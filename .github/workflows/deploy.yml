@@ -1,0 +1,29 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - helper/**/*.ts
+      - helper/**/*.tsx
+      - .github/workflows/test.yml
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+
+      - name: Run TypeCheck
+        run: npm run typecheck
+      - name: Run Lint
+        run: npm run lint
+      - name: Run Tests
+        run: npm run test
