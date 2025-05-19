@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"prisma-smart-formatter.typescript.defaultFormatter": "esbenp.prettier-vscode",
+		"prisma-smart-formatter.typescriptreact.defaultFormatter": "biomejs.biome"
+	}
+}
