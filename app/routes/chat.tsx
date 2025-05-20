@@ -1,3 +1,5 @@
+import Markdown from "react-markdown";
+
 export default function Index() {
 	return (
 		<div className="py-20 max-w-1/2 mx-2 px-4 space-y-4">
@@ -9,17 +11,17 @@ export default function Index() {
 			/>
 
 			<Multiline
-				className="mr-20"
+				className="mr-20 bg-blue-600 text-white"
 				text={[
 					"We got a few places for you to consider:",
-					`Southland Mall in Hayward.
-						 We have one spot 8' by 12' for $759/week.
-						 We have one spot 10' by 14' for $1,200/week.
-						 Estimated foot traffic 3,500 to 4,500 people a day.`,
-					`South Shore Center in Alameda.
-						 This is a strip mall.
-						 We have several spots 12' by 14' for $925/week.
-						 Estimated foot traffic 4,500 to 5,250 people a day.`,
+					`**Southland Mall in Hayward**
+We have one spot 8' by 12' for $759/week
+We have one spot 10' by 14' for $1,200/week
+Estimated foot traffic 3,500 to 4,500 people a day`,
+					`**South Shore Center in Alameda**
+This is a strip mall
+We have several spots 12' by 14' for $925/week
+Estimated foot traffic 4,500 to 5,250 people a day`,
 				]}
 			/>
 		</div>
@@ -42,7 +44,7 @@ function Multiline({
 				<div key={index}>
 					{paragraph.split(/\n/).map((line, index) => (
 						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-						<p key={index}>{line}</p>
+						<Markdown key={index}>{line}</Markdown>
 					))}
 				</div>
 			))}
