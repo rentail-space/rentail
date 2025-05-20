@@ -17,11 +17,11 @@ export default function Index() {
 					`**Southland Mall in Hayward**
 We have one spot 8' by 12' for $759/week
 We have one spot 10' by 14' for $1,200/week
-Estimated foot traffic 3,500 to 4,500 people a day`,
+Estimated foot traffic **3,500 to 4,500** people a day`,
 					`**South Shore Center in Alameda**
 This is a strip mall
 We have several spots 12' by 14' for $925/week
-Estimated foot traffic 4,500 to 5,250 people a day`,
+Estimated foot traffic **4,500 to 5,250** people a day`,
 				]}
 			/>
 		</div>
@@ -37,7 +37,7 @@ function Multiline({
 }) {
 	return (
 		<div
-			className={`${className} px-4 py-2 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow space-y-2`}
+			className={`${className} px-4 py-2 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow space-y-4`}
 		>
 			{text.map((paragraph, index) => (
 				// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
