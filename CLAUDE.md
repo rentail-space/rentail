@@ -1,47 +1,56 @@
-# CLAUDE.md - Coding Assistant Guidelines
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Build Commands
 
 - Build: `npm run build`
-- Check code: `npm run check`
 - Lint: `npm run lint`
 - Type check: `npm run typecheck`
 - Test: `npm run test`
 - Dev: `npm run dev`
+- Preview: `npm run preview`
+
+## Architecture
+
+This is a React TypeScript application built with Vite that serves as a specialty lease marketplace called "rentail.space". The app helps businesses find short-term retail spaces in shopping centers.
+
+**Tech Stack:**
+- React 19 with TypeScript
+- React Router DOM for client-side routing
+- Vite for build tooling
+- Tailwind CSS 4 for styling
+- Vitest for unit testing with jsdom environment
+- Biome for linting
+
+**Routing Structure:**
+The app uses React Router with a nested layout pattern:
+- Root layout (`App.tsx`) contains header, footer, and outlet
+- Home page (`/`) displays the marketing landing page
+- Chat page (`/chat`) shows a conversation interface for finding spaces
 
 ## Code Style
 
-- Frontend: React with TypeScript and Remix
-- Use 2-space indentation with 80 character line width
+- Use 2-space indentation
 - Prefer named exports over default exports
-- Organize imports: React first, then external libs, then local files
-- Use TypeScript for type safety, avoid non-null assertions
 - Component naming: PascalCase for components, camelCase for utilities
-- Error handling: Use try/catch blocks with proper user feedback
-- CSS: Use app/css directory and component-specific styles
-- Follow Biome linting rules (see biome.json)
-- Always use descriptive variable names
+- Follow Biome linting rules
+- Use TypeScript for type safety, avoid non-null assertions unless necessary
+- Organize imports: React first, then external libs, then local files
 
 ## Tests
 
-- Test file name ends with ".test.ts" instead of ".ts"
-- Test file should be placed in the same directory as file getting tested
-- Use the Vitest framework for writing tests
-- Use Mock Service Workers (MSW) for mocking 3rd party APIs
-- For 3rd party APIs, mock the actual endpoint and not the calling code
-- Use Playwright for E2E testing of browser rendering
-- Use fetch-mock to mock the fetch API
-- Tests should be easy to read and understand
-- Tests should be easy to change
-
-# Summary instructions
-
-When you are using compact, please focus on test output and code changes
+- Test files should end with ".test.ts" or ".test.tsx"
+- Place test files in the same directory as the code being tested
+- Use Vitest framework with jsdom environment
+- Tests run from `./src/**/*.test.{ts,tsx}` with setup in `./test/setup.ts`
+- Include tests in `./test/` directory for integration or setup tests
 
 ## Project Structure
 
-- `/app`: Core application code
-- `/app/components`: Reusable UI components
-- `/app/lib`: Server-side utilities and server functions (.server.ts)
-- `/app/routes`: Route components and API endpoints
-- `/app/css`: Global CSS and theme configuration
+- `/src`: Application source code
+- `/src/pages`: Page components (Home, Chat)
+- `/src/main.tsx`: Application entry point with routing setup
+- `/src/App.tsx`: Root layout component with header/footer
+- `/public`: Static assets (favicon, logos)
+- `/test`: Test setup and shared test utilities

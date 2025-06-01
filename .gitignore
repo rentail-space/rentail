@@ -1,9 +1,5 @@
 node_modules
 
-# Remix build files
-/.cache
-/build
-
 # Environment variables
 .env
 .env.local
