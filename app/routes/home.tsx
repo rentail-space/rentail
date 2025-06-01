@@ -1,10 +1,10 @@
-export default function Home() {
+export default function () {
 	return (
-		<>
+		<main className="flex flex-col min-h-screen">
 			<HeroSection />
 			<FeaturesSection />
 			<HowItWorksSection />
-		</>
+		</main>
 	);
 }
 
