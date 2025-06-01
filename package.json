@@ -4,30 +4,27 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix vite:build",
-    "dev": "remix vite:dev",
+    "build": "vite build",
+    "dev": "vite",
     "lint": "biome lint app",
-    "start": "remix-serve ./build/server/index.js",
+    "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@remix-run/node": "^2.16.8",
-    "@remix-run/react": "^2.16.8",
-    "@remix-run/serve": "^2.16.8",
     "@tailwindcss/vite": "^4.1.8",
-    "isbot": "^5.1.28",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-markdown": "^10.1.0"
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.16.8",
     "@testing-library/react": "^16.3.0",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^8.33.0",
     "@typescript-eslint/parser": "^8.33.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.21",
     "eslint-import-resolver-typescript": "^4.4.2",
     "eslint-plugin-import": "^2.31.0",

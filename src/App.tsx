@@ -1,57 +1,15 @@
-import type { LinksFunction } from "@remix-run/node";
-import {
-	Links,
-	Meta,
-	Outlet,
-	Scripts,
-	ScrollRestoration,
-} from "@remix-run/react";
-
-import "./tailwind.css";
-
-export const links: LinksFunction = () => [
-	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
-	{
-		rel: "preconnect",
-		href: "https://fonts.gstatic.com",
-		crossOrigin: "anonymous",
-	},
-	{
-		rel: "stylesheet",
-		href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-	},
-];
-
-export function Layout({ children }: { children: React.ReactNode }) {
-	return (
-		<html lang="en">
-			<head>
-				<meta charSet="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<Meta />
-				<Links />
-			</head>
-			<body className="bg-white min-h-screen flex flex-col">
-				{children}
-				<ScrollRestoration />
-				<Scripts />
-			</body>
-		</html>
-	);
-}
-
-const appName = "rentail.space";
-const tagline = "Find your speciality lease with ease";
+import { Outlet } from "react-router-dom";
+import "./index.css";
 
 export default function App() {
 	return (
-		<>
+		<div className="bg-white min-h-screen flex flex-col">
 			<Header />
 			<main className="flex-grow">
 				<Outlet />
 			</main>
 			<Footer />
-		</>
+		</div>
 	);
 }
 
@@ -60,8 +18,8 @@ function Header() {
 		<header className="py-4 border-b border-gray-200">
 			<div className="container mx-auto px-4 flex justify-between items-center">
 				<div className="flex items-center">
-					<a href="/" className="text-2xl font-bold text-blue-600">
-						{appName}
+					<a href="/" className="text-2xl font-bold">
+						<span className="text-blue-600">rentail</span>.space
 					</a>
 				</div>
 				<nav className="hidden md:flex space-x-8">
@@ -109,8 +67,12 @@ function Footer() {
 			<div className="container mx-auto px-4">
 				<div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 					<div>
-						<h3 className="text-lg font-semibold mb-4">{appName}</h3>
-						<p className="text-gray-600">{tagline}</p>
+						<h3 className="text-lg font-semibold mb-4">
+							<span className="text-blue-600">rentail</span>.space
+						</h3>
+						<p className="text-gray-600">
+							Find your speciality lease with ease
+						</p>
 					</div>
 					<div>
 						<h3 className="text-lg font-semibold mb-4">Company</h3>
@@ -187,7 +149,7 @@ function Footer() {
 				</div>
 				<div className="mt-8 pt-8 border-t border-gray-200 text-center text-gray-500">
 					<p>
-						© {new Date().getFullYear()} {appName}. All rights reserved.
+						© {new Date().getFullYear()} rentail.space. All rights reserved.
 					</p>
 				</div>
 			</div>
