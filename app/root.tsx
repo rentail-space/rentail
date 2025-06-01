@@ -78,13 +78,7 @@ function Header() {
 						How It Works
 					</a>
 					<a
-						href="#pricing"
-						className="font-medium text-gray-600 hover:text-blue-600"
-					>
-						Pricing
-					</a>
-					<a
-						href="#contact"
+						href="mailto:help@rentail.space"
 						className="font-medium text-gray-600 hover:text-blue-600"
 					>
 						Contact
