@@ -1,28 +1,27 @@
 import { useChat } from "@ai-sdk/react";
-import type { UIMessage } from "ai";
+import type { Message } from "ai";
 import Markdown from "react-markdown";
 
-type Message = {
-  id: string;
-  text: string;
-  isUser: boolean;
-  timestamp: Date;
-};
+const initialMessages: Message[] = [
+  {
+    content: `Welcome to **rentail.space**!
+I'm your virtual assistant here to help you find the perfect retail space for your business needs.
+How can I assist you today?
+`,
+    id: "0",
+    role: "assistant",
+  },
+];
 
 export default function x() {
   const { error, messages, input, handleInputChange, handleSubmit, status } =
-    useChat({
-      api: "/api/chat",
-      initialMessages: [
-        { content: intro, createdAt: new Date(), id: "1", role: "assistant" },
-      ],
-    });
+    useChat({ api: "/api/chat", initialMessages });
   const isTyping = status === "submitted";
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
-      <Message isTyping={isTyping} messages={messages} />
+      <Messages isTyping={isTyping} messages={messages} />
       {error && (
         <div className="text-red-500">
           {error.message || "Some error happened"}
@@ -48,12 +47,12 @@ function Header() {
   );
 }
 
-function Message({
+function Messages({
   isTyping,
   messages,
 }: {
   isTyping: boolean;
-  messages: UIMessage[];
+  messages: Message[];
 }) {
   return (
     <div className="flex-1 overflow-hidden flex flex-col max-w-4xl mx-auto w-full">
@@ -139,55 +138,3 @@ function InputMessage({
     </div>
   );
 }
-
-const intro = `Welcome to **rentail.space**!
-I'm your virtual assistant here to help you find the perfect retail space for your business needs.
-How can I assist you today?
-`;
-const spaces = `Here are some of the retail spaces we offer:
-
-**Premium Mall Location**
-- Size: 10' x 12'
-- Weekly Rate: $1,200
-- Foot Traffic: ~4,000 daily visitors
-- Available: Weekends
-
-**Strip Mall Space**
-- Size: 8' x 10'
-- Weekly Rate: $800
-- Foot Traffic: ~2,500 daily visitors
-- Available: All week
-
-Would you like more details about any of these locations?
-You can also ask about pricing, locations, or specific business types. I'm here to help!`;
-
-const pricing = `Our pricing varies based on location and size:
-
-**Mall Locations:** $800 - $1,500/week
-
-**Strip Centers:** $500 - $1,000/week
-
-**Pop-up Spaces:** $200 - $600/week
-
-Prices include:
-- ✅ Basic utilities
-- ✅ Security
-- ✅ Maintenance
-- ✅ Parking access
-What's your budget range?`;
-
-const locations = `We have retail spaces available in the following areas:
-
-**San Francisco:**
-- Union Square
-- Mission District
-
-**East Bay:**
-- Hayward
-- Alameda
-
-**Peninsula:**
-- San Mateo
-- Redwood City
-
-If you have a specific area in mind, let me know and I can provide more details!`;
