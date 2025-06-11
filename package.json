@@ -13,8 +13,11 @@
 		"clean": "rm -rf .react-router"
 	},
 	"dependencies": {
+		"@ai-sdk/anthropic": "^1.2.12",
 		"@react-router/node": "^7.6.2",
 		"@react-router/serve": "^7.6.2",
+		"ai": "^4.3.16",
+		"env-var": "^7.5.0",
 		"isbot": "^5.1.28",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",

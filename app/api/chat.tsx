@@ -1,0 +1,21 @@
+import { createAnthropic } from "@ai-sdk/anthropic";
+import { streamText } from "ai";
+import env from "env-var";
+import type { ActionFunctionArgs } from "react-router";
+
+const anthropic = createAnthropic({
+  apiKey: env.get("ANTHROPIC_API_KEY").required().asString(),
+});
+
+// Allow streaming responses up to 30 seconds
+export const maxDuration = 30;
+
+export async function action({ request }: ActionFunctionArgs) {
+  const { messages } = await request.json();
+  const result = streamText({
+    model: anthropic("claude-3-7-sonnet-20250219"),
+    system: "You are a helpful assistant.",
+    messages,
+  });
+  return result.toDataStreamResponse();
+}
