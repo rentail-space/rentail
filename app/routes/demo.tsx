@@ -13,7 +13,7 @@ How can I assist you today?
   },
 ];
 
-export default function x() {
+export default function () {
   const { error, messages, input, handleInputChange, handleSubmit, status } =
     useChat({ api: "/api/chat", initialMessages });
   const isTyping = status === "submitted";
