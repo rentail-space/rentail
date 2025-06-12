@@ -1,6 +1,12 @@
 import { useChat } from "@ai-sdk/react";
-import type { Message } from "ai";
+import type { CreateMessage, Message } from "ai";
+import { useEffect } from "react";
 import Markdown from "react-markdown";
+import {
+  NavLink,
+  type SetURLSearchParams,
+  useSearchParams,
+} from "react-router";
 
 const initialMessages: Message[] = [
   {
@@ -14,9 +20,18 @@ How can I assist you today?
 ];
 
 export default function () {
-  const { error, messages, input, handleInputChange, handleSubmit, status } =
-    useChat({ api: "/api/chat", initialMessages });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const {
+    error,
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    status,
+    append,
+  } = useChat({ api: "/api/chat", initialMessages });
   const isTyping = status === "submitted";
+  useAppendQuestion({ append, searchParams, setSearchParams });
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -35,6 +50,29 @@ export default function () {
       />
     </div>
   );
+}
+
+function useAppendQuestion({
+  append,
+  searchParams,
+  setSearchParams,
+}: {
+  append: (message: Message | CreateMessage) => void;
+  searchParams: URLSearchParams;
+  setSearchParams: SetURLSearchParams;
+}) {
+  useEffect(() => {
+    const question = (searchParams.get("question") ?? "").trim();
+    if (question) {
+      // Send the question as a user message
+      append({ role: "user", content: question.trim() });
+
+      // Remove the question parameter from URL without reloading
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.delete("question");
+      setSearchParams(newSearchParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams, append]);
 }
 
 function Header() {
@@ -73,7 +111,19 @@ function Messages({
               {message.role === "user" ? (
                 <p className="whitespace-pre-wrap">{message.content}</p>
               ) : (
-                <Markdown>{message.content}</Markdown>
+                <Markdown
+                  components={{
+                    a: ({ node, ...props }) => (
+                      <NavLink
+                        {...props}
+                        className="text-blue-600 hover:underline"
+                        to={props.href || "#"}
+                      />
+                    ),
+                  }}
+                >
+                  {message.content}
+                </Markdown>
               )}
               <div
                 className={`text-xs mt-1 ${
