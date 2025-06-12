@@ -3,6 +3,7 @@ import type { CreateMessage, Message } from "ai";
 import { type RefObject, useEffect, useRef } from "react";
 import Markdown from "react-markdown";
 import {
+  Link,
   NavLink,
   type SetURLSearchParams,
   useSearchParams,
@@ -38,13 +39,14 @@ export default function () {
     <div className="h-screen bg-gray-50 flex flex-col">
       <Header />
       <div className="flex-1 flex flex-col min-h-0">
-        <Messages ref={ref} isTyping={isTyping} messages={messages} />
-        {error && (
-          <div className="text-red-500 p-4">
-            {error.message || "Some error happened"}
-          </div>
-        )}
+        <Messages
+          error={error}
+          ref={ref}
+          isTyping={isTyping}
+          messages={messages}
+        />
       </div>
+      <Presets />
       <InputMessage
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
@@ -100,10 +102,12 @@ function Header() {
 }
 
 function Messages({
+  error,
   isTyping,
   messages,
   ref,
 }: {
+  error?: Error;
   isTyping: boolean;
   messages: Message[];
   ref: RefObject<HTMLDivElement | null>;
@@ -158,13 +162,19 @@ function Messages({
 
       {isTyping && (
         <div className="flex justify-start">
-          <div className="bg-white border shadow-sm px-4 py-2 rounded-lg">
+          <div className="bg-white border shadow-sm px-4 py-4 rounded-lg">
             <div className="flex space-x-1">
               <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
               <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.1s]" />
               <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]" />
             </div>
           </div>
+        </div>
+      )}
+
+      {error && (
+        <div className="text-red-500 p-4">
+          {error.message || "Some error happened"}
         </div>
       )}
     </div>
@@ -202,5 +212,31 @@ function InputMessage({
         </button>
       </form>
     </div>
+  );
+}
+
+function Presets() {
+  return (
+    <div className="p-4 max-w-4xl mx-auto w-full flex flex-wrap gap-2">
+      <Preset question="What is the average rent for retail spaces?" />
+      <Preset question="What are the best locations for retail spaces?" />
+      <Preset question="What amenities are included in retail spaces?" />
+    </div>
+  );
+}
+
+function Preset({
+  question,
+}: {
+  question: string;
+}) {
+  return (
+    <Link
+      className="px-4 py-2 border-blue-300 hover:text-blue-700 hover:border-blue-700 border-1 rounded-lg transition-colors whitespace-nowrap"
+      title="Click to ask this question"
+      to={{ search: `?question=${question}` }}
+    >
+      Q: {question}
+    </Link>
   );
 }

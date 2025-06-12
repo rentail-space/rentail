@@ -29,7 +29,7 @@ Here are responses you can use. We start by listing all the shopping centers in 
 </space>
 <space>
 	Center: Stonestown Galleria
-	Name: Strip Mall Space
+	Name: Second Floor Placement
 	Size: 8' x 10'
 	Cost: $800/week
 	Foot traffic: ~2,500 daily visitors
