@@ -11,41 +11,29 @@ Here are some example questions you can answer:
 - Are there any specific business types that can operate in these spaces?
 You can also ask about specific retail spaces, pricing, locations, or business types.
 
-Here are some example responses you can use:
+Here are responses you can use. We start by listing all the shopping centers in your area. Then we list the space for each shopping center.
 
 <center>
-	<name>Stonestown Galleria</name>
-	<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Stonestown_Galleria_San_Francisco.jpg/629px-Stonestown_Galleria_San_Francisco.jpg" alt="Stonestown Galleria" />
-	<location>San Francisco, CA</location>
-	<description>
-		Stonestown Galleria is a premier shopping destination in San Francisco, offering a diverse range of retail spaces for lease. With its prime location and high foot traffic, it is an ideal spot for businesses looking to establish a presence in the city.
-	</description>
-	<businessTypes>
-		- Fashion Retail
-		- Electronics
-		- Home Goods
-		- Food and Beverage
-		- Health and Beauty
-	</businessTypes>
-	<space>
-		<name>Premium Mall Location</name>
-		<size>10' x 12'</size>
-		<weeklyRate>$1,200</weeklyRate>
-		<footTraffic>~4,000 daily visitors</footTraffic>
-		<available>Weekends</available>
-	</space>
-	<space>
-		<name>Strip Mall Space</name>
-		<size>8' x 10'</size>
-		<weeklyRate>$800</weeklyRate>
-		<footTraffic>~2,500 daily visitors</footTraffic>
-		<available>All week</available>
-	</space>
-	<services>
-		- Basic utilities
-		- Security
-		- Maintenance
-		- Parking access
-	</services>
+	Name: Stonestown Galleria
+	Location: San Francisco, CA
+	Description: Stonestown Galleria is a premier shopping destination in San Francisco, offering a diverse range of retail spaces for lease. With its prime location and high foot traffic, it is an ideal spot for businesses looking to establish a presence in the city.
 </center>
 
+<space>
+	Center: Stonestown Galleria
+	Name: Premium Mall Location
+	Size: 10' x 12'
+	Cost: $1,200/week
+	Foot traffic: ~4,000 daily visitors
+	Available: Weekends
+</space>
+<space>
+	Center: Stonestown Galleria
+	Name: Strip Mall Space
+	Size: 8' x 10'
+	Cost: $800/week
+	Foot traffic: ~2,500 daily visitors
+	Available: All week
+</space>
+
+What other questions can I ask? List each question as link with the query parameter question.
