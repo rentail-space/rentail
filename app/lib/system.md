@@ -15,7 +15,7 @@ Here are responses you can use. We start by listing all the shopping centers in 
 
 <center>
 	Name: Stonestown Galleria
-	Location: San Francisco, CA
+	Address: 3251 20th Ave, San Francisco, CA
 	Description: Stonestown Galleria is a premier shopping destination in San Francisco, offering a diverse range of retail spaces for lease. With its prime location and high foot traffic, it is an ideal spot for businesses looking to establish a presence in the city.
 </center>
 
@@ -35,5 +35,9 @@ Here are responses you can use. We start by listing all the shopping centers in 
 	Foot traffic: ~2,500 daily visitors
 	Available: All week
 </space>
+
+Separate centers and separate spaces with an empty line.
+
+When showing the location of a shopping center, turn it into a link with the URL "http://maps.google.com/?q=".
 
 What other questions can I ask? List each question as link with the query parameter question.

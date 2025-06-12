@@ -38,14 +38,12 @@ export default function () {
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
       <Header />
-      <div className="flex-1 flex flex-col min-h-0">
-        <Messages
-          error={error}
-          ref={ref}
-          isTyping={isTyping}
-          messages={messages}
-        />
-      </div>
+      <Messages
+        error={error}
+        ref={ref}
+        isTyping={isTyping}
+        messages={messages}
+      />
       <Presets />
       <InputMessage
         handleInputChange={handleInputChange}
@@ -114,7 +112,7 @@ function Messages({
 }) {
   return (
     <div
-      className="flex-1 overflow-y-auto p-6 space-y-4 max-w-4xl mx-auto w-full"
+      className="flex flex-1 flex-col overflow-y-auto p-6 space-y-4 max-w-4xl mx-auto w-full"
       ref={ref}
     >
       {messages.map((message) => (
@@ -139,7 +137,16 @@ function Messages({
                       {...props}
                       className="text-blue-600 hover:underline"
                       to={props.href || "#"}
+                      target={
+                        props.href?.startsWith("http") ? "_blank" : undefined
+                      }
                     />
+                  ),
+                  hr: ({ node, ...props }) => (
+                    <hr className="border-gray-300 my-2" />
+                  ),
+                  p: ({ node, ...props }) => (
+                    <p className="whitespace-pre-wrap my-2" {...props} />
                   ),
                 }}
               >
@@ -196,17 +203,23 @@ function InputMessage({
     <div className="bg-white border-t p-4 max-w-4xl mx-auto w-full">
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input
-          type="text"
-          value={input}
-          onChange={handleInputChange}
-          placeholder="Ask about retail spaces..."
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
+          // biome-ignore lint/a11y/noAutofocus: <explanation>
+          autoFocus
           className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           disabled={isTyping}
+          onChange={handleInputChange}
+          placeholder="Ask about retail spaces..."
+          spellCheck="false"
+          type="text"
+          value={input}
         />
         <button
-          type="submit"
-          disabled={isTyping || !input.trim()}
           className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          disabled={isTyping || !input.trim()}
+          type="submit"
         >
           Send
         </button>
