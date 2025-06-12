@@ -1,6 +1,6 @@
 import { useChat } from "@ai-sdk/react";
 import type { CreateMessage, Message } from "ai";
-import { useEffect } from "react";
+import { type RefObject, useEffect, useRef } from "react";
 import Markdown from "react-markdown";
 import {
   NavLink,
@@ -21,6 +21,7 @@ How can I assist you today?
 
 export default function () {
   const [searchParams, setSearchParams] = useSearchParams();
+  const inputRef = useRef<HTMLDivElement>(null);
   const {
     error,
     messages,
@@ -31,7 +32,7 @@ export default function () {
     append,
   } = useChat({ api: "/api/chat", initialMessages });
   const isTyping = status === "submitted";
-  useAppendQuestion({ append, searchParams, setSearchParams });
+  useAppendQuestion({ append, inputRef, searchParams, setSearchParams });
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -46,6 +47,7 @@ export default function () {
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         input={input}
+        inputRef={inputRef}
         isTyping={isTyping}
       />
     </div>
@@ -54,10 +56,12 @@ export default function () {
 
 function useAppendQuestion({
   append,
+  inputRef,
   searchParams,
   setSearchParams,
 }: {
   append: (message: Message | CreateMessage) => void;
+  inputRef: RefObject<HTMLDivElement | null>;
   searchParams: URLSearchParams;
   setSearchParams: SetURLSearchParams;
 }) {
@@ -71,8 +75,13 @@ function useAppendQuestion({
       const newSearchParams = new URLSearchParams(searchParams);
       newSearchParams.delete("question");
       setSearchParams(newSearchParams, { replace: true });
+
+      // Auto-scroll to bottom when messages change
+      setTimeout(() => {
+        inputRef.current?.scrollIntoView({ behavior: "smooth" });
+      });
     }
-  }, [searchParams, setSearchParams, append]);
+  }, [append, inputRef, searchParams, setSearchParams]);
 }
 
 function Header() {
@@ -159,15 +168,17 @@ function InputMessage({
   handleInputChange,
   handleSubmit,
   input,
+  inputRef,
   isTyping,
 }: {
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   input: string;
+  inputRef: RefObject<HTMLDivElement | null>;
   isTyping: boolean;
 }) {
   return (
-    <div className="bg-white border-t p-4">
+    <div className="bg-white border-t p-4" ref={inputRef}>
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input
           type="text"
