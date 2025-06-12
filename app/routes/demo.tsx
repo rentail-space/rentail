@@ -21,7 +21,7 @@ How can I assist you today?
 
 export default function () {
   const [searchParams, setSearchParams] = useSearchParams();
-  const inputRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const {
     error,
     messages,
@@ -32,22 +32,23 @@ export default function () {
     append,
   } = useChat({ api: "/api/chat", initialMessages });
   const isTyping = status === "submitted";
-  useAppendQuestion({ append, inputRef, searchParams, setSearchParams });
+  useAppendQuestion({ append, ref, searchParams, setSearchParams });
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="h-screen bg-gray-50 flex flex-col">
       <Header />
-      <Messages isTyping={isTyping} messages={messages} />
-      {error && (
-        <div className="text-red-500">
-          {error.message || "Some error happened"}
-        </div>
-      )}
+      <div className="flex-1 flex flex-col min-h-0">
+        <Messages ref={ref} isTyping={isTyping} messages={messages} />
+        {error && (
+          <div className="text-red-500 p-4">
+            {error.message || "Some error happened"}
+          </div>
+        )}
+      </div>
       <InputMessage
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         input={input}
-        inputRef={inputRef}
         isTyping={isTyping}
       />
     </div>
@@ -56,12 +57,12 @@ export default function () {
 
 function useAppendQuestion({
   append,
-  inputRef,
+  ref,
   searchParams,
   setSearchParams,
 }: {
   append: (message: Message | CreateMessage) => void;
-  inputRef: RefObject<HTMLDivElement | null>;
+  ref: RefObject<HTMLDivElement | null>;
   searchParams: URLSearchParams;
   setSearchParams: SetURLSearchParams;
 }) {
@@ -78,10 +79,14 @@ function useAppendQuestion({
 
       // Auto-scroll to bottom when messages change
       setTimeout(() => {
-        inputRef.current?.scrollIntoView({ behavior: "smooth" });
-      });
+        if (ref.current)
+          ref.current.scrollTo({
+            behavior: "smooth",
+            top: ref.current.scrollHeight,
+          });
+      }, 100);
     }
-  }, [append, inputRef, searchParams, setSearchParams]);
+  }, [append, ref, searchParams, setSearchParams]);
 }
 
 function Header() {
@@ -97,69 +102,71 @@ function Header() {
 function Messages({
   isTyping,
   messages,
+  ref,
 }: {
   isTyping: boolean;
   messages: Message[];
+  ref: RefObject<HTMLDivElement | null>;
 }) {
   return (
-    <div className="flex-1 overflow-hidden flex flex-col max-w-4xl mx-auto w-full">
-      {/* Messages Container  */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-4">
-        {messages.map((message) => (
+    <div
+      className="flex-1 overflow-y-auto p-6 space-y-4 max-w-4xl mx-auto w-full"
+      ref={ref}
+    >
+      {messages.map((message) => (
+        <div
+          key={message.id}
+          className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+        >
           <div
-            key={message.id}
-            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+            className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+              message.role === "user"
+                ? "bg-blue-600 text-white ml-auto"
+                : "bg-white border shadow-sm"
+            }`}
           >
+            {message.role === "user" ? (
+              <p className="whitespace-pre-wrap">{message.content}</p>
+            ) : (
+              <Markdown
+                components={{
+                  a: ({ node, ...props }) => (
+                    <NavLink
+                      {...props}
+                      className="text-blue-600 hover:underline"
+                      to={props.href || "#"}
+                    />
+                  ),
+                }}
+              >
+                {message.content}
+              </Markdown>
+            )}
             <div
-              className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                message.role === "user"
-                  ? "bg-blue-600 text-white ml-auto"
-                  : "bg-white border shadow-sm"
+              className={`text-xs mt-1 ${
+                message.role === "user" ? "text-blue-100" : "text-gray-500"
               }`}
             >
-              {message.role === "user" ? (
-                <p className="whitespace-pre-wrap">{message.content}</p>
-              ) : (
-                <Markdown
-                  components={{
-                    a: ({ node, ...props }) => (
-                      <NavLink
-                        {...props}
-                        className="text-blue-600 hover:underline"
-                        to={props.href || "#"}
-                      />
-                    ),
-                  }}
-                >
-                  {message.content}
-                </Markdown>
-              )}
-              <div
-                className={`text-xs mt-1 ${
-                  message.role === "user" ? "text-blue-100" : "text-gray-500"
-                }`}
-              >
-                {message.createdAt?.toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </div>
+              {message.createdAt?.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
             </div>
           </div>
-        ))}
+        </div>
+      ))}
 
-        {isTyping && (
-          <div className="flex justify-start">
-            <div className="bg-white border shadow-sm px-4 py-2 rounded-lg">
-              <div className="flex space-x-1">
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.1s]" />
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]" />
-              </div>
+      {isTyping && (
+        <div className="flex justify-start">
+          <div className="bg-white border shadow-sm px-4 py-2 rounded-lg">
+            <div className="flex space-x-1">
+              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
+              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.1s]" />
+              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]" />
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -168,17 +175,15 @@ function InputMessage({
   handleInputChange,
   handleSubmit,
   input,
-  inputRef,
   isTyping,
 }: {
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   input: string;
-  inputRef: RefObject<HTMLDivElement | null>;
   isTyping: boolean;
 }) {
   return (
-    <div className="bg-white border-t p-4" ref={inputRef}>
+    <div className="bg-white border-t p-4 max-w-4xl mx-auto w-full">
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input
           type="text"

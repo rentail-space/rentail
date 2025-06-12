@@ -2,7 +2,6 @@ import {
   Links,
   type LinksFunction,
   Meta,
-  NavLink,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -33,30 +32,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
-        <Footer />
         <ScrollRestoration />
         <Scripts />
       </body>
     </html>
-  );
-}
-
-function Footer() {
-  return (
-    <footer>
-      <div className="container mx-auto p-4 text-center">
-        <p className="text-gray-600 space-x-2">
-          <span>© {new Date().getFullYear()}</span>
-          <NavLink to="/" className="font-bold" viewTransition>
-            <span className="text-blue-500">rentail</span>
-            .space
-          </NavLink>
-          <NavLink to="/demo" viewTransition>
-            All rights reserved.
-          </NavLink>
-        </p>
-      </div>
-    </footer>
   );
 }
 

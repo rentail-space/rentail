@@ -1,10 +1,15 @@
+import { NavLink } from "react-router";
+
 export default function () {
   return (
-    <main className="flex flex-col min-h-screen">
-      <HeroSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-    </main>
+    <>
+      <main className="flex flex-col min-h-screen">
+        <HeroSection />
+        <FeaturesSection />
+        <HowItWorksSection />
+      </main>
+      <Footer />
+    </>
   );
 }
 
@@ -214,5 +219,24 @@ function HowItWorksSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer>
+      <div className="container mx-auto p-4 text-center">
+        <p className="text-gray-600 space-x-2">
+          <span>© {new Date().getFullYear()}</span>
+          <NavLink to="/" className="font-bold" viewTransition>
+            <span className="text-blue-500">rentail</span>
+            .space
+          </NavLink>
+          <NavLink to="/demo" viewTransition>
+            All rights reserved.
+          </NavLink>
+        </p>
+      </div>
+    </footer>
   );
 }
