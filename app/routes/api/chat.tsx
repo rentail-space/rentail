@@ -8,9 +8,6 @@ const anthropic = createAnthropic({
   apiKey: env.get("ANTHROPIC_API_KEY").required().asString(),
 });
 
-// Allow streaming responses up to 30 seconds
-export const maxDuration = 30;
-
 export async function action({ request }: ActionFunctionArgs) {
   const { messages } = (await request.json()) as { messages: Message[] };
   const result = streamText({
