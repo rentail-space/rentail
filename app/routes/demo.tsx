@@ -2,12 +2,7 @@ import { useChat } from "@ai-sdk/react";
 import type { CreateMessage, Message } from "ai";
 import { type RefObject, useEffect, useRef } from "react";
 import Markdown from "react-markdown";
-import {
-  Link,
-  NavLink,
-  type SetURLSearchParams,
-  useSearchParams,
-} from "react-router";
+import { type SetURLSearchParams, useSearchParams } from "react-router";
 
 const initialMessages: Message[] = [
   {
@@ -44,7 +39,6 @@ export default function () {
         isTyping={isTyping}
         messages={messages}
       />
-      <Presets />
       <InputMessage
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
@@ -133,14 +127,16 @@ function Messages({
               <Markdown
                 components={{
                   a: ({ node, ...props }) => (
-                    <NavLink
-                      {...props}
+                    <button
                       className="text-blue-600 hover:underline"
-                      to={props.href || "#"}
-                      target={
-                        props.href?.startsWith("http") ? "_blank" : undefined
-                      }
-                    />
+                      onClick={(event) => {
+                        event.preventDefault();
+                        askQuestion(props.children?.toString() ?? "");
+                      }}
+                      type="button"
+                    >
+                      {props.children}
+                    </button>
                   ),
                   hr: ({ node, ...props }) => (
                     <hr className="border-gray-300 my-2" />
@@ -184,6 +180,8 @@ function Messages({
           {error.message || "Some error happened"}
         </div>
       )}
+
+      <Presets />
     </div>
   );
 }
@@ -203,6 +201,7 @@ function InputMessage({
     <div className="bg-white border-t p-4 max-w-4xl mx-auto w-full">
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input
+          id="question"
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
@@ -244,12 +243,26 @@ function Preset({
   question: string;
 }) {
   return (
-    <Link
+    <button
       className="px-4 py-2 border-blue-300 hover:text-blue-700 hover:border-blue-700 border-1 rounded-lg transition-colors whitespace-nowrap"
+      onClick={(event) => {
+        event.preventDefault();
+        askQuestion(question);
+      }}
       title="Click to ask this question"
-      to={{ search: `?question=${question}` }}
+      type="button"
     >
       Q: {question}
-    </Link>
+    </button>
   );
+}
+
+function askQuestion(question: string) {
+  const input = document.getElementById("question") as HTMLInputElement;
+  input.value = "";
+  for (let i = 0; i < question.length; i++)
+    setTimeout(() => {
+      input.value += question[i];
+    }, i * 10);
+  input.focus();
 }
