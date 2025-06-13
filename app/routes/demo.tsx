@@ -112,6 +112,15 @@ function Messages({
                       {children}
                     </button>
                   ),
+                  h1: ({ children }) => (
+                    <h1 className="text-xl font-bold my-2">{children}</h1>
+                  ),
+                  h2: ({ children }) => (
+                    <h2 className="text-lg font-semibold my-2">{children}</h2>
+                  ),
+                  h3: ({ children }) => (
+                    <h3 className="text-md font-semibold my-2">{children}</h3>
+                  ),
                   hr: () => <hr className="border-gray-300 my-2" />,
                   ol: ({ children }) => (
                     <ol className="ml-8 list-decimal">{children}</ol>
