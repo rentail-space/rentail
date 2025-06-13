@@ -1,8 +1,12 @@
 import { useChat } from "@ai-sdk/react";
-import type { CreateMessage, Message } from "ai";
-import { type RefObject, useEffect, useRef } from "react";
+import type { Message } from "ai";
+import {
+  type ChangeEvent,
+  type FormEvent,
+  type RefObject,
+  useRef,
+} from "react";
 import Markdown from "react-markdown";
-import { type SetURLSearchParams, useSearchParams } from "react-router";
 
 const initialMessages: Message[] = [
   {
@@ -15,29 +19,28 @@ How can I assist you today?
   },
 ];
 
+const precanned = [
+  "What are the available retail spaces?",
+  "What is the average size of retail spaces?",
+  "What are the rental prices for retail spaces?",
+  "What are the lease terms for retail spaces?",
+];
+
 export default function () {
-  const [searchParams, setSearchParams] = useSearchParams();
   const ref = useRef<HTMLDivElement>(null);
-  const {
-    error,
-    messages,
-    input,
-    handleInputChange,
-    handleSubmit,
-    status,
-    append,
-  } = useChat({ api: "/api/chat", initialMessages });
+  const { error, handleInputChange, handleSubmit, input, messages, status } =
+    useChat({ api: "/api/chat", initialMessages });
   const isTyping = status === "submitted";
-  useAppendQuestion({ append, ref, searchParams, setSearchParams });
 
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
       <Header />
       <Messages
         error={error}
-        ref={ref}
+        handleInputChange={handleInputChange}
         isTyping={isTyping}
         messages={messages}
+        ref={ref}
       />
       <InputMessage
         handleInputChange={handleInputChange}
@@ -47,40 +50,6 @@ export default function () {
       />
     </div>
   );
-}
-
-function useAppendQuestion({
-  append,
-  ref,
-  searchParams,
-  setSearchParams,
-}: {
-  append: (message: Message | CreateMessage) => void;
-  ref: RefObject<HTMLDivElement | null>;
-  searchParams: URLSearchParams;
-  setSearchParams: SetURLSearchParams;
-}) {
-  useEffect(() => {
-    const question = (searchParams.get("question") ?? "").trim();
-    if (question) {
-      // Send the question as a user message
-      append({ role: "user", content: question.trim() });
-
-      // Remove the question parameter from URL without reloading
-      const newSearchParams = new URLSearchParams(searchParams);
-      newSearchParams.delete("question");
-      setSearchParams(newSearchParams, { replace: true });
-
-      // Auto-scroll to bottom when messages change
-      setTimeout(() => {
-        if (ref.current)
-          ref.current.scrollTo({
-            behavior: "smooth",
-            top: ref.current.scrollHeight,
-          });
-      }, 100);
-    }
-  }, [append, ref, searchParams, setSearchParams]);
 }
 
 function Header() {
@@ -95,11 +64,13 @@ function Header() {
 
 function Messages({
   error,
+  handleInputChange,
   isTyping,
   messages,
   ref,
 }: {
   error?: Error;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   isTyping: boolean;
   messages: Message[];
   ref: RefObject<HTMLDivElement | null>;
@@ -126,22 +97,23 @@ function Messages({
             ) : (
               <Markdown
                 components={{
-                  a: ({ node, ...props }) => (
+                  a: ({ children }) => (
                     <button
                       className="text-blue-600 hover:underline"
-                      onClick={(event) => {
-                        event.preventDefault();
-                        askQuestion(props.children?.toString() ?? "");
-                      }}
+                      onClick={async () =>
+                        await askQuestion({
+                          handleInputChange,
+                          question: `${children}`,
+                          ref,
+                        })
+                      }
                       type="button"
                     >
-                      {props.children}
+                      {children}
                     </button>
                   ),
-                  hr: ({ node, ...props }) => (
-                    <hr className="border-gray-300 my-2" />
-                  ),
-                  p: ({ node, ...props }) => (
+                  hr: () => <hr className="border-gray-300 my-2" />,
+                  p: ({ ...props }) => (
                     <p className="whitespace-pre-wrap my-2" {...props} />
                   ),
                 }}
@@ -149,6 +121,7 @@ function Messages({
                 {message.content}
               </Markdown>
             )}
+
             <div
               className={`text-xs mt-1 ${
                 message.role === "user" ? "text-blue-100" : "text-gray-500"
@@ -181,7 +154,16 @@ function Messages({
         </div>
       )}
 
-      <Presets />
+      <div className="p-4 max-w-4xl mx-auto w-full flex flex-wrap gap-2">
+        {precanned.map((question, index) => (
+          <Precanned
+            handleInputChange={handleInputChange}
+            key={question}
+            question={question}
+            ref={ref}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -192,8 +174,8 @@ function InputMessage({
   input,
   isTyping,
 }: {
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   input: string;
   isTyping: boolean;
 }) {
@@ -227,28 +209,19 @@ function InputMessage({
   );
 }
 
-function Presets() {
-  return (
-    <div className="p-4 max-w-4xl mx-auto w-full flex flex-wrap gap-2">
-      <Preset question="What is the average rent for retail spaces?" />
-      <Preset question="What are the best locations for retail spaces?" />
-      <Preset question="What amenities are included in retail spaces?" />
-    </div>
-  );
-}
-
-function Preset({
+function Precanned({
+  handleInputChange,
   question,
+  ref,
 }: {
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   question: string;
+  ref: RefObject<HTMLDivElement | null>;
 }) {
   return (
     <button
       className="px-4 py-2 border-blue-300 hover:text-blue-700 hover:border-blue-700 border-1 rounded-lg transition-colors whitespace-nowrap"
-      onClick={(event) => {
-        event.preventDefault();
-        askQuestion(question);
-      }}
+      onClick={() => askQuestion({ handleInputChange, question, ref })}
       title="Click to ask this question"
       type="button"
     >
@@ -257,12 +230,32 @@ function Preset({
   );
 }
 
-function askQuestion(question: string) {
+async function askQuestion({
+  handleInputChange,
+  question,
+  ref,
+}: {
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  ref: RefObject<HTMLDivElement | null>;
+  question: string;
+}) {
   const input = document.getElementById("question") as HTMLInputElement;
   input.value = "";
-  for (let i = 0; i < question.length; i++)
-    setTimeout(() => {
-      input.value += question[i];
-    }, i * 10);
+  input.readOnly = true;
+  handleInputChange({ target: input } as ChangeEvent<HTMLInputElement>);
+
+  // Auto-scroll to bottom when messages change
+  if (ref.current)
+    ref.current.scrollTo({
+      behavior: "smooth",
+      top: ref.current.scrollHeight,
+    });
   input.focus();
+
+  for (let i = 0; i < question.length; i++) {
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    input.value += question[i];
+  }
+  input.readOnly = false;
+  handleInputChange({ target: input } as ChangeEvent<HTMLInputElement>);
 }
