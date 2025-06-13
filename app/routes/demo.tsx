@@ -113,8 +113,14 @@ function Messages({
                     </button>
                   ),
                   hr: () => <hr className="border-gray-300 my-2" />,
+                  ol: ({ children }) => (
+                    <ol className="ml-8 list-decimal">{children}</ol>
+                  ),
                   p: ({ ...props }) => (
                     <p className="whitespace-pre-wrap my-2" {...props} />
+                  ),
+                  ul: ({ children }) => (
+                    <ul className="ml-6 list-disc">{children}</ul>
                   ),
                 }}
               >
