@@ -1,6 +1,6 @@
 import { type Message, streamText } from "ai";
 import invariant from "tiny-invariant";
-import model from "~/lib/anthropic";
+import model from "~/lib/llm";
 import system from "../lib/system.md?raw";
 import type { Route } from "./+types/api.chat";
 
