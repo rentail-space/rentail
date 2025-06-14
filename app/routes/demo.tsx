@@ -7,29 +7,16 @@ import {
   useRef,
 } from "react";
 import Markdown from "react-markdown";
-
-const initialMessages: Message[] = [
-  {
-    content: `Welcome to **rentail.space**!
-I'm your virtual assistant here to help you find the perfect retail space for your business needs.
-How can I assist you today?
-`,
-    id: "0",
-    role: "assistant",
-  },
-];
-
-const precanned = [
-  "What are the available retail spaces?",
-  "What is the average size of retail spaces?",
-  "What are the rental prices for retail spaces?",
-  "What are the lease terms for retail spaces?",
-];
+import precanned from "../lib/precanned.md?raw";
+import welcome from "../lib/welcome.md?raw";
 
 export default function () {
   const ref = useRef<HTMLDivElement>(null);
   const { error, handleInputChange, handleSubmit, input, messages, status } =
-    useChat({ api: "/api/chat", initialMessages });
+    useChat({
+      api: "/api/chat",
+      initialMessages: [{ content: welcome, id: "0", role: "assistant" }],
+    });
   const isTyping = status === "submitted";
 
   return (
@@ -170,14 +157,17 @@ function Messages({
       )}
 
       <div className="p-4 max-w-4xl mx-auto w-full flex flex-wrap gap-2">
-        {precanned.map((question, index) => (
-          <Precanned
-            handleInputChange={handleInputChange}
-            key={question}
-            question={question}
-            ref={ref}
-          />
-        ))}
+        {precanned
+          .split(/\n+/)
+          .filter((question) => question.trim())
+          .map((question, index) => (
+            <Precanned
+              handleInputChange={handleInputChange}
+              key={question}
+              question={question}
+              ref={ref}
+            />
+          ))}
       </div>
     </div>
   );
