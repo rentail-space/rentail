@@ -1,19 +1,21 @@
+import { useId } from "react";
 import { NavLink } from "react-router";
 
 export default function () {
+  const howItWorksId = useId();
   return (
     <>
       <main className="flex flex-col min-h-screen">
-        <HeroSection />
+        <HeroSection howItWorksId={howItWorksId} />
         <FeaturesSection />
-        <HowItWorksSection />
+        <HowItWorksSection howItWorksId={howItWorksId} />
       </main>
       <Footer />
     </>
   );
 }
 
-function HeroSection() {
+function HeroSection({ howItWorksId }: { howItWorksId: string }) {
   return (
     <section className="py-20 bg-gradient-to-r from-blue-50 to-indigo-50">
       <div className="container mx-auto px-4">
@@ -36,7 +38,7 @@ function HeroSection() {
                 Get Started
               </a>
               <a
-                href="#how-it-works"
+                href={`#${howItWorksId}`}
                 className="px-6 py-3 bg-white text-blue-600 font-medium rounded-lg border border-blue-200 hover:border-blue-300 transition-colors text-center"
               >
                 How It Works
@@ -65,7 +67,7 @@ function HeroSection() {
 
 function FeaturesSection() {
   return (
-    <section className="py-20" id="features">
+    <section className="py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -162,9 +164,9 @@ function FeaturesSection() {
   );
 }
 
-function HowItWorksSection() {
+function HowItWorksSection({ howItWorksId }: { howItWorksId: string }) {
   return (
-    <section className="py-20 bg-gray-50" id="how-it-works">
+    <section className="py-20 bg-gray-50" id={howItWorksId}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">

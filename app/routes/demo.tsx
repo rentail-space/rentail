@@ -1,9 +1,11 @@
+/** biome-ignore-all lint/a11y/noAutofocus: User needs to focus on input field */
 import { useChat } from "@ai-sdk/react";
 import type { Message } from "ai";
 import {
   type ChangeEvent,
   type FormEvent,
   type RefObject,
+  useId,
   useRef,
 } from "react";
 import Markdown from "react-markdown";
@@ -18,6 +20,7 @@ export default function () {
       initialMessages: [{ content: welcome, id: "0", role: "assistant" }],
     });
   const isTyping = status === "submitted";
+  const inputId = useId();
 
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
@@ -25,6 +28,7 @@ export default function () {
       <Messages
         error={error}
         handleInputChange={handleInputChange}
+        inputId={inputId}
         isTyping={isTyping}
         messages={messages}
         ref={ref}
@@ -32,6 +36,7 @@ export default function () {
       <InputMessage
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
+        inputId={inputId}
         input={input}
         isTyping={isTyping}
       />
@@ -52,12 +57,14 @@ function Header() {
 function Messages({
   error,
   handleInputChange,
+  inputId,
   isTyping,
   messages,
   ref,
 }: {
   error?: Error;
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
   isTyping: boolean;
   messages: Message[];
   ref: RefObject<HTMLDivElement | null>;
@@ -90,6 +97,7 @@ function Messages({
                       onClick={async () =>
                         await askQuestion({
                           handleInputChange,
+                          inputId,
                           question: `${children}`,
                           ref,
                         })
@@ -160,9 +168,10 @@ function Messages({
         {precanned
           .split(/\n+/)
           .filter((question) => question.trim())
-          .map((question, index) => (
+          .map((question) => (
             <Precanned
               handleInputChange={handleInputChange}
+              inputId={inputId}
               key={question}
               question={question}
               ref={ref}
@@ -176,11 +185,13 @@ function Messages({
 function InputMessage({
   handleInputChange,
   handleSubmit,
+  inputId,
   input,
   isTyping,
 }: {
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  inputId: string;
   input: string;
   isTyping: boolean;
 }) {
@@ -188,14 +199,13 @@ function InputMessage({
     <div className="bg-white border-t p-4 max-w-4xl mx-auto w-full">
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input
-          id="question"
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
-          // biome-ignore lint/a11y/noAutofocus: <explanation>
-          autoFocus
+          autoFocus={true}
           className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           disabled={isTyping}
+          id={inputId}
           onChange={handleInputChange}
           placeholder="Ask about retail spaces..."
           spellCheck="false"
@@ -216,17 +226,19 @@ function InputMessage({
 
 function Precanned({
   handleInputChange,
+  inputId,
   question,
   ref,
 }: {
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
   question: string;
   ref: RefObject<HTMLDivElement | null>;
 }) {
   return (
     <button
       className="px-4 py-2 border-blue-300 hover:text-blue-700 hover:border-blue-700 border-1 rounded-lg transition-colors whitespace-nowrap"
-      onClick={() => askQuestion({ handleInputChange, question, ref })}
+      onClick={() => askQuestion({ handleInputChange, inputId, question, ref })}
       title="Click to ask this question"
       type="button"
     >
@@ -237,14 +249,16 @@ function Precanned({
 
 async function askQuestion({
   handleInputChange,
+  inputId,
   question,
   ref,
 }: {
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
   ref: RefObject<HTMLDivElement | null>;
   question: string;
 }) {
-  const input = document.getElementById("question") as HTMLInputElement;
+  const input = document.getElementById(inputId) as HTMLInputElement;
   input.value = "";
   input.readOnly = true;
   handleInputChange({ target: input } as ChangeEvent<HTMLInputElement>);
