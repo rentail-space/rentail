@@ -1,11 +1,11 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-		"prisma-smart-formatter.typescript.defaultFormatter": "biomejs.biome",
-		"prisma-smart-formatter.typescriptreact.defaultFormatter": "biomejs.biome"
-	}
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "prisma-smart-formatter.typescript.defaultFormatter": "biomejs.biome",
+    "prisma-smart-formatter.typescriptreact.defaultFormatter": "biomejs.biome"
+  }
 }
