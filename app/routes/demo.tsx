@@ -80,7 +80,7 @@ function Messages({
           className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
         >
           <div
-            className={`max-w-10/12 px-4 py-2 rounded-lg ${
+            className={`max-w-10/12 px-4 py-2 rounded-lg text-black ${
               message.role === "user"
                 ? "bg-blue-600 text-white ml-auto"
                 : "bg-white border shadow-sm"
