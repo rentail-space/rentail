@@ -1,7 +1,6 @@
 // DO NOT add to setup.ts as vitest.config.js cannot upload file that imports vitest
 
-import { existsSync } from "node:fs";
-import { readFile, writeFile } from "node:fs/promises";
+import { access, constants, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import pixelmatch from "pixelmatch";
 import type { Page } from "playwright";
@@ -18,7 +17,9 @@ expect.extend({
     const screenshot = await page.screenshot();
     const filename = path.join(dirname, `${testName}.jpg`);
     console.log(filename);
-    if (!existsSync(filename)) {
+    try {
+      await access(filename, constants.R_OK);
+    } catch {
       await writeFile(filename, screenshot);
       return {
         message: () =>
