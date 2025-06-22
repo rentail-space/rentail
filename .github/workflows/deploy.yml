@@ -1,14 +1,8 @@
 name: Deploy
 
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - helper/**/*.ts
-      - helper/**/*.tsx
-      - .github/workflows/test.yml
-  workflow_dispatch:
+on: 
+  - deployment_status
+  - workflow_dispatch
 
 jobs:
   deploy:
