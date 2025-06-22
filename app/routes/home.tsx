@@ -1,6 +1,10 @@
 import { useId } from "react";
 import { NavLink } from "react-router";
 
+export function meta() {
+  return [{ title: "Find your speciality lease with ease" }];
+}
+
 export default function () {
   const howItWorksId = useId();
   return (
