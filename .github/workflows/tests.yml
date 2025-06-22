@@ -1,4 +1,4 @@
-name: Deploy
+name: tests
 
 on: 
   - deployment_status
@@ -25,6 +25,6 @@ jobs:
       - name: Run TypeCheck
         run: npm run typecheck
       - name: Run Lint
-        run: npm run lint
+        run: biome lint
       - name: Run Tests
         run: npm run test
