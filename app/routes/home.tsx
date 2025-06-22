@@ -5,6 +5,14 @@ export default function () {
   const howItWorksId = useId();
   return (
     <>
+      <button
+        onClick={() => {
+          throw new Error("This is your first error!");
+        }}
+        type="button"
+      >
+        Break the world
+      </button>
       <main className="flex flex-col min-h-screen">
         <HeroSection howItWorksId={howItWorksId} />
         <FeaturesSection />
