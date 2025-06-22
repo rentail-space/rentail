@@ -19,7 +19,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2022",
-    "types": ["node", "vite/client", "@react-router/node"],
+    "types": ["node", "vite/client", "@react-router/node", "@vitest/browser/providers/playwright"],
     "verbatimModuleSyntax": true
   }
 }
