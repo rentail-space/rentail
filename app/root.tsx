@@ -7,9 +7,19 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "react-router";
 import "./app.css";
 import ErrorBoundary from "./components/ErrorBoundary";
+
+export async function loader() {
+  return {
+    ENV: {
+      SENTRY_DSN: process.env.SENTRY_DSN,
+      NODE_ENV: process.env.NODE_ENV,
+    },
+  };
+}
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -25,16 +35,6 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    Sentry.init({
-      dsn: process.env.VITE_SENTRY_DSN,
-      environment: process.env.NODE_ENV,
-      tracesSampleRate: 1.0,
-      replaysSessionSampleRate: 0.1,
-      replaysOnErrorSampleRate: 1.0,
-    });
-  }, []);
-
   return (
     <html lang="en">
       <head>
@@ -53,6 +53,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const { ENV } = useLoaderData<typeof loader>();
+
+  useEffect(() => {
+    if (ENV.SENTRY_DSN) {
+      Sentry.init({
+        dsn: ENV.SENTRY_DSN,
+        environment: ENV.NODE_ENV,
+        tracesSampleRate: 1.0,
+        replaysSessionSampleRate: 0.1,
+        replaysOnErrorSampleRate: 1.0,
+      });
+    }
+  }, [ENV]);
+
   return (
     <ErrorBoundary>
       <Outlet />
