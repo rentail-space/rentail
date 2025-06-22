@@ -14,3 +14,11 @@ export default defineConfig({
     },
   },
 });
+
+interface CustomMatchers<R = unknown> {
+  toMatchScreenshot: () => Promise<R>;
+}
+
+declare module "vitest" {
+  interface Matchers<T> extends CustomMatchers<T> {}
+}
