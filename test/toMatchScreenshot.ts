@@ -1,3 +1,5 @@
+// DO NOT add to setup.ts as vitest.config.js cannot upload file that imports vitest
+
 import { existsSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
