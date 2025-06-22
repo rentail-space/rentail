@@ -7,13 +7,14 @@
   },
   "scripts": {
     "build": "react-router build",
+    "checkly": "npx checkly test --update-snapshots --record",
+    "clean": "rm -rf .react-router",
     "dev": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc",
-    "lint": "biome lint --fix",
     "format": "biome format --write",
+    "lint": "biome lint --fix",
+    "start": "react-router-serve ./build/server/index.js",
     "test": "vitest run --reporter verbose",
-    "clean": "rm -rf .react-router"
+    "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.2.12",
