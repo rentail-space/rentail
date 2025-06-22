@@ -13,7 +13,7 @@ const URL = "http://localhost:9222";
 describe("Home page", () => {
   it("home page", async () => {
     await chromium.launchServer({
-      headless: false,
+      headless: true,
       port: 9222,
     });
 
