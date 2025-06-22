@@ -5,15 +5,6 @@ export default function () {
   const howItWorksId = useId();
   return (
     <>
-      <button
-        className="fixed bottom-4 right-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-red-700 transition-colors"
-        onClick={() => {
-          throw new Error("This is your first error!");
-        }}
-        type="submit"
-      >
-        Break the world
-      </button>
       <main className="flex flex-col min-h-screen">
         <HeroSection howItWorksId={howItWorksId} />
         <FeaturesSection />
