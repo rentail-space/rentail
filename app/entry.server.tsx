@@ -4,6 +4,7 @@ import { PassThrough } from "node:stream";
 import { renderToPipeableStream } from "react-dom/server";
 import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
+import "./lib/logger.server";
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
