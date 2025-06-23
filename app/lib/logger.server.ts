@@ -1,5 +1,6 @@
 import { Logtail } from "@logtail/node";
 import chalk from "chalk";
+import { format } from "util";
 
 const logtail = new Logtail("***REMOVED***", {
   endpoint: "https://s1356404.eu-nbg-2.betterstackdata.com",
@@ -21,8 +22,9 @@ const colors = {
     : (message: string) => message;
 
   Reflect.set(console, level, (message: string, ...metadata: unknown[]) => {
-    original.call(console, color(message), ...metadata);
-    logger.call(logtail, message, ...metadata);
+    const formattedMessage = format(message, ...metadata);
+    original.call(console, color(formattedMessage));
+    logger.call(logtail, formattedMessage, ...metadata);
   });
 });
 

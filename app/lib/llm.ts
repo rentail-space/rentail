@@ -20,7 +20,7 @@ https
   .on("error", (error) => {
     console.log(error);
     model = createOllama({})("deepseek-v2:latest");
-    console.error("LLM model: %s", model.modelId);
+    console.error("Fallback LLM model: %s", model.modelId);
   });
 
 export default model;
