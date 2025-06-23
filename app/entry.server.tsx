@@ -21,6 +21,10 @@ export default function handleRequest(
   entryContext: EntryContext,
 ) {
   let statusCode = responseStatusCode || 200;
+
+  // Log the incoming request
+  const startTime = Date.now();
+  const { pathname } = new URL(request.url);
   return new Promise<Response>((resolve, reject) => {
     let shellRendered = false;
     const { pipe, abort } = renderToPipeableStream(
@@ -31,16 +35,27 @@ export default function handleRequest(
           const body = new PassThrough();
           const stream = createReadableStreamFromReadable(body);
           responseHeaders.set("content-type", "text/html");
-          resolve(
-            new Response(stream, {
-              headers: responseHeaders,
-              status: statusCode,
-            }),
+          const response = new Response(stream, {
+            headers: responseHeaders,
+            status: statusCode,
+          });
+
+          // Log the response
+          const duration = Date.now() - startTime;
+          console.info(
+            `${request.method} ${pathname} - ${statusCode} - ${duration}ms`,
           );
+
+          resolve(response);
           pipe(body);
         },
         onShellError(error: unknown) {
           Sentry.captureException(error);
+          const duration = Date.now() - startTime;
+          console.error(
+            `${request.method} ${pathname} - ERROR - ${duration}ms`,
+            error,
+          );
           reject(error);
         },
         onError(error: unknown) {
