@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
     globals: true,
-    environment: "jsdom",
+    environment: "node",
     setupFiles: ["./test/setup.ts"],
     include: ["./app/**/*.test.{ts,tsx}"],
     exclude: ["./app/build", "./app/node_modules"],
