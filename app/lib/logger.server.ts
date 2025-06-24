@@ -1,6 +1,6 @@
+import { format } from "node:util";
 import { Logtail } from "@logtail/node";
 import chalk from "chalk";
-import { format } from "util";
 
 const logtail = new Logtail("***REMOVED***", {
   endpoint: "https://s1356404.eu-nbg-2.betterstackdata.com",

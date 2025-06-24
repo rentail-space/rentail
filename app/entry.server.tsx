@@ -1,6 +1,6 @@
+import { PassThrough } from "node:stream";
 import { createReadableStreamFromReadable } from "@react-router/node";
 import * as Sentry from "@sentry/react";
-import { PassThrough } from "node:stream";
 import { renderToPipeableStream } from "react-dom/server";
 import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
