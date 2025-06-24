@@ -40,7 +40,7 @@
     "@react-router/dev": "^7.6.2",
     "@tailwindcss/vite": "^4.1.10",
     "@types/jest-image-snapshot": "^6.4.0",
-    "@types/node": "^24.0.3",
+    "@types/node": "^24.0.4",
     "@types/pngjs": "^6.0.5",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
