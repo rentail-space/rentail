@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 export function meta() {
   return [{ title: "Find your speciality lease with ease" }];
@@ -238,9 +238,14 @@ function Footer() {
             <span className="text-blue-500">rentail</span>
             .space
           </NavLink>
-          <NavLink to="/demo" viewTransition>
-            All rights reserved.
-          </NavLink>
+          <span>All rights reserved.</span>
+          <Link
+            to="mailto:info@rentail.space"
+            className="text-blue-500"
+            viewTransition
+          >
+            Contact us
+          </Link>
         </p>
       </div>
     </footer>
