@@ -6,11 +6,14 @@ import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
 import "./lib/logger.server";
 
-Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  environment: process.env.NODE_ENV,
-  tracesSampleRate: 1.0,
-});
+const sentryDsn = process.env.SENTRY_DSN;
+if (sentryDsn) {
+  Sentry.init({
+    dsn: sentryDsn,
+    environment: process.env.NODE_ENV || "development",
+    tracesSampleRate: 1.0,
+  });
+}
 
 const ABORT_DELAY = 5_000;
 

@@ -15,8 +15,8 @@ import ErrorBoundary from "./components/ErrorBoundary";
 export async function loader() {
   return {
     ENV: {
-      SENTRY_DSN: process.env.SENTRY_DSN,
-      NODE_ENV: process.env.NODE_ENV,
+      SENTRY_DSN: process.env.SENTRY_DSN || null,
+      NODE_ENV: process.env.NODE_ENV || "development",
     },
   };
 }
@@ -59,7 +59,7 @@ export default function App() {
     if (ENV.SENTRY_DSN) {
       Sentry.init({
         dsn: ENV.SENTRY_DSN,
-        environment: ENV.NODE_ENV,
+        environment: ENV.NODE_ENV || "development",
         tracesSampleRate: 1.0,
         replaysSessionSampleRate: 0.1,
         replaysOnErrorSampleRate: 1.0,
