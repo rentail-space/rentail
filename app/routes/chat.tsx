@@ -12,7 +12,7 @@ import Markdown from "react-markdown";
 import precanned from "../lib/precanned.md?raw";
 import welcome from "../lib/welcome.md?raw";
 
-export default function () {
+export default function Chat() {
   const ref = useRef<HTMLDivElement>(null);
   const { error, handleInputChange, handleSubmit, input, messages, status } =
     useChat({
