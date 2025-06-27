@@ -1,10 +1,12 @@
 import { format } from "node:util";
 import { Logtail } from "@logtail/node";
 import chalk from "chalk";
+import env from "env-var";
 
-const logtail = new Logtail("***REMOVED***", {
-  endpoint: "https://s1356404.eu-nbg-2.betterstackdata.com",
-});
+const logtailToken = env.get("LOGTAIL_TOKEN").required().asString();
+const logtailEndpoint = env.get("LOGTAIL_ENDPOINT").required().asString();
+
+const logtail = new Logtail(logtailToken, { endpoint: logtailEndpoint });
 
 const colors = {
   debug: chalk.blue,
