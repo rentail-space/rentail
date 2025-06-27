@@ -7,8 +7,8 @@ export default defineConfig({
     globals: true,
     environment: "node",
     setupFiles: ["./test/setup.ts"],
-    include: ["./app/**/*.test.{ts,tsx}"],
-    exclude: ["./app/build", "./app/node_modules"],
+    include: ["./**/*.test.{ts,tsx}"],
+    exclude: ["./build", "./node_modules"],
     browser: {
       screenshotDirectory: "./__screenshots__",
     },
