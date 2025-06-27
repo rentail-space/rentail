@@ -6,12 +6,7 @@
     "useIgnoreFile": false
   },
   "files": {
-    "includes": [
-      "**",
-      "!**/.react-router",
-      "!**/node_modules",
-      "!**/build"
-    ],
+    "includes": ["**", "!**/.react-router", "!**/node_modules", "!**/build"],
     "ignoreUnknown": false
   },
   "formatter": {
