@@ -6,7 +6,7 @@
 
 import { chromium } from "playwright";
 import { describe, expect, it } from "vitest";
-import "../../test/toMatchScreenshot";
+import "./toMatchScreenshot";
 
 const URL = "http://localhost:9222";
 
