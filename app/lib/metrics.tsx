@@ -1,19 +1,47 @@
 // Push metrics to BetterStack
 
-import { readFileSync } from "node:fs";
 import os from "node:os";
 import env from "env-var";
+
+const startTime = Date.now() / 1000;
+
+export async function pushGauge(
+  name: string,
+  value: number,
+  tags?: Record<string, string>,
+) {
+  await pushToPrometheus([{ name, gauge: { value }, tags }]);
+}
+
+export async function pushCounter(
+  name: string,
+  value: number,
+  tags?: Record<string, string>,
+) {
+  await pushToPrometheus([{ name, counter: { value }, tags }]);
+}
 
 export async function pushHTTPResponse({
   statusCode,
   duration,
+  request,
 }: {
   statusCode: number;
   duration: number;
+  request: Request;
 }) {
   await pushToPrometheus([
     {
-      name: "http_response_status_codes",
+      name: "events_count",
+      counter: { value: 1 },
+      tags: {
+        request_method: request.method,
+        request_path: new URL(request.url).pathname,
+        response_status: statusCode.toString(),
+      },
+    },
+    {
+      name: "response_status_code",
       histogram: {
         buckets: [
           { count: 0, upper_limit: 200 },
@@ -44,25 +72,60 @@ export async function pushHTTPResponse({
 
 export async function pushProcessMetrics() {
   await pushToPrometheus([
-    { name: "node_memory_MemTotal_bytes", gauge: { value: os.totalmem() } },
-    { name: "node_memory_MemFree_bytes", gauge: { value: os.freemem() } },
     {
-      name: "node_memory_MemAvailable_bytes",
-      gauge: { value: getAvailableMemoryLinux() },
+      name: "process_cpu_user_seconds_total",
+      gauge: { value: process.cpuUsage().user / 1000 },
     },
     {
-      name: "node_boot_time_seconds",
-      gauge: { value: Math.floor(process.uptime()) },
+      name: "process_cpu_system_seconds_total",
+      gauge: { value: process.cpuUsage().system / 1000 },
     },
     {
-      name: "process_cpu_seconds_total",
+      name: "process_resident_memory_bytes",
+      gauge: { value: process.memoryUsage().rss },
+    },
+    {
+      name: "nodejs_heap_size_total_bytes",
+      gauge: { value: process.memoryUsage().heapTotal },
+    },
+    {
+      name: "nodejs_heap_size_used_bytes",
+      gauge: { value: process.memoryUsage().heapUsed },
+    },
+    {
+      name: "nodejs_external_memory_bytes",
+      gauge: { value: process.memoryUsage().external },
+    },
+    {
+      name: "nodejs_heap_space_size_used_bytes",
+      gauge: { value: process.memoryUsage().heapUsed },
+    },
+    {
+      name: "nodejs_heap_space_size_available_bytes",
       gauge: {
-        value: (process.cpuUsage().user + process.cpuUsage().system) / 1000,
+        value: process.memoryUsage().heapTotal - process.memoryUsage().heapUsed,
       },
     },
     {
-      name: "process_memory_bytes",
-      gauge: { value: process.memoryUsage().rss },
+      name: "nodejs_heap_space_size_total_bytes",
+      gauge: { value: process.memoryUsage().heapTotal },
+    },
+    {
+      name: "process_start_time_seconds",
+      gauge: { value: Math.floor(startTime) },
+    },
+    {
+      name: "nodejs_version_info",
+      gauge: {
+        value: Number(process.versions.node),
+      },
+      tags: {
+        version: process.versions.node,
+      },
+    },
+    {
+      name: "nodejs_active_resources",
+      gauge: { value: process.getActiveResourcesInfo().length },
     },
     ...os.cpus().map((cpu, index) => ({
       name: "node_cpu_seconds_total",
@@ -70,31 +133,18 @@ export async function pushProcessMetrics() {
       tags: { cpu: index.toString() },
     })),
   ]);
-}
 
-export async function pushGauge(
-  name: string,
-  value: number,
-  tags?: Record<string, string>,
-) {
-  await pushToPrometheus([{ name, gauge: { value }, tags }]);
-}
+  const baseTime = process.hrtime();
 
-export async function pushCounter(
-  name: string,
-  value: number,
-  tags?: Record<string, string>,
-) {
-  await pushToPrometheus([{ name, counter: { value }, tags }]);
-}
+  function measureLap() {
+    const diff = process.hrtime(baseTime); // [seconds, nanoseconds]
+    const lagInSeconds = diff[0] + diff[1] / 1e9;
+    pushToPrometheus([
+      { name: "nodejs_eventloop_lag_seconds", gauge: { value: lagInSeconds } },
+    ]);
+  }
 
-function getAvailableMemoryLinux() {
-  try {
-    const meminfo = readFileSync("/proc/meminfo", "utf8");
-    const match = meminfo.match(/^MemAvailable:\s+(\d+)\skB$/m);
-    if (match) return Number.parseInt(match[1], 10) * 1024; // bytes
-  } catch {}
-  return 0;
+  setImmediate(measureLap);
 }
 
 const url = env.get("PUSHGATEWAY_URL").required().asString();

@@ -51,8 +51,15 @@ export default function handleRequest(
           console.info(
             `${request.method} ${pathname} - ${statusCode} - ${duration}ms`,
           );
+          logtail.info("request", {
+            duration: duration.toString(),
+            referrer: request.headers.get("Referer") ?? "",
+            request_method: request.method,
+            request_path: pathname,
+            response_status: statusCode.toString(),
+          });
           // Add metrics
-          pushHTTPResponse({ statusCode, duration });
+          pushHTTPResponse({ request, statusCode, duration });
 
           resolve(response);
           pipe(body);
@@ -71,7 +78,7 @@ export default function handleRequest(
               error,
             );
           logtail.flush();
-          pushHTTPResponse({ statusCode: 500, duration });
+          pushHTTPResponse({ request, statusCode: 500, duration });
           statusCode = 500;
         },
       },
