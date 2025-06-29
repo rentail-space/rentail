@@ -43,10 +43,14 @@ export async function pushGauge(name: string, value: number) {
   });
 }
 
-setInterval(() => {
-  pushGauge("node_memory_MemTotal_bytes", os.totalmem());
-  pushGauge("node_memory_MemFree_bytes", os.freemem());
-  pushGauge("node_memory_MemAvailable_bytes", getAvailableMemoryLinux());
+setInterval(async () => {
+  await Promise.all([
+    pushGauge("node_memory_MemTotal_bytes", os.totalmem()),
+    pushGauge("node_memory_MemFree_bytes", os.freemem()),
+    pushGauge("node_memory_MemAvailable_bytes", getAvailableMemoryLinux()),
+    pushGauge("node_boot_time_seconds", Math.floor(process.uptime())),
+    pushGauge("node_cpu_seconds_total", process.cpuUsage().user),
+  ]);
 }, 5000);
 
 function getAvailableMemoryLinux() {
