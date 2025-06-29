@@ -1,5 +1,6 @@
 // Push metrics to BetterStack
 
+import { readFileSync } from "node:fs";
 import env from "env-var";
 
 export async function pushStatusCodes(statusCode: number) {
@@ -43,9 +44,21 @@ export async function pushGauge(name: string, value: number) {
 }
 
 setInterval(() => {
-  pushGauge("node_memory_MemTotal_bytes", process.memoryUsage().heapUsed);
-  pushGauge("node_memory_MemAvailable_bytes", process.memoryUsage().heapTotal);
+  pushGauge("node_memory_MemTotal_bytes", os.totalmem());
+  pushGauge("node_memory_MemFree_bytes", os.freemem());
+  pushGauge("node_memory_MemAvailable_bytes", getAvailableMemoryLinux());
 }, 5000);
+
+function getAvailableMemoryLinux() {
+  try {
+    const meminfo = readFileSync("/proc/meminfo", "utf8");
+    const match = meminfo.match(/^MemAvailable:\s+(\d+)\skB$/m);
+    if (match) return Number.parseInt(match[1], 10) * 1024; // bytes
+  } catch {}
+  return 0;
+}
+
+import os from "node:os";
 
 const url = env.get("PUSHGATEWAY_URL").required().asString();
 const token = env.get("PUSHGATEWAY_TOKEN").required().asString();
