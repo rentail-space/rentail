@@ -5,6 +5,7 @@ import { renderToPipeableStream } from "react-dom/server";
 import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
 import logtail from "./lib/logger.server";
+import { pushResponseTime, pushStatusCodes } from "./lib/metrics";
 
 const sentryDsn = process.env.SENTRY_DSN;
 if (sentryDsn) {
@@ -48,18 +49,16 @@ export default function handleRequest(
           console.info(
             `${request.method} ${pathname} - ${statusCode} - ${duration}ms`,
           );
+          // Add metrics
+          pushResponseTime(duration).catch(console.error);
+          pushStatusCodes(statusCode).catch(console.error);
 
           resolve(response);
           pipe(body);
         },
         onShellError(error: unknown) {
           Sentry.captureException(error);
-          const duration = Date.now() - startTime;
-          console.error(
-            `${request.method} ${pathname} - ERROR - ${duration}ms`,
-            error,
-          );
-          logtail.flush();
+          console.error(error);
           reject(error);
         },
         onError(error: unknown) {
@@ -71,6 +70,7 @@ export default function handleRequest(
               error,
             );
           logtail.flush();
+          pushStatusCodes(500);
           statusCode = 500;
         },
       },
