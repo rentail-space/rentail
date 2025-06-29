@@ -4,7 +4,7 @@ import * as Sentry from "@sentry/react";
 import { renderToPipeableStream } from "react-dom/server";
 import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
-import "./lib/logger.server";
+import logtail from "./lib/logger.server";
 
 const sentryDsn = process.env.SENTRY_DSN;
 if (sentryDsn) {
@@ -59,12 +59,19 @@ export default function handleRequest(
             `${request.method} ${pathname} - ERROR - ${duration}ms`,
             error,
           );
+          logtail.flush();
           reject(error);
         },
         onError(error: unknown) {
           Sentry.captureException(error);
+          const duration = Date.now() - startTime;
+          if (shellRendered)
+            console.error(
+              `${request.method} ${pathname} - ERROR - ${duration}ms`,
+              error,
+            );
+          logtail.flush();
           statusCode = 500;
-          if (shellRendered) console.error(error);
         },
       },
     );
