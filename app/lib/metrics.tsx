@@ -21,33 +21,13 @@ export async function pushCounter(
   await pushToPrometheus([{ name, counter: { value }, tags }]);
 }
 
-const startTime = Date.now() / 1000;
-
-export async function pushGauge(
-  name: string,
-  value: number,
-  tags?: Record<string, string>,
-) {
-  await pushToPrometheus([{ name, gauge: { value }, tags }]);
-}
-
-export async function pushCounter(
-  name: string,
-  value: number,
-  tags?: Record<string, string>,
-) {
-  await pushToPrometheus([{ name, counter: { value }, tags }]);
-}
-
 export async function pushHTTPResponse({
   statusCode,
   duration,
   request,
-  request,
 }: {
   statusCode: number;
   duration: number;
-  request: Request;
   request: Request;
 }) {
   await pushToPrometheus([
@@ -149,18 +129,6 @@ export async function pushProcessMetrics() {
       tags: { cpu: index.toString() },
     })),
   ]);
-
-  const baseTime = process.hrtime();
-
-  function measureLap() {
-    const diff = process.hrtime(baseTime); // [seconds, nanoseconds]
-    const lagInSeconds = diff[0] + diff[1] / 1e9;
-    pushToPrometheus([
-      { name: "nodejs_eventloop_lag_seconds", gauge: { value: lagInSeconds } },
-    ]);
-  }
-
-  setImmediate(measureLap);
 
   const baseTime = process.hrtime();
 
