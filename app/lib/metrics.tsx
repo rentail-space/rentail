@@ -1,57 +1,92 @@
 // Push metrics to BetterStack
 
 import { readFileSync } from "node:fs";
+import os from "node:os";
 import env from "env-var";
 
-export async function pushStatusCodes(statusCode: number) {
-  await pushMetrics({
-    name: "status_codes",
-    histogram: {
-      buckets: [
-        { count: 0, upper_limit: 200 },
-        { count: 0, upper_limit: 300 },
-        { count: 0, upper_limit: 400 },
-        { count: 0, upper_limit: 500 },
-      ],
-      count: 1,
-      sum: statusCode,
+export async function pushHTTPResponse({
+  statusCode,
+  duration,
+}: {
+  statusCode: number;
+  duration: number;
+}) {
+  await pushToPrometheus([
+    {
+      name: "http_response_status_codes",
+      histogram: {
+        buckets: [
+          { count: 0, upper_limit: 200 },
+          { count: 0, upper_limit: 300 },
+          { count: 0, upper_limit: 400 },
+          { count: 0, upper_limit: 500 },
+        ],
+        count: 1,
+        sum: statusCode,
+      },
     },
-  });
-}
-
-export async function pushResponseTime(duration: number) {
-  await pushMetrics({
-    name: "response_time",
-    histogram: {
-      buckets: [
-        { count: 0, upper_limit: 100 },
-        { count: 0, upper_limit: 500 },
-        { count: 0, upper_limit: 1000 },
-        { count: 0, upper_limit: 5000 },
-        { count: 0, upper_limit: 10000 },
-      ],
-      count: 1,
-      sum: duration,
+    {
+      name: "http_request_duration_seconds",
+      histogram: {
+        buckets: [
+          { count: 0, upper_limit: 100 },
+          { count: 0, upper_limit: 500 },
+          { count: 0, upper_limit: 1000 },
+          { count: 0, upper_limit: 5000 },
+          { count: 0, upper_limit: 10000 },
+        ],
+        count: 1,
+        sum: duration,
+      },
     },
-  });
-}
-
-export async function pushGauge(name: string, value: number) {
-  await pushMetrics({
-    name,
-    gauge: { value },
-  });
-}
-
-setInterval(async () => {
-  await Promise.all([
-    pushGauge("node_memory_MemTotal_bytes", os.totalmem()),
-    pushGauge("node_memory_MemFree_bytes", os.freemem()),
-    pushGauge("node_memory_MemAvailable_bytes", getAvailableMemoryLinux()),
-    pushGauge("node_boot_time_seconds", Math.floor(process.uptime())),
-    pushGauge("node_cpu_seconds_total", process.cpuUsage().user),
   ]);
-}, 5000);
+}
+
+export async function pushProcessMetrics() {
+  await pushToPrometheus([
+    { name: "node_memory_MemTotal_bytes", gauge: { value: os.totalmem() } },
+    { name: "node_memory_MemFree_bytes", gauge: { value: os.freemem() } },
+    {
+      name: "node_memory_MemAvailable_bytes",
+      gauge: { value: getAvailableMemoryLinux() },
+    },
+    {
+      name: "node_boot_time_seconds",
+      gauge: { value: Math.floor(process.uptime()) },
+    },
+    {
+      name: "process_cpu_seconds_total",
+      gauge: {
+        value: (process.cpuUsage().user + process.cpuUsage().system) / 1000,
+      },
+    },
+    {
+      name: "process_memory_bytes",
+      gauge: { value: process.memoryUsage().rss },
+    },
+    ...os.cpus().map((cpu, index) => ({
+      name: "node_cpu_seconds_total",
+      gauge: { value: cpu.times.user },
+      tags: { cpu: index.toString() },
+    })),
+  ]);
+}
+
+export async function pushGauge(
+  name: string,
+  value: number,
+  tags?: Record<string, string>,
+) {
+  await pushToPrometheus([{ name, gauge: { value }, tags }]);
+}
+
+export async function pushCounter(
+  name: string,
+  value: number,
+  tags?: Record<string, string>,
+) {
+  await pushToPrometheus([{ name, counter: { value }, tags }]);
+}
 
 function getAvailableMemoryLinux() {
   try {
@@ -61,8 +96,6 @@ function getAvailableMemoryLinux() {
   } catch {}
   return 0;
 }
-
-import os from "node:os";
 
 const url = env.get("PUSHGATEWAY_URL").required().asString();
 const token = env.get("PUSHGATEWAY_TOKEN").required().asString();
@@ -77,16 +110,19 @@ type Histogram = {
     sum: number;
   };
 };
+
 type Gauge = {
   gauge: {
     value: number;
   };
 };
+
 type Counter = {
   counter: {
     value: number;
   };
 };
+
 type Summary = {
   summary: {
     count: number;
@@ -98,20 +134,34 @@ type Summary = {
   };
 };
 
-async function pushMetrics({
-  name,
-  ...rest
-}: {
-  name: string;
-} & (Histogram | Gauge | Counter | Summary)) {
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ dt: new Date().toISOString(), name, ...rest }),
-  });
-  if (!response.ok)
-    throw new Error(`Failed to push metrics: ${response.statusText}`);
+async function pushToPrometheus(
+  metrics: Array<
+    { name: string; tags?: Record<string, string> } & (
+      | Counter
+      | Gauge
+      | Histogram
+      | Summary
+    )
+  >,
+): Promise<void> {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(
+        metrics.map(({ name, tags, ...rest }) => ({
+          dt: new Date().toISOString(),
+          name,
+          tags,
+          ...rest,
+        })),
+      ),
+    });
+    if (!response.ok) throw new Error(response.statusText);
+  } catch (error) {
+    console.error("Failed to push metrics", error);
+  }
 }

@@ -5,7 +5,7 @@ import { renderToPipeableStream } from "react-dom/server";
 import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
 import logtail from "./lib/logger.server";
-import { pushResponseTime, pushStatusCodes } from "./lib/metrics";
+import { pushHTTPResponse, pushProcessMetrics } from "./lib/metrics";
 
 const sentryDsn = process.env.SENTRY_DSN;
 if (sentryDsn) {
@@ -15,6 +15,8 @@ if (sentryDsn) {
     tracesSampleRate: 1.0,
   });
 }
+
+setInterval(async () => pushProcessMetrics(), 5000);
 
 const ABORT_DELAY = 5_000;
 
@@ -50,8 +52,7 @@ export default function handleRequest(
             `${request.method} ${pathname} - ${statusCode} - ${duration}ms`,
           );
           // Add metrics
-          pushResponseTime(duration).catch(console.error);
-          pushStatusCodes(statusCode).catch(console.error);
+          pushHTTPResponse({ statusCode, duration });
 
           resolve(response);
           pipe(body);
@@ -70,7 +71,7 @@ export default function handleRequest(
               error,
             );
           logtail.flush();
-          pushStatusCodes(500);
+          pushHTTPResponse({ statusCode: 500, duration });
           statusCode = 500;
         },
       },
