@@ -33,37 +33,67 @@ export const links: LinksFunction = () => [
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
-  { rel: "canonical", href: "https://rentail.space/" },
+  { rel: "canonical", href: url },
 ];
+
+const url = "https://rentail.space/";
+const title = "rentail.space — Find your specialty lease with ease";
+const description =
+  "Discover short-term retail spaces and pop-up shop opportunities in shopping centers nationwide. Connect with landlords offering specialty leases for seasonal retail, temporary stores, and unique business concepts.";
 
 export const meta: MetaFunction = () => [
   {
-    title: "rentail.space",
-    description:
-      "Find perfect specialty retail spaces for short-term leases. Connect with shopping centers nationwide through rentail.space - your marketplace for pop-up shops and seasonal retail opportunities.",
+    title,
   },
   {
-    property: "og:title",
-    content: "Find your speciality lease with ease - rentail.space",
+    name: "description",
+    content: description,
   },
   {
-    property: "og:description",
+    name: "keywords",
     content:
-      "Discover specialty retail spaces for short-term leases. Connect with shopping centers nationwide.",
+      "specialty lease, short-term retail space, pop-up shop, shopping center lease, temporary retail, seasonal retail space, retail marketplace",
   },
-  {
-    property: "og:image",
-    content: "https://rentail.space/og-image.jpg",
-  },
-  {
-    property: "og:url",
-    content: "https://rentail.space/",
-  },
+  { property: "og:title", content: title },
+  { property: "og:description", content: description },
+  { property: "og:image", content: `${url}/og-image.png` },
+  { property: "og:url", content: url },
   { property: "og:type", content: "website" },
+  { property: "og:site_name", content: "rentail.space" },
+  { name: "twitter:card", content: "summary_large_image" },
+  { name: "twitter:site", content: "@rentailspace" },
+  { name: "twitter:creator", content: "@rentailspace" },
+  { name: "twitter:title", content: title },
+  { name: "twitter:description", content: description },
+  { name: "twitter:image", content: `${url}/og-image.png` },
   { name: "robots", content: "index, follow" },
+  { name: "author", content: "rentail.space" },
+  { name: "theme-color", content: "#2563eb" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "rentail.space",
+    url,
+    logo: `${url}/og-image.png`,
+    description:
+      "Marketplace for specialty retail spaces and short-term leases. Connect businesses with shopping centers nationwide for pop-up shops and seasonal retail opportunities.",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      areaServed: "US",
+      availableLanguage: "en",
+    },
+    sameAs: ["https://twitter.com/rentailspace"],
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${url}/chat?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <html lang="en">
       <head>
@@ -71,6 +101,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
       </head>
       <body>
         {children}

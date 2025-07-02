@@ -1,12 +1,8 @@
 import { useId } from "react";
-import { HeroSection } from "~/components/home/HeroSection";
 import { FeaturesSection } from "~/components/home/FeaturesSection";
+import { HeroSection } from "~/components/home/HeroSection";
 import { HowItWorksSection } from "~/components/home/HowItWorksSection";
 import { Footer } from "~/components/layout/Footer";
-
-export function meta() {
-  return [{ title: "Find your speciality lease with ease" }];
-}
 
 export default function Home() {
   const howItWorksId = useId();
