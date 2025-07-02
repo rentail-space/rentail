@@ -4,6 +4,7 @@ import {
   Links,
   type LinksFunction,
   Meta,
+  type MetaFunction,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -32,6 +33,34 @@ export const links: LinksFunction = () => [
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
+  { rel: "canonical", href: "https://rentail.space/" },
+];
+
+export const meta: MetaFunction = () => [
+  {
+    title: "rentail.space",
+    description:
+      "Find perfect specialty retail spaces for short-term leases. Connect with shopping centers nationwide through rentail.space - your marketplace for pop-up shops and seasonal retail opportunities.",
+  },
+  {
+    property: "og:title",
+    content: "Find your speciality lease with ease - rentail.space",
+  },
+  {
+    property: "og:description",
+    content:
+      "Discover specialty retail spaces for short-term leases. Connect with shopping centers nationwide.",
+  },
+  {
+    property: "og:image",
+    content: "https://rentail.space/og-image.jpg",
+  },
+  {
+    property: "og:url",
+    content: "https://rentail.space/",
+  },
+  { property: "og:type", content: "website" },
+  { name: "robots", content: "index, follow" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
