@@ -39,7 +39,7 @@
     "@playwright/test": "^1.53.2",
     "@react-router/dev": "^7.6.3",
     "@tailwindcss/vite": "^4.1.11",
-    "@types/node": "^24.0.9",
+    "@types/node": "^24.0.10",
     "@types/pngjs": "^6.0.5",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
