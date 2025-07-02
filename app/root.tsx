@@ -77,7 +77,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     "@type": "Organization",
     name: "rentail.space",
     url,
-    logo: `${url}/og-image.png`,
+    logo: `${url}/logo.png`,
     description:
       "Marketplace for specialty retail spaces and short-term leases. Connect businesses with shopping centers nationwide for pop-up shops and seasonal retail opportunities.",
     contactPoint: {
