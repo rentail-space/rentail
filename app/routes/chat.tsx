@@ -5,6 +5,7 @@ import {
   type ChangeEvent,
   type FormEvent,
   type RefObject,
+  useEffect,
   useId,
   useRef,
   useState,
@@ -49,17 +50,36 @@ export default function Chat() {
   );
 }
 
+const userInfo = {
+  name: "Assaf",
+  location: "Los Angeles, CA",
+  level: "Expert",
+  interactions: 5,
+  rented: 2,
+};
+
 function Header() {
+  const [userInfo] = useState({
+    name: "Assaf",
+    location: "Los Angeles, CA",
+    level: "Expert",
+    interactions: 5,
+    rented: 2,
+  });
+
   return (
     <header className="bg-white border-b px-6 py-4 flex flex-row gap-8 items-center justify-between">
       <h1 className="text-2xl font-bold text-gray-900">
         <span className="text-blue-600">rentail</span>.space
       </h1>
       <div className="flex flex-row gap-3 items-center">
-        <HeaderStats label="User" value="Assaf" />
-        <HeaderStats label="Location" value="Los Angeles CA" />
-        <HeaderStats label="Level" value="Expert" />
-        <HeaderStats label="Interactions" value="5" />
+        <HeaderStats label="User" value={userInfo.name} />
+        <HeaderStats label="Location" value={userInfo.location} />
+        <HeaderStats label="Level" value={userInfo.level} />
+        <HeaderStats
+          label="Interactions"
+          value={userInfo.interactions.toString()}
+        />
         <HeaderStats label="Rented" value="2" />
       </div>
     </header>
