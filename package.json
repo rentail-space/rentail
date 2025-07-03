@@ -14,7 +14,7 @@
     "format": "biome format --write",
     "lint": "biome lint",
     "start": "react-router-serve ./build/server/index.js",
-    "test": "vitest run --reporter verbose",
+    "test": "npm run lint && npm run typecheck && vitest run --reporter verbose",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
