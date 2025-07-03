@@ -102,10 +102,10 @@ function Messages({
           className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
         >
           <div
-            className={`max-w-10/12 px-4 py-2 rounded-lg text-black ${
+            className={`max-w-11/12 px-4 py-2 rounded-lg ${
               message.role === "user"
                 ? "bg-blue-600 text-white ml-auto"
-                : "bg-white border shadow-sm"
+                : "bg-white text-black border shadow-sm"
             }`}
           >
             {message.role === "user" ? (
@@ -291,7 +291,7 @@ function Precanned({
   ref: RefObject<HTMLDivElement | null>;
 }) {
   return (
-    <div className="p-4 max-w-4xl mx-auto w-full flex flex-wrap gap-2">
+    <div className="mx-auto w-full flex flex-wrap gap-2">
       {questions.map((question) => (
         <button
           key={question}
