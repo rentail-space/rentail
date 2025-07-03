@@ -49,9 +49,12 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Chat() {
   const { userInfo } = useLoaderData<typeof loader>();
-  const ref = useRef<HTMLDivElement>(null);
+  const messagesRef = useRef<HTMLDivElement>(null);
+  const inputId = useId();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [usage, setUsage] = useState(new Map<string, LanguageModelUsage>());
   const [canEdit, setCanEdit] = useState(true);
+
   const {
     append,
     error,
@@ -68,14 +71,18 @@ export default function Chat() {
       setCanEdit(true);
     },
   });
+
   const isTyping = status === "submitted";
-  const inputId = useId();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const q = searchParams.get("q");
+  const initialQuery = searchParams.get("q");
+
+  // Handle initial query from URL
   // biome-ignore lint/correctness/useExhaustiveDependencies: only once on mount
   useEffect(() => {
-    if (q && messages.length === 1) append({ content: q, role: "user" });
+    if (initialQuery && messages.length === 1) {
+      append({ content: initialQuery, role: "user" });
+    }
   }, []);
+
   const onSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -95,10 +102,10 @@ export default function Chat() {
         inputId={inputId}
         isTyping={isTyping}
         messages={messages}
-        ref={ref}
+        messagesRef={messagesRef}
         usage={usage}
       />
-      <InputMessage
+      <InputForm
         canEdit={canEdit}
         handleInputChange={handleInputChange}
         input={input}
@@ -140,124 +147,169 @@ function HeaderStats({ label, value }: { label: string; value: string }) {
   );
 }
 
+type MessagesProps = {
+  error?: Error;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
+  isTyping: boolean;
+  messages: Message[];
+  messagesRef: RefObject<HTMLDivElement | null>;
+  usage: Map<string, LanguageModelUsage>;
+};
+
 function Messages({
   error,
   handleInputChange,
   inputId,
   isTyping,
   messages,
-  ref,
+  messagesRef,
   usage,
-}: {
-  error?: Error;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  isTyping: boolean;
-  messages: Message[];
-  ref: RefObject<HTMLDivElement | null>;
-  usage: Map<string, LanguageModelUsage>;
-}) {
+}: MessagesProps) {
+  const precanredQuestions = precanned
+    .split(/\n+/)
+    .filter((question) => question.trim());
+
   return (
     <div
       className="flex flex-1 flex-col overflow-y-auto p-6 space-y-4 mx-auto w-full"
-      ref={ref}
+      ref={messagesRef}
     >
       {messages.map((message) => (
-        <div
+        <MessageBubble
           key={message.id}
-          className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-        >
-          <div
-            className={`max-w-11/12 px-4 py-2 rounded-lg ${
-              message.role === "user"
-                ? "bg-blue-600 text-white ml-auto"
-                : "bg-white text-black border shadow-sm"
-            }`}
-          >
-            {message.role === "user" ? (
-              <p className="whitespace-pre-wrap">{message.content}</p>
-            ) : (
-              <StructuredMessage
-                message={message}
-                handleInputChange={handleInputChange}
-                inputId={inputId}
-                ref={ref}
-              />
-            )}
-            <div
-              className={`my-2 text-sm flex flex-row gap-2 items-center ${
-                message.role === "user" ? "text-gray-300" : "text-gray-700"
-              }`}
-            >
-              <MessageTimestamp timestamp={message.createdAt} />
-              <TokenUsage usage={usage.get(message.id)} />
-            </div>
-          </div>
-        </div>
+          message={message}
+          usage={usage.get(message.id)}
+          handleInputChange={handleInputChange}
+          inputId={inputId}
+          messagesRef={messagesRef}
+        />
       ))}
 
       <TypingIndicator isTyping={isTyping} />
       <ErrorNotice error={error} />
-      <Precanned
+      <PrecanredQuestions
         handleInputChange={handleInputChange}
         inputId={inputId}
-        questions={precanned.split(/\n+/).filter((question) => question.trim())}
-        ref={ref}
+        questions={precanredQuestions}
+        messagesRef={messagesRef}
       />
     </div>
   );
 }
 
+type MessageBubbleProps = {
+  message: Message;
+  usage?: LanguageModelUsage;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
+  messagesRef: RefObject<HTMLDivElement | null>;
+};
+
+function MessageBubble({
+  message,
+  usage,
+  handleInputChange,
+  inputId,
+  messagesRef,
+}: MessageBubbleProps) {
+  const isUser = message.role === "user";
+  const bubbleStyles = isUser
+    ? "bg-blue-600 text-white ml-auto"
+    : "bg-white text-black border shadow-sm";
+  const footerStyles = isUser ? "text-gray-300" : "text-gray-700";
+
+  return (
+    <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
+      <div className={`max-w-11/12 px-4 py-2 rounded-lg ${bubbleStyles}`}>
+        {isUser ? (
+          <p className="whitespace-pre-wrap">{message.content}</p>
+        ) : (
+          <StructuredMessage
+            message={message}
+            handleInputChange={handleInputChange}
+            inputId={inputId}
+            messagesRef={messagesRef}
+          />
+        )}
+        <div
+          className={`my-2 text-sm flex flex-row gap-2 items-center ${footerStyles}`}
+        >
+          <MessageTimestamp timestamp={message.createdAt} />
+          <TokenUsage usage={usage} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+type StructuredMessageProps = {
+  message: Message;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
+  messagesRef: RefObject<HTMLDivElement | null>;
+};
+
 function StructuredMessage({
   message,
   handleInputChange,
   inputId,
-  ref,
-}: {
-  message: Message;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  ref: RefObject<HTMLDivElement | null>;
-}) {
-  return (
-    <Markdown
-      components={{
-        a: ({ children }) => (
-          <button
-            className="text-blue-600 hover:underline"
-            onClick={async () =>
-              await askQuestion({
-                handleInputChange,
-                inputId,
-                question: `${children}`,
-                ref,
-              })
-            }
-            type="button"
-          >
-            {children}
-          </button>
-        ),
-        h1: ({ children }) => (
-          <h1 className="text-xl font-bold my-2">{children}</h1>
-        ),
-        h2: ({ children }) => (
-          <h2 className="text-lg font-semibold my-2">{children}</h2>
-        ),
-        h3: ({ children }) => (
-          <h3 className="text-md font-semibold my-2">{children}</h3>
-        ),
-        hr: () => <hr className="border-gray-300 my-2" />,
-        ol: ({ children }) => <ol className="ml-8 list-decimal">{children}</ol>,
-        p: ({ ...props }) => (
-          <p className="whitespace-pre-wrap my-2" {...props} />
-        ),
-        ul: ({ children }) => <ul className="ml-6 list-disc">{children}</ul>,
-      }}
-    >
-      {message.content}
-    </Markdown>
-  );
+  messagesRef,
+}: StructuredMessageProps) {
+  const markdownComponents = {
+    a: ({
+      children,
+      ...props
+    }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+      <button
+        className="text-blue-600 hover:underline"
+        onClick={async () =>
+          await askQuestion({
+            handleInputChange,
+            inputId,
+            question: `${children}`,
+            messagesRef,
+          })
+        }
+        type="button"
+      >
+        {children}
+      </button>
+    ),
+    h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h1 className="text-xl font-bold my-2" {...props}>
+        {children}
+      </h1>
+    ),
+    h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h2 className="text-lg font-semibold my-2" {...props}>
+        {children}
+      </h2>
+    ),
+    h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h3 className="text-md font-semibold my-2" {...props}>
+        {children}
+      </h3>
+    ),
+    hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
+      <hr className="border-gray-300 my-2" {...props} />
+    ),
+    ol: ({ children, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
+      <ol className="ml-8 list-decimal" {...props}>
+        {children}
+      </ol>
+    ),
+    p: ({ ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
+      <p className="whitespace-pre-wrap my-2" {...props} />
+    ),
+    ul: ({ children, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
+      <ul className="ml-6 list-disc" {...props}>
+        {children}
+      </ul>
+    ),
+  };
+
+  return <Markdown components={markdownComponents}>{message.content}</Markdown>;
 }
 
 function MessageTimestamp({ timestamp }: { timestamp?: Date }) {
@@ -281,21 +333,26 @@ function TokenUsage({ usage }: { usage?: LanguageModelUsage }) {
   );
 }
 
-function InputMessage({
-  canEdit,
-  handleInputChange,
-  input,
-  inputId,
-  isTyping,
-  onSubmit,
-}: {
+type InputFormProps = {
   canEdit: boolean;
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   input: string;
   inputId: string;
   isTyping: boolean;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-}) {
+};
+
+function InputForm({
+  canEdit,
+  handleInputChange,
+  input,
+  inputId,
+  isTyping,
+  onSubmit,
+}: InputFormProps) {
+  const isDisabled = isTyping || !canEdit;
+  const canSubmit = !isDisabled && input.trim();
+
   return (
     <div className="bg-white border-t p-4 mx-auto w-full">
       <form onSubmit={onSubmit} className="flex gap-2">
@@ -305,7 +362,7 @@ function InputMessage({
           autoCorrect="off"
           autoFocus={true}
           className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          disabled={isTyping || !canEdit}
+          disabled={isDisabled}
           id={inputId}
           onChange={handleInputChange}
           placeholder="Ask about retail spaces..."
@@ -315,7 +372,7 @@ function InputMessage({
         />
         <button
           className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          disabled={isTyping || !input.trim() || !canEdit}
+          disabled={!canSubmit}
           type="submit"
         >
           Send
@@ -347,17 +404,19 @@ function ErrorNotice({ error }: { error?: Error }) {
   ) : null;
 }
 
-function Precanned({
-  handleInputChange,
-  inputId,
-  questions,
-  ref,
-}: {
+type PrecanredQuestionsProps = {
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   inputId: string;
   questions: string[];
-  ref: RefObject<HTMLDivElement | null>;
-}) {
+  messagesRef: RefObject<HTMLDivElement | null>;
+};
+
+function PrecanredQuestions({
+  handleInputChange,
+  inputId,
+  questions,
+  messagesRef,
+}: PrecanredQuestionsProps) {
   return (
     <div className="mx-auto w-full flex flex-wrap gap-2">
       {questions.map((question) => (
@@ -365,7 +424,7 @@ function Precanned({
           key={question}
           className="px-4 py-2 border-blue-300 hover:text-blue-700 hover:border-blue-700 border-1 rounded-lg transition-colors whitespace-nowrap"
           onClick={() =>
-            askQuestion({ handleInputChange, inputId, question, ref })
+            askQuestion({ handleInputChange, inputId, question, messagesRef })
           }
           title="Click to ask this question"
           type="button"
@@ -377,34 +436,44 @@ function Precanned({
   );
 }
 
+type AskQuestionParams = {
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
+  messagesRef: RefObject<HTMLDivElement | null>;
+  question: string;
+};
+
 async function askQuestion({
   handleInputChange,
   inputId,
   question,
-  ref,
-}: {
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  ref: RefObject<HTMLDivElement | null>;
-  question: string;
-}) {
+  messagesRef,
+}: AskQuestionParams) {
   const input = document.getElementById(inputId) as HTMLInputElement;
+  if (!input) return;
+
+  // Clear input and make it readonly during typing animation
   input.value = "";
   input.readOnly = true;
   handleInputChange({ target: input } as ChangeEvent<HTMLInputElement>);
 
-  // Auto-scroll to bottom when messages change
-  if (ref.current)
-    ref.current.scrollTo({
+  // Auto-scroll to bottom
+  if (messagesRef.current) {
+    messagesRef.current.scrollTo({
       behavior: "smooth",
-      top: ref.current.scrollHeight,
+      top: messagesRef.current.scrollHeight,
     });
+  }
+
   input.focus();
 
+  // Animate typing the question
   for (let i = 0; i < question.length; i++) {
     await new Promise((resolve) => setTimeout(resolve, 10));
     input.value += question[i];
   }
+
+  // Re-enable input and trigger change event
   input.readOnly = false;
   handleInputChange({ target: input } as ChangeEvent<HTMLInputElement>);
 }
