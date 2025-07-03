@@ -139,7 +139,7 @@ function Messages({
               />
             )}
             <div
-              className={`mt-2 text-sm flex flex-row gap-2 items-center ${
+              className={`my-2 text-sm flex flex-row gap-2 items-center ${
                 message.role === "user" ? "text-gray-300" : "text-gray-700"
               }`}
             >
