@@ -4,8 +4,8 @@ import * as Sentry from "@sentry/react";
 import { renderToPipeableStream } from "react-dom/server";
 import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
+import { pushHTTPResponse, pushProcessMetrics } from "./lib/instrument.server";
 import logtail from "./lib/logger.server";
-import { pushHTTPResponse, pushProcessMetrics } from "./lib/metrics";
 
 const sentryDsn = process.env.SENTRY_DSN;
 if (sentryDsn) {

@@ -29,7 +29,8 @@ const colors = {
     Reflect.set(console, level, (message: string, ...metadata: unknown[]) => {
       const formattedMessage = format(message, ...metadata);
       consoleOriginal.call(console, colorCode(formattedMessage));
-      logtailFunction.call(logtail, formattedMessage, ...metadata);
+      if (process.env.NODE_ENV === "production")
+        logtailFunction.call(logtail, formattedMessage, ...metadata);
     });
   },
 );

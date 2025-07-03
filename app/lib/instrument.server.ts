@@ -172,6 +172,8 @@ async function pushToPrometheus(
     )
   >,
 ): Promise<void> {
+  if (process.env.NODE_ENV !== "production") return;
+
   try {
     const response = await fetch(url, {
       method: "POST",
