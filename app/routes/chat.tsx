@@ -5,16 +5,43 @@ import {
   type ChangeEvent,
   type FormEvent,
   type RefObject,
-  useEffect,
   useId,
   useRef,
   useState,
 } from "react";
 import Markdown from "react-markdown";
+import { data, type LoaderFunctionArgs, useLoaderData } from "react-router";
+import { commitSession, getSession } from "~/sessions.server";
 import precanned from "../lib/precanned.md?raw";
 import welcome from "../lib/welcome.md?raw";
 
+type UserInfo = {
+  name: string;
+  location: string;
+  level: string;
+  interactions: number;
+  rented: number;
+};
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const session = await getSession(request.headers.get("Cookie"));
+  const interactions = (session.get("interactions") || 0) + 1;
+  session.set("interactions", interactions);
+  const userInfo = {
+    interactions,
+    name: "Assaf",
+    location: "Los Angeles, CA",
+    level: "Expert",
+    rented: 2,
+  } as UserInfo;
+  return data(
+    { userInfo },
+    { headers: { "Set-Cookie": await commitSession(session) } },
+  );
+}
+
 export default function Chat() {
+  const { userInfo } = useLoaderData<typeof loader>();
   const ref = useRef<HTMLDivElement>(null);
   const [usage, setUsage] = useState(new Map<string, LanguageModelUsage>());
   const { error, handleInputChange, handleSubmit, input, messages, status } =
@@ -29,7 +56,7 @@ export default function Chat() {
 
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
-      <Header />
+      <Header userInfo={userInfo} />
       <Messages
         error={error}
         handleInputChange={handleInputChange}
@@ -50,37 +77,23 @@ export default function Chat() {
   );
 }
 
-const userInfo = {
-  name: "Assaf",
-  location: "Los Angeles, CA",
-  level: "Expert",
-  interactions: 5,
-  rented: 2,
-};
-
-function Header() {
-  const [userInfo] = useState({
-    name: "Assaf",
-    location: "Los Angeles, CA",
-    level: "Expert",
-    interactions: 5,
-    rented: 2,
-  });
-
+function Header({ userInfo }: { userInfo: UserInfo }) {
   return (
     <header className="bg-white border-b px-6 py-4 flex flex-row gap-8 items-center justify-between">
       <h1 className="text-2xl font-bold text-gray-900">
         <span className="text-blue-600">rentail</span>.space
       </h1>
       <div className="flex flex-row gap-3 items-center">
-        <HeaderStats label="User" value={userInfo.name} />
-        <HeaderStats label="Location" value={userInfo.location} />
-        <HeaderStats label="Level" value={userInfo.level} />
+        {userInfo.name && <HeaderStats label="User" value={userInfo.name} />}
+        {userInfo.location && (
+          <HeaderStats label="Location" value={userInfo.location} />
+        )}
+        {userInfo.level && <HeaderStats label="Level" value={userInfo.level} />}
         <HeaderStats
           label="Interactions"
-          value={userInfo.interactions.toString()}
+          value={(userInfo.interactions || 0).toString()}
         />
-        <HeaderStats label="Rented" value="2" />
+        <HeaderStats label="Rented" value={(userInfo.rented || 0).toString()} />
       </div>
     </header>
   );
