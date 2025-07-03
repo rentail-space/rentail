@@ -5,12 +5,19 @@ import {
   type ChangeEvent,
   type FormEvent,
   type RefObject,
+  useCallback,
+  useEffect,
   useId,
   useRef,
   useState,
 } from "react";
 import Markdown from "react-markdown";
-import { data, type LoaderFunctionArgs, useLoaderData } from "react-router";
+import {
+  data,
+  type LoaderFunctionArgs,
+  useLoaderData,
+  useSearchParams,
+} from "react-router";
 import { commitSession, getSession } from "~/sessions.server";
 import precanned from "../lib/precanned.md?raw";
 import welcome from "../lib/welcome.md?raw";
@@ -44,15 +51,40 @@ export default function Chat() {
   const { userInfo } = useLoaderData<typeof loader>();
   const ref = useRef<HTMLDivElement>(null);
   const [usage, setUsage] = useState(new Map<string, LanguageModelUsage>());
-  const { error, handleInputChange, handleSubmit, input, messages, status } =
-    useChat({
-      api: "/api/chat",
-      initialMessages: [{ content: welcome, id: "0", role: "assistant" }],
-      onFinish: (message, options) =>
-        setUsage((prev) => prev.set(message.id, options.usage)),
-    });
+  const [canEdit, setCanEdit] = useState(true);
+  const {
+    append,
+    error,
+    handleInputChange,
+    handleSubmit,
+    input,
+    messages,
+    status,
+  } = useChat({
+    api: "/api/chat",
+    initialMessages: [{ content: welcome, id: "0", role: "assistant" }],
+    onFinish: (message, options) => {
+      setUsage((prev) => prev.set(message.id, options.usage));
+      setCanEdit(true);
+    },
+  });
   const isTyping = status === "submitted";
   const inputId = useId();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const q = searchParams.get("q");
+  // biome-ignore lint/correctness/useExhaustiveDependencies: only once on mount
+  useEffect(() => {
+    if (q && messages.length === 1) append({ content: q, role: "user" });
+  }, []);
+  const onSubmit = useCallback(
+    (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      handleSubmit(event);
+      setSearchParams((prev) => ({ ...prev, q: input.trim() }));
+      setCanEdit(false);
+    },
+    [handleSubmit, setSearchParams, input],
+  );
 
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
@@ -67,11 +99,12 @@ export default function Chat() {
         usage={usage}
       />
       <InputMessage
+        canEdit={canEdit}
         handleInputChange={handleInputChange}
-        handleSubmit={handleSubmit}
-        inputId={inputId}
         input={input}
+        inputId={inputId}
         isTyping={isTyping}
+        onSubmit={onSubmit}
       />
     </div>
   );
@@ -249,28 +282,30 @@ function TokenUsage({ usage }: { usage?: LanguageModelUsage }) {
 }
 
 function InputMessage({
+  canEdit,
   handleInputChange,
-  handleSubmit,
-  inputId,
   input,
+  inputId,
   isTyping,
+  onSubmit,
 }: {
+  canEdit: boolean;
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  inputId: string;
   input: string;
+  inputId: string;
   isTyping: boolean;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }) {
   return (
     <div className="bg-white border-t p-4 mx-auto w-full">
-      <form onSubmit={handleSubmit} className="flex gap-2">
+      <form onSubmit={onSubmit} className="flex gap-2">
         <input
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
           autoFocus={true}
           className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          disabled={isTyping}
+          disabled={isTyping || !canEdit}
           id={inputId}
           onChange={handleInputChange}
           placeholder="Ask about retail spaces..."
@@ -280,7 +315,7 @@ function InputMessage({
         />
         <button
           className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          disabled={isTyping || !input.trim()}
+          disabled={isTyping || !input.trim() || !canEdit}
           type="submit"
         >
           Send
