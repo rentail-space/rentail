@@ -46,11 +46,26 @@ export default function Chat() {
 
 function Header() {
   return (
-    <header className="bg-white border-b px-6 py-4">
+    <header className="bg-white border-b px-6 py-4 flex flex-row gap-8 items-center justify-between">
       <h1 className="text-2xl font-bold text-gray-900">
         <span className="text-blue-600">rentail</span>.space
       </h1>
+      <div className="flex flex-row gap-3 items-center">
+        <HeaderStats label="User" value="Assaf" />
+        <HeaderStats label="Location" value="Los Angeles CA" />
+        <HeaderStats label="Level" value="Expert" />
+        <HeaderStats label="Interactions" value="5" />
+        <HeaderStats label="Rented" value="2" />
+      </div>
     </header>
+  );
+}
+
+function HeaderStats({ label, value }: { label: string; value: string }) {
+  return (
+    <span className="text-sm text-gray-500">
+      {label}: <b>{value}</b>
+    </span>
   );
 }
 
@@ -71,7 +86,7 @@ function Messages({
 }) {
   return (
     <div
-      className="flex flex-1 flex-col overflow-y-auto p-6 space-y-4 max-w-4xl mx-auto w-full"
+      className="flex flex-1 flex-col overflow-y-auto p-6 space-y-4 mx-auto w-full"
       ref={ref}
     >
       {messages.map((message) => (
@@ -190,7 +205,7 @@ function InputMessage({
   isTyping: boolean;
 }) {
   return (
-    <div className="bg-white border-t p-4 max-w-4xl mx-auto w-full">
+    <div className="bg-white border-t p-4 mx-auto w-full">
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input
           autoCapitalize="off"
