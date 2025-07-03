@@ -1,12 +1,13 @@
 /** biome-ignore-all lint/a11y/noAutofocus: User needs to focus on input field */
 import { useChat } from "@ai-sdk/react";
-import type { Message } from "ai";
+import type { LanguageModelUsage, Message } from "ai";
 import {
   type ChangeEvent,
   type FormEvent,
   type RefObject,
   useId,
   useRef,
+  useState,
 } from "react";
 import Markdown from "react-markdown";
 import precanned from "../lib/precanned.md?raw";
@@ -14,10 +15,13 @@ import welcome from "../lib/welcome.md?raw";
 
 export default function Chat() {
   const ref = useRef<HTMLDivElement>(null);
+  const [usage, setUsage] = useState(new Map<string, LanguageModelUsage>());
   const { error, handleInputChange, handleSubmit, input, messages, status } =
     useChat({
       api: "/api/chat",
       initialMessages: [{ content: welcome, id: "0", role: "assistant" }],
+      onFinish: (message, options) =>
+        setUsage((prev) => prev.set(message.id, options.usage)),
     });
   const isTyping = status === "submitted";
   const inputId = useId();
@@ -32,6 +36,7 @@ export default function Chat() {
         isTyping={isTyping}
         messages={messages}
         ref={ref}
+        usage={usage}
       />
       <InputMessage
         handleInputChange={handleInputChange}
@@ -76,6 +81,7 @@ function Messages({
   isTyping,
   messages,
   ref,
+  usage,
 }: {
   error?: Error;
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -83,6 +89,7 @@ function Messages({
   isTyping: boolean;
   messages: Message[];
   ref: RefObject<HTMLDivElement | null>;
+  usage: Map<string, LanguageModelUsage>;
 }) {
   return (
     <div
@@ -111,7 +118,14 @@ function Messages({
                 ref={ref}
               />
             )}
-            <MessageTimestamp timestamp={message.createdAt} />
+            <div
+              className={`mt-2 text-sm flex flex-row gap-2 items-center ${
+                message.role === "user" ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              <MessageTimestamp timestamp={message.createdAt} />
+              <TokenUsage usage={usage.get(message.id)} />
+            </div>
           </div>
         </div>
       ))}
@@ -182,12 +196,22 @@ function StructuredMessage({
 
 function MessageTimestamp({ timestamp }: { timestamp?: Date }) {
   return (
-    <div className="text-xs text-gray-500">
+    <span>
       {timestamp?.toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       })}
-    </div>
+    </span>
+  );
+}
+
+function TokenUsage({ usage }: { usage?: LanguageModelUsage }) {
+  if (!usage) return null;
+  return (
+    <span>
+      Tokens: {usage.promptTokens} (prompt) + {usage.completionTokens}{" "}
+      (completion) → {usage.totalTokens}
+    </span>
   );
 }
 
