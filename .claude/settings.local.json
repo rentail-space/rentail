@@ -1,6 +1,13 @@
 {
   "permissions": {
-    "allow": ["Bash(npm run typecheck:*)", "Bash(npm audit:*)"]
+    "allow": [
+      "Bash(npm run typecheck:*)",
+      "Bash(npm audit:*)",
+      "Bash(git commit:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run build:*)",
+      "Bash(git add:*)"
+    ]
   },
   "enableAllProjectMcpServers": false
 }
