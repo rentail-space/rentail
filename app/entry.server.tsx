@@ -16,7 +16,20 @@ if (sentryDsn) {
   });
 }
 
-setInterval(async () => pushProcessMetrics(), 5000);
+// Start metrics collection with proper cleanup
+const metricsInterval = setInterval(async () => pushProcessMetrics(), 5000);
+
+// Cleanup function to clear the interval
+const cleanup = () => {
+  if (metricsInterval) {
+    clearInterval(metricsInterval);
+  }
+};
+
+// Handle graceful shutdown
+process.on("SIGINT", cleanup);
+process.on("SIGTERM", cleanup);
+process.on("exit", cleanup);
 
 const ABORT_DELAY = 5_000;
 
