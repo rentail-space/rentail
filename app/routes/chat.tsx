@@ -19,6 +19,7 @@ import {
   useSearchParams,
 } from "react-router";
 import { commitSession, getSession } from "~/sessions.server";
+import { createMarkdownComponents } from "~/components/chat/MarkdownComponents";
 import precanned from "../lib/precanned.md?raw";
 import welcome from "../lib/welcome.md?raw";
 
@@ -256,55 +257,12 @@ function StructuredMessage({
   inputId,
   messagesRef,
 }: StructuredMessageProps) {
-  const markdownComponents = {
-    a: ({ children }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-      <button
-        className="text-blue-600 hover:underline"
-        onClick={async () =>
-          await askQuestion({
-            handleInputChange,
-            inputId,
-            question: `${children}`,
-            messagesRef,
-          })
-        }
-        type="button"
-      >
-        {children}
-      </button>
-    ),
-    h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <h1 className="text-xl font-bold my-2" {...props}>
-        {children}
-      </h1>
-    ),
-    h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <h2 className="text-lg font-semibold my-2" {...props}>
-        {children}
-      </h2>
-    ),
-    h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <h3 className="text-md font-semibold my-2" {...props}>
-        {children}
-      </h3>
-    ),
-    hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
-      <hr className="border-gray-300 my-2" {...props} />
-    ),
-    ol: ({ children, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
-      <ol className="ml-8 list-decimal" {...props}>
-        {children}
-      </ol>
-    ),
-    p: ({ ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <p className="whitespace-pre-wrap my-2" {...props} />
-    ),
-    ul: ({ children, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
-      <ul className="ml-6 list-disc" {...props}>
-        {children}
-      </ul>
-    ),
-  };
+  const markdownComponents = createMarkdownComponents({
+    handleInputChange,
+    inputId,
+    messagesRef,
+    askQuestion,
+  });
 
   return <Markdown components={markdownComponents}>{message.content}</Markdown>;
 }
