@@ -1,6 +1,6 @@
 {
-  "enableAllProjectMcpServers": false,
   "permissions": {
-    "allow": ["Bash(npm run typecheck:*)"]
-  }
+    "allow": ["Bash(npm run typecheck:*)", "Bash(npm audit:*)"]
+  },
+  "enableAllProjectMcpServers": false
 }
