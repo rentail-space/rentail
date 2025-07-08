@@ -21,6 +21,7 @@ import {
 } from "react-router";
 import { createMarkdownComponents } from "~/components/chat/MarkdownComponents";
 import { commitSession, getSession } from "~/sessions.server";
+import userData from "../data/users.json";
 import precanned from "../lib/precanned.md?raw";
 import welcome from "../lib/welcome.md?raw";
 
@@ -38,10 +39,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   session.set("interactions", interactions);
   const userInfo = {
     interactions,
-    name: "Assaf",
-    location: "Los Angeles, CA",
-    level: "Expert",
-    rented: 2,
+    ...userData.defaultUser,
   } as UserInfo;
   return data(
     { userInfo },
