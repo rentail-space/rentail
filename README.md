@@ -181,7 +181,7 @@ npm run start
 
 ## 📝 License
 
-[Add your license information here]
+Proprietary!
 
 ---
 
