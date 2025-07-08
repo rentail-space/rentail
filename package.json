@@ -27,7 +27,6 @@
     "@sentry/vite-plugin": "^3.5.0",
     "ai": "^4.3.17",
     "chalk": "^5.4.1",
-    "dotenv": "^17.1.0",
     "env-var": "^7.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

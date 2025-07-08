@@ -1,5 +1,4 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
-import "dotenv/config";
 import env from "env-var";
 
 const model = createAnthropic({
