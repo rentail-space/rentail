@@ -19,8 +19,8 @@ import {
   useLoaderData,
   useSearchParams,
 } from "react-router";
-import { commitSession, getSession } from "~/sessions.server";
 import { createMarkdownComponents } from "~/components/chat/MarkdownComponents";
+import { commitSession, getSession } from "~/sessions.server";
 import precanned from "../lib/precanned.md?raw";
 import welcome from "../lib/welcome.md?raw";
 
@@ -191,7 +191,7 @@ function Messages({
 
       <TypingIndicator isTyping={isTyping} />
       <ErrorNotice error={error} />
-      <PrecanredQuestions
+      <PrecannedQuestions
         handleInputChange={handleInputChange}
         inputId={inputId}
         questions={precanredQuestions}
@@ -201,21 +201,19 @@ function Messages({
   );
 }
 
-type MessageBubbleProps = {
-  message: Message;
-  usage?: LanguageModelUsage;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  messagesRef: RefObject<HTMLDivElement | null>;
-};
-
 function MessageBubble({
   message,
   usage,
   handleInputChange,
   inputId,
   messagesRef,
-}: MessageBubbleProps) {
+}: {
+  message: Message;
+  usage?: LanguageModelUsage;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
+  messagesRef: RefObject<HTMLDivElement | null>;
+}) {
   const isUser = message.role === "user";
   const bubbleStyles = isUser
     ? "bg-blue-600 text-white ml-auto"
@@ -246,27 +244,29 @@ function MessageBubble({
   );
 }
 
-type StructuredMessageProps = {
-  message: Message;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  messagesRef: RefObject<HTMLDivElement | null>;
-};
-
 function StructuredMessage({
   message,
   handleInputChange,
   inputId,
   messagesRef,
-}: StructuredMessageProps) {
-  const markdownComponents = createMarkdownComponents({
-    handleInputChange,
-    inputId,
-    messagesRef,
-    askQuestion,
-  });
-
-  return <Markdown components={markdownComponents}>{message.content}</Markdown>;
+}: {
+  message: Message;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
+  messagesRef: RefObject<HTMLDivElement | null>;
+}) {
+  return (
+    <Markdown
+      components={createMarkdownComponents({
+        handleInputChange,
+        inputId,
+        messagesRef,
+        askQuestion,
+      })}
+    >
+      {message.content}
+    </Markdown>
+  );
 }
 
 function MessageTimestamp({ timestamp }: { timestamp?: Date }) {
@@ -281,23 +281,14 @@ function MessageTimestamp({ timestamp }: { timestamp?: Date }) {
 }
 
 function TokenUsage({ usage }: { usage?: LanguageModelUsage }) {
-  if (!usage) return null;
   return (
     <span>
-      Tokens: {usage.promptTokens} (prompt) + {usage.completionTokens}{" "}
-      (completion) → {usage.totalTokens}
+      {usage
+        ? `Tokens: ${usage.promptTokens} (prompt) + ${usage.completionTokens} (completion) → ${usage.totalTokens}`
+        : null}
     </span>
   );
 }
-
-type InputFormProps = {
-  canEdit: boolean;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  input: string;
-  inputId: string;
-  isTyping: boolean;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-};
 
 function InputForm({
   canEdit,
@@ -306,7 +297,14 @@ function InputForm({
   inputId,
   isTyping,
   onSubmit,
-}: InputFormProps) {
+}: {
+  canEdit: boolean;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  input: string;
+  inputId: string;
+  isTyping: boolean;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+}) {
   const isDisabled = isTyping || !canEdit;
   const canSubmit = !isDisabled && input.trim();
 
@@ -361,28 +359,31 @@ function ErrorNotice({ error }: { error?: Error }) {
   ) : null;
 }
 
-type PrecanredQuestionsProps = {
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  questions: string[];
-  messagesRef: RefObject<HTMLDivElement | null>;
-};
-
-function PrecanredQuestions({
+function PrecannedQuestions({
   handleInputChange,
   inputId,
   questions,
   messagesRef,
-}: PrecanredQuestionsProps) {
+}: {
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
+  questions: string[];
+  messagesRef: RefObject<HTMLDivElement | null>;
+}) {
+  const handleQuestionClick = useCallback(
+    (question: string) => {
+      askQuestion({ handleInputChange, inputId, question, messagesRef });
+    },
+    [handleInputChange, inputId, messagesRef],
+  );
+
   return (
     <div className="mx-auto w-full flex flex-wrap gap-2">
       {questions.map((question) => (
         <button
           key={question}
           className="px-4 py-2 border-blue-300 hover:text-blue-700 hover:border-blue-700 border-1 rounded-lg transition-colors whitespace-nowrap"
-          onClick={() =>
-            askQuestion({ handleInputChange, inputId, question, messagesRef })
-          }
+          onClick={() => handleQuestionClick(question)}
           title="Click to ask this question"
           type="button"
         >
