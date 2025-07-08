@@ -257,10 +257,7 @@ function StructuredMessage({
   messagesRef,
 }: StructuredMessageProps) {
   const markdownComponents = {
-    a: ({
-      children,
-      ...props
-    }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+    a: ({ children }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
       <button
         className="text-blue-600 hover:underline"
         onClick={async () =>
