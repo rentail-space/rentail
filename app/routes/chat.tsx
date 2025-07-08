@@ -8,6 +8,7 @@ import {
   useCallback,
   useEffect,
   useId,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -167,9 +168,10 @@ function Messages({
   messagesRef,
   usage,
 }: MessagesProps) {
-  const precanredQuestions = precanned
-    .split(/\n+/)
-    .filter((question) => question.trim());
+  const precanredQuestions = useMemo(
+    () => precanned.split(/\n+/).filter((question) => question.trim()),
+    [],
+  );
 
   return (
     <div
