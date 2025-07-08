@@ -12,12 +12,13 @@ import {
 } from "react-router";
 import "./app.css";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { isProduction, serverConfig } from "./lib/config";
 
 export async function loader() {
   return {
     ENV: {
-      SENTRY_DSN: process.env.SENTRY_DSN || null,
-      NODE_ENV: process.env.NODE_ENV || "development",
+      SENTRY_DSN: serverConfig.SENTRY_DSN || null,
+      NODE_ENV: isProduction ? "production" : "development",
     },
   };
 }

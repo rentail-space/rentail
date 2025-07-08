@@ -1,0 +1,60 @@
+import env from "env-var";
+
+export const isProduction = env.get("NODE_ENV").asString() === "production";
+
+console.log(
+  env
+    .from({
+      ANTHROPIC_API_KEY: "123",
+      LOGTAIL_TOKEN: "123",
+      LOGTAIL_ENDPOINT: "123",
+      PUSHGATEWAY_URL: "123",
+      PUSHGATEWAY_TOKEN: "123",
+    })
+    .get(),
+);
+
+export const serverConfig = {
+  ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),
+  LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required().asString(),
+  LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required().asString(),
+  PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required().asString(),
+  PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required().asString(),
+
+  SENTRY_AUTH_TOKEN: env.get("SENTRY_AUTH_TOKEN").asString(),
+  SENTRY_ORG: env.get("SENTRY_ORG").asString(),
+  SENTRY_PROJECT: env.get("SENTRY_PROJECT").asString(),
+  SENTRY_DSN: env.get("SENTRY_DSN").asString(),
+
+  SESSION_SECRET: env.get("SESSION_SECRET").required().asString(),
+  SESSION_MAX_AGE_SECONDS: env
+    .get("SESSION_MAX_AGE_SECONDS")
+    .default(60 * 60 * 24 * 30)
+    .asInt(),
+
+  // SSR request timeout in milliseconds
+  SSR_REQUEST_TIMEOUT_MS: env
+    .get("SSR_REQUEST_TIMEOUT_MS")
+    .default(5000)
+    .asInt(),
+
+  // Metrics collection interval in milliseconds
+  METRICS_COLLECTION_INTERVAL_MS: env
+    .get("METRICS_COLLECTION_INTERVAL_MS")
+    .default(5000)
+    .asInt(),
+};
+
+export const chatConfig = {
+  TYPING_ANIMATION_DELAY_MS: env
+    .get("TYPING_ANIMATION_DELAY_MS")
+    .default(10)
+    .asInt(),
+};
+
+export const testingConfig = {
+  SCREENSHOT_DIFF_THRESHOLD_PERCENT: env
+    .get("SCREENSHOT_DIFF_THRESHOLD_PERCENT")
+    .default(1)
+    .asInt(),
+};

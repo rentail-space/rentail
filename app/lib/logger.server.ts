@@ -2,12 +2,11 @@ import { format } from "node:util";
 import { Logtail } from "@logtail/node";
 import type { ILogLevel } from "@logtail/types";
 import chalk from "chalk";
-import env from "env-var";
+import { isProduction, serverConfig } from "./config";
 
-const logtailToken = env.get("LOGTAIL_TOKEN").required().asString();
-const logtailEndpoint = env.get("LOGTAIL_ENDPOINT").required().asString();
-
-const logtail = new Logtail(logtailToken, { endpoint: logtailEndpoint });
+const logtail = new Logtail(serverConfig.LOGTAIL_TOKEN, {
+  endpoint: serverConfig.LOGTAIL_ENDPOINT,
+});
 
 const colors = {
   trace: chalk.gray,
@@ -29,7 +28,7 @@ const colors = {
     Reflect.set(console, level, (message: string, ...metadata: unknown[]) => {
       const formattedMessage = format(message, ...metadata);
       consoleOriginal.call(console, colorCode(formattedMessage));
-      if (process.env.NODE_ENV === "production")
+      if (isProduction)
         logtailFunction.call(logtail, formattedMessage, ...metadata);
     });
   },

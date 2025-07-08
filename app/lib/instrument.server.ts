@@ -1,7 +1,7 @@
 // Push metrics to BetterStack
 
 import os from "node:os";
-import env from "env-var";
+import { isProduction, serverConfig } from "./config";
 
 const startTime = Date.now() / 1000;
 
@@ -143,8 +143,8 @@ export async function pushProcessMetrics() {
   setImmediate(measureLap);
 }
 
-const url = env.get("PUSHGATEWAY_URL").required().asString();
-const token = env.get("PUSHGATEWAY_TOKEN").required().asString();
+const url = serverConfig.PUSHGATEWAY_URL;
+const token = serverConfig.PUSHGATEWAY_TOKEN;
 
 async function pushToPrometheus(
   metrics: Array<
@@ -172,7 +172,7 @@ async function pushToPrometheus(
     )
   >,
 ): Promise<void> {
-  if (process.env.NODE_ENV !== "production") return;
+  if (!isProduction) return;
 
   try {
     const response = await fetch(url, {

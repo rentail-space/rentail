@@ -20,6 +20,7 @@ import {
   useSearchParams,
 } from "react-router";
 import { createMarkdownComponents } from "~/components/chat/MarkdownComponents";
+import { chatConfig } from "~/lib/config";
 import { commitSession, getSession } from "~/sessions.server";
 import precanned from "../lib/precanned.md?raw";
 import welcome from "../lib/welcome.md?raw";
@@ -427,7 +428,9 @@ async function askQuestion({
 
   // Animate typing the question
   for (let i = 0; i < question.length; i++) {
-    await new Promise((resolve) => setTimeout(resolve, 10));
+    await new Promise((resolve) =>
+      setTimeout(resolve, chatConfig.TYPING_ANIMATION_DELAY_MS),
+    );
     input.value += question[i];
   }
 

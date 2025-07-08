@@ -1,5 +1,4 @@
 // DO NOT add to setup.ts as vitest.config.js cannot upload file that imports vitest
-
 import { access, constants, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import pixelmatch from "pixelmatch";
@@ -51,7 +50,7 @@ expect.extend({
     );
 
     const diffPercentage = (numDiffPixels / (width * height)) * 100;
-    const maxDiffPercentage = 1; // Set your threshold for differences
+    const maxDiffPercentage = 1;
     const matches = diffPercentage <= maxDiffPercentage;
     if (!matches)
       await writeFile(

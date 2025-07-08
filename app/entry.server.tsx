@@ -4,20 +4,23 @@ import * as Sentry from "@sentry/react";
 import { renderToPipeableStream } from "react-dom/server";
 import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
+import { isProduction, serverConfig } from "./lib/config";
 import { pushHTTPResponse, pushProcessMetrics } from "./lib/instrument.server";
 import logtail from "./lib/logger.server";
 
-const sentryDsn = process.env.SENTRY_DSN;
-if (sentryDsn) {
+if (serverConfig.SENTRY_DSN) {
   Sentry.init({
-    dsn: sentryDsn,
-    environment: process.env.NODE_ENV || "development",
+    dsn: serverConfig.SENTRY_DSN,
+    environment: isProduction ? "production" : "development",
     tracesSampleRate: 1.0,
   });
 }
 
 // Start metrics collection with proper cleanup
-const metricsInterval = setInterval(async () => pushProcessMetrics(), 5000);
+const metricsInterval = setInterval(
+  async () => pushProcessMetrics(),
+  serverConfig.METRICS_COLLECTION_INTERVAL_MS,
+);
 
 // Cleanup function to clear the interval
 const cleanup = () => {
@@ -30,8 +33,6 @@ const cleanup = () => {
 process.on("SIGINT", cleanup);
 process.on("SIGTERM", cleanup);
 process.on("exit", cleanup);
-
-const ABORT_DELAY = 5_000;
 
 export default function handleRequest(
   request: Request,
@@ -97,6 +98,6 @@ export default function handleRequest(
       },
     );
 
-    setTimeout(abort, ABORT_DELAY);
+    setTimeout(abort, serverConfig.SSR_REQUEST_TIMEOUT_MS);
   });
 }
