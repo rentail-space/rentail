@@ -1,20 +1,8 @@
 import env from "env-var";
 
-export const isProduction = env.get("NODE_ENV").asString() === "production";
+export default {
+  isProduction: env.get("NODE_ENV").asString() === "production",
 
-console.log(
-  env
-    .from({
-      ANTHROPIC_API_KEY: "123",
-      LOGTAIL_TOKEN: "123",
-      LOGTAIL_ENDPOINT: "123",
-      PUSHGATEWAY_URL: "123",
-      PUSHGATEWAY_TOKEN: "123",
-    })
-    .get(),
-);
-
-export const serverConfig = {
   ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),
   LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required().asString(),
   LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required().asString(),
@@ -42,19 +30,5 @@ export const serverConfig = {
   METRICS_COLLECTION_INTERVAL_MS: env
     .get("METRICS_COLLECTION_INTERVAL_MS")
     .default(5000)
-    .asInt(),
-};
-
-export const chatConfig = {
-  TYPING_ANIMATION_DELAY_MS: env
-    .get("TYPING_ANIMATION_DELAY_MS")
-    .default(10)
-    .asInt(),
-};
-
-export const testingConfig = {
-  SCREENSHOT_DIFF_THRESHOLD_PERCENT: env
-    .get("SCREENSHOT_DIFF_THRESHOLD_PERCENT")
-    .default(1)
     .asInt(),
 };

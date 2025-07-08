@@ -4,14 +4,14 @@ import * as Sentry from "@sentry/react";
 import { renderToPipeableStream } from "react-dom/server";
 import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
-import { isProduction, serverConfig } from "./lib/config";
+import serverConfig from "./lib/config";
 import { pushHTTPResponse, pushProcessMetrics } from "./lib/instrument.server";
 import logtail from "./lib/logger.server";
 
 if (serverConfig.SENTRY_DSN) {
   Sentry.init({
     dsn: serverConfig.SENTRY_DSN,
-    environment: isProduction ? "production" : "development",
+    environment: serverConfig.isProduction ? "production" : "development",
     tracesSampleRate: 1.0,
   });
 }

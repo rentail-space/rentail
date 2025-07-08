@@ -1,7 +1,7 @@
 // Push metrics to BetterStack
 
 import os from "node:os";
-import { isProduction, serverConfig } from "./config";
+import serverConfig from "./config";
 
 const startTime = Date.now() / 1000;
 
@@ -172,7 +172,7 @@ async function pushToPrometheus(
     )
   >,
 ): Promise<void> {
-  if (!isProduction) return;
+  if (!serverConfig.isProduction) return;
 
   try {
     const response = await fetch(url, {

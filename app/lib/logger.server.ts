@@ -2,7 +2,7 @@ import { format } from "node:util";
 import { Logtail } from "@logtail/node";
 import type { ILogLevel } from "@logtail/types";
 import chalk from "chalk";
-import { isProduction, serverConfig } from "./config";
+import serverConfig from "./config";
 
 const logtail = new Logtail(serverConfig.LOGTAIL_TOKEN, {
   endpoint: serverConfig.LOGTAIL_ENDPOINT,
@@ -28,7 +28,7 @@ const colors = {
     Reflect.set(console, level, (message: string, ...metadata: unknown[]) => {
       const formattedMessage = format(message, ...metadata);
       consoleOriginal.call(console, colorCode(formattedMessage));
-      if (isProduction)
+      if (serverConfig.isProduction)
         logtailFunction.call(logtail, formattedMessage, ...metadata);
     });
   },

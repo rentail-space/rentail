@@ -1,5 +1,5 @@
 import { createCookieSessionStorage } from "react-router";
-import { isProduction, serverConfig } from "./lib/config";
+import serverConfig from "./lib/config";
 
 type SessionData = {
   userId: string;
@@ -20,7 +20,7 @@ const { getSession, commitSession, destroySession } =
       path: "/",
       sameSite: "lax",
       secrets: [serverConfig.SESSION_SECRET],
-      secure: isProduction,
+      secure: serverConfig.isProduction,
     },
   });
 

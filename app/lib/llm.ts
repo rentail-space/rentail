@@ -1,5 +1,5 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
-import { serverConfig } from "./config";
+import serverConfig from "./config";
 
 const model = createAnthropic({
   apiKey: serverConfig.ANTHROPIC_API_KEY,
