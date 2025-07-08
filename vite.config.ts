@@ -14,8 +14,8 @@ export default defineConfig({
       ? [
           sentryVitePlugin({
             authToken: process.env.SENTRY_AUTH_TOKEN,
-            org: process.env.SENTRY_ORG,
-            project: process.env.SENTRY_PROJECT,
+            org: process.env.SENTRY_ORG || "labnotes",
+            project: process.env.SENTRY_PROJECT || "rentail",
           }),
         ]
       : [devtoolsJson()]),
