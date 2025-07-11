@@ -11,6 +11,7 @@ echo -e "\033[32m  Upgrading dependencies …\033[0m"
 npm prune --force
 npm outdated  || echo
 npm-check-updates --configFileName .npm-check-update.json --errorLevel 2 && error_and_exit "No updates"
+npx playwright install
 npm dedupe --force
 npm prune
 
