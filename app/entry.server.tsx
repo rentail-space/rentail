@@ -16,23 +16,8 @@ if (serverConfig.SENTRY_DSN) {
   });
 }
 
-// Start metrics collection with proper cleanup
-const metricsInterval = setInterval(
-  async () => pushProcessMetrics(),
-  serverConfig.METRICS_COLLECTION_INTERVAL_MS,
-);
-
-// Cleanup function to clear the interval
-const cleanup = () => {
-  if (metricsInterval) {
-    clearInterval(metricsInterval);
-  }
-};
-
-// Handle graceful shutdown
-process.on("SIGINT", cleanup);
-process.on("SIGTERM", cleanup);
-process.on("exit", cleanup);
+// Replace fixed interval with request-triggered collection
+let lastMetricsPush = 0;
 
 export default function handleRequest(
   request: Request,
@@ -40,6 +25,14 @@ export default function handleRequest(
   responseHeaders: Headers,
   entryContext: EntryContext,
 ) {
+  if (
+    Date.now() - lastMetricsPush >
+    serverConfig.METRICS_COLLECTION_INTERVAL_MS
+  ) {
+    lastMetricsPush = Date.now();
+    pushProcessMetrics(); // Remove await to avoid blocking
+  }
+
   let statusCode = responseStatusCode || 200;
 
   // Log the incoming request

@@ -26,6 +26,6 @@ export default {
   // Metrics collection interval in milliseconds
   METRICS_COLLECTION_INTERVAL_MS: env
     .get("METRICS_COLLECTION_INTERVAL_MS")
-    .default(5000)
+    .default(30_0000)
     .asInt(),
 };
