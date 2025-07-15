@@ -7,8 +7,8 @@ export function FeaturesSection() {
             Why Choose <span className="text-blue-600">rentail</span>.space?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Our marketplace makes renting a specialty space quick and simple.
-            Grow your business in a few easy steps.
+            We help you find a retail space for rent. Grow your business in a
+            few easy steps.
           </p>
         </div>
 

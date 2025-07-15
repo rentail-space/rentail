@@ -7,9 +7,8 @@ export function HowItWorksSection({ howItWorksId }: { howItWorksId: string }) {
             How It Works
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Looking to open a pop-up shop in a shopping center? Lease a seasonal
-            retail space? We can help you find the perfect space for your
-            business needs.
+            Looking to open a pop-up retail space in a shopping center? We can
+            help you find the perfect space for your business needs.
           </p>
         </div>
 
