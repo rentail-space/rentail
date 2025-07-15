@@ -9,8 +9,11 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useLocation,
+  useNavigation,
 } from "react-router";
 import "./app.css";
+import ReactGA from "react-ga4";
 import ErrorBoundary from "./components/ErrorBoundary";
 import serverConfig from "./lib/config";
 
@@ -102,6 +105,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
     },
   };
 
+  const { ENV } = useLoaderData<typeof loader>();
+  useEffect(() => ReactGA.initialize("G-HLE5G8GC5Y"), []);
+  const location = useLocation();
+  useEffect(() => {
+    if (ENV.NODE_ENV === "production")
+      ReactGA.send({ hitType: "pageview", page: location.pathname });
+  }, [location.pathname, ENV.NODE_ENV]);
+
   return (
     <html lang="en">
       <head>
@@ -117,7 +128,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
-        <GoogleAnalytics />
       </body>
     </html>
   );
@@ -127,7 +137,7 @@ export default function App() {
   const { ENV } = useLoaderData<typeof loader>();
 
   useEffect(() => {
-    if (ENV.SENTRY_DSN) {
+    if (ENV.SENTRY_DSN && ENV.NODE_ENV === "production") {
       Sentry.init({
         dsn: ENV.SENTRY_DSN,
         environment: ENV.NODE_ENV || "development",
@@ -142,24 +152,5 @@ export default function App() {
     <ErrorBoundary>
       <Outlet />
     </ErrorBoundary>
-  );
-}
-
-function GoogleAnalytics() {
-  return (
-    <>
-      <script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-HLE5G8GC5Y"
-      />
-      <script>
-        {`
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-HLE5G8GC5Y');
-    `}
-      </script>
-    </>
   );
 }
