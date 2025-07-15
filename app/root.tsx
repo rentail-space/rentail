@@ -52,8 +52,15 @@ export const meta: MetaFunction = () => [
   },
   {
     name: "keywords",
-    content:
-      "specialty lease, short-term retail space, pop-up shop, shopping center lease, temporary retail, seasonal retail space, retail marketplace",
+    content: [
+      "pop up retail space",
+      "pop-up shop",
+      "seasonal retail space",
+      "shopping center kiosk rental",
+      "short term retail space",
+      "specialty lease",
+      "temporary retail space",
+    ],
   },
   { property: "og:title", content: title },
   { property: "og:description", content: description },
