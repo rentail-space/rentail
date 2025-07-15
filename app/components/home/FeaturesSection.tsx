@@ -34,7 +34,7 @@ export function FeaturesSection() {
               Find the Perfect Space
             </h3>
             <p className="text-gray-600">
-              We help you find a speciality lease that fits your needs, with
+              We help you find a specialty lease that fits your needs, with
               adequate foot traffic to make your business thrive.
             </p>
           </div>

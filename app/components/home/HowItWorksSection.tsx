@@ -7,7 +7,7 @@ export function HowItWorksSection({ howItWorksId }: { howItWorksId: string }) {
             How It Works
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Leasing a speciality space is simple and straightforward with just a
+            Leasing a specialty space is simple and straightforward with just a
             few simple steps.
           </p>
         </div>

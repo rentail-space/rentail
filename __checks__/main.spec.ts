@@ -7,7 +7,7 @@ test.describe("Homepage Tests", () => {
     if (!response) throw new Error("Failed to navigate to the page");
 
     expect(response.status()).toBe(200);
-    expect(page).toHaveTitle("Find your speciality lease with ease");
+    expect(page).toHaveTitle("Find your specialty lease with ease");
     await expect(page).toHaveScreenshot({
       maxDiffPixelRatio: 0.2,
     });

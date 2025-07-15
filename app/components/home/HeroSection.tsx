@@ -5,11 +5,11 @@ export function HeroSection({ howItWorksId }: { howItWorksId: string }) {
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-10 md:mb-0">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Find your <span className="text-blue-600">speciality lease</span>{" "}
+              Find your <span className="text-blue-600">specialty lease</span>{" "}
               with ease
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8">
-              We help you find a speciality lease that fits your needs, in a
+              We help you find a specialty lease that fits your needs, in a
               shopping center near you, at reasonable price, and with adequate
               foot traffic to make your business thrive.
             </p>
