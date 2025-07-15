@@ -53,13 +53,13 @@ export const meta: MetaFunction = () => [
   {
     name: "keywords",
     content: [
-      "pop up retail space",
-      "pop-up shop",
+      "pop-up retail space",
+      "pop-up shop space for rent",
       "seasonal retail space",
       "shopping center kiosk rental",
-      "short term retail space",
+      "short term retail lease",
       "specialty lease",
-      "temporary retail space",
+      "temporary retail space rental",
     ],
   },
   { property: "og:title", content: title },
