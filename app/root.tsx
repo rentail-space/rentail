@@ -117,6 +117,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
+        <GoogleAnalytics />
       </body>
     </html>
   );
@@ -141,5 +142,24 @@ export default function App() {
     <ErrorBoundary>
       <Outlet />
     </ErrorBoundary>
+  );
+}
+
+function GoogleAnalytics() {
+  return (
+    <>
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-HLE5G8GC5Y"
+      />
+      <script>
+        {`
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-HLE5G8GC5Y');
+    `}
+      </script>
+    </>
   );
 }
