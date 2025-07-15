@@ -7,8 +7,9 @@ export function HowItWorksSection({ howItWorksId }: { howItWorksId: string }) {
             How It Works
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Leasing a specialty space is simple and straightforward with just a
-            few simple steps.
+            Looking to open a pop-up shop in a shopping center? Lease a seasonal
+            retail space? We can help you find the perfect space for your
+            business needs.
           </p>
         </div>
 
