@@ -1,0 +1,21 @@
+# Rentail.space - Specialty Lease Marketplace
+
+## About
+Rentail.space is a specialty lease marketplace that helps businesses find short-term retail spaces in shopping centers. We connect businesses looking for temporary retail locations with property owners who have available spaces.
+
+## Features
+- AI-powered space discovery and matching
+- Short-term lease opportunities
+- Shopping center focus
+- Business-to-business marketplace
+
+## Technology
+- Built with React Router v7 and server-side rendering
+- Powered by Claude AI for intelligent space recommendations
+- Modern web application with TypeScript
+
+## Contact
+Visit https://rentail.space to explore available retail spaces or list your property.
+
+## Sitemap
+/sitemap.xml
