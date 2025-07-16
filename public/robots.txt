@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /chat
 
-Sitemap: /sitemap.xml
+Sitemap: https://rentail.space/sitemap.xml
