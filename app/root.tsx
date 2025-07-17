@@ -10,7 +10,6 @@ import {
   ScrollRestoration,
   useLoaderData,
   useLocation,
-  useNavigation,
 } from "react-router";
 import "./app.css";
 import ReactGA from "react-ga4";

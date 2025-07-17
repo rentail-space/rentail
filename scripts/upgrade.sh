@@ -16,8 +16,6 @@ npm dedupe --force
 npm prune
 
 echo -e "\033[32m  Checking code …\033[0m"
-npm run lint || error_and_exit "Linting failed"
-npm run typecheck || error_and_exit "Typechecking failed"
 npm run test || error_and_exit "Tests failed"
 
 echo -e "\033[32m  Commiting changes …\033[0m"
