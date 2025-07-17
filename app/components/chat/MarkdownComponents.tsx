@@ -38,22 +38,22 @@ export function createMarkdownComponents({
       </a>
     ),
     h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <h1 className="text-xl font-bold my-2" {...props}>
+      <h1 className="text-xl font-bold" {...props}>
         {children}
       </h1>
     ),
     h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <h2 className="text-lg font-semibold my-2" {...props}>
+      <h2 className="text-lg font-semibold" {...props}>
         {children}
       </h2>
     ),
     h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <h3 className="text-md font-semibold my-2" {...props}>
+      <h3 className="text-md font-semibold" {...props}>
         {children}
       </h3>
     ),
     hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
-      <hr className="border-gray-300 my-2" {...props} />
+      <hr className="border-gray-300" {...props} />
     ),
     ol: ({ children, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
       <ol className="ml-8 list-decimal" {...props}>
@@ -61,7 +61,7 @@ export function createMarkdownComponents({
       </ol>
     ),
     p: ({ ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <p className="whitespace-pre-wrap my-2" {...props} />
+      <p className="whitespace-pre-wrap " {...props} />
     ),
     ul: ({ children, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
       <ul className="ml-6 list-disc" {...props}>

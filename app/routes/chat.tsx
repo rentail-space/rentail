@@ -234,16 +234,27 @@ function StructuredMessage({
   messagesRef: RefObject<HTMLDivElement | null>;
 }) {
   return (
-    <Markdown
-      components={createMarkdownComponents({
-        handleInputChange,
-        inputId,
-        messagesRef,
-        askQuestion,
-      })}
-    >
-      {message.content}
-    </Markdown>
+    <div className="flex flex-row gap-2">
+      <img
+        alt="rental space"
+        className="w-8 h-8 rounded-md border-2 border-gray-200"
+        height={32}
+        src="/logo.png"
+        width={32}
+      />
+      <div className="flex flex-col gap-2">
+        <Markdown
+          components={createMarkdownComponents({
+            handleInputChange,
+            inputId,
+            messagesRef,
+            askQuestion,
+          })}
+        >
+          {message.content}
+        </Markdown>
+      </div>
+    </div>
   );
 }
 
@@ -313,7 +324,7 @@ function InputForm({
 function TypingIndicator({ isTyping }: { isTyping: boolean }) {
   return isTyping ? (
     <div className="flex justify-start">
-      <div className="bg-white border shadow-sm px-4 py-4 rounded-lg">
+      <div className="bg-white px-4 py-4 rounded-lg">
         <div className="flex space-x-1">
           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.1s]" />
