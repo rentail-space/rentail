@@ -167,7 +167,7 @@ function Messages({
 }) {
   return (
     <div
-      className="flex flex-1 flex-col overflow-y-auto p-6 space-y-4 mx-auto w-full justify-end"
+      className="flex flex-1 flex-col overflow-y-auto p-6 space-y-4 mx-auto w-full justify-end mt-2"
       ref={messagesRef}
     >
       {messages.map((message) => (
