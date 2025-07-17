@@ -1,7 +1,6 @@
 /** biome-ignore-all lint/a11y/noAutofocus: User needs to focus on input field */
 import { useChat } from "@ai-sdk/react";
-import type { LanguageModelUsage, Message } from "ai";
-import { AnimatePresence, motion } from "framer-motion";
+import type { Message } from "ai";
 import {
   type ChangeEvent,
   type FormEvent,
