@@ -89,6 +89,7 @@ export default function Chat() {
       handleSubmit(event);
       setSearchParams((prev) => ({ ...prev, q: input.trim() }));
       setCanEdit(false);
+      return false;
     },
     [handleSubmit, setSearchParams, input],
   );
@@ -305,16 +306,22 @@ function InputForm({
 }) {
   const isDisabled = isTyping || !canEdit;
   const canSubmit = !isDisabled && input.trim();
+  const buttonColor = canSubmit
+    ? "bg-indigo-500 hover:bg-indigo-600"
+    : "bg-indigo-300";
+  const shrinkButton = canSubmit
+    ? "transition-all duration-200 active:scale-[0.6] active:duration-75 cursor-pointer active:scale-95 hover:scale-105 "
+    : "";
 
   return (
-    <div className="bg-white border-t p-4 mx-auto w-full">
-      <form onSubmit={onSubmit} className="flex gap-2">
+    <div className="bg-gray-50 p-10 flex justify-center items-center w-full">
+      <form onSubmit={onSubmit} className="relative w-full">
         <input
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
           autoFocus={true}
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full py-4 pl-5 pr-16 border-2 border-gray-200 rounded-2xl text-base outline-none transition-all duration-200 bg-white placeholder-gray-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
           disabled={isDisabled}
           id={inputId}
           onChange={handleInputChange}
@@ -324,11 +331,21 @@ function InputForm({
           value={input}
         />
         <button
-          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className={`absolute right-2 top-1/2 transform -translate-y-1/2 border-none rounded-xl w-10 h-10 flex items-center justify-center ${buttonColor} ${shrinkButton}`}
           disabled={!canSubmit}
           type="submit"
         >
-          Send
+          <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24">
+            <title>Send arrow</title>
+            <path
+              d="M12 2L12 22M5 9L12 2L19 9"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              stroke="white"
+            />
+          </svg>
         </button>
       </form>
     </div>
