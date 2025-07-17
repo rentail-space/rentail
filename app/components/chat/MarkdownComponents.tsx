@@ -1,4 +1,4 @@
-import type { RefObject, ChangeEvent } from "react";
+import type { ChangeEvent, RefObject } from "react";
 
 interface AskQuestionParams {
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -23,7 +23,7 @@ export function createMarkdownComponents({
   return {
     a: ({ children }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
       <button
-        className="text-blue-600 hover:underline"
+        className="bg-gray-200 rounded-3xl p-4 m-1 font-medium text-gray-800 hover:bg-gray-300 hover:underline"
         onClick={async () =>
           await askQuestion({
             handleInputChange,

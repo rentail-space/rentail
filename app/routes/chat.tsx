@@ -1,6 +1,7 @@
 /** biome-ignore-all lint/a11y/noAutofocus: User needs to focus on input field */
 import { useChat } from "@ai-sdk/react";
 import type { LanguageModelUsage, Message } from "ai";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   type ChangeEvent,
   type FormEvent,
@@ -52,7 +53,6 @@ export default function Chat() {
   const messagesRef = useRef<HTMLDivElement>(null);
   const inputId = useId();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [usage, setUsage] = useState(new Map<string, LanguageModelUsage>());
   const [canEdit, setCanEdit] = useState(true);
 
   const {
@@ -66,8 +66,7 @@ export default function Chat() {
   } = useChat({
     api: "/api/chat",
     initialMessages: [{ content: welcome, id: "0", role: "assistant" }],
-    onFinish: (message, options) => {
-      setUsage((prev) => prev.set(message.id, options.usage));
+    onFinish: () => {
       setCanEdit(true);
     },
   });
@@ -104,7 +103,6 @@ export default function Chat() {
         isTyping={isTyping}
         messages={messages}
         messagesRef={messagesRef}
-        usage={usage}
       />
       <InputForm
         canEdit={canEdit}
@@ -113,6 +111,11 @@ export default function Chat() {
         inputId={inputId}
         isTyping={isTyping}
         onSubmit={onSubmit}
+      />
+      <PrecannedQuestions
+        handleInputChange={handleInputChange}
+        inputId={inputId}
+        messagesRef={messagesRef}
       />
     </div>
   );
@@ -148,16 +151,6 @@ function HeaderStats({ label, value }: { label: string; value: string }) {
   );
 }
 
-type MessagesProps = {
-  error?: Error;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  isTyping: boolean;
-  messages: Message[];
-  messagesRef: RefObject<HTMLDivElement | null>;
-  usage: Map<string, LanguageModelUsage>;
-};
-
 function Messages({
   error,
   handleInputChange,
@@ -165,23 +158,23 @@ function Messages({
   isTyping,
   messages,
   messagesRef,
-  usage,
-}: MessagesProps) {
-  const precanredQuestions = useMemo(
-    () => precanned.split(/\n+/).filter((question) => question.trim()),
-    [],
-  );
-
+}: {
+  error?: Error;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
+  isTyping: boolean;
+  messages: Message[];
+  messagesRef: RefObject<HTMLDivElement | null>;
+}) {
   return (
     <div
-      className="flex flex-1 flex-col overflow-y-auto p-6 space-y-4 mx-auto w-full"
+      className="flex flex-1 flex-col overflow-y-auto p-6 space-y-4 mx-auto w-full justify-end"
       ref={messagesRef}
     >
       {messages.map((message) => (
         <MessageBubble
           key={message.id}
           message={message}
-          usage={usage.get(message.id)}
           handleInputChange={handleInputChange}
           inputId={inputId}
           messagesRef={messagesRef}
@@ -190,38 +183,31 @@ function Messages({
 
       <TypingIndicator isTyping={isTyping} />
       <ErrorNotice error={error} />
-      <PrecannedQuestions
-        handleInputChange={handleInputChange}
-        inputId={inputId}
-        questions={precanredQuestions}
-        messagesRef={messagesRef}
-      />
     </div>
   );
 }
 
 function MessageBubble({
   message,
-  usage,
   handleInputChange,
   inputId,
   messagesRef,
 }: {
   message: Message;
-  usage?: LanguageModelUsage;
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   inputId: string;
   messagesRef: RefObject<HTMLDivElement | null>;
 }) {
   const isUser = message.role === "user";
   const bubbleStyles = isUser
-    ? "bg-blue-600 text-white ml-auto"
-    : "bg-white text-black border shadow-sm";
-  const footerStyles = isUser ? "text-gray-300" : "text-gray-700";
+    ? "bg-indigo-200 text-gray-800 ml-auto"
+    : "bg-white text-gray-800";
 
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
-      <div className={`max-w-11/12 px-4 py-2 rounded-lg ${bubbleStyles}`}>
+      <div
+        className={`rounded-3xl font-medium max-w-11/12 p-4 ${bubbleStyles}`}
+      >
         {isUser ? (
           <p className="whitespace-pre-wrap">{message.content}</p>
         ) : (
@@ -232,12 +218,6 @@ function MessageBubble({
             messagesRef={messagesRef}
           />
         )}
-        <div
-          className={`my-2 text-sm flex flex-row gap-2 items-center ${footerStyles}`}
-        >
-          <MessageTimestamp timestamp={message.createdAt} />
-          <TokenUsage usage={usage} />
-        </div>
       </div>
     </div>
   );
@@ -268,27 +248,6 @@ function StructuredMessage({
   );
 }
 
-function MessageTimestamp({ timestamp }: { timestamp?: Date }) {
-  return (
-    <span>
-      {timestamp?.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      })}
-    </span>
-  );
-}
-
-function TokenUsage({ usage }: { usage?: LanguageModelUsage }) {
-  return (
-    <span>
-      {usage
-        ? `Tokens: ${usage.promptTokens} (prompt) + ${usage.completionTokens} (completion) → ${usage.totalTokens}`
-        : null}
-    </span>
-  );
-}
-
 function InputForm({
   canEdit,
   handleInputChange,
@@ -314,7 +273,7 @@ function InputForm({
     : "";
 
   return (
-    <div className="bg-gray-50 p-10 flex justify-center items-center w-full">
+    <div className="bg-gray-50 p-2 flex justify-center items-center w-full">
       <form onSubmit={onSubmit} className="relative w-full">
         <input
           autoCapitalize="off"
@@ -377,14 +336,16 @@ function ErrorNotice({ error }: { error?: Error }) {
 function PrecannedQuestions({
   handleInputChange,
   inputId,
-  questions,
   messagesRef,
 }: {
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   inputId: string;
-  questions: string[];
   messagesRef: RefObject<HTMLDivElement | null>;
 }) {
+  const questions = useMemo(
+    () => precanned.split(/\n+/).filter((question) => question.trim()),
+    [],
+  );
   const handleQuestionClick = useCallback(
     (question: string) => {
       askQuestion({ handleInputChange, inputId, question, messagesRef });
@@ -393,18 +354,20 @@ function PrecannedQuestions({
   );
 
   return (
-    <div className="mx-auto w-full flex flex-wrap gap-2">
-      {questions.map((question) => (
-        <button
-          key={question}
-          className="px-4 py-2 border-blue-300 hover:text-blue-700 hover:border-blue-700 border-1 rounded-lg transition-colors whitespace-nowrap"
-          onClick={() => handleQuestionClick(question)}
-          title="Click to ask this question"
-          type="button"
-        >
-          Q: {question}
-        </button>
-      ))}
+    <div className="mx-auto overflow-x-auto overflow-y-hidden w-full p-2">
+      <div className="text-white text-xs font-bold flex flex-row gap-2">
+        {questions.map((question) => (
+          <button
+            key={question}
+            className="bg-gray-200 rounded-3xl p-2 font-medium text-gray-800 hover:bg-gray-300 hover:underline"
+            onClick={() => handleQuestionClick(question)}
+            title="Click to ask this question"
+            type="button"
+          >
+            Q: {question}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
