@@ -22,8 +22,8 @@ export function createMarkdownComponents({
 }: MarkdownComponentsProps) {
   return {
     a: ({ children }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-      <button
-        className="bg-gray-200 rounded-3xl p-4 m-1 font-medium text-gray-800 hover:bg-gray-300 hover:underline"
+      <a
+        className="bg-gray-200 rounded-3xl p-2 m-1 font-medium text-gray-800 hover:bg-gray-300 hover:underline cursor-pointer inline-block"
         onClick={async () =>
           await askQuestion({
             handleInputChange,
@@ -32,10 +32,10 @@ export function createMarkdownComponents({
             messagesRef,
           })
         }
-        type="button"
+        href={`?q=${children}`}
       >
         {children}
-      </button>
+      </a>
     ),
     h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
       <h1 className="text-xl font-bold my-2" {...props}>

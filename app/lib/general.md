@@ -47,4 +47,5 @@ When showing the location of a shopping center, turn it into a link with the URL
 
 What other questions can I ask? Give the user some examples of additional
 questions they can ask. List each question as a link with the query parameter
-"question".
+"question". Put each question on a separate line and start the link text with an
+appropriate emoji.
