@@ -104,13 +104,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
     },
   };
 
-  const { ENV } = useLoaderData<typeof loader>();
+  const fromLoader = useLoaderData<typeof loader | undefined>();
   useEffect(() => ReactGA.initialize("G-HLE5G8GC5Y"), []);
   const location = useLocation();
   useEffect(() => {
-    if (ENV.NODE_ENV === "production")
+    if (fromLoader?.ENV.NODE_ENV === "production")
       ReactGA.send({ hitType: "pageview", page: location.pathname });
-  }, [location.pathname, ENV.NODE_ENV]);
+  }, [location.pathname, fromLoader?.ENV.NODE_ENV]);
 
   return (
     <html lang="en">
