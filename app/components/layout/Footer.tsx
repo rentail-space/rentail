@@ -10,7 +10,7 @@ export function Footer() {
             <span className="text-blue-500">rentail</span>
             .space
           </NavLink>
-          <span>All rights reserved.</span>
+          <span>All rights reserved</span>
           <Link
             to="mailto:info@rentail.space"
             className="text-blue-500"
