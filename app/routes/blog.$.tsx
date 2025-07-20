@@ -24,12 +24,24 @@ export const meta: MetaFunction = ({ params }) => {
 
 export default function Post() {
   const { post } = useLoaderData<typeof loader>();
-  const { attributes, body } = fm<{ title: string }>(post);
+  const { attributes, body } = fm<{
+    image?: { alt: string; src: string };
+    title: string;
+  }>(post);
   return (
     <div className="p-4 md:p-8">
       <header className="mb-2">
         <h1 className="text-2xl font-bold">{attributes.title}</h1>
       </header>
+      {attributes.image && (
+        <figure className="relative left-[calc(-50vw+50%)] my-4 overflow-x-hidden w-screen">
+          <img
+            alt={attributes.image.alt}
+            className="w-full h-[60vh] object-cover"
+            src={attributes.image.src}
+          />
+        </figure>
+      )}
       <article className="flex flex-col gap-2">
         <Markdown
           components={{
