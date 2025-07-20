@@ -1,5 +1,10 @@
+import fm from "front-matter";
 import Markdown from "react-markdown";
-import { type LoaderFunctionArgs, useLoaderData } from "react-router";
+import {
+  type LoaderFunctionArgs,
+  type MetaFunction,
+  useLoaderData,
+} from "react-router";
 import { Footer } from "~/components/layout/Footer";
 import guide from "~/data/ultimate-guide.md?raw";
 
@@ -10,11 +15,22 @@ export async function loader({ params }: LoaderFunctionArgs) {
   return { post };
 }
 
+export const meta: MetaFunction = ({ params }) => {
+  const { "*": slug } = params;
+  const post = slug === "ultimate-guide" ? guide : null;
+  const { attributes } = fm<{ title: string }>(post ?? "");
+  return [{ title: attributes.title ?? "rentail.space" }];
+};
+
 export default function Post() {
   const { post } = useLoaderData<typeof loader>();
+  const { attributes, body } = fm<{ title: string }>(post);
   return (
-    <>
-      <article className="flex flex-col gap-2 p-4 md:p-8">
+    <div className="p-4 md:p-8">
+      <header className="mb-8">
+        <h1 className="text-2xl font-bold my-4">{attributes.title}</h1>
+      </header>
+      <article className="flex flex-col gap-2">
         <Markdown
           components={{
             a: ({ children, href }) => (
@@ -54,10 +70,10 @@ export default function Post() {
             ),
           }}
         >
-          {post}
+          {body}
         </Markdown>
       </article>
       <Footer />
-    </>
+    </div>
   );
 }
