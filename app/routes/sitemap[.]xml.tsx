@@ -4,8 +4,7 @@ import type { RouteConfigEntry } from "@react-router/dev/routes";
 import routes from "../routes";
 
 export async function loader() {
-  const all = "then" in routes ? await routes : routes;
-  const mapped = dynamicRoutes(all).concat(blogPosts("app/data"));
+  const mapped = dynamicRoutes(routes).concat(blogPosts("app/data"));
   return new Response(
     `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${mapped
