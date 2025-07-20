@@ -13,11 +13,14 @@ export async function loader() {
   const dataDir = path.join(process.cwd(), "app/data");
   const posts = fs
     .readdirSync(dataDir)
-    .filter((file: string) => file.endsWith(".md"))
-    .map((file: string) => fs.readFileSync(path.join(dataDir, file), "utf8"))
-    .map((file: string) => ({
-      ...fm<{ date: string; title: string }>(file),
-      slug: file.replace(".md", ""),
+    .filter((filename: string) => filename.endsWith(".md"))
+    .map((filename: string) => ({
+      content: fs.readFileSync(path.join(dataDir, filename), "utf8"),
+      filename,
+    }))
+    .map(({ filename, content }) => ({
+      ...fm<{ date: string; title: string }>(content),
+      slug: filename.replace(".md", ""),
     }))
     .map((file) => ({
       date: new Date(file.attributes.date),
