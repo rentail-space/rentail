@@ -1,21 +1,13 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
 import Markdown from "react-markdown";
 import { type LoaderFunctionArgs, useLoaderData } from "react-router";
 import { Footer } from "~/components/layout/Footer";
+import guide from "~/data/ultimate-guide.md?raw";
 
-export function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
   const { "*": slug } = params;
-  try {
-    const post = readFileSync(
-      join(import.meta.dirname, `../data/${slug}.md`),
-      "utf8",
-    );
-    return { post };
-  } catch (error) {
-    console.error(error);
-    throw new Response("Not Found", { status: 404 });
-  }
+  const post = slug === "ultimate-guide" ? guide : null;
+  if (!post) throw new Response("Not Found", { status: 404 });
+  return { post };
 }
 
 export default function Post() {
