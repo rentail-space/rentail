@@ -1,10 +1,9 @@
-import fs from "node:fs";
+import fs from "node:fs/promises";
 import path from "node:path";
-import type { RouteConfigEntry } from "@react-router/dev/routes";
-import routes from "../routes";
+import { flatRoutes } from "@react-router/fs-routes";
 
 export async function loader() {
-  const mapped = dynamicRoutes(routes).concat(blogPosts("app/data"));
+  const mapped = [...(await dynamicRoutes()), ...(await blogPosts("app/data"))];
   return new Response(
     `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${mapped
@@ -25,22 +24,30 @@ type SitemapEntry = {
   priority: number;
 };
 
-function dynamicRoutes(routes: RouteConfigEntry[]): SitemapEntry[] {
-  return routes
-    .filter(
-      (route) => !route.path?.endsWith("*") && !route.path?.startsWith("api/"),
-    )
-    .map((route) => ({
+async function dynamicRoutes(): Promise<SitemapEntry[]> {
+  return [
+    {
       changefreq: "daily",
       lastmod: new Date().toISOString(),
-      loc: `https://rentail.space/${route.path ?? ""}`,
+      loc: "https://rentail.space",
+      priority: 1,
+    },
+  ].concat(
+    (
+      await flatRoutes({
+        ignoredRouteFiles: ["routes/home.tsx", "**/*.test.ts", "**/*.test.tsx"],
+      })
+    ).map((route) => ({
+      changefreq: "daily",
+      lastmod: new Date().toISOString(),
+      loc: `https://rentail.space/${route.path}`,
       priority: 0.8,
-    }));
+    })),
+  );
 }
 
-function blogPosts(dir: string): SitemapEntry[] {
-  return fs
-    .readdirSync(path.join(process.cwd(), dir))
+async function blogPosts(dir: string): Promise<SitemapEntry[]> {
+  return (await fs.readdir(path.join(process.cwd(), dir)))
     .filter((file: string) => file.endsWith(".md"))
     .map((file: string) => ({
       changefreq: "daily",
