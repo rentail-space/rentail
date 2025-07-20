@@ -1,25 +1,21 @@
 import type { ChangeEvent, RefObject } from "react";
 
-interface AskQuestionParams {
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  question: string;
-  messagesRef: RefObject<HTMLDivElement | null>;
-}
-
-interface MarkdownComponentsProps {
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  messagesRef: RefObject<HTMLDivElement | null>;
-  askQuestion: (params: AskQuestionParams) => Promise<void>;
-}
-
-export function createMarkdownComponents({
+export default function createMarkdownComponents({
   handleInputChange,
   inputId,
   messagesRef,
   askQuestion,
-}: MarkdownComponentsProps) {
+}: {
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
+  messagesRef: RefObject<HTMLDivElement | null>;
+  askQuestion: (params: {
+    handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    inputId: string;
+    question: string;
+    messagesRef: RefObject<HTMLDivElement | null>;
+  }) => Promise<void>;
+}) {
   return {
     a: ({ children }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
       <a
@@ -70,5 +66,3 @@ export function createMarkdownComponents({
     ),
   };
 }
-
-export type MarkdownComponents = ReturnType<typeof createMarkdownComponents>;

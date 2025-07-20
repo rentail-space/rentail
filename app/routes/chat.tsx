@@ -8,21 +8,20 @@ import {
   useCallback,
   useEffect,
   useId,
-  useMemo,
   useRef,
   useState,
 } from "react";
-import Markdown from "react-markdown";
 import {
   data,
   type LoaderFunctionArgs,
   useLoaderData,
   useSearchParams,
 } from "react-router";
-import { createMarkdownComponents } from "~/components/chat/MarkdownComponents";
+import InputForm from "~/components/chat/InputForm";
+import PrecannedQuestions from "~/components/chat/PrecannedQuestions";
+import ResponseMessage from "~/components/chat/ResponseMessage";
 import { commitSession, getSession } from "~/sessions.server";
 import userData from "../data/users.json";
-import precanned from "../lib/precanned.md?raw";
 import welcome from "../lib/welcome.md?raw";
 
 type UserInfo = {
@@ -115,6 +114,7 @@ export default function Chat() {
         handleInputChange={handleInputChange}
         inputId={inputId}
         messagesRef={messagesRef}
+        askQuestion={askQuestion}
       />
     </div>
   );
@@ -210,113 +210,15 @@ function MessageBubble({
         {isUser ? (
           <p className="whitespace-pre-wrap">{message.content}</p>
         ) : (
-          <StructuredMessage
-            message={message}
+          <ResponseMessage
+            askQuestion={askQuestion}
             handleInputChange={handleInputChange}
             inputId={inputId}
+            message={message}
             messagesRef={messagesRef}
           />
         )}
       </div>
-    </div>
-  );
-}
-
-function StructuredMessage({
-  message,
-  handleInputChange,
-  inputId,
-  messagesRef,
-}: {
-  message: Message;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  messagesRef: RefObject<HTMLDivElement | null>;
-}) {
-  return (
-    <div className="flex flex-row gap-2">
-      <img
-        alt="rental space"
-        className="w-8 h-8 rounded-md border-2 border-gray-200"
-        height={32}
-        src="/logo.png"
-        width={32}
-      />
-      <div className="flex flex-col gap-2">
-        <Markdown
-          components={createMarkdownComponents({
-            handleInputChange,
-            inputId,
-            messagesRef,
-            askQuestion,
-          })}
-        >
-          {message.content}
-        </Markdown>
-      </div>
-    </div>
-  );
-}
-
-function InputForm({
-  canEdit,
-  handleInputChange,
-  input,
-  inputId,
-  isTyping,
-  onSubmit,
-}: {
-  canEdit: boolean;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  input: string;
-  inputId: string;
-  isTyping: boolean;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-}) {
-  const isDisabled = isTyping || !canEdit;
-  const canSubmit = !isDisabled && input.trim();
-  const buttonColor = canSubmit
-    ? "bg-indigo-500 hover:bg-indigo-600"
-    : "bg-indigo-300";
-  const shrinkButton = canSubmit
-    ? "transition-all duration-200 active:scale-[0.6] active:duration-75 cursor-pointer active:scale-95 hover:scale-105 "
-    : "";
-
-  return (
-    <div className="bg-gray-50 p-2 flex justify-center items-center w-full">
-      <form onSubmit={onSubmit} className="relative w-full">
-        <input
-          autoCapitalize="off"
-          autoComplete="off"
-          autoCorrect="off"
-          autoFocus={true}
-          className="w-full py-4 pl-5 pr-16 border-2 border-gray-200 rounded-2xl text-base outline-none transition-all duration-200 bg-white placeholder-gray-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
-          disabled={isDisabled}
-          id={inputId}
-          onChange={handleInputChange}
-          placeholder="Ask about retail spaces..."
-          spellCheck="false"
-          type="text"
-          value={input}
-        />
-        <button
-          className={`absolute right-2 top-1/2 transform -translate-y-1/2 border-none rounded-xl w-10 h-10 flex items-center justify-center ${buttonColor} ${shrinkButton}`}
-          disabled={!canSubmit}
-          type="submit"
-        >
-          <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24">
-            <title>Send arrow</title>
-            <path
-              d="M12 2L12 22M5 9L12 2L19 9"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              stroke="white"
-            />
-          </svg>
-        </button>
-      </form>
     </div>
   );
 }
@@ -341,45 +243,6 @@ function ErrorNotice({ error }: { error?: Error }) {
       {error.message || "Some error happened"}
     </div>
   ) : null;
-}
-
-function PrecannedQuestions({
-  handleInputChange,
-  inputId,
-  messagesRef,
-}: {
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  messagesRef: RefObject<HTMLDivElement | null>;
-}) {
-  const questions = useMemo(
-    () => precanned.split(/\n+/).filter((question) => question.trim()),
-    [],
-  );
-  const handleQuestionClick = useCallback(
-    (question: string) => {
-      askQuestion({ handleInputChange, inputId, question, messagesRef });
-    },
-    [handleInputChange, inputId, messagesRef],
-  );
-
-  return (
-    <div className="mx-auto overflow-x-auto overflow-y-hidden w-full p-2">
-      <div className="text-white text-xs font-bold flex flex-row gap-2">
-        {questions.map((question) => (
-          <button
-            key={question}
-            className="bg-gray-200 rounded-3xl p-2 font-medium text-gray-800 hover:bg-gray-300 hover:underline"
-            onClick={() => handleQuestionClick(question)}
-            title="Click to ask this question"
-            type="button"
-          >
-            Q: {question}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
 }
 
 type AskQuestionParams = {
