@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { BlogPosts } from "~/components/home/BlogPosts";
 import { FeaturesSection } from "~/components/home/FeaturesSection";
 import { HeroSection } from "~/components/home/HeroSection";
 import { HowItWorksSection } from "~/components/home/HowItWorksSection";
@@ -12,6 +13,7 @@ export default function Home() {
         <HeroSection howItWorksId={howItWorksId} />
         <FeaturesSection />
         <HowItWorksSection howItWorksId={howItWorksId} />
+        <BlogPosts />
       </main>
       <Footer />
     </>

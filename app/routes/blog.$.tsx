@@ -1,11 +1,15 @@
 import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import Markdown from "react-markdown";
 import { useParams } from "react-router";
 import { Footer } from "~/components/layout/Footer";
 
 export default function Post() {
   const { "*": slug } = useParams();
-  const post = readFileSync(`./app/data/${slug}.md`, "utf8");
+  const post = readFileSync(
+    join(import.meta.dirname, `../data/${slug}.md`),
+    "utf8",
+  );
   if (!post) throw new Response("Not Found", { status: 404 });
   return (
     <>
