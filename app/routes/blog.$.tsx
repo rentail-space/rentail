@@ -27,8 +27,8 @@ export default function Post() {
   const { attributes, body } = fm<{ title: string }>(post);
   return (
     <div className="p-4 md:p-8">
-      <header className="mb-8">
-        <h1 className="text-2xl font-bold my-4">{attributes.title}</h1>
+      <header className="mb-2">
+        <h1 className="text-2xl font-bold">{attributes.title}</h1>
       </header>
       <article className="flex flex-col gap-2">
         <Markdown
@@ -49,6 +49,18 @@ export default function Post() {
             ),
             hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
               <hr className="border-gray-300" {...props} />
+            ),
+            img: ({
+              src,
+              alt,
+              ...props
+            }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+              <img
+                alt={alt}
+                className="w-full h-auto max-h-[400px] object-contain my-2"
+                src={src}
+                {...props}
+              />
             ),
             li: ({ children }) => <li className="ml-4">{children}</li>,
             ol: ({
