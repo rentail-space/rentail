@@ -82,27 +82,68 @@ export const meta: MetaFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "rentail.space",
-    url,
-    logo: `${url}/logo.png`,
-    description:
-      "Marketplace for specialty retail spaces and short-term leases. Connect businesses with shopping centers nationwide for pop-up shops and seasonal retail opportunities.",
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "customer service",
-      areaServed: "US",
-      availableLanguage: "en",
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "rentail.space",
+      url,
+      logo: `${url}/logo.png`,
+      description:
+        "Marketplace for specialty retail spaces and short-term leases. Connect businesses with shopping centers in Los Angeles for pop-up shops and seasonal retail opportunities.",
+      address: {
+        "@type": "PostalAddress",
+        addressRegion: "CA",
+        addressCountry: "US",
+        addressLocality: "Los Angeles",
+      },
+      areaServed: {
+        "@type": "GeoCircle",
+        geoMidpoint: {
+          "@type": "GeoCoordinates",
+          latitude: 34.0522,
+          longitude: -118.2437,
+        },
+        geoRadius: "50000",
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        areaServed: "Los Angeles, CA",
+        availableLanguage: "en",
+      },
+      sameAs: ["https://twitter.com/rentailspace"],
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${url}/chat?q={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
     },
-    sameAs: ["https://twitter.com/rentailspace"],
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${url}/chat?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": `${url}#the-grove`,
+      name: "The Grove - Retail Space Rentals",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "189 The Grove Dr",
+        addressLocality: "Los Angeles",
+        addressRegion: "CA",
+        postalCode: "90036",
+        addressCountry: "US",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 34.0722,
+        longitude: -118.3559,
+      },
+      telephone: "+1-555-RENTAIL",
+      url: `${url}/chat`,
+      description:
+        "Specialty lease opportunities and short-term retail rentals at The Grove LA",
+      priceRange: "$$",
     },
-  };
+  ];
 
   const fromLoader = useLoaderData<typeof loader | undefined>();
   useEffect(() => ReactGA.initialize("G-HLE5G8GC5Y"), []);
@@ -119,9 +160,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
+        {structuredData.map((data) => (
+          <script key={data.name} type="application/ld+json">
+            {JSON.stringify(data)}
+          </script>
+        ))}
       </head>
       <body>
         {children}
