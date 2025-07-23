@@ -4,7 +4,7 @@ export default function HeroSection({
   howItWorksId: string;
 }) {
   return (
-    <section className="bg-gradient-to-r from-blue-50 to-indigo-50 py-20">
+    <section className="hero bg-gradient-to-r from-blue-50 to-indigo-50 py-20">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-10 md:mb-0">
@@ -17,21 +17,15 @@ export default function HeroSection({
               foot traffic to make your business thrive.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="/chat"
-                className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors text-center"
-              >
+              <a href="/chat" className="btn btn-lg btn-primary">
                 Get Started
               </a>
-              <a
-                href={`#${howItWorksId}`}
-                className="px-6 py-3 bg-white text-blue-600 font-medium rounded-lg border border-blue-200 hover:border-blue-300 transition-colors text-center"
-              >
+              <a href={`#${howItWorksId}`} className="btn btn-lg btn-outline">
                 How It Works
               </a>
             </div>
           </div>
-          <div className="md:w-1/2">
+          <div className="md:w-1/2 hero-content">
             <div className="relative">
               <div className="bg-white p-2 rounded-2xl shadow-xl">
                 <img
