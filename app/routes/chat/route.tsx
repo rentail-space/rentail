@@ -20,9 +20,9 @@ import {
 import InputForm from "~/components/chat/InputForm";
 import PrecannedQuestions from "~/components/chat/PrecannedQuestions";
 import ResponseMessage from "~/components/chat/ResponseMessage";
+import userData from "~/data/users.json";
+import welcome from "~/lib/welcome.md?raw";
 import { commitSession, getSession } from "~/sessions.server";
-import userData from "../data/users.json";
-import welcome from "../lib/welcome.md?raw";
 
 type UserInfo = {
   name: string;
