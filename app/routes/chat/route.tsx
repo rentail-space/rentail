@@ -13,6 +13,7 @@ import {
 } from "react";
 import {
   data,
+  Link,
   type LoaderFunctionArgs,
   useLoaderData,
   useSearchParams,
@@ -124,7 +125,9 @@ function Header({ userInfo }: { userInfo: UserInfo }) {
   return (
     <header className="bg-white border-b px-6 py-4 flex flex-row gap-8 items-center justify-between">
       <h1 className="text-2xl font-bold text-gray-900">
-        <span className="text-blue-600">rentail</span>.space
+        <Link to="/">
+          <span className="text-blue-600">rentail</span>.space
+        </Link>
       </h1>
       <div className="flex flex-row gap-3 items-center">
         {userInfo.name && <HeaderStats label="User" value={userInfo.name} />}
