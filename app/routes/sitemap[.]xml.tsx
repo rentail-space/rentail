@@ -32,18 +32,7 @@ async function dynamicRoutes(): Promise<SitemapEntry[]> {
       loc: "https://rentail.space",
       priority: 1,
     },
-  ].concat(
-    (
-      await flatRoutes({
-        ignoredRouteFiles: ["routes/home.tsx", "**/*.test.ts", "**/*.test.tsx"],
-      })
-    ).map((route) => ({
-      changefreq: "daily",
-      lastmod: new Date().toISOString(),
-      loc: `https://rentail.space/${route.path}`,
-      priority: 0.8,
-    })),
-  );
+  ].concat();
 }
 
 async function blogPosts(dir: string): Promise<SitemapEntry[]> {
