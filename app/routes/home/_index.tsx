@@ -3,11 +3,12 @@ import path from "node:path";
 import fm from "front-matter";
 import { useId } from "react";
 import { useLoaderData } from "react-router";
-import { FeaturesSection } from "~/components/home/FeaturesSection";
-import { HeroSection } from "~/components/home/HeroSection";
-import { HowItWorksSection } from "~/components/home/HowItWorksSection";
 import { Footer } from "~/components/layout/Footer";
-import truncateWords from "~/lib/truncateWords";
+import BlogPosts from "./BlogPosts";
+import FeaturesSection from "./FeaturesSection";
+import HeroSection from "./HeroSection";
+import HowItWorksSection from "./HowItWorksSection";
+import SpecialtyLeasing from "./SpecialtyLeasing";
 
 export async function loader() {
   const dataDir = path.join(process.cwd(), "app/data");
@@ -42,27 +43,12 @@ export default function Home() {
   const { posts } = useLoaderData<typeof loader>();
   return (
     <>
-      <main className="flex flex-col min-h-screen">
+      <main className="flex flex-col min-h-screen gap-y-20 mb-20">
         <HeroSection howItWorksId={howItWorksId} />
         <FeaturesSection />
         <HowItWorksSection howItWorksId={howItWorksId} />
-
-        <section className="py-20 bg-gray-50">
-          <div className="container mx-auto px-4">
-            {posts.map((post) => (
-              <a
-                className="text-lg"
-                href={`/blog/${post.slug}`}
-                key={post.slug}
-              >
-                <h2 className="font-bold text-gray-900 mb-4">{post.title}</h2>
-                <p className="text-gray-600">
-                  {truncateWords(post.excerpt, 30)}
-                </p>
-              </a>
-            ))}
-          </div>
-        </section>
+        <BlogPosts posts={posts} />
+        <SpecialtyLeasing />
       </main>
       <Footer />
     </>

@@ -1,6 +1,10 @@
-export function HeroSection({ howItWorksId }: { howItWorksId: string }) {
+export default function HeroSection({
+  howItWorksId,
+}: {
+  howItWorksId: string;
+}) {
   return (
-    <section className="py-20 bg-gradient-to-r from-blue-50 to-indigo-50">
+    <section className="bg-gradient-to-r from-blue-50 to-indigo-50 py-20">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-10 md:mb-0">
