@@ -34,8 +34,8 @@ export default function PrecannedQuestions({
       <div className="text-white text-xs font-bold flex flex-row gap-2">
         {questions.map((question) => (
           <button
+            className="btn btn-soft btn-sm"
             key={question}
-            className="bg-gray-200 rounded-3xl p-2 font-medium text-gray-800 hover:bg-gray-300 hover:underline"
             onClick={() => handleQuestionClick(question)}
             title="Click to ask this question"
             type="button"

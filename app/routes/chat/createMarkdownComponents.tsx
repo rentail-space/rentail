@@ -19,7 +19,7 @@ export default function createMarkdownComponents({
   return {
     a: ({ children }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
       <a
-        className="bg-gray-200 rounded-3xl p-2 m-1 font-medium text-gray-800 hover:bg-gray-300 hover:underline cursor-pointer inline-block"
+        className="btn btn-soft btn-primary my-1"
         onClick={async () =>
           await askQuestion({
             handleInputChange,

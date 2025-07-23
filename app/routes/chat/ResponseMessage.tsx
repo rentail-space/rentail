@@ -1,7 +1,7 @@
 import type { Message } from "ai";
 import type { ChangeEvent, RefObject } from "react";
 import Markdown from "react-markdown";
-import createMarkdownComponents from "./MarkdownComponents";
+import createMarkdownComponents from "./createMarkdownComponents";
 
 export default function ResponseMessage({
   message,
