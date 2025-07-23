@@ -20,15 +20,16 @@ export default function createMarkdownComponents({
     a: ({ children }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
       <a
         className="btn btn-soft btn-primary"
-        onClick={async () =>
+        href={`?q=${children}`}
+        onClick={async (event) => {
+          event.preventDefault();
           await askQuestion({
             handleInputChange,
             inputId,
             question: `${children}`,
             messagesRef,
-          })
-        }
-        href={`?q=${children}`}
+          });
+        }}
       >
         {children}
       </a>
