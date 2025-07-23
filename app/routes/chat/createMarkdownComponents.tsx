@@ -19,7 +19,7 @@ export default function createMarkdownComponents({
   return {
     a: ({ children }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
       <a
-        className="btn btn-soft btn-primary my-1"
+        className="btn btn-soft btn-primary"
         onClick={async () =>
           await askQuestion({
             handleInputChange,
@@ -57,7 +57,7 @@ export default function createMarkdownComponents({
       </ol>
     ),
     p: ({ ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <p className="whitespace-pre-wrap " {...props} />
+      <p className="whitespace-pre-wrap my-1" {...props} />
     ),
     ul: ({ children, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
       <ul className="ml-6 list-disc" {...props}>
