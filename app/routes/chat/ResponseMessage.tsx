@@ -22,15 +22,11 @@ export default function ResponseMessage({
   }) => Promise<void>;
 }) {
   return (
-    <div className="flex flex-row gap-2">
-      <img
-        alt="rental space"
-        className="w-8 h-8 rounded-md border-2 border-gray-200"
-        height={32}
-        src="/logo.png"
-        width={32}
-      />
-      <div className="flex flex-col gap-2">
+    <div className="chat chat-start ">
+      <div className="chat-image avatar w-8 h-8 mr-2">
+        <img alt="rental space" height="32px" src="/logo.png" width="32px" />
+      </div>
+      <div className="chat-bubble">
         <Markdown
           components={createMarkdownComponents({
             handleInputChange,

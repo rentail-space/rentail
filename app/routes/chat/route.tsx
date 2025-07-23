@@ -198,28 +198,18 @@ function MessageBubble({
   messagesRef: RefObject<HTMLDivElement | null>;
 }) {
   const isUser = message.role === "user";
-  const bubbleStyles = isUser
-    ? "bg-indigo-200 text-gray-800 ml-auto"
-    : "bg-white text-gray-800";
-
-  return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
-      <div
-        className={`rounded-3xl font-medium max-w-11/12 p-4 ${bubbleStyles}`}
-      >
-        {isUser ? (
-          <p className="whitespace-pre-wrap">{message.content}</p>
-        ) : (
-          <ResponseMessage
-            askQuestion={askQuestion}
-            handleInputChange={handleInputChange}
-            inputId={inputId}
-            message={message}
-            messagesRef={messagesRef}
-          />
-        )}
-      </div>
+  return isUser ? (
+    <div className="chat chat-end">
+      <div className="chat-bubble chat-bubble-accent">{message.content}</div>
     </div>
+  ) : (
+    <ResponseMessage
+      askQuestion={askQuestion}
+      handleInputChange={handleInputChange}
+      inputId={inputId}
+      message={message}
+      messagesRef={messagesRef}
+    />
   );
 }
 
