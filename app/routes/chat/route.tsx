@@ -17,12 +17,12 @@ import {
   useLoaderData,
   useSearchParams,
 } from "react-router";
-import InputForm from "~/components/chat/InputForm";
-import PrecannedQuestions from "~/components/chat/PrecannedQuestions";
-import ResponseMessage from "~/components/chat/ResponseMessage";
 import userData from "~/data/users.json";
 import welcome from "~/lib/welcome.md?raw";
 import { commitSession, getSession } from "~/sessions.server";
+import InputForm from "./InputForm";
+import PrecannedQuestions from "./PrecannedQuestions";
+import ResponseMessage from "./ResponseMessage";
 
 type UserInfo = {
   name: string;
