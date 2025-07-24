@@ -7,27 +7,12 @@ import { href } from "react-router";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const domain = `${new URL(request.url).origin}`;
-  const routes = Object.fromEntries<{
-    id: string;
-    module: string;
-    path: string;
-  }>(
-    (await flatRoutes()).map((route) => [
-      route.id ?? "unknown",
-      {
-        id: route.id ?? "unknown",
-        module: route.file,
-        path: route.path === "home" ? href("/") : (route.path ?? ""),
-      },
-    ]),
-  );
-
+  const { routes } = await import("virtual:react-router/server-build");
   const sitemap = await generateRemixSitemap({
     domain,
     ignore: ["*/\\*", "/api/*"],
     routes: { ...routes, ...blogPosts("app/data") },
   });
-
   return new Response(sitemap, {
     headers: { "Content-Type": "application/xml" },
   });
