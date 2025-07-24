@@ -2,12 +2,11 @@ import { generateRobotsTxt } from "@forge42/seo-tools/robots";
 import type { LoaderFunctionArgs } from "react-router";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const domain = new URL(request.url).origin;
   const robotsTxt = generateRobotsTxt([
     {
       allow: ["/"],
       disallow: ["/api/*", "/chat"],
-      sitemap: [`${domain}/sitemap.xml`],
+      sitemap: ["https://rentail.space/sitemap.xml"],
       userAgent: "*",
     },
   ]);
