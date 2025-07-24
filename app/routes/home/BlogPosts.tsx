@@ -1,3 +1,4 @@
+import type { FrontMatterResult } from "front-matter";
 import { Link } from "react-router";
 import truncateWords from "~/lib/truncateWords";
 
@@ -10,7 +11,7 @@ export type FrontMatter = {
 export default function BlogPosts({
   posts,
 }: {
-  posts: (FrontMatter & { slug: string; excerpt: string })[];
+  posts: (FrontMatterResult<FrontMatter> & { slug: string })[];
 }) {
   return (
     <section className="prose prose-lg mx-auto">
@@ -20,10 +21,19 @@ export default function BlogPosts({
           to={`/blog/${post.slug}`}
           key={post.slug}
         >
-          <h2>{post.title}</h2>
-          <p>{truncateWords(post.excerpt, 30)}</p>
+          <h3>{post.attributes.title}</h3>
+          <p>{truncateWords(getExcerpt(post.body), 30)}</p>
         </Link>
       ))}
     </section>
   );
+}
+
+function getExcerpt(body: string) {
+  return body
+    .replace(/!\[.*?\]\(.*?\)/g, "")
+    .replace(/\[.*?\]\(.*?\)/g, "")
+    .replace(/[#*_`]/g, "")
+    .replace(/\n+/g, " ")
+    .trim();
 }

@@ -23,17 +23,11 @@ export async function loader() {
       ...fm<FrontMatter>(content),
       slug: filename.replace(".md", ""),
     }))
-    .map((file) => ({
-      ...file.attributes,
-      excerpt: file.body
-        .replace(/!\[.*?\]\(.*?\)/g, "")
-        .replace(/\[.*?\]\(.*?\)/g, "")
-        .replace(/[#*_`]/g, "")
-        .replace(/\n+/g, " ")
-        .trim(),
-      slug: file.slug,
-    }))
-    .sort((a, b) => new Date(b.added).getTime() - new Date(a.added).getTime());
+    .sort(
+      (a, b) =>
+        new Date(b.attributes.added).getTime() -
+        new Date(a.attributes.added).getTime(),
+    );
   return { posts };
 }
 
