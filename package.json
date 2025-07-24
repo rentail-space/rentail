@@ -41,6 +41,7 @@
   "devDependencies": {
     "@playwright/test": "^1.54.1",
     "@react-router/dev": "^7.7.0",
+    "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.11",
     "@types/node": "^24.1.0",
     "@types/pngjs": "^6.0.5",

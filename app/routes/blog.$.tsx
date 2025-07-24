@@ -5,7 +5,7 @@ import {
   type MetaFunction,
   useLoaderData,
 } from "react-router";
-import { Footer } from "~/components/layout/Footer";
+import Layout from "~/components/layout/Layout";
 import guide from "~/data/ultimate-guide.md?raw";
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -29,20 +29,18 @@ export default function Post() {
     title: string;
   }>(post);
   return (
-    <div className="p-4 md:p-8">
-      <header className="mb-2">
-        <h1 className="text-2xl font-bold">{attributes.title}</h1>
-      </header>
-      {attributes.image && (
-        <figure className="relative left-[calc(-50vw+50%)] my-4 overflow-x-hidden w-screen">
-          <img
-            alt={attributes.image.alt}
-            className="w-full h-[60vh] object-cover"
-            src={attributes.image.src}
-          />
-        </figure>
-      )}
-      <article className="flex flex-col gap-2">
+    <Layout>
+      <article className="prose prose-lg mx-auto">
+        <h1>{attributes.title}</h1>
+        {attributes.image && (
+          <figure className="relative left-[calc(-50vw+50%)] my-4 overflow-x-hidden w-screen">
+            <img
+              alt={attributes.image.alt}
+              className="w-full h-[60vh] object-cover"
+              src={attributes.image.src}
+            />
+          </figure>
+        )}
         <Markdown
           components={{
             a: ({ children, href }) => (
@@ -97,7 +95,6 @@ export default function Post() {
           {body}
         </Markdown>
       </article>
-      <Footer />
-    </div>
+    </Layout>
   );
 }
