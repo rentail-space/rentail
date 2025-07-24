@@ -2,25 +2,22 @@ import fm from "front-matter";
 import Markdown from "react-markdown";
 import {
   type LoaderFunctionArgs,
-  type MetaFunction,
+  type Params,
   useLoaderData,
 } from "react-router";
 import Layout from "~/components/layout/Layout";
-import guide from "~/data/ultimate-guide.md?raw";
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  const { "*": slug } = params;
-  const post = slug === "ultimate-guide" ? guide : null;
-  if (!post) throw new Response("Not Found", { status: 404 });
+  const post = await loadFile(params);
   return { post };
 }
 
-export const meta: MetaFunction = ({ params }) => {
+async function loadFile(params: Params<string>) {
   const { "*": slug } = params;
-  const post = slug === "ultimate-guide" ? guide : null;
-  const { attributes } = fm<{ title: string }>(post ?? "");
-  return [{ title: attributes.title ?? "rentail.space" }];
-};
+  const post = await import(`../data/${slug}.md?raw`);
+  if (!post) throw new Response("Not Found", { status: 404 });
+  return post.default;
+}
 
 export default function Post() {
   const { post } = useLoaderData<typeof loader>();
