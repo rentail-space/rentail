@@ -4,6 +4,10 @@ import { generateRemixSitemap } from "@forge42/seo-tools/remix/sitemap";
 import { href } from "react-router";
 
 export async function loader() {
+  // NOTE Google does not support changefreq and priority.
+  // They do support lastmod, but seo-tools doesn't seem to support it.
+  // https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping
+
   const { routes } = await import("virtual:react-router/server-build");
   const sitemap = await generateRemixSitemap({
     domain: "https://rentail.space",
