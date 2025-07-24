@@ -1,47 +1,56 @@
-import fs from "node:fs/promises";
+import fs from "node:fs";
 import path from "node:path";
+import { generateRemixSitemap } from "@forge42/seo-tools/remix/sitemap";
 import { flatRoutes } from "@react-router/fs-routes";
+import type { LoaderFunctionArgs } from "react-router";
 
-export async function loader() {
-  const mapped = [...(await dynamicRoutes()), ...(await blogPosts("app/data"))];
-  return new Response(
-    `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${mapped
-    .map(
-      (route) =>
-        `<url><loc>${route.loc}</loc><lastmod>${route.lastmod}</lastmod><changefreq>${route.changefreq}</changefreq><priority>${route.priority}</priority></url>`,
-    )
-    .join("\n")}
-</urlset>`,
-    { headers: { "Content-Type": "application/xml" } },
+export async function loader({ request }: LoaderFunctionArgs) {
+  const domain = `${new URL(request.url).origin}`;
+  const routes = Object.fromEntries<{
+    id: string;
+    module: string;
+    path: string;
+  }>(
+    (await flatRoutes()).map((route) => [
+      route.id ?? "unknown",
+      {
+        id: route.id ?? "unknown",
+        module: route.file,
+        path: route.path === "home" ? "/" : (route.path ?? ""),
+      },
+    ]),
   );
+
+  const sitemap = await generateRemixSitemap({
+    domain,
+    ignore: ["*/\\*", "/api/*"],
+    routes: { ...routes, ...blogPosts("app/data") },
+  });
+
+  return new Response(sitemap, {
+    headers: { "Content-Type": "application/xml" },
+  });
 }
 
-type SitemapEntry = {
-  changefreq: string;
-  lastmod: string;
-  loc: string;
-  priority: number;
-};
-
-async function dynamicRoutes(): Promise<SitemapEntry[]> {
-  return [
-    {
-      changefreq: "daily",
-      lastmod: new Date().toISOString(),
-      loc: "https://rentail.space",
-      priority: 1,
-    },
-  ].concat();
-}
-
-async function blogPosts(dir: string): Promise<SitemapEntry[]> {
-  return (await fs.readdir(path.join(process.cwd(), dir)))
-    .filter((file: string) => file.endsWith(".md"))
-    .map((file: string) => ({
-      changefreq: "daily",
-      lastmod: new Date().toISOString(),
-      loc: `https://rentail.space/blog/${path.basename(file, ".md")}`,
-      priority: 0.8,
-    }));
+function blogPosts(
+  dir: string,
+): Record<string, { id: string; module: string }> {
+  const filenames = fs
+    .readdirSync(path.join(process.cwd(), dir))
+    .filter((filename: string) => filename.endsWith(".md"));
+  return Object.fromEntries(
+    filenames.map((file) => [
+      `routes/blog/${path.basename(file, ".md")}`,
+      {
+        id: `routes/blog/${path.basename(file, ".md")}`,
+        module: "app/routes/blog.$",
+        path: `/blog/${path.basename(file, ".md")}`,
+        lastmod: new Date(
+          fs.statSync(path.join(process.cwd(), dir, file)).mtime,
+        ).toISOString(),
+        changefreq: "daily",
+        priority: 0.8,
+      },
+    ]),
+  );
 }

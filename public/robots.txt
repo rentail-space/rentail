@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /chat
-
-Sitemap: https://rentail.space/sitemap.xml
