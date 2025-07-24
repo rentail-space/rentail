@@ -1,15 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import { generateRemixSitemap } from "@forge42/seo-tools/remix/sitemap";
-import { flatRoutes } from "@react-router/fs-routes";
 import type { LoaderFunctionArgs } from "react-router";
 import { href } from "react-router";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const domain = `${new URL(request.url).origin}`;
   const { routes } = await import("virtual:react-router/server-build");
+  const { origin } = new URL(request.url);
   const sitemap = await generateRemixSitemap({
-    domain,
+    domain: origin,
     ignore: ["*/\\*", "/api/*"],
     routes: { ...routes, ...blogPosts("app/data") },
   });
