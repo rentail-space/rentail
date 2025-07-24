@@ -2,9 +2,9 @@ export default function SpecialtyLeasing() {
   return (
     <section className="flex flex-row gap-2 max-w-screen-lg mx-auto items-start">
       <LightBulb />
-      <div className="text-lg flex-1">
-        <h2 className="font-bold text-gray-900 mb-4">Specialty Leasing</h2>
-        <p className="text-gray-600">
+      <div className="prose prose-lg flex-1">
+        <h2>Specialty Leasing</h2>
+        <p>
           Specialty leasing refers to short-term retail space in malls, shopping
           centers, and other retail centers. It includes flexible options like
           RMUs (Retail Merchandising Units), retail carts, booth rentals, kiosk

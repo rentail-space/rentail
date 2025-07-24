@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import truncateWords from "~/lib/truncateWords";
 
 export default function BlogPosts({
@@ -6,23 +7,17 @@ export default function BlogPosts({
   posts: { slug: string; title: string; excerpt: string }[];
 }) {
   return (
-    <section>
-      <div className="container mx-auto px-4">
-        {posts.map((post) => (
-          <a
-            className="text-lg link link-hover"
-            href={`/blog/${post.slug}`}
-            key={post.slug}
-          >
-            <h2 className="font-bold text-gray-900 mb-4 link-primary">
-              {post.title}
-            </h2>
-            <p className="text-gray-600 no-underline">
-              {truncateWords(post.excerpt, 30)}
-            </p>
-          </a>
-        ))}
-      </div>
+    <section className="prose prose-lg mx-auto">
+      {posts.map((post) => (
+        <Link
+          className="link link-hover"
+          to={`/blog/${post.slug}`}
+          key={post.slug}
+        >
+          <h2>{post.title}</h2>
+          <p>{truncateWords(post.excerpt, 30)}</p>
+        </Link>
+      ))}
     </section>
   );
 }

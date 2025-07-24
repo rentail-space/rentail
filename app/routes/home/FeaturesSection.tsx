@@ -42,25 +42,22 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section>
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Why Choose <span className="text-blue-600">rentail</span>.space?
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We help you find a retail space for rent. Grow your business in a
-            few easy steps.
-          </p>
-        </div>
+    <section className="prose prose-lg mx-auto">
+      <div className="text-center">
+        <h2>
+          Why Choose <span className="text-blue-600">rentail</span>.space?
+        </h2>
+        <p>
+          We help you find a retail space for rent. Grow your business in a few
+          easy steps.
+        </p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {features.map((feature) => (
+          <div key={feature.title} className="card shadow-sm">
+            <div className="card-body">
+              <div className="card-title w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -72,11 +69,11 @@ export default function FeaturesSection() {
                   {feature.icon}
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   );

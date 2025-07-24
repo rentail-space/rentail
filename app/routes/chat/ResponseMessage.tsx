@@ -26,7 +26,7 @@ export default function ResponseMessage({
       <div className="chat-image avatar w-8 h-8 mr-2">
         <img alt="rental space" height="32px" src="/logo.png" width="32px" />
       </div>
-      <div className="chat-bubble">
+      <div className="chat-bubble prose prose-base">
         <Markdown
           components={createMarkdownComponents({
             handleInputChange,

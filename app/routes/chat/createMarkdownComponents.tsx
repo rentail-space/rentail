@@ -34,36 +34,24 @@ export default function createMarkdownComponents({
         {children}
       </a>
     ),
-    h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <h1 className="text-xl font-bold" {...props}>
-        {children}
-      </h1>
+    h1: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h1 className="text-xl font-bold">{children}</h1>
     ),
-    h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <h2 className="text-lg font-semibold" {...props}>
-        {children}
-      </h2>
+    h2: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h2 className="text-lg font-semibold">{children}</h2>
     ),
-    h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <h3 className="text-md font-semibold" {...props}>
-        {children}
-      </h3>
+    h3: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h3 className="text-md font-semibold">{children}</h3>
     ),
-    hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
-      <hr className="border-gray-300" {...props} />
+    hr: () => <hr className="border-gray-300" />,
+    ol: ({ children }: React.HTMLAttributes<HTMLOListElement>) => (
+      <ol className="ml-8 list-decimal">{children}</ol>
     ),
-    ol: ({ children, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
-      <ol className="ml-8 list-decimal" {...props}>
-        {children}
-      </ol>
+    p: ({ children }: React.HTMLAttributes<HTMLParagraphElement>) => (
+      <p className="whitespace-pre-wrap mt-2 mb-2">{children}</p>
     ),
-    p: ({ ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <p className="whitespace-pre-wrap my-1" {...props} />
-    ),
-    ul: ({ children, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
-      <ul className="ml-6 list-disc" {...props}>
-        {children}
-      </ul>
+    ul: ({ children }: React.HTMLAttributes<HTMLUListElement>) => (
+      <ul className="ml-6 list-disc">{children}</ul>
     ),
   };
 }

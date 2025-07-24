@@ -18,6 +18,7 @@ import {
   useLoaderData,
   useSearchParams,
 } from "react-router";
+import Header from "~/components/layout/Header";
 import userData from "~/data/users.json";
 import welcome from "~/lib/welcome.md?raw";
 import { commitSession, getSession } from "~/sessions.server";
@@ -94,7 +95,7 @@ export default function Chat() {
 
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
-      <Header userInfo={userInfo} />
+      <Header />
       <Messages
         error={error}
         handleInputChange={handleInputChange}
@@ -118,38 +119,6 @@ export default function Chat() {
         askQuestion={askQuestion}
       />
     </div>
-  );
-}
-
-function Header({ userInfo }: { userInfo: UserInfo }) {
-  return (
-    <header className="bg-white border-b px-6 py-4 flex flex-row gap-8 items-center justify-between">
-      <h1 className="text-2xl font-bold text-gray-900">
-        <Link to="/">
-          <span className="text-blue-600">rentail</span>.space
-        </Link>
-      </h1>
-      <div className="flex flex-row gap-3 items-center">
-        {userInfo.name && <HeaderStats label="User" value={userInfo.name} />}
-        {userInfo.location && (
-          <HeaderStats label="Location" value={userInfo.location} />
-        )}
-        {userInfo.level && <HeaderStats label="Level" value={userInfo.level} />}
-        <HeaderStats
-          label="Interactions"
-          value={(userInfo.interactions || 0).toString()}
-        />
-        <HeaderStats label="Rented" value={(userInfo.rented || 0).toString()} />
-      </div>
-    </header>
-  );
-}
-
-function HeaderStats({ label, value }: { label: string; value: string }) {
-  return (
-    <span className="text-sm text-gray-500">
-      {label}: <b>{value}</b>
-    </span>
   );
 }
 
@@ -202,7 +171,7 @@ function MessageBubble({
 }) {
   const isUser = message.role === "user";
   return isUser ? (
-    <div className="chat chat-end">
+    <div className="chat chat-end prose">
       <div className="chat-bubble chat-bubble-accent">{message.content}</div>
     </div>
   ) : (
