@@ -6,6 +6,7 @@ import {
   useLoaderData,
 } from "react-router";
 import Layout from "~/components/layout/Layout";
+import type { FrontMatter } from "./home/BlogPosts";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const post = await loadFile(params);
@@ -21,10 +22,7 @@ async function loadFile(params: Params<string>) {
 
 export default function Post() {
   const { post } = useLoaderData<typeof loader>();
-  const { attributes, body } = fm<{
-    image?: { alt: string; src: string };
-    title: string;
-  }>(post);
+  const { attributes, body } = fm<FrontMatter>(post);
   return (
     <Layout>
       <article className="prose prose-lg mx-auto">
@@ -38,6 +36,13 @@ export default function Post() {
             />
           </figure>
         )}
+        <div className="text-sm text-gray-500">
+          {new Date(attributes.added).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </div>
         <Markdown
           components={{
             a: ({ children, href }) => (
