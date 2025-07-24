@@ -3,6 +3,7 @@ import path from "node:path";
 import { generateRemixSitemap } from "@forge42/seo-tools/remix/sitemap";
 import { flatRoutes } from "@react-router/fs-routes";
 import type { LoaderFunctionArgs } from "react-router";
+import { href } from "react-router";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const domain = `${new URL(request.url).origin}`;
@@ -16,7 +17,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       {
         id: route.id ?? "unknown",
         module: route.file,
-        path: route.path === "home" ? "/" : (route.path ?? ""),
+        path: route.path === "home" ? href("/") : (route.path ?? ""),
       },
     ]),
   );
@@ -34,22 +35,17 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 function blogPosts(
   dir: string,
-): Record<string, { id: string; module: string }> {
+): Record<string, { id: string; module: string; path: string }> {
   const filenames = fs
     .readdirSync(path.join(process.cwd(), dir))
     .filter((filename: string) => filename.endsWith(".md"));
   return Object.fromEntries(
-    filenames.map((file) => [
-      `routes/blog/${path.basename(file, ".md")}`,
+    filenames.map((filename) => [
+      `routes/blog/${path.basename(filename, ".md")}`,
       {
-        id: `routes/blog/${path.basename(file, ".md")}`,
-        module: "app/routes/blog.$",
-        path: `/blog/${path.basename(file, ".md")}`,
-        lastmod: new Date(
-          fs.statSync(path.join(process.cwd(), dir, file)).mtime,
-        ).toISOString(),
-        changefreq: "daily",
-        priority: 0.8,
+        id: `routes/blog/${path.basename(filename, ".md")}`,
+        module: filename,
+        path: href("/blog/*", { "*": path.basename(filename, ".md") }),
       },
     ]),
   );
