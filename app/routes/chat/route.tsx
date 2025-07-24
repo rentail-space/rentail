@@ -11,45 +11,24 @@ import {
   useRef,
   useState,
 } from "react";
-import {
-  data,
-  Link,
-  type LoaderFunctionArgs,
-  useLoaderData,
-  useSearchParams,
-} from "react-router";
+import { data, type LoaderFunctionArgs, useSearchParams } from "react-router";
 import Header from "~/components/layout/Header";
-import userData from "~/data/users.json";
 import welcome from "~/lib/welcome.md?raw";
 import { commitSession, getSession } from "~/sessions.server";
 import InputForm from "./InputForm";
 import PrecannedQuestions from "./PrecannedQuestions";
 import ResponseMessage from "./ResponseMessage";
 
-type UserInfo = {
-  name: string;
-  location: string;
-  level: string;
-  interactions: number;
-  rented: number;
-};
-
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"));
   const interactions = (session.get("interactions") || 0) + 1;
   session.set("interactions", interactions);
-  const userInfo = {
-    interactions,
-    ...userData.defaultUser,
-  } as UserInfo;
-  return data(
-    { userInfo },
-    { headers: { "Set-Cookie": await commitSession(session) } },
-  );
+  return data(null, {
+    headers: { "Set-Cookie": await commitSession(session) },
+  });
 }
 
 export default function Chat() {
-  const { userInfo } = useLoaderData<typeof loader>();
   const messagesRef = useRef<HTMLDivElement>(null);
   const inputId = useId();
   const [searchParams, setSearchParams] = useSearchParams();
