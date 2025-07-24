@@ -1,10 +1,16 @@
 import { Link } from "react-router";
 import truncateWords from "~/lib/truncateWords";
 
+export type FrontMatter = {
+  added: string;
+  image?: { alt: string; src: string };
+  title: string;
+};
+
 export default function BlogPosts({
   posts,
 }: {
-  posts: { slug: string; title: string; excerpt: string }[];
+  posts: (FrontMatter & { slug: string; excerpt: string })[];
 }) {
   return (
     <section className="prose prose-lg mx-auto">

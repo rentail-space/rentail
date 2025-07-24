@@ -3,7 +3,7 @@ title: A Step-by-Step Guide for First-Time Business Owners
 added: 2025-07-19
 image:
   alt: "Person standing inside a sunlit empty retail space holding a tablet, reviewing the lease for a new business location."
-  src: "/posts/ultimate-guide.webp"
+  src: "/blog/ultimate-guide.webp"
 ---
 
 Did you know that signing the wrong retail lease can cost first-time business owners up to 20% more in operational expenses?

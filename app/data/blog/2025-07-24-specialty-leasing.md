@@ -1,6 +1,8 @@
 ---
 title: "Specialty Leasing: A Smart Alternative for Small Business Owners Looking to Test the Waters"
 added: 2025-07-24
+image:
+  src: "/blog/specialty-leasing.jpg"
 ---
 
 As a small business owner, you've probably dreamed of having your own storefront. But between sky-high rents, multi-year commitments, and hefty build-out costs, traditional retail leases can feel overwhelming—especially when you're just starting out or testing a new market. That's where specialty leasing comes in.

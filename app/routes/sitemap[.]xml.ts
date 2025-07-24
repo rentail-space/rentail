@@ -12,7 +12,7 @@ export async function loader() {
   const sitemap = await generateRemixSitemap({
     domain: "https://rentail.space",
     ignore: ["*/\\*", "/api/*"],
-    routes: { ...routes, ...blogPosts("app/data") },
+    routes: { ...routes, ...blogPosts("app/data/blog") },
   });
   return new Response(sitemap, {
     headers: { "Content-Type": "application/xml" },

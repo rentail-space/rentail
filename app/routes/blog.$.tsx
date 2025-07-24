@@ -14,7 +14,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
 async function loadFile(params: Params<string>) {
   const { "*": slug } = params;
-  const post = await import(`../data/${slug}.md?raw`);
+  const post = await import(`../data/blog/${slug}.md?raw`);
   if (!post) throw new Response("Not Found", { status: 404 });
   return post.default;
 }

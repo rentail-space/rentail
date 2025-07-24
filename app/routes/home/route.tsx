@@ -4,14 +4,14 @@ import fm from "front-matter";
 import { useId } from "react";
 import { useLoaderData } from "react-router";
 import { Footer } from "~/components/layout/Footer";
-import BlogPosts from "./BlogPosts";
+import BlogPosts, { type FrontMatter } from "./BlogPosts";
 import FeaturesSection from "./FeaturesSection";
 import HeroSection from "./HeroSection";
 import HowItWorksSection from "./HowItWorksSection";
 import SpecialtyLeasing from "./SpecialtyLeasing";
 
 export async function loader() {
-  const dataDir = path.join(process.cwd(), "app/data");
+  const dataDir = path.join(process.cwd(), "app/data/blog");
   const posts = fs
     .readdirSync(dataDir)
     .filter((filename: string) => filename.endsWith(".md"))
@@ -20,11 +20,11 @@ export async function loader() {
       filename,
     }))
     .map(({ filename, content }) => ({
-      ...fm<{ date: string; title: string }>(content),
+      ...fm<FrontMatter>(content),
       slug: filename.replace(".md", ""),
     }))
     .map((file) => ({
-      date: new Date(file.attributes.date),
+      ...file.attributes,
       excerpt: file.body
         .replace(/!\[.*?\]\(.*?\)/g, "")
         .replace(/\[.*?\]\(.*?\)/g, "")
@@ -32,9 +32,8 @@ export async function loader() {
         .replace(/\n+/g, " ")
         .trim(),
       slug: file.slug,
-      title: file.attributes.title,
     }))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => new Date(b.added).getTime() - new Date(a.added).getTime());
   return { posts };
 }
 
