@@ -4,21 +4,21 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
-    globals: true,
-    environment: "node",
-    setupFiles: ["./test/setup.ts"],
-    include: ["./**/*.test.{ts,tsx}"],
+    browser: { screenshotDirectory: "./__screenshots__" },
     exclude: ["./build", "./node_modules"],
-    browser: {
-      screenshotDirectory: "./__screenshots__",
-    },
+    fileParallelism: false,
+    globals: true,
+    include: ["./**/*.test.{ts,tsx}"],
+    pool: "forks",
+    setupFiles: ["./test/setup.ts"],
+    testTimeout: 30000, // 30 seconds for E2E tests with browser launches
   },
 });
 
-interface CustomMatchers<R = unknown> {
-  toMatchScreenshot: () => Promise<R>;
-}
-
-declare module "vitest" {
-  interface Matchers<T> extends CustomMatchers<T> {}
+declare global {
+  namespace PlaywrightTest {
+    interface Matchers<R> {
+      toMatchScreenshot(): Promise<R>;
+    }
+  }
 }
