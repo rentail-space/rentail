@@ -15,9 +15,12 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
 async function loadFile(params: Params<string>) {
   const { "*": slug } = params;
-  const post = await import(`../data/blog/${slug}.md?raw`);
-  if (!post) throw new Response("Not Found", { status: 404 });
-  return post.default;
+  try {
+    const post = await import(`../data/blog/${slug}.md?raw`);
+    return post.default;
+  } catch {
+    throw new Response("Not Found", { status: 404 });
+  }
 }
 
 export default function Post() {
@@ -27,6 +30,7 @@ export default function Post() {
     <Layout>
       <article className="prose prose-lg mx-auto">
         <h1>{attributes.title}</h1>
+
         {attributes.image && (
           <figure className="relative left-[calc(-50vw+50%)] my-4 overflow-x-hidden w-screen">
             <img
@@ -36,6 +40,7 @@ export default function Post() {
             />
           </figure>
         )}
+
         <div className="text-sm text-gray-500">
           {new Date(attributes.added).toLocaleDateString("en-US", {
             year: "numeric",
@@ -43,6 +48,7 @@ export default function Post() {
             day: "numeric",
           })}
         </div>
+
         <Markdown
           components={{
             a: ({ children, href }) => (
