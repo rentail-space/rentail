@@ -3,8 +3,12 @@
 @plugin "daisyui";
 
 @theme {
-  --font-sans: "Convergence", "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-mono: "Atkinson", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
+  --font-sans:
+    "Convergence", "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono:
+    "Atkinson", "Monaco", "Consolas", "Liberation Mono", "Courier New",
+    monospace;
   --font-serif: "Quando", "Times New Roman", serif;
 }
 
@@ -47,14 +51,16 @@ body {
 
 @font-face {
   font-family: "Atkinson";
-  src: url("/fonts/AtkinsonHyperlegibleMono-VariableFont_wght.ttf") format("truetype");
+  src: url("/fonts/AtkinsonHyperlegibleMono-VariableFont_wght.ttf")
+    format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Atkinson";
-  src: url("/fonts/AtkinsonHyperlegibleMono-VariableFont_wght.ttf") format("truetype");
+  src: url("/fonts/AtkinsonHyperlegibleMono-VariableFont_wght.ttf")
+    format("truetype");
   font-weight: 400;
   font-style: italic;
 }
