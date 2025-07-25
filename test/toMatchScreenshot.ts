@@ -1,24 +1,29 @@
 // DO NOT add to setup.ts as vitest.config.js cannot upload file that imports vitest
-import { access, constants, readFile, writeFile } from "node:fs/promises";
+import {
+  access,
+  constants,
+  mkdir,
+  readFile,
+  writeFile,
+} from "node:fs/promises";
 import path from "node:path";
+import { expect } from "@playwright/test";
+import type { AsyncExpectationResult } from "@vitest/expect";
 import pixelmatch from "pixelmatch";
 import type { Page } from "playwright";
 import { PNG } from "pngjs";
 import invariant from "tiny-invariant";
-import { expect } from "vitest";
 
 expect.extend({
-  async toMatchScreenshot(page: Page) {
+  async toMatchScreenshot(page: Page): AsyncExpectationResult {
+    const testName = getTestName();
     const dirname = path.resolve("./__screenshots__");
-    invariant(this.testPath, "Test name must be defined");
-    const testName = path.basename(this.testPath, ".ts");
-
     const screenshot = await page.screenshot();
     const filename = path.join(dirname, `${testName}.jpg`);
-    console.log(filename);
     try {
       await access(filename, constants.R_OK);
     } catch {
+      await mkdir(dirname, { recursive: true });
       await writeFile(filename, screenshot);
       return {
         message: () =>
@@ -67,3 +72,15 @@ expect.extend({
     };
   },
 });
+
+function getTestName(): string {
+  const error = new Error();
+  const stackLines = error.stack?.split("\n") || [];
+  const callerLine = stackLines.find(
+    (line) => line.includes(".test.") && !line.includes("node_modules"),
+  );
+  invariant(callerLine, "Could not determine test file name");
+  const match = callerLine.match(/\/(.+?):\d+/);
+  const testFile = match ? path.basename(match[1]) : "unknown";
+  return testFile.replace(".test.ts", "");
+}
