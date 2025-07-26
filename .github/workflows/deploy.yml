@@ -4,7 +4,9 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
-on: [deployment_status]
+on:
+  - deployment_status
+  - workflow_dispatch
 
 jobs:
   deploy:
