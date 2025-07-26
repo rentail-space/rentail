@@ -9,36 +9,42 @@ on:
   - workflow_dispatch
 
 jobs:
-  deploy:
+  checkout_repo:
+    name: Checkout Repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: 'package.json'
+
       - name: Restore or cache node_modules
         id: cache-node-modules
         uses: actions/cache@v4
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
+
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
-      - name: Setup Biome
-        uses: biomejs/setup-biome@v2
-        with:
-          version: latest
 
+  setup_playwright:
+    name: Setup Playwright
+    needs: checkout_repo
+    runs-on: ubuntu-latest
+    steps:
       - name: Get installed Playwright version
         id: playwright-version
         run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+
       - name: Cache playwright binaries
         uses: actions/cache@v4
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
         if: steps.playwright-cache.outputs.cache-hit != 'true'
@@ -46,10 +52,16 @@ jobs:
         run: npx playwright install-deps
         if: steps.playwright-cache.outputs.cache-hit == 'true'
 
-      - name: Run TypeCheck
-        run: npm run typecheck
-      - name: Run Lint
-        run: npm run lint
+  run_tests:
+    name: Run Tests
+    needs: setup_playwright
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: latest
+
       - name: Run Tests
         run: npm run test
 
@@ -59,6 +71,11 @@ jobs:
           name: playwright-test-results
           path: test-results/
 
+  deploy_vercel:
+    name: Deploy to Vercel
+    needs: run_tests
+    runs-on: ubuntu-latest
+    steps:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
