@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import truncateWords from "~/lib/truncateWords";
 
 export type FrontMatter = {
-  added: string;
+  added: Date;
   image?: { alt: string; src: string };
   title: string;
 };

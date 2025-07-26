@@ -102,7 +102,7 @@ export async function launchServer() {
         return resolve(server);
       }
 
-      console.debug(stream.toString());
+      // console.debug(stream.toString());
     });
   });
 }

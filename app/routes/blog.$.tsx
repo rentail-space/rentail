@@ -1,4 +1,5 @@
 import fm from "front-matter";
+import { DateTime } from "luxon";
 import Markdown from "react-markdown";
 import {
   type LoaderFunctionArgs,
@@ -42,11 +43,11 @@ export default function Post() {
         )}
 
         <div className="text-sm text-gray-500">
-          {new Date(attributes.added).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+          {DateTime.fromJSDate(attributes.added, {
+            zone: "utc",
+          })
+            .setZone("UTC")
+            .toFormat("LLLL dd, yyyy", { locale: "en-US" })}
         </div>
 
         <Markdown

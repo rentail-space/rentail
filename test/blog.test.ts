@@ -33,7 +33,7 @@ describe("Blog Post Rendering", () => {
     const dateElement = await page
       .locator(".text-sm.text-gray-500")
       .textContent();
-    expect(dateElement).toContain("July 18, 2025");
+    expect(dateElement).toContain("July 19, 2025");
 
     await page.close();
   });
@@ -167,7 +167,7 @@ describe("Blog Post Rendering", () => {
     const dateElement = await page
       .locator(".text-sm.text-gray-500")
       .textContent();
-    expect(dateElement).toContain("July 23, 2025");
+    expect(dateElement).toContain("July 24, 2025");
 
     await page.close();
   });
