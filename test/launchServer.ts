@@ -1,10 +1,11 @@
 import { spawn } from "node:child_process";
 import { existsSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import invariant from "tiny-invariant";
 
 const port = 9222;
-const lockFile = join(".", `rentail-server-${port}.lock`);
+const lockFile = join(tmpdir(), `rentail-server-${port}.lock`);
 
 let server:
   | {
