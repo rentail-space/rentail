@@ -2,17 +2,29 @@ import { spawn } from "node:child_process";
 import { existsSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import {
+  type Browser,
+  type BrowserContext,
+  chromium,
+  type Page,
+} from "playwright";
 import invariant from "tiny-invariant";
+import "./toMatchScreenshot";
 
 const port = 9222;
 const lockFile = join(tmpdir(), `rentail-server-${port}.lock`);
 
-let server:
-  | {
-      port: number;
-      stop: () => boolean;
-    }
-  | undefined;
+export const URL = `http://localhost:${port}`;
+
+let browser: Browser;
+let context: BrowserContext;
+let server: { port: number; stop: () => boolean };
+
+export async function launchBrowser(): Promise<Page> {
+  if (!browser) browser = await chromium.launch();
+  if (!context) context = await browser.newContext();
+  return await context.newPage();
+}
 
 export async function launchServer() {
   if (server) return server;
@@ -115,5 +127,3 @@ async function checkServerHealth(): Promise<boolean> {
     return false;
   }
 }
-
-export const URL = `http://localhost:${port}`;

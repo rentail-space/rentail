@@ -1,8 +1,6 @@
 import { expect } from "playwright/test";
 import { describe, it } from "vitest";
-import "./toMatchScreenshot";
-import { launchBrowser } from "./launchBrowser";
-import { launchServer, URL } from "./launchServer";
+import { launchBrowser, launchServer, URL } from "./e2e";
 
 describe("Home page", () => {
   it("home page", async () => {

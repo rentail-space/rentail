@@ -12,9 +12,7 @@
 import type { ConsoleMessage } from "playwright";
 import { expect } from "playwright/test";
 import { beforeAll, describe, test } from "vitest";
-import "./toMatchScreenshot";
-import { launchBrowser } from "./launchBrowser";
-import { launchServer, URL } from "./launchServer";
+import { launchBrowser, launchServer, URL } from "./e2e";
 
 describe("Blog Post Rendering", () => {
   beforeAll(async () => await launchServer());

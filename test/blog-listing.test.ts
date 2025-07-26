@@ -9,9 +9,7 @@
 
 import { expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
-import "./toMatchScreenshot";
-import { launchBrowser } from "./launchBrowser";
-import { launchServer, URL } from "./launchServer";
+import { launchBrowser, launchServer, URL } from "./e2e";
 
 describe("Blog Listing", () => {
   beforeAll(async () => await launchServer());
