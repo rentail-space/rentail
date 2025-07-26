@@ -1,8 +1,6 @@
 name: tests
 
-on: 
-  - deployment_status
-  - workflow_dispatch
+on: [deployment_status]
 
 jobs:
   deploy:
@@ -25,8 +23,22 @@ jobs:
         uses: biomejs/setup-biome@v2
         with:
           version: latest
+
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+      - name: Cache playwright binaries
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+      - name: Install Playwright Browsers - Cached
+        run: npx playwright install-deps
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
 
       - name: Run TypeCheck
         run: npm run typecheck
@@ -34,3 +46,9 @@ jobs:
         run: npm run lint
       - name: Run Tests
         run: npm run test
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-test-results
+          path: test-results/
