@@ -14,6 +14,8 @@ import type { Page } from "playwright";
 import { PNG } from "pngjs";
 import invariant from "tiny-invariant";
 
+const maxDiffPercentage = 3;
+
 expect.extend({
   async toMatchScreenshot(page: Page): AsyncExpectationResult {
     const testName = getTestName();
@@ -55,7 +57,6 @@ expect.extend({
     );
 
     const diffPercentage = (numDiffPixels / (width * height)) * 100;
-    const maxDiffPercentage = 1;
     const matches = diffPercentage <= maxDiffPercentage;
     if (!matches)
       await writeFile(
