@@ -20,12 +20,29 @@ let browser: Browser;
 let context: BrowserContext;
 let server: { port: number; stop: () => boolean };
 
+/**
+ * Launch the server and browser. Returns instance of server and browser page.
+ * @returns The browser page.
+ */
+export async function launch(): Promise<Page> {
+  await launchServer();
+  return await launchBrowser();
+}
+
+/**
+ * Launch a new browser instance.
+ * @returns The browser page.
+ */
 export async function launchBrowser(): Promise<Page> {
   if (!browser) browser = await chromium.launch();
   if (!context) context = await browser.newContext();
   return await context.newPage();
 }
 
+/**
+ * Launch a new server instance.
+ * @returns The server instance.
+ */
 export async function launchServer() {
   if (server) return server;
 
@@ -119,9 +136,13 @@ export async function launchServer() {
   });
 }
 
+/**
+ * Check if the server is healthy.
+ * @returns True if the server is running and responding to requests.
+ */
 async function checkServerHealth(): Promise<boolean> {
   try {
-    const response = await fetch(`http://localhost:${port}`);
+    const response = await fetch(URL);
     return response.ok;
   } catch {
     return false;

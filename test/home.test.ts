@@ -1,13 +1,12 @@
 import { expect } from "playwright/test";
 import { describe, it } from "vitest";
-import { launchBrowser, launchServer, URL } from "./e2e";
+import { launch, URL } from "./e2e";
 
 describe("Home page", () => {
   it("home page", async () => {
-    await launchServer();
-    const page = await launchBrowser();
+    const page = await launch();
     const response = await page.goto(URL);
-    await expect(page).toMatchScreenshot();
     expect(response?.status(), "should respond with 200").toEqual(200);
+    await expect(page).toMatchScreenshot();
   });
 });

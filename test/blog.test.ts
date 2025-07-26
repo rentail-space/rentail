@@ -11,14 +11,12 @@
 
 import type { ConsoleMessage } from "playwright";
 import { expect } from "playwright/test";
-import { beforeAll, describe, test } from "vitest";
-import { launchBrowser, launchServer, URL } from "./e2e";
+import { describe, test } from "vitest";
+import { launch, URL } from "./e2e";
 
 describe("Blog Post Rendering", () => {
-  beforeAll(async () => await launchServer());
-
   test("renders blog post with proper title and metadata", async () => {
-    const page = await launchBrowser();
+    const page = await launch();
     const response = await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
 
     expect(response?.status(), "should respond with 200").toEqual(200);
@@ -37,7 +35,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("renders blog post image with proper attributes", async () => {
-    const page = await launchBrowser();
+    const page = await launch();
     await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
 
     // Check if hero image is rendered
@@ -63,7 +61,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("renders markdown content with proper formatting", async () => {
-    const page = await launchBrowser();
+    const page = await launch();
     await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
 
     // Check for proper heading rendering
@@ -87,7 +85,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("handles links with proper styling", async () => {
-    const page = await launchBrowser();
+    const page = await launch();
     await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
 
     // Check if links are rendered with blue styling
@@ -102,7 +100,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("renders lists with proper indentation and styling", async () => {
-    const page = await launchBrowser();
+    const page = await launch();
     await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
 
     // Check for ordered lists
@@ -127,7 +125,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("displays blog post with correct layout structure", async () => {
-    const page = await launchBrowser();
+    const page = await launch();
     await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
 
     // Check main article structure
@@ -142,14 +140,14 @@ describe("Blog Post Rendering", () => {
   });
 
   test("handles non-existent blog posts with 404", async () => {
-    const page = await launchBrowser();
+    const page = await launch();
     const response = await page.goto(`${URL}/blog/non-existent-post`);
     expect(response?.status()).toEqual(404);
     await page.close();
   });
 
   test("renders second blog post correctly", async () => {
-    const page = await launchBrowser();
+    const page = await launch();
     const response = await page.goto(
       `${URL}/blog/2025-07-24-specialty-leasing`,
     );
@@ -171,7 +169,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("blog post visual regression test", async () => {
-    const page = await launchBrowser();
+    const page = await launch();
 
     // Set consistent viewport for screenshots
     await page.setViewportSize({ width: 1280, height: 720 });
@@ -188,7 +186,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("blog post is responsive on mobile viewport", async () => {
-    const page = await launchBrowser();
+    const page = await launch();
 
     // Set mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
@@ -216,14 +214,12 @@ describe("Blog Post Rendering", () => {
   });
 
   test("blog post content loads without JavaScript errors", async () => {
-    const page = await launchBrowser();
+    const page = await launch();
 
     // Listen for console errors
     const errors: string[] = [];
     page.on("console", (msg: ConsoleMessage) => {
-      if (msg.type() === "error") {
-        errors.push(msg.text());
-      }
+      if (msg.type() === "error") errors.push(msg.text());
     });
 
     await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
