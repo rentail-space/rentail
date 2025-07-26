@@ -5,7 +5,6 @@ import invariant from "tiny-invariant";
 
 const port = 9222;
 const lockFile = join(".", `rentail-server-${port}.lock`);
-const pidFile = join(".", `rentail-server-${port}.pid`);
 
 let server:
   | {
@@ -20,7 +19,7 @@ export async function launchServer() {
   // Check if lock file exists and server is running
   if (existsSync(lockFile)) {
     try {
-      const pidStr = readFileSync(pidFile, "utf8");
+      const pidStr = readFileSync(lockFile, "utf8");
       const pid = Number.parseInt(pidStr, 10);
 
       if (await checkServerHealth()) {
@@ -31,7 +30,6 @@ export async function launchServer() {
             try {
               process.kill(pid);
               unlinkSync(lockFile);
-              unlinkSync(pidFile);
               return true;
             } catch {
               return false;
@@ -44,13 +42,11 @@ export async function launchServer() {
       // Clean up stale lock files
       try {
         unlinkSync(lockFile);
-        unlinkSync(pidFile);
       } catch {}
     } catch {
       // Clean up corrupted lock files
       try {
         unlinkSync(lockFile);
-        unlinkSync(pidFile);
       } catch {}
     }
   }
@@ -63,8 +59,7 @@ export async function launchServer() {
 
   // Create lock file
   invariant(process.pid, "Server process ID is not available");
-  writeFileSync(lockFile, new Date().toISOString());
-  writeFileSync(pidFile, process.pid.toString());
+  writeFileSync(lockFile, process.pid.toString());
 
   return await new Promise<{
     port: number;
@@ -79,7 +74,6 @@ export async function launchServer() {
       clearTimeout(timeout);
       try {
         unlinkSync(lockFile);
-        unlinkSync(pidFile);
       } catch {}
       reject(error);
     });
@@ -98,7 +92,6 @@ export async function launchServer() {
             try {
               process.kill();
               unlinkSync(lockFile);
-              unlinkSync(pidFile);
               return true;
             } catch {
               return false;
