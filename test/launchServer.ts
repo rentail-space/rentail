@@ -53,14 +53,10 @@ export async function launchServer() {
   }
 
   // Start new server instance
-  const process = spawn(
-    "npm",
-    ["run", "dev", "--", "--port", port.toString()],
-    {
-      detached: true,
-      stdio: ["pipe", "pipe", "pipe"],
-    },
-  );
+  const process = spawn("react-router", ["dev", "--port", port.toString()], {
+    detached: true,
+    stdio: ["pipe", "pipe", "pipe"],
+  });
 
   // Create lock file
   invariant(process.pid, "Server process ID is not available");
