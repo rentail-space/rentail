@@ -1,4 +1,8 @@
+import dotenv from "dotenv";
 import env from "env-var";
+
+// NOTE This is used in GitHub Actions to load test enviroment from .env file.
+dotenv.config();
 
 export default {
   isProduction: env.get("NODE_ENV").asString() === "production",
