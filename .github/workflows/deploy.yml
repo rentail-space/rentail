@@ -74,8 +74,13 @@ jobs:
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
+      - name: Install CLI
+        uses: dopplerhq/cli-action@v3
+
       - name: Build Project Artifacts
         run: doppler run --config prd -- vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
