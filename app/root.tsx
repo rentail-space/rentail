@@ -178,6 +178,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="author" content="rentail.space" />
         <meta name="theme-color" content="#2563eb" />
         <meta name="robots" content="index, follow" />
+        {/* Touch web app title */}
+        <meta name="application-name" content="rentail.space" />
+        <meta name="apple-mobile-web-app-title" content="rentail.space" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <Meta />
         <Links />
         {structuredData.map((data) => (
