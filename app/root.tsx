@@ -134,22 +134,27 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="author" content="rentail.space" />
         <meta name="theme-color" content="#2563eb" />
         <meta name="robots" content="index, follow" />
-        <meta
-          name="og:title"
-          content="rentail.space — Find your specialty lease with ease"
-        />
-        <meta name="og:description" content={description} />
-        <meta name="og:image" content={`${url}/og-image.png`} />
-        <meta name="og:url" content={url} />
-        <meta name="og:type" content="website" />
-        <meta name="og:site_name" content="rentail.space" />
-        <meta name="og:locale" content="en_US" />
+
+        {/* Google / Search Engine Tags */}
+        <meta itemProp="name" content={title} />
+        <meta itemProp="description" content={description} />
+        <meta itemProp="image" content="https://rentail.space//og-image.png" />
+
+        {/* Facebook Meta Tags */}
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={`${url}/og-image.png`} />
+        <meta property="og:title" content={title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={url} />
+
+        {/* Twitter Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@rentailspace" />
         <meta name="twitter:creator" content="@rentailspace" />
-        <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={`${url}/og-image.png`} />
+        <meta name="twitter:site" content="@rentailspace" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:url" content={url} />
         <Meta />
         <Links />
         {structuredData.map((data) => (
