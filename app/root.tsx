@@ -46,7 +46,7 @@ export const links: LinksFunction = () => [
 const url = "https://rentail.space/";
 const title = "rentail.space — Find your specialty lease with ease";
 const description =
-  "Discover short-term retail spaces and pop-up shop opportunities in shopping centers nationwide. Connect with landlords offering specialty leases for seasonal retail, temporary stores, and unique business concepts.";
+  "Discover short-term retail spaces and pop-up shop opportunities nationwide: seasonal retail, temporary stores, and unique business concepts.";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const structuredData = [
