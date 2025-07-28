@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import Markdown from "react-markdown";
 import {
   type LoaderFunctionArgs,
+  type MetaFunction,
   type Params,
   useLoaderData,
 } from "react-router";
@@ -14,7 +15,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   return { post };
 }
 
-async function loadFile(params: Params<string>) {
+async function loadFile(params: Params<string>): Promise<string> {
   const { "*": slug } = params;
   try {
     const post = await import(`../data/blog/${slug}.md?raw`);
@@ -23,6 +24,35 @@ async function loadFile(params: Params<string>) {
     throw new Response("Not Found", { status: 404 });
   }
 }
+
+export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
+  const { "*": slug } = params;
+  const { attributes } = fm<FrontMatter>(data?.post ?? "");
+  return [
+    { title: attributes.title },
+
+    // Facebook Meta Tags
+    { property: "og:article:section", content: "Blog" },
+    { property: "og:image", content: attributes.image?.src },
+    {
+      property: "og:published_time",
+      content: DateTime.fromJSDate(attributes.added, { zone: "utc" })
+        .setZone("UTC")
+        .toFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", { locale: "en-US" }),
+    },
+    { property: "og:title", content: attributes.title },
+    { property: "og:type", content: "article" },
+    { property: "og:url", content: `https://rentail.space/blog/${slug}` },
+
+    // Twitter Meta Tags
+    { property: "twitter:title", content: attributes.title },
+    { property: "twitter:url", content: `https://rentail.space/blog/${slug}` },
+    { property: "twitter:card", content: "summary_large_image" },
+    { property: "twitter:creator", content: "@rentailspace" },
+    { property: "twitter:image", content: attributes.image?.src },
+    { property: "twitter:site", content: "@rentailspace" },
+  ];
+};
 
 export default function Post() {
   const { post } = useLoaderData<typeof loader>();
