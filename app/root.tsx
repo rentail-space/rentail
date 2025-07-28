@@ -4,7 +4,6 @@ import {
   Links,
   type LinksFunction,
   Meta,
-  type MetaFunction,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -37,49 +36,17 @@ export const links: LinksFunction = () => [
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
   { rel: "canonical", href: url },
+  {
+    rel: "icon",
+    href: "/favicon.ico",
+    type: "image/x-icon",
+  },
 ];
 
 const url = "https://rentail.space/";
 const title = "rentail.space — Find your specialty lease with ease";
 const description =
   "Discover short-term retail spaces and pop-up shop opportunities in shopping centers nationwide. Connect with landlords offering specialty leases for seasonal retail, temporary stores, and unique business concepts.";
-
-export const meta: MetaFunction = () => [
-  {
-    title,
-  },
-  {
-    name: "description",
-    content: description,
-  },
-  {
-    name: "keywords",
-    content: [
-      "pop-up retail space",
-      "pop-up shop space for rent",
-      "seasonal retail space",
-      "shopping center kiosk rental",
-      "short term retail lease",
-      "specialty lease",
-      "temporary retail space rental",
-    ],
-  },
-  { property: "og:title", content: title },
-  { property: "og:description", content: description },
-  { property: "og:image", content: `${url}/og-image.png` },
-  { property: "og:url", content: url },
-  { property: "og:type", content: "website" },
-  { property: "og:site_name", content: "rentail.space" },
-  { name: "twitter:card", content: "summary_large_image" },
-  { name: "twitter:site", content: "@rentailspace" },
-  { name: "twitter:creator", content: "@rentailspace" },
-  { name: "twitter:title", content: title },
-  { name: "twitter:description", content: description },
-  { name: "twitter:image", content: `${url}/og-image.png` },
-  { name: "robots", content: "index, follow" },
-  { name: "author", content: "rentail.space" },
-  { name: "theme-color", content: "#2563eb" },
-];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const structuredData = [
@@ -158,6 +125,31 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta
+          name="keywords"
+          content="pop-up retail space, pop-up shop space for rent, seasonal retail space, shopping center kiosk rental, short term retail lease, specialty lease, temporary retail space rental"
+        />
+        <meta name="author" content="rentail.space" />
+        <meta name="theme-color" content="#2563eb" />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="og:title"
+          content="rentail.space — Find your specialty lease with ease"
+        />
+        <meta name="og:description" content={description} />
+        <meta name="og:image" content={`${url}/og-image.png`} />
+        <meta name="og:url" content={url} />
+        <meta name="og:type" content="website" />
+        <meta name="og:site_name" content="rentail.space" />
+        <meta name="og:locale" content="en_US" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@rentailspace" />
+        <meta name="twitter:creator" content="@rentailspace" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={`${url}/og-image.png`} />
         <Meta />
         <Links />
         {structuredData.map((data) => (
