@@ -6,13 +6,7 @@
     "useIgnoreFile": false
   },
   "files": {
-    "includes": [
-      "**",
-      "!.react-router",
-      "!node_modules",
-      "!build",
-      "!.vercel"
-    ],
+    "includes": ["**", "!.react-router", "!node_modules", "!build", "!.vercel"],
     "ignoreUnknown": false
   },
   "formatter": {

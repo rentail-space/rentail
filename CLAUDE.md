@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Build: `npm run build` (react-router build for production)
 - Start: `npm run start` (starts production server)
 - Type check: `npm run typecheck` (includes react-router typegen)
-- Test: `npm run test` (vitest with verbose reporter)
+- Test: `npm run test` (lint + typecheck + vitest with verbose reporter)
 - Lint: `npm run lint` (Biome linter)
 - Format: `npm run format --write` (Biome formatter)
 - Check: `npm run check` (runs both lint and typecheck)
@@ -43,9 +43,10 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 
 **File-Based Routing:**
 Routes are configured in `/app/routes.ts` using React Router v7's declarative routing:
-- `/` - Home route (`routes/home.tsx`) with marketing content
-- `/chat` - Chat interface for space discovery
-- `/api/chat` - Streaming AI chat endpoint
+- `/` - Home route (`routes/home/route.tsx`) with marketing content
+- `/chat` - Chat interface for space discovery (`routes/chat/route.tsx`)
+- `/blog/$` - Dynamic blog post routes (`routes/blog.$.tsx`)
+- `/api/chat` - Streaming AI chat endpoint (`routes/api.chat.tsx`)
 - Root layout in `/app/root.tsx` with HTML shell and global components
 
 **SSR Configuration:**
@@ -68,13 +69,14 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 ## Tests
 
 - Test files should end with ".test.ts" or ".test.tsx"
-- Place test files in `/app` directory alongside source code
+- Place test files in `/test` directory (NOT in `/app` directory alongside source code)
 - Use Vitest framework with Node.js environment and Playwright browser provider
-- Tests run from `/app/**/*.test.{ts,tsx}` with setup in `/test/setup.ts`
+- Tests run from `/**/*.test.{ts,tsx}` with setup in `/test/setup.ts`
 - Visual regression testing with Playwright and custom `toMatchScreenshot` matcher
 - Screenshots stored in `__screenshots__` directory
 - Checkly monitoring tests in `__checks__` directory
 - Requires Node.js 22.0.0 or higher
+- Tests use custom server launcher (`test/e2e.ts`) that starts dev server on port 9222
 
 ## Environment Variables
 
@@ -103,7 +105,7 @@ Optional environment variables:
   - `/app/root.tsx`: Root layout with HTML shell and Sentry
   - `/app/routes/`: Individual route components
   - `/app/lib/`: Shared utilities (AI model, logging, system prompt)
-  - `/app/data/`: External data files (user data, etc.)
+  - `/app/data/`: External data files (user data, blog posts)
   - `/app/entry.server.tsx`: Server-side rendering entry point with request logging
   - `/app/app.css`: Global Tailwind CSS imports
 - `/build`: Production build output (client/server bundles)
