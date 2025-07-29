@@ -64,7 +64,6 @@ export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
 export default function Post() {
   const { post, slug } = useLoaderData<typeof loader>();
   const { attributes, body } = fm<FrontMatter>(post);
-  const plainText = removeMd(body);
   const datePublished = DateTime.fromJSDate(attributes.added, {
     zone: "utc",
   }).setZone("UTC");
