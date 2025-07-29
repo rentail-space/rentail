@@ -14,6 +14,7 @@ import {
 import "./app.css";
 import ReactGA from "react-ga4";
 import ErrorBoundary from "./components/ErrorBoundary";
+import schema from "./data/schema.json";
 import serverConfig from "./lib/config";
 
 export async function loader() {
@@ -45,13 +46,13 @@ export const meta: MetaFunction<typeof loader> = () => {
     { property: "og:title", content: title },
     { property: "og:type", content: "website" },
     { property: "og:url", content: url },
+    { property: "og:site_name", content: "Rentail Space" },
+    { property: "og:locale", content: "en_US" },
 
     // Twitter Meta Tags
     { property: "twitter:card", content: "summary_large_image" },
-    { property: "twitter:creator", content: "@rentailspace" },
     { property: "twitter:description", content: description },
     { property: "twitter:image", content: `${url}/og-image.png` },
-    { property: "twitter:site", content: "@rentailspace" },
     { property: "twitter:title", content: title },
     { property: "twitter:url", content: url },
   ];
@@ -94,68 +95,6 @@ export const links: LinksFunction = () => [
   },
 ];
 
-const structuredData = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "rentail.space",
-    url,
-    logo: `${url}/logo.png`,
-    description:
-      "Marketplace for specialty retail spaces and short-term leases. Connect businesses with shopping centers in Los Angeles for pop-up shops and seasonal retail opportunities.",
-    address: {
-      "@type": "PostalAddress",
-      addressRegion: "CA",
-      addressCountry: "US",
-      addressLocality: "Los Angeles",
-    },
-    areaServed: {
-      "@type": "GeoCircle",
-      geoMidpoint: {
-        "@type": "GeoCoordinates",
-        latitude: 34.0522,
-        longitude: -118.2437,
-      },
-      geoRadius: "50000",
-    },
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "customer service",
-      areaServed: "Los Angeles, CA",
-      availableLanguage: "en",
-    },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${url}/chat?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `${url}#the-grove`,
-    name: "The Grove - Retail Space Rentals",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "189 The Grove Dr",
-      addressLocality: "Los Angeles",
-      addressRegion: "CA",
-      postalCode: "90036",
-      addressCountry: "US",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 34.0722,
-      longitude: -118.3559,
-    },
-    telephone: "+1-555-RENTAIL",
-    url: `${url}/chat`,
-    description:
-      "Specialty lease opportunities and short-term retail rentals at The Grove LA",
-    priceRange: "$$",
-  },
-];
-
 export function Layout({ children }: { children: React.ReactNode }) {
   const fromLoader = useLoaderData<typeof loader | undefined>();
   useEffect(() => ReactGA.initialize("G-HLE5G8GC5Y"), []);
@@ -164,6 +103,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     if (fromLoader?.ENV.NODE_ENV === "production")
       ReactGA.send({ hitType: "pageview", page: location.pathname });
   }, [location.pathname, fromLoader?.ENV.NODE_ENV]);
+  const canonicalUrl = `https://rentail.space${location.pathname}`;
 
   return (
     <html lang="en">
@@ -177,19 +117,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
         <meta name="author" content="rentail.space" />
         <meta name="theme-color" content="#2563eb" />
-        <meta name="robots" content="index, follow" />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
         {/* Touch web app title */}
         <meta name="application-name" content="rentail.space" />
         <meta name="apple-mobile-web-app-title" content="rentail.space" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="canonical" href={canonicalUrl} />
         <Meta />
         <Links />
-        {structuredData.map((data) => (
-          <script key={data.name} type="application/ld+json">
-            {JSON.stringify(data)}
-          </script>
-        ))}
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </head>
       <body>
         {children}

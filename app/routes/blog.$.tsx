@@ -7,19 +7,22 @@ import {
   type Params,
   useLoaderData,
 } from "react-router";
+import invariant from "tiny-invariant";
 import Layout from "~/components/layout/Layout";
 import type { FrontMatter } from "./home/BlogPosts";
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  const post = await loadFile(params);
-  return { post };
+  return await loadFile(params);
 }
 
-async function loadFile(params: Params<string>): Promise<string> {
+async function loadFile(
+  params: Params<string>,
+): Promise<{ post: string; slug: string }> {
   const { "*": slug } = params;
   try {
+    invariant(slug, "Slug is required");
     const post = await import(`../data/blog/${slug}.md?raw`);
-    return post.default;
+    return { post: post.default, slug };
   } catch {
     throw new Response("Not Found", { status: 404 });
   }
@@ -32,6 +35,7 @@ export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
     { title: attributes.title },
 
     // Facebook Meta Tags
+    { property: "og:article:author", content: "Rentail Space" },
     { property: "og:article:section", content: "Blog" },
     { property: "og:image", content: attributes.image?.src },
     {
@@ -43,20 +47,25 @@ export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
     { property: "og:title", content: attributes.title },
     { property: "og:type", content: "article" },
     { property: "og:url", content: `https://rentail.space/blog/${slug}` },
+    { property: "og:site_name", content: "Rentail Space" },
+    { property: "og:locale", content: "en_US" },
 
     // Twitter Meta Tags
     { property: "twitter:title", content: attributes.title },
     { property: "twitter:url", content: `https://rentail.space/blog/${slug}` },
     { property: "twitter:card", content: "summary_large_image" },
-    { property: "twitter:creator", content: "@rentailspace" },
     { property: "twitter:image", content: attributes.image?.src },
     { property: "twitter:site", content: "@rentailspace" },
   ];
 };
 
 export default function Post() {
-  const { post } = useLoaderData<typeof loader>();
+  const { post, slug } = useLoaderData<typeof loader>();
   const { attributes, body } = fm<FrontMatter>(post);
+  const datePublished = DateTime.fromJSDate(attributes.added, {
+    zone: "utc",
+  }).setZone("UTC");
+
   return (
     <Layout>
       <article className="prose prose-lg mx-auto">
@@ -73,11 +82,7 @@ export default function Post() {
         )}
 
         <div className="text-sm text-gray-500">
-          {DateTime.fromJSDate(attributes.added, {
-            zone: "utc",
-          })
-            .setZone("UTC")
-            .toFormat("LLLL dd, yyyy", { locale: "en-US" })}
+          {datePublished.toFormat("LLLL dd, yyyy", { locale: "en-US" })}
         </div>
 
         <Markdown
@@ -134,6 +139,20 @@ export default function Post() {
           {body}
         </Markdown>
       </article>
+
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@id": `https://rentail.space/blog/${slug}`,
+          "@type": "WebPage",
+          datePublished: datePublished.toISO(),
+          primaryImageOfPage: {
+            "@id": attributes.image?.src,
+            "@type": "ImageObject",
+            contentUrl: attributes.image?.src,
+            caption: attributes.image?.alt,
+          },
+        })}
+      </script>
     </Layout>
   );
 }

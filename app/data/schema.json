@@ -1,0 +1,45 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Rentail Space",
+      "email": "hello@rentail.space",
+      "url": "https://rentail.space",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "CA",
+        "addressCountry": "US",
+        "addressLocality": "Los Angeles"
+      },
+      "image": "https://rentail.space/og-image.png",
+      "logo": "https://rentail.space/og-image.png",
+      "sameAs": [
+        "https://www.linkedin.com/company/rentailspace"
+      ]
+    },
+    {
+      "@id": "https://rentail.space",
+      "@type": "WebSite",
+      "description": "Marketplace for specialty retail spaces and short-term leases. Connect businesses with shopping centers in Los Angeles for pop-up shops and seasonal retail opportunities.",
+      "inLanguage": "en-US",
+      "name": "Rentail Space",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "query-input": "required name=search_term_string",
+        "target": "https://rentail.space/chat?q={search_term_string}"
+      },
+      "url": "https://rentail.space"
+    },
+    {
+      "@id": "https://rentail.space#primaryimage",
+      "@type": "ImageObject",
+      "caption": "Two people sharing and exchanging items",
+      "contentUrl": "https://rentail.space/hero-image.jpg",
+      "name": "Hero Image",
+      "url": "https://rentail.space/hero-image.jpg",
+      "height": 533,
+      "width": 800
+    }
+  ]
+}

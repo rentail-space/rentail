@@ -1,10 +1,19 @@
 import { Link } from "react-router";
+import type { ImageObject } from "schema-dts";
+import invariant from "tiny-invariant";
+import schema from "../../data/schema.json";
 
 export default function HeroSection({
   howItWorksId,
 }: {
   howItWorksId: string;
 }) {
+  const heroImage = schema["@graph"].find(
+    (item) => item["@type"] === "ImageObject",
+  ) as ImageObject;
+  invariant(heroImage, "Hero image not found");
+  invariant(heroImage.contentUrl, "Hero image content URL not found");
+
   return (
     <section className="hero bg-gradient-to-r from-blue-50 to-indigo-50 py-20">
       <div className="container mx-auto px-4">
@@ -32,9 +41,11 @@ export default function HeroSection({
             <div className="relative">
               <div className="bg-white p-2 rounded-2xl shadow-xl">
                 <img
-                  src="https://plus.unsplash.com/premium_photo-1731498609507-2ee3ce286e3b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8QSUyMGdyb3VwJTIwb2YlMjBwZW9wbGUlMjBzaGFyaW5nJTIwYW5kJTIwZXhjaGFuZ2luZyUyMGl0ZW1zfGVufDB8fDB8fHww"
-                  alt="A group of people sharing and exchanging items"
+                  alt={heroImage.caption?.toString()}
                   className="rounded-xl w-full h-auto"
+                  height={heroImage.height?.toString() ?? "auto"}
+                  src={new URL(heroImage.contentUrl.toString()).pathname}
+                  width={heroImage.width?.toString() ?? "auto"}
                 />
               </div>
               <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-4 py-2 rounded-lg">
