@@ -13,7 +13,7 @@ export function Footer() {
           <span>All rights reserved</span>
           <Link
             className="text-blue-500"
-            to="mailto:info@rentail.space"
+            to="mailto:hello@rentail.space"
             viewTransition
           >
             Contact us
