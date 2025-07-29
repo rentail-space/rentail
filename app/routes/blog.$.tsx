@@ -9,6 +9,7 @@ import {
 } from "react-router";
 import invariant from "tiny-invariant";
 import Layout from "~/components/layout/Layout";
+import truncateWords from "~/lib/truncateWords";
 import type { FrontMatter } from "./home/BlogPosts";
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -65,21 +66,20 @@ export default function Post() {
   const datePublished = DateTime.fromJSDate(attributes.added, {
     zone: "utc",
   }).setZone("UTC");
+  invariant(attributes.image, "Image is required");
 
   return (
     <Layout>
       <article className="prose prose-lg mx-auto">
         <h1>{attributes.title}</h1>
 
-        {attributes.image && (
-          <figure className="relative left-[calc(-50vw+50%)] my-4 overflow-x-hidden w-screen">
-            <img
-              alt={attributes.image.alt}
-              className="w-full h-[60vh] object-cover"
-              src={attributes.image.src}
-            />
-          </figure>
-        )}
+        <figure className="relative left-[calc(-50vw+50%)] my-4 overflow-x-hidden w-screen">
+          <img
+            alt={attributes.image.alt}
+            className="w-full h-[60vh] object-cover"
+            src={attributes.image.src}
+          />
+        </figure>
 
         <div className="text-sm text-gray-500">
           {datePublished.toFormat("LLLL dd, yyyy", { locale: "en-US" })}
@@ -142,14 +142,17 @@ export default function Post() {
 
       <script type="application/ld+json">
         {JSON.stringify({
-          "@id": `https://rentail.space/blog/${slug}`,
+          "@context": "https://schema.org",
           "@type": "WebPage",
-          datePublished: datePublished.toISO(),
+          "@id": `https://rentail.space/blog/${slug}`,
+          datePublished: datePublished.toISODate(),
+          description: truncateWords(body, 50),
+          name: attributes.title,
           primaryImageOfPage: {
-            "@id": attributes.image?.src,
+            "@id": attributes.image.src,
             "@type": "ImageObject",
-            contentUrl: attributes.image?.src,
-            caption: attributes.image?.alt,
+            contentUrl: new URL(attributes.image.src, "https://rentail.space"),
+            caption: attributes.image.alt,
           },
         })}
       </script>
