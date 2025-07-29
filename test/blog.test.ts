@@ -46,7 +46,7 @@ describe("Blog Post Rendering", () => {
     const imageSrc = await heroImage.getAttribute("src");
     const imageAlt = await heroImage.getAttribute("alt");
 
-    expect(imageSrc).toBe("/blog/ultimate-guide.webp");
+    expect(imageSrc).toBe("/blog/2025-07-19-ultimate-guide.jpg");
     expect(imageAlt).toBe(
       "Person standing inside a sunlit empty retail space holding a tablet, reviewing the lease for a new business location.",
     );
