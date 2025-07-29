@@ -7,6 +7,7 @@ import {
   type Params,
   useLoaderData,
 } from "react-router";
+import removeMd from "remove-markdown";
 import invariant from "tiny-invariant";
 import Layout from "~/components/layout/Layout";
 import truncateWords from "~/lib/truncateWords";
@@ -63,6 +64,7 @@ export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
 export default function Post() {
   const { post, slug } = useLoaderData<typeof loader>();
   const { attributes, body } = fm<FrontMatter>(post);
+  const plainText = removeMd(body);
   const datePublished = DateTime.fromJSDate(attributes.added, {
     zone: "utc",
   }).setZone("UTC");
@@ -146,7 +148,8 @@ export default function Post() {
           "@type": "WebPage",
           "@id": `https://rentail.space/blog/${slug}`,
           datePublished: datePublished.toISODate(),
-          description: truncateWords(body, 50),
+          description: truncateWords(removeMd(body), 50),
+          inLanguage: "en-US",
           name: attributes.title,
           primaryImageOfPage: {
             "@id": attributes.image.src,
