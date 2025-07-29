@@ -23,7 +23,12 @@ export default function ResponseMessage({
   return (
     <div className="chat chat-start ">
       <div className="chat-image avatar w-8 h-8 mr-2">
-        <img alt="rental space" height="32px" src="/logo.png" width="32px" />
+        <img
+          alt="rental space"
+          height="32px"
+          src="/favicon-96x96.png"
+          width="32px"
+        />
       </div>
       <div className="chat-bubble prose prose-base">
         <Markdown
