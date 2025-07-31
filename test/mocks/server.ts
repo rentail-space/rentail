@@ -8,7 +8,7 @@ export const server = setupServer(...handlers);
 if (config.isDebug)
   server.events.on("response:mocked", ({ request, response }) =>
     console.debug(
-      "MSW: %s %s => %s",
+      "[MSW] %s %s => %s",
       request.method,
       request.url,
       response.status,
@@ -16,5 +16,9 @@ if (config.isDebug)
   );
 
 server.events.on("request:unhandled", ({ request }) =>
-  console.error("MSW: Unhandled request: %s %s", request.method, request.url),
+  console.error("[MSW] Unhandled request: %s %s", request.method, request.url),
+);
+
+server.events.on("unhandledException", ({ request, error }) =>
+  console.error("[MSW] %s %s errored!", request.method, request.url, error),
 );
