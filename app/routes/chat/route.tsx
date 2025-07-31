@@ -1,10 +1,6 @@
 /** biome-ignore-all lint/a11y/noAutofocus: User needs to focus on input field */
 import { useChat } from "@ai-sdk/react";
-import {
-  DefaultChatTransport,
-  TextStreamChatTransport,
-  type UIMessage,
-} from "ai";
+import { TextStreamChatTransport, type UIMessage } from "ai";
 import {
   type FormEvent,
   type RefObject,

@@ -24,16 +24,8 @@ let server: { port: number; stop: () => boolean };
  * Launch the server and browser. Returns instance of server and browser page.
  * @returns The browser page.
  */
-export async function launch(): Promise<Page> {
-  await launchServer();
-  return await launchBrowser();
-}
-
-/**
- * Launch a new browser instance.
- * @returns The browser page.
- */
 export async function launchBrowser(): Promise<Page> {
+  await launchServer();
   if (!browser) browser = await chromium.launch();
   if (!context) context = await browser.newContext();
   return await context.newPage();
@@ -43,7 +35,7 @@ export async function launchBrowser(): Promise<Page> {
  * Launch a new server instance.
  * @returns The server instance.
  */
-export async function launchServer() {
+async function launchServer() {
   if (server) return server;
 
   // Check if lock file exists and server is running

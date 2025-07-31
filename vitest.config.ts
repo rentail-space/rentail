@@ -10,7 +10,7 @@ export default defineConfig({
     globals: true,
     include: ["./**/*.test.{ts,tsx}"],
     pool: "forks",
-    setupFiles: ["./test/setup.ts"],
+    setupFiles: ["./test/helpers/setup.ts"],
     testTimeout: 30000, // 30 seconds for E2E tests with browser launches
   },
 });

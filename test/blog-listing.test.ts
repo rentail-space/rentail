@@ -9,11 +9,11 @@
 
 import { expect } from "playwright/test";
 import { describe, it } from "vitest";
-import { launch, URL } from "./e2e";
+import { launchBrowser, URL } from "./helpers/launchBrowser";
 
 describe("Blog Listing", () => {
   it("displays blog posts on home page", async () => {
-    const page = await launch();
+    const page = await launchBrowser();
     const response = await page.goto(URL);
 
     expect(response?.status(), "should respond with 200").toEqual(200);
@@ -31,7 +31,7 @@ describe("Blog Listing", () => {
   });
 
   it("blog post links have proper titles and excerpts", async () => {
-    const page = await launch();
+    const page = await launchBrowser();
     await page.goto(URL);
 
     // Find blog post links
@@ -60,7 +60,7 @@ describe("Blog Listing", () => {
   });
 
   it("navigates to blog post when clicking link", async () => {
-    const page = await launch();
+    const page = await launchBrowser();
     await page.goto(URL);
 
     // Find first blog post link
@@ -91,7 +91,7 @@ describe("Blog Listing", () => {
   });
 
   it("blog listing has proper prose styling", async () => {
-    const page = await launch();
+    const page = await launchBrowser();
     await page.goto(URL);
 
     // Check blog section styling
@@ -107,7 +107,7 @@ describe("Blog Listing", () => {
   });
 
   it("blog links have hover styling", async () => {
-    const page = await launch();
+    const page = await launchBrowser();
     await page.goto(URL);
 
     // Check blog post links for hover classes
@@ -123,7 +123,7 @@ describe("Blog Listing", () => {
   });
 
   it("displays multiple blog posts if available", async () => {
-    const page = await launch();
+    const page = await launchBrowser();
     await page.goto(URL);
 
     // Count blog post links
@@ -146,7 +146,7 @@ describe("Blog Listing", () => {
   });
 
   it("blog listing visual regression test", async () => {
-    const page = await launch();
+    const page = await launchBrowser();
     // Set consistent viewport for screenshots
     await page.setViewportSize({ width: 1280, height: 720 });
 
