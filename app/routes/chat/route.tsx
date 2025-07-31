@@ -1,6 +1,10 @@
 /** biome-ignore-all lint/a11y/noAutofocus: User needs to focus on input field */
 import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport, type UIMessage } from "ai";
+import {
+  DefaultChatTransport,
+  TextStreamChatTransport,
+  type UIMessage,
+} from "ai";
 import {
   type FormEvent,
   type RefObject,
@@ -33,9 +37,16 @@ export default function Chat() {
   const [canEdit, setCanEdit] = useState(true);
 
   const { error, messages, sendMessage, status } = useChat({
-    messages: [{ parts: [{ text: welcome }], role: "assistant" } as UIMessage],
+    messages: [
+      {
+        parts: [{ text: welcome, type: "text" }],
+        role: "assistant",
+      } as UIMessage,
+    ],
     onFinish: () => setCanEdit(true),
-    transport: new DefaultChatTransport({ api: "/api/chat" }),
+    transport: new TextStreamChatTransport({
+      api: "/api/chat",
+    }),
   });
   const [input, setInput] = useState("");
 
@@ -47,7 +58,7 @@ export default function Chat() {
   useEffect(() => {
     if (initialQuery && messages.length === 1) {
       sendMessage({
-        parts: [{ text: initialQuery }],
+        parts: [{ text: initialQuery, type: "text" }],
         role: "user",
       } as UIMessage);
     }
@@ -56,7 +67,7 @@ export default function Chat() {
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     sendMessage({
-      parts: [{ text: input.trim() }],
+      parts: [{ text: input.trim(), type: "text" }],
       role: "user",
     } as UIMessage);
     setSearchParams((prev) => ({ ...prev, q: input.trim() }));
@@ -113,9 +124,10 @@ function Messages({
       className="flex flex-1 flex-col gap-4 overflow-y-auto p-6 mx-auto w-full justify-end mt-2"
       ref={messagesRef}
     >
-      {messages.map((message) => (
+      {messages.map((message, index) => (
         <MessageBubble
-          key={message.id}
+          // biome-ignore lint/suspicious/noArrayIndexKey: we need to use the index as the key
+          key={index}
           message={message}
           setInput={setInput}
           inputId={inputId}
@@ -144,7 +156,10 @@ function MessageBubble({
   return isUser ? (
     <div className="chat chat-end prose">
       <div className="chat-bubble chat-bubble-accent">
-        {message.parts.map((part) => (part.type === "text" ? part.text : null))}
+        {message.parts.map((part, index) =>
+          // biome-ignore lint/suspicious/noArrayIndexKey: we need to use the index as the key
+          part.type === "text" ? <span key={index}>{part.text}</span> : null,
+        )}
       </div>
     </div>
   ) : (

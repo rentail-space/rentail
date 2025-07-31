@@ -1,4 +1,4 @@
-import { type ModelMessage, streamText } from "ai";
+import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import invariant from "tiny-invariant";
 import model from "~/lib/llm";
 import general from "../lib/general.md?raw";
@@ -9,11 +9,29 @@ invariant(general, "General prompt is required");
 invariant(spaces, "Centers list is required");
 
 export async function action({ request }: Route.ActionArgs) {
-  const { messages } = (await request.json()) as { messages: ModelMessage[] };
+  const { messages }: { messages: UIMessage[] } = await request.json();
   const result = streamText({
-    messages,
+    messages: convertToModelMessages(messages),
     model,
     system: [general, spaces].join("\n\n=====\n\n"),
   });
-  return result.toUIMessageStreamResponse();
+  return result.toTextStreamResponse();
 }
+
+/**
+ * {
+ *   "id":"Nv2i6Na7LGdM4QLx",
+ *   "messages":[
+ *     {
+ *       "parts":[{"text":"Welcome to **rentail.space**!\n\nI'm your virtual assistant here to help you find the perfect retail space for\nyour business needs.  How can I assist you today?"}],
+ *       "role":"assistant"
+ *     },
+ *     {
+ *       "parts":[{"text":"What are the available retail spaces?"}],
+ *       "role":
+ *       "user","id":"RNf0kp5K0xhgmH3O"
+ *     }
+ *   ],
+ *   "trigger":"submit-message"
+ * }
+ */

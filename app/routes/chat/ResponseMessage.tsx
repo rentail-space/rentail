@@ -1,4 +1,4 @@
-import type { UIMessage } from "@ai-sdk/react";
+import type { TextUIPart, UIMessage } from "ai";
 import type { RefObject } from "react";
 import Markdown from "react-markdown";
 
@@ -39,9 +39,7 @@ export default function ResponseMessage({
             setInput,
           })}
         >
-          {message.parts
-            .map((part) => (part.type === "text" ? part.text : null))
-            .join("")}
+          {message.parts.map((part) => (part as TextUIPart).text).join("")}
         </Markdown>
       </div>
     </div>
