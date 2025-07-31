@@ -10,6 +10,7 @@ import {
 } from "playwright";
 import invariant from "tiny-invariant";
 import "./toMatchScreenshot";
+import config from "~/lib/config";
 
 const port = 9222;
 const lockFile = join(tmpdir(), `rentail-server-${port}.lock`);
@@ -19,6 +20,7 @@ export const URL = `http://localhost:${port}`;
 let browser: Browser;
 let context: BrowserContext;
 let server: { port: number; stop: () => boolean };
+const stdout = process.stdout;
 
 /**
  * Launch the server and browser. Returns instance of server and browser page.
@@ -122,8 +124,7 @@ async function launchServer() {
         };
         return resolve(server);
       }
-
-      // console.debug(stream.toString());
+      if (config.isDebug) stdout.write(stream.toString());
     });
   });
 }

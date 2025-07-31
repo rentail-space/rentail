@@ -7,3 +7,5 @@
 .env.local
 *.swp
 .vercel
+
+__screenshots__/diff-*.jpg

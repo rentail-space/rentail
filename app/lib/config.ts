@@ -6,6 +6,8 @@ dotenv.config();
 
 export default {
   isProduction: env.get("NODE_ENV").asString() === "production",
+  isDebug: env.get("DEBUG").asString() !== undefined,
+  isTest: env.get("NODE_ENV").asString() === "test",
 
   ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),
   LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required().asString(),
