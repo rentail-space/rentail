@@ -1,11 +1,9 @@
 /** biome-ignore-all lint/a11y/noAutofocus: User needs to focus on input field */
 import { useChat } from "@ai-sdk/react";
-import type { Message } from "ai";
+import { DefaultChatTransport, type UIMessage } from "ai";
 import {
-  type ChangeEvent,
   type FormEvent,
   type RefObject,
-  useCallback,
   useEffect,
   useId,
   useRef,
@@ -34,21 +32,12 @@ export default function Chat() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [canEdit, setCanEdit] = useState(true);
 
-  const {
-    append,
-    error,
-    handleInputChange,
-    handleSubmit,
-    input,
-    messages,
-    status,
-  } = useChat({
-    api: "/api/chat",
-    initialMessages: [{ content: welcome, id: "0", role: "assistant" }],
-    onFinish: () => {
-      setCanEdit(true);
-    },
+  const { error, messages, sendMessage, status } = useChat({
+    messages: [{ parts: [{ text: welcome }], role: "assistant" } as UIMessage],
+    onFinish: () => setCanEdit(true),
+    transport: new DefaultChatTransport({ api: "/api/chat" }),
   });
+  const [input, setInput] = useState("");
 
   const isTyping = status === "submitted";
   const initialQuery = searchParams.get("q");
@@ -57,45 +46,48 @@ export default function Chat() {
   // biome-ignore lint/correctness/useExhaustiveDependencies: only once on mount
   useEffect(() => {
     if (initialQuery && messages.length === 1) {
-      append({ content: initialQuery, role: "user" });
+      sendMessage({
+        parts: [{ text: initialQuery }],
+        role: "user",
+      } as UIMessage);
     }
   }, []);
 
-  const onSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      handleSubmit(event);
-      setSearchParams((prev) => ({ ...prev, q: input.trim() }));
-      setCanEdit(false);
-      return false;
-    },
-    [handleSubmit, setSearchParams, input],
-  );
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    sendMessage({
+      parts: [{ text: input.trim() }],
+      role: "user",
+    } as UIMessage);
+    setSearchParams((prev) => ({ ...prev, q: input.trim() }));
+    setCanEdit(false);
+    return false;
+  };
 
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
       <Header />
       <Messages
         error={error}
-        handleInputChange={handleInputChange}
         inputId={inputId}
         isTyping={isTyping}
         messages={messages}
         messagesRef={messagesRef}
+        setInput={setInput}
       />
       <InputForm
         canEdit={canEdit}
-        handleInputChange={handleInputChange}
         input={input}
         inputId={inputId}
         isTyping={isTyping}
         onSubmit={onSubmit}
+        setInput={setInput}
       />
       <PrecannedQuestions
-        handleInputChange={handleInputChange}
+        askQuestion={askQuestion}
         inputId={inputId}
         messagesRef={messagesRef}
-        askQuestion={askQuestion}
+        setInput={setInput}
       />
     </div>
   );
@@ -103,17 +95,17 @@ export default function Chat() {
 
 function Messages({
   error,
-  handleInputChange,
+  setInput,
   inputId,
   isTyping,
   messages,
   messagesRef,
 }: {
   error?: Error;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  setInput: (input: string) => void;
   inputId: string;
   isTyping: boolean;
-  messages: Message[];
+  messages: UIMessage[];
   messagesRef: RefObject<HTMLDivElement | null>;
 }) {
   return (
@@ -125,7 +117,7 @@ function Messages({
         <MessageBubble
           key={message.id}
           message={message}
-          handleInputChange={handleInputChange}
+          setInput={setInput}
           inputId={inputId}
           messagesRef={messagesRef}
         />
@@ -138,25 +130,27 @@ function Messages({
 }
 
 function MessageBubble({
-  message,
-  handleInputChange,
   inputId,
+  message,
   messagesRef,
+  setInput,
 }: {
-  message: Message;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   inputId: string;
+  message: UIMessage;
   messagesRef: RefObject<HTMLDivElement | null>;
+  setInput: (input: string) => void;
 }) {
   const isUser = message.role === "user";
   return isUser ? (
     <div className="chat chat-end prose">
-      <div className="chat-bubble chat-bubble-accent">{message.content}</div>
+      <div className="chat-bubble chat-bubble-accent">
+        {message.parts.map((part) => (part.type === "text" ? part.text : null))}
+      </div>
     </div>
   ) : (
     <ResponseMessage
       askQuestion={askQuestion}
-      handleInputChange={handleInputChange}
+      setInput={setInput}
       inputId={inputId}
       message={message}
       messagesRef={messagesRef}
@@ -186,26 +180,24 @@ function ErrorNotice({ error }: { error?: Error }) {
   ) : null;
 }
 
-type AskQuestionParams = {
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+async function askQuestion({
+  inputId,
+  messagesRef,
+  question,
+  setInput,
+}: {
   inputId: string;
   messagesRef: RefObject<HTMLDivElement | null>;
   question: string;
-};
-
-async function askQuestion({
-  handleInputChange,
-  inputId,
-  question,
-  messagesRef,
-}: AskQuestionParams) {
+  setInput: (input: string) => void;
+}) {
   const input = document.getElementById(inputId) as HTMLInputElement;
   if (!input) return;
 
   // Clear input and make it readonly during typing animation
   input.value = "";
   input.readOnly = true;
-  handleInputChange({ target: input } as ChangeEvent<HTMLInputElement>);
+  setInput(input.value);
 
   // Auto-scroll to bottom
   if (messagesRef.current) {
@@ -225,5 +217,5 @@ async function askQuestion({
 
   // Re-enable input and trigger change event
   input.readOnly = false;
-  handleInputChange({ target: input } as ChangeEvent<HTMLInputElement>);
+  setInput(input.value);
 }

@@ -1,19 +1,19 @@
-import type { ChangeEvent, FormEvent } from "react";
+import type { FormEvent } from "react";
 
 export default function InputForm({
   canEdit,
-  handleInputChange,
   input,
   inputId,
   isTyping,
   onSubmit,
+  setInput,
 }: {
   canEdit: boolean;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   input: string;
   inputId: string;
   isTyping: boolean;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  setInput: (input: string) => void;
 }) {
   const isDisabled = isTyping || !canEdit;
   const canSubmit = !isDisabled && input.trim();
@@ -36,7 +36,7 @@ export default function InputForm({
           className="w-full py-4 pl-5 pr-16 border-2 border-gray-200 rounded-2xl text-base outline-none transition-all duration-200 bg-white placeholder-gray-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
           disabled={isDisabled}
           id={inputId}
-          onChange={handleInputChange}
+          onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about retail spaces..."
           spellCheck="false"
           type="text"

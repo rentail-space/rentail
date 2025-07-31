@@ -1,24 +1,24 @@
-import type { Message } from "ai";
-import type { ChangeEvent, RefObject } from "react";
+import type { UIMessage } from "@ai-sdk/react";
+import type { RefObject } from "react";
 import Markdown from "react-markdown";
 
 export default function ResponseMessage({
-  message,
-  handleInputChange,
-  inputId,
-  messagesRef,
   askQuestion,
+  inputId,
+  message,
+  messagesRef,
+  setInput,
 }: {
-  message: Message;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  inputId: string;
-  messagesRef: RefObject<HTMLDivElement | null>;
   askQuestion: (params: {
-    handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    setInput: (input: string) => void;
     inputId: string;
     question: string;
     messagesRef: RefObject<HTMLDivElement | null>;
   }) => Promise<void>;
+  inputId: string;
+  message: UIMessage;
+  messagesRef: RefObject<HTMLDivElement | null>;
+  setInput: (input: string) => void;
 }) {
   return (
     <div className="chat chat-start ">
@@ -33,13 +33,15 @@ export default function ResponseMessage({
       <div className="chat-bubble prose prose-base">
         <Markdown
           components={createMarkdownComponents({
-            handleInputChange,
+            askQuestion,
             inputId,
             messagesRef,
-            askQuestion,
+            setInput,
           })}
         >
-          {message.content}
+          {message.parts
+            .map((part) => (part.type === "text" ? part.text : null))
+            .join("")}
         </Markdown>
       </div>
     </div>
@@ -47,20 +49,20 @@ export default function ResponseMessage({
 }
 
 function createMarkdownComponents({
-  handleInputChange,
+  askQuestion,
   inputId,
   messagesRef,
-  askQuestion,
+  setInput,
 }: {
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  askQuestion: (params: {
+    inputId: string;
+    messagesRef: RefObject<HTMLDivElement | null>;
+    question: string;
+    setInput: (input: string) => void;
+  }) => Promise<void>;
   inputId: string;
   messagesRef: RefObject<HTMLDivElement | null>;
-  askQuestion: (params: {
-    handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    inputId: string;
-    question: string;
-    messagesRef: RefObject<HTMLDivElement | null>;
-  }) => Promise<void>;
+  setInput: (input: string) => void;
 }) {
   return {
     a: ({ children }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
@@ -70,10 +72,10 @@ function createMarkdownComponents({
         onClick={async (event) => {
           event.preventDefault();
           await askQuestion({
-            handleInputChange,
             inputId,
-            question: `${children}`,
             messagesRef,
+            question: `${children}`,
+            setInput,
           });
         }}
       >
