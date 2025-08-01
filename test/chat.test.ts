@@ -25,6 +25,7 @@ describe("Chat page", () => {
     await expect(
       page.locator("button").filter({ hasText: "Q:" }).first(),
     ).toBeVisible();
+    await page.close();
   });
 
   it("handles initial query parameter", async () => {
@@ -39,6 +40,7 @@ describe("Chat page", () => {
     await expect(
       page.locator(".chat-bubble-accent").filter({ hasText: testQuery }),
     ).toBeVisible();
+    await page.close();
   });
 
   it("precanned questions work correctly", async () => {
@@ -64,33 +66,34 @@ describe("Chat page", () => {
 
     // Check that the question appears in the input field
     await expect(page.locator("input[type='text']")).toHaveValue(question);
+    await page.close();
   });
 
   it("maintains chat history during session", async () => {
     const page = await launchBrowser();
     await page.goto(`${URL}/chat`);
+    // This seems necessary, otherwise the first message input is ignored
+    await page.waitForTimeout(100);
 
     const firstMessage = "First test message";
     const secondMessage = "Second test message";
 
     // Send first message
     await page.fill("input[type='text']", firstMessage);
-    await page.press("input[type='text']", "Enter");
-
-    // Wait for response
-    await page.waitForTimeout(2000);
+    await page.press("button", "Enter");
 
     // Send second message
     await page.fill("input[type='text']", secondMessage);
-    await page.press("input[type='text']", "Enter");
+    await page.press("button", "Enter");
 
-    // Check both messages are visible
+    // Check both messages are still visible
     await expect(
       page.locator(".chat-bubble-accent").filter({ hasText: firstMessage }),
     ).toBeVisible();
     await expect(
       page.locator(".chat-bubble-accent").filter({ hasText: secondMessage }),
     ).toBeVisible();
+    await page.close();
   });
 
   it("sends user message and receives server response", async () => {
