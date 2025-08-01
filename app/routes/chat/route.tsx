@@ -14,8 +14,9 @@ import Header from "~/components/layout/Header";
 import welcome from "~/lib/welcome.md?raw";
 import { commitSession, getSession } from "~/sessions.server";
 import InputForm from "./InputForm";
+import MessageBubble from "./MessageBubble";
+import Messages from "./Messages";
 import PrecannedQuestions from "./PrecannedQuestions";
-import ResponseMessage from "./ResponseMessage";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"));
@@ -75,6 +76,7 @@ export default function Chat() {
     <div className="h-screen bg-gray-50 flex flex-col">
       <Header />
       <Messages
+        askQuestion={askQuestion}
         error={error}
         inputId={inputId}
         isTyping={isTyping}
@@ -98,97 +100,6 @@ export default function Chat() {
       />
     </div>
   );
-}
-
-function Messages({
-  error,
-  setInput,
-  inputId,
-  isTyping,
-  messages,
-  messagesRef,
-}: {
-  error?: Error;
-  setInput: (input: string) => void;
-  inputId: string;
-  isTyping: boolean;
-  messages: UIMessage[];
-  messagesRef: RefObject<HTMLDivElement | null>;
-}) {
-  return (
-    <div
-      className="flex flex-1 flex-col gap-4 overflow-y-auto p-6 mx-auto w-full justify-end mt-2"
-      ref={messagesRef}
-    >
-      {messages.map((message, index) => (
-        <MessageBubble
-          // biome-ignore lint/suspicious/noArrayIndexKey: we need to use the index as the key
-          key={index}
-          message={message}
-          setInput={setInput}
-          inputId={inputId}
-          messagesRef={messagesRef}
-        />
-      ))}
-
-      <TypingIndicator isTyping={isTyping} />
-      <ErrorNotice error={error} />
-    </div>
-  );
-}
-
-function MessageBubble({
-  inputId,
-  message,
-  messagesRef,
-  setInput,
-}: {
-  inputId: string;
-  message: UIMessage;
-  messagesRef: RefObject<HTMLDivElement | null>;
-  setInput: (input: string) => void;
-}) {
-  const isUser = message.role === "user";
-  return isUser ? (
-    <div className="chat chat-end prose">
-      <div className="chat-bubble chat-bubble-accent">
-        {message.parts.map((part, index) =>
-          // biome-ignore lint/suspicious/noArrayIndexKey: we need to use the index as the key
-          part.type === "text" ? <span key={index}>{part.text}</span> : null,
-        )}
-      </div>
-    </div>
-  ) : (
-    <ResponseMessage
-      askQuestion={askQuestion}
-      setInput={setInput}
-      inputId={inputId}
-      message={message}
-      messagesRef={messagesRef}
-    />
-  );
-}
-
-function TypingIndicator({ isTyping }: { isTyping: boolean }) {
-  return isTyping ? (
-    <div className="flex justify-start">
-      <div className="bg-white px-4 py-4 rounded-lg">
-        <div className="flex space-x-1">
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.1s]" />
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]" />
-        </div>
-      </div>
-    </div>
-  ) : null;
-}
-
-function ErrorNotice({ error }: { error?: Error }) {
-  return error ? (
-    <div className="text-red-500 p-4">
-      {error.message || "Some error happened"}
-    </div>
-  ) : null;
 }
 
 async function askQuestion({
