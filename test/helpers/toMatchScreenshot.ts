@@ -3,7 +3,9 @@ import {
   access,
   constants,
   mkdir,
+  readdir,
   readFile,
+  unlink,
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
@@ -15,11 +17,13 @@ import { PNG } from "pngjs";
 import invariant from "tiny-invariant";
 
 const maxDiffPercentage = 3;
+const dirname = path.resolve("./__screenshots__");
 
 expect.extend({
   async toMatchScreenshot(page: Page): AsyncExpectationResult {
+    await cleanBeforeTest();
+
     const testName = getTestName();
-    const dirname = path.resolve("./__screenshots__");
     const screenshot = await page.screenshot();
     const filename = path.join(dirname, `${testName}.jpg`);
     try {
@@ -58,11 +62,13 @@ expect.extend({
 
     const diffPercentage = (numDiffPixels / (width * height)) * 100;
     const matches = diffPercentage <= maxDiffPercentage;
-    if (!matches)
-      await writeFile(
-        path.join(dirname, `diff-${testName}.jpg`),
-        PNG.sync.write(diff),
+    if (!matches) {
+      const filename = path.join(dirname, `diff-${testName}.jpg`);
+      await writeFile(filename, PNG.sync.write(diff));
+      console.error(
+        `[TEST] Image differs from baseline by ${diffPercentage.toFixed(2)}%, see:\n\t${filename}`,
       );
+    }
 
     return {
       message: () =>
@@ -84,4 +90,10 @@ function getTestName(): string {
   const match = callerLine.match(/\/(.+?):\d+/);
   const testFile = match ? path.basename(match[1]) : "unknown";
   return testFile.replace(".test.ts", "");
+}
+
+async function cleanBeforeTest() {
+  const list = await readdir(dirname);
+  for (const file of list)
+    if (file.startsWith("diff-")) await unlink(path.join(dirname, file));
 }
