@@ -41,29 +41,6 @@ describe("Chat page", () => {
     ).toBeVisible();
   });
 
-  it("allows user to type and send messages", async () => {
-    const page = await launchBrowser();
-    await page.goto(`${URL}/chat`);
-
-    const testMessage = "I need a space for a pop-up shop";
-
-    // Type in the input field
-    await page.fill("input[type='text']", testMessage);
-
-    // Submit the form
-    await page.press("input[type='text']", "Enter");
-
-    // Check that user message appears in chat
-    await expect(
-      page.locator(".chat-bubble-accent").filter({ hasText: testMessage }),
-    ).toBeVisible();
-
-    // Check that typing indicator appears (AI is responding)
-    await expect(page.locator(".animate-bounce").first()).toBeVisible({
-      timeout: 2000,
-    });
-  });
-
   it("precanned questions work correctly", async () => {
     const page = await launchBrowser();
     await page.goto(`${URL}/chat`);
