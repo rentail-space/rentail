@@ -182,7 +182,7 @@ async function blockBrowserRequest(route: Route): Promise<void> {
   if (url.startsWith("http://localhost:")) {
     await route.continue();
   } else {
-    if (config.isDebug) console.warn(`[TEST] blocking request to ${hostname}`);
+    if (config.isDebug) console.debug(`[TEST] blocking request to ${hostname}`);
     await route.abort("accessdenied");
   }
 }

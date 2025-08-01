@@ -2,7 +2,7 @@ import { HttpResponse, http } from "msw";
 
 export const handlers = [
   // Mock Anthropic API
-  http.post("https://api.anthropic.com/v1/messages", () => {
+  http.post("https://api.anthropic.com/v1/messages", ({ request }) => {
     return HttpResponse.json({
       id: "msg_test_123",
       type: "message",
@@ -24,7 +24,7 @@ export const handlers = [
   }),
 
   // Mock streaming endpoint if needed
-  http.post("https://api.anthropic.com/v1/messages/stream", () => {
+  http.post("https://api.anthropic.com/v1/messages/stream", ({ request }) => {
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
       start(controller) {
@@ -67,14 +67,6 @@ export const handlers = [
     });
   }),
 
-  // Mock any other external HTTP services
-  http.get("https://api.openai.com/*", () => {
-    return HttpResponse.json(
-      { error: "OpenAI API is mocked" },
-      { status: 503 },
-    );
-  }),
-
   // Block any other external HTTP services not explicitly mocked
   http.get("https://*/*", ({ request }) => {
     console.warn(`[MSW] Blocked external HTTP GET request to: ${request.url}`);
@@ -99,11 +91,7 @@ export const handlers = [
   }),
 
   // Allow all localhost requests to pass through (for dev server communication)
-  http.get(/^http:\/\/localhost:\d+/, () => {
-    return; // Pass through to real server
-  }),
-
-  http.post(/^http:\/\/localhost:\d+/, () => {
+  http.get(/^https?:\/\/localhost:\d+/, () => {
     return; // Pass through to real server
   }),
 ];

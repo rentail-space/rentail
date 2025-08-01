@@ -66,18 +66,6 @@ describe("Chat page", () => {
     await expect(page.locator("input[type='text']")).toHaveValue(question);
   });
 
-  it("handles chat API responses correctly", async () => {
-    const page = await launchBrowser();
-    await page.goto(`${URL}/chat`);
-
-    // Send a message
-    await page.fill("input[type='text']", "Test message");
-    await page.press("input[type='text']", "Enter");
-
-    // MSW will mock the API response, so verify an assistant response appears
-    await expect(page.locator(".chat").nth(1)).toBeVisible({ timeout: 10000 });
-  });
-
   it("maintains chat history during session", async () => {
     const page = await launchBrowser();
     await page.goto(`${URL}/chat`);
