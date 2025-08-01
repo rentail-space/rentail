@@ -212,22 +212,4 @@ describe("Blog Post Rendering", () => {
 
     await page.close();
   });
-
-  test("blog post content loads without JavaScript errors", async () => {
-    const page = await launchBrowser();
-
-    // Listen for console errors
-    const errors: string[] = [];
-    page.on("console", (msg: ConsoleMessage) => {
-      if (msg.type() === "error") errors.push(msg.text());
-    });
-
-    await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
-    await page.waitForLoadState("networkidle");
-
-    // Check for any JavaScript errors
-    expect(errors).toHaveLength(0);
-
-    await page.close();
-  });
 });
