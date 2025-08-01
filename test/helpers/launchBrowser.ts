@@ -27,7 +27,7 @@ const stdout = process.stdout;
  * @returns The browser page.
  */
 export async function launchBrowser(): Promise<Page> {
-  await launchServer();
+  if (!server) await launchServer();
   if (!browser) browser = await chromium.launch();
   if (!context) context = await browser.newContext();
   return await context.newPage();
@@ -38,20 +38,24 @@ export async function launchBrowser(): Promise<Page> {
  * @returns The server instance.
  */
 async function launchServer() {
-  if (server) return server;
-
   // Check if lock file exists and server is running
   if (existsSync(lockFile)) {
+    console.debug(
+      "[TEST] lockFile exists, checking server health\n\t%s",
+      lockFile,
+    );
     try {
       const pidStr = readFileSync(lockFile, "utf8");
       const pid = Number.parseInt(pidStr, 10);
 
       if (await checkServerHealth()) {
         // Server is already running and healthy
+        console.debug("[TEST] server is already running and healthy");
         server = {
           port,
           stop: () => {
             try {
+              console.debug("[TEST] killing server");
               process.kill(pid);
               unlinkSync(lockFile);
               return true;
@@ -66,12 +70,16 @@ async function launchServer() {
       // Clean up stale lock files
       try {
         unlinkSync(lockFile);
-      } catch {}
+      } catch (error) {
+        console.error("[TEST] error cleaning up lock file\n\t%s", error);
+      }
     } catch {
       // Clean up corrupted lock files
       try {
         unlinkSync(lockFile);
-      } catch {}
+      } catch (error) {
+        console.error("[TEST] error cleaning up lock file\n\t%s", error);
+      }
     }
   }
 
@@ -88,6 +96,10 @@ async function launchServer() {
       },
     },
   );
+  process.on("exit", () => {
+    console.debug("[TEST] server process exited, killing server");
+    serverProcess.kill("SIGTERM");
+  });
 
   // Create lock file
   invariant(serverProcess.pid, "Server process ID is not available");
@@ -106,7 +118,9 @@ async function launchServer() {
       clearTimeout(timeout);
       try {
         unlinkSync(lockFile);
-      } catch {}
+      } catch (error) {
+        console.error("[TEST] error cleaning up lock file\n\t%s", error);
+      }
       reject(error);
     });
 
@@ -132,8 +146,10 @@ async function launchServer() {
         };
         return resolve(server);
       }
-      if (config.isDebug) stdout.write(stream.toString());
     });
+
+    if (config.isDebug)
+      serverProcess.stdout.on("data", (stream: Buffer) => stdout.write(stream));
   });
 }
 
