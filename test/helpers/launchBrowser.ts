@@ -7,9 +7,11 @@ import {
   type BrowserContext,
   chromium,
   type Page,
+  type Route,
 } from "playwright";
 import invariant from "tiny-invariant";
 import "./toMatchScreenshot";
+import { URL as URLString } from "node:url";
 import config from "~/lib/config";
 
 const port = 9222;
@@ -20,7 +22,6 @@ export const URL = `http://localhost:${port}`;
 let browser: Browser;
 let context: BrowserContext;
 let server: { port: number; stop: () => boolean };
-const stdout = process.stdout;
 
 /**
  * Launch the server and browser. Returns instance of server and browser page.
@@ -30,7 +31,9 @@ export async function launchBrowser(): Promise<Page> {
   if (!server) await launchServer();
   if (!browser) browser = await chromium.launch();
   if (!context) context = await browser.newContext();
-  return await context.newPage();
+  const page = await context.newPage();
+  page.route("**", blockBrowserRequest);
+  return page;
 }
 
 /**
@@ -40,22 +43,25 @@ export async function launchBrowser(): Promise<Page> {
 async function launchServer() {
   // Check if lock file exists and server is running
   if (existsSync(lockFile)) {
-    console.debug(
-      "[TEST] lockFile exists, checking server health\n\t%s",
-      lockFile,
-    );
+    if (config.isDebug)
+      console.debug(
+        "[TEST] lockFile exists, checking server health\n\t%s",
+        lockFile,
+      );
+
     try {
       const pidStr = readFileSync(lockFile, "utf8");
       const pid = Number.parseInt(pidStr, 10);
 
       if (await checkServerHealth()) {
         // Server is already running and healthy
-        console.debug("[TEST] server is already running and healthy");
+        if (config.isDebug)
+          console.debug("[TEST] server is already running and healthy");
         server = {
           port,
           stop: () => {
             try {
-              console.debug("[TEST] killing server");
+              if (config.isDebug) console.debug("[TEST] killing server");
               process.kill(pid);
               unlinkSync(lockFile);
               return true;
@@ -69,6 +75,7 @@ async function launchServer() {
 
       // Clean up stale lock files
       try {
+        if (config.isDebug) console.debug("[TEST] cleaning up stale lock file");
         unlinkSync(lockFile);
       } catch (error) {
         console.error("[TEST] error cleaning up lock file\n\t%s", error);
@@ -96,8 +103,9 @@ async function launchServer() {
       },
     },
   );
-  process.on("exit", () => {
-    console.debug("[TEST] server process exited, killing server");
+  process.on("beforeExit", () => {
+    if (config.isDebug)
+      console.debug("[TEST] server process exited, killing server");
     serverProcess.kill("SIGTERM");
   });
 
@@ -149,7 +157,9 @@ async function launchServer() {
     });
 
     if (config.isDebug)
-      serverProcess.stdout.on("data", (stream: Buffer) => stdout.write(stream));
+      serverProcess.stdout.on("data", (stream: Buffer) =>
+        process.stdout.write(stream),
+      );
   });
 }
 
@@ -163,5 +173,16 @@ async function checkServerHealth(): Promise<boolean> {
     return response.ok;
   } catch {
     return false;
+  }
+}
+
+async function blockBrowserRequest(route: Route): Promise<void> {
+  const { hostname } = new URLString(route.request().url());
+  const url = route.request().url();
+  if (url.startsWith("http://localhost:")) {
+    await route.continue();
+  } else {
+    if (config.isDebug) console.warn(`[TEST] blocking request to ${hostname}`);
+    await route.abort("accessdenied");
   }
 }
