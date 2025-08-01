@@ -75,32 +75,35 @@ export const handlers = [
     );
   }),
 
-  // Block any unexpected HTTP requests to external services
-  http.get("*", ({ request }) => {
-    const url = new URL(request.url);
-    // Allow requests to localhost (our test server)
-    if (url.hostname === "localhost" || url.hostname === "127.0.0.1") {
-      return;
-    }
-    // Block all other external requests
-    console.warn(`Blocked external HTTP request to: ${request.url}`);
+  // Block any other external HTTP services not explicitly mocked
+  http.get("https://*/*", ({ request }) => {
+    console.warn(`[MSW] Blocked external HTTP GET request to: ${request.url}`);
     return HttpResponse.json(
       { error: "External HTTP requests are not allowed in tests" },
       { status: 503 },
     );
   }),
 
-  http.post("*", ({ request }) => {
+  http.post("https://*/*", ({ request }) => {
+    // Skip if already handled by specific handlers above
     const url = new URL(request.url);
-    // Allow requests to localhost (our test server)
-    if (url.hostname === "localhost" || url.hostname === "127.0.0.1") {
-      return;
+    if (url.hostname === "api.anthropic.com") {
+      return; // Let the specific Anthropic handlers handle this
     }
-    // Block all other external requests
-    console.warn(`Blocked external HTTP POST request to: ${request.url}`);
+
+    console.warn(`[MSW] Blocked external HTTP POST request to: ${request.url}`);
     return HttpResponse.json(
       { error: "External HTTP requests are not allowed in tests" },
       { status: 503 },
     );
+  }),
+
+  // Allow all localhost requests to pass through (for dev server communication)
+  http.get(/^http:\/\/localhost:\d+/, () => {
+    return; // Pass through to real server
+  }),
+
+  http.post(/^http:\/\/localhost:\d+/, () => {
+    return; // Pass through to real server
   }),
 ];

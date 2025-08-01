@@ -16,6 +16,9 @@ if (serverConfig.SENTRY_DSN) {
   });
 }
 
+// Initialize MSW in test mode
+if (serverConfig.isTest) await import("../test/mocks/msw.server");
+
 // Replace fixed interval with request-triggered collection
 let lastMetricsPush = 0;
 

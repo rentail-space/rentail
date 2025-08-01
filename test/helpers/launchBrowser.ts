@@ -75,26 +75,34 @@ async function launchServer() {
     }
   }
 
-  // Start new server instance
-  const process = spawn("react-router", ["dev", "--port", port.toString()], {
-    detached: true,
-    stdio: ["pipe", "pipe", "pipe"],
-  });
+  // Start new server instance in test mode
+  const serverProcess = spawn(
+    "react-router",
+    ["dev", "--port", port.toString()],
+    {
+      detached: true,
+      stdio: ["pipe", "pipe", "pipe"],
+      env: {
+        ...process.env,
+        NODE_ENV: "test",
+      },
+    },
+  );
 
   // Create lock file
-  invariant(process.pid, "Server process ID is not available");
-  writeFileSync(lockFile, process.pid.toString());
+  invariant(serverProcess.pid, "Server process ID is not available");
+  writeFileSync(lockFile, serverProcess.pid.toString());
 
   return await new Promise<{
     port: number;
     stop: () => boolean;
   }>((resolve, reject) => {
     const timeout = setTimeout(() => {
-      process.kill("SIGTERM");
+      serverProcess.kill("SIGTERM");
       reject(new Error("Server failed to start within 30 seconds"));
     }, 30000);
 
-    process.once("error", (error) => {
+    serverProcess.once("error", (error) => {
       clearTimeout(timeout);
       try {
         unlinkSync(lockFile);
@@ -102,19 +110,19 @@ async function launchServer() {
       reject(error);
     });
 
-    if (process.stdout === null) {
+    if (serverProcess.stdout === null) {
       clearTimeout(timeout);
       return reject(new Error("Failed to start server."));
     }
 
-    process.stdout.on("data", (stream: Buffer) => {
+    serverProcess.stdout.on("data", (stream: Buffer) => {
       if (stream.toString().includes(port.toString())) {
         clearTimeout(timeout);
         server = {
           port,
           stop: () => {
             try {
-              process.kill();
+              serverProcess.kill();
               unlinkSync(lockFile);
               return true;
             } catch {
