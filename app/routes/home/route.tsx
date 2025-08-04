@@ -23,10 +23,11 @@ export async function loader() {
       ...fm<FrontMatter>(content),
       slug: filename.replace(".md", ""),
     }))
+    .filter((post) => post.attributes.published)
     .sort(
       (a, b) =>
-        new Date(b.attributes.added).getTime() -
-        new Date(a.attributes.added).getTime(),
+        new Date(b.attributes.published ?? new Date()).getTime() -
+        new Date(a.attributes.published ?? new Date()).getTime(),
     );
   return { posts };
 }

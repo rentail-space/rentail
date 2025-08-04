@@ -24,6 +24,8 @@ async function loadFile(
   try {
     invariant(slug, "Slug is required");
     const post = await import(`../data/blog/${slug}.md?raw`);
+    const { attributes } = fm<FrontMatter>(post.default);
+    invariant(attributes.published, "Published date is required");
     return { post: post.default, slug };
   } catch {
     throw new Response("Not Found", { status: 404 });
@@ -33,6 +35,7 @@ async function loadFile(
 export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
   const { "*": slug } = params;
   const { attributes } = fm<FrontMatter>(data?.post ?? "");
+  invariant(attributes.published, "Published date is required");
   return [
     { title: attributes.title },
 
@@ -42,7 +45,7 @@ export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
     { property: "og:image", content: attributes.image?.src },
     {
       property: "og:published_time",
-      content: DateTime.fromJSDate(attributes.added, { zone: "utc" })
+      content: DateTime.fromJSDate(attributes.published, { zone: "utc" })
         .setZone("UTC")
         .toFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", { locale: "en-US" }),
     },
@@ -64,7 +67,8 @@ export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
 export default function Post() {
   const { post, slug } = useLoaderData<typeof loader>();
   const { attributes, body } = fm<FrontMatter>(post);
-  const datePublished = DateTime.fromJSDate(attributes.added, {
+  invariant(attributes.published, "Published date is required");
+  const datePublished = DateTime.fromJSDate(attributes.published, {
     zone: "utc",
   }).setZone("UTC");
   invariant(attributes.image, "Image is required");

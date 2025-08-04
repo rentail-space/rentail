@@ -1,6 +1,6 @@
 ---
 title: "Specialty Leasing: A Smart Alternative for Small Business Owners Looking to Test the Waters"
-added: 2025-07-24
+published: 2025-07-24
 image:
   src: "/blog/2025-07-24-specialty-leasing.jpg"
 ---

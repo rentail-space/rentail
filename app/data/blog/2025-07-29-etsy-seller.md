@@ -1,6 +1,6 @@
 ---
 title: "From Digital Dreams to Mall Reality: The Etsy Seller's Strategic Guide to Physical Retail Domination"
-added: 2025-07-28
+published: 2025-07-28
 image:
   alt: "Person standing inside a sunlit empty retail space holding a tablet, reviewing the lease for a new business location."
   src: "/blog/2025-07-29-etsy-seller.jpg"
