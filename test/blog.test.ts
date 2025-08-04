@@ -9,7 +9,6 @@
  * - Navigation functionality
  */
 
-import type { ConsoleMessage } from "playwright";
 import { expect } from "playwright/test";
 import { describe, test } from "vitest";
 import { launchBrowser, URL } from "./helpers/launchBrowser";

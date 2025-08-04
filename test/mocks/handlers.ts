@@ -2,7 +2,7 @@ import { HttpResponse, http } from "msw";
 
 export const handlers = [
   // Mock Anthropic API
-  http.post("https://api.anthropic.com/v1/messages", ({ request }) => {
+  http.post("https://api.anthropic.com/v1/messages", () => {
     return HttpResponse.json({
       id: "msg_test_123",
       type: "message",
@@ -24,7 +24,7 @@ export const handlers = [
   }),
 
   // Mock streaming endpoint if needed
-  http.post("https://api.anthropic.com/v1/messages/stream", ({ request }) => {
+  http.post("https://api.anthropic.com/v1/messages/stream", () => {
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
       start(controller) {

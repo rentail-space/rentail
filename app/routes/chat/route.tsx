@@ -14,7 +14,6 @@ import Header from "~/components/layout/Header";
 import welcome from "~/lib/welcome.md?raw";
 import { commitSession, getSession } from "~/sessions.server";
 import InputForm from "./InputForm";
-import MessageBubble from "./MessageBubble";
 import Messages from "./Messages";
 import PrecannedQuestions from "./PrecannedQuestions";
 
