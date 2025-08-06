@@ -18,8 +18,8 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^2.0.0",
-    "@ai-sdk/react": "^2.0.2",
+    "@ai-sdk/anthropic": "^2.0.1",
+    "@ai-sdk/react": "^2.0.4",
     "@forge42/seo-tools": "^1.4.5",
     "@logtail/node": "^0.5.5",
     "@react-router/fs-routes": "^7.7.1",
@@ -28,7 +28,7 @@
     "@secretlint/secretlint-rule-preset-recommend": "^10.2.2",
     "@sentry/react": "^10.1.0",
     "@sentry/vite-plugin": "^4.0.2",
-    "ai": "^5.0.2",
+    "ai": "^5.0.4",
     "chalk": "^5.5.0",
     "env-var": "^7.5.0",
     "es-toolkit": "^1.39.8",
