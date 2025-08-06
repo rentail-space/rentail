@@ -78,26 +78,6 @@ npm run checkly     # Run monitoring tests
 
 ## 🔧 Configuration
 
-### Environment Variables
-Create a `.env.local` file with the following required variables:
-
-```bash
-# Security (REQUIRED)
-SESSION_SECRET=your-super-secret-session-key-here
-
-# AI Configuration (REQUIRED)
-ANTHROPIC_API_KEY=your-anthropic-api-key
-
-# Monitoring (REQUIRED)  
-SENTRY_DSN=your-sentry-dsn
-LOGTAIL_TOKEN=your-logtail-token
-
-# Optional Configuration
-PORT=3000
-NODE_ENV=development
-AI_MODEL=claude-4-opus-20250514
-```
-
 ### Key Features
 - **AI-Powered Chat:** Interactive space discovery with Claude AI
 - **Server-Side Rendering:** Fast initial page loads
