@@ -1,6 +1,6 @@
+import { anthropic } from "@ai-sdk/anthropic";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import invariant from "tiny-invariant";
-import model from "~/lib/llm";
 import general from "../lib/general.md?raw";
 import spaces from "../lib/spaces.md?raw";
 import type { Route } from "./+types/api.chat";
@@ -12,7 +12,15 @@ export async function action({ request }: Route.ActionArgs) {
   const { messages }: { messages: UIMessage[] } = await request.json();
   const result = streamText({
     messages: convertToModelMessages(messages),
-    model,
+    model: anthropic("claude-opus-4-1-20250805"),
+    providerOptions: {
+      anthropic: {
+        thinking: {
+          budgetTokens: 12000,
+          type: "disabled",
+        },
+      },
+    },
     system: [general, spaces].join("\n\n=====\n\n"),
   });
   return result.toTextStreamResponse();

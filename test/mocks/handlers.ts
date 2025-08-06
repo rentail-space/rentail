@@ -13,7 +13,7 @@ export const handlers = [
           text: "This is a mocked response from Claude. I can help you find retail spaces for your business needs.",
         },
       ],
-      model: "claude-4-opus-20250514",
+      model: "claude-opus-4-1-20250805",
       stop_reason: "end_turn",
       stop_sequence: null,
       usage: {
