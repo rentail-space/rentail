@@ -4,6 +4,7 @@ import { TextStreamChatTransport, type UIMessage } from "ai";
 import {
   type FormEvent,
   type RefObject,
+  useCallback,
   useEffect,
   useId,
   useRef,
@@ -25,6 +26,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
     headers: { "Set-Cookie": await commitSession(session) },
   });
 }
+
+import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 
 export default function Chat() {
   const messagesRef = useRef<HTMLDivElement>(null);
@@ -72,32 +75,77 @@ export default function Chat() {
   };
 
   return (
-    <div className="h-screen bg-gray-50 flex flex-col">
+    <div className="h-screen relative bg-gray-50 flex flex-col">
       <Header />
-      <Messages
-        askQuestion={askQuestion}
-        error={error}
-        inputId={inputId}
-        isTyping={isTyping}
-        messages={messages}
-        messagesRef={messagesRef}
-        setInput={setInput}
-      />
-      <InputForm
-        canEdit={canEdit}
-        input={input}
-        inputId={inputId}
-        isTyping={isTyping}
-        onSubmit={onSubmit}
-        setInput={setInput}
-      />
-      <PrecannedQuestions
-        askQuestion={askQuestion}
-        inputId={inputId}
-        messagesRef={messagesRef}
-        setInput={setInput}
-      />
+      <StickToBottom
+        className="overflow-auto "
+        initial="smooth"
+        resize="smooth"
+        role="log"
+      >
+        <StickToBottom.Content>
+          <Messages
+            askQuestion={askQuestion}
+            error={error}
+            inputId={inputId}
+            isTyping={isTyping}
+            messages={messages}
+            messagesRef={messagesRef}
+            setInput={setInput}
+          />
+        </StickToBottom.Content>
+        <ScrollButton />
+        <section>
+          <InputForm
+            canEdit={canEdit}
+            input={input}
+            inputId={inputId}
+            isTyping={isTyping}
+            onSubmit={onSubmit}
+            setInput={setInput}
+          />
+          <PrecannedQuestions
+            askQuestion={askQuestion}
+            inputId={inputId}
+            messagesRef={messagesRef}
+            setInput={setInput}
+          />
+        </section>
+      </StickToBottom>
     </div>
+  );
+}
+
+function ScrollButton() {
+  const { isAtBottom, scrollToBottom } = useStickToBottomContext();
+
+  const handleScrollToBottom = useCallback(() => {
+    scrollToBottom();
+  }, [scrollToBottom]);
+
+  return (
+    !isAtBottom && (
+      <button
+        className="absolute bottom-4 right-4 rounded-full bg-white"
+        onClick={handleScrollToBottom}
+        type="button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14M19 12l-7 7-7-7" />
+        </svg>
+      </button>
+    )
   );
 }
 
