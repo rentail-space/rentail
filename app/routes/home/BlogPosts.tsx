@@ -1,3 +1,4 @@
+import { drop, take } from "es-toolkit";
 import type { FrontMatterResult } from "front-matter";
 import { Link } from "react-router";
 import removeMd from "remove-markdown";
@@ -14,9 +15,12 @@ export default function BlogPosts({
 }: {
   posts: (FrontMatterResult<FrontMatter> & { slug: string })[];
 }) {
+  const first = take(posts, 3);
+  const rest = drop(posts, 3);
+
   return (
     <section className="prose prose-lg mx-auto">
-      {posts.map((post) => (
+      {first.map((post) => (
         <Link
           className="link link-hover flex flex-row gap-4"
           to={`/blog/${post.slug}`}
@@ -33,6 +37,17 @@ export default function BlogPosts({
             <h3>{post.attributes.title}</h3>
             <p>{truncateWords(removeMd(post.body), 30)}</p>
           </div>
+        </Link>
+      ))}
+
+      {rest.map((post) => (
+        <Link
+          className="link link-hover"
+          to={`/blog/${post.slug}`}
+          key={post.slug}
+        >
+          <h4>{post.attributes.title}</h4>
+          <p className="hidden ">{truncateWords(removeMd(post.body), 30)}</p>
         </Link>
       ))}
     </section>
