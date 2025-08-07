@@ -1,10 +1,7 @@
-# Rentail.space - Specialty Lease Marketplace
+# Rentail.space
 
-## About
+> Rentail.space is a specialty lease marketplace that helps businesses find short-term retail spaces in shopping centers. We connect businesses looking for temporary retail locations with property owners who have available spaces.
 
-Rentail.space is a specialty lease marketplace that helps businesses find
-short-term retail spaces in shopping centers. We connect businesses looking for
-temporary retail locations with property owners who have available spaces.
 
 ## Features
 
@@ -13,14 +10,32 @@ temporary retail locations with property owners who have available spaces.
 - Shopping center focus
 - Business-to-business marketplace
 
-## Technology
 
-- Built with React Router v7 and server-side rendering
-- Powered by Claude AI for intelligent space recommendations
-- Modern web application with TypeScript
+## Executive Summary
+
+The retail landscape is experiencing its most significant transformation in decades—and smart operators are capitalizing on unprecedented opportunities.
+
+Specialty retail is exploding at 11.8% CAGR, reaching $68.4 billion in 2025, while big box retailers hemorrhage customer satisfaction. This represents a $2.3 trillion opportunity for agile retailers who understand the fundamental shift happening in consumer behavior.
+
+
+## The Numbers That Matter
+
+* 55% of consumers prefer specialty stores for unique products
+* 47% discover new products at specialty retailers
+* 46% struggle finding specific items at big box stores
+* 80% demand personalized retail experiences
+* 73% want personalized rewards programs
+
+Environmental consciousness and authenticity demands are driving customers to specialty retailers. The second-hand fashion market alone will grow 127% by 2026.
+
+Strategic Insight: Big box stores built their empire on scale—but scale creates rigidity. Specialty retailers win through agility and personalization.
+
+If you've built successful Etsy operations, you've already validated product-market fit. 80% of retail sales still happen offline—your proven online success gives you massive competitive advantages over traditional retailers.
+
+The specialty retail revolution is creating unprecedented opportunities for agile operators. Your online success proves you understand customers and products. The physical retail expansion multiplies that success through strategic execution.
+
 
 ## Contact
-Visit https://rentail.space to explore available retail spaces or list your property.
 
-## Sitemap
-https://rentail.space/sitemap.xml
+Visit https://rentail.space to explore available retail spaces or list your property,
+or email us at hello@rentail.space.
