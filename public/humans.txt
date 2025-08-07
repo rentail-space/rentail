@@ -1,0 +1,30 @@
+/* SITE */
+    Launch: 2025-05-15
+    Last update: 2025-08-07
+    Language: English
+    Tools: Cursor, React Router, Tailwind CSS, Vitest, Markdown, TypeScript
+    Location: Los Angeles, CA
+
+/* TEAM */
+
+    Creator: Assaf Arkin
+    Site: https://labnotes.org
+    Location: Los Angeles, CA
+
+/* WTF? */
+
+See: https://humanstxt.org/
+
+Screenreader warning for ascii art that reads the word "humans" in block letters
+===============================================================================
+
+         __                                                          
+        /\ \                                                         
+        \ \ \___     __  __    ___ ___       __       ___      ____  
+         \ \  _ `\  /\ \/\ \ /' __` __`\   /'__`\   /' _ `\   /',__\ 
+          \ \ \ \ \ \ \ \_\ \/\ \/\ \/\ \ /\ \L\.\_ /\ \/\ \ /\__, `\
+           \ \_\ \_\ \ \____/\ \_\ \_\ \_\\ \__/.\_\\ \_\ \_\\/\____/
+            \/_/\/_/  \/___/  \/_/\/_/\/_/ \/__/\/_/ \/_/\/_/ \/___/ 
+                                                             
+                                                             
+===============================================================================

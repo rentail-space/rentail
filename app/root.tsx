@@ -93,6 +93,11 @@ export const links: LinksFunction = () => [
     type: "image/png",
     sizes: "16x16",
   },
+  {
+    href: "/humans.txt",
+    rel: "author",
+    type: "text/plain",
+  },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
