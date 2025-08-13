@@ -1,36 +1,18 @@
 import type { TextUIPart, UIMessage } from "ai";
-import type { RefObject } from "react";
-import Markdown from "react-markdown";
+import Response from "./Response";
 
 export default function MessageBubble({
-  askQuestion,
-  inputId,
-  message,
-  messagesRef,
   setInput,
+  message,
 }: {
-  askQuestion: (params: {
-    setInput: (input: string) => void;
-    inputId: string;
-    question: string;
-    messagesRef: RefObject<HTMLDivElement | null>;
-  }) => Promise<void>;
-  inputId: string;
-  message: UIMessage;
-  messagesRef: RefObject<HTMLDivElement | null>;
   setInput: (input: string) => void;
+  message: UIMessage;
 }) {
   const isUser = message.role === "user";
   return isUser ? (
     <UserMessage message={message} />
   ) : (
-    <ResponseMessage
-      askQuestion={askQuestion}
-      setInput={setInput}
-      inputId={inputId}
-      message={message}
-      messagesRef={messagesRef}
-    />
+    <ResponseMessage setInput={setInput} message={message} />
   );
 }
 
@@ -49,22 +31,11 @@ function UserMessage({ message }: { message: UIMessage }) {
 }
 
 function ResponseMessage({
-  askQuestion,
-  inputId,
-  message,
-  messagesRef,
   setInput,
+  message,
 }: {
-  askQuestion: (params: {
-    setInput: (input: string) => void;
-    inputId: string;
-    question: string;
-    messagesRef: RefObject<HTMLDivElement | null>;
-  }) => Promise<void>;
-  inputId: string;
-  message: UIMessage;
-  messagesRef: RefObject<HTMLDivElement | null>;
   setInput: (input: string) => void;
+  message: UIMessage;
 }) {
   return (
     <div className="chat chat-start">
@@ -77,73 +48,10 @@ function ResponseMessage({
         />
       </div>
       <div className="chat-bubble prose prose-base">
-        <Markdown
-          components={createMarkdownComponents({
-            askQuestion,
-            inputId,
-            messagesRef,
-            setInput,
-          })}
-        >
+        <Response setInput={setInput}>
           {message.parts.map((part) => (part as TextUIPart).text).join("")}
-        </Markdown>
+        </Response>
       </div>
     </div>
   );
-}
-
-function createMarkdownComponents({
-  askQuestion,
-  inputId,
-  messagesRef,
-  setInput,
-}: {
-  askQuestion: (params: {
-    inputId: string;
-    messagesRef: RefObject<HTMLDivElement | null>;
-    question: string;
-    setInput: (input: string) => void;
-  }) => Promise<void>;
-  inputId: string;
-  messagesRef: RefObject<HTMLDivElement | null>;
-  setInput: (input: string) => void;
-}) {
-  return {
-    a: ({ children }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-      <a
-        className="btn btn-soft btn-primary"
-        href={`?q=${children}`}
-        onClick={async (event) => {
-          event.preventDefault();
-          await askQuestion({
-            inputId,
-            messagesRef,
-            question: `${children}`,
-            setInput,
-          });
-        }}
-      >
-        {children}
-      </a>
-    ),
-    h1: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <h1 className="text-xl font-bold">{children}</h1>
-    ),
-    h2: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <h2 className="text-lg font-semibold">{children}</h2>
-    ),
-    h3: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <h3 className="text-md font-semibold">{children}</h3>
-    ),
-    hr: () => <hr className="border-gray-300" />,
-    ol: ({ children }: React.HTMLAttributes<HTMLOListElement>) => (
-      <ol className="ml-8 list-decimal">{children}</ol>
-    ),
-    p: ({ children }: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <p className="whitespace-pre-wrap mt-2 mb-2">{children}</p>
-    ),
-    ul: ({ children }: React.HTMLAttributes<HTMLUListElement>) => (
-      <ul className="ml-6 list-disc">{children}</ul>
-    ),
-  };
 }

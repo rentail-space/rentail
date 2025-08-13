@@ -3,14 +3,13 @@ import { useChat } from "@ai-sdk/react";
 import { TextStreamChatTransport, type UIMessage } from "ai";
 import {
   type FormEvent,
-  type RefObject,
   useCallback,
   useEffect,
-  useId,
   useRef,
   useState,
 } from "react";
 import { data, type LoaderFunctionArgs, useSearchParams } from "react-router";
+import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
 import welcome from "~/lib/welcome.md?raw";
 import { commitSession, getSession } from "~/sessions.server";
@@ -27,13 +26,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
   });
 }
 
-import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
-
 export default function Chat() {
   const messagesRef = useRef<HTMLDivElement>(null);
-  const inputId = useId();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [canEdit, setCanEdit] = useState(true);
 
   const { error, messages, sendMessage, status } = useChat({
     messages: [
@@ -42,14 +37,12 @@ export default function Chat() {
         role: "assistant",
       } as UIMessage,
     ],
-    onFinish: () => setCanEdit(true),
     transport: new TextStreamChatTransport({
       api: "/api/chat",
     }),
   });
   const [input, setInput] = useState("");
 
-  const isTyping = status === "submitted";
   const initialQuery = searchParams.get("q");
 
   // Handle initial query from URL
@@ -70,7 +63,6 @@ export default function Chat() {
       role: "user",
     } as UIMessage);
     setSearchParams((prev) => ({ ...prev, q: input.trim() }));
-    setCanEdit(false);
     return false;
   };
 
@@ -78,38 +70,29 @@ export default function Chat() {
     <div className="h-screen relative bg-gray-50 flex flex-col">
       <Header />
       <StickToBottom
-        className="overflow-auto "
+        className="overflow-auto h-screen"
         initial="smooth"
         resize="smooth"
         role="log"
       >
-        <StickToBottom.Content>
+        <StickToBottom.Content className="">
           <Messages
-            askQuestion={askQuestion}
             error={error}
-            inputId={inputId}
-            isTyping={isTyping}
+            setInput={setInput}
+            isSubmitting={status === "submitted"}
             messages={messages}
             messagesRef={messagesRef}
-            setInput={setInput}
           />
         </StickToBottom.Content>
         <ScrollButton />
         <section>
           <InputForm
-            canEdit={canEdit}
             input={input}
-            inputId={inputId}
-            isTyping={isTyping}
+            isSubmitting={status === "submitted"}
             onSubmit={onSubmit}
             setInput={setInput}
           />
-          <PrecannedQuestions
-            askQuestion={askQuestion}
-            inputId={inputId}
-            messagesRef={messagesRef}
-            setInput={setInput}
-          />
+          <PrecannedQuestions setInput={setInput} />
         </section>
       </StickToBottom>
     </div>
@@ -147,44 +130,4 @@ function ScrollButton() {
       </button>
     )
   );
-}
-
-async function askQuestion({
-  inputId,
-  messagesRef,
-  question,
-  setInput,
-}: {
-  inputId: string;
-  messagesRef: RefObject<HTMLDivElement | null>;
-  question: string;
-  setInput: (input: string) => void;
-}) {
-  const input = document.getElementById(inputId) as HTMLInputElement;
-  if (!input) return;
-
-  // Clear input and make it readonly during typing animation
-  input.value = "";
-  input.readOnly = true;
-  setInput(input.value);
-
-  // Auto-scroll to bottom
-  if (messagesRef.current) {
-    messagesRef.current.scrollTo({
-      behavior: "smooth",
-      top: messagesRef.current.scrollHeight,
-    });
-  }
-
-  input.focus();
-
-  // Animate typing the question
-  for (let i = 0; i < question.length; i++) {
-    await new Promise((resolve) => setTimeout(resolve, 10));
-    input.value += question[i];
-  }
-
-  // Re-enable input and trigger change event
-  input.readOnly = false;
-  setInput(input.value);
 }

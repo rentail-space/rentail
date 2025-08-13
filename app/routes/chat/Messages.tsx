@@ -1,47 +1,79 @@
-import type { UIMessage } from "ai";
+import type { TextUIPart, UIMessage } from "ai";
 import type { RefObject } from "react";
-import MessageBubble from "./MessageBubble";
+import Response from "./Response";
 
 export default function Messages({
   error,
   setInput,
-  inputId,
-  isTyping,
+  isSubmitting: isTyping,
   messages,
   messagesRef,
-  askQuestion,
 }: {
   error?: Error;
   setInput: (input: string) => void;
-  inputId: string;
-  isTyping: boolean;
+  isSubmitting: boolean;
   messages: UIMessage[];
   messagesRef: RefObject<HTMLDivElement | null>;
-  askQuestion: (params: {
-    setInput: (input: string) => void;
-    inputId: string;
-    question: string;
-    messagesRef: RefObject<HTMLDivElement | null>;
-  }) => Promise<void>;
 }) {
   return (
     <div
       className="flex flex-1 flex-col gap-4 overflow-y-auto p-6 mx-auto max-w-3xl w-full justify-end mt-2"
       ref={messagesRef}
     >
-      {messages.map((message, index) => (
-        <MessageBubble
-          askQuestion={askQuestion}
-          inputId={inputId}
-          key={index.toString()}
-          message={message}
-          messagesRef={messagesRef}
-          setInput={setInput}
-        />
-      ))}
+      {messages.map((message, index) =>
+        message.role === "user" ? (
+          <UserMessage key={index.toString()} message={message} />
+        ) : (
+          <ResponseMessage
+            setInput={setInput}
+            key={index.toString()}
+            message={message}
+          />
+        ),
+      )}
 
       <TypingIndicator isTyping={isTyping} />
       <ErrorNotice error={error} />
+    </div>
+  );
+}
+
+function UserMessage({ message }: { message: UIMessage }) {
+  return (
+    <div className="chat chat-end">
+      <div className="chat-bubble chat-bubble-accent prose prose-base">
+        {message.parts.map((part, index) =>
+          part.type === "text" ? (
+            <span key={index.toString()}>{part.text}</span>
+          ) : null,
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ResponseMessage({
+  setInput,
+  message,
+}: {
+  setInput: (input: string) => void;
+  message: UIMessage;
+}) {
+  return (
+    <div className="chat chat-start">
+      <div className="chat-image avatar w-8 h-8 mr-2">
+        <img
+          alt="rental space"
+          height="32px"
+          src="/favicon-96x96.png"
+          width="32px"
+        />
+      </div>
+      <div className="chat-bubble prose prose-base">
+        <Response setInput={setInput}>
+          {message.parts.map((part) => (part as TextUIPart).text).join("")}
+        </Response>
+      </div>
     </div>
   );
 }
