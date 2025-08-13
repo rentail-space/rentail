@@ -55,14 +55,12 @@ export default function Chat() {
     }
   }, []);
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = (input: string) => {
     sendMessage({
       parts: [{ text: input.trim(), type: "text" }],
       role: "user",
     } as UIMessage);
     setSearchParams((prev) => ({ ...prev, q: input.trim() }));
-    return false;
   };
 
   return (

@@ -1,5 +1,3 @@
-import type { FormEvent } from "react";
-
 export default function InputForm({
   input,
   setInput,
@@ -9,11 +7,17 @@ export default function InputForm({
   input: string;
   setInput: (input: string) => void;
   isSubmitting: boolean;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  onSubmit: (input: string) => void;
 }) {
   return (
     <div className="bg-gray-50 p-2 flex justify-center items-center w-full">
-      <form onSubmit={onSubmit} className="relative w-full">
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          if (input.trim()) onSubmit(input.trim());
+        }}
+        className="relative w-full"
+      >
         <input
           autoCapitalize="off"
           autoComplete="off"
