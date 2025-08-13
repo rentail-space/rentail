@@ -27,7 +27,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function Chat() {
-  const messagesRef = useRef<HTMLDivElement>(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { error, messages, sendMessage, status } = useChat({
@@ -75,16 +74,16 @@ export default function Chat() {
         resize="smooth"
         role="log"
       >
-        <StickToBottom.Content className="">
+        <StickToBottom.Content>
           <Messages
             error={error}
             setInput={setInput}
             isSubmitting={status === "submitted"}
             messages={messages}
-            messagesRef={messagesRef}
           />
         </StickToBottom.Content>
         <ScrollButton />
+
         <section>
           <InputForm
             input={input}

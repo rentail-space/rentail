@@ -1,39 +1,37 @@
 import type { TextUIPart, UIMessage } from "ai";
-import type { RefObject } from "react";
 import Response from "./Response";
 
 export default function Messages({
+  className,
   error,
   setInput,
   isSubmitting: isTyping,
   messages,
-  messagesRef,
 }: {
+  className?: string;
   error?: Error;
   setInput: (input: string) => void;
   isSubmitting: boolean;
   messages: UIMessage[];
-  messagesRef: RefObject<HTMLDivElement | null>;
 }) {
   return (
-    <div
-      className="flex flex-1 flex-col gap-4 overflow-y-auto p-6 mx-auto max-w-3xl w-full justify-end mt-2"
-      ref={messagesRef}
-    >
-      {messages.map((message, index) =>
-        message.role === "user" ? (
-          <UserMessage key={index.toString()} message={message} />
-        ) : (
-          <ResponseMessage
-            setInput={setInput}
-            key={index.toString()}
-            message={message}
-          />
-        ),
-      )}
+    <div className={className}>
+      <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-6 mx-auto max-w-3xl justify-end md:absolutetop-24">
+        {messages.map((message, index) =>
+          message.role === "user" ? (
+            <UserMessage key={index.toString()} message={message} />
+          ) : (
+            <ResponseMessage
+              setInput={setInput}
+              key={index.toString()}
+              message={message}
+            />
+          ),
+        )}
 
-      <TypingIndicator isTyping={isTyping} />
-      <ErrorNotice error={error} />
+        <TypingIndicator isTyping={isTyping} />
+        <ErrorNotice error={error} />
+      </div>
     </div>
   );
 }
