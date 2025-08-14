@@ -17,8 +17,8 @@ export default function HeroSection({
   return (
     <section className="hero bg-gradient-to-r from-blue-50 to-indigo-50 py-20">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 mb-10 md:mb-0 prose prose-lg">
+        <div className="flex flex-col items-center md:flex-row">
+          <div className="prose prose-lg mb-10 md:mb-0 md:w-1/2">
             <h1>
               Find your <span className="text-blue-600">short-term rental</span>
             </h1>
@@ -27,7 +27,7 @@ export default function HeroSection({
               shopping center near you, at reasonable price, and with adequate
               foot traffic to make your business thrive.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <Link to="/chat" className="btn btn-lg btn-primary">
                 Get Started
               </Link>
@@ -37,18 +37,18 @@ export default function HeroSection({
             </div>
           </div>
 
-          <div className="md:w-1/2 hero-content">
+          <div className="hero-content md:w-1/2">
             <div className="relative">
-              <div className="bg-white p-2 rounded-2xl shadow-xl">
+              <div className="rounded-2xl bg-white p-2 shadow-xl">
                 <img
                   alt={heroImage.caption?.toString()}
-                  className="rounded-xl w-full h-auto"
+                  className="h-auto w-full rounded-xl"
                   height={heroImage.height?.toString() ?? "auto"}
                   src={new URL(heroImage.contentUrl.toString()).pathname}
                   width={heroImage.width?.toString() ?? "auto"}
                 />
               </div>
-              <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-4 py-2 rounded-lg">
+              <div className="-bottom-4 -left-4 absolute rounded-lg bg-blue-600 px-4 py-2 text-white">
                 Rent a space for a few days, weeks, or months
               </div>
             </div>

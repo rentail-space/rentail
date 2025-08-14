@@ -34,8 +34,8 @@ export class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         this.props.fallback || (
-          <div className="min-h-screen flex items-center justify-center bg-gray-50">
-            <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
+          <div className="flex min-h-screen items-center justify-center bg-gray-50">
+            <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <svg
@@ -54,10 +54,10 @@ export class ErrorBoundary extends Component<Props, State> {
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <h3 className="text-sm font-medium text-gray-800">
+                  <h3 className="font-medium text-gray-800 text-sm">
                     Something went wrong
                   </h3>
-                  <div className="mt-2 text-sm text-gray-500">
+                  <div className="mt-2 text-gray-500 text-sm">
                     <p>
                       We're sorry, but something unexpected happened. Please try
                       refreshing the page.
@@ -66,7 +66,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   <div className="mt-4">
                     <button
                       type="button"
-                      className="bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className="rounded-md bg-red-600 px-4 py-2 font-medium text-sm text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
                       onClick={() => window.location.reload()}
                     >
                       Refresh Page

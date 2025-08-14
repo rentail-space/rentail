@@ -78,15 +78,15 @@ export default function Post() {
       <article className="prose prose-lg mx-auto">
         <h1>{attributes.title}</h1>
 
-        <figure className="relative left-[calc(-50vw+50%)] my-4 overflow-x-hidden w-screen">
+        <figure className="relative left-[calc(-50vw+50%)] my-4 w-screen overflow-x-hidden">
           <img
             alt={attributes.image.alt}
-            className="w-full h-[60vh] object-cover"
+            className="h-[60vh] w-full object-cover"
             src={attributes.image.src}
           />
         </figure>
 
-        <div className="text-sm text-gray-500">
+        <div className="text-gray-500 text-sm">
           {datePublished.toFormat("LLLL dd, yyyy", { locale: "en-US" })}
         </div>
 
@@ -98,13 +98,13 @@ export default function Post() {
               </a>
             ),
             h1: ({ children }) => (
-              <h1 className="text-2xl font-bold">{children}</h1>
+              <h1 className="font-bold text-2xl">{children}</h1>
             ),
             h2: ({ children }) => (
-              <h2 className="text-xl font-bold">{children}</h2>
+              <h2 className="font-bold text-xl">{children}</h2>
             ),
             h3: ({ children }) => (
-              <h3 className="text-lg font-bold">{children}</h3>
+              <h3 className="font-bold text-lg">{children}</h3>
             ),
             hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
               <hr className="border-gray-300" {...props} />
@@ -116,7 +116,7 @@ export default function Post() {
             }: React.ImgHTMLAttributes<HTMLImageElement>) => (
               <img
                 alt={alt}
-                className="w-full h-auto max-h-[400px] object-contain my-2"
+                className="my-2 h-auto max-h-[400px] w-full object-contain"
                 src={src}
                 {...props}
               />

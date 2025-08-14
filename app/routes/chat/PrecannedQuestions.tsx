@@ -11,8 +11,8 @@ export default function PrecannedQuestions({
   invariant(typeof setInput === "function", "setInput is required");
   const { scrollToBottom } = useStickToBottomContext();
   return (
-    <div className="mx-auto overflow-x-auto overflow-y-hidden w-full p-2">
-      <div className="text-white text-xs font-bold flex flex-row gap-2">
+    <div className="mx-auto w-full overflow-x-auto overflow-y-hidden p-2">
+      <div className="flex flex-row gap-2 font-bold text-white text-xs">
         {precanned
           .split(/\n+/)
           .filter((question) => question.trim())

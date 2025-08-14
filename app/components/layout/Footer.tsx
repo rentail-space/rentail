@@ -2,9 +2,9 @@ import { Link, NavLink } from "react-router";
 
 export function Footer() {
   return (
-    <footer className="footer sm:footer-horizontal footer-center text-base-content p-4">
+    <footer className="footer sm:footer-horizontal footer-center p-4 text-base-content">
       <aside>
-        <p className="text-gray-600 flex flex-row gap-2 items-center">
+        <p className="flex flex-row items-center gap-2 text-gray-600">
           <span>© {new Date().getFullYear()}</span>
           <NavLink to="/" className="font-bold" viewTransition>
             <span className="text-blue-500">rentail</span>

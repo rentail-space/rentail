@@ -58,10 +58,10 @@ export default function Chat() {
   };
 
   return (
-    <div className="h-screen relative bg-gray-50 flex flex-col">
+    <div className="relative flex h-screen flex-col bg-gray-50">
       <Header />
       <StickToBottom
-        className="overflow-auto h-screen"
+        className="h-screen overflow-auto"
         initial="smooth"
         resize="smooth"
         role="log"
@@ -100,7 +100,7 @@ function ScrollButton() {
   return (
     !isAtBottom && (
       <button
-        className="absolute bottom-4 right-4 rounded-full bg-white"
+        className="absolute right-4 bottom-4 rounded-full bg-white"
         onClick={handleScrollToBottom}
         type="button"
       >

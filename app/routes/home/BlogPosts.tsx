@@ -31,7 +31,7 @@ export default function BlogPosts({
             alt={post.attributes.image?.alt}
             width={100}
             height={100}
-            className="w-24 h-24 object-cover rounded-lg border border-gray-200 mt-12"
+            className="mt-12 h-24 w-24 rounded-lg border border-gray-200 object-cover"
           />
           <div>
             <h3>{post.attributes.title}</h3>
@@ -47,7 +47,7 @@ export default function BlogPosts({
           key={post.slug}
         >
           <h4>{post.attributes.title}</h4>
-          <p className="hidden ">{truncateWords(removeMd(post.body), 30)}</p>
+          <p className="hidden">{truncateWords(removeMd(post.body), 30)}</p>
         </Link>
       ))}
     </section>

@@ -27,7 +27,7 @@ export default function HowItWorksSection({
 
   return (
     <section id={howItWorksId} className="prose prose-lg mx-auto">
-      <div className="text-center mb-16">
+      <div className="mb-16 text-center">
         <h2>How It Works</h2>
         <p>
           Looking to open a pop-up retail space in a shopping center? We can
@@ -35,10 +35,10 @@ export default function HowItWorksSection({
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
         {steps.map((step, index) => (
           <div className="text-center" key={step.title}>
-            <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 font-bold text-2xl text-white">
               {index + 1}
             </div>
             <h3>{step.title}</h3>

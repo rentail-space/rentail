@@ -53,17 +53,17 @@ export default function FeaturesSection() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {features.map((feature) => (
           <div key={feature.title} className="card shadow-sm">
             <div className="card-body">
-              <div className="card-title w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+              <div className="card-title flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="h-6 w-6"
                 >
                   <title>{feature.title}</title>
                   {feature.icon}

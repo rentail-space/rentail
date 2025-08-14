@@ -37,7 +37,7 @@ export default function Home() {
   const { posts } = useLoaderData<typeof loader>();
   return (
     <>
-      <main className="flex flex-col min-h-screen gap-y-20 mb-20">
+      <main className="mb-20 flex min-h-screen flex-col gap-y-20">
         <HeroSection howItWorksId={howItWorksId} />
         <FeaturesSection />
         <HowItWorksSection howItWorksId={howItWorksId} />

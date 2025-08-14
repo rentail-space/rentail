@@ -1,66 +1,22 @@
 @import "tailwindcss";
+@import "./fonts.css";
 @plugin "@tailwindcss/typography";
 @plugin "daisyui";
 
-@theme {
-  --font-sans:
-    "Convergence", "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-mono:
-    "Atkinson", "Monaco", "Consolas", "Liberation Mono", "Courier New",
-    monospace;
-  --font-serif: "Quando", "Times New Roman", serif;
+
+@layer theme {
+  :root {
+    --spacing: 0.25rem;
+  }
 }
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
+@layer utilities {
+  html,
+  body {
+    @apply bg-white dark:bg-gray-950;
+  }
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
-}
-
-@font-face {
-  font-family: "Convergence";
-  src: url("/fonts/Convergence-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf") format("truetype");
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "Quando";
-  src: url("/fonts/Quando-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Atkinson";
-  src: url("/fonts/AtkinsonHyperlegibleMono-VariableFont_wght.ttf")
-    format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Atkinson";
-  src: url("/fonts/AtkinsonHyperlegibleMono-VariableFont_wght.ttf")
-    format("truetype");
-  font-weight: 400;
-  font-style: italic;
 }

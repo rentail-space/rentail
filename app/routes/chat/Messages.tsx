@@ -16,7 +16,7 @@ export default function Messages({
 }) {
   return (
     <div className={className}>
-      <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-6 mx-auto max-w-3xl justify-end md:absolutetop-24">
+      <div className="md:absolutetop-24 mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto p-6">
         {messages.map((message, index) =>
           message.role === "user" ? (
             <UserMessage key={index.toString()} message={message} />
@@ -59,7 +59,7 @@ function ResponseMessage({
 }) {
   return (
     <div className="chat chat-start">
-      <div className="chat-image avatar w-8 h-8 mr-2">
+      <div className="chat-image avatar mr-2 h-8 w-8">
         <img
           alt="rental space"
           height="32px"
@@ -79,11 +79,11 @@ function ResponseMessage({
 function TypingIndicator({ isTyping }: { isTyping: boolean }) {
   return isTyping ? (
     <div className="flex justify-start">
-      <div className="bg-white px-4 py-4 rounded-lg">
+      <div className="rounded-lg bg-white px-4 py-4">
         <div className="flex space-x-1">
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.1s]" />
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]" />
+          <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400" />
+          <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:0.1s]" />
+          <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:0.2s]" />
         </div>
       </div>
     </div>
@@ -92,7 +92,7 @@ function TypingIndicator({ isTyping }: { isTyping: boolean }) {
 
 function ErrorNotice({ error }: { error?: Error }) {
   return error ? (
-    <div className="text-red-500 p-4">
+    <div className="p-4 text-red-500">
       {error.message || "Some error happened"}
     </div>
   ) : null;

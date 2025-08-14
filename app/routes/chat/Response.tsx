@@ -157,7 +157,7 @@ function getComponents(
     ),
     hr: () => <hr className="border-gray-300" />,
     p: ({ children }: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <p className="whitespace-pre-wrap mt-2 mb-2">{children}</p>
+      <p className="mt-2 mb-2 whitespace-pre-wrap">{children}</p>
     ),
   };
 }

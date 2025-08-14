@@ -1,6 +1,6 @@
 export default function SpecialtyLeasing() {
   return (
-    <section className="flex flex-row gap-2 max-w-screen-lg mx-auto items-start">
+    <section className="mx-auto flex max-w-screen-lg flex-row items-start gap-2">
       <LightBulb />
       <div className="prose prose-lg flex-1">
         <h2>Specialty Leasing</h2>
@@ -26,7 +26,7 @@ function LightBulb() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="w-10 h-10 text-yellow-500 flex-shrink-0"
+      className="h-10 w-10 flex-shrink-0 text-yellow-500"
       aria-hidden="true"
     >
       <line x1="9" y1="18" x2="15" y2="18" />
