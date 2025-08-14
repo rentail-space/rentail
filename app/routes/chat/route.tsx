@@ -1,13 +1,7 @@
 /** biome-ignore-all lint/a11y/noAutofocus: User needs to focus on input field */
 import { useChat } from "@ai-sdk/react";
 import { TextStreamChatTransport, type UIMessage } from "ai";
-import {
-  type FormEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useState } from "react";
 import { data, type LoaderFunctionArgs, useSearchParams } from "react-router";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
