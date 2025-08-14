@@ -26,7 +26,6 @@ export default function InputForm({
           autoFocus={true}
           className="w-full py-4 pl-5 pr-16 border-2 border-gray-200 rounded-2xl text-base outline-none transition-all duration-200 bg-white placeholder-gray-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
           disabled={isTyping}
-          id="message-input"
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about retail spaces..."
           spellCheck="false"
