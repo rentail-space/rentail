@@ -10,7 +10,6 @@
       "**",
       "!.react-router",
       "!node_modules",
-      "!build",
       "!.vercel"
     ],
     "ignoreUnknown": false
