@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/a11y/noAutofocus: User needs to focus on input field */
 import { useChat } from "@ai-sdk/react";
 import { TextStreamChatTransport, type UIMessage } from "ai";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { data, type LoaderFunctionArgs, useSearchParams } from "react-router";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
@@ -35,6 +35,7 @@ export default function Chat() {
     }),
   });
   const [input, setInput] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const initialQuery = searchParams.get("q");
 
@@ -60,31 +61,25 @@ export default function Chat() {
   return (
     <div className="relative flex h-screen flex-col bg-gray-50">
       <Header />
-      <StickToBottom
-        className="h-screen overflow-auto"
-        initial="smooth"
-        resize="smooth"
-        role="log"
-      >
+      <StickToBottom initial="smooth" resize="smooth">
         <StickToBottom.Content>
           <Messages
             error={error}
             setInput={setInput}
             isSubmitting={status === "submitted"}
             messages={messages}
+            inputRef={inputRef}
           />
         </StickToBottom.Content>
         <ScrollButton />
 
-        <section>
-          <InputForm
-            input={input}
-            isSubmitting={status === "submitted"}
-            onSubmit={onSubmit}
-            setInput={setInput}
-          />
-          <PrecannedQuestions setInput={setInput} />
-        </section>
+        <InputForm
+          input={input}
+          isSubmitting={status === "submitted"}
+          onSubmit={onSubmit}
+          setInput={setInput}
+          inputRef={inputRef}
+        />
       </StickToBottom>
     </div>
   );

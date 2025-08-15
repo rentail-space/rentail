@@ -4,15 +4,17 @@ import Response from "./Response";
 export default function MessageBubble({
   setInput,
   message,
+  inputRef,
 }: {
   setInput: (input: string) => void;
   message: UIMessage;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   const isUser = message.role === "user";
   return isUser ? (
     <UserMessage message={message} />
   ) : (
-    <ResponseMessage setInput={setInput} message={message} />
+    <ResponseMessage setInput={setInput} message={message} inputRef={inputRef} />
   );
 }
 
@@ -33,9 +35,11 @@ function UserMessage({ message }: { message: UIMessage }) {
 function ResponseMessage({
   setInput,
   message,
+  inputRef,
 }: {
   setInput: (input: string) => void;
   message: UIMessage;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   return (
     <div className="chat chat-start">
@@ -48,7 +52,7 @@ function ResponseMessage({
         />
       </div>
       <div className="chat-bubble prose prose-base">
-        <Response setInput={setInput}>
+        <Response setInput={setInput} inputRef={inputRef}>
           {message.parts.map((part) => (part as TextUIPart).text).join("")}
         </Response>
       </div>

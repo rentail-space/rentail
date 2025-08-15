@@ -7,12 +7,14 @@ export default function Messages({
   setInput,
   isSubmitting: isTyping,
   messages,
+  inputRef,
 }: {
   className?: string;
   error?: Error;
   setInput: (input: string) => void;
   isSubmitting: boolean;
   messages: UIMessage[];
+  inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   return (
     <div className={className}>
@@ -25,6 +27,7 @@ export default function Messages({
               setInput={setInput}
               key={index.toString()}
               message={message}
+              inputRef={inputRef}
             />
           ),
         )}
@@ -53,9 +56,11 @@ function UserMessage({ message }: { message: UIMessage }) {
 function ResponseMessage({
   setInput,
   message,
+  inputRef,
 }: {
   setInput: (input: string) => void;
   message: UIMessage;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   return (
     <div className="chat chat-start">
@@ -68,7 +73,7 @@ function ResponseMessage({
         />
       </div>
       <div className="chat-bubble prose prose-base">
-        <Response setInput={setInput}>
+        <Response setInput={setInput} inputRef={inputRef}>
           {message.parts.map((part) => (part as TextUIPart).text).join("")}
         </Response>
       </div>

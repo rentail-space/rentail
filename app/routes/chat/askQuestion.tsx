@@ -1,30 +1,32 @@
 import type { ReactNode } from "react";
 
 export default async function askQuestion({
-  setInput,
   question,
   scrollToBottom,
+  inputRef,
 }: {
-  setInput: (input: string) => void;
   question: Array<Exclude<ReactNode, boolean | null | undefined>>;
   scrollToBottom: () => void;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
-  let input = "";
+  if (!inputRef.current) return;
+
   // Clear input and make it readonly during typing animation
-  setInput(input);
+  inputRef.current.value = "";
 
   // Auto-scroll to bottom
   scrollToBottom();
 
-  const text = question.join("");
-
   // Animate typing the question
+  let input = "";
+  const text = question.join("");
   for (let i = 0; i < text.length; i++) {
     await new Promise((resolve) => setTimeout(resolve, 10));
     input += text[i];
-    setInput(input);
+    inputRef.current.value = input;
   }
 
   // Re-enable input and trigger change event
-  setInput(input);
+  inputRef.current.value = input;
+  setTimeout(() => inputRef.current?.focus(), 100);
 }

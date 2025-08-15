@@ -94,9 +94,11 @@ function parseIncompleteMarkdown(text: string): string {
   return result;
 }
 
-function getComponents(
-  setInput: (input: string) => void,
-): Options["components"] {
+function getComponents({
+  inputRef,
+}: {
+  inputRef: React.RefObject<HTMLInputElement | null>;
+}): Options["components"] {
   return {
     ol: ({ node, children, className, ...props }) => (
       <ol className={"ml-4 list-outside list-decimal"} {...props}>
@@ -127,9 +129,9 @@ function getComponents(
           onClick={async (event) => {
             event.preventDefault();
             await askQuestion({
-              setInput,
               question: React.Children.toArray(children),
               scrollToBottom,
+              inputRef,
             });
           }}
           rel="noreferrer"
@@ -164,11 +166,13 @@ function getComponents(
 
 export default function Response({
   className,
+  inputRef,
   setInput,
   options,
   children,
   ...props
 }: HTMLAttributes<HTMLDivElement> & {
+  inputRef: React.RefObject<HTMLInputElement | null>;
   setInput: (input: string) => void;
   options?: Options;
   children: Options["children"];
@@ -182,7 +186,7 @@ export default function Response({
       {...props}
     >
       <ReactMarkdown
-        components={getComponents(setInput)}
+        components={getComponents({ inputRef })}
         remarkPlugins={[remarkGfm]}
         {...options}
       >

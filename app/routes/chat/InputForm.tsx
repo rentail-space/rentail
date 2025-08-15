@@ -1,16 +1,20 @@
+import PrecannedQuestions from "./PrecannedQuestions";
+
 export default function InputForm({
   input,
   setInput,
   isSubmitting: isTyping,
   onSubmit,
+  inputRef,
 }: {
   input: string;
   setInput: (input: string) => void;
   isSubmitting: boolean;
   onSubmit: (input: string) => void;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   return (
-    <div className="flex w-full items-center justify-center bg-gray-50 p-2">
+    <div className="w-full items-center justify-center bg-gray-50 p-2">
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -19,6 +23,7 @@ export default function InputForm({
         className="relative w-full"
       >
         <input
+          ref={inputRef}
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
@@ -49,6 +54,7 @@ export default function InputForm({
           </svg>
         </button>
       </form>
+      <PrecannedQuestions inputRef={inputRef} />
     </div>
   );
 }
