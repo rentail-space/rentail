@@ -1,24 +1,31 @@
+import { useStickToBottomContext } from "use-stick-to-bottom";
 import PrecannedQuestions from "./PrecannedQuestions";
 
 export default function InputForm({
   input,
   setInput,
-  isSubmitting: isTyping,
+  isTyping,
   onSubmit,
   inputRef,
 }: {
   input: string;
   setInput: (input: string) => void;
-  isSubmitting: boolean;
+  isTyping: boolean;
   onSubmit: (input: string) => void;
   inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
+  const { scrollToBottom } = useStickToBottomContext();
   return (
     <div className="w-full items-center justify-center bg-gray-50 p-2">
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          if (input.trim()) onSubmit(input.trim());
+          const question = inputRef.current?.value.trim();
+          if (question) {
+            onSubmit(question);
+            scrollToBottom();
+          }
+          if (inputRef.current) inputRef.current.value = "";
         }}
         className="relative w-full"
       >

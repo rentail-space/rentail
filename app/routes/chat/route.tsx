@@ -1,7 +1,6 @@
-/** biome-ignore-all lint/a11y/noAutofocus: User needs to focus on input field */
 import { useChat } from "@ai-sdk/react";
 import { TextStreamChatTransport, type UIMessage } from "ai";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { data, type LoaderFunctionArgs, useSearchParams } from "react-router";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
@@ -9,7 +8,6 @@ import welcome from "~/lib/welcome.md?raw";
 import { commitSession, getSession } from "~/sessions.server";
 import InputForm from "./InputForm";
 import Messages from "./Messages";
-import PrecannedQuestions from "./PrecannedQuestions";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"));
@@ -50,16 +48,15 @@ export default function Chat() {
     }
   }, []);
 
-  const onSubmit = (input: string) => {
-    sendMessage({
+  const onSubmit = async (input: string) => {
+    await sendMessage({
       parts: [{ text: input.trim(), type: "text" }],
       role: "user",
     } as UIMessage);
     setSearchParams((prev) => ({ ...prev, q: input.trim() }));
   };
-
   return (
-    <div className="relative flex h-screen flex-col bg-gray-50">
+    <div className="flex h-screen flex-col bg-gray-50 inset-0">
       <Header />
       <StickToBottom initial="smooth" resize="smooth">
         <StickToBottom.Content>
@@ -70,12 +67,12 @@ export default function Chat() {
             messages={messages}
             inputRef={inputRef}
           />
+          <ScrollButton />
         </StickToBottom.Content>
-        <ScrollButton />
 
         <InputForm
           input={input}
-          isSubmitting={status === "submitted"}
+          isTyping={status === "submitted"}
           onSubmit={onSubmit}
           setInput={setInput}
           inputRef={inputRef}
@@ -88,15 +85,11 @@ export default function Chat() {
 function ScrollButton() {
   const { isAtBottom, scrollToBottom } = useStickToBottomContext();
 
-  const handleScrollToBottom = useCallback(() => {
-    scrollToBottom();
-  }, [scrollToBottom]);
-
   return (
     !isAtBottom && (
       <button
         className="absolute right-4 bottom-4 rounded-full bg-white"
-        onClick={handleScrollToBottom}
+        onClick={() => scrollToBottom()}
         type="button"
       >
         <svg

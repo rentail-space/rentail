@@ -14,7 +14,11 @@ export default function MessageBubble({
   return isUser ? (
     <UserMessage message={message} />
   ) : (
-    <ResponseMessage setInput={setInput} message={message} inputRef={inputRef} />
+    <ResponseMessage
+      setInput={setInput}
+      message={message}
+      inputRef={inputRef}
+    />
   );
 }
 
