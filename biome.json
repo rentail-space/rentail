@@ -6,12 +6,7 @@
     "useIgnoreFile": false
   },
   "files": {
-    "includes": [
-      "**",
-      "!.react-router",
-      "!node_modules",
-      "!.vercel"
-    ],
+    "includes": ["**", "!.react-router", "!node_modules", "!.vercel"],
     "ignoreUnknown": false
   },
   "formatter": {
@@ -32,7 +27,7 @@
     "enabled": true,
     "rules": {
       "nursery": {
-        "useSortedClasses": "error"
+        "useSortedClasses": "off"
       },
       "suspicious": {
         "noUnknownAtRules": "off"
