@@ -59,12 +59,40 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 
 ## Code Style
 
-- Use TypeScript for type safety
+- Use TypeScript for type safety with strict mode enabled
+- Prefer interfaces over types, avoid enums (use maps instead)
 - Component naming: PascalCase for components, camelCase for utilities
+- Directory naming: lowercase with dashes (e.g., `components/auth-wizard`)
 - Path alias: `~/*` maps to `./app/*`
-- Use descriptive variable names
+- Use descriptive variable names with auxiliary verbs (e.g., `isLoading`, `hasError`)
 - Organize imports: React first, then external libs, then local files
-- Biome enforces double quotes, space indentation, and import organization
+- Use functional and declarative programming patterns; avoid classes
+- Use the "function" keyword for pure functions
+- Structure files: exported component, subcomponents, helpers, static content, types
+- Biome enforces double quotes, space indentation, line width 80, and import organization
+- Favor default exports for components
+
+## Development Practices
+
+**Performance:**
+- Minimize `useState` and `useEffect`; prefer context and reducers for state management
+- Implement code splitting and lazy loading with React's Suspense and dynamic imports
+- Use `useMemo` and `useCallback` appropriately to avoid unnecessary re-renders
+
+**Error Handling:**
+- Handle errors at the beginning of functions with early returns
+- Avoid unnecessary else statements; use if-return pattern
+- Implement global error boundaries for unexpected errors
+- Use Zod for runtime validation and error handling
+
+**Security:**
+- Sanitize user inputs to prevent XSS attacks
+- Use HTTPS and proper authentication for API communication
+- Never commit secrets or API keys to the repository
+
+**AI Integration:**
+- Use Context7 MCP server for library documentation and code examples
+- Reference the system prompt in `app/lib/system.md` for AI assistant behavior
 
 ## Tests
 
@@ -77,6 +105,9 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Checkly monitoring tests in `__checks__` directory
 - Requires Node.js 22.0.0 or higher
 - Tests use custom server launcher (`test/e2e.ts`) that starts dev server on port 9222
+- Write unit tests with Vitest for all utilities and components
+- Consider snapshot testing for UI consistency
+- Run individual tests: `npm run test -- <test-pattern>`
 
 ## Environment Variables
 
