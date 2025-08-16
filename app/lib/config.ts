@@ -11,11 +11,11 @@ export default {
 
   ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),
   LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required().asString(),
-  LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required().asString(),
-  PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required().asString(),
+  LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required().asUrlString(),
+  PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required().asUrlString(),
   PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required().asString(),
 
-  SENTRY_DSN: env.get("SENTRY_DSN").default("").asString(),
+  SENTRY_DSN: env.get("SENTRY_DSN").required(false).asUrlString(),
 
   SESSION_SECRET: env.get("SESSION_SECRET").required().asString(),
   SESSION_MAX_AGE_SECONDS: env

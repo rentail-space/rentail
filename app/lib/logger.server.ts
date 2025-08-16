@@ -36,7 +36,7 @@ const colors = {
 
 process.on("exit", () => {
   // Ensure that all logs are sent to Logtail
-  logtail.flush();
+  if (serverConfig.isProduction) logtail.flush();
 });
 
 export default logtail;
