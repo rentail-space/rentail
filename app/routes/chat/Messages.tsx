@@ -17,8 +17,8 @@ export default function Messages({
   inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   return (
-    <div className={className}>
-      <div className="md:absolutetop-24 mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto p-6">
+    <div className={`flex-1 flex flex-col ${className || ""}`}>
+      <div className="mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto p-6">
         {messages.map((message, index) =>
           message.role === "user" ? (
             <UserMessage key={index.toString()} message={message} />
