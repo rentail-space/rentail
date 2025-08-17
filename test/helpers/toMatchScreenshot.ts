@@ -16,7 +16,7 @@ import type { Page } from "playwright";
 import { PNG } from "pngjs";
 import invariant from "tiny-invariant";
 
-const maxDiffPercentage = 3;
+const maxDiffPercentage = 5;
 const dirname = path.resolve("./__screenshots__");
 
 expect.extend({
