@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 import dayjs from "dayjs";
 import fm from "front-matter";
@@ -16,25 +16,25 @@ import truncateWords from "~/lib/truncateWords";
 import type { FrontMatter } from "./home/BlogPosts";
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  const { "*": slug } = params;
   try {
-    invariant(slug, "Slug is required");
-    const filename = path.join(process.cwd(), `./app/data/blog/${slug}.md`);
-    const post = readFileSync(filename, "utf8");
+    const post = await readFile(
+      path.join(process.cwd(), "app/data/blog", `${params.post}.md`),
+      "utf8",
+    );
     const { attributes } = fm<FrontMatter>(post);
-    invariant(attributes.published, "Published date is required");
     invariant(
       dayjs().isAfter(attributes.published),
       "Published date is in the future",
     );
-    return { post, slug };
-  } catch {
+    return { post, slug: params.post };
+  } catch (error) {
+    console.error(error);
     throw new Response("Not Found", { status: 404 });
   }
 }
 
-export const meta: MetaFunction<typeof loader> = ({ loaderData, params }) => {
-  const { "*": slug } = params;
+export const meta: MetaFunction<typeof loader> = ({ loaderData }) => {
+  if (!loaderData) return [];
   const { attributes } = fm<FrontMatter>(loaderData?.post ?? "");
   invariant(attributes.published, "Published date is required");
   return [
@@ -43,7 +43,10 @@ export const meta: MetaFunction<typeof loader> = ({ loaderData, params }) => {
     // Facebook Meta Tags
     { property: "og:article:author", content: "Rentail Space" },
     { property: "og:article:section", content: "Blog" },
-    { property: "og:image", content: attributes.image?.src },
+    {
+      property: "og:image",
+      content: `https://rentail.space/blog/${loaderData.slug}.jpg`,
+    },
     {
       property: "og:published_time",
       content: DateTime.fromJSDate(attributes.published, { zone: "utc" })
@@ -52,15 +55,24 @@ export const meta: MetaFunction<typeof loader> = ({ loaderData, params }) => {
     },
     { property: "og:title", content: attributes.title },
     { property: "og:type", content: "article" },
-    { property: "og:url", content: `https://rentail.space/blog/${slug}` },
+    {
+      property: "og:url",
+      content: `https://rentail.space/blog/${loaderData.slug}`,
+    },
     { property: "og:site_name", content: "Rentail Space" },
     { property: "og:locale", content: "en_US" },
 
     // Twitter Meta Tags
     { property: "twitter:title", content: attributes.title },
-    { property: "twitter:url", content: `https://rentail.space/blog/${slug}` },
+    {
+      property: "twitter:url",
+      content: `https://rentail.space/blog/${loaderData.slug}`,
+    },
     { property: "twitter:card", content: "summary_large_image" },
-    { property: "twitter:image", content: attributes.image?.src },
+    {
+      property: "twitter:image",
+      content: `https://rentail.space/blog/${loaderData.slug}.jpg`,
+    },
     { property: "twitter:site", content: "@rentailspace" },
   ];
 };
@@ -72,7 +84,6 @@ export default function Post() {
   const datePublished = DateTime.fromJSDate(attributes.published, {
     zone: "utc",
   }).setZone("UTC");
-  invariant(attributes.image, "Image is required");
 
   return (
     <Layout>
@@ -81,9 +92,9 @@ export default function Post() {
 
         <figure className="relative left-[calc(-50vw+50%)] my-4 w-screen overflow-x-hidden">
           <img
-            alt={attributes.image.alt}
+            alt=""
             className="h-[60vh] w-full object-cover"
-            src={attributes.image.src}
+            src={`/blog/${slug}.jpg`}
           />
         </figure>
 
@@ -156,10 +167,10 @@ export default function Post() {
           inLanguage: "en-US",
           name: attributes.title,
           primaryImageOfPage: {
-            "@id": attributes.image.src,
+            "@id": `https://rentail.space/blog/${slug}.jpg`,
             "@type": "ImageObject",
-            contentUrl: new URL(attributes.image.src, "https://rentail.space"),
-            caption: attributes.image.alt,
+            contentUrl: new URL(`/blog/${slug}.jpg`, "https://rentail.space"),
+            caption: "",
           },
         })}
       </script>

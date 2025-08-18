@@ -32,11 +32,11 @@ export default function BlogPosts({
           key={post.slug}
         >
           <img
-            src={post.attributes.image?.src}
-            alt={post.attributes.image?.alt}
-            width={100}
-            height={100}
+            alt=""
             className="mt-12 h-24 w-24 rounded-lg border border-gray-200 object-cover"
+            height={100}
+            src={`/blog/${post.slug}.jpg`}
+            width={100}
           />
           <div>
             <h3>{post.attributes.title}</h3>
