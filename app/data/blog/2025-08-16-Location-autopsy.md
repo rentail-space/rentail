@@ -2,7 +2,7 @@
 title: "Location autopsy: 5 'perfect' retail spots that killed businesses"
 published: 2025-08-16
 image:
-  src: "/blog/2025-08-16-Location-autopsy.jpg"
+  src: "/blog/2025-08-16-location-autopsy.jpg"
 ---
 
 ## And the 3 Warning Signs You Must Know
