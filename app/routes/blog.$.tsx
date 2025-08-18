@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import fm from "front-matter";
 import { DateTime } from "luxon";
 import Markdown from "react-markdown";
@@ -14,18 +15,16 @@ import truncateWords from "~/lib/truncateWords";
 import type { FrontMatter } from "./home/BlogPosts";
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  return await loadFile(params);
-}
-
-async function loadFile(
-  params: Params<string>,
-): Promise<{ post: string; slug: string }> {
   const { "*": slug } = params;
   try {
     invariant(slug, "Slug is required");
     const post = await import(`../data/blog/${slug}.md?raw`);
     const { attributes } = fm<FrontMatter>(post.default);
     invariant(attributes.published, "Published date is required");
+    invariant(
+      dayjs().isAfter(attributes.published),
+      "Published date is in the future",
+    );
     return { post: post.default, slug };
   } catch {
     throw new Response("Not Found", { status: 404 });

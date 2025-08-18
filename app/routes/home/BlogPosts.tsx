@@ -1,4 +1,5 @@
-import { drop, take } from "es-toolkit";
+import dayjs from "dayjs";
+import { drop, invariant, take } from "es-toolkit";
 import type { FrontMatterResult } from "front-matter";
 import { Link } from "react-router";
 import removeMd from "remove-markdown";
@@ -15,8 +16,12 @@ export default function BlogPosts({
 }: {
   posts: (FrontMatterResult<FrontMatter> & { slug: string })[];
 }) {
-  const first = take(posts, 3);
-  const rest = drop(posts, 3);
+  const today = dayjs();
+  const isPublished = posts.filter((post) =>
+    today.isAfter(post.attributes.published),
+  );
+  const first = take(isPublished, 3);
+  const rest = drop(isPublished, 3);
 
   return (
     <section className="prose prose-lg mx-auto">
