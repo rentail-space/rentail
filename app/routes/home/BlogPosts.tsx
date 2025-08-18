@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { drop, invariant, take } from "es-toolkit";
+import { drop, take } from "es-toolkit";
 import type { FrontMatterResult } from "front-matter";
 import { Link } from "react-router";
 import removeMd from "remove-markdown";

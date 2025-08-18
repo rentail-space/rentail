@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import dayjs from "dayjs";
 import fm from "front-matter";
 import { DateTime } from "luxon";
@@ -5,7 +7,6 @@ import Markdown from "react-markdown";
 import {
   type LoaderFunctionArgs,
   type MetaFunction,
-  type Params,
   useLoaderData,
 } from "react-router";
 import removeMd from "remove-markdown";
@@ -18,22 +19,23 @@ export async function loader({ params }: LoaderFunctionArgs) {
   const { "*": slug } = params;
   try {
     invariant(slug, "Slug is required");
-    const post = await import(`../data/blog/${slug}.md?raw`);
-    const { attributes } = fm<FrontMatter>(post.default);
+    const filename = path.join(process.cwd(), `./app/data/blog/${slug}.md`);
+    const post = readFileSync(filename, "utf8");
+    const { attributes } = fm<FrontMatter>(post);
     invariant(attributes.published, "Published date is required");
     invariant(
       dayjs().isAfter(attributes.published),
       "Published date is in the future",
     );
-    return { post: post.default, slug };
+    return { post, slug };
   } catch {
     throw new Response("Not Found", { status: 404 });
   }
 }
 
-export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
+export const meta: MetaFunction<typeof loader> = ({ loaderData, params }) => {
   const { "*": slug } = params;
-  const { attributes } = fm<FrontMatter>(data?.post ?? "");
+  const { attributes } = fm<FrontMatter>(loaderData?.post ?? "");
   invariant(attributes.published, "Published date is required");
   return [
     { title: attributes.title },
