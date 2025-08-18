@@ -6,8 +6,7 @@ import removeMd from "remove-markdown";
 import truncateWords from "~/lib/truncateWords";
 
 export type FrontMatter = {
-  image?: { alt: string; src: string };
-  published?: Date;
+  published: Date;
   title: string;
 };
 

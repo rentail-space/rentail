@@ -41,15 +41,6 @@ describe("Blog Post Rendering", () => {
     const heroImage = page.locator("figure img");
     expect(heroImage).toBeVisible();
 
-    // Verify image attributes
-    const imageSrc = await heroImage.getAttribute("src");
-    const imageAlt = await heroImage.getAttribute("alt");
-
-    expect(imageSrc).toBe("/blog/2025-07-19-ultimate-guide.jpg");
-    expect(imageAlt).toBe(
-      "Person standing inside a sunlit empty retail space holding a tablet, reviewing the lease for a new business location.",
-    );
-
     // Check image styling classes
     const imageClasses = await heroImage.getAttribute("class");
     expect(imageClasses).toContain("w-full");

@@ -1,8 +1,6 @@
 ---
 title: "The 90-Day Retail Launch Blueprint: From Lease Signature to First Sale"
 published: 2025-08-26
-image:
-  src: "/blog/2025-08-26-the-90-day-retail-launch-blueprint.jpg"
 ---
 
 Master retail store launch in 90 days with our proven blueprint. Get specific milestones, deadlines, and actionable strategies to open your retail business successfully and profitably.
