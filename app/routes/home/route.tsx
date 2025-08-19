@@ -1,10 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
+import dayjs from "dayjs";
 import fm from "front-matter";
+import { DateTime } from "luxon";
 import { useId } from "react";
 import { useLoaderData } from "react-router";
 import { Footer } from "~/components/layout/Footer";
-import BlogPosts, { type FrontMatter } from "./BlogPosts";
+import BlogPosts from "./BlogPosts";
 import FeaturesSection from "./FeaturesSection";
 import HeroSection from "./HeroSection";
 import HowItWorksSection from "./HowItWorksSection";
@@ -12,6 +14,7 @@ import SpecialtyLeasing from "./SpecialtyLeasing";
 
 export async function loader() {
   const dataDir = path.join(process.cwd(), "app/data/blog");
+  const today = dayjs();
   const posts = fs
     .readdirSync(dataDir)
     .filter((filename: string) => filename.endsWith(".md"))
@@ -20,15 +23,15 @@ export async function loader() {
       filename,
     }))
     .map(({ filename, content }) => ({
-      ...fm<FrontMatter>(content),
+      ...fm<{ title: string }>(content),
       slug: filename.replace(".md", ""),
+      published: DateTime.fromISO(
+        filename.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
+        { zone: "utc" },
+      ),
     }))
-    .filter((post) => post.attributes.published)
-    .sort(
-      (a, b) =>
-        new Date(b.attributes.published ?? new Date()).getTime() -
-        new Date(a.attributes.published ?? new Date()).getTime(),
-    );
+    .filter((post) => today.isAfter(post.published.toJSDate()))
+    .sort((a, b) => b.published.toMillis() - a.published.toMillis());
   return { posts };
 }
 

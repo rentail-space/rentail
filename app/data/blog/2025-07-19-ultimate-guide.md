@@ -1,6 +1,5 @@
 ---
 title: "A Step-by-Step Guide for First-Time Business Owners"
-published: 2025-07-19
 ---
 
 Did you know that signing the wrong retail lease can cost first-time business owners up to 20% more in operational expenses?

@@ -1,6 +1,5 @@
 ---
 title: "Rent Negotiation Secrets: How One Merchant Cut Their Monthly Payment by 40% (Without Moving)"
-published: 2025-08-28
 ---
 
 ## The Phone Call That Changed Everything

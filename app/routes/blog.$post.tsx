@@ -13,7 +13,6 @@ import removeMd from "remove-markdown";
 import invariant from "tiny-invariant";
 import Layout from "~/components/layout/Layout";
 import truncateWords from "~/lib/truncateWords";
-import type { FrontMatter } from "./home/BlogPosts";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   try {
@@ -21,9 +20,12 @@ export async function loader({ params }: LoaderFunctionArgs) {
       path.join(process.cwd(), "app/data/blog", `${params.post}.md`),
       "utf8",
     );
-    const { attributes } = fm<FrontMatter>(post);
+    const published = DateTime.fromISO(
+      params.post?.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
+      { zone: "utc" },
+    );
     invariant(
-      dayjs().isAfter(attributes.published),
+      dayjs().isAfter(published.toJSDate()),
       "Published date is in the future",
     );
     return { post, slug: params.post };
@@ -33,10 +35,19 @@ export async function loader({ params }: LoaderFunctionArgs) {
   }
 }
 
-export const meta: MetaFunction<typeof loader> = ({ loaderData }) => {
+export const meta: MetaFunction<typeof loader> = ({ loaderData, params }) => {
   if (!loaderData) return [];
-  const { attributes } = fm<FrontMatter>(loaderData?.post ?? "");
-  invariant(attributes.published, "Published date is required");
+
+  const published = DateTime.fromISO(
+    params.post?.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
+    { zone: "utc" },
+  );
+  invariant(
+    dayjs().isAfter(published.toJSDate()),
+    "Published date is in the future",
+  );
+
+  const { attributes } = fm<{ title: string }>(loaderData?.post ?? "");
   return [
     { title: attributes.title },
 
@@ -49,7 +60,7 @@ export const meta: MetaFunction<typeof loader> = ({ loaderData }) => {
     },
     {
       property: "og:published_time",
-      content: DateTime.fromJSDate(attributes.published, { zone: "utc" })
+      content: published
         .setZone("UTC")
         .toFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", { locale: "en-US" }),
     },
@@ -79,11 +90,11 @@ export const meta: MetaFunction<typeof loader> = ({ loaderData }) => {
 
 export default function Post() {
   const { post, slug } = useLoaderData<typeof loader>();
-  const { attributes, body } = fm<FrontMatter>(post);
-  invariant(attributes.published, "Published date is required");
-  const datePublished = DateTime.fromJSDate(attributes.published, {
-    zone: "utc",
-  }).setZone("UTC");
+  const { attributes, body } = fm<{ title: string }>(post);
+  const published = DateTime.fromISO(
+    slug?.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
+    { zone: "utc" },
+  );
 
   return (
     <Layout>
@@ -99,7 +110,7 @@ export default function Post() {
         </figure>
 
         <div className="text-gray-500 text-sm">
-          {datePublished.toFormat("LLLL dd, yyyy", { locale: "en-US" })}
+          {published.toFormat("LLLL dd, yyyy", { locale: "en-US" })}
         </div>
 
         <Markdown
@@ -162,7 +173,7 @@ export default function Post() {
           "@context": "https://schema.org",
           "@type": "WebPage",
           "@id": `https://rentail.space/blog/${slug}`,
-          datePublished: datePublished.toISODate(),
+          datePublished: published.toISODate(),
           description: truncateWords(removeMd(body), 50),
           inLanguage: "en-US",
           name: attributes.title,

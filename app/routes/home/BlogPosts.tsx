@@ -1,23 +1,23 @@
 import dayjs from "dayjs";
 import { drop, take } from "es-toolkit";
 import type { FrontMatterResult } from "front-matter";
+import { DateTime } from "luxon";
 import { Link } from "react-router";
 import removeMd from "remove-markdown";
 import truncateWords from "~/lib/truncateWords";
 
-export type FrontMatter = {
-  published: Date;
-  title: string;
-};
-
 export default function BlogPosts({
   posts,
 }: {
-  posts: (FrontMatterResult<FrontMatter> & { slug: string })[];
+  posts: (FrontMatterResult<{ title: string }> & { slug: string })[];
 }) {
   const today = dayjs();
   const isPublished = posts.filter((post) =>
-    today.isAfter(post.attributes.published),
+    today.isAfter(
+      DateTime.fromISO(
+        post.slug.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
+      ).toJSDate(),
+    ),
   );
   const first = take(isPublished, 3);
   const rest = drop(isPublished, 3);
