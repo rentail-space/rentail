@@ -413,5 +413,3 @@ Marcus's 40% rent reduction wasn't luck, desperation, or market timing. It was t
 Marcus's results prove the ROI: $32,400 in annual savings, improved cash flow that enabled business growth, and a three-year lease that provides stability and predictability.
 
 **Remember this truth:** Every day you overpay rent is profit you'll never recover. Every month you delay negotiation is money left on the table. Every year you accept above-market terms is competitive advantage you're giving away.
-
-*The phone call that changed Marcus's business can change yours too—if you're prepared to make it strategically.*
