@@ -44,12 +44,12 @@ jobs:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
-      - name: Install Playwright Browsers
+      - name: Install Playwright Browsers — Chromium
+        # if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-      - name: Install Playwright Browsers - Cached
-        run: npx playwright install-deps
+      - name: Install Playwright Browsers - Depencies
         if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps
 
 
       - name: Setup Biome
