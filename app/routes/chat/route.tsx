@@ -1,9 +1,5 @@
 import { useChat } from "@ai-sdk/react";
-import {
-  DefaultChatTransport,
-  TextStreamChatTransport,
-  type UIMessage,
-} from "ai";
+import { DefaultChatTransport, type UIMessage } from "ai";
 import { useEffect, useRef, useState } from "react";
 import { data, type LoaderFunctionArgs, useSearchParams } from "react-router";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";

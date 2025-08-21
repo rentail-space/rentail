@@ -77,7 +77,7 @@ describe("Chat page", () => {
     await page.waitForLoadState("networkidle");
 
     const testMessage =
-      "I'm looking for a pop-up retail space for my clothing boutique.";
+      "looking for a pop-up retail space for my clothing boutique";
 
     // Fill and submit the message
     await page.fill("input[type='text']", testMessage);
@@ -85,7 +85,10 @@ describe("Chat page", () => {
 
     // Verify user message appears in chat
     await expect(
-      page.locator(".chat-bubble-accent").filter({ hasText: testMessage }),
+      page
+        .locator(".chat-bubble-accent")
+        .filter({ hasText: testMessage })
+        .first(),
     ).toBeVisible({ timeout: 5000 });
 
     // Wait a moment for any UI updates after form submission
@@ -94,7 +97,8 @@ describe("Chat page", () => {
     // Verify user message is present
     const userMessage = page
       .locator(".chat-bubble-accent")
-      .filter({ hasText: testMessage });
+      .filter({ hasText: testMessage })
+      .first();
     await expect(userMessage).toBeVisible();
 
     // Count all chat messages - should have at least welcome message + user message

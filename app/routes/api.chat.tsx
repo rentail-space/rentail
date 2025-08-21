@@ -1,5 +1,4 @@
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
-import { show } from "showify";
 import invariant from "tiny-invariant";
 import general from "../lib/general.md?raw";
 import spaces from "../lib/spaces.md?raw";

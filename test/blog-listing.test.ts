@@ -74,8 +74,8 @@ describe("Blog Listing", () => {
     // Click the link
     await firstBlogLink.click();
 
-    // Wait for navigation
-    await page.waitForLoadState("networkidle");
+    // Wait for navigation to complete
+    await page.waitForURL(/.*\/blog\/.*/, { timeout: 10000 });
 
     // Verify we're on a blog post page
     expect(page.url()).toContain("/blog/");
