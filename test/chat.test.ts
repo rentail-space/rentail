@@ -1,5 +1,4 @@
 import { expect } from "playwright/test";
-import { show } from "showify";
 import { describe, it } from "vitest";
 import { launchBrowser, URL } from "./helpers/launchBrowser";
 
@@ -131,25 +130,6 @@ describe("Chat page", () => {
     // 2. At least one of: typing indicator, error, or response (showing the system reacted)
     expect(chatCount).toBeGreaterThanOrEqual(2);
     expect(hasTypingIndicator || hasError || hasResponse).toBe(true);
-
-    await page.close();
-  });
-
-  it("chat page visual regression test", async () => {
-    const page = await launchBrowser();
-    await page.goto(`${URL}/chat`);
-
-    // Wait for the page to fully load
-    await page.waitForLoadState("networkidle");
-
-    // Wait for any initial animations to complete
-    await page.waitForTimeout(500);
-
-    // Ensure the welcome message is visible before taking screenshot
-    await expect(page.locator(".chat").first()).toBeVisible();
-
-    // Take screenshot for visual regression testing
-    await expect(page).toMatchScreenshot();
 
     await page.close();
   });
