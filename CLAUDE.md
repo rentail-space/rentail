@@ -121,7 +121,7 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 ## Environment Variables
 
 Required environment variables (set in `.env.local`):
-- `ANTHROPIC_API_KEY`: API key for Claude AI integration
+- `AI_GATEWAY_API_KEY`: Vercel AI Gateway API key
 - `LOGTAIL_TOKEN`: BetterStack Logtail token for logging
 - `LOGTAIL_ENDPOINT`: BetterStack Logtail endpoint URL
 - `PUSHGATEWAY_URL`: BetterStack Push Gateway URL for metrics

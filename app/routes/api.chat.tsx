@@ -1,4 +1,3 @@
-import { anthropic } from "@ai-sdk/anthropic";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import invariant from "tiny-invariant";
 import general from "../lib/general.md?raw";
@@ -12,7 +11,7 @@ export async function action({ request }: Route.ActionArgs) {
   const { messages }: { messages: UIMessage[] } = await request.json();
   const result = streamText({
     messages: convertToModelMessages(messages),
-    model: anthropic("claude-opus-4-1-20250805"),
+    model: "anthropic/claude-sonnet-4",
     providerOptions: {
       anthropic: {
         thinking: {

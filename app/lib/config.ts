@@ -9,7 +9,7 @@ export default {
   isDebug: env.get("DEBUG").asString() !== undefined,
   isTest: env.get("NODE_ENV").asString() === "test",
 
-  ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),
+  AI_GATEWAY_API_KEY: env.get("AI_GATEWAY_API_KEY").required().asString(),
   LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required().asString(),
   LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required().asUrlString(),
   PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required().asUrlString(),
