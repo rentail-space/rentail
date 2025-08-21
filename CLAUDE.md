@@ -29,9 +29,11 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - Playwright for E2E testing with visual regression
 
 **AI Integration:**
-- Claude 4 Opus via Anthropic AI SDK (`app/lib/llm.ts`)
-- Streaming chat API endpoint (`app/routes/api.chat.tsx`)
-- System prompt for rental space assistant (`app/lib/system.md`)
+- Claude 4 via Anthropic AI SDK with streaming responses
+- Chat API endpoint: `app/routes/api.chat.tsx` (streaming chat interface)
+- AI library configuration: `app/lib/config.ts` (environment-based settings)
+- System prompts in `app/lib/`: `general.md`, `prelude.md`, `spaces.md`, `welcome.md`
+- Use Context7 MCP server for library documentation and code examples
 
 **Monitoring & Observability:**
 - Sentry for error tracking and performance monitoring
@@ -42,12 +44,15 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - Checkly for synthetic monitoring (every 30 minutes)
 
 **File-Based Routing:**
-Routes are configured in `/app/routes.ts` using React Router v7's declarative routing:
-- `/` - Home route (`routes/home/route.tsx`) with marketing content
-- `/chat` - Chat interface for space discovery (`routes/chat/route.tsx`)
-- `/blog/$` - Dynamic blog post routes (`routes/blog.$.tsx`)
-- `/api/chat` - Streaming AI chat endpoint (`routes/api.chat.tsx`)
-- Root layout in `/app/root.tsx` with HTML shell and global components
+Routes are configured in `/app/routes.ts` using React Router v7's declarative routing with `flatRoutes`:
+- `/` - Home route (`routes/home/route.tsx`) with marketing content and hero sections
+- `/chat` - Interactive chat interface (`routes/chat/route.tsx`) for space discovery with AI
+- `/blog/$post` - Dynamic blog posts (`routes/blog.$post.tsx`) with markdown content
+- `/blog/$post[.jpg]` - Blog post image serving (`routes/blog.$post[.jpg].ts`)
+- `/api/chat` - Streaming AI chat endpoint (`routes/api.chat.tsx`) with Claude integration
+- `/robots.txt` and `/sitemap.xml` - SEO utilities (`routes/robots[.]txt.ts`, `routes/sitemap[.]xml.ts`)
+- Root layout in `/app/root.tsx` with HTML shell, Sentry integration, and global components
+- Route configuration ignores test files and home directory from flat routes
 
 **SSR Configuration:**
 - Server-side rendering enabled by default via `react-router.config.ts`
@@ -91,8 +96,9 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Never commit secrets or API keys to the repository
 
 **AI Integration:**
-- Use Context7 MCP server for library documentation and code examples
-- Reference the system prompt in `app/lib/system.md` for AI assistant behavior
+- Use Context7 MCP server for library documentation and code examples  
+- AI configuration managed via `app/lib/config.ts` with env-var validation
+- Multiple system prompt files for different contexts (general, prelude, spaces, welcome)
 
 ## Tests
 
@@ -104,7 +110,10 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Screenshots stored in `__screenshots__` directory
 - Checkly monitoring tests in `__checks__` directory
 - Requires Node.js 22.0.0 or higher
-- Tests use custom server launcher (`test/e2e.ts`) that starts dev server on port 9222
+- Tests use setup file in `/test/helpers/setup.ts` with MSW mock server configuration
+- Visual regression tests use custom `toMatchScreenshot` matcher with Playwright browser provider
+- Test configuration in `vitest.config.ts` with 30-second timeout for E2E tests
+- Mock server setup prevents external API calls during testing
 - Write unit tests with Vitest for all utilities and components
 - Consider snapshot testing for UI consistency
 - Run individual tests: `npm run test -- <test-pattern>`
@@ -126,7 +135,7 @@ Optional environment variables:
 - `SENTRY_AUTH_TOKEN`: Sentry auth token for build-time integration
 - `NODE_ENV`: Environment (development/production)
 - `SSR_REQUEST_TIMEOUT_MS`: SSR timeout in milliseconds (default: 5000)
-- `METRICS_COLLECTION_INTERVAL_MS`: Metrics collection interval (default: 5000)
+- `METRICS_COLLECTION_INTERVAL_MS`: Metrics collection interval (default: 300000ms / 5 minutes)
 - `SESSION_MAX_AGE_SECONDS`: Session duration in seconds (default: 30 days)
 
 ## Project Structure
@@ -147,4 +156,11 @@ Optional environment variables:
 - `.react-router`: Cache directory (can be cleaned with npm run clean)
 - `react-router.config.ts`: React Router v7 configuration with prerendering
 - `checkly.config.ts`: Synthetic monitoring configuration
-- `biome.json`: Linting and formatting rules with import organization
+- `biome.json`: Linting and formatting rules with import organization and strict style rules
+- `mcp.json`: MCP server configuration for Claude Code integration
+
+# important-instruction-reminders  
+Do what has been asked; nothing more, nothing less.
+NEVER create files unless they're absolutely necessary for achieving your goal.
+ALWAYS prefer editing an existing file to creating a new one.
+NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
