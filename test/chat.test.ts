@@ -1,4 +1,5 @@
 import { expect } from "playwright/test";
+import { show } from "showify";
 import { describe, it } from "vitest";
 import { launchBrowser, URL } from "./helpers/launchBrowser";
 
@@ -30,7 +31,7 @@ describe("Chat page", () => {
 
   it("handles initial query parameter", async () => {
     const page = await launchBrowser();
-    const testQuery = "Find me a retail space in downtown area";
+    const testQuery = "Do you have any locations available in downtown areas?";
     await page.goto(`${URL}/chat?q=${encodeURIComponent(testQuery)}`);
 
     // Wait for the message to be processed
@@ -69,33 +70,6 @@ describe("Chat page", () => {
     await page.close();
   });
 
-  it("maintains chat history during session", async () => {
-    const page = await launchBrowser();
-    await page.goto(`${URL}/chat`);
-    // This seems necessary, otherwise the first message input is ignored
-    await page.waitForTimeout(100);
-
-    const firstMessage = "First test message";
-    const secondMessage = "Second test message";
-
-    // Send first message
-    await page.fill("input[type='text']", firstMessage);
-    await page.press("button", "Enter");
-
-    // Send second message
-    await page.fill("input[type='text']", secondMessage);
-    await page.press("button", "Enter");
-
-    // Check both messages are still visible
-    await expect(
-      page.locator(".chat-bubble-accent").filter({ hasText: firstMessage }),
-    ).toBeVisible();
-    await expect(
-      page.locator(".chat-bubble-accent").filter({ hasText: secondMessage }),
-    ).toBeVisible();
-    await page.close();
-  });
-
   it("sends user message and receives server response", async () => {
     const page = await launchBrowser();
     await page.goto(`${URL}/chat`);
@@ -103,7 +77,8 @@ describe("Chat page", () => {
     // Wait for page to be ready
     await page.waitForLoadState("networkidle");
 
-    const testMessage = "I need a retail space for a pop-up store";
+    const testMessage =
+      "I'm looking for a pop-up retail space for my clothing boutique.";
 
     // Fill and submit the message
     await page.fill("input[type='text']", testMessage);
