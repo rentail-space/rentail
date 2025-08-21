@@ -1,4 +1,5 @@
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
+import { show } from "showify";
 import invariant from "tiny-invariant";
 import general from "../lib/general.md?raw";
 import spaces from "../lib/spaces.md?raw";
@@ -22,7 +23,7 @@ export async function action({ request }: Route.ActionArgs) {
     },
     system: [general, spaces].join("\n\n=====\n\n"),
   });
-  return result.toTextStreamResponse();
+  return result.toUIMessageStreamResponse();
 }
 
 /**
