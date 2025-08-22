@@ -1,6 +1,7 @@
 import type { UIMessage } from "ai";
 import React from "react";
 import type { Components } from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import askQuestion from "./askQuestion";
@@ -84,6 +85,7 @@ function ResponseMessage({
               <Streamdown
                 components={getComponents({ inputRef, scrollToBottom })}
                 key={index.toString()}
+                remarkPlugins={[remarkGfm]}
                 rehypePlugins={[]}
                 allowedImagePrefixes={["*"]}
                 allowedLinkPrefixes={["*"]}
