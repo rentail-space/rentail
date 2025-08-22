@@ -87,7 +87,6 @@ For example, what's your preferred square footage, duration of lease, and budget
         <StickToBottom.Content>
           <Messages
             error={error}
-            setInput={setInput}
             isSubmitting={status === "submitted"}
             messages={messages}
             inputRef={inputRef}
