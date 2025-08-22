@@ -1,22 +1,15 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-function error_and_exit {
-  echo -e "\033[31m  $1\033[0m"
-  terminal-notifier -sound default  -title "$0" -message "$1"
-  exit 1
-}
-
 echo -e "\033[32m  Upgrading dependencies …\033[0m"
-npm prune --force
 npm outdated  || echo
-npx playwright install
 npm-check-updates --configFileName .npm-check-update.json --errorLevel 2
+npx playwright install
 npm dedupe --force
-npm prune
+npm prune --force
 
 echo -e "\033[32m  Checking code …\033[0m"
-npm run test || error_and_exit "Tests failed"
+npm run test
 
 echo -e "\033[32m  Commiting changes …\033[0m"
 git diff --unified=0 --color --word-diff package.json | cat
