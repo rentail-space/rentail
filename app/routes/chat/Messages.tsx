@@ -78,18 +78,18 @@ function ResponseMessage({
         />
       </div>
       <div className="chat-bubble prose prose-base">
-        <div key={message.id}>
+        <div>
           {message.parts
             .filter((part) => part.type === "text")
             .map((part, index) => (
               <Streamdown
-                components={getComponents({ inputRef, scrollToBottom })}
-                key={index.toString()}
-                remarkPlugins={[remarkGfm]}
-                rehypePlugins={[]}
                 allowedImagePrefixes={["*"]}
                 allowedLinkPrefixes={["*"]}
+                components={getComponents({ inputRef, scrollToBottom })}
                 defaultOrigin="https://rentail.space"
+                key={index.toString()}
+                rehypePlugins={[]}
+                remarkPlugins={[remarkGfm]}
               >
                 {part.text}
               </Streamdown>
@@ -151,7 +151,8 @@ function getComponents({
       </span>
     ),
     a: ({ node, children, className, ...props }) => {
-      return (
+      const isAsk = props.href?.startsWith("https://rentail.space");
+      return isAsk ? (
         <a
           className="btn btn-soft btn-primary"
           href={`?q=${children}`}
@@ -163,10 +164,11 @@ function getComponents({
               inputRef,
             });
           }}
-          rel="noreferrer"
-          target="_blank"
-          {...props}
         >
+          {children}
+        </a>
+      ) : (
+        <a className="link-primary" href={props.href} target="_blank">
           {children}
         </a>
       );

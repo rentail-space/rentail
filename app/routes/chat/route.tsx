@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { data, type LoaderFunctionArgs, useSearchParams } from "react-router";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
-import welcome from "~/lib/welcome.md?raw";
 import { commitSession, getSession } from "~/sessions.server";
 import InputForm from "./InputForm";
+import initialMessages from "./initial.json";
 import Messages from "./Messages";
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -22,36 +22,10 @@ export default function Chat() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { error, messages, sendMessage, status } = useChat({
-    messages: [
-      {
-        parts: [{ text: welcome, type: "text" }],
-        role: "assistant",
-      } as UIMessage,
-      {
-        parts: [
-          {
-            text: `I'm looking for a pop-up retail space for my clothing boutique.
-            
-Do you have any locations available in downtown areas?`,
-            type: "text",
-          },
-        ],
-        role: "user",
-      } as UIMessage,
-      {
-        parts: [
-          {
-            text: `Great! I'd be happy to help you find a pop-up retail space for your clothing boutique.
-            
-We have several exciting downtown locations available. Can you tell me more about your specific requirements?
-
-For example, what's your preferred square footage, duration of lease, and budget range?`,
-            type: "text",
-          },
-        ],
-        role: "assistant",
-      } as UIMessage,
-    ],
+    messages: initialMessages as UIMessage<
+      { role: UIMessage["role"] },
+      { text: string }
+    >[],
     transport: new DefaultChatTransport({
       api: "/api/chat",
     }),
@@ -68,7 +42,7 @@ For example, what's your preferred square footage, duration of lease, and budget
       sendMessage({
         parts: [{ text: initialQuery, type: "text" }],
         role: "user",
-      } as UIMessage);
+      });
     }
   }, []);
 
@@ -76,7 +50,7 @@ For example, what's your preferred square footage, duration of lease, and budget
     await sendMessage({
       parts: [{ text: input.trim(), type: "text" }],
       role: "user",
-    } as UIMessage);
+    });
     setSearchParams((prev) => ({ ...prev, q: input.trim() }));
   };
 
