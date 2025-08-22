@@ -14,7 +14,6 @@ The post idea should be innovative, thought-provoking, and tailored to the inter
 
 Consider leveraging current trends, industry insights, personal success stories or failures, and actionable tips that could benefit the audience. The goal is to craft content that not only resonates with software professionals but also encourages shares and comments, thereby increasing reach and engagement in line with LinkedIn's algorithm preferences.
 
----
 
 ## Limits
 
@@ -28,7 +27,6 @@ Avoid hype and generic claims. Don’t use phrases like “the next big thing”
 
 End with a clear call to action. For example: “Could you share your perspective on [topic]?”
 
----
 
 ## General practices
 
@@ -88,7 +86,6 @@ The **hook structure** combines three powerful elements in two opening lines: au
 
 The **evidence stacking** pattern builds an overwhelming case: research finding leads to gender disparity data, followed by specific scenarios, concluded with scientific explanation. Each piece reinforces the previous argument while adding new dimensions of credibility.
 
----
 
 ## Your prompt formula
 
