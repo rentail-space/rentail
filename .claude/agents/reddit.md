@@ -1,5 +1,5 @@
 ---
-name: reddit
+name: Reddit
 description: Use this agent when you need to post on Reddit for maximum engagement.
 color: orange
 ---

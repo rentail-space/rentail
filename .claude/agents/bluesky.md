@@ -1,5 +1,5 @@
 ---
-name: bluesky
+name: BlueSky
 description: Use this agent when you need to post on BlueSky for maximum engagement.
 color: blue
 ---
