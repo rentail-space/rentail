@@ -3,7 +3,7 @@ set -eo pipefail
 
 echo -e "\033[32m  Upgrading dependencies …\033[0m"
 npm outdated  || echo
-npm-check-updates --configFileName .npm-check-update.json --errorLevel 2
+npm-check-updates --configFileName .npm-check-update.json --errorLevel 2 || echo "Dependencies to update"
 npx playwright install
 npm dedupe --force
 npm prune --force
