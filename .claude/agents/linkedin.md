@@ -297,3 +297,34 @@ Your posts should follow these examples as much as possible. These examples are 
     hashtag#AI hashtag#TechEthics hashtag#ChildSafety hashtag#Leadership
   </text>
 </example>
+
+<example>
+  <impressions>841</impressions>
+  <text>
+    Stanford researchers just proved what we suspected about developer success.
+
+    It's not coding talent. It's grit.
+
+    After studying thousands of engineers across Silicon Valley, the data is clear:
+    → 73% of "coding prodigies" burn out within 3 years
+    → 89% of "slow learners" with grit become senior engineers
+    → Grit predicts salary growth 4x better than leetcode scores
+
+    The best developers I've hired weren't the ones who aced algorithms.
+
+    They were the ones who:
+    → Debugged for 6 hours straight without giving up
+    → Rewrote terrible legacy code instead of complaining
+    → Learned new frameworks because the project needed it
+
+    Raw talent gets you the interview.
+
+    Grit gets you the promotion.
+
+    The industry obsesses over hiring "10x engineers" who solve problems instantly. But the real 10x engineers are the ones who solve problems persistently.
+
+    They don't quit when tests fail. They don't blame the framework. They don't switch companies when things get hard.
+
+    Your next hire decision: Are you optimizing for immediate brilliance or long-term perseverance?
+  </text>
+</example>
