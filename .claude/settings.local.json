@@ -13,5 +13,6 @@
       "Bash(npm install:*)"
     ]
   },
-  "enableAllProjectMcpServers": false
+  "enableAllProjectMcpServers": false,
+  "outputStyle": "clearframe"
 }
