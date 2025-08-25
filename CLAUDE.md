@@ -76,6 +76,7 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Structure files: exported component, subcomponents, helpers, static content, types
 - Biome enforces double quotes, space indentation, line width 80, and import organization
 - Favor default exports for components
+- File structure conventions: `/app/components/<name>/index.tsx` for reusable components
 
 ## Development Practices
 
@@ -99,6 +100,7 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Use Context7 MCP server for library documentation and code examples  
 - AI configuration managed via `app/lib/config.ts` with env-var validation
 - Multiple system prompt files for different contexts (general, prelude, spaces, welcome)
+- Chat interface uses Server-Sent Events for streaming responses
 
 ## Tests
 
@@ -117,6 +119,7 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Write unit tests with Vitest for all utilities and components
 - Consider snapshot testing for UI consistency
 - Run individual tests: `npm run test -- <test-pattern>`
+- E2E tests use Checkly for production monitoring
 
 ## Environment Variables
 
