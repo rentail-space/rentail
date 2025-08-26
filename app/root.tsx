@@ -98,6 +98,12 @@ export const links: LinksFunction = () => [
     rel: "author",
     type: "text/plain",
   },
+  {
+    href: "/atom.xml",
+    rel: "alternate",
+    type: "application/atom+xml",
+    title: "Rentail Space Blog",
+  },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
