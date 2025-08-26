@@ -1,8 +1,10 @@
+import { existsSync } from "node:fs";
 import dotenv from "dotenv";
 import env from "env-var";
 
 // NOTE This is used in GitHub Actions to load test enviroment from .env file.
-if (process.env.NODE_ENV === "test") dotenv.config({ path: ".env.test" });
+const path = ".env.test";
+if (existsSync(path)) dotenv.config({ path });
 
 export default {
   isProduction: env.get("NODE_ENV").asString() === "production",
