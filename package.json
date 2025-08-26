@@ -28,7 +28,6 @@
     "@sentry/react": "^10.6.0",
     "@sentry/vite-plugin": "^4.1.1",
     "@tailwindcss/postcss": "^4.1.12",
-    "@vitejs/plugin-rsc": "^0.4.24",
     "ai": "^5.0.25",
     "chalk": "^5.6.0",
     "dayjs": "^1.11.13",
@@ -76,6 +75,7 @@
     "vitest": "^3.2.4"
   },
   "overrides": {
-    "@mjackson/node-fetch-server": "npm:@remix-run/node-fetch-server"
+    "@mjackson/node-fetch-server": "npm:@remix-run/node-fetch-server",
+    "@vitejs/plugin-rsc": "0.4.24"
   }
 }
