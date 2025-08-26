@@ -42,6 +42,7 @@ expect.extend({
       {
         createDiffImage: true,
         ignoreAntialiasing: true,
+        ignoreCaret: true,
         tolerance: 3,
       },
     );
