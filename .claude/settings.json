@@ -14,7 +14,7 @@
     ]
   },
   "enableAllProjectMcpServers": false,
-  "outputStyle": "clearframe"
+  "outputStyle": "clearframe",
   "hooks": {
     "PostToolUse": [
       {

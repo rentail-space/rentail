@@ -36,12 +36,12 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - Use Context7 MCP server for library documentation and code examples
 
 **Monitoring & Observability:**
-- Sentry for error tracking and performance monitoring
+- Sentry for error tracking and performance monitoring (`app/lib/instrument.server.ts`)
 - BetterStack integration with Logtail for structured logging and Push Gateway for metrics
 - Comprehensive metrics collection: memory, CPU, heap, event loop lag, HTTP requests
 - Process metrics collected every 5 seconds in production
-- HTTP request logging with method, URL, status code, and duration
-- Checkly for synthetic monitoring (every 30 minutes)
+- HTTP request logging with method, URL, status code, and duration (`app/lib/logger.server.ts`)
+- Checkly for synthetic monitoring (every 30 minutes) configured in `checkly.config.ts`
 
 **File-Based Routing:**
 Routes are configured in `/app/routes.ts` using React Router v7's declarative routing with `flatRoutes`:
@@ -111,15 +111,15 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Visual regression testing with Playwright and custom `toMatchScreenshot` matcher
 - Screenshots stored in `__screenshots__` directory
 - Checkly monitoring tests in `__checks__` directory
-- Requires Node.js 22.0.0 or higher
-- Tests use setup file in `/test/helpers/setup.ts` with MSW mock server configuration
+- Requires Node.js 22.0.0 or higher (enforced in package.json)
+- Tests use setup file in `/test/helpers/setup.ts` with MSW mock server configuration (`/test/mocks/`)
 - Visual regression tests use custom `toMatchScreenshot` matcher with Playwright browser provider
 - Test configuration in `vitest.config.ts` with 30-second timeout for E2E tests
-- Mock server setup prevents external API calls during testing
+- Mock server setup prevents external API calls during testing (`/test/mocks/handlers.ts`)
 - Write unit tests with Vitest for all utilities and components
 - Consider snapshot testing for UI consistency
 - Run individual tests: `npm run test -- <test-pattern>`
-- E2E tests use Checkly for production monitoring
+- E2E tests use Checkly for production monitoring (`__checks__/` directory)
 
 ## Environment Variables
 
@@ -148,9 +148,10 @@ Optional environment variables:
   - `/app/root.tsx`: Root layout with HTML shell and Sentry
   - `/app/routes/`: Individual route components
   - `/app/lib/`: Shared utilities (AI model, logging, system prompt)
-  - `/app/data/`: External data files (user data, blog posts)
+  - `/app/data/`: External data files (user data, blog posts in markdown)
   - `/app/entry.server.tsx`: Server-side rendering entry point with request logging
   - `/app/app.css`: Global Tailwind CSS imports
+  - `/app/components/`: Reusable UI components organized by feature
 - `/build`: Production build output (client/server bundles)
 - `/public`: Static assets (favicon, logos)
 - `/test`: Test setup and shared utilities
@@ -160,6 +161,8 @@ Optional environment variables:
 - `react-router.config.ts`: React Router v7 configuration with prerendering
 - `checkly.config.ts`: Synthetic monitoring configuration
 - `biome.json`: Linting and formatting rules with import organization and strict style rules
+- `tailwind.config.ts`: Tailwind CSS 4 configuration with DaisyUI plugin
+- `vitest.config.ts`: Test configuration with browser provider and custom matchers
 - `mcp.json`: MCP server configuration for Claude Code integration
 
 # important-instruction-reminders  
