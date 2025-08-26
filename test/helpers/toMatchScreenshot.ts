@@ -11,12 +11,10 @@ import {
 import path from "node:path";
 import { expect } from "@playwright/test";
 import type { AsyncExpectationResult } from "@vitest/expect";
-import pixelmatch from "pixelmatch";
+import looksSame from "looks-same";
 import type { Page } from "playwright";
-import { PNG } from "pngjs";
 import invariant from "tiny-invariant";
 
-const maxDiffPercentage = 5;
 const dirname = path.resolve("./__screenshots__");
 
 expect.extend({
@@ -24,8 +22,8 @@ expect.extend({
     await cleanBeforeTest();
 
     const testName = getTestName();
-    const screenshot = await page.screenshot();
     const filename = path.join(dirname, `${testName}.jpg`);
+    const screenshot = await page.screenshot();
     try {
       await access(filename, constants.R_OK);
     } catch {
@@ -38,44 +36,27 @@ expect.extend({
       };
     }
 
-    const img1 = PNG.sync.read(await readFile(filename));
-    const img2 = PNG.sync.read(screenshot);
-    if (img1.width !== img2.width || img1.height !== img2.height) {
+    const { differentPixels, diffImage } = await looksSame(
+      await readFile(filename),
+      screenshot,
+      {
+        createDiffImage: true,
+        ignoreAntialiasing: true,
+        tolerance: 0.1,
+      },
+    );
+    if (diffImage) {
+      const diffFilename = path.join(dirname, `diff-${testName}.jpg`);
+      await diffImage.save(diffFilename);
       return {
         message: () =>
-          `Image dimensions don't match: ${img1.width}x${img1.height} vs ${img2.width}x${img2.height}`,
+          `Image differs from baseline by ${differentPixels} pixels, see: ${diffFilename}`,
         pass: false,
       };
     }
-
-    const { width, height } = img1;
-    const diff = new PNG({ width, height });
-
-    // Compare images
-    const numDiffPixels = pixelmatch(
-      img1.data,
-      img2.data,
-      diff.data,
-      width,
-      height,
-    );
-
-    const diffPercentage = (numDiffPixels / (width * height)) * 100;
-    const matches = diffPercentage <= maxDiffPercentage;
-    if (!matches) {
-      const filename = path.join(dirname, `diff-${testName}.jpg`);
-      await writeFile(filename, PNG.sync.write(diff));
-      console.error(
-        `[TEST] Image differs from baseline by ${diffPercentage.toFixed(2)}%, see:\n\t${filename}`,
-      );
-    }
-
     return {
-      message: () =>
-        matches
-          ? `Image matches baseline (diff: ${diffPercentage.toFixed(2)}%)`
-          : `Image differs from baseline by ${diffPercentage.toFixed(2)}% (threshold: ${maxDiffPercentage}%). See diff: ${dirname}`,
-      pass: matches,
+      message: () => `Image matches baseline (diff: ${differentPixels} pixels)`,
+      pass: true,
     };
   },
 });
