@@ -46,17 +46,18 @@ expect.extend({
         tolerance: 3,
       },
     );
+    const diff = differentPixels / screenshot.length;
     if (diffImage) {
       const diffFilename = path.join(dirname, `diff-${testName}.jpg`);
       await diffImage.save(diffFilename);
       return {
         message: () =>
-          `Image differs from baseline by ${differentPixels} pixels, see: ${diffFilename}`,
+          `Image differs from baseline by ${diff.toFixed(2)}%, see: ${diffFilename}`,
         pass: false,
       };
     }
     return {
-      message: () => `Image matches baseline (diff: ${differentPixels} pixels)`,
+      message: () => `Image matches baseline (diff: ${diff.toFixed(2)}%)`,
       pass: true,
     };
   },

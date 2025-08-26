@@ -2,11 +2,10 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import fm from "front-matter";
 import { DateTime } from "luxon";
-import type { LoaderFunctionArgs } from "react-router";
 import removeMd from "remove-markdown";
 import truncateWords from "~/lib/truncateWords";
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader() {
   try {
     const blogDir = path.join(process.cwd(), "app/data/blog");
     const files = await readdir(blogDir);
