@@ -2,7 +2,9 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import fm from "front-matter";
 import { DateTime } from "luxon";
+import { marked } from "marked";
 import removeMd from "remove-markdown";
+import { unified } from "unified";
 import truncateWords from "~/lib/truncateWords";
 
 export async function loader() {
@@ -35,7 +37,7 @@ export async function loader() {
         return {
           title: attributes.title,
           slug,
-          content: body,
+          content: marked.parse(body, { breaks: true, gfm: true }),
           published,
           description: truncateWords(removeMd(body), 50),
         };
