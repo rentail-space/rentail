@@ -4,7 +4,6 @@ import fm from "front-matter";
 import { DateTime } from "luxon";
 import { marked } from "marked";
 import removeMd from "remove-markdown";
-import { unified } from "unified";
 import truncateWords from "~/lib/truncateWords";
 
 export async function loader() {
