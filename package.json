@@ -21,7 +21,6 @@
     "@ai-sdk/react": "^2.0.25",
     "@forge42/seo-tools": "^1.4.5",
     "@logtail/node": "^0.5.5",
-    "@mjackson/node-fetch-server": "^0.7.0",
     "@react-router/fs-routes": "^7.8.2",
     "@react-router/node": "^7.8.2",
     "@react-router/serve": "^7.8.2",
@@ -75,7 +74,5 @@
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
   },
-  "overrides": {
-    "@vitejs/plugin-rsc": "0.4.24"
-  }
+  "overrides": {}
 }
