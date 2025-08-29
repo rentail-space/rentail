@@ -4,8 +4,10 @@
 # React Router
 .react-router/
 /build/
-.env.local
+.env
 *.swp
 .vercel
 
 __screenshots__/diff-*.jpg
+
+prisma/generated

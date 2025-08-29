@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import env from "env-var";
 
 // NOTE This is used in GitHub Actions to load test enviroment from .env file.
-const path = ".env.test";
+const path = ".env";
 if (existsSync(path)) dotenv.config({ path });
 
 export default {
@@ -16,6 +16,14 @@ export default {
   LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required().asUrlString(),
   PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required().asUrlString(),
   PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required().asString(),
+
+  DATABASE_URL: env.get("DATABASE_URL").required().asUrlString(),
+  DIRECT_URL: env.get("DIRECT_URL").required().asUrlString(),
+  VITE_SUPABASE_ANON_KEY: env
+    .get("VITE_SUPABASE_ANON_KEY")
+    .required()
+    .asString(),
+  VITE_SUPABASE_URL: env.get("VITE_SUPABASE_URL").required().asUrlString(),
 
   SENTRY_DSN: env.get("SENTRY_DSN").required(false).asUrlString(),
 
