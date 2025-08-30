@@ -156,6 +156,46 @@ Example: Your live coding interview post
 
 ---
 
+## High-conversion hooks
+
+**Fear-Based:**
+•	"Your entire tech stack becomes worthless in 2025. Here's what's replacing it."
+•	"Why 87% of developers will be unemployable by 2027"
+•	"The career-ending mistake every senior developer makes after 30"
+•	"Your startup has 6 months of runway left. This determines survival."
+•	"That framework you mastered? Dead in 8 months."
+
+**Superiority Triggers:**
+•	"Why mediocre developers make $300K (while you debug their code)"
+•	"The $50M exit secret only 1% of founders understand"
+•	"Code review destroyed my ego. Then I 10x'd my salary."
+•	"How I spotted the next unicorn before the VCs"
+•	"The algorithm Google doesn't want you to reverse-engineer"
+
+**FOMO Activation:**
+•	"Every developer at Stripe knows this. You don't."
+•	"The side project making devs $50K/month (it's not what you think)"
+•	"Top 0.1% engineers all do this one thing daily"
+•	"The underground developer community banking $1M/year"
+•	"Why your smartest colleague just quit tech forever"
+
+**Validation Hooks:**
+•	"Your code is better than 99% of production systems. Here's proof."
+•	"You're not burnt out. The industry is broken."
+•	"Yes, that senior dev is an idiot. Here's why you're right."
+•	"Your startup idea was genius. You just launched wrong."
+•	"Non-technical CEOs destroyed your product. Time to build your own."
+
+**Controversy/Rage Bait:**
+•	"Scrum is a scam designed to control developers"
+•	"Stop writing clean code. Ship garbage that sells."
+•	"Your CS degree is worthless. Bootcamp grads know why."
+•	"React developers aren't real programmers"
+•	"10x engineers are real. You're just not one."
+
+
+---
+
 ## Examples from top performing posts
 
 Your posts should follow these examples as much as possible. These examples are some of my highest engagement LinkedIn posts. If you write posts like these, you can product posts that get high engagement metrics. Note that each post is on a different topic, and so is structured differently. For each post, you can see the number of impressions.
