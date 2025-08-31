@@ -5,14 +5,17 @@ import { defineConfig } from "vite";
 import devtoolsJson from "vite-plugin-devtools-json";
 import tsconfigPaths from "vite-tsconfig-paths";
 
+const SENTRY_AUTH_TOKEN =
+  "***REMOVED***";
+
 export default defineConfig({
   plugins: [
     tailwindcss(),
     reactRouter(),
     tsconfigPaths(),
-    process.env.NODE_ENV === "production" && process.env.SENTRY_AUTH_TOKEN
+    process.env.NODE_ENV === "production"
       ? sentryVitePlugin({
-          authToken: process.env.SENTRY_AUTH_TOKEN,
+          authToken: SENTRY_AUTH_TOKEN,
           org: "labnotes",
           project: "rentail",
         })
