@@ -47,7 +47,7 @@ export default function handleRequest(
           console.info(
             `${request.method} ${pathname} - ${statusCode} - ${duration}ms`,
           );
-          logtail.info("request", {
+          logtail?.info("request", {
             duration: duration.toString(),
             referrer: request.headers.get("Referer") ?? "",
             request_method: request.method,
@@ -61,13 +61,13 @@ export default function handleRequest(
         onError(error: unknown) {
           Sentry.captureException(error);
           const duration = Date.now() - startTime;
-          logtail.error("request", {
+          logtail?.error("request", {
             duration: duration.toString(),
             error: error instanceof Error ? error.message : "Unknown error",
             request_method: request.method,
             request_path: pathname,
           });
-          logtail.flush();
+          logtail?.flush();
           statusCode = 500;
         },
       },

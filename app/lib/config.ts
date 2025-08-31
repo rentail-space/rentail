@@ -12,18 +12,13 @@ export default {
   isTest: env.get("NODE_ENV").asString() === "test",
 
   AI_GATEWAY_API_KEY: env.get("AI_GATEWAY_API_KEY").required().asString(),
-  LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required().asString(),
-  LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required().asUrlString(),
-  PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required().asUrlString(),
-  PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required().asString(),
+  LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required(false).asString(),
+  LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required(false).asUrlString(),
+  PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required(false).asUrlString(),
+  PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required(false).asString(),
 
   DATABASE_URL: env.get("DATABASE_URL").required().asUrlString(),
   DIRECT_URL: env.get("DIRECT_URL").required().asUrlString(),
-  VITE_SUPABASE_ANON_KEY: env
-    .get("VITE_SUPABASE_ANON_KEY")
-    .required()
-    .asString(),
-  VITE_SUPABASE_URL: env.get("VITE_SUPABASE_URL").required().asUrlString(),
 
   SENTRY_DSN: env.get("SENTRY_DSN").required(false).asUrlString(),
 

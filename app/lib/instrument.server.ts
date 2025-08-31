@@ -172,7 +172,7 @@ async function pushToPrometheus(
     )
   >,
 ): Promise<void> {
-  if (!serverConfig.isProduction) return;
+  if (!serverConfig.isProduction || !url || !token) return;
 
   try {
     const response = await fetch(url, {
