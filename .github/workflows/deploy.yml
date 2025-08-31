@@ -63,7 +63,7 @@ jobs:
           postgres-version: "16"
 
       - name: Setup Prisma
-        run: prisma db push
+        run: npx prisma db push
         env:
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
           DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
