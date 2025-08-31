@@ -5,7 +5,6 @@ import { renderToPipeableStream } from "react-dom/server";
 import type { EntryContext } from "react-router";
 import { ServerRouter } from "react-router";
 import serverConfig from "./lib/config";
-import { pushHTTPResponse, pushProcessMetrics } from "./lib/instrument.server";
 import logtail from "./lib/logger.server";
 
 if (serverConfig.SENTRY_DSN) {
@@ -19,35 +18,22 @@ if (serverConfig.SENTRY_DSN) {
 // Initialize MSW in test mode
 if (serverConfig.isTest) await import("../test/mocks/msw.server");
 
-// Replace fixed interval with request-triggered collection
-let lastMetricsPush = 0;
-
 export default function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   entryContext: EntryContext,
 ) {
-  if (
-    Date.now() - lastMetricsPush >
-    serverConfig.METRICS_COLLECTION_INTERVAL_MS
-  ) {
-    lastMetricsPush = Date.now();
-    pushProcessMetrics(); // Remove await to avoid blocking
-  }
-
   let statusCode = responseStatusCode || 200;
 
   // Log the incoming request
   const startTime = Date.now();
   const { pathname } = new URL(request.url);
-  return new Promise<Response>((resolve, reject) => {
-    let shellRendered = false;
+  return new Promise<Response>((resolve) => {
     const { pipe, abort } = renderToPipeableStream(
       <ServerRouter context={entryContext} url={request.url} />,
       {
         onShellReady() {
-          shellRendered = true;
           const body = new PassThrough();
           const stream = createReadableStreamFromReadable(body);
           responseHeaders.set("content-type", "text/html");
@@ -68,27 +54,20 @@ export default function handleRequest(
             request_path: pathname,
             response_status: statusCode.toString(),
           });
-          // Add metrics
-          pushHTTPResponse({ request, statusCode, duration });
 
           resolve(response);
           pipe(body);
         },
-        onShellError(error: unknown) {
-          Sentry.captureException(error);
-          console.error(error);
-          reject(error);
-        },
         onError(error: unknown) {
           Sentry.captureException(error);
           const duration = Date.now() - startTime;
-          if (shellRendered)
-            console.error(
-              `${request.method} ${pathname} - ERROR - ${duration}ms`,
-              error,
-            );
+          logtail.error("request", {
+            duration: duration.toString(),
+            error: error instanceof Error ? error.message : "Unknown error",
+            request_method: request.method,
+            request_path: pathname,
+          });
           logtail.flush();
-          pushHTTPResponse({ request, statusCode: 500, duration });
           statusCode = 500;
         },
       },
