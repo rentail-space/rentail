@@ -52,6 +52,7 @@
     "showify": "^0.2.1",
     "streamdown": "^1.1.7",
     "tiny-invariant": "^1.3.3",
+    "tsx": "^4.20.5",
     "use-stick-to-bottom": "^1.1.1"
   },
   "devDependencies": {
