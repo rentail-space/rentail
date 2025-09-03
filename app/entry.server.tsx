@@ -10,7 +10,11 @@ import logtail from "./lib/logger.server";
 if (serverConfig.SENTRY_DSN) {
   Sentry.init({
     dsn: serverConfig.SENTRY_DSN,
+    enableLogs: true,
     environment: serverConfig.isProduction ? "production" : "development",
+    integrations: [
+      Sentry.consoleLoggingIntegration({ levels: ["log", "warn", "error"] }),
+    ],
     tracesSampleRate: 1.0,
   });
 }
