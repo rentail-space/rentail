@@ -12,6 +12,7 @@ export default {
   isTest: env.get("NODE_ENV").asString() === "test",
 
   AI_GATEWAY_API_KEY: env.get("AI_GATEWAY_API_KEY").required().asString(),
+  ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),
   LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required(false).asString(),
   LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required(false).asUrlString(),
   PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required(false).asUrlString(),

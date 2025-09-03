@@ -1,33 +1,38 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useEffect, useRef, useState } from "react";
-import { data, type LoaderFunctionArgs, useSearchParams } from "react-router";
+import { useLoaderData, useSearchParams } from "react-router";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
-import { commitSession, getSession } from "~/sessions.server";
+import prisma from "~/lib/prisma";
 import InputForm from "./InputForm";
-import initialMessages from "./initial.json";
 import Messages from "./Messages";
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const session = await getSession(request.headers.get("Cookie"));
-  const interactions = (session.get("interactions") || 0) + 1;
-  session.set("interactions", interactions);
-  return data(null, {
-    headers: { "Set-Cookie": await commitSession(session) },
+export async function loader() {
+  const userId = "wxxx3cwnw9o4g6zehqg0dswy";
+  const conversationId = "mv3syosnkkawsqkwdpmeeuyk";
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  const messages = await prisma.message.findMany({
+    where: { conversationId },
+    orderBy: { createdAt: "asc" },
   });
+  return { conversationId, user, messages };
 }
 
 export default function Chat() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { conversationId, messages: initialMessages } =
+    useLoaderData<typeof loader>();
 
   const { error, messages, sendMessage, status } = useChat({
-    messages: initialMessages as UIMessage<
-      { role: UIMessage["role"] },
-      { text: string }
-    >[],
+    messages: initialMessages.map((message) => ({
+      id: message.id,
+      role: message.role === "USER" ? "user" : "assistant",
+      parts: [{ text: message.content, type: "text" }],
+    })) as UIMessage<{ role: UIMessage["role"] }, { text: string }>[],
     transport: new DefaultChatTransport({
       api: "/api/chat",
+      headers: { "X-Conversation-Id": conversationId },
     }),
   });
   const [input, setInput] = useState("");
