@@ -42,7 +42,11 @@ export default function handleRequest(
           const stream = createReadableStreamFromReadable(body);
           responseHeaders.set("content-type", "text/html");
           const response = new Response(stream, {
-            headers: responseHeaders,
+            headers: {
+              ...responseHeaders,
+              // See https://labnotes.sentry.io/explore/profiling/
+              "Document-Policy": "js-profiling",
+            },
             status: statusCode,
           });
 

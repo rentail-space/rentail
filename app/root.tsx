@@ -158,10 +158,14 @@ export default function App() {
     if (ENV.SENTRY_DSN && ENV.NODE_ENV === "production") {
       Sentry.init({
         dsn: ENV.SENTRY_DSN,
-        environment: ENV.NODE_ENV || "development",
-        tracesSampleRate: 1.0,
-        replaysSessionSampleRate: 0.1,
+        environment: ENV.NODE_ENV,
+        integrations: [
+          Sentry.browserTracingIntegration(),
+          Sentry.browserProfilingIntegration(),
+        ],
         replaysOnErrorSampleRate: 1.0,
+        replaysSessionSampleRate: 0.1,
+        tracesSampleRate: 1.0,
       });
     }
   }, [ENV]);
