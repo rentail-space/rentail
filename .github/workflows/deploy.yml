@@ -1,6 +1,8 @@
 name: Deploy
 
 env:
+  DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+  DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
@@ -64,16 +66,11 @@ jobs:
 
       - name: Setup Prisma
         run: npx prisma db push && npx prisma db seed
-        env:
-          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-          DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
 
       - name: Run Tests
         run: npm run test
         env:
-          AI_GATEWAY_API_KEY: "***REMOVED***"
-          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-          DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+          ANTHROPIC_API_KEY: "***REMOVED***"
           SESSION_SECRET: "***REMOVED***"
 
       - name: Upload Playwright Test Results

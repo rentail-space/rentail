@@ -1,30 +1,27 @@
-import { existsSync } from "node:fs";
 import dotenv from "dotenv";
 import env from "env-var";
 
-// NOTE This is used in GitHub Actions to load test enviroment from .env file.
-const path = ".env";
-if (existsSync(path)) dotenv.config({ path });
+dotenv.config();
+const isTest = process.env.NODE_ENV === "test";
 
 export default {
-  isProduction: env.get("NODE_ENV").asString() === "production",
-  isDebug: env.get("DEBUG").asString() !== undefined,
-  isTest: env.get("NODE_ENV").asString() === "test",
-  isDevelopment: env.get("NODE_ENV").asString() === "development",
+  isProduction: process.env.NODE_ENV === "production",
+  isDebug: !!process.env.DEBUG,
+  isTest: process.env.NODE_ENV === "test",
+  isDevelopment: process.env.NODE_ENV === "development",
 
-  AI_GATEWAY_API_KEY: env.get("AI_GATEWAY_API_KEY").required().asString(),
-  ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),
+  ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required(true).asString(),
   LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required(false).asString(),
   LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required(false).asUrlString(),
   PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required(false).asUrlString(),
   PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required(false).asString(),
 
-  DATABASE_URL: env.get("DATABASE_URL").required().asUrlString(),
-  DIRECT_URL: env.get("DIRECT_URL").required().asUrlString(),
+  DATABASE_URL: env.get("DATABASE_URL").required(!isTest).asUrlString(),
+  DIRECT_URL: env.get("DIRECT_URL").required(!isTest).asUrlString(),
 
   SENTRY_DSN: env.get("SENTRY_DSN").required(false).asUrlString(),
 
-  SESSION_SECRET: env.get("SESSION_SECRET").required().asString(),
+  SESSION_SECRET: env.get("SESSION_SECRET").required(true).asString(),
   SESSION_MAX_AGE_SECONDS: env
     .get("SESSION_MAX_AGE_SECONDS")
     .default(60 * 60 * 24 * 30)

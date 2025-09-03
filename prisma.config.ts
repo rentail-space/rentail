@@ -1,5 +1,7 @@
+import * as dotenv from "dotenv";
 import { defineConfig } from "prisma/config";
-import "./app/lib/config";
+
+dotenv.config(); // Load the environment variables
 
 export default defineConfig({
   migrations: {
