@@ -1,5 +1,5 @@
 import { defineConfig } from "prisma/config";
-import "dotenv/config";
+import "./app/lib/config";
 
 export default defineConfig({
   migrations: {

@@ -29,13 +29,13 @@ model User {
 model Conversation {
   id       String                    @id @default(cuid(2))
   messages Message[]
-  user     User      @relation(fields: [userId], references: [id])
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId   String    @map("user_id")
 }
 
 model Message {
   content        String
-  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   conversationId String
   createdAt      DateTime     @map("created_at") @default(now())
   id             String                          @id @default(ulid())

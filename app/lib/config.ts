@@ -10,6 +10,7 @@ export default {
   isProduction: env.get("NODE_ENV").asString() === "production",
   isDebug: env.get("DEBUG").asString() !== undefined,
   isTest: env.get("NODE_ENV").asString() === "test",
+  isDevelopment: env.get("NODE_ENV").asString() === "development",
 
   AI_GATEWAY_API_KEY: env.get("AI_GATEWAY_API_KEY").required().asString(),
   ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),

@@ -2,7 +2,7 @@ import { setupServer } from "msw/node";
 import config from "~/lib/config";
 import { handlers } from "./handlers";
 
-const server = config.isTest ? setupServer(...handlers) : undefined;
+const server = setupServer(...handlers);
 export default server;
 
 // Add logging for debugging

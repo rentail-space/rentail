@@ -27,9 +27,9 @@ let server: { port: number; stop: () => boolean };
  * Launch the server and browser. Returns instance of server and browser page.
  * @returns The browser page.
  */
-export async function launchBrowser(): Promise<Page> {
+export async function launchBrowser(headless = true): Promise<Page> {
   if (!server) await launchServer();
-  if (!browser) browser = await chromium.launch();
+  if (!browser) browser = await chromium.launch({ headless });
   if (!context) context = await browser.newContext();
   const page = await context.newPage();
   page.route("**", blockBrowserRequest);
