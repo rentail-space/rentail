@@ -1,27 +1,27 @@
 import { reactRouter } from "@react-router/dev/vite";
-import { sentryVitePlugin } from "@sentry/vite-plugin";
+import {
+  type SentryReactRouterBuildOptions,
+  sentryReactRouter,
+} from "@sentry/react-router";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import devtoolsJson from "vite-plugin-devtools-json";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-const SENTRY_AUTH_TOKEN =
-  "***REMOVED***";
+const sentryConfig: SentryReactRouterBuildOptions = {
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  org: "labnotes",
+  project: "rentail",
+};
 
-export default defineConfig({
+export default defineConfig((config) => ({
   plugins: [
     tailwindcss(),
     reactRouter(),
     tsconfigPaths(),
     process.env.NODE_ENV === "production"
-      ? sentryVitePlugin({
-          authToken: SENTRY_AUTH_TOKEN,
-          org: "labnotes",
-          project: "rentail",
-        })
+      ? sentryReactRouter(sentryConfig, config)
       : devtoolsJson(),
   ],
-  ssr: {
-    noExternal: ["streamdown"],
-  },
-});
+  ssr: { noExternal: ["streamdown"] },
+}));

@@ -1,11 +1,16 @@
 import { PassThrough } from "node:stream";
 import { createReadableStreamFromReadable } from "@react-router/node";
-import * as Sentry from "@sentry/react";
+import * as Sentry from "@sentry/react-router";
 import { renderToPipeableStream } from "react-dom/server";
-import type { EntryContext } from "react-router";
+import type {
+  ActionFunctionArgs,
+  EntryContext,
+  LoaderFunctionArgs,
+} from "react-router";
 import { ServerRouter } from "react-router";
 import serverConfig from "./lib/config";
 import logtail from "./lib/logger.server";
+import "./lib/instrument.server";
 
 if (serverConfig.SENTRY_DSN) {
   Sentry.init({
@@ -22,7 +27,7 @@ if (serverConfig.SENTRY_DSN) {
 // Initialize MSW in test mode
 if (serverConfig.isTest) await import("../test/mocks/msw.server");
 
-export default function handleRequest(
+function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
@@ -64,7 +69,7 @@ export default function handleRequest(
           });
 
           resolve(response);
-          pipe(body);
+          pipe(Sentry.getMetaTagTransformer(body));
         },
         onError(error: unknown) {
           Sentry.captureException(error);
@@ -83,4 +88,16 @@ export default function handleRequest(
 
     setTimeout(abort, serverConfig.SSR_REQUEST_TIMEOUT_MS);
   });
+}
+
+export default Sentry.wrapSentryHandleRequest(handleRequest);
+
+export function handleError(
+  error: unknown,
+  { request }: LoaderFunctionArgs | ActionFunctionArgs,
+) {
+  if (!request.signal.aborted) {
+    Sentry.captureException(error);
+    console.error(error);
+  }
 }

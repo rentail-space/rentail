@@ -1,4 +1,3 @@
-import * as Sentry from "@sentry/react";
 import { useEffect } from "react";
 import {
   Links,
@@ -20,7 +19,6 @@ import serverConfig from "./lib/config";
 export async function loader() {
   return {
     ENV: {
-      SENTRY_DSN: serverConfig.SENTRY_DSN || null,
       NODE_ENV: serverConfig.isProduction ? "production" : "development",
     },
   };
@@ -152,24 +150,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  const { ENV } = useLoaderData<typeof loader>();
-
-  useEffect(() => {
-    if (ENV.SENTRY_DSN && ENV.NODE_ENV === "production") {
-      Sentry.init({
-        dsn: ENV.SENTRY_DSN,
-        environment: ENV.NODE_ENV,
-        integrations: [
-          Sentry.browserTracingIntegration(),
-          Sentry.browserProfilingIntegration(),
-        ],
-        replaysOnErrorSampleRate: 1.0,
-        replaysSessionSampleRate: 0.1,
-        tracesSampleRate: 1.0,
-      });
-    }
-  }, [ENV]);
-
   return (
     <ErrorBoundary>
       <Outlet />
