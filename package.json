@@ -6,7 +6,7 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "build": "react-router build",
+    "build": "react-router build && prisma generate",
     "check": "npm run lint && npm run typecheck",
     "checkly": "npx checkly test --update-snapshots --record",
     "clean": "rm -rf .react-router build",
