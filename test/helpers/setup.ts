@@ -1,16 +1,7 @@
 // This file contains setup code that will run before all tests
-import { PrismaClient } from "prisma/generated/client";
 import { afterAll, afterEach, beforeAll } from "vitest";
-import serverConfig from "~/lib/config";
+import prisma from "~/lib/prisma";
 import server from "../mocks/msw.server";
-
-// In test mode, we always use database on localhost
-const prisma = new PrismaClient({
-  // secretlint-disable-next-line
-  datasourceUrl: "postgresql://postgres:postgres@localhost:5432/postgres",
-  errorFormat: "pretty",
-  log: serverConfig.isDebug ? ["error", "warn", "query", "info"] : ["error"],
-});
 
 // Start MSW server before all tests
 beforeAll(async () => {
