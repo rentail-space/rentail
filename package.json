@@ -6,14 +6,13 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "build": "react-router build && prisma generate",
+    "build": "prisma generate && react-router build",
     "check": "npm run lint && npm run typecheck",
     "checkly": "npx checkly test --update-snapshots --record",
     "clean": "rm -rf .react-router build",
     "dev": "env NODE_ENV=test react-router dev",
     "format": "biome format --write",
     "lint": "biome lint",
-    "postinstall": "prisma generate",
     "start": "react-router-serve ./build/server/index.js",
     "test": "npm run lint && npm run typecheck && vitest run --reporter verbose",
     "typecheck": "react-router typegen && tsc"

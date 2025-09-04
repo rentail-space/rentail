@@ -91,6 +91,11 @@ jobs:
       - name: Install CLI
         uses: dopplerhq/cli-action@v3
 
+      - name: Deploy migrations
+        run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
       - name: Deploy to Vercel
         run: doppler run --config prd -- vercel deploy --target=production --logs --token=${{ secrets.VERCEL_TOKEN }}
         env:
