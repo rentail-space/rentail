@@ -16,8 +16,10 @@ export default {
   PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required(false).asUrlString(),
   PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required(false).asString(),
 
-  DATABASE_URL: env.get("DATABASE_URL").required(!isTest).asUrlString(),
-  DIRECT_URL: env.get("DIRECT_URL").required(!isTest).asUrlString(),
+  DATABASE_URL: isTest
+    ? // secretlint-disable-next-line
+      "postgresql://postgres:postgres@localhost:5432/postgres"
+    : env.get("DATABASE_URL").required().asUrlString(),
 
   SENTRY_DSN: env.get("SENTRY_DSN").required(false).asUrlString(),
 

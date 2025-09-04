@@ -4,10 +4,12 @@ import os from "node:os";
 import * as Sentry from "@sentry/react-router";
 import serverConfig from "./config";
 
-Sentry.init({
-  dsn: "https://515a0fc92e7e2fb27be04676288ef875@o510761.ingest.us.sentry.io/4509539620618240",
-  sendDefaultPii: true,
-});
+if (serverConfig.SENTRY_DSN) {
+  Sentry.init({
+    dsn: serverConfig.SENTRY_DSN,
+    sendDefaultPii: true,
+  });
+}
 
 const startTime = Date.now() / 1000;
 

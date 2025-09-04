@@ -2,11 +2,9 @@ import { expect } from "playwright/test";
 import { describe, it } from "vitest";
 import { launchBrowser, URL } from "./helpers/launchBrowser";
 
-console.log(process.env.DATABASE_URL);
-
 describe("Chat page", () => {
   it("renders chat interface with welcome message", async () => {
-    const page = await launchBrowser(false);
+    const page = await launchBrowser();
     const response = await page.goto(`${URL}/chat`);
     expect(response?.status(), "should respond with 200").toEqual(200);
 

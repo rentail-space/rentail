@@ -20,6 +20,7 @@ export async function loader() {
   return {
     ENV: {
       NODE_ENV: serverConfig.isProduction ? "production" : "development",
+      SENTRY_DSN: serverConfig.SENTRY_DSN,
     },
   };
 }
