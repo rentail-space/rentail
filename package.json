@@ -16,7 +16,7 @@
     "postinstall": "prisma generate",
     "start": "react-router-serve ./build/server/index.js",
     "test": "npm run lint && npm run typecheck && vitest run --reporter verbose",
-    "typecheck": "react-router typegen && tsc",
+    "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^2.0.10",
