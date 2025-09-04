@@ -3,6 +3,7 @@ name: Deploy
 env:
   DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
   DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+  DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
   SENTRY_AUTH_TOKEN: "***REMOVED***"
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -92,11 +93,7 @@ jobs:
         uses: dopplerhq/cli-action@v3
 
       - name: Deploy migrations
-        run: npx prisma migrate deploy
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: doppler run --config prd -- npx prisma migrate deploy
 
       - name: Deploy to Vercel
         run: doppler run --config prd -- vercel deploy --target=production --logs --token=${{ secrets.VERCEL_TOKEN }}
-        env:
-          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
