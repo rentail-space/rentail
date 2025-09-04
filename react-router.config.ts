@@ -4,6 +4,15 @@ import { sentryOnBuildEnd } from "@sentry/react-router";
 export default {
   ssr: true,
   prerender: false,
-  buildEnd: async ({ viteConfig, reactRouterConfig, buildManifest }) =>
-    await sentryOnBuildEnd({ viteConfig, reactRouterConfig, buildManifest }),
+  ...(process.env.SENTRY_AUTH_TOKEN
+    ? {
+        buildEnd: async ({ viteConfig, reactRouterConfig, buildManifest }) => {
+          await sentryOnBuildEnd({
+            buildManifest,
+            reactRouterConfig,
+            viteConfig,
+          });
+        },
+      }
+    : null),
 } satisfies Config;

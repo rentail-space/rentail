@@ -8,20 +8,21 @@ import { defineConfig } from "vite";
 import devtoolsJson from "vite-plugin-devtools-json";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-const sentryConfig: SentryReactRouterBuildOptions = {
-  authToken: process.env.SENTRY_AUTH_TOKEN,
-  org: "labnotes",
-  project: "rentail",
-};
+const sentryConfig: SentryReactRouterBuildOptions | undefined = process.env
+  .SENTRY_AUTH_TOKEN
+  ? {
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      org: "labnotes",
+      project: "rentail",
+    }
+  : undefined;
 
 export default defineConfig((config) => ({
   plugins: [
     tailwindcss(),
     reactRouter(),
     tsconfigPaths(),
-    process.env.NODE_ENV === "production"
-      ? sentryReactRouter(sentryConfig, config)
-      : devtoolsJson(),
+    sentryConfig ? sentryReactRouter(sentryConfig, config) : devtoolsJson(),
   ],
   ssr: { noExternal: ["streamdown"] },
 }));
