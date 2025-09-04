@@ -1,6 +1,5 @@
-import { PrismaClient } from "./generated/client";
+import prisma from "~/lib/prisma";
 
-const prisma = new PrismaClient();
 const user = {
   id: "wxxx3cwnw9o4g6zehqg0dswy",
   email: "assaf@labnotes.org",
