@@ -1,5 +1,7 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { invariant, last } from "es-toolkit";
+import { generateAtomFeed } from "feedsmith";
 import fm from "front-matter";
 import { DateTime } from "luxon";
 import { marked } from "marked";
@@ -23,6 +25,7 @@ export async function loader() {
       .sort((a, b) => b.localeCompare(a)) // Reverse chronological order
       .slice(0, 10); // Take most recent 10
 
+    // Blog post entries for feed
     const entries = await Promise.all(
       blogPosts.map(async (file) => {
         const content = await readFile(path.join(blogDir, file), "utf8");
@@ -49,14 +52,14 @@ export async function loader() {
     invariant(lastBuildDate, "Last build date is required");
 
     const atom = generateAtomFeed({
-      title: "Rentail Space Blog",
-      logo: "https://rentail.space/og-image.png",
-      id: "https://rentail.space/",
-      updated: lastBuildDate,
-      links: [{ href: "https://rentail.space", rel: "self" }],
-      subtitle: "Short-term retail space marketplace insights and guides",
       authors: [{ email: "info@rentail.space", name: "Rentail Space" }],
       entries,
+      id: "https://rentail.space/",
+      links: [{ href: "https://rentail.space", rel: "self" }],
+      logo: "https://rentail.space/og-image.png",
+      subtitle: "Short-term retail space marketplace insights and guides",
+      title: "Rentail Space Blog",
+      updated: lastBuildDate,
     });
 
     return new Response(atom, {
@@ -70,16 +73,3 @@ export async function loader() {
     throw new Response("Internal Server Error", { status: 500 });
   }
 }
-
-function escapeXml(text: string): string {
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-import { invariant, last } from "es-toolkit";
-import { generateAtomFeed, generateRssFeed } from "feedsmith";
-import type { Entry } from "node_modules/feedsmith/dist/feeds/atom/common/types";
