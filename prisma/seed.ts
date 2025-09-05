@@ -19,22 +19,21 @@ const prisma = new PrismaClient({
 
 const user = {
   id: "wxxx3cwnw9o4g6zehqg0dswy",
-  email: "assaf@labnotes.org",
 };
 const conversation = {
   id: "mv3syosnkkawsqkwdpmeeuyk",
-  userId: user.id,
 };
 
 await prisma.user.upsert({
-  create: { email: user.email, id: user.id },
+  create: { id: user.id },
   update: {},
-  where: { email: user.email },
+  where: { id: user.id },
 });
 
-await prisma.conversation.createMany({
-  data: [{ id: conversation.id, userId: user.id }],
-  skipDuplicates: true,
+await prisma.conversation.upsert({
+  create: { id: conversation.id, userId: user.id },
+  update: {},
+  where: { id: conversation.id },
 });
 
 await prisma.message.createMany({
