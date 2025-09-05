@@ -18,12 +18,10 @@ const { getSession, commitSession, destroySession } =
     cookie: {
       httpOnly: true,
       isSigned: true,
-      maxAge: serverConfig.SESSION_MAX_AGE_SECONDS,
+      maxAge: 60 * 60 * 24 * 365, // 365 days
       name: "__session",
       path: "/",
-      sameSite: "lax",
       secrets: [serverConfig.SESSION_SECRET],
-      secure: serverConfig.isProduction,
     },
   });
 

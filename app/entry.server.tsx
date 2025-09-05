@@ -85,8 +85,6 @@ function handleRequest(
         },
       },
     );
-
-    setTimeout(abort, serverConfig.SSR_REQUEST_TIMEOUT_MS);
   });
 }
 
