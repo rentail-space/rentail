@@ -50,7 +50,11 @@ export async function getUserFromSession(
   }
 
   const location = await getLocationFromRequest(request, session);
-  const newUser = await prisma.user.create({ data: { ...location } });
+  const newUser = await prisma.user.create({ data: {
+    ip: location?.ip,
+    latitude: location?.latitude,
+    longitude: location?.longitude,
+  } });
   session.set("user_id", newUser.id);
   return newUser;
 }

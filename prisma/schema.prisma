@@ -19,7 +19,6 @@ model User {
   latitude      String?        @map("latitude")
   longitude     String?        @map("longitude")
   updatedAt     DateTime       @map("updated_at") @updatedAt
-
   conversations Conversation[]
 }
 
