@@ -94,7 +94,9 @@ export async function getConversationFromSession(
 async function getLocationFromRequest(
   request: Request,
   session: SessionType,
-): Promise<void> {
+): Promise<void> {'
+  if (session.get("location")) return;
+
   try {
     const clientIp = request.headers.get("x-forwarded-for");
     invariant(clientIp, "Client IP is required");
@@ -109,7 +111,6 @@ async function getLocationFromRequest(
     invariant(response.ok, "Failed to fetch IP geolocation data");
 
     const data = (await response.json()) as IPData;
-    console.info("data", data);
     session.set("location", {
       city: data.location.city,
       ip: clientIp,
@@ -118,7 +119,6 @@ async function getLocationFromRequest(
       state_code: data.location.state_code,
       zipcode: data.location.zipcode,
     });
-    console.info("locaiton", session.get("location"));
   } catch (error) {
     console.error("Error fetching IP geolocation data:", error);
   }
