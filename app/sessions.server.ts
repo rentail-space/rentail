@@ -1,5 +1,6 @@
 import type { Conversation, Message, User } from "prisma/generated/client";
 import { createCookieSessionStorage, type Session } from "react-router";
+import invariant from "tiny-invariant";
 import serverConfig from "./lib/config";
 import prisma from "./lib/prisma";
 
@@ -94,10 +95,12 @@ async function getLocationFromRequest(
   request: Request,
   session: SessionType,
 ): Promise<void> {
-  const clientIp = request.headers.get("x-forwarded-for");
-  console.info("%o", request.headers);
-  console.info("ip", clientIp);
-  if (clientIp) {
+  try {
+    console.info("%o", request.headers);
+    const clientIp = request.headers.get("x-forwarded-for");
+    console.info("ip", clientIp);
+    invariant(clientIp, "Client IP is required");
+
     const url = new URL("https://api.ipgeolocation.io/v2/ipgeo");
     url.searchParams.set("apiKey", serverConfig.IPGEOLOCATION_API_KEY);
     url.searchParams.set("ip", clientIp);
@@ -105,6 +108,8 @@ async function getLocationFromRequest(
     const response = await fetch(url, {
       headers: { "Content-Type": "application/json" },
     });
+    invariant(response.ok, "Failed to fetch IP geolocation data");
+
     const data = (await response.json()) as IPData;
     console.info("data", data);
     session.set("location", {
@@ -117,6 +122,8 @@ async function getLocationFromRequest(
       zipcode: data.location.zipcode,
     });
     console.info("locaiton", session.get("location"));
+  } catch (error) {
+    console.error("Error fetching IP geolocation data:", error);
   }
 }
 

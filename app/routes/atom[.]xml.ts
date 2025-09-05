@@ -1,11 +1,12 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
-import { invariant, last } from "es-toolkit";
+import { last } from "es-toolkit";
 import { generateAtomFeed } from "feedsmith";
 import fm from "front-matter";
 import { DateTime } from "luxon";
 import { marked } from "marked";
 import removeMd from "remove-markdown";
+import invariant from "tiny-invariant";
 import truncateWords from "~/lib/truncateWords";
 
 export async function loader() {
