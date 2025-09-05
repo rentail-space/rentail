@@ -24,4 +24,9 @@ export default {
   SENTRY_DSN: env.get("SENTRY_DSN").required(false).asUrlString(),
 
   SESSION_SECRET: env.get("SESSION_SECRET").required(true).asString(),
+
+  IPGEOLOCATION_API_KEY: env
+    .get("IPGEOLOCATION_API_KEY")
+    .required(false)
+    .asString(),
 };

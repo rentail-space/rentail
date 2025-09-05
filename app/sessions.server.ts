@@ -6,6 +6,15 @@ import prisma from "./lib/prisma";
 type SessionData = {
   user_id?: string;
   conversation_id?: string;
+  location?: {
+    ip?: string;
+    time_zone?: string;
+    state_code?: string;
+    city?: string;
+    zipcode?: string;
+    latitude?: string;
+    longitude?: string;
+  };
 };
 
 type SessionFlashData = {
@@ -29,7 +38,12 @@ const { getSession, commitSession, destroySession } =
 
 export { getSession, commitSession, destroySession };
 
-export async function getUserFromSession(session: SessionType): Promise<User> {
+export async function getUserFromSession(
+  request: Request,
+  session: SessionType,
+): Promise<User> {
+  await getLocationFromRequest(request, session);
+
   const userId = session.get("user_id");
   if (userId) {
     const user = await prisma.user.findUnique({ where: { id: userId } });
@@ -42,12 +56,13 @@ export async function getUserFromSession(session: SessionType): Promise<User> {
 }
 
 export async function getConversationFromSession(
+  request: Request,
   session: SessionType,
 ): Promise<{
   user: User;
   conversation: Conversation & { messages: Message[] };
 }> {
-  const user = await getUserFromSession(session);
+  const user = await getUserFromSession(request, session);
 
   const conversationId = session.get("conversation_id");
   if (conversationId) {
@@ -74,3 +89,52 @@ export async function getConversationFromSession(
   session.set("conversation_id", newConversation.id);
   return { user, conversation: newConversation };
 }
+
+async function getLocationFromRequest(
+  request: Request,
+  session: SessionType,
+): Promise<void> {
+  const clientIp = request.headers.get("x-forwarded-for");
+  console.info("%o", request.headers);
+  console.info("ip", clientIp);
+  if (clientIp) {
+    const url = new URL("https://api.ipgeolocation.io/v2/ipgeo");
+    url.searchParams.set("apiKey", serverConfig.IPGEOLOCATION_API_KEY);
+    url.searchParams.set("ip", clientIp);
+    url.searchParams.set("fields", "ip,time_zone,location");
+    const response = await fetch(url, {
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = (await response.json()) as IPData;
+    console.info("data", data);
+    session.set("location", {
+      city: data.location.city,
+      ip: data.ip,
+      latitude: data.location.latitude,
+      longitude: data.location.longitude,
+      state_code: data.location.state_code,
+      time_zone: data.time_zone.name,
+      zipcode: data.location.zipcode,
+    });
+    console.info("locaiton", session.get("location"));
+  }
+}
+
+// See https://ipgeolocation.io/ip-location-api.html#documentation-overview
+type IPData = {
+  ip: string;
+  hostname: string; // eg "dns.google"
+  location: {
+    country_code2: string; // eg "US"
+    country_name: string; // eg "United States"
+    state_prov: string; // eg "California"
+    state_code: string; // eg "US-CA"
+    city: string; // eg "Mountain View"
+    accuracy_radius: string; // eg "5"
+    confidence: string; // eg "High"
+    zipcode: string; // eg "94043-1351"
+    latitude: string; // eg "37.42240"
+    longitude: string; // eg "-122.08421"
+  };
+  time_zone: { name: string }; // eg "America/Los_Angeles"
+};

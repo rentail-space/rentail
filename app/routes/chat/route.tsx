@@ -15,7 +15,10 @@ import Messages from "./Messages";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const session = await getSession(request.headers.get("Cookie") || "");
-  const { conversation, user } = await getConversationFromSession(session);
+  const { conversation, user } = await getConversationFromSession(
+    request,
+    session,
+  );
   return data(
     { conversation, user },
     { headers: { "Set-Cookie": await commitSession(session) } },
