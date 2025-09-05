@@ -23,7 +23,7 @@ export async function loader() {
       .sort((a, b) => b.localeCompare(a)) // Reverse chronological order
       .slice(0, 10); // Take most recent 10
 
-    const posts = await Promise.all(
+    const entries = await Promise.all(
       blogPosts.map(async (file) => {
         const content = await readFile(path.join(blogDir, file), "utf8");
         const { attributes, body } = fm<{ title: string }>(content);
@@ -34,46 +34,32 @@ export async function loader() {
         );
 
         return {
+          content: await marked.parse(body, { breaks: true, gfm: true }),
+          id: `https://rentail.space/blog/${slug}`,
+          links: [{ href: `https://rentail.space/blog/${slug}`, rel: "self" }],
+          published: published.toJSDate(),
+          summary: truncateWords(removeMd(body), 50),
           title: attributes.title,
-          slug,
-          content: marked.parse(body, { breaks: true, gfm: true }),
-          published,
-          description: truncateWords(removeMd(body), 50),
+          updated: published.toJSDate(),
         };
       }),
     );
 
-    const lastBuildDate =
-      posts.length > 0 ? posts[0].published : DateTime.now();
+    const lastBuildDate = last(entries)?.published;
+    invariant(lastBuildDate, "Last build date is required");
 
-    const atomFeed = `<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Rentail Space Blog</title>
-  <subtitle>Short-term retail space marketplace insights and guides</subtitle>
-  <link href="https://rentail.space/atom.xml" rel="self"/>
-  <link href="https://rentail.space/"/>
-  <id>https://rentail.space/</id>
-  <updated>${lastBuildDate.toISO()}</updated>
-  <author>
-    <name>Rentail Space</name>
-    <email>info@rentail.space</email>
-  </author>
-  <generator>React Router v7</generator>
-${posts
-  .map(
-    (post) => `  <entry>
-    <title>${escapeXml(post.title)}</title>
-    <link href="https://rentail.space/blog/${post.slug}"/>
-    <id>https://rentail.space/blog/${post.slug}</id>
-    <updated>${post.published.toISO()}</updated>
-    <summary type="text">${escapeXml(post.description)}</summary>
-    <content type="html"><![CDATA[${post.content}]]></content>
-  </entry>`,
-  )
-  .join("\n")}
-</feed>`;
+    const atom = generateAtomFeed({
+      title: "Rentail Space Blog",
+      logo: "https://rentail.space/og-image.png",
+      id: "https://rentail.space/",
+      updated: lastBuildDate,
+      links: [{ href: "https://rentail.space", rel: "self" }],
+      subtitle: "Short-term retail space marketplace insights and guides",
+      authors: [{ email: "info@rentail.space", name: "Rentail Space" }],
+      entries,
+    });
 
-    return new Response(atomFeed, {
+    return new Response(atom, {
       headers: {
         "Content-Type": "application/atom+xml; charset=utf-8",
         "Cache-Control": "public, max-age=3600",
@@ -93,3 +79,7 @@ function escapeXml(text: string): string {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
+
+import { invariant, last } from "es-toolkit";
+import { generateAtomFeed, generateRssFeed } from "feedsmith";
+import type { Entry } from "node_modules/feedsmith/dist/feeds/atom/common/types";
