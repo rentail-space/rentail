@@ -11,7 +11,6 @@ beforeAll(async () => {
   await prisma.user.deleteMany({});
   await prisma.user.create({
     data: {
-      email: "assaf@labnotes.org",
       id: "wxxx3cwnw9o4g6zehqg0dswy",
       conversations: {
         create: {
