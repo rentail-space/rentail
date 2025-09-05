@@ -1,38 +1,78 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
+import type { User } from "prisma/generated/client";
 import { useEffect, useRef, useState } from "react";
-import { useLoaderData, useSearchParams } from "react-router";
+import { data, useLoaderData, useSearchParams } from "react-router";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
 import prisma from "~/lib/prisma";
+import { commitSession, getSession, type SessionType } from "~/sessions.server";
+import type { Route } from "./+types/route";
 import InputForm from "./InputForm";
 import Messages from "./Messages";
 
-export async function loader() {
-  const userId = "wxxx3cwnw9o4g6zehqg0dswy";
-  const conversationId = "mv3syosnkkawsqkwdpmeeuyk";
-  const user = await prisma.user.findUnique({ where: { id: userId } });
-  const messages = await prisma.message.findMany({
-    where: { conversationId },
-    orderBy: { createdAt: "asc" },
+export async function loader({ request }: Route.LoaderArgs) {
+  const session = await getSession(request.headers.get("Cookie") || "");
+  const user = await getUserFromSession(session);
+  const conversation = await getConversation(session, user);
+  return data(
+    { conversation, user },
+    { headers: { "Set-Cookie": await commitSession(session) } },
+  );
+}
+
+async function getUserFromSession(session: SessionType) {
+  const userId = session.get("user_id");
+  if (userId) {
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (user) return user;
+  }
+
+  const email = `user.${Math.random().toString(36).slice(2)}@rentail.space`;
+  const newUser = await prisma.user.create({ data: { email } });
+  session.set("user_id", newUser.id);
+  return newUser;
+}
+
+async function getConversation(session: SessionType, user: User) {
+  const conversationId = session.get("conversation_id");
+  if (conversationId) {
+    const conversation = await prisma.conversation.findUnique({
+      where: { id: conversationId, userId: user.id },
+      include: { messages: true },
+    });
+    if (conversation) return conversation;
+  }
+
+  const newConversation = await prisma.conversation.create({
+    data: {
+      messages: {
+        create: {
+          content:
+            "Hello, I'm **Rentail** — how can I help you find a pop-up retail space for your business?",
+          role: "ASSISTANT",
+        },
+      },
+      user: { connect: { id: user.id } },
+    },
+    include: { messages: { orderBy: { createdAt: "asc" } } },
   });
-  return { conversationId, user, messages };
+  session.set("conversation_id", newConversation.id);
+  return newConversation;
 }
 
 export default function Chat() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { conversationId, messages: initialMessages } =
-    useLoaderData<typeof loader>();
-
+  const { conversation, user } = useLoaderData<typeof loader>();
   const { error, messages, sendMessage, status } = useChat({
-    messages: initialMessages.map((message) => ({
+    messages: conversation.messages.map((message) => ({
       id: message.id,
       role: message.role === "USER" ? "user" : "assistant",
       parts: [{ text: message.content, type: "text" }],
     })) as UIMessage<{ role: UIMessage["role"] }, { text: string }>[],
     transport: new DefaultChatTransport({
       api: "/api/chat",
-      headers: { "X-Conversation-Id": conversationId },
+      headers: { "X-Conversation-Id": conversation.id },
     }),
   });
   const [input, setInput] = useState("");

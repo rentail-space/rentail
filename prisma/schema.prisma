@@ -21,10 +21,12 @@ model User {
 }
 
 model Conversation {
-  id       String    @map("id")      @id @default(cuid(2))
-  userId   String    @map("user_id")
-  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  messages Message[]
+  createdAt DateTime  @map("created_at") @default(now())
+  id        String    @map("id")         @id @default(cuid(2))
+  messages  Message[]
+  updatedAt DateTime  @map("updated_at") @updatedAt
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String    @map("user_id")
 }
 
 model Message {
