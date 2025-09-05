@@ -96,15 +96,13 @@ async function getLocationFromRequest(
   session: SessionType,
 ): Promise<void> {
   try {
-    console.info("%o", request.headers);
     const clientIp = request.headers.get("x-forwarded-for");
-    console.info("ip", clientIp);
     invariant(clientIp, "Client IP is required");
 
     const url = new URL("https://api.ipgeolocation.io/v2/ipgeo");
     url.searchParams.set("apiKey", serverConfig.IPGEOLOCATION_API_KEY);
     url.searchParams.set("ip", clientIp);
-    url.searchParams.set("fields", "ip,time_zone,location");
+    url.searchParams.set("fields", "time_zone,location");
     const response = await fetch(url, {
       headers: { "Content-Type": "application/json" },
     });
@@ -114,11 +112,10 @@ async function getLocationFromRequest(
     console.info("data", data);
     session.set("location", {
       city: data.location.city,
-      ip: data.ip,
+      ip: clientIp,
       latitude: data.location.latitude,
       longitude: data.location.longitude,
       state_code: data.location.state_code,
-      time_zone: data.time_zone.name,
       zipcode: data.location.zipcode,
     });
     console.info("locaiton", session.get("location"));
@@ -129,8 +126,6 @@ async function getLocationFromRequest(
 
 // See https://ipgeolocation.io/ip-location-api.html#documentation-overview
 type IPData = {
-  ip: string;
-  hostname: string; // eg "dns.google"
   location: {
     country_code2: string; // eg "US"
     country_name: string; // eg "United States"
@@ -143,5 +138,4 @@ type IPData = {
     latitude: string; // eg "37.42240"
     longitude: string; // eg "-122.08421"
   };
-  time_zone: { name: string }; // eg "America/Los_Angeles"
 };
