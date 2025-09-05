@@ -94,7 +94,7 @@ export async function getConversationFromSession(
 async function getLocationFromRequest(
   request: Request,
   session: SessionType,
-): Promise<void> {'
+): Promise<void> {
   if (session.get("location")) return;
 
   try {
