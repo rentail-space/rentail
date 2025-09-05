@@ -13,9 +13,13 @@ datasource db {
 }
 
 model User {
-  id            String         @map("id")         @id @default(cuid(2))
   createdAt     DateTime       @map("created_at") @default(now())
+  id            String         @map("id")         @id @default(cuid(2))
+  ip            String?        @map("ip")
+  latitude      String?        @map("latitude")
+  longitude     String?        @map("longitude")
   updatedAt     DateTime       @map("updated_at") @updatedAt
+
   conversations Conversation[]
 }
 

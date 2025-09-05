@@ -43,15 +43,14 @@ export async function getUserFromSession(
   request: Request,
   session: SessionType,
 ): Promise<User> {
-  await getLocationFromRequest(request, session);
-
   const userId = session.get("user_id");
   if (userId) {
     const user = await prisma.user.findUnique({ where: { id: userId } });
     if (user) return user;
   }
 
-  const newUser = await prisma.user.create({ data: {} });
+  const location = await getLocationFromRequest(request, session);
+  const newUser = await prisma.user.create({ data: { ...location } });
   session.set("user_id", newUser.id);
   return newUser;
 }
@@ -94,8 +93,15 @@ export async function getConversationFromSession(
 async function getLocationFromRequest(
   request: Request,
   session: SessionType,
-): Promise<void> {
-  if (session.get("location")) return;
+): Promise<
+  | {
+      ip?: string;
+      latitude?: string;
+      longitude?: string;
+    }
+  | undefined
+> {
+  if (session.get("location")) return session.get("location");
 
   try {
     const clientIp = request.headers.get("x-forwarded-for");
@@ -119,6 +125,7 @@ async function getLocationFromRequest(
       state_code: data.location.state_code,
       zipcode: data.location.zipcode,
     });
+    return session.get("location");
   } catch (error) {
     console.error("Error fetching IP geolocation data:", error);
   }
