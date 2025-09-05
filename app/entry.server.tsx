@@ -39,19 +39,16 @@ function handleRequest(
   const startTime = Date.now();
   const { pathname } = new URL(request.url);
   return new Promise<Response>((resolve) => {
-    const { pipe, abort } = renderToPipeableStream(
+    const { pipe } = renderToPipeableStream(
       <ServerRouter context={entryContext} url={request.url} />,
       {
         onShellReady() {
           const body = new PassThrough();
           const stream = createReadableStreamFromReadable(body);
           responseHeaders.set("content-type", "text/html");
+          responseHeaders.set("Document-Policy", "js-profiling");
           const response = new Response(stream, {
-            headers: {
-              ...responseHeaders,
-              // See https://labnotes.sentry.io/explore/profiling/
-              "Document-Policy": "js-profiling",
-            },
+            headers: responseHeaders,
             status: statusCode,
           });
 
