@@ -12,7 +12,7 @@
     "clean": "rm -rf .react-router build",
     "dev": "env NODE_ENV=test react-router dev",
     "format": "biome format --write",
-    "lint": "biome lint",
+    "lint": "secretlint **/* --format stylish && biome lint",
     "start": "react-router-serve ./build/server/index.js",
     "test": "npm run lint && npm run typecheck && vitest run --reporter verbose",
     "typecheck": "react-router typegen && tsc"
