@@ -7,13 +7,11 @@ import { useStickToBottomContext } from "use-stick-to-bottom";
 import askQuestion from "./askQuestion";
 
 export default function Messages({
-  className,
   error,
   isSubmitting: isTyping,
   messages,
   inputRef,
 }: {
-  className?: string;
   error?: Error;
   isSubmitting: boolean;
   messages: UIMessage[];
@@ -22,8 +20,10 @@ export default function Messages({
   const { scrollToBottom } = useStickToBottomContext();
 
   return (
-    <div className={`flex-1 flex flex-col ${className || ""}`}>
+    <div className="flex-1 flex flex-col">
       <div className="mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto p-6">
+        <FirstMessage />
+
         {messages.map((message, index) =>
           message.role === "user" ? (
             <UserMessage key={index.toString()} message={message} />
@@ -53,6 +53,27 @@ function UserMessage({ message }: { message: UIMessage }) {
             <span key={index.toString()}>{part.text}</span>
           ) : null,
         )}
+      </div>
+    </div>
+  );
+}
+
+function FirstMessage() {
+  return (
+    <div className="chat chat-start">
+      <div className="chat-image avatar mr-2 h-8 w-8">
+        <img
+          alt="rental space"
+          height="32px"
+          src="/favicon-96x96.png"
+          width="32px"
+        />
+      </div>
+      <div className="chat-bubble prose prose-base flex flex-row">
+        <p>
+          Hello, I'm <strong>Rentail</strong> — how can I help you find a pop-up
+          retail space for your business?
+        </p>
       </div>
     </div>
   );

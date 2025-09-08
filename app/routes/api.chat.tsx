@@ -1,6 +1,6 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
-import { last } from "es-toolkit";
+import { last, partition, takeRightWhile } from "es-toolkit";
 import invariant from "tiny-invariant";
 import config from "~/lib/config";
 import prisma from "~/lib/prisma";
@@ -14,21 +14,22 @@ invariant(spaces, "Centers list is required");
 export async function action({ request }: Route.ActionArgs) {
   const conversationId = request.headers.get("X-Conversation-Id");
   invariant(conversationId, "Conversation ID is required");
+
   const { messages }: { messages: UIMessage[] } = await request.json();
 
-  // Store the last message from the user (idempotent)
-  const lastMessage = last(messages);
-  invariant(lastMessage?.role === "user", "Last message from user is required");
-  await prisma.message.upsert({
-    where: { id: lastMessage.id },
-    update: {},
-    create: {
-      content: combine(lastMessage.parts),
-      conversationId,
-      id: lastMessage.id,
-      role: "USER",
-    },
-  });
+  // Store the new messages from the user or assistant
+  for (const message of messages) {
+    await prisma.message.upsert({
+      create: {
+        content: combine(message.parts),
+        id: message.id,
+        conversationId,
+        role: message.role === "user" ? "USER" : "ASSISTANT",
+      },
+      update: {},
+      where: { id: message.id },
+    });
+  }
 
   // Send last message to Anthropic LLM
   const model = createAnthropic({ apiKey: config.ANTHROPIC_API_KEY })(

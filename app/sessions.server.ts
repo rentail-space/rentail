@@ -99,16 +99,7 @@ export async function getConversationFromSession(request: Request): Promise<{
   }
 
   const newConversation = await prisma.conversation.create({
-    data: {
-      messages: {
-        create: {
-          content:
-            "Hello, I'm **Rentail** — how can I help you find a pop-up retail space for your business?",
-          role: "ASSISTANT",
-        },
-      },
-      user: { connect: { id: user.id } },
-    },
+    data: { user: { connect: { id: user.id } } },
     include: { messages: { orderBy: { createdAt: "asc" } } },
   });
   session.set("conversation_id", newConversation.id);
