@@ -19,7 +19,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export default function Chat() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const { conversation } = useLoaderData<typeof loader>();
   const { error, messages, sendMessage, status } = useChat({
     messages: conversation.messages.map((message) => ({
@@ -27,22 +27,18 @@ export default function Chat() {
       role: message.role === "USER" ? "user" : "assistant",
       parts: [{ text: message.content, type: "text" }],
     })) as UIMessage<{ role: UIMessage["role"] }, { text: string }>[],
-    transport: new DefaultChatTransport({
-      api: "/api/chat",
-      headers: { "X-Conversation-Id": conversation.id },
-    }),
+    transport: new DefaultChatTransport({ api: "/api/chat" }),
   });
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const initialQuery = searchParams.get("q");
-
   // Handle initial query from URL
   // biome-ignore lint/correctness/useExhaustiveDependencies: only once on mount
   useEffect(() => {
-    if (initialQuery && messages.length === 1) {
+    const query = searchParams.get("q");
+    if (query) {
       sendMessage({
-        parts: [{ text: initialQuery, type: "text" }],
+        parts: [{ text: query, type: "text" }],
         role: "user",
       });
     }

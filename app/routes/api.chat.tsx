@@ -3,6 +3,7 @@ import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import invariant from "tiny-invariant";
 import config from "~/lib/config";
 import prisma from "~/lib/prisma";
+import { getConversationFromSession } from "~/sessions.server";
 import general from "../lib/general.md?raw";
 import spaces from "../lib/spaces.md?raw";
 import type { Route } from "./+types/api.chat";
@@ -11,9 +12,7 @@ invariant(general, "General prompt is required");
 invariant(spaces, "Centers list is required");
 
 export async function action({ request }: Route.ActionArgs) {
-  const conversationId = request.headers.get("X-Conversation-Id");
-  invariant(conversationId, "Conversation ID is required");
-
+  const { conversation } = await getConversationFromSession(request);
   const { messages }: { messages: UIMessage[] } = await request.json();
 
   // Store the new messages from the user or assistant
@@ -22,7 +21,7 @@ export async function action({ request }: Route.ActionArgs) {
       create: {
         content: combine(message.parts),
         id: message.id,
-        conversationId,
+        conversationId: conversation.id,
         role: message.role === "user" ? "USER" : "ASSISTANT",
       },
       update: {},
@@ -49,7 +48,7 @@ export async function action({ request }: Route.ActionArgs) {
     prisma.message.create({
       data: {
         content: combine(content),
-        conversationId,
+        conversationId: conversation.id,
         role: "ASSISTANT",
       },
     }),
