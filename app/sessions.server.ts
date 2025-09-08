@@ -8,13 +8,9 @@ type SessionData = {
   user_id?: string;
   conversation_id?: string;
   location?: {
-    ip?: string;
-    time_zone?: string;
-    state_code?: string;
-    city?: string;
-    zipcode?: string;
-    latitude?: string;
-    longitude?: string;
+    ip: string;
+    latitude: string;
+    longitude: string;
   };
 };
 
@@ -22,51 +18,76 @@ type SessionFlashData = {
   error: string;
 };
 
-export type SessionType = Session<SessionData, SessionFlashData>;
+type SessionType = Session<SessionData, SessionFlashData>;
 
-const { getSession, commitSession, destroySession } =
-  createCookieSessionStorage<SessionData, SessionFlashData>({
-    // a Cookie from `createCookie` or the CookieOptions to create one
-    cookie: {
-      httpOnly: true,
-      isSigned: true,
-      maxAge: 60 * 60 * 24 * 365, // 365 days
-      name: "__session",
-      path: "/",
-      secrets: [serverConfig.SESSION_SECRET],
-    },
+const { getSession, commitSession } = createCookieSessionStorage<
+  SessionData,
+  SessionFlashData
+>({
+  // a Cookie from `createCookie` or the CookieOptions to create one
+  cookie: {
+    httpOnly: true,
+    isSigned: true,
+    maxAge: 60 * 60 * 24 * 365, // 365 days
+    name: "__session",
+    path: "/",
+    secrets: [serverConfig.SESSION_SECRET],
+  },
+});
+
+/**
+ * Use this instead of `commitSession` to avoid hardcoding the expiration date.
+ *
+ * @example
+ * { headers: { "Set-Cookie": await commit(session) } }
+ */
+export async function commit(session: SessionType) {
+  return await commitSession(session, {
+    expires: new Date(Date.now() + 60 * 60 * 24 * 365),
   });
+}
 
-export { getSession, commitSession, destroySession };
-
-export async function getUserFromSession(
-  request: Request,
-  session: SessionType,
-): Promise<User> {
+/**
+ * Get the user from the session.
+ *
+ * @param request - The request object
+ * @returns The user and the updated session
+ */
+export async function getUserFromSession(request: Request): Promise<{
+  user: User;
+  session: SessionType;
+}> {
+  const session = await getSession(request.headers.get("Cookie"));
   const userId = session.get("user_id");
   if (userId) {
     const user = await prisma.user.findUnique({ where: { id: userId } });
-    if (user) return user;
+    if (user) return { user, session };
   }
 
-  const location = await getLocationFromRequest(request, session);
-  const newUser = await prisma.user.create({ data: {
-    ip: location?.ip,
-    latitude: location?.latitude,
-    longitude: location?.longitude,
-  } });
+  const { location } = await getLocationFromRequest(request);
+  const newUser = await prisma.user.create({
+    data: {
+      ip: location?.ip,
+      latitude: location?.latitude,
+      longitude: location?.longitude,
+    },
+  });
   session.set("user_id", newUser.id);
-  return newUser;
+  return { user: newUser, session };
 }
 
-export async function getConversationFromSession(
-  request: Request,
-  session: SessionType,
-): Promise<{
+/**
+ * Get the conversation from the session.
+ *
+ * @param request - The request object
+ * @returns The conversation, user, and the updated session
+ */
+export async function getConversationFromSession(request: Request): Promise<{
   user: User;
+  session: SessionType;
   conversation: Conversation & { messages: Message[] };
 }> {
-  const user = await getUserFromSession(request, session);
+  const { user, session } = await getUserFromSession(request);
 
   const conversationId = session.get("conversation_id");
   if (conversationId) {
@@ -74,7 +95,7 @@ export async function getConversationFromSession(
       where: { id: conversationId, userId: user.id },
       include: { messages: true },
     });
-    if (conversation) return { user, conversation };
+    if (conversation) return { user, conversation, session };
   }
 
   const newConversation = await prisma.conversation.create({
@@ -91,21 +112,27 @@ export async function getConversationFromSession(
     include: { messages: { orderBy: { createdAt: "asc" } } },
   });
   session.set("conversation_id", newConversation.id);
-  return { user, conversation: newConversation };
+  return { user, conversation: newConversation, session };
 }
 
-async function getLocationFromRequest(
-  request: Request,
-  session: SessionType,
-): Promise<
-  | {
-      ip?: string;
-      latitude?: string;
-      longitude?: string;
-    }
-  | undefined
-> {
-  if (session.get("location")) return session.get("location");
+/**
+ * Get the location information from the request: IP, latitude, longitude, etc.
+ *
+ * @param request - The request object
+ * @param session - The session object
+ * @returns The location and the updated session
+ */
+async function getLocationFromRequest(request: Request): Promise<{
+  location?: {
+    ip: string;
+    latitude: string;
+    longitude: string;
+  };
+  session: SessionType;
+}> {
+  const session = await getSession(request.headers.get("Cookie"));
+  if (session.get("location"))
+    return { session, location: session.get("location") };
 
   try {
     const clientIp = request.headers.get("x-forwarded-for");
@@ -121,17 +148,19 @@ async function getLocationFromRequest(
     invariant(response.ok, "Failed to fetch IP geolocation data");
 
     const data = (await response.json()) as IPData;
-    session.set("location", {
+    const location = {
       city: data.location.city,
       ip: clientIp,
       latitude: data.location.latitude,
       longitude: data.location.longitude,
       state_code: data.location.state_code,
       zipcode: data.location.zipcode,
-    });
-    return session.get("location");
+    };
+    session.set("location", location);
+    return { session, location };
   } catch (error) {
     console.error("Error fetching IP geolocation data:", error);
+    return { session };
   }
 }
 

@@ -4,24 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { data, useLoaderData, useSearchParams } from "react-router";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
-import {
-  commitSession,
-  getConversationFromSession,
-  getSession,
-} from "~/sessions.server";
+import { commit, getConversationFromSession } from "~/sessions.server";
 import type { Route } from "./+types/route";
 import InputForm from "./InputForm";
 import Messages from "./Messages";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const session = await getSession(request.headers.get("Cookie") || "");
-  const { conversation, user } = await getConversationFromSession(
-    request,
-    session,
-  );
+  const { conversation, user, session } =
+    await getConversationFromSession(request);
   return data(
     { conversation, user },
-    { headers: { "Set-Cookie": await commitSession(session) } },
+    { headers: { "Set-Cookie": await commit(session) } },
   );
 }
 
