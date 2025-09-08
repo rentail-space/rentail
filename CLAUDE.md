@@ -35,6 +35,13 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - System prompts in `app/lib/`: `general.md`, `prelude.md`, `spaces.md`, `welcome.md`
 - Use Context7 MCP server for library documentation and code examples
 
+**Database:**
+- PostgreSQL with Prisma ORM client and schema generation
+- Database schema: `prisma/schema.prisma` with User, Conversation, and Message models
+- Prisma features: TypedSQL, Query Compiler, Driver Adapters
+- Test environment uses local PostgreSQL instance
+- Database operations: `prisma generate && prisma db push` for schema updates
+
 **Monitoring & Observability:**
 - Sentry for error tracking and performance monitoring (`app/lib/instrument.server.ts`)
 - BetterStack integration with Logtail for structured logging and Push Gateway for metrics
@@ -124,18 +131,20 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 ## Environment Variables
 
 Required environment variables (set in `.env.local`):
-- `AI_GATEWAY_API_KEY`: Vercel AI Gateway API key
+- `ANTHROPIC_API_KEY`: Claude AI API key for chat functionality
+- `DATABASE_URL`: PostgreSQL connection string for production
+- `SESSION_SECRET`: Secret key for session management
 - `LOGTAIL_TOKEN`: BetterStack Logtail token for logging
 - `LOGTAIL_ENDPOINT`: BetterStack Logtail endpoint URL
 - `PUSHGATEWAY_URL`: BetterStack Push Gateway URL for metrics
 - `PUSHGATEWAY_TOKEN`: BetterStack Push Gateway token
-- `SESSION_SECRET`: Secret key for session management
 - `CHECKLY_ACCOUNT_ID`: Checkly monitoring account ID
 - `CHECKLY_API_KEY`: Checkly monitoring API key
 
 Optional environment variables:
 - `SENTRY_DSN`: Sentry project DSN for error tracking
 - `SENTRY_AUTH_TOKEN`: Sentry auth token for build-time integration
+- `IPGEOLOCATION_API_KEY`: API key for IP geolocation services
 - `NODE_ENV`: Environment (development/production)
 - `SSR_REQUEST_TIMEOUT_MS`: SSR timeout in milliseconds (default: 5000)
 - `METRICS_COLLECTION_INTERVAL_MS`: Metrics collection interval (default: 300000ms / 5 minutes)
@@ -152,6 +161,9 @@ Optional environment variables:
   - `/app/entry.server.tsx`: Server-side rendering entry point with request logging
   - `/app/app.css`: Global Tailwind CSS imports
   - `/app/components/`: Reusable UI components organized by feature
+- `/prisma`: Database schema and migrations
+  - `schema.prisma`: Database models and configuration
+  - `generated/`: Prisma client generation output
 - `/build`: Production build output (client/server bundles)
 - `/public`: Static assets (favicon, logos)
 - `/test`: Test setup and shared utilities
