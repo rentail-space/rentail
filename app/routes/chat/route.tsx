@@ -53,7 +53,6 @@ export default function Chat() {
       parts: [{ text: input.trim(), type: "text" }],
       role: "user",
     });
-    setSearchParams((prev) => ({ ...prev, q: input.trim() }));
   };
 
   return (

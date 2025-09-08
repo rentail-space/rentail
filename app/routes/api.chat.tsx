@@ -1,6 +1,5 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
-import { last, partition, takeRightWhile } from "es-toolkit";
 import invariant from "tiny-invariant";
 import config from "~/lib/config";
 import prisma from "~/lib/prisma";
