@@ -19,28 +19,29 @@ const colors = {
   error: chalk.red,
 };
 
-if (logtail) {
-  ["trace", "debug", "log", "info", "warn", "error"].forEach(
-    (level: ILogLevel) => {
-      const consoleOriginal = Reflect.get(console, level);
-      const logtailFunction = Reflect.get(logtail, level);
-      const colorCode = process.stdout.isTTY
-        ? colors[level as keyof typeof colors]
-        : (message: string) => message;
+["trace", "debug", "log", "info", "warn", "error"].forEach(
+  (level: ILogLevel) => {
+    const consoleOriginal = Reflect.get(console, level);
+    const logtailFunction = logtail ? Reflect.get(logtail, level) : () => {};
+    const colorCode = process.stdout.isTTY
+      ? colors[level as keyof typeof colors]
+      : (message: string) => message;
 
-      Reflect.set(console, level, (message: string, ...metadata: unknown[]) => {
-        const formattedMessage = format(message, ...metadata);
-        consoleOriginal.call(console, colorCode(formattedMessage));
-        if (serverConfig.isProduction)
-          logtailFunction.call(logtail, formattedMessage, ...metadata);
-      });
-    },
-  );
+    Reflect.set(console, level, (message: string, ...metadata: unknown[]) => {
+      const formattedMessage = format(message, ...metadata);
+      consoleOriginal.call(console, colorCode(formattedMessage));
+      try {
+        logtailFunction.call(logtail, formattedMessage, ...metadata);
+      } catch (error) {
+        console.error("Error logging to Logtail:", error);
+      }
+    });
+  },
+);
 
-  process.on("exit", () => {
-    // Ensure that all logs are sent to Logtail
-    if (serverConfig.isProduction) logtail.flush();
-  });
-}
+process.on("SIGTERM", () => {
+  // Ensure that all logs are sent to Logtail
+  if (logtail) logtail.flush();
+});
 
 export default logtail;
