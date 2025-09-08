@@ -1,7 +1,10 @@
 import { defineConfig } from "@prisma/config";
 import * as dotenv from "dotenv";
 
-dotenv.config(); // Load the environment variables
+// Load the environment variables
+dotenv.config({
+  path: process.env.NODE_ENV === "test" ? ".env.test" : ".env",
+});
 
 export default defineConfig({
   migrations: { seed: "tsx prisma/seed.ts" },

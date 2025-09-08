@@ -68,11 +68,14 @@ jobs:
 
       - name: Setup Prisma
         run: npx prisma db push && npx prisma db seed
+        env:
+          NODE_ENV: "test"
 
       - name: Run Tests
         run: npm run test
         env:
           ANTHROPIC_API_KEY: "***REMOVED***"
+          NODE_ENV: "test"
           SESSION_SECRET: "***REMOVED***"
 
       - name: Upload Playwright Test Results

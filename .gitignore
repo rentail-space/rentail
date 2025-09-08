@@ -5,6 +5,7 @@
 .react-router/
 /build/
 .env
+.env.test
 *.swp
 .vercel
 
