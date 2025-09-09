@@ -41,8 +41,8 @@ describe("Blog Listing", () => {
     if (linkCount > 0) {
       const firstLink = blogLinks.first();
 
-      // Check for title (h3 element)
-      const title = firstLink.locator("h3");
+      // Check for title (h4 element)
+      const title = firstLink.locator("h4");
       await expect(title).toBeVisible();
       const titleText = await title.textContent();
       expect(titleText).toBeDefined();
@@ -98,8 +98,8 @@ describe("Blog Listing", () => {
     const blogSection = page.locator("section.prose").first();
     if (await blogSection.isVisible()) {
       const sectionClasses = await blogSection.getAttribute("class");
-      expect(sectionClasses).toContain("prose");
-      expect(sectionClasses).toContain("prose-lg");
+      expect(sectionClasses).toContain("prose-xl");
+      expect(sectionClasses).toContain("min-w-4xl");
       expect(sectionClasses).toContain("mx-auto");
     }
 
