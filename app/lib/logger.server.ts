@@ -1,7 +1,6 @@
 import { format } from "node:util";
 import { Logtail } from "@logtail/node";
 import type { ILogLevel } from "@logtail/types";
-import chalk from "chalk";
 import env from "./env";
 
 const logtail = env.LOGTAIL_TOKEN
@@ -11,12 +10,12 @@ const logtail = env.LOGTAIL_TOKEN
   : null;
 
 const colors = {
-  trace: chalk.gray,
-  debug: chalk.blue,
-  log: chalk.white,
-  info: chalk.green,
-  warn: chalk.yellow,
-  error: chalk.red,
+  trace: (text: string) => `\x1b[90m${text}\x1b[0m`,
+  debug: (text: string) => `\x1b[94m${text}\x1b[0m`,
+  log: (text: string) => `\x1b[97m${text}\x1b[0m`,
+  info: (text: string) => `\x1b[92m${text}\x1b[0m`,
+  warn: (text: string) => `\x1b[93m${text}\x1b[0m`,
+  error: (text: string) => `\x1b[91m${text}\x1b[0m`,
 };
 
 ["trace", "debug", "log", "info", "warn", "error"].forEach(
