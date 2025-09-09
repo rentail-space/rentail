@@ -12,16 +12,6 @@ datasource db {
   relationMode = "foreignKeys"
 }
 
-model User {
-  createdAt     DateTime       @map("created_at") @default(now())
-  id            String         @map("id")         @id @default(cuid(2))
-  ip            String?        @map("ip")
-  latitude      String?        @map("latitude")
-  longitude     String?        @map("longitude")
-  updatedAt     DateTime       @map("updated_at") @updatedAt
-  conversations Conversation[]
-}
-
 model Conversation {
   createdAt DateTime  @map("created_at") @default(now())
   id        String    @map("id")         @id @default(cuid(2))
@@ -38,6 +28,21 @@ model Message {
   role           Role         @map("role")
   conversationId String       @map("conversation_id")
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  createdAt     DateTime       @map("created_at") @default(now())
+  id            String         @map("id")         @id @default(cuid(2))
+  ip            String?        @map("ip")
+  latitude      String?        @map("latitude")
+  longitude     String?        @map("longitude")
+  updatedAt     DateTime       @map("updated_at") @updatedAt
+  conversations Conversation[]
+}
+
+model Waitlist {
+  createdAt DateTime @map("created_at") @default(now())
+  email     String   @map("email")      @id
 }
 
 enum Role {

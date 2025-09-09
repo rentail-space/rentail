@@ -12,6 +12,7 @@ import {
 } from "react-router";
 import "./app.css";
 import ReactGA from "react-ga4";
+import { Toaster } from "sonner";
 import ErrorBoundary from "./components/ErrorBoundary";
 import schema from "./data/schema.json";
 import serverConfig from "./lib/config";
@@ -143,6 +144,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <Toaster richColors />
+
         <ScrollRestoration />
         <Scripts />
       </body>
