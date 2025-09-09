@@ -2,7 +2,7 @@ import { captureException } from "@sentry/react-router";
 import { useId, useState } from "react";
 import { toast } from "sonner";
 
-export default function AddToWaitlist() {
+export default function JoinWaitlist() {
   const [email, setEmail] = useState("");
   const [isActive, setIsActive] = useState(false);
   const id = useId();
@@ -13,7 +13,7 @@ export default function AddToWaitlist() {
       setIsActive(true);
       const response = await fetch("/api/waitlist", {
         body: JSON.stringify({ email: email.trim() }),
-        headers: { "Content-Type": "application/json", },
+        headers: { "Content-Type": "application/json" },
         method: "POST",
       });
 
@@ -29,8 +29,8 @@ export default function AddToWaitlist() {
 
   return (
     <section className="mx-auto flex flex-col items-start gap-4 text-xl">
-      <form onSubmit={handleSubmit} className="mt-2 max-w-md">
-        <div className="flex flex-col gap-2 lg:flex-row">
+      <form onSubmit={handleSubmit} className="mt-2 w-full md:w-xl">
+        <div className="flex flex-col gap-2 md:flex-row">
           <label className="sr-only" htmlFor={id}>
             Email address
           </label>
