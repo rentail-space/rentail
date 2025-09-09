@@ -6,6 +6,7 @@ import { DateTime } from "luxon";
 import { useId } from "react";
 import { useLoaderData } from "react-router";
 import { Footer } from "~/components/layout/Footer";
+import AddToWaitlist from "./AddToWaitlist";
 import BlogPosts from "./BlogPosts";
 import FeaturesSection from "./FeaturesSection";
 import HeroSection from "./HeroSection";
@@ -42,10 +43,13 @@ export default function Home() {
     <>
       <main className="mb-20 flex min-h-screen flex-col gap-y-20">
         <HeroSection howItWorksId={howItWorksId} />
-        <FeaturesSection />
-        <HowItWorksSection howItWorksId={howItWorksId} />
-        <BlogPosts posts={posts} />
-        <SpecialtyLeasing />
+        <section className="prose prose-xl min-w-4xl mx-auto flex flex-col gap-y-10">
+          <AddToWaitlist />
+          <FeaturesSection />
+          <HowItWorksSection howItWorksId={howItWorksId} />
+          <BlogPosts posts={posts} />
+          <SpecialtyLeasing />
+        </section>
       </main>
       <Footer />
     </>

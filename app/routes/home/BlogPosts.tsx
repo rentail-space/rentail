@@ -23,7 +23,7 @@ export default function BlogPosts({
   const rest = drop(isPublished, 3);
 
   return (
-    <section className="prose prose-lg mx-auto">
+    <section>
       {first.map((post) => (
         <Link
           className="link link-hover flex flex-row gap-4"
@@ -38,8 +38,10 @@ export default function BlogPosts({
             width={100}
           />
           <div>
-            <h3>{post.attributes.title}</h3>
-            <p>{truncateWords(removeMd(post.body), 30)}</p>
+            <h4>{post.attributes.title}</h4>
+            <p className="text-gray-500">
+              {truncateWords(removeMd(post.body), 30)}
+            </p>
           </div>
         </Link>
       ))}
@@ -50,8 +52,7 @@ export default function BlogPosts({
           to={`/blog/${post.slug}`}
           key={post.slug}
         >
-          <h4>{post.attributes.title}</h4>
-          <p className="hidden">{truncateWords(removeMd(post.body), 30)}</p>
+          <h5>{post.attributes.title}</h5>
         </Link>
       ))}
     </section>

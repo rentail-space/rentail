@@ -42,7 +42,7 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section className="prose prose-lg mx-auto">
+    <section>
       <div className="text-center">
         <h2>
           Why Choose <span className="text-blue-600">rentail</span>.space?

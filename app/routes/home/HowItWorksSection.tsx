@@ -26,7 +26,7 @@ export default function HowItWorksSection({
   ];
 
   return (
-    <section id={howItWorksId} className="prose prose-lg mx-auto">
+    <section id={howItWorksId}>
       <div className="mb-16 text-center">
         <h2>How It Works</h2>
         <p>
