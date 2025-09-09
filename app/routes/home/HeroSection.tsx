@@ -23,9 +23,11 @@ export default function HeroSection({
               Find your <span className="text-blue-600">short-term rental</span>
             </h1>
             <p>
-              We help you find a short-term rental that fits your needs, in a
-              shopping center near you, at reasonable price, and with adequate
-              foot traffic to make your business thrive.
+              Rentail is literally the iOS for micro-merchants - like instead of
+              scrolling endlessly through Craigslist hoping to find the perfect
+              mall spot, this AI just matches you with your ideal retail space
+              and handles all the boring stuff, no cap this is the blueprint for
+              how gen-z should be doing brick-and-mortar.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <Link to="/chat" className="btn btn-lg btn-primary">

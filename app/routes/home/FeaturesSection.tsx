@@ -48,8 +48,9 @@ export default function FeaturesSection() {
           Why Choose <span className="text-blue-600">rentail</span>.space?
         </h2>
         <p>
-          We help you find a retail space for rent. Grow your business in a few
-          easy steps.
+          We help you find a short-term rental that fits your needs, in a
+          shopping center near you, at reasonable price, and with adequate foot
+          traffic to make your business thrive.
         </p>
       </div>
 
