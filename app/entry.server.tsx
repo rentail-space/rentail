@@ -8,15 +8,15 @@ import type {
   LoaderFunctionArgs,
 } from "react-router";
 import { ServerRouter } from "react-router";
-import serverConfig from "./lib/config";
+import env from "./lib/env";
 import logtail from "./lib/logger.server";
 import "./lib/instrument.server";
 
-if (serverConfig.SENTRY_DSN) {
+if (env.SENTRY_DSN) {
   Sentry.init({
-    dsn: serverConfig.SENTRY_DSN,
+    dsn: env.SENTRY_DSN,
     enableLogs: true,
-    environment: serverConfig.isProduction ? "production" : "development",
+    environment: env.isProduction ? "production" : "development",
     integrations: [
       Sentry.consoleLoggingIntegration({ levels: ["log", "warn", "error"] }),
     ],
@@ -25,7 +25,7 @@ if (serverConfig.SENTRY_DSN) {
 }
 
 // Initialize MSW in test mode
-if (serverConfig.isTest) await import("../test/mocks/msw.server");
+if (env.isTest) await import("../test/mocks/msw.server");
 
 function handleRequest(
   request: Request,

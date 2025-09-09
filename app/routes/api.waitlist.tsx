@@ -1,12 +1,12 @@
 import { pretty, render } from "@react-email/render";
+import { captureException } from "@sentry/react-router";
 import { data } from "react-router";
 import { Resend } from "resend";
 import invariant from "tiny-invariant";
 import Waitlist from "~/emails/Waitlist";
-import env from "~/lib/config";
-import type { Route } from "./+types/api.waitlist";
-import { captureException } from "@sentry/react-router";
+import env from "~/lib/env";
 import prisma from "~/lib/prisma";
+import type { Route } from "./+types/api.waitlist";
 
 const resend = new Resend(env.RESEND_API_KEY);
 

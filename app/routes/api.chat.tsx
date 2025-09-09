@@ -1,7 +1,7 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import invariant from "tiny-invariant";
-import config from "~/lib/config";
+import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { getConversationFromSession } from "~/sessions.server";
 import general from "../lib/general.md?raw";
@@ -30,7 +30,7 @@ export async function action({ request }: Route.ActionArgs) {
   }
 
   // Send last message to Anthropic LLM
-  const model = createAnthropic({ apiKey: config.ANTHROPIC_API_KEY })(
+  const model = createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
     "claude-sonnet-4-20250514",
   );
   const result = streamText({

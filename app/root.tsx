@@ -15,13 +15,13 @@ import ReactGA from "react-ga4";
 import { Toaster } from "sonner";
 import ErrorBoundary from "./components/ErrorBoundary";
 import schema from "./data/schema.json";
-import serverConfig from "./lib/config";
+import env from "./lib/env";
 
 export async function loader() {
   return {
     ENV: {
-      NODE_ENV: serverConfig.isProduction ? "production" : "development",
-      SENTRY_DSN: serverConfig.SENTRY_DSN,
+      NODE_ENV: env.isProduction ? "production" : "development",
+      SENTRY_DSN: env.SENTRY_DSN,
     },
   };
 }

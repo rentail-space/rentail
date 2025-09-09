@@ -1,12 +1,12 @@
 import { setupServer } from "msw/node";
-import config from "~/lib/config";
+import env from "~/lib/env";
 import { handlers } from "./handlers";
 
 const server = setupServer(...handlers);
 export default server;
 
 // Add logging for debugging
-if (server && config.isDebug) {
+if (server && env.isDebug) {
   server.events.on("request:start", ({ request }) =>
     console.debug("[MSW] %s", request.method, request.url),
   );

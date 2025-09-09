@@ -12,7 +12,7 @@ import {
 import invariant from "tiny-invariant";
 import "./toMatchScreenshot";
 import { URL as URLString } from "node:url";
-import config from "~/lib/config";
+import env from "~/lib/env";
 
 const port = 9222;
 const lockFile = join(tmpdir(), `rentail-server-${port}.lock`);
@@ -43,7 +43,7 @@ export async function launchBrowser(headless = true): Promise<Page> {
 async function launchServer() {
   // Check if lock file exists and server is running
   if (existsSync(lockFile)) {
-    if (config.isDebug)
+    if (env.isDebug)
       console.debug(
         "[TEST] lockFile exists, checking server health\n\t%s",
         lockFile,
@@ -55,13 +55,13 @@ async function launchServer() {
 
       if (await checkServerHealth()) {
         // Server is already running and healthy
-        if (config.isDebug)
+        if (env.isDebug)
           console.debug("[TEST] server is already running and healthy");
         server = {
           port,
           stop: () => {
             try {
-              if (config.isDebug) console.debug("[TEST] killing server");
+              if (env.isDebug) console.debug("[TEST] killing server");
               process.kill(pid);
               unlinkSync(lockFile);
               return true;
@@ -75,7 +75,7 @@ async function launchServer() {
 
       // Clean up stale lock files
       try {
-        if (config.isDebug) console.debug("[TEST] cleaning up stale lock file");
+        if (env.isDebug) console.debug("[TEST] cleaning up stale lock file");
         unlinkSync(lockFile);
       } catch (error) {
         console.error("[TEST] error cleaning up lock file\n\t%s", error);
@@ -104,7 +104,7 @@ async function launchServer() {
     },
   );
   process.on("beforeExit", () => {
-    if (config.isDebug)
+    if (env.isDebug)
       console.debug("[TEST] server process exited, killing server");
     serverProcess.kill("SIGTERM");
   });
@@ -156,7 +156,7 @@ async function launchServer() {
       }
     });
 
-    if (config.isDebug)
+    if (env.isDebug)
       serverProcess.stdout.on("data", (stream: Buffer) =>
         process.stdout.write(stream),
       );
@@ -182,7 +182,7 @@ async function blockBrowserRequest(route: Route): Promise<void> {
   if (url.startsWith("http://localhost:")) {
     await route.continue();
   } else {
-    if (config.isDebug) console.debug(`[TEST] blocking request to ${hostname}`);
+    if (env.isDebug) console.debug(`[TEST] blocking request to ${hostname}`);
     await route.abort("accessdenied");
   }
 }

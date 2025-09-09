@@ -2,11 +2,11 @@
 
 import os from "node:os";
 import * as Sentry from "@sentry/react-router";
-import serverConfig from "./config";
+import env from "./env";
 
-if (serverConfig.SENTRY_DSN) {
+if (env.SENTRY_DSN) {
   Sentry.init({
-    dsn: serverConfig.SENTRY_DSN,
+    dsn: env.SENTRY_DSN,
     sendDefaultPii: true,
   });
 }
@@ -151,8 +151,8 @@ export async function pushProcessMetrics() {
   setImmediate(measureLap);
 }
 
-const url = serverConfig.PUSHGATEWAY_URL;
-const token = serverConfig.PUSHGATEWAY_TOKEN;
+const url = env.PUSHGATEWAY_URL;
+const token = env.PUSHGATEWAY_TOKEN;
 
 async function pushToPrometheus(
   metrics: Array<
@@ -180,7 +180,7 @@ async function pushToPrometheus(
     )
   >,
 ): Promise<void> {
-  if (!serverConfig.isProduction || !url || !token) return;
+  if (!env.isProduction || !url || !token) return;
 
   try {
     const response = await fetch(url, {

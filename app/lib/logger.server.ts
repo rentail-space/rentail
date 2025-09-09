@@ -2,11 +2,11 @@ import { format } from "node:util";
 import { Logtail } from "@logtail/node";
 import type { ILogLevel } from "@logtail/types";
 import chalk from "chalk";
-import serverConfig from "./config";
+import env from "./env";
 
-const logtail = serverConfig.LOGTAIL_TOKEN
-  ? new Logtail(serverConfig.LOGTAIL_TOKEN, {
-      endpoint: serverConfig.LOGTAIL_ENDPOINT,
+const logtail = env.LOGTAIL_TOKEN
+  ? new Logtail(env.LOGTAIL_TOKEN, {
+      endpoint: env.LOGTAIL_ENDPOINT,
     })
   : null;
 

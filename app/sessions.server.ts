@@ -1,7 +1,7 @@
 import type { Conversation, Message, User } from "prisma/generated/client";
 import { createCookieSessionStorage, type Session } from "react-router";
 import invariant from "tiny-invariant";
-import serverConfig from "./lib/config";
+import env from "./lib/env";
 import prisma from "./lib/prisma";
 
 type SessionData = {
@@ -31,7 +31,7 @@ const { getSession, commitSession } = createCookieSessionStorage<
     maxAge: 60 * 60 * 24 * 365, // 365 days
     name: "__session",
     path: "/",
-    secrets: [serverConfig.SESSION_SECRET],
+    secrets: [env.SESSION_SECRET],
   },
 });
 
@@ -130,7 +130,7 @@ async function getLocationFromRequest(request: Request): Promise<{
     invariant(clientIp, "Client IP is required");
 
     const url = new URL("https://api.ipgeolocation.io/v2/ipgeo");
-    url.searchParams.set("apiKey", serverConfig.IPGEOLOCATION_API_KEY);
+    url.searchParams.set("apiKey", env.IPGEOLOCATION_API_KEY);
     url.searchParams.set("ip", clientIp);
     url.searchParams.set("fields", "time_zone,location");
     const response = await fetch(url, {
