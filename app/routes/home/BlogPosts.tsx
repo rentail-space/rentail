@@ -23,7 +23,7 @@ export default function BlogPosts({
   const rest = drop(isPublished, 3);
 
   return (
-    <section>
+    <section className="blog-posts-section">
       {first.map((post) => (
         <Link
           className="link link-hover flex flex-row gap-4"

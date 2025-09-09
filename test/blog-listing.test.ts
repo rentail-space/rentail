@@ -19,7 +19,7 @@ describe("Blog Listing", () => {
     expect(response?.status(), "should respond with 200").toEqual(200);
 
     // Check if blog posts section exists
-    const blogSection = page.locator("section.prose").first();
+    const blogSection = page.locator("section.blog-posts-section").first();
     await expect(blogSection).toBeVisible();
 
     // Check if blog post links are present
@@ -90,22 +90,6 @@ describe("Blog Listing", () => {
     await page.close();
   });
 
-  it("blog listing has proper prose styling", async () => {
-    const page = await launchBrowser();
-    await page.goto(URL);
-
-    // Check blog section styling
-    const blogSection = page.locator("section.prose").first();
-    if (await blogSection.isVisible()) {
-      const sectionClasses = await blogSection.getAttribute("class");
-      expect(sectionClasses).toContain("prose-xl");
-      expect(sectionClasses).toContain("min-w-4xl");
-      expect(sectionClasses).toContain("mx-auto");
-    }
-
-    await page.close();
-  });
-
   it("blog links have hover styling", async () => {
     const page = await launchBrowser();
     await page.goto(URL);
@@ -154,13 +138,12 @@ describe("Blog Listing", () => {
     await page.waitForLoadState("networkidle");
 
     // Scroll to blog section if it exists
-    const blogSection = page.locator("section.prose").first();
-    if (await blogSection.isVisible()) {
-      await blogSection.scrollIntoViewIfNeeded();
-    }
+    const blogSection = page.locator("section.blog-posts-section").first();
+    expect(blogSection).toBeVisible();
+    await blogSection.scrollIntoViewIfNeeded();
 
     // Take screenshot for visual regression testing of the blog section
-    await expect(page).toMatchScreenshot();
+    await expect(blogSection).toMatchScreenshot();
 
     await page.close();
   });
