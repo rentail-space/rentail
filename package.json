@@ -14,7 +14,7 @@
     "format": "biome format --write",
     "lint": "secretlint **/* --format stylish && biome lint",
     "start": "react-router-serve ./build/server/index.js",
-    "test": "NODE_ENV=test npm run lint && npm run typecheck && prisma db push && vitest run --reporter verbose",
+    "test": "npm run lint && npm run typecheck && NODE_ENV=test prisma db push && vitest run --reporter verbose",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {

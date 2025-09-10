@@ -1,8 +1,12 @@
 generator client {
   provider      = "prisma-client"
   output        = "generated"
-  moduleFormat  = "esm"
-  previewFeatures = ["typedSql", "queryCompiler", "driverAdapters"]
+
+  engineType             = "client"
+  runtime                = "nodejs"
+  moduleFormat           = "esm"
+  generatedFileExtension = "ts"
+  importFileExtension    = "ts"
 }
 
 datasource db {
