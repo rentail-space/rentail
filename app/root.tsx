@@ -160,3 +160,14 @@ export default function App() {
     </ErrorBoundary>
   );
 }
+
+export function HydrateFallback() {
+  return (
+    <div className="flex flex-col gap-4 h-screen w-screen items-center justify-center">
+      <div className="flex flex-col items-center justify-center">
+        <div className="animate-spin h-12 w-12 border-4 border-blue-600 rounded-full border-t-transparent" />
+      </div>
+      <p className="text-sm text-gray-500">Loading, please wait...</p>
+    </div>
+  );
+}
