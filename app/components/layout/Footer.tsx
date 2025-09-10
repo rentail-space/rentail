@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router";
 
-export function Footer() {
+export default function Footer() {
   return (
     <footer className="footer sm:footer-horizontal footer-center p-4 text-base-content">
       <aside>

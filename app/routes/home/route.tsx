@@ -5,7 +5,7 @@ import fm from "front-matter";
 import { DateTime } from "luxon";
 import { useId } from "react";
 import { useLoaderData } from "react-router";
-import { Footer } from "~/components/layout/Footer";
+import Footer from "~/components/layout/Footer";
 import BlogPosts from "./BlogPosts";
 import FeaturesSection from "./FeaturesSection";
 import HeroSection from "./HeroSection";
