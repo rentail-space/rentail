@@ -10,17 +10,16 @@ import truncateWords from "~/lib/truncateWords";
 export async function loader() {
   try {
     const feed = new Feed({
-      // entries: await getEntries(),
       author: { email: "info@rentail.space", name: "Rentail" },
       copyright: "Copyright 2025 Rentail Space",
       description: "Short-term retail space marketplace insights and guides",
       favicon: "https://rentail.space/favicon-96x96.png",
       feedLinks: { atom: "https://rentail.space/blog/feed" },
-      id: "https://rentail.space/blog/feed",
+      id: "rentail.space",
       image: "https://rentail.space/og-image.png",
       language: "en-US",
       link: "https://rentail.space/blog/feed",
-      title: "Rentail Blog",
+      title: "The Rentail Blog",
       updated: new Date(),
     });
 
@@ -50,7 +49,7 @@ export async function loader() {
       );
       feed.addItem({
         content: await marked.parse(body, { gfm: true }),
-        id: `https://rentail.space/blog/${slug}`,
+        id: `rentail.space:${slug}`,
         link: `https://rentail.space/blog/${slug}`,
         published: published.toJSDate(),
         description: truncateWords(removeMd(body), 50),
