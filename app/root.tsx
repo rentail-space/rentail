@@ -99,10 +99,10 @@ export const links: LinksFunction = () => [
     type: "text/plain",
   },
   {
-    href: "/atom.xml",
+    href: "/blog/feed",
     rel: "alternate",
+    title: "Rentail Blog",
     type: "application/atom+xml",
-    title: "Rentail Space Blog",
   },
 ];
 
