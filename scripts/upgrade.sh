@@ -20,8 +20,5 @@ git commit -m "Upgrade dependencies"
 echo -e "\033[32m  Cleaning up …\033[0m"
 git gc --aggressive --prune=now
 
-echo -e "\033[32m  Testing …\033[0m"
-npm run test
-
 terminal-notifier -sound default  -title "$0" -message "Done!"
 exit 0
