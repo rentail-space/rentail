@@ -36,7 +36,7 @@
     "dayjs": "^1.11.18",
     "env-var": "^7.5.0",
     "es-toolkit": "^1.39.10",
-    "feedsmith": "^2.0.0",
+    "feed": "^5.1.0",
     "front-matter": "^4.0.2",
     "looks-same": "^10.0.1",
     "luxon": "^3.7.2",
