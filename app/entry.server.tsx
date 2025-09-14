@@ -24,8 +24,10 @@ if (env.SENTRY_DSN) {
   });
 }
 
-// Initialize MSW in test mode
-if (env.isTest) await import("../test/mocks/msw.server");
+if (env.isTest) {
+  // Initialize MSW in test mode
+  await import("../test/mocks/msw.server");
+}
 
 function handleRequest(
   request: Request,
