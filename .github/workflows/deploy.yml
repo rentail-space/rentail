@@ -71,6 +71,11 @@ jobs:
         env:
           NODE_ENV: "test"
 
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.7.0
+        with:
+          redis-version: 5
+
       - name: Run Tests
         run: npm run test
         env:
