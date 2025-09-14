@@ -1,12 +1,8 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
-import {
-  convertToModelMessages,
-  streamText,
-  type UIMessage,
-  validateUIMessages,
-} from "ai";
+import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import type { Conversation } from "prisma/generated/client";
 import invariant from "tiny-invariant";
+import { ulid } from "ulid";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { getConversationFromSession } from "~/sessions.server";
@@ -47,6 +43,7 @@ export async function action({ request }: Route.ActionArgs) {
   // assistant.
   return result.toUIMessageStreamResponse({
     originalMessages: messages,
+    generateMessageId: ulid,
     onFinish: async ({ messages }) =>
       await saveMessages({ conversation, messages }),
   });
@@ -73,7 +70,9 @@ async function saveMessages({
 function combine(content: Array<{ type: string; text?: string }>) {
   return content
     .map((part) => (part.type === "text" ? part.text : ""))
-    .join("\n");
+    .join("\n")
+    .replace(/^\s+|\s+$/g, "")
+    .trim();
 }
 
 /**
