@@ -23,18 +23,16 @@ let browser: Browser;
 let context: BrowserContext;
 let server: { port: number; stop: () => boolean };
 
-const isDebug = !!process.env.DEBUG;
-
 /**
  * Launch the server and browser. Returns instance of server and browser page.
  * @returns The browser page.
  */
-export async function launchBrowser(headless = !isDebug): Promise<Page> {
+export async function launchBrowser(headless = env.isDebug): Promise<Page> {
   if (!server) await launchServer();
   if (!browser) browser = await chromium.launch({ headless });
   if (!context) context = await browser.newContext();
   const page = await context.newPage();
-  page.route("**", blockBrowserRequest);
+  page.route("**", (route) => blockBrowserRequest(route));
   return page;
 }
 
@@ -43,9 +41,10 @@ export async function launchBrowser(headless = !isDebug): Promise<Page> {
  * @returns The server instance.
  */
 async function launchServer() {
+  const logging = env.isDebug;
   // Check if lock file exists and server is running
   if (existsSync(lockFile)) {
-    if (env.isDebug)
+    if (logging)
       console.debug(
         "[TEST] lockFile exists, checking server health\n\t%s",
         lockFile,
@@ -57,13 +56,13 @@ async function launchServer() {
 
       if (await checkServerHealth()) {
         // Server is already running and healthy
-        if (env.isDebug)
+        if (logging)
           console.debug("[TEST] server is already running and healthy");
         server = {
           port,
           stop: () => {
             try {
-              if (env.isDebug) console.debug("[TEST] killing server");
+              if (logging) console.debug("[TEST] killing server");
               process.kill(pid);
               unlinkSync(lockFile);
               return true;
@@ -77,7 +76,7 @@ async function launchServer() {
 
       // Clean up stale lock files
       try {
-        if (env.isDebug) console.debug("[TEST] cleaning up stale lock file");
+        if (logging) console.debug("[TEST] cleaning up stale lock file");
         unlinkSync(lockFile);
       } catch (error) {
         console.error("[TEST] error cleaning up lock file\n\t%s", error);
@@ -106,8 +105,7 @@ async function launchServer() {
     },
   );
   process.on("beforeExit", () => {
-    if (env.isDebug)
-      console.debug("[TEST] server process exited, killing server");
+    if (logging) console.debug("[TEST] server process exited, killing server");
     serverProcess.kill("SIGTERM");
   });
 
@@ -158,7 +156,7 @@ async function launchServer() {
       }
     });
 
-    if (env.isDebug)
+    if (logging)
       serverProcess.stdout.on("data", (stream: Buffer) =>
         process.stdout.write(stream),
       );
@@ -184,7 +182,7 @@ async function blockBrowserRequest(route: Route): Promise<void> {
   if (url.startsWith("http://localhost:")) {
     await route.continue();
   } else {
-    if (env.isDebug) console.debug(`[TEST] blocking request to ${hostname}`);
+    if (env.isDebug) console.debug(`[BROWSER] blocking request to ${hostname}`);
     await route.abort("accessdenied");
   }
 }

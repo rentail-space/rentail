@@ -26,7 +26,8 @@ if (env.SENTRY_DSN) {
 
 if (env.isTest) {
   // Initialize MSW in test mode
-  await import("../test/mocks/msw.server");
+  const { default: server } = await import("../test/mocks/msw.server");
+  server.listen({ onUnhandledRequest: "error" });
 }
 
 function handleRequest(
