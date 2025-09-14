@@ -31,7 +31,7 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 **AI Integration:**
 - Claude 4 via Anthropic AI SDK with streaming responses
 - Chat API endpoint: `app/routes/api.chat.tsx` (streaming chat interface)
-- AI library configuration: `app/lib/config.ts` (environment-based settings)
+- AI library configuration: `app/lib/env.ts` (environment-based settings)
 - System prompts in `app/lib/`: `general.md`, `prelude.md`, `spaces.md`, `welcome.md`
 - Use Context7 MCP server for library documentation and code examples
 
@@ -63,7 +63,7 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 
 **SSR Configuration:**
 - Server-side rendering enabled by default via `react-router.config.ts`
-- Prerendering enabled for better performance
+- Prerendering disabled (set to false) for dynamic content
 - Builds separate client/server bundles to `/build` directory
 - Production server runs with `@react-router/serve`
 - Configurable SSR request timeout (default: 5000ms)
@@ -105,7 +105,7 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 
 **AI Integration:**
 - Use Context7 MCP server for library documentation and code examples  
-- AI configuration managed via `app/lib/config.ts` with env-var validation
+- AI configuration managed via `app/lib/env.ts` with env-var validation
 - Multiple system prompt files for different contexts (general, prelude, spaces, welcome)
 - Chat interface uses Server-Sent Events for streaming responses
 
@@ -113,13 +113,13 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 
 - Test files should end with ".test.ts" or ".test.tsx"
 - Place test files in `/test` directory (NOT in `/app` directory alongside source code)
-- Use Vitest framework with Node.js environment and Playwright browser provider
+- Use Vitest framework with browser provider for visual testing and forks pool for performance
 - Tests run from `/**/*.test.{ts,tsx}` with setup in `/test/setup.ts`
 - Visual regression testing with Playwright and custom `toMatchScreenshot` matcher
 - Screenshots stored in `__screenshots__` directory
 - Checkly monitoring tests in `__checks__` directory
 - Requires Node.js 22.0.0 or higher (enforced in package.json)
-- Tests use setup file in `/test/helpers/setup.ts` with MSW mock server configuration (`/test/mocks/`)
+- Tests use setup file in `/test/helpers/setup.ts` with MSW mock server configuration (`/test/mocks/handlers.ts`)
 - Visual regression tests use custom `toMatchScreenshot` matcher with Playwright browser provider
 - Test configuration in `vitest.config.ts` with 30-second timeout for E2E tests
 - Mock server setup prevents external API calls during testing (`/test/mocks/handlers.ts`)
