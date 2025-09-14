@@ -1,10 +1,15 @@
-import { expect } from "playwright/test";
-import { describe, it } from "vitest";
+import { expect, type Page } from "playwright/test";
+import { afterEach, beforeEach, describe, it } from "vitest";
 import { launchBrowser, URL } from "./helpers/launchBrowser";
 
 describe("Chat page", () => {
+  let page: Page;
+
+  beforeEach(async () => {
+    page = await launchBrowser();
+  });
+
   it("renders chat interface with welcome message", async () => {
-    const page = await launchBrowser();
     const response = await page.goto(`${URL}/chat`);
     expect(response?.status(), "should respond with 200").toEqual(200);
 
@@ -25,31 +30,26 @@ describe("Chat page", () => {
     await expect(
       page.locator("button").filter({ hasText: "Q:" }).first(),
     ).toBeVisible();
-    await page.close();
   });
 
   it("handles initial query parameter", async () => {
-    const page = await launchBrowser();
     const testQuery = "Do you have any locations available in downtown areas?";
     await page.goto(`${URL}/chat?q=${encodeURIComponent(testQuery)}`);
-
-    // Wait for the message to be processed
     await page.waitForTimeout(2000);
 
     // Check that user message appears in chat
     await expect(
       page.locator(".chat-bubble-accent").filter({ hasText: testQuery }),
     ).toBeVisible();
-    await page.close();
   });
 
   it("precanned questions work correctly", async () => {
-    const page = await launchBrowser();
     await page.goto(`${URL}/chat`);
+    await page.waitForTimeout(2000);
 
     // Click on the first precanned question button
     const firstQuestion = page
-      .locator("button")
+      .locator("#precanned-questions button")
       .filter({ hasText: "Q:" })
       .first();
     await expect(firstQuestion).toBeVisible();
@@ -57,6 +57,7 @@ describe("Chat page", () => {
     // Get the question text
     const questionText = await firstQuestion.textContent();
     const question = questionText?.replace("Q: ", "") || "";
+    expect(question).not.toEqual("");
 
     // Click the button
     await firstQuestion.click();
@@ -66,15 +67,11 @@ describe("Chat page", () => {
 
     // Check that the question appears in the input field
     await expect(page.locator("input[type='text']")).toHaveValue(question);
-    await page.close();
   });
 
   it("sends user message and receives server response", async () => {
-    const page = await launchBrowser();
     await page.goto(`${URL}/chat`);
-
-    // Wait for page to be ready
-    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(2000);
 
     const testMessage =
       "looking for a pop-up retail space for my clothing boutique";
@@ -95,46 +92,39 @@ describe("Chat page", () => {
     await page.waitForTimeout(2000);
 
     // Verify user message is present
-    const userMessage = page
-      .locator(".chat-bubble-accent")
-      .filter({ hasText: testMessage })
-      .first();
-    await expect(userMessage).toBeVisible();
+    await expect(
+      page
+        .locator(".chat-bubble-accent")
+        .filter({ hasText: testMessage })
+        .first(),
+    ).toBeVisible();
 
     // Count all chat messages - should have at least welcome message + user message
-    const allChats = page.locator(".chat");
-    const chatCount = await allChats.count();
+    const chatCount = await page.locator(".chat").count();
     expect(chatCount).toBeGreaterThanOrEqual(2); // At least welcome + user message
-
-    // Check if typing indicator appeared (indicates request was sent)
-    const typingIndicator = page.locator(".animate-bounce");
-    const hasTypingIndicator = await typingIndicator.first().isVisible();
 
     // Check if we got an error
     const errorElement = page.locator(".text-red-500");
     const hasError = await errorElement.isVisible();
+    if (hasError) expect(errorElement.textContent()).toBeTruthy();
 
     // Check if we got a server response (new assistant message beyond welcome)
     const assistantMessages = page.locator(".chat.chat-start");
     const assistantCount = await assistantMessages.count();
     const hasResponse = assistantCount > 1;
 
-    if (hasError) {
-      const errorText = await errorElement.textContent();
-      expect(errorText).toBeTruthy();
-    }
-
-    if (hasResponse) {
+    if (hasResponse)
       // Verify response element exists (content may be empty in test environment)
       expect(assistantCount).toBeGreaterThan(1);
-    }
 
-    // Test passes if we have:
-    // 1. User message displayed correctly
-    // 2. At least one of: typing indicator, error, or response (showing the system reacted)
+    // Check if typing indicator appeared (indicates request was sent)
     expect(chatCount).toBeGreaterThanOrEqual(2);
+    const typingIndicator = page.locator(".animate-bounce");
+    const hasTypingIndicator = await typingIndicator.first().isVisible();
     expect(hasTypingIndicator || hasError || hasResponse).toBe(true);
+  });
 
+  afterEach(async () => {
     await page.close();
   });
 });

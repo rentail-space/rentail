@@ -10,7 +10,11 @@ export default function PrecannedQuestions({
   const { scrollToBottom } = useStickToBottomContext();
   return (
     <div className="mx-auto w-full overflow-x-auto overflow-y-hidden p-2">
-      <div className="flex flex-row gap-2 font-bold text-white text-xs">
+      {/** biome-ignore lint/correctness/useUniqueElementIds: needed for testing */}
+      <div
+        id="precanned-questions"
+        className="flex flex-row gap-2 font-bold text-white text-xs"
+      >
         {precanned
           .split(/\n+/)
           .filter((question) => question.trim().length > 0)
