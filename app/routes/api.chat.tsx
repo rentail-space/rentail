@@ -17,17 +17,27 @@ invariant(spaces, "Centers list is required");
 
 export async function action({ request }: Route.ActionArgs) {
   const { conversation } = await getConversationFromSession(request);
-  const { messages }: { messages: UIMessage[] } = await request.json();
+  const { message } = (await request.json()) as { message: UIMessage };
 
   // Store the new messages from the user.
-  await saveMessages({ conversation, messages });
+  await saveMessages({ conversation, messages: [message] });
+  // We need to load all messages to send to the LLM
+  const allMessages = await prisma.message.findMany({
+    where: { conversationId: conversation.id },
+    orderBy: { createdAt: "asc" },
+  });
+  const originalMessages = allMessages.map((message) => ({
+    id: message.id,
+    role: message.role === "USER" ? "user" : "assistant",
+    parts: [{ text: message.content, type: "text" }],
+  })) as UIMessage[];
 
   // Send last message to Anthropic LLM
   const model = createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
     "claude-sonnet-4-20250514",
   );
   const result = streamText({
-    messages: convertToModelMessages(messages),
+    messages: convertToModelMessages(originalMessages),
     model,
     providerOptions: {
       anthropic: { thinking: { budgetTokens: 12000, type: "disabled" } },
@@ -42,7 +52,7 @@ export async function action({ request }: Route.ActionArgs) {
   // Stream the response to the client, always save the last message(s) from the
   // assistant.
   return result.toUIMessageStreamResponse({
-    originalMessages: messages,
+    originalMessages: originalMessages,
     generateMessageId: ulid,
     onFinish: async ({ messages }) =>
       await saveMessages({ conversation, messages }),

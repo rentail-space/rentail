@@ -1,5 +1,6 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
+import { last } from "es-toolkit";
 import { useEffect, useRef, useState } from "react";
 import { data, useLoaderData, useSearchParams } from "react-router";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
@@ -22,12 +23,19 @@ export default function Chat() {
   const [searchParams] = useSearchParams();
   const { conversation } = useLoaderData<typeof loader>();
   const { error, messages, sendMessage, status } = useChat({
+    id: conversation.id,
     messages: conversation.messages.map((message) => ({
       id: message.id,
       role: message.role === "USER" ? "user" : "assistant",
       parts: [{ text: message.content, type: "text" }],
     })) as UIMessage<{ role: UIMessage["role"] }, { text: string }>[],
-    transport: new DefaultChatTransport({ api: "/api/chat" }),
+    transport: new DefaultChatTransport({
+      api: "/api/chat",
+      // only send the last message to the server:
+      prepareSendMessagesRequest({ messages }) {
+        return { body: { message: last(messages) } };
+      },
+    }),
   });
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
