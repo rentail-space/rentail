@@ -41,14 +41,16 @@ export default function Chat() {
         parts: [{ text: query, type: "text" }],
         role: "user",
       });
+      searchParams.delete("q");
     }
   }, []);
 
-  const onSubmit = async (input: string) => {
-    await sendMessage({
+  const onSubmit = (input: string) => {
+    sendMessage({
       parts: [{ text: input.trim(), type: "text" }],
       role: "user",
     });
+    setInput("");
   };
 
   return (
