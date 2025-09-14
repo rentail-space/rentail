@@ -1,6 +1,6 @@
 import { setupServer } from "msw/node";
 import env from "~/lib/env";
-import { handlers } from "./handlers";
+import { handlers } from "./msw.handlers";
 
 const server = setupServer(...handlers);
 
