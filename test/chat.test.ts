@@ -1,5 +1,7 @@
+import { delay } from "es-toolkit";
 import { expect, type Page } from "playwright/test";
 import { afterEach, beforeEach, describe, it } from "vitest";
+import env from "~/lib/env";
 import { launchBrowser, URL } from "./helpers/launchBrowser";
 
 describe("Chat page", () => {
@@ -35,7 +37,7 @@ describe("Chat page", () => {
   it("handles initial query parameter", async () => {
     const testQuery = "Do you have any locations available in downtown areas?";
     await page.goto(`${URL}/chat?q=${encodeURIComponent(testQuery)}`);
-    await page.waitForTimeout(5000);
+    await page.waitForLoadState("networkidle");
 
     // Check that user message appears in chat
     await expect(
@@ -45,7 +47,7 @@ describe("Chat page", () => {
 
   it("precanned questions work correctly", async () => {
     await page.goto(`${URL}/chat`);
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState("networkidle");
 
     // Click on the first precanned question button
     const firstQuestion = page
@@ -63,7 +65,7 @@ describe("Chat page", () => {
     await firstQuestion.click();
 
     // Wait for typing animation to complete
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(500);
 
     // Check that the question appears in the input field
     await expect(page.locator("input[type='text']")).toHaveValue(question);
@@ -71,7 +73,7 @@ describe("Chat page", () => {
 
   it("sends user message and receives server response", async () => {
     await page.goto(`${URL}/chat`);
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState("networkidle");
 
     const testMessage =
       "looking for a pop-up retail space for my clothing boutique";
@@ -79,6 +81,7 @@ describe("Chat page", () => {
     // Fill and submit the message
     await page.fill("input[type='text']", testMessage);
     await page.press("input[type='text']", "Enter");
+    await page.waitForLoadState("networkidle");
 
     // Verify user message appears in chat
     await expect(
@@ -86,45 +89,22 @@ describe("Chat page", () => {
         .locator(".chat-bubble-accent")
         .filter({ hasText: testMessage })
         .first(),
-    ).toBeVisible({ timeout: 5000 });
-
-    // Wait a moment for any UI updates after form submission
-    await page.waitForTimeout(2000);
-
-    // Verify user message is present
-    await expect(
-      page
-        .locator(".chat-bubble-accent")
-        .filter({ hasText: testMessage })
-        .first(),
     ).toBeVisible();
 
-    // Count all chat messages - should have at least welcome message + user message
+    // Verify we got our mock response
+    await expect(
+      page
+        .locator(".chat-bubble")
+        .filter({ hasText: /Perfect! I found some great locations/i }),
+    ).toBeVisible();
+
+    // Count all chat messages - should have welcome + user + assistant response
     const chatCount = await page.locator(".chat").count();
-    expect(chatCount).toBeGreaterThanOrEqual(2); // At least welcome + user message
-
-    // Check if we got an error
-    const errorElement = page.locator(".text-red-500");
-    const hasError = await errorElement.isVisible();
-    if (hasError) expect(errorElement.textContent()).toBeTruthy();
-
-    // Check if we got a server response (new assistant message beyond welcome)
-    const assistantMessages = page.locator(".chat.chat-start");
-    const assistantCount = await assistantMessages.count();
-    const hasResponse = assistantCount > 1;
-
-    if (hasResponse)
-      // Verify response element exists (content may be empty in test environment)
-      expect(assistantCount).toBeGreaterThan(1);
-
-    // Check if typing indicator appeared (indicates request was sent)
-    expect(chatCount).toBeGreaterThanOrEqual(2);
-    const typingIndicator = page.locator(".animate-bounce");
-    const hasTypingIndicator = await typingIndicator.first().isVisible();
-    expect(hasTypingIndicator || hasError || hasResponse).toBe(true);
+    expect(chatCount).toBeGreaterThanOrEqual(3); // welcome + user + response
   });
 
   afterEach(async () => {
+    if (env.isDebug) await delay(3000);
     await page.close();
   });
 });
