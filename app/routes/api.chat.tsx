@@ -1,6 +1,7 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import type { Conversation } from "prisma/generated/client";
+import { createResumableStreamContext } from "resumable-stream/ioredis";
 import invariant from "tiny-invariant";
 import { ulid } from "ulid";
 import env from "~/lib/env";
@@ -11,6 +12,7 @@ import spaces from "../lib/spaces.md?raw";
 import type { Route } from "./+types/api.chat";
 
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
+// @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams
 
 invariant(general, "General prompt is required");
 invariant(spaces, "Centers list is required");
@@ -20,13 +22,17 @@ export async function action({ request }: Route.ActionArgs) {
   const { message } = (await request.json()) as { message: UIMessage };
 
   // Store the new messages from the user.
-  await saveMessages({ conversation, messages: [message] });
+  await saveChat({
+    conversation,
+    messages: [message],
+    activeStreamId: null,
+  });
   // We need to load all messages to send to the LLM
-  const allMessages = await prisma.message.findMany({
+  const dbMessages = await prisma.message.findMany({
     where: { conversationId: conversation.id },
     orderBy: { createdAt: "asc" },
   });
-  const originalMessages = allMessages.map((message) => ({
+  const uiMessages = dbMessages.map((message) => ({
     id: message.id,
     role: message.role === "USER" ? "user" : "assistant",
     parts: [{ text: message.content, type: "text" }],
@@ -37,7 +43,7 @@ export async function action({ request }: Route.ActionArgs) {
     "claude-sonnet-4-20250514",
   );
   const result = streamText({
-    messages: convertToModelMessages(originalMessages),
+    messages: convertToModelMessages(uiMessages),
     model,
     providerOptions: {
       anthropic: { thinking: { budgetTokens: 12000, type: "disabled" } },
@@ -52,20 +58,41 @@ export async function action({ request }: Route.ActionArgs) {
   // Stream the response to the client, always save the last message(s) from the
   // assistant.
   return result.toUIMessageStreamResponse({
-    originalMessages: originalMessages,
+    originalMessages: uiMessages,
     generateMessageId: ulid,
     onFinish: async ({ messages }) =>
-      await saveMessages({ conversation, messages }),
+      await saveChat({ conversation, messages, activeStreamId: null }),
+    async consumeSseStream({ stream }) {
+      const activeStreamId = ulid();
+      // Create a resumable stream from the SSE stream
+      const streamContext = createResumableStreamContext({
+        publisher: env.redis,
+        subscriber: env.redis,
+        waitUntil: null,
+      });
+      await streamContext.createNewResumableStream(
+        activeStreamId,
+        () => stream,
+      );
+      await saveChat({ conversation, messages: [], activeStreamId });
+    },
   });
 }
 
-async function saveMessages({
+async function saveChat({
+  activeStreamId,
   conversation,
   messages,
 }: {
+  activeStreamId: string | null;
   conversation: Conversation;
   messages: UIMessage[];
 }): Promise<void> {
+  await prisma.conversation.update({
+    where: { id: conversation.id },
+    data: { activeStreamId },
+  });
+
   await prisma.message.createMany({
     data: messages.map((message) => ({
       content: combine(message.parts),

@@ -23,11 +23,13 @@ let browser: Browser;
 let context: BrowserContext;
 let server: { port: number; stop: () => boolean };
 
+const isDebug = !!process.env.DEBUG;
+
 /**
  * Launch the server and browser. Returns instance of server and browser page.
  * @returns The browser page.
  */
-export async function launchBrowser(headless = true): Promise<Page> {
+export async function launchBrowser(headless = !isDebug): Promise<Page> {
   if (!server) await launchServer();
   if (!browser) browser = await chromium.launch({ headless });
   if (!context) context = await browser.newContext();

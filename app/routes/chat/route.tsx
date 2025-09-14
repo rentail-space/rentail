@@ -29,11 +29,12 @@ export default function Chat() {
       role: message.role === "USER" ? "user" : "assistant",
       parts: [{ text: message.content, type: "text" }],
     })) as UIMessage<{ role: UIMessage["role"] }, { text: string }>[],
+    resume: true, // Enable automatic stream resumption
     transport: new DefaultChatTransport({
       api: "/api/chat",
       // only send the last message to the server:
-      prepareSendMessagesRequest({ messages }) {
-        return { body: { message: last(messages) } };
+      prepareSendMessagesRequest({ messages, id }) {
+        return { body: { message: last(messages), id } };
       },
     }),
   });

@@ -17,12 +17,13 @@ datasource db {
 }
 
 model Conversation {
-  createdAt DateTime  @map("created_at") @default(now())
-  id        String    @map("id")         @id @default(cuid(2))
-  messages  Message[]
-  updatedAt DateTime  @map("updated_at") @updatedAt
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String    @map("user_id")
+  activeStreamId String?   @map("active_stream_id")
+  createdAt      DateTime  @map("created_at")       @default(now())
+  id             String    @map("id")               @id @default(cuid(2))
+  messages       Message[]
+  updatedAt      DateTime  @map("updated_at")       @updatedAt
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String    @map("user_id")
 }
 
 model Message {
