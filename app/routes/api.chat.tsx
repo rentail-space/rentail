@@ -1,5 +1,6 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
+import Redis from "ioredis";
 import type { Conversation } from "prisma/generated/client";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import invariant from "tiny-invariant";
@@ -28,11 +29,16 @@ export async function action({ request }: Route.ActionArgs) {
     activeStreamId: null,
   });
   // We need to load all messages to send to the LLM
-  const dbMessages = await prisma.message.findMany({
-    where: { conversationId: conversation.id },
-    orderBy: { createdAt: "asc" },
-  });
-  const uiMessages = dbMessages.map((message) => ({
+  const messages = [
+    ...conversation.messages,
+    {
+      id: message.id,
+      content: combineMessageParts(message.parts),
+      role: message.role === "user" ? "USER" : "ASSISTANT",
+      createdAt: new Date(),
+      conversationId: conversation.id,
+    },
+  ].map((message) => ({
     id: message.id,
     role: message.role === "USER" ? "user" : "assistant",
     parts: [{ text: message.content, type: "text" }],
@@ -43,7 +49,7 @@ export async function action({ request }: Route.ActionArgs) {
     "claude-sonnet-4-20250514",
   );
   const result = streamText({
-    messages: convertToModelMessages(uiMessages),
+    messages: convertToModelMessages(messages),
     model,
     providerOptions: {
       anthropic: { thinking: { budgetTokens: 12000, type: "disabled" } },
@@ -58,7 +64,7 @@ export async function action({ request }: Route.ActionArgs) {
   // Stream the response to the client, always save the last message(s) from the
   // assistant.
   return result.toUIMessageStreamResponse({
-    originalMessages: uiMessages,
+    originalMessages: messages,
     generateMessageId: ulid,
     onFinish: async ({ messages }) =>
       await saveChat({ conversation, messages, activeStreamId: null }),
@@ -66,8 +72,9 @@ export async function action({ request }: Route.ActionArgs) {
       const activeStreamId = ulid();
       // Create a resumable stream from the SSE stream
       const streamContext = createResumableStreamContext({
-        publisher: env.redis,
-        subscriber: env.redis,
+        // NOTE must use separate instances for publisher and subscriber
+        publisher: new Redis(env.REDIS_URL),
+        subscriber: new Redis(env.REDIS_URL),
         waitUntil: null,
       });
       await streamContext.createNewResumableStream(
@@ -90,21 +97,23 @@ async function saveChat({
 }): Promise<void> {
   await prisma.conversation.update({
     where: { id: conversation.id },
-    data: { activeStreamId },
-  });
-
-  await prisma.message.createMany({
-    data: messages.map((message) => ({
-      content: combine(message.parts),
-      conversationId: conversation.id,
-      id: message.id,
-      role: message.role === "user" ? "USER" : "ASSISTANT",
-    })),
-    skipDuplicates: true,
+    data: {
+      activeStreamId,
+      messages: {
+        createMany: {
+          data: messages.map((message) => ({
+            content: combineMessageParts(message.parts),
+            id: message.id,
+            role: message.role === "user" ? "USER" : "ASSISTANT",
+          })),
+          skipDuplicates: true,
+        },
+      },
+    },
   });
 }
 
-function combine(content: Array<{ type: string; text?: string }>) {
+function combineMessageParts(content: Array<{ type: string; text?: string }>) {
   return content
     .map((part) => (part.type === "text" ? part.text : ""))
     .join("\n")

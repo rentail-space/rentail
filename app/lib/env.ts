@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 import env from "env-var";
-import Redis from "ioredis";
 
 dotenv.config();
 const isTest = process.env.NODE_ENV === "test";
@@ -29,7 +28,8 @@ export default {
   RESEND_API_KEY: env.get("RESEND_API_KEY").required(true).asString(),
   SESSION_SECRET: env.get("SESSION_SECRET").required(true).asString(),
 
-  redis: new Redis(
-    env.get("REDIS_URL").default("redis://localhost:6379").asUrlString(),
-  ),
+  REDIS_URL: env
+    .get("REDIS_URL")
+    .default("redis://localhost:6379")
+    .asUrlString(),
 };

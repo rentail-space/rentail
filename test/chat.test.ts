@@ -35,7 +35,7 @@ describe("Chat page", () => {
   it("handles initial query parameter", async () => {
     const testQuery = "Do you have any locations available in downtown areas?";
     await page.goto(`${URL}/chat?q=${encodeURIComponent(testQuery)}`);
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(5000);
 
     // Check that user message appears in chat
     await expect(
@@ -63,7 +63,7 @@ describe("Chat page", () => {
     await firstQuestion.click();
 
     // Wait for typing animation to complete
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(5000);
 
     // Check that the question appears in the input field
     await expect(page.locator("input[type='text']")).toHaveValue(question);

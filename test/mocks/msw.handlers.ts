@@ -11,12 +11,6 @@ export const handlers = [
   }),
 
   http.post("https://*/*", ({ request }) => {
-    // Skip if already handled by specific handlers above
-    const url = new URL(request.url);
-    if (url.hostname === "api.anthropic.com") {
-      return; // Let the specific Anthropic handlers handle this
-    }
-
     console.warn(`[MSW] Blocked external HTTP POST request to: ${request.url}`);
     return HttpResponse.json(
       { error: "External HTTP requests are not allowed in tests" },

@@ -3,7 +3,6 @@ import env from "~/lib/env";
 import { handlers } from "./handlers";
 
 const server = setupServer(...handlers);
-export default server;
 
 // Add logging for debugging
 if (server && env.isDebug) {
@@ -37,3 +36,5 @@ if (server) {
     console.error("[MSW] %s %s errored!", request.method, request.url, error),
   );
 }
+
+export default server;
