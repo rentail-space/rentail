@@ -1,5 +1,11 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
-import { convertToModelMessages, streamText, type UIMessage } from "ai";
+import {
+  convertToModelMessages,
+  streamText,
+  type UIMessage,
+  validateUIMessages,
+} from "ai";
+import type { Conversation } from "prisma/generated/client";
 import invariant from "tiny-invariant";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
@@ -8,6 +14,8 @@ import general from "../lib/general.md?raw";
 import spaces from "../lib/spaces.md?raw";
 import type { Route } from "./+types/api.chat";
 
+// @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
+
 invariant(general, "General prompt is required");
 invariant(spaces, "Centers list is required");
 
@@ -15,19 +23,8 @@ export async function action({ request }: Route.ActionArgs) {
   const { conversation } = await getConversationFromSession(request);
   const { messages }: { messages: UIMessage[] } = await request.json();
 
-  // Store the new messages from the user or assistant
-  for (const message of messages) {
-    await prisma.message.upsert({
-      create: {
-        content: combine(message.parts),
-        id: message.id,
-        conversationId: conversation.id,
-        role: message.role === "user" ? "USER" : "ASSISTANT",
-      },
-      update: {},
-      where: { id: message.id },
-    });
-  }
+  // Store the new messages from the user.
+  await saveMessages({ conversation, messages });
 
   // Send last message to Anthropic LLM
   const model = createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
@@ -42,20 +39,35 @@ export async function action({ request }: Route.ActionArgs) {
     system: [general, spaces].join("\n\n=====\n\n"),
   });
 
-  // Store the response from the LLM as last message from assistant.
-  // Wait until Anthropic LLM has finished generating the response.
-  result.content.then((content) =>
-    prisma.message.create({
-      data: {
-        content: combine(content),
-        conversationId: conversation.id,
-        role: "ASSISTANT",
-      },
-    }),
-  );
+  // consume the stream to ensure it runs to completion & triggers onFinish
+  // even when the client response is aborted:
+  result.consumeStream(); // no await
 
-  // Stream the response to the client
-  return result.toUIMessageStreamResponse();
+  // Stream the response to the client, always save the last message(s) from the
+  // assistant.
+  return result.toUIMessageStreamResponse({
+    originalMessages: messages,
+    onFinish: async ({ messages }) =>
+      await saveMessages({ conversation, messages }),
+  });
+}
+
+async function saveMessages({
+  conversation,
+  messages,
+}: {
+  conversation: Conversation;
+  messages: UIMessage[];
+}): Promise<void> {
+  await prisma.message.createMany({
+    data: messages.map((message) => ({
+      content: combine(message.parts),
+      conversationId: conversation.id,
+      id: message.id,
+      role: message.role === "user" ? "USER" : "ASSISTANT",
+    })),
+    skipDuplicates: true,
+  });
 }
 
 function combine(content: Array<{ type: string; text?: string }>) {
