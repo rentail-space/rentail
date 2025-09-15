@@ -10,7 +10,7 @@
     "check": "npm run lint && npm run typecheck",
     "checkly": "npx checkly test --update-snapshots --record",
     "clean": "rm -rf .react-router build",
-    "dev": "env NODE_ENV=test react-router dev",
+    "dev": "react-router dev",
     "format": "biome format --write",
     "lint": "secretlint **/* --format stylish && biome lint",
     "start": "react-router-serve ./build/server/index.js",

@@ -28,7 +28,7 @@ export const handlers = [
         .map((part) => part.text)
         .join(" ");
 
-      console.log(
+      console.info(
         `[MSW] Anthropic API mock - processing message: "${messageText.slice(0, 100)}..."`,
       );
 
