@@ -19,7 +19,7 @@ export default function createStreamingResponse(
   return new ReadableStream({
     start(controller) {
       // Simulate initial delay
-      setImmediate(() => {
+      setTimeout(() => {
         // Send message_start event
         const messageStart = createMessageStartEvent();
         controller.enqueue(encoder.encode(messageStart));
@@ -53,11 +53,11 @@ export default function createStreamingResponse(
           controller.enqueue(encoder.encode(contentDelta));
 
           // Schedule next chunk with small delay to simulate streaming
-          setImmediate(sendNextChunk);
+          setTimeout(sendNextChunk, 10);
         }
 
         sendNextChunk();
-      });
+      }, 10);
     },
   });
 }

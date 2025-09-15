@@ -148,7 +148,7 @@ export async function pushProcessMetrics() {
     ]);
   }
 
-  setImmediate(measureLap);
+  setTimeout(measureLap, 10);
 }
 
 const url = env.PUSHGATEWAY_URL;

@@ -1,18 +1,20 @@
+import type { ChatStatus } from "ai";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import PrecannedQuestions from "./PrecannedQuestions";
 
 export default function InputForm({
   input,
-  setInput,
+  inputRef,
   isTyping,
   onSubmit,
-  inputRef,
+  setInput,
 }: {
   input: string;
-  setInput: (input: string) => void;
+  inputRef: React.RefObject<HTMLInputElement | null>;
   isTyping: boolean;
   onSubmit: (input: string) => void;
-  inputRef: React.RefObject<HTMLInputElement | null>;
+  setInput: (input: string) => void;
+  status: ChatStatus;
 }) {
   const { scrollToBottom } = useStickToBottomContext();
   return (
@@ -20,12 +22,12 @@ export default function InputForm({
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          const question = inputRef.current?.value.trim();
-          if (question) {
-            onSubmit(question);
+          if (inputRef.current) {
+            const question = inputRef.current.value.trim();
+            if (question) onSubmit(question);
+            inputRef.current.value = "";
             scrollToBottom();
           }
-          if (inputRef.current) inputRef.current.value = "";
         }}
         className="relative w-full"
       >

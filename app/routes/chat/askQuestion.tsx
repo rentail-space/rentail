@@ -1,3 +1,4 @@
+import { delay } from "es-toolkit";
 import type { ReactNode } from "react";
 
 export default async function askQuestion({
@@ -14,19 +15,24 @@ export default async function askQuestion({
   // Clear input and make it readonly during typing animation
   inputRef.current.value = "";
 
-  // Auto-scroll to bottom
+  // Auto-scroll to bottom before starting animation
   scrollToBottom();
 
   // Animate typing the question
   let input = "";
   const text = question.join("");
   for (let i = 0; i < text.length; i++) {
-    await new Promise((resolve) => setTimeout(resolve, 10));
+    await delay(10);
     input += text[i];
     inputRef.current.value = input;
   }
 
   // Re-enable input and trigger change event
   inputRef.current.value = input;
-  setTimeout(() => inputRef.current?.focus(), 100);
+
+  // Final scroll to bottom and focus
+  setTimeout(() => {
+    inputRef.current?.focus();
+    scrollToBottom();
+  }, 10);
 }

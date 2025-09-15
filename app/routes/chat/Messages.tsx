@@ -1,5 +1,5 @@
 import type { UIMessage } from "ai";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
@@ -17,20 +17,38 @@ export default function Messages({
   messages: UIMessage[];
   inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
-  const { scrollToBottom } = useStickToBottomContext();
+  const { scrollToBottom, isAtBottom } = useStickToBottomContext();
+  const prevMessagesLength = useRef(messages.length);
+  const prevIsTyping = useRef(isTyping);
+
+  // Auto-scroll when new messages arrive or typing state changes
+  useEffect(() => {
+    const messagesChanged = messages.length !== prevMessagesLength.current;
+    const typingChanged = isTyping !== prevIsTyping.current;
+
+    if (messagesChanged || typingChanged) {
+      // Only auto-scroll if user was already at bottom or this is a new message
+      if (isAtBottom || messagesChanged)
+        // Use a small delay to ensure DOM has updated
+        setTimeout(scrollToBottom, 10);
+    }
+
+    prevMessagesLength.current = messages.length;
+    prevIsTyping.current = isTyping;
+  }, [messages.length, isTyping, scrollToBottom, isAtBottom]);
 
   return (
     <div className="flex-1 flex flex-col">
-      <div className="mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto p-6">
+      <div className="mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto p-6 scroll-smooth scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
         <FirstMessage />
 
         {messages.map((message, index) =>
           message.role === "user" ? (
-            <UserMessage key={index.toString()} message={message} />
+            <UserMessage key={`${message.id}-${index}`} message={message} />
           ) : (
             <ResponseMessage
               inputRef={inputRef}
-              key={index.toString()}
+              key={`${message.id}-${index}`}
               message={message}
               scrollToBottom={scrollToBottom}
             />
@@ -88,6 +106,26 @@ function ResponseMessage({
   inputRef: React.RefObject<HTMLInputElement | null>;
   scrollToBottom: () => void;
 }) {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll during streaming updates
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      // Small delay to allow content to render
+      setTimeout(scrollToBottom, 10);
+    });
+
+    if (contentRef.current) {
+      observer.observe(contentRef.current, {
+        characterData: true,
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    return () => observer.disconnect();
+  }, [scrollToBottom]);
+
   return (
     <div className="chat chat-start">
       <div className="chat-image avatar mr-2 h-8 w-8">
@@ -99,7 +137,7 @@ function ResponseMessage({
         />
       </div>
       <div className="chat-bubble prose prose-base">
-        <div>
+        <div ref={contentRef}>
           {message.parts
             .filter((part) => part.type === "text")
             .map((part, index) => (

@@ -63,56 +63,61 @@ export default function Chat() {
   };
 
   return (
-    <div className="flex h-screen flex-col bg-gray-50 inset-0">
-      <Header />
-      <StickToBottom initial="smooth" resize="smooth">
-        <StickToBottom.Content>
+    <StickToBottom initial="smooth" resize="smooth">
+      <div className="flex h-screen flex-col inset-0">
+        <Header />
+        <StickToBottom.Content className="stick-to-bottom-content">
           <Messages
             error={error}
             isSubmitting={status === "submitted"}
             messages={messages}
             inputRef={inputRef}
           />
-          <ScrollButton />
         </StickToBottom.Content>
+
+        <ScrollButton />
 
         <InputForm
           input={input}
+          inputRef={inputRef}
           isTyping={status === "submitted"}
           onSubmit={onSubmit}
           setInput={setInput}
-          inputRef={inputRef}
+          status={status}
         />
-      </StickToBottom>
-    </div>
+      </div>
+    </StickToBottom>
   );
 }
 
 function ScrollButton() {
   const { isAtBottom, scrollToBottom } = useStickToBottomContext();
 
+  if (isAtBottom) return null;
+
   return (
-    !isAtBottom && (
-      <button
-        className="absolute right-4 bottom-4 rounded-full bg-white"
-        onClick={() => scrollToBottom()}
-        type="button"
+    <button
+      className="fixed right-6 bottom-24 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg border border-gray-200 transition-all duration-200 hover:scale-105 hover:shadow-xl active:scale-95"
+      onClick={() => scrollToBottom()}
+      type="button"
+      aria-label="Scroll to bottom"
+      title="Scroll to bottom"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="text-gray-600"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M12 5v14M19 12l-7 7-7-7" />
-        </svg>
-      </button>
-    )
+        <title>Scroll to bottom</title>
+        <path d="M12 5v14M19 12l-7 7-7-7" />
+      </svg>
+    </button>
   );
 }

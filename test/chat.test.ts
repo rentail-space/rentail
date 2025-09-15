@@ -16,7 +16,7 @@ describe("Chat page", () => {
     expect(response?.status(), "should respond with 200").toEqual(200);
 
     // Check that the chat interface is rendered
-    await expect(page.locator("div.h-screen.bg-gray-50")).toBeVisible();
+    await expect(page.locator("div.h-screen")).toBeVisible();
 
     // Check header is present
     await expect(page.locator("header")).toBeVisible();
@@ -101,6 +101,19 @@ describe("Chat page", () => {
     // Count all chat messages - should have welcome + user + assistant response
     const chatCount = await page.locator(".chat").count();
     expect(chatCount).toBeGreaterThanOrEqual(3); // welcome + user + response
+
+    // Verify page is scrolled to bottom after response
+    const scrollContainer = page.locator(".overflow-y-auto").first();
+    const scrollTop = await scrollContainer.evaluate((el) => el.scrollTop);
+    const scrollHeight = await scrollContainer.evaluate(
+      (el) => el.scrollHeight,
+    );
+    const clientHeight = await scrollContainer.evaluate(
+      (el) => el.clientHeight,
+    );
+
+    // Should be at or very close to bottom (within 50px tolerance)
+    expect(scrollTop + clientHeight).toBeGreaterThan(scrollHeight - 50);
   });
 
   afterEach(async () => {
