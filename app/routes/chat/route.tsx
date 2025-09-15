@@ -1,6 +1,6 @@
 import { useChat } from "@ai-sdk/react";
 import { captureException } from "@sentry/react-router";
-import { DefaultChatTransport, type UIMessage, type UITools } from "ai";
+import { DefaultChatTransport } from "ai";
 import { last } from "es-toolkit";
 import { useEffect, useRef, useState } from "react";
 import { data, useLoaderData, useSearchParams } from "react-router";
@@ -9,6 +9,7 @@ import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
 import { commit, getConversationFromSession } from "~/sessions.server";
 import type { Route } from "./+types/route";
+import type { ClientMessage } from "./ClientMessage";
 import InputForm from "./InputForm";
 import Messages from "./Messages";
 
@@ -24,32 +25,26 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function Chat() {
   const [searchParams] = useSearchParams();
   const { conversation } = useLoaderData<typeof loader>();
-  const { error, messages, sendMessage, status, stop } = useChat<
-    UIMessage<
-      { isAborted?: boolean; role: UIMessage["role"] },
-      { text: string },
-      UITools
-    >
-  >({
-    id: conversation.id,
-    messages: conversation.messages.map((message) => ({
-      id: message.id,
-      role: message.role === "USER" ? "user" : "assistant",
-      parts: [{ text: message.content, type: "text" }],
-      metadata: {
+  const { error, messages, sendMessage, status, stop } = useChat<ClientMessage>(
+    {
+      id: conversation.id,
+      messages: conversation.messages.map((message) => ({
+        id: message.id,
         role: message.role === "USER" ? "user" : "assistant",
-        isAborted: message.isAborted,
-      },
-    })) as UIMessage<{ role: UIMessage["role"] }, { text: string }>[],
-    resume: true, // Enable automatic stream resumption
-    transport: new DefaultChatTransport({
-      api: "/api/chat",
-      // only send the last message to the server:
-      prepareSendMessagesRequest({ messages, id }) {
-        return { body: { message: last(messages), id } };
-      },
-    }),
-  });
+        parts: [{ text: message.content, type: "text" }],
+        metadata: { isAborted: message.isAborted },
+      })) as ClientMessage[],
+      resume: true, // Enable automatic stream resumption
+
+      transport: new DefaultChatTransport({
+        api: "/api/chat",
+        // only send the last message to the server:
+        prepareSendMessagesRequest({ messages, id }) {
+          return { body: { message: last(messages), id } };
+        },
+      }),
+    },
+  );
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -86,7 +81,7 @@ export default function Chat() {
 
     messages.push({
       id: ulid(),
-      metadata: { role: "user", isAborted: true },
+      metadata: { isAborted: true },
       parts: [],
       role: "user",
     });

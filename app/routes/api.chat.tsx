@@ -1,11 +1,12 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { captureException } from "@sentry/react-router";
-import { convertToModelMessages, streamText, type UIMessage } from "ai";
+import { convertToModelMessages, streamText } from "ai";
 import Redis from "ioredis";
-import type { Conversation } from "prisma/generated/client";
+import type { Conversation, Role } from "prisma/generated/client";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import invariant from "tiny-invariant";
 import { ulid } from "ulid";
+import zod from "zod";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { createStopMonitor } from "~/lib/redis-stop-monitor";
@@ -13,6 +14,7 @@ import { getConversationFromSession } from "~/sessions.server";
 import general from "../lib/general.md?raw";
 import spaces from "../lib/spaces.md?raw";
 import type { Route } from "./+types/api.chat";
+import type { ClientMessage } from "./chat/ClientMessage";
 
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams
@@ -21,8 +23,8 @@ invariant(general, "General prompt is required");
 invariant(spaces, "Centers list is required");
 
 export async function action({ request }: Route.ActionArgs) {
-  const { conversation } = await getConversationFromSession(request);
-  const { message } = (await request.json()) as { message: UIMessage };
+  const { conversation, user } = await getConversationFromSession(request);
+  const { message } = (await request.json()) as { message: ClientMessage };
 
   // Store the new messages from the user.
   await saveChat({
@@ -44,7 +46,7 @@ export async function action({ request }: Route.ActionArgs) {
     id: message.id,
     role: message.role === "USER" ? "user" : "assistant",
     parts: [{ text: message.content, type: "text" }],
-  })) as UIMessage[];
+  })) as ClientMessage[];
 
   // Send last message to Anthropic LLM
   const model = createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
@@ -67,12 +69,30 @@ export async function action({ request }: Route.ActionArgs) {
     abortSignal: abort.signal,
     onFinish: async ({ steps, totalUsage }) => {
       await cleanupStopMonitor();
-      console.info("[LLM] steps %d totalUsage %d", steps, totalUsage);
+      console.info(
+        "[LLM] steps %d => totalUsage %d",
+        steps.length,
+        totalUsage.totalTokens,
+      );
     },
     providerOptions: {
       anthropic: { thinking: { budgetTokens: 12000, type: "disabled" } },
     },
     system: [general, spaces].join("\n\n=====\n\n"),
+    tools: {
+      getLocation: {
+        description: "Get the location of the current user",
+        inputSchema: zod.object({}).describe("No input is required"),
+        outputSchema: zod
+          .object({
+            latitude: zod.string(),
+            longitude: zod.string(),
+          })
+          .describe("The location of the current user"),
+        execute: () => ({ latitude: user.latitude, longitude: user.longitude }),
+      },
+    },
+    toolChoice: "auto",
   });
 
   // consume the stream to ensure it runs to completion & triggers onFinish
@@ -133,7 +153,7 @@ async function saveChat({
 }: {
   activeStreamId: string | null;
   conversation: Conversation;
-  messages: UIMessage[];
+  messages: ClientMessage[];
 }): Promise<void> {
   await prisma.conversation.update({
     where: { id: conversation.id },
@@ -141,11 +161,14 @@ async function saveChat({
       activeStreamId,
       messages: {
         createMany: {
-          data: messages.map((message) => ({
-            content: combineMessageParts(message.parts),
-            id: message.id,
-            role: message.role === "user" ? "USER" : "ASSISTANT",
-          })),
+          data: messages
+            .map((message) => ({
+              content: combineMessageParts(message.parts),
+              id: message.id,
+              role: message.role === "user" ? "USER" : ("ASSISTANT" as Role),
+              isAborted: message.metadata?.isAborted,
+            }))
+            .filter((message) => message.content !== "" || message.isAborted),
           skipDuplicates: true,
         },
       },

@@ -1,4 +1,3 @@
-import type { UIMessage, UITools } from "ai";
 import { last } from "es-toolkit";
 import React, { useEffect, useRef } from "react";
 import type { Components } from "react-markdown";
@@ -6,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import askQuestion from "./askQuestion";
+import type { ClientMessage } from "./ClientMessage";
 
 export default function Messages({
   error,
@@ -15,11 +15,7 @@ export default function Messages({
 }: {
   error?: Error;
   isSubmitting: boolean;
-  messages: UIMessage<
-    { isAborted?: boolean; role: UIMessage["role"] },
-    { text: string },
-    UITools
-  >[];
+  messages: ClientMessage[];
   inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   const lastMessage = last(messages);
@@ -77,7 +73,7 @@ export default function Messages({
   );
 }
 
-function UserMessage({ message }: { message: UIMessage }) {
+function UserMessage({ message }: { message: ClientMessage }) {
   return (
     <div className="chat chat-end">
       <div className="chat-bubble chat-bubble-accent prose prose-base">
@@ -117,7 +113,7 @@ function ResponseMessage({
   inputRef,
   scrollToBottom,
 }: {
-  message: UIMessage;
+  message: ClientMessage;
   inputRef: React.RefObject<HTMLInputElement | null>;
   scrollToBottom: () => void;
 }) {

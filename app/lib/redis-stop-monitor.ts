@@ -6,7 +6,6 @@ import env from "~/lib/env";
  * Creates a Redis-based stop signal monitor for a conversation
  */
 export function createStopMonitor(conversationId: string, onStop: () => void) {
-  const redis = new Redis(env.REDIS_URL);
   const subscriber = new Redis(env.REDIS_URL);
   const stopKey = `chat:stop:${conversationId}`;
   const channelKey = `chat:stop:${conversationId}`;
@@ -19,10 +18,11 @@ export function createStopMonitor(conversationId: string, onStop: () => void) {
 
   return async () => {
     try {
-      // Unsubscribe and close connections
-      await subscriber.unsubscribe(channelKey);
-      await subscriber.quit();
-      await redis.quit();
+      // Check if subscriber is already closed to avoid errors
+      if (subscriber.status !== "end") {
+        await subscriber.unsubscribe(channelKey);
+        await subscriber.quit();
+      }
 
       // Clear the stop signal
       const cleanup = new Redis(env.REDIS_URL);
