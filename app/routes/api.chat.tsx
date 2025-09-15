@@ -3,7 +3,7 @@ import { captureException } from "@sentry/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import Redis from "ioredis";
 import type { Conversation } from "prisma/generated/client";
-import { createResumableStreamContext } from "resumable-stream";
+import { createResumableStreamContext } from "resumable-stream/ioredis";
 import invariant from "tiny-invariant";
 import { ulid } from "ulid";
 import env from "~/lib/env";
@@ -63,10 +63,6 @@ export async function action({ request }: Route.ActionArgs) {
     system: [general, spaces].join("\n\n=====\n\n"),
   });
 
-  setTimeout(() => {
-    abort.abort();
-  }, 5000);
-
   // consume the stream to ensure it runs to completion & triggers onFinish
   // even when the client response is aborted:
   result.consumeStream(); // no await
@@ -100,6 +96,16 @@ export async function action({ request }: Route.ActionArgs) {
         conversation,
         messages,
       });
+      if (isAborted)
+        await prisma.message.create({
+          data: {
+            content: "",
+            conversationId: conversation.id,
+            id: ulid(),
+            isAborted,
+            role: "USER",
+          },
+        });
     },
     originalMessages: messages,
     sendReasoning: true,

@@ -1,5 +1,5 @@
 import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport, type UIMessage } from "ai";
+import { DefaultChatTransport, type UIMessage, type UITools } from "ai";
 import { last } from "es-toolkit";
 import { useEffect, useRef, useState } from "react";
 import { data, useLoaderData, useSearchParams } from "react-router";
@@ -22,12 +22,22 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function Chat() {
   const [searchParams] = useSearchParams();
   const { conversation } = useLoaderData<typeof loader>();
-  const { error, messages, sendMessage, status } = useChat({
+  const { error, messages, sendMessage, status } = useChat<
+    UIMessage<
+      { isAborted?: boolean; role: UIMessage["role"] },
+      { text: string },
+      UITools
+    >
+  >({
     id: conversation.id,
     messages: conversation.messages.map((message) => ({
       id: message.id,
       role: message.role === "USER" ? "user" : "assistant",
       parts: [{ text: message.content, type: "text" }],
+      metadata: {
+        role: message.role === "USER" ? "user" : "assistant",
+        isAborted: message.isAborted,
+      },
     })) as UIMessage<{ role: UIMessage["role"] }, { text: string }>[],
     resume: true, // Enable automatic stream resumption
     transport: new DefaultChatTransport({

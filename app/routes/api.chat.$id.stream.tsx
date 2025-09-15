@@ -1,6 +1,6 @@
 import { UI_MESSAGE_STREAM_HEADERS } from "ai";
 import Redis from "ioredis";
-import { createResumableStreamContext } from "resumable-stream";
+import { createResumableStreamContext } from "resumable-stream/ioredis";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import type { Route } from "./+types/api.chat.$id.stream";

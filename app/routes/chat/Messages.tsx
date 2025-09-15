@@ -1,4 +1,4 @@
-import type { UIMessage } from "ai";
+import type { UIMessage, UITools } from "ai";
 import { last } from "es-toolkit";
 import React, { useEffect, useRef } from "react";
 import type { Components } from "react-markdown";
@@ -15,7 +15,11 @@ export default function Messages({
 }: {
   error?: Error;
   isSubmitting: boolean;
-  messages: UIMessage[];
+  messages: UIMessage<
+    { isAborted?: boolean; role: UIMessage["role"] },
+    { text: string },
+    UITools
+  >[];
   inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   const { scrollToBottom, isAtBottom } = useStickToBottomContext();
@@ -45,7 +49,13 @@ export default function Messages({
         <FirstMessage />
 
         {messages.map((message, index) =>
-          message.role === "user" ? (
+          message.metadata?.isAborted ? (
+            <div className="chat chat-end" key={`${message.id}-${index}`}>
+              <div className="prose prose-base text-red-500">
+                The conversation was aborted.
+              </div>
+            </div>
+          ) : message.role === "user" ? (
             <UserMessage key={`${message.id}-${index}`} message={message} />
           ) : message.parts.length > 0 ? (
             <ResponseMessage
