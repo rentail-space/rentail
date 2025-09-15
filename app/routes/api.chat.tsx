@@ -1,8 +1,9 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
+import { captureException } from "@sentry/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import Redis from "ioredis";
 import type { Conversation } from "prisma/generated/client";
-import { createResumableStreamContext } from "resumable-stream/ioredis";
+import { createResumableStreamContext } from "resumable-stream";
 import invariant from "tiny-invariant";
 import { ulid } from "ulid";
 import env from "~/lib/env";
@@ -64,10 +65,6 @@ export async function action({ request }: Route.ActionArgs) {
   // Stream the response to the client, always save the last message(s) from the
   // assistant.
   return result.toUIMessageStreamResponse({
-    originalMessages: messages,
-    generateMessageId: ulid,
-    onFinish: async ({ messages }) =>
-      await saveChat({ conversation, messages, activeStreamId: null }),
     async consumeSseStream({ stream }) {
       const activeStreamId = ulid();
       // Create a resumable stream from the SSE stream
@@ -83,6 +80,20 @@ export async function action({ request }: Route.ActionArgs) {
       );
       await saveChat({ conversation, messages: [], activeStreamId });
     },
+    generateMessageId: ulid,
+    onError: (error) => {
+      captureException(error);
+      return error instanceof Error ? error.message : "Unknown error";
+    },
+    onFinish: async ({ messages, isAborted }) => {
+      await saveChat({
+        activeStreamId: isAborted ? null : null,
+        conversation,
+        messages,
+      });
+    },
+    originalMessages: messages,
+    sendReasoning: true,
   });
 }
 
