@@ -1,4 +1,5 @@
 import type { UIMessage } from "ai";
+import { last } from "es-toolkit";
 import React, { useEffect, useRef } from "react";
 import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -8,7 +9,7 @@ import askQuestion from "./askQuestion";
 
 export default function Messages({
   error,
-  isSubmitting: isTyping,
+  isSubmitting,
   messages,
   inputRef,
 }: {
@@ -18,6 +19,7 @@ export default function Messages({
   inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   const { scrollToBottom, isAtBottom } = useStickToBottomContext();
+  const isTyping = isSubmitting || last(messages)?.parts.length === 0;
   const prevMessagesLength = useRef(messages.length);
   const prevIsTyping = useRef(isTyping);
 
@@ -45,14 +47,14 @@ export default function Messages({
         {messages.map((message, index) =>
           message.role === "user" ? (
             <UserMessage key={`${message.id}-${index}`} message={message} />
-          ) : (
+          ) : message.parts.length > 0 ? (
             <ResponseMessage
               inputRef={inputRef}
               key={`${message.id}-${index}`}
               message={message}
               scrollToBottom={scrollToBottom}
             />
-          ),
+          ) : null,
         )}
 
         <TypingIndicator isTyping={isTyping} />

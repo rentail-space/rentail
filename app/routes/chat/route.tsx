@@ -66,7 +66,7 @@ export default function Chat() {
     <StickToBottom initial="smooth" resize="smooth">
       <div className="flex h-screen flex-col inset-0">
         <Header />
-        <StickToBottom.Content className="stick-to-bottom-content">
+        <StickToBottom.Content>
           <Messages
             error={error}
             isSubmitting={status === "submitted"}
