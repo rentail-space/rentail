@@ -1,20 +1,18 @@
-import type { ChatStatus } from "ai";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import PrecannedQuestions from "./PrecannedQuestions";
 
 export default function InputForm({
   input,
   inputRef,
-  isTyping,
+  isSubmitting,
   onSubmit,
   setInput,
 }: {
   input: string;
   inputRef: React.RefObject<HTMLInputElement | null>;
-  isTyping: boolean;
+  isSubmitting: boolean;
   onSubmit: (input: string) => void;
   setInput: (input: string) => void;
-  status: ChatStatus;
 }) {
   const { scrollToBottom } = useStickToBottomContext();
   return (
@@ -39,7 +37,7 @@ export default function InputForm({
           // biome-ignore lint/a11y/noAutofocus: we want to autofocus the input
           autoFocus={true}
           className="w-full rounded-2xl border-2 border-gray-200 bg-white py-4 pr-16 pl-5 text-base placeholder-gray-400 outline-none transition-all duration-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
-          disabled={isTyping}
+          disabled={isSubmitting}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about retail spaces..."
           spellCheck="false"

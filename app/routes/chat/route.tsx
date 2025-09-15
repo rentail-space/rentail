@@ -80,10 +80,9 @@ export default function Chat() {
         <InputForm
           input={input}
           inputRef={inputRef}
-          isTyping={status === "submitted"}
+          isSubmitting={status === "submitted"}
           onSubmit={onSubmit}
           setInput={setInput}
-          status={status}
         />
       </div>
     </StickToBottom>
