@@ -1,8 +1,10 @@
 import { useChat } from "@ai-sdk/react";
+import { captureException } from "@sentry/react-router";
 import { DefaultChatTransport, type UIMessage, type UITools } from "ai";
 import { last } from "es-toolkit";
 import { useEffect, useRef, useState } from "react";
 import { data, useLoaderData, useSearchParams } from "react-router";
+import { ulid } from "ulid";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
 import { commit, getConversationFromSession } from "~/sessions.server";
@@ -22,7 +24,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function Chat() {
   const [searchParams] = useSearchParams();
   const { conversation } = useLoaderData<typeof loader>();
-  const { error, messages, sendMessage, status } = useChat<
+  const { error, messages, sendMessage, status, stop } = useChat<
     UIMessage<
       { isAborted?: boolean; role: UIMessage["role"] },
       { text: string },
@@ -72,6 +74,26 @@ export default function Chat() {
     setInput("");
   };
 
+  const stopLLM = async (scrollToBottom: () => void) => {
+    await Promise.all([
+      // Stop the AI SDK stream
+      stop(),
+      // Send Redis stop signal for cross-request coordination
+      fetch(`/api/chat/${conversation.id}/stop`, { method: "POST" }).catch(
+        captureException,
+      ),
+    ]);
+
+    messages.push({
+      id: ulid(),
+      metadata: { role: "user", isAborted: true },
+      parts: [],
+      role: "user",
+    });
+    // Scroll to bottom after a small delay to ensure the message is rendered
+    setTimeout(scrollToBottom, 10);
+  };
+
   return (
     <StickToBottom initial="smooth" resize="smooth">
       <div className="flex h-screen flex-col inset-0">
@@ -79,9 +101,9 @@ export default function Chat() {
         <StickToBottom.Content>
           <Messages
             error={error}
+            inputRef={inputRef}
             isSubmitting={status === "submitted"}
             messages={messages}
-            inputRef={inputRef}
           />
         </StickToBottom.Content>
 
@@ -90,8 +112,10 @@ export default function Chat() {
         <InputForm
           input={input}
           inputRef={inputRef}
+          isResponding={status === "streaming" || status === "submitted"}
           isSubmitting={status === "submitted"}
           onSubmit={onSubmit}
+          stopLLM={stopLLM}
           setInput={setInput}
         />
       </div>

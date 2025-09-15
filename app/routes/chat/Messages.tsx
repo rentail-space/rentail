@@ -1,5 +1,4 @@
 import type { UIMessage, UITools } from "ai";
-import { last } from "es-toolkit";
 import React, { useEffect, useRef } from "react";
 import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -22,11 +21,11 @@ export default function Messages({
   >[];
   inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
-  const { scrollToBottom, isAtBottom } = useStickToBottomContext();
-  const isTyping = isSubmitting || last(messages)?.parts.length === 0;
+  const isTyping = isSubmitting;
   const prevMessagesLength = useRef(messages.length);
-  const prevIsTyping = useRef(isTyping);
+  const prevIsTyping = useRef(isSubmitting);
 
+  const { scrollToBottom, isAtBottom } = useStickToBottomContext();
   // Auto-scroll when new messages arrive or typing state changes
   useEffect(() => {
     const messagesChanged = messages.length !== prevMessagesLength.current;

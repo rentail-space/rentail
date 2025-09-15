@@ -8,6 +8,7 @@ import invariant from "tiny-invariant";
 import { ulid } from "ulid";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
+import { createStopMonitor } from "~/lib/redis-stop-monitor";
 import { getConversationFromSession } from "~/sessions.server";
 import general from "../lib/general.md?raw";
 import spaces from "../lib/spaces.md?raw";
@@ -50,11 +51,22 @@ export async function action({ request }: Route.ActionArgs) {
     "claude-sonnet-4-20250514",
   );
   const abort = new AbortController();
+
+  // Set up Redis stop monitoring
+  const cleanupStopMonitor = createStopMonitor(conversation.id, () => {
+    console.info(
+      "[CHAT] Stop signal received, aborting stream for conversation",
+      conversation.id,
+    );
+    abort.abort();
+  });
+
   const result = streamText({
     messages: convertToModelMessages(messages),
     model,
     abortSignal: abort.signal,
     onFinish: async ({ steps, totalUsage }) => {
+      await cleanupStopMonitor();
       console.info("[LLM] steps %d totalUsage %d", steps, totalUsage);
     },
     providerOptions: {
@@ -106,6 +118,8 @@ export async function action({ request }: Route.ActionArgs) {
             role: "USER",
           },
         });
+      // Clean up stop monitor if not already done
+      await cleanupStopMonitor();
     },
     originalMessages: messages,
     sendReasoning: true,

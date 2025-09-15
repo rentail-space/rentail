@@ -93,7 +93,7 @@ export async function getConversationFromSession(request: Request): Promise<{
   if (conversationId) {
     const conversation = await prisma.conversation.findUnique({
       where: { id: conversationId, userId: user.id },
-      include: { messages: true },
+      include: { messages: { orderBy: { createdAt: "asc" } } },
     });
     if (conversation) return { user, conversation, session };
   }
