@@ -49,14 +49,23 @@ export async function action({ request }: Route.ActionArgs) {
   const model = createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
     "claude-sonnet-4-20250514",
   );
+  const abort = new AbortController();
   const result = streamText({
     messages: convertToModelMessages(messages),
     model,
+    abortSignal: abort.signal,
+    onFinish: async ({ steps, totalUsage }) => {
+      console.info("[LLM] steps %d totalUsage %d", steps, totalUsage);
+    },
     providerOptions: {
       anthropic: { thinking: { budgetTokens: 12000, type: "disabled" } },
     },
     system: [general, spaces].join("\n\n=====\n\n"),
   });
+
+  setTimeout(() => {
+    abort.abort();
+  }, 5000);
 
   // consume the stream to ensure it runs to completion & triggers onFinish
   // even when the client response is aborted:
