@@ -48,3 +48,4 @@ Create well-formatted commits with conventional commit messages and emojis.
 - Explain why, not just what
 - Reference issues/PRs when relevant
 - Split unrelated changes into separate commits
+- Only run the `git commit` command once

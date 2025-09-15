@@ -1,4 +1,5 @@
 import type { UIMessage, UITools } from "ai";
+import { last } from "es-toolkit";
 import React, { useEffect, useRef } from "react";
 import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -21,7 +22,10 @@ export default function Messages({
   >[];
   inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
-  const isTyping = isSubmitting;
+  const lastMessage = last(messages);
+  const lastMessageIsEmpty =
+    lastMessage?.role === "assistant" && lastMessage.parts.length === 0;
+  const isTyping = isSubmitting || lastMessageIsEmpty;
   const prevMessagesLength = useRef(messages.length);
   const prevIsTyping = useRef(isSubmitting);
 
