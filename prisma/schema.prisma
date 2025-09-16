@@ -27,13 +27,14 @@ model Conversation {
 }
 
 model Message {
-  content        String       @map("content")
+  content        String?      @map("content")
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId String       @map("conversation_id")
   createdAt      DateTime     @map("created_at")      @default(now())
   id             String       @map("id")              @id @default(ulid())
-  role           Role         @map("role")
-  conversationId String       @map("conversation_id")
-  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   isAborted      Boolean      @map("is_aborted")      @default(false)
+  reasoning      String?      @map("reasoning")
+  role           Role         @map("role")
 }
 
 model User {

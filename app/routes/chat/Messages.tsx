@@ -1,5 +1,5 @@
 import { last } from "es-toolkit";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
@@ -48,22 +48,22 @@ export default function Messages({
         <FirstMessage />
 
         {messages.map((message, index) =>
-          message.metadata?.isAborted ? (
+          message.role === "user" ? (
+            <UserMessage key={`${message.id}-${index}`} message={message} />
+          ) : message.metadata?.isAborted ? (
             <div className="chat chat-end" key={`${message.id}-${index}`}>
               <div className="prose prose-base text-red-500">
                 The conversation was aborted.
               </div>
             </div>
-          ) : message.role === "user" ? (
-            <UserMessage key={`${message.id}-${index}`} message={message} />
-          ) : message.parts.length > 0 ? (
-            <ResponseMessage
+          ) : (
+            <AssistantMessage
               inputRef={inputRef}
               key={`${message.id}-${index}`}
               message={message}
               scrollToBottom={scrollToBottom}
             />
-          ) : null,
+          ),
         )}
 
         <TypingIndicator isTyping={isTyping} />
@@ -108,7 +108,7 @@ function FirstMessage() {
   );
 }
 
-function ResponseMessage({
+function AssistantMessage({
   message,
   inputRef,
   scrollToBottom,
@@ -138,6 +138,63 @@ function ResponseMessage({
   }, [scrollToBottom]);
 
   return (
+    <>
+      {message.parts.map((part, index) => {
+        switch (part.type) {
+          case "text":
+            return (
+              <ResponseMessage
+                contentRef={contentRef}
+                inputRef={inputRef}
+                key={index.toString()}
+                text={part.text}
+                scrollToBottom={scrollToBottom}
+              />
+            );
+          case "reasoning":
+            return <ReasoningMessage key={index.toString()} text={part.text} />;
+          default: {
+            console.log("%o", part);
+            return null;
+          }
+        }
+      })}
+    </>
+  );
+}
+
+function ReasoningMessage({ text }: { text: string }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const ref = useRef<HTMLDetailsElement>(null);
+
+  const toggleExpand = (event: React.ToggleEvent<HTMLDetailsElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsExpanded(ref.current?.open ?? false);
+  };
+
+  return (
+    <details className="prose prose-base" onToggle={toggleExpand} ref={ref}>
+      <summary className={isExpanded ? "hidden" : "line-clamp-2"}>
+        {text}
+      </summary>
+      {isExpanded && <div className="prose prose-base">{text}</div>}
+    </details>
+  );
+}
+
+function ResponseMessage({
+  contentRef,
+  inputRef,
+  scrollToBottom,
+  text,
+}: {
+  contentRef: React.RefObject<HTMLDivElement | null>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
+  scrollToBottom: () => void;
+  text: string;
+}) {
+  return (
     <div className="chat chat-start">
       <div className="chat-image avatar mr-2 h-8 w-8">
         <img
@@ -149,21 +206,16 @@ function ResponseMessage({
       </div>
       <div className="chat-bubble prose prose-base">
         <div ref={contentRef}>
-          {message.parts
-            .filter((part) => part.type === "text")
-            .map((part, index) => (
-              <Streamdown
-                allowedImagePrefixes={["*"]}
-                allowedLinkPrefixes={["*"]}
-                components={getComponents({ inputRef, scrollToBottom })}
-                defaultOrigin="https://rentail.space"
-                key={index.toString()}
-                rehypePlugins={[]}
-                remarkPlugins={[remarkGfm]}
-              >
-                {part.text}
-              </Streamdown>
-            ))}
+          <Streamdown
+            allowedImagePrefixes={["*"]}
+            allowedLinkPrefixes={["*"]}
+            components={getComponents({ inputRef, scrollToBottom })}
+            defaultOrigin="https://rentail.space"
+            rehypePlugins={[]}
+            remarkPlugins={[remarkGfm]}
+          >
+            {text}
+          </Streamdown>
         </div>
       </div>
     </div>

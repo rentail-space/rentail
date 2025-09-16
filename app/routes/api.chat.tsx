@@ -1,8 +1,12 @@
-import { createAnthropic } from "@ai-sdk/anthropic";
+import {
+  type AnthropicProviderOptions,
+  createAnthropic,
+} from "@ai-sdk/anthropic";
 import { captureException } from "@sentry/react-router";
-import { convertToModelMessages, streamText } from "ai";
+import { convertToModelMessages, stepCountIs, streamText } from "ai";
+import humanFormat from "human-format";
 import Redis from "ioredis";
-import type { Conversation, Role } from "prisma/generated/client";
+import type { Conversation, Message, Role } from "prisma/generated/client";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import invariant from "tiny-invariant";
 import { ulid } from "ulid";
@@ -25,6 +29,13 @@ invariant(spaces, "Centers list is required");
 export async function action({ request }: Route.ActionArgs) {
   const { conversation, user } = await getConversationFromSession(request);
   const { message } = (await request.json()) as { message: ClientMessage };
+  const userMessage = {
+    id: message.id || ulid(),
+    content: combineMessageParts(message.parts),
+    role: "USER",
+    createdAt: new Date(),
+    conversationId: conversation.id,
+  } as Message;
 
   // Store the new messages from the user.
   await saveChat({
@@ -33,19 +44,14 @@ export async function action({ request }: Route.ActionArgs) {
     activeStreamId: null,
   });
   // We need to load all messages to send to the LLM
-  const messages = [
-    ...conversation.messages,
-    {
-      id: message.id,
-      content: combineMessageParts(message.parts),
-      role: message.role === "user" ? "USER" : "ASSISTANT",
-      createdAt: new Date(),
-      conversationId: conversation.id,
-    },
-  ].map((message) => ({
+  const messages = [...conversation.messages, userMessage].map((message) => ({
     id: message.id,
     role: message.role === "USER" ? "user" : "assistant",
-    parts: [{ text: message.content, type: "text" }],
+    parts: message.content
+      ? [{ text: message.content, type: "text" }]
+      : message.reasoning
+        ? [{ text: message.reasoning, type: "reasoning" }]
+        : [],
   })) as ClientMessage[];
 
   // Send last message to Anthropic LLM
@@ -70,14 +76,18 @@ export async function action({ request }: Route.ActionArgs) {
     onFinish: async ({ steps, totalUsage }) => {
       await cleanupStopMonitor();
       console.info(
-        "[LLM] steps %d => totalUsage %d",
+        "[LLM] steps %d => total tokens %s",
         steps.length,
-        totalUsage.totalTokens,
+        humanFormat(totalUsage.totalTokens ?? 0),
       );
     },
     providerOptions: {
-      anthropic: { thinking: { budgetTokens: 12000, type: "disabled" } },
+      anthropic: {
+        sendReasoning: true,
+        thinking: { type: "enabled", budgetTokens: 12000 },
+      } satisfies AnthropicProviderOptions,
     },
+    stopWhen: stepCountIs(3),
     system: [general, spaces].join("\n\n=====\n\n"),
     tools: {
       getLocation: {
@@ -120,7 +130,7 @@ export async function action({ request }: Route.ActionArgs) {
     generateMessageId: ulid,
     onError: (error) => {
       captureException(error);
-      return error instanceof Error ? error.message : "Unknown error";
+      return JSON.stringify(error);
     },
     onFinish: async ({ messages, isAborted }) => {
       await saveChat({
@@ -161,14 +171,15 @@ async function saveChat({
       activeStreamId,
       messages: {
         createMany: {
-          data: messages
-            .map((message) => ({
-              content: combineMessageParts(message.parts),
+          data: messages.flatMap((message) => {
+            return message.parts.map((part) => ({
+              content: part.type === "text" ? part.text : null,
               id: message.id,
-              role: message.role === "user" ? "USER" : ("ASSISTANT" as Role),
               isAborted: message.metadata?.isAborted,
-            }))
-            .filter((message) => message.content !== "" || message.isAborted),
+              reasoning: part.type === "reasoning" ? part.text : null,
+              role: message.role === "user" ? "USER" : ("ASSISTANT" as Role),
+            }));
+          }),
           skipDuplicates: true,
         },
       },
