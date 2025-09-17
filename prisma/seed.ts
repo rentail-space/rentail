@@ -17,34 +17,4 @@ const prisma = new PrismaClient({
   log: ["error", "warn", "query", "info"],
 });
 
-const user = {
-  id: "wxxx3cwnw9o4g6zehqg0dswy",
-};
-const chat = {
-  id: "mv3syosnkkawsqkwdpmeeuyk",
-};
-
-await prisma.user.upsert({
-  create: { id: user.id },
-  update: {},
-  where: { id: user.id },
-});
-
-await prisma.chat.upsert({
-  create: { id: chat.id, userId: user.id },
-  update: {},
-  where: { id: chat.id },
-});
-
-await prisma.message.createMany({
-  data: [
-    {
-      id: "01K469V6Y6CQPFTK3D2MK9NMYY",
-      content:
-        "Hello, I'm **Rentail** — how can I help you find a pop-up retail space for your business?",
-      role: "ASSISTANT",
-      chatId: chat.id,
-    },
-  ],
-  skipDuplicates: true,
-});
+await prisma.user.findMany();

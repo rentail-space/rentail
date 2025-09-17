@@ -67,7 +67,7 @@ jobs:
           postgres-version: "16"
 
       - name: Setup Prisma (for testing)
-        run: npx prisma db push && npx prisma db seed
+        run: npx prisma db push
         env:
           NODE_ENV: "test"
 
