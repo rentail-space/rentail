@@ -163,7 +163,6 @@ async function updateChat({
   conversation: Conversation;
   messages?: ClientMessage[];
 }): Promise<void> {
-  console.log("%o", messages);
   await prisma.conversation.update({
     where: { id: conversation.id },
     data: {

@@ -14,12 +14,13 @@ export type ClientMessage = UIMessage<
 export function toClientMessage(message: Message): ClientMessage {
   return {
     id: message.id,
-    role: message.role === "USER" ? "user" : "assistant",
+    metadata: { isAborted: message.isAborted },
     parts: message.content
       ? [{ text: message.content, type: "text" }]
       : message.reasoning
         ? [{ text: message.reasoning, type: "reasoning" }]
         : [],
+    role: message.role === "USER" ? "user" : "assistant",
   };
 }
 

@@ -44,10 +44,10 @@ export default function Messages({
         <FirstMessage />
 
         {messages.map((message, index) =>
-          message.role === "user" ? (
-            <UserMessage key={`${message.id}-${index}`} message={message} />
-          ) : message.metadata?.isAborted ? (
+          message.metadata?.isAborted ? (
             <AbortedMessage key={`${message.id}-${index}`} />
+          ) : message.role === "user" ? (
+            <UserMessage key={`${message.id}-${index}`} message={message} />
           ) : (
             <AssistantMessage
               inputRef={inputRef}
@@ -103,9 +103,7 @@ function FirstMessage() {
 function AbortedMessage() {
   return (
     <div className="chat chat-end">
-      <div className="chat-bubble chat-bubble-accent prose prose-base">
-        The conversation was aborted.
-      </div>
+      <div className="text-red-500">The conversation was aborted.</div>
     </div>
   );
 }
