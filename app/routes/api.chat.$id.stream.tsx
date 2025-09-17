@@ -5,8 +5,14 @@ import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import type { Route } from "./+types/api.chat.$id.stream";
 
-// @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams
-
+/**
+ * Resume an existing conversation. Typically a conversation will run until the
+ * LLM is done, and reload the page will only resume the conversation using this
+ * endpoint.
+ *
+ * @param params.id - The ID of the conversation to stop.
+ * @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams
+ */
 export async function loader({ params }: Route.LoaderArgs) {
   const conversation = await prisma.conversation.findUnique({
     where: { id: params.id },

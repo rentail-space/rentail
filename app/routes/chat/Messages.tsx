@@ -1,4 +1,3 @@
-import { last } from "es-toolkit";
 import React, { useEffect, useRef, useState } from "react";
 import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -18,10 +17,7 @@ export default function Messages({
   messages: ClientMessage[];
   inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
-  const lastMessage = last(messages);
-  const lastMessageIsEmpty =
-    lastMessage?.role === "assistant" && lastMessage.parts.length === 0;
-  const isTyping = isSubmitting || lastMessageIsEmpty;
+  const isTyping = isSubmitting;
   const prevMessagesLength = useRef(messages.length);
   const prevIsTyping = useRef(isSubmitting);
 
@@ -51,11 +47,7 @@ export default function Messages({
           message.role === "user" ? (
             <UserMessage key={`${message.id}-${index}`} message={message} />
           ) : message.metadata?.isAborted ? (
-            <div className="chat chat-end" key={`${message.id}-${index}`}>
-              <div className="prose prose-base text-red-500">
-                The conversation was aborted.
-              </div>
-            </div>
+            <AbortedMessage key={`${message.id}-${index}`} />
           ) : (
             <AssistantMessage
               inputRef={inputRef}
@@ -67,7 +59,7 @@ export default function Messages({
         )}
 
         <TypingIndicator isTyping={isTyping} />
-        <ErrorNotice error={error} />
+        {error && <ErrorNotice error={error} />}
       </div>
     </div>
   );
@@ -77,11 +69,11 @@ function UserMessage({ message }: { message: ClientMessage }) {
   return (
     <div className="chat chat-end">
       <div className="chat-bubble chat-bubble-accent prose prose-base">
-        {message.parts.map((part, index) =>
-          part.type === "text" ? (
+        {message.parts
+          .filter((part) => part.type === "text")
+          .map((part, index) => (
             <span key={index.toString()}>{part.text}</span>
-          ) : null,
-        )}
+          ))}
       </div>
     </div>
   );
@@ -103,6 +95,16 @@ function FirstMessage() {
           Hello, I'm <strong>Rentail</strong> — how can I help you find a pop-up
           retail space for your business?
         </p>
+      </div>
+    </div>
+  );
+}
+
+function AbortedMessage() {
+  return (
+    <div className="chat chat-end">
+      <div className="chat-bubble chat-bubble-accent prose prose-base">
+        The conversation was aborted.
       </div>
     </div>
   );
@@ -137,30 +139,26 @@ function AssistantMessage({
     return () => observer.disconnect();
   }, [scrollToBottom]);
 
-  return (
-    <>
-      {message.parts.map((part, index) => {
-        switch (part.type) {
-          case "text":
-            return (
-              <ResponseMessage
-                contentRef={contentRef}
-                inputRef={inputRef}
-                key={index.toString()}
-                text={part.text}
-                scrollToBottom={scrollToBottom}
-              />
-            );
-          case "reasoning":
-            return <ReasoningMessage key={index.toString()} text={part.text} />;
-          default: {
-            console.log("%o", part);
-            return null;
-          }
-        }
-      })}
-    </>
-  );
+  return message.parts.map((part, index) => {
+    switch (part.type) {
+      case "text":
+        return (
+          <ResponseMessage
+            contentRef={contentRef}
+            inputRef={inputRef}
+            key={index.toString()}
+            text={part.text}
+            scrollToBottom={scrollToBottom}
+          />
+        );
+      case "reasoning":
+        return <ReasoningMessage key={index.toString()} text={part.text} />;
+      default: {
+        console.info("%o", part);
+        return null;
+      }
+    }
+  });
 }
 
 function ReasoningMessage({ text }: { text: string }) {
@@ -178,7 +176,13 @@ function ReasoningMessage({ text }: { text: string }) {
       <summary className={isExpanded ? "hidden" : "line-clamp-2"}>
         {text}
       </summary>
-      {isExpanded && <div className="prose prose-base">{text}</div>}
+      {isExpanded && (
+        <div className="prose prose-base">
+          <Streamdown allowedImagePrefixes={["*"]} allowedLinkPrefixes={["*"]}>
+            {text}
+          </Streamdown>
+        </div>
+      )}
     </details>
   );
 }
@@ -236,12 +240,12 @@ function TypingIndicator({ isTyping }: { isTyping: boolean }) {
   ) : null;
 }
 
-function ErrorNotice({ error }: { error?: Error }) {
-  return error ? (
+function ErrorNotice({ error }: { error: Error }) {
+  return (
     <div className="p-4 text-red-500">
       {error.message || "Some error happened"}
     </div>
-  ) : null;
+  );
 }
 
 function getComponents({

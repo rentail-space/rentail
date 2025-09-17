@@ -9,7 +9,7 @@ import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
 import { commit, getConversationFromSession } from "~/sessions.server";
 import type { Route } from "./+types/route";
-import type { ClientMessage } from "./ClientMessage";
+import { type ClientMessage, toClientMessage } from "./ClientMessage";
 import InputForm from "./InputForm";
 import Messages from "./Messages";
 
@@ -28,19 +28,13 @@ export default function Chat() {
   const { error, messages, sendMessage, status, stop } = useChat<ClientMessage>(
     {
       id: conversation.id,
-      messages: conversation.messages.map((message) => ({
-        id: message.id,
-        role: message.role === "USER" ? "user" : "assistant",
-        parts: [{ text: message.content, type: "text" }],
-        metadata: { isAborted: message.isAborted },
-      })) as ClientMessage[],
+      messages: conversation.messages.map(toClientMessage),
       resume: true, // Enable automatic stream resumption
-
       transport: new DefaultChatTransport({
         api: "/api/chat",
         // only send the last message to the server:
-        prepareSendMessagesRequest({ messages, id }) {
-          return { body: { message: last(messages), id } };
+        prepareSendMessagesRequest({ messages }) {
+          return { body: { userMessage: last(messages) } };
         },
       }),
     },
@@ -51,12 +45,9 @@ export default function Chat() {
   // Handle initial query from URL
   // biome-ignore lint/correctness/useExhaustiveDependencies: only once on mount
   useEffect(() => {
-    const query = searchParams.get("q");
+    const query = searchParams.get("q")?.trim();
     if (query) {
-      sendMessage({
-        parts: [{ text: query, type: "text" }],
-        role: "user",
-      });
+      sendMessage({ parts: [{ text: query, type: "text" }], role: "user" });
       searchParams.delete("q");
     }
   }, []);

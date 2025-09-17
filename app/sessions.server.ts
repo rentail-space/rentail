@@ -77,7 +77,9 @@ export async function getUserFromSession(request: Request): Promise<{
 }
 
 /**
- * Get the conversation from the session.
+ * Get the conversation from the session. If no conversation is found, a new one
+ * is created. Includes all messages in the conversation. Will update the session
+ * with the new conversation ID.
  *
  * @param request - The request object
  * @returns The conversation, user, and the updated session
