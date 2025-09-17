@@ -163,6 +163,7 @@ async function updateChat({
   conversation: Conversation;
   messages?: ClientMessage[];
 }): Promise<void> {
+  console.log("%o", messages);
   await prisma.conversation.update({
     where: { id: conversation.id },
     data: {
@@ -184,14 +185,40 @@ async function updateChat({
  *   "id":"Nv2i6Na7LGdM4QLx",
  *   "messages":[
  *     {
- *       "parts":[{"text":"Welcome to **rentail.space**!\n\nI'm your virtual assistant here to help you find the perfect retail space for\nyour business needs.  How can I assist you today?"}],
- *       "role":"assistant"
- *     },
- *     {
  *       "parts":[{"text":"What are the available retail spaces?"}],
  *       "role":
  *       "user","id":"RNf0kp5K0xhgmH3O"
- *     }
+ *     },
+ *     {
+ *       id: '01K5CBJ0GYKYQKMQ37BW00A7YF',
+ *       metadata: undefined,
+ *       role: 'assistant',
+ *       parts: [
+ *         { type: 'step-start' },
+ *         {
+ *           type: 'reasoning',
+ *           text: "I can help you find the perfect retail space for your business needs.",
+ *           state: 'done',
+ *         },
+ *         {
+ *           type: 'tool-getLocation',
+ *           toolCallId: 'toolu_01Sh2rNyVvzicuwEaPRUTpTN',
+ *           state: 'output-available',
+ *           input: {},
+ *           output: { latitude: null, longitude: null },
+ *           rawInput: undefined,
+ *           errorText: undefined,
+ *           providerExecuted: undefined,
+ *           preliminary: undefined
+ *         },
+ *         { type: 'step-start' },
+ *         {
+ *           type: 'text',
+ *           text: 'The location of the current user is 37.774929, -122.419416.',
+ *           providerMetadata: undefined,
+ *           state: 'done',
+ *         },
+ *       ],
  *   ],
  *   "trigger":"submit-message"
  * }
