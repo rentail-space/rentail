@@ -3,18 +3,18 @@ import { stopChat } from "~/lib/redis-stop-monitor";
 import type { Route } from "./+types/api.chat.$id.stop";
 
 /**
- * Stop a conversation. Typically a conversation will run until the LLM is done,
- * and reload the page will only resume the conversation. This endpoint is used
- * to stop the conversation manually.
+ * Stop a chat. Typically a chat will run until the LLM is done,
+ * and reload the page will only resume the chat. This endpoint is used
+ * to stop the chat manually.
  *
- * @param params.id - The ID of the conversation to stop.
+ * @param params.id - The ID of the chat to stop.
  */
 export async function action({ params }: Route.ActionArgs) {
-  const conversation = await prisma.conversation.findUnique({
+  const chat = await prisma.chat.findUnique({
     where: { id: params.id },
   });
-  if (!conversation) throw new Response(null, { status: 404 });
+  if (!chat) throw new Response(null, { status: 404 });
 
-  await stopChat(conversation.id);
+  await stopChat(chat.id);
   return new Response(null, { status: 204 });
 }

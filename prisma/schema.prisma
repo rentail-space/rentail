@@ -16,7 +16,7 @@ datasource db {
   relationMode = "foreignKeys"
 }
 
-model Conversation {
+model Chat {
   activeStreamId String?   @map("active_stream_id")
   createdAt      DateTime  @map("created_at")       @default(now())
   id             String    @map("id")               @id @default(cuid(2))
@@ -27,24 +27,24 @@ model Conversation {
 }
 
 model Message {
-  content        String?      @map("content")
-  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  conversationId String       @map("conversation_id")
-  createdAt      DateTime     @map("created_at")      @default(now())
-  id             String       @map("id")              @id @default(ulid())
-  isAborted      Boolean      @map("is_aborted")      @default(false)
-  reasoning      String?      @map("reasoning")
-  role           Role         @map("role")
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId    String   @map("chat_id")
+  content   String?  @map("content")
+  createdAt DateTime @map("created_at") @default(now())
+  id        String   @map("id")         @id @default(ulid())
+  isAborted Boolean  @map("is_aborted") @default(false)
+  reasoning String?  @map("reasoning")
+  role      Role     @map("role")
 }
 
 model User {
-  createdAt     DateTime       @map("created_at") @default(now())
-  id            String         @map("id")         @id @default(cuid(2))
-  ip            String?        @map("ip")
-  latitude      String?        @map("latitude")
-  longitude     String?        @map("longitude")
-  updatedAt     DateTime       @map("updated_at") @updatedAt
-  conversations Conversation[]
+  chats     Chat[]
+  createdAt DateTime @map("created_at") @default(now())
+  id        String   @map("id")         @id @default(cuid(2))
+  ip        String?  @map("ip")
+  latitude  String?  @map("latitude")
+  longitude String?  @map("longitude")
+  updatedAt DateTime @map("updated_at") @updatedAt
 }
 
 model Waitlist {

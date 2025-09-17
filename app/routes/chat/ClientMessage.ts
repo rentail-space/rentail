@@ -27,7 +27,7 @@ export function toClientMessage(message: Message): ClientMessage {
 // Convert a UI Message to one or more Prisma Message
 export function fromClientMessage(
   message: ClientMessage,
-): Omit<Message, "conversationId">[] {
+): Omit<Message, "chatId">[] {
   return message.parts
     .filter(({ type }) => type === "text" || type === "reasoning")
     .map((part) => ({

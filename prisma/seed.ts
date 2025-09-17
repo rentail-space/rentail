@@ -20,7 +20,7 @@ const prisma = new PrismaClient({
 const user = {
   id: "wxxx3cwnw9o4g6zehqg0dswy",
 };
-const conversation = {
+const chat = {
   id: "mv3syosnkkawsqkwdpmeeuyk",
 };
 
@@ -30,10 +30,10 @@ await prisma.user.upsert({
   where: { id: user.id },
 });
 
-await prisma.conversation.upsert({
-  create: { id: conversation.id, userId: user.id },
+await prisma.chat.upsert({
+  create: { id: chat.id, userId: user.id },
   update: {},
-  where: { id: conversation.id },
+  where: { id: chat.id },
 });
 
 await prisma.message.createMany({
@@ -43,7 +43,7 @@ await prisma.message.createMany({
       content:
         "Hello, I'm **Rentail** — how can I help you find a pop-up retail space for your business?",
       role: "ASSISTANT",
-      conversationId: conversation.id,
+      chatId: chat.id,
     },
   ],
   skipDuplicates: true,

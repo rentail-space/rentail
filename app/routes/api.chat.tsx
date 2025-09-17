@@ -6,7 +6,7 @@ import { captureException } from "@sentry/react-router";
 import { convertToModelMessages, stepCountIs, streamText } from "ai";
 import humanFormat from "human-format";
 import Redis from "ioredis";
-import type { Conversation } from "prisma/generated/client";
+import type { Chat } from "prisma/generated/client";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import invariant from "tiny-invariant";
 import { ulid } from "ulid";
@@ -14,7 +14,7 @@ import zod from "zod";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal, stopChat } from "~/lib/redis-stop-monitor";
-import { getConversationFromSession } from "~/sessions.server";
+import { getChatFromSession } from "~/sessions.server";
 import general from "../lib/general.md?raw";
 import spaces from "../lib/spaces.md?raw";
 import type { Route } from "./+types/api.chat";
@@ -31,7 +31,7 @@ invariant(general, "General prompt is required");
 invariant(spaces, "Centers list is required");
 
 export async function action({ request }: Route.ActionArgs) {
-  const { conversation, user } = await getConversationFromSession(request);
+  const { chat, user } = await getChatFromSession(request);
   const { userMessage } = (await request.json()) as {
     userMessage: ClientMessage;
   };
@@ -39,15 +39,15 @@ export async function action({ request }: Route.ActionArgs) {
   // Store the user's messages in the database,
   await updateChat({
     activeStreamId: null,
-    conversation,
+    chat,
     messages: [userMessage],
   });
-  const originalMessages = await loadMessages(conversation);
+  const originalMessages = await loadMessages(chat);
 
   // Set up Redis stop monitoring
-  const { abortSignal, cleanup } = monitorStopSignal(conversation.id);
+  const { abortSignal, cleanup } = monitorStopSignal(chat.id);
 
-  // Send the conversation to Anthropic LLM
+  // Send the chat to Anthropic LLM
   const model = createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
     "claude-sonnet-4-20250514",
   );
@@ -111,7 +111,7 @@ export async function action({ request }: Route.ActionArgs) {
         activeStreamId,
         () => stream,
       );
-      await updateChat({ conversation, activeStreamId });
+      await updateChat({ chat, activeStreamId });
     },
 
     generateMessageId: ulid,
@@ -123,19 +123,19 @@ export async function action({ request }: Route.ActionArgs) {
     onFinish: async ({ messages, isAborted }) => {
       await updateChat({
         activeStreamId: null,
-        conversation,
+        chat,
         messages,
       });
       if (isAborted) {
         await prisma.message.create({
           data: {
-            conversationId: conversation.id,
+            chatId: chat.id,
             id: ulid(),
             isAborted,
             role: "USER",
           },
         });
-        await stopChat(conversation.id);
+        await stopChat(chat.id);
       }
     },
 
@@ -144,11 +144,9 @@ export async function action({ request }: Route.ActionArgs) {
   });
 }
 
-async function loadMessages(
-  conversation: Conversation,
-): Promise<ClientMessage[]> {
+async function loadMessages(chat: Chat): Promise<ClientMessage[]> {
   const messages = await prisma.message.findMany({
-    where: { conversationId: conversation.id },
+    where: { chatId: chat.id },
     orderBy: { createdAt: "asc" },
   });
   return messages.map(toClientMessage);
@@ -156,15 +154,15 @@ async function loadMessages(
 
 async function updateChat({
   activeStreamId,
-  conversation,
+  chat,
   messages,
 }: {
   activeStreamId: string | null;
-  conversation: Conversation;
+  chat: Chat;
   messages?: ClientMessage[];
 }): Promise<void> {
-  await prisma.conversation.update({
-    where: { id: conversation.id },
+  await prisma.chat.update({
+    where: { id: chat.id },
     data: {
       activeStreamId,
       messages: messages

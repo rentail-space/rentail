@@ -7,28 +7,27 @@ import { data, useLoaderData, useSearchParams } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
-import { commit, getConversationFromSession } from "~/sessions.server";
+import { commit, getChatFromSession } from "~/sessions.server";
 import type { Route } from "./+types/route";
 import { type ClientMessage, toClientMessage } from "./ClientMessage";
 import InputForm from "./InputForm";
 import Messages from "./Messages";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const { conversation, user, session } =
-    await getConversationFromSession(request);
+  const { chat, session, user } = await getChatFromSession(request);
   return data(
-    { conversation, user },
+    { chat, user },
     { headers: { "Set-Cookie": await commit(session) } },
   );
 }
 
 export default function Chat() {
   const [searchParams] = useSearchParams();
-  const { conversation } = useLoaderData<typeof loader>();
+  const { chat } = useLoaderData<typeof loader>();
   const { error, messages, sendMessage, status, stop } = useChat<ClientMessage>(
     {
-      id: conversation.id,
-      messages: conversation.messages.map(toClientMessage),
+      id: chat.id,
+      messages: chat.messages.map(toClientMessage),
       resume: true, // Enable automatic stream resumption
       transport: new DefaultChatTransport({
         api: "/api/chat",
@@ -65,7 +64,7 @@ export default function Chat() {
       // Stop the AI SDK stream
       stop(),
       // Send Redis stop signal for cross-request coordination
-      fetch(`/api/chat/${conversation.id}/stop`, { method: "POST" }).catch(
+      fetch(`/api/chat/${chat.id}/stop`, { method: "POST" }).catch(
         captureException,
       ),
     ]);

@@ -1,4 +1,4 @@
-import type { Conversation, Message, User } from "prisma/generated/client";
+import type { Chat, Message, User } from "prisma/generated/client";
 import { createCookieSessionStorage, type Session } from "react-router";
 import invariant from "tiny-invariant";
 import env from "./lib/env";
@@ -6,7 +6,7 @@ import prisma from "./lib/prisma";
 
 type SessionData = {
   user_id?: string;
-  conversation_id?: string;
+  chat_id?: string;
   location?: {
     ip: string;
     latitude: string;
@@ -77,35 +77,35 @@ export async function getUserFromSession(request: Request): Promise<{
 }
 
 /**
- * Get the conversation from the session. If no conversation is found, a new one
- * is created. Includes all messages in the conversation. Will update the session
- * with the new conversation ID.
+ * Get the chat from the session. If no chat is found, a new one
+ * is created. Includes all messages in the chat. Will update the session
+ * with the new chat ID.
  *
  * @param request - The request object
- * @returns The conversation, user, and the updated session
+ * @returns The chat, user, and the updated session
  */
-export async function getConversationFromSession(request: Request): Promise<{
+export async function getChatFromSession(request: Request): Promise<{
   user: User;
   session: SessionType;
-  conversation: Conversation & { messages: Message[] };
+  chat: Chat & { messages: Message[] };
 }> {
   const { user, session } = await getUserFromSession(request);
 
-  const conversationId = session.get("conversation_id");
-  if (conversationId) {
-    const conversation = await prisma.conversation.findUnique({
-      where: { id: conversationId, userId: user.id },
+  const chatId = session.get("chat_id");
+  if (chatId) {
+    const chat = await prisma.chat.findUnique({
+      where: { id: chatId, userId: user.id },
       include: { messages: { orderBy: { createdAt: "asc" } } },
     });
-    if (conversation) return { user, conversation, session };
+    if (chat) return { user, chat, session };
   }
 
-  const newConversation = await prisma.conversation.create({
+  const newChat = await prisma.chat.create({
     data: { user: { connect: { id: user.id } } },
     include: { messages: { orderBy: { createdAt: "asc" } } },
   });
-  session.set("conversation_id", newConversation.id);
-  return { user, conversation: newConversation, session };
+  session.set("chat_id", newChat.id);
+  return { chat: newChat, session, user };
 }
 
 /**

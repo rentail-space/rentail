@@ -6,22 +6,22 @@ import prisma from "~/lib/prisma";
 import type { Route } from "./+types/api.chat.$id.stream";
 
 /**
- * Resume an existing conversation. Typically a conversation will run until the
- * LLM is done, and reload the page will only resume the conversation using this
+ * Resume an existing chat. Typically a chat will run until the
+ * LLM is done, and reload the page will only resume the chat using this
  * endpoint.
  *
- * @param params.id - The ID of the conversation to stop.
+ * @param params.id - The ID of the chat to stop.
  * @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams
+ * @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
  */
 export async function loader({ params }: Route.LoaderArgs) {
-  const conversation = await prisma.conversation.findUnique({
+  const chat = await prisma.chat.findUnique({
     where: { id: params.id },
   });
-  if (!conversation) throw new Response(null, { status: 404 });
+  if (!chat) throw new Response(null, { status: 404 });
 
   // no content response when there is no active stream
-  if (conversation.activeStreamId == null)
-    return new Response(null, { status: 204 });
+  if (chat.activeStreamId == null) return new Response(null, { status: 204 });
 
   const streamContext = createResumableStreamContext({
     waitUntil: null,
@@ -29,7 +29,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     subscriber: new Redis(env.REDIS_URL),
   });
   return new Response(
-    await streamContext.resumeExistingStream(conversation.activeStreamId),
+    await streamContext.resumeExistingStream(chat.activeStreamId),
     { headers: UI_MESSAGE_STREAM_HEADERS },
   );
 }

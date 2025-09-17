@@ -12,7 +12,7 @@ beforeAll(async () => {
   await prisma.user.create({
     data: {
       id: "wxxx3cwnw9o4g6zehqg0dswy",
-      conversations: {
+      chats: {
         create: {
           id: "mv3syosnkkawsqkwdpmeeuyk",
           messages: {
