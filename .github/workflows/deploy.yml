@@ -14,7 +14,6 @@ jobs:
     env:
       DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
       DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-      DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       REDIS_URL: "redis://localhost:6379"
 
     steps:
@@ -98,6 +97,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     env:
+      DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       SENTRY_AUTH_TOKEN: "***REMOVED***"
     steps:
       - name: Checkout Repository
