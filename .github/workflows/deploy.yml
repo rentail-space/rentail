@@ -121,10 +121,10 @@ jobs:
         run: doppler run --config prd -- npx prisma migrate deploy
 
       - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
+        uses: nexterias/actions-vercel@v1
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          vercel-args: --prod
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+          org-id: ${{ secrets.VERCEL_ORG_ID }}
+          prebuilt: false
+          production: ${{ github.ref == 'refs/heads/main' }}
+          project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          token: ${{ secrets.VERCEL_TOKEN }}
