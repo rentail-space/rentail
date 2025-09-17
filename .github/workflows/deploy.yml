@@ -1,21 +1,22 @@
 name: Deploy
 
-env:
-  DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-  DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-  DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
-  SENTRY_AUTH_TOKEN: "***REMOVED***"
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   - push
   - workflow_dispatch
 
 jobs:
-  test_and_deploy:
-    name: Test and Deploy
+
+  test:
+    name: Test
     runs-on: ubuntu-latest
+
+    env:
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+      DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+      DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
+      REDIS_URL: "redis://localhost:6379"
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -61,20 +62,21 @@ jobs:
         with:
           version: latest
 
-      - name: Setup PostgreSQL
+      - name: Setup PostgreSQL (for testing)
         uses: ikalnytskyi/action-setup-postgres@v7
         with:
           postgres-version: "16"
 
-      - name: Setup Prisma
+      - name: Setup Prisma (for testing)
         run: npx prisma db push && npx prisma db seed
         env:
           NODE_ENV: "test"
 
-      - name: Start Redis
+      - name: Start Redis (for testing)
         uses: supercharge/redis-github-action@1.7.0
         with:
           redis-version: 5
+
 
       - name: Run Tests
         run: npm run test
@@ -91,21 +93,35 @@ jobs:
           name: playwright-test-results
           path: test-results/
 
+  deploy:
+    name: Deploy
+    needs: test
+    runs-on: ubuntu-latest
+    env:
+      SENTRY_AUTH_TOKEN: "***REMOVED***"
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Install CLI
+      - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
 
       - name: Deploy Prisma schema
         run: doppler run --config prd -- npx prisma db push
 
-      - name: Deploy migrations
+      - name: Deploy database migrations
         run: doppler run --config prd -- npx prisma migrate deploy
 
       - name: Deploy to Vercel
-        run: doppler run --config prd -- vercel deploy --target=production --logs --token=${{ secrets.VERCEL_TOKEN }}
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-args: --environment=production
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
