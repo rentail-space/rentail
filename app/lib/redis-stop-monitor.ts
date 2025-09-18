@@ -29,7 +29,7 @@ export async function monitorStopSignal(chatId: string): Promise<{
   // Abort the signal returned to the caller
   try {
     const redis = new Redis(env.REDIS_URL);
-    if (await redis.get(key)) abort.abort();
+    if ((await redis.get(key)) === "stop") abort.abort();
     await redis.quit();
   } catch (error) {
     captureException(error);
@@ -39,12 +39,12 @@ export async function monitorStopSignal(chatId: string): Promise<{
     try {
       if (subscriber.status !== "end") {
         await subscriber.unsubscribe(key);
-        await subscriber.quit();
+        subscriber.disconnect();
       }
 
       const redis = new Redis(env.REDIS_URL);
       await redis.del(key);
-      await redis.quit();
+      redis.disconnect();
     } catch (error) {
       captureException(error);
     }
@@ -63,7 +63,7 @@ export async function stopChat(chatId: string) {
   const key = `chat:stop:${chatId}`;
   try {
     // Set a stop signal that expires after 30 seconds
-    await redis.setex(key, 30, "1");
+    await redis.set(key, "stop", "EX", 30);
 
     // Also publish to a channel for immediate notification
     await redis.publish(key, "stop");
