@@ -60,14 +60,11 @@ export default function Chat() {
   };
 
   const stopLLM = async (scrollToBottom: () => void) => {
-    await Promise.all([
-      // Stop the AI SDK stream
-      stop(),
-      // Send Redis stop signal for cross-request coordination
-      fetch(`/api/chat/${chat.id}/stop`, { method: "POST" }).catch(
-        captureException,
-      ),
-    ]);
+    // Send Redis stop signal for cross-request coordination
+    await fetch(`/api/chat/${chat.id}/stop`, { method: "POST" }).catch(
+      captureException,
+    );
+    await stop(); // Stop the AI SDK stream
 
     messages.push({
       id: ulid(),
@@ -75,6 +72,8 @@ export default function Chat() {
       parts: [],
       role: "user",
     });
+    // Force a re-render to show the aborted state
+    setInput(input);
     // Scroll to bottom after a small delay to ensure the message is rendered
     setTimeout(scrollToBottom, 10);
   };

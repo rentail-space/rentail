@@ -9,10 +9,10 @@ import env from "~/lib/env";
  * @return abortSignal - Abort signal received from another server instance.
  * @return cleanup - Cleanup function to stop monitoring and remove the stop signal.
  */
-export function monitorStopSignal(chatId: string): {
+export async function monitorStopSignal(chatId: string): Promise<{
   abortSignal: AbortSignal;
   cleanup: () => Promise<void>;
-} {
+}> {
   const subscriber = new Redis(env.REDIS_URL);
   const key = `chat:stop:${chatId}`;
   const abort = new AbortController();
@@ -21,31 +21,29 @@ export function monitorStopSignal(chatId: string): {
   });
 
   // Subscribe to abort signal from another server instance
-  subscriber.subscribe(key);
+  await subscriber.subscribe(key);
   subscriber.once("message", (channel, message) => {
     if (channel === key && message === "stop") abort.abort();
   });
 
   // Abort the signal returned to the caller
-  setTimeout(async () => {
-    try {
-      const redis = new Redis(env.REDIS_URL);
-      if (await redis.get(key)) abort.abort();
-      await redis.quit();
-    } catch (error) {
-      captureException(error);
-    }
-  }, 10);
+  try {
+    const redis = new Redis(env.REDIS_URL);
+    if (await redis.get(key)) abort.abort();
+    await redis.quit();
+  } catch (error) {
+    captureException(error);
+  }
 
   async function cleanup() {
     try {
       if (subscriber.status !== "end") {
-        subscriber.unsubscribe(chatId);
-        subscriber.quit();
+        await subscriber.unsubscribe(key);
+        await subscriber.quit();
       }
 
       const redis = new Redis(env.REDIS_URL);
-      await redis.del(chatId);
+      await redis.del(key);
       await redis.quit();
     } catch (error) {
       captureException(error);

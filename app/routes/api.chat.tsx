@@ -45,7 +45,7 @@ export async function action({ request }: Route.ActionArgs) {
   const originalMessages = await loadContentMessages(chat);
 
   // Set up Redis stop monitoring
-  const { abortSignal, cleanup } = monitorStopSignal(chat.id);
+  const { abortSignal, cleanup } = await monitorStopSignal(chat.id);
 
   // Send the chat to Anthropic LLM
   const model = createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
@@ -58,11 +58,24 @@ export async function action({ request }: Route.ActionArgs) {
 
     onFinish: async ({ steps, totalUsage }) => {
       console.info(
-        "[LLM] steps %d => total tokens %s",
+        "[CHAT] steps %d => total tokens %s",
         steps.length,
         humanFormat(totalUsage.totalTokens ?? 0),
       );
       await cleanup();
+    },
+
+    onAbort: async () => {
+      console.info("[CHAT] Aborted by user");
+      await cleanup();
+      await prisma.message.create({
+        data: {
+          chatId: chat.id,
+          id: ulid(),
+          isAborted: true,
+          role: "USER",
+        },
+      });
     },
 
     providerOptions: {
@@ -115,28 +128,14 @@ export async function action({ request }: Route.ActionArgs) {
     },
 
     generateMessageId: ulid,
+
     onError: (error) => {
       captureException(error);
       return JSON.stringify(error);
     },
 
-    onFinish: async ({ messages, isAborted }) => {
-      await updateChat({
-        activeStreamId: null,
-        chat,
-        messages,
-      });
-      if (isAborted) {
-        await prisma.message.create({
-          data: {
-            chatId: chat.id,
-            id: ulid(),
-            isAborted: true,
-            role: "USER",
-          },
-        });
-        await stopChat(chat.id);
-      }
+    onFinish: async ({ messages }) => {
+      await updateChat({ activeStreamId: null, chat, messages });
     },
 
     originalMessages,
