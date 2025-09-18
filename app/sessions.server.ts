@@ -127,10 +127,10 @@ async function getLocationFromRequest(request: Request): Promise<{
   if (session.get("location"))
     return { session, location: session.get("location") };
 
-  const clientIp = request.headers.get("x-forwarded-for");
-  if (!clientIp) return { session };
-
   try {
+    // In development, we use my IP address, since x-forwarded-for is not set.
+    const clientIp = request.headers.get("x-forwarded-for") || "23.241.26.38";
+
     const url = new URL("https://api.ipgeolocation.io/v2/ipgeo");
     url.searchParams.set("apiKey", env.IPGEOLOCATION_API_KEY);
     url.searchParams.set("ip", clientIp);
