@@ -67,14 +67,6 @@ export async function action({ request }: Route.ActionArgs) {
 
     onAbort: async () => {
       console.info("[CHAT] Aborted by user");
-      await prisma.message.create({
-        data: {
-          chatId: chat.id,
-          id: ulid(),
-          isAborted: true,
-          role: "USER",
-        },
-      });
       await cleanup();
     },
 
@@ -87,21 +79,6 @@ export async function action({ request }: Route.ActionArgs) {
 
     stopWhen: stepCountIs(3),
     system: [general, spaces].join("\n\n=====\n\n"),
-
-    tools: {
-      getLocation: {
-        description: "Get the location of the current user",
-        inputSchema: zod.object({}).describe("No input is required"),
-        outputSchema: zod
-          .object({
-            latitude: zod.string(),
-            longitude: zod.string(),
-          })
-          .describe("The location of the current user"),
-        execute: () => ({ latitude: user.latitude, longitude: user.longitude }),
-      },
-    },
-    toolChoice: "auto",
   });
 
   // Consume the stream to ensure it runs to completion & triggers onFinish even
@@ -134,8 +111,13 @@ export async function action({ request }: Route.ActionArgs) {
       return JSON.stringify(error);
     },
 
-    onFinish: async ({ messages }) => {
-      await updateChat({ activeStreamId: null, chat, messages });
+    onFinish: async ({ messages, isAborted }) => {
+      await updateChat({
+        activeStreamId: null,
+        chat,
+        isAborted,
+        messages,
+      });
     },
 
     originalMessages,
@@ -161,17 +143,20 @@ async function loadContentMessages(chat: Chat): Promise<ClientMessage[]> {
 /**
  * Update the chat in the database.
  *
- * @param chat The chat to update.
  * @param activeStreamId The active stream ID. If null, no stream is active.
+ * @param chat The chat to update.
+ * @param isAborted Whether the chat was aborted. If true, an aborted message is added.
  * @param messages Messages to add or update. If null, messages are not updated.
  */
 async function updateChat({
   activeStreamId,
   chat,
+  isAborted,
   messages,
 }: {
   activeStreamId: string | null;
   chat: Chat;
+  isAborted?: boolean;
   messages?: ClientMessage[];
 }): Promise<void> {
   await prisma.chat.update({
@@ -188,6 +173,10 @@ async function updateChat({
         : undefined,
     },
   });
+  if (isAborted)
+    await prisma.message.create({
+      data: { chatId: chat.id, id: ulid(), isAborted: true, role: "USER" },
+    });
 }
 
 /**

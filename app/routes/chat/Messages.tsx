@@ -42,15 +42,15 @@ export default function Messages({
       <div className="mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto p-6 scroll-smooth scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
         <FirstMessage />
 
-        {messages.map((message, index) =>
+        {messages.map((message) =>
           message.metadata?.isAborted ? (
-            <AbortedMessage key={`${message.id}-${index}`} />
+            <AbortedMessage key={message.id} />
           ) : message.role === "user" ? (
-            <UserMessage key={`${message.id}-${index}`} message={message} />
+            <UserMessage key={message.id} message={message} />
           ) : (
             <AssistantMessage
               inputRef={inputRef}
-              key={`${message.id}-${index}`}
+              key={message.id}
               message={message}
               scrollToBottom={scrollToBottom}
             />

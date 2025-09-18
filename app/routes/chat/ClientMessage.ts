@@ -31,7 +31,10 @@ export function fromClientMessage(
     .filter(({ type }) => type === "text" || type === "reasoning")
     .map((part, index) => ({
       content: part.type === "text" ? part.text : null,
-      id: `${message.id}-${index}`, // Each part must have own unique ID
+      // NOTE: Each part must have unique ID. We can't always suffix with part
+      // number, because that ends up with {message.id}.0.0.0 ... but it works
+      // for parts 2 (index=1), 3 (index=2), etc.
+      id: index ? `${message.id}.${index}` : message.id,
       isAborted: message.metadata?.isAborted ?? false,
       reasoning: part.type === "reasoning" ? part.text : null,
       role: message.role === "user" ? "USER" : "ASSISTANT",
