@@ -30,8 +30,8 @@ const DEFAULT_LOCATION: Location = {
   city: "Los Angeles",
   country: "United States",
   ip: "23.241.26.38", // My IP address
-  latitude: "37.42240",
-  longitude: "-122.08421",
+  latitude: "34.044727",
+  longitude: "-118.249283",
   state: "California",
 };
 

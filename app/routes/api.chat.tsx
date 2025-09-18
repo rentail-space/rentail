@@ -1,8 +1,10 @@
+import { readdir, readFile } from "node:fs/promises";
+import path from "node:path";
 import {
   type AnthropicProviderOptions,
   createAnthropic,
 } from "@ai-sdk/anthropic";
-import { captureException } from "@sentry/react-router";
+import { captureException, type User } from "@sentry/react-router";
 import { convertToModelMessages, stepCountIs, streamText } from "ai";
 import humanFormat from "human-format";
 import Redis from "ioredis";
@@ -15,7 +17,6 @@ import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import { getChatFromSession } from "~/sessions.server";
 import general from "../lib/general.md?raw";
-import spaces from "../lib/spaces.md?raw";
 import type { Route } from "./+types/api.chat";
 import {
   type ClientMessage,
@@ -27,7 +28,6 @@ import {
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams
 
 invariant(general, "General prompt is required");
-invariant(spaces, "Centers list is required");
 
 export async function action({ request }: Route.ActionArgs) {
   const { chat } = await getChatFromSession(request);
@@ -77,7 +77,7 @@ export async function action({ request }: Route.ActionArgs) {
     },
 
     stopWhen: stepCountIs(3),
-    system: [general, spaces].join("\n\n=====\n\n"),
+    system: [general, await loadSpaces(chat.user)].join("\n\n=====\n\n"),
   });
 
   // Consume the stream to ensure it runs to completion & triggers onFinish even
@@ -176,6 +176,101 @@ async function updateChat({
     await prisma.message.create({
       data: { chatId: chat.id, isAborted: true, role: "USER" },
     });
+}
+
+async function loadSpaces(user: User): Promise<string> {
+  const filenames = await readdir(
+    path.join(process.cwd(), "app/data/centers"),
+    "utf8",
+  );
+  const centers = await Promise.all(
+    filenames.map(
+      async (filename) =>
+        await readFile(
+          path.join(process.cwd(), "app/data/centers", filename),
+          "utf8",
+        ),
+    ),
+  );
+
+  const nearBy = centers.filter((center) => {
+    const distance = calculateDistance({
+      center: {
+        latitude: center.match(/Latitude:\s+(-?\d+\.\d+)/)?.[1],
+        longitude: center.match(/Longitude:\s+(-?\d+\.\d+)/)?.[1],
+      },
+      user: {
+        latitude: user.location?.latitude,
+        longitude: user.location?.longitude,
+      },
+    });
+    return distance < 20;
+  });
+
+  return [
+    `Here are the shopping centers in the area which are within 20 miles of the user.
+    These are all the shopping centers you know about.
+    You do not know about any other shopping centers.
+    If the user asks about a shopping center you do not know about, you should say so.
+    Do not make up information about shopping centers you do not know about.
+    Do not even mention shopping centers you do not know about.
+    `,
+    ...nearBy,
+  ].join("\n\n");
+}
+
+function calculateDistance({
+  center,
+  user,
+}: {
+  center: { latitude?: string; longitude?: string };
+  user: { latitude?: string; longitude?: string };
+}): number {
+  // Convert string coordinates to numbers
+  const centerAt = {
+    latitude: Number.parseFloat(center.latitude ?? "NA"),
+    longitude: Number.parseFloat(center.longitude ?? "NA"),
+  };
+  const userAt = {
+    latitude: Number.parseFloat(user.latitude ?? "NA"),
+    longitude: Number.parseFloat(user.longitude ?? "NA"),
+  };
+
+  // If any coordinates are invalid, return a large distance
+  if (
+    Number.isNaN(centerAt.latitude) ||
+    Number.isNaN(centerAt.longitude) ||
+    Number.isNaN(userAt.latitude) ||
+    Number.isNaN(userAt.longitude)
+  )
+    return Number.MAX_SAFE_INTEGER;
+
+  // Convert latitude and longitude to radians
+  const centerAtRad = {
+    latitude: (centerAt.latitude * Math.PI) / 180,
+    longitude: (centerAt.longitude * Math.PI) / 180,
+  };
+  const userAtRad = {
+    latitude: (userAt.latitude * Math.PI) / 180,
+    longitude: (userAt.longitude * Math.PI) / 180,
+  };
+
+  // Haversine formula
+  const dLat = userAtRad.latitude - centerAtRad.latitude;
+  const dLon = userAtRad.longitude - centerAtRad.longitude;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(centerAtRad.latitude) *
+      Math.cos(userAtRad.latitude) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  // Earth's radius in miles
+  const R = 3959;
+
+  // Calculate distance
+  return R * c;
 }
 
 /**
