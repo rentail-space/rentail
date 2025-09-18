@@ -8,11 +8,16 @@ import prisma from "./lib/prisma";
 type SessionData = {
   user_id?: string;
   chat_id?: string;
-  location?: {
-    ip: string;
-    latitude: string;
-    longitude: string;
-  };
+  location?: Location;
+};
+
+type Location = {
+  city: string;
+  country: string;
+  state: string;
+  ip: string;
+  latitude: string;
+  longitude: string;
 };
 
 type SessionFlashData = {
@@ -21,10 +26,13 @@ type SessionFlashData = {
 
 type SessionType = Session<SessionData, SessionFlashData>;
 
-const DEFAULT_LOCATION = {
+const DEFAULT_LOCATION: Location = {
+  city: "Los Angeles",
+  country: "United States",
   ip: "23.241.26.38", // My IP address
   latitude: "37.42240",
   longitude: "-122.08421",
+  state: "California",
 };
 
 const { getSession, commitSession } = createCookieSessionStorage<
@@ -73,11 +81,7 @@ export async function getUserFromSession(request: Request): Promise<{
 
   const { location } = await getLocationFromRequest(request);
   const newUser = await prisma.user.create({
-    data: {
-      ip: location?.ip,
-      latitude: location?.latitude,
-      longitude: location?.longitude,
-    },
+    data: { ip: location?.ip, location: location },
   });
   session.set("user_id", newUser.id);
   return { user: newUser, session };
@@ -123,11 +127,7 @@ export async function getChatFromSession(request: Request): Promise<{
  * @returns The location and the updated session
  */
 async function getLocationFromRequest(request: Request): Promise<{
-  location?: {
-    ip: string;
-    latitude: string;
-    longitude: string;
-  };
+  location?: Location;
   session: SessionType;
 }> {
   const session = await getSession(request.headers.get("Cookie"));
@@ -145,11 +145,7 @@ async function getLocationFromRequest(request: Request): Promise<{
   }
 }
 
-async function geocode(clientIp: string | null): Promise<{
-  ip: string;
-  latitude: string;
-  longitude: string;
-}> {
+async function geocode(clientIp: string | null): Promise<Location> {
   // In development, we use my IP address, since x-forwarded-for is not set.
   if (!clientIp) return DEFAULT_LOCATION;
 
@@ -164,9 +160,12 @@ async function geocode(clientIp: string | null): Promise<{
   invariant(response.ok, "Failed to fetch IP geolocation data");
   const data = (await response.json()) as IPData;
   return {
+    city: data.location.city,
+    country: data.location.country_code2,
     ip: clientIp,
     latitude: data.location.latitude,
     longitude: data.location.longitude,
+    state: data.location.state_prov,
   };
 }
 
