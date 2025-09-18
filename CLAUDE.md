@@ -5,14 +5,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Build Commands
 
 - Dev: `npm run dev` (starts development server with HMR)
-- Build: `npm run build` (react-router build for production)
+- Build: `npm run build` (prisma generate + react-router build for production)
 - Start: `npm run start` (starts production server)
 - Type check: `npm run typecheck` (includes react-router typegen)
-- Test: `npm run test` (lint + typecheck + vitest with verbose reporter)
-- Lint: `npm run lint` (Biome linter)
+- Test: `npm run test` (lint + db push + prisma generate + typecheck + vitest with verbose reporter)
+- Lint: `npm run lint` (secretlint + Biome linter)
 - Format: `npm run format --write` (Biome formatter)
 - Check: `npm run check` (runs both lint and typecheck)
-- Clean: `npm run clean` (removes .react-router cache)
+- Clean: `npm run clean` (removes .react-router cache and build directory)
 - Monitoring: `npm run checkly` (runs Checkly monitoring tests)
 
 ## Architecture
@@ -22,8 +22,8 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 **Tech Stack:**
 - React Router v7 with SSR (migrated from Vite + React Router DOM)
 - React 19 with TypeScript
-- Vite 6 for build tooling (integrated with React Router v7)
-- Tailwind CSS 4 for styling
+- Vite 7 for build tooling (integrated with React Router v7)
+- Tailwind CSS 4 for styling with DaisyUI plugin
 - Vitest for unit testing with jsdom environment
 - Biome for linting and formatting
 - Playwright for E2E testing with visual regression
