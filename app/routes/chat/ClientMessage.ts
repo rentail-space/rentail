@@ -20,7 +20,7 @@ export type ClientMessage = UIMessage<
 export function toClientMessages(messages: Message[]): ClientMessage[] {
   return messages.reduce((all, message) => {
     // Split {message.id}.{index} to {message.id} so we can roll parts together
-    const messageId = message.id.split(":")[0];
+    const messageId = message.messageId.split(":")[0];
     const lastMessage = last(all);
     const lastMessageId = lastMessage?.id.split(":")[0];
     if (lastMessage && lastMessageId === messageId)
@@ -46,13 +46,13 @@ function toMessageParts(message: Message): ClientMessage["parts"] {
 
 // Convert a UI Message to one or more Prisma Message
 export function fromClientMessage(message: ClientMessage): MessageGetPayload<{
-  omit: { createdAt: true; chatId: true; order: true };
+  omit: { createdAt: true; chatId: true; id: true };
 }>[] {
   return message.parts
     .filter(({ type }) => type === "text" || type === "reasoning")
     .map((part, index) => ({
       content: part.type === "text" ? part.text : null,
-      id: `${message.id}:${index}`,
+      messageId: `${message.id}:${index}`,
       isAborted: message.metadata?.isAborted ?? false,
       reasoning: part.type === "reasoning" ? part.text : null,
       role: message.role === "user" ? "USER" : "ASSISTANT",

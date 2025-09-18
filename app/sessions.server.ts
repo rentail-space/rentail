@@ -102,7 +102,7 @@ export async function getChatFromSession(request: Request): Promise<{
   if (chatId) {
     const chat = await prisma.chat.findUnique({
       where: { id: chatId, userId: user.id },
-      include: { messages: { orderBy: { order: "asc" } }, user: true },
+      include: { messages: { orderBy: { id: "asc" } }, user: true },
     });
     if (chat) return { chat, session };
   }

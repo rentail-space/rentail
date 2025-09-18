@@ -31,9 +31,9 @@ model Message {
   chatId    String   @map("chat_id")
   content   String?  @map("content")
   createdAt DateTime @map("created_at") @default(now())
-  id        String   @map("id")         @id @default(ulid())
+  id        Int      @map("id")         @default(autoincrement()) @id
   isAborted Boolean  @map("is_aborted") @default(false)
-  order     Int      @map("order")      @default(autoincrement()) @unique
+  messageId String   @map("message_id") @unique @default(ulid()) // AI SDK message ID
   reasoning String?  @map("reasoning")
   role      Role     @map("role")
 }

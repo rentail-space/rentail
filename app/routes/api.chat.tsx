@@ -134,7 +134,7 @@ export async function action({ request }: Route.ActionArgs) {
 async function loadContentMessages(chat: Chat): Promise<ClientMessage[]> {
   const messages = await prisma.message.findMany({
     where: { chatId: chat.id, content: { not: null } },
-    orderBy: { order: "asc" },
+    orderBy: { id: "asc" },
   });
   return toClientMessages(messages);
 }
@@ -174,7 +174,7 @@ async function updateChat({
   });
   if (isAborted)
     await prisma.message.create({
-      data: { chatId: chat.id, id: ulid(), isAborted: true, role: "USER" },
+      data: { chatId: chat.id, isAborted: true, role: "USER" },
     });
 }
 
