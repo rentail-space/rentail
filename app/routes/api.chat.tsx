@@ -67,7 +67,6 @@ export async function action({ request }: Route.ActionArgs) {
 
     onAbort: async () => {
       console.info("[CHAT] Aborted by user");
-      await cleanup();
       await prisma.message.create({
         data: {
           chatId: chat.id,
@@ -76,6 +75,7 @@ export async function action({ request }: Route.ActionArgs) {
           role: "USER",
         },
       });
+      await cleanup();
     },
 
     providerOptions: {
