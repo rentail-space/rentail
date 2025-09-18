@@ -58,7 +58,7 @@ export default function Messages({
           ),
         )}
 
-        <TypingIndicator isTyping={isTyping} />
+        {isTyping && <TypingIndicator />}
         {error && <ErrorNotice error={error} />}
       </div>
     </div>
@@ -224,8 +224,8 @@ function ResponseMessage({
   );
 }
 
-function TypingIndicator({ isTyping }: { isTyping: boolean }) {
-  return isTyping ? (
+function TypingIndicator() {
+  return (
     <div className="flex justify-start">
       <div className="rounded-lg bg-white px-4 py-4">
         <div className="flex space-x-1">
@@ -235,7 +235,7 @@ function TypingIndicator({ isTyping }: { isTyping: boolean }) {
         </div>
       </div>
     </div>
-  ) : null;
+  );
 }
 
 function ErrorNotice({ error }: { error: Error }) {
