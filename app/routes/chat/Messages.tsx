@@ -140,7 +140,7 @@ function AssistantMessage({
     return () => observer.disconnect();
   }, [scrollToBottom]);
 
-  return message.parts.map((part, index) => {
+  return message.parts.map((part, index, parts) => {
     switch (part.type) {
       case "text":
         return (
@@ -153,7 +153,13 @@ function AssistantMessage({
           />
         );
       case "reasoning":
-        return <ReasoningMessage key={index.toString()} text={part.text} />;
+        return (
+          <ReasoningMessage
+            isLast={index === parts.length - 1}
+            key={index.toString()}
+            text={part.text}
+          />
+        );
       default: {
         console.info("%o", part);
         return null;
@@ -162,28 +168,29 @@ function AssistantMessage({
   });
 }
 
-function ReasoningMessage({ text }: { text: string }) {
+function ReasoningMessage({ text, isLast }: { text: string; isLast: boolean }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const ref = useRef<HTMLDetailsElement>(null);
-
-  const toggleExpand = (event: React.ToggleEvent<HTMLDetailsElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setIsExpanded(ref.current?.open ?? false);
-  };
 
   return (
-    <details className="prose prose-base" onToggle={toggleExpand} ref={ref}>
-      <summary className={isExpanded ? "hidden" : "line-clamp-2"}>
-        {text}
+    <details
+      className="prose prose-base bg-gray-50 rounded-lg p-3 mb-2 hover:bg-gray-200"
+      onToggle={(event) => setIsExpanded(event.currentTarget.open)}
+      open={isExpanded}
+    >
+      <summary className="text-gray-600 font-medium cursor-pointer w-full mb-4">
+        {isLast
+          ? "Thinking …"
+          : isExpanded
+            ? "Reasoning"
+            : "Reasoning (click to expand)"}
       </summary>
-      {isExpanded && (
-        <div className="prose prose-base">
-          <Streamdown allowedImagePrefixes={["*"]} allowedLinkPrefixes={["*"]}>
-            {text}
-          </Streamdown>
-        </div>
-      )}
+      <Streamdown
+        allowedImagePrefixes={["*"]}
+        allowedLinkPrefixes={["*"]}
+        className="prose prose-base"
+      >
+        {text}
+      </Streamdown>
     </details>
   );
 }
