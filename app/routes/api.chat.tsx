@@ -131,7 +131,7 @@ export async function action({ request }: Route.ActionArgs) {
           data: {
             chatId: chat.id,
             id: ulid(),
-            isAborted,
+            isAborted: true,
             role: "USER",
           },
         });
