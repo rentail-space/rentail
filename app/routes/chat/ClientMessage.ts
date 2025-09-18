@@ -26,12 +26,11 @@ export function toClientMessage(message: Message): ClientMessage {
 // Convert a UI Message to one or more Prisma Message
 export function fromClientMessage(
   message: ClientMessage,
-): Omit<Message, "chatId">[] {
+): Omit<Message, "chatId" | "createdAt">[] {
   return message.parts
     .filter(({ type }) => type === "text" || type === "reasoning")
     .map((part, index) => ({
       content: part.type === "text" ? part.text : null,
-      createdAt: new Date(),
       id: `${message.id}-${index}`, // Each part must have own unique ID
       isAborted: message.metadata?.isAborted ?? false,
       reasoning: part.type === "reasoning" ? part.text : null,
