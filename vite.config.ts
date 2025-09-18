@@ -5,21 +5,16 @@ import { defineConfig } from "vite";
 import devtoolsJson from "vite-plugin-devtools-json";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-export default defineConfig((config) => ({
+export default defineConfig(async (config) => ({
   plugins: [
     tailwindcss(),
     reactRouter(),
     tsconfigPaths(),
-    process.env.SENTRY_AUTH_TOKEN
-      ? sentryReactRouter(
-          {
-            authToken: process.env.SENTRY_AUTH_TOKEN,
-            org: "labnotes",
-            project: "rentail",
-          },
-          config,
-        )
-      : devtoolsJson(),
+    devtoolsJson(),
+    await sentryReactRouter(
+      { telemetry: !!process.env.SENTRY_AUTH_TOKEN },
+      config,
+    ),
   ],
   ssr: { noExternal: ["streamdown"] },
 }));
