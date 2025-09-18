@@ -8,18 +8,17 @@ import type { ClientMessage } from "./ClientMessage";
 
 export default function Messages({
   error,
-  isSubmitting,
+  isTyping,
   messages,
   inputRef,
 }: {
   error?: Error;
-  isSubmitting: boolean;
+  isTyping: boolean;
   messages: ClientMessage[];
   inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
-  const isTyping = isSubmitting;
   const prevMessagesLength = useRef(messages.length);
-  const prevIsTyping = useRef(isSubmitting);
+  const prevIsTyping = useRef(isTyping);
 
   const { scrollToBottom, isAtBottom } = useStickToBottomContext();
   // Auto-scroll when new messages arrive or typing state changes

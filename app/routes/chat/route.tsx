@@ -86,7 +86,7 @@ export default function Chat() {
           <Messages
             error={error}
             inputRef={inputRef}
-            isSubmitting={status === "submitted"}
+            isTyping={status === "streaming"}
             messages={messages}
           />
         </StickToBottom.Content>
