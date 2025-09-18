@@ -42,7 +42,7 @@ export async function action({ request }: Route.ActionArgs) {
     chat,
     messages: [userMessage],
   });
-  const originalMessages = await loadMessages(chat);
+  const originalMessages = await loadContentMessages(chat);
 
   // Set up Redis stop monitoring
   const { abortSignal, cleanup } = monitorStopSignal(chat.id);
@@ -144,14 +144,28 @@ export async function action({ request }: Route.ActionArgs) {
   });
 }
 
-async function loadMessages(chat: Chat): Promise<ClientMessage[]> {
+/**
+ * Load text messages from the database. Ignores reasoning messages,
+ * aborted messages, and other messages that don't have text content.
+ *
+ * @param chat The chat to load the messages from.
+ * @returns The text messages.
+ */
+async function loadContentMessages(chat: Chat): Promise<ClientMessage[]> {
   const messages = await prisma.message.findMany({
-    where: { chatId: chat.id },
+    where: { chatId: chat.id, content: { not: null } },
     orderBy: { createdAt: "asc" },
   });
   return messages.map(toClientMessage);
 }
 
+/**
+ * Update the chat in the database.
+ *
+ * @param chat The chat to update.
+ * @param activeStreamId The active stream ID. If null, no stream is active.
+ * @param messages Messages to add or update. If null, messages are not updated.
+ */
 async function updateChat({
   activeStreamId,
   chat,
