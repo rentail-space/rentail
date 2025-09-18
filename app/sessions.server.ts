@@ -20,6 +20,12 @@ type SessionFlashData = {
 
 type SessionType = Session<SessionData, SessionFlashData>;
 
+const DEFAULT_LOCATION = {
+  ip: "23.241.26.38", // My IP address
+  latitude: "37.42240",
+  longitude: "-122.08421",
+};
+
 const { getSession, commitSession } = createCookieSessionStorage<
   SessionData,
   SessionFlashData
@@ -54,8 +60,8 @@ export async function commit(session: SessionType) {
  * @returns The user and the updated session
  */
 export async function getUserFromSession(request: Request): Promise<{
-  user: User;
   session: SessionType;
+  user: User;
 }> {
   const session = await getSession(request.headers.get("Cookie"));
   const userId = session.get("user_id");
@@ -85,9 +91,9 @@ export async function getUserFromSession(request: Request): Promise<{
  * @returns The chat, user, and the updated session
  */
 export async function getChatFromSession(request: Request): Promise<{
-  user: User;
-  session: SessionType;
   chat: Chat & { messages: Message[] };
+  session: SessionType;
+  user: User;
 }> {
   const { user, session } = await getUserFromSession(request);
 
@@ -128,33 +134,39 @@ async function getLocationFromRequest(request: Request): Promise<{
     return { session, location: session.get("location") };
 
   try {
-    // In development, we use my IP address, since x-forwarded-for is not set.
-    const clientIp = request.headers.get("x-forwarded-for") || "23.241.26.38";
-
-    const url = new URL("https://api.ipgeolocation.io/v2/ipgeo");
-    url.searchParams.set("apiKey", env.IPGEOLOCATION_API_KEY);
-    url.searchParams.set("ip", clientIp);
-    url.searchParams.set("fields", "time_zone,location");
-    const response = await fetch(url, {
-      headers: { "Content-Type": "application/json" },
-    });
-    invariant(response.ok, "Failed to fetch IP geolocation data");
-
-    const data = (await response.json()) as IPData;
-    const location = {
-      city: data.location.city,
-      ip: clientIp,
-      latitude: data.location.latitude,
-      longitude: data.location.longitude,
-      state_code: data.location.state_code,
-      zipcode: data.location.zipcode,
-    };
+    const clientIp = request.headers.get("x-forwarded-for");
+    const location = await geocode(clientIp);
     session.set("location", location);
     return { session, location };
   } catch (error) {
-    console.error("Error fetching IP geolocation data:", error);
-    return { session };
+    console.error("[GEOCODE] Error fetching IP geolocation data:", error);
+    return { session, location: DEFAULT_LOCATION };
   }
+}
+
+async function geocode(clientIp: string | null): Promise<{
+  ip: string;
+  latitude: string;
+  longitude: string;
+}> {
+  // In development, we use my IP address, since x-forwarded-for is not set.
+  if (!clientIp) return DEFAULT_LOCATION;
+
+  console.info("[GEOCODE] Fetching IP geolocation data for IP %s", clientIp);
+  const url = new URL("https://api.ipgeolocation.io/v2/ipgeo");
+  url.searchParams.set("apiKey", env.IPGEOLOCATION_API_KEY);
+  url.searchParams.set("ip", clientIp);
+  url.searchParams.set("fields", "time_zone,location");
+  const response = await fetch(url, {
+    headers: { "Content-Type": "application/json" },
+  });
+  invariant(response.ok, "Failed to fetch IP geolocation data");
+  const data = (await response.json()) as IPData;
+  return {
+    ip: clientIp,
+    latitude: data.location.latitude,
+    longitude: data.location.longitude,
+  };
 }
 
 // See https://ipgeolocation.io/ip-location-api.html#documentation-overview
