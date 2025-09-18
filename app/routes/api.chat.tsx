@@ -10,10 +10,9 @@ import type { Chat } from "prisma/generated/client";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import invariant from "tiny-invariant";
 import { ulid } from "ulid";
-import zod from "zod";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
-import { monitorStopSignal, stopChat } from "~/lib/redis-stop-monitor";
+import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import { getChatFromSession } from "~/sessions.server";
 import general from "../lib/general.md?raw";
 import spaces from "../lib/spaces.md?raw";
@@ -21,7 +20,7 @@ import type { Route } from "./+types/api.chat";
 import {
   type ClientMessage,
   fromClientMessage,
-  toClientMessage,
+  toClientMessages,
 } from "./chat/ClientMessage";
 
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
@@ -31,7 +30,7 @@ invariant(general, "General prompt is required");
 invariant(spaces, "Centers list is required");
 
 export async function action({ request }: Route.ActionArgs) {
-  const { chat, user } = await getChatFromSession(request);
+  const { chat } = await getChatFromSession(request);
   const { userMessage } = (await request.json()) as {
     userMessage: ClientMessage;
   };
@@ -135,9 +134,9 @@ export async function action({ request }: Route.ActionArgs) {
 async function loadContentMessages(chat: Chat): Promise<ClientMessage[]> {
   const messages = await prisma.message.findMany({
     where: { chatId: chat.id, content: { not: null } },
-    orderBy: { createdAt: "asc" },
+    orderBy: { order: "asc" },
   });
-  return messages.map(toClientMessage);
+  return toClientMessages(messages);
 }
 
 /**

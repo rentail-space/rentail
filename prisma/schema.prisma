@@ -33,6 +33,7 @@ model Message {
   createdAt DateTime @map("created_at") @default(now())
   id        String   @map("id")         @id @default(ulid())
   isAborted Boolean  @map("is_aborted") @default(false)
+  order     Int      @map("order")      @default(autoincrement()) @unique
   reasoning String?  @map("reasoning")
   role      Role     @map("role")
 }

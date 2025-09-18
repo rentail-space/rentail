@@ -9,16 +9,13 @@ import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
 import { commit, getChatFromSession } from "~/sessions.server";
 import type { Route } from "./+types/route";
-import { type ClientMessage, toClientMessage } from "./ClientMessage";
+import { type ClientMessage, toClientMessages } from "./ClientMessage";
 import InputForm from "./InputForm";
 import Messages from "./Messages";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const { chat, session, user } = await getChatFromSession(request);
-  return data(
-    { chat, user },
-    { headers: { "Set-Cookie": await commit(session) } },
-  );
+  const { chat, session } = await getChatFromSession(request);
+  return data({ chat }, { headers: { "Set-Cookie": await commit(session) } });
 }
 
 export default function Chat() {
@@ -27,7 +24,7 @@ export default function Chat() {
   const { error, messages, sendMessage, status, stop } = useChat<ClientMessage>(
     {
       id: chat.id,
-      messages: chat.messages.map(toClientMessage),
+      messages: toClientMessages(chat.messages),
       resume: true, // Enable automatic stream resumption
       transport: new DefaultChatTransport({
         api: "/api/chat",

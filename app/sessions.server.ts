@@ -1,4 +1,5 @@
-import type { Chat, Message, User } from "prisma/generated/client";
+import type { User } from "prisma/generated/client";
+import type { ChatGetPayload } from "prisma/generated/models";
 import { createCookieSessionStorage, type Session } from "react-router";
 import invariant from "tiny-invariant";
 import env from "./lib/env";
@@ -88,12 +89,12 @@ export async function getUserFromSession(request: Request): Promise<{
  * with the new chat ID.
  *
  * @param request - The request object
- * @returns The chat, user, and the updated session
+ * @returns chat - Chat with messages and user
+ * @returns session - The updated session
  */
 export async function getChatFromSession(request: Request): Promise<{
-  chat: Chat & { messages: Message[] };
+  chat: ChatGetPayload<{ include: { messages: true; user: true } }>;
   session: SessionType;
-  user: User;
 }> {
   const { user, session } = await getUserFromSession(request);
 
@@ -101,17 +102,17 @@ export async function getChatFromSession(request: Request): Promise<{
   if (chatId) {
     const chat = await prisma.chat.findUnique({
       where: { id: chatId, userId: user.id },
-      include: { messages: { orderBy: { createdAt: "asc" } } },
+      include: { messages: { orderBy: { order: "asc" } }, user: true },
     });
-    if (chat) return { user, chat, session };
+    if (chat) return { chat, session };
   }
 
   const newChat = await prisma.chat.create({
     data: { user: { connect: { id: user.id } } },
-    include: { messages: true },
+    include: { messages: true, user: true },
   });
   session.set("chat_id", newChat.id);
-  return { chat: newChat, session, user };
+  return { chat: newChat, session };
 }
 
 /**
