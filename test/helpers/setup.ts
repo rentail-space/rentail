@@ -17,7 +17,7 @@ beforeAll(async () => {
           id: "mv3syosnkkawsqkwdpmeeuyk",
           messages: {
             create: {
-              id: "01K469V6Y6CQPFTK3D2MK9NMYY",
+              messageId: "01K469V6Y6CQPFTK3D2MK9NMYY",
               content:
                 "Hello, I'm **Rentail** — how can I help you find a pop-up retail space for your business?",
               role: "ASSISTANT",
