@@ -102,7 +102,7 @@ export async function getChatFromSession(request: Request): Promise<{
 
   const newChat = await prisma.chat.create({
     data: { user: { connect: { id: user.id } } },
-    include: { messages: { orderBy: { createdAt: "asc" } } },
+    include: { messages: true },
   });
   session.set("chat_id", newChat.id);
   return { chat: newChat, session, user };
