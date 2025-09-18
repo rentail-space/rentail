@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import dayjs from "dayjs";
+import { invariant } from "es-toolkit";
 import fm from "front-matter";
 import { DateTime } from "luxon";
 import Markdown from "react-markdown";
@@ -10,7 +11,6 @@ import {
   useLoaderData,
 } from "react-router";
 import removeMd from "remove-markdown";
-import invariant from "tiny-invariant";
 import Layout from "~/components/layout/Layout";
 import truncateWords from "~/lib/truncateWords";
 

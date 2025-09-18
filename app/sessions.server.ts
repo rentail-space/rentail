@@ -1,7 +1,7 @@
+import { invariant } from "es-toolkit";
 import type { User } from "prisma/generated/client";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { createCookieSessionStorage, type Session } from "react-router";
-import invariant from "tiny-invariant";
 import env from "./lib/env";
 import prisma from "./lib/prisma";
 

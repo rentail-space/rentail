@@ -1,6 +1,6 @@
+import { invariant } from "es-toolkit";
 import { Link } from "react-router";
 import type { ImageObject } from "schema-dts";
-import invariant from "tiny-invariant";
 import schema from "../../data/schema.json";
 
 export default function HeroSection({

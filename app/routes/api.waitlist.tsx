@@ -1,8 +1,8 @@
 import { pretty, render } from "@react-email/render";
 import { captureException } from "@sentry/react-router";
+import { invariant } from "es-toolkit";
 import { data } from "react-router";
 import { Resend } from "resend";
-import invariant from "tiny-invariant";
 import Waitlist from "~/emails/Waitlist";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";

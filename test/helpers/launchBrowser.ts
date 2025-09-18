@@ -9,9 +9,9 @@ import {
   type Page,
   type Route,
 } from "playwright";
-import invariant from "tiny-invariant";
 import "./toMatchScreenshot";
 import { URL as URLString } from "node:url";
+import { invariant } from "es-toolkit";
 import env from "~/lib/env";
 
 const port = 9222;

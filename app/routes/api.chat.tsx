@@ -6,11 +6,11 @@ import {
 } from "@ai-sdk/anthropic";
 import { captureException, type User } from "@sentry/react-router";
 import { convertToModelMessages, stepCountIs, streamText } from "ai";
+import { invariant } from "es-toolkit";
 import humanFormat from "human-format";
 import Redis from "ioredis";
 import type { Chat } from "prisma/generated/client";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
-import invariant from "tiny-invariant";
 import { ulid } from "ulid";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";

@@ -11,9 +11,9 @@ import {
 import path from "node:path";
 import { expect } from "@playwright/test";
 import type { AsyncExpectationResult } from "@vitest/expect";
+import { invariant } from "es-toolkit";
 import looksSame from "looks-same";
 import type { Page } from "playwright";
-import invariant from "tiny-invariant";
 
 const dirname = path.resolve("./__screenshots__");
 

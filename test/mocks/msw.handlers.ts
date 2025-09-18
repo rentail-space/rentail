@@ -1,6 +1,5 @@
-import { last } from "es-toolkit";
+import { invariant, last } from "es-toolkit";
 import { HttpResponse, http } from "msw";
-import invariant from "tiny-invariant";
 import { findMockResponse } from "./anthropic.mock";
 import createStreamingResponse from "./anthropic.stream";
 
