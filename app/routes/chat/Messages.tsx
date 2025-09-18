@@ -1,3 +1,4 @@
+import { uniqBy } from "es-toolkit";
 import React, { useEffect, useRef, useState } from "react";
 import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -37,12 +38,15 @@ export default function Messages({
     prevIsTyping.current = isTyping;
   }, [messages.length, isTyping, scrollToBottom, isAtBottom]);
 
+  // Don't render the same message twice
+  const uniqueMessages = uniqBy(messages, (message) => message.id);
+
   return (
     <div className="flex-1 flex flex-col">
       <div className="mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto p-6 scroll-smooth scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
         <FirstMessage />
 
-        {messages.map((message) =>
+        {uniqueMessages.map((message) =>
           message.metadata?.isAborted ? (
             <AbortedMessage key={message.id} />
           ) : message.role === "user" ? (
