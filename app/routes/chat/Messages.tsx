@@ -46,13 +46,14 @@ export default function Messages({
       <div className="mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto p-6 scroll-smooth scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
         <FirstMessage />
 
-        {uniqueMessages.map((message) =>
+        {uniqueMessages.map((message, index, messages) =>
           message.metadata?.isAborted ? (
             <AbortedMessage key={message.id} />
           ) : message.role === "user" ? (
             <UserMessage key={message.id} message={message} />
           ) : (
             <AssistantMessage
+              isLast={index === messages.length - 1}
               inputRef={inputRef}
               key={message.id}
               message={message}
@@ -112,10 +113,12 @@ function AbortedMessage() {
 }
 
 function AssistantMessage({
+  isLast,
   message,
   inputRef,
   scrollToBottom,
 }: {
+  isLast: boolean;
   message: ClientMessage;
   inputRef: React.RefObject<HTMLInputElement | null>;
   scrollToBottom: () => void;
@@ -155,7 +158,7 @@ function AssistantMessage({
       case "reasoning":
         return (
           <ReasoningMessage
-            isLast={index === parts.length - 1}
+            isLast={isLast && index === parts.length - 1}
             key={index.toString()}
             text={part.text}
           />
@@ -170,6 +173,7 @@ function AssistantMessage({
 
 function ReasoningMessage({ text, isLast }: { text: string; isLast: boolean }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const isThinking = isLast;
 
   return (
     <details
@@ -178,11 +182,16 @@ function ReasoningMessage({ text, isLast }: { text: string; isLast: boolean }) {
       open={isExpanded}
     >
       <summary className="text-gray-600 font-medium cursor-pointer w-full mb-4">
-        {isLast
-          ? "Thinking …"
-          : isExpanded
-            ? "Reasoning"
-            : "Reasoning (click to expand)"}
+        {isThinking ? (
+          <span className="flex-row items-center gap-2 flex-nowrap pl-2">
+            <ThinkingIcon />
+            Thinking …
+          </span>
+        ) : isExpanded ? (
+          "Reasoning"
+        ) : (
+          "Reasoning (click to expand)"
+        )}
       </summary>
       <Streamdown
         allowedImagePrefixes={["*"]}
@@ -332,4 +341,31 @@ function getComponents({
       <p className="mt-2 mb-2 whitespace-pre-wrap">{children}</p>
     ),
   };
+}
+
+function ThinkingIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="inline w-4 h-4 mr-2 text-gray-400 animate-spin"
+      fill="none"
+      role="progressbar"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        fill="currentColor"
+      />
+    </svg>
+  );
 }
