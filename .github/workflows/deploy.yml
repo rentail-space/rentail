@@ -55,10 +55,10 @@ jobs:
 
       - name: Install Playwright Browsers — Chromium
         # if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium
+        run: pnpx playwright install --with-deps chromium
       - name: Install Playwright Browsers - Depencies
         if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps
+        run: pnpx playwright install-deps
 
 
       - name: Setup Biome
@@ -72,7 +72,7 @@ jobs:
           postgres-version: "16"
 
       - name: Setup database schema (for testing)
-        run: pnpm install @prisma/client && pnpm prisma db push
+        run: pnpm dlx prisma db push
         env:
           NODE_ENV: "test"
 
@@ -125,13 +125,13 @@ jobs:
         uses: dopplerhq/cli-action@v3
 
       - name: Install NPM dependencies
-        run: pnpm install @prisma/client && pnpm prisma db push
+        run: pnpm dlx prisma db push
 
       - name: Deploy Prisma schema
-        run: doppler run --config prd -- pnpm prisma db push
+        run: doppler run --config prd -- pnpm dlx prisma db push
 
       - name: Deploy database migrations
-        run: doppler run --config prd -- pnpm prisma migrate deploy
+        run: doppler run --config prd -- pnpm dlx prisma migrate deploy
 
 
       - name: Deploy to Vercel

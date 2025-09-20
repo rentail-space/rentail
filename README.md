@@ -73,8 +73,8 @@ npm run test -- --watch  # Watch mode
 
 ### E2E Tests
 ```bash
-npx playwright test       # Run Playwright tests
-npx playwright test --ui  # Interactive UI mode
+pnpx playwright test       # Run Playwright tests
+pnpx playwright test --ui  # Interactive UI mode
 ```
 
 ### Visual Regression Tests

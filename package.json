@@ -8,7 +8,7 @@
   "scripts": {
     "build": "prisma generate && react-router build",
     "check": "pnpm run lint && pnpm run typecheck",
-    "checkly": "npx checkly test --update-snapshots --record",
+    "checkly": "pnpx checkly test --update-snapshots --record",
     "clean": "rm -rf .react-router build",
     "dev": "react-router dev",
     "format": "biome format --write",

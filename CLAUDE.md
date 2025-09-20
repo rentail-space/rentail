@@ -127,7 +127,7 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Mock server setup prevents external API calls during testing (`/test/mocks/handlers.ts`)
 - Write unit tests with Vitest for all utilities and components
 - Consider snapshot testing for UI consistency
-- Run individual tests: `npm run test -- <test-pattern>` or `npx vitest run <test-pattern>`
+- Run individual tests: `npm run test -- <test-pattern>` or `pnpx vitest run <test-pattern>`
 - E2E tests use Checkly for production monitoring (`__checks__/` directory)
 
 ## Environment Variables
