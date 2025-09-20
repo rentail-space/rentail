@@ -5,7 +5,6 @@
   "engines": {
     "node": ">=22.0.0"
   },
-  "packageManager": "pnpm",
   "scripts": {
     "build": "prisma generate && react-router build",
     "check": "pnpm run lint && pnpm run typecheck",
