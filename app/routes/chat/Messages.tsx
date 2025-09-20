@@ -3,7 +3,10 @@ import React, { useEffect, useRef, useState } from "react";
 import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
-import { useStickToBottomContext } from "use-stick-to-bottom";
+import {
+  type ScrollToBottom,
+  useStickToBottomContext,
+} from "use-stick-to-bottom";
 import askQuestion from "./askQuestion";
 import type { ClientMessage } from "./ClientMessage";
 
@@ -121,7 +124,7 @@ function AssistantMessage({
   isLast: boolean;
   message: ClientMessage;
   inputRef: React.RefObject<HTMLInputElement | null>;
-  scrollToBottom: () => void;
+  scrollToBottom: ScrollToBottom;
 }) {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -212,7 +215,7 @@ function ResponseMessage({
 }: {
   contentRef: React.RefObject<HTMLDivElement | null>;
   inputRef: React.RefObject<HTMLInputElement | null>;
-  scrollToBottom: () => void;
+  scrollToBottom: ScrollToBottom;
   text: string;
 }) {
   return (
@@ -270,7 +273,7 @@ function getComponents({
   scrollToBottom,
 }: {
   inputRef: React.RefObject<HTMLInputElement | null>;
-  scrollToBottom: () => void;
+  scrollToBottom: ScrollToBottom;
 }): Components {
   return {
     ol: ({ node, children, className, ...props }) => (
