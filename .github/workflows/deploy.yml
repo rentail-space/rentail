@@ -88,8 +88,11 @@ jobs:
       - name: Check secrets
         run: pnpm secretlint "**/*" --format stylish
 
+      - name: Generate React Router types
+        run: pnpm react-router typegen
+
       - name: Check types
-        run: pnpm react-router typegen && pnpm tsc
+        run: pnpm tsc
 
       - name: Run Tests
         run: pnpm vitest run --reporter verbose
