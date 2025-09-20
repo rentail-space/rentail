@@ -136,9 +136,6 @@ jobs:
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v3
 
-      - name: Install NPM dependencies
-        run: pnpm dlx prisma db push
-
       - name: Deploy Prisma schema
         run: doppler run --config prd -- pnpm dlx prisma db push
 
