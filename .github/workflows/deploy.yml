@@ -39,7 +39,7 @@ jobs:
 
       - name: Install NPM dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: pnpm --prod
+        run: pnpm install --prod
 
 
       - name: Get installed Playwright version
