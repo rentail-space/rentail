@@ -1,14 +1,17 @@
 .DS_Store
+.vercel
 /node_modules/
 
 # React Router
-.react-router/
-/build/
 .env
 .env.test
+.react-router/
 *.swp
-.vercel
+/build/
 
+# Ignore test results
 __screenshots__/diff-*.jpg
-
+# Ignore since we're using pnpm
+package-lock.json
+# Need to re-generate on the server
 prisma/generated
