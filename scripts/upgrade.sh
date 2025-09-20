@@ -2,13 +2,16 @@
 set -eo pipefail
 
 echo -e "\033[32m  Upgrading dependencies …\033[0m"
-npm outdated  || echo
-npm-check-updates --configFileName .npm-check-update.json --errorLevel 2 || echo "Dependencies to update"
+npm-check-updates --configFileName .ncurc.json --errorLevel 2 || echo "Dependencies to update"
+
+echo -e "\033[32m  Installing Playwright browsers …\033[0m"
 npx playwright install
+
+echo -e "\033[32m  Deduping dependencies …\033[0m"
 npm dedupe --force
 npm prune --force
 
-echo -e "\033[32m  Checking code …\033[0m"
+echo -e "\033[32m  Running tests …\033[0m"
 npm run test
 
 echo -e "\033[32m  Commiting changes …\033[0m"
