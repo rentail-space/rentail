@@ -72,7 +72,9 @@ jobs:
           postgres-version: "16"
 
       - name: Setup database schema (for testing)
-        run: pnpm dlx prisma db push
+        run: |
+          pnpm dlx prisma db push
+          pnpm dlx prisma generate 
         env:
           NODE_ENV: "test"
 
@@ -83,7 +85,10 @@ jobs:
 
 
       - name: Run Tests
-        run: pnpm run test
+        run: |
+          pnpm run lint
+          pnpm run typecheck
+          vitest run --reporter verbose
         env:
           ANTHROPIC_API_KEY: "***REMOVED***"
           NODE_ENV: "test"
