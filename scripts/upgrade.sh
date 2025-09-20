@@ -11,6 +11,9 @@ echo -e "\033[32m  Deduping dependencies …\033[0m"
 pnpm dedupe
 pnpm prune --force
 
+echo -e "\033[32m  Security audit …\033[0m"
+pnpm audit
+
 echo -e "\033[32m  Running tests …\033[0m"
 pnpm run test
 

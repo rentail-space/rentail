@@ -8,14 +8,14 @@
   "packageManager": "pnpm",
   "scripts": {
     "build": "prisma generate && react-router build",
-    "check": "npm run lint && npm run typecheck",
+    "check": "pnpm run lint && pnpm run typecheck",
     "checkly": "npx checkly test --update-snapshots --record",
     "clean": "rm -rf .react-router build",
     "dev": "react-router dev",
     "format": "biome format --write",
     "lint": "secretlint **/* --format stylish && biome lint",
     "start": "react-router-serve ./build/server/index.js",
-    "test": "npm run lint && NODE_ENV=test prisma db push && prisma generate && npm run typecheck && vitest run --reporter verbose",
+    "test": "pnpm run lint && NODE_ENV=test prisma db push && prisma generate && pnpm run typecheck && vitest run --reporter verbose",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {

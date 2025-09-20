@@ -1,16 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run typecheck:*)",
-      "Bash(npm audit:*)",
+      "Bash(pnpm run typecheck:*)",
+      "Bash(pnpm audit:*)",
       "Bash(git commit:*)",
-      "Bash(npm run lint)",
-      "Bash(npm run build:*)",
+      "Bash(pnpm run lint)",
+      "Bash(pnpm run build:*)",
       "Bash(git add:*)",
-      "Bash(npm run test:*)",
+      "Bash(pnpm run test:*)",
       "mcp__emails__search_emails",
       "mcp__emails__get_email_content",
-      "Bash(npm install:*)"
+      "Bash(pnpm install:*)"
     ]
   },
   "enableAllProjectMcpServers": false,

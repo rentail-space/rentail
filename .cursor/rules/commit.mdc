@@ -33,7 +33,7 @@ Create well-formatted commits with conventional commit messages and emojis.
 - 🔒 security: Security improvements
 
 ## Process:
-1. Start by running `npm run lint`
+1. Start by running `pnpm run lint`
 2. Check for staged changes (`git status`)
 3. If no staged changes, review and stage appropriate files
 4. Run pre-commit checks (unless --no-verify)
