@@ -39,7 +39,7 @@ jobs:
 
       - name: Install NPM dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: pnpm install --prod
+        run: pnpm install
 
 
       - name: Get installed Playwright version
@@ -65,6 +65,7 @@ jobs:
         uses: biomejs/setup-biome@v2
         with:
           version: latest
+      - run: biome lint
 
       - name: Setup PostgreSQL (for testing)
         uses: ikalnytskyi/action-setup-postgres@v7
@@ -84,11 +85,14 @@ jobs:
           redis-version: 5
 
 
+      - name: Check secrets
+        run: secretlint "**/*" --format stylish
+
+      - name: Check types
+        run: react-router typegen && tsc
+
       - name: Run Tests
-        run: |
-          pnpm run lint
-          pnpm run typecheck
-          vitest run --reporter verbose
+        run: vitest run --reporter verbose
         env:
           ANTHROPIC_API_KEY: "***REMOVED***"
           NODE_ENV: "test"
