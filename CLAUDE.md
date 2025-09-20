@@ -46,7 +46,7 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - Sentry for error tracking and performance monitoring (`app/lib/instrument.server.ts`)
 - BetterStack integration with Logtail for structured logging and Push Gateway for metrics
 - Comprehensive metrics collection: memory, CPU, heap, event loop lag, HTTP requests
-- Process metrics collected every 5 seconds in production
+- Process metrics collected every 5 minutes in production (configurable via METRICS_COLLECTION_INTERVAL_MS)
 - HTTP request logging with method, URL, status code, and duration (`app/lib/logger.server.ts`)
 - Checkly for synthetic monitoring (every 30 minutes) configured in `checkly.config.ts`
 
@@ -125,7 +125,7 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Mock server setup prevents external API calls during testing (`/test/mocks/handlers.ts`)
 - Write unit tests with Vitest for all utilities and components
 - Consider snapshot testing for UI consistency
-- Run individual tests: `npm run test -- <test-pattern>`
+- Run individual tests: `npm run test -- <test-pattern>` or `npx vitest run <test-pattern>`
 - E2E tests use Checkly for production monitoring (`__checks__/` directory)
 
 ## Environment Variables
