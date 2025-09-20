@@ -20,6 +20,9 @@ importers:
       '@logtail/node':
         specifier: ^0.5.6
         version: 0.5.6
+      '@logtail/types':
+        specifier: ^0.5.6
+        version: 0.5.6
       '@prisma/adapter-pg':
         specifier: ^6.16.2
         version: 6.16.2
@@ -1444,7 +1447,6 @@ packages:
     resolution: {integrity: sha512-nmSVN+F2i1yKZ7rJNKO3G7ZzmxJgoQBQZ/6c4MuS553Grmr7WqR7LLDcYG53Z2m9409z3JLt4sCOhLdbKQ3HmA==}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.51.0':
     resolution: {integrity: sha512-P7U7U03+E5w7WgJtvSseNLOX1UhknVPmEaqgUENFWfNxNBa1OhExT6qYGmyF8gepcxWSaSfJsAV5UwhWrYefdQ==}

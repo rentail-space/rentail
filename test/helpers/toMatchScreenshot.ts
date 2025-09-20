@@ -10,7 +10,6 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import { expect } from "@playwright/test";
-import type { AsyncExpectationResult } from "@vitest/expect";
 import { invariant } from "es-toolkit";
 import looksSame from "looks-same";
 import type { Page } from "playwright";
@@ -18,7 +17,7 @@ import type { Page } from "playwright";
 const dirname = path.resolve("./__screenshots__");
 
 expect.extend({
-  async toMatchScreenshot(page: Page): AsyncExpectationResult {
+  async toMatchScreenshot(page: Page) {
     await cleanBeforeTest();
 
     const testName = getTestName();

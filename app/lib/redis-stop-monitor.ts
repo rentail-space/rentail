@@ -1,4 +1,4 @@
-import { captureException } from "@sentry/react";
+import { captureException } from "@sentry/react-router";
 import Redis from "ioredis";
 import env from "~/lib/env";
 

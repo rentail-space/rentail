@@ -1,4 +1,4 @@
-import { pretty, render } from "@react-email/render";
+import { pretty, render } from "@react-email/components";
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
 import { data } from "react-router";
