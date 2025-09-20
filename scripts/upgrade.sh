@@ -8,11 +8,11 @@ echo -e "\033[32m  Installing Playwright browsers …\033[0m"
 npx playwright install
 
 echo -e "\033[32m  Deduping dependencies …\033[0m"
-npm dedupe --force
-npm prune --force
+pnpm dedupe
+pnpm prune --force
 
 echo -e "\033[32m  Running tests …\033[0m"
-npm run test
+pnpm run test
 
 echo -e "\033[32m  Commiting changes …\033[0m"
 git diff --unified=0 --color --word-diff package.json | cat

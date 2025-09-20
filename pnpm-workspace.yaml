@@ -1,0 +1,14 @@
+ignoredBuiltDependencies:
+  - yarn
+
+onlyBuiltDependencies:
+  - '@prisma/client'
+  - '@prisma/engines'
+  - '@sentry/cli'
+  - '@tailwindcss/oxide'
+  - esbuild
+  - msw
+  - prisma
+
+minimumReleaseAge: 1440
+

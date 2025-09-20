@@ -4,6 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Build Commands
 
+**Package Management:** Uses pnpm as the package manager (configured in .ncurc.json for dependency updates)
+
 - Dev: `npm run dev` (starts development server with HMR)
 - Build: `npm run build` (prisma generate + react-router build for production)
 - Start: `npm run start` (starts production server)

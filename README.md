@@ -4,28 +4,6 @@ A modern AI-powered marketplace for short-term retail space leasing built with R
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Node.js 22.0.0 or higher
-- npm or yarn package manager
-
-### Installation
-```bash
-# Clone the repository
-git clone <repository-url>
-cd rentail
-
-# Install dependencies
-npm install
-
-# Set up environment variables
-cp .env.example .env.local
-# Edit .env.local with your API keys and configuration
-
-# Start development server
-npm run dev
-```
-
-Visit `http://localhost:3000` to see the application running.
 
 ## 🏗️ Architecture
 
@@ -59,15 +37,15 @@ rentail/
 
 ### Available Scripts
 ```bash
-npm run dev         # Start development server with HMR
-npm run build       # Build for production
-npm run start       # Start production server
-npm run test        # Run all tests (lint + typecheck + unit tests)
-npm run typecheck   # TypeScript type checking
-npm run lint        # Lint code with Biome
-npm run format      # Format code with Biome
-npm run clean       # Clean build artifacts
-npm run checkly     # Run monitoring tests
+pnpm run dev         # Start development server with HMR
+pnpm run build       # Build for production
+pnpm run start       # Start production server
+pnpm run test        # Run all tests (lint + typecheck + unit tests)
+pnpm run typecheck   # TypeScript type checking
+pnpm run lint        # Lint code with Biome
+pnpm run format      # Format code with Biome
+pnpm run clean       # Clean build artifacts
+pnpm run checkly     # Run monitoring tests
 ```
 
 ### Development Workflow
