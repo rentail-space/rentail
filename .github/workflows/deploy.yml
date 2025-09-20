@@ -86,13 +86,13 @@ jobs:
 
 
       - name: Check secrets
-        run: secretlint "**/*" --format stylish
+        run: pnpm secretlint "**/*" --format stylish
 
       - name: Check types
-        run: react-router typegen && tsc
+        run: pnpm react-router typegen && pnpm tsc
 
       - name: Run Tests
-        run: vitest run --reporter verbose
+        run: pnpm vitest run --reporter verbose
         env:
           ANTHROPIC_API_KEY: "***REMOVED***"
           NODE_ENV: "test"
