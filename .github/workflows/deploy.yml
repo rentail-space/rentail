@@ -91,6 +91,9 @@ jobs:
       - name: Generate React Router types
         run: pnpm react-router typegen
 
+      - name: Check types
+        uses: iCrawl/action-tsc@v1
+
       - name: Run Tests
         run: pnpm vitest run --reporter verbose
         env:
