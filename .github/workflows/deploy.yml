@@ -71,8 +71,8 @@ jobs:
         with:
           postgres-version: "16"
 
-      - name: Setup Prisma (for testing)
-        run: npx prisma db push
+      - name: Setup database schema (for testing)
+        run: pnpm prisma db push
         env:
           NODE_ENV: "test"
 
@@ -115,17 +115,24 @@ jobs:
         with:
           node-version-file: 'package.json'
 
-      - name: Install NPM dependencies
-        run: pnpm install @prisma/client
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
 
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v3
 
+      - name: Install NPM dependencies
+        run: pnpm install @prisma/client
+
       - name: Deploy Prisma schema
-        run: doppler run --config prd -- npx prisma db push
+        run: doppler run --config prd -- pnpm prisma db push
 
       - name: Deploy database migrations
-        run: doppler run --config prd -- npx prisma migrate deploy
+        run: doppler run --config prd -- pnpm prisma migrate deploy
+
 
       - name: Deploy to Vercel
         uses: nexterias/actions-vercel@v1
