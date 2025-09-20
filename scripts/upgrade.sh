@@ -20,7 +20,7 @@ pnpm run test
 echo -e "\033[32m  Commiting changes …\033[0m"
 git diff --unified=0 --color --word-diff package.json | cat
 git add package.json
-git add package-lock.json
+git add pnpm-lock.yaml
 git commit -m "Upgrade dependencies"
 
 echo -e "\033[32m  Cleaning up …\033[0m"
