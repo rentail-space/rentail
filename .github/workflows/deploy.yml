@@ -72,7 +72,7 @@ jobs:
           postgres-version: "16"
 
       - name: Setup database schema (for testing)
-        run: pnpm prisma db push
+        run: pnpm install @prisma/client && pnpm prisma db push
         env:
           NODE_ENV: "test"
 
@@ -125,7 +125,7 @@ jobs:
         uses: dopplerhq/cli-action@v3
 
       - name: Install NPM dependencies
-        run: pnpm install @prisma/client
+        run: pnpm install @prisma/client && pnpm prisma db push
 
       - name: Deploy Prisma schema
         run: doppler run --config prd -- pnpm prisma db push
