@@ -23,7 +23,7 @@ export default function BlogPosts({
   const rest = drop(isPublished, 3);
 
   return (
-    <section className="blog-posts-section">
+    <section className="blog-posts-section flex flex-col gap-y-2">
       {first.map((post) => (
         <Link
           className="link link-hover flex flex-row gap-4"
@@ -52,9 +52,34 @@ export default function BlogPosts({
           to={`/blog/${post.slug}`}
           key={post.slug}
         >
-          <h5>{post.attributes.title}</h5>
+          <h5 className="flex flex-row items-start flex-nowrap gap-2">
+            <ArrowIcon className="ml-3 mt-3 h-3 w-3 flex-shrink-0" />
+            {post.attributes.title}
+          </h5>
         </Link>
       ))}
     </section>
+  );
+}
+
+function ArrowIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={`${className} inline-block`}
+      fill="none"
+      height="16"
+      viewBox="0 0 16 16"
+      width="16"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 4L10 8L6 12"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
   );
 }
