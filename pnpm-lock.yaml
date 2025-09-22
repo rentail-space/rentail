@@ -187,7 +187,7 @@ importers:
         specifier: ^5.1.13
         version: 5.1.13
       msw:
-        specifier: ^2.11.2
+        specifier: ^2.11.3
         version: 2.11.3(@types/node@24.5.2)(typescript@5.9.2)
       playwright:
         specifier: ^1.55.0
