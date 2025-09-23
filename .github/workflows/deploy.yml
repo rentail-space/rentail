@@ -54,11 +54,10 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
       - name: Install Playwright Browsers — Chromium
-        # if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: pnpx playwright install --with-deps chromium
-      - name: Install Playwright Browsers - Depencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: pnpx playwright install-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: |
+          pnpm exec playwright install --with-deps --only-shell chromium
+          pnpm exec playwright install-deps chromium
 
 
       - name: Setup Biome
