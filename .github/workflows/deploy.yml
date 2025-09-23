@@ -44,7 +44,7 @@ jobs:
 
       - name: Get installed Playwright version
         id: playwright-version
-        run: export PLAYWRIGHT_VERSION=$(playwright --version)
+        run: export PLAYWRIGHT_VERSION=$(pnpm exec playwright --version)
 
       - name: Cache playwright binaries
         uses: actions/cache@v4
@@ -56,8 +56,8 @@ jobs:
       - name: Install Playwright Browsers — Chromium
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: |
-          playwright install --with-deps --only-shell chromium
-          playwright install-deps chromium
+          pnpm exec playwright install --with-deps --only-shell chromium
+          pnpm exec playwright install-deps chromium
 
 
       - name: Setup Biome
