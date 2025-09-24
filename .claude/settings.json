@@ -8,8 +8,6 @@
       "Bash(pnpm run build:*)",
       "Bash(git add:*)",
       "Bash(pnpm run test:*)",
-      "mcp__emails__search_emails",
-      "mcp__emails__get_email_content",
       "Bash(pnpm install:*)"
     ]
   },

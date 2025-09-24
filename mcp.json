@@ -1,13 +1,4 @@
 {
   "mcpServers": {
-    "supabase": {
-      "command": "pnpx",
-      "args": [
-        "-y",
-        "@supabase/mcp-server-supabase@latest",
-        "--access-token",
-        "${env:SUPABASE_ACCESS_TOKEN}"
-      ]
-    }
   }
 }
