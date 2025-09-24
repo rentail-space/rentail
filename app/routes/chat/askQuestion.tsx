@@ -6,7 +6,7 @@ export default async function askQuestion({
   scrollToBottom,
   inputRef,
 }: {
-  question: Array<Exclude<ReactNode, boolean | null | undefined>>;
+  question: Exclude<ReactNode, boolean | null | undefined>[];
   scrollToBottom: () => void;
   inputRef: React.RefObject<HTMLInputElement | null>;
 }) {

@@ -18,25 +18,30 @@ const colors = {
   error: (text: string) => `\x1b[91m${text}\x1b[0m`,
 };
 
-["trace", "debug", "log", "info", "warn", "error"].forEach(
-  (level: ILogLevel) => {
-    const consoleOriginal = Reflect.get(console, level);
-    const logtailFunction = logtail ? Reflect.get(logtail, level) : () => {};
-    const colorCode = process.stdout.isTTY
-      ? colors[level as keyof typeof colors]
-      : (message: string) => message;
+for (const level of [
+  "trace",
+  "debug",
+  "log",
+  "info",
+  "warn",
+  "error",
+] as ILogLevel[]) {
+  const consoleOriginal = Reflect.get(console, level);
+  const logtailFunction = logtail ? Reflect.get(logtail, level) : () => {};
+  const colorCode = process.stdout.isTTY
+    ? colors[level as keyof typeof colors]
+    : (message: string) => message;
 
-    Reflect.set(console, level, (message: string, ...metadata: unknown[]) => {
-      const formattedMessage = format(message, ...metadata);
-      consoleOriginal.call(console, colorCode(formattedMessage));
-      try {
-        logtailFunction.call(logtail, formattedMessage, ...metadata);
-      } catch (error) {
-        console.error("Error logging to Logtail:", error);
-      }
-    });
-  },
-);
+  Reflect.set(console, level, (message: string, ...metadata: unknown[]) => {
+    const formattedMessage = format(message, ...metadata);
+    consoleOriginal.call(console, colorCode(formattedMessage));
+    try {
+      logtailFunction.call(logtail, formattedMessage, ...metadata);
+    } catch (error) {
+      console.error("Error logging to Logtail:", error);
+    }
+  });
+}
 
 process.on("SIGTERM", () => {
   // Ensure that all logs are sent to Logtail

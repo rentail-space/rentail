@@ -42,7 +42,9 @@
         "useSortedClasses": "off"
       },
       "suspicious": {
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noExplicitAny": "warn",
+        "noUnsafeDeclarationMerging": "error"
       },
       "recommended": true,
       "style": {
@@ -55,7 +57,26 @@
         "noUnusedTemplateLiteral": "error",
         "useNumberNamespace": "error",
         "noInferrableTypes": "error",
-        "noUselessElse": "error"
+        "noUselessElse": "error",
+        "useConsistentArrayType": "error"
+      },
+      "complexity": {
+        "noForEach": "warn",
+        "noThisInStatic": "error",
+        "useFlatMap": "error"
+      },
+      "correctness": {
+        "noInvalidConstructorSuper": "error",
+        "noUnreachableSuper": "error",
+        "useExhaustiveDependencies": "warn",
+        "useHookAtTopLevel": "error"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "error"
+      },
+      "performance": {
+        "noBarrelFile": "warn",
+        "noReExportAll": "warn"
       }
     }
   },

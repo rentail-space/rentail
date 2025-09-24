@@ -1,146 +1,253 @@
-# 🏪 Rentail.space
+# Rentail Space - Specialty Lease Marketplace
 
-A modern AI-powered marketplace for short-term retail space leasing built with React Router v7 and Claude AI.
+A React Router v7 application serving as a specialty lease marketplace that helps businesses find short-term retail spaces in shopping centers with AI-powered assistance.
 
 ## 🚀 Quick Start
 
+### Prerequisites
 
-## 🏗️ Architecture
+- Node.js ≥ 22.0.0
+- PostgreSQL database
+- Redis server
+- pnpm package manager
+
+### Environment Setup
+
+Create a `.env.local` file with the following required variables:
+
+```bash
+# AI Integration
+ANTHROPIC_API_KEY=your_anthropic_api_key
+
+# Database
+DATABASE_URL=postgresql://username:password@localhost:5432/rentail
+SESSION_SECRET=your_session_secret_key
+
+# Email Service
+RESEND_API_KEY=your_resend_api_key
+
+# Redis
+REDIS_URL=redis://localhost:6379
+
+# Optional - Monitoring & Logging
+LOGTAIL_TOKEN=your_logtail_token
+LOGTAIL_ENDPOINT=your_logtail_endpoint
+PUSHGATEWAY_URL=your_pushgateway_url
+PUSHGATEWAY_TOKEN=your_pushgateway_token
+SENTRY_DSN=your_sentry_dsn
+CHECKLY_ACCOUNT_ID=your_checkly_account_id
+CHECKLY_API_KEY=your_checkly_api_key
+IPGEOLOCATION_API_KEY=your_ipgeolocation_api_key
+```
+
+### Installation & Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Setup database
+prisma generate
+prisma db push
+
+# Start development server
+pnpm dev
+
+# Open http://localhost:3000
+```
+
+## 🏗️ Architecture Overview
 
 ### Tech Stack
-- **Frontend:** React 19 with TypeScript
-- **Framework:** React Router v7 with Server-Side Rendering
-- **Styling:** Tailwind CSS 4
-- **Build Tool:** Vite 7
-- **AI Integration:** Claude 4 via Anthropic SDK
-- **Testing:** Vitest + Playwright
-- **Monitoring:** Sentry + Logtail + Checkly
-- **Code Quality:** Biome (linting & formatting)
 
-### Project Structure
-```
-rentail/
-├── app/                      # Main application (React Router v7)
-│   ├── components/           # Reusable UI components
-│   ├── lib/                  # Shared utilities & AI integration
-│   ├── routes/               # Route handlers & pages
-│   ├── root.tsx             # Root layout with HTML shell
-│   └── entry.server.tsx     # Server-side rendering entry
-├── test/                     # Test files and utilities
-├── __checks__/              # Checkly monitoring tests
-├── __screenshots__/         # Visual regression test screenshots
-├── public/                  # Static assets
-└── Configuration files      # Various config files
-```
-
-## 🛠️ Development
-
-### Available Scripts
-```bash
-pnpm run dev         # Start development server with HMR
-pnpm run build       # Build for production
-pnpm run start       # Start production server
-pnpm run test        # Run all tests (lint + typecheck + unit tests)
-pnpm run typecheck   # TypeScript type checking
-pnpm run lint        # Lint code with Biome
-pnpm run format      # Format code with Biome
-pnpm run clean       # Clean build artifacts
-pnpm run checkly     # Run monitoring tests
-```
-
-### Development Workflow
-1. **Start Development:** `npm run dev`
-2. **Code Quality:** `npm run lint && npm run typecheck`
-3. **Testing:** `npm run test`
-4. **Build:** `npm run build`
-
-## 🔧 Configuration
+- **Frontend**: React 19 + TypeScript + React Router v7
+- **Styling**: Tailwind CSS 4 + DaisyUI
+- **Backend**: React Router v7 SSR
+- **Database**: PostgreSQL + Prisma ORM
+- **AI**: Claude 4 via Anthropic SDK
+- **Caching**: Redis
+- **Testing**: Vitest + Playwright
+- **Monitoring**: Sentry + BetterStack + Checkly
 
 ### Key Features
-- **AI-Powered Chat:** Interactive space discovery with Claude AI
-- **Server-Side Rendering:** Fast initial page loads
-- **Real-time Monitoring:** Comprehensive observability stack
-- **Visual Testing:** Automated screenshot comparisons
-- **Type Safety:** Full TypeScript coverage
 
-## 🧪 Testing
+- **AI-Powered Chat Interface**: Interactive space discovery with Claude 4
+- **Server-Side Rendering**: Optimized for SEO and performance
+- **Real-time Streaming**: Server-sent events for chat responses
+- **Geographic Intelligence**: Location-based space recommendations
+- **Email Integration**: Waitlist management with React Email
+- **Comprehensive Monitoring**: Error tracking, metrics, and synthetic monitoring
 
-### Unit Tests
-```bash
-npm run test              # Run all tests
-npm run test -- --watch  # Watch mode
+## 📁 Project Structure
+
+```
+rentail/
+├── app/                          # Main application directory
+│   ├── routes/                   # File-based routing
+│   │   ├── home/                # Home page components
+│   │   ├── chat/                # AI chat interface
+│   │   └── api.chat.tsx         # Streaming AI endpoint
+│   ├── lib/                     # Shared utilities
+│   │   ├── env.ts              # Environment configuration
+│   │   ├── prisma.ts           # Database client
+│   │   ├── logger.server.ts    # Logging infrastructure
+│   │   └── instrument.server.ts # Metrics collection
+│   ├── components/              # Reusable UI components
+│   ├── data/                    # Static data files
+│   └── emails/                  # Email templates
+├── prisma/                      # Database schema & migrations
+├── test/                        # Test setup and utilities
+├── __checks__/                  # Checkly monitoring tests
+└── __screenshots__/             # Visual regression tests
 ```
 
-### E2E Tests
+## 🔧 Development Commands
+
 ```bash
-pnpx playwright test       # Run Playwright tests
-pnpx playwright test --ui  # Interactive UI mode
+# Development
+pnpm dev                    # Start dev server with HMR
+pnpm build                  # Build for production
+pnpm start                  # Start production server
+
+# Code Quality
+pnpm typecheck             # TypeScript type checking
+pnpm lint                  # Run linters (secretlint + Biome)
+pnpm format --write        # Format code with Biome
+pnpm check                 # Run both lint and typecheck
+
+# Testing
+pnpm test                  # Full test suite (lint + db + typecheck + vitest)
+pnpm checkly               # Run synthetic monitoring tests
+
+# Utilities
+pnpm clean                 # Remove build cache and artifacts
 ```
 
-### Visual Regression Tests
-Screenshots are automatically captured and compared in `__screenshots__/` directory.
+## 🎯 Key Components
 
-## 📊 Monitoring
+### AI Integration
+
+- **Chat API** (`/api/chat`): Streaming responses with Claude 4
+- **System Prompts**: Context-aware prompts for different scenarios
+- **Resume Support**: Automatic stream resumption for reliability
+- **Stop Mechanism**: Redis-based cross-request coordination
+
+### Database Models
+
+```typescript
+// Core entities
+User        // User profiles with location data
+Chat        // Conversation sessions
+Message     // Individual chat messages with roles and content
+```
+
+### Configuration Management
+
+- **Centralized Config**: All environment variables in `app/lib/env.ts`
+- **Type Safety**: Runtime validation with env-var library
+- **Environment Aware**: Different defaults for test/dev/production
+
+## 🔒 Security Considerations
+
+- **Input Sanitization**: All user inputs validated and sanitized
+- **Session Management**: Secure cookie-based sessions
+- **API Key Protection**: Environment-based secret management
+- **CSP Headers**: Content Security Policy implementation
+- **Rate Limiting**: Built-in protection against abuse
+
+## 📊 Monitoring & Observability
 
 ### Error Tracking
-- **Sentry:** Real-time error monitoring and performance tracking
-- **Logtail:** Structured logging with colored console output
+- **Sentry Integration**: Automatic error capture and reporting
+- **Custom Error Boundaries**: React error boundary implementation
+- **Performance Monitoring**: Request timing and resource usage
+
+### Metrics Collection
+- **Process Metrics**: CPU, memory, heap usage
+- **HTTP Metrics**: Request counts, response times, status codes
+- **Custom Metrics**: Business-specific measurements
 
 ### Synthetic Monitoring
-- **Checkly:** Automated monitoring tests every 30 minutes
-- Run: `npm run checkly`
+- **Checkly Tests**: Automated E2E monitoring every 30 minutes
+- **Visual Regression**: Screenshot comparison testing
+- **API Health Checks**: Endpoint availability monitoring
 
-### Performance Metrics
-- Process metrics collected every 5 seconds
-- Memory usage, CPU usage, uptime tracking
-- Request logging with duration and status codes
+## 🧪 Testing Strategy
+
+### Unit Testing
+- **Framework**: Vitest with jsdom environment
+- **Coverage**: Components, utilities, and business logic
+- **Mocking**: MSW for API mocking
+
+### Visual Testing
+- **Playwright Integration**: Browser-based visual testing
+- **Screenshot Comparison**: Automated visual regression detection
+- **Cross-browser Testing**: Multiple browser environments
+
+### E2E Testing
+- **Checkly Integration**: Production monitoring
+- **User Journey Testing**: Critical path validation
+- **Performance Testing**: Page load and interaction timing
 
 ## 🚀 Deployment
 
-### Production Build
+### Build Process
 ```bash
-npm run build
-npm run start
+pnpm build  # Generates client/server bundles in /build
 ```
 
-### Environment Setup
-1. Set all required environment variables
-2. Configure Sentry DSN for error tracking
-3. Set up Logtail for log aggregation
-4. Configure Checkly for monitoring
+### Production Requirements
+- Node.js ≥ 22.0.0
+- PostgreSQL database
+- Redis server
+- All required environment variables
 
-## 🔒 Security
-
-### Best Practices
-- Environment variables for all secrets
-- Session management with secure secrets
-- Input validation and sanitization
-- Regular dependency updates
-
-### Security Checklist
-- [ ] Update SESSION_SECRET from default
-- [ ] Secure API keys in environment variables
-- [ ] Regular `npm audit` checks
-- [ ] Keep dependencies updated
+### Monitoring Setup
+1. Configure Sentry for error tracking
+2. Setup BetterStack for logging and metrics
+3. Enable Checkly for synthetic monitoring
+4. Configure alert thresholds and notifications
 
 ## 🤝 Contributing
 
 ### Code Style
-- Use TypeScript for type safety
-- Follow existing patterns and conventions
-- Run `npm run lint` before committing
-- Maintain test coverage
+- **Formatter**: Biome with 80 character line width
+- **Linting**: Strict TypeScript + Biome rules
+- **Imports**: Organized (React → external → local)
+- **Naming**: PascalCase components, camelCase utilities
 
 ### Development Guidelines
-1. Create feature branches from `main`
-2. Write tests for new functionality
-3. Ensure linting and type checking pass
-4. Update documentation as needed
+1. **Single Responsibility**: Each function should have one clear purpose
+2. **Type Safety**: Prefer interfaces over types, avoid enums
+3. **Error Handling**: Handle errors early with explicit returns
+4. **Performance**: Minimize useState/useEffect, use context/reducers
+5. **Testing**: Write tests for all new functionality
 
-## 📝 License
+### Pull Request Process
+1. Run `pnpm check` to ensure code quality
+2. Add tests for new functionality
+3. Update documentation as needed
+4. Ensure all CI checks pass
 
-Proprietary!
+## 📚 Additional Resources
+
+- [React Router v7 Documentation](https://reactrouter.com)
+- [Anthropic AI SDK Documentation](https://sdk.vercel.ai/docs)
+- [Prisma Documentation](https://prisma.io/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Biome Documentation](https://biomejs.dev)
+
+## 📄 License
+
+[Add your license information here]
+
+## 🆘 Support
+
+For questions and support:
+- Create an issue in this repository
+- Check existing documentation and guides
+- Review the troubleshooting section below
 
 ---
 
-Built with ❤️ using React Router v7 and Claude AI
+**Last Updated**: September 2025

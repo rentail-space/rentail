@@ -26,20 +26,28 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - React 19 with TypeScript
 - Vite 7 for build tooling (integrated with React Router v7)
 - Tailwind CSS 4 for styling with DaisyUI plugin
+- Redis for stream coordination and cross-server communication
+- Session management with automatic user creation and IP-based geolocation
 - Vitest for unit testing with jsdom environment
 - Biome for linting and formatting
 - Playwright for E2E testing with visual regression
 
 **AI Integration:**
-- Claude 4 via Anthropic AI SDK with streaming responses
-- Chat API endpoint: `app/routes/api.chat.tsx` (streaming chat interface)
+- Claude 4 via Anthropic AI SDK with streaming responses and thinking tokens
+- Chat API endpoint: `app/routes/api.chat.tsx` (streaming chat interface with Redis coordination)
+- Redis-based stream management: `app/lib/redis-stop-monitor.ts` (cross-server stop signals)
+- Stop endpoints: `app/routes/api.chat.$id.stop.tsx` for manual chat termination
 - AI library configuration: `app/lib/env.ts` (environment-based settings)
 - System prompts in `app/lib/`: `general.md`, `prelude.md`, `spaces.md`, `welcome.md`
+- Geolocation filtering: Built-in Haversine distance calculation for shopping centers
 - Use Context7 MCP server for library documentation and code examples
 
 **Database:**
 - PostgreSQL with Prisma ORM client and schema generation
-- Database schema: `prisma/schema.prisma` with User, Conversation, and Message models
+- Database models: User (with location/IP tracking), Chat (with stream management), Message (with AI SDK integration), Waitlist
+- Active stream tracking: Chat.activeStreamId for coordinating streaming responses across server instances
+- Message model includes reasoning field for AI thinking tokens and abort status
+- Session-based chat management with automatic user creation from IP geolocation
 - Prisma features: TypedSQL, Query Compiler, Driver Adapters
 - Test environment uses local PostgreSQL instance
 - Database operations: `prisma generate && prisma db push` for schema updates
@@ -135,6 +143,7 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 Required environment variables (set in `.env.local`):
 - `ANTHROPIC_API_KEY`: Claude AI API key for chat functionality
 - `DATABASE_URL`: PostgreSQL connection string for production
+- `REDIS_URL`: Redis connection string for stream coordination (default: redis://localhost:6379)
 - `SESSION_SECRET`: Secret key for session management
 - `LOGTAIL_TOKEN`: BetterStack Logtail token for logging
 - `LOGTAIL_ENDPOINT`: BetterStack Logtail endpoint URL
