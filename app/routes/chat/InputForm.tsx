@@ -1,5 +1,4 @@
 import { useStickToBottomContext } from "use-stick-to-bottom";
-import PrecannedQuestions from "./PrecannedQuestions";
 
 export default function InputForm({
   input,
@@ -69,7 +68,6 @@ export default function InputForm({
           </button>
         </div>
       </form>
-      <PrecannedQuestions inputRef={inputRef} />
     </div>
   );
 }

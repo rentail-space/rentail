@@ -27,11 +27,6 @@ describe("Chat page", () => {
     // Check that input form is present
     await expect(page.locator("form")).toBeVisible();
     await expect(page.locator("input[type='text']")).toBeVisible();
-
-    // Check that precanned questions are displayed
-    await expect(
-      page.locator("button").filter({ hasText: "Q:" }).first(),
-    ).toBeVisible();
   });
 
   it("handles initial query parameter", async () => {
@@ -43,32 +38,6 @@ describe("Chat page", () => {
     await expect(
       page.locator(".chat-bubble-accent").filter({ hasText: testQuery }),
     ).toBeVisible();
-  });
-
-  it("precanned questions work correctly", async () => {
-    await page.goto(`${URL}/chat`);
-    await page.waitForLoadState("networkidle");
-
-    // Click on the first precanned question button
-    const firstQuestion = page
-      .locator("#precanned-questions button")
-      .filter({ hasText: "Q:" })
-      .first();
-    await expect(firstQuestion).toBeVisible();
-
-    // Get the question text
-    const questionText = await firstQuestion.textContent();
-    const question = questionText?.replace("Q: ", "") || "";
-    expect(question).not.toEqual("");
-
-    // Click the button
-    await firstQuestion.click();
-
-    // Wait for typing animation to complete
-    await page.waitForTimeout(500);
-
-    // Check that the question appears in the input field
-    await expect(page.locator("input[type='text']")).toHaveValue(question);
   });
 
   it("sends user message and receives server response", async () => {
