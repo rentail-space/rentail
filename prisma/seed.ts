@@ -1,25 +1,11 @@
 import { readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { PrismaPg } from "@prisma/adapter-pg";
-import env from "env-var";
+import prisma from "app/lib/prisma";
 import { z } from "zod";
-import { PrismaClient } from "./generated/client";
 
 // NOTE don't use lib/config here, we don't plan to set all the environment
 // variables just to seed the database.
-
-const connectionString =
-  process.env.NODE_ENV === "test"
-    ? // secretlint-disable-next-line
-      "postgresql://postgres:postgres@localhost:5432/postgres"
-    : env.get("DATABASE_URL").required().asUrlString();
-const adapter = new PrismaPg({ connectionString });
-const prisma = new PrismaClient({
-  adapter,
-  errorFormat: "pretty",
-  log: ["error", "warn", "query", "info"],
-});
 
 // NOTE We're using postgis to find nearby shopping centers.
 await prisma.$executeRaw`CREATE EXTENSION IF NOT EXISTS postgis;`;
@@ -57,18 +43,29 @@ async function addShoppingCenters() {
     const data = await readFile(join(dirname, file), "utf-8");
     const json = shoppingCenter.parse(JSON.parse(data));
     await prisma.shoppingCenter.upsert({
-      create: { ...json, spaces: { create: json.spaces } },
+      create: {
+        name: json.name,
+        address: json.address,
+        city: json.city,
+        state: json.state,
+        country: json.country,
+        description: json.description,
+        imageURLs: json.imageURLs,
+        spaces: { create: json.spaces },
+      },
       update: {
         name: json.name,
         address: json.address,
         city: json.city,
         state: json.state,
         country: json.country,
-        latitude: json.latitude,
-        longitude: json.longitude,
+        description: json.description,
+        imageURLs: json.imageURLs,
         spaces: { deleteMany: {}, create: json.spaces },
       },
       where: { id: json.id },
     });
+    const point = `POINT(${json.longitude} ${json.latitude})`;
+    await prisma.$queryRaw`UPDATE "shopping_centers" SET location = ST_GeomFromText(${point}, 4326) WHERE ID=${json.id};`;
   }
 }

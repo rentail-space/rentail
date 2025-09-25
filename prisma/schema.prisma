@@ -62,19 +62,18 @@ model Waitlist {
 }
 
 model ShoppingCenter {
-  address     String                @map("address")
-  city        String                @map("city")
-  country     String                @map("country")
-  createdAt   DateTime              @map("created_at")  @default(now()) @db.Timestamp(3)
-  description String                @map("description") @db.Text
-  id          String                @map("id")          @id @default(cuid(2))
-  imageURLs   String[]              @map("image_urls")
-  latitude    String                @map("latitude")
-  longitude   String                @map("longitude")
-  name        String                @map("name")
+  address     String                           @map("address")
+  city        String                           @map("city")
+  country     String                           @map("country")
+  createdAt   DateTime                         @map("created_at")  @default(now()) @db.Timestamp(3)
+  description String                           @map("description") @db.Text
+  id          String                           @map("id")          @id @default(cuid(2))
+  imageURLs   String[]                         @map("image_urls")
+  location    Unsupported("geography(Point)")? @map("location")
+  name        String                           @map("name")
   spaces      ShoppingCenterSpace[]
-  state       String                @map("state")
-  updatedAt   DateTime              @map("updated_at")  @updatedAt @db.Timestamp(3)
+  state       String                           @map("state")
+  updatedAt   DateTime                         @map("updated_at")  @updatedAt @db.Timestamp(3)
 
   @@map("shopping_centers")
 }

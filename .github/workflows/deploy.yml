@@ -133,11 +133,10 @@ jobs:
         uses: dopplerhq/cli-action@v3
 
       - name: Deploy Prisma schema
-        run: doppler run --config prd -- pnpm dlx prisma db push
-
-      - name: Deploy database migrations
-        run: doppler run --config prd -- pnpm dlx prisma migrate deploy
-
+        run: |
+          doppler run --config prd -- pnpm dlx prisma db push
+          doppler run --config prd -- pnpm dlx prisma db seed
+          doppler run --config prd -- pnpm dlx prisma migrate deploy
 
       - name: Deploy to Vercel
         uses: nexterias/actions-vercel@v1
