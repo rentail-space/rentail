@@ -43,11 +43,8 @@ jobs:
         run: pnpm install
 
       - name: Install Playwright Browsers — Chromium
-        uses: maxmilton/action-setup-playwright@v1
-        with:
-          browsers: chromium
-          headless: true
-
+        run: |
+          npx playwright install --with-deps --only-shell chromium
 
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
