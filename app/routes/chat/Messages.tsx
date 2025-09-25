@@ -1,3 +1,4 @@
+import type { UIMessage, UITools } from "ai";
 import { uniqBy } from "es-toolkit";
 import React, { useEffect, useRef, useState } from "react";
 import type { Components } from "react-markdown";
@@ -8,7 +9,6 @@ import {
   useStickToBottomContext,
 } from "use-stick-to-bottom";
 import askQuestion from "./askQuestion";
-import type { ClientMessage } from "./ClientMessage";
 
 export default function Messages({
   error,
@@ -18,7 +18,7 @@ export default function Messages({
 }: {
   error?: Error;
   isTyping: boolean;
-  messages: ClientMessage[];
+  messages: UIMessage<{ isAborted?: boolean }, { text: string }, UITools>[];
   inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   const prevMessagesLength = useRef(messages.length);
@@ -72,7 +72,7 @@ export default function Messages({
   );
 }
 
-function UserMessage({ message }: { message: ClientMessage }) {
+function UserMessage({ message }: { message: UIMessage }) {
   return (
     <div className="chat chat-end">
       <div className="chat-bubble chat-bubble-accent prose prose-base">
@@ -122,7 +122,7 @@ function AssistantMessage({
   scrollToBottom,
 }: {
   isLast: boolean;
-  message: ClientMessage;
+  message: UIMessage;
   inputRef: React.RefObject<HTMLInputElement | null>;
   scrollToBottom: ScrollToBottom;
 }) {

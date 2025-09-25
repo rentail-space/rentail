@@ -1,98 +1,237 @@
 generator client {
-  provider                = "prisma-client"
-  output                  = "generated"
-  engineType              = "client"
-  runtime                 = "nodejs"
-  moduleFormat            = "esm"
-  generatedFileExtension  = "ts"
-  importFileExtension     = "ts"
-  previewFeatures         = ["postgresqlExtensions"]
+  provider               = "prisma-client"
+  output                 = "generated"
+  previewFeatures        = ["postgresqlExtensions"]
+  engineType             = "client"
+  generatedFileExtension = "ts"
+  importFileExtension    = "ts"
+  moduleFormat           = "esm"
+  runtime                = "nodejs"
 }
 
 datasource db {
-  provider      = "postgresql"
-  url           = env("DATABASE_URL")
-  directUrl     = env("DIRECT_URL")
-  relationMode  = "foreignKeys"
-  extensions    = [postgis]
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  directUrl    = env("DIRECT_URL")
+  relationMode = "foreignKeys"
+  extensions   = [postgis]
 }
 
 model Chat {
   activeStreamId String?   @map("active_stream_id")
-  createdAt      DateTime  @map("created_at")       @default(now()) @db.Timestamp(3)
+  createdAt      DateTime  @map("created_at")       @default(now())
   id             String    @map("id")               @id @default(cuid(2))
-  messages       Message[]
-  updatedAt      DateTime  @map("updated_at")       @updatedAt @db.Timestamp(3)
-  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  updatedAt      DateTime  @map("updated_at")       @updatedAt
   userId         String    @map("user_id")
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages       Message[]
 
   @@map("chats")
 }
 
 model Message {
-  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    String   @map("chat_id")
   content   String?  @map("content")
-  createdAt DateTime @map("created_at") @default(now()) @db.Timestamp(3)
-  id        Int      @map("id")         @default(autoincrement()) @id
+  createdAt DateTime @map("created_at") @default(now())
+  id        Int      @map("id")         @id @default(autoincrement())
   isAborted Boolean  @map("is_aborted") @default(false)
-  messageId String   @map("message_id") @unique @default(ulid()) // AI SDK message ID
+  messageId String   @map("message_id") @unique @default(ulid())
   reasoning String?  @map("reasoning")
   role      Role     @map("role")
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
   @@map("messages")
 }
 
 model User {
-  chats     Chat[]
-  createdAt DateTime @map("created_at") @default(now()) @db.Timestamp(3)
+  createdAt DateTime @map("created_at") @default(now())
   id        String   @map("id")         @id @default(cuid(2))
   ip        String?  @map("ip")
   location  Json?    @map("location")
-  updatedAt DateTime @map("updated_at") @updatedAt @db.Timestamp(3)
+  updatedAt DateTime @map("updated_at") @updatedAt
+  chats     Chat[]
 
   @@map("users")
 }
 
 model Waitlist {
-  createdAt DateTime @map("created_at") @default(now()) @db.Timestamp(3)
+  createdAt DateTime @map("created_at") @default(now())
   email     String   @map("email")      @id @default(cuid(2))
 
   @@map("waitlist")
 }
 
 model ShoppingCenter {
-  address     String                           @map("address")
-  city        String                           @map("city")
-  country     String                           @map("country")
-  createdAt   DateTime                         @map("created_at")  @default(now()) @db.Timestamp(3)
-  description String                           @map("description") @db.Text
-  id          String                           @map("id")          @id @default(cuid(2))
-  imageURLs   String[]                         @map("image_urls")
-  location    Unsupported("geography(Point)")? @map("location")
-  name        String                           @map("name")
+  address     String                    @map("address")
+  city        String                    @map("city")
+  country     String                    @map("country")
+  createdAt   DateTime                  @map("created_at")  @default(now())
+  description String                    @map("description")
+  id          String                    @map("id")          @id @default(cuid(2))
+  imageURLs   String[]                  @map("image_urls")
+  name        String                    @map("name")
+  state       String                    @map("state")
+  updatedAt   DateTime                  @map("updated_at")  @updatedAt
+  location    Unsupported("geography")? @map("location")
   spaces      ShoppingCenterSpace[]
-  state       String                           @map("state")
-  updatedAt   DateTime                         @map("updated_at")  @updatedAt @db.Timestamp(3)
 
   @@map("shopping_centers")
 }
 
 model ShoppingCenterSpace {
-  available   String         @map("available")
-  center      ShoppingCenter @relation(fields: [centerId], references: [id], onDelete: Cascade)
   centerId    String         @map("shopping_center_id")
-  cost        Int            @map("cost")
-  createdAt   DateTime       @map("created_at")         @default(now()) @db.Timestamp(3)
+  createdAt   DateTime       @map("created_at")         @default(now())
   details     String         @map("details")
-  footTraffic Int            @map("foot_traffic")
   id          String         @map("id")                 @id @default(cuid(2))
   imageURLs   String[]       @map("image_urls")
-  name        String         @map("name")
+  updatedAt   DateTime       @map("updated_at")         @updatedAt
+  footTraffic Int            @map("foot_traffic")
+  cost        Int            @map("cost")
   size        Int            @map("size")
-  updatedAt   DateTime       @map("updated_at")         @updatedAt @db.Timestamp(3)
+  available   String         @map("available")
+  name        String         @map("name")
+  center      ShoppingCenter @relation(fields: [centerId], references: [id], onDelete: Cascade)
 
   @@map("shopping_center_spaces")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model mastra_evals {
+  input         String
+  output        String
+  result        Json
+  agent_name    String
+  metric_name   String
+  instructions  String
+  test_info     Json?
+  global_run_id String
+  run_id        String
+  created_at    DateTime   @db.Timestamp(6)
+  createdAt     DateTime?  @db.Timestamp(6)
+  created_atZ   DateTime?  @default(now()) @db.Timestamptz(6)
+  createdAtZ    DateTime?  @default(now()) @db.Timestamptz(6)
+
+  @@index([agent_name, created_at(sort: Desc)], map: "public_mastra_evals_agent_name_created_at_idx")
+  @@ignore
+}
+
+model mastra_messages {
+  id         String     @id
+  thread_id  String
+  content    String
+  role       String
+  type       String
+  createdAt  DateTime   @db.Timestamp(6)
+  resourceId String?
+  createdAtZ DateTime?  @default(now()) @db.Timestamptz(6)
+
+  @@index([thread_id, createdAt(sort: Desc)], map: "public_mastra_messages_thread_id_createdat_idx")
+  @@ignore
+}
+
+model mastra_resources {
+  id            String     @id
+  workingMemory String?
+  metadata      Json?
+  createdAt     DateTime   @db.Timestamp(6)
+  updatedAt     DateTime   @db.Timestamp(6)
+  createdAtZ    DateTime?  @default(now()) @db.Timestamptz(6)
+  updatedAtZ    DateTime?  @default(now()) @db.Timestamptz(6)
+  @@ignore
+}
+
+model mastra_scorers {
+  id                   String     @id
+  scorerId             String
+  traceId              String?
+  runId                String
+  scorer               Json
+  preprocessStepResult Json?
+  extractStepResult    Json?
+  analyzeStepResult    Json?
+  score                Float
+  reason               String?
+  metadata             Json?
+  preprocessPrompt     String?
+  extractPrompt        String?
+  generateScorePrompt  String?
+  generateReasonPrompt String?
+  analyzePrompt        String?
+  reasonPrompt         String?
+  input                Json
+  output               Json
+  additionalContext    Json?
+  runtimeContext       Json?
+  entityType           String?
+  entity               Json?
+  entityId             String?
+  source               String
+  resourceId           String?
+  threadId             String?
+  createdAt            DateTime   @db.Timestamp(6)
+  updatedAt            DateTime   @db.Timestamp(6)
+  createdAtZ           DateTime?  @default(now()) @db.Timestamptz(6)
+  updatedAtZ           DateTime?  @default(now()) @db.Timestamptz(6)
+  @@ignore
+}
+
+model mastra_threads {
+  id         String     @id
+  resourceId String
+  title      String
+  metadata   String?
+  createdAt  DateTime   @db.Timestamp(6)
+  updatedAt  DateTime   @db.Timestamp(6)
+  createdAtZ DateTime?  @default(now()) @db.Timestamptz(6)
+  updatedAtZ DateTime?  @default(now()) @db.Timestamptz(6)
+
+  @@index([resourceId, createdAt(sort: Desc)], map: "public_mastra_threads_resourceid_createdat_idx")
+  @@ignore
+}
+
+model mastra_traces {
+  id           String     @id
+  parentSpanId String?
+  name         String
+  traceId      String
+  scope        String
+  kind         Int
+  attributes   Json?
+  status       Json?
+  events       Json?
+  links        Json?
+  other        String?
+  startTime    BigInt
+  endTime      BigInt
+  createdAt    DateTime   @db.Timestamp(6)
+  createdAtZ   DateTime?  @default(now()) @db.Timestamptz(6)
+
+  @@index([name, startTime(sort: Desc)], map: "public_mastra_traces_name_starttime_idx")
+  @@ignore
+}
+
+model mastra_workflow_snapshot {
+  workflowName String    @map("workflow_name")
+  run_id       String
+  resourceId   String?
+  snapshot     String
+  createdAt    DateTime                        @db.Timestamp(6)
+  updatedAt    DateTime                        @db.Timestamp(6)
+  createdAtZ   DateTime?                       @default(now()) @db.Timestamptz(6)
+  updatedAtZ   DateTime?                       @default(now()) @db.Timestamptz(6)
+
+  @@unique([workflowName, run_id], map: "public_mastra_workflow_snapshot_workflow_name_run_id_key")
+  @@ignore
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model spatial_ref_sys {
+  srid      Int      @id
+  auth_name String?  @db.VarChar(256)
+  auth_srid Int?
+  srtext    String?  @db.VarChar(2048)
+  proj4text String?  @db.VarChar(2048)
+  @@ignore
 }
 
 enum Role {

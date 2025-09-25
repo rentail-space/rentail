@@ -1,6 +1,6 @@
 import { useChat } from "@ai-sdk/react";
 import { captureException } from "@sentry/react-router";
-import { DefaultChatTransport } from "ai";
+import { DefaultChatTransport, type UIMessage, type UITools } from "ai";
 import { last } from "es-toolkit";
 import { useEffect, useRef, useState } from "react";
 import { data, useLoaderData, useSearchParams } from "react-router";
@@ -9,32 +9,45 @@ import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
 import { commit, getChatFromSession } from "~/sessions.server";
 import type { Route } from "./+types/route";
-import { type ClientMessage, toClientMessages } from "./ClientMessage";
 import InputForm from "./InputForm";
 import Messages from "./Messages";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const { chat, session } = await getChatFromSession(request);
-  return data({ chat }, { headers: { "Set-Cookie": await commit(session) } });
+  const { chat, messages, session, user } = await getChatFromSession(request);
+  return data(
+    { chat, messages, user },
+    { headers: { "Set-Cookie": await commit(session) } },
+  );
 }
 
 export default function Chat() {
   const [searchParams] = useSearchParams();
-  const { chat } = useLoaderData<typeof loader>();
-  const { error, messages, sendMessage, status, stop } = useChat<ClientMessage>(
-    {
-      id: chat.id,
-      messages: toClientMessages(chat.messages),
-      resume: true, // Enable automatic stream resumption
-      transport: new DefaultChatTransport({
-        api: "/api/chat",
-        // only send the last message to the server:
-        prepareSendMessagesRequest({ messages }) {
-          return { body: { userMessage: last(messages) } };
-        },
-      }),
-    },
-  );
+  const {
+    chat,
+    messages: initialMessages,
+    user,
+  } = useLoaderData<typeof loader>();
+  const { error, messages, sendMessage, status, stop } = useChat<
+    UIMessage<{ isAborted?: boolean }, { text: string }, UITools>
+  >({
+    id: chat.id,
+    messages: initialMessages.map((message) => ({
+      id: message.id,
+      parts: message.content.parts.map((part) => ({
+        text: "text" in part ? part.text : "",
+        type: part.type as "text" | "reasoning",
+      })),
+      role: message.role,
+    })),
+    resume: false, // Enable automatic stream resumption
+    transport: new DefaultChatTransport({
+      api: "/api/chat",
+      // only send the last message to the server:
+      prepareSendMessagesRequest({ messages }) {
+        return { body: { userMessage: last(messages) } };
+      },
+    }),
+  });
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -80,6 +93,10 @@ export default function Chat() {
     <StickToBottom initial="smooth" resize="smooth">
       <div className="flex h-screen flex-col inset-0">
         <Header />
+
+        <div>Chat: {chat.id}</div>
+        <div>User: {user.id}</div>
+
         <StickToBottom.Content>
           <Messages
             error={error}

@@ -1,8 +1,10 @@
+import type { MastraMessageV2 } from "@mastra/core";
 import { invariant } from "es-toolkit";
-import type { User } from "prisma/generated/client";
-import type { ChatGetPayload } from "prisma/generated/models";
+import type { Chat, User } from "prisma/generated/client";
 import { createCookieSessionStorage, type Session } from "react-router";
+import { ulid } from "ulid";
 import env from "./lib/env";
+import mastra from "./lib/mastra";
 import prisma from "./lib/prisma";
 
 type SessionData = {
@@ -94,29 +96,59 @@ export async function getUserFromSession(request: Request): Promise<{
  *
  * @param request - The request object
  * @returns chat - Chat with messages and user
+ * @returns messages - Messages from the chat
  * @returns session - The updated session
+ * @returns user - The user
  */
 export async function getChatFromSession(request: Request): Promise<{
-  chat: ChatGetPayload<{ include: { messages: true; user: true } }>;
+  chat: Chat;
+  messages: MastraMessageV2[];
   session: SessionType;
+  user: User;
 }> {
   const { user, session } = await getUserFromSession(request);
+  const memory = await mastra.getAgentById("main").getMemory();
 
   const chatId = session.get("chat_id");
   if (chatId) {
     const chat = await prisma.chat.findUnique({
       where: { id: chatId, userId: user.id },
-      include: { messages: { orderBy: { id: "asc" } }, user: true },
     });
-    if (chat) return { chat, session };
+    const messages = (await memory?.rememberMessages({
+      threadId: `conv_${chatId}`,
+    })) ?? { messagesV2: [] };
+    if (chat)
+      return { chat, messages: messages?.messagesV2 || [], user, session };
   }
 
   const newChat = await prisma.chat.create({
     data: { user: { connect: { id: user.id } } },
-    include: { messages: true, user: true },
   });
   session.set("chat_id", newChat.id);
-  return { chat: newChat, session };
+  const messages =
+    (await memory?.saveMessages({
+      messages: [
+        {
+          content: {
+            format: 2,
+            parts: [
+              {
+                text: "Hello, I'm **Rentail** — how can I help you find a pop-up retail space for your business?",
+                type: "text",
+              },
+            ],
+          },
+          createdAt: new Date(),
+          id: ulid(),
+          resourceId: `user_${user.id}`,
+          role: "assistant",
+          threadId: `conv_${newChat.id}`,
+        },
+      ],
+      format: "v2",
+    })) ?? [];
+
+  return { chat: newChat, messages, user, session };
 }
 
 /**

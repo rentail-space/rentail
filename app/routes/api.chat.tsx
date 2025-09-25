@@ -1,31 +1,18 @@
-import {
-  type AnthropicProviderOptions,
-  createAnthropic,
-} from "@ai-sdk/anthropic";
+import type { AnthropicProviderOptions } from "@ai-sdk/anthropic";
+import type { MastraMessageV2 } from "@mastra/core";
 import { captureException, type User } from "@sentry/react-router";
-import { convertToModelMessages, stepCountIs, streamText } from "ai";
+import { stepCountIs, type UIMessage } from "ai";
 import { invariant } from "es-toolkit";
 import humanFormat from "human-format";
-import Redis from "ioredis";
-import type {
-  Chat,
-  ShoppingCenter,
-  ShoppingCenterSpace,
-} from "prisma/generated/client";
+import type { ShoppingCenterSpace } from "prisma/generated/client";
 import type { ShoppingCenterGetPayload } from "prisma/generated/models";
-import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { ulid } from "ulid";
-import env from "~/lib/env";
+import mastra from "~/lib/mastra";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import { commit, getChatFromSession } from "~/sessions.server";
 import general from "../lib/general.md?raw";
 import type { Route } from "./+types/api.chat";
-import {
-  type ClientMessage,
-  fromClientMessage,
-  toClientMessages,
-} from "./chat/ClientMessage";
 
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams
@@ -33,38 +20,64 @@ import {
 invariant(general, "General prompt is required");
 
 export async function action({ request }: Route.ActionArgs) {
-  const { chat, session } = await getChatFromSession(request);
-  const { userMessage } = (await request.json()) as {
-    userMessage: ClientMessage;
-  };
+  const { chat, session, user } = await getChatFromSession(request);
 
-  // Store the user's messages in the database,
-  await updateChat({
-    activeStreamId: null,
-    chat,
-    messages: [userMessage],
-  });
-  const originalMessages = await loadContentMessages(chat);
+  const userMessage = (await request.json()) as { userMessage: UIMessage };
 
   // Set up Redis stop monitoring
   const { abortSignal, cleanup } = await monitorStopSignal(chat.id);
   const maxDistance = 20;
-  const spaces = await findSpaces(chat.user, maxDistance);
+  const spaces = await findSpaces(user, maxDistance);
 
-  // Send the chat to Anthropic LLM
-  const model = createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
-    "claude-sonnet-4-20250514",
-  );
-  const result = streamText({
-    messages: convertToModelMessages(originalMessages),
-    model,
+  const agent = mastra.getAgentById("main");
+  const memory = await agent.getMemory();
+  invariant(memory, "Memory is required");
+  const messages = await memory.saveMessages({
+    messages: [
+      {
+        id: ulid(),
+        role: "user",
+        createdAt: new Date(),
+        threadId: `conv_${chat.id}`,
+        resourceId: `user_${user.id}`,
+        type: "text",
+        content: {
+          parts: userMessage.userMessage.parts.map((part) => ({
+            text: part.type === "text" ? part.text : "",
+            type: "text",
+          })),
+          format: 2,
+        },
+      },
+    ],
+    format: "v2",
+  });
+
+  const initialMessages: MastraMessageV2[] = messages.map((message) => ({
+    content: message.content,
+    createdAt: message.createdAt,
+    id: message.id,
+    role: message.role,
+  }));
+
+  const result = await agent.streamVNext(initialMessages, {
     abortSignal,
+    format: "aisdk",
+    memory: {
+      resource: `user_${user.id}`,
+      thread: `conv_${chat.id}`,
+    },
+    savePerStep: true,
+    maxSteps: 3,
+    stopWhen: stepCountIs(3),
+    requireToolApproval: false,
+    system: `${general}\n\n=====\n\n${shoppingCentersToMarkdown(spaces, maxDistance)}`,
 
-    onFinish: async ({ steps, totalUsage }) => {
+    onFinish: async ({ steps, usage }) => {
       console.info(
         "[CHAT] steps %d => total tokens %s",
         steps.length,
-        humanFormat(totalUsage.totalTokens ?? 0),
+        humanFormat(usage.totalTokens ?? 0),
       );
       await cleanup();
     },
@@ -76,13 +89,10 @@ export async function action({ request }: Route.ActionArgs) {
 
     providerOptions: {
       anthropic: {
-        sendReasoning: true,
-        thinking: { type: "enabled", budgetTokens: 12000 },
+        sendReasoning: false,
+        thinking: { type: "disabled", budgetTokens: 12000 },
       } satisfies AnthropicProviderOptions,
     },
-
-    stopWhen: stepCountIs(3),
-    system: `${general}\n\n=====\n\n${shoppingCentersToMarkdown(spaces, maxDistance)}`,
   });
 
   // Consume the stream to ensure it runs to completion & triggers onFinish even
@@ -91,7 +101,8 @@ export async function action({ request }: Route.ActionArgs) {
 
   // Stream the response to the client,  saving the last message(s) from the
   // assistant.
-  return result.toUIMessageStreamResponse<ClientMessage>({
+  return result.toUIMessageStreamResponse({
+    /*
     async consumeSseStream({ stream }) {
       const activeStreamId = ulid();
       // Create a resumable stream from the SSE stream
@@ -107,6 +118,7 @@ export async function action({ request }: Route.ActionArgs) {
       );
       await updateChat({ chat, activeStreamId });
     },
+    */
 
     generateMessageId: ulid,
 
@@ -116,72 +128,12 @@ export async function action({ request }: Route.ActionArgs) {
     },
 
     onFinish: async ({ messages, isAborted }) => {
-      await updateChat({
-        activeStreamId: null,
-        chat,
-        isAborted,
-        messages,
-      });
+      console.info("[CHAT] Finished", messages, isAborted);
     },
 
-    originalMessages,
-    sendReasoning: true,
+    sendReasoning: false,
     headers: { "Set-Cookie": await commit(session) },
   });
-}
-
-/**
- * Load text messages from the database. Ignores reasoning messages,
- * aborted messages, and other messages that don't have text content.
- *
- * @param chat The chat to load the messages from.
- * @returns The text messages.
- */
-async function loadContentMessages(chat: Chat): Promise<ClientMessage[]> {
-  const messages = await prisma.message.findMany({
-    where: { chatId: chat.id, content: { not: null } },
-    orderBy: { id: "asc" },
-  });
-  return toClientMessages(messages);
-}
-
-/**
- * Update the chat in the database.
- *
- * @param activeStreamId The active stream ID. If null, no stream is active.
- * @param chat The chat to update.
- * @param isAborted Whether the chat was aborted. If true, an aborted message is added.
- * @param messages Messages to add or update. If null, messages are not updated.
- */
-async function updateChat({
-  activeStreamId,
-  chat,
-  isAborted,
-  messages,
-}: {
-  activeStreamId: string | null;
-  chat: Chat;
-  isAborted?: boolean;
-  messages?: ClientMessage[];
-}): Promise<void> {
-  await prisma.chat.update({
-    where: { id: chat.id },
-    data: {
-      activeStreamId,
-      messages: messages
-        ? {
-            createMany: {
-              data: messages.flatMap(fromClientMessage),
-              skipDuplicates: true,
-            },
-          }
-        : undefined,
-    },
-  });
-  if (isAborted)
-    await prisma.message.create({
-      data: { chatId: chat.id, isAborted: true, role: "USER" },
-    });
 }
 
 /**
