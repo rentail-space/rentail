@@ -8,7 +8,7 @@ describe("Chat page", () => {
   let page: Page;
 
   beforeEach(async () => {
-    page = await launchBrowser(false);
+    page = await launchBrowser();
   });
 
   it("renders chat interface with welcome message", async () => {

@@ -29,7 +29,10 @@ let server: { port: number; stop: () => boolean };
  */
 export async function launchBrowser(headless = !env.isDebug): Promise<Page> {
   if (!server) await launchServer();
-  if (!browser) browser = await chromium.launch({ headless });
+  if (!browser)
+    browser = await chromium.launch({
+      headless: process.env.CI ? true : headless,
+    });
   if (!context) context = await browser.newContext();
   const page = await context.newPage();
   page.route("**", (route) => blockBrowserRequest(route));
