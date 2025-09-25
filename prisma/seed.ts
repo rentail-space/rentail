@@ -42,30 +42,31 @@ async function addShoppingCenters() {
     console.info(`Seeding ${file}`);
     const data = await readFile(join(dirname, file), "utf-8");
     const json = shoppingCenter.parse(JSON.parse(data));
+    const fields = {
+      address: json.address,
+      city: json.city,
+      country: json.country,
+      description: json.description,
+      imageURLs: json.imageURLs,
+      name: json.name,
+      spaces: { create: json.spaces },
+      state: json.state,
+    };
     await prisma.shoppingCenter.upsert({
-      create: {
-        name: json.name,
-        address: json.address,
-        city: json.city,
-        state: json.state,
-        country: json.country,
-        description: json.description,
-        imageURLs: json.imageURLs,
-        spaces: { create: json.spaces },
-      },
+      create: { ...fields, id: json.id },
       update: {
-        name: json.name,
-        address: json.address,
-        city: json.city,
-        state: json.state,
-        country: json.country,
-        description: json.description,
-        imageURLs: json.imageURLs,
-        spaces: { deleteMany: {}, create: json.spaces },
+        ...fields,
+        spaces: {
+          upsert: json.spaces.map((space) => ({
+            create: space,
+            update: space,
+            where: { id: space.id },
+          })),
+        },
       },
       where: { id: json.id },
     });
     const point = `POINT(${json.longitude} ${json.latitude})`;
-    await prisma.$queryRaw`UPDATE "shopping_centers" SET location = ST_GeomFromText(${point}, 4326) WHERE ID=${json.id};`;
+    await prisma.$queryRaw`UPDATE "shopping_centers" SET location = ST_GeomFromText(${point}) WHERE ID=${json.id};`;
   }
 }
