@@ -7,7 +7,12 @@ import { convertToModelMessages, stepCountIs, streamText } from "ai";
 import { invariant } from "es-toolkit";
 import humanFormat from "human-format";
 import Redis from "ioredis";
-import type { Chat } from "prisma/generated/client";
+import type {
+  Chat,
+  ShoppingCenter,
+  ShoppingCenterSpace,
+} from "prisma/generated/client";
+import type { ShoppingCenterGetPayload } from "prisma/generated/models";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { ulid } from "ulid";
 import env from "~/lib/env";
@@ -43,6 +48,8 @@ export async function action({ request }: Route.ActionArgs) {
 
   // Set up Redis stop monitoring
   const { abortSignal, cleanup } = await monitorStopSignal(chat.id);
+  const maxDistance = 20;
+  const spaces = await findSpaces(chat.user, maxDistance);
 
   // Send the chat to Anthropic LLM
   const model = createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
@@ -75,7 +82,7 @@ export async function action({ request }: Route.ActionArgs) {
     },
 
     stopWhen: stepCountIs(3),
-    system: [general, await loadSpaces(chat.user)].join("\n\n=====\n\n"),
+    system: `${general}\n\n=====\n\n${shoppingCentersToMarkdown(spaces, maxDistance)}`,
   });
 
   // Consume the stream to ensure it runs to completion & triggers onFinish even
@@ -177,140 +184,66 @@ async function updateChat({
     });
 }
 
-async function loadSpaces(_user: User): Promise<string> {
+/**
+ * Find the shopping centers within a given distance from the user.
+ *
+ * @param user The user to find the shopping centers for.
+ * @param distance The distance in miles to find the shopping centers within.
+ * @returns The shopping centers within the given distance.
+ */
+async function findSpaces(
+  user: User,
+  distance: number,
+): Promise<ShoppingCenterGetPayload<{ include: { spaces: true } }>[]> {
+  const maxDistance = distance * 1609.344; // 20 miles in meters
+  const nearBy = await prisma.$queryRaw<
+    { id: string; longitude: number; latitude: number }[]
+  >`
+    SELECT id, ST_X(location::geometry), ST_Y(location::geometry)
+    FROM "shopping_centers" 
+    WHERE ST_DistanceSphere(location::geometry, ST_MakePoint(${user.location.longitude}, ${user.location.latitude})) < ${maxDistance}
+  `;
   const centers = await prisma.shoppingCenter.findMany({
-    include: {
-      spaces: true,
-    },
+    include: { spaces: true },
+    where: { id: { in: nearBy.map((center) => center.id) } },
   });
-  const md = centers
-    .map(
-      (center) => `<shopping-center>
-  Shopping center name: ${center.name}
-  Address: ${center.address}, ${center.city}, ${center.state}, ${center.country}
-  Description: ${center.description}
-  ${center.imageURLs.map((image) => `Image: ${image}`).join("\n")}
-  Spaces: ${center.spaces
-    .map(
-      (space) => `<space>
-    Space name: ${space.name}
-    Description: ${space.details}
-    Cost: ${space.cost}
-    Foot traffic: ${space.footTraffic}
-    Size: ${space.size} sqft
-    Available: ${space.available}
-    ${space.imageURLs.map((image) => `Image: ${image}`).join("\n")}
-  </space>`,
-    )
-    .join("\n")}
-</shopping-center>`,
-    )
-    .join("\n\n");
+  return centers;
+}
 
-  return `Here are the shopping centers in the area which are within 20 miles of the user.
+function shoppingCentersToMarkdown(
+  centers: ShoppingCenterGetPayload<{ include: { spaces: true } }>[],
+  maxDistance: number,
+): string {
+  const prefix = `Here are the shopping centers in the area which are within ${maxDistance} miles of the user.
     These are all the shopping centers you know about.
     You do not know about any other shopping centers.
     If the user asks about a shopping center you do not know about, you should say so.
     Do not make up information about shopping centers you do not know about.
-    Do not even mention shopping centers you do not know about.
-    
-    ${md}`;
+    Do not even mention shopping centers you do not know about.`;
+
+  return `${prefix}\n\n${centers.map(shoppingCenterToMarkdown).join("\n\n")}`;
 }
 
-function _calculateDistance({
-  center,
-  user,
-}: {
-  center: { latitude?: string; longitude?: string };
-  user: { latitude?: string; longitude?: string };
-}): number {
-  // Convert string coordinates to numbers
-  const centerAt = {
-    latitude: Number.parseFloat(center.latitude ?? "NA"),
-    longitude: Number.parseFloat(center.longitude ?? "NA"),
-  };
-  const userAt = {
-    latitude: Number.parseFloat(user.latitude ?? "NA"),
-    longitude: Number.parseFloat(user.longitude ?? "NA"),
-  };
-
-  // If any coordinates are invalid, return a large distance
-  if (
-    Number.isNaN(centerAt.latitude) ||
-    Number.isNaN(centerAt.longitude) ||
-    Number.isNaN(userAt.latitude) ||
-    Number.isNaN(userAt.longitude)
-  )
-    return Number.MAX_SAFE_INTEGER;
-
-  // Convert latitude and longitude to radians
-  const centerAtRad = {
-    latitude: (centerAt.latitude * Math.PI) / 180,
-    longitude: (centerAt.longitude * Math.PI) / 180,
-  };
-  const userAtRad = {
-    latitude: (userAt.latitude * Math.PI) / 180,
-    longitude: (userAt.longitude * Math.PI) / 180,
-  };
-
-  // Haversine formula
-  const dLat = userAtRad.latitude - centerAtRad.latitude;
-  const dLon = userAtRad.longitude - centerAtRad.longitude;
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(centerAtRad.latitude) *
-      Math.cos(userAtRad.latitude) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-  // Earth's radius in miles
-  const R = 3959;
-
-  // Calculate distance
-  return R * c;
+function shoppingCenterToMarkdown(
+  center: ShoppingCenterGetPayload<{ include: { spaces: true } }>,
+): string {
+  return `<shopping-center>
+  Shopping center name: ${center.name}
+  Address: ${center.address}, ${center.city}, ${center.state}, ${center.country}
+  Description: ${center.description}
+  ${center.imageURLs.map((image) => `Image: ${image}`).join("\n")}
+  Spaces: ${center.spaces.map(shoppingCenterSpacesToMarkdown).join("\n")}
+</shopping-center>`;
 }
 
-/**
- * {
- *   "id":"Nv2i6Na7LGdM4QLx",
- *   "messages":[
- *     {
- *       "parts":[{"text":"What are the available retail spaces?"}],
- *       "role":
- *       "user","id":"RNf0kp5K0xhgmH3O"
- *     },
- *     {
- *       id: '01K5CBJ0GYKYQKMQ37BW00A7YF',
- *       metadata: undefined,
- *       role: 'assistant',
- *       parts: [
- *         { type: 'step-start' },
- *         {
- *           type: 'reasoning',
- *           text: "I can help you find the perfect retail space for your business needs.",
- *           state: 'done',
- *         },
- *         {
- *           type: 'tool-getLocation',
- *           toolCallId: 'toolu_01Sh2rNyVvzicuwEaPRUTpTN',
- *           state: 'output-available',
- *           input: {},
- *           output: { latitude: null, longitude: null },
- *           rawInput: undefined,
- *           errorText: undefined,
- *           providerExecuted: undefined,
- *           preliminary: undefined
- *         },
- *         { type: 'step-start' },
- *         {
- *           type: 'text',
- *           text: 'The location of the current user is 37.774929, -122.419416.',
- *           providerMetadata: undefined,
- *           state: 'done',
- *         },
- *       ],
- *   ],
- *   "trigger":"submit-message"
- * }
- */
+function shoppingCenterSpacesToMarkdown(space: ShoppingCenterSpace): string {
+  return `<space>
+  Space name: ${space.name}
+  Description: ${space.details}
+  Cost: ${space.cost}
+  Foot traffic: ${space.footTraffic}
+  Size: ${space.size} sqft
+  Available: ${space.available}
+  ${space.imageURLs.map((image) => `Image: ${image}`).join("\n")}
+</space>`;
+}
