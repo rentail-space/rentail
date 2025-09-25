@@ -12,9 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      ANTHROPIC_API_KEY: "***REMOVED***"
       DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
       DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
       REDIS_URL: "redis://localhost:6379"
+      RESEND_API_KEY: "re_1234567890"
+      SESSION_SECRET: "***REMOVED***"
 
     steps:
       - name: Checkout Repository
@@ -95,11 +98,6 @@ jobs:
 
       - name: Run Tests
         run: pnpm vitest run --reporter verbose
-        env:
-          ANTHROPIC_API_KEY: "***REMOVED***"
-          NODE_ENV: "test"
-          SESSION_SECRET: "***REMOVED***"
-          RESEND_API_KEY: "re_1234567890"
 
       - name: Upload Playwright Test Results
         uses: actions/upload-artifact@v4
