@@ -133,7 +133,6 @@ jobs:
       - name: Deploy Prisma schema
         run: |
           doppler run --config prd -- pnpm dlx prisma db push
-          doppler run --config prd -- pnpm dlx prisma db seed
           doppler run --config prd -- pnpm dlx prisma migrate deploy
 
       - name: Deploy to Vercel
