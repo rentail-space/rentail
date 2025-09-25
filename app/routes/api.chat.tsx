@@ -15,7 +15,7 @@ import { ulid } from "ulid";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
-import { getChatFromSession } from "~/sessions.server";
+import { commit, getChatFromSession } from "~/sessions.server";
 import general from "../lib/general.md?raw";
 import type { Route } from "./+types/api.chat";
 import {
@@ -30,7 +30,7 @@ import {
 invariant(general, "General prompt is required");
 
 export async function action({ request }: Route.ActionArgs) {
-  const { chat } = await getChatFromSession(request);
+  const { chat, session } = await getChatFromSession(request);
   const { userMessage } = (await request.json()) as {
     userMessage: ClientMessage;
   };
@@ -121,6 +121,7 @@ export async function action({ request }: Route.ActionArgs) {
 
     originalMessages,
     sendReasoning: true,
+    headers: { "Set-Cookie": await commit(session) },
   });
 }
 

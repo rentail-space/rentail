@@ -18,10 +18,10 @@ datasource db {
 
 model Chat {
   activeStreamId String?   @map("active_stream_id")
-  createdAt      DateTime  @map("created_at")       @default(now())
+  createdAt      DateTime  @map("created_at")       @default(now()) @db.Timestamp(3)
   id             String    @map("id")               @id @default(cuid(2))
   messages       Message[]
-  updatedAt      DateTime  @map("updated_at")       @updatedAt
+  updatedAt      DateTime  @map("updated_at")       @updatedAt @db.Timestamp(3)
   user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId         String    @map("user_id")
 }
@@ -30,7 +30,7 @@ model Message {
   chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    String   @map("chat_id")
   content   String?  @map("content")
-  createdAt DateTime @map("created_at") @default(now())
+  createdAt DateTime @map("created_at") @default(now()) @db.Timestamp(3)
   id        Int      @map("id")         @default(autoincrement()) @id
   isAborted Boolean  @map("is_aborted") @default(false)
   messageId String   @map("message_id") @unique @default(ulid()) // AI SDK message ID
@@ -40,15 +40,15 @@ model Message {
 
 model User {
   chats     Chat[]
-  createdAt DateTime @map("created_at") @default(now())
+  createdAt DateTime @map("created_at") @default(now()) @db.Timestamp(3)
   id        String   @map("id")         @id @default(cuid(2))
   ip        String?  @map("ip")
   location  Json?    @map("location")
-  updatedAt DateTime @map("updated_at") @updatedAt
+  updatedAt DateTime @map("updated_at") @updatedAt @db.Timestamp(3)
 }
 
 model Waitlist {
-  createdAt DateTime @map("created_at") @default(now())
+  createdAt DateTime @map("created_at") @default(now()) @db.Timestamp(3)
   email     String   @map("email")      @id
 }
 
