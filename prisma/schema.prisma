@@ -24,6 +24,8 @@ model Chat {
   updatedAt      DateTime  @map("updated_at")       @updatedAt @db.Timestamp(3)
   user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId         String    @map("user_id")
+
+  @@map("chats")
 }
 
 model Message {
@@ -36,6 +38,8 @@ model Message {
   messageId String   @map("message_id") @unique @default(ulid()) // AI SDK message ID
   reasoning String?  @map("reasoning")
   role      Role     @map("role")
+
+  @@map("messages")
 }
 
 model User {
@@ -45,11 +49,50 @@ model User {
   ip        String?  @map("ip")
   location  Json?    @map("location")
   updatedAt DateTime @map("updated_at") @updatedAt @db.Timestamp(3)
+
+  @@map("users")
 }
 
 model Waitlist {
   createdAt DateTime @map("created_at") @default(now()) @db.Timestamp(3)
-  email     String   @map("email")      @id
+  email     String   @map("email")      @id @default(cuid(2))
+
+  @@map("waitlist")
+}
+
+model ShoppingCenter {
+  address     String                @map("address")
+  city        String                @map("city")
+  country     String                @map("country")
+  createdAt   DateTime              @map("created_at")  @default(now()) @db.Timestamp(3)
+  description String                @map("description") @db.Text
+  id          String                @map("id")          @id @default(cuid(2))
+  imageURLs   String[]              @map("image_urls")
+  latitude    String                @map("latitude")
+  longitude   String                @map("longitude")
+  name        String                @map("name")
+  spaces      ShoppingCenterSpace[]
+  state       String                @map("state")
+  updatedAt   DateTime              @map("updated_at")  @updatedAt @db.Timestamp(3)
+
+  @@map("shopping_centers")
+}
+
+model ShoppingCenterSpace {
+  available   String         @map("available")
+  center      ShoppingCenter @relation(fields: [centerId], references: [id], onDelete: Cascade)
+  centerId    String         @map("shopping_center_id")
+  cost        Int            @map("cost")
+  createdAt   DateTime       @map("created_at")         @default(now()) @db.Timestamp(3)
+  details     String         @map("details")
+  footTraffic Int            @map("foot_traffic")
+  id          String         @map("id")                 @id @default(cuid(2))
+  imageURLs   String[]       @map("image_urls")
+  name        String         @map("name")
+  size        Int            @map("size")
+  updatedAt   DateTime       @map("updated_at")         @updatedAt @db.Timestamp(3)
+
+  @@map("shopping_center_spaces")
 }
 
 enum Role {

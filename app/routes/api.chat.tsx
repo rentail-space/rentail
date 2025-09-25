@@ -1,5 +1,3 @@
-import { readdir, readFile } from "node:fs/promises";
-import path from "node:path";
 import {
   type AnthropicProviderOptions,
   createAnthropic,
@@ -179,48 +177,47 @@ async function updateChat({
     });
 }
 
-async function loadSpaces(user: User): Promise<string> {
-  const filenames = await readdir(
-    path.join(process.cwd(), "app/data/centers"),
-    "utf8",
-  );
-  const centers = await Promise.all(
-    filenames.map(
-      async (filename) =>
-        await readFile(
-          path.join(process.cwd(), "app/data/centers", filename),
-          "utf8",
-        ),
-    ),
-  );
-
-  const nearBy = centers.filter((center) => {
-    const distance = calculateDistance({
-      center: {
-        latitude: center.match(/Latitude:\s+(-?\d+\.\d+)/)?.[1],
-        longitude: center.match(/Longitude:\s+(-?\d+\.\d+)/)?.[1],
-      },
-      user: {
-        latitude: user.location?.latitude,
-        longitude: user.location?.longitude,
-      },
-    });
-    return distance < 20;
+async function loadSpaces(_user: User): Promise<string> {
+  const centers = await prisma.shoppingCenter.findMany({
+    include: {
+      spaces: true,
+    },
   });
+  const md = centers
+    .map(
+      (center) => `<shopping-center>
+  Shopping center name: ${center.name}
+  Address: ${center.address}, ${center.city}, ${center.state}, ${center.country}
+  Description: ${center.description}
+  ${center.imageURLs.map((image) => `Image: ${image}`).join("\n")}
+  Spaces: ${center.spaces
+    .map(
+      (space) => `<space>
+    Space name: ${space.name}
+    Description: ${space.details}
+    Cost: ${space.cost}
+    Foot traffic: ${space.footTraffic}
+    Size: ${space.size} sqft
+    Available: ${space.available}
+    ${space.imageURLs.map((image) => `Image: ${image}`).join("\n")}
+  </space>`,
+    )
+    .join("\n")}
+</shopping-center>`,
+    )
+    .join("\n\n");
 
-  return [
-    `Here are the shopping centers in the area which are within 20 miles of the user.
+  return `Here are the shopping centers in the area which are within 20 miles of the user.
     These are all the shopping centers you know about.
     You do not know about any other shopping centers.
     If the user asks about a shopping center you do not know about, you should say so.
     Do not make up information about shopping centers you do not know about.
     Do not even mention shopping centers you do not know about.
-    `,
-    ...nearBy,
-  ].join("\n\n");
+    
+    ${md}`;
 }
 
-function calculateDistance({
+function _calculateDistance({
   center,
   user,
 }: {

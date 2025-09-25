@@ -1,0 +1,46 @@
+{
+  "address": "189 The Grove Dr",
+  "city": "Los Angeles",
+  "country": "US",
+  "description": "The Grove LA is an open-air environment pulsing with style & energy that offers some of Los Angeles' best boutiques, shops, restaurants, & entertainment. This outdoor shopping center features a unique trolley system, dancing fountains, and a mix of upscale retailers and dining options, making it a popular destination for both locals and tourists.",
+  "id": "ll2g4f0gqn3qvbhp0pmfatyk",
+  "imageURLs": [
+    "https://thegrovela.com/wp-content/uploads/2025/04/148-The-Grove-Caruso_No-Cheesecake-Logo_1400x500.png"
+  ],
+  "latitude": "34.071972",
+  "longitude": "-118.357674",
+  "name": "The Grove",
+  "spaces": [
+    {
+      "available": "week",
+      "cost": 3400,
+      "details": "This pop-up is just next to Barnes & Noble, available for one month lease of longer, and at 350 sqft is enough for any small merchant that wants to reach ~4,000 visitors every day.",
+      "footTraffic": 4000,
+      "id": "jzfi2vjakvteoqmrxzcucivq",
+      "imageURLs": [],
+      "name": "Corner Pop-up",
+      "size": 350
+    },
+    {
+      "available": "week",
+      "cost": 1200,
+      "details": "Come show case at our Pop-up Incubator. We have two spaces for you to display your merchandize and connect with up to ~4,000 daily visitors. Our pop-up incubator is designed for emerging merchants that want very short-term lease: weeks or months. And we've got two spots available right now.",
+      "footTraffic": 4000,
+      "id": "k88u8gtjt1wopy7wxx1d88qd",
+      "imageURLs": [],
+      "name": "Pop-up Incubator",
+      "size": 350
+    },
+    {
+      "available": "weekends",
+      "cost": 800,
+      "details": "A space for you available every weekend right by Wetzel's Pretzels. It's large enough for any small merchant and gets you enough foot traffic to make a killing on your sales. And we're only asking for $800/week.",
+      "footTraffic": 2500,
+      "id": "pkusyjmal8bqratee4p0si7w",
+      "imageURLs": [],
+      "name": "Premium Mall Location",
+      "size": 8
+    }
+  ],
+  "state": "CA"
+}
