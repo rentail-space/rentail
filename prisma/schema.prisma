@@ -18,13 +18,12 @@ datasource db {
 }
 
 model Chat {
-  activeStreamId String?         @map("active_stream_id")
-  createdAt      DateTime        @map("created_at")       @default(now())
-  id             String          @map("id")               @id @default(cuid(2))
-  updatedAt      DateTime        @map("updated_at")       @updatedAt
-  userId         String          @map("user_id")
-  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  thread         mastra_threads? @relation(fields: [id], references: [id], onDelete: Cascade) @ignore
+  activeStreamId String?  @map("active_stream_id")
+  createdAt      DateTime @map("created_at")       @default(now())
+  id             String   @map("id")               @id @default(cuid(2))
+  updatedAt      DateTime @map("updated_at")       @updatedAt
+  userId         String   @map("user_id")
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("chats")
 }
@@ -175,7 +174,6 @@ model mastra_threads {
   title      String
   updatedAt  DateTime           @db.Timestamp(6)
   updatedAtZ DateTime?          @default(now()) @db.Timestamptz(6)
-  chat       Chat?
 
   @@index([resourceId, createdAt(sort: Desc)], map: "public_mastra_threads_resourceid_createdat_idx")
   @@ignore
