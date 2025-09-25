@@ -68,18 +68,15 @@ jobs:
 
       - name: Setup PostgreSQL (for testing)
         id: postgres
-        uses: ikalnytskyi/action-setup-postgres@v7
+        uses: nyurik/action-setup-postgis@v2.2
         with:
-          postgres-version: "16"
-
-      - run: psql -c "CREATE EXTENSION postgis;"
-        env:
-          PGSERVICE: ${{ steps.postgres.outputs.service-name }}
+          postgres-version: "17"
 
       - name: Setup database schema (for testing)
         run: |
-          pnpm dlx prisma db push
           pnpm dlx prisma generate 
+          pnpm dlx prisma db push
+          pnpm dlx prisma db seed
         env:
           NODE_ENV: "test"
 
