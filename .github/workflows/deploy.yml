@@ -128,9 +128,6 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
 
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v3
