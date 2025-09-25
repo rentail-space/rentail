@@ -67,9 +67,14 @@ jobs:
       - run: biome lint
 
       - name: Setup PostgreSQL (for testing)
+        id: postgres
         uses: ikalnytskyi/action-setup-postgres@v7
         with:
           postgres-version: "16"
+
+      - run: psql -c "CREATE EXTENSION postgis;"
+        env:
+          PGSERVICE: ${{ steps.postgres.outputs.service-name }}
 
       - name: Setup database schema (for testing)
         run: |

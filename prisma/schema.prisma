@@ -1,19 +1,20 @@
 generator client {
-  provider      = "prisma-client"
-  output        = "generated"
-
-  engineType             = "client"
-  runtime                = "nodejs"
-  moduleFormat           = "esm"
-  generatedFileExtension = "ts"
-  importFileExtension    = "ts"
+  provider                = "prisma-client"
+  output                  = "generated"
+  engineType              = "client"
+  runtime                 = "nodejs"
+  moduleFormat            = "esm"
+  generatedFileExtension  = "ts"
+  importFileExtension     = "ts"
+  previewFeatures         = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider     = "postgresql"
-  url          = env("DATABASE_URL")
-  directUrl    = env("DIRECT_URL")
-  relationMode = "foreignKeys"
+  provider      = "postgresql"
+  url           = env("DATABASE_URL")
+  directUrl     = env("DIRECT_URL")
+  relationMode  = "foreignKeys"
+  extensions    = [postgis]
 }
 
 model Chat {
