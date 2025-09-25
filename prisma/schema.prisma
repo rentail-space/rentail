@@ -18,30 +18,17 @@ datasource db {
 }
 
 model Chat {
-  activeStreamId String?   @map("active_stream_id")
-  createdAt      DateTime  @map("created_at")       @default(now())
-  id             String    @map("id")               @id @default(cuid(2))
-  updatedAt      DateTime  @map("updated_at")       @updatedAt
-  userId         String    @map("user_id")
-  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  messages       Message[]
+  activeStreamId String?         @map("active_stream_id")
+  createdAt      DateTime        @map("created_at")       @default(now())
+  id             String          @map("id")               @id @default(cuid(2))
+  updatedAt      DateTime        @map("updated_at")       @updatedAt
+  userId         String          @map("user_id")
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  thread         mastra_threads? @relation(fields: [id], references: [id], onDelete: Cascade) @ignore
 
   @@map("chats")
 }
 
-model Message {
-  chatId    String   @map("chat_id")
-  content   String?  @map("content")
-  createdAt DateTime @map("created_at") @default(now())
-  id        Int      @map("id")         @id @default(autoincrement())
-  isAborted Boolean  @map("is_aborted") @default(false)
-  messageId String   @map("message_id") @unique @default(ulid())
-  reasoning String?  @map("reasoning")
-  role      Role     @map("role")
-  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
-
-  @@map("messages")
-}
 
 model User {
   createdAt DateTime @map("created_at") @default(now())
@@ -116,74 +103,79 @@ model mastra_evals {
 }
 
 model mastra_messages {
-  id         String     @id
+  id         String          @id
   thread_id  String
   content    String
   role       String
   type       String
-  createdAt  DateTime   @db.Timestamp(6)
+  createdAt  DateTime        @db.Timestamp(6)
   resourceId String?
-  createdAtZ DateTime?  @default(now()) @db.Timestamptz(6)
+  createdAtZ DateTime?       @default(now()) @db.Timestamptz(6)
+  thread     mastra_threads @relation(fields: [thread_id], references: [id], onDelete: Cascade)
 
   @@index([thread_id, createdAt(sort: Desc)], map: "public_mastra_messages_thread_id_createdat_idx")
   @@ignore
 }
 
 model mastra_resources {
-  id            String     @id
-  workingMemory String?
-  metadata      Json?
   createdAt     DateTime   @db.Timestamp(6)
-  updatedAt     DateTime   @db.Timestamp(6)
   createdAtZ    DateTime?  @default(now()) @db.Timestamptz(6)
+  id            String     @id
+  metadata      Json?
+  updatedAt     DateTime   @db.Timestamp(6)
   updatedAtZ    DateTime?  @default(now()) @db.Timestamptz(6)
+  workingMemory String?
+
   @@ignore
 }
 
 model mastra_scorers {
-  id                   String     @id
-  scorerId             String
-  traceId              String?
-  runId                String
-  scorer               Json
-  preprocessStepResult Json?
-  extractStepResult    Json?
-  analyzeStepResult    Json?
-  score                Float
-  reason               String?
-  metadata             Json?
-  preprocessPrompt     String?
-  extractPrompt        String?
-  generateScorePrompt  String?
-  generateReasonPrompt String?
-  analyzePrompt        String?
-  reasonPrompt         String?
-  input                Json
-  output               Json
   additionalContext    Json?
-  runtimeContext       Json?
-  entityType           String?
+  analyzePrompt        String?
+  analyzeStepResult    Json?
+  createdAt            DateTime   @db.Timestamp(6)
+  createdAtZ           DateTime?  @default(now()) @db.Timestamptz(6)
   entity               Json?
   entityId             String?
-  source               String
+  entityType           String?
+  extractPrompt        String?
+  extractStepResult    Json?
+  generateReasonPrompt String?
+  generateScorePrompt  String?
+  id                   String     @id
+  input                Json
+  metadata             Json?
+  output               Json
+  preprocessPrompt     String?
+  preprocessStepResult Json?
+  reason               String?
+  reasonPrompt         String?
   resourceId           String?
+  runId                String
+  runtimeContext       Json?
+  score                Float
+  scorer               Json
+  scorerId             String
+  source               String
   threadId             String?
-  createdAt            DateTime   @db.Timestamp(6)
+  traceId              String?
   updatedAt            DateTime   @db.Timestamp(6)
-  createdAtZ           DateTime?  @default(now()) @db.Timestamptz(6)
   updatedAtZ           DateTime?  @default(now()) @db.Timestamptz(6)
+
   @@ignore
 }
 
 model mastra_threads {
-  id         String     @id
+  createdAt  DateTime           @db.Timestamp(6)
+  createdAtZ DateTime?          @default(now()) @db.Timestamptz(6)
+  id         String             @id
+  messages   mastra_messages[]
+  metadata   String?
   resourceId String
   title      String
-  metadata   String?
-  createdAt  DateTime   @db.Timestamp(6)
-  updatedAt  DateTime   @db.Timestamp(6)
-  createdAtZ DateTime?  @default(now()) @db.Timestamptz(6)
-  updatedAtZ DateTime?  @default(now()) @db.Timestamptz(6)
+  updatedAt  DateTime           @db.Timestamp(6)
+  updatedAtZ DateTime?          @default(now()) @db.Timestamptz(6)
+  chat       Chat?
 
   @@index([resourceId, createdAt(sort: Desc)], map: "public_mastra_threads_resourceid_createdat_idx")
   @@ignore

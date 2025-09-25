@@ -22,11 +22,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 export default function Chat() {
   const [searchParams] = useSearchParams();
-  const {
-    chat,
-    messages: initialMessages,
-    user,
-  } = useLoaderData<typeof loader>();
+  const { chat, messages: initialMessages } = useLoaderData<typeof loader>();
   const { error, messages, sendMessage, status, stop } = useChat<
     UIMessage<{ isAborted?: boolean }, { text: string }, UITools>
   >({
@@ -93,9 +89,6 @@ export default function Chat() {
     <StickToBottom initial="smooth" resize="smooth">
       <div className="flex h-screen flex-col inset-0">
         <Header />
-
-        <div>Chat: {chat.id}</div>
-        <div>User: {user.id}</div>
 
         <StickToBottom.Content>
           <Messages

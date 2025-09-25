@@ -38,8 +38,8 @@ export async function action({ request }: Route.ActionArgs) {
         id: ulid(),
         role: "user",
         createdAt: new Date(),
-        threadId: `conv_${chat.id}`,
-        resourceId: `user_${user.id}`,
+        threadId: chat.id,
+        resourceId: user.id,
         type: "text",
         content: {
           parts: userMessage.userMessage.parts.map((part) => ({
@@ -64,8 +64,8 @@ export async function action({ request }: Route.ActionArgs) {
     abortSignal,
     format: "aisdk",
     memory: {
-      resource: `user_${user.id}`,
-      thread: `conv_${chat.id}`,
+      resource: user.id,
+      thread: chat.id,
     },
     savePerStep: true,
     maxSteps: 3,
@@ -128,7 +128,11 @@ export async function action({ request }: Route.ActionArgs) {
     },
 
     onFinish: async ({ messages, isAborted }) => {
-      console.info("[CHAT] Finished", messages, isAborted);
+      console.info(
+        "[CHAT] Finished: messages=%d isAborted=%s",
+        messages.length,
+        isAborted,
+      );
     },
 
     sendReasoning: false,

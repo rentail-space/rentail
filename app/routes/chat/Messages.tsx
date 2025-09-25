@@ -47,8 +47,6 @@ export default function Messages({
   return (
     <div className="flex-1 flex flex-col">
       <div className="mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto p-6 scroll-smooth scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-        <FirstMessage />
-
         {uniqueMessages.map((message, index, messages) =>
           message.metadata?.isAborted ? (
             <AbortedMessage key={message.id} />
@@ -81,27 +79,6 @@ function UserMessage({ message }: { message: UIMessage }) {
           .map((part, index) => (
             <span key={index.toString()}>{part.text}</span>
           ))}
-      </div>
-    </div>
-  );
-}
-
-function FirstMessage() {
-  return (
-    <div className="chat chat-start">
-      <div className="chat-image avatar mr-2 h-8 w-8">
-        <img
-          alt="rental space"
-          height="32px"
-          src="/favicon-96x96.png"
-          width="32px"
-        />
-      </div>
-      <div className="chat-bubble prose prose-base flex flex-row">
-        <p>
-          Hello, I'm <strong>Rentail</strong> — how can I help you find a pop-up
-          retail space for your business?
-        </p>
       </div>
     </div>
   );

@@ -8,8 +8,8 @@ import mastra from "./lib/mastra";
 import prisma from "./lib/prisma";
 
 type SessionData = {
-  user_id?: string;
-  chat_id?: string;
+  userId?: string;
+  chatId?: string;
   location?: Location;
 };
 
@@ -75,7 +75,7 @@ export async function getUserFromSession(request: Request): Promise<{
   user: User;
 }> {
   const session = await getSession(request.headers.get("Cookie"));
-  const userId = session.get("user_id");
+  const userId = session.get("userId");
   if (userId) {
     const user = await prisma.user.findUnique({ where: { id: userId } });
     if (user) return { user, session };
@@ -85,7 +85,7 @@ export async function getUserFromSession(request: Request): Promise<{
   const newUser = await prisma.user.create({
     data: { ip: location?.ip, location: location },
   });
-  session.set("user_id", newUser.id);
+  session.set("userId", newUser.id);
   return { user: newUser, session };
 }
 
@@ -109,13 +109,13 @@ export async function getChatFromSession(request: Request): Promise<{
   const { user, session } = await getUserFromSession(request);
   const memory = await mastra.getAgentById("main").getMemory();
 
-  const chatId = session.get("chat_id");
+  const chatId = session.get("chatId");
   if (chatId) {
     const chat = await prisma.chat.findUnique({
       where: { id: chatId, userId: user.id },
     });
     const messages = (await memory?.rememberMessages({
-      threadId: `conv_${chatId}`,
+      threadId: chatId,
     })) ?? { messagesV2: [] };
     if (chat)
       return { chat, messages: messages?.messagesV2 || [], user, session };
@@ -124,9 +124,14 @@ export async function getChatFromSession(request: Request): Promise<{
   const newChat = await prisma.chat.create({
     data: { user: { connect: { id: user.id } } },
   });
-  session.set("chat_id", newChat.id);
+  session.set("chatId", newChat.id);
+  invariant(memory, "Memory is required");
+  await memory.createThread({
+    resourceId: user.id,
+    threadId: newChat.id,
+  });
   const messages =
-    (await memory?.saveMessages({
+    (await memory.saveMessages({
       messages: [
         {
           content: {
@@ -140,9 +145,9 @@ export async function getChatFromSession(request: Request): Promise<{
           },
           createdAt: new Date(),
           id: ulid(),
-          resourceId: `user_${user.id}`,
+          resourceId: user.id,
           role: "assistant",
-          threadId: `conv_${newChat.id}`,
+          threadId: newChat.id,
         },
       ],
       format: "v2",
