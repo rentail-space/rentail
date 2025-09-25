@@ -22,7 +22,7 @@ const prisma = new PrismaClient({
 });
 
 // NOTE We're using postgis to find nearby shopping centers.
-await prisma.$executeRaw`CREATE EXTENSION postgis;`;
+await prisma.$executeRaw`CREATE EXTENSION IF NOT EXISTS postgis;`;
 await addShoppingCenters();
 
 async function addShoppingCenters() {
