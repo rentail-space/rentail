@@ -110,14 +110,14 @@ export async function getChatFromSession(request: Request): Promise<{
   if (chat) {
     const messages = await getRecentMessages(user, chat);
     return { chat, messages, user, session };
+  } else {
+    const newChat = await prisma.chat.create({
+      data: { user: { connect: { id: user.id } } },
+    });
+    session.set("chatId", newChat.id);
+    const messages = await getRecentMessages(user, newChat);
+    return { chat: newChat, messages, user, session };
   }
-
-  const newChat = await prisma.chat.create({
-    data: { user: { connect: { id: user.id } } },
-  });
-  session.set("chatId", newChat.id);
-  const messages = await getRecentMessages(user, newChat);
-  return { chat: newChat, messages, user, session };
 }
 
 /**

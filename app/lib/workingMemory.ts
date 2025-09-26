@@ -1,7 +1,7 @@
 import { Memory } from "@mastra/memory";
 import { PostgresStore } from "@mastra/pg";
 import { captureException } from "@sentry/react-router";
-import { invariant, isEqual } from "es-toolkit";
+import { isEqual } from "es-toolkit";
 import type { Chat, User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import zod from "zod";
@@ -120,14 +120,18 @@ export async function getRecentMessages(user: User, chat: Chat) {
  * @returns The user's profile.
  */
 async function getWorkingMemory(user: User, chat: Chat): Promise<UserProfile> {
-  await memory.createThread({ resourceId: user.id, threadId: chat.id });
+  await memory.createThread({
+    resourceId: user.id,
+    threadId: chat.id,
+    saveThread: true,
+  });
   const json = await memory.getWorkingMemory({
     resourceId: user.id,
     threadId: chat.id,
   });
+  if (!json) return userProfile.parse({ location: user.location });
 
   try {
-    invariant(json, "Working memory is null");
     return userProfile.parse(JSON.parse(json));
   } catch (error) {
     captureException(error, { data: json });
