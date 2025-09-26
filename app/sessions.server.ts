@@ -1,7 +1,9 @@
 import type { MastraMessageV2 } from "@mastra/core";
+import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
 import type { Chat, User } from "prisma/generated/client";
 import { createCookieSessionStorage, type Session } from "react-router";
+import zod from "zod";
 import env from "./lib/env";
 import prisma from "./lib/prisma";
 import { getRecentMessages } from "./lib/workingMemory";
@@ -19,6 +21,7 @@ type Location = {
   ip: string;
   latitude: string;
   longitude: string;
+  timeZone: string;
 };
 
 type SessionFlashData = {
@@ -26,16 +29,6 @@ type SessionFlashData = {
 };
 
 type SessionType = Session<SessionData, SessionFlashData>;
-
-const DEFAULT_IP = "146.70.195.182";
-const DEFAULT_LOCATION: Location = {
-  city: "Los Angeles",
-  country: "US",
-  ip: DEFAULT_IP,
-  latitude: "34.05361",
-  longitude: "-118.24550",
-  state: "California",
-};
 
 const { getSession, commitSession } = createCookieSessionStorage<
   SessionData,
@@ -142,51 +135,67 @@ async function getLocationFromRequest(request: Request): Promise<{
   const currentLocation = session.get("location") as Location;
   if (currentLocation) return { session, location: currentLocation };
 
-  try {
-    const clientIp = request.headers.get("x-forwarded-for") ?? DEFAULT_IP;
-    const location = await geocode(clientIp);
-    session.set("location", location);
-
-    return { session, location };
-  } catch (error) {
-    console.error("[GEOCODE] Error fetching IP geolocation data:", error);
-    return { session, location: DEFAULT_LOCATION };
-  }
-}
-
-async function geocode(clientIp: string): Promise<Location> {
-  console.info("[GEOCODE] Fetching IP geolocation data for IP %s", clientIp);
-  const url = new URL("https://api.ipgeolocation.io/v2/ipgeo");
-  url.searchParams.set("apiKey", env.IPGEOLOCATION_API_KEY);
-  url.searchParams.set("ip", clientIp);
-  url.searchParams.set("fields", "time_zone,location");
-  const response = await fetch(url, {
-    headers: { "Content-Type": "application/json" },
-  });
-  invariant(response.ok, "Failed to fetch IP geolocation data");
-  const data = (await response.json()) as IPData;
-  return {
+  const clientIp = request.headers.get("x-forwarded-for") ?? "146.70.195.182";
+  const data = await geocode(clientIp);
+  const location: Location = {
     city: data.location.city,
-    country: data.location.country_code2,
+    country: data.location.country_name,
     ip: clientIp,
     latitude: data.location.latitude,
     longitude: data.location.longitude,
     state: data.location.state_prov,
+    timeZone: data.time_zone.name,
   };
+
+  session.set("location", location);
+  return { session, location };
+}
+
+async function geocode(
+  clientIp: string,
+): Promise<zod.infer<typeof ipDataSchema>> {
+  console.info("[GEOCODE] Geocoding IP %s", clientIp);
+  try {
+    const url = new URL("https://api.ipgeolocation.io/v2/timezone");
+    url.searchParams.set("apiKey", env.IPGEOLOCATION_API_KEY);
+    url.searchParams.set("ip", clientIp);
+    url.searchParams.set("fields", "time_zone,location");
+    const response = await fetch(url, {
+      headers: { "Content-Type": "application/json" },
+    });
+    invariant(response.ok, "Failed to geocode IP");
+    return ipDataSchema.parse(await response.json());
+  } catch (error) {
+    captureException(error, { data: { clientIp } });
+    return ipDataSchema.parse(undefined);
+  }
 }
 
 // See https://ipgeolocation.io/ip-location-api.html#documentation-overview
-type IPData = {
-  location: {
-    country_code2: string; // eg "US"
-    country_name: string; // eg "United States"
-    state_prov: string; // eg "California"
-    state_code: string; // eg "US-CA"
-    city: string; // eg "Mountain View"
-    accuracy_radius: string; // eg "5"
-    confidence: string; // eg "High"
-    zipcode: string; // eg "94043-1351"
-    latitude: string; // eg "37.42240"
-    longitude: string; // eg "-122.08421"
-  };
-};
+const ipDataSchema = zod
+  .object({
+    location: zod.object({
+      country_code2: zod.string(), // eg "US"
+      country_name: zod.string(), // eg "United States"
+      state_prov: zod.string(), // eg "California"
+      city: zod.string(), // eg "Mountain View"
+      zipcode: zod.string(), // eg "94043-1351"
+      latitude: zod.string(), // eg "37.42240"
+      longitude: zod.string(), // eg "-122.08421"
+    }),
+    time_zone: zod.object({
+      name: zod.string(), // eg "America/Los_Angeles"
+    }),
+  })
+  .catch({
+    location: {
+      country_code2: "US",
+      country_name: "United States",
+      state_prov: "California",
+      city: "Mountain View",
+      zipcode: "94043-1351",
+      latitude: "37.42240",
+      longitude: "-122.08421",
+    },
+    time_zone: { name: "America/Los_Angeles" },
+  });
