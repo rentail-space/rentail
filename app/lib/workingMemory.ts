@@ -1,7 +1,7 @@
 import { Memory } from "@mastra/memory";
 import { PostgresStore } from "@mastra/pg";
 import { captureException } from "@sentry/react-router";
-import { isEqual } from "es-toolkit";
+import { invariant, isEqual } from "es-toolkit";
 import type { Chat, User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import zod from "zod";
@@ -140,7 +140,8 @@ async function getWorkingMemory(user: User, chat: Chat): Promise<UserProfile> {
   });
 
   try {
-    return userProfile.parse(JSON.parse(json ?? ""));
+    invariant(json, "Working memory is null");
+    return userProfile.parse(JSON.parse(json));
   } catch (error) {
     captureException(error, { data: json });
     return {
