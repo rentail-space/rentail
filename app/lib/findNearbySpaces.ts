@@ -22,6 +22,9 @@ export default async function findNearbySpaces({
   user: User;
 }): Promise<string> {
   const location = await locationFromWorkingMemory(user, chat);
+  if (!location || !location.longitude || !location.latitude)
+    return "I don't know where you are, so I can't find any shopping centers near you.";
+
   const maxDistance = distance * 1609.344; // 20 miles in meters
   const nearBy = await prisma.$queryRaw<
     { id: string; longitude: number; latitude: number }[]

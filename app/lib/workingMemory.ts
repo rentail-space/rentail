@@ -150,8 +150,8 @@ export async function updateWorkingMemory(
   chat: Chat,
   update?: (current: UserProfile) => Promise<UserProfile> | UserProfile,
 ): Promise<UserProfile> {
-  const currentValue = await getWorkingMemory(user, chat);
   try {
+    const currentValue = await getWorkingMemory(user, chat);
     const validateValue = userProfile.parse(
       update ? await update(currentValue) : currentValue,
     );
@@ -164,6 +164,6 @@ export async function updateWorkingMemory(
     return validateValue;
   } catch (error) {
     captureException(error);
-    return currentValue;
+    return userProfile.parse({ location: user.location });
   }
 }
