@@ -108,9 +108,11 @@ export async function getChatFromSession(request: Request): Promise<{
   const { user, session } = await getUserFromSession(request);
 
   const chatId = session.get("chatId");
-  const chat = await prisma.chat.findUnique({
-    where: { id: chatId, userId: user.id },
-  });
+  const chat = chatId
+    ? await prisma.chat.findUnique({
+        where: { id: chatId, userId: user.id },
+      })
+    : null;
   if (chat) {
     const messages = await getRecentMessages(user, chat);
     return { chat, messages, user, session };
