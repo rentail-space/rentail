@@ -120,6 +120,11 @@ export async function getRecentMessages(user: User, chat: Chat) {
  * @returns The user's profile.
  */
 async function getWorkingMemory(user: User, chat: Chat): Promise<UserProfile> {
+  const { success, data } = userProfile.safeParse({ location: user.location });
+  const location = success
+    ? data.location
+    : userProfile.parse(undefined).location;
+
   await memory.createThread({
     resourceId: user.id,
     threadId: chat.id,
@@ -129,13 +134,13 @@ async function getWorkingMemory(user: User, chat: Chat): Promise<UserProfile> {
     resourceId: user.id,
     threadId: chat.id,
   });
-  if (!json) return userProfile.parse({ location: user.location });
+  if (!json) return userProfile.parse({ location });
 
   try {
     return userProfile.parse(JSON.parse(json));
   } catch (error) {
     captureException(error, { data: json });
-    return userProfile.parse({ location: user.location });
+    return userProfile.parse({ location });
   }
 }
 

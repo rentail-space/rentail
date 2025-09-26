@@ -1,6 +1,7 @@
 import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
+import Redis from "ioredis";
 import type { Chat, User } from "prisma/generated/client";
 import { createCookieSessionStorage, type Session } from "react-router";
 import zod from "zod";
@@ -11,24 +12,11 @@ import { getRecentMessages } from "./lib/workingMemory";
 type SessionData = {
   userId?: string;
   chatId?: string;
-  location?: Location;
-};
-
-type Location = {
-  city: string;
-  country: string;
-  state: string;
-  ip: string;
-  latitude: string;
-  longitude: string;
-  timeZone: string;
 };
 
 type SessionFlashData = {
   error: string;
 };
-
-type SessionType = Session<SessionData, SessionFlashData>;
 
 const { getSession, commitSession } = createCookieSessionStorage<
   SessionData,
@@ -46,12 +34,28 @@ const { getSession, commitSession } = createCookieSessionStorage<
 });
 
 /**
+ * We use Redis to cache the location information for 30 days so we don't have
+ * to geocode the IP address every time.
+ */
+const cachedLocation = zod.object({
+  city: zod.string(),
+  country: zod.string(),
+  state: zod.string(),
+  ip: zod.string(),
+  latitude: zod.string(),
+  longitude: zod.string(),
+  timeZone: zod.string(),
+});
+
+const redis = new Redis(env.REDIS_URL);
+
+/**
  * Use this instead of `commitSession` to avoid hardcoding the expiration date.
  *
  * @example
  * { headers: { "Set-Cookie": await commit(session) } }
  */
-export async function commit(session: SessionType) {
+export async function commit(session: Session<SessionData, SessionFlashData>) {
   return await commitSession(session, {
     expires: new Date(Date.now() + 60 * 60 * 24 * 365),
   });
@@ -64,7 +68,7 @@ export async function commit(session: SessionType) {
  * @returns The user and the updated session
  */
 export async function getUserFromSession(request: Request): Promise<{
-  session: SessionType;
+  session: Session<SessionData, SessionFlashData>;
   user: User;
 }> {
   const session = await getSession(request.headers.get("Cookie"));
@@ -74,7 +78,7 @@ export async function getUserFromSession(request: Request): Promise<{
     if (user) return { user, session };
   }
 
-  const { location } = await getLocationFromRequest(request);
+  const location = await getLocationFromRequest(request);
   const newUser = await prisma.user.create({
     data: { ip: location.ip, location: location },
   });
@@ -96,7 +100,7 @@ export async function getUserFromSession(request: Request): Promise<{
 export async function getChatFromSession(request: Request): Promise<{
   chat: Chat;
   messages: MastraMessageV2[];
-  session: SessionType;
+  session: Session<SessionData, SessionFlashData>;
   user: User;
 }> {
   const { user, session } = await getUserFromSession(request);
@@ -127,28 +131,27 @@ export async function getChatFromSession(request: Request): Promise<{
  * @param session - The session object
  * @returns The location and the updated session
  */
-async function getLocationFromRequest(request: Request): Promise<{
-  location: Location;
-  session: SessionType;
-}> {
-  const session = await getSession(request.headers.get("Cookie"));
-  const currentLocation = session.get("location") as Location;
-  if (currentLocation) return { session, location: currentLocation };
-
+async function getLocationFromRequest(
+  request: Request,
+): Promise<zod.infer<typeof cachedLocation>> {
   const clientIp = request.headers.get("x-forwarded-for") ?? "146.70.195.182";
-  const data = await geocode(clientIp);
-  const location: Location = {
-    city: data.location.city,
-    country: data.location.country_name,
-    ip: clientIp,
-    latitude: data.location.latitude,
-    longitude: data.location.longitude,
-    state: data.location.state_prov,
-    timeZone: data.time_zone.name,
-  };
 
-  session.set("location", location);
-  return { session, location };
+  const key = `location:${clientIp}`;
+  const { success, data } = cachedLocation.safeParse(await redis.get(key));
+  if (success) return data;
+
+  const geocoded = await geocode(clientIp);
+  const location = cachedLocation.parse({
+    city: geocoded.location.city,
+    country: geocoded.location.country_name,
+    ip: clientIp,
+    latitude: geocoded.location.latitude,
+    longitude: geocoded.location.longitude,
+    state: geocoded.location.state_prov,
+    timeZone: geocoded.time_zone.name,
+  });
+  await redis.set(key, JSON.stringify(location), "EX", 60 * 60 * 24 * 30); // 30 days
+  return location;
 }
 
 async function geocode(
@@ -175,7 +178,6 @@ async function geocode(
 const ipDataSchema = zod
   .object({
     location: zod.object({
-      country_code2: zod.string(), // eg "US"
       country_name: zod.string(), // eg "United States"
       state_prov: zod.string(), // eg "California"
       city: zod.string(), // eg "Mountain View"
@@ -189,7 +191,6 @@ const ipDataSchema = zod
   })
   .catch({
     location: {
-      country_code2: "US",
       country_name: "United States",
       state_prov: "California",
       city: "Mountain View",
