@@ -4,6 +4,8 @@ import { ConsoleLogger } from "@mastra/core/logger";
 import { Mastra } from "@mastra/core/mastra";
 import { Memory } from "@mastra/memory";
 import { PostgresStore } from "@mastra/pg";
+import type { Optional } from "@prisma/client/runtime/client";
+import type { Chat, User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import zod from "zod";
 import env from "~/lib/env";
@@ -34,6 +36,8 @@ const userProfile = zod.object({
   }),
 });
 
+type UserProfile = zod.infer<typeof userProfile>;
+
 const memory = new Memory({
   options: {
     lastMessages: 100,
@@ -48,6 +52,53 @@ const memory = new Memory({
   },
   storage: store,
 });
+
+const fallback = {
+  location: { latitude: "0", longitude: "0" },
+  name: "Unknown",
+  timezone: "Unknown",
+  preferences: {
+    communicationStyle: "Unknown",
+    projectGoal: "Unknown",
+    keyDeadlines: [],
+  },
+  sessionState: {
+    lastTaskDiscussed: "Unknown",
+    openQuestions: [],
+  },
+};
+
+export async function getWorkingMemory({
+  chat,
+  user,
+}: {
+  chat: Chat;
+  user: User;
+}): Promise<UserProfile> {
+  const json = await memory.getWorkingMemory({
+    resourceId: user.id,
+    threadId: chat.id,
+  });
+  const parsed = userProfile.safeParse(JSON.parse(json ?? "{}"));
+  if (!parsed.success)
+    console.error("[CHAT] Failed to parse working memory", parsed.error);
+  return parsed.data ?? fallback;
+}
+
+export async function updateWorkingMemory(
+  { chat, user }: { chat: Chat; user: User },
+  update: (
+    current: Optional<UserProfile>,
+  ) => Promise<Optional<UserProfile>> | Optional<UserProfile>,
+): Promise<void> {
+  const current = await getWorkingMemory({ chat, user });
+  const updated = await update(current);
+  await memory.updateWorkingMemory({
+    resourceId: user.id,
+    threadId: chat.id,
+    workingMemory: JSON.stringify(updated),
+  });
+}
 
 const agent = new Agent({
   id: "main",
@@ -71,8 +122,10 @@ const agent = new Agent({
   name: "Main Agent",
 });
 
-export default new Mastra({
+const mastra = new Mastra({
   agents: { agent },
   idGenerator: ulid,
   logger: new ConsoleLogger(),
 });
+
+export default mastra;

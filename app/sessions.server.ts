@@ -175,6 +175,7 @@ async function getLocationFromRequest(request: Request): Promise<{
     const clientIp = request.headers.get("x-forwarded-for");
     const location = await geocode(clientIp);
     session.set("location", location);
+
     return { session, location };
   } catch (error) {
     console.error("[GEOCODE] Error fetching IP geolocation data:", error);
