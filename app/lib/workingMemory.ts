@@ -131,17 +131,7 @@ async function getWorkingMemory(user: User, chat: Chat): Promise<UserProfile> {
     return userProfile.parse(JSON.parse(json));
   } catch (error) {
     captureException(error, { data: json });
-    return {
-      ...userProfile.parse(undefined),
-      location: {
-        latitude: user.location.latitude,
-        longitude: user.location.longitude,
-        city: user.location.city,
-        state: user.location.state,
-        country: user.location.country,
-        timezone: user.location.timezone,
-      },
-    };
+    return userProfile.parse({ location: user.location });
   }
 }
 
