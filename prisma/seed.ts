@@ -39,7 +39,7 @@ async function addShoppingCenters() {
 
   const dirname = join(import.meta.dirname, "seed");
   for (const file of readdirSync(dirname)) {
-    console.info(`Seeding ${file}`);
+    console.info(`[SEED] Seeding ${file}`);
     const data = await readFile(join(dirname, file), "utf-8");
     const json = shoppingCenter.parse(JSON.parse(data));
     const fields = {

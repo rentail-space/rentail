@@ -1,26 +1,27 @@
 import type { Chat, ShoppingCenterSpace, User } from "prisma/generated/client";
 import type { ShoppingCenterGetPayload } from "prisma/generated/models";
-import { getWorkingMemory, updateWorkingMemory } from "~/lib/mastra";
+import { updateWorkingMemory } from "~/lib/mastra";
 import prisma from "~/lib/prisma";
 
 /**
- * Find the shopping centers within a given distance from the user.
+ * Find the shopping centers within a given distance from the user. Gets the
+ * current location from working memory, updates it, if necessary.
  *
- * @param user The user to find the shopping centers for.
  * @param chat The chat to find the shopping centers for.
  * @param distance The distance in miles to find the shopping centers within.
- * @returns The shopping centers within the given distance.
+ * @param user The user to find the shopping centers for.
+ * @returns Markup with shopping centers and spaces based on distance
  */
-export default async function findNearBySpaces({
+export default async function findNearbySpaces({
+  chat,
   distance,
   user,
-  chat,
 }: {
+  chat: Chat;
   distance: number;
   user: User;
-  chat: Chat;
 }): Promise<string> {
-  const location = await locationFromWorkingMemory({ user, chat });
+  const location = await locationFromWorkingMemory(user, chat);
   const maxDistance = distance * 1609.344; // 20 miles in meters
   const nearBy = await prisma.$queryRaw<
     { id: string; longitude: number; latitude: number }[]
@@ -36,18 +37,18 @@ export default async function findNearBySpaces({
   return shoppingCentersToMarkdown(centers, maxDistance);
 }
 
-async function locationFromWorkingMemory({
-  user,
-  chat,
-}: {
-  user: User;
-  chat: Chat;
-}) {
-  await updateWorkingMemory({ user, chat }, (current) => ({
-    ...current,
-    location: user.location as { longitude: string; latitude: string },
-  }));
-  const workingMemory = await getWorkingMemory({ user, chat });
+async function locationFromWorkingMemory(
+  user: User,
+  chat: Chat,
+): Promise<{ longitude: string; latitude: string }> {
+  const workingMemory = await updateWorkingMemory(user, chat, (current) => {
+    return current.location?.latitude && current.location?.longitude
+      ? current
+      : {
+          ...current,
+          location: user.location as { latitude: string; longitude: string },
+        };
+  });
   return workingMemory.location;
 }
 

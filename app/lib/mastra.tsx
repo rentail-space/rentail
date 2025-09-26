@@ -4,7 +4,7 @@ import { ConsoleLogger } from "@mastra/core/logger";
 import { Mastra } from "@mastra/core/mastra";
 import { Memory } from "@mastra/memory";
 import { PostgresStore } from "@mastra/pg";
-import type { Optional } from "@prisma/client/runtime/client";
+import { captureException } from "@sentry/react-router";
 import type { Chat, User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import zod from "zod";
@@ -54,27 +54,32 @@ const memory = new Memory({
 });
 
 const fallback = {
-  location: { latitude: "0", longitude: "0" },
+  location: { latitude: "", longitude: "" },
   name: "Unknown",
-  timezone: "Unknown",
+  timezone: "America/Los_Angeles",
   preferences: {
-    communicationStyle: "Unknown",
-    projectGoal: "Unknown",
+    communicationStyle: "Formal",
+    projectGoal: "I am looking for a pop-up retail space for my business.",
     keyDeadlines: [],
   },
   sessionState: {
-    lastTaskDiscussed: "Unknown",
+    lastTaskDiscussed: "",
     openQuestions: [],
   },
 };
 
-export async function getWorkingMemory({
-  chat,
-  user,
-}: {
-  chat: Chat;
-  user: User;
-}): Promise<UserProfile> {
+/**
+ * Read from working memory and return the user's profile. If no profile is
+ * found, return the fallback profile.
+ *
+ * @param user The user to read from working memory.
+ * @param chat The chat to read from working memory.
+ * @returns The user's profile.
+ */
+export async function getWorkingMemory(
+  user: User,
+  chat: Chat,
+): Promise<UserProfile> {
   const json = await memory.getWorkingMemory({
     resourceId: user.id,
     threadId: chat.id,
@@ -85,19 +90,32 @@ export async function getWorkingMemory({
   return parsed.data ?? fallback;
 }
 
+/**
+ * Update the working memory for a user and chat. The update function is called
+ * with the current working memory and should return the new working memory.
+ *
+ * @param user The user to update working memory for.
+ * @param chat The chat to update working memory for.
+ * @param update The update function to apply to the working memory.
+ */
 export async function updateWorkingMemory(
-  { chat, user }: { chat: Chat; user: User },
-  update: (
-    current: Optional<UserProfile>,
-  ) => Promise<Optional<UserProfile>> | Optional<UserProfile>,
-): Promise<void> {
-  const current = await getWorkingMemory({ chat, user });
-  const updated = await update(current);
-  await memory.updateWorkingMemory({
-    resourceId: user.id,
-    threadId: chat.id,
-    workingMemory: JSON.stringify(updated),
-  });
+  user: User,
+  chat: Chat,
+  update: (current: UserProfile) => Promise<UserProfile> | UserProfile,
+): Promise<UserProfile> {
+  const current = await getWorkingMemory(user, chat);
+  try {
+    const updated = userProfile.parse(update(current));
+    await memory.updateWorkingMemory({
+      resourceId: user.id,
+      threadId: chat.id,
+      workingMemory: JSON.stringify(updated),
+    });
+    return updated;
+  } catch (error) {
+    captureException(error);
+    return current;
+  }
 }
 
 const agent = new Agent({

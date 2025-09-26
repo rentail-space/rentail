@@ -144,7 +144,6 @@ function AssistantMessage({
           />
         );
       default: {
-        console.info("%o", part);
         return null;
       }
     }

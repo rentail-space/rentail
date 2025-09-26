@@ -5,12 +5,12 @@ import { stepCountIs, type UIMessage } from "ai";
 import { invariant } from "es-toolkit";
 import humanFormat from "human-format";
 import { ulid } from "ulid";
+import findNearbySpaces from "~/lib/findNearbySpaces";
 import mastra from "~/lib/mastra";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import { commit, getChatFromSession } from "~/sessions.server";
 import general from "../lib/general.md?raw";
 import type { Route } from "./+types/api.chat";
-import findNearBySpaces from "./findNearBySpaces";
 
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams
@@ -24,8 +24,7 @@ export async function action({ request }: Route.ActionArgs) {
 
   // Set up Redis stop monitoring
   const { abortSignal, cleanup } = await monitorStopSignal(chat.id);
-  const maxDistance = 20;
-  const spaces = await findNearBySpaces({ user, chat, distance: maxDistance });
+  const spaces = await findNearbySpaces({ user, chat, distance: 20 });
 
   const agent = mastra.getAgentById("main");
   const memory = await agent.getMemory();
