@@ -27,12 +27,13 @@ type SessionFlashData = {
 
 type SessionType = Session<SessionData, SessionFlashData>;
 
+const DEFAULT_IP = "146.70.195.182";
 const DEFAULT_LOCATION: Location = {
   city: "Los Angeles",
-  country: "United States",
-  ip: "23.241.26.38", // My IP address
-  latitude: "34.044727",
-  longitude: "-118.249283",
+  country: "US",
+  ip: DEFAULT_IP,
+  latitude: "34.05361",
+  longitude: "-118.24550",
   state: "California",
 };
 
@@ -82,7 +83,7 @@ export async function getUserFromSession(request: Request): Promise<{
 
   const { location } = await getLocationFromRequest(request);
   const newUser = await prisma.user.create({
-    data: { ip: location?.ip, location: location },
+    data: { ip: location.ip, location: location },
   });
   session.set("userId", newUser.id);
   return { user: newUser, session };
@@ -134,15 +135,15 @@ export async function getChatFromSession(request: Request): Promise<{
  * @returns The location and the updated session
  */
 async function getLocationFromRequest(request: Request): Promise<{
-  location?: Location;
+  location: Location;
   session: SessionType;
 }> {
   const session = await getSession(request.headers.get("Cookie"));
-  if (session.get("location"))
-    return { session, location: session.get("location") };
+  const currentLocation = session.get("location") as Location;
+  if (currentLocation) return { session, location: currentLocation };
 
   try {
-    const clientIp = request.headers.get("x-forwarded-for");
+    const clientIp = request.headers.get("x-forwarded-for") ?? DEFAULT_IP;
     const location = await geocode(clientIp);
     session.set("location", location);
 
@@ -153,10 +154,7 @@ async function getLocationFromRequest(request: Request): Promise<{
   }
 }
 
-async function geocode(clientIp: string | null): Promise<Location> {
-  // In development, we use my IP address, since x-forwarded-for is not set.
-  if (!clientIp) return DEFAULT_LOCATION;
-
+async function geocode(clientIp: string): Promise<Location> {
   console.info("[GEOCODE] Fetching IP geolocation data for IP %s", clientIp);
   const url = new URL("https://api.ipgeolocation.io/v2/ipgeo");
   url.searchParams.set("apiKey", env.IPGEOLOCATION_API_KEY);
