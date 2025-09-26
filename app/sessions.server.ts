@@ -2,10 +2,9 @@ import type { MastraMessageV2 } from "@mastra/core";
 import { invariant } from "es-toolkit";
 import type { Chat, User } from "prisma/generated/client";
 import { createCookieSessionStorage, type Session } from "react-router";
-import { ulid } from "ulid";
 import env from "./lib/env";
-import mastra from "./lib/mastra";
 import prisma from "./lib/prisma";
+import { getRecentMessages } from "./lib/workingMemory";
 
 type SessionData = {
   userId?: string;
@@ -107,52 +106,21 @@ export async function getChatFromSession(request: Request): Promise<{
   user: User;
 }> {
   const { user, session } = await getUserFromSession(request);
-  const memory = await mastra.getAgentById("main").getMemory();
 
   const chatId = session.get("chatId");
-  if (chatId) {
-    const chat = await prisma.chat.findUnique({
-      where: { id: chatId, userId: user.id },
-    });
-    const messages = (await memory?.rememberMessages({
-      threadId: chatId,
-    })) ?? { messagesV2: [] };
-    if (chat)
-      return { chat, messages: messages?.messagesV2 || [], user, session };
+  const chat = await prisma.chat.findUnique({
+    where: { id: chatId, userId: user.id },
+  });
+  if (chat) {
+    const messages = await getRecentMessages(user, chat);
+    return { chat, messages, user, session };
   }
 
   const newChat = await prisma.chat.create({
     data: { user: { connect: { id: user.id } } },
   });
   session.set("chatId", newChat.id);
-  invariant(memory, "Memory is required");
-  await memory.createThread({
-    resourceId: user.id,
-    threadId: newChat.id,
-  });
-  const messages =
-    (await memory.saveMessages({
-      messages: [
-        {
-          content: {
-            format: 2,
-            parts: [
-              {
-                text: "Hello, I'm **Rentail** — how can I help you find a pop-up retail space for your business?",
-                type: "text",
-              },
-            ],
-          },
-          createdAt: new Date(),
-          id: ulid(),
-          resourceId: user.id,
-          role: "assistant",
-          threadId: newChat.id,
-        },
-      ],
-      format: "v2",
-    })) ?? [];
-
+  const messages = await getRecentMessages(user, newChat);
   return { chat: newChat, messages, user, session };
 }
 

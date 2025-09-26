@@ -1,7 +1,7 @@
 import type { Chat, ShoppingCenterSpace, User } from "prisma/generated/client";
 import type { ShoppingCenterGetPayload } from "prisma/generated/models";
-import { updateWorkingMemory } from "~/lib/mastra";
 import prisma from "~/lib/prisma";
+import { updateWorkingMemory } from "~/lib/workingMemory";
 
 /**
  * Find the shopping centers within a given distance from the user. Gets the
@@ -40,16 +40,9 @@ export default async function findNearbySpaces({
 async function locationFromWorkingMemory(
   user: User,
   chat: Chat,
-): Promise<{ longitude: string; latitude: string }> {
-  const workingMemory = await updateWorkingMemory(user, chat, (current) => {
-    return current.location?.latitude && current.location?.longitude
-      ? current
-      : {
-          ...current,
-          location: user.location as { latitude: string; longitude: string },
-        };
-  });
-  return workingMemory.location;
+): Promise<{ longitude?: string; latitude?: string }> {
+  const { location } = await updateWorkingMemory(user, chat);
+  return location;
 }
 
 function shoppingCentersToMarkdown(
