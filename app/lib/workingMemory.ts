@@ -7,39 +7,43 @@ import { ulid } from "ulid";
 import zod from "zod";
 import env from "~/lib/env";
 
-// Store state in our Postgres database
+/**
+ * The initial message to be used in any new chat.
+ */
+const initialMessage =
+  "Hello, I'm **Rentail** — how can I help you find a pop-up retail space for your business?";
+
+/**
+ * Store state in our Postgres database
+ */
 const store = new PostgresStore({
   connectionString: env.DATABASE_URL,
 });
 
-const userProfile = zod.object({
-  name: zod.string().default("Unknown").describe("The user's name"),
-  location: zod
-    .object({
+/**
+ * This is the schema that will be used to store the user's profile in the
+ * database and update it from the user's messages.
+ */
+const userProfile = zod
+  .object({
+    name: zod.string().default("Unknown").describe("The user's name"),
+    location: zod.object({
       latitude: zod.string().describe("The user's latitude"),
       longitude: zod.string().describe("The user's longitude"),
       city: zod.string().describe("The user's city"),
       state: zod.string().describe("The user's state"),
       country: zod.string().describe("The user's country"),
-      timezone: zod.string().describe("The user's timezone"),
-    })
-    .catch({
-      latitude: "",
-      longitude: "",
-      city: "",
-      state: "",
-      country: "",
-      timezone: "America/Los_Angeles",
+      timezone: zod
+        .string()
+        .default("America/Los_Angeles")
+        .describe("The user's timezone"),
     }),
-  selling: zod
-    .object({
+    selling: zod.object({
       productType: zod.string().describe("The user's product type"),
       pricePoint: zod.string().describe("The user's price point"),
       targetAudience: zod.string().describe("The user's target audience"),
-    })
-    .catch({ productType: "", pricePoint: "", targetAudience: "" }),
-  preferences: zod
-    .object({
+    }),
+    preferences: zod.object({
       communicationStyle: zod
         .string()
         .default("Casual")
@@ -47,21 +51,18 @@ const userProfile = zod.object({
       keyDeadlines: zod
         .array(zod.string())
         .describe("The user's key deadlines"),
-    })
-    .catch({ communicationStyle: "Casual", keyDeadlines: [] }),
-  sessionState: zod
-    .object({
+    }),
+    sessionState: zod.object({
       lastTaskDiscussed: zod
         .string()
+        .default("")
         .describe("The user's last task discussed"),
       openQuestions: zod
         .array(zod.string())
         .describe("The user's open questions"),
-    })
-    .catch({ lastTaskDiscussed: "", openQuestions: [] }),
-});
-
-type UserProfile = zod.infer<typeof userProfile>;
+    }),
+  })
+  .partial();
 
 export const memory = new Memory({
   options: {
@@ -77,9 +78,6 @@ export const memory = new Memory({
   },
   storage: store,
 });
-
-const initialMessage =
-  "Hello, I'm **Rentail** — how can I help you find a pop-up retail space for your business?";
 
 /**
  * Get the messages for a chat. If no messages are found, create an initial
@@ -119,28 +117,29 @@ export async function getRecentMessages(user: User, chat: Chat) {
  * @param chat The chat to read from working memory.
  * @returns The user's profile.
  */
-async function getWorkingMemory(user: User, chat: Chat): Promise<UserProfile> {
-  const { success, data } = userProfile.safeParse({ location: user.location });
-  const location = success
-    ? data.location
-    : userProfile.parse(undefined).location;
-
-  await memory.createThread({
-    resourceId: user.id,
-    threadId: chat.id,
-    saveThread: true,
-  });
-  const json = await memory.getWorkingMemory({
-    resourceId: user.id,
-    threadId: chat.id,
-  });
-  if (!json) return userProfile.parse({ location });
-
+async function getWorkingMemory(
+  user: User,
+  chat: Chat,
+): Promise<zod.infer<typeof userProfile>> {
   try {
-    return userProfile.parse(JSON.parse(json));
+    await memory.createThread({
+      resourceId: user.id,
+      threadId: chat.id,
+      saveThread: true,
+    });
+    const json = await memory.getWorkingMemory({
+      resourceId: user.id,
+      threadId: chat.id,
+    });
+    if (json) return userProfile.parse(JSON.parse(json));
+
+    const { success, data } = userProfile.safeParse({
+      location: user.location,
+    });
+    return success ? data : userProfile.parse(undefined);
   } catch (error) {
-    captureException(error, { data: json });
-    return userProfile.parse({ location });
+    captureException(error);
+    return userProfile.safeParse(undefined).data ?? {};
   }
 }
 
@@ -157,10 +156,10 @@ async function getWorkingMemory(user: User, chat: Chat): Promise<UserProfile> {
 export async function updateWorkingMemory(
   user: User,
   chat: Chat,
-  update?: (current: UserProfile) => Promise<UserProfile> | UserProfile,
-): Promise<UserProfile> {
+  update?: <T = zod.infer<typeof userProfile>>(current: T) => Promise<T> | T,
+): Promise<zod.infer<typeof userProfile>> {
+  const currentValue = await getWorkingMemory(user, chat);
   try {
-    const currentValue = await getWorkingMemory(user, chat);
     const validateValue = userProfile.parse(
       update ? await update(currentValue) : currentValue,
     );
@@ -173,6 +172,6 @@ export async function updateWorkingMemory(
     return validateValue;
   } catch (error) {
     captureException(error);
-    return userProfile.parse({ location: user.location });
+    return currentValue;
   }
 }
