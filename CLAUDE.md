@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Type check: `npm run typecheck` (includes react-router typegen)
 - Test: `npm run test` (lint + db push + prisma generate + typecheck + vitest with verbose reporter)
 - Lint: `npm run lint` (secretlint + Biome linter)
-- Format: `npm run format --write` (Biome formatter)
+- Format: `pnpm run format --write` (Biome formatter)
 - Check: `npm run check` (runs both lint and typecheck)
 - Clean: `npm run clean` (removes .react-router cache and build directory)
 - Monitoring: `npm run checkly` (runs Checkly monitoring tests)
