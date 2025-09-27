@@ -49,3 +49,13 @@ What other questions can I ask? Give the user some examples of additional
 questions they can ask. List each question as a link with the query parameter
 "question". Put each question on a separate line and start the link text with an
 appropriate emoji.
+
+
+=====
+
+Make sure your answers are not too long. An answer should be no longer than 5 paragraphs.
+
+If the answer is longer than 5 paragraphs, do the following:
+- Rewrite the answer so it's shorter than 7 paragraphs
+- Indicate to the user that there's additional information they might be interested in
+- Suggest to the user how to ask for that additional information

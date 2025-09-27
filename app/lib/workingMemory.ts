@@ -6,7 +6,7 @@ import type { Chat, User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import zod from "zod";
 import env from "~/lib/env";
-import welcome from "~/lib/welcome.md?raw";
+import welcome from "~/prompts/welcome.md?raw";
 
 /**
  * Store state in our Postgres database

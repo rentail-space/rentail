@@ -8,8 +8,8 @@ import { ulid } from "ulid";
 import findNearbySpaces from "~/lib/findNearbySpaces";
 import mastra from "~/lib/mastra";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
+import general from "~/prompts/general.md?raw";
 import { commit, getChatFromSession } from "~/sessions.server";
-import general from "../lib/general.md?raw";
 import type { Route } from "./+types/api.chat";
 
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
