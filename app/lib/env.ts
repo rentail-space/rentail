@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import env from "env-var";
 
-dotenv.config();
+dotenv.config({ quiet: true });
 const isTest = process.env.NODE_ENV === "test";
 
 export default {

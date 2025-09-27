@@ -45,7 +45,7 @@ async function locationFromWorkingMemory(
   chat: Chat,
 ): Promise<{ longitude?: string; latitude?: string }> {
   const { location } = await updateWorkingMemory(user, chat);
-  return location;
+  return { longitude: location?.longitude, latitude: location?.latitude };
 }
 
 function shoppingCentersToMarkdown(
