@@ -6,12 +6,7 @@ import type { Chat, User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import zod from "zod";
 import env from "~/lib/env";
-
-/**
- * The initial message to be used in any new chat.
- */
-const initialMessage =
-  "Hello, I'm **Rentail** — how can I help you find a pop-up retail space for your business?";
+import welcome from "~/lib/welcome.md?raw";
 
 /**
  * Store state in our Postgres database
@@ -105,7 +100,7 @@ export async function getRecentMessages(user: User, chat: Chat) {
   const savedMessages = await memory.saveMessages({
     messages: [
       {
-        content: { format: 2, parts: [{ text: initialMessage, type: "text" }] },
+        content: { format: 2, parts: [{ text: welcome, type: "text" }] },
         createdAt: new Date(),
         id: ulid(),
         resourceId: user.id,

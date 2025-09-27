@@ -190,9 +190,11 @@ describe("User, conversation, profile", () => {
 
     it("should ask user a question", async () => {
       const part = messages[0].content.parts[0] as TextUIPart;
+      expect(part.text).toContain("Welcome to **rentail.space**!");
       expect(part.text).toContain(
-        "how can I help you find a pop-up retail space for your business?",
+        "I'm your virtual assistant here to help you find the perfect retail space for your business needs.",
       );
+      expect(part.text).toContain("How can I assist you today?");
     });
   });
 
