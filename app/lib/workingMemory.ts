@@ -1,4 +1,5 @@
 import { Memory } from "@mastra/memory";
+import { TokenLimiter, ToolCallFilter } from "@mastra/memory/processors";
 import { PostgresStore } from "@mastra/pg";
 import { captureException } from "@sentry/react-router";
 import { isEqual } from "es-toolkit";
@@ -80,6 +81,10 @@ export const memory = new Memory({
       scope: "resource",
     },
   },
+  processors: [
+    new ToolCallFilter(),
+    new TokenLimiter(127000), // Ensure the total tokens from memory don't exceed ~127k
+  ],
   storage: store,
 });
 
