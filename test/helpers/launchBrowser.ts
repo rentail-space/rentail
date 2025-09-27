@@ -24,16 +24,31 @@ let context: BrowserContext;
 let server: { port: number; stop: () => boolean };
 
 /**
- * Launch the server and browser. Returns instance of server and browser page.
- * @returns The browser page.
+ * Launch a new browser instance and return the context.
+ *
+ * @param logging - Whether to run the browser in headless mode.
+ * @returns The browser context.
  */
-export async function launchBrowser(headless = !env.isDebug): Promise<Page> {
-  if (!server) await launchServer();
+export async function launchBrowser(
+  logging = env.isDebug,
+): Promise<BrowserContext> {
   if (!browser)
     browser = await chromium.launch({
-      headless: process.env.CI ? true : headless,
+      headless: process.env.CI ? true : !logging,
     });
   if (!context) context = await browser.newContext();
+  return context;
+}
+
+/**
+ * Open a new page in the browser.
+ *
+ * @param logging - Whether to log debug messages, launch browsr in non-headless mode.
+ * @returns The page.
+ */
+export async function openPage(logging = env.isDebug): Promise<Page> {
+  await launchServer(logging);
+  const context = await launchBrowser(logging);
   const page = await context.newPage();
   page.route("**", (route) => blockBrowserRequest(route));
   return page;
@@ -41,10 +56,14 @@ export async function launchBrowser(headless = !env.isDebug): Promise<Page> {
 
 /**
  * Launch a new server instance.
+ *
+ * @param logging - Whether to log debug messages.
  * @returns The server instance.
  */
-async function launchServer() {
-  const logging = env.isDebug;
+export async function launchServer(logging = env.isDebug) {
+  if (server) return server;
+
+  if (logging) console.info("[TEST] launching server");
   // Check if lock file exists and server is running
   if (existsSync(lockFile)) {
     if (logging)

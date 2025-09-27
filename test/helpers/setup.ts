@@ -9,24 +9,6 @@ beforeAll(async () => {
 
   // Clean up database
   await prisma.user.deleteMany({});
-  await prisma.user.create({
-    data: {
-      id: "wxxx3cwnw9o4g6zehqg0dswy",
-      location: {
-        latitude: "37.42240",
-        longitude: "-122.08421",
-        city: "Mountain View",
-        state: "California",
-        country: "United States",
-        timezone: "America/Los_Angeles",
-      },
-      chats: {
-        create: {
-          id: "mv3syosnkkawsqkwdpmeeuyk",
-        },
-      },
-    },
-  });
 });
 
 // Close MSW server after all tests

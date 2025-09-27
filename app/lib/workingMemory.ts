@@ -24,7 +24,7 @@ const store = new PostgresStore({
  * This is the schema that will be used to store the user's profile in the
  * database and update it from the user's messages.
  */
-const userProfile = zod
+export const userProfile = zod
   .object({
     name: zod
       .string()
@@ -38,7 +38,7 @@ const userProfile = zod
         city: zod.string().describe("The user's city"),
         state: zod.string().describe("The user's state"),
         country: zod.string().describe("The user's country"),
-        timezone: zod.string().describe("The user's timezone"),
+        timeZone: zod.string().describe("The user's timezone"),
       })
       .partial(),
     selling: zod
@@ -126,7 +126,7 @@ export async function getRecentMessages(user: User, chat: Chat) {
  * @param chat The chat to read from working memory.
  * @returns The user's profile.
  */
-async function getWorkingMemory(
+export async function getWorkingMemory(
   user: User,
   chat: Chat,
 ): Promise<zod.infer<typeof userProfile>> {

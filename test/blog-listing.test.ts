@@ -7,13 +7,18 @@
  * - Navigation to individual posts
  */
 
-import { expect } from "playwright/test";
-import { describe, it } from "vitest";
-import { launchBrowser, URL } from "./helpers/launchBrowser";
+import { expect, type Page } from "playwright/test";
+import { afterEach, beforeEach, describe, it } from "vitest";
+import { openPage, URL } from "./helpers/launchBrowser";
 
 describe("Blog Listing", () => {
+  let page: Page;
+
+  beforeEach(async () => {
+    page = await openPage();
+  });
+
   it("displays blog posts on home page", async () => {
-    const page = await launchBrowser();
     const response = await page.goto(URL);
 
     expect(response?.status(), "should respond with 200").toEqual(200);
@@ -26,12 +31,9 @@ describe("Blog Listing", () => {
     const blogLinks = page.locator('a[href^="/blog/"]');
     const linkCount = await blogLinks.count();
     expect(linkCount).toBeGreaterThan(0);
-
-    await page.close();
   });
 
   it("blog post links have proper titles and excerpts", async () => {
-    const page = await launchBrowser();
     await page.goto(URL);
 
     // Find blog post links
@@ -55,12 +57,9 @@ describe("Blog Listing", () => {
       expect(excerptText).toBeDefined();
       expect(excerptText?.length).toBeGreaterThan(0);
     }
-
-    await page.close();
   });
 
   it("navigates to blog post when clicking link", async () => {
-    const page = await launchBrowser();
     await page.goto(URL);
 
     // Find first blog post link
@@ -86,12 +85,9 @@ describe("Blog Listing", () => {
 
     const title = page.locator("article h1");
     await expect(title).toBeVisible();
-
-    await page.close();
   });
 
   it("blog links have hover styling", async () => {
-    const page = await launchBrowser();
     await page.goto(URL);
 
     // Check blog post links for hover classes
@@ -102,12 +98,9 @@ describe("Blog Listing", () => {
       expect(linkClasses).toContain("link");
       expect(linkClasses).toContain("link-hover");
     }
-
-    await page.close();
   });
 
   it("displays multiple blog posts if available", async () => {
-    const page = await launchBrowser();
     await page.goto(URL);
 
     // Count blog post links
@@ -125,12 +118,9 @@ describe("Blog Listing", () => {
       expect(hrefs.has(href)).toBe(false);
       hrefs.add(href);
     }
-
-    await page.close();
   });
 
   it("blog listing visual regression test", async () => {
-    const page = await launchBrowser();
     // Set consistent viewport for screenshots
     await page.setViewportSize({ width: 1280, height: 720 });
 
@@ -144,7 +134,9 @@ describe("Blog Listing", () => {
 
     // Take screenshot for visual regression testing of the blog section
     await expect(blogSection).toMatchScreenshot();
+  });
 
+  afterEach(async () => {
     await page.close();
   });
 });

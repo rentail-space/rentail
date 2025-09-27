@@ -2,13 +2,13 @@ import { delay } from "es-toolkit";
 import { expect, type Page } from "playwright/test";
 import { afterEach, beforeEach, describe, it } from "vitest";
 import env from "~/lib/env";
-import { launchBrowser, URL } from "./helpers/launchBrowser";
+import { openPage, URL } from "./helpers/launchBrowser";
 
 describe("Chat page", () => {
   let page: Page;
 
   beforeEach(async () => {
-    page = await launchBrowser();
+    page = await openPage(env.isDebug);
   });
 
   it("renders chat interface with welcome message", async () => {
