@@ -18,24 +18,39 @@ datasource db {
 }
 
 model Chat {
-  activeStreamId String?  @map("active_stream_id")
-  createdAt      DateTime @map("created_at")       @default(now())
-  id             String   @map("id")               @id @default(cuid(2))
-  updatedAt      DateTime @map("updated_at")       @updatedAt
-  userId         String   @map("user_id")
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime   @map("created_at") @default(now())
+  id        String     @map("id")         @id @default(cuid(2))
+  messages  Messages[]
+  metadata  Json?      @map("metadata")   @db.Json()
+  title     String?    @map("title")
+  updatedAt DateTime   @map("updated_at") @updatedAt
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String     @map("user_id")
 
   @@map("chats")
 }
 
+model Messages {
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId    String   @map("chat_id")
+  content   Json     @map("content")
+  createdAt DateTime @map("created_at") @default(now()) @db.Timestamp(3)
+  id        String   @map("id")         @id @default(cuid(2))
+  role      Role     @map("role")
+  type      String   @map("type")
+
+  @@map("messages")
+}
 
 model User {
-  createdAt DateTime @map("created_at") @default(now())
-  id        String   @map("id")         @id @default(cuid(2))
-  ip        String?  @map("ip")
-  location  Json     @map("location")   @db.Json()
-  updatedAt DateTime @map("updated_at") @updatedAt
-  chats     Chat[]
+  chats         Chat[]
+  createdAt     DateTime @map("created_at")     @default(now())
+  id            String   @map("id")             @id @default(cuid(2))
+  ip            String?  @map("ip")
+  location      Json     @map("location")       @db.Json()
+  updatedAt     DateTime @map("updated_at")     @updatedAt
+  workingMemory String?  @map("working_memory") @db.Text()
+  metadata      Json?    @map("metadata")       @db.Json()
 
   @@map("users")
 }
@@ -81,150 +96,9 @@ model ShoppingCenterSpace {
   @@map("shopping_center_spaces")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model mastra_evals {
-  input         String
-  output        String
-  result        Json
-  agent_name    String
-  metric_name   String
-  instructions  String
-  test_info     Json?
-  global_run_id String
-  run_id        String
-  created_at    DateTime   @db.Timestamp(6)
-  createdAt     DateTime?  @db.Timestamp(6)
-  created_atZ   DateTime?  @default(now()) @db.Timestamptz(6)
-  createdAtZ    DateTime?  @default(now()) @db.Timestamptz(6)
-
-  @@index([agent_name, created_at(sort: Desc)], map: "public_mastra_evals_agent_name_created_at_idx")
-  @@ignore
-}
-
-model mastra_messages {
-  id         String          @id
-  thread_id  String
-  content    String
-  role       String
-  type       String
-  createdAt  DateTime        @db.Timestamp(6)
-  resourceId String?
-  createdAtZ DateTime?       @default(now()) @db.Timestamptz(6)
-  thread     mastra_threads @relation(fields: [thread_id], references: [id], onDelete: Cascade)
-
-  @@index([thread_id, createdAt(sort: Desc)], map: "public_mastra_messages_thread_id_createdat_idx")
-  @@ignore
-}
-
-model mastra_resources {
-  createdAt     DateTime   @db.Timestamp(6)
-  createdAtZ    DateTime?  @default(now()) @db.Timestamptz(6)
-  id            String     @id
-  metadata      Json?
-  updatedAt     DateTime   @db.Timestamp(6)
-  updatedAtZ    DateTime?  @default(now()) @db.Timestamptz(6)
-  workingMemory String?
-
-  @@ignore
-}
-
-model mastra_scorers {
-  additionalContext    Json?
-  analyzePrompt        String?
-  analyzeStepResult    Json?
-  createdAt            DateTime   @db.Timestamp(6)
-  createdAtZ           DateTime?  @default(now()) @db.Timestamptz(6)
-  entity               Json?
-  entityId             String?
-  entityType           String?
-  extractPrompt        String?
-  extractStepResult    Json?
-  generateReasonPrompt String?
-  generateScorePrompt  String?
-  id                   String     @id
-  input                Json
-  metadata             Json?
-  output               Json
-  preprocessPrompt     String?
-  preprocessStepResult Json?
-  reason               String?
-  reasonPrompt         String?
-  resourceId           String?
-  runId                String
-  runtimeContext       Json?
-  score                Float
-  scorer               Json
-  scorerId             String
-  source               String
-  threadId             String?
-  traceId              String?
-  updatedAt            DateTime   @db.Timestamp(6)
-  updatedAtZ           DateTime?  @default(now()) @db.Timestamptz(6)
-
-  @@ignore
-}
-
-model mastra_threads {
-  createdAt  DateTime           @db.Timestamp(6)
-  createdAtZ DateTime?          @default(now()) @db.Timestamptz(6)
-  id         String             @id
-  messages   mastra_messages[]
-  metadata   String?
-  resourceId String
-  title      String
-  updatedAt  DateTime           @db.Timestamp(6)
-  updatedAtZ DateTime?          @default(now()) @db.Timestamptz(6)
-
-  @@index([resourceId, createdAt(sort: Desc)], map: "public_mastra_threads_resourceid_createdat_idx")
-  @@ignore
-}
-
-model mastra_traces {
-  id           String     @id
-  parentSpanId String?
-  name         String
-  traceId      String
-  scope        String
-  kind         Int
-  attributes   Json?
-  status       Json?
-  events       Json?
-  links        Json?
-  other        String?
-  startTime    BigInt
-  endTime      BigInt
-  createdAt    DateTime   @db.Timestamp(6)
-  createdAtZ   DateTime?  @default(now()) @db.Timestamptz(6)
-
-  @@index([name, startTime(sort: Desc)], map: "public_mastra_traces_name_starttime_idx")
-  @@ignore
-}
-
-model mastra_workflow_snapshot {
-  workflowName String    @map("workflow_name")
-  run_id       String
-  resourceId   String?
-  snapshot     String
-  createdAt    DateTime                        @db.Timestamp(6)
-  updatedAt    DateTime                        @db.Timestamp(6)
-  createdAtZ   DateTime?                       @default(now()) @db.Timestamptz(6)
-  updatedAtZ   DateTime?                       @default(now()) @db.Timestamptz(6)
-
-  @@unique([workflowName, run_id], map: "public_mastra_workflow_snapshot_workflow_name_run_id_key")
-  @@ignore
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model spatial_ref_sys {
-  srid      Int      @id
-  auth_name String?  @db.VarChar(256)
-  auth_srid Int?
-  srtext    String?  @db.VarChar(2048)
-  proj4text String?  @db.VarChar(2048)
-  @@ignore
-}
-
 enum Role {
-  ASSISTANT
-  USER
+  assistant
+  system
+  tool
+  user
 }

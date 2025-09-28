@@ -1,20 +1,17 @@
 import { Memory } from "@mastra/memory";
 import { TokenLimiter, ToolCallFilter } from "@mastra/memory/processors";
-import { PostgresStore } from "@mastra/pg";
 import { captureException } from "@sentry/react-router";
 import { isEqual } from "es-toolkit";
 import type { Chat, User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import zod from "zod";
-import env from "~/lib/env";
 import welcome from "~/prompts/welcome.md?raw";
+import { CustomStorage } from "./mastaStorage";
 
 /**
  * Store state in our Postgres database
  */
-const store = new PostgresStore({
-  connectionString: env.DATABASE_URL,
-});
+const store = new CustomStorage();
 
 /**
  * This is the schema that will be used to store the user's profile in the
@@ -71,7 +68,7 @@ export const userProfile = zod
 
 export const memory = new Memory({
   options: {
-    lastMessages: 100,
+    lastMessages: 10,
     threads: {
       generateTitle: true,
     },
