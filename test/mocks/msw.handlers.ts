@@ -1,3 +1,4 @@
+import type { Tool, ToolChoice } from "ai";
 import { invariant, last } from "es-toolkit";
 import { HttpResponse, http } from "msw";
 import { findMockResponse } from "./anthropic.mock";
@@ -12,7 +13,11 @@ export const handlers = [
           role: string;
           content: Array<{ type: string; text: string }>;
         }>;
+        tools: { name: string }[];
+        tool_choice: { type: ToolChoice<Record<string, Tool>> };
       };
+
+      console.log("\n\nbody %o\n\n", body);
 
       // Extract the last user message from the request
       const message = last(body.messages);

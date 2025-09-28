@@ -14,12 +14,28 @@ import { launchServer, URL } from "./helpers/launchBrowser";
 describe("User, conversation, profile", () => {
   let server: { port: number; stop: () => boolean };
   let response: Response;
+  let session: string;
+  let userId: string;
+  let chatId: string;
 
   beforeAll(async () => {
     server = await launchServer();
     response = await fetch(`${URL}/chat`, {
       method: "GET",
     });
+
+    const header = response.headers.get("Set-Cookie") || "";
+    const cookies = new Map(
+      header
+        .split(", ")
+        .map((cookie) => cookie.split(";")[0])
+        .map((cookie) => cookie.split("="))
+        .filter((parts): parts is [string, string] => parts.length === 2),
+    );
+    session = cookies.get("__session") || "";
+    const decoded = atob(decodeURIComponent(session.split(".")[0]));
+    userId = JSON.parse(decoded).userId;
+    chatId = JSON.parse(decoded).chatId;
   });
 
   it("should respond with 200", async () => {
@@ -27,24 +43,18 @@ describe("User, conversation, profile", () => {
   });
 
   describe("session", () => {
-    let session: { userId: string; chatId: string };
-
-    beforeAll(async () => {
-      session = getSession();
-    });
-
     it("should include session cookie", async () => {
       expect(session).toBeDefined();
     });
 
     it("should include user id", async () => {
-      expect(session.userId).toBeDefined();
-      await prisma.user.findUniqueOrThrow({ where: { id: session.userId } });
+      expect(userId).toBeDefined();
+      await prisma.user.findUniqueOrThrow({ where: { id: userId } });
     });
 
     it("should include chat id", async () => {
-      expect(session.chatId).toBeDefined();
-      await prisma.chat.findUniqueOrThrow({ where: { id: session.chatId } });
+      expect(chatId).toBeDefined();
+      await prisma.chat.findUniqueOrThrow({ where: { id: chatId } });
     });
   });
 
@@ -52,10 +62,7 @@ describe("User, conversation, profile", () => {
     let user: User;
 
     beforeAll(async () => {
-      const session = getSession();
-      user = await prisma.user.findUniqueOrThrow({
-        where: { id: session.userId },
-      });
+      user = await prisma.user.findUniqueOrThrow({ where: { id: userId } });
     });
 
     it("should have IP address", async () => {
@@ -104,18 +111,14 @@ describe("User, conversation, profile", () => {
 
   describe("chat", () => {
     let chat: Chat;
-    let session: { userId: string; chatId: string };
 
     beforeAll(async () => {
-      session = getSession();
-      chat = await prisma.chat.findUniqueOrThrow({
-        where: { id: session.chatId },
-      });
+      chat = await prisma.chat.findUniqueOrThrow({ where: { id: chatId } });
     });
 
     it("should reference the user", async () => {
       expect(chat.userId).toBeDefined();
-      expect(chat.userId).toEqual(session.userId);
+      expect(chat.userId).toEqual(userId);
     });
   });
 
@@ -123,14 +126,11 @@ describe("User, conversation, profile", () => {
     let workingMemory: zod.infer<typeof userProfile>;
 
     beforeAll(async () => {
-      const session = getSession();
-      const user = await prisma.user.findUniqueOrThrow({
-        where: { id: session.userId },
-      });
       const chat = await prisma.chat.findUniqueOrThrow({
-        where: { id: session.chatId },
+        include: { user: true },
+        where: { id: chatId },
       });
-      workingMemory = await updateWorkingMemory(user, chat);
+      workingMemory = await updateWorkingMemory(chat);
     });
 
     it("should have user city", async () => {
@@ -166,14 +166,11 @@ describe("User, conversation, profile", () => {
     let messages: MastraMessageV2[];
 
     beforeAll(async () => {
-      const session = getSession();
-      const user = await prisma.user.findUniqueOrThrow({
-        where: { id: session.userId },
-      });
       const chat = await prisma.chat.findUniqueOrThrow({
-        where: { id: session.chatId },
+        where: { id: chatId },
+        include: { user: true },
       });
-      messages = await getRecentMessages(user, chat);
+      messages = await getRecentMessages(chat);
     });
 
     it("should have one message", async () => {
@@ -198,19 +195,59 @@ describe("User, conversation, profile", () => {
     });
   });
 
-  function getSession() {
-    const header = response.headers.get("Set-Cookie") || "";
-    const cookies = new Map(
-      header
-        .split(", ")
-        .map((cookie) => cookie.split(";")[0])
-        .map((cookie) => cookie.split("="))
-        .filter((parts): parts is [string, string] => parts.length === 2),
-    );
-    const value = cookies.get("__session") || "";
-    const decoded = atob(decodeURIComponent(value.split(".")[0]));
-    return JSON.parse(decoded);
-  }
+  describe.skip("spell location", () => {
+    let workingMemory: zod.infer<typeof userProfile>;
+
+    beforeAll(async () => {
+      const chat = await prisma.chat.findUniqueOrThrow({
+        where: { id: chatId },
+        include: { user: true },
+      });
+      const response = await fetch(`${URL}/api/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: `__session=${session}`,
+        },
+        body: JSON.stringify({
+          userMessage: {
+            parts: [
+              {
+                type: "text",
+                text: "I actually live in Boston",
+              },
+            ],
+          },
+        }),
+      });
+      expect(response.status).toBe(200);
+      workingMemory = await updateWorkingMemory(chat);
+    });
+
+    it("should have user city", async () => {
+      expect(workingMemory.location?.city).toEqual("Boston");
+    });
+
+    it("should have user state", async () => {
+      expect(workingMemory.location?.state).toEqual("Massachusetts");
+    });
+
+    it("should have user country", async () => {
+      expect(workingMemory.location?.country).toEqual("United States");
+    });
+
+    it("should have user latitude", async () => {
+      expect(workingMemory.location?.latitude).toEqual("42.3601");
+    });
+
+    it("should have user longitude", async () => {
+      expect(workingMemory.location?.longitude).toEqual("-71.0589");
+    });
+
+    it("should have user time zone", async () => {
+      expect(workingMemory.location?.timeZone).toEqual("America/New_York");
+    });
+  });
 
   afterAll(() => {
     server.stop();

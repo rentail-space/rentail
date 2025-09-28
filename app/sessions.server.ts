@@ -2,7 +2,8 @@ import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
 import Redis from "ioredis";
-import type { Chat, User } from "prisma/generated/client";
+import type { User } from "prisma/generated/client";
+import type { ChatGetPayload } from "prisma/generated/models";
 import { createCookieSessionStorage, type Session } from "react-router";
 import zod from "zod";
 import env from "./lib/env";
@@ -95,32 +96,32 @@ export async function getUserFromSession(request: Request): Promise<{
  * @returns chat - Chat with messages and user
  * @returns messages - Messages from the chat
  * @returns session - The updated session
- * @returns user - The user
  */
 export async function getChatFromSession(request: Request): Promise<{
-  chat: Chat;
+  chat: ChatGetPayload<{ include: { user: true } }>;
   messages: MastraMessageV2[];
   session: Session<SessionData, SessionFlashData>;
-  user: User;
 }> {
   const { user, session } = await getUserFromSession(request);
 
   const chatId = session.get("chatId");
   const chat = chatId
     ? await prisma.chat.findUnique({
+        include: { user: true },
         where: { id: chatId, userId: user.id },
       })
     : null;
   if (chat) {
-    const messages = await getRecentMessages(user, chat);
-    return { chat, messages, user, session };
+    const messages = await getRecentMessages(chat);
+    return { chat, messages, session };
   } else {
     const newChat = await prisma.chat.create({
       data: { user: { connect: { id: user.id } } },
+      include: { user: true },
     });
     session.set("chatId", newChat.id);
-    const messages = await getRecentMessages(user, newChat);
-    return { chat: newChat, messages, user, session };
+    const messages = await getRecentMessages(newChat);
+    return { chat: newChat, messages, session };
   }
 }
 

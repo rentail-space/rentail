@@ -1,7 +1,7 @@
 import { Memory } from "@mastra/memory";
 import { TokenLimiter, ToolCallFilter } from "@mastra/memory/processors";
 import { captureException } from "@sentry/react-router";
-import type { Chat, User } from "prisma/generated/client";
+import type { ChatGetPayload } from "prisma/generated/models";
 import { ulid } from "ulid";
 import zod from "zod";
 import welcome from "~/prompts/welcome.md?raw";
@@ -83,12 +83,13 @@ export const memory = new Memory({
  * Get the messages for a chat. If no messages are found, create an initial
  * message and save it to the database.
  *
- * @param user The user to get messages for.
  * @param chat The chat to get messages for.
  * @returns The messages for the chat.
  */
-export async function getRecentMessages(user: User, chat: Chat) {
-  await updateWorkingMemory(user, chat);
+export async function getRecentMessages(
+  chat: ChatGetPayload<{ include: { user: true } }>,
+) {
+  await updateWorkingMemory(chat);
 
   const messages = await memory.rememberMessages({ threadId: chat.id });
   if (messages.messagesV2.length > 0) return messages.messagesV2;
@@ -99,7 +100,7 @@ export async function getRecentMessages(user: User, chat: Chat) {
         content: { format: 2, parts: [{ text: welcome, type: "text" }] },
         createdAt: new Date(),
         id: ulid(),
-        resourceId: user.id,
+        resourceId: chat.user.id,
         role: "assistant",
         threadId: chat.id,
       },
@@ -113,26 +114,24 @@ export async function getRecentMessages(user: User, chat: Chat) {
  * Read from working memory and return the user's profile. If no profile is
  * found, return the fallback profile.
  *
- * @param user The user to read from working memory.
  * @param chat The chat to read from working memory.
  * @returns The user's profile.
  */
 export async function getWorkingMemory(
-  user: User,
-  chat: Chat,
+  chat: ChatGetPayload<{ include: { user: true } }>,
 ): Promise<zod.infer<typeof userProfile>> {
   try {
     await memory.createThread({
-      resourceId: user.id,
+      resourceId: chat.user.id,
       threadId: chat.id,
       saveThread: true,
     });
     const json = await memory.getWorkingMemory({
-      resourceId: user.id,
+      resourceId: chat.user.id,
       threadId: chat.id,
     });
     const { success, data } = userProfile.safeParse(
-      json ? JSON.parse(json) : { location: user.location },
+      json ? JSON.parse(json) : { location: chat.user.location },
     );
     return success ? data : userProfile.parse(undefined);
   } catch (error) {
@@ -145,24 +144,22 @@ export async function getWorkingMemory(
  * Update the working memory for a user and chat. The update function is called
  * with the current working memory and should return the new working memory.
  *
- * @param user The user to update working memory for.
  * @param chat The chat to update working memory for.
  * @param update The update function to apply to the working memory (if missing,
  * returns the current working memory)
  * @returns The updated working memory.
  */
 export async function updateWorkingMemory(
-  user: User,
-  chat: Chat,
+  chat: ChatGetPayload<{ include: { user: true } }>,
   update?: <T = zod.infer<typeof userProfile>>(current: T) => Promise<T> | T,
 ): Promise<zod.infer<typeof userProfile>> {
-  const currentValue = await getWorkingMemory(user, chat);
+  const currentValue = await getWorkingMemory(chat);
   try {
     const validateValue = userProfile.parse(
       update ? await update(currentValue) : currentValue,
     );
     await memory.updateWorkingMemory({
-      resourceId: user.id,
+      resourceId: chat.user.id,
       threadId: chat.id,
       workingMemory: JSON.stringify(validateValue),
     });

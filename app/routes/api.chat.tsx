@@ -5,8 +5,8 @@ import { stepCountIs, type UIMessage } from "ai";
 import { invariant } from "es-toolkit";
 import humanFormat from "human-format";
 import { ulid } from "ulid";
+import mastra from "~/lib/agent";
 import findNearbySpaces from "~/lib/findNearbySpaces";
-import mastra from "~/lib/mastra";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import general from "~/prompts/general.md?raw";
 import { commit, getChatFromSession } from "~/sessions.server";
@@ -18,13 +18,12 @@ import type { Route } from "./+types/api.chat";
 invariant(general, "General prompt is required");
 
 export async function action({ request }: Route.ActionArgs) {
-  const { chat, session, user } = await getChatFromSession(request);
-
-  const userMessage = (await request.json()) as { userMessage: UIMessage };
+  const { chat, session } = await getChatFromSession(request);
+  const { userMessage } = (await request.json()) as { userMessage: UIMessage };
 
   // Set up Redis stop monitoring
   const { abortSignal, cleanup } = await monitorStopSignal(chat.id);
-  const spaces = await findNearbySpaces({ user, chat, distance: 20 });
+  const spaces = await findNearbySpaces({ chat, distance: 20 });
 
   const agent = mastra.getAgentById("main");
   const memory = await agent.getMemory();
@@ -36,10 +35,10 @@ export async function action({ request }: Route.ActionArgs) {
         role: "user",
         createdAt: new Date(),
         threadId: chat.id,
-        resourceId: user.id,
+        resourceId: chat.user.id,
         type: "text",
         content: {
-          parts: userMessage.userMessage.parts.map((part) => ({
+          parts: userMessage.parts.map((part) => ({
             text: part.type === "text" ? part.text : "",
             type: "text",
           })),
@@ -61,7 +60,7 @@ export async function action({ request }: Route.ActionArgs) {
     abortSignal,
     format: "aisdk",
     memory: {
-      resource: user.id,
+      resource: chat.user.id,
       thread: chat.id,
     },
     savePerStep: true,
