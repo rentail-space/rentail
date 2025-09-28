@@ -195,8 +195,8 @@ const ipDataSchema = zod
       state_prov: "California",
       city: "Mountain View",
       zipcode: "94043-1351",
-      latitude: "37.42240",
-      longitude: "-122.08421",
+      latitude: "34.07558",
+      longitude: "-118.37841",
     },
     time_zone: { name: "America/Los_Angeles" },
   });

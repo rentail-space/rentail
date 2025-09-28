@@ -1,7 +1,6 @@
 import { Memory } from "@mastra/memory";
 import { TokenLimiter, ToolCallFilter } from "@mastra/memory/processors";
 import { captureException } from "@sentry/react-router";
-import { isEqual } from "es-toolkit";
 import type { Chat, User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import zod from "zod";
@@ -137,11 +136,9 @@ export async function getWorkingMemory(
       resourceId: user.id,
       threadId: chat.id,
     });
-    if (json) return userProfile.parse(JSON.parse(json));
-
-    const { success, data } = userProfile.safeParse({
-      location: user.location,
-    });
+    const { success, data } = userProfile.safeParse(
+      json ? JSON.parse(json) : { location: user.location },
+    );
     return success ? data : userProfile.parse(undefined);
   } catch (error) {
     captureException(error);
@@ -169,12 +166,11 @@ export async function updateWorkingMemory(
     const validateValue = userProfile.parse(
       update ? await update(currentValue) : currentValue,
     );
-    if (!isEqual(currentValue, validateValue))
-      await memory.updateWorkingMemory({
-        resourceId: user.id,
-        threadId: chat.id,
-        workingMemory: JSON.stringify(validateValue),
-      });
+    await memory.updateWorkingMemory({
+      resourceId: user.id,
+      threadId: chat.id,
+      workingMemory: JSON.stringify(validateValue),
+    });
     return validateValue;
   } catch (error) {
     captureException(error);

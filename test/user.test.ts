@@ -6,7 +6,7 @@ import type zod from "zod";
 import prisma from "~/lib/prisma";
 import {
   getRecentMessages,
-  getWorkingMemory,
+  updateWorkingMemory,
   type userProfile,
 } from "~/lib/workingMemory";
 import { launchServer, URL } from "./helpers/launchBrowser";
@@ -77,7 +77,7 @@ describe("User, conversation, profile", () => {
       });
 
       it("should have city", async () => {
-        expect(location.city).toEqual("Mountain View");
+        expect(location.city).toEqual("Los Angeles");
       });
 
       it("should have state", async () => {
@@ -130,11 +130,11 @@ describe("User, conversation, profile", () => {
       const chat = await prisma.chat.findUniqueOrThrow({
         where: { id: session.chatId },
       });
-      workingMemory = await getWorkingMemory(user, chat);
+      workingMemory = await updateWorkingMemory(user, chat);
     });
 
     it("should have user city", async () => {
-      expect(workingMemory.location?.city).toEqual("Mountain View");
+      expect(workingMemory.location?.city).toEqual("Los Angeles");
     });
 
     it("should have user state", async () => {
