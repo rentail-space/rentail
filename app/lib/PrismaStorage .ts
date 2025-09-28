@@ -23,12 +23,17 @@ import type { Chat, Messages, User } from "prisma/generated/client";
 import type { Role } from "prisma/generated/enums";
 import prisma from "./prisma";
 
-export class CustomStorage extends MastraStorage {
+/**
+ * Store Mastra state in our Postgres database using our existing schema.
+ */
+export class PrismaStorage extends MastraStorage {
   constructor() {
     super({ name: "prisma" });
   }
 
-  async init() {}
+  init(): Promise<void> {
+    return Promise.resolve();
+  }
 
   get supports() {
     return {
@@ -37,36 +42,34 @@ export class CustomStorage extends MastraStorage {
       hasColumn: false,
       createTable: false,
       deleteMessages: false,
-      aiTracing: false,
-      indexManagement: false,
     };
   }
 
-  async createTable() {
+  createTable(): Promise<void> {
     throw new Error("Not implemented");
   }
 
-  async clearTable() {
+  clearTable(): Promise<void> {
     throw new Error("Not implemented");
   }
 
-  async dropTable() {
+  dropTable(): Promise<void> {
     throw new Error("Not implemented");
   }
 
-  async alterTable() {
+  alterTable(): Promise<void> {
     throw new Error("Not implemented");
   }
 
-  async insert() {
+  insert(): Promise<void> {
     throw new Error("Not implemented");
   }
 
-  async batchInsert() {
+  batchInsert(): Promise<void> {
     throw new Error("Not implemented");
   }
 
-  async load<R>(): Promise<R | null> {
+  load<R>(): Promise<R | null> {
     throw new Error("Not implemented");
   }
 
@@ -218,14 +221,8 @@ export class CustomStorage extends MastraStorage {
 
   async saveMessages(
     args:
-      | {
-          messages: MastraMessageV1[];
-          format?: "v1";
-        }
-      | {
-          messages: MastraMessageV2[];
-          format: "v2";
-        },
+      | { messages: MastraMessageV1[]; format?: "v1" }
+      | { messages: MastraMessageV2[]; format: "v2" },
   ): Promise<MastraMessageV2[] | MastraMessageV1[]>;
 
   async saveMessages(
@@ -251,11 +248,11 @@ export class CustomStorage extends MastraStorage {
 
   async updateMessages(args: {
     messages: (Partial<Omit<MastraMessageV2, "createdAt">> & {
-      id: string;
       content?: {
-        metadata?: MastraMessageContentV2["metadata"];
         content?: MastraMessageContentV2["content"];
+        metadata?: MastraMessageContentV2["metadata"];
       };
+      id: string;
     })[];
   }): Promise<MastraMessageV2[]> {
     const messages = await prisma.messages.updateManyAndReturn({
@@ -270,19 +267,17 @@ export class CustomStorage extends MastraStorage {
     return toMessages(messages, "v2");
   }
 
-  async getTraces(/*args: StorageGetTracesArg*/): Promise<Trace[]> {
+  getTraces(/*args: StorageGetTracesArg*/): Promise<Trace[]> {
     throw new Error("Not implemented");
   }
 
-  async getTracesPaginated(/*args: StorageGetTracesPaginatedArg*/): Promise<
-    PaginationInfo & {
-      traces: Trace[];
-    }
+  getTracesPaginated(/*args: StorageGetTracesPaginatedArg*/): Promise<
+    PaginationInfo & { traces: Trace[] }
   > {
     throw new Error("Not implemented");
   }
 
-  async updateWorkflowResults(
+  updateWorkflowResults(
     /*{
     workflowName,
     runId,
@@ -300,7 +295,7 @@ export class CustomStorage extends MastraStorage {
     throw new Error("Not implemented");
   }
 
-  async updateWorkflowState(
+  updateWorkflowState(
     /*{
     workflowName,
     runId,
@@ -320,18 +315,18 @@ export class CustomStorage extends MastraStorage {
     throw new Error("Not implemented");
   }
 
-  async getScoreById(/*{ id }: { id: string }*/): Promise<ScoreRowData | null> {
+  getScoreById(/*{ id }: { id: string }*/): Promise<ScoreRowData | null> {
     throw new Error("Not implemented");
   }
 
-  async saveScore(
+  saveScore(
     /*
     score: ValidatedSaveScorePayload,
   }*/
   ): Promise<{ score: ScoreRowData }> {
     throw new Error("Not implemented");
   }
-  async getScoresByScorerId(
+  getScoresByScorerId(
     /*{
     scorerId,
     pagination,
@@ -349,7 +344,7 @@ export class CustomStorage extends MastraStorage {
     throw new Error("Not implemented");
   }
 
-  async getScoresByRunId(
+  getScoresByRunId(
     /*{
     runId,
     pagination,
@@ -361,7 +356,7 @@ export class CustomStorage extends MastraStorage {
     throw new Error("Not implemented");
   }
 
-  async getScoresByEntityId(
+  getScoresByEntityId(
     /*{
     entityId,
     entityType,
@@ -375,14 +370,15 @@ export class CustomStorage extends MastraStorage {
     throw new Error("Not implemented");
   }
 
-  async getEvals(
+  getEvals(
     /*
     options: { agentName?: string; type?: "test" | "live" } & PaginationArgs,
   }*/
   ): Promise<PaginationInfo & { evals: EvalRow[] }> {
     throw new Error("Not implemented");
   }
-  async getEvalsByAgentName(
+
+  getEvalsByAgentName(
     /*
     agentName: string,
     type?: "test" | "live",
@@ -391,7 +387,7 @@ export class CustomStorage extends MastraStorage {
     throw new Error("Not implemented");
   }
 
-  async getWorkflowRuns(
+  getWorkflowRuns(
     /*args?: {
     workflowName?: string;
     fromDate?: Date;
@@ -403,7 +399,8 @@ export class CustomStorage extends MastraStorage {
   ): Promise<WorkflowRuns> {
     throw new Error("Not implemented");
   }
-  async getWorkflowRunById(
+
+  getWorkflowRunById(
     /*args: {
     runId: string;
     workflowName?: string;
@@ -419,13 +416,13 @@ export class CustomStorage extends MastraStorage {
       perPage: number;
     } & ThreadSortOptions,
   ): Promise<PaginationInfo & { threads: StorageThreadType[] }> {
-    const count = await prisma.chat.count({
-      where: { userId: args.resourceId },
-    });
     const chats = await prisma.chat.findMany({
       orderBy: toOrderBy(args.orderBy, args.sortDirection),
       skip: args.page * args.perPage,
       take: args.perPage,
+      where: { userId: args.resourceId },
+    });
+    const count = await prisma.chat.count({
       where: { userId: args.resourceId },
     });
     return {
@@ -464,7 +461,7 @@ export class CustomStorage extends MastraStorage {
     };
   }
 
-  async persistWorkflowSnapshot(
+  persistWorkflowSnapshot(
     /*{
     workflowName,
     runId,
@@ -480,7 +477,7 @@ export class CustomStorage extends MastraStorage {
     throw new Error("Not implemented");
   }
 
-  async loadWorkflowSnapshot(
+  loadWorkflowSnapshot(
     /*{
     workflowName,
     runId,
@@ -532,11 +529,11 @@ export class CustomStorage extends MastraStorage {
     metadata?: Record<string, unknown>;
   }): Promise<StorageResourceType> {
     const user = await prisma.user.update({
-      where: { id: resourceId },
       data: {
         workingMemory,
         metadata: metadata ? JSON.stringify(metadata) : undefined,
       },
+      where: { id: resourceId },
     });
     return toResource(user);
   }
@@ -575,7 +572,7 @@ function toThread(chat: Chat): StorageThreadType {
   return {
     createdAt: chat.createdAt,
     id: chat.id,
-    metadata: JSON.parse(chat.metadata as string),
+    metadata: chat.metadata ? JSON.parse(chat.metadata as string) : undefined,
     resourceId: chat.userId,
     title: chat.title ?? undefined,
     updatedAt: chat.updatedAt,
@@ -584,11 +581,11 @@ function toThread(chat: Chat): StorageThreadType {
 
 function toResource(user: User): StorageResourceType {
   return {
-    id: user.id,
-    workingMemory: user.workingMemory ?? undefined,
-    metadata: user.metadata ? JSON.parse(user.metadata as string) : undefined,
     createdAt: user.createdAt,
+    id: user.id,
+    metadata: user.metadata ? JSON.parse(user.metadata as string) : undefined,
     updatedAt: user.updatedAt,
+    workingMemory: user.workingMemory ?? undefined,
   };
 }
 

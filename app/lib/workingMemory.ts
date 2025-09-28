@@ -5,12 +5,7 @@ import type { Chat, User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import zod from "zod";
 import welcome from "~/prompts/welcome.md?raw";
-import { CustomStorage } from "./mastaStorage";
-
-/**
- * Store state in our Postgres database
- */
-const store = new CustomStorage();
+import { PrismaStorage } from "./PrismaStorage ";
 
 /**
  * This is the schema that will be used to store the user's profile in the
@@ -81,7 +76,7 @@ export const memory = new Memory({
     new ToolCallFilter(),
     new TokenLimiter(127000), // Ensure the total tokens from memory don't exceed ~127k
   ],
-  storage: store,
+  storage: new PrismaStorage(),
 });
 
 /**
