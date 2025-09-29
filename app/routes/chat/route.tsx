@@ -88,7 +88,7 @@ export default function Chat() {
   return (
     <StickToBottom initial="smooth" resize="smooth">
       <div className="flex h-screen flex-col inset-0">
-        <Header />
+        <Header chatId={chat.id} />
 
         <StickToBottom.Content>
           <Messages
