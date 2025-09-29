@@ -109,7 +109,7 @@ function createMessageStartEvent(): string {
       type: "message",
       role: "assistant",
       content: [],
-      model: "claude-sonnet-4-20250514",
+      model: "claude-sonnet-4.5-sonnet",
       stop_reason: null,
       stop_sequence: null,
       usage: { input_tokens: 0, output_tokens: 0 },
