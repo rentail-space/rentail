@@ -512,7 +512,7 @@ export class PrismaStorage extends MastraStorage {
         : undefined,
     };
     const user = await prisma.user.upsert({
-      create: { ...update, id: resource.id, location: "" },
+      create: { ...update, id: resource.id, geocode: "" },
       update,
       where: { id: resource.id },
     });

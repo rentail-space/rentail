@@ -79,9 +79,9 @@ export async function getUserFromSession(request: Request): Promise<{
     if (user) return { user, session };
   }
 
-  const location = await getLocationFromRequest(request);
+  const geocode = await getLocationFromRequest(request);
   const newUser = await prisma.user.create({
-    data: { ip: location.ip, location: location },
+    data: { ip: geocode.ip, geocode: geocode },
   });
   session.set("userId", newUser.id);
   return { user: newUser, session };

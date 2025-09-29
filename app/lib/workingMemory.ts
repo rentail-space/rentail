@@ -131,7 +131,7 @@ export async function getWorkingMemory(
       threadId: chat.id,
     });
     const { success, data } = userProfile.safeParse(
-      json ? JSON.parse(json) : { location: chat.user.location },
+      json ? JSON.parse(json) : { location: chat.user.geocode },
     );
     return success ? data : userProfile.parse(undefined);
   } catch (error) {

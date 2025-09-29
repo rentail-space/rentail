@@ -80,7 +80,7 @@ describe("User, conversation, profile", () => {
       };
 
       beforeAll(async () => {
-        location = user.location as typeof location;
+        location = user.geocode as typeof location;
       });
 
       it("should have city", async () => {
