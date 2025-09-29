@@ -17,8 +17,8 @@ const agent = new Agent({
       - If giving a location with multiple parts (e.g. "New York, NY"), use the most relevant part (e.g. "New York")
       - Include relevant details like the cost of the space, the size of the space, and the foot traffic of the space
       - Keep responses concise but informative
- 
-      Use the findNearbySpacesTool to fetch the pop-up retail spaces for the user.
+      - When a user provides their location, you should extract and remember their location information
+      - Use the findNearbySpacesTool to fetch the pop-up retail spaces for the user
 `,
   memory: memory,
   // Send the chat to Anthropic LLM

@@ -7,14 +7,22 @@
 
 import { ulid } from "ulid";
 
+export interface ToolCall {
+  id: string;
+  name: string;
+  input: Record<string, unknown>;
+}
+
 /**
  * Create a streaming response that mimics Anthropic's API format
  */
 export default function createStreamingResponse(
   mockResponse: string,
+  toolCalls: ToolCall[],
 ): ReadableStream<Uint8Array> {
   const encoder = new TextEncoder();
   let index = 0;
+  let currentBlockIndex = 0;
 
   return new ReadableStream({
     start(controller) {
@@ -24,8 +32,32 @@ export default function createStreamingResponse(
         const messageStart = createMessageStartEvent();
         controller.enqueue(encoder.encode(messageStart));
 
-        // Send content_block_start event
-        const contentBlockStart = createContentBlockStartEvent();
+        // If we need to include a tool call, send it first
+        for (const toolCall of toolCalls) {
+          // Send tool use content block start
+          const toolUseStart = createToolUseContentBlockStartEvent(
+            currentBlockIndex,
+            toolCall,
+          );
+          controller.enqueue(encoder.encode(toolUseStart));
+
+          // Send tool use input delta (for Anthropic format)
+          const toolInputDelta = createToolUseInputDeltaEvent(
+            currentBlockIndex,
+            toolCall.input,
+          );
+          controller.enqueue(encoder.encode(toolInputDelta));
+
+          // Send tool use content block stop
+          const toolUseStop = createContentBlockStopEvent(currentBlockIndex);
+          controller.enqueue(encoder.encode(toolUseStop));
+
+          currentBlockIndex++;
+        }
+
+        // Send text content_block_start event
+        const contentBlockStart =
+          createContentBlockStartEvent(currentBlockIndex);
         controller.enqueue(encoder.encode(contentBlockStart));
 
         // Send content in chunks to simulate streaming
@@ -34,7 +66,8 @@ export default function createStreamingResponse(
         function sendNextChunk() {
           if (index >= mockResponse.length) {
             // Send content_block_stop event
-            const contentBlockStop = createContentBlockStopEvent();
+            const contentBlockStop =
+              createContentBlockStopEvent(currentBlockIndex);
             controller.enqueue(encoder.encode(contentBlockStop));
 
             // Send message_stop event
@@ -49,7 +82,10 @@ export default function createStreamingResponse(
           index += chunkSize;
 
           // Send content_block_delta event
-          const contentDelta = createContentBlockDeltaEvent(chunk);
+          const contentDelta = createContentBlockDeltaEvent(
+            chunk,
+            currentBlockIndex,
+          );
           controller.enqueue(encoder.encode(contentDelta));
 
           // Schedule next chunk with small delay to simulate streaming
@@ -83,12 +119,50 @@ function createMessageStartEvent(): string {
 }
 
 /**
- * Create content_block_start event
+ * Create tool use content_block_start event
  */
-function createContentBlockStartEvent(): string {
+function createToolUseContentBlockStartEvent(
+  index: number,
+  toolCall: ToolCall,
+): string {
   const event = {
     type: "content_block_start",
-    index: 0,
+    index: index,
+    content_block: {
+      type: "tool_use",
+      id: toolCall.id,
+      name: toolCall.name,
+      input: {},
+    },
+  };
+  return `event: content_block_start\ndata: ${JSON.stringify(event)}\n\n`;
+}
+
+/**
+ * Create tool use input delta event (streams the tool input)
+ */
+function createToolUseInputDeltaEvent(
+  index: number,
+  input: Record<string, unknown>,
+): string {
+  const event = {
+    type: "content_block_delta",
+    index: index,
+    delta: {
+      type: "input_json_delta",
+      partial_json: JSON.stringify(input),
+    },
+  };
+  return `event: content_block_delta\ndata: ${JSON.stringify(event)}\n\n`;
+}
+
+/**
+ * Create text content_block_start event
+ */
+function createContentBlockStartEvent(index = 0): string {
+  const event = {
+    type: "content_block_start",
+    index: index,
     content_block: {
       type: "text",
       text: "",
@@ -100,10 +174,10 @@ function createContentBlockStartEvent(): string {
 /**
  * Create content_block_delta event
  */
-function createContentBlockDeltaEvent(text: string): string {
+function createContentBlockDeltaEvent(text: string, index = 0): string {
   const event = {
     type: "content_block_delta",
-    index: 0,
+    index: index,
     delta: {
       type: "text_delta",
       text: text,
@@ -115,10 +189,10 @@ function createContentBlockDeltaEvent(text: string): string {
 /**
  * Create content_block_stop event
  */
-function createContentBlockStopEvent(): string {
+function createContentBlockStopEvent(index = 0): string {
   const event = {
     type: "content_block_stop",
-    index: 0,
+    index: index,
   };
   return `event: content_block_stop\ndata: ${JSON.stringify(event)}\n\n`;
 }

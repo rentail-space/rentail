@@ -6,6 +6,7 @@ import type zod from "zod";
 import prisma from "~/lib/prisma";
 import {
   getRecentMessages,
+  getWorkingMemory,
   updateWorkingMemory,
   type userProfile,
 } from "~/lib/workingMemory";
@@ -194,15 +195,11 @@ describe("User, conversation, profile", () => {
     });
   });
 
-  describe.skip("spell location", () => {
+  describe("user updates location", () => {
     let workingMemory: zod.infer<typeof userProfile>;
 
     beforeAll(async () => {
-      const chat = await prisma.chat.findUniqueOrThrow({
-        where: { id: chatId },
-        include: { user: true },
-      });
-      const response = await fetch(`${URL}/api/chat`, {
+      const chatResponse = await fetch(`${URL}/api/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -210,17 +207,34 @@ describe("User, conversation, profile", () => {
         },
         body: JSON.stringify({
           userMessage: {
-            parts: [
-              {
-                type: "text",
-                text: "I actually live in Boston",
-              },
-            ],
+            parts: [{ type: "text", text: "My location is Boston" }],
           },
         }),
       });
-      expect(response.status).toBe(200);
-      workingMemory = await updateWorkingMemory(chat);
+
+      expect(chatResponse.status).toBe(200);
+      expect(chatResponse.headers.get("content-type")).toContain(
+        "text/event-stream",
+      );
+      const reader = chatResponse.body?.getReader();
+      if (reader) {
+        try {
+          while (true) {
+            const { done } = await reader.read();
+            if (done) break;
+          }
+        } finally {
+          reader.releaseLock();
+        }
+      }
+
+      // After the location message, working memory should still be accessible
+      const chat = await prisma.chat.findUniqueOrThrow({
+        include: { user: true },
+        where: { id: chatId },
+      });
+
+      workingMemory = await getWorkingMemory(chat);
     });
 
     it("should have user city", async () => {

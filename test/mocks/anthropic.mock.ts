@@ -5,6 +5,10 @@
  * you to define responses based on the last user message or message patterns.
  */
 
+import type { Tool, ToolChoice } from "ai";
+import { invariant, last } from "es-toolkit";
+import createStreamingResponse, { type ToolCall } from "./anthropic.stream";
+
 interface MessagePattern {
   // Pattern to match against the last user message
   pattern: string | RegExp;
@@ -25,6 +29,11 @@ export const customMockResponses: MessagePattern[] = [
     response:
       "We have some great locations available. Here are the top options with excellent foot traffic.",
   },
+  {
+    pattern: /location.*Boston/i,
+    response:
+      "Perfect! I've updated your location to Boston. I can now help you find retail spaces in the Boston area. What type of business are you planning to open?",
+  },
 ];
 
 /**
@@ -36,12 +45,64 @@ const fallbackResponse: string =
 /**
  * Find a matching response for the given message
  */
-export function findMockResponse(message: string): string {
+export function findMockResponse(body: {
+  messages: Array<{
+    role: string;
+    content: Array<{ type: string; text: string }>;
+  }>;
+  tools: { name: string }[];
+  tool_choice: { type: ToolChoice<Record<string, Tool>> };
+}): ReadableStream<Uint8Array> {
+  // Extract the last user message from the request
+  const message = last(body.messages);
+  invariant(message?.role === "user", "Last message must be a user message");
+
+  // Get the text content from the message
+  const messageText = message.content
+    .filter((part) => part.type === "text")
+    .map((part) => part.text)
+    .join(" ");
+
+  console.info(
+    `[MSW] Anthropic API mock - processing message: "${messageText.slice(0, 100)}..."`,
+  );
+
   // Check custom responses first (higher priority)
   const response = customMockResponses.find((mockPattern) =>
-    matchesPattern(message, mockPattern.pattern),
+    matchesPattern(messageText, mockPattern.pattern),
   );
-  return response?.response ?? fallbackResponse;
+
+  const toolCalls: ToolCall[] = [];
+
+  if (
+    body.tool_choice?.type === "auto" &&
+    body.tools.find((tool) => tool.name === "updateWorkingMemory")
+  ) {
+    // Create a tool call for updating working memory with the exact format Mastra expects
+    const updateWorkingMemoryTool = {
+      id: `toolu_${Date.now()}`,
+      name: "updateWorkingMemory", // This is the exact name Mastra's ToolCallFilter looks for
+      input: {
+        memory: {
+          // Mastra expects the data under 'memory' key
+          location: {
+            city: "Boston",
+            state: "Massachusetts",
+            country: "United States",
+            latitude: "42.3601",
+            longitude: "-71.0589",
+            timeZone: "America/New_York",
+          },
+        },
+      },
+    };
+    toolCalls.push(updateWorkingMemoryTool);
+  }
+
+  return createStreamingResponse(
+    response?.response ?? fallbackResponse,
+    toolCalls,
+  );
 }
 
 /**
