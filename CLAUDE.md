@@ -34,6 +34,7 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 
 **AI Integration:**
 - Claude 4 via Anthropic AI SDK with streaming responses and thinking tokens
+- Mastra framework for agent orchestration and memory management (PostgreSQL-backed)
 - Chat API endpoint: `app/routes/api.chat.tsx` (streaming chat interface with Redis coordination)
 - Redis-based stream management: `app/lib/redis-stop-monitor.ts` (cross-server stop signals)
 - Stop endpoints: `app/routes/api.chat.$id.stop.tsx` for manual chat termination
@@ -41,6 +42,11 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - System prompts in `app/lib/`: `general.md`, `prelude.md`, `spaces.md`, `welcome.md`
 - Geolocation filtering: Built-in Haversine distance calculation for shopping centers
 - Use Context7 MCP server for library documentation and code examples
+
+**Email Integration:**
+- React Email templates in `/app/emails/` directory using `@react-email/components`
+- Resend API for email delivery (configured via `RESEND_API_KEY`)
+- Transactional emails for waitlist notifications and user communication
 
 **Database:**
 - PostgreSQL with Prisma ORM client and schema generation
@@ -114,10 +120,28 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Never commit secrets or API keys to the repository
 
 **AI Integration:**
-- Use Context7 MCP server for library documentation and code examples  
+- Use Context7 MCP server for library documentation and code examples
 - AI configuration managed via `app/lib/env.ts` with env-var validation
 - Multiple system prompt files for different contexts (general, prelude, spaces, welcome)
 - Chat interface uses Server-Sent Events for streaming responses
+
+**Git Commits:**
+- Use conventional commit format with descriptive emojis:
+  - ✨ feat: New features
+  - 🐛 fix: Bug fixes
+  - 📝 docs: Documentation changes
+  - ♻️ refactor: Code restructuring
+  - 🎨 style: Code formatting
+  - ⚡️ perf: Performance improvements
+  - ✅ test: Adding or correcting tests
+  - 🔧 chore: Tooling, configuration, maintenance
+  - ⬆️ upgrade: Dependency updates
+  - 🔥 remove: Removing code or files
+  - 🚑 hotfix: Critical fixes
+  - 🔒 security: Security improvements
+- Write in imperative mood ("Add feature" not "Added feature")
+- Include scope when applicable: `type(scope): description`
+- Keep commits atomic and focused on single concerns
 
 ## Tests
 
@@ -145,6 +169,7 @@ Required environment variables (set in `.env.local`):
 - `DATABASE_URL`: PostgreSQL connection string for production
 - `REDIS_URL`: Redis connection string for stream coordination (default: redis://localhost:6379)
 - `SESSION_SECRET`: Secret key for session management
+- `RESEND_API_KEY`: Resend API key for email functionality
 - `LOGTAIL_TOKEN`: BetterStack Logtail token for logging
 - `LOGTAIL_ENDPOINT`: BetterStack Logtail endpoint URL
 - `PUSHGATEWAY_URL`: BetterStack Push Gateway URL for metrics
@@ -172,6 +197,7 @@ Optional environment variables:
   - `/app/entry.server.tsx`: Server-side rendering entry point with request logging
   - `/app/app.css`: Global Tailwind CSS imports
   - `/app/components/`: Reusable UI components organized by feature
+  - `/app/emails/`: React Email templates for transactional emails
 - `/prisma`: Database schema and migrations
   - `schema.prisma`: Database models and configuration
   - `generated/`: Prisma client generation output
