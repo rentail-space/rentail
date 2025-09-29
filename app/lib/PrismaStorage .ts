@@ -19,6 +19,7 @@ import {
 } from "@mastra/core/storage";
 import type { Trace } from "@mastra/core/telemetry";
 import type { StepResult, WorkflowRunState } from "@mastra/core/workflows";
+import { invariant } from "es-toolkit";
 import type { Chat, Messages, User } from "prisma/generated/client";
 import type { Role } from "prisma/generated/enums";
 import prisma from "./prisma";
@@ -160,7 +161,6 @@ export class PrismaStorage extends MastraStorage {
 
   async getMessages({
     threadId,
-    resourceId,
     selectBy,
     format,
   }: StorageGetMessagesArg & {
@@ -169,7 +169,7 @@ export class PrismaStorage extends MastraStorage {
     const page = selectBy?.pagination?.page ?? 0;
     const perPage = selectBy?.pagination?.perPage ?? 10;
     const messages = await prisma.messages.findMany({
-      where: { chatId: threadId, chat: { userId: resourceId } },
+      where: { chatId: threadId },
       skip: page * perPage,
       take: perPage,
     });
@@ -227,17 +227,22 @@ export class PrismaStorage extends MastraStorage {
 
   async saveMessages(
     args:
-      | { messages: MastraMessageV1[]; format?: undefined | "v1" }
-      | { messages: MastraMessageV2[]; format: "v2" },
+      | {
+          messages: MastraMessageV1[];
+          format?: undefined | "v1";
+          threadId?: string;
+        }
+      | { messages: MastraMessageV2[]; format: "v2"; threadId?: string },
   ): Promise<MastraMessageV2[] | MastraMessageV1[]> {
+    const chatId = getChatId(args.messages);
     const messages = await prisma.messages.createManyAndReturn({
       data: args.messages.map((message) => ({
+        chatId,
         content: JSON.stringify(message.content),
         createdAt: message.createdAt,
         id: message.id,
         role: message.role as Role,
         type: message.type ?? "text",
-        chatId: message.threadId as string,
       })),
       skipDuplicates: true,
     });
@@ -255,13 +260,14 @@ export class PrismaStorage extends MastraStorage {
       id: string;
     })[];
   }): Promise<MastraMessageV2[]> {
+    const chatId = getChatId(args.messages);
     const messages = await prisma.messages.updateManyAndReturn({
       data: args.messages.map((message) => ({
+        chatId,
         content: message.content ? JSON.stringify(message.content) : undefined,
         id: message.id,
         role: message.role as Role,
         type: message.type as MastraMessageV2["type"],
-        chatId: message.threadId as string,
       })),
     });
     return toMessages(messages, "v2");
@@ -597,4 +603,13 @@ function toOrderBy(
   return orderBy === "updatedAt"
     ? { updatedAt: sortOrder }
     : { createdAt: sortOrder };
+}
+
+function getChatId(
+  messages: Partial<MastraMessageV1>[] | Partial<MastraMessageV2>[],
+): string {
+  console.log("messages", messages);
+  const threadId = messages.find((message) => message.threadId)?.threadId;
+  invariant(threadId, "Thread ID is required");
+  return threadId;
 }

@@ -23,7 +23,7 @@ const agent = new Agent({
   memory: memory,
   // Send the chat to Anthropic LLM
   model: createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
-    "claude-sonnet-4.5",
+    "claude-sonnet-4-5",
   ),
   name: "Main Agent",
 });
