@@ -33,7 +33,7 @@ model Chat {
 model Messages {
   chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    String   @map("chat_id")
-  content   Json     @map("content")
+  content   Json     @map("content")    @db.Json()
   createdAt DateTime @map("created_at") @default(now()) @db.Timestamp(3)
   id        String   @map("id")         @id @default(cuid(2))
   role      Role     @map("role")
