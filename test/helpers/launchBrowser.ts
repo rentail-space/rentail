@@ -1,7 +1,9 @@
 import { spawn } from "node:child_process";
-import { existsSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
+import { existsSync, unlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { URL as URLString } from "node:url";
+import { invariant } from "es-toolkit";
 import {
   type Browser,
   type BrowserContext,
@@ -9,10 +11,8 @@ import {
   type Page,
   type Route,
 } from "playwright";
-import "./toMatchScreenshot";
-import { URL as URLString } from "node:url";
-import { invariant } from "es-toolkit";
 import env from "~/lib/env";
+import "./toMatchScreenshot";
 
 const port = 9222;
 const lockFile = join(tmpdir(), `rentail-server-${port}.lock`);
@@ -21,7 +21,7 @@ export const URL = `http://localhost:${port}`;
 
 let browser: Browser;
 let context: BrowserContext;
-let server: { port: number; stop: () => boolean };
+let server: boolean;
 
 /**
  * Launch a new browser instance and return the context.
@@ -60,7 +60,7 @@ export async function openPage(logging = env.isDebug): Promise<Page> {
  * @param logging - Whether to log debug messages.
  * @returns The server instance.
  */
-export async function launchServer(logging = env.isDebug) {
+export async function launchServer(logging = env.isDebug): Promise<boolean> {
   if (server) return server;
 
   if (logging) console.info("[TEST] launching server");
@@ -73,26 +73,11 @@ export async function launchServer(logging = env.isDebug) {
       );
 
     try {
-      const pidStr = readFileSync(lockFile, "utf8");
-      const pid = Number.parseInt(pidStr, 10);
-
       if (await checkServerHealth()) {
         // Server is already running and healthy
         if (logging)
           console.debug("[TEST] server is already running and healthy");
-        server = {
-          port,
-          stop: () => {
-            try {
-              if (logging) console.debug("[TEST] killing server");
-              process.kill(pid);
-              unlinkSync(lockFile);
-              return true;
-            } catch {
-              return false;
-            }
-          },
-        };
+        server = true;
         return server;
       }
 
@@ -135,10 +120,7 @@ export async function launchServer(logging = env.isDebug) {
   invariant(serverProcess.pid, "Server process ID is not available");
   writeFileSync(lockFile, serverProcess.pid.toString());
 
-  return await new Promise<{
-    port: number;
-    stop: () => boolean;
-  }>((resolve, reject) => {
+  return await new Promise<boolean>((resolve, reject) => {
     const timeout = setTimeout(() => {
       serverProcess.kill("SIGTERM");
       reject(new Error("Server failed to start within 30 seconds"));
@@ -162,20 +144,15 @@ export async function launchServer(logging = env.isDebug) {
     serverProcess.stdout.on("data", (stream: Buffer) => {
       if (stream.toString().includes(port.toString())) {
         clearTimeout(timeout);
-        server = {
-          port,
-          stop: () => {
-            try {
-              serverProcess.kill();
-              unlinkSync(lockFile);
-              return true;
-            } catch {
-              return false;
-            }
-          },
-        };
+        server = true;
         return resolve(server);
       }
+    });
+
+    process.on("beforeExit", () => {
+      if (logging) console.debug("[TEST] killing server");
+      serverProcess.kill("SIGTERM");
+      unlinkSync(lockFile);
     });
 
     if (logging)

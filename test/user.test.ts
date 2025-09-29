@@ -1,7 +1,7 @@
 import type { MastraMessageV2 } from "@mastra/core";
 import type { TextUIPart } from "ai";
 import type { Chat, User } from "prisma/generated/client";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import type zod from "zod";
 import prisma from "~/lib/prisma";
 import {
@@ -12,14 +12,13 @@ import {
 import { launchServer, URL } from "./helpers/launchBrowser";
 
 describe("User, conversation, profile", () => {
-  let server: { port: number; stop: () => boolean };
   let response: Response;
   let session: string;
   let userId: string;
   let chatId: string;
 
   beforeAll(async () => {
-    server = await launchServer();
+    await launchServer();
     response = await fetch(`${URL}/chat`, {
       method: "GET",
     });
@@ -247,9 +246,5 @@ describe("User, conversation, profile", () => {
     it("should have user time zone", async () => {
       expect(workingMemory.location?.timeZone).toEqual("America/New_York");
     });
-  });
-
-  afterAll(() => {
-    server.stop();
   });
 });

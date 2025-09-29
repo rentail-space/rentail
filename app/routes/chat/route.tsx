@@ -13,9 +13,9 @@ import InputForm from "./InputForm";
 import Messages from "./Messages";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const { chat, messages, session, user } = await getChatFromSession(request);
+  const { chat, messages, session } = await getChatFromSession(request);
   return data(
-    { chat, messages, user },
+    { chat, messages },
     { headers: { "Set-Cookie": await commit(session) } },
   );
 }
