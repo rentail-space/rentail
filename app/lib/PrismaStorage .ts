@@ -608,7 +608,6 @@ function toOrderBy(
 function getChatId(
   messages: Partial<MastraMessageV1>[] | Partial<MastraMessageV2>[],
 ): string {
-  console.log("messages", messages);
   const threadId = messages.find((message) => message.threadId)?.threadId;
   invariant(threadId, "Thread ID is required");
   return threadId;
