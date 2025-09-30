@@ -26,7 +26,6 @@ export const auth = betterAuth({
   plugins: [
     anonymous({
       onLinkAccount: async ({ anonymousUser, newUser }) => {
-        console.log("onLinkAccount", anonymousUser, newUser);
         const from = anonymousUser.user as unknown as User;
         newUser.user.geocode = from.geocode;
         newUser.user.ip = from.ip;
