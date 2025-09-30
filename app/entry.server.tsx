@@ -74,6 +74,7 @@ function handleRequest(
         },
         onError(error: unknown) {
           Sentry.captureException(error);
+          console.error(`[500] ${request.method} ${pathname}:`, error);
           const duration = Date.now() - startTime;
           logtail?.error("request", {
             duration: duration.toString(),
