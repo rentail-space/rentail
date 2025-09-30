@@ -44,7 +44,17 @@
       "suspicious": {
         "noUnknownAtRules": "off",
         "noExplicitAny": "warn",
-        "noUnsafeDeclarationMerging": "error"
+        "noUnsafeDeclarationMerging": "error",
+        "noConsole": {
+          "options": {
+            "allow": [
+              "assert",
+              "error",
+              "info",
+              "warn"
+            ]
+          }
+        }
       },
       "recommended": true,
       "style": {
