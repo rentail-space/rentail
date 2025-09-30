@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { authClient } from "~/lib/auth.client";
 
 interface HeaderProps {
   chatId?: string;
@@ -13,13 +14,42 @@ export default function Header({ chatId }: HeaderProps) {
         </Link>
       </h1>
 
-      {chatId && (
-        <div className="flex gap-3 items-center">
-          <DownloadButton href={`/api/chat/${chatId}/export/csv`} as="CSV" />
-          <DownloadButton href={`/api/chat/${chatId}/export/pdf`} as="PDF" />
-        </div>
-      )}
+      <div className="flex gap-3 items-center">
+        {chatId && (
+          <>
+            <DownloadButton href={`/api/chat/${chatId}/export/csv`} as="CSV" />
+            <DownloadButton href={`/api/chat/${chatId}/export/pdf`} as="PDF" />
+          </>
+        )}
+        {authClient && <Authentication />}
+      </div>
     </header>
+  );
+}
+
+function Authentication() {
+  const { data: session, isPending } = authClient.useSession();
+  return (
+    !isPending &&
+    (session ? (
+      <button
+        type="button"
+        onClick={async () => {
+          await authClient.signOut();
+          window.location.href = "/";
+        }}
+        className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+      >
+        Sign Out
+      </button>
+    ) : (
+      <Link
+        to="/auth"
+        className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+      >
+        Sign In
+      </Link>
+    ))
   );
 }
 

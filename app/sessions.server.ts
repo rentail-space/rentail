@@ -81,7 +81,7 @@ export async function getUserFromSession(request: Request): Promise<{
 
   const geocode = await getLocationFromRequest(request);
   const newUser = await prisma.user.create({
-    data: { ip: geocode.ip, geocode: geocode },
+    data: { geocode: geocode, ip: geocode.ip },
   });
   session.set("userId", newUser.id);
   return { user: newUser, session };
@@ -132,7 +132,7 @@ export async function getChatFromSession(request: Request): Promise<{
  * @param session - The session object
  * @returns The location and the updated session
  */
-async function getLocationFromRequest(
+export async function getLocationFromRequest(
   request: Request,
 ): Promise<zod.infer<typeof cachedLocation>> {
   const clientIp = request.headers.get("x-forwarded-for") ?? "146.70.195.182";

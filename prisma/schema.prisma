@@ -1,3 +1,4 @@
+
 generator client {
   provider               = "prisma-client"
   output                 = "generated"
@@ -21,7 +22,7 @@ model Chat {
   createdAt DateTime   @map("created_at") @default(now())
   id        String     @map("id")         @id @default(cuid(2))
   messages  Messages[]
-  metadata  Json?      @map("metadata")   @db.Json()
+  metadata  Json?      @map("metadata")   @db.Json
   title     String?    @map("title")
   updatedAt DateTime   @map("updated_at") @updatedAt
   user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -33,7 +34,7 @@ model Chat {
 model Messages {
   chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    String   @map("chat_id")
-  content   Json     @map("content")    @db.Json()
+  content   Json     @map("content")    @db.Json
   createdAt DateTime @map("created_at") @default(now()) @db.Timestamp(3)
   id        String   @map("id")         @id @default(cuid(2))
   role      Role     @map("role")
@@ -43,16 +44,23 @@ model Messages {
 }
 
 model User {
+  accounts      Account[]
   chats         Chat[]
-  createdAt     DateTime @map("created_at")     @default(now())
-  id            String   @map("id")             @id @default(cuid(2))
-  ip            String?  @map("ip")
-  geocode       Json     @map("geocode")        @db.Json()
-  updatedAt     DateTime @map("updated_at")     @updatedAt
-  workingMemory String?  @map("working_memory") @db.Text()
-  metadata      Json?    @map("metadata")       @db.Json()
+  createdAt     DateTime  @map("created_at")     @default(now())
+  email         String?   @map("email")
+  emailVerified Boolean   @map("email_verified") @default(false)
+  geocode       Json      @map("geocode")        @db.Json
+  id            String    @map("id")             @id @default(cuid(2))
+  image         String?   @map("image")
+  ip            String?   @map("ip")
+  metadata      Json?     @map("metadata")       @db.Json
+  name          String?   @map("name")
+  sessions      Session[]
+  updatedAt     DateTime  @map("updated_at")     @updatedAt
+  workingMemory String?   @map("working_memory") @db.Text
 
   @@map("users")
+  @@unique([email])
 }
 
 model Waitlist {
@@ -101,4 +109,49 @@ enum Role {
   system
   tool
   user
+}
+
+model Session {
+  id        String                      @id
+  expiresAt DateTime @map("expires_at")
+  token     String   @map("token")
+  createdAt DateTime @map("created_at") @default(now())
+  updatedAt DateTime @map("updated_at") @updatedAt
+  ipAddress String?  @map("ip_address")
+  userAgent String?  @map("user_agent")
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String                                     @id
+  accountId             String    @map("account_id")
+  providerId            String    @map("provider_id")
+  userId                String    @map("user_id")
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?   @map("access_token")
+  refreshToken          String?   @map("refresh_token")
+  idToken               String?   @map("id_token")
+  accessTokenExpiresAt  DateTime? @map("access_token_expires_at")
+  refreshTokenExpiresAt DateTime? @map("refresh_token_expires_at")
+  scope                 String?   @map("scope")
+  password              String?   @map("password")
+  createdAt             DateTime  @map("created_at")               @default(now())
+  updatedAt             DateTime  @map("updated_at")               @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String                      @id
+  identifier String   @map("identifier")
+  value      String   @map("value")
+  expiresAt  DateTime @map("expires_at")
+  createdAt  DateTime @map("created_at") @default(now())
+  updatedAt  DateTime @map("updated_at") @default(now()) @updatedAt
+
+  @@map("verification")
 }
