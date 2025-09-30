@@ -7,6 +7,10 @@ interface HeaderProps {
 }
 
 export default function Header({ chatId }: HeaderProps) {
+  useEffect(() => {
+    if (!authClient.getSession()) authClient.signIn.anonymous();
+  }, []);
+
   return (
     <header className="flex flex-row items-center justify-between gap-8 border-b px-6 py-1">
       <h1 className="font-bold text-2xl text-gray-900">
@@ -15,10 +19,12 @@ export default function Header({ chatId }: HeaderProps) {
         </Link>
       </h1>
 
-      <div className="flex gap-3 items-center">
-        <ExportButtons chatId={chatId} />
-        {authClient && <Authentication />}
-      </div>
+      {authClient && (
+        <div className="flex gap-3 items-center">
+          <ExportButtons chatId={chatId} />
+          <Authentication />
+        </div>
+      )}
     </header>
   );
 }
@@ -38,10 +44,6 @@ function ExportButtons({ chatId }: { chatId?: string }) {
 }
 
 function Authentication() {
-  useEffect(() => {
-    if (!authClient.getSession()) authClient.signIn.anonymous();
-  }, []);
-
   const { data: session, isPending } = authClient.useSession();
   return (
     !isPending &&
