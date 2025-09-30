@@ -10,6 +10,7 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
+
   emailAndPassword: {
     enabled: true,
     disableSignUp: false,
@@ -19,7 +20,6 @@ export const auth = betterAuth({
     autoSignIn: true,
     resetPasswordTokenExpiresIn: 3600, // 1 hour
   },
-  trustedOrigins: ["http://localhost:*", "https://rentail.space"],
 
   plugins: [
     anonymous({
@@ -32,6 +32,8 @@ export const auth = betterAuth({
       },
     }),
   ],
+
+  trustedOrigins: ["http://localhost:*", "https://rentail.space"],
 
   user: {
     additionalFields: {
@@ -55,27 +57,27 @@ export const auth = betterAuth({
       },
     },
   },
+
   session: {
-    additionalFields: {
-      ipAddress: { type: "string" },
-      location: { type: "string" },
-    },
     cookieCache: {
       enabled: true,
       maxAge: 5 * 60, // Short maxAge ensures session gets refreshed regularly
     },
   },
+
   advanced: {
     ipAddress: {
       ipAddressHeaders: ["x-client-ip", "x-forwarded-for"],
       disableIpTracking: false,
     },
   },
+
   logger: {
-    disabled: false,
+    disabled: true,
     disableColors: false,
     level: "debug",
   },
+
   databaseHooks: {
     user: {
       create: {
