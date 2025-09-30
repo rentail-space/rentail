@@ -90,6 +90,7 @@ export default function Chat() {
             inputRef={ref}
             isTyping={status === "streaming"}
             messages={messages}
+            setQuery={setQuery}
           />
         </StickToBottom.Content>
 

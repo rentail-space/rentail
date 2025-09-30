@@ -12,14 +12,16 @@ import askQuestion from "./askQuestion";
 
 export default function Messages({
   error,
+  inputRef,
   isTyping,
   messages,
-  inputRef,
+  setQuery,
 }: {
   error?: Error;
+  inputRef: React.RefObject<HTMLInputElement | null>;
   isTyping: boolean;
   messages: UIMessage<{ isAborted?: boolean }, { text: string }, UITools>[];
-  inputRef: React.RefObject<HTMLInputElement | null>;
+  setQuery: (query: string) => void;
 }) {
   const prevMessagesLength = useRef(messages.length);
   const prevIsTyping = useRef(isTyping);
@@ -54,8 +56,8 @@ export default function Messages({
             <UserMessage key={message.id} message={message} />
           ) : (
             <AssistantMessage
+              askQuestion={askQuestion({ inputRef, scrollToBottom, setQuery })}
               isLast={index === messages.length - 1}
-              inputRef={inputRef}
               key={message.id}
               message={message}
               scrollToBottom={scrollToBottom}
@@ -93,14 +95,14 @@ function AbortedMessage() {
 }
 
 function AssistantMessage({
+  askQuestion,
   isLast,
   message,
-  inputRef,
   scrollToBottom,
 }: {
+  askQuestion: (question: string) => Promise<void>;
   isLast: boolean;
   message: UIMessage;
-  inputRef: React.RefObject<HTMLInputElement | null>;
   scrollToBottom: ScrollToBottom;
 }) {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -128,11 +130,10 @@ function AssistantMessage({
       case "text":
         return (
           <ResponseMessage
+            askQuestion={askQuestion}
             contentRef={contentRef}
-            inputRef={inputRef}
             key={index.toString()}
             text={part.text}
-            scrollToBottom={scrollToBottom}
           />
         );
       case "reasoning":
@@ -184,14 +185,12 @@ function ReasoningMessage({ text, isLast }: { text: string; isLast: boolean }) {
 }
 
 function ResponseMessage({
+  askQuestion,
   contentRef,
-  inputRef,
-  scrollToBottom,
   text,
 }: {
+  askQuestion: (question: string) => Promise<void>;
   contentRef: React.RefObject<HTMLDivElement | null>;
-  inputRef: React.RefObject<HTMLInputElement | null>;
-  scrollToBottom: ScrollToBottom;
   text: string;
 }) {
   return (
@@ -209,7 +208,7 @@ function ResponseMessage({
           <Streamdown
             allowedImagePrefixes={["*"]}
             allowedLinkPrefixes={["*"]}
-            components={getComponents({ inputRef, scrollToBottom })}
+            components={getComponents({ askQuestion })}
             defaultOrigin="https://rentail.space"
             rehypePlugins={[]}
             remarkPlugins={[remarkGfm]}
@@ -243,11 +242,9 @@ function ErrorNotice({ error }: { error: Error }) {
 }
 
 function getComponents({
-  inputRef,
-  scrollToBottom,
+  askQuestion,
 }: {
-  inputRef: React.RefObject<HTMLInputElement | null>;
-  scrollToBottom: ScrollToBottom;
+  askQuestion: (question: string) => Promise<void>;
 }): Components {
   return {
     ol: ({ node, children, className, ...props }) => (
@@ -271,18 +268,16 @@ function getComponents({
       </span>
     ),
     a: ({ node, children, className, ...props }) => {
-      const isAsk = props.href?.startsWith("https://rentail.space");
+      const isAsk =
+        props.href?.startsWith("https://rentail.space/") ||
+        props.href?.startsWith("/");
       return isAsk ? (
         <a
           className="btn btn-soft btn-primary"
           href={`?q=${children}`}
-          onClick={async (event) => {
+          onClick={(event) => {
             event.preventDefault();
-            await askQuestion({
-              question: React.Children.toArray(children),
-              scrollToBottom,
-              inputRef,
-            });
+            askQuestion(React.Children.toArray(children).join(""));
           }}
         >
           {children}

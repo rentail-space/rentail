@@ -34,7 +34,6 @@ export default function InputForm({
         className="relative w-full"
       >
         <input
-          ref={ref}
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
@@ -44,6 +43,7 @@ export default function InputForm({
           disabled={isSubmitting}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Ask me any question about retail spaces..."
+          ref={ref}
           spellCheck="false"
           type="text"
           value={query}

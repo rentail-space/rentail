@@ -1,38 +1,36 @@
 import { delay } from "es-toolkit";
-import type { ReactNode } from "react";
 
-export default async function askQuestion({
-  question,
-  scrollToBottom,
+export default function askQuestion({
   inputRef,
+  scrollToBottom,
+  setQuery,
 }: {
-  question: Exclude<ReactNode, boolean | null | undefined>[];
-  scrollToBottom: () => void;
   inputRef: React.RefObject<HTMLInputElement | null>;
+  scrollToBottom: () => void;
+  setQuery: (query: string) => void;
 }) {
-  if (!inputRef.current) return;
+  return async function ask(question: string): Promise<void> {
+    // Clear input and make it readonly during typing animation
+    setQuery("");
 
-  // Clear input and make it readonly during typing animation
-  inputRef.current.value = "";
-
-  // Auto-scroll to bottom before starting animation
-  scrollToBottom();
-
-  // Animate typing the question
-  let input = "";
-  const text = question.join("");
-  for (let i = 0; i < text.length; i++) {
-    await delay(10);
-    input += text[i];
-    inputRef.current.value = input;
-  }
-
-  // Re-enable input and trigger change event
-  inputRef.current.value = input;
-
-  // Final scroll to bottom and focus
-  setTimeout(() => {
-    inputRef.current?.focus();
+    // Auto-scroll to bottom before starting animation
     scrollToBottom();
-  }, 10);
+
+    // Animate typing the question
+    let input = "";
+    for (let i = 0; i < question.length; i++) {
+      await delay(10);
+      input += question[i];
+      setQuery(input);
+    }
+
+    // Re-enable input and trigger change event
+    setQuery(input);
+
+    // Final scroll to bottom and focus
+    setTimeout(() => {
+      inputRef.current?.focus();
+      scrollToBottom();
+    }, 10);
+  };
 }
