@@ -4,7 +4,10 @@ import { authClient } from "~/lib/auth.client";
 import Header from "~/components/layout/Header";
 
 export default function ProfilePage() {
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session, isPending } = authClient?.useSession?.() ?? {
+    data: null,
+    isPending: true,
+  };
   const [activeTab, setActiveTab] = useState<"name" | "email" | "password">(
     "name",
   );

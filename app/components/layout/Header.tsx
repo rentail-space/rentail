@@ -4,7 +4,10 @@ import { authClient } from "~/lib/auth.client";
 
 export default function Header({ chatId }: { chatId?: string }) {
   const [isClient, setIsClient] = useState(false);
-  useEffect(() => setIsClient(true), []);
+  
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <header className="flex flex-row items-center justify-between gap-8 border-b px-6 py-1">
@@ -14,7 +17,7 @@ export default function Header({ chatId }: { chatId?: string }) {
         </Link>
       </h1>
 
-      {isClient && (
+      {isClient && authClient && (
         <div className="flex gap-3 items-center">
           {chatId && <ExportButtons chatId={chatId} />}
           <Authentication />
@@ -25,7 +28,7 @@ export default function Header({ chatId }: { chatId?: string }) {
 }
 
 function ExportButtons({ chatId }: { chatId: string }) {
-  const { data: session } = authClient.useSession();
+  const { data: session } = authClient?.useSession?.() ?? { data: null };
   const isAuthenticated = session?.user && !session?.user.isAnonymous;
   return (
     chatId &&
@@ -39,7 +42,10 @@ function ExportButtons({ chatId }: { chatId: string }) {
 }
 
 function Authentication() {
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session, isPending } = authClient?.useSession?.() ?? {
+    data: null,
+    isPending: true,
+  };
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

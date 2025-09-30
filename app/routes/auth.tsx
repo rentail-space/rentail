@@ -5,7 +5,7 @@ import Header from "~/components/layout/Header";
 
 export default function AuthPage() {
   const navigate = useNavigate();
-  const { data: session } = authClient.useSession();
+  const { data: session } = authClient?.useSession?.() ?? { data: null };
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
