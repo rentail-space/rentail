@@ -143,7 +143,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </head>
       <body>
-        {children}
+        <NuqsAdapter>{children}</NuqsAdapter>
         <Toaster richColors />
 
         <ScrollRestoration />
@@ -152,6 +152,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
+
+import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 
 export default function App() {
   return (

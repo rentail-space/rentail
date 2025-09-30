@@ -2,8 +2,9 @@ import { useChat } from "@ai-sdk/react";
 import { captureException } from "@sentry/react-router";
 import { DefaultChatTransport, type UIMessage, type UITools } from "ai";
 import { last } from "es-toolkit";
-import { useEffect, useRef, useState } from "react";
-import { data, useLoaderData, useSearchParams } from "react-router";
+import { useQueryState } from "nuqs";
+import { useRef } from "react";
+import { data, useLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
@@ -21,7 +22,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export default function Chat() {
-  const [searchParams] = useSearchParams();
+  const [query, setQuery] = useQueryState("q");
   const { chat, messages: initialMessages } = useLoaderData<typeof loader>();
   const { error, messages, sendMessage, status, stop } = useChat<
     UIMessage<{ isAborted?: boolean }, { text: string }, UITools>
@@ -48,25 +49,14 @@ export default function Chat() {
       },
     }),
   });
-  const [input, setInput] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  // Handle initial query from URL
-  // biome-ignore lint/correctness/useExhaustiveDependencies: only once on mount
-  useEffect(() => {
-    const query = searchParams.get("q")?.trim();
-    if (query) {
-      sendMessage({ parts: [{ text: query, type: "text" }], role: "user" });
-      searchParams.delete("q");
-    }
-  }, []);
+  const ref = useRef<HTMLInputElement>(null);
 
   const onSubmit = (input: string) => {
     sendMessage({
       parts: [{ text: input.trim(), type: "text" }],
       role: "user",
     });
-    setInput("");
+    setQuery(null);
   };
 
   const stopLLM = async (scrollToBottom: () => void) => {
@@ -84,7 +74,7 @@ export default function Chat() {
     await stop(); // Stop the AI SDK stream
 
     // Force a re-render to show the aborted state
-    setInput(input);
+    setQuery(null);
     // Scroll to bottom after a small delay to ensure the message is rendered
     setTimeout(scrollToBottom, 10);
   };
@@ -97,7 +87,7 @@ export default function Chat() {
         <StickToBottom.Content>
           <Messages
             error={error}
-            inputRef={inputRef}
+            inputRef={ref}
             isTyping={status === "streaming"}
             messages={messages}
           />
@@ -106,13 +96,13 @@ export default function Chat() {
         <ScrollButton />
 
         <InputForm
-          input={input}
-          inputRef={inputRef}
           isResponding={status === "streaming" || status === "submitted"}
           isSubmitting={status === "submitted"}
           onSubmit={onSubmit}
+          query={query ?? ""}
+          ref={ref}
+          setQuery={setQuery}
           stopLLM={stopLLM}
-          setInput={setInput}
         />
       </div>
     </StickToBottom>
