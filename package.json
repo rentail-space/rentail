@@ -35,6 +35,7 @@
     "@secretlint/secretlint-rule-preset-recommend": "^11.2.4",
     "@sentry/react-router": "^10.15.0",
     "@tailwindcss/postcss": "^4.1.13",
+    "@vercel/speed-insights": "^1.2.0",
     "ai": "^5.0.48",
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.2",

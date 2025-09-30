@@ -11,6 +11,8 @@ import {
   useLocation,
 } from "react-router";
 import "./app.css";
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 import ReactGA from "react-ga4";
 import { Toaster } from "sonner";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -148,12 +150,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         <ScrollRestoration />
         <Scripts />
+        <SpeedInsights />
       </body>
     </html>
   );
 }
-
-import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 
 export default function App() {
   return (
