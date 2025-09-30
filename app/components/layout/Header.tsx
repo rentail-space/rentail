@@ -16,15 +16,24 @@ export default function Header({ chatId }: HeaderProps) {
       </h1>
 
       <div className="flex gap-3 items-center">
-        {chatId && (
-          <>
-            <DownloadButton href={`/api/chat/${chatId}/export/csv`} as="CSV" />
-            <DownloadButton href={`/api/chat/${chatId}/export/pdf`} as="PDF" />
-          </>
-        )}
+        <ExportButtons chatId={chatId} />
         {authClient && <Authentication />}
       </div>
     </header>
+  );
+}
+
+function ExportButtons({ chatId }: { chatId?: string }) {
+  const { data: session, isPending } = authClient.useSession();
+  return (
+    !isPending &&
+    session &&
+    chatId && (
+      <>
+        <DownloadButton href={`/api/chat/${chatId}/export/csv`} as="CSV" />
+        <DownloadButton href={`/api/chat/${chatId}/export/pdf`} as="PDF" />
+      </>
+    )
   );
 }
 
