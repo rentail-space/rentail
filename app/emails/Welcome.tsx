@@ -12,11 +12,7 @@ import {
   Text,
 } from "@react-email/components";
 
-interface WelcomeEmailProps {
-  name: string;
-}
-
-export default function Welcome({ name }: WelcomeEmailProps) {
+export default function Welcome({ name }: { name: string }) {
   const previewText = `Welcome to rentail.space, ${name}!`;
 
   return (
@@ -45,20 +41,16 @@ export default function Welcome({ name }: WelcomeEmailProps) {
           <Section style={highlightBox}>
             <Text style={highlightText}>
               🏢 Discover specialty leasing opportunities
-              <br />
-              🤖 AI-powered recommendations tailored to your needs
-              <br />
-              💬 Interactive chat to answer all your questions
-              <br />
-              📍 Location-based search with detailed property info
+              <br />🤖 AI-powered recommendations tailored to your needs
+              <br />💬 Interactive chat to answer all your questions
+              <br />📍 Location-based search with detailed property info
             </Text>
           </Section>
 
           <Text style={text}>
-            Our platform uses advanced AI to help you discover short-term
-            retail spaces in shopping centers. Whether you're looking for a
-            pop-up shop, seasonal kiosk, or specialty lease, we've got you
-            covered.
+            Our platform uses advanced AI to help you discover short-term retail
+            spaces in shopping centers. Whether you're looking for a pop-up
+            shop, seasonal kiosk, or specialty lease, we've got you covered.
           </Text>
 
           <Section style={buttonContainer}>

@@ -6,7 +6,7 @@ import env from "./env";
 
 const resend = new Resend(env.RESEND_API_KEY);
 
-export async function sendWelcomeEmail({
+export default async function sendWelcomeEmail({
   email,
   name,
 }: {
@@ -23,18 +23,11 @@ export async function sendWelcomeEmail({
       subject,
       to: [email],
     });
+    if (error) throw error;
 
-    if (error) {
-      console.error("Failed to send welcome email:", error);
-      captureException(error);
-      return { success: false, error };
-    }
-
-    console.info(`Welcome email sent successfully to ${email}`);
-    return { success: true };
+    console.info(`[EMAIL] Welcome email sent to ${email}`);
   } catch (error) {
-    console.error("Error sending welcome email:", error);
+    console.error("[EMAIL] Error sending welcome email:", error);
     captureException(error);
-    return { success: false, error };
   }
 }

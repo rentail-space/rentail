@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react-router";
 import { betterAuth, type GenericEndpointContext } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { anonymous } from "better-auth/plugins";
@@ -5,7 +6,7 @@ import { invariant } from "es-toolkit";
 import type { User } from "prisma/generated/client";
 import { getLocationFromRequest } from "~/sessions.server";
 import prisma from "./prisma";
-import { sendWelcomeEmail } from "./send-welcome-email.tsx";
+import sendWelcomeEmail from "./send-welcome-email";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -91,12 +92,11 @@ export const auth = betterAuth({
           // Send welcome email to non-anonymous users
           if (!user.isAnonymous && user.email && user.name) {
             // Don't await - send email in background to avoid blocking
-            sendWelcomeEmail({
-              email: user.email,
-              name: user.name,
-            }).catch((error) => {
-              console.error("Failed to send welcome email:", error);
-            });
+            try {
+              sendWelcomeEmail(user);
+            } catch (error) {
+              captureException(error);
+            }
           }
         },
       },
