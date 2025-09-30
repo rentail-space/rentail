@@ -26,11 +26,12 @@ export const auth = betterAuth({
   plugins: [
     anonymous({
       onLinkAccount: async ({ anonymousUser, newUser }) => {
-        Object.assign(newUser.user, {
-          geocode: anonymousUser.user.geocode,
-          ip: anonymousUser.user.ip,
-          workingMemory: anonymousUser.user.workingMemory,
-        } as Partial<User>);
+        console.log("onLinkAccount", anonymousUser, newUser);
+        const from = anonymousUser.user as unknown as User;
+        newUser.user.geocode = from.geocode;
+        newUser.user.ip = from.ip;
+        newUser.user.isAnonymous = false;
+        newUser.user.workingMemory = from.workingMemory;
       },
     }),
   ],
@@ -48,12 +49,12 @@ export const auth = betterAuth({
       ip: {
         type: "string",
         defaultValue: "",
-        required: true,
+        required: false,
         description: "The user's IP address",
       },
       workingMemory: {
         type: "string",
-        required: true,
+        required: false,
         defaultValue: "",
         description: "The user's working memory",
       },
@@ -86,7 +87,14 @@ export const auth = betterAuth({
         before: async (user, context?: GenericEndpointContext) => {
           invariant(context?.request, "Request context is required");
           const geocode = await getLocationFromRequest(context?.request);
-          return { data: { ...user, geocode, ip: geocode.ip } };
+          return {
+            data: {
+              ...user,
+              geocode: user.geocode ?? geocode,
+              ip: user.ip ?? geocode.ip,
+              isAnonymous: user.isAnonymous ?? false,
+            },
+          };
         },
         after: async (user) => {
           // Send welcome email to non-anonymous users

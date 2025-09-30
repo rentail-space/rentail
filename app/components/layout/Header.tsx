@@ -1,15 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { authClient } from "~/lib/auth.client";
 
-interface HeaderProps {
-  chatId?: string;
-}
-
-export default function Header({ chatId }: HeaderProps) {
-  useEffect(() => {
-    if (!authClient.getSession()) authClient.signIn.anonymous();
-  }, []);
+export default function Header({ chatId }: { chatId?: string }) {
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => setIsClient(true), []);
 
   return (
     <header className="flex flex-row items-center justify-between gap-8 border-b px-6 py-1">
@@ -19,9 +14,9 @@ export default function Header({ chatId }: HeaderProps) {
         </Link>
       </h1>
 
-      {authClient && (
+      {isClient && (
         <div className="flex gap-3 items-center">
-          <ExportButtons chatId={chatId} />
+          {chatId && <ExportButtons chatId={chatId} />}
           <Authentication />
         </div>
       )}
@@ -29,12 +24,12 @@ export default function Header({ chatId }: HeaderProps) {
   );
 }
 
-function ExportButtons({ chatId }: { chatId?: string }) {
-  const { data: session, isPending } = authClient.useSession();
+function ExportButtons({ chatId }: { chatId: string }) {
+  const { data: session } = authClient.useSession();
+  const isAuthenticated = session?.user && !session?.user.isAnonymous;
   return (
-    !isPending &&
-    session &&
-    chatId && (
+    chatId &&
+    isAuthenticated && (
       <>
         <DownloadButton href={`/api/chat/${chatId}/export/csv`} as="CSV" />
         <DownloadButton href={`/api/chat/${chatId}/export/pdf`} as="PDF" />
@@ -45,27 +40,97 @@ function ExportButtons({ chatId }: { chatId?: string }) {
 
 function Authentication() {
   const { data: session, isPending } = authClient.useSession();
-  return (
-    !isPending &&
-    (session ? (
-      <button
-        type="button"
-        onClick={async () => {
-          await authClient.signOut();
-          window.location.href = "/";
-        }}
-        className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
-      >
-        Sign Out
-      </button>
-    ) : (
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [isOpen]);
+
+  if (isPending) return null;
+
+  // Show sign-in link for non-authenticated users
+  const isAuthenticated = session && !session.user.isAnonymous;
+  if (isAuthenticated) return <DropdownMenu user={session.user} />;
+  else
+    return (
       <Link
         to="/auth"
         className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
       >
         Sign In
       </Link>
-    ))
+    );
+}
+
+function DropdownMenu({ user }: { user: { name: string; email: string } }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [isOpen]);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+      >
+        <UserIcon />
+        <span>{user.name || user.email}</span>
+        <ChevronDownIcon isOpen={isOpen} />
+      </button>
+
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 py-1 z-50">
+          <div className="px-4 py-2 border-b border-gray-200">
+            <p className="text-sm font-medium text-gray-900">{user.name}</p>
+            <p className="text-xs text-gray-500 truncate">{user.email}</p>
+          </div>
+
+          <button
+            type="button"
+            onClick={async () => {
+              await authClient.signOut();
+              window.location.href = "/";
+            }}
+            className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+          >
+            Sign Out
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -77,13 +142,28 @@ function DownloadButton({ href, as: title }: { href: string; as: string }) {
       download
       title={`Export as ${title}`}
     >
-      <DownArrowIcon />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <title>Export PDF</title>
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+      </svg>
       {title}
     </a>
   );
 }
 
-function DownArrowIcon() {
+function UserIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -96,10 +176,29 @@ function DownArrowIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <title>Export PDF</title>
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" y1="15" x2="12" y2="3" />
+      <title>User</title>
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  );
+}
+
+function ChevronDownIcon({ isOpen }: { isOpen: boolean }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
+    >
+      <title>Menu</title>
+      <polyline points="6 9 12 15 18 9" />
     </svg>
   );
 }
