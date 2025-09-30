@@ -3,7 +3,7 @@ import { existsSync, unlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { URL as URLString } from "node:url";
-import { invariant } from "es-toolkit";
+import { invariant, withTimeout } from "es-toolkit";
 import {
   type Browser,
   type BrowserContext,
@@ -13,7 +13,6 @@ import {
 } from "playwright";
 import env from "~/lib/env";
 import "./toMatchScreenshot";
-import { afterAll } from "vitest";
 
 const port = 9222;
 const lockFile = join(tmpdir(), `rentail-server-${port}.lock`);
@@ -67,6 +66,7 @@ export async function launchServer(
   if (server) return server;
 
   if (logging) console.info("[TEST] launching server");
+
   // Check if lock file exists and server is running
   if (existsSync(lockFile)) {
     if (logging)
@@ -75,90 +75,73 @@ export async function launchServer(
         lockFile,
       );
 
-    try {
-      if (await checkServerHealth())
-        throw new Error("Server is already running and healthy");
+    if (await checkServerHealth()) throw new Error("Server is already running");
 
-      // Clean up stale lock files
-      try {
-        if (logging) console.debug("[TEST] cleaning up stale lock file");
-        unlinkSync(lockFile);
-      } catch (error) {
-        console.error("[TEST] error cleaning up lock file\n\t%s", error);
-      }
-    } catch {
-      // Clean up corrupted lock files
-      try {
-        unlinkSync(lockFile);
-      } catch (error) {
-        console.error("[TEST] error cleaning up lock file\n\t%s", error);
-      }
+    // Clean up stale lock files
+    try {
+      if (logging)
+        console.debug("[TEST] cleaning up stale lock file\n\t%s", lockFile);
+      unlinkSync(lockFile);
+    } catch (error) {
+      console.error("[TEST] error cleaning up lock file\n\t%s", error);
     }
   }
 
   // Start new server instance in test mode
-  const serverProcess = spawn(
-    "react-router",
-    ["dev", "--port", port.toString()],
-    {
-      detached: true,
-      stdio: ["pipe", "pipe", "pipe"],
-      env: {
-        ...process.env,
-        NODE_ENV: "test",
-      },
+  server = spawn("react-router", ["dev", "--port", port.toString()], {
+    detached: true,
+    stdio: ["pipe", "pipe", "pipe"],
+    env: {
+      ...process.env,
+      NODE_ENV: "test",
     },
-  );
-  process.on("beforeExit", () => {
+  });
+
+  process.on("exit", () => {
     if (logging) console.debug("[TEST] server process exited, killing server");
-    serverProcess.kill("SIGTERM");
+    unlinkSync(lockFile);
+    server.kill("SIGTERM");
   });
 
   // Create lock file
-  invariant(serverProcess.pid, "Server process ID is not available");
-  writeFileSync(lockFile, serverProcess.pid.toString());
+  invariant(server.pid, "Server process ID is not available");
+  writeFileSync(lockFile, server.pid.toString());
 
-  return await new Promise<ChildProcess>((resolve, reject) => {
-    const timeout = setTimeout(() => {
-      serverProcess.kill("SIGTERM");
-      reject(new Error("Server failed to start within 30 seconds"));
-    }, 30000);
+  return await withTimeout(
+    () =>
+      new Promise<ChildProcess>((resolve, reject) => {
+        server.once("error", (error) => {
+          try {
+            unlinkSync(lockFile);
+            server.kill("SIGTERM");
+          } catch (error) {
+            console.error("[TEST] error cleaning up lock file\n\t%s", error);
+          }
+          reject(error);
+        });
 
-    serverProcess.once("error", (error) => {
-      clearTimeout(timeout);
-      try {
-        unlinkSync(lockFile);
-      } catch (error) {
-        console.error("[TEST] error cleaning up lock file\n\t%s", error);
-      }
-      reject(error);
-    });
+        if (server.stdout === null) {
+          unlinkSync(lockFile);
+          server.kill("SIGTERM");
+          return reject(new Error("Failed to start server."));
+        }
 
-    if (serverProcess.stdout === null) {
-      clearTimeout(timeout);
-      return reject(new Error("Failed to start server."));
-    }
+        if (logging) {
+          server.stdout.on("data", (stream: Buffer) =>
+            process.stdout.write(`\x1b[92m${stream}\x1b[0m`),
+          );
+          server.stderr?.on("data", (stream: Buffer) =>
+            process.stderr.write(`\x1b[91m${stream}\x1b[0m`),
+          );
+        }
 
-    if (logging)
-      serverProcess.stdout.on("data", (stream: Buffer) =>
-        process.stdout.write(stream),
-      );
-
-    afterAll(() => {
-      serverProcess.kill("SIGTERM");
-      unlinkSync(lockFile);
-    });
-
-    serverProcess.stdout.on("data", (stream: Buffer) => {
-      if (stream.toString().includes(port.toString())) {
-        clearTimeout(timeout);
-        setTimeout(() => {
-          server = serverProcess;
-          return resolve(server);
-        }, 10);
-      }
-    });
-  });
+        server.stdout.on("data", (stream: Buffer) => {
+          if (stream.toString().includes(port.toString()))
+            setTimeout(() => resolve(server), 10);
+        });
+      }),
+    30000,
+  );
 }
 
 /**

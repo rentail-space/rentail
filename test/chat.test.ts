@@ -1,4 +1,3 @@
-import { delay } from "es-toolkit";
 import { expect, type Page } from "playwright/test";
 import { afterEach, beforeEach, describe, it } from "vitest";
 import env from "~/lib/env";
@@ -86,7 +85,6 @@ describe("Chat page", () => {
   });
 
   afterEach(async () => {
-    if (env.isDebug) await delay(3000);
-    await page.close();
+    if (page) await page.close();
   });
 });

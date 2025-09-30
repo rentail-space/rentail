@@ -48,6 +48,7 @@
     "ioredis": "^5.8.0",
     "looks-same": "^10.0.1",
     "luxon": "^3.7.2",
+    "markdown-it": "^14.1.0",
     "marked": "^16.3.0",
     "mastra": "^0.13.2",
     "pdfmake": "^0.2.20",

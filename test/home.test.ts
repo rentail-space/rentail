@@ -16,6 +16,6 @@ describe("Home page", () => {
   });
 
   afterEach(async () => {
-    await page.close();
+    if (page) await page.close();
   });
 });

@@ -96,8 +96,6 @@ export function handleError(
   error: unknown,
   { request }: LoaderFunctionArgs | ActionFunctionArgs,
 ) {
-  if (!request.signal.aborted) {
-    Sentry.captureException(error);
-    console.error(error);
-  }
+  if (!request.signal.aborted) Sentry.captureException(error);
+  console.error(error);
 }
