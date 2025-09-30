@@ -118,6 +118,13 @@ function DropdownMenu({ user }: { user: { name: string; email: string } }) {
             <p className="text-xs text-gray-500 truncate">{user.email}</p>
           </div>
 
+          <Link
+            to="/profile"
+            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+          >
+            Profile Settings
+          </Link>
+
           <button
             type="button"
             onClick={async () => {

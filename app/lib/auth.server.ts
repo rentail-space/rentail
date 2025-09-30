@@ -6,6 +6,7 @@ import { invariant } from "es-toolkit";
 import type { User } from "prisma/generated/client";
 import { getLocationFromRequest } from "~/sessions.server";
 import prisma from "./prisma";
+import sendVerificationEmail from "./send-verification-email";
 import sendWelcomeEmail from "./send-welcome-email";
 
 export const auth = betterAuth({
@@ -17,10 +18,27 @@ export const auth = betterAuth({
     enabled: true,
     disableSignUp: false,
     requireEmailVerification: false,
-    minPasswordLength: 6,
+    minPasswordLength: 8,
     maxPasswordLength: 128,
     autoSignIn: true,
     resetPasswordTokenExpiresIn: 3600, // 1 hour
+    sendResetPassword: async ({ user, url }) => {
+      // TODO: Send password reset email
+      console.info(`[EMAIL] Password reset link for ${user.email}: ${url}`);
+    },
+  },
+
+  emailVerification: {
+    enabled: true,
+    autoSignInAfterVerification: true,
+    sendOnSignUp: false, // Don't send on signup, only on email change
+    sendVerificationEmail: async ({ user, url }) => {
+      await sendVerificationEmail({
+        email: user.email,
+        name: user.name,
+        url,
+      });
+    },
   },
 
   plugins: [
