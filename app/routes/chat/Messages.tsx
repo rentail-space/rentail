@@ -224,13 +224,11 @@ function ResponseMessage({
 
 function TypingIndicator() {
   return (
-    <div className="flex justify-start">
-      <div className="rounded-lg bg-white px-4 py-4">
-        <div className="flex space-x-1">
-          <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400" />
-          <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:0.1s]" />
-          <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:0.2s]" />
-        </div>
+    <div className="rounded-lg bg-white px-4 py-4">
+      <div className="flex space-x-1">
+        <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400" />
+        <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:0.1s]" />
+        <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:0.2s]" />
       </div>
     </div>
   );
