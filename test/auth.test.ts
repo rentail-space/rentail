@@ -294,6 +294,161 @@ describe("Authentication", () => {
     });
   });
 
+  describe("Complete User Journey: Chat to Sign Up", () => {
+    it("user visits chat, clicks sign in, signs up, and returns to chat authenticated", async () => {
+      // Step 1: Visit chat page as anonymous user
+      await page.goto(`${URL}/chat`);
+      await page.waitForLoadState("networkidle");
+
+      // Verify we're on the chat page
+      expect(page.url()).toContain("/chat");
+
+      // Step 2: Verify "Sign In" button is visible for anonymous users
+      const signInButton = page.locator("a").filter({ hasText: "Sign In" });
+      await expect(signInButton).toBeVisible();
+
+      // Verify export buttons are NOT visible for anonymous users
+      await expect(
+        page.locator("a").filter({ hasText: "CSV" }),
+      ).not.toBeVisible();
+      await expect(
+        page.locator("a").filter({ hasText: "PDF" }),
+      ).not.toBeVisible();
+
+      // Step 3: Click "Sign In" button
+      await signInButton.click();
+
+      // Should redirect to auth page
+      await page.waitForURL(`${URL}/auth`, { timeout: 5000 });
+      expect(page.url()).toContain("/auth");
+
+      // Step 4: Switch to sign-up mode
+      await page.click("text=Don't have an account? Sign up");
+      await expect(page.locator("h1")).toContainText("Create Account");
+
+      // Step 5: Fill in sign-up form
+      const timestamp = Date.now();
+      const testEmail = `journey-test-${timestamp}@example.com`;
+      const testName = `Journey Test ${timestamp}`;
+      const testPassword = "JourneyTest123!";
+
+      await page.fill("input[id*='name']", testName);
+      await page.fill("input[type='email']", testEmail);
+      await page.fill("input[type='password']", testPassword);
+
+      // Step 6: Submit sign-up form
+      await page.click("button[type='submit']");
+
+      // Should redirect back to chat page
+      await page.waitForURL(`${URL}/chat`, { timeout: 5000 });
+      expect(page.url()).toContain("/chat");
+
+      // Step 7: Verify user is now authenticated
+      // Should see user dropdown button with their name
+      const userButton = page.locator("button").filter({ hasText: testName });
+      await expect(userButton).toBeVisible();
+
+      // Should NOT see "Sign In" link anymore
+      await expect(
+        page.locator("a").filter({ hasText: "Sign In" }),
+      ).not.toBeVisible();
+
+      // Step 8: Open user dropdown
+      await userButton.click();
+
+      // Verify dropdown shows user info
+      await expect(
+        page.locator(".font-medium").filter({ hasText: testName }),
+      ).toBeVisible();
+      await expect(
+        page.locator(".text-xs").filter({ hasText: testEmail }),
+      ).toBeVisible();
+
+      // Step 9: Verify "Sign Out" button is in dropdown
+      const signOutButton = page.locator("text=Sign Out");
+      await expect(signOutButton).toBeVisible();
+
+      // Step 10: Send a message to ensure chat functionality works
+      await page.fill("input[type='text']", "Hello, I'm looking for a space");
+      await page.press("input[type='text']", "Enter");
+      await page.waitForTimeout(1000);
+
+      // Step 11: Verify export buttons are NOW visible for authenticated users
+      await expect(page.locator("a").filter({ hasText: "CSV" })).toBeVisible();
+      await expect(page.locator("a").filter({ hasText: "PDF" })).toBeVisible();
+
+      // Step 12: Test sign out
+      await userButton.click(); // Reopen dropdown if it closed
+      await signOutButton.click();
+
+      // Should redirect to home page
+      await page.waitForURL(`${URL}/`, { timeout: 5000 });
+      expect(page.url()).toBe(`${URL}/`);
+
+      // Step 13: Navigate back to chat and verify anonymous state
+      await page.goto(`${URL}/chat`);
+
+      // Should see "Sign In" button again
+      await expect(
+        page.locator("a").filter({ hasText: "Sign In" }),
+      ).toBeVisible();
+
+      // Should NOT see user dropdown
+      await expect(
+        page.locator("button").filter({ hasText: testName }),
+      ).not.toBeVisible();
+    });
+
+    it("user visits chat, clicks sign in, signs in with existing account", async () => {
+      // First, create an account
+      const timestamp = Date.now();
+      const testEmail = `existing-journey-${timestamp}@example.com`;
+      const testName = `Existing Journey ${timestamp}`;
+      const testPassword = "ExistingJourney123!";
+
+      await page.goto(`${URL}/auth`);
+      await page.click("text=Don't have an account? Sign up");
+
+      await page.fill("input[id*='name']", testName);
+      await page.fill("input[type='email']", testEmail);
+      await page.fill("input[type='password']", testPassword);
+      await page.click("button[type='submit']");
+
+      await page.waitForURL(`${URL}/chat`, { timeout: 5000 });
+
+      // Sign out
+      await page.click(`button:has-text("${testName}")`);
+      await page.click("text=Sign Out");
+      await page.waitForURL(`${URL}/`, { timeout: 5000 });
+
+      // Now test the journey
+      // Step 1: Visit chat as anonymous
+      await page.goto(`${URL}/chat`);
+      await page.waitForLoadState("networkidle");
+
+      // Step 2: Click sign in
+      await page.click("a:has-text('Sign In')");
+      await page.waitForURL(`${URL}/auth`, { timeout: 5000 });
+
+      // Step 3: Sign in with existing credentials (already on sign-in form)
+      await page.fill("input[type='email']", testEmail);
+      await page.fill("input[type='password']", testPassword);
+      await page.click("button[type='submit']");
+
+      // Step 4: Should redirect back to chat
+      await page.waitForURL(`${URL}/chat`, { timeout: 5000 });
+
+      // Step 5: Verify authenticated state
+      await expect(
+        page.locator("button").filter({ hasText: testName }),
+      ).toBeVisible();
+
+      // Step 6: Open dropdown and verify sign out is available
+      await page.click(`button:has-text("${testName}")`);
+      await expect(page.locator("text=Sign Out")).toBeVisible();
+    });
+  });
+
   afterEach(async () => {
     if (page) await page.close();
   });
