@@ -85,7 +85,7 @@
     "@types/react-dom": "^19.1.9",
     "@vitest/browser": "^3.2.4",
     "checkly": "^6.6.1",
-    "daisyui": "^5.1.14",
+    "daisyui": "^5.1.25",
     "msw": "^2.11.3",
     "playwright": "^1.55.1",
     "prisma": "^6.16.2",

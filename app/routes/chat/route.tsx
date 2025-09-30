@@ -35,6 +35,10 @@ export default function Chat() {
       })),
       role: message.role,
     })),
+    onError: (error) => {
+      console.error("Chat error:", error);
+      captureException(error);
+    },
     resume: false, // Enable automatic stream resumption
     transport: new DefaultChatTransport({
       api: "/api/chat",

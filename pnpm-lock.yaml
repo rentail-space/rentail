@@ -205,8 +205,8 @@ importers:
         specifier: ^6.6.1
         version: 6.6.1(@types/node@24.5.2)(jiti@2.5.1)(typescript@5.9.2)
       daisyui:
-        specifier: ^5.1.14
-        version: 5.1.14
+        specifier: ^5.1.25
+        version: 5.1.25
       msw:
         specifier: ^2.11.3
         version: 2.11.3(@types/node@24.5.2)(typescript@5.9.2)
@@ -2289,6 +2289,7 @@ packages:
     resolution: {integrity: sha512-tPgGd6bY2M2LJTA1uGq8fkSPK8ZLYjDjY+ZLK9WHncCnfIz29LIXIqUgzCR0hIefzy6Hpbe8Th5WOSwTM8E7LA==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.50.2':
     resolution: {integrity: sha512-HPNJwxPL3EmhzeAnsWQCM3DcoqOz3/IC6de9rWfGR8ZCuEHETi9km66bH/wG3YH0V3nyzyFEGUZeL5PKyy4xvw==}
@@ -3780,8 +3781,8 @@ packages:
   dagre-d3-es@7.0.11:
     resolution: {integrity: sha512-tvlJLyQf834SylNKax8Wkzco/1ias1OPw8DcUMDE7oUIoSEW25riQVuiu/0OWEFqT0cxHT3Pa9/D82Jr47IONw==}
 
-  daisyui@5.1.14:
-    resolution: {integrity: sha512-c9Op7tB8vLzzazFaLeyFsmmVMLrU8sYo1sHuStBGTbaAzLVxrulelGQBROo/lS2ZxWm/CnCb9NWdKbTL+MaKFA==}
+  daisyui@5.1.25:
+    resolution: {integrity: sha512-LYOGVIzTCCucEFkKmdj0fxbHHPZ83fpkYD7jXYF3/7UwrUu68TtXkIdGtEXadzeqUT361hCe6cj5tBB/7mvszw==}
 
   date-fns@3.6.0:
     resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
@@ -11427,7 +11428,7 @@ snapshots:
       d3: 7.9.0
       lodash-es: 4.17.21
 
-  daisyui@5.1.14: {}
+  daisyui@5.1.25: {}
 
   date-fns@3.6.0: {}
 
