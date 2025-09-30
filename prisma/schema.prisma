@@ -53,6 +53,7 @@ model User {
   id            String    @map("id")             @id @default(cuid(2))
   image         String?   @map("image")
   ip            String?   @map("ip")
+  isAnonymous   Boolean   @map("is_anonymous")   @default(true)
   metadata      Json?     @map("metadata")       @db.Json
   name          String?   @map("name")
   sessions      Session[]

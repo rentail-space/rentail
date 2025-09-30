@@ -1,6 +1,8 @@
 import { betterAuth, type GenericEndpointContext } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { anonymous } from "better-auth/plugins";
 import { invariant } from "es-toolkit";
+import type { User } from "prisma/generated/client";
 import { getLocationFromRequest } from "~/sessions.server";
 import prisma from "./prisma";
 
@@ -19,10 +21,37 @@ export const auth = betterAuth({
   },
   trustedOrigins: ["http://localhost:*", "https://rentail.space"],
 
+  plugins: [
+    anonymous({
+      onLinkAccount: async ({ anonymousUser, newUser }) => {
+        Object.assign(newUser.user, {
+          geocode: anonymousUser.user.geocode,
+          ip: anonymousUser.user.ip,
+          workingMemory: anonymousUser.user.workingMemory,
+        } as Partial<User>);
+      },
+    }),
+  ],
+
   user: {
     additionalFields: {
       geocode: {
         type: "string",
+        required: true,
+        defaultValue: "{}",
+        description: "The user's geocode",
+      },
+      ip: {
+        type: "string",
+        defaultValue: "",
+        required: true,
+        description: "The user's IP address",
+      },
+      workingMemory: {
+        type: "string",
+        required: true,
+        defaultValue: "",
+        description: "The user's working memory",
       },
     },
   },
@@ -30,6 +59,10 @@ export const auth = betterAuth({
     additionalFields: {
       ipAddress: { type: "string" },
       location: { type: "string" },
+    },
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60, // Short maxAge ensures session gets refreshed regularly
     },
   },
   advanced: {

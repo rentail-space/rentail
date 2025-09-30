@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router";
 import { authClient } from "~/lib/auth.client";
 
@@ -28,6 +29,10 @@ export default function Header({ chatId }: HeaderProps) {
 }
 
 function Authentication() {
+  useEffect(() => {
+    if (!authClient.getSession()) authClient.signIn.anonymous();
+  }, []);
+
   const { data: session, isPending } = authClient.useSession();
   return (
     !isPending &&
