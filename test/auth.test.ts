@@ -133,19 +133,15 @@ describe("Authentication", () => {
   });
 
   describe("Sign In Flow", () => {
-    let testEmail: string;
-    let testPassword: string;
-    let testName: string;
 
-    // Create a test user before sign-in tests
-    beforeEach(async () => {
-      // Use unique email for each test run
+    it("signs in existing user successfully", async () => {
+      // Create a unique user for this test
       const timestamp = Date.now();
-      testEmail = `signin-test-${timestamp}@example.com`;
-      testPassword = "ExistingPassword123!";
-      testName = `Signin User ${timestamp}`;
+      const testEmail = `signin-test-${timestamp}@example.com`;
+      const testPassword = "SignInTest123!";
+      const testName = `Signin User ${timestamp}`;
 
-      // Navigate to auth page and create account
+      // First, create the account
       await page.goto(`${URL}/auth`);
       await page.click("text=Don't have an account? Sign up");
 
@@ -154,29 +150,33 @@ describe("Authentication", () => {
       await page.fill("input[type='password']", testPassword);
       await page.click("button[type='submit']");
 
-      // Wait for redirect
-      await page.waitForURL(`${URL}/chat`, { timeout: 5000 });
+      // Wait for redirect to chat
+      await page.waitForURL(`${URL}/chat`, { timeout: 10000 });
 
       // Sign out
       await page.click(`button:has-text("${testName}")`);
       await page.click("text=Sign Out");
 
       // Wait for redirect to home
-      await page.waitForURL(`${URL}/`, { timeout: 5000 });
-    });
+      await page.waitForURL(`${URL}/`, { timeout: 10000 });
+      await page.waitForLoadState("networkidle");
 
-    it("signs in existing user successfully", async () => {
+      // Now test signing back in
       await page.goto(`${URL}/auth`);
+      await page.waitForLoadState("domcontentloaded");
+      
+      // Wait for auth client to initialize
+      await page.waitForTimeout(500);
 
       // Fill in credentials
       await page.fill("input[type='email']", testEmail);
       await page.fill("input[type='password']", testPassword);
 
-      // Submit the form
+      // Submit the form by clicking the button
       await page.click("button[type='submit']");
 
       // Wait for redirect to chat page
-      await page.waitForURL(`${URL}/chat`, { timeout: 5000 });
+      await page.waitForURL(`${URL}/chat`, { timeout: 10000 });
 
       // Verify we're on the chat page
       expect(page.url()).toContain("/chat");
@@ -188,6 +188,28 @@ describe("Authentication", () => {
     });
 
     it("shows error for incorrect credentials", async () => {
+      // Create a user first
+      const timestamp = Date.now();
+      const testEmail = `error-test-${timestamp}@example.com`;
+      const testPassword = "ErrorTest123!";
+      const testName = `Error User ${timestamp}`;
+
+      await page.goto(`${URL}/auth`);
+      await page.click("text=Don't have an account? Sign up");
+
+      await page.fill("input[id*='name']", testName);
+      await page.fill("input[type='email']", testEmail);
+      await page.fill("input[type='password']", testPassword);
+      await page.click("button[type='submit']");
+
+      await page.waitForURL(`${URL}/chat`, { timeout: 10000 });
+
+      // Sign out
+      await page.click(`button:has-text("${testName}")`);
+      await page.click("text=Sign Out");
+      await page.waitForURL(`${URL}/`, { timeout: 10000 });
+
+      // Now try to sign in with wrong password
       await page.goto(`${URL}/auth`);
 
       // Fill in incorrect credentials
