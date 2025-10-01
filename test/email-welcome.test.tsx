@@ -1,4 +1,3 @@
-import { pretty, render } from "@react-email/components";
 import { expect, type Page } from "playwright/test";
 import { afterEach, beforeEach, describe, it } from "vitest";
 import Welcome from "~/emails/Welcome";

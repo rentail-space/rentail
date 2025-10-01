@@ -77,17 +77,11 @@ export default function PrivacyPolicy() {
                     Personalize your experience and provide AI-powered
                     recommendations
                   </li>
-                  <li>
-                    Process your requests and respond to your inquiries
-                  </li>
+                  <li>Process your requests and respond to your inquiries</li>
                   <li>Send you technical notices and support messages</li>
-                  <li>
-                    Monitor and analyze trends, usage, and activities
-                  </li>
+                  <li>Monitor and analyze trends, usage, and activities</li>
                   <li>Detect, prevent, and address technical issues</li>
-                  <li>
-                    Comply with legal obligations and protect our rights
-                  </li>
+                  <li>Comply with legal obligations and protect our rights</li>
                 </ul>
               </section>
 
@@ -110,8 +104,8 @@ export default function PrivacyPolicy() {
                 </ul>
                 <p className="mb-4 text-gray-700">
                   We store chat histories to improve your experience across
-                  sessions. You can request deletion of your chat history at
-                  any time.
+                  sessions. You can request deletion of your chat history at any
+                  time.
                 </p>
               </section>
 
@@ -125,13 +119,13 @@ export default function PrivacyPolicy() {
                 </p>
                 <ul className="mb-4 ml-6 list-disc text-gray-700">
                   <li>
-                    <strong>Service Providers:</strong> With third-party
-                    vendors who perform services on our behalf (e.g., hosting,
+                    <strong>Service Providers:</strong> With third-party vendors
+                    who perform services on our behalf (e.g., hosting,
                     analytics, AI processing)
                   </li>
                   <li>
-                    <strong>Legal Requirements:</strong> When required by law
-                    or to protect our rights
+                    <strong>Legal Requirements:</strong> When required by law or
+                    to protect our rights
                   </li>
                   <li>
                     <strong>Business Transfers:</strong> In connection with a
@@ -149,15 +143,17 @@ export default function PrivacyPolicy() {
                   6. Data Security
                 </h2>
                 <p className="mb-4 text-gray-700">
-                  We implement appropriate technical and organizational
-                  measures to protect your personal information, including:
+                  We implement appropriate technical and organizational measures
+                  to protect your personal information, including:
                 </p>
                 <ul className="mb-4 ml-6 list-disc text-gray-700">
                   <li>Encryption of data in transit and at rest</li>
                   <li>Secure password hashing using industry standards</li>
                   <li>Regular security assessments and monitoring</li>
                   <li>Access controls and authentication requirements</li>
-                  <li>Error tracking and performance monitoring (via Sentry)</li>
+                  <li>
+                    Error tracking and performance monitoring (via Sentry)
+                  </li>
                 </ul>
                 <p className="mb-4 text-gray-700">
                   However, no method of transmission over the Internet or
@@ -177,9 +173,7 @@ export default function PrivacyPolicy() {
                   <li>Maintain your session and authentication state</li>
                   <li>Remember your preferences</li>
                   <li>Analyze usage patterns and improve our service</li>
-                  <li>
-                    Track performance metrics (via Vercel Speed Insights)
-                  </li>
+                  <li>Track performance metrics (via Vercel Speed Insights)</li>
                 </ul>
                 <p className="mb-4 text-gray-700">
                   You can control cookies through your browser settings, but
@@ -193,8 +187,7 @@ export default function PrivacyPolicy() {
                   8. Your Rights and Choices
                 </h2>
                 <p className="mb-4 text-gray-700">
-                  Depending on your location, you may have the following
-                  rights:
+                  Depending on your location, you may have the following rights:
                 </p>
                 <ul className="mb-4 ml-6 list-disc text-gray-700">
                   <li>
@@ -206,8 +199,8 @@ export default function PrivacyPolicy() {
                     inaccurate data
                   </li>
                   <li>
-                    <strong>Deletion:</strong> Request deletion of your
-                    personal information
+                    <strong>Deletion:</strong> Request deletion of your personal
+                    information
                   </li>
                   <li>
                     <strong>Data Portability:</strong> Request a copy of your
@@ -241,8 +234,8 @@ export default function PrivacyPolicy() {
                   We retain your personal information for as long as necessary
                   to provide our services and fulfill the purposes outlined in
                   this Privacy Policy. When you delete your account, we will
-                  delete or anonymize your personal information, except where
-                  we are required to retain it for legal purposes.
+                  delete or anonymize your personal information, except where we
+                  are required to retain it for legal purposes.
                 </p>
               </section>
 
@@ -266,9 +259,9 @@ export default function PrivacyPolicy() {
                 <p className="mb-4 text-gray-700">
                   Your information may be transferred to and processed in
                   countries other than your country of residence. These
-                  countries may have data protection laws that differ from
-                  those of your country. We take steps to ensure that your
-                  information receives an adequate level of protection.
+                  countries may have data protection laws that differ from those
+                  of your country. We take steps to ensure that your information
+                  receives an adequate level of protection.
                 </p>
               </section>
 
@@ -280,8 +273,8 @@ export default function PrivacyPolicy() {
                   We may update this Privacy Policy from time to time. We will
                   notify you of any material changes by posting the new Privacy
                   Policy on this page and updating the "Last Updated" date. You
-                  are advised to review this Privacy Policy periodically for
-                  any changes.
+                  are advised to review this Privacy Policy periodically for any
+                  changes.
                 </p>
               </section>
 

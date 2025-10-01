@@ -88,11 +88,17 @@ export default function Welcome({ name }: { name: string }) {
               </Link>
             </Text>
             <Text style={styles.footerText}>
-              <Link href="https://rentail.space/privacy" style={styles.footerLink}>
+              <Link
+                href="https://rentail.space/privacy"
+                style={styles.footerLink}
+              >
                 Privacy Policy
               </Link>{" "}
               •{" "}
-              <Link href="https://rentail.space/terms" style={styles.footerLink}>
+              <Link
+                href="https://rentail.space/terms"
+                style={styles.footerLink}
+              >
                 Terms of Service
               </Link>
             </Text>

@@ -75,11 +75,17 @@ export default function EmailVerification({
                 rentail.space
               </Link>{" "}
               •{" "}
-              <Link href="https://rentail.space/privacy" style={styles.footerLink}>
+              <Link
+                href="https://rentail.space/privacy"
+                style={styles.footerLink}
+              >
                 Privacy
               </Link>{" "}
               •{" "}
-              <Link href="https://rentail.space/terms" style={styles.footerLink}>
+              <Link
+                href="https://rentail.space/terms"
+                style={styles.footerLink}
+              >
                 Terms
               </Link>
             </Text>

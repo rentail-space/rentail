@@ -24,8 +24,8 @@ export default function TermsOfService() {
                 <p className="mb-4 text-gray-700">
                   By accessing and using rentail.space (the "Service"), you
                   accept and agree to be bound by the terms and provision of
-                  this agreement. If you do not agree to these Terms of
-                  Service, please do not use the Service.
+                  this agreement. If you do not agree to these Terms of Service,
+                  please do not use the Service.
                 </p>
               </section>
 
@@ -46,14 +46,14 @@ export default function TermsOfService() {
                   3. User Accounts
                 </h2>
                 <p className="mb-4 text-gray-700">
-                  To access certain features of the Service, you may be
-                  required to create an account. You agree to:
+                  To access certain features of the Service, you may be required
+                  to create an account. You agree to:
                 </p>
                 <ul className="mb-4 ml-6 list-disc text-gray-700">
-                  <li>Provide accurate and complete registration information</li>
                   <li>
-                    Maintain the security of your password and account
+                    Provide accurate and complete registration information
                   </li>
+                  <li>Maintain the security of your password and account</li>
                   <li>
                     Notify us immediately of any unauthorized use of your
                     account
@@ -86,9 +86,9 @@ export default function TermsOfService() {
                     or security, or decipher any transmissions
                   </li>
                   <li>
-                    Use automated systems to access the Service in a manner
-                    that sends more request messages than a human can
-                    reasonably produce
+                    Use automated systems to access the Service in a manner that
+                    sends more request messages than a human can reasonably
+                    produce
                   </li>
                 </ul>
               </section>
@@ -111,10 +111,10 @@ export default function TermsOfService() {
                 </h2>
                 <p className="mb-4 text-gray-700">
                   The Service uses artificial intelligence to provide
-                  recommendations and information. While we strive for
-                  accuracy, AI-generated content may contain errors or
-                  inaccuracies. You should verify all information independently
-                  before making business decisions.
+                  recommendations and information. While we strive for accuracy,
+                  AI-generated content may contain errors or inaccuracies. You
+                  should verify all information independently before making
+                  business decisions.
                 </p>
               </section>
 
@@ -124,10 +124,10 @@ export default function TermsOfService() {
                 </h2>
                 <p className="mb-4 text-gray-700">
                   The Service may contain links to third-party websites or
-                  services that are not owned or controlled by rentail.space.
-                  We have no control over, and assume no responsibility for,
-                  the content, privacy policies, or practices of any
-                  third-party websites or services.
+                  services that are not owned or controlled by rentail.space. We
+                  have no control over, and assume no responsibility for, the
+                  content, privacy policies, or practices of any third-party
+                  websites or services.
                 </p>
               </section>
 
@@ -152,9 +152,8 @@ export default function TermsOfService() {
                   PARTNERS, AGENTS, SUPPLIERS, OR AFFILIATES BE LIABLE FOR ANY
                   INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE
                   DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA,
-                  USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM
-                  YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE
-                  SERVICE.
+                  USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM YOUR
+                  ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICE.
                 </p>
               </section>
 
@@ -167,8 +166,8 @@ export default function TermsOfService() {
                   rentail.space and its licensee and licensors, and their
                   employees, contractors, agents, officers, and directors, from
                   and against any and all claims, damages, obligations, losses,
-                  liabilities, costs or debt, and expenses arising from your
-                  use of and access to the Service.
+                  liabilities, costs or debt, and expenses arising from your use
+                  of and access to the Service.
                 </p>
               </section>
 
@@ -177,11 +176,11 @@ export default function TermsOfService() {
                   11. Termination
                 </h2>
                 <p className="mb-4 text-gray-700">
-                  We may terminate or suspend your account and bar access to
-                  the Service immediately, without prior notice or liability,
-                  under our sole discretion, for any reason whatsoever and
-                  without limitation, including but not limited to a breach of
-                  the Terms.
+                  We may terminate or suspend your account and bar access to the
+                  Service immediately, without prior notice or liability, under
+                  our sole discretion, for any reason whatsoever and without
+                  limitation, including but not limited to a breach of the
+                  Terms.
                 </p>
               </section>
 
@@ -190,9 +189,9 @@ export default function TermsOfService() {
                   12. Governing Law
                 </h2>
                 <p className="mb-4 text-gray-700">
-                  These Terms shall be governed and construed in accordance
-                  with the laws of the jurisdiction in which rentail.space
-                  operates, without regard to its conflict of law provisions.
+                  These Terms shall be governed and construed in accordance with
+                  the laws of the jurisdiction in which rentail.space operates,
+                  without regard to its conflict of law provisions.
                 </p>
               </section>
 
@@ -202,10 +201,10 @@ export default function TermsOfService() {
                 </h2>
                 <p className="mb-4 text-gray-700">
                   We reserve the right, at our sole discretion, to modify or
-                  replace these Terms at any time. If a revision is material,
-                  we will provide at least 30 days' notice prior to any new
-                  terms taking effect. What constitutes a material change will
-                  be determined at our sole discretion.
+                  replace these Terms at any time. If a revision is material, we
+                  will provide at least 30 days' notice prior to any new terms
+                  taking effect. What constitutes a material change will be
+                  determined at our sole discretion.
                 </p>
               </section>
 
@@ -214,8 +213,8 @@ export default function TermsOfService() {
                   14. Contact Us
                 </h2>
                 <p className="mb-4 text-gray-700">
-                  If you have any questions about these Terms, please contact
-                  us at:
+                  If you have any questions about these Terms, please contact us
+                  at:
                 </p>
                 <p className="text-gray-700">
                   Email:{" "}
