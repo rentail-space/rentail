@@ -1,7 +1,7 @@
 import { useId, useState } from "react";
 import { Navigate, useNavigate } from "react-router";
-import { authClient } from "~/lib/auth.client";
 import Header from "~/components/layout/Header";
+import { authClient } from "~/lib/auth.client";
 
 export default function AuthPage() {
   const navigate = useNavigate();
@@ -17,9 +17,7 @@ export default function AuthPage() {
   const passwordId = useId();
 
   // Redirect if already authenticated
-  if (session) {
-    return <Navigate to="/chat" replace />;
-  }
+  if (session) return <Navigate to="/chat" replace />;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,11 +26,7 @@ export default function AuthPage() {
 
     try {
       if (isSignUp) {
-        const result = await authClient.signUp.email({
-          email,
-          password,
-          name,
-        });
+        const result = await authClient.signUp.email({ email, password, name });
 
         if (result.error) {
           setError(result.error.message || "Failed to sign up");
@@ -43,10 +37,7 @@ export default function AuthPage() {
         // Sign up successful, redirect to chat
         navigate("/chat");
       } else {
-        const result = await authClient.signIn.email({
-          email,
-          password,
-        });
+        const result = await authClient.signIn.email({ email, password });
 
         if (result.error) {
           setError(result.error.message || "Failed to sign in");

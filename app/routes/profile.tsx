@@ -1,23 +1,16 @@
 import { useId, useState } from "react";
 import { Navigate } from "react-router";
-import { authClient } from "~/lib/auth.client";
 import Header from "~/components/layout/Header";
+import { authClient } from "~/lib/auth.client";
 
 export default function ProfilePage() {
-  const { data: session, isPending } = authClient?.useSession?.() ?? {
-    data: null,
-    isPending: true,
-  };
-  const [activeTab, setActiveTab] = useState<"name" | "email" | "password">(
-    "name",
-  );
+  const session = authClient?.useSession?.().data ?? null;
+  const isPending = authClient?.useSession?.().isPending ?? true;
 
   // Redirect if not authenticated
-  if (!isPending && (!session || session.user.isAnonymous)) {
+  if (!isPending && (!session || session.user.isAnonymous))
     return <Navigate to="/auth" replace />;
-  }
-
-  if (isPending || !session) {
+  else if (isPending || !session) {
     return (
       <>
         <Header />
@@ -26,7 +19,13 @@ export default function ProfilePage() {
         </div>
       </>
     );
-  }
+  } else return <ProfileTabs user={session.user} />;
+}
+
+function ProfileTabs({ user }: { user: { name: string; email: string } }) {
+  const [activeTab, setActiveTab] = useState<"name" | "email" | "password">(
+    "name",
+  );
 
   return (
     <>
@@ -81,8 +80,8 @@ export default function ProfilePage() {
             </div>
 
             {/* Tab Content */}
-            {activeTab === "name" && <NameForm user={session.user} />}
-            {activeTab === "email" && <EmailForm user={session.user} />}
+            {activeTab === "name" && <NameForm user={user} />}
+            {activeTab === "email" && <EmailForm user={user} />}
             {activeTab === "password" && <PasswordForm />}
           </div>
         </div>
@@ -107,26 +106,19 @@ function NameForm({ user }: { user: { name: string; email: string } }) {
     try {
       const response = await fetch("/api/auth/update-user", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name }),
         credentials: "include",
       });
 
       const result = await response.json();
-
-      if (!response.ok || result.error) {
-        setError(result.error?.message || "Failed to update name");
-      } else {
+      if (response.ok) {
         setSuccess("Name updated successfully!");
         // Refresh the page to show updated name in header
         setTimeout(() => window.location.reload(), 1000);
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      } else setError(result.error?.message || "Failed to update name");
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -135,7 +127,10 @@ function NameForm({ user }: { user: { name: string; email: string } }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor={nameId} className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor={nameId}
+          className="block text-sm font-medium text-gray-700"
+        >
           Full Name
         </label>
         <input
@@ -190,29 +185,23 @@ function EmailForm({ user }: { user: { name: string; email: string } }) {
       // Update email via Better Auth API
       const response = await fetch("/api/auth/update-user", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          emailVerified: false, // Mark as unverified
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, emailVerified: false }),
         credentials: "include",
       });
 
       const result = await response.json();
 
-      if (!response.ok || result.error) {
-        setError(result.error?.message || "Failed to update email");
-      } else {
+      if (response.ok) {
         // Now trigger email verification
-        const verifyResponse = await fetch("/api/auth/send-verification-email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const verifyResponse = await fetch(
+          "/api/auth/send-verification-email",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
           },
-          credentials: "include",
-        });
+        );
 
         if (verifyResponse.ok) {
           setVerificationSent(true);
@@ -222,9 +211,9 @@ function EmailForm({ user }: { user: { name: string; email: string } }) {
         } else {
           setError("Email updated but failed to send verification email");
         }
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      } else setError(result.error?.message || "Failed to update email");
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -248,7 +237,10 @@ function EmailForm({ user }: { user: { name: string; email: string } }) {
       )}
 
       <div>
-        <label htmlFor={emailId} className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor={emailId}
+          className="block text-sm font-medium text-gray-700"
+        >
           New Email Address
         </label>
         <input
@@ -320,9 +312,7 @@ function PasswordForm() {
     try {
       const response = await fetch("/api/auth/change-password", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           currentPassword,
           newPassword,
@@ -333,17 +323,15 @@ function PasswordForm() {
 
       const result = await response.json();
 
-      if (!response.ok || result.error) {
-        setError(result.error?.message || "Failed to change password");
-      } else {
+      if (response.ok) {
         setSuccess("Password changed successfully!");
         // Clear form
         setCurrentPassword("");
         setNewPassword("");
         setConfirmPassword("");
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      } else setError(result.error?.message || "Failed to change password");
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
       setIsLoading(false);
     }

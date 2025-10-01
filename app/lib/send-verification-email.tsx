@@ -18,7 +18,13 @@ export default async function sendVerificationEmail({
   try {
     const subject = "Verify your email address for rentail.space";
     const html = await pretty(
-      await render(<EmailVerification name={name} verificationUrl={url} />),
+      await render(
+        <EmailVerification
+          name={name}
+          verificationUrl={url}
+          preview={subject}
+        />,
+      ),
     );
 
     const { error } = await resend.emails.send({

@@ -4,10 +4,7 @@ import { authClient } from "~/lib/auth.client";
 
 export default function Header({ chatId }: { chatId?: string }) {
   const [isClient, setIsClient] = useState(false);
-  
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  useEffect(() => setIsClient(true), []);
 
   return (
     <header className="flex flex-row items-center justify-between gap-8 border-b px-6 py-1">
@@ -28,7 +25,7 @@ export default function Header({ chatId }: { chatId?: string }) {
 }
 
 function ExportButtons({ chatId }: { chatId: string }) {
-  const { data: session } = authClient?.useSession?.() ?? { data: null };
+  const session = authClient?.useSession?.().data ?? null;
   const isAuthenticated = session?.user && !session?.user.isAnonymous;
   return (
     chatId &&
@@ -42,10 +39,8 @@ function ExportButtons({ chatId }: { chatId: string }) {
 }
 
 function Authentication() {
-  const { data: session, isPending } = authClient?.useSession?.() ?? {
-    data: null,
-    isPending: true,
-  };
+  const session = authClient?.useSession?.().data ?? null;
+  const isPending = authClient?.useSession?.().isPending ?? true;
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -55,9 +50,8 @@ function Authentication() {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
-      ) {
+      )
         setIsOpen(false);
-      }
     };
 
     if (isOpen) {

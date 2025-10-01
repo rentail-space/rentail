@@ -12,19 +12,19 @@ import {
   Text,
 } from "@react-email/components";
 
-interface EmailVerificationProps {
-  name: string;
-  verificationUrl: string;
-}
-
 export default function EmailVerification({
   name,
+  preview,
   verificationUrl,
-}: EmailVerificationProps) {
+}: {
+  name: string;
+  preview: string;
+  verificationUrl: string;
+}) {
   return (
     <Html>
       <Head />
-      <Preview>Verify your new email address for rentail.space</Preview>
+      <Preview>{preview}</Preview>
       <Body style={main}>
         <Container style={container}>
           <Img
@@ -41,8 +41,8 @@ export default function EmailVerification({
 
           <Text style={text}>
             You recently requested to change your email address on
-            rentail.space. To complete this change, please verify your new
-            email address by clicking the button below.
+            rentail.space. To complete this change, please verify your new email
+            address by clicking the button below.
           </Text>
 
           <Section style={buttonContainer}>
