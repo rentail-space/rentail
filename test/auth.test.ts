@@ -15,8 +15,10 @@ describe("Authentication", () => {
       const response = await page.goto(`${URL}/auth`);
       expect(response?.status(), "should respond with 200").toEqual(200);
 
-      // Check page title
-      await expect(page.locator("h1")).toContainText("Welcome Back");
+      // Check page title (select h1 with specific class, not the header h1)
+      await expect(
+        page.locator("h1.text-3xl.font-bold.text-gray-900"),
+      ).toContainText("Welcome Back");
 
       // Check form elements are present
       await expect(page.locator("input[type='email']")).toBeVisible();
@@ -34,17 +36,28 @@ describe("Authentication", () => {
     it("toggles between sign-in and sign-up modes", async () => {
       await page.goto(`${URL}/auth`);
 
-      // Start with sign-in
-      await expect(page.locator("h1")).toContainText("Welcome Back");
+      // Start with sign-in (select h1 with specific class)
+      await expect(
+        page.locator("h1.text-3xl.font-bold.text-gray-900"),
+      ).toContainText("Welcome Back");
 
       // Toggle to sign-up
       await page.click("text=Don't have an account? Sign up");
-      await expect(page.locator("h1")).toContainText("Create Account");
+      await expect(
+        page.locator("h1.text-3xl.font-bold.text-gray-900"),
+      ).toContainText("Create Account");
+      // Wait for the name input to appear after state update
+      await page.waitForSelector("input[id*='name']", {
+        state: "visible",
+        timeout: 5000,
+      });
       await expect(page.locator("input[id*='name']")).toBeVisible();
 
       // Toggle back to sign-in
       await page.click("text=Already have an account? Sign in");
-      await expect(page.locator("h1")).toContainText("Welcome Back");
+      await expect(
+        page.locator("h1.text-3xl.font-bold.text-gray-900"),
+      ).toContainText("Welcome Back");
       await expect(page.locator("input[id*='name']")).not.toBeVisible();
     });
   });
@@ -250,7 +263,9 @@ describe("Authentication", () => {
       await page.waitForURL(`${URL}/`, { timeout: 5000 });
 
       // Should see "Sign In" link instead of user dropdown
-      await expect(page.locator("a").filter({ hasText: "Sign In" })).toBeVisible();
+      await expect(
+        page.locator("a").filter({ hasText: "Sign In" }),
+      ).toBeVisible();
     });
   });
 
@@ -259,15 +274,21 @@ describe("Authentication", () => {
       await page.goto(`${URL}/`);
 
       // Should show "Sign In" link for anonymous users
-      await expect(page.locator("a").filter({ hasText: "Sign In" })).toBeVisible();
+      await expect(
+        page.locator("a").filter({ hasText: "Sign In" }),
+      ).toBeVisible();
     });
 
     it("hides export buttons for anonymous users", async () => {
       await page.goto(`${URL}/chat`);
 
       // Export buttons should not be visible for anonymous users
-      await expect(page.locator("a").filter({ hasText: "CSV" })).not.toBeVisible();
-      await expect(page.locator("a").filter({ hasText: "PDF" })).not.toBeVisible();
+      await expect(
+        page.locator("a").filter({ hasText: "CSV" }),
+      ).not.toBeVisible();
+      await expect(
+        page.locator("a").filter({ hasText: "PDF" }),
+      ).not.toBeVisible();
     });
 
     it("shows export buttons for authenticated users", async () => {
@@ -324,7 +345,9 @@ describe("Authentication", () => {
 
       // Step 4: Switch to sign-up mode
       await page.click("text=Don't have an account? Sign up");
-      await expect(page.locator("h1")).toContainText("Create Account");
+      await expect(
+        page.locator("h1.text-3xl.font-bold.text-gray-900"),
+      ).toContainText("Create Account");
 
       // Step 5: Fill in sign-up form
       const timestamp = Date.now();
