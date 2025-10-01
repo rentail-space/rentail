@@ -133,7 +133,6 @@ describe("Authentication", () => {
   });
 
   describe("Sign In Flow", () => {
-
     it("signs in existing user successfully", async () => {
       // Create a unique user for this test
       const timestamp = Date.now();
@@ -164,7 +163,7 @@ describe("Authentication", () => {
       // Now test signing back in
       await page.goto(`${URL}/auth`);
       await page.waitForLoadState("domcontentloaded");
-      
+
       // Wait for auth client to initialize
       await page.waitForTimeout(500);
 
@@ -412,7 +411,9 @@ describe("Authentication", () => {
       await expect(userButton).toBeVisible();
 
       // Should NOT see "Sign In" link anymore
-      await expect(page.getByRole("link", { name: "Sign In" })).not.toBeVisible();
+      await expect(
+        page.getByRole("link", { name: "Sign In" }),
+      ).not.toBeVisible();
 
       // Step 8: Open user dropdown
       await userButton.click();
