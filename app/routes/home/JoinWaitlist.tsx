@@ -20,7 +20,7 @@ export default function JoinWaitlist() {
       if (response.ok) toast.success("Thank you for joining our waitlist! 🚀");
       else toast.error("Oops! Something went wrong!");
     } catch (error) {
-      captureException(error);
+      captureException(error, { extra: { email } });
     }
 
     setEmail("");

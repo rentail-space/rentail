@@ -32,7 +32,7 @@ export async function monitorStopSignal(chatId: string): Promise<{
     if ((await redis.get(key)) === "stop") abort.abort();
     await redis.quit();
   } catch (error) {
-    captureException(error);
+    captureException(error, { extra: { chatId } });
   }
 
   async function cleanup() {
@@ -46,7 +46,7 @@ export async function monitorStopSignal(chatId: string): Promise<{
       await redis.del(key);
       redis.disconnect();
     } catch (error) {
-      captureException(error);
+      captureException(error, { extra: { chatId } });
     }
   }
 
@@ -68,7 +68,7 @@ export async function stopChat(chatId: string) {
     // Also publish to a channel for immediate notification
     await redis.publish(key, "stop");
   } catch (error) {
-    captureException(error);
+    captureException(error, { extra: { chatId } });
   } finally {
     await redis.quit();
   }

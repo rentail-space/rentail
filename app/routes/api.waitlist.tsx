@@ -27,6 +27,6 @@ export async function action({ request }: Route.ActionArgs) {
     subject,
     to: [input.email],
   });
-  if (error) captureException(error);
+  if (error) captureException(error, { extra: { email: input.email } });
   return data({ error }, { status: error ? 400 : 200 });
 }

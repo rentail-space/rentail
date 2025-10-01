@@ -52,7 +52,7 @@ export async function getChatFromSession(request: Request): Promise<{
       }
     }
   } catch (error) {
-    captureException(error);
+    captureException(error, { extra: { request } });
   }
 
   const location = await getLocationFromRequest(request);
@@ -144,7 +144,7 @@ async function geocode(
     invariant(response.ok, "Failed to geocode IP");
     return ipDataSchema.parse(await response.json());
   } catch (error) {
-    captureException(error, { data: { clientIp } });
+    captureException(error, { extra: { clientIp } });
     return ipDataSchema.parse(undefined);
   }
 }

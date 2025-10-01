@@ -28,6 +28,6 @@ export default async function sendWelcomeEmail({
     console.info(`[EMAIL] Welcome email sent to ${email}`);
   } catch (error) {
     console.error("[EMAIL] Error sending welcome email:", error);
-    captureException(error);
+    captureException(error, { extra: { email } });
   }
 }

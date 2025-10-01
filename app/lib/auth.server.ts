@@ -120,15 +120,8 @@ export default betterAuth({
     user: {
       create: {
         after: async (user) => {
-          // Send welcome email to non-anonymous users
-          if (!user.isAnonymous && user.email && user.name) {
-            // Don't await - send email in background to avoid blocking
-            try {
-              sendWelcomeEmail(user);
-            } catch (error) {
-              captureException(error);
-            }
-          }
+          // Send welcome email to non-anonymous users, don't await to avoid blocking
+          if (!user.isAnonymous) sendWelcomeEmail(user);
         },
       },
     },

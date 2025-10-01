@@ -119,7 +119,7 @@ export async function action({ request }: Route.ActionArgs) {
     generateMessageId: ulid,
 
     onError: (error) => {
-      captureException(error);
+      captureException(error, { extra: { chat } });
       return JSON.stringify(error);
     },
 

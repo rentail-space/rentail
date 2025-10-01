@@ -135,7 +135,7 @@ export async function getWorkingMemory(
     );
     return success ? data : userProfile.parse(undefined);
   } catch (error) {
-    captureException(error);
+    captureException(error, { extra: { chat } });
     return userProfile.safeParse(undefined).data ?? {};
   }
 }
@@ -165,7 +165,7 @@ export async function updateWorkingMemory(
     });
     return validateValue;
   } catch (error) {
-    captureException(error);
+    captureException(error, { extra: { chat } });
     return currentValue;
   }
 }

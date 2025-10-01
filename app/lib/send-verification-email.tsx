@@ -38,6 +38,6 @@ export default async function sendVerificationEmail({
     console.info(`[EMAIL] Verification email sent to ${email}`);
   } catch (error) {
     console.error("[EMAIL] Error sending verification email:", error);
-    captureException(error);
+    captureException(error, { extra: { email } });
   }
 }

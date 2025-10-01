@@ -35,7 +35,7 @@ export default function Chat() {
     })),
     onError: (error) => {
       console.error("Chat error:", error);
-      captureException(error);
+      captureException(error, { extra: { chat } });
     },
     resume: false, // Enable automatic stream resumption
     transport: new DefaultChatTransport({
@@ -66,7 +66,7 @@ export default function Chat() {
 
     // Send Redis stop signal for cross-request coordination
     await fetch(`/api/chat/${chat.id}/stop`, { method: "POST" }).catch(
-      captureException,
+      (error) => captureException(error, { extra: { chat } }),
     );
     await stop(); // Stop the AI SDK stream
 
