@@ -9,7 +9,7 @@ import mastra from "~/lib/agent";
 import findNearbySpaces from "~/lib/findNearbySpaces";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import general from "~/prompts/general.md?raw";
-import { getChatFromSession } from "~/sessions.server";
+import { getUserChat } from "~/sessions.server";
 import type { Route } from "./+types/api.chat";
 
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
@@ -18,7 +18,7 @@ import type { Route } from "./+types/api.chat";
 invariant(general, "General prompt is required");
 
 export async function action({ request }: Route.ActionArgs) {
-  const { chat, headers } = await getChatFromSession(request);
+  const { chat, headers } = await getUserChat(request.headers);
   const { userMessage } = (await request.json()) as { userMessage: UIMessage };
 
   // Set up Redis stop monitoring

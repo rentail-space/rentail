@@ -26,50 +26,41 @@ const cachedLocation = zod.object({
 const redis = new Redis(env.REDIS_URL);
 
 /**
- * Get the chat for the user from the session.
+ * Get the chat for the user from the session. If no chat is found, a new one is
+ * created. Includes recent messages in the chat.
  *
- * @param request - The request object
+ * @param headers - The headers object
  * @returns The chat, recent messages, and HTTP headers
  */
-export async function getChatFromSession(request: Request): Promise<{
+export async function getUserChat(headers: Headers): Promise<{
   chat: ChatGetPayload<{ include: { user: true } }>;
   headers: Headers;
   messages: MastraMessageV2[];
 }> {
   try {
     const current = await authServer.api.getSession({
-      headers: request.headers,
+      headers,
       returnHeaders: true,
     });
-
     if (current.response?.user) {
-      const user = await prisma.user.findUnique({
-        where: { id: current.response.user.id },
-      });
-      if (user) {
-        const { chat, messages } = await getChatForUser(user);
-        return { chat, messages, headers: current.headers };
-      }
+      const { chat, messages } = await getChatForUser(current.response.user);
+      return { chat, messages, headers: current.headers };
     }
   } catch (error) {
-    captureException(error, { extra: { request } });
+    captureException(error, { extra: { headers } });
   }
 
-  const location = await getLocationFromRequest(request);
-
+  const geocode = await geocodeIP(headers);
   const anonymous = await authServer.api.signInAnonymous({
     returnHeaders: true,
-    query: {
-      geocode: location,
-      ip: location.ip,
-    },
+    query: { geocode, ip: geocode.ip },
   });
-  const user = await prisma.user.findUniqueOrThrow({
-    where: { id: anonymous.response?.user.id },
-  });
-
-  const { chat, messages } = await getChatForUser(user);
-  await updateWorkingMemory(chat, (profile) => ({ ...profile, location }));
+  invariant(anonymous.response?.user, "Anonymous user not created");
+  const { chat, messages } = await getChatForUser(anonymous.response.user);
+  await updateWorkingMemory(chat, (profile) => ({
+    ...profile,
+    location: geocode,
+  }));
   return { chat, messages, headers: anonymous.headers };
 }
 
@@ -100,16 +91,15 @@ async function getChatForUser(user: { id: string }): Promise<{
 }
 
 /**
- * Get the location information from the request: IP, latitude, longitude, etc.
+ * Get the location information from the headers: IP, latitude, longitude, etc.
  *
- * @param request - The request object
- * @param session - The session object
- * @returns The location and the updated session
+ * @param headers - The headers object
+ * @returns The location
  */
-export async function getLocationFromRequest(
-  request: Request,
+export async function geocodeIP(
+  headers: Headers,
 ): Promise<zod.infer<typeof cachedLocation>> {
-  const clientIp = request.headers.get("x-forwarded-for") ?? "146.70.195.182";
+  const clientIp = headers.get("x-forwarded-for") ?? "146.70.195.182";
 
   const key = `location:${clientIp}`;
   const { success, data } = cachedLocation.safeParse(await redis.get(key));

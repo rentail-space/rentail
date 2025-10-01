@@ -8,13 +8,13 @@ import { data, useLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
-import { getChatFromSession } from "~/sessions.server";
+import { getUserChat } from "~/sessions.server";
 import type { Route } from "./+types/route";
 import InputForm from "./InputForm";
 import Messages from "./Messages";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const { chat, messages, headers } = await getChatFromSession(request);
+  const { chat, messages, headers } = await getUserChat(request.headers);
   return data({ chat, messages }, { headers });
 }
 
