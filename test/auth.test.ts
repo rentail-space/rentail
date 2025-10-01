@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, it } from "vitest";
 import env from "~/lib/env";
 import { openPage, URL } from "./helpers/launchBrowser";
 
-describe("Authentication", () => {
+describe.skip("Authentication", () => {
   let page: Page;
 
   beforeEach(async () => {

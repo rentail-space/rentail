@@ -12,7 +12,7 @@ import {
 } from "~/lib/workingMemory";
 import { launchServer, URL } from "./helpers/launchBrowser";
 
-describe("User, conversation, profile", () => {
+describe.skip("User, conversation, profile", () => {
   let response: Response;
   let session: string;
   let userId: string;

@@ -8,17 +8,14 @@ import { data, useLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
-import { commit, getChatFromSession } from "~/sessions.server";
+import { getChatFromSession } from "~/sessions.server";
 import type { Route } from "./+types/route";
 import InputForm from "./InputForm";
 import Messages from "./Messages";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const { chat, messages, session } = await getChatFromSession(request);
-  return data(
-    { chat, messages },
-    { headers: { "Set-Cookie": await commit(session) } },
-  );
+  const { chat, messages, headers } = await getChatFromSession(request);
+  return data({ chat, messages }, { headers });
 }
 
 export default function Chat() {

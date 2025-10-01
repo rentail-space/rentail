@@ -2,37 +2,12 @@ import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
 import Redis from "ioredis";
-import type { User } from "prisma/generated/client";
 import type { ChatGetPayload } from "prisma/generated/models";
-import { createCookieSessionStorage, type Session } from "react-router";
 import zod from "zod";
+import { auth } from "./lib/auth.server";
 import env from "./lib/env";
 import prisma from "./lib/prisma";
-import { getRecentMessages } from "./lib/workingMemory";
-
-type SessionData = {
-  userId?: string;
-  chatId?: string;
-};
-
-type SessionFlashData = {
-  error: string;
-};
-
-const { getSession, commitSession } = createCookieSessionStorage<
-  SessionData,
-  SessionFlashData
->({
-  // a Cookie from `createCookie` or the CookieOptions to create one
-  cookie: {
-    httpOnly: true,
-    isSigned: true,
-    maxAge: 60 * 60 * 24 * 365, // 365 days
-    name: "__session",
-    path: "/",
-    secrets: [env.SESSION_SECRET],
-  },
-});
+import { getRecentMessages, updateWorkingMemory } from "./lib/workingMemory";
 
 /**
  * We use Redis to cache the location information for 30 days so we don't have
@@ -51,78 +26,74 @@ const cachedLocation = zod.object({
 const redis = new Redis(env.REDIS_URL);
 
 /**
- * Use this instead of `commitSession` to avoid hardcoding the expiration date.
- *
- * @example
- * { headers: { "Set-Cookie": await commit(session) } }
- */
-export async function commit(session: Session<SessionData, SessionFlashData>) {
-  return await commitSession(session, {
-    expires: new Date(Date.now() + 60 * 60 * 24 * 365),
-  });
-}
-
-/**
- * Get the user from the session.
+ * Get the chat for the user from the session.
  *
  * @param request - The request object
- * @returns The user and the updated session
- */
-export async function getUserFromSession(request: Request): Promise<{
-  session: Session<SessionData, SessionFlashData>;
-  user: User;
-}> {
-  const session = await getSession(request.headers.get("Cookie"));
-  const userId = session.get("userId");
-  if (userId) {
-    const user = await prisma.user.findUnique({ where: { id: userId } });
-    if (user) return { user, session };
-  }
-
-  const geocode = await getLocationFromRequest(request);
-  const newUser = await prisma.user.create({
-    data: { geocode: geocode, ip: geocode.ip },
-  });
-  session.set("userId", newUser.id);
-  return { user: newUser, session };
-}
-
-/**
- * Get the chat from the session. If no chat is found, a new one
- * is created. Includes all messages in the chat. Will update the session
- * with the new chat ID.
- *
- * @param request - The request object
- * @returns chat - Chat with messages and user
- * @returns messages - Messages from the chat
- * @returns session - The updated session
+ * @returns The chat, recent messages, and HTTP headers
  */
 export async function getChatFromSession(request: Request): Promise<{
   chat: ChatGetPayload<{ include: { user: true } }>;
+  headers: Headers;
   messages: MastraMessageV2[];
-  session: Session<SessionData, SessionFlashData>;
 }> {
-  const { user, session } = await getUserFromSession(request);
+  try {
+    const current = await auth.api.getSession({
+      headers: request.headers,
+      returnHeaders: true,
+    });
+    if (current.response?.user) {
+      const user = await prisma.user.findUniqueOrThrow({
+        where: { id: current.response.user.id },
+      });
+      const { chat, messages } = await getChatForUser(user);
+      return { chat, messages, headers: current.headers };
+    }
+  } catch (error) {
+    captureException(error);
+  }
 
-  const chatId = session.get("chatId");
-  const chat = chatId
-    ? await prisma.chat.findUnique({
-        include: { user: true },
-        where: { id: chatId, userId: user.id },
-      })
-    : null;
-  if (chat) {
-    const messages = await getRecentMessages(chat);
-    return { chat, messages, session };
-  } else {
-    const newChat = await prisma.chat.create({
+  const location = await getLocationFromRequest(request);
+  const anonymous = await auth.api.signInAnonymous({
+    query: {
+      geocode: location,
+      ip: location.ip,
+    },
+    headers: request.headers,
+    returnHeaders: true,
+  });
+  const user = await prisma.user.findUniqueOrThrow({
+    where: { id: anonymous.response?.user.id },
+  });
+
+  const { chat, messages } = await getChatForUser(user);
+  await updateWorkingMemory(chat, (profile) => ({ ...profile, location }));
+  return { chat, messages, headers: anonymous.headers };
+}
+
+/**
+ * Get the chat for a user. If no chat is found, a new one is created. Includes
+ * all messages in the chat.
+ *
+ * @param userId - The user ID
+ * @returns chat - Chat with messages and user
+ * @returns messages - Messages from the chat
+ */
+async function getChatForUser(user: { id: string }): Promise<{
+  chat: ChatGetPayload<{ include: { user: true } }>;
+  messages: MastraMessageV2[];
+}> {
+  const chat =
+    (await prisma.chat.findFirst({
+      include: { user: true },
+      orderBy: { createdAt: "desc" },
+      where: { userId: user.id },
+    })) ||
+    (await prisma.chat.create({
       data: { user: { connect: { id: user.id } } },
       include: { user: true },
-    });
-    session.set("chatId", newChat.id);
-    const messages = await getRecentMessages(newChat);
-    return { chat: newChat, messages, session };
-  }
+    }));
+  const messages = await getRecentMessages(chat);
+  return { chat, messages };
 }
 
 /**

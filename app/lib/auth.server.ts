@@ -1,10 +1,8 @@
 import { captureException } from "@sentry/react-router";
-import { betterAuth, type GenericEndpointContext } from "better-auth";
+import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { anonymous } from "better-auth/plugins";
-import { invariant } from "es-toolkit";
 import type { User } from "prisma/generated/client";
-import { getLocationFromRequest } from "~/sessions.server";
 import prisma from "./prisma";
 import sendVerificationEmail from "./send-verification-email";
 import sendWelcomeEmail from "./send-welcome-email";
@@ -101,18 +99,6 @@ export const auth = betterAuth({
   databaseHooks: {
     user: {
       create: {
-        before: async (user, context?: GenericEndpointContext) => {
-          invariant(context?.request, "Request context is required");
-          const geocode = await getLocationFromRequest(context?.request);
-          return {
-            data: {
-              ...user,
-              geocode: user.geocode ?? geocode,
-              ip: user.ip ?? geocode.ip,
-              isAnonymous: user.isAnonymous ?? false,
-            },
-          };
-        },
         after: async (user) => {
           // Send welcome email to non-anonymous users
           if (!user.isAnonymous && user.email && user.name) {
