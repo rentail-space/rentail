@@ -189,11 +189,19 @@ describe("Authentication with Working Memory", () => {
             ).toBeVisible();
           });
 
-          it("stores user credentials correctly in database", async () => {
+          it("should delete anonymous user", async () => {
             const users = await prisma.user.findMany();
-            console.log("\n\nusers", users);
             expect(users.length, "Should have exactly one user").toBe(1);
             const user = users[0];
+            expect(user.isAnonymous, "User should not be anonymous").toBe(
+              false,
+            );
+          });
+
+          it("stores user credentials correctly in database", async () => {
+            const user = await prisma.user.findFirstOrThrow({
+              where: { isAnonymous: false },
+            });
             expect(user.name, "User should have correct name").toBe(
               "Working Memory User",
             );
@@ -205,9 +213,9 @@ describe("Authentication with Working Memory", () => {
           it("preserves working memory through authentication", async () => {
             const chat = await prisma.chat.findFirstOrThrow({
               include: { user: true },
+              where: { user: { isAnonymous: false } },
             });
             const workingMemory = await getWorkingMemory(chat);
-            console.log("\n\nworkingMemory", workingMemory);
             expect(workingMemory.location?.city).toEqual("Boston");
           });
         });
