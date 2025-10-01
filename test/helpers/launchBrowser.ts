@@ -157,6 +157,43 @@ async function checkServerHealth(): Promise<boolean> {
   }
 }
 
+/**
+ * Cleanup server and browser resources when all tests finish.
+ */
+export async function cleanupServer(): Promise<void> {
+  if (env.isDebug) console.info("[TEST] cleaning up server and browser");
+
+  // Close browser
+  if (context) {
+    await context.close();
+    // @ts-expect-error - Resetting to undefined
+    context = undefined;
+  }
+  if (browser) {
+    await browser.close();
+    // @ts-expect-error - Resetting to undefined
+    browser = undefined;
+  }
+
+  // Kill server
+  if (server) {
+    if (env.isDebug) console.info("[TEST] killing server process");
+    server.kill("SIGTERM");
+    // @ts-expect-error - Resetting to undefined
+    server = undefined;
+  }
+
+  // Remove lock file
+  if (existsSync(lockFile)) {
+    try {
+      unlinkSync(lockFile);
+      if (env.isDebug) console.info("[TEST] removed lock file");
+    } catch (error) {
+      console.error("[TEST] error removing lock file:", error);
+    }
+  }
+}
+
 async function blockBrowserRequest(route: Route): Promise<void> {
   const { hostname } = new URLString(route.request().url());
   const url = route.request().url();
