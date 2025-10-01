@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, it } from "vitest";
 import env from "~/lib/env";
 import { openPage, URL } from "./helpers/launchBrowser";
 
-describe.skip("Authentication", () => {
+describe("Authentication", () => {
   let page: Page;
 
   beforeEach(async () => {
@@ -133,12 +133,18 @@ describe.skip("Authentication", () => {
   });
 
   describe("Sign In Flow", () => {
-    const testEmail = "existing-user@example.com";
-    const testPassword = "ExistingPassword123!";
-    const testName = "Existing User";
+    let testEmail: string;
+    let testPassword: string;
+    let testName: string;
 
     // Create a test user before sign-in tests
     beforeEach(async () => {
+      // Use unique email for each test run
+      const timestamp = Date.now();
+      testEmail = `signin-test-${timestamp}@example.com`;
+      testPassword = "ExistingPassword123!";
+      testName = `Signin User ${timestamp}`;
+
       // Navigate to auth page and create account
       await page.goto(`${URL}/auth`);
       await page.click("text=Don't have an account? Sign up");
@@ -202,11 +208,17 @@ describe.skip("Authentication", () => {
   });
 
   describe("User Dropdown Menu", () => {
-    const testEmail = "dropdown-test@example.com";
-    const testPassword = "DropdownTest123!";
-    const testName = "Dropdown Test User";
+    let testEmail: string;
+    let testPassword: string;
+    let testName: string;
 
     beforeEach(async () => {
+      // Use unique email for each test run
+      const timestamp = Date.now();
+      testEmail = `dropdown-test-${timestamp}@example.com`;
+      testPassword = "DropdownTest123!";
+      testName = `Dropdown User ${timestamp}`;
+
       // Create and sign in a user
       await page.goto(`${URL}/auth`);
       await page.click("text=Don't have an account? Sign up");
@@ -262,21 +274,26 @@ describe.skip("Authentication", () => {
       // Wait for redirect to home
       await page.waitForURL(`${URL}/`, { timeout: 5000 });
 
-      // Should see "Sign In" link instead of user dropdown
-      await expect(
-        page.locator("a").filter({ hasText: "Sign In" }),
-      ).toBeVisible();
+      // Should see "Sign In" link instead of user dropdown (wait for header + hydration)
+      await page.waitForSelector("header div.flex", { timeout: 10000 });
+      await expect(page.getByRole("link", { name: "Sign In" })).toBeVisible({
+        timeout: 10000,
+      });
     });
   });
 
   describe("Anonymous vs Authenticated Users", () => {
     it("shows sign-in link for anonymous users", async () => {
       await page.goto(`${URL}/`);
+      await page.waitForLoadState("networkidle");
 
-      // Should show "Sign In" link for anonymous users
-      await expect(
-        page.locator("a").filter({ hasText: "Sign In" }),
-      ).toBeVisible();
+      // Wait for header to finish loading (isClient becomes true)
+      await page.waitForSelector("header div.flex", { timeout: 10000 });
+
+      // Should show "Sign In" link for anonymous users (wait for auth state)
+      await expect(page.getByRole("link", { name: "Sign In" })).toBeVisible({
+        timeout: 10000,
+      });
     });
 
     it("hides export buttons for anonymous users", async () => {
@@ -324,9 +341,10 @@ describe.skip("Authentication", () => {
       // Verify we're on the chat page
       expect(page.url()).toContain("/chat");
 
-      // Step 2: Verify "Sign In" button is visible for anonymous users
-      const signInButton = page.locator("a").filter({ hasText: "Sign In" });
-      await expect(signInButton).toBeVisible();
+      // Step 2: Wait for header to load then verify "Sign In" button is visible
+      await page.waitForSelector("header div.flex", { timeout: 10000 });
+      const signInButton = page.getByRole("link", { name: "Sign In" });
+      await expect(signInButton).toBeVisible({ timeout: 10000 });
 
       // Verify export buttons are NOT visible for anonymous users
       await expect(
@@ -372,9 +390,7 @@ describe.skip("Authentication", () => {
       await expect(userButton).toBeVisible();
 
       // Should NOT see "Sign In" link anymore
-      await expect(
-        page.locator("a").filter({ hasText: "Sign In" }),
-      ).not.toBeVisible();
+      await expect(page.getByRole("link", { name: "Sign In" })).not.toBeVisible();
 
       // Step 8: Open user dropdown
       await userButton.click();
@@ -411,10 +427,11 @@ describe.skip("Authentication", () => {
       // Step 13: Navigate back to chat and verify anonymous state
       await page.goto(`${URL}/chat`);
 
-      // Should see "Sign In" button again
-      await expect(
-        page.locator("a").filter({ hasText: "Sign In" }),
-      ).toBeVisible();
+      // Should see "Sign In" button again (wait for header + auth state)
+      await page.waitForSelector("header div.flex", { timeout: 10000 });
+      await expect(page.getByRole("link", { name: "Sign In" })).toBeVisible({
+        timeout: 10000,
+      });
 
       // Should NOT see user dropdown
       await expect(
