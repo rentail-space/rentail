@@ -12,9 +12,9 @@ export default function AuthPage() {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const nameId = useId();
-  const emailId = useId();
-  const passwordId = useId();
+  const nameId = `name-${useId()}`;
+  const emailId = `email-${useId()}`;
+  const passwordId = `password-${useId()}`;
 
   // Redirect if already authenticated
   if (session) return <Navigate to="/chat" replace />;

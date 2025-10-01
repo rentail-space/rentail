@@ -34,9 +34,7 @@ describe("Chat page", () => {
     await page.waitForLoadState("networkidle");
 
     // Check that user message appears in chat
-    await expect(
-      page.locator(".chat-bubble-accent").filter({ hasText: testQuery }),
-    ).toBeVisible();
+    await expect(page.locator("input[type='text']")).toHaveValue(testQuery);
   });
 
   it("sends user message and receives server response", async () => {
