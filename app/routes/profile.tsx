@@ -105,12 +105,21 @@ function NameForm({ user }: { user: { name: string; email: string } }) {
     setIsLoading(true);
 
     try {
-      const result = await authClient.updateUser({
-        name,
+      const response = await fetch("/api/auth/update-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+        }),
+        credentials: "include",
       });
 
-      if (result.error) {
-        setError(result.error.message || "Failed to update name");
+      const result = await response.json();
+
+      if (!response.ok || result.error) {
+        setError(result.error?.message || "Failed to update name");
       } else {
         setSuccess("Name updated successfully!");
         // Refresh the page to show updated name in header
@@ -178,18 +187,41 @@ function EmailForm({ user }: { user: { name: string; email: string } }) {
     setIsLoading(true);
 
     try {
-      // Change email - this will require verification
-      const result = await authClient.changeEmail({
-        newEmail: email,
+      // Update email via Better Auth API
+      const response = await fetch("/api/auth/update-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          emailVerified: false, // Mark as unverified
+        }),
+        credentials: "include",
       });
 
-      if (result.error) {
-        setError(result.error.message || "Failed to change email");
+      const result = await response.json();
+
+      if (!response.ok || result.error) {
+        setError(result.error?.message || "Failed to update email");
       } else {
-        setVerificationSent(true);
-        setSuccess(
-          "Verification email sent! Please check your new email address to verify the change.",
-        );
+        // Now trigger email verification
+        const verifyResponse = await fetch("/api/auth/send-verification-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
+
+        if (verifyResponse.ok) {
+          setVerificationSent(true);
+          setSuccess(
+            "Email updated! A verification link has been sent to your new email address. You must verify your email before you can sign in with it.",
+          );
+        } else {
+          setError("Email updated but failed to send verification email");
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
@@ -286,13 +318,23 @@ function PasswordForm() {
     setIsLoading(true);
 
     try {
-      const result = await authClient.changePassword({
-        currentPassword,
-        newPassword,
+      const response = await fetch("/api/auth/change-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+          revokeOtherSessions: false,
+        }),
+        credentials: "include",
       });
 
-      if (result.error) {
-        setError(result.error.message || "Failed to change password");
+      const result = await response.json();
+
+      if (!response.ok || result.error) {
+        setError(result.error?.message || "Failed to change password");
       } else {
         setSuccess("Password changed successfully!");
         // Clear form
