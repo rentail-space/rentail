@@ -23,7 +23,7 @@ export default function Header({ chatId }: { chatId?: string }) {
 }
 
 function ExportButtons({ chatId }: { chatId: string }) {
-  const session = authClient?.useSession?.().data ?? null;
+  const session = authClient.useSession().data ?? null;
   const isAuthenticated = session?.user && !session?.user.isAnonymous;
   return (
     chatId &&
@@ -37,8 +37,8 @@ function ExportButtons({ chatId }: { chatId: string }) {
 }
 
 function Authentication() {
-  const session = authClient?.useSession?.().data ?? null;
-  const isPending = authClient?.useSession?.().isPending ?? true;
+  const session = authClient.useSession().data ?? null;
+  const isPending = authClient.useSession().isPending ?? true;
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

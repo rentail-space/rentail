@@ -7,7 +7,7 @@ import prisma from "./prisma";
 import sendVerificationEmail from "./send-verification-email";
 import sendWelcomeEmail from "./send-welcome-email";
 
-export const auth = betterAuth({
+export default betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),

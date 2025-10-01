@@ -62,7 +62,7 @@ describe("Authentication with Working Memory", () => {
         const input = page.locator("input[type='text']").first();
         await input.focus();
         await input.pressSequentially("Actually I'm in Boston");
-        await page.locator("button[type='submit']").first().click();
+        await page.getByLabel("Send message").click();
 
         const chat = await prisma.chat.findFirstOrThrow({
           include: { user: true },
@@ -70,10 +70,10 @@ describe("Authentication with Working Memory", () => {
         workingMemory = await withTimeout<zod.infer<typeof userProfile>>(
           async () => {
             while (true) {
+              await delay(100);
               const workingMemory = await getWorkingMemory(chat);
               if (workingMemory.location?.city === "Boston")
                 return workingMemory;
-              else await delay(100);
             }
           },
           10000,

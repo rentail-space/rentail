@@ -4,10 +4,10 @@ import { invariant } from "es-toolkit";
 import Redis from "ioredis";
 import type { ChatGetPayload } from "prisma/generated/models";
 import zod from "zod";
-import { auth } from "./lib/auth.server";
-import env from "./lib/env";
-import prisma from "./lib/prisma";
-import { getRecentMessages, updateWorkingMemory } from "./lib/workingMemory";
+import authServer from "~/lib/auth.server";
+import env from "~/lib/env";
+import prisma from "~/lib/prisma";
+import { getRecentMessages, updateWorkingMemory } from "~/lib/workingMemory";
 
 /**
  * We use Redis to cache the location information for 30 days so we don't have
@@ -37,7 +37,7 @@ export async function getChatFromSession(request: Request): Promise<{
   messages: MastraMessageV2[];
 }> {
   try {
-    const current = await auth.api.getSession({
+    const current = await authServer.api.getSession({
       headers: request.headers,
       returnHeaders: true,
     });
@@ -56,7 +56,7 @@ export async function getChatFromSession(request: Request): Promise<{
   }
 
   const location = await getLocationFromRequest(request);
-  const anonymous = await auth.api.signInAnonymous({
+  const anonymous = await authServer.api.signInAnonymous({
     query: {
       geocode: location,
       ip: location.ip,
