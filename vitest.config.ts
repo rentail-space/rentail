@@ -13,7 +13,11 @@ export default defineConfig({
     include: ["./**/*.test.{ts,tsx}"],
     pool: "forks",
     setupFiles: ["./test/helpers/setup.ts"],
-    testTimeout: 30000, // 30 seconds for E2E tests with browser launches
+    testTimeout: 3000, // 3 seconds for E2E tests with browser launches
+    hookTimeout: 30000,
+    teardownTimeout: 3000,
+    silent: "passed-only",
+    hideSkippedTests: true,
   },
 });
 

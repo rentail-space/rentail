@@ -8,11 +8,9 @@ export default function Header({ chatId }: { chatId?: string }) {
 
   return (
     <header className="flex flex-row items-center justify-between gap-8 border-b px-6 py-1">
-      <h1 className="font-bold text-2xl text-gray-900">
-        <Link to="/">
-          <span className="text-blue-600">rentail</span>.space
-        </Link>
-      </h1>
+      <Link to="/" className="font-bold text-2xl text-gray-900">
+        <span className="text-blue-600">rentail</span>.space
+      </Link>
 
       {isClient && authClient && (
         <div className="flex gap-3 items-center">
@@ -68,12 +66,16 @@ function Authentication() {
   if (isAuthenticated) return <DropdownMenu user={session.user} />;
   else
     return (
-      <Link
-        to="/auth"
+      <button
+        type="button"
+        onClick={async () => {
+          await authClient.signOut();
+          window.location.href = "/auth";
+        }}
         className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
       >
         Sign In
-      </Link>
+      </button>
     );
 }
 

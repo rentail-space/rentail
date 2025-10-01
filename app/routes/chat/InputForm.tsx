@@ -61,7 +61,7 @@ export default function InputForm({
           )}
           <button
             className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-indigo-500 transition-all duration-200 hover:scale-105 hover:bg-indigo-600 active:scale-95 active:scale-[0.6] active:duration-75 disabled:bg-gray-300 disabled:cursor-not-allowed"
-            disabled={isSubmitting || query.trim() === ""}
+            disabled={isSubmitting}
             type="submit"
           >
             <SendIcon isSubmitting={isSubmitting} />
