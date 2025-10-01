@@ -11,7 +11,7 @@ export default defineConfig({
     fileParallelism: false,
     globals: true,
     include: ["./**/*.test.{ts,tsx}"],
-    pool: "typescript",
+    pool: "forks",
     setupFiles: ["./test/helpers/setup.ts"],
     testTimeout: 30000, // 30 seconds for E2E tests with browser launches
   },
