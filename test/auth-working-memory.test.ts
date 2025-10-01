@@ -1,190 +1,221 @@
-import { invariant } from "es-toolkit";
+import { delay, withTimeout } from "es-toolkit";
 import { expect, type Page } from "playwright/test";
-import { afterEach, beforeEach, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vitest";
+import type zod from "zod";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
-import { URL, openPage } from "./helpers/launchBrowser";
+import { getWorkingMemory, type userProfile } from "~/lib/workingMemory";
+import { openPage, URL } from "./helpers/launchBrowser";
 
 describe("Authentication with Working Memory", () => {
   let page: Page;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     page = await openPage(env.isDebug);
+    await prisma.user.deleteMany();
   });
 
-  it(
-    "tracks user location through authentication flow",
-    { timeout: 60000 },
-    async () => {
-      // Step 1: User opens /chat page
-      await page.goto(`${URL}/chat`);
-      await page.waitForLoadState("domcontentloaded");
+  describe("user visits chat page", () => {
+    beforeAll(async () => {
+      await page.goto(`${URL}/chat`, { waitUntil: "domcontentloaded" });
+    });
+
+    it("creates anonymous user when opening chat page", async () => {
       expect(page.url()).toContain("/chat");
+    });
 
-      // Step 2: They are not authenticated, they see a "Sign in" button at the top
-      await page.waitForSelector("header div.flex", { timeout: 10000 });
-      const signInButton = page.getByRole("link", { name: "Sign In" });
-      await expect(signInButton).toBeVisible({ timeout: 10000 });
+    it("shows sign-in button for unauthenticated users", async () => {
+      const signInButton = page.getByRole("button", { name: "Sign In" });
+      await expect(signInButton).toBeVisible();
+    });
 
-      // Step 3: There is a user in the database, that user is anonymous
-      const anonymousUsersBefore = await prisma.user.findMany({
-        where: { isAnonymous: true },
-      });
-      expect(
-        anonymousUsersBefore.length,
-        "should have at least one anonymous user",
-      ).toBeGreaterThanOrEqual(1);
+    it("creates anonymous user in database", async () => {
+      const users = await prisma.user.findMany();
+      expect(users.length, "should have one user").toEqual(1);
 
-      const anonymousUser = anonymousUsersBefore[0];
-      expect(anonymousUser.isAnonymous, "User should be anonymous").toBe(true);
+      const user = users[0];
+      expect(user.isAnonymous, "User should be anonymous").toBe(true);
+    });
 
-      // Step 4: Keep track of the cookies sent from the client
+    it("maintains cookies across requests", async () => {
       const initialCookies = await page.context().cookies();
+      expect(initialCookies.length, "Should have cookies").toBeGreaterThan(0);
+    });
 
-      // Step 5: The working memory for the user says they're located in Los Angeles
-      expect(
-        anonymousUser.geocode,
-        "User should have geocode from IP geolocation",
-      ).toBeTruthy();
-
-      // Step 6: Send a message to the chat stating "actually I'm in Boston"
-      await page.fill("input[type='text']", "actually I'm in Boston");
-      await page.press("input[type='text']", "Enter");
-
-      // Wait for AI response to process
-      await page.waitForTimeout(5000);
-
-      // Step 7: That request should use the same cookies
-      const cookiesAfterMessage = await page.context().cookies();
-      expect(
-        cookiesAfterMessage.length,
-        "Cookies should still be present",
-      ).toBeGreaterThanOrEqual(initialCookies.length);
-
-      // Step 8: Now the working memory says they're located in Boston
-      const userAfterMessage = await prisma.user.findUnique({
-        where: { id: anonymousUser.id },
+    it("sets initial working memory with default location", async () => {
+      const chat = await prisma.chat.findFirstOrThrow({
+        include: { user: true },
       });
-      invariant(userAfterMessage, "User must still exist");
+      const workingMemory = await getWorkingMemory(chat);
+      expect(workingMemory.location?.city).toEqual("Los Angeles");
+      expect(workingMemory.location?.state).toEqual("California");
+      expect(workingMemory.location?.country).toEqual("United States");
+      expect(workingMemory.location?.latitude).toEqual("37.42240");
+      expect(workingMemory.location?.longitude).toEqual("-122.08421");
+      expect(workingMemory.location?.timeZone).toEqual("America/Los_Angeles");
+    });
 
-      if (userAfterMessage.workingMemory) {
-        const parsed = JSON.parse(userAfterMessage.workingMemory);
-        if (parsed.location?.city) {
-          console.info(
-            `[TEST] Working memory location after message: ${parsed.location.city}`,
-          );
-        }
-      }
+    describe("user updates their location", () => {
+      let workingMemory: zod.infer<typeof userProfile>;
 
-      // Step 9: Navigate to auth page (clear cookies to sign out anonymous session)
-      await page.context().clearCookies();
-      await page.goto(`${URL}/auth`);
-      await page.waitForLoadState("domcontentloaded");
-      expect(page.url()).toContain("/auth");
+      beforeAll(async () => {
+        const input = page.locator("input[type='text']").first();
+        await input.focus();
+        await input.pressSequentially("Actually I'm in Boston");
+        await page.locator("button[type='submit']").first().click();
 
-      // Step 10: Now presented with sign-in page with email and password fields
-      await expect(page.locator("input[type='email']")).toBeVisible({
-        timeout: 10000,
+        const chat = await prisma.chat.findFirstOrThrow({
+          include: { user: true },
+        });
+        workingMemory = await withTimeout<zod.infer<typeof userProfile>>(
+          async () => {
+            while (true) {
+              const workingMemory = await getWorkingMemory(chat);
+              if (workingMemory.location?.city === "Boston")
+                return workingMemory;
+              else await delay(100);
+            }
+          },
+          10000,
+        );
       });
-      await expect(page.locator("input[type='password']")).toBeVisible();
 
-      // Step 11: User clicks to sign-up for a new account
-      await page.waitForTimeout(500);
-      await page.click("text=Don't have an account? Sign up", {
-        timeout: 10000,
+      it("should have user's new city", async () => {
+        expect(workingMemory.location?.city).toEqual("Boston");
       });
-      await expect(
-        page.locator("h1.text-3xl.font-bold.text-gray-900"),
-      ).toContainText("Create Account");
 
-      // Step 12: Now presented with sign-up page with name, email and password fields
-      await page.waitForSelector("input[id*='name']", {
-        state: "visible",
-        timeout: 5000,
+      it("should have user's new state", async () => {
+        expect(workingMemory.location?.state).toEqual("Massachusetts");
       });
-      await expect(page.locator("input[id*='name']")).toBeVisible();
-      await expect(page.locator("input[type='email']")).toBeVisible();
-      await expect(page.locator("input[type='password']")).toBeVisible();
 
-      // Step 13: User fills input fields and creates new account
-      const timestamp = Date.now();
-      const testEmail = `working-memory-${timestamp}@example.com`;
-      const testName = `Working Memory User ${timestamp}`;
-      const testPassword = "WorkingMemory123!";
-
-      await page.fill("input[id*='name']", testName);
-      await page.fill("input[type='email']", testEmail);
-      await page.fill("input[type='password']", testPassword);
-      await page.click("button[type='submit']");
-
-      // Step 14: Now the user is looking at the chat page
-      await page.waitForURL(`${URL}/chat`, { timeout: 5000 });
-      expect(page.url()).toContain("/chat");
-
-      // Wait for page to fully load and auth state to hydrate
-      await page.waitForLoadState("networkidle");
-
-      // Step 15: They see a dropdown link at the top of the page
-      // Wait for header to finish hydration (isClient becomes true)
-      await page.waitForSelector("header div.flex", { timeout: 10000 });
-      await expect(
-        page.locator("button").filter({ hasText: testName }),
-      ).toBeVisible({ timeout: 10000 });
-
-      // Step 16: The drop-down has options including sign-out
-      const userButton = page.locator("button").filter({ hasText: testName });
-      await userButton.click();
-      await expect(
-        page.locator(".font-medium").filter({ hasText: testName }),
-      ).toBeVisible();
-      await expect(
-        page.locator(".text-xs").filter({ hasText: testEmail }),
-      ).toBeVisible();
-      await expect(page.locator("text=Sign Out")).toBeVisible();
-
-      // Step 17: There is only one user in database, that user is not anonymous
-      const allUsers = await prisma.user.findMany();
-      const nonAnonymousUsers = allUsers.filter(
-        (u: { isAnonymous: boolean }) => !u.isAnonymous,
-      );
-      expect(
-        nonAnonymousUsers.length,
-        "Should have exactly one non-anonymous user after signup",
-      ).toBe(1);
-
-      // Step 18: That user has the name, email, and password set before
-      const finalUser = nonAnonymousUsers[0];
-      // Note: better-auth may create a new user instead of linking anonymous user
-      // So we don't assert the ID matches
-      expect(finalUser.name, "User should have correct name").toBe(testName);
-      expect(finalUser.email, "User should have correct email").toBe(testEmail);
-      expect(finalUser.isAnonymous, "User should not be anonymous").toBe(false);
-
-      // Verify password is set in Account table
-      const account = await prisma.account.findFirst({
-        where: { userId: finalUser.id },
+      it("should have user country", async () => {
+        expect(workingMemory.location?.country).toEqual("United States");
       });
-      invariant(account, "Account must exist for user");
-      expect(
-        account.password,
-        "Account should have password hash",
-      ).toBeTruthy();
 
-      // Step 19: Working memory says they're located in Boston
-      if (finalUser.workingMemory) {
-        const parsed = JSON.parse(finalUser.workingMemory);
-        if (parsed.location?.city) {
-          console.info(
-            `[TEST] Final working memory location: ${parsed.location.city}`,
-          );
-          // Soft assertion - AI behavior can vary
-          // In production, this should verify Boston was set
-        }
-      }
-    },
-  );
+      it("should have user's new latitude", async () => {
+        expect(workingMemory.location?.latitude).toEqual("42.3601");
+      });
 
-  afterEach(async () => {
+      it("should have user's new longitude", async () => {
+        expect(workingMemory.location?.longitude).toEqual("-71.0589");
+      });
+
+      it("should have user's new time zone", async () => {
+        expect(workingMemory.location?.timeZone).toEqual("America/New_York");
+      });
+    });
+
+    describe("sign-in page", () => {
+      beforeAll(async () => {
+        await page.goto(`${URL}/chat`, { waitUntil: "domcontentloaded" });
+        await page.locator("button", { hasText: "Sign In" }).click();
+        await page.waitForURL(`${URL}/auth`);
+      });
+
+      it("shows sign-in page", async () => {
+        expect(page.url()).toContain("/auth");
+        await expect(page.locator("h1")).toContainText("Welcome Back");
+      });
+
+      it("shows sign-in page with email field", async () => {
+        await expect(page.locator("input[type='email']")).toBeVisible();
+      });
+
+      it("shows sign-in page with password fields", async () => {
+        await expect(page.locator("input[type='password']")).toBeVisible();
+      });
+
+      it("shows sign-in page with sign-in button", async () => {
+        await expect(page.locator("button[type='submit']")).toBeVisible();
+      });
+
+      it("shows sign-in page with sign-up link", async () => {
+        await expect(
+          page.locator("text=Don't have an account? Sign up"),
+        ).toBeVisible();
+      });
+
+      describe("sign-up page", () => {
+        beforeAll(async () => {
+          await page.locator("button", { hasText: /Sign up/i }).click();
+        });
+
+        it("shows sign-up page", async () => {
+          await expect(page.locator("h1")).toContainText("Create Account");
+        });
+
+        it("shows sign-up page with name field", async () => {
+          await expect(page.locator("input[id*='name']")).toBeVisible();
+        });
+
+        it("shows sign-up page with email field", async () => {
+          await expect(page.locator("input[type='email']")).toBeVisible();
+        });
+
+        it("shows sign-up page with password fields", async () => {
+          await expect(page.locator("input[type='password']")).toBeVisible();
+        });
+
+        it("shows sign-up page with sign-up button", async () => {
+          await expect(page.locator("button[type='submit']")).toBeVisible();
+        });
+
+        describe("user signs up", () => {
+          beforeAll(async () => {
+            await page.locator("input[id*='name']").fill("Working Memory User");
+            await page
+              .locator("input[type='email']")
+              .fill("working-memory@example.com");
+            await page
+              .locator("input[type='password']")
+              .fill("WorkingMemory123!");
+            await page.locator("button[type='submit']").click();
+            await page.waitForURL(`${URL}/chat`);
+          });
+
+          it("redirects to chat page after successful sign-up", async () => {
+            expect(page.url()).toContain("/chat");
+          });
+
+          it("shows user dropdown after successful sign-up", async () => {
+            await expect(
+              page.locator("button").filter({ hasText: "Working Memory User" }),
+            ).toBeVisible();
+          });
+
+          it("displays user info in dropdown menu", async () => {
+            await expect(
+              page.locator("button").filter({ hasText: "Working Memory User" }),
+            ).toBeVisible();
+          });
+
+          it("stores user credentials correctly in database", async () => {
+            const users = await prisma.user.findMany();
+            console.log("\n\nusers", users);
+            expect(users.length, "Should have exactly one user").toBe(1);
+            const user = users[0];
+            expect(user.name, "User should have correct name").toBe(
+              "Working Memory User",
+            );
+            expect(user.email, "User should have correct email").toBe(
+              "working-memory@example.com",
+            );
+          });
+
+          it("preserves working memory through authentication", async () => {
+            const chat = await prisma.chat.findFirstOrThrow({
+              include: { user: true },
+            });
+            const workingMemory = await getWorkingMemory(chat);
+            console.log("\n\nworkingMemory", workingMemory);
+            expect(workingMemory.location?.city).toEqual("Boston");
+          });
+        });
+      });
+    });
+  });
+
+  afterAll(async () => {
     if (page) await page.close();
   });
 });

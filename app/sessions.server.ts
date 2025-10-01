@@ -41,12 +41,15 @@ export async function getChatFromSession(request: Request): Promise<{
       headers: request.headers,
       returnHeaders: true,
     });
+
     if (current.response?.user) {
-      const user = await prisma.user.findUniqueOrThrow({
+      const user = await prisma.user.findUnique({
         where: { id: current.response.user.id },
       });
-      const { chat, messages } = await getChatForUser(user);
-      return { chat, messages, headers: current.headers };
+      if (user) {
+        const { chat, messages } = await getChatForUser(user);
+        return { chat, messages, headers: current.headers };
+      }
     }
   } catch (error) {
     captureException(error);
@@ -58,7 +61,6 @@ export async function getChatFromSession(request: Request): Promise<{
       geocode: location,
       ip: location.ip,
     },
-    headers: request.headers,
     returnHeaders: true,
   });
   const user = await prisma.user.findUniqueOrThrow({

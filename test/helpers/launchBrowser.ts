@@ -140,7 +140,7 @@ export async function launchServer(
             setTimeout(() => resolve(server), 10);
         });
       }),
-    30000,
+    3000,
   );
 }
 
