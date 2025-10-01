@@ -56,12 +56,13 @@ export async function getChatFromSession(request: Request): Promise<{
   }
 
   const location = await getLocationFromRequest(request);
+
   const anonymous = await authServer.api.signInAnonymous({
+    returnHeaders: true,
     query: {
       geocode: location,
       ip: location.ip,
     },
-    returnHeaders: true,
   });
   const user = await prisma.user.findUniqueOrThrow({
     where: { id: anonymous.response?.user.id },
