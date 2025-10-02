@@ -120,7 +120,6 @@ export default betterAuth({
     user: {
       create: {
         after: async (user) => {
-          console.log("create:after:user", user);
           // Send welcome email to non-anonymous users, don't await to avoid blocking
           if (!user.isAnonymous) sendWelcomeEmail(user);
         },
