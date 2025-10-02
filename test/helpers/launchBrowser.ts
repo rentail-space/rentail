@@ -12,6 +12,7 @@ import {
 } from "playwright";
 import env from "~/lib/env";
 import "~/test/helpers/toMatchScreenshot";
+import { afterAll } from "vitest";
 
 const port = 9222;
 const lockFile = join(tmpdir(), `rentail-server-${port}.lock`);
@@ -20,6 +21,11 @@ export const URL = `http://localhost:${port}`;
 
 let context: BrowserContext;
 let server: ChildProcess;
+
+afterAll(async () => {
+  if (context) await context.close();
+  if (server) server.kill("SIGTERM");
+});
 
 /**
  * Launch a new browser instance and return the context.

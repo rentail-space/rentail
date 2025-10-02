@@ -4,7 +4,7 @@ import * as Sentry from "@sentry/react-router";
 import { afterAll, beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
 import { cleanupServer } from "~/test/helpers/launchBrowser";
-import server from "~/test/mocks/msw.server";
+import msw from "~/test/mocks/msw.server";
 
 Sentry.init({
   enabled: false,
@@ -18,7 +18,7 @@ Sentry.init({
 
 // Start MSW server before all tests
 beforeAll(async () => {
-  server.listen({ onUnhandledRequest: "error" });
+  msw.listen({ onUnhandledRequest: "error" });
 
   // Clean up database
   await prisma.user.deleteMany({});
@@ -26,6 +26,6 @@ beforeAll(async () => {
 
 // Close MSW server and test server after all tests
 afterAll(async () => {
-  server.close();
+  msw.close();
   await cleanupServer();
 });
