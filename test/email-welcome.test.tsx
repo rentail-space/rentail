@@ -1,5 +1,5 @@
 import { expect, type Page } from "playwright/test";
-import { afterEach, beforeEach, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vitest";
 import Welcome from "~/emails/Welcome";
 import { openPage } from "./helpers/launchBrowser";
 import renderEmail from "./helpers/renderEmail";
@@ -7,7 +7,7 @@ import renderEmail from "./helpers/renderEmail";
 describe("Welcome Email", () => {
   let page: Page;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     page = await openPage();
   });
 
@@ -18,7 +18,7 @@ describe("Welcome Email", () => {
     await expect(page).toMatchScreenshot();
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     if (page) await page.close();
   });
 });

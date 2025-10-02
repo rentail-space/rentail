@@ -1,11 +1,11 @@
 import { expect, type Page } from "playwright/test";
-import { afterEach, beforeEach, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vitest";
 import { openPage, URL } from "./helpers/launchBrowser";
 
 describe("Home page", () => {
   let page: Page;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     page = await openPage();
   });
 
@@ -15,7 +15,7 @@ describe("Home page", () => {
     await expect(page).toMatchScreenshot();
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     if (page) await page.close();
   });
 });

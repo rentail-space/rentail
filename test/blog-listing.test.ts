@@ -8,13 +8,13 @@
  */
 
 import { expect, type Page } from "playwright/test";
-import { afterEach, beforeEach, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vitest";
 import { openPage, URL } from "./helpers/launchBrowser";
 
 describe("Blog Listing", () => {
   let page: Page;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     page = await openPage();
   });
 
@@ -121,6 +121,7 @@ describe("Blog Listing", () => {
   });
 
   it("blog listing visual regression test", async () => {
+    await page.goto(URL);
     // Set consistent viewport for screenshots
     await page.setViewportSize({ width: 1280, height: 720 });
 
@@ -136,7 +137,7 @@ describe("Blog Listing", () => {
     await expect(blogSection).toMatchScreenshot();
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     if (page) await page.close();
   });
 });

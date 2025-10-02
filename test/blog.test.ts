@@ -10,13 +10,13 @@
  */
 
 import { expect, type Page } from "playwright/test";
-import { afterEach, beforeEach, describe, test } from "vitest";
+import { afterAll, beforeAll, describe, test } from "vitest";
 import { openPage, URL } from "./helpers/launchBrowser";
 
 describe("Blog Post Rendering", () => {
   let page: Page;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     page = await openPage();
   });
 
@@ -178,7 +178,7 @@ describe("Blog Post Rendering", () => {
     }
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     if (page) await page.close();
   });
 });

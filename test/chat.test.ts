@@ -1,12 +1,12 @@
 import { expect, type Page } from "playwright/test";
-import { afterEach, beforeEach, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vitest";
 import env from "~/lib/env";
 import { openPage, URL } from "./helpers/launchBrowser";
 
 describe("Chat page", () => {
   let page: Page;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     page = await openPage(env.isDebug);
   });
 
@@ -82,7 +82,7 @@ describe("Chat page", () => {
     expect(scrollTop + clientHeight).toBeGreaterThan(scrollHeight - 50);
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     if (page) await page.close();
   });
 });
