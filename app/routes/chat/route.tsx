@@ -1,28 +1,26 @@
 import { useChat } from "@ai-sdk/react";
+import type { MastraMessageV2 } from "@mastra/core/memory";
 import { captureException } from "@sentry/react-router";
 import { DefaultChatTransport, type UIMessage, type UITools } from "ai";
 import { last } from "es-toolkit";
 import { useQueryState } from "nuqs";
+import type { ChatGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
-import { data, useLoaderData } from "react-router";
+import { useMatches } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
-import { getUserChat } from "~/sessions.server";
-import type { Route } from "./+types/route";
 
 export const handle = { hideLayout: true };
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const { chat, messages, headers } = await getUserChat(request.headers);
-  return data({ chat, messages }, { headers });
-}
-
 export default function Chat() {
   const [query, setQuery] = useQueryState("q");
-  const { chat, messages: initialMessages } = useLoaderData<typeof loader>();
+  const { chat, messages: initialMessages } = useMatches()[0].loaderData as {
+    chat: ChatGetPayload<{ include: { user: true } }>;
+    messages: MastraMessageV2[];
+  };
   const { error, messages, sendMessage, status, stop } = useChat<
     UIMessage<{ isAborted?: boolean }, { text: string }, UITools>
   >({

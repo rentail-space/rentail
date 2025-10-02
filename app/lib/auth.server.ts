@@ -142,7 +142,8 @@ export default betterAuth({
 /**
  * Copy the anonymous user's data to the new user. We need to go through this
  * process because we're not allowed to just change the user's ID, and we need
- * to duplicate their chats, messages, and working memory.
+ * to duplicate their chats, messages, and working memory. The anonymous user
+ * will be deleted after this process.
  *
  * @param anonUser - The anonymous user.
  * @param newUser - The new user.

@@ -15,3 +15,5 @@ __screenshots__/diff-*.jpg
 package-lock.json
 # Need to re-generate on the server
 prisma/generated
+# Used by playwright for persistent context
+test/context

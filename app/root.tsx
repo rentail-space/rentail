@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import {
+  data,
   Links,
   type LinksFunction,
   Meta,
@@ -7,7 +8,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
   useLocation,
   useMatches,
 } from "react-router";
@@ -20,15 +20,12 @@ import ErrorBoundary from "~/components/ErrorBoundary";
 import Footer from "~/components/layout/Footer";
 import Header from "~/components/layout/Header";
 import schema from "~/data/schema.json";
-import env from "~/lib/env";
+import type { Route } from "./+types/root";
+import { getUserChat } from "./sessions.server";
 
-export async function loader() {
-  return {
-    ENV: {
-      NODE_ENV: env.isProduction ? "production" : "development",
-      SENTRY_DSN: env.SENTRY_DSN,
-    },
-  };
+export async function loader({ request }: Route.LoaderArgs) {
+  const { headers, chat, messages } = await getUserChat(request.headers);
+  return data({ chat, messages }, { headers });
 }
 
 const description =
@@ -112,13 +109,8 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const fromLoader = useLoaderData<typeof loader | undefined>();
   useEffect(() => ReactGA.initialize("G-HLE5G8GC5Y"), []);
   const location = useLocation();
-  useEffect(() => {
-    if (fromLoader?.ENV.NODE_ENV === "production")
-      ReactGA.send({ hitType: "pageview", page: location.pathname });
-  }, [location.pathname, fromLoader?.ENV.NODE_ENV]);
   const canonicalUrl = `https://rentail.space${location.pathname}`;
 
   const matches = useMatches();

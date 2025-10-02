@@ -5,7 +5,6 @@ import { join } from "node:path";
 import { URL as URLString } from "node:url";
 import { invariant, withTimeout } from "es-toolkit";
 import {
-  type Browser,
   type BrowserContext,
   chromium,
   type Page,
@@ -19,7 +18,6 @@ const lockFile = join(tmpdir(), `rentail-server-${port}.lock`);
 
 export const URL = `http://localhost:${port}`;
 
-let browser: Browser;
 let context: BrowserContext;
 let server: ChildProcess;
 
@@ -32,11 +30,12 @@ let server: ChildProcess;
 export async function launchBrowser(
   logging = env.isDebug,
 ): Promise<BrowserContext> {
-  if (!browser)
-    browser = await chromium.launch({
-      headless: process.env.CI ? true : !logging,
+  const headless = process.env.CI ? true : !logging;
+  if (!context) {
+    context = await chromium.launchPersistentContext("test/context", {
+      headless,
     });
-  if (!context) context = await browser.newContext();
+  }
   return context;
 }
 
@@ -48,7 +47,7 @@ export async function launchBrowser(
  */
 export async function openPage(logging = env.isDebug): Promise<Page> {
   await launchServer(logging);
-  const context = await launchBrowser(logging);
+  await launchBrowser(logging);
   const page = await context.newPage();
   page.route("**", (route) => blockBrowserRequest(route));
   return page;
@@ -170,11 +169,6 @@ export async function cleanupServer(): Promise<void> {
     // @ts-expect-error - Resetting to undefined
     context = undefined;
   }
-  if (browser) {
-    await browser.close();
-    // @ts-expect-error - Resetting to undefined
-    browser = undefined;
-  }
 
   // Kill server
   if (server) {
@@ -202,6 +196,5 @@ async function blockBrowserRequest(route: Route): Promise<void> {
     await route.continue();
   } else {
     if (env.isDebug) console.debug(`[BROWSER] blocking request to ${hostname}`);
-    await route.abort("accessdenied");
   }
 }

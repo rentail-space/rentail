@@ -3,17 +3,11 @@ import { invariant } from "es-toolkit";
 import { useEffect, useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
 import authServer from "~/lib/auth.server";
-import { getUserChat } from "~/sessions.server";
 import type { Route } from "./+types/auth";
 
 export const handle = {
   hideLayout: true,
 };
-
-export async function loader({ request }: Route.LoaderArgs) {
-  const { headers } = await getUserChat(request.headers);
-  return new Response(null, { headers });
-}
 
 export async function action({
   request,
