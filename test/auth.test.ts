@@ -17,9 +17,10 @@ describe("Authentication with Working Memory", () => {
 
   describe("user visits chat page", () => {
     beforeAll(async () => {
-      await page.goto(`${URL}/chat`);
+      await page.goto(`${URL}/chat`, { waitUntil: "networkidle" });
       await page.waitForSelector(`button[aria-label="Sign in"]`, {
         state: "visible",
+        timeout: 30000,
       });
     });
 
