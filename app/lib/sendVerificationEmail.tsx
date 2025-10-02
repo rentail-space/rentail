@@ -1,10 +1,7 @@
 import { pretty, render } from "@react-email/components";
 import { captureException } from "@sentry/react-router";
-import { Resend } from "resend";
 import EmailVerification from "~/emails/EmailVerification";
-import env from "~/lib/env";
-
-const resend = new Resend(env.RESEND_API_KEY);
+import resend from "~/lib/resend";
 
 export default async function sendVerificationEmail({
   email,

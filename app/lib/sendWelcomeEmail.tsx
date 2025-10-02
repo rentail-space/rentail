@@ -1,10 +1,7 @@
 import { pretty, render } from "@react-email/components";
 import { captureException } from "@sentry/react-router";
-import { Resend } from "resend";
 import Welcome from "~/emails/Welcome";
-import env from "~/lib/env";
-
-const resend = new Resend(env.RESEND_API_KEY);
+import resend from "~/lib/resend";
 
 export default async function sendWelcomeEmail({
   email,
