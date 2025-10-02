@@ -13,9 +13,9 @@ export default defineConfig({
     include: ["./**/*.test.{ts,tsx}"],
     pool: "forks",
     setupFiles: ["./test/helpers/setup.ts"],
-    testTimeout: 10000, // 10 seconds for E2E tests with browser launches
-    hookTimeout: 10000,
-    teardownTimeout: 1000,
+    testTimeout: 30000, // 30 seconds for E2E tests with browser interaction
+    hookTimeout: 60000, // 60 seconds for beforeAll/afterAll (server + browser startup)
+    teardownTimeout: 10000, // 10 seconds for cleanup
     silent: "passed-only",
     hideSkippedTests: true,
   },
