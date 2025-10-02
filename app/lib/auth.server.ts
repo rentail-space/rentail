@@ -55,24 +55,23 @@ export default betterAuth({
   user: {
     additionalFields: {
       geocode: {
-        type: "string",
-        required: true,
         defaultValue: "{}",
+        required: true,
+        type: "string",
       },
       ip: {
+        defaultValue: "146.70.195.182",
+        required: true,
         type: "string",
-        defaultValue: "",
-        required: false,
       },
       metadata: {
-        type: "string",
-        required: false,
         defaultValue: "{}",
+        required: true,
+        type: "string",
       },
       workingMemory: {
-        type: "string",
-        required: false,
         defaultValue: "",
+        type: "string",
       },
     },
     changeEmail: {

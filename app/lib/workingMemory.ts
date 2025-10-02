@@ -144,23 +144,23 @@ export async function saveMessages(
 export async function getWorkingMemory(
   chat: ChatGetPayload<{ include: { user: true } }>,
 ): Promise<zod.infer<typeof userProfile>> {
-  try {
-    await memory.createThread({
-      resourceId: chat.user.id,
-      threadId: chat.id,
-      saveThread: true,
-    });
-    const json = await memory.getWorkingMemory({
-      resourceId: chat.user.id,
-      threadId: chat.id,
-    });
-    const { success, data } = userProfile.safeParse(
-      json ? JSON.parse(json) : { location: chat.user.geocode },
-    );
-    return success ? data : userProfile.parse(undefined);
-  } catch (error) {
+  await memory.createThread({
+    resourceId: chat.user.id,
+    threadId: chat.id,
+    saveThread: true,
+  });
+  const json = await memory.getWorkingMemory({
+    resourceId: chat.user.id,
+    threadId: chat.id,
+  });
+  const { success, data, error } = userProfile.safeParse({
+    location: chat.user.geocode,
+    ...(json ? JSON.parse(json) : {}),
+  });
+  if (success) return data;
+  else {
     captureException(error, { extra: { chat } });
-    return userProfile.safeParse(undefined).data ?? {};
+    return userProfile.parse({});
   }
 }
 
@@ -179,16 +179,18 @@ export async function updateWorkingMemory(
   ) => Promise<Record<string, unknown>> | Record<string, unknown>,
 ): Promise<zod.infer<typeof userProfile>> {
   const currentValue = await getWorkingMemory(chat);
-  try {
-    const validateValue = userProfile.parse(await update(currentValue));
+  const { success, error, data } = userProfile.safeParse(
+    await update(currentValue),
+  );
+  if (success) {
     await memory.updateWorkingMemory({
       resourceId: chat.user.id,
       threadId: chat.id,
-      workingMemory: JSON.stringify(validateValue),
+      workingMemory: JSON.stringify(data),
     });
-    return validateValue;
-  } catch (error) {
+    return data;
+  } else {
     captureException(error, { extra: { chat } });
-    return currentValue;
+    return userProfile.parse({ location: chat.user.geocode });
   }
 }

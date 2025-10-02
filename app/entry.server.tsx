@@ -19,6 +19,11 @@ if (env.SENTRY_DSN) {
     environment: env.isProduction ? "production" : "development",
     integrations: [
       Sentry.consoleLoggingIntegration({ levels: ["log", "warn", "error"] }),
+      Sentry.anthropicAIIntegration({
+        recordInputs: true,
+        recordOutputs: true,
+      }),
+      Sentry.vercelAIIntegration({ recordInputs: true, recordOutputs: true }),
     ],
     tracesSampleRate: 1.0,
   });

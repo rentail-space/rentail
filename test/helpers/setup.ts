@@ -1,8 +1,21 @@
 // This file contains setup code that will run before all tests
+
+import * as Sentry from "@sentry/react-router";
+import { captureException } from "@sentry/react-router";
 import { afterAll, beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
-import { cleanupServer } from "./launchBrowser";
 import server from "../mocks/msw.server";
+import { cleanupServer } from "./launchBrowser";
+
+Sentry.init({
+  enabled: false,
+  environment: "development",
+  defaultIntegrations: false,
+  beforeSend(event) {
+    console.error("\x1b[91m[SENTRY] %s %o\x1b[0m", event.message, event.extra);
+    return event;
+  },
+});
 
 // Start MSW server before all tests
 beforeAll(async () => {
