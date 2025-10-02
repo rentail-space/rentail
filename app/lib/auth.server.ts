@@ -2,7 +2,6 @@ import { captureException } from "@sentry/react-router";
 import { type BetterAuthOptions, betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { anonymous, type UserWithAnonymous } from "better-auth/plugins";
-import { invariant } from "es-toolkit";
 import prisma from "./prisma";
 import sendVerificationEmail from "./send-verification-email";
 import sendWelcomeEmail from "./send-welcome-email";
@@ -121,6 +120,7 @@ export default betterAuth({
     user: {
       create: {
         after: async (user) => {
+          console.log("create:after:user", user);
           // Send welcome email to non-anonymous users, don't await to avoid blocking
           if (!user.isAnonymous) sendWelcomeEmail(user);
         },
@@ -152,14 +152,21 @@ async function copyAnonToNewUser(
   anonUser: UserWithAnonymous & Record<string, unknown>,
   newUser: Omit<UserWithAnonymous, "isAnonymous"> & Record<string, unknown>,
 ) {
-  invariant(anonUser.id, "Anonymous user ID is required");
-  invariant(newUser.id, "New user ID is required");
-
   // Copy the anonymous user's saved data to the new user.
-  newUser.metadata = anonUser.metadata || "{}";
-  newUser.ip = anonUser.ip || "146.70.195.182";
-  newUser.geocode = anonUser.geocode || "{}";
-  newUser.workingMemory = anonUser.workingMemory || "";
+  // NOTE: anonUser doesn't have the workingMemory field, so we need to get it
+  // from the database directly.
+  const loaded = await prisma.user.findUniqueOrThrow({
+    where: { id: anonUser.id },
+  });
+  await prisma.user.update({
+    data: {
+      geocode: loaded.geocode ?? {},
+      ip: loaded.ip ?? "",
+      metadata: loaded.metadata ?? {},
+      workingMemory: loaded.workingMemory,
+    },
+    where: { id: newUser.id },
+  });
 
   // Duplicate the anonymous user's last chat.
   const anonChat = await prisma.chat.findFirst({

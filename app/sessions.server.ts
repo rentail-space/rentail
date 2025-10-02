@@ -13,15 +13,17 @@ import { getRecentMessages, updateWorkingMemory } from "~/lib/workingMemory";
  * We use Redis to cache the location information for 30 days so we don't have
  * to geocode the IP address every time.
  */
-const cachedLocation = zod.object({
-  city: zod.string(),
-  country: zod.string(),
-  state: zod.string(),
-  ip: zod.string(),
-  latitude: zod.string(),
-  longitude: zod.string(),
-  timeZone: zod.string(),
-});
+const cachedLocation = zod
+  .object({
+    city: zod.string(),
+    country: zod.string(),
+    state: zod.string(),
+    ip: zod.string(),
+    latitude: zod.string(),
+    longitude: zod.string(),
+    timeZone: zod.string(),
+  })
+  .partial();
 
 const redis = new Redis(env.REDIS_URL);
 
@@ -57,7 +59,6 @@ export async function getUserChat(headers: Headers): Promise<{
   const geocode = await geocodeIP(headers);
   const anonymous = await authServer.api.signInAnonymous({
     returnHeaders: true,
-    query: { geocode, ip: geocode.ip },
   });
   invariant(anonymous.response?.user.id, "Anonymous user ID is required");
   const user = await prisma.user.findUniqueOrThrow({
@@ -65,8 +66,8 @@ export async function getUserChat(headers: Headers): Promise<{
   });
   const { chat, messages } = await getChatForUser(user);
   await updateWorkingMemory(chat, (profile) => ({
-    ...profile,
     location: geocode,
+    ...profile,
   }));
   return { chat, messages, headers: anonymous.headers };
 }

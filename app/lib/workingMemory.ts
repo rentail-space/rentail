@@ -90,8 +90,6 @@ export const memory = new Memory({
 export async function getRecentMessages(
   chat: ChatGetPayload<{ include: { user: true } }>,
 ) {
-  await updateWorkingMemory(chat, () => ({}));
-
   const messages = await memory.rememberMessages({ threadId: chat.id });
   if (messages.messagesV2.length > 0) return messages.messagesV2;
 
@@ -149,18 +147,19 @@ export async function getWorkingMemory(
     threadId: chat.id,
     saveThread: true,
   });
-  const json = await memory.getWorkingMemory({
-    resourceId: chat.user.id,
-    threadId: chat.id,
-  });
+  const json =
+    (await memory.getWorkingMemory({
+      resourceId: chat.user.id,
+      threadId: chat.id,
+    })) ?? "{}";
   const { success, data, error } = userProfile.safeParse({
     location: chat.user.geocode,
-    ...(json ? JSON.parse(json) : {}),
+    ...JSON.parse(json),
   });
   if (success) return data;
   else {
     captureException(error, { extra: { chat } });
-    return userProfile.parse({});
+    return userProfile.parse({ name: "Unknown" });
   }
 }
 
