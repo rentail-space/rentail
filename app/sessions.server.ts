@@ -90,7 +90,7 @@ async function getChatForUser(user: { id: string }): Promise<{
       where: { userId: user.id },
     })) ||
     (await prisma.chat.create({
-      data: { user: { connect: { id: user.id } } },
+      data: { metadata: {}, user: { connect: { id: user.id } } },
       include: { user: true },
     }));
   const messages = await getRecentMessages(chat);

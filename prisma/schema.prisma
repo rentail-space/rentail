@@ -22,7 +22,7 @@ model Chat {
   createdAt DateTime   @map("created_at") @default(now())
   id        String     @map("id")         @id @default(cuid(2))
   messages  Messages[]
-  metadata  Json?      @map("metadata")   @db.Json
+  metadata  Json       @map("metadata")   @db.Json
   title     String?    @map("title")
   updatedAt DateTime   @map("updated_at") @updatedAt
   user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -54,11 +54,11 @@ model User {
   image         String?   @map("image")
   ip            String?   @map("ip")
   isAnonymous   Boolean   @map("is_anonymous")   @default(false)
-  metadata      Json?     @map("metadata")       @db.Json
+  metadata      Json      @map("metadata")       @db.Json
   name          String?   @map("name")
   sessions      Session[]
   updatedAt     DateTime  @map("updated_at")     @updatedAt
-  workingMemory String?   @map("working_memory") @db.Text
+  workingMemory String    @map("working_memory") @db.Text
 
   @@map("users")
   @@unique([email])

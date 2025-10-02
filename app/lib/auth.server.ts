@@ -64,6 +64,11 @@ export default betterAuth({
         defaultValue: "",
         required: false,
       },
+      metadata: {
+        type: "string",
+        required: false,
+        defaultValue: "{}",
+      },
       workingMemory: {
         type: "string",
         required: false,
@@ -145,24 +150,17 @@ export default betterAuth({
  * @param newUser - The new user.
  */
 async function copyAnonToNewUser(
-  anonUser: UserWithAnonymous,
-  newUser: Omit<UserWithAnonymous, "isAnonymous">,
+  anonUser: UserWithAnonymous & Record<string, unknown>,
+  newUser: Omit<UserWithAnonymous, "isAnonymous"> & Record<string, unknown>,
 ) {
   invariant(anonUser.id, "Anonymous user ID is required");
   invariant(newUser.id, "New user ID is required");
+
   // Copy the anonymous user's saved data to the new user.
-  const anonSaved = await prisma.user.findUnique({
-    where: { id: anonUser.id },
-    select: { workingMemory: true, ip: true, geocode: true },
-  });
-  await prisma.user.update({
-    data: {
-      workingMemory: anonSaved?.workingMemory,
-      ip: anonSaved?.ip || "146.70.195.182",
-      geocode: anonSaved?.geocode || "{}",
-    },
-    where: { id: newUser.id },
-  });
+  newUser.metadata = anonUser.metadata || "{}";
+  newUser.ip = anonUser.ip || "146.70.195.182";
+  newUser.geocode = anonUser.geocode || "{}";
+  newUser.workingMemory = anonUser.workingMemory || "";
 
   // Duplicate the anonymous user's last chat.
   const anonChat = await prisma.chat.findFirst({
@@ -171,7 +169,7 @@ async function copyAnonToNewUser(
     where: { user: { id: anonUser.id } },
   });
   const newChat = await prisma.chat.create({
-    data: { user: { connect: { id: newUser.id } } },
+    data: { metadata: {}, user: { connect: { id: newUser.id } } },
     include: { user: true },
   });
 

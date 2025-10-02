@@ -19,6 +19,7 @@ import {
 } from "@mastra/core/storage";
 import type { Trace } from "@mastra/core/telemetry";
 import type { StepResult, WorkflowRunState } from "@mastra/core/workflows";
+import type { InputJsonValue } from "@prisma/client/runtime/client";
 import { invariant } from "es-toolkit";
 import type { Chat, Messages, User } from "prisma/generated/client";
 import type { Role } from "prisma/generated/enums";
@@ -108,7 +109,7 @@ export class PrismaStorage extends MastraStorage {
   }): Promise<StorageThreadType> {
     const update = {
       createdAt: thread.createdAt,
-      metadata: thread.metadata ? JSON.stringify(thread.metadata) : undefined,
+      metadata: JSON.stringify(thread.metadata ?? {}),
       title: thread.title ?? undefined,
       updatedAt: thread.updatedAt,
       userId: thread.resourceId,
@@ -512,13 +513,16 @@ export class PrismaStorage extends MastraStorage {
     resource: StorageResourceType;
   }): Promise<StorageResourceType> {
     const update = {
-      workingMemory: resource.workingMemory,
-      metadata: resource.metadata
-        ? JSON.stringify(resource.metadata)
-        : undefined,
+      workingMemory: resource.workingMemory ?? "",
+      metadata: resource.metadata ? JSON.stringify(resource.metadata) : "{}",
+      geocode: "{}",
+      ip: "146.70.195.182",
     };
     const user = await prisma.user.upsert({
-      create: { ...update, id: resource.id, geocode: "" },
+      create: {
+        ...update,
+        id: resource.id,
+      },
       update,
       where: { id: resource.id },
     });

@@ -75,10 +75,8 @@ export async function launchServer(
         lockFile,
       );
 
-    if (await checkServerHealth()) {
-      console.error("[TEST] server is already running");
-      process.exit(1);
-    }
+    if (await checkServerHealth())
+      throw new Error("[TEST] server is already running");
 
     // Clean up stale lock files
     try {
