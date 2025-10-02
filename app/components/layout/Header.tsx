@@ -56,7 +56,7 @@ function UserMenu({ chatId }: { chatId?: string }) {
 
   // Show sign-in link for non-authenticated users
   if (isPending) return <span>Loading...</span>;
-  if (user && !user.isAnonymous && !isPending)
+  else if (user && !user.isAnonymous)
     return <DropdownMenu user={user} chatId={chatId} />;
   else return <SignInButton />;
 }
