@@ -1,7 +1,7 @@
 import { useId, useState } from "react";
 import { Navigate } from "react-router";
 import Header from "~/components/layout/Header";
-import { authClient } from "~/lib/auth.client";
+import authClient from "~/lib/auth.client";
 
 export default function ProfilePage() {
   const session = authClient?.useSession?.().data ?? null;

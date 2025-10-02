@@ -42,9 +42,13 @@ export async function getUserChat(headers: Headers): Promise<{
       headers,
       returnHeaders: true,
     });
-    if (current.response?.user) {
-      const { chat, messages } = await getChatForUser(current.response.user);
-      return { chat, messages, headers: current.headers };
+    const userId = current.response?.user.id;
+    if (userId) {
+      const user = await prisma.user.findUnique({ where: { id: userId } });
+      if (user) {
+        const { chat, messages } = await getChatForUser(user);
+        return { chat, messages, headers: current.headers };
+      }
     }
   } catch (error) {
     captureException(error, { extra: { headers } });
@@ -55,8 +59,11 @@ export async function getUserChat(headers: Headers): Promise<{
     returnHeaders: true,
     query: { geocode, ip: geocode.ip },
   });
-  invariant(anonymous.response?.user, "Anonymous user not created");
-  const { chat, messages } = await getChatForUser(anonymous.response.user);
+  invariant(anonymous.response?.user.id, "Anonymous user ID is required");
+  const user = await prisma.user.findUniqueOrThrow({
+    where: { id: anonymous.response.user.id },
+  });
+  const { chat, messages } = await getChatForUser(user);
   await updateWorkingMemory(chat, (profile) => ({
     ...profile,
     location: geocode,

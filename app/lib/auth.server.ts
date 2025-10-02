@@ -1,11 +1,12 @@
 import { captureException } from "@sentry/react-router";
 import { type BetterAuthOptions, betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { anonymous } from "better-auth/plugins";
-import type { User } from "prisma/generated/client";
+import { anonymous, type UserWithAnonymous } from "better-auth/plugins";
+import { invariant } from "es-toolkit";
 import prisma from "./prisma";
 import sendVerificationEmail from "./send-verification-email";
 import sendWelcomeEmail from "./send-welcome-email";
+import { getRecentMessages, saveMessages } from "./workingMemory";
 
 /**
  * @see https://github.com/better-auth/better-auth/blob/main/packages/better-auth/src/types/options.ts
@@ -45,13 +46,8 @@ export default betterAuth({
 
   plugins: [
     anonymous({
-      onLinkAccount: async ({ anonymousUser, newUser }) => {
-        console.log("!!!! onLinkAccount", anonymousUser, newUser);
-        const from = anonymousUser.user as unknown as User;
-        newUser.user.geocode = from.geocode;
-        newUser.user.ip = from.ip;
-        newUser.user.isAnonymous = false;
-        newUser.user.workingMemory = from.workingMemory;
+      onLinkAccount: async ({ anonymousUser: anonUser, newUser }) => {
+        await copyAnonToNewUser(anonUser.user, newUser.user);
       },
     }),
   ],
@@ -99,6 +95,7 @@ export default betterAuth({
       allowDifferentEmails: true,
       enabled: true,
       trustedProviders: ["email-password"],
+      updateUserInfoOnLink: true,
     },
   },
 
@@ -138,3 +135,47 @@ export default betterAuth({
     enabled: false,
   },
 } satisfies BetterAuthOptions);
+
+/**
+ * Copy the anonymous user's data to the new user. We need to go through this
+ * process because we're not allowed to just change the user's ID, and we need
+ * to duplicate their chats, messages, and working memory.
+ *
+ * @param anonUser - The anonymous user.
+ * @param newUser - The new user.
+ */
+async function copyAnonToNewUser(
+  anonUser: UserWithAnonymous,
+  newUser: Omit<UserWithAnonymous, "isAnonymous">,
+) {
+  invariant(anonUser.id, "Anonymous user ID is required");
+  invariant(newUser.id, "New user ID is required");
+  // Copy the anonymous user's saved data to the new user.
+  const anonSaved = await prisma.user.findUnique({
+    where: { id: anonUser.id },
+    select: { workingMemory: true, ip: true, geocode: true },
+  });
+  await prisma.user.update({
+    data: {
+      workingMemory: anonSaved?.workingMemory,
+      ip: anonSaved?.ip || "146.70.195.182",
+      geocode: anonSaved?.geocode || "{}",
+    },
+    where: { id: newUser.id },
+  });
+
+  // Duplicate the anonymous user's last chat.
+  const anonChat = await prisma.chat.findFirst({
+    include: { user: true },
+    orderBy: { createdAt: "desc" },
+    where: { user: { id: anonUser.id } },
+  });
+  const newChat = await prisma.chat.create({
+    data: { user: { connect: { id: newUser.id } } },
+    include: { user: true },
+  });
+
+  // Copy the anonymous user's messages to the new user.
+  const anonMessages = anonChat ? await getRecentMessages(anonChat) : [];
+  await saveMessages(newChat, anonMessages);
+}

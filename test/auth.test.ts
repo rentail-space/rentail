@@ -145,7 +145,7 @@ describe("Authentication with Working Memory", () => {
         });
 
         it("shows sign-up page with name field", async () => {
-          await expect(page.locator("input[id*='name']")).toBeVisible();
+          await expect(page.locator("input[name='name']")).toBeVisible();
         });
 
         it("shows sign-up page with email field", async () => {
@@ -162,7 +162,9 @@ describe("Authentication with Working Memory", () => {
 
         describe("user signs up", () => {
           beforeAll(async () => {
-            await page.locator("input[id*='name']").fill("Working Memory User");
+            await page
+              .locator("input[type='text']")
+              .fill("Working Memory User");
             await page
               .locator("input[type='email']")
               .fill("working-memory@example.com");

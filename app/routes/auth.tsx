@@ -1,68 +1,67 @@
+import { captureException } from "@sentry/react-router";
+import { invariant } from "es-toolkit";
 import { useId, useState } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { redirect, useFetcher } from "react-router";
 import Header from "~/components/layout/Header";
-import { authClient } from "~/lib/auth.client";
+import authServer from "~/lib/auth.server";
+import { getUserChat } from "~/sessions.server";
+import type { Route } from "./+types/auth";
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const { headers } = await getUserChat(request.headers);
+  return new Response(null, { headers });
+}
+
+export async function action({
+  request,
+}: Route.ActionArgs): Promise<{ error: string | null } | Response> {
+  const form = await request.formData();
+  const email = form.get("email")?.toString();
+  const isSignUp = form.get("isSignUp")?.toString() === "true";
+  const name = form.get("name")?.toString();
+  const password = form.get("password")?.toString();
+
+  try {
+    if (isSignUp) {
+      const response = await authServer.api.getSession({
+        headers: request.headers,
+      });
+      invariant(response, "Session data is required");
+      invariant(email, "Email is required");
+      invariant(password, "Password is required");
+      invariant(name, "Name is required");
+      const result = await authServer.api.signUpEmail({
+        body: { email, password, name },
+        headers: request.headers,
+        returnHeaders: true,
+      });
+      return redirect("/chat", { headers: result.headers });
+    } else {
+      invariant(email, "Email is required");
+      invariant(password, "Password is required");
+      const result = await authServer.api.signInEmail({
+        body: { email, password },
+        headers: request.headers,
+        returnHeaders: true,
+      });
+      return redirect("/chat", { headers: result.headers });
+    }
+  } catch (error) {
+    captureException(error, { extra: { email, isSignUp } });
+    console.error(error);
+    return {
+      error: error instanceof Error ? error.message : "Something went wrong",
+    };
+  }
+}
 
 export default function AuthPage() {
-  const navigate = useNavigate();
-  const { data: session } = authClient?.useSession?.() ?? { data: null };
   const [isSignUp, setIsSignUp] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const nameId = `name-${useId()}`;
-  const emailId = `email-${useId()}`;
-  const passwordId = `password-${useId()}`;
-
-  // Redirect if already authenticated
-  if (session) return <Navigate to="/chat" replace />;
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setIsLoading(true);
-
-    try {
-      if (isSignUp) {
-        const result = await authClient.signUp.email({ email, password, name });
-
-        if (result.error) {
-          setError(result.error.message || "Failed to sign up");
-          setIsLoading(false);
-          return;
-        }
-
-        // Sign up successful, redirect to chat
-        navigate("/chat");
-      } else {
-        const result = await authClient.signIn.email({ email, password });
-
-        if (result.error) {
-          setError(result.error.message || "Failed to sign in");
-          setIsLoading(false);
-          return;
-        }
-
-        // Sign in successful, redirect to chat
-        navigate("/chat");
-      }
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "An unexpected error occurred",
-      );
-      setIsLoading(false);
-    }
-  };
-
-  const toggleMode = () => {
-    setIsSignUp(!isSignUp);
-    setError("");
-    setEmail("");
-    setPassword("");
-    setName("");
-  };
+  const nameId = useId();
+  const emailId = useId();
+  const passwordId = useId();
+  const fetcher = useFetcher();
+  const error = fetcher.data?.error;
 
   return (
     <>
@@ -81,7 +80,7 @@ export default function AuthPage() {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <fetcher.Form className="space-y-6" method="post">
               {isSignUp && (
                 <div>
                   <label
@@ -91,10 +90,9 @@ export default function AuthPage() {
                     Full Name
                   </label>
                   <input
-                    type="text"
                     id={nameId}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    name="name"
+                    type="text"
                     required={isSignUp}
                     className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     placeholder="John Doe"
@@ -110,10 +108,9 @@ export default function AuthPage() {
                   Email Address
                 </label>
                 <input
-                  type="email"
                   id={emailId}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  type="email"
                   required
                   className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="you@example.com"
@@ -128,10 +125,9 @@ export default function AuthPage() {
                   Password
                 </label>
                 <input
-                  type="password"
                   id={passwordId}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  type="password"
                   required
                   minLength={8}
                   className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -151,23 +147,25 @@ export default function AuthPage() {
               )}
 
               <button
-                type="submit"
-                disabled={isLoading}
                 className="w-full rounded-lg bg-indigo-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-indigo-400"
+                name="isSignUp"
+                type="submit"
+                value={isSignUp.toString()}
+                disabled={fetcher.state !== "idle"}
               >
-                {isLoading
-                  ? "Loading..."
+                {fetcher.state !== "idle"
+                  ? "Processing..."
                   : isSignUp
                     ? "Create Account"
                     : "Sign In"}
               </button>
-            </form>
+            </fetcher.Form>
 
             <div className="mt-6 text-center">
               <button
-                type="button"
-                onClick={toggleMode}
                 className="text-sm text-indigo-600 hover:text-indigo-700 hover:underline"
+                onClick={() => setIsSignUp(!isSignUp)}
+                type="button"
               >
                 {isSignUp
                   ? "Already have an account? Sign in"

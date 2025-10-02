@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import { authClient } from "~/lib/auth.client";
+import authClient from "~/lib/auth.client";
 
 export default function Header({ chatId }: { chatId?: string }) {
   const [isClient, setIsClient] = useState(false);

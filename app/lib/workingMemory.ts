@@ -1,3 +1,4 @@
+import type { MastraMessageV2 } from "@mastra/core";
 import { Memory } from "@mastra/memory";
 import { TokenLimiter, ToolCallFilter } from "@mastra/memory/processors";
 import { captureException } from "@sentry/react-router";
@@ -89,7 +90,7 @@ export const memory = new Memory({
 export async function getRecentMessages(
   chat: ChatGetPayload<{ include: { user: true } }>,
 ) {
-  await updateWorkingMemory(chat);
+  await updateWorkingMemory(chat, () => ({}));
 
   const messages = await memory.rememberMessages({ threadId: chat.id });
   if (messages.messagesV2.length > 0) return messages.messagesV2;
@@ -108,6 +109,29 @@ export async function getRecentMessages(
     format: "v2",
   });
   return savedMessages;
+}
+
+/**
+ * Save messages to the chat on behalf of the user. Can be used to copy messages
+ * from one chat to another.
+ *
+ * @param chat The chat to save messages to.
+ * @param messages The messages to save.
+ * @returns The saved messages.
+ */
+export async function saveMessages(
+  chat: ChatGetPayload<{ include: { user: true } }>,
+  messages: MastraMessageV2[],
+): Promise<MastraMessageV2[]> {
+  return await memory.saveMessages({
+    messages: messages.map((message) => ({
+      ...message,
+      id: ulid(),
+      resourceId: chat.user.id,
+      threadId: chat.id,
+    })),
+    format: "v2",
+  });
 }
 
 /**
@@ -145,19 +169,18 @@ export async function getWorkingMemory(
  * with the current working memory and should return the new working memory.
  *
  * @param chat The chat to update working memory for.
- * @param update The update function to apply to the working memory (if missing,
- * returns the current working memory)
+ * @param update The update function to apply to the working memory
  * @returns The updated working memory.
  */
 export async function updateWorkingMemory(
   chat: ChatGetPayload<{ include: { user: true } }>,
-  update?: <T = zod.infer<typeof userProfile>>(current: T) => Promise<T> | T,
+  update: (
+    current: zod.infer<typeof userProfile>,
+  ) => Promise<Record<string, unknown>> | Record<string, unknown>,
 ): Promise<zod.infer<typeof userProfile>> {
   const currentValue = await getWorkingMemory(chat);
   try {
-    const validateValue = userProfile.parse(
-      update ? await update(currentValue) : currentValue,
-    );
+    const validateValue = userProfile.parse(await update(currentValue));
     await memory.updateWorkingMemory({
       resourceId: chat.user.id,
       threadId: chat.id,
