@@ -17,7 +17,7 @@ describe("Authentication with Working Memory", () => {
 
   describe("user visits chat page", () => {
     beforeAll(async () => {
-      await page.goto(`${URL}/chat`, { waitUntil: "domcontentloaded" });
+      await page.goto(`${URL}/chat`);
       await page.waitForSelector(`button[aria-label="Sign in"]`, {
         state: "visible",
       });
@@ -110,7 +110,7 @@ describe("Authentication with Working Memory", () => {
 
     describe("sign-in page", () => {
       beforeAll(async () => {
-        await page.goto(`${URL}/chat`, { waitUntil: "domcontentloaded" });
+        await page.goto(`${URL}/chat`);
         await page.locator("button", { hasText: "Sign In" }).click();
         await page.waitForURL(`${URL}/auth`);
       });
