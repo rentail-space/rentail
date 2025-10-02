@@ -15,17 +15,17 @@ import * as styles from "~/emails/styles";
 
 export default function EmailVerification({
   name,
-  preview,
+  subject,
   verificationUrl,
 }: {
   name: string;
-  preview: string;
+  subject: string;
   verificationUrl: string;
 }) {
   return (
     <Html>
       <Head />
-      <Preview>{preview}</Preview>
+      <Preview>{subject}</Preview>
       <Body style={styles.main}>
         <Container style={styles.container}>
           <Img

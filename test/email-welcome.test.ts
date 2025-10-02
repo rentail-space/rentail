@@ -1,8 +1,8 @@
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import Welcome from "~/emails/Welcome";
+import { renderLastEmailSent } from "~/lib/resend";
+import sendWelcomeEmail from "~/lib/sendWelcomeEmail";
 import { openPage } from "~/test/helpers/launchBrowser";
-import renderEmail from "~/test/helpers/renderEmail";
 
 describe("Welcome Email", () => {
   let page: Page;
@@ -12,7 +12,11 @@ describe("Welcome Email", () => {
   });
 
   it("renders welcome email with correct styling and layout", async () => {
-    await renderEmail(page, <Welcome name="John Doe" />);
+    await sendWelcomeEmail({
+      email: "john.doe@example.com",
+      name: "John Doe",
+    });
+    await renderLastEmailSent(page);
 
     // Take a screenshot for visual regression testing
     await expect(page).toMatchScreenshot();

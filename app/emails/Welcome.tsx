@@ -13,13 +13,17 @@ import {
 } from "@react-email/components";
 import * as styles from "~/emails/styles";
 
-export default function Welcome({ name }: { name: string }) {
-  const previewText = `Welcome to rentail.space, ${name}!`;
-
+export default function Welcome({
+  name,
+  subject,
+}: {
+  name: string;
+  subject: string;
+}) {
   return (
     <Html>
       <Head />
-      <Preview>{previewText}</Preview>
+      <Preview>{subject}</Preview>
       <Body style={styles.main}>
         <Container style={styles.container}>
           <Img
