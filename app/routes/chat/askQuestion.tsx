@@ -1,4 +1,5 @@
 import { delay } from "es-toolkit";
+import { useTimeout } from "usehooks-ts";
 
 export default function askQuestion({
   inputRef,
@@ -28,7 +29,7 @@ export default function askQuestion({
     setQuery(input);
 
     // Final scroll to bottom and focus
-    setTimeout(() => {
+    useTimeout(() => {
       inputRef.current?.focus();
       scrollToBottom();
     }, 10);

@@ -17,10 +17,11 @@ export default function Header({ chatId }: { chatId?: string }) {
   );
 }
 
+import { useIsClient, useTimeout } from "usehooks-ts";
+
 function ClientOnly({ children }: { children: React.ReactNode }) {
   // NOTE: do not call useSession() while server-side rendering
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => setIsClient(true), []);
+  const isClient = useIsClient();
   return isClient ? children : null;
 }
 
@@ -32,10 +33,7 @@ function UserMenu({ chatId }: { chatId?: string }) {
 
   // NOTE: after user signs in, the header doesn't show them as signed in, we
   // need to refetch the session to show them as signed in
-  useEffect(() => {
-    const timeout = setTimeout(refetch, 100);
-    return () => clearTimeout(timeout);
-  }, [refetch]);
+  useTimeout(refetch, 100);
 
   // Close dropdown when clicking outside
   useEffect(() => {
