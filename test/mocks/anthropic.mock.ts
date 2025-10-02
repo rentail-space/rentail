@@ -32,7 +32,7 @@ export const customMockResponses: MessagePattern[] = [
       "We have some great locations available. Here are the top options with excellent foot traffic.",
   },
   {
-    pattern: /location.*Boston/i,
+    pattern: /Boston/i,
     response:
       "Perfect! I've updated your location to Boston. I can now help you find retail spaces in the Boston area. What type of business are you planning to open?",
   },

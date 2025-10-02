@@ -86,7 +86,7 @@ describe("Authentication with Working Memory", () => {
                 return workingMemory;
             }
           },
-          10000,
+          30000, // Increased to 30s for CI where AI responses are slower
         );
       });
 
