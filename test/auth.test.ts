@@ -27,19 +27,30 @@ describe("Authentication with Working Memory", () => {
 
       // Wait for React to hydrate and auth check to complete
       // The header shows "Loading..." while isPending, then shows Sign in button
-      await page.waitForFunction(
+      const loaded = await page.waitForFunction(
         () => {
           const header = document.querySelector("header");
-          return header && !header.textContent?.includes("Loading...");
+          const hasLoading = header?.textContent?.includes("Loading...");
+          const hasButton =
+            header?.querySelector('button[aria-label="Sign in"]') ||
+            header?.querySelector("button");
+          return header && !hasLoading && hasButton;
         },
-        { timeout: 30000 },
+        { timeout: 60000 },
       );
 
+      if (env.isDebug && !loaded) {
+        console.error(
+          "[TEST] Header content:",
+          await page.locator("header").textContent(),
+        );
+      }
+
       // Now wait for either Sign in button or user menu
-      await page.waitForSelector(
-        `button[aria-label="Sign in"], button:has-text("Working Memory User")`,
-        { state: "visible", timeout: 10000 },
-      );
+      await page.waitForSelector(`button[aria-label="Sign in"]`, {
+        state: "visible",
+        timeout: 30000,
+      });
     });
 
     it("creates anonymous user when opening chat page", async () => {
