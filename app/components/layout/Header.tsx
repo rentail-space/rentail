@@ -64,8 +64,7 @@ function SignInButton() {
     <button
       aria-label="Sign in"
       type="button"
-      onClick={async () => {
-        await authClient.signOut();
+      onClick={() => {
         window.location.href = "/auth";
       }}
       className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"

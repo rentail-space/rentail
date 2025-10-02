@@ -110,7 +110,7 @@ describe("Authentication with Working Memory", () => {
 
     describe("sign-in page", () => {
       beforeAll(async () => {
-        await page.goto(`${URL}/chat`);
+        await page.goto(`${URL}/chat`, { waitUntil: "networkidle" });
         await page.locator("button", { hasText: "Sign In" }).click();
         await page.waitForURL(`${URL}/auth`);
       });
@@ -136,6 +136,8 @@ describe("Authentication with Working Memory", () => {
         await expect(
           page.locator("text=Don't have an account? Sign up"),
         ).toBeVisible();
+        const users = await prisma.user.findMany();
+        expect(users.length, "Should have one user").toBe(1);
       });
 
       describe("sign-up page", () => {
@@ -194,11 +196,12 @@ describe("Authentication with Working Memory", () => {
             ).toBeVisible();
           });
 
-          it("should keep anonymous user", async () => {
+          it("should convert anonymous user to authenticated user", async () => {
             const users = await prisma.user.findMany();
-            expect(users.length, "Should have two user").toBe(2);
-            expect(users.find((user) => user.isAnonymous)).not.toBeUndefined();
-            expect(users.find((user) => !user.isAnonymous)).not.toBeUndefined();
+            expect(users.length, "Should have one user").toBe(1);
+            expect(users[0].isAnonymous, "User should not be anonymous").toBe(
+              false,
+            );
           });
 
           it("stores user credentials correctly in database", async () => {
@@ -219,7 +222,14 @@ describe("Authentication with Working Memory", () => {
               where: { user: { isAnonymous: false } },
             });
             const workingMemory = await getWorkingMemory(chat);
-            expect(workingMemory.location?.city).toEqual("Los Angeles");
+            expect(workingMemory.location?.city).toEqual("Boston");
+            expect(workingMemory.location?.state).toEqual("Massachusetts");
+            expect(workingMemory.location?.country).toEqual("United States");
+            expect(workingMemory.location?.latitude).toEqual("42.3601");
+            expect(workingMemory.location?.longitude).toEqual("-71.0589");
+            expect(workingMemory.location?.timeZone).toEqual(
+              "America/New_York",
+            );
           });
         });
       });

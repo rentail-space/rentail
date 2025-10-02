@@ -195,6 +195,10 @@ async function blockBrowserRequest(route: Route): Promise<void> {
   if (url.startsWith("http://localhost:")) {
     await route.continue();
   } else {
+    // NOTE: According to Claud, non-blocked requests can interfere with cookie
+    // handling because Playwright waits for all requests to complete before
+    // considering a navigation finished, so we must abort blocked requests.
+    await route.abort();
     if (env.isDebug) console.debug(`[BROWSER] blocking request to ${hostname}`);
   }
 }
