@@ -17,11 +17,29 @@ describe("Authentication with Working Memory", () => {
 
   describe("user visits chat page", () => {
     beforeAll(async () => {
-      await page.goto(`${URL}/chat`, { waitUntil: "networkidle" });
-      await page.waitForSelector(`button[aria-label="Sign in"]`, {
+      await page.goto(`${URL}/chat`, { waitUntil: "domcontentloaded" });
+
+      // Wait for header to render
+      await page.waitForSelector("header", {
         state: "visible",
         timeout: 30000,
       });
+
+      // Wait for React to hydrate and auth check to complete
+      // The header shows "Loading..." while isPending, then shows Sign in button
+      await page.waitForFunction(
+        () => {
+          const header = document.querySelector("header");
+          return header && !header.textContent?.includes("Loading...");
+        },
+        { timeout: 30000 },
+      );
+
+      // Now wait for either Sign in button or user menu
+      await page.waitForSelector(
+        `button[aria-label="Sign in"], button:has-text("Working Memory User")`,
+        { state: "visible", timeout: 10000 },
+      );
     });
 
     it("creates anonymous user when opening chat page", async () => {
