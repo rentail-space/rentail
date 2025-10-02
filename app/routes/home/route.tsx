@@ -13,6 +13,8 @@ import HowItWorksSection from "./HowItWorksSection";
 import JoinWaitlist from "./JoinWaitlist";
 import SpecialtyLeasing from "./SpecialtyLeasing";
 
+export const handle = { hideLayout: true };
+
 export async function loader() {
   const dataDir = path.join(process.cwd(), "app/data/blog");
   const today = dayjs();

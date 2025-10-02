@@ -1,7 +1,6 @@
 import type { UIMessage, UITools } from "ai";
 import { uniqBy } from "es-toolkit";
-import React, { useEffect, useRef, useState } from "react";
-import type { Components } from "react-markdown";
+import React, { type JSX, useEffect, useRef, useState } from "react";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import {
@@ -245,29 +244,33 @@ function getComponents({
   askQuestion,
 }: {
   askQuestion: (question: string) => Promise<void>;
-}): Components {
+}): {
+  [Key in keyof JSX.IntrinsicElements]?: React.ComponentType<
+    JSX.IntrinsicElements[Key]
+  >;
+} {
   return {
-    ol: ({ node, children, className, ...props }) => (
+    ol: ({ children, className, ...props }) => (
       <ol className={"ml-4 list-outside list-decimal"} {...props}>
         {children}
       </ol>
     ),
-    li: ({ node, children, className, ...props }) => (
+    li: ({ children, className, ...props }) => (
       <li className={"py-1"} {...props}>
         {children}
       </li>
     ),
-    ul: ({ node, children, className, ...props }) => (
+    ul: ({ children, className, ...props }) => (
       <ul className={"ml-4 list-outside list-disc"} {...props}>
         {children}
       </ul>
     ),
-    strong: ({ node, children, className, ...props }) => (
+    strong: ({ children, className, ...props }) => (
       <span className={"font-semibold"} {...props}>
         {children}
       </span>
     ),
-    a: ({ node, children, className, ...props }) => {
+    a: ({ children, className, ...props }) => {
       const isAsk =
         props.href?.startsWith("https://rentail.space/") ||
         props.href?.startsWith("/");
@@ -288,22 +291,22 @@ function getComponents({
         </a>
       );
     },
-    button: ({ node, children, className, ...props }) => (
+    button: ({ children, className, ...props }) => (
       <button className="btn btn-soft btn-primary" {...props}>
         {children}
       </button>
     ),
-    h1: ({ node, children, className, ...props }) => (
+    h1: ({ children, className, ...props }) => (
       <h1 className={"mt-6 mb-2 font-semibold text-xl"} {...props}>
         {children}
       </h1>
     ),
-    h2: ({ node, children, className, ...props }) => (
+    h2: ({ children, className, ...props }) => (
       <h2 className={"mt-6 mb-2 font-semibold text-lg"} {...props}>
         {children}
       </h2>
     ),
-    h3: ({ node, children, className, ...props }) => (
+    h3: ({ children, className, ...props }) => (
       <h3 className={"mt-6 mb-2 font-semibold text-md"} {...props}>
         {children}
       </h3>

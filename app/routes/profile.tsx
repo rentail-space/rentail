@@ -1,6 +1,5 @@
 import { useId, useState } from "react";
 import { Navigate } from "react-router";
-import Header from "~/components/layout/Header";
 import authClient from "~/lib/auth.client";
 
 export default function ProfilePage() {
@@ -12,12 +11,9 @@ export default function ProfilePage() {
     return <Navigate to="/auth" replace />;
   else if (isPending || !session) {
     return (
-      <>
-        <Header />
-        <div className="flex min-h-screen items-center justify-center">
-          <p className="text-gray-600">Loading...</p>
-        </div>
-      </>
+      <div className="flex min-h-screen items-center justify-center">
+        <p className="text-gray-600">Loading...</p>
+      </div>
     );
   } else return <ProfileTabs user={session.user} />;
 }
@@ -28,65 +24,60 @@ function ProfileTabs({ user }: { user: { name: string; email: string } }) {
   );
 
   return (
-    <>
-      <Header />
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-lg bg-white p-8 shadow-lg">
-            <h1 className="mb-2 text-3xl font-bold text-gray-900">
-              Profile Settings
-            </h1>
-            <p className="mb-8 text-gray-600">
-              Manage your account information
-            </p>
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-lg bg-white p-8 shadow-lg">
+          <h1 className="mb-2 text-3xl font-bold text-gray-900">
+            Profile Settings
+          </h1>
+          <p className="mb-8 text-gray-600">Manage your account information</p>
 
-            {/* Tabs */}
-            <div className="mb-6 border-b border-gray-200">
-              <nav className="-mb-px flex space-x-8">
-                <button
-                  type="button"
-                  onClick={() => setActiveTab("name")}
-                  className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium ${
-                    activeTab === "name"
-                      ? "border-indigo-500 text-indigo-600"
-                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  }`}
-                >
-                  Name
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveTab("email")}
-                  className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium ${
-                    activeTab === "email"
-                      ? "border-indigo-500 text-indigo-600"
-                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  }`}
-                >
-                  Email Address
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveTab("password")}
-                  className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium ${
-                    activeTab === "password"
-                      ? "border-indigo-500 text-indigo-600"
-                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  }`}
-                >
-                  Password
-                </button>
-              </nav>
-            </div>
-
-            {/* Tab Content */}
-            {activeTab === "name" && <NameForm user={user} />}
-            {activeTab === "email" && <EmailForm user={user} />}
-            {activeTab === "password" && <PasswordForm />}
+          {/* Tabs */}
+          <div className="mb-6 border-b border-gray-200">
+            <nav className="-mb-px flex space-x-8">
+              <button
+                type="button"
+                onClick={() => setActiveTab("name")}
+                className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium ${
+                  activeTab === "name"
+                    ? "border-indigo-500 text-indigo-600"
+                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                }`}
+              >
+                Name
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("email")}
+                className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium ${
+                  activeTab === "email"
+                    ? "border-indigo-500 text-indigo-600"
+                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                }`}
+              >
+                Email Address
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("password")}
+                className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium ${
+                  activeTab === "password"
+                    ? "border-indigo-500 text-indigo-600"
+                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                }`}
+              >
+                Password
+              </button>
+            </nav>
           </div>
+
+          {/* Tab Content */}
+          {activeTab === "name" && <NameForm user={user} />}
+          {activeTab === "email" && <EmailForm user={user} />}
+          {activeTab === "password" && <PasswordForm />}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

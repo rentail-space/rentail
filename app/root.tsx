@@ -9,6 +9,7 @@ import {
   ScrollRestoration,
   useLoaderData,
   useLocation,
+  useMatches,
 } from "react-router";
 import "./app.css";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -16,6 +17,8 @@ import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 import ReactGA from "react-ga4";
 import { Toaster } from "sonner";
 import ErrorBoundary from "./components/ErrorBoundary";
+import Footer from "./components/layout/Footer";
+import Header from "./components/layout/Header";
 import schema from "./data/schema.json";
 import env from "./lib/env";
 
@@ -118,6 +121,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }, [location.pathname, fromLoader?.ENV.NODE_ENV]);
   const canonicalUrl = `https://rentail.space${location.pathname}`;
 
+  const matches = useMatches();
+  const hideLayout = matches.some(
+    (match) =>
+      (match.handle as { hideLayout?: boolean } | undefined)?.hideLayout ===
+      true,
+  );
+
   return (
     <html lang="en">
       <head>
@@ -145,7 +155,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </head>
       <body>
-        <NuqsAdapter>{children}</NuqsAdapter>
+        <NuqsAdapter>
+          {hideLayout ? (
+            children
+          ) : (
+            <div className="flex min-h-screen flex-col gap-8">
+              <Header />
+              {children}
+              <Footer />
+            </div>
+          )}
+        </NuqsAdapter>
         <Toaster richColors />
 
         <ScrollRestoration />

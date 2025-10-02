@@ -1,6 +1,4 @@
 import { Streamdown } from "streamdown";
-import Footer from "~/components/layout/Footer";
-import Header from "~/components/layout/Header";
 
 const terms = `
 # Terms of Service
@@ -113,12 +111,8 @@ agree to be bound by these Terms of Service.
 
 export default function TermsOfService() {
   return (
-    <>
-      <Header />
-      <div className="min-h-screen  py-12 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 prose">
-        <Streamdown>{terms}</Streamdown>
-      </div>
-      <Footer />
-    </>
+    <div className="min-h-screen  py-12 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 prose">
+      <Streamdown>{terms}</Streamdown>
+    </div>
   );
 }

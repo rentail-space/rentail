@@ -1,12 +1,12 @@
 export async function loader() {
-  return new Response("Not Found", { status: 404 });
+  return new Response("Error", { status: 500 });
 }
 
 export default function NotFoundPage() {
   return (
     <div className="flex flex-col gap-4 h-screen w-screen items-center justify-center">
-      <h1 className="text-4xl">
-        404 <span className="font-bold">Not found</span>
+      <h1 className="text-4xl text-red-500">
+        500 <span className="font-bold">Oops! Something went wrong</span>
       </h1>
     </div>
   );

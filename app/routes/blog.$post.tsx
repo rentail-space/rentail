@@ -4,14 +4,13 @@ import dayjs from "dayjs";
 import { invariant } from "es-toolkit";
 import fm from "front-matter";
 import { DateTime } from "luxon";
-import Markdown from "react-markdown";
 import {
   type LoaderFunctionArgs,
   type MetaFunction,
   useLoaderData,
 } from "react-router";
 import removeMd from "remove-markdown";
-import Layout from "~/components/layout/Layout";
+import { Streamdown } from "streamdown";
 import truncateWords from "~/lib/truncateWords";
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -97,76 +96,74 @@ export default function Post() {
   );
 
   return (
-    <Layout>
-      <article className="prose prose-lg mx-auto">
-        <h1>{attributes.title}</h1>
+    <article className="prose prose-lg mx-auto">
+      <h1>{attributes.title}</h1>
 
-        <figure className="relative left-[calc(-50vw+50%)] my-4 w-screen overflow-x-hidden">
-          <img
-            alt=""
-            className="h-[60vh] w-full object-cover"
-            src={`/blog/${slug}.jpg`}
-          />
-        </figure>
+      <figure className="relative left-[calc(-50vw+50%)] my-4 w-screen overflow-x-hidden">
+        <img
+          alt=""
+          className="h-[60vh] w-full object-cover"
+          src={`/blog/${slug}.jpg`}
+        />
+      </figure>
 
-        <div className="text-gray-500 text-sm">
-          {published.toFormat("LLLL dd, yyyy", { locale: "en-US" })}
-        </div>
+      <div className="text-gray-500 text-sm">
+        {published.toFormat("LLLL dd, yyyy", { locale: "en-US" })}
+      </div>
 
-        <Markdown
-          components={{
-            a: ({ children, href }) => (
-              <a href={href} className="text-blue-500">
-                {children}
-              </a>
-            ),
-            h1: ({ children }) => (
-              <h1 className="font-bold text-2xl">{children}</h1>
-            ),
-            h2: ({ children }) => (
-              <h2 className="font-bold text-xl">{children}</h2>
-            ),
-            h3: ({ children }) => (
-              <h3 className="font-bold text-lg">{children}</h3>
-            ),
-            hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
-              <hr className="border-gray-300" {...props} />
-            ),
-            img: ({
-              src,
-              alt,
-              ...props
-            }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-              <img
-                alt={alt}
-                className="my-2 h-auto max-h-[400px] w-full object-contain"
-                src={src}
-                {...props}
-              />
-            ),
-            li: ({ children }) => <li className="ml-4">{children}</li>,
-            ol: ({
-              children,
-              ...props
-            }: React.HTMLAttributes<HTMLOListElement>) => (
-              <ol className="ml-8 list-decimal" {...props}>
-                {children}
-              </ol>
-            ),
-            p: ({ children }) => <p className="text-lg">{children}</p>,
-            ul: ({
-              children,
-              ...props
-            }: React.HTMLAttributes<HTMLUListElement>) => (
-              <ul className="ml-6 list-disc" {...props}>
-                {children}
-              </ul>
-            ),
-          }}
-        >
-          {body}
-        </Markdown>
-      </article>
+      <Streamdown
+        components={{
+          a: ({ children, href }) => (
+            <a href={href} className="text-blue-500">
+              {children}
+            </a>
+          ),
+          h1: ({ children }) => (
+            <h1 className="font-bold text-2xl">{children}</h1>
+          ),
+          h2: ({ children }) => (
+            <h2 className="font-bold text-xl">{children}</h2>
+          ),
+          h3: ({ children }) => (
+            <h3 className="font-bold text-lg">{children}</h3>
+          ),
+          hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
+            <hr className="border-gray-300" {...props} />
+          ),
+          img: ({
+            src,
+            alt,
+            ...props
+          }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+            <img
+              alt={alt}
+              className="my-2 h-auto max-h-[400px] w-full object-contain"
+              src={src}
+              {...props}
+            />
+          ),
+          li: ({ children }) => <li className="ml-4">{children}</li>,
+          ol: ({
+            children,
+            ...props
+          }: React.HTMLAttributes<HTMLOListElement>) => (
+            <ol className="ml-8 list-decimal" {...props}>
+              {children}
+            </ol>
+          ),
+          p: ({ children }) => <p className="text-lg">{children}</p>,
+          ul: ({
+            children,
+            ...props
+          }: React.HTMLAttributes<HTMLUListElement>) => (
+            <ul className="ml-6 list-disc" {...props}>
+              {children}
+            </ul>
+          ),
+        }}
+      >
+        {body}
+      </Streamdown>
 
       <script type="application/ld+json">
         {JSON.stringify({
@@ -185,6 +182,6 @@ export default function Post() {
           },
         })}
       </script>
-    </Layout>
+    </article>
   );
 }

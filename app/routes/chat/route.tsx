@@ -13,6 +13,8 @@ import type { Route } from "./+types/route";
 import InputForm from "./InputForm";
 import Messages from "./Messages";
 
+export const handle = { hideLayout: true };
+
 export async function loader({ request }: Route.LoaderArgs) {
   const { chat, messages, headers } = await getUserChat(request.headers);
   return data({ chat, messages }, { headers });

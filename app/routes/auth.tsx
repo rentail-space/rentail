@@ -2,10 +2,13 @@ import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
 import { useEffect, useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
-import Header from "~/components/layout/Header";
 import authServer from "~/lib/auth.server";
 import { getUserChat } from "~/sessions.server";
 import type { Route } from "./+types/auth";
+
+export const handle = {
+  hideLayout: true,
+};
 
 export async function loader({ request }: Route.LoaderArgs) {
   const { headers } = await getUserChat(request.headers);
@@ -69,131 +72,128 @@ export default function AuthPage() {
   }, [fetcher.data]);
 
   return (
-    <>
-      <Header />
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50 px-4 py-12">
-        <div className="w-full max-w-md">
-          <div className="rounded-2xl bg-white p-8 shadow-xl">
-            <div className="mb-8 text-center">
-              <h1 className="text-3xl font-bold text-gray-900">
-                {isSignUp ? "Create Account" : "Welcome Back"}
-              </h1>
-              <p className="mt-2 text-gray-600">
-                {isSignUp
-                  ? "Sign up to start finding retail spaces"
-                  : "Sign in to your account"}
-              </p>
-            </div>
-
-            <fetcher.Form className="space-y-6" method="post">
-              {isSignUp && (
-                <div>
-                  <label
-                    htmlFor={nameId}
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Full Name
-                  </label>
-                  <input
-                    id={nameId}
-                    name="name"
-                    type="text"
-                    required={isSignUp}
-                    className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    placeholder="John Doe"
-                  />
-                </div>
-              )}
-
-              <div>
-                <label
-                  htmlFor={emailId}
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email Address
-                </label>
-                <input
-                  id={emailId}
-                  name="email"
-                  type="email"
-                  required
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  placeholder="you@example.com"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor={passwordId}
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Password
-                </label>
-                <input
-                  id={passwordId}
-                  name="password"
-                  type="password"
-                  required
-                  minLength={8}
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  placeholder="••••••••"
-                />
-                {isSignUp && (
-                  <p className="mt-1 text-sm text-gray-500">
-                    Must be at least 8 characters
-                  </p>
-                )}
-              </div>
-
-              {error && (
-                <div className="rounded-lg bg-red-50 p-4">
-                  <p className="text-sm text-red-800">{error}</p>
-                </div>
-              )}
-
-              <button
-                className="w-full rounded-lg bg-indigo-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-indigo-400"
-                name="isSignUp"
-                type="submit"
-                value={isSignUp.toString()}
-                disabled={fetcher.state !== "idle"}
-              >
-                {fetcher.state !== "idle"
-                  ? "Processing..."
-                  : isSignUp
-                    ? "Create Account"
-                    : "Sign In"}
-              </button>
-            </fetcher.Form>
-
-            <div className="mt-6 text-center">
-              <button
-                className="text-sm text-indigo-600 hover:text-indigo-700 hover:underline"
-                onClick={() => {
-                  setError(null);
-                  setIsSignUp(!isSignUp);
-                }}
-                type="button"
-              >
-                {isSignUp
-                  ? "Already have an account? Sign in"
-                  : "Don't have an account? Sign up"}
-              </button>
-            </div>
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50 px-4 py-12">
+      <div className="w-full max-w-md">
+        <div className="rounded-2xl bg-white p-8 shadow-xl">
+          <div className="mb-8 text-center">
+            <h1 className="text-3xl font-bold text-gray-900">
+              {isSignUp ? "Create Account" : "Welcome Back"}
+            </h1>
+            <p className="mt-2 text-gray-600">
+              {isSignUp
+                ? "Sign up to start finding retail spaces"
+                : "Sign in to your account"}
+            </p>
           </div>
 
-          <p className="mt-8 text-center text-sm text-gray-600">
-            By signing up, you agree to our{" "}
-            <a href="/terms" className="text-indigo-600 hover:underline">
-              Terms of Service
-            </a>{" "}
-            and{" "}
-            <a href="/privacy" className="text-indigo-600 hover:underline">
-              Privacy Policy
-            </a>
-          </p>
+          <fetcher.Form className="space-y-6" method="post">
+            {isSignUp && (
+              <div>
+                <label
+                  htmlFor={nameId}
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Full Name
+                </label>
+                <input
+                  id={nameId}
+                  name="name"
+                  type="text"
+                  required={isSignUp}
+                  className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  placeholder="John Doe"
+                />
+              </div>
+            )}
+
+            <div>
+              <label
+                htmlFor={emailId}
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email Address
+              </label>
+              <input
+                id={emailId}
+                name="email"
+                type="email"
+                required
+                className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="you@example.com"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor={passwordId}
+                className="block text-sm font-medium text-gray-700"
+              >
+                Password
+              </label>
+              <input
+                id={passwordId}
+                name="password"
+                type="password"
+                required
+                minLength={8}
+                className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="••••••••"
+              />
+              {isSignUp && (
+                <p className="mt-1 text-sm text-gray-500">
+                  Must be at least 8 characters
+                </p>
+              )}
+            </div>
+
+            {error && (
+              <div className="rounded-lg bg-red-50 p-4">
+                <p className="text-sm text-red-800">{error}</p>
+              </div>
+            )}
+
+            <button
+              className="w-full rounded-lg bg-indigo-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-indigo-400"
+              name="isSignUp"
+              type="submit"
+              value={isSignUp.toString()}
+              disabled={fetcher.state !== "idle"}
+            >
+              {fetcher.state !== "idle"
+                ? "Processing..."
+                : isSignUp
+                  ? "Create Account"
+                  : "Sign In"}
+            </button>
+          </fetcher.Form>
+
+          <div className="mt-6 text-center">
+            <button
+              className="text-sm text-indigo-600 hover:text-indigo-700 hover:underline"
+              onClick={() => {
+                setError(null);
+                setIsSignUp(!isSignUp);
+              }}
+              type="button"
+            >
+              {isSignUp
+                ? "Already have an account? Sign in"
+                : "Don't have an account? Sign up"}
+            </button>
+          </div>
         </div>
+
+        <p className="mt-8 text-center text-sm text-gray-600">
+          By signing up, you agree to our{" "}
+          <a href="/terms" className="text-indigo-600 hover:underline">
+            Terms of Service
+          </a>{" "}
+          and{" "}
+          <a href="/privacy" className="text-indigo-600 hover:underline">
+            Privacy Policy
+          </a>
+        </p>
       </div>
-    </>
+    </div>
   );
 }

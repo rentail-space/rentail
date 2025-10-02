@@ -1,8 +1,7 @@
 import { Streamdown } from "streamdown";
-import Footer from "~/components/layout/Footer";
-import Header from "~/components/layout/Header";
 
-const policy = `# Privacy Policy
+const policy = `
+# Privacy Policy
 
 Last Updated: 10/02/2025
 
@@ -127,14 +126,8 @@ agree to this Privacy Policy.
 
 export default function PrivacyPolicy() {
   return (
-    <>
-      <Header />
-
-      <div className="min-h-screen  py-12 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 prose">
-        <Streamdown>{policy}</Streamdown>
-      </div>
-
-      <Footer />
-    </>
+    <div className="min-h-screen  py-12 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 prose">
+      <Streamdown>{policy}</Streamdown>
+    </div>
   );
 }
