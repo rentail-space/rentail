@@ -113,40 +113,42 @@ export async function launchServer(
   invariant(server.pid, "Server process ID is not available");
   writeFileSync(lockFile, server.pid.toString());
 
+  // Set up logging if requested
+  if (logging && server.stdout && server.stderr) {
+    server.stdout.on("data", (stream: Buffer) =>
+      process.stdout.write(`\x1b[92m${stream}\x1b[0m`),
+    );
+    server.stderr.on("data", (stream: Buffer) =>
+      process.stderr.write(`\x1b[91m${stream}\x1b[0m`),
+    );
+  }
+
+  // Handle server errors
+  server.once("error", (error) => {
+    try {
+      unlinkSync(lockFile);
+      server.kill("SIGTERM");
+    } catch (cleanupError) {
+      console.error("[TEST] error cleaning up lock file\n\t%s", cleanupError);
+    }
+    throw error;
+  });
+
+  // Poll server health instead of waiting for stdout
+  // This is more reliable across different environments
+  if (logging) console.info("[TEST] waiting for server to be ready...");
+
   return await withTimeout(
-    () =>
-      new Promise<ChildProcess>((resolve, reject) => {
-        server.once("error", (error) => {
-          try {
-            unlinkSync(lockFile);
-            server.kill("SIGTERM");
-          } catch (error) {
-            console.error("[TEST] error cleaning up lock file\n\t%s", error);
-          }
-          reject(error);
-        });
-
-        if (server.stdout === null) {
-          unlinkSync(lockFile);
-          server.kill("SIGTERM");
-          return reject(new Error("Failed to start server."));
+    async () => {
+      while (true) {
+        if (await checkServerHealth()) {
+          if (logging) console.info("[TEST] server is ready");
+          return server;
         }
-
-        if (logging) {
-          server.stdout.on("data", (stream: Buffer) =>
-            process.stdout.write(`\x1b[92m${stream}\x1b[0m`),
-          );
-          server.stderr?.on("data", (stream: Buffer) =>
-            process.stderr.write(`\x1b[91m${stream}\x1b[0m`),
-          );
-        }
-
-        server.stdout.on("data", (stream: Buffer) => {
-          if (stream.toString().includes(port.toString()))
-            setTimeout(() => resolve(server), 10);
-        });
-      }),
-    3000,
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+    },
+    30000, // 30 seconds timeout for server startup
   );
 }
 
