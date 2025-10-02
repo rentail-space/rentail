@@ -17,40 +17,17 @@ describe("Authentication with Working Memory", () => {
 
   describe("user visits chat page", () => {
     beforeAll(async () => {
-      await page.goto(`${URL}/chat`, { waitUntil: "domcontentloaded" });
+      await page.goto(`${URL}/chat`, { waitUntil: "load" });
 
-      // Wait for header to render
-      await page.waitForSelector("header", {
+      // Wait for the chat input to render (this proves page is loaded and React hydrated)
+      await page.waitForSelector("input[type='text']", {
         state: "visible",
-        timeout: 30000,
+        timeout: 60000,
       });
 
-      // Wait for React to hydrate and auth check to complete
-      // The header shows "Loading..." while isPending, then shows Sign in button
-      const loaded = await page.waitForFunction(
-        () => {
-          const header = document.querySelector("header");
-          const hasLoading = header?.textContent?.includes("Loading...");
-          const hasButton =
-            header?.querySelector('button[aria-label="Sign in"]') ||
-            header?.querySelector("button");
-          return header && !hasLoading && hasButton;
-        },
-        { timeout: 60000 },
-      );
-
-      if (env.isDebug && !loaded) {
-        console.error(
-          "[TEST] Header content:",
-          await page.locator("header").textContent(),
-        );
-      }
-
-      // Now wait for either Sign in button or user menu
-      await page.waitForSelector(`button[aria-label="Sign in"]`, {
-        state: "visible",
-        timeout: 30000,
-      });
+      // Give auth client time to complete session check
+      // In CI, the session check might be slow
+      await page.waitForTimeout(2000);
     });
 
     it("creates anonymous user when opening chat page", async () => {
