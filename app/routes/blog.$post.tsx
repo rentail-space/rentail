@@ -114,7 +114,7 @@ export default function Post() {
       <Streamdown
         components={{
           a: ({ children, href }) => (
-            <a href={href} className="text-blue-500">
+            <a href={href} className="text-indigo-600 hover:underline">
               {children}
             </a>
           ),

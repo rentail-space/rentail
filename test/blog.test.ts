@@ -79,7 +79,7 @@ describe("Blog Post Rendering", () => {
     if ((await links.count()) > 0) {
       const firstLink = links.first();
       const linkClasses = await firstLink.getAttribute("class");
-      expect(linkClasses).toContain("text-blue-500");
+      expect(linkClasses).toContain("text-indigo-600 hover:underline");
     }
   });
 
