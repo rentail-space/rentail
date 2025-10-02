@@ -19,7 +19,6 @@ import {
 } from "@mastra/core/storage";
 import type { Trace } from "@mastra/core/telemetry";
 import type { StepResult, WorkflowRunState } from "@mastra/core/workflows";
-import type { InputJsonValue } from "@prisma/client/runtime/client";
 import { invariant } from "es-toolkit";
 import type { Chat, Messages, User } from "prisma/generated/client";
 import type { Role } from "prisma/generated/enums";

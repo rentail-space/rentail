@@ -1,7 +1,6 @@
 // This file contains setup code that will run before all tests
 
 import * as Sentry from "@sentry/react-router";
-import { captureException } from "@sentry/react-router";
 import { afterAll, beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
 import server from "../mocks/msw.server";

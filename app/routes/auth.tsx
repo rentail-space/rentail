@@ -1,6 +1,6 @@
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
 import Header from "~/components/layout/Header";
 import authServer from "~/lib/auth.server";
@@ -61,7 +61,12 @@ export default function AuthPage() {
   const emailId = useId();
   const passwordId = useId();
   const fetcher = useFetcher();
-  const error = fetcher.data?.error;
+  const [error, setError] = useState<string | null>(null);
+
+  // Show error after form submission, but allow form change to clear error
+  useEffect(() => {
+    setError(fetcher.data?.error);
+  }, [fetcher.data]);
 
   return (
     <>
@@ -164,7 +169,10 @@ export default function AuthPage() {
             <div className="mt-6 text-center">
               <button
                 className="text-sm text-indigo-600 hover:text-indigo-700 hover:underline"
-                onClick={() => setIsSignUp(!isSignUp)}
+                onClick={() => {
+                  setError(null);
+                  setIsSignUp(!isSignUp);
+                }}
                 type="button"
               >
                 {isSignUp

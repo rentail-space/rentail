@@ -1,46 +1,41 @@
+import type { UserWithAnonymous } from "better-auth/plugins";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import authClient from "~/lib/auth.client";
 
 export default function Header({ chatId }: { chatId?: string }) {
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => setIsClient(true), []);
-
   return (
     <header className="flex flex-row items-center justify-between gap-8 border-b px-6 py-1">
       <Link to="/" className="font-bold text-2xl text-gray-900">
         <span className="text-blue-600">rentail</span>.space
       </Link>
 
-      {isClient && authClient && (
-        <div className="flex gap-3 items-center">
-          {chatId && <ExportButtons chatId={chatId} />}
-          <Authentication />
-        </div>
-      )}
+      <ClientOnly>
+        <UserMenu chatId={chatId} />
+      </ClientOnly>
     </header>
   );
 }
 
-function ExportButtons({ chatId }: { chatId: string }) {
-  const session = authClient.useSession().data ?? null;
-  const isAuthenticated = session?.user && !session?.user.isAnonymous;
-  return (
-    chatId &&
-    isAuthenticated && (
-      <>
-        <DownloadButton href={`/api/chat/${chatId}/export/csv`} as="CSV" />
-        <DownloadButton href={`/api/chat/${chatId}/export/pdf`} as="PDF" />
-      </>
-    )
-  );
+function ClientOnly({ children }: { children: React.ReactNode }) {
+  // NOTE: do not call useSession() while server-side rendering
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => setIsClient(true), []);
+  return isClient ? children : null;
 }
 
-function Authentication() {
-  const session = authClient.useSession().data ?? null;
-  const isPending = authClient.useSession().isPending ?? true;
+function UserMenu({ chatId }: { chatId?: string }) {
+  const { data: session, isPending, refetch } = authClient.useSession();
+  const user = session?.user as UserWithAnonymous | null;
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // NOTE: after user signs in, the header doesn't show them as signed in, we
+  // need to refetch the session to show them as signed in
+  useEffect(() => {
+    const timeout = setTimeout(refetch, 100);
+    return () => clearTimeout(timeout);
+  }, [refetch]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -59,27 +54,36 @@ function Authentication() {
     }
   }, [isOpen]);
 
-  if (isPending) return null;
-
   // Show sign-in link for non-authenticated users
-  const isAuthenticated = session && !session.user.isAnonymous;
-  if (isAuthenticated) return <DropdownMenu user={session.user} />;
-  else
-    return (
-      <button
-        type="button"
-        onClick={async () => {
-          await authClient.signOut();
-          window.location.href = "/auth";
-        }}
-        className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
-      >
-        Sign In
-      </button>
-    );
+  if (isPending) return <span>Loading...</span>;
+  if (user && !user.isAnonymous && !isPending)
+    return <DropdownMenu user={user} chatId={chatId} />;
+  else return <SignInButton />;
 }
 
-function DropdownMenu({ user }: { user: { name: string; email: string } }) {
+function SignInButton() {
+  return (
+    <button
+      aria-label="Sign in"
+      type="button"
+      onClick={async () => {
+        await authClient.signOut();
+        window.location.href = "/auth";
+      }}
+      className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+    >
+      Sign In
+    </button>
+  );
+}
+
+function DropdownMenu({
+  chatId,
+  user,
+}: {
+  chatId?: string;
+  user: UserWithAnonymous;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -104,9 +108,9 @@ function DropdownMenu({ user }: { user: { name: string; email: string } }) {
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+        onClick={() => setIsOpen(!isOpen)}
+        type="button"
       >
         <UserIcon />
         <span>{user.name || user.email}</span>
@@ -127,6 +131,21 @@ function DropdownMenu({ user }: { user: { name: string; email: string } }) {
             Profile Settings
           </Link>
 
+          <a
+            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+            download
+            href={`/api/chat/${chatId}/export/csv`}
+          >
+            CSV Export
+          </a>
+          <a
+            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+            download
+            href={`/api/chat/${chatId}/export/pdf`}
+          >
+            PDF Export
+          </a>
+
           <button
             type="button"
             onClick={async () => {
@@ -140,35 +159,6 @@ function DropdownMenu({ user }: { user: { name: string; email: string } }) {
         </div>
       )}
     </div>
-  );
-}
-
-function DownloadButton({ href, as: title }: { href: string; as: string }) {
-  return (
-    <a
-      className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
-      href={href}
-      download
-      title={`Export as ${title}`}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <title>Export PDF</title>
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-        <polyline points="7 10 12 15 17 10" />
-        <line x1="12" y1="15" x2="12" y2="3" />
-      </svg>
-      {title}
-    </a>
   );
 }
 

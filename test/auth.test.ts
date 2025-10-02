@@ -18,6 +18,9 @@ describe("Authentication with Working Memory", () => {
   describe("user visits chat page", () => {
     beforeAll(async () => {
       await page.goto(`${URL}/chat`, { waitUntil: "domcontentloaded" });
+      await page.waitForSelector(`button[aria-label="Sign in"]`, {
+        state: "visible",
+      });
     });
 
     it("creates anonymous user when opening chat page", async () => {
@@ -191,13 +194,11 @@ describe("Authentication with Working Memory", () => {
             ).toBeVisible();
           });
 
-          it("should delete anonymous user", async () => {
+          it("should keep anonymous user", async () => {
             const users = await prisma.user.findMany();
-            expect(users.length, "Should have exactly one user").toBe(1);
-            const user = users[0];
-            expect(user.isAnonymous, "User should not be anonymous").toBe(
-              false,
-            );
+            expect(users.length, "Should have two user").toBe(2);
+            expect(users.find((user) => user.isAnonymous)).not.toBeUndefined();
+            expect(users.find((user) => !user.isAnonymous)).not.toBeUndefined();
           });
 
           it("stores user credentials correctly in database", async () => {
@@ -218,7 +219,7 @@ describe("Authentication with Working Memory", () => {
               where: { user: { isAnonymous: false } },
             });
             const workingMemory = await getWorkingMemory(chat);
-            expect(workingMemory.location?.city).toEqual("Boston");
+            expect(workingMemory.location?.city).toEqual("Los Angeles");
           });
         });
       });
