@@ -1,7 +1,7 @@
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import env from "~/lib/env";
-import { openPage, URL } from "./helpers/launchBrowser";
+import { openPage, URL } from "~/test/helpers/launchBrowser";
 
 describe("Chat page", () => {
   let page: Page;

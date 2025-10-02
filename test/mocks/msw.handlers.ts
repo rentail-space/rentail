@@ -1,6 +1,6 @@
 import { invariant } from "es-toolkit";
 import { HttpResponse, http } from "msw";
-import { findMockResponse } from "./anthropic.mock";
+import { findMockResponse } from "~/test/mocks/anthropic.mock";
 
 export const handlers = [
   // Mock Anthropic API
@@ -39,6 +39,11 @@ export const handlers = [
       });
     } else return new HttpResponse({ status: 404 });
   }),
+
+  // Make sure we're not sending emails in tests
+  http.post("https://api.resend.com/emails", () =>
+    HttpResponse.json({ status: 200 }),
+  ),
 
   // Allow all localhost requests to pass through (for dev server communication)
   http.all(/^https?:\/\/localhost:\d+/, () => {

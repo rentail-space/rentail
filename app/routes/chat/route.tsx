@@ -8,10 +8,10 @@ import { data, useLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
+import InputForm from "~/routes/chat/InputForm";
+import Messages from "~/routes/chat/Messages";
 import { getUserChat } from "~/sessions.server";
 import type { Route } from "./+types/route";
-import InputForm from "./InputForm";
-import Messages from "./Messages";
 
 export const handle = { hideLayout: true };
 

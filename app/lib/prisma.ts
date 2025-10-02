@@ -1,6 +1,6 @@
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "../../prisma/generated/client";
-import env from "./env";
+import { PrismaClient } from "prisma/generated/client";
+import env from "~/lib/env";
 
 export default new PrismaClient({
   adapter: new PrismaPg({ connectionString: env.DATABASE_URL }),

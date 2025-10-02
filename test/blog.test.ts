@@ -11,7 +11,7 @@
 
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, test } from "vitest";
-import { openPage, URL } from "./helpers/launchBrowser";
+import { openPage, URL } from "~/test/helpers/launchBrowser";
 
 describe("Blog Post Rendering", () => {
   let page: Page;

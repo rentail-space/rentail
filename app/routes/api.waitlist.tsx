@@ -2,13 +2,10 @@ import { pretty, render } from "@react-email/components";
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
 import { data } from "react-router";
-import { Resend } from "resend";
 import Waitlist from "~/emails/Waitlist";
-import env from "~/lib/env";
 import prisma from "~/lib/prisma";
+import resend from "~/lib/resend";
 import type { Route } from "./+types/api.waitlist";
-
-const resend = new Resend(env.RESEND_API_KEY);
 
 export async function action({ request }: Route.ActionArgs) {
   const subject = "You're on the waitlist for Rentail";

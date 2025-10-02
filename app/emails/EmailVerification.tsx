@@ -11,7 +11,7 @@ import {
   Section,
   Text,
 } from "@react-email/components";
-import * as styles from "./styles";
+import * as styles from "~/emails/styles";
 
 export default function EmailVerification({
   name,

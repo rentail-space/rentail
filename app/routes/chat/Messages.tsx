@@ -7,7 +7,7 @@ import {
   type ScrollToBottom,
   useStickToBottomContext,
 } from "use-stick-to-bottom";
-import askQuestion from "./askQuestion";
+import askQuestion from "~/routes/chat/askQuestion";
 
 export default function Messages({
   error,

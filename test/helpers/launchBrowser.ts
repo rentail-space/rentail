@@ -12,7 +12,7 @@ import {
   type Route,
 } from "playwright";
 import env from "~/lib/env";
-import "./toMatchScreenshot";
+import "~/test/helpers/toMatchScreenshot";
 
 const port = 9222;
 const lockFile = join(tmpdir(), `rentail-server-${port}.lock`);

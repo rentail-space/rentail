@@ -3,8 +3,8 @@
 import * as Sentry from "@sentry/react-router";
 import { afterAll, beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
-import server from "../mocks/msw.server";
-import { cleanupServer } from "./launchBrowser";
+import { cleanupServer } from "~/test/helpers/launchBrowser";
+import server from "~/test/mocks/msw.server";
 
 Sentry.init({
   enabled: false,

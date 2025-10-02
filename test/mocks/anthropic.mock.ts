@@ -7,7 +7,9 @@
 
 import type { Tool, ToolChoice } from "ai";
 import { invariant, last } from "es-toolkit";
-import createStreamingResponse, { type ToolCall } from "./anthropic.stream";
+import createStreamingResponse, {
+  type ToolCall,
+} from "~/test/mocks/anthropic.stream";
 
 interface MessagePattern {
   // Pattern to match against the last user message

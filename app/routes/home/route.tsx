@@ -6,12 +6,12 @@ import { DateTime } from "luxon";
 import { useId } from "react";
 import { useLoaderData } from "react-router";
 import Footer from "~/components/layout/Footer";
-import BlogPosts from "./BlogPosts";
-import FeaturesSection from "./FeaturesSection";
-import HeroSection from "./HeroSection";
-import HowItWorksSection from "./HowItWorksSection";
-import JoinWaitlist from "./JoinWaitlist";
-import SpecialtyLeasing from "./SpecialtyLeasing";
+import BlogPosts from "~/routes/home/BlogPosts";
+import FeaturesSection from "~/routes/home/FeaturesSection";
+import HeroSection from "~/routes/home/HeroSection";
+import HowItWorksSection from "~/routes/home/HowItWorksSection";
+import JoinWaitlist from "~/routes/home/JoinWaitlist";
+import SpecialtyLeasing from "~/routes/home/SpecialtyLeasing";
 
 export const handle = { hideLayout: true };
 

@@ -1,8 +1,8 @@
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import Welcome from "~/emails/Welcome";
-import { openPage } from "./helpers/launchBrowser";
-import renderEmail from "./helpers/renderEmail";
+import { openPage } from "~/test/helpers/launchBrowser";
+import renderEmail from "~/test/helpers/renderEmail";
 
 describe("Welcome Email", () => {
   let page: Page;

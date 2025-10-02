@@ -4,7 +4,7 @@ import { ConsoleLogger } from "@mastra/core/logger";
 import { Mastra } from "@mastra/core/mastra";
 import { ulid } from "ulid";
 import env from "~/lib/env";
-import { memory } from "./workingMemory";
+import { memory } from "~/lib/workingMemory";
 
 const agent = new Agent({
   id: "main",

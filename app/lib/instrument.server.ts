@@ -2,7 +2,7 @@
 
 import os from "node:os";
 import * as Sentry from "@sentry/react-router";
-import env from "./env";
+import env from "~/lib/env";
 
 if (env.SENTRY_DSN) {
   Sentry.init({

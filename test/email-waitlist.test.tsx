@@ -1,8 +1,8 @@
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import Waitlist from "~/emails/Waitlist";
-import { openPage } from "./helpers/launchBrowser";
-import renderEmail from "./helpers/renderEmail";
+import { openPage } from "~/test/helpers/launchBrowser";
+import renderEmail from "~/test/helpers/renderEmail";
 
 describe("Waitlist Email", () => {
   let page: Page;

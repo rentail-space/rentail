@@ -22,7 +22,7 @@ import type { StepResult, WorkflowRunState } from "@mastra/core/workflows";
 import { invariant } from "es-toolkit";
 import type { Chat, Messages, User } from "prisma/generated/client";
 import type { Role } from "prisma/generated/enums";
-import prisma from "./prisma";
+import prisma from "~/lib/prisma";
 
 /**
  * Store Mastra state in our Postgres database using our existing schema.

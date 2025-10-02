@@ -2,10 +2,10 @@ import { captureException } from "@sentry/react-router";
 import { type BetterAuthOptions, betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { anonymous, type UserWithAnonymous } from "better-auth/plugins";
-import prisma from "./prisma";
-import sendVerificationEmail from "./sendVerificationEmail";
-import sendWelcomeEmail from "./sendWelcomeEmail";
-import { getRecentMessages, saveMessages } from "./workingMemory";
+import prisma from "~/lib/prisma";
+import sendVerificationEmail from "~/lib/sendVerificationEmail";
+import sendWelcomeEmail from "~/lib/sendWelcomeEmail";
+import { getRecentMessages, saveMessages } from "~/lib/workingMemory";
 
 /**
  * @see https://github.com/better-auth/better-auth/blob/main/packages/better-auth/src/types/options.ts

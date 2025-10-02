@@ -11,16 +11,16 @@ import {
   useLocation,
   useMatches,
 } from "react-router";
-import "./app.css";
+import "~/app.css";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 import ReactGA from "react-ga4";
 import { Toaster } from "sonner";
-import ErrorBoundary from "./components/ErrorBoundary";
-import Footer from "./components/layout/Footer";
-import Header from "./components/layout/Header";
-import schema from "./data/schema.json";
-import env from "./lib/env";
+import ErrorBoundary from "~/components/ErrorBoundary";
+import Footer from "~/components/layout/Footer";
+import Header from "~/components/layout/Header";
+import schema from "~/data/schema.json";
+import env from "~/lib/env";
 
 export async function loader() {
   return {
