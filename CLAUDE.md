@@ -26,11 +26,21 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - React 19 with TypeScript
 - Vite 7 for build tooling (integrated with React Router v7)
 - Tailwind CSS 4 for styling with DaisyUI plugin
+- Better Auth for authentication with anonymous user support and account linking
 - Redis for stream coordination and cross-server communication
 - Session management with automatic user creation and IP-based geolocation
 - Vitest for unit testing with jsdom environment
 - Biome for linting and formatting
 - Playwright for E2E testing with visual regression
+
+**Authentication Architecture:**
+- Better Auth library provides anonymous sessions and email/password authentication
+- Anonymous users automatically created on first visit with IP-based geolocation
+- Account linking: when anonymous user signs up, their chat history and working memory are migrated to the new account
+- User model includes custom fields: `geocode`, `ip`, `metadata`, `workingMemory`
+- Email verification with Resend, auto sign-in after verification
+- Session cookies with 365-day expiration, 5-minute cache for performance
+- Migration logic in `app/lib/auth.server.ts` handles copying data from anonymous to authenticated users
 
 **AI Integration:**
 - Claude 4 via Anthropic AI SDK with streaming responses and thinking tokens
@@ -43,10 +53,22 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - Geolocation filtering: Built-in Haversine distance calculation for shopping centers
 - Use Context7 MCP server for library documentation and code examples
 
+**Working Memory & User Profiles:**
+- Mastra memory stores user profiles as JSON in User.workingMemory field
+- Profile includes: name, location (city, state, country, lat/lon, timezone), preferences
+- Working memory updated automatically by AI during conversations
+- Location initialized from IP geolocation on first visit (via ipgeolocation.io with Redis cache)
+- Custom Mastra storage adapter (`PrismaStorage`) stores threads/messages in existing Chat/Message tables
+- Profile persists across sessions and survives anonymous→authenticated user migration
+- Access via `getWorkingMemory(chat)` and `updateWorkingMemory(chat, fn)`
+
 **Email Integration:**
 - React Email templates in `/app/emails/` directory using `@react-email/components`
 - Resend API for email delivery (configured via `RESEND_API_KEY`)
-- Transactional emails for waitlist notifications and user communication
+- Unified `sendEmail()` function in `app/lib/resend.ts` for all email sending
+- Email components accept `subject` prop for consistent rendering
+- Test helper `renderLastEmailSent()` for visual regression testing of emails
+- Transactional emails: waitlist confirmations, welcome emails, email verification
 
 **Database:**
 - PostgreSQL with Prisma ORM client and schema generation
@@ -84,6 +106,13 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Production server runs with `@react-router/serve`
 - Configurable SSR request timeout (default: 5000ms)
 - Development server runs on port 3000
+
+**Layout Control:**
+- Root layout in `app/root.tsx` provides Header and Footer by default
+- Routes can hide layout by exporting `handle = { hideLayout: true }`
+- Root uses `useMatches()` to check route handles and conditionally render layout
+- Currently used by: `/auth`, `/chat`, `/` (home page has custom layout)
+- This pattern allows full-page experiences without navigation chrome
 
 ## Code Style
 
@@ -148,17 +177,44 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Test files should end with ".test.ts" or ".test.tsx"
 - Place test files in `/test` directory (NOT in `/app` directory alongside source code)
 - Use Vitest framework with browser provider for visual testing and forks pool for performance
-- Tests run from `/**/*.test.{ts,tsx}` with setup in `/test/setup.ts`
+- Tests run from `/**/*.test.{ts,tsx}` with setup in `/test/helpers/setup.ts`
 - Visual regression testing with Playwright and custom `toMatchScreenshot` matcher
 - Screenshots stored in `__screenshots__` directory
 - Checkly monitoring tests in `__checks__` directory
 - Requires Node.js 22.0.0 or higher (enforced in package.json)
-- Tests use setup file in `/test/helpers/setup.ts` with MSW mock server configuration (`/test/mocks/handlers.ts`)
-- Visual regression tests use custom `toMatchScreenshot` matcher with Playwright browser provider
-- Test configuration in `vitest.config.ts` with 30-second timeout for E2E tests
-- Mock server setup prevents external API calls during testing (`/test/mocks/handlers.ts`)
-- Write unit tests with Vitest for all utilities and components
-- Consider snapshot testing for UI consistency
+
+**Test Organization:**
+- Use nested `describe` blocks to organize related tests
+- Use `beforeAll`/`afterAll` for test setup/cleanup (not `beforeEach`/`afterEach`)
+- Share state across tests within a describe block using `let` variables
+- Sequential tests: each test validates one aspect, state flows through the suite
+- Example pattern from `test/auth.test.ts`:
+  ```typescript
+  describe("user visits chat page", () => {
+    beforeAll(async () => {
+      await page.goto(`${URL}/chat`);
+    });
+    it("creates anonymous user", async () => { /* ... */ });
+
+    describe("user updates location", () => {
+      let workingMemory: UserProfile;
+      beforeAll(async () => {
+        // Perform action
+        workingMemory = await getWorkingMemory();
+      });
+      it("should have user's new city", async () => {
+        expect(workingMemory.location?.city).toEqual("Boston");
+      });
+    });
+  });
+  ```
+
+**Testing Infrastructure:**
+- Mock server setup with MSW prevents external API calls (`/test/mocks/handlers.ts`)
+- Sentry initialized in test mode with console logging only
+- Database reset in beforeAll: `await prisma.user.deleteMany()`
+- Visual regression: `await expect(page).toMatchScreenshot()`
+- Email testing: use `sendEmail()` then `renderLastEmailSent(page)` for visual testing
 - Run individual tests: `npm run test -- <test-pattern>` or `pnpx vitest run <test-pattern>`
 - E2E tests use Checkly for production monitoring (`__checks__/` directory)
 
@@ -192,19 +248,31 @@ Optional environment variables:
   - `/app/routes.ts`: Route configuration with file-based routing
   - `/app/root.tsx`: Root layout with HTML shell and Sentry
   - `/app/routes/`: Individual route components
-  - `/app/lib/`: Shared utilities (AI model, logging, system prompt)
-  - `/app/data/`: External data files (user data, blog posts in markdown)
+  - `/app/lib/`: Shared utilities
+    - `env.ts`: Environment variable configuration with runtime validation
+    - `auth.server.ts`: Better Auth configuration with anonymous user support
+    - `auth.client.ts`: Client-side auth hooks and utilities
+    - `prisma.ts`: Database client with connection pooling
+    - `resend.ts`: Email sending utilities with test helpers
+    - `workingMemory.ts`: Mastra memory integration for user profiles
+    - `logger.server.ts`: HTTP request logging
+    - `instrument.server.ts`: Metrics collection and monitoring
+    - `PrismaStorage .ts`: Mastra storage adapter for PostgreSQL
+  - `/app/data/`: External data files (blog posts in markdown with front-matter)
   - `/app/entry.server.tsx`: Server-side rendering entry point with request logging
   - `/app/app.css`: Global Tailwind CSS imports
   - `/app/components/`: Reusable UI components organized by feature
-  - `/app/emails/`: React Email templates for transactional emails
+    - `/layout/`: Header, Footer components
+  - `/app/emails/`: React Email templates (all accept `subject` prop)
 - `/prisma`: Database schema and migrations
   - `schema.prisma`: Database models and configuration
-  - `generated/`: Prisma client generation output
+  - `generated/`: Prisma client generation output (imported as `prisma` in code)
 - `/build`: Production build output (client/server bundles)
-- `/public`: Static assets (favicon, logos)
+- `/public`: Static assets (favicon, logos, OG images)
 - `/test`: Test setup and shared utilities
-- `/__screenshots__`: Visual regression test screenshots
+  - `/helpers/`: Test utilities (launchBrowser, renderEmail, setup)
+  - `/mocks/`: MSW handlers for API mocking
+- `/__screenshots__`: Visual regression test screenshots (git-ignored)
 - `/__checks__`: Checkly monitoring test files
 - `.react-router`: Cache directory (can be cleaned with npm run clean)
 - `react-router.config.ts`: React Router v7 configuration with prerendering
@@ -213,6 +281,7 @@ Optional environment variables:
 - `tailwind.config.ts`: Tailwind CSS 4 configuration with DaisyUI plugin
 - `vitest.config.ts`: Test configuration with browser provider and custom matchers
 - `mcp.json`: MCP server configuration for Claude Code integration
+- `tsconfig.json`: TypeScript configuration with path aliases (`~/*` → `./app/*`)
 
 # important-instruction-reminders  
 Do what has been asked; nothing more, nothing less.
