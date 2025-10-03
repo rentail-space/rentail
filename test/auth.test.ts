@@ -2,7 +2,6 @@ import { delay, withTimeout } from "es-toolkit";
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import type zod from "zod";
-import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { getWorkingMemory, type userProfile } from "~/lib/workingMemory";
 import { openPage, URL } from "~/test/helpers/launchBrowser";
@@ -11,45 +10,35 @@ describe("Authentication with Working Memory", () => {
   let page: Page;
 
   beforeAll(async () => {
-    page = await openPage(env.isDebug);
+    page = await openPage();
     await prisma.user.deleteMany();
   });
 
   describe("user visits chat page", () => {
     beforeAll(async () => {
-      await page.goto(`${URL}/chat`, { waitUntil: "load" });
-
+      await page.goto(`${URL}/chat`);
       // Wait for the chat input to render (this proves page is loaded and React hydrated)
-      await page.waitForSelector("input[type='text']", {
-        state: "visible",
-        timeout: 60000,
-      });
-
-      // Give auth client time to complete session check
-      // In CI, the session check might be slow
-      await page.waitForTimeout(2000);
+      await page.waitForSelector("input[type='text']");
     });
 
     it("creates anonymous user when opening chat page", async () => {
-      expect(page.url()).toContain("/chat");
+      expect(page.url()).toEqual(`${URL}/chat`);
     });
 
     it("shows sign-in button for unauthenticated users", async () => {
-      const signInButton = page.getByRole("button", { name: "Sign In" });
-      await expect(signInButton).toBeVisible();
+      await page.waitForSelector("button[aria-label='Sign in']");
+      await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
     });
 
     it("creates anonymous user in database", async () => {
       const users = await prisma.user.findMany();
       expect(users.length, "should have one user").toEqual(1);
-
-      const user = users[0];
-      expect(user.isAnonymous, "User should be anonymous").toBe(true);
+      expect(users[0].isAnonymous, "User should be anonymous").toBe(true);
     });
 
     it("maintains cookies across requests", async () => {
       const initialCookies = await page.context().cookies();
-      expect(initialCookies.length, "Should have cookies").toBeGreaterThan(0);
+      expect(initialCookies.length, "Should have cookies").toEqual(2);
     });
 
     it("sets initial working memory with default location", async () => {
@@ -86,7 +75,7 @@ describe("Authentication with Working Memory", () => {
                 return workingMemory;
             }
           },
-          30000, // Increased to 30s for CI where AI responses are slower
+          1000,
         );
       });
 
@@ -117,74 +106,91 @@ describe("Authentication with Working Memory", () => {
 
     describe("sign-in page", () => {
       beforeAll(async () => {
-        await page.goto(`${URL}/chat`, { waitUntil: "networkidle" });
-        await page.locator("button", { hasText: "Sign In" }).click();
-        await page.waitForURL(`${URL}/auth`);
+        await page.getByRole("button", { name: "Sign In" }).click();
+        await page.waitForURL(`${URL}/auth`, { waitUntil: "load" });
       });
 
       it("shows sign-in page", async () => {
         expect(page.url()).toContain("/auth");
-        await expect(page.locator("h1")).toContainText("Welcome Back");
+        await expect(
+          page.getByRole("heading", { name: "Welcome Back" }),
+        ).toBeVisible();
       });
 
       it("shows sign-in page with email field", async () => {
-        await expect(page.locator("input[type='email']")).toBeVisible();
+        await expect(
+          page.getByRole("textbox", { name: "Email" }),
+        ).toBeVisible();
       });
 
       it("shows sign-in page with password fields", async () => {
-        await expect(page.locator("input[type='password']")).toBeVisible();
+        await expect(
+          page.getByRole("textbox", { name: "Password" }),
+        ).toBeVisible();
       });
 
       it("shows sign-in page with sign-in button", async () => {
-        await expect(page.locator("button[type='submit']")).toBeVisible();
+        await expect(
+          page.getByRole("button", { name: "Sign In" }),
+        ).toBeVisible();
       });
 
       it("shows sign-in page with sign-up link", async () => {
         await expect(
-          page.locator("text=Don't have an account? Sign up"),
+          page.getByRole("button", { name: "Don't have an account? Sign up" }),
         ).toBeVisible();
-        const users = await prisma.user.findMany();
-        expect(users.length, "Should have one user").toBe(1);
       });
 
       describe("sign-up page", () => {
         beforeAll(async () => {
-          await page.locator("button", { hasText: /Sign up/i }).click();
+          await page
+            .getByRole("button", { name: "Don't have an account? Sign up" })
+            .click();
         });
 
         it("shows sign-up page", async () => {
-          await expect(page.locator("h1")).toContainText("Create Account");
+          await expect(
+            page.getByRole("heading", { name: "Create Account" }),
+          ).toBeVisible();
         });
 
         it("shows sign-up page with name field", async () => {
-          await expect(page.locator("input[name='name']")).toBeVisible();
+          await expect(
+            page.getByRole("textbox", { name: "Name" }),
+          ).toBeVisible();
         });
 
         it("shows sign-up page with email field", async () => {
-          await expect(page.locator("input[type='email']")).toBeVisible();
+          await expect(
+            page.getByRole("textbox", { name: "Email" }),
+          ).toBeVisible();
         });
 
         it("shows sign-up page with password fields", async () => {
-          await expect(page.locator("input[type='password']")).toBeVisible();
+          await expect(
+            page.getByRole("textbox", { name: "Password" }),
+          ).toBeVisible();
         });
 
         it("shows sign-up page with sign-up button", async () => {
-          await expect(page.locator("button[type='submit']")).toBeVisible();
+          await expect(
+            page.getByRole("button", { name: "Create Account" }),
+          ).toBeVisible();
         });
 
         describe("user signs up", () => {
           beforeAll(async () => {
             await page
-              .locator("input[type='text']")
+              .getByRole("textbox", { name: "Name" })
               .fill("Working Memory User");
             await page
-              .locator("input[type='email']")
+              .getByRole("textbox", { name: "Email" })
               .fill("working-memory@example.com");
             await page
-              .locator("input[type='password']")
+              .getByRole("textbox", { name: "Password" })
               .fill("WorkingMemory123!");
-            await page.locator("button[type='submit']").click();
-            await page.waitForURL(`${URL}/chat`);
+            await page.getByRole("button", { name: "Create Account" }).click();
+            await page.waitForURL(`${URL}/chat`, { waitUntil: "load" });
           });
 
           it("redirects to chat page after successful sign-up", async () => {
@@ -193,32 +199,27 @@ describe("Authentication with Working Memory", () => {
 
           it("shows user dropdown after successful sign-up", async () => {
             await expect(
-              page.locator("button").filter({ hasText: "Working Memory User" }),
-            ).toBeVisible();
-          });
-
-          it("displays user info in dropdown menu", async () => {
-            await expect(
-              page.locator("button").filter({ hasText: "Working Memory User" }),
+              page.getByRole("button", { name: "Working Memory User" }),
             ).toBeVisible();
           });
 
           it("should convert anonymous user to authenticated user", async () => {
             const users = await prisma.user.findMany();
-            expect(users.length, "Should have one user").toBe(1);
-            expect(users[0].isAnonymous, "User should not be anonymous").toBe(
-              false,
-            );
+            expect(users.length, "Should have one user").toEqual(1);
+            expect(
+              users[0].isAnonymous,
+              "User should not be anonymous",
+            ).toEqual(false);
           });
 
           it("stores user credentials correctly in database", async () => {
             const user = await prisma.user.findFirstOrThrow({
               where: { isAnonymous: false },
             });
-            expect(user.name, "User should have correct name").toBe(
+            expect(user.name, "User should have correct name").toEqual(
               "Working Memory User",
             );
-            expect(user.email, "User should have correct email").toBe(
+            expect(user.email, "User should have correct email").toEqual(
               "working-memory@example.com",
             );
           });
