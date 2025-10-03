@@ -46,15 +46,7 @@ export default function Chat() {
       },
     }),
   });
-  const ref = useRef<HTMLInputElement>(null);
-
-  const onSubmit = (input: string) => {
-    sendMessage({
-      parts: [{ text: input.trim(), type: "text" }],
-      role: "user",
-    });
-    setQuery(null);
-  };
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const stopLLM = async (scrollToBottom: () => void) => {
     messages.push({
@@ -70,8 +62,6 @@ export default function Chat() {
     );
     await stop(); // Stop the AI SDK stream
 
-    // Force a re-render to show the aborted state
-    setQuery(null);
     // Scroll to bottom after a small delay to ensure the message is rendered
     setTimeout(scrollToBottom, 10);
   };
@@ -84,7 +74,7 @@ export default function Chat() {
         <StickToBottom.Content>
           <Messages
             error={error}
-            inputRef={ref}
+            inputRef={inputRef}
             isTyping={status === "streaming"}
             messages={messages}
             setQuery={setQuery}
@@ -94,11 +84,11 @@ export default function Chat() {
         <ScrollButton />
 
         <InputForm
+          inputRef={inputRef}
           isResponding={status === "streaming" || status === "submitted"}
           isSubmitting={status === "submitted"}
-          onSubmit={onSubmit}
           query={query ?? ""}
-          ref={ref}
+          sendMessage={sendMessage}
           setQuery={setQuery}
           stopLLM={stopLLM}
         />

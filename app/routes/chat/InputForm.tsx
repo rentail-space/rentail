@@ -1,19 +1,20 @@
+import type { TextPart } from "ai";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 
 export default function InputForm({
+  inputRef,
   isResponding,
   isSubmitting,
-  onSubmit,
   query,
-  ref,
+  sendMessage,
   setQuery,
   stopLLM,
 }: {
+  inputRef: React.RefObject<HTMLInputElement | null>;
   isResponding: boolean;
   isSubmitting: boolean;
-  onSubmit: (input: string) => void;
   query: string;
-  ref: React.RefObject<HTMLInputElement | null>;
+  sendMessage: (message: { parts: TextPart[]; role: "user" }) => void;
   setQuery: (input: string) => void;
   stopLLM: (scrollToBottom: () => void) => Promise<void>;
 }) {
@@ -24,12 +25,9 @@ export default function InputForm({
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          if (ref.current) {
-            const question = ref.current.value.trim();
-            if (question) onSubmit(question);
-            ref.current.value = "";
-            scrollToBottom();
-          }
+          sendMessage({ parts: [{ text: query, type: "text" }], role: "user" });
+          setQuery("");
+          scrollToBottom();
         }}
         className="relative w-full"
       >
@@ -43,7 +41,7 @@ export default function InputForm({
           disabled={isSubmitting}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Ask me any question about retail spaces..."
-          ref={ref}
+          ref={inputRef}
           spellCheck="false"
           type="text"
           value={query}

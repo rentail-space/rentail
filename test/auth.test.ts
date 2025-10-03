@@ -59,8 +59,8 @@ describe("Authentication", () => {
         const input = page.locator("input[type='text']").first();
         await input.focus();
         await input.pressSequentially("Actually I'm in Boston");
-        await page.getByLabel("Send message").click();
-        await page.waitForTimeout(1000);
+        await page.getByRole("button", { name: "Send message" }).click();
+        await page.waitForTimeout(5000);
 
         const chat = await prisma.chat.findFirstOrThrow({
           include: { user: true },
