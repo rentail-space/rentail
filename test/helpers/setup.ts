@@ -16,15 +16,13 @@ Sentry.init({
   },
 });
 
-// Start MSW server before all tests
 beforeAll(async () => {
+  // Start MSW server before all tests
   msw.listen({ onUnhandledRequest: "error" });
-
   // Clean up database
   await prisma.user.deleteMany({});
 });
 
-// Close MSW server and test server after all tests
 afterAll(async () => {
   msw.close();
   await cleanupServer();
