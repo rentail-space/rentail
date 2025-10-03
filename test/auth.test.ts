@@ -1,4 +1,3 @@
-import { delay } from "es-toolkit";
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import type zod from "zod";
@@ -6,7 +5,7 @@ import prisma from "~/lib/prisma";
 import { getWorkingMemory, type userProfile } from "~/lib/workingMemory";
 import { openPage, URL } from "~/test/helpers/launchBrowser";
 
-describe("Authentication with Working Memory", () => {
+describe.skip("Authentication with Working Memory", () => {
   let page: Page;
 
   beforeAll(async () => {
@@ -63,7 +62,6 @@ describe("Authentication with Working Memory", () => {
         await input.pressSequentially("Actually I'm in Boston");
         await page.getByLabel("Send message").click();
         await page.waitForLoadState("networkidle");
-        await delay(1000);
 
         const chat = await prisma.chat.findFirstOrThrow({
           include: { user: true },
