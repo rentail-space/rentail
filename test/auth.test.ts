@@ -60,7 +60,11 @@ describe("Authentication", () => {
         const input = page.locator("input[type='text']").first();
         await input.focus();
         await input.pressSequentially("Actually I'm in Boston");
-        await page.getByRole("button", { name: "Send message" }).click();
+        console.log("**** input value", await input.inputValue());
+        await input.press("Enter");
+        console.log("**** input value", await input.inputValue());
+
+        //await page.getByRole("button", { name: "Send message" }).click();
         while (!workingMemory) {
           await delay(100);
           const chat = await prisma.chat.findFirstOrThrow({
@@ -70,6 +74,9 @@ describe("Authentication", () => {
           if (chat.messages.length === 3)
             workingMemory = await getWorkingMemory(chat);
         }
+
+        console.log("**** input value", await input.inputValue());
+        console.log("**** workingMemory", workingMemory);
       });
 
       it("should have user's new city", async () => {
