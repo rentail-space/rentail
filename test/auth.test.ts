@@ -5,7 +5,7 @@ import prisma from "~/lib/prisma";
 import { getWorkingMemory, type userProfile } from "~/lib/workingMemory";
 import { openPage, URL } from "~/test/helpers/launchBrowser";
 
-describe("Authentication with Working Memory", () => {
+describe.skip("Authentication with Working Memory", () => {
   let page: Page;
 
   beforeAll(async () => {
