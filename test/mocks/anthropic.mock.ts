@@ -78,7 +78,11 @@ export function findMockResponse(body: {
 
   if (
     body.tool_choice?.type === "auto" &&
-    body.tools.find((tool) => tool.name === "updateWorkingMemory")
+    body.tools.find((tool) => tool.name === "updateWorkingMemory") &&
+    last(body.messages)?.content.some(
+      (content) =>
+        content.type === "text" && content.text.includes("I'm in Boston"),
+    )
   ) {
     // Create a tool call for updating working memory with the exact format Mastra expects
     const updateWorkingMemoryTool = {

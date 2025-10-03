@@ -7,6 +7,7 @@ export const handlers = [
   http.post(
     "https://api.anthropic.com/v1/messages",
     async ({ request }: { request: Request }) => {
+      console.log("**** request", await request.clone().text());
       try {
         const body = (await request.json()) as Parameters<
           typeof findMockResponse
