@@ -10,8 +10,8 @@ import {
   type Page,
   type Route,
 } from "playwright";
-import env from "~/lib/env";
 import "~/test/helpers/toMatchScreenshot";
+import debug from "debug";
 import { afterAll } from "vitest";
 
 const port = 9222;
@@ -30,17 +30,36 @@ afterAll(async () => {
 /**
  * Launch a new browser instance and return the context.
  *
- * @param logging - Whether to run the browser in headless mode.
  * @returns The browser context.
  */
-export async function launchBrowser(
-  logging = env.isDebug,
-): Promise<BrowserContext> {
-  const headless = process.env.CI ? true : !logging;
+export async function launchBrowser(): Promise<BrowserContext> {
+  const headless = process.env.CI ? true : !debug("browser").enabled;
   if (!context) {
     context = await chromium.launchPersistentContext("test/context", {
       headless,
     });
+    if (debug("browser").enabled) {
+      context.on("console", (message) => {
+        message.type();
+        switch (message.type()) {
+          case "info":
+            console.info(message.text());
+            break;
+          case "warning":
+            console.warn(message.text());
+            break;
+          case "debug":
+            console.debug(message.text());
+            break;
+          case "error":
+            console.error(message.text());
+            break;
+          case "log":
+            console.log(message.text());
+            break;
+        }
+      });
+    }
   }
   return context;
 }
@@ -48,12 +67,11 @@ export async function launchBrowser(
 /**
  * Open a new page in the browser.
  *
- * @param logging - Whether to log debug messages, launch browsr in non-headless mode.
  * @returns The page.
  */
-export async function openPage(logging = env.isDebug): Promise<Page> {
-  await launchServer(logging);
-  await launchBrowser(logging);
+export async function openPage(): Promise<Page> {
+  await launchServer();
+  await launchBrowser();
   const page = await context.newPage();
   page.route("**", (route) => blockBrowserRequest(route));
   return page;
@@ -62,14 +80,12 @@ export async function openPage(logging = env.isDebug): Promise<Page> {
 /**
  * Launch a new server instance.
  *
- * @param logging - Whether to log debug messages.
  * @returns The server process.
  */
-export async function launchServer(
-  logging = env.isDebug,
-): Promise<ChildProcess> {
+export async function launchServer(): Promise<ChildProcess> {
   if (server) return server;
 
+  const logging = debug("server").enabled;
   if (logging) console.info("[TEST] launching server");
 
   // Check if lock file exists and server is running
@@ -169,7 +185,8 @@ async function checkServerHealth(): Promise<boolean> {
  * Cleanup server and browser resources when all tests finish.
  */
 export async function cleanupServer(): Promise<void> {
-  if (env.isDebug) console.info("[TEST] cleaning up server and browser");
+  const logging = debug("server").enabled;
+  if (logging) console.info("[TEST] cleaning up server and browser");
 
   // Close browser
   if (context) {
@@ -180,7 +197,7 @@ export async function cleanupServer(): Promise<void> {
 
   // Kill server
   if (server) {
-    if (env.isDebug) console.info("[TEST] killing server process");
+    if (logging) console.info("[TEST] killing server process");
     server.kill("SIGTERM");
     // @ts-expect-error - Resetting to undefined
     server = undefined;
@@ -190,7 +207,7 @@ export async function cleanupServer(): Promise<void> {
   if (existsSync(lockFile)) {
     try {
       unlinkSync(lockFile);
-      if (env.isDebug) console.info("[TEST] removed lock file");
+      if (logging) console.info("[TEST] removed lock file");
     } catch (error) {
       console.error("[TEST] error removing lock file:", error);
     }
@@ -207,6 +224,7 @@ async function blockBrowserRequest(route: Route): Promise<void> {
     // handling because Playwright waits for all requests to complete before
     // considering a navigation finished, so we must abort blocked requests.
     await route.abort();
-    if (env.isDebug) console.debug(`[BROWSER] blocking request to ${hostname}`);
+    if (debug("browser").enabled)
+      console.warn(`[BROWSER] blocking request to ${hostname}`);
   }
 }

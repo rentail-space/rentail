@@ -1,13 +1,12 @@
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import env from "~/lib/env";
 import { openPage, URL } from "~/test/helpers/launchBrowser";
 
 describe("Chat page", () => {
   let page: Page;
 
   beforeAll(async () => {
-    page = await openPage(env.isDebug);
+    page = await openPage();
   });
 
   it("renders chat interface with welcome message", async () => {
