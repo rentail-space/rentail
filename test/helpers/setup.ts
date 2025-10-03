@@ -3,7 +3,11 @@
 import * as Sentry from "@sentry/react-router";
 import { afterAll, beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
-import { cleanupServer } from "~/test/helpers/launchBrowser";
+import {
+  cleanupServer,
+  launchBrowser,
+  launchServer,
+} from "~/test/helpers/launchBrowser";
 import msw from "~/test/mocks/msw.server";
 
 Sentry.init({
@@ -21,6 +25,9 @@ beforeAll(async () => {
   msw.listen({ onUnhandledRequest: "error" });
   // Clean up database
   await prisma.user.deleteMany({});
+
+  await launchBrowser();
+  await launchServer();
 });
 
 afterAll(async () => {
