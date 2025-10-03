@@ -1,3 +1,4 @@
+import { delay } from "es-toolkit";
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import type zod from "zod";
@@ -60,12 +61,17 @@ describe("Authentication", () => {
         await input.focus();
         await input.pressSequentially("Actually I'm in Boston");
         await page.getByRole("button", { name: "Send message" }).click();
-        await page.waitForTimeout(5000);
-
-        const chat = await prisma.chat.findFirstOrThrow({
-          include: { user: true },
-        });
-        workingMemory = await getWorkingMemory(chat);
+        while (true) {
+          const chat = await prisma.chat.findFirstOrThrow({
+            include: { messages: true, user: true },
+            where: { user: { isAnonymous: true } },
+          });
+          if (chat.messages.length === 3) {
+            workingMemory = await getWorkingMemory(chat);
+            break;
+          }
+          await delay(100);
+        }
       });
 
       it("should have user's new city", async () => {
