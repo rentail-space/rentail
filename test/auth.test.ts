@@ -62,21 +62,12 @@ describe("Authentication with Working Memory", () => {
         await input.focus();
         await input.pressSequentially("Actually I'm in Boston");
         await page.getByLabel("Send message").click();
+        await page.waitForLoadState("networkidle");
 
         const chat = await prisma.chat.findFirstOrThrow({
           include: { user: true },
         });
-        workingMemory = await withTimeout<zod.infer<typeof userProfile>>(
-          async () => {
-            while (true) {
-              await delay(100);
-              const workingMemory = await getWorkingMemory(chat);
-              if (workingMemory.location?.city === "Boston")
-                return workingMemory;
-            }
-          },
-          1000,
-        );
+        workingMemory = await getWorkingMemory(chat);
       });
 
       it("should have user's new city", async () => {
