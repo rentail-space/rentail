@@ -2,6 +2,7 @@ import { createAnthropic } from "@ai-sdk/anthropic";
 import { Agent } from "@mastra/core/agent";
 import { ConsoleLogger } from "@mastra/core/logger";
 import { Mastra } from "@mastra/core/mastra";
+import debug from "debug";
 import { ulid } from "ulid";
 import env from "~/lib/env";
 import { memory } from "~/lib/workingMemory";
@@ -31,6 +32,8 @@ const agent = new Agent({
 export default new Mastra({
   agents: { agent },
   idGenerator: ulid,
-  logger: new ConsoleLogger({ level: env.isDebug ? "debug" : "info" }),
+  logger: new ConsoleLogger({
+    level: debug("agent").enabled ? "debug" : "info",
+  }),
   telemetry: { enabled: false },
 });

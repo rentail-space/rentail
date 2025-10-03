@@ -1,11 +1,11 @@
+import debug from "debug";
 import { setupServer } from "msw/node";
-import env from "~/lib/env";
 import { handlers } from "~/test/mocks/msw.handlers";
 
 const server = setupServer(...handlers);
 
 // Add logging for debugging
-if (env.isDebug) {
+if (debug("msw").enabled) {
   server.events.on("request:start", ({ request }) =>
     console.debug("[MSW] %s", request.method, request.url),
   );

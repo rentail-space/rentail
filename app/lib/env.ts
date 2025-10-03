@@ -6,7 +6,6 @@ const isTest = process.env.NODE_ENV === "test";
 
 export default {
   isProduction: process.env.NODE_ENV === "production",
-  isDebug: !!process.env.DEBUG,
   isTest: process.env.NODE_ENV === "test",
   isDevelopment: process.env.NODE_ENV === "development",
 
