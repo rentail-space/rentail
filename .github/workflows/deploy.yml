@@ -29,30 +29,38 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Restore node_modules and playwright browsers
-        id: cache
+      - id: cache-node-modules
         uses: actions/cache/restore@v4
         with:
-          path: |
-            node_modules
-            ~/.cache/ms-playwright
+          path: node_modules
           key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Install NPM dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: pnpm install
 
+      - uses: actions/cache/save@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Set PLAYWRIGHT_VERSION
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version)" >> $GITHUB_ENV
+
+      - id: cache-playwright
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ env.PLAYWRIGHT_VERSION }}
+
       - name: Install Playwright Browsers — Chromium
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache-playwright.outputs.cache-hit != 'true'
         run: pnpm exec playwright install chromium --with-deps
 
-      - name: Cache node_modules and playwright browsers
-        uses: actions/cache/save@v4
+      - uses: actions/cache/save@v4
         with:
-          path: |
-            node_modules
-            ~/.cache/ms-playwright
-          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ env.PLAYWRIGHT_VERSION }}
 
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
