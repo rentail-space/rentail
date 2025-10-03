@@ -37,6 +37,9 @@ export async function launchBrowser(): Promise<BrowserContext> {
   if (!context) {
     context = await chromium.launchPersistentContext("test/context", {
       headless,
+      // Slow down all operations to simulate slower CI environment
+      // Set SLOW_MO=1000 to add 1 second delay between each operation
+      slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
     });
     if (debug("browser").enabled) {
       context.on("console", (message) => {
