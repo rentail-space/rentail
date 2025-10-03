@@ -61,16 +61,14 @@ describe("Authentication", () => {
         await input.focus();
         await input.pressSequentially("Actually I'm in Boston");
         await page.getByRole("button", { name: "Send message" }).click();
-        while (true) {
+        while (!workingMemory) {
+          await delay(100);
           const chat = await prisma.chat.findFirstOrThrow({
             include: { messages: true, user: true },
             where: { user: { isAnonymous: true } },
           });
-          if (chat.messages.length === 3) {
+          if (chat.messages.length === 3)
             workingMemory = await getWorkingMemory(chat);
-            break;
-          }
-          await delay(100);
         }
       });
 
