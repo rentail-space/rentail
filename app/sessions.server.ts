@@ -40,16 +40,16 @@ export async function getUserChat(headers: Headers): Promise<{
   messages: MastraMessageV2[];
 }> {
   try {
-    const current = await authServer.api.getSession({
+    const session = await authServer.api.getSession({
       headers,
       returnHeaders: true,
     });
-    const userId = current.response?.user.id;
+    const userId = session.response?.user.id;
     if (userId) {
       const user = await prisma.user.findUnique({ where: { id: userId } });
       if (user) {
         const { chat, messages } = await getChatForUser(user);
-        return { chat, messages, headers: current.headers };
+        return { chat, messages, headers: session.headers };
       }
     }
   } catch (error) {

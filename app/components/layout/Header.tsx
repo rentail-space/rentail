@@ -1,39 +1,26 @@
-import type { UserWithAnonymous } from "better-auth/plugins";
+import type { ChatGetPayload } from "prisma/generated/models";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
+import { Link, useMatches } from "react-router";
 import authClient from "~/lib/auth.client";
 
-export default function Header({ chatId }: { chatId?: string }) {
+export default function Header() {
   return (
     <header className="flex flex-row items-center justify-between gap-8 border-b px-6 py-1">
       <Link to="/" className="font-bold text-2xl text-gray-900">
         <span className="text-blue-600">rentail</span>.space
       </Link>
 
-      <ClientOnly>
-        <UserMenu chatId={chatId} />
-      </ClientOnly>
+      <UserMenu />
     </header>
   );
 }
 
-import { useIsClient, useTimeout } from "usehooks-ts";
-
-function ClientOnly({ children }: { children: React.ReactNode }) {
-  // NOTE: do not call useSession() while server-side rendering
-  const isClient = useIsClient();
-  return isClient ? children : null;
-}
-
-function UserMenu({ chatId }: { chatId?: string }) {
-  const { data: session, isPending, refetch } = authClient.useSession();
-  const user = session?.user as UserWithAnonymous | null;
+function UserMenu() {
+  const { chat } = useMatches()[0].loaderData as {
+    chat: ChatGetPayload<{ include: { user: true } }>;
+  };
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // NOTE: after user signs in, the header doesn't show them as signed in, we
-  // need to refetch the session to show them as signed in
-  useTimeout(refetch, 100);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -53,10 +40,11 @@ function UserMenu({ chatId }: { chatId?: string }) {
   }, [isOpen]);
 
   // Show sign-in link for non-authenticated users
-  if (isPending) return <span>Loading...</span>;
-  else if (user && !user.isAnonymous)
-    return <DropdownMenu user={user} chatId={chatId} />;
-  else return <SignInButton />;
+  return chat?.user && !chat.user.isAnonymous ? (
+    <DropdownMenu chat={chat} />
+  ) : (
+    <SignInButton />
+  );
 }
 
 function SignInButton() {
@@ -75,11 +63,9 @@ function SignInButton() {
 }
 
 function DropdownMenu({
-  chatId,
-  user,
+  chat,
 }: {
-  chatId?: string;
-  user: UserWithAnonymous;
+  chat: ChatGetPayload<{ include: { user: true } }>;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -110,15 +96,17 @@ function DropdownMenu({
         type="button"
       >
         <UserIcon />
-        <span>{user.name || user.email}</span>
+        <span>{chat.user.name || chat.user.email}</span>
         <ChevronDownIcon isOpen={isOpen} />
       </button>
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 py-1 z-50">
           <div className="px-4 py-2 border-b border-gray-200">
-            <p className="text-sm font-medium text-gray-900">{user.name}</p>
-            <p className="text-xs text-gray-500 truncate">{user.email}</p>
+            <p className="text-sm font-medium text-gray-900">
+              {chat.user.name}
+            </p>
+            <p className="text-xs text-gray-500 truncate">{chat.user.email}</p>
           </div>
 
           <Link
@@ -131,14 +119,14 @@ function DropdownMenu({
           <a
             className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
             download
-            href={`/api/chat/${chatId}/export/csv`}
+            href={`/api/chat/${chat.id}/export/csv`}
           >
             CSV Export
           </a>
           <a
             className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
             download
-            href={`/api/chat/${chatId}/export/pdf`}
+            href={`/api/chat/${chat.id}/export/pdf`}
           >
             PDF Export
           </a>

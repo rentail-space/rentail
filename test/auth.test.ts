@@ -25,9 +25,6 @@ describe("Authentication", () => {
     });
 
     it("shows sign-in button for unauthenticated users", async () => {
-      await page.waitForSelector("button[aria-label='Sign in']", {
-        timeout: 1000,
-      });
       await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
     });
 
