@@ -21,7 +21,7 @@ echo -e "\033[32m  Running tests …\033[0m"
 pnpm run test
 
 echo -e "\033[32m  Commiting changes …\033[0m"
-git diff --unified=0 --color --word-diff package.json | cat
+git diff --unified=0 --color --word-diff HEAD~1 package.json
 git commit -m "Upgrade dependencies"
 
 echo -e "\033[32m  Cleaning up …\033[0m"

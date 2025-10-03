@@ -25,7 +25,9 @@ describe("Authentication", () => {
     });
 
     it("shows sign-in button for unauthenticated users", async () => {
-      await page.waitForSelector("button[aria-label='Sign in']");
+      await page.waitForSelector("button[aria-label='Sign in']", {
+        timeout: 1000,
+      });
       await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
     });
 
@@ -61,7 +63,7 @@ describe("Authentication", () => {
         await input.focus();
         await input.pressSequentially("Actually I'm in Boston");
         await page.getByLabel("Send message").click();
-        await page.waitForLoadState("networkidle");
+        await page.waitForTimeout(1000);
 
         const chat = await prisma.chat.findFirstOrThrow({
           include: { user: true },
