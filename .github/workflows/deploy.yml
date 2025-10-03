@@ -29,19 +29,30 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Restore or cache node_modules
-        id: cache-node-modules
-        uses: actions/cache@v4
+      - name: Restore node_modules and playwright browsers
+        id: cache
+        uses: actions/cache/restore@v4
         with:
-          path: node_modules
+          path: |
+            node_modules
+            ~/.cache/ms-playwright
           key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Install NPM dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
         run: pnpm install
 
       - name: Install Playwright Browsers — Chromium
+        if: steps.cache.outputs.cache-hit != 'true'
         run: pnpm exec playwright install chromium --with-deps
+
+      - name: Cache node_modules and playwright browsers
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            node_modules
+            ~/.cache/ms-playwright
+          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
