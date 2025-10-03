@@ -28,7 +28,7 @@ beforeAll(async () => {
 
   await launchBrowser();
   await launchServer();
-});
+}, 60000);
 
 afterAll(async () => {
   msw.close();
