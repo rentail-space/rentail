@@ -98,6 +98,8 @@ jobs:
 
       - name: Run Tests
         run: pnpm vitest run --reporter verbose
+        env:
+          DEBUG: "server,browser,msw"
 
       - name: Upload Playwright Test Results
         uses: actions/upload-artifact@v4
