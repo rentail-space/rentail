@@ -55,30 +55,17 @@ describe("Authentication", () => {
         await page.press("input[type='text']", "Enter");
         await page.waitForLoadState("networkidle");
 
-        console.log(await page.locator(".chat").last().innerHTML());
-        console.log("[TEST] Waiting for chat to update");
-        while (true) {
-          await page.waitForTimeout(100);
-          const chatCount = await page.locator(".chat").count();
-          console.log("[TEST] Chat count:", chatCount);
-          if (chatCount >= 3) break;
-        }
-        console.log(await page.locator(".chat").last().innerHTML());
-
         await expect(
           page.locator(".chat-bubble").filter({
             hasText: /updated your location to Boston/i,
           }),
         ).toBeVisible();
-        console.log("[TEST] Chat updated");
 
         const chat = await prisma.chat.findFirstOrThrow({
           include: { messages: true, user: true },
           where: { user: { isAnonymous: true } },
         });
         workingMemory = await getWorkingMemory(chat);
-
-        console.log("[TEST] Working memory updated:", workingMemory.location);
       });
 
       it("should have user's new city", async () => {

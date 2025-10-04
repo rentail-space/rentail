@@ -6,7 +6,7 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "build": "prisma generate && react-router build",
+    "build": "prisma generate && react-router build --force",
     "check": "pnpm run lint && pnpm run typecheck",
     "checkly": "pnpx checkly test --update-snapshots --record",
     "clean": "rm -rf node_modules/.vite .react-router build",

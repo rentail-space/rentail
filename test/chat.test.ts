@@ -1,11 +1,13 @@
 import { expect, type Page } from "playwright/test";
-import { afterAll, beforeAll, describe, it } from "vitest";
+import { beforeAll, describe, it } from "vitest";
+import prisma from "~/lib/prisma";
 import { openPage } from "~/test/helpers/launchBrowser";
 
 describe("Chat page", () => {
   let page: Page;
 
   beforeAll(async () => {
+    await prisma.user.deleteMany();
     page = await openPage();
   });
 
@@ -79,9 +81,5 @@ describe("Chat page", () => {
 
     // Should be at or very close to bottom (within 50px tolerance)
     expect(scrollTop + clientHeight).toBeGreaterThan(scrollHeight - 50);
-  });
-
-  afterAll(async () => {
-    if (page) await page.close();
   });
 });

@@ -11,7 +11,7 @@
 
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, test } from "vitest";
-import { openPage, URL } from "~/test/helpers/launchBrowser";
+import { openPage } from "~/test/helpers/launchBrowser";
 
 describe("Blog Post Rendering", () => {
   let page: Page;
@@ -21,7 +21,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("renders blog post with proper title and metadata", async () => {
-    const response = await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
+    const response = await page.goto("/blog/2025-07-19-ultimate-guide");
 
     expect(response?.status(), "should respond with 200").toEqual(200);
 
@@ -37,7 +37,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("renders blog post image with proper attributes", async () => {
-    await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
+    await page.goto("/blog/2025-07-19-ultimate-guide");
 
     // Check if hero image is rendered
     const heroImage = page.locator("figure img");
@@ -51,7 +51,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("renders markdown content with proper formatting", async () => {
-    await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
+    await page.goto("/blog/2025-07-19-ultimate-guide");
 
     // Check for proper heading rendering
     const heading = page.locator("h2").first();
@@ -72,7 +72,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("handles links with proper styling", async () => {
-    await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
+    await page.goto("/blog/2025-07-19-ultimate-guide");
 
     // Check if links are rendered with blue styling
     const links = page.locator("article a");
@@ -84,7 +84,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("renders lists with proper indentation and styling", async () => {
-    await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
+    await page.goto("/blog/2025-07-19-ultimate-guide");
 
     // Check for ordered lists
     const orderedLists = page.locator("article ol");
@@ -106,7 +106,7 @@ describe("Blog Post Rendering", () => {
   });
 
   test("displays blog post with correct layout structure", async () => {
-    await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
+    await page.goto("/blog/2025-07-19-ultimate-guide");
 
     // Check main article structure
     const article = page.locator("article");
@@ -118,14 +118,12 @@ describe("Blog Post Rendering", () => {
   });
 
   test("handles non-existent blog posts with 404", async () => {
-    const response = await page.goto(`${URL}/blog/non-existent-post`);
+    const response = await page.goto("/blog/non-existent-post");
     expect(response?.status()).toEqual(404);
   });
 
   test("renders second blog post correctly", async () => {
-    const response = await page.goto(
-      `${URL}/blog/2025-07-24-specialty-leasing`,
-    );
+    const response = await page.goto("/blog/2025-07-24-specialty-leasing");
 
     expect(response?.status(), "should respond with 200").toEqual(200);
 
@@ -145,7 +143,7 @@ describe("Blog Post Rendering", () => {
     // Set consistent viewport for screenshots
     await page.setViewportSize({ width: 1280, height: 720 });
 
-    await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
+    await page.goto("/blog/2025-07-19-ultimate-guide");
 
     // Wait for any images to load
     await page.waitForLoadState("networkidle");
@@ -158,7 +156,7 @@ describe("Blog Post Rendering", () => {
     // Set mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
 
-    await page.goto(`${URL}/blog/2025-07-19-ultimate-guide`);
+    await page.goto("/blog/2025-07-19-ultimate-guide");
     await page.waitForLoadState("networkidle");
 
     // Check that content is still visible and properly formatted

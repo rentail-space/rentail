@@ -3,11 +3,7 @@
 import * as Sentry from "@sentry/react-router";
 import { afterAll, beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
-import {
-  cleanupServer,
-  launchBrowser,
-  launchServer,
-} from "~/test/helpers/launchBrowser";
+import { launchBrowser, launchServer } from "~/test/helpers/launchBrowser";
 import msw from "~/test/mocks/msw.server";
 
 Sentry.init({
@@ -32,5 +28,4 @@ beforeAll(async () => {
 
 afterAll(async () => {
   msw.close();
-  await cleanupServer();
 });

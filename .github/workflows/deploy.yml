@@ -90,9 +90,6 @@ jobs:
       - name: Check secrets
         run: pnpm secretlint "**/*" --format stylish
 
-      - name: Clear Vite cache
-        run: pnpm clean
-
       - name: Generate React Router types
         run: pnpm react-router typegen
 

@@ -1,8 +1,6 @@
-import { type ChildProcess, spawn } from "node:child_process";
-import { existsSync, unlinkSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { URL as URLString } from "node:url";
+import { Worker } from "node:worker_threads";
 import { invariant, withTimeout } from "es-toolkit";
 import {
   type BrowserContext,
@@ -12,20 +10,12 @@ import {
 } from "playwright";
 import "~/test/helpers/toMatchScreenshot";
 import debug from "debug";
-import { afterAll } from "vitest";
 
 const port = 9222;
-const lockFile = join(tmpdir(), `rentail-server-${port}.lock`);
-
 export const URL = `http://localhost:${port}`;
 
-let context: BrowserContext;
-let server: ChildProcess;
-
-afterAll(async () => {
-  if (context) await context.close();
-  if (server) server.kill("SIGTERM");
-});
+let context: BrowserContext | undefined;
+let serverWorker: Worker | undefined;
 
 /**
  * Open a new page in the browser.
@@ -34,7 +24,7 @@ afterAll(async () => {
  */
 export async function openPage(): Promise<Page> {
   await launchServer();
-  await launchBrowser();
+  const context = await launchBrowser();
   const page = await context.newPage();
   page.route("**", (route) => blockBrowserRequest(route));
   return page;
@@ -90,157 +80,62 @@ export async function launchBrowser(): Promise<BrowserContext> {
 /**
  * Launch a new server instance.
  *
- * @returns The server process.
+ * @returns The server worker.
  */
-export async function launchServer(): Promise<ChildProcess> {
-  if (server) return server;
+export async function launchServer(): Promise<void> {
+  if (serverWorker) return;
 
   const logging = debug("server").enabled;
-  if (logging) console.info("[TEST] launching server");
+  if (logging) console.info("[SERVER] launching server");
 
-  // Check if lock file exists and server is running
-  if (existsSync(lockFile)) {
-    if (logging)
-      console.debug(
-        "[TEST] lockFile exists, checking server health\n\t%s",
-        lockFile,
-      );
-
-    if (await checkServerHealth())
-      throw new Error("[TEST] server is already running");
-
-    // Clean up stale lock files
-    try {
-      if (logging)
-        console.debug("[TEST] cleaning up stale lock file\n\t%s", lockFile);
-      unlinkSync(lockFile);
-    } catch (error) {
-      console.error("[TEST] error cleaning up lock file\n\t%s", error);
-    }
-  }
-
-  // Start new server instance in test mode
-  server = spawn("react-router", ["dev", "--port", port.toString()], {
-    detached: true,
-    stdio: ["pipe", "pipe", "pipe"],
+  // Start server as Worker thread
+  serverWorker = new Worker(join(__dirname, "serverWorker.ts"), {
+    workerData: { port },
     env: {
       ...process.env,
-      NODE_ENV: "test",
     },
   });
 
-  process.on("exit", () => {
-    if (logging) console.debug("[TEST] server process exited, killing server");
-    unlinkSync(lockFile);
-    server.kill("SIGTERM");
-  });
-
-  // Create lock file
-  invariant(server.pid, "Server process ID is not available");
-  writeFileSync(lockFile, server.pid.toString());
-
-  // Set up logging if requested
-  if (logging && server.stdout && server.stderr) {
-    server.stdout.on("data", (stream: Buffer) =>
-      process.stdout.write(`\x1b[92m${stream}\x1b[0m`),
-    );
-    server.stderr.on("data", (stream: Buffer) =>
-      process.stderr.write(`\x1b[91m${stream}\x1b[0m`),
-    );
-  }
-
-  // Handle server errors
-  server.once("error", (error) => {
-    try {
-      unlinkSync(lockFile);
-      server.kill("SIGTERM");
-    } catch (cleanupError) {
-      console.error("[TEST] error cleaning up lock file\n\t%s", cleanupError);
-    }
-    throw error;
-  });
-
-  // Poll server health instead of waiting for stdout
-  // This is more reliable across different environments
-  if (logging) console.info("[TEST] waiting for server to be ready...");
-
-  return await withTimeout(
+  // Listen for worker messages
+  await withTimeout(
     async () => {
-      while (true) {
-        if (await checkServerHealth()) {
-          if (logging) console.info("[TEST] server is ready");
-          return server;
-        }
-        await new Promise((resolve) => setTimeout(resolve, 100));
-      }
+      return new Promise<void>((resolve, reject) => {
+        invariant(serverWorker, "Server worker is not defined");
+        serverWorker.on("message", (msg: { type: string; error?: string }) => {
+          if (msg.type === "ready") {
+            if (logging) console.info("[SERVER] server is ready");
+            resolve();
+          } else if (msg.type === "error")
+            reject(new Error(`Worker error: ${msg.error}`));
+        });
+
+        serverWorker.on("error", (error) => {
+          if (logging) console.error("[SERVER] worker error:", error);
+          reject(error);
+        });
+
+        serverWorker.on("exit", (code) => {
+          if (code !== 0)
+            reject(new Error(`Worker stopped with exit code ${code}`));
+        });
+      });
     },
-    30000, // 30 seconds timeout for server startup
+    10000, // 10 seconds timeout for server startup
   );
-}
-
-/**
- * Check if the server is healthy.
- * @returns True if the server is running and responding to requests.
- */
-async function checkServerHealth(): Promise<boolean> {
-  try {
-    const response = await fetch(URL);
-    return response.ok;
-  } catch {
-    return false;
-  }
-}
-
-/**
- * Cleanup server and browser resources when all tests finish.
- */
-export async function cleanupServer(): Promise<void> {
-  const logging = debug("server").enabled;
-  if (logging) console.info("[TEST] cleaning up server and browser");
-
-  // Close browser
-  if (context) {
-    await context.close();
-    // @ts-expect-error - Resetting to undefined
-    context = undefined;
-  }
-
-  // Kill server
-  if (server) {
-    if (logging) console.info("[TEST] killing server process");
-    server.kill("SIGTERM");
-    // @ts-expect-error - Resetting to undefined
-    server = undefined;
-  }
-
-  // Remove lock file
-  if (existsSync(lockFile)) {
-    try {
-      unlinkSync(lockFile);
-      if (logging) console.info("[TEST] removed lock file");
-    } catch (error) {
-      console.error("[TEST] error removing lock file:", error);
-    }
-  }
 }
 
 async function blockBrowserRequest(route: Route): Promise<void> {
   const { hostname } = new URLString(route.request().url());
-  const url = route.request().url();
   const resourceType = route.request().resourceType();
 
-  if (url.startsWith("http://localhost:")) {
-    if (process.env.CI || debug("browser").enabled) {
-      console.log(`[BROWSER] allowing ${resourceType}: ${url}`);
-    }
+  if (hostname === "localhost" || hostname === "127.0.0.1") {
     await route.continue();
   } else {
     // NOTE: According to Claud, non-blocked requests can interfere with cookie
     // handling because Playwright waits for all requests to complete before
     // considering a navigation finished, so we must abort blocked requests.
-    if (process.env.CI || debug("browser").enabled) {
+    if (process.env.CI || debug("browser").enabled)
       console.warn(`[BROWSER] blocking ${resourceType}: ${hostname}`);
-    }
     await route.abort();
   }
 }

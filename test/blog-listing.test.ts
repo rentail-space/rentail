@@ -9,7 +9,7 @@
 
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import { openPage, URL } from "~/test/helpers/launchBrowser";
+import { openPage } from "~/test/helpers/launchBrowser";
 
 describe("Blog Listing", () => {
   let page: Page;
@@ -19,7 +19,7 @@ describe("Blog Listing", () => {
   });
 
   it("displays blog posts on home page", async () => {
-    const response = await page.goto(URL);
+    const response = await page.goto("/");
 
     expect(response?.status(), "should respond with 200").toEqual(200);
 
@@ -34,7 +34,7 @@ describe("Blog Listing", () => {
   });
 
   it("blog post links have proper titles and excerpts", async () => {
-    await page.goto(URL);
+    await page.goto("/");
 
     // Find blog post links
     const blogLinks = page.locator('a[href^="/blog/"]');
@@ -60,7 +60,7 @@ describe("Blog Listing", () => {
   });
 
   it("navigates to blog post when clicking link", async () => {
-    await page.goto(URL);
+    await page.goto("/");
 
     // Find first blog post link
     const firstBlogLink = page.locator('a[href^="/blog/"]').first();
@@ -88,7 +88,7 @@ describe("Blog Listing", () => {
   });
 
   it("blog links have hover styling", async () => {
-    await page.goto(URL);
+    await page.goto("/");
 
     // Check blog post links for hover classes
     const blogLinks = page.locator('a[href^="/blog/"]');
@@ -101,7 +101,7 @@ describe("Blog Listing", () => {
   });
 
   it("displays multiple blog posts if available", async () => {
-    await page.goto(URL);
+    await page.goto("/");
 
     // Count blog post links
     const blogLinks = page.locator('a[href^="/blog/"]');
@@ -121,11 +121,10 @@ describe("Blog Listing", () => {
   });
 
   it("blog listing visual regression test", async () => {
-    await page.goto(URL);
     // Set consistent viewport for screenshots
     await page.setViewportSize({ width: 1280, height: 720 });
 
-    await page.goto(URL);
+    await page.goto("/");
     await page.waitForLoadState("networkidle");
 
     // Scroll to blog section if it exists
