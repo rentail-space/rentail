@@ -62,7 +62,7 @@ export async function action({ request }: Route.ActionArgs) {
     role: message.role,
   }));
 
-  const result = await agent.streamVNext(initialMessages, {
+  const result = await agent.stream(initialMessages, {
     abortSignal,
     format: "aisdk",
     memory: {
