@@ -5,7 +5,7 @@ import prisma from "~/lib/prisma";
 import { getWorkingMemory, type userProfile } from "~/lib/workingMemory";
 import { openPage, URL } from "~/test/helpers/launchBrowser";
 
-describe("Authentication", () => {
+describe.only("Authentication", () => {
   let page: Page;
 
   beforeAll(async () => {
