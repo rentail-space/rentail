@@ -61,32 +61,20 @@ describe("Authentication", () => {
         await page.press("input[type='text']", "Enter");
         await page.waitForLoadState("networkidle");
 
-        let attempts = 0;
-        while (!workingMemory) {
-          await delay(100);
-          attempts++;
-          const chat = await prisma.chat.findFirstOrThrow({
-            include: { messages: true, user: true },
-            where: { user: { isAnonymous: true } },
-          });
-          console.log(
-            `[TEST] Attempt ${attempts}: chat.messages.length = ${chat.messages.length}`,
-          );
-          if (chat.messages.length === 3) {
-            console.log("[TEST] Found 3 messages, getting working memory");
-            workingMemory = await getWorkingMemory(chat);
-          }
-          if (attempts > 100) {
-            console.error(
-              "[TEST] Timeout: Waited 10 seconds but only got",
-              chat.messages.length,
-              "messages",
-            );
-            throw new Error(
-              `Timeout: Expected 3 messages but got ${chat.messages.length}`,
-            );
-          }
-        }
+        await expect(
+          page.locator(".chat-bubble").filter({
+            hasText: /updated your location to Boston/i,
+          }),
+        ).toBeVisible();
+
+        const chatCount = await page.locator(".chat").count();
+        expect(chatCount).toBeGreaterThanOrEqual(3); // welcome + user + response
+
+        const chat = await prisma.chat.findFirstOrThrow({
+          include: { messages: true, user: true },
+          where: { user: { isAnonymous: true } },
+        });
+        workingMemory = await getWorkingMemory(chat);
 
         console.log("[TEST] Working memory updated:", workingMemory.location);
       });
