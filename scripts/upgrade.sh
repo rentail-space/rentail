@@ -3,7 +3,6 @@ set -eo pipefail
 
 echo -e "\033[32m  Upgrading dependencies …\033[0m"
 npm-check-updates --configFileName .ncurc.json --errorLevel 2 || echo "Dependencies to update"
-git add package.json pnpm-lock.yaml
 
 echo -e "\033[32m  Installing Playwright browsers …\033[0m"
 pnpm dlx playwright install --with-deps chromium
@@ -16,6 +15,7 @@ pnpm prune
 
 echo -e "\033[32m  Security audit …\033[0m"
 pnpm audit --fix
+git add package.json pnpm-lock.yaml
 
 echo -e "\033[32m  Running tests …\033[0m"
 pnpm run test
