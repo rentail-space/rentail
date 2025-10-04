@@ -1,5 +1,5 @@
 import { invariant } from "es-toolkit";
-import { HttpResponse, http } from "msw";
+import { HttpResponse, http, passthrough } from "msw";
 import { findMockResponse } from "~/test/mocks/anthropic.mock";
 
 export const handlers = [
@@ -7,12 +7,10 @@ export const handlers = [
   http.post(
     "https://api.anthropic.com/v1/messages",
     async ({ request }: { request: Request }) => {
-      console.log("**** request", await request.clone().text());
       try {
         const body = (await request.json()) as Parameters<
           typeof findMockResponse
         >[0];
-
         return new HttpResponse(findMockResponse(body), {
           headers: { "Content-Type": "text/event-stream" },
         });
@@ -49,20 +47,27 @@ export const handlers = [
 
   // Make sure we're not sending emails in tests
   http.post("https://api.resend.com/emails", () =>
-    HttpResponse.json({ status: 200 }),
+    HttpResponse.text("OK", { status: 200 }),
   ),
 
   // Allow all localhost requests to pass through (for dev server communication)
-  http.all(/^https?:\/\/localhost:\d+/, () => {
-    return; // Pass through to real server
-  }),
+  http.all(
+    ({ request }: { request: Request }) =>
+      new URL(request.url).hostname === "localhost",
+    () => passthrough(), // Pass through to real server
+  ),
 
   // Block any other external HTTP services not explicitly mocked
-  http.all("https://*/*", ({ request }: { request: Request }) => {
-    console.warn(`[MSW] Blocked ${request.method} request to: ${request.url}`);
-    return HttpResponse.json(
-      { error: "External HTTP requests are not allowed in tests" },
-      { status: 503 },
-    );
-  }),
+  http.all(
+    () => true,
+    ({ request }: { request: Request }) => {
+      console.warn(
+        `[MSW] Blocked ${request.method} request to: ${request.url}`,
+      );
+      return HttpResponse.json(
+        { error: "External HTTP requests are not allowed in tests" },
+        { status: 503 },
+      );
+    },
+  ),
 ];

@@ -60,9 +60,7 @@ describe("Authentication", () => {
         const input = page.locator("input[type='text']").first();
         await input.focus();
         await input.pressSequentially("Actually I'm in Boston");
-        console.log("**** input value", await input.inputValue());
         await input.press("Enter");
-        console.log("**** input value", await input.inputValue());
 
         while (!workingMemory) {
           await delay(100);
@@ -75,7 +73,6 @@ describe("Authentication", () => {
             workingMemory = await getWorkingMemory(chat);
         }
 
-        console.log("**** input value", await input.inputValue());
         console.log("**** workingMemory", workingMemory);
       });
 
