@@ -227,14 +227,20 @@ export async function cleanupServer(): Promise<void> {
 async function blockBrowserRequest(route: Route): Promise<void> {
   const { hostname } = new URLString(route.request().url());
   const url = route.request().url();
+  const resourceType = route.request().resourceType();
+
   if (url.startsWith("http://localhost:")) {
+    if (process.env.CI || debug("browser").enabled) {
+      console.log(`[BROWSER] allowing ${resourceType}: ${url}`);
+    }
     await route.continue();
   } else {
     // NOTE: According to Claud, non-blocked requests can interfere with cookie
     // handling because Playwright waits for all requests to complete before
     // considering a navigation finished, so we must abort blocked requests.
+    if (process.env.CI || debug("browser").enabled) {
+      console.warn(`[BROWSER] blocking ${resourceType}: ${hostname}`);
+    }
     await route.abort();
-    if (debug("browser").enabled)
-      console.warn(`[BROWSER] blocking request to ${hostname}`);
   }
 }
