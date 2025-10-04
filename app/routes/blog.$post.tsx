@@ -6,35 +6,41 @@ import fm from "front-matter";
 import { DateTime } from "luxon";
 import {
   type LoaderFunctionArgs,
+  type MetaArgs,
   type MetaFunction,
   useLoaderData,
 } from "react-router";
 import removeMd from "remove-markdown";
 import { Streamdown } from "streamdown";
 import truncateWords from "~/lib/truncateWords";
+import { validateParam } from "./blog.$post[.]jpg";
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs<{ post: string }>) {
   try {
+    const postName = validateParam(params);
     const post = await readFile(
-      path.join(process.cwd(), "app/data/blog", `${params.post}.md`),
+      path.join(process.cwd(), "app/data/blog", `${postName}.md`),
       "utf8",
     );
     const published = DateTime.fromISO(
-      params.post?.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
+      postName?.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
       { zone: "utc" },
     );
     invariant(
       dayjs().isAfter(published.toJSDate()),
       "Published date is in the future",
     );
-    return { post, slug: params.post };
+    return { post, slug: postName };
   } catch (error) {
     console.error(error);
     throw new Response("Not Found", { status: 404 });
   }
 }
 
-export const meta: MetaFunction<typeof loader> = ({ loaderData, params }) => {
+export const meta: MetaFunction<typeof loader> = ({
+  loaderData,
+  params,
+}: MetaArgs<typeof loader>) => {
   if (!loaderData) return [];
 
   const published = DateTime.fromISO(
