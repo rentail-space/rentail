@@ -62,9 +62,22 @@ describe("Authentication", () => {
         await input.focus();
         console.log("[TEST] Input focused");
         await input.pressSequentially("Actually I'm in Boston");
-        console.log("[TEST] Text entered, pressing Enter");
-        await input.press("Enter");
-        console.log("[TEST] Enter pressed, waiting for messages");
+        console.log("[TEST] Text entered, waiting for input value to sync");
+
+        // Wait for React to sync the state with the DOM
+        await page.waitForFunction(
+          () => {
+            const input = document.querySelector(
+              "input[type='text']",
+            ) as HTMLInputElement;
+            return input?.value === "Actually I'm in Boston";
+          },
+          { timeout: 5000 },
+        );
+
+        console.log("[TEST] Input value synced, clicking send button");
+        await page.getByRole("button", { name: "Send message" }).click();
+        console.log("[TEST] Button clicked, waiting for messages");
 
         let attempts = 0;
         while (!workingMemory) {
