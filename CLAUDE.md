@@ -41,6 +41,8 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - Email verification with Resend, auto sign-in after verification
 - Session cookies with 365-day expiration, 5-minute cache for performance
 - Migration logic in `app/lib/auth.server.ts` handles copying data from anonymous to authenticated users
+- Header component uses `useRouteLoaderData("root")` to access chat/user data from loader (not client-side session hooks)
+- This eliminates "Loading..." flash and hydration issues by using server data
 
 **AI Integration:**
 - Claude 4 via Anthropic AI SDK with streaming responses and thinking tokens
@@ -111,8 +113,15 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Root layout in `app/root.tsx` provides Header and Footer by default
 - Routes can hide layout by exporting `handle = { hideLayout: true }`
 - Root uses `useMatches()` to check route handles and conditionally render layout
-- Currently used by: `/auth`, `/chat`, `/` (home page has custom layout)
+- Currently used by: `/auth`, `/chat` (both render their own Header component)
 - This pattern allows full-page experiences without navigation chrome
+
+**Data Loading Patterns:**
+- Use `useRouteLoaderData("root")` to access root loader data from any component
+- Root loader returns `{ chat, messages }` for authenticated users
+- Header and Chat components use this pattern instead of client-side hooks
+- Benefits: eliminates loading states, prevents hydration mismatches, faster initial render
+- InputForm receives `sendMessage` directly (not wrapped in callback) for clearer data flow
 
 ## Code Style
 
@@ -211,12 +220,18 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 
 **Testing Infrastructure:**
 - Mock server setup with MSW prevents external API calls (`/test/mocks/handlers.ts`)
+- Anthropic API mocked with pattern matching for different user messages (`/test/mocks/anthropic.mock.ts`)
+- Working memory updates triggered by mock tool calls (e.g., Boston location update)
 - Sentry initialized in test mode with console logging only
 - Database reset in beforeAll: `await prisma.user.deleteMany()`
 - Visual regression: `await expect(page).toMatchScreenshot()`
 - Email testing: use `sendEmail()` then `renderLastEmailSent(page)` for visual testing
 - Run individual tests: `npm run test -- <test-pattern>` or `pnpx vitest run <test-pattern>`
+- Simulate slower CI: `SLOW_MO=1000 pnpm test` (adds 1s delay between Playwright actions)
+- Run in headless mode: `CI=true pnpm test`
 - E2E tests use Checkly for production monitoring (`__checks__/` directory)
+- Debug logging: Use `debug` package with namespaces (server, browser, agent, prisma, msw)
+  - Enable with: `DEBUG=server,browser pnpm test` or `DEBUG=* pnpm test`
 
 ## Environment Variables
 
@@ -237,10 +252,13 @@ Optional environment variables:
 - `SENTRY_DSN`: Sentry project DSN for error tracking
 - `SENTRY_AUTH_TOKEN`: Sentry auth token for build-time integration
 - `IPGEOLOCATION_API_KEY`: API key for IP geolocation services
-- `NODE_ENV`: Environment (development/production)
+- `NODE_ENV`: Environment (development/production/test)
 - `SSR_REQUEST_TIMEOUT_MS`: SSR timeout in milliseconds (default: 5000)
 - `METRICS_COLLECTION_INTERVAL_MS`: Metrics collection interval (default: 300000ms / 5 minutes)
 - `SESSION_MAX_AGE_SECONDS`: Session duration in seconds (default: 30 days)
+- `DEBUG`: Enable debug logging (e.g., `DEBUG=server,browser` or `DEBUG=*`)
+- `SLOW_MO`: Slow down Playwright operations in tests (milliseconds, e.g., `SLOW_MO=1000`)
+- `CI`: Set to `true` to run tests in headless mode
 
 ## Project Structure
 
@@ -270,8 +288,14 @@ Optional environment variables:
 - `/build`: Production build output (client/server bundles)
 - `/public`: Static assets (favicon, logos, OG images)
 - `/test`: Test setup and shared utilities
-  - `/helpers/`: Test utilities (launchBrowser, renderEmail, setup)
+  - `/helpers/`: Test utilities
+    - `launchBrowser.ts`: Playwright browser/server management with slowMo support
+    - `renderEmail.ts`: Email rendering helper for visual regression
+    - `setup.ts`: Global test setup (MSW, Sentry, database cleanup)
   - `/mocks/`: MSW handlers for API mocking
+    - `msw.handlers.ts`: HTTP request handlers (Anthropic, Resend, geolocation)
+    - `anthropic.mock.ts`: Pattern-based mock responses with tool call support
+    - `anthropic.stream.ts`: Server-Sent Events streaming for AI responses
 - `/__screenshots__`: Visual regression test screenshots (git-ignored)
 - `/__checks__`: Checkly monitoring test files
 - `.react-router`: Cache directory (can be cleaned with npm run clean)
@@ -279,7 +303,12 @@ Optional environment variables:
 - `checkly.config.ts`: Synthetic monitoring configuration
 - `biome.json`: Linting and formatting rules with import organization and strict style rules
 - `tailwind.config.ts`: Tailwind CSS 4 configuration with DaisyUI plugin
-- `vitest.config.ts`: Test configuration with browser provider and custom matchers
+- `vitest.config.ts`: Test configuration
+  - Uses forks pool (not threads) for better performance
+  - 10s timeout for tests and hooks (fast with mocks)
+  - GitHub Actions reporter for CI, verbose reporter locally
+  - Filters node_modules from stack traces
+  - Bails after 3 failures to save time
 - `mcp.json`: MCP server configuration for Claude Code integration
 - `tsconfig.json`: TypeScript configuration with path aliases (`~/*` → `./app/*`)
 
