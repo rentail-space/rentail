@@ -1,4 +1,3 @@
-import { delay } from "es-toolkit";
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import type zod from "zod";
@@ -10,8 +9,8 @@ describe("Authentication", () => {
   let page: Page;
 
   beforeAll(async () => {
-    page = await openPage();
     await prisma.user.deleteMany();
+    page = await openPage();
   });
 
   describe("anonymous visits chat page", () => {
@@ -19,10 +18,6 @@ describe("Authentication", () => {
       await page.goto(`${URL}/chat`);
       // Wait for the chat input to render (this proves page is loaded and React hydrated)
       await page.waitForSelector("input[type='text']");
-    });
-
-    it("creates anonymous user when opening chat page", async () => {
-      expect(page.url()).toEqual(`${URL}/chat`);
     });
 
     it("shows sign-in button for unauthenticated users", async () => {

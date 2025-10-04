@@ -1,7 +1,7 @@
 // This file contains setup code that will run before all tests
 
 import * as Sentry from "@sentry/react-router";
-import { afterAll, beforeAll, beforeEach } from "vitest";
+import { afterAll, beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
 import {
   cleanupServer,
@@ -23,15 +23,12 @@ Sentry.init({
 beforeAll(async () => {
   // Start MSW server before all tests
   msw.listen({ onUnhandledRequest: "error" });
+  // Clean up database
+  await prisma.user.deleteMany({});
 
   await launchBrowser();
   await launchServer();
 }, 60000);
-
-beforeEach(async () => {
-  // Clean up database
-  await prisma.user.deleteMany({});
-});
 
 afterAll(async () => {
   msw.close();
