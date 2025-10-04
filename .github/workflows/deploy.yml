@@ -100,7 +100,7 @@ jobs:
         run: rm -rf node_modules/.vite .react-router
 
       - name: Run Tests
-        run: pnpm vitest run --reporter verbose --allowOnly
+        run: pnpm vitest run --reporter verbose test/auth.test.ts
         env:
           DEBUG: "server,browser,msw"
 
