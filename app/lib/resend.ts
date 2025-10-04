@@ -18,6 +18,7 @@ export async function sendEmail({
   component: ({ subject }: { subject: string }) => JSX.Element;
   subject: string;
 }) {
+  lastEmail = null;
   try {
     const html = await pretty(await render(component({ subject })));
     lastEmail = html;
@@ -32,7 +33,6 @@ export async function sendEmail({
 
     console.info("[EMAIL] %s sent to %s", subject, email);
   } catch (error) {
-    lastEmail = null;
     console.error("[EMAIL] Error sending %s email: %s", subject, error);
     captureException(error, { extra: { email } });
   }

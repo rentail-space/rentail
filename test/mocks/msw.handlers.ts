@@ -1,5 +1,6 @@
 import { invariant } from "es-toolkit";
 import { HttpResponse, http, passthrough } from "msw";
+import { ulid } from "ulid";
 import { findMockResponse } from "~/test/mocks/anthropic.mock";
 
 export const handlers = [
@@ -47,7 +48,7 @@ export const handlers = [
 
   // Make sure we're not sending emails in tests
   http.post("https://api.resend.com/emails", () =>
-    HttpResponse.text("OK", { status: 200 }),
+    HttpResponse.json({ id: ulid() }),
   ),
 
   // Allow all localhost requests to pass through (for dev server communication)
