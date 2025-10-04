@@ -57,23 +57,43 @@ describe("Authentication", () => {
       let workingMemory: zod.infer<typeof userProfile>;
 
       beforeAll(async () => {
+        console.log("[TEST] Starting location update test");
         const input = page.locator("input[type='text']").first();
         await input.focus();
+        console.log("[TEST] Input focused");
         await input.pressSequentially("Actually I'm in Boston");
+        console.log("[TEST] Text entered, pressing Enter");
         await input.press("Enter");
+        console.log("[TEST] Enter pressed, waiting for messages");
 
+        let attempts = 0;
         while (!workingMemory) {
           await delay(100);
+          attempts++;
           const chat = await prisma.chat.findFirstOrThrow({
             include: { messages: true, user: true },
             where: { user: { isAnonymous: true } },
           });
-          console.log("**** chat.messages.length", chat.messages.length);
-          if (chat.messages.length === 3)
+          console.log(
+            `[TEST] Attempt ${attempts}: chat.messages.length = ${chat.messages.length}`,
+          );
+          if (chat.messages.length === 3) {
+            console.log("[TEST] Found 3 messages, getting working memory");
             workingMemory = await getWorkingMemory(chat);
+          }
+          if (attempts > 100) {
+            console.error(
+              "[TEST] Timeout: Waited 10 seconds but only got",
+              chat.messages.length,
+              "messages",
+            );
+            throw new Error(
+              `Timeout: Expected 3 messages but got ${chat.messages.length}`,
+            );
+          }
         }
 
-        console.log("**** workingMemory", workingMemory);
+        console.log("[TEST] Working memory updated:", workingMemory.location);
       });
 
       it("should have user's new city", async () => {

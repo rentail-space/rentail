@@ -41,24 +41,25 @@ export async function launchBrowser(): Promise<BrowserContext> {
       // Set SLOW_MO=1000 to add 1 second delay between each operation
       slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
     });
-    if (debug("browser").enabled) {
+    // Always log browser console in CI, or when DEBUG=browser is set
+    if (process.env.CI || debug("browser").enabled) {
       context.on("console", (message) => {
-        message.type();
+        const prefix = "[BROWSER]";
         switch (message.type()) {
           case "info":
-            console.info(message.text());
+            console.info(prefix, message.text());
             break;
           case "warning":
-            console.warn(message.text());
+            console.warn(prefix, message.text());
             break;
           case "debug":
-            console.debug(message.text());
+            console.debug(prefix, message.text());
             break;
           case "error":
-            console.error(message.text());
+            console.error(prefix, message.text());
             break;
           case "log":
-            console.log(message.text());
+            console.log(prefix, message.text());
             break;
         }
       });
