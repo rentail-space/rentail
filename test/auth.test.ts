@@ -56,14 +56,18 @@ describe("Authentication", () => {
         await page.press("input[type='text']", "Enter");
         await page.waitForLoadState("networkidle");
 
+        while (true) {
+          await page.waitForTimeout(100);
+          const chatCount = await page.locator(".chat").count();
+          if (chatCount >= 3) break;
+        }
+        console.log(await page.locator(".chat").last().innerHTML());
+
         await expect(
           page.locator(".chat-bubble").filter({
             hasText: /updated your location to Boston/i,
           }),
         ).toBeVisible();
-
-        const chatCount = await page.locator(".chat").count();
-        expect(chatCount).toBeGreaterThanOrEqual(3); // welcome + user + response
 
         const chat = await prisma.chat.findFirstOrThrow({
           include: { messages: true, user: true },
