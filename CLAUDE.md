@@ -10,11 +10,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Build: `npm run build` (prisma generate + react-router build for production)
 - Start: `npm run start` (starts production server)
 - Type check: `npm run typecheck` (includes react-router typegen)
-- Test: `npm run test` (lint + db push + prisma generate + typecheck + vitest with verbose reporter)
+- Test: `npm run test` (clears Vite cache + lint + db push + prisma generate + typecheck + vitest with verbose reporter)
 - Lint: `npm run lint` (secretlint + Biome linter)
 - Format: `pnpm run format --write` (Biome formatter)
 - Check: `npm run check` (runs both lint and typecheck)
-- Clean: `npm run clean` (removes .react-router cache and build directory)
+- Clean: `npm run clean` (removes Vite cache, .react-router cache, and build directory)
 - Monitoring: `npm run checkly` (runs Checkly monitoring tests)
 
 ## Architecture
