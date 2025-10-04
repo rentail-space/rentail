@@ -57,27 +57,9 @@ describe("Authentication", () => {
       let workingMemory: zod.infer<typeof userProfile>;
 
       beforeAll(async () => {
-        console.log("[TEST] Starting location update test");
-        const input = page.locator("input[type='text']").first();
-        await input.focus();
-        console.log("[TEST] Input focused");
-        await input.pressSequentially("Actually I'm in Boston");
-        console.log("[TEST] Text entered, waiting for input value to sync");
-
-        // Wait for React to sync the state with the DOM
-        await page.waitForFunction(
-          () => {
-            const input = document.querySelector(
-              "input[type='text']",
-            ) as HTMLInputElement;
-            return input?.value === "Actually I'm in Boston";
-          },
-          { timeout: 5000 },
-        );
-
-        console.log("[TEST] Input value synced, clicking send button");
-        await page.getByRole("button", { name: "Send message" }).click();
-        console.log("[TEST] Button clicked, waiting for messages");
+        await page.fill("input[type='text']", "Actually I'm in Boston");
+        await page.press("input[type='text']", "Enter");
+        await page.waitForLoadState("networkidle");
 
         let attempts = 0;
         while (!workingMemory) {
