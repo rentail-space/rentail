@@ -55,6 +55,11 @@ export async function launchBrowser(): Promise<BrowserContext> {
       // Set SLOW_MO=1000 to add 1 second delay between each operation
       slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
     });
+
+    // Set navigation timeout to 8s (less than 10s hook timeout)
+    // This ensures Playwright fails first with a useful error message
+    context.setDefaultNavigationTimeout(8000);
+
     // Always log browser console in CI, or when DEBUG=browser is set
     if (process.env.CI || debug("browser").enabled) {
       context.on("console", (message) => {

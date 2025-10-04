@@ -15,11 +15,18 @@ describe("Authentication", () => {
 
   describe("anonymous visits chat page", () => {
     beforeAll(async () => {
-      const response = await page.goto("/chat", { waitUntil: "load" });
+      const response = await page.goto("/chat");
       expect(response?.status(), "should respond with 200").toEqual(200);
 
+      // Debug: check what's actually rendered
+      if (process.env.CI) {
+        console.log("[TEST] Page title:", await page.title());
+        console.log("[TEST] Page HTML length:", (await page.content()).length);
+        await page.screenshot({ path: "test-chat-page.png" });
+      }
+
       // Wait for the chat input to render (this proves page is loaded and React hydrated)
-      await page.waitForSelector("input[type='text']");
+      await page.waitForSelector("input[type='text']", { timeout: 8000 });
     });
 
     it("shows sign-in button for unauthenticated users", async () => {
