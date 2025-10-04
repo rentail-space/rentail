@@ -3,7 +3,7 @@ import { afterAll, beforeAll, describe, it } from "vitest";
 import type zod from "zod";
 import prisma from "~/lib/prisma";
 import { getWorkingMemory, type userProfile } from "~/lib/workingMemory";
-import { openPage, URL } from "~/test/helpers/launchBrowser";
+import { openPage } from "~/test/helpers/launchBrowser";
 
 describe("Authentication", () => {
   let page: Page;
@@ -15,7 +15,9 @@ describe("Authentication", () => {
 
   describe("anonymous visits chat page", () => {
     beforeAll(async () => {
-      await page.goto(`${URL}/chat`);
+      const response = await page.goto("/chat", { waitUntil: "load" });
+      expect(response?.status(), "should respond with 200").toEqual(200);
+
       // Wait for the chat input to render (this proves page is loaded and React hydrated)
       await page.waitForSelector("input[type='text']");
     });
@@ -56,9 +58,12 @@ describe("Authentication", () => {
         await page.press("input[type='text']", "Enter");
         await page.waitForLoadState("networkidle");
 
+        console.log(await page.locator(".chat").last().innerHTML());
+        console.log("[TEST] Waiting for chat to update");
         while (true) {
           await page.waitForTimeout(100);
           const chatCount = await page.locator(".chat").count();
+          console.log("[TEST] Chat count:", chatCount);
           if (chatCount >= 3) break;
         }
         console.log(await page.locator(".chat").last().innerHTML());
@@ -68,6 +73,7 @@ describe("Authentication", () => {
             hasText: /updated your location to Boston/i,
           }),
         ).toBeVisible();
+        console.log("[TEST] Chat updated");
 
         const chat = await prisma.chat.findFirstOrThrow({
           include: { messages: true, user: true },
@@ -105,7 +111,7 @@ describe("Authentication", () => {
       describe("visits sign-in page", () => {
         beforeAll(async () => {
           await page.getByRole("button", { name: "Sign In" }).click();
-          await page.waitForURL(`${URL}/auth`, { waitUntil: "load" });
+          await page.waitForURL("/auth", { waitUntil: "load" });
         });
 
         it("shows sign-in page", async () => {
@@ -193,7 +199,7 @@ describe("Authentication", () => {
               await page
                 .getByRole("button", { name: "Create Account" })
                 .click();
-              await page.waitForURL(`${URL}/chat`, { waitUntil: "load" });
+              await page.waitForURL("/chat", { waitUntil: "load" });
             });
 
             it("redirects to chat page after successful sign-up", async () => {

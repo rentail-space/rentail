@@ -9,7 +9,7 @@
     "build": "prisma generate && react-router build",
     "check": "pnpm run lint && pnpm run typecheck",
     "checkly": "pnpx checkly test --update-snapshots --record",
-    "clean": "rm -rf .react-router build",
+    "clean": "rm -rf node_modules/.vite .react-router build",
     "dev": "react-router dev",
     "format": "biome format --write",
     "lint": "secretlint **/* --format stylish && biome lint",

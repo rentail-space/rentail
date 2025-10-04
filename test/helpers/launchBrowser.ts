@@ -28,6 +28,19 @@ afterAll(async () => {
 });
 
 /**
+ * Open a new page in the browser.
+ *
+ * @returns The page.
+ */
+export async function openPage(): Promise<Page> {
+  await launchServer();
+  await launchBrowser();
+  const page = await context.newPage();
+  page.route("**", (route) => blockBrowserRequest(route));
+  return page;
+}
+
+/**
  * Launch a new browser instance and return the context.
  *
  * @returns The browser context.
@@ -36,6 +49,7 @@ export async function launchBrowser(): Promise<BrowserContext> {
   const headless = process.env.CI ? true : !debug("browser").enabled;
   if (!context) {
     context = await chromium.launchPersistentContext("test/context", {
+      baseURL: URL,
       headless,
       // Slow down all operations to simulate slower CI environment
       // Set SLOW_MO=1000 to add 1 second delay between each operation
@@ -66,19 +80,6 @@ export async function launchBrowser(): Promise<BrowserContext> {
     }
   }
   return context;
-}
-
-/**
- * Open a new page in the browser.
- *
- * @returns The page.
- */
-export async function openPage(): Promise<Page> {
-  await launchServer();
-  await launchBrowser();
-  const page = await context.newPage();
-  page.route("**", (route) => blockBrowserRequest(route));
-  return page;
 }
 
 /**

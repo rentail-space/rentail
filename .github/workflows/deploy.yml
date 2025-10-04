@@ -90,19 +90,19 @@ jobs:
       - name: Check secrets
         run: pnpm secretlint "**/*" --format stylish
 
+      - name: Clear Vite cache
+        run: pnpm clean
+
       - name: Generate React Router types
         run: pnpm react-router typegen
 
       - name: Check types
         uses: iCrawl/action-tsc@v1
 
-      - name: Clear Vite cache
-        run: rm -rf node_modules/.vite .react-router
-
       - name: Run Tests
         run: pnpm vitest run --reporter verbose test/auth.test.ts
         env:
-          DEBUG: "server,browser,msw"
+          DEBUG: "server"
 
       - name: Upload Playwright Test Results
         uses: actions/upload-artifact@v4

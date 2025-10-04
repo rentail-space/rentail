@@ -1,6 +1,6 @@
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import { openPage, URL } from "~/test/helpers/launchBrowser";
+import { openPage } from "~/test/helpers/launchBrowser";
 
 describe("Chat page", () => {
   let page: Page;
@@ -10,7 +10,7 @@ describe("Chat page", () => {
   });
 
   it("renders chat interface with welcome message", async () => {
-    const response = await page.goto(`${URL}/chat`);
+    const response = await page.goto("/chat", { waitUntil: "load" });
     expect(response?.status(), "should respond with 200").toEqual(200);
 
     // Check that the chat interface is rendered
@@ -29,16 +29,16 @@ describe("Chat page", () => {
 
   it("handles initial query parameter", async () => {
     const testQuery = "Do you have any locations available in downtown areas?";
-    await page.goto(`${URL}/chat?q=${encodeURIComponent(testQuery)}`);
-    await page.waitForLoadState("networkidle");
+    await page.goto(`/chat?q=${encodeURIComponent(testQuery)}`, {
+      waitUntil: "load",
+    });
 
     // Check that user message appears in chat
     await expect(page.locator("input[type='text']")).toHaveValue(testQuery);
   });
 
   it("sends user message and receives server response", async () => {
-    await page.goto(`${URL}/chat`);
-    await page.waitForLoadState("networkidle");
+    await page.goto("/chat", { waitUntil: "load" });
 
     const testMessage =
       "looking for a pop-up retail space for my clothing boutique";
