@@ -6,7 +6,7 @@ import { last } from "es-toolkit";
 import { useQueryState } from "nuqs";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
-import { useMatches } from "react-router";
+import { useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
@@ -17,15 +17,17 @@ export const handle = { hideLayout: true };
 
 export default function Chat() {
   const [query, setQuery] = useQueryState("q");
-  const { chat, messages: initialMessages } = useMatches()[0].loaderData as {
+  const data = useRouteLoaderData<{
     chat: ChatGetPayload<{ include: { user: true } }>;
     messages: MastraMessageV2[];
-  };
+  }>("root");
+  const chat = data?.chat;
+  const initialMessages = data?.messages;
   const { error, messages, sendMessage, status, stop } = useChat<
     UIMessage<{ isAborted?: boolean }, { text: string }, UITools>
   >({
-    id: chat.id,
-    messages: initialMessages.map((message) => ({
+    id: chat?.id,
+    messages: initialMessages?.map((message) => ({
       id: message.id,
       parts: message.content.parts.map((part) => ({
         text: "text" in part ? part.text : "",
@@ -57,7 +59,7 @@ export default function Chat() {
     });
 
     // Send Redis stop signal for cross-request coordination
-    await fetch(`/api/chat/${chat.id}/stop`, { method: "POST" }).catch(
+    await fetch(`/api/chat/${chat?.id}/stop`, { method: "POST" }).catch(
       (error) => captureException(error, { extra: { chat } }),
     );
     await stop(); // Stop the AI SDK stream

@@ -1,6 +1,6 @@
 import type { ChatGetPayload } from "prisma/generated/models";
 import { useEffect, useRef, useState } from "react";
-import { Link, useMatches } from "react-router";
+import { Link, useRouteLoaderData } from "react-router";
 import authClient from "~/lib/auth.client";
 
 export default function Header() {
@@ -16,9 +16,11 @@ export default function Header() {
 }
 
 function UserMenu() {
-  const { chat } = useMatches()[0].loaderData as {
+  const data = useRouteLoaderData<{
     chat: ChatGetPayload<{ include: { user: true } }>;
-  };
+  }>("root");
+  const chat = data?.chat;
+  const user = chat?.user;
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -40,7 +42,7 @@ function UserMenu() {
   }, [isOpen]);
 
   // Show sign-in link for non-authenticated users
-  return chat?.user && !chat.user.isAnonymous ? (
+  return user && !user.isAnonymous ? (
     <DropdownMenu chat={chat} />
   ) : (
     <SignInButton />
