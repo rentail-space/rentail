@@ -7,8 +7,9 @@
  * - Navigation to individual posts
  */
 
+import { delay } from "es-toolkit";
 import { expect, type Page } from "playwright/test";
-import { beforeAll, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Blog Listing", () => {
@@ -51,32 +52,6 @@ describe("Blog Listing", () => {
       expect(excerptText).toBeDefined();
       expect(excerptText?.length).toBeGreaterThan(0);
     }
-  });
-
-  it("navigates to blog post when clicking link", async () => {
-    // Find first blog post link
-    const firstBlogLink = page.locator('a[href^="/blog/"]').first();
-    await expect(firstBlogLink).toBeVisible();
-
-    // Get the href to verify navigation
-    const href = await firstBlogLink.getAttribute("href");
-    expect(href).toMatch(/^\/blog\/.+/);
-
-    // Click the link
-    await firstBlogLink.click();
-
-    // Wait for navigation to complete
-    await page.waitForURL(/.*\/blog\/.*/, { timeout: 10000 });
-
-    // Verify we're on a blog post page
-    expect(page.url()).toContain("/blog/");
-
-    // Verify blog post content is loaded
-    const article = page.locator("article");
-    await expect(article).toBeVisible();
-
-    const title = page.locator("article h1");
-    await expect(title).toBeVisible();
   });
 
   it("blog links have hover styling", async () => {
@@ -122,5 +97,32 @@ describe("Blog Listing", () => {
 
     // Take screenshot for visual regression testing of the blog section
     await expect(blogSection).toMatchScreenshot();
+  });
+
+  describe("clicks blog post link", () => {
+    beforeAll(async () => {
+      const firstBlogLink = page.locator('a[href^="/blog/"]').first();
+      await expect(firstBlogLink).toBeVisible();
+      await firstBlogLink.click();
+    });
+
+    it("navigates to blog post when clicking link", async () => {
+      // Wait for navigation to complete
+      await page.waitForURL(/.*\/blog\/.*/, { timeout: 10000 });
+
+      // Verify we're on a blog post page
+      expect(page.url()).toContain("/blog/");
+
+      // Verify blog post content is loaded
+      const article = page.locator("article");
+      await expect(article).toBeVisible();
+
+      const title = page.locator("article h1");
+      await expect(title).toBeVisible();
+    });
+
+    afterAll(async () => {
+      await delay(10000);
+    });
   });
 });

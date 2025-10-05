@@ -250,30 +250,9 @@ function getComponents({
   >;
 } {
   return {
-    ol: ({ children, className, ...props }) => (
-      <ol className={"ml-4 list-outside list-decimal"} {...props}>
-        {children}
-      </ol>
-    ),
-    li: ({ children, className, ...props }) => (
-      <li className={"py-1"} {...props}>
-        {children}
-      </li>
-    ),
-    ul: ({ children, className, ...props }) => (
-      <ul className={"ml-4 list-outside list-disc"} {...props}>
-        {children}
-      </ul>
-    ),
-    strong: ({ children, className, ...props }) => (
-      <span className={"font-semibold"} {...props}>
-        {children}
-      </span>
-    ),
-    a: ({ children, className, ...props }) => {
+    a: ({ children, href }) => {
       const isAsk =
-        props.href?.startsWith("https://rentail.space/") ||
-        props.href?.startsWith("/");
+        href?.startsWith("https://rentail.space/") || href?.startsWith("/");
       return isAsk ? (
         <a
           className="btn btn-soft btn-primary"
@@ -286,34 +265,38 @@ function getComponents({
           {children}
         </a>
       ) : (
-        <a className="link-primary" href={props.href} target="_blank">
+        <a className="link-primary" href={href} target="_blank">
           {children}
         </a>
       );
     },
-    button: ({ children, className, ...props }) => (
-      <button className="btn btn-soft btn-primary" {...props}>
+    button: ({ children }) => (
+      <button className="btn btn-soft btn-primary" type="button">
         {children}
       </button>
     ),
-    h1: ({ children, className, ...props }) => (
-      <h1 className={"mt-6 mb-2 font-semibold text-xl"} {...props}>
-        {children}
-      </h1>
+    h1: ({ children }) => (
+      <h1 className={"mt-6 mb-2 font-semibold text-xl"}>{children}</h1>
     ),
-    h2: ({ children, className, ...props }) => (
-      <h2 className={"mt-6 mb-2 font-semibold text-lg"} {...props}>
-        {children}
-      </h2>
+    h2: ({ children }) => (
+      <h2 className={"mt-6 mb-2 font-semibold text-lg"}>{children}</h2>
     ),
-    h3: ({ children, className, ...props }) => (
-      <h3 className={"mt-6 mb-2 font-semibold text-md"} {...props}>
-        {children}
-      </h3>
+    h3: ({ children }) => (
+      <h3 className={"mt-6 mb-2 font-semibold text-md"}>{children}</h3>
     ),
     hr: () => <hr className="border-gray-300" />,
-    p: ({ children }: React.HTMLAttributes<HTMLParagraphElement>) => (
+    li: ({ children }) => <li className={"py-1"}>{children}</li>,
+    ol: ({ children }) => (
+      <ol className={"ml-4 list-outside list-decimal"}>{children}</ol>
+    ),
+    p: ({ children }) => (
       <p className="mt-2 mb-2 whitespace-pre-wrap">{children}</p>
+    ),
+    strong: ({ children }) => (
+      <span className={"font-semibold"}>{children}</span>
+    ),
+    ul: ({ children }) => (
+      <ul className={"ml-4 list-outside list-disc"}>{children}</ul>
     ),
   };
 }

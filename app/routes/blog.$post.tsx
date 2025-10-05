@@ -79,39 +79,20 @@ export default function Post() {
           h3: ({ children }) => (
             <h3 className="font-bold text-lg">{children}</h3>
           ),
-          hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
-            <hr className="border-gray-300" {...props} />
-          ),
-          img: ({
-            src,
-            alt,
-            ...props
-          }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+          hr: () => <hr className="border-gray-300" />,
+          img: ({ src, alt }) => (
             <img
               alt={alt}
               className="my-2 h-auto max-h-[400px] w-full object-contain"
               src={src}
-              {...props}
             />
           ),
           li: ({ children }) => <li className="ml-4">{children}</li>,
-          ol: ({
-            children,
-            ...props
-          }: React.HTMLAttributes<HTMLOListElement>) => (
-            <ol className="ml-8 list-decimal" {...props}>
-              {children}
-            </ol>
+          ol: ({ children }) => (
+            <ol className="ml-8 list-decimal">{children}</ol>
           ),
           p: ({ children }) => <p className="text-lg">{children}</p>,
-          ul: ({
-            children,
-            ...props
-          }: React.HTMLAttributes<HTMLUListElement>) => (
-            <ul className="ml-6 list-disc" {...props}>
-              {children}
-            </ul>
-          ),
+          ul: ({ children }) => <ul className="ml-6 list-disc">{children}</ul>,
         }}
       >
         {body}
