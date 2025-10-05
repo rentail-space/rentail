@@ -2,9 +2,9 @@
 
 import * as Sentry from "@sentry/react-router";
 import { afterAll, beforeAll } from "vitest";
+import whyIsNodeRunning from "why-is-node-running";
 import prisma from "~/lib/prisma";
 import msw from "~/test/mocks/msw.server";
-import whyIsNodeRunning from "why-is-node-running";
 
 Sentry.init({
   enabled: false,
