@@ -29,6 +29,12 @@ async function startServer() {
     await devServer.listen(port);
     await devServer.waitForRequestsIdle();
 
+    // Clean shutdown on SIGTERM
+    process.on("SIGTERM", async () => {
+      await devServer.close();
+      process.exit(0);
+    });
+
     // Send ready signal immediately - first test navigation will trigger optimization
     process.send({ type: "ready" });
   } catch (error) {

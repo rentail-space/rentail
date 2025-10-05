@@ -18,7 +18,7 @@ const port = 9222;
 const URL = `http://localhost:${port}`;
 
 export let context: BrowserContext | undefined;
-let worker: ChildProcess | undefined;
+export let worker: ChildProcess | undefined;
 
 /**
  * Open a new page in the browser.
@@ -181,7 +181,28 @@ async function blockBrowserRequest(route: Route): Promise<void> {
   }
 }
 
-afterAll(async () => {
-  if (context) await context.close();
-  if (worker) worker.kill();
-});
+export async function cleanup() {
+  if (context) {
+    await context.close();
+    context = undefined;
+  }
+  if (worker && !worker.killed) {
+    worker.kill("SIGTERM");
+    // Force kill after 1s if still running
+    await new Promise((resolve) => {
+      const timeout = setTimeout(() => {
+        if (worker && !worker.killed) {
+          worker.kill("SIGKILL");
+        }
+        resolve(undefined);
+      }, 1000);
+      worker?.once("exit", () => {
+        clearTimeout(timeout);
+        resolve(undefined);
+      });
+    });
+    worker = undefined;
+  }
+}
+
+afterAll(cleanup);
