@@ -25,7 +25,6 @@ export default function InputForm({
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          console.log("[InputForm] Sending message:", query);
           sendMessage({ parts: [{ text: query, type: "text" }], role: "user" });
           setQuery("");
           scrollToBottom();

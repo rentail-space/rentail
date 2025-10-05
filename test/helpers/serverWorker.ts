@@ -1,40 +1,43 @@
-import { parentPort, workerData } from "node:worker_threads";
-
-const { port } = workerData;
+import { invariant } from "es-toolkit";
 
 // Import and start the server
 async function startServer() {
+  invariant(process.send, "process.send is not defined");
   try {
-    // Set environment variables
-    process.env.PORT = port.toString();
-    process.env.NODE_ENV = "test";
-
+    const port = process.env.PORT ? Number(process.env.PORT) : 9222;
     const vite = await import("vite");
 
-    // Import the built server
-    // Use Vite dev server for testing instead of importing the built server
+    // Create Vite dev server with pre-bundling optimization
     const devServer = await vite.createServer({
       root: process.cwd(),
       server: {
         port,
         strictPort: true,
         middlewareMode: false,
+        hmr: false,
+      },
+      ssr: {
+        noExternal: ["streamdown"],
+      },
+      optimizeDeps: {
+        force: true,
       },
       logLevel: "info",
     });
 
     // Start the Vite dev server
-    await devServer.listen(port, true);
+    await devServer.listen(port);
 
-    // The server starts automatically when imported
+    // Wait for dependencies to be optimized
+    await devServer.waitForRequestsIdle();
+
     // Send ready signal
-    if (parentPort) parentPort.postMessage({ type: "ready" });
+    process.send({ type: "ready" });
   } catch (error) {
-    if (parentPort)
-      parentPort.postMessage({
-        type: "error",
-        error: error instanceof Error ? error.message : String(error),
-      });
+    process.send({
+      type: "error",
+      error: error instanceof Error ? error.message : String(error),
+    });
   }
 }
 

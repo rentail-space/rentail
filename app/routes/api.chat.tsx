@@ -18,12 +18,8 @@ import type { Route } from "./+types/api.chat";
 invariant(general, "General prompt is required");
 
 export async function action({ request }: Route.ActionArgs) {
-  console.log("[API] Received chat request");
   const { chat, headers } = await getUserChat(request.headers);
-  console.log("[API] Got chat:", chat.id, "user:", chat.user.id);
-
   const { userMessage } = (await request.json()) as { userMessage: UIMessage };
-  console.log("[API] User message:", userMessage.parts[0]);
 
   // Set up Redis stop monitoring
   const { abortSignal, cleanup } = await monitorStopSignal(chat.id);
@@ -32,7 +28,6 @@ export async function action({ request }: Route.ActionArgs) {
   const agent = mastra.getAgentById("main");
   const memory = await agent.getMemory();
   invariant(memory, "Memory is required");
-  console.log("[API] Saving user message to database...");
   const messages = await memory.saveMessages({
     messages: [
       {
@@ -53,7 +48,6 @@ export async function action({ request }: Route.ActionArgs) {
     ],
     format: "v2",
   });
-  console.log("[API] Saved user message, total messages:", messages.length);
 
   const initialMessages: MastraMessageV2[] = messages.map((message) => ({
     content: message.content,
