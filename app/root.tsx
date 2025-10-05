@@ -20,8 +20,11 @@ import ErrorBoundary from "~/components/ErrorBoundary";
 import Footer from "~/components/layout/Footer";
 import Header from "~/components/layout/Header";
 import schema from "~/data/schema.json";
+import loggingMiddleware from "~/lib/middleware/logging";
 import type { Route } from "./+types/root";
 import { getUserChat } from "./sessions.server";
+
+export const middleware: Route.MiddlewareFunction[] = [loggingMiddleware];
 
 export async function loader({ request }: Route.LoaderArgs) {
   const { headers, chat, messages } = await getUserChat(request.headers);

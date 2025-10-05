@@ -4,18 +4,18 @@ import dayjs from "dayjs";
 import { invariant } from "es-toolkit";
 import fm from "front-matter";
 import { DateTime } from "luxon";
-import {
-  type LoaderFunctionArgs,
-  type MetaArgs,
-  type MetaFunction,
-  useLoaderData,
-} from "react-router";
+import { type LoaderFunctionArgs, useLoaderData } from "react-router";
 import removeMd from "remove-markdown";
 import { Streamdown } from "streamdown";
 import truncateWords from "~/lib/truncateWords";
 import { validateParam } from "./blog.$post[.]jpg";
 
-export async function loader({ params }: LoaderFunctionArgs<{ post: string }>) {
+export async function loader({
+  params,
+}: LoaderFunctionArgs<{ post: string }>): Promise<{
+  post: string;
+  slug: string;
+}> {
   try {
     const postName = validateParam(params);
     const post = await readFile(
@@ -37,62 +37,6 @@ export async function loader({ params }: LoaderFunctionArgs<{ post: string }>) {
   }
 }
 
-export const meta: MetaFunction<typeof loader> = ({
-  loaderData,
-  params,
-}: MetaArgs<typeof loader>) => {
-  if (!loaderData) return [];
-
-  const published = DateTime.fromISO(
-    params.post?.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
-    { zone: "utc" },
-  );
-  invariant(
-    dayjs().isAfter(published.toJSDate()),
-    "Published date is in the future",
-  );
-
-  const { attributes } = fm<{ title: string }>(loaderData?.post ?? "");
-  return [
-    { title: attributes.title },
-
-    // Facebook Meta Tags
-    { property: "og:article:author", content: "Rentail Space" },
-    { property: "og:article:section", content: "Blog" },
-    {
-      property: "og:image",
-      content: `https://rentail.space/blog/${loaderData.slug}.jpg`,
-    },
-    {
-      property: "og:published_time",
-      content: published
-        .setZone("UTC")
-        .toFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", { locale: "en-US" }),
-    },
-    { property: "og:title", content: attributes.title },
-    { property: "og:type", content: "article" },
-    {
-      property: "og:url",
-      content: `https://rentail.space/blog/${loaderData.slug}`,
-    },
-    { property: "og:site_name", content: "Rentail Space" },
-    { property: "og:locale", content: "en_US" },
-
-    // Twitter Meta Tags
-    { property: "twitter:title", content: attributes.title },
-    {
-      property: "twitter:url",
-      content: `https://rentail.space/blog/${loaderData.slug}`,
-    },
-    { property: "twitter:card", content: "summary_large_image" },
-    {
-      property: "twitter:image",
-      content: `https://rentail.space/blog/${loaderData.slug}.jpg`,
-    },
-    { property: "twitter:site", content: "@rentailspace" },
-  ];
-};
-
 export default function Post() {
   const { post, slug } = useLoaderData<typeof loader>();
   const { attributes, body } = fm<{ title: string }>(post);
@@ -103,6 +47,8 @@ export default function Post() {
 
   return (
     <article className="prose prose-lg mx-auto">
+      <MetaTags title={attributes.title} published={published} slug={slug} />
+
       <h1>{attributes.title}</h1>
 
       <figure className="relative left-[calc(-50vw+50%)] my-4 w-screen overflow-x-hidden">
@@ -171,23 +117,85 @@ export default function Post() {
         {body}
       </Streamdown>
 
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          "@id": `https://rentail.space/blog/${slug}`,
-          datePublished: published.toISODate(),
-          description: truncateWords(removeMd(body), 50),
-          inLanguage: "en-US",
-          name: attributes.title,
-          primaryImageOfPage: {
-            "@id": `https://rentail.space/blog/${slug}.jpg`,
-            "@type": "ImageObject",
-            contentUrl: new URL(`/blog/${slug}.jpg`, "https://rentail.space"),
-            caption: "",
-          },
-        })}
-      </script>
+      <JSONLD
+        body={body}
+        published={published}
+        slug={slug}
+        title={attributes.title}
+      />
     </article>
+  );
+}
+
+function JSONLD({
+  body,
+  published,
+  slug,
+  title,
+}: {
+  body: string;
+  published: DateTime;
+  slug: string;
+  title: string;
+}) {
+  return (
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": `https://rentail.space/blog/${slug}`,
+        datePublished: published.toISODate(),
+        description: truncateWords(removeMd(body), 50),
+        inLanguage: "en-US",
+        name: title,
+        primaryImageOfPage: {
+          "@id": `https://rentail.space/blog/${slug}.jpg`,
+          "@type": "ImageObject",
+          contentUrl: new URL(`/blog/${slug}.jpg`, "https://rentail.space"),
+          caption: "",
+        },
+      })}
+    </script>
+  );
+}
+
+function MetaTags({
+  published,
+  slug,
+  title,
+}: {
+  published: DateTime;
+  slug: string;
+  title: string;
+}) {
+  return (
+    <>
+      <title>{title}</title>
+      <meta name="author" content="Rentail Space" />
+      <meta name="section" content="Blog" />
+      <meta
+        name="og:image"
+        content={`https://rentail.space/blog/${slug}.jpg`}
+      />
+      <meta
+        name="og:published_time"
+        content={published.toFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", {
+          locale: "en-US",
+        })}
+      />
+      <meta name="og:title" content={title} />
+      <meta name="og:type" content="article" />
+      <meta name="og:url" content={`https://rentail.space/blog/${slug}`} />
+      <meta name="og:site_name" content="Rentail Space" />
+      <meta name="og:locale" content="en_US" />
+      <meta name="robots" content="index, follow" />
+      <meta name="googlebot" content="index, follow" />
+      <meta name="bingbot" content="index, follow" />
+      <meta name="yandexbot" content="index, follow" />
+      <meta name="duckduckbot" content="index, follow" />
+      <meta name="slurp" content="index, follow" />
+      <meta name="ia_archiver" content="index, follow" />
+      <meta name="ia_archiver" content="index, follow" />
+    </>
   );
 }

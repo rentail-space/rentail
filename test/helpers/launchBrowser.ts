@@ -1,6 +1,6 @@
 import { join } from "node:path";
 import { URL as URLString } from "node:url";
-import { delay, invariant } from "es-toolkit";
+import { invariant } from "es-toolkit";
 import {
   type BrowserContext,
   chromium,

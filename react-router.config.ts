@@ -3,6 +3,9 @@ import { sentryOnBuildEnd } from "@sentry/react-router";
 
 export default {
   buildEnd: process.env.SENTRY_AUTH_TOKEN ? sentryOnBuildEnd : undefined,
+  future: {
+    v8_middleware: true,
+  },
   ssr: true,
   prerender: process.env.NODE_ENV === "production",
 } satisfies Config;
