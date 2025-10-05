@@ -24,6 +24,7 @@ beforeAll(async () => {
 }, 60000);
 
 afterAll(async () => {
-  msw.close();
   await cleanup();
+  msw.close();
+  await prisma.$disconnect();
 });
