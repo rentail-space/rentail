@@ -4,6 +4,7 @@ import * as Sentry from "@sentry/react-router";
 import { afterAll, beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
 import msw from "~/test/mocks/msw.server";
+import whyIsNodeRunning from "why-is-node-running";
 
 Sentry.init({
   enabled: false,
@@ -30,4 +31,12 @@ beforeAll(async () => {
 afterAll(async () => {
   msw.close();
   await prisma.$disconnect();
+
+  // Debug what's keeping Node alive (if tests hang)
+  if (process.env.DEBUG_HANG) {
+    setTimeout(() => {
+      console.log("\n=== WHY IS NODE STILL RUNNING? ===");
+      whyIsNodeRunning();
+    }, 2000);
+  }
 });

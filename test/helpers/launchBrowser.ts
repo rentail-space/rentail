@@ -182,13 +182,16 @@ async function blockOutgoingRequests(route: Route): Promise<void> {
 }
 
 async function cleanup() {
+  const logging = debug("browser").enabled || debug("server").enabled;
+
   if (context) {
+    if (logging) console.info("[BROWSER] closing context");
     await context.close();
     context = undefined;
+    if (logging) console.info("[BROWSER] context closed");
   }
 
   if (worker && !worker.killed) {
-    const logging = debug("server").enabled;
     if (logging) console.info("[SERVER] killing worker");
     worker.once("exit", () => {
       worker = undefined;
@@ -199,6 +202,8 @@ async function cleanup() {
     if (worker && !worker.killed) worker.kill("SIGKILL");
   }
   worker = undefined;
+
+  if (logging) console.info("[CLEANUP] complete");
 }
 
 process.once("exit", cleanup);

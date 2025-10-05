@@ -1,5 +1,5 @@
 import { expect, type Page } from "playwright/test";
-import { beforeAll, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vitest";
 import Waitlist from "~/emails/Waitlist";
 import { lastEmailHtml, sendEmail } from "~/lib/resend";
 import renderEmail from "./helpers/renderEmail";
@@ -19,5 +19,9 @@ describe("Waitlist", () => {
   it("renders waitlist email with correct styling and layout", async () => {
     // Take a screenshot for visual regression testing
     await expect(page).toMatchScreenshot();
+  });
+
+  afterAll(async () => {
+    await page.close();
   });
 });
