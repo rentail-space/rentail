@@ -97,7 +97,9 @@ jobs:
         uses: iCrawl/action-tsc@v1
 
       - name: Run Tests
-        run: pnpm vitest run --reporter verbose
+        run: |
+          rm -rf node_modules/.vite .react-router build
+          pnpm vitest run --reporter verbose
         env:
           DEBUG: "server"
 
