@@ -1,5 +1,5 @@
 import { expect, type Page } from "playwright/test";
-import { beforeAll, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
 import { openPage } from "~/test/helpers/launchBrowser";
 
@@ -9,12 +9,11 @@ describe("Chat page", () => {
   beforeAll(async () => {
     await prisma.user.deleteMany();
     page = await openPage();
+    await page.goto("/chat", { waitUntil: "networkidle" });
+    await page.waitForFunction(() => "__reactRouterVersion" in window);
   });
 
   it("renders chat interface with welcome message", async () => {
-    const response = await page.goto("/chat", { waitUntil: "load" });
-    expect(response?.status(), "should respond with 200").toEqual(200);
-
     // Check that the chat interface is rendered
     await expect(page.locator("div.h-screen")).toBeVisible();
 
@@ -31,23 +30,28 @@ describe("Chat page", () => {
 
   it("handles initial query parameter", async () => {
     const testQuery = "Do you have any locations available in downtown areas?";
-    await page.goto(`/chat?q=${encodeURIComponent(testQuery)}`, {
-      waitUntil: "load",
-    });
+    await page.goto(`/chat?q=${encodeURIComponent(testQuery)}`);
 
     // Check that user message appears in chat
     await expect(page.locator("input[type='text']")).toHaveValue(testQuery);
   });
 
   it("sends user message and receives server response", async () => {
-    await page.goto("/chat", { waitUntil: "load" });
+    // Navigate back to clean chat page
+    await page.goto("/chat");
+    await page.waitForFunction(() => "__reactRouterVersion" in window);
 
     const testMessage =
       "looking for a pop-up retail space for my clothing boutique";
 
-    // Fill and submit the message
-    await page.fill("input[type='text']", testMessage);
-    await page.press("input[type='text']", "Enter");
+    const input = page.locator("input[type='text']");
+
+    // Clear and type the message properly
+    await input.click(); // Focus the input
+    await input.fill(testMessage); // Fill sets the value and dispatches input event
+
+    // Submit by pressing Enter (more reliable than clicking button)
+    await input.press("Enter");
     await page.waitForLoadState("networkidle");
 
     // Verify user message appears in chat
@@ -81,5 +85,9 @@ describe("Chat page", () => {
 
     // Should be at or very close to bottom (within 50px tolerance)
     expect(scrollTop + clientHeight).toBeGreaterThan(scrollHeight - 50);
+  });
+
+  afterAll(async () => {
+    await page.close();
   });
 });

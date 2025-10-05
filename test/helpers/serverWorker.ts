@@ -7,7 +7,7 @@ async function startServer() {
     const port = process.env.PORT ? Number(process.env.PORT) : 9222;
     const vite = await import("vite");
 
-    // Create Vite dev server with pre-bundling optimization
+    // Create Vite dev server with cached dependencies
     const devServer = await vite.createServer({
       root: process.cwd(),
       server: {
@@ -20,7 +20,7 @@ async function startServer() {
         noExternal: ["streamdown"],
       },
       optimizeDeps: {
-        force: true,
+        force: false, // Use cached dependencies
       },
       logLevel: "info",
     });
@@ -28,10 +28,7 @@ async function startServer() {
     // Start the Vite dev server
     await devServer.listen(port);
 
-    // Wait for dependencies to be optimized
-    await devServer.waitForRequestsIdle();
-
-    // Send ready signal
+    // Send ready signal immediately - first test navigation will trigger optimization
     process.send({ type: "ready" });
   } catch (error) {
     process.send({

@@ -14,7 +14,7 @@ import { afterAll } from "vitest";
 import config from "vitest.config";
 
 const port = 9222;
-export const URL = `http://localhost:${port}`;
+const URL = `http://localhost:${port}`;
 
 let context: BrowserContext | undefined;
 let worker: ChildProcess | undefined;
@@ -100,6 +100,17 @@ export async function launchServer(): Promise<void> {
       NODE_ENV: "test",
     },
   });
+
+  // Ensure worker is killed when parent process exits or receives signals
+  const cleanup = () => {
+    if (worker && !worker.killed) {
+      if (logging) console.info("[SERVER] killing worker");
+      worker.kill("SIGTERM");
+    }
+  };
+  process.once("exit", cleanup);
+  process.once("SIGINT", cleanup);
+  process.once("SIGTERM", cleanup);
 
   // Listen for worker messages
   await new Promise<void>((resolve, reject) => {
