@@ -1,13 +1,11 @@
 import { expect, type Page } from "playwright/test";
-import { afterAll, beforeAll, describe, it } from "vitest";
-import prisma from "~/lib/prisma";
+import { beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Chat page", () => {
   let page: Page;
 
   beforeAll(async () => {
-    await prisma.user.deleteMany();
     page = await goto("/chat");
   });
 

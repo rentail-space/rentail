@@ -1,5 +1,5 @@
 import { expect, type Page } from "playwright/test";
-import { afterAll, beforeAll, describe, it } from "vitest";
+import { beforeAll, describe, it } from "vitest";
 import { lastEmailHtml } from "~/lib/resend";
 import sendWelcomeEmail from "~/lib/sendWelcomeEmail";
 import renderEmail from "./helpers/renderEmail";

@@ -9,6 +9,14 @@ const resend = new Resend(env.RESEND_API_KEY);
 // Test-only: stores last sent email HTML for visual regression testing
 export let lastEmailHtml: string | null = null;
 
+/**
+ * Send an email using Resend. If an error occurs, it will be captured by Sentry.
+ * The email will be stored in `lastEmailHtml` for visual regression testing.
+ *
+ * @param email - The email address to send the email to.
+ * @param component - The React Email component to send.
+ * @param subject - The subject of the email.
+ */
 export async function sendEmail({
   email,
   component,

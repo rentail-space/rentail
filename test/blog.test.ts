@@ -10,7 +10,7 @@
  */
 
 import { expect, type Page } from "playwright/test";
-import { afterAll, beforeAll, describe, test } from "vitest";
+import { beforeAll, describe, test } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Blog Post Rendering", () => {

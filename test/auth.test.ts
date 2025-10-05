@@ -1,5 +1,5 @@
 import { expect, type Page } from "playwright/test";
-import { afterAll, beforeAll, describe, it } from "vitest";
+import { beforeAll, describe, it } from "vitest";
 import type zod from "zod";
 import prisma from "~/lib/prisma";
 import { getWorkingMemory, type userProfile } from "~/lib/workingMemory";
@@ -9,7 +9,6 @@ describe("Anonymous visits chat page", () => {
   let page: Page;
 
   beforeAll(async () => {
-    await prisma.user.deleteMany();
     page = await goto("/chat");
   });
 
@@ -139,6 +138,8 @@ describe("Anonymous visits chat page", () => {
         });
 
         it("shows sign-up page", async () => {
+          await page.waitForTimeout(100);
+          expect(page.url()).toContain("/auth");
           await expect(
             page.getByRole("heading", { name: "Create Account" }),
           ).toBeVisible();

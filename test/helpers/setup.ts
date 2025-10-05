@@ -3,7 +3,6 @@
 import * as Sentry from "@sentry/react-router";
 import { afterAll, beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
-import { cleanup } from "~/test/helpers/launchBrowser";
 import msw from "~/test/mocks/msw.server";
 
 Sentry.init({
@@ -20,11 +19,15 @@ beforeAll(async () => {
   // Start MSW server before all tests
   msw.listen({ onUnhandledRequest: "error" });
   // Clean up database
-  await prisma.user.deleteMany({});
-}, 60000);
+  await Promise.all([
+    prisma.shoppingCenter.deleteMany(),
+    prisma.user.deleteMany(),
+    prisma.verification.deleteMany(),
+    prisma.waitlist.deleteMany(),
+  ]);
+});
 
 afterAll(async () => {
-  await cleanup();
   msw.close();
   await prisma.$disconnect();
 });

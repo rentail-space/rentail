@@ -23,24 +23,25 @@ export let worker: ChildProcess | undefined;
 /**
  * Open a new page in the browser.
  *
+ * @param path - The path to open.
  * @returns The page.
  */
 export async function goto(path: string): Promise<Page> {
   await launchServer();
   const context = await launchBrowser();
   const page = await context.newPage();
-  page.route("**", (route) => blockBrowserRequest(route));
   await waitForDependencies(page, path);
   return page;
 }
 
 /**
- * Wait for dev server to build all cached dependencies.
+ * Wait for dev server to build all cached dependencies and open the page.
  *
  * @param page - The page to wait for.
  * @param path - The path to wait for.
  */
 async function waitForDependencies(page: Page, path: string) {
+  // We expect 900+ files to be present in .vite/deps
   const dirname = join(import.meta.dirname, "../../node_modules/.vite/deps");
   await Promise.all([
     page.goto(path, { waitUntil: "networkidle" }),
@@ -54,7 +55,9 @@ async function waitForDependencies(page: Page, path: string) {
       }
     })(),
   ]);
-  await page.goto(path, { waitUntil: "networkidle" });
+
+  await page.goto(path);
+  // Make sure React is available
   await page.waitForFunction(() => "__reactRouterContext" in window);
 }
 
@@ -66,7 +69,9 @@ async function waitForDependencies(page: Page, path: string) {
 export async function launchBrowser(): Promise<BrowserContext> {
   if (context) return context;
 
-  const headless = process.env.CI ? true : !debug("browser").enabled;
+  const logging = debug("browser").enabled;
+  // CI can set DEBUG=browser to see browser logs without opening the browser
+  const headless = process.env.CI ? true : !logging;
   context = await chromium.launchPersistentContext("test/context", {
     baseURL: URL,
     headless,
@@ -75,14 +80,18 @@ export async function launchBrowser(): Promise<BrowserContext> {
     slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
   });
 
+  // Block all requests that are not localhost or 127.0.0.1
+  // For logging, since MSW should also block external requests
+  context.route("**", (route) => blockOutgoingRequests(route));
+
   // Set navigation timeout to 3s less than hook timeout
   // This ensures Playwright fails first with a useful error message
   context.setDefaultNavigationTimeout(
     (config.test?.hookTimeout ?? 30000) - 3000,
   );
 
-  // Always log browser console in CI, or when DEBUG=browser is set
-  if (process.env.CI || debug("browser").enabled) {
+  // Always log browser console when DEBUG=browser is set
+  if (logging) {
     context.on("console", (message) => {
       const text = message.text();
       // Skip HMR connection warnings (expected during test cleanup)
@@ -122,33 +131,23 @@ export async function launchServer(): Promise<void> {
   const logging = debug("server").enabled;
   if (logging) console.info("[SERVER] launching server");
 
+  // Start the server as forked process, that way we don't share the same node
+  // instance, which could cause issues with some libraries (eg Prisma)
   worker = fork(join(__dirname, "serverWorker.ts"), {
     stdio: "inherit",
     env: {
       ...process.env,
-      PORT: port.toString(),
       NODE_ENV: "test",
+      PORT: port.toString(),
     },
   });
-
-  // Ensure worker is killed when parent process exits or receives signals
-  const cleanup = () => {
-    if (worker && !worker.killed) {
-      if (logging) console.info("[SERVER] killing worker");
-      worker.kill("SIGTERM");
-    }
-  };
-  process.once("exit", cleanup);
-  process.once("SIGINT", cleanup);
-  process.once("SIGTERM", cleanup);
 
   // Listen for worker messages
   await new Promise<void>((resolve, reject) => {
     invariant(worker, "Server worker is not defined");
     worker.on("message", (msg: { type: string; error?: string }) => {
       if (msg.type === "ready") resolve();
-      else if (msg.type === "error")
-        reject(new Error(`Worker error: ${msg.error}`));
+      if (msg.type === "error") reject(new Error(`Worker error: ${msg.error}`));
     });
 
     worker.on("error", (error) => {
@@ -165,9 +164,10 @@ export async function launchServer(): Promise<void> {
   if (logging) console.info("[SERVER] server is ready");
 }
 
-async function blockBrowserRequest(route: Route): Promise<void> {
+async function blockOutgoingRequests(route: Route): Promise<void> {
   const { hostname } = new URLString(route.request().url());
   const resourceType = route.request().resourceType();
+  const logging = debug("browser").enabled;
 
   if (hostname === "localhost" || hostname === "127.0.0.1") {
     await route.continue();
@@ -175,34 +175,34 @@ async function blockBrowserRequest(route: Route): Promise<void> {
     // NOTE: According to Claud, non-blocked requests can interfere with cookie
     // handling because Playwright waits for all requests to complete before
     // considering a navigation finished, so we must abort blocked requests.
-    if (process.env.CI || debug("browser").enabled)
+    if (logging)
       console.warn(`[BROWSER] blocking ${resourceType}: ${hostname}`);
     await route.abort();
   }
 }
 
-export async function cleanup() {
+async function cleanup() {
   if (context) {
     await context.close();
     context = undefined;
   }
+
   if (worker && !worker.killed) {
+    const logging = debug("server").enabled;
+    if (logging) console.info("[SERVER] killing worker");
+    worker.once("exit", () => {
+      worker = undefined;
+    });
     worker.kill("SIGTERM");
     // Force kill after 1s if still running
-    await new Promise((resolve) => {
-      const timeout = setTimeout(() => {
-        if (worker && !worker.killed) {
-          worker.kill("SIGKILL");
-        }
-        resolve(undefined);
-      }, 1000);
-      worker?.once("exit", () => {
-        clearTimeout(timeout);
-        resolve(undefined);
-      });
-    });
-    worker = undefined;
+    await delay(1000);
+    if (worker && !worker.killed) worker.kill("SIGKILL");
   }
+  worker = undefined;
 }
+
+process.once("exit", cleanup);
+process.once("SIGINT", cleanup);
+process.once("SIGTERM", cleanup);
 
 afterAll(cleanup);

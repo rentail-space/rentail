@@ -1,3 +1,10 @@
+/**
+ * This file is used to start the Vite dev server in a forked process.  It is
+ * used to avoid sharing the same node instance, which could cause issues with
+ * some libraries (eg Prisma). It is also used to allow the process to exit
+ * cleanly when the test is done.
+ */
+
 import { invariant } from "es-toolkit";
 import type { ViteDevServer } from "vite";
 
@@ -14,10 +21,10 @@ async function startServer() {
     devServer = await vite.createServer({
       root: process.cwd(),
       server: {
+        hmr: false,
+        middlewareMode: false,
         port,
         strictPort: true,
-        middlewareMode: false,
-        hmr: false,
       },
       ssr: {
         noExternal: ["streamdown"],
@@ -45,19 +52,13 @@ async function startServer() {
   }
 }
 
-// Clean shutdown on SIGTERM
-process.on("SIGTERM", async () => {
-  try {
-    if (devServer) {
-      await devServer.close();
-    }
-  } finally {
-    process.exit(0);
-  }
-});
+function cleanup() {
+  if (devServer) devServer.close();
+}
 
-// Fallback cleanup handlers
-process.on("SIGINT", () => process.exit(0));
-process.on("disconnect", () => process.exit(0));
+// Clean shutdown on SIGTERM
+process.on("SIGTERM", cleanup);
+process.on("SIGINT", cleanup);
+process.on("disconnect", cleanup);
 
 startServer();

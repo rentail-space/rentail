@@ -1,5 +1,5 @@
 import { expect, type Page } from "playwright/test";
-import { afterAll, beforeAll, describe, it } from "vitest";
+import { beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Home page", () => {
