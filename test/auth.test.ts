@@ -3,35 +3,33 @@ import { afterAll, beforeAll, describe, it } from "vitest";
 import type zod from "zod";
 import prisma from "~/lib/prisma";
 import { getWorkingMemory, type userProfile } from "~/lib/workingMemory";
-import { openPage } from "~/test/helpers/launchBrowser";
+import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Anonymous visits chat page", () => {
   let page: Page;
 
   beforeAll(async () => {
     await prisma.user.deleteMany();
-    page = await openPage();
-    await page.goto("/chat");
-    await page.waitForFunction(() => "__reactRouterContext" in window);
+    page = await goto("/chat");
   });
 
-  it.skip("loads chat page and shows sign-in button", async () => {
+  it("loads chat page and shows sign-in button", async () => {
     await expect(page.locator("input[type='text']")).toBeVisible();
     await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
   });
 
-  it.skip("creates anonymous user in database", async () => {
+  it("creates anonymous user in database", async () => {
     const users = await prisma.user.findMany();
     expect(users.length, "should have one user").toEqual(1);
     expect(users[0].isAnonymous, "user should be anonymous").toBe(true);
   });
 
-  it.skip("maintains cookies across requests", async () => {
+  it("maintains cookies across requests", async () => {
     const initialCookies = await page.context().cookies();
     expect(initialCookies.length, "Should have cookies").toEqual(2);
   });
 
-  it.skip("sets initial working memory with default location", async () => {
+  it("sets initial working memory with default location", async () => {
     const chat = await prisma.chat.findFirstOrThrow({
       include: { user: true },
     });
@@ -234,9 +232,5 @@ describe("Anonymous visits chat page", () => {
         });
       });
     });
-  });
-
-  afterAll(async () => {
-    if (page) await page.close();
   });
 });

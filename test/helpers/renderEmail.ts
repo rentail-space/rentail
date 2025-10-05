@@ -1,12 +1,15 @@
 import { pretty, render } from "@react-email/components";
-import type { Page } from "playwright/test";
+import { invariant } from "es-toolkit";
+import type { JSX } from "react";
+import { expect } from "vitest";
+import { context } from "./launchBrowser";
 
-export default async function renderEmail(
-  page: Page,
-  element: React.ReactNode,
-) {
+export default async function renderEmail(email: string | JSX.Element | null) {
+  expect(email, "Email is required").toBeDefined();
+
   // Render the email component to HTML
-  const html = await pretty(await render(element));
+  const html =
+    typeof email === "string" ? email : await pretty(await render(email));
 
   // Create a full HTML page with the email content
   const fullHtml = `
@@ -24,5 +27,8 @@ export default async function renderEmail(
       `;
 
   // Set the page content and wait for it to load
+  invariant(context, "No browser context");
+  const page = await context.newPage();
   await page.setContent(fullHtml, { waitUntil: "networkidle" });
+  return page;
 }

@@ -1,16 +1,14 @@
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
-import { openPage } from "~/test/helpers/launchBrowser";
+import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Chat page", () => {
   let page: Page;
 
   beforeAll(async () => {
     await prisma.user.deleteMany();
-    page = await openPage();
-    await page.goto("/chat", { waitUntil: "networkidle" });
-    await page.waitForFunction(() => "__reactRouterVersion" in window);
+    page = await goto("/chat");
   });
 
   it("renders chat interface with welcome message", async () => {
@@ -39,7 +37,6 @@ describe("Chat page", () => {
   it("sends user message and receives server response", async () => {
     // Navigate back to clean chat page
     await page.goto("/chat");
-    await page.waitForFunction(() => "__reactRouterVersion" in window);
 
     const testMessage =
       "looking for a pop-up retail space for my clothing boutique";
@@ -85,9 +82,5 @@ describe("Chat page", () => {
 
     // Should be at or very close to bottom (within 50px tolerance)
     expect(scrollTop + clientHeight).toBeGreaterThan(scrollHeight - 50);
-  });
-
-  afterAll(async () => {
-    await page.close();
   });
 });

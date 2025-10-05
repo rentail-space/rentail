@@ -20,13 +20,14 @@ async function startServer() {
         noExternal: ["streamdown"],
       },
       optimizeDeps: {
-        force: false, // Use cached dependencies
+        force: true, // Always rebuild
       },
       logLevel: "info",
     });
 
     // Start the Vite dev server
     await devServer.listen(port);
+    await devServer.waitForRequestsIdle();
 
     // Send ready signal immediately - first test navigation will trigger optimization
     process.send({ type: "ready" });

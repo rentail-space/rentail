@@ -11,20 +11,16 @@
 
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, test } from "vitest";
-import { openPage } from "~/test/helpers/launchBrowser";
+import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Blog Post Rendering", () => {
   let page: Page;
 
   beforeAll(async () => {
-    page = await openPage();
+    page = await goto("/blog/2025-07-19-ultimate-guide");
   });
 
   test("renders blog post with proper title and metadata", async () => {
-    const response = await page.goto("/blog/2025-07-19-ultimate-guide");
-
-    expect(response?.status(), "should respond with 200").toEqual(200);
-
     // Check title rendering
     const title = await page.locator("article h1").textContent();
     expect(title).toBe("A Step-by-Step Guide for First-Time Business Owners");
@@ -37,8 +33,6 @@ describe("Blog Post Rendering", () => {
   });
 
   test("renders blog post image with proper attributes", async () => {
-    await page.goto("/blog/2025-07-19-ultimate-guide");
-
     // Check if hero image is rendered
     const heroImage = page.locator("figure img");
     expect(heroImage).toBeVisible();
@@ -51,8 +45,6 @@ describe("Blog Post Rendering", () => {
   });
 
   test("renders markdown content with proper formatting", async () => {
-    await page.goto("/blog/2025-07-19-ultimate-guide");
-
     // Check for proper heading rendering
     const heading = page.locator("h2").first();
     await expect(heading).toBeVisible();
@@ -72,8 +64,6 @@ describe("Blog Post Rendering", () => {
   });
 
   test("handles links with proper styling", async () => {
-    await page.goto("/blog/2025-07-19-ultimate-guide");
-
     // Check if links are rendered with blue styling
     const links = page.locator("article a");
     if ((await links.count()) > 0) {
@@ -84,8 +74,6 @@ describe("Blog Post Rendering", () => {
   });
 
   test("renders lists with proper indentation and styling", async () => {
-    await page.goto("/blog/2025-07-19-ultimate-guide");
-
     // Check for ordered lists
     const orderedLists = page.locator("article ol");
     if ((await orderedLists.count()) > 0) {
@@ -106,8 +94,6 @@ describe("Blog Post Rendering", () => {
   });
 
   test("displays blog post with correct layout structure", async () => {
-    await page.goto("/blog/2025-07-19-ultimate-guide");
-
     // Check main article structure
     const article = page.locator("article");
     await expect(article).toBeVisible();
@@ -117,33 +103,11 @@ describe("Blog Post Rendering", () => {
     await expect(layout).toBeVisible();
   });
 
-  test("handles non-existent blog posts with 404", async () => {
-    const response = await page.goto("/blog/non-existent-post");
-    expect(response?.status()).toEqual(404);
-  });
-
-  test("renders second blog post correctly", async () => {
-    const response = await page.goto("/blog/2025-07-24-specialty-leasing");
-
-    expect(response?.status(), "should respond with 200").toEqual(200);
-
-    // Check title rendering for second post
-    const title = await page.locator("article h1").textContent();
-    expect(title).toBeDefined();
-    expect(title?.length).toBeGreaterThan(0);
-
-    // Check date formatting for second post
-    const dateElement = await page
-      .locator(".text-sm.text-gray-500")
-      .textContent();
-    expect(dateElement).toContain("July 24, 2025");
-  });
-
   test("blog post visual regression test", async () => {
     // Set consistent viewport for screenshots
     await page.setViewportSize({ width: 1280, height: 720 });
 
-    await page.goto("/blog/2025-07-19-ultimate-guide");
+    await page.reload();
 
     // Wait for any images to load
     await page.waitForLoadState("networkidle");
@@ -156,7 +120,7 @@ describe("Blog Post Rendering", () => {
     // Set mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
 
-    await page.goto("/blog/2025-07-19-ultimate-guide");
+    await page.reload();
     await page.waitForLoadState("networkidle");
 
     // Check that content is still visible and properly formatted
@@ -176,7 +140,29 @@ describe("Blog Post Rendering", () => {
     }
   });
 
-  afterAll(async () => {
-    if (page) await page.close();
+  describe("non-existent blog post", () => {
+    test("handles non-existent blog posts with 404", async () => {
+      const response = await page.goto("/blog/non-existent-post");
+      expect(response?.status()).toEqual(404);
+    });
+  });
+
+  describe("second blog post", () => {
+    test("renders second blog post correctly", async () => {
+      const response = await page.goto("/blog/2025-07-24-specialty-leasing");
+
+      expect(response?.status(), "should respond with 200").toEqual(200);
+
+      // Check title rendering for second post
+      const title = await page.locator("article h1").textContent();
+      expect(title).toBeDefined();
+      expect(title?.length).toBeGreaterThan(0);
+
+      // Check date formatting for second post
+      const dateElement = await page
+        .locator(".text-sm.text-gray-500")
+        .textContent();
+      expect(dateElement).toContain("July 24, 2025");
+    });
   });
 });

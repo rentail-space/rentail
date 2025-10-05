@@ -9,20 +9,16 @@
 
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import { openPage } from "~/test/helpers/launchBrowser";
+import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Blog Listing", () => {
   let page: Page;
 
   beforeAll(async () => {
-    page = await openPage();
+    page = await goto("/");
   });
 
   it("displays blog posts on home page", async () => {
-    const response = await page.goto("/");
-
-    expect(response?.status(), "should respond with 200").toEqual(200);
-
     // Check if blog posts section exists
     const blogSection = page.locator("section.blog-posts-section").first();
     await expect(blogSection).toBeVisible();
@@ -34,8 +30,6 @@ describe("Blog Listing", () => {
   });
 
   it("blog post links have proper titles and excerpts", async () => {
-    await page.goto("/");
-
     // Find blog post links
     const blogLinks = page.locator('a[href^="/blog/"]');
     const linkCount = await blogLinks.count();
@@ -60,8 +54,6 @@ describe("Blog Listing", () => {
   });
 
   it("navigates to blog post when clicking link", async () => {
-    await page.goto("/");
-
     // Find first blog post link
     const firstBlogLink = page.locator('a[href^="/blog/"]').first();
     await expect(firstBlogLink).toBeVisible();
@@ -88,8 +80,6 @@ describe("Blog Listing", () => {
   });
 
   it("blog links have hover styling", async () => {
-    await page.goto("/");
-
     // Check blog post links for hover classes
     const blogLinks = page.locator('a[href^="/blog/"]');
     if ((await blogLinks.count()) > 0) {
@@ -101,8 +91,6 @@ describe("Blog Listing", () => {
   });
 
   it("displays multiple blog posts if available", async () => {
-    await page.goto("/");
-
     // Count blog post links
     const blogLinks = page.locator('a[href^="/blog/"]');
     const linkCount = await blogLinks.count();
@@ -124,7 +112,7 @@ describe("Blog Listing", () => {
     // Set consistent viewport for screenshots
     await page.setViewportSize({ width: 1280, height: 720 });
 
-    await page.goto("/");
+    await page.reload();
     await page.waitForLoadState("networkidle");
 
     // Scroll to blog section if it exists
@@ -134,9 +122,5 @@ describe("Blog Listing", () => {
 
     // Take screenshot for visual regression testing of the blog section
     await expect(blogSection).toMatchScreenshot();
-  });
-
-  afterAll(async () => {
-    if (page) await page.close();
   });
 });

@@ -1,6 +1,6 @@
 import { join } from "node:path";
 import { URL as URLString } from "node:url";
-import { invariant } from "es-toolkit";
+import { delay, invariant } from "es-toolkit";
 import {
   type BrowserContext,
   chromium,
@@ -9,6 +9,7 @@ import {
 } from "playwright";
 import "~/test/helpers/toMatchScreenshot";
 import { type ChildProcess, fork } from "node:child_process";
+import { readdir } from "node:fs/promises";
 import debug from "debug";
 import { afterAll } from "vitest";
 import config from "vitest.config";
@@ -16,7 +17,7 @@ import config from "vitest.config";
 const port = 9222;
 const URL = `http://localhost:${port}`;
 
-let context: BrowserContext | undefined;
+export let context: BrowserContext | undefined;
 let worker: ChildProcess | undefined;
 
 /**
@@ -24,12 +25,37 @@ let worker: ChildProcess | undefined;
  *
  * @returns The page.
  */
-export async function openPage(): Promise<Page> {
+export async function goto(path: string): Promise<Page> {
   await launchServer();
   const context = await launchBrowser();
   const page = await context.newPage();
   page.route("**", (route) => blockBrowserRequest(route));
+  await waitForDependencies(page, path);
   return page;
+}
+
+/**
+ * Wait for dev server to build all cached dependencies.
+ *
+ * @param page - The page to wait for.
+ * @param path - The path to wait for.
+ */
+async function waitForDependencies(page: Page, path: string) {
+  const dirname = join(import.meta.dirname, "../../node_modules/.vite/deps");
+  await Promise.all([
+    page.goto(path, { waitUntil: "networkidle" }),
+    (async () => {
+      while (true) {
+        try {
+          const files = await readdir(dirname);
+          if (files.length > 100) break;
+        } catch {}
+        await delay(100);
+      }
+    })(),
+  ]);
+  await page.goto(path, { waitUntil: "networkidle" });
+  await page.waitForFunction(() => "__reactRouterContext" in window);
 }
 
 /**
@@ -58,22 +84,26 @@ export async function launchBrowser(): Promise<BrowserContext> {
   // Always log browser console in CI, or when DEBUG=browser is set
   if (process.env.CI || debug("browser").enabled) {
     context.on("console", (message) => {
+      const text = message.text();
+      // Skip HMR connection warnings (expected during test cleanup)
+      if (text.includes("server connection lost")) return;
+
       const prefix = "[BROWSER]";
       switch (message.type()) {
         case "info":
-          console.info(prefix, message.text());
+          console.info(prefix, text);
           break;
         case "warning":
-          console.warn(prefix, message.text());
+          console.warn(prefix, text);
           break;
         case "debug":
-          console.debug(prefix, message.text());
+          console.debug(prefix, text);
           break;
         case "error":
-          console.error(prefix, message.text());
+          console.error(prefix, text);
           break;
         case "log":
-          console.log(prefix, message.text());
+          console.log(prefix, text);
           break;
       }
     });

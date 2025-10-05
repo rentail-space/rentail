@@ -97,7 +97,7 @@ jobs:
         uses: iCrawl/action-tsc@v1
 
       - name: Run Tests
-        run: pnpm vitest run --reporter verbose test/auth.test.ts
+        run: pnpm vitest run --reporter verbose
         env:
           DEBUG: "server"
 
