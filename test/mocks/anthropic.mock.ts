@@ -6,6 +6,7 @@
  */
 
 import type { Tool, ToolChoice } from "ai";
+import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import createStreamingResponse, {
   type ToolCall,
@@ -65,9 +66,11 @@ export function findMockResponse(body: {
     .map((part) => part.text)
     .join(" ");
 
-  console.info(
-    `[MSW] Anthropic API mock - processing message: "${messageText.slice(0, 100)}..."`,
-  );
+  const logging = debug("msw").enabled;
+  if (logging)
+    console.info(
+      `[MSW] Anthropic API mock - processing message: "${messageText.slice(0, 100)}..."`,
+    );
 
   // Check custom responses first (higher priority)
   const response = customMockResponses.find((mockPattern) =>

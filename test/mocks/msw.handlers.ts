@@ -1,3 +1,4 @@
+import debug from "debug";
 import { invariant } from "es-toolkit";
 import { HttpResponse, http, passthrough } from "msw";
 import { ulid } from "ulid";
@@ -16,7 +17,8 @@ export const handlers = [
           headers: { "Content-Type": "text/event-stream" },
         });
       } catch (error) {
-        console.error("[MSW] Error in Anthropic API mock:", error);
+        const logging = debug("msw").enabled;
+        if (logging) console.error("[MSW] Error in Anthropic API mock:", error);
         return HttpResponse.error();
       }
     },
@@ -62,9 +64,11 @@ export const handlers = [
   http.all(
     () => true,
     ({ request }: { request: Request }) => {
-      console.warn(
-        `[MSW] Blocked ${request.method} request to: ${request.url}`,
-      );
+      const logging = debug("msw").enabled;
+      if (logging)
+        console.warn(
+          `[MSW] Blocked ${request.method} request to: ${request.url}`,
+        );
       return HttpResponse.json(
         { error: "External HTTP requests are not allowed in tests" },
         { status: 503 },

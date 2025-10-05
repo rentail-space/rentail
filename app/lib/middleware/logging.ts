@@ -1,3 +1,4 @@
+import debug from "debug";
 import type { Route } from "../../+types/root";
 
 const loggingMiddleware: Route.MiddlewareFunction = async (
@@ -7,8 +8,9 @@ const loggingMiddleware: Route.MiddlewareFunction = async (
   const start = Date.now();
   const { method } = request;
   const { pathname } = new URL(request.url);
+  const logging = debug("server").enabled;
 
-  console.info(`[SERVER] ${method} ${pathname}`);
+  if (logging) console.info(`[SERVER] ${method} ${pathname}`);
 
   // Call next middleware/loader
   const response = await next();
@@ -16,7 +18,8 @@ const loggingMiddleware: Route.MiddlewareFunction = async (
   const duration = Date.now() - start;
   const status = response.status;
 
-  console.info(`[SERVER] ${method} ${pathname} => ${status} (${duration}ms)`);
+  if (logging)
+    console.info(`[SERVER] ${method} ${pathname} => ${status} (${duration}ms)`);
 
   return response;
 };
