@@ -16,5 +16,8 @@ export default defineConfig(async (config) => ({
       config,
     ),
   ],
+  optimizeDeps: {
+    include: ["react", "react-dom", "streamdown"],
+  },
   ssr: { noExternal: ["streamdown"] },
 }));

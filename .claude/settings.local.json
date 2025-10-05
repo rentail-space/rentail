@@ -6,7 +6,8 @@
       "Bash(lsof:*)",
       "Bash(xargs kill:*)",
       "Bash(pkill:*)",
-      "Bash(killall:*)"
+      "Bash(killall:*)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []
