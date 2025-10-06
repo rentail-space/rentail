@@ -43,6 +43,7 @@ function handleRequest(
   responseStatusCode: number,
   responseHeaders: Headers,
   entryContext: EntryContext,
+  _loadContext: unknown,
 ) {
   let statusCode = responseStatusCode || 200;
 
