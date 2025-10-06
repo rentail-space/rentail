@@ -35,7 +35,7 @@ afterAll(async () => {
   // Debug what's keeping Node alive (if tests hang)
   if (process.env.DEBUG_HANG) {
     setTimeout(() => {
-      console.log("\n=== WHY IS NODE STILL RUNNING? ===");
+      console.warn("\n=== WHY IS NODE STILL RUNNING? ===");
       whyIsNodeRunning();
     }, 2000);
   }

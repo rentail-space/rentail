@@ -7,5 +7,7 @@ export default {
     v8_middleware: true,
   },
   ssr: true,
-  prerender: process.env.NODE_ENV === "production",
+  prerender: async () => {
+    return [];
+  },
 } satisfies Config;

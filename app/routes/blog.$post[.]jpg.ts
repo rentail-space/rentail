@@ -1,14 +1,11 @@
 import { readFile } from "node:fs/promises";
-import path from "node:path";
-import { invariant } from "es-toolkit";
-import type { LoaderFunctionArgs, Params } from "react-router";
+import type { LoaderFunctionArgs } from "react-router";
+import { loadBlogPost } from "~/lib/blogPosts.server";
 
 export async function loader({ params }: LoaderFunctionArgs<{ post: string }>) {
   try {
-    const postName = validateParam(params);
-    const image = await readFile(
-      path.join(process.cwd(), "app/data/blog", `${postName}.jpg`),
-    );
+    const { filename } = await loadBlogPost(params.post);
+    const image = await readFile(filename.replace(".md", ".jpg"));
     return new Response(image.buffer as BodyInit, {
       headers: {
         "Content-Type": "image/jpeg",
@@ -19,20 +16,4 @@ export async function loader({ params }: LoaderFunctionArgs<{ post: string }>) {
     console.error(error);
     throw new Response("Not Found", { status: 404 });
   }
-}
-
-export function validateParam(params: Params<string>) {
-  const postName = params.post;
-
-  // This prevents attacks like:
-  // - ../../../etc/passwd
-  // - ..\\..\\windows\\system32\\config
-  // - .git/config
-  invariant(
-    postName &&
-      path.basename(postName) === postName && // No path separators
-      /^[a-zA-Z0-9-]+$/.test(postName), // Only safe characters
-    "Invalid post name",
-  );
-  return postName;
 }

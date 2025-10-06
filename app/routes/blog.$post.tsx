@@ -1,36 +1,22 @@
-import { readFile } from "node:fs/promises";
-import path from "node:path";
-import dayjs from "dayjs";
 import { invariant } from "es-toolkit";
 import fm from "front-matter";
 import { DateTime } from "luxon";
 import { type LoaderFunctionArgs, useLoaderData } from "react-router";
 import removeMd from "remove-markdown";
 import { Streamdown } from "streamdown";
+import { loadBlogPost } from "~/lib/blogPosts.server";
 import truncateWords from "~/lib/truncateWords";
-import { validateParam } from "./blog.$post[.]jpg";
 
 export async function loader({
   params,
 }: LoaderFunctionArgs<{ post: string }>): Promise<{
   post: string;
+  published: Date;
   slug: string;
 }> {
   try {
-    const postName = validateParam(params);
-    const post = await readFile(
-      path.join(process.cwd(), "app/data/blog", `${postName}.md`),
-      "utf8",
-    );
-    const published = DateTime.fromISO(
-      postName?.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
-      { zone: "utc" },
-    );
-    invariant(
-      dayjs().isAfter(published.toJSDate()),
-      "Published date is in the future",
-    );
-    return { post, slug: postName };
+    invariant(params.post, "Post is required");
+    return await loadBlogPost(params.post);
   } catch (error) {
     console.error(error);
     throw new Response("Not Found", { status: 404 });
@@ -38,12 +24,8 @@ export async function loader({
 }
 
 export default function Post() {
-  const { post, slug } = useLoaderData<typeof loader>();
+  const { post, slug, published } = useLoaderData<typeof loader>();
   const { attributes, body } = fm<{ title: string }>(post);
-  const published = DateTime.fromISO(
-    slug?.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
-    { zone: "utc" },
-  );
 
   return (
     <article className="prose prose-lg mx-auto">
@@ -60,7 +42,10 @@ export default function Post() {
       </figure>
 
       <div className="text-gray-500 text-sm">
-        {published.toFormat("LLLL dd, yyyy", { locale: "en-US" })}
+        {DateTime.fromISO(published.toISOString(), { zone: "utc" }).toFormat(
+          "LLLL dd, yyyy",
+          { locale: "en-US" },
+        )}
       </div>
 
       <Streamdown
@@ -115,7 +100,7 @@ function JSONLD({
   title,
 }: {
   body: string;
-  published: DateTime;
+  published: Date;
   slug: string;
   title: string;
 }) {
@@ -125,7 +110,7 @@ function JSONLD({
         "@context": "https://schema.org",
         "@type": "WebPage",
         "@id": `https://rentail.space/blog/${slug}`,
-        datePublished: published.toISODate(),
+        datePublished: published,
         description: truncateWords(removeMd(body), 50),
         inLanguage: "en-US",
         name: title,
@@ -145,7 +130,7 @@ function MetaTags({
   slug,
   title,
 }: {
-  published: DateTime;
+  published: Date;
   slug: string;
   title: string;
 }) {
@@ -158,12 +143,7 @@ function MetaTags({
         name="og:image"
         content={`https://rentail.space/blog/${slug}.jpg`}
       />
-      <meta
-        name="og:published_time"
-        content={published.toFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", {
-          locale: "en-US",
-        })}
-      />
+      <meta name="og:published_time" content={published.toISOString()} />
       <meta name="og:title" content={title} />
       <meta name="og:type" content="article" />
       <meta name="og:url" content={`https://rentail.space/blog/${slug}`} />

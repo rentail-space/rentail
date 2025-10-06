@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import { drop, take } from "es-toolkit";
 import type { FrontMatterResult } from "front-matter";
-import { DateTime } from "luxon";
 import { Link } from "react-router";
 import removeMd from "remove-markdown";
 import truncateWords from "~/lib/truncateWords";
@@ -9,16 +8,13 @@ import truncateWords from "~/lib/truncateWords";
 export default function BlogPosts({
   posts,
 }: {
-  posts: (FrontMatterResult<{ title: string }> & { slug: string })[];
+  posts: (FrontMatterResult<{ title: string }> & {
+    slug: string;
+    published: Date;
+  })[];
 }) {
   const today = dayjs();
-  const isPublished = posts.filter((post) =>
-    today.isAfter(
-      DateTime.fromISO(
-        post.slug.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
-      ).toJSDate(),
-    ),
-  );
+  const isPublished = posts.filter((post) => today.isAfter(post.published));
   const first = take(isPublished, 3);
   const rest = drop(isPublished, 3);
 
@@ -27,8 +23,8 @@ export default function BlogPosts({
       {first.map((post) => (
         <Link
           className="link link-hover flex flex-row gap-4"
-          to={`/blog/${post.slug}`}
           key={post.slug}
+          to={`/blog/${post.slug}`}
         >
           <img
             alt=""
@@ -49,8 +45,8 @@ export default function BlogPosts({
       {rest.map((post) => (
         <Link
           className="link link-hover"
-          to={`/blog/${post.slug}`}
           key={post.slug}
+          to={`/blog/${post.slug}`}
         >
           <h5 className="flex flex-row items-start flex-nowrap gap-2">
             <ArrowIcon className="ml-3 mt-3 h-3 w-3 flex-shrink-0" />

@@ -1,8 +1,7 @@
-import fs from "node:fs";
 import path from "node:path";
 import { generateRemixSitemap } from "@forge42/seo-tools/remix/sitemap";
-import dayjs from "dayjs";
 import { href } from "react-router";
+import { listBlogPosts } from "~/lib/blogPosts.server";
 
 export async function loader() {
   // NOTE Google does not support changefreq and priority.
@@ -13,23 +12,17 @@ export async function loader() {
   const sitemap = await generateRemixSitemap({
     domain: "https://rentail.space",
     ignore: ["*/\\*", "/api/*"],
-    routes: { ...routes, ...blogPosts("app/data/blog") },
+    routes: { ...routes, ...(await blogPosts()) },
   });
   return new Response(sitemap, {
     headers: { "Content-Type": "application/xml" },
   });
 }
 
-function blogPosts(
-  dir: string,
-): Record<string, { id: string; module: string; path: string }> {
-  const today = dayjs();
-  const filenames = fs
-    .readdirSync(path.join(process.cwd(), dir))
-    .filter((filename: string) => filename.endsWith(".md"))
-    .filter((filename) =>
-      today.isAfter(new Date(filename.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? "")),
-    );
+async function blogPosts(): Promise<
+  Record<string, { id: string; module: string; path: string }>
+> {
+  const filenames = await listBlogPosts();
   return Object.fromEntries(
     filenames.map((filename) => [
       `routes/blog/${path.basename(filename, ".md")}`,

@@ -1,11 +1,12 @@
 import fs from "node:fs";
-import path from "node:path";
+import { basename } from "node:path";
 import dayjs from "dayjs";
 import fm from "front-matter";
 import { DateTime } from "luxon";
 import { useId } from "react";
 import { useLoaderData } from "react-router";
 import Footer from "~/components/layout/Footer";
+import { listBlogPosts } from "~/lib/blogPosts.server";
 import BlogPosts from "~/routes/home/BlogPosts";
 import FeaturesSection from "~/routes/home/FeaturesSection";
 import HeroSection from "~/routes/home/HeroSection";
@@ -16,25 +17,22 @@ import SpecialtyLeasing from "~/routes/home/SpecialtyLeasing";
 export const handle = { hideLayout: true };
 
 export async function loader() {
-  const dataDir = path.join(process.cwd(), "app/data/blog");
   const today = dayjs();
-  const posts = fs
-    .readdirSync(dataDir)
-    .filter((filename: string) => filename.endsWith(".md"))
+  const filenames = await listBlogPosts();
+  const posts = filenames
     .map((filename: string) => ({
-      content: fs.readFileSync(path.join(dataDir, filename), "utf8"),
-      filename,
+      content: fs.readFileSync(filename, "utf8"),
+      slug: basename(filename, ".md"),
     }))
-    .map(({ filename, content }) => ({
+    .map(({ slug, content }) => ({
       ...fm<{ title: string }>(content),
-      slug: filename.replace(".md", ""),
-      published: DateTime.fromISO(
-        filename.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
-        { zone: "utc" },
-      ),
+      slug,
+      published: DateTime.fromISO(slug.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? "", {
+        zone: "utc",
+      }).toJSDate(),
     }))
-    .filter((post) => today.isAfter(post.published.toJSDate()))
-    .sort((a, b) => b.published.toMillis() - a.published.toMillis());
+    .filter((post) => today.isAfter(post.published))
+    .sort((a, b) => b.published.getTime() - a.published.getTime());
   return { posts };
 }
 
