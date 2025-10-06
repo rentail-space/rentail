@@ -58,10 +58,6 @@ export default Sentry.wrapSentryHandleRequest(
       loadContext as AppLoadContext,
       { nonce },
     );
-    response.headers.set(
-      "Content-Security-Policy",
-      `script-src 'nonce-${nonce}'`,
-    );
     response.headers.set("Document-Policy", "js-profiling");
     return response;
   },
