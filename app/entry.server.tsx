@@ -7,7 +7,7 @@ import type {
   EntryContext,
   LoaderFunctionArgs,
 } from "react-router";
-import { ServerRouter } from "react-router";
+import { RouterContextProvider, ServerRouter } from "react-router";
 import env from "~/lib/env";
 import "~/lib/instrument.server";
 import debug from "debug";
@@ -36,6 +36,10 @@ if (env.isTest) {
   // Initialize MSW in test mode
   const { default: server } = await import("~/test/mocks/msw.server");
   server.listen({ onUnhandledRequest: "error" });
+}
+
+export function getLoadContext() {
+  return new RouterContextProvider();
 }
 
 function handleRequest(

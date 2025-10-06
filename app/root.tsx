@@ -6,7 +6,6 @@ import {
   Meta,
   type MetaFunction,
   Outlet,
-  RouterContextProvider,
   Scripts,
   ScrollRestoration,
   useLocation,
@@ -26,14 +25,6 @@ import type { Route } from "./+types/root";
 import { getUserChat } from "./sessions.server";
 
 export const middleware: Route.MiddlewareFunction[] = [loggingMiddleware];
-
-/**
- * This is necessary when exposing middleware in React Router v7.
- */
-export function getLoadContext() {
-  const context = new RouterContextProvider();
-  return context;
-}
 
 export async function loader({ request }: Route.LoaderArgs) {
   const { headers, chat, messages } = await getUserChat(request.headers);
