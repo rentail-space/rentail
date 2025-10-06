@@ -251,7 +251,6 @@ Required environment variables (set in `.env.local`):
 Optional environment variables:
 - `SENTRY_DSN`: Sentry project DSN for error tracking
 - `SENTRY_AUTH_TOKEN`: Sentry auth token for build-time integration
-- `IPGEOLOCATION_API_KEY`: API key for IP geolocation services
 - `NODE_ENV`: Environment (development/production/test)
 - `SSR_REQUEST_TIMEOUT_MS`: SSR timeout in milliseconds (default: 5000)
 - `METRICS_COLLECTION_INTERVAL_MS`: Metrics collection interval (default: 300000ms / 5 minutes)

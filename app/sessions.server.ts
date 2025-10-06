@@ -1,11 +1,9 @@
 import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
-import Redis from "ioredis";
 import type { ChatGetPayload } from "prisma/generated/models";
 import zod from "zod";
 import authServer from "~/lib/auth.server";
-import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { getRecentMessages, updateWorkingMemory } from "~/lib/workingMemory";
 
@@ -24,8 +22,6 @@ const cachedLocation = zod
     timeZone: zod.string(),
   })
   .partial();
-
-const redis = new Redis(env.REDIS_URL);
 
 /**
  * Get the chat for the user from the session. If no chat is found, a new one is
@@ -107,69 +103,13 @@ async function getChatForUser(user: { id: string }): Promise<{
 export async function geocodeIP(
   headers: Headers,
 ): Promise<zod.infer<typeof cachedLocation>> {
-  const clientIp = headers.get("x-forwarded-for") ?? "146.70.195.182";
-
-  const key = `location:${clientIp}`;
-  const { success, data } = cachedLocation.safeParse(await redis.get(key));
-  if (success) return data;
-
-  const geocoded = await geocode(clientIp);
-  const location = cachedLocation.parse({
-    city: geocoded.location.city,
-    country: geocoded.location.country_name,
-    ip: clientIp,
-    latitude: geocoded.location.latitude,
-    longitude: geocoded.location.longitude,
-    state: geocoded.location.state_prov,
-    timeZone: geocoded.time_zone.name,
-  });
-  await redis.set(key, JSON.stringify(location), "EX", 60 * 60 * 24 * 30); // 30 days
-  return location;
+  return {
+    city: headers.get("x-vercel-ip-city") ?? "Los Angeles",
+    country: headers.get("x-vercel-ip-country") ?? "United States",
+    ip: headers.get("x-forwarded-for") ?? "146.70.195.182",
+    latitude: headers.get("x-vercel-ip-latitude") ?? "37.42240",
+    longitude: headers.get("x-vercel-ip-longitude") ?? "-122.08421",
+    state: headers.get("x-vercel-ip-country-region") ?? "California",
+    timeZone: headers.get("x-vercel-ip-timezone") ?? "America/Los_Angeles",
+  };
 }
-
-async function geocode(
-  clientIp: string,
-): Promise<zod.infer<typeof ipDataSchema>> {
-  console.info("[GEOCODE] Geocoding IP %s", clientIp);
-  try {
-    const url = new URL("https://api.ipgeolocation.io/v2/timezone");
-    url.searchParams.set("apiKey", env.IPGEOLOCATION_API_KEY);
-    url.searchParams.set("ip", clientIp);
-    url.searchParams.set("fields", "time_zone,location");
-    const response = await fetch(url, {
-      headers: { "Content-Type": "application/json" },
-    });
-    invariant(response.ok, "Failed to geocode IP");
-    return ipDataSchema.parse(await response.json());
-  } catch (error) {
-    captureException(error, { extra: { clientIp } });
-    return ipDataSchema.parse(undefined);
-  }
-}
-
-// See https://ipgeolocation.io/ip-location-api.html#documentation-overview
-const ipDataSchema = zod
-  .object({
-    location: zod.object({
-      country_name: zod.string(), // eg "United States"
-      state_prov: zod.string(), // eg "California"
-      city: zod.string(), // eg "Mountain View"
-      zipcode: zod.string(), // eg "94043-1351"
-      latitude: zod.string(), // eg "37.42240"
-      longitude: zod.string(), // eg "-122.08421"
-    }),
-    time_zone: zod.object({
-      name: zod.string(), // eg "America/Los_Angeles"
-    }),
-  })
-  .catch({
-    location: {
-      country_name: "United States",
-      state_prov: "California",
-      city: "Mountain View",
-      zipcode: "94043-1351",
-      latitude: "34.07558",
-      longitude: "-118.37841",
-    },
-    time_zone: { name: "America/Los_Angeles" },
-  });

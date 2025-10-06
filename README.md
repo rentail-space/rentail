@@ -37,7 +37,6 @@ PUSHGATEWAY_TOKEN=your_pushgateway_token
 SENTRY_DSN=your_sentry_dsn
 CHECKLY_ACCOUNT_ID=your_checkly_account_id
 CHECKLY_API_KEY=your_checkly_api_key
-IPGEOLOCATION_API_KEY=your_ipgeolocation_api_key
 ```
 
 ### Installation & Development

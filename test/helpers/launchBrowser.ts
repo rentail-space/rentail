@@ -26,10 +26,14 @@ export let worker: ChildProcess | undefined;
  * @param path - The path to open.
  * @returns The page.
  */
-export async function goto(path: string): Promise<Page> {
+export async function goto(
+  path: string,
+  headers?: Record<string, string>,
+): Promise<Page> {
   await launchServer();
   const context = await launchBrowser();
   const page = await context.newPage();
+  await page.setExtraHTTPHeaders(headers ?? {});
   await waitForDependencies(page, path);
   return page;
 }

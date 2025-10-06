@@ -9,7 +9,15 @@ describe("Anonymous visits chat page", () => {
   let page: Page;
 
   beforeAll(async () => {
-    page = await goto("/chat");
+    page = await goto("/chat", {
+      "x-forwarded-for": "146.70.195.182",
+      "x-vercel-ip-city": "Los Angeles",
+      "x-vercel-ip-country": "United States",
+      "x-vercel-ip-country-region": "California",
+      "x-vercel-ip-timezone": "America/Los_Angeles",
+      "x-vercel-ip-latitude": "37.42240",
+      "x-vercel-ip-longitude": "-122.08421",
+    });
   });
 
   it("loads chat page and shows sign-in button", async () => {

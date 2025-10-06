@@ -24,30 +24,6 @@ export const handlers = [
     },
   ),
 
-  http.get(
-    "https://api.ipgeolocation.io/v2/timezone",
-    async ({ request }: { request: Request }) => {
-      const url = new URL(request.url);
-      const ip = url.searchParams.get("ip");
-      invariant(ip, "IP is required");
-      if (ip === "146.70.195.182") {
-        return HttpResponse.json({
-          location: {
-            country_name: "United States",
-            state_prov: "California",
-            city: "Los Angeles",
-            zipcode: "90001",
-            latitude: "37.42240",
-            longitude: "-122.08421",
-          },
-          time_zone: {
-            name: "America/Los_Angeles",
-          },
-        });
-      } else return new HttpResponse({ status: 404 });
-    },
-  ),
-
   // Make sure we're not sending emails in tests
   http.post("https://api.resend.com/emails", () =>
     HttpResponse.json({ id: ulid() }),

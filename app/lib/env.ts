@@ -14,10 +14,6 @@ export default {
   PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required(false).asString(),
   PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required(false).asUrlString(),
   SENTRY_DSN: env.get("SENTRY_DSN").required(false).asUrlString(),
-  IPGEOLOCATION_API_KEY: env
-    .get("IPGEOLOCATION_API_KEY")
-    .required(false)
-    .asString(),
 
   ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required(true).asString(),
   DATABASE_URL: isTest
