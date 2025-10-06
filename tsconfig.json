@@ -1,9 +1,15 @@
 {
   "include": [
-    "**/*",
-    "**/.server/**/*",
-    "**/.client/**/*",
-    ".react-router/types/**/*"
+    "**/*.ts",
+    "**/*.tsx",
+    ".react-router/types/**/*",
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    ".vercel",
+    "test/context",
   ],
   "compilerOptions": {
     "baseUrl": ".",
