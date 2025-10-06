@@ -4,9 +4,6 @@ import dayjs from "dayjs";
 import { invariant } from "es-toolkit";
 import { DateTime } from "luxon";
 
-// Directory where blog posts are stored
-const blogPostsDir = path.join(import.meta.dirname, "../data/blog");
-
 /**
  * Lists all blog posts in the blogPostsDir directory. We only include posts that
  * are published based on the published date in the filename.
@@ -14,6 +11,7 @@ const blogPostsDir = path.join(import.meta.dirname, "../data/blog");
  * @returns An array of blog post filenames.
  */
 export async function listBlogPosts(): Promise<string[]> {
+  const blogPostsDir = path.join(__dirname, "../data/blog");
   const filenames = await readdir(blogPostsDir);
   const publishedPosts = filenames
     .filter((filename) => filename.endsWith(".md"))
