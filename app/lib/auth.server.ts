@@ -2,6 +2,7 @@ import { captureException } from "@sentry/react-router";
 import { type BetterAuthOptions, betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { anonymous, type UserWithAnonymous } from "better-auth/plugins";
+import debug from "debug";
 import prisma from "~/lib/prisma";
 import sendVerificationEmail from "~/lib/sendVerificationEmail";
 import sendWelcomeEmail from "~/lib/sendWelcomeEmail";
@@ -39,7 +40,8 @@ export default betterAuth({
     resetPasswordTokenExpiresIn: 3600, // 1 hour
     sendResetPassword: async ({ user, url }) => {
       // TODO: Send password reset email
-      console.info(`[EMAIL] Password reset link for ${user.email}: ${url}`);
+      if (debug("email").enabled)
+        console.info(`[EMAIL] Password reset link for ${user.email}: ${url}`);
     },
   },
 

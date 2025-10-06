@@ -1,13 +1,15 @@
 import { pretty, render } from "@react-email/components";
 import { captureException } from "@sentry/react-router";
+import debug from "debug";
 import type { JSX } from "react";
 import { Resend } from "resend";
 import env from "~/lib/env";
 
-const resend = new Resend(env.RESEND_API_KEY);
-
 // Test-only: stores last sent email HTML for visual regression testing
 export let lastEmailHtml: string | null = null;
+
+const resend = new Resend(env.RESEND_API_KEY);
+const logging = debug("email").enabled;
 
 /**
  * Send an email using Resend. If an error occurs, it will be captured by Sentry.
@@ -39,9 +41,10 @@ export async function sendEmail({
     });
     if (error) throw error;
 
-    console.info("[EMAIL] %s sent to %s", subject, email);
+    if (logging) console.info("[EMAIL] %s sent to %s", subject, email);
   } catch (error) {
-    console.error("[EMAIL] Error sending %s email: %s", subject, error);
+    if (logging)
+      console.error("[EMAIL] Error sending %s email: %s", subject, error);
     captureException(error, { extra: { email } });
   }
 }

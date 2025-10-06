@@ -1,5 +1,8 @@
+import debug from "debug";
 import type { Route } from "../../+types/root";
 import logtail from "../logger.server";
+
+const logging = debug("server").enabled;
 
 const loggingMiddleware: Route.MiddlewareFunction = async (
   { request },
@@ -10,7 +13,7 @@ const loggingMiddleware: Route.MiddlewareFunction = async (
   const { pathname } = new URL(request.url);
   const referrer = request.headers.get("Referer") ?? "";
 
-  console.info("%s %s", method, pathname);
+  if (logging) console.info("%s %s", method, pathname);
 
   // Call next middleware/loader
   const response = await next();
@@ -18,11 +21,13 @@ const loggingMiddleware: Route.MiddlewareFunction = async (
   const duration = Date.now() - start;
   const status = response.status;
   if (response.status >= 500) {
-    console.error("%s %s => %d (%dms)", method, pathname, status, duration);
+    if (logging)
+      console.error("%s %s => %d (%dms)", method, pathname, status, duration);
     logtail?.error("request", { duration, referrer, method, pathname, status });
     logtail?.flush();
   } else {
-    console.info("%s %s => %d (%dms)", method, pathname, status, duration);
+    if (logging)
+      console.info("%s %s => %d (%dms)", method, pathname, status, duration);
     logtail?.info("request", { duration, referrer, method, pathname, status });
   }
 
