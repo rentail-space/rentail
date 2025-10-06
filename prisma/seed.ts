@@ -1,72 +1,9 @@
-import { readdirSync } from "node:fs";
-import { readdir, readFile } from "node:fs/promises";
-import { join, resolve } from "node:path";
 import prisma from "app/lib/prisma";
-import { z } from "zod";
+import seedShoppingCenters from "./seed/seedShoppingCenters";
 
 // NOTE don't use lib/config here, we don't plan to set all the environment
 // variables just to seed the database.
 
 // NOTE We're using postgis to find nearby shopping centers.
 await prisma.$executeRaw`CREATE EXTENSION IF NOT EXISTS postgis;`;
-await addShoppingCenters();
-
-async function addShoppingCenters() {
-  const shoppingCenter = z.object({
-    address: z.string(),
-    city: z.string(),
-    country: z.string(),
-    description: z.string(),
-    id: z.cuid2(),
-    imageURLs: z.array(z.url()),
-    latitude: z.string(),
-    longitude: z.string(),
-    name: z.string(),
-    state: z.string(),
-    spaces: z.array(
-      z.object({
-        available: z.literal(["week", "weekends"]),
-        cost: z.number(),
-        details: z.string(),
-        footTraffic: z.number(),
-        id: z.cuid2(),
-        imageURLs: z.array(z.url()),
-        name: z.string(),
-        size: z.number(),
-      }),
-    ),
-  });
-
-  const dirname = resolve("prisma/seed");
-  for (const file of await readdir(dirname)) {
-    console.info(`[SEED] Seeding ${file}`);
-    const data = await readFile(join(dirname, file), "utf-8");
-    const json = shoppingCenter.parse(JSON.parse(data));
-    const fields = {
-      address: json.address,
-      city: json.city,
-      country: json.country,
-      description: json.description,
-      imageURLs: json.imageURLs,
-      name: json.name,
-      spaces: { create: json.spaces },
-      state: json.state,
-    };
-    await prisma.shoppingCenter.upsert({
-      create: { ...fields, id: json.id },
-      update: {
-        ...fields,
-        spaces: {
-          upsert: json.spaces.map((space) => ({
-            create: space,
-            update: space,
-            where: { id: space.id },
-          })),
-        },
-      },
-      where: { id: json.id },
-    });
-    const point = `POINT(${json.longitude} ${json.latitude})`;
-    await prisma.$queryRaw`UPDATE "shopping_centers" SET location = ST_GeomFromText(${point}) WHERE ID=${json.id};`;
-  }
-}
+await seedShoppingCenters();

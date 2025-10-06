@@ -78,7 +78,6 @@ jobs:
         run: |
           pnpm dlx prisma generate 
           pnpm dlx prisma db push
-          pnpm dlx prisma db seed
         env:
           NODE_ENV: "test"
 

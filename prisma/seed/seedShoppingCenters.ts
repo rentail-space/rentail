@@ -1,0 +1,67 @@
+import { readdir, readFile } from "node:fs/promises";
+import { join, resolve } from "node:path";
+import prisma from "app/lib/prisma";
+import debug from "debug";
+import { z } from "zod";
+
+const logging = debug("seed").enabled;
+
+export default async function seedShoppingCenters() {
+  if (logging) console.info("[SEED] Seeding shopping centers");
+
+  const dirname = resolve("prisma/seed");
+  const filenames = (await readdir(dirname)).filter((filename) =>
+    filename.endsWith(".json"),
+  );
+
+  for (const filename of filenames) {
+    if (logging) console.info(`[SEED] Seeding ${filename}`);
+    const data = await readFile(join(dirname, filename), "utf-8");
+    const json = shoppingCenter.parse(JSON.parse(data));
+    await prisma.shoppingCenter.upsert({
+      create: {
+        ...json,
+        spaces: { create: json.spaces },
+        id: json.id,
+      },
+      update: {
+        ...json,
+        spaces: {
+          upsert: json.spaces.map((space) => ({
+            create: space,
+            update: space,
+            where: { id: space.id },
+          })),
+        },
+      },
+      where: { id: json.id },
+    });
+    const point = `POINT(${json.longitude} ${json.latitude})`;
+    await prisma.$queryRaw`UPDATE "shopping_centers" SET location = ST_GeomFromText(${point}) WHERE ID=${json.id};`;
+  }
+}
+
+const shoppingCenter = z.object({
+  address: z.string(),
+  city: z.string(),
+  country: z.string(),
+  description: z.string(),
+  id: z.cuid2(),
+  imageURLs: z.array(z.url()),
+  latitude: z.string(),
+  longitude: z.string(),
+  name: z.string(),
+  state: z.string(),
+  spaces: z.array(
+    z.object({
+      available: z.literal(["week", "weekends"]),
+      cost: z.number(),
+      details: z.string(),
+      footTraffic: z.number(),
+      id: z.cuid2(),
+      imageURLs: z.array(z.url()),
+      name: z.string(),
+      size: z.number(),
+    }),
+  ),
+});

@@ -1,6 +1,7 @@
 // This file contains setup code that will run before all tests
 
 import * as Sentry from "@sentry/react-router";
+import seedShoppingCenters from "prisma/seed/seedShoppingCenters";
 import { afterAll, beforeAll } from "vitest";
 import whyIsNodeRunning from "why-is-node-running";
 import prisma from "~/lib/prisma";
@@ -26,6 +27,7 @@ beforeAll(async () => {
     prisma.verification.deleteMany(),
     prisma.waitlist.deleteMany(),
   ]);
+  await seedShoppingCenters();
 });
 
 afterAll(async () => {

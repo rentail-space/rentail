@@ -79,11 +79,13 @@ model ShoppingCenter {
   description String                    @map("description")
   id          String                    @map("id")          @id @default(cuid(2))
   imageURLs   String[]                  @map("image_urls")
+  latitude    String                    @map("latitude")
+  location    Unsupported("geography")? @map("location")
+  longitude   String                    @map("longitude")
   name        String                    @map("name")
+  spaces      ShoppingCenterSpace[]
   state       String                    @map("state")
   updatedAt   DateTime                  @map("updated_at")  @updatedAt
-  location    Unsupported("geography")? @map("location")
-  spaces      ShoppingCenterSpace[]
 
   @@map("shopping_centers")
 }
@@ -101,6 +103,7 @@ model ShoppingCenterSpace {
   available   String         @map("available")
   name        String         @map("name")
   center      ShoppingCenter @relation(fields: [centerId], references: [id], onDelete: Cascade)
+
 
   @@map("shopping_center_spaces")
 }
