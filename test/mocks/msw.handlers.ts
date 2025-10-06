@@ -1,5 +1,4 @@
 import debug from "debug";
-import { invariant } from "es-toolkit";
 import { HttpResponse, http, passthrough } from "msw";
 import { ulid } from "ulid";
 import { findMockResponse } from "~/test/mocks/anthropic.mock";
