@@ -1,4 +1,4 @@
-import { join } from "node:path";
+import { resolve } from "node:path";
 import { URL as URLString } from "node:url";
 import { delay, invariant } from "es-toolkit";
 import {
@@ -46,7 +46,7 @@ export async function goto(
  */
 async function waitForDependencies(page: Page, path: string) {
   // We expect 900+ files to be present in .vite/deps
-  const dirname = join(import.meta.dirname, "../../node_modules/.vite/deps");
+  const dirname = resolve("node_modules/.vite/deps");
   await Promise.all([
     page.goto(path, { waitUntil: "networkidle" }),
     (async () => {
@@ -137,7 +137,7 @@ export async function launchServer(): Promise<void> {
 
   // Start the server as forked process, that way we don't share the same node
   // instance, which could cause issues with some libraries (eg Prisma)
-  worker = fork(join(__dirname, "serverWorker.ts"), {
+  worker = fork(resolve("test/helpers/serverWorker.ts"), {
     stdio: "inherit",
     env: {
       ...process.env,

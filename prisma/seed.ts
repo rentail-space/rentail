@@ -1,6 +1,6 @@
 import { readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import prisma from "app/lib/prisma";
 import { z } from "zod";
 
@@ -37,7 +37,7 @@ async function addShoppingCenters() {
     ),
   });
 
-  const dirname = join(import.meta.dirname, "seed");
+  const dirname = resolve("seed");
   for (const file of readdirSync(dirname)) {
     console.info(`[SEED] Seeding ${file}`);
     const data = await readFile(join(dirname, file), "utf-8");
