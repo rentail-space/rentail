@@ -3,6 +3,7 @@ import { type BetterAuthOptions, betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { anonymous, type UserWithAnonymous } from "better-auth/plugins";
 import debug from "debug";
+import { DEFAULTS } from "~/lib/constants";
 import prisma from "~/lib/prisma";
 import sendVerificationEmail from "~/lib/sendVerificationEmail";
 import sendWelcomeEmail from "~/lib/sendWelcomeEmail";
@@ -61,7 +62,7 @@ export default betterAuth({
         type: "string",
       },
       ip: {
-        defaultValue: "146.70.195.182",
+        defaultValue: DEFAULTS.LOCATION.ip,
         required: true,
         type: "string",
       },

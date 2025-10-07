@@ -5,7 +5,7 @@ import { captureException } from "@sentry/react-router";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { ulid } from "ulid";
 import zod from "zod";
-import { PrismaStorage } from "~/lib/PrismaStorage ";
+import { PrismaStorage } from "~/lib/PrismaStorage";
 import welcome from "~/prompts/welcome.md?raw";
 
 /**
