@@ -5,6 +5,8 @@ import { captureException } from "@sentry/react-router";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { ulid } from "ulid";
 import zod from "zod";
+import { DEFAULTS } from "~/lib/constants";
+import { safeParseJSON, safeStringify } from "~/lib/json";
 import { PrismaStorage } from "~/lib/PrismaStorage";
 import welcome from "~/prompts/welcome.md?raw";
 
@@ -63,7 +65,7 @@ export const userProfile = zod
 
 export const memory = new Memory({
   options: {
-    lastMessages: 10,
+    lastMessages: DEFAULTS.MEMORY.LAST_MESSAGES,
     threads: {
       generateTitle: true,
     },
@@ -73,10 +75,7 @@ export const memory = new Memory({
       scope: "resource",
     },
   },
-  processors: [
-    new ToolCallFilter(),
-    new TokenLimiter(127000), // Ensure the total tokens from memory don't exceed ~127k
-  ],
+  processors: [new ToolCallFilter(), new TokenLimiter(DEFAULTS.AI.TOKEN_LIMIT)],
   storage: new PrismaStorage(),
 });
 
@@ -152,9 +151,17 @@ export async function getWorkingMemory(
       resourceId: chat.user.id,
       threadId: chat.id,
     })) ?? "{}";
+
+  const parsed =
+    safeParseJSON(
+      json,
+      zod.record(zod.string(), zod.unknown()) as zod.ZodSchema<
+        Record<string, unknown>
+      >,
+    ) ?? {};
   const { success, data, error } = userProfile.safeParse({
     location: chat.user.geocode,
-    ...JSON.parse(json),
+    ...parsed,
   });
   if (success) return data;
   else {
@@ -185,7 +192,7 @@ export async function updateWorkingMemory(
     await memory.updateWorkingMemory({
       resourceId: chat.user.id,
       threadId: chat.id,
-      workingMemory: JSON.stringify(data),
+      workingMemory: safeStringify(data),
     });
     return data;
   } else {

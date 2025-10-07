@@ -4,7 +4,6 @@ import { invariant } from "es-toolkit";
 import type { ChatGetPayload } from "prisma/generated/models";
 import zod from "zod";
 import authServer from "~/lib/auth.server";
-import { DEFAULTS } from "~/lib/constants";
 import prisma from "~/lib/prisma";
 import { getRecentMessages, updateWorkingMemory } from "~/lib/workingMemory";
 

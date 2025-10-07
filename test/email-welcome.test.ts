@@ -1,7 +1,7 @@
 import { expect, type Page } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
+import { sendWelcomeEmail } from "~/lib/emails";
 import { lastEmailHtml } from "~/lib/resend";
-import sendWelcomeEmail from "~/lib/sendWelcomeEmail";
 import renderEmail from "./helpers/renderEmail";
 
 describe("Welcome Email", () => {

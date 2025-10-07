@@ -8,6 +8,11 @@ export const DEFAULTS = {
     state: "California",
     timeZone: "America/Los_Angeles",
   },
+  USER: {
+    geocode: "{}",
+    metadata: "{}",
+    workingMemory: "",
+  },
   AI: {
     MAX_STEPS: 3,
     TOKEN_LIMIT: 127000,

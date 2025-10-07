@@ -22,6 +22,8 @@ import type { StepResult, WorkflowRunState } from "@mastra/core/workflows";
 import { invariant } from "es-toolkit";
 import type { Chat, Messages, User } from "prisma/generated/client";
 import type { Role } from "prisma/generated/enums";
+import { DEFAULTS } from "~/lib/constants";
+import { safeStringify } from "~/lib/json";
 import prisma from "~/lib/prisma";
 
 /**
@@ -74,6 +76,101 @@ export class PrismaStorage extends MastraStorage {
     throw new Error("Not implemented");
   }
 
+  getTraces(): Promise<Trace[]> {
+    return Promise.resolve([]);
+  }
+
+  getTracesPaginated(): Promise<PaginationInfo & { traces: Trace[] }> {
+    return Promise.resolve({
+      page: 0,
+      perPage: 10,
+      total: 0,
+      hasMore: false,
+      traces: [],
+    });
+  }
+
+  updateWorkflowResults(): Promise<
+    Record<string, StepResult<string, string, string, string>>
+  > {
+    return Promise.resolve({});
+  }
+
+  updateWorkflowState(): Promise<WorkflowRunState | undefined> {
+    return Promise.resolve(undefined);
+  }
+
+  getScoreById(): Promise<ScoreRowData | null> {
+    return Promise.resolve(null);
+  }
+
+  saveScore(): Promise<{ score: ScoreRowData }> {
+    throw new Error("Not implemented");
+  }
+
+  getScoresByScorerId(): Promise<{
+    pagination: PaginationInfo;
+    scores: ScoreRowData[];
+  }> {
+    return Promise.resolve({
+      pagination: { page: 0, perPage: 10, total: 0, hasMore: false },
+      scores: [],
+    });
+  }
+
+  getScoresByRunId(): Promise<{
+    pagination: PaginationInfo;
+    scores: ScoreRowData[];
+  }> {
+    return Promise.resolve({
+      pagination: { page: 0, perPage: 10, total: 0, hasMore: false },
+      scores: [],
+    });
+  }
+
+  getScoresByEntityId(): Promise<{
+    pagination: PaginationInfo;
+    scores: ScoreRowData[];
+  }> {
+    return Promise.resolve({
+      pagination: { page: 0, perPage: 10, total: 0, hasMore: false },
+      scores: [],
+    });
+  }
+
+  getEvals(): Promise<PaginationInfo & { evals: EvalRow[] }> {
+    return Promise.resolve({
+      page: 0,
+      perPage: 10,
+      total: 0,
+      hasMore: false,
+      evals: [],
+    });
+  }
+
+  getEvalsByAgentName(): Promise<EvalRow[]> {
+    return Promise.resolve([]);
+  }
+
+  getWorkflowRuns(): Promise<WorkflowRuns> {
+    return Promise.resolve({
+      runs: [],
+      total: 0,
+    });
+  }
+
+  getWorkflowRunById(): Promise<WorkflowRun | null> {
+    return Promise.resolve(null);
+  }
+
+  persistWorkflowSnapshot(): Promise<void> {
+    return Promise.resolve();
+  }
+
+  loadWorkflowSnapshot(): Promise<WorkflowRunState | null> {
+    return Promise.resolve(null);
+  }
+
   async getThreadById({
     threadId,
   }: {
@@ -108,7 +205,7 @@ export class PrismaStorage extends MastraStorage {
   }): Promise<StorageThreadType> {
     const update = {
       createdAt: thread.createdAt,
-      metadata: JSON.stringify(thread.metadata ?? {}),
+      metadata: safeStringify(thread.metadata ?? {}),
       title: thread.title ?? undefined,
       updatedAt: thread.updatedAt,
       userId: thread.resourceId,
@@ -132,7 +229,7 @@ export class PrismaStorage extends MastraStorage {
   }): Promise<StorageThreadType> {
     const chat = await prisma.chat.update({
       where: { id },
-      data: { title, metadata: JSON.stringify(metadata) },
+      data: { title, metadata: safeStringify(metadata) },
     });
     return toThread(chat);
   }
@@ -238,7 +335,7 @@ export class PrismaStorage extends MastraStorage {
     const messages = await prisma.messages.createManyAndReturn({
       data: args.messages.map((message) => ({
         chatId,
-        content: JSON.stringify(message.content),
+        content: safeStringify(message.content),
         createdAt: message.createdAt,
         id: message.id,
         role: message.role as Role,
@@ -264,155 +361,13 @@ export class PrismaStorage extends MastraStorage {
     const messages = await prisma.messages.updateManyAndReturn({
       data: args.messages.map((message) => ({
         chatId,
-        content: message.content ? JSON.stringify(message.content) : undefined,
+        content: message.content ? safeStringify(message.content) : undefined,
         id: message.id,
         role: message.role as Role,
         type: message.type as MastraMessageV2["type"],
       })),
     });
     return toMessages(messages, "v2");
-  }
-
-  getTraces(/*args: StorageGetTracesArg*/): Promise<Trace[]> {
-    throw new Error("Not implemented");
-  }
-
-  getTracesPaginated(/*args: StorageGetTracesPaginatedArg*/): Promise<
-    PaginationInfo & { traces: Trace[] }
-  > {
-    throw new Error("Not implemented");
-  }
-
-  updateWorkflowResults(
-    /*{
-    workflowName,
-    runId,
-    stepId,
-    result,
-    runtimeContext,
-  }: {
-    workflowName: string;
-    runId: string;
-    stepId: string;
-    result: StepResult<string, string, string, string>;
-    runtimeContext: RuntimeContext;
-  }*/
-  ): Promise<Record<string, StepResult<string, string, string, string>>> {
-    throw new Error("Not implemented");
-  }
-
-  updateWorkflowState(
-    /*{
-    workflowName,
-    runId,
-    opts,
-  }: {
-    workflowName: string;
-    runId: string;
-    opts: {
-      status: string;
-      result?: StepResult<string, string, string, string>;
-      error?: string;
-      suspendedPaths?: Record<string, number[]>;
-      waitingPaths?: Record<string, number[]>;
-    };
-  }*/
-  ): Promise<WorkflowRunState | undefined> {
-    throw new Error("Not implemented");
-  }
-
-  getScoreById(/*{ id }: { id: string }*/): Promise<ScoreRowData | null> {
-    throw new Error("Not implemented");
-  }
-
-  saveScore(
-    /*
-    score: ValidatedSaveScorePayload,
-  }*/
-  ): Promise<{ score: ScoreRowData }> {
-    throw new Error("Not implemented");
-  }
-  getScoresByScorerId(
-    /*{
-    scorerId,
-    pagination,
-    entityId,
-    entityType,
-    source,
-  }: {
-    scorerId: string;
-    pagination: StoragePagination;
-    entityId?: string;
-    entityType?: string;
-    source?: ScoringSource;
-  }*/
-  ): Promise<{ pagination: PaginationInfo; scores: ScoreRowData[] }> {
-    throw new Error("Not implemented");
-  }
-
-  getScoresByRunId(
-    /*{
-    runId,
-    pagination,
-  }: {
-    runId: string;
-    pagination: StoragePagination;
-  }*/
-  ): Promise<{ pagination: PaginationInfo; scores: ScoreRowData[] }> {
-    throw new Error("Not implemented");
-  }
-
-  getScoresByEntityId(
-    /*{
-    entityId,
-    entityType,
-    pagination,
-  }: {
-    pagination: StoragePagination;
-    entityId: string;
-    entityType: string;
-  }*/
-  ): Promise<{ pagination: PaginationInfo; scores: ScoreRowData[] }> {
-    throw new Error("Not implemented");
-  }
-
-  getEvals(
-    /*
-    options: { agentName?: string; type?: "test" | "live" } & PaginationArgs,
-  }*/
-  ): Promise<PaginationInfo & { evals: EvalRow[] }> {
-    throw new Error("Not implemented");
-  }
-
-  getEvalsByAgentName(
-    /*
-    agentName: string,
-    type?: "test" | "live",
-  }*/
-  ): Promise<EvalRow[]> {
-    throw new Error("Not implemented");
-  }
-
-  getWorkflowRuns(
-    /*args?: {
-    workflowName?: string;
-    fromDate?: Date;
-    toDate?: Date;
-    limit?: number;
-    offset?: number;
-    resourceId?: string;
-  }*/
-  ): Promise<WorkflowRuns> {
-    throw new Error("Not implemented");
-  }
-
-  getWorkflowRunById(
-    /*args: {
-    runId: string;
-    workflowName?: string;
-  }*/
-  ): Promise<WorkflowRun | null> {
-    throw new Error("Not implemented");
   }
 
   async getThreadsByResourceIdPaginated(
@@ -467,34 +422,6 @@ export class PrismaStorage extends MastraStorage {
     };
   }
 
-  persistWorkflowSnapshot(
-    /*{
-    workflowName,
-    runId,
-    resourceId,
-    snapshot,
-  }: {
-    workflowName: string;
-    runId: string;
-    resourceId?: string;
-    snapshot: WorkflowRunState;
-  }*/
-  ): Promise<void> {
-    throw new Error("Not implemented");
-  }
-
-  loadWorkflowSnapshot(
-    /*{
-    workflowName,
-    runId,
-  }: {
-    workflowName: string;
-    runId: string;
-  }*/
-  ): Promise<WorkflowRunState | null> {
-    throw new Error("Not implemented");
-  }
-
   async getResourceById({
     resourceId,
   }: {
@@ -512,10 +439,12 @@ export class PrismaStorage extends MastraStorage {
     resource: StorageResourceType;
   }): Promise<StorageResourceType> {
     const update = {
-      workingMemory: resource.workingMemory ?? "",
-      metadata: resource.metadata ? JSON.stringify(resource.metadata) : "{}",
-      geocode: "{}",
-      ip: "146.70.195.182",
+      workingMemory: resource.workingMemory ?? DEFAULTS.USER.workingMemory,
+      metadata: resource.metadata
+        ? safeStringify(resource.metadata)
+        : DEFAULTS.USER.metadata,
+      geocode: DEFAULTS.USER.geocode,
+      ip: DEFAULTS.LOCATION.ip,
     };
     const user = await prisma.user.upsert({
       create: {
@@ -540,7 +469,7 @@ export class PrismaStorage extends MastraStorage {
     const user = await prisma.user.update({
       data: {
         workingMemory,
-        metadata: metadata ? JSON.stringify(metadata) : undefined,
+        metadata: metadata ? safeStringify(metadata) : undefined,
       },
       where: { id: resourceId },
     });
