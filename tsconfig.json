@@ -1,16 +1,6 @@
 {
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".react-router/types/**/*",
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build",
-    ".vercel",
-    "test/context",
-  ],
+  "include": ["**/*.ts", "**/*.tsx", ".react-router/types/**/*"],
+  "exclude": ["node_modules", "dist", "build", ".vercel", "test/context"],
   "compilerOptions": {
     "baseUrl": ".",
     "esModuleInterop": true,

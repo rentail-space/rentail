@@ -14,7 +14,8 @@ import config from "vitest.config";
 import "~/test/helpers/toMatchScreenshot";
 import { launchServer, port } from "./launchServer";
 
-const URL = `http://localhost:${port}`;
+const BASE_URL = `http://localhost:${port}`;
+const VITE_DEPS_THRESHOLD = 100;
 const logging = debug("browser").enabled;
 let context: BrowserContext | undefined;
 
@@ -39,27 +40,29 @@ export async function goto(
 /**
  * Wait for dev server to build all cached dependencies and open the page.
  *
+ * First navigation triggers Vite to build dependencies, then we wait for them
+ * to be ready before reloading the page.
+ *
  * @param page - The page to wait for.
  * @param path - The path to wait for.
  */
 async function waitForDependencies(page: Page, path: string) {
-  // We expect 900+ files to be present in .vite/deps
   const dirname = resolve("node_modules/.vite/deps");
-  await Promise.all([
-    page.goto(path, { waitUntil: "networkidle" }),
-    (async () => {
-      while (true) {
-        try {
-          const files = await readdir(dirname);
-          if (files.length > 100) break;
-        } catch {}
-        await delay(100);
-      }
-    })(),
-  ]);
 
+  // Trigger initial build
   await page.goto(path);
-  // Make sure React is available
+
+  // Wait for Vite to generate dependency cache (900+ files expected)
+  while (true) {
+    try {
+      const files = await readdir(dirname);
+      if (files.length > VITE_DEPS_THRESHOLD) break;
+    } catch {}
+    await delay(100);
+  }
+
+  // Reload with cached dependencies
+  await page.goto(path);
   await page.waitForFunction(() => "__reactRouterContext" in window);
 }
 
@@ -71,70 +74,57 @@ async function waitForDependencies(page: Page, path: string) {
 export async function launchBrowser(): Promise<BrowserContext> {
   if (context) return context;
 
-  // CI can set DEBUG=browser to see browser logs without opening the browser
   const headless = process.env.CI ? true : !logging;
   context = await chromium.launchPersistentContext("test/context", {
-    baseURL: URL,
+    baseURL: BASE_URL,
     headless,
-    // Slow down all operations to simulate slower CI environment
-    // Set SLOW_MO=1000 to add 1 second delay between each operation
     slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
   });
 
-  // Block all requests that are not localhost or 127.0.0.1
-  // For logging, since MSW should also block external requests
-  context.route("**", (route) => blockOutgoingRequests(route));
+  context.route("**", blockOutgoingRequests);
 
-  // Set navigation timeout to 3s less than hook timeout
-  // This ensures Playwright fails first with a useful error message
-  context.setDefaultNavigationTimeout(
-    (config.test?.hookTimeout ?? 30000) - 3000,
-  );
+  // Set navigation timeout to 3s less than hook timeout for better error messages
+  const hookTimeout = config.test?.hookTimeout ?? 30000;
+  context.setDefaultNavigationTimeout(hookTimeout - 3000);
 
-  // Always log browser console when DEBUG=browser is set
   if (logging) {
-    context.on("console", (message) => {
-      const text = message.text();
-      // Skip HMR connection warnings (expected during test cleanup)
-      if (text.includes("server connection lost")) return;
-
-      const prefix = "[BROWSER]";
-      switch (message.type()) {
-        case "info":
-          console.info(prefix, text);
-          break;
-        case "warning":
-          console.warn(prefix, text);
-          break;
-        case "debug":
-          console.debug(prefix, text);
-          break;
-        case "error":
-          console.error(prefix, text);
-          break;
-        case "log":
-          console.log(prefix, text);
-          break;
-      }
-    });
+    context.on("console", logBrowserConsole);
   }
+
   return context;
+}
+
+function logBrowserConsole(message: import("playwright").ConsoleMessage) {
+  const text = message.text();
+  if (text.includes("server connection lost")) return;
+
+  const loggers = {
+    info: console.info,
+    warning: console.warn,
+    debug: console.debug,
+    error: console.error,
+    log: console.log,
+  };
+
+  const logger = loggers[message.type() as keyof typeof loggers] ?? console.log;
+  logger("[BROWSER]", text);
 }
 
 async function blockOutgoingRequests(route: Route): Promise<void> {
   const { hostname } = new URLString(route.request().url());
-  const resourceType = route.request().resourceType();
 
   if (hostname === "localhost" || hostname === "127.0.0.1") {
     await route.continue();
-  } else {
-    // NOTE: According to Claud, non-blocked requests can interfere with cookie
-    // handling because Playwright waits for all requests to complete before
-    // considering a navigation finished, so we must abort blocked requests.
-    if (logging)
-      console.warn(`[BROWSER] blocking ${resourceType}: ${hostname}`);
-    await route.abort();
+    return;
   }
+
+  // Abort non-local requests to prevent cookie handling interference
+  // (Playwright waits for all requests before completing navigation)
+  if (logging) {
+    const resourceType = route.request().resourceType();
+    console.warn(`[BROWSER] blocking ${resourceType}: ${hostname}`);
+  }
+  await route.abort();
 }
 
 async function cleanup() {
