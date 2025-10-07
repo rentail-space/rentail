@@ -1,24 +1,22 @@
+import { readdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { URL as URLString } from "node:url";
-import { delay, invariant } from "es-toolkit";
+import debug from "debug";
+import { delay } from "es-toolkit";
 import {
   type BrowserContext,
   chromium,
   type Page,
   type Route,
 } from "playwright";
-import "~/test/helpers/toMatchScreenshot";
-import { type ChildProcess, fork } from "node:child_process";
-import { readdir } from "node:fs/promises";
-import debug from "debug";
 import { afterAll } from "vitest";
 import config from "vitest.config";
+import "~/test/helpers/toMatchScreenshot";
+import { launchServer, port } from "./launchServer";
 
-const port = 9222;
 const URL = `http://localhost:${port}`;
-
-export let context: BrowserContext | undefined;
-export let worker: ChildProcess | undefined;
+const logging = debug("browser").enabled;
+let context: BrowserContext | undefined;
 
 /**
  * Open a new page in the browser.
@@ -73,7 +71,6 @@ async function waitForDependencies(page: Page, path: string) {
 export async function launchBrowser(): Promise<BrowserContext> {
   if (context) return context;
 
-  const logging = debug("browser").enabled;
   // CI can set DEBUG=browser to see browser logs without opening the browser
   const headless = process.env.CI ? true : !logging;
   context = await chromium.launchPersistentContext("test/context", {
@@ -124,54 +121,9 @@ export async function launchBrowser(): Promise<BrowserContext> {
   return context;
 }
 
-/**
- * Launch a new server instance.
- *
- * @returns The server worker.
- */
-export async function launchServer(): Promise<void> {
-  if (worker) return;
-
-  const logging = debug("server").enabled;
-  if (logging) console.info("[SERVER] launching server");
-
-  // Start the server as forked process, that way we don't share the same node
-  // instance, which could cause issues with some libraries (eg Prisma)
-  worker = fork(resolve("test/helpers/serverWorker.ts"), {
-    stdio: "inherit",
-    env: {
-      ...process.env,
-      NODE_ENV: "test",
-      PORT: port.toString(),
-    },
-  });
-
-  // Listen for worker messages
-  await new Promise<void>((resolve, reject) => {
-    invariant(worker, "Server worker is not defined");
-    worker.on("message", (msg: { type: string; error?: string }) => {
-      if (msg.type === "ready") resolve();
-      if (msg.type === "error") reject(new Error(`Worker error: ${msg.error}`));
-    });
-
-    worker.on("error", (error) => {
-      if (logging) console.error("[SERVER] worker error:", error);
-      reject(error);
-    });
-
-    worker.on("exit", (code) => {
-      if (code !== 0)
-        reject(new Error(`Worker stopped with exit code ${code}`));
-    });
-  });
-
-  if (logging) console.info("[SERVER] server is ready");
-}
-
 async function blockOutgoingRequests(route: Route): Promise<void> {
   const { hostname } = new URLString(route.request().url());
   const resourceType = route.request().resourceType();
-  const logging = debug("browser").enabled;
 
   if (hostname === "localhost" || hostname === "127.0.0.1") {
     await route.continue();
@@ -186,28 +138,12 @@ async function blockOutgoingRequests(route: Route): Promise<void> {
 }
 
 async function cleanup() {
-  const logging = debug("browser").enabled || debug("server").enabled;
-
   if (context) {
     if (logging) console.info("[BROWSER] closing context");
     await context.close();
     context = undefined;
     if (logging) console.info("[BROWSER] context closed");
   }
-
-  if (worker && !worker.killed) {
-    if (logging) console.info("[SERVER] killing worker");
-    worker.once("exit", () => {
-      worker = undefined;
-    });
-    worker.kill("SIGTERM");
-    // Force kill after 1s if still running
-    await delay(1000);
-    if (worker && !worker.killed) worker.kill("SIGKILL");
-  }
-  worker = undefined;
-
-  if (logging) console.info("[CLEANUP] complete");
 }
 
 process.once("exit", cleanup);
