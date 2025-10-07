@@ -1,4 +1,4 @@
-import { format } from "node:util";
+import { format, styleText } from "node:util";
 import { Logtail } from "@logtail/node";
 import type { ILogLevel } from "@logtail/types";
 import env from "~/lib/env";
@@ -10,23 +10,22 @@ const logtail = env.LOGTAIL_TOKEN
   : null;
 
 const colors = {
-  trace: (text: string) => `\x1b[90m${text}\x1b[0m`,
-  debug: (text: string) => `\x1b[94m${text}\x1b[0m`,
-  log: (text: string) => `\x1b[97m${text}\x1b[0m`,
-  info: (text: string) => `\x1b[92m${text}\x1b[0m`,
-  warn: (text: string) => `\x1b[93m${text}\x1b[0m`,
-  error: (text: string) => `\x1b[91m${text}\x1b[0m`,
+  trace: (text: string) => styleText("gray", text),
+  debug: (text: string) => styleText("blue", text),
+  log: (text: string) => styleText("red", text),
+  info: (text: string) => styleText("green", text),
+  warn: (text: string) => styleText("yellow", text),
+  error: (text: string) => styleText("red", text),
 };
 
 for (const level of [
-  "trace",
   "debug",
-  "log",
-  "info",
-  "warn",
   "error",
+  "info",
+  "log",
+  "trace",
+  "warn",
 ] as ILogLevel[]) {
-  const consoleOriginal = Reflect.get(console, level);
   const logtailFunction = logtail ? Reflect.get(logtail, level) : () => {};
   const colorCode = process.stdout.isTTY
     ? colors[level as keyof typeof colors]
@@ -34,11 +33,13 @@ for (const level of [
 
   Reflect.set(console, level, (message: string, ...metadata: unknown[]) => {
     const formattedMessage = format(message, ...metadata);
-    consoleOriginal.call(console, colorCode(formattedMessage));
+    process.stdout.write(`${colorCode(formattedMessage)}\n`);
     try {
       logtailFunction.call(logtail, formattedMessage, ...metadata);
     } catch (error) {
-      console.error("Error logging to Logtail:", error);
+      process.stderr.write(
+        `${error instanceof Error ? error.message : error}\n`,
+      );
     }
   });
 }
