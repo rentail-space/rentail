@@ -1,7 +1,7 @@
 import { type ChildProcess, fork } from "node:child_process";
 import { resolve } from "node:path";
 import debug from "debug";
-import { delay, invariant } from "es-toolkit";
+import { invariant } from "es-toolkit";
 import { afterAll } from "vitest";
 import "~/test/helpers/toMatchScreenshot";
 
@@ -61,8 +61,9 @@ async function cleanup() {
     });
     worker.kill("SIGTERM");
     // Force kill after 1s if still running
-    await delay(1000);
-    if (worker && !worker.killed) worker.kill("SIGKILL");
+    setTimeout(() => {
+      if (worker && !worker.killed) worker.kill("SIGKILL");
+    }, 1000);
   }
   worker = undefined;
 

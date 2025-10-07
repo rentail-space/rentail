@@ -1,8 +1,7 @@
-import { readdir } from "node:fs/promises";
+import { readdir, watch } from "node:fs/promises";
 import { resolve } from "node:path";
 import { URL as URLString } from "node:url";
 import debug from "debug";
-import { delay } from "es-toolkit";
 import {
   type BrowserContext,
   chromium,
@@ -53,17 +52,20 @@ async function waitForDependencies(page: Page, path: string) {
   await page.goto(path);
 
   // Wait for Vite to generate dependency cache (900+ files expected)
-  while (true) {
-    try {
-      const files = await readdir(dirname);
-      if (files.length > VITE_DEPS_THRESHOLD) break;
-    } catch {}
-    await delay(100);
+  if (!(await hasEnoughDependencies(dirname))) {
+    const watcher = watch(dirname);
+    for await (const _event of watcher)
+      if (await hasEnoughDependencies(dirname)) break;
   }
 
   // Reload with cached dependencies
   await page.goto(path);
   await page.waitForFunction(() => "__reactRouterContext" in window);
+}
+
+async function hasEnoughDependencies(dirname: string) {
+  const files = await readdir(dirname);
+  return files.length > VITE_DEPS_THRESHOLD;
 }
 
 /**

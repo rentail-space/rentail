@@ -7,9 +7,8 @@
  * - Navigation to individual posts
  */
 
-import { delay } from "es-toolkit";
 import { expect, type Page } from "playwright/test";
-import { afterAll, beforeAll, describe, it } from "vitest";
+import { beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Blog Listing", () => {
@@ -119,10 +118,6 @@ describe("Blog Listing", () => {
 
       const title = page.locator("article h1");
       await expect(title).toBeVisible();
-    });
-
-    afterAll(async () => {
-      await delay(10000);
     });
   });
 });
