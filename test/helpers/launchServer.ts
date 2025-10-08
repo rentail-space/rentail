@@ -22,6 +22,7 @@ export async function launchServer(): Promise<void> {
   // Start the server as forked process, that way we don't share the same node
   // instance, which could cause issues with some libraries (eg Prisma)
   worker = fork(resolve("test/helpers/serverWorker.ts"), {
+    execArgv: ["--import", "tsx/esm"],
     stdio: debug("server").enabled ? "inherit" : "pipe",
     env: {
       ...process.env,
