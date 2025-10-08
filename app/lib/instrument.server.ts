@@ -3,6 +3,7 @@
 import os from "node:os";
 import * as Sentry from "@sentry/react-router";
 import env from "~/lib/env";
+import { isMonitoringRequest } from "~/lib/isMonitoring";
 
 if (env.SENTRY_DSN) {
   Sentry.init({
@@ -38,6 +39,9 @@ export async function pushHTTPResponse({
   duration: number;
   request: Request;
 }) {
+  // Skip monitoring requests from BetterStack/Checkly to avoid noise in metrics
+  if (isMonitoringRequest(request)) return;
+
   await pushToPrometheus([
     {
       name: "events_count",
