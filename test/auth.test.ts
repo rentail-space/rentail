@@ -2,7 +2,8 @@ import { expect, type Page } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
 import type zod from "zod";
 import prisma from "~/lib/prisma";
-import { getWorkingMemory, type userProfile } from "~/lib/workingMemory";
+import type { userProfile } from "~/lib/userProfile";
+import { getWorkingMemory } from "~/lib/workingMemory";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Anonymous visits chat page", () => {

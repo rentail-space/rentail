@@ -23,7 +23,6 @@ import { invariant } from "es-toolkit";
 import type { Chat, Messages, User } from "prisma/generated/client";
 import type { Role } from "prisma/generated/enums";
 import { DEFAULTS } from "~/lib/constants";
-import { safeStringify } from "~/lib/json";
 import prisma from "~/lib/prisma";
 
 /**
@@ -205,7 +204,7 @@ export class PrismaStorage extends MastraStorage {
   }): Promise<StorageThreadType> {
     const update = {
       createdAt: thread.createdAt,
-      metadata: safeStringify(thread.metadata ?? {}),
+      metadata: JSON.stringify(thread.metadata ?? {}),
       title: thread.title ?? undefined,
       updatedAt: thread.updatedAt,
       userId: thread.resourceId,
@@ -229,7 +228,7 @@ export class PrismaStorage extends MastraStorage {
   }): Promise<StorageThreadType> {
     const chat = await prisma.chat.update({
       where: { id },
-      data: { title, metadata: safeStringify(metadata) },
+      data: { title, metadata: JSON.stringify(metadata) },
     });
     return toThread(chat);
   }
@@ -335,7 +334,7 @@ export class PrismaStorage extends MastraStorage {
     const messages = await prisma.messages.createManyAndReturn({
       data: args.messages.map((message) => ({
         chatId,
-        content: safeStringify(message.content),
+        content: JSON.stringify(message.content),
         createdAt: message.createdAt,
         id: message.id,
         role: message.role as Role,
@@ -361,7 +360,7 @@ export class PrismaStorage extends MastraStorage {
     const messages = await prisma.messages.updateManyAndReturn({
       data: args.messages.map((message) => ({
         chatId,
-        content: message.content ? safeStringify(message.content) : undefined,
+        content: message.content ? JSON.stringify(message.content) : undefined,
         id: message.id,
         role: message.role as Role,
         type: message.type as MastraMessageV2["type"],
@@ -441,7 +440,7 @@ export class PrismaStorage extends MastraStorage {
     const update = {
       workingMemory: resource.workingMemory ?? DEFAULTS.USER.workingMemory,
       metadata: resource.metadata
-        ? safeStringify(resource.metadata)
+        ? JSON.stringify(resource.metadata)
         : DEFAULTS.USER.metadata,
       geocode: DEFAULTS.USER.geocode,
       ip: DEFAULTS.LOCATION.ip,
@@ -469,7 +468,7 @@ export class PrismaStorage extends MastraStorage {
     const user = await prisma.user.update({
       data: {
         workingMemory,
-        metadata: metadata ? safeStringify(metadata) : undefined,
+        metadata: metadata ? JSON.stringify(metadata) : undefined,
       },
       where: { id: resourceId },
     });
