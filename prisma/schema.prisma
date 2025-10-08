@@ -44,21 +44,23 @@ model Messages {
 }
 
 model User {
-  accounts      Account[]
-  chats         Chat[]
-  createdAt     DateTime  @map("created_at")     @default(now())
-  email         String?   @map("email")
-  emailVerified Boolean   @map("email_verified") @default(false)
-  geocode       Json      @map("geocode")        @db.Json
-  id            String    @map("id")             @id @default(cuid(2))
-  image         String?   @map("image")
-  ip            String?   @map("ip")
-  isAnonymous   Boolean   @map("is_anonymous")   @default(false)
-  metadata      Json      @map("metadata")       @db.Json
-  name          String?   @map("name")
-  sessions      Session[]
-  updatedAt     DateTime  @map("updated_at")     @updatedAt
-  workingMemory String    @map("working_memory") @db.Text
+  accounts         Account[]
+  chats            Chat[]
+  cityStateCountry String?   @map("city_state_country")
+  createdAt        DateTime  @map("created_at")         @default(now())
+  email            String?   @map("email")
+  emailVerified    Boolean   @map("email_verified")     @default(false)
+  geocode          Json      @map("geocode")            @db.Json
+  id               String    @map("id")                 @id @default(cuid(2))
+  image            String?   @map("image")
+  ip               String?   @map("ip")
+  isAnonymous      Boolean   @map("is_anonymous")       @default(false)
+  metadata         Json      @map("metadata")           @db.Json
+  name             String?   @map("name")
+  referrer         String?   @map("referrer")
+  sessions         Session[]
+  updatedAt        DateTime  @map("updated_at")         @updatedAt
+  workingMemory    String    @map("working_memory")     @db.Text
 
   @@map("users")
   @@unique([email])
@@ -91,19 +93,18 @@ model Property {
 }
 
 model PropertySpace {
-  propertyId  String   @map("property_id")
+  available   String   @map("available")
+  cost        Int      @map("cost")
   createdAt   DateTime @map("created_at")   @default(now())
   details     String   @map("details")
+  footTraffic Int      @map("foot_traffic")
   id          String   @map("id")           @id @default(cuid(2))
   imageURLs   String[] @map("image_urls")
-  updatedAt   DateTime @map("updated_at")   @updatedAt
-  footTraffic Int      @map("foot_traffic")
-  cost        Int      @map("cost")
-  size        Int      @map("size")
-  available   String   @map("available")
   name        String   @map("name")
   property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-
+  propertyId  String   @map("property_id")
+  size        Int      @map("size")
+  updatedAt   DateTime @map("updated_at")   @updatedAt
 
   @@map("property_spaces")
 }

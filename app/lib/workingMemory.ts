@@ -6,13 +6,12 @@ import type { ChatGetPayload } from "prisma/generated/models";
 import { ulid } from "ulid";
 import type zod from "zod";
 import welcome from "~/prompts/welcome.md?raw";
-import { DEFAULTS } from "./constants";
 import { PrismaStorage } from "./PrismaStorage";
 import { userProfile } from "./userProfile";
 
 export const memory = new Memory({
   options: {
-    lastMessages: DEFAULTS.MEMORY.LAST_MESSAGES,
+    lastMessages: 10,
     threads: {
       generateTitle: true,
     },
@@ -22,7 +21,7 @@ export const memory = new Memory({
       scope: "resource",
     },
   },
-  processors: [new ToolCallFilter(), new TokenLimiter(DEFAULTS.AI.TOKEN_LIMIT)],
+  processors: [new ToolCallFilter(), new TokenLimiter(127000)],
   storage: new PrismaStorage(),
 });
 

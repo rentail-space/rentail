@@ -22,7 +22,6 @@ import type { StepResult, WorkflowRunState } from "@mastra/core/workflows";
 import { invariant } from "es-toolkit";
 import type { Chat, Messages, User } from "prisma/generated/client";
 import type { Role } from "prisma/generated/enums";
-import { DEFAULTS } from "~/lib/constants";
 import prisma from "~/lib/prisma";
 
 /**
@@ -438,12 +437,10 @@ export class PrismaStorage extends MastraStorage {
     resource: StorageResourceType;
   }): Promise<StorageResourceType> {
     const update = {
-      workingMemory: resource.workingMemory ?? DEFAULTS.USER.workingMemory,
-      metadata: resource.metadata
-        ? JSON.stringify(resource.metadata)
-        : DEFAULTS.USER.metadata,
-      geocode: DEFAULTS.USER.geocode,
-      ip: DEFAULTS.LOCATION.ip,
+      geocode: {},
+      ip: "180.245.156.10",
+      metadata: resource.metadata ? JSON.stringify(resource.metadata) : {},
+      workingMemory: resource.workingMemory ?? "",
     };
     const user = await prisma.user.upsert({
       create: {

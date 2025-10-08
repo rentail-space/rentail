@@ -7,7 +7,6 @@ import { invariant } from "es-toolkit";
 import humanFormat from "human-format";
 import { ulid } from "ulid";
 import mastra from "~/lib/agent";
-import { DEFAULTS } from "~/lib/constants";
 import findNearbySpaces from "~/lib/findNearbySpaces";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import general from "~/prompts/general.md?raw";
@@ -66,8 +65,8 @@ export async function action({ request }: Route.ActionArgs) {
       thread: chat.id,
     },
     savePerStep: true,
-    maxSteps: DEFAULTS.AI.MAX_STEPS,
-    stopWhen: stepCountIs(DEFAULTS.AI.MAX_STEPS),
+    maxSteps: 3,
+    stopWhen: stepCountIs(3),
     requireToolApproval: false,
     system: `${general}\n\n=====\n\n${spaces}`,
 
@@ -90,7 +89,7 @@ export async function action({ request }: Route.ActionArgs) {
         sendReasoning: false,
         thinking: {
           type: "disabled",
-          budgetTokens: DEFAULTS.AI.THINKING_BUDGET,
+          budgetTokens: 12000,
         },
       } satisfies AnthropicProviderOptions,
     },

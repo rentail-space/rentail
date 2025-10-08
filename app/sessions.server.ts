@@ -57,8 +57,16 @@ export async function getUserChat(headers: Headers): Promise<{
     returnHeaders: true,
   });
   invariant(anonymous.response?.user.id, "Anonymous user ID is required");
-  const user = await prisma.user.findUniqueOrThrow({
+  const user = await prisma.user.update({
     where: { id: anonymous.response.user.id },
+    data: {
+      cityStateCountry: [geocode.city, geocode.state, geocode.country]
+        .filter(Boolean)
+        .join(", "),
+      geocode,
+      ip: headers.get("x-forwarded-for") ?? "",
+      referrer: headers.get("referer") ?? "",
+    },
   });
   const { chat, messages } = await getChatForUser(user);
   await updateWorkingMemory(chat, (profile) => ({

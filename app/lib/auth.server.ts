@@ -4,7 +4,6 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { anonymous, type UserWithAnonymous } from "better-auth/plugins";
 import debug from "debug";
 import { sendVerificationEmail, sendWelcomeEmail } from "~/emails/sendEmails";
-import { DEFAULTS } from "~/lib/constants";
 import prisma from "~/lib/prisma";
 import { getRecentMessages, saveMessages } from "~/lib/workingMemory";
 
@@ -54,19 +53,27 @@ export default betterAuth({
 
   user: {
     additionalFields: {
+      cityStateCountry: {
+        defaultValue: "",
+        type: "string",
+      },
       geocode: {
         defaultValue: "{}",
         required: true,
         type: "string",
       },
       ip: {
-        defaultValue: DEFAULTS.LOCATION.ip,
+        defaultValue: "180.245.156.10",
         required: true,
         type: "string",
       },
       metadata: {
         defaultValue: "{}",
         required: true,
+        type: "string",
+      },
+      referrer: {
+        defaultValue: "",
         type: "string",
       },
       workingMemory: {
@@ -161,9 +168,11 @@ async function copyAnonToNewUser(
   });
   await prisma.user.update({
     data: {
+      cityStateCountry: loaded.cityStateCountry,
       geocode: loaded.geocode ?? {},
-      ip: loaded.ip ?? "",
+      ip: loaded.ip,
       metadata: loaded.metadata ?? {},
+      referrer: loaded.referrer,
       workingMemory: loaded.workingMemory,
     },
     where: { id: newUser.id },
