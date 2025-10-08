@@ -6,8 +6,8 @@ import { z } from "zod";
 
 const logging = debug("seed").enabled;
 
-export default async function seedShoppingCenters() {
-  if (logging) console.info("[SEED] Seeding shopping centers");
+export default async function seedProperties() {
+  if (logging) console.info("[SEED] Seeding properties");
 
   const dirname = resolve("prisma/seed");
   const filenames = (await readdir(dirname)).filter((filename) =>
@@ -17,8 +17,8 @@ export default async function seedShoppingCenters() {
   for (const filename of filenames) {
     if (logging) console.info(`[SEED] Seeding ${filename}`);
     const data = await readFile(join(dirname, filename), "utf-8");
-    const json = shoppingCenter.parse(JSON.parse(data));
-    await prisma.shoppingCenter.upsert({
+    const json = property.parse(JSON.parse(data));
+    await prisma.property.upsert({
       create: {
         ...json,
         spaces: { create: json.spaces },
@@ -37,11 +37,11 @@ export default async function seedShoppingCenters() {
       where: { id: json.id },
     });
     const point = `POINT(${json.longitude} ${json.latitude})`;
-    await prisma.$queryRaw`UPDATE "shopping_centers" SET location = ST_GeomFromText(${point}) WHERE ID=${json.id};`;
+    await prisma.$queryRaw`UPDATE "properties" SET location = ST_GeomFromText(${point}) WHERE ID=${json.id};`;
   }
 }
 
-const shoppingCenter = z.object({
+const property = z.object({
   address: z.string(),
   city: z.string(),
   country: z.string(),

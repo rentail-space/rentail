@@ -71,7 +71,7 @@ model Waitlist {
   @@map("waitlist")
 }
 
-model ShoppingCenter {
+model Property {
   address     String                    @map("address")
   city        String                    @map("city")
   country     String                    @map("country")
@@ -83,29 +83,29 @@ model ShoppingCenter {
   location    Unsupported("geography")? @map("location")
   longitude   String                    @map("longitude")
   name        String                    @map("name")
-  spaces      ShoppingCenterSpace[]
+  spaces      PropertySpace[]
   state       String                    @map("state")
   updatedAt   DateTime                  @map("updated_at")  @updatedAt
 
-  @@map("shopping_centers")
+  @@map("properties")
 }
 
-model ShoppingCenterSpace {
-  centerId    String         @map("shopping_center_id")
-  createdAt   DateTime       @map("created_at")         @default(now())
-  details     String         @map("details")
-  id          String         @map("id")                 @id @default(cuid(2))
-  imageURLs   String[]       @map("image_urls")
-  updatedAt   DateTime       @map("updated_at")         @updatedAt
-  footTraffic Int            @map("foot_traffic")
-  cost        Int            @map("cost")
-  size        Int            @map("size")
-  available   String         @map("available")
-  name        String         @map("name")
-  center      ShoppingCenter @relation(fields: [centerId], references: [id], onDelete: Cascade)
+model PropertySpace {
+  propertyId  String   @map("property_id")
+  createdAt   DateTime @map("created_at")   @default(now())
+  details     String   @map("details")
+  id          String   @map("id")           @id @default(cuid(2))
+  imageURLs   String[] @map("image_urls")
+  updatedAt   DateTime @map("updated_at")   @updatedAt
+  footTraffic Int      @map("foot_traffic")
+  cost        Int      @map("cost")
+  size        Int      @map("size")
+  available   String   @map("available")
+  name        String   @map("name")
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
 
-  @@map("shopping_center_spaces")
+  @@map("property_spaces")
 }
 
 enum Role {

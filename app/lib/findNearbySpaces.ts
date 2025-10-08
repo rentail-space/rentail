@@ -1,7 +1,7 @@
-import type { ShoppingCenterSpace } from "prisma/generated/client";
+import type { PropertySpace } from "prisma/generated/client";
 import type {
   ChatGetPayload,
-  ShoppingCenterGetPayload,
+  PropertyGetPayload,
 } from "prisma/generated/models";
 import prisma from "~/lib/prisma";
 import { getWorkingMemory } from "~/lib/workingMemory";
@@ -33,11 +33,11 @@ export default async function findNearbySpaces({
     FROM "shopping_centers" 
     WHERE ST_DistanceSphere(location::geometry, ST_MakePoint(${location.longitude}, ${location.latitude})) < ${maxDistance}
   `;
-  const centers = await prisma.shoppingCenter.findMany({
+  const centers = await prisma.property.findMany({
     include: { spaces: true },
     where: { id: { in: nearBy.map((center) => center.id) } },
   });
-  return shoppingCentersToMarkdown(centers, maxDistance);
+  return propertiesToMarkdown(centers, maxDistance);
 }
 
 async function locationFromWorkingMemory(
@@ -47,8 +47,8 @@ async function locationFromWorkingMemory(
   return { longitude: location?.longitude, latitude: location?.latitude };
 }
 
-function shoppingCentersToMarkdown(
-  centers: ShoppingCenterGetPayload<{ include: { spaces: true } }>[],
+function propertiesToMarkdown(
+  centers: PropertyGetPayload<{ include: { spaces: true } }>[],
   maxDistance: number,
 ): string {
   const prefix = `Here are the shopping centers in the area which are within ${maxDistance} miles of the user.
@@ -58,22 +58,22 @@ function shoppingCentersToMarkdown(
     Do not make up information about shopping centers you do not know about.
     Do not even mention shopping centers you do not know about.`;
 
-  return `${prefix}\n\n${centers.map(shoppingCenterToMarkdown).join("\n\n")}`;
+  return `${prefix}\n\n${centers.map(propertyToMarkdown).join("\n\n")}`;
 }
 
-function shoppingCenterToMarkdown(
-  center: ShoppingCenterGetPayload<{ include: { spaces: true } }>,
+function propertyToMarkdown(
+  center: PropertyGetPayload<{ include: { spaces: true } }>,
 ): string {
   return `<shopping-center>
   Shopping center name: ${center.name}
   Address: ${center.address}, ${center.city}, ${center.state}, ${center.country}
   Description: ${center.description}
   ${center.imageURLs.map((image) => `Image: ${image}`).join("\n")}
-  Spaces: ${center.spaces.map(shoppingCenterSpacesToMarkdown).join("\n")}
+  Spaces: ${center.spaces.map(propertySpacesToMarkdown).join("\n")}
 </shopping-center>`;
 }
 
-function shoppingCenterSpacesToMarkdown(space: ShoppingCenterSpace): string {
+function propertySpacesToMarkdown(space: PropertySpace): string {
   return `<space>
   Space name: ${space.name}
   Description: ${space.details}
