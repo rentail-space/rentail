@@ -3,8 +3,8 @@ import { type BetterAuthOptions, betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { anonymous, type UserWithAnonymous } from "better-auth/plugins";
 import debug from "debug";
+import { sendVerificationEmail, sendWelcomeEmail } from "~/emails/sendEmails";
 import { DEFAULTS } from "~/lib/constants";
-import { sendVerificationEmail, sendWelcomeEmail } from "~/lib/emails";
 import prisma from "~/lib/prisma";
 import { getRecentMessages, saveMessages } from "~/lib/workingMemory";
 

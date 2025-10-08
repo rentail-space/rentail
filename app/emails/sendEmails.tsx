@@ -4,11 +4,56 @@ import debug from "debug";
 import type { JSX } from "react";
 import { Resend } from "resend";
 import env from "~/lib/env";
+import EmailVerification from "./EmailVerification";
+import Waitlist from "./Waitlist";
+import Welcome from "./Welcome";
 
 // Test-only: stores last sent email HTML for visual regression testing
 export let lastEmailHtml: string | null = null;
 
 const resend = new Resend(env.RESEND_API_KEY);
+
+export async function sendWelcomeEmail({
+  email,
+  name,
+}: {
+  email: string;
+  name: string;
+}) {
+  await sendEmail({
+    email,
+    subject: `Welcome to rentail.space, ${name}! 🎉`,
+    component: ({ subject }) => <Welcome name={name} subject={subject} />,
+  });
+}
+
+export async function sendVerificationEmail({
+  email,
+  name,
+  url,
+}: {
+  email: string;
+  name: string;
+  url: string;
+}) {
+  const subject = "Verify your email address for rentail.space";
+  await sendEmail({
+    email,
+    subject,
+    component: ({ subject }) => (
+      <EmailVerification name={name} subject={subject} verificationUrl={url} />
+    ),
+  });
+}
+
+export async function sendWaitlistEmail({ email }: { email: string }) {
+  const subject = "You're on the waitlist!";
+  await sendEmail({
+    email,
+    subject,
+    component: ({ subject }) => <Waitlist subject={subject} />,
+  });
+}
 
 /**
  * Send an email using Resend. If an error occurs, it will be captured by Sentry.
@@ -18,7 +63,7 @@ const resend = new Resend(env.RESEND_API_KEY);
  * @param component - The React Email component to send.
  * @param subject - The subject of the email.
  */
-export async function sendEmail({
+async function sendEmail({
   email,
   component,
   subject,
