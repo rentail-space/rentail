@@ -16,8 +16,7 @@ export const handlers = [
           headers: { "Content-Type": "text/event-stream" },
         });
       } catch (error) {
-        const logging = debug("msw").enabled;
-        if (logging) console.error("[MSW] Error in Anthropic API mock:", error);
+        debug("msw")("Error in Anthropic API mock: %s", error);
         return HttpResponse.error();
       }
     },
@@ -39,11 +38,7 @@ export const handlers = [
   http.all(
     () => true,
     ({ request }: { request: Request }) => {
-      const logging = debug("msw").enabled;
-      if (logging)
-        console.warn(
-          `[MSW] Blocked ${request.method} request to: ${request.url}`,
-        );
+      debug("msw")("Blocked %s request to: %s", request.method, request.url);
       return HttpResponse.json(
         { error: "External HTTP requests are not allowed in tests" },
         { status: 503 },

@@ -2,6 +2,7 @@ import type { AnthropicProviderOptions } from "@ai-sdk/anthropic";
 import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
 import { stepCountIs, type UIMessage } from "ai";
+import debug from "debug";
 import { invariant } from "es-toolkit";
 import humanFormat from "human-format";
 import { ulid } from "ulid";
@@ -71,8 +72,8 @@ export async function action({ request }: Route.ActionArgs) {
     system: `${general}\n\n=====\n\n${spaces}`,
 
     onFinish: async ({ steps, usage }) => {
-      console.info(
-        "[CHAT] steps %d => total tokens %s",
+      debug("chat")(
+        "steps %d => total tokens %s",
         steps.length,
         humanFormat(usage.totalTokens ?? 0),
       );
@@ -80,7 +81,7 @@ export async function action({ request }: Route.ActionArgs) {
     },
 
     onAbort: async () => {
-      console.info("[CHAT] Aborted by user");
+      debug("chat")("Aborted by user");
       await cleanup();
     },
 
@@ -128,8 +129,8 @@ export async function action({ request }: Route.ActionArgs) {
     },
 
     onFinish: async ({ messages, isAborted }) => {
-      console.info(
-        "[CHAT] Finished: messages=%d isAborted=%s",
+      debug("chat")(
+        "Finished: messages=%d isAborted=%s",
         messages.length,
         isAborted,
       );

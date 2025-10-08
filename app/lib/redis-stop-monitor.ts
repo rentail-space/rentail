@@ -1,4 +1,5 @@
 import { captureException } from "@sentry/react-router";
+import debug from "debug";
 import Redis from "ioredis";
 import env from "~/lib/env";
 
@@ -17,7 +18,7 @@ export async function monitorStopSignal(chatId: string): Promise<{
   const key = `chat:stop:${chatId}`;
   const abort = new AbortController();
   abort.signal.addEventListener("abort", () => {
-    console.info("[CHAT] Stop signal received, aborting %s", chatId);
+    debug("chat")("Stop signal received, aborting %s", chatId);
   });
 
   // Subscribe to abort signal from another server instance

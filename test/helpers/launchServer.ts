@@ -7,7 +7,6 @@ import "~/test/helpers/toMatchScreenshot";
 
 export const port = 9222;
 
-const logging = debug("server").enabled;
 let worker: ChildProcess | undefined;
 
 /**
@@ -18,12 +17,12 @@ let worker: ChildProcess | undefined;
 export async function launchServer(): Promise<void> {
   if (worker) return;
 
-  if (logging) console.info("[SERVER] launching server");
+  debug("server")("launching server");
 
   // Start the server as forked process, that way we don't share the same node
   // instance, which could cause issues with some libraries (eg Prisma)
   worker = fork(resolve("test/helpers/serverWorker.ts"), {
-    stdio: logging ? "inherit" : "pipe",
+    stdio: debug("server").enabled ? "inherit" : "pipe",
     env: {
       ...process.env,
       NODE_ENV: "test",
@@ -40,7 +39,7 @@ export async function launchServer(): Promise<void> {
     });
 
     worker.on("error", (error) => {
-      if (logging) console.error("[SERVER] worker error:", error);
+      debug("server")("worker error:", error);
       reject(error);
     });
 
@@ -50,12 +49,12 @@ export async function launchServer(): Promise<void> {
     });
   });
 
-  if (logging) console.info("[SERVER] server is ready");
+  debug("server")("server is ready");
 }
 
 async function cleanup() {
   if (worker && !worker.killed) {
-    if (logging) console.info("[SERVER] killing worker");
+    debug("server")("killing worker");
     worker.once("exit", () => {
       worker = undefined;
     });
@@ -67,7 +66,7 @@ async function cleanup() {
   }
   worker = undefined;
 
-  if (logging) console.info("[CLEANUP] complete");
+  debug("server")("cleanup complete");
 }
 
 process.once("exit", cleanup);

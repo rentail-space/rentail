@@ -36,8 +36,9 @@ export default async function seedProperties() {
       where: { id: json.id },
     });
     const point = `POINT(${json.longitude} ${json.latitude})`;
-    await prisma.$queryRaw`UPDATE "properties" SET location = ST_GeomFromText(${point}) WHERE ID=${json.id};`;
+    await prisma.$executeRaw`UPDATE "properties" SET location = ST_GeomFromText(${point}) WHERE ID=${json.id};`;
   }
+  debug("seed")("Seeded %d properties", filenames.length);
 }
 
 const property = z.object({

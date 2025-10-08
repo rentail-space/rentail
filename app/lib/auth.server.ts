@@ -3,8 +3,8 @@ import { type BetterAuthOptions, betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { anonymous, type UserWithAnonymous } from "better-auth/plugins";
 import debug from "debug";
-import { sendVerificationEmail, sendWelcomeEmail } from "~/lib/emails";
 import { DEFAULTS } from "~/lib/constants";
+import { sendVerificationEmail, sendWelcomeEmail } from "~/lib/emails";
 import prisma from "~/lib/prisma";
 import { getRecentMessages, saveMessages } from "~/lib/workingMemory";
 
@@ -40,8 +40,7 @@ export default betterAuth({
     resetPasswordTokenExpiresIn: 3600, // 1 hour
     sendResetPassword: async ({ user, url }) => {
       // TODO: Send password reset email
-      if (debug("email").enabled)
-        console.info(`[EMAIL] Password reset link for ${user.email}: ${url}`);
+      debug("email")("Password reset link for %s: %s", user.email, url);
     },
   },
 

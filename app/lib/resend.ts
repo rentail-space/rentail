@@ -9,7 +9,6 @@ import env from "~/lib/env";
 export let lastEmailHtml: string | null = null;
 
 const resend = new Resend(env.RESEND_API_KEY);
-const logging = debug("email").enabled;
 
 /**
  * Send an email using Resend. If an error occurs, it will be captured by Sentry.
@@ -41,10 +40,9 @@ export async function sendEmail({
     });
     if (error) throw error;
 
-    if (logging) console.info("[EMAIL] %s sent to %s", subject, email);
+    debug("email")("%s sent to %s", subject, email);
   } catch (error) {
-    if (logging)
-      console.error("[EMAIL] Error sending %s email: %s", subject, error);
+    debug("email")("Error sending %s email: %s", subject, error);
     captureException(error, { extra: { email } });
   }
 }

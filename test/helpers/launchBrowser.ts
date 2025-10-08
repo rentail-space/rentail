@@ -15,7 +15,6 @@ import { launchServer, port } from "./launchServer";
 
 const BASE_URL = `http://localhost:${port}`;
 const VITE_DEPS_THRESHOLD = 100;
-const logging = debug("browser").enabled;
 let context: BrowserContext | undefined;
 
 /**
@@ -76,7 +75,7 @@ async function hasEnoughDependencies(dirname: string) {
 export async function launchBrowser(): Promise<BrowserContext> {
   if (context) return context;
 
-  const headless = process.env.CI ? true : !logging;
+  const headless = process.env.CI ? true : !debug("browser").enabled;
   context = await chromium.launchPersistentContext("test/context", {
     baseURL: BASE_URL,
     headless,
@@ -89,27 +88,9 @@ export async function launchBrowser(): Promise<BrowserContext> {
   const hookTimeout = config.test?.hookTimeout ?? 30000;
   context.setDefaultNavigationTimeout(hookTimeout - 3000);
 
-  if (logging) {
-    context.on("console", logBrowserConsole);
-  }
+  context.on("console", (msg) => debug("browser")(msg.text()));
 
   return context;
-}
-
-function logBrowserConsole(message: import("playwright").ConsoleMessage) {
-  const text = message.text();
-  if (text.includes("server connection lost")) return;
-
-  const loggers = {
-    info: console.info,
-    warning: console.warn,
-    debug: console.debug,
-    error: console.error,
-    log: console.log,
-  };
-
-  const logger = loggers[message.type() as keyof typeof loggers] ?? console.log;
-  logger("[BROWSER]", text);
 }
 
 async function blockOutgoingRequests(route: Route): Promise<void> {
@@ -122,19 +103,17 @@ async function blockOutgoingRequests(route: Route): Promise<void> {
 
   // Abort non-local requests to prevent cookie handling interference
   // (Playwright waits for all requests before completing navigation)
-  if (logging) {
-    const resourceType = route.request().resourceType();
-    console.warn(`[BROWSER] blocking ${resourceType}: ${hostname}`);
-  }
+  const resourceType = route.request().resourceType();
+  debug("browser")("blocking %s: %s", resourceType, hostname);
   await route.abort();
 }
 
 async function cleanup() {
   if (context) {
-    if (logging) console.info("[BROWSER] closing context");
+    debug("browser")("closing context");
     await context.close();
     context = undefined;
-    if (logging) console.info("[BROWSER] context closed");
+    debug("browser")("context closed");
   }
 }
 

@@ -30,7 +30,7 @@ export default async function findNearbySpaces({
     { id: string; longitude: number; latitude: number }[]
   >`
     SELECT id, ST_X(location::geometry), ST_Y(location::geometry)
-    FROM "shopping_centers" 
+    FROM "properties" 
     WHERE ST_DistanceSphere(location::geometry, ST_MakePoint(${location.longitude}, ${location.latitude})) < ${maxDistance}
   `;
   const centers = await prisma.property.findMany({

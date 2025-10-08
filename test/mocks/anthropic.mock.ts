@@ -66,11 +66,13 @@ export function findMockResponse(body: {
     .map((part) => part.text)
     .join(" ");
 
-  const logging = debug("msw").enabled;
-  if (logging)
-    console.info(
-      `[MSW] Anthropic API mock - processing message: "${messageText.slice(0, 100)}..."`,
-    );
+  debug("msw")(
+    `Anthropic API mock - processing message: "${messageText.slice(0, 100)}..."`,
+  );
+  debug("msw")(
+    "Anthropic API mock - processing message: %s... ",
+    messageText.slice(0, 100),
+  );
 
   // Check custom responses first (higher priority)
   const response = customMockResponses.find((mockPattern) =>

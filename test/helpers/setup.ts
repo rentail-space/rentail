@@ -1,5 +1,6 @@
 // This file contains setup code that will run before all tests
 
+import { format, styleText } from "node:util";
 import * as Sentry from "@sentry/react-router";
 import seedProperties from "prisma/seed/seedProperties";
 import { afterAll, beforeAll } from "vitest";
@@ -12,7 +13,9 @@ Sentry.init({
   environment: "development",
   defaultIntegrations: false,
   beforeSend(event) {
-    console.error("\x1b[91m[SENTRY] %s %o\x1b[0m", event.message, event.extra);
+    console.error(
+      styleText("red", format("%s %o", event.message, event.extra)),
+    );
     return event;
   },
 });

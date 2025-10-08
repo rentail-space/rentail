@@ -29,8 +29,7 @@ if (env.SENTRY_DSN) {
 }
 
 if (env.isTest) {
-  if (debug("msw").enabled)
-    console.info("[MSW] Initializing MSW for test mode");
+  debug("msw")("Initializing MSW for test mode");
 
   // Initialize MSW in test mode
   const { default: server } = await import("~/test/mocks/msw.server");
