@@ -52,9 +52,9 @@ const property = z.object({
   latitude: z.string(),
   longitude: z.string(),
   name: z.string(),
-  slug: z.string().optional(),
+  slug: z.string(),
   state: z.string(),
-  website: z.string().optional(),
+  website: z.string(),
   spaces: z.array(
     z.object({
       available: z.literal(["week", "weekends"]),

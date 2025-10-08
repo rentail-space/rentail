@@ -81,11 +81,11 @@ model Property {
   imageURLs   String[]                  @map("image_urls")
   location    Unsupported("geography")? @map("location")
   name        String                    @map("name")
+  slug        String                    @map("slug")        @unique
   spaces      PropertySpace[]
   state       String                    @map("state")
   updatedAt   DateTime                  @map("updated_at")  @updatedAt
-  website     String?                   @map("website")
-  slug        String?                   @map("slug")        @unique
+  website     String                    @map("website")
 
   @@map("properties")
 }
