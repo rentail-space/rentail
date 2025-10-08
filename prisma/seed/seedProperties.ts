@@ -4,10 +4,9 @@ import prisma from "app/lib/prisma";
 import debug from "debug";
 import { z } from "zod";
 
-const logging = debug("seed").enabled;
-
 export default async function seedProperties() {
-  if (logging) console.info("[SEED] Seeding properties");
+  const log = debug("seed");
+  log("Seeding properties");
 
   const dirname = resolve("prisma/seed");
   const filenames = (await readdir(dirname)).filter((filename) =>
@@ -15,7 +14,7 @@ export default async function seedProperties() {
   );
 
   for (const filename of filenames) {
-    if (logging) console.info(`[SEED] Seeding ${filename}`);
+    log("Seeding %s", filename);
     const data = await readFile(join(dirname, filename), "utf-8");
     const json = property.parse(JSON.parse(data));
     await prisma.property.upsert({

@@ -4,7 +4,7 @@ import { href } from "react-router";
 import { listBlogPosts } from "~/lib/blogPosts.server";
 
 export async function loader() {
-  // NOTE Google does not support changefreq and priority.
+  // NOTE: Google does not support changefreq and priority.
   // They do support lastmod, but seo-tools doesn't seem to support it.
   // https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping
 
