@@ -52,6 +52,20 @@ export async function getUserChat(headers: Headers): Promise<{
     captureException(error, { extra: { headers } });
   }
 
+  if (
+    /UptimeRobot|StatusCake|Pingdom|Checkly|Better Uptime Bot/.test(
+      headers.get("user-agent") ?? "",
+    )
+  ) {
+    const ip = "0.0.0.0";
+    headers.set("x-forwarded-for", ip);
+    const bot = await prisma.user.findFirst({ where: { ip } });
+    if (bot) {
+      const { chat, messages } = await getChatForUser(bot);
+      return { chat, messages, headers: headers };
+    }
+  }
+
   const geocode = await geocodeIP(headers);
   const anonymous = await authServer.api.signInAnonymous({
     returnHeaders: true,
