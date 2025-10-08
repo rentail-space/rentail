@@ -16,6 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Check: `npm run check` (runs both lint and typecheck)
 - Clean: `npm run clean` (removes Vite cache, .react-router cache, and build directory)
 - Monitoring: `npm run checkly` (runs Checkly monitoring tests)
+- Seed: `tsx prisma/seed.ts` (seed database with properties, use `DEBUG=seed` for logging)
 
 ## Architecture
 
@@ -54,6 +55,7 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - System prompts in `app/lib/`: `general.md`, `prelude.md`, `spaces.md`, `welcome.md`
 - Geolocation filtering: Built-in Haversine distance calculation for shopping centers
 - Use Context7 MCP server for library documentation and code examples
+- When requesting code examples, setup/configuration steps, or library/API documentation, use Context7 tool
 
 **Working Memory & User Profiles:**
 - Mastra memory stores user profiles as JSON in User.workingMemory field
@@ -74,13 +76,15 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 
 **Database:**
 - PostgreSQL with Prisma ORM client and schema generation
-- Database models: User (with location/IP tracking), Chat (with stream management), Message (with AI SDK integration), Waitlist
+- Database models: User (with location/IP tracking), Chat (with stream management), Message (with AI SDK integration), Waitlist, Property (shopping centers with PostGIS), PropertySpace (individual retail spaces)
+- PostGIS extension for geographic queries and distance calculations
 - Active stream tracking: Chat.activeStreamId for coordinating streaming responses across server instances
 - Message model includes reasoning field for AI thinking tokens and abort status
 - Session-based chat management with automatic user creation from IP geolocation
 - Prisma features: TypedSQL, Query Compiler, Driver Adapters
 - Test environment uses local PostgreSQL instance
 - Database operations: `prisma generate && prisma db push` for schema updates
+- Seeding: `tsx prisma/seed.ts` with debug logging (enable with `DEBUG=seed`)
 
 **Monitoring & Observability:**
 - Sentry for error tracking and performance monitoring (`app/lib/instrument.server.ts`)
@@ -138,6 +142,8 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Biome enforces double quotes, space indentation, line width 80, and import organization
 - Favor default exports for components
 - File structure conventions: `/app/components/<name>/index.tsx` for reusable components
+- Write concise, technical TypeScript code with accurate examples
+- Prefer iteration and modularization over code duplication
 
 ## Development Practices
 
@@ -274,7 +280,7 @@ Optional environment variables:
     - `workingMemory.ts`: Mastra memory integration for user profiles
     - `logger.server.ts`: HTTP request logging
     - `instrument.server.ts`: Metrics collection and monitoring
-    - `PrismaStorage .ts`: Mastra storage adapter for PostgreSQL
+    - `PrismaStorage.ts`: Mastra storage adapter for PostgreSQL
   - `/app/data/`: External data files (blog posts in markdown with front-matter)
   - `/app/entry.server.tsx`: Server-side rendering entry point with request logging
   - `/app/app.css`: Global Tailwind CSS imports
@@ -284,6 +290,8 @@ Optional environment variables:
 - `/prisma`: Database schema and migrations
   - `schema.prisma`: Database models and configuration
   - `generated/`: Prisma client generation output (imported as `prisma` in code)
+  - `/seed/`: Database seeding scripts
+    - `seedProperties.ts`: Property and space data seeding
 - `/build`: Production build output (client/server bundles)
 - `/public`: Static assets (favicon, logos, OG images)
 - `/test`: Test setup and shared utilities
