@@ -2,6 +2,7 @@ import { readdir, readFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import prisma from "app/lib/prisma";
 import debug from "debug";
+import { omit } from "es-toolkit";
 import { z } from "zod";
 
 export default async function seedProperties() {
@@ -19,12 +20,12 @@ export default async function seedProperties() {
     const json = property.parse(JSON.parse(data));
     await prisma.property.upsert({
       create: {
-        ...json,
+        ...omit(json, ["latitude", "longitude"]),
         spaces: { create: json.spaces },
         id: json.id,
       },
       update: {
-        ...json,
+        ...omit(json, ["latitude", "longitude"]),
         spaces: {
           upsert: json.spaces.map((space) => ({
             create: space,
