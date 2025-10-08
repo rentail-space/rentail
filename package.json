@@ -1,6 +1,7 @@
 {
   "name": "rentail",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "prisma generate && react-router build --force",
     "check": "pnpm run lint && pnpm run typecheck",
