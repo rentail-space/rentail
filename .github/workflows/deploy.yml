@@ -113,6 +113,11 @@ jobs:
     name: Deploy
     needs: test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+      statuses: write
+      pull-requests: write
     env:
       DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       SENTRY_AUTH_TOKEN: "***REMOVED***"
@@ -140,6 +145,7 @@ jobs:
       - name: Deploy to Vercel
         uses: nexterias/actions-vercel@v1
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           org-id: ${{ secrets.VERCEL_ORG_ID }}
           prebuilt: false
           production: ${{ github.ref == 'refs/heads/main' }}
