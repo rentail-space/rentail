@@ -1,13 +1,13 @@
 import { Markdown } from "@react-email/components";
-import humanFormat from "human-format";
 import type { PropertySpace } from "prisma/generated/client";
-import { Link, type LoaderFunctionArgs, useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import prisma from "~/lib/prisma";
+import type { Route } from "./+types/route";
 
-export async function loader({ params }: LoaderFunctionArgs<{ id: string }>) {
+export async function loader({ params }: Route.LoaderArgs) {
   const property = await prisma.property.findUnique({
-    where: { id: params.id },
     include: { spaces: true },
+    where: { slug: params.slug },
   });
   if (!property) throw new Response("Not Found", { status: 404 });
   return property;

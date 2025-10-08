@@ -12,3 +12,4 @@ await prisma.$executeRaw`CREATE EXTENSION IF NOT EXISTS postgis;`;
 // NOTE: We need to import async if we want to use debug.enable
 debug.enable("seed");
 await seedProperties();
+process.exit(0);

@@ -85,6 +85,7 @@ model Property {
   state       String                    @map("state")
   updatedAt   DateTime                  @map("updated_at")  @updatedAt
   website     String?                   @map("website")
+  slug        String?                   @map("slug")        @unique
 
   @@map("properties")
 }
