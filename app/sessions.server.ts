@@ -53,7 +53,7 @@ export async function getUserChat(headers: Headers): Promise<{
     captureException(error, { extra: { headers } });
   }
 
-  const userAgent = headers.get("user-agent");
+  const userAgent = headers.get("user-agent") ?? "";
   if (userAgent && isBot(userAgent)) {
     const bot = await prisma.user.findFirst({ where: { isBot: true } });
     if (bot) {
@@ -77,6 +77,7 @@ export async function getUserChat(headers: Headers): Promise<{
       ip: headers.get("x-forwarded-for") ?? "",
       referrer: headers.get("referer") ?? "",
       userAgent,
+      isBot: isBot(userAgent),
     },
   });
   const { chat, messages } = await getChatForUser(user);
