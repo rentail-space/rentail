@@ -138,9 +138,10 @@ jobs:
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v3
 
-      - name: Deploy Prisma schema
+      - name: Deploy Prisma schema and seed database
         run: |
           doppler run --config prd -- pnpm dlx prisma db push
+          doppler run --config prd -- pnpm dlx prisma db seed
 
       - name: Deploy to Vercel
         uses: nexterias/actions-vercel@v1
