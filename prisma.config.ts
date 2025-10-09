@@ -8,7 +8,7 @@ dotenv.config({
 });
 
 export default defineConfig({
-  migrations: { seed: "tsx prisma/seed.ts" },
+  migrations: { seed: "pnpm dlx tsx prisma/seed.ts" },
   schema: "prisma/schema.prisma",
   typedSql: { path: "prisma/sql" },
 });
