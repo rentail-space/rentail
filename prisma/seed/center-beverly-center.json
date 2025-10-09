@@ -7,8 +7,8 @@
   "imageURLs": [
     "https://mallmaverick.imgix.net/web/property_managers/1/properties/708/all/20250603152724/1110x540.png?auto=format,compress"
   ],
-  "latitude": "34.07558",
-  "longitude": "-118.37841",
+  "latitude": 34.07558,
+  "longitude": -118.37841,
   "name": "Beverly Center",
   "slug": "beverly-center",
   "spaces": [],

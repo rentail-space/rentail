@@ -24,7 +24,7 @@ export async function action({ request }: Route.ActionArgs) {
 
   // Set up Redis stop monitoring
   const { abortSignal, cleanup } = await monitorStopSignal(chat.id);
-  const spaces = await findNearbySpaces({ chat, distance: 20 });
+  const spaces = await findNearbySpaces({ chat, maxDistance: 20 });
 
   const agent = mastra.getAgentById("main");
   const memory = await agent.getMemory();

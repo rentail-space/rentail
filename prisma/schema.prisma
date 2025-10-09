@@ -74,20 +74,21 @@ model Waitlist {
 }
 
 model Property {
-  address     String                    @map("address")
-  city        String                    @map("city")
-  country     String                    @map("country")
-  createdAt   DateTime                  @map("created_at")  @default(now())
-  description String                    @map("description")
-  id          String                    @map("id")          @id @default(cuid(2))
-  imageURLs   String[]                  @map("image_urls")
-  location    Unsupported("geography")? @map("location")
-  name        String                    @map("name")
-  slug        String                    @map("slug")        @unique
+  address     String          @map("address")
+  city        String          @map("city")
+  country     String          @map("country")
+  createdAt   DateTime        @map("created_at")  @default(now())
+  description String          @map("description")
+  id          String          @map("id")          @id @default(cuid(2))
+  imageURLs   String[]        @map("image_urls")
+  latitude    Float           @map("latitude")
+  longitude   Float           @map("longitude")
+  name        String          @map("name")
+  slug        String          @map("slug")        @unique
   spaces      PropertySpace[]
-  state       String                    @map("state")
-  updatedAt   DateTime                  @map("updated_at")  @updatedAt
-  website     String                    @map("website")
+  state       String          @map("state")
+  updatedAt   DateTime        @map("updated_at")  @updatedAt
+  website     String          @map("website")
 
   @@map("properties")
 }

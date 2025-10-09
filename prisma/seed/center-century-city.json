@@ -7,8 +7,8 @@
   "imageURLs": [
     "https://cdn.vox-cdn.com/thumbor/BXjqYCVvAIo7-pHIUXr8S4Kz8aQ=/115x0:859x558/2420x1613/filters:focal(115x0:859x558)/cdn.vox-cdn.com/uploads/chorus_image/image/47018104/Luxury_District.0.0.jpg"
   ],
-  "latitude": "34.0587526",
-  "longitude": "-118.419204100278",
+  "latitude": 34.0587526,
+  "longitude": -118.419204100278,
   "name": "Westfield Century City",
   "slug": "century-city",
   "spaces": [],

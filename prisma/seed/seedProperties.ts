@@ -2,7 +2,6 @@ import { readdir, readFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import prisma from "app/lib/prisma";
 import debug from "debug";
-import { omit } from "es-toolkit";
 import { z } from "zod";
 
 export default async function seedProperties() {
@@ -20,12 +19,12 @@ export default async function seedProperties() {
     const json = property.parse(JSON.parse(data));
     await prisma.property.upsert({
       create: {
-        ...omit(json, ["latitude", "longitude"]),
-        spaces: { create: json.spaces },
+        ...json,
         id: json.id,
+        spaces: { create: json.spaces },
       },
       update: {
-        ...omit(json, ["latitude", "longitude"]),
+        ...json,
         spaces: {
           upsert: json.spaces.map((space) => ({
             create: space,
@@ -36,8 +35,6 @@ export default async function seedProperties() {
       },
       where: { id: json.id },
     });
-    const point = `POINT(${json.longitude} ${json.latitude})`;
-    await prisma.$executeRaw`UPDATE "properties" SET location = ST_GeomFromText(${point}) WHERE ID=${json.id};`;
   }
   debug("seed")("Seeded %d properties", filenames.length);
 }
@@ -49,8 +46,8 @@ const property = z.object({
   description: z.string(),
   id: z.cuid2(),
   imageURLs: z.array(z.url()),
-  latitude: z.string(),
-  longitude: z.string(),
+  latitude: z.number(),
+  longitude: z.number(),
   name: z.string(),
   slug: z.string(),
   state: z.string(),
