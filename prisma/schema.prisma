@@ -55,6 +55,7 @@ model User {
   image            String?   @map("image")
   ip               String?   @map("ip")
   isAnonymous      Boolean   @map("is_anonymous")       @default(false)
+  isBot            Boolean   @map("is_bot")             @default(false)
   metadata         Json      @map("metadata")           @db.Json
   name             String?   @map("name")
   referrer         String?   @map("referrer")

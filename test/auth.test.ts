@@ -45,8 +45,8 @@ describe("Anonymous visits chat page", () => {
     expect(workingMemory.location?.city).toEqual("Los Angeles");
     expect(workingMemory.location?.state).toEqual("California");
     expect(workingMemory.location?.country).toEqual("United States");
-    expect(workingMemory.location?.latitude).toEqual("37.42240");
-    expect(workingMemory.location?.longitude).toEqual("-122.08421");
+    expect(workingMemory.location?.latitude).toEqual(37.4224);
+    expect(workingMemory.location?.longitude).toEqual(-122.08421);
     expect(workingMemory.location?.timeZone).toEqual("America/Los_Angeles");
   });
 
@@ -89,11 +89,11 @@ describe("Anonymous visits chat page", () => {
     });
 
     it("should have user's new latitude", async () => {
-      expect(workingMemory.location?.latitude).toEqual("42.3601");
+      expect(workingMemory.location?.latitude).toEqual(42.3601);
     });
 
     it("should have user's new longitude", async () => {
-      expect(workingMemory.location?.longitude).toEqual("-71.0589");
+      expect(workingMemory.location?.longitude).toEqual(-71.0589);
     });
 
     it("should have user's new time zone", async () => {
@@ -233,8 +233,8 @@ describe("Anonymous visits chat page", () => {
             expect(workingMemory.location?.city).toEqual("Boston");
             expect(workingMemory.location?.state).toEqual("Massachusetts");
             expect(workingMemory.location?.country).toEqual("United States");
-            expect(workingMemory.location?.latitude).toEqual("42.3601");
-            expect(workingMemory.location?.longitude).toEqual("-71.0589");
+            expect(workingMemory.location?.latitude).toEqual(42.3601);
+            expect(workingMemory.location?.longitude).toEqual(-71.0589);
             expect(workingMemory.location?.timeZone).toEqual(
               "America/New_York",
             );

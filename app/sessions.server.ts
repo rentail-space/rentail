@@ -1,7 +1,7 @@
 import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
-import { isbot } from "isbot";
+import { createIsbotFromList, list } from "isbot";
 import type { ChatGetPayload } from "prisma/generated/models";
 import zod from "zod";
 import authServer from "~/lib/auth.server";
@@ -18,8 +18,8 @@ const cachedLocation = zod
     country: zod.string(),
     state: zod.string(),
     ip: zod.string(),
-    latitude: zod.string(),
-    longitude: zod.string(),
+    latitude: zod.number(),
+    longitude: zod.number(),
     timeZone: zod.string(),
   })
   .partial();
@@ -53,10 +53,10 @@ export async function getUserChat(headers: Headers): Promise<{
     captureException(error, { extra: { headers } });
   }
 
-  if (isbot(headers.get("User-Agent"))) {
-    const ip = "0.0.0.0";
-    headers.set("x-forwarded-for", ip);
-    const bot = await prisma.user.findFirst({ where: { ip } });
+  console.log("headers", headers);
+  console.log("isbot", isBot(headers.get("User-Agent") ?? ""));
+  if (isBot(headers.get("User-Agent") ?? "")) {
+    const bot = await prisma.user.findFirst({ where: { isBot: true } });
     if (bot) {
       const { chat, messages } = await getChatForUser(bot);
       return { chat, messages, headers: headers };
@@ -122,13 +122,44 @@ async function getChatForUser(user: { id: string }): Promise<{
 export async function geocodeIP(
   headers: Headers,
 ): Promise<zod.infer<typeof cachedLocation>> {
-  return {
-    city: headers.get("x-vercel-ip-city") ?? "Los Angeles",
-    country: headers.get("x-vercel-ip-country") ?? "United States",
-    ip: headers.get("x-forwarded-for") ?? "146.70.195.182",
-    latitude: headers.get("x-vercel-ip-latitude") ?? "37.42240",
-    longitude: headers.get("x-vercel-ip-longitude") ?? "-122.08421",
-    state: headers.get("x-vercel-ip-country-region") ?? "California",
-    timeZone: headers.get("x-vercel-ip-timezone") ?? "America/Los_Angeles",
+  const fallback = {
+    city: "Los Angeles",
+    country: "United States",
+    state: "California",
+    ip: "146.70.195.182",
+    latitude: 37.4224,
+    longitude: -122.08421,
+    timeZone: "America/Los_Angeles",
   };
+  try {
+    return {
+      city: decodeURIComponent(
+        headers.get("x-vercel-ip-city") ?? fallback.city,
+      ),
+      country: headers.get("x-vercel-ip-country") ?? fallback.country,
+      ip: headers.get("x-forwarded-for") ?? fallback.ip,
+      latitude: Number.parseFloat(
+        headers.get("x-vercel-ip-latitude") ?? fallback.latitude.toString(),
+      ),
+      longitude: Number.parseFloat(
+        headers.get("x-vercel-ip-longitude") ?? fallback.longitude.toString(),
+      ),
+      state: headers.get("x-vercel-ip-country-region") ?? fallback.state,
+      timeZone: headers.get("x-vercel-ip-timezone") ?? fallback.timeZone,
+    };
+  } catch (error) {
+    captureException(error, { extra: { headers } });
+    return fallback;
+  }
 }
+
+/**
+ * Check if the user agent is a bot. In testing, we treat headless Chrome as a
+ * real user.
+ *
+ * @param userAgent - The user agent
+ * @returns True if the user agent is a bot, false otherwise
+ */
+const isBot: (userAgent: string) => boolean = createIsbotFromList(
+  list.filter((record: string): boolean => !/headless/i.test(record)),
+);

@@ -15,32 +15,29 @@ describe("Proximity-based shopping center search", () => {
   function calculateCoordinates(
     direction: "north" | "south" | "east" | "west",
     miles: number,
-  ): { latitude: string; longitude: string } {
+  ): { latitude: number; longitude: number } {
     const LAT_MILES_PER_DEGREE = 69.172;
     const LON_MILES_PER_DEGREE = 57.393; // at 34°N
 
-    let lat = THE_GROVE_LAT;
-    let lon = THE_GROVE_LON;
+    let latitude = THE_GROVE_LAT;
+    let longitude = THE_GROVE_LON;
 
     switch (direction) {
       case "north":
-        lat += miles / LAT_MILES_PER_DEGREE;
+        latitude += miles / LAT_MILES_PER_DEGREE;
         break;
       case "south":
-        lat -= miles / LAT_MILES_PER_DEGREE;
+        latitude -= miles / LAT_MILES_PER_DEGREE;
         break;
       case "east":
-        lon += miles / LON_MILES_PER_DEGREE;
+        longitude += miles / LON_MILES_PER_DEGREE;
         break;
       case "west":
-        lon -= miles / LON_MILES_PER_DEGREE;
+        longitude -= miles / LON_MILES_PER_DEGREE;
         break;
     }
 
-    return {
-      latitude: lat.toFixed(5),
-      longitude: lon.toFixed(6),
-    };
+    return { latitude, longitude };
   }
 
   describe("Search from 10 miles north", () => {
@@ -54,8 +51,8 @@ describe("Proximity-based shopping center search", () => {
         "x-vercel-ip-country": "United States",
         "x-vercel-ip-country-region": "California",
         "x-vercel-ip-timezone": "America/Los_Angeles",
-        "x-vercel-ip-latitude": coords.latitude,
-        "x-vercel-ip-longitude": coords.longitude,
+        "x-vercel-ip-latitude": coords.latitude.toString(),
+        "x-vercel-ip-longitude": coords.longitude.toString(),
       });
 
       const chat = await prisma.chat.findFirstOrThrow({
@@ -81,8 +78,8 @@ describe("Proximity-based shopping center search", () => {
         "x-vercel-ip-country": "United States",
         "x-vercel-ip-country-region": "California",
         "x-vercel-ip-timezone": "America/Los_Angeles",
-        "x-vercel-ip-latitude": coords.latitude,
-        "x-vercel-ip-longitude": coords.longitude,
+        "x-vercel-ip-latitude": coords.latitude.toString(),
+        "x-vercel-ip-longitude": coords.longitude.toString(),
       });
 
       const chat = await prisma.chat.findFirstOrThrow({
@@ -108,8 +105,8 @@ describe("Proximity-based shopping center search", () => {
         "x-vercel-ip-country": "United States",
         "x-vercel-ip-country-region": "California",
         "x-vercel-ip-timezone": "America/Los_Angeles",
-        "x-vercel-ip-latitude": coords.latitude,
-        "x-vercel-ip-longitude": coords.longitude,
+        "x-vercel-ip-latitude": coords.latitude.toString(),
+        "x-vercel-ip-longitude": coords.longitude.toString(),
       });
 
       const chat = await prisma.chat.findFirstOrThrow({
@@ -135,8 +132,8 @@ describe("Proximity-based shopping center search", () => {
         "x-vercel-ip-country": "United States",
         "x-vercel-ip-country-region": "California",
         "x-vercel-ip-timezone": "America/Los_Angeles",
-        "x-vercel-ip-latitude": coords.latitude,
-        "x-vercel-ip-longitude": coords.longitude,
+        "x-vercel-ip-latitude": coords.latitude.toString(),
+        "x-vercel-ip-longitude": coords.longitude.toString(),
       });
 
       const chat = await prisma.chat.findFirstOrThrow({
@@ -162,8 +159,8 @@ describe("Proximity-based shopping center search", () => {
         "x-vercel-ip-country": "United States",
         "x-vercel-ip-country-region": "California",
         "x-vercel-ip-timezone": "America/Los_Angeles",
-        "x-vercel-ip-latitude": coords.latitude,
-        "x-vercel-ip-longitude": coords.longitude,
+        "x-vercel-ip-latitude": coords.latitude.toString(),
+        "x-vercel-ip-longitude": coords.longitude.toString(),
       });
 
       const chat = await prisma.chat.findFirstOrThrow({
@@ -189,8 +186,8 @@ describe("Proximity-based shopping center search", () => {
         "x-vercel-ip-country": "United States",
         "x-vercel-ip-country-region": "California",
         "x-vercel-ip-timezone": "America/Los_Angeles",
-        "x-vercel-ip-latitude": coords.latitude,
-        "x-vercel-ip-longitude": coords.longitude,
+        "x-vercel-ip-latitude": coords.latitude.toString(),
+        "x-vercel-ip-longitude": coords.longitude.toString(),
       });
 
       const chat = await prisma.chat.findFirstOrThrow({
@@ -216,8 +213,8 @@ describe("Proximity-based shopping center search", () => {
         "x-vercel-ip-country": "United States",
         "x-vercel-ip-country-region": "California",
         "x-vercel-ip-timezone": "America/Los_Angeles",
-        "x-vercel-ip-latitude": coords.latitude,
-        "x-vercel-ip-longitude": coords.longitude,
+        "x-vercel-ip-latitude": coords.latitude.toString(),
+        "x-vercel-ip-longitude": coords.longitude.toString(),
       });
 
       const chat = await prisma.chat.findFirstOrThrow({
@@ -243,8 +240,8 @@ describe("Proximity-based shopping center search", () => {
         "x-vercel-ip-country": "United States",
         "x-vercel-ip-country-region": "California",
         "x-vercel-ip-timezone": "America/Los_Angeles",
-        "x-vercel-ip-latitude": coords.latitude,
-        "x-vercel-ip-longitude": coords.longitude,
+        "x-vercel-ip-latitude": coords.latitude.toString(),
+        "x-vercel-ip-longitude": coords.longitude.toString(),
       });
 
       const chat = await prisma.chat.findFirstOrThrow({

@@ -29,12 +29,12 @@ export default async function findNearbySpaces({
     include: { spaces: true },
     where: {
       latitude: {
-        gte: Number.parseFloat(location.latitude) - maxDistance / 69.172,
-        lte: Number.parseFloat(location.latitude) + maxDistance / 69.172,
+        gte: location.latitude - maxDistance / 69.172,
+        lte: location.latitude + maxDistance / 69.172,
       },
       longitude: {
-        gte: Number.parseFloat(location.longitude) - maxDistance / 57.393,
-        lte: Number.parseFloat(location.longitude) + maxDistance / 57.393,
+        gte: location.longitude - maxDistance / 57.393,
+        lte: location.longitude + maxDistance / 57.393,
       },
     },
   });
@@ -43,9 +43,12 @@ export default async function findNearbySpaces({
 
 async function locationFromWorkingMemory(
   chat: ChatGetPayload<{ include: { user: true } }>,
-): Promise<{ longitude?: string; latitude?: string }> {
+): Promise<{ longitude?: number; latitude?: number }> {
   const { location } = await getWorkingMemory(chat);
-  return { longitude: location?.longitude, latitude: location?.latitude };
+  return {
+    longitude: location?.longitude ?? 0,
+    latitude: location?.latitude ?? 0,
+  };
 }
 
 function propertiesToMarkdown({

@@ -14,8 +14,8 @@ export const userProfile = zod
 
     location: zod
       .object({
-        latitude: zod.string().describe("The user's latitude"),
-        longitude: zod.string().describe("The user's longitude"),
+        latitude: zod.number().describe("The user's latitude"),
+        longitude: zod.number().describe("The user's longitude"),
         city: zod.string().describe("The user's city"),
         state: zod.string().describe("The user's state"),
         country: zod.string().describe("The user's country"),
