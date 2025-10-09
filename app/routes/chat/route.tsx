@@ -4,34 +4,19 @@ import { captureException } from "@sentry/react-router";
 import { DefaultChatTransport, type UIMessage, type UITools } from "ai";
 import { last } from "es-toolkit";
 import { useQueryState } from "nuqs";
-import type {
-  ChatGetPayload,
-  PropertyGetPayload,
-} from "prisma/generated/models";
-import { Activity, useRef, useState } from "react";
-import { Link, useLoaderData, useRouteLoaderData } from "react-router";
+import type { ChatGetPayload } from "prisma/generated/models";
+import { useRef } from "react";
+import { useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
-import findNearbyProperties from "~/lib/findNearbyProperties";
-import truncateWords from "~/lib/truncateWords";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
-import { getUserChat } from "~/sessions.server";
-import type { Route } from "./+types/route";
-import Properties from "./Properties";
 
 export const handle = { hideLayout: true };
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const { chat } = await getUserChat(request.headers);
-  const properties = await findNearbyProperties({ chat, maxDistance: 20 });
-  return { properties };
-}
-
 export default function Chat() {
-  const { properties } = useLoaderData<typeof loader>();
   const [query, setQuery] = useQueryState("q");
   const data = useRouteLoaderData<{
     chat: ChatGetPayload<{ include: { user: true } }>;
@@ -100,8 +85,6 @@ export default function Chat() {
         </StickToBottom.Content>
 
         <ScrollButton />
-
-        <Properties properties={properties ?? []} />
 
         <InputForm
           inputRef={inputRef}
