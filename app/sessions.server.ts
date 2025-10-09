@@ -1,3 +1,4 @@
+import { reverse } from "node:dns/promises";
 import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
@@ -54,7 +55,10 @@ export async function getUserChat(headers: Headers): Promise<{
   }
 
   const userAgent = headers.get("user-agent") ?? "";
-  if (userAgent && isBot(userAgent)) {
+  const ip = headers.get("x-forwarded-for") ?? "";
+
+  // Check if it's a bot by user agent
+  if (isBot(userAgent) || (await isGoogleIP(ip))) {
     const bot = await prisma.user.findFirst({ where: { isBot: true } });
     if (bot) {
       const { chat, messages } = await getChatForUser(bot);
@@ -166,3 +170,36 @@ const isBot: (userAgent: string) => boolean = createIsbotFromList(
     .filter((record: string): boolean => !/headless/i.test(record))
     .concat(["betterstack", "checkly", "vercel"]),
 );
+
+/**
+ * Check if an IP address is from Google's domains by performing reverse DNS lookup.
+ * This helps verify if a request is actually from Google's crawlers.
+ *
+ * @param ip - The IP address to check
+ * @returns True if the IP resolves to a Google domain, false otherwise
+ */
+async function isGoogleIP(ip: string): Promise<boolean> {
+  try {
+    // Skip reverse DNS check for localhost/private IPs
+    if (
+      ip === "127.0.0.1" ||
+      ip === "::1" ||
+      ip.startsWith("192.168.") ||
+      ip.startsWith("10.") ||
+      ip.startsWith("172.")
+    )
+      return false;
+
+    const hostnames = await reverse(ip);
+    const hostname = hostnames[0]?.toLowerCase() || "";
+
+    // Check if the hostname ends with Google's known domains
+    return (
+      hostname.endsWith(".googlebot.com") || hostname.endsWith(".google.com")
+    );
+  } catch (error) {
+    // If reverse DNS lookup fails, assume it's not a Google IP
+    captureException(error, { extra: { ip } });
+    return false;
+  }
+}
