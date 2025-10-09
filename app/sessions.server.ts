@@ -53,7 +53,8 @@ export async function getUserChat(headers: Headers): Promise<{
     captureException(error, { extra: { headers } });
   }
 
-  if (isBot(headers.get("User-Agent") ?? "")) {
+  const userAgent = headers.get("user-agent");
+  if (userAgent && isBot(userAgent)) {
     const bot = await prisma.user.findFirst({ where: { isBot: true } });
     if (bot) {
       const { chat, messages } = await getChatForUser(bot);
@@ -75,6 +76,7 @@ export async function getUserChat(headers: Headers): Promise<{
       geocode,
       ip: headers.get("x-forwarded-for") ?? "",
       referrer: headers.get("referer") ?? "",
+      userAgent,
     },
   });
   const { chat, messages } = await getChatForUser(user);
@@ -161,5 +163,5 @@ export async function geocodeIP(
 const isBot: (userAgent: string) => boolean = createIsbotFromList(
   list
     .filter((record: string): boolean => !/headless/i.test(record))
-    .concat(["BetterStack", "Checkly"]),
+    .concat(["betterstack", "checkly", "vercel"]),
 );
