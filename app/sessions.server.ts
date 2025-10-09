@@ -53,8 +53,6 @@ export async function getUserChat(headers: Headers): Promise<{
     captureException(error, { extra: { headers } });
   }
 
-  console.log("headers", headers);
-  console.log("isbot", isBot(headers.get("User-Agent") ?? ""));
   if (isBot(headers.get("User-Agent") ?? "")) {
     const bot = await prisma.user.findFirst({ where: { isBot: true } });
     if (bot) {
