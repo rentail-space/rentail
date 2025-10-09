@@ -131,9 +131,9 @@ export async function geocodeIP(
     city: "Los Angeles",
     country: "United States",
     state: "California",
-    ip: "146.70.195.182",
-    latitude: 37.4224,
-    longitude: -122.08421,
+    ip: "23.241.26.38",
+    latitude: 34.0456,
+    longitude: -118.2694,
     timeZone: "America/Los_Angeles",
   };
   try {
