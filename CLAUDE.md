@@ -53,15 +53,16 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - Stop endpoints: `app/routes/api.chat.$id.stop.tsx` for manual chat termination
 - AI library configuration: `app/lib/env.ts` (environment-based settings)
 - System prompts in `app/lib/`: `general.md`, `prelude.md`, `spaces.md`, `welcome.md`
-- Geolocation filtering: Built-in Haversine distance calculation for shopping centers
+- Geolocation filtering: Simple bounding box calculation for shopping centers within radius
 - Use Context7 MCP server for library documentation and code examples
 - When requesting code examples, setup/configuration steps, or library/API documentation, use Context7 tool
 
 **Working Memory & User Profiles:**
 - Mastra memory stores user profiles as JSON in User.workingMemory field
-- Profile includes: name, location (city, state, country, lat/lon, timezone), preferences
+- Profile includes: name, location (city, state, country, lat/lon as numbers, timezone), preferences
 - Working memory updated automatically by AI during conversations
-- Location initialized from IP geolocation on first visit (via ipgeolocation.io with Redis cache)
+- Location initialized from IP geolocation on first visit via Vercel headers (x-vercel-ip-*)
+- Latitude/longitude stored as numbers (not strings) for direct numeric calculations
 - Custom Mastra storage adapter (`PrismaStorage`) stores threads/messages in existing Chat/Message tables
 - Profile persists across sessions and survives anonymous→authenticated user migration
 - Access via `getWorkingMemory(chat)` and `updateWorkingMemory(chat, fn)`
@@ -76,11 +77,13 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 
 **Database:**
 - PostgreSQL with Prisma ORM client and schema generation
-- Database models: User (with location/IP tracking), Chat (with stream management), Message (with AI SDK integration), Waitlist, Property (shopping centers with PostGIS), PropertySpace (individual retail spaces)
-- PostGIS extension for geographic queries and distance calculations
+- Database models: User (with location/IP/userAgent tracking, isBot flag), Chat (with stream management), Message (with AI SDK integration), Waitlist, Property (shopping centers), PropertySpace (individual retail spaces)
+- Geographic queries use simple latitude/longitude bounding box calculations (69.172 miles per degree latitude, 57.393 miles per degree longitude at 34°N)
 - Active stream tracking: Chat.activeStreamId for coordinating streaming responses across server instances
 - Message model includes reasoning field for AI thinking tokens and abort status
 - Session-based chat management with automatic user creation from IP geolocation
+- Bot detection: isBot flag set based on user-agent (filters monitoring services like BetterStack, Checkly, Vercel)
+- Bot users share a single database record (found via `isBot: true`) instead of creating duplicates
 - Prisma features: TypedSQL, Query Compiler, Driver Adapters
 - Test environment uses local PostgreSQL instance
 - Database operations: `prisma generate && prisma db push` for schema updates
@@ -93,6 +96,8 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - Process metrics collected every 5 minutes in production (configurable via METRICS_COLLECTION_INTERVAL_MS)
 - HTTP request logging with method, URL, status code, and duration (`app/lib/logger.server.ts`)
 - Checkly for synthetic monitoring (every 30 minutes) configured in `checkly.config.ts`
+- Bot detection with reverse DNS lookup: verifies Google crawlers via `.googlebot.com` or `.google.com` hostnames
+- Monitoring bots (BetterStack, Checkly, Vercel) automatically use shared bot user to avoid polluting analytics
 
 **File-Based Routing:**
 Routes are configured in `/app/routes.ts` using React Router v7's declarative routing with `flatRoutes`:
@@ -200,7 +205,8 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 
 **Test Organization:**
 - Use nested `describe` blocks to organize related tests
-- Use `beforeAll`/`afterAll` for test setup/cleanup (not `beforeEach`/`afterEach`)
+- Use `beforeAll`/`afterAll` for test setup/cleanup when sharing state across tests
+- Use `beforeEach`/`afterEach` when tests need isolated state (e.g., bot detection tests)
 - Share state across tests within a describe block using `let` variables
 - Sequential tests: each test validates one aspect, state flows through the suite
 - Example pattern from `test/auth.test.ts`:
@@ -229,13 +235,15 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Anthropic API mocked with pattern matching for different user messages (`/test/mocks/anthropic.mock.ts`)
 - Working memory updates triggered by mock tool calls (e.g., Boston location update)
 - Sentry initialized in test mode with console logging only
-- Database reset in beforeAll: `await prisma.user.deleteMany()`
+- Database reset in beforeAll or beforeEach: `await prisma.user.deleteMany()`
 - Visual regression: `await expect(page).toMatchScreenshot()`
 - Email testing: use `sendEmail()` then `renderLastEmailSent(page)` for visual testing
+- Bot detection tests: verify user-agent detection, isBot flag, and bot user reuse
 - Run individual tests: `npm run test -- <test-pattern>` or `pnpx vitest run <test-pattern>`
 - Simulate slower CI: `SLOW_MO=1000 pnpm test` (adds 1s delay between Playwright actions)
 - Run in headless mode: `CI=true pnpm test`
 - E2E tests use Checkly for production monitoring (`__checks__/` directory)
+- Bot user-agent for tests: "vercel-screenshot/1.0" (bypasses headless Chrome filter)
 - Debug logging: Use `debug` package with namespaces (server, browser, agent, prisma, msw)
   - Enable with: `DEBUG=server,browser pnpm test` or `DEBUG=* pnpm test`
 
