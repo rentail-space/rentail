@@ -1,10 +1,10 @@
 import { expect, type Page } from "playwright/test";
-import { beforeAll, describe, it } from "vitest";
+import { beforeAll, beforeEach, describe, it } from "vitest";
 import type zod from "zod";
 import prisma from "~/lib/prisma";
 import type { userProfile } from "~/lib/userProfile";
 import { getWorkingMemory } from "~/lib/workingMemory";
-import { goto } from "~/test/helpers/launchBrowser";
+import { goto, launchBrowser } from "~/test/helpers/launchBrowser";
 
 describe("Anonymous visits chat page", () => {
   let page: Page;
@@ -242,5 +242,43 @@ describe("Anonymous visits chat page", () => {
         });
       });
     });
+  });
+});
+
+describe("Bot detection", () => {
+  beforeEach(async () => {
+    await prisma.user.deleteMany();
+  });
+
+  it("default browser is not considered a bot (is_bot is false)", async () => {
+    await goto("/chat");
+    const users = await prisma.user.findMany();
+    expect(users.length, "should have one user").toEqual(1);
+    expect(users[0].isBot, "user should not be considered a bot").toBe(false);
+  });
+
+  it("browser with bot User-Agent is considered a bot", async () => {
+    await goto("/chat", {
+      "user-agent": "vercel-screenshot/1.0",
+    });
+    const users = await prisma.user.findMany();
+    expect(users.length, "should have one user").toEqual(1);
+    expect(users[0].isBot, "user should be considered a bot").toBe(true);
+  });
+
+  it("two different bot requests without shared cookies link to the same user record", async () => {
+    const context = await launchBrowser();
+
+    // First bot request
+    await goto("/chat", { "user-agent": "vercel-screenshot/1.0" });
+
+    // Clear all cookies before the second bot request
+    await context.clearCookies();
+    await goto("/chat", { "user-agent": "vercel-screenshot/1.0" });
+
+    // Should still have only one user (the bot user)
+    const users = await prisma.user.findMany();
+    expect(users.length, "should have only one bot user").toEqual(1);
+    expect(users[0].isBot, "user should be considered a bot").toBe(true);
   });
 });
