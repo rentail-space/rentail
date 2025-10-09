@@ -1,6 +1,7 @@
 import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
+import { isbot } from "isbot";
 import type { ChatGetPayload } from "prisma/generated/models";
 import zod from "zod";
 import authServer from "~/lib/auth.server";
@@ -52,11 +53,7 @@ export async function getUserChat(headers: Headers): Promise<{
     captureException(error, { extra: { headers } });
   }
 
-  if (
-    /UptimeRobot|StatusCake|Pingdom|Checkly|Better Uptime Bot/.test(
-      headers.get("user-agent") ?? "",
-    )
-  ) {
+  if (isbot(headers.get("User-Agent"))) {
     const ip = "0.0.0.0";
     headers.set("x-forwarded-for", ip);
     const bot = await prisma.user.findFirst({ where: { ip } });
