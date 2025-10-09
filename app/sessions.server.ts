@@ -159,5 +159,7 @@ export async function geocodeIP(
  * @returns True if the user agent is a bot, false otherwise
  */
 const isBot: (userAgent: string) => boolean = createIsbotFromList(
-  list.filter((record: string): boolean => !/headless/i.test(record)),
+  list
+    .filter((record: string): boolean => !/headless/i.test(record))
+    .concat(["BetterStack", "Checkly"]),
 );
