@@ -3,14 +3,12 @@ import { handleRequest } from "@vercel/react-router/entry.server";
 import debug from "debug";
 import type {
   ActionFunctionArgs,
-  AppLoadContext,
   EntryContext,
   LoaderFunctionArgs,
 } from "react-router";
 import { RouterContextProvider } from "react-router";
 import env from "~/lib/env";
 import "~/lib/instrument.server";
-import appContext from "~/context";
 
 if (env.SENTRY_DSN) {
   Sentry.init({
@@ -47,7 +45,7 @@ export default Sentry.wrapSentryHandleRequest(
     responseStatusCode: number,
     responseHeaders: Headers,
     routerContext: EntryContext,
-    loadContext: RouterContextProvider | AppLoadContext,
+    loadContext: any,
   ) => {
     const nonce = crypto.randomUUID();
     const response = await handleRequest(
@@ -55,7 +53,7 @@ export default Sentry.wrapSentryHandleRequest(
       responseStatusCode,
       responseHeaders,
       routerContext,
-      loadContext as AppLoadContext,
+      loadContext,
       { nonce },
     );
     response.headers.set("Document-Policy", "js-profiling");
