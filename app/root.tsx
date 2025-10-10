@@ -19,25 +19,15 @@ import { Toaster } from "sonner";
 import ErrorBoundary from "~/components/ErrorBoundary";
 import Footer from "~/components/layout/Footer";
 import Header from "~/components/layout/Header";
-import appContext from "~/context";
 import schema from "~/data/schema.json";
 import loggingMiddleware from "~/lib/middleware/logging";
 import type { Route } from "./+types/root";
 import { getUserChat } from "./sessions.server";
 
-export const middleware: Route.MiddlewareFunction[] = [
-  loggingMiddleware,
+export const middleware: Route.MiddlewareFunction[] = [loggingMiddleware];
 
-  // Set user context before loaders run so child loaders can access it
-  async ({ request, context }, next) => {
-    const { chat, messages, headers } = await getUserChat(request.headers);
-    context.set(appContext, { chat, messages, headers });
-    return next();
-  },
-];
-
-export async function loader({ context }: Route.LoaderArgs) {
-  const { chat, messages, headers } = context.get(appContext);
+export async function loader({ request }: Route.LoaderArgs) {
+  const { chat, messages, headers } = await getUserChat(request.headers);
   return data({ chat, messages }, { headers });
 }
 

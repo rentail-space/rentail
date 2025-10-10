@@ -1,15 +1,12 @@
 import * as Sentry from "@sentry/react-router";
-import { createReadableStreamFromReadable } from "@react-router/node";
+import { handleRequest } from "@vercel/react-router/entry.server";
 import debug from "debug";
-import { PassThrough } from "node:stream";
-import { renderToPipeableStream } from "react-dom/server";
 import type {
   ActionFunctionArgs,
   AppLoadContext,
   EntryContext,
   LoaderFunctionArgs,
 } from "react-router";
-import { RouterContextProvider, ServerRouter } from "react-router";
 import env from "~/lib/env";
 import "~/lib/instrument.server";
 
@@ -39,43 +36,29 @@ if (env.isTest) {
 }
 
 export function getLoadContext() {
-  return new RouterContextProvider();
+  return {};
 }
 
 export default Sentry.wrapSentryHandleRequest(
-  (
+  async (
     request: Request,
     responseStatusCode: number,
     responseHeaders: Headers,
     routerContext: EntryContext,
-    loadContext: RouterContextProvider | AppLoadContext,
+    // biome-ignore lint/suspicious/noExplicitAny: Sentry wrapper requires flexible type
+    loadContext?: any,
   ) => {
-    return new Promise((resolve, reject) => {
-      const { pipe } = renderToPipeableStream(
-        <ServerRouter context={routerContext} url={request.url} />,
-        {
-          onShellReady() {
-            responseHeaders.set("Content-Type", "text/html");
-            responseHeaders.set("Document-Policy", "js-profiling");
-
-            const body = new PassThrough();
-            const stream = createReadableStreamFromReadable(body);
-
-            resolve(
-              new Response(stream, {
-                headers: responseHeaders,
-                status: responseStatusCode,
-              }),
-            );
-
-            pipe(body);
-          },
-          onShellError(error: unknown) {
-            reject(error);
-          },
-        },
-      );
-    });
+    const nonce = crypto.randomUUID();
+    const response = await handleRequest(
+      request,
+      responseStatusCode,
+      responseHeaders,
+      routerContext,
+      loadContext,
+      { nonce },
+    );
+    response.headers.set("Document-Policy", "js-profiling");
+    return response;
   },
 );
 

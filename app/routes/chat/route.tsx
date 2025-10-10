@@ -1,14 +1,15 @@
 import { useChat } from "@ai-sdk/react";
+import type { MastraMessageV2 } from "@mastra/core/memory";
 import { captureException } from "@sentry/react-router";
 import { DefaultChatTransport, type UIMessage, type UITools } from "ai";
 import { last } from "es-toolkit";
 import { useQueryState } from "nuqs";
+import type { ChatGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
-import { useLoaderData } from "react-router";
+import { useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
-import appContext from "~/context";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
@@ -17,22 +18,25 @@ import type { Route } from "./+types/route";
 export const handle = { hideLayout: true };
 
 /**
- * Chat route loader - accesses user/chat data from root context.
- * Context is set by root loader, so we can use chat.user for any server-side logic.
- *
- * Example usage:
- * - Load user-specific data: await findNearbyProperties({ chat: context.chat, maxDistance: 20 })
- * - Access user location: context.chat.user.geocode
- * - Check user permissions: context.chat.user.isAnonymous
+ * Chat route - uses root loader data for user/chat information.
+ * Access via useRouteLoaderData("root") to get chat and messages.
  */
-export async function loader({ context }: Route.LoaderArgs) {
-  const { chat, messages } = context.get(appContext);
-  return { chat, messages };
+export async function loader() {
+  // Chat data comes from root loader via useRouteLoaderData
+  return null;
 }
 
 export default function Chat() {
   const [query, setQuery] = useQueryState("q");
-  const { chat, messages: initialMessages } = useLoaderData<typeof loader>();
+
+  // Access data from root loader
+  const data = useRouteLoaderData<{
+    chat: ChatGetPayload<{ include: { user: true } }>;
+    messages: MastraMessageV2[];
+  }>("root");
+
+  const chat = data?.chat;
+  const initialMessages = data?.messages;
   const { error, messages, sendMessage, status, stop } = useChat<
     UIMessage<{ isAborted?: boolean }, { text: string }, UITools>
   >({
