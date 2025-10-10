@@ -38,9 +38,7 @@ if (env.isTest) {
 }
 
 export function getLoadContext() {
-  const context = new RouterContextProvider();
-  context.set(appContext, {});
-  return context;
+  return new RouterContextProvider();
 }
 
 export default Sentry.wrapSentryHandleRequest(
