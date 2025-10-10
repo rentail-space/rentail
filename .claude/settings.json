@@ -3,12 +3,11 @@
     "allow": [
       "Bash(pnpm run typecheck:*)",
       "Bash(pnpm audit:*)",
-      "Bash(git commit:*)",
       "Bash(pnpm run lint)",
       "Bash(pnpm run build:*)",
-      "Bash(git add:*)",
       "Bash(pnpm run test:*)",
-      "Bash(pnpm install:*)"
+      "Bash(pnpm install:*)",
+      "Bash(git add:*)"
     ]
   },
   "enableAllProjectMcpServers": false,
