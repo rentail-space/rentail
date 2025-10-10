@@ -14,30 +14,48 @@ export default function PropertyList({
   return (
     <div className="flex flex-wrap gap-4 mx-auto max-w-xl">
       {properties.map((property) => (
-        <Link
-          className="flex flex-row gap-2 items-center hover:bg-base-200 rounded-lg px-4 py-2"
+        <PropertyLink
+          hoveredProperty={hoveredProperty}
           key={property.id}
-          onMouseEnter={() => setHoveredProperty(property.id)}
-          onMouseLeave={() => setHoveredProperty(null)}
-          target="_blank"
-          to={`/property/${property.slug}`}
-        >
-          <img
-            alt="Shopping mall"
-            className="w-4 h-4"
-            src="/shopping-mall.png"
-          />
-          <span className="text-sm text-base-content/70">
-            {truncateLetters(property.name, 25)}
-          </span>
-
-          <HoverCard
-            key={property.id}
-            mode={hoveredProperty === property.id ? "visible" : "hidden"}
-            property={property}
-          />
-        </Link>
+          property={property}
+          setHoveredProperty={setHoveredProperty}
+        />
       ))}
+    </div>
+  );
+}
+
+function PropertyLink({
+  hoveredProperty,
+  property,
+  setHoveredProperty,
+}: {
+  hoveredProperty: string | null;
+  property: PropertyGetPayload<{ include: { spaces: true } }>;
+  setHoveredProperty: (propertyId: string | null) => void;
+}) {
+  return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: container for hover card positioning
+    <div
+      className="relative"
+      onMouseEnter={() => setHoveredProperty(property.id)}
+      onMouseLeave={() => setHoveredProperty(null)}
+    >
+      <Link
+        className="flex flex-row gap-2 items-center hover:bg-base-200 rounded-lg px-4 py-2"
+        target="_blank"
+        to={`/property/${property.slug}`}
+      >
+        <img alt="Shopping mall" className="w-4 h-4" src="/shopping-mall.png" />
+        <span className="text-sm text-base-content/70">
+          {truncateLetters(property.name, 25)}
+        </span>
+      </Link>
+
+      <HoverCard
+        mode={hoveredProperty === property.id ? "visible" : "hidden"}
+        property={property}
+      />
     </div>
   );
 }
@@ -56,11 +74,26 @@ function HoverCard({
         <p className="text-sm text-base-content/70 mb-3">
           {truncateWords(property.description, 30)}
         </p>
-        <img
-          src={property.imageURLs[0]}
-          alt={property.name}
-          className="w-full h-40 rounded-lg"
-        />
+
+        <div
+          style={{
+            background:
+              "repeating-linear-gradient(135deg, #e5e7eb 0 24px, #fff 24px 48px)",
+          }}
+          className="w-full relative overflow-hidden justify-center flex border-2 border-base-300 items-center rounded-lg h-[160px]"
+        >
+          <img
+            alt={property.name}
+            className="w-full h-40 rounded-lg absolute inset-0 object-cover opacity-0 transition-opacity duration-300"
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
+            onLoad={(e) => {
+              e.currentTarget.style.opacity = "1";
+            }}
+            src={property.imageURLs[0]}
+          />
+        </div>
       </div>
     </Activity>
   );
