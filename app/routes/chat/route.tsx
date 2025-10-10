@@ -13,18 +13,8 @@ import Header from "~/components/layout/Header";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
-import type { Route } from "./+types/route";
 
 export const handle = { hideLayout: true };
-
-/**
- * Chat route - uses root loader data for user/chat information.
- * Access via useRouteLoaderData("root") to get chat and messages.
- */
-export async function loader() {
-  // Chat data comes from root loader via useRouteLoaderData
-  return null;
-}
 
 export default function Chat() {
   const [query, setQuery] = useQueryState("q");
