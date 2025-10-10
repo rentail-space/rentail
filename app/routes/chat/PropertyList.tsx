@@ -1,9 +1,10 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Activity, useState } from "react";
 import { Link } from "react-router";
+import truncateLetters from "~/lib/truncateLetters";
 import truncateWords from "~/lib/truncateWords";
 
-export default function Properties({
+export default function PropertyList({
   properties,
 }: {
   properties: PropertyGetPayload<{ include: { spaces: true } }>[];
@@ -14,25 +15,26 @@ export default function Properties({
     <div className="flex flex-wrap gap-4 mx-auto max-w-xl">
       {properties.map((property) => (
         <Link
+          className="flex flex-row gap-2 items-center hover:bg-base-200 rounded-lg px-4 py-2"
           key={property.id}
-          className="relative flex flex-row gap-2 items-center hover:bg-base-200 rounded-lg px-4 py-2"
           onMouseEnter={() => setHoveredProperty(property.id)}
           onMouseLeave={() => setHoveredProperty(null)}
-          to={`/property/${property.slug}`}
           target="_blank"
-          rel="noopener noreferrer"
+          to={`/property/${property.slug}`}
         >
           <img
-            src="/shopping-mall.png"
             alt="Shopping mall"
             className="w-4 h-4"
+            src="/shopping-mall.png"
           />
-          <span className="text-sm text-base-content/70">{property.name}</span>
+          <span className="text-sm text-base-content/70">
+            {truncateLetters(property.name, 25)}
+          </span>
 
           <HoverCard
-            property={property}
             key={property.id}
             mode={hoveredProperty === property.id ? "visible" : "hidden"}
+            property={property}
           />
         </Link>
       ))}

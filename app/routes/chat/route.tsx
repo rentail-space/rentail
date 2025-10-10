@@ -6,15 +6,36 @@ import { last } from "es-toolkit";
 import { useQueryState } from "nuqs";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
-import { useRouteLoaderData } from "react-router";
+import { useLoaderData, useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
+import authServer from "~/lib/auth.server";
+import findNearbyProperties from "~/lib/findNearbyProperties";
+import prisma from "~/lib/prisma";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
+import type { Route } from "./+types/route";
+import PropertyList from "./PropertyList";
 
 export const handle = { hideLayout: true };
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const session = await authServer.api.getSession({ headers: request.headers });
+  // Query existing chat (don't create)
+  const chat =
+    session &&
+    (await prisma.chat.findFirst({
+      where: { userId: session.user.id },
+      orderBy: { updatedAt: "desc" },
+      include: { user: true },
+    }));
+  const properties = chat
+    ? await findNearbyProperties({ chat, maxDistance: 20 })
+    : [];
+  return { properties };
+}
 
 export default function Chat() {
   const [query, setQuery] = useQueryState("q");
@@ -24,9 +45,11 @@ export default function Chat() {
     chat: ChatGetPayload<{ include: { user: true } }>;
     messages: MastraMessageV2[];
   }>("root");
-
   const chat = data?.chat;
   const initialMessages = data?.messages;
+
+  const { properties } = useLoaderData<typeof loader>();
+
   const { error, messages, sendMessage, status, stop } = useChat<
     UIMessage<{ isAborted?: boolean }, { text: string }, UITools>
   >({
@@ -89,6 +112,8 @@ export default function Chat() {
         </StickToBottom.Content>
 
         <ScrollButton />
+
+        <PropertyList properties={properties} />
 
         <InputForm
           inputRef={inputRef}
