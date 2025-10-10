@@ -3,11 +3,10 @@
 import os from "node:os";
 import * as Sentry from "@sentry/react-router";
 import { isbot } from "isbot";
-import env from "~/lib/env";
 
-if (env.SENTRY_DSN) {
+if (process.env.SENTRY_DSN) {
   Sentry.init({
-    dsn: env.SENTRY_DSN,
+    dsn: process.env.SENTRY_DSN,
     sendDefaultPii: true,
   });
 }
@@ -155,8 +154,8 @@ export async function pushProcessMetrics() {
   setTimeout(measureLap, 10);
 }
 
-const url = env.PUSHGATEWAY_URL;
-const token = env.PUSHGATEWAY_TOKEN;
+const url = process.env.PUSHGATEWAY_URL;
+const token = process.env.PUSHGATEWAY_TOKEN;
 
 async function pushToPrometheus(
   metrics: Array<
@@ -184,7 +183,7 @@ async function pushToPrometheus(
     )
   >,
 ): Promise<void> {
-  if (!env.isProduction || !url || !token) return;
+  if (process.env.NODE_ENV !== "production" || !url || !token) return;
 
   try {
     const response = await fetch(url, {

@@ -4,9 +4,7 @@ import { vercelPreset } from "@vercel/react-router/vite";
 
 export default {
   buildEnd: process.env.SENTRY_AUTH_TOKEN ? sentryOnBuildEnd : undefined,
-  prerender: async () => {
-    return [];
-  },
+  prerender: async () => [],
   presets: [vercelPreset()],
   ssr: true,
 } satisfies Config;

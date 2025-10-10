@@ -3,12 +3,10 @@ import { handleRequest } from "@vercel/react-router/entry.server";
 import debug from "debug";
 import type {
   ActionFunctionArgs,
-  AppLoadContext,
   EntryContext,
   LoaderFunctionArgs,
 } from "react-router";
 import env from "~/lib/env";
-import "~/lib/instrument.server";
 
 if (env.SENTRY_DSN) {
   Sentry.init({
