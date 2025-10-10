@@ -52,6 +52,20 @@ export default function Home() {
         </section>
       </main>
       <Footer />
+      <HubSpotScript />
     </>
+  );
+}
+
+function HubSpotScript() {
+  return (
+    // biome-ignore lint/correctness/useUniqueElementIds: per HubSpot example
+    <script
+      async
+      defer
+      id="hs-script-loader"
+      src="//js-eu1.hs-scripts.com/146512099.js"
+      type="text/javascript"
+    />
   );
 }
