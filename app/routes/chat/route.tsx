@@ -1,12 +1,10 @@
 import { useChat } from "@ai-sdk/react";
-import type { MastraMessageV2 } from "@mastra/core/memory";
 import { captureException } from "@sentry/react-router";
 import { DefaultChatTransport, type UIMessage, type UITools } from "ai";
 import { last } from "es-toolkit";
 import { useQueryState } from "nuqs";
-import type { ChatGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
-import { useRouteLoaderData } from "react-router";
+import { useLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
@@ -28,42 +26,26 @@ export const handle = { hideLayout: true };
  * - Check user permissions: context.chat.user.isAnonymous
  */
 export async function loader({ context }: Route.LoaderArgs) {
-  const { chat } = context.get(appContext);
-
-  // Now you can use chat and chat.user for any server-side logic
-  // For example, load properties based on user location:
-  // const properties = await findNearbyProperties({ chat, maxDistance: 20 });
-  // return { properties };
-
-  // For now, we just rely on the root loader data in the component
-  return null;
+  const { chat, messages } = context.get(appContext);
+  return { chat, messages };
 }
 
 export default function Chat() {
   const [query, setQuery] = useQueryState("q");
-
-  // Access data from root loader - no need for a separate chat loader
-  const data = useRouteLoaderData<{
-    chat: ChatGetPayload<{ include: { user: true } }>;
-    messages: MastraMessageV2[];
-  }>("root");
-
-  const chat = data?.chat;
-  const initialMessages = data?.messages;
+  const { chat, messages: initialMessages } = useLoaderData<typeof loader>();
   const { error, messages, sendMessage, status, stop } = useChat<
     UIMessage<{ isAborted?: boolean }, { text: string }, UITools>
   >({
     id: chat?.id,
-    messages: initialMessages
-      ? initialMessages.map((message) => ({
-          id: message.id,
-          parts: message.content.parts.map((part) => ({
-            text: "text" in part ? part.text : "",
-            type: part.type as "text" | "reasoning",
-          })),
-          role: message.role,
-        }))
-      : [],
+    messages:
+      initialMessages?.map((message) => ({
+        id: message.id,
+        parts: message.content.parts.map((part) => ({
+          text: "text" in part ? part.text : "",
+          type: part.type as "text" | "reasoning",
+        })),
+        role: message.role,
+      })) ?? [],
     onError: (error) => {
       console.error("Chat error:", error);
       captureException(error, { extra: { chat } });
