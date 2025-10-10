@@ -1,15 +1,17 @@
 import * as Sentry from "@sentry/react-router";
-import { handleRequest } from "@vercel/react-router/entry.server";
 import debug from "debug";
 import type {
   ActionFunctionArgs,
-  AppLoadContext,
   EntryContext,
   LoaderFunctionArgs,
 } from "react-router";
-import { RouterContextProvider } from "react-router";
+import { RouterContextProvider, ServerRouter } from "react-router";
 import env from "~/lib/env";
 import "~/lib/instrument.server";
+import { PassThrough } from "node:stream";
+import { createReadableStreamFromReadable } from "@react-router/node";
+import { renderToPipeableStream } from "react-dom/server";
+import appContext from "~/context";
 
 if (env.SENTRY_DSN) {
   Sentry.init({
@@ -37,28 +39,43 @@ if (env.isTest) {
 }
 
 export function getLoadContext() {
-  return new RouterContextProvider();
+  const context = new RouterContextProvider();
+  context.set(appContext, {});
+  return context;
 }
 
 export default Sentry.wrapSentryHandleRequest(
-  async (
+  (
     request: Request,
     responseStatusCode: number,
     responseHeaders: Headers,
     routerContext: EntryContext,
-    loadContext?: AppLoadContext | RouterContextProvider,
   ) => {
-    const nonce = crypto.randomUUID();
-    const response = await handleRequest(
-      request,
-      responseStatusCode,
-      responseHeaders,
-      routerContext,
-      loadContext as AppLoadContext,
-      { nonce },
-    );
-    response.headers.set("Document-Policy", "js-profiling");
-    return response;
+    return new Promise((resolve, reject) => {
+      const { pipe } = renderToPipeableStream(
+        <ServerRouter context={routerContext} url={request.url} />,
+        {
+          onShellReady() {
+            responseHeaders.set("Content-Type", "text/html");
+
+            const body = new PassThrough();
+            const stream = createReadableStreamFromReadable(body);
+
+            resolve(
+              new Response(stream, {
+                headers: responseHeaders,
+                status: responseStatusCode,
+              }),
+            );
+
+            pipe(body);
+          },
+          onShellError(error: unknown) {
+            reject(error);
+          },
+        },
+      );
+    });
   },
 );
 
@@ -66,6 +83,8 @@ export function handleError(
   error: unknown,
   { request }: LoaderFunctionArgs | ActionFunctionArgs,
 ) {
-  if (!request.signal.aborted) Sentry.captureException(error);
-  console.error(error);
+  if (!request.signal.aborted) {
+    Sentry.captureException(error, { extra: { request } });
+    console.error(error);
+  }
 }
