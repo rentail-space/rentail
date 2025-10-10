@@ -45,6 +45,7 @@ export default Sentry.wrapSentryHandleRequest(
     responseStatusCode: number,
     responseHeaders: Headers,
     routerContext: EntryContext,
+    // biome-ignore lint/suspicious/noExplicitAny: hack to get around type errors
     loadContext: any,
   ) => {
     const nonce = crypto.randomUUID();
