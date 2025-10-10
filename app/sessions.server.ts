@@ -1,6 +1,7 @@
 import { reverse } from "node:dns/promises";
 import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
+import debug from "debug";
 import { invariant } from "es-toolkit";
 import { createIsbotFromList, list } from "isbot";
 import type { ChatGetPayload } from "prisma/generated/models";
@@ -197,9 +198,9 @@ async function isGoogleIP(ip: string): Promise<boolean> {
     return (
       hostname.endsWith(".googlebot.com") || hostname.endsWith(".google.com")
     );
-  } catch (error) {
+  } catch {
     // If reverse DNS lookup fails, assume it's not a Google IP
-    captureException(error, { extra: { ip } });
+    debug("server")("Reverse DNS lookup failed for IP: %s", ip);
     return false;
   }
 }

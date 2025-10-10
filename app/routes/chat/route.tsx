@@ -10,32 +10,60 @@ import { useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
+import appContext from "~/context";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
+import type { Route } from "./+types/route";
 
 export const handle = { hideLayout: true };
 
+/**
+ * Chat route loader - accesses user/chat data from root context.
+ * Context is set by root loader, so we can use chat.user for any server-side logic.
+ *
+ * Example usage:
+ * - Load user-specific data: await findNearbyProperties({ chat: context.chat, maxDistance: 20 })
+ * - Access user location: context.chat.user.geocode
+ * - Check user permissions: context.chat.user.isAnonymous
+ */
+export async function loader({ context }: Route.LoaderArgs) {
+  const { chat } = context.get(appContext);
+
+  // Now you can use chat and chat.user for any server-side logic
+  // For example, load properties based on user location:
+  // const properties = await findNearbyProperties({ chat, maxDistance: 20 });
+  // return { properties };
+
+  // For now, we just rely on the root loader data in the component
+  return null;
+}
+
 export default function Chat() {
   const [query, setQuery] = useQueryState("q");
+
+  // Access data from root loader - no need for a separate chat loader
   const data = useRouteLoaderData<{
     chat: ChatGetPayload<{ include: { user: true } }>;
     messages: MastraMessageV2[];
   }>("root");
+
   const chat = data?.chat;
   const initialMessages = data?.messages;
   const { error, messages, sendMessage, status, stop } = useChat<
     UIMessage<{ isAborted?: boolean }, { text: string }, UITools>
   >({
     id: chat?.id,
-    messages: initialMessages?.map((message) => ({
-      id: message.id,
-      parts: message.content.parts.map((part) => ({
-        text: "text" in part ? part.text : "",
-        type: part.type as "text" | "reasoning",
-      })),
-      role: message.role,
-    })),
+    messages: initialMessages
+      ? initialMessages.map((message) => ({
+          id: message.id,
+          parts: message.content.parts.map((part) => ({
+            text: "text" in part ? part.text : "",
+            type: part.type as "text" | "reasoning",
+          })),
+          role: message.role,
+        }))
+      : [],
     onError: (error) => {
       console.error("Chat error:", error);
       captureException(error, { extra: { chat } });
