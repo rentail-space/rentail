@@ -30,7 +30,7 @@
     "@react-router/node": "^7.9.4",
     "@react-router/serve": "^7.9.4",
     "@secretlint/secretlint-rule-preset-recommend": "^11.2.4",
-    "@sentry/react-router": "^10.17.0",
+    "@sentry/react-router": "^10.19.0",
     "@tailwindcss/postcss": "^4.1.14",
     "@vercel/react-router": "^1.2.3",
     "@vercel/speed-insights": "^1.2.0",
