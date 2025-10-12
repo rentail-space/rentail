@@ -7,6 +7,7 @@ import type {
   LoaderFunctionArgs,
 } from "react-router";
 import env from "~/lib/env";
+import server from "~/test/mocks/msw.server";
 
 if (env.SENTRY_DSN) {
   Sentry.init({
@@ -27,9 +28,7 @@ if (env.SENTRY_DSN) {
 
 if (env.isTest) {
   debug("msw")("Initializing MSW for test mode");
-
   // Initialize MSW in test mode
-  const { default: server } = await import("~/test/mocks/msw.server");
   server.listen({ onUnhandledRequest: "error" });
 }
 

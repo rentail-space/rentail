@@ -1,4 +1,5 @@
 import path from "node:path";
+import { routes } from "virtual:react-router/server-build";
 import { generateRemixSitemap } from "@forge42/seo-tools/remix/sitemap";
 import { href } from "react-router";
 import { listBlogPosts } from "~/lib/blogPosts.server";
@@ -8,7 +9,6 @@ export async function loader() {
   // They do support lastmod, but seo-tools doesn't seem to support it.
   // https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping
 
-  const { routes } = await import("virtual:react-router/server-build");
   const sitemap = await generateRemixSitemap({
     domain: "https://rentail.space",
     ignore: ["*/\\*", "/api/*"],
