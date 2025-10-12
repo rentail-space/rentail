@@ -3,7 +3,6 @@ import { drop, take } from "es-toolkit";
 import type { FrontMatterResult } from "front-matter";
 import { Link } from "react-router";
 import removeMd from "remove-markdown";
-import truncateWords from "~/lib/truncateWords";
 
 export default function BlogPosts({
   posts,
@@ -22,7 +21,7 @@ export default function BlogPosts({
     <section className="blog-posts-section flex flex-col gap-y-2">
       {first.map((post) => (
         <Link
-          className="link link-hover flex flex-row gap-4"
+          className="link link-hover flex flex-row gap-4 line-clamp-2"
           key={post.slug}
           to={`/blog/${post.slug}`}
         >
@@ -35,16 +34,14 @@ export default function BlogPosts({
           />
           <div>
             <h4>{post.attributes.title}</h4>
-            <p className="text-gray-500">
-              {truncateWords(removeMd(post.body), 30)}
-            </p>
+            <p className="text-gray-500 line-clamp-3">{removeMd(post.body)}</p>
           </div>
         </Link>
       ))}
 
       {rest.map((post) => (
         <Link
-          className="link link-hover"
+          className="link link-hover line-clamp-1"
           key={post.slug}
           to={`/blog/${post.slug}`}
         >

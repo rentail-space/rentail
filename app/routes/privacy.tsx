@@ -1,3 +1,4 @@
+import remarkGfm from "node_modules/remark-gfm/lib";
 import { Streamdown } from "streamdown";
 
 const policy = `
@@ -127,7 +128,7 @@ agree to this Privacy Policy.
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen  py-12 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 prose">
-      <Streamdown>{policy}</Streamdown>
+      <Streamdown remarkPlugins={[remarkGfm]}>{policy}</Streamdown>
     </div>
   );
 }

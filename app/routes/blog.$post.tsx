@@ -2,10 +2,10 @@ import { invariant } from "es-toolkit";
 import fm from "front-matter";
 import { DateTime } from "luxon";
 import { type LoaderFunctionArgs, useLoaderData } from "react-router";
+import remarkGfm from "remark-gfm";
 import removeMd from "remove-markdown";
 import { Streamdown } from "streamdown";
 import { loadBlogPost } from "~/lib/blogPosts.server";
-import truncateWords from "~/lib/truncateWords";
 
 export async function loader({
   params,
@@ -79,6 +79,7 @@ export default function Post() {
           p: ({ children }) => <p className="text-lg">{children}</p>,
           ul: ({ children }) => <ul className="ml-6 list-disc">{children}</ul>,
         }}
+        remarkPlugins={[remarkGfm]}
       >
         {body}
       </Streamdown>
@@ -111,7 +112,7 @@ function JSONLD({
         "@type": "WebPage",
         "@id": `https://rentail.space/blog/${slug}`,
         datePublished: published,
-        description: truncateWords(removeMd(body), 50),
+        description: removeMd(body),
         inLanguage: "en-US",
         name: title,
         primaryImageOfPage: {

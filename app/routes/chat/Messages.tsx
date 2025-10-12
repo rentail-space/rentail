@@ -173,9 +173,8 @@ function ReasoningMessage({ text, isLast }: { text: string; isLast: boolean }) {
         )}
       </summary>
       <Streamdown
-        allowedImagePrefixes={["*"]}
-        allowedLinkPrefixes={["*"]}
         className="prose prose-base"
+        remarkPlugins={[[remarkGfm, {}]]}
       >
         {text}
       </Streamdown>
@@ -205,11 +204,7 @@ function ResponseMessage({
       <div className="chat-bubble prose prose-base">
         <div ref={contentRef}>
           <Streamdown
-            allowedImagePrefixes={["*"]}
-            allowedLinkPrefixes={["*"]}
             components={getComponents({ askQuestion })}
-            defaultOrigin="https://rentail.space"
-            rehypePlugins={[]}
             remarkPlugins={[remarkGfm]}
           >
             {text}

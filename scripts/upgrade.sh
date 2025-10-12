@@ -5,7 +5,7 @@ echo -e "\033[32m  Upgrading dependencies …\033[0m"
 npm-check-updates --configFileName .ncurc.json --errorLevel 2 || echo "Dependencies to update"
 
 echo -e "\033[32m  Installing Playwright browsers …\033[0m"
-pnpm dlx playwright install --with-deps chromium
+pnpm playwright install --with-deps chromium
 
 echo -e "\033[32m  Deduping dependencies …\033[0m"
 pnpm dedupe
@@ -18,7 +18,7 @@ pnpm audit --fix
 git add package.json pnpm-lock.yaml
 
 echo -e "\033[32m  Running tests …\033[0m"
-pnpm run test
+pnpm test
 
 echo -e "\033[32m  Commiting changes …\033[0m"
 git diff --unified=0 --color --word-diff HEAD~1 package.json

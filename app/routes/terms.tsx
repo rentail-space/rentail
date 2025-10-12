@@ -1,3 +1,4 @@
+import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 
 const terms = `
@@ -112,7 +113,7 @@ agree to be bound by these Terms of Service.
 export default function TermsOfService() {
   return (
     <div className="min-h-screen  py-12 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 prose">
-      <Streamdown>{terms}</Streamdown>
+      <Streamdown remarkPlugins={[remarkGfm]}>{terms}</Streamdown>
     </div>
   );
 }

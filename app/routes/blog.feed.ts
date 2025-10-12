@@ -45,7 +45,7 @@ export async function loader() {
         id: `rentail.space:${slug}`,
         link: `https://rentail.space/blog/${slug}`,
         published: published.toJSDate(),
-        description: truncateWords(removeMd(body), 50),
+        description: truncateWords(removeMd(body), 200),
         title: attributes.title,
         date: published.toJSDate(),
       });
