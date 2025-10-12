@@ -6,7 +6,7 @@ import type { userProfile } from "~/lib/userProfile";
 import { getWorkingMemory } from "~/lib/workingMemory";
 import { goto, launchBrowser } from "~/test/helpers/launchBrowser";
 
-describe.only("Anonymous visits chat page", () => {
+describe("Anonymous visits chat page", () => {
   let page: Page;
 
   beforeAll(async () => {

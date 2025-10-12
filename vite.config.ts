@@ -16,5 +16,12 @@ export default defineConfig(async (config) => ({
   optimizeDeps: {
     include: ["react", "react-dom", "streamdown"],
   },
-  ssr: { noExternal: ["streamdown"] },
+  ssr: {
+    noExternal: [
+      // NOTE: recommended by the Streamdown docs
+      "streamdown",
+      // NOTE: without rehype-harden here we get "Cannot require() ES Module in a cycle."
+      "rehype-harden",
+    ],
+  },
 }));

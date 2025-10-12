@@ -7,6 +7,8 @@
 
 import { invariant } from "es-toolkit";
 import type { ViteDevServer } from "vite";
+import * as vite from "vite";
+import config from "vite.config";
 
 let devServer: ViteDevServer | undefined;
 
@@ -15,22 +17,17 @@ async function startServer() {
   invariant(process.send, "process.send is not defined");
   try {
     const port = process.env.PORT ? Number(process.env.PORT) : 9222;
-    const vite = await import("vite");
 
     // Create Vite dev server with cached dependencies
     devServer = await vite.createServer({
+      // NOTE: for dependencies use the same configuration as the main server
+      ...config,
       root: process.cwd(),
       server: {
         hmr: false,
         middlewareMode: false,
         port,
         strictPort: true,
-      },
-      ssr: {
-        noExternal: ["streamdown"],
-      },
-      optimizeDeps: {
-        force: true, // Always rebuild
       },
       logLevel: "info",
     });
