@@ -9,12 +9,9 @@ import {
   type Route,
 } from "playwright";
 import { afterAll } from "vitest";
-import config from "vitest.config";
 import "~/test/helpers/toMatchScreenshot";
 import { launchServer, port } from "./launchServer";
 
-const BASE_URL = `http://localhost:${port}`;
-const VITE_DEPS_THRESHOLD = 100;
 let context: BrowserContext | undefined;
 
 /**
@@ -52,9 +49,14 @@ async function waitForDependencies(page: Page, path: string) {
 
   // Wait for Vite to generate dependency cache (900+ files expected)
   if (!(await hasEnoughDependencies(dirname))) {
-    const watcher = watch(dirname);
-    for await (const _event of watcher)
-      if (await hasEnoughDependencies(dirname)) break;
+    try {
+      const watcher = watch(dirname);
+      for await (const _event of watcher)
+        if (await hasEnoughDependencies(dirname)) break;
+    } catch {
+      // Directory doesn't exist yet, wait a bit and try again
+      await page.waitForTimeout(1000);
+    }
   }
 
   // Reload with cached dependencies
@@ -63,8 +65,12 @@ async function waitForDependencies(page: Page, path: string) {
 }
 
 async function hasEnoughDependencies(dirname: string) {
-  const files = await readdir(dirname);
-  return files.length > VITE_DEPS_THRESHOLD;
+  try {
+    const files = await readdir(dirname);
+    return files.length > 100;
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -77,7 +83,7 @@ export async function launchBrowser(): Promise<BrowserContext> {
 
   const headless = process.env.CI ? true : !debug("browser").enabled;
   context = await chromium.launchPersistentContext("test/context", {
-    baseURL: BASE_URL,
+    baseURL: `http://localhost:${port}`,
     headless,
     slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
   });
@@ -85,8 +91,7 @@ export async function launchBrowser(): Promise<BrowserContext> {
   context.route("**", blockOutgoingRequests);
 
   // Set navigation timeout to 3s less than hook timeout for better error messages
-  const hookTimeout = config.test?.hookTimeout ?? 30000;
-  context.setDefaultNavigationTimeout(hookTimeout - 3000);
+  context.setDefaultNavigationTimeout(10_000);
 
   context.on("console", (msg) => debug("browser")(msg.text()));
 

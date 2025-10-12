@@ -72,13 +72,14 @@ export default function Messages({
 }
 
 function UserMessage({ message }: { message: UIMessage }) {
+  // NOTE: always render as plain text to avoid HTML injection
   return (
     <div className="chat chat-end">
       <div className="chat-bubble chat-bubble-accent prose prose-base">
         {message.parts
           .filter((part) => part.type === "text")
           .map((part, index) => (
-            <span key={index.toString()}>{part.text}</span>
+            <p key={index.toString()}>{part.text}</p>
           ))}
       </div>
     </div>
