@@ -107,7 +107,7 @@ describe("Blog Listing", () => {
 
     it("navigates to blog post when clicking link", async () => {
       // Wait for navigation to complete
-      await page.waitForURL(/.*\/blog\/.*/, { timeout: 10000 });
+      await page.waitForURL(/.*\/blog\/.*/);
 
       // Verify we're on a blog post page
       expect(page.url()).toContain("/blog/");

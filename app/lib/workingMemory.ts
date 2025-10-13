@@ -21,7 +21,7 @@ export const memory = new Memory({
       scope: "resource",
     },
   },
-  processors: [new ToolCallFilter(), new TokenLimiter(127000)],
+  processors: [new ToolCallFilter(), new TokenLimiter(127_000)],
   storage: new PrismaStorage(),
 });
 

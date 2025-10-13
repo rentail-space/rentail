@@ -42,6 +42,6 @@ afterAll(async () => {
     setTimeout(() => {
       console.warn("\n=== WHY IS NODE STILL RUNNING? ===");
       whyIsNodeRunning();
-    }, 2000);
+    }, 2_000);
   }
 });

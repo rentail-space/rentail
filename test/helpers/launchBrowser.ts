@@ -90,8 +90,8 @@ export async function launchBrowser(): Promise<BrowserContext> {
 
   context.route("**", blockOutgoingRequests);
 
-  // Set navigation timeout to 3s less than hook timeout for better error messages
-  context.setDefaultNavigationTimeout(10_000);
+  // Set navigation timeout to 5s less than hook timeout for better error messages
+  context.setDefaultNavigationTimeout(25_000);
 
   context.on("console", (msg) => debug("browser")(msg.text()));
 

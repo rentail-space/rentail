@@ -15,8 +15,8 @@ new ApiCheck("rentail.api", {
   shouldFail: false,
   runParallel: true,
   environmentVariables: [],
-  maxResponseTime: 20000,
-  degradedResponseTime: 10000,
+  maxResponseTime: 20_000,
+  degradedResponseTime: 10_000,
   request: {
     url: "https://rentail.space",
     method: "GET",
@@ -24,7 +24,7 @@ new ApiCheck("rentail.api", {
     skipSSL: false,
     assertions: [
       AssertionBuilder.statusCode().equals(200),
-      AssertionBuilder.responseTime().lessThan(20000),
+      AssertionBuilder.responseTime().lessThan(20_000),
     ],
     body: "",
     bodyType: "NONE",

@@ -71,9 +71,9 @@ export async function pushHTTPResponse({
         buckets: [
           { count: 0, upper_limit: 100 },
           { count: 0, upper_limit: 500 },
-          { count: 0, upper_limit: 1000 },
-          { count: 0, upper_limit: 5000 },
-          { count: 0, upper_limit: 10000 },
+          { count: 0, upper_limit: 1_000 },
+          { count: 0, upper_limit: 5_000 },
+          { count: 0, upper_limit: 10_000 },
         ],
         count: 1,
         sum: duration,
