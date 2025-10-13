@@ -56,18 +56,14 @@ export async function launchServer(): Promise<void> {
 async function cleanup() {
   if (worker && !worker.killed) {
     debug("server")("killing worker");
-    worker.once("exit", () => {
-      worker = undefined;
-    });
     worker.kill("SIGTERM");
     // Force kill after 1s if still running
     setTimeout(() => {
       if (worker && !worker.killed) worker.kill("SIGKILL");
     }, 1000);
+    debug("server")("worker killed");
   }
   worker = undefined;
-
-  debug("server")("cleanup complete");
 }
 
 process.once("exit", cleanup);
