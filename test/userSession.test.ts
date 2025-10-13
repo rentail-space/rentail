@@ -6,7 +6,7 @@ import type { userProfile } from "~/lib/userProfile";
 import { getWorkingMemory } from "~/lib/workingMemory";
 import { goto } from "~/test/helpers/launchBrowser";
 
-describe("Anonymous visits chat page", () => {
+describe.sequential("Anonymous visits chat page", () => {
   let page: Page;
 
   beforeAll(async () => {
@@ -51,7 +51,7 @@ describe("Anonymous visits chat page", () => {
     expect(workingMemory.location?.timeZone).toEqual("America/Los_Angeles");
   });
 
-  describe("updates their location", () => {
+  describe.sequential("updates their location", () => {
     let workingMemory: zod.infer<typeof userProfile>;
 
     beforeAll(async () => {
@@ -101,7 +101,7 @@ describe("Anonymous visits chat page", () => {
       expect(workingMemory.location?.timeZone).toEqual("America/New_York");
     });
 
-    describe("visits sign-in page", () => {
+    describe.sequential("visits sign-in page", () => {
       beforeAll(async () => {
         await page.getByRole("button", { name: "Sign In" }).click();
         await page.waitForURL("/auth", { waitUntil: "load" });
@@ -140,19 +140,13 @@ describe("Anonymous visits chat page", () => {
         ).toBeVisible();
       });
 
-      describe("visits sign-up page", () => {
+      describe.sequential("visits sign-up page", () => {
         beforeAll(async () => {
-          console.log("Looking for sign-up link");
           await expect(
             page.getByRole("button", {
               name: "Don't have an account? Create one",
             }),
           ).toBeVisible();
-          console.log("Found sign-up link");
-
-          console.log("Clicking sign-up link");
-          await page.getByRole("button", { name: "Create one" }).click();
-          console.log("Clicked sign-up link");
         });
 
         it("shows sign-up page", async () => {
@@ -181,11 +175,11 @@ describe("Anonymous visits chat page", () => {
 
         it("shows sign-up page with sign-up button", async () => {
           await expect(
-            page.getByRole("button", { name: "Create Account" }),
+            page.getByRole("button", { name: "Create one" }),
           ).toBeVisible();
         });
 
-        describe("signs up", () => {
+        describe.sequential("signs up", () => {
           beforeAll(async () => {
             await page
               .getByRole("textbox", { name: "Name" })
