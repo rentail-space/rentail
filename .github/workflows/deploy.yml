@@ -100,7 +100,7 @@ jobs:
           rm -rf node_modules/.vite .react-router build
           pnpm vitest run --reporter verbose
         env:
-          DEBUG: "server"
+          DEBUG: "browser,server"
 
       - name: Upload Playwright Test Results
         uses: actions/upload-artifact@v4
