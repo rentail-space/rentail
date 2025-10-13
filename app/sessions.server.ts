@@ -10,6 +10,16 @@ import authServer from "~/lib/auth.server";
 import prisma from "~/lib/prisma";
 import { getRecentMessages, updateWorkingMemory } from "~/lib/workingMemory";
 
+// List of user agents that are considered bots
+const botUserAgents = [
+  "Android 9",
+  "BetterStack",
+  "CFNetwork",
+  "Checkly",
+  "FastmailUA",
+  "Vercel",
+];
+
 /**
  * We use Redis to cache the location information for 30 days so we don't have
  * to geocode the IP address every time.
@@ -57,9 +67,10 @@ export async function getUserChat(headers: Headers): Promise<{
 
   const userAgent = headers.get("user-agent") ?? "";
   const ip = headers.get("x-forwarded-for") ?? "";
+  const isBot = isUABot(userAgent) || (await isGoogleIP(ip));
 
-  // Check if it's a bot by user agent
-  if (isBot(userAgent) || (await isGoogleIP(ip))) {
+  // If it's a bot, reuse the existing bot user
+  if (isBot) {
     const bot = await prisma.user.findFirst({ where: { isBot: true } });
     if (bot) {
       const { chat, messages } = await getChatForUser(bot);
@@ -82,7 +93,7 @@ export async function getUserChat(headers: Headers): Promise<{
       ip: headers.get("x-forwarded-for") ?? "",
       referrer: headers.get("referer") ?? "",
       userAgent,
-      isBot: isBot(userAgent),
+      isBot: isBot,
     },
   });
   const { chat, messages } = await getChatForUser(user);
@@ -166,10 +177,10 @@ export async function geocodeIP(
  * @param userAgent - The user agent
  * @returns True if the user agent is a bot, false otherwise
  */
-const isBot: (userAgent: string) => boolean = createIsbotFromList(
+const isUABot: (userAgent: string) => boolean = createIsbotFromList(
   list
     .filter((record: string): boolean => !/headless/i.test(record))
-    .concat(["betterstack", "checkly", "vercel"]),
+    .concat(botUserAgents),
 );
 
 /**

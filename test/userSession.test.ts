@@ -247,39 +247,70 @@ describe("Anonymous visits chat page", () => {
 });
 
 describe("Bot detection", () => {
-  beforeEach(async () => {
-    await prisma.user.deleteMany();
-  });
-
-  it("default browser is not considered a bot (is_bot is false)", async () => {
-    await goto("/chat");
-    const users = await prisma.user.findMany();
-    expect(users.length, "should have one user").toEqual(1);
-    expect(users[0].isBot, "user should not be considered a bot").toBe(false);
-  });
-
-  it("browser with bot User-Agent is considered a bot", async () => {
-    await goto("/chat", {
-      "user-agent": "vercel-screenshot/1.0",
+  describe("default browser", () => {
+    beforeEach(async () => {
+      await prisma.user.deleteMany();
+      await goto("/chat");
     });
-    const users = await prisma.user.findMany();
-    expect(users.length, "should have one user").toEqual(1);
-    expect(users[0].isBot, "user should be considered a bot").toBe(true);
+
+    it("should not be considered a bot", async () => {
+      const users = await prisma.user.findMany();
+      expect(users.length, "should have one user").toEqual(1);
+      expect(users[0].isBot, "user should not be considered a bot").toBe(false);
+    });
   });
 
-  it("two different bot requests without shared cookies link to the same user record", async () => {
-    const context = await launchBrowser();
+  describe("browser with bot User-Agent", () => {
+    beforeEach(async () => {
+      await prisma.user.deleteMany();
+      await goto("/chat", {
+        "user-agent": "vercel-screenshot/1.0",
+      });
+    });
 
-    // First bot request
-    await goto("/chat", { "user-agent": "vercel-screenshot/1.0" });
+    it("should be considered a bot", async () => {
+      const users = await prisma.user.findMany();
+      expect(users.length, "should have one user").toEqual(1);
+      expect(users[0].isBot, "user should be considered a bot").toBe(true);
+    });
+  });
 
-    // Clear all cookies before the second bot request
-    await context.clearCookies();
-    await goto("/chat", { "user-agent": "vercel-screenshot/1.0" });
+  describe("browser with bot IP", () => {
+    beforeEach(async () => {
+      await prisma.user.deleteMany();
+      await goto("/chat", {
+        "x-forwarded-for": "66.249.65.224",
+      });
+    });
 
-    // Should still have only one user (the bot user)
-    const users = await prisma.user.findMany();
-    expect(users.length, "should have only one bot user").toEqual(1);
-    expect(users[0].isBot, "user should be considered a bot").toBe(true);
+    it("should be considered a bot", async () => {
+      const users = await prisma.user.findMany();
+      expect(users.length, "should have one user").toEqual(1);
+      expect(users[0].isBot, "user should be considered a bot").toBe(true);
+    });
+  });
+
+  describe("two different bot requests without shared cookies link to the same user record", () => {
+    beforeEach(async () => {
+      await prisma.user.deleteMany();
+      const context = await launchBrowser();
+
+      // First bot request
+      await goto("/chat", { "user-agent": "vercel-screenshot/1.0" });
+
+      // Clear all cookies before the second bot request
+      await context.clearCookies();
+      await goto("/chat", { "user-agent": "vercel-screenshot/1.0" });
+    });
+
+    it("should create only one user", async () => {
+      const users = await prisma.user.findMany();
+      expect(users.length, "should have one user").toEqual(1);
+    });
+
+    it("should have the user considered a bot", async () => {
+      const users = await prisma.user.findMany();
+      expect(users[0].isBot, "user should be considered a bot").toBe(true);
+    });
   });
 });
