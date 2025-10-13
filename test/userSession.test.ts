@@ -142,12 +142,17 @@ describe("Anonymous visits chat page", () => {
 
       describe("visits sign-up page", () => {
         beforeAll(async () => {
-          await page
-            .getByRole("button", { name: "Don't have an account? Create one" })
-            .click();
-          await page
-            .getByRole("heading", { name: "Create Account" })
-            .waitFor({ state: "visible" });
+          console.log("Looking for sign-up link");
+          await expect(
+            page.getByRole("button", {
+              name: "Don't have an account? Create one",
+            }),
+          ).toBeVisible();
+          console.log("Found sign-up link");
+
+          console.log("Clicking sign-up link");
+          await page.getByRole("button", { name: "Create one" }).click();
+          console.log("Clicked sign-up link");
         });
 
         it("shows sign-up page", async () => {
