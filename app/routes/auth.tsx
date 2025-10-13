@@ -27,12 +27,21 @@ export async function action({
       invariant(email, "Email is required");
       invariant(password, "Password is required");
       invariant(name, "Name is required");
-      const result = await authServer.api.signUpEmail({
-        body: { email, password, name },
-        headers: request.headers,
-        returnHeaders: true,
-      });
-      return redirect("/chat", { headers: result.headers });
+      try {
+        const result = await authServer.api.signUpEmail({
+          body: { email, password, name },
+          headers: request.headers,
+          returnHeaders: true,
+        });
+        return redirect("/chat", { headers: result.headers });
+      } catch {
+        const result = await authServer.api.signInEmail({
+          body: { email, password },
+          headers: request.headers,
+          returnHeaders: true,
+        });
+        return redirect("/chat", { headers: result.headers });
+      }
     } else {
       invariant(email, "Email is required");
       invariant(password, "Password is required");
