@@ -41,7 +41,7 @@ export async function goto(
  * @param page - The page to wait for.
  * @param path - The path to wait for.
  */
-async function waitForDependencies(page: Page, path: string) {
+export async function waitForDependencies(page: Page, path: string) {
   const dirname = resolve("node_modules/.vite/deps");
 
   // Trigger initial build

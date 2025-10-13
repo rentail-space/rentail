@@ -103,11 +103,11 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 Routes are configured in `/app/routes.ts` using React Router v7's declarative routing with `flatRoutes`:
 - `/` - Home route (`routes/home/route.tsx`) with marketing content and hero sections
 - `/chat` - Interactive chat interface (`routes/chat/route.tsx`) for space discovery with AI
-- `/blog/$post` - Dynamic blog posts (`routes/blog.$post.tsx`) with markdown content
+- `/blog/$post` - Dynamic blog posts (`routes/blog.$post.tsx`) with streamdown markdown rendering
 - `/blog/$post[.jpg]` - Blog post image serving (`routes/blog.$post[.jpg].ts`)
 - `/api/chat` - Streaming AI chat endpoint (`routes/api.chat.tsx`) with Claude integration
 - `/robots.txt` and `/sitemap.xml` - SEO utilities (`routes/robots[.]txt.ts`, `routes/sitemap[.]xml.ts`)
-- Root layout in `/app/root.tsx` with HTML shell, Sentry integration, and global components
+- Root exports: App (default), Layout, ErrorBoundary, HydrateFallback
 - Route configuration ignores test files and home directory from flat routes
 
 **SSR Configuration:**
@@ -119,10 +119,12 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Development server runs on port 3000
 
 **Layout Control:**
-- Root layout in `app/root.tsx` provides Header and Footer by default
+- Layout component extracted to `app/components/layout/Layout.tsx` (provides HTML shell, meta tags, scripts)
+- App component (root.tsx default export) receives `matches` prop from React Router framework
 - Routes can hide layout by exporting `handle = { hideLayout: true }`
-- Root uses `useMatches()` to check route handles and conditionally render layout
+- App checks route handles via matches prop and conditionally renders Header/Footer
 - Currently used by: `/auth`, `/chat` (both render their own Header component)
+- ErrorBoundary exported from root.tsx per React Router v7 conventions (wraps content in Layout)
 - This pattern allows full-page experiences without navigation chrome
 
 **Data Loading Patterns:**
@@ -277,7 +279,7 @@ Optional environment variables:
 
 - `/app`: Main application directory (React Router v7 convention)
   - `/app/routes.ts`: Route configuration with file-based routing
-  - `/app/root.tsx`: Root layout with HTML shell and Sentry
+  - `/app/root.tsx`: Root exports (App, ErrorBoundary, HydrateFallback, loader, headers, links)
   - `/app/routes/`: Individual route components
   - `/app/lib/`: Shared utilities
     - `env.ts`: Environment variable configuration with runtime validation
@@ -290,10 +292,10 @@ Optional environment variables:
     - `instrument.server.ts`: Metrics collection and monitoring
     - `PrismaStorage.ts`: Mastra storage adapter for PostgreSQL
   - `/app/data/`: External data files (blog posts in markdown with front-matter)
-  - `/app/entry.server.tsx`: Server-side rendering entry point with request logging
+  - `/app/entry.server.tsx`: Server-side rendering entry point with Sentry wrapper
   - `/app/app.css`: Global Tailwind CSS imports
   - `/app/components/`: Reusable UI components organized by feature
-    - `/layout/`: Header, Footer components
+    - `/layout/`: Layout (HTML shell), Header, Footer components
   - `/app/emails/`: React Email templates (all accept `subject` prop)
 - `/prisma`: Database schema and migrations
   - `schema.prisma`: Database models and configuration
@@ -324,6 +326,8 @@ Optional environment variables:
   - GitHub Actions reporter for CI, verbose reporter locally
   - Filters node_modules from stack traces
   - Bails after 3 failures to save time
+- `vite.config.ts`: Vite configuration with React Router v7, Tailwind, Sentry
+  - SSR noExternal: streamdown, rehype-harden (fixes ES module cycle issues)
 - `mcp.json`: MCP server configuration for Claude Code integration
 - `tsconfig.json`: TypeScript configuration with path aliases (`~/*` → `./app/*`)
 
