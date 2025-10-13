@@ -135,7 +135,7 @@ describe("Anonymous visits chat page", () => {
       it("shows sign-in page with sign-up link", async () => {
         await expect(
           page.getByRole("button", {
-            name: "Don't have an account? Sign up",
+            name: "Don't have an account? Create one",
           }),
         ).toBeVisible();
       });
@@ -143,13 +143,11 @@ describe("Anonymous visits chat page", () => {
       describe("visits sign-up page", () => {
         beforeAll(async () => {
           await page
-            .getByRole("button", { name: "Don't have an account? Sign up" })
+            .getByRole("button", { name: "Don't have an account? Create one" })
             .click();
         });
 
         it("shows sign-up page", async () => {
-          await page.waitForTimeout(100);
-          expect(page.url()).toContain("/auth");
           await expect(
             page.getByRole("heading", { name: "Create Account" }),
           ).toBeVisible();

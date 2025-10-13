@@ -78,7 +78,7 @@ export default function AuthPage() {
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50 px-4 py-12">
       <div className="w-full max-w-md">
         <div className="rounded-2xl bg-white p-8 shadow-xl">
-          <div className="mb-8 text-center">
+          <header className="mb-8 text-center">
             <h1 className="text-3xl font-bold text-gray-900">
               {isSignUp ? "Create Account" : "Welcome Back"}
             </h1>
@@ -87,7 +87,7 @@ export default function AuthPage() {
                 ? "Sign up to start finding retail spaces"
                 : "Sign in to your account"}
             </p>
-          </div>
+          </header>
 
           <fetcher.Form className="space-y-6" method="post">
             {isSignUp && (
@@ -162,11 +162,13 @@ export default function AuthPage() {
               value={isSignUp.toString()}
               disabled={fetcher.state !== "idle"}
             >
-              {fetcher.state !== "idle"
-                ? "Processing..."
-                : isSignUp
+              {isSignUp
+                ? fetcher.state === "idle"
                   ? "Create Account"
-                  : "Sign In"}
+                  : "Creating Your Account..."
+                : fetcher.state === "idle"
+                  ? "Sign In"
+                  : "Signing You In..."}
             </button>
           </fetcher.Form>
 
@@ -175,19 +177,19 @@ export default function AuthPage() {
               className="text-sm text-indigo-600 hover:text-indigo-700 hover:underline"
               onClick={() => {
                 setError(null);
-                setIsSignUp(!isSignUp);
+                setIsSignUp((isSignUp) => !isSignUp);
               }}
               type="button"
             >
               {isSignUp
                 ? "Already have an account? Sign in"
-                : "Don't have an account? Sign up"}
+                : "Don't have an account? Create one"}
             </button>
           </div>
         </div>
 
         <p className="mt-8 text-center text-sm text-gray-600">
-          By signing up, you agree to our{" "}
+          By {isSignUp ? "signing up" : "signing in"}, you agree to our{" "}
           <a href="/terms" className="text-indigo-600 hover:underline">
             Terms of Service
           </a>{" "}

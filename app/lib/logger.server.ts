@@ -27,9 +27,7 @@ for (const level of [
   "warn",
 ] as ILogLevel[]) {
   const logtailFunction = logtail ? Reflect.get(logtail, level) : () => {};
-  const colorCode = process.stdout.isTTY
-    ? colors[level as keyof typeof colors]
-    : (message: string) => message;
+  const colorCode = colors[level as keyof typeof colors];
 
   Reflect.set(console, level, (message: string, ...metadata: unknown[]) => {
     const formattedMessage = format(message, ...metadata);
