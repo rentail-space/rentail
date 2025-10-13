@@ -145,7 +145,9 @@ describe("Anonymous visits chat page", () => {
           await page
             .getByRole("button", { name: "Don't have an account? Create one" })
             .click();
-          await page.waitForURL("/auth", { waitUntil: "load" });
+          await page
+            .getByRole("heading", { name: "Create Account" })
+            .waitFor({ state: "visible" });
         });
 
         it("shows sign-up page", async () => {
