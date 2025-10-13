@@ -46,7 +46,7 @@ export default Sentry.wrapSentryHandleRequest(
     loadContext?: any,
   ) => {
     const nonce = crypto.randomUUID();
-    const response = await handleRequest(
+    return await handleRequest(
       request,
       responseStatusCode,
       responseHeaders,
@@ -54,8 +54,6 @@ export default Sentry.wrapSentryHandleRequest(
       loadContext,
       { nonce },
     );
-    response.headers.set("Document-Policy", "js-profiling");
-    return response;
   },
 );
 

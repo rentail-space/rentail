@@ -1,7 +1,11 @@
 import { invariant } from "es-toolkit";
 import fm from "front-matter";
 import { DateTime } from "luxon";
-import { type LoaderFunctionArgs, useLoaderData } from "react-router";
+import {
+  type LoaderFunctionArgs,
+  type ShouldRevalidateFunction,
+  useLoaderData,
+} from "react-router";
 import remarkGfm from "remark-gfm";
 import removeMd from "remove-markdown";
 import { Streamdown } from "streamdown";
@@ -22,6 +26,8 @@ export async function loader({
     throw new Response("Not Found", { status: 404 });
   }
 }
+
+export const shouldRevalidate: ShouldRevalidateFunction = () => false;
 
 export default function Post() {
   const { post, slug, published } = useLoaderData<typeof loader>();
@@ -135,6 +141,7 @@ function MetaTags({
   slug: string;
   title: string;
 }) {
+  // NOTE: Meta tags here replace the root meta tags
   return (
     <>
       <title>{title}</title>
