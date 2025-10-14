@@ -150,13 +150,13 @@ describe("Blog Post Rendering", () => {
   describe("second blog post", () => {
     test("renders second blog post correctly", async () => {
       const response = await page.goto("/blog/2025-07-24-specialty-leasing");
-
       expect(response?.status(), "should respond with 200").toEqual(200);
 
-      // Check title rendering for second post
-      const title = await page.locator("article h1").textContent();
-      expect(title).toBeDefined();
-      expect(title?.length).toBeGreaterThan(0);
+      await expect(
+        page.getByRole("heading", {
+          name: "Specialty Leasing for Small Business",
+        }),
+      ).toBeVisible();
 
       // Check date formatting for second post
       const dateElement = await page
