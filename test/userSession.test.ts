@@ -6,7 +6,7 @@ import type { userProfile } from "~/lib/userProfile";
 import { getWorkingMemory } from "~/lib/workingMemory";
 import { goto } from "~/test/helpers/launchBrowser";
 
-describe.sequential("Anonymous visits chat page", () => {
+describe("Anonymous visits chat page", () => {
   let page: Page;
 
   beforeAll(async () => {
@@ -51,7 +51,7 @@ describe.sequential("Anonymous visits chat page", () => {
     expect(workingMemory.location?.timeZone).toEqual("America/Los_Angeles");
   });
 
-  describe.sequential("updates their location", () => {
+  describe("updates their location", () => {
     let workingMemory: zod.infer<typeof userProfile>;
 
     beforeAll(async () => {
@@ -101,7 +101,7 @@ describe.sequential("Anonymous visits chat page", () => {
       expect(workingMemory.location?.timeZone).toEqual("America/New_York");
     });
 
-    describe.sequential("visits sign-in page", () => {
+    describe("visits sign-in page", () => {
       beforeAll(async () => {
         await page.getByRole("button", { name: "Sign In" }).click();
         await page.waitForURL("/auth", { waitUntil: "load" });
@@ -134,24 +134,18 @@ describe.sequential("Anonymous visits chat page", () => {
 
       it("shows sign-in page with sign-up link", async () => {
         await expect(
-          page.getByRole("button", {
-            name: "Don't have an account? Create one",
-          }),
+          page.getByRole("button", { name: /Create one/ }),
         ).toBeVisible();
       });
 
-      describe.sequential("visits sign-up page", () => {
+      describe("visits sign-up page", () => {
         beforeAll(async () => {
-          await expect(
-            page.getByRole("button", {
-              name: "Don't have an account? Create one",
-            }),
-          ).toBeVisible();
+          await page.getByRole("button", { name: /Create one/ }).click();
         });
 
         it("shows sign-up page", async () => {
           await expect(
-            page.getByRole("heading", { name: "Create Account" }),
+            page.getByRole("heading", { name: /Create Account/ }),
           ).toBeVisible();
         });
 
@@ -175,11 +169,11 @@ describe.sequential("Anonymous visits chat page", () => {
 
         it("shows sign-up page with sign-up button", async () => {
           await expect(
-            page.getByRole("button", { name: "Create one" }),
+            page.getByRole("button", { name: "Create" }),
           ).toBeVisible();
         });
 
-        describe.sequential("signs up", () => {
+        describe("signs up", () => {
           beforeAll(async () => {
             await page
               .getByRole("textbox", { name: "Name" })
@@ -190,7 +184,7 @@ describe.sequential("Anonymous visits chat page", () => {
             await page
               .getByRole("textbox", { name: "Password" })
               .fill("WorkingMemory123!");
-            await page.getByRole("button", { name: "Create Account" }).click();
+            await page.getByRole("button", { name: "Create" }).click();
             await page.waitForURL("/chat", { waitUntil: "load" });
           });
 
