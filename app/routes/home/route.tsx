@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 import fm from "front-matter";
 import { DateTime } from "luxon";
 import { useId } from "react";
-import { useLoaderData } from "react-router";
 import Footer from "~/components/layout/Footer";
 import { listBlogPosts } from "~/lib/blogPosts.server";
 import BlogPosts from "~/routes/home/BlogPosts";
@@ -25,7 +24,7 @@ export async function loader() {
       slug: basename(filename, ".md"),
     }))
     .map(({ slug, content }) => ({
-      ...fm<{ title: string }>(content),
+      ...fm<{ title: string; alt?: string }>(content),
       slug,
       published: DateTime.fromISO(slug.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? "", {
         zone: "utc",
@@ -36,9 +35,12 @@ export async function loader() {
   return { posts };
 }
 
-export default function Home() {
+export default function Home({
+  loaderData,
+}: {
+  loaderData: Awaited<ReturnType<typeof loader>>;
+}) {
   const howItWorksId = useId();
-  const { posts } = useLoaderData<typeof loader>();
   return (
     <>
       <main className="mb-20 flex min-h-screen flex-col gap-y-20">
@@ -47,7 +49,7 @@ export default function Home() {
           <JoinWaitlist />
           <FeaturesSection />
           <HowItWorksSection howItWorksId={howItWorksId} />
-          <BlogPosts posts={posts} />
+          <BlogPosts posts={loaderData.posts} />
           <SpecialtyLeasing />
         </section>
       </main>

@@ -2,6 +2,7 @@ import { readdir, readFile } from "node:fs/promises";
 import path, { basename, join } from "node:path";
 import dayjs from "dayjs";
 import { invariant } from "es-toolkit";
+import fm from "front-matter";
 import { DateTime } from "luxon";
 
 const dirname = path.resolve("./app/data/blog");
@@ -46,13 +47,15 @@ function getPublishedData(filename: string): DateTime {
  * - the slug is not a valid slug
  *
  * @param slug The slug of the blog post.
- * @returns The blog post, published date, slug, and filename.
+ * @returns The blog post, published date, slug, filename, alt text, and title.
  */
 export async function loadBlogPost(slug?: string): Promise<{
-  post: string;
+  alt?: string;
+  body: string;
+  filename: string;
   published: Date;
   slug: string;
-  filename: string;
+  title: string;
 }> {
   invariant(slug, "Slug is required");
   const blogPosts = await listBlogPosts();
@@ -63,5 +66,6 @@ export async function loadBlogPost(slug?: string): Promise<{
   const post = await readFile(filename, "utf8");
   const published = getPublishedData(filename).toJSDate();
   invariant(dayjs().isAfter(published), "Published date is in the future");
-  return { post, slug, published, filename };
+  const { attributes, body } = fm<{ title: string; alt?: string }>(post);
+  return { slug, published, filename, ...attributes, body };
 }

@@ -10,6 +10,7 @@ export default function BlogPosts({
   posts: (FrontMatterResult<{ title: string }> & {
     slug: string;
     published: Date;
+    alt?: string;
   })[];
 }) {
   const today = dayjs();
@@ -26,8 +27,8 @@ export default function BlogPosts({
           to={`/blog/${post.slug}`}
         >
           <img
-            alt=""
-            className="mt-12 h-24 w-24 rounded-lg border border-gray-200 object-cover"
+            alt={post.alt}
+            className="mt-10 h-24 w-24 rounded-lg border border-gray-200 object-cover"
             height={100}
             src={`/blog/${post.slug}.jpg`}
             width={100}

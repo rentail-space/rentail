@@ -1,10 +1,8 @@
 import { invariant } from "es-toolkit";
-import fm from "front-matter";
 import { DateTime } from "luxon";
-import {
-  type LoaderFunctionArgs,
-  type ShouldRevalidateFunction,
-  useLoaderData,
+import type {
+  LoaderFunctionArgs,
+  ShouldRevalidateFunction,
 } from "react-router";
 import remarkGfm from "remark-gfm";
 import removeMd from "remove-markdown";
@@ -14,9 +12,11 @@ import { loadBlogPost } from "~/lib/blogPosts.server";
 export async function loader({
   params,
 }: LoaderFunctionArgs<{ post: string }>): Promise<{
-  post: string;
+  alt?: string;
+  body: string;
   published: Date;
   slug: string;
+  title: string;
 }> {
   try {
     invariant(params.post, "Post is required");
@@ -29,19 +29,22 @@ export async function loader({
 
 export const shouldRevalidate: ShouldRevalidateFunction = () => false;
 
-export default function Post() {
-  const { post, slug, published } = useLoaderData<typeof loader>();
-  const { attributes, body } = fm<{ title: string }>(post);
+export default function Post({
+  loaderData,
+}: {
+  loaderData: Awaited<ReturnType<typeof loader>>;
+}) {
+  const { alt, body, slug, published, title } = loaderData;
 
   return (
     <article className="prose prose-lg mx-auto">
-      <MetaTags title={attributes.title} published={published} slug={slug} />
+      <MetaTags title={title} published={published} slug={slug} />
 
-      <h1>{attributes.title}</h1>
+      <h1>{title}</h1>
 
       <figure className="relative left-[calc(-50vw+50%)] my-4 w-screen overflow-x-hidden">
         <img
-          alt=""
+          alt={alt}
           className="h-[60vh] w-full object-cover"
           src={`/blog/${slug}.jpg`}
         />
@@ -90,12 +93,7 @@ export default function Post() {
         {body}
       </Streamdown>
 
-      <JSONLD
-        body={body}
-        published={published}
-        slug={slug}
-        title={attributes.title}
-      />
+      <JSONLD body={body} published={published} slug={slug} title={title} />
     </article>
   );
 }
