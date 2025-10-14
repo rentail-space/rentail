@@ -9,9 +9,11 @@ export const handle = {
   hideLayout: true,
 };
 
-export async function loader() {
+export const clientLoader = async () => {
   return {};
-}
+};
+
+clientLoader.hydrate = true as const;
 
 export async function action({
   request,
