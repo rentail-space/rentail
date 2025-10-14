@@ -141,9 +141,6 @@ describe("Anonymous visits chat page", () => {
       describe("visits sign-up page", () => {
         beforeAll(async () => {
           await page.getByRole("button", { name: /Create one/ }).click();
-          await page
-            .getByRole("heading", { name: /Create Account/ })
-            .waitFor({ state: "visible" });
         });
 
         it("shows sign-up page", async () => {

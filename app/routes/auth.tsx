@@ -9,6 +9,10 @@ export const handle = {
   hideLayout: true,
 };
 
+export async function loader() {
+  return {};
+}
+
 export async function action({
   request,
 }: Route.ActionArgs): Promise<{ error: string | null } | Response> {
@@ -71,7 +75,7 @@ export default function AuthPage() {
 
   // Show error after form submission, but allow form change to clear error
   useEffect(() => {
-    setError(fetcher.data?.error);
+    if (fetcher.data?.error) setError(fetcher.data.error);
   }, [fetcher.data]);
 
   return (
