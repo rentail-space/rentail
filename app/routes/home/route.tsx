@@ -1,11 +1,8 @@
 import fs from "node:fs";
-import { basename } from "node:path";
-import dayjs from "dayjs";
 import fm from "front-matter";
-import { DateTime } from "luxon";
 import { useId } from "react";
 import Footer from "~/components/layout/Footer";
-import { listBlogPosts } from "~/lib/blogPosts.server";
+import { recentBlogPosts } from "~/lib/blogPosts.server";
 import BlogPosts from "~/routes/home/BlogPosts";
 import FeaturesSection from "~/routes/home/FeaturesSection";
 import HeroSection from "~/routes/home/HeroSection";
@@ -16,22 +13,16 @@ import SpecialtyLeasing from "~/routes/home/SpecialtyLeasing";
 export const handle = { hideLayout: true };
 
 export async function loader() {
-  const today = dayjs();
-  const filenames = await listBlogPosts();
-  const posts = filenames
-    .map((filename: string) => ({
-      content: fs.readFileSync(filename, "utf8"),
-      slug: basename(filename, ".md"),
+  const recent = await recentBlogPosts();
+  const posts = recent
+    .map((post) => ({
+      content: fs.readFileSync(post.filename, "utf8"),
+      ...post,
     }))
-    .map(({ slug, content }) => ({
+    .map(({ content, ...post }) => ({
       ...fm<{ title: string; alt?: string }>(content),
-      slug,
-      published: DateTime.fromISO(slug.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? "", {
-        zone: "utc",
-      }).toJSDate(),
-    }))
-    .filter((post) => today.isAfter(post.published))
-    .sort((a, b) => b.published.getTime() - a.published.getTime());
+      ...post,
+    }));
   return { posts };
 }
 

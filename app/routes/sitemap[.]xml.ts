@@ -1,8 +1,7 @@
-import path from "node:path";
 import { routes } from "virtual:react-router/server-build";
 import { generateRemixSitemap } from "@forge42/seo-tools/remix/sitemap";
 import { href } from "react-router";
-import { listBlogPosts } from "~/lib/blogPosts.server";
+import { recentBlogPosts } from "~/lib/blogPosts.server";
 
 export async function loader() {
   // NOTE: Google does not support changefreq and priority.
@@ -22,14 +21,14 @@ export async function loader() {
 async function blogPosts(): Promise<
   Record<string, { id: string; module: string; path: string }>
 > {
-  const filenames = await listBlogPosts();
+  const filenames = await recentBlogPosts();
   return Object.fromEntries(
-    filenames.map((filename) => [
-      `routes/blog/${path.basename(filename, ".md")}`,
+    filenames.map(({ slug }) => [
+      `routes/blog/${slug}.md`,
       {
-        id: `routes/blog/${path.basename(filename, ".md")}`,
-        module: filename,
-        path: href("/blog/:post", { post: path.basename(filename, ".md") }),
+        id: `routes/blog/${slug}`,
+        module: slug,
+        path: href("/blog/:post", { post: slug }),
       },
     ]),
   );

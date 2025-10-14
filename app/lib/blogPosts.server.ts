@@ -8,20 +8,28 @@ import { DateTime } from "luxon";
 const dirname = path.resolve("./app/data/blog");
 
 /**
- * Lists all blog posts in the blogPostsDir directory. We only include posts that
- * are published based on the published date in the filename.
+ * Lists all blog posts that are published based on the published date in the
+ * filename.
  *
- * @returns An array of blog post filenames.
+ * @returns An array of blog post filenames, published date, and slug.
  */
-export async function listBlogPosts(): Promise<string[]> {
+export async function recentBlogPosts(): Promise<
+  {
+    filename: string;
+    published: Date;
+    slug: string;
+  }[]
+> {
   const filenames = await readdir(dirname);
-  const publishedPosts = filenames
+  return filenames
     .filter((filename) => filename.endsWith(".md"))
-    .filter((filename) => {
-      const published = getPublishedData(filename);
-      return dayjs().isAfter(published.toJSDate());
-    });
-  return publishedPosts.map((filename) => join(dirname, filename));
+    .map((filename) => {
+      const published = getPublishedData(filename).toJSDate();
+      const slug = basename(filename, ".md");
+      return { filename: join(dirname, filename), published, slug };
+    })
+    .filter(({ published }) => dayjs().isAfter(published))
+    .sort((a, b) => b.published.getTime() - a.published.getTime());
 }
 
 /**

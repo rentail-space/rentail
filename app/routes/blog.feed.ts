@@ -1,11 +1,9 @@
 import { readFile } from "node:fs/promises";
-import { basename } from "node:path";
 import { Feed } from "feed";
 import fm from "front-matter";
-import { DateTime } from "luxon";
 import { marked } from "marked";
 import removeMd from "remove-markdown";
-import { listBlogPosts } from "~/lib/blogPosts.server";
+import { recentBlogPosts } from "~/lib/blogPosts.server";
 import truncateWords from "~/lib/truncateWords";
 
 export async function loader() {
@@ -24,30 +22,21 @@ export async function loader() {
       updated: new Date(),
     });
 
-    const blogPosts = await listBlogPosts();
-
-    // Filter and sort markdown files by date (most recent first)
-    const filenames = blogPosts
-      .sort((a, b) => b.localeCompare(a)) // Reverse chronological order
-      .slice(0, 10); // Take most recent 10
+    const blogPosts = await recentBlogPosts();
+    const filenames = blogPosts.slice(0, 10); // Take most recent 10
 
     // Blog post entries for feed
-    for (const filename of filenames) {
+    for (const { filename, slug, published } of filenames) {
       const content = await readFile(filename, "utf8");
       const { attributes, body } = fm<{ title: string }>(content);
-      const slug = basename(filename, ".md");
-      const published = DateTime.fromISO(
-        slug.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
-        { zone: "utc" },
-      );
       feed.addItem({
         content: await marked.parse(body, { gfm: true }),
         id: `rentail.space:${slug}`,
         link: `https://rentail.space/blog/${slug}`,
-        published: published.toJSDate(),
+        published: published,
         description: truncateWords(removeMd(body), 200),
         title: attributes.title,
-        date: published.toJSDate(),
+        date: published,
       });
     }
 
