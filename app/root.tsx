@@ -122,19 +122,21 @@ export function ErrorBoundary() {
     <Layout>
       <main className="prose prose-lg mx-auto">
         {isRouteErrorResponse(error) ? (
-          <>
-            <h1 className="text-4xl text-red-500">
-              {error.status} {error.statusText}
-            </h1>
-            <p className="text-gray-500">{error.data}</p>
-          </>
+          <h1 className="flex flex-row gap-2 text-4xl mx-auto mt-24 justify-center">
+            <span className="text-red-500 font-bold">{error.status}</span>
+            <span className="text-gray-500">
+              {error.statusText || error.data}
+            </span>
+          </h1>
         ) : error instanceof Error ? (
-          <>
-            <h1 className="text-4xl text-red-500">Error</h1>
-            <p className="text-gray-500">{error.message}</p>
-          </>
+          <h1 className="flex flex-row gap-2 text-4xl mx-auto mt-24 justify-center">
+            <span className="text-red-500 font-bold">Error</span>
+            <span className="text-gray-500">{error.message}</span>
+          </h1>
         ) : (
-          <h1 className="text-4xl text-red-500">Unknown Error</h1>
+          <h1 className="flex flex-row gap-2 text-4xl mx-auto mt-24 justify-center">
+            <span className="text-red-500 font-bold">Unknown Error</span>
+          </h1>
         )}
       </main>
     </Layout>

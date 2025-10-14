@@ -14,6 +14,7 @@ export async function loader({
 }: LoaderFunctionArgs<{ post: string }>): Promise<{
   alt?: string;
   body: string;
+  img?: string;
   published: Date;
   slug: string;
   title: string;
@@ -34,7 +35,7 @@ export default function Post({
 }: {
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
-  const { alt, body, slug, published, title } = loaderData;
+  const { alt, body, img, slug, published, title } = loaderData;
 
   return (
     <article className="prose prose-lg mx-auto">
@@ -42,13 +43,11 @@ export default function Post({
 
       <h1>{title}</h1>
 
-      <figure className="relative left-[calc(-50vw+50%)] my-4 w-screen overflow-x-hidden">
-        <img
-          alt={alt}
-          className="h-[60vh] w-full object-cover"
-          src={`/blog/${slug}.jpg`}
-        />
-      </figure>
+      {img && (
+        <figure className="relative left-[calc(-50vw+50%)] my-4 w-screen overflow-x-hidden">
+          <img alt={alt} className="h-[60vh] w-full object-cover" src={img} />
+        </figure>
+      )}
 
       <div className="text-gray-500 text-sm">
         {DateTime.fromISO(published.toISOString(), { zone: "utc" }).toFormat(

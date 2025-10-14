@@ -1,5 +1,6 @@
 ---
 title: "The $2.3 Trillion Opportunity: Why Specialty Retail is Crushing Big Box Stores (And How You Can Cash In)"
+alt: "White ceramic angel figurine with hands in prayer position in sharp focus with similar figurines blurred in background, representing artisanal collectible products and gift items in specialty retail market opportunity"
 ---
 
 ## The retail revolution is here. And the small guys are winning.

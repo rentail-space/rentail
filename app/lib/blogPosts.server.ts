@@ -1,4 +1,4 @@
-import { readdir, readFile } from "node:fs/promises";
+import { access, readdir, readFile } from "node:fs/promises";
 import path, { basename, join } from "node:path";
 import dayjs from "dayjs";
 import { invariant } from "es-toolkit";
@@ -53,19 +53,25 @@ export async function loadBlogPost(slug?: string): Promise<{
   alt?: string;
   body: string;
   filename: string;
+  img?: string;
   published: Date;
   slug: string;
   title: string;
 }> {
   invariant(slug, "Slug is required");
-  const blogPosts = await listBlogPosts();
-  const filename = blogPosts.find((filename) =>
-    filename.endsWith(`${slug}.md`),
-  );
-  invariant(filename, "Blog post not found");
+  const filename = join(dirname, `${slug}.md`);
   const post = await readFile(filename, "utf8");
   const published = getPublishedData(filename).toJSDate();
-  invariant(dayjs().isAfter(published), "Published date is in the future");
   const { attributes, body } = fm<{ title: string; alt?: string }>(post);
-  return { slug, published, filename, ...attributes, body };
+  const imgExists = await access(join(dirname, `${slug}.jpg`))
+    .then(() => true)
+    .catch(() => false);
+  return {
+    ...attributes,
+    body,
+    filename,
+    img: imgExists ? `/blog/${slug}.jpg` : undefined,
+    published,
+    slug,
+  };
 }
