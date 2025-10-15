@@ -1,4 +1,3 @@
-import { routes } from "virtual:react-router/server-build";
 import { generateRemixSitemap } from "@forge42/seo-tools/remix/sitemap";
 import { href } from "react-router";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
@@ -10,7 +9,7 @@ export async function loader() {
 
   const sitemap = await generateRemixSitemap({
     domain: "https://rentail.space",
-    ignore: ["*/\\*", "/api/*"],
+    ignore: ["*/\\*", "/api/*", "/error", "/.well-known/*"],
     routes: { ...routes, ...(await blogPosts()) },
   });
   return new Response(sitemap, {
@@ -18,12 +17,18 @@ export async function loader() {
   });
 }
 
+const routes = {
+  "/": { id: "routes/home/route.tsx", module: "home", path: "/" },
+  "/privacy": { id: "routes/privacy.tsx", module: "privacy", path: "/privacy" },
+  "/terms": { id: "routes/terms.tsx", module: "terms", path: "/terms" },
+};
+
 async function blogPosts(): Promise<
   Record<string, { id: string; module: string; path: string }>
 > {
   const filenames = await recentBlogPosts();
   return Object.fromEntries(
-    filenames.map(({ slug }) => [
+    filenames.reverse().map(({ slug }) => [
       `routes/blog/${slug}.md`,
       {
         id: `routes/blog/${slug}`,
