@@ -6,7 +6,7 @@ export async function loader() {
       // NOTE: userAgent must show first
       userAgent: "*",
       allow: ["/"],
-      disallow: ["/api/*", "/chat"],
+      disallow: ["/api/*", "/chat", "/auth", "/error"],
       sitemap: ["https://rentail.space/sitemap.xml"],
     },
   ]);
