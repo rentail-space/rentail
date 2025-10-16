@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.2.6/schema.json",
   "vcs": {
     "enabled": false,
     "clientKind": "git",
@@ -47,7 +47,12 @@
         "noUnsafeDeclarationMerging": "error",
         "noConsole": {
           "options": {
-            "allow": ["assert", "error", "info", "warn"]
+            "allow": [
+              "assert",
+              "error",
+              "info",
+              "warn"
+            ]
           }
         }
       },

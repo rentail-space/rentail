@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router";
 
 export default function Footer() {
   return (
-    <footer className="footer sm:footer-horizontal footer-center p-4 text-base-content">
+    <footer className="footer sm:footer-horizontal footer-center p-4 text-base-content print:hidden">
       <aside className="flex flex-col gap-4 text-gray-600">
         <p className="flex flex-row items-center gap-2">
           <span>© {new Date().getFullYear()}</span>
