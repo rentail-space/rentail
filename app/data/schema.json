@@ -12,9 +12,11 @@
         "addressCountry": "US",
         "addressLocality": "Los Angeles"
       },
-      "image": "https://rentail.space/og-image.png",
-      "logo": "https://rentail.space/og-image.png",
-      "sameAs": ["https://www.linkedin.com/company/rentail-space"]
+      "image": "https://rentail.space/images/og-image.png",
+      "logo": "https://rentail.space/images/logo.png",
+      "sameAs": [
+        "https://www.linkedin.com/company/rentail-space"
+      ]
     },
     {
       "@id": "https://rentail.space",
@@ -33,9 +35,9 @@
       "@id": "https://rentail.space#primaryimage",
       "@type": "ImageObject",
       "caption": "Two people sharing and exchanging items",
-      "contentUrl": "https://rentail.space/hero-image.jpg",
+      "contentUrl": "https://rentail.space/images/hero-image.jpg",
       "name": "Hero Image",
-      "url": "https://rentail.space/hero-image.jpg",
+      "url": "https://rentail.space/images/hero-image.jpg",
       "height": 533,
       "width": 800
     }

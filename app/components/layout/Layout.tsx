@@ -39,12 +39,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Google / Search Engine Tags */}
         <meta itemProp="description" content={description} />
-        <meta itemProp="image" content={`${url}/og-image.png`} />
+        <meta itemProp="image" content={`${url}/images/og-image.png`} />
         <meta itemProp="name" content={title} />
 
         {/* Facebook Meta Tags */}
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={`${url}/og-image.png`} />
+        <meta property="og:image" content={`${url}/images/og-image.png`} />
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={url} />
@@ -54,7 +54,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {/* Twitter Meta Tags */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:description" content={description} />
-        <meta property="twitter:image" content={`${url}/og-image.png`} />
+        <meta property="twitter:image" content={`${url}/images/og-image.png`} />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:url" content={url} />
 

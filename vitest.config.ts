@@ -8,17 +8,17 @@ export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
     bail: 3,
-    browser: { screenshotDirectory: "./__screenshots__" },
-    exclude: ["./build", "./node_modules"],
+    browser: { screenshotDirectory: "__screenshots__" },
+    exclude: ["build", "node_modules"],
     fileParallelism: false,
     globals: false,
     hideSkippedTests: true,
     hookTimeout: 30_000, // 30 seconds for beforeAll/afterAll (server + browser startup)
-    include: ["./**/*.test.{ts,tsx}"],
+    include: ["test/**/*.test.{ts,tsx}"],
     onStackTrace,
     pool: "forks",
     reporters: process.env.GITHUB_ACTIONS ? ["github-actions"] : ["verbose"],
-    setupFiles: "./test/helpers/setup.ts",
+    setupFiles: "test/helpers/setup.ts",
     teardownTimeout: 10_000, // 10 seconds for browser/server cleanup
     testTimeout: 30_000, // 30 seconds for E2E tests with browser interaction
   },

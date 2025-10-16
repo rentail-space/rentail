@@ -15,7 +15,7 @@ export async function loader() {
       favicon: "https://rentail.space/favicon-96x96.png",
       feedLinks: { atom: "https://rentail.space/blog/feed" },
       id: "rentail.space",
-      image: "https://rentail.space/og-image.png",
+      image: "https://rentail.space/images/og-image.png",
       language: "en-US",
       link: "https://rentail.space/blog/feed",
       title: "The Rentail Blog",

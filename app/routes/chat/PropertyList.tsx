@@ -44,7 +44,11 @@ function PropertyLink({
         target="_blank"
         to={`/property/${property.slug}`}
       >
-        <img alt="Shopping mall" className="w-4 h-4" src="/shopping-mall.png" />
+        <img
+          alt="Shopping mall"
+          className="w-4 h-4"
+          src="/images/shopping-mall.png"
+        />
         <span className="text-sm text-base-content/70 truncate max-w-[12rem]">
           {property.name}
         </span>
