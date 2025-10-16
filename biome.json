@@ -17,7 +17,8 @@
       "!.git",
       "!.vscode",
       "!build",
-      "!prisma/generated"
+      "!prisma/generated",
+      "!test/context"
     ],
     "ignoreUnknown": false
   },

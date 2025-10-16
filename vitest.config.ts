@@ -15,19 +15,24 @@ export default defineConfig({
     hideSkippedTests: true,
     hookTimeout: 30_000, // 30 seconds for beforeAll/afterAll (server + browser startup)
     include: ["./**/*.test.{ts,tsx}"],
+    onStackTrace,
     pool: "forks",
     reporters: process.env.GITHUB_ACTIONS ? ["github-actions"] : ["verbose"],
     setupFiles: "./test/helpers/setup.ts",
     teardownTimeout: 10_000, // 10 seconds for browser/server cleanup
     testTimeout: 30_000, // 30 seconds for E2E tests with browser interaction
-    onStackTrace(error: { name?: string }, { file }: ParsedStack) {
-      // If we've encountered a ReferenceError, show the whole stack.
-      if (error.name === "ReferenceError") return true;
-      // Reject all frames from third party libraries.
-      if (file.includes("node_modules")) return false;
-    },
   },
 });
+
+function onStackTrace(
+  error: { name?: string },
+  { file }: ParsedStack,
+): boolean {
+  // If we've encountered a ReferenceError, show the whole stack.
+  if (error.name === "ReferenceError") return true;
+  // Reject all frames from third party libraries.
+  return !file.includes("node_modules");
+}
 
 declare global {
   namespace PlaywrightTest {
