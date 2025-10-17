@@ -76,8 +76,8 @@ jobs:
 
       - name: Setup database schema (for testing)
         run: |
-          prisma generate 
-          prisma db push
+          pnpm prisma generate 
+          pnpm prisma db push
         env:
           NODE_ENV: "test"
 
@@ -155,8 +155,8 @@ jobs:
 
       - name: Deploy Prisma schema and seed database
         run: |
-          doppler run --config prd -- prisma db push
-          doppler run --config prd -- prisma db seed
+          doppler run --config prd -- pnpm prisma db push
+          doppler run --config prd -- pnpm prisma db seed
 
       - name: Deploy to Vercel
         uses: nexterias/actions-vercel@v1
