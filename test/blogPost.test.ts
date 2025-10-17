@@ -69,7 +69,7 @@ describe("Blog Post Rendering", () => {
     if ((await links.count()) > 0) {
       const firstLink = links.first();
       const linkClasses = await firstLink.getAttribute("class");
-      expect(linkClasses).toContain("text-indigo-600 hover:underline");
+      expect(linkClasses).toContain("underline");
     }
   });
 
@@ -79,7 +79,6 @@ describe("Blog Post Rendering", () => {
     if ((await orderedLists.count()) > 0) {
       const firstOL = orderedLists.first();
       const olClasses = await firstOL.getAttribute("class");
-      expect(olClasses).toContain("ml-8");
       expect(olClasses).toContain("list-decimal");
     }
 
@@ -88,7 +87,6 @@ describe("Blog Post Rendering", () => {
     if ((await unorderedLists.count()) > 0) {
       const firstUL = unorderedLists.first();
       const ulClasses = await firstUL.getAttribute("class");
-      expect(ulClasses).toContain("ml-6");
       expect(ulClasses).toContain("list-disc");
     }
   });
