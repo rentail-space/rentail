@@ -8,8 +8,8 @@ export async function loader({ params }: LoaderFunctionArgs<{ post: string }>) {
     const image = await readFile(filename.replace(".md", ".jpg"));
     return new Response(image.buffer as BodyInit, {
       headers: {
-        "Content-Type": "image/jpeg",
         "Cache-Control": "public, max-age=31536000, immutable",
+        "Content-Type": "image/jpeg",
       },
     });
   } catch (error) {

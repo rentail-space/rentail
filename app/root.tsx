@@ -7,7 +7,7 @@ import {
   type useMatches,
   useRouteError,
 } from "react-router";
-import "~/app.css";
+import "~/global.css";
 import Footer from "~/components/layout/Footer";
 import Header from "~/components/layout/Header";
 import loggingMiddleware from "~/lib/middleware/logging";
@@ -120,22 +120,18 @@ export function ErrorBoundary() {
 
   return (
     <Layout>
-      <main className="prose prose-lg mx-auto">
+      <main className="prose prose-lg mx-auto py-32">
         {isRouteErrorResponse(error) ? (
-          <h1 className="flex flex-row gap-2 text-4xl mx-auto mt-24 justify-center">
+          <h1 className="flex flex-row gap-2 text-4xl mx-auto justify-center">
             <span className="text-red-500 font-bold">{error.status}</span>
             <span className="text-gray-500">
               {error.statusText || error.data}
             </span>
           </h1>
-        ) : error instanceof Error ? (
-          <h1 className="flex flex-row gap-2 text-4xl mx-auto mt-24 justify-center">
-            <span className="text-red-500 font-bold">Error</span>
-            <span className="text-gray-500">{error.message}</span>
-          </h1>
         ) : (
-          <h1 className="flex flex-row gap-2 text-4xl mx-auto mt-24 justify-center">
-            <span className="text-red-500 font-bold">Unknown Error</span>
+          <h1 className="flex flex-row gap-2 text-4xl mx-auto justify-center">
+            <span className="text-red-500 font-bold">500</span>
+            <span className="text-gray-500">Unknown error</span>
           </h1>
         )}
       </main>

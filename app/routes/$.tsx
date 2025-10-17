@@ -4,10 +4,11 @@ export async function loader() {
 
 export default function NotFoundPage() {
   return (
-    <div className="flex flex-col gap-4 h-screen w-screen items-center justify-center">
-      <h1 className="text-4xl">
-        404 <span className="font-bold">Not found</span>
+    <main className="prose prose-lg mx-auto py-32">
+      <h1 className="flex flex-row gap-2 text-4xl mx-auto justify-center ">
+        <span className="text-red-500 font-bold">404</span>
+        <span className="text-gray-500">Not found</span>
       </h1>
-    </div>
+    </main>
   );
 }

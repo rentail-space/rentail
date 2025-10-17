@@ -57,36 +57,7 @@ export default function Post({
       </div>
 
       <Streamdown
-        components={{
-          a: ({ children, href }) => (
-            <a href={href} className="text-indigo-600 hover:underline">
-              {children}
-            </a>
-          ),
-          h1: ({ children }) => (
-            <h1 className="font-bold text-2xl">{children}</h1>
-          ),
-          h2: ({ children }) => (
-            <h2 className="font-bold text-xl">{children}</h2>
-          ),
-          h3: ({ children }) => (
-            <h3 className="font-bold text-lg">{children}</h3>
-          ),
-          hr: () => <hr className="border-gray-300" />,
-          img: ({ src, alt }) => (
-            <img
-              alt={alt}
-              className="my-2 h-auto max-h-[400px] w-full object-contain"
-              src={src}
-            />
-          ),
-          li: ({ children }) => <li className="ml-4">{children}</li>,
-          ol: ({ children }) => (
-            <ol className="ml-8 list-decimal">{children}</ol>
-          ),
-          p: ({ children }) => <p className="text-lg">{children}</p>,
-          ul: ({ children }) => <ul className="ml-6 list-disc">{children}</ul>,
-        }}
+        className="prose prose-lg mx-auto"
         remarkPlugins={[remarkGfm]}
       >
         {body}

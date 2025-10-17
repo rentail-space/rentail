@@ -18,8 +18,6 @@ import type { Route } from "./+types/api.chat";
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams
 
-invariant(general, "General prompt is required");
-
 export async function action({ request }: Route.ActionArgs) {
   const { chat, headers } = await getUserChat(request.headers);
   const { userMessage } = (await request.json()) as { userMessage: UIMessage };

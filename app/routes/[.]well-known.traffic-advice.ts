@@ -1,10 +1,8 @@
 export async function loader() {
   const trafficAdvice = [
     {
+      google_prefetch_proxy_eap: { fraction: 1.0 },
       user_agent: "prefetch-proxy",
-      google_prefetch_proxy_eap: {
-        fraction: 1.0,
-      },
     },
   ];
 

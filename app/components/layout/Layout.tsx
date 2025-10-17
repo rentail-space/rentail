@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import ReactGA from "react-ga4";
 import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
 import { Toaster } from "sonner";
-import "~/app.css";
+import "~/global.css";
 import schema from "~/data/schema.json";
 
 const description =
