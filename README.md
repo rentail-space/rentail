@@ -11,34 +11,6 @@ A React Router v7 application serving as a specialty lease marketplace that help
 - Redis server
 - pnpm package manager
 
-### Environment Setup
-
-Create a `.env.local` file with the following required variables:
-
-```bash
-# AI Integration
-ANTHROPIC_API_KEY=your_anthropic_api_key
-
-# Database
-DATABASE_URL=postgresql://username:password@localhost:5432/rentail
-SESSION_SECRET=your_session_secret_key
-
-# Email Service
-RESEND_API_KEY=your_resend_api_key
-
-# Redis
-REDIS_URL=redis://localhost:6379
-
-# Optional - Monitoring & Logging
-LOGTAIL_TOKEN=your_logtail_token
-LOGTAIL_ENDPOINT=your_logtail_endpoint
-PUSHGATEWAY_URL=your_pushgateway_url
-PUSHGATEWAY_TOKEN=your_pushgateway_token
-SENTRY_DSN=your_sentry_dsn
-CHECKLY_ACCOUNT_ID=your_checkly_account_id
-CHECKLY_API_KEY=your_checkly_api_key
-```
-
 ### Installation & Development
 
 ```bash
@@ -52,7 +24,7 @@ prisma db push
 # Start development server
 pnpm dev
 
-# Open http://localhost:3000
+# Open http://localhost:5173
 ```
 
 ## 🏗️ Architecture Overview
@@ -122,85 +94,6 @@ pnpm checkly               # Run synthetic monitoring tests
 pnpm clean                 # Remove build cache and artifacts
 ```
 
-## 🎯 Key Components
-
-### AI Integration
-
-- **Chat API** (`/api/chat`): Streaming responses with Claude 4
-- **System Prompts**: Context-aware prompts for different scenarios
-- **Resume Support**: Automatic stream resumption for reliability
-- **Stop Mechanism**: Redis-based cross-request coordination
-
-### Database Models
-
-```typescript
-// Core entities
-User        // User profiles with location data
-Chat        // Conversation sessions
-Message     // Individual chat messages with roles and content
-```
-
-### Configuration Management
-
-- **Centralized Config**: All environment variables in `app/lib/env.ts`
-- **Type Safety**: Runtime validation with env-var library
-- **Environment Aware**: Different defaults for test/dev/production
-
-## 🔒 Security Considerations
-
-- **Input Sanitization**: All user inputs validated and sanitized
-- **Session Management**: Secure cookie-based sessions
-- **API Key Protection**: Environment-based secret management
-- **CSP Headers**: Content Security Policy implementation
-- **Rate Limiting**: Built-in protection against abuse
-
-## 📊 Monitoring & Observability
-
-### Error Tracking
-- **Sentry Integration**: Automatic error capture and reporting
-- **Custom Error Boundaries**: React error boundary implementation
-- **Performance Monitoring**: Request timing and resource usage
-
-### Metrics Collection
-- **Process Metrics**: CPU, memory, heap usage
-- **HTTP Metrics**: Request counts, response times, status codes
-- **Custom Metrics**: Business-specific measurements
-
-### Synthetic Monitoring
-- **Checkly Tests**: Automated E2E monitoring every 30 minutes
-- **Visual Regression**: Screenshot comparison testing
-- **API Health Checks**: Endpoint availability monitoring
-
-## 🧪 Testing Strategy
-
-### Unit Testing
-- **Framework**: Vitest with jsdom environment
-- **Coverage**: Components, utilities, and business logic
-- **Mocking**: MSW for API mocking
-
-### Visual Testing
-- **Playwright Integration**: Browser-based visual testing
-- **Screenshot Comparison**: Automated visual regression detection
-- **Cross-browser Testing**: Multiple browser environments
-
-### E2E Testing
-- **Checkly Integration**: Production monitoring
-- **User Journey Testing**: Critical path validation
-- **Performance Testing**: Page load and interaction timing
-
-## 🚀 Deployment
-
-### Build Process
-```bash
-pnpm build  # Generates client/server bundles in /build
-```
-
-### Production Requirements
-- Node.js ≥ 22.0.0
-- PostgreSQL database
-- Redis server
-- All required environment variables
-
 ### Monitoring Setup
 1. Configure Sentry for error tracking
 2. Setup BetterStack for logging and metrics
@@ -235,18 +128,3 @@ pnpm build  # Generates client/server bundles in /build
 - [Prisma Documentation](https://prisma.io/docs)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Biome Documentation](https://biomejs.dev)
-
-## 📄 License
-
-[Add your license information here]
-
-## 🆘 Support
-
-For questions and support:
-- Create an issue in this repository
-- Check existing documentation and guides
-- Review the troubleshooting section below
-
----
-
-**Last Updated**: September 2025
