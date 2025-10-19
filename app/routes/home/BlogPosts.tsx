@@ -11,6 +11,7 @@ export default function BlogPosts({
     slug: string;
     published: Date;
     alt?: string;
+    image?: string;
   })[];
 }) {
   const today = dayjs();
@@ -26,13 +27,17 @@ export default function BlogPosts({
           key={post.slug}
           to={`/blog/${post.slug}`}
         >
-          <img
-            alt={post.alt}
-            className="mt-10 h-24 w-24 rounded-lg border border-gray-200 object-cover"
-            height={100}
-            src={`/blog/${post.slug}.jpg`}
-            width={100}
-          />
+          {post.image ? (
+            <img
+              alt={post.alt}
+              className="mt-10 h-24 w-24 rounded-lg border border-gray-200 object-cover"
+              height={100}
+              src={`/blog/${post.image}`}
+              width={100}
+            />
+          ) : (
+            <span />
+          )}
           <div>
             <h4>{post.attributes.title}</h4>
             <p className="text-gray-500 line-clamp-3">{removeMd(post.body)}</p>

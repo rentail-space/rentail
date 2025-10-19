@@ -7,7 +7,11 @@
       "Bash(xargs kill:*)",
       "Bash(pkill:*)",
       "Bash(killall:*)",
-      "WebSearch"
+      "WebSearch",
+      "Read(//Users/assaf/.config/fish/**)",
+      "Read(//Users/assaf/.claude/**)",
+      "Read(//usr/local/**)",
+      "Bash(npm root:*)"
     ],
     "deny": [],
     "ask": []

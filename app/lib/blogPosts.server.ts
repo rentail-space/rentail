@@ -61,7 +61,7 @@ export async function loadBlogPost(slug?: string): Promise<{
   alt?: string;
   body: string;
   filename: string;
-  img?: string;
+  image?: string;
   published: Date;
   slug: string;
   title: string;
@@ -70,16 +70,18 @@ export async function loadBlogPost(slug?: string): Promise<{
   const filename = join(dirname, `${slug}.md`);
   const post = await readFile(filename, "utf8");
   const published = getPublishedData(filename).toJSDate();
-  const { attributes, body } = fm<{ title: string; alt?: string }>(post);
-  const imgExists = await access(join(dirname, `${slug}.jpg`))
-    .then(() => true)
-    .catch(() => false);
+  const { attributes, body } = fm<{
+    title: string;
+    alt?: string;
+    image?: string;
+  }>(post);
   return {
-    ...attributes,
+    alt: attributes.alt,
     body,
     filename,
-    img: imgExists ? `/blog/${slug}.jpg` : undefined,
+    image: attributes.image ? `/blog/${attributes.image}` : undefined,
     published,
     slug,
+    title: attributes.title,
   };
 }

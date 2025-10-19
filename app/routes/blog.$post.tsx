@@ -14,7 +14,7 @@ export async function loader({
 }: LoaderFunctionArgs<{ post: string }>): Promise<{
   alt?: string;
   body: string;
-  img?: string;
+  image?: string;
   published: Date;
   slug: string;
   title: string;
@@ -35,7 +35,7 @@ export default function Post({
 }: {
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
-  const { alt, body, img, slug, published, title } = loaderData;
+  const { alt, body, image, slug, published, title } = loaderData;
 
   return (
     <article className="prose prose-lg mx-auto">
@@ -43,18 +43,11 @@ export default function Post({
 
       <h1>{title}</h1>
 
-      {img && (
+      {image && (
         <figure className="relative left-[calc(-50vw+50%)] my-4 w-screen overflow-x-hidden">
-          <img alt={alt} className="h-[60vh] w-full object-cover" src={img} />
+          <img alt={alt} className="h-[60vh] w-full object-cover" src={image} />
         </figure>
       )}
-
-      <div className="text-gray-500 text-sm">
-        {DateTime.fromISO(published.toISOString(), { zone: "utc" }).toFormat(
-          "LLLL dd, yyyy",
-          { locale: "en-US" },
-        )}
-      </div>
 
       <Streamdown
         className="prose prose-lg mx-auto"
