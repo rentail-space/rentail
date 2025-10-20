@@ -5,7 +5,7 @@ echo -e "\033[32m  Upgrading dependencies …\033[0m"
 npm-check-updates --configFileName .ncurc.json --errorLevel 2 || echo "Dependencies to update"
 
 echo -e "\033[32m  Installing Playwright browsers …\033[0m"
-pnpm playwright install --with-deps chromium
+pnpx playwright install
 
 echo -e "\033[32m  Deduping dependencies …\033[0m"
 pnpm dedupe
