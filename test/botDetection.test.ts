@@ -4,9 +4,12 @@ import prisma from "~/lib/prisma";
 import { goto, launchBrowser } from "~/test/helpers/launchBrowser";
 
 describe("Bot detection", () => {
+  beforeEach(async () => {
+    await prisma.user.deleteMany();
+  });
+
   describe("default browser", () => {
     beforeEach(async () => {
-      await prisma.user.deleteMany();
       await goto("/chat");
     });
 
@@ -19,7 +22,6 @@ describe("Bot detection", () => {
 
   describe("browser with bot User-Agent", () => {
     beforeEach(async () => {
-      await prisma.user.deleteMany();
       await goto("/chat", {
         "user-agent": "vercel-screenshot/1.0",
       });
@@ -34,7 +36,6 @@ describe("Bot detection", () => {
 
   describe("browser with bot IP", () => {
     beforeEach(async () => {
-      await prisma.user.deleteMany();
       await goto("/chat", {
         "x-forwarded-for": "66.249.65.224",
       });
@@ -49,7 +50,6 @@ describe("Bot detection", () => {
 
   describe("two different bot requests without shared cookies link to the same user record", () => {
     beforeEach(async () => {
-      await prisma.user.deleteMany();
       const context = await launchBrowser();
 
       // First bot request

@@ -1,4 +1,4 @@
-import { access, readdir, readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import path, { basename, join } from "node:path";
 import dayjs from "dayjs";
 import { invariant } from "es-toolkit";
