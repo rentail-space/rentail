@@ -120,7 +120,7 @@ export async function action({ request }: Route.ActionArgs) {
     },
     */
 
-    generateMessageId: ulid,
+    generateMessageId: () => ulid(),
 
     onError: (error) => {
       captureException(error, { extra: { chat } });

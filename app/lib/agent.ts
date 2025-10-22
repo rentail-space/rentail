@@ -29,7 +29,7 @@ const agent = new Agent({
 
 export default new Mastra({
   agents: { agent },
-  idGenerator: ulid,
+  idGenerator: () => ulid(),
   logger: new ConsoleLogger({
     level: debug("agent").enabled ? "debug" : "info",
   }),

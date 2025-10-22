@@ -18,9 +18,15 @@ datasource db {
   extensions   = [postgis]
 }
 
+/**
+ * NOTE about identifiers:
+ * - ULID — sortable and readable by humans (eg message ID)
+ * - UUID(4) — not sortable, more entropy (eg user ID)
+ */
+
 model Chat {
   createdAt DateTime   @map("created_at") @default(now())
-  id        String     @map("id")         @id @default(cuid(2))
+  id        String     @map("id")         @id @default(uuid(4))
   messages  Messages[]
   metadata  Json       @map("metadata")   @db.Json
   title     String?    @map("title")
@@ -51,7 +57,7 @@ model User {
   email            String?   @map("email")
   emailVerified    Boolean   @map("email_verified")     @default(false)
   geocode          Json      @map("geocode")            @db.Json
-  id               String    @map("id")                 @id @default(cuid(2))
+  id               String    @map("id")                 @id @default(uuid(4))
   image            String?   @map("image")
   ip               String?   @map("ip")
   isAnonymous      Boolean   @map("is_anonymous")       @default(false)
@@ -70,7 +76,7 @@ model User {
 
 model Waitlist {
   createdAt DateTime @map("created_at") @default(now())
-  email     String   @map("email")      @id @default(cuid(2))
+  email     String   @map("email")      @id @default(uuid(4))
 
   @@map("waitlist")
 }
@@ -120,7 +126,7 @@ enum Role {
 }
 
 model Session {
-  id        String                      @id
+  id        String                      @id @default(uuid(4))
   expiresAt DateTime @map("expires_at")
   token     String   @map("token")
   createdAt DateTime @map("created_at") @default(now())
@@ -135,7 +141,7 @@ model Session {
 }
 
 model Account {
-  id                    String                                     @id @default(cuid(2))
+  id                    String                                     @id @default(uuid(4))
   accountId             String    @map("account_id")
   providerId            String    @map("provider_id")
   userId                String    @map("user_id")
@@ -154,7 +160,7 @@ model Account {
 }
 
 model Verification {
-  id         String                      @id
+  id         String                      @id @default(uuid(4))
   identifier String   @map("identifier")
   value      String   @map("value")
   expiresAt  DateTime @map("expires_at")

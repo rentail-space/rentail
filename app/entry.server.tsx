@@ -6,6 +6,7 @@ import type {
   EntryContext,
   LoaderFunctionArgs,
 } from "react-router";
+import { v7 as uuidv7 } from "uuid";
 import env from "~/lib/env";
 import server from "~/test/mocks/msw.server";
 
@@ -45,7 +46,7 @@ export default Sentry.wrapSentryHandleRequest(
     // biome-ignore lint/suspicious/noExplicitAny: Sentry wrapper requires flexible type
     loadContext?: any,
   ) => {
-    const nonce = crypto.randomUUID();
+    const nonce = uuidv7();
     return await handleRequest(
       request,
       responseStatusCode,
