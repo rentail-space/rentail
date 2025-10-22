@@ -1,8 +1,9 @@
 import { captureException } from "@sentry/react-router";
-import { type BetterAuthOptions, betterAuth } from "better-auth";
+import { betterAuth, type BetterAuthOptions } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { anonymous, type UserWithAnonymous } from "better-auth/plugins";
 import debug from "debug";
+import { ulid } from "ulid";
 import { sendVerificationEmail, sendWelcomeEmail } from "~/emails/sendEmails";
 import prisma from "~/lib/prisma";
 import { getRecentMessages, saveMessages } from "~/lib/workingMemory";
@@ -185,7 +186,7 @@ async function copyAnonToNewUser(
     where: { user: { id: anonUser.id } },
   });
   const newChat = await prisma.chat.create({
-    data: { metadata: {}, user: { connect: { id: newUser.id } } },
+    data: { id: ulid(), metadata: {}, user: { connect: { id: newUser.id } } },
     include: { user: true },
   });
 

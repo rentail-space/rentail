@@ -1,10 +1,11 @@
-import { reverse } from "node:dns/promises";
 import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
 import debug from "debug";
 import { invariant } from "es-toolkit";
 import { createIsbotFromList, list } from "isbot";
+import { reverse } from "node:dns/promises";
 import type { ChatGetPayload } from "prisma/generated/models";
+import { ulid } from "ulid";
 import zod from "zod";
 import authServer from "~/lib/auth.server";
 import prisma from "~/lib/prisma";
@@ -123,7 +124,7 @@ async function getChatForUser(user: { id: string }): Promise<{
       where: { userId: user.id },
     })) ||
     (await prisma.chat.create({
-      data: { metadata: {}, user: { connect: { id: user.id } } },
+      data: { id: ulid(), metadata: {}, user: { connect: { id: user.id } } },
       include: { user: true },
     }));
   const messages = await getRecentMessages(chat);
