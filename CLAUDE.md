@@ -116,7 +116,7 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Builds separate client/server bundles to `/build` directory
 - Production server runs with `@react-router/serve`
 - Configurable SSR request timeout (default: 5000ms)
-- Development server runs on port 3000
+- Development server runs on port 5173 (Vite default)
 
 **Layout Control:**
 - Layout component extracted to `app/components/layout/Layout.tsx` (provides HTML shell, meta tags, scripts)
