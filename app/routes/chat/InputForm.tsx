@@ -48,17 +48,16 @@ export default function InputForm({
           value={query}
         />
         <div className="absolute right-2 top-1/2 -translate-y-1/2 transform flex gap-2">
-          {isResponding ||
-            (true && (
-              <button
-                aria-label="Stop generation"
-                className="flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-200 hover:scale-105"
-                onClick={() => stopLLM(scrollToBottom)}
-                type="button"
-              >
-                <IconCircleCloseFill className="text-red-500 hover:text-red-600 w-10 h-10" />
-              </button>
-            ))}
+          {isResponding && (
+            <button
+              aria-label="Stop generation"
+              className="flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-200 hover:scale-105"
+              onClick={() => stopLLM(scrollToBottom)}
+              type="button"
+            >
+              <IconCircleCloseFill className="text-red-500 hover:text-red-600 w-10 h-10" />
+            </button>
+          )}
           <button
             aria-label="Send message"
             className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-indigo-500 transition-all duration-200 hover:scale-105 hover:bg-indigo-600 active:scale-95 active:scale-[0.6] active:duration-75 disabled:bg-gray-300 disabled:cursor-not-allowed"
