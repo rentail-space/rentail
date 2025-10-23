@@ -1,4 +1,5 @@
 import { Markdown } from "@react-email/components";
+import { IconExternalLink } from "obra-icons-react";
 import type { PropertySpace } from "prisma/generated/client";
 import { Link, useLoaderData } from "react-router";
 import prisma from "~/lib/prisma";
@@ -34,10 +35,12 @@ export default function Property() {
           )}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-800"
+          className="text-blue-600 hover:text-blue-800 flex flex-row items-center gap-2"
         >
-          {property.address}, {property.city}, {property.state}{" "}
-          <ExternalLinkIcon />
+          <span>
+            {property.address}, {property.city}, {property.state}
+          </span>
+          <IconExternalLink className="w-4 h-4" />
         </Link>
       </section>
 

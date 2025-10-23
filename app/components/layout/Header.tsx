@@ -1,3 +1,4 @@
+import { IconDownload, IconUser } from "obra-icons-react";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouteLoaderData } from "react-router";
@@ -97,9 +98,8 @@ function DropdownMenu({
         onClick={() => setIsOpen(!isOpen)}
         type="button"
       >
-        <UserIcon />
+        <IconUser />
         <span>{chat.user.name || chat.user.email}</span>
-        <ChevronDownIcon isOpen={isOpen} />
       </button>
 
       {isOpen && (
@@ -115,6 +115,7 @@ function DropdownMenu({
             to="/profile"
             className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
           >
+            <IconUser className="w-4 h-4 inline-block mr-2" />
             Profile Settings
           </Link>
 
@@ -123,6 +124,7 @@ function DropdownMenu({
             download
             href={`/api/chat/${chat.id}/export/csv`}
           >
+            <IconDownload className="w-4 h-4 inline-block mr-2" />
             CSV Export
           </a>
 
@@ -139,45 +141,5 @@ function DropdownMenu({
         </div>
       )}
     </div>
-  );
-}
-
-function UserIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <title>User</title>
-      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-      <circle cx="12" cy="7" r="4" />
-    </svg>
-  );
-}
-
-function ChevronDownIcon({ isOpen }: { isOpen: boolean }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
-    >
-      <title>Menu</title>
-      <polyline points="6 9 12 15 18 9" />
-    </svg>
   );
 }

@@ -1,3 +1,4 @@
+import { IconChevronDoubleDown } from "obra-icons-react";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 
 export default function ScrollButton() {
@@ -13,21 +14,7 @@ export default function ScrollButton() {
       aria-label="Scroll to bottom"
       title="Scroll to bottom"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="text-gray-600"
-      >
-        <title>Scroll to bottom</title>
-        <path d="M12 5v14M19 12l-7 7-7-7" />
-      </svg>
+      <IconChevronDoubleDown className="text-gray-600 w-6 h-6" />
     </button>
   );
 }

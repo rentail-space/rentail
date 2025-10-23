@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { drop, take } from "es-toolkit";
 import type { FrontMatterResult } from "front-matter";
+import { IconChevronRight } from "obra-icons-react";
 import { Link } from "react-router";
 import removeMd from "remove-markdown";
 
@@ -51,34 +52,12 @@ export default function BlogPosts({
           key={post.slug}
           to={`/blog/${post.slug}`}
         >
-          <h5 className="flex flex-row items-start flex-nowrap gap-2">
-            <ArrowIcon className="ml-3 mt-3 h-3 w-3 flex-shrink-0" />
-            {post.attributes.title}
+          <h5 className="flex flex-row items-center flex-nowrap gap-2">
+            <IconChevronRight className="w-4 h-4 inline-block mr-2" />
+            <span>{post.attributes.title}</span>
           </h5>
         </Link>
       ))}
     </section>
-  );
-}
-
-function ArrowIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className={`${className} inline-block`}
-      fill="none"
-      height="16"
-      viewBox="0 0 16 16"
-      width="16"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6 4L10 8L6 12"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-      />
-    </svg>
   );
 }

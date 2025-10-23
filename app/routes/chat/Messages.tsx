@@ -1,5 +1,6 @@
 import type { UIMessage, UITools } from "ai";
 import { uniqBy } from "es-toolkit";
+import { IconCircle } from "obra-icons-react";
 import React, { type JSX, useEffect, useRef, useState } from "react";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
@@ -164,8 +165,8 @@ function ReasoningMessage({ text, isLast }: { text: string; isLast: boolean }) {
       <summary className="text-gray-600 font-medium cursor-pointer w-full mb-4">
         {isThinking ? (
           <span className="flex-row items-center gap-2 flex-nowrap pl-2">
-            <ThinkingIcon />
-            Thinking …
+            <IconCircle className="animate-spin w-4 h-4 inline-block mr-2" />
+            <span>Thinking…</span>
           </span>
         ) : isExpanded ? (
           "Reasoning"
@@ -295,31 +296,4 @@ function getComponents({
       <ul className={"ml-4 list-outside list-disc"}>{children}</ul>
     ),
   };
-}
-
-function ThinkingIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="inline w-4 h-4 mr-2 text-gray-400 animate-spin"
-      fill="none"
-      role="progressbar"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-      />
-      <path
-        className="opacity-75"
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-        fill="currentColor"
-      />
-    </svg>
-  );
 }

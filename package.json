@@ -51,6 +51,7 @@
     "markdown-it": "^14.1.0",
     "marked": "^16.4.1",
     "nuqs": "^2.7.2",
+    "obra-icons-react": "^1.23.1",
     "pdfmake": "^0.2.20",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
