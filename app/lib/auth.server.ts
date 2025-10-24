@@ -186,11 +186,15 @@ async function copyAnonToNewUser(
     where: { user: { id: anonUser.id } },
   });
   const newChat = await prisma.chat.create({
-    data: { id: ulid(), metadata: {}, user: { connect: { id: newUser.id } } },
+    data: {
+      id: ulid(),
+      metadata: anonChat?.metadata ?? {},
+      user: { connect: { id: newUser.id } },
+    },
     include: { user: true },
   });
 
   // Copy the anonymous user's messages to the new user.
   const anonMessages = anonChat ? await getRecentMessages(anonChat) : [];
-  await saveMessages(newChat, anonMessages);
+  await saveMessages({ chat: newChat, messages: anonMessages });
 }

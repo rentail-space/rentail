@@ -2,6 +2,7 @@ import type { MastraMessageV2 } from "@mastra/core";
 import { Memory } from "@mastra/memory";
 import { TokenLimiter, ToolCallFilter } from "@mastra/memory/processors";
 import { captureException } from "@sentry/react-router";
+import { invariant } from "es-toolkit";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { ulid } from "ulid";
 import type zod from "zod";
@@ -56,22 +57,26 @@ export async function getRecentMessages(
 
 /**
  * Save messages to the chat on behalf of the user. Can be used to copy messages
- * from one chat to another.
+ * from one chat to another. Note: when we create the first conversation
+ * (cloning a user), messages will not have threadID or resourceID so we need to
+ * provide these separately.
  *
- * @param chat The chat to save messages to.
  * @param messages The messages to save.
  * @returns The saved messages.
  */
-export async function saveMessages(
-  chat: ChatGetPayload<{ include: { user: true } }>,
-  messages: MastraMessageV2[],
-): Promise<MastraMessageV2[]> {
+export async function saveMessages({
+  chat,
+  messages,
+}: {
+  chat: ChatGetPayload<{ include: { user: true } }>;
+  messages: MastraMessageV2[];
+}): Promise<MastraMessageV2[]> {
+  invariant(chat, "Chat is required");
   return await memory.saveMessages({
     messages: messages.map((message) => ({
       ...message,
-      id: ulid(),
-      resourceId: chat.user.id,
       threadId: chat.id,
+      resourceId: chat.user.id,
     })),
     format: "v2",
   });

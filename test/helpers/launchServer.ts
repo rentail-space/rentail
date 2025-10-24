@@ -1,7 +1,7 @@
-import { type ChildProcess, fork } from "node:child_process";
-import { resolve } from "node:path";
 import debug from "debug";
 import { invariant } from "es-toolkit";
+import { type ChildProcess, execSync, fork } from "node:child_process";
+import { resolve } from "node:path";
 import { afterAll } from "vitest";
 import "~/test/helpers/toMatchScreenshot";
 
@@ -18,6 +18,10 @@ export async function launchServer(): Promise<void> {
   if (worker) return;
 
   debug("server")("launching server");
+  try {
+    const pids = execSync(`lsof -ti:${port}`, { encoding: "utf8" }).split("\n");
+    for (const pid of pids) execSync(`kill -9 ${pid}`, { stdio: "ignore" });
+  } catch {}
 
   // Start the server as forked process, that way we don't share the same node
   // instance, which could cause issues with some libraries (eg Prisma)

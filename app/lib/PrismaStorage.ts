@@ -268,9 +268,8 @@ export class PrismaStorage extends MastraStorage {
       skip: page * perPage,
       take: perPage,
     });
-    return format === "v2"
-      ? toMessages(messages, "v2")
-      : toMessages(messages, "v1");
+    invariant(format === "v2", "Format must be v2");
+    return await toMessageV2(messages);
   }
 
   getMessagesById({
@@ -299,9 +298,8 @@ export class PrismaStorage extends MastraStorage {
     const messages = await prisma.messages.findMany({
       where: { id: { in: messageIds } },
     });
-    return format === "v2"
-      ? toMessages(messages, "v2")
-      : toMessages(messages, "v1");
+    invariant(format === "v2", "Format must be v2");
+    return await toMessageV2(messages);
   }
 
   saveMessages(args: {
@@ -318,32 +316,23 @@ export class PrismaStorage extends MastraStorage {
     args:
       | { messages: MastraMessageV1[]; format?: "v1" }
       | { messages: MastraMessageV2[]; format: "v2" },
-  ): Promise<MastraMessageV2[] | MastraMessageV1[]>;
-
-  async saveMessages(
-    args:
-      | {
-          messages: MastraMessageV1[];
-          format?: undefined | "v1";
-          threadId?: string;
-        }
-      | { messages: MastraMessageV2[]; format: "v2"; threadId?: string },
   ): Promise<MastraMessageV2[] | MastraMessageV1[]> {
-    const chatId = getChatId(args.messages);
+    invariant(args.format === "v2", "Format must be v2");
     const messages = await prisma.messages.createManyAndReturn({
-      data: args.messages.map((message) => ({
-        chatId,
-        content: JSON.stringify(message.content),
-        createdAt: message.createdAt,
-        id: message.id,
-        role: message.role as Role,
-        type: message.type ?? "text",
-      })),
+      data: args.messages.map((message) => {
+        invariant(message.threadId, "Thread ID is required");
+        return {
+          chatId: message.threadId,
+          content: JSON.stringify(message.content),
+          createdAt: message.createdAt,
+          id: message.id,
+          role: message.role as Role,
+          type: message.type ?? "text",
+        };
+      }),
       skipDuplicates: true,
     });
-    return args.format === "v2"
-      ? toMessages(messages, "v2")
-      : toMessages(messages, "v1");
+    return await toMessageV2(messages);
   }
 
   async updateMessages(args: {
@@ -365,7 +354,7 @@ export class PrismaStorage extends MastraStorage {
         type: message.type as MastraMessageV2["type"],
       })),
     });
-    return toMessages(messages, "v2");
+    return await toMessageV2(messages);
   }
 
   async getThreadsByResourceIdPaginated(
@@ -398,6 +387,7 @@ export class PrismaStorage extends MastraStorage {
   ): Promise<
     PaginationInfo & { messages: MastraMessageV1[] | MastraMessageV2[] }
   > {
+    invariant(args.format === "v2", "Format must be v2");
     const page = args.selectBy?.pagination?.page ?? 0;
     const perPage = args.selectBy?.pagination?.perPage ?? 10;
     const messages = await prisma.messages.findMany({
@@ -413,10 +403,7 @@ export class PrismaStorage extends MastraStorage {
       page: page,
       perPage: perPage,
       total: count,
-      messages:
-        args.format === "v2"
-          ? toMessages(messages, "v2")
-          : toMessages(messages, "v1"),
+      messages: await toMessageV2(messages),
     };
   }
 
@@ -473,33 +460,25 @@ export class PrismaStorage extends MastraStorage {
   }
 }
 
-function toMessages(messages: Messages[], format: "v1"): MastraMessageV1[];
-function toMessages(messages: Messages[], format: "v2"): MastraMessageV2[];
-function toMessages(
-  messages: Messages[],
-  format: "v1" | "v2",
-): MastraMessageV1[] | MastraMessageV2[] {
-  return format === "v2"
-    ? messages.map((message) => ({
-        content: message.content
-          ? JSON.parse(message.content as string)
-          : undefined,
-        createdAt: message.createdAt,
-        id: message.id,
-        role: message.role as MastraMessageV2["role"],
-        type: message.type as MastraMessageV2["type"],
-        threadId: message.chatId,
-      }))
-    : messages.map((message) => ({
-        content: message.content
-          ? JSON.parse(message.content as string)
-          : undefined,
-        createdAt: message.createdAt,
-        id: message.id,
-        role: message.role as MastraMessageV1["role"],
-        type: message.type as MastraMessageV1["type"],
-        threadId: message.chatId,
-      }));
+async function toMessageV2(messages: Messages[]): Promise<MastraMessageV2[]> {
+  if (messages.length === 0) return [];
+
+  const chat = await prisma.chat.findUnique({
+    where: { id: messages[0].chatId },
+    include: { user: true },
+  });
+  invariant(chat, "Chat is required");
+  return messages.map((message) => ({
+    content: message.content
+      ? JSON.parse(message.content as string)
+      : undefined,
+    createdAt: message.createdAt,
+    id: message.id,
+    role: message.role as MastraMessageV2["role"],
+    type: message.type as MastraMessageV2["type"],
+    threadId: chat.id,
+    resourceId: chat.user?.id,
+  }));
 }
 
 function toThread(chat: Chat): StorageThreadType {
@@ -537,6 +516,6 @@ function getChatId(
   messages: Partial<MastraMessageV1>[] | Partial<MastraMessageV2>[],
 ): string {
   const threadId = messages.find((message) => message.threadId)?.threadId;
-  invariant(threadId, "Thread ID is required");
+  invariant(threadId, "Thread ID is required to obtain chat ID");
   return threadId;
 }

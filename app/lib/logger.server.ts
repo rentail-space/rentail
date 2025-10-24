@@ -1,6 +1,6 @@
-import { format, styleText } from "node:util";
 import { Logtail } from "@logtail/node";
 import type { ILogLevel } from "@logtail/types";
+import { format, styleText } from "node:util";
 import env from "~/lib/env";
 
 const logtail = env.LOGTAIL_TOKEN
@@ -35,9 +35,9 @@ for (const level of [
     try {
       logtailFunction.call(logtail, formattedMessage, ...metadata);
     } catch (error) {
-      process.stderr.write(
-        `${error instanceof Error ? error.message : error}\n`,
-      );
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      process.stderr.write(`${errorMessage}\n`);
     }
   });
 }
