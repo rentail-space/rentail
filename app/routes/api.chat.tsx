@@ -1,7 +1,8 @@
 import type { AnthropicProviderOptions } from "@ai-sdk/anthropic";
+import { toAISdkFormat } from "@mastra/ai-sdk";
 import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
-import { stepCountIs, type UIMessage } from "ai";
+import { createUIMessageStreamResponse, stepCountIs, type UIMessage } from "ai";
 import debug from "debug";
 import { invariant } from "es-toolkit";
 import humanFormat from "human-format";
@@ -57,9 +58,8 @@ export async function action({ request }: Route.ActionArgs) {
     role: message.role,
   }));
 
-  const result = await agent.stream(initialMessages, {
+  const stream = await agent.stream(initialMessages, {
     abortSignal,
-    format: "aisdk",
     memory: {
       resource: chat.user.id,
       thread: chat.id,
@@ -70,17 +70,21 @@ export async function action({ request }: Route.ActionArgs) {
     requireToolApproval: false,
     system: `${general}\n\n=====\n\n${propertiesToMarkdown({ properties, maxDistance: 20 })}`,
 
+    onAbort: async () => {
+      debug("chat")("Aborted by user");
+      await cleanup();
+    },
+
+    onError: (error) => {
+      captureException(error, { extra: { chat } });
+    },
+
     onFinish: async ({ steps, usage }) => {
       debug("chat")(
         "steps %d => total tokens %s",
         steps.length,
         humanFormat(usage.totalTokens ?? 0),
       );
-      await cleanup();
-    },
-
-    onAbort: async () => {
-      debug("chat")("Aborted by user");
       await cleanup();
     },
 
@@ -97,47 +101,13 @@ export async function action({ request }: Route.ActionArgs) {
 
   // Consume the stream to ensure it runs to completion & triggers onFinish even
   // when the client response is aborted:
-  result.consumeStream(); // no await
+  stream.consumeStream(); // no await
 
-  // Stream the response to the client,  saving the last message(s) from the
-  // assistant.
-  return result.toUIMessageStreamResponse({
-    /*
-    async consumeSseStream({ stream }) {
-      const activeStreamId = ulid();
-      // Create a resumable stream from the SSE stream
-      const streamContext = createResumableStreamContext({
-        // NOTE: use separate instances for publisher and subscriber
-        publisher: new Redis(env.REDIS_URL),
-        subscriber: new Redis(env.REDIS_URL),
-        waitUntil: null,
-      });
-      await streamContext.createNewResumableStream(
-        activeStreamId,
-        () => stream,
-      );
-      await updateChat({ chat, activeStreamId });
-    },
-    */
+  // Convert Mastra stream to AI SDK format
+  const aiStream = toAISdkFormat(stream, { from: "agent" });
 
-    generateMessageId: () => ulid(),
-
-    onError: (error) => {
-      captureException(error, { extra: { chat } });
-      return JSON.stringify(error);
-    },
-
-    onFinish: async ({ messages, isAborted }) => {
-      debug("chat")(
-        "Finished: messages=%d isAborted=%s",
-        messages.length,
-        isAborted,
-      );
-    },
-
-    sendReasoning: false,
-    headers,
-  });
+  // Return the UI message stream response
+  return createUIMessageStreamResponse({ headers, stream: aiStream });
 }
 
 function propertiesToMarkdown({
