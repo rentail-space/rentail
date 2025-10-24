@@ -21,10 +21,14 @@ import type { Route } from "./+types/api.chat";
 
 export async function action({ request }: Route.ActionArgs) {
   const { chat, headers } = await getUserChat(request.headers);
-  const { userMessage } = (await request.json()) as { userMessage: UIMessage };
+  const { message, chatId } = (await request.json()) as {
+    chatId: string;
+    message: UIMessage;
+  };
+  invariant(chat.id === chatId, "Chat ID is incorrect");
 
   // Set up Redis stop monitoring
-  const { abortSignal, cleanup } = await monitorStopSignal(chat.id);
+  const { abortSignal, cleanup } = await monitorStopSignal(chatId);
   const properties = await findNearbyProperties({ chat, maxDistance: 20 });
 
   const agent = mastra.getAgentById("main");
@@ -36,11 +40,11 @@ export async function action({ request }: Route.ActionArgs) {
         id: ulid(),
         role: "user",
         createdAt: new Date(),
-        threadId: chat.id,
+        threadId: chatId,
         resourceId: chat.user.id,
         type: "text",
         content: {
-          parts: userMessage.parts.map((part) => ({
+          parts: message.parts.map((part) => ({
             text: part.type === "text" ? part.text : "",
             type: "text",
           })),

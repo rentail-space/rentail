@@ -6,7 +6,7 @@ import { last } from "es-toolkit";
 import { useQueryState } from "nuqs";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
-import { useLoaderData, useRouteLoaderData } from "react-router";
+import { useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import Header from "~/components/layout/Header";
@@ -23,58 +23,64 @@ export const handle = { hideLayout: true };
 
 export async function loader({ request }: Route.LoaderArgs) {
   const session = await authServer.api.getSession({ headers: request.headers });
-  // Query existing chat (don't create)
-  const chat =
-    session &&
-    (await prisma.chat.findFirst({
+  if (session) {
+    // Query existing chat (don't create)
+    const chat = await prisma.chat.findFirst({
       where: { userId: session.user.id },
       orderBy: { updatedAt: "desc" },
       include: { user: true },
-    }));
-  const properties = chat
-    ? await findNearbyProperties({ chat, maxDistance: 20 })
-    : [];
-  return { properties };
+    });
+    if (chat) {
+      const properties = await findNearbyProperties({ chat, maxDistance: 20 });
+      return { properties };
+    }
+  }
 }
 
-export default function Chat() {
+export default function Chat({
+  loaderData,
+}: {
+  loaderData: Awaited<ReturnType<typeof loader>>;
+}) {
   const [query, setQuery] = useQueryState("q");
 
-  // Access data from root loader
-  const data = useRouteLoaderData<{
+  // Access data from root loader first, our loaded depends on it
+  const { chat, messages: initialMessages } = useRouteLoaderData("root") as {
     chat: ChatGetPayload<{ include: { user: true } }>;
     messages: MastraMessageV2[];
-  }>("root");
-  const chat = data?.chat;
-  const initialMessages = data?.messages;
-
-  const { properties } = useLoaderData<typeof loader>();
+  };
+  const properties = loaderData?.properties ?? [];
 
   const { error, messages, sendMessage, status, stop } = useChat<
     UIMessage<{ isAborted?: boolean }, { text: string }, UITools>
   >({
-    id: chat?.id,
-    messages:
-      initialMessages?.map((message) => ({
-        id: message.id,
-        parts: message.content.parts.map((part) => ({
-          text: "text" in part ? part.text : "",
-          type: part.type as "text" | "reasoning",
-        })),
-        role: message.role,
-      })) ?? [],
-    onError: (error) => {
-      console.error("Chat error:", error);
-      captureException(error, { extra: { chat } });
-    },
+    id: chat.id,
+    messages: initialMessages.map((message) => ({
+      id: message.id,
+      parts: message.content.parts.map((part) => ({
+        text: "text" in part ? part.text : "",
+        type: part.type as "text" | "reasoning",
+      })),
+      role: message.role,
+    })),
     resume: false, // Enable automatic stream resumption
     transport: new DefaultChatTransport({
       api: "/api/chat",
       // only send the last message to the server:
       prepareSendMessagesRequest({ messages }) {
-        return { body: { userMessage: last(messages) } };
+        return {
+          body: {
+            chatId: chat.id,
+            message: last(messages) as UIMessage,
+          },
+        };
       },
     }),
+
+    onError: (error) => {
+      console.error("Chat error:", error);
+      captureException(error, { extra: { chat } });
+    },
   });
   const inputRef = useRef<HTMLInputElement>(null);
 
