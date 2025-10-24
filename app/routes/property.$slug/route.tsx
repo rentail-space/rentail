@@ -17,8 +17,8 @@ export async function loader({ params }: Route.LoaderArgs) {
 export default function Property() {
   const property = useLoaderData<typeof loader>();
   return (
-    <div className="mx-auto max-w-xl flex flex-col gap-4">
-      <h1 className="text-4xl font-bold">
+    <div className="mx-auto flex max-w-xl flex-col gap-4">
+      <h1 className="font-bold text-4xl">
         {property.website ? (
           <Link to={property.website} target="_blank" rel="noopener noreferrer">
             {property.name}
@@ -35,12 +35,12 @@ export default function Property() {
           )}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-800 flex flex-row items-center gap-2"
+          className="flex flex-row items-center gap-2 text-blue-600 hover:text-blue-800"
         >
           <span>
             {property.address}, {property.city}, {property.state}
           </span>
-          <IconExternalLink className="w-4 h-4" />
+          <IconExternalLink className="h-4 w-4" />
         </Link>
       </section>
 
@@ -67,8 +67,8 @@ export default function Property() {
 
 function Space({ space }: { space: PropertySpace }) {
   return (
-    <div className="border border-gray-300 rounded-lg p-4">
-      <h2 className="text-xl font-bold">{space.name}</h2>
+    <div className="rounded-lg border border-gray-300 p-4">
+      <h2 className="font-bold text-xl">{space.name}</h2>
       <div className="prose prose-lg">
         <Markdown>{space.details}</Markdown>
       </div>
@@ -109,10 +109,10 @@ function Metric({
   unit?: string;
 }) {
   return (
-    <p className="flex flex-col gap-2 justify-center items-center">
-      <span className="text-sm text-gray-500">{label}</span>
+    <p className="flex flex-col items-center justify-center gap-2">
+      <span className="text-gray-500 text-sm">{label}</span>
       <span className="font-bold text-2xl">{value}</span>
-      <span className="text-sm text-gray-500">{unit || " . "}</span>
+      <span className="text-gray-500 text-sm">{unit || " . "}</span>
     </p>
   );
 }

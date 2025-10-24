@@ -47,7 +47,7 @@ export default function InputForm({
           type="text"
           value={query}
         />
-        <div className="absolute right-2 top-1/2 -translate-y-1/2 transform flex gap-2">
+        <div className="-translate-y-1/2 absolute top-1/2 right-2 flex transform gap-2">
           {isResponding && (
             <button
               aria-label="Stop generation"
@@ -55,19 +55,19 @@ export default function InputForm({
               onClick={() => stopLLM(scrollToBottom)}
               type="button"
             >
-              <IconCircleCloseFill className="text-red-500 hover:text-red-600 w-10 h-10" />
+              <IconCircleCloseFill className="h-10 w-10 text-red-500 hover:text-red-600" />
             </button>
           )}
           <button
             aria-label="Send message"
-            className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-indigo-500 transition-all duration-200 hover:scale-105 hover:bg-indigo-600 active:scale-95 active:scale-[0.6] active:duration-75 disabled:bg-gray-300 disabled:cursor-not-allowed"
+            className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-indigo-500 transition-all duration-200 hover:scale-105 hover:bg-indigo-600 active:scale-95 active:scale-[0.6] active:duration-75 disabled:cursor-not-allowed disabled:bg-gray-300"
             disabled={isSubmitting}
             type="submit"
           >
             {isSubmitting ? (
-              <IconSend className="animate-spin w-6 h-6" />
+              <IconSend className="h-6 w-6 animate-spin" />
             ) : (
-              <IconSend className="text-white w-6 h-6" />
+              <IconSend className="h-6 w-6 text-white" />
             )}
           </button>
         </div>

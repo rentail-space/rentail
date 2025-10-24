@@ -58,7 +58,7 @@ function SignInButton() {
       onClick={() => {
         window.location.href = "/auth";
       }}
-      className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+      className="rounded-md px-3 py-1.5 font-medium text-gray-700 text-sm transition-colors hover:bg-blue-50 hover:text-blue-600"
     >
       Sign In
     </button>
@@ -94,7 +94,7 @@ function DropdownMenu({
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+        className="flex items-center gap-2 rounded-md px-3 py-1.5 font-medium text-gray-700 text-sm transition-colors hover:bg-blue-50 hover:text-blue-600"
         onClick={() => setIsOpen(!isOpen)}
         type="button"
       >
@@ -103,28 +103,28 @@ function DropdownMenu({
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 py-1 z-50">
-          <div className="px-4 py-2 border-b border-gray-200">
-            <p className="text-sm font-medium text-gray-900">
+        <div className="absolute right-0 z-50 mt-2 w-48 rounded-md border border-gray-200 bg-white py-1 shadow-lg">
+          <div className="border-gray-200 border-b px-4 py-2">
+            <p className="font-medium text-gray-900 text-sm">
               {chat.user.name}
             </p>
-            <p className="text-xs text-gray-500 truncate">{chat.user.email}</p>
+            <p className="truncate text-gray-500 text-xs">{chat.user.email}</p>
           </div>
 
           <Link
             to="/profile"
-            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+            className="block w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
           >
-            <IconUser className="w-4 h-4 inline-block mr-2" />
+            <IconUser className="mr-2 inline-block h-4 w-4" />
             Profile Settings
           </Link>
 
           <a
-            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+            className="block w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
             download
             href={`/api/chat/${chat.id}/export/csv`}
           >
-            <IconDownload className="w-4 h-4 inline-block mr-2" />
+            <IconDownload className="mr-2 inline-block h-4 w-4" />
             CSV Export
           </a>
 
@@ -134,7 +134,7 @@ function DropdownMenu({
               await authClient.signOut();
               window.location.href = "/";
             }}
-            className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+            className="w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
           >
             Sign Out
           </button>

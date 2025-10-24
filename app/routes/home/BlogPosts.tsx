@@ -24,7 +24,7 @@ export default function BlogPosts({
     <section className="blog-posts-section flex flex-col gap-y-2">
       {first.map((post) => (
         <Link
-          className="link link-hover flex flex-row gap-4 line-clamp-2"
+          className="link link-hover line-clamp-2 flex flex-row gap-4"
           key={post.slug}
           to={`/blog/${post.slug}`}
         >
@@ -41,7 +41,7 @@ export default function BlogPosts({
           )}
           <div>
             <h4>{post.attributes.title}</h4>
-            <p className="text-gray-500 line-clamp-3">{removeMd(post.body)}</p>
+            <p className="line-clamp-3 text-gray-500">{removeMd(post.body)}</p>
           </div>
         </Link>
       ))}
@@ -52,8 +52,8 @@ export default function BlogPosts({
           key={post.slug}
           to={`/blog/${post.slug}`}
         >
-          <h5 className="flex flex-row items-center flex-nowrap gap-2">
-            <IconChevronRight className="w-4 h-4 inline-block mr-2" />
+          <h5 className="flex flex-row flex-nowrap items-center gap-2">
+            <IconChevronRight className="mr-2 inline-block h-4 w-4" />
             <span>{post.attributes.title}</span>
           </h5>
         </Link>

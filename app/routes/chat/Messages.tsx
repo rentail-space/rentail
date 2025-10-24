@@ -47,8 +47,8 @@ export default function Messages({
   const uniqueMessages = uniqBy(messages, (message) => message.id);
 
   return (
-    <div className="flex-1 flex flex-col">
-      <div className="mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto p-6 scroll-smooth scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+    <div className="flex flex-1 flex-col">
+      <div className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto scroll-smooth p-6">
         {uniqueMessages.map((message, index, messages) =>
           message.metadata?.isAborted ? (
             <AbortedMessage key={message.id} />
@@ -158,14 +158,14 @@ function ReasoningMessage({ text, isLast }: { text: string; isLast: boolean }) {
 
   return (
     <details
-      className="prose prose-base bg-gray-50 rounded-lg p-3 mb-2 hover:bg-gray-200"
+      className="prose prose-base mb-2 rounded-lg bg-gray-50 p-3 hover:bg-gray-200"
       onToggle={(event) => setIsExpanded(event.currentTarget.open)}
       open={isExpanded}
     >
-      <summary className="text-gray-600 font-medium cursor-pointer w-full mb-4">
+      <summary className="mb-4 w-full cursor-pointer font-medium text-gray-600">
         {isThinking ? (
-          <span className="flex-row items-center gap-2 flex-nowrap pl-2">
-            <IconCircle className="animate-spin w-4 h-4 inline-block mr-2" />
+          <span className="flex-row flex-nowrap items-center gap-2 pl-2">
+            <IconCircle className="mr-2 inline-block h-4 w-4 animate-spin" />
             <span>Thinking…</span>
           </span>
         ) : isExpanded ? (

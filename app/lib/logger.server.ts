@@ -1,6 +1,6 @@
+import { format, styleText } from "node:util";
 import { Logtail } from "@logtail/node";
 import type { ILogLevel } from "@logtail/types";
-import { format, styleText } from "node:util";
 import env from "~/lib/env";
 
 const logtail = env.LOGTAIL_TOKEN

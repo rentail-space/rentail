@@ -1,7 +1,7 @@
-import debug from "debug";
-import { invariant } from "es-toolkit";
 import { type ChildProcess, execSync, fork } from "node:child_process";
 import { resolve } from "node:path";
+import debug from "debug";
+import { invariant } from "es-toolkit";
 import { afterAll } from "vitest";
 import "~/test/helpers/toMatchScreenshot";
 

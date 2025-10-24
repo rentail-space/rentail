@@ -105,11 +105,11 @@ export default function App({
 export function HydrateFallback() {
   return (
     <Layout>
-      <main className="prose prose-lg mx-auto flex flex-col gap-4 items-center justify-center">
+      <main className="prose prose-lg mx-auto flex flex-col items-center justify-center gap-4">
         <div className="flex flex-col items-center justify-center">
-          <div className="animate-spin h-12 w-12 border-4 border-blue-600 rounded-full border-t-transparent" />
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
         </div>
-        <p className="text-sm text-gray-500">Loading, please wait...</p>
+        <p className="text-gray-500 text-sm">Loading, please wait...</p>
       </main>
     </Layout>
   );
@@ -122,15 +122,15 @@ export function ErrorBoundary() {
     <Layout>
       <main className="prose prose-lg mx-auto py-32">
         {isRouteErrorResponse(error) ? (
-          <h1 className="flex flex-row gap-2 text-4xl mx-auto justify-center">
-            <span className="text-red-500 font-bold">{error.status}</span>
+          <h1 className="mx-auto flex flex-row justify-center gap-2 text-4xl">
+            <span className="font-bold text-red-500">{error.status}</span>
             <span className="text-gray-500">
               {error.statusText || error.data}
             </span>
           </h1>
         ) : (
-          <h1 className="flex flex-row gap-2 text-4xl mx-auto justify-center">
-            <span className="text-red-500 font-bold">500</span>
+          <h1 className="mx-auto flex flex-row justify-center gap-2 text-4xl">
+            <span className="font-bold text-red-500">500</span>
             <span className="text-gray-500">Unknown error</span>
           </h1>
         )}

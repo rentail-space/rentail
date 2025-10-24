@@ -27,18 +27,18 @@ function ProfileTabs({ user }: { user: { name: string; email: string } }) {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
         <div className="rounded-lg bg-white p-8 shadow-lg">
-          <h1 className="mb-2 text-3xl font-bold text-gray-900">
+          <h1 className="mb-2 font-bold text-3xl text-gray-900">
             Profile Settings
           </h1>
           <p className="mb-8 text-gray-600">Manage your account information</p>
 
           {/* Tabs */}
-          <div className="mb-6 border-b border-gray-200">
+          <div className="mb-6 border-gray-200 border-b">
             <nav className="-mb-px flex space-x-8">
               <button
                 type="button"
                 onClick={() => setActiveTab("name")}
-                className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium ${
+                className={`whitespace-nowrap border-b-2 px-1 py-4 font-medium text-sm ${
                   activeTab === "name"
                     ? "border-indigo-500 text-indigo-600"
                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
@@ -49,7 +49,7 @@ function ProfileTabs({ user }: { user: { name: string; email: string } }) {
               <button
                 type="button"
                 onClick={() => setActiveTab("email")}
-                className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium ${
+                className={`whitespace-nowrap border-b-2 px-1 py-4 font-medium text-sm ${
                   activeTab === "email"
                     ? "border-indigo-500 text-indigo-600"
                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
@@ -60,7 +60,7 @@ function ProfileTabs({ user }: { user: { name: string; email: string } }) {
               <button
                 type="button"
                 onClick={() => setActiveTab("password")}
-                className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium ${
+                className={`whitespace-nowrap border-b-2 px-1 py-4 font-medium text-sm ${
                   activeTab === "password"
                     ? "border-indigo-500 text-indigo-600"
                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
@@ -120,7 +120,7 @@ function NameForm({ user }: { user: { name: string; email: string } }) {
       <div>
         <label
           htmlFor={nameId}
-          className="block text-sm font-medium text-gray-700"
+          className="block font-medium text-gray-700 text-sm"
         >
           Full Name
         </label>
@@ -137,13 +137,13 @@ function NameForm({ user }: { user: { name: string; email: string } }) {
 
       {error && (
         <div className="rounded-lg bg-red-50 p-4">
-          <p className="text-sm text-red-800">{error}</p>
+          <p className="text-red-800 text-sm">{error}</p>
         </div>
       )}
 
       {success && (
         <div className="rounded-lg bg-green-50 p-4">
-          <p className="text-sm text-green-800">{success}</p>
+          <p className="text-green-800 text-sm">{success}</p>
         </div>
       )}
 
@@ -213,7 +213,7 @@ function EmailForm({ user }: { user: { name: string; email: string } }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="rounded-lg bg-blue-50 p-4">
-        <p className="text-sm text-blue-800">
+        <p className="text-blue-800 text-sm">
           <strong>Current email:</strong> {user.email}
         </p>
       </div>
@@ -230,7 +230,7 @@ function EmailForm({ user }: { user: { name: string; email: string } }) {
       <div>
         <label
           htmlFor={emailId}
-          className="block text-sm font-medium text-gray-700"
+          className="block font-medium text-gray-700 text-sm"
         >
           New Email Address
         </label>
@@ -243,20 +243,20 @@ function EmailForm({ user }: { user: { name: string; email: string } }) {
           className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           placeholder="you@example.com"
         />
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-gray-500 text-sm">
           You'll need to verify your new email before you can use it to sign in.
         </p>
       </div>
 
       {error && (
         <div className="rounded-lg bg-red-50 p-4">
-          <p className="text-sm text-red-800">{error}</p>
+          <p className="text-red-800 text-sm">{error}</p>
         </div>
       )}
 
       {success && (
         <div className="rounded-lg bg-green-50 p-4">
-          <p className="text-sm text-green-800">{success}</p>
+          <p className="text-green-800 text-sm">{success}</p>
         </div>
       )}
 
@@ -333,7 +333,7 @@ function PasswordForm() {
       <div>
         <label
           htmlFor={currentPasswordId}
-          className="block text-sm font-medium text-gray-700"
+          className="block font-medium text-gray-700 text-sm"
         >
           Current Password
         </label>
@@ -351,7 +351,7 @@ function PasswordForm() {
       <div>
         <label
           htmlFor={newPasswordId}
-          className="block text-sm font-medium text-gray-700"
+          className="block font-medium text-gray-700 text-sm"
         >
           New Password
         </label>
@@ -365,7 +365,7 @@ function PasswordForm() {
           className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           placeholder="••••••••"
         />
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-gray-500 text-sm">
           Must be at least 8 characters
         </p>
       </div>
@@ -373,7 +373,7 @@ function PasswordForm() {
       <div>
         <label
           htmlFor={confirmPasswordId}
-          className="block text-sm font-medium text-gray-700"
+          className="block font-medium text-gray-700 text-sm"
         >
           Confirm New Password
         </label>
@@ -391,13 +391,13 @@ function PasswordForm() {
 
       {error && (
         <div className="rounded-lg bg-red-50 p-4">
-          <p className="text-sm text-red-800">{error}</p>
+          <p className="text-red-800 text-sm">{error}</p>
         </div>
       )}
 
       {success && (
         <div className="rounded-lg bg-green-50 p-4">
-          <p className="text-sm text-green-800">{success}</p>
+          <p className="text-green-800 text-sm">{success}</p>
         </div>
       )}
 

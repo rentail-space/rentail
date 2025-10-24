@@ -85,7 +85,7 @@ export default function AuthPage() {
       <div className="w-full max-w-md">
         <div className="rounded-2xl bg-white p-8 shadow-xl">
           <header className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="font-bold text-3xl text-gray-900">
               {isSignUp ? "Create Account" : "Welcome Back"}
             </h1>
             <p className="mt-2 text-gray-600">
@@ -100,7 +100,7 @@ export default function AuthPage() {
               <div>
                 <label
                   htmlFor={nameId}
-                  className="block text-sm font-medium text-gray-700"
+                  className="block font-medium text-gray-700 text-sm"
                 >
                   Full Name
                 </label>
@@ -118,7 +118,7 @@ export default function AuthPage() {
             <div>
               <label
                 htmlFor={emailId}
-                className="block text-sm font-medium text-gray-700"
+                className="block font-medium text-gray-700 text-sm"
               >
                 Email Address
               </label>
@@ -135,7 +135,7 @@ export default function AuthPage() {
             <div>
               <label
                 htmlFor={passwordId}
-                className="block text-sm font-medium text-gray-700"
+                className="block font-medium text-gray-700 text-sm"
               >
                 Password
               </label>
@@ -149,7 +149,7 @@ export default function AuthPage() {
                 placeholder="••••••••"
               />
               {isSignUp && (
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-gray-500 text-sm">
                   Must be at least 8 characters
                 </p>
               )}
@@ -157,7 +157,7 @@ export default function AuthPage() {
 
             {error && (
               <div className="rounded-lg bg-red-50 p-4">
-                <p className="text-sm text-red-800">{error}</p>
+                <p className="text-red-800 text-sm">{error}</p>
               </div>
             )}
 
@@ -180,7 +180,7 @@ export default function AuthPage() {
 
           <div className="mt-6 text-center">
             <button
-              className="text-sm text-indigo-600 hover:text-indigo-700 hover:underline"
+              className="text-indigo-600 text-sm hover:text-indigo-700 hover:underline"
               onClick={() => {
                 setError(null);
                 setIsSignUp((isSignUp) => !isSignUp);
@@ -194,7 +194,7 @@ export default function AuthPage() {
           </div>
         </div>
 
-        <p className="mt-8 text-center text-sm text-gray-600">
+        <p className="mt-8 text-center text-gray-600 text-sm">
           By {isSignUp ? "signing up" : "signing in"}, you agree to our{" "}
           <a href="/terms" className="text-indigo-600 hover:underline">
             Terms of Service

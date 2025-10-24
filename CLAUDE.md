@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Build: `npm run build` (prisma generate + react-router build for production)
 - Start: `npm run start` (starts production server)
 - Type check: `npm run typecheck` (includes react-router typegen)
-- Test: `npm run test` (clears Vite cache + lint + db push + prisma generate + typecheck + vitest with verbose reporter)
+- Test: `npm run test` (clears Vite cache + lint + db push + typecheck + vitest with verbose reporter)
 - Lint: `npm run lint` (secretlint + Biome linter)
 - Format: `pnpm run format --write` (Biome formatter)
 - Check: `npm run check` (runs both lint and typecheck)
@@ -48,11 +48,16 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 **AI Integration:**
 - Claude 4 via Anthropic AI SDK with streaming responses and thinking tokens
 - Mastra framework for agent orchestration and memory management (PostgreSQL-backed)
-- Chat API endpoint: `app/routes/api.chat.tsx` (streaming chat interface with Redis coordination)
+- **Streaming Architecture:**
+  - Chat API endpoint: `app/routes/api.chat.tsx` uses `@mastra/ai-sdk` package for stream conversion
+  - Convert Mastra streams to AI SDK format: `toAISdkFormat(result, { from: "agent" })`
+  - NEVER use deprecated `format: "aisdk"` option in `agent.stream()` - use `@mastra/ai-sdk` instead
+  - Client uses AI SDK's `useChat` hook with custom transport that sends `chatId` and `message`
+  - Server validates `chatId` matches the session's chat ID for security
 - Redis-based stream management: `app/lib/redis-stop-monitor.ts` (cross-server stop signals)
 - Stop endpoints: `app/routes/api.chat.$id.stop.tsx` for manual chat termination
 - AI library configuration: `app/lib/env.ts` (environment-based settings)
-- System prompts in `app/lib/`: `general.md`, `prelude.md`, `spaces.md`, `welcome.md`
+- System prompts in `app/prompts/`: `general.md`, `welcome.md`
 - Geolocation filtering: Simple bounding box calculation for shopping centers within radius
 - Use Context7 MCP server for library documentation and code examples
 - When requesting code examples, setup/configuration steps, or library/API documentation, use Context7 tool
@@ -63,7 +68,12 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - Working memory updated automatically by AI during conversations
 - Location initialized from IP geolocation on first visit via Vercel headers (x-vercel-ip-*)
 - Latitude/longitude stored as numbers (not strings) for direct numeric calculations
-- Custom Mastra storage adapter (`PrismaStorage`) stores threads/messages in existing Chat/Message tables
+- **Custom Mastra Storage Adapter (`PrismaStorage`):**
+  - Stores Mastra threads/messages in existing Chat/Message Prisma tables
+  - MUST use `format: "v2"` for all operations (v1 format is not supported)
+  - All messages require `threadId` (chat ID) and `resourceId` (user ID)
+  - When saving messages, use: `saveMessages({ chat, messages })` with chat object
+  - Storage adapter automatically populates `resourceId` from chat's user when converting to v2 format
 - Profile persists across sessions and survives anonymous→authenticated user migration
 - Access via `getWorkingMemory(chat)` and `updateWorkingMemory(chat, fn)`
 
@@ -132,7 +142,12 @@ Routes are configured in `/app/routes.ts` using React Router v7's declarative ro
 - Root loader returns `{ chat, messages }` for authenticated users
 - Header and Chat components use this pattern instead of client-side hooks
 - Benefits: eliminates loading states, prevents hydration mismatches, faster initial render
-- InputForm receives `sendMessage` directly (not wrapped in callback) for clearer data flow
+- **Chat Route Loader Pattern:**
+  - Chat route loader depends on root loader data (must be accessed first)
+  - Route loader may return `undefined` if user is not authenticated
+  - Chat component receives `loaderData` as prop with type `Awaited<ReturnType<typeof loader>>`
+  - Always destructure root data before accessing route loader data: `const { chat, messages } = useRouteLoaderData("root")`
+  - Client passes `chatId` explicitly in transport to prevent session mismatches
 
 ## Code Style
 

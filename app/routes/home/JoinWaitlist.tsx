@@ -37,7 +37,7 @@ export default function JoinWaitlist() {
           </label>
           <input
             autoComplete="email"
-            className="text-accent-500 block h-10 w-full focus:invalid:border-red-400 focus:invalid:text-red-500 focus:invalid:ring-red-500 appearance-none rounded-lg border-2 border-slate-300 px-4 py-2 placeholder-zinc-400 duration-200 focus:outline-none focus:ring-zinc-300"
+            className="block h-10 w-full appearance-none rounded-lg border-2 border-slate-300 px-4 py-2 text-accent-500 placeholder-zinc-400 duration-200 focus:outline-none focus:ring-zinc-300 focus:invalid:border-red-400 focus:invalid:text-red-500 focus:invalid:ring-red-500"
             id={id}
             name="email"
             onChange={(event) => setEmail(event.target.value)}
@@ -49,7 +49,7 @@ export default function JoinWaitlist() {
           />
           <button
             disabled={isActive}
-            className="flex h-10 shrink-0 items-center justify-center gap-1 rounded-lg  bg-blue-600 active:bg-gray-400 px-4 py-2 font-semibold text-white transition-all hover:bg-blue-700"
+            className="flex h-10 shrink-0 items-center justify-center gap-1 rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white transition-all hover:bg-blue-700 active:bg-gray-400"
             type="submit"
           >
             <span>Join the waitlist</span>
@@ -58,7 +58,7 @@ export default function JoinWaitlist() {
       </form>
 
       <div className="flex items-start gap-2 text-gray-500 text-sm">
-        <IconCircleInfoFill className="w-4 h-4 inline-block" />
+        <IconCircleInfoFill className="inline-block h-4 w-4" />
         <p className="-mt-1 max-w-sm">
           No worries! your data is completely safe and will only be utilized to
           provide you with updates about our product.

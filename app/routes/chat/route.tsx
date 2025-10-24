@@ -104,7 +104,7 @@ export default function Chat({
 
   return (
     <StickToBottom initial="smooth" resize="smooth">
-      <div className="flex h-screen flex-col inset-0">
+      <div className="inset-0 flex h-screen flex-col">
         <Header />
 
         <StickToBottom.Content>

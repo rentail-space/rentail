@@ -36,7 +36,7 @@ export default function Home({
     <>
       <main className="mb-20 flex min-h-screen flex-col gap-y-20">
         <HeroSection howItWorksId={howItWorksId} />
-        <section className="prose prose-lg md:min-w-4xl md:mx-auto flex flex-col gap-y-10 mx-2">
+        <section className="prose prose-lg mx-2 flex flex-col gap-y-10 md:mx-auto md:min-w-4xl">
           <JoinWaitlist />
           <FeaturesSection />
           <HowItWorksSection howItWorksId={howItWorksId} />
@@ -52,7 +52,6 @@ export default function Home({
 
 function HubSpotScript() {
   return (
-    // biome-ignore lint/correctness/useUniqueElementIds: per HubSpot example
     <script
       async
       defer

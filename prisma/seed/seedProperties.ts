@@ -1,7 +1,7 @@
-import prisma from "app/lib/prisma";
-import debug from "debug";
 import { readdir, readFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
+import prisma from "app/lib/prisma";
+import debug from "debug";
 import { z } from "zod";
 
 export default async function seedProperties() {

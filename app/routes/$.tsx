@@ -5,9 +5,9 @@ export async function loader() {
 export default function NotFoundPage() {
   return (
     <main className="prose prose-lg mx-auto py-32">
-      <h1 className="flex flex-row gap-2 text-4xl mx-auto justify-center ">
-        <span className="text-red-500 font-bold">404</span>
-        <span className="text-gray-500">Not found</span>
+      <h1 className="mx-auto flex flex-row items-center justify-center gap-2 text-4xl">
+        <span className="font-bold text-red-500">404</span>
+        <span className="text-center text-gray-500">Not found</span>
       </h1>
     </main>
   );
