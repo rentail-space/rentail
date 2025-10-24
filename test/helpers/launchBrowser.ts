@@ -1,7 +1,7 @@
+import debug from "debug";
 import { readdir, watch } from "node:fs/promises";
 import { resolve } from "node:path";
 import { URL as URLString } from "node:url";
-import debug from "debug";
 import {
   type BrowserContext,
   chromium,
@@ -81,7 +81,7 @@ async function hasEnoughDependencies(dirname: string) {
 export async function launchBrowser(): Promise<BrowserContext> {
   if (context) return context;
 
-  const headless = process.env.CI ? true : !debug("browser").enabled;
+  const headless = process.env.CI ? true : !debug.enabled("browser");
   context = await chromium.launchPersistentContext("test/context", {
     baseURL: `http://localhost:${port}`,
     headless,

@@ -31,7 +31,7 @@ export default new Mastra({
   agents: { agent },
   idGenerator: () => ulid(),
   logger: new ConsoleLogger({
-    level: debug("agent").enabled ? "debug" : "info",
+    level: debug.enabled("mastra") ? "debug" : "info",
   }),
   telemetry: { enabled: false },
 });

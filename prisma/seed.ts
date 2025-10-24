@@ -1,5 +1,5 @@
-import prisma from "app/lib/prisma";
 import "app/lib/logger.server";
+import prisma from "app/lib/prisma";
 import debug from "debug";
 import seedProperties from "./seed/seedProperties";
 

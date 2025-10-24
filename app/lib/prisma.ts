@@ -6,5 +6,5 @@ import env from "~/lib/env";
 export default new PrismaClient({
   adapter: new PrismaPg({ connectionString: env.DATABASE_URL }),
   errorFormat: "pretty",
-  log: debug("prisma").enabled ? ["error", "warn", "query", "info"] : ["error"],
+  log: debug.enabled("prisma") ? ["error", "warn", "query", "info"] : ["error"],
 });

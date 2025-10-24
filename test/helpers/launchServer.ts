@@ -1,7 +1,7 @@
-import { type ChildProcess, execSync, fork } from "node:child_process";
-import { resolve } from "node:path";
 import debug from "debug";
 import { invariant } from "es-toolkit";
+import { type ChildProcess, execSync, fork } from "node:child_process";
+import { resolve } from "node:path";
 import { afterAll } from "vitest";
 import "~/test/helpers/toMatchScreenshot";
 
@@ -27,7 +27,7 @@ export async function launchServer(): Promise<void> {
   // instance, which could cause issues with some libraries (eg Prisma)
   worker = fork(resolve("test/helpers/serverWorker.ts"), {
     execArgv: ["--import", "tsx/esm"],
-    stdio: debug("server").enabled ? "inherit" : "pipe",
+    stdio: debug.enabled("server") ? "inherit" : "pipe",
     env: {
       ...process.env,
       NODE_ENV: "test",
