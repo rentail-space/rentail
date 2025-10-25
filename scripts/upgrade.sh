@@ -8,13 +8,12 @@ echo -e "\033[32m  Installing Playwright browsers …\033[0m"
 pnpx playwright install
 
 echo -e "\033[32m  Deduping dependencies …\033[0m"
-pnpm dedupe
-
-echo -e "\033[32m  Removing unused dependencies …\033[0m"
-pnpm prune
+pnpm dedupe --ignore-scripts
+pnpm prune --ignore-scripts
 
 echo -e "\033[32m  Security audit …\033[0m"
-pnpm audit --fix
+pnpm audit --prod --fix
+pnpm install
 git add package.json pnpm-lock.yaml
 
 echo -e "\033[32m  Running tests …\033[0m"
