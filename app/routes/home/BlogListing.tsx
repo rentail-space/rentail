@@ -1,30 +1,13 @@
-import dayjs from "dayjs";
-import { drop, take } from "es-toolkit";
-import type { FrontMatterResult } from "front-matter";
 import { IconChevronRight } from "obra-icons-react";
 import { Link } from "react-router";
-import removeMd from "remove-markdown";
+import type { BlogPost } from "~/lib/blogPosts.server";
 
-export default function BlogPosts({
-  posts,
-}: {
-  posts: (FrontMatterResult<{ title: string }> & {
-    slug: string;
-    published: Date;
-    alt?: string;
-    image?: string;
-  })[];
-}) {
-  const today = dayjs();
-  const isPublished = posts.filter((post) => today.isAfter(post.published));
-  const first = take(isPublished, 3);
-  const rest = drop(isPublished, 3);
-
+export default function BlogListing({ posts }: { posts: BlogPost[] }) {
   return (
     <section className="blog-posts-section flex flex-col gap-y-2">
-      {first.map((post) => (
+      {posts.slice(0, 3).map((post) => (
         <Link
-          className="link link-hover line-clamp-2 flex flex-row gap-4"
+          className="link link-hover line-clamp-2 flex flex-row gap-4 no-underline"
           key={post.slug}
           to={`/blog/${post.slug}`}
         >
@@ -40,21 +23,21 @@ export default function BlogPosts({
             <span />
           )}
           <div>
-            <h4>{post.attributes.title}</h4>
-            <p className="line-clamp-3 text-gray-500">{removeMd(post.body)}</p>
+            <h4>{post.title}</h4>
+            <p className="line-clamp-3 text-gray-500">{post.summary}</p>
           </div>
         </Link>
       ))}
 
-      {rest.map((post) => (
+      {posts.slice(3).map((post) => (
         <Link
-          className="link link-hover line-clamp-1"
+          className="link link-hover line-clamp-1 no-underline"
           key={post.slug}
           to={`/blog/${post.slug}`}
         >
           <h5 className="flex flex-row flex-nowrap items-center gap-2">
             <IconChevronRight className="mr-2 inline-block h-4 w-4" />
-            <span>{post.attributes.title}</span>
+            <span>{post.title}</span>
           </h5>
         </Link>
       ))}

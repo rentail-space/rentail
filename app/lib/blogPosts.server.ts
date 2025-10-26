@@ -1,32 +1,54 @@
-import { readdir, readFile } from "node:fs/promises";
-import path, { basename, join } from "node:path";
 import dayjs from "dayjs";
 import { invariant } from "es-toolkit";
 import fm from "front-matter";
 import { DateTime } from "luxon";
+import { readFileSync } from "node:fs";
+import { readdir, readFile } from "node:fs/promises";
+import path, { basename, join } from "node:path";
+import removeMd from "remove-markdown";
+import truncateWords from "./truncateWords";
 
 const dirname = path.resolve("./app/data/blog");
+
+export type BlogPost = {
+  alt?: string;
+  body: string;
+  image?: string;
+  published: Date;
+  slug: string;
+  summary: string;
+  title: string;
+};
 
 /**
  * Lists all blog posts that are published based on the published date in the
  * filename.
  *
- * @returns An array of blog post filenames, published date, and slug.
+ * @returns An array of blog posts.
  */
-export async function recentBlogPosts(): Promise<
-  {
-    filename: string;
-    published: Date;
-    slug: string;
-  }[]
-> {
+export async function recentBlogPosts(): Promise<BlogPost[]> {
   const filenames = await readdir(dirname);
   return filenames
     .filter((filename) => filename.endsWith(".md"))
     .map((filename) => {
       const published = getPublishedData(filename).toJSDate();
+      const content = readFileSync(join(dirname, filename), "utf8");
+      const { attributes, body } = fm<{
+        alt: string;
+        image: string;
+        summary: string;
+        title: string;
+      }>(content);
       const slug = basename(filename, ".md");
-      return { filename: join(dirname, filename), published, slug };
+      return {
+        alt: attributes.alt,
+        body,
+        image: attributes.image,
+        published,
+        slug,
+        summary: attributes.summary || truncateWords(removeMd(body), 20),
+        title: attributes.title,
+      };
     })
     .filter(({ published }) => dayjs().isAfter(published))
     .sort((a, b) => b.published.getTime() - a.published.getTime());
@@ -57,15 +79,7 @@ function getPublishedData(filename: string): DateTime {
  * @param slug The slug of the blog post.
  * @returns The blog post, published date, slug, filename, alt text, and title.
  */
-export async function loadBlogPost(slug?: string): Promise<{
-  alt?: string;
-  body: string;
-  filename: string;
-  image?: string;
-  published: Date;
-  slug: string;
-  title: string;
-}> {
+export async function loadBlogPost(slug?: string): Promise<BlogPost> {
   invariant(slug, "Slug is required");
   const filename = join(dirname, `${slug}.md`);
   const post = await readFile(filename, "utf8");
@@ -74,14 +88,13 @@ export async function loadBlogPost(slug?: string): Promise<{
     title: string;
     alt?: string;
     image?: string;
+    summary?: string;
   }>(post);
   return {
-    alt: attributes.alt,
+    ...attributes,
     body,
-    filename,
-    image: attributes.image ? `/blog/${attributes.image}` : undefined,
     published,
     slug,
-    title: attributes.title,
+    summary: attributes.summary || truncateWords(removeMd(body), 20),
   };
 }

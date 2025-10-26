@@ -1,6 +1,8 @@
 ---
 title: "The Type-A Trap: Why Speed Without Context Costs You Talent"
+image: "2025-07-30-fists.jpg"
 alt: "Diverse raised fists against neutral background, symbolizing team members voices needing to be heard and understood by leadership before quick judgments are made"
+summary: "Type-A leaders have a superpower: decisiveness. They see patterns fast, synthesize information quickly, and drive toward conclusions while others are still processing. This trait builds companies."
 ---
 
 > I'm a type-A personality and very driven. I come to conclusions quickly and tend to jump to the end of a conversation even quicker. have learned to slow down and listen more with an open mind to whomever I'm speaking with. Here was a major breakthrough: I needed to understand that the person I'm speaking with may have just gone through something very difficult, and that's what caused them to behave differently than their norm. Once I understand a situation, I now place myself in their shoes before determining next steps.
@@ -15,7 +17,8 @@ It also destroys relationships.
 
 Henry Penix recognized the double edge. His instinct to jump to the end of conversations—to skip the context and land on the solution—was alienating the very people he needed most. The speed that made him effective as an operator was making him ineffective as a leader.
 
-**The Cost of Snap Judgments**
+
+## The Cost of Snap Judgments
 
 When leaders operate purely on velocity, three breakdowns occur:
 
@@ -25,7 +28,8 @@ Second, talented people leave. High performers don't tolerate leaders who don't 
 
 Third, you create a culture of defensiveness. When people know you're making judgments before understanding context, they stop bringing problems forward. Information flow breaks down. You lose visibility into what's actually happening.
 
-**The Listening Reset**
+
+## The Listening Reset
 
 Henry's breakthrough wasn't about becoming less decisive. It was about front-loading context before making the decision.
 
@@ -35,7 +39,8 @@ Consider the operational difference. A usually reliable manager starts missing m
 
 Maybe they're dealing with a family emergency. Maybe role expectations shifted without clear communication. Maybe they're drowning in poorly delegated work from three different executives. Each scenario requires a completely different response.
 
-**Making the Shift**
+
+## Making the Shift
 
 Transitioning from snap judgments to open listening requires three practices:
 
@@ -45,7 +50,8 @@ Transitioning from snap judgments to open listening requires three practices:
 
 **Separate behavior from character.** One missed deadline isn't a character flaw. A pattern without context might be—but you won't know until you listen.
 
-**The Bottom Line**
+
+## The Bottom Line
 
 Speed matters. But speed without context creates expensive mistakes—lost talent, broken trust, and blind spots that compound over time.
 

@@ -1,6 +1,8 @@
 ---
 title: "The Hermit Leader Problem: Why Hunkering Down Kills Momentum"
+image: "2025-07-23-matches.jpg"
 alt: "Row of matches with one burnt match among unlit ones, representing leader burnout and withdrawal that extinguishes team momentum while others remain ready to ignite"
+summary: "Early-stage founders face relentless uncertainty. Missed sales target. Key employee quits. Product launch flops. The instinct is to hunker down—withdraw, overthink, wait for clarity before moving forward. It feels protective. It's actually poisonous."
 ---
 
 > Early on in my journey, every little setback would derail me. This often made me a hermit instead of a leader, discouraged my team, and limited all of our productivity. After a few years, I realized things were never as great or as bad as they seemed in the moment. A peer founder told me to take the 90-day trailing average of my sentiment as a more reliable snapshot of the business. So learned to execute excellently on what I can control, let go of what i can't, and trust the process from there.
@@ -13,7 +15,7 @@ Brad Savage learned what destroys more startups than bad products or market timi
 
 Early-stage founders face relentless uncertainty. Missed sales target. Key employee quits. Product launch flops. The instinct is to hunker down—withdraw, overthink, wait for clarity before moving forward. It feels protective. It's actually poisonous.
 
-**The Withdrawal Trap**
+## The Withdrawal Trap
 
 When leaders go dark after setbacks, three failures cascade:
 
@@ -25,13 +27,13 @@ The feedback loop breaks. Hunkering down means avoiding customers, investors, an
 
 Brad's early pattern was textbook: every setback triggered isolation. The hermit CEO, holed up analyzing what went wrong instead of leading through it. His team didn't need a strategist hiding in spreadsheets. They needed a leader executing forward.
 
-**The 90-Day Reset**
+## The 90-Day Reset
 
 Brad's breakthrough came from reframing volatility. A peer founder introduced him to the 90-day trailing average concept: instead of reacting to daily emotional swings, measure how you feel about the business over a rolling three-month window.
 
 This mental model changes everything. That brutal week where two deals fell through? Noise. The spike of euphoria from one viral post? Also noise. The actual trajectory reveals itself across quarters, not days.
 
-**Persistence as Execution**
+## Persistence as Execution
 
 The shift from hunkering down to persisting isn't about blind optimism. It's about operational discipline:
 
@@ -43,7 +45,7 @@ The shift from hunkering down to persisting isn't about blind optimism. It's abo
 
 Consider the practical difference. A customer churns. The hunkering response: spiral into analysis paralysis, question the entire business model, delay the next ten sales calls. The persisting response: understand what happened, adjust the pitch, make fifteen more calls by end of week.
 
-**The Leadership Mandate**
+## The Leadership Mandate
 
 Your team takes emotional cues from you. When you persist through setbacks with clear-eyed execution, you give them permission to do the same. When you hunker down, you signal defeat.
 

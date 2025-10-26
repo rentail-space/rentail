@@ -1,9 +1,7 @@
-import fs from "node:fs";
-import fm from "front-matter";
 import { useId } from "react";
 import Footer from "~/components/layout/Footer";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
-import BlogPosts from "~/routes/home/BlogPosts";
+import BlogListing from "~/routes/home/BlogListing";
 import FeaturesSection from "~/routes/home/FeaturesSection";
 import HeroSection from "~/routes/home/HeroSection";
 import HowItWorksSection from "~/routes/home/HowItWorksSection";
@@ -13,16 +11,7 @@ import SpecialtyLeasing from "~/routes/home/SpecialtyLeasing";
 export const handle = { hideLayout: true };
 
 export async function loader() {
-  const recent = await recentBlogPosts();
-  const posts = recent
-    .map((post) => ({
-      content: fs.readFileSync(post.filename, "utf8"),
-      ...post,
-    }))
-    .map(({ content, ...post }) => ({
-      ...fm<{ title: string; alt?: string }>(content),
-      ...post,
-    }));
+  const posts = await recentBlogPosts();
   return { posts };
 }
 
@@ -40,7 +29,7 @@ export default function Home({
           <JoinWaitlist />
           <FeaturesSection />
           <HowItWorksSection howItWorksId={howItWorksId} />
-          <BlogPosts posts={loaderData.posts} />
+          <BlogListing posts={loaderData.posts} />
           <SpecialtyLeasing />
         </section>
       </main>

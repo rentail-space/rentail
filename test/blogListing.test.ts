@@ -116,8 +116,12 @@ describe("Blog Listing", () => {
       const article = page.locator("article");
       await expect(article).toBeVisible();
 
-      const title = page.locator("article h1");
-      await expect(title).toBeVisible();
+      await expect(
+        page.getByRole("heading", { name: "The Perfectionist's Paradox:" }),
+      ).toBeVisible();
+      await expect(
+        page.getByRole("heading", { name: "FAQ: Imperfect Action Strategy" }),
+      ).toBeVisible();
     });
   });
 });
