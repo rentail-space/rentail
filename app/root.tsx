@@ -1,18 +1,17 @@
+import { last } from "es-toolkit";
 import {
   data,
   type HeadersFunction,
   isRouteErrorResponse,
   type LinksFunction,
   Outlet,
-  type useMatches,
+  type UIMatch,
   useRouteError,
 } from "react-router";
 import "~/global.css";
-import Footer from "~/components/layout/Footer";
-import Header from "~/components/layout/Header";
 import loggingMiddleware from "~/lib/middleware/logging";
 import type { Route } from "./+types/root";
-import Layout from "./components/layout/Layout";
+import PageLayout from "./components/layout/PageLayout";
 import { getUserChat } from "./sessions.server";
 
 export const middleware: Route.MiddlewareFunction[] = [loggingMiddleware];
@@ -79,39 +78,33 @@ export const links: LinksFunction = () => [
 export default function App({
   matches,
 }: {
-  matches: ReturnType<typeof useMatches>;
+  matches: UIMatch<unknown, { showHeader?: boolean; showFooter?: boolean }>[];
 }) {
-  const hideLayout = matches.some(
-    (match) =>
-      (match.handle as { hideLayout?: boolean } | undefined)?.hideLayout ===
-      true,
-  );
+  const { showHeader, showFooter } = last(
+    matches.filter(
+      (match) =>
+        match.handle &&
+        ("showHeader" in match.handle || "showFooter" in match.handle),
+    ),
+  )?.handle || { showHeader: true, showFooter: true };
 
   return (
-    <Layout>
-      {hideLayout ? (
-        <Outlet />
-      ) : (
-        <div className="flex min-h-screen flex-col gap-8">
-          <Header />
-          <Outlet />
-          <Footer />
-        </div>
-      )}
-    </Layout>
+    <PageLayout showHeader={showHeader} showFooter={showFooter}>
+      <Outlet />
+    </PageLayout>
   );
 }
 
 export function HydrateFallback() {
   return (
-    <Layout>
+    <PageLayout showHeader={false} showFooter={false}>
       <main className="prose prose-lg mx-auto flex flex-col items-center justify-center gap-4">
         <div className="flex flex-col items-center justify-center">
           <div className="h-12 w-12 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
         </div>
         <p className="text-gray-500 text-sm">Loading, please wait...</p>
       </main>
-    </Layout>
+    </PageLayout>
   );
 }
 
@@ -119,7 +112,7 @@ export function ErrorBoundary() {
   const error = useRouteError();
 
   return (
-    <Layout>
+    <PageLayout showHeader={false} showFooter={false}>
       <main className="prose prose-lg mx-auto py-32">
         {isRouteErrorResponse(error) ? (
           <h1 className="mx-auto flex flex-row justify-center gap-2 text-4xl">
@@ -135,6 +128,6 @@ export function ErrorBoundary() {
           </h1>
         )}
       </main>
-    </Layout>
+    </PageLayout>
   );
 }

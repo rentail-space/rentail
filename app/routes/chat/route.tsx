@@ -9,7 +9,7 @@ import { useRef } from "react";
 import { useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
-import Header from "~/components/layout/Header";
+import LayoutHeader from "~/components/layout/LayoutHeader";
 import authServer from "~/lib/auth.server";
 import findNearbyProperties from "~/lib/findNearbyProperties";
 import prisma from "~/lib/prisma";
@@ -19,7 +19,7 @@ import ScrollButton from "~/routes/chat/ScrollButton";
 import type { Route } from "./+types/route";
 import PropertyList from "./PropertyList";
 
-export const handle = { hideLayout: true };
+export const handle = { showHeader: false, showFooter: false };
 
 export async function loader({ request }: Route.LoaderArgs) {
   const session = await authServer.api.getSession({ headers: request.headers });
@@ -105,8 +105,7 @@ export default function Chat({
   return (
     <StickToBottom initial="smooth" resize="smooth">
       <div className="inset-0 flex h-screen flex-col">
-        <Header />
-
+        <LayoutHeader />
         <StickToBottom.Content>
           <Messages
             error={error}

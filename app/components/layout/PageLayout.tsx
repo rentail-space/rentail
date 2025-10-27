@@ -2,17 +2,33 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 import { useEffect } from "react";
 import ReactGA from "react-ga4";
-import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
+import {
+  Link,
+  Links,
+  Meta,
+  NavLink,
+  Scripts,
+  ScrollRestoration,
+} from "react-router";
 import { Toaster } from "sonner";
-import "~/global.css";
 import schema from "~/data/schema.json";
+import "~/global.css";
+import LayoutHeader from "./LayoutHeader";
 
 const description =
   "Discover short-term retail spaces and pop-up shop opportunities nationwide: seasonal retail, temporary stores, and unique business concepts.";
 const title = "rentail.space — Find your specialty lease with ease";
 const url = "https://rentail.space/";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function PageLayout({
+  children,
+  showHeader = true,
+  showFooter = true,
+}: {
+  children: React.ReactNode;
+  showHeader?: boolean;
+  showFooter?: boolean;
+}) {
   useEffect(() => ReactGA.initialize("G-HLE5G8GC5Y"), []);
 
   return (
@@ -63,12 +79,50 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </head>
       <body>
-        <NuqsAdapter>{children}</NuqsAdapter>
+        <NuqsAdapter>
+          <div className="flex min-h-screen flex-col gap-8">
+            {showHeader && <LayoutHeader />}
+            {children}
+            {showFooter && <LayoutFooter />}
+          </div>
+        </NuqsAdapter>
         <Toaster richColors />
         <ScrollRestoration />
         <Scripts />
         <SpeedInsights />
       </body>
     </html>
+  );
+}
+
+function LayoutFooter() {
+  return (
+    <footer className="footer sm:footer-horizontal footer-center p-4 text-base-content print:hidden">
+      <aside className="flex flex-col gap-4 text-gray-600">
+        <p className="flex flex-row items-center gap-2">
+          <span>© {new Date().getFullYear()}</span>
+          <NavLink to="/" className="font-bold" viewTransition>
+            <span className="text-indigo-600 hover:underline">rentail</span>
+            .space
+          </NavLink>
+          <span>All rights reserved</span>
+          <Link
+            className="text-indigo-600 hover:underline"
+            to="mailto:hello@rentail.space"
+            viewTransition
+          >
+            Contact us
+          </Link>
+        </p>
+        <p className="flex flex-row items-center gap-2">
+          <a href="/terms" className="text-indigo-600 hover:underline">
+            Terms of Service
+          </a>{" "}
+          <a href="/privacy" className="text-indigo-600 hover:underline">
+            Privacy Policy
+          </a>
+        </p>
+      </aside>
+    </footer>
   );
 }

@@ -6,7 +6,8 @@ import authServer from "~/lib/auth.server";
 import type { Route } from "./+types/auth";
 
 export const handle = {
-  hideLayout: true,
+  showHeader: false,
+  showFooter: false,
 };
 
 export const clientLoader = async () => {

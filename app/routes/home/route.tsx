@@ -1,5 +1,4 @@
 import { useId } from "react";
-import Footer from "~/components/layout/Footer";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
 import BlogListing from "~/routes/home/BlogListing";
 import FeaturesSection from "~/routes/home/FeaturesSection";
@@ -8,7 +7,7 @@ import HowItWorksSection from "~/routes/home/HowItWorksSection";
 import JoinWaitlist from "~/routes/home/JoinWaitlist";
 import SpecialtyLeasing from "~/routes/home/SpecialtyLeasing";
 
-export const handle = { hideLayout: true };
+export const handle = { showHeader: false, showFooter: true };
 
 export async function loader() {
   const posts = await recentBlogPosts();
@@ -33,7 +32,6 @@ export default function Home({
           <SpecialtyLeasing />
         </section>
       </main>
-      <Footer />
       <HubSpotScript />
     </>
   );

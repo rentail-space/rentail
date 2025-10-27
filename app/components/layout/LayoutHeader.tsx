@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useRouteLoaderData } from "react-router";
 import authClient from "~/lib/auth.client";
 
-export default function Header() {
+export default function LayoutHeader() {
   return (
     <header className="flex flex-row items-center justify-between gap-8 border-b px-6 py-1 print:hidden">
       <Link to="/" className="font-bold text-2xl text-gray-900">
