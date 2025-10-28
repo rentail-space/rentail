@@ -21,10 +21,10 @@ pnpm test
 
 echo -e "\033[32m  Commiting changes …\033[0m"
 git diff --unified=0 --color --word-diff HEAD~1 package.json
-git commit -m "Upgrade dependencies"
+git commit -m "Upgrade dependencies" || echo
 
 echo -e "\033[32m  Cleaning up …\033[0m"
-git gc --aggressive --prune=now
+git gc --aggressive --prune=now || echo
 
 terminal-notifier -sound default  -title "$0" -message "Done!"
 exit 0
