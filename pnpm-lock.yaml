@@ -221,8 +221,8 @@ importers:
         specifier: ^6.8.2
         version: 6.8.2(@types/node@24.9.1)(debug@4.4.3)(jiti@2.6.1)(typescript@5.9.3)
       daisyui:
-        specifier: ^5.3.8
-        version: 5.3.8
+        specifier: ^5.3.10
+        version: 5.3.10
       msw:
         specifier: ^2.11.6
         version: 2.11.6(@types/node@24.9.1)(typescript@5.9.3)
@@ -3647,8 +3647,8 @@ packages:
   dagre-d3-es@7.0.11:
     resolution: {integrity: sha512-tvlJLyQf834SylNKax8Wkzco/1ias1OPw8DcUMDE7oUIoSEW25riQVuiu/0OWEFqT0cxHT3Pa9/D82Jr47IONw==}
 
-  daisyui@5.3.8:
-    resolution: {integrity: sha512-ihDXb07IzM/2ugkwBWdy2LFCaepdn1oGsKIsR3gNG/VuTAmS60+HUG9rskjR5BzyJOVVUDDpWoiX3PBDIT3DYQ==}
+  daisyui@5.3.10:
+    resolution: {integrity: sha512-vmjyPmm0hvFhA95KB6uiGmWakziB2pBv6CUcs5Ka/3iMBMn9S+C3SZYx9G9l2JrgTZ1EFn61F/HrPcwaUm2kLQ==}
 
   date-fns@3.6.0:
     resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
@@ -10952,7 +10952,7 @@ snapshots:
       d3: 7.9.0
       lodash-es: 4.17.21
 
-  daisyui@5.3.8: {}
+  daisyui@5.3.10: {}
 
   date-fns@3.6.0: {}
 
