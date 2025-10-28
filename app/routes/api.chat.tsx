@@ -2,7 +2,7 @@ import type { AnthropicProviderOptions } from "@ai-sdk/anthropic";
 import { toAISdkFormat } from "@mastra/ai-sdk";
 import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
-import { createUIMessageStreamResponse, stepCountIs, type UIMessage } from "ai";
+import { createUIMessageStreamResponse, stepCountIs } from "ai";
 import debug from "debug";
 import { invariant } from "es-toolkit";
 import humanFormat from "human-format";
@@ -23,7 +23,7 @@ export async function action({ request }: Route.ActionArgs) {
   const { chat, headers } = await getUserChat(request.headers);
   const { message, chatId } = (await request.json()) as {
     chatId: string;
-    message: UIMessage;
+    message: string;
   };
   invariant(chat.id === chatId, "Chat ID is incorrect");
 
@@ -44,23 +44,15 @@ export async function action({ request }: Route.ActionArgs) {
         resourceId: chat.user.id,
         type: "text",
         content: {
-          parts: message.parts.map((part) => ({
-            text: part.type === "text" ? part.text : "",
-            type: "text",
-          })),
           format: 2,
+          parts: [{ type: "text", text: message }],
         },
       },
     ],
     format: "v2",
   });
 
-  const initialMessages: MastraMessageV2[] = messages.map((message) => ({
-    content: message.content,
-    createdAt: message.createdAt,
-    id: message.id,
-    role: message.role,
-  }));
+  const initialMessages: MastraMessageV2[] = messages;
 
   const stream = await agent.stream(initialMessages, {
     abortSignal,
@@ -72,7 +64,7 @@ export async function action({ request }: Route.ActionArgs) {
     maxSteps: 3,
     stopWhen: stepCountIs(3),
     requireToolApproval: false,
-    system: `${general}\n\n=====\n\n${propertiesToMarkdown({ properties, maxDistance: 20 })}`,
+    system: `${general}\n\n=====\n\n${centersToMarkdown({ properties, maxDistance: 20 })}`,
 
     onAbort: async () => {
       debug("chat")("Aborted by user");
@@ -107,14 +99,14 @@ export async function action({ request }: Route.ActionArgs) {
   // when the client response is aborted:
   stream.consumeStream(); // no await
 
-  // Convert Mastra stream to AI SDK format
-  const aiStream = toAISdkFormat(stream, { from: "agent" });
-
   // Return the UI message stream response
-  return createUIMessageStreamResponse({ headers, stream: aiStream });
+  return createUIMessageStreamResponse({
+    headers,
+    stream: toAISdkFormat(stream, { from: "agent" }),
+  });
 }
 
-function propertiesToMarkdown({
+function centersToMarkdown({
   properties,
   maxDistance,
 }: {
@@ -131,10 +123,10 @@ function propertiesToMarkdown({
     Do not make up information about shopping centers you do not know about.
     Do not even mention shopping centers you do not know about.`;
 
-  return `${prefix}\n\n${properties.map(propertyToMarkdown).join("\n\n")}`;
+  return `${prefix}\n\n${properties.map(centerToMarkdown).join("\n\n")}`;
 }
 
-function propertyToMarkdown(
+function centerToMarkdown(
   property: PropertyGetPayload<{ include: { spaces: true } }>,
 ): string {
   return `<shopping-center>
@@ -142,11 +134,11 @@ function propertyToMarkdown(
   Address: ${property.address}, ${property.city}, ${property.state}, ${property.country}
   Description: ${property.description}
   ${property.imageURLs.map((image) => `Image: ${image}`).join("\n")}
-  Spaces: ${property.spaces.map(propertySpacesToMarkdown).join("\n")}
+  Spaces: ${property.spaces.map(centerSpacesToMarkdown).join("\n")}
 </shopping-center>`;
 }
 
-function propertySpacesToMarkdown(space: PropertySpace): string {
+function centerSpacesToMarkdown(space: PropertySpace): string {
   return `<space>
   Space name: ${space.name}
   Description: ${space.details}

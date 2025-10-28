@@ -1,18 +1,22 @@
-import { IconSend } from "obra-icons-react";
+import { IconSend, IconStop } from "obra-icons-react";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 
 export default function InputForm({
   inputRef,
+  isResponding,
   isSubmitting,
   query,
   sendMessage,
   setQuery,
+  stopChat,
 }: {
   inputRef: React.RefObject<HTMLInputElement | null>;
+  isResponding: boolean;
   isSubmitting: boolean;
   query: string;
   sendMessage: (message: string) => void;
   setQuery: (input: string) => void;
+  stopChat: () => void;
 }) {
   const { scrollToBottom } = useStickToBottomContext();
 
@@ -43,6 +47,16 @@ export default function InputForm({
           value={query}
         />
         <div className="-translate-y-1/2 absolute top-1/2 right-2 flex transform gap-2">
+          {isResponding && (
+            <button
+              onClick={stopChat}
+              aria-label="Stop"
+              className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-red-500 transition-all duration-200 hover:scale-105 hover:bg-red-600 active:scale-95 active:scale-[0.6] active:duration-75"
+              type="button"
+            >
+              <IconStop className="h-6 w-6 text-white" />
+            </button>
+          )}
           <button
             aria-label="Send message"
             className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-indigo-500 transition-all duration-200 hover:scale-105 hover:bg-indigo-600 active:scale-95 active:scale-[0.6] active:duration-75 disabled:cursor-not-allowed disabled:bg-gray-300"

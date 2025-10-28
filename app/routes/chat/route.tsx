@@ -22,18 +22,18 @@ export const handle = { showHeader: false, showFooter: false };
 
 export async function loader({ request }: Route.LoaderArgs) {
   const session = await authServer.api.getSession({ headers: request.headers });
-  if (session) {
-    // Query existing chat (don't create)
-    const chat = await prisma.chat.findFirst({
-      where: { userId: session.user.id },
-      orderBy: { updatedAt: "desc" },
-      include: { user: true },
-    });
-    if (chat) {
-      const properties = await findNearbyProperties({ chat, maxDistance: 20 });
-      return { properties };
-    }
-  }
+  // Query existing chat (don't create)
+  const chat = session
+    ? await prisma.chat.findFirst({
+        where: { userId: session.user.id },
+        orderBy: { updatedAt: "desc" },
+        include: { user: true },
+      })
+    : null;
+  const properties = chat
+    ? await findNearbyProperties({ chat, maxDistance: 20 })
+    : [];
+  return { chat, properties };
 }
 
 export default function Chat({
@@ -50,7 +50,7 @@ export default function Chat({
   };
   const properties = loaderData?.properties ?? [];
 
-  const { error, messages, sendMessage, status } = useChat({
+  const { error, messages, sendMessage, status, stop } = useChat({
     id: chat.id,
     messages: initialMessages.map((message) => ({
       id: message.id,
@@ -68,10 +68,14 @@ export default function Chat({
       api: "/api/chat",
       // only send the last message to the server:
       prepareSendMessagesRequest({ messages }) {
+        const message = last(messages) as UIMessage;
         return {
           body: {
             chatId: chat.id,
-            message: last(messages) as UIMessage,
+            message: message.parts
+              .filter((part) => part.type === "text")
+              .map((part) => part.text)
+              .join("\n"),
           },
         };
       },
@@ -83,6 +87,10 @@ export default function Chat({
     },
   });
   const inputRef = useRef<HTMLInputElement>(null);
+  function stopChat() {
+    stop();
+    fetch(`/api/chat/${chat.id}/stop`, { method: "POST" });
+  }
 
   return (
     <StickToBottom initial="smooth" resize="smooth">
@@ -104,6 +112,7 @@ export default function Chat({
 
         <InputForm
           inputRef={inputRef}
+          isResponding={status === "streaming"}
           isSubmitting={status === "submitted"}
           query={query ?? ""}
           sendMessage={(message: string) =>
@@ -113,6 +122,7 @@ export default function Chat({
             })
           }
           setQuery={setQuery}
+          stopChat={stopChat}
         />
       </div>
     </StickToBottom>
