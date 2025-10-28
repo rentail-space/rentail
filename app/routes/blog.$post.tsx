@@ -21,6 +21,7 @@ export const shouldRevalidate: ShouldRevalidateFunction = () => false;
 
 export default function Post({ loaderData }: { loaderData: BlogPost }) {
   const { alt, body, image, slug, published, summary, title } = loaderData;
+  const faqItems = parseFAQ(body);
 
   return (
     <article className="prose prose-lg mx-auto">
@@ -64,20 +65,60 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "WebPage",
+          "@type": "Article",
           "@id": `https://rentail.space/blog/${slug}`,
+          author: {
+            "@type": "Organization",
+            name: "Rentail Space",
+            url: "https://rentail.space",
+          },
           datePublished: published,
           description: summary,
+          headline: title,
           inLanguage: "en-US",
           name: title,
-          primaryImageOfPage: {
-            "@id": `https://rentail.space/blog/${slug}.jpg`,
-            "@type": "ImageObject",
-            contentUrl: new URL(`/blog/${slug}.jpg`, "https://rentail.space"),
-            caption: alt,
-          },
+          primaryImageOfPage: image
+            ? {
+                "@id": image,
+                "@type": "ImageObject",
+                caption: alt,
+                contentUrl: image,
+              }
+            : undefined,
         })}
       </script>
+      {faqItems && faqItems.length > 0 && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqItems.map(({ question, answer }) => ({
+              "@type": "Question",
+              name: question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: answer,
+              },
+            })),
+          })}
+        </script>
+      )}
     </article>
   );
+}
+
+function parseFAQ(body: string): { question: string; answer: string }[] | null {
+  const faqMatch = body.match(/# FAQ:[\s\S]*$/i);
+  if (!faqMatch) return null;
+
+  const faqSection = faqMatch[0];
+  const qaPattern = /\*\*Q:\s*([^*]+)\*\*\s*\n\n([^*]+?)(?=\n\n\*\*Q:|$)/g;
+  const matches = [...faqSection.matchAll(qaPattern)];
+
+  if (matches.length === 0) return null;
+
+  return matches.map((match) => ({
+    question: match[1].trim(),
+    answer: match[2].trim(),
+  }));
 }
