@@ -71,7 +71,7 @@ export async function saveMessages({
   chat: ChatGetPayload<{ include: { user: true } }>;
   messages: MastraMessageV2[];
 }): Promise<MastraMessageV2[]> {
-  invariant(chat, "Chat is required");
+  invariant(chat.id, "Chat ID is required");
   return await memory.saveMessages({
     messages: messages.map((message) => ({
       ...message,

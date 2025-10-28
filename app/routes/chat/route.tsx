@@ -1,13 +1,12 @@
 import { useChat } from "@ai-sdk/react";
 import type { MastraMessageV2 } from "@mastra/core/memory";
 import { captureException } from "@sentry/react-router";
-import { DefaultChatTransport, type UIMessage, type UITools } from "ai";
+import { DefaultChatTransport, type UIMessage } from "ai";
 import { last } from "es-toolkit";
 import { useQueryState } from "nuqs";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
 import { useRouteLoaderData } from "react-router";
-import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import LayoutHeader from "~/components/layout/LayoutHeader";
 import authServer from "~/lib/auth.server";
@@ -51,16 +50,17 @@ export default function Chat({
   };
   const properties = loaderData?.properties ?? [];
 
-  const { error, messages, sendMessage, status, stop } = useChat<
-    UIMessage<{ isAborted?: boolean }, { text: string }, UITools>
-  >({
+  const { error, messages, sendMessage, status } = useChat({
     id: chat.id,
     messages: initialMessages.map((message) => ({
       id: message.id,
-      parts: message.content.parts.map((part) => ({
-        text: "text" in part ? part.text : "",
-        type: part.type as "text" | "reasoning",
-      })),
+      parts: message.content.parts
+        .filter((part) => part.type === "text" || part.type === "reasoning")
+        .map((part) => ({
+          text: "text" in part ? part.text : "",
+          type: part.type as "text" | "reasoning",
+          details: part.type === "reasoning" ? part.details : undefined,
+        })),
       role: message.role,
     })),
     resume: false, // Enable automatic stream resumption
@@ -84,24 +84,6 @@ export default function Chat({
   });
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const stopLLM = async (scrollToBottom: () => void) => {
-    messages.push({
-      id: ulid(),
-      metadata: { isAborted: true },
-      parts: [],
-      role: "user",
-    });
-
-    // Send Redis stop signal for cross-request coordination
-    await fetch(`/api/chat/${chat?.id}/stop`, { method: "POST" }).catch(
-      (error) => captureException(error, { extra: { chat } }),
-    );
-    await stop(); // Stop the AI SDK stream
-
-    // Scroll to bottom after a small delay to ensure the message is rendered
-    setTimeout(scrollToBottom, 10);
-  };
-
   return (
     <StickToBottom initial="smooth" resize="smooth">
       <div className="inset-0 flex h-screen flex-col">
@@ -122,12 +104,15 @@ export default function Chat({
 
         <InputForm
           inputRef={inputRef}
-          isResponding={status === "streaming" || status === "submitted"}
           isSubmitting={status === "submitted"}
           query={query ?? ""}
-          sendMessage={sendMessage}
+          sendMessage={(message: string) =>
+            sendMessage({
+              parts: [{ text: message, type: "text", details: undefined }],
+              role: "user",
+            })
+          }
           setQuery={setQuery}
-          stopLLM={stopLLM}
         />
       </div>
     </StickToBottom>

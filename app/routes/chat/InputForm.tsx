@@ -1,23 +1,18 @@
-import type { TextPart } from "ai";
-import { IconCircleCloseFill, IconSend } from "obra-icons-react";
+import { IconSend } from "obra-icons-react";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 
 export default function InputForm({
   inputRef,
-  isResponding,
   isSubmitting,
   query,
   sendMessage,
   setQuery,
-  stopLLM,
 }: {
   inputRef: React.RefObject<HTMLInputElement | null>;
-  isResponding: boolean;
   isSubmitting: boolean;
   query: string;
-  sendMessage: (message: { parts: TextPart[]; role: "user" }) => void;
+  sendMessage: (message: string) => void;
   setQuery: (input: string) => void;
-  stopLLM: (scrollToBottom: () => void) => Promise<void>;
 }) {
   const { scrollToBottom } = useStickToBottomContext();
 
@@ -26,7 +21,7 @@ export default function InputForm({
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          sendMessage({ parts: [{ text: query, type: "text" }], role: "user" });
+          sendMessage(query);
           setQuery("");
           scrollToBottom();
         }}
@@ -48,16 +43,6 @@ export default function InputForm({
           value={query}
         />
         <div className="-translate-y-1/2 absolute top-1/2 right-2 flex transform gap-2">
-          {isResponding && (
-            <button
-              aria-label="Stop generation"
-              className="flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-200 hover:scale-105"
-              onClick={() => stopLLM(scrollToBottom)}
-              type="button"
-            >
-              <IconCircleCloseFill className="h-10 w-10 text-red-500 hover:text-red-600" />
-            </button>
-          )}
           <button
             aria-label="Send message"
             className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-indigo-500 transition-all duration-200 hover:scale-105 hover:bg-indigo-600 active:scale-95 active:scale-[0.6] active:duration-75 disabled:cursor-not-allowed disabled:bg-gray-300"

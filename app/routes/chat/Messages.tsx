@@ -20,7 +20,11 @@ export default function Messages({
   error?: Error;
   inputRef: React.RefObject<HTMLInputElement | null>;
   isTyping: boolean;
-  messages: UIMessage<{ isAborted?: boolean }, { text: string }, UITools>[];
+  messages: UIMessage<
+    { isAborted?: boolean },
+    { text: string; details?: { type: string; text: string }[] },
+    UITools
+  >[];
   setQuery: (query: string) => void;
 }) {
   const prevMessagesLength = useRef(messages.length);
@@ -103,7 +107,7 @@ function AssistantMessage({
 }: {
   askQuestion: (question: string) => Promise<void>;
   isLast: boolean;
-  message: UIMessage;
+  message: UIMessage<{ isAborted?: boolean }>;
   scrollToBottom: ScrollToBottom;
 }) {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -137,14 +141,23 @@ function AssistantMessage({
             text={part.text}
           />
         );
-      case "reasoning":
+      case "reasoning": {
+        const text = (
+          part as unknown as { details?: { type: string; text: string }[] }
+        ).details
+          ?.filter((part) => part.type === "text")
+          .map((part) => part.text)
+          .join("\n");
         return (
-          <ReasoningMessage
-            isLast={isLast && index === parts.length - 1}
-            key={index.toString()}
-            text={part.text}
-          />
+          text && (
+            <ReasoningMessage
+              isLast={isLast && index === parts.length - 1}
+              key={index.toString()}
+              text={text}
+            />
+          )
         );
+      }
       default: {
         return null;
       }

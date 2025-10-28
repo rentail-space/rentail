@@ -19,7 +19,7 @@ import {
 } from "@mastra/core/storage";
 import type { Trace } from "@mastra/core/telemetry";
 import type { StepResult, WorkflowRunState } from "@mastra/core/workflows";
-import { invariant } from "es-toolkit";
+import { invariant, uniq } from "es-toolkit";
 import type { Chat, Messages, User } from "prisma/generated/client";
 import type { Role } from "prisma/generated/enums";
 import prisma from "~/lib/prisma";
@@ -317,12 +317,11 @@ export class PrismaStorage extends MastraStorage {
       | { messages: MastraMessageV1[]; format?: "v1" }
       | { messages: MastraMessageV2[]; format: "v2" },
   ): Promise<MastraMessageV2[] | MastraMessageV1[]> {
-    invariant(args.format === "v2", "Format must be v2");
+    const chatId = getChatId(args.messages);
     const messages = await prisma.messages.createManyAndReturn({
       data: args.messages.map((message) => {
-        invariant(message.threadId, "Thread ID is required");
         return {
-          chatId: message.threadId,
+          chatId,
           content: JSON.stringify(message.content),
           createdAt: message.createdAt,
           id: message.id,
@@ -468,6 +467,7 @@ async function toMessageV2(messages: Messages[]): Promise<MastraMessageV2[]> {
     include: { user: true },
   });
   invariant(chat, "Chat is required");
+
   return messages.map((message) => ({
     content: message.content
       ? JSON.parse(message.content as string)
@@ -515,7 +515,11 @@ function toOrderBy(
 function getChatId(
   messages: Partial<MastraMessageV1>[] | Partial<MastraMessageV2>[],
 ): string {
-  const threadId = messages.find((message) => message.threadId)?.threadId;
-  invariant(threadId, "Thread ID is required to obtain chat ID");
-  return threadId;
+  invariant(
+    messages.every((message) => message.threadId),
+    "Thread ID is required",
+  );
+  const ids = uniq(messages.map((message) => message.threadId));
+  invariant(ids.length === 1, "Only one thread ID is allowed");
+  return ids[0] ?? "";
 }

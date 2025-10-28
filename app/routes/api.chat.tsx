@@ -94,9 +94,9 @@ export async function action({ request }: Route.ActionArgs) {
 
     providerOptions: {
       anthropic: {
-        sendReasoning: false,
+        sendReasoning: true,
         thinking: {
-          type: "disabled",
+          type: "enabled",
           budgetTokens: 12000,
         },
       } satisfies AnthropicProviderOptions,
