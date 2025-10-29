@@ -1,4 +1,4 @@
-import { IconDownload, IconUser } from "obra-icons-react";
+import { Download, User } from "lucide-react";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouteLoaderData } from "react-router";
@@ -98,7 +98,7 @@ function DropdownMenu({
         onClick={() => setIsOpen(!isOpen)}
         type="button"
       >
-        <IconUser />
+        <User className="h-4 w-4" />
         <span>{chat.user.name || chat.user.email}</span>
       </button>
 
@@ -115,7 +115,7 @@ function DropdownMenu({
             to="/profile"
             className="block w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
           >
-            <IconUser className="mr-2 inline-block h-4 w-4" />
+            <User className="mr-2 inline-block h-4 w-4" />
             Profile Settings
           </Link>
 
@@ -124,7 +124,7 @@ function DropdownMenu({
             download
             href={`/api/chat/${chat.id}/export/csv`}
           >
-            <IconDownload className="mr-2 inline-block h-4 w-4" />
+            <Download className="mr-2 inline-block h-4 w-4" />
             CSV Export
           </a>
 

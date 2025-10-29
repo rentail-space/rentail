@@ -51,7 +51,7 @@
     "luxon": "^3.7.2",
     "marked": "^16.4.1",
     "nuqs": "^2.7.2",
-    "obra-icons-react": "^1.23.1",
+    "lucide-react": "^0.468.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-ga4": "^2.1.0",
@@ -122,5 +122,5 @@
       "yarn"
     ]
   },
-  "packageManager": "pnpm@10.19.0"
+  "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd"
 }

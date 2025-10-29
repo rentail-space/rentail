@@ -1,6 +1,6 @@
 import type { UIMessage, UITools } from "ai";
 import { uniqBy } from "es-toolkit";
-import { IconCircle } from "obra-icons-react";
+import { Loader2 } from "lucide-react";
 import React, { type JSX, useEffect, useRef, useState } from "react";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
@@ -178,7 +178,7 @@ function ReasoningMessage({ text, isLast }: { text: string; isLast: boolean }) {
       <summary className="mb-4 w-full cursor-pointer font-medium text-gray-600">
         {isThinking ? (
           <span className="flex-row flex-nowrap items-center gap-2 pl-2">
-            <IconCircle className="mr-2 inline-block h-4 w-4 animate-spin" />
+            <Loader2 className="mr-2 inline-block h-4 w-4 animate-spin" />
             <span>Thinking…</span>
           </span>
         ) : isExpanded ? (

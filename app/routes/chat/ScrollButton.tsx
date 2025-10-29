@@ -1,4 +1,4 @@
-import { IconChevronDoubleDown } from "obra-icons-react";
+import { ChevronsDown } from "lucide-react";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 
 export default function ScrollButton() {
@@ -14,7 +14,7 @@ export default function ScrollButton() {
       aria-label="Scroll to bottom"
       title="Scroll to bottom"
     >
-      <IconChevronDoubleDown className="h-6 w-6 text-gray-600" />
+      <ChevronsDown className="h-6 w-6 text-gray-600" />
     </button>
   );
 }

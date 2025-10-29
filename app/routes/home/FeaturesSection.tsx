@@ -1,21 +1,21 @@
-import { IconCircleDollar, IconPenAlt, IconUsers } from "obra-icons-react";
+import { CircleDollarSign, Pen, Users } from "lucide-react";
 
 export default function FeaturesSection() {
   const features = [
     {
-      icon: <IconCircleDollar />,
+      icon: <CircleDollarSign className="h-6 w-6" />,
       title: "Find the Perfect Space",
       description:
         "We help you find a short-term rental that fits your needs, with adequate foot traffic to make your business thrive.",
     },
     {
-      icon: <IconPenAlt />,
+      icon: <Pen className="h-6 w-6" />,
       title: "Sign Up Once",
       description:
         "You only need to sign up once to access all shopping center in your area. We give you the flexibility to try out different markets.",
     },
     {
-      icon: <IconUsers />,
+      icon: <Users className="h-6 w-6" />,
       title: "We Handle the Minutia",
       description:
         "We take care of the details so you can focus on your business, from payment processing to contract management.",

@@ -1,4 +1,4 @@
-import { IconChevronRight } from "obra-icons-react";
+import { ChevronRight } from "lucide-react";
 import { Link } from "react-router";
 import type { BlogPost } from "~/lib/blogPosts.server";
 
@@ -36,7 +36,7 @@ export default function BlogListing({ posts }: { posts: BlogPost[] }) {
           to={`/blog/${post.slug}`}
         >
           <h5 className="flex flex-row flex-nowrap items-center gap-2">
-            <IconChevronRight className="mr-2 inline-block h-4 w-4" />
+            <ChevronRight className="mr-2 inline-block h-4 w-4" />
             <span>{post.title}</span>
           </h5>
         </Link>

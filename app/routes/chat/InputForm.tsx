@@ -1,4 +1,4 @@
-import { IconSend, IconStop } from "obra-icons-react";
+import { Send, Square } from "lucide-react";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 
 export default function InputForm({
@@ -54,7 +54,7 @@ export default function InputForm({
               className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-red-500 transition-all duration-200 hover:scale-105 hover:bg-red-600 active:scale-95 active:scale-[0.6] active:duration-75"
               type="button"
             >
-              <IconStop className="h-6 w-6 text-white" />
+              <Square className="h-6 w-6 text-white" />
             </button>
           )}
           <button
@@ -64,9 +64,9 @@ export default function InputForm({
             type="submit"
           >
             {isSubmitting ? (
-              <IconSend className="h-6 w-6 animate-spin" />
+              <Send className="h-6 w-6 animate-spin" />
             ) : (
-              <IconSend className="h-6 w-6 text-white" />
+              <Send className="h-6 w-6 text-white" />
             )}
           </button>
         </div>

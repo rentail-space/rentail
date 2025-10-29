@@ -1,5 +1,5 @@
 import { Markdown } from "@react-email/components";
-import { IconExternalLink } from "obra-icons-react";
+import { ExternalLink } from "lucide-react";
 import type { PropertySpace } from "prisma/generated/client";
 import { Link, useLoaderData } from "react-router";
 import prisma from "~/lib/prisma";
@@ -40,7 +40,7 @@ export default function Property() {
           <span>
             {property.address}, {property.city}, {property.state}
           </span>
-          <IconExternalLink className="h-4 w-4" />
+          <ExternalLink className="h-4 w-4" />
         </Link>
       </section>
 

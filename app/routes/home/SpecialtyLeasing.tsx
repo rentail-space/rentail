@@ -1,10 +1,10 @@
-import { IconLightbulbOn } from "obra-icons-react";
+import { Lightbulb } from "lucide-react";
 
 export default function SpecialtyLeasing() {
   return (
     <section>
       <h2 className="flex flex-row items-center gap-2">
-        <IconLightbulbOn />
+        <Lightbulb className="h-6 w-6" />
         Specialty Leasing
       </h2>
       <p>

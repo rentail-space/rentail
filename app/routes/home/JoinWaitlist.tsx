@@ -1,5 +1,5 @@
 import { captureException } from "@sentry/react-router";
-import { IconCircleInfoFill } from "obra-icons-react";
+import { Info } from "lucide-react";
 import { useId, useState } from "react";
 import { toast } from "sonner";
 
@@ -58,7 +58,7 @@ export default function JoinWaitlist() {
       </form>
 
       <div className="flex items-start gap-2 text-gray-500 text-sm">
-        <IconCircleInfoFill className="inline-block h-4 w-4" />
+        <Info className="inline-block h-4 w-4" />
         <p className="-mt-1 max-w-sm">
           No worries! your data is completely safe and will only be utilized to
           provide you with updates about our product.
