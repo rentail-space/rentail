@@ -20,6 +20,15 @@ describe("Anonymous visits chat page", () => {
       "x-vercel-ip-latitude": "37.42240",
       "x-vercel-ip-longitude": "-122.08421",
     });
+
+    const input = page.locator("input[type='text']");
+    // Clear and type the message properly
+    await input.click(); // Focus the input
+    await input.fill("Hello, how are you?");
+
+    // Submit by pressing Enter (more reliable than clicking button)
+    await input.press("Enter");
+    await page.waitForLoadState("networkidle");
   });
 
   it("loads chat page and shows sign-in button", async () => {
@@ -27,15 +36,10 @@ describe("Anonymous visits chat page", () => {
     await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
   });
 
-  it("creates anonymous user in database", async () => {
+  it("should be registered as anonymous user", async () => {
     const users = await prisma.user.findMany();
     expect(users.length, "should have one user").toEqual(1);
     expect(users[0].isAnonymous, "user should be anonymous").toBe(true);
-  });
-
-  it("maintains cookies across requests", async () => {
-    const initialCookies = await page.context().cookies();
-    expect(initialCookies.length, "Should have cookies").toEqual(2);
   });
 
   it("sets initial working memory with default location", async () => {

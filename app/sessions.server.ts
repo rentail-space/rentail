@@ -51,8 +51,15 @@ export async function findChat(headers: Headers): Promise<{
 }> {
   const session = await authServer.api.getSession({ headers });
   if (session?.user) {
-    const { chat, messages } = await getChatForUser(session.user);
-    return { chat, messages };
+    const chat = await prisma.chat.findFirst({
+      include: { user: true },
+      orderBy: { createdAt: "desc" },
+      where: { userId: session.user.id },
+    });
+    if (chat) {
+      const messages = await getRecentMessages(chat);
+      return { chat, messages };
+    }
   }
 
   return {
@@ -132,32 +139,6 @@ export async function createUser({
     headers: anonymousUser.headers,
     messages: newMessages,
   };
-}
-
-/**
- * Get the chat for a user. If no chat is found, a new one is created. Includes
- * all messages in the chat.
- *
- * @param userId - The user ID
- * @returns chat - Chat with messages and user
- * @returns messages - Messages from the chat
- */
-async function getChatForUser(user: { id: string }): Promise<{
-  chat: ChatGetPayload<{ include: { user: true } }>;
-  messages: MastraMessageV2[];
-}> {
-  const chat =
-    (await prisma.chat.findFirst({
-      include: { user: true },
-      orderBy: { createdAt: "desc" },
-      where: { userId: user.id },
-    })) ||
-    (await prisma.chat.create({
-      data: { id: ulid(), metadata: {}, user: { connect: { id: user.id } } },
-      include: { user: true },
-    }));
-  const messages = await getRecentMessages(chat);
-  return { chat, messages };
 }
 
 /**
