@@ -5,7 +5,7 @@ import { DefaultChatTransport, type UIMessage } from "ai";
 import { last } from "es-toolkit";
 import { useQueryState } from "nuqs";
 import type { ChatGetPayload } from "prisma/generated/models";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
@@ -26,21 +26,24 @@ export default function Chat() {
     messages?: MastraMessageV2[];
   };
 
-  const chatId = chat?.id ?? ulid();
+  // Ensure chatId is stable across renders
+  const chatId = useMemo(() => chat?.id ?? ulid(), [chat?.id]);
   const { error, messages, sendMessage, status, stop } = useChat({
     id: chatId,
-    messages: initialMessages?.map((message) => ({
-      id: message.id,
-      threadId: chatId,
-      parts: message.content.parts
-        .filter((part) => part.type === "text" || part.type === "reasoning")
-        .map((part) => ({
-          text: "text" in part ? part.text : "",
-          type: part.type as "text" | "reasoning",
-          details: part.type === "reasoning" ? part.details : undefined,
-        })),
-      role: message.role,
-    })),
+    messages:
+      initialMessages?.map((message) => ({
+        id: message.id,
+        parts: message.content.parts
+          .filter((part) => part.type === "text" || part.type === "reasoning")
+          .map((part) =>
+            part.type === "text"
+              ? { text: part.text, type: "text" }
+              : { text: "", type: "reasoning", details: part.details },
+          ),
+        role: message.role,
+        threadId: chatId,
+        resourceId: chat?.user?.id,
+      })) ?? [],
     transport: new DefaultChatTransport({
       api: `/api/chat/${chatId}/message`,
       // only send the last message to the server:
@@ -62,6 +65,7 @@ export default function Chat() {
       captureException(error, { extra: { chat } });
     },
   });
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   function stopChat() {
@@ -96,9 +100,10 @@ export default function Chat() {
           query={query ?? ""}
           sendMessage={(message: string) =>
             sendMessage({
-              threadId: chatId,
               parts: [{ text: message, type: "text", details: undefined }],
               role: "user",
+              threadId: chatId,
+              resourceId: chat?.user?.id,
             })
           }
           setQuery={setQuery}
