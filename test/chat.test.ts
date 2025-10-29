@@ -32,53 +32,60 @@ describe("Chat page", () => {
     await expect(page.locator("input[type='text']")).toHaveValue(testQuery);
   });
 
-  it("sends user message and receives server response", async () => {
-    // Navigate back to clean chat page
-    await page.goto("/chat");
-
+  describe("exchange messages", () => {
     const testMessage =
       "looking for a pop-up retail space for my clothing boutique";
 
-    const input = page.locator("input[type='text']");
+    beforeAll(async () => {
+      await page.goto("/chat");
 
-    // Clear and type the message properly
-    await input.click(); // Focus the input
-    await input.fill(testMessage); // Fill sets the value and dispatches input event
+      const input = page.locator("input[type='text']");
 
-    // Submit by pressing Enter (more reliable than clicking button)
-    await input.press("Enter");
-    await page.waitForLoadState("networkidle");
+      // Clear and type the message properly
+      await input.click(); // Focus the input
+      await input.fill(testMessage); // Fill sets the value and dispatches input event
+      // Submit by pressing Enter (more reliable than clicking button)
+      await input.press("Enter");
+      await page.waitForLoadState("networkidle");
+    });
 
-    // Verify user message appears in chat
-    await expect(
-      page
-        .locator(".chat-bubble-accent")
-        .filter({ hasText: testMessage })
-        .first(),
-    ).toBeVisible();
+    it("sends user message and receives server response", async () => {
+      // Verify user message appears in chat
+      await expect(
+        page
+          .locator(".chat-bubble-accent")
+          .filter({ hasText: testMessage })
+          .first(),
+      ).toBeVisible();
 
-    // Verify we got our mock response
-    await expect(
-      page
-        .locator(".chat-bubble")
-        .filter({ hasText: /Perfect! I found some great locations/i }),
-    ).toBeVisible();
+      // Verify we got our mock response
+      await expect(
+        page
+          .locator(".chat-bubble")
+          .filter({ hasText: /Perfect! I found some great locations/i }),
+      ).toBeVisible();
 
-    // Count all chat messages - should have welcome + user + assistant response
-    const chatCount = await page.locator(".chat").count();
-    expect(chatCount).toBeGreaterThanOrEqual(3); // welcome + user + response
+      // Count all chat messages - should have welcome + user + assistant response
+      const chatCount = await page.locator(".chat").count();
+      expect(chatCount).toBeGreaterThanOrEqual(3); // welcome + user + response
 
-    // Verify page is scrolled to bottom after response
-    const scrollContainer = page.locator(".overflow-y-auto").first();
-    const scrollTop = await scrollContainer.evaluate((el) => el.scrollTop);
-    const scrollHeight = await scrollContainer.evaluate(
-      (el) => el.scrollHeight,
-    );
-    const clientHeight = await scrollContainer.evaluate(
-      (el) => el.clientHeight,
-    );
+      // Verify page is scrolled to bottom after response
+      const scrollContainer = page.locator(".overflow-y-auto").first();
+      const scrollTop = await scrollContainer.evaluate((el) => el.scrollTop);
+      const scrollHeight = await scrollContainer.evaluate(
+        (el) => el.scrollHeight,
+      );
+      const clientHeight = await scrollContainer.evaluate(
+        (el) => el.clientHeight,
+      );
 
-    // Should be at or very close to bottom (within 50px tolerance)
-    expect(scrollTop + clientHeight).toBeGreaterThan(scrollHeight - 50);
+      // Should be at or very close to bottom (within 50px tolerance)
+      expect(scrollTop + clientHeight).toBeGreaterThan(scrollHeight - 50);
+    });
+
+    it("should look like a real chat", async () => {
+      // Take screenshot for visual regression testing
+      await expect(page).toMatchScreenshot();
+    });
   });
 });
