@@ -470,7 +470,7 @@ async function toMessageV2(messages: Messages[]): Promise<MastraMessageV2[]> {
   });
   invariant(chat, "Chat is required");
 
-  const result = messages.map((message) => {
+  return messages.map((message) => {
     const content = message.content
       ? JSON.parse(message.content as string)
       : undefined;
@@ -484,8 +484,6 @@ async function toMessageV2(messages: Messages[]): Promise<MastraMessageV2[]> {
       resourceId: chat.user?.id,
     };
   });
-
-  return result;
 }
 
 function toThread(chat: Chat): StorageThreadType {

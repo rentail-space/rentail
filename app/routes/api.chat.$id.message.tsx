@@ -19,6 +19,7 @@ import type { Route } from "./+types/api.chat.$id.message";
 
 export async function action({ params, request }: Route.ActionArgs) {
   const { message } = (await request.json()) as { message: string };
+
   const { chat, headers } = await createUser({
     chatId: params.id,
     headers: request.headers,
@@ -99,11 +100,10 @@ export async function action({ params, request }: Route.ActionArgs) {
     },
   });
 
-  // Consume the stream to ensure it runs to completion & triggers onFinish even
-  // when the client response is aborted:
   stream.consumeStream(); // no await
 
   // Return the UI message stream response
+  // The stream will be consumed by the client
   return createUIMessageStreamResponse({
     headers,
     stream: toAISdkFormat(stream, { from: "agent" }),

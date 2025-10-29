@@ -21,6 +21,13 @@ describe("Anonymous visits chat page", () => {
       "x-vercel-ip-longitude": "-122.08421",
     });
 
+    // Log errors only
+    page.on("console", (msg) => {
+      if (msg.type() === "error") {
+        console.error(`[Browser error]: ${msg.text()}`);
+      }
+    });
+
     const input = page.locator("input[type='text']");
     // Clear and type the message properly
     await input.click(); // Focus the input
@@ -66,10 +73,10 @@ describe("Anonymous visits chat page", () => {
 
       // Submit by pressing Enter (more reliable than clicking button)
       await input.press("Enter");
-      await page.waitForLoadState("networkidle");
 
+      // Wait for response
       await expect(
-        page.locator(".chat-bubble").filter({
+        page.locator(".chat-bubble", {
           hasText: /updated your location to Boston/i,
         }),
       ).toBeVisible();
