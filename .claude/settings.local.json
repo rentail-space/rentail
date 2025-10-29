@@ -1,17 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(pnpx vitest run:*)",
       "Bash(pnpm test:*)",
       "Bash(lsof:*)",
-      "Bash(xargs kill:*)",
-      "Bash(pkill:*)",
-      "Bash(killall:*)",
       "WebSearch",
-      "Read(//Users/assaf/.config/fish/**)",
-      "Read(//Users/assaf/.claude/**)",
-      "Read(//usr/local/**)",
-      "Bash(npm root:*)"
+      "Bash(npm run typecheck:*)",
+      "Bash(tsx scripts/*)",
     ],
     "deny": [],
     "ask": []

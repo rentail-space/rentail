@@ -10,6 +10,7 @@ import zod from "zod";
 import authServer from "~/lib/auth.server";
 import prisma from "~/lib/prisma";
 import { getRecentMessages, updateWorkingMemory } from "~/lib/workingMemory";
+import welcome from "~/prompts/welcome.md?raw";
 
 // List of user agents that are considered bots
 const botUserAgents = [
@@ -42,50 +43,69 @@ const cachedLocation = zod
  * created. Includes recent messages in the chat.
  *
  * @param headers - The headers object
- * @returns The chat, recent messages, and HTTP headers
+ * @returns The chat (optional) and recent messages
  */
-export async function getUserChat(headers: Headers): Promise<{
+export async function getChat(headers: Headers): Promise<{
+  chat?: ChatGetPayload<{ include: { user: true } }>;
+  messages: MastraMessageV2[];
+}> {
+  const session = await authServer.api.getSession({ headers });
+  const userId = session?.user.id;
+  if (userId) {
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (user) {
+      const { chat, messages } = await getChatForUser(user);
+      return { chat, messages };
+    }
+  }
+
+  return {
+    messages: [
+      {
+        id: ulid(),
+        role: "assistant",
+        content: { format: 2, parts: [{ type: "text", text: welcome }] },
+        createdAt: new Date(),
+      },
+    ],
+  };
+}
+
+/**
+ * Create a new user and chat. If a chat is provided, it is updated with the new user.
+ * created. Includes recent messages in the chat.
+ *
+ * @param headers - The headers object
+ * @param chatId - The chat ID
+ * @returns The chat, recent messages, and HTTP headers
+ * @throws If the chat is not found
+ */
+export async function createUser({
+  chatId,
+  headers,
+}: {
+  chatId: string;
+  headers: Headers;
+}): Promise<{
   chat: ChatGetPayload<{ include: { user: true } }>;
   headers: Headers;
   messages: MastraMessageV2[];
 }> {
-  try {
-    const session = await authServer.api.getSession({
-      headers,
-      returnHeaders: true,
-    });
-    const userId = session.response?.user.id;
-    if (userId) {
-      const user = await prisma.user.findUnique({ where: { id: userId } });
-      if (user) {
-        const { chat, messages } = await getChatForUser(user);
-        return { chat, messages, headers: session.headers };
-      }
-    }
-  } catch (error) {
-    captureException(error, { extra: { headers } });
-  }
+  const { chat, messages } = await getChat(headers);
+  if (chat?.id === chatId && messages)
+    return { chat, headers: headers, messages };
 
   const userAgent = headers.get("user-agent") ?? "";
   const ip = headers.get("x-forwarded-for") ?? "";
   const isBot = isUABot(userAgent) || (await isGoogleIP(ip));
 
-  // If it's a bot, reuse the existing bot user
-  if (isBot) {
-    const bot = await prisma.user.findFirst({ where: { isBot: true } });
-    if (bot) {
-      const { chat, messages } = await getChatForUser(bot);
-      return { chat, messages, headers: headers };
-    }
-  }
-
   const geocode = await geocodeIP(headers);
-  const anonymous = await authServer.api.signInAnonymous({
+  const anonymousUser = await authServer.api.signInAnonymous({
     returnHeaders: true,
   });
-  invariant(anonymous.response?.user.id, "Anonymous user ID is required");
+  invariant(anonymousUser.response?.user.id, "Anonymous user ID is required");
   const user = await prisma.user.update({
-    where: { id: anonymous.response.user.id },
+    where: { id: anonymousUser.response.user.id },
     data: {
       cityStateCountry: [geocode.city, geocode.state, geocode.country]
         .filter(Boolean)
@@ -97,12 +117,25 @@ export async function getUserChat(headers: Headers): Promise<{
       isBot: isBot,
     },
   });
-  const { chat, messages } = await getChatForUser(user);
-  await updateWorkingMemory(chat, (profile) => ({
+  const newChat =
+    (await prisma.chat.findUnique({
+      where: { id: chatId },
+      include: { user: true },
+    })) ??
+    (await prisma.chat.create({
+      data: { id: chatId, metadata: {}, user: { connect: { id: user.id } } },
+      include: { user: true },
+    }));
+  const newMessages = await getRecentMessages(newChat);
+  await updateWorkingMemory(newChat, (profile) => ({
     location: geocode,
     ...profile,
   }));
-  return { chat, messages, headers: anonymous.headers };
+  return {
+    chat: newChat,
+    headers: anonymousUser.headers,
+    messages: newMessages,
+  };
 }
 
 /**

@@ -7,53 +7,31 @@ import { useQueryState } from "nuqs";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
 import { useRouteLoaderData } from "react-router";
+import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import LayoutHeader from "~/components/layout/LayoutHeader";
-import authServer from "~/lib/auth.server";
-import findNearbyProperties from "~/lib/findNearbyProperties";
-import prisma from "~/lib/prisma";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
-import type { Route } from "./+types/route";
 import PropertyList from "./PropertyList";
 
 export const handle = { showHeader: false, showFooter: false };
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const session = await authServer.api.getSession({ headers: request.headers });
-  // Query existing chat (don't create)
-  const chat = session
-    ? await prisma.chat.findFirst({
-        where: { userId: session.user.id },
-        orderBy: { updatedAt: "desc" },
-        include: { user: true },
-      })
-    : null;
-  const properties = chat
-    ? await findNearbyProperties({ chat, maxDistance: 20 })
-    : [];
-  return { chat, properties };
-}
-
-export default function Chat({
-  loaderData,
-}: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
-}) {
+export default function Chat() {
   const [query, setQuery] = useQueryState("q");
 
   // Access data from root loader first, our loaded depends on it
   const { chat, messages: initialMessages } = useRouteLoaderData("root") as {
-    chat: ChatGetPayload<{ include: { user: true } }>;
-    messages: MastraMessageV2[];
+    chat?: ChatGetPayload<{ include: { user: true } }>;
+    messages?: MastraMessageV2[];
   };
-  const properties = loaderData?.properties ?? [];
 
+  const chatId = chat?.id ?? ulid();
   const { error, messages, sendMessage, status, stop } = useChat({
-    id: chat.id,
-    messages: initialMessages.map((message) => ({
+    id: chatId,
+    messages: initialMessages?.map((message) => ({
       id: message.id,
+      threadId: chatId,
       parts: message.content.parts
         .filter((part) => part.type === "text" || part.type === "reasoning")
         .map((part) => ({
@@ -63,15 +41,13 @@ export default function Chat({
         })),
       role: message.role,
     })),
-    resume: false, // Enable automatic stream resumption
     transport: new DefaultChatTransport({
-      api: "/api/chat",
+      api: `/api/chat/${chatId}/message`,
       // only send the last message to the server:
       prepareSendMessagesRequest({ messages }) {
         const message = last(messages) as UIMessage;
         return {
           body: {
-            chatId: chat.id,
             message: message.parts
               .filter((part) => part.type === "text")
               .map((part) => part.text)
@@ -87,9 +63,12 @@ export default function Chat({
     },
   });
   const inputRef = useRef<HTMLInputElement>(null);
+
   function stopChat() {
-    stop();
-    fetch(`/api/chat/${chat.id}/stop`, { method: "POST" });
+    if (chat?.id) {
+      stop();
+      fetch(`/api/chat/${chat.id}/stop`, { method: "POST" });
+    }
   }
 
   return (
@@ -108,7 +87,7 @@ export default function Chat({
 
         <ScrollButton />
 
-        <PropertyList properties={properties} />
+        <PropertyList chatId={chatId} messages={messages} />
 
         <InputForm
           inputRef={inputRef}
@@ -117,6 +96,7 @@ export default function Chat({
           query={query ?? ""}
           sendMessage={(message: string) =>
             sendMessage({
+              threadId: chatId,
               parts: [{ text: message, type: "text", details: undefined }],
               role: "user",
             })

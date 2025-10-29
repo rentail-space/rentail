@@ -319,16 +319,18 @@ export class PrismaStorage extends MastraStorage {
   ): Promise<MastraMessageV2[] | MastraMessageV1[]> {
     const chatId = getChatId(args.messages);
     const messages = await prisma.messages.createManyAndReturn({
-      data: args.messages.map((message) => {
-        return {
-          chatId,
-          content: JSON.stringify(message.content),
-          createdAt: message.createdAt,
-          id: message.id,
-          role: message.role as Role,
-          type: message.type ?? "text",
-        };
-      }),
+      data: args.messages
+        .filter((message) => message.content !== undefined)
+        .map((message) => {
+          return {
+            chatId,
+            content: JSON.stringify(message.content),
+            createdAt: message.createdAt,
+            id: message.id,
+            role: message.role as Role,
+            type: message.type ?? "text",
+          };
+        }),
       skipDuplicates: true,
     });
     return await toMessageV2(messages);
@@ -468,17 +470,22 @@ async function toMessageV2(messages: Messages[]): Promise<MastraMessageV2[]> {
   });
   invariant(chat, "Chat is required");
 
-  return messages.map((message) => ({
-    content: message.content
+  const result = messages.map((message) => {
+    const content = message.content
       ? JSON.parse(message.content as string)
-      : undefined,
-    createdAt: message.createdAt,
-    id: message.id,
-    role: message.role as MastraMessageV2["role"],
-    type: message.type as MastraMessageV2["type"],
-    threadId: chat.id,
-    resourceId: chat.user?.id,
-  }));
+      : undefined;
+    return {
+      content,
+      createdAt: message.createdAt,
+      id: message.id,
+      role: message.role as MastraMessageV2["role"],
+      type: message.type as MastraMessageV2["type"],
+      threadId: chat.id,
+      resourceId: chat.user?.id,
+    };
+  });
+
+  return result;
 }
 
 function toThread(chat: Chat): StorageThreadType {

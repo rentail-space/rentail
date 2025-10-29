@@ -1,13 +1,26 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
-import { Activity, useState } from "react";
+import { Activity, useEffect, useState } from "react";
 import { Link } from "react-router";
 
 export default function PropertyList({
-  properties,
+  chatId,
+  messages,
 }: {
-  properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+  chatId: string;
+  messages: { id: string }[];
 }) {
+  const [properties, setProperties] = useState<
+    PropertyGetPayload<{ include: { spaces: true } }>[]
+  >([]);
   const [hoveredProperty, setHoveredProperty] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      fetch(`/api/chat/${chatId}/properties`)
+        .then((response) => response.json())
+        .then((data) => setProperties(data));
+    }
+  }, [messages.length, chatId]);
 
   return (
     <div className="mx-auto flex max-w-xl flex-wrap gap-4">
