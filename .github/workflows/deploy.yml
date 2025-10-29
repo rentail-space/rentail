@@ -164,6 +164,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           org-id: ${{ secrets.VERCEL_ORG_ID }}
           prebuilt: false
-          production: ${{ github.ref == 'refs/heads/main' }}
+          production: false
           project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           token: ${{ secrets.VERCEL_TOKEN }}
