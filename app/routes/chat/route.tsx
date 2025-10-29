@@ -91,7 +91,12 @@ export default function Chat() {
 
         <ScrollButton />
 
-        <PropertyList chatId={chatId} messages={messages} />
+        <PropertyList
+          chatId={chatId}
+          lastAssistantMessage={last(
+            messages?.filter((message) => message.role === "assistant"),
+          )}
+        />
 
         <InputForm
           inputRef={inputRef}
