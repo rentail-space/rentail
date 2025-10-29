@@ -45,18 +45,14 @@ const cachedLocation = zod
  * @param headers - The headers object
  * @returns The chat (optional) and recent messages
  */
-export async function getChat(headers: Headers): Promise<{
+export async function findChat(headers: Headers): Promise<{
   chat?: ChatGetPayload<{ include: { user: true } }>;
   messages: MastraMessageV2[];
 }> {
   const session = await authServer.api.getSession({ headers });
-  const userId = session?.user.id;
-  if (userId) {
-    const user = await prisma.user.findUnique({ where: { id: userId } });
-    if (user) {
-      const { chat, messages } = await getChatForUser(user);
-      return { chat, messages };
-    }
+  if (session?.user) {
+    const { chat, messages } = await getChatForUser(session.user);
+    return { chat, messages };
   }
 
   return {
@@ -91,7 +87,7 @@ export async function createUser({
   headers: Headers;
   messages: MastraMessageV2[];
 }> {
-  const { chat, messages } = await getChat(headers);
+  const { chat, messages } = await findChat(headers);
   if (chat?.id === chatId && messages)
     return { chat, headers: headers, messages };
 

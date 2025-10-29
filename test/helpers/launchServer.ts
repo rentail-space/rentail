@@ -5,8 +5,7 @@ import { resolve } from "node:path";
 import { afterAll } from "vitest";
 import "~/test/helpers/toMatchScreenshot";
 
-export const port = 9222;
-
+const port = 9222;
 let worker: ChildProcess | undefined;
 
 /**
@@ -14,8 +13,8 @@ let worker: ChildProcess | undefined;
  *
  * @returns The server worker.
  */
-export async function launchServer(): Promise<void> {
-  if (worker) return;
+export async function launchServer(): Promise<{ port: number }> {
+  if (worker) return { port };
 
   debug("server")("launching server");
   try {
@@ -55,6 +54,7 @@ export async function launchServer(): Promise<void> {
   });
 
   debug("server")("server is ready");
+  return { port };
 }
 
 async function cleanup() {

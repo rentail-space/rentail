@@ -40,7 +40,7 @@ export default async function findNearbyProperties({
 
 async function locationFromWorkingMemory(
   chat: ChatGetPayload<{ include: { user: true } }>,
-): Promise<{ longitude?: number; latitude?: number }> {
+): Promise<{ longitude: number; latitude: number }> {
   const { location } = await getWorkingMemory(chat);
   return {
     longitude: location?.longitude ?? 0,

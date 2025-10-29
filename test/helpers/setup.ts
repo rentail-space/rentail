@@ -1,7 +1,7 @@
 // This file contains setup code that will run before all tests
 
-import { format, styleText } from "node:util";
 import * as Sentry from "@sentry/react-router";
+import { format, styleText } from "node:util";
 import seedProperties from "prisma/seed/seedProperties";
 import { afterAll, beforeAll } from "vitest";
 import whyIsNodeRunning from "why-is-node-running";
@@ -40,9 +40,9 @@ afterAll(async () => {
 beforeAll(async () => {
   // Start MSW server before all tests
   msw.listen({ onUnhandledRequest: "error" });
-  await launchServer();
+  const { port } = await launchServer();
   // Setup browser and wait for dependencies to be ready
-  const context = await launchBrowser();
+  const context = await launchBrowser(port);
   const page = await context.newPage();
   await waitForDependencies(page, "/");
 });

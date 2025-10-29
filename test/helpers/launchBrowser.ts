@@ -10,7 +10,7 @@ import {
 } from "playwright";
 import { afterAll } from "vitest";
 import "~/test/helpers/toMatchScreenshot";
-import { launchServer, port } from "./launchServer";
+import { launchServer } from "./launchServer";
 
 let context: BrowserContext | undefined;
 
@@ -24,8 +24,8 @@ export async function goto(
   path: string,
   headers?: Record<string, string>,
 ): Promise<Page> {
-  await launchServer();
-  const context = await launchBrowser();
+  const { port } = await launchServer();
+  const context = await launchBrowser(port);
   const page = await context.newPage();
   await page.setExtraHTTPHeaders(headers ?? {});
   await waitForDependencies(page, path);
@@ -76,9 +76,10 @@ async function hasEnoughDependencies(dirname: string) {
 /**
  * Launch a new browser instance and return the context.
  *
+ * @param port - The port to use for the browser.
  * @returns The browser context.
  */
-export async function launchBrowser(): Promise<BrowserContext> {
+export async function launchBrowser(port: number): Promise<BrowserContext> {
   if (context) return context;
 
   const headless = process.env.CI ? true : !debug.enabled("browser");

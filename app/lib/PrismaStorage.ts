@@ -206,7 +206,7 @@ export class PrismaStorage extends MastraStorage {
       metadata: JSON.stringify(thread.metadata ?? {}),
       title: thread.title ?? undefined,
       updatedAt: thread.updatedAt,
-      userId: thread.resourceId,
+      user: { connect: { id: thread.resourceId } },
     };
     const chat = await prisma.chat.upsert({
       create: { ...update, id: thread.id },
