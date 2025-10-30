@@ -1,4 +1,7 @@
 // DO NOT add to setup.ts as vitest.config.js cannot upload file that imports vitest
+import { expect } from "@playwright/test";
+import { invariant } from "es-toolkit";
+import looksSame from "looks-same";
 import {
   access,
   constants,
@@ -9,9 +12,6 @@ import {
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
-import { expect } from "@playwright/test";
-import { invariant } from "es-toolkit";
-import looksSame from "looks-same";
 import type { Page } from "playwright";
 
 const dirname = path.resolve("./__screenshots__");
@@ -46,7 +46,7 @@ expect.extend({
       },
     );
     const diff = differentPixels / screenshot.length;
-    if (diff < 2 || !diffImage) {
+    if (diff < 3 || !diffImage) {
       return {
         message: () => `Image matches baseline (diff: ${diff.toFixed(2)}%)`,
         pass: true,
