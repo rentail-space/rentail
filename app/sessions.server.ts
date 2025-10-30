@@ -4,6 +4,7 @@ import debug from "debug";
 import { invariant } from "es-toolkit";
 import { createIsbotFromList, list } from "isbot";
 import { reverse } from "node:dns/promises";
+import type { Chat, User } from "prisma/generated/client";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { ulid } from "ulid";
 import zod from "zod";
@@ -39,8 +40,9 @@ const cachedLocation = zod
   .partial();
 
 /**
- * Get the chat for the user from the session. If no chat is found, a new one is
- * created. Includes recent messages in the chat.
+ * Get the chat for the user from the session. The chat referenced the user.
+ * Also returns the recent messages in the chat. If this is a new chat, returns
+ * the initial welcome message.
  *
  * @param headers - The headers object
  * @returns The chat (optional) and recent messages
@@ -75,70 +77,86 @@ export async function findChat(headers: Headers): Promise<{
 }
 
 /**
- * Create a new user and chat. If a chat is provided, it is updated with the new user.
- * created. Includes recent messages in the chat.
+ * Find or create a user and chat. Returns the chat, which references the user,
+ * and the recent messages in the chat. Also returns the HTTP headers which have
+ * the session cookie set.
  *
  * @param headers - The headers object
- * @param chatId - The chat ID
+ * @param chatId - The chat ID to find or create
  * @returns The chat, recent messages, and HTTP headers
- * @throws If the chat is not found
  */
-export async function createUser({
+export async function findOrCreateUser({
   chatId,
   headers,
 }: {
   chatId: string;
   headers: Headers;
 }): Promise<{
-  chat: ChatGetPayload<{ include: { user: true } }>;
+  chat: Chat;
   headers: Headers;
   messages: MastraMessageV2[];
+  user: User;
 }> {
   const { chat, messages } = await findChat(headers);
-  if (chat?.id === chatId && messages)
-    return { chat, headers: headers, messages };
+  if (chat) {
+    invariant(chat.id === chatId, "Chat ID mismatch");
+    return { chat, headers: headers, messages, user: chat.user };
+  }
 
-  const userAgent = headers.get("user-agent") ?? "";
-  const ip = headers.get("x-forwarded-for") ?? "";
-  const isBot = isUABot(userAgent) || (await isGoogleIP(ip));
-
-  const geocode = await geocodeIP(headers);
+  // We're gong to sign in the anonymous user so we can get the HTTP headers
   const anonymousUser = await authServer.api.signInAnonymous({
     returnHeaders: true,
   });
   invariant(anonymousUser.response?.user.id, "Anonymous user ID is required");
-  const user = await prisma.user.update({
+
+  // Update the anonymous user with the initial fields (IP, geocode, user agent,
+  // referrer, etc.)
+  const newUser = await prisma.user.update({
+    data: await getInitialFields(headers),
     where: { id: anonymousUser.response.user.id },
-    data: {
-      cityStateCountry: [geocode.city, geocode.state, geocode.country]
-        .filter(Boolean)
-        .join(", "),
-      geocode,
-      ip: headers.get("x-forwarded-for") ?? "",
-      referrer: headers.get("referer") ?? "",
-      userAgent,
-      isBot: isBot,
-    },
   });
-  const newChat =
-    (await prisma.chat.findUnique({
-      where: { id: chatId },
-      include: { user: true },
-    })) ??
-    (await prisma.chat.create({
-      data: { id: chatId, metadata: {}, user: { connect: { id: user.id } } },
-      include: { user: true },
-    }));
-  const newMessages = await getRecentMessages(newChat);
-  await updateWorkingMemory(newChat, (profile) => ({
-    location: geocode,
+  const newChat = await prisma.chat.create({
+    data: { id: chatId, metadata: {}, user: { connect: { id: newUser.id } } },
+    include: { user: true },
+  });
+
+  await updateWorkingMemory({ chat: newChat, user: newUser }, (profile) => ({
+    location: newUser.geocode,
     ...profile,
   }));
+  const newMessages = await getRecentMessages(newChat);
+
   return {
     chat: newChat,
     headers: anonymousUser.headers,
     messages: newMessages,
+    user: newUser,
   };
+}
+
+/**
+ * Get the initial fields for the user. These record the user's IP
+ * address, geocode, user agent, referrer, etc.
+ *
+ * @param headers - The headers object
+ * @returns The initial fields for the user
+ */
+async function getInitialFields(headers: Headers): Promise<{
+  cityStateCountry: string;
+  geocode: zod.infer<typeof cachedLocation>;
+  isBot: boolean;
+  referrer: string;
+  userAgent: string;
+}> {
+  const geocode = await geocodeFromHeaders(headers);
+  const ip = headers.get("x-forwarded-for") ?? "";
+  const userAgent = headers.get("user-agent") ?? "";
+  const isBot = isUABot(userAgent) || (await isGoogleBot(ip));
+  const cityStateCountry = [geocode.city, geocode.state, geocode.country]
+    .filter(Boolean)
+    .join(", ");
+  const referrer = headers.get("referer") ?? "";
+  return { cityStateCountry, geocode, isBot, referrer, userAgent };
 }
 
 /**
@@ -147,7 +165,7 @@ export async function createUser({
  * @param headers - The headers object
  * @returns The location
  */
-export async function geocodeIP(
+async function geocodeFromHeaders(
   headers: Headers,
 ): Promise<zod.infer<typeof cachedLocation>> {
   const fallback = {
@@ -201,7 +219,7 @@ const isUABot: (userAgent: string) => boolean = createIsbotFromList(
  * @param ip - The IP address to check
  * @returns True if the IP resolves to a Google domain, false otherwise
  */
-async function isGoogleIP(ip: string): Promise<boolean> {
+async function isGoogleBot(ip: string): Promise<boolean> {
   try {
     // Skip reverse DNS check for localhost/private IPs
     if (

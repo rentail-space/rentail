@@ -11,11 +11,7 @@ describe("Proximity-based shopping center search", () => {
 
     beforeAll(async () => {
       await identifyUser(calculateCoordinates("north", 10));
-
-      const chat = await prisma.chat.findFirstOrThrow({
-        include: { user: true },
-      });
-      properties = await findNearbyProperties({ chat, maxDistance: 20 });
+      properties = await findWithin20Miles();
     });
 
     it("should find The Grove shopping center", () => {
@@ -28,10 +24,7 @@ describe("Proximity-based shopping center search", () => {
 
     beforeAll(async () => {
       await identifyUser(calculateCoordinates("south", 10));
-      const chat = await prisma.chat.findFirstOrThrow({
-        include: { user: true },
-      });
-      properties = await findNearbyProperties({ chat, maxDistance: 20 });
+      properties = await findWithin20Miles();
     });
 
     it("should find The Grove shopping center", () => {
@@ -44,10 +37,7 @@ describe("Proximity-based shopping center search", () => {
 
     beforeAll(async () => {
       await identifyUser(calculateCoordinates("west", 10));
-      const chat = await prisma.chat.findFirstOrThrow({
-        include: { user: true },
-      });
-      properties = await findNearbyProperties({ chat, maxDistance: 20 });
+      properties = await findWithin20Miles();
     });
 
     it("should find The Grove shopping center", () => {
@@ -60,10 +50,7 @@ describe("Proximity-based shopping center search", () => {
 
     beforeAll(async () => {
       await identifyUser(calculateCoordinates("east", 10));
-      const chat = await prisma.chat.findFirstOrThrow({
-        include: { user: true },
-      });
-      properties = await findNearbyProperties({ chat, maxDistance: 20 });
+      properties = await findWithin20Miles();
     });
 
     it("should find The Grove shopping center", () => {
@@ -76,10 +63,7 @@ describe("Proximity-based shopping center search", () => {
 
     beforeAll(async () => {
       await identifyUser(calculateCoordinates("north", 30));
-      const chat = await prisma.chat.findFirstOrThrow({
-        include: { user: true },
-      });
-      properties = await findNearbyProperties({ chat, maxDistance: 20 });
+      properties = await findWithin20Miles();
     });
 
     it("should not find The Grove shopping center", () => {
@@ -92,10 +76,7 @@ describe("Proximity-based shopping center search", () => {
 
     beforeAll(async () => {
       await identifyUser(calculateCoordinates("south", 30));
-      const chat = await prisma.chat.findFirstOrThrow({
-        include: { user: true },
-      });
-      properties = await findNearbyProperties({ chat, maxDistance: 20 });
+      properties = await findWithin20Miles();
     });
 
     it("should not find The Grove shopping center", () => {
@@ -108,10 +89,7 @@ describe("Proximity-based shopping center search", () => {
 
     beforeAll(async () => {
       await identifyUser(calculateCoordinates("west", 30));
-      const chat = await prisma.chat.findFirstOrThrow({
-        include: { user: true },
-      });
-      properties = await findNearbyProperties({ chat, maxDistance: 20 });
+      properties = await findWithin20Miles();
     });
 
     it("should not find The Grove shopping center", () => {
@@ -124,10 +102,7 @@ describe("Proximity-based shopping center search", () => {
 
     beforeAll(async () => {
       await identifyUser(calculateCoordinates("east", 30));
-      const chat = await prisma.chat.findFirstOrThrow({
-        include: { user: true },
-      });
-      properties = await findNearbyProperties({ chat, maxDistance: 20 });
+      properties = await findWithin20Miles();
     });
 
     it("should not find The Grove shopping center", () => {
@@ -179,6 +154,18 @@ async function identifyUser(coordinates: {
   await page.getByRole("textbox").fill("What are the nearby shopping centers?");
   await page.getByRole("button", { name: "Send" }).click();
   await page.waitForLoadState("networkidle");
+}
+
+async function findWithin20Miles(): Promise<
+  PropertyGetPayload<{ include: { spaces: true } }>[]
+> {
+  const chat = await prisma.chat.findFirstOrThrow({ include: { user: true } });
+  const { properties } = await findNearbyProperties({
+    chat,
+    maxDistance: 20,
+    user: chat.user,
+  });
+  return properties;
 }
 
 function findTheGrove(

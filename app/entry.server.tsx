@@ -8,7 +8,7 @@ import type {
 } from "react-router";
 import { v7 as uuidv7 } from "uuid";
 import env from "~/lib/env";
-import server from "~/test/mocks/msw.server";
+import msw from "~/test/mocks/msw.server";
 
 if (env.SENTRY_DSN) {
   Sentry.init({
@@ -30,7 +30,7 @@ if (env.SENTRY_DSN) {
 if (env.isTest) {
   debug("msw")("Initializing MSW for test mode");
   // Initialize MSW in test mode
-  server.listen({ onUnhandledRequest: "error" });
+  msw.listen({ onUnhandledRequest: "error" });
 }
 
 export function getLoadContext() {

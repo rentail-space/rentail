@@ -69,7 +69,7 @@ function PropertyLink({
           className="h-4 w-4"
           src="/images/shopping-mall.png"
         />
-        <span className="max-w-[12rem] truncate text-base-content/70 text-sm">
+        <span className="max-w-48 truncate text-base-content/70 text-sm">
           {property.name}
         </span>
       </Link>

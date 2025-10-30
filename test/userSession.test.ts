@@ -47,7 +47,7 @@ describe("Anonymous visits chat page", () => {
     const chat = await prisma.chat.findFirstOrThrow({
       include: { user: true },
     });
-    const workingMemory = await getWorkingMemory(chat);
+    const workingMemory = await getWorkingMemory({ chat, user: chat.user });
     expect(workingMemory.location?.city).toEqual("Los Angeles");
     expect(workingMemory.location?.state).toEqual("California");
     expect(workingMemory.location?.country).toEqual("United States");
@@ -73,7 +73,7 @@ describe("Anonymous visits chat page", () => {
         include: { messages: true, user: true },
         where: { user: { isAnonymous: true } },
       });
-      workingMemory = await getWorkingMemory(chat);
+      workingMemory = await getWorkingMemory({ chat, user: chat.user });
     });
 
     it("should have user's new city", async () => {
@@ -223,7 +223,10 @@ describe("Anonymous visits chat page", () => {
               include: { user: true },
               where: { user: { isAnonymous: false } },
             });
-            const workingMemory = await getWorkingMemory(chat);
+            const workingMemory = await getWorkingMemory({
+              chat,
+              user: chat.user,
+            });
             expect(workingMemory.location?.city).toEqual("Boston");
             expect(workingMemory.location?.state).toEqual("Massachusetts");
             expect(workingMemory.location?.country).toEqual("United States");

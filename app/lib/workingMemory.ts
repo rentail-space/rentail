@@ -3,7 +3,7 @@ import { Memory } from "@mastra/memory";
 import { TokenLimiter, ToolCallFilter } from "@mastra/memory/processors";
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
-import type { ChatGetPayload } from "prisma/generated/models";
+import type { Chat, User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import type zod from "zod";
 import welcome from "~/prompts/welcome.md?raw";
@@ -33,9 +33,7 @@ export const memory = new Memory({
  * @param chat The chat to get messages for.
  * @returns The messages for the chat.
  */
-export async function getRecentMessages(
-  chat: ChatGetPayload<{ include: { user: true } }>,
-) {
+export async function getRecentMessages(chat: Chat) {
   const messages = await memory.rememberMessages({ threadId: chat.id });
   if (messages.messagesV2.length > 0) return messages.messagesV2;
 
@@ -45,7 +43,7 @@ export async function getRecentMessages(
         content: { format: 2, parts: [{ text: welcome, type: "text" }] },
         createdAt: new Date(),
         id: ulid(),
-        resourceId: chat.user.id,
+        resourceId: chat.userId,
         role: "assistant",
         threadId: chat.id,
       },
@@ -68,7 +66,7 @@ export async function saveMessages({
   chat,
   messages,
 }: {
-  chat: ChatGetPayload<{ include: { user: true } }>;
+  chat: Chat;
   messages: MastraMessageV2[];
 }): Promise<MastraMessageV2[]> {
   invariant(chat.id, "Chat ID is required");
@@ -76,7 +74,7 @@ export async function saveMessages({
     messages: messages.map((message) => ({
       ...message,
       threadId: chat.id,
-      resourceId: chat.user.id,
+      resourceId: chat.userId,
     })),
     format: "v2",
   });
@@ -87,19 +85,24 @@ export async function saveMessages({
  * found, return the fallback profile.
  *
  * @param chat The chat to read from working memory.
+ * @param user The user to read from working memory.
  * @returns The user's profile.
  */
-export async function getWorkingMemory(
-  chat: ChatGetPayload<{ include: { user: true } }>,
-): Promise<zod.infer<typeof userProfile>> {
+export async function getWorkingMemory({
+  chat,
+  user,
+}: {
+  chat: Chat;
+  user: User;
+}): Promise<zod.infer<typeof userProfile>> {
   await memory.createThread({
-    resourceId: chat.user.id,
+    resourceId: chat.userId,
     threadId: chat.id,
     saveThread: true,
   });
   const json =
     (await memory.getWorkingMemory({
-      resourceId: chat.user.id,
+      resourceId: chat.userId,
       threadId: chat.id,
     })) ?? null;
 
@@ -107,7 +110,7 @@ export async function getWorkingMemory(
     zod.infer<typeof userProfile>
   >;
   const { success, data, error } = userProfile.safeParse({
-    location: chat.user.geocode,
+    location: user.geocode,
     ...parsed,
   });
   if (success) return data;
@@ -122,28 +125,29 @@ export async function getWorkingMemory(
  * with the current working memory and should return the new working memory.
  *
  * @param chat The chat to update working memory for.
- * @param update The update function to apply to the working memory
+ * @param user The user to update working memory for.
+ * @param update The update function to apply to the working memory.
  * @returns The updated working memory.
  */
 export async function updateWorkingMemory(
-  chat: ChatGetPayload<{ include: { user: true } }>,
+  { chat, user }: { chat: Chat; user: User },
   update: (
     current: zod.infer<typeof userProfile>,
   ) => Promise<Record<string, unknown>> | Record<string, unknown>,
 ): Promise<zod.infer<typeof userProfile>> {
-  const currentValue = await getWorkingMemory(chat);
+  const currentValue = await getWorkingMemory({ chat, user });
   const { success, error, data } = userProfile.safeParse(
     await update(currentValue),
   );
   if (success) {
     await memory.updateWorkingMemory({
-      resourceId: chat.user.id,
+      resourceId: user.id,
       threadId: chat.id,
       workingMemory: JSON.stringify(data),
     });
     return data;
   } else {
     captureException(error, { extra: { chat } });
-    return userProfile.parse({ location: chat.user.geocode });
+    return userProfile.parse({ location: user.geocode });
   }
 }

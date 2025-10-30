@@ -5,17 +5,16 @@ import { createUIMessageStreamResponse, stepCountIs } from "ai";
 import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import humanFormat from "human-format";
-import type { PropertySpace } from "prisma/generated/client";
-import type { PropertyGetPayload } from "prisma/generated/models";
 import mastra from "~/lib/agent";
 import findNearbyProperties from "~/lib/findNearbyProperties";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import general from "~/prompts/general.md?raw";
-import { createUser } from "~/sessions.server";
+import { findOrCreateUser } from "~/sessions.server";
 import type { Route } from "./+types/api.chat.$id.message";
 
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams
+const logger = debug("chat");
 
 export async function action({ params, request }: Route.ActionArgs) {
   const { messages } = (await request.clone().json()) as {
@@ -23,15 +22,21 @@ export async function action({ params, request }: Route.ActionArgs) {
   };
   const lastMessage = last(messages);
   if (!lastMessage) return new Response("Message is required", { status: 400 });
+  logger("User's last message: %o", lastMessage);
 
-  const { chat, headers } = await createUser({
+  const { chat, headers, user } = await findOrCreateUser({
     chatId: params.id,
     headers: request.headers,
   });
 
   // Set up Redis stop monitoring
-  const { abortSignal, cleanup } = await monitorStopSignal(chat.id);
-  const properties = await findNearbyProperties({ chat, maxDistance: 20 });
+  const { abortSignal } = await monitorStopSignal(chat.id);
+  const { properties, markdown } = await findNearbyProperties({
+    chat,
+    maxDistance: 20,
+    user,
+  });
+  logger("Found %d properties", properties.length);
 
   const agent = mastra.getAgentById("main");
   const memory = await agent.getMemory();
@@ -39,18 +44,17 @@ export async function action({ params, request }: Route.ActionArgs) {
 
   // Load existing messages to see what will be sent
   const { messagesV2 } = await memory.rememberMessages({ threadId: chat.id });
-  const stream = await agent.stream([...messagesV2, lastMessage], {
+  const stream = await agent.stream(messages, {
     abortSignal,
-    memory: { resource: chat.user.id, thread: chat.id },
+    memory: { resource: user.id, thread: chat.id },
     savePerStep: true,
     maxSteps: 3,
     stopWhen: stepCountIs(3),
     requireToolApproval: false,
-    system: `${general}\n\n=====\n\n${centersToMarkdown({ properties, maxDistance: 20 })}`,
+    system: `${general}\n\n=====\n\n${markdown}`,
 
     onAbort: async () => {
-      debug("chat")("Aborted by user");
-      await cleanup();
+      logger("Aborted by user");
     },
 
     onError: (error) => {
@@ -65,16 +69,15 @@ export async function action({ params, request }: Route.ActionArgs) {
     },
 
     onFinish: async ({ steps, usage }) => {
-      debug("chat")(
-        "steps %d => total tokens %s",
+      logger(
+        "Finished: %d steps => total tokens %s",
         steps.length,
         humanFormat(usage.totalTokens ?? 0),
       );
-      await cleanup();
     },
 
     onChunk: (data) => {
-      debug("chat")(data);
+      logger("Chunk: %o", data);
     },
 
     providerOptions: {
@@ -96,48 +99,4 @@ export async function action({ params, request }: Route.ActionArgs) {
     headers,
     stream: toAISdkFormat(stream, { from: "agent" }),
   });
-}
-
-function centersToMarkdown({
-  properties,
-  maxDistance,
-}: {
-  properties: PropertyGetPayload<{ include: { spaces: true } }>[];
-  maxDistance: number;
-}): string {
-  if (properties.length === 0)
-    return "I don't know where you are, so I can't find any shopping centers near you.";
-
-  const prefix = `Here are the shopping centers in the area which are within ${maxDistance} miles of the user.
-    These are all the shopping centers you know about.
-    You do not know about any other shopping centers.
-    If the user asks about a shopping center you do not know about, you should say so.
-    Do not make up information about shopping centers you do not know about.
-    Do not even mention shopping centers you do not know about.`;
-
-  return `${prefix}\n\n${properties.map(centerToMarkdown).join("\n\n")}`;
-}
-
-function centerToMarkdown(
-  property: PropertyGetPayload<{ include: { spaces: true } }>,
-): string {
-  return `<shopping-center>
-  Shopping center name: ${property.name}
-  Address: ${property.address}, ${property.city}, ${property.state}, ${property.country}
-  Description: ${property.description}
-  ${property.imageURLs.map((image) => `Image: ${image}`).join("\n")}
-  Spaces: ${property.spaces.map(centerSpacesToMarkdown).join("\n")}
-</shopping-center>`;
-}
-
-function centerSpacesToMarkdown(space: PropertySpace): string {
-  return `<space>
-  Space name: ${space.name}
-  Description: ${space.details}
-  Cost: ${space.cost}
-  Foot traffic: ${space.footTraffic}
-  Size: ${space.size} sqft
-  Available: ${space.available}
-  ${space.imageURLs.map((image) => `Image: ${image}`).join("\n")}
-</space>`;
 }

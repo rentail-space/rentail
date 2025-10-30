@@ -9,6 +9,10 @@ export async function loader({ params }: Route.LoaderArgs) {
     where: { id },
   });
   if (!chat) throw new Response("Chat not found", { status: 404 });
-  const properties = await findNearbyProperties({ chat, maxDistance: 20 });
+  const { properties } = await findNearbyProperties({
+    chat,
+    maxDistance: 20,
+    user: chat.user,
+  });
   return properties;
 }

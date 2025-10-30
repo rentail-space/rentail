@@ -1,4 +1,6 @@
-// This file contains setup code that will run before all tests
+/**
+ * NOTE: This file contains setup code that will run before all tests
+ */
 
 import * as Sentry from "@sentry/react-router";
 import { format, styleText } from "node:util";

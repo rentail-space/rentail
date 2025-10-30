@@ -319,18 +319,16 @@ export class PrismaStorage extends MastraStorage {
   ): Promise<MastraMessageV2[] | MastraMessageV1[]> {
     const chatId = getChatId(args.messages);
     const messages = await prisma.messages.createManyAndReturn({
-      data: args.messages
-        .filter((message) => message.content !== undefined)
-        .map((message) => {
-          return {
-            chatId,
-            content: JSON.stringify(message.content),
-            createdAt: message.createdAt,
-            id: message.id,
-            role: message.role as Role,
-            type: message.type ?? "text",
-          };
-        }),
+      data: args.messages.map((message) => {
+        return {
+          chatId,
+          content: message.content ? JSON.stringify(message.content) : "{}",
+          createdAt: message.createdAt,
+          id: message.id,
+          role: message.role as Role,
+          type: message.type ?? "text",
+        };
+      }),
       skipDuplicates: true,
     });
     return await toMessageV2(messages);
