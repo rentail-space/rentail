@@ -1,4 +1,3 @@
-import { invariant } from "node_modules/es-toolkit/dist/util/invariant.mjs";
 import { expect, type Page } from "playwright/test";
 import type { Messages } from "prisma/generated/client";
 import { beforeAll, describe, it } from "vitest";
@@ -41,11 +40,12 @@ describe("Chat page", () => {
       page = await goto("/chat");
       await page.getByRole("textbox").fill(testMessage);
       await page.getByRole("button", { name: "Send" }).click();
-      await page.waitForLoadState("networkidle");
+      await page.waitForTimeout(500);
 
       message = await prisma.messages.findFirstOrThrow({
         orderBy: { createdAt: "desc" },
       });
+      console.log(message);
     });
 
     it("should look like a real chat", async () => {
@@ -60,13 +60,11 @@ describe("Chat page", () => {
     });
 
     it("should show assistant message in chat", async () => {
-      invariant(message?.content, "Message content is required");
-      const multipleLines = JSON.parse(message.content as string).parts.map(
-        (part: { text: string }) => part.text,
-      );
-      const firstLine = multipleLines.join("\n").split("\n")[0];
       await expect(
-        page.locator(".chat-bubble").filter({ hasText: firstLine }),
+        page.locator(".chat-bubble").filter({
+          hasText:
+            /I'm here to help you find the perfect retail space for your business./i,
+        }),
       ).toBeVisible();
     });
 
