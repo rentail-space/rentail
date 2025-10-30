@@ -3,13 +3,8 @@ import { beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Chat page", () => {
-  let page: Page;
-
-  beforeAll(async () => {
-    page = await goto("/chat");
-  });
-
   it("renders chat interface with welcome message", async () => {
+    const page = await goto("/chat");
     // Check that the chat interface is rendered
     await expect(page.locator("div.h-screen")).toBeVisible();
 
@@ -21,54 +16,57 @@ describe("Chat page", () => {
 
     // Check that input form is present
     await expect(page.locator("form")).toBeVisible();
-    await expect(page.locator("input[type='text']")).toBeVisible();
+    await expect(page.getByRole("textbox")).toBeVisible();
   });
 
   it("handles initial query parameter", async () => {
     const testQuery = "Do you have any locations available in downtown areas?";
-    await page.goto(`/chat?q=${encodeURIComponent(testQuery)}`);
+    const page = await goto(`/chat?q=${encodeURIComponent(testQuery)}`);
 
     // Check that user message appears in chat
-    await expect(page.locator("input[type='text']")).toHaveValue(testQuery);
+    await expect(page.getByRole("textbox")).toHaveValue(testQuery);
   });
 
   describe("exchange messages", () => {
     const testMessage =
       "looking for a pop-up retail space for my clothing boutique";
+    let page: Page;
 
     beforeAll(async () => {
-      await page.goto("/chat");
-
-      const input = page.locator("input[type='text']");
-
-      // Clear and type the message properly
-      await input.click(); // Focus the input
-      await input.fill(testMessage); // Fill sets the value and dispatches input event
-      // Submit by pressing Enter (more reliable than clicking button)
-      await input.press("Enter");
+      page = await goto("/chat");
+      await page.getByRole("textbox").fill(testMessage);
+      await page.getByRole("button", { name: "Send" }).click();
       await page.waitForLoadState("networkidle");
     });
 
-    it("sends user message and receives server response", async () => {
-      // Verify user message appears in chat
-      await expect(
-        page
-          .locator(".chat-bubble-accent")
-          .filter({ hasText: testMessage })
-          .first(),
-      ).toBeVisible();
+    it("should look like a real chat", async () => {
+      // Take screenshot for visual regression testing
+      await expect(page).toMatchScreenshot();
+    });
 
-      // Verify we got our mock response
+    it("should show user message in chat", async () => {
       await expect(
-        page
-          .locator(".chat-bubble")
-          .filter({ hasText: /Perfect! I found some great locations/i }),
+        page.locator(".chat-bubble-accent").filter({
+          hasText:
+            /looking for a pop-up retail space for my clothing boutique/i,
+        }),
       ).toBeVisible();
+    });
 
-      // Count all chat messages - should have welcome + user + assistant response
+    it("should show assistant message in chat", async () => {
+      await expect(
+        page.locator(".chat-bubble").filter({
+          hasText: /Could you tell me more about what you're looking for/i,
+        }),
+      ).toBeVisible();
+    });
+
+    it("shoudl have at 3 messages in chat", async () => {
       const chatCount = await page.locator(".chat").count();
-      expect(chatCount).toBeGreaterThanOrEqual(3); // welcome + user + response
+      expect(chatCount).toEqual(3); // welcome + user + response
+    });
 
+    it("should have a scroll container", async () => {
       // Verify page is scrolled to bottom after response
       const scrollContainer = page.locator(".overflow-y-auto").first();
       const scrollTop = await scrollContainer.evaluate((el) => el.scrollTop);
@@ -78,14 +76,8 @@ describe("Chat page", () => {
       const clientHeight = await scrollContainer.evaluate(
         (el) => el.clientHeight,
       );
-
       // Should be at or very close to bottom (within 50px tolerance)
       expect(scrollTop + clientHeight).toBeGreaterThan(scrollHeight - 50);
-    });
-
-    it("should look like a real chat", async () => {
-      // Take screenshot for visual regression testing
-      await expect(page).toMatchScreenshot();
     });
   });
 });

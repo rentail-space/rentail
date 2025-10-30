@@ -3,21 +3,14 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { beforeAll, describe, it } from "vitest";
 import findNearbyProperties from "~/lib/findNearbyProperties";
 import prisma from "~/lib/prisma";
-import { launchServer } from "~/test/helpers/launchServer";
+import { goto } from "./helpers/launchBrowser";
 
 describe("Proximity-based shopping center search", () => {
-  let port: number;
-
-  beforeAll(async () => {
-    const { port: serverPort } = await launchServer();
-    port = serverPort;
-  });
-
   describe("Search from 10 miles north", () => {
     let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
 
     beforeAll(async () => {
-      await identifyUser(port, calculateCoordinates("north", 10));
+      await identifyUser(calculateCoordinates("north", 10));
 
       const chat = await prisma.chat.findFirstOrThrow({
         include: { user: true },
@@ -34,7 +27,7 @@ describe("Proximity-based shopping center search", () => {
     let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
 
     beforeAll(async () => {
-      await identifyUser(port, calculateCoordinates("south", 10));
+      await identifyUser(calculateCoordinates("south", 10));
       const chat = await prisma.chat.findFirstOrThrow({
         include: { user: true },
       });
@@ -50,7 +43,7 @@ describe("Proximity-based shopping center search", () => {
     let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
 
     beforeAll(async () => {
-      await identifyUser(port, calculateCoordinates("west", 10));
+      await identifyUser(calculateCoordinates("west", 10));
       const chat = await prisma.chat.findFirstOrThrow({
         include: { user: true },
       });
@@ -66,7 +59,7 @@ describe("Proximity-based shopping center search", () => {
     let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
 
     beforeAll(async () => {
-      await identifyUser(port, calculateCoordinates("east", 10));
+      await identifyUser(calculateCoordinates("east", 10));
       const chat = await prisma.chat.findFirstOrThrow({
         include: { user: true },
       });
@@ -82,7 +75,7 @@ describe("Proximity-based shopping center search", () => {
     let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
 
     beforeAll(async () => {
-      await identifyUser(port, calculateCoordinates("north", 30));
+      await identifyUser(calculateCoordinates("north", 30));
       const chat = await prisma.chat.findFirstOrThrow({
         include: { user: true },
       });
@@ -98,7 +91,7 @@ describe("Proximity-based shopping center search", () => {
     let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
 
     beforeAll(async () => {
-      await identifyUser(port, calculateCoordinates("south", 30));
+      await identifyUser(calculateCoordinates("south", 30));
       const chat = await prisma.chat.findFirstOrThrow({
         include: { user: true },
       });
@@ -114,7 +107,7 @@ describe("Proximity-based shopping center search", () => {
     let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
 
     beforeAll(async () => {
-      await identifyUser(port, calculateCoordinates("west", 30));
+      await identifyUser(calculateCoordinates("west", 30));
       const chat = await prisma.chat.findFirstOrThrow({
         include: { user: true },
       });
@@ -130,7 +123,7 @@ describe("Proximity-based shopping center search", () => {
     let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
 
     beforeAll(async () => {
-      await identifyUser(port, calculateCoordinates("east", 30));
+      await identifyUser(calculateCoordinates("east", 30));
       const chat = await prisma.chat.findFirstOrThrow({
         include: { user: true },
       });
@@ -174,22 +167,18 @@ function calculateCoordinates(
   return { latitude, longitude };
 }
 
-async function identifyUser(
-  port: number,
-  coordinates: { latitude: number; longitude: number },
-) {
+async function identifyUser(coordinates: {
+  latitude: number;
+  longitude: number;
+}) {
   await prisma.user.deleteMany();
-  const stream = await fetch(`http://localhost:${port}/api/chat/1/message`, {
-    method: "POST",
-    body: JSON.stringify({ message: "What are the nearby shopping centers?" }),
-    headers: {
-      "x-vercel-ip-latitude": coordinates.latitude.toString(),
-      "x-vercel-ip-longitude": coordinates.longitude.toString(),
-    },
+  const page = await goto("/chat", {
+    "x-vercel-ip-latitude": coordinates.latitude.toString(),
+    "x-vercel-ip-longitude": coordinates.longitude.toString(),
   });
-  // NOTE: Consume the stream to ensure it creates the user, thread, and working
-  // memory, which is where the location is stored.
-  await stream.text();
+  await page.getByRole("textbox").fill("What are the nearby shopping centers?");
+  await page.getByRole("button", { name: "Send" }).click();
+  await page.waitForLoadState("networkidle");
 }
 
 function findTheGrove(

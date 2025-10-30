@@ -2,11 +2,9 @@ import { delay } from "es-toolkit";
 import { useTimeout } from "usehooks-ts";
 
 export default function askQuestion({
-  inputRef,
   scrollToBottom,
   setQuery,
 }: {
-  inputRef: React.RefObject<HTMLInputElement | null>;
   scrollToBottom: () => void;
   setQuery: (query: string) => void;
 }) {
@@ -30,7 +28,10 @@ export default function askQuestion({
 
     // Final scroll to bottom and focus
     useTimeout(() => {
-      inputRef.current?.focus();
+      const input = document.querySelector(
+        "input[type='text']",
+      ) as HTMLInputElement;
+      if (input) input.focus();
       scrollToBottom();
     }, 10);
   };

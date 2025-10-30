@@ -28,18 +28,12 @@ describe("Anonymous visits chat page", () => {
       }
     });
 
-    const input = page.locator("input[type='text']");
-    // Clear and type the message properly
-    await input.click(); // Focus the input
-    await input.fill("Hello, how are you?");
-
-    // Submit by pressing Enter (more reliable than clicking button)
-    await input.press("Enter");
+    await page.getByRole("textbox").fill("Hello, how are you?");
+    await page.getByRole("button", { name: "Send" }).click();
     await page.waitForLoadState("networkidle");
   });
 
   it("loads chat page and shows sign-in button", async () => {
-    await expect(page.locator("input[type='text']")).toBeVisible();
     await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
   });
 
@@ -66,14 +60,8 @@ describe("Anonymous visits chat page", () => {
     let workingMemory: zod.infer<typeof userProfile>;
 
     beforeAll(async () => {
-      const input = page.locator("input[type='text']");
-      // Clear and type the message properly
-      await input.click(); // Focus the input
-      await input.fill("Actually I'm in Boston");
-
-      // Submit by pressing Enter (more reliable than clicking button)
-      await input.press("Enter");
-
+      await page.getByRole("textbox").fill("Actually I'm in Boston");
+      await page.getByRole("button", { name: "Send" }).click();
       // Wait for response
       await expect(
         page.locator(".chat-bubble", {

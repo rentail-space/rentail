@@ -20,14 +20,12 @@ let context: BrowserContext | undefined;
  * @param path - The path to open.
  * @returns The page.
  */
-export async function goto(
-  path: string,
-  headers?: Record<string, string>,
-): Promise<Page> {
+export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const { port } = await launchServer();
   const context = await launchBrowser(port);
   const page = await context.newPage();
-  await page.setExtraHTTPHeaders(headers ?? {});
+  if (headers)
+    await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
   await waitForDependencies(page, path);
   return page;
 }

@@ -1,11 +1,11 @@
 import { useChat } from "@ai-sdk/react";
 import type { MastraMessageV2 } from "@mastra/core/memory";
 import { captureException } from "@sentry/react-router";
-import { DefaultChatTransport, type UIMessage } from "ai";
+import { DefaultChatTransport } from "ai";
 import { last } from "es-toolkit";
 import { useQueryState } from "nuqs";
 import type { ChatGetPayload } from "prisma/generated/models";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
@@ -42,22 +42,10 @@ export default function Chat() {
           ),
         role: message.role,
         threadId: chatId,
-        resourceId: chat?.user?.id,
       })) ?? [],
     transport: new DefaultChatTransport({
       api: `/api/chat/${chatId}/message`,
-      // only send the last message to the server:
-      prepareSendMessagesRequest({ messages }) {
-        const message = last(messages) as UIMessage;
-        return {
-          body: {
-            message: message.parts
-              .filter((part) => part.type === "text")
-              .map((part) => part.text)
-              .join("\n"),
-          },
-        };
-      },
+      // Only send user input to the server
     }),
 
     onError: (error) => {
@@ -66,15 +54,6 @@ export default function Chat() {
     },
   });
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  function stopChat() {
-    if (chat?.id) {
-      stop();
-      fetch(`/api/chat/${chat.id}/stop`, { method: "POST" });
-    }
-  }
-
   return (
     <StickToBottom initial="smooth" resize="smooth">
       <div className="inset-0 flex h-screen flex-col">
@@ -82,7 +61,6 @@ export default function Chat() {
         <StickToBottom.Content>
           <Messages
             error={error}
-            inputRef={inputRef}
             isTyping={status === "streaming"}
             messages={messages}
             setQuery={setQuery}
@@ -99,7 +77,6 @@ export default function Chat() {
         />
 
         <InputForm
-          inputRef={inputRef}
           isResponding={status === "streaming"}
           isSubmitting={status === "submitted"}
           query={query ?? ""}
@@ -108,11 +85,15 @@ export default function Chat() {
               parts: [{ text: message, type: "text", details: undefined }],
               role: "user",
               threadId: chatId,
-              resourceId: chat?.user?.id,
             })
           }
           setQuery={setQuery}
-          stopChat={stopChat}
+          stopChat={() => {
+            if (chat?.id) {
+              stop();
+              fetch(`/api/chat/${chat.id}/stop`, { method: "POST" });
+            }
+          }}
         />
       </div>
     </StickToBottom>

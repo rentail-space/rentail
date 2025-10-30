@@ -2,7 +2,6 @@ import { Send, Square } from "lucide-react";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 
 export default function InputForm({
-  inputRef,
   isResponding,
   isSubmitting,
   query,
@@ -10,7 +9,6 @@ export default function InputForm({
   setQuery,
   stopChat,
 }: {
-  inputRef: React.RefObject<HTMLInputElement | null>;
   isResponding: boolean;
   isSubmitting: boolean;
   query: string;
@@ -41,21 +39,13 @@ export default function InputForm({
           disabled={isSubmitting}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Ask me any question about retail spaces..."
-          ref={inputRef}
           spellCheck="false"
           type="text"
           value={query}
         />
         <div className="-translate-y-1/2 absolute top-1/2 right-2 flex transform gap-2">
-          {isResponding && (
-            <button
-              onClick={stopChat}
-              aria-label="Stop"
-              className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-red-500 transition-all duration-200 hover:scale-105 hover:bg-red-600 active:scale-95 active:scale-[0.6] active:duration-75"
-              type="button"
-            >
-              <Square className="h-6 w-6 text-white" />
-            </button>
+          {false && (
+            <StopButton isResponding={isResponding} stopChat={stopChat} />
           )}
           <button
             aria-label="Send message"
@@ -72,5 +62,26 @@ export default function InputForm({
         </div>
       </form>
     </div>
+  );
+}
+
+function StopButton({
+  isResponding,
+  stopChat,
+}: {
+  isResponding: boolean;
+  stopChat: () => void;
+}) {
+  if (!isResponding) return null;
+
+  return (
+    <button
+      onClick={stopChat}
+      aria-label="Stop"
+      className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-red-500 transition-all duration-200 hover:scale-105 hover:bg-red-600 active:scale-95 active:scale-[0.6] active:duration-75"
+      type="button"
+    >
+      <Square className="h-6 w-6 text-white" />
+    </button>
   );
 }

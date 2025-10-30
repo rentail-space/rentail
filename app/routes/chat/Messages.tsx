@@ -12,13 +12,11 @@ import askQuestion from "~/routes/chat/askQuestion";
 
 export default function Messages({
   error,
-  inputRef,
   isTyping,
   messages,
   setQuery,
 }: {
   error?: Error;
-  inputRef: React.RefObject<HTMLInputElement | null>;
   isTyping: boolean;
   messages: UIMessage<
     { isAborted?: boolean },
@@ -60,7 +58,7 @@ export default function Messages({
             <UserMessage key={message.id} message={message} />
           ) : (
             <AssistantMessage
-              askQuestion={askQuestion({ inputRef, scrollToBottom, setQuery })}
+              askQuestion={askQuestion({ scrollToBottom, setQuery })}
               isLast={index === messages.length - 1}
               key={message.id}
               message={message}

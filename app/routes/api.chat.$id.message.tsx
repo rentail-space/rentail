@@ -1,9 +1,9 @@
-import type { AnthropicProviderOptions } from "@ai-sdk/anthropic";
 import { toAISdkFormat } from "@mastra/ai-sdk";
+import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
 import { createUIMessageStreamResponse, stepCountIs } from "ai";
 import debug from "debug";
-import { invariant } from "es-toolkit";
+import { invariant, last } from "es-toolkit";
 import humanFormat from "human-format";
 import type { PropertySpace } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
@@ -18,7 +18,11 @@ import type { Route } from "./+types/api.chat.$id.message";
 // @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams
 
 export async function action({ params, request }: Route.ActionArgs) {
-  const { message } = (await request.json()) as { message: string };
+  const { messages } = (await request.clone().json()) as {
+    messages: MastraMessageV2[];
+  };
+  const lastMessage = last(messages);
+  if (!lastMessage) return new Response("Message is required", { status: 400 });
 
   const { chat, headers } = await createUser({
     chatId: params.id,
@@ -35,29 +39,9 @@ export async function action({ params, request }: Route.ActionArgs) {
 
   // Load existing messages to see what will be sent
   const { messagesV2 } = await memory.rememberMessages({ threadId: chat.id });
-  debug("chat")(
-    "Loaded %d messages from memory for thread %s",
-    messagesV2.length,
-    chat.id,
-  );
-
-  // Log message content for debugging
-  messagesV2.forEach((msg, i) => {
-    const partsCount = msg.content?.parts?.length || 0;
-    debug("chat")("  Message %d: %s, parts: %d", i, msg.role, partsCount);
-    if (partsCount === 0) {
-      console.error(`❌ Message ${i} (${msg.id}) has NO PARTS!`, msg);
-    }
-  });
-
-  debug("chat")("Streaming new message: '%s'", message);
-
-  const stream = await agent.stream(message, {
+  const stream = await agent.stream([...messagesV2, lastMessage], {
     abortSignal,
-    memory: {
-      resource: chat.user.id,
-      thread: chat.id,
-    },
+    memory: { resource: chat.user.id, thread: chat.id },
     savePerStep: true,
     maxSteps: 3,
     stopWhen: stepCountIs(3),
@@ -89,21 +73,25 @@ export async function action({ params, request }: Route.ActionArgs) {
       await cleanup();
     },
 
+    onChunk: (data) => {
+      debug("chat")(data);
+    },
+
     providerOptions: {
       anthropic: {
-        sendReasoning: true,
-        thinking: {
-          type: "disabled",
-          budgetTokens: 12000,
-        },
-      } satisfies AnthropicProviderOptions,
+        sendReasoning: false,
+        thinking: { type: "disabled" },
+      },
+    },
+
+    modelSettings: {
+      temperature: 0,
     },
   });
 
-  stream.consumeStream(); // no await
+  // NOTE No await! This keeps Node alive if browser request is closed prematurely
+  stream.consumeStream();
 
-  // Return the UI message stream response
-  // The stream will be consumed by the client
   return createUIMessageStreamResponse({
     headers,
     stream: toAISdkFormat(stream, { from: "agent" }),
