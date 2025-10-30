@@ -1,5 +1,4 @@
 import { toAISdkFormat } from "@mastra/ai-sdk";
-import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
 import { createUIMessageStreamResponse, stepCountIs } from "ai";
 import debug from "debug";
@@ -17,17 +16,24 @@ import type { Route } from "./+types/api.chat.$id.message";
 const logger = debug("chat");
 
 export async function action({ params, request }: Route.ActionArgs) {
-  const { messages } = (await request.clone().json()) as {
-    messages: MastraMessageV2[];
-  };
-  const lastMessage = last(messages);
-  if (!lastMessage) return new Response("Message is required", { status: 400 });
-  logger("User's last message: %o", lastMessage);
-
+  const chatId = params.id;
+  invariant(chatId, "Chat ID is required");
   const { chat, headers, user } = await findOrCreateUser({
-    chatId: params.id,
+    chatId,
     headers: request.headers,
   });
+
+  const { messages: bodyMessages } = (await request.clone().json()) as {
+    messages: {
+      id: string;
+      parts: [{ text: string; type: "text" }];
+      role: "user" | "assistant";
+      threadId: string;
+    }[];
+  };
+  const lastMessage = last(bodyMessages);
+  if (!lastMessage) return new Response("Message is required", { status: 400 });
+  logger("User's last message: %o", lastMessage);
 
   // Set up Redis stop monitoring
   const { abortSignal } = await monitorStopSignal(chat.id);
@@ -42,23 +48,21 @@ export async function action({ params, request }: Route.ActionArgs) {
   const memory = await agent.getMemory();
   invariant(memory, "Memory is required");
 
-  // Load existing messages to see what will be sent
-  const { messagesV2 } = await memory.rememberMessages({ threadId: chat.id });
-
-  // Save the user's message before streaming (savePerStep only saves assistant messages)
-  await memory.saveMessages({
+  const allMessages = await memory.saveMessages({
     messages: [
       {
-        ...lastMessage,
-        threadId: chat.id,
+        content: { format: 2, parts: lastMessage.parts },
+        createdAt: new Date(),
+        id: lastMessage.id,
         resourceId: user.id,
+        role: "user",
+        threadId: chat.id,
       },
     ],
     format: "v2",
   });
-  logger("Saved user message to database");
 
-  const stream = await agent.stream(messages, {
+  const stream = await agent.stream(allMessages, {
     abortSignal,
     memory: { resource: user.id, thread: chat.id },
     savePerStep: true,
@@ -75,10 +79,10 @@ export async function action({ params, request }: Route.ActionArgs) {
       console.error("Error in agent stream", {
         error,
         chat: chat.id,
-        messagesCount: messagesV2.length,
+        messagesCount: allMessages.length,
       });
       captureException(error, {
-        extra: { chat, messagesCount: messagesV2.length },
+        extra: { chat, messagesCount: allMessages.length },
       });
     },
 
