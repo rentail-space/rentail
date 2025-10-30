@@ -6,102 +6,45 @@ import prisma from "~/lib/prisma";
 import converse from "./helpers/converse";
 import { goto } from "./helpers/launchBrowser";
 
+const directions = ["north", "south", "east", "west"] as const;
+
 describe("Proximity-based shopping center search", () => {
-  describe("Search from 10 miles north", () => {
-    let properties: Property[];
+  for (const direction of directions) {
+    describe(`Search from 10 miles ${direction}`, () => {
+      let coordinates: { latitude: number; longitude: number };
+      let properties: Property[];
 
-    beforeAll(async () => {
-      properties = await identifyUser(calculateCoordinates("north", 10));
+      beforeAll(async () => {
+        await prisma.user.deleteMany();
+        coordinates = calculateCoordinates(direction, 10);
+        properties = await findNearbyCoordinate(coordinates);
+      });
+
+      it(`should find The Grove shopping center ${direction}`, () => {
+        const grove = properties.find(
+          (property) => property.name === "The Grove",
+        );
+        expect(grove).toBeDefined();
+      });
     });
+  }
 
-    it("should find The Grove shopping center", () => {
-      expect(findTheGrove(properties)).toBeDefined();
+  for (const direction of directions) {
+    describe(`Search from 30 miles ${direction}`, () => {
+      let coordinates: { latitude: number; longitude: number };
+      let properties: Property[];
+
+      beforeAll(async () => {
+        await prisma.user.deleteMany();
+        coordinates = calculateCoordinates(direction, 30);
+        properties = await findNearbyCoordinate(coordinates);
+      });
+
+      it(`should not find The Grove shopping center ${direction}`, () => {
+        expect(properties.length).toEqual(0);
+      });
     });
-  });
-
-  describe("Search from 10 miles south", () => {
-    let properties: Property[];
-
-    beforeAll(async () => {
-      properties = await identifyUser(calculateCoordinates("south", 10));
-    });
-
-    it("should find The Grove shopping center", () => {
-      expect(findTheGrove(properties)).toBeDefined();
-    });
-  });
-
-  describe("Search from 10 miles west", () => {
-    let properties: Property[];
-
-    beforeAll(async () => {
-      properties = await identifyUser(calculateCoordinates("west", 10));
-    });
-
-    it("should find The Grove shopping center", () => {
-      expect(findTheGrove(properties)).toBeDefined();
-    });
-  });
-
-  describe("Search from 10 miles east", () => {
-    let properties: Property[];
-
-    beforeAll(async () => {
-      properties = await identifyUser(calculateCoordinates("east", 10));
-    });
-
-    it("should find The Grove shopping center", () => {
-      expect(findTheGrove(properties)).toBeDefined();
-    });
-  });
-
-  describe("Search from 30 miles north", () => {
-    let properties: Property[];
-
-    beforeAll(async () => {
-      properties = await identifyUser(calculateCoordinates("north", 30));
-    });
-
-    it("should not find The Grove shopping center", () => {
-      expect(findTheGrove(properties)).toBeUndefined();
-    });
-  });
-
-  describe("Search from 30 miles south", () => {
-    let properties: Property[];
-
-    beforeAll(async () => {
-      properties = await identifyUser(calculateCoordinates("south", 30));
-    });
-
-    it("should not find The Grove shopping center", () => {
-      expect(findTheGrove(properties)).toBeUndefined();
-    });
-  });
-
-  describe("Search from 30 miles west", () => {
-    let properties: Property[];
-
-    beforeAll(async () => {
-      properties = await identifyUser(calculateCoordinates("west", 30));
-    });
-
-    it("should not find The Grove shopping center", () => {
-      expect(findTheGrove(properties)).toBeUndefined();
-    });
-  });
-
-  describe("Search from 30 miles east", () => {
-    let properties: Property[];
-
-    beforeAll(async () => {
-      properties = await identifyUser(calculateCoordinates("east", 30));
-    });
-
-    it("should not find The Grove shopping center", () => {
-      expect(findTheGrove(properties)).toBeUndefined();
-    });
-  });
+  }
 });
 
 /**
@@ -135,11 +78,10 @@ function calculateCoordinates(
   return { latitude, longitude };
 }
 
-async function identifyUser(coordinates: {
+async function findNearbyCoordinate(coordinates: {
   latitude: number;
   longitude: number;
 }): Promise<Property[]> {
-  await prisma.user.deleteMany();
   const page = await goto("/chat", {
     "x-vercel-ip-latitude": coordinates.latitude.toString(),
     "x-vercel-ip-longitude": coordinates.longitude.toString(),
@@ -149,12 +91,8 @@ async function identifyUser(coordinates: {
   const user = await prisma.user.findFirstOrThrow({ include: { chats: true } });
   const { properties } = await findNearbyProperties({
     chat: user.chats[0],
-    maxDistance: 20,
+    maxDistance: 10,
     user,
   });
   return properties;
-}
-
-function findTheGrove(properties: Property[]) {
-  return properties.find((property) => property.name === "The Grove");
 }

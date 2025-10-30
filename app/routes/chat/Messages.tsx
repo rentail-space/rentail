@@ -214,7 +214,7 @@ function ResponseMessage({
           width="32px"
         />
       </div>
-      <div className="chat-bubble prose prose-base">
+      <div className="chat-bubble chat-bubble-response prose prose-base">
         <div ref={contentRef}>
           <Streamdown
             components={getComponents({ askQuestion })}
