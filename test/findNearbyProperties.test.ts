@@ -145,7 +145,7 @@ async function identifyUser(coordinates: {
   });
   await page.getByRole("textbox").fill("What are the nearby shopping centers?");
   await page.getByRole("button", { name: "Send" }).click();
-  await page.waitForLoadState("networkidle");
+  await page.waitForTimeout(500);
 
   const user = await prisma.user.findFirstOrThrow({ include: { chats: true } });
   const { properties } = await findNearbyProperties({
