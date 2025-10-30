@@ -60,6 +60,9 @@ export async function findChat(headers: Headers): Promise<{
     });
     if (chat) {
       const messages = await getRecentMessages(chat);
+
+      console.log("messages", messages);
+
       return { chat, messages };
     }
   }

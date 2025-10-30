@@ -34,23 +34,22 @@ export const memory = new Memory({
  * @returns The messages for the chat.
  */
 export async function getRecentMessages(chat: Chat) {
-  const messages = await memory.rememberMessages({ threadId: chat.id });
-  if (messages.messagesV2.length > 0) return messages.messagesV2;
-
-  const savedMessages = await memory.saveMessages({
-    messages: [
-      {
-        content: { format: 2, parts: [{ text: welcome, type: "text" }] },
-        createdAt: new Date(),
-        id: ulid(),
-        resourceId: chat.userId,
-        role: "assistant",
-        threadId: chat.id,
-      },
-    ],
-    format: "v2",
-  });
-  return savedMessages;
+  const { messagesV2 } = await memory.rememberMessages({ threadId: chat.id });
+  return messagesV2.length === 0
+    ? await memory.saveMessages({
+        messages: [
+          {
+            content: { format: 2, parts: [{ text: welcome, type: "text" }] },
+            createdAt: new Date(),
+            id: ulid(),
+            resourceId: chat.userId,
+            role: "assistant",
+            threadId: chat.id,
+          },
+        ],
+        format: "v2",
+      })
+    : messagesV2;
 }
 
 /**

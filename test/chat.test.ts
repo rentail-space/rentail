@@ -56,7 +56,7 @@ describe("Chat page", () => {
     it("should show assistant message in chat", async () => {
       await expect(
         page.locator(".chat-bubble").filter({
-          hasText: /Could you tell me more about what you're looking for/i,
+          hasText: /I found some great locations for your clothing boutique/i,
         }),
       ).toBeVisible();
     });

@@ -65,7 +65,7 @@ describe("Anonymous visits chat page", () => {
       // Wait for response
       await expect(
         page.locator(".chat-bubble", {
-          hasText: /updated your location to Boston/i,
+          hasText: /Thanks for letting me know/i,
         }),
       ).toBeVisible();
 

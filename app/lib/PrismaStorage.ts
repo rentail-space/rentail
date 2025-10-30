@@ -261,14 +261,15 @@ export class PrismaStorage extends MastraStorage {
   }: StorageGetMessagesArg & {
     format?: "v1" | "v2";
   }): Promise<MastraMessageV1[] | MastraMessageV2[]> {
-    const page = selectBy?.pagination?.page ?? 0;
-    const perPage = selectBy?.pagination?.perPage ?? 10;
-    const messages = await prisma.messages.findMany({
-      where: { chatId: threadId },
-      skip: page * perPage,
-      take: perPage,
-    });
     invariant(format === "v2", "Format must be v2");
+    const page = selectBy?.pagination?.page;
+    const perPage = selectBy?.pagination?.perPage;
+    const messages = await prisma.messages.findMany({
+      orderBy: { createdAt: "asc" },
+      skip: page && perPage ? page * perPage : undefined,
+      take: perPage,
+      where: { chatId: threadId },
+    });
     return await toMessageV2(messages);
   }
 
@@ -295,10 +296,11 @@ export class PrismaStorage extends MastraStorage {
     messageIds: string[];
     format?: "v1" | "v2";
   }): Promise<MastraMessageV1[] | MastraMessageV2[]> {
+    invariant(format === "v2", "Format must be v2");
     const messages = await prisma.messages.findMany({
+      orderBy: { createdAt: "asc" },
       where: { id: { in: messageIds } },
     });
-    invariant(format === "v2", "Format must be v2");
     return await toMessageV2(messages);
   }
 
@@ -389,12 +391,13 @@ export class PrismaStorage extends MastraStorage {
     invariant(args.format === "v2", "Format must be v2");
     const page = args.selectBy?.pagination?.page ?? 0;
     const perPage = args.selectBy?.pagination?.perPage ?? 10;
-    const messages = await prisma.messages.findMany({
+    const count = await prisma.messages.count({
       where: { chatId: args.threadId, chat: { userId: args.resourceId } },
+    });
+    const messages = await prisma.messages.findMany({
+      orderBy: { createdAt: "asc" },
       skip: page * perPage,
       take: perPage,
-    });
-    const count = await prisma.messages.count({
       where: { chatId: args.threadId, chat: { userId: args.resourceId } },
     });
     return {
@@ -460,14 +463,6 @@ export class PrismaStorage extends MastraStorage {
 }
 
 async function toMessageV2(messages: Messages[]): Promise<MastraMessageV2[]> {
-  if (messages.length === 0) return [];
-
-  const chat = await prisma.chat.findUnique({
-    where: { id: messages[0].chatId },
-    include: { user: true },
-  });
-  invariant(chat, "Chat is required");
-
   return messages.map((message) => {
     const content = message.content
       ? JSON.parse(message.content as string)
@@ -478,8 +473,7 @@ async function toMessageV2(messages: Messages[]): Promise<MastraMessageV2[]> {
       id: message.id,
       role: message.role as MastraMessageV2["role"],
       type: message.type as MastraMessageV2["type"],
-      threadId: chat.id,
-      resourceId: chat.user?.id,
+      threadId: message.chatId,
     };
   });
 }

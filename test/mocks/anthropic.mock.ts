@@ -34,8 +34,7 @@ export const customMockResponses: MessagePattern[] = [
   },
   {
     pattern: /Boston/i,
-    response:
-      "Perfect! I've updated your location to Boston. I can now help you find retail spaces in the Boston area. What type of business are you planning to open?",
+    response: "Thanks for letting me know!",
   },
 ];
 
