@@ -46,17 +46,57 @@ export default Sentry.wrapSentryHandleRequest(
     // biome-ignore lint/suspicious/noExplicitAny: Sentry wrapper requires flexible type
     loadContext?: any,
   ) => {
-    const nonce = uuidv7();
-    return await handleRequest(
+    const start = Date.now();
+    console.info("%s %s", request.method, request.url);
+    const response = await handleRequest(
       request,
       responseStatusCode,
       responseHeaders,
       routerContext,
       loadContext,
-      { nonce },
+      { nonce: uuidv7() },
     );
+    waitForResponse(response, start).then((duration) => {
+      console.info(
+        "%s %s => %d (%dms)",
+        request.method,
+        request.url,
+        response.status,
+        duration,
+      );
+    });
+    return response;
   },
 );
+
+async function waitForResponse(response: Response, start: number) {
+  const reader = response.clone().body?.getReader();
+  if (reader) {
+    while (true) {
+      const { done } = await reader.read();
+      if (done) break;
+    }
+  }
+  return Date.now() - start;
+}
+
+export function handleDataRequest(
+  response: Response,
+  { request, params, context }: LoaderFunctionArgs | ActionFunctionArgs,
+) {
+  const start = Date.now();
+  console.info("%s %s", request.method, request.url);
+  waitForResponse(response, start).then((duration) => {
+    console.info(
+      "%s %s => %d (%dms)",
+      request.method,
+      request.url,
+      response.status,
+      duration,
+    );
+  });
+  return response;
+}
 
 export function handleError(
   error: unknown,

@@ -19,14 +19,15 @@ datasource db {
 }
 
 model Chat {
-  createdAt DateTime   @map("created_at") @default(now())
-  id        String     @map("id")         @id
-  messages  Messages[]
-  metadata  Json       @map("metadata")   @db.Json
-  title     String?    @map("title")
-  updatedAt DateTime   @map("updated_at") @updatedAt
-  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String     @map("user_id")
+  activeStreamId String?    @map("active_stream_id")
+  createdAt      DateTime   @map("created_at")       @default(now())
+  id             String     @map("id")               @id
+  messages       Messages[]
+  metadata       Json       @map("metadata")         @db.Json
+  title          String?    @map("title")
+  updatedAt      DateTime   @map("updated_at")       @updatedAt
+  user           User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String     @map("user_id")
 
   @@map("chats")
 }

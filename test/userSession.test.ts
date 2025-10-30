@@ -21,13 +21,6 @@ describe("Anonymous visits chat page", () => {
       "x-vercel-ip-longitude": "-122.08421",
     });
 
-    // Log errors only
-    page.on("console", (msg) => {
-      if (msg.type() === "error") {
-        console.error(`[Browser error]: ${msg.text()}`);
-      }
-    });
-
     await page.getByRole("textbox").fill("Hello, how are you?");
     await page.getByRole("button", { name: "Send" }).click();
     await page.waitForLoadState("networkidle");

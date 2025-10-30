@@ -8,13 +8,12 @@ import type { Route } from "./+types/api.chat.$id.stop";
  * to stop the chat manually.
  *
  * @param params.id - The ID of the chat to stop.
+ * @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-stop-streams
  */
 export async function action({ params }: Route.ActionArgs) {
   const chat = await prisma.chat.findUnique({
     where: { id: params.id },
   });
-  if (!chat) throw new Response(null, { status: 404 });
-
-  await stopChat(chat.id);
+  if (chat) await stopChat(chat.id);
   return new Response(null, { status: 204 });
 }

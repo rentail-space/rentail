@@ -26,7 +26,7 @@ export default function PropertyList({
     if (!lastAssistantMessage?.id) return;
     fetch(`/api/chat/${chatId}/properties`)
       .then((response) => response.json())
-      .then((data) => setProperties(data));
+      .then((data) => setProperties(data.properties));
   }, [chatId, lastAssistantMessage?.id]);
 
   return (

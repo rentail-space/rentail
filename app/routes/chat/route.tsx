@@ -43,6 +43,7 @@ export default function Chat() {
         role: message.role,
         threadId: chatId,
       })) ?? [],
+    resume: true, // Enable automatic stream resumption
     transport: new DefaultChatTransport({
       api: `/api/chat/${chatId}/message`,
       // Only send user input to the server

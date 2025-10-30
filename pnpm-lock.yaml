@@ -165,6 +165,9 @@ importers:
       resend:
         specifier: ^6.3.0
         version: 6.3.0(@react-email/render@1.4.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
+      resumable-stream:
+        specifier: ^2.2.8
+        version: 2.2.8
       schema-dts:
         specifier: ^1.1.5
         version: 1.1.5
@@ -5899,6 +5902,9 @@ packages:
   restore-cursor@5.1.0:
     resolution: {integrity: sha512-oMA2dcrw6u0YfxJQXm342bFKX/E4sG9rbTzO9ptUcR/e8A33cHuvStiYOwH7fszkZlZ1z/ta9AAoPk2F4qIOHA==}
     engines: {node: '>=18'}
+
+  resumable-stream@2.2.8:
+    resolution: {integrity: sha512-F9+SLKw/a/p7hRjy2CNwzT66UIlY7aY4D3Sg9xwuZMA7nxVQrVPXCWU27qIGcO4jlauL0T3XkCN2218qi6ugTw==}
 
   retry@0.12.0:
     resolution: {integrity: sha512-9LkiTwjUh6rT555DtE9rTX+BKByPfrMzEAtnlEtdEwr3Nkffwiihqe2bWADg+OQRjt9gl6ICdmB/ZFDCGAtSow==}
@@ -13403,6 +13409,8 @@ snapshots:
     dependencies:
       onetime: 7.0.0
       signal-exit: 4.1.0
+
+  resumable-stream@2.2.8: {}
 
   retry@0.12.0: {}
 
