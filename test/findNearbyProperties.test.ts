@@ -3,7 +3,7 @@ import type { Property } from "prisma/generated/client";
 import { beforeAll, describe, it } from "vitest";
 import findNearbyProperties from "~/lib/findNearbyProperties";
 import prisma from "~/lib/prisma";
-import { goto } from "./helpers/launchBrowser";
+import converse from "./helpers/converse";
 
 describe("Proximity-based shopping center search", () => {
   describe("Search from 10 miles north", () => {
@@ -139,13 +139,10 @@ async function identifyUser(coordinates: {
   longitude: number;
 }): Promise<Property[]> {
   await prisma.user.deleteMany();
-  const page = await goto("/chat", {
+  await converse("What are the nearby shopping centers?", {
     "x-vercel-ip-latitude": coordinates.latitude.toString(),
     "x-vercel-ip-longitude": coordinates.longitude.toString(),
   });
-  await page.getByRole("textbox").fill("What are the nearby shopping centers?");
-  await page.getByRole("button", { name: "Send" }).click();
-  await page.waitForTimeout(1000);
 
   const user = await prisma.user.findFirstOrThrow({ include: { chats: true } });
   const { properties } = await findNearbyProperties({

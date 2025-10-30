@@ -1,11 +1,11 @@
 import { expect, type Page } from "playwright/test";
-import type { Messages } from "prisma/generated/client";
 import { beforeAll, describe, it } from "vitest";
-import prisma from "~/lib/prisma";
 import { goto } from "~/test/helpers/launchBrowser";
+import converse from "./helpers/converse";
 
 const testMessage =
   "looking for a pop-up retail space for my clothing boutique";
+const testResponse = /I found some great locations/i;
 
 describe("Chat page", () => {
   it("renders chat interface with welcome message", async () => {
@@ -34,23 +34,19 @@ describe("Chat page", () => {
 
   describe("exchange messages", () => {
     let page: Page;
-    let message: Messages;
 
     beforeAll(async () => {
-      page = await goto("/chat");
-      await page.getByRole("textbox").fill(testMessage);
-      await page.getByRole("button", { name: "Send" }).click();
-      await page.waitForTimeout(1000);
-
-      message = await prisma.messages.findFirstOrThrow({
-        orderBy: { createdAt: "desc" },
-      });
-      console.log(message);
+      page = await converse(testMessage);
     });
 
     it("should look like a real chat", async () => {
       // Take screenshot for visual regression testing
       await expect(page).toMatchScreenshot();
+    });
+
+    it("shoudl have at 3 messages in chat", async () => {
+      const chatCount = await page.locator(".chat").count();
+      expect(chatCount).toEqual(3); // welcome + user + response
     });
 
     it("should show user message in chat", async () => {
@@ -61,16 +57,8 @@ describe("Chat page", () => {
 
     it("should show assistant message in chat", async () => {
       await expect(
-        page.locator(".chat-bubble").filter({
-          hasText:
-            /I'm here to help you find the perfect retail space for your business./i,
-        }),
+        page.locator(".chat-bubble").filter({ hasText: testResponse }),
       ).toBeVisible();
-    });
-
-    it("shoudl have at 3 messages in chat", async () => {
-      const chatCount = await page.locator(".chat").count();
-      expect(chatCount).toEqual(3); // welcome + user + response
     });
 
     it("should have a scroll container", async () => {

@@ -41,8 +41,7 @@ export const customMockResponses: MessagePattern[] = [
 /**
  * Default fallback response when no patterns match
  */
-const fallbackResponse: string =
-  "I'm here to help you find the perfect retail space for your business. Could you tell me more about what you're looking for? For example:\n\n• What type of business are you planning?\n• What area or neighborhood interests you?\n• What size space do you need?\n• What's your budget range?\n\nThe more details you share, the better I can assist you!";
+const fallbackResponse: string = "Fallback response!";
 
 /**
  * Find a matching response for the given message
