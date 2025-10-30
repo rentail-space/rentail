@@ -1,7 +1,7 @@
 import debug from "debug";
 import { HttpResponse, http, passthrough } from "msw";
 import { ulid } from "ulid";
-import { findMockResponse } from "~/test/mocks/anthropic.mock";
+import { findMockResponse } from "./anthropic.stream";
 
 export const handlers = [
   // Mock Anthropic API
@@ -9,10 +9,9 @@ export const handlers = [
     "https://api.anthropic.com/v1/messages",
     async ({ request }: { request: Request }) => {
       try {
-        const body = (await request.json()) as Parameters<
-          typeof findMockResponse
-        >[0];
-        return new HttpResponse(findMockResponse(body), {
+        const json = await request.json();
+        const stream = findMockResponse(json);
+        return new HttpResponse(stream, {
           headers: { "Content-Type": "text/event-stream" },
         });
       } catch (error) {

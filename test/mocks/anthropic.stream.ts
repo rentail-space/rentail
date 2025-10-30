@@ -5,13 +5,92 @@
  * the Anthropic API's Server-Sent Events format.
  */
 
+import type { Tool, ToolChoice } from "ai";
 import debug from "debug";
+import { invariant, last } from "es-toolkit";
 import { ulid } from "ulid";
+import customMockResponses from "~/test/mocks/anthropic.mocks";
 
 export interface ToolCall {
   id: string;
   name: string;
   input: Record<string, unknown>;
+}
+
+/**
+ * Default fallback response when no patterns match
+ */
+const fallbackResponse: string = "Fallback response!";
+
+/**
+ * Find a matching response for the given message
+ */
+export function findMockResponse(body: object): ReadableStream<Uint8Array> {
+  const { messages, tools, tool_choice } = body as {
+    messages: Array<{
+      role: string;
+      content: Array<{ type: string; text: string }>;
+    }>;
+    tools: { name: string }[];
+    tool_choice: { type: ToolChoice<Record<string, Tool>> };
+  };
+
+  // Extract the last user message from the request
+  const lastMessage = last(messages);
+  invariant(lastMessage, "Last message is required");
+
+  // Get the text content from the message
+  const messageText = lastMessage.content
+    .filter((part) => part.type === "text")
+    .map((part) => part.text)
+    .join(" ");
+
+  debug("msw")(
+    `Anthropic API mock - processing message: "${messageText.slice(0, 100)}..."`,
+  );
+  debug("msw")(
+    "Anthropic API mock - processing message: %s... ",
+    messageText.slice(0, 100),
+  );
+
+  // Check custom responses first (higher priority)
+  const mockResponse =
+    Object.entries(customMockResponses).find(([pattern, _response]) =>
+      messageText.toLowerCase().includes(pattern.toLowerCase()),
+    )?.[1] ?? fallbackResponse;
+
+  const toolCalls: ToolCall[] = [];
+
+  if (
+    tool_choice?.type === "auto" &&
+    tools.find((tool) => tool.name === "updateWorkingMemory") &&
+    lastMessage.content.some(
+      (content) =>
+        content.type === "text" && content.text.includes("I'm in Boston"),
+    )
+  ) {
+    // Create a tool call for updating working memory with the exact format Mastra expects
+    const updateWorkingMemoryTool = {
+      id: `toolu_${Date.now()}`,
+      name: "updateWorkingMemory", // This is the exact name Mastra's ToolCallFilter looks for
+      input: {
+        memory: {
+          // Mastra expects the data under 'memory' key
+          location: {
+            city: "Boston",
+            state: "Massachusetts",
+            country: "United States",
+            latitude: 42.3601,
+            longitude: -71.0589,
+            timeZone: "America/New_York",
+          },
+        },
+      },
+    };
+    toolCalls.push(updateWorkingMemoryTool);
+  }
+
+  return createStreamingResponse(mockResponse, toolCalls);
 }
 
 /**

@@ -21,13 +21,20 @@ export default async function converse(
   await page.waitForLoadState("networkidle");
 
   expect(await prisma.chat.count()).toEqual(1);
+  await page.waitForTimeout(2000);
+  console.log("****** Messages: ", await prisma.messages.count());
   while (true) {
     const chat = await prisma.chat.findFirstOrThrow();
     if (chat.activeStreamId === null) break;
+    console.log("****** Messages: ", await prisma.messages.count());
     await page.waitForTimeout(100);
   }
 
   const lastResponseBubble = page.locator(".chat-bubble").last();
+  console.log(
+    "****** Last response bubble: ",
+    await lastResponseBubble.innerHTML(),
+  );
   await lastResponseBubble.waitFor({ state: "visible" });
 
   const className = await lastResponseBubble.getAttribute("class");
