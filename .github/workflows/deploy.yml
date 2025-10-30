@@ -107,7 +107,7 @@ jobs:
         if: always()
         with:
           name: playwright-test-results
-          path: test-results/
+          path: __screenshots__
 
   deploy:
     name: Deploy
