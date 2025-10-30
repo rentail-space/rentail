@@ -49,5 +49,5 @@ async function visit(headers?: HeadersInit) {
   const page = await goto("/chat", headers);
   await page.getByRole("textbox").fill("Hello, how are you?");
   await page.getByRole("button", { name: "Send" }).click();
-  await page.waitForLoadState("networkidle");
+  await page.waitForTimeout(500);
 }
