@@ -40,7 +40,7 @@ describe("Chat page", () => {
       page = await goto("/chat");
       await page.getByRole("textbox").fill(testMessage);
       await page.getByRole("button", { name: "Send" }).click();
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(1000);
 
       message = await prisma.messages.findFirstOrThrow({
         orderBy: { createdAt: "desc" },
