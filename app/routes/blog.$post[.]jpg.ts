@@ -13,8 +13,7 @@ export async function loader({ params }: LoaderFunctionArgs<{ post: string }>) {
         "Content-Type": "image/jpeg",
       },
     });
-  } catch (error) {
-    console.error(error);
+  } catch {
     throw new Response("Not Found", { status: 404 });
   }
 }

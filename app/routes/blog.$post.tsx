@@ -11,8 +11,7 @@ export async function loader({
 }: LoaderFunctionArgs<{ post: string }>): Promise<BlogPost> {
   try {
     return await loadBlogPost(params.post);
-  } catch (error) {
-    console.error(error);
+  } catch {
     throw new Response("Not Found", { status: 404 });
   }
 }
