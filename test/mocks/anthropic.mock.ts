@@ -56,7 +56,6 @@ export function findMockResponse(body: {
 }): ReadableStream<Uint8Array> {
   // Extract the last user message from the request
   const message = last(body.messages);
-  debug("msw")("message", message);
   invariant(message, "Last message is required");
 
   // Get the text content from the message

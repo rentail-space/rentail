@@ -15,4 +15,5 @@ export default async function converse(
     if (chat?.activeStreamId == null) break;
     await delay(100);
   }
+  console.log(await prisma.messages.findMany({}));
 }

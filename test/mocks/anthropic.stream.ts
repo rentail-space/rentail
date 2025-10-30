@@ -5,6 +5,7 @@
  * the Anthropic API's Server-Sent Events format.
  */
 
+import debug from "debug";
 import { ulid } from "ulid";
 
 export interface ToolCall {
@@ -26,74 +27,71 @@ export default function createStreamingResponse(
 
   return new ReadableStream({
     start(controller) {
-      // Simulate initial delay
-      setTimeout(() => {
-        // Send message_start event
-        const messageStart = createMessageStartEvent();
-        controller.enqueue(encoder.encode(messageStart));
+      // Send message_start event
+      const messageStart = createMessageStartEvent();
+      controller.enqueue(encoder.encode(messageStart));
 
-        // If we need to include a tool call, send it first
-        for (const toolCall of toolCalls) {
-          // Send tool use content block start
-          const toolUseStart = createToolUseContentBlockStartEvent(
-            currentBlockIndex,
-            toolCall,
-          );
-          controller.enqueue(encoder.encode(toolUseStart));
+      // If we need to include a tool call, send it first
+      for (const toolCall of toolCalls) {
+        // Send tool use content block start
+        const toolUseStart = createToolUseContentBlockStartEvent(
+          currentBlockIndex,
+          toolCall,
+        );
+        controller.enqueue(encoder.encode(toolUseStart));
 
-          // Send tool use input delta (for Anthropic format)
-          const toolInputDelta = createToolUseInputDeltaEvent(
-            currentBlockIndex,
-            toolCall.input,
-          );
-          controller.enqueue(encoder.encode(toolInputDelta));
+        // Send tool use input delta (for Anthropic format)
+        const toolInputDelta = createToolUseInputDeltaEvent(
+          currentBlockIndex,
+          toolCall.input,
+        );
+        controller.enqueue(encoder.encode(toolInputDelta));
 
-          // Send tool use content block stop
-          const toolUseStop = createContentBlockStopEvent(currentBlockIndex);
-          controller.enqueue(encoder.encode(toolUseStop));
+        // Send tool use content block stop
+        const toolUseStop = createContentBlockStopEvent(currentBlockIndex);
+        controller.enqueue(encoder.encode(toolUseStop));
 
-          currentBlockIndex++;
+        currentBlockIndex++;
+      }
+
+      // Send text content_block_start event
+      const contentBlockStart = createContentBlockStartEvent(currentBlockIndex);
+      controller.enqueue(encoder.encode(contentBlockStart));
+
+      // Send content in chunks to simulate streaming
+      const chunkSize = 25;
+
+      function sendNextChunk() {
+        if (index >= mockResponse.length) {
+          // Send content_block_stop event
+          const contentBlockStop =
+            createContentBlockStopEvent(currentBlockIndex);
+          controller.enqueue(encoder.encode(contentBlockStop));
+
+          // Send message_stop event
+          const messageStop = createMessageStopEvent();
+          controller.enqueue(encoder.encode(messageStop));
+
+          controller.close();
+          debug("msw")("createStreamingResponse closed");
+          return;
         }
 
-        // Send text content_block_start event
-        const contentBlockStart =
-          createContentBlockStartEvent(currentBlockIndex);
-        controller.enqueue(encoder.encode(contentBlockStart));
+        const chunk = mockResponse.slice(index, index + chunkSize);
+        index += chunkSize;
 
-        // Send content in chunks to simulate streaming
-        const chunkSize = 25;
+        // Send content_block_delta event
+        const contentDelta = createContentBlockDeltaEvent(
+          chunk,
+          currentBlockIndex,
+        );
+        controller.enqueue(encoder.encode(contentDelta));
 
-        function sendNextChunk() {
-          if (index >= mockResponse.length) {
-            // Send content_block_stop event
-            const contentBlockStop =
-              createContentBlockStopEvent(currentBlockIndex);
-            controller.enqueue(encoder.encode(contentBlockStop));
+        // Schedule next chunk with small delay to simulate streaming
+        setTimeout(sendNextChunk, 10);
+      }
 
-            // Send message_stop event
-            const messageStop = createMessageStopEvent();
-            controller.enqueue(encoder.encode(messageStop));
-
-            controller.close();
-            return;
-          }
-
-          const chunk = mockResponse.slice(index, index + chunkSize);
-          index += chunkSize;
-
-          // Send content_block_delta event
-          const contentDelta = createContentBlockDeltaEvent(
-            chunk,
-            currentBlockIndex,
-          );
-          controller.enqueue(encoder.encode(contentDelta));
-
-          // Schedule next chunk with small delay to simulate streaming
-          setTimeout(sendNextChunk, 10);
-        }
-
-        sendNextChunk();
-      }, 10);
+      sendNextChunk();
     },
   });
 }
