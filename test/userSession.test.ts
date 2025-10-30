@@ -5,6 +5,7 @@ import prisma from "~/lib/prisma";
 import type { userProfile } from "~/lib/userProfile";
 import { getWorkingMemory } from "~/lib/workingMemory";
 import { goto } from "~/test/helpers/launchBrowser";
+import converse from "./helpers/converse";
 
 describe("Anonymous visits chat page", () => {
   let page: Page;
@@ -53,9 +54,7 @@ describe("Anonymous visits chat page", () => {
     let workingMemory: zod.infer<typeof userProfile>;
 
     beforeAll(async () => {
-      await page.getByRole("textbox").fill("Actually I'm in Boston");
-      await page.getByRole("button", { name: "Send" }).click();
-      await page.waitForLoadState("networkidle");
+      await converse(page, "Actually I'm in Boston");
 
       await expect(
         page.locator(".chat-bubble", {

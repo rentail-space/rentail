@@ -36,7 +36,8 @@ describe("Chat page", () => {
     let page: Page;
 
     beforeAll(async () => {
-      page = await converse(testMessage);
+      page = await goto("/chat");
+      await converse(page, testMessage);
     });
 
     it("should look like a real chat", async () => {

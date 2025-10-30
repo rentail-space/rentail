@@ -1,13 +1,11 @@
 import { delay } from "es-toolkit";
 import type { Page } from "playwright";
 import prisma from "~/lib/prisma";
-import { goto } from "./launchBrowser";
 
 export default async function converse(
+  page: Page,
   message: string,
-  headers?: HeadersInit,
-): Promise<Page> {
-  const page = await goto("/chat", headers);
+): Promise<void> {
   await page.getByRole("textbox").fill(message);
   await page.getByRole("button", { name: "Send" }).click();
   await delay(100);
@@ -17,5 +15,4 @@ export default async function converse(
     if (chat?.activeStreamId == null) break;
     await delay(100);
   }
-  return page;
 }

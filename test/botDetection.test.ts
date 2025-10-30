@@ -2,6 +2,7 @@ import { expect } from "playwright/test";
 import { beforeEach, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
 import converse from "./helpers/converse";
+import { goto } from "./helpers/launchBrowser";
 
 describe("Bot detection", () => {
   describe("default browser", () => {
@@ -46,5 +47,6 @@ describe("Bot detection", () => {
 
 async function visit(headers?: HeadersInit) {
   await prisma.user.deleteMany();
-  await converse("Hello, how are you?", headers);
+  const page = await goto("/chat", headers);
+  await converse(page, "Hello, how are you?");
 }

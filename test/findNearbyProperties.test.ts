@@ -4,6 +4,7 @@ import { beforeAll, describe, it } from "vitest";
 import findNearbyProperties from "~/lib/findNearbyProperties";
 import prisma from "~/lib/prisma";
 import converse from "./helpers/converse";
+import { goto } from "./helpers/launchBrowser";
 
 describe("Proximity-based shopping center search", () => {
   describe("Search from 10 miles north", () => {
@@ -139,10 +140,11 @@ async function identifyUser(coordinates: {
   longitude: number;
 }): Promise<Property[]> {
   await prisma.user.deleteMany();
-  await converse("What are the nearby shopping centers?", {
+  const page = await goto("/chat", {
     "x-vercel-ip-latitude": coordinates.latitude.toString(),
     "x-vercel-ip-longitude": coordinates.longitude.toString(),
   });
+  await converse(page, "What are the nearby shopping centers?");
 
   const user = await prisma.user.findFirstOrThrow({ include: { chats: true } });
   const { properties } = await findNearbyProperties({
