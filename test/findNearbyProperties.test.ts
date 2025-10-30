@@ -1,5 +1,5 @@
 import { expect } from "playwright/test";
-import type { PropertyGetPayload } from "prisma/generated/models";
+import type { Property } from "prisma/generated/client";
 import { beforeAll, describe, it } from "vitest";
 import findNearbyProperties from "~/lib/findNearbyProperties";
 import prisma from "~/lib/prisma";
@@ -7,11 +7,10 @@ import { goto } from "./helpers/launchBrowser";
 
 describe("Proximity-based shopping center search", () => {
   describe("Search from 10 miles north", () => {
-    let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+    let properties: Property[];
 
     beforeAll(async () => {
-      await identifyUser(calculateCoordinates("north", 10));
-      properties = await findWithin20Miles();
+      properties = await identifyUser(calculateCoordinates("north", 10));
     });
 
     it("should find The Grove shopping center", () => {
@@ -20,11 +19,10 @@ describe("Proximity-based shopping center search", () => {
   });
 
   describe("Search from 10 miles south", () => {
-    let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+    let properties: Property[];
 
     beforeAll(async () => {
-      await identifyUser(calculateCoordinates("south", 10));
-      properties = await findWithin20Miles();
+      properties = await identifyUser(calculateCoordinates("south", 10));
     });
 
     it("should find The Grove shopping center", () => {
@@ -33,11 +31,10 @@ describe("Proximity-based shopping center search", () => {
   });
 
   describe("Search from 10 miles west", () => {
-    let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+    let properties: Property[];
 
     beforeAll(async () => {
-      await identifyUser(calculateCoordinates("west", 10));
-      properties = await findWithin20Miles();
+      properties = await identifyUser(calculateCoordinates("west", 10));
     });
 
     it("should find The Grove shopping center", () => {
@@ -46,11 +43,10 @@ describe("Proximity-based shopping center search", () => {
   });
 
   describe("Search from 10 miles east", () => {
-    let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+    let properties: Property[];
 
     beforeAll(async () => {
-      await identifyUser(calculateCoordinates("east", 10));
-      properties = await findWithin20Miles();
+      properties = await identifyUser(calculateCoordinates("east", 10));
     });
 
     it("should find The Grove shopping center", () => {
@@ -59,11 +55,10 @@ describe("Proximity-based shopping center search", () => {
   });
 
   describe("Search from 30 miles north", () => {
-    let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+    let properties: Property[];
 
     beforeAll(async () => {
-      await identifyUser(calculateCoordinates("north", 30));
-      properties = await findWithin20Miles();
+      properties = await identifyUser(calculateCoordinates("north", 30));
     });
 
     it("should not find The Grove shopping center", () => {
@@ -72,11 +67,10 @@ describe("Proximity-based shopping center search", () => {
   });
 
   describe("Search from 30 miles south", () => {
-    let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+    let properties: Property[];
 
     beforeAll(async () => {
-      await identifyUser(calculateCoordinates("south", 30));
-      properties = await findWithin20Miles();
+      properties = await identifyUser(calculateCoordinates("south", 30));
     });
 
     it("should not find The Grove shopping center", () => {
@@ -85,11 +79,10 @@ describe("Proximity-based shopping center search", () => {
   });
 
   describe("Search from 30 miles west", () => {
-    let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+    let properties: Property[];
 
     beforeAll(async () => {
-      await identifyUser(calculateCoordinates("west", 30));
-      properties = await findWithin20Miles();
+      properties = await identifyUser(calculateCoordinates("west", 30));
     });
 
     it("should not find The Grove shopping center", () => {
@@ -98,11 +91,10 @@ describe("Proximity-based shopping center search", () => {
   });
 
   describe("Search from 30 miles east", () => {
-    let properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+    let properties: Property[];
 
     beforeAll(async () => {
-      await identifyUser(calculateCoordinates("east", 30));
-      properties = await findWithin20Miles();
+      properties = await identifyUser(calculateCoordinates("east", 30));
     });
 
     it("should not find The Grove shopping center", () => {
@@ -145,7 +137,7 @@ function calculateCoordinates(
 async function identifyUser(coordinates: {
   latitude: number;
   longitude: number;
-}) {
+}): Promise<Property[]> {
   await prisma.user.deleteMany();
   const page = await goto("/chat", {
     "x-vercel-ip-latitude": coordinates.latitude.toString(),
@@ -154,22 +146,16 @@ async function identifyUser(coordinates: {
   await page.getByRole("textbox").fill("What are the nearby shopping centers?");
   await page.getByRole("button", { name: "Send" }).click();
   await page.waitForLoadState("networkidle");
-}
 
-async function findWithin20Miles(): Promise<
-  PropertyGetPayload<{ include: { spaces: true } }>[]
-> {
-  const chat = await prisma.chat.findFirstOrThrow({ include: { user: true } });
+  const user = await prisma.user.findFirstOrThrow({ include: { chats: true } });
   const { properties } = await findNearbyProperties({
-    chat,
+    chat: user.chats[0],
     maxDistance: 20,
-    user: chat.user,
+    user,
   });
   return properties;
 }
 
-function findTheGrove(
-  properties: PropertyGetPayload<{ include: { spaces: true } }>[],
-) {
+function findTheGrove(properties: Property[]) {
   return properties.find((property) => property.name === "The Grove");
 }
