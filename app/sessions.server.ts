@@ -16,7 +16,7 @@ import welcome from "~/prompts/welcome.md?raw";
 // List of user agents that are considered bots
 const botUserAgents = [
   "Android 9",
-  "BetterStack",
+  "Better Stack",
   "CFNetwork",
   "Checkly",
   "FastmailUA",
@@ -151,7 +151,7 @@ async function getInitialFields(headers: Headers): Promise<{
   const geocode = await geocodeFromHeaders(headers);
   const ip = headers.get("x-forwarded-for") ?? "";
   const userAgent = headers.get("user-agent") ?? "";
-  const isBot = isUABot(userAgent) || (await isGoogleBot(ip));
+  const isBot = isUABot(userAgent) || (await isBotByIP(ip));
   const cityStateCountry = [geocode.city, geocode.state, geocode.country]
     .filter(Boolean)
     .join(", ");
@@ -219,7 +219,7 @@ const isUABot: (userAgent: string) => boolean = createIsbotFromList(
  * @param ip - The IP address to check
  * @returns True if the IP resolves to a Google domain, false otherwise
  */
-async function isGoogleBot(ip: string): Promise<boolean> {
+async function isBotByIP(ip: string): Promise<boolean> {
   try {
     // Skip reverse DNS check for localhost/private IPs
     if (
