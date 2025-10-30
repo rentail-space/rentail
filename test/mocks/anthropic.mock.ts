@@ -34,7 +34,7 @@ export const customMockResponses: MessagePattern[] = [
   },
   {
     pattern: /Boston/i,
-    response: "Thanks for letting me know!",
+    response: "Thanks for letting me know. I'll update my working memory.",
   },
 ];
 
@@ -75,7 +75,7 @@ export function findMockResponse(body: {
   );
 
   // Check custom responses first (higher priority)
-  const response = customMockResponses.find((mockPattern) =>
+  const mock = customMockResponses.find((mockPattern) =>
     matchesPattern(messageText, mockPattern.pattern),
   );
 
@@ -111,7 +111,7 @@ export function findMockResponse(body: {
   }
 
   return createStreamingResponse(
-    response?.response ?? fallbackResponse,
+    mock ? mock.response : fallbackResponse,
     toolCalls,
   );
 }

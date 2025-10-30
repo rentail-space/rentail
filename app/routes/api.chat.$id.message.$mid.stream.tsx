@@ -16,9 +16,8 @@ export async function loader({ params }: Route.LoaderArgs) {
   const chat = await prisma.chat.findUnique({
     where: { id: params.id },
   });
-  if (!chat) throw new Response(null, { status: 404 });
-
-  if (chat.activeStreamId == null) return new Response(null, { status: 204 });
+  if (!chat || chat.activeStreamId == null)
+    return new Response(null, { status: 204 });
 
   const streamContext = createResumableStreamContext({
     waitUntil: async (promise) => await promise,

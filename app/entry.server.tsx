@@ -82,7 +82,7 @@ async function waitForResponse(response: Response, start: number) {
 
 export function handleDataRequest(
   response: Response,
-  { request, params, context }: LoaderFunctionArgs | ActionFunctionArgs,
+  { request }: LoaderFunctionArgs | ActionFunctionArgs,
 ) {
   const start = Date.now();
   console.info("%s %s", request.method, request.url);
