@@ -44,6 +44,20 @@ export async function action({ params, request }: Route.ActionArgs) {
 
   // Load existing messages to see what will be sent
   const { messagesV2 } = await memory.rememberMessages({ threadId: chat.id });
+
+  // Save the user's message before streaming (savePerStep only saves assistant messages)
+  await memory.saveMessages({
+    messages: [
+      {
+        ...lastMessage,
+        threadId: chat.id,
+        resourceId: user.id,
+      },
+    ],
+    format: "v2",
+  });
+  logger("Saved user message to database");
+
   const stream = await agent.stream(messages, {
     abortSignal,
     memory: { resource: user.id, thread: chat.id },
