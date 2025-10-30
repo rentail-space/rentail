@@ -55,7 +55,7 @@ describe("Anonymous visits chat page", () => {
     beforeAll(async () => {
       await page.getByRole("textbox").fill("Actually I'm in Boston");
       await page.getByRole("button", { name: "Send" }).click();
-      await page.waitForTimeout(20000);
+      await page.waitForLoadState("networkidle");
 
       await expect(
         page.locator(".chat-bubble", {
