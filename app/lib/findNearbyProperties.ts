@@ -1,32 +1,28 @@
-import type { Chat, PropertySpace, User } from "prisma/generated/client";
+import { captureException } from "@sentry/react-router";
+import type { PropertySpace, User } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import prisma from "~/lib/prisma";
-import { getWorkingMemory } from "~/lib/workingMemory";
+import { cleanParse } from "./userProfile";
 
 /**
  * Find the shopping centers within a given distance from the user. Gets the
  * current location from working memory, updates it, if necessary.
  *
- * @param chat The chat to find the shopping centers for.
+ * @param user The user to find the shopping centers for.
  * @param maxDistance The distance in miles to find the shopping centers within.
  * @returns Markup with shopping centers and spaces based on distance
  */
 export default async function findNearbyProperties({
-  chat,
   maxDistance,
   user,
 }: {
-  chat: Chat;
   maxDistance: number;
   user: User;
 }): Promise<{
   properties: PropertyGetPayload<{ include: { spaces: true } }>[];
   markdown: string;
 }> {
-  const { longitude, latitude } = await locationFromWorkingMemory({
-    chat,
-    user,
-  });
+  const { longitude, latitude } = await locationFromWorkingMemory(user);
   if (!longitude || !latitude) return { properties: [], markdown: "" };
 
   const properties = await prisma.property.findMany({
@@ -46,18 +42,20 @@ export default async function findNearbyProperties({
   return { properties, markdown };
 }
 
-async function locationFromWorkingMemory({
-  chat,
-  user,
-}: {
-  chat: Chat;
-  user: User;
-}): Promise<{ longitude: number; latitude: number }> {
-  const { location } = await getWorkingMemory({ chat, user });
-  return {
-    longitude: location?.longitude ?? 0,
-    latitude: location?.latitude ?? 0,
-  };
+async function locationFromWorkingMemory(
+  user: User,
+): Promise<{ longitude?: number; latitude?: number }> {
+  try {
+    const { workingMemory } = await prisma.user.findUniqueOrThrow({
+      where: { id: user.id },
+      select: { workingMemory: true },
+    });
+    const { location } = cleanParse(workingMemory);
+    return { longitude: location?.longitude, latitude: location?.latitude };
+  } catch (error) {
+    captureException(error, { extra: { user } });
+    return {};
+  }
 }
 
 function centersToMarkdown({

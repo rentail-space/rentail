@@ -1,5 +1,4 @@
-import type { UIMessage, UITools } from "ai";
-import { uniqBy } from "es-toolkit";
+import type { UIMessage } from "ai";
 import { Loader2 } from "lucide-react";
 import React, { type JSX, useEffect, useRef, useState } from "react";
 import remarkGfm from "remark-gfm";
@@ -18,11 +17,7 @@ export default function Messages({
 }: {
   error?: Error;
   isTyping: boolean;
-  messages: UIMessage<
-    { isAborted?: boolean },
-    { text: string; details?: { type: string; text: string }[] },
-    UITools
-  >[];
+  messages: UIMessage[];
   setQuery: (query: string) => void;
 }) {
   const prevMessagesLength = useRef(messages.length);
@@ -45,26 +40,21 @@ export default function Messages({
     prevIsTyping.current = isTyping;
   }, [messages.length, isTyping, scrollToBottom, isAtBottom]);
 
-  // Don't render the same message twice
-  const uniqueMessages = uniqBy(messages, (message) => message.id);
-
   return (
     <div className="flex flex-1 flex-col">
       <div className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto scroll-smooth p-6">
-        {uniqueMessages.map((message, index, messages) =>
-          message.metadata?.isAborted ? (
-            <AbortedMessage key={message.id} />
-          ) : message.role === "user" ? (
-            <UserMessage key={message.id} message={message} />
-          ) : (
+        {messages.map((message, index, messages) =>
+          message.role === "user" ? (
+            <UserMessage key={index.toString()} message={message} />
+          ) : message.role === "assistant" ? (
             <AssistantMessage
               askQuestion={askQuestion({ scrollToBottom, setQuery })}
               isLast={index === messages.length - 1}
-              key={message.id}
+              key={index.toString()}
               message={message}
               scrollToBottom={scrollToBottom}
             />
-          ),
+          ) : null,
         )}
 
         {isTyping && <TypingIndicator />}
@@ -89,7 +79,7 @@ function UserMessage({ message }: { message: UIMessage }) {
   );
 }
 
-function AbortedMessage() {
+function _AbortedMessage() {
   return (
     <div className="chat chat-end">
       <div className="text-red-500">The conversation was aborted.</div>
@@ -104,7 +94,7 @@ function AssistantMessage({
 }: {
   askQuestion: (question: string) => Promise<void>;
   isLast: boolean;
-  message: UIMessage<{ isAborted?: boolean }>;
+  message: UIMessage;
   scrollToBottom: ScrollToBottom;
 }) {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -127,7 +117,7 @@ function AssistantMessage({
     return () => observer.disconnect();
   }, [scrollToBottom]);
 
-  return message.parts.map((part, index, parts) => {
+  return message.parts.map((part, index) => {
     switch (part.type) {
       case "text": {
         return (
@@ -146,7 +136,13 @@ function AssistantMessage({
   });
 }
 
-function ReasoningMessage({ text, isLast }: { text: string; isLast: boolean }) {
+function _ReasoningMessage({
+  text,
+  isLast,
+}: {
+  text: string;
+  isLast: boolean;
+}) {
   const [isExpanded, setIsExpanded] = useState(false);
   const isThinking = isLast;
 

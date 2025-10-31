@@ -1,3 +1,4 @@
+import { withTimeout } from "es-toolkit";
 import type { Page } from "playwright";
 import { expect } from "vitest";
 import prisma from "~/lib/prisma";
@@ -16,19 +17,20 @@ export default async function converse(
   message: string,
 ): Promise<string> {
   expect(page.url()).toContain("/chat");
+  const initialCount = await prisma.chat.count();
+
   await page.getByRole("textbox").fill(message);
   await page.getByRole("button", { name: "Send" }).click();
   await page.waitForLoadState("networkidle");
 
-  // Wait for the stream to complete by polling activeStreamId
-  expect(await prisma.chat.count()).toEqual(1);
-  while (true) {
-    const chat = await prisma.chat.findFirstOrThrow({
-      select: { activeStreamId: true },
-    });
-    if (!chat.activeStreamId) break;
-    await page.waitForTimeout(100);
-  }
+  // Wait for server to update the database with the new messages
+  await withTimeout(async () => {
+    while (true) {
+      const finalCount = await prisma.chat.count();
+      if (finalCount >= initialCount + 2) break;
+      await page.waitForTimeout(100);
+    }
+  }, 2_000);
 
   // Wait for the assistant response bubble to appear in the UI
   const lastResponseBubble = page.locator(".chat-bubble-response").last();

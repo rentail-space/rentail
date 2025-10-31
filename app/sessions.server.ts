@@ -1,17 +1,16 @@
-import type { MastraMessageV2 } from "@mastra/core";
 import { captureException } from "@sentry/react-router";
+import type { TextUIPart, UIMessage } from "ai";
 import debug from "debug";
 import { invariant } from "es-toolkit";
 import { createIsbotFromList, list } from "isbot";
 import { reverse } from "node:dns/promises";
 import type { Chat, User } from "prisma/generated/client";
-import type { ChatGetPayload } from "prisma/generated/models";
 import { ulid } from "ulid";
 import zod from "zod";
 import authServer from "~/lib/auth.server";
 import prisma from "~/lib/prisma";
-import { getRecentMessages, updateWorkingMemory } from "~/lib/workingMemory";
 import welcome from "~/prompts/welcome.md?raw";
+import { cleanParse } from "./lib/userProfile";
 
 // List of user agents that are considered bots
 const botUserAgents = [
@@ -47,30 +46,31 @@ const cachedLocation = zod
  * @param headers - The headers object
  * @returns The chat (optional) and recent messages
  */
-export async function findChat(headers: Headers): Promise<{
-  chat?: ChatGetPayload<{ include: { user: true } }>;
-  messages: MastraMessageV2[];
-}> {
+export async function findUserAndChat(
+  headers: Headers,
+): Promise<{ chat?: Chat; messages: UIMessage[]; user?: User }> {
   const session = await authServer.api.getSession({ headers });
   if (session?.user) {
-    const chat = await prisma.chat.findFirst({
-      include: { user: true },
-      orderBy: { createdAt: "desc" },
-      where: { userId: session.user.id },
+    const user = await prisma.user.findUnique({
+      include: {
+        chats: { orderBy: { createdAt: "desc" }, take: 1 },
+      },
+      where: { id: session.user.id },
     });
+    const chat = user?.chats[0];
     if (chat) {
-      const messages = await getRecentMessages(chat);
-      return { chat, messages };
+      const messages = await recentMessages(chat.id);
+      return { chat, messages, user };
     }
   }
 
   return {
+    // No user, no chat, only the initial welcome message
     messages: [
       {
-        id: ulid(),
         role: "assistant",
-        content: { format: 2, parts: [{ type: "text", text: welcome }] },
-        createdAt: new Date(),
+        parts: [{ text: welcome, type: "text" }],
+        id: ulid(),
       },
     ],
   };
@@ -94,13 +94,19 @@ export async function findOrCreateUser({
 }): Promise<{
   chat: Chat;
   headers: Headers;
-  messages: MastraMessageV2[];
+  messages: UIMessage[];
   user: User;
 }> {
-  const { chat, messages } = await findChat(headers);
-  if (chat) {
-    invariant(chat.id === chatId, "Chat ID mismatch");
-    return { chat, headers: headers, messages, user: chat.user };
+  const found = await findUserAndChat(headers);
+  if ("chat" in found && "user" in found) {
+    invariant(found.chat?.id === chatId, "Chat ID mismatch");
+    invariant(found.user, "User is required");
+    return {
+      chat: found.chat,
+      headers: new Headers(),
+      messages: found.messages,
+      user: found.user,
+    };
   }
 
   // We're gong to sign in the anonymous user so we can get the HTTP headers
@@ -111,27 +117,58 @@ export async function findOrCreateUser({
 
   // Update the anonymous user with the initial fields (IP, geocode, user agent,
   // referrer, etc.)
-  const newUser = await prisma.user.update({
+  const user = await prisma.user.update({
     data: await getInitialFields(headers),
     where: { id: anonymousUser.response.user.id },
   });
-  const newChat = await prisma.chat.create({
-    data: { id: chatId, metadata: {}, user: { connect: { id: newUser.id } } },
+  const chat = await prisma.chat.create({
+    data: {
+      id: chatId,
+      metadata: {},
+      messages: {
+        create: [
+          {
+            content: [{ type: "text", text: welcome }],
+            id: ulid(),
+            role: "assistant",
+            type: "text",
+          },
+        ],
+      },
+      user: { connect: { id: user.id } },
+    },
     include: { user: true },
   });
+  const data = cleanParse(user.workingMemory);
+  await prisma.user.update({
+    data: {
+      workingMemory: JSON.stringify({ location: user.geocode, ...data }),
+    },
+    where: { id: user.id },
+  });
 
-  await updateWorkingMemory({ chat: newChat, user: newUser }, (profile) => ({
-    location: newUser.geocode,
-    ...profile,
+  const messages = await recentMessages(chat.id);
+  return { chat, headers: anonymousUser.headers, messages, user };
+}
+
+/**
+ * Get 50 most recent messages for a chat.
+ *
+ * @param chatId - The chat ID
+ * @returns The 50 most recent messages
+ */
+export async function recentMessages(chatId: string): Promise<UIMessage[]> {
+  const recent = await prisma.messages.findMany({
+    orderBy: { createdAt: "desc" },
+    take: 50,
+    where: { chatId },
+  });
+  // Ensure correct transformation to ModelMessage[]
+  return recent.reverse().map((message) => ({
+    id: message.id,
+    parts: message.content as TextUIPart[],
+    role: message.role,
   }));
-  const newMessages = await getRecentMessages(newChat);
-
-  return {
-    chat: newChat,
-    headers: anonymousUser.headers,
-    messages: newMessages,
-    user: newUser,
-  };
 }
 
 /**

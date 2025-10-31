@@ -1,4 +1,5 @@
 ---
+name: clearframe
 description: Ultra-minimal responses with direct action focus - no fluff, just results
 ---
 

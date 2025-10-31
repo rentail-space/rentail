@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react-router";
 import zod from "zod";
 
 /**
@@ -56,3 +57,19 @@ export const userProfile = zod
       .partial(),
   })
   .partial();
+
+/**
+ * Parse the working memory into a valid user profile. If the working memory is
+ * invalid, return an empty object.
+ *
+ * @param workingMemory - The working memory to parse.
+ * @returns The user profile.
+ */
+export function cleanParse(workingMemory?: string) {
+  try {
+    return userProfile.parse(JSON.parse(workingMemory || "{}"));
+  } catch (error) {
+    captureException(error, { extra: { workingMemory } });
+    return {};
+  }
+}

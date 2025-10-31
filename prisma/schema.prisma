@@ -161,7 +161,5 @@ model Verification {
 
 enum Role {
   assistant
-  system
-  tool
   user
 }

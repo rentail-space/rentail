@@ -2,8 +2,7 @@ import { expect, type Page } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
 import type zod from "zod";
 import prisma from "~/lib/prisma";
-import type { userProfile } from "~/lib/userProfile";
-import { getWorkingMemory } from "~/lib/workingMemory";
+import { cleanParse, type userProfile } from "~/lib/userProfile";
 import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
 
@@ -38,10 +37,8 @@ describe("Anonymous visits chat page", () => {
   });
 
   it("sets initial working memory with default location", async () => {
-    const chat = await prisma.chat.findFirstOrThrow({
-      include: { user: true },
-    });
-    const workingMemory = await getWorkingMemory({ chat, user: chat.user });
+    const user = await prisma.user.findFirstOrThrow({});
+    const workingMemory = cleanParse(user.workingMemory);
     expect(workingMemory.location?.city).toEqual("Los Angeles");
     expect(workingMemory.location?.state).toEqual("California");
     expect(workingMemory.location?.country).toEqual("United States");
@@ -56,15 +53,13 @@ describe("Anonymous visits chat page", () => {
     beforeAll(async () => {
       await converse(page, "Actually I'm in Boston");
 
-      const chat = await prisma.chat.findFirstOrThrow({
-        include: { user: true },
-      });
-      workingMemory = await getWorkingMemory({ chat, user: chat.user });
+      const user = await prisma.user.findFirstOrThrow();
+      workingMemory = cleanParse(user.workingMemory);
     });
 
     it("should show user message in chat", async () => {
       await expect(
-        page.locator(".chat-bubble-accent", {
+        page.locator(".chat-bubble-user", {
           hasText: "Actually I'm in Boston",
         }),
       ).toBeVisible();
@@ -72,7 +67,7 @@ describe("Anonymous visits chat page", () => {
 
     it("should show assistant message in chat", async () => {
       await expect(
-        page.locator(".chat-bubble", {
+        page.locator(".chat-bubble-response", {
           hasText: /Thanks for letting me know/i,
         }),
       ).toBeVisible();
@@ -221,14 +216,10 @@ describe("Anonymous visits chat page", () => {
           });
 
           it("preserves working memory through authentication", async () => {
-            const chat = await prisma.chat.findFirstOrThrow({
-              include: { user: true },
-              where: { user: { isAnonymous: false } },
+            const user = await prisma.user.findFirstOrThrow({
+              where: { isAnonymous: false },
             });
-            const workingMemory = await getWorkingMemory({
-              chat,
-              user: chat.user,
-            });
+            const workingMemory = cleanParse(user.workingMemory);
             expect(workingMemory.location?.city).toEqual("Boston");
             expect(workingMemory.location?.state).toEqual("Massachusetts");
             expect(workingMemory.location?.country).toEqual("United States");

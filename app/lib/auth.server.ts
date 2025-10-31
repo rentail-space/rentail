@@ -1,12 +1,12 @@
 import { captureException } from "@sentry/react-router";
-import { type BetterAuthOptions, betterAuth } from "better-auth";
+import { betterAuth, type BetterAuthOptions } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { anonymous, type UserWithAnonymous } from "better-auth/plugins";
 import debug from "debug";
+import type { InputJsonValue } from "prisma/generated/internal/prismaNamespace";
 import { ulid } from "ulid";
 import { sendVerificationEmail, sendWelcomeEmail } from "~/emails/sendEmails";
 import prisma from "~/lib/prisma";
-import { getRecentMessages, saveMessages } from "~/lib/workingMemory";
 
 /**
  * @see https://github.com/better-auth/better-auth/blob/main/packages/better-auth/src/types/options.ts
@@ -181,7 +181,7 @@ async function copyAnonToNewUser(
 
   // Duplicate the anonymous user's last chat.
   const anonChat = await prisma.chat.findFirst({
-    include: { user: true },
+    include: { user: true, messages: true },
     orderBy: { createdAt: "desc" },
     where: { user: { id: anonUser.id } },
   });
@@ -195,6 +195,21 @@ async function copyAnonToNewUser(
   });
 
   // Copy the anonymous user's messages to the new user.
-  const anonMessages = anonChat ? await getRecentMessages(anonChat) : [];
-  await saveMessages({ chat: newChat, messages: anonMessages });
+  if (anonChat) {
+    await prisma.chat.update({
+      data: {
+        messages: {
+          createMany: {
+            data: anonChat.messages.map((message) => ({
+              content: message.content as InputJsonValue,
+              role: message.role,
+              id: ulid(),
+              type: message.type,
+            })),
+          },
+        },
+      },
+      where: { id: newChat.id },
+    });
+  }
 }

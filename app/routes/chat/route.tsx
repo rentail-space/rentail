@@ -1,15 +1,13 @@
 import { useChat } from "@ai-sdk/react";
-import type { MastraMessageV2 } from "@mastra/core/memory";
 import { captureException } from "@sentry/react-router";
 import { DefaultChatTransport } from "ai";
-import { last } from "es-toolkit";
+import { invariant, last } from "es-toolkit";
 import { useQueryState } from "nuqs";
-import type { ChatGetPayload } from "prisma/generated/models";
-import { useMemo } from "react";
 import { useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import LayoutHeader from "~/components/layout/LayoutHeader";
+import type { loader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
@@ -17,33 +15,20 @@ import PropertyList from "./PropertyList";
 
 export const handle = { showHeader: false, showFooter: false };
 
-export default function Chat() {
+export default function ChatPage() {
   const [query, setQuery] = useQueryState("q");
 
   // Access data from root loader first, our loaded depends on it
-  const { chat, messages: initialMessages } = useRouteLoaderData("root") as {
-    chat?: ChatGetPayload<{ include: { user: true } }>;
-    messages?: MastraMessageV2[];
-  };
+  const found = useRouteLoaderData<typeof loader>("root");
+  invariant(found, "No root loader data found");
 
   // Ensure chatId is stable across renders
-  const chatId = useMemo(() => chat?.id ?? ulid(), [chat?.id]);
+  const chatId = found.chat?.id ?? ulid();
+
   const { error, messages, sendMessage, status, stop } = useChat({
     generateId: () => ulid(),
     id: chatId,
-    messages:
-      initialMessages?.map((message) => ({
-        id: message.id,
-        parts: message.content.parts
-          .filter((part) => part.type === "text" || part.type === "reasoning")
-          .map((part) =>
-            part.type === "text"
-              ? { text: part.text, type: "text" }
-              : { text: "", type: "reasoning", details: part.details },
-          ),
-        role: message.role,
-        threadId: chatId,
-      })) ?? [],
+    messages: found.messages,
     resume: true, // Enable automatic stream resumption
     transport: new DefaultChatTransport({
       api: `/api/chat/${chatId}/message`,
@@ -51,7 +36,7 @@ export default function Chat() {
     }),
     onError: (error) => {
       console.error("Chat error:", error);
-      captureException(error, { extra: { chat } });
+      captureException(error, { extra: { chatId } });
     },
   });
 
@@ -83,16 +68,15 @@ export default function Chat() {
           query={query ?? ""}
           sendMessage={(message: string) =>
             sendMessage({
-              parts: [{ text: message, type: "text", details: undefined }],
+              parts: [{ text: message, type: "text" }],
               role: "user",
-              threadId: chatId,
             })
           }
           setQuery={setQuery}
           stopChat={() => {
-            if (chat?.id) {
+            if (chatId) {
               stop();
-              fetch(`/api/chat/${chat.id}/stop`, { method: "POST" });
+              fetch(`/api/chat/${chatId}/stop`, { method: "POST" });
             }
           }}
         />

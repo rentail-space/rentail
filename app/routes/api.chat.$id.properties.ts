@@ -9,15 +9,10 @@ import type { Route } from "./+types/api.chat.$id.export.csv";
  */
 export async function loader({ params }: Route.LoaderArgs) {
   const { id } = params;
-  const chat = await prisma.chat.findUnique({
-    include: { user: true },
+  const user = await prisma.user.findUnique({
     where: { id },
   });
-  if (!chat) return Response.json({ properties: [] });
-  const { properties } = await findNearbyProperties({
-    chat,
-    maxDistance: 20,
-    user: chat.user,
-  });
+  if (!user) return Response.json({ properties: [] });
+  const { properties } = await findNearbyProperties({ maxDistance: 20, user });
   return Response.json({ properties });
 }

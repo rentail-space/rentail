@@ -1,19 +1,19 @@
-import { toAISdkFormat } from "@mastra/ai-sdk";
+import { createAnthropic } from "@ai-sdk/anthropic";
 import { captureException } from "@sentry/react-router";
-import { createUIMessageStreamResponse } from "ai";
+import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import humanFormat from "human-format";
 import { Redis } from "ioredis";
+import type { InputJsonValue } from "prisma/generated/internal/prismaNamespace";
 import { createResumableStreamContext } from "resumable-stream";
 import { ulid } from "ulid";
-import mastra from "~/lib/agent";
 import env from "~/lib/env";
 import findNearbyProperties from "~/lib/findNearbyProperties";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import general from "~/prompts/general.md?raw";
-import { findOrCreateUser } from "~/sessions.server";
+import { findOrCreateUser, recentMessages } from "~/sessions.server";
 import type { Route } from "./+types/api.chat.$id.message";
 
 const logger = debug("chat");
@@ -26,59 +26,44 @@ const logger = debug("chat");
  * @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
  */
 export async function action({ params, request }: Route.ActionArgs) {
-  const chatId = params.id;
-  invariant(chatId, "Chat ID is required");
   const { chat, headers, user } = await findOrCreateUser({
-    chatId,
+    chatId: params.id,
     headers: request.headers,
   });
 
   const { messages: bodyMessages } = (await request.clone().json()) as {
-    messages: {
-      id: string;
-      parts: [{ text: string; type: "text" }];
-      role: "user" | "assistant";
-      threadId: string;
-    }[];
+    messages: UIMessage[];
   };
-  const lastMessageObj = last(bodyMessages);
-  if (!lastMessageObj)
-    return new Response("Message is required", { status: 400 });
+  const lastMessage = last(bodyMessages) as UIMessage;
+  invariant(lastMessage, "Last message is required");
 
-  const lastMessageText = lastMessageObj.parts
-    .map((part) => part.text)
-    .join("\n");
-  logger("Message from user:\n%o", lastMessageText);
+  await prisma.messages.create({
+    data: {
+      chatId: chat.id,
+      content: lastMessage.parts as InputJsonValue,
+      id: lastMessage.id,
+      role: "user",
+      type: "text",
+    },
+  });
+
+  const messages = await recentMessages(chat.id);
 
   // Set up Redis stop monitoring
   const { abortSignal } = await monitorStopSignal(chat.id);
   const { properties, markdown } = await findNearbyProperties({
-    chat,
     maxDistance: 20,
     user,
   });
   logger("Found %d properties", properties.length);
 
-  const agent = mastra.getAgentById("main");
-  const memory = await agent.getMemory();
-  invariant(memory, "Memory is required");
-
   // Don't pass messages array - let agent load from memory automatically
-  const stream = await agent.stream(lastMessageText, {
+  const stream = streamText({
     abortSignal,
-    maxSteps: 1,
-    memory: {
-      resource: user.id,
-      thread: chat.id,
-      options: {
-        lastMessages: 10,
-        threads: {
-          generateTitle: true,
-        },
-      },
-    },
-    requireToolApproval: false,
-    savePerStep: false, // Saves after each step; skipDuplicates prevents user message duplication
+    model: createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
+      "claude-haiku-4-5",
+    ),
+    messages: convertToModelMessages(messages),
     system: `${general}\n\n=====\n\n${markdown}`,
 
     onAbort: async () => {
@@ -106,22 +91,29 @@ export async function action({ params, request }: Route.ActionArgs) {
         data: { activeStreamId: null },
       });
     },
-
-    providerOptions: {
-      anthropic: {
-        sendReasoning: false,
-        thinking: { type: "disabled" },
-      },
-    },
-
-    modelSettings: {
-      temperature: 0,
-    },
   });
 
-  return createUIMessageStreamResponse({
-    headers,
-    async consumeSseStream({ stream }) {
+  return stream.toUIMessageStreamResponse({
+    onError: (error) => {
+      captureException(error, { extra: { chat } });
+      return "Error in agent stream";
+    },
+    onFinish: async ({ messages }) => {
+      await prisma.messages.createMany({
+        data: messages.map((message) => ({
+          chatId: chat.id,
+          content: message.parts as InputJsonValue,
+          id: ulid(),
+          role: message.role as "assistant" | "user",
+          type: "text",
+        })),
+      });
+      await prisma.chat.update({
+        where: { id: chat.id },
+        data: { activeStreamId: ulid() },
+      });
+    },
+    consumeSseStream: async ({ stream }) => {
       const streamId = ulid();
 
       // Create a resumable stream from the SSE stream
@@ -137,8 +129,6 @@ export async function action({ params, request }: Route.ActionArgs) {
         data: { activeStreamId: streamId },
       });
     },
-    stream: toAISdkFormat(stream, {
-      from: "agent",
-    }),
+    headers,
   });
 }

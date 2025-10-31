@@ -1,6 +1,5 @@
 import { last } from "es-toolkit";
 import {
-  data,
   type HeadersFunction,
   isRouteErrorResponse,
   type LinksFunction,
@@ -12,13 +11,12 @@ import "~/global.css";
 import loggingMiddleware from "~/lib/middleware/logging";
 import type { Route } from "./+types/root";
 import PageLayout from "./components/layout/PageLayout";
-import { findChat } from "./sessions.server";
+import { findUserAndChat } from "./sessions.server";
 
 export const middleware: Route.MiddlewareFunction[] = [loggingMiddleware];
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const { chat, messages } = await findChat(request.headers);
-  return data({ chat, messages });
+  return await findUserAndChat(request.headers);
 }
 
 export const headers: HeadersFunction = () => {
