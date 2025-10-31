@@ -107,10 +107,6 @@ export async function action({ params, request }: Route.ActionArgs) {
       });
     },
 
-    onChunk: (data) => {
-      logger("Chunk: %o", data);
-    },
-
     providerOptions: {
       anthropic: {
         sendReasoning: false,
