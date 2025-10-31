@@ -29,6 +29,7 @@ export default function Chat() {
   // Ensure chatId is stable across renders
   const chatId = useMemo(() => chat?.id ?? ulid(), [chat?.id]);
   const { error, messages, sendMessage, status, stop } = useChat({
+    generateId: () => ulid(),
     id: chatId,
     messages:
       initialMessages?.map((message) => ({
@@ -43,7 +44,7 @@ export default function Chat() {
         role: message.role,
         threadId: chatId,
       })) ?? [],
-    resume: false, // Enable automatic stream resumption
+    resume: true, // Enable automatic stream resumption
     transport: new DefaultChatTransport({
       api: `/api/chat/${chatId}/message`,
       // Only send user input to the server

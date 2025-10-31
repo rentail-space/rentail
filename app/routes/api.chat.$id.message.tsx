@@ -41,9 +41,14 @@ export async function action({ params, request }: Route.ActionArgs) {
       threadId: string;
     }[];
   };
-  const lastMessage = last(bodyMessages);
-  if (!lastMessage) return new Response("Message is required", { status: 400 });
-  logger("User's last message: %o", lastMessage);
+  const lastMessageObj = last(bodyMessages);
+  if (!lastMessageObj)
+    return new Response("Message is required", { status: 400 });
+
+  const lastMessageText = lastMessageObj.parts
+    .map((part) => part.text)
+    .join("\n");
+  logger("Message from user:\n%o", lastMessageText);
 
   // Set up Redis stop monitoring
   const { abortSignal } = await monitorStopSignal(chat.id);
@@ -58,21 +63,8 @@ export async function action({ params, request }: Route.ActionArgs) {
   const memory = await agent.getMemory();
   invariant(memory, "Memory is required");
 
-  const allMessages = await memory.saveMessages({
-    messages: [
-      {
-        content: { format: 2, parts: lastMessage.parts },
-        createdAt: new Date(),
-        id: lastMessage.id,
-        resourceId: user.id,
-        role: "user",
-        threadId: chat.id,
-      },
-    ],
-    format: "v2",
-  });
-
-  const stream = await agent.stream(allMessages, {
+  // Don't pass messages array - let agent load from memory automatically
+  const stream = await agent.stream(lastMessageText, {
     abortSignal,
     maxSteps: 1,
     memory: {
@@ -86,7 +78,7 @@ export async function action({ params, request }: Route.ActionArgs) {
       },
     },
     requireToolApproval: false,
-    savePerStep: true,
+    savePerStep: false, // Saves after each step; skipDuplicates prevents user message duplication
     system: `${general}\n\n=====\n\n${markdown}`,
 
     onAbort: async () => {
@@ -97,10 +89,9 @@ export async function action({ params, request }: Route.ActionArgs) {
       console.error("Error in agent stream", {
         error,
         chat: chat.id,
-        messagesCount: allMessages.length,
       });
       captureException(error, {
-        extra: { chat, messagesCount: allMessages.length },
+        extra: { chat },
       });
     },
 
@@ -131,9 +122,6 @@ export async function action({ params, request }: Route.ActionArgs) {
       temperature: 0,
     },
   });
-
-  // NOTE No await! This keeps Node alive if browser request is closed prematurely
-  stream.consumeStream();
 
   return createUIMessageStreamResponse({
     headers,
