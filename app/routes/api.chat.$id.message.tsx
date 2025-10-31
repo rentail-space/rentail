@@ -12,6 +12,7 @@ import env from "~/lib/env";
 import findNearbyProperties from "~/lib/findNearbyProperties";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
+import updateUserProfile from "~/lib/updateProfile.server";
 import general from "~/prompts/general.md?raw";
 import { findOrCreateUser, recentMessages } from "~/sessions.server";
 import type { Route } from "./+types/api.chat.$id.message";
@@ -36,7 +37,6 @@ export async function action({ params, request }: Route.ActionArgs) {
   };
   const lastMessage = last(bodyMessages) as UIMessage;
   invariant(lastMessage, "Last message is required");
-
   await prisma.messages.create({
     data: {
       chatId: chat.id,
@@ -112,6 +112,11 @@ export async function action({ params, request }: Route.ActionArgs) {
         where: { id: chat.id },
         data: { activeStreamId: ulid() },
       });
+
+      // Update user profile based on conversation
+      console.log("Updating user profile based on conversation");
+      await updateUserProfile({ lastMessage, user });
+      console.log("User profile updated");
     },
     consumeSseStream: async ({ stream }) => {
       const streamId = ulid();

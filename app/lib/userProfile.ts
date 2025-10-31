@@ -65,9 +65,9 @@ export const userProfile = zod
  * @param workingMemory - The working memory to parse.
  * @returns The user profile.
  */
-export function cleanParse(workingMemory?: string) {
+export function cleanParse(workingMemory: unknown) {
   try {
-    return userProfile.parse(JSON.parse(workingMemory || "{}"));
+    return userProfile.parse(JSON.parse((workingMemory as string) || "{}"));
   } catch (error) {
     captureException(error, { extra: { workingMemory } });
     return {};
