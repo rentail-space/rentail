@@ -9,8 +9,8 @@ import { ulid } from "ulid";
 import zod from "zod";
 import authServer from "~/lib/auth.server";
 import prisma from "~/lib/prisma";
+import { cleanParse } from "~/lib/userProfile";
 import welcome from "~/prompts/welcome.md?raw";
-import { cleanParse } from "./lib/userProfile";
 
 // List of user agents that are considered bots
 const botUserAgents = [

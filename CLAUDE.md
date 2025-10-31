@@ -34,32 +34,29 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 
 **AI Integration:**
 - Claude 4 via Anthropic AI SDK with streaming responses
-- Mastra framework for agent orchestration and PostgreSQL-backed memory
 - **Streaming Architecture:**
-  - Chat API: `app/routes/api.chat.$id.message.tsx` handles new messages
-  - Stream resumption: `app/routes/api.chat.$id.message.$mid.stream.tsx` resumes interrupted streams
-  - Convert Mastra streams to AI SDK format: `toAISdkFormat(result, { from: "agent" })`
-  - NEVER use deprecated `format: "aisdk"` option in `agent.stream()` - use `@mastra/ai-sdk` package instead
+  - Chat API: `app/routes/api.chat.$id.message.tsx` uses `streamText()` from AI SDK
   - Client uses AI SDK's `useChat` hook with `resume: true` for automatic reconnection
   - **Resumable Streams:** Uses `resumable-stream` package with Redis for reliable message delivery
     - Store active stream ID in `Chat.activeStreamId` field
-    - Call `stream.consumeStream()` WITHOUT await before returning response (keeps Node alive if browser closes)
     - Create resumable context in `consumeSseStream` callback with Redis pub/sub
-    - Resume endpoint checks `activeStreamId` and calls `resumeExistingStream()`
+    - Resume endpoint: `app/routes/api.chat.$id.stream.tsx` resumes interrupted streams
     - Clear `activeStreamId` in `onFinish` callback when stream completes
-- System prompts in `app/prompts/`: `general.md`, `welcome.md`
+- System prompts in `app/prompts/`: `general.md` (includes working memory instructions), `welcome.md`
 - Use Context7 MCP server for library documentation and code examples
 
 **Working Memory & User Profiles:**
-- Mastra memory stores user profiles as JSON in User.workingMemory field
-- Profile includes: name, location (city, state, country, lat/lon as numbers, timezone), preferences
-- Working memory updated automatically by AI during conversations
-- **Custom Mastra Storage Adapter (`PrismaStorage`):**
-  - Stores Mastra threads/messages in existing Chat/Message Prisma tables
-  - MUST use `format: "v2"` for all operations (v1 format is not supported)
-  - All messages require `threadId` (chat ID) and `resourceId` (user ID)
-  - When saving messages, use: `saveMessages({ messages, format: "v2" })`
-  - Storage adapter automatically populates `resourceId` from chat's user
+- Inspired by Mastra's working memory pattern and MemGPT whitepaper
+- User profiles stored as JSON in `User.workingMemory` field
+- Profile schema defined in `app/lib/userProfile.ts` with Zod validation
+- Profile includes: name, location (city, state, country, lat/lon as numbers, timezone), selling details, preferences, session state
+- **Working Memory Pattern:**
+  - Agent receives instructions in system prompt (`app/prompts/general.md`) to emit `<working_memory>` tags
+  - Agent outputs `<working_memory>{JSON}</working_memory>` when learning new user information
+  - Tags automatically parsed and saved to database via `updateUserProfile()` in `onFinish` callback
+  - Tags masked from user display using `maskWorkingMemoryTags()` function
+  - Deep merge strategy: new values override existing profile fields
+  - Agent instructed to be proactive - store any potentially useful information
 
 **Database:**
 - PostgreSQL with Prisma ORM client and schema generation

@@ -7,6 +7,7 @@ import {
   type ScrollToBottom,
   useStickToBottomContext,
 } from "use-stick-to-bottom";
+import { maskWorkingMemoryTags } from "~/lib/userProfile";
 import askQuestion from "~/routes/chat/askQuestion";
 
 export default function Messages({
@@ -199,7 +200,7 @@ function ResponseMessage({
             components={getComponents({ askQuestion })}
             remarkPlugins={[remarkGfm]}
           >
-            {text}
+            {maskWorkingMemoryTags(text)}
           </Streamdown>
         </div>
       </div>

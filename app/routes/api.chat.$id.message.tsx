@@ -12,7 +12,7 @@ import env from "~/lib/env";
 import findNearbyProperties from "~/lib/findNearbyProperties";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
-import updateUserProfile from "~/lib/updateProfile.server";
+import updateUserProfile, { maskWorkingMemoryTags } from "~/lib/userProfile";
 import general from "~/prompts/general.md?raw";
 import { findOrCreateUser, recentMessages } from "~/sessions.server";
 import type { Route } from "./+types/api.chat.$id.message";
@@ -57,7 +57,6 @@ export async function action({ params, request }: Route.ActionArgs) {
   });
   logger("Found %d properties", properties.length);
 
-  // Don't pass messages array - let agent load from memory automatically
   const stream = streamText({
     abortSignal,
     model: createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
@@ -91,33 +90,25 @@ export async function action({ params, request }: Route.ActionArgs) {
         data: { activeStreamId: null },
       });
     },
+
+    // Transform the stream to mask working memory tags before sending to client
+    experimental_transform: () => {
+      return new TransformStream({
+        transform(chunk, controller) {
+          if (chunk.type === "text-delta") {
+            controller.enqueue({
+              ...chunk,
+              text: maskWorkingMemoryTags(chunk.text),
+            });
+          } else controller.enqueue(chunk);
+        },
+      });
+    },
   });
 
   return stream.toUIMessageStreamResponse({
-    onError: (error) => {
-      captureException(error, { extra: { chat } });
-      return "Error in agent stream";
-    },
-    onFinish: async ({ messages }) => {
-      await prisma.messages.createMany({
-        data: messages.map((message) => ({
-          chatId: chat.id,
-          content: message.parts as InputJsonValue,
-          id: ulid(),
-          role: message.role as "assistant" | "user",
-          type: "text",
-        })),
-      });
-      await prisma.chat.update({
-        where: { id: chat.id },
-        data: { activeStreamId: ulid() },
-      });
+    headers,
 
-      // Update user profile based on conversation
-      console.log("Updating user profile based on conversation");
-      await updateUserProfile({ lastMessage, user });
-      console.log("User profile updated");
-    },
     consumeSseStream: async ({ stream }) => {
       const streamId = ulid();
 
@@ -134,6 +125,35 @@ export async function action({ params, request }: Route.ActionArgs) {
         data: { activeStreamId: streamId },
       });
     },
-    headers,
+
+    onError: (error) => {
+      captureException(error, { extra: { chat } });
+      return "Error in agent stream";
+    },
+
+    onFinish: async ({ messages }) => {
+      await prisma.chat.update({
+        where: { id: chat.id },
+        data: {
+          activeStreamId: ulid(),
+          messages: {
+            create: messages.map((message) => ({
+              content: message.parts as InputJsonValue,
+              id: ulid(),
+              role: message.role as "assistant" | "user",
+              type: "text",
+            })),
+          },
+          user: {
+            update: {
+              workingMemory: await updateUserProfile({
+                messages,
+                workingMemory: user.workingMemory,
+              }),
+            },
+          },
+        },
+      });
+    },
   });
 }
