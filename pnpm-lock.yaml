@@ -32,16 +32,16 @@ importers:
         version: 0.5.6
       '@mastra/ai-sdk':
         specifier: ^0.2.5
-        version: 0.2.5(@mastra/core@0.23.2(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12))(zod@4.1.12)
+        version: 0.2.5(@mastra/core@0.23.3(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12))(zod@4.1.12)
       '@mastra/core':
-        specifier: ^0.23.2
-        version: 0.23.2(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12)
+        specifier: ^0.23.3
+        version: 0.23.3(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12)
       '@mastra/memory':
         specifier: ^0.15.10
-        version: 0.15.10(@mastra/core@0.23.2(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12))(react@19.2.0)(zod@4.1.12)
+        version: 0.15.10(@mastra/core@0.23.3(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12))(react@19.2.0)(zod@4.1.12)
       '@mastra/pg':
         specifier: ^0.17.7
-        version: 0.17.7(@mastra/core@0.23.2(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12))(pg-query-stream@4.10.3(pg@8.16.3))
+        version: 0.17.7(@mastra/core@0.23.3(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12))(pg-query-stream@4.10.3(pg@8.16.3))
       '@prisma/adapter-pg':
         specifier: ^6.18.0
         version: 6.18.0
@@ -950,8 +950,8 @@ packages:
       '@mastra/core': '>=0.21.0-0 <0.24.0-0'
       zod: ^3.25.0 || ^4.0.0
 
-  '@mastra/core@0.23.2':
-    resolution: {integrity: sha512-7Qw9vZKMkFyBAtohYJCA/ddsVCkX0hMgiXJ6SFVzxke66y0f5YlHaL3rQxIGaWkpwLFRjY0SE3tJdPSchiLKMA==}
+  '@mastra/core@0.23.3':
+    resolution: {integrity: sha512-5AqzE19M03T7If9ea0xjj3wr/i9MGeazdK7wbFrrJz44GnYGoSy179KYsyciXzpgXCxuWFi0ytg1jFSry/UCIQ==}
     engines: {node: '>=20'}
     peerDependencies:
       zod: ^3.25.0 || ^4.0.0
@@ -7554,13 +7554,13 @@ snapshots:
 
   '@logtail/types@0.5.6': {}
 
-  '@mastra/ai-sdk@0.2.5(@mastra/core@0.23.2(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12))(zod@4.1.12)':
+  '@mastra/ai-sdk@0.2.5(@mastra/core@0.23.3(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12))(zod@4.1.12)':
     dependencies:
-      '@mastra/core': 0.23.2(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12)
+      '@mastra/core': 0.23.3(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12)
       ai: 5.0.82(zod@4.1.12)
       zod: 4.1.12
 
-  '@mastra/core@0.23.2(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12)':
+  '@mastra/core@0.23.3(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12)':
     dependencies:
       '@a2a-js/sdk': 0.2.5
       '@ai-sdk/anthropic-v5': '@ai-sdk/anthropic@2.0.33(zod@4.1.12)'
@@ -7625,9 +7625,9 @@ snapshots:
       - valibot
       - zod-openapi
 
-  '@mastra/memory@0.15.10(@mastra/core@0.23.2(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12))(react@19.2.0)(zod@4.1.12)':
+  '@mastra/memory@0.15.10(@mastra/core@0.23.3(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12))(react@19.2.0)(zod@4.1.12)':
     dependencies:
-      '@mastra/core': 0.23.2(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12)
+      '@mastra/core': 0.23.3(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12)
       '@mastra/schema-compat': 0.11.6(ai@4.3.19(react@19.2.0)(zod@4.1.12))(zod@4.1.12)
       '@upstash/redis': 1.35.6
       ai: 4.3.19(react@19.2.0)(zod@4.1.12)
@@ -7646,9 +7646,9 @@ snapshots:
       - pg-native
       - react
 
-  '@mastra/pg@0.17.7(@mastra/core@0.23.2(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12))(pg-query-stream@4.10.3(pg@8.16.3))':
+  '@mastra/pg@0.17.7(@mastra/core@0.23.3(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12))(pg-query-stream@4.10.3(pg@8.16.3))':
     dependencies:
-      '@mastra/core': 0.23.2(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12)
+      '@mastra/core': 0.23.3(effect@3.18.4)(openapi-types@12.1.3)(react@19.2.0)(valibot@1.1.0(typescript@5.9.3))(zod@4.1.12)
       async-mutex: 0.5.0
       pg: 8.16.3
       pg-promise: 11.15.0(pg-query-stream@4.10.3(pg@8.16.3))

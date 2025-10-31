@@ -45,20 +45,20 @@ describe("Chat page", () => {
       await expect(page).toMatchScreenshot();
     });
 
-    it("shoudl have at 3 messages in chat", async () => {
-      const chatCount = await page.locator(".chat").count();
+    it("should have at 3 messages in chat", async () => {
+      const chatCount = await page.locator(".chat-bubble").count();
       expect(chatCount).toEqual(3); // welcome + user + response
     });
 
     it("should show user message in chat", async () => {
       await expect(
-        page.locator(".chat-bubble-accent", { hasText: testMessage }),
+        page.locator(".chat-bubble-user", { hasText: testMessage }),
       ).toBeVisible();
     });
 
     it("should show assistant message in chat", async () => {
       await expect(
-        page.locator(".chat-bubble", { hasText: testResponse }),
+        page.locator(".chat-bubble-response", { hasText: testResponse }),
       ).toBeVisible();
     });
 

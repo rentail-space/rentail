@@ -78,7 +78,7 @@ function UserMessage({ message }: { message: UIMessage }) {
   // NOTE: always render as plain text to avoid HTML injection
   return (
     <div className="chat chat-end">
-      <div className="chat-bubble chat-bubble-accent prose prose-base">
+      <div className="chat-bubble chat-bubble-accent chat-bubble-user prose prose-base">
         {message.parts
           .filter((part) => part.type === "text")
           .map((part, index) => (
@@ -99,7 +99,6 @@ function AbortedMessage() {
 
 function AssistantMessage({
   askQuestion,
-  isLast,
   message,
   scrollToBottom,
 }: {
@@ -130,7 +129,7 @@ function AssistantMessage({
 
   return message.parts.map((part, index, parts) => {
     switch (part.type) {
-      case "text":
+      case "text": {
         return (
           <ResponseMessage
             askQuestion={askQuestion}
@@ -138,22 +137,6 @@ function AssistantMessage({
             key={index.toString()}
             text={part.text}
           />
-        );
-      case "reasoning": {
-        const text = (
-          part as unknown as { details?: { type: string; text: string }[] }
-        ).details
-          ?.filter((part) => part.type === "text")
-          .map((part) => part.text)
-          .join("\n");
-        return (
-          text && (
-            <ReasoningMessage
-              isLast={isLast && index === parts.length - 1}
-              key={index.toString()}
-              text={text}
-            />
-          )
         );
       }
       default: {
