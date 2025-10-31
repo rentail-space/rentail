@@ -7,7 +7,7 @@ import { goto } from "./helpers/launchBrowser";
 describe("Bot detection", () => {
   describe("default browser", () => {
     beforeEach(async () => {
-      await visit({
+      await visitAs({
         "user-agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
       });
@@ -22,7 +22,7 @@ describe("Bot detection", () => {
 
   describe("browser with bot User-Agent", () => {
     beforeEach(async () => {
-      await visit({ "user-agent": "vercel-screenshot/1.0" });
+      await visitAs({ "user-agent": "vercel-screenshot/1.0" });
     });
 
     it("should be considered a bot", async () => {
@@ -34,7 +34,7 @@ describe("Bot detection", () => {
 
   describe("browser with bot IP", () => {
     beforeEach(async () => {
-      await visit({ "x-forwarded-for": "66.249.65.224" });
+      await visitAs({ "x-forwarded-for": "66.249.65.224" });
     });
 
     it("should be considered a bot", async () => {
@@ -45,7 +45,7 @@ describe("Bot detection", () => {
   });
 });
 
-async function visit(headers?: HeadersInit) {
+async function visitAs(headers?: HeadersInit) {
   await prisma.user.deleteMany();
   const page = await goto("/chat", headers);
   await converse(page, "Hello, how are you?");

@@ -164,17 +164,17 @@ async function copyAnonToNewUser(
   // Copy the anonymous user's saved data to the new user.
   // NOTE: anonUser doesn't have the workingMemory field, so we need to get it
   // from the database directly.
-  const loaded = await prisma.user.findUniqueOrThrow({
+  const fromAnon = await prisma.user.findUniqueOrThrow({
     where: { id: anonUser.id },
   });
   await prisma.user.update({
     data: {
-      cityStateCountry: loaded.cityStateCountry,
-      geocode: loaded.geocode ?? {},
-      ip: loaded.ip,
-      metadata: loaded.metadata ?? {},
-      referrer: loaded.referrer,
-      workingMemory: loaded.workingMemory,
+      cityStateCountry: fromAnon.cityStateCountry,
+      geocode: fromAnon.geocode ?? {},
+      ip: fromAnon.ip,
+      metadata: fromAnon.metadata ?? {},
+      referrer: fromAnon.referrer,
+      workingMemory: fromAnon.workingMemory,
     },
     where: { id: newUser.id },
   });

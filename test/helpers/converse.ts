@@ -17,7 +17,7 @@ export default async function converse(
   message: string,
 ): Promise<string> {
   expect(page.url()).toContain("/chat");
-  const initialCount = await prisma.chat.count();
+  const initialCount = await prisma.messages.count();
 
   await page.getByRole("textbox").fill(message);
   await page.getByRole("button", { name: "Send" }).click();
@@ -26,11 +26,11 @@ export default async function converse(
   // Wait for server to update the database with the new messages
   await withTimeout(async () => {
     while (true) {
-      const finalCount = await prisma.chat.count();
+      const finalCount = await prisma.messages.count();
       if (finalCount >= initialCount + 2) break;
       await page.waitForTimeout(100);
     }
-  }, 2_000);
+  }, 1_000);
 
   // Wait for the assistant response bubble to appear in the UI
   const lastResponseBubble = page.locator(".chat-bubble-response").last();

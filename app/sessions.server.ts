@@ -9,7 +9,6 @@ import { ulid } from "ulid";
 import zod from "zod";
 import authServer from "~/lib/auth.server";
 import prisma from "~/lib/prisma";
-import { cleanParse } from "~/lib/userProfile";
 import welcome from "~/prompts/welcome.md?raw";
 
 // List of user agents that are considered bots
@@ -97,7 +96,9 @@ export async function findOrCreateUser({
   messages: UIMessage[];
   user: User;
 }> {
+  console.log("***** Looking for ", chatId);
   const found = await findUserAndChat(headers);
+  console.log("***** Found", found);
   if ("chat" in found && "user" in found) {
     invariant(found.chat?.id === chatId, "Chat ID mismatch");
     invariant(found.user, "User is required");
@@ -110,45 +111,42 @@ export async function findOrCreateUser({
   }
 
   // We're gong to sign in the anonymous user so we can get the HTTP headers
-  const anonymousUser = await authServer.api.signInAnonymous({
-    returnHeaders: true,
-  });
-  invariant(anonymousUser.response?.user.id, "Anonymous user ID is required");
+  const { response, headers: signInHeaders } =
+    await authServer.api.signInAnonymous({
+      returnHeaders: true,
+    });
+  const anonUser = response?.user;
+  invariant(anonUser, "Anonymous user ID is required");
 
   // Update the anonymous user with the initial fields (IP, geocode, user agent,
-  // referrer, etc.)
+  // referrer, etc.). Make sure it has initial chat with the welcome message.
   const user = await prisma.user.update({
-    data: await getInitialFields(headers),
-    where: { id: anonymousUser.response.user.id },
-  });
-  const chat = await prisma.chat.create({
     data: {
-      id: chatId,
-      metadata: {},
-      messages: {
-        create: [
-          {
-            content: [{ type: "text", text: welcome }],
-            id: ulid(),
-            role: "assistant",
-            type: "text",
+      ...(await getInitialFields(headers)),
+      chats: {
+        create: {
+          id: chatId,
+          metadata: {},
+          messages: {
+            create: [
+              {
+                content: [{ type: "text", text: welcome }],
+                id: ulid(),
+                role: "assistant",
+                type: "text",
+              },
+            ],
           },
-        ],
+        },
       },
-      user: { connect: { id: user.id } },
     },
-    include: { user: true },
-  });
-  const data = cleanParse(user.workingMemory);
-  await prisma.user.update({
-    data: {
-      workingMemory: JSON.stringify({ location: user.geocode, ...data }),
-    },
-    where: { id: user.id },
+    include: { chats: { include: { messages: true } } },
+    where: { id: anonUser.id },
   });
 
+  const chat = user.chats[0];
   const messages = await recentMessages(chat.id);
-  return { chat, headers: anonymousUser.headers, messages, user };
+  return { chat, headers: signInHeaders, messages, user };
 }
 
 /**
@@ -184,6 +182,7 @@ async function getInitialFields(headers: Headers): Promise<{
   isBot: boolean;
   referrer: string;
   userAgent: string;
+  workingMemory: string;
 }> {
   const geocode = await geocodeFromHeaders(headers);
   const ip = headers.get("x-forwarded-for") ?? "";
@@ -193,7 +192,15 @@ async function getInitialFields(headers: Headers): Promise<{
     .filter(Boolean)
     .join(", ");
   const referrer = headers.get("referer") ?? "";
-  return { cityStateCountry, geocode, isBot, referrer, userAgent };
+  const workingMemory = JSON.stringify({ location: geocode });
+  return {
+    cityStateCountry,
+    geocode,
+    isBot,
+    referrer,
+    userAgent,
+    workingMemory,
+  };
 }
 
 /**
