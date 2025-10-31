@@ -20,27 +20,20 @@ export default async function converse(
   await page.getByRole("button", { name: "Send" }).click();
   await page.waitForLoadState("networkidle");
 
+  // Wait for the stream to complete by polling activeStreamId
   expect(await prisma.chat.count()).toEqual(1);
-  await page.waitForTimeout(2000);
-  console.log("****** Messages: ", await prisma.messages.count());
   while (true) {
-    const chat = await prisma.chat.findFirstOrThrow();
-    if (chat.activeStreamId === null) break;
-    console.log("****** Messages: ", await prisma.messages.count());
+    const chat = await prisma.chat.findFirstOrThrow({
+      select: { activeStreamId: true },
+    });
+    if (!chat.activeStreamId) break;
     await page.waitForTimeout(100);
   }
 
-  const lastResponseBubble = page.locator(".chat-bubble").last();
-  console.log(
-    "****** Last response bubble: ",
-    await lastResponseBubble.innerHTML(),
-  );
+  // Wait for the assistant response bubble to appear in the UI
+  const lastResponseBubble = page.locator(".chat-bubble-response").last();
   await lastResponseBubble.waitFor({ state: "visible" });
 
-  const className = await lastResponseBubble.getAttribute("class");
-  expect(className).toContain("chat-bubble-response");
-
   const lastResponseText = await lastResponseBubble.innerText();
-  console.log("**********", lastResponseText);
   return lastResponseText;
 }

@@ -5,7 +5,7 @@ import converse from "./helpers/converse";
 
 const testMessage =
   "looking for a pop-up retail space for my clothing boutique";
-const testResponse = /I found some great locations/i;
+const testResponse = "I found some great locations";
 
 describe("Chat page", () => {
   it("renders chat interface with welcome message", async () => {
@@ -52,13 +52,13 @@ describe("Chat page", () => {
 
     it("should show user message in chat", async () => {
       await expect(
-        page.locator(".chat-bubble-accent").filter({ hasText: testMessage }),
+        page.locator(".chat-bubble-accent", { hasText: testMessage }),
       ).toBeVisible();
     });
 
     it("should show assistant message in chat", async () => {
       await expect(
-        page.locator(".chat-bubble").filter({ hasText: testResponse }),
+        page.locator(".chat-bubble", { hasText: testResponse }),
       ).toBeVisible();
     });
 

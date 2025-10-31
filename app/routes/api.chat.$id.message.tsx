@@ -1,6 +1,6 @@
 import { toAISdkFormat } from "@mastra/ai-sdk";
 import { captureException } from "@sentry/react-router";
-import { createUIMessageStreamResponse, stepCountIs } from "ai";
+import { createUIMessageStreamResponse } from "ai";
 import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import humanFormat from "human-format";
@@ -74,11 +74,19 @@ export async function action({ params, request }: Route.ActionArgs) {
 
   const stream = await agent.stream(allMessages, {
     abortSignal,
-    memory: { resource: user.id, thread: chat.id },
-    savePerStep: true,
-    maxSteps: 3,
-    stopWhen: stepCountIs(3),
+    maxSteps: 1,
+    memory: {
+      resource: user.id,
+      thread: chat.id,
+      options: {
+        lastMessages: 10,
+        threads: {
+          generateTitle: true,
+        },
+      },
+    },
     requireToolApproval: false,
+    savePerStep: true,
     system: `${general}\n\n=====\n\n${markdown}`,
 
     onAbort: async () => {

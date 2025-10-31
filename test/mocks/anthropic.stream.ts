@@ -40,14 +40,8 @@ export function findMockResponse(body: object): ReadableStream<Uint8Array> {
   invariant(lastMessage, "Last message is required");
 
   // Get the text content from the message
-  const messageText = lastMessage.content
-    .filter((part) => part.type === "text")
-    .map((part) => part.text)
-    .join(" ");
+  const messageText = lastMessage.content.map((part) => part.text).join(" ");
 
-  debug("msw")(
-    `Anthropic API mock - processing message: "${messageText.slice(0, 100)}..."`,
-  );
   debug("msw")(
     "Anthropic API mock - processing message: %s... ",
     messageText.slice(0, 100),

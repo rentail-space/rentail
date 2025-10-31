@@ -56,17 +56,26 @@ describe("Anonymous visits chat page", () => {
     beforeAll(async () => {
       await converse(page, "Actually I'm in Boston");
 
+      const chat = await prisma.chat.findFirstOrThrow({
+        include: { user: true },
+      });
+      workingMemory = await getWorkingMemory({ chat, user: chat.user });
+    });
+
+    it("should show user message in chat", async () => {
+      await expect(
+        page.locator(".chat-bubble-accent", {
+          hasText: "Actually I'm in Boston",
+        }),
+      ).toBeVisible();
+    });
+
+    it("should show assistant message in chat", async () => {
       await expect(
         page.locator(".chat-bubble", {
           hasText: /Thanks for letting me know/i,
         }),
       ).toBeVisible();
-
-      const chat = await prisma.chat.findFirstOrThrow({
-        include: { messages: true, user: true },
-        where: { user: { isAnonymous: true } },
-      });
-      workingMemory = await getWorkingMemory({ chat, user: chat.user });
     });
 
     it("should have user's new city", async () => {
