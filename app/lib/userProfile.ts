@@ -2,7 +2,7 @@ import { captureException } from "@sentry/react-router";
 import type { UIMessage } from "ai";
 import debug from "debug";
 import { invariant } from "es-toolkit";
-import zod from "zod";
+import zod, { type ZodType } from "zod";
 
 const logger = debug("profile");
 
@@ -16,24 +16,24 @@ export const userProfile = zod
       .string()
       .optional()
       .default("Unknown")
-      .describe("The user's name"),
+      .describe("The merchant's name"),
 
     location: zod
       .object({
-        latitude: zod.number().describe("The user's latitude"),
-        longitude: zod.number().describe("The user's longitude"),
-        city: zod.string().describe("The user's city"),
-        state: zod.string().describe("The user's state"),
-        country: zod.string().describe("The user's country"),
-        timeZone: zod.string().describe("The user's timezone"),
+        latitude: zod.number().describe("The merchant's latitude"),
+        longitude: zod.number().describe("The merchant's longitude"),
+        city: zod.string().describe("The merchant's city"),
+        state: zod.string().describe("The merchant's state"),
+        country: zod.string().describe("The merchant's country"),
+        timeZone: zod.string().describe("The merchant's timezone"),
       })
       .partial(),
 
     selling: zod
       .object({
-        productType: zod.string().describe("The user's product type"),
-        pricePoint: zod.string().describe("The user's price point"),
-        targetAudience: zod.string().describe("The user's target audience"),
+        productType: zod.string().describe("The merchant's product type"),
+        pricePoint: zod.string().describe("The merchant's price point"),
+        targetAudience: zod.string().describe("The merchant's target audience"),
       })
       .partial(),
 
@@ -42,10 +42,10 @@ export const userProfile = zod
         communicationStyle: zod
           .string()
           .default("Casual")
-          .describe("The user's communication style e.g. Formal, Casual"),
+          .describe("The merchant's communication style e.g. Formal, Casual"),
         keyDeadlines: zod
           .array(zod.string())
-          .describe("The user's key deadlines"),
+          .describe("The merchant's key deadlines"),
       })
       .partial(),
 
@@ -54,10 +54,10 @@ export const userProfile = zod
         lastTaskDiscussed: zod
           .string()
           .default("")
-          .describe("The user's last task discussed"),
+          .describe("The merchant's last task discussed"),
         openQuestions: zod
           .array(zod.string())
-          .describe("The user's open questions"),
+          .describe("The merchant's open questions"),
       })
       .partial(),
   })
@@ -168,4 +168,38 @@ export default async function updateUserProfile({
     captureException(error, { extra: { workingMemory, relevant } });
     return workingMemory;
   }
+}
+
+/**
+ * Convert a Zod schema to a human-readable example object showing the structure
+ * and descriptions from the schema.
+ *
+ * @param schema - The Zod schema to convert
+ * @returns A JSON-serializable example object
+ */
+export function zodToExample(schema: ZodType): unknown {
+  // Use the public API to get the description
+  const description = schema.description;
+
+  if (schema instanceof zod.ZodObject) {
+    const shape = schema.shape;
+    const result: Record<string, unknown> = {};
+    for (const [key, value] of Object.entries(shape))
+      result[key] = zodToExample(value as ZodType);
+    return result;
+  } else if (schema instanceof zod.ZodArray) return schema.description;
+  else if (schema instanceof zod.ZodString) return description || "string";
+  else if (schema instanceof zod.ZodNumber) return description || 0.0;
+  else if (schema instanceof zod.ZodBoolean) return description || true;
+  else if (
+    schema instanceof zod.ZodOptional ||
+    schema instanceof zod.ZodNullable
+  )
+    return zodToExample(schema.unwrap() as ZodType);
+  else if (schema instanceof zod.ZodEnum) {
+    const values = schema.options;
+    return values[0] || "enum";
+  } else if (schema instanceof zod.ZodLiteral) return schema.value;
+  else if (schema instanceof zod.ZodDate) return description || "2024-01-01";
+  return description || "any";
 }

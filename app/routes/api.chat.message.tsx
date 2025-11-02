@@ -11,9 +11,12 @@ import { ulid } from "ulid";
 import env from "~/lib/env";
 import findNearbyProperties from "~/lib/findNearbyProperties";
 import prisma from "~/lib/prisma";
+import prompt from "~/lib/prompt";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
-import updateUserProfile, { maskWorkingMemoryTags } from "~/lib/userProfile";
-import general from "~/prompts/general.md?raw";
+import updateUserProfile, {
+  maskWorkingMemoryTags,
+  userProfile,
+} from "~/lib/userProfile";
 import { findOrCreateUser, recentMessages } from "~/sessions.server";
 import type { Route } from "./+types/api.chat.message";
 
@@ -48,7 +51,7 @@ export async function action({ request }: Route.ActionArgs) {
 
   // Set up Redis stop monitoring
   const { abortSignal } = await monitorStopSignal(chat.id);
-  const { properties, markdown } = await findNearbyProperties({
+  const properties = await findNearbyProperties({
     maxDistance: 20,
     user,
   });
@@ -60,7 +63,7 @@ export async function action({ request }: Route.ActionArgs) {
       "claude-haiku-4-5",
     ),
     messages: convertToModelMessages(messages),
-    system: `${general}\n\n=====\n\n${markdown}`,
+    system: prompt({ userProfile, properties }),
 
     onAbort: async () => {
       logger("Aborted by user");
