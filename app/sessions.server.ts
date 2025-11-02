@@ -93,6 +93,22 @@ export async function findOrCreateUser({
 
   // Update the anonymous user with the initial fields (IP, geocode, user agent,
   // referrer, etc.). Make sure it has initial chat with the welcome message.
+  const { chat, messages, user } = await updateNewUser(anonUser.id, headers);
+  return { chat, headers: signInHeaders, messages, user };
+}
+
+/**
+ * Update the new user with the initial fields (IP, geocode, user agent,
+ * referrer, etc.). Make sure it has initial chat with the welcome message.
+ *
+ * @param userId - The user ID to update
+ * @param headers - The headers object
+ * @returns The updated user, chat, and messages
+ */
+export async function updateNewUser(
+  userId: string,
+  headers: Headers,
+): Promise<{ chat: Chat; messages: UIMessage[]; user: User }> {
   const user = await prisma.user.update({
     data: {
       ...(await getInitialFields(headers)),
@@ -114,12 +130,12 @@ export async function findOrCreateUser({
       },
     },
     include: { chats: { include: { messages: true } } },
-    where: { id: anonUser.id },
+    where: { id: userId },
   });
 
   const chat = user.chats[0];
   const messages = await recentMessages(chat.id);
-  return { chat, headers: signInHeaders, messages, user };
+  return { chat, messages, user };
 }
 
 /**

@@ -1,4 +1,3 @@
-import { delay } from "es-toolkit";
 import { expect, type Page } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
 import type zod from "zod";
@@ -23,9 +22,7 @@ describe("Anonymous visits chat page", () => {
       "x-vercel-ip-longitude": "-122.08421",
     });
 
-    await page.getByRole("textbox").fill("Hello, how are you?");
-    await page.getByRole("button", { name: "Send" }).click();
-    await page.waitForLoadState("networkidle");
+    await converse(page, "Hello, how are you?");
   });
 
   it("loads chat page and shows sign-in button", async () => {
@@ -39,7 +36,7 @@ describe("Anonymous visits chat page", () => {
   });
 
   it("sets initial working memory with default location", async () => {
-    const user = await prisma.user.findFirstOrThrow({});
+    const user = await prisma.user.findFirstOrThrow();
     const workingMemory = cleanParse(user.workingMemory);
     expect(workingMemory.location?.city).toEqual("Los Angeles");
     expect(workingMemory.location?.state).toEqual("California");
@@ -54,8 +51,6 @@ describe("Anonymous visits chat page", () => {
 
     beforeAll(async () => {
       await converse(page, "Actually I'm in Boston");
-      await delay(2000);
-      console.log(await prisma.user.findMany());
 
       const user = await prisma.user.findFirstOrThrow();
       workingMemory = cleanParse(user.workingMemory);
@@ -194,8 +189,10 @@ describe("Anonymous visits chat page", () => {
 
           it("shows user dropdown after successful sign-up", async () => {
             await expect(
-              page.getByRole("button", { name: "Working Memory User" }),
-            ).toBeVisible();
+              page.locator("button[aria-label='User menu']", {
+                hasText: "Working Memory User",
+              }),
+            ).toBeVisible({ timeout: 5000 });
           });
 
           it("should convert anonymous user to authenticated user", async () => {

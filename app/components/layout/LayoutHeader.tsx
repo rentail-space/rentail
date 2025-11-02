@@ -1,5 +1,5 @@
-import { Download, User } from "lucide-react";
-import type { ChatGetPayload } from "prisma/generated/models";
+import { User as UserIcon } from "lucide-react";
+import type { User } from "prisma/generated/client";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouteLoaderData } from "react-router";
 import authClient from "~/lib/auth.client";
@@ -16,12 +16,11 @@ export default function LayoutHeader() {
   );
 }
 
+import type { loader as rootLoader } from "~/root";
+
 function UserMenu() {
-  const data = useRouteLoaderData<{
-    chat: ChatGetPayload<{ include: { user: true } }>;
-  }>("root");
-  const chat = data?.chat;
-  const user = chat?.user;
+  const data = useRouteLoaderData<typeof rootLoader>("root");
+  const user = data?.user;
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -44,7 +43,7 @@ function UserMenu() {
 
   // Show sign-in link for non-authenticated users
   return user && !user.isAnonymous ? (
-    <DropdownMenu chat={chat} />
+    <DropdownMenu user={user} />
   ) : (
     <SignInButton />
   );
@@ -65,11 +64,7 @@ function SignInButton() {
   );
 }
 
-function DropdownMenu({
-  chat,
-}: {
-  chat: ChatGetPayload<{ include: { user: true } }>;
-}) {
+function DropdownMenu({ user }: { user: User }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -97,36 +92,28 @@ function DropdownMenu({
         className="flex items-center gap-2 rounded-md px-3 py-1.5 font-medium text-gray-700 text-sm transition-colors hover:bg-blue-50 hover:text-blue-600"
         onClick={() => setIsOpen(!isOpen)}
         type="button"
+        aria-label="User menu"
       >
-        <User className="h-4 w-4" />
-        <span>{chat.user.name || chat.user.email}</span>
+        <UserIcon className="h-4 w-4" />
+        <span className="max-w-[200px] truncate">
+          {user.name || user.email}
+        </span>
       </button>
 
       {isOpen && (
         <div className="absolute right-0 z-50 mt-2 w-48 rounded-md border border-gray-200 bg-white py-1 shadow-lg">
           <div className="border-gray-200 border-b px-4 py-2">
-            <p className="font-medium text-gray-900 text-sm">
-              {chat.user.name}
-            </p>
-            <p className="truncate text-gray-500 text-xs">{chat.user.email}</p>
+            <p className="font-medium text-gray-900 text-sm">{user.name}</p>
+            <p className="truncate text-gray-500 text-xs">{user.email}</p>
           </div>
 
           <Link
             to="/profile"
             className="block w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
           >
-            <User className="mr-2 inline-block h-4 w-4" />
+            <UserIcon className="mr-2 inline-block h-4 w-4" />
             Profile Settings
           </Link>
-
-          <a
-            className="block w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
-            download
-            href={`/api/chat/${chat.id}/export/csv`}
-          >
-            <Download className="mr-2 inline-block h-4 w-4" />
-            CSV Export
-          </a>
 
           <button
             type="button"

@@ -26,7 +26,7 @@ const fallbackResponse: string = "Fallback response!";
  * Find a matching response for the given message
  */
 export function findMockResponse(body: object): ReadableStream<Uint8Array> {
-  const { messages, tools, tool_choice } = body as {
+  const { messages } = body as {
     messages: Array<{
       role: string;
       content: Array<{ type: string; text: string }>;
@@ -53,38 +53,7 @@ export function findMockResponse(body: object): ReadableStream<Uint8Array> {
       messageText.toLowerCase().includes(pattern.toLowerCase()),
     )?.[1] ?? fallbackResponse;
 
-  const toolCalls: ToolCall[] = [];
-
-  if (
-    tool_choice?.type === "auto" &&
-    tools.find((tool) => tool.name === "updateWorkingMemory") &&
-    lastMessage.content.some(
-      (content) =>
-        content.type === "text" && content.text.includes("I'm in Boston"),
-    )
-  ) {
-    // Create a tool call for updating working memory with the exact format Mastra expects
-    const updateWorkingMemoryTool = {
-      id: `toolu_${Date.now()}`,
-      name: "updateWorkingMemory", // This is the exact name Mastra's ToolCallFilter looks for
-      input: {
-        memory: {
-          // Mastra expects the data under 'memory' key
-          location: {
-            city: "Boston",
-            state: "Massachusetts",
-            country: "United States",
-            latitude: 42.3601,
-            longitude: -71.0589,
-            timeZone: "America/New_York",
-          },
-        },
-      },
-    };
-    toolCalls.push(updateWorkingMemoryTool);
-  }
-
-  return createStreamingResponse(mockResponse, toolCalls);
+  return createStreamingResponse(mockResponse, []);
 }
 
 /**

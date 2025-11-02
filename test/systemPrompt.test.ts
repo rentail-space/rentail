@@ -64,8 +64,8 @@ describe("prompt()", () => {
 
   it("includes shopping centers", () => {
     const shoppingCenter = prompt
-      .match(/<shopping-center>(.*?)<\/shopping-center>/ms)?.[1]
-      .replace(/<space>(.*?)<\/space>/gms, "");
+      .match(/<shopping-center>(.*?)<\/shopping-center>/ims)?.[1]
+      .replace(/<space>(.*?)<\/space>/gims, "");
     invariant(shoppingCenter, "Shopping center not found");
     const props = Object.fromEntries(
       shoppingCenter
@@ -82,8 +82,8 @@ describe("prompt()", () => {
 
   it("includes spaces in shopping centers", () => {
     const space = prompt
-      .match(/<shopping-center>(.*?)<\/shopping-center>/ms)?.[1]
-      .match(/<space>(.*?)<\/space>/ms)?.[1];
+      .match(/<shopping-center>(.*?)<\/shopping-center>/ims)?.[1]
+      .match(/<space>(.*?)<\/space>/gims)?.[1];
     invariant(space, "Space not found");
     const props = Object.fromEntries(
       space

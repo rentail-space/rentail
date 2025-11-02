@@ -1,7 +1,7 @@
 import { captureException } from "@sentry/react-router";
 import type { UIMessage } from "ai";
 import debug from "debug";
-import { invariant } from "es-toolkit";
+import { invariant, last } from "es-toolkit";
 import zod, { type ZodType } from "zod";
 
 const logger = debug("profile");
@@ -63,7 +63,7 @@ export const userProfile = zod
   })
   .partial();
 
-const matchWorkingMemoryTags = /<working_memory>([\s\S]*?)<\/working_memory>/im;
+const matchWorkingMemoryTags = /<working_memory>(.*?)<\/working_memory>/ims;
 
 /**
  * Parse and extract working memory updates from assistant's response.
@@ -75,15 +75,50 @@ const matchWorkingMemoryTags = /<working_memory>([\s\S]*?)<\/working_memory>/im;
 function extractWorkingMemory(
   responseText: string,
 ): Record<string, unknown> | null {
-  const match = matchWorkingMemoryTags.exec(responseText)?.[1].trim();
-  console.log("Match: %o", match);
   try {
+    const match = responseText.match(matchWorkingMemoryTags)?.[1].trim();
     invariant(match, "No working memory found in response");
-    console.log("Parsed: %o", JSON.parse(match));
-    return JSON.parse(match);
-  } catch (error) {
-    captureException(error, { extra: { responseText } });
+    const { data, error } = userProfile.safeParse(safeParseJSON(match));
+    if (error) throw new Error(error.message);
+    return data;
+  } catch {
     return null;
+  }
+}
+
+/**
+ * Parse a JSON string safely. This is a workaround to handle improperly
+ * formatted JSON strings, for example, strings like `{location: {city:
+ * "Boston"}}` (missing quotes around property names).
+ *
+ * @param str - The JSON string to parse
+ * @returns The parsed JSON object or null if the string is invalid
+ */
+function safeParseJSON(str: string): Record<string, unknown> | null {
+  try {
+    return JSON.parse(str);
+  } catch {
+    try {
+      // Use JSON5 or a more sophisticated parser
+      const fixed = str
+        // Add quotes around unquoted property names
+        .replace(/([{,]\s*)([a-zA-Z_$][a-zA-Z0-9_$]*)\s*:/g, '$1"$2":')
+        // Fix unquoted string values (preserve numbers, booleans, null)
+        .replace(
+          /:\s*([a-zA-Z_/][a-zA-Z0-9_/\s]*?)(\s*[,}\n])/g,
+          (_, value, after) => {
+            const trimmed = value.trim();
+            if (["true", "false", "null"].includes(trimmed))
+              return `: ${trimmed}${after}`;
+            if (/^-?\d+\.?\d*$/.test(trimmed)) return `: ${trimmed}${after}`;
+            return `: "${trimmed}"${after}`;
+          },
+        );
+
+      return JSON.parse(fixed);
+    } catch {
+      return null;
+    }
   }
 }
 
@@ -130,29 +165,26 @@ export default async function updateUserProfile({
   messages: UIMessage[];
   workingMemory: string;
 }): Promise<string> {
-  const relevant = messages
-    .slice(-5)
-    .flatMap((message) =>
-      message.parts
-        .filter((part) => part.type === "text")
-        .map((part) => part.text),
-    )
+  const lastResponse = last(
+    messages.filter((message) => message.role === "assistant"),
+  )
+    ?.parts.filter((part) => part.type === "text")
+    .map((part) => part.text)
     .join("\n");
-
-  console.log("Relevant: %s", relevant);
+  invariant(lastResponse, "No relevant messages found");
 
   try {
-    const updates = extractWorkingMemory(relevant);
+    const updates = extractWorkingMemory(lastResponse);
     if (!updates) return workingMemory;
-
-    logger("Working memory updates: %o", updates);
-    console.log("Working memory updates: %o", updates);
+    logger("Updating working memory: %o", updates);
 
     const current = cleanParse(workingMemory);
     // Validate the updates against our schema
     const { data: validated, error, success } = userProfile.safeParse(updates);
     if (!success) {
-      captureException(error, { extra: { workingMemory, relevant } });
+      captureException(error, {
+        extra: { workingMemory, relevant: lastResponse },
+      });
       return workingMemory;
     }
 
@@ -168,7 +200,9 @@ export default async function updateUserProfile({
 
     return JSON.stringify(merged);
   } catch (error) {
-    captureException(error, { extra: { workingMemory, relevant } });
+    captureException(error, {
+      extra: { workingMemory, relevant: lastResponse },
+    });
     return workingMemory;
   }
 }

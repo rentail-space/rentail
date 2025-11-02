@@ -3,6 +3,7 @@ import { invariant } from "es-toolkit";
 import { useEffect, useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
 import authServer from "~/lib/auth.server";
+import { updateNewUser } from "~/sessions.server";
 import type { Route } from "./+types/auth";
 
 export const handle = {
@@ -29,18 +30,20 @@ export async function action({
     if (isSignUp) {
       const response = await authServer.api.getSession({
         headers: request.headers,
+        returnHeaders: true,
       });
       invariant(response, "Session data is required");
       invariant(email, "Email is required");
       invariant(password, "Password is required");
       invariant(name, "Name is required");
       try {
-        const result = await authServer.api.signUpEmail({
+        const { response, headers } = await authServer.api.signUpEmail({
           body: { email, password, name },
           headers: request.headers,
           returnHeaders: true,
         });
-        return redirect("/chat", { headers: result.headers });
+        await updateNewUser(response.user.id, request.headers);
+        return redirect("/chat", { headers });
       } catch {
         const result = await authServer.api.signInEmail({
           body: { email, password },
