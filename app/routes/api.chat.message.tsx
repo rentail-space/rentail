@@ -15,7 +15,7 @@ import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import updateUserProfile, { maskWorkingMemoryTags } from "~/lib/userProfile";
 import general from "~/prompts/general.md?raw";
 import { findOrCreateUser, recentMessages } from "~/sessions.server";
-import type { Route } from "./+types/api.chat.$id.message";
+import type { Route } from "./+types/api.chat.message";
 
 const logger = debug("chat");
 
@@ -26,11 +26,8 @@ const logger = debug("chat");
  * @param request - The request object.
  * @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
  */
-export async function action({ params, request }: Route.ActionArgs) {
-  const { chat, headers, user } = await findOrCreateUser({
-    chatId: params.id,
-    headers: request.headers,
-  });
+export async function action({ request }: Route.ActionArgs) {
+  const { chat, headers, user } = await findOrCreateUser(request);
 
   const { messages: bodyMessages } = (await request.clone().json()) as {
     messages: UIMessage[];

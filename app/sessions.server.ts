@@ -1,7 +1,7 @@
 import { captureException } from "@sentry/react-router";
 import type { TextUIPart, UIMessage } from "ai";
 import debug from "debug";
-import { invariant } from "es-toolkit";
+import { invariant, last } from "es-toolkit";
 import { createIsbotFromList, list } from "isbot";
 import { reverse } from "node:dns/promises";
 import type { Chat, User } from "prisma/generated/client";
@@ -39,56 +39,40 @@ const cachedLocation = zod
 
 /**
  * Get the chat for the user from the session. The chat referenced the user.
- * Also returns the recent messages in the chat. If this is a new chat, returns
- * the initial welcome message.
+ * Also returns the recent messages in the chat.
  *
  * @param headers - The headers object
- * @returns The chat (optional) and recent messages
+ * @returns The chat, messages, and user if found
  */
 export async function findUserAndChat(
   headers: Headers,
-): Promise<{ chat?: Chat; messages: UIMessage[]; user?: User }> {
+): Promise<{ chat: Chat; messages: UIMessage[]; user: User } | undefined> {
   const session = await authServer.api.getSession({ headers });
   if (session?.user) {
     const user = await prisma.user.findUnique({
-      include: {
-        chats: { orderBy: { createdAt: "desc" }, take: 1 },
-      },
+      include: { chats: { orderBy: { createdAt: "desc" }, take: 1 } },
       where: { id: session.user.id },
     });
-    const chat = user?.chats[0];
-    if (chat) {
+    if (user && user?.chats.length > 0) {
+      const chat = last(user.chats);
+      invariant(chat, "Chat is required");
       const messages = await recentMessages(chat.id);
       return { chat, messages, user };
     }
   }
-
-  return {
-    // No user, no chat, only the initial welcome message
-    messages: [
-      {
-        role: "assistant",
-        parts: [{ text: welcome, type: "text" }],
-        id: ulid(),
-      },
-    ],
-  };
 }
 
 /**
  * Find or create a user and chat. Returns the chat, which references the user,
- * and the recent messages in the chat. Also returns the HTTP headers which have
- * the session cookie set.
+ * the recent messages in the chat, and the user. Also returns the HTTP headers
+ * which have the session cookie set, and the user agent.
  *
  * @param headers - The headers object
- * @param chatId - The chat ID to find or create
- * @returns The chat, recent messages, and HTTP headers
+ * @returns The chat, recent messages, user, and HTTP headers
  */
 export async function findOrCreateUser({
-  chatId,
   headers,
 }: {
-  chatId: string;
   headers: Headers;
 }): Promise<{
   chat: Chat;
@@ -96,19 +80,8 @@ export async function findOrCreateUser({
   messages: UIMessage[];
   user: User;
 }> {
-  console.log("***** Looking for ", chatId);
   const found = await findUserAndChat(headers);
-  console.log("***** Found", found);
-  if ("chat" in found && "user" in found) {
-    invariant(found.chat?.id === chatId, "Chat ID mismatch");
-    invariant(found.user, "User is required");
-    return {
-      chat: found.chat,
-      headers: new Headers(),
-      messages: found.messages,
-      user: found.user,
-    };
-  }
+  if (found) return { ...found, headers: new Headers() };
 
   // We're gong to sign in the anonymous user so we can get the HTTP headers
   const { response, headers: signInHeaders } =
@@ -125,7 +98,7 @@ export async function findOrCreateUser({
       ...(await getInitialFields(headers)),
       chats: {
         create: {
-          id: chatId,
+          id: ulid(),
           metadata: {},
           messages: {
             create: [
@@ -150,10 +123,10 @@ export async function findOrCreateUser({
 }
 
 /**
- * Get 50 most recent messages for a chat.
+ * Get the 50 most recent messages for a chat.
  *
- * @param chatId - The chat ID
- * @returns The 50 most recent messages
+ * @param chatId - The chat ID to get the messages for
+ * @returns The 50 most recent messages for the chat
  */
 export async function recentMessages(chatId: string): Promise<UIMessage[]> {
   const recent = await prisma.messages.findMany({
@@ -171,7 +144,7 @@ export async function recentMessages(chatId: string): Promise<UIMessage[]> {
 
 /**
  * Get the initial fields for the user. These record the user's IP
- * address, geocode, user agent, referrer, etc.
+ * address, geocode, user agent, referrer, and working memory.
  *
  * @param headers - The headers object
  * @returns The initial fields for the user
@@ -204,10 +177,12 @@ async function getInitialFields(headers: Headers): Promise<{
 }
 
 /**
- * Get the location information from the headers: IP, latitude, longitude, etc.
+ * Get the location information from the headers: IP, latitude, longitude, city,
+ * state, country, and time zone.  If the location information is not found,
+ * return a fallback location. The fallback location is Los Angeles, California.
  *
  * @param headers - The headers object
- * @returns The location
+ * @returns The location information from the headers or the fallback location
  */
 async function geocodeFromHeaders(
   headers: Headers,
@@ -245,9 +220,9 @@ async function geocodeFromHeaders(
 
 /**
  * Check if the user agent is a bot. In testing, we treat headless Chrome as a
- * real user.
+ * real user. The list of bots is defined in the botUserAgents array.
  *
- * @param userAgent - The user agent
+ * @param userAgent - The user agent to check
  * @returns True if the user agent is a bot, false otherwise
  */
 const isUABot: (userAgent: string) => boolean = createIsbotFromList(
@@ -258,10 +233,11 @@ const isUABot: (userAgent: string) => boolean = createIsbotFromList(
 
 /**
  * Check if an IP address is from Google's domains by performing reverse DNS lookup.
- * This helps verify if a request is actually from Google's crawlers.
+ * This helps verify if a request is actually from Google's crawlers. If the reverse
+ * DNS lookup fails, assume it's not a Google IP.
  *
  * @param ip - The IP address to check
- * @returns True if the IP resolves to a Google domain, false otherwise
+ * @returns True if the IP is from Google's domains, false otherwise
  */
 async function isBotByIP(ip: string): Promise<boolean> {
   try {

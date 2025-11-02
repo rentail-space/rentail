@@ -1,12 +1,12 @@
 import { expect } from "playwright/test";
-import { beforeEach, describe, it } from "vitest";
+import { beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
 import converse from "./helpers/converse";
 import { goto } from "./helpers/launchBrowser";
 
 describe("Bot detection", () => {
   describe("default browser", () => {
-    beforeEach(async () => {
+    beforeAll(async () => {
       await visitAs({
         "user-agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -21,7 +21,7 @@ describe("Bot detection", () => {
   });
 
   describe("browser with bot User-Agent", () => {
-    beforeEach(async () => {
+    beforeAll(async () => {
       await visitAs({ "user-agent": "vercel-screenshot/1.0" });
     });
 
@@ -33,7 +33,7 @@ describe("Bot detection", () => {
   });
 
   describe("browser with bot IP", () => {
-    beforeEach(async () => {
+    beforeAll(async () => {
       await visitAs({ "x-forwarded-for": "66.249.65.224" });
     });
 
@@ -47,6 +47,7 @@ describe("Bot detection", () => {
 
 async function visitAs(headers?: HeadersInit) {
   await prisma.user.deleteMany();
+
   const page = await goto("/chat", headers);
   await converse(page, "Hello, how are you?");
 }

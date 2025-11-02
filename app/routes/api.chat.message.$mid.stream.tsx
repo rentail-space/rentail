@@ -2,8 +2,8 @@ import { UI_MESSAGE_STREAM_HEADERS } from "ai";
 import { Redis } from "ioredis";
 import { createResumableStreamContext } from "resumable-stream";
 import env from "~/lib/env";
-import prisma from "~/lib/prisma";
-import type { Route } from "./+types/api.chat.$id.message.$mid.stream";
+import { findOrCreateUser } from "~/sessions.server";
+import type { Route } from "./+types/api.chat.message.$mid.stream";
 
 /**
  * Resume a message stream.
@@ -12,10 +12,8 @@ import type { Route } from "./+types/api.chat.$id.message.$mid.stream";
  * @param params.mid - The ID of the message to resume.
  * @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams
  */
-export async function loader({ params }: Route.LoaderArgs) {
-  const chat = await prisma.chat.findUnique({
-    where: { id: params.id },
-  });
+export async function loader({ request }: Route.LoaderArgs) {
+  const { chat } = await findOrCreateUser(request);
   if (!chat || chat.activeStreamId == null)
     return new Response(null, { status: 204 });
 
