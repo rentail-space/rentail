@@ -29,7 +29,10 @@ export default function PageLayout({
   showHeader?: boolean;
   showFooter?: boolean;
 }) {
-  useEffect(() => ReactGA.initialize("G-HLE5G8GC5Y"), []);
+  useEffect(() => {
+    if (process.env.NODE_ENV === "production")
+      ReactGA.initialize("G-HLE5G8GC5Y");
+  }, []);
 
   return (
     <html lang="en">
@@ -89,7 +92,7 @@ export default function PageLayout({
         <Toaster richColors />
         <ScrollRestoration />
         <Scripts />
-        <SpeedInsights />
+        {process.env.NODE_ENV === "production" && <SpeedInsights />}
       </body>
     </html>
   );

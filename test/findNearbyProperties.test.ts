@@ -16,7 +16,7 @@ describe("Proximity-based shopping center search", () => {
 
       beforeAll(async () => {
         await prisma.user.deleteMany();
-        coordinates = calculateCoordinates(direction, 10);
+        coordinates = await calculateCoordinates(direction, 10);
         properties = await findNearbyCoordinate(coordinates);
       });
 
@@ -36,7 +36,7 @@ describe("Proximity-based shopping center search", () => {
 
       beforeAll(async () => {
         await prisma.user.deleteMany();
-        coordinates = calculateCoordinates(direction, 30);
+        coordinates = await calculateCoordinates(direction, 30);
         properties = await findNearbyCoordinate(coordinates);
       });
 
@@ -52,30 +52,30 @@ describe("Proximity-based shopping center search", () => {
  * 1 degree latitude = 69.172 miles
  * 1 degree longitude at 34°N = 57.393 miles
  */
-function calculateCoordinates(
+async function calculateCoordinates(
   direction: "north" | "south" | "east" | "west",
   miles: number,
-): { latitude: number; longitude: number } {
-  // The Grove coordinates: -118.357674, 34.071972
-  let latitude = 34.071972;
-  let longitude = -118.357674;
+): Promise<{ latitude: number; longitude: number }> {
+  const { latitude, longitude } = await prisma.property.findFirstOrThrow({
+    where: {
+      name: "The Grove",
+    },
+    select: {
+      latitude: true,
+      longitude: true,
+    },
+  });
 
   switch (direction) {
     case "north":
-      latitude += miles / 69.172;
-      break;
+      return { latitude: latitude + miles / 69.172, longitude };
     case "south":
-      latitude -= miles / 69.172;
-      break;
+      return { latitude: latitude - miles / 69.172, longitude };
     case "east":
-      longitude += miles / 57.393;
-      break;
+      return { latitude, longitude: longitude + miles / 57.393 };
     case "west":
-      longitude -= miles / 57.393;
-      break;
+      return { latitude, longitude: longitude - miles / 57.393 };
   }
-
-  return { latitude, longitude };
 }
 
 async function findNearbyCoordinate(coordinates: {

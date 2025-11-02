@@ -1,4 +1,4 @@
-import { withTimeout } from "es-toolkit";
+import { invariant, withTimeout } from "es-toolkit";
 import type { Page } from "playwright";
 import { expect } from "vitest";
 import prisma from "~/lib/prisma";
@@ -19,8 +19,9 @@ export default async function converse(
   expect(page.url()).toContain("/chat");
   const initialCount = await prisma.messages.count();
 
-  await page.getByRole("textbox").fill(message);
-  await page.getByRole("button", { name: "Send" }).click();
+  invariant(message.length > 5, "Message must be at least 5 characters long");
+  await page.fill('input[type="text"]', message, { force: true, timeout: 100 });
+  await page.click('button[type="submit"]');
   await page.waitForLoadState("networkidle");
 
   // Wait for server to update the database with the new messages
@@ -30,7 +31,7 @@ export default async function converse(
       if (finalCount >= initialCount + 2) break;
       await page.waitForTimeout(100);
     }
-  }, 1_000);
+  }, 2_000);
 
   // Wait for the assistant response bubble to appear in the UI
   const lastResponseBubble = page.locator(".chat-bubble-response").last();

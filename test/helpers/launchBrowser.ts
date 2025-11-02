@@ -26,7 +26,7 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const page = await context.newPage();
   if (headers)
     await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
-  await waitForDependencies(page, path);
+  await page.goto(path);
   return page;
 }
 
@@ -39,11 +39,8 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
  * @param page - The page to wait for.
  * @param path - The path to wait for.
  */
-export async function waitForDependencies(page: Page, path: string) {
+export async function waitForDependencies(page: Page) {
   const dirname = resolve("node_modules/.vite/deps");
-
-  // Trigger initial build
-  await page.goto(path);
 
   // Wait for Vite to generate dependency cache (900+ files expected)
   if (!(await hasEnoughDependencies(dirname))) {
@@ -58,7 +55,6 @@ export async function waitForDependencies(page: Page, path: string) {
   }
 
   // Reload with cached dependencies
-  await page.goto(path);
   await page.waitForFunction(() => "__reactRouterContext" in window);
 }
 
@@ -93,6 +89,10 @@ export async function launchBrowser(port: number): Promise<BrowserContext> {
   context.setDefaultNavigationTimeout(25_000);
 
   context.on("console", (msg) => debug("browser")(msg.text()));
+
+  const page = await context.newPage();
+  await page.goto("/");
+  await waitForDependencies(page);
 
   return context;
 }
