@@ -1,13 +1,17 @@
 import { invariant } from "node_modules/es-toolkit/dist/util/invariant.mjs";
 import { beforeAll, describe, expect, it } from "vitest";
+import prisma from "~/lib/prisma";
 import systemPrompt from "~/lib/systemPrompt";
 import { userProfile } from "~/lib/userProfile";
 
 describe("prompt()", () => {
   let prompt: string;
 
-  beforeAll(() => {
-    prompt = systemPrompt({ userProfile, properties: sampleProperties });
+  beforeAll(async () => {
+    const properties = await prisma.property.findMany({
+      include: { spaces: true },
+    });
+    prompt = systemPrompt({ userProfile, properties });
   });
 
   it("includes clear instructions", () => {
@@ -63,41 +67,31 @@ describe("prompt()", () => {
   });
 
   it("includes shopping centers", () => {
-    const shoppingCenter = prompt
-      .match(/<shopping-center>(.*?)<\/shopping-center>/ims)?.[1]
-      .replace(/<space>(.*?)<\/space>/gims, "");
-    invariant(shoppingCenter, "Shopping center not found");
-    const props = Object.fromEntries(
-      shoppingCenter
-        .trim()
-        .split("\n")
-        .map((line) => line.trim().split(": ")),
-    );
-    expect(props).toMatchObject({
-      Name: "Westfield Mall",
-      Address: "123 Main St",
-      Description: "Premier shopping destination",
+    const theGrove = findTheGrove(prompt);
+    expect(theGrove).toMatchObject({
+      name: "The Grove",
+      address: "189 The Grove Dr",
+      city: "Los Angeles",
+      state: "CA",
+      slug: "the-grove",
+      website: "https://thegrovela.com",
     });
   });
 
   it("includes spaces in shopping centers", () => {
-    const space = prompt
-      .match(/<shopping-center>(.*?)<\/shopping-center>/ims)?.[1]
-      .match(/<space>(.*?)<\/space>/gims)?.[1];
-    invariant(space, "Space not found");
-    const props = Object.fromEntries(
-      space
-        .trim()
-        .split("\n")
-        .map((line) => line.trim().split(": ")),
+    const theGrove = findTheGrove(prompt);
+    invariant(theGrove, "The Grove not found");
+    const spaces = Array.isArray(theGrove.spaces) ? theGrove.spaces : [];
+    const space = spaces.find(
+      (space: { id: string }) => space.id === "jzfi2vjakvteoqmrxzcucivq",
     );
-    expect(props).toMatchObject({
-      Name: "Storefront A",
-      Details: "High-traffic corner space",
-      Cost: "2500",
-      "Foot Traffic": "5000",
-      Size: "800",
-      Available: "Yes",
+    expect(space).toMatchObject({
+      available: "week",
+      cost: 3400,
+      details:
+        "This pop-up is just next to Barnes & Noble, available for one month lease of longer, and at 350 sqft is enough for any small merchant that wants to reach ~4,000 visitors every day.",
+      name: "Corner Pop-up",
+      size: 350,
     });
   });
 
@@ -123,80 +117,57 @@ describe("prompt()", () => {
   });
 });
 
-const sampleProperties = [
-  {
-    id: "1",
-    name: "Westfield Mall",
-    address: "123 Main St",
-    city: "Los Angeles",
-    state: "CA",
-    country: "USA",
-    description: "Premier shopping destination",
-    imageURLs: ["https://example.com/mall.jpg"],
-    latitude: 34.0522,
-    longitude: -118.2437,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    slug: "westfield-mall",
-    website: "https://westfield.com",
-    spaces: [
-      {
-        id: "space-1",
-        name: "Storefront A",
-        details: "High-traffic corner space",
-        cost: 2500,
-        footTraffic: 5000,
-        size: 800,
-        available: "Yes",
-        imageURLs: ["https://example.com/space-a.jpg"],
-        propertyId: "1",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: "space-2",
-        name: "Kiosk B",
-        details: "Central mall location",
-        cost: 1200,
-        footTraffic: 3000,
-        size: 200,
-        available: "Yes",
-        imageURLs: [],
-        propertyId: "1",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ],
-  },
-  {
-    id: "2",
-    name: "Downtown Plaza",
-    address: "456 Oak Ave",
-    city: "San Francisco",
-    state: "CA",
-    country: "USA",
-    description: "Urban retail space",
-    imageURLs: [],
-    latitude: 37.7749,
-    longitude: -122.4194,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    slug: "downtown-plaza",
-    website: "https://downtownplaza.com",
-    spaces: [
-      {
-        id: "space-3",
-        name: "Pop-up Space",
-        details: "Flexible short-term rental",
-        cost: 800,
-        footTraffic: 1000,
-        size: 400,
-        available: "No",
-        imageURLs: ["https://example.com/popup.jpg"],
-        propertyId: "2",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ],
-  },
-];
+function findTheGrove(markdown: string): Record<string, unknown> | undefined {
+  const centers = parseShoppingCenters(markdown);
+  return centers.find(
+    (center) => (center as { slug: unknown }).slug === "the-grove",
+  );
+}
+
+function parseShoppingCenters(markdown: string): Record<string, unknown>[] {
+  const shoppingCentersRegex = /<shopping-center>(.*?)<\/shopping-center>/gims;
+  const matches = markdown.match(shoppingCentersRegex);
+  invariant(matches, "No shopping centers found");
+  return matches.map((center) => {
+    const content = center.replace(/<\/?shopping-center>/gm, "");
+    const spacesRegex = /<space>(.*?)<\/space>/gims;
+    const spaces = content
+      .match(spacesRegex)
+      ?.map((space) => parseNameValuePairs(space));
+    const props = parseNameValuePairs(content.replace(spacesRegex, ""));
+    return { ...props, spaces };
+  });
+}
+
+function parseNameValuePairs(str: string): Record<string, string | number> {
+  const result: Record<string, string | number> = {};
+
+  for (const line of str.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+
+    // Find the colon separator
+    const colonIndex = trimmed.indexOf(":");
+    if (colonIndex === -1) continue;
+
+    // Extract key (remove quotes and trim) and convert to camelCase
+    const rawKey = trimmed.slice(0, colonIndex).trim();
+    const key = rawKey
+      .replace(/^"|"$/g, "")
+      .toLowerCase()
+      .split(" ")
+      .map((word, idx) =>
+        idx === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1),
+      )
+      .join("");
+
+    // Extract value (remove quotes and trim)
+    const rawValue = trimmed.slice(colonIndex + 1).trim();
+    const value = rawValue.replace(/^"|"$/g, "");
+
+    // Try parsing as number
+    if (/^-?\d+\.?\d*$/.test(value)) result[key] = Number(value);
+    else result[key] = value;
+  }
+  return result;
+}
