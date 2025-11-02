@@ -30,7 +30,9 @@ const logger = debug("chat");
  * @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
  */
 export async function action({ request }: Route.ActionArgs) {
-  const { chat, headers, user } = await findOrCreateUser(request);
+  const { chat, headers, user } = await findOrCreateUser({
+    headers: request.headers,
+  });
 
   const { messages: bodyMessages } = (await request.clone().json()) as {
     messages: UIMessage[];
@@ -135,7 +137,7 @@ export async function action({ request }: Route.ActionArgs) {
       await prisma.chat.update({
         where: { id: chat.id },
         data: {
-          activeStreamId: ulid(),
+          activeStreamId: null,
           messages: {
             create: messages.map((message) => ({
               content: message.parts as InputJsonValue,

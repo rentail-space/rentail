@@ -20,7 +20,7 @@ export default async function converse(
   const initialCount = await prisma.messages.count();
 
   invariant(message.length > 5, "Message must be at least 5 characters long");
-  await page.fill('input[type="text"]', message, { force: true, timeout: 100 });
+  await page.fill('input[type="text"]', message, { force: true });
   await page.click('button[type="submit"]');
   await page.waitForLoadState("networkidle");
 
