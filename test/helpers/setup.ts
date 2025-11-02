@@ -8,7 +8,7 @@ import seedProperties from "prisma/seed/seedProperties";
 import { afterAll, beforeAll } from "vitest";
 import whyIsNodeRunning from "why-is-node-running";
 import prisma from "~/lib/prisma";
-import msw from "~/test/mocks/msw.server";
+import msw from "~/test/mocks/mswHendlers";
 
 Sentry.init({
   enabled: false,

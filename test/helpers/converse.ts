@@ -18,6 +18,7 @@ export default async function converse(
 ): Promise<string> {
   expect(page.url()).toContain("/chat");
   const initialCount = await prisma.messages.count();
+  invariant(initialCount === 0, "Expected 0 messages in database");
 
   invariant(message.length > 5, "Message must be at least 5 characters long");
   await page.fill('input[type="text"]', message, { force: true });

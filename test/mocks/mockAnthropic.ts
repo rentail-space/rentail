@@ -9,9 +9,32 @@ import type { Tool, ToolChoice } from "ai";
 import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import { ulid } from "ulid";
-import customMockResponses from "~/test/mocks/anthropic.mocks";
 
-export interface ToolCall {
+/**
+ * Custom mock responses that you can define for specific test scenarios
+ */
+const customMockResponses = {
+  "clothing boutique":
+    "Perfect! I found some great locations for your clothing boutique. Here are the top options with excellent foot traffic.",
+
+  "locations available":
+    "We have some great locations available. Here are the top options with excellent foot traffic.",
+
+  "Actually I'm in Boston": `Thanks for letting me know. I'll update my working memory.
+    <working_memory>{
+      location: {
+        city: "Boston",
+        state: "Massachusetts",
+        country: "United States",
+        latitude: 42.3601,
+        longitude: -71.0589,
+        timeZone: "America/New_York"
+      }
+    }
+    </working_memory>`,
+};
+
+interface ToolCall {
   id: string;
   name: string;
   input: Record<string, unknown>;

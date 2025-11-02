@@ -1,9 +1,10 @@
 import debug from "debug";
 import { HttpResponse, http, passthrough } from "msw";
+import { setupServer } from "msw/node";
 import { ulid } from "ulid";
-import { findMockResponse } from "./anthropic.stream";
+import { findMockResponse } from "./mockAnthropic";
 
-export const handlers = [
+const handlers = [
   // Mock Anthropic API
   http.post(
     "https://api.anthropic.com/v1/messages",
@@ -45,3 +46,30 @@ export const handlers = [
     },
   ),
 ];
+
+const msw = setupServer(...handlers);
+
+// Add logging for debugging
+msw.events
+  .on("request:start", ({ request }) =>
+    debug("msw")("%s", request.method, request.url),
+  )
+  .on("response:mocked", ({ request, response }) => {
+    debug("msw")("%s %s => %s", request.method, request.url, response.status);
+  })
+  .on("request:unhandled", ({ request }) => {
+    // Only log external requests that are being bypassed
+    const url = new URL(request.url);
+    if (url.hostname !== "localhost" && url.hostname !== "127.0.0.1") {
+      debug("msw")(
+        "Unhandled external request (bypassed): %s %s",
+        request.method,
+        request.url,
+      );
+    }
+  })
+  .on("unhandledException", ({ request, error }) =>
+    debug("msw")("%s %s errored!", request.method, request.url, error),
+  );
+
+export default msw;
