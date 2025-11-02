@@ -63,8 +63,7 @@ export const userProfile = zod
   })
   .partial();
 
-const matchWorkingMemoryTags =
-  /<working_memory[^>]*>[\s\S]*?(<\/working_memory\s*>|<\/work[\s_]*memory\s*>)/gim;
+const matchWorkingMemoryTags = /<working_memory>([\s\S]*?)<\/working_memory>/im;
 
 /**
  * Parse and extract working memory updates from assistant's response.
@@ -76,11 +75,12 @@ const matchWorkingMemoryTags =
 function extractWorkingMemory(
   responseText: string,
 ): Record<string, unknown> | null {
-  const match = matchWorkingMemoryTags.exec(responseText);
+  const match = matchWorkingMemoryTags.exec(responseText)?.[1].trim();
+  console.log("Match: %o", match);
   try {
-    const json = match?.[1]?.trim();
-    invariant(json, "No working memory found in response");
-    return JSON.parse(json);
+    invariant(match, "No working memory found in response");
+    console.log("Parsed: %o", JSON.parse(match));
+    return JSON.parse(match);
   } catch (error) {
     captureException(error, { extra: { responseText } });
     return null;
@@ -139,11 +139,14 @@ export default async function updateUserProfile({
     )
     .join("\n");
 
+  console.log("Relevant: %s", relevant);
+
   try {
     const updates = extractWorkingMemory(relevant);
     if (!updates) return workingMemory;
 
     logger("Working memory updates: %o", updates);
+    console.log("Working memory updates: %o", updates);
 
     const current = cleanParse(workingMemory);
     // Validate the updates against our schema
@@ -157,7 +160,7 @@ export default async function updateUserProfile({
     const merged = {
       ...current,
       ...validated,
-      location: { ...current.location, ...validated.location },
+      location: validated.location || current.location,
       preferences: { ...current.preferences, ...validated.preferences },
       selling: { ...current.selling, ...validated.selling },
       sessionState: { ...current.sessionState, ...validated.sessionState },

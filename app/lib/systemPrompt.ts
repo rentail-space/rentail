@@ -1,6 +1,6 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
 import type { ZodType } from "zod";
-import general from "~/prompts/general.md?raw";
+import source from "~/prompts/systemPrompt.md?raw";
 import { zodToExample } from "./userProfile";
 
 export default function systemPrompt({
@@ -11,7 +11,7 @@ export default function systemPrompt({
   properties: PropertyGetPayload<{ include: { spaces: true } }>[];
 }): string {
   const [date, time] = new Date().toISOString().split("T");
-  const prompt = general
+  const prompt = source
     .replace("$[date]", date)
     .replace("$[time]", time)
     .replace(
@@ -22,7 +22,6 @@ export default function systemPrompt({
       "$[properties]",
       centersToMarkdown({ properties, maxDistance: 20 }),
     );
-  console.log(prompt);
   return prompt;
 }
 

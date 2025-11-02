@@ -57,7 +57,7 @@ You will update working memory when:
 - Merchant expresses preferences about communication
 - Important context emerges that should be remembered
 
-For example, if the merchant says "I'm in Boston", then this indicates their city is "Boston", the state is "Massachusetts", the country is "US", and the timezone is "America/New_York". You can use the city to deduct their actual location. In this example, the latitude is 42.3584 and the longitude is -71.0598.
+When merchant states their city, also include the state of that city, the country of that state, and the timezone identifier for that state. For a city, always set the latitude and longitude based on the city center.
 
 To update working memory, include `<working_memory>` tags in your response with the updated JSON. For example:
 
