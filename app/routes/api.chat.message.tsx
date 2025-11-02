@@ -11,8 +11,8 @@ import { ulid } from "ulid";
 import env from "~/lib/env";
 import findNearbyProperties from "~/lib/findNearbyProperties";
 import prisma from "~/lib/prisma";
-import prompt from "~/lib/prompt";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
+import systemPrompt from "~/lib/systemPrompt";
 import updateUserProfile, {
   maskWorkingMemoryTags,
   userProfile,
@@ -63,7 +63,7 @@ export async function action({ request }: Route.ActionArgs) {
       "claude-haiku-4-5",
     ),
     messages: convertToModelMessages(messages),
-    system: prompt({ userProfile, properties }),
+    system: systemPrompt({ userProfile, properties }),
 
     onAbort: async () => {
       logger("Aborted by user");

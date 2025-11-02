@@ -89,9 +89,6 @@ async function findNearbyCoordinate(coordinates: {
   await converse(page, "What are the nearby shopping centers?");
 
   const user = await prisma.user.findFirstOrThrow();
-  const { properties } = await findNearbyProperties({
-    maxDistance: 10,
-    user,
-  });
+  const properties = await findNearbyProperties({ maxDistance: 10, user });
   return properties;
 }

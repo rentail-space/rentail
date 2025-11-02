@@ -1,27 +1,27 @@
 import { invariant } from "node_modules/es-toolkit/dist/util/invariant.mjs";
 import { beforeAll, describe, expect, it } from "vitest";
-import prompt from "~/lib/prompt";
+import systemPrompt from "~/lib/systemPrompt";
 import { userProfile } from "~/lib/userProfile";
 
 describe("prompt()", () => {
-  let result: string;
+  let prompt: string;
 
   beforeAll(() => {
-    result = prompt({ userProfile, properties: sampleProperties });
+    prompt = systemPrompt({ userProfile, properties: sampleProperties });
   });
 
   it("includes clear instructions", () => {
-    expect(result).toContain(
+    expect(prompt).toContain(
       "You are a virtual assistant for a specialty leasing retail space service",
     );
-    expect(result).toContain(
+    expect(prompt).toContain(
       "You help merchants find the retail space that's best for their needs",
     );
   });
 
   it("includes current date and time", () => {
     // Extract date from prompt (format: YYYY-MM-DD)
-    const dateMatch = /date is (\d{4}-\d{2}-\d{2})/.exec(result);
+    const dateMatch = /date is (\d{4}-\d{2}-\d{2})/.exec(prompt);
     expect(dateMatch).toBeTruthy();
     if (!dateMatch) throw new Error("Date match not found");
 
@@ -36,7 +36,7 @@ describe("prompt()", () => {
 
   it("includes current time", () => {
     // Extract time from prompt (format: HH:MM:SS)
-    const timeMatch = /time is (\d{2}:\d{2}:\d{2})/.exec(result);
+    const timeMatch = /time is (\d{2}:\d{2}:\d{2})/.exec(prompt);
     expect(timeMatch).toBeTruthy();
     if (!timeMatch) throw new Error("Time match not found");
 
@@ -49,7 +49,7 @@ describe("prompt()", () => {
   });
 
   it("includes user profile schema", () => {
-    const json = result.match(/```json\n(.*?)\n```/ms)?.[1];
+    const json = prompt.match(/```json\n(.*?)\n```/ms)?.[1];
     invariant(json, "JSON match not found");
     const parsed = JSON.parse(json);
     expect(parsed).toMatchObject({
@@ -63,7 +63,7 @@ describe("prompt()", () => {
   });
 
   it("includes shopping centers", () => {
-    const shoppingCenter = result
+    const shoppingCenter = prompt
       .match(/<shopping-center>(.*?)<\/shopping-center>/ms)?.[1]
       .replace(/<space>(.*?)<\/space>/gms, "");
     invariant(shoppingCenter, "Shopping center not found");
@@ -74,14 +74,14 @@ describe("prompt()", () => {
         .map((line) => line.trim().split(": ")),
     );
     expect(props).toMatchObject({
-      "Shopping center name": "Westfield Mall",
-      Address: "123 Main St, Los Angeles, CA, USA",
+      Name: "Westfield Mall",
+      Address: "123 Main St",
       Description: "Premier shopping destination",
     });
   });
 
   it("includes spaces in shopping centers", () => {
-    const space = result
+    const space = prompt
       .match(/<shopping-center>(.*?)<\/shopping-center>/ms)?.[1]
       .match(/<space>(.*?)<\/space>/ms)?.[1];
     invariant(space, "Space not found");
@@ -92,17 +92,17 @@ describe("prompt()", () => {
         .map((line) => line.trim().split(": ")),
     );
     expect(props).toMatchObject({
-      "Space name": "Storefront A",
-      Description: "High-traffic corner space",
+      Name: "Storefront A",
+      Details: "High-traffic corner space",
       Cost: "2500",
-      "Foot traffic": "5000",
-      Size: "800 sqft",
+      "Foot Traffic": "5000",
+      Size: "800",
       Available: "Yes",
     });
   });
 
   it("handles empty properties list", () => {
-    const result = prompt({ userProfile, properties: [] });
+    const result = systemPrompt({ userProfile, properties: [] });
     expect(result).toContain(
       "I don't know where you are, so I can't find any shopping centers near you",
     );
@@ -110,14 +110,14 @@ describe("prompt()", () => {
   });
 
   it("includes instructions about known shopping centers only", () => {
-    expect(result).toContain("within 20 miles of the user");
-    expect(result).toContain(
+    expect(prompt).toContain("within 20 miles of the user");
+    expect(prompt).toContain(
       "These are all the shopping centers you know about",
     );
-    expect(result).toContain(
+    expect(prompt).toContain(
       "You do not know about any other shopping centers",
     );
-    expect(result).toContain(
+    expect(prompt).toContain(
       "Do not make up information about shopping centers you do not know about",
     );
   });

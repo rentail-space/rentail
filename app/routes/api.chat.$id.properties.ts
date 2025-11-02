@@ -13,6 +13,6 @@ export async function loader({ params }: Route.LoaderArgs) {
     where: { id },
   });
   if (!user) return Response.json({ properties: [] });
-  const { properties } = await findNearbyProperties({ maxDistance: 20, user });
+  const properties = await findNearbyProperties({ maxDistance: 20, user });
   return Response.json({ properties });
 }

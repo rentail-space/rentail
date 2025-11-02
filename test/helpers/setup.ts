@@ -9,8 +9,6 @@ import { afterAll, beforeAll } from "vitest";
 import whyIsNodeRunning from "why-is-node-running";
 import prisma from "~/lib/prisma";
 import msw from "~/test/mocks/msw.server";
-import { launchBrowser, waitForDependencies } from "./launchBrowser";
-import { launchServer } from "./launchServer";
 
 Sentry.init({
   enabled: false,
@@ -33,23 +31,14 @@ beforeAll(async () => {
     prisma.waitlist.deleteMany(),
   ]);
   await seedProperties();
+
+  // Start MSW server before all tests
+  msw.listen({ onUnhandledRequest: "error" });
 });
 
 afterAll(async () => {
   await prisma.$disconnect();
-});
 
-beforeAll(async () => {
-  // Start MSW server before all tests
-  msw.listen({ onUnhandledRequest: "error" });
-  const { port } = await launchServer();
-  // Setup browser and wait for dependencies to be ready
-  const context = await launchBrowser(port);
-  const page = await context.newPage();
-  await waitForDependencies(page, "/");
-});
-
-afterAll(async () => {
   msw.close();
 
   // Debug what's keeping Node alive (if tests hang)

@@ -1,10 +1,9 @@
-import type { PropertySpace } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import type { ZodType } from "zod";
 import general from "~/prompts/general.md?raw";
 import { zodToExample } from "./userProfile";
 
-export default function prompt({
+export default function systemPrompt({
   userProfile,
   properties,
 }: {
@@ -50,23 +49,39 @@ function centersToMarkdown({
 function centerToMarkdown(
   property: PropertyGetPayload<{ include: { spaces: true } }>,
 ): string {
-  return `<shopping-center>
-  Shopping center name: ${property.name}
-  Address: ${property.address}, ${property.city}, ${property.state}, ${property.country}
-  Description: ${property.description}
-  ${property.imageURLs.map((image) => `Image: ${image}`).join("\n")}
-  Spaces: ${property.spaces.map(centerSpacesToMarkdown).join("\n")}
-</shopping-center>`;
+  return toXml({
+    obj: {
+      ...property,
+      spaces: property.spaces.map((space) =>
+        toXml({ obj: space, tag: "space" }),
+      ),
+    },
+    tag: "shopping-center",
+  });
 }
 
-function centerSpacesToMarkdown(space: PropertySpace): string {
-  return `<space>
-  Space name: ${space.name}
-  Description: ${space.details}
-  Cost: ${space.cost}
-  Foot traffic: ${space.footTraffic}
-  Size: ${space.size} sqft
-  Available: ${space.available}
-  ${space.imageURLs.map((image) => `Image: ${image}`).join("\n")}
-</space>`;
+function toXml({
+  obj,
+  tag,
+}: {
+  obj: Record<string, unknown>;
+  tag: string;
+}): string {
+  const entries = Object.entries(obj)
+    .map(([key, value]) => {
+      if (Array.isArray(value))
+        return value.map((item) => `  ${toLabel(key)}: ${item}`).join("\n");
+      return `  ${toLabel(key)}: ${value}`;
+    })
+    .join("\n");
+
+  return `<${tag}>\n${entries}\n</${tag}>`;
+}
+
+function toLabel(key: string): string {
+  return key
+    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2") // Handle acronyms: "URLSet" -> "URL Set"
+    .replace(/([a-z])([A-Z])/g, "$1 $2") // CamelCase: "footTraffic" -> "foot Traffic"
+    .replace(/^./, (str) => str.toUpperCase()) // Capitalize first
+    .trim();
 }
