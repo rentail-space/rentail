@@ -134,7 +134,7 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - Sequential tests: each test validates one aspect, state flows through the suite
 
 **Testing Infrastructure:**
-- Mock server setup with MSW prevents external API calls (`/test/mocks/mswHendlers.ts`)
+- Mock server setup with MSW prevents external API calls (`/test/mocks/mswHandlers.ts`)
 - Anthropic API mocked with pattern matching (`/test/mocks/mockAnthropic.ts`)
 - Database reset in beforeAll or beforeEach: `await prisma.user.deleteMany()`
 - Visual regression: `await expect(page).toMatchScreenshot()`
