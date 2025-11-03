@@ -5,7 +5,7 @@
       "Bash(lsof:*)",
       "WebSearch",
       "Bash(npm run typecheck:*)",
-      "Bash(tsx scripts/*)",
+      "Bash(tsx scripts/*)"
     ],
     "deny": [],
     "ask": []

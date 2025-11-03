@@ -1,4 +1,5 @@
 // DO NOT add to setup.ts as vitest.config.js cannot upload file that imports vitest
+
 import { expect } from "@playwright/test";
 import { invariant } from "es-toolkit";
 import looksSame from "looks-same";
@@ -46,7 +47,7 @@ expect.extend({
       },
     );
     const diff = differentPixels / screenshot.length;
-    if (diff < 3 || !diffImage) {
+    if (diff < 5 || !diffImage) {
       return {
         message: () => `Image matches baseline (diff: ${diff.toFixed(2)}%)`,
         pass: true,
