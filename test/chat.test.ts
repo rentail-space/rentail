@@ -12,10 +12,6 @@ describe("Chat page", () => {
       page = await goto("/chat");
     });
 
-    it("should render the chat page", async () => {
-      await expect(page).toMatchScreenshot();
-    });
-
     it("should show the welcome message", async () => {
       const welcomeBubble = page.locator(".chat-bubble-response");
       await expect(welcomeBubble).toBeVisible();

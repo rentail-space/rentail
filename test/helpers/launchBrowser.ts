@@ -49,6 +49,7 @@ async function newContext(port: number): Promise<BrowserContext> {
   const browser = await launchBrowser();
   context = await browser.newContext({
     baseURL: `http://localhost:${port}`,
+    viewport: { width: 1920, height: 1080 },
   });
   context.route("**", blockOutgoingRequests);
   context

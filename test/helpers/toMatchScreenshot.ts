@@ -16,6 +16,7 @@ import path from "node:path";
 import type { Page } from "playwright";
 
 const dirname = path.resolve("./__screenshots__");
+const maxDifference = 0.05; // 5% difference
 
 expect.extend({
   async toMatchScreenshot(page: Page) {
@@ -23,7 +24,12 @@ expect.extend({
 
     const testName = getTestName();
     const filename = path.join(dirname, `${testName}.jpg`);
-    const screenshot = await page.screenshot();
+    const screenshot = await page.screenshot({
+      animations: "disabled",
+      caret: "hide",
+      scale: "css",
+      type: "png",
+    });
     try {
       await access(filename, constants.R_OK);
     } catch {
@@ -47,7 +53,7 @@ expect.extend({
       },
     );
     const diff = differentPixels / screenshot.length;
-    if (diff < 5 || !diffImage) {
+    if (diff / 100 < maxDifference || !diffImage) {
       return {
         message: () => `Image matches baseline (diff: ${diff.toFixed(2)}%)`,
         pass: true,
