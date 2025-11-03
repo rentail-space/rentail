@@ -4,9 +4,9 @@
 
 import * as Sentry from "@sentry/react-router";
 import { format, styleText } from "node:util";
-import seedProperties from "prisma/seed/seedProperties";
 import { afterAll, beforeAll } from "vitest";
 import whyIsNodeRunning from "why-is-node-running";
+import seedProperties from "prisma/seed/seedProperties";
 import prisma from "~/lib/prisma";
 import msw from "~/test/mocks/mswHandlers";
 
@@ -22,16 +22,19 @@ Sentry.init({
   },
 });
 
-// Suppress React hydration warnings in tests - these are expected when Playwright
-// interacts with the page (adds inline styles, etc.) and don't affect functionality
+// Suppress expected browser warnings in tests - these don't affect functionality
 const originalConsoleError = console.error;
 console.error = (...args: unknown[]) => {
   const message = format(...args);
   if (
+    // React hydration warnings from Playwright interactions
     message.includes("A tree hydrated but some attributes") ||
-    message.includes("hydration mismatch")
+    message.includes("hydration mismatch") ||
+    // Vite HMR manifest patch failures (dev server interruptions)
+    message.includes("Failed to fetch manifest patches") ||
+    message.includes("fetchAndApplyManifestPatches")
   ) {
-    return; // Suppress hydration warnings
+    return; // Suppress expected test warnings
   }
   originalConsoleError(...args);
 };
