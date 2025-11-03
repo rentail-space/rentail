@@ -8,7 +8,7 @@ import type {
 } from "react-router";
 import { v7 as uuidv7 } from "uuid";
 import env from "~/lib/env";
-import msw from "~/test/mocks/mswHendlers";
+import msw from "~/test/mocks/mswHandlers";
 
 if (env.SENTRY_DSN) {
   Sentry.init({

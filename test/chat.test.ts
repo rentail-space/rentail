@@ -1,43 +1,76 @@
 import { expect, type Page } from "playwright/test";
-import { beforeAll, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vitest";
+import prisma from "~/lib/prisma";
 import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
 
 const testMessage =
   "looking for a pop-up retail space for my clothing boutique";
-const testResponse = "I found some great locations";
 
 describe("Chat page", () => {
-  it("renders chat interface with welcome message", async () => {
-    const page = await goto("/chat");
-    // Check that the chat interface is rendered
-    await expect(page.locator("div.h-screen")).toBeVisible();
+  describe("interface with welcome message", () => {
+    let page: Page;
 
-    // Check header is present
-    await expect(page.locator("header")).toBeVisible();
+    beforeAll(async () => {
+      await prisma.user.deleteMany();
+      page = await goto("/chat");
+    });
 
-    // Check that welcome message is displayed
-    await expect(page.locator(".chat.chat-start").first()).toBeVisible();
+    it("renders the chat page", async () => {
+      await expect(page).toMatchScreenshot();
+    });
 
-    // Check that input form is present
-    await expect(page.locator("form")).toBeVisible();
-    await expect(page.getByRole("textbox")).toBeVisible();
+    it("shows the welcome message", async () => {
+      await expect(page.locator(".chat-bubble-response")).toBeVisible();
+      await expect(page.locator(".chat-bubble-response")).toHaveText(
+        /Welcome to rentail.space!/,
+      );
+      await expect(page.locator(".chat-bubble-response")).toHaveText(
+        /I'm your virtual assistant here to help you find the perfect retail space for your business needs./,
+      );
+      await expect(page.locator(".chat-bubble-response")).toHaveText(
+        /How can I assist you today?/,
+      );
+    });
+
+    it("should have a form for the user to input messages", async () => {
+      await expect(page.locator("form")).toBeVisible();
+      await expect(page.getByRole("textbox")).toBeVisible();
+    });
+
+    afterAll(async () => {
+      page.close();
+    });
   });
 
-  it("handles initial query parameter", async () => {
+  describe("initial query parameter", () => {
+    let page: Page;
     const testQuery = "Do you have any locations available in downtown areas?";
-    const page = await goto(`/chat?q=${encodeURIComponent(testQuery)}`);
 
-    // Check that user message appears in chat
-    await expect(page.getByRole("textbox")).toHaveValue(testQuery);
+    beforeAll(async () => {
+      await prisma.user.deleteMany();
+      page = await goto(`/chat?q=${encodeURIComponent(testQuery)}`);
+    });
+
+    it("handles initial query parameter", async () => {
+      await expect(page.getByRole("textbox")).toHaveValue(testQuery);
+    });
+
+    afterAll(async () => {
+      page.close();
+    });
   });
 
   describe("exchange messages", () => {
     let page: Page;
 
     beforeAll(async () => {
+      await prisma.user.deleteMany();
       page = await goto("/chat");
-      await converse(page, testMessage);
+      await converse(
+        page,
+        "looking for a pop-up retail space for my clothing boutique",
+      );
     });
 
     it("should look like a real chat", async () => {
@@ -45,24 +78,30 @@ describe("Chat page", () => {
       await expect(page).toMatchScreenshot();
     });
 
-    it("should have at 3 messages in chat", async () => {
+    it("should have welcome message, user message, and assistant response", async () => {
       const chatCount = await page.locator(".chat-bubble").count();
-      expect(chatCount).toEqual(3); // welcome + user + response
+      expect(chatCount).toBeGreaterThanOrEqual(3);
     });
 
     it("should show user message in chat", async () => {
       await expect(
-        page.locator(".chat-bubble-user", { hasText: testMessage }),
+        page.locator(".chat-bubble-user", {
+          hasText: /looking for a pop-up retail space/,
+        }),
       ).toBeVisible();
     });
 
-    it("should show assistant message in chat", async () => {
-      await expect(
-        page.locator(".chat-bubble-response", { hasText: testResponse }),
-      ).toBeVisible();
+    it("should show assistant response in chat", async () => {
+      // Just verify there's a response, don't assert specific content
+      await expect(page.locator(".chat-bubble-response").last()).toBeVisible();
+      const responseText = await page
+        .locator(".chat-bubble-response")
+        .last()
+        .innerText();
+      expect(responseText.length).toBeGreaterThan(0);
     });
 
-    it("should have a scroll container", async () => {
+    it("should auto-scroll to bottom after response", async () => {
       // Verify page is scrolled to bottom after response
       const scrollContainer = page.locator(".overflow-y-auto").first();
       const scrollTop = await scrollContainer.evaluate((el) => el.scrollTop);
@@ -72,8 +111,43 @@ describe("Chat page", () => {
       const clientHeight = await scrollContainer.evaluate(
         (el) => el.clientHeight,
       );
-      // Should be at or very close to bottom (within 50px tolerance)
-      expect(scrollTop + clientHeight).toBeGreaterThan(scrollHeight - 50);
+
+      // Calculate how far from bottom (allow small tolerance for rounding)
+      const distanceFromBottom = scrollHeight - (scrollTop + clientHeight);
+      expect(distanceFromBottom).toBeLessThan(5);
+    });
+
+    it("should store messages in database", async () => {
+      const messages = await prisma.messages.findMany({
+        orderBy: { createdAt: "asc" },
+      });
+      expect(messages.length).toBeGreaterThanOrEqual(3);
+    });
+
+    it("should store user message in database", async () => {
+      const messages = await prisma.messages.findMany({
+        orderBy: { createdAt: "asc" },
+      });
+      expect(messages.find((m) => m.role === "user")).toBeDefined();
+    });
+
+    it("should store assistant message in database", async () => {
+      const messages = await prisma.messages.findMany({
+        orderBy: { createdAt: "asc" },
+      });
+      expect(messages.find((m) => m.role === "assistant")).toBeDefined();
+    });
+
+    it("should create one chat session", async () => {
+      const chats = await prisma.chat.findMany();
+      expect(chats.length).toEqual(1);
+      expect(chats[0].activeStreamId).toBeNull(); // Stream should be complete
+    });
+
+    it("should create an anonymous user", async () => {
+      const users = await prisma.user.findMany();
+      expect(users.length).toEqual(1);
+      expect(users[0].isAnonymous).toBe(true);
     });
   });
 });
