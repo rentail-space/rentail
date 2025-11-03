@@ -22,6 +22,20 @@ Sentry.init({
   },
 });
 
+// Suppress React hydration warnings in tests - these are expected when Playwright
+// interacts with the page (adds inline styles, etc.) and don't affect functionality
+const originalConsoleError = console.error;
+console.error = (...args: unknown[]) => {
+  const message = format(...args);
+  if (
+    message.includes("A tree hydrated but some attributes") ||
+    message.includes("hydration mismatch")
+  ) {
+    return; // Suppress hydration warnings
+  }
+  originalConsoleError(...args);
+};
+
 beforeAll(async () => {
   // Cleanup database and seed it
   await Promise.all([
