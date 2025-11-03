@@ -14,6 +14,7 @@ import { launchServer } from "./launchServer";
 
 let browser: Browser | undefined;
 let context: BrowserContext | undefined;
+let viteWarmedUp = false;
 const logger = debug("browser");
 
 /**
@@ -26,11 +27,32 @@ const logger = debug("browser");
 export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const { port } = await launchServer();
   const context = await newContext(port);
+
+  // Warm up Vite on first page load to avoid mid-test reloads
+  if (!viteWarmedUp) {
+    const warmupPage = await context.newPage();
+    try {
+      await warmupPage.goto("/chat", { timeout: 30000, waitUntil: "load" });
+      // Wait for Vite to finish optimizing and trigger the reload
+      await warmupPage.waitForLoadState("networkidle");
+      await warmupPage.waitForTimeout(1000);
+      // Wait for the post-optimization reload
+      await warmupPage.waitForLoadState("networkidle");
+      logger("Vite warmed up successfully");
+    } catch (error) {
+      logger("Vite warmup failed (continuing anyway): %O", error);
+    } finally {
+      await warmupPage.close();
+      viteWarmedUp = true;
+    }
+  }
+
   const page = await context.newPage();
   if (headers)
     await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
 
   await page.goto(path);
+  await page.waitForLoadState("networkidle");
   return page;
 }
 

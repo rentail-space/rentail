@@ -22,7 +22,7 @@ describe("Anonymous visits chat page", () => {
     });
 
     await converse(page, "Hello, how are you?");
-  });
+  }, 10_000);
 
   it("loads chat page and shows sign-in button", async () => {
     await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
