@@ -37,6 +37,11 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
       await warmupPage.goto("/chat", { waitUntil: "load" });
       // Wait for Vite to finish optimizing and trigger the reload
       await warmupPage.waitForLoadState("networkidle");
+      // Give Vite time to trigger the optimization reload
+      await warmupPage.waitForTimeout(3000);
+      // Wait for the post-optimization reload to complete
+      await warmupPage.waitForLoadState("networkidle");
+      await warmupPage.waitForTimeout(500);
       logger("Vite warmed up for port %d", port);
     } catch (error) {
       logger(

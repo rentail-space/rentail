@@ -30,9 +30,11 @@ export default async function converse(
   const input = page.locator('input[type="text"]');
   await input.click();
   await input.pressSequentially(message, { delay: 0 });
+  expect(await input.inputValue()).toBe(message);
 
   await page.click('button[type="submit"]');
   await page.waitForLoadState("networkidle");
+  expect(await input.inputValue()).toBe("");
 
   // Wait for the messages to be saved to the database
   // We expect 2 new messages: one from the user, one from the assistant
@@ -42,7 +44,7 @@ export default async function converse(
       if (currentCount >= initialCount + 2) break;
       await page.waitForTimeout(10);
     }
-  }, 15_000);
+  }, 1_000);
 
   // Wait for the assistant response bubble to appear in the UI
   const lastResponseBubble = page.locator(".chat-bubble-response").last();
