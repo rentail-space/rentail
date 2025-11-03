@@ -61,7 +61,7 @@ async function startServer() {
  * Wait for Vite to generate dependency cache (900+ files expected) and return when found
  */
 export async function waitForDependencies() {
-  while (!existsSync(deps)) await delay(100);
+  while (!existsSync(deps)) await delay(10);
 
   const files = await readdir(deps);
   if (files.length > 100) return;

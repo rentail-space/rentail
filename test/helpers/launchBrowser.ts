@@ -1,7 +1,7 @@
-import debug from "debug";
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { URL as URLString } from "node:url";
+import debug from "debug";
 import {
   type Browser,
   type BrowserContext,
@@ -14,7 +14,7 @@ import { launchServer } from "./launchServer";
 
 let browser: Browser | undefined;
 let context: BrowserContext | undefined;
-let viteWarmedUp = false;
+const warmedUpPorts = new Set<number>();
 const logger = debug("browser");
 
 /**
@@ -29,21 +29,24 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const context = await newContext(port);
 
   // Warm up Vite on first page load to avoid mid-test reloads
-  if (!viteWarmedUp) {
+  // Track warmup per port since each test file gets its own Vite server
+  if (!warmedUpPorts.has(port)) {
+    logger("Warming up Vite for port %d", port);
     const warmupPage = await context.newPage();
     try {
-      await warmupPage.goto("/chat", { timeout: 30000, waitUntil: "load" });
+      await warmupPage.goto("/chat", { waitUntil: "load" });
       // Wait for Vite to finish optimizing and trigger the reload
       await warmupPage.waitForLoadState("networkidle");
-      await warmupPage.waitForTimeout(1000);
-      // Wait for the post-optimization reload
-      await warmupPage.waitForLoadState("networkidle");
-      logger("Vite warmed up successfully");
+      logger("Vite warmed up for port %d", port);
     } catch (error) {
-      logger("Vite warmup failed (continuing anyway): %O", error);
+      logger(
+        "Vite warmup failed for port %d (continuing anyway): %O",
+        port,
+        error,
+      );
     } finally {
       await warmupPage.close();
-      viteWarmedUp = true;
+      warmedUpPorts.add(port);
     }
   }
 

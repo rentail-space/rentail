@@ -40,7 +40,7 @@ export default async function converse(
     while (true) {
       const currentCount = await prisma.messages.count();
       if (currentCount >= initialCount + 2) break;
-      await page.waitForTimeout(100);
+      await page.waitForTimeout(10);
     }
   }, 15_000);
 

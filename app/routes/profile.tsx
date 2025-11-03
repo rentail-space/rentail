@@ -106,7 +106,7 @@ function NameForm({ user }: { user: { name: string; email: string } }) {
       if (response.ok) {
         setSuccess("Name updated successfully!");
         // Refresh the page to show updated name in header
-        setTimeout(() => window.location.reload(), 1000);
+        setTimeout(() => window.location.reload());
       } else setError(result.error?.message || "Failed to update name");
     } catch (error) {
       setError(error instanceof Error ? error.message : "An error occurred");

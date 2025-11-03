@@ -127,7 +127,7 @@ export default function createStreamingResponse(
       controller.enqueue(encoder.encode(contentBlockStart));
 
       // Send content in chunks to simulate streaming
-      const chunkSize = 25;
+      const chunkSize = 50;
 
       function sendNextChunk() {
         if (index >= mockResponse.length) {
@@ -156,7 +156,7 @@ export default function createStreamingResponse(
         controller.enqueue(encoder.encode(contentDelta));
 
         // Schedule next chunk with small delay to simulate streaming
-        setTimeout(sendNextChunk, 10);
+        setTimeout(sendNextChunk);
       }
 
       sendNextChunk();
