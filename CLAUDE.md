@@ -35,14 +35,14 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 **AI Integration:**
 - Claude 4 via Anthropic AI SDK with streaming responses
 - **Streaming Architecture:**
-  - Chat API: `app/routes/api.chat.$id.message.tsx` uses `streamText()` from AI SDK
+  - Chat API: `app/routes/api.chat.message.tsx` uses `streamText()` from AI SDK
   - Client uses AI SDK's `useChat` hook with `resume: true` for automatic reconnection
   - **Resumable Streams:** Uses `resumable-stream` package with Redis for reliable message delivery
     - Store active stream ID in `Chat.activeStreamId` field
     - Create resumable context in `consumeSseStream` callback with Redis pub/sub
-    - Resume endpoint: `app/routes/api.chat.$id.stream.tsx` resumes interrupted streams
+    - Resume endpoint: `app/routes/api.chat.message.$messageId.stream.tsx` resumes interrupted streams
     - Clear `activeStreamId` in `onFinish` callback when stream completes
-- System prompts in `app/prompts/`: `general.md` (includes working memory instructions), `welcome.md`
+- System prompts in `app/prompts/`: `systemPrompt.md` (includes working memory instructions), `welcome.md`
 - Use Context7 MCP server for library documentation and code examples
 
 **Working Memory & User Profiles:**
@@ -51,7 +51,7 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - Profile schema defined in `app/lib/userProfile.ts` with Zod validation
 - Profile includes: name, location (city, state, country, lat/lon as numbers, timezone), selling details, preferences, session state
 - **Working Memory Pattern:**
-  - Agent receives instructions in system prompt (`app/prompts/general.md`) to emit `<working_memory>` tags
+  - Agent receives instructions in system prompt (`app/prompts/systemPrompt.md`) to emit `<working_memory>` tags
   - Agent outputs `<working_memory>{JSON}</working_memory>` when learning new user information
   - Tags automatically parsed and saved to database via `updateUserProfile()` in `onFinish` callback
   - Tags masked from user display using `maskWorkingMemoryTags()` function
@@ -134,8 +134,8 @@ This is a **React Router v7** application serving as a specialty lease marketpla
 - Sequential tests: each test validates one aspect, state flows through the suite
 
 **Testing Infrastructure:**
-- Mock server setup with MSW prevents external API calls (`/test/mocks/handlers.ts`)
-- Anthropic API mocked with pattern matching (`/test/mocks/anthropic.mock.ts`)
+- Mock server setup with MSW prevents external API calls (`/test/mocks/mswHendlers.ts`)
+- Anthropic API mocked with pattern matching (`/test/mocks/mockAnthropic.ts`)
 - Database reset in beforeAll or beforeEach: `await prisma.user.deleteMany()`
 - Visual regression: `await expect(page).toMatchScreenshot()`
 - **Test Helper: `converse(page, message)`**
@@ -144,6 +144,11 @@ This is a **React Router v7** application serving as a specialty lease marketpla
   - Polls `Chat.activeStreamId` until null (stream finished)
   - Use in tests: `await converse(page, "Hello, how are you?")`
   - Replaces manual textbox filling + button clicking + waiting patterns
+- **Unit Testing Pattern:** For testing business logic without browser overhead:
+  - Create test users directly with `prisma.user.create()` including required fields (geocode, metadata, workingMemory)
+  - Call functions directly instead of through HTTP/browser layer
+  - Clean up test data in `beforeAll` or after each test
+  - Example: `findNearbyProperties.test.ts` tests proximity search by creating users with location data
 - Run individual tests: `pnpx vitest run <test-pattern>`
 - Debug logging: Use `DEBUG=* pnpm test` to see all debug output
 
@@ -174,18 +179,22 @@ Optional environment variables:
   - `/app/routes.ts`: Route configuration with file-based routing
   - `/app/root.tsx`: Root exports (App, ErrorBoundary, HydrateFallback, loader, headers, links)
   - `/app/routes/`: Individual route components
-    - `api.chat.$id.message.tsx`: Send new chat message (creates resumable stream)
-    - `api.chat.$id.message.$mid.stream.tsx`: Resume interrupted stream
-    - `api.chat.$id.stop.tsx`: Stop active stream manually
+    - `api.chat.message.tsx`: Send new chat message (creates resumable stream)
+    - `api.chat.message.$messageId.stream.tsx`: Resume interrupted stream
+    - `api.chat.$chatId.stop.tsx`: Stop active stream manually
+    - `api.chat.$chatId.properties.ts`: Get nearby properties for a chat
+    - `api.chat.$chatId.export.csv.ts`: Export chat as CSV
     - `chat/route.tsx`: Chat UI with `useChat` hook and `resume: true`
   - `/app/lib/`: Shared utilities
     - `env.ts`: Environment variable configuration with runtime validation
     - `auth.server.ts`: Better Auth configuration with anonymous user support
     - `prisma.ts`: Database client with connection pooling
-    - `workingMemory.ts`: Mastra memory integration for user profiles
-    - `PrismaStorage.ts`: Mastra storage adapter for PostgreSQL
+    - `userProfile.ts`: Working memory schema and update logic
+    - `systemPrompt.ts`: System prompt generation with user profile and properties
+    - `findNearbyProperties.ts`: Geographic proximity search logic
     - `redis-stop-monitor.ts`: Cross-server stream coordination
   - `/app/components/`: Reusable UI components organized by feature
+  - `/app/prompts/`: AI system prompts (systemPrompt.md, welcome.md)
 - `/prisma`: Database schema and migrations
   - `schema.prisma`: Database models (includes Chat.activeStreamId field)
 - `/test`: Test setup and shared utilities
