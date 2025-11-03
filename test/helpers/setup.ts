@@ -4,9 +4,8 @@
 
 import * as Sentry from "@sentry/react-router";
 import { format, styleText } from "node:util";
-import { afterAll, beforeAll } from "vitest";
-import whyIsNodeRunning from "why-is-node-running";
 import seedProperties from "prisma/seed/seedProperties";
+import { beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
 import msw from "~/test/mocks/mswHandlers";
 
@@ -32,10 +31,11 @@ console.error = (...args: unknown[]) => {
     message.includes("hydration mismatch") ||
     // Vite HMR manifest patch failures (dev server interruptions)
     message.includes("Failed to fetch manifest patches") ||
-    message.includes("fetchAndApplyManifestPatches")
-  ) {
+    message.includes("fetchAndApplyManifestPatches") ||
+    // Vite optimize dep warnings (dev server interruptions)
+    message.includes("status of 504 (Outdated Optimize Dep)")
+  )
     return; // Suppress expected test warnings
-  }
   originalConsoleError(...args);
 };
 
@@ -51,18 +51,4 @@ beforeAll(async () => {
 
   // Start MSW server before all tests
   msw.listen({ onUnhandledRequest: "error" });
-});
-
-afterAll(async () => {
-  await prisma.$disconnect();
-
-  msw.close();
-
-  // Debug what's keeping Node alive (if tests hang)
-  if (process.env.DEBUG_HANG) {
-    setTimeout(() => {
-      console.warn("\n=== WHY IS NODE STILL RUNNING? ===");
-      whyIsNodeRunning();
-    }, 2_000);
-  }
 });

@@ -11,7 +11,6 @@ describe("Anonymous visits chat page", () => {
   let page: Page;
 
   beforeAll(async () => {
-    await prisma.user.deleteMany();
     page = await goto("/chat", {
       "x-forwarded-for": "146.70.195.182",
       "x-vercel-ip-city": "Los Angeles",

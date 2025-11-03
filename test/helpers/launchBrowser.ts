@@ -3,15 +3,16 @@ import { readdir, watch } from "node:fs/promises";
 import { resolve } from "node:path";
 import { URL as URLString } from "node:url";
 import {
+  type Browser,
   type BrowserContext,
   chromium,
   type Page,
   type Route,
 } from "playwright";
-import { afterAll } from "vitest";
 import "~/test/helpers/toMatchScreenshot";
 import { launchServer } from "./launchServer";
 
+let browser: Browser | undefined;
 let context: BrowserContext | undefined;
 const logger = debug("browser");
 
@@ -19,11 +20,12 @@ const logger = debug("browser");
  * Open a new page in the browser.
  *
  * @param path - The path to open.
+ * @param headers - The headers to set on the page.
  * @returns The page.
  */
 export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const { port } = await launchServer();
-  const context = await launchBrowser(port);
+  const context = await newContext(port);
   const page = await context.newPage();
   if (headers)
     await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
@@ -36,26 +38,18 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
 }
 
 /**
- * Launch a new browser instance and return the context.
+ * Create a new browser context.
  *
- * @param port - The port to use for the browser.
  * @returns The browser context.
  */
-export async function launchBrowser(port: number): Promise<BrowserContext> {
+async function newContext(port: number): Promise<BrowserContext> {
   if (context) return context;
 
-  const headless = process.env.CI ? true : !logger.enabled;
-  context = await chromium.launchPersistentContext("test/context", {
+  const browser = await launchBrowser();
+  context = await browser.newContext({
     baseURL: `http://localhost:${port}`,
-    headless,
-    slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
   });
-
   context.route("**", blockOutgoingRequests);
-
-  // Set navigation timeout to 5s less than hook timeout for better error messages
-  context.setDefaultNavigationTimeout(25_000);
-
   context
     .on("console", (msg) => {
       if (msg.type() === "error") console.error(msg.text());
@@ -65,7 +59,26 @@ export async function launchBrowser(port: number): Promise<BrowserContext> {
       logger("error:", error);
     });
 
+  // Set navigation timeout to 5s less than hook timeout for better error messages
+  context.setDefaultNavigationTimeout(25_000);
+
   return context;
+}
+
+/**
+ * Launch a new browser instance and return it.
+ *
+ * @returns The browser.
+ */
+async function launchBrowser(): Promise<Browser> {
+  if (browser) return browser;
+
+  const headless = process.env.CI ? true : !logger.enabled;
+  browser = await chromium.launch({
+    headless,
+    slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
+  });
+  return browser;
 }
 
 async function blockOutgoingRequests(route: Route): Promise<void> {
@@ -81,15 +94,6 @@ async function blockOutgoingRequests(route: Route): Promise<void> {
   const resourceType = route.request().resourceType();
   logger("blocking %s: %s", resourceType, hostname);
   await route.abort();
-}
-
-async function cleanup() {
-  if (context) {
-    logger("closing context");
-    await context.close();
-    context = undefined;
-    logger("context closed");
-  }
 }
 
 /**
@@ -128,9 +132,3 @@ async function hasEnoughDependencies(dirname: string) {
     return false;
   }
 }
-
-process.once("exit", cleanup);
-process.once("SIGINT", cleanup);
-process.once("SIGTERM", cleanup);
-
-afterAll(cleanup);

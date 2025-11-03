@@ -2,7 +2,6 @@ import debug from "debug";
 import { invariant } from "es-toolkit";
 import { type ChildProcess, execSync, fork } from "node:child_process";
 import { resolve } from "node:path";
-import { afterAll } from "vitest";
 import "~/test/helpers/toMatchScreenshot";
 
 const port = 9222;
@@ -55,22 +54,3 @@ export async function launchServer(): Promise<{ port: number }> {
   debug("server")("server is ready");
   return { port };
 }
-
-async function cleanup() {
-  if (worker && !worker.killed) {
-    debug("server")("killing worker");
-    worker.kill("SIGTERM");
-    // Force kill after 1s if still running
-    setTimeout(() => {
-      if (worker && !worker.killed) worker.kill("SIGKILL");
-    }, 1000);
-    debug("server")("worker killed");
-  }
-  worker = undefined;
-}
-
-process.once("exit", cleanup);
-process.once("SIGINT", cleanup);
-process.once("SIGTERM", cleanup);
-
-afterAll(cleanup);
