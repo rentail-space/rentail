@@ -22,10 +22,11 @@ export default async function converse(
 
   invariant(message.length > 5, "Message must be at least 5 characters long");
 
-  // Fill the input using pressSequentially to trigger React's onChange
+  // Type into the input - this properly triggers React events
   const input = page.locator('input[type="text"]');
-  await input.focus();
-  await input.pressSequentially(message);
+  await input.click();
+  await input.pressSequentially(message, { delay: 0 });
+
   await page.click('button[type="submit"]');
   await page.waitForLoadState("networkidle");
 
