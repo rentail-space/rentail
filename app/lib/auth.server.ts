@@ -167,6 +167,7 @@ async function copyAnonToNewUser(
   const fromAnon = await prisma.user.findUniqueOrThrow({
     where: { id: anonUser.id },
   });
+
   await prisma.user.update({
     data: {
       cityStateCountry: fromAnon.cityStateCountry,
@@ -174,7 +175,7 @@ async function copyAnonToNewUser(
       ip: fromAnon.ip,
       metadata: fromAnon.metadata ?? {},
       referrer: fromAnon.referrer,
-      workingMemory: fromAnon.workingMemory,
+      workingMemory: fromAnon.workingMemory ?? "{}",
     },
     where: { id: newUser.id },
   });

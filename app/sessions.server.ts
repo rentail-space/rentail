@@ -109,9 +109,12 @@ export async function updateNewUser(
   userId: string,
   headers: Headers,
 ): Promise<{ chat: Chat; messages: UIMessage[]; user: User }> {
+  const existing = await prisma.user.findUniqueOrThrow({
+    where: { id: userId },
+  });
   const user = await prisma.user.update({
     data: {
-      ...(await getInitialFields(headers)),
+      ...(await getInitialFields(headers, existing)),
       chats: {
         create: {
           id: ulid(),
@@ -162,10 +165,18 @@ export async function recentMessages(chatId: string): Promise<UIMessage[]> {
  * Get the initial fields for the user. These record the user's IP
  * address, geocode, user agent, referrer, and working memory.
  *
+ * NOTE: Sometimes the user was just created by Better Auth, and so we must set
+ * all the initial fields. Other times, the user already exists, and so we only
+ * need to set the fields that are not already set.
+ *
  * @param headers - The headers object
+ * @param existing - The existing user
  * @returns The initial fields for the user
  */
-async function getInitialFields(headers: Headers): Promise<{
+async function getInitialFields(
+  headers: Headers,
+  existing: User,
+): Promise<{
   cityStateCountry: string;
   geocode: zod.infer<typeof cachedLocation>;
   isBot: boolean;
@@ -183,12 +194,12 @@ async function getInitialFields(headers: Headers): Promise<{
   const referrer = headers.get("referer") ?? "";
   const workingMemory = JSON.stringify({ location: geocode });
   return {
-    cityStateCountry,
-    geocode,
+    cityStateCountry: existing.cityStateCountry || cityStateCountry,
+    geocode: (existing.geocode as zod.infer<typeof cachedLocation>) || geocode,
     isBot,
-    referrer,
-    userAgent,
-    workingMemory,
+    referrer: existing.referrer || referrer,
+    userAgent: existing.userAgent || userAgent,
+    workingMemory: existing.workingMemory || workingMemory,
   };
 }
 
