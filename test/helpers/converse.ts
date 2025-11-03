@@ -22,6 +22,10 @@ export default async function converse(
 
   invariant(message.length > 5, "Message must be at least 5 characters long");
 
+  // Wait for Vite to finish optimizing dependencies before interacting with page
+  // This prevents page reloads from clearing the input mid-interaction
+  await waitForDependencies(page);
+
   // Type into the input - this properly triggers React events
   const input = page.locator('input[type="text"]');
   await input.click();
@@ -29,17 +33,17 @@ export default async function converse(
 
   await page.click('button[type="submit"]');
   await page.waitForLoadState("networkidle");
-
-  await waitForDependencies(page);
   await page.waitForTimeout(100);
 
   // Wait for the stream to complete and working memory to be updated
   // The stream is finished when Chat.activeStreamId is set to null
   await withTimeout(async () => {
+    // First wait for chat to be created
     while (true) {
       const chat = await prisma.chat.findFirst({
         select: { activeStreamId: true },
       });
+      // Then wait for stream to finish (activeStreamId becomes null)
       if (chat && chat.activeStreamId === null) break;
       await page.waitForTimeout(100);
     }

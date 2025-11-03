@@ -12,9 +12,10 @@ export default defineConfig({
     exclude: ["build", "node_modules"],
     fileParallelism: false,
     globals: false,
-    hideSkippedTests: true,
+    hideSkippedTests: false,
     hookTimeout: 30_000, // 30 seconds for beforeAll/afterAll (server + browser startup)
     include: ["test/**/*.test.{ts,tsx}"],
+    isolate: true, // NOTE: without isolation sometimes tests hang
     onStackTrace,
     pool: "forks",
     reporters: process.env.GITHUB_ACTIONS ? ["github-actions"] : ["verbose"],

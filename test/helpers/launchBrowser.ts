@@ -34,6 +34,7 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   await waitForDependencies(page);
 
   await page.goto(path);
+  await waitForDependencies(page);
   return page;
 }
 
@@ -120,8 +121,12 @@ export async function waitForDependencies(page: Page) {
     }
   }
 
-  // Reload with cached dependencies
+  // Wait for React Router context to be available
   await page.waitForFunction(() => "__reactRouterContext" in window);
+
+  // Wait additional time for Vite to finish all dependency optimization waves
+  // Vite optimizes in multiple batches - we need to wait for all of them
+  await page.waitForTimeout(2000);
 }
 
 async function hasEnoughDependencies(dirname: string) {
