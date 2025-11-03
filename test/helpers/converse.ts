@@ -1,4 +1,4 @@
-import { invariant, withTimeout } from "es-toolkit";
+import { delay, invariant, withTimeout } from "es-toolkit";
 import type { Page } from "playwright";
 import { expect } from "vitest";
 import prisma from "~/lib/prisma";
@@ -16,28 +16,33 @@ export default async function converse(
   page: Page,
   message: string,
 ): Promise<string> {
-  expect(page.url()).toContain("/chat");
-  const initialCount = await prisma.messages.count();
-
   invariant(message.length > 5, "Message must be at least 5 characters long");
 
-  // Type into the input - this properly triggers React events
-  const input = page.locator('input[type="text"]');
-  await input.click();
-  await input.pressSequentially(message, { delay: 0 });
+  // NOTE: Make sure React is ready and reload to make sure the input field
+  // triggers React events, otherwise this test will fail.
+  expect(page.url()).toContain("/chat");
+  await page.waitForFunction(() => "__reactRouterContext" in window);
+  await page.reload({ waitUntil: "networkidle" });
 
+  const initialCount = await prisma.messages.count();
+  await page.fill('input[type="text"]', message);
   await page.click('button[type="submit"]');
   await page.waitForLoadState("networkidle");
 
-  // Wait for the messages to be saved to the database
-  // We expect 2 new messages: one from the user, one from the assistant
+  // NOTE: Wait just long enough to make sure the chat is streaming, and then
+  // for it to finish streaming.
   await withTimeout(async () => {
+    await delay(100);
     while (true) {
-      const currentCount = await prisma.messages.count();
-      if (currentCount >= initialCount + 2) break;
+      const chat = await prisma.chat.findFirst();
+      if (chat && chat.activeStreamId === null) break;
       await page.waitForTimeout(100);
     }
-  }, 15_000);
+  }, 1_000);
+
+  // We expect 2 new messages: one from the user, one from the assistant
+  const currentCount = await prisma.messages.count();
+  expect(currentCount).toBeGreaterThanOrEqual(initialCount + 2);
 
   // Wait for the assistant response bubble to appear in the UI
   const lastResponseBubble = page.locator(".chat-bubble-response").last();

@@ -23,7 +23,7 @@ expect.extend({
     await cleanBeforeTest();
 
     const testName = getTestName();
-    const filename = path.join(dirname, `${testName}.jpg`);
+    const filename = path.join(dirname, `${testName}.png`);
     const screenshot = await page.screenshot({
       animations: "disabled",
       caret: "hide",
@@ -60,7 +60,7 @@ expect.extend({
       };
     }
 
-    const diffFilename = path.join(dirname, `diff-${testName}.jpg`);
+    const diffFilename = path.join(dirname, `diff-${testName}.png`);
     await diffImage.save(diffFilename);
     return {
       message: () =>

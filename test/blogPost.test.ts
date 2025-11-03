@@ -95,7 +95,7 @@ describe("Blog Post Rendering", () => {
 
   test("blog post visual regression test", async () => {
     // Set consistent viewport for screenshots
-    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.setViewportSize({ width: 960, height: 600 });
 
     await page.reload();
 

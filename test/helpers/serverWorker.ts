@@ -6,9 +6,9 @@
  */
 
 import { delay, invariant } from "es-toolkit";
-import { existsSync } from "fs";
-import { readdir, rm, watch } from "fs/promises";
-import { resolve } from "path";
+import { existsSync } from "node:fs";
+import { readdir, rm, watch } from "node:fs/promises";
+import { resolve } from "node:path";
 import type { ViteDevServer } from "vite";
 import * as vite from "vite";
 import config from "vite.config";

@@ -1,4 +1,6 @@
 import debug from "debug";
+import { mkdir } from "node:fs/promises";
+import { resolve } from "node:path";
 import { URL as URLString } from "node:url";
 import {
   type Browser,
@@ -43,7 +45,7 @@ async function newContext(port: number): Promise<BrowserContext> {
   const browser = await launchBrowser();
   context = await browser.newContext({
     baseURL: `http://localhost:${port}`,
-    viewport: { width: 1920, height: 1080 },
+    viewport: { width: 960, height: 600 },
   });
   context.route("**", blockOutgoingRequests);
   context
@@ -74,6 +76,10 @@ async function launchBrowser(): Promise<Browser> {
     headless,
     slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
   });
+
+  // Ensure the __screenshots__ directory exists
+  await mkdir(resolve("__screenshots__"), { recursive: true });
+
   return browser;
 }
 
