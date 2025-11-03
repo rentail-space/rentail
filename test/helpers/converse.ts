@@ -21,8 +21,11 @@ export default async function converse(
   const initialCount = await prisma.messages.count();
 
   invariant(message.length > 5, "Message must be at least 5 characters long");
-  await page.focus('input[type="text"]');
-  await page.keyboard.type(message);
+
+  // Fill the input using pressSequentially to trigger React's onChange
+  const input = page.locator('input[type="text"]');
+  await input.focus();
+  await input.pressSequentially(message);
   await page.click('button[type="submit"]');
   await page.waitForLoadState("networkidle");
 
