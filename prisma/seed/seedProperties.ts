@@ -1,8 +1,25 @@
 import prisma from "app/lib/prisma";
 import debug from "debug";
 import { readdir, readFile } from "node:fs/promises";
-import { join, resolve } from "node:path";
+import { basename, join, resolve } from "node:path";
 import { z } from "zod";
+
+const schema = z.object({
+  name: z.string(),
+  city: z.string(),
+  state: z.string(),
+  country: z.string(),
+  address: z.string(),
+  latitude: z.number(),
+  longitude: z.number(),
+  squareFootage: z.number(),
+  numberOfStores: z.number(),
+  website: z.string(),
+  phone: z.string().optional(),
+  imageURLs: z.array(z.url()),
+  logoURL: z.url().optional(),
+  description: z.string(),
+});
 
 export default async function seedProperties() {
   debug("seed")("Seeding properties");
@@ -15,52 +32,16 @@ export default async function seedProperties() {
   for (const filename of filenames) {
     debug("seed")("Seeding %s", filename);
     const data = await readFile(join(dirname, filename), "utf-8");
-    const json = property.parse(JSON.parse(data));
+    const parsed = schema.parse(JSON.parse(data));
+
+    // Generate missing fields
+    const id = basename(filename, ".json");
+
     await prisma.property.upsert({
-      create: {
-        ...json,
-        id: json.id,
-        spaces: { create: json.spaces },
-      },
-      update: {
-        ...json,
-        spaces: {
-          upsert: json.spaces.map((space) => ({
-            create: space,
-            update: space,
-            where: { id: space.id },
-          })),
-        },
-      },
-      where: { id: json.id },
+      create: { ...parsed, id },
+      update: parsed,
+      where: { id },
     });
   }
   debug("seed")("Seeded %d properties", filenames.length);
 }
-
-const property = z.object({
-  address: z.string(),
-  city: z.string(),
-  country: z.string(),
-  description: z.string(),
-  id: z.cuid2(),
-  imageURLs: z.array(z.url()),
-  latitude: z.number(),
-  longitude: z.number(),
-  name: z.string(),
-  slug: z.string(),
-  state: z.string(),
-  website: z.string(),
-  spaces: z.array(
-    z.object({
-      available: z.literal(["week", "weekends"]),
-      cost: z.number(),
-      details: z.string(),
-      footTraffic: z.number(),
-      id: z.cuid2(),
-      imageURLs: z.array(z.url()),
-      name: z.string(),
-      size: z.number(),
-    }),
-  ),
-});

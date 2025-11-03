@@ -1,0 +1,33 @@
+{
+  "name": "Burbank Town Center",
+  "city": "Burbank",
+  "state": "CA",
+  "country": "US",
+  "address": "1500 N San Fernando Blvd, Burbank, CA 91504",
+  "latitude": 34.1873,
+  "longitude": -118.3258,
+  "squareFootage": 1200000,
+  "numberOfStores": 185,
+  "website": "http://www.burbanktowncenter.com",
+  "leasingPage": "http://www.burbanktowncenter.com/leasing/",
+  "specialtyLeasingContact": {
+    "name": "Yari Zepeda",
+    "phone": "(818) 566-7350",
+    "email": "Yari.Zepeda@burbanktowncenter.com"
+  },
+  "leasingContacts": [
+    {
+      "name": "Terrison Quinn",
+      "phone": "949-698-1107"
+    },
+    {
+      "name": "Casey Mahony",
+      "phone": "949-698-1108"
+    }
+  ],
+  "imageURLs": [
+    "http://www.burbanktowncenter.com/media_files/images/exterior.max-1900x1900.jpg"
+  ],
+  "footTraffic": "Popular community shopping mall, significant local and regional visitors",
+  "description": "Burbank Town Center stands as a 1.2 million square foot retail landmark serving the San Fernando Valley with accessible, diverse shopping and entertainment options. Located in the heart of Burbank's entertainment district, this property has become an essential shopping destination for residents throughout the valley and visitors seeking convenient access to quality retail in a vibrant community setting.\n\nThe center's tenant mix reflects its commitment to serving the practical shopping needs of families and professionals. Major anchors including Macy's and Sears provide classic department store shopping, while contemporary retailers and specialty boutiques create a balanced retail environment. The mall features approximately 185 stores spanning multiple retail categories, ensuring that shoppers can find virtually everything they need in one convenient location.\n\nWhat particularly distinguishes Burbank Town Center is its strong specialty leasing program, which actively seeks unique, locally-owned, and experiential retailers that create distinctive shopping opportunities unavailable at larger regional malls. The mall's management recognizes that successful modern retail requires a balance between established national brands and innovative specialty concepts that create memorable, differentiated shopping experiences.\n\nThe property's location in Burbank—a community known for its connection to entertainment and media industries—creates a distinctive character. The mall serves not only as a retail destination but also as a community gathering space where local residents can enjoy shopping, dining, and entertainment. The property's walkability and proximity to other Burbank attractions including Universal Studios, the Burbank Media District, and numerous restaurants enhance its appeal as a comprehensive entertainment destination.\n\nRecent renovations and updates have modernized the property, incorporating contemporary retail aesthetics while maintaining the accessible, family-friendly environment that has made Burbank Town Center popular for decades. The property's commitment to specialty leasing and experiential retail positions it well for continued success in an increasingly competitive retail landscape."
+}
