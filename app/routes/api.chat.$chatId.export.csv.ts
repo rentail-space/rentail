@@ -1,13 +1,13 @@
 import removeMd from "remove-markdown";
 import prisma from "~/lib/prisma";
-import type { Route } from "./+types/api.chat.$id.export.csv";
+import type { Route } from "./+types/api.chat.$chatId.export.csv";
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const { id } = params;
+  const { chatId } = params;
 
   // Get chat with messages
   const chat = await prisma.chat.findUnique({
-    where: { id },
+    where: { id: chatId },
     include: { messages: { orderBy: { createdAt: "asc" } } },
   });
 
@@ -38,7 +38,7 @@ export async function loader({ params }: Route.LoaderArgs) {
   return new Response(csvRows.join("\n"), {
     headers: {
       "Content-Type": "text/csv",
-      "Content-Disposition": `attachment; filename="chat-${id}.csv"`,
+      "Content-Disposition": `attachment; filename="chat-${chatId}.csv"`,
     },
   });
 }

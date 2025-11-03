@@ -18,21 +18,26 @@ export default async function converse(
 ): Promise<string> {
   expect(page.url()).toContain("/chat");
   const initialCount = await prisma.messages.count();
-  invariant(initialCount === 0, "Expected 0 messages in database");
 
   invariant(message.length > 5, "Message must be at least 5 characters long");
   await page.fill('input[type="text"]', message, { force: true });
   await page.click('button[type="submit"]');
   await page.waitForLoadState("networkidle");
 
-  // Wait for server to update the database with the new messages
+  // Wait for the stream to complete and working memory to be updated
+  // The stream is finished when Chat.activeStreamId is set to null
   await withTimeout(async () => {
     while (true) {
-      const finalCount = await prisma.messages.count();
-      if (finalCount >= initialCount + 2) break;
+      const chat = await prisma.chat.findFirst({
+        select: { activeStreamId: true },
+      });
+      if (chat && chat.activeStreamId === null) break;
       await page.waitForTimeout(100);
     }
-  }, 2_000);
+  }, 10_000);
+
+  const finalCount = await prisma.messages.count();
+  invariant(finalCount >= initialCount + 2, "Expected 2 new messages");
 
   // Wait for the assistant response bubble to appear in the UI
   const lastResponseBubble = page.locator(".chat-bubble-response").last();

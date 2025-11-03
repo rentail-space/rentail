@@ -13,6 +13,7 @@ import "~/test/helpers/toMatchScreenshot";
 import { launchServer } from "./launchServer";
 
 let context: BrowserContext | undefined;
+const logger = debug("browser");
 
 /**
  * Open a new page in the browser.
@@ -26,8 +27,69 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const page = await context.newPage();
   if (headers)
     await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
+
+  await page.goto("/");
+  await waitForDependencies(page);
+
   await page.goto(path);
   return page;
+}
+
+/**
+ * Launch a new browser instance and return the context.
+ *
+ * @param port - The port to use for the browser.
+ * @returns The browser context.
+ */
+export async function launchBrowser(port: number): Promise<BrowserContext> {
+  if (context) return context;
+
+  const headless = process.env.CI ? true : !logger.enabled;
+  context = await chromium.launchPersistentContext("test/context", {
+    baseURL: `http://localhost:${port}`,
+    headless,
+    slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
+  });
+
+  context.route("**", blockOutgoingRequests);
+
+  // Set navigation timeout to 5s less than hook timeout for better error messages
+  context.setDefaultNavigationTimeout(25_000);
+
+  context
+    .on("console", (msg) => {
+      if (msg.type() === "error") console.error(msg.text());
+      else logger("%s: %s", msg.type(), msg.text());
+    })
+    .on("weberror", (error) => {
+      logger("error:", error);
+    });
+
+  return context;
+}
+
+async function blockOutgoingRequests(route: Route): Promise<void> {
+  const { hostname } = new URLString(route.request().url());
+
+  if (hostname === "localhost" || hostname === "127.0.0.1") {
+    await route.continue();
+    return;
+  }
+
+  // Abort non-local requests to prevent cookie handling interference
+  // (Playwright waits for all requests before completing navigation)
+  const resourceType = route.request().resourceType();
+  logger("blocking %s: %s", resourceType, hostname);
+  await route.abort();
+}
+
+async function cleanup() {
+  if (context) {
+    logger("closing context");
+    await context.close();
+    context = undefined;
+    logger("context closed");
+  }
 }
 
 /**
@@ -64,60 +126,6 @@ async function hasEnoughDependencies(dirname: string) {
     return files.length > 100;
   } catch {
     return false;
-  }
-}
-
-/**
- * Launch a new browser instance and return the context.
- *
- * @param port - The port to use for the browser.
- * @returns The browser context.
- */
-export async function launchBrowser(port: number): Promise<BrowserContext> {
-  if (context) return context;
-
-  const headless = process.env.CI ? true : !debug.enabled("browser");
-  context = await chromium.launchPersistentContext("test/context", {
-    baseURL: `http://localhost:${port}`,
-    headless,
-    slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
-  });
-
-  context.route("**", blockOutgoingRequests);
-
-  // Set navigation timeout to 5s less than hook timeout for better error messages
-  context.setDefaultNavigationTimeout(25_000);
-
-  context.on("console", (msg) => debug("browser")(msg.text()));
-
-  const page = await context.newPage();
-  await page.goto("/");
-  await waitForDependencies(page);
-
-  return context;
-}
-
-async function blockOutgoingRequests(route: Route): Promise<void> {
-  const { hostname } = new URLString(route.request().url());
-
-  if (hostname === "localhost" || hostname === "127.0.0.1") {
-    await route.continue();
-    return;
-  }
-
-  // Abort non-local requests to prevent cookie handling interference
-  // (Playwright waits for all requests before completing navigation)
-  const resourceType = route.request().resourceType();
-  debug("browser")("blocking %s: %s", resourceType, hostname);
-  await route.abort();
-}
-
-async function cleanup() {
-  if (context) {
-    debug("browser")("closing context");
-    await context.close();
-    context = undefined;
-    debug("browser")("context closed");
   }
 }
 

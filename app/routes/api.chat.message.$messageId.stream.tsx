@@ -3,7 +3,7 @@ import { Redis } from "ioredis";
 import { createResumableStreamContext } from "resumable-stream";
 import env from "~/lib/env";
 import { findUserAndChat } from "~/sessions.server";
-import type { Route } from "./+types/api.chat.message.$mid.stream";
+import type { Route } from "./+types/api.chat.message.$messageId.stream";
 
 /**
  * Resume a message stream.

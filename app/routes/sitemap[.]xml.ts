@@ -33,7 +33,7 @@ async function blogPosts(): Promise<
       {
         id: `routes/blog/${slug}`,
         module: slug,
-        path: href("/blog/:post", { post: slug }),
+        path: href("/blog/:slug", { slug }),
       },
     ]),
   );

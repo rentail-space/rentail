@@ -1,6 +1,6 @@
 import findNearbyProperties from "~/lib/findNearbyProperties";
 import prisma from "~/lib/prisma";
-import type { Route } from "./+types/api.chat.$id.export.csv";
+import type { Route } from "./+types/api.chat.$chatId.properties";
 
 /**
  * Get the properties near the user for a chat.
@@ -8,11 +8,13 @@ import type { Route } from "./+types/api.chat.$id.export.csv";
  * @param params.id - The ID of the chat to get the properties for.
  */
 export async function loader({ params }: Route.LoaderArgs) {
-  const { id } = params;
-  const user = await prisma.user.findUnique({
-    where: { id },
+  const { chatId } = params;
+  const chat = await prisma.chat.findUnique({
+    where: { id: chatId },
+    include: { user: true },
   });
-  if (!user) return Response.json({ properties: [] });
+  if (!chat) return { properties: [] };
+  const user = chat.user;
   const properties = await findNearbyProperties({ maxDistance: 20, user });
-  return Response.json({ properties });
+  return { properties };
 }

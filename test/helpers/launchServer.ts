@@ -34,23 +34,22 @@ export async function launchServer(): Promise<{ port: number }> {
     },
   });
 
-  // Listen for worker messages
+  // Listen for worker's ready and error messages
   await new Promise<void>((resolve, reject) => {
     invariant(worker, "Server worker is not defined");
-    worker.on("message", (msg: { type: string; error?: string }) => {
-      if (msg.type === "ready") resolve();
-      if (msg.type === "error") reject(new Error(`Worker error: ${msg.error}`));
-    });
-
-    worker.on("error", (error) => {
-      debug("server")("worker error:", error);
-      reject(error);
-    });
-
-    worker.on("exit", (code) => {
-      if (code !== 0)
+    worker
+      .on("message", (msg: { type: string; error?: string }) => {
+        if (msg.type === "ready") resolve();
+        if (msg.type === "error")
+          reject(new Error(`Worker error: ${msg.error}`));
+      })
+      .on("error", (error) => {
+        debug("server")("worker error:", error);
+        reject(error);
+      })
+      .on("exit", (code) => {
         reject(new Error(`Worker stopped with exit code ${code}`));
-    });
+      });
   });
 
   debug("server")("server is ready");

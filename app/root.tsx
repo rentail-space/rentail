@@ -28,7 +28,6 @@ export const headers: HeadersFunction = () => {
 export const links: LinksFunction = () => [
   { href: "/favicon.ico", rel: "icon", type: "image/x-icon", sizes: "any" },
   { href: "/favicon.svg", rel: "icon", type: "image/svg+xml", sizes: "any" },
-  { href: "/site.webmanifest", rel: "manifest" },
   { href: "/apple-touch-icon.png", rel: "apple-touch-icon", sizes: "180x180" },
   {
     href: "/android-chrome-512x512.png",

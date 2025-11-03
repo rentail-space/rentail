@@ -1,11 +1,12 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import type { LoaderFunctionArgs } from "react-router";
+import type { Route } from "./+types/blog.$slug[.]jpg";
 
-export async function loader({ params }: LoaderFunctionArgs<{ post: string }>) {
+export async function loader({ params }: Route.LoaderArgs) {
   try {
+    const { slug } = params;
     const { buffer } = await readFile(
-      resolve("./app/data/blog", `${params.post}.jpg`),
+      resolve("./app/data/blog", `${slug}.jpg`),
     );
     return new Response(buffer as BodyInit, {
       headers: {
