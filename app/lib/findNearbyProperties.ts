@@ -1,7 +1,9 @@
 import { captureException } from "@sentry/react-router";
+import { Redis } from "ioredis";
 import type { User } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import prisma from "~/lib/prisma";
+import env from "./env";
 import { cleanParse } from "./userProfile";
 
 /**
@@ -12,15 +14,17 @@ import { cleanParse } from "./userProfile";
  * @param maxDistance The distance in miles to find the shopping centers within.
  * @returns Markup with shopping centers and spaces based on distance
  */
-export default async function findNearbyProperties({
-  maxDistance,
-  user,
-}: {
-  maxDistance: number;
-  user: User;
-}): Promise<PropertyGetPayload<{ include: { spaces: true } }>[]> {
+export default async function findNearbyProperties(
+  user: User,
+): Promise<PropertyGetPayload<{ include: { spaces: true } }>[]> {
   const { longitude, latitude } = await locationFromWorkingMemory(user);
   if (!longitude || !latitude) return [];
+
+  const redis = new Redis(env.REDIS_URL);
+  const maxDistance = 45; // miles
+  const key = `properties:${latitude}:${longitude}:${maxDistance}`;
+  const cachedProperties = await redis.get(key);
+  if (cachedProperties) return JSON.parse(cachedProperties);
 
   const properties = await prisma.property.findMany({
     include: { spaces: true },
@@ -35,6 +39,8 @@ export default async function findNearbyProperties({
       },
     },
   });
+  await redis.set(key, JSON.stringify(properties));
+  await redis.expire(key, 60 * 60 * 24 * 30); // 30 days
   return properties;
 }
 

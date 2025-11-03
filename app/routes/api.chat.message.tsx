@@ -53,10 +53,7 @@ export async function action({ request }: Route.ActionArgs) {
 
   // Set up Redis stop monitoring
   const { abortSignal } = await monitorStopSignal(chat.id);
-  const properties = await findNearbyProperties({
-    maxDistance: 20,
-    user,
-  });
+  const properties = await findNearbyProperties(user);
   logger("Found %d properties", properties.length);
 
   const stream = streamText({

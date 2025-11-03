@@ -22,62 +22,62 @@ describe("Proximity-based shopping center search", () => {
     longitude = theGrove.longitude;
   });
 
-  describe("Search from 10 miles north", () => {
+  describe("Search from 30 miles north", () => {
     let properties: Property[];
 
     beforeAll(async () => {
       properties = await createUserAndFind({
-        latitude: latitude + 10 / 69.172,
+        latitude: latitude + 30 / 69.172,
         longitude,
       });
     });
 
-    it("should find The Grove shopping center within 10 miles north", () => {
+    it("should find The Grove shopping center within 30 miles north", () => {
       expect(findTheGrove(properties)).toBeDefined();
     });
   });
 
-  describe("Search from 10 miles south", () => {
+  describe("Search from 30 miles south", () => {
     let properties: Property[];
 
     beforeAll(async () => {
       properties = await createUserAndFind({
-        latitude: latitude - 10 / 69.172,
+        latitude: latitude - 30 / 69.172,
         longitude,
       });
     });
 
-    it("should find The Grove shopping center within 10 miles south", () => {
+    it("should find The Grove shopping center within 30 miles south", () => {
       expect(findTheGrove(properties)).toBeDefined();
     });
   });
 
-  describe("Search from 10 miles east", () => {
+  describe("Search from 30 miles east", () => {
     let properties: Property[];
 
     beforeAll(async () => {
       properties = await createUserAndFind({
         latitude,
-        longitude: longitude + 10 / 57.393,
+        longitude: longitude + 30 / 57.393,
       });
     });
 
-    it("should find The Grove shopping center within 10 miles east", () => {
+    it("should find The Grove shopping center within 30 miles east", () => {
       expect(findTheGrove(properties)).toBeDefined();
     });
   });
 
-  describe("Search from 10 miles west", () => {
+  describe("Search from 30 miles west", () => {
     let properties: Property[];
 
     beforeAll(async () => {
       properties = await createUserAndFind({
         latitude,
-        longitude: longitude - 10 / 57.393,
+        longitude: longitude - 30 / 57.393,
       });
     });
 
-    it("should find The Grove shopping center within 10 miles west", () => {
+    it("should find The Grove shopping center within 30 miles west", () => {
       expect(findTheGrove(properties)).toBeDefined();
     });
   });

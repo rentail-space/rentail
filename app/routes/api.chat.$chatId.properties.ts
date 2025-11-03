@@ -15,6 +15,6 @@ export async function loader({ params }: Route.LoaderArgs) {
   });
   if (!chat) return { properties: [] };
   const user = chat.user;
-  const properties = await findNearbyProperties({ maxDistance: 20, user });
+  const properties = await findNearbyProperties(user);
   return { properties };
 }
