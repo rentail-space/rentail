@@ -6,7 +6,7 @@ import { invariant, last } from "es-toolkit";
 import humanFormat from "human-format";
 import { Redis } from "ioredis";
 import type { InputJsonValue } from "prisma/generated/internal/prismaNamespace";
-import { createResumableStreamContext } from "resumable-stream";
+import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { ulid } from "ulid";
 import env from "~/lib/env";
 import findNearbyProperties from "~/lib/findNearbyProperties";
@@ -92,20 +92,6 @@ export async function action({ request }: Route.ActionArgs) {
         data: { activeStreamId: null },
       });
     },
-
-    // Transform the stream to mask working memory tags before sending to client
-    experimental_transform: () => {
-      return new TransformStream({
-        transform(chunk, controller) {
-          if (chunk.type === "text-delta") {
-            controller.enqueue({
-              ...chunk,
-              text: maskWorkingMemoryTags(chunk.text),
-            });
-          } else controller.enqueue(chunk);
-        },
-      });
-    },
   });
 
   return stream.toUIMessageStreamResponse({
@@ -116,9 +102,9 @@ export async function action({ request }: Route.ActionArgs) {
 
       // Create a resumable stream from the SSE stream
       const streamContext = createResumableStreamContext({
-        waitUntil: async (promise) => await promise,
-        subscriber: new Redis(env.REDIS_URL),
         publisher: new Redis(env.REDIS_URL),
+        subscriber: new Redis(env.REDIS_URL),
+        waitUntil: async (promise) => await promise,
       });
       await streamContext.createNewResumableStream(streamId, () => stream);
 
@@ -140,7 +126,14 @@ export async function action({ request }: Route.ActionArgs) {
           activeStreamId: null,
           messages: {
             create: messages.map((message) => ({
-              content: message.parts as InputJsonValue,
+              content: message.parts.map((part) =>
+                part.type === "text"
+                  ? {
+                      type: "text",
+                      text: maskWorkingMemoryTags(part.text).trim(),
+                    }
+                  : part,
+              ) as InputJsonValue,
               id: ulid(),
               role: message.role as "assistant" | "user",
               type: "text",

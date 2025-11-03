@@ -2,6 +2,7 @@ import { invariant, withTimeout } from "es-toolkit";
 import type { Page } from "playwright";
 import { expect } from "vitest";
 import prisma from "~/lib/prisma";
+import { waitForDependencies } from "./launchBrowser";
 
 /**
  * Converse with the chatbot. Send a message to the chatbot and wait for the
@@ -23,6 +24,9 @@ export default async function converse(
   await page.fill('input[type="text"]', message, { force: true });
   await page.click('button[type="submit"]');
   await page.waitForLoadState("networkidle");
+
+  await waitForDependencies(page);
+  await page.waitForTimeout(100);
 
   // Wait for the stream to complete and working memory to be updated
   // The stream is finished when Chat.activeStreamId is set to null

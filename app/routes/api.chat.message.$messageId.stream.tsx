@@ -1,6 +1,6 @@
 import { UI_MESSAGE_STREAM_HEADERS } from "ai";
 import { Redis } from "ioredis";
-import { createResumableStreamContext } from "resumable-stream";
+import { createResumableStreamContext } from "resumable-stream/ioredis";
 import env from "~/lib/env";
 import { findUserAndChat } from "~/sessions.server";
 import type { Route } from "./+types/api.chat.message.$messageId.stream";
@@ -18,9 +18,9 @@ export async function loader({ request }: Route.LoaderArgs) {
     return new Response(null, { status: 204 });
 
   const streamContext = createResumableStreamContext({
-    waitUntil: async (promise) => await promise,
-    subscriber: new Redis(env.REDIS_URL),
     publisher: new Redis(env.REDIS_URL),
+    subscriber: new Redis(env.REDIS_URL),
+    waitUntil: async (promise) => await promise,
   });
 
   return new Response(
