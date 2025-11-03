@@ -2,7 +2,6 @@ import { invariant, withTimeout } from "es-toolkit";
 import type { Page } from "playwright";
 import { expect } from "vitest";
 import prisma from "~/lib/prisma";
-import { waitForDependencies } from "./launchBrowser";
 
 /**
  * Converse with the chatbot. Send a message to the chatbot and wait for the
@@ -21,10 +20,6 @@ export default async function converse(
   const initialCount = await prisma.messages.count();
 
   invariant(message.length > 5, "Message must be at least 5 characters long");
-
-  // Wait for Vite to finish optimizing dependencies before interacting with page
-  // This prevents page reloads from clearing the input mid-interaction
-  await waitForDependencies(page);
 
   // Type into the input - this properly triggers React events
   const input = page.locator('input[type="text"]');

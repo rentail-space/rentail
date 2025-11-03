@@ -1,6 +1,4 @@
 import debug from "debug";
-import { readdir, watch } from "node:fs/promises";
-import { resolve } from "node:path";
 import { URL as URLString } from "node:url";
 import {
   type Browser,
@@ -30,11 +28,7 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   if (headers)
     await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
 
-  await page.goto("/");
-  await waitForDependencies(page);
-
   await page.goto(path);
-  await waitForDependencies(page);
   return page;
 }
 
@@ -96,45 +90,4 @@ async function blockOutgoingRequests(route: Route): Promise<void> {
   const resourceType = route.request().resourceType();
   logger("blocking %s: %s", resourceType, hostname);
   await route.abort();
-}
-
-/**
- * Wait for dev server to build all cached dependencies and open the page.
- *
- * First navigation triggers Vite to build dependencies, then we wait for them
- * to be ready before reloading the page.
- *
- * @param page - The page to wait for.
- * @param path - The path to wait for.
- */
-export async function waitForDependencies(page: Page) {
-  const dirname = resolve("node_modules/.vite/deps");
-
-  // Wait for Vite to generate dependency cache (900+ files expected)
-  if (!(await hasEnoughDependencies(dirname))) {
-    try {
-      const watcher = watch(dirname);
-      for await (const _event of watcher)
-        if (await hasEnoughDependencies(dirname)) break;
-    } catch {
-      // Directory doesn't exist yet, wait a bit and try again
-      await page.waitForTimeout(1000);
-    }
-  }
-
-  // Wait for React Router context to be available
-  await page.waitForFunction(() => "__reactRouterContext" in window);
-
-  // Wait additional time for Vite to finish all dependency optimization waves
-  // Vite optimizes in multiple batches - we need to wait for all of them
-  await page.waitForTimeout(2000);
-}
-
-async function hasEnoughDependencies(dirname: string) {
-  try {
-    const files = await readdir(dirname);
-    return files.length > 100;
-  } catch {
-    return false;
-  }
 }
