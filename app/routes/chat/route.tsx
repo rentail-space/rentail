@@ -19,10 +19,10 @@ export const handle = { showHeader: false, showFooter: false };
 
 export default function ChatPage() {
   const [query, setQuery] = useQueryState("q");
-  const [chatId] = useState(() => ulid());
 
   // Access data from root loader first, our loaded depends on it
   const found = useRouteLoaderData<typeof loader>("root");
+  const [chatId] = useState(() => found?.chat?.id ?? ulid());
   const initialMessages = found?.messages ?? [
     { id: chatId, parts: [{ text: welcome, type: "text" }], role: "assistant" },
   ];
