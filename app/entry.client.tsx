@@ -3,10 +3,10 @@ import { StrictMode, startTransition } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { HydratedRouter } from "react-router/dom";
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.SENTRY_DSN) {
   Sentry.init({
     dsn: "https://515a0fc92e7e2fb27be04676288ef875@o510761.ingest.us.sentry.io/4509539620618240",
-    environment: process.env.NODE_ENV,
+    environment: process.env.NODE_ENV ? "production" : "development",
     integrations: [
       Sentry.browserTracingIntegration(),
       Sentry.browserProfilingIntegration(),

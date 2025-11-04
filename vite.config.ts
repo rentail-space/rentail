@@ -11,7 +11,9 @@ export default defineConfig(async (config) => ({
     reactRouter(),
     tsconfigPaths(),
     devtoolsJson(),
-    sentryReactRouter({ telemetry: !!process.env.SENTRY_AUTH_TOKEN }, config),
+    process.env.SENTRY_AUTH_TOKEN
+      ? sentryReactRouter({ telemetry: true }, config)
+      : undefined,
   ],
   optimizeDeps: {
     include: ["react", "react-dom", "streamdown"],
