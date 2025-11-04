@@ -16,12 +16,12 @@ async function scrapeRetailSpaces() {
   const page = await browser.newPage();
 
   try {
-    console.log("Navigating to Santa Monica Place leasing page...");
+    console.info("Navigating to Santa Monica Place leasing page...");
     await page.goto("https://www.santamonicaplace.com/leasing/", {
       waitUntil: "domcontentloaded",
     });
 
-    console.log("Extracting retail space data...");
+    console.info("Extracting retail space data...");
     const spaces = await page.evaluate(() => {
       const results: RetailSpace[] = [];
 
@@ -77,13 +77,13 @@ async function scrapeRetailSpaces() {
       return results;
     });
 
-    console.log("Found %d retail spaces", spaces.length);
+    console.info("Found %d retail spaces", spaces.length);
 
     // Write to JSON file
     const outputPath = "./santa-monica-place-retail.json";
     await writeFile(outputPath, JSON.stringify(spaces, null, 2));
-    console.log("Data written to %s", outputPath);
-    console.log(JSON.stringify(spaces.slice(0, 10), null, 2));
+    console.info("Data written to %s", outputPath);
+    console.info(JSON.stringify(spaces.slice(0, 10), null, 2));
     return spaces;
   } finally {
     await browser.close();
@@ -93,7 +93,7 @@ async function scrapeRetailSpaces() {
 // Run the scraper
 scrapeRetailSpaces()
   .then((spaces) => {
-    console.log("\n✅ Successfully scraped %d retail spaces", spaces.length);
+    console.info("\n✅ Successfully scraped %d retail spaces", spaces.length);
     process.exit(0);
   })
   .catch((error) => {

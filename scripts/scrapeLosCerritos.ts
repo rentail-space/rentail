@@ -18,13 +18,13 @@ async function scrapeSpaces() {
   const page = await browser.newPage();
 
   try {
-    console.log("Navigating to Los Cerritos Center leasing page...");
+    console.info("Navigating to Los Cerritos Center leasing page...");
     await page.goto(
       "https://quikspace.macerich.com/commercial-property/us/ca/cerritos/los-cerritos-center-1/",
       { waitUntil: "domcontentloaded", timeout: 60000 },
     );
 
-    console.log("Extracting space data...");
+    console.info("Extracting space data...");
     const spaces = await page.evaluate(() => {
       const results: Space[] = [];
       const nodes = document.querySelectorAll(".space");
@@ -108,7 +108,7 @@ async function scrapeSpaces() {
       return results;
     });
 
-    console.log("Found %d spaces", spaces.length);
+    console.info("Found %d spaces", spaces.length);
 
     // Try to find and associate images
     const imageDirs = resolve("los-cerritos-images");
@@ -133,7 +133,7 @@ async function scrapeSpaces() {
         }, space.spaceNumber);
 
         if (imageUrl) {
-          console.log("Found image for space %s", space.spaceNumber);
+          console.info("Found image for space %s", space.spaceNumber);
           space.imageUrl = imageUrl;
         }
       } catch {
@@ -144,11 +144,11 @@ async function scrapeSpaces() {
     // Write to JSON file
     const outputPath = "./los-cerritos-center-spaces.json";
     await writeFile(outputPath, JSON.stringify(spaces, null, 2));
-    console.log("\nData written to %s", outputPath);
+    console.info("\nData written to %s", outputPath);
 
     // Print preview
-    console.log("\nPreview of scraped data:");
-    console.log(JSON.stringify(spaces.slice(0, 10), null, 2));
+    console.info("\nPreview of scraped data:");
+    console.info(JSON.stringify(spaces.slice(0, 10), null, 2));
 
     return spaces;
   } finally {
@@ -159,7 +159,7 @@ async function scrapeSpaces() {
 // Run the scraper
 scrapeSpaces()
   .then((spaces) => {
-    console.log("\n✅ Successfully scraped %d spaces", spaces.length);
+    console.info("\n✅ Successfully scraped %d spaces", spaces.length);
     process.exit(0);
   })
   .catch((error) => {

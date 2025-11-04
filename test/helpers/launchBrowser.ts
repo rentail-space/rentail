@@ -57,7 +57,7 @@ async function newContext(): Promise<BrowserContext> {
       else logger("%s: %s", msg.type(), msg.text());
     })
     .on("weberror", (error) => {
-      logger("error:", error);
+      logger("error: %s", error.error);
     });
 
   // Set navigation timeout to 5s less than hook timeout for better error messages
