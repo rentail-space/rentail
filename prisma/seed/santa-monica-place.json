@@ -37,5 +37,49 @@
     "https://upload.wikimedia.org/wikipedia/commons/f/fa/Santa_Monica_Place_%28outdoor_mall%29_panoramic.jpg"
   ],
   "footTraffic": "Premier open-air shopping center, affluent visitors and tourists, high lifestyle appeal",
-  "description": "Santa Monica Place represents a unique shopping destination that seamlessly blends retail excellence with Southern California's iconic beach lifestyle and cultural sophistication. Spanning 534,000 square feet across three levels in the heart of downtown Santa Monica, this open-air shopping center has been meticulously designed to create a premium retail environment that complements Santa Monica's renowned beach community character.\n\nThe property features over 80 carefully curated retailers and dining establishments housed in an elegant open-air format that emphasizes California lifestyle and outdoor shopping experiences. Major retailers including Nordstrom anchor the property alongside luxury brands like Louis Vuitton, Tiffany & Co., and Rolex, creating an upscale retail environment that appeals to affluent residents and affluent tourists drawn to Santa Monica's beach lifestyle appeal.\n\nWhat particularly distinguishes Santa Monica Place is its strategic location—just blocks from the Pacific Ocean and steps from the iconic Third Street Promenade. This proximity to the beach creates a distinctive lifestyle shopping experience where visitors can combine world-class retail with beach access, ocean views, and the laid-back sophistication Santa Monica is known for worldwide. The property's open-air format allows shoppers to enjoy Southern California's excellent weather while shopping and dining.\n\nThe center's retail strategy emphasizes lifestyle and experience over pure retail transaction volume. Retailers including Nike, Uniqlo, and Tesla showcase how contemporary brands are creating experiential retail environments that engage customers beyond traditional shopping. The rooftop dining deck features restaurants offering ocean views and sophisticated dining experiences that transform the property into a comprehensive lifestyle destination.\n\nThe demographics of Santa Monica Place's trade area reflect an exceptionally affluent customer base—average household income exceeds $180,000, with 70% of residents holding bachelor's degrees or higher. This affluent, educated consumer base has enabled the property to maintain premium positioning and attract exclusive retail brands. The property's success demonstrates how thoughtful location selection, upscale tenant curation, and lifestyle integration can create a shopping destination that achieves premium pricing power and traffic volume."
+  "description": "Santa Monica Place represents a unique shopping destination that seamlessly blends retail excellence with Southern California's iconic beach lifestyle and cultural sophistication. Spanning 534,000 square feet across three levels in the heart of downtown Santa Monica, this open-air shopping center has been meticulously designed to create a premium retail environment that complements Santa Monica's renowned beach community character.\n\nThe property features over 80 carefully curated retailers and dining establishments housed in an elegant open-air format that emphasizes California lifestyle and outdoor shopping experiences. Major retailers including Nordstrom anchor the property alongside luxury brands like Louis Vuitton, Tiffany & Co., and Rolex, creating an upscale retail environment that appeals to affluent residents and affluent tourists drawn to Santa Monica's beach lifestyle appeal.\n\nWhat particularly distinguishes Santa Monica Place is its strategic location—just blocks from the Pacific Ocean and steps from the iconic Third Street Promenade. This proximity to the beach creates a distinctive lifestyle shopping experience where visitors can combine world-class retail with beach access, ocean views, and the laid-back sophistication Santa Monica is known for worldwide. The property's open-air format allows shoppers to enjoy Southern California's excellent weather while shopping and dining.\n\nThe center's retail strategy emphasizes lifestyle and experience over pure retail transaction volume. Retailers including Nike, Uniqlo, and Tesla showcase how contemporary brands are creating experiential retail environments that engage customers beyond traditional shopping. The rooftop dining deck features restaurants offering ocean views and sophisticated dining experiences that transform the property into a comprehensive lifestyle destination.\n\nThe demographics of Santa Monica Place's trade area reflect an exceptionally affluent customer base—average household income exceeds $180,000, with 70% of residents holding bachelor's degrees or higher. This affluent, educated consumer base has enabled the property to maintain premium positioning and attract exclusive retail brands. The property's success demonstrates how thoughtful location selection, upscale tenant curation, and lifestyle integration can create a shopping destination that achieves premium pricing power and traffic volume.",
+  "spaces": [
+    {
+      "number": "K20C",
+      "type": "Cart",
+      "size": 60,
+      "floor": 1
+    },
+    {
+      "number": "146",
+      "type": "Inline",
+      "size": 5470,
+      "floor": 1
+    },
+    {
+      "number": "156",
+      "type": "Inline",
+      "size": 565,
+      "floor": 1
+    },
+    {
+      "number": "166",
+      "type": "Inline",
+      "size": 2569,
+      "floor": 1
+    },
+    {
+      "number": "168",
+      "type": "Inline",
+      "size": 2607,
+      "floor": 1
+    },
+    {
+      "number": "238",
+      "type": "Inline",
+      "size": 756,
+      "floor": 2
+    },
+    {
+      "number": "244",
+      "type": "Inline",
+      "size": 2645,
+      "floor": 2
+    }
+  ]
 }

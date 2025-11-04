@@ -100,22 +100,19 @@ model Property {
 }
 
 model PropertySpace {
-  available   String   @map("available")
-  cost        Int      @map("cost")
-  createdAt   DateTime @map("created_at")   @default(now())
-  details     String   @map("details")
-  footTraffic Int      @map("foot_traffic")
-  id          String   @map("id")           @id
-  imageURLs   String[] @map("image_urls")
-  name        String   @map("name")
-  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-  propertyId  String   @map("property_id")
-  size        Int      @map("size")
-  updatedAt   DateTime @map("updated_at")   @updatedAt
+  available  Boolean   @map("available")
+  id         String    @map("id")          @id
+  number     String    @map("number")
+  type       SpaceType @map("type")
+  size       Int       @map("size")
+  floor      Int       @map("floor")
+  imageURLs  String[]  @map("image_urls")
+  property   Property  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId String    @map("property_id")
+  updatedAt  DateTime  @map("updated_at")  @updatedAt
 
   @@map("property_spaces")
 }
-
 
 model Session {
   id        String                      @id
@@ -166,3 +163,11 @@ enum Role {
   assistant
   user
 }
+
+enum SpaceType {
+  Cart
+  Inline
+  Storage
+  Other
+}
+

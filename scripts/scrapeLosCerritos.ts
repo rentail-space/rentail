@@ -1,16 +1,16 @@
 #!/usr/bin/env tsx
 import { existsSync } from "node:fs";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 
 interface Space {
-  spaceNumber: string;
-  spaceType?: "Cart" | "Inline" | "Storage";
-  totalSpace?: number;
+  number: string;
+  type?: "Cart" | "Inline" | "Storage";
+  size?: number;
   floor?: number;
   availableDate?: string;
-  imageUrl?: string;
+  imageURLs?: string[];
 }
 
 async function scrapeSpaces() {
@@ -44,7 +44,7 @@ async function scrapeSpaces() {
           const spaceNumber = spaceMatch[1] || spaceMatch[2];
           if (!spaceNumber) continue;
 
-          const space: Space = { spaceNumber };
+          const space: Space = { number: spaceNumber };
 
           // Extract space type (Cart, Inline, Storage, etc.)
           const typeMatch = text.match(
@@ -53,14 +53,14 @@ async function scrapeSpaces() {
           if (typeMatch) {
             const type = typeMatch[1].trim() as "Cart" | "Inline" | "Storage";
             if (type && !type.includes("Space") && type.length < 20)
-              space.spaceType = type;
+              space.type = type;
           }
 
           // Try another approach for space type
-          if (!space.spaceType) {
-            if (text.match(/\bCart\b/)) space.spaceType = "Cart";
-            else if (text.match(/\bInline\b/)) space.spaceType = "Inline";
-            else if (text.match(/\bStorage\b/)) space.spaceType = "Storage";
+          if (!space.type) {
+            if (text.match(/\bCart\b/)) space.type = "Cart";
+            else if (text.match(/\bInline\b/)) space.type = "Inline";
+            else if (text.match(/\bStorage\b/)) space.type = "Storage";
           }
 
           // Extract total space (usually in SF)
@@ -72,7 +72,7 @@ async function scrapeSpaces() {
               totalMatch[1].trim().replace(/,/g, ""),
               10,
             );
-            if (available >= 50) space.totalSpace = available;
+            if (available >= 50) space.size = available;
           }
 
           // Extract floor
@@ -97,9 +97,7 @@ async function scrapeSpaces() {
           // Only add spaces with at least spaceType and floor
           if (isCart || isInline) {
             // Avoid duplicates
-            const isDuplicate = results.some(
-              (r) => r.spaceNumber === space.spaceNumber,
-            );
+            const isDuplicate = results.some((r) => r.number === space.number);
             if (!isDuplicate) results.push(space);
           }
         }
@@ -130,30 +128,34 @@ async function scrapeSpaces() {
             }
           }
           return undefined;
-        }, space.spaceNumber);
+        }, space.number);
 
         if (imageUrl) {
-          console.info("Found image for space %s", space.spaceNumber);
-          space.imageUrl = imageUrl;
+          console.info("Found image for space %s", space.number);
+          space.imageURLs = [imageUrl];
         }
       } catch {
         // Silent fail for image search
       }
     }
 
-    // Write to JSON file
-    const outputPath = "./los-cerritos-center-spaces.json";
-    await writeFile(outputPath, JSON.stringify(spaces, null, 2));
-    console.info("\nData written to %s", outputPath);
-
     // Print preview
     console.info("\nPreview of scraped data:");
     console.info(JSON.stringify(spaces.slice(0, 10), null, 2));
-
+    await updateSpace("los-cerritos-center.json", spaces);
     return spaces;
   } finally {
     await browser.close();
   }
+}
+
+async function updateSpace(filename: string, spaces: Space[]) {
+  const file = resolve("prisma/seed/", filename);
+  const json = await readFile(file, "utf-8");
+  const center = JSON.parse(json);
+  center.spaces = spaces;
+  await writeFile(file, JSON.stringify(center, null, 2));
+  console.info("Spaces updated in %s", filename);
 }
 
 // Run the scraper

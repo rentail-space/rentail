@@ -19,6 +19,18 @@ const schema = z.object({
   imageURLs: z.array(z.url()),
   logoURL: z.url().optional(),
   description: z.string(),
+
+  spaces: z
+    .array(
+      z.object({
+        number: z.string(),
+        type: z.enum(["Cart", "Inline", "Storage", "Other"]),
+        size: z.number(),
+        floor: z.number(),
+        imageURLs: z.array(z.url()).optional(),
+      }),
+    )
+    .default([]),
 });
 
 export default async function seedProperties() {
@@ -38,10 +50,31 @@ export default async function seedProperties() {
     const id = basename(filename, ".json");
 
     await prisma.property.upsert({
-      create: { ...parsed, id },
-      update: parsed,
+      create: {
+        ...parsed,
+        id,
+        spaces: { create: [] },
+      },
+      update: { ...parsed, spaces: {} },
       where: { id },
     });
+
+    await prisma.propertySpace.updateMany({
+      data: { available: false },
+      where: { propertyId: id },
+    });
+    for (const space of parsed.spaces) {
+      const data = {
+        ...space,
+        available: true,
+        property: { connect: { id } },
+      };
+      await prisma.propertySpace.upsert({
+        create: { ...data, id: `${id}-${space.number}` },
+        update: data,
+        where: { id: `${id}-${space.number}` },
+      });
+    }
   }
   debug("seed")("Seeded %d properties", filenames.length);
 }

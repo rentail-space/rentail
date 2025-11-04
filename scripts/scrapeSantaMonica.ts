@@ -1,14 +1,13 @@
 #!/usr/bin/env tsx
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { chromium } from "playwright";
 
 interface RetailSpace {
-  spaceNumber?: string;
-  spaceType?: "Cart" | "Inline" | "Storage";
-  totalSpace?: number;
+  number?: string;
+  type?: "Cart" | "Inline" | "Storage";
+  size?: number;
   floor?: number;
-  availableDate?: string;
-  imageUrl?: string;
 }
 
 async function scrapeRetailSpaces() {
@@ -48,14 +47,14 @@ async function scrapeRetailSpaces() {
             // Map the labels to our interface properties
             switch (label.toLowerCase()) {
               case "space number":
-                space.spaceNumber = value;
+                space.number = value;
                 break;
               case "space type":
-                space.spaceType = value as "Cart" | "Inline" | "Storage";
+                space.type = value as "Cart" | "Inline" | "Storage";
                 break;
               case "total space sf":
               case "total space":
-                space.totalSpace = Number.parseInt(value.replace(/,/g, ""), 10);
+                space.size = Number.parseInt(value.replace(/,/g, ""), 10);
                 break;
               case "floor":
                 space.floor = Number.parseInt(
@@ -64,30 +63,36 @@ async function scrapeRetailSpaces() {
                 );
                 break;
               case "available date":
-                space.availableDate = value;
+                if (!value.toLowerCase().includes("immediate")) continue;
                 break;
             }
           }
 
           // Only add if we found meaningful data
-          if (space.spaceNumber || space.spaceType) results.push(space);
+          if (space.number || space.type) results.push(space);
         }
       }
 
       return results;
     });
 
-    console.info("Found %d retail spaces", spaces.length);
-
-    // Write to JSON file
-    const outputPath = "./santa-monica-place-retail.json";
-    await writeFile(outputPath, JSON.stringify(spaces, null, 2));
-    console.info("Data written to %s", outputPath);
+    // Print preview
+    console.info("\nPreview of scraped data:");
     console.info(JSON.stringify(spaces.slice(0, 10), null, 2));
+    await updateSpace("santa-monica-place.json", spaces);
     return spaces;
   } finally {
     await browser.close();
   }
+}
+
+async function updateSpace(filename: string, spaces: RetailSpace[]) {
+  const file = resolve("prisma/seed/", filename);
+  const json = await readFile(file, "utf-8");
+  const center = JSON.parse(json);
+  center.spaces = spaces;
+  await writeFile(file, JSON.stringify(center, null, 2));
+  console.info("Spaces updated in %s", filename);
 }
 
 // Run the scraper
