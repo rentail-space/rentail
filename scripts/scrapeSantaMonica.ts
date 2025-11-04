@@ -1,15 +1,14 @@
+#!/usr/bin/env tsx
 import { writeFile } from "node:fs/promises";
 import { chromium } from "playwright";
 
 interface RetailSpace {
-  name: string;
   spaceNumber?: string;
-  spaceType?: string;
-  totalSpaceSF?: string;
-  floor?: string;
-  leaseRate?: string;
-  additionalRent?: string;
+  spaceType?: "Cart" | "Inline" | "Storage";
+  totalSpace?: number;
+  floor?: number;
   availableDate?: string;
+  imageUrl?: string;
 }
 
 async function scrapeRetailSpaces() {
@@ -36,9 +35,7 @@ async function scrapeRetailSpaces() {
         const nestedList = item.querySelector("ul");
 
         if (heading && nestedList) {
-          const space: RetailSpace = {
-            name: heading.textContent?.trim() || "",
-          };
+          const space: RetailSpace = {};
 
           // Extract all the detail items from the nested list
           const details = nestedList.querySelectorAll("li");
@@ -54,20 +51,17 @@ async function scrapeRetailSpaces() {
                 space.spaceNumber = value;
                 break;
               case "space type":
-                space.spaceType = value;
+                space.spaceType = value as "Cart" | "Inline" | "Storage";
                 break;
               case "total space sf":
               case "total space":
-                space.totalSpaceSF = value;
+                space.totalSpace = Number.parseInt(value.replace(/,/g, ""), 10);
                 break;
               case "floor":
-                space.floor = value;
-                break;
-              case "lease rate":
-                space.leaseRate = value;
-                break;
-              case "additional rent":
-                space.additionalRent = value;
+                space.floor = Number.parseInt(
+                  value.replace(/[a-zA-Z]/g, ""),
+                  10,
+                );
                 break;
               case "available date":
                 space.availableDate = value;
@@ -89,6 +83,8 @@ async function scrapeRetailSpaces() {
     const outputPath = "./santa-monica-place-retail.json";
     await writeFile(outputPath, JSON.stringify(spaces, null, 2));
     console.log("Data written to %s", outputPath);
+    console.log(JSON.stringify(spaces.slice(0, 10), null, 2));
+    return spaces;
   } finally {
     await browser.close();
   }
@@ -97,7 +93,7 @@ async function scrapeRetailSpaces() {
 // Run the scraper
 scrapeRetailSpaces()
   .then((spaces) => {
-    console.log(`\n✅ Successfully scraped ${spaces.length} retail spaces`);
+    console.log("\n✅ Successfully scraped %d retail spaces", spaces.length);
     process.exit(0);
   })
   .catch((error) => {
