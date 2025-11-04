@@ -34,13 +34,15 @@ export async function action({ request }: Route.ActionArgs) {
     headers: request.headers,
   });
 
+  // We're only looking for last message sent by the user
   const { messages: bodyMessages } = (await request.clone().json()) as {
     messages: UIMessage[];
   };
   const lastMessage = last(bodyMessages) as UIMessage;
   invariant(lastMessage, "Last message is required");
 
-  // Clear any previous active stream and save the user message
+  // For robustness, we're clearing any previous active stream.
+  // We're also saving the user's message to the database.
   await prisma.chat.update({
     data: {
       activeStreamId: null,
@@ -55,14 +57,22 @@ export async function action({ request }: Route.ActionArgs) {
     },
     where: { id: chat.id },
   });
+
+  // We're getting the recent messages to pass to the stream, since we need AI
+  // to operate on the full conversation history.
   const messages = await recentMessages(chat.id);
 
   // Set up Redis stop monitoring
   const { abortSignal } = await monitorStopSignal(chat.id);
+
+  // Find properties near the user to include in the system prompt, so AI can
+  // recommend properties based on the user's location.
   const properties = await findNearbyProperties(user);
   logger("Found %d properties", properties.length);
 
-  // Set up the resumable stream ID before starting the stream
+  // NOTE: onFinish may be called before consumeSseStream, so we need to store
+  // the active stream ID in the database right now. The docs show a different
+  // approach, but it fails certain test cases (quick responses).
   const activeStreamId = ulid();
   await prisma.chat.update({
     data: { activeStreamId },
@@ -119,8 +129,9 @@ export async function action({ request }: Route.ActionArgs) {
     },
 
     onFinish: async ({ messages }) => {
-      // Process messages and update working memory asynchronously
-      // This can take time but doesn't block stream completion
+      // 1. Clear the active stream ID since the stream is complete
+      // 2. Save the assistant's messages to the database
+      // 3. Update the user's working memory based on the assistant's messages
       await prisma.chat.update({
         where: { id: chat.id },
         data: {

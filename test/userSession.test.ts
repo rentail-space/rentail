@@ -21,7 +21,7 @@ describe("Anonymous visits chat page", () => {
       "x-vercel-ip-longitude": "-122.08421",
     });
     await converse(page, "Hello, how are you?");
-  }, 30_000);
+  });
 
   it("loads chat page and shows sign-in button", async () => {
     await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();

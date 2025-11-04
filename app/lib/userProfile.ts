@@ -165,28 +165,27 @@ export default function updateUserProfile({
   messages: UIMessage[];
   workingMemory: string;
 }): string {
-  const lastResponse = last(
-    messages.filter((message) => message.role === "assistant"),
-  )
-    ?.parts.filter((part) => part.type === "text")
-    .map((part) => part.text)
-    .join("\n");
-  if (!lastResponse) return workingMemory;
-
   try {
+    const lastMessage = last(messages);
+    invariant(
+      lastMessage?.role === "assistant",
+      "Last message must be from assistant",
+    );
+
+    const lastResponse = lastMessage?.parts
+      .filter((part) => part.type === "text")
+      .map((part) => part.text)
+      .join("\n");
+    invariant(lastResponse, "Last response must be a string");
+
     const updates = extractWorkingMemory(lastResponse);
-    if (!updates) return workingMemory;
+    invariant(updates, "No updates found in last response");
     logger("Updating working memory: %o", updates);
 
     const current = cleanParse(workingMemory);
     // Validate the updates against our schema
-    const { data: validated, error, success } = userProfile.safeParse(updates);
-    if (!success) {
-      captureException(error, {
-        extra: { workingMemory, relevant: lastResponse },
-      });
-      return workingMemory;
-    }
+    const { data: validated, error } = userProfile.safeParse(updates);
+    if (error) throw error;
 
     // Deep merge with current profile (new values override old ones)
     const merged = {
@@ -200,9 +199,8 @@ export default function updateUserProfile({
 
     return JSON.stringify(merged);
   } catch (error) {
-    captureException(error, {
-      extra: { workingMemory, relevant: lastResponse },
-    });
+    logger("Error updating user profile: %o", error);
+    captureException(error, { extra: { workingMemory } });
     return workingMemory;
   }
 }
