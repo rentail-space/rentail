@@ -10,6 +10,8 @@ import {
 } from "playwright";
 import "~/test/helpers/toMatchScreenshot";
 
+export const port = 9222;
+
 let context: BrowserContext | undefined;
 const logger = debug("browser");
 
@@ -21,14 +23,11 @@ const logger = debug("browser");
  * @returns The page.
  */
 export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
-  const context = await newContext(9222);
+  const context = await newContext();
 
   const page = await context.newPage();
-  if (headers)
-    await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
-
-  await page.goto(path);
-  await page.waitForLoadState("networkidle");
+  await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
+  await page.goto(path, { waitUntil: "networkidle" });
   return page;
 }
 
@@ -37,7 +36,7 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
  *
  * @returns The browser context.
  */
-async function newContext(port: number): Promise<BrowserContext> {
+async function newContext(): Promise<BrowserContext> {
   if (context) return context;
 
   const headless = process.env.CI ? true : !logger.enabled;

@@ -130,7 +130,7 @@ function safeParseJSON(str: string): Record<string, unknown> | null {
  * @returns Text with working memory tags removed
  */
 export function maskWorkingMemoryTags(text: string): string {
-  return text.replace(matchWorkingMemoryTags, "");
+  return text.replace(matchWorkingMemoryTags, "").trim();
 }
 
 /**
@@ -171,7 +171,7 @@ export default async function updateUserProfile({
     ?.parts.filter((part) => part.type === "text")
     .map((part) => part.text)
     .join("\n");
-  invariant(lastResponse, "No relevant messages found");
+  if (!lastResponse) return workingMemory;
 
   try {
     const updates = extractWorkingMemory(lastResponse);

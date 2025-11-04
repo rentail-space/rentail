@@ -13,7 +13,7 @@ export default defineConfig({
     fileParallelism: false,
     globals: false,
     hideSkippedTests: false,
-    hookTimeout: 30_000, // 30 seconds for beforeAll/afterAll (server + browser startup)
+    hookTimeout: 90_000, // 90 seconds for beforeAll/afterAll (server + browser startup)
     include: ["test/**/*.test.{ts,tsx}"],
     isolate: true, // NOTE: without isolation sometimes tests hang
     onStackTrace,

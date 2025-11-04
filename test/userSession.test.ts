@@ -20,9 +20,8 @@ describe("Anonymous visits chat page", () => {
       "x-vercel-ip-latitude": "37.42240",
       "x-vercel-ip-longitude": "-122.08421",
     });
-
     await converse(page, "Hello, how are you?");
-  }, 90_000);
+  }, 30_000);
 
   it("loads chat page and shows sign-in button", async () => {
     await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();

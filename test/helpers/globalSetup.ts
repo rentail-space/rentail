@@ -3,9 +3,10 @@
  */
 
 import seedProperties from "prisma/seed/seedProperties";
+import { port } from "./launchBrowser";
 import { launchServer } from "./launchServer";
 
 export default async function setup() {
   await seedProperties();
-  await launchServer(9222);
+  await launchServer(port);
 }

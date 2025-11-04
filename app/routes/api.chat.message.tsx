@@ -39,6 +39,7 @@ export async function action({ request }: Route.ActionArgs) {
   };
   const lastMessage = last(bodyMessages) as UIMessage;
   invariant(lastMessage, "Last message is required");
+
   await prisma.messages.create({
     data: {
       chatId: chat.id,
@@ -48,7 +49,6 @@ export async function action({ request }: Route.ActionArgs) {
       type: "text",
     },
   });
-
   const messages = await recentMessages(chat.id);
 
   // Set up Redis stop monitoring
@@ -65,37 +65,30 @@ export async function action({ request }: Route.ActionArgs) {
     system: systemPrompt({ userProfile, properties }),
 
     onAbort: async () => {
-      logger("Aborted by user");
+      logger("Aborted %s by user", chat.id);
     },
 
     onError: (error) => {
-      console.error("Error in agent stream", {
-        error,
-        chat: chat.id,
-      });
-      captureException(error, {
-        extra: { chat },
-      });
+      captureException(error, { extra: { chat } });
     },
 
     onFinish: async ({ steps, usage }) => {
       logger(
-        "Finished: %d steps => total tokens %s",
+        "Finished %s: %d steps => total tokens %s",
+        chat.id,
         steps.length,
         humanFormat(usage.totalTokens ?? 0),
       );
-      await prisma.chat.update({
-        where: { id: chat.id },
-        data: { activeStreamId: null },
-      });
     },
   });
 
   return stream.toUIMessageStreamResponse({
     headers,
 
+    generateMessageId: () => ulid(),
+
     consumeSseStream: async ({ stream }) => {
-      const streamId = ulid();
+      const activeStreamId = ulid();
 
       // Create a resumable stream from the SSE stream
       const streamContext = createResumableStreamContext({
@@ -103,15 +96,19 @@ export async function action({ request }: Route.ActionArgs) {
         subscriber: new Redis(env.REDIS_URL),
         waitUntil: async (promise) => await promise,
       });
-      await streamContext.createNewResumableStream(streamId, () => stream);
+      await streamContext.createNewResumableStream(
+        activeStreamId,
+        () => stream,
+      );
 
       await prisma.chat.update({
+        data: { activeStreamId },
         where: { id: chat.id },
-        data: { activeStreamId: streamId },
       });
     },
 
     onError: (error) => {
+      console.error(error);
       captureException(error, { extra: { chat } });
       return "Error in agent stream";
     },
@@ -123,15 +120,13 @@ export async function action({ request }: Route.ActionArgs) {
           activeStreamId: null,
           messages: {
             create: messages.map((message) => ({
-              content: message.parts.map((part) =>
-                part.type === "text"
-                  ? {
-                      type: "text",
-                      text: maskWorkingMemoryTags(part.text).trim(),
-                    }
-                  : part,
-              ) as InputJsonValue,
-              id: ulid(),
+              content: message.parts
+                .filter((part) => part.type === "text")
+                .map((part) => ({
+                  type: "text",
+                  text: maskWorkingMemoryTags(part.text).trim(),
+                })),
+              id: message.id,
               role: message.role as "assistant" | "user",
               type: "text",
             })),

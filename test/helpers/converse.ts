@@ -1,4 +1,4 @@
-import { invariant, withTimeout } from "es-toolkit";
+import { delay, invariant, withTimeout } from "es-toolkit";
 import type { Page } from "playwright";
 import { expect } from "vitest";
 import prisma from "~/lib/prisma";
@@ -18,6 +18,7 @@ export default async function converse(
 ): Promise<string> {
   expect(page.url()).toContain("/chat");
   const initialCount = await prisma.messages.count();
+  const responseBubbles = await page.locator(".chat-bubble-response").count();
 
   invariant(message.length > 5, "Message must be at least 5 characters long");
 
@@ -34,20 +35,26 @@ export default async function converse(
   await page.waitForLoadState("networkidle");
   expect(await input.inputValue()).toBe("");
 
-  // Wait for the messages to be saved to the database
-  // We expect 2 new messages: one from the user, one from the assistant
+  // Wait for the new response bubble to appear
+  await page.waitForSelector(
+    `.chat-bubble-response:nth-child(${responseBubbles + 1})`,
+    { state: "visible" },
+  );
+
+  // Wait for the assistant to finish streaming
   await withTimeout(async () => {
     while (true) {
-      const currentCount = await prisma.messages.count();
-      if (currentCount >= initialCount + 2) break;
-      await page.waitForTimeout(100);
+      const chat = await prisma.chat.findFirst();
+      console.log("chat", chat?.activeStreamId);
+      if (chat && chat.activeStreamId === null) break;
+      await delay(1000);
     }
-  }, 15_000);
+  }, 30_000);
+
+  // We expect 2 new messages: one from the user, one from the assistant
+  const currentCount = await prisma.messages.count();
+  expect(currentCount).toBeGreaterThanOrEqual(initialCount + 2);
 
   // Wait for the assistant response bubble to appear in the UI
-  const lastResponseBubble = page.locator(".chat-bubble-response").last();
-  await lastResponseBubble.waitFor({ state: "visible" });
-
-  const lastResponseText = await lastResponseBubble.innerText();
-  return lastResponseText;
+  return page.locator(".chat-bubble-response").last().innerText();
 }

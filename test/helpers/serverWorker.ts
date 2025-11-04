@@ -18,7 +18,7 @@ let devServer: ViteDevServer | undefined;
 async function startServer() {
   invariant(process.send, "process.send is not defined");
   try {
-    const port = process.env.PORT ? Number(process.env.PORT) : 9222;
+    const port = Number(process.env.PORT);
 
     // Remove the directory at "deps" before starting the dev server
     await rm(resolve("node_modules/.vite/deps"), {
