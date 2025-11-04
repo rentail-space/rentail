@@ -1,14 +1,11 @@
 import type { UIMessage } from "ai";
 import { Loader2 } from "lucide-react";
-import React, { type JSX, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
-import {
-  type ScrollToBottom,
-  useStickToBottomContext,
-} from "use-stick-to-bottom";
-import { maskWorkingMemoryTags } from "~/lib/userProfile";
+import { useStickToBottomContext } from "use-stick-to-bottom";
 import askQuestion from "~/routes/chat/askQuestion";
+import ResponseMessage from "./ResponseMessage";
 
 export default function Messages({
   error,
@@ -48,7 +45,7 @@ export default function Messages({
           message.role === "user" ? (
             <UserMessage key={index.toString()} message={message} />
           ) : message.role === "assistant" ? (
-            <AssistantMessage
+            <ResponseMessage
               askQuestion={askQuestion({ scrollToBottom, setQuery })}
               isLast={index === messages.length - 1}
               key={index.toString()}
@@ -67,14 +64,18 @@ export default function Messages({
 
 function UserMessage({ message }: { message: UIMessage }) {
   // NOTE: always render as plain text to avoid HTML injection
+  const multipleLines = message.parts
+    .filter((part) => part.type === "text")
+    .map((part) => part.text)
+    .join("\n")
+    .split("\n");
+
   return (
     <div className="chat chat-end">
       <div className="chat-bubble chat-bubble-accent chat-bubble-user prose prose-base">
-        {message.parts
-          .filter((part) => part.type === "text")
-          .map((part, index) => (
-            <p key={index.toString()}>{part.text}</p>
-          ))}
+        {multipleLines.map((line, index) => (
+          <p key={index.toString()}>{line}</p>
+        ))}
       </div>
     </div>
   );
@@ -86,55 +87,6 @@ function _AbortedMessage() {
       <div className="text-red-500">The conversation was aborted.</div>
     </div>
   );
-}
-
-function AssistantMessage({
-  askQuestion,
-  message,
-  scrollToBottom,
-}: {
-  askQuestion: (question: string) => Promise<void>;
-  isLast: boolean;
-  message: UIMessage;
-  scrollToBottom: ScrollToBottom;
-}) {
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  // Auto-scroll during streaming updates
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      // Small delay to allow content to render
-      setTimeout(scrollToBottom, 10);
-    });
-
-    if (contentRef.current) {
-      observer.observe(contentRef.current, {
-        characterData: true,
-        childList: true,
-        subtree: true,
-      });
-    }
-
-    return () => observer.disconnect();
-  }, [scrollToBottom]);
-
-  return message.parts.map((part, index) => {
-    switch (part.type) {
-      case "text": {
-        return (
-          <ResponseMessage
-            askQuestion={askQuestion}
-            contentRef={contentRef}
-            key={index.toString()}
-            text={part.text}
-          />
-        );
-      }
-      default: {
-        return null;
-      }
-    }
-  });
 }
 
 function _ReasoningMessage({
@@ -175,39 +127,6 @@ function _ReasoningMessage({
   );
 }
 
-function ResponseMessage({
-  askQuestion,
-  contentRef,
-  text,
-}: {
-  askQuestion: (question: string) => Promise<void>;
-  contentRef: React.RefObject<HTMLDivElement | null>;
-  text: string;
-}) {
-  return (
-    <div className="chat chat-start">
-      <div className="chat-image avatar mr-2 h-8 w-8">
-        <img
-          alt="rental space"
-          height="32px"
-          src="/favicon-96x96.png"
-          width="32px"
-        />
-      </div>
-      <div className="chat-bubble chat-bubble-response prose prose-base">
-        <div ref={contentRef}>
-          <Streamdown
-            components={getComponents({ askQuestion })}
-            remarkPlugins={[remarkGfm]}
-          >
-            {maskWorkingMemoryTags(text)}
-          </Streamdown>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function TypingIndicator() {
   return (
     <div className="rounded-lg bg-white px-4 py-4">
@@ -226,65 +145,4 @@ function ErrorNotice({ error }: { error: Error }) {
       {error.message || "Some error happened"}
     </div>
   );
-}
-
-function getComponents({
-  askQuestion,
-}: {
-  askQuestion: (question: string) => Promise<void>;
-}): {
-  [Key in keyof JSX.IntrinsicElements]?: React.ComponentType<
-    JSX.IntrinsicElements[Key]
-  >;
-} {
-  return {
-    a: ({ children, href }) => {
-      const isAsk =
-        href?.startsWith("https://rentail.space/") || href?.startsWith("/");
-      return isAsk ? (
-        <a
-          className="btn btn-soft btn-primary"
-          href={`?q=${children}`}
-          onClick={(event) => {
-            event.preventDefault();
-            askQuestion(React.Children.toArray(children).join(""));
-          }}
-        >
-          {children}
-        </a>
-      ) : (
-        <a className="link-primary" href={href} target="_blank">
-          {children}
-        </a>
-      );
-    },
-    button: ({ children }) => (
-      <button className="btn btn-soft btn-primary" type="button">
-        {children}
-      </button>
-    ),
-    h1: ({ children }) => (
-      <h1 className={"mt-6 mb-2 font-semibold text-xl"}>{children}</h1>
-    ),
-    h2: ({ children }) => (
-      <h2 className={"mt-6 mb-2 font-semibold text-lg"}>{children}</h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className={"mt-6 mb-2 font-semibold text-md"}>{children}</h3>
-    ),
-    hr: () => <hr className="border-gray-300" />,
-    li: ({ children }) => <li className={"py-1"}>{children}</li>,
-    ol: ({ children }) => (
-      <ol className={"ml-4 list-outside list-decimal"}>{children}</ol>
-    ),
-    p: ({ children }) => (
-      <p className="mt-2 mb-2 whitespace-pre-wrap">{children}</p>
-    ),
-    strong: ({ children }) => (
-      <span className={"font-semibold"}>{children}</span>
-    ),
-    ul: ({ children }) => (
-      <ul className={"ml-4 list-outside list-disc"}>{children}</ul>
-    ),
-  };
 }
