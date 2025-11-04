@@ -86,7 +86,7 @@ describe("Blog Listing", () => {
 
   describe("clicks blog post link", () => {
     beforeAll(async () => {
-      await page.locator('a[href^="/blog/"]').first().click();
+      await page.locator('a[href^="/blog/"]').last().click();
       await page.waitForURL(/.*\/blog\/.*/);
       await page.waitForLoadState("networkidle");
     });
