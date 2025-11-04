@@ -30,15 +30,24 @@ export default function PropertyList({
   }, [chatId, lastAssistantMessage?.id]);
 
   return (
-    <div className="mx-auto flex max-w-xl flex-wrap gap-4">
-      {properties.map((property) => (
-        <PropertyLink
-          hoveredProperty={hoveredProperty}
-          key={property.id}
-          property={property}
-          setHoveredProperty={setHoveredProperty}
-        />
-      ))}
+    <div className="mx-auto hidden min-h-16 max-w-full overflow-x-auto md:block">
+      <div className="flex w-max flex-row flex-nowrap gap-4">
+        {properties
+          // Sort by number of available spaces, then by name
+          .sort((a, b) =>
+            a.spaces.length === b.spaces.length
+              ? a.name.localeCompare(b.name)
+              : b.spaces.length - a.spaces.length,
+          )
+          .map((property) => (
+            <PropertyLink
+              hoveredProperty={hoveredProperty}
+              key={property.id}
+              property={property}
+              setHoveredProperty={setHoveredProperty}
+            />
+          ))}
+      </div>
     </div>
   );
 }
@@ -55,7 +64,6 @@ function PropertyLink({
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: container for hover card positioning
     <div
-      className="relative"
       onMouseEnter={() => setHoveredProperty(property.id)}
       onMouseLeave={() => setHoveredProperty(null)}
     >
@@ -67,7 +75,7 @@ function PropertyLink({
         <img
           alt="Shopping mall"
           className="h-4 w-4"
-          src="/images/shopping-mall.png"
+          src={property.logoURL || "/images/shopping-mall.png"}
         />
         <span className="max-w-48 truncate text-base-content/70 text-sm">
           {property.name}
@@ -91,7 +99,7 @@ function HoverCard({
 }) {
   return (
     <Activity name="HoverCard" mode={mode}>
-      <div className="absolute bottom-full left-0 z-50 mb-2 w-80 rounded-lg border border-base-300 bg-base-100 p-4 shadow-xl">
+      <div className="absolute top-4 right-4 z-50 mb-2 w-80 rounded-lg border border-base-300 bg-base-100 p-4 shadow-xl">
         <h3 className="mb-2 font-bold text-lg">{property.name}</h3>
         <p className="mb-3 line-clamp-5 text-base-content/70 text-sm">
           {property.description}
@@ -115,6 +123,14 @@ function HoverCard({
             }}
             src={property.imageURLs[0]}
           />
+        </div>
+
+        <div className="mt-4 font-bold text-base-content/70 text-lg">
+          {property.spaces.length > 1
+            ? `${property.spaces.length} available spaces`
+            : property.spaces.length === 1
+              ? "1 available space"
+              : "All spaces leased"}
         </div>
       </div>
     </Activity>
