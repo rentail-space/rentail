@@ -68,32 +68,19 @@ export default function Property() {
 function Space({ space }: { space: PropertySpace }) {
   return (
     <div className="rounded-lg border border-gray-300 p-4">
-      <h2 className="font-bold text-xl">{space.name}</h2>
-      <div className="prose prose-lg">
-        <Markdown>{space.details}</Markdown>
-      </div>
+      <h2 className="font-bold text-xl">{space.number}</h2>
       <div className="grid grid-cols-4 gap-4">
-        <Metric
-          label="cost"
-          value={space.cost.toLocaleString(undefined, {
-            style: "currency",
-            currency: "USD",
-          })}
-          unit="pre week"
-        />
         <Metric
           label="size"
           value={space.size.toLocaleString(undefined, { style: "decimal" })}
           unit="sqft"
         />
+        <Metric label="type" value={space.type} />
         <Metric
-          label="foot traffic"
-          value={space.footTraffic.toLocaleString(undefined, {
-            style: "decimal",
-          })}
-          unit="visitors"
+          label="floor"
+          value={space.floor.toLocaleString(undefined, { style: "decimal" })}
+          unit="floor"
         />
-        <Metric label="available" value={space.available} />
       </div>
     </div>
   );
