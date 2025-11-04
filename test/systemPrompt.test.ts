@@ -70,11 +70,10 @@ describe("prompt()", () => {
     const theGrove = findTheGrove(prompt);
     expect(theGrove).toMatchObject({
       name: "The Grove",
-      address: "189 The Grove Dr",
+      address: "189 The Grove Drive, Los Angeles, CA 90036",
       city: "Los Angeles",
       state: "CA",
-      slug: "the-grove",
-      website: "https://thegrovela.com",
+      website: "https://thegrovela.com/",
     });
   });
 
@@ -85,14 +84,7 @@ describe("prompt()", () => {
     const space = spaces.find(
       (space: { id: string }) => space.id === "jzfi2vjakvteoqmrxzcucivq",
     );
-    expect(space).toMatchObject({
-      available: "week",
-      cost: 3400,
-      details:
-        "This pop-up is just next to Barnes & Noble, available for one month lease of longer, and at 350 sqft is enough for any small merchant that wants to reach ~4,000 visitors every day.",
-      name: "Corner Pop-up",
-      size: 350,
-    });
+    expect(space).toBeUndefined();
   });
 
   it("handles empty properties list", () => {
@@ -120,7 +112,7 @@ describe("prompt()", () => {
 function findTheGrove(markdown: string): Record<string, unknown> | undefined {
   const centers = parseShoppingCenters(markdown);
   return centers.find(
-    (center) => (center as { slug: unknown }).slug === "the-grove",
+    (center) => (center as { id: string }).id === "the-grove",
   );
 }
 

@@ -171,10 +171,7 @@ async function createUserAndFind(coordinates: {
     },
   });
 
-  const properties = await findNearbyProperties({
-    maxDistance: 20,
-    user,
-  });
+  const properties = await findNearbyProperties(user);
 
   // Clean up the test user
   await prisma.user.delete({ where: { id: user.id } });

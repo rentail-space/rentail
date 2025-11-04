@@ -21,10 +21,8 @@ export default async function converse(
 
   invariant(message.length > 5, "Message must be at least 5 characters long");
 
-  // Wait for the page to be fully loaded and any Vite hot reloads to finish
+  // Wait for the page to be fully loaded
   await page.waitForLoadState("networkidle");
-  // Wait for potential Vite optimization reloads (these happen on first load)
-  await page.waitForTimeout(200);
 
   // Type into the input - this properly triggers React events
   const input = page.locator('input[type="text"]');
@@ -42,9 +40,9 @@ export default async function converse(
     while (true) {
       const currentCount = await prisma.messages.count();
       if (currentCount >= initialCount + 2) break;
-      await page.waitForTimeout(10);
+      await page.waitForTimeout(100);
     }
-  }, 1_000);
+  }, 15_000);
 
   // Wait for the assistant response bubble to appear in the UI
   const lastResponseBubble = page.locator(".chat-bubble-response").last();

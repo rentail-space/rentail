@@ -62,7 +62,7 @@ function PropertyLink({
       <Link
         className="flex flex-row items-center gap-2 rounded-lg px-4 py-2 hover:bg-base-200"
         target="_blank"
-        to={`/property/${property.slug}`}
+        to={`/property/${property.id}`}
       >
         <img
           alt="Shopping mall"
