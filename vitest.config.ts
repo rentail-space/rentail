@@ -18,7 +18,9 @@ export default defineConfig({
     isolate: true, // NOTE: without isolation sometimes tests hang
     onStackTrace,
     pool: "forks",
-    reporters: process.env.GITHUB_ACTIONS ? ["github-actions"] : ["verbose"],
+    reporters: process.env.GITHUB_ACTIONS
+      ? ["github-actions", "hanging-process"]
+      : ["verbose"],
     setupFiles: "test/helpers/setup.ts",
     globalSetup: "test/helpers/globalSetup.ts",
     teardownTimeout: 10_000, // 10 seconds for browser/server cleanup
