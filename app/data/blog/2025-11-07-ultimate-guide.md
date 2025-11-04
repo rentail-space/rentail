@@ -1,5 +1,5 @@
 ---
-title: "The Ultimate Guide"
+title: The Ultimate Guide
 image: "2025-11-07-ultimate-guide.jpg"
 alt: "Man in dark shirt and jeans standing in modern, empty office space with concrete floors and floor-to-ceiling windows, holding tablet, with natural light streaming across industrial-style loft interior."
 summary: "Finding the perfect retail space goes beyond simply looking at rent prices. The location you choose can make or break your retail business success, making this step crucial in your leasing journey."
