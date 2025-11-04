@@ -33,6 +33,7 @@ export default function ChatPage() {
     status,
     stop,
   } = useChat({
+    id: found?.chat?.id,
     generateId: () => ulid(),
     messages: initialMessages,
     resume: true, // Enable automatic stream resumption

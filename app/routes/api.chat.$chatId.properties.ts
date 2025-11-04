@@ -13,6 +13,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     where: { id: chatId },
     include: { user: true },
   });
+  console.log(chatId, chat);
   if (!chat) return { properties: [] };
   const user = chat.user;
   const properties = await findNearbyProperties(user);
