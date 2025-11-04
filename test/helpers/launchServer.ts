@@ -4,16 +4,15 @@ import { type ChildProcess, execSync, fork } from "node:child_process";
 import { resolve } from "node:path";
 import "~/test/helpers/toMatchScreenshot";
 
-const port = 9222;
 let worker: ChildProcess | undefined;
 
 /**
  * Launch a new server instance.
  *
- * @returns The server worker.
+ * @param port - The port to launch the server on.
  */
-export async function launchServer(): Promise<{ port: number }> {
-  if (worker) return { port };
+export async function launchServer(port: number): Promise<void> {
+  if (worker) return;
 
   debug("server")("launching server");
   try {
@@ -52,5 +51,4 @@ export async function launchServer(): Promise<{ port: number }> {
   });
 
   debug("server")("server is ready");
-  return { port };
 }

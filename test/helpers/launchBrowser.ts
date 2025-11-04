@@ -1,18 +1,15 @@
+import debug from "debug";
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { URL as URLString } from "node:url";
-import debug from "debug";
 import {
-  type Browser,
   type BrowserContext,
   chromium,
   type Page,
   type Route,
 } from "playwright";
 import "~/test/helpers/toMatchScreenshot";
-import { launchServer } from "./launchServer";
 
-let browser: Browser | undefined;
 let context: BrowserContext | undefined;
 const logger = debug("browser");
 
@@ -24,8 +21,7 @@ const logger = debug("browser");
  * @returns The page.
  */
 export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
-  const { port } = await launchServer();
-  const context = await newContext(port);
+  const context = await newContext(9222);
 
   const page = await context.newPage();
   if (headers)
@@ -44,7 +40,12 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
 async function newContext(port: number): Promise<BrowserContext> {
   if (context) return context;
 
-  const browser = await launchBrowser();
+  const headless = process.env.CI ? true : !logger.enabled;
+  const browser = await chromium.launch({
+    headless,
+    slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
+  });
+
   context = await browser.newContext({
     baseURL: `http://localhost:${port}`,
     viewport: { width: 960, height: 600 },
@@ -52,7 +53,8 @@ async function newContext(port: number): Promise<BrowserContext> {
   context.route("**", blockOutgoingRequests);
   context
     .on("console", (msg) => {
-      if (msg.type() === "error") console.error(msg.text());
+      if (msg.text().includes("Download the React DevTools")) return;
+      else if (msg.type() === "error") console.error(msg.text());
       else logger("%s: %s", msg.type(), msg.text());
     })
     .on("weberror", (error) => {
@@ -61,28 +63,10 @@ async function newContext(port: number): Promise<BrowserContext> {
 
   // Set navigation timeout to 5s less than hook timeout for better error messages
   context.setDefaultNavigationTimeout(25_000);
-
-  return context;
-}
-
-/**
- * Launch a new browser instance and return it.
- *
- * @returns The browser.
- */
-async function launchBrowser(): Promise<Browser> {
-  if (browser) return browser;
-
-  const headless = process.env.CI ? true : !logger.enabled;
-  browser = await chromium.launch({
-    headless,
-    slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
-  });
-
   // Ensure the __screenshots__ directory exists
   await mkdir(resolve("__screenshots__"), { recursive: true });
 
-  return browser;
+  return context;
 }
 
 async function blockOutgoingRequests(route: Route): Promise<void> {

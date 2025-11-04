@@ -20,6 +20,7 @@ export default defineConfig({
     pool: "forks",
     reporters: process.env.GITHUB_ACTIONS ? ["github-actions"] : ["verbose"],
     setupFiles: "test/helpers/setup.ts",
+    globalSetup: "test/helpers/globalSetup.ts",
     teardownTimeout: 10_000, // 10 seconds for browser/server cleanup
     testTimeout: 30_000, // 30 seconds for E2E tests with browser interaction
   },
