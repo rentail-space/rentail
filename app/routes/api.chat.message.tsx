@@ -129,9 +129,7 @@ export async function action({ request }: Route.ActionArgs) {
     },
 
     onFinish: async ({ messages }) => {
-      // 1. Clear the active stream ID since the stream is complete
-      // 2. Save the assistant's messages to the database
-      // 3. Update the user's working memory based on the assistant's messages
+      // 1. Clear the active stream ID and save messages immediately
       await prisma.chat.update({
         where: { id: chat.id },
         data: {
@@ -150,15 +148,17 @@ export async function action({ request }: Route.ActionArgs) {
               type: "text",
             })),
           },
+        },
+      });
 
-          user: {
-            update: {
-              workingMemory: updateUserProfile({
-                messages,
-                workingMemory: user.workingMemory,
-              }),
-            },
-          },
+      // 2. Update the user's working memory asynchronously (slower operation)
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          workingMemory: updateUserProfile({
+            messages,
+            workingMemory: user.workingMemory,
+          }),
         },
       });
     },
