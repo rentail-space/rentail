@@ -1,6 +1,6 @@
 ---
 title: "Rent Negotiation Secrets: How One Merchant Cut Their Monthly Payment by 40% (Without Moving)"
-image: "2025-11-21-rent-negotiation.jpg"
+image: "2025-11-25-rent-negotiation.jpg"
 alt: "Woman in light blue denim shirt and glasses leaning over wooden desk speaking on phone while viewing laptop, in bright minimalist home office with white walls, framed portrait art, and desk accessories including white mug with pampas grass, stacked books, and wireless headphones."
 summary: "Every day you overpay rent is profit you'll never recover. Every month you delay negotiation is money left on the table. Every year you accept above-market terms is competitive advantage you're giving away."
 ---

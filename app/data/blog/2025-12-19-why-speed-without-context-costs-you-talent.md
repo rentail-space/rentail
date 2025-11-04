@@ -1,6 +1,6 @@
 ---
 title: "The Type-A Trap: Why Speed Without Context Costs You Talent"
-image: "2025-12-19-fists.jpg"
+image: "2025-12-23-fists.jpg"
 alt: "Diverse raised fists against neutral background, symbolizing team members voices needing to be heard and understood by leadership before quick judgments are made"
 summary: "Type-A leaders have a superpower: decisiveness. They see patterns fast, synthesize information quickly, and drive toward conclusions while others are still processing. This trait builds companies."
 ---

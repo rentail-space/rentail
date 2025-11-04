@@ -1,6 +1,6 @@
 ---
 title: "The Comparison Trap: Why Focus Beats Imitation"
-image: "2025-12-05-eagle.jpg"
+image: "2025-12-09-eagle.jpg"
 alt: "Close-up of hawk with intense focused gaze, representing the sharp precision and singular attention required to excel at specific strengths rather than scattered comparison to competitors"
 summary: "Every founder hits this wall. You're building something real, gaining traction, then you see a competitor drop a massive campaign. Suddenly your wins feel small. Your team's execution looks inadequate. The mental spiral begins."
 ---
