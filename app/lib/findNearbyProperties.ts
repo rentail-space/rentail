@@ -56,6 +56,7 @@ async function locationFromWorkingMemory(
     return { longitude: location?.longitude, latitude: location?.latitude };
   } catch (error) {
     captureException(error, { extra: { user } });
+    console.error("Error getting location from working memory: %s", error);
     return {};
   }
 }

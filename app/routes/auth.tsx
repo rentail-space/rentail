@@ -64,7 +64,7 @@ export async function action({
     }
   } catch (error) {
     captureException(error, { extra: { email, isSignUp } });
-    console.error(error);
+    console.error("Error in auth: %s", error);
     return {
       error: error instanceof Error ? error.message : "Something went wrong",
     };

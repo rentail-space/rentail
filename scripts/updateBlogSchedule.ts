@@ -82,7 +82,7 @@ async function updateFuturePosts(past: BlogPost[], future: BlogPost[]) {
   let currentDate = await getRecentDate(past);
   // Sequentially update futurePosts, awaiting each rename
   for (const post of future) {
-    console.log(`Updating ${post.filename} to ${currentDate}`);
+    console.info(`Updating ${post.filename} to ${currentDate}`);
     // Add one week to running date
     currentDate = dayjs(currentDate).add(1, "week").toDate();
     await renameFile({ date: currentDate, post });

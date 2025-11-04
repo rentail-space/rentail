@@ -145,6 +145,7 @@ export function cleanParse(workingMemory: unknown) {
     return userProfile.parse(JSON.parse((workingMemory as string) || "{}"));
   } catch (error) {
     captureException(error, { extra: { workingMemory } });
+    console.error("Error parsing working memory: %s", error);
     return {};
   }
 }
@@ -199,8 +200,8 @@ export default function updateUserProfile({
 
     return JSON.stringify(merged);
   } catch (error) {
-    logger("Error updating user profile: %o", error);
     captureException(error, { extra: { workingMemory } });
+    console.error("Error updating user profile: %s", error);
     return workingMemory;
   }
 }

@@ -1,10 +1,11 @@
 // Push metrics to BetterStack and Sentry
 
-import os from "node:os";
 import * as Sentry from "@sentry/react-router";
 import { isbot } from "isbot";
+import os from "node:os";
 
-if (process.env.SENTRY_DSN) {
+// Only enable Sentry in production
+if (process.env.NODE_ENV === "production" && process.env.SENTRY_DSN) {
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
     sendDefaultPii: true,

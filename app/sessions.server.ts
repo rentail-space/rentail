@@ -241,6 +241,7 @@ async function geocodeFromHeaders(
     };
   } catch (error) {
     captureException(error, { extra: { headers } });
+    console.error("Error getting geocode from headers: %s", error);
     return fallback;
   }
 }

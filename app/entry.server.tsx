@@ -10,11 +10,12 @@ import { v7 as uuidv7 } from "uuid";
 import env from "~/lib/env";
 import msw from "~/test/mocks/mswHandlers";
 
-if (env.SENTRY_DSN) {
+// Only enable Sentry in production
+if (env.isProduction && env.SENTRY_DSN) {
   Sentry.init({
     dsn: env.SENTRY_DSN,
     enableLogs: true,
-    environment: env.isProduction ? "production" : "development",
+    environment: "production",
     integrations: [
       Sentry.consoleLoggingIntegration({ levels: ["log", "warn", "error"] }),
       Sentry.anthropicAIIntegration({

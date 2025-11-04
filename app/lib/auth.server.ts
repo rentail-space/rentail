@@ -139,6 +139,7 @@ export default betterAuth({
   onAPIError: {
     onError: (error) => {
       captureException(error);
+      console.error("Error in BetterAuth: %s", error);
     },
     errorURL: "/error",
   },

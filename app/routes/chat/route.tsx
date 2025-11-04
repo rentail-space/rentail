@@ -42,8 +42,8 @@ export default function ChatPage() {
       // Only send user input to the server
     }),
     onError: (error) => {
-      console.error("Chat error:", error);
       captureException(error, { extra: { chat: found?.chat } });
+      console.error("Chat error: %s", error);
     },
   });
 

@@ -34,6 +34,7 @@ export async function monitorStopSignal(chatId: string): Promise<{
     await redis.quit();
   } catch (error) {
     captureException(error, { extra: { chatId } });
+    console.error("Error getting stop signal from Redis: %s", error);
   }
 
   async function cleanup() {
@@ -48,6 +49,7 @@ export async function monitorStopSignal(chatId: string): Promise<{
       redis.disconnect();
     } catch (error) {
       captureException(error, { extra: { chatId } });
+      console.error("Error cleaning up stop signal from Redis: %s", error);
     }
   }
 
@@ -70,6 +72,7 @@ export async function stopChat(chatId: string) {
     await redis.publish(key, "stop");
   } catch (error) {
     captureException(error, { extra: { chatId } });
+    console.error("Error sending stop signal to Redis: %s", error);
   } finally {
     await redis.quit();
   }

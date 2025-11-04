@@ -22,6 +22,7 @@ export default function JoinWaitlist() {
       else toast.error("Oops! Something went wrong!");
     } catch (error) {
       captureException(error, { extra: { email } });
+      console.error("Error joining waitlist: %s", error);
     }
 
     setEmail("");

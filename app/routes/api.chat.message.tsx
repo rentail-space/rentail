@@ -93,6 +93,7 @@ export async function action({ request }: Route.ActionArgs) {
 
     onError: (error) => {
       captureException(error, { extra: { chat } });
+      console.error("Error in agent stream: %s", error);
     },
 
     onFinish: async ({ steps, usage }) => {
@@ -125,6 +126,7 @@ export async function action({ request }: Route.ActionArgs) {
 
     onError: (error) => {
       captureException(error, { extra: { chat } });
+      console.error("Error in agent stream: %s", error);
       return "Error in agent stream";
     },
 

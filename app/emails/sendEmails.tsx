@@ -87,7 +87,7 @@ async function sendEmail({
 
     debug("email")("%s sent to %s", subject, email);
   } catch (error) {
-    debug("email")("Error sending %s email: %s", subject, error);
     captureException(error, { extra: { email } });
+    console.error("Error sending %s email to %s: %s", subject, email, error);
   }
 }
