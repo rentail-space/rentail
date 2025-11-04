@@ -74,16 +74,14 @@ const matchWorkingMemoryTags = /<working_memory>(.*?)<\/working_memory>/ims;
  */
 function extractWorkingMemory(
   responseText: string,
-): Record<string, unknown> | null {
-  try {
-    const match = responseText.match(matchWorkingMemoryTags)?.[1].trim();
-    invariant(match, "No working memory found in response");
+): Record<string, unknown> | undefined {
+  const match = responseText.match(matchWorkingMemoryTags)?.[1].trim();
+  if (match) {
     const { data, error } = userProfile.safeParse(safeParseJSON(match));
-    if (error) throw new Error(error.message);
-    return data;
-  } catch {
-    return null;
+    if (data) return data;
+    else console.error("Error parsing working memory: %s", error);
   }
+  return undefined;
 }
 
 /**
