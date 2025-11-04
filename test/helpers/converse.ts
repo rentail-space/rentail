@@ -1,4 +1,4 @@
-import { delay, withTimeout } from "es-toolkit";
+import { withTimeout } from "es-toolkit";
 import type { Page } from "playwright";
 import { expect } from "vitest";
 import prisma from "~/lib/prisma";
@@ -41,11 +41,11 @@ export default async function converse(
   expect(await input.inputValue()).toBe("");
 
   // Wait for the new assistant response bubble to appear.
-  await delay(1000);
   await page.waitForFunction(
     (count) =>
-      document.querySelectorAll(".chat-bubble-response").length === count,
+      document.querySelectorAll(".chat-bubble-response").length >= count,
     responseCount + 1,
+    { timeout: 10_000 },
   );
 
   // Wait for the assistant to finish streaming. It should have completed by
