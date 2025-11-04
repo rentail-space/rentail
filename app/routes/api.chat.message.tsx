@@ -40,14 +40,20 @@ export async function action({ request }: Route.ActionArgs) {
   const lastMessage = last(bodyMessages) as UIMessage;
   invariant(lastMessage, "Last message is required");
 
-  await prisma.messages.create({
+  // Clear any previous active stream and save the user message
+  await prisma.chat.update({
     data: {
-      chatId: chat.id,
-      content: lastMessage.parts as InputJsonValue,
-      id: lastMessage.id,
-      role: "user",
-      type: "text",
+      activeStreamId: null,
+      messages: {
+        create: {
+          content: lastMessage.parts as InputJsonValue,
+          id: lastMessage.id,
+          role: "user",
+          type: "text",
+        },
+      },
     },
+    where: { id: chat.id },
   });
   const messages = await recentMessages(chat.id);
 
@@ -55,6 +61,13 @@ export async function action({ request }: Route.ActionArgs) {
   const { abortSignal } = await monitorStopSignal(chat.id);
   const properties = await findNearbyProperties(user);
   logger("Found %d properties", properties.length);
+
+  // Set up the resumable stream ID before starting the stream
+  const activeStreamId = ulid();
+  await prisma.chat.update({
+    data: { activeStreamId },
+    where: { id: chat.id },
+  });
 
   const stream = streamText({
     abortSignal,
@@ -88,8 +101,6 @@ export async function action({ request }: Route.ActionArgs) {
     generateMessageId: () => ulid(),
 
     consumeSseStream: async ({ stream }) => {
-      const activeStreamId = ulid();
-
       // Create a resumable stream from the SSE stream
       const streamContext = createResumableStreamContext({
         publisher: new Redis(env.REDIS_URL),
@@ -100,24 +111,21 @@ export async function action({ request }: Route.ActionArgs) {
         activeStreamId,
         () => stream,
       );
-
-      await prisma.chat.update({
-        data: { activeStreamId },
-        where: { id: chat.id },
-      });
     },
 
     onError: (error) => {
-      console.error(error);
       captureException(error, { extra: { chat } });
       return "Error in agent stream";
     },
 
     onFinish: async ({ messages }) => {
+      // Process messages and update working memory asynchronously
+      // This can take time but doesn't block stream completion
       await prisma.chat.update({
         where: { id: chat.id },
         data: {
           activeStreamId: null,
+
           messages: {
             create: messages.map((message) => ({
               content: message.parts
@@ -131,9 +139,10 @@ export async function action({ request }: Route.ActionArgs) {
               type: "text",
             })),
           },
+
           user: {
             update: {
-              workingMemory: await updateUserProfile({
+              workingMemory: updateUserProfile({
                 messages,
                 workingMemory: user.workingMemory,
               }),

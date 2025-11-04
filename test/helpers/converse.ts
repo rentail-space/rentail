@@ -1,4 +1,4 @@
-import { delay, invariant, withTimeout } from "es-toolkit";
+import { invariant, withTimeout } from "es-toolkit";
 import type { Page } from "playwright";
 import { expect } from "vitest";
 import prisma from "~/lib/prisma";
@@ -22,8 +22,8 @@ export default async function converse(
 
   invariant(message.length > 5, "Message must be at least 5 characters long");
 
-  // Wait for the page to be fully loaded
-  await page.waitForLoadState("networkidle");
+  // Reload the page to clear any previous state
+  await page.reload({ waitUntil: "networkidle" });
 
   // Type into the input - this properly triggers React events
   const input = page.locator('input[type="text"]');
@@ -44,10 +44,11 @@ export default async function converse(
   // Wait for the assistant to finish streaming
   await withTimeout(async () => {
     while (true) {
-      const chat = await prisma.chat.findFirst();
-      console.log("chat", chat?.activeStreamId);
+      const chat = await prisma.chat.findFirst({
+        select: { activeStreamId: true },
+      });
       if (chat && chat.activeStreamId === null) break;
-      await delay(1000);
+      await page.waitForTimeout(500);
     }
   }, 30_000);
 

@@ -141,7 +141,7 @@ export default function createStreamingResponse(
           controller.enqueue(encoder.encode(messageStop));
 
           controller.close();
-          debug("msw")("createStreamingResponse closed");
+          debug("msw")("streaming response now closed");
           return;
         }
 

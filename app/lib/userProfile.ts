@@ -158,13 +158,13 @@ export function cleanParse(workingMemory: unknown) {
  * @param workingMemory - The working memory to update
  * @returns The updated working memory
  */
-export default async function updateUserProfile({
+export default function updateUserProfile({
   messages,
   workingMemory,
 }: {
   messages: UIMessage[];
   workingMemory: string;
-}): Promise<string> {
+}): string {
   const lastResponse = last(
     messages.filter((message) => message.role === "assistant"),
   )

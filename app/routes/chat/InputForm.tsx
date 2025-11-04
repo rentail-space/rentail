@@ -13,7 +13,7 @@ export default function InputForm({
   isSubmitting: boolean;
   query: string;
   sendMessage: (message: string) => void;
-  setQuery: (input: string) => void;
+  setQuery: (input: string | null) => void;
   stopChat: () => void;
 }) {
   const { scrollToBottom } = useStickToBottomContext();
@@ -24,7 +24,7 @@ export default function InputForm({
         onSubmit={(event) => {
           event.preventDefault();
           sendMessage(query);
-          setQuery("");
+          setQuery(null);
           scrollToBottom();
         }}
         className="relative w-full"

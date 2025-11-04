@@ -82,3 +82,11 @@ async function blockOutgoingRequests(route: Route): Promise<void> {
   logger("blocking %s: %s", resourceType, hostname);
   await route.abort();
 }
+
+function cleanup() {
+  context?.browser()?.close();
+}
+
+process.on("exit", cleanup);
+process.on("SIGINT", cleanup);
+process.on("SIGTERM", cleanup);
