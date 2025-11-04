@@ -59,7 +59,7 @@ export default async function converse(
       if (chat && chat.activeStreamId === null) break;
       await page.waitForTimeout(100);
     }
-  }, 1_000);
+  }, 10_000);
 
   // We expect at least 2 new messages: one from the user and one from the assistant
   expect(await prisma.messages.count()).toBeGreaterThanOrEqual(

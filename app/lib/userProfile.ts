@@ -180,8 +180,7 @@ export default function updateUserProfile({
     invariant(lastResponse, "Last response must be a string");
 
     const updates = extractWorkingMemory(lastResponse);
-    invariant(updates, "No updates found in last response");
-    logger("Updating working memory: %o", updates);
+    if (!updates) return workingMemory;
 
     const current = cleanParse(workingMemory);
     // Validate the updates against our schema
