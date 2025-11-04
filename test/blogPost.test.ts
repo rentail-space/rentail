@@ -9,24 +9,24 @@
  * - Navigation functionality
  */
 
-import { expect, type Page } from "playwright/test";
-import { beforeAll, describe, test } from "vitest";
+import { expect, type Page, type Response } from "playwright/test";
+import { beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Blog Post Rendering", () => {
   let page: Page;
 
   beforeAll(async () => {
-    page = await goto("/blog/2025-06-18-ultimate-guide");
+    page = await goto("/blog/2025-10-31-the-name");
   });
 
-  test("renders blog post with proper title and metadata", async () => {
+  it("should render blog post with proper title and metadata", async () => {
     // Check title rendering
     const title = await page.locator("article h1").textContent();
-    expect(title).toBe("The Ultimate Guide");
+    expect(title).toBe("The Birth of Rentail Space");
   });
 
-  test("renders blog post image with proper attributes", async () => {
+  it("should render blog post image with proper attributes", async () => {
     // Check if hero image is rendered
     const heroImage = page.locator("figure img");
     expect(heroImage).toBeVisible();
@@ -38,7 +38,7 @@ describe("Blog Post Rendering", () => {
     expect(imageClasses).toContain("object-cover");
   });
 
-  test("renders markdown content with proper formatting", async () => {
+  it("should render markdown content with proper formatting", async () => {
     // Check for proper heading rendering
     const heading = page.locator("h2").first();
     await expect(heading).toBeVisible();
@@ -55,7 +55,7 @@ describe("Blog Post Rendering", () => {
     expect(articleClasses).toContain("mx-auto");
   });
 
-  test("handles links with proper styling", async () => {
+  it("should handle links with proper styling", async () => {
     // Check if links are rendered with blue styling
     const links = page.locator("article a");
     if ((await links.count()) > 0) {
@@ -65,7 +65,7 @@ describe("Blog Post Rendering", () => {
     }
   });
 
-  test("renders lists with proper indentation and styling", async () => {
+  it("should render lists with proper indentation and styling", async () => {
     // Check for ordered lists
     const orderedLists = page.locator("article ol");
     if ((await orderedLists.count()) > 0) {
@@ -83,7 +83,7 @@ describe("Blog Post Rendering", () => {
     }
   });
 
-  test("displays blog post with correct layout structure", async () => {
+  it("should display blog post with correct layout structure", async () => {
     // Check main article structure
     const article = page.locator("article");
     await expect(article).toBeVisible();
@@ -93,7 +93,7 @@ describe("Blog Post Rendering", () => {
     await expect(layout).toBeVisible();
   });
 
-  test("blog post visual regression test", async () => {
+  it("should match visual regression test", async () => {
     // Set consistent viewport for screenshots
     await page.setViewportSize({ width: 960, height: 600 });
 
@@ -106,7 +106,7 @@ describe("Blog Post Rendering", () => {
     await expect(page).toMatchScreenshot();
   });
 
-  test("blog post is responsive on mobile viewport", async () => {
+  it("should be responsive on mobile viewport", async () => {
     // Set mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
 
@@ -131,20 +131,32 @@ describe("Blog Post Rendering", () => {
   });
 
   describe("non-existent blog post", () => {
-    test("handles non-existent blog posts with 404", async () => {
-      const response = await page.goto("/blog/non-existent-post");
-      expect(response?.status()).toEqual(404);
+    let response: Response | null;
+
+    beforeAll(async () => {
+      response = await page.goto("/blog/non-existent-post");
+    });
+
+    it("should handle non-existent blog posts with 404", async () => {
+      expect(response?.status(), "should respond with 404").toEqual(404);
     });
   });
 
   describe("second blog post", () => {
-    test("renders second blog post correctly", async () => {
-      const response = await page.goto("/blog/2025-06-25-specialty-leasing");
-      expect(response?.status(), "should respond with 200").toEqual(200);
+    let response: Response | null;
 
+    beforeAll(async () => {
+      response = await page.goto("/blog/2025-11-07-ultimate-guide");
+    });
+
+    it("should respond with 200", async () => {
+      expect(response?.status(), "should respond with 200").toEqual(200);
+    });
+
+    it("should render second blog post correctly", async () => {
       await expect(
         page.getByRole("heading", {
-          name: "Specialty Leasing for Small Business",
+          name: "The Ultimate Guide",
         }),
       ).toBeVisible();
     });
