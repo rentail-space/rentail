@@ -39,7 +39,7 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: pnpm install
 
-      - name: Install Playwright Browsers — Chromium
+      - name: Install Playwright (Chromium)
         run: pnpm exec playwright install chromium --with-deps
 
       - uses: actions/cache/save@v4
@@ -55,6 +55,9 @@ jobs:
 
       - name: Scrape Stonewood
         run: pnpm tsx scripts/scrapeStonewood.ts
+
+      - name: Install Doppler CLI
+        uses: dopplerhq/cli-action@v3
 
       - name: Seed database
         run: doppler run --config prd -- pnpm prisma db seed
