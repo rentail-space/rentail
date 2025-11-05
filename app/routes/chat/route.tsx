@@ -1,8 +1,8 @@
 import { useChat } from "@ai-sdk/react";
 import { captureException } from "@sentry/react-router";
 import { DefaultChatTransport } from "ai";
-import { last } from "es-toolkit";
 import { useQueryState } from "nuqs";
+import type { PropertyGetPayload } from "prisma/generated/models";
 import { useState } from "react";
 import { useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
@@ -26,6 +26,9 @@ export default function ChatPage() {
   const initialMessages = found?.messages ?? [
     { id: chatId, parts: [{ text: welcome, type: "text" }], role: "assistant" },
   ];
+  const [properties, setProperties] = useState<
+    PropertyGetPayload<{ include: { spaces: true } }>[]
+  >([]);
 
   const { error, messages, sendMessage, status, stop } = useChat({
     id: chatId,
@@ -39,6 +42,11 @@ export default function ChatPage() {
     onError: (error) => {
       captureException(error, { extra: { chat: found?.chat } });
       console.error("Chat error: %s", error);
+    },
+    onFinish: () => {
+      fetch(`/api/chat/${chatId}/properties`)
+        .then((response) => response.json())
+        .then((data) => setProperties(data.properties));
     },
   });
 
@@ -57,12 +65,7 @@ export default function ChatPage() {
 
         <ScrollButton />
 
-        <PropertyList
-          chatId={chatId}
-          lastAssistantMessage={last(
-            messages?.filter((message) => message.role === "assistant"),
-          )}
-        />
+        <PropertyList properties={properties} />
 
         <InputForm
           isResponding={status === "streaming"}

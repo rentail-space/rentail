@@ -1,33 +1,19 @@
-import type { UIMessage } from "ai";
 import type { PropertyGetPayload } from "prisma/generated/models";
-import { Activity, useEffect, useState } from "react";
+import { Activity, useState } from "react";
 import { Link } from "react-router";
 
 /**
  * A list of properties that are nearby the user.
  *
- * @param chatId - The ID of the chat.
- * @param lastAssistantMessage - The last message from the assistant
+ * @param properties - The properties that are nearby the user.
  * @returns A list of properties that are nearby the user.
  */
 export default function PropertyList({
-  chatId,
-  lastAssistantMessage,
+  properties,
 }: {
-  chatId: string;
-  lastAssistantMessage?: UIMessage;
+  properties: PropertyGetPayload<{ include: { spaces: true } }>[];
 }) {
-  const [properties, setProperties] = useState<
-    PropertyGetPayload<{ include: { spaces: true } }>[]
-  >([]);
   const [hoveredProperty, setHoveredProperty] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!lastAssistantMessage?.id) return;
-    fetch(`/api/chat/${chatId}/properties`)
-      .then((response) => response.json())
-      .then((data) => setProperties(data.properties));
-  }, [chatId, lastAssistantMessage?.id]);
 
   return (
     <div className="mx-auto hidden min-h-16 max-w-full overflow-x-auto md:block">
