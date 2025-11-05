@@ -2,206 +2,236 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Build Commands
+## Commands Reference
 
-**Package Management:** Uses pnpm as the package manager
+**Package Management:** Uses pnpm (v10.20.0+)
 
-- Dev: `pnpm dev` (starts development server with HMR on port 5173)
-- Build: `pnpm build` (prisma generate + react-router build for production)
-- Start: `pnpm start` (starts production server with instrumentation)
-- Type check: `pnpm typecheck` (includes react-router typegen)
-- Test: `pnpm test` (clears Vite cache + lint + db push + typecheck + vitest with verbose reporter)
-- Lint: `pnpm lint` (secretlint + Biome linter)
-- Format: `pnpm format --write` (Biome formatter)
-- Check: `pnpm check` (runs both lint and typecheck)
-- Clean: `pnpm clean` (removes Vite cache, .react-router cache, and build directory)
-- Monitoring: `pnpm checkly` (runs Checkly monitoring tests with snapshot updates)
-- Single test: `pnpx vitest run <test-pattern>` (e.g., `pnpx vitest run chat.test`)
+### Development & Building
+- `pnpm dev` - Start dev server with HMR on port 5173
+- `pnpm build` - Build for production (prisma generate + react-router build)
+- `pnpm start` - Start production server with instrumentation
+- `pnpm clean` - Remove Vite cache, .react-router cache, and build directory
+
+### Code Quality
+- `pnpm lint` - Run secretlint + Biome linter
+- `pnpm typecheck` - Type check with TypeScript + react-router typegen (auto-generates route types)
+- `pnpm format --write` - Format code with Biome (80 char line width, double quotes, 2-space indent)
+- `pnpm check` - Run both lint and typecheck
+
+### Testing
+- `pnpm test` - Full test suite: lint + db push + typecheck + vitest (verbose reporter)
+- `pnpx vitest run <pattern>` - Run specific test (e.g., `pnpx vitest run chat.test`)
+- `pnpm checkly` - Synthetic monitoring tests with snapshot updates
+
+### Slash Commands (in `.claude/commands/`)
+- `/cmd:audit` - Review code for maintainability, flexibility, readability
+- `/cmd:security` - Security audit and vulnerability assessment
+- `/cmd:performance` - Performance optimization analysis
+- `/cmd:conversion-hooks` - Find conversion tracking hooks
 
 ## Architecture
 
-This is a **React Router v7** application serving as a specialty lease marketplace called "rentail.space". The app helps businesses find short-term retail spaces in shopping centers with AI-powered assistance.
+**rentail.space** is a specialty lease marketplace web application that helps businesses discover short-term retail spaces in shopping centers. It combines server-side rendering, real-time AI-powered chat, and geographic intelligence for space discovery.
 
 **Tech Stack:**
-- React Router v7 with SSR (file-based routing)
-- React 19 with TypeScript
-- Vite 7 for build tooling
-- Tailwind CSS 4 for styling with DaisyUI plugin
-- Better Auth for authentication with anonymous user support
-- Redis for stream coordination and resumable streams
-- Vitest + Playwright for E2E testing with visual regression
-- Biome for linting and formatting
+- **Framework**: React Router v7 (SSR with file-based routing)
+- **Frontend**: React 19 + TypeScript + Tailwind CSS 4 + DaisyUI
+- **Build**: Vite 7
+- **Database**: PostgreSQL + Prisma ORM (with PgAdapter)
+- **Auth**: Better Auth (anonymous user support)
+- **Streaming**: Redis + resumable-stream package for reliable SSE delivery
+- **AI**: Claude 4 via Anthropic SDK with streaming responses
+- **Testing**: Vitest + Playwright (browser pool, visual regression)
+- **Linting**: Biome (formatter + linter) + secretlint
+- **Monitoring**: Sentry + BetterStack (Logtail + Push Gateway) + Checkly
 
-**AI Integration:**
-- Claude 4 via Anthropic AI SDK with streaming responses
-- **Streaming Architecture:**
-  - Chat API: `app/routes/api.chat.message.tsx` uses `streamText()` from AI SDK
-  - Client uses AI SDK's `useChat` hook with `resume: true` for automatic reconnection
-  - **Resumable Streams:** Uses `resumable-stream` package with Redis for reliable message delivery
-    - Store active stream ID in `Chat.activeStreamId` field
-    - Create resumable context in `consumeSseStream` callback with Redis pub/sub
-    - Resume endpoint: `app/routes/api.chat.message.$messageId.stream.tsx` resumes interrupted streams
-    - Clear `activeStreamId` in `onFinish` callback when stream completes
-- System prompts in `app/prompts/`: `systemPrompt.md` (includes working memory instructions), `welcome.md`
-- Use Context7 MCP server for library documentation and code examples
+### AI Integration & Streaming
 
-**Working Memory & User Profiles:**
-- Inspired by Mastra's working memory pattern and MemGPT whitepaper
-- User profiles stored as JSON in `User.workingMemory` field
-- Profile schema defined in `app/lib/userProfile.ts` with Zod validation
-- Profile includes: name, location (city, state, country, lat/lon as numbers, timezone), selling details, preferences, session state
-- **Working Memory Pattern:**
-  - Agent receives instructions in system prompt (`app/prompts/systemPrompt.md`) to emit `<working_memory>` tags
-  - Agent outputs `<working_memory>{JSON}</working_memory>` when learning new user information
-  - Tags automatically parsed and saved to database via `updateUserProfile()` in `onFinish` callback
-  - Tags masked from user display using `maskWorkingMemoryTags()` function
-  - Deep merge strategy: new values override existing profile fields
-  - Agent instructed to be proactive - store any potentially useful information
+**Chat Architecture:**
+- API endpoint: `app/routes/api.chat.message.tsx` implements `streamText()` from Anthropic SDK
+- Client hook: `useChat` from AI SDK with `resume: true` for auto-reconnection on network loss
+- **Resumable Streams Pattern:**
+  - Active stream ID stored in `Chat.activeStreamId` database field
+  - Resumable context created in `consumeSseStream` callback using Redis pub/sub
+  - Resume endpoint: `app/routes/api.chat.message.$messageId.stream.tsx` restores interrupted streams
+  - `activeStreamId` cleared in `onFinish` callback when stream completes
+  - Prevents message duplication on reconnect
+
+**Working Memory (User Profiles):**
+- Stores persistent user context as JSON in `User.workingMemory` field
+- Profile schema validated via Zod in `app/lib/userProfile.ts`
+- Profile fields: name, location (city, state, country, lat/lon as numbers, timezone), selling details, preferences
+- **Emission Pattern:**
+  - System prompt instructs agent to emit `<working_memory>{JSON}</working_memory>` tags
+  - Tags automatically parsed and merged into profile via `updateUserProfile()` in `onFinish` callback
+  - `maskWorkingMemoryTags()` removes tags from user-visible output
+  - Deep merge: new values override existing profile fields
+- System prompts: `app/prompts/systemPrompt.md` (with working memory instructions), `welcome.md`
+
+### Database & Observability
 
 **Database:**
-- PostgreSQL with Prisma ORM client and schema generation
-- Database models: User, Chat (with activeStreamId for stream resumption), Message, Waitlist, Property, PropertySpace
-- Chat.activeStreamId tracks active streaming responses for resumption
-- Geographic queries use simple latitude/longitude bounding box calculations
-- Session-based chat management with automatic user creation from IP geolocation
-- Bot detection: isBot flag set based on user-agent
-- Prisma operations: `prisma generate && prisma db push` for schema updates
+- PostgreSQL with Prisma ORM + PgAdapter for connection pooling
+- Models: User, Chat, Message, Waitlist, Property, PropertySpace
+- Session-based chat with automatic user creation from IP geolocation
+- Bot detection via `isBot` flag (user-agent based)
+- Geographic queries: simple latitude/longitude bounding box calculations (see `app/lib/findNearbyProperties.ts`)
+- Schema updates: `prisma generate && prisma db push`
 
-**Monitoring & Observability:**
-- Sentry for error tracking and performance monitoring (`app/lib/instrument.server.ts`)
-- BetterStack integration with Logtail for structured logging and Push Gateway for metrics
-- Checkly for synthetic monitoring configured in `checkly.config.ts`
-- Debug logging: Use `debug` package with namespaces (server, browser, agent, prisma, msw)
-  - Enable with: `DEBUG=server,browser pnpm test` or `DEBUG=* pnpm test`
+**Monitoring & Logging:**
+- **Error tracking**: Sentry (configured in `app/lib/instrument.server.ts`)
+- **Structured logging**: BetterStack Logtail + Push Gateway for metrics
+- **Synthetic monitoring**: Checkly (see `checkly.config.ts`)
+- **Debug logging**: `debug` package with namespaces (server, browser, agent, prisma, msw)
+  - Enable: `DEBUG=server,browser pnpm test` or `DEBUG=* pnpm test`
 
-## Code Style
+## Code Conventions
 
-- Use TypeScript for type safety with strict mode enabled
-- Prefer interfaces over types, avoid enums (use maps instead)
-- Component naming: PascalCase for components, camelCase for utilities
-- Directory naming: lowercase with dashes (e.g., `components/auth-wizard`)
-- Path alias: `~/*` maps to `./app/*`
-- Use descriptive variable names with auxiliary verbs (e.g., `isLoading`, `hasError`)
-- Organize imports: React first, then external libs, then local files
-- Use functional and declarative programming patterns; avoid classes
-- Use the "function" keyword for pure functions
-- Biome enforces double quotes, space indentation, line width 80, and import organization
-- Favor default exports for components
-- Write concise, technical TypeScript code with accurate examples
-- Prefer iteration and modularization over code duplication
+**TypeScript & Types:**
+- Strict mode enabled; use interfaces over types
+- Avoid enums (use discriminated unions or const maps instead)
+- Descriptive variable names with auxiliary verbs (`isLoading`, `hasError`, `didUpdate`)
 
-## Development Practices
+**Components & Files:**
+- Components: PascalCase + default exports
+- Utilities & functions: camelCase + named/default exports
+- Directories: lowercase with dashes (e.g., `components/auth-wizard`)
+- Path alias: `~/*` = `./app/*`, `~/test/*` = `./test/*`
 
-**Performance:**
-- Minimize `useState` and `useEffect`; prefer context and reducers for state management
-- Implement code splitting and lazy loading with React's Suspense and dynamic imports
-- Use `useMemo` and `useCallback` appropriately to avoid unnecessary re-renders
+**Code Organization:**
+- Imports: React → external packages → local files
+- Functional and declarative patterns (no classes)
+- Pure functions use `function` keyword
+- Early returns, no unnecessary else statements
+- Minimize `useState`/`useEffect`; prefer context or reducers for state
+- Use `useMemo` and `useCallback` to prevent unnecessary re-renders
 
-**Error Handling:**
-- Handle errors at the beginning of functions with early returns
-- Avoid unnecessary else statements; use if-return pattern
-- Implement global error boundaries for unexpected errors
-- Use Zod for runtime validation and error handling
+**Formatting (Biome-enforced):**
+- Double quotes, 2-space indent, 80 character line width
+- Import organization via Biome assist
+- `pnpm format --write` before committing
 
-**Git Commits:**
-- Use conventional commit format with descriptive emojis:
-  - ✨ feat: New features
-  - 🐛 fix: Bug fixes
-  - 📝 docs: Documentation changes
-  - ♻️ refactor: Code restructuring
-  - 🎨 style: Code formatting
-  - ⚡️ perf: Performance improvements
-  - ✅ test: Adding or correcting tests
-  - 🔧 chore: Tooling, configuration, maintenance
-  - ⬆️ upgrade: Dependency updates
-- Write in imperative mood ("Add feature" not "Added feature")
-- Keep commits atomic and focused on single concerns
+## Git & Commits
 
-## Tests
+**Commit Format (Conventional Commits):**
+- Use descriptive emoji prefixes:
+  - ✨ `feat:` New features
+  - 🐛 `fix:` Bug fixes
+  - 📝 `docs:` Documentation
+  - ♻️ `refactor:` Code restructuring
+  - 🎨 `style:` Formatting (Biome)
+  - ⚡️ `perf:` Performance improvements
+  - ✅ `test:` Test additions/fixes
+  - 🔧 `chore:` Config, tooling, maintenance
+  - ⬆️ `upgrade:` Dependency updates
+  - 🚑 `hotfix:` Critical fixes for production
+  - 🔒 `security:` Security improvements
+  - 🔥 `remove:` Removing code or files
+  - 🚧 `wip:` Work in progress
 
-- Test files should end with ".test.ts" or ".test.tsx"
-- Place test files in `/test` directory (NOT in `/app` directory alongside source code)
-- Use Vitest framework with browser provider for visual testing and forks pool for performance
-- Tests run from `/**/*.test.{ts,tsx}` with setup in `/test/helpers/setup.ts`
-- Visual regression testing with Playwright and custom `toMatchScreenshot` matcher
-- Screenshots stored in `__screenshots__` directory
-- Requires Node.js 22.0.0 or higher
+**Commit Guidelines:**
+- Imperative mood: "Add feature" not "Added feature"
+- Single concern per commit (atomic)
+- Reference relevant files in description when helpful
+- Format: `emoji type(scope): description` (e.g., `✨ feat(chat): Add streaming message support`)
+- Include body for complex changes explaining the "why"
+- Suggest splitting commits across different concerns
+
+## Testing
+
+**Setup & Configuration:**
+- Test files: `*.test.ts` or `*.test.tsx` in `/test` directory (NOT alongside source in `/app`)
+- Framework: Vitest with browser provider (Playwright) + forks pool
+- Config: `vitest.config.ts` (60s test timeout, 90s hook timeout, 10s teardown timeout)
+- Setup: `/test/helpers/setup.ts` (global) + `/test/helpers/globalSetup.ts`
+- Node.js: 22.0.0 or higher required
 
 **Test Organization:**
-- Use nested `describe` blocks to organize related tests
-- Use `beforeAll`/`afterAll` for test setup/cleanup when sharing state across tests
-- Share state across tests within a describe block using `let` variables
-- Sequential tests: each test validates one aspect, state flows through the suite
+- Use nested `describe` blocks for logical grouping
+- `beforeAll`/`afterAll` for setup/cleanup when sharing state across tests
+- Share state via `let` variables within describe block (tests run sequentially)
+- Each test validates one aspect; state flows through the suite
 
-**Testing Infrastructure:**
-- Mock server setup with MSW prevents external API calls (`/test/mocks/mswHandlers.ts`)
-- Anthropic API mocked with pattern matching (`/test/mocks/mockAnthropic.ts`)
-- Database reset in beforeAll or beforeEach: `await prisma.user.deleteMany()`
-- Visual regression: `await expect(page).toMatchScreenshot()`
-- **Test Helper: `converse(page, message)`**
-  - Located in `/test/helpers/converse.ts`
-  - Fills textbox, clicks Send, waits for stream to complete
-  - Polls `Chat.activeStreamId` until null (stream finished)
-  - Use in tests: `await converse(page, "Hello, how are you?")`
-  - Replaces manual textbox filling + button clicking + waiting patterns
-- **Unit Testing Pattern:** For testing business logic without browser overhead:
-  - Create test users directly with `prisma.user.create()` including required fields (geocode, metadata, workingMemory)
-  - Call functions directly instead of through HTTP/browser layer
-  - Clean up test data in `beforeAll` or after each test
-  - Example: `findNearbyProperties.test.ts` tests proximity search by creating users with location data
-- Run individual tests: `pnpx vitest run <test-pattern>`
-- Debug logging: Use `DEBUG=* pnpm test` to see all debug output
+**Infrastructure & Mocking:**
+- **MSW Handlers**: `/test/mocks/mswHandlers.ts` prevents external API calls
+- **Anthropic Mock**: `/test/mocks/mockAnthropic.ts` with pattern matching
+- **Database**: Reset with `await prisma.user.deleteMany()` in beforeAll or beforeEach
+- **Visual regression**: `await expect(page).toMatchScreenshot()` (screenshots in `__screenshots__/`)
+
+**Common Patterns:**
+
+*E2E Chat Testing:*
+```typescript
+import { converse } from "~/test/helpers/converse";
+await converse(page, "Hello, how are you?");
+// Automatically: fills input, clicks Send, polls Chat.activeStreamId until null
+```
+
+*Unit Testing (Database/Logic):*
+```typescript
+const user = await prisma.user.create({
+  data: {
+    geocode: { lat: 40.0, lon: -118.0 },
+    metadata: { ip: "127.0.0.1" },
+    workingMemory: {},
+  },
+});
+// Call functions directly; clean up after test
+```
+
+**Commands:**
+- Run all: `pnpm test` (includes lint + db push + typecheck)
+- Run specific: `pnpx vitest run <pattern>` (e.g., `pnpx vitest run chat.test`)
+- Debug: `DEBUG=* pnpm test` to enable all debug namespaces
 
 ## Environment Variables
 
-Required environment variables (set in `.env.local`):
-- `ANTHROPIC_API_KEY`: Claude AI API key for chat functionality
-- `DATABASE_URL`: PostgreSQL connection string for production
-- `REDIS_URL`: Redis connection string for stream coordination (default: redis://localhost:6379)
-- `SESSION_SECRET`: Secret key for session management
-- `RESEND_API_KEY`: Resend API key for email functionality
-- `LOGTAIL_TOKEN`: BetterStack Logtail token for logging
-- `LOGTAIL_ENDPOINT`: BetterStack Logtail endpoint URL
-- `PUSHGATEWAY_URL`: BetterStack Push Gateway URL for metrics
-- `PUSHGATEWAY_TOKEN`: BetterStack Push Gateway token
-- `CHECKLY_ACCOUNT_ID`: Checkly monitoring account ID
-- `CHECKLY_API_KEY`: Checkly monitoring API key
+**Required (.env.local):**
+- `ANTHROPIC_API_KEY` - Claude AI API key
+- `DATABASE_URL` - PostgreSQL connection string
+- `REDIS_URL` - Redis for stream coordination (default: redis://localhost:6379)
+- `SESSION_SECRET` - Session management key
+- `RESEND_API_KEY` - Email service (Resend)
+- `LOGTAIL_TOKEN` / `LOGTAIL_ENDPOINT` - BetterStack logging
+- `PUSHGATEWAY_URL` / `PUSHGATEWAY_TOKEN` - BetterStack metrics
+- `CHECKLY_ACCOUNT_ID` / `CHECKLY_API_KEY` - Synthetic monitoring
 
-Optional environment variables:
-- `SENTRY_DSN`: Sentry project DSN for error tracking
-- `SENTRY_AUTH_TOKEN`: Sentry auth token for build-time integration
-- `NODE_ENV`: Environment (development/production/test)
-- `DEBUG`: Enable debug logging (e.g., `DEBUG=server,browser` or `DEBUG=*`)
+**Optional:**
+- `SENTRY_DSN` / `SENTRY_AUTH_TOKEN` - Error tracking
+- `NODE_ENV` - Environment (development/production/test)
+- `DEBUG` - Debug logging namespaces (e.g., `DEBUG=server,browser` or `DEBUG=*`)
 
 ## Project Structure
 
-- `/app`: Main application directory (React Router v7 convention)
-  - `/app/routes.ts`: Route configuration with file-based routing
-  - `/app/root.tsx`: Root exports (App, ErrorBoundary, HydrateFallback, loader, headers, links)
-  - `/app/routes/`: Individual route components
-    - `api.chat.message.tsx`: Send new chat message (creates resumable stream)
-    - `api.chat.message.$messageId.stream.tsx`: Resume interrupted stream
-    - `api.chat.$chatId.stop.tsx`: Stop active stream manually
-    - `api.chat.$chatId.properties.ts`: Get nearby properties for a chat
-    - `api.chat.$chatId.export.csv.ts`: Export chat as CSV
-    - `chat/route.tsx`: Chat UI with `useChat` hook and `resume: true`
-  - `/app/lib/`: Shared utilities
-    - `env.ts`: Environment variable configuration with runtime validation
-    - `auth.server.ts`: Better Auth configuration with anonymous user support
-    - `prisma.ts`: Database client with connection pooling
-    - `userProfile.ts`: Working memory schema and update logic
-    - `systemPrompt.ts`: System prompt generation with user profile and properties
-    - `findNearbyProperties.ts`: Geographic proximity search logic
-    - `redis-stop-monitor.ts`: Cross-server stream coordination
-  - `/app/components/`: Reusable UI components organized by feature
-  - `/app/prompts/`: AI system prompts (systemPrompt.md, welcome.md)
-- `/prisma`: Database schema and migrations
-  - `schema.prisma`: Database models (includes Chat.activeStreamId field)
-- `/test`: Test setup and shared utilities
-  - `/helpers/`: Test utilities
-    - `converse.ts`: Helper for sending messages and waiting for stream completion
-    - `launchBrowser.ts`: Playwright browser/server management
-    - `setup.ts`: Global test setup (MSW, Sentry, database cleanup)
-  - `/mocks/`: MSW handlers for API mocking
-- `/__screenshots__`: Visual regression test screenshots (git-ignored)
-- `vitest.config.ts`: Test configuration with forks pool and 30s timeouts
+**Key Directories:**
+
+`/app` - Main application (React Router v7 file-based routing)
+- `routes.ts` - Route config
+- `root.tsx` - App shell + error boundary
+- `routes/` - Individual routes
+  - `api.chat.message.tsx` - Create chat message (streaming)
+  - `api.chat.message.$messageId.stream.tsx` - Resume interrupted stream
+  - `api.chat.$chatId.stop.tsx` - Stop active stream
+  - `api.chat.$chatId.properties.ts` - Fetch nearby properties
+  - `api.chat.$chatId.export.csv.ts` - Export chat as CSV
+  - `chat/route.tsx` - Chat UI component
+- `lib/` - Shared utilities
+  - `env.ts` - Env vars + runtime validation
+  - `auth.server.ts` - Better Auth setup
+  - `prisma.ts` - Prisma client
+  - `userProfile.ts` - Working memory schema/validation
+  - `systemPrompt.ts` - System prompt generation
+  - `findNearbyProperties.ts` - Geographic search
+  - `redis-stop-monitor.ts` - Stream coordination
+- `components/` - Reusable UI components
+- `prompts/` - AI system prompts
+
+`/prisma` - Database
+- `schema.prisma` - Models + migrations
+
+`/test` - Test infrastructure
+- `helpers/` - Utilities (converse, launchBrowser, setup)
+- `mocks/` - MSW + Anthropic mocks
+
+`/__screenshots__` - Visual regression tests (git-ignored)
+`vitest.config.ts` - Test configuration
