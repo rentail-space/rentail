@@ -128,7 +128,7 @@ function safeParseJSON(str: string): Record<string, unknown> | null {
  * @returns Text with working memory tags removed
  */
 export function maskWorkingMemoryTags(text: string): string {
-  return text.replace(matchWorkingMemoryTags, "").trim();
+  return text.replace(/<(\w+)>[^<]*(<\/\w+>)?/g, "").trim();
 }
 
 /**
