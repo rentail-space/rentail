@@ -138,7 +138,7 @@ export function maskWorkingMemoryTags(text: string): string {
  * @param workingMemory - The working memory to parse.
  * @returns The user profile.
  */
-export function cleanParse(workingMemory: unknown) {
+export function cleanParseProfile(workingMemory: unknown) {
   try {
     return userProfile.parse(JSON.parse((workingMemory as string) || "{}"));
   } catch (error) {
@@ -157,13 +157,13 @@ export function cleanParse(workingMemory: unknown) {
  * @param workingMemory - The working memory to update
  * @returns The updated working memory
  */
-export default function updateUserProfile({
+export default async function updateUserProfile({
   messages,
   workingMemory,
 }: {
   messages: UIMessage[];
   workingMemory: string;
-}): string {
+}): Promise<Promise<string>> {
   try {
     const lastMessage = last(messages);
     invariant(
@@ -175,25 +175,29 @@ export default function updateUserProfile({
       .filter((part) => part.type === "text")
       .map((part) => part.text)
       .join("\n");
-    invariant(lastResponse, "Last response must be a string");
 
     const updates = extractWorkingMemory(lastResponse);
     if (!updates) return workingMemory;
 
-    const current = cleanParse(workingMemory);
+    const current = cleanParseProfile(workingMemory);
     // Validate the updates against our schema
     const { data: validated, error } = userProfile.safeParse(updates);
     if (error) throw error;
 
     // Deep merge with current profile (new values override old ones)
+    const geocoded =
+      validated?.location && (await geocodeLocation(validated?.location));
     const merged = {
       ...current,
       ...validated,
-      location: validated.location || current.location,
+      location: validated.location
+        ? { ...validated.location, ...geocoded }
+        : current.location,
       preferences: { ...current.preferences, ...validated.preferences },
       selling: { ...current.selling, ...validated.selling },
       sessionState: { ...current.sessionState, ...validated.sessionState },
     };
+    logger("Updating user profile: %o", merged);
 
     return JSON.stringify(merged);
   } catch (error) {
@@ -201,6 +205,28 @@ export default function updateUserProfile({
     console.error("Error updating user profile: %s", error);
     return workingMemory;
   }
+}
+
+async function geocodeLocation(location: {
+  city?: string;
+  state?: string;
+  country?: string;
+}) {
+  const { city, state, country } = location;
+  if (!city || !state || !country) return null;
+
+  const query = encodeURIComponent(`${city}, ${state}, ${country}`);
+  const response = await fetch(
+    `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1`,
+    { headers: { "User-Agent": "your-app-name/1.0 (your@email.com)" } },
+  );
+  const results = await response.json();
+  return results && results.length > 0
+    ? {
+        latitude: Number.parseFloat(results[0].lat),
+        longitude: Number.parseFloat(results[0].lon),
+      }
+    : {};
 }
 
 /**

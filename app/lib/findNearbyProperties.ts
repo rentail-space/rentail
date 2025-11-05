@@ -4,7 +4,7 @@ import type { User } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import prisma from "~/lib/prisma";
 import env from "./env";
-import { cleanParse } from "./userProfile";
+import { cleanParseProfile } from "./userProfile";
 
 /**
  * Find the shopping centers within a given distance from the user. Gets the
@@ -22,7 +22,7 @@ export default async function findNearbyProperties(
   if (!longitude || !latitude) return [];
 
   const redis = new Redis(env.REDIS_URL);
-  const maxDistance = 45; // miles
+  const maxDistance = 65; // miles
   const key = `properties:${latitude}:${longitude}:${maxDistance}`;
   const cachedProperties = await redis.get(key);
   if (cachedProperties) return JSON.parse(cachedProperties);
@@ -57,7 +57,7 @@ async function locationFromWorkingMemory(
       where: { id: user.id },
       select: { workingMemory: true },
     });
-    const { location } = cleanParse(workingMemory);
+    const { location } = cleanParseProfile(workingMemory);
     return { longitude: location?.longitude, latitude: location?.latitude };
   } catch (error) {
     captureException(error, { extra: { user } });

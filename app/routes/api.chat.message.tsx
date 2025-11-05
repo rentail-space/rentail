@@ -157,7 +157,7 @@ export async function action({ request }: Route.ActionArgs) {
       await prisma.user.update({
         where: { id: user.id },
         data: {
-          workingMemory: updateUserProfile({
+          workingMemory: await updateUserProfile({
             messages,
             workingMemory: user.workingMemory,
           }),

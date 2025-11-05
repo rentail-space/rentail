@@ -3,7 +3,7 @@ import { beforeAll, describe, it } from "vitest";
 import type zod from "zod";
 import prisma from "~/lib/prisma";
 import type { userProfile } from "~/lib/userProfile";
-import { cleanParse } from "~/lib/userProfile";
+import { cleanParseProfile } from "~/lib/userProfile";
 import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
 
@@ -35,7 +35,7 @@ describe("Anonymous visits chat page", () => {
 
   it("sets initial working memory with default location", async () => {
     const user = await prisma.user.findFirstOrThrow();
-    const workingMemory = cleanParse(user.workingMemory);
+    const workingMemory = cleanParseProfile(user.workingMemory);
     expect(workingMemory.location?.city).toEqual("Los Angeles");
     expect(workingMemory.location?.state).toEqual("California");
     expect(workingMemory.location?.country).toEqual("United States");
@@ -51,7 +51,7 @@ describe("Anonymous visits chat page", () => {
       await converse(page, "Actually I'm in Boston");
 
       const user = await prisma.user.findFirstOrThrow();
-      workingMemory = cleanParse(user.workingMemory);
+      workingMemory = cleanParseProfile(user.workingMemory);
     });
 
     it("should show user message in chat", async () => {
@@ -218,7 +218,7 @@ describe("Anonymous visits chat page", () => {
             const user = await prisma.user.findFirstOrThrow({
               where: { isAnonymous: false },
             });
-            const workingMemory = cleanParse(user.workingMemory);
+            const workingMemory = cleanParseProfile(user.workingMemory);
             expect(workingMemory.location?.city).toEqual("Boston");
             expect(workingMemory.location?.state).toEqual("Massachusetts");
             expect(workingMemory.location?.country).toEqual("United States");

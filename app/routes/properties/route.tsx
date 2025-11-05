@@ -1,98 +1,39 @@
-import { Link } from "@react-email/components";
-import type { PropertySpace } from "prisma/generated/client";
-import type { PropertyGetPayload } from "prisma/generated/models";
 import { lazy, Suspense } from "react";
 import prisma from "~/lib/prisma";
+import { cleanParseProfile } from "~/lib/userProfile";
+import { findUserAndChat } from "~/sessions.server";
+import type { Route } from "./+types/route";
+import PropertiesList from "./PropertiesList";
 
-export async function loader() {
+export async function loader({ request }: Route.LoaderArgs) {
+  const found = await findUserAndChat(request.headers);
+  const profile = found ? cleanParseProfile(found.user.workingMemory) : {};
   const properties = await prisma.property.findMany({
     include: { spaces: true },
   });
-  return properties;
+  return { properties, ...profile.location };
 }
 
 export default function PropertyPage({
   loaderData,
 }: {
-  loaderData: PropertyGetPayload<{ include: { spaces: true } }>[];
+  loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
-  const PropertyMap = lazy(
-    () => import("~/components/property-map/PropertyMap"),
-  );
+  const PropertyMap = lazy(() => import("~/routes/properties/PropertiesMap"));
 
   return (
-    <div className="prose mx-auto flex flex-col gap-4">
+    <div>
       <Suspense
         fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-200" />}
       >
-        <PropertyMap properties={loaderData} />
+        <PropertyMap
+          properties={loaderData.properties}
+          latitude={loaderData.latitude ?? 34.0522}
+          longitude={loaderData.longitude ?? -118.2437}
+        />
       </Suspense>
 
-      {loaderData.map((property) => (
-        <Property key={property.id} property={property} />
-      ))}
+      <PropertiesList properties={loaderData.properties} />
     </div>
-  );
-}
-
-function Property({
-  property,
-}: {
-  property: PropertyGetPayload<{ include: { spaces: true } }>;
-}) {
-  const paragraphs = property.description.split("\n");
-
-  return (
-    <div key={property.id} className="flex flex-col gap-2">
-      <h3>
-        <Link href={`/property/${property.id}`}>{property.name}</Link>
-      </h3>
-      <Link
-        href={`https://maps.google.com/?q=${encodeURIComponent(`${property.address}, ${property.city}, ${property.state} ${property.country}`)}`}
-      >
-        {property.address}, {property.city}, {property.state}
-      </Link>
-      <details>
-        <summary className="summary-open:hidden">{paragraphs[0]}</summary>
-        {paragraphs.slice(1).map((line, index) => (
-          <p key={index.toString()}>{line}</p>
-        ))}
-      </details>
-
-      <Spaces spaces={property.spaces} />
-    </div>
-  );
-}
-
-function Spaces({ spaces }: { spaces: PropertySpace[] }) {
-  if (spaces.length === 0)
-    return <p className="text-center text-gray-500">No spaces available</p>;
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th>Number</th>
-          <th>Size</th>
-          <th>Type</th>
-          <th>Floor</th>
-        </tr>
-      </thead>
-      <tbody>
-        {spaces
-          .sort((a, b) =>
-            a.type !== b.type
-              ? a.type.localeCompare(b.type)
-              : a.number.localeCompare(b.number),
-          )
-          .map((space) => (
-            <tr key={space.id}>
-              <td>{space.number}</td>
-              <td>{space.size} sqft</td>
-              <td>{space.type}</td>
-              <td>{space.floor}</td>
-            </tr>
-          ))}
-      </tbody>
-    </table>
   );
 }
