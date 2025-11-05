@@ -1,7 +1,8 @@
-import { Markdown } from "@react-email/components";
 import { ExternalLink } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
+import remarkGfm from "remark-gfm";
+import { Streamdown } from "streamdown";
 import { Spaces } from "./Spaces";
 
 export default function Property({
@@ -48,7 +49,9 @@ export default function Property({
       )}
 
       <section className="prose prose-lg">
-        <Markdown>{property.description}</Markdown>
+        <Streamdown remarkPlugins={[[remarkGfm, {}]]}>
+          {property.description}
+        </Streamdown>
       </section>
 
       <section className="flex flex-col gap-4">

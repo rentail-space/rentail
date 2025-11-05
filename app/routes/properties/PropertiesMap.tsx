@@ -29,16 +29,13 @@ export default function PropertiesMap({
   longitude: number;
 }) {
   return (
-    <div className="h-96 w-full overflow-hidden rounded-lg border border-gray-300">
+    <div className="h-96 w-full overflow-hidden">
       <MapContainer
         center={[latitude, longitude]}
+        className="h-full w-full"
         zoom={10}
-        style={{ height: "100%", width: "100%" }}
       >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {properties.map((property) => (
           <PropertyMarker key={property.id} property={property} />
         ))}
@@ -59,15 +56,13 @@ function PropertyMarker({
       icon={DefaultIcon}
     >
       <Popup>
-        <div className="flex flex-col gap-2">
-          <h4 style={{ margin: 0 }} className="font-bold text-lg">
-            {property.name}
-          </h4>
-          <p style={{ margin: 0 }}>
-            {property.address}, {property.city}, {property.state}
-          </p>
-          <p style={{ margin: 0 }}>{property.spaces.length} available spaces</p>
-        </div>
+        <h4 style={{ margin: 0 }} className="font-bold text-lg">
+          {property.name}
+        </h4>
+        <p>
+          {property.address}, {property.city}, {property.state}
+        </p>
+        <p style={{ margin: 0 }}>{property.spaces.length} available spaces</p>
       </Popup>
     </Marker>
   );

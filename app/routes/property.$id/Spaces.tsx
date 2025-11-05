@@ -16,7 +16,7 @@ export function Spaces({ spaces }: { spaces: PropertySpace[] }) {
 
 function NoAvailableSpaces() {
   return (
-    <p className="my-4 text-gray-500 text-lg">
+    <p className="my-4 text-center text-gray-400 text-lg">
       Sorry, all spaces are currently leased. Please check back later.
     </p>
   );

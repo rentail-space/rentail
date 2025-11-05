@@ -24,7 +24,7 @@ function Property({
   const paragraphs = property.description.split("\n");
 
   return (
-    <div key={property.id} className="flex flex-col gap-2">
+    <section key={property.id} className="flex flex-col gap-2">
       <h3>
         <Link
           className="text-blue-500 no-underline hover:text-blue-700 hover:underline"
@@ -33,12 +33,15 @@ function Property({
           {property.name}
         </Link>
       </h3>
+
       <Link
         className="text-blue-500 no-underline hover:text-blue-700 hover:underline"
         to={`https://maps.google.com/?q=${encodeURIComponent(`${property.address}, ${property.city}, ${property.state} ${property.country}`)}`}
+        target="_blank"
       >
         {property.address}, {property.city}, {property.state}
       </Link>
+
       <details>
         <summary className="summary-open:hidden">{paragraphs[0]}</summary>
         {paragraphs.slice(1).map((line, index) => (
@@ -47,14 +50,12 @@ function Property({
       </details>
 
       <Spaces spaces={property.spaces} />
-    </div>
+    </section>
   );
 }
 
 function Spaces({ spaces }: { spaces: PropertySpace[] }) {
-  if (spaces.length === 0)
-    return <p className="text-center text-gray-500">No spaces available</p>;
-  return (
+  return spaces.length > 0 ? (
     <table>
       <thead>
         <tr>
@@ -81,5 +82,7 @@ function Spaces({ spaces }: { spaces: PropertySpace[] }) {
           ))}
       </tbody>
     </table>
+  ) : (
+    <p className="text-center text-gray-400 text-lg">No spaces available</p>
   );
 }

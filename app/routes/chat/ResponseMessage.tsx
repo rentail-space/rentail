@@ -1,6 +1,7 @@
 import type { UIMessage } from "ai";
 import type React from "react";
 import { Children, type JSX, useEffect, useRef } from "react";
+import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import type { ScrollToBottom } from "use-stick-to-bottom";
@@ -101,24 +102,24 @@ function getComponents({
     a: ({ children, href }) => {
       const isAsk = href?.startsWith("/?q=");
       return isAsk ? (
-        <a
+        <Link
           className="btn btn-soft btn-primary"
-          href={`?q=${children}`}
+          to={`/chat?q=${children}`}
           onClick={(event) => {
             event.preventDefault();
             askQuestion(Children.toArray(children).join(""));
           }}
         >
           {children}
-        </a>
+        </Link>
       ) : (
-        <a
+        <Link
           className="text-blue-500 no-underline hover:text-blue-700 hover:underline"
-          href={href}
+          to={href ?? ""}
           target="_blank"
         >
           {children}
-        </a>
+        </Link>
       );
     },
     button: ({ children }) => (
