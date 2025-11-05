@@ -8,7 +8,8 @@
       "Bash(tsx scripts/*)",
       "Bash(pnpx vitest:*)",
       "Bash(pnpm add:*)",
-      "Bash(pnpm typecheck:*)"
+      "Bash(pnpm typecheck:*)",
+      "Bash(pnpm build:*)"
     ],
     "deny": [],
     "ask": []

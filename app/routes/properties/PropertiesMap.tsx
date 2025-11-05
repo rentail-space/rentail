@@ -1,5 +1,3 @@
-"use client";
-
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { PropertyGetPayload } from "prisma/generated/models";
