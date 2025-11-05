@@ -118,11 +118,13 @@ jobs:
       deployments: write
       statuses: write
       pull-requests: write
+
     env:
       DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       SENTRY_AUTH_TOKEN: "***REMOVED***"
       SENTRY_ORG: "labnotes"
       SENTRY_PROJECT: "rentail"
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4

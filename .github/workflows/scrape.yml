@@ -1,0 +1,70 @@
+name: Scrape
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 4,5 * * *"
+
+jobs:
+  scrape:
+    name: Scrape
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      repository-projects: write
+
+    env:
+      DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: "package.json"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - id: cache-node-modules
+        uses: actions/cache/restore@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install NPM dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: pnpm install
+
+      - uses: actions/cache/save@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Scrape Los Cerritos
+        run: pnpm run scrape:los-cerritos
+
+      - name: Scrape Santa Monica
+        run: pnpm run scrape:santa-monica
+
+      - name: Scrape Stonewood
+        run: pnpm run scrape:stonewood
+
+      - name: Seed database
+        run: doppler run --config prd -- pnpm prisma db seed
+
+      - name: Commit files
+        run: |
+          git config --local user.email "assaf@labnotes.org"
+          git config --local user.name "GitHub Actions"
+          git add prisma/seed/*.json
+          git commit -m "Scrape properties" || echo "No changes to commit"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: "main"
