@@ -3,7 +3,7 @@ name: Scrape
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 4,5 * * *"
+    - cron: "0 6 * * *" # 10 pm Pacific Time (PST/PDT) = 6 am UTC on the following day
 
 jobs:
   scrape:
@@ -45,13 +45,13 @@ jobs:
           key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Scrape Los Cerritos
-        run: pnpm run scrape:los-cerritos
+        run: pnpm tsx scripts/scrapeLosCerritos.ts
 
       - name: Scrape Santa Monica
-        run: pnpm run scrape:santa-monica
+        run: pnpm tsx scripts/scrapeSantaMonica.ts
 
       - name: Scrape Stonewood
-        run: pnpm run scrape:stonewood
+        run: pnpm tsx scripts/scrapeStonewood.ts
 
       - name: Seed database
         run: doppler run --config prd -- pnpm prisma db seed
