@@ -16,7 +16,7 @@ export default function PropertyPage({
   loaderData: PropertyGetPayload<{ include: { spaces: true } }>[];
 }) {
   return (
-    <div className="prose prose-2xl mx-auto flex flex-col gap-4">
+    <div className="prose mx-auto flex flex-col gap-4">
       {loaderData.map((property) => (
         <Property key={property.id} property={property} />
       ))}
@@ -32,10 +32,10 @@ function Property({
   const paragraphs = property.description.split("\n");
 
   return (
-    <div key={property.id}>
-      <h2>
+    <div key={property.id} className="flex flex-col gap-2">
+      <h3>
         <Link href={`/property/${property.id}`}>{property.name}</Link>
-      </h2>
+      </h3>
       <Link
         href={`https://maps.google.com/?q=${encodeURIComponent(`${property.address}, ${property.city}, ${property.state} ${property.country}`)}`}
       >
