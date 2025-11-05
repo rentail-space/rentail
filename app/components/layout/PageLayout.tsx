@@ -83,7 +83,7 @@ export default function PageLayout({
       </head>
       <body>
         <NuqsAdapter>
-          <div className="flex min-h-screen flex-col gap-8">
+          <div className="flex min-h-screen flex-col">
             {showHeader && <LayoutHeader />}
             {children}
             {showFooter && <LayoutFooter />}
