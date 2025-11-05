@@ -22,122 +22,122 @@ describe("Proximity-based shopping center search", () => {
     longitude = theGrove.longitude;
   });
 
-  describe("Search from 30 miles north", () => {
+  describe("Search from 45 miles north", () => {
     let properties: Property[];
 
     beforeAll(async () => {
       properties = await createUserAndFind({
-        latitude: latitude + 30 / 69.172,
+        latitude: latitude + 45 / 69.172,
         longitude,
       });
     });
 
-    it("should find The Grove shopping center within 30 miles north", () => {
+    it("should find The Grove shopping center within 45 miles north", () => {
       expect(findTheGrove(properties)).toBeDefined();
     });
   });
 
-  describe("Search from 30 miles south", () => {
+  describe("Search from 45 miles south", () => {
     let properties: Property[];
 
     beforeAll(async () => {
       properties = await createUserAndFind({
-        latitude: latitude - 30 / 69.172,
+        latitude: latitude - 45 / 69.172,
         longitude,
       });
     });
 
-    it("should find The Grove shopping center within 30 miles south", () => {
+    it("should find The Grove shopping center within 45 miles south", () => {
       expect(findTheGrove(properties)).toBeDefined();
     });
   });
 
-  describe("Search from 30 miles east", () => {
+  describe("Search from 45 miles east", () => {
     let properties: Property[];
 
     beforeAll(async () => {
       properties = await createUserAndFind({
         latitude,
-        longitude: longitude + 30 / 57.393,
+        longitude: longitude + 45 / 57.393,
       });
     });
 
-    it("should find The Grove shopping center within 30 miles east", () => {
+    it("should find The Grove shopping center within 45 miles east", () => {
       expect(findTheGrove(properties)).toBeDefined();
     });
   });
 
-  describe("Search from 30 miles west", () => {
+  describe("Search from 45 miles west", () => {
     let properties: Property[];
 
     beforeAll(async () => {
       properties = await createUserAndFind({
         latitude,
-        longitude: longitude - 30 / 57.393,
+        longitude: longitude - 45 / 57.393,
       });
     });
 
-    it("should find The Grove shopping center within 30 miles west", () => {
+    it("should find The Grove shopping center within 45 miles west", () => {
       expect(findTheGrove(properties)).toBeDefined();
     });
   });
 
-  describe("Search from 50 miles north", () => {
+  describe("Search from 70 miles north", () => {
     let properties: Property[];
 
     beforeAll(async () => {
       properties = await createUserAndFind({
-        latitude: latitude + 50 / 69.172,
+        latitude: latitude + 70 / 69.172,
         longitude,
       });
     });
 
-    it("should not find The Grove shopping center beyond 50 miles north", () => {
+    it("should not find The Grove shopping center beyond 70 miles north", () => {
       expect(findTheGrove(properties)).toBeUndefined();
     });
   });
 
-  describe("Search from 50 miles south", () => {
+  describe("Search from 70 miles south", () => {
     let properties: Property[];
 
     beforeAll(async () => {
       properties = await createUserAndFind({
-        latitude: latitude - 50 / 69.172,
+        latitude: latitude - 70 / 69.172,
         longitude,
       });
     });
 
-    it("should not find The Grove shopping center beyond 50 miles south", () => {
+    it("should not find The Grove shopping center beyond 70 miles south", () => {
       expect(findTheGrove(properties)).toBeUndefined();
     });
   });
 
-  describe("Search from 50 miles east", () => {
+  describe("Search from 70 miles east", () => {
     let properties: Property[];
 
     beforeAll(async () => {
       properties = await createUserAndFind({
         latitude,
-        longitude: longitude + 50 / 57.393,
+        longitude: longitude + 70 / 57.393,
       });
     });
 
-    it("should not find The Grove shopping center beyond 50 miles east", () => {
+    it("should not find The Grove shopping center beyond 70 miles east", () => {
       expect(findTheGrove(properties)).toBeUndefined();
     });
   });
 
-  describe("Search from 50 miles west", () => {
+  describe("Search from 70 miles west", () => {
     let properties: Property[];
 
     beforeAll(async () => {
       properties = await createUserAndFind({
         latitude,
-        longitude: longitude - 50 / 57.393,
+        longitude: longitude - 70 / 57.393,
       });
     });
 
-    it("should not find The Grove shopping center beyond 50 miles west", () => {
+    it("should not find The Grove shopping center beyond 70 miles west", () => {
       expect(findTheGrove(properties)).toBeUndefined();
     });
   });
