@@ -6,7 +6,9 @@
       "WebSearch",
       "Bash(npm run typecheck:*)",
       "Bash(tsx scripts/*)",
-      "Bash(pnpx vitest:*)"
+      "Bash(pnpx vitest:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm typecheck:*)"
     ],
     "deny": [],
     "ask": []

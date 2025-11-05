@@ -1,6 +1,7 @@
 import { Link } from "@react-email/components";
 import type { PropertySpace } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
+import { lazy, Suspense } from "react";
 import prisma from "~/lib/prisma";
 
 export async function loader() {
@@ -15,8 +16,18 @@ export default function PropertyPage({
 }: {
   loaderData: PropertyGetPayload<{ include: { spaces: true } }>[];
 }) {
+  const PropertyMap = lazy(
+    () => import("~/components/property-map/PropertyMap"),
+  );
+
   return (
     <div className="prose mx-auto flex flex-col gap-4">
+      <Suspense
+        fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-200" />}
+      >
+        <PropertyMap properties={loaderData} />
+      </Suspense>
+
       {loaderData.map((property) => (
         <Property key={property.id} property={property} />
       ))}
