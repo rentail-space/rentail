@@ -8,11 +8,12 @@ import { cleanParse } from "./userProfile";
 
 /**
  * Find the shopping centers within a given distance from the user. Gets the
- * current location from working memory, updates it, if necessary.
+ * current location from working memory, updates it, if necessary. Returns a
+ * list of properties with only their available spaces.
  *
  * @param user The user to find the shopping centers for.
  * @param maxDistance The distance in miles to find the shopping centers within.
- * @returns Markup with shopping centers and spaces based on distance
+ * @returns A list of properties with only their available spaces.
  */
 export default async function findNearbyProperties(
   user: User,
@@ -27,7 +28,11 @@ export default async function findNearbyProperties(
   if (cachedProperties) return JSON.parse(cachedProperties);
 
   const properties = await prisma.property.findMany({
-    include: { spaces: true },
+    include: {
+      spaces: {
+        where: { available: true },
+      },
+    },
     where: {
       latitude: {
         gte: latitude - maxDistance / 69.172,

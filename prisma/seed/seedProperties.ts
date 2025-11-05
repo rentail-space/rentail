@@ -28,6 +28,7 @@ const schema = z.object({
         size: z.number(),
         floor: z.number(),
         imageURLs: z.array(z.url()).optional(),
+        available: z.boolean().default(false),
       }),
     )
     .default([]),
@@ -53,28 +54,27 @@ export default async function seedProperties() {
       create: {
         ...parsed,
         id,
-        spaces: { create: [] },
+        spaces: {
+          createMany: {
+            data: parsed.spaces.map((space) => ({
+              ...space,
+              id: `${id}-${space.number}`,
+            })),
+          },
+        },
       },
-      update: { ...parsed, spaces: {} },
+      update: {
+        ...parsed,
+        spaces: {
+          upsert: parsed.spaces.map((space) => ({
+            where: { id: `${id}-${space.number}` },
+            update: space,
+            create: { ...space, id: `${id}-${space.number}` },
+          })),
+        },
+      },
       where: { id },
     });
-
-    await prisma.propertySpace.updateMany({
-      data: { available: false },
-      where: { propertyId: id },
-    });
-    for (const space of parsed.spaces) {
-      const data = {
-        ...space,
-        available: true,
-        property: { connect: { id } },
-      };
-      await prisma.propertySpace.upsert({
-        create: { ...data, id: `${id}-${space.number}` },
-        update: data,
-        where: { id: `${id}-${space.number}` },
-      });
-    }
   }
   debug("seed")("Seeded %d properties", filenames.length);
 }

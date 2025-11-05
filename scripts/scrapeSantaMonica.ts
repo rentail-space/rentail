@@ -8,6 +8,7 @@ interface RetailSpace {
   type?: "Cart" | "Inline" | "Storage";
   size?: number;
   floor?: number;
+  available?: boolean;
 }
 
 async function scrapeRetailSpaces() {
@@ -63,7 +64,7 @@ async function scrapeRetailSpaces() {
                 );
                 break;
               case "available date":
-                if (!value.toLowerCase().includes("immediate")) continue;
+                space.available = value.toLowerCase().includes("immediate");
                 break;
             }
           }

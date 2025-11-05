@@ -9,7 +9,7 @@ interface RetailSpace {
   type?: "Cart" | "Inline" | "Storage";
   size?: number;
   floor?: number;
-  availableDate?: string;
+  available?: boolean;
   imageURLs?: string[];
 }
 
@@ -92,7 +92,9 @@ async function scrapeSpaces() {
           const dateMatch = text.match(
             /Available Date[:\s]+([^\n\r]+?)(?:\n|$|Lease|Contact)/i,
           );
-          if (dateMatch) space.availableDate = dateMatch[1].trim();
+          space.available = dateMatch
+            ? dateMatch[1].trim().toLowerCase().includes("immediate")
+            : false;
 
           // Only add spaces with at least spaceType and floor
           if (space.type && space.floor) {
