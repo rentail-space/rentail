@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/react-router";
 import { UI_MESSAGE_STREAM_HEADERS } from "ai";
 import { Redis } from "ioredis";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
@@ -17,14 +18,31 @@ export async function loader({ request }: Route.LoaderArgs) {
   if (!found || found.chat.activeStreamId == null)
     return new Response(null, { status: 204 });
 
-  const streamContext = createResumableStreamContext({
-    publisher: new Redis(env.REDIS_URL),
-    subscriber: new Redis(env.REDIS_URL),
-    waitUntil: async (promise) => await promise,
-  });
+  try {
+    const streamContext = createResumableStreamContext({
+      publisher: new Redis(env.REDIS_URL),
+      subscriber: new Redis(env.REDIS_URL),
+      waitUntil: async (promise) => await promise,
+    });
 
-  return new Response(
-    await streamContext.resumeExistingStream(found.chat.activeStreamId),
-    { headers: UI_MESSAGE_STREAM_HEADERS },
-  );
+    const stream = await streamContext.resumeExistingStream(
+      found.chat.activeStreamId,
+    );
+
+    if (!stream)
+      // Stream not found in Redis, return 204 to signal completion
+      return new Response(null, { status: 204 });
+
+    // Return the stream directly - Response accepts ReadableStream<Uint8Array>
+    return new Response(stream, { headers: UI_MESSAGE_STREAM_HEADERS });
+  } catch (error) {
+    captureException(error, {
+      extra: {
+        activeStreamId: found.chat.activeStreamId,
+        chatId: found.chat.id,
+      },
+    });
+    // Return 204 instead of 500 so client treats it as stream complete
+    return new Response(null, { status: 204 });
+  }
 }
