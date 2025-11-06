@@ -28,6 +28,7 @@
     "@react-router/serve": "^7.9.5",
     "@secretlint/secretlint-rule-preset-recommend": "^11.2.5",
     "@sentry/react-router": "^10.22.0",
+    "@sglara/cn": "^1.0.0",
     "@tailwindcss/postcss": "^4.1.16",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.16",

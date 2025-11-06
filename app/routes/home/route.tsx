@@ -1,5 +1,5 @@
+import BlogPostsGrid from "~/components/ui/BlogPostsGrid";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
-import BlogListing from "~/routes/home/BlogListing";
 import FeaturesSection from "~/routes/home/FeaturesSection";
 import HeroSection from "~/routes/home/HeroSection";
 import SpecialtyLeasing from "~/routes/home/SpecialtyLeasing";
@@ -23,7 +23,7 @@ export default function Home({
         <HeroSection />
         <FeaturesSection />
         <CTASection />
-        <BlogListing posts={loaderData.posts} />
+        <BlogPostsGrid className="bg-gray-50" posts={loaderData.posts} />
         <SpecialtyLeasing />
       </main>
       <HubSpotScript />
