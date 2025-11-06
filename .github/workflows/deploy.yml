@@ -113,11 +113,6 @@ jobs:
     name: Deploy
     needs: test
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-      statuses: write
-      pull-requests: write
 
     env:
       DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}

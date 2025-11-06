@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
-      repository-projects: write
+      actions: write
+      contents: write
 
     env:
       DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
