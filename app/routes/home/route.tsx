@@ -1,11 +1,9 @@
-import { useId } from "react";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
 import BlogListing from "~/routes/home/BlogListing";
 import FeaturesSection from "~/routes/home/FeaturesSection";
 import HeroSection from "~/routes/home/HeroSection";
-import HowItWorksSection from "~/routes/home/HowItWorksSection";
-import JoinWaitlist from "~/routes/home/JoinWaitlist";
 import SpecialtyLeasing from "~/routes/home/SpecialtyLeasing";
+import CTASection from "./CTASection";
 
 export const handle = { showHeader: false, showFooter: true };
 
@@ -19,18 +17,14 @@ export default function Home({
 }: {
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
-  const howItWorksId = useId();
   return (
     <>
-      <main className="mb-20 flex min-h-screen flex-col gap-y-20">
-        <HeroSection howItWorksId={howItWorksId} />
-        <section className="prose prose-lg mx-2 flex flex-col gap-y-10 md:mx-auto md:min-w-4xl">
-          <JoinWaitlist />
-          <FeaturesSection />
-          <HowItWorksSection howItWorksId={howItWorksId} />
-          <BlogListing posts={loaderData.posts} />
-          <SpecialtyLeasing />
-        </section>
+      <main className="flex min-h-screen flex-col">
+        <HeroSection />
+        <FeaturesSection />
+        <CTASection />
+        <BlogListing posts={loaderData.posts} />
+        <SpecialtyLeasing />
       </main>
       <HubSpotScript />
     </>

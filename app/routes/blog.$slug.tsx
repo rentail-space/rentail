@@ -20,7 +20,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
   const faqItems = parseFAQ(body);
 
   return (
-    <article className="prose prose-lg mx-auto">
+    <article className="prose prose-lg mx-auto mt-10 mb-20">
       <title>{title}</title>
       <meta name="author" content="Rentail Space" />
       <meta name="section" content="Blog" />

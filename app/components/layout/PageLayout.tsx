@@ -100,32 +100,90 @@ export default function PageLayout({
 
 function LayoutFooter() {
   return (
-    <footer className="footer sm:footer-horizontal footer-center p-4 text-base-content print:hidden">
-      <aside className="flex flex-col gap-4 text-gray-600">
-        <p className="flex flex-row items-center gap-2">
-          <span>© {new Date().getFullYear()}</span>
-          <NavLink to="/" className="font-bold" viewTransition>
-            <span className="text-indigo-600 hover:underline">rentail</span>
-            .space
-          </NavLink>
-          <span>All rights reserved</span>
-          <Link
-            className="text-indigo-600 hover:underline"
-            to="mailto:hello@rentail.space"
-            viewTransition
-          >
-            Contact us
-          </Link>
-        </p>
-        <p className="flex flex-row items-center gap-2">
-          <a href="/terms" className="text-indigo-600 hover:underline">
-            Terms of Service
-          </a>{" "}
-          <a href="/privacy" className="text-indigo-600 hover:underline">
-            Privacy Policy
-          </a>
-        </p>
-      </aside>
+    <footer className="border-t bg-gray-50 px-6 py-12 print:hidden">
+      <div className="container mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+          {/* Brand */}
+          <div className="flex flex-col gap-4">
+            <NavLink to="/" className="font-bold text-2xl" viewTransition>
+              <span className="text-blue-600">rentail</span>.space
+            </NavLink>
+            <p className="text-gray-600 text-sm">
+              AI-powered short-term retail space marketplace
+            </p>
+          </div>
+
+          {/* Product */}
+          <div className="flex flex-col gap-3">
+            <h3 className="font-semibold text-gray-900 text-sm">Product</h3>
+            <nav className="flex flex-col gap-2">
+              <Link
+                to="/pricing"
+                className="text-gray-600 text-sm transition-colors hover:text-blue-600"
+              >
+                Pricing
+              </Link>
+              <Link
+                to="/faq"
+                className="text-gray-600 text-sm transition-colors hover:text-blue-600"
+              >
+                FAQ
+              </Link>
+            </nav>
+          </div>
+
+          {/* Resources */}
+          <div className="flex flex-col gap-3">
+            <h3 className="font-semibold text-gray-900 text-sm">Resources</h3>
+            <nav className="flex flex-col gap-2">
+              <Link
+                to="/blog"
+                className="text-gray-600 text-sm transition-colors hover:text-blue-600"
+              >
+                Blog
+              </Link>
+              <Link
+                to="/about"
+                className="text-gray-600 text-sm transition-colors hover:text-blue-600"
+              >
+                About
+              </Link>
+              <Link
+                to="mailto:hello@rentail.space"
+                className="text-gray-600 text-sm transition-colors hover:text-blue-600"
+              >
+                Contact
+              </Link>
+            </nav>
+          </div>
+
+          {/* Legal */}
+          <div className="flex flex-col gap-3">
+            <h3 className="font-semibold text-gray-900 text-sm">Legal</h3>
+            <nav className="flex flex-col gap-2">
+              <Link
+                to="/privacy"
+                className="text-gray-600 text-sm transition-colors hover:text-blue-600"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                to="/terms"
+                className="text-gray-600 text-sm transition-colors hover:text-blue-600"
+              >
+                Terms of Service
+              </Link>
+            </nav>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="mt-12 border-t pt-8">
+          <p className="text-center text-gray-600 text-sm">
+            © {new Date().getFullYear()} rentail.space. All rights reserved.
+          </p>
+        </div>
+      </div>
     </footer>
   );
 }
