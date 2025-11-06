@@ -1,5 +1,6 @@
-import * as dotenv from "dotenv";
-import { defineConfig } from "prisma/config";
+import dotenv from "dotenv";
+import { resolve } from "node:path";
+import { defineConfig, env } from "prisma/config";
 
 // Load the environment variables
 dotenv.config({
@@ -8,7 +9,14 @@ dotenv.config({
 });
 
 export default defineConfig({
-  migrations: { seed: "pnpm dlx tsx prisma/seed.ts" },
-  schema: "prisma/schema.prisma",
-  typedSql: { path: "prisma/sql" },
+  engine: "classic",
+  datasource: {
+    url: env("DATABASE_URL"),
+  },
+  migrations: {
+    path: resolve("prisma", "migrations"),
+    seed: "pnpm tsx prisma/seed.ts",
+  },
+  schema: resolve("prisma", "schema.prisma"),
+  typedSql: { path: resolve("prisma", "sql") },
 });
