@@ -1,4 +1,3 @@
-
 generator client {
   provider               = "prisma-client"
   output                 = "generated"
@@ -64,8 +63,8 @@ model User {
   userAgent        String?   @map("user_agent")
   workingMemory    String    @map("working_memory")     @db.Text
 
-  @@map("users")
   @@unique([email])
+  @@map("users")
 }
 
 model Waitlist {
@@ -169,4 +168,3 @@ enum SpaceType {
   Storage
   Other
 }
-
