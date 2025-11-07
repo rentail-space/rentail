@@ -161,6 +161,7 @@ General industry range for shopping centers in Southern California:
  • Pop-up/Activation: $1,500-$5,000/month
 
 
+
 ## To Apply
 
 To apply, the merchant will need to provide the following information:

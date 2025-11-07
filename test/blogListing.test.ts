@@ -86,7 +86,7 @@ describe("Blog Listing", () => {
 
   describe("clicks blog post link", () => {
     beforeAll(async () => {
-      await page.locator('a[href^="/blog/"]').last().click();
+      await page.locator('a[href^="/blog/2025"]').last().click();
       await page.waitForURL(/.*\/blog\/.*/);
       await page.waitForLoadState("networkidle");
     });
@@ -99,9 +99,9 @@ describe("Blog Listing", () => {
     it("should display the blog post content", async () => {
       const article = page.locator("article");
       await expect(article).toBeVisible();
-      await expect(page.locator("h1").first()).toHaveText(
-        "The Birth of Rentail Space",
-      );
+      const h1 = page.locator("h1").first();
+      await expect(h1).toBeVisible();
+      await expect(h1).toHaveText("The Birth of Rentail Space");
     });
   });
 });
