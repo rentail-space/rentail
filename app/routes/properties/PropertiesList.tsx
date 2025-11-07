@@ -56,13 +56,13 @@ function Property({
 
 function Spaces({ spaces }: { spaces: PropertySpace[] }) {
   return spaces.length > 0 ? (
-    <table>
+    <table className="table-zebra table">
       <thead>
         <tr>
           <th>Number</th>
-          <th>Size</th>
-          <th>Type</th>
-          <th>Floor</th>
+          <th className="w-24 text-right">Size</th>
+          <th className="w-20">Type</th>
+          <th className="w-20">Floor</th>
         </tr>
       </thead>
       <tbody>
@@ -75,7 +75,9 @@ function Spaces({ spaces }: { spaces: PropertySpace[] }) {
           .map((space) => (
             <tr key={space.id}>
               <td>{space.number}</td>
-              <td>{space.size} sqft</td>
+              <td className="text-right">
+                {space.size.toLocaleString()} sq ft
+              </td>
               <td>{space.type}</td>
               <td>{space.floor}</td>
             </tr>
