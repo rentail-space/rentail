@@ -17,22 +17,37 @@ export default function PropertiesMapWrapper({
   const [PropertiesMap, setPropertiesMap] = useState<
     typeof import("./PropertiesMap").default | null
   >(null);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     // Dynamically import PropertiesMap only on the client
-    import("./PropertiesMap").then((module) => {
-      setPropertiesMap(() => module.default);
-    });
+    import("./PropertiesMap")
+      .then((module) => {
+        setPropertiesMap(() => module.default);
+      })
+      .catch((err) => {
+        console.error("Failed to load PropertiesMap:", err);
+        setError(err);
+      });
   }, []);
 
-  // Render nothing on server, show PropertiesMap only on client
-  if (!PropertiesMap) return null;
+  if (error) {
+    return (
+      <div className="h-96 rounded-lg bg-red-50 p-4 text-red-700">
+        <p className="font-semibold">Failed to load map</p>
+        <p className="text-sm">{error.message}</p>
+      </div>
+    );
+  }
 
+  // Render nothing on server, show PropertiesMap only on client
   return (
-    <PropertiesMap
-      properties={properties}
-      latitude={latitude}
-      longitude={longitude}
-    />
+    PropertiesMap && (
+      <PropertiesMap
+        properties={properties}
+        latitude={latitude}
+        longitude={longitude}
+      />
+    )
   );
 }
