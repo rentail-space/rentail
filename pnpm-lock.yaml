@@ -192,6 +192,9 @@ importers:
       uuid:
         specifier: ^13.0.0
         version: 13.0.0
+      yaml:
+        specifier: ^2.8.1
+        version: 2.8.1
       zod:
         specifier: ^4.1.12
         version: 4.1.12
@@ -12074,8 +12077,7 @@ snapshots:
 
   yallist@3.1.1: {}
 
-  yaml@2.8.1:
-    optional: true
+  yaml@2.8.1: {}
 
   yargs-parser@21.1.1: {}
 
