@@ -2,21 +2,24 @@ import { NavLink } from "react-router";
 
 export default function PageFooter() {
   return (
-    <footer className="border-t bg-gray-50 px-6 py-12 print:hidden">
+    <footer className="footer sm:footer-horizontal border-t bg-gray-50 px-6 py-12 print:hidden">
       <div className="container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Brand */}
-          <div className="flex flex-col gap-4">
+          <aside className="flex flex-col gap-4">
             <NavLink to="/" className="font-bold text-2xl" viewTransition>
               <span className="text-blue-600">rentail</span>.space
             </NavLink>
             <p className="text-gray-600 text-sm">
               AI-powered short-term retail space marketplace
             </p>
-          </div>
+            <p className="text-gray-600 text-sm">
+              © {new Date().getFullYear()} rentail.space. All rights reserved.
+            </p>
+          </aside>
 
           {/* Product */}
-          <div className="flex flex-col gap-3">
+          <nav className="flex flex-col gap-3">
             <h3 className="font-semibold text-gray-900 text-sm">Product</h3>
             <nav className="flex flex-col gap-2">
               <NavLink
@@ -32,10 +35,10 @@ export default function PageFooter() {
                 FAQ
               </NavLink>
             </nav>
-          </div>
+          </nav>
 
           {/* Resources */}
-          <div className="flex flex-col gap-3">
+          <nav className="flex flex-col gap-3">
             <h3 className="font-semibold text-gray-900 text-sm">Resources</h3>
             <nav className="flex flex-col gap-2">
               <NavLink
@@ -57,10 +60,10 @@ export default function PageFooter() {
                 Contact
               </NavLink>
             </nav>
-          </div>
+          </nav>
 
           {/* Legal */}
-          <div className="flex flex-col gap-3">
+          <nav className="flex flex-col gap-3">
             <h3 className="font-semibold text-gray-900 text-sm">Legal</h3>
             <nav className="flex flex-col gap-2">
               <NavLink
@@ -76,14 +79,7 @@ export default function PageFooter() {
                 Terms of Service
               </NavLink>
             </nav>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="mt-12 border-t pt-8">
-          <p className="text-center text-gray-600 text-sm">
-            © {new Date().getFullYear()} rentail.space. All rights reserved.
-          </p>
+          </nav>
         </div>
       </div>
     </footer>
