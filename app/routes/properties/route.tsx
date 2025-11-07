@@ -1,10 +1,12 @@
-import { Suspense } from "react";
 import prisma from "~/lib/prisma";
 import { cleanParseProfile } from "~/lib/userProfile";
 import { findUserAndChat } from "~/sessions.server";
 import type { Route } from "./+types/route";
 import PropertiesList from "./PropertiesList";
-import PropertiesMapWrapper from "./PropertiesMapWrapper";
+
+// TODO: Re-enable map after fixing Leaflet import issue
+// import { Suspense } from "react";
+// import PropertiesMapWrapper from "./PropertiesMapWrapper";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const found = await findUserAndChat(request.headers);
@@ -22,6 +24,7 @@ export default function PropertyPage({
 }) {
   return (
     <div>
+      {/* TODO: Re-enable map component
       <Suspense
         fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-200" />}
       >
@@ -31,6 +34,7 @@ export default function PropertyPage({
           longitude={loaderData.longitude ?? -118.2437}
         />
       </Suspense>
+      */}
 
       <PropertiesList properties={loaderData.properties} />
     </div>
