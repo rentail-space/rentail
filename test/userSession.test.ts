@@ -187,7 +187,7 @@ describe("Anonymous visits chat page", () => {
 
           it("shows user dropdown after successful sign-up", async () => {
             const userMenuButton = page
-              .locator("button[aria-label='User menu']")
+              .locator("summary")
               .filter({ hasText: "Working Memory User" });
             await expect(userMenuButton).toBeVisible({ timeout: 5000 });
           });
