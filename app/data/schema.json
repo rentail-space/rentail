@@ -14,9 +14,7 @@
       },
       "image": "https://rentail.space/images/og-image.png",
       "logo": "https://rentail.space/images/logo.png",
-      "sameAs": [
-        "https://www.linkedin.com/company/rentail-space"
-      ]
+      "sameAs": ["https://www.linkedin.com/company/rentail-space"]
     },
     {
       "@id": "https://rentail.space",

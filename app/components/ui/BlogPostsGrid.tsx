@@ -1,4 +1,4 @@
-import { cn } from "@sglara/cn";
+import { twMerge } from "tailwind-merge";
 import type { BlogPost } from "~/lib/blogPosts.server";
 import BlogCard from "./BlogCard";
 
@@ -10,7 +10,7 @@ export default function BlogPostsGrid({
   posts: BlogPost[];
 }) {
   return (
-    <section className={cn("px-4 py-20", className)}>
+    <section className={twMerge("blog-posts px-4 py-20", className)}>
       <div className="container mx-auto max-w-7xl">
         {posts.length === 0 ? (
           <div className="py-20 text-center">

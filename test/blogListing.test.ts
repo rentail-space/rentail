@@ -20,7 +20,7 @@ describe("Blog Listing", () => {
 
   it("should display blog posts on home page", async () => {
     // Check if blog posts section exists
-    const blogSection = page.locator("section.blog-posts-section").first();
+    const blogSection = page.locator("section.blog-posts").first();
     await expect(blogSection).toBeVisible();
 
     // Check if blog post links are present
@@ -37,8 +37,8 @@ describe("Blog Listing", () => {
     if (linkCount > 0) {
       const firstLink = blogLinks.first();
 
-      // Check for title (h4 element)
-      const title = firstLink.locator("h4");
+      // Check for title (h2 element)
+      const title = firstLink.locator("h2");
       await expect(title).toBeVisible();
       const titleText = await title.textContent();
       expect(titleText).toBeDefined();
@@ -59,8 +59,8 @@ describe("Blog Listing", () => {
     if ((await blogLinks.count()) > 0) {
       const firstLink = blogLinks.first();
       const linkClasses = await firstLink.getAttribute("class");
-      expect(linkClasses).toContain("link");
-      expect(linkClasses).toContain("link-hover");
+      expect(linkClasses).toContain("hover:border-blue-500");
+      expect(linkClasses).toContain("hover:shadow-xl");
     }
   });
 
@@ -76,8 +76,8 @@ describe("Blog Listing", () => {
     await page.waitForLoadState("networkidle");
 
     // Scroll to blog section if it exists
-    const blogSection = page.locator("section.blog-posts-section").first();
-    expect(blogSection).toBeVisible();
+    const blogSection = page.locator("section.blog-posts").first();
+    await expect(blogSection).toBeVisible();
     await blogSection.scrollIntoViewIfNeeded();
 
     // Take screenshot for visual regression testing of the blog section
