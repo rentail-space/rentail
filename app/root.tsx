@@ -65,7 +65,7 @@ export const links: LinksFunction = () => [
     type: "text/plain",
   },
   {
-    href: "/blog/feed",
+    href: "https://rentail.space/blog/feed",
     rel: "alternate",
     title: "Rentail.space Blog",
     type: "application/atom+xml",
