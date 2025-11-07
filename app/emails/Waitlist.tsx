@@ -19,7 +19,7 @@ export default function Waitlist({ subject }: { subject: string }) {
       <Body style={styles.main}>
         <Container style={styles.container}>
           <Img
-            alt="Rentail Logo"
+            alt="Rentail.space Logo"
             height="80"
             src="https://rentail.space/favicon-96x96.png"
             style={styles.logo}
@@ -30,8 +30,8 @@ export default function Waitlist({ subject }: { subject: string }) {
 
           <Section>
             <Text style={styles.text}>
-              🚀 Rentail helps you find a retail space in a shopping center.
-              Grow your business in a few easy steps.
+              🚀 Rentail.space helps you find a retail space in a shopping
+              center. Grow your business in a few easy steps.
             </Text>
             <Text style={styles.text}>
               🛳 We are launching soon, and we'll send you an email when we do.

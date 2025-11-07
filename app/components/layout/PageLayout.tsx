@@ -67,7 +67,7 @@ export default function PageLayout({
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={url} />
-        <meta property="og:site_name" content="Rentail Space" />
+        <meta property="og:site_name" content="Rentail.space" />
         <meta property="og:locale" content="en_US" />
 
         {/* Twitter Meta Tags */}

@@ -29,7 +29,7 @@ export default function EmailVerification({
       <Body style={styles.main}>
         <Container style={styles.container}>
           <Img
-            alt="Rentail Logo"
+            alt="Rentail.space Logo"
             height="80"
             src="https://rentail.space/favicon-96x96.png"
             style={styles.logo}

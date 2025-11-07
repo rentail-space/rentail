@@ -22,7 +22,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
   return (
     <article className="prose prose-lg mx-auto mt-10 mb-20">
       <title>{title}</title>
-      <meta name="author" content="Rentail Space" />
+      <meta name="author" content="Rentail.space" />
       <meta name="section" content="Blog" />
       <meta
         name="og:image"
@@ -32,7 +32,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
       <meta name="og:title" content={title} />
       <meta name="og:type" content="article" />
       <meta name="og:url" content={`https://rentail.space/blog/${slug}`} />
-      <meta name="og:site_name" content="Rentail Space" />
+      <meta name="og:site_name" content="Rentail.space" />
       <meta name="og:locale" content="en_US" />
       <meta name="robots" content="index, follow" />
       <meta name="googlebot" content="index, follow" />
@@ -65,7 +65,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
           "@id": `https://rentail.space/blog/${slug}`,
           author: {
             "@type": "Organization",
-            name: "Rentail Space",
+            name: "Rentail.space",
             url: "https://rentail.space",
           },
           datePublished: published,

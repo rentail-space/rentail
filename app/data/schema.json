@@ -3,7 +3,7 @@
   "@graph": [
     {
       "@type": "Organization",
-      "name": "Rentail Space",
+      "name": "Rentail.space",
       "email": "hello@rentail.space",
       "url": "https://rentail.space",
       "address": {
@@ -14,14 +14,16 @@
       },
       "image": "https://rentail.space/images/og-image.png",
       "logo": "https://rentail.space/images/logo.png",
-      "sameAs": ["https://www.linkedin.com/company/rentail-space"]
+      "sameAs": [
+        "https://www.linkedin.com/company/rentail-space"
+      ]
     },
     {
       "@id": "https://rentail.space",
       "@type": "WebSite",
       "description": "Marketplace for specialty retail spaces and short-term leases. Connect businesses with shopping centers in Los Angeles for pop-up shops and seasonal retail opportunities.",
       "inLanguage": "en-US",
-      "name": "Rentail Space",
+      "name": "Rentail.space",
       "potentialAction": {
         "@type": "SearchAction",
         "query-input": "required name=search_term_string",

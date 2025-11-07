@@ -78,7 +78,7 @@ async function sendEmail({
     lastEmailHtml = html;
 
     const { error } = await resend.emails.send({
-      from: "Rentail <hello@rentail.space>",
+      from: "Rentail.space <hello@rentail.space>",
       html,
       subject,
       to: [email],

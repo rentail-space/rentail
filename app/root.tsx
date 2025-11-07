@@ -67,7 +67,7 @@ export const links: LinksFunction = () => [
   {
     href: "/blog/feed",
     rel: "alternate",
-    title: "Rentail Blog",
+    title: "Rentail.space Blog",
     type: "application/atom+xml",
   },
 ];
