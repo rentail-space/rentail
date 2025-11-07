@@ -10,7 +10,9 @@
   "numberOfStores": 150,
   "website": "https://www.shopstonewoodcenter.com/",
   "phone": "(562) 923-2191",
-  "imageURLs": ["https://rentail.space/images/malls/stonewood-center-1.jpg"],
+  "imageURLs": [
+    "https://rentail.space/images/malls/stonewood-center-1.jpg"
+  ],
   "description": "Stonewood Center represents a distinctly different retail archetype—a long-established shopping destination with deep community roots and a focus on accessibility and family-oriented commerce. Opening in 1958 before its major renovation and enclosed format in 1990, this 939,000 square foot property embodies the classic American mall experience while maintaining contemporary operational standards. Strategically positioned in Downey near four major freeways, Stonewood Center leverages its location to serve a daytime population of 236,000 within three miles and a total trade area of 1.5 million people.\n\nWhat distinguishes Stonewood Center is its positioning as a value-oriented, family-friendly destination rather than a luxury or aspirational shopping venue. The anchor mix—J.C. Penney, Macy's, Kohl's, and Sears—reflects a focus on affordable fashion, home goods, and practical retail needs. The presence of contemporary brands like H&M, PINK, and Victoria's Secret alongside value retailers creates a democratized shopping environment that appeals to budget-conscious families and value seekers throughout the region.\n\nThe mall's 150-store inventory and dining options anchored by casual favorites like BJ's Restaurant & Brewhouse and Olive Garden reinforce its positioning as an accessible, multi-hour family destination where shopping, dining, and entertainment can be combined without premium pricing. The property's significant acreage (8.41 acres) and ample parking facilities accommodate the high traffic volumes typical of suburban shopping centers, ensuring that visitor parking experience doesn't constrain accessibility.\n\nFor specialty leasing, Stonewood Center's 12 currently available QuikSpace spaces across a range of sizes (from 60 to 5,426 square feet) represent exceptional opportunity for merchants seeking affordable entry into tested retail locations. The availability of multiple size options—particularly the robust inventory of retail storage solutions—suggests a property actively supporting merchant flexibility and testing. For entrepreneurs and established brands seeking to establish or expand presence in the southeast Los Angeles/long Beach market, Stonewood Center offers proven traffic patterns, demonstrated consumer demographics, and accessible leasing terms within a well-maintained facility that balances operational efficiency with merchant support.",
   "spaces": [
     {
@@ -93,6 +95,13 @@
       "imageURLs": [
         "https://www.commercialcafe.com:443/images/b952f21a-8d76-4304-af62-2f8c94aa1f02/StonewoodSpaceP01_C.jpg?width=450"
       ]
+    },
+    {
+      "number": "P05",
+      "type": "Inline",
+      "size": 884,
+      "floor": 1,
+      "available": true
     }
   ]
 }
