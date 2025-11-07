@@ -1,16 +1,27 @@
+"use client";
+
 import "leaflet/dist/leaflet.css";
-import leaflet from "leaflet";
+import { useEffect, useState } from "react";
+import type { ComponentType } from "react";
 import type { Icon } from "leaflet";
 import type { PropertyGetPayload } from "prisma/generated/models";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import type {
+  MapContainerProps,
+  MarkerProps,
+  PopupProps,
+  TileLayerProps,
+} from "react-leaflet";
 
 // Fix for default marker icons in Leaflet with dynamic imports
 let DefaultIcon: Icon | null = null;
 
-function initializeDefaultIcon(): Icon {
+async function initializeDefaultIcon(): Promise<Icon> {
   if (DefaultIcon) return DefaultIcon;
 
   try {
+    // Dynamically import Leaflet only on client
+    const leaflet = await import("leaflet");
+
     DefaultIcon = leaflet.icon({
       iconUrl:
         "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
@@ -36,6 +47,13 @@ function initializeDefaultIcon(): Icon {
   return DefaultIcon;
 }
 
+type MapComponentsType = {
+  MapContainer: ComponentType<MapContainerProps>;
+  Marker: ComponentType<MarkerProps>;
+  Popup: ComponentType<PopupProps>;
+  TileLayer: ComponentType<TileLayerProps>;
+};
+
 export default function PropertiesMap({
   properties,
   latitude,
@@ -45,8 +63,47 @@ export default function PropertiesMap({
   latitude: number;
   longitude: number;
 }) {
-  // Initialize icon on component mount
-  const icon = initializeDefaultIcon();
+  const [MapComponents, setMapComponents] = useState<MapComponentsType | null>(
+    null,
+  );
+  const [icon, setIcon] = useState<Icon | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadMap() {
+      try {
+        const { MapContainer, Marker, Popup, TileLayer } = await import(
+          "react-leaflet"
+        );
+        const defaultIcon = await initializeDefaultIcon();
+
+        setMapComponents({ MapContainer, Marker, Popup, TileLayer });
+        setIcon(defaultIcon);
+      } catch (err) {
+        console.error("Failed to load map components:", err);
+        setError(
+          err instanceof Error ? err.message : "Failed to load map components",
+        );
+      }
+    }
+
+    loadMap();
+  }, []);
+
+  if (error) {
+    return (
+      <div className="h-96 rounded-lg bg-red-50 p-4 text-red-700">
+        <p className="font-semibold">Failed to load map</p>
+        <p className="text-sm">{error}</p>
+      </div>
+    );
+  }
+
+  if (!MapComponents || !icon) {
+    return <div className="h-96 animate-pulse rounded-lg bg-gray-200" />;
+  }
+
+  const { MapContainer, Marker, Popup, TileLayer } = MapComponents;
 
   return (
     <div className="h-96 w-full overflow-hidden">
@@ -57,7 +114,13 @@ export default function PropertiesMap({
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {properties.map((property) => (
-          <PropertyMarker key={property.id} property={property} icon={icon} />
+          <PropertyMarker
+            key={property.id}
+            property={property}
+            Marker={Marker}
+            Popup={Popup}
+            icon={icon}
+          />
         ))}
       </MapContainer>
     </div>
@@ -66,9 +129,13 @@ export default function PropertiesMap({
 
 function PropertyMarker({
   property,
+  Marker,
+  Popup,
   icon,
 }: {
   property: PropertyGetPayload<{ include: { spaces: true } }>;
+  Marker: MapComponentsType["Marker"];
+  Popup: MapComponentsType["Popup"];
   icon: Icon;
 }) {
   return (
