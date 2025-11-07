@@ -1,10 +1,12 @@
-import type { ShouldRevalidateFunction } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { type BlogPost, loadBlogPost } from "~/lib/blogPosts.server";
 import type { Route } from "./+types/blog.$slug";
 
+export const handle = { showHeader: true, showFooter: true };
+
 export async function loader({ params }: Route.LoaderArgs): Promise<BlogPost> {
+  console.log({ params });
   try {
     const { slug } = params;
     return await loadBlogPost(slug);
@@ -12,8 +14,6 @@ export async function loader({ params }: Route.LoaderArgs): Promise<BlogPost> {
     throw new Response("Not Found", { status: 404 });
   }
 }
-
-export const shouldRevalidate: ShouldRevalidateFunction = () => false;
 
 export default function Post({ loaderData }: { loaderData: BlogPost }) {
   const { alt, body, image, slug, published, summary, title } = loaderData;

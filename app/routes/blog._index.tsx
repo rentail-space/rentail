@@ -2,6 +2,8 @@ import BlogPostsGrid from "~/components/ui/BlogPostsGrid";
 import type { BlogPost } from "~/lib/blogPosts.server";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
 
+export const handle = { showHeader: true, showFooter: true };
+
 export async function loader() {
   const posts = await recentBlogPosts();
   return { posts };
