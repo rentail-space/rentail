@@ -5,8 +5,6 @@ import FAQCTA from "./FAQCTA";
 import FAQHeader from "./FAQHeader";
 import FAQQuestions from "./FAQQuestions";
 
-export const handle = { showHeader: true, showFooter: true };
-
 export const loader = async () => {
   const filePath = path.resolve(import.meta.dirname, "faq.yaml");
   const data = await fs.readFile(filePath, "utf-8");

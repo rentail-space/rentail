@@ -1,3 +1,4 @@
+import PageFooter from "~/components/layout/PageFooter";
 import BlogPostsGrid from "~/components/ui/BlogPostsGrid";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
 import FeaturesSection from "~/routes/home/FeaturesSection";
@@ -5,7 +6,7 @@ import HeroSection from "~/routes/home/HeroSection";
 import SpecialtyLeasing from "~/routes/home/SpecialtyLeasing";
 import CTASection from "./CTASection";
 
-export const handle = { showHeader: false, showFooter: true };
+export const handle = { hideLayout: true };
 
 export async function loader() {
   const posts = await recentBlogPosts();
@@ -27,6 +28,7 @@ export default function Home({
         <SpecialtyLeasing />
       </main>
       <HubSpotScript />
+      <PageFooter />
     </>
   );
 }

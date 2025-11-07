@@ -6,10 +6,7 @@ import authServer from "~/lib/auth.server";
 import { updateNewUser } from "~/sessions.server";
 import type { Route } from "./+types/auth";
 
-export const handle = {
-  showHeader: false,
-  showFooter: false,
-};
+export const handle = { hideLayout: true };
 
 export const clientLoader = async () => {
   return {};
@@ -85,7 +82,7 @@ export default function AuthPage() {
   }, [fetcher.data]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50 px-4 py-12">
+    <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50 px-4 py-12">
       <div className="w-full max-w-md">
         <div className="rounded-2xl bg-white p-8 shadow-xl">
           <header className="mb-8 text-center">

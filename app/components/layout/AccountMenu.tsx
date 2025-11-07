@@ -1,57 +1,10 @@
-import { User as UserIcon } from "lucide-react";
-import type { User } from "prisma/generated/client";
+import { UserIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouteLoaderData } from "react-router";
 import authClient from "~/lib/auth.client";
-
-export default function LayoutHeader() {
-  return (
-    <header className="flex flex-row items-center justify-between gap-8 border-b bg-white px-6 py-4 print:hidden">
-      <Link to="/" className="font-bold text-2xl text-gray-900">
-        <span className="text-blue-600">rentail</span>.space
-      </Link>
-
-      <nav className="hidden items-center gap-6 md:flex">
-        <Link
-          to="/about"
-          className="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600"
-        >
-          About
-        </Link>
-        <Link
-          to="/pricing"
-          className="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600"
-        >
-          Pricing
-        </Link>
-        <Link
-          to="/blog"
-          className="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600"
-        >
-          Blog
-        </Link>
-        <Link
-          to="/faq"
-          className="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600"
-        >
-          FAQ
-        </Link>
-        <Link
-          to="mailto:hello@rentail.space"
-          className="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600"
-        >
-          Contact
-        </Link>
-      </nav>
-
-      <UserMenu />
-    </header>
-  );
-}
-
 import type { loader as rootLoader } from "~/root";
 
-function UserMenu() {
+export default function AccountMenu() {
   const data = useRouteLoaderData<typeof rootLoader>("root");
   const user = data?.user;
   const [isOpen, setIsOpen] = useState(false);
@@ -97,7 +50,14 @@ function SignInButton() {
   );
 }
 
-function DropdownMenu({ user }: { user: User }) {
+function DropdownMenu({
+  user,
+}: {
+  user: {
+    name: string | null;
+    email: string | null;
+  };
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
