@@ -186,11 +186,10 @@ describe("Anonymous visits chat page", () => {
           });
 
           it("shows user dropdown after successful sign-up", async () => {
-            await expect(
-              page.locator("button[aria-label='User menu']", {
-                hasText: "Working Memory User",
-              }),
-            ).toBeVisible({ timeout: 5000 });
+            const userMenuButton = page
+              .locator("button[aria-label='User menu']")
+              .filter({ hasText: "Working Memory User" });
+            await expect(userMenuButton).toBeVisible({ timeout: 5000 });
           });
 
           it("should convert anonymous user to authenticated user", async () => {
