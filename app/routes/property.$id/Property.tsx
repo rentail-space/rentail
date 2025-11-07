@@ -11,7 +11,7 @@ export default function Property({
   property: PropertyGetPayload<{ include: { spaces: true } }>;
 }) {
   return (
-    <div className="mx-auto flex max-w-xl flex-col gap-4">
+    <div className="mx-auto my-10 flex max-w-xl flex-col gap-4">
       <h1 className="font-bold text-4xl">
         {property.website ? (
           <Link to={property.website} target="_blank" rel="noopener noreferrer">

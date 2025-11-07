@@ -1,16 +1,20 @@
 import type { PropertySpace } from "prisma/generated/client";
 
 export function Spaces({ spaces }: { spaces: PropertySpace[] }) {
-  return spaces.length ? (
-    spaces
-      .sort((a, b) =>
-        a.type !== b.type
-          ? a.type.localeCompare(b.type)
-          : a.number.localeCompare(b.number),
-      )
-      .map((space) => <Space key={space.id} space={space} />)
-  ) : (
-    <NoAvailableSpaces />
+  return (
+    <div className="mb-10 flex flex-col gap-4">
+      {spaces.length ? (
+        spaces
+          .sort((a, b) =>
+            a.type !== b.type
+              ? a.type.localeCompare(b.type)
+              : a.number.localeCompare(b.number),
+          )
+          .map((space) => <Space key={space.id} space={space} />)
+      ) : (
+        <NoAvailableSpaces />
+      )}
+    </div>
   );
 }
 
@@ -24,16 +28,16 @@ function NoAvailableSpaces() {
 
 function Space({ space }: { space: PropertySpace }) {
   return (
-    <div className="grid grid-cols-4 gap-4 rounded-lg border border-gray-300 p-4">
-      <Metric label="number" value={space.number} />
+    <div className="stats stats-vertical lg:stats-horizontal shadow">
+      <Metric title="number" value={space.number} />
       <Metric
-        label="size"
+        title="size"
         value={space.size.toLocaleString(undefined, { style: "decimal" })}
-        unit="sqft"
+        desc="sqft"
       />
-      <Metric label="type" value={space.type} />
+      <Metric title="type" value={space.type} />
       <Metric
-        label="floor"
+        title="floor"
         value={space.floor.toLocaleString(undefined, { style: "decimal" })}
       />
     </div>
@@ -41,19 +45,19 @@ function Space({ space }: { space: PropertySpace }) {
 }
 
 function Metric({
-  label,
+  title,
   value,
-  unit,
+  desc,
 }: {
-  label: string;
+  title: string;
   value: string;
-  unit?: string;
+  desc?: string;
 }) {
   return (
-    <p className="flex flex-col items-center justify-center gap-2">
-      <span className="text-gray-500 text-sm">{label}</span>
-      <span className="font-bold text-2xl">{value}</span>
-      <span className="text-gray-500 text-sm">{unit || " . "}</span>
-    </p>
+    <div className="stat place-items-center">
+      <span className="stat-title">{title}</span>
+      <span className="stat-value">{value}</span>
+      <span className="stat-desc">{desc}</span>
+    </div>
   );
 }
