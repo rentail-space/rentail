@@ -1,23 +1,24 @@
-import { Users } from "lucide-react";
-
 const team = [
   {
     name: "Assaf Arkin",
     role: "CEO & Co-founder",
     description:
       "Repeat founder with years of experience working with LLMs and serving SMBs.",
+    image: "/images/team/avatar-assaf.jpg",
   },
   {
     name: "Jon Sofield",
     role: "Chief Marketplace Officer",
     description:
       "Scaled Google My Business to 100+ million users, VP of Business Development at several startups.",
+    image: "/images/team/avatar-jon.jpg",
   },
   {
     name: "Alex Storey",
     role: "Chief Sales Officer",
     description:
       "From channel growth at Google to starting multiple companies in the proptech space.",
+    image: "/images/team/avatar-alex.jpg",
   },
 ];
 
@@ -42,7 +43,11 @@ export default function AboutTeam() {
               className="flex flex-col items-center rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm"
             >
               <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-linear-to-br from-blue-100 to-indigo-100">
-                <Users className="h-12 w-12 text-blue-600" />
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="h-full w-full rounded-full"
+                />
               </div>
               <h3 className="mb-1 font-bold text-gray-900 text-xl">
                 {member.name}
