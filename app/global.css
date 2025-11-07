@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "./fonts.css";
-@plugin "daisyui";
 @plugin "@tailwindcss/typography";
+@plugin "daisyui";
 @source "streamdown/dist/index.js";
 
 @layer theme {

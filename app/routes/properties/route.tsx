@@ -1,20 +1,19 @@
+import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { cleanParseProfile } from "~/lib/userProfile";
 import { findUserAndChat } from "~/sessions.server";
 import type { Route } from "./+types/route";
 import PropertiesList from "./PropertiesList";
-
-// TODO: Re-enable map after fixing Leaflet import issue
-// import { Suspense } from "react";
-// import PropertiesMapWrapper from "./PropertiesMapWrapper";
+import PropertiesMap from "./PropertiesMap";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const found = await findUserAndChat(request.headers);
   const profile = found ? cleanParseProfile(found.user.workingMemory) : {};
+  const mapboxToken = env.MAPBOX_TOKEN;
   const properties = await prisma.property.findMany({
     include: { spaces: true },
   });
-  return { properties, ...profile.location };
+  return { properties, ...profile.location, mapboxToken };
 }
 
 export default function PropertyPage({
@@ -24,17 +23,14 @@ export default function PropertyPage({
 }) {
   return (
     <div>
-      {/* TODO: Re-enable map component
-      <Suspense
-        fallback={<div className="h-96 animate-pulse rounded-lg bg-gray-200" />}
-      >
-        <PropertiesMapWrapper
-          properties={loaderData.properties}
-          latitude={loaderData.latitude ?? 34.0522}
-          longitude={loaderData.longitude ?? -118.2437}
-        />
-      </Suspense>
-      */}
+      <PropertiesMap
+        mapboxToken={loaderData.mapboxToken}
+        properties={loaderData.properties}
+        latitude={loaderData.latitude ?? 34.0522}
+        longitude={loaderData.longitude ?? -118.2437}
+        width={800}
+        height={384}
+      />
 
       <PropertiesList properties={loaderData.properties} />
     </div>
