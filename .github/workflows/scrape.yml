@@ -65,6 +65,14 @@ jobs:
       - name: Seed database
         run: doppler run --config prd -- pnpm prisma db seed
 
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: latest
+
+      - name: Format seed files
+        run: biome format prisma/seed/*.json --fix
+
       - name: Commit files
         run: |
           git config --local user.email "assaf@labnotes.org"
