@@ -53,8 +53,11 @@ export default function ChatPage() {
   return (
     <StickToBottom initial="smooth" resize="smooth">
       <div className="inset-0 flex h-screen flex-col">
-        <header className="flex flex-row items-center justify-between gap-8 border-b bg-white px-6 py-4 print:hidden">
-          <NavLink to="/" className="font-bold text-2xl text-gray-900">
+        <header className="navbar shadow-sm print:hidden">
+          <NavLink
+            to="/"
+            className="navbar-start font-bold text-2xl text-gray-900"
+          >
             <span className="text-blue-600">rentail</span>.space
           </NavLink>
           <AccountMenu />

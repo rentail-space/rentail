@@ -28,10 +28,14 @@ export default function AccountMenu() {
   }, [isOpen]);
 
   // Show sign-in link for non-authenticated users
-  return user && !user.isAnonymous ? (
-    <DropdownMenu user={user} />
-  ) : (
-    <SignInButton />
+  return (
+    <div className="navbar-end">
+      {user && !user.isAnonymous ? (
+        <DropdownMenu user={user} />
+      ) : (
+        <SignInButton />
+      )}
+    </div>
   );
 }
 
