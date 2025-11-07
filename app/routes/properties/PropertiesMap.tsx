@@ -1,29 +1,38 @@
 import "leaflet/dist/leaflet.css";
 import leaflet from "leaflet";
+import type { Icon } from "leaflet";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 // Fix for default marker icons in Leaflet with dynamic imports
-let DefaultIcon: leaflet.Icon | null = null;
+let DefaultIcon: Icon | null = null;
 
-function initializeDefaultIcon() {
+function initializeDefaultIcon(): Icon {
   if (DefaultIcon) return DefaultIcon;
 
-  DefaultIcon = leaflet.icon({
-    iconUrl:
-      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
-    iconRetinaUrl:
-      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
-    shadowUrl:
-      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41],
-  });
+  try {
+    DefaultIcon = leaflet.icon({
+      iconUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+      iconRetinaUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+      shadowUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    });
 
-  // Set as default for all markers
-  leaflet.Marker.prototype.setIcon(DefaultIcon);
+    // Set as default for all markers
+    if (leaflet.Marker.prototype.setIcon) {
+      leaflet.Marker.prototype.setIcon(DefaultIcon);
+    }
+  } catch (err) {
+    console.error("Failed to initialize Leaflet icon:", err);
+    throw err;
+  }
+
   return DefaultIcon;
 }
 
@@ -60,13 +69,13 @@ function PropertyMarker({
   icon,
 }: {
   property: PropertyGetPayload<{ include: { spaces: true } }>;
-  icon: leaflet.Icon | null;
+  icon: Icon;
 }) {
   return (
     <Marker
       key={property.id}
       position={[property.latitude, property.longitude]}
-      icon={icon || undefined}
+      icon={icon}
     >
       <Popup>
         <h4 style={{ margin: 0 }} className="font-bold text-lg">
