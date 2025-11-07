@@ -118,3 +118,4 @@ function parseFAQ(body: string): { question: string; answer: string }[] | null {
     answer: match[2].trim(),
   }));
 }
+
