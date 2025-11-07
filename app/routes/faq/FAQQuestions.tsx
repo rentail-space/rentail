@@ -1,19 +1,13 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import faq from "./faq";
 
-export default function FAQQuestions({
-  faqs,
-}: {
-  faqs: {
-    category: string;
-    questions: { question: string; answer: string }[];
-  }[];
-}) {
+export default function FAQQuestions() {
   return (
     <section className="px-4 py-20">
       <div className="container mx-auto max-w-4xl">
         <div className="flex flex-col gap-12">
-          {faqs.map((category) => (
+          {faq.map((category) => (
             <div key={category.category}>
               <h2 className="mb-6 font-bold text-3xl text-gray-900">
                 {category.category}
