@@ -143,9 +143,9 @@ State clearly that you cannot provide a complete answer due to a fundamental saf
 
 ## All Shopping Centers
 
-Some people call them "malls". Some people call them "centers". Some people call them "properties". These are all valid synonyms for "shopping centers".
+Some people refer to shopping centers as "malls". Some people refer to shopping centers as "centers". Some people call to shopping centers as "properties". These are all valid synonyms for "shopping centers".
 
-$[properties]
+$[centers]
 
 
 ## Approximate Pricing
@@ -159,7 +159,6 @@ General industry range for shopping centers in Southern California:
  • Kiosk (60-200 sf): $1,200-$3,500/month
  • Inline Retail: $2-$8/sq ft/month
  • Pop-up/Activation: $1,500-$5,000/month
-
 
 
 ## To Apply

@@ -5,10 +5,10 @@ import { zodToExample } from "./userProfile";
 
 export default function systemPrompt({
   userProfile,
-  properties,
+  centers,
 }: {
   userProfile: ZodType;
-  properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
 }): string {
   const [date, time] = new Date().toISOString().split("T");
   const prompt = source
@@ -18,21 +18,18 @@ export default function systemPrompt({
       "$[userProfile]",
       JSON.stringify(zodToExample(userProfile), null, 2),
     )
-    .replace(
-      "$[properties]",
-      centersToMarkdown({ properties, maxDistance: 20 }),
-    );
+    .replace("$[centers]", centersToMarkdown({ centers, maxDistance: 20 }));
   return prompt;
 }
 
 function centersToMarkdown({
-  properties,
+  centers,
   maxDistance,
 }: {
-  properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
   maxDistance: number;
 }): string {
-  if (properties.length === 0)
+  if (centers.length === 0)
     return "I don't know where you are, so I can't find any shopping centers near you.";
 
   const prefix = `Here are the shopping centers in the area which are within ${maxDistance} miles of the user.
@@ -42,7 +39,7 @@ function centersToMarkdown({
     Do not make up information about shopping centers you do not know about.
     Do not even mention shopping centers you do not know about.`;
 
-  return `${prefix}\n\n${properties.map(centerToMarkdown).join("\n\n")}`;
+  return `${prefix}\n\n${centers.map(centerToMarkdown).join("\n\n")}`;
 }
 
 function centerToMarkdown(

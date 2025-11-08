@@ -19,6 +19,7 @@ const schema = z.object({
   imageURLs: z.array(z.url()),
   logoURL: z.url().optional(),
   description: z.string(),
+  demographics: z.string().optional(),
 
   spaces: z
     .array(

@@ -85,7 +85,7 @@ export async function action({ request }: Route.ActionArgs) {
       "claude-haiku-4-5",
     ),
     messages: convertToModelMessages(messages),
-    system: systemPrompt({ userProfile, properties }),
+    system: systemPrompt({ userProfile, centers: properties }),
 
     onAbort: async () => {
       logger("Aborted %s by user", chat.id);

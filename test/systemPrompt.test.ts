@@ -11,7 +11,7 @@ describe("prompt()", () => {
     const properties = await prisma.property.findMany({
       include: { spaces: true },
     });
-    prompt = systemPrompt({ userProfile, properties });
+    prompt = systemPrompt({ userProfile, centers: properties });
   });
 
   it("includes clear instructions", () => {
@@ -88,7 +88,7 @@ describe("prompt()", () => {
   });
 
   it("handles empty properties list", () => {
-    const result = systemPrompt({ userProfile, properties: [] });
+    const result = systemPrompt({ userProfile, centers: [] });
     expect(result).toContain(
       "I don't know where you are, so I can't find any shopping centers near you",
     );

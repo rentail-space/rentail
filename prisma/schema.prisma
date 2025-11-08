@@ -79,6 +79,7 @@ model Property {
   city           String          @map("city")
   country        String          @map("country")
   createdAt      DateTime        @map("created_at")       @default(now())
+  demographics   String?         @map("demographics")
   description    String          @map("description")
   id             String          @map("id")               @id
   imageURLs      String[]        @map("image_urls")
