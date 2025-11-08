@@ -19,6 +19,10 @@ export default function PropertiesMap({
   const map = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
   const rootsRef = useRef<ReturnType<typeof createRoot>[]>([]);
+  const popupsRef = useRef<mapboxgl.Popup[]>([]);
+  const escapeHandlerRef = useRef<((event: KeyboardEvent) => void) | null>(
+    null,
+  );
 
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
@@ -37,6 +41,12 @@ export default function PropertiesMap({
 
     // Clean up function
     return () => {
+      // Remove escape key handler
+      if (escapeHandlerRef.current) {
+        document.removeEventListener("keydown", escapeHandlerRef.current);
+        escapeHandlerRef.current = null;
+      }
+
       // Unmount all React roots
       for (const root of rootsRef.current) {
         root.unmount();
@@ -67,11 +77,12 @@ export default function PropertiesMap({
     }
     rootsRef.current = [];
 
-    // Remove existing markers
+    // Remove existing markers and popups
     for (const marker of markersRef.current) {
       marker.remove();
     }
     markersRef.current = [];
+    popupsRef.current = [];
 
     // Add new markers
     const validCenters = centers.filter(
@@ -134,11 +145,41 @@ export default function PropertiesMap({
       popupContent.appendChild(addressDiv);
       popupContent.appendChild(spacesDiv);
 
-      // Create popup
+      // Create popup without close button
       const popup = new mapboxgl.Popup({
         offset: 25,
-        closeButton: true,
+        closeButton: false,
       }).setDOMContent(popupContent);
+
+      // Add event listeners for popup open/close to handle Escape key
+      popup.on("open", () => {
+        // Remove existing escape handler if any
+        if (escapeHandlerRef.current) {
+          document.removeEventListener("keydown", escapeHandlerRef.current);
+        }
+
+        // Create new escape handler
+        escapeHandlerRef.current = (event: KeyboardEvent) => {
+          if (event.key === "Escape") {
+            popup.remove();
+            if (escapeHandlerRef.current) {
+              document.removeEventListener("keydown", escapeHandlerRef.current);
+              escapeHandlerRef.current = null;
+            }
+          }
+        };
+
+        // Add escape key listener
+        document.addEventListener("keydown", escapeHandlerRef.current);
+      });
+
+      popup.on("close", () => {
+        // Remove escape handler when popup closes
+        if (escapeHandlerRef.current) {
+          document.removeEventListener("keydown", escapeHandlerRef.current);
+          escapeHandlerRef.current = null;
+        }
+      });
 
       // Create marker with popup
       // Use 'bottom' anchor - Mapbox will anchor the bottom-center of the element to the coordinates
@@ -149,6 +190,7 @@ export default function PropertiesMap({
         .addTo(map.current);
 
       markersRef.current.push(marker);
+      popupsRef.current.push(popup);
     }
   }, [centers]);
 
