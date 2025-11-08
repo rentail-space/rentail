@@ -5,21 +5,33 @@ import prisma from "~/lib/prisma";
 import { cleanParseProfile } from "./userProfile";
 
 /**
+ * Fallback on the the latitude/longitude of LA midcity.
+ */
+const midcity = {
+  latitude: 34.04592,
+  longitude: -118.34574,
+};
+
+/**
  * Find the shopping centers within a given distance from the user. Gets the
  * current location from working memory, updates it, if necessary. Returns a
  * list of properties with only their available spaces.
  *
- * @param user The user to find the shopping centers for.
- * @param maxDistance The distance in miles to find the shopping centers within.
+ * @param headers The HTTP headers to use to get the user's location.
+ * @param user The user to find the shopping centers for. If not provided, the
+ * location will be inferred from the IP address in the headers.
  * @returns A list of properties with only their available spaces.
  */
-export default async function findNearbyCenters(
-  user: User,
-): Promise<PropertyGetPayload<{ include: { spaces: true } }>[]> {
-  const { longitude, latitude } = await locationFromWorkingMemory(user);
-  if (!longitude || !latitude) return [];
+export default async function findNearbyCenters({
+  headers,
+  user,
+}: {
+  headers: Headers;
+  user?: User;
+}): Promise<PropertyGetPayload<{ include: { spaces: true } }>[]> {
+  const { longitude, latitude } = await getLocation({ user, headers });
 
-  const maxDistance = 65; // miles
+  const maxDistance = 30; // miles
   const centers = await prisma.property.findMany({
     include: {
       spaces: {
@@ -40,19 +52,49 @@ export default async function findNearbyCenters(
   return centers;
 }
 
+/**
+ * Try in this order: working memory -> geocode request headers -> default to
+ * LA midcity.
+ */
+async function getLocation({
+  user,
+  headers,
+}: {
+  user?: User;
+  headers: Headers;
+}): Promise<{ longitude: number; latitude: number }> {
+  const fromMemory = user && (await locationFromWorkingMemory(user));
+  if (fromMemory?.longitude && fromMemory.latitude) return fromMemory;
+  const fromHeaders = await locationFromHeaders(headers);
+  if (fromHeaders?.longitude && fromHeaders.latitude) return fromHeaders;
+  return midcity;
+}
+
+async function locationFromHeaders(
+  headers: Headers,
+): Promise<{ longitude: number; latitude: number } | undefined> {
+  const longitude = Number.parseFloat(
+    headers.get("x-vercel-ip-longitude") ?? "0",
+  );
+  const latitude = Number.parseFloat(
+    headers.get("x-vercel-ip-latitude") ?? "0",
+  );
+  return longitude && latitude ? { longitude, latitude } : undefined;
+}
+
 async function locationFromWorkingMemory(
   user: User,
-): Promise<{ longitude?: number; latitude?: number }> {
+): Promise<{ longitude: number; latitude: number } | undefined> {
   try {
     const { workingMemory } = await prisma.user.findUniqueOrThrow({
       where: { id: user.id },
       select: { workingMemory: true },
     });
     const { location } = cleanParseProfile(workingMemory);
-    return { longitude: location?.longitude, latitude: location?.latitude };
+    const { longitude, latitude } = location ?? {};
+    return longitude && latitude ? { longitude, latitude } : undefined;
   } catch (error) {
     captureException(error, { extra: { user } });
     console.error("Error getting location from working memory: %s", error);
-    return {};
   }
 }

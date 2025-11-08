@@ -171,11 +171,7 @@ async function createUserAndFind(coordinates: {
     },
   });
 
-  const centers = await findNearbyCenters(user);
-
-  // Clean up the test user
-  await prisma.user.delete({ where: { id: user.id } });
-
+  const centers = await findNearbyCenters({ headers: new Headers(), user });
   return centers;
 }
 

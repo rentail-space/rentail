@@ -24,7 +24,10 @@ export const handle = { hideLayout: true };
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const found = await findUserAndChat(request.headers);
-  const centers = found ? await findNearbyCenters(found.user) : [];
+  const centers = await findNearbyCenters({
+    headers: request.headers,
+    user: found?.user,
+  });
   return { centers };
 }
 
