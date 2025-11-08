@@ -1,9 +1,9 @@
 import findNearbyCenters from "~/lib/findNearbyCenters";
 import prisma from "~/lib/prisma";
-import type { Route } from "./+types/api.chat.$chatId.properties";
+import type { Route } from "./+types/api.chat.$chatId.centers";
 
 /**
- * Get the properties near the user for a chat.
+ * Get the shopping centers near the user for a chat.
  *
  * @param params.id - The ID of the chat to get the properties for.
  */
@@ -13,6 +13,6 @@ export async function loader({ params }: Route.LoaderArgs) {
     where: { id: chatId },
     include: { user: true },
   });
-  const properties = chat ? await findNearbyCenters(chat.user) : [];
-  return { properties };
+  const centers = chat ? await findNearbyCenters(chat.user) : [];
+  return { centers };
 }

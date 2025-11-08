@@ -56,11 +56,15 @@ function centerToMarkdown(
     website: center.website,
     description: center.description,
   });
-  return `<shopping-center>
-${xml}\n
-${demographics(center.demographics)}\n
-${spaces(center.spaces)}
-</shopping-center>`;
+  return [
+    "<shopping-center>",
+    xml,
+    demographics(center.demographics),
+    spaces(center.spaces),
+    "</shopping-center>",
+  ]
+    .filter(Boolean)
+    .join("\n");
 }
 
 function demographics(demographics: string | null): string {

@@ -2,33 +2,52 @@ import { useChat } from "@ai-sdk/react";
 import { captureException } from "@sentry/react-router";
 import { DefaultChatTransport } from "ai";
 import { useQueryState } from "nuqs";
-import type { PropertyGetPayload } from "prisma/generated/models";
 import { useState } from "react";
-import { NavLink, useRouteLoaderData } from "react-router";
+import {
+  type LoaderFunctionArgs,
+  NavLink,
+  useRouteLoaderData,
+} from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import AccountMenu from "~/components/layout/AccountMenu";
+import findNearbyCenters from "~/lib/findNearbyCenters";
+import systemPrompt from "~/lib/systemPrompt";
 import welcome from "~/prompts/welcome.md?raw";
-import type { loader } from "~/root";
+import type { loader as rootLoader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
+import { findUserAndChat } from "~/sessions.server";
 import CentersList from "./CentersList";
 
 export const handle = { hideLayout: true };
 
-export default function ChatPage() {
+export async function loader({ request }: LoaderFunctionArgs) {
+  const found = await findUserAndChat(request.headers);
+  const centers = found ? await findNearbyCenters(found.user) : [];
+  if (found)
+    systemPrompt({
+      userProfile: JSON.parse(found?.user.workingMemory),
+      centers,
+    });
+  return { centers };
+}
+
+export default function ChatPage({
+  loaderData,
+}: {
+  loaderData: Awaited<ReturnType<typeof loader>>;
+}) {
   const [query, setQuery] = useQueryState("q");
 
   // Access data from root loader first, our loaded depends on it
-  const found = useRouteLoaderData<typeof loader>("root");
+  const found = useRouteLoaderData<typeof rootLoader>("root");
   const [chatId] = useState(() => found?.chat?.id ?? ulid());
   const initialMessages = found?.messages ?? [
     { id: chatId, parts: [{ text: welcome, type: "text" }], role: "assistant" },
   ];
-  const [properties, setProperties] = useState<
-    PropertyGetPayload<{ include: { spaces: true } }>[]
-  >([]);
+  const [centers, setCenters] = useState(loaderData.centers);
 
   const { error, messages, sendMessage, status, stop } = useChat({
     id: chatId,
@@ -44,9 +63,9 @@ export default function ChatPage() {
       console.error("Chat error: %s", error);
     },
     onFinish: () => {
-      fetch(`/api/chat/${chatId}/properties`)
+      fetch(`/api/chat/${chatId}/centers`)
         .then((response) => response.json())
-        .then((data) => setProperties(data.properties));
+        .then(({ centers }) => setCenters(centers));
     },
   });
 
@@ -73,8 +92,8 @@ export default function ChatPage() {
                 setQuery={setQuery}
               />
             </div>
-            <div className="hidden lg:block lg:w-80 lg:flex-shrink-0">
-              <CentersList centers={properties} />
+            <div className="hidden lg:block lg:w-80 lg:shrink-0">
+              <CentersList centers={centers} />
             </div>
           </div>
         </StickToBottom.Content>
