@@ -1,6 +1,8 @@
+import { MapPin } from "lucide-react";
 import mapboxgl from "mapbox-gl";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { useEffect, useRef } from "react";
+import { createRoot } from "react-dom/client";
 
 export default function PropertiesMap({
   latitude,
@@ -16,6 +18,7 @@ export default function PropertiesMap({
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
+  const rootsRef = useRef<ReturnType<typeof createRoot>[]>([]);
 
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
@@ -34,6 +37,12 @@ export default function PropertiesMap({
 
     // Clean up function
     return () => {
+      // Unmount all React roots
+      for (const root of rootsRef.current) {
+        root.unmount();
+      }
+      rootsRef.current = [];
+
       // Remove all markers
       for (const marker of markersRef.current) {
         marker.remove();
@@ -52,6 +61,12 @@ export default function PropertiesMap({
   useEffect(() => {
     if (!map.current) return;
 
+    // Unmount existing React roots
+    for (const root of rootsRef.current) {
+      root.unmount();
+    }
+    rootsRef.current = [];
+
     // Remove existing markers
     for (const marker of markersRef.current) {
       marker.remove();
@@ -66,47 +81,27 @@ export default function PropertiesMap({
     );
 
     for (const center of validCenters) {
-      // Create classic pin marker using SVG for precise positioning
-      // Pin is 30px wide, 45px tall (30px circle + 15px triangle)
-      // The tip is at the bottom center (15px from left, 45px from top)
+      // Create marker element with MapPin icon from lucide-react
       const el = document.createElement("div");
       el.className = "marker";
-      el.style.width = "30px";
-      el.style.height = "45px";
       el.style.cursor = "pointer";
+      el.style.display = "flex";
+      el.style.alignItems = "center";
+      el.style.justifyContent = "center";
+      el.style.width = "32px";
+      el.style.height = "40px";
 
-      // Create SVG pin marker
-      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      svg.setAttribute("width", "30");
-      svg.setAttribute("height", "45");
-      svg.setAttribute("viewBox", "0 0 30 45");
-      svg.style.display = "block";
-
-      // Pin tail (triangle) - tip at bottom center (15, 45)
-      const triangle = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "path",
+      // Render the MapPin icon into the element
+      const root = createRoot(el);
+      root.render(
+        <MapPin
+          className="text-red-500"
+          size={32}
+          strokeWidth={2}
+          fill="#EA4335"
+        />,
       );
-      triangle.setAttribute("d", "M 15 45 L 0 30 L 30 30 Z");
-      triangle.setAttribute("fill", "#285ca0");
-      triangle.setAttribute("filter", "drop-shadow(0 2px 2px rgba(0,0,0,0.3))");
-
-      // Pin head (circle) - centered at (15, 15) with radius 15
-      const circle = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "circle",
-      );
-      circle.setAttribute("cx", "15");
-      circle.setAttribute("cy", "15");
-      circle.setAttribute("r", "14");
-      circle.setAttribute("fill", "#285ca0");
-      circle.setAttribute("stroke", "white");
-      circle.setAttribute("stroke-width", "2");
-      circle.setAttribute("filter", "drop-shadow(0 2px 4px rgba(0,0,0,0.3))");
-
-      svg.appendChild(triangle);
-      svg.appendChild(circle);
-      el.appendChild(svg);
+      rootsRef.current.push(root);
 
       // Create popup content
       const popupContent = document.createElement("div");
@@ -147,7 +142,7 @@ export default function PropertiesMap({
 
       // Create marker with popup
       // Use 'bottom' anchor - Mapbox will anchor the bottom-center of the element to the coordinates
-      // The pin tip is at the bottom center (15px from left edge, 45px from top)
+      // The MapPin icon tip is at the bottom center
       const marker = new mapboxgl.Marker({ element: el, anchor: "bottom" })
         .setLngLat([center.longitude, center.latitude])
         .setPopup(popup)
