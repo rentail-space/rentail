@@ -20,7 +20,6 @@ export default function systemPrompt({
       JSON.stringify(zodToExample(userProfile), null, 2),
     )
     .replace("$[centers]", centersToMarkdown({ centers, maxDistance: 20 }));
-  console.log(prompt);
   return prompt;
 }
 

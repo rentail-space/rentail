@@ -6,7 +6,6 @@ import type { Route } from "./+types/blog.$slug";
 export const handle = { showHeader: true, showFooter: true };
 
 export async function loader({ params }: Route.LoaderArgs): Promise<BlogPost> {
-  console.log({ params });
   try {
     const { slug } = params;
     return await loadBlogPost(slug);
