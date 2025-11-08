@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const team = [
   {
     name: "Assaf Arkin",
@@ -5,6 +7,7 @@ const team = [
     description:
       "Repeat founder with years of experience working with LLMs and serving SMBs.",
     image: "/images/team/avatar-assaf.jpg",
+    linkedIn: "https://www.linkedin.com/in/assafarkin/",
   },
   {
     name: "Jon Sofield",
@@ -12,6 +15,7 @@ const team = [
     description:
       "Scaled Google My Business to 100+ million users, VP of Business Development at several startups.",
     image: "/images/team/avatar-jon.jpg",
+    linkedIn: "https://www.linkedin.com/in/jonsofield/",
   },
   {
     name: "Alex Storey",
@@ -19,6 +23,7 @@ const team = [
     description:
       "From channel growth at Google to starting multiple companies in the proptech space.",
     image: "/images/team/avatar-alex.jpg",
+    linkedIn: "https://www.linkedin.com/in/a-c-s/",
   },
 ];
 
@@ -38,9 +43,11 @@ export default function AboutTeam() {
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {team.map((member) => (
-            <div
+            <Link
               key={member.name}
-              className="flex flex-col items-center rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm"
+              to={member.linkedIn}
+              target="_blank"
+              className="flex flex-col items-center rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm transition-all hover:border-blue-500 hover:shadow-xl"
             >
               <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-linear-to-br from-blue-100 to-indigo-100">
                 <img
@@ -58,7 +65,7 @@ export default function AboutTeam() {
               <p className="text-gray-600 text-sm leading-relaxed">
                 {member.description}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
