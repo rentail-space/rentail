@@ -13,7 +13,7 @@ import type { loader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
-import PropertyList from "./PropertyList";
+import CentersList from "./CentersList";
 
 export const handle = { hideLayout: true };
 
@@ -74,7 +74,7 @@ export default function ChatPage() {
 
         <ScrollButton />
 
-        <PropertyList properties={properties} />
+        <CentersList centers={properties} />
 
         <InputForm
           isResponding={status === "streaming"}

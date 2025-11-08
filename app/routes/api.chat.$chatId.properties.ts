@@ -1,4 +1,4 @@
-import findNearbyProperties from "~/lib/findNearbyProperties";
+import findNearbyCenters from "~/lib/findNearbyCenters";
 import prisma from "~/lib/prisma";
 import type { Route } from "./+types/api.chat.$chatId.properties";
 
@@ -13,6 +13,6 @@ export async function loader({ params }: Route.LoaderArgs) {
     where: { id: chatId },
     include: { user: true },
   });
-  const properties = chat ? await findNearbyProperties(chat.user) : [];
+  const properties = chat ? await findNearbyCenters(chat.user) : [];
   return { properties };
 }

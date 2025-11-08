@@ -9,7 +9,7 @@ import type { InputJsonValue } from "prisma/generated/internal/prismaNamespace";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { ulid } from "ulid";
 import env from "~/lib/env";
-import findNearbyProperties from "~/lib/findNearbyProperties";
+import findNearbyCenters from "~/lib/findNearbyCenters";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import systemPrompt from "~/lib/systemPrompt";
@@ -67,7 +67,7 @@ export async function action({ request }: Route.ActionArgs) {
 
   // Find properties near the user to include in the system prompt, so AI can
   // recommend properties based on the user's location.
-  const properties = await findNearbyProperties(user);
+  const properties = await findNearbyCenters(user);
   logger("Found %d properties", properties.length);
 
   // NOTE: onFinish may be called before consumeSseStream, so we need to store

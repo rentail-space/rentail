@@ -1,21 +1,21 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
 import prisma from "~/lib/prisma";
 import type { Route } from "./+types/route";
-import Property from "./Property";
+import Center from "./Center";
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const property = await prisma.property.findUnique({
+  const center = await prisma.property.findUnique({
     include: { spaces: true },
     where: { id: params.id },
   });
-  if (!property) throw new Response("Not Found", { status: 404 });
-  return property;
+  if (!center) throw new Response("Not Found", { status: 404 });
+  return center;
 }
 
-export default function PropertyPage({
+export default function CenterPage({
   loaderData,
 }: {
   loaderData: PropertyGetPayload<{ include: { spaces: true } }>;
 }) {
-  return <Property property={loaderData} />;
+  return <Center center={loaderData} />;
 }

@@ -31,9 +31,8 @@ function Space({ space }: { space: PropertySpace }) {
     <div className="stats stats-vertical lg:stats-horizontal shadow">
       <Metric title="number" value={space.number} />
       <Metric
-        title="size"
+        title="size (sqft)"
         value={space.size.toLocaleString(undefined, { style: "decimal" })}
-        desc="sqft"
       />
       <Metric title="type" value={space.type} />
       <Metric
@@ -44,20 +43,11 @@ function Space({ space }: { space: PropertySpace }) {
   );
 }
 
-function Metric({
-  title,
-  value,
-  desc,
-}: {
-  title: string;
-  value: string;
-  desc?: string;
-}) {
+function Metric({ title, value }: { title: string; value: string }) {
   return (
     <div className="stat place-items-center">
       <span className="stat-title">{title}</span>
       <span className="stat-value">{value}</span>
-      <span className="stat-desc">{desc}</span>
     </div>
   );
 }

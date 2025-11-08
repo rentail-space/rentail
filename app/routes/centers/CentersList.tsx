@@ -3,43 +3,43 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
 
 export default function PropertiesList({
-  properties,
+  centers,
 }: {
-  properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
 }) {
   return (
     <div className="prose prose-md mx-auto flex flex-col gap-4">
-      {properties.map((property) => (
-        <Property key={property.id} property={property} />
+      {centers.map((center) => (
+        <Center key={center.id} center={center} />
       ))}
     </div>
   );
 }
 
-function Property({
-  property,
+function Center({
+  center,
 }: {
-  property: PropertyGetPayload<{ include: { spaces: true } }>;
+  center: PropertyGetPayload<{ include: { spaces: true } }>;
 }) {
-  const paragraphs = property.description.split("\n");
+  const paragraphs = center.description.split("\n");
 
   return (
-    <section key={property.id} className="flex flex-col gap-2">
+    <section key={center.id} className="flex flex-col gap-2">
       <h3>
         <Link
           className="text-blue-500 no-underline hover:text-blue-700 hover:underline"
-          to={`/property/${property.id}`}
+          to={`/center/${center.id}`}
         >
-          {property.name}
+          {center.name}
         </Link>
       </h3>
 
       <Link
         className="text-blue-500 no-underline hover:text-blue-700 hover:underline"
-        to={`https://maps.google.com/?q=${encodeURIComponent(`${property.address}, ${property.city}, ${property.state} ${property.country}`)}`}
+        to={`https://maps.google.com/?q=${encodeURIComponent(`${center.address}, ${center.city}, ${center.state} ${center.country}`)}`}
         target="_blank"
       >
-        {property.address}, {property.city}, {property.state}
+        {center.address}, {center.city}, {center.state}
       </Link>
 
       <details>
@@ -49,7 +49,7 @@ function Property({
         ))}
       </details>
 
-      <Spaces spaces={property.spaces} />
+      <Spaces spaces={center.spaces} />
     </section>
   );
 }

@@ -1,7 +1,7 @@
 import { expect } from "playwright/test";
 import type { Property } from "prisma/generated/client";
 import { beforeAll, describe, it } from "vitest";
-import findNearbyProperties from "~/lib/findNearbyProperties";
+import findNearbyCenters from "~/lib/findNearbyCenters";
 import prisma from "~/lib/prisma";
 
 /**
@@ -23,122 +23,122 @@ describe("Proximity-based shopping center search", () => {
   });
 
   describe("Search from 45 miles north", () => {
-    let properties: Property[];
+    let centers: Property[];
 
     beforeAll(async () => {
-      properties = await createUserAndFind({
+      centers = await createUserAndFind({
         latitude: latitude + 45 / 69.172,
         longitude,
       });
     });
 
     it("should find The Grove shopping center within 45 miles north", () => {
-      expect(findTheGrove(properties)).toBeDefined();
+      expect(findTheGrove(centers)).toBeDefined();
     });
   });
 
   describe("Search from 45 miles south", () => {
-    let properties: Property[];
+    let centers: Property[];
 
     beforeAll(async () => {
-      properties = await createUserAndFind({
+      centers = await createUserAndFind({
         latitude: latitude - 45 / 69.172,
         longitude,
       });
     });
 
     it("should find The Grove shopping center within 45 miles south", () => {
-      expect(findTheGrove(properties)).toBeDefined();
+      expect(findTheGrove(centers)).toBeDefined();
     });
   });
 
   describe("Search from 45 miles east", () => {
-    let properties: Property[];
+    let centers: Property[];
 
     beforeAll(async () => {
-      properties = await createUserAndFind({
+      centers = await createUserAndFind({
         latitude,
         longitude: longitude + 45 / 57.393,
       });
     });
 
     it("should find The Grove shopping center within 45 miles east", () => {
-      expect(findTheGrove(properties)).toBeDefined();
+      expect(findTheGrove(centers)).toBeDefined();
     });
   });
 
   describe("Search from 45 miles west", () => {
-    let properties: Property[];
+    let centers: Property[];
 
     beforeAll(async () => {
-      properties = await createUserAndFind({
+      centers = await createUserAndFind({
         latitude,
         longitude: longitude - 45 / 57.393,
       });
     });
 
     it("should find The Grove shopping center within 45 miles west", () => {
-      expect(findTheGrove(properties)).toBeDefined();
+      expect(findTheGrove(centers)).toBeDefined();
     });
   });
 
   describe("Search from 70 miles north", () => {
-    let properties: Property[];
+    let centers: Property[];
 
     beforeAll(async () => {
-      properties = await createUserAndFind({
+      centers = await createUserAndFind({
         latitude: latitude + 70 / 69.172,
         longitude,
       });
     });
 
     it("should not find The Grove shopping center beyond 70 miles north", () => {
-      expect(findTheGrove(properties)).toBeUndefined();
+      expect(findTheGrove(centers)).toBeUndefined();
     });
   });
 
   describe("Search from 70 miles south", () => {
-    let properties: Property[];
+    let centers: Property[];
 
     beforeAll(async () => {
-      properties = await createUserAndFind({
+      centers = await createUserAndFind({
         latitude: latitude - 70 / 69.172,
         longitude,
       });
     });
 
     it("should not find The Grove shopping center beyond 70 miles south", () => {
-      expect(findTheGrove(properties)).toBeUndefined();
+      expect(findTheGrove(centers)).toBeUndefined();
     });
   });
 
   describe("Search from 70 miles east", () => {
-    let properties: Property[];
+    let centers: Property[];
 
     beforeAll(async () => {
-      properties = await createUserAndFind({
+      centers = await createUserAndFind({
         latitude,
         longitude: longitude + 70 / 57.393,
       });
     });
 
     it("should not find The Grove shopping center beyond 70 miles east", () => {
-      expect(findTheGrove(properties)).toBeUndefined();
+      expect(findTheGrove(centers)).toBeUndefined();
     });
   });
 
   describe("Search from 70 miles west", () => {
-    let properties: Property[];
+    let centers: Property[];
 
     beforeAll(async () => {
-      properties = await createUserAndFind({
+      centers = await createUserAndFind({
         latitude,
         longitude: longitude - 70 / 57.393,
       });
     });
 
     it("should not find The Grove shopping center beyond 70 miles west", () => {
-      expect(findTheGrove(properties)).toBeUndefined();
+      expect(findTheGrove(centers)).toBeUndefined();
     });
   });
 });
@@ -171,14 +171,14 @@ async function createUserAndFind(coordinates: {
     },
   });
 
-  const properties = await findNearbyProperties(user);
+  const centers = await findNearbyCenters(user);
 
   // Clean up the test user
   await prisma.user.delete({ where: { id: user.id } });
 
-  return properties;
+  return centers;
 }
 
-function findTheGrove(properties: Property[]) {
-  return properties.find((property) => property.name === "The Grove");
+function findTheGrove(centers: Property[]) {
+  return centers.find((center) => center.name === "The Grove");
 }

@@ -5,57 +5,57 @@ import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { Spaces } from "./Spaces";
 
-export default function Property({
-  property,
+export default function Center({
+  center,
 }: {
-  property: PropertyGetPayload<{ include: { spaces: true } }>;
+  center: PropertyGetPayload<{ include: { spaces: true } }>;
 }) {
   return (
     <div className="mx-auto my-10 flex max-w-xl flex-col gap-4">
       <h1 className="font-bold text-4xl">
-        {property.website ? (
-          <Link to={property.website} target="_blank" rel="noopener noreferrer">
-            {property.name}
+        {center.website ? (
+          <Link to={center.website} target="_blank" rel="noopener noreferrer">
+            {center.name}
           </Link>
         ) : (
-          property.name
+          center.name
         )}
       </h1>
 
       <section>
         <Link
           to={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-            `${property.address}, ${property.city}, ${property.state} ${property.country}`,
+            `${center.address}, ${center.city}, ${center.state} ${center.country}`,
           )}`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-row items-center gap-2 text-blue-600 hover:text-blue-800"
         >
           <span>
-            {property.address}, {property.city}, {property.state}
+            {center.address}, {center.city}, {center.state}
           </span>
           <ExternalLink className="h-4 w-4" />
         </Link>
       </section>
 
-      {property.imageURLs.length > 0 && (
+      {center.imageURLs.length > 0 && (
         <section>
           <img
             className="rounded-lg"
-            src={property.imageURLs[0]}
-            alt={property.name}
+            src={center.imageURLs[0]}
+            alt={center.name}
           />
         </section>
       )}
 
       <section className="prose prose-lg">
         <Streamdown remarkPlugins={[[remarkGfm, {}]]}>
-          {property.description}
+          {center.description}
         </Streamdown>
       </section>
 
       <section className="flex flex-col gap-4">
-        <Spaces spaces={property.spaces} />
+        <Spaces spaces={center.spaces} />
       </section>
     </div>
   );

@@ -15,7 +15,7 @@ import { cleanParseProfile } from "./userProfile";
  * @param maxDistance The distance in miles to find the shopping centers within.
  * @returns A list of properties with only their available spaces.
  */
-export default async function findNearbyProperties(
+export default async function findNearbyCenters(
   user: User,
 ): Promise<PropertyGetPayload<{ include: { spaces: true } }>[]> {
   const { longitude, latitude } = await locationFromWorkingMemory(user);
@@ -24,10 +24,10 @@ export default async function findNearbyProperties(
   const redis = new Redis(env.REDIS_URL);
   const maxDistance = 65; // miles
   const key = `properties:${latitude}:${longitude}:${maxDistance}`;
-  const cachedProperties = await redis.get(key);
-  if (cachedProperties) return JSON.parse(cachedProperties);
+  const cachedCenters = await redis.get(key);
+  if (cachedCenters) return JSON.parse(cachedCenters);
 
-  const properties = await prisma.property.findMany({
+  const centers = await prisma.property.findMany({
     include: {
       spaces: {
         where: { available: true },
@@ -44,9 +44,9 @@ export default async function findNearbyProperties(
       },
     },
   });
-  await redis.set(key, JSON.stringify(properties));
+  await redis.set(key, JSON.stringify(centers));
   await redis.expire(key, 60 * 60 * 24 * 30); // 30 days
-  return properties;
+  return centers;
 }
 
 async function locationFromWorkingMemory(

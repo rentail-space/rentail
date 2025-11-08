@@ -46,14 +46,12 @@ function centersToMarkdown({
 }
 
 function centerToMarkdown(
-  property: PropertyGetPayload<{ include: { spaces: true } }>,
+  center: PropertyGetPayload<{ include: { spaces: true } }>,
 ): string {
   return toXml({
     obj: {
-      ...property,
-      spaces: property.spaces.map((space) =>
-        toXml({ obj: space, tag: "space" }),
-      ),
+      ...center,
+      spaces: center.spaces.map((space) => toXml({ obj: space, tag: "space" })),
     },
     tag: "shopping-center",
   });

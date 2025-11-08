@@ -4,24 +4,26 @@ export default function PropertiesMap({
   latitude,
   longitude,
   mapboxToken,
-  properties,
+  centers,
   width,
   height,
 }: {
   latitude: number;
   longitude: number;
   mapboxToken: string;
-  properties: PropertyGetPayload<{ include: { spaces: true } }>[];
+  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
   width: number;
   height: number;
 }) {
   const zoom = 9;
 
-  const markers = properties
+  const markers = centers
     .filter(
-      (p) => typeof p.longitude === "number" && typeof p.latitude === "number",
+      (center) =>
+        typeof center.longitude === "number" &&
+        typeof center.latitude === "number",
     )
-    .map((p, i) => `pin-s+285ca0(${p.longitude},${p.latitude})`)
+    .map((center) => `pin-s+285ca0(${center.longitude},${center.latitude})`)
     .join(",");
 
   const staticMapUrl = `https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/${markers ? markers + "/" : ""}${longitude},${latitude},${zoom}/${width}x${height}@2x?access_token=${mapboxToken}`;
@@ -34,7 +36,7 @@ export default function PropertiesMap({
         className="h-full w-full object-cover"
       />
       <div className="absolute bottom-4 left-4 rounded-md bg-white px-3 py-2 text-gray-700 text-sm shadow-md">
-        {properties.length} properties
+        {centers.length} centers
       </div>
     </div>
   );
