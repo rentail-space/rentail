@@ -3,6 +3,7 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
+import CentersMap from "../../components/ui/CentersMap";
 import { Spaces } from "./Spaces";
 
 export default function Center({
@@ -57,6 +58,13 @@ export default function Center({
       <section className="flex flex-col gap-4">
         <Spaces spaces={center.spaces} />
       </section>
+
+      <CentersMap
+        centers={[center]}
+        latitude={center.latitude ?? 0}
+        longitude={center.longitude ?? 0}
+        zoom={12}
+      />
     </div>
   );
 }

@@ -4,16 +4,19 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
 
+const mapboxToken =
+  "pk.eyJ1IjoiYXNzYWZhcmtpbiIsImEiOiJjbWhwY3ZoazMwYXloMmxvbmxvZTE2eTBmIn0.m1npzYF93dHWeF4W3Yt_xw";
+
 export default function PropertiesMap({
   latitude,
   longitude,
-  mapboxToken,
   centers,
+  zoom = 11,
 }: {
   latitude: number;
   longitude: number;
-  mapboxToken: string;
   centers: PropertyGetPayload<{ include: { spaces: true } }>[];
+  zoom?: number;
 }) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
@@ -33,7 +36,7 @@ export default function PropertiesMap({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v12",
       center: [longitude, latitude],
-      zoom: 9,
+      zoom,
     });
 
     // Add navigation controls
@@ -61,7 +64,7 @@ export default function PropertiesMap({
         map.current = null;
       }
     };
-  }, [mapboxToken, latitude, longitude]);
+  }, [latitude, longitude, zoom]);
 
   // Add markers when centers change
   useEffect(() => {
@@ -186,11 +189,13 @@ export default function PropertiesMap({
   }, [centers]);
 
   return (
-    <div className="relative h-96 w-full overflow-hidden rounded-lg bg-gray-100">
+    <section className="relative h-96 w-full overflow-hidden rounded-lg bg-gray-100">
       <div ref={mapContainer} className="h-full w-full" />
-      <div className="absolute bottom-4 left-4 z-10 rounded-md bg-white px-3 py-2 text-gray-700 text-sm shadow-md">
-        {centers.length} centers
-      </div>
-    </div>
+      {centers.length > 1 && (
+        <div className="absolute bottom-4 left-4 z-10 rounded-md bg-white px-3 py-2 text-gray-700 text-sm shadow-md">
+          {centers.length} centers
+        </div>
+      )}
+    </section>
   );
 }

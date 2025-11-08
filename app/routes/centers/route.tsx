@@ -2,9 +2,9 @@ import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { cleanParseProfile } from "~/lib/userProfile";
 import { findUserAndChat } from "~/sessions.server";
+import CentersMap from "../../components/ui/CentersMap";
 import type { Route } from "./+types/route";
 import CentersList from "./CentersList";
-import CentersMap from "./CentersMap";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const found = await findUserAndChat(request.headers);
@@ -24,10 +24,10 @@ export default function CenterPage({
   return (
     <div>
       <CentersMap
-        mapboxToken={loaderData.mapboxToken}
         centers={loaderData.centers}
         latitude={loaderData.latitude ?? 34.0522}
         longitude={loaderData.longitude ?? -118.2437}
+        zoom={9}
       />
 
       <CentersList centers={loaderData.centers} />
