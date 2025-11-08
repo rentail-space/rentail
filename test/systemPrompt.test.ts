@@ -112,7 +112,7 @@ describe("prompt()", () => {
 function findTheGrove(markdown: string): Record<string, unknown> | undefined {
   const centers = parseShoppingCenters(markdown);
   return centers.find(
-    (center) => (center as { id: string }).id === "the-grove",
+    (center) => (center as { name: string }).name === "The Grove",
   );
 }
 
