@@ -12,7 +12,6 @@ import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import AccountMenu from "~/components/layout/AccountMenu";
 import findNearbyCenters from "~/lib/findNearbyCenters";
-import systemPrompt from "~/lib/systemPrompt";
 import welcome from "~/prompts/welcome.md?raw";
 import type { loader as rootLoader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
@@ -26,11 +25,6 @@ export const handle = { hideLayout: true };
 export async function loader({ request }: LoaderFunctionArgs) {
   const found = await findUserAndChat(request.headers);
   const centers = found ? await findNearbyCenters(found.user) : [];
-  if (found)
-    systemPrompt({
-      userProfile: JSON.parse(found?.user.workingMemory),
-      centers,
-    });
   return { centers };
 }
 
