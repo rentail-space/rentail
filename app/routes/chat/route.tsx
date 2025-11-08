@@ -64,17 +64,22 @@ export default function ChatPage() {
         </header>
 
         <StickToBottom.Content>
-          <Messages
-            error={error}
-            isTyping={status === "streaming"}
-            messages={messages}
-            setQuery={setQuery}
-          />
+          <div className="flex flex-1 flex-row gap-4 lg:pr-4">
+            <div className="flex flex-1 flex-col">
+              <Messages
+                error={error}
+                isTyping={status === "streaming"}
+                messages={messages}
+                setQuery={setQuery}
+              />
+            </div>
+            <div className="hidden lg:block lg:w-80 lg:flex-shrink-0">
+              <CentersList centers={properties} />
+            </div>
+          </div>
         </StickToBottom.Content>
 
         <ScrollButton />
-
-        <CentersList centers={properties} />
 
         <InputForm
           isResponding={status === "streaming"}
