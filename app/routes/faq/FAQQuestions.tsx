@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { twMerge } from "tailwind-merge";
 import faq from "./faq";
 
 export default function FAQQuestions() {
@@ -33,24 +34,22 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md">
-      <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between gap-4 p-6 text-left"
-      >
+    <details
+      onToggle={(event) => setIsOpen(event.currentTarget.open)}
+      className="rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md"
+    >
+      <summary className="flex w-full items-center justify-between gap-4 p-6 text-left">
         <h3 className="font-semibold text-gray-900 text-lg">{question}</h3>
         <ChevronDown
-          className={`h-5 w-5 shrink-0 text-blue-600 transition-transform ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={twMerge(
+            "h-5 w-5 shrink-0 text-blue-600 transition-transform",
+            isOpen && "rotate-180",
+          )}
         />
-      </button>
-      {isOpen && (
-        <div className="border-gray-200 border-t px-6 pt-4 pb-6">
-          <p className="text-gray-600 leading-relaxed">{answer}</p>
-        </div>
-      )}
-    </div>
+      </summary>
+      <div className="border-gray-200 border-t px-6 pt-4 pb-6">
+        <p className="text-gray-600 leading-relaxed">{answer}</p>
+      </div>
+    </details>
   );
 }
