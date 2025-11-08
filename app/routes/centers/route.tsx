@@ -28,8 +28,6 @@ export default function CenterPage({
         centers={loaderData.centers}
         latitude={loaderData.latitude ?? 34.0522}
         longitude={loaderData.longitude ?? -118.2437}
-        width={800}
-        height={384}
       />
 
       <CentersList centers={loaderData.centers} />
