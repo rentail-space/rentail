@@ -1,3 +1,4 @@
+import type { PropertySpace } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import type { ZodType } from "zod";
 import source from "~/prompts/systemPrompt.md?raw";
@@ -19,6 +20,7 @@ export default function systemPrompt({
       JSON.stringify(zodToExample(userProfile), null, 2),
     )
     .replace("$[centers]", centersToMarkdown({ centers, maxDistance: 20 }));
+  console.log(prompt);
   return prompt;
 }
 
@@ -45,31 +47,48 @@ function centersToMarkdown({
 function centerToMarkdown(
   center: PropertyGetPayload<{ include: { spaces: true } }>,
 ): string {
-  return toXml({
-    obj: {
-      ...center,
-      spaces: center.spaces.map((space) => toXml({ obj: space, tag: "space" })),
-    },
-    tag: "shopping-center",
+  const xml = toXml({
+    name: center.name,
+    address: center.address,
+    city: center.city,
+    state: center.state,
+    country: center.country,
+    website: center.website,
+    description: center.description,
   });
+  return `<shopping-center>
+${xml}\n
+${demographics(center.demographics)}\n
+${spaces(center.spaces)}
+</shopping-center>`;
 }
 
-function toXml({
-  obj,
-  tag,
-}: {
-  obj: Record<string, unknown>;
-  tag: string;
-}): string {
-  const entries = Object.entries(obj)
+function demographics(demographics: string | null): string {
+  return demographics ? `<demographics>\n${demographics}\n</demographics>` : "";
+}
+
+function spaces(spaces: PropertySpace[]): string {
+  return spaces
+    .map((space) =>
+      toXml({
+        number: space.number,
+        type: space.type,
+        size: space.size,
+        floor: space.floor,
+      }),
+    )
+    .map((space) => `<space>\n${space}\n</space>`)
+    .join("\n");
+}
+
+function toXml(obj: Record<string, unknown>): string {
+  return Object.entries(obj)
     .map(([key, value]) => {
       if (Array.isArray(value))
         return value.map((item) => `  ${toLabel(key)}: ${item}`).join("\n");
       return `  ${toLabel(key)}: ${value}`;
     })
     .join("\n");
-
-  return `<${tag}>\n${entries}\n</${tag}>`;
 }
 
 function toLabel(key: string): string {

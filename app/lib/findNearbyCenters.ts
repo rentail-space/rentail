@@ -1,9 +1,7 @@
 import { captureException } from "@sentry/react-router";
-import { Redis } from "ioredis";
 import type { User } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import prisma from "~/lib/prisma";
-import env from "./env";
 import { cleanParseProfile } from "./userProfile";
 
 /**
@@ -21,12 +19,7 @@ export default async function findNearbyCenters(
   const { longitude, latitude } = await locationFromWorkingMemory(user);
   if (!longitude || !latitude) return [];
 
-  const redis = new Redis(env.REDIS_URL);
   const maxDistance = 65; // miles
-  const key = `properties:${latitude}:${longitude}:${maxDistance}`;
-  const cachedCenters = await redis.get(key);
-  if (cachedCenters) return JSON.parse(cachedCenters);
-
   const centers = await prisma.property.findMany({
     include: {
       spaces: {
@@ -44,8 +37,6 @@ export default async function findNearbyCenters(
       },
     },
   });
-  await redis.set(key, JSON.stringify(centers));
-  await redis.expire(key, 60 * 60 * 24 * 30); // 30 days
   return centers;
 }
 
