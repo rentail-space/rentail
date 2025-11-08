@@ -48,15 +48,11 @@ export default function PropertiesMap({
       }
 
       // Unmount all React roots
-      for (const root of rootsRef.current) {
-        root.unmount();
-      }
+      for (const root of rootsRef.current) root.unmount();
       rootsRef.current = [];
 
       // Remove all markers
-      for (const marker of markersRef.current) {
-        marker.remove();
-      }
+      for (const marker of markersRef.current) marker.remove();
       markersRef.current = [];
 
       // Remove map
@@ -72,15 +68,11 @@ export default function PropertiesMap({
     if (!map.current) return;
 
     // Unmount existing React roots
-    for (const root of rootsRef.current) {
-      root.unmount();
-    }
+    for (const root of rootsRef.current) root.unmount();
     rootsRef.current = [];
 
     // Remove existing markers and popups
-    for (const marker of markersRef.current) {
-      marker.remove();
-    }
+    for (const marker of markersRef.current) marker.remove();
     markersRef.current = [];
     popupsRef.current = [];
 
@@ -106,10 +98,10 @@ export default function PropertiesMap({
       const root = createRoot(el);
       root.render(
         <MapPin
-          className="text-red-500"
+          className="text-yellow-200"
           size={32}
           strokeWidth={2}
-          fill="#EA4335"
+          fill="var(--color-yellow-500)"
         />,
       );
       rootsRef.current.push(root);
@@ -154,9 +146,8 @@ export default function PropertiesMap({
       // Add event listeners for popup open/close to handle Escape key
       popup.on("open", () => {
         // Remove existing escape handler if any
-        if (escapeHandlerRef.current) {
+        if (escapeHandlerRef.current)
           document.removeEventListener("keydown", escapeHandlerRef.current);
-        }
 
         // Create new escape handler
         escapeHandlerRef.current = (event: KeyboardEvent) => {
