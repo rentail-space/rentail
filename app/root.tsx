@@ -54,12 +54,6 @@ export const links: LinksFunction = () => [
     sizes: "32x32",
   },
   {
-    href: "/favicon-16x16.png",
-    rel: "icon",
-    type: "image/png",
-    sizes: "16x16",
-  },
-  {
     href: "/humans.txt",
     rel: "author",
     type: "text/plain",
