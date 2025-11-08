@@ -86,14 +86,16 @@ describe("Blog Listing", () => {
 
   describe("clicks blog post link", () => {
     beforeAll(async () => {
-      await page.locator('a[href^="/blog/2025"]').last().click();
-      await page.waitForURL(/.*\/blog\/.*/);
-      await page.waitForLoadState("networkidle");
+      await page
+        .locator('a[href^="/blog/2025-11-07-ultimate-guide"]')
+        .last()
+        .click();
+      await page.waitForURL(/.*\/blog\/.*/, { waitUntil: "networkidle" });
     });
 
     it("should navigate to blog post when clicking link", async () => {
       // Verify we're on a blog post page
-      expect(page.url()).toContain("/blog/");
+      expect(page.url()).toContain("/blog/2025-11-07-ultimate-guide");
     });
 
     it("should display the blog post content", async () => {
@@ -101,7 +103,7 @@ describe("Blog Listing", () => {
       await expect(article).toBeVisible();
       const h1 = page.locator("h1").first();
       await expect(h1).toBeVisible();
-      await expect(h1).toHaveText("The Birth of Rentail Space");
+      await expect(h1).toHaveText("The Ultimate Guide");
     });
   });
 });

@@ -1,6 +1,5 @@
 import type { BlogPost } from "~/lib/blogPosts.server";
-
-import BlogCard from "./BlogCard";
+import BlogPostCard from "./BlogPostCard";
 
 export default function BlogPostsGrid({
   className,
@@ -23,7 +22,7 @@ export default function BlogPostsGrid({
         ) : (
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
-              <BlogCard key={post.slug} post={post} />
+              <BlogPostCard key={post.slug} post={post} />
             ))}
           </div>
         )}
