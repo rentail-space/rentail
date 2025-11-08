@@ -41,13 +41,10 @@ export async function recentBlogPosts(): Promise<BlogPost[]> {
       }>(content);
       const slug = basename(filename, ".md");
       return {
-        alt: attributes.alt,
+        ...attributes,
         body,
-        image: attributes.image,
         published,
         slug,
-        summary: attributes.summary || truncateWords(removeMd(body), 20),
-        title: attributes.title,
       };
     })
     .filter(({ published }) => dayjs().isAfter(published))

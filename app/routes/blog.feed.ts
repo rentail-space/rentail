@@ -22,12 +22,25 @@ export async function loader() {
     const recent = blogPosts.slice(0, 10); // Take most recent 10
 
     // Blog post entries for feed
-    for (const { body, slug, published, summary, title } of recent) {
+    for (const {
+      body,
+      slug,
+      published,
+      summary,
+      title,
+      image,
+      alt,
+    } of recent) {
+      const imageURL = `https://rentail.space/blog/${image}`;
+      const content =
+        `<img src="${imageURL}" alt="${alt}" />` +
+        (await marked.parse(body, { gfm: true }));
       feed.addItem({
-        content: await marked.parse(body, { gfm: true }),
+        content,
         date: published,
         description: summary,
         id: `rentail.space:${slug}`,
+        image: imageURL,
         link: `https://rentail.space/blog/${slug}`,
         published: published,
         title: title,
