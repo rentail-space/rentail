@@ -3,10 +3,10 @@ import { Activity, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
 /**
- * A list of properties that are nearby the user.
+ * A list of centers that are nearby the user.
  *
- * @param properties - The properties that are nearby the user.
- * @returns A list of properties that are nearby the user.
+ * @param centers - The centers that are nearby the user.
+ * @returns A list of centers that are nearby the user.
  */
 export default function CentersList({
   centers,

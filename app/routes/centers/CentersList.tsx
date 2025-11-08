@@ -2,7 +2,7 @@ import type { PropertySpace } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
 
-export default function PropertiesList({
+export default function CentersList({
   centers,
 }: {
   centers: PropertyGetPayload<{ include: { spaces: true } }>[];

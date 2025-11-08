@@ -78,7 +78,7 @@ jobs:
           git config --local user.email "assaf@labnotes.org"
           git config --local user.name "GitHub Actions"
           git add prisma/seed/*.json
-          git commit -m "Scrape properties" || echo "No changes to commit"
+          git commit -m "Scrape centers" || echo "No changes to commit"
 
       - name: Push changes
         uses: ad-m/github-push-action@master

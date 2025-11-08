@@ -5,7 +5,7 @@ import type { Route } from "./+types/api.chat.$chatId.centers";
 /**
  * Get the shopping centers near the user for a chat.
  *
- * @param params.id - The ID of the chat to get the properties for.
+ * @param params.id - The ID of the chat to get the centers for.
  */
 export async function loader({ params, request }: Route.LoaderArgs) {
   const { chatId } = params;

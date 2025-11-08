@@ -7,7 +7,7 @@ import { createRoot } from "react-dom/client";
 const mapboxToken =
   "pk.eyJ1IjoiYXNzYWZhcmtpbiIsImEiOiJjbWhwY3ZoazMwYXloMmxvbmxvZTE2eTBmIn0.m1npzYF93dHWeF4W3Yt_xw";
 
-export default function PropertiesMap({
+export default function CentersMap({
   latitude,
   longitude,
   centers,

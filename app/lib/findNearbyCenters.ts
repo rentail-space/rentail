@@ -15,12 +15,12 @@ const midcity = {
 /**
  * Find the shopping centers within a given distance from the user. Gets the
  * current location from working memory, updates it, if necessary. Returns a
- * list of properties with only their available spaces.
+ * list of centers with only their available spaces.
  *
  * @param headers The HTTP headers to use to get the user's location.
  * @param user The user to find the shopping centers for. If not provided, the
  * location will be inferred from the IP address in the headers.
- * @returns A list of properties with only their available spaces.
+ * @returns A list of centers with only their available spaces.
  */
 export default async function findNearbyCenters({
   headers,

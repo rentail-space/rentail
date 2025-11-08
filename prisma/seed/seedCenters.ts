@@ -35,8 +35,8 @@ const schema = z.object({
     .default([]),
 });
 
-export default async function seedProperties() {
-  debug("seed")("Seeding properties");
+export default async function seedCenters() {
+  debug("seed")("Seeding centers");
 
   const dirname = resolve("prisma/seed");
   const filenames = (await readdir(dirname)).filter((filename) =>
@@ -46,18 +46,18 @@ export default async function seedProperties() {
   for (const filename of filenames) {
     debug("seed")("Seeding %s", filename);
     const data = await readFile(join(dirname, filename), "utf-8");
-    const parsed = schema.parse(JSON.parse(data));
+    const center = schema.parse(JSON.parse(data));
 
     // Generate missing fields
     const id = basename(filename, ".json");
 
     await prisma.property.upsert({
       create: {
-        ...parsed,
+        ...center,
         id,
         spaces: {
           createMany: {
-            data: parsed.spaces.map((space) => ({
+            data: center.spaces.map((space) => ({
               ...space,
               id: `${id}-${space.number}`,
             })),
@@ -65,9 +65,9 @@ export default async function seedProperties() {
         },
       },
       update: {
-        ...parsed,
+        ...center,
         spaces: {
-          upsert: parsed.spaces.map((space) => ({
+          upsert: center.spaces.map((space) => ({
             where: { id: `${id}-${space.number}` },
             update: space,
             create: { ...space, id: `${id}-${space.number}` },
@@ -77,5 +77,5 @@ export default async function seedProperties() {
       where: { id },
     });
   }
-  debug("seed")("Seeded %d properties", filenames.length);
+  debug("seed")("Seeded %d centers", filenames.length);
 }

@@ -8,10 +8,10 @@ describe("prompt()", () => {
   let prompt: string;
 
   beforeAll(async () => {
-    const properties = await prisma.property.findMany({
+    const centers = await prisma.property.findMany({
       include: { spaces: true },
     });
-    prompt = systemPrompt({ userProfile, centers: properties });
+    prompt = systemPrompt({ userProfile, centers });
   });
 
   it("includes clear instructions", () => {
@@ -87,7 +87,7 @@ describe("prompt()", () => {
     expect(space).toBeUndefined();
   });
 
-  it("handles empty properties list", () => {
+  it("handles empty centers list", () => {
     const result = systemPrompt({ userProfile, centers: [] });
     expect(result).toContain(
       "I don't know where you are, so I can't find any shopping centers near you",

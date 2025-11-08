@@ -65,10 +65,10 @@ export async function action({ request }: Route.ActionArgs) {
   // Set up Redis stop monitoring
   const { abortSignal } = await monitorStopSignal(chat.id);
 
-  // Find properties near the user to include in the system prompt, so AI can
-  // recommend properties based on the user's location.
-  const properties = await findNearbyCenters(user);
-  logger("Found %d properties", properties.length);
+  // Find centers near the user to include in the system prompt, so AI can
+  // recommend centers based on the user's location.
+  const centers = await findNearbyCenters({ headers, user });
+  logger("Found %d centers", centers.length);
 
   // NOTE: onFinish may be called before consumeSseStream, so we need to store
   // the active stream ID in the database right now. The docs show a different
@@ -85,7 +85,7 @@ export async function action({ request }: Route.ActionArgs) {
       "claude-haiku-4-5",
     ),
     messages: convertToModelMessages(messages),
-    system: systemPrompt({ userProfile, centers: properties }),
+    system: systemPrompt({ userProfile, centers }),
 
     onAbort: async () => {
       logger("Aborted %s by user", chat.id);
