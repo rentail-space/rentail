@@ -50,33 +50,70 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Chat Architecture:**
 - API endpoint: `app/routes/api.chat.message.tsx` implements `streamText()` from Anthropic SDK
 - Client hook: `useChat` from AI SDK with `resume: true` for auto-reconnection on network loss
-- **Resumable Streams Pattern:**
-  - Active stream ID stored in `Chat.activeStreamId` database field
-  - Resumable context created in `consumeSseStream` callback using Redis pub/sub
-  - Resume endpoint: `app/routes/api.chat.message.$messageId.stream.tsx` restores interrupted streams
-  - `activeStreamId` cleared in `onFinish` callback when stream completes
-  - Prevents message duplication on reconnect
+
+**Resumable Streams Pattern:**
+The core innovation that prevents message duplication on network interruptions:
+- Stream ID generation: Each new response gets a unique ID stored in `Chat.activeStreamId`
+- Storage: Active stream ID persisted in database (identifies which message is currently streaming)
+- Resumption: When network reconnects, client requests `/api/chat/message.$messageId.stream.tsx` with the message ID
+- Redis coordination: `resumable-stream` context created via Redis pub/sub to track already-sent chunks
+- Completion: `activeStreamId` cleared in `onFinish` callback when stream completes (signals ready for next message)
+- Safety: If a new message request arrives while `activeStreamId` is set, the old stream is aborted (prevents accidental dual streams)
 
 **Working Memory (User Profiles):**
 - Stores persistent user context as JSON in `User.workingMemory` field
 - Profile schema validated via Zod in `app/lib/userProfile.ts`
 - Profile fields: name, location (city, state, country, lat/lon as numbers, timezone), selling details, preferences
-- **Emission Pattern:**
-  - System prompt instructs agent to emit `<working_memory>{JSON}</working_memory>` tags
-  - Tags automatically parsed and merged into profile via `updateUserProfile()` in `onFinish` callback
-  - `maskWorkingMemoryTags()` removes tags from user-visible output
-  - Deep merge: new values override existing profile fields
-- System prompts: `app/prompts/systemPrompt.md` (with working memory instructions), `welcome.md`
+- Example working memory object:
+  ```json
+  {
+    "name": "Sarah Chen",
+    "location": {
+      "city": "Los Angeles",
+      "state": "CA",
+      "country": "USA",
+      "latitude": 34.0522,
+      "longitude": -118.2437,
+      "timeZone": "America/Los_Angeles"
+    },
+    "selling": {
+      "productType": "Artisan Coffee",
+      "pricePoint": "Premium",
+      "targetAudience": "Young professionals"
+    },
+    "preferences": {
+      "communicationStyle": "Formal",
+      "keyDeadlines": ["Q2 2024 expansion"]
+    }
+  }
+  ```
+
+**Emission & Update Pattern:**
+- System prompt (in `app/prompts/systemPrompt.md`) explicitly instructs Claude to emit `<working_memory>{JSON}</working_memory>` tags when extracting user information
+- Tags automatically parsed and merged into profile via `updateUserProfile()` in `onFinish` callback
+- `maskWorkingMemoryTags()` removes tags from user-visible output (users never see the XML markers)
+- Deep merge strategy: new values override existing profile fields (partial updates supported)
+- Async geocoding: When location updates, reverse geocoding via OpenStreetMap API populates city/state/country
+- System prompts: `app/prompts/systemPrompt.md` (main agent instructions with working memory tags), `welcome.md` (first-time user greeting)
 
 ### Database & Observability
 
 **Database:**
 - PostgreSQL with Prisma ORM + PgAdapter for connection pooling
-- Models: User, Chat, Message, Waitlist, Property, PropertySpace
+- Models: User, Chat, Message, Waitlist, Property, PropertySpace, Session, Account, Verification
 - Session-based chat with automatic user creation from IP geolocation
 - Bot detection via `isBot` flag (user-agent based)
 - Geographic queries: simple latitude/longitude bounding box calculations (see `app/lib/findNearbyProperties.ts`)
 - Schema updates: `prisma generate && prisma db push`
+
+**Key Database Tables:**
+- `User`: id, name, email, emailVerified, isAnonymous, isBot, geocode (JSON), workingMemory (Text), metadata, createdAt
+- `Chat`: id, userId (FK), title, metadata (JSON), activeStreamId, createdAt, updatedAt
+- `Message`: id, chatId (FK), role (assistant|user), content (JSON), type, createdAt
+- `Property`: id, name, address, city, state, country, latitude, longitude, website, phone, imageURLs, squareFootage
+- `PropertySpace`: id, propertyId (FK), number, type (Cart|Inline|Storage|Other), size, floor, available, imageURLs
+- `Session`: id, userId (FK), token (unique), expiresAt, ipAddress, userAgent
+- `Waitlist`: email (PK), createdAt
 
 **Monitoring & Logging:**
 - **Error tracking**: Sentry (configured in `app/lib/instrument.server.ts`)
@@ -110,6 +147,36 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Double quotes, 2-space indent, 80 character line width
 - Import organization via Biome assist
 - `pnpm format --write` before committing
+
+## Key Architectural Patterns
+
+**Location Retrieval (Priority Chain):**
+The app determines user location in this order:
+1. `User.workingMemory.location` - Most recent location from conversation (highest priority)
+2. Vercel IP geolocation headers (`x-vercel-ip-latitude`, `x-vercel-ip-longitude`) - Automatic via platform
+3. Fallback: LA Midcity (`34.04592, -118.34574`) - Used if no other source available
+- Implemented in `app/lib/findNearbyCenters.ts`
+
+**Geographic Search (Non-PostGIS):**
+- Uses simple latitude/longitude bounding box calculations (no PostGIS required)
+- Formula: `lat ± (miles / 69.172)` and `lon ± (miles / 57.393)`
+- Default radius: 30 miles for search, 20 miles for display
+- Centers returned sorted by distance for relevance
+
+**Geocoding (Location Name Resolution):**
+- When user provides location in chat (e.g., "I'm in Denver"), Claude extracts it via working memory tags
+- Async reverse geocoding via OpenStreetMap Nominatim API enriches coordinates with city/state/country
+- Populates `workingMemory.location.{city, state, country}` for future use without geocoding API
+- Implemented in `app/lib/userProfile.ts` via `geocodeLocation()`
+
+**State Management:**
+- **Server-side (SSR):** React Router loaders/actions handle data fetching; Prisma queries return database state
+- **Client-side:**
+  - `useChat` hook from AI SDK manages message array, streaming status, and auto-resume on reconnect
+  - URL parameters via `nuqs` for queryable state (search queries)
+  - Component-level `useState` minimized; prefers loader data
+- **Persistent state:** Better Auth session cookies (5min cache, 365 day expiry) + localStorage (implicitly via useChat)
+- **No Redux/Zustand:** Codebase relies on React Router's data layer for state management
 
 ## Git & Commits
 
@@ -183,6 +250,45 @@ const user = await prisma.user.create({
 - Run all: `pnpm test` (includes lint + db push + typecheck)
 - Run specific: `pnpx vitest run <pattern>` (e.g., `pnpx vitest run chat.test`)
 - Debug: `DEBUG=* pnpm test` to enable all debug namespaces
+
+## Common Development Tasks
+
+**Adding a New API Route:**
+1. Create file: `app/routes/api.newfeature.ts` (or `.tsx` for JSX)
+2. Export `action()` or `loader()` from React Router
+3. For streaming responses, use `streamText()` from `@ai-sdk/anthropic`
+4. Return Response object: `new Response(stream, { headers: { "Content-Type": "text/event-stream" } })`
+5. Test with E2E test in `/test/*.test.tsx`
+
+**Modifying Working Memory Schema:**
+1. Edit schema in `app/lib/userProfile.ts` - Add new Zod field definitions
+2. System prompt (`app/prompts/systemPrompt.md`) will need updating to instruct Claude to populate new fields
+3. Migration: Add `app/lib/updateUserProfile.ts` to handle old → new schema upgrades if needed
+4. Test: Create test user and verify working memory extraction works with mock Anthropic responses
+
+**Adding a New Chat Feature (e.g., new data access):**
+1. Update system prompt (`app/prompts/systemPrompt.md`) with new instructions
+2. If accessing new data: Create helper function in `app/lib/` (e.g., `findNearbyCenters.ts` pattern)
+3. Pass data to Claude via system prompt injection (inject nearby data in XML format)
+4. Test with `converse()` helper from `~/test/helpers/converse`
+
+**Debugging Chat Issues:**
+- Enable debug logging: `DEBUG=agent,server pnpm dev` (see `app/lib/logger.server.ts` for namespaces)
+- Inspect active stream: Check `Chat.activeStreamId` in database (should be null when idle)
+- Check working memory updates: Query `User.workingMemory` JSON directly
+- Vitest browser debugging: `pnpx vitest --ui` opens browser inspector
+
+**Adding a New Database Model:**
+1. Update `prisma/schema.prisma` with new model definition
+2. Run: `prisma generate && prisma db push` (auto-migrates)
+3. Update types in TypeScript files importing from Prisma client
+4. Run `pnpm typecheck` to catch type errors
+
+**Testing AI Responses:**
+- Use mock Anthropic: `test/mocks/mockAnthropic.ts` with pattern matching
+- Mock responds to patterns like "tell me your name" with pre-set responses
+- Update mocks before test if new Claude behavior is needed
+- Example: `{"pattern": "test", "response": "This is a test response"}`
 
 ## Environment Variables
 
