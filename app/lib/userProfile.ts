@@ -12,11 +12,18 @@ const logger = debug("profile");
  */
 export const userProfile = zod
   .object({
-    name: zod
-      .string()
-      .optional()
-      .default("Unknown")
-      .describe("The merchant's name"),
+    merchant: zod
+      .object({
+        name: zod.string().describe("The merchant's name"),
+        phoneNumber: zod.string().describe("Merchant's phone number"),
+        retailExperience: zod
+          .boolean()
+          .describe(
+            "Whether merchant has past experience as retailer at shopping centers",
+          ),
+      })
+      .partial()
+      .describe("The merchant's information"),
 
     location: zod
       .object({
@@ -27,14 +34,74 @@ export const userProfile = zod
         country: zod.string().describe("The merchant's country"),
         timeZone: zod.string().describe("The merchant's timezone"),
       })
-      .partial(),
+      .partial()
+      .describe("The merchant's location information"),
 
     selling: zod
       .object({
         productType: zod.string().describe("The merchant's product type"),
-        pricePoint: zod.string().describe("The merchant's price point"),
+        pricePoint: zod
+          .string()
+          .describe("The merchant's price point (can be a range)"),
         targetAudience: zod.string().describe("The merchant's target audience"),
       })
+      .partial()
+      .describe("What the merchant is selling and their price point"),
+
+    entity: zod
+      .object({
+        entityName: zod.string().describe("Legal entity name (corporate name)"),
+        entityDba: zod
+          .string()
+          .describe("DBA (Doing Business As) if applicable"),
+        entityAddress: zod
+          .string()
+          .describe("Physical street address of the legal entity"),
+        entityWebsite: zod.string().describe("Website address"),
+        entityType: zod
+          .enum([
+            "individual",
+            "c-corporation",
+            "s-corporation",
+            "llc",
+            "lp",
+            "llp",
+          ])
+          .describe("The type of legal entity the merchant is acting as"),
+        socialMedia: zod
+          .array(
+            zod.object({
+              platform: zod.enum([
+                "twitter",
+                "instagram",
+                "facebook",
+                "linkedin",
+                "youtube",
+                "tiktok",
+                "pinterest",
+                "snapchat",
+                "reddit",
+                "other",
+              ]),
+              handle: zod
+                .string()
+                .describe("The merchant's social media handle"),
+            }),
+          )
+          .describe("Any social media handles the merchant wants to share"),
+      })
+      .describe("The merchant's entity information")
+      .partial(),
+
+    projections: zod
+      .object({
+        monthlySales: zod.number().describe("Projected monthly sales"),
+        annualSales: zod.number().describe("Projected annual sales"),
+        employeeCount: zod
+          .number()
+          .describe("Number of employees the merchant anticipates hiring"),
+      })
+      .describe("The merchant's projections")
       .partial(),
 
     preferences: zod
@@ -47,19 +114,8 @@ export const userProfile = zod
           .array(zod.string())
           .describe("The merchant's key deadlines"),
       })
-      .partial(),
-
-    sessionState: zod
-      .object({
-        lastTaskDiscussed: zod
-          .string()
-          .default("")
-          .describe("The merchant's last task discussed"),
-        openQuestions: zod
-          .array(zod.string())
-          .describe("The merchant's open questions"),
-      })
-      .partial(),
+      .partial()
+      .describe("The merchant's preferences"),
   })
   .partial();
 
@@ -193,9 +249,11 @@ export default async function updateUserProfile({
       location: validated.location
         ? { ...validated.location, ...geocoded }
         : current.location,
+      entity: { ...current.entity, ...validated.entity },
+      merchant: { ...current.merchant, ...validated.merchant },
       preferences: { ...current.preferences, ...validated.preferences },
+      projections: { ...current.projections, ...validated.projections },
       selling: { ...current.selling, ...validated.selling },
-      sessionState: { ...current.sessionState, ...validated.sessionState },
     };
     logger("Updating user profile: %o", merged);
 
