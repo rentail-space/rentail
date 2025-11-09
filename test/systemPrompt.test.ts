@@ -57,7 +57,12 @@ describe("prompt()", () => {
     invariant(json, "JSON match not found");
     const parsed = JSON.parse(json);
     expect(parsed).toMatchObject({
-      name: "The merchant's name",
+      merchant: {
+        name: "The merchant's name",
+        phoneNumber: "Merchant's phone number",
+        retailExperience:
+          "Whether merchant has past experience as retailer at shopping centers",
+      },
       location: {
         city: "The merchant's city",
         state: "The merchant's state",
