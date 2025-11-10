@@ -1,11 +1,13 @@
 /**
- * NOTE: This file contains setup code that will run before all tests
+ * NOTE: Setup code to run before every test suite
+ *
+ * - Disables Sentry
+ * - Cleans up database (once per test suite)
  */
 
 import * as Sentry from "@sentry/react-router";
 import { beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
-import msw from "~/test/mocks/mswHandlers";
 import "./trimConsole";
 
 Sentry.init({
@@ -15,13 +17,10 @@ Sentry.init({
 });
 
 beforeAll(async () => {
-  // Cleanup database and seed it
+  // Cleanup database
   await Promise.all([
     prisma.user.deleteMany(),
     prisma.verification.deleteMany(),
     prisma.waitlist.deleteMany(),
   ]);
-
-  // Start MSW server before all tests
-  msw.listen({ onUnhandledRequest: "error" });
 });

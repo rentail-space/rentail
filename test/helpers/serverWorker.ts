@@ -5,11 +5,11 @@
  * cleanly when the test is done.
  */
 
-import { invariant } from "es-toolkit";
 import { rm } from "node:fs/promises";
 import { resolve } from "node:path";
-import type { ViteDevServer } from "vite";
 import * as vite from "vite";
+import type { ViteDevServer } from "vite";
+import { invariant } from "es-toolkit";
 import config from "vite.config";
 
 let devServer: ViteDevServer | undefined;
@@ -47,6 +47,14 @@ async function startServer() {
 
     // Unref the server to allow process to exit cleanly
     devServer.httpServer?.unref();
+
+    // Handle graceful shutdown on parent process termination
+    process.on("message", async (msg) => {
+      if (msg === "shutdown") {
+        await devServer?.close();
+        process.exit(0);
+      }
+    });
 
     // Send ready signal immediately - first test navigation will trigger optimization
     process.send({ type: "ready" });

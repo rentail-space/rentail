@@ -1,12 +1,26 @@
 /**
- * NOTE: This file contains setup code that will run before all tests
+ * NOTE: Setup code to run only once before all tests
+ *
+ * - Seeds database with known centers
+ * - Launches Web server once per test suite
+ * - Starts MSW server (used by Web server)
  */
 
 import seedCenters from "prisma/seed/seedCenters";
+import prisma from "~/lib/prisma";
+import msw from "../mocks/mswHandlers";
 import { port } from "./launchBrowser";
-import { launchServer } from "./launchServer";
+import { closeServer, launchServer } from "./launchServer";
 
 export default async function setup() {
   await seedCenters();
   await launchServer(port);
+  // Start MSW server before all tests
+  msw.listen({ onUnhandledRequest: "error" });
+}
+
+export async function teardown() {
+  msw.close();
+  await prisma.$disconnect();
+  await closeServer();
 }

@@ -1,5 +1,5 @@
 import debug from "debug";
-import { invariant } from "es-toolkit";
+import { delay, invariant } from "es-toolkit";
 import { type ChildProcess, execSync, fork } from "node:child_process";
 import { resolve } from "node:path";
 import "~/test/helpers/toMatchScreenshot";
@@ -51,4 +51,17 @@ export async function launchServer(port: number): Promise<void> {
   });
 
   debug("server")("server is ready");
+}
+
+/**
+ * Close the server gracefully.
+ */
+export async function closeServer(): Promise<void> {
+  if (worker) {
+    // Send graceful shutdown message first
+    worker.send("shutdown");
+    // Wait briefly for graceful shutdown, then kill if needed
+    await delay(2_000);
+    worker.kill("SIGKILL");
+  }
 }
