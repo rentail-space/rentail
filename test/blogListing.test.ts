@@ -72,7 +72,6 @@ describe("Blog Listing", () => {
 
   it("should match visual regression test", async () => {
     // Set consistent viewport for screenshots
-    await page.reload();
     await page.waitForLoadState("networkidle");
 
     // Scroll to blog section if it exists
@@ -86,6 +85,7 @@ describe("Blog Listing", () => {
 
   describe("clicks blog post link", () => {
     beforeAll(async () => {
+      await page.goto("/", { waitUntil: "networkidle" });
       await page
         .locator('a[href^="/blog/2025-11-07-ultimate-guide"]')
         .last()
