@@ -5,7 +5,12 @@ export default [
       {
         question: "How does rentail.space work?",
         answer:
-          "Rentail.space connects micro-merchants with short-term retail spaces in shopping centers. Simply chat with our AI to find spaces that match your needs, book your preferred space, and start selling. We handle all the paperwork and payment processing.",
+          "Rentail.space connects you with short-term retail spaces in shopping centers. Simply chat with our AI to find spaces that match your needs, book your preferred space, and start selling. We handle the paperwork for you.",
+      },
+      {
+        question: "What is specialty leasing?",
+        answer:
+          "Specialty leasing is a type of retail space that is leased for a short period of time, typically for a few days to a few months. It may be a kiosk, a cart, a booth, a pop-up shop, or a shared space.",
       },
     ],
   },
