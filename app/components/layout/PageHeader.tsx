@@ -1,12 +1,11 @@
 import { NavLink } from "react-router";
 import AccountMenu from "./AccountMenu";
+import PageIconLink from "./PageIconLink";
 
 export default function PageHeader() {
   return (
     <header className="navbar shadow-sm print:hidden">
-      <NavLink to="/" className="navbar-start font-bold text-2xl text-gray-900">
-        <span className="text-blue-600">rentail</span>.space
-      </NavLink>
+      <PageIconLink className="navbar-start" />
 
       <nav className="navbar-center hidden items-center gap-6 md:flex">
         <NavLink

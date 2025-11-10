@@ -1,4 +1,5 @@
 import { NavLink } from "react-router";
+import PageIconLink from "./PageIconLink";
 
 export default function PageFooter() {
   return (
@@ -7,18 +8,7 @@ export default function PageFooter() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Brand */}
           <aside className="flex flex-col gap-4">
-            <NavLink
-              to="/"
-              className="flex items-center gap-2 font-bold text-2xl"
-              viewTransition
-            >
-              <img
-                src="/images/logo.png"
-                alt="rentail.space"
-                className="h-8 w-8"
-              />
-              <span className="text-blue-600">rentail</span>.space
-            </NavLink>
+            <PageIconLink />
             <p className="text-gray-600 text-sm">
               AI-powered short-term retail space marketplace
             </p>
