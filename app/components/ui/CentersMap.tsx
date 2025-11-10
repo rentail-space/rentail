@@ -3,6 +3,7 @@ import mapboxgl from "mapbox-gl";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
+import CenterPopup from "./CenterPopup";
 
 const mapboxToken =
   "pk.eyJ1IjoiYXNzYWZhcmtpbiIsImEiOiJjbWhwY3ZoazMwYXloMmxvbmxvZTE2eTBmIn0.m1npzYF93dHWeF4W3Yt_xw";
@@ -109,42 +110,20 @@ export default function CentersMap({
       );
       rootsRef.current.push(root);
 
-      // Create popup content
-      const popupContent = document.createElement("div");
-      popupContent.style.padding = "8px";
-      popupContent.style.minWidth = "200px";
+      // Create popup content using React and render to a DOM node
+      const popupContentContainer = document.createElement("div");
+      popupContentContainer.className = "w-64 pl-2 pr-8";
 
-      // Center name
-      const nameDiv = document.createElement("div");
-      nameDiv.style.fontWeight = "600";
-      nameDiv.style.fontSize = "14px";
-      nameDiv.style.marginBottom = "4px";
-      nameDiv.style.color = "#1f2937";
-      nameDiv.textContent = center.name;
-
-      // Address
-      const addressDiv = document.createElement("div");
-      addressDiv.style.fontSize = "12px";
-      addressDiv.style.color = "#6b7280";
-      addressDiv.style.marginBottom = "4px";
-      addressDiv.textContent = `${center.address}, ${center.city}, ${center.state}`;
-
-      // Spaces count
-      const spacesDiv = document.createElement("div");
-      spacesDiv.style.fontSize = "12px";
-      spacesDiv.style.color = "#285ca0";
-      spacesDiv.style.fontWeight = "500";
-      spacesDiv.textContent = `${center.spaces.length} ${center.spaces.length === 1 ? "space" : "spaces"}`;
-
-      popupContent.appendChild(nameDiv);
-      popupContent.appendChild(addressDiv);
-      popupContent.appendChild(spacesDiv);
+      // Use React to render popup content
+      const popupRoot = createRoot(popupContentContainer);
+      popupRoot.render(<CenterPopup center={center} />);
 
       // Create popup without close button
       const popup = new mapboxgl.Popup({
         offset: 25,
         closeButton: false,
-      }).setDOMContent(popupContent);
+        maxWidth: "256px",
+      }).setDOMContent(popupContentContainer);
 
       // Add event listeners for popup open/close to handle Escape key
       popup.on("open", () => {
