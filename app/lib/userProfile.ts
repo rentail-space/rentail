@@ -14,9 +14,14 @@ export const userProfile = zod
   .object({
     merchant: zod
       .object({
-        name: zod.string().describe("The merchant's name"),
+        name: zod.string().trim().describe("The merchant's name"),
+        email: zod
+          .email()
+          .toLowerCase()
+          .trim()
+          .describe("Merchant's email address"),
         phoneNumber: zod.string().describe("Merchant's phone number"),
-        retailExperience: zod
+        hasRetailExperience: zod
           .boolean()
           .describe(
             "Whether merchant has past experience as retailer at shopping centers",
@@ -95,10 +100,10 @@ export const userProfile = zod
 
     projections: zod
       .object({
-        monthlySales: zod.number().describe("Projected monthly sales"),
-        annualSales: zod.number().describe("Projected annual sales"),
+        monthlySales: zod.string().describe("Projected monthly sales"),
+        annualSales: zod.string().describe("Projected annual sales"),
         employeeCount: zod
-          .number()
+          .string()
           .describe("Number of employees the merchant anticipates hiring"),
       })
       .describe("The merchant's projections")
