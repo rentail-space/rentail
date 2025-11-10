@@ -83,8 +83,6 @@ jobs:
 
       - name: Start Redis (for testing)
         uses: supercharge/redis-github-action@1.7.0
-        with:
-          redis-version: 5
 
       - name: Check secrets
         run: pnpm secretlint "**/*" --format stylish
