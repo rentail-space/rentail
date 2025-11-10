@@ -60,7 +60,8 @@ describe("prompt()", () => {
       merchant: {
         name: "The merchant's name",
         phoneNumber: "Merchant's phone number",
-        retailExperience:
+        email: "Merchant's email address",
+        hasRetailExperience:
           "Whether merchant has past experience as retailer at shopping centers",
       },
       location: {
