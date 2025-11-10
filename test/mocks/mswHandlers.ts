@@ -68,8 +68,8 @@ msw.events
       );
     }
   })
-  .on("unhandledException", ({ request, error }) =>
-    debug("msw")("%s %s errored!", request.method, request.url, error),
-  );
+  .on("unhandledException", ({ request, error }) => {
+    debug("msw")("%s %s errored!", request.method, request.url, error);
+  });
 
 export default msw;
