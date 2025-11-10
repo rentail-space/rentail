@@ -34,6 +34,12 @@ const handlers = [
     () => passthrough(), // Pass through to real server
   ),
 
+  // Allow images, fonts, and other assets to fail gracefully
+  http.get(
+    /\.(jpg|jpeg|png|gif|webp|woff|woff2|ttf|svg|css|ico|eot)(\?.*)?$/i,
+    () => new HttpResponse(null, { status: 204 }), // No content
+  ),
+
   // Block any other external HTTP services not explicitly mocked
   http.all(
     () => true,
