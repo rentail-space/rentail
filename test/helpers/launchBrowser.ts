@@ -71,9 +71,17 @@ async function newContext(): Promise<BrowserContext> {
 async function blockOutgoingRequests(route: Route): Promise<void> {
   const { hostname } = new URLString(route.request().url());
 
-  if (hostname === "localhost" || hostname === "127.0.0.1") {
-    await route.continue();
-    return;
+  // Allow local requests to pass through
+  if (hostname === "localhost" || hostname === "127.0.0.1")
+    return await route.continue();
+
+  // Mock rentail.space requests using localhost
+  if (hostname === "rentail.space") {
+    const url = new URL(route.request().url());
+    url.hostname === "localhost";
+    url.port === "9222";
+    const response = await route.fetch();
+    return await route.fulfill({ response });
   }
 
   // Abort non-local requests to prevent cookie handling interference
