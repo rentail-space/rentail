@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands Reference
 
-**Package Management:** Uses pnpm (v10.20.0+)
+**Package Management:** Uses pnpm (v10.21.0+)
 
 ### Development & Building
 - `pnpm dev` - Start dev server with HMR on port 5173
