@@ -49,7 +49,10 @@
       "type": "Inline",
       "size": 1180,
       "floor": 1,
-      "available": true
+      "available": true,
+      "imageURLs": [
+        "https://www.commercialcafe.com:443/images/2c9b043d-82d1-4aaf-8f94-91e287345306/SWD%20C29.jpg?width=450"
+      ]
     },
     {
       "number": "C31",
