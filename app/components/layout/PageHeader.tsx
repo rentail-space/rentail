@@ -2,32 +2,23 @@ import { NavLink } from "react-router";
 import AccountMenu from "./AccountMenu";
 import PageIconLink from "./PageIconLink";
 
-const links = [
-  {
-    to: "/about",
-    label: "About",
-  },
-  {
-    to: "/pricing",
-    label: "Pricing",
-  },
-  {
-    to: "/blog",
-    label: "Blog",
-  },
-  {
-    to: "/faq",
-    label: "FAQ",
-  },
-];
-
-export default function PageHeader() {
+export default function PageHeader({
+  children,
+  links,
+}: {
+  children?: React.ReactNode;
+  links?: {
+    to: string;
+    label: string;
+  }[];
+}) {
   return (
     <header className="navbar shadow-sm print:hidden">
       <PageIconLink className="navbar-start" />
+      {children}
 
       <nav className="navbar-center hidden items-center gap-6 md:flex">
-        {links.map((link) => (
+        {links?.map((link) => (
           <NavLink
             key={link.to}
             to={link.to}

@@ -3,10 +3,10 @@ import { captureException } from "@sentry/react-router";
 import { DefaultChatTransport } from "ai";
 import { useQueryState } from "nuqs";
 import { useState } from "react";
-import { NavLink, useFetcher, useRouteLoaderData } from "react-router";
+import { useFetcher, useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
-import AccountMenu from "~/components/layout/AccountMenu";
+import PageHeader from "~/components/layout/PageHeader";
 import welcome from "~/prompts/welcome.md?raw";
 import type { loader as rootLoader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
@@ -49,15 +49,7 @@ export default function ChatPage() {
   return (
     <StickToBottom initial="smooth" resize="smooth">
       <div className="inset-0 flex h-screen flex-col">
-        <header className="navbar shadow-sm print:hidden">
-          <NavLink
-            to="/"
-            className="navbar-start font-bold text-2xl text-gray-900"
-          >
-            <span className="text-blue-600">rentail</span>.space
-          </NavLink>
-          <AccountMenu />
-        </header>
+        <PageHeader />
 
         <StickToBottom.Content>
           <div className="flex flex-1 flex-row gap-4 lg:pr-4">

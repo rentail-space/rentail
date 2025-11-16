@@ -1,6 +1,16 @@
-import { Link, Outlet, useRouteLoaderData } from "react-router";
+import { Outlet, useRouteLoaderData } from "react-router";
+import PageHeader from "~/components/layout/PageHeader";
 import type { loader as rootLoader } from "~/root";
 import NotFoundPage from "./$";
+
+export const handle = { hideLayout: true };
+
+const adminLinks = [
+  {
+    to: "/admin/centers",
+    label: "All centers",
+  },
+];
 
 export default function Admin() {
   const root = useRouteLoaderData<typeof rootLoader>("root");
@@ -8,15 +18,7 @@ export default function Admin() {
 
   return (
     <div>
-      <div className="mx-auto flex max-w-md flex-row items-center">
-        <ul className="menu menu-horizontal mx-auto">
-          <li>
-            <Link to="/admin/centers">All centers</Link>
-          </li>
-        </ul>
-        <span className="badge">Signed in as {root.user?.email}</span>
-      </div>
-
+      <PageHeader links={adminLinks} />
       <Outlet />
     </div>
   );

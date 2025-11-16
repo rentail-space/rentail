@@ -14,6 +14,25 @@ const description =
 const title = "rentail.space — Find your specialty lease with ease";
 const url = "https://rentail.space/";
 
+const headerLinks = [
+  {
+    to: "/about",
+    label: "About",
+  },
+  {
+    to: "/pricing",
+    label: "Pricing",
+  },
+  {
+    to: "/blog",
+    label: "Blog",
+  },
+  {
+    to: "/faq",
+    label: "FAQ",
+  },
+];
+
 export default function PageLayout({
   children,
   hideLayout = false,
@@ -79,7 +98,7 @@ export default function PageLayout({
             children
           ) : (
             <div className="flex min-h-screen flex-col">
-              <PageHeader />
+              <PageHeader links={headerLinks} />
               {children}
               <PageFooter />
             </div>
