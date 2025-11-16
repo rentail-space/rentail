@@ -279,10 +279,13 @@ async function geocodeLocation(location: {
   if (!city || !state || !country) return null;
 
   const query = encodeURIComponent(`${city}, ${state}, ${country}`);
-  const response = await fetch(
-    `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1`,
-    { headers: { "User-Agent": "your-app-name/1.0 (your@email.com)" } },
-  );
+  const url = new URL("https://nominatim.openstreetmap.org/search");
+  url.searchParams.set("q", query);
+  url.searchParams.set("format", "json");
+  url.searchParams.set("limit", "1");
+  const response = await fetch(url, {
+    headers: { "User-Agent": "your-app-name/1.0 (your@email.com)" },
+  });
   const results = await response.json();
   return results && results.length > 0
     ? {

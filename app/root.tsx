@@ -11,12 +11,12 @@ import "~/global.css";
 import loggingMiddleware from "~/lib/middleware/logging";
 import type { Route } from "./+types/root";
 import PageLayout from "./components/layout/PageLayout";
-import { findUserAndChat } from "./sessions.server";
+import { findUserAndLastChat } from "./sessions.server";
 
 export const middleware: Route.MiddlewareFunction[] = [loggingMiddleware];
 
 export async function loader({ request }: Route.LoaderArgs) {
-  return await findUserAndChat(request.headers);
+  return await findUserAndLastChat(request.headers);
 }
 
 export const headers: HeadersFunction = () => {

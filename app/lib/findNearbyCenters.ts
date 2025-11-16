@@ -10,7 +10,7 @@ import { cleanParseProfile } from "./userProfile";
  */
 const midcity = {
   latitude: 34.04592,
-  longitude: -118.34574,
+  longitude: 118.34574,
 };
 
 const logger = debug("geocode");

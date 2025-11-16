@@ -1,5 +1,5 @@
 import findNearbyCenters from "~/lib/findNearbyCenters";
-import prisma from "~/lib/prisma";
+import { findUserAndChatById } from "~/sessions.server";
 import type { Route } from "./+types/api.chat.$chatId.centers";
 
 /**
@@ -9,13 +9,11 @@ import type { Route } from "./+types/api.chat.$chatId.centers";
  */
 export async function loader({ params, request }: Route.LoaderArgs) {
   const { chatId } = params;
-  const chat = await prisma.chat.findUnique({
-    where: { id: chatId },
-    include: { user: true },
-  });
-  const centers = await findNearbyCenters({
-    headers: request.headers,
-    user: chat?.user,
-  });
+  const { headers } = request;
+  const found = await findUserAndChatById({ chatId, headers });
+
+  const centers = found
+    ? await findNearbyCenters({ headers, user: found.user })
+    : [];
   return { centers };
 }

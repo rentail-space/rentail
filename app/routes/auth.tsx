@@ -2,6 +2,7 @@ import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
 import { useEffect, useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
+import { ulid } from "ulid";
 import authServer from "~/lib/auth.server";
 import { updateNewUser } from "~/sessions.server";
 import type { Route } from "./+types/auth";
@@ -39,7 +40,11 @@ export async function action({
           headers: request.headers,
           returnHeaders: true,
         });
-        await updateNewUser(response.user.id, request.headers);
+        await updateNewUser({
+          chatId: ulid(),
+          headers: request.headers,
+          userId: response.user.id,
+        });
         return redirect("/chat", { headers });
       } catch {
         const result = await authServer.api.signInEmail({

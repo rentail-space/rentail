@@ -17,17 +17,17 @@ import type { loader as rootLoader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
-import { findUserAndChat } from "~/sessions.server";
+import { findUserAndLastChat } from "~/sessions.server";
 import CentersList from "./CentersList";
 
 export const handle = { hideLayout: true };
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const found = await findUserAndChat(request.headers);
-  const centers = await findNearbyCenters({
-    headers: request.headers,
-    user: found?.user,
-  });
+  const { headers } = request;
+  const found = await findUserAndLastChat(headers);
+  const centers = found
+    ? await findNearbyCenters({ headers, user: found.user })
+    : [];
   return { centers };
 }
 
@@ -45,6 +45,7 @@ export default function ChatPage({
     { id: chatId, parts: [{ text: welcome, type: "text" }], role: "assistant" },
   ];
   const [centers, setCenters] = useState(loaderData.centers);
+  const [isAborted, setIsAborted] = useState(false);
 
   const { error, messages, sendMessage, status, stop } = useChat({
     id: chatId,
@@ -52,17 +53,20 @@ export default function ChatPage({
     messages: initialMessages,
     resume: true, // Enable automatic stream resumption
     transport: new DefaultChatTransport({
-      api: "/api/chat/message",
+      api: `/api/chat/${chatId}/message`,
       // Only send user input to the server
     }),
     onError: (error) => {
       captureException(error, { extra: { chat: found?.chat } });
       console.error("Chat error: %s", error);
     },
-    onFinish: () => {
-      fetch(`/api/chat/${chatId}/centers`)
-        .then((response) => response.json())
-        .then(({ centers }) => setCenters(centers));
+    onFinish: ({ isAbort }) => {
+      setIsAborted(isAbort);
+      if (found?.chat && !isAbort) {
+        fetch(`/api/chat/${found.chat.id}/centers`)
+          .then((response) => response.json())
+          .then(({ centers }) => setCenters(centers));
+      }
     },
   });
 
@@ -88,6 +92,9 @@ export default function ChatPage({
                 messages={messages}
                 setQuery={setQuery}
               />
+              {isAborted && (
+                <div className="text-red-500">This chat was aborted.</div>
+              )}
             </div>
             <div className="hidden lg:block lg:w-80 lg:shrink-0">
               <CentersList centers={centers} />

@@ -1,7 +1,7 @@
 import { captureException } from "@sentry/react-router";
 import type { TextUIPart, UIMessage } from "ai";
 import debug from "debug";
-import { invariant, last } from "es-toolkit";
+import { invariant } from "es-toolkit";
 import { createIsbotFromList, list } from "isbot";
 import { reverse } from "node:dns/promises";
 import type { Chat, User } from "prisma/generated/client";
@@ -38,28 +38,78 @@ const cachedLocation = zod
   .partial();
 
 /**
- * Get the chat for the user from the session. The chat referenced the user.
- * Also returns the recent messages in the chat.
+ * Get the chat for the user from the session. If the user exists, there must be
+ * a last chat for the user. Also return the recent messages in the chat.
  *
  * @param headers - The headers object
  * @returns The chat, messages, and user if found
  */
-export async function findUserAndChat(
+export async function findUser(headers: Headers): Promise<User | null> {
+  const session = await authServer.api.getSession({ headers });
+  if (!session?.user) return null;
+
+  return await prisma.user.findUnique({
+    where: { id: session.user.id },
+  });
+}
+
+/**
+ * Get the chat for the user from the session. If the user exists, there must be
+ * a last chat for the user. Also return the recent messages in the chat.
+ *
+ * @param headers - The headers object
+ * @returns The chat, messages, and user if found
+ */
+export async function findUserAndLastChat(
   headers: Headers,
 ): Promise<{ chat: Chat; messages: UIMessage[]; user: User } | undefined> {
   const session = await authServer.api.getSession({ headers });
-  if (session?.user) {
-    const user = await prisma.user.findUnique({
-      include: { chats: { orderBy: { createdAt: "desc" }, take: 1 } },
-      where: { id: session.user.id },
-    });
-    if (user && user?.chats.length > 0) {
-      const chat = last(user.chats);
-      invariant(chat, "Chat is required");
-      const messages = await recentMessages(chat.id);
-      return { chat, messages, user };
-    }
-  }
+  if (!session?.user) return;
+
+  const user = await prisma.user.findUnique({
+    include: { chats: { orderBy: { createdAt: "desc" }, take: 1 } },
+    where: { id: session.user.id },
+  });
+  if (!user) return;
+
+  const chat = user.chats[0];
+  if (!chat) return;
+
+  const messages = await recentMessages(chat.id);
+  return { chat, messages, user };
+}
+
+/**
+ * Get the chat for the user from the session. If the user exists, there must be
+ * a chat with the given chat ID, and it must belong to that user.  Also return
+ * the recent messages in the chat.
+ *
+ * @param chatId - The ID of the chat to find
+ * @param headers - The headers object
+ * @returns The chat, messages, and user if found
+ * @throws If the chat ID mismatch is detected
+ */
+export async function findUserAndChatById({
+  chatId,
+  headers,
+}: {
+  chatId: string;
+  headers: Headers;
+}): Promise<{ chat: Chat; messages: UIMessage[]; user: User } | undefined> {
+  const session = await authServer.api.getSession({ headers });
+  if (!session?.user) return;
+
+  const user = await prisma.user.findUnique({
+    include: { chats: { where: { id: chatId } } },
+    where: { id: session.user.id },
+  });
+  if (!user) return;
+
+  const chat = user.chats.find((chat) => chat.id === chatId);
+  if (!chat) return;
+
+  const messages = await recentMessages(chat.id);
+  return { chat, messages, user };
 }
 
 /**
@@ -68,11 +118,14 @@ export async function findUserAndChat(
  * which have the session cookie set, and the user agent.
  *
  * @param headers - The headers object
+ * @param chatId - The ID of the chat to find or create
  * @returns The chat, recent messages, user, and HTTP headers
  */
 export async function findOrCreateUser({
+  chatId,
   headers,
 }: {
+  chatId: string;
   headers: Headers;
 }): Promise<{
   chat: Chat;
@@ -80,7 +133,7 @@ export async function findOrCreateUser({
   messages: UIMessage[];
   user: User;
 }> {
-  const found = await findUserAndChat(headers);
+  const found = await findUserAndChatById({ headers, chatId });
   if (found) return { ...found, headers: new Headers() };
 
   // We're gong to sign in the anonymous user so we can get the HTTP headers
@@ -93,22 +146,32 @@ export async function findOrCreateUser({
 
   // Update the anonymous user with the initial fields (IP, geocode, user agent,
   // referrer, etc.). Make sure it has initial chat with the welcome message.
-  const { chat, messages, user } = await updateNewUser(anonUser.id, headers);
+  const { chat, messages, user } = await updateNewUser({
+    chatId,
+    headers,
+    userId: anonUser.id,
+  });
   return { chat, headers: signInHeaders, messages, user };
 }
 
 /**
  * Update the new user with the initial fields (IP, geocode, user agent,
- * referrer, etc.). Make sure it has initial chat with the welcome message.
+ * referrer, etc.). Make sure it has initial chat with a welcome message.
  *
- * @param userId - The user ID to update
+ * @param chatId - The ID of the chat to create
  * @param headers - The headers object
+ * @param userId - The user ID to update
  * @returns The updated user, chat, and messages
  */
-export async function updateNewUser(
-  userId: string,
-  headers: Headers,
-): Promise<{ chat: Chat; messages: UIMessage[]; user: User }> {
+export async function updateNewUser({
+  chatId,
+  headers,
+  userId,
+}: {
+  chatId: string;
+  headers: Headers;
+  userId: string;
+}): Promise<{ chat: Chat; messages: UIMessage[]; user: User }> {
   const existing = await prisma.user.findUniqueOrThrow({
     where: { id: userId },
   });
@@ -117,7 +180,7 @@ export async function updateNewUser(
       ...(await getInitialFields(headers, existing)),
       chats: {
         create: {
-          id: ulid(),
+          id: chatId,
           metadata: {},
           messages: {
             create: [

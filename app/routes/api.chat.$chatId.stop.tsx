@@ -1,5 +1,5 @@
-import prisma from "~/lib/prisma";
 import { stopChat } from "~/lib/redis-stop-monitor";
+import { findUserAndChatById } from "~/sessions.server";
 import type { Route } from "./+types/api.chat.$chatId.stop";
 
 /**
@@ -10,11 +10,11 @@ import type { Route } from "./+types/api.chat.$chatId.stop";
  * @param params.id - The ID of the chat to stop.
  * @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-stop-streams
  */
-export async function action({ params }: Route.ActionArgs) {
+export async function action({ params, request }: Route.ActionArgs) {
   const { chatId } = params;
-  const chat = await prisma.chat.findUnique({
-    where: { id: chatId },
-  });
-  if (chat) await stopChat(chat.id);
+  const found = await findUserAndChatById({ chatId, headers: request.headers });
+  if (!found) throw new Response("Not Found", { status: 404 });
+
+  await stopChat(found.chat.id);
   return new Response(null, { status: 204 });
 }

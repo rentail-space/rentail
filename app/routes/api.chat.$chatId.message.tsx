@@ -18,7 +18,7 @@ import updateUserProfile, {
   userProfile,
 } from "~/lib/userProfile";
 import { findOrCreateUser, recentMessages } from "~/sessions.server";
-import type { Route } from "./+types/api.chat.message";
+import type { Route } from "./+types/api.chat.$chatId.message";
 
 const logger = debug("chat");
 
@@ -29,8 +29,10 @@ const logger = debug("chat");
  * @param request - The request object.
  * @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence
  */
-export async function action({ request }: Route.ActionArgs) {
+export async function action({ request, params }: Route.ActionArgs) {
+  const { chatId } = params;
   const { chat, headers, user } = await findOrCreateUser({
+    chatId,
     headers: request.headers,
   });
 

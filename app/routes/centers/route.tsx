@@ -1,13 +1,13 @@
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { cleanParseProfile } from "~/lib/userProfile";
-import { findUserAndChat } from "~/sessions.server";
+import { findUserAndLastChat } from "~/sessions.server";
 import CentersMap from "../../components/ui/CentersMap";
 import type { Route } from "./+types/route";
 import CentersList from "./CentersList";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const found = await findUserAndChat(request.headers);
+  const found = await findUserAndLastChat(request.headers);
   const profile = found ? cleanParseProfile(found.user.workingMemory) : {};
   const mapboxToken = env.MAPBOX_TOKEN;
   const centers = await prisma.property.findMany({
