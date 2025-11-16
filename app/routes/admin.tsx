@@ -10,6 +10,10 @@ const adminLinks = [
     to: "/admin/centers",
     label: "All centers",
   },
+  {
+    to: "/admin/users",
+    label: "All users",
+  },
 ];
 
 export default function Admin() {
@@ -19,7 +23,9 @@ export default function Admin() {
   return (
     <div>
       <PageHeader links={adminLinks} />
-      <Outlet />
+      <main className="container mx-auto my-10">
+        <Outlet />
+      </main>
     </div>
   );
 }
