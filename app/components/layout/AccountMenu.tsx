@@ -1,4 +1,4 @@
-import { UserIcon } from "lucide-react";
+import { ShieldIcon, UserIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouteLoaderData } from "react-router";
 import authClient from "~/lib/auth.client";
@@ -31,7 +31,7 @@ export default function AccountMenu() {
   return (
     <div className="navbar-end">
       {user && !user.isAnonymous ? (
-        <DropdownMenu user={user} />
+        <DropdownMenu user={user} isAdmin={data.isAdmin} />
       ) : (
         <SignInButton />
       )}
@@ -56,7 +56,9 @@ function SignInButton() {
 
 function DropdownMenu({
   user,
+  isAdmin,
 }: {
+  isAdmin: boolean;
   user: {
     name: string | null;
     email: string | null;
@@ -97,6 +99,18 @@ function DropdownMenu({
             <p className="font-medium text-gray-900 text-sm">{user.name}</p>
             <p className="truncate text-gray-500 text-xs">{user.email}</p>
           </li>
+
+          {isAdmin && (
+            <li>
+              <Link
+                to="/admin"
+                className="block w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
+              >
+                <ShieldIcon className="mr-2 inline-block h-4 w-4" />
+                Admin
+              </Link>
+            </li>
+          )}
 
           <li>
             <Link

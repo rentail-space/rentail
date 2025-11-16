@@ -21,6 +21,8 @@ const botUserAgents = [
   "Vercel",
 ];
 
+const adminUsers = ["assaf@labnotes.org"];
+
 /**
  * We use Redis to cache the location information for 30 days so we don't have
  * to geocode the IP address every time.
@@ -62,7 +64,10 @@ export async function findUser(headers: Headers): Promise<User | null> {
  */
 export async function findUserAndLastChat(
   headers: Headers,
-): Promise<{ chat: Chat; messages: UIMessage[]; user: User } | undefined> {
+): Promise<
+  | { chat: Chat; isAdmin: boolean; messages: UIMessage[]; user: User }
+  | undefined
+> {
   const session = await authServer.api.getSession({ headers });
   if (!session?.user) return;
 
@@ -76,7 +81,9 @@ export async function findUserAndLastChat(
   if (!chat) return;
 
   const messages = await recentMessages(chat.id);
-  return { chat, messages, user };
+
+  const isAdmin = user.email ? adminUsers.includes(user.email) : false;
+  return { chat, isAdmin, messages, user };
 }
 
 /**

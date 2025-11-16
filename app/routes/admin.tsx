@@ -1,20 +1,11 @@
-import { Link, Outlet } from "react-router";
-import { findUserAndLastChat } from "~/sessions.server";
+import { Link, Outlet, useRouteLoaderData } from "react-router";
+import type { loader as rootLoader } from "~/root";
 import NotFoundPage from "./$";
-import type { Route } from "./+types/admin";
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const found = await findUserAndLastChat(request.headers);
-  if (found?.user.email !== "assaf@labnotes.org")
-    throw new Response(null, { status: 403 });
-  return { user: found?.user };
-}
+export default function Admin() {
+  const root = useRouteLoaderData<typeof rootLoader>("root");
+  if (!root?.isAdmin) return <NotFoundPage />;
 
-export function ErrorBoundary() {
-  return <NotFoundPage />;
-}
-
-export default function Admin({ loaderData }: Route.ComponentProps) {
   return (
     <div>
       <div className="mx-auto flex max-w-md flex-row items-center">
@@ -23,7 +14,7 @@ export default function Admin({ loaderData }: Route.ComponentProps) {
             <Link to="/admin/centers">All centers</Link>
           </li>
         </ul>
-        <span className="badge">Signed in as {loaderData.user?.email}</span>
+        <span className="badge">Signed in as {root.user?.email}</span>
       </div>
 
       <Outlet />
