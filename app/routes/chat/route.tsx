@@ -12,7 +12,7 @@ import type { loader as rootLoader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
-import CentersList from "./CentersList";
+import CenterCards from "./CenterCards";
 
 export const handle = { hideLayout: true };
 
@@ -74,7 +74,7 @@ export default function ChatPage() {
             </div>
 
             <div className="top-0 hidden py-4 lg:block lg:w-80 lg:shrink-0">
-              <CentersList centers={fetcher.data?.centers ?? []} />
+              <CenterCards centers={fetcher.data?.centers ?? []} />
             </div>
           </div>
         </StickToBottom.Content>

@@ -8,7 +8,7 @@ import { Link } from "react-router";
  * @param centers - The centers that are nearby the user.
  * @returns A list of centers that are nearby the user.
  */
-export default function CentersList({
+export default function CenterCards({
   centers,
 }: {
   centers: PropertyGetPayload<{ include: { spaces: true } }>[];
