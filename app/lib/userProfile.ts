@@ -32,11 +32,16 @@ export const userProfile = zod
 
     location: zod
       .object({
+        city: zod.string().describe("The merchant's city"),
+        country: zod.string().describe("The merchant's country"),
+        displayName: zod
+          .string()
+          .describe(
+            "The merchant's location display name (e.g. 'Los Angeles, Los Angeles County, California, United States')",
+          ),
         latitude: zod.number().describe("The merchant's latitude"),
         longitude: zod.number().describe("The merchant's longitude"),
-        city: zod.string().describe("The merchant's city"),
         state: zod.string().describe("The merchant's state"),
-        country: zod.string().describe("The merchant's country"),
         timeZone: zod.string().describe("The merchant's timezone"),
       })
       .partial()
@@ -246,8 +251,9 @@ export default async function updateUserProfile({
     if (error) throw error;
 
     // Deep merge with current profile (new values override old ones)
-    const geocoded =
-      validated?.location && (await geocodeLocation(validated?.location));
+    const geocoded = validated?.location
+      ? await geocodeLocation(validated?.location)
+      : null;
     const merged = {
       ...current,
       ...validated,
@@ -272,27 +278,45 @@ export default async function updateUserProfile({
 
 async function geocodeLocation(location: {
   city?: string;
-  state?: string;
   country?: string;
-}) {
+  state?: string;
+}): Promise<{
+  displayName: string;
+  latitude: number;
+  longitude: number;
+} | null> {
   const { city, state, country } = location;
   if (!city || !state || !country) return null;
 
   const query = encodeURIComponent(`${city}, ${state}, ${country}`);
   const url = new URL("https://nominatim.openstreetmap.org/search");
-  url.searchParams.set("q", query);
+  url.searchParams.set("q", decodeURIComponent(query));
   url.searchParams.set("format", "json");
   url.searchParams.set("limit", "1");
-  const response = await fetch(url, {
-    headers: { "User-Agent": "your-app-name/1.0 (your@email.com)" },
-  });
-  const results = await response.json();
-  return results && results.length > 0
-    ? {
-        latitude: Number.parseFloat(results[0].lat),
-        longitude: Number.parseFloat(results[0].lon),
-      }
-    : {};
+  logger("Geocoding location: %s", url.toString());
+
+  try {
+    const response = await fetch(url, {
+      headers: { "User-Agent": "rentail.space/1.0 (support@rentail.space)" },
+      signal: AbortSignal.timeout(2_000),
+    });
+    const results = (await response.json()) as {
+      place_id: number;
+      display_name: string;
+      lat: string;
+      lon: string;
+    }[];
+    invariant(results.length > 0, "No results found");
+    return {
+      displayName: results[0].display_name,
+      latitude: Number.parseFloat(results[0].lat),
+      longitude: Number.parseFloat(results[0].lon),
+    };
+  } catch (error) {
+    captureException(error, { extra: { url } });
+    console.error("Error geocoding location %s: %s", query, error);
+    return null;
+  }
 }
 
 /**
