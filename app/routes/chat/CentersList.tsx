@@ -19,11 +19,9 @@ export default function CentersList({
 
   return (
     <div className="sticky top-4 h-fit">
-      <div className="flex flex-col gap-2 rounded-lg border border-base-300 bg-base-100 p-4 shadow-lg">
-        <h3 className="mb-2 font-bold text-base-content text-sm">
-          Available Centers ({centers.length})
-        </h3>
-        <div className="flex flex-col gap-2">
+      <div className="card card-border bg-base-100 shadow-md">
+        <div className="card-body">
+          <div className="card-title">Available Centers ({centers.length})</div>
           {centers
             // Sort by number of available spaces, then by name
             .sort((a, b) =>
@@ -62,13 +60,13 @@ function LinkToCenter({
       onMouseLeave={() => setHoveredCenter(null)}
     >
       <Link
-        className="flex flex-row items-center gap-2 rounded-lg px-3 py-2 transition-colors hover:bg-base-200"
+        className="flex flex-row items-center gap-2 rounded-lg p-2 hover:bg-base-200"
         target="_blank"
         to={`/center/${center.id}`}
       >
         <img
           alt="Shopping mall"
-          className="h-4 w-4 shrink-0"
+          className="h-4 w-4 shrink-0 object-contain"
           src={center.logoURL || "/images/shopping-mall.png"}
         />
         <div className="flex min-w-0 flex-1 flex-col">
@@ -169,27 +167,25 @@ function HoverCard({
   }, [mode]);
 
   return (
-    <Activity name="HoverCard" mode={mode}>
+    <Activity mode={mode}>
       <div
         ref={cardRef}
-        className="absolute right-full z-50 mr-[38px] w-80 max-w-[min(20rem,calc(100vw-2rem))] rounded-lg border border-base-300 bg-base-100 p-4 shadow-xl"
+        className="card card-border absolute right-full z-50 mr-[38px] w-96 max-w-[min(20rem,calc(100vw-2rem))] bg-base-100 shadow-md"
         style={{ top: `${topOffset}px` }}
       >
-        <h3 className="mb-2 font-bold text-lg">{center.name}</h3>
-        <p className="mb-3 line-clamp-5 text-base-content/70 text-sm">
-          {center.description}
-        </p>
+        <div className="card-body">
+          <p className="card-title">{center.name}</p>
+          <p className="line-clamp-5 text-sm">{center.description}</p>
+        </div>
 
-        <div
+        <figure
           style={{
             background:
               "repeating-linear-gradient(135deg, #e5e7eb 0 24px, #fff 24px 48px)",
           }}
-          className="relative flex h-[160px] w-full items-center justify-center overflow-hidden rounded-lg border-2 border-base-300"
         >
           <img
             alt={center.name}
-            className="absolute inset-0 h-40 w-full rounded-lg object-cover opacity-0 transition-opacity duration-300"
             onError={(e) => {
               e.currentTarget.style.display = "none";
             }}
@@ -198,9 +194,9 @@ function HoverCard({
             }}
             src={center.imageURLs[0]}
           />
-        </div>
+        </figure>
 
-        <div className="mt-4 font-bold text-base-content/70 text-lg">
+        <div className="card-body">
           {center.spaces.length > 1
             ? `${center.spaces.length} available spaces`
             : center.spaces.length === 1
