@@ -3,39 +3,20 @@ import { captureException } from "@sentry/react-router";
 import { DefaultChatTransport } from "ai";
 import { useQueryState } from "nuqs";
 import { useState } from "react";
-import {
-  type LoaderFunctionArgs,
-  NavLink,
-  useRouteLoaderData,
-} from "react-router";
+import { NavLink, useFetcher, useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import AccountMenu from "~/components/layout/AccountMenu";
-import findNearbyCenters from "~/lib/findNearbyCenters";
 import welcome from "~/prompts/welcome.md?raw";
 import type { loader as rootLoader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
-import { findUserAndLastChat } from "~/sessions.server";
 import CentersList from "./CentersList";
 
 export const handle = { hideLayout: true };
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const { headers } = request;
-  const found = await findUserAndLastChat(headers);
-  const centers = found
-    ? await findNearbyCenters({ headers, user: found.user })
-    : [];
-  return { centers };
-}
-
-export default function ChatPage({
-  loaderData,
-}: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
-}) {
+export default function ChatPage() {
   const [query, setQuery] = useQueryState("q");
 
   // Access data from root loader first, our loaded depends on it
@@ -44,8 +25,8 @@ export default function ChatPage({
   const initialMessages = found?.messages ?? [
     { id: chatId, parts: [{ text: welcome, type: "text" }], role: "assistant" },
   ];
-  const [centers, setCenters] = useState(loaderData.centers);
   const [isAborted, setIsAborted] = useState(false);
+  const fetcher = useFetcher();
 
   const { error, messages, sendMessage, status, stop } = useChat({
     id: chatId,
@@ -54,19 +35,14 @@ export default function ChatPage({
     resume: true, // Enable automatic stream resumption
     transport: new DefaultChatTransport({
       api: `/api/chat/${chatId}/message`,
-      // Only send user input to the server
     }),
     onError: (error) => {
-      captureException(error, { extra: { chat: found?.chat } });
+      captureException(error, { extra: { chatId } });
       console.error("Chat error: %s", error);
     },
     onFinish: ({ isAbort }) => {
       setIsAborted(isAbort);
-      if (found?.chat && !isAbort) {
-        fetch(`/api/chat/${found.chat.id}/centers`)
-          .then((response) => response.json())
-          .then(({ centers }) => setCenters(centers));
-      }
+      if (!isAbort) fetcher.load(`/api/chat/${chatId}/centers`);
     },
   });
 
@@ -97,7 +73,7 @@ export default function ChatPage({
               )}
             </div>
             <div className="hidden lg:block lg:w-80 lg:shrink-0">
-              <CentersList centers={centers} />
+              <CentersList centers={fetcher.data?.centers ?? []} />
             </div>
           </div>
         </StickToBottom.Content>
