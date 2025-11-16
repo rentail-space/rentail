@@ -72,7 +72,8 @@ export default function ChatPage() {
                 <div className="text-red-500">This chat was aborted.</div>
               )}
             </div>
-            <div className="hidden lg:block lg:w-80 lg:shrink-0">
+
+            <div className="top-0 hidden py-4 lg:block lg:w-80 lg:shrink-0">
               <CentersList centers={fetcher.data?.centers ?? []} />
             </div>
           </div>

@@ -39,7 +39,7 @@ export default function Messages({
   }, [messages.length, isTyping, scrollToBottom, isAtBottom]);
 
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="flex min-h-[80lvh] flex-1 flex-col">
       <div className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto scroll-smooth p-6">
         {messages.map((message, index, messages) =>
           message.role === "user" ? (
