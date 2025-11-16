@@ -1,4 +1,5 @@
 import { captureException } from "@sentry/react-router";
+import debug from "debug";
 import type { User } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import prisma from "~/lib/prisma";
@@ -11,6 +12,8 @@ const midcity = {
   latitude: 34.04592,
   longitude: -118.34574,
 };
+
+const logger = debug("geocode");
 
 /**
  * Find the shopping centers within a given distance from the user. Gets the
@@ -67,6 +70,8 @@ async function getLocation({
   if (fromMemory?.longitude && fromMemory.latitude) return fromMemory;
   const fromHeaders = await locationFromHeaders(headers);
   if (fromHeaders?.longitude && fromHeaders.latitude) return fromHeaders;
+
+  logger("Fallback location: midcity, Los Angeles, California");
   return midcity;
 }
 
@@ -79,6 +84,13 @@ async function locationFromHeaders(
   const latitude = Number.parseFloat(
     headers.get("x-vercel-ip-latitude") ?? "0",
   );
+  const { city, state, country } = {
+    city: headers.get("x-vercel-ip-city"),
+    state: headers.get("x-vercel-ip-country-region"),
+    country: headers.get("x-vercel-ip-country"),
+  };
+  if (city && state && country)
+    logger("Location from headers: %s %s %s", city, state, country);
   return longitude && latitude ? { longitude, latitude } : undefined;
 }
 
@@ -91,6 +103,9 @@ async function locationFromWorkingMemory(
       select: { workingMemory: true },
     });
     const { location } = cleanParseProfile(workingMemory);
+    const { city, state, country } = location ?? {};
+    if (city && state && country)
+      logger("Location from working memory: %s %s %s", city, state, country);
     const { longitude, latitude } = location ?? {};
     return longitude && latitude ? { longitude, latitude } : undefined;
   } catch (error) {
