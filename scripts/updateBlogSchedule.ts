@@ -1,10 +1,10 @@
 #!/usr/bin/env tsx
 import dayjs from "dayjs";
 import { invariant, partition } from "es-toolkit";
-import frontMatter from "front-matter";
 import { readFileSync, writeFileSync } from "node:fs";
 import { readdir, rename } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
+import parseFrontMatter from "~/lib/parseFrontMatter";
 
 /**
  * This script updates the blog schedule by renaming the files and updating the frontmatter.
@@ -41,7 +41,7 @@ async function splitPosts(): Promise<[BlogPost[], BlogPost[]]> {
       date: getDateFromFilename(basename(filename)),
     }))
     .map(({ filename, content, date }) => {
-      const { attributes, body } = frontMatter<{
+      const { attributes, body } = parseFrontMatter<{
         title: string;
         image: string;
         alt: string;

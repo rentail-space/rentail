@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
 import { invariant } from "es-toolkit";
-import fm from "front-matter";
 import { DateTime } from "luxon";
 import { readFileSync } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import path, { basename, join } from "node:path";
 import removeMd from "remove-markdown";
-import truncateWords from "./truncateWords";
+import parseFrontMatter from "~/lib/parseFrontMatter";
+import truncateWords from "~/lib/truncateWords";
 
 const dirname = path.resolve("./app/data/blog");
 
@@ -33,7 +33,7 @@ export async function recentBlogPosts(): Promise<BlogPost[]> {
     .map((filename) => {
       const published = getPublishedData(filename).toJSDate();
       const content = readFileSync(join(dirname, filename), "utf8");
-      const { attributes, body } = fm<{
+      const { attributes, body } = parseFrontMatter<{
         alt: string;
         image: string;
         summary: string;
@@ -81,7 +81,7 @@ export async function loadBlogPost(slug?: string): Promise<BlogPost> {
   const filename = join(dirname, `${slug}.md`);
   const post = await readFile(filename, "utf8");
   const published = getPublishedData(filename).toJSDate();
-  const { attributes, body } = fm<{
+  const { attributes, body } = parseFrontMatter<{
     title: string;
     alt?: string;
     image?: string;
