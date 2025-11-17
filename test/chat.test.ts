@@ -65,11 +65,11 @@ describe("Chat page", () => {
     });
 
     it("should look like a real chat", async () => {
-      await page.waitForTimeout(100);
+      await page.waitForTimeout(500);
       await page.evaluate(() => {
         window.scrollTo(0, document.body.scrollHeight);
       });
-      await page.waitForTimeout(100);
+      await page.waitForTimeout(500);
 
       // Take screenshot for visual regression testing
       await expect(page).toMatchScreenshot();

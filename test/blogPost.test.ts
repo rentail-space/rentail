@@ -9,7 +9,7 @@
  * - Navigation functionality
  */
 
-import { expect, type Page, type Response } from "playwright/test";
+import { type Page, type Response, expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
@@ -94,13 +94,8 @@ describe("Blog Post Rendering", () => {
   });
 
   it("should match visual regression test", async () => {
-    // Set consistent viewport for screenshots
-    await page.setViewportSize({ width: 960, height: 600 });
-
-    await page.reload();
-
     // Wait for any images to load
-    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(100);
 
     // Take screenshot for visual regression testing
     await expect(page).toMatchScreenshot();
