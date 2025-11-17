@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
-import dayjs from "dayjs";
 import { invariant, partition } from "es-toolkit";
+import { DateTime } from "luxon";
 import { readFileSync, writeFileSync } from "node:fs";
 import { readdir, rename } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
@@ -55,9 +55,9 @@ async function splitPosts(): Promise<[BlogPost[], BlogPost[]]> {
         body,
       };
     });
-  const today = dayjs();
+  const today = DateTime.now();
   return partition(posts, (post) => {
-    return today.isAfter(post.date);
+    return today.diff(DateTime.fromJSDate(post.date), "days").days < 0;
   });
 }
 
@@ -84,14 +84,16 @@ async function updateFuturePosts(past: BlogPost[], future: BlogPost[]) {
   for (const post of future) {
     console.info(`Updating ${post.filename} to ${currentDate}`);
     // Add one week to running date
-    currentDate = dayjs(currentDate).add(1, "week").toDate();
+    currentDate = DateTime.fromJSDate(currentDate)
+      .plus({ weeks: 1 })
+      .toJSDate();
     await renameFile({ date: currentDate, post });
   }
 }
 
 async function renameImage({ date, post }: { date: Date; post: BlogPost }) {
   const imageFilenameParts = post.attributes.image.split("-");
-  const newDatePrefix = dayjs(date).format("YYYY-MM-DD");
+  const newDatePrefix = DateTime.fromJSDate(date).toFormat("yyyy-MM-dd");
   const newImageFilename = `${newDatePrefix}-${imageFilenameParts.slice(3).join("-")}`;
   await rename(
     resolve(dir, post.attributes.image),
@@ -105,7 +107,7 @@ async function renameFile({ date, post }: { date: Date; post: BlogPost }) {
 
   const newFilename = post.filename.replace(
     /^\d{4}-\d{2}-\d{2}-/,
-    `${dayjs(date).format("YYYY-MM-DD")}-`,
+    `${DateTime.fromJSDate(date).toFormat("yyyy-MM-dd")}-`,
   );
   await rename(post.filename, newFilename);
 

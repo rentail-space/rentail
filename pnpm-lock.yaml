@@ -68,9 +68,6 @@ importers:
       daisyui:
         specifier: ^5.5.4
         version: 5.5.4
-      dayjs:
-        specifier: ^1.11.19
-        version: 1.11.19
       debug:
         specifier: ^4.4.3
         version: 4.4.3(supports-color@8.1.1)

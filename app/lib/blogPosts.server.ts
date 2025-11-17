@@ -1,8 +1,7 @@
-import dayjs from "dayjs";
 import { invariant } from "es-toolkit";
 import { DateTime } from "luxon";
 import { readFileSync } from "node:fs";
-import { readdir, readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path, { basename, join } from "node:path";
 import removeMd from "remove-markdown";
 import parseFrontMatter from "~/lib/parseFrontMatter";
@@ -28,6 +27,7 @@ export type BlogPost = {
  */
 export async function recentBlogPosts(): Promise<BlogPost[]> {
   const filenames = await readdir(dirname);
+  const now = DateTime.now();
   return filenames
     .filter((filename) => filename.endsWith(".md"))
     .map((filename) => {
@@ -47,7 +47,10 @@ export async function recentBlogPosts(): Promise<BlogPost[]> {
         slug,
       };
     })
-    .filter(({ published }) => dayjs().isAfter(published))
+    .filter(
+      ({ published }) =>
+        DateTime.fromJSDate(published).diff(now, "days").days < 0,
+    )
     .sort((a, b) => b.published.getTime() - a.published.getTime());
 }
 
