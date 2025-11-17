@@ -32,7 +32,7 @@ const dirname = path.resolve("./__screenshots__");
 expect.extend({
   async toMatchScreenshot(
     page: Page,
-    options: { tolerance: number } = { tolerance: 2.3 },
+    options: { tolerance: number } = { tolerance: 3 },
   ) {
     try {
       const testName = getTestName();

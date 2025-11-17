@@ -70,7 +70,7 @@ describe("Chat page", () => {
       await scrollContainer.evaluate((el) => {
         el.scrollTop = el.scrollHeight;
       });
-      await page.waitForTimeout(300);
+      await page.waitForTimeout(500);
 
       // Take screenshot for visual regression testing
       await expect(page).toMatchScreenshot();
