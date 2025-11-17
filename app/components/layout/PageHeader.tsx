@@ -5,12 +5,20 @@ import PageIconLink from "./PageIconLink";
 export default function PageHeader({
   children,
   links,
+  user,
+  isAdmin,
 }: {
   children?: React.ReactNode;
   links?: {
     to: string;
     label: string;
   }[];
+  user?: {
+    name: string | null;
+    email: string | null;
+    isAnonymous: boolean;
+  };
+  isAdmin?: boolean;
 }) {
   return (
     <header className="navbar shadow-sm print:hidden">
@@ -29,7 +37,7 @@ export default function PageHeader({
         ))}
       </nav>
 
-      <AccountMenu />
+      <AccountMenu user={user} isAdmin={isAdmin} />
     </header>
   );
 }

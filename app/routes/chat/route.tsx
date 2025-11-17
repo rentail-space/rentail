@@ -49,7 +49,7 @@ export default function ChatPage() {
   return (
     <StickToBottom initial="smooth" resize="smooth">
       <div className="inset-0 flex h-screen flex-col">
-        <PageHeader />
+        <PageHeader isAdmin={found?.isAdmin} user={found?.user} />
 
         <StickToBottom.Content>
           <div className="flex flex-1 flex-row gap-4 lg:pr-4">
