@@ -4,9 +4,9 @@ import { resolve } from "node:path";
 import { URL as URLString } from "node:url";
 import {
   type BrowserContext,
-  chromium,
   type Page,
   type Route,
+  chromium,
 } from "playwright";
 import "~/test/helpers/toMatchScreenshot";
 
@@ -20,6 +20,7 @@ const logger = debug("browser");
  *
  * @param path - The path to open.
  * @param headers - The headers to set on the page.
+ * @param options - Optional navigation options (waitUntil, timeout)
  * @returns The page.
  */
 export async function goto(path: string, headers?: HeadersInit): Promise<Page> {

@@ -65,11 +65,12 @@ describe("Chat page", () => {
     });
 
     it("should look like a real chat", async () => {
-      await page.waitForTimeout(500);
-      await page.evaluate(() => {
-        window.scrollTo(0, document.body.scrollHeight);
+      // Wait until the chat container is rendered and present, then scroll it to bottom reliably
+      const scrollContainer = page.locator(".overflow-y-auto").first();
+      await scrollContainer.evaluate((el) => {
+        el.scrollTop = el.scrollHeight;
       });
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(300);
 
       // Take screenshot for visual regression testing
       await expect(page).toMatchScreenshot();
