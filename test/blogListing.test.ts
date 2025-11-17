@@ -99,6 +99,8 @@ describe("Blog Listing", () => {
     });
 
     it("should display the blog post content", async () => {
+      // Wait for article to appear on the page
+      await page.waitForSelector("article");
       const article = page.locator("article");
       await expect(article).toBeVisible();
       const h1 = page.locator("h1").first();
