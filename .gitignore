@@ -19,3 +19,6 @@ package-lock.json
 prisma/generated
 # Used by playwright for persistent context
 test/context
+# All local files or directories (eg ./.claude/settings.local.json, /.vercel/.env.production.local) 
+*/*.local.*
+*/*.local
