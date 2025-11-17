@@ -26,7 +26,6 @@
     "@react-router/fs-routes": "^7.9.6",
     "@react-router/node": "^7.9.6",
     "@react-router/serve": "^7.9.6",
-    "@secretlint/secretlint-rule-preset-recommend": "^11.2.5",
     "@sentry/react-router": "^10.25.0",
     "@tailwindcss/postcss": "^4.1.17",
     "@tailwindcss/typography": "^0.5.19",
@@ -82,10 +81,10 @@
     "@types/luxon": "^3.7.1",
     "@types/mapbox-gl": "^3.4.1",
     "@types/node": "^24.10.1",
-    "@types/pdfmake": "^0.2.12",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitest/browser": "^4.0.9",
+    "@secretlint/secretlint-rule-preset-recommend": "^11.2.5",
     "checkly": "^6.9.1",
     "msw": "^2.12.2",
     "playwright": "^1.56.1",
@@ -103,24 +102,13 @@
       "@prisma/client",
       "@prisma/engines",
       "@sentry/cli",
-      "@tailwindcss/oxide",
       "@vercel/speed-insights",
       "esbuild",
       "msw",
       "prisma"
     ],
-    "overrides": {
-      "pdfmake@<0.3.0-beta.17": ">=0.3.0-beta.17",
-      "jsondiffpatch@<0.7.2": ">=0.7.2",
-      "vite@>=7.1.0 <=7.1.10": ">=7.1.11",
-      "hono@>=1.1.0 <4.10.2": ">=4.10.2",
-      "hono@<4.10.3": ">=4.10.3",
-      "js-yaml@<4.1.1": ">=4.1.1"
-    },
-    "ignoredBuiltDependencies": [
-      "better-sqlite3",
-      "yarn"
-    ]
+    "overrides": {},
+    "ignoredBuiltDependencies": []
   },
   "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c"
 }

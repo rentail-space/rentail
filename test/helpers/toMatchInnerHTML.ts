@@ -53,14 +53,50 @@ expect.extend({
     if (html !== original) {
       const newFilename = path.join(dirname, `${testName}-new.html`);
       await writeFile(newFilename, html);
+
+      const diff = toDiff(html, original, filename, newFilename);
+      await writeFile(path.join(dirname, `${testName}-diff.html`), diff);
+
       return {
-        message: () => `HTML differs from baseline see ${newFilename}`,
+        message: () =>
+          `HTML differs from baseline see ${newFilename}:\n${diff}`,
         pass: false,
       };
     }
     return { message: () => "HTML matches baseline", pass: true };
   },
 });
+
+function toDiff(
+  actual: string,
+  original: string,
+  origFilename: string,
+  newFilename: string,
+): string {
+  const actualLines = actual.split(/\r?\n/);
+  const originalLines = original.split(/\r?\n/);
+  const diffOutput = diffLines(actualLines, originalLines);
+  return diffOutput.length
+    ? [
+        `--- Original (${origFilename})`,
+        `+++ New      (${newFilename})`,
+        ...diffOutput,
+      ].join("\n")
+    : "";
+}
+
+function diffLines(a: string[], b: string[]): string[] {
+  // Simple line-based diff (not full-featured unified diff)
+  const diffs: string[] = [];
+  const maxLen = Math.max(a.length, b.length);
+  for (let i = 0; i < maxLen; i++) {
+    if ((a[i] ?? "") !== (b[i] ?? "")) {
+      diffs.push(`- ${b[i] ?? ""}`);
+      diffs.push(`+ ${a[i] ?? ""}`);
+    }
+  }
+  return diffs;
+}
 
 function getTestName(): string {
   const error = new Error();
@@ -77,5 +113,6 @@ function getTestName(): string {
 export async function removeNewHTML() {
   const list = await readdir(dirname);
   for (const file of list)
-    if (file.endsWith("-new.html")) await unlink(path.join(dirname, file));
+    if (file.endsWith("-new.html") || file.endsWith("-diff.html"))
+      await unlink(path.join(dirname, file));
 }

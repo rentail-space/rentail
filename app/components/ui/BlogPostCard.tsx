@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { DateTime } from "luxon";
 import { Link } from "react-router";
 import type { BlogPost } from "~/lib/blogPosts.server";
 
@@ -22,11 +23,9 @@ export default function BlogCard({ post }: { post: BlogPost }) {
       <div className="flex flex-col gap-3 p-6">
         <div className="flex items-center gap-2 text-gray-500 text-xs">
           <time dateTime={post.published.toISOString()}>
-            {new Date(post.published).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            {DateTime.fromJSDate(post.published, {
+              zone: "utc",
+            }).toLocaleString(DateTime.DATE_MED)}
           </time>
         </div>
         <h2 className="line-clamp-2 font-bold text-gray-900 text-xl group-hover:text-blue-600">
