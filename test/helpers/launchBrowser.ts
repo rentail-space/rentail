@@ -78,9 +78,6 @@ async function blockOutgoingRequests(route: Route): Promise<void> {
 
   // Mock rentail.space requests using localhost
   if (hostname === "rentail.space") {
-    const url = new URL(route.request().url());
-    url.hostname === "localhost";
-    url.port === "9222";
     const response = await route.fetch();
     return await route.fulfill({ response });
   }

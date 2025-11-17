@@ -61,7 +61,7 @@ export async function closeServer(): Promise<void> {
     // Send graceful shutdown message first
     worker.send("shutdown");
     // Wait briefly for graceful shutdown, then kill if needed
-    await delay(2_000);
+    await delay(500);
     worker.kill("SIGKILL");
   }
 }

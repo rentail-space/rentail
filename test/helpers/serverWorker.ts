@@ -5,11 +5,11 @@
  * cleanly when the test is done.
  */
 
+import { invariant } from "es-toolkit";
 import { rm } from "node:fs/promises";
 import { resolve } from "node:path";
-import * as vite from "vite";
 import type { ViteDevServer } from "vite";
-import { invariant } from "es-toolkit";
+import * as vite from "vite";
 import config from "vite.config";
 
 let devServer: ViteDevServer | undefined;
@@ -36,6 +36,7 @@ async function startServer() {
         middlewareMode: false,
         port,
         strictPort: true,
+        watch: null,
       },
       logLevel: "info",
     });
@@ -66,4 +67,4 @@ async function startServer() {
   }
 }
 
-startServer();
+await startServer();

@@ -11,12 +11,14 @@ import prisma from "~/lib/prisma";
 import msw from "../mocks/mswHandlers";
 import { port } from "./launchBrowser";
 import { closeServer, launchServer } from "./launchServer";
+import { removeDiffImages } from "./toMatchScreenshot";
 
 export default async function setup() {
   await seedCenters();
   await launchServer(port);
   // Start MSW server before all tests
   msw.listen({ onUnhandledRequest: "error" });
+  await removeDiffImages();
 }
 
 export async function teardown() {

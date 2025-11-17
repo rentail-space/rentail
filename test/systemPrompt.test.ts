@@ -88,17 +88,26 @@ describe("prompt()", () => {
     expect(space).toBeUndefined();
   });
 
-  it("handles empty centers list", async () => {
-    const result = await systemPrompt({
-      headers: new Headers({
-        "x-vercel-ip-latitude": "37.42240",
-        "x-vercel-ip-longitude": "-122.08421",
-      }),
+  describe("empty centers list", () => {
+    let result: string;
+    beforeAll(async () => {
+      result = await systemPrompt({
+        headers: new Headers({
+          "x-vercel-ip-latitude": "37.42240",
+          "x-vercel-ip-longitude": "-122.08421",
+        }),
+      });
     });
-    expect(result).toContain(
-      "I don't know where you are, so I can't find any shopping centers near you",
-    );
-    expect(result).not.toContain("<shopping-center>");
+
+    it("includes instructions about empty centers list", () => {
+      expect(result).toContain(
+        "I don't know where you are, so I can't find any shopping centers near you",
+      );
+    });
+
+    it("should not include shopping centers", () => {
+      expect(result).not.toContain("<shopping-center>");
+    });
   });
 
   it("includes instructions about known shopping centers only", () => {

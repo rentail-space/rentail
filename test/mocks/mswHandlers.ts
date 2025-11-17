@@ -27,6 +27,23 @@ const handlers = [
     HttpResponse.json({ id: ulid() }),
   ),
 
+  // Mock OpenStreetMap Nominatim API
+  http.get("https://nominatim.openstreetmap.org/search", ({ request }) =>
+    HttpResponse.json(
+      [
+        {
+          place_id: ulid(),
+          display_name:
+            new URL(request.url).searchParams.get("q") ??
+            "Los Angeles, California, United States",
+          lat: "34.052235",
+          lon: "-118.243683",
+        },
+      ],
+      { headers: { "Content-Type": "application/json" } },
+    ),
+  ),
+
   // Allow all localhost requests to pass through (for dev server communication)
   http.all(
     ({ request }: { request: Request }) =>

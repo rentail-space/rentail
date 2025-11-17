@@ -300,12 +300,12 @@ async function geocodeLocation(location: {
       headers: { "User-Agent": "rentail.space/1.0 (support@rentail.space)" },
       signal: AbortSignal.timeout(2_000),
     });
-    const results = (await response.json()) as {
+    const results = (await response.json()) as Array<{
       place_id: number;
       display_name: string;
       lat: string;
       lon: string;
-    }[];
+    }>;
     invariant(results.length > 0, "No results found");
     return {
       displayName: results[0].display_name,
