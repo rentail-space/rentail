@@ -37,7 +37,7 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
  *
  * @returns The browser context.
  */
-async function newContext(): Promise<BrowserContext> {
+export async function newContext(): Promise<BrowserContext> {
   if (context) return context;
 
   const headless = process.env.CI ? true : !logger.enabled;

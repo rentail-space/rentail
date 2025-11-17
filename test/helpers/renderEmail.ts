@@ -1,7 +1,7 @@
 import { pretty, render } from "@react-email/components";
 import { invariant } from "es-toolkit";
 import type { JSX } from "react";
-import { goto } from "./launchBrowser";
+import { newContext } from "./launchBrowser";
 
 /**
  * Render an email component to HTML for visual regression testing. The email
@@ -18,7 +18,9 @@ export default async function renderEmail(email: string | JSX.Element | null) {
     typeof email === "string" ? email : await pretty(await render(email));
 
   // Set the page content and wait for it to load (for images)
-  const page = await goto("/");
-  await page.setContent(html, { waitUntil: "networkidle" });
+  const context = await newContext();
+  const page = await context.newPage();
+  await page.setViewportSize({ width: 1024, height: 780 });
+  await page.setContent(html, { waitUntil: "domcontentloaded" });
   return page;
 }

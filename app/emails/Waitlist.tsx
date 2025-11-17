@@ -21,7 +21,7 @@ export default function Waitlist({ subject }: { subject: string }) {
           <Img
             alt="Rentail.space Logo"
             height="80"
-            src="https://rentail.space/favicon-96x96.png"
+            src="https://rentail.space/images/logo.png"
             style={styles.logo}
             width="80"
           />

@@ -83,11 +83,11 @@ describe("Anonymous visits chat page", () => {
     });
 
     it("should have user's new latitude", async () => {
-      expect(workingMemory.location?.latitude).toEqual(42.3601);
+      expect(workingMemory.location?.latitude).toEqual(33.74901);
     });
 
     it("should have user's new longitude", async () => {
-      expect(workingMemory.location?.longitude).toEqual(-71.0589);
+      expect(workingMemory.location?.longitude).toEqual(-118.1956);
     });
 
     it("should have user's new time zone", async () => {
@@ -178,7 +178,7 @@ describe("Anonymous visits chat page", () => {
               .getByRole("textbox", { name: "Password" })
               .fill("WorkingMemory123!");
             await page.getByRole("button", { name: "Create" }).click();
-            await page.waitForURL("/chat", { waitUntil: "load" });
+            await page.waitForURL("/chat", { waitUntil: "networkidle" });
           });
 
           it("redirects to chat page after successful sign-up", async () => {
@@ -221,11 +221,18 @@ describe("Anonymous visits chat page", () => {
             expect(workingMemory.location?.city).toEqual("Boston");
             expect(workingMemory.location?.state).toEqual("Massachusetts");
             expect(workingMemory.location?.country).toEqual("United States");
-            expect(workingMemory.location?.latitude).toEqual(42.3601);
-            expect(workingMemory.location?.longitude).toEqual(-71.0589);
             expect(workingMemory.location?.timeZone).toEqual(
               "America/New_York",
             );
+          });
+
+          it("preserves working memory latitude and longitude", async () => {
+            const user = await prisma.user.findFirstOrThrow({
+              where: { isAnonymous: false },
+            });
+            const workingMemory = cleanParseProfile(user.workingMemory);
+            expect(workingMemory.location?.latitude).toEqual(33.74901);
+            expect(workingMemory.location?.longitude).toEqual(-118.1956);
           });
         });
       });

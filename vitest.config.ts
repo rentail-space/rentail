@@ -21,8 +21,7 @@ export default defineConfig({
     reporters: [
       process.env.GITHUB_ACTIONS
         ? "github-actions"
-        : ["verbose", { summary: false }],
-
+        : ["verbose", { summary: true }],
       "hanging-process",
     ],
     setupFiles: "test/helpers/setup.ts",

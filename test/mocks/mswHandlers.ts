@@ -1,5 +1,5 @@
 import debug from "debug";
-import { HttpResponse, http, passthrough } from "msw";
+import { http, HttpResponse, passthrough } from "msw";
 import { setupServer } from "msw/node";
 import { ulid } from "ulid";
 import { findMockResponse } from "./mockAnthropic";
@@ -36,8 +36,8 @@ const handlers = [
           display_name:
             new URL(request.url).searchParams.get("q") ??
             "Los Angeles, California, United States",
-          lat: "34.052235",
-          lon: "-118.243683",
+          lat: "33.74901",
+          lon: "-118.1956",
         },
       ],
       { headers: { "Content-Type": "application/json" } },

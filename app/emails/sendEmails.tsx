@@ -76,6 +76,8 @@ async function sendEmail({
   try {
     const html = await pretty(await render(component({ subject })));
     lastEmailHtml = html;
+    // In tests, we don't want to actually send emails, we just want to render them
+    if (process.env.NODE_ENV === "test") return;
 
     const { error } = await resend.emails.send({
       from: "Rentail.space <hello@rentail.space>",

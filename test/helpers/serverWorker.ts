@@ -8,18 +8,14 @@
 import { invariant } from "es-toolkit";
 import { rm } from "node:fs/promises";
 import { resolve } from "node:path";
-import type { ViteDevServer } from "vite";
 import * as vite from "vite";
-import config from "vite.config";
-
-let devServer: ViteDevServer | undefined;
 
 // Import and start the server
 async function startServer() {
   invariant(process.send, "process.send is not defined");
+  const port = Number(process.env.PORT);
+  invariant(port, "PORT is not defined");
   try {
-    const port = Number(process.env.PORT);
-
     // Remove the directory at "deps" before starting the dev server
     await rm(resolve("node_modules/.vite/deps"), {
       recursive: true,
@@ -27,9 +23,9 @@ async function startServer() {
     });
 
     // Create Vite dev server with cached dependencies
-    devServer = await vite.createServer({
-      // NOTE: for dependencies use the same configuration as the main server
-      ...config,
+    const devServer = await vite.createServer({
+      clearScreen: false,
+      logLevel: "info",
       root: process.cwd(),
       server: {
         hmr: false,
@@ -38,7 +34,6 @@ async function startServer() {
         strictPort: true,
         watch: null,
       },
-      logLevel: "info",
     });
 
     // Start the Vite dev server
