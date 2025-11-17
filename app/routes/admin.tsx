@@ -1,5 +1,6 @@
 import { Outlet, useRouteLoaderData } from "react-router";
 import PageHeader from "~/components/layout/PageHeader";
+import PageLayout from "~/components/layout/PageLayout";
 import type { loader as rootLoader } from "~/root";
 import NotFoundPage from "./$";
 
@@ -18,14 +19,16 @@ const adminLinks = [
 
 export default function Admin() {
   const root = useRouteLoaderData<typeof rootLoader>("root");
-  if (!root?.isAdmin) return <NotFoundPage />;
-
-  return (
-    <div>
+  return root?.isAdmin ? (
+    <>
       <PageHeader links={adminLinks} />
       <main className="container mx-auto my-10">
         <Outlet />
       </main>
-    </div>
+    </>
+  ) : (
+    <PageLayout>
+      <NotFoundPage />
+    </PageLayout>
   );
 }

@@ -26,6 +26,7 @@ export default async function converse(
   // Count response bubbles on the page, we expect 1 new response bubble.
   // There's always at least one response bubble, the welcome message.
   const responseCount = await page.locator(".chat-bubble-response").count();
+
   // NOTE: We need to focus on the input and then type text into it, which
   // properly triggers React events.
   const input = page.locator('input[type="text"]');
