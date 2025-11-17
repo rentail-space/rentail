@@ -28,7 +28,7 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const page = await context.newPage();
   await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
   await page.setViewportSize({ width: 1024, height: 780 });
-  await page.goto(path, { waitUntil: "domcontentloaded" });
+  await page.goto(path, { waitUntil: "networkidle" });
   return page;
 }
 
