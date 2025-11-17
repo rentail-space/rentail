@@ -19,7 +19,10 @@ export default defineConfig({
     onStackTrace,
     pool: "forks",
     reporters: [
-      process.env.GITHUB_ACTIONS ? "github-actions" : "verbose",
+      process.env.GITHUB_ACTIONS
+        ? "github-actions"
+        : ["verbose", { summary: false }],
+
       "hanging-process",
     ],
     setupFiles: "test/helpers/setup.ts",

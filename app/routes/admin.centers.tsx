@@ -6,7 +6,7 @@ import prisma from "~/lib/prisma";
 import { cleanParseProfile } from "~/lib/userProfile";
 import { findUserAndLastChat } from "~/sessions.server";
 import CentersMap from "../components/ui/CentersMap";
-import type { Route } from "./admin.centers/+types/route";
+import type { Route } from "./+types/admin.centers";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const found = await findUserAndLastChat(request.headers);

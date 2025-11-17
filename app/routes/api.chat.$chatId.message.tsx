@@ -9,14 +9,10 @@ import type { InputJsonValue } from "prisma/generated/internal/prismaNamespace";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { ulid } from "ulid";
 import env from "~/lib/env";
-import findNearbyCenters from "~/lib/findNearbyCenters";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import systemPrompt from "~/lib/systemPrompt";
-import updateUserProfile, {
-  maskWorkingMemoryTags,
-  userProfile,
-} from "~/lib/userProfile";
+import updateUserProfile, { maskWorkingMemoryTags } from "~/lib/userProfile";
 import { findOrCreateUser, recentMessages } from "~/sessions.server";
 import type { Route } from "./+types/api.chat.$chatId.message";
 
@@ -37,7 +33,7 @@ export async function action({ request, params }: Route.ActionArgs) {
   });
 
   // We're only looking for last message sent by the user
-  const { messages: bodyMessages } = (await request.clone().json()) as {
+  const { messages: bodyMessages } = (await request.json()) as {
     messages: UIMessage[];
   };
   const lastMessage = last(bodyMessages) as UIMessage;
@@ -67,11 +63,6 @@ export async function action({ request, params }: Route.ActionArgs) {
   // Set up Redis stop monitoring
   const { abortSignal } = await monitorStopSignal(chat.id);
 
-  // Find centers near the user to include in the system prompt, so AI can
-  // recommend centers based on the user's location.
-  const centers = await findNearbyCenters({ headers, user });
-  logger("Found %d centers", centers.length);
-
   // NOTE: onFinish may be called before consumeSseStream, so we need to store
   // the active stream ID in the database right now. The docs show a different
   // approach, but it fails certain test cases (quick responses).
@@ -87,7 +78,7 @@ export async function action({ request, params }: Route.ActionArgs) {
       "claude-haiku-4-5",
     ),
     messages: convertToModelMessages(messages),
-    system: systemPrompt({ userProfile, centers }),
+    system: await systemPrompt({ headers, user }),
 
     onAbort: async () => {
       logger("Aborted %s by user", chat.id);

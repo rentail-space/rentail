@@ -1,17 +1,12 @@
 import { invariant } from "node_modules/es-toolkit/dist/util/invariant.mjs";
 import { beforeAll, describe, expect, it } from "vitest";
-import prisma from "~/lib/prisma";
 import systemPrompt from "~/lib/systemPrompt";
-import { userProfile } from "~/lib/userProfile";
 
 describe("prompt()", () => {
   let prompt: string;
 
   beforeAll(async () => {
-    const centers = await prisma.property.findMany({
-      include: { spaces: true },
-    });
-    prompt = systemPrompt({ userProfile, centers });
+    prompt = await systemPrompt({ headers: new Headers() });
   });
 
   it("includes clear instructions", () => {
@@ -93,8 +88,13 @@ describe("prompt()", () => {
     expect(space).toBeUndefined();
   });
 
-  it("handles empty centers list", () => {
-    const result = systemPrompt({ userProfile, centers: [] });
+  it("handles empty centers list", async () => {
+    const result = await systemPrompt({
+      headers: new Headers({
+        "x-vercel-ip-latitude": "37.42240",
+        "x-vercel-ip-longitude": "-122.08421",
+      }),
+    });
     expect(result).toContain(
       "I don't know where you are, so I can't find any shopping centers near you",
     );

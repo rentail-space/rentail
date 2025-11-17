@@ -1,16 +1,25 @@
-import type { PropertySpace } from "prisma/generated/client";
+import type { PropertySpace, User } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
-import type { ZodType } from "zod";
+import { userProfile, zodToExample } from "~/lib/userProfile";
 import source from "~/prompts/systemPrompt.md?raw";
-import { zodToExample } from "./userProfile";
+import findNearbyCenters from "./findNearbyCenters";
 
-export default function systemPrompt({
-  userProfile,
-  centers,
+/**
+ * Get the system prompt for the chat.
+ *
+ * @param headers - The HTTP headers to use to get the user's location.
+ * @param user - The user to find the shopping centers for. If not provided, the
+ * location will be inferred from the IP address in the headers.
+ * @returns The system prompt with the shopping centers included.
+ */
+export default async function systemPrompt({
+  headers,
+  user,
 }: {
-  userProfile: ZodType;
-  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
-}): string {
+  headers: Headers;
+  user?: User;
+}): Promise<string> {
+  const centers = await findNearbyCenters({ headers, user });
   const [date, time] = new Date().toISOString().split("T");
   const prompt = source
     .replace("$[date]", date)

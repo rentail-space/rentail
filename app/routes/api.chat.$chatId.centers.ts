@@ -10,12 +10,7 @@ import type { Route } from "./+types/api.chat.$chatId.centers";
 export async function loader({ params, request }: Route.LoaderArgs) {
   const { chatId } = params;
   const { headers } = request;
-  console.log("Getting centers for chat %s", chatId);
   const found = await findUserAndChatById({ chatId, headers });
-  console.log("Found user and chat: %O", found);
-
-  const centers = found
-    ? await findNearbyCenters({ headers, user: found.user })
-    : [];
+  const centers = await findNearbyCenters({ headers, user: found?.user });
   return { centers };
 }

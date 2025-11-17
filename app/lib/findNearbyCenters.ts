@@ -10,7 +10,7 @@ import { cleanParseProfile } from "./userProfile";
  */
 const midcity = {
   latitude: 34.04592,
-  longitude: 118.34574,
+  longitude: -118.34574,
 };
 
 const logger = debug("geocode");
@@ -35,7 +35,7 @@ export default async function findNearbyCenters({
   const { longitude, latitude } = await getLocation({ user, headers });
 
   const maxDistance = 30; // miles
-  const centers = await prisma.property.findMany({
+  return await prisma.property.findMany({
     include: {
       spaces: {
         where: { available: true },
@@ -52,7 +52,6 @@ export default async function findNearbyCenters({
       },
     },
   });
-  return centers;
 }
 
 /**
