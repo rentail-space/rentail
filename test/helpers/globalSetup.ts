@@ -14,15 +14,21 @@ import { closeServer, launchServer } from "./launchServer";
 import { removeDiffImages } from "./toMatchScreenshot";
 
 export default async function setup() {
+  // Clean up database and seed it again
+  await prisma.user.deleteMany();
+  await prisma.property.deleteMany();
   await seedCenters();
-  await launchServer(port);
-  // Start MSW server before all tests
-  msw.listen({ onUnhandledRequest: "error" });
+
+  // Remove regression testing diff images
   await removeDiffImages();
+
+  // Launch server and start test env MSW handlers
+  await launchServer(port);
+  msw.listen({ onUnhandledRequest: "error" });
 }
 
 export async function teardown() {
+  await closeServer();
   msw.close();
   await prisma.$disconnect();
-  await closeServer();
 }

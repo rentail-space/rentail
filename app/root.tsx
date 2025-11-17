@@ -67,10 +67,8 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App({
-  loaderData,
   matches,
 }: {
-  loaderData?: Awaited<ReturnType<typeof loader>>;
   matches: UIMatch<unknown, { hideLayout?: boolean }>[];
 }) {
   const { hideLayout } = last(
@@ -78,11 +76,7 @@ export default function App({
   )?.handle || { hideLayout: false };
 
   return (
-    <PageLayout
-      hideLayout={hideLayout}
-      user={loaderData?.user}
-      isAdmin={loaderData?.isAdmin}
-    >
+    <PageLayout hideLayout={hideLayout}>
       <Outlet />
     </PageLayout>
   );
@@ -90,7 +84,7 @@ export default function App({
 
 export function HydrateFallback() {
   return (
-    <PageLayout hideLayout={true} user={undefined} isAdmin={false}>
+    <PageLayout hideLayout={true}>
       <main className="prose prose-lg mx-auto flex flex-col items-center justify-center gap-4">
         <div className="flex flex-col items-center justify-center">
           <div className="h-12 w-12 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
@@ -105,7 +99,7 @@ export function ErrorBoundary() {
   const error = useRouteError();
 
   return (
-    <PageLayout hideLayout={true} user={undefined} isAdmin={false}>
+    <PageLayout hideLayout={true}>
       <main className="prose prose-lg mx-auto py-32">
         {isRouteErrorResponse(error) ? (
           <h1 className="mx-auto flex flex-row justify-center gap-2 text-4xl">

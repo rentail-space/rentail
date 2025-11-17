@@ -22,11 +22,7 @@ export default function Admin() {
 
   return (
     <div>
-      <PageHeader
-        links={adminLinks}
-        isAdmin={root?.isAdmin}
-        user={root?.user}
-      />
+      <PageHeader links={adminLinks} />
       <main className="container mx-auto my-10">
         <Outlet />
       </main>

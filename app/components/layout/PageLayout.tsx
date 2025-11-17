@@ -36,17 +36,9 @@ const headerLinks = [
 export default function PageLayout({
   children,
   hideLayout = false,
-  user,
-  isAdmin,
 }: {
   children: React.ReactNode;
   hideLayout?: boolean;
-  user?: {
-    name: string | null;
-    email: string | null;
-    isAnonymous: boolean;
-  };
-  isAdmin?: boolean;
 }) {
   useEffect(() => {
     if (process.env.NODE_ENV === "production")
@@ -106,7 +98,7 @@ export default function PageLayout({
             children
           ) : (
             <div className="flex min-h-screen flex-col">
-              <PageHeader links={headerLinks} user={user} isAdmin={isAdmin} />
+              <PageHeader links={headerLinks} />
               {children}
               <PageFooter />
             </div>

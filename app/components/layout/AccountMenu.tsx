@@ -1,19 +1,12 @@
 import { ShieldIcon, UserIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
+import { Link, useRouteLoaderData } from "react-router";
 import authClient from "~/lib/auth.client";
+import type { loader as rootLoader } from "~/root";
 
-export default function AccountMenu({
-  user,
-  isAdmin,
-}: {
-  user?: {
-    name: string | null;
-    email: string | null;
-    isAnonymous: boolean;
-  };
-  isAdmin?: boolean;
-}) {
+export default function AccountMenu() {
+  const data = useRouteLoaderData<typeof rootLoader>("root");
+  const user = data?.user;
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -38,7 +31,7 @@ export default function AccountMenu({
   return (
     <div className="navbar-end">
       {user && !user.isAnonymous ? (
-        <DropdownMenu user={user} isAdmin={isAdmin ?? false} />
+        <DropdownMenu user={user} isAdmin={data.isAdmin} />
       ) : (
         <SignInButton />
       )}

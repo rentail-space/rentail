@@ -30,7 +30,7 @@ if (env.isProduction && env.SENTRY_DSN) {
 
 if (env.isTest) {
   debug("msw")("Initializing MSW for test mode");
-  // Initialize MSW in test mode
+  // Initialize MSW in test mode (on the server side)
   msw.listen({ onUnhandledRequest: "error" });
 }
 

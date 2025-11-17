@@ -7,8 +7,8 @@ import {
   access,
   constants,
   mkdir,
-  readdir,
   readFile,
+  readdir,
   unlink,
   writeFile,
 } from "node:fs/promises";
@@ -22,15 +22,17 @@ const dirname = path.resolve("./__screenshots__");
  *
  * @param page - The page to take a screenshot of.
  * @param options - The options for the matcher.
- * @param options.maxDifference - The maximum difference allowed between the baseline and the current screenshot.
+ * @param options.tolerance - The tolerance for the matcher (default: 2.3)
  * @returns The result of the matcher.
  * @example
- * await expect(page).toMatchScreenshot({ maxDifference: 0.05 });
+ * await expect(page).toMatchScreenshot({ tolerance: 2.3 });
+ *
+ * @see https://github.com/gemini-testing/looks-same
  */
 expect.extend({
   async toMatchScreenshot(
     page: Page,
-    options: { maxDifference: number } = { maxDifference: 0.01 },
+    options: { tolerance: number } = { tolerance: 2.3 },
   ) {
     try {
       const testName = getTestName();
@@ -53,27 +55,22 @@ expect.extend({
         };
       }
 
-      const { differentPixels, diffImage } = await looksSame(
+      const { diffImage, equal } = await looksSame(
         await readFile(filename),
         screenshot,
         {
           createDiffImage: true,
           ignoreAntialiasing: true,
           ignoreCaret: true,
-          tolerance: 5,
+          tolerance: options.tolerance,
+          strict: false,
         },
       );
-      if (diffImage) {
+      if (!equal) {
         const diffFilename = path.join(dirname, `diff-${testName}.png`);
         await diffImage.save(diffFilename);
         await writeFile(path.join(dirname, `new-${testName}.png`), screenshot);
         throw new Error(`Image differs from baseline see ${diffFilename}`);
-      }
-
-      if (typeof differentPixels === "number") {
-        const diff = differentPixels / screenshot.length;
-        if (diff / 100 >= options.maxDifference)
-          throw new Error(`Image differs from baseline by ${diff.toFixed(2)}%`);
       }
 
       return { message: () => "Image matches baseline", pass: true };
