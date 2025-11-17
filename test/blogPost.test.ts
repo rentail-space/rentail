@@ -93,10 +93,11 @@ describe("Blog Post Rendering", () => {
     await expect(layout).toBeVisible();
   });
 
-  it("should match visual regression test", async () => {
-    // Wait for any images to load
-    await page.waitForTimeout(100);
+  it("should match inner HTML", async () => {
+    await expect(page).toMatchInnerHTML();
+  });
 
+  it.runIf(!process.env.CI)("should match visual regression test", async () => {
     // Take screenshot for visual regression testing
     await expect(page).toMatchScreenshot();
   });

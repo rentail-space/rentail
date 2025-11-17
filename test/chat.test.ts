@@ -64,16 +64,22 @@ describe("Chat page", () => {
       );
     });
 
-    it("should look like a real chat", async () => {
-      // Wait until the chat container is rendered and present, then scroll it to bottom reliably
-      const scrollContainer = page.locator(".overflow-y-auto").first();
-      await scrollContainer.evaluate((el) => {
-        el.scrollTop = el.scrollHeight;
+    describe("visual regression testing", () => {
+      beforeAll(async () => {
+        await page.waitForLoadState("networkidle");
+        await page.locator(".scroll-smooth").scrollIntoViewIfNeeded();
+        await page.waitForTimeout(100);
       });
-      await page.waitForTimeout(500);
 
-      // Take screenshot for visual regression testing
-      await expect(page).toMatchScreenshot();
+      it("should look like a real chat", async () => {
+        // Take screenshot for visual regression testing
+        await expect(page).toMatchInnerHTML();
+      });
+
+      it.runIf(!process.env.CI)("should look like a real chat", async () => {
+        // Take screenshot for visual regression testing
+        await expect(page).toMatchScreenshot();
+      });
     });
 
     it("should have welcome message, user message, and assistant response", async () => {

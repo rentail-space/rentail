@@ -2,7 +2,6 @@ import debug from "debug";
 import { delay, invariant } from "es-toolkit";
 import { type ChildProcess, execSync, fork } from "node:child_process";
 import { resolve } from "node:path";
-import "~/test/helpers/toMatchScreenshot";
 
 let worker: ChildProcess | undefined;
 

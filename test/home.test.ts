@@ -1,4 +1,4 @@
-import { expect, type Page } from "playwright/test";
+import { type Page, expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
@@ -9,7 +9,11 @@ describe("Home page", () => {
     page = await goto("/");
   });
 
-  it("home page", async () => {
+  it("should match inner HTML", async () => {
+    await expect(page).toMatchInnerHTML();
+  });
+
+  it.runIf(!process.env.CI)("should match visual regression test", async () => {
     await expect(page).toMatchScreenshot();
   });
 });

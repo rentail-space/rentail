@@ -10,7 +10,8 @@
       "Bash(pnpm add:*)",
       "Bash(pnpm typecheck:*)",
       "Bash(pnpm build:*)",
-      "Bash(pnpm biome format:*)"
+      "Bash(pnpm biome format:*)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [],
     "ask": []

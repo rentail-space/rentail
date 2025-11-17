@@ -33,53 +33,49 @@ expect.extend({
   async toMatchScreenshot(
     page: Page,
     options: { tolerance: number } = { tolerance: 3 },
-  ) {
+  ): Promise<{ message: () => string; pass: boolean }> {
+    const testName = getTestName();
+    const filename = path.join(dirname, `${testName}.png`);
+    const screenshot = await page.screenshot({
+      animations: "disabled",
+      caret: "hide",
+      scale: "css",
+      type: "png",
+    });
+
     try {
-      const testName = getTestName();
-      const filename = path.join(dirname, `${testName}.png`);
-      const screenshot = await page.screenshot({
-        animations: "disabled",
-        caret: "hide",
-        scale: "css",
-        type: "png",
-      });
-
-      try {
-        await access(filename, constants.R_OK);
-      } catch {
-        await mkdir(dirname, { recursive: true });
-        await writeFile(filename, screenshot);
-        return {
-          message: () => `Baseline screenshot created at ${filename}.`,
-          pass: true,
-        };
-      }
-
-      const { diffImage, equal } = await looksSame(
-        await readFile(filename),
-        screenshot,
-        {
-          createDiffImage: true,
-          ignoreAntialiasing: true,
-          ignoreCaret: true,
-          tolerance: options.tolerance,
-          strict: false,
-        },
-      );
-      if (!equal) {
-        const diffFilename = path.join(dirname, `diff-${testName}.png`);
-        await diffImage.save(diffFilename);
-        await writeFile(path.join(dirname, `new-${testName}.png`), screenshot);
-        throw new Error(`Image differs from baseline see ${diffFilename}`);
-      }
-
-      return { message: () => "Image matches baseline", pass: true };
-    } catch (error) {
+      await access(filename, constants.R_OK);
+    } catch {
+      await mkdir(dirname, { recursive: true });
+      await writeFile(filename, screenshot);
       return {
-        message: () => (error instanceof Error ? error.message : String(error)),
+        message: () => `Baseline screenshot created at ${filename}.`,
+        pass: true,
+      };
+    }
+    const { diffImage, equal } = await looksSame(
+      await readFile(filename),
+      screenshot,
+      {
+        createDiffImage: true,
+        ignoreAntialiasing: true,
+        ignoreCaret: true,
+        tolerance: options.tolerance,
+        strict: false,
+      },
+    );
+
+    if (!equal) {
+      const diffFilename = path.join(dirname, `${testName}-diff.png`);
+      await diffImage.save(diffFilename);
+      await writeFile(path.join(dirname, `${testName}-new.png`), screenshot);
+      return {
+        message: () => `Image differs from baseline see ${diffFilename}`,
         pass: false,
       };
     }
+
+    return { message: () => "Image matches baseline", pass: true };
   },
 });
 
@@ -98,6 +94,6 @@ function getTestName(): string {
 export async function removeDiffImages() {
   const list = await readdir(dirname);
   for (const file of list)
-    if (file.startsWith("diff-") || file.startsWith("new-"))
+    if (file.endsWith("-diff.png") || file.endsWith("-new.png"))
       await unlink(path.join(dirname, file));
 }

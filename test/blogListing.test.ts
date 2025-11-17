@@ -7,7 +7,7 @@
  * - Navigation to individual posts
  */
 
-import { expect, type Page } from "playwright/test";
+import { type Page, expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
@@ -70,10 +70,11 @@ describe("Blog Listing", () => {
     expect(linkCount).toBeGreaterThan(0);
   });
 
-  it("should match visual regression test", async () => {
-    // Set consistent viewport for screenshots
-    await page.waitForLoadState("networkidle");
+  it("should match inner HTML", async () => {
+    await expect(page).toMatchInnerHTML();
+  });
 
+  it.runIf(!process.env.CI)("should match visual regression test", async () => {
     // Scroll to blog section if it exists
     const blogSection = page.locator("section.blog-posts").first();
     await expect(blogSection).toBeVisible();

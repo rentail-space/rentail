@@ -10,7 +10,8 @@ import seedCenters from "prisma/seed/seedCenters";
 import prisma from "~/lib/prisma";
 import msw from "../mocks/mswHandlers";
 import { port } from "./launchBrowser";
-import { closeServer, launchServer } from "./launchServer";
+import { launchServer } from "./launchServer";
+import { removeNewHTML } from "./toMatchInnerHTML";
 import { removeDiffImages } from "./toMatchScreenshot";
 
 export default async function setup() {
@@ -21,14 +22,9 @@ export default async function setup() {
 
   // Remove regression testing diff images
   await removeDiffImages();
+  await removeNewHTML();
 
   // Launch server and start test env MSW handlers
   await launchServer(port);
   msw.listen({ onUnhandledRequest: "error" });
-}
-
-export async function teardown() {
-  await closeServer();
-  msw.close();
-  await prisma.$disconnect();
 }

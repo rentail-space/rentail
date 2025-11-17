@@ -44,7 +44,21 @@ function onStackTrace(
 declare global {
   namespace PlaywrightTest {
     interface Matchers<R> {
+      /**
+       * Take a screenshot of the page and compare it to the baseline screenshot.
+       *
+       * @example
+       * await expect(page).toMatchScreenshot();
+       */
       toMatchScreenshot(): Promise<R>;
+
+      /**
+       * Takes the inner HTML of the page and compares it to the baseline HTML.
+       *
+       * @example
+       * await expect(page).toMatchInnerHTML();
+       */
+      toMatchInnerHTML(): Promise<R>;
     }
   }
 }

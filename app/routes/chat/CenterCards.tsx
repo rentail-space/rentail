@@ -175,7 +175,9 @@ function HoverCard({
       >
         <div className="card-body">
           <p className="card-title">{center.name}</p>
-          <p className="line-clamp-5 text-sm">{center.description}</p>
+          <p className="line-clamp-5 text-sm">
+            {center.description.split("\n")[0]}
+          </p>
         </div>
 
         <figure

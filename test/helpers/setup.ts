@@ -8,13 +8,11 @@
 import * as Sentry from "@sentry/react-router";
 import { beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
+import "./toMatchInnerHTML";
+import "./toMatchScreenshot";
 import "./trimConsole";
 
-Sentry.init({
-  enabled: false,
-  environment: "development",
-  defaultIntegrations: false,
-});
+Sentry.init({ enabled: false });
 
 beforeAll(async () => {
   // Cleanup database

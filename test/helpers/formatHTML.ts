@@ -1,0 +1,75 @@
+/**
+ * Formats an HTML string into a nicely indented tree.
+ * Works in Node.js without JSDOM or external HTML parsers.
+ * Assumes clean HTML (e.g., from browser innerHTML).
+ */
+export function formatHTMLTree(html: string): string {
+  const INDENT = "  ";
+  let result = "";
+  let level = 0;
+
+  // Simple regex-based HTML tokenizer
+  // Matches: opening tags, closing tags, text nodes, and self-closing tags
+  const tokenRegex = /<\/?[\w-]+(?:\s+[\w-]+=(?:"[^"]*"|'[^']*'))*\s*\/?>/g;
+
+  // Split HTML into tokens and text content
+  let lastIndex = 0;
+  let match = tokenRegex.exec(html);
+
+  while (match !== null) {
+    // Get text content before this tag
+    const textBefore = html.slice(lastIndex, match.index).trim();
+    if (textBefore) result += `${INDENT.repeat(level)}${textBefore}\n`;
+
+    const tag = match[0];
+    lastIndex = match.index + tag.length;
+
+    // Check if it's a closing tag
+    if (tag.startsWith("</")) {
+      level = Math.max(0, level - 1);
+      result += `${INDENT.repeat(level)}${tag}\n`;
+    }
+    // Check if it's a self-closing tag
+    else if (tag.endsWith("/>") || isSelfClosingTag(tag))
+      result += `${INDENT.repeat(level)}${tag}\n`;
+    // It's an opening tag
+    else {
+      result += `${INDENT.repeat(level)}${tag}\n`;
+      level++;
+    }
+    match = tokenRegex.exec(html);
+  }
+
+  // Get any remaining text after the last tag
+  const textAfter = html.slice(lastIndex).trim();
+  if (textAfter) result += `${INDENT.repeat(level)}${textAfter}\n`;
+
+  return `${result.trim()}\n`;
+}
+
+/**
+ * Check if a tag is self-closing (void elements in HTML).
+ */
+function isSelfClosingTag(tag: string): boolean {
+  const selfClosingTags = [
+    "area",
+    "base",
+    "br",
+    "col",
+    "embed",
+    "hr",
+    "img",
+    "input",
+    "link",
+    "meta",
+    "param",
+    "source",
+    "track",
+    "wbr",
+  ];
+
+  const tagMatch = /<([\w-]+)/.exec(tag);
+  return (
+    tagMatch !== null && selfClosingTags.includes(tagMatch[1].toLowerCase())
+  );
+}
