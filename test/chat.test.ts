@@ -1,4 +1,4 @@
-import { expect, type Page } from "playwright/test";
+import { type Page, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
 import { goto } from "~/test/helpers/launchBrowser";
@@ -65,10 +65,10 @@ describe("Chat page", () => {
     });
 
     it("should look like a real chat", async () => {
+      await page.waitForTimeout(100);
       await page.evaluate(() => {
         window.scrollTo(0, document.body.scrollHeight);
       });
-      await page.waitForTimeout(1_000);
 
       // Take screenshot for visual regression testing
       await expect(page).toMatchScreenshot();
