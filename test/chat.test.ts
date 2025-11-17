@@ -69,6 +69,7 @@ describe("Chat page", () => {
       await page.evaluate(() => {
         window.scrollTo(0, document.body.scrollHeight);
       });
+      await page.waitForTimeout(100);
 
       // Take screenshot for visual regression testing
       await expect(page).toMatchScreenshot();
