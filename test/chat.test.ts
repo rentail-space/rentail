@@ -66,18 +66,17 @@ describe("Chat page", () => {
 
     describe("visual regression testing", () => {
       beforeAll(async () => {
+        // Take screenshot for visual regression testing
         await page.waitForLoadState("networkidle");
         await page.locator(".scroll-smooth").scrollIntoViewIfNeeded();
-        await page.waitForTimeout(100);
+        await page.waitForTimeout(300);
       });
 
       it("should look like a real chat", async () => {
-        // Take screenshot for visual regression testing
         await expect(page).toMatchInnerHTML();
       });
 
       it.runIf(!process.env.CI)("should look like a real chat", async () => {
-        // Take screenshot for visual regression testing
         await expect(page).toMatchScreenshot();
       });
     });
