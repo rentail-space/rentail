@@ -1,6 +1,7 @@
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
-import { useEffect, useId, useState } from "react";
+import { AlertCircle } from "lucide-react";
+import { useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
 import { ulid } from "ulid";
 import authServer from "~/lib/auth.server";
@@ -15,62 +16,79 @@ export const clientLoader = async () => {
 
 clientLoader.hydrate = true as const;
 
-export async function action({
-  request,
-}: Route.ActionArgs): Promise<{ error: string | null } | Response> {
+export async function action({ request }: Route.ActionArgs): Promise<Response> {
   const form = await request.formData();
-  const email = form.get("email")?.toString();
-  const isSignUp = form.get("isSignUp")?.toString() === "true";
-  const name = form.get("name")?.toString();
-  const password = form.get("password")?.toString();
-
   try {
-    if (isSignUp) {
-      const response = await authServer.api.getSession({
-        headers: request.headers,
-        returnHeaders: true,
-      });
-      invariant(response, "Session data is required");
-      invariant(email, "Email is required");
-      invariant(password, "Password is required");
-      invariant(name, "Name is required");
-      try {
-        const { response, headers } = await authServer.api.signUpEmail({
-          body: { email, password, name },
-          headers: request.headers,
-          returnHeaders: true,
-        });
-        await updateNewUser({
-          chatId: ulid(),
-          headers: request.headers,
-          userId: response.user.id,
-        });
-        return redirect("/chat", { headers });
-      } catch {
-        const result = await authServer.api.signInEmail({
-          body: { email, password },
-          headers: request.headers,
-          returnHeaders: true,
-        });
-        return redirect("/chat", { headers: result.headers });
-      }
-    } else {
-      invariant(email, "Email is required");
-      invariant(password, "Password is required");
-      const result = await authServer.api.signInEmail({
-        body: { email, password },
-        headers: request.headers,
-        returnHeaders: true,
-      });
-      return redirect("/chat", { headers: result.headers });
+    try {
+      return await signUpEmail(form, request.headers);
+    } catch {
+      return await signInEmail(form);
     }
   } catch (error) {
-    captureException(error, { extra: { email, isSignUp } });
+    captureException(error, { extra: { form } });
     console.error("Error in auth: %s", error);
-    return {
-      error: error instanceof Error ? error.message : "Something went wrong",
-    };
+    let errorMessage = "Something went wrong";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    } else if (typeof error === "object" && error !== null) {
+      const betterAuthError = error as {
+        body?: { message: string };
+        message?: string;
+      };
+      errorMessage = betterAuthError.body?.message ?? "Something went wrong";
+    }
+    return new Response(JSON.stringify({ error: errorMessage }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
   }
+}
+
+/**
+ * Sign up with email and password. Redirects to the chat page on success.
+ *
+ * @param form - The form data containing the email, password, and name.
+ * @param headers - The headers object containing the request headers.
+ * @returns A redirect response to the chat page.
+ * @throws An error if the email or password is invalid, or if the user already exists.
+ */
+async function signUpEmail(
+  form: FormData,
+  headers: Headers,
+): Promise<Response> {
+  const email = form.get("email")?.toString();
+  const name = form.get("name")?.toString();
+  const password = form.get("password")?.toString();
+  invariant(name, "Name is required");
+  invariant(email, "Email is required");
+  invariant(password, "Password is required");
+  const { response, headers: returnedHeaders } =
+    await authServer.api.signUpEmail({
+      body: { email, password, name },
+      returnHeaders: true,
+    });
+  await updateNewUser({ chatId: ulid(), headers, userId: response.user.id });
+  return redirect("/chat", { headers: returnedHeaders });
+}
+
+/**
+ * Sign in with email and password. Returns a redirect response to the chat page
+ * on success, throws an error if the email or password are invalid.
+ *
+ * @param form - The form data containing the email and password.
+ * @returns A redirect response to the chat page
+ * @throws An error if the email or password are invalid
+ */
+async function signInEmail(form: FormData): Promise<Response> {
+  const email = form.get("email")?.toString();
+  const password = form.get("password")?.toString();
+  invariant(email, "Email is required");
+  invariant(password, "Password is required");
+  const { headers } = await authServer.api.signInEmail({
+    body: { email, password },
+    returnHeaders: true,
+  });
+  return redirect("/chat", { headers });
 }
 
 export default function AuthPage() {
@@ -79,53 +97,41 @@ export default function AuthPage() {
   const emailId = useId();
   const passwordId = useId();
   const fetcher = useFetcher();
-  const [error, setError] = useState<string | null>(null);
-
-  // Show error after form submission, but allow form change to clear error
-  useEffect(() => {
-    if (fetcher.data?.error) setError(fetcher.data.error);
-  }, [fetcher.data]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50 px-4 py-12">
-      <div className="w-full max-w-md">
-        <div className="rounded-2xl bg-white p-8 shadow-xl">
-          <header className="mb-8 text-center">
-            <h1 className="font-bold text-3xl text-gray-900">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50 px-4 py-12">
+      <div className="card card-border w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+        <div className="card-body space-y-6">
+          <div>
+            <h1 className="text-center font-bold text-3xl">
               {isSignUp ? "Create Account" : "Welcome Back"}
             </h1>
-            <p className="mt-2 text-gray-600">
+            <p className="text-center text-gray-600">
               {isSignUp
                 ? "Sign up to start finding retail spaces"
                 : "Sign in to your account"}
             </p>
-          </header>
+          </div>
 
-          <fetcher.Form className="space-y-6" method="post">
-            {isSignUp && (
-              <div>
-                <label
-                  htmlFor={nameId}
-                  className="block font-medium text-gray-700 text-sm"
-                >
-                  Full Name
-                </label>
-                <input
-                  id={nameId}
-                  name="name"
-                  type="text"
-                  required={isSignUp}
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  placeholder="John Doe"
-                />
-              </div>
-            )}
+          <fetcher.Form method="post" className="space-y-6">
+            <fieldset className="fieldset">
+              {isSignUp && (
+                <>
+                  <label htmlFor={nameId} className="label">
+                    Full Name
+                  </label>
+                  <input
+                    id={nameId}
+                    name="name"
+                    type="text"
+                    required={isSignUp}
+                    className="input input-lg w-full"
+                    placeholder="John Doe"
+                  />
+                </>
+              )}
 
-            <div>
-              <label
-                htmlFor={emailId}
-                className="block font-medium text-gray-700 text-sm"
-              >
+              <label htmlFor={emailId} className="label">
                 Email Address
               </label>
               <input
@@ -133,16 +139,11 @@ export default function AuthPage() {
                 name="email"
                 type="email"
                 required
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="input input-lg w-full"
                 placeholder="you@example.com"
               />
-            </div>
 
-            <div>
-              <label
-                htmlFor={passwordId}
-                className="block font-medium text-gray-700 text-sm"
-              >
+              <label htmlFor={passwordId} className="fieldset-label">
                 Password
               </label>
               <input
@@ -151,29 +152,31 @@ export default function AuthPage() {
                 type="password"
                 required
                 minLength={8}
-                className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="input input-lg w-full"
                 placeholder="••••••••"
               />
               {isSignUp && (
-                <p className="mt-1 text-gray-500 text-sm">
-                  Must be at least 8 characters
-                </p>
+                <p className="fieldset-legend">Must be at least 8 characters</p>
               )}
-            </div>
+            </fieldset>
 
-            {error && (
-              <div className="rounded-lg bg-red-50 p-4">
-                <p className="text-red-800 text-sm">{error}</p>
+            {fetcher.data?.error && (
+              <div role="alert" className="alert alert-error">
+                <AlertCircle className="h-6 w-6 shrink-0 stroke-current" />
+                <span>{fetcher.data.error}</span>
               </div>
             )}
 
             <button
-              className="w-full rounded-lg bg-indigo-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-indigo-400"
+              className="btn btn-primary mt-4 flex w-full items-center justify-center gap-2"
               name="isSignUp"
               type="submit"
               value={isSignUp.toString()}
               disabled={fetcher.state !== "idle"}
             >
+              {fetcher.state !== "idle" && (
+                <span className="loading loading-spinner" />
+              )}
               {isSignUp
                 ? fetcher.state === "idle"
                   ? "Create Account"
@@ -183,34 +186,39 @@ export default function AuthPage() {
                   : "Signing You In..."}
             </button>
           </fetcher.Form>
-
-          <div className="mt-6 text-center">
-            <button
-              className="text-indigo-600 text-sm hover:text-indigo-700 hover:underline"
-              onClick={() => {
-                setError(null);
-                setIsSignUp((isSignUp) => !isSignUp);
-              }}
-              type="button"
-            >
-              {isSignUp
-                ? "Already have an account? Sign in"
-                : "Don't have an account? Create one"}
-            </button>
-          </div>
         </div>
 
-        <p className="mt-8 text-center text-gray-600 text-sm">
-          By {isSignUp ? "signing up" : "signing in"}, you agree to our{" "}
-          <a href="/terms" className="text-indigo-600 hover:underline">
-            Terms of Service
-          </a>{" "}
-          and{" "}
-          <a href="/privacy" className="text-indigo-600 hover:underline">
-            Privacy Policy
-          </a>
-        </p>
+        <div className="card-action text-center">
+          <button
+            className="btn btn-link"
+            onClick={() => {
+              setIsSignUp((isSignUp) => !isSignUp);
+            }}
+            type="button"
+          >
+            {isSignUp
+              ? "Already have an account? Sign in"
+              : "Don't have an account? Create one"}
+          </button>
+        </div>
       </div>
+
+      <Footer isSignUp={isSignUp} />
     </div>
+  );
+}
+
+function Footer({ isSignUp }: { isSignUp: boolean }) {
+  return (
+    <footer className="mt-8 text-center text-gray-600 text-sm">
+      By {isSignUp ? "signing up" : "signing in"}, you agree to our{" "}
+      <a href="/terms" className="link">
+        Terms of Service
+      </a>{" "}
+      and{" "}
+      <a href="/privacy" className="link">
+        Privacy Policy
+      </a>
+    </footer>
   );
 }
