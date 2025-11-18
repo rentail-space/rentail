@@ -1,7 +1,6 @@
-import { captureException } from "@sentry/react-router";
-import { Info } from "lucide-react";
-import { useId, useState } from "react";
-import { toast } from "sonner";
+import { AlertCircle, CheckCircle, Info } from "lucide-react";
+import { useEffect, useId, useState } from "react";
+import { useFetcher } from "react-router";
 
 export default function CTASection() {
   return (
@@ -22,33 +21,40 @@ export default function CTASection() {
 
 function JoinWaitlist() {
   const [email, setEmail] = useState("");
-  const [isActive, setIsActive] = useState(false);
   const id = useId();
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const fetcher = useFetcher();
+
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    fetcher.submit(event.currentTarget);
+  }
 
-    try {
-      setIsActive(true);
-      const response = await fetch("/api/waitlist", {
-        body: JSON.stringify({ email: email.trim() }),
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-      });
-
-      if (response.ok) toast.success("Thank you for joining our waitlist! 🚀");
-      else toast.error("Oops! Something went wrong!");
-    } catch (error) {
-      captureException(error, { extra: { email } });
-      console.error("Error joining waitlist: %s", error);
-    }
-
+  useEffect(() => {
+    if (fetcher.data?.error)
+      console.error("Error joining waitlist: %s", fetcher.data.error);
     setEmail("");
-    setIsActive(false);
-  };
+  }, [fetcher.data]);
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-4">
-      <form onSubmit={handleSubmit} className="w-full">
+      <form
+        action="/api/waitlist"
+        method="POST"
+        onSubmit={onSubmit}
+        className="flex w-full flex-col gap-4"
+      >
+        {fetcher.data?.error ? (
+          <div role="alert" className="alert alert-error">
+            <AlertCircle className="h-6 w-6 shrink-0 stroke-current" />
+            <span>Something went wrong. Please try again.</span>
+          </div>
+        ) : fetcher.data?.success ? (
+          <div role="alert" className="alert alert-success">
+            <CheckCircle className="h-6 w-6 shrink-0 stroke-current" />
+            <span>Thank you for joining our waitlist! 🚀</span>
+          </div>
+        ) : null}
+
         <div className="flex flex-col gap-3 sm:flex-row">
           <label className="sr-only" htmlFor={id}>
             Email address
@@ -66,7 +72,7 @@ function JoinWaitlist() {
             value={email}
           />
           <button
-            disabled={isActive}
+            disabled={fetcher.state !== "idle"}
             className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-8 font-semibold text-blue-600 text-lg transition-all hover:bg-blue-50 hover:shadow-lg disabled:opacity-50"
             type="submit"
           >

@@ -4,14 +4,15 @@ import prisma from "~/lib/prisma";
 import type { Route } from "./+types/api.waitlist";
 
 export async function action({ request }: Route.ActionArgs) {
-  const input = (await request.json()) as { email: string };
-  invariant(input.email, "Email is required");
+  const formData = await request.formData();
+  const email = formData.get("email")?.toString();
+  invariant(email, "Email is required");
 
   await prisma.waitlist.createMany({
-    data: [{ email: input.email }],
+    data: [{ email }],
     skipDuplicates: true,
   });
 
-  await sendWaitlistEmail({ email: input.email });
-  return null;
+  await sendWaitlistEmail({ email });
+  return { success: true };
 }

@@ -3,7 +3,6 @@ import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 import { useEffect } from "react";
 import ReactGA from "react-ga4";
 import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
-import { Toaster } from "sonner";
 import schema from "~/data/schema.json";
 import "~/global.css";
 import PageFooter from "./PageFooter";
@@ -104,7 +103,6 @@ export default function PageLayout({
             </div>
           )}
         </NuqsAdapter>
-        <Toaster richColors />
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "production" && <SpeedInsights />}
