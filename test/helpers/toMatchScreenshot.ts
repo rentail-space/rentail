@@ -32,10 +32,10 @@ const dirname = path.resolve("./__screenshots__");
 expect.extend({
   async toMatchScreenshot(
     page: Page,
-    options: { tolerance: number } = { tolerance: 3 },
+    options?: { name?: string; tolerance?: number },
   ): Promise<{ message: () => string; pass: boolean }> {
-    const testName = getTestName();
-    const filename = path.join(dirname, `${testName}.png`);
+    const name = options?.name || getTestName();
+    const filename = path.join(dirname, `${name}.png`);
     const screenshot = await page.screenshot({
       animations: "disabled",
       caret: "hide",
@@ -60,15 +60,15 @@ expect.extend({
         createDiffImage: true,
         ignoreAntialiasing: true,
         ignoreCaret: true,
-        tolerance: options.tolerance,
+        tolerance: options?.tolerance ?? 3,
         strict: false,
       },
     );
 
     if (!equal) {
-      const diffFilename = path.join(dirname, `${testName}.diff.png`);
+      const diffFilename = path.join(dirname, `${name}.diff.png`);
       await diffImage.save(diffFilename);
-      await writeFile(path.join(dirname, `${testName}.new.png`), screenshot);
+      await writeFile(path.join(dirname, `${name}.new.png`), screenshot);
       return {
         message: () => `Image differs from baseline see ${diffFilename}`,
         pass: false,

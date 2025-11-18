@@ -1,4 +1,4 @@
-import { expect, type Page } from "playwright/test";
+import { type Page, expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
 import type zod from "zod";
 import prisma from "~/lib/prisma";
@@ -131,6 +131,14 @@ describe("Anonymous visits chat page", () => {
         ).toBeVisible();
       });
 
+      it("should match inner HTML", async () => {
+        await expect(page).toMatchInnerHTML({ name: "sign-in-page" });
+      });
+
+      it.runIf(!process.env.CI)("should match screenshot", async () => {
+        await expect(page).toMatchScreenshot({ name: "sign-in-page" });
+      });
+
       describe("visits sign-up page", () => {
         beforeAll(async () => {
           await page.getByRole("button", { name: /Create one/ }).click();
@@ -164,6 +172,14 @@ describe("Anonymous visits chat page", () => {
           await expect(
             page.getByRole("button", { name: "Create" }),
           ).toBeVisible();
+        });
+
+        it("should match inner HTML", async () => {
+          await expect(page).toMatchInnerHTML({ name: "sign-up-page" });
+        });
+
+        it.runIf(!process.env.CI)("should match screenshot", async () => {
+          await expect(page).toMatchScreenshot({ name: "sign-up-page" });
         });
 
         describe("signs up", () => {

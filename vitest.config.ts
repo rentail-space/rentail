@@ -48,7 +48,7 @@ declare global {
        * @example
        * await expect(page).toMatchScreenshot();
        */
-      toMatchScreenshot(): Promise<R>;
+      toMatchScreenshot(options?: { name?: string }): Promise<R>;
 
       /**
        * Takes the inner HTML of the page and compares it to the baseline HTML.
@@ -56,7 +56,7 @@ declare global {
        * @example
        * await expect(page).toMatchInnerHTML();
        */
-      toMatchInnerHTML(): Promise<R>;
+      toMatchInnerHTML(options?: { name?: string }): Promise<R>;
     }
   }
 }

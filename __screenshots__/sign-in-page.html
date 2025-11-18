@@ -1,0 +1,45 @@
+<!--$--><!--$--><!--/$--><!--/$-->
+<div class="flex min-h-screen flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50 px-4 py-12">
+  <div class="card card-border w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+    <div class="card-body space-y-6">
+      <div>
+        <h1 class="text-center font-bold text-3xl">
+          Welcome Back
+        </h1>
+        <p class="text-center text-gray-600">
+          Sign in to your account
+        </p>
+      </div>
+      <form method="post" action="/auth" class="space-y-6" data-discover="true">
+        <fieldset class="fieldset">
+          <label for="_r_1_" class="label">
+            Email Address
+          </label>
+          <input id="_r_1_" required="" class="input input-lg w-full" placeholder="you@example.com" type="email" name="email">
+          <label for="_r_2_" class="fieldset-label">
+            Password
+          </label>
+          <input id="_r_2_" required="" minlength="8" class="input input-lg w-full" placeholder="••••••••" type="password" name="password">
+        </fieldset>
+        <button class="btn btn-primary mt-4 flex w-full items-center justify-center gap-2" name="isSignUp" type="submit" value="false">
+          Sign In
+        </button>
+      </form>
+    </div>
+    <div class="card-action text-center">
+      <button class="btn btn-link" type="button">
+        Don't have an account? Create one
+      </button>
+    </div>
+  </div>
+  <footer class="mt-8 text-center text-gray-600 text-sm">
+    By signing in, you agree to our
+    <a href="/terms" class="link">
+      Terms of Service
+    </a>
+    and
+    <a href="/privacy" class="link">
+      Privacy Policy
+    </a>
+  </footer>
+</div>

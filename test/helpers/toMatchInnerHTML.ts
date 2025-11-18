@@ -29,9 +29,10 @@ const dirname = path.resolve("./__screenshots__");
 expect.extend({
   async toMatchInnerHTML(
     page: Page,
+    options?: { name?: string },
   ): Promise<{ message: () => string; pass: boolean }> {
-    const testName = getTestName();
-    const filename = path.join(dirname, `${testName}.html`);
+    const name = options?.name || getTestName();
+    const filename = path.join(dirname, `${name}.html`);
     await page.evaluate(() => {
       for (const script of document.body.querySelectorAll("script"))
         script.remove();
@@ -52,11 +53,11 @@ expect.extend({
 
     const original = await readFile(filename, "utf-8");
     if (html !== original) {
-      const newFilename = path.join(dirname, `${testName}.new.html`);
+      const newFilename = path.join(dirname, `${name}.new.html`);
       await writeFile(newFilename, html);
 
       const diff = diffHTMLs(html, original);
-      await writeFile(path.join(dirname, `${testName}.html.diff`), diff);
+      await writeFile(path.join(dirname, `${name}.html.diff`), diff);
       process.stdout.write(`${diff}\n`);
 
       return {

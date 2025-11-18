@@ -121,10 +121,11 @@ export default function AuthPage() {
                     Full Name
                   </label>
                   <input
+                    key="name-input"
                     id={nameId}
                     name="name"
                     type="text"
-                    required={isSignUp}
+                    required
                     className="input input-lg w-full"
                     placeholder="John Doe"
                   />
