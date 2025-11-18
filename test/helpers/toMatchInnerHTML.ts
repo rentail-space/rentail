@@ -57,10 +57,10 @@ expect.extend({
 
       const diff = diffHTMLs(html, original);
       await writeFile(path.join(dirname, `${testName}.html.diff`), diff);
+      process.stdout.write(`${diff}\n`);
 
       return {
-        message: () =>
-          `HTML differs from baseline see ${newFilename}:\n${diff}`,
+        message: () => `HTML differs from baseline see ${newFilename}`,
         pass: false,
       };
     }
@@ -76,8 +76,9 @@ function diffHTMLs(html: string, original: string): string {
         ? `\x1b[32m+ ${diff.value}\x1b[0m`
         : diff.removed
           ? `\x1b[31m- ${diff.value}\x1b[0m`
-          : diff.value,
+          : false,
     )
+    .filter(Boolean)
     .join("\n");
 }
 
