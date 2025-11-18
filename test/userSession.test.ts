@@ -97,7 +97,7 @@ describe("Anonymous visits chat page", () => {
     describe("visits sign-in page", () => {
       beforeAll(async () => {
         await page.getByRole("button", { name: "Sign In" }).click();
-        await page.waitForURL("/auth", { waitUntil: "load" });
+        await page.waitForURL("/auth", { waitUntil: "networkidle" });
       });
 
       it("shows sign-in page", async () => {
@@ -179,6 +179,7 @@ describe("Anonymous visits chat page", () => {
         });
 
         it.runIf(!process.env.CI)("should match screenshot", async () => {
+          await page.waitForTimeout(100);
           await expect(page).toMatchScreenshot({ name: "sign-up-page" });
         });
 

@@ -115,22 +115,19 @@ export default function AuthPage() {
 
           <fetcher.Form method="post" className="space-y-6">
             <fieldset className="fieldset">
-              {isSignUp && (
-                <>
-                  <label htmlFor={nameId} className="label">
-                    Full Name
-                  </label>
-                  <input
-                    key="name-input"
-                    id={nameId}
-                    name="name"
-                    type="text"
-                    required
-                    className="input input-lg w-full"
-                    placeholder="John Doe"
-                  />
-                </>
-              )}
+              <div hidden={!isSignUp}>
+                <label htmlFor={nameId} className="label">
+                  Full Name
+                </label>
+                <input
+                  id={nameId}
+                  name="name"
+                  type="text"
+                  required
+                  className="input input-lg w-full"
+                  placeholder="John Doe"
+                />
+              </div>
 
               <label htmlFor={emailId} className="label">
                 Email Address
@@ -156,9 +153,9 @@ export default function AuthPage() {
                 className="input input-lg w-full"
                 placeholder="••••••••"
               />
-              {isSignUp && (
-                <p className="fieldset-legend">Must be at least 8 characters</p>
-              )}
+              <p hidden={!isSignUp} className="fieldset-legend">
+                Must be at least 8 characters
+              </p>
             </fieldset>
 
             {fetcher.data?.error && (

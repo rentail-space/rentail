@@ -86,9 +86,7 @@ function diffHTMLs(html: string, original: string): string {
 function lines(lines: string, added: boolean): string {
   return lines
     .split("\n")
-    .map((line) =>
-      added ? `\x1b[32m+ ${line}\x1b[0m` : `\x1b[31m- ${line}\x1b[0m`,
-    )
+    .map((line) => (added ? `+ ${line}` : `- ${line}`))
     .join("\n");
 }
 
