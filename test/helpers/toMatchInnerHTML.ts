@@ -51,11 +51,11 @@ expect.extend({
 
     const original = await readFile(filename, "utf-8");
     if (html !== original) {
-      const newFilename = path.join(dirname, `${testName}-new.html`);
+      const newFilename = path.join(dirname, `${testName}.new.html`);
       await writeFile(newFilename, html);
 
       const diff = toDiff(html, original, filename, newFilename);
-      await writeFile(path.join(dirname, `${testName}-diff.html`), diff);
+      await writeFile(path.join(dirname, `${testName}.html.diff`), diff);
 
       return {
         message: () =>
@@ -113,6 +113,6 @@ function getTestName(): string {
 export async function removeNewHTML() {
   const list = await readdir(dirname);
   for (const file of list)
-    if (file.endsWith("-new.html") || file.endsWith("-diff.html"))
+    if (file.endsWith(".new.html") || file.endsWith(".html.diff"))
       await unlink(path.join(dirname, file));
 }

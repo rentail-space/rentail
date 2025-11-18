@@ -225,6 +225,20 @@ The app determines user location in this order:
 - **Database**: Reset with `await prisma.user.deleteMany()` in beforeAll or beforeEach
 - **Visual regression**: `await expect(page).toMatchScreenshot()` (screenshots in `__screenshots__/`)
 
+**Navigation & Page Loading:**
+- `goto(path, headers?, { waitUntil?, timeout? })` - Navigate with flexible options
+  - `waitUntil`: "load" | "domcontentloaded" | "networkidle" (default: "networkidle")
+  - `timeout`: milliseconds (default: 25_000)
+  - Use `waitUntil: "domcontentloaded"` for pages with background streaming (e.g., chat)
+  - Example: `page = await goto("/chat?q=test", undefined, { waitUntil: "domcontentloaded" })`
+
+**HTML Snapshot Testing:**
+- `await expect(page).toMatchInnerHTML()` - Test HTML structure against baseline snapshots
+- Uses regex-based Node.js formatter in `/test/helpers/formatHTML.ts` (no JSDOM required)
+- Formats HTML into indented tree structure with 2-space indentation
+- Compares against baseline HTML files; creates `.new.html` on mismatch
+- Automatically removes `<script>` tags before comparison
+
 **Common Patterns:**
 
 *E2E Chat Testing:*
@@ -289,6 +303,22 @@ const user = await prisma.user.create({
 - Mock responds to patterns like "tell me your name" with pre-set responses
 - Update mocks before test if new Claude behavior is needed
 - Example: `{"pattern": "test", "response": "This is a test response"}`
+
+## Known Issues & Troubleshooting
+
+**Vitest RPC Error: "rpc is closed, cannot call onCancel"**
+- Occurs in watch mode, typically with coverage enabled or during test reruns
+- Root causes: Missing dependencies, coverage temp directory race condition, or module resolution issues
+- **Workarounds:**
+  - Run `pnpm install` to ensure all transitive dependencies are installed
+  - Disable coverage during development: use `pnpm test -- --run` instead of watch mode
+  - Clear temp files manually if needed: `rm -rf /tmp/vitest-coverage-*.tmp`
+  - Update Vitest/VSCode to latest compatible versions
+
+**Test Navigation Timeouts**
+- If `goto()` times out waiting for `"networkidle"`, change to `"domcontentloaded"`
+- Common on pages with background requests (chat, streaming endpoints)
+- Example: `await goto("/chat", undefined, { waitUntil: "domcontentloaded" })`
 
 ## Environment Variables
 

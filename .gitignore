@@ -10,9 +10,10 @@
 /build/
 
 # Ignore test results
-__screenshots__/*-diff.png
-__screenshots__/*-new.png
-__screenshots__/*-new.html
+__screenshots__/*.diff.png
+__screenshots__/*.new.png
+__screenshots__/*.new.html
+__screenshots__/*.html.diff
 # Ignore since we're using pnpm
 package-lock.json
 # Need to re-generate on the server

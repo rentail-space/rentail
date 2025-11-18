@@ -66,9 +66,9 @@ expect.extend({
     );
 
     if (!equal) {
-      const diffFilename = path.join(dirname, `${testName}-diff.png`);
+      const diffFilename = path.join(dirname, `${testName}.diff.png`);
       await diffImage.save(diffFilename);
-      await writeFile(path.join(dirname, `${testName}-new.png`), screenshot);
+      await writeFile(path.join(dirname, `${testName}.new.png`), screenshot);
       return {
         message: () => `Image differs from baseline see ${diffFilename}`,
         pass: false,
@@ -94,6 +94,6 @@ function getTestName(): string {
 export async function removeDiffImages() {
   const list = await readdir(dirname);
   for (const file of list)
-    if (file.endsWith("-diff.png") || file.endsWith("-new.png"))
+    if (file.endsWith(".diff.png") || file.endsWith(".new.png"))
       await unlink(path.join(dirname, file));
 }
