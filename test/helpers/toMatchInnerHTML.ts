@@ -73,12 +73,21 @@ function diffHTMLs(html: string, original: string): string {
   return diffs
     .map((diff) =>
       diff.added
-        ? `\x1b[32m+ ${diff.value}\x1b[0m`
+        ? lines(diff.value, true)
         : diff.removed
-          ? `\x1b[31m- ${diff.value}\x1b[0m`
+          ? lines(diff.value, false)
           : false,
     )
     .filter(Boolean)
+    .join("\n");
+}
+
+function lines(lines: string, added: boolean): string {
+  return lines
+    .split("\n")
+    .map((line) =>
+      added ? `\x1b[32m+ ${line}\x1b[0m` : `\x1b[31m- ${line}\x1b[0m`,
+    )
     .join("\n");
 }
 
