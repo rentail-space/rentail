@@ -1,6 +1,7 @@
 // DO NOT add to setup.ts as vitest.config.js cannot upload file that imports vitest
 
 import { expect } from "@playwright/test";
+import { diffLines } from "diff";
 import { invariant } from "es-toolkit";
 import {
   access,
@@ -54,7 +55,7 @@ expect.extend({
       const newFilename = path.join(dirname, `${testName}.new.html`);
       await writeFile(newFilename, html);
 
-      const diff = toDiff(html, original, filename, newFilename);
+      const diff = diffHTMLs(html, original);
       await writeFile(path.join(dirname, `${testName}.html.diff`), diff);
 
       return {
@@ -67,35 +68,17 @@ expect.extend({
   },
 });
 
-function toDiff(
-  actual: string,
-  original: string,
-  origFilename: string,
-  newFilename: string,
-): string {
-  const actualLines = actual.split(/\r?\n/);
-  const originalLines = original.split(/\r?\n/);
-  const diffOutput = diffLines(actualLines, originalLines);
-  return diffOutput.length
-    ? [
-        `--- Original (${origFilename})`,
-        `+++ New      (${newFilename})`,
-        ...diffOutput,
-      ].join("\n")
-    : "";
-}
-
-function diffLines(a: string[], b: string[]): string[] {
-  // Simple line-based diff (not full-featured unified diff)
-  const diffs: string[] = [];
-  const maxLen = Math.max(a.length, b.length);
-  for (let i = 0; i < maxLen; i++) {
-    if ((a[i] ?? "") !== (b[i] ?? "")) {
-      diffs.push(`- ${b[i] ?? ""}`);
-      diffs.push(`+ ${a[i] ?? ""}`);
-    }
-  }
-  return diffs;
+function diffHTMLs(html: string, original: string): string {
+  const diffs = diffLines(html, original, { ignoreWhitespace: true });
+  return diffs
+    .map((diff) =>
+      diff.added
+        ? `\x1b[32m+ ${diff.value}\x1b[0m`
+        : diff.removed
+          ? `\x1b[31m- ${diff.value}\x1b[0m`
+          : diff.value,
+    )
+    .join("\n");
 }
 
 function getTestName(): string {
