@@ -1,0 +1,57 @@
+import { AlertCircle, CheckCircle } from "lucide-react";
+import { useId } from "react";
+import { useFetcher } from "react-router";
+
+export default function ProfileNameForm({
+  user,
+}: {
+  user: { name: string | null };
+}) {
+  const nameId = useId();
+  const fetcher = useFetcher();
+
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    fetcher.submit(event.currentTarget);
+  }
+
+  return (
+    <form className="space-y-6" method="post" onSubmit={onSubmit}>
+      <fieldset className="fieldset">
+        <label className="label" htmlFor={nameId}>
+          Full Name
+        </label>
+        <input
+          type="text"
+          id={nameId}
+          defaultValue={user.name || ""}
+          name="name"
+          required
+          className="input input-lg w-full"
+          placeholder="John Doe"
+        />
+      </fieldset>
+
+      {fetcher.data?.error ? (
+        <div role="alert" className="alert alert-error">
+          <AlertCircle className="h-6 w-6 shrink-0 stroke-current" />
+          <span>Something went wrong. Please try again.</span>
+        </div>
+      ) : fetcher.data?.success ? (
+        <div role="alert" className="alert alert-success">
+          <CheckCircle className="h-6 w-6 shrink-0 stroke-current" />
+          <span>Name updated successfully!</span>
+        </div>
+      ) : null}
+
+      <button
+        className="btn btn-primary w-full"
+        disabled={fetcher.state !== "idle"}
+        type="submit"
+      >
+        {fetcher.state !== "idle" ? "Updating..." : "Update Name"}
+      </button>
+    </form>
+  );
+}
