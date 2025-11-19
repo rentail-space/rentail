@@ -204,7 +204,7 @@ describe("Anonymous visits chat page", () => {
 
           it("shows user dropdown after successful sign-up", async () => {
             const userMenuButton = page
-              .locator("summary")
+              .getByRole("button")
               .filter({ hasText: "Working Memory User" });
             await expect(userMenuButton).toBeVisible({ timeout: 5000 });
           });

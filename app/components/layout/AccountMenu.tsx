@@ -87,13 +87,19 @@ function DropdownMenu({
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <details>
-        <summary className="flex items-center gap-2 rounded-md px-3 py-1.5 font-medium text-gray-700 text-sm transition-colors hover:bg-blue-50 hover:text-blue-600">
-          <UserIcon className="h-4 w-4" />
-          <span className="max-w-[200px] truncate">
-            {user.name || user.email}
-          </span>
-        </summary>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 rounded-md px-3 py-1.5 font-medium text-gray-700 text-sm transition-colors hover:bg-blue-50 hover:text-blue-600"
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+      >
+        <UserIcon className="h-4 w-4" />
+        <span className="max-w-[200px] truncate">
+          {user.name || user.email}
+        </span>
+      </button>
+      {isOpen && (
         <ul className="menu menu-dropdown dropdown-end absolute right-0 z-50 mt-2 w-48 rounded-md border border-gray-200 bg-white py-1 shadow-lg">
           <li className="menu-disabled border-gray-200 border-b px-4 py-2">
             <p className="font-medium text-gray-900 text-sm">{user.name}</p>
@@ -135,7 +141,7 @@ function DropdownMenu({
             </button>
           </li>
         </ul>
-      </details>
+      )}
     </div>
   );
 }
