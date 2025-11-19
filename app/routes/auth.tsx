@@ -19,9 +19,8 @@ clientLoader.hydrate = true as const;
 
 export async function action({ request }: Route.ActionArgs): Promise<Response> {
   const form = await request.formData();
-  const isSignUp = form.get("isSignUp")?.toString() === "true";
   try {
-    return isSignUp
+    return form.has("name")
       ? await signUpEmail({ form, headers: request.headers })
       : await signInEmail({ form, headers: request.headers });
   } catch (error) {
@@ -92,11 +91,13 @@ async function signInEmail({
   const password = form.get("password")?.toString();
   invariant(email, "Email is required");
   invariant(password, "Password is required");
+  console.log("signing in with email: %s", email);
   const { headers: returnedHeaders } = await authServer.api.signInEmail({
     body: { email, password },
     headers,
     returnHeaders: true,
   });
+  console.log("redirecting to chat with headers: %o", returnedHeaders);
   return redirect("/chat", { headers: returnedHeaders });
 }
 
@@ -124,19 +125,21 @@ export default function AuthPage() {
 
           <fetcher.Form method="post" className="space-y-6">
             <fieldset className="fieldset">
-              <div hidden={!isSignUp}>
-                <label htmlFor={nameId} className="label">
-                  Full Name
-                </label>
-                <input
-                  id={nameId}
-                  name="name"
-                  type="text"
-                  required
-                  className="input input-lg w-full"
-                  placeholder="John Doe"
-                />
-              </div>
+              {isSignUp && (
+                <div>
+                  <label htmlFor={nameId} className="label">
+                    Full Name
+                  </label>
+                  <input
+                    id={nameId}
+                    name="name"
+                    type="text"
+                    required
+                    className="input input-lg w-full"
+                    placeholder="John Doe"
+                  />
+                </div>
+              )}
 
               <label htmlFor={emailId} className="label">
                 Email Address

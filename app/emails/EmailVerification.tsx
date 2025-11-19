@@ -1,97 +1,48 @@
-import {
-  Body,
-  Button,
-  Container,
-  Head,
-  Heading,
-  Html,
-  Img,
-  Link,
-  Preview,
-  Section,
-  Text,
-} from "@react-email/components";
+import { Button, Section, Text } from "@react-email/components";
 import * as styles from "~/emails/styles";
+import EmailLayout from "./EmailLayout";
 
 export default function EmailVerification({
   name,
   subject,
-  verificationUrl,
+  url: verificationUrl,
 }: {
   name: string;
   subject: string;
-  verificationUrl: string;
+  url: string;
 }) {
   return (
-    <Html>
-      <Head />
-      <Preview>{subject}</Preview>
-      <Body style={styles.main}>
-        <Container style={styles.container}>
-          <Img
-            alt="Rentail.space Logo"
-            height="80"
-            src="https://rentail.space/images/logo.png"
-            style={styles.logo}
-            width="80"
-          />
+    <EmailLayout subject={subject}>
+      <Text style={styles.text}>Hi {name},</Text>
 
-          <Heading style={styles.heading}>Verify Your Email Address</Heading>
+      <Text style={styles.text}>
+        You recently requested to change your email address on rentail.space. To
+        complete this change, please verify your new email address by clicking
+        the button below.
+      </Text>
 
-          <Text style={styles.text}>Hi {name},</Text>
+      <Section style={styles.buttonContainer}>
+        <Button href={verificationUrl} style={styles.button}>
+          Verify Email Address
+        </Button>
+      </Section>
 
-          <Text style={styles.text}>
-            You recently requested to change your email address on
-            rentail.space. To complete this change, please verify your new email
-            address by clicking the button below.
-          </Text>
+      <Text style={styles.text}>
+        Or copy and paste this link into your browser:
+      </Text>
 
-          <Section style={styles.buttonContainer}>
-            <Button href={verificationUrl} style={styles.button}>
-              Verify Email Address
-            </Button>
-          </Section>
+      <Text style={styles.code}>{verificationUrl}</Text>
 
-          <Text style={styles.text}>
-            Or copy and paste this link into your browser:
-          </Text>
+      <Text style={styles.text}>
+        This link will expire in 24 hours. If you didn't request this change,
+        you can safely ignore this email.
+      </Text>
 
-          <Text style={styles.code}>{verificationUrl}</Text>
-
-          <Text style={styles.text}>
-            This link will expire in 24 hours. If you didn't request this
-            change, you can safely ignore this email.
-          </Text>
-
-          <Text style={styles.text}>
-            Best regards,
-            <br />
-            The rentail.space Team
-          </Text>
-
-          <Section style={styles.footer}>
-            <Text style={styles.footerText}>
-              <Link href="https://rentail.space" style={styles.footerLink}>
-                rentail.space
-              </Link>{" "}
-              •{" "}
-              <Link
-                href="https://rentail.space/privacy"
-                style={styles.footerLink}
-              >
-                Privacy
-              </Link>{" "}
-              •{" "}
-              <Link
-                href="https://rentail.space/terms"
-                style={styles.footerLink}
-              >
-                Terms
-              </Link>
-            </Text>
-          </Section>
-        </Container>
-      </Body>
-    </Html>
+      <Text style={styles.text}>
+        Best regards,
+        <br />
+        The rentail.space Team
+      </Text>
+    </EmailLayout>
   );
 }

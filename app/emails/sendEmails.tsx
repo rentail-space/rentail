@@ -21,9 +21,9 @@ export async function sendWelcomeEmail({
   name: string;
 }) {
   await sendEmail({
-    email,
-    subject: `Welcome to rentail.space, ${name}! 🎉`,
     component: ({ subject }) => <Welcome name={name} subject={subject} />,
+    email,
+    subject: "Welcome to rentail.space! 🎉",
   });
 }
 
@@ -36,22 +36,20 @@ export async function sendVerificationEmail({
   name: string;
   url: string;
 }) {
-  const subject = "Verify your email address for rentail.space";
   await sendEmail({
     email,
-    subject,
+    subject: "Verify your email address for rentail.space",
     component: ({ subject }) => (
-      <EmailVerification name={name} subject={subject} verificationUrl={url} />
+      <EmailVerification name={name} subject={subject} url={url} />
     ),
   });
 }
 
 export async function sendWaitlistEmail({ email }: { email: string }) {
-  const subject = "You're on the waitlist!";
   await sendEmail({
     email,
-    subject,
-    component: ({ subject }) => <Waitlist subject={subject} />,
+    subject: "You're on the waitlist!",
+    component: Waitlist,
   });
 }
 
