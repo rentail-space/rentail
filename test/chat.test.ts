@@ -28,7 +28,7 @@ describe("Chat page", () => {
     });
 
     afterAll(async () => {
-      await page.close();
+      await page?.close();
     });
   });
 
@@ -46,7 +46,7 @@ describe("Chat page", () => {
     });
 
     afterAll(async () => {
-      await page.close();
+      await page?.close();
     });
   });
 

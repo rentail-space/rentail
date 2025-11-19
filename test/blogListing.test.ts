@@ -79,6 +79,7 @@ describe("Blog Listing", () => {
     const blogSection = page.locator("section.blog-posts").first();
     await expect(blogSection).toBeVisible();
     await blogSection.scrollIntoViewIfNeeded();
+    blogSection.page();
 
     // Take screenshot for visual regression testing of the blog section
     await expect(blogSection).toMatchScreenshot();

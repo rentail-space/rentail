@@ -13,34 +13,37 @@ import {
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
-import type { Page } from "playwright";
+import type { Locator, Page } from "playwright";
 
 const dirname = path.resolve("./__screenshots__");
+const defaultTolerance = 2.3;
 
 /**
  * Extend the expect object with a toMatchScreenshot matcher.
  *
- * @param page - The page to take a screenshot of.
+ * @param locator - The locator to take a screenshot of.
  * @param options - The options for the matcher.
+ * @param options.name - The name of the test.
  * @param options.tolerance - The tolerance for the matcher (default: 2.3)
  * @returns The result of the matcher.
  * @example
- * await expect(page).toMatchScreenshot({ tolerance: 2.3 });
+ * await expect(locator).toMatchScreenshot({ tolerance: 2.3 });
  *
  * @see https://github.com/gemini-testing/looks-same
  */
 expect.extend({
   async toMatchScreenshot(
-    page: Page,
+    locator: Locator,
     options?: { name?: string; tolerance?: number },
   ): Promise<{ message: () => string; pass: boolean }> {
     // NOTE: handle the case where the page is not fully loaded or scrolls.
+    const page: Page = "page" in locator ? locator.page() : locator;
     await page.waitForLoadState("networkidle");
     await page.waitForTimeout(100);
 
     const name = options?.name || getTestName();
     const filename = path.join(dirname, `${name}.png`);
-    const screenshot = await page.screenshot({
+    const screenshot = await locator.screenshot({
       animations: "disabled",
       caret: "hide",
       scale: "css",
@@ -64,7 +67,7 @@ expect.extend({
         createDiffImage: true,
         ignoreAntialiasing: true,
         ignoreCaret: true,
-        tolerance: options?.tolerance ?? 3,
+        tolerance: options?.tolerance ?? defaultTolerance,
         strict: false,
       },
     );

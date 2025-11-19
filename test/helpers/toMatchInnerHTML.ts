@@ -13,7 +13,7 @@ import {
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
-import type { Page } from "playwright";
+import type { Locator, Page } from "playwright";
 import { formatHTMLTree } from "./formatHTML";
 
 const dirname = path.resolve("./__screenshots__");
@@ -21,19 +21,25 @@ const dirname = path.resolve("./__screenshots__");
 /**
  * Extend the expect object with a toMatchInnerHTML matcher.
  *
- * @param page - The page to get the inner HTML of.
+ * @param locator - The locator to get the inner HTML of.
+ * @param options - The options for the matcher.
+ * @param options.name - The name of the test.
  * @returns The result of the matcher.
  * @example
- * await expect(page).toMatchInnerHTML();
+ * await expect(locator).toMatchInnerHTML();
  */
 expect.extend({
   async toMatchInnerHTML(
-    page: Page,
+    locator: Locator,
     options?: { name?: string },
   ): Promise<{ message: () => string; pass: boolean }> {
     const name = options?.name || getTestName();
     const filename = path.resolve(dirname, `${name}.html`);
-    const rawHtml = await page.innerHTML("body");
+
+    const rawHtml =
+      "content" in locator
+        ? await (locator as unknown as Page).innerHTML("body")
+        : await locator.innerHTML();
     const html = formatHTMLTree(rawHtml);
 
     try {
@@ -52,7 +58,7 @@ expect.extend({
       const newFilename = path.resolve(dirname, `${name}.new.html`);
       await writeFile(newFilename, html);
 
-      const diff = diffHTMLs(html, original);
+      const diff = diffHTMLs(original, html);
       await writeFile(path.resolve(dirname, `${name}.html.diff`), diff);
       process.stdout.write(`${diff}\n`);
 

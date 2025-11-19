@@ -12,7 +12,7 @@ describe("Waitlist", () => {
   });
 
   it("should match inner HTML", async () => {
-    await expect(page).toMatchInnerHTML();
+    await expect(page.locator("body>table")).toMatchInnerHTML();
   });
 
   it.runIf(!process.env.CI)("should match screenshot", async () => {
@@ -20,6 +20,6 @@ describe("Waitlist", () => {
   });
 
   afterAll(async () => {
-    await page.close();
+    await page?.close();
   });
 });

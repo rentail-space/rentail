@@ -4,7 +4,7 @@ import EmailLayout from "./EmailLayout";
 
 export default function Waitlist({ subject }: { subject: string }) {
   return (
-    <EmailLayout subject={subject}>
+    <EmailLayout isCustomer={false} subject={subject}>
       <Section>
         <Text style={styles.text}>
           🚀 Rentail.space helps you find a retail space in a shopping center.
