@@ -34,6 +34,10 @@ expect.extend({
     page: Page,
     options?: { name?: string; tolerance?: number },
   ): Promise<{ message: () => string; pass: boolean }> {
+    // NOTE: handle the case where the page is not fully loaded or scrolls.
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(100);
+
     const name = options?.name || getTestName();
     const filename = path.join(dirname, `${name}.png`);
     const screenshot = await page.screenshot({
