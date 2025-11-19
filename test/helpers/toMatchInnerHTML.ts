@@ -32,11 +32,7 @@ expect.extend({
     options?: { name?: string },
   ): Promise<{ message: () => string; pass: boolean }> {
     const name = options?.name || getTestName();
-    const filename = path.join(dirname, `${name}.html`);
-    await page.evaluate(() => {
-      for (const script of document.body.querySelectorAll("script"))
-        script.remove();
-    });
+    const filename = path.resolve(dirname, `${name}.html`);
     const rawHtml = await page.innerHTML("body");
     const html = formatHTMLTree(rawHtml);
 
@@ -53,11 +49,11 @@ expect.extend({
 
     const original = await readFile(filename, "utf-8");
     if (html !== original) {
-      const newFilename = path.join(dirname, `${name}.new.html`);
+      const newFilename = path.resolve(dirname, `${name}.new.html`);
       await writeFile(newFilename, html);
 
       const diff = diffHTMLs(html, original);
-      await writeFile(path.join(dirname, `${name}.html.diff`), diff);
+      await writeFile(path.resolve(dirname, `${name}.html.diff`), diff);
       process.stdout.write(`${diff}\n`);
 
       return {
@@ -106,5 +102,5 @@ export async function removeNewHTML() {
   const list = await readdir(dirname);
   for (const file of list)
     if (file.endsWith(".new.html") || file.endsWith(".html.diff"))
-      await unlink(path.join(dirname, file));
+      await unlink(path.resolve(dirname, file));
 }

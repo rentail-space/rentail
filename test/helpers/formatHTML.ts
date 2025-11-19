@@ -12,13 +12,19 @@ export function formatHTMLTree(html: string): string {
   // Matches: opening tags, closing tags, text nodes, and self-closing tags
   const tokenRegex = /<\/?[\w-]+(?:\s+[\w-]+=(?:"[^"]*"|'[^']*'))*\s*\/?>/g;
 
+  // Strip all <script ...>...</script> elements from html to create noScript variable
+  // and all <!-- ... --> comments
+  const noScript = html
+    .replaceAll(/<script\b[^>]*>[\s\S]*?<\/script>/gim, "")
+    .replaceAll(/<!--[\s\S]*?-->/g, "");
+
   // Split HTML into tokens and text content
   let lastIndex = 0;
-  let match = tokenRegex.exec(html);
+  let match = tokenRegex.exec(noScript);
 
   while (match !== null) {
     // Get text content before this tag
-    const textBefore = html.slice(lastIndex, match.index).trim();
+    const textBefore = noScript.slice(lastIndex, match.index).trim();
     if (textBefore) result += `${INDENT.repeat(level)}${textBefore}\n`;
 
     const tag = match[0];
@@ -37,11 +43,11 @@ export function formatHTMLTree(html: string): string {
       result += `${INDENT.repeat(level)}${tag}\n`;
       level++;
     }
-    match = tokenRegex.exec(html);
+    match = tokenRegex.exec(noScript);
   }
 
   // Get any remaining text after the last tag
-  const textAfter = html.slice(lastIndex).trim();
+  const textAfter = noScript.slice(lastIndex).trim();
   if (textAfter) result += `${INDENT.repeat(level)}${textAfter}\n`;
 
   return `${result.trim()}\n`;

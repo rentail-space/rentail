@@ -23,3 +23,5 @@ test/context
 # All local files or directories (eg ./.claude/settings.local.json, /.vercel/.env.production.local) 
 */*.local.*
 */*.local
+# Server log used when running tests
+server.log

@@ -1,6 +1,8 @@
-import { format, styleText } from "node:util";
 import { Logtail } from "@logtail/node";
 import type { ILogLevel } from "@logtail/types";
+import { createWriteStream } from "node:fs";
+import { resolve } from "node:path";
+import { format, styleText } from "node:util";
 import env from "~/lib/env";
 
 const logtail = env.LOGTAIL_TOKEN
@@ -17,6 +19,10 @@ const colors = {
   warn: (text: string) => styleText("yellow", text),
   error: (text: string) => styleText("red", text),
 };
+
+const logFile = env.isTest
+  ? createWriteStream(resolve("server.log"), { flags: "a" })
+  : null;
 
 for (const level of [
   "debug",
@@ -39,6 +45,7 @@ for (const level of [
         error instanceof Error ? error.message : String(error);
       process.stderr.write(`${errorMessage}\n`);
     }
+    if (logFile) logFile.write(`${formattedMessage}\n`);
   });
 }
 
