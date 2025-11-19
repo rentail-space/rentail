@@ -69,16 +69,10 @@ describe("Chat page", () => {
         // Take screenshot for visual regression testing
         await page.waitForLoadState("networkidle");
         await page.locator(".scroll-smooth").scrollIntoViewIfNeeded();
-        await page.waitForTimeout(100);
+        await page.waitForTimeout(300);
       });
 
       it("should look like a real chat", async () => {
-        // Remove the scroll to bottom button, it's not part of the chat.
-        await page.evaluate(() =>
-          document
-            .querySelector("button[aria-label='Scroll to bottom']")
-            ?.remove(),
-        );
         await expect(page).toMatchInnerHTML();
       });
 

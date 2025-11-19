@@ -13,7 +13,7 @@ import {
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
-import type { Locator, Page } from "playwright";
+import type { Locator } from "playwright";
 
 const dirname = path.resolve("./__screenshots__");
 const defaultTolerance = 2.3;
@@ -36,11 +36,6 @@ expect.extend({
     locator: Locator,
     options?: { name?: string; tolerance?: number },
   ): Promise<{ message: () => string; pass: boolean }> {
-    // NOTE: handle the case where the page is not fully loaded or scrolls.
-    const page: Page = "page" in locator ? locator.page() : locator;
-    await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(100);
-
     const name = options?.name || getTestName();
     const filename = path.join(dirname, `${name}.png`);
     const screenshot = await locator.screenshot({
