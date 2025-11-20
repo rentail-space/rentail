@@ -28,7 +28,7 @@ expect.extend({
 
     const rawHtml =
       "content" in locator
-        ? await (locator as unknown as Page).innerHTML("body")
+        ? await (locator as unknown as Page).locator("body").innerHTML()
         : await locator.innerHTML();
     const formattedHTML = formatHTMLTree(rawHtml);
     const cleanHTML = options?.strip

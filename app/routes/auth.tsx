@@ -143,25 +143,27 @@ export default function AuthPage() {
                 Email Address
               </label>
               <input
+                className="input input-lg w-full"
                 id={emailId}
                 name="email"
-                type="email"
-                required
-                className="input input-lg w-full"
                 placeholder="you@example.com"
+                required
+                type="email"
+                style={{}}
               />
 
               <label htmlFor={passwordId} className="fieldset-label">
                 Password
               </label>
               <input
-                id={passwordId}
-                name="password"
-                type="password"
-                required
-                minLength={8}
                 className="input input-lg w-full"
+                id={passwordId}
+                minLength={8}
+                name="password"
                 placeholder="••••••••"
+                required
+                type="password"
+                style={{}}
               />
               <p hidden={!isSignUp} className="fieldset-legend">
                 Must be at least 8 characters
