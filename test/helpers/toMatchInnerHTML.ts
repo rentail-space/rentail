@@ -18,20 +18,10 @@ import { formatHTMLTree } from "./formatHTML";
 
 const dirname = path.resolve("./__screenshots__");
 
-/**
- * Extend the expect object with a toMatchInnerHTML matcher.
- *
- * @param locator - The locator to get the inner HTML of.
- * @param options - The options for the matcher.
- * @param options.name - The name of the test.
- * @returns The result of the matcher.
- * @example
- * await expect(locator).toMatchInnerHTML();
- */
 expect.extend({
   async toMatchInnerHTML(
     locator: Locator,
-    options?: { name?: string },
+    options?: { name?: string; strip?: (html: string) => string },
   ): Promise<{ message: () => string; pass: boolean }> {
     const name = options?.name || getTestName();
     const filename = path.resolve(dirname, `${name}.html`);
@@ -40,13 +30,16 @@ expect.extend({
       "content" in locator
         ? await (locator as unknown as Page).innerHTML("body")
         : await locator.innerHTML();
-    const html = formatHTMLTree(rawHtml);
+    const formattedHTML = formatHTMLTree(rawHtml);
+    const cleanHTML = options?.strip
+      ? options.strip(formattedHTML)
+      : formattedHTML;
 
     try {
       await access(filename, constants.R_OK);
     } catch {
       await mkdir(dirname, { recursive: true });
-      await writeFile(filename, html);
+      await writeFile(filename, cleanHTML);
       return {
         message: () => `Baseline HTML created at ${filename}.`,
         pass: true,
@@ -54,11 +47,11 @@ expect.extend({
     }
 
     const original = await readFile(filename, "utf-8");
-    if (html !== original) {
+    if (cleanHTML !== original) {
       const newFilename = path.resolve(dirname, `${name}.new.html`);
-      await writeFile(newFilename, html);
+      await writeFile(newFilename, cleanHTML);
 
-      const diff = diffHTMLs(original, html);
+      const diff = diffHTMLs(original, cleanHTML);
       await writeFile(path.resolve(dirname, `${name}.html.diff`), diff);
       process.stdout.write(`${diff}\n`);
 

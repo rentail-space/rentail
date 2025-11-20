@@ -18,19 +18,6 @@ import type { Locator } from "playwright";
 const dirname = path.resolve("./__screenshots__");
 const defaultTolerance = 2.3;
 
-/**
- * Extend the expect object with a toMatchScreenshot matcher.
- *
- * @param locator - The locator to take a screenshot of.
- * @param options - The options for the matcher.
- * @param options.name - The name of the test.
- * @param options.tolerance - The tolerance for the matcher (default: 2.3)
- * @returns The result of the matcher.
- * @example
- * await expect(locator).toMatchScreenshot({ tolerance: 2.3 });
- *
- * @see https://github.com/gemini-testing/looks-same
- */
 expect.extend({
   async toMatchScreenshot(
     locator: Locator,

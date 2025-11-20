@@ -20,15 +20,31 @@ const logger = debug("browser");
  * @param path - The path to open.
  * @param headers - The headers to set on the page.
  * @param options - Optional navigation options (waitUntil, timeout)
+ *   - waitUntil: "load" | "domcontentloaded" | "networkidle" (default: "networkidle")
+ *     Use "domcontentloaded" for pages with background streaming (e.g., chat)
+ *   - timeout: Navigation timeout in milliseconds
  * @returns The page.
  */
-export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
+export async function goto(
+  path: string,
+  headers?: HeadersInit,
+  options?: {
+    waitUntil?: "load" | "domcontentloaded" | "networkidle";
+    timeout?: number;
+  },
+): Promise<Page> {
   const context = await newContext();
 
   const page = await context.newPage();
   await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
   await page.setViewportSize({ width: 1024, height: 780 });
-  await page.goto(path, { waitUntil: "networkidle" });
+  // Default to "networkidle" for most pages, but allow override for streaming pages.
+  // "networkidle" waits for all network activity to cease, which fails on pages
+  // with background streaming (like chat). Use "domcontentloaded" for those instead.
+  await page.goto(path, {
+    waitUntil: options?.waitUntil ?? "networkidle",
+    timeout: options?.timeout,
+  });
   return page;
 }
 

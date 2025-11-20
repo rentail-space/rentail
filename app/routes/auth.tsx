@@ -91,13 +91,11 @@ async function signInEmail({
   const password = form.get("password")?.toString();
   invariant(email, "Email is required");
   invariant(password, "Password is required");
-  console.log("signing in with email: %s", email);
   const { headers: returnedHeaders } = await authServer.api.signInEmail({
     body: { email, password },
     headers,
     returnHeaders: true,
   });
-  console.log("redirecting to chat with headers: %o", returnedHeaders);
   return redirect("/chat", { headers: returnedHeaders });
 }
 

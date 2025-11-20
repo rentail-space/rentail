@@ -7,7 +7,7 @@ process.env.NODE_ENV = "test";
 export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
-    bail: 3,
+    bail: process.env.CI ? 10 : 3,
     browser: { screenshotDirectory: "__screenshots__" },
     exclude: ["build", "node_modules"],
     fileParallelism: false,
@@ -45,18 +45,30 @@ declare global {
       /**
        * Take a screenshot of the page and compare it to the baseline screenshot.
        *
+       * @param options - The options for the matcher.
+       * @param options.name - The name of the test.
+       * @param options.tolerance - The tolerance for the matcher (default: 2.3).
        * @example
        * await expect(page).toMatchScreenshot();
        */
-      toMatchScreenshot(options?: { name?: string }): Promise<R>;
+      toMatchScreenshot(options?: {
+        name?: string;
+        tolerance?: number;
+      }): Promise<R>;
 
       /**
        * Takes the inner HTML of the page and compares it to the baseline HTML.
        *
+       * @param options - The options for the matcher.
+       * @param options.name - The name of the test.
+       * @param options.strip - A function to strip the HTML of any unwanted content.
        * @example
        * await expect(page).toMatchInnerHTML();
        */
-      toMatchInnerHTML(options?: { name?: string }): Promise<R>;
+      toMatchInnerHTML(options?: {
+        name?: string;
+        strip?: (html: string) => string;
+      }): Promise<R>;
     }
   }
 }

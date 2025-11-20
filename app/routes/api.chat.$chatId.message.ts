@@ -1,6 +1,6 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { captureException } from "@sentry/react-router";
-import { convertToModelMessages, streamText, type UIMessage } from "ai";
+import { type UIMessage, convertToModelMessages, streamText } from "ai";
 import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import humanFormat from "human-format";
@@ -27,6 +27,7 @@ const logger = debug("chat");
  */
 export async function action({ request, params }: Route.ActionArgs) {
   const { chatId } = params;
+
   const { chat, headers, user } = await findOrCreateUser({
     chatId,
     headers: request.headers,
@@ -104,6 +105,15 @@ export async function action({ request, params }: Route.ActionArgs) {
 
     generateMessageId: () => ulid(),
 
+    // Include all messages (including the user message just added) in the response.
+    // This tells the AI SDK to include these messages in the stream so the client
+    // hook can update its state with both the user message and assistant response.
+    originalMessages: messages.map((msg) => ({
+      id: msg.id,
+      role: msg.role as "user" | "assistant",
+      parts: msg.parts,
+    })),
+
     consumeSseStream: async ({ stream }) => {
       // Create a resumable stream from the SSE stream
       const streamContext = createResumableStreamContext({
@@ -124,24 +134,32 @@ export async function action({ request, params }: Route.ActionArgs) {
     },
 
     onFinish: async ({ messages }) => {
-      // 1. Clear the active stream ID and save messages immediately
+      // 1. Try to save assistant messages and clear active stream ID
+      // Only create assistant messages - the user message was already created at line 49-54
+      const assistantMessages = messages.filter(
+        (message) => message.role === "assistant",
+      );
+
       await prisma.chat.update({
         where: { id: chat.id },
         data: {
           activeStreamId: null,
 
           messages: {
-            create: messages.map((message) => ({
-              content: message.parts
-                .filter((part) => part.type === "text")
-                .map((part) => ({
-                  type: "text",
-                  text: maskWorkingMemoryTags(part.text).trim(),
-                })),
-              id: message.id,
-              role: message.role as "assistant" | "user",
-              type: "text",
-            })),
+            createMany: {
+              data: assistantMessages.map((message) => ({
+                content: message.parts
+                  .filter((part) => part.type === "text")
+                  .map((part) => ({
+                    type: "text",
+                    text: maskWorkingMemoryTags(part.text).trim(),
+                  })),
+                id: message.id,
+                role: message.role as "assistant" | "user",
+                type: "text",
+              })),
+              skipDuplicates: true,
+            },
           },
         },
       });
