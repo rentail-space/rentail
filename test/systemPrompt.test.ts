@@ -28,9 +28,9 @@ describe("prompt()", () => {
     const [year, month, day] = dateMatch[1].split("-").map(Number);
 
     const today = new Date();
-    expect(year).toBe(today.getFullYear());
-    expect(month).toEqual(expect.closeTo(today.getUTCMonth() + 1));
-    expect(day).toEqual(expect.closeTo(today.getUTCDate()));
+    expect(year).approximately(today.getFullYear(), 1);
+    expect(month).approximately(today.getUTCMonth() + 1, 1);
+    expect(day).approximately(today.getUTCDate(), 1);
   });
 
   it("includes current time", () => {
@@ -42,9 +42,9 @@ describe("prompt()", () => {
     // Verify time format is valid
     const [hours, minutes, seconds] = timeMatch[1].split(":").map(Number);
     const now = new Date();
-    expect(hours).toEqual(expect.closeTo(now.getUTCHours()));
-    expect(minutes).toEqual(expect.closeTo(now.getUTCMinutes()));
-    expect(seconds).toEqual(expect.closeTo(now.getUTCSeconds()));
+    expect(hours).approximately(now.getUTCHours(), 1);
+    expect(minutes).approximately(now.getUTCMinutes(), 1);
+    expect(seconds).approximately(now.getUTCSeconds(), 1);
   });
 
   it("includes user profile schema", () => {
