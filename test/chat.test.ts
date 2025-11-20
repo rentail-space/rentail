@@ -3,7 +3,7 @@ import { afterAll, beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
 import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
-import { getElementsByTagName, removeElement } from "./helpers/formatHTML";
+import { removeElements } from "./helpers/formatHTML";
 
 describe("Chat page", () => {
   describe("interface with welcome message", () => {
@@ -79,11 +79,11 @@ describe("Chat page", () => {
             // NOTE: In CI the scroll to bottom button is visible, even though we
             // scroll to the bottom of the page.  We remove the button to make
             // the HTML match.
-            removeElement(
+            removeElements(
               html,
-              getElementsByTagName(html, "button").filter((node) =>
-                /scroll to bottom/i.test(node.attributes["aria-label"]),
-              )[0],
+              (node) =>
+                node.tag === "button" &&
+                node.attributes["aria-label"] === "Scroll to bottom",
             );
           },
         });

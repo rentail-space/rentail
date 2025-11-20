@@ -285,24 +285,24 @@ function lines(lines: string, added: boolean): string {
 }
 
 /**
- * Recursively iterates the tree and removes the given element.  The element
- * is removed by reference, so the original tree is modified.
+ * Recursively iterates the tree and removes the elements that match the given function.  The elements
+ * are removed by reference, so the original tree is modified.
  *
- * @param html - The HTML tree to remove the element from.
- * @param element - The element to remove.
+ * @param html - The HTML tree to remove the elements from.
+ * @param match - The function to match the elements to remove.
  * @example
- * removeElement(html, getElementsByTagName(html, "script")[0]); // removes the first <script> element
+ * removeElements(html, (node) => node.tag === "script"); // removes all <script> elements
  */
-export function removeElement(
+export function removeElements(
   html: HTMLNode[],
-  element: HTMLNode & { type: "element" },
+  match: (node: HTMLNode & { type: "element" }) => boolean,
 ): void {
   for (let i = html.length - 1; i >= 0; i--) {
     const node = html[i];
-    if (node.type === "element" && node === element) {
+    if (node.type === "element" && match(node)) {
       html.splice(i, 1);
     } else if (node.type === "element" && node.children) {
-      removeElement(node.children, element);
+      removeElements(node.children, match);
     }
   }
 }
@@ -325,8 +325,7 @@ export function getElementsByTagName(
     if (node.type === "element") {
       if (node.tag.toLowerCase() === tagName.toLowerCase())
         result.push({ ...node, type: "element" });
-      if (node.children)
-        result.push(...getElementsByTagName(node.children, tagName));
+      result.push(...getElementsByTagName(node.children, tagName));
     }
   }
   return result;
