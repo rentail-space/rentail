@@ -243,7 +243,7 @@ export function formatHTMLTree(html: HTMLNode[]): string {
       const children = node.children
         .map((child) => formatNode(child, indent + 1))
         .join("\n");
-      return pad + tagStart + "\n" + children + "\n" + pad + `</${node.tag}>`;
+      return `${pad + tagStart}\n${children}\n${pad}</${node.tag}>`;
     }
   }
 
