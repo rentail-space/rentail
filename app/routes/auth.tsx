@@ -64,7 +64,7 @@ async function signUpEmail({
 
   const { response, headers: returnedHeaders } =
     await authServer.api.signUpEmail({
-      body: { email, password, name },
+      body: { email, password, name, rememberMe: true },
       headers,
       returnHeaders: true,
     });
@@ -91,12 +91,12 @@ async function signInEmail({
   const password = form.get("password")?.toString();
   invariant(email, "Email is required");
   invariant(password, "Password is required");
-  const { headers: returnedHeaders } = await authServer.api.signInEmail({
-    body: { email, password },
+  const { headers: responseHeaders } = await authServer.api.signInEmail({
+    body: { email, password, rememberMe: true },
     headers,
     returnHeaders: true,
   });
-  return redirect("/chat", { headers: returnedHeaders });
+  return redirect("/chat", { headers: responseHeaders });
 }
 
 export default function AuthPage() {

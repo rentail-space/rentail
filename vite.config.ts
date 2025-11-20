@@ -12,7 +12,7 @@ export default defineConfig(async (config) =>
       reactRouter(),
       tsconfigPaths(),
       devtoolsJson(),
-      process.env.SENTRY_AUTH_TOKEN
+      process.env.NODE_ENV === "production"
         ? sentryReactRouter({ telemetry: true }, config)
         : undefined,
     ],
