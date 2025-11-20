@@ -7,6 +7,7 @@ import type { InputJsonValue } from "prisma/generated/internal/prismaNamespace";
 import { ulid } from "ulid";
 import { sendVerificationEmail, sendWelcomeEmail } from "~/emails/sendEmails";
 import prisma from "~/lib/prisma";
+import env from "./env";
 
 /**
  * @see https://github.com/better-auth/better-auth/blob/main/packages/better-auth/src/types/options.ts
@@ -14,6 +15,8 @@ import prisma from "~/lib/prisma";
 
 export default betterAuth({
   appName: "rentail.space",
+
+  baseURL: env.isProduction ? "https://rentail.space" : "http://localhost:5173",
 
   database: prismaAdapter(prisma, {
     provider: "postgresql",
@@ -111,8 +114,6 @@ export default betterAuth({
     },
   },
 
-  trustedOrigins: ["http://localhost:*", "https://rentail.space"],
-
   advanced: {
     ipAddress: {
       ipAddressHeaders: ["x-client-ip", "x-forwarded-for"],
@@ -147,6 +148,10 @@ export default betterAuth({
   telemetry: {
     enabled: false,
   },
+
+  trustedOrigins: [
+    env.isProduction ? "https://rentail.space" : "http://localhost:*",
+  ],
 } satisfies BetterAuthOptions);
 
 /**
