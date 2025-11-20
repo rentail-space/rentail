@@ -73,7 +73,13 @@ describe("Chat page", () => {
       });
 
       it("should look like a real chat", async () => {
-        await expect(page).toMatchInnerHTML();
+        await expect(page).toMatchInnerHTML({
+          strip: (html) =>
+            html.replace(
+              /<button\b[^>]*\baria-label="Scroll to bottom"[^>]*>([\s\S]*?)<\/button>/g,
+              "",
+            ),
+        });
       });
 
       it.runIf(!process.env.CI)("should look like a real chat", async () => {

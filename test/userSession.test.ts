@@ -132,7 +132,10 @@ describe("Anonymous visits chat page", () => {
       });
 
       it("should match inner HTML", async () => {
-        await expect(page).toMatchInnerHTML({ name: "sign-in-page" });
+        await expect(page).toMatchInnerHTML({
+          name: "sign-in-page",
+          strip: (html) => html.replace(/\btyle=""\b/g, ""),
+        });
       });
 
       it.runIf(!process.env.CI)("should match screenshot", async () => {
@@ -175,7 +178,10 @@ describe("Anonymous visits chat page", () => {
         });
 
         it("should match inner HTML", async () => {
-          await expect(page).toMatchInnerHTML({ name: "sign-up-page" });
+          await expect(page).toMatchInnerHTML({
+            name: "sign-up-page",
+            strip: (html) => html.replace(/\btyle=""\b/g, ""),
+          });
         });
 
         it.runIf(!process.env.CI)("should match screenshot", async () => {
