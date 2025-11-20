@@ -1,11 +1,11 @@
 import { type Page, expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
-import type zod from "zod";
 import prisma from "~/lib/prisma";
-import type { userProfile } from "~/lib/userProfile";
 import { cleanParseProfile } from "~/lib/userProfile";
 import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
+import type zod from "zod";
+import type { userProfile } from "~/lib/userProfile";
 
 describe("Anonymous visits chat page", () => {
   let page: Page;
@@ -180,7 +180,7 @@ describe("Anonymous visits chat page", () => {
         it("should match inner HTML", async () => {
           await expect(page).toMatchInnerHTML({
             name: "sign-up-page",
-            strip: (html) => html.replace(/\btyle=""\b/g, ""),
+            strip: (html) => html.replace(/\btyle=""\s\b/g, ""),
           });
         });
 

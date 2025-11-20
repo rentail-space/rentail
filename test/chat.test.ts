@@ -76,7 +76,7 @@ describe("Chat page", () => {
         await expect(page).toMatchInnerHTML({
           strip: (html) =>
             html.replace(
-              /<button\b[^>]*\baria-label="Scroll to bottom"[^>]*>([\s\S]*?)<\/button>/g,
+              /<button\b[^>]*\baria-label="Scroll to bottom"[^>]*?>([\s\S]*?)<\/button>\n/g,
               "",
             ),
         });
