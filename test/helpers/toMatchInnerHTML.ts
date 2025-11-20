@@ -53,10 +53,9 @@ expect.extend({
 
       const diff = diffHTMLs(original, cleanHTML);
       await writeFile(path.resolve(dirname, `${name}.html.diff`), diff);
-      process.stdout.write(`${diff}\n`);
 
       return {
-        message: () => `HTML differs from baseline see ${newFilename}`,
+        message: () => `HTML differs from baseline see ${newFilename}\n${diff}`,
         pass: false,
       };
     }
