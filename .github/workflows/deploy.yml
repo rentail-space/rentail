@@ -153,9 +153,16 @@ jobs:
         run: |
           echo "DATABASE_URL=$(doppler run --config prd -- bash -c 'echo $DIRECT_URL')" >> $GITHUB_ENV
 
+      - name: Generate Prisma schema
+        run: |
+          pnpm prisma generate
+
       - name: Deploy Prisma schema and seed database
         run: |
           doppler run --config prd -- pnpm prisma db push
+
+      - name: Seed database
+        run: |
           doppler run --config prd -- pnpm prisma db seed
 
       - name: Deploy to Vercel
