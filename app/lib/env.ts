@@ -16,6 +16,7 @@ export default {
   SENTRY_DSN: env.get("SENTRY_DSN").required(false).asUrlString(),
 
   ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required(true).asString(),
+  BETTER_AUTH_SECRET: env.get("BETTER_AUTH_SECRET").required(true).asString(),
   DATABASE_URL: isTest
     ? // secretlint-disable-next-line
       "postgresql://postgres:postgres@localhost:5432/postgres"

@@ -17,10 +17,10 @@ export default betterAuth({
   appName: "rentail.space",
 
   baseURL: env.isProduction ? "https://rentail.space" : "http://localhost:5173",
+  basePath: "/auth",
+  secret: env.BETTER_AUTH_SECRET,
 
-  database: prismaAdapter(prisma, {
-    provider: "postgresql",
-  }),
+  database: prismaAdapter(prisma, { provider: "postgresql" }),
 
   emailVerification: {
     autoSignInAfterVerification: true,
@@ -118,6 +118,7 @@ export default betterAuth({
     ipAddress: {
       ipAddressHeaders: ["x-client-ip", "x-forwarded-for"],
     },
+    useSecureCookies: env.isProduction,
   },
 
   logger: {
@@ -125,6 +126,10 @@ export default betterAuth({
     disableColors: false,
     level: "debug",
   },
+
+  trustedOrigins: [
+    env.isProduction ? "https://rentail.space" : "http://localhost:*",
+  ],
 
   databaseHooks: {
     user: {
@@ -148,11 +153,7 @@ export default betterAuth({
   telemetry: {
     enabled: false,
   },
-
-  trustedOrigins: [
-    env.isProduction ? "https://rentail.space" : "http://localhost:*",
-  ],
-} satisfies BetterAuthOptions);
+} as BetterAuthOptions);
 
 /**
  * Copy the anonymous user's data to the new user. We need to go through this
