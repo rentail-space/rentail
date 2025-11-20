@@ -285,23 +285,49 @@ function lines(lines: string, added: boolean): string {
 }
 
 /**
- * Removes elements from the HTML tree when the match function returns true.
+ * Recursively iterates the tree and removes the given element.  The element
+ * is removed by reference, so the original tree is modified.
  *
- * @param html - The HTML tree to remove elements from.
- * @param match - The function to match the elements to remove.
+ * @param html - The HTML tree to remove the element from.
+ * @param element - The element to remove.
  * @example
- * removeElementWhen(html, (node) => node.tag === "script");
+ * removeElement(html, getElementsByTagName(html, "script")[0]); // removes the first <script> element
  */
-export function removeElementWhen(
+export function removeElement(
   html: HTMLNode[],
-  match: (node: HTMLNode & { type: "element" }) => boolean,
+  element: HTMLNode & { type: "element" },
 ): void {
   for (let i = html.length - 1; i >= 0; i--) {
     const node = html[i];
-    if (node.type === "element" && match(node)) {
+    if (node.type === "element" && node === element) {
       html.splice(i, 1);
     } else if (node.type === "element" && node.children) {
-      removeElementWhen(node.children, match);
+      removeElement(node.children, element);
     }
   }
+}
+
+/**
+ * Queries the HTML tree for elements with the given tag name. The elements are
+ * returned with the type "element" to make it easier to use with the other
+ * functions in this module.
+ *
+ * @param html - The HTML tree to query.
+ * @param tagName - The tag name to query the HTML tree with.
+ * @returns The elements with the given tag name.
+ */
+export function getElementsByTagName(
+  html: HTMLNode[],
+  tagName: string,
+): (HTMLNode & { type: "element" })[] {
+  const result: (HTMLNode & { type: "element" })[] = [];
+  for (const node of html) {
+    if (node.type === "element") {
+      if (node.tag.toLowerCase() === tagName.toLowerCase())
+        result.push({ ...node, type: "element" });
+      if (node.children)
+        result.push(...getElementsByTagName(node.children, tagName));
+    }
+  }
+  return result;
 }

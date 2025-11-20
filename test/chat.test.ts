@@ -3,7 +3,7 @@ import { afterAll, beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
 import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
-import { removeElementWhen } from "./helpers/formatHTML";
+import { getElementsByTagName, removeElement } from "./helpers/formatHTML";
 
 describe("Chat page", () => {
   describe("interface with welcome message", () => {
@@ -76,8 +76,14 @@ describe("Chat page", () => {
       it("should match inner HTML", async () => {
         await expect(page).toMatchInnerHTML({
           strip: (html) => {
-            removeElementWhen(html, (node) =>
-              /scroll to bottom/i.test(node.attributes["aria-label"]),
+            // NOTE: In CI the scroll to bottom button is visible, even though we
+            // scroll to the bottom of the page.  We remove the button to make
+            // the HTML match.
+            removeElement(
+              html,
+              getElementsByTagName(html, "button").filter((node) =>
+                /scroll to bottom/i.test(node.attributes["aria-label"]),
+              )[0],
             );
           },
         });

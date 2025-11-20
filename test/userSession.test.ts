@@ -6,6 +6,7 @@ import type { userProfile } from "~/lib/userProfile";
 import { cleanParseProfile } from "~/lib/userProfile";
 import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
+import { getElementsByTagName } from "./helpers/formatHTML";
 
 describe("Anonymous visits chat page", () => {
   let page: Page;
@@ -179,6 +180,14 @@ describe("Anonymous visits chat page", () => {
         it("should match inner HTML", async () => {
           await expect(page).toMatchInnerHTML({
             name: "sign-up-page",
+            strip: (html) => {
+              // NOTE: In CI the input elements have a style attribute that is
+              // an empty string.  This is not present in the baseline HTML from
+              // the local environment.  We remove the style attribute to make
+              // the HTML match.
+              const all = getElementsByTagName(html, "input");
+              for (const node of all) delete node.attributes.style;
+            },
           });
         });
 
