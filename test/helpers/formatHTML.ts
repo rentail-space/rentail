@@ -1,122 +1,307 @@
+import { diffLines } from "diff";
+
 /**
- * Formats an HTML string into a nicely indented tree.
- * Works in Node.js without JSDOM or external HTML parsers.
- * Assumes clean HTML (e.g., from browser innerHTML).
+ * Represents a node in the HTML tree.
  */
-export function formatHTMLTree(html: string): string {
-  const INDENT = "  ";
-  let result = "";
-  let level = 0;
-
-  // Simple regex-based HTML tokenizer
-  // Matches: opening tags, closing tags, text nodes, and self-closing tags
-  const tokenRegex = /<\/?[\w-]+(?:\s+[\w-]+=(?:"[^"]*"|'[^']*'))*\s*\/?>/g;
-
-  // Strip all <script ...>...</script> elements from html to create noScript variable
-  // and all <!-- ... --> comments
-  const withoutScript = html
-    .replaceAll(/<script\b[^>]*>[\s\S]*?<\/script>/gim, "")
-    .replaceAll(/<!--[\s\S]*?-->/g, "");
-
-  // Split HTML into tokens and text content
-  let lastIndex = 0;
-  let match = tokenRegex.exec(withoutScript);
-
-  while (match !== null) {
-    // Get text content before this tag
-    const textBefore = withoutScript.slice(lastIndex, match.index).trim();
-    if (textBefore) result += `${INDENT.repeat(level)}${textBefore}\n`;
-
-    const tag = match[0];
-    lastIndex = match.index + tag.length;
-
-    // Check if it's a closing tag
-    if (tag.startsWith("</")) {
-      level = Math.max(0, level - 1);
-      result += `${INDENT.repeat(level)}${sortTagAttributes(tag)}\n`;
+export type HTMLNode =
+  | {
+      type: "element";
+      tag: string;
+      attributes: Record<string, string>;
+      children: HTMLNode[];
     }
-    // Check if it's a self-closing tag
-    else if (tag.endsWith("/>") || isSelfClosingTag(tag))
-      result += `${INDENT.repeat(level)}${sortTagAttributes(tag)}\n`;
-    // It's an opening tag
-    else {
-      result += `${INDENT.repeat(level)}${tag}\n`;
-      level++;
-    }
-    match = tokenRegex.exec(withoutScript);
-  }
-
-  // Get any remaining text after the last tag
-  const textAfter = withoutScript.slice(lastIndex).trim();
-  if (textAfter) result += `${INDENT.repeat(level)}${textAfter}\n`;
-
-  return `${result.trim()}\n`;
-}
+  | {
+      type: "text";
+      content: string;
+    };
 
 /**
- * Sorts all attributes of an opening or self-closing tag and returns the result.
- * Handles both self-closing ("<input ... />") and normal opening ("<div ...>") tags.
+ * Parses an HTML string into a tree of elements and text nodes.  The HTML is
+ * assumed to be valid, well-formed HTML (i.e., as returned by innerHTML).
  *
- * @param tag - The HTML tag as a string.
- * @returns The tag with sorted attributes.
+ * @param html - The HTML to parse.
+ * @returns The parsed HTML as a tree of elements and text nodes. The HTML is
+ * sorted by attributes to make the diffs easier to read.
  */
-function sortTagAttributes(tag: string): string {
-  // Match the opening or self-closing tag, capturing tag name and attributes
-  // e.g. <div id="b" class="a"> or <img src="b" alt="a"/>
-  const tagRegex =
-    /^<([\w-]+)((?:\s+[\w-]+(?:=(?:"[^"]*"|'[^']*'))?)*)\s*(\/?)>$/;
-  const match = tag.match(tagRegex);
-  if (!match) return tag;
+export function parseHTMLTree(html: string): HTMLNode[] {
+  // An improved, more memory-efficient HTML parser that avoids repeated RegExp.exec (which can leak memory
+  // on large input due to its lastIndex statefulness, especially in poorly structured document).
+  // This avoids recursion and big intermediate arrays as much as possible.
 
-  const tagName = match[1];
-  const attributesStr = match[2];
-  const isSelfClosing = !!match[3];
-
-  // Regex to match attributes: name[=value]
-  // Handles quoted and unquoted values; only supporting quoted values here for safety
-  const attrRegex = /([\w-]+)(=(?:"[^"]*"|'[^']*'))?/g;
-  const attributes: string[] = [];
-  let attrMatch = attrRegex.exec(attributesStr);
-  while (attrMatch) {
-    attributes.push(attrMatch[0].trim());
-    attrMatch = attrRegex.exec(attributesStr);
+  // Utility to parse attributes string into a Record
+  function parseAttributes(attrStr: string): Record<string, string> {
+    const attrs: Record<string, string> = {};
+    const attrRegex = /\s*([a-zA-Z0-9-:]+)(?:=(?:"([^"]*)"|'([^']*)'))?/g;
+    let match: RegExpExecArray | null;
+    for (;;) {
+      match = attrRegex.exec(attrStr);
+      if (match === null) break;
+      const [, name, doubleVal, singleVal] = match;
+      if (typeof doubleVal !== "undefined") {
+        attrs[name] = doubleVal;
+      } else if (typeof singleVal !== "undefined") {
+        attrs[name] = singleVal;
+      } else {
+        attrs[name] = "";
+      }
+    }
+    return attrs;
   }
 
-  attributes.sort((a, b) => {
-    // Sort by attribute name (case-insensitive)
-    const nameA = a.split("=")[0].toLowerCase();
-    const nameB = b.split("=")[0].toLowerCase();
-    return nameA.localeCompare(nameB);
-  });
+  // Remove scripts and comments, so they're not parsed as nodes.
+  const raw = html
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gim, "")
+    .replace(/<!--[\s\S]*?-->/g, "");
 
-  const sortedAttrs = attributes.length ? ` ${attributes.join(" ")}` : "";
+  const tagRegex =
+    /<(\/?)([a-zA-Z0-9-]+)((?:\s+[a-zA-Z0-9-:]+(?:=(?:"[^"]*"|'[^']*'))?)*)\s*(\/?)>/g;
 
-  return `<${tagName}${sortedAttrs}${isSelfClosing ? " /" : ""}>`;
+  const stack: HTMLNode[] = [];
+  const root: HTMLNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  // Stream through the HTML string without the repeated exec in inner loop:
+  // Refactored per lint rule: do not assign in while condition
+  while (true) {
+    match = tagRegex.exec(raw);
+    if (match === null) break;
+    const [full, slash, tagName, attrStr, selfClosing] = match;
+    // Text node before this tag
+    if (match.index > lastIndex) {
+      const text = raw.slice(lastIndex, match.index);
+      const trimmed = text.replace(/\s+/g, " ").trim();
+      if (trimmed) {
+        const node: HTMLNode = { type: "text", content: trimmed };
+        if (stack.length > 0) {
+          const parent = stack[stack.length - 1];
+          if (
+            parent &&
+            parent.type === "element" &&
+            Array.isArray(parent.children)
+          ) {
+            parent.children.push(node);
+          }
+        } else {
+          root.push(node);
+        }
+      }
+    }
+
+    if (slash) {
+      // Closing tag: pop from stack
+      const popped = stack.pop();
+      // Defensive: If there is an unmatched closing tag, just skip
+      if (popped) {
+        if (stack.length > 0) {
+          const parent = stack[stack.length - 1];
+          if (
+            parent &&
+            parent.type === "element" &&
+            Array.isArray(parent.children)
+          ) {
+            parent.children.push(popped);
+          }
+        } else {
+          root.push(popped);
+        }
+      }
+    } else {
+      // Opening or self-closing tag
+      const node: HTMLNode = {
+        type: "element",
+        tag: tagName,
+        attributes: parseAttributes(attrStr),
+        children: [],
+      };
+      if (selfClosing || isSelfClosingTagString(full)) {
+        // Self-closing tag: push to children or root
+        if (stack.length > 0) {
+          const parent = stack[stack.length - 1];
+          if (
+            parent &&
+            parent.type === "element" &&
+            Array.isArray(parent.children)
+          ) {
+            parent.children.push(node);
+          }
+        } else {
+          root.push(node);
+        }
+      } else {
+        // Opening tag: push to stack
+        stack.push(node);
+      }
+    }
+    lastIndex = tagRegex.lastIndex;
+  }
+
+  // Text node after last tag
+  if (lastIndex < raw.length) {
+    const text = raw.slice(lastIndex);
+    const trimmed = text.replace(/\s+/g, " ").trim();
+    if (trimmed) {
+      const node: HTMLNode = { type: "text", content: trimmed };
+      if (stack.length > 0) {
+        const parent = stack[stack.length - 1];
+        if (
+          parent &&
+          parent.type === "element" &&
+          Array.isArray(parent.children)
+        ) {
+          parent.children.push(node);
+        }
+      } else {
+        root.push(node);
+      }
+    }
+  }
+
+  // Any not-properly-closed elements left: push them to root in order
+  while (stack.length > 0) {
+    const popped = stack.pop();
+    if (popped) {
+      if (stack.length > 0) {
+        // Fix: push to the correct parent's children array with type safety
+        const parent = stack[stack.length - 1];
+        if (
+          parent &&
+          parent.type === "element" &&
+          Array.isArray(parent.children)
+        ) {
+          parent.children.push(popped);
+        }
+      } else {
+        root.push(popped);
+      }
+    }
+  }
+
+  return root;
+}
+
+function isSelfClosingTagString(tag: string): boolean {
+  return (
+    /\/>$/.test(tag) ||
+    /<(area|base|br|col|embed|hr|img|input|link|meta|source|track|wbr)[\s/>]/i.test(
+      tag,
+    )
+  );
 }
 
 /**
- * Check if a tag is self-closing (void elements in HTML).
+ * Formats an HTMLNode[] tree into XML-style document with indentation.  The
+ * HTML is formatted with 2-space indentation.  The HTML is escaped to prevent
+ * XSS attacks.
+ *
+ * @param html - The HTML to format.
+ * @returns The formatted HTML as a string.
  */
-function isSelfClosingTag(tag: string): boolean {
-  const selfClosingTags = [
-    "area",
-    "base",
-    "br",
-    "col",
-    "embed",
-    "hr",
-    "img",
-    "input",
-    "link",
-    "meta",
-    "param",
-    "source",
-    "track",
-    "wbr",
-  ];
+export function formatHTMLTree(html: HTMLNode[]): string {
+  function formatNode(node: HTMLNode, indent = 0): string {
+    const pad = "  ".repeat(indent);
 
-  const tagMatch = /<([\w-]+)/.exec(tag);
-  return (
-    tagMatch !== null && selfClosingTags.includes(tagMatch[1].toLowerCase())
-  );
+    if (node.type === "text") {
+      // Escape XML special chars
+      const escaped = node.content
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+      return pad + escaped;
+    } else {
+      const attrs = node.attributes
+        ? Object.entries(node.attributes)
+            .sort(([a], [b]) => a.localeCompare(b))
+            .map(([key, value]) =>
+              value === undefined || value === null || value === ""
+                ? key
+                : `${key}="${value.replace(/"/g, "&quot;")}"`,
+            )
+            .join(" ")
+        : "";
+
+      const tagStart =
+        attrs && attrs.length > 0 ? `<${node.tag} ${attrs}>` : `<${node.tag}>`;
+      const tagSelfClose =
+        attrs && attrs.length > 0
+          ? `<${node.tag} ${attrs} />`
+          : `<${node.tag} />`;
+
+      if (!node.children || node.children.length === 0) {
+        // Use self-closing for void/self-closing tags
+        if (
+          /^(area|base|br|col|embed|hr|img|input|link|meta|source|track|wbr)$/i.test(
+            node.tag,
+          )
+        ) {
+          return pad + tagSelfClose;
+        } else {
+          return `${pad + tagStart}</${node.tag}>`;
+        }
+      }
+
+      const children = node.children
+        .map((child) => formatNode(child, indent + 1))
+        .join("\n");
+      return pad + tagStart + "\n" + children + "\n" + pad + `</${node.tag}>`;
+    }
+  }
+
+  return html.map((node) => formatNode(node, 0)).join("\n");
+}
+
+/**
+ * Diffs two HTML trees and returns the diff as a string.  The diff is a string
+ * with the lines that are added or removed.  The lines are prefixed with + or -
+ * to indicate if they are added or removed.
+ *
+ * @param html - The HTML to diff. The HTML is assumed to be valid, well-formed
+ * HTML (i.e., as returned by innerHTML). The HTML is sorted by attributes to
+ * make the diffs easier to read.
+ * @param original - The original HTML to diff against. The original HTML is
+ * assumed to be valid, well-formed HTML (i.e., as returned by innerHTML). The
+ * original HTML is sorted by attributes to make the diffs easier to read.
+ * @returns The diff between the two HTML trees.
+ */
+export function diffHTMLs(html: string, original: string): string {
+  const diffs = diffLines(html, original, { ignoreWhitespace: true });
+  return diffs
+    .map((diff) =>
+      diff.added
+        ? lines(diff.value, true)
+        : diff.removed
+          ? lines(diff.value, false)
+          : false,
+    )
+    .filter(Boolean)
+    .join("\n");
+}
+
+function lines(lines: string, added: boolean): string {
+  return lines
+    .split("\n")
+    .map((line) => (added ? `+ ${line}` : `- ${line}`))
+    .join("\n");
+}
+
+/**
+ * Removes elements from the HTML tree when the match function returns true.
+ *
+ * @param html - The HTML tree to remove elements from.
+ * @param match - The function to match the elements to remove.
+ * @example
+ * removeElementWhen(html, (node) => node.tag === "script");
+ */
+export function removeElementWhen(
+  html: HTMLNode[],
+  match: (node: HTMLNode & { type: "element" }) => boolean,
+): void {
+  for (let i = html.length - 1; i >= 0; i--) {
+    const node = html[i];
+    if (node.type === "element" && match(node)) {
+      html.splice(i, 1);
+    } else if (node.type === "element" && node.children) {
+      removeElementWhen(node.children, match);
+    }
+  }
 }

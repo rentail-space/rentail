@@ -1,6 +1,7 @@
 import tsconfigPaths from "vite-tsconfig-paths";
 import type { ParsedStack } from "vitest";
 import { defineConfig } from "vitest/config";
+import type { HTMLNode } from "./test/helpers/formatHTML";
 
 process.env.NODE_ENV = "test";
 
@@ -67,7 +68,7 @@ declare global {
        */
       toMatchInnerHTML(options?: {
         name?: string;
-        strip?: (html: string) => string;
+        strip?: (html: HTMLNode[]) => void;
       }): Promise<R>;
     }
   }

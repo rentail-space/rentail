@@ -3,6 +3,7 @@ import { afterAll, beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
 import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
+import { removeElementWhen } from "./helpers/formatHTML";
 
 describe("Chat page", () => {
   describe("interface with welcome message", () => {
@@ -72,13 +73,13 @@ describe("Chat page", () => {
         await page.waitForTimeout(300);
       });
 
-      it("should look like a real chat", async () => {
+      it("should match inner HTML", async () => {
         await expect(page).toMatchInnerHTML({
-          strip: (html) =>
-            html.replace(
-              /<button\b[^>]*\baria-label="Scroll to bottom"[^>]*?>([\s\S]*?)<\/button>\n/g,
-              "",
-            ),
+          strip: (html) => {
+            removeElementWhen(html, (node) =>
+              /scroll to bottom/i.test(node.attributes["aria-label"]),
+            );
+          },
         });
       });
 

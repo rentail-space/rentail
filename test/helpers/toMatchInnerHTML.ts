@@ -1,7 +1,6 @@
 // DO NOT add to setup.ts as vitest.config.js cannot upload file that imports vitest
 
 import { expect } from "@playwright/test";
-import { diffLines } from "diff";
 import { invariant } from "es-toolkit";
 import {
   access,
@@ -14,32 +13,36 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import type { Locator, Page } from "playwright";
-import { formatHTMLTree } from "./formatHTML";
+import {
+  type HTMLNode,
+  diffHTMLs,
+  formatHTMLTree,
+  parseHTMLTree,
+} from "./formatHTML";
 
 const dirname = path.resolve("./__screenshots__");
 
 expect.extend({
   async toMatchInnerHTML(
     locator: Locator,
-    options?: { name?: string; strip?: (html: string) => string },
+    options?: { name?: string; strip?: (html: HTMLNode[]) => void },
   ): Promise<{ message: () => string; pass: boolean }> {
     const name = options?.name || getTestName();
     const filename = path.resolve(dirname, `${name}.html`);
-
     const rawHtml =
       "content" in locator
-        ? await (locator as unknown as Page).locator("body").innerHTML()
+        ? await (locator as unknown as Page).innerHTML("body")
         : await locator.innerHTML();
-    const formattedHTML = formatHTMLTree(rawHtml);
-    const cleanHTML = options?.strip
-      ? options.strip(formattedHTML)
-      : formattedHTML;
+
+    const html = parseHTMLTree(rawHtml);
+    if (options?.strip) options.strip(html);
+    const formattedHtml = formatHTMLTree(html);
 
     try {
       await access(filename, constants.R_OK);
     } catch {
       await mkdir(dirname, { recursive: true });
-      await writeFile(filename, cleanHTML);
+      await writeFile(filename, formattedHtml);
       return {
         message: () => `Baseline HTML created at ${filename}.`,
         pass: true,
@@ -47,11 +50,11 @@ expect.extend({
     }
 
     const original = await readFile(filename, "utf-8");
-    if (cleanHTML !== original) {
+    if (formattedHtml !== original) {
       const newFilename = path.resolve(dirname, `${name}.new.html`);
-      await writeFile(newFilename, cleanHTML);
+      await writeFile(newFilename, formattedHtml);
 
-      const diff = diffHTMLs(original, cleanHTML);
+      const diff = diffHTMLs(original, formattedHtml);
       await writeFile(path.resolve(dirname, `${name}.html.diff`), diff);
 
       return {
@@ -62,27 +65,6 @@ expect.extend({
     return { message: () => "HTML matches baseline", pass: true };
   },
 });
-
-function diffHTMLs(html: string, original: string): string {
-  const diffs = diffLines(html, original, { ignoreWhitespace: true });
-  return diffs
-    .map((diff) =>
-      diff.added
-        ? lines(diff.value, true)
-        : diff.removed
-          ? lines(diff.value, false)
-          : false,
-    )
-    .filter(Boolean)
-    .join("\n");
-}
-
-function lines(lines: string, added: boolean): string {
-  return lines
-    .split("\n")
-    .map((line) => (added ? `+ ${line}` : `- ${line}`))
-    .join("\n");
-}
 
 function getTestName(): string {
   const error = new Error();
