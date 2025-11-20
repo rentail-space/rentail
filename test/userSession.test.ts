@@ -139,6 +139,7 @@ describe("Anonymous visits chat page", () => {
       });
 
       it.runIf(!process.env.CI)("should match screenshot", async () => {
+        await page.waitForTimeout(100);
         await expect(page).toMatchScreenshot({ name: "sign-in-page" });
       });
 
@@ -192,6 +193,7 @@ describe("Anonymous visits chat page", () => {
         });
 
         it.runIf(!process.env.CI)("should match screenshot", async () => {
+          await page.waitForTimeout(100);
           await expect(page).toMatchScreenshot({ name: "sign-up-page" });
         });
 
