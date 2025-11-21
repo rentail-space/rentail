@@ -153,7 +153,7 @@ export default betterAuth({
   telemetry: {
     enabled: false,
   },
-} as BetterAuthOptions);
+} satisfies BetterAuthOptions);
 
 /**
  * Copy the anonymous user's data to the new user. We need to go through this

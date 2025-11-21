@@ -144,15 +144,8 @@ export async function findOrCreateUser({
   if (found) return { ...found, headers: new Headers() };
 
   // We're going to sign in the anonymous user so we can get the HTTP headers
-  const { response, headers: signInHeaders } = await (
-    authServer.api as unknown as typeof authServer.api & {
-      signInAnonymous: (opts: {
-        returnHeaders: true;
-      }) => Promise<{ response: { user: { id: string } }; headers: Headers }>;
-    }
-  ).signInAnonymous({
-    returnHeaders: true,
-  });
+  const { response, headers: signInHeaders } =
+    await authServer.api.signInAnonymous({ returnHeaders: true });
   const anonUser = response?.user;
   invariant(anonUser, "Anonymous user ID is required");
 
