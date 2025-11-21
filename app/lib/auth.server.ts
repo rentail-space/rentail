@@ -119,9 +119,6 @@ export default betterAuth({
       ipAddressHeaders: ["x-client-ip", "x-forwarded-for"],
     },
     useSecureCookies: env.isProduction,
-    sessionCookieOptions: {
-      domain: env.isProduction ? "rentail.space" : undefined,
-    },
   },
 
   logger: {
