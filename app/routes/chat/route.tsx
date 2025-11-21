@@ -65,9 +65,7 @@ export default function ChatPage() {
               )}
             </div>
 
-            <div className="top-0 hidden py-4 lg:block lg:w-80 lg:shrink-0">
-              <CenterCards centers={fetcher.data?.centers ?? []} />
-            </div>
+            <CenterCards centers={fetcher.data?.centers ?? []} />
           </div>
         </StickToBottom.Content>
 

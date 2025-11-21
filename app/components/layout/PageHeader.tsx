@@ -13,7 +13,7 @@ export default function PageHeader({
   }[];
 }) {
   return (
-    <header className="navbar shadow-sm print:hidden">
+    <header className="navbar mb-1 shadow-sm print:hidden">
       <PageIconLink className="navbar-start" />
       {children}
 

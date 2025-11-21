@@ -18,7 +18,7 @@ export default function CenterCards({
   if (centers.length === 0) return null;
 
   return (
-    <div className="sticky top-4 h-fit">
+    <div className="sticky top-0 my-4 h-fit">
       <div className="card card-border bg-base-100 shadow-md">
         <div className="card-body">
           <div className="card-title">Available Centers ({centers.length})</div>
