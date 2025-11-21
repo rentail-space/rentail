@@ -7,8 +7,8 @@ export default function parseFrontMatter<T = Record<string, unknown>>(
   body: string;
   attributes: T;
 } {
-  const [, frontMatter, body] = document.split(/^---$/m);
+  const [, frontMatter, ...body] = document.split(/^---$/m);
   invariant(frontMatter, "Front matter not found");
   const attributes = YAML.parse(frontMatter);
-  return { body, attributes };
+  return { body: body.join("\n---\n"), attributes };
 }
