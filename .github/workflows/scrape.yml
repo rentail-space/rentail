@@ -59,11 +59,10 @@ jobs:
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v3
 
-      - name: Generate Prisma schema
-        run: pnpm prisma generate
-
       - name: Seed database
-        run: doppler run --config prd -- pnpm prisma db seed
+        run: |
+          doppler run --config prd -- pnpm prisma generate
+          doppler run --config prd -- pnpm prisma db seed
 
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
