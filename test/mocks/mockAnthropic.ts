@@ -157,8 +157,9 @@ export default function createStreamingResponse(
         );
         controller.enqueue(encoder.encode(contentDelta));
 
-        // Schedule next chunk with small delay to simulate streaming
-        setTimeout(sendNextChunk);
+        // Schedule next chunk using Promise microtask queue instead of setTimeout
+        // This ensures chunks are sent reliably in test environments
+        Promise.resolve().then(sendNextChunk);
       }
 
       sendNextChunk();
