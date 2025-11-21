@@ -13,6 +13,7 @@ jobs:
       ANTHROPIC_API_KEY: "***REMOVED***"
       BETTER_AUTH_SECRET: "***REMOVED***"
       DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+      DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
       REDIS_URL: "redis://localhost:6379"
       RESEND_API_KEY: "re_1234567890"
 
