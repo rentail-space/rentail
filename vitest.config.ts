@@ -24,7 +24,7 @@ export default defineConfig({
     ],
     setupFiles: "test/helpers/setup.ts",
     globalSetup: "test/helpers/globalSetup.ts",
-    teardownTimeout: 10_000, // 10 seconds for browser/server cleanup
+    teardownTimeout: 30_000, // 30 seconds for browser/server cleanup (increased to allow proper shutdown)
     testTimeout: 30_000, // 30 seconds for E2E tests with browser interaction
   },
 });

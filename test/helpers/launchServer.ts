@@ -57,8 +57,11 @@ export async function closeServer(): Promise<void> {
   if (worker) {
     // Send graceful shutdown message first
     worker.send("shutdown");
-    // Wait briefly for graceful shutdown, then kill if needed
-    await delay(500);
-    worker.kill("SIGKILL");
+    // Wait for graceful shutdown (increased from 500ms to allow Vite server to fully close)
+    await delay(1000);
+    // Check if process exited, only kill if it's still running
+    if (!worker.killed) {
+      worker.kill("SIGKILL");
+    }
   }
 }

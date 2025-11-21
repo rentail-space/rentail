@@ -14,6 +14,17 @@ import "./trimConsole";
 
 Sentry.init({ enabled: false });
 
+// Suppress the birpc RPC closure error that occurs during test teardown
+// This happens when Vite dependency optimization is still running while the worker shuts down
+process.on("unhandledRejection", (reason) => {
+  const message = reason instanceof Error ? reason.message : String(reason);
+  if (message.includes("birpc") && message.includes("rpc is closed"))
+    // Silently ignore - this is expected during test teardown when Vite is optimizing dependencies
+    return;
+  // Re-throw other unhandled rejections
+  else throw reason;
+});
+
 beforeAll(async () => {
   // Cleanup database
   await Promise.all([

@@ -25,7 +25,7 @@ async function startServer() {
     // Create Vite dev server with cached dependencies
     const devServer = await vite.createServer({
       clearScreen: false,
-      logLevel: "info",
+      logLevel: "warn", // Reduced log level to avoid noise
       root: process.cwd(),
       server: {
         hmr: false,
@@ -38,11 +38,10 @@ async function startServer() {
 
     // Start the Vite dev server
     await devServer.listen(port);
-    await devServer.waitForRequestsIdle();
-    await devServer.warmupRequest("/");
-
     // Unref the server to allow process to exit cleanly
     devServer.httpServer?.unref();
+    await devServer.warmupRequest("/");
+    await devServer.waitForRequestsIdle();
 
     // Handle graceful shutdown on parent process termination
     process.on("message", async (msg) => {
