@@ -61,7 +61,7 @@ const { getSession, commitSession, destroySession } =
       path: "/",
       sameSite: "lax",
       secrets: [env.BETTER_AUTH_SECRET],
-      secure: true,
+      secure: env.isProduction,
     },
   });
 
@@ -186,6 +186,9 @@ export async function findOrCreateUser({
 
   const user = await createUser({
     chatId,
+    email: undefined,
+    name: undefined,
+    passwordHash: undefined,
     requestHeaders,
   });
   const chat = user.chats[0];
@@ -425,6 +428,9 @@ export async function signUpEmail({
   } else {
     const user = await createUser({
       chatId: ulid(),
+      email,
+      name,
+      passwordHash,
       requestHeaders,
     });
     return await createSession({ requestHeaders, userId: user.id });
@@ -441,30 +447,56 @@ export async function signOut(requestHeaders: Headers): Promise<Headers> {
   return new Headers({ "set-cookie": await destroySession(session) });
 }
 
+/**
+ * Create a new user accont. If a password hash is not provided, the user is anonymous.
+ *
+ * @param chatId - The ID of the chat to create
+ * @param email - The email of the user (required for authenticated users)
+ * @param name - The name of the user (required for authenticated users)
+ * @param passwordHash - The password hash to create the user account with (required for authenticated users)
+ * @param requestHeaders - The request headers object
+ * @returns The new user account
+ */
 async function createUser({
   chatId,
+  email,
+  name,
+  passwordHash,
   requestHeaders,
-}: {
-  chatId: string;
-  requestHeaders: Headers;
-}): Promise<UserGetPayload<{ include: { chats: true } }>> {
+}:
+  | {
+      chatId: string;
+      email: undefined;
+      name: undefined;
+      passwordHash: undefined;
+      requestHeaders: Headers;
+    }
+  | {
+      chatId: string;
+      email: string;
+      name: string;
+      passwordHash: string;
+      requestHeaders: Headers;
+    }): Promise<UserGetPayload<{ include: { chats: true } }>> {
   const geocode = await geocodeFromHeaders(requestHeaders);
   const userAgent = requestHeaders.get("user-agent") ?? "";
   const ip = requestHeaders.get("x-forwarded-for") ?? "";
+  const cityStateCountry = [geocode.city, geocode.state, geocode.country]
+    .filter(Boolean)
+    .join(", ");
 
-  const user = await prisma.user.create({
+  return await prisma.user.create({
     data: {
-      email: `anonymous-${ulid()}@rentail.space`,
-      id: ulid(),
-      isAnonymous: true,
-      isBot: isUABot(userAgent) || (await isBotByIP(ip)),
-      cityStateCountry: [geocode.city, geocode.state, geocode.country]
-        .filter(Boolean)
-        .join(", "),
+      cityStateCountry,
+      email: email || `anonymous-${ulid()}@rentail.space`,
       geocode,
+      id: ulid(),
       ip,
+      isAnonymous: !passwordHash,
+      isBot: isUABot(userAgent) || (await isBotByIP(ip)),
       metadata: {},
-      name: "Anonymous",
+      name: name || "Anonymous",
+      passwordHash,
       referrer: requestHeaders.get("referer") ?? "",
       userAgent,
       workingMemory: JSON.stringify({ location: geocode }),
@@ -488,7 +520,6 @@ async function createUser({
     },
     include: { chats: true },
   });
-  return user;
 }
 
 async function createSession({

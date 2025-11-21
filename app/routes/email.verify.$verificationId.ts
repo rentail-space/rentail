@@ -8,11 +8,12 @@ export async function loader({ params }: Route.ActionArgs) {
     where: { id: verificationId },
   });
   if (!verification)
-    return new Response("Verification not found", { status: 404 });
+    throw new Response("Verification not found", { status: 404 });
   if (verification.expiresAt < new Date())
-    return new Response("Verification expired, please request a new one", {
+    throw new Response("Verification expired, please request a new one", {
       status: 400,
     });
+
   await prisma.user.update({
     data: { email: verification.value, emailVerified: true },
     where: { id: verification.identifier },
@@ -20,5 +21,5 @@ export async function loader({ params }: Route.ActionArgs) {
   await prisma.verification.delete({
     where: { id: verification.id },
   });
-  return redirect("/profile");
+  throw redirect("/profile");
 }
