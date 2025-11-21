@@ -42,7 +42,7 @@ export async function goto(
   // "networkidle" waits for all network activity to cease, which fails on pages
   // with background streaming (like chat). Use "domcontentloaded" for those instead.
   await page.goto(path, {
-    waitUntil: options?.waitUntil ?? "networkidle",
+    waitUntil: options?.waitUntil ?? "domcontentloaded",
     timeout: options?.timeout,
   });
   return page;

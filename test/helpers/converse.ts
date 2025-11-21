@@ -18,8 +18,9 @@ export default async function converse(
   expect(page.url()).toContain("/chat");
 
   // Reload the page, this clears any previous state and loads any React
-  // dependencies.
-  await page.reload({ waitUntil: "networkidle" });
+  // dependencies. We need to wait a little bit for React to finish rendering.
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.waitForTimeout(1_000);
 
   // Get the initial count of messages in the database, we expect 2 new messages.
   const messageCount = await prisma.messages.count();
@@ -37,7 +38,6 @@ export default async function converse(
 
   // Click the submit button, this sends the message to the server.
   await page.click('button[type="submit"]');
-  await page.waitForLoadState("networkidle");
   // Sanity check that the input is now empty.
   expect(await input.inputValue()).toBe("");
 

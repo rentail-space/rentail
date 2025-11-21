@@ -1,7 +1,6 @@
 import tsconfigPaths from "vite-tsconfig-paths";
 import type { ParsedStack } from "vitest";
 import { defineConfig } from "vitest/config";
-import type { HTMLNode } from "./test/helpers/formatHTML";
 
 process.env.NODE_ENV = "test";
 
@@ -38,38 +37,4 @@ function onStackTrace(
   if (error.name === "ReferenceError") return true;
   // Reject all frames from third party libraries.
   return !file.includes("node_modules");
-}
-
-declare global {
-  namespace PlaywrightTest {
-    interface Matchers<R> {
-      /**
-       * Take a screenshot of the page and compare it to the baseline screenshot.
-       *
-       * @param options - The options for the matcher.
-       * @param options.name - The name of the test.
-       * @param options.tolerance - The tolerance for the matcher (default: 2.3).
-       * @example
-       * await expect(page).toMatchScreenshot();
-       */
-      toMatchScreenshot(options?: {
-        name?: string;
-        tolerance?: number;
-      }): Promise<R>;
-
-      /**
-       * Takes the inner HTML of the page and compares it to the baseline HTML.
-       *
-       * @param options - The options for the matcher.
-       * @param options.name - The name of the test.
-       * @param options.strip - A function to strip the HTML of any unwanted content.
-       * @example
-       * await expect(page).toMatchInnerHTML();
-       */
-      toMatchInnerHTML(options?: {
-        name?: string;
-        strip?: (html: HTMLNode[]) => void;
-      }): Promise<R>;
-    }
-  }
 }

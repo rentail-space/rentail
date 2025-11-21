@@ -68,7 +68,7 @@ describe("Chat page", () => {
     describe("visual regression testing", () => {
       beforeAll(async () => {
         // Take screenshot for visual regression testing
-        await page.waitForLoadState("networkidle");
+        await page.waitForLoadState("domcontentloaded");
         await page.locator(".scroll-smooth").scrollIntoViewIfNeeded();
         await page.waitForTimeout(300);
       });

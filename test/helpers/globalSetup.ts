@@ -6,6 +6,7 @@
  * - Starts MSW server (used by Web server)
  */
 
+import { execFile } from "node:child_process";
 import seedCenters from "prisma/seed/seedCenters";
 import prisma from "~/lib/prisma";
 import msw from "../mocks/mswHandlers";
@@ -27,4 +28,15 @@ export default async function setup() {
   // Launch server and start test env MSW handlers
   await launchServer(port);
   msw.listen({ onUnhandledRequest: "error" });
+}
+
+export async function teardown() {
+  execFile("terminal-notifier", [
+    "-sound",
+    "default",
+    "-title",
+    "Test Suite",
+    "-message",
+    "Done!",
+  ]);
 }

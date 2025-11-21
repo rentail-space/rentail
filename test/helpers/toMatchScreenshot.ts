@@ -13,16 +13,40 @@ import {
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
-import type { Locator } from "playwright";
+import type { Locator, Page } from "playwright";
+
+declare global {
+  namespace PlaywrightTest {
+    interface Matchers<R> {
+      /**
+       * Take a screenshot of the page and compare it to the baseline screenshot.
+       *
+       * @param options - The options for the matcher.
+       * @param options.name - The name of the test.
+       * @param options.tolerance - The tolerance for the matcher (default: 2.3).
+       * @example
+       * await expect(page).toMatchScreenshot();
+       */
+      toMatchScreenshot(options?: {
+        name?: string;
+        tolerance?: number;
+      }): Promise<R>;
+    }
+  }
+}
 
 const dirname = path.resolve("./__screenshots__");
 const defaultTolerance = 2.3;
 
 expect.extend({
   async toMatchScreenshot(
-    locator: Locator,
+    locator: Locator | Page,
     options?: { name?: string; tolerance?: number },
   ): Promise<{ message: () => string; pass: boolean }> {
+    // NOTE: Give the page minimum time to finish uploading images and rendering.
+    const page = "page" in locator ? locator.page() : locator;
+    await page.waitForTimeout(100);
+
     const name = options?.name || getTestName();
     const filename = path.join(dirname, `${name}.png`);
     const screenshot = await locator.screenshot({

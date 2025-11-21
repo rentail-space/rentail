@@ -20,11 +20,31 @@ import {
   parseHTMLTree,
 } from "./formatHTML";
 
+declare global {
+  namespace PlaywrightTest {
+    interface Matchers<R> {
+      /**
+       * Takes the inner HTML of the page and compares it to the baseline HTML.
+       *
+       * @param options - The options for the matcher.
+       * @param options.name - The name of the test.
+       * @param options.strip - A function to strip the HTML of any unwanted content.
+       * @example
+       * await expect(page).toMatchInnerHTML();
+       */
+      toMatchInnerHTML(options?: {
+        name?: string;
+        strip?: (html: HTMLNode[]) => void;
+      }): Promise<R>;
+    }
+  }
+}
+
 const dirname = path.resolve("./__screenshots__");
 
 expect.extend({
   async toMatchInnerHTML(
-    locator: Locator,
+    locator: Locator | Page,
     options?: { name?: string; strip?: (html: HTMLNode[]) => void },
   ): Promise<{ message: () => string; pass: boolean }> {
     const name = options?.name || getTestName();
