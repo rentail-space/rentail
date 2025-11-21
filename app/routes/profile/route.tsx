@@ -5,6 +5,7 @@ import type { User } from "prisma/generated/client";
 import { Activity, useState } from "react";
 import { redirect, useLoaderData } from "react-router";
 import { twMerge } from "tailwind-merge";
+import { ulid } from "ulid";
 import { sendVerificationEmail } from "~/emails/sendEmails";
 import prisma from "~/lib/prisma";
 import { findUserAndLastChat } from "~/sessions.server";
@@ -77,10 +78,18 @@ async function updateEmail({
   console.info("Sending verification email to user %s", user.id);
   try {
     invariant(user.name, "User has no name");
+    const verification = await prisma.verification.create({
+      data: {
+        expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24), // 24 hours
+        id: ulid(),
+        identifier: user.id,
+        value: newEmail,
+      },
+    });
     await sendVerificationEmail({
       email: newEmail,
       name: user.name,
-      url: new URL("/email/verify", request.url).toString(),
+      url: new URL(`/email/verify/${verification.id}`, request.url).toString(),
     });
     return { success: "Verification email sent" };
   } catch (error) {

@@ -40,39 +40,6 @@ model Messages {
   @@map("messages")
 }
 
-model User {
-  accounts         Account[]
-  chats            Chat[]
-  cityStateCountry String?   @map("city_state_country")
-  createdAt        DateTime  @map("created_at")         @default(now())
-  email            String?   @map("email")
-  emailVerified    Boolean   @map("email_verified")     @default(false)
-  geocode          Json      @map("geocode")            @db.Json
-  id               String    @map("id")                 @id
-  image            String?   @map("image")
-  ip               String?   @map("ip")
-  isAnonymous      Boolean   @map("is_anonymous")       @default(false)
-  isBot            Boolean   @map("is_bot")             @default(false)
-  metadata         Json      @map("metadata")           @db.Json
-  name             String?   @map("name")
-  passwordHash     String?   @map("password_hash")
-  referrer         String?   @map("referrer")
-  sessions         Session[]
-  updatedAt        DateTime  @map("updated_at")         @updatedAt
-  userAgent        String?   @map("user_agent")
-  workingMemory    String    @map("working_memory")     @db.Text
-
-  @@unique([email])
-  @@map("users")
-}
-
-model Waitlist {
-  createdAt DateTime @map("created_at") @default(now())
-  email     String   @map("email")      @id @default(uuid(4))
-
-  @@map("waitlist")
-}
-
 model Property {
   address        String          @map("address")
   city           String          @map("city")
@@ -127,34 +94,47 @@ model Session {
   @@map("session")
 }
 
-model Account {
-  id                    String                                     @id
-  accountId             String    @map("account_id")
-  providerId            String    @map("provider_id")
-  userId                String    @map("user_id")
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  accessToken           String?   @map("access_token")
-  refreshToken          String?   @map("refresh_token")
-  idToken               String?   @map("id_token")
-  accessTokenExpiresAt  DateTime? @map("access_token_expires_at")
-  refreshTokenExpiresAt DateTime? @map("refresh_token_expires_at")
-  scope                 String?   @map("scope")
-  password              String?   @map("password")
-  createdAt             DateTime  @map("created_at")               @default(now())
-  updatedAt             DateTime  @map("updated_at")               @updatedAt
+model User {
+  chats            Chat[]
+  cityStateCountry String?   @map("city_state_country")
+  createdAt        DateTime  @map("created_at")         @default(now())
+  email            String?   @map("email")
+  emailVerified    Boolean   @map("email_verified")     @default(false)
+  geocode          Json      @map("geocode")            @db.Json
+  id               String    @map("id")                 @id
+  image            String?   @map("image")
+  ip               String?   @map("ip")
+  isAnonymous      Boolean   @map("is_anonymous")       @default(false)
+  isBot            Boolean   @map("is_bot")             @default(false)
+  metadata         Json      @map("metadata")           @db.Json
+  name             String?   @map("name")
+  passwordHash     String?   @map("password_hash")
+  referrer         String?   @map("referrer")
+  sessions         Session[]
+  updatedAt        DateTime  @map("updated_at")         @updatedAt
+  userAgent        String?   @map("user_agent")
+  workingMemory    String    @map("working_memory")     @db.Text
 
-  @@map("account")
+  @@unique([email])
+  @@map("users")
 }
 
 model Verification {
-  id         String                      @id
-  identifier String   @map("identifier")
-  value      String   @map("value")
-  expiresAt  DateTime @map("expires_at")
   createdAt  DateTime @map("created_at") @default(now())
+  expiresAt  DateTime @map("expires_at")
+  id         String   @map("id")         @id
+  identifier String   @map("identifier")
   updatedAt  DateTime @map("updated_at") @default(now()) @updatedAt
+  value      String   @map("value")
 
   @@map("verification")
+}
+
+model Waitlist {
+  createdAt DateTime @map("created_at") @default(now())
+  email     String   @map("email")      @id @default(uuid(4))
+
+  @@map("waitlist")
 }
 
 enum Role {

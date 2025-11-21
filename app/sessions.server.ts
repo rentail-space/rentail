@@ -504,7 +504,9 @@ async function createSession({
     data: {
       expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 365 days
       id: ulid(),
+      ipAddress: requestHeaders.get("x-forwarded-for"),
       token: sessionToken,
+      userAgent: requestHeaders.get("user-agent"),
       userId,
     },
   });
