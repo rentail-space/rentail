@@ -38,32 +38,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Frontend**: React 19 + TypeScript + Tailwind CSS 4 + DaisyUI
 - **Build**: Vite 7
 - **Database**: PostgreSQL + Prisma ORM (with PgAdapter)
-- **Auth**: Better Auth v1.3.34+ (anonymous user support, email/password, OAuth)
+- **Auth**: React Router session cookies + bcrypt password hashing
 - **Streaming**: Redis + resumable-stream package for reliable SSE delivery
 - **AI**: Claude 4 via Anthropic SDK with streaming responses
 - **Testing**: Vitest + Playwright (browser pool, visual regression)
 - **Linting**: Biome (formatter + linter) + secretlint
 - **Monitoring**: Sentry + BetterStack (Logtail + Push Gateway) + Checkly
-
-### Authentication & Session Management
-
-**Better Auth Configuration:**
-- Config file: `app/lib/auth.server.ts` - Centralized auth setup with plugins
-- Plugin: Anonymous user support via `better-auth/plugins`
-- Session storage: Database via Prisma adapter with session table
-- API exposure: Better Auth provides `authServer.api` with methods like `signInAnonymous()`, `signInEmail()`, etc.
-- Important: Use `satisfies BetterAuthOptions` (not `as`) to preserve plugin API types in TypeScript
-
-**Cookie Management:**
-- Production cookie domain: Set to `rentail.space` in `fixSetCookieHeaders()` helper (`app/routes/auth.tsx`)
-- `__Secure-` prefix: Requires explicit Domain attribute for Safari/browser compatibility
-- Session cookie attributes: httpOnly, Secure (HTTPS only), SameSite=Lax
-- Cache strategy: 5-minute browser refresh with 365-day server expiry
-
-**Authentication Routes:**
-- Sign-up/sign-in: `app/routes/auth.tsx` - Form submission with email/password
-- Auth API handler: `app/routes/api.auth.$.ts` - Catch-all for Better Auth endpoints
-- Post-login flow: User redirected to `/chat` with session cookies set
 
 ### AI Integration & Streaming
 
@@ -195,10 +175,7 @@ The app determines user location in this order:
   - `useChat` hook from AI SDK manages message array, streaming status, and auto-resume on reconnect
   - URL parameters via `nuqs` for queryable state (search queries)
   - Component-level `useState` minimized; prefers loader data
-- **Persistent state:** Better Auth session cookies (5min browser cache, 365 day server expiry) + localStorage (implicitly via useChat)
-  - Cookie cache: Browser refreshes token every 5 minutes for freshness
-  - Server session: Lasts 365 days; session refresh triggered after 30 days inactivity
-  - Domain attribute: Set to `rentail.space` in production to ensure cross-request persistence
+- **Persistent state:** React Router session cookies + localStorage (implicitly via useChat)
 - **No Redux/Zustand:** Codebase relies on React Router's data layer for state management
 
 ## Git & Commits
@@ -329,12 +306,6 @@ const user = await prisma.user.create({
 
 ## Known Issues & Troubleshooting
 
-**Production Login Sessions Not Persisting**
-- Symptom: Users login and redirect to `/chat`, but session lost immediately
-- Root cause: Better Auth `__Secure-` cookies require explicit Domain attribute; browsers reject missing Domain
-- Fix: `fixSetCookieHeaders()` in `app/routes/auth.tsx` appends `Domain=rentail.space` to cookies in production
-- Verification: Check Safari DevTools → Storage → Cookies → rentail.space → `__Secure-better-auth.session_data` cookie present with Domain attribute
-
 **Vitest RPC Error: "rpc is closed, cannot call onCancel"**
 - Occurs in watch mode, typically with coverage enabled or during test reruns
 - Root causes: Missing dependencies, coverage temp directory race condition, or module resolution issues
@@ -354,7 +325,6 @@ const user = await prisma.user.create({
 **Required (.env.local):**
 - `ANTHROPIC_API_KEY` - Claude AI API key
 - `DATABASE_URL` - PostgreSQL connection string
-- `BETTER_AUTH_SECRET` - Better Auth secret key (for session/token signing)
 - `REDIS_URL` - Redis for stream coordination (default: redis://localhost:6379)
 - `RESEND_API_KEY` - Email service (Resend)
 - `LOGTAIL_TOKEN` / `LOGTAIL_ENDPOINT` - BetterStack logging
@@ -365,19 +335,6 @@ const user = await prisma.user.create({
 - `SENTRY_DSN` / `SENTRY_AUTH_TOKEN` - Error tracking
 - `NODE_ENV` - Environment (development/production/test)
 - `DEBUG` - Debug logging namespaces (e.g., `DEBUG=server,browser` or `DEBUG=*`)
-
-## Monitoring & Observability
-
-**Sentry Integration:**
-- Config: `app/lib/instrument.server.ts` - Initialized only in production
-- Vite plugin: `vite.config.ts` line 16 - Set `sentryReactRouter({ telemetry: false }, config)` to disable telemetry message
-- All uncaught errors automatically captured via Sentry hooks
-
-**Debug Logging:**
-- Package: `debug` npm package with prefixed namespaces
-- Usage: `DEBUG=server,browser pnpm dev` or `DEBUG=* pnpm test` to enable
-- Common namespaces: `server`, `browser`, `agent`, `prisma`, `msw`
-- Example: `const log = debug("server"); log("message")`
 
 ## Project Structure
 
@@ -395,13 +352,11 @@ const user = await prisma.user.create({
   - `chat/route.tsx` - Chat UI component
 - `lib/` - Shared utilities
   - `env.ts` - Env vars + runtime validation
-  - `auth.server.ts` - Better Auth setup (use `satisfies BetterAuthOptions` for plugin types)
   - `prisma.ts` - Prisma client
   - `userProfile.ts` - Working memory schema/validation
   - `systemPrompt.ts` - System prompt generation
   - `findNearbyProperties.ts` - Geographic search
   - `redis-stop-monitor.ts` - Stream coordination
-  - `logger.server.ts` - Debug logging with namespaces (server, browser, agent, prisma, msw)
 - `components/` - Reusable UI components
 - `prompts/` - AI system prompts
 
