@@ -25,26 +25,14 @@ const logger = debug("browser");
  *   - timeout: Navigation timeout in milliseconds
  * @returns The page.
  */
-export async function goto(
-  path: string,
-  headers?: HeadersInit,
-  options?: {
-    waitUntil?: "load" | "domcontentloaded" | "networkidle";
-    timeout?: number;
-  },
-): Promise<Page> {
+export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const context = await newContext();
-
   const page = await context.newPage();
   await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
   await page.setViewportSize({ width: 1024, height: 780 });
-  // Default to "networkidle" for most pages, but allow override for streaming pages.
-  // "networkidle" waits for all network activity to cease, which fails on pages
-  // with background streaming (like chat). Use "domcontentloaded" for those instead.
-  await page.goto(path, {
-    waitUntil: options?.waitUntil ?? "domcontentloaded",
-    timeout: options?.timeout,
-  });
+  await page.goto(path, { waitUntil: "domcontentloaded" });
+  // Wait for React to finish rendering.
+  await page.waitForFunction(() => "__reactRouterContext" in window);
   return page;
 }
 
@@ -66,6 +54,7 @@ export async function newContext(): Promise<BrowserContext> {
     baseURL: `http://localhost:${port}`,
     viewport: { width: 960, height: 600 },
   });
+  context.setGeolocation({ latitude: 33.74901, longitude: -118.1956 });
   context.route("**", blockOutgoingRequests);
   context
     .on("console", (msg) => {
@@ -78,7 +67,7 @@ export async function newContext(): Promise<BrowserContext> {
     });
 
   // Set navigation timeout to 5s less than hook timeout for better error messages
-  context.setDefaultNavigationTimeout(25_000);
+  context.setDefaultNavigationTimeout(10_000);
   // Ensure the __screenshots__ directory exists
   await mkdir(resolve("__screenshots__"), { recursive: true });
 

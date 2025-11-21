@@ -17,11 +17,6 @@ export default async function converse(
   // Verify we're on the chat page
   expect(page.url()).toContain("/chat");
 
-  // Reload the page, this clears any previous state and loads any React
-  // dependencies. We need to wait a little bit for React to finish rendering.
-  await page.reload({ waitUntil: "domcontentloaded" });
-  await page.waitForTimeout(1_000);
-
   // Get the initial count of messages in the database, we expect 2 new messages.
   const messageCount = await prisma.messages.count();
   // Count response bubbles on the page, we expect 1 new response bubble.

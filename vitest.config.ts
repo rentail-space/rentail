@@ -13,7 +13,7 @@ export default defineConfig({
     fileParallelism: false,
     globals: false,
     hideSkippedTests: false,
-    hookTimeout: 90_000, // 90 seconds for beforeAll/afterAll (server + browser startup)
+    hookTimeout: 10_000, // 10 seconds for beforeAll/afterAll (server + browser startup)
     include: ["test/*.test.{ts,tsx}"],
     isolate: true, // NOTE: without isolation sometimes tests hang
     onStackTrace,
@@ -25,7 +25,7 @@ export default defineConfig({
     setupFiles: "test/helpers/setup.ts",
     globalSetup: "test/helpers/globalSetup.ts",
     teardownTimeout: 10_000, // 10 seconds for browser/server cleanup
-    testTimeout: 60_000, // 60 seconds for E2E tests with browser interaction
+    testTimeout: 30_000, // 30 seconds for E2E tests with browser interaction
   },
 });
 
