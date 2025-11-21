@@ -103,6 +103,7 @@ export default betterAuth({
       maxAge: 5 * 60, // Short maxAge ensures session gets refreshed regularly
     },
     expiresIn: 365 * 24 * 60 * 60, // 365 days
+    updateAge: 60 * 60 * 24 * 30, // 30 days
   },
 
   account: {

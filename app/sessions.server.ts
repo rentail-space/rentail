@@ -57,25 +57,39 @@ export async function findUser(headers: Headers): Promise<User | null> {
 
 /**
  * Get the chat for the user from the session. If the user exists, there must be
- * a last chat for the user. Also return the recent messages in the chat.
+ * a last chat for the user. Also return the recent messages in the chat, the HTTP
+ * headers, and whether the user is an admin.
  *
  * @param headers - The headers object
- * @returns The chat, messages, and user if found
+ * @returns The chat, messages, user, HTTP headers, and whether the user is an
+ * admin if found. If the user is not found, return undefined.
  */
-export async function findUserAndLastChat(
-  headers: Headers,
-): Promise<
-  | { chat: Chat; isAdmin: boolean; messages: UIMessage[]; user: User }
+export async function findUserAndLastChat(headers: Headers): Promise<
+  | {
+      chat: Chat;
+      headers: Headers;
+      isAdmin: boolean;
+      messages: UIMessage[];
+      user: User;
+    }
   | undefined
 > {
-  console.log("findUserAndLastChat", JSON.stringify(headers, null, 2));
-  const session = await authServer.api.getSession({ headers });
-  console.log("found session", JSON.stringify(session, null, 2));
-  if (!session?.user) return;
+  console.log(
+    "findUserAndLastChat",
+    JSON.stringify(Object.fromEntries(headers.entries()), null, 2),
+  );
+  const { response, headers: responseHeaders } =
+    await authServer.api.getSession({ headers, returnHeaders: true });
+  console.log("found session", JSON.stringify(response, null, 2));
+  console.log(
+    "session headers",
+    JSON.stringify(Object.fromEntries(responseHeaders.entries()), null, 2),
+  );
+  if (!response?.user) return;
 
   const user = await prisma.user.findUnique({
     include: { chats: { orderBy: { createdAt: "desc" }, take: 1 } },
-    where: { id: session.user.id },
+    where: { id: response?.user.id },
   });
   if (!user) return;
 
@@ -85,7 +99,7 @@ export async function findUserAndLastChat(
   const messages = await recentMessages(chat.id);
 
   const isAdmin = user.email ? adminUsers.includes(user.email) : false;
-  return { chat, isAdmin, messages, user };
+  return { chat, headers: responseHeaders, isAdmin, messages, user };
 }
 
 /**

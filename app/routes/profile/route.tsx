@@ -121,7 +121,7 @@ async function changePassword({
       body: {
         currentPassword,
         newPassword,
-        revokeOtherSessions: false,
+        revokeOtherSessions: true,
       },
       headers: request.headers,
       returnHeaders: true,

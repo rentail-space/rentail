@@ -4,6 +4,7 @@ import {
   type LinksFunction,
   Outlet,
   type UIMatch,
+  data,
   isRouteErrorResponse,
   useRouteError,
 } from "react-router";
@@ -16,7 +17,16 @@ import { findUserAndLastChat } from "./sessions.server";
 export const middleware: Route.MiddlewareFunction[] = [loggingMiddleware];
 
 export async function loader({ request }: Route.LoaderArgs) {
-  return await findUserAndLastChat(request.headers);
+  const found = await findUserAndLastChat(request.headers);
+  return data(
+    found && {
+      chat: found.chat,
+      isAdmin: found.isAdmin,
+      messages: found.messages,
+      user: found.user,
+    },
+    { headers: found?.headers },
+  );
 }
 
 export const headers: HeadersFunction = () => {
