@@ -13,7 +13,7 @@ export default defineConfig(async (config) =>
       tsconfigPaths(),
       devtoolsJson(),
       process.env.NODE_ENV === "production"
-        ? sentryReactRouter({ telemetry: true }, config)
+        ? sentryReactRouter({ telemetry: false }, config)
         : undefined,
     ],
     optimizeDeps: {
