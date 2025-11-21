@@ -59,6 +59,7 @@ describe("Chat page", () => {
         "x-vercel-ip-latitude": "34.04592",
         "x-vercel-ip-longitude": "-118.34574",
       });
+
       await converse(
         page,
         "looking for a pop-up retail space for my clothing boutique",

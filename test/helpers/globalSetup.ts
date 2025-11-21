@@ -7,6 +7,7 @@
  */
 
 import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import seedCenters from "prisma/seed/seedCenters";
 import prisma from "~/lib/prisma";
 import msw from "../mocks/mswHandlers";
@@ -14,6 +15,8 @@ import { port } from "./launchBrowser";
 import { launchServer } from "./launchServer";
 import { removeNewHTML } from "./toMatchInnerHTML";
 import { removeDiffImages } from "./toMatchScreenshot";
+
+const execFileAsync = promisify(execFile);
 
 export default async function setup() {
   // Clean up database and seed it again
@@ -31,7 +34,7 @@ export default async function setup() {
 }
 
 export async function teardown() {
-  execFile("terminal-notifier", [
+  await execFileAsync("terminal-notifier", [
     "-sound",
     "default",
     "-title",

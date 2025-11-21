@@ -120,7 +120,9 @@ async function updatePassword({
     return { error: "Your new password must be at least 8 characters long" };
   if (newPassword !== confirmPassword)
     return { error: "Your new password and confirmation do not match" };
-  if (await bcrypt.compare(currentPassword, user.passwordHash ?? "anonymous"))
+  if (
+    !(await bcrypt.compare(currentPassword, user.passwordHash ?? "anonymous"))
+  )
     return { error: "Your current password is incorrect, please try again" };
 
   try {
