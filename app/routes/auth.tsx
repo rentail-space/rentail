@@ -47,13 +47,10 @@ function fixSetCookieHeaders(headers: Headers): Headers {
   const cookies = fixed.getSetCookie();
 
   fixed.delete("set-cookie");
-  for (const cookie of cookies) {
-    if (cookie.includes("__Secure-") && !cookie.includes("Domain=")) {
+  for (const cookie of cookies)
+    if (cookie.includes("__Secure-") && !cookie.includes("Domain="))
       fixed.append("set-cookie", `${cookie}; Domain=rentail.space`);
-    } else {
-      fixed.append("set-cookie", cookie);
-    }
-  }
+    else fixed.append("set-cookie", cookie);
 
   return fixed;
 }
