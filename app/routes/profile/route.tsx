@@ -1,8 +1,12 @@
 import { captureException } from "@sentry/react-router";
+import bcrypt from "bcrypt";
+import { invariant } from "es-toolkit";
+import type { User } from "prisma/generated/client";
 import { Activity, useState } from "react";
-import { data, redirect, useLoaderData } from "react-router";
+import { redirect, useLoaderData } from "react-router";
 import { twMerge } from "tailwind-merge";
-import authServer from "~/lib/auth.server";
+import { sendVerificationEmail } from "~/emails/sendEmails";
+import prisma from "~/lib/prisma";
 import { findUserAndLastChat } from "~/sessions.server";
 import ProfileEmailForm from "./ProfileEmailForm";
 import ProfileNameForm from "./ProfileNameForm";
@@ -17,47 +21,43 @@ export async function loader({ request }: { request: Request }) {
 export async function action({ request }: { request: Request }) {
   const root = await findUserAndLastChat(request.headers);
   if (!root || root.user.isAnonymous) throw redirect("/auth");
+  const user = root.user;
 
   const form = await request.formData();
   const name = form.get("name")?.toString();
-  if (name) return await updateName({ user: root.user, name, request });
+  if (name) return await updateName({ user, name });
 
   const email = form.get("email")?.toString();
-  if (email)
-    return await sendVerificationEmail({ email, request, user: root.user });
+  if (email) return await updateEmail({ newEmail: email, request, user });
 
   const currentPassword = form.get("currentPassword")?.toString();
   const newPassword = form.get("newPassword")?.toString();
   const confirmPassword = form.get("confirmPassword")?.toString();
   if (currentPassword && newPassword && confirmPassword)
-    return await changePassword({
+    return await updatePassword({
       confirmPassword,
       currentPassword,
       newPassword,
-      request,
-      user: root.user,
+      user,
     });
 
-  return { error: "No action to perform" };
+  return { error: "What did you want to update?" };
 }
 
 async function updateName({
   user,
   name,
-  request,
 }: {
   user: { id: string };
   name: string;
-  request: Request;
 }) {
   console.info("Updating name for user %s", user.id);
   try {
-    const { headers } = await authServer.api.updateUser({
-      body: { name },
-      headers: request.headers,
-      returnHeaders: true,
+    await prisma.user.update({
+      data: { name },
+      where: { id: user.id },
     });
-    return data({ success: "Name updated successfully" }, { headers });
+    return { success: "Name updated successfully" };
   } catch (error) {
     captureException(error);
     console.error("Error updating name for user %s: %s", user.id, error);
@@ -65,26 +65,24 @@ async function updateName({
   }
 }
 
-async function sendVerificationEmail({
-  email,
+async function updateEmail({
+  newEmail,
   request,
   user,
 }: {
-  email: string;
+  newEmail: string;
   request: Request;
-  user: { id: string };
+  user: User;
 }) {
   console.info("Sending verification email to user %s", user.id);
   try {
-    const { headers } = await authServer.api.sendVerificationEmail({
-      body: {
-        callbackURL: new URL("/profile", request.url).toString(),
-        email,
-      },
-      headers: request.headers,
-      returnHeaders: true,
+    invariant(user.name, "User has no name");
+    await sendVerificationEmail({
+      email: newEmail,
+      name: user.name,
+      url: new URL("/email/verify", request.url).toString(),
     });
-    return data({ success: "Verification email sent" }, { headers });
+    return { success: "Verification email sent" };
   } catch (error) {
     captureException(error);
     console.error(
@@ -96,18 +94,16 @@ async function sendVerificationEmail({
   }
 }
 
-async function changePassword({
-  user,
+async function updatePassword({
   confirmPassword,
   currentPassword,
   newPassword,
-  request,
+  user,
 }: {
-  user: { id: string };
   confirmPassword: string;
   currentPassword: string;
   newPassword: string;
-  request: Request;
+  user: User;
 }) {
   console.info("Changing password for user %s", user.id);
 
@@ -115,18 +111,16 @@ async function changePassword({
     return { error: "Your new password must be at least 8 characters long" };
   if (newPassword !== confirmPassword)
     return { error: "Your new password and confirmation do not match" };
+  if (await bcrypt.compare(currentPassword, user.passwordHash ?? "anonymous"))
+    return { error: "Your current password is incorrect, please try again" };
 
   try {
-    const { headers } = await authServer.api.changePassword({
-      body: {
-        currentPassword,
-        newPassword,
-        revokeOtherSessions: true,
-      },
-      headers: request.headers,
-      returnHeaders: true,
+    const passwordHash = await bcrypt.hash(newPassword, 10);
+    await prisma.user.update({
+      data: { passwordHash },
+      where: { id: user.id },
     });
-    return data({ success: "Password changed successfully" }, { headers });
+    return { success: "Password changed successfully" };
   } catch (error) {
     captureException(error);
     console.error("Error changing password for user %s: %s", user.id, error);

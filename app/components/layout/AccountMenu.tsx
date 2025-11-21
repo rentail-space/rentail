@@ -1,7 +1,6 @@
 import { ShieldIcon, UserIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouteLoaderData } from "react-router";
-import authClient from "~/lib/auth.client";
 import type { loader as rootLoader } from "~/root";
 
 export default function AccountMenu() {
@@ -132,8 +131,7 @@ function DropdownMenu({
             <button
               type="button"
               onClick={async () => {
-                await authClient.signOut();
-                window.location.href = "/";
+                window.location.href = "/auth/sign-out";
               }}
               className="w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
             >
