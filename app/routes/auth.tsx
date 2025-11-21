@@ -5,6 +5,7 @@ import { useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
 import { ulid } from "ulid";
 import authServer from "~/lib/auth.server";
+import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { updateNewUser } from "~/sessions.server";
 import type { Route } from "./+types/auth";
@@ -33,6 +34,28 @@ export async function action({ request }: Route.ActionArgs): Promise<Response> {
       headers: { "Content-Type": "application/json" },
     });
   }
+}
+
+/**
+ * Add Domain attribute to session cookies for production Safari compatibility.
+ * Better Auth's __Secure- prefix cookies need explicit Domain to be accepted.
+ */
+function fixSetCookieHeaders(headers: Headers): Headers {
+  if (!env.isProduction) return headers;
+
+  const fixed = new Headers(headers);
+  const cookies = fixed.getSetCookie();
+
+  fixed.delete("set-cookie");
+  for (const cookie of cookies) {
+    if (cookie.includes("__Secure-") && !cookie.includes("Domain=")) {
+      fixed.append("set-cookie", `${cookie}; Domain=rentail.space`);
+    } else {
+      fixed.append("set-cookie", cookie);
+    }
+  }
+
+  return fixed;
 }
 
 /**
@@ -69,7 +92,7 @@ async function signUpEmail({
       returnHeaders: true,
     });
   await updateNewUser({ chatId: ulid(), headers, userId: response.user.id });
-  return redirect("/chat", { headers: returnedHeaders });
+  return redirect("/chat", { headers: fixSetCookieHeaders(returnedHeaders) });
 }
 
 /**
@@ -96,7 +119,7 @@ async function signInEmail({
     headers,
     returnHeaders: true,
   });
-  return redirect("/chat", { headers: responseHeaders });
+  return redirect("/chat", { headers: fixSetCookieHeaders(responseHeaders) });
 }
 
 export default function AuthPage() {
