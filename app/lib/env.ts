@@ -23,7 +23,6 @@ export default {
     : env.get("DATABASE_URL").required().asUrlString(),
   MAPBOX_TOKEN: env.get("MAPBOX_TOKEN").required(false).asString(),
   RESEND_API_KEY: env.get("RESEND_API_KEY").required(true).asString(),
-  SESSION_SECRET: env.get("SESSION_SECRET").required(true).asString(),
 
   REDIS_URL: env
     .get("REDIS_URL")

@@ -326,7 +326,6 @@ const user = await prisma.user.create({
 - `ANTHROPIC_API_KEY` - Claude AI API key
 - `DATABASE_URL` - PostgreSQL connection string
 - `REDIS_URL` - Redis for stream coordination (default: redis://localhost:6379)
-- `SESSION_SECRET` - Session management key
 - `RESEND_API_KEY` - Email service (Resend)
 - `LOGTAIL_TOKEN` / `LOGTAIL_ENDPOINT` - BetterStack logging
 - `PUSHGATEWAY_URL` / `PUSHGATEWAY_TOKEN` - BetterStack metrics
