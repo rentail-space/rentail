@@ -119,6 +119,10 @@ export default betterAuth({
       ipAddressHeaders: ["x-client-ip", "x-forwarded-for"],
     },
     useSecureCookies: env.isProduction,
+    crossSubDomainCookies: {
+      enabled: true,
+      domain: env.isProduction ? "rentail.space" : "localhost",
+    },
   },
 
   logger: {

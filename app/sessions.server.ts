@@ -68,7 +68,9 @@ export async function findUserAndLastChat(
   | { chat: Chat; isAdmin: boolean; messages: UIMessage[]; user: User }
   | undefined
 > {
+  console.log("findUserAndLastChat", JSON.stringify(headers, null, 2));
   const session = await authServer.api.getSession({ headers });
+  console.log("found session", JSON.stringify(session, null, 2));
   if (!session?.user) return;
 
   const user = await prisma.user.findUnique({
