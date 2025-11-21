@@ -1,7 +1,8 @@
 import prisma from "app/lib/prisma";
 import debug from "debug";
-import { readdir, readFile } from "node:fs/promises";
-import { basename, join, resolve } from "node:path";
+import { readdirSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import path, { basename, resolve } from "node:path";
 import { z } from "zod";
 
 const schema = z.object({
@@ -35,17 +36,19 @@ const schema = z.object({
     .default([]),
 });
 
+const logger = debug("seed");
+
 export default async function seedCenters() {
-  debug("seed")("Seeding centers");
+  logger("Seeding centers");
 
   const dirname = resolve("prisma/seed");
-  const filenames = (await readdir(dirname)).filter((filename) =>
+  const filenames = readdirSync(dirname).filter((filename) =>
     filename.endsWith(".json"),
   );
 
   for (const filename of filenames) {
-    debug("seed")("Seeding %s", filename);
-    const data = await readFile(join(dirname, filename), "utf-8");
+    logger("Seeding %s", filename);
+    const data = await readFile(path.resolve(dirname, filename), "utf-8");
     const center = schema.parse(JSON.parse(data));
 
     // Generate missing fields
@@ -77,5 +80,5 @@ export default async function seedCenters() {
       where: { id },
     });
   }
-  debug("seed")("Seeded %d centers", filenames.length);
+  logger("Seeded %d centers", filenames.length);
 }

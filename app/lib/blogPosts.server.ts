@@ -1,7 +1,7 @@
 import { invariant } from "es-toolkit";
 import { DateTime } from "luxon";
-import { readFileSync } from "node:fs";
-import { readFile, readdir } from "node:fs/promises";
+import { readFileSync, readdirSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import path, { basename, join } from "node:path";
 import removeMd from "remove-markdown";
 import parseFrontMatter from "~/lib/parseFrontMatter";
@@ -26,13 +26,13 @@ export type BlogPost = {
  * @returns An array of blog posts.
  */
 export async function recentBlogPosts(): Promise<BlogPost[]> {
-  const filenames = await readdir(dirname);
+  const filenames = readdirSync(dirname);
   const now = DateTime.now();
   return filenames
     .filter((filename) => filename.endsWith(".md"))
     .map((filename) => {
       const published = getPublishedData(filename).toJSDate();
-      const content = readFileSync(join(dirname, filename), "utf8");
+      const content = readFileSync(path.resolve(dirname, filename), "utf8");
       const { attributes, body } = parseFrontMatter<{
         alt: string;
         image: string;

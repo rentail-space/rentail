@@ -3,6 +3,8 @@ import debug from "debug";
 import Redis from "ioredis";
 import env from "~/lib/env";
 
+const logger = debug("chat");
+
 /**
  * Creates a Redis-based stop signal monitor for a chat.
  *
@@ -18,7 +20,7 @@ export async function monitorStopSignal(chatId: string): Promise<{
   const key = `chat:stop:${chatId}`;
   const abort = new AbortController();
   abort.signal.addEventListener("abort", () => {
-    debug("chat")("Stop signal received, aborting %s", chatId);
+    logger("Stop signal received, aborting %s", chatId);
   });
 
   // Subscribe to abort signal from another server instance

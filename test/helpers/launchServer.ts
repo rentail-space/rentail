@@ -1,9 +1,11 @@
 import debug from "debug";
 import { delay, invariant } from "es-toolkit";
-import { type ChildProcess, execSync, fork } from "node:child_process";
+import { type ChildProcess, fork } from "node:child_process";
 import { resolve } from "node:path";
 
 let worker: ChildProcess | undefined;
+
+const logger = debug("server");
 
 /**
  * Launch a new server instance.
@@ -13,11 +15,7 @@ let worker: ChildProcess | undefined;
 export async function launchServer(port: number): Promise<void> {
   if (worker) return;
 
-  debug("server")("launching server");
-  try {
-    const pids = execSync(`lsof -ti:${port}`, { encoding: "utf8" }).split("\n");
-    for (const pid of pids) execSync(`kill -9 ${pid}`, { stdio: "ignore" });
-  } catch {}
+  logger("launching server");
 
   // Start the server as forked process, that way we don't share the same node
   // instance, which could cause issues with some libraries (eg Prisma)
@@ -41,7 +39,7 @@ export async function launchServer(port: number): Promise<void> {
           reject(new Error(`Worker error: ${msg.error}`));
       })
       .on("error", (error) => {
-        debug("server")("worker error:", error);
+        logger("worker error:", error);
         reject(error);
       })
       .on("exit", (code) => {
@@ -49,7 +47,7 @@ export async function launchServer(port: number): Promise<void> {
       });
   });
 
-  debug("server")("server is ready");
+  logger("server is ready");
 }
 
 /**

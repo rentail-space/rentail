@@ -10,6 +10,8 @@ import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import { ulid } from "ulid";
 
+const logger = debug("msw");
+
 /**
  * Custom mock responses that you can define for specific test scenarios
  */
@@ -68,7 +70,7 @@ export function findMockResponse(body: object): ReadableStream<Uint8Array> {
   // Get the text content from the message
   const messageText = lastMessage.content.map((part) => part.text).join(" ");
 
-  debug("msw")(
+  logger(
     "Anthropic API mock - processing message: %s... ",
     messageText.slice(0, 100),
   );
@@ -141,7 +143,7 @@ export default function createStreamingResponse(
           controller.enqueue(encoder.encode(messageStop));
 
           controller.close();
-          debug("msw")("streaming response now closed");
+          logger("streaming response now closed");
           return;
         }
 

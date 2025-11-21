@@ -10,8 +10,8 @@ import Welcome from "./Welcome";
 
 // Test-only: stores last sent email HTML for visual regression testing
 export let lastEmailHtml: string | null = null;
-
 const resend = new Resend(env.RESEND_API_KEY);
+const logger = debug("email");
 
 export async function sendWelcomeEmail({
   email,
@@ -85,7 +85,7 @@ async function sendEmail({
     });
     if (error) throw error;
 
-    debug("email")("%s sent to %s", subject, email);
+    logger("%s sent to %s", subject, email);
   } catch (error) {
     captureException(error, { extra: { email } });
     console.error("Error sending %s email to %s: %s", subject, email, error);

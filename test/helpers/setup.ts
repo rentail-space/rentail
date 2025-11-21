@@ -6,7 +6,7 @@
  */
 
 import * as Sentry from "@sentry/react-router";
-import { beforeAll } from "vitest";
+import { afterAll, beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
 import "./toMatchInnerHTML";
 import "./toMatchScreenshot";
@@ -21,4 +21,8 @@ beforeAll(async () => {
     prisma.verification.deleteMany(),
     prisma.waitlist.deleteMany(),
   ]);
+});
+
+afterAll(async () => {
+  await prisma.$disconnect();
 });

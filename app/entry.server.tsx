@@ -1,6 +1,5 @@
 import * as Sentry from "@sentry/react-router";
 import { handleRequest } from "@vercel/react-router/entry.server";
-import debug from "debug";
 import type {
   ActionFunctionArgs,
   EntryContext,
@@ -28,11 +27,8 @@ if (env.isProduction && env.SENTRY_DSN) {
   });
 }
 
-if (env.isTest) {
-  debug("msw")("Initializing MSW for test mode");
-  // Initialize MSW in test mode (on the server side)
-  msw.listen({ onUnhandledRequest: "error" });
-}
+// Initialize MSW in test mode (on the server side)
+if (env.isTest) msw.listen({ onUnhandledRequest: "error" });
 
 export function getLoadContext() {
   return {};

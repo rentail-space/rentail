@@ -2,13 +2,12 @@
 
 import { expect } from "@playwright/test";
 import { invariant } from "es-toolkit";
+import { readdirSync, unlinkSync } from "node:fs";
 import {
   access,
   constants,
   mkdir,
   readFile,
-  readdir,
-  unlink,
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
@@ -99,8 +98,8 @@ function getTestName(): string {
 }
 
 export async function removeNewHTML() {
-  const list = await readdir(dirname);
+  const list = readdirSync(dirname);
   for (const file of list)
     if (file.endsWith(".new.html") || file.endsWith(".html.diff"))
-      await unlink(path.resolve(dirname, file));
+      unlinkSync(path.resolve(dirname, file));
 }

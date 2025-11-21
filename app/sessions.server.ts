@@ -34,6 +34,8 @@ const botUserAgents = [
 
 const adminUsers = ["assaf@labnotes.org"];
 
+const logger = debug("sessions");
+
 /**
  * We use Redis to cache the location information for 30 days so we don't have
  * to geocode the IP address every time.
@@ -308,7 +310,7 @@ async function isBotByIP(ip: string): Promise<boolean> {
     );
   } catch {
     // If reverse DNS lookup fails, assume it's not a Google IP
-    debug("server")("Reverse DNS lookup failed for IP: %s", ip);
+    logger("Reverse DNS lookup failed for IP: %s", ip);
     return false;
   }
 }

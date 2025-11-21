@@ -1,9 +1,9 @@
 #!/usr/bin/env tsx
 import { invariant, partition } from "es-toolkit";
 import { DateTime } from "luxon";
-import { readFileSync, writeFileSync } from "node:fs";
-import { readdir, rename } from "node:fs/promises";
-import { basename, join, resolve } from "node:path";
+import { readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { rename } from "node:fs/promises";
+import path, { basename, resolve } from "node:path";
 import parseFrontMatter from "~/lib/parseFrontMatter";
 
 /**
@@ -32,9 +32,9 @@ const [past, future] = await splitPosts();
 await updateFuturePosts(past, future);
 
 async function splitPosts(): Promise<[BlogPost[], BlogPost[]]> {
-  const posts = (await readdir(dir))
+  const posts = readdirSync(dir)
     .filter((filename) => filename.endsWith(".md"))
-    .map((filename) => join(dir, filename))
+    .map((filename) => path.resolve(dir, filename))
     .map((filename) => ({
       filename,
       content: readFileSync(filename, "utf8"),

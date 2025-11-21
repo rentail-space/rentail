@@ -3,13 +3,12 @@
 import { expect } from "@playwright/test";
 import { invariant } from "es-toolkit";
 import looksSame from "looks-same";
+import { readdirSync, unlinkSync } from "node:fs";
 import {
   access,
   constants,
   mkdir,
   readFile,
-  readdir,
-  unlink,
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
@@ -48,7 +47,7 @@ expect.extend({
     await page.waitForTimeout(100);
 
     const name = options?.name || getTestName();
-    const filename = path.join(dirname, `${name}.png`);
+    const filename = path.resolve(dirname, `${name}.png`);
     const screenshot = await locator.screenshot({
       animations: "disabled",
       caret: "hide",
@@ -79,9 +78,9 @@ expect.extend({
     );
 
     if (!equal) {
-      const diffFilename = path.join(dirname, `${name}.diff.png`);
+      const diffFilename = path.resolve(dirname, `${name}.diff.png`);
       await diffImage.save(diffFilename);
-      await writeFile(path.join(dirname, `${name}.new.png`), screenshot);
+      await writeFile(path.resolve(dirname, `${name}.new.png`), screenshot);
       return {
         message: () => `Image differs from baseline see ${diffFilename}`,
         pass: false,
@@ -105,8 +104,8 @@ function getTestName(): string {
 }
 
 export async function removeDiffImages() {
-  const list = await readdir(dirname);
+  const list = readdirSync(dirname);
   for (const file of list)
     if (file.endsWith(".diff.png") || file.endsWith(".new.png"))
-      await unlink(path.join(dirname, file));
+      unlinkSync(path.resolve(dirname, file));
 }
