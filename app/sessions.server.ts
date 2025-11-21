@@ -425,18 +425,17 @@ export async function signUpEmail({
       data: { isAnonymous: false, name, email, passwordHash },
       where: { id: anon.id },
     });
+    return await createSession({ requestHeaders, userId: anon.id });
   } else {
-    const user = await createUser({
+    const newUser = await createUser({
       chatId: ulid(),
       email,
       name,
       passwordHash,
       requestHeaders,
     });
-    return await createSession({ requestHeaders, userId: user.id });
+    return await createSession({ requestHeaders, userId: newUser.id });
   }
-
-  return new Headers({ "set-cookie": await commitSession(session) });
 }
 
 export async function signOut(requestHeaders: Headers): Promise<Headers> {
