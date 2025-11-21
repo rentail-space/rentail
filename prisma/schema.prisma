@@ -55,6 +55,7 @@ model User {
   isBot            Boolean   @map("is_bot")             @default(false)
   metadata         Json      @map("metadata")           @db.Json
   name             String?   @map("name")
+  passwordHash     String?   @map("password_hash")
   referrer         String?   @map("referrer")
   sessions         Session[]
   updatedAt        DateTime  @map("updated_at")         @updatedAt

@@ -3,11 +3,7 @@ import { invariant } from "es-toolkit";
 import { AlertCircle } from "lucide-react";
 import { useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
-import { ulid } from "ulid";
-import authServer from "~/lib/auth.server";
-import env from "~/lib/env";
-import prisma from "~/lib/prisma";
-import { updateNewUser } from "~/sessions.server";
+import { signInEmail, signUpEmail } from "~/sessions.server";
 import type { Route } from "./+types/auth";
 
 export const handle = { hideLayout: true };
@@ -21,9 +17,30 @@ clientLoader.hydrate = true as const;
 export async function action({ request }: Route.ActionArgs): Promise<Response> {
   const form = await request.formData();
   try {
-    return form.has("name")
-      ? await signUpEmail({ form, headers: request.headers })
-      : await signInEmail({ form, headers: request.headers });
+    const email = form.get("email")?.toString();
+    const password = form.get("password")?.toString();
+    invariant(email, "Email is required");
+    invariant(password, "Password is required");
+
+    if (form.has("name")) {
+      const name = form.get("name")?.toString();
+      invariant(name, "Name is required");
+
+      const returnedHeaders = await signUpEmail({
+        email,
+        name,
+        password,
+        requestHeaders: request.headers,
+      });
+      return redirect("/chat", { headers: returnedHeaders });
+    } else {
+      const responseHeaders = await signInEmail({
+        email,
+        password,
+        requestHeaders: request.headers,
+      });
+      return redirect("/chat", { headers: responseHeaders });
+    }
   } catch (error) {
     captureException(error, { extra: { form } });
     const errorMessage =
@@ -34,93 +51,6 @@ export async function action({ request }: Route.ActionArgs): Promise<Response> {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
-
-/**
- * Add Domain attribute to session cookies for production Safari compatibility.
- * Better Auth's __Secure- prefix cookies need explicit Domain to be accepted.
- */
-function fixSetCookieHeaders(headers: Headers): Headers {
-  if (!env.isProduction) return headers;
-
-  const fixed = new Headers(headers);
-  const cookies = fixed.getSetCookie();
-
-  fixed.delete("set-cookie");
-  for (const cookie of cookies)
-    if (cookie.includes("__Secure-") && !cookie.includes("Domain="))
-      fixed.append("set-cookie", `${cookie}; Domain=rentail.space`);
-    else fixed.append("set-cookie", cookie);
-
-  return fixed;
-}
-
-/**
- * Sign up with email and password. Redirects to the chat page on success.  If
- * the user already exists, it will try to sign them in instead.
- *
- * @param form - The form data containing the email, password, and name.
- * @param headers - The headers object containing the request headers. Used to
- * associate anonymous user with the new user.
- * @returns A redirect response to the chat page.
- * @throws An error if the email or password is invalid, or if the user already exists.
- */
-async function signUpEmail({
-  form,
-  headers,
-}: {
-  form: FormData;
-  headers: Headers;
-}): Promise<Response> {
-  const email = form.get("email")?.toString();
-  const name = form.get("name")?.toString();
-  const password = form.get("password")?.toString();
-  invariant(name, "Name is required");
-  invariant(email, "Email is required");
-  invariant(password, "Password is required");
-
-  const user = await prisma.user.findUnique({ where: { email } });
-  if (user) return await signInEmail({ form, headers });
-
-  const { response, headers: returnedHeaders } =
-    await authServer.api.signUpEmail({
-      body: { email, password, name, rememberMe: true },
-      headers,
-      returnHeaders: true,
-    });
-  await updateNewUser({
-    chatId: ulid(),
-    requestHeaders: headers,
-    userId: response.user.id,
-  });
-  return redirect("/chat", { headers: fixSetCookieHeaders(returnedHeaders) });
-}
-
-/**
- * Sign in with email and password. Returns a redirect response to the chat page
- * on success, throws an error if the email or password are invalid.
- *
- * @param form - The form data containing the email and password.
- * @returns A redirect response to the chat page
- * @throws An error if the email or password are invalid
- */
-async function signInEmail({
-  form,
-  headers,
-}: {
-  form: FormData;
-  headers: Headers;
-}): Promise<Response> {
-  const email = form.get("email")?.toString();
-  const password = form.get("password")?.toString();
-  invariant(email, "Email is required");
-  invariant(password, "Password is required");
-  const { headers: responseHeaders } = await authServer.api.signInEmail({
-    body: { email, password, rememberMe: true },
-    headers,
-    returnHeaders: true,
-  });
-  return redirect("/chat", { headers: fixSetCookieHeaders(responseHeaders) });
 }
 
 export default function AuthPage() {

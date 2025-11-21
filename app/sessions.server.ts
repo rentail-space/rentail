@@ -1,15 +1,26 @@
 import { captureException } from "@sentry/react-router";
 import type { TextUIPart, UIMessage } from "ai";
+import bcrypt from "bcrypt";
 import debug from "debug";
 import { invariant } from "es-toolkit";
 import { createIsbotFromList, list } from "isbot";
 import { reverse } from "node:dns/promises";
 import type { Chat, User } from "prisma/generated/client";
+import type { UserGetPayload } from "prisma/generated/models";
+import { type Session, createCookieSessionStorage } from "react-router";
 import { ulid } from "ulid";
 import zod from "zod";
-import authServer from "~/lib/auth.server";
 import prisma from "~/lib/prisma";
 import welcome from "~/prompts/welcome.md?raw";
+import env from "./lib/env";
+
+type SessionData = {
+  token: string;
+};
+
+type SessionFlashData = {
+  error: string;
+};
 
 // List of user agents that are considered bots
 const botUserAgents = [
@@ -39,56 +50,71 @@ const cachedLocation = zod
   })
   .partial();
 
+const { getSession, commitSession, destroySession } =
+  createCookieSessionStorage<SessionData, SessionFlashData>({
+    // a Cookie from `createCookie` or the CookieOptions to create one
+    cookie: {
+      name: "__session",
+      domain: env.isProduction ? "rentail.space" : "localhost",
+      httpOnly: true,
+      maxAge: 365 * 24 * 60 * 60, // 365 days
+      path: "/",
+      sameSite: "lax",
+      secrets: [env.BETTER_AUTH_SECRET],
+      secure: true,
+    },
+  });
+
 /**
- * Get the chat for the user from the session. If the user exists, there must be
- * a last chat for the user. Also return the recent messages in the chat, the HTTP
- * headers, and whether the user is an admin.
+ * Get the most recent chat for the user from the session. If the user exists,
+ * there must be a last chat for the user. Also return the recent messages in
+ * the chat, the HTTP headers with the session cookie set, and whether the user
+ * is an admin.
  *
  * @param requestHeaders - The request headers object
- * @returns The chat, messages, response headers, user, and whether the user is an
- * admin if found. If the user is not found, return undefined.
+ * @returns The last chat, messages, response headers with the session cookie
+ * set, user, and whether the user is an admin. If the user is not found, return undefined.
  */
 export async function findUserAndLastChat(requestHeaders: Headers): Promise<
   | {
       chat: Chat;
-      responseHeaders: Headers;
       isAdmin: boolean;
       messages: UIMessage[];
+      responseHeaders: Headers;
       user: User;
     }
   | undefined
 > {
-  const { response, headers: responseHeaders } =
-    await authServer.api.getSession({
-      headers: requestHeaders,
-      returnHeaders: true,
-    });
-  if (!response?.user) return;
+  const session = await userFromCookie(requestHeaders);
+  if (!("user" in session)) return;
 
-  const user = await prisma.user.findUnique({
-    include: { chats: { orderBy: { createdAt: "desc" }, take: 1 } },
-    where: { id: response?.user.id },
+  const { isAdmin, user } = session;
+  const chat = await prisma.chat.findFirst({
+    orderBy: { createdAt: "desc" },
+    take: 1,
+    where: { userId: user.id },
   });
-  if (!user) return;
-
-  const chat = user.chats[0];
-  if (!chat) return;
+  invariant(chat, "No chat found for user");
 
   const messages = await recentMessages(chat.id);
-
-  const isAdmin = user.email ? adminUsers.includes(user.email) : false;
-  return { chat, responseHeaders, isAdmin, messages, user };
+  const responseHeaders = new Headers({
+    "set-cookie": await commitSession(session.cookieSession),
+  });
+  return { chat, isAdmin, messages, responseHeaders, user };
 }
 
 /**
- * Get the chat for the user from the session. If the user exists, there must be
- * a chat with the given chat ID, and it must belong to that user.  Also return
- * the recent messages in the chat.
+ * Get the chat with the given chat ID for the user from the session. If the
+ * user exists, there must be a chat with the given chat ID, and it must belong
+ * to that user. Also return the recent messages in the chat, the HTTP headers
+ * with the session cookie set, and whether the user is an admin. If the user is
+ * not found, or if the chat ID is mismatched, return undefined.
  *
  * @param chatId - The ID of the chat to find
  * @param requestHeaders - The request headers object
- * @returns The chat, messages, response headers, and user if found
- * @throws If the user is not found or the chat ID mismatch is detected
+ * @returns The chat, messages, response headers with the session cookie set,
+ * user, and whether the user is an admin.
+ * @throws If the user is not found or the chat ID is mismatched
  */
 export async function findUserAndChatById({
   chatId,
@@ -97,37 +123,38 @@ export async function findUserAndChatById({
   chatId: string;
   requestHeaders: Headers;
 }): Promise<
-  | { chat: Chat; messages: UIMessage[]; responseHeaders: Headers; user: User }
+  | {
+      chat: Chat;
+      isAdmin: boolean;
+      messages: UIMessage[];
+      responseHeaders: Headers;
+      user: User;
+    }
   | undefined
 > {
-  const { response, headers: responseHeaders } =
-    await authServer.api.getSession({
-      headers: requestHeaders,
-      returnHeaders: true,
-    });
-  if (!response?.user) return;
+  const session = await userFromCookie(requestHeaders);
+  if (!("user" in session)) return;
 
-  const user = await prisma.user.findUnique({
-    include: { chats: { where: { id: chatId } } },
-    where: { id: response?.user.id },
+  const { isAdmin, user } = session;
+  const chat = await prisma.chat.findUniqueOrThrow({
+    where: { id: chatId, user: { id: user.id } },
   });
-  if (!user) return;
-
-  const chat = user.chats.find((chat) => chat.id === chatId);
-  if (!chat) return;
 
   const messages = await recentMessages(chat.id);
-  return { chat, messages, responseHeaders, user };
+  const responseHeaders = new Headers({
+    "set-cookie": await commitSession(session.cookieSession),
+  });
+  return { chat, isAdmin, messages, responseHeaders, user };
 }
 
 /**
- * Find or create a user and chat. Returns the chat, which references the user,
- * the recent messages in the chat, and the user. Also returns the HTTP headers
- * which have the session cookie set, and the user agent.
+ * Find or create a user and chat. Also returns the HTTP headers which have the
+ * session cookie set. If the user and chat are not found, create a new user and
+ * chat.
  *
  * @param chatId - The ID of the chat to find or create
  * @param requestHeaders - The request headers object
- * @returns The chat, recent messages, user, and HTTP headers
+ * @returns The chat, recent messages, user, and HTTP headers.
  */
 export async function findOrCreateUser({
   chatId,
@@ -137,77 +164,38 @@ export async function findOrCreateUser({
   requestHeaders: Headers;
 }): Promise<{
   chat: Chat;
+  isAdmin: boolean;
   responseHeaders: Headers;
   messages: UIMessage[];
   user: User;
 }> {
-  const found = await findUserAndChatById({ requestHeaders, chatId });
-  if (found) return { ...found, responseHeaders: new Headers() };
+  const session = await userFromCookie(requestHeaders);
+  // Look in session to see if we already have a user with that chat ID.
+  if ("user" in session) {
+    const { isAdmin, user } = session;
+    const chat = await prisma.chat.findUniqueOrThrow({
+      where: { id: chatId, user: { id: user.id } },
+    });
 
-  // We're going to sign in the anonymous user so we can get the HTTP headers
-  const { response, headers: signInHeaders } =
-    await authServer.api.signInAnonymous({ returnHeaders: true });
-  const anonUser = response?.user;
-  invariant(anonUser, "Anonymous user ID is required");
+    const messages = await recentMessages(chat.id);
+    const responseHeaders = new Headers({
+      "set-cookie": await commitSession(session.cookieSession),
+    });
+    return { chat, isAdmin, messages, responseHeaders, user };
+  }
 
-  // Update the anonymous user with the initial fields (IP, geocode, user agent,
-  // referrer, etc.). Make sure it has initial chat with the welcome message.
-  const { chat, messages, user } = await updateNewUser({
+  const user = await createUser({
     chatId,
-    requestHeaders: requestHeaders,
-    userId: anonUser.id,
+    requestHeaders,
   });
-  return { chat, responseHeaders: signInHeaders, messages, user };
-}
-
-/**
- * Update the new user with the initial fields (IP, geocode, user agent,
- * referrer, etc.). Make sure it has initial chat with a welcome message.
- *
- * @param chatId - The ID of the chat to create
- * @param requestHeaders - The request headers object
- * @param userId - The user ID to update
- * @returns The updated user, chat, and messages
- */
-export async function updateNewUser({
-  chatId,
-  requestHeaders,
-  userId,
-}: {
-  chatId: string;
-  requestHeaders: Headers;
-  userId: string;
-}): Promise<{ chat: Chat; messages: UIMessage[]; user: User }> {
-  const existingUser = await prisma.user.findUniqueOrThrow({
-    where: { id: userId },
-  });
-  const user = await prisma.user.update({
-    data: {
-      ...(await getInitialFields({ existingUser, requestHeaders })),
-      chats: {
-        create: {
-          id: chatId,
-          metadata: {},
-          messages: {
-            create: [
-              {
-                content: [{ type: "text", text: welcome }],
-                id: ulid(),
-                role: "assistant",
-                type: "text",
-              },
-            ],
-          },
-        },
-      },
-    },
-    include: { chats: { include: { messages: true } } },
-    where: { id: userId },
-  });
-
   const chat = user.chats[0];
   const messages = await recentMessages(chat.id);
-  return { chat, messages, user };
+
+  const responseHeaders = await createSession({
+    requestHeaders,
+    userId: user.id,
+  });
+  return { chat, isAdmin: false, messages, user, responseHeaders };
 }
 
 /**
@@ -228,52 +216,6 @@ export async function recentMessages(chatId: string): Promise<UIMessage[]> {
     parts: message.content as TextUIPart[],
     role: message.role,
   }));
-}
-
-/**
- * Get the initial fields for the user. These record the user's IP
- * address, geocode, user agent, referrer, and working memory.
- *
- * NOTE: Sometimes the user was just created by Better Auth, and so we must set
- * all the initial fields. Other times, the user already exists, and so we only
- * need to set the fields that are not already set.
- *
- * @param requestHeaders - The request headers object
- * @param existingUser - The existing user
- * @returns The initial fields for the user
- */
-async function getInitialFields({
-  existingUser,
-  requestHeaders,
-}: {
-  existingUser: User;
-  requestHeaders: Headers;
-}): Promise<{
-  cityStateCountry: string;
-  geocode: zod.infer<typeof cachedLocation>;
-  isBot: boolean;
-  referrer: string;
-  userAgent: string;
-  workingMemory: string;
-}> {
-  const geocode = await geocodeFromHeaders(requestHeaders);
-  const ip = requestHeaders.get("x-forwarded-for") ?? "";
-  const userAgent = requestHeaders.get("user-agent") ?? "";
-  const isBot = isUABot(userAgent) || (await isBotByIP(ip));
-  const cityStateCountry = [geocode.city, geocode.state, geocode.country]
-    .filter(Boolean)
-    .join(", ");
-  const referrer = requestHeaders.get("referer") ?? "";
-  const workingMemory = JSON.stringify({ location: geocode });
-  return {
-    cityStateCountry: existingUser.cityStateCountry || cityStateCountry,
-    geocode:
-      (existingUser.geocode as zod.infer<typeof cachedLocation>) || geocode,
-    isBot,
-    referrer: existingUser.referrer || referrer,
-    userAgent: existingUser.userAgent || userAgent,
-    workingMemory: existingUser.workingMemory || workingMemory,
-  };
 }
 
 /**
@@ -366,4 +308,206 @@ async function isBotByIP(ip: string): Promise<boolean> {
     debug("server")("Reverse DNS lookup failed for IP: %s", ip);
     return false;
   }
+}
+
+/**
+ * Get the user from the cookie. Aftewards we will get the user's chat (the most
+ * recent chat, or by ID).
+ *
+ * @param requestHeaders - The request headers object
+ * @returns The cookie session, user, and response headers if found, or the
+ * cookie session if not found.
+ */
+async function userFromCookie(requestHeaders: Headers): Promise<
+  | {
+      cookieSession: Session<SessionData, SessionFlashData>;
+      isAdmin: boolean;
+      user: User;
+      responseHeaders: Headers;
+    }
+  | {
+      cookieSession: Session<SessionData, SessionFlashData>;
+    }
+> {
+  const cookieSession = await getSession(requestHeaders.get("cookie"));
+  if (!cookieSession.data.token) return { cookieSession };
+
+  const session = await prisma.session.findFirst({
+    include: { user: true },
+    where: { token: cookieSession.data.token, expiresAt: { gt: new Date() } },
+  });
+  const user = session?.user;
+  if (!user) return { cookieSession };
+
+  const responseHeaders = new Headers({
+    "set-cookie": await commitSession(cookieSession),
+  });
+  const isAdmin = adminUsers.includes(user.email ?? "anonymous");
+  return { cookieSession, isAdmin, user, responseHeaders };
+}
+
+/**
+ * Sign in a user with their email and password.
+ *
+ * @param email - The email of the user
+ * @param password - The password of the user
+ * @param requestHeaders - The request headers object
+ * @returns The HTTP headers with the session cookie set
+ * @throws If the email and password do not match
+ */
+export async function signInEmail({
+  email,
+  password,
+  requestHeaders,
+}: {
+  email: string;
+  password: string;
+  requestHeaders: Headers;
+}): Promise<Headers> {
+  try {
+    const user = await prisma.user.findUnique({ where: { email } });
+    invariant(user?.passwordHash, "User has no password hash");
+    const valid = await bcrypt.compare(password, user.passwordHash);
+    invariant(valid, "Password does not match");
+
+    return await createSession({ requestHeaders, userId: user.id });
+  } catch (error) {
+    console.error(
+      "signInEmail: %s",
+      error instanceof Error ? error.message : "Unknown error",
+    );
+    throw new Error("Email and password do not match");
+  }
+}
+
+/**
+ * Sign up a user with their email and password.
+ *
+ * @param email - The email of the user
+ * @param password - The password of the user
+ * @param name - The name of the user
+ * @param requestHeaders - The request headers object
+ * @returns The HTTP headers with the session cookie set
+ * @throws If the email and password do not match
+ */
+export async function signUpEmail({
+  email,
+  name,
+  password,
+  requestHeaders,
+}: {
+  email: string;
+  name: string;
+  password: string;
+  requestHeaders: Headers;
+}): Promise<Headers> {
+  const session = await getSession(requestHeaders.get("Cookie"));
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  // TODO: convert from anonymous user to new user
+
+  const anon = await prisma.user.findFirst({
+    where: {
+      isAnonymous: true,
+      sessions: {
+        some: {
+          expiresAt: { gt: new Date() },
+          token: session.data.token,
+        },
+      },
+    },
+  });
+  if (anon) {
+    await prisma.user.update({
+      data: { isAnonymous: false, name, email, passwordHash },
+      where: { id: anon.id },
+    });
+  } else {
+    const user = await createUser({
+      chatId: ulid(),
+      requestHeaders,
+    });
+    return await createSession({ requestHeaders, userId: user.id });
+  }
+
+  return new Headers({ "set-cookie": await commitSession(session) });
+}
+
+export async function signOut(requestHeaders: Headers): Promise<Headers> {
+  const session = await getSession(requestHeaders.get("Cookie"));
+  await prisma.session.delete({
+    where: { token: session.data.token },
+  });
+  return new Headers({ "set-cookie": await destroySession(session) });
+}
+
+async function createUser({
+  chatId,
+  requestHeaders,
+}: {
+  chatId: string;
+  requestHeaders: Headers;
+}): Promise<UserGetPayload<{ include: { chats: true } }>> {
+  const geocode = await geocodeFromHeaders(requestHeaders);
+  const userAgent = requestHeaders.get("user-agent") ?? "";
+  const ip = requestHeaders.get("x-forwarded-for") ?? "";
+
+  const user = await prisma.user.create({
+    data: {
+      email: `anonymous-${ulid()}@rentail.space`,
+      id: ulid(),
+      isAnonymous: true,
+      isBot: isUABot(userAgent) || (await isBotByIP(ip)),
+      cityStateCountry: [geocode.city, geocode.state, geocode.country]
+        .filter(Boolean)
+        .join(", "),
+      geocode,
+      ip,
+      metadata: {},
+      name: "Anonymous",
+      referrer: requestHeaders.get("referer") ?? "",
+      userAgent,
+      workingMemory: JSON.stringify({ location: geocode }),
+
+      chats: {
+        create: {
+          id: chatId,
+          metadata: {},
+          messages: {
+            create: [
+              {
+                content: [{ type: "text", text: welcome }],
+                id: ulid(),
+                role: "assistant",
+                type: "text",
+              },
+            ],
+          },
+        },
+      },
+    },
+    include: { chats: true },
+  });
+  return user;
+}
+
+async function createSession({
+  requestHeaders,
+  userId,
+}: {
+  requestHeaders: Headers;
+  userId: string;
+}): Promise<Headers> {
+  const session = await getSession(requestHeaders.get("Cookie"));
+  const sessionToken = ulid();
+  await prisma.session.create({
+    data: {
+      expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 365 days
+      id: ulid(),
+      token: sessionToken,
+      userId,
+    },
+  });
+  session.set("token", sessionToken);
+  return new Headers({ "set-cookie": await commitSession(session) });
 }
