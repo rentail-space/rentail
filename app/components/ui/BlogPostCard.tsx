@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 import { Link } from "react-router";
 import type { BlogPost } from "~/lib/blogPosts.server";
 
-export default function BlogCard({ post }: { post: BlogPost }) {
+export default function BlogPostCard({ post }: { post: BlogPost }) {
   return (
     <Link
       to={`/blog/${post.slug}`}

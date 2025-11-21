@@ -49,7 +49,7 @@ export async function recentBlogPosts(): Promise<BlogPost[]> {
     })
     .filter(
       ({ published }) =>
-        DateTime.fromJSDate(published).diff(now, "days").days < 0,
+        DateTime.fromJSDate(published).diff(now, "days").days < -1,
     )
     .sort((a, b) => b.published.getTime() - a.published.getTime());
 }
