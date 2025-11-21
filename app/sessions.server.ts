@@ -143,11 +143,12 @@ export async function findOrCreateUser({
   const found = await findUserAndChatById({ headers, chatId });
   if (found) return { ...found, headers: new Headers() };
 
-  // We're gong to sign in the anonymous user so we can get the HTTP headers
-  const { response, headers: signInHeaders } =
-    await authServer.api.signInAnonymous({
-      returnHeaders: true,
-    });
+  // We're going to sign in the anonymous user so we can get the HTTP headers
+  const { response, headers: signInHeaders } = await (
+    authServer.api as any
+  ).signInAnonymous({
+    returnHeaders: true,
+  });
   const anonUser = response?.user;
   invariant(anonUser, "Anonymous user ID is required");
 
