@@ -12,9 +12,12 @@ import type { Route } from "./+types/api.chat.$chatId.stop";
  */
 export async function action({ params, request }: Route.ActionArgs) {
   const { chatId } = params;
-  const found = await findUserAndChatById({ chatId, headers: request.headers });
+  const found = await findUserAndChatById({
+    chatId,
+    requestHeaders: request.headers,
+  });
   if (!found) throw new Response("Not Found", { status: 404 });
 
   await stopChat(found.chat.id);
-  return new Response(null, { status: 204 });
+  return new Response(null, { headers: found.responseHeaders, status: 204 });
 }

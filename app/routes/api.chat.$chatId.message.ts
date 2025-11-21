@@ -28,9 +28,9 @@ const logger = debug("chat");
 export async function action({ request, params }: Route.ActionArgs) {
   const { chatId } = params;
 
-  const { chat, headers, user } = await findOrCreateUser({
+  const { chat, responseHeaders, user } = await findOrCreateUser({
     chatId,
-    headers: request.headers,
+    requestHeaders: request.headers,
   });
 
   // We're only looking for last message sent by the user
@@ -79,7 +79,7 @@ export async function action({ request, params }: Route.ActionArgs) {
       "claude-haiku-4-5",
     ),
     messages: convertToModelMessages(messages),
-    system: await systemPrompt({ headers, user }),
+    system: await systemPrompt({ headers: request.headers, user }),
 
     onAbort: async () => {
       logger("Aborted %s by user", chat.id);
@@ -101,7 +101,7 @@ export async function action({ request, params }: Route.ActionArgs) {
   });
 
   return stream.toUIMessageStreamResponse({
-    headers,
+    headers: responseHeaders,
 
     generateMessageId: () => ulid(),
 

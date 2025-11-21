@@ -41,33 +41,17 @@ const cachedLocation = zod
 
 /**
  * Get the chat for the user from the session. If the user exists, there must be
- * a last chat for the user. Also return the recent messages in the chat.
- *
- * @param headers - The headers object
- * @returns The chat, messages, and user if found
- */
-export async function findUser(headers: Headers): Promise<User | null> {
-  const session = await authServer.api.getSession({ headers });
-  if (!session?.user) return null;
-
-  return await prisma.user.findUnique({
-    where: { id: session.user.id },
-  });
-}
-
-/**
- * Get the chat for the user from the session. If the user exists, there must be
  * a last chat for the user. Also return the recent messages in the chat, the HTTP
  * headers, and whether the user is an admin.
  *
- * @param headers - The headers object
- * @returns The chat, messages, user, HTTP headers, and whether the user is an
+ * @param requestHeaders - The request headers object
+ * @returns The chat, messages, response headers, user, and whether the user is an
  * admin if found. If the user is not found, return undefined.
  */
-export async function findUserAndLastChat(headers: Headers): Promise<
+export async function findUserAndLastChat(requestHeaders: Headers): Promise<
   | {
       chat: Chat;
-      headers: Headers;
+      responseHeaders: Headers;
       isAdmin: boolean;
       messages: UIMessage[];
       user: User;
@@ -76,10 +60,13 @@ export async function findUserAndLastChat(headers: Headers): Promise<
 > {
   console.log(
     "findUserAndLastChat",
-    JSON.stringify(Object.fromEntries(headers.entries()), null, 2),
+    JSON.stringify(Object.fromEntries(requestHeaders.entries()), null, 2),
   );
   const { response, headers: responseHeaders } =
-    await authServer.api.getSession({ headers, returnHeaders: true });
+    await authServer.api.getSession({
+      headers: requestHeaders,
+      returnHeaders: true,
+    });
   console.log("found session", JSON.stringify(response, null, 2));
   console.log(
     "session headers",
@@ -99,7 +86,7 @@ export async function findUserAndLastChat(headers: Headers): Promise<
   const messages = await recentMessages(chat.id);
 
   const isAdmin = user.email ? adminUsers.includes(user.email) : false;
-  return { chat, headers: responseHeaders, isAdmin, messages, user };
+  return { chat, responseHeaders, isAdmin, messages, user };
 }
 
 /**
@@ -108,23 +95,30 @@ export async function findUserAndLastChat(headers: Headers): Promise<
  * the recent messages in the chat.
  *
  * @param chatId - The ID of the chat to find
- * @param headers - The headers object
- * @returns The chat, messages, and user if found
- * @throws If the chat ID mismatch is detected
+ * @param requestHeaders - The request headers object
+ * @returns The chat, messages, response headers, and user if found
+ * @throws If the user is not found or the chat ID mismatch is detected
  */
 export async function findUserAndChatById({
   chatId,
-  headers,
+  requestHeaders,
 }: {
   chatId: string;
-  headers: Headers;
-}): Promise<{ chat: Chat; messages: UIMessage[]; user: User } | undefined> {
-  const session = await authServer.api.getSession({ headers });
-  if (!session?.user) return;
+  requestHeaders: Headers;
+}): Promise<
+  | { chat: Chat; messages: UIMessage[]; responseHeaders: Headers; user: User }
+  | undefined
+> {
+  const { response, headers: responseHeaders } =
+    await authServer.api.getSession({
+      headers: requestHeaders,
+      returnHeaders: true,
+    });
+  if (!response?.user) return;
 
   const user = await prisma.user.findUnique({
     include: { chats: { where: { id: chatId } } },
-    where: { id: session.user.id },
+    where: { id: response?.user.id },
   });
   if (!user) return;
 
@@ -132,7 +126,7 @@ export async function findUserAndChatById({
   if (!chat) return;
 
   const messages = await recentMessages(chat.id);
-  return { chat, messages, user };
+  return { chat, messages, responseHeaders, user };
 }
 
 /**
@@ -140,24 +134,24 @@ export async function findUserAndChatById({
  * the recent messages in the chat, and the user. Also returns the HTTP headers
  * which have the session cookie set, and the user agent.
  *
- * @param headers - The headers object
  * @param chatId - The ID of the chat to find or create
+ * @param requestHeaders - The request headers object
  * @returns The chat, recent messages, user, and HTTP headers
  */
 export async function findOrCreateUser({
   chatId,
-  headers,
+  requestHeaders,
 }: {
   chatId: string;
-  headers: Headers;
+  requestHeaders: Headers;
 }): Promise<{
   chat: Chat;
-  headers: Headers;
+  responseHeaders: Headers;
   messages: UIMessage[];
   user: User;
 }> {
-  const found = await findUserAndChatById({ headers, chatId });
-  if (found) return { ...found, headers: new Headers() };
+  const found = await findUserAndChatById({ requestHeaders, chatId });
+  if (found) return { ...found, responseHeaders: new Headers() };
 
   // We're going to sign in the anonymous user so we can get the HTTP headers
   const { response, headers: signInHeaders } =
@@ -169,10 +163,10 @@ export async function findOrCreateUser({
   // referrer, etc.). Make sure it has initial chat with the welcome message.
   const { chat, messages, user } = await updateNewUser({
     chatId,
-    headers,
+    requestHeaders: requestHeaders,
     userId: anonUser.id,
   });
-  return { chat, headers: signInHeaders, messages, user };
+  return { chat, responseHeaders: signInHeaders, messages, user };
 }
 
 /**
@@ -180,25 +174,25 @@ export async function findOrCreateUser({
  * referrer, etc.). Make sure it has initial chat with a welcome message.
  *
  * @param chatId - The ID of the chat to create
- * @param headers - The headers object
+ * @param requestHeaders - The request headers object
  * @param userId - The user ID to update
  * @returns The updated user, chat, and messages
  */
 export async function updateNewUser({
   chatId,
-  headers,
+  requestHeaders,
   userId,
 }: {
   chatId: string;
-  headers: Headers;
+  requestHeaders: Headers;
   userId: string;
 }): Promise<{ chat: Chat; messages: UIMessage[]; user: User }> {
-  const existing = await prisma.user.findUniqueOrThrow({
+  const existingUser = await prisma.user.findUniqueOrThrow({
     where: { id: userId },
   });
   const user = await prisma.user.update({
     data: {
-      ...(await getInitialFields(headers, existing)),
+      ...(await getInitialFields({ existingUser, requestHeaders })),
       chats: {
         create: {
           id: chatId,
@@ -253,14 +247,17 @@ export async function recentMessages(chatId: string): Promise<UIMessage[]> {
  * all the initial fields. Other times, the user already exists, and so we only
  * need to set the fields that are not already set.
  *
- * @param headers - The headers object
- * @param existing - The existing user
+ * @param requestHeaders - The request headers object
+ * @param existingUser - The existing user
  * @returns The initial fields for the user
  */
-async function getInitialFields(
-  headers: Headers,
-  existing: User,
-): Promise<{
+async function getInitialFields({
+  existingUser,
+  requestHeaders,
+}: {
+  existingUser: User;
+  requestHeaders: Headers;
+}): Promise<{
   cityStateCountry: string;
   geocode: zod.infer<typeof cachedLocation>;
   isBot: boolean;
@@ -268,22 +265,23 @@ async function getInitialFields(
   userAgent: string;
   workingMemory: string;
 }> {
-  const geocode = await geocodeFromHeaders(headers);
-  const ip = headers.get("x-forwarded-for") ?? "";
-  const userAgent = headers.get("user-agent") ?? "";
+  const geocode = await geocodeFromHeaders(requestHeaders);
+  const ip = requestHeaders.get("x-forwarded-for") ?? "";
+  const userAgent = requestHeaders.get("user-agent") ?? "";
   const isBot = isUABot(userAgent) || (await isBotByIP(ip));
   const cityStateCountry = [geocode.city, geocode.state, geocode.country]
     .filter(Boolean)
     .join(", ");
-  const referrer = headers.get("referer") ?? "";
+  const referrer = requestHeaders.get("referer") ?? "";
   const workingMemory = JSON.stringify({ location: geocode });
   return {
-    cityStateCountry: existing.cityStateCountry || cityStateCountry,
-    geocode: (existing.geocode as zod.infer<typeof cachedLocation>) || geocode,
+    cityStateCountry: existingUser.cityStateCountry || cityStateCountry,
+    geocode:
+      (existingUser.geocode as zod.infer<typeof cachedLocation>) || geocode,
     isBot,
-    referrer: existing.referrer || referrer,
-    userAgent: existing.userAgent || userAgent,
-    workingMemory: existing.workingMemory || workingMemory,
+    referrer: existingUser.referrer || referrer,
+    userAgent: existingUser.userAgent || userAgent,
+    workingMemory: existingUser.workingMemory || workingMemory,
   };
 }
 
@@ -292,11 +290,11 @@ async function getInitialFields(
  * state, country, and time zone.  If the location information is not found,
  * return a fallback location. The fallback location is Los Angeles, California.
  *
- * @param headers - The headers object
+ * @param requestHeaders - The headers object
  * @returns The location information from the headers or the fallback location
  */
 async function geocodeFromHeaders(
-  headers: Headers,
+  requestHeaders: Headers,
 ): Promise<zod.infer<typeof cachedLocation>> {
   const fallback = {
     city: "Los Angeles",
@@ -310,21 +308,23 @@ async function geocodeFromHeaders(
   try {
     return {
       city: decodeURIComponent(
-        headers.get("x-vercel-ip-city") ?? fallback.city,
+        requestHeaders.get("x-vercel-ip-city") ?? fallback.city,
       ),
-      country: headers.get("x-vercel-ip-country") ?? fallback.country,
-      ip: headers.get("x-forwarded-for") ?? fallback.ip,
+      country: requestHeaders.get("x-vercel-ip-country") ?? fallback.country,
+      ip: requestHeaders.get("x-forwarded-for") ?? fallback.ip,
       latitude: Number.parseFloat(
-        headers.get("x-vercel-ip-latitude") ?? fallback.latitude.toString(),
+        requestHeaders.get("x-vercel-ip-latitude") ??
+          fallback.latitude.toString(),
       ),
       longitude: Number.parseFloat(
-        headers.get("x-vercel-ip-longitude") ?? fallback.longitude.toString(),
+        requestHeaders.get("x-vercel-ip-longitude") ??
+          fallback.longitude.toString(),
       ),
-      state: headers.get("x-vercel-ip-country-region") ?? fallback.state,
-      timeZone: headers.get("x-vercel-ip-timezone") ?? fallback.timeZone,
+      state: requestHeaders.get("x-vercel-ip-country-region") ?? fallback.state,
+      timeZone: requestHeaders.get("x-vercel-ip-timezone") ?? fallback.timeZone,
     };
   } catch (error) {
-    captureException(error, { extra: { headers } });
+    captureException(error, { extra: { headers: requestHeaders } });
     console.error("Error getting geocode from headers: %s", error);
     return fallback;
   }

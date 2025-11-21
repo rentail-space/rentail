@@ -15,7 +15,10 @@ import type { Route } from "./+types/api.chat.$chatId.message.$messageId.stream"
  */
 export async function loader({ request, params }: Route.LoaderArgs) {
   const { chatId } = params;
-  const found = await findUserAndChatById({ chatId, headers: request.headers });
+  const found = await findUserAndChatById({
+    chatId,
+    requestHeaders: request.headers,
+  });
 
   if (!found || found.chat.activeStreamId == null)
     return new Response(null, { status: 204 });
@@ -33,10 +36,15 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 
     if (!stream)
       // Stream not found in Redis, return 204 to signal completion
-      return new Response(null, { status: 204 });
+      return new Response(null, {
+        headers: found.responseHeaders,
+        status: 204,
+      });
 
     // Return the stream directly - Response accepts ReadableStream<Uint8Array>
-    return new Response(stream, { headers: UI_MESSAGE_STREAM_HEADERS });
+    return new Response(stream, {
+      headers: { ...UI_MESSAGE_STREAM_HEADERS, ...found.responseHeaders },
+    });
   } catch (error) {
     captureException(error, {
       extra: {
@@ -45,6 +53,6 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       },
     });
     // Return 204 instead of 500 so client treats it as stream complete
-    return new Response(null, { status: 204 });
+    return new Response(null, { headers: found.responseHeaders, status: 204 });
   }
 }

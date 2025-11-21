@@ -1,3 +1,4 @@
+import { data } from "react-router";
 import findNearbyCenters from "~/lib/findNearbyCenters";
 import { findUserAndChatById } from "~/sessions.server";
 import type { Route } from "./+types/api.chat.$chatId.centers";
@@ -9,8 +10,13 @@ import type { Route } from "./+types/api.chat.$chatId.centers";
  */
 export async function loader({ params, request }: Route.LoaderArgs) {
   const { chatId } = params;
-  const { headers } = request;
-  const found = await findUserAndChatById({ chatId, headers });
-  const centers = await findNearbyCenters({ headers, user: found?.user });
-  return { centers };
+  const found = await findUserAndChatById({
+    chatId,
+    requestHeaders: request.headers,
+  });
+  const centers = await findNearbyCenters({
+    headers: request.headers,
+    user: found?.user,
+  });
+  return data({ centers }, { headers: found?.responseHeaders });
 }

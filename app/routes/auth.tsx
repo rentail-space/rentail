@@ -88,7 +88,11 @@ async function signUpEmail({
       headers,
       returnHeaders: true,
     });
-  await updateNewUser({ chatId: ulid(), headers, userId: response.user.id });
+  await updateNewUser({
+    chatId: ulid(),
+    requestHeaders: headers,
+    userId: response.user.id,
+  });
   return redirect("/chat", { headers: fixSetCookieHeaders(returnedHeaders) });
 }
 

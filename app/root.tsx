@@ -25,7 +25,7 @@ export async function loader({ request }: Route.LoaderArgs) {
       messages: found.messages,
       user: found.user,
     },
-    { headers: found?.headers },
+    { headers: found?.responseHeaders },
   );
 }
 
