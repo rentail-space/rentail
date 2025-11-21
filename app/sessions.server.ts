@@ -58,20 +58,11 @@ export async function findUserAndLastChat(requestHeaders: Headers): Promise<
     }
   | undefined
 > {
-  console.log(
-    "findUserAndLastChat",
-    JSON.stringify(Object.fromEntries(requestHeaders.entries()), null, 2),
-  );
   const { response, headers: responseHeaders } =
     await authServer.api.getSession({
       headers: requestHeaders,
       returnHeaders: true,
     });
-  console.log("found session", JSON.stringify(response, null, 2));
-  console.log(
-    "session headers",
-    JSON.stringify(Object.fromEntries(responseHeaders.entries()), null, 2),
-  );
   if (!response?.user) return;
 
   const user = await prisma.user.findUnique({
