@@ -103,11 +103,6 @@ export default betterAuth({
       maxAge: 5 * 60, // Short maxAge ensures session gets refreshed regularly
     },
     expiresIn: 365 * 24 * 60 * 60, // 365 days
-    cookie: {
-      attributes: {
-        domain: env.isProduction ? "rentail.space" : "localhost",
-      },
-    },
   },
 
   account: {
@@ -124,6 +119,13 @@ export default betterAuth({
       ipAddressHeaders: ["x-client-ip", "x-forwarded-for"],
     },
     useSecureCookies: env.isProduction,
+    cookies: {
+      session_data: {
+        attributes: {
+          domain: env.isProduction ? "rentail.space" : undefined,
+        },
+      },
+    },
   },
 
   logger: {
