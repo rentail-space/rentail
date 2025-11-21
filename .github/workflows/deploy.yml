@@ -148,10 +148,10 @@ jobs:
           path: node_modules
           key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
 
-      - name: Fetch DATABASE_URL from Doppler
-        id: fetch_database_url
+      - name: Fetch DATABASE_URL/DIRECT_URL from Doppler
         run: |
           echo "DATABASE_URL=$(doppler run --config prd -- bash -c 'echo $DATABASE_URL')" >> $GITHUB_ENV
+          echo "DIRECT_URL=$(doppler run --config prd -- bash -c 'echo $DIRECT_URL')" >> $GITHUB_ENV
 
       - name: Generate Prisma schema
         run: |
