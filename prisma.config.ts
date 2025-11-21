@@ -4,7 +4,7 @@ import { defineConfig } from "prisma/config";
 
 // Load environment variables only if not already set (e.g., by Doppler)
 // This prevents overwriting variables injected by tools like Doppler
-if (!process.env.DIRECT_URL) {
+if (!process.env.DATABASE_URL) {
   dotenv.config({
     path: process.env.NODE_ENV === "test" ? ".env.test" : ".env",
     quiet: true,
@@ -13,7 +13,7 @@ if (!process.env.DIRECT_URL) {
 
 export default defineConfig({
   datasource: {
-    url: process.env.DIRECT_URL ?? "",
+    url: process.env.DATABASE_URL ?? "",
   },
   migrations: {
     path: resolve("prisma", "migrations"),

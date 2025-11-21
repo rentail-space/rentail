@@ -11,8 +11,8 @@ jobs:
 
     env:
       ANTHROPIC_API_KEY: "***REMOVED***"
+      BETTER_AUTH_SECRET: "***REMOVED***"
       DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-      DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
       REDIS_URL: "redis://localhost:6379"
       RESEND_API_KEY: "re_1234567890"
 
@@ -150,7 +150,7 @@ jobs:
       - name: Fetch DATABASE_URL from Doppler
         id: fetch_database_url
         run: |
-          echo "DATABASE_URL=$(doppler run --config prd -- bash -c 'echo $DIRECT_URL')" >> $GITHUB_ENV
+          echo "DATABASE_URL=$(doppler run --config prd -- bash -c 'echo $DATABASE_URL')" >> $GITHUB_ENV
 
       - name: Generate Prisma schema
         run: |
