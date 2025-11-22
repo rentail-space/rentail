@@ -266,22 +266,24 @@ export function formatHTMLTree(html: HTMLNode[]): string {
 export function diffHTMLs(html: string, original: string): string {
   const diffs = diffLines(html, original, { ignoreWhitespace: true });
   return diffs
-    .map((diff) =>
-      diff.added
-        ? lines(diff.value, true)
-        : diff.removed
-          ? lines(diff.value, false)
-          : false,
-    )
+    .map((diff) => (diff.added || diff.removed ? multipleLines(diff) : null))
     .filter(Boolean)
     .join("\n");
 }
 
-function lines(lines: string, added: boolean): string {
-  return lines
-    .split("\n")
-    .map((line) => (added ? `+ ${line}` : `- ${line}`))
-    .join("\n");
+function multipleLines({
+  added,
+  count,
+  value,
+}: {
+  added: boolean;
+  count: number;
+  value: string;
+}) {
+  return [
+    added ? `added: ${count}` : `removed: ${count}`,
+    ...value.split("\n").map((line) => (added ? `+ ${line}` : `- ${line}`)),
+  ].join("\n");
 }
 
 /**

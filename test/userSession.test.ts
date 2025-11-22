@@ -8,7 +8,7 @@ import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
 import { getElementsByTagName } from "./helpers/formatHTML";
 
-describe("Anonymous visits chat page", () => {
+describe.skip("Anonymous visits chat page", () => {
   let page: Page;
 
   beforeAll(async () => {

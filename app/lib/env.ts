@@ -19,7 +19,7 @@ export default {
   BETTER_AUTH_SECRET: env.get("BETTER_AUTH_SECRET").required(true).asString(),
   DATABASE_URL: isTest
     ? // secretlint-disable-next-line
-      "postgresql://postgres:postgres@localhost:5432/postgres"
+      "postgresql://postgres:postgres@localhost:5432/postgres?pgbouncer=true"
     : env.get("DATABASE_URL").required().asUrlString(),
   MAPBOX_TOKEN: env.get("MAPBOX_TOKEN").required(false).asString(),
   RESEND_API_KEY: env.get("RESEND_API_KEY").required(true).asString(),
