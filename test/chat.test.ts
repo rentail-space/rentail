@@ -3,7 +3,7 @@ import { afterAll, beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
 import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
-import { removeElements } from "./helpers/formatHTML";
+import { getElementsByTagName, removeElements } from "./helpers/formatHTML";
 
 describe("Chat page", () => {
   describe("interface with welcome message", () => {
@@ -79,6 +79,15 @@ describe("Chat page", () => {
                 node.tag === "button" &&
                 node.attributes["aria-label"] === "Scroll to bottom",
             );
+
+            // NOTE: In CI the images are hidden until they are loaded.  We remove the
+            // opacity-0 class to make the HTML match.
+            for (const img of getElementsByTagName(html, "img")) {
+              img.attributes.class = img.attributes.class?.replace(
+                "opacity-0",
+                "",
+              );
+            }
           },
         });
       });
