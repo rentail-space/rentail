@@ -51,7 +51,7 @@ describe("Chat page", () => {
     });
   });
 
-  describe.skip("exchange messages", () => {
+  describe("exchange messages", () => {
     let page: Page;
 
     beforeAll(async () => {
@@ -84,6 +84,9 @@ describe("Chat page", () => {
       });
 
       it.runIf(!process.env.CI)("should look like a real chat", async () => {
+        // Scroll to bottom of the page view to ensure "real chat" state for screenshot
+        const scrollContainer = page.locator(".overflow-y-auto").first();
+        await scrollContainer.scrollIntoViewIfNeeded();
         await expect(page).toMatchScreenshot();
       });
     });

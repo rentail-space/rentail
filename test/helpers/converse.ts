@@ -16,7 +16,13 @@ export default async function converse(
 ): Promise<void> {
   // Verify we're on the chat page
   expect(page.url()).toContain("/chat");
+  await page.waitForLoadState("networkidle");
   await page.waitForFunction(() => "__reactRouterContext" in window);
+
+  // NOTE: We need to reload the page otherwise React doesn't handle the form
+  // submission correctly on Playwright.
+  await page.reload();
+  await page.waitForTimeout(100);
 
   // Get the initial count of messages in the database, we expect 2 new messages.
   const messageCount = await prisma.messages.count();

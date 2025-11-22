@@ -44,7 +44,7 @@ expect.extend({
   ): Promise<{ message: () => string; pass: boolean }> {
     // NOTE: Give the page minimum time to finish uploading images and rendering.
     const page = "page" in locator ? locator.page() : locator;
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(500);
 
     const name = options?.name || getTestName();
     const filename = path.resolve(dirname, `${name}.png`);

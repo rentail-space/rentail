@@ -40,7 +40,6 @@ async function startServer() {
     await devServer.listen(port);
     // Unref the server to allow process to exit cleanly
     devServer.httpServer?.unref();
-    await devServer.warmupRequest("/");
     await devServer.waitForRequestsIdle();
 
     // Handle graceful shutdown on parent process termination
