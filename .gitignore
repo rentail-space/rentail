@@ -25,3 +25,5 @@ test/context
 */*.local
 # Server log used when running tests
 server.log
+# Used by scripts/clone.sh to clone the production database to the local development database
+prisma/backup.sql

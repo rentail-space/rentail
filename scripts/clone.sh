@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+# Clone production database to local development database
+# Usage: ./scripts/clone.sh
+
+# Load environment variables from Doppler and export DATABASE_URL
+eval "$(doppler secrets download --format env --no-file)"
+
+# Dump the database to a file
+echo -e "\033[32m  Dumping database to backup.sql …\033[0m"
+pg_dump "$DIRECT_URL" --file prisma/backup.sql
+
+# Restore the database from the file
+echo -e "\033[32m  Restoring database from backup.sql …\033[0m"
+# psql postgresql://postgres:postgres@localhost:5432/postgres < prisma/backup.sql
+pg_restore --verbose --clean --data-only --file prisma/backup.sql
