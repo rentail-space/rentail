@@ -316,6 +316,19 @@ async function isBotByIP(ip: string): Promise<boolean> {
 }
 
 /**
+ * Verify that the user is an admin and return the user.
+ *
+ * @param requestHeaders - The request headers object
+ * @returns The user if the user is an admin, or throws an error if the user is not an admin.
+ */
+export async function verifyAdmin(requestHeaders: Headers): Promise<User> {
+  const session = await userFromCookie(requestHeaders);
+  if (!("isAdmin" in session && session.isAdmin))
+    throw new Response("Not Found", { status: 404 });
+  return session.user;
+}
+
+/**
  * Get the user from the cookie. Aftewards we will get the user's chat (the most
  * recent chat, or by ID).
  *

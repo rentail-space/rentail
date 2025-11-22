@@ -1,7 +1,12 @@
-import { Outlet, useRouteLoaderData } from "react-router";
+import {
+  type LoaderFunctionArgs,
+  Outlet,
+  useRouteLoaderData,
+} from "react-router";
 import PageHeader from "~/components/layout/PageHeader";
 import PageLayout from "~/components/layout/PageLayout";
 import type { loader as rootLoader } from "~/root";
+import { verifyAdmin } from "~/sessions.server";
 import NotFoundPage from "./$";
 
 export const handle = { hideLayout: true };
@@ -16,6 +21,10 @@ const adminLinks = [
     label: "All users",
   },
 ];
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  return await verifyAdmin(request.headers);
+}
 
 export default function Admin() {
   const root = useRouteLoaderData<typeof rootLoader>("root");

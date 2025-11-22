@@ -1,13 +1,19 @@
 import type { TextUIPart } from "ai";
+import { CircleCheck } from "lucide-react";
 import type { Messages, User } from "prisma/generated/client";
 import type { ChatGetPayload } from "prisma/generated/models";
+import { useFetcher } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 import { Streamdown } from "streamdown";
+import { twMerge } from "tailwind-merge";
 import prisma from "~/lib/prisma";
 import { cleanParseProfile } from "~/lib/userProfile";
+import { verifyAdmin } from "~/sessions.server";
 import type { Route } from "./+types/admin.user.$userId";
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function loader({ params, request }: Route.LoaderArgs) {
+  await verifyAdmin(request.headers);
+
   const user = await prisma.user.findUnique({
     where: { id: params.userId },
     include: {
@@ -23,6 +29,20 @@ export async function loader({ params }: Route.LoaderArgs) {
   });
   if (!user) throw new Response("Not Found", { status: 404 });
   return { user };
+}
+
+export async function action({ params, request }: Route.ActionArgs) {
+  await verifyAdmin(request.headers);
+
+  const formData = await request.formData();
+  const note = formData.get("note") as string;
+  console.log(note);
+  console.log(params.userId);
+  const user = await prisma.user.update({
+    data: { note },
+    where: { id: params.userId },
+  });
+  return user;
 }
 
 export default function UserPage({
@@ -41,6 +61,8 @@ export default function UserPage({
 }
 
 function UserInfoCard({ user }: { user: User }) {
+  const fetcher = useFetcher<typeof action>();
+
   return (
     <details className="collapse border border-gray-200">
       <summary className="collapse-title font-semibold">{user.name}</summary>
@@ -71,6 +93,40 @@ function UserInfoCard({ user }: { user: User }) {
               month: "short",
               day: "numeric",
             })}
+          </span>
+        </li>
+        <li className="list-row">
+          <span className="font-semibold">Note</span>
+          <span>
+            <fetcher.Form
+              onSubmit={(event) => {
+                event.preventDefault();
+                fetcher.submit(event.currentTarget, {
+                  method: "post",
+                  action: `/api/admin/${user.id}/note`,
+                });
+              }}
+            >
+              <textarea
+                className="textarea textarea-bordered min-h-12 w-full"
+                defaultValue={user.note ?? ""}
+                name="note"
+              />
+              <button
+                className={twMerge(
+                  "btn btn-primary float-right mt-2",
+                  fetcher.state !== "idle" && "loading loading-spinner",
+                  fetcher.data?.name ? "btn-success" : "btn-primary",
+                )}
+                type="submit"
+                disabled={fetcher.state !== "idle"}
+              >
+                {fetcher.data ? (
+                  <CircleCheck className="h-6 w-6 shrink-0 stroke-current" />
+                ) : null}
+                {fetcher.state !== "idle" ? "Saving..." : "Save"}
+              </button>
+            </fetcher.Form>
           </span>
         </li>
       </ul>

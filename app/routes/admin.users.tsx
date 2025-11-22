@@ -1,7 +1,11 @@
-import { Link } from "react-router";
+import { Link, type LoaderFunctionArgs } from "react-router";
+import { Fragment } from "react/jsx-runtime";
 import prisma from "~/lib/prisma";
+import { verifyAdmin } from "~/sessions.server";
 
-export async function loader() {
+export async function loader({ request }: LoaderFunctionArgs) {
+  await verifyAdmin(request.headers);
+
   const users = await prisma.user.findMany({
     orderBy: { createdAt: "desc" },
     where: { isBot: false },
@@ -29,38 +33,49 @@ export default function UsersPage({
         </thead>
         <tbody>
           {loaderData.users.map((user) => (
-            <tr key={user.id}>
-              <td
-                className="max-w-24 truncate"
-                title={`${user.name} (${user.id})`}
-              >
-                <Link
-                  className="link link-primary"
-                  to={`/admin/user/${user.id}`}
+            <Fragment key={user.id}>
+              <tr>
+                <td
+                  className="max-w-24 truncate"
+                  title={`${user.name} (${user.id})`}
                 >
-                  {user.isAnonymous ? user.id : (user.name ?? user.id)}
-                </Link>
-              </td>
-              <td className="max-w-24 truncate" title={user.email ?? ""}>
-                {user.email}
-              </td>
-              <td className="max-w-24 truncate" title={user.userAgent ?? ""}>
-                {user.userAgent}
-              </td>
-              <td className="max-w-24 truncate" title={user.referrer ?? ""}>
-                {user.referrer}
-              </td>
-              <td className="max-w-18 truncate" title={user.ip ?? ""}>
-                {user.ip}
-              </td>
-              <td className="max-w-8 whitespace-nowrap">
-                {user.createdAt.toLocaleDateString(undefined, {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </td>
-            </tr>
+                  <Link
+                    className="link link-primary"
+                    to={`/admin/user/${user.id}`}
+                  >
+                    {user.isAnonymous ? user.id : (user.name ?? user.id)}
+                  </Link>
+                </td>
+                <td className="max-w-24 truncate" title={user.email ?? ""}>
+                  {user.email}
+                </td>
+                <td className="max-w-24 truncate" title={user.userAgent ?? ""}>
+                  {user.userAgent}
+                </td>
+                <td className="max-w-24 truncate" title={user.referrer ?? ""}>
+                  {user.referrer}
+                </td>
+                <td className="max-w-18 truncate" title={user.ip ?? ""}>
+                  {user.ip}
+                </td>
+                <td className="max-w-8 whitespace-nowrap">
+                  {user.createdAt.toLocaleDateString(undefined, {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </td>
+              </tr>
+              <tr>
+                <td />
+                <td colSpan={6}>
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold">Note:</span>
+                    <span className="text-sm">{user.note}</span>
+                  </div>
+                </td>
+              </tr>
+            </Fragment>
           ))}
         </tbody>
       </table>

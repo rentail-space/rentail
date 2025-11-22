@@ -1,21 +1,18 @@
-import { invariant } from "es-toolkit";
 import type { PropertySpace } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { cleanParseProfile } from "~/lib/userProfile";
-import { findUserAndLastChat } from "~/sessions.server";
+import { verifyAdmin } from "~/sessions.server";
 import CentersMap from "../components/ui/CentersMap";
 import type { Route } from "./+types/admin.centers";
 
 const mapboxToken = env.MAPBOX_TOKEN;
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const found = await findUserAndLastChat(request.headers);
-  invariant(found?.isAdmin, "User is not an admin");
-
-  const { location } = cleanParseProfile(found.user.workingMemory);
+  const user = await verifyAdmin(request.headers);
+  const { location } = cleanParseProfile(user.workingMemory);
   const centers = await prisma.property.findMany({
     include: { spaces: true },
   });
