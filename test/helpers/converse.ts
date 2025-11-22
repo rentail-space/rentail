@@ -16,6 +16,7 @@ export default async function converse(
 ): Promise<void> {
   // Verify we're on the chat page
   expect(page.url()).toContain("/chat");
+  await page.waitForFunction(() => "__reactRouterContext" in window);
 
   // Get the initial count of messages in the database, we expect 2 new messages.
   const messageCount = await prisma.messages.count();
@@ -26,14 +27,16 @@ export default async function converse(
   // NOTE: We need to focus on the input and then type text into it, which
   // properly triggers React events.
   const input = page.locator('input[type="text"]');
-  await input.click();
-  await input.pressSequentially(message, { delay: 0 });
+  await input.focus();
+  await input.pressSequentially(message);
   // Sanity check that we got the correct message in the input.
   expect(await input.inputValue()).toBe(message);
 
-  // Click the submit button, this sends the message to the server.
-  await page.click('button[type="submit"]');
-  // Sanity check that the input is now empty.
+  // Press Enter to trigger form submission
+  // This fires a native submit event that React's event delegation system catches
+  await input.press("Enter");
+  // After submitting, verify the input is empty (submission succeeded)
+  // Wait a bit for React state to update
   expect(await input.inputValue()).toBe("");
 
   // Wait for the new assistant response bubble to appear.

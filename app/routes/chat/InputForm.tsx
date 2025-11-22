@@ -23,7 +23,7 @@ export default function InputForm({
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          sendMessage(query);
+          sendMessage(query.trim());
           setQuery(null);
           scrollToBottom();
         }}

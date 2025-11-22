@@ -75,12 +75,12 @@ export default function ChatPage() {
           isResponding={status === "streaming"}
           isSubmitting={status === "submitted"}
           query={query ?? ""}
-          sendMessage={(message: string) =>
-            sendMessage({
+          sendMessage={async (message: string) => {
+            await sendMessage({
               parts: [{ text: message, type: "text" }],
               role: "user",
-            })
-          }
+            });
+          }}
           setQuery={setQuery}
           stopChat={() => {
             if (chatId) {
