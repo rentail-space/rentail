@@ -35,6 +35,7 @@ export default async function converse(
   // Press Enter to trigger form submission
   // This fires a native submit event that React's event delegation system catches
   await input.press("Enter");
+
   // After submitting, verify the input is empty (submission succeeded)
   // Wait a bit for React state to update
   expect(await input.inputValue()).toBe("");

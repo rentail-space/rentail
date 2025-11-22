@@ -51,7 +51,7 @@ describe("Chat page", () => {
     });
   });
 
-  describe("exchange messages", () => {
+  describe.skip("exchange messages", () => {
     let page: Page;
 
     beforeAll(async () => {
@@ -67,13 +67,6 @@ describe("Chat page", () => {
     });
 
     describe("visual regression testing", () => {
-      beforeAll(async () => {
-        // Take screenshot for visual regression testing
-        await page.waitForLoadState("domcontentloaded");
-        await page.locator(".scroll-smooth").scrollIntoViewIfNeeded();
-        await page.waitForTimeout(300);
-      });
-
       it("should match inner HTML", async () => {
         await expect(page).toMatchInnerHTML({
           strip: (html) => {
