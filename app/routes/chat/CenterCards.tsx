@@ -189,12 +189,13 @@ function HoverCard({
           <img
             alt={center.name}
             onError={(e) => {
-              e.currentTarget.style.display = "none";
+              e.currentTarget.classList.add("hidden");
             }}
             onLoad={(e) => {
-              e.currentTarget.style.opacity = "1";
+              e.currentTarget.classList.remove("opacity-0");
             }}
             src={center.imageURLs[0]}
+            className="opacity-0"
           />
         </figure>
 
