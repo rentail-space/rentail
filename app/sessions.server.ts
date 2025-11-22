@@ -96,7 +96,7 @@ export async function findUserAndLastChat(requestHeaders: Headers): Promise<
     take: 1,
     where: { userId: user.id },
   });
-  invariant(chat, "No chat found for user");
+  if (!chat) return;
 
   const messages = await recentMessages(chat.id);
   const responseHeaders = new Headers({
