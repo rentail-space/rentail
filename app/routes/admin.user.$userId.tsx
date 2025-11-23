@@ -1,5 +1,5 @@
 import type { TextUIPart } from "ai";
-import { CircleCheck } from "lucide-react";
+import { CircleCheck, NotepadTextIcon } from "lucide-react";
 import type { Messages, User } from "prisma/generated/client";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { useFetcher } from "react-router";
@@ -50,10 +50,13 @@ export default function UserPage({
 }: {
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
+  const { user } = loaderData;
+
   return (
     <div className="prose mx-auto space-y-4">
-      <UserInfoCard user={loaderData.user} />
-      {loaderData.user.chats.map((chat) => (
+      <UserInfoCard user={user} />
+      <EditNote user={user} />
+      {user.chats.map((chat) => (
         <ChatMessages key={chat.id} chat={chat} />
       ))}
     </div>
@@ -61,8 +64,6 @@ export default function UserPage({
 }
 
 function UserInfoCard({ user }: { user: User }) {
-  const fetcher = useFetcher<typeof action>();
-
   return (
     <details className="collapse border border-gray-200">
       <summary className="collapse-title font-semibold">{user.name}</summary>
@@ -95,42 +96,51 @@ function UserInfoCard({ user }: { user: User }) {
             })}
           </span>
         </li>
-        <li className="list-row">
-          <span className="font-semibold">Note</span>
-          <span>
-            <fetcher.Form
-              onSubmit={(event) => {
-                event.preventDefault();
-                fetcher.submit(event.currentTarget, {
-                  method: "post",
-                  action: `/api/admin/${user.id}/note`,
-                });
-              }}
-            >
-              <textarea
-                className="textarea textarea-bordered min-h-12 w-full"
-                defaultValue={user.note ?? ""}
-                name="note"
-              />
-              <button
-                className={twMerge(
-                  "btn btn-primary float-right mt-2",
-                  fetcher.state !== "idle" && "loading loading-spinner",
-                  fetcher.data?.name ? "btn-success" : "btn-primary",
-                )}
-                type="submit"
-                disabled={fetcher.state !== "idle"}
-              >
-                {fetcher.data ? (
-                  <CircleCheck className="h-6 w-6 shrink-0 stroke-current" />
-                ) : null}
-                {fetcher.state !== "idle" ? "Saving..." : "Save"}
-              </button>
-            </fetcher.Form>
-          </span>
-        </li>
       </ul>
     </details>
+  );
+}
+
+function EditNote({ user }: { user: User }) {
+  const fetcher = useFetcher<typeof action>();
+  return (
+    <fetcher.Form
+      onSubmit={(event) => {
+        event.preventDefault();
+        fetcher.submit(event.currentTarget, {
+          method: "post",
+        });
+      }}
+    >
+      <fieldset className="fieldset">
+        <div className="items-top flex gap-2">
+          <NotepadTextIcon />
+          <textarea
+            className="textarea textarea-bordered min-h-12 w-full"
+            defaultValue={user.note ?? ""}
+            name="note"
+          />
+        </div>
+
+        <div className="flex justify-end">
+          <button
+            className={twMerge(
+              "btn btn-primary btn-sm",
+              fetcher.data?.name ? "btn-success" : "btn-primary",
+            )}
+            type="submit"
+            disabled={fetcher.state !== "idle"}
+          >
+            {fetcher.state !== "idle" ? (
+              <span className="loading loading-spinner" />
+            ) : fetcher.data ? (
+              <CircleCheck className="h-6 w-6 shrink-0 stroke-current" />
+            ) : null}
+            {fetcher.state !== "idle" ? "Saving..." : "Save"}
+          </button>
+        </div>
+      </fieldset>
+    </fetcher.Form>
   );
 }
 
