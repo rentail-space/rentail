@@ -17,9 +17,7 @@ async function scrapeRetailSpaces() {
 
   try {
     console.info("Navigating to Santa Monica Place leasing page...");
-    await page.goto("https://www.santamonicaplace.com/leasing/", {
-      waitUntil: "domcontentloaded",
-    });
+    await page.goto("https://www.santamonicaplace.com/leasing/");
 
     console.info("Extracting retail space data...");
     const spaces = await page.evaluate(() => {

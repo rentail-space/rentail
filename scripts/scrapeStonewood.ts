@@ -21,7 +21,6 @@ async function scrapeSpaces() {
     console.info("Navigating to Stonewood Center leasing page...");
     await page.goto(
       "https://quikspace.macerich.com/commercial-property/us/ca/downey/stonewood-center-1/",
-      { waitUntil: "domcontentloaded" },
     );
 
     console.info("Extracting space data...");

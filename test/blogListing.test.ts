@@ -87,12 +87,12 @@ describe("Blog Listing", () => {
 
   describe("clicks blog post link", () => {
     beforeAll(async () => {
-      await page.goto("/", { waitUntil: "domcontentloaded" });
+      await page.goto("/");
       await page
         .locator('a[href^="/blog/2025-11-07-ultimate-guide"]')
         .last()
         .click();
-      await page.waitForURL(/.*\/blog\/.*/, { waitUntil: "domcontentloaded" });
+      await page.waitForURL(/.*\/blog\/.*/);
     });
 
     it("should navigate to blog post when clicking link", async () => {

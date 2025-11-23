@@ -21,7 +21,6 @@ async function scrapeSpaces() {
     console.info("Navigating to Los Cerritos Center leasing page...");
     await page.goto(
       "https://quikspace.macerich.com/commercial-property/us/ca/cerritos/los-cerritos-center-1/",
-      { waitUntil: "domcontentloaded", timeout: 60000 },
     );
 
     console.info("Extracting space data...");
