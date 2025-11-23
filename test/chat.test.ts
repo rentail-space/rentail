@@ -156,7 +156,12 @@ async function scrollToBottom(page: Page) {
   const scrollButton = page.getByRole("button", {
     name: "Scroll to bottom",
   });
-  await page.waitForTimeout(100);
-  if (await scrollButton.isVisible())
-    await scrollButton.click({ timeout: 100 });
+  if ((await scrollButton.count()) > 0) {
+    try {
+      await page.waitForTimeout(100);
+      await scrollButton.click({ timeout: 100 });
+    } catch {
+      // Ignore error if the scroll button is not visible, enabled, or stable
+    }
+  }
 }
