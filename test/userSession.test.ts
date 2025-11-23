@@ -98,7 +98,7 @@ describe("Anonymous visits chat page", () => {
     describe("visits sign-in page", () => {
       beforeAll(async () => {
         await page.getByRole("button", { name: "Sign In" }).click();
-        await page.waitForURL("/auth", { waitUntil: "networkidle" });
+        await page.waitForURL("/auth", { waitUntil: "domcontentloaded" });
       });
 
       it("shows sign-in page", async () => {
@@ -209,7 +209,7 @@ describe("Anonymous visits chat page", () => {
               .getByRole("textbox", { name: "Password" })
               .fill("WorkingMemory123!");
             await page.getByRole("button", { name: "Create" }).click();
-            await page.waitForURL("/chat", { waitUntil: "networkidle" });
+            await page.waitForURL("/chat", { waitUntil: "domcontentloaded" });
           });
 
           it("redirects to chat page after successful sign-up", async () => {

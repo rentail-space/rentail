@@ -21,6 +21,6 @@ export default async function renderEmail(email: string | JSX.Element | null) {
   const context = await newContext();
   const page = await context.newPage();
   await page.setViewportSize({ width: 1024, height: 780 });
-  await page.setContent(html, { waitUntil: "networkidle" });
+  await page.setContent(html, { waitUntil: "domcontentloaded" });
   return page;
 }
