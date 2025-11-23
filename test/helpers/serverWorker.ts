@@ -22,17 +22,19 @@ async function startServer() {
       force: true,
     });
 
-    // Create Vite dev server with cached dependencies
     const devServer = await vite.createServer({
       clearScreen: false,
       logLevel: "warn", // Reduced log level to avoid noise
       root: process.cwd(),
       server: {
-        hmr: false,
         middlewareMode: false,
         port,
         strictPort: true,
         watch: null,
+        warmup: {
+          // Pre-warm these routes during dev server startup
+          clientFiles: ["/", "/chat", "/chat?q=test"],
+        },
       },
     });
 
