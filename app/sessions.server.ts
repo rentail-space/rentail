@@ -138,9 +138,10 @@ export async function findUserAndChatById({
   if (!("user" in session)) return;
 
   const { isAdmin, user } = session;
-  const chat = await prisma.chat.findUniqueOrThrow({
+  const chat = await prisma.chat.findUnique({
     where: { id: chatId, user: { id: user.id } },
   });
+  if (!chat) return;
 
   const messages = await recentMessages(chat.id);
   const responseHeaders = new Headers({

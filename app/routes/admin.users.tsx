@@ -35,12 +35,9 @@ export default function UsersPage({
           {loaderData.users.map((user) => (
             <Fragment key={user.id}>
               <tr>
-                <td
-                  className="max-w-24 truncate"
-                  title={`${user.name} (${user.id})`}
-                >
+                <td title={`${user.name} (${user.id})`}>
                   <Link
-                    className="link link-primary"
+                    className="link link-primary w-14 max-w-14 truncate"
                     to={`/admin/user/${user.id}`}
                   >
                     {user.isAnonymous ? user.id : (user.name ?? user.id)}
@@ -69,7 +66,7 @@ export default function UsersPage({
               <tr>
                 <td />
                 <td colSpan={6}>
-                  <div className="flex items-center gap-2">
+                  <div className="items-top flex gap-2">
                     <span className="font-semibold">Note:</span>
                     <span className="text-sm">{user.note}</span>
                   </div>
