@@ -15,17 +15,10 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   await verifyAdmin(request.headers);
 
   const user = await prisma.user.findUnique({
-    where: { id: params.userId },
     include: {
-      chats: {
-        include: {
-          messages: {
-            orderBy: { createdAt: "asc" },
-            take: 10,
-          },
-        },
-      },
+      chats: { include: { messages: { orderBy: { createdAt: "asc" } } } },
     },
+    where: { id: params.userId },
   });
   if (!user) throw new Response("Not Found", { status: 404 });
   return { user };
@@ -180,13 +173,13 @@ function ChatMessages({
         </div>
       </summary>
 
-      <div className="m-4">
+      <div className="collapse-content">
         {chat.messages.map((message) => (
           <Fragment key={message.id}>
             {message.role === "user" ? (
               <div className="chat chat-end">
                 <MessageTimestamp message={message} />
-                <div className="chat-bubble prose prose-base">
+                <div className="chat-bubble prose prose-base max-w-10/12">
                   {getTextContent({ message })
                     .split("\n")
                     .map((line, index) => (
@@ -197,7 +190,7 @@ function ChatMessages({
             ) : (
               <div className="chat chat-start">
                 <MessageTimestamp message={message} />
-                <Streamdown className="chat-bubble prose prose-base">
+                <Streamdown className="chat-bubble prose prose-base max-w-10/12">
                   {getTextContent({ message })}
                 </Streamdown>
               </div>
