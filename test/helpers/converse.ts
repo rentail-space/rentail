@@ -22,6 +22,9 @@ export default async function converse(
   // submission correctly on Playwright.
   await page.reload();
   await page.waitForTimeout(500);
+  await page.waitForFunction(() => "__reactRouterContext" in window, {
+    timeout: 5000,
+  });
 
   // Get the initial count of messages in the database, we expect 2 new messages.
   const messageCount = await prisma.messages.count();

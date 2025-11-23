@@ -29,13 +29,7 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const context = await newContext();
   const page = await context.newPage();
   await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
-  await page.goto(path, { waitUntil: "domcontentloaded" });
-
-  // Wait for React to finish rendering.
-  await page.reload();
-  await page.waitForFunction(() => "__reactRouterContext" in window, {
-    timeout: 5000,
-  });
+  await page.goto(path);
   return page;
 }
 

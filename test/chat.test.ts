@@ -11,6 +11,7 @@ describe("Chat page", () => {
 
     beforeAll(async () => {
       page = await goto("/chat");
+      await scrollToBottom(page);
     });
 
     it("should show the welcome message", async () => {
@@ -40,6 +41,7 @@ describe("Chat page", () => {
     beforeAll(async () => {
       await prisma.user.deleteMany();
       page = await goto(`/chat?q=${encodeURIComponent(testQuery)}`);
+      await scrollToBottom(page);
     });
 
     it("should handle initial query parameter", async () => {
@@ -66,13 +68,7 @@ describe("Chat page", () => {
 
     describe("visual regression testing", () => {
       beforeAll(async () => {
-        // Scroll to bottom of the page view to ensure "real chat" state for screenshot
-        await page.locator(".overflow-y-auto").scrollIntoViewIfNeeded();
-        const scrollButton = page.getByRole("button", {
-          name: "Scroll to bottom",
-        });
-        if (await scrollButton.isVisible())
-          await scrollButton.click({ timeout: 100 });
+        await scrollToBottom(page);
       });
 
       it("should match inner HTML", async () => {
@@ -153,3 +149,14 @@ describe("Chat page", () => {
     });
   });
 });
+
+async function scrollToBottom(page: Page) {
+  // Scroll to bottom of the page view to ensure "real chat" state for screenshot
+  await page.locator(".overflow-y-auto").scrollIntoViewIfNeeded();
+  const scrollButton = page.getByRole("button", {
+    name: "Scroll to bottom",
+  });
+  await page.waitForTimeout(100);
+  if (await scrollButton.isVisible())
+    await scrollButton.click({ timeout: 100 });
+}

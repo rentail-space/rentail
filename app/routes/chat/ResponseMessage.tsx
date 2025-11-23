@@ -80,6 +80,8 @@ function MarkdownMessage({
           <Streamdown
             components={getComponents({ askQuestion })}
             remarkPlugins={[remarkGfm]}
+            parseIncompleteMarkdown={true}
+            mode="static"
           >
             {maskWorkingMemoryTags(text)}
           </Streamdown>
