@@ -20,7 +20,7 @@ export default function UsersPage({
 }) {
   return (
     <section className="m-full overflow-x-auto">
-      <table className="table-zebra table">
+      <table className="table">
         <thead>
           <tr>
             <th>Name</th>
@@ -34,8 +34,11 @@ export default function UsersPage({
         <tbody>
           {loaderData.users.map((user) => (
             <Fragment key={user.id}>
-              <tr>
-                <td title={`${user.name} (${user.id})`}>
+              <tr className="bg-base-200">
+                <td
+                  className="max-w-56 truncate"
+                  title={`${user.name} (${user.id})`}
+                >
                   <Link
                     className="link link-primary w-14 max-w-14 truncate"
                     to={`/admin/user/${user.id}`}
@@ -43,19 +46,19 @@ export default function UsersPage({
                     {user.isAnonymous ? user.id : (user.name ?? user.id)}
                   </Link>
                 </td>
-                <td className="max-w-24 truncate" title={user.email ?? ""}>
+                <td className="max-w-56 truncate" title={user.email ?? ""}>
                   {user.email}
                 </td>
-                <td className="max-w-24 truncate" title={user.userAgent ?? ""}>
+                <td className="max-w-44 truncate" title={user.userAgent ?? ""}>
                   {user.userAgent}
                 </td>
-                <td className="max-w-24 truncate" title={user.referrer ?? ""}>
+                <td className="max-w-44 truncate" title={user.referrer ?? ""}>
                   {user.referrer}
                 </td>
-                <td className="max-w-18 truncate" title={user.ip ?? ""}>
+                <td className="min-w-28 truncate" title={user.ip ?? ""}>
                   {user.ip}
                 </td>
-                <td className="max-w-8 whitespace-nowrap">
+                <td className="min-w-24 whitespace-nowrap">
                   {user.createdAt.toLocaleDateString(undefined, {
                     year: "numeric",
                     month: "short",
@@ -63,15 +66,18 @@ export default function UsersPage({
                   })}
                 </td>
               </tr>
-              <tr>
-                <td />
-                <td colSpan={6}>
-                  <div className="items-top flex gap-2">
-                    <span className="font-semibold">Note:</span>
-                    <span className="text-sm">{user.note}</span>
-                  </div>
-                </td>
-              </tr>
+
+              {user.note && (
+                <tr>
+                  <td />
+                  <td colSpan={6}>
+                    <div className="items-top flex gap-2">
+                      <span className="font-semibold">Note:</span>
+                      <span className="text-sm">{user.note}</span>
+                    </div>
+                  </td>
+                </tr>
+              )}
             </Fragment>
           ))}
         </tbody>
