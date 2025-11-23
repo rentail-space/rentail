@@ -7,16 +7,32 @@ import { useFetcher, useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import PageHeader from "~/components/layout/PageHeader";
+import findNearbyCenters from "~/lib/findNearbyCenters";
 import welcome from "~/prompts/welcome.md?raw";
 import type { loader as rootLoader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
+import { findUserAndLastChat } from "~/sessions.server";
+import type { Route } from "./+types/route";
 import CenterCards from "./CenterCards";
 
 export const handle = { hideLayout: true };
 
-export default function ChatPage() {
+export async function loader({ request }: Route.LoaderArgs) {
+  const found = await findUserAndLastChat(request.headers);
+  const centers = await findNearbyCenters({
+    headers: request.headers,
+    user: found?.user,
+  });
+  return { centers };
+}
+
+export default function ChatPage({
+  loaderData,
+}: {
+  loaderData: Awaited<ReturnType<typeof loader>>;
+}) {
   const [query, setQuery] = useQueryState("q");
 
   // Access data from root loader first, our loaded depends on it
@@ -26,7 +42,8 @@ export default function ChatPage() {
     { id: chatId, parts: [{ text: welcome, type: "text" }], role: "assistant" },
   ];
   const [isAborted, setIsAborted] = useState(false);
-  const fetcher = useFetcher();
+  const centersFetcher = useFetcher<Awaited<ReturnType<typeof loader>>>();
+  const stopFetcher = useFetcher();
 
   const { error, messages, sendMessage, status, stop } = useChat({
     id: chatId,
@@ -42,7 +59,7 @@ export default function ChatPage() {
     },
     onFinish: ({ isAbort }) => {
       setIsAborted(isAbort);
-      if (!isAbort) fetcher.load(`/api/chat/${chatId}/centers`);
+      if (!isAbort) centersFetcher.load("/chat");
     },
   });
 
@@ -65,7 +82,9 @@ export default function ChatPage() {
               )}
             </div>
 
-            <CenterCards centers={fetcher.data?.centers ?? []} />
+            <CenterCards
+              centers={centersFetcher.data?.centers ?? loaderData.centers}
+            />
           </div>
         </StickToBottom.Content>
 
@@ -83,10 +102,11 @@ export default function ChatPage() {
           }}
           setQuery={setQuery}
           stopChat={() => {
-            if (chatId) {
-              stop();
-              fetch(`/api/chat/${chatId}/stop`, { method: "POST" });
-            }
+            stop();
+            stopFetcher.submit(`/api/chat/${chatId}/stop`, {
+              method: "POST",
+              preventScrollReset: true,
+            });
           }}
         />
       </div>

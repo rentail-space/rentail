@@ -250,7 +250,7 @@ async function geocodeFromHeaders(
         requestHeaders.get("x-vercel-ip-city") ?? fallback.city,
       ),
       country: requestHeaders.get("x-vercel-ip-country") ?? fallback.country,
-      ip: requestHeaders.get("x-forwarded-for") ?? fallback.ip,
+      ip: requestHeaders.get("x-real-ip") ?? fallback.ip,
       latitude: Number.parseFloat(
         requestHeaders.get("x-vercel-ip-latitude") ??
           fallback.latitude.toString(),
@@ -290,7 +290,8 @@ const isUABot: (userAgent: string) => boolean = createIsbotFromList(
  * @param ip - The IP address to check
  * @returns True if the IP is from Google's domains, false otherwise
  */
-async function isBotByIP(ip: string): Promise<boolean> {
+async function isBotByIP(ip?: string): Promise<boolean> {
+  if (!ip) return false;
   try {
     // Skip reverse DNS check for localhost/private IPs
     if (
@@ -495,7 +496,6 @@ async function createUser({
     }): Promise<UserGetPayload<{ include: { chats: true } }>> {
   const geocode = await geocodeFromHeaders(requestHeaders);
   const userAgent = requestHeaders.get("user-agent") ?? "";
-  const ip = requestHeaders.get("x-forwarded-for") ?? "";
   const cityStateCountry = [geocode.city, geocode.state, geocode.country]
     .filter(Boolean)
     .join(", ");
@@ -506,9 +506,9 @@ async function createUser({
       email: email || `anonymous-${ulid()}@rentail.space`,
       geocode,
       id: ulid(),
-      ip,
+      ip: geocode.ip,
       isAnonymous: !passwordHash,
-      isBot: isUABot(userAgent) || (await isBotByIP(ip)),
+      isBot: isUABot(userAgent) || (await isBotByIP(geocode.ip)),
       metadata: {},
       name: name || "Anonymous",
       passwordHash,
@@ -550,7 +550,7 @@ async function createSession({
     data: {
       expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 365 days
       id: ulid(),
-      ipAddress: requestHeaders.get("x-forwarded-for"),
+      ipAddress: requestHeaders.get("x-real-ip"),
       token: sessionToken,
       userAgent: requestHeaders.get("user-agent"),
       userId,

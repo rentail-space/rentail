@@ -22,7 +22,7 @@ export default defineConfig({
       process.env.GITHUB_ACTIONS ? "github-actions" : "verbose",
       "hanging-process",
     ],
-    setupFiles: "test/helpers/setup.ts",
+    setupFiles: "test/helpers/testSuiteSetup.ts",
     globalSetup: "test/helpers/globalSetup.ts",
     teardownTimeout: 30_000, // 30 seconds for browser/server cleanup (increased to allow proper shutdown)
     testTimeout: 30_000, // 30 seconds for E2E tests with browser interaction

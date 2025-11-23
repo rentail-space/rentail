@@ -3,7 +3,7 @@ import { afterAll, beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
 import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
-import { getElementsByTagName, removeElements } from "./helpers/formatHTML";
+import { getElementsByTagName } from "./helpers/formatHTML";
 
 describe("Chat page", () => {
   describe("interface with welcome message", () => {
@@ -55,31 +55,29 @@ describe("Chat page", () => {
     let page: Page;
 
     beforeAll(async () => {
-      page = await goto("/chat", {
-        "x-vercel-ip-latitude": "34.04592",
-        "x-vercel-ip-longitude": "-118.34574",
-      });
-
-      await converse(
-        page,
+      page = await converse(
         "looking for a pop-up retail space for my clothing boutique",
+        {
+          "x-vercel-ip-latitude": "34.04592",
+          "x-vercel-ip-longitude": "-118.34574",
+        },
       );
     });
 
     describe("visual regression testing", () => {
+      beforeAll(async () => {
+        // Scroll to bottom of the page view to ensure "real chat" state for screenshot
+        await page.locator(".overflow-y-auto").scrollIntoViewIfNeeded();
+        const scrollButton = page.getByRole("button", {
+          name: "Scroll to bottom",
+        });
+        if (await scrollButton.isVisible())
+          await scrollButton.click({ timeout: 100 });
+      });
+
       it("should match inner HTML", async () => {
         await expect(page).toMatchInnerHTML({
           strip: (html) => {
-            // NOTE: In CI the scroll to bottom button is visible, even though we
-            // scroll to the bottom of the page.  We remove the button to make
-            // the HTML match.
-            removeElements(
-              html,
-              (node) =>
-                node.tag === "button" &&
-                node.attributes["aria-label"] === "Scroll to bottom",
-            );
-
             // NOTE: In CI the images are hidden until they are loaded.  We remove the
             // opacity-0 class to make the HTML match.
             for (const img of getElementsByTagName(html, "img")) {
@@ -93,9 +91,6 @@ describe("Chat page", () => {
       });
 
       it.runIf(!process.env.CI)("should look like a real chat", async () => {
-        // Scroll to bottom of the page view to ensure "real chat" state for screenshot
-        const scrollContainer = page.locator(".overflow-y-auto").first();
-        await scrollContainer.scrollIntoViewIfNeeded();
         await expect(page).toMatchScreenshot();
       });
     });

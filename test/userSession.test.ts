@@ -4,7 +4,6 @@ import type zod from "zod";
 import prisma from "~/lib/prisma";
 import type { userProfile } from "~/lib/userProfile";
 import { cleanParseProfile } from "~/lib/userProfile";
-import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
 import { getElementsByTagName } from "./helpers/formatHTML";
 
@@ -12,8 +11,8 @@ describe("Anonymous visits chat page", () => {
   let page: Page;
 
   beforeAll(async () => {
-    page = await goto("/chat", {
-      "x-forwarded-for": "146.70.195.182",
+    page = await converse("Hello, how are you?", {
+      "x-real-ip": "146.70.195.182",
       "x-vercel-ip-city": "Los Angeles",
       "x-vercel-ip-country": "United States",
       "x-vercel-ip-country-region": "California",
@@ -21,7 +20,6 @@ describe("Anonymous visits chat page", () => {
       "x-vercel-ip-latitude": "37.42240",
       "x-vercel-ip-longitude": "-122.08421",
     });
-    await converse(page, "Hello, how are you?");
   });
 
   it("loads chat page and shows sign-in button", async () => {
@@ -46,10 +44,11 @@ describe("Anonymous visits chat page", () => {
   });
 
   describe("updates their location", () => {
+    let page: Page;
     let workingMemory: zod.infer<typeof userProfile>;
 
     beforeAll(async () => {
-      await converse(page, "Actually I'm in Boston");
+      page = await converse("Actually I'm in Boston");
 
       const user = await prisma.user.findFirstOrThrow();
       workingMemory = cleanParseProfile(user.workingMemory);

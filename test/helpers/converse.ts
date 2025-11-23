@@ -2,6 +2,7 @@ import { withTimeout } from "es-toolkit";
 import type { Page } from "playwright";
 import { expect } from "vitest";
 import prisma from "~/lib/prisma";
+import { goto } from "./launchBrowser";
 
 /**
  * Converse with the chatbot. Send a message to the chatbot and wait for the
@@ -11,12 +12,11 @@ import prisma from "~/lib/prisma";
  * @param message - The message to send to the chatbot.
  */
 export default async function converse(
-  page: Page,
   message: string,
-): Promise<void> {
-  // Verify we're on the chat page
-  expect(page.url()).toContain("/chat");
-  await page.waitForFunction(() => "__reactRouterContext" in window);
+  headers?: HeadersInit,
+): Promise<Page> {
+  const page = await goto("/chat");
+  await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
 
   // NOTE: We need to reload the page otherwise React doesn't handle the form
   // submission correctly on Playwright.
@@ -75,4 +75,6 @@ export default async function converse(
   expect(
     await page.locator(".chat-bubble-response").count(),
   ).toBeGreaterThanOrEqual(responseCount + 1);
+
+  return page;
 }

@@ -36,10 +36,15 @@ export default async function setup() {
   msw.listen({ onUnhandledRequest: "error" });
 }
 
-export async function teardown() {
-  // Close MSW first to stop intercepting requests
-  msw.close();
+async function killServerOnPort(port: number) {
+  try {
+    const { stdout } = await execFileAsync("lsof", [`-ti:${port}`]);
+    const pid = stdout.trim().match(/^\s*(\d+)/m)?.[1];
+    if (pid) await execAsync(`kill -9 ${pid}`);
+  } catch {}
+}
 
+export async function teardown() {
   // Notify completion
   try {
     await execAsync(
@@ -48,12 +53,10 @@ export async function teardown() {
   } catch {
     // Ignore if terminal-notifier fails (not installed on all systems)
   }
-}
 
-async function killServerOnPort(port: number) {
-  try {
-    const { stdout } = await execFileAsync("lsof", [`-ti:${port}`]);
-    const pid = stdout.trim().match(/^\s*(\d+)/m)?.[1];
-    if (pid) await execAsync(`kill -9 ${pid}`);
-  } catch {}
+  // Close MSW first to stop intercepting requests
+  msw.close();
+  await prisma.$disconnect();
+
+  process.exit(0);
 }

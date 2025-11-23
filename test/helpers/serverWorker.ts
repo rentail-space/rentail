@@ -5,7 +5,7 @@
  * cleanly when the test is done.
  */
 
-import { invariant } from "es-toolkit";
+import { delay, invariant } from "es-toolkit";
 import { rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import * as vite from "vite";
@@ -42,7 +42,9 @@ async function startServer() {
     await devServer.listen(port);
     // Unref the server to allow process to exit cleanly
     devServer.httpServer?.unref();
+    await devServer.warmupRequest("/chat");
     await devServer.waitForRequestsIdle();
+    await delay(1000); // Wait for the server to warm up
 
     // Handle graceful shutdown on parent process termination
     process.on("message", async (msg) => {

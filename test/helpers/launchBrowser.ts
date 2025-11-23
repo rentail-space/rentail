@@ -30,7 +30,9 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const page = await context.newPage();
   await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
   await page.goto(path, { waitUntil: "domcontentloaded" });
+
   // Wait for React to finish rendering.
+  await page.reload();
   await page.waitForFunction(() => "__reactRouterContext" in window, {
     timeout: 5000,
   });
@@ -84,7 +86,11 @@ async function blockOutgoingRequests(route: Route): Promise<void> {
 
   // Mock rentail.space requests using localhost
   if (hostname === "rentail.space") {
-    const response = await route.fetch();
+    const url = new URLString(
+      route.request().url(),
+      `http://localhost:${port}`,
+    );
+    const response = await route.fetch({ url: url.toString() });
     return await route.fulfill({ response });
   }
 
