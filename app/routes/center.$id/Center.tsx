@@ -50,7 +50,7 @@ export default function Center({
       )}
 
       <section className="prose prose-lg">
-        <Streamdown remarkPlugins={[[remarkGfm, {}]]}>
+        <Streamdown remarkPlugins={[remarkGfm]} mode="static">
           {center.description}
         </Streamdown>
       </section>

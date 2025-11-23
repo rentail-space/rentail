@@ -52,12 +52,9 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
 
       <Streamdown
         className="prose prose-lg mx-auto"
+        controls={{ code: false, mermaid: false, table: false }}
+        mode="static"
         remarkPlugins={[remarkGfm]}
-        controls={{
-          code: false,
-          mermaid: false,
-          table: false,
-        }}
       >
         {body}
       </Streamdown>

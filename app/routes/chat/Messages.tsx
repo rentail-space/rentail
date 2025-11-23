@@ -40,14 +40,14 @@ export default function Messages({
   return (
     <div className="flex min-h-[80lvh] flex-1 flex-col">
       <div className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto scroll-smooth p-4">
-        {messages.map((message, index, messages) =>
+        {messages.map((message) =>
           message.role === "user" ? (
-            <UserMessage key={index.toString()} message={message} />
+            <UserMessage key={message.id} message={message} />
           ) : message.role === "assistant" ? (
             <ResponseMessage
               askQuestion={askQuestion({ scrollToBottom, setQuery })}
-              isLast={index === messages.length - 1}
-              key={index.toString()}
+              isStreaming={isTyping}
+              key={message.id}
               message={message}
               scrollToBottom={scrollToBottom}
             />

@@ -9,11 +9,12 @@ import { maskWorkingMemoryTags } from "~/lib/userProfile";
 
 export default function ResponseMessage({
   askQuestion,
+  isStreaming,
   message,
   scrollToBottom,
 }: {
   askQuestion: (question: string) => Promise<void>;
-  isLast: boolean;
+  isStreaming: boolean;
   message: UIMessage;
   scrollToBottom: ScrollToBottom;
 }) {
@@ -44,6 +45,7 @@ export default function ResponseMessage({
           <MarkdownMessage
             askQuestion={askQuestion}
             contentRef={contentRef}
+            isStreaming={isStreaming}
             key={index.toString()}
             text={part.text}
           />
@@ -59,10 +61,12 @@ export default function ResponseMessage({
 function MarkdownMessage({
   askQuestion,
   contentRef,
+  isStreaming,
   text,
 }: {
   askQuestion: (question: string) => Promise<void>;
   contentRef: React.RefObject<HTMLDivElement | null>;
+  isStreaming: boolean;
   text: string;
 }) {
   return (
@@ -75,22 +79,18 @@ function MarkdownMessage({
           width="32px"
         />
       </div>
-      <div className="chat-bubble chat-bubble-response prose prose-base">
-        <div ref={contentRef}>
-          <Streamdown
-            components={getComponents({ askQuestion })}
-            remarkPlugins={[remarkGfm]}
-            parseIncompleteMarkdown={true}
-            mode="static"
-            controls={{
-              code: false,
-              mermaid: false,
-              table: false,
-            }}
-          >
-            {maskWorkingMemoryTags(text)}
-          </Streamdown>
-        </div>
+      <div className="chat-bubble chat-bubble-response" ref={contentRef}>
+        <Streamdown
+          className="prose prose-base"
+          components={getComponents({ askQuestion })}
+          controls={{ code: false, mermaid: false, table: false }}
+          parseIncompleteMarkdown
+          remarkPlugins={[remarkGfm]}
+          isAnimating={isStreaming}
+          mode={isStreaming ? "streaming" : "static"}
+        >
+          {maskWorkingMemoryTags(text)}
+        </Streamdown>
       </div>
     </div>
   );
