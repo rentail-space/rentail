@@ -1,22 +1,25 @@
 import type { TextUIPart } from "ai";
 import { CircleCheck, NotepadTextIcon } from "lucide-react";
-import type { Messages, User } from "prisma/generated/client";
+import type { User } from "prisma/generated/client";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { useFetcher } from "react-router";
-import { Fragment } from "react/jsx-runtime";
-import { Streamdown } from "streamdown";
 import { twMerge } from "tailwind-merge";
+import { StickToBottom } from "use-stick-to-bottom";
 import prisma from "~/lib/prisma";
 import { cleanParseProfile } from "~/lib/userProfile";
 import { verifyAdmin } from "~/sessions.server";
 import type { Route } from "./+types/admin.user.$userId";
+import Messages from "./chat/Messages";
 
 export async function loader({ params, request }: Route.LoaderArgs) {
   await verifyAdmin(request.headers);
 
   const user = await prisma.user.findUnique({
     include: {
-      chats: { include: { messages: { orderBy: { createdAt: "asc" } } } },
+      chats: {
+        orderBy: { createdAt: "desc" },
+        include: { messages: { orderBy: { createdAt: "asc" } } },
+      },
     },
     where: { id: params.userId },
   });
@@ -29,8 +32,6 @@ export async function action({ params, request }: Route.ActionArgs) {
 
   const formData = await request.formData();
   const note = formData.get("note") as string;
-  console.log(note);
-  console.log(params.userId);
   const user = await prisma.user.update({
     data: { note },
     where: { id: params.userId },
@@ -46,14 +47,18 @@ export default function UserPage({
   const { user } = loaderData;
 
   return (
-    <div className="prose mx-auto space-y-4">
+    <StickToBottom
+      className="prose mx-auto space-y-4"
+      initial="smooth"
+      resize="smooth"
+    >
       <UserInfoCard user={user} />
       <EditNote user={user} />
       <WorkingMemory user={user} />
       {user.chats.map((chat) => (
-        <ChatMessages key={chat.id} chat={chat} />
+        <FullChat key={chat.id} chat={chat} />
       ))}
-    </div>
+    </StickToBottom>
   );
 }
 
@@ -64,26 +69,41 @@ function UserInfoCard({ user }: { user: User }) {
       <table className="table-bordered collapse-content table">
         <tbody>
           <tr>
-            <th>Email</th>
-            <td className="truncate" title={user.email ?? ""}>
+            <th className="align-middle">Email</th>
+            <td className="truncate align-middle" title={user.email ?? ""}>
               {user.email}
             </td>
           </tr>
           <tr>
-            <th className="whitespace-nowrap">User Agent</th>
-            <td className="truncate" title={user.userAgent ?? ""}>
+            <th className="whitespace-nowrap align-middle">User Agent</th>
+            <td className="truncate align-middle" title={user.userAgent ?? ""}>
               {user.userAgent}
             </td>
           </tr>
           <tr>
-            <th>Referrer</th>
-            <td className="truncate" title={user.referrer ?? ""}>
+            <th className="align-middle">Referrer</th>
+            <td className="truncate align-middle" title={user.referrer ?? ""}>
               {user.referrer}
             </td>
           </tr>
           <tr>
-            <th>Created</th>
-            <td>
+            <th className="align-middle">IP</th>
+            <td className="truncate align-middle" title={user.ip ?? ""}>
+              {user.ip}
+            </td>
+          </tr>
+          <tr>
+            <th className="align-middle">Location</th>
+            <td
+              className="truncate align-middle"
+              title={user.cityStateCountry ?? ""}
+            >
+              {user.cityStateCountry}
+            </td>
+          </tr>
+          <tr>
+            <th className="align-middle">Created</th>
+            <td className="whitespace-nowrap align-middle">
               {user.createdAt.toLocaleDateString(undefined, {
                 year: "numeric",
                 month: "short",
@@ -144,8 +164,8 @@ function WorkingMemory({ user }: { user: User }) {
   const workingMemory = cleanParseProfile(user.workingMemory);
   return (
     <details className="collapse border border-gray-200">
-      <summary className="collapse-title semibold">
-        Click to show/hide working memory
+      <summary className="collapse-title font-semibold">
+        User's working memory
       </summary>
       <pre className="collapse-content text-sm">
         {JSON.stringify(workingMemory, null, 2)}
@@ -154,77 +174,41 @@ function WorkingMemory({ user }: { user: User }) {
   );
 }
 
-function ChatMessages({
+function FullChat({
   chat,
 }: {
   chat: ChatGetPayload<{ include: { messages: true } }>;
 }) {
+  const timestamp = chat.createdAt;
   return (
     <details className="collapse border border-gray-200" open>
-      <summary className="collapse-title">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold">{chat.title || "Chat"}</span>
-          <span className="font-normal text-gray-500">
-            (
-            {chat.createdAt.toLocaleDateString(undefined, {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
-            )
-          </span>
-        </div>
+      <summary className="collapse-title flex justify-between gap-2 font-semibold">
+        <span>{chat.title ?? "Untitled chat"}</span>
+        <span className="text-gray-500">
+          {timestamp.toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+            timeZone: "UTC",
+          })}
+        </span>
       </summary>
 
-      <div className="collapse-content">
-        {chat.messages.map((message) => (
-          <Fragment key={message.id}>
-            {message.role === "user" ? (
-              <div className="chat chat-end">
-                <MessageTimestamp message={message} />
-                <div className="chat-bubble prose prose-base max-w-10/12">
-                  {getTextContent({ message })
-                    .split("\n")
-                    .map((line, index) => (
-                      <p key={index.toString()}>{line}</p>
-                    ))}
-                </div>
-              </div>
-            ) : (
-              <div className="chat chat-start">
-                <MessageTimestamp message={message} />
-                <Streamdown className="chat-bubble prose prose-base max-w-10/12">
-                  {getTextContent({ message })}
-                </Streamdown>
-              </div>
-            )}
-          </Fragment>
-        ))}
-      </div>
+      <Messages
+        key={chat.id}
+        isAborted={false}
+        error={undefined}
+        isTyping={false}
+        messages={chat.messages.map((message) => ({
+          id: message.id,
+          parts: message.content as TextUIPart[],
+          role: message.role,
+        }))}
+        setQuery={() => {}}
+      />
     </details>
   );
-}
-
-function MessageTimestamp({ message }: { message: Messages }) {
-  return (
-    <div className="chat-header">
-      {message.createdAt.toLocaleTimeString(undefined, {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-      })}{" "}
-      {message.createdAt.toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })}
-    </div>
-  );
-}
-
-function getTextContent({ message }: { message: Messages }): string {
-  return (message.content as TextUIPart[])
-    .map((part) => (part.type === "text" ? part.text : null))
-    .join("\n");
 }

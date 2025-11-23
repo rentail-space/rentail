@@ -1,18 +1,17 @@
 import type { UIMessage } from "ai";
-import { Loader2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import remarkGfm from "remark-gfm";
-import { Streamdown } from "streamdown";
+import { useEffect, useRef } from "react";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import askQuestion from "~/routes/chat/askQuestion";
 import ResponseMessage from "./ResponseMessage";
 
 export default function Messages({
+  isAborted,
   error,
   isTyping,
   messages,
   setQuery,
 }: {
+  isAborted: boolean;
   error?: Error;
   isTyping: boolean;
   messages: UIMessage[];
@@ -40,7 +39,7 @@ export default function Messages({
 
   return (
     <div className="flex min-h-[80lvh] flex-1 flex-col">
-      <div className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto scroll-smooth p-6">
+      <div className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto scroll-smooth p-4">
         {messages.map((message, index, messages) =>
           message.role === "user" ? (
             <UserMessage key={index.toString()} message={message} />
@@ -56,6 +55,7 @@ export default function Messages({
         )}
 
         {isTyping && <TypingIndicator />}
+        {isAborted && <_AbortedMessage />}
         {error && <ErrorNotice error={error} />}
       </div>
     </div>
@@ -86,44 +86,6 @@ function _AbortedMessage() {
     <div className="chat chat-end">
       <div className="text-red-500">The conversation was aborted.</div>
     </div>
-  );
-}
-
-function _ReasoningMessage({
-  text,
-  isLast,
-}: {
-  text: string;
-  isLast: boolean;
-}) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const isThinking = isLast;
-
-  return (
-    <details
-      className="prose prose-base mb-2 rounded-lg bg-gray-50 p-3 hover:bg-gray-200"
-      onToggle={(event) => setIsExpanded(event.currentTarget.open)}
-      open={isExpanded}
-    >
-      <summary className="mb-4 w-full cursor-pointer font-medium text-gray-600">
-        {isThinking ? (
-          <span className="flex-row flex-nowrap items-center gap-2 pl-2">
-            <Loader2 className="mr-2 inline-block h-4 w-4 animate-spin" />
-            <span>Thinking…</span>
-          </span>
-        ) : isExpanded ? (
-          "Reasoning"
-        ) : (
-          "Reasoning (click to expand)"
-        )}
-      </summary>
-      <Streamdown
-        className="prose prose-base"
-        remarkPlugins={[[remarkGfm, {}]]}
-      >
-        {text}
-      </Streamdown>
-    </details>
   );
 }
 

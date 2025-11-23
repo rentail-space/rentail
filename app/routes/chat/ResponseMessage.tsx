@@ -67,7 +67,7 @@ function MarkdownMessage({
 }) {
   return (
     <div className="chat chat-start">
-      <div className="chat-image avatar mr-2 h-8 w-8">
+      <div className="chat-image avatar not-prose w-8">
         <img
           alt="rental space"
           height="32px"
@@ -82,6 +82,11 @@ function MarkdownMessage({
             remarkPlugins={[remarkGfm]}
             parseIncompleteMarkdown={true}
             mode="static"
+            controls={{
+              code: false,
+              mermaid: false,
+              table: false,
+            }}
           >
             {maskWorkingMemoryTags(text)}
           </Streamdown>

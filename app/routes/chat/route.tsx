@@ -73,6 +73,7 @@ export default function ChatPage({
             <div className="flex flex-1 flex-col">
               <Messages
                 error={error}
+                isAborted={isAborted}
                 isTyping={status === "streaming"}
                 messages={messages}
                 setQuery={setQuery}
