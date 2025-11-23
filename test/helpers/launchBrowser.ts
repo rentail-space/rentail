@@ -18,18 +18,14 @@ const logger = debug("browser");
  * Open a new page in the browser.
  *
  * @param path - The path to open.
- * @param headers - The headers to set on the page.
- * @param options - Optional navigation options (waitUntil, timeout)
- *   - waitUntil: "load" | "domcontentloaded" | "networkidle" (default: "networkidle")
- *     Use "domcontentloaded" for pages with background streaming (e.g., chat)
- *   - timeout: Navigation timeout in milliseconds
+ * @param headers - The headers to set on the page (optional).
  * @returns The page.
  */
 export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const context = await newContext();
   const page = await context.newPage();
   await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
-  await page.goto(path);
+  await page.goto(path, { timeout: 5_000 });
   return page;
 }
 

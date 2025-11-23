@@ -6,17 +6,17 @@ import { goto } from "./launchBrowser";
 
 /**
  * Converse with the chatbot. Send a message to the chatbot and wait for the
- * response to arrive, check that it renders on the page.
+ * response to arrive. Check that it renders on the page.
  *
- * @param page - The Playwright page object.
  * @param message - The message to send to the chatbot.
+ * @param headers - The headers to set on the page (optional).
+ * @returns The page.
  */
 export default async function converse(
   message: string,
   headers?: HeadersInit,
 ): Promise<Page> {
-  const page = await goto("/chat");
-  await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
+  const page = await goto("/chat", headers);
 
   // NOTE: We need to reload the page otherwise React doesn't handle the form
   // submission correctly on Playwright.
