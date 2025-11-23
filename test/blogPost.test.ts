@@ -107,7 +107,7 @@ describe("Blog Post Rendering", () => {
     await page.setViewportSize({ width: 375, height: 667 });
 
     await page.reload();
-    await page.waitForLoadState("domcontentloaded");
+    await page.waitForLoadState("load");
 
     // Check that content is still visible and properly formatted
     const article = page.locator("article");

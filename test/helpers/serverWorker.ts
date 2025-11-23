@@ -23,18 +23,38 @@ async function startServer() {
     });
 
     const devServer = await vite.createServer({
+      build: {
+        // Test-specific build options
+        minify: false,
+        sourcemap: true,
+      },
       clearScreen: false,
       logLevel: "warn", // Reduced log level to avoid noise
       root: process.cwd(),
+      optimizeDeps: {
+        // Force pre-bundling on startup
+        include: [
+          "react",
+          "react-dom",
+          "react-router",
+          "@ai-sdk/react",
+          "lucide-react",
+          "tailwindcss",
+          "use-stick-to-bottom",
+          "nuqs",
+          "daisyui",
+        ],
+        force: true, // Force re-optimization in test mode
+        noDiscovery: false, // Disable lazy optimization during dev
+      },
       server: {
+        fs: { allow: ["."] }, // Don't re-optimize already bundled deps
+        hmr: false,
         middlewareMode: false,
         port,
         strictPort: true,
-        watch: null,
-        warmup: {
-          // Pre-warm these routes during dev server startup
-          clientFiles: ["/", "/chat", "/chat?q=test"],
-        },
+        warmup: { clientFiles: ["/", "/chat", "/chat?q=test"] }, // Pre-warm these routes during dev server startup
+        watch: null, // Don't watch files during tests
       },
     });
 

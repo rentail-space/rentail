@@ -21,7 +21,7 @@ export async function launchServer(port: number): Promise<void> {
   // instance, which could cause issues with some libraries (eg Prisma)
   worker = fork(resolve("test/helpers/serverWorker.ts"), {
     execArgv: ["--import", "tsx/esm"],
-    stdio: debug.enabled("server") ? "inherit" : "pipe",
+    stdio: "pipe",
     env: {
       ...process.env,
       NODE_ENV: "test",
