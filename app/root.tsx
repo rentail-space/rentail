@@ -109,7 +109,7 @@ export function ErrorBoundary() {
   const error = useRouteError();
 
   return (
-    <PageLayout hideLayout={true}>
+    <PageLayout>
       <main className="prose prose-lg mx-auto py-32">
         {isRouteErrorResponse(error) ? (
           <h1 className="mx-auto flex flex-row justify-center gap-2 text-4xl">
