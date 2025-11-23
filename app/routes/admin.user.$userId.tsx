@@ -49,6 +49,7 @@ export default function UserPage({
     <div className="prose mx-auto space-y-4">
       <UserInfoCard user={user} />
       <EditNote user={user} />
+      <WorkingMemory user={user} />
       {user.chats.map((chat) => (
         <ChatMessages key={chat.id} chat={chat} />
       ))}
@@ -58,38 +59,40 @@ export default function UserPage({
 
 function UserInfoCard({ user }: { user: User }) {
   return (
-    <details className="collapse border border-gray-200">
+    <details className="collapse border border-gray-200" open>
       <summary className="collapse-title font-semibold">{user.name}</summary>
-      <ul className="list">
-        <li className="list-row">
-          <span className="font-semibold">Email</span>
-          <span>{user.email}</span>
-        </li>
-        <li className="list-row">
-          <span className="font-semibold">User Agent</span>
-          <span className="list-col-wrap">{user.userAgent}</span>
-        </li>
-        <li className="list-row">
-          <span className="font-semibold">Referrer</span>
-          <span className="list-col-wrap">{user.referrer}</span>
-        </li>
-        <li className="list-row">
-          <span className="font-semibold">Working Memory</span>
-          <span className="list-col-wrap">
-            <WorkingMemory user={user} />
-          </span>
-        </li>
-        <li className="list-row">
-          <span className="font-semibold">Created</span>
-          <span>
-            {user.createdAt.toLocaleDateString(undefined, {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
-          </span>
-        </li>
-      </ul>
+      <table className="table-bordered collapse-content table">
+        <tbody>
+          <tr>
+            <th>Email</th>
+            <td className="truncate" title={user.email ?? ""}>
+              {user.email}
+            </td>
+          </tr>
+          <tr>
+            <th className="whitespace-nowrap">User Agent</th>
+            <td className="truncate" title={user.userAgent ?? ""}>
+              {user.userAgent}
+            </td>
+          </tr>
+          <tr>
+            <th>Referrer</th>
+            <td className="truncate" title={user.referrer ?? ""}>
+              {user.referrer}
+            </td>
+          </tr>
+          <tr>
+            <th>Created</th>
+            <td>
+              {user.createdAt.toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </details>
   );
 }
