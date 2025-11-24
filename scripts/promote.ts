@@ -60,11 +60,13 @@ async function getRecentDeployment(): Promise<
     console.log(
       deplopyment.state === "READY"
         ? `\x1b[32m✓ ${status}\x1b[0m`
-        : `\x1b[31m✗ ${status}\x1b[0m`,
+        : deplopyment.state === "BUILDING"
+          ? `\x1b[33m⚡ ${status}\x1b[0m`
+          : `\x1b[31m✗ ${status}\x1b[0m`,
       new Date(deplopyment.createdAt ?? 0).toLocaleString(),
       deplopyment.uid,
       deplopyment.target ?? "preview",
-      deplopyment.readySubstate || "pending",
+      deplopyment.readySubstate || "building",
     );
   }
   console.log();
