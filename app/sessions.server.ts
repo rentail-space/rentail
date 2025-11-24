@@ -543,7 +543,7 @@ async function createUser({
   });
 
   // Notify admin of new user creation
-  await sendNewUserEmail({ user });
+  if (env.isProduction) await sendNewUserEmail({ user });
 
   return user;
 }
