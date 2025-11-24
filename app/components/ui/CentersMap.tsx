@@ -9,14 +9,18 @@ const mapboxToken =
   "pk.eyJ1IjoiYXNzYWZhcmtpbiIsImEiOiJjbWhwY3ZoazMwYXloMmxvbmxvZTE2eTBmIn0.m1npzYF93dHWeF4W3Yt_xw";
 
 export default function CentersMap({
+  centers,
   latitude,
   longitude,
-  centers,
+  centerRef,
   zoom = 11,
 }: {
+  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
   latitude: number;
   longitude: number;
-  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
+  centerRef?: React.RefObject<
+    ((center: { longitude: number; latitude: number }) => void) | null
+  >;
   zoom?: number;
 }) {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -27,6 +31,12 @@ export default function CentersMap({
   const escapeHandlerRef = useRef<((event: KeyboardEvent) => void) | null>(
     null,
   );
+
+  if (centerRef)
+    centerRef.current = (center: { longitude: number; latitude: number }) => {
+      map.current?.setCenter([center.longitude, center.latitude]);
+      map.current?.setZoom(10);
+    };
 
   useEffect(() => {
     if (!mapContainer.current || map.current) return;

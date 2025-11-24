@@ -1,5 +1,7 @@
+import { MapPinIcon } from "lucide-react";
 import type { PropertySpace } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
+import { useRef } from "react";
 import { Link } from "react-router";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
@@ -24,29 +26,36 @@ export default function CenterPage({
 }: {
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
+  const centerRef =
+    useRef<(center: { longitude: number; latitude: number }) => void>(null);
   return (
     <div>
       <CentersMap
+        centerRef={centerRef}
         centers={loaderData.centers}
         latitude={loaderData.latitude ?? 34.0522}
         longitude={loaderData.longitude ?? -118.2437}
         zoom={9}
       />
 
-      <CentersList centers={loaderData.centers} />
+      <CentersList centerRef={centerRef} centers={loaderData.centers} />
     </div>
   );
 }
 
 function CentersList({
   centers,
+  centerRef,
 }: {
   centers: PropertyGetPayload<{ include: { spaces: true } }>[];
+  centerRef: React.RefObject<
+    ((center: { longitude: number; latitude: number }) => void) | null
+  >;
 }) {
   return (
     <div className="prose prose-md mx-auto flex flex-col gap-4">
       {centers.map((center) => (
-        <Center key={center.id} center={center} />
+        <Center key={center.id} center={center} centerRef={centerRef} />
       ))}
     </div>
   );
@@ -54,28 +63,49 @@ function CentersList({
 
 function Center({
   center,
+  centerRef,
 }: {
   center: PropertyGetPayload<{ include: { spaces: true } }>;
+  centerRef: React.RefObject<
+    ((center: { longitude: number; latitude: number }) => void) | null
+  >;
 }) {
   const paragraphs = center.description.split("\n");
 
   return (
     <section key={center.id} className="flex flex-col gap-2">
-      <h3>
+      <h3 className="flex flex-row items-center justify-between gap-2">
         <Link
           className="text-blue-500 no-underline hover:text-blue-700 hover:underline"
+          title="View center"
           to={`/center/${center.id}`}
         >
           {center.name}
         </Link>
+
+        <button
+          type="button"
+          className="btn btn-ghost btn-sm"
+          onClick={(event) => {
+            event.preventDefault();
+            centerRef.current?.({
+              longitude: center.longitude ?? 0,
+              latitude: center.latitude ?? 0,
+            });
+          }}
+          title="Center on map"
+        >
+          <MapPinIcon className="h-6 w-6 text-blue-500" />
+        </button>
       </h3>
 
-      <div>{paragraphs[0]}</div>
+      <p>{paragraphs[0]}</p>
       <div>
         <Link
           className="text-blue-500 no-underline hover:text-blue-700 hover:underline"
           to={`https://maps.google.com/?q=${encodeURIComponent(`${center.address}, ${center.city}, ${center.state} ${center.country}`)}`}
           target="_blank"
+          title="Open in Google Maps"
         >
           {center.address}, {center.city}, {center.state}
         </Link>
