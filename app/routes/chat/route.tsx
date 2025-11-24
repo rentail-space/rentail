@@ -69,8 +69,8 @@ export default function ChatPage({
         <PageHeader />
 
         <StickToBottom.Content>
-          <div className="flex flex-1 flex-row gap-4 lg:pr-4">
-            <div className="flex flex-1 flex-col">
+          <div className="flex flex-row gap-4 lg:pr-4">
+            <div className="flex min-h-[80lvh] flex-1 flex-col">
               <Messages
                 error={error}
                 isAborted={isAborted}
