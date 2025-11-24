@@ -1,10 +1,12 @@
 import { pretty, render } from "@react-email/components";
 import { captureException } from "@sentry/react-router";
 import debug from "debug";
+import type { User } from "prisma/generated/client";
 import type { JSX } from "react";
 import { Resend } from "resend";
 import env from "~/lib/env";
 import EmailVerification from "./EmailVerification";
+import NewUserNotification from "./NewUserNotification";
 import Waitlist from "./Waitlist";
 import Welcome from "./Welcome";
 
@@ -50,6 +52,16 @@ export async function sendWaitlistEmail({ email }: { email: string }) {
     email,
     subject: "You're on the waitlist!",
     component: Waitlist,
+  });
+}
+
+export async function sendNewUserEmail({ user }: { user: User }) {
+  await sendEmail({
+    email: "assaf@labnotes.org",
+    subject: "New User Created",
+    component: ({ subject }) => (
+      <NewUserNotification user={user} subject={subject} />
+    ),
   });
 }
 

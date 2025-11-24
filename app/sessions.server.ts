@@ -12,6 +12,7 @@ import { ulid } from "ulid";
 import zod from "zod";
 import prisma from "~/lib/prisma";
 import welcome from "~/prompts/welcome.md?raw";
+import { sendNewUserEmail } from "./emails/sendEmails";
 import env from "./lib/env";
 
 type SessionData = {
@@ -500,7 +501,7 @@ async function createUser({
     .filter(Boolean)
     .join(", ");
 
-  return await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       cityStateCountry,
       email: email || `anonymous-${ulid()}@rentail.space`,
@@ -535,6 +536,11 @@ async function createUser({
     },
     include: { chats: true },
   });
+
+  // Notify admin of new user creation
+  await sendNewUserEmail({ user });
+
+  return user;
 }
 
 async function createSession({
