@@ -30,11 +30,15 @@ async function githubWorkflows() {
     displayTitle: string;
   }[];
   for (const workflow of workflows) {
-    const status = `  ${workflow.createdAt} ${workflow.displayTitle} => ${workflow.conclusion}`;
+    const status = "  %s\t%s =>\t%s";
     console.log(
       workflow.conclusion === "failure"
-        ? `\x1b[31m${status}\x1b[0m`
-        : `\x1b[32m${status}\x1b[0m`,
+        ? `\x1b[31m✗ ${status}\x1b[0m`
+        : `\x1b[32m✓ ${status}\x1b[0m`,
+      new Date(workflow.createdAt ?? 0).toLocaleString(),
+      workflow.displayTitle.slice(0, 40) +
+        (workflow.displayTitle.length > 40 ? "…" : ""),
+      workflow.conclusion,
     );
   }
   console.log();
@@ -52,11 +56,15 @@ async function getRecentDeployment(): Promise<
   });
 
   for (const deplopyment of deployments) {
-    const status = `  ${new Date(deplopyment.createdAt ?? 0).toLocaleString()}\t${deplopyment.uid} => ${deplopyment.target ?? "preview"}\t(${deplopyment.readySubstate?.toLocaleLowerCase()}) `;
+    const status = "  %s\t%s => %s\t(%s) ";
     console.log(
       deplopyment.state === "READY"
-        ? `\x1b[32m${status}\x1b[0m`
-        : `\x1b[31m${status}\x1b[0m`,
+        ? `\x1b[32m✓ ${status}\x1b[0m`
+        : `\x1b[31m✗ ${status}\x1b[0m`,
+      new Date(deplopyment.createdAt ?? 0).toLocaleString(),
+      deplopyment.uid,
+      deplopyment.target ?? "preview",
+      deplopyment.readySubstate || "pending",
     );
   }
   console.log();
@@ -88,6 +96,9 @@ await githubWorkflows();
 const deployment = await getRecentDeployment();
 if (deployment.readySubstate === "PROMOTED") {
   console.log("\x1b[32m✔ Deployment already promoted to production\x1b[0m");
+  process.exit(0);
+} else if (!deployment.readySubstate) {
+  console.log("\x1b[32m✔ Promoting to production …\x1b[0m");
   process.exit(0);
 }
 
