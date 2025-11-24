@@ -425,9 +425,8 @@ export async function signUpEmail({
   const session = await getSession(requestHeaders.get("Cookie"));
   const passwordHash = await bcrypt.hash(password, 10);
 
-  // TODO: convert from anonymous user to new user
-
-  const anon = await prisma.user.findFirst({
+  // Is this session from an anonymous user? If so, convert them to a named user.
+  const anonymousUser = await prisma.user.findFirst({
     where: {
       isAnonymous: true,
       sessions: {
@@ -438,22 +437,28 @@ export async function signUpEmail({
       },
     },
   });
-  if (anon) {
-    await prisma.user.update({
+  if (anonymousUser) {
+    const user = await prisma.user.update({
       data: { isAnonymous: false, name, email, passwordHash },
-      where: { id: anon.id },
+      where: { id: anonymousUser.id },
     });
-    return await createSession({ requestHeaders, userId: anon.id });
-  } else {
-    const newUser = await createUser({
-      chatId: ulid(),
-      email,
-      name,
-      passwordHash,
-      requestHeaders,
-    });
-    return await createSession({ requestHeaders, userId: newUser.id });
+    return await createSession({ requestHeaders, userId: user.id });
   }
+
+  // Is this email already in use? If so, sign in the user.
+  const existingUser = await prisma.user.findUnique({ where: { email } });
+  if (existingUser)
+    return await signInEmail({ email, password, requestHeaders });
+
+  // Create a new user account and return the session cookie.
+  const newUser = await createUser({
+    chatId: ulid(),
+    email,
+    name,
+    passwordHash,
+    requestHeaders,
+  });
+  return await createSession({ requestHeaders, userId: newUser.id });
 }
 
 export async function signOut(requestHeaders: Headers): Promise<Headers> {
