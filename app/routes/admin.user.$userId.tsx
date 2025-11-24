@@ -53,8 +53,8 @@ export default function UserPage({
       resize="smooth"
     >
       <UserInfoCard user={user} />
-      <EditNote user={user} />
       <WorkingMemory user={user} />
+      <EditNote user={user} />
       {user.chats.map((chat) => (
         <FullChat key={chat.id} chat={chat} />
       ))}
@@ -120,43 +120,47 @@ function UserInfoCard({ user }: { user: User }) {
 function EditNote({ user }: { user: User }) {
   const fetcher = useFetcher<typeof action>();
   return (
-    <fetcher.Form
-      onSubmit={(event) => {
-        event.preventDefault();
-        fetcher.submit(event.currentTarget, {
-          method: "post",
-        });
-      }}
-    >
-      <fieldset className="fieldset">
-        <div className="items-top flex gap-2">
-          <NotepadTextIcon />
-          <textarea
-            className="textarea textarea-bordered min-h-12 w-full"
-            defaultValue={user.note ?? ""}
-            name="note"
-          />
-        </div>
+    <details className="collapse border border-gray-200">
+      <summary className="collapse-title font-semibold">Note</summary>
+      <fetcher.Form
+        className="collapse-content"
+        onSubmit={(event) => {
+          event.preventDefault();
+          fetcher.submit(event.currentTarget, {
+            method: "post",
+          });
+        }}
+      >
+        <fieldset className="fieldset">
+          <div className="items-top flex gap-2">
+            <NotepadTextIcon />
+            <textarea
+              className="textarea textarea-bordered min-h-12 w-full"
+              defaultValue={user.note ?? ""}
+              name="note"
+            />
+          </div>
 
-        <div className="flex justify-end">
-          <button
-            className={twMerge(
-              "btn btn-primary btn-sm",
-              fetcher.data?.name ? "btn-success" : "btn-primary",
-            )}
-            type="submit"
-            disabled={fetcher.state !== "idle"}
-          >
-            {fetcher.state !== "idle" ? (
-              <span className="loading loading-spinner" />
-            ) : fetcher.data ? (
-              <CircleCheck className="h-6 w-6 shrink-0 stroke-current" />
-            ) : null}
-            {fetcher.state !== "idle" ? "Saving..." : "Save"}
-          </button>
-        </div>
-      </fieldset>
-    </fetcher.Form>
+          <div className="flex justify-end">
+            <button
+              className={twMerge(
+                "btn btn-primary btn-sm",
+                fetcher.data?.name ? "btn-success" : "btn-primary",
+              )}
+              type="submit"
+              disabled={fetcher.state !== "idle"}
+            >
+              {fetcher.state !== "idle" ? (
+                <span className="loading loading-spinner" />
+              ) : fetcher.data ? (
+                <CircleCheck className="h-6 w-6 shrink-0 stroke-current" />
+              ) : null}
+              {fetcher.state !== "idle" ? "Saving..." : "Save"}
+            </button>
+          </div>
+        </fieldset>
+      </fetcher.Form>
+    </details>
   );
 }
 
