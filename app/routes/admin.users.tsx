@@ -19,69 +19,67 @@ export default function UsersPage({
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
   return (
-    <section className="m-full overflow-x-auto">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>User Agent</th>
-            <th>Referrer</th>
-            <th>IP</th>
-            <th>Created</th>
-          </tr>
-        </thead>
-        <tbody>
-          {loaderData.users.map((user) => (
-            <Fragment key={user.id}>
-              <tr className="bg-base-200">
-                <td
-                  className="max-w-56 truncate"
-                  title={`${user.name} (${user.id})`}
+    <table className="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>User Agent</th>
+          <th>Referrer</th>
+          <th>IP</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {loaderData.users.map((user) => (
+          <Fragment key={user.id}>
+            <tr className="bg-base-200">
+              <td
+                className="max-w-56 truncate"
+                title={`${user.name} (${user.id})`}
+              >
+                <Link
+                  className="link link-primary w-14 max-w-14 truncate"
+                  to={`/admin/user/${user.id}`}
                 >
-                  <Link
-                    className="link link-primary w-14 max-w-14 truncate"
-                    to={`/admin/user/${user.id}`}
-                  >
-                    {user.isAnonymous ? user.id : (user.name ?? user.id)}
-                  </Link>
-                </td>
-                <td className="max-w-56 truncate" title={user.email ?? ""}>
-                  {user.email}
-                </td>
-                <td className="max-w-44 truncate" title={user.userAgent ?? ""}>
-                  {user.userAgent}
-                </td>
-                <td className="max-w-44 truncate" title={user.referrer ?? ""}>
-                  {user.referrer}
-                </td>
-                <td className="min-w-28 truncate" title={user.ip ?? ""}>
-                  {user.ip}
-                </td>
-                <td className="min-w-24 whitespace-nowrap">
-                  {user.createdAt.toLocaleDateString(undefined, {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
+                  {user.isAnonymous ? user.id : (user.name ?? user.id)}
+                </Link>
+              </td>
+              <td className="max-w-56 truncate" title={user.email ?? ""}>
+                {user.email}
+              </td>
+              <td className="max-w-44 truncate" title={user.userAgent ?? ""}>
+                {user.userAgent}
+              </td>
+              <td className="max-w-44 truncate" title={user.referrer ?? ""}>
+                {user.referrer}
+              </td>
+              <td className="min-w-28 truncate" title={user.ip ?? ""}>
+                {user.ip}
+              </td>
+              <td className="min-w-24 whitespace-nowrap">
+                {user.createdAt.toLocaleDateString(undefined, {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </td>
+            </tr>
+
+            {user.note && (
+              <tr>
+                <td />
+                <td colSpan={6}>
+                  <div className="items-top flex gap-2">
+                    <span className="font-semibold">Note:</span>
+                    <span className="text-sm">{user.note}</span>
+                  </div>
                 </td>
               </tr>
-
-              {user.note && (
-                <tr>
-                  <td />
-                  <td colSpan={6}>
-                    <div className="items-top flex gap-2">
-                      <span className="font-semibold">Note:</span>
-                      <span className="text-sm">{user.note}</span>
-                    </div>
-                  </td>
-                </tr>
-              )}
-            </Fragment>
-          ))}
-        </tbody>
-      </table>
-    </section>
+            )}
+          </Fragment>
+        ))}
+      </tbody>
+    </table>
   );
 }
