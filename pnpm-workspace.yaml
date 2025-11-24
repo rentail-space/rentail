@@ -12,8 +12,6 @@ onlyBuiltDependencies:
 
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
-  - "@biomejs/biome"
-  - "streamdown"
 
 packages:
   - "*"
