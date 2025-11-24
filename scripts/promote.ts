@@ -11,6 +11,7 @@ import dotenv from "dotenv";
 import env from "env-var";
 import { invariant } from "es-toolkit";
 import { Octokit } from "octokit";
+import ora from "ora";
 
 dotenv.config();
 
@@ -101,34 +102,42 @@ async function waitForDeploy(
   deployment: GetDeploymentsResponseBody["deployments"][0],
 ) {
   console.log("\x1b[34mWaiting for deployment to be ready...\x1b[0m");
+  const spinner = ora().start();
+
   while (true) {
     const { status } = await vercel.deployments.getDeployment({
       idOrUrl: deployment.uid,
     });
     if (status === "READY") break;
+    spinner.text = `${status}…`;
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
-  console.log("\x1b[32m✔ Deployment is ready\x1b[0m");
+  spinner.succeed("Deployment is ready");
 }
 
-await githubWorkflows();
-const deployment = await getRecentDeployment();
-if (deployment.readySubstate === "PROMOTED") {
-  console.log("\x1b[32m✔ Deployment already promoted to production\x1b[0m");
-  await waitForDeploy(deployment);
-  process.exit(0);
-} else if (!deployment.readySubstate) {
-  console.log("\x1b[32m✔ Promoting to production …\x1b[0m");
-  process.exit(0);
+async function interactive() {
+  // Review GitHub workflow status
+  await githubWorkflows();
+  // Review Vercel deployment status
+  const deployment = await getRecentDeployment();
+
+  if (deployment.readySubstate === "PROMOTED") {
+    console.log("\x1b[32m✔ Deployment already promoted to production\x1b[0m");
+  } else if (!deployment.readySubstate) {
+    console.log("\x1b[32m✔ Promoting to production …\x1b[0m");
+    await waitForDeploy(deployment);
+  } else {
+    const answer = await confirm({
+      default: false,
+      message: `Are you sure you want to promote deployment ${deployment.uid} to production?`,
+    });
+    if (answer) {
+      await promoteToProduction(deployment);
+      await waitForDeploy(deployment);
+    } else {
+      console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
+    }
+  }
 }
 
-const answer = await confirm({
-  default: false,
-  message: `Are you sure you want to promote deployment ${deployment.uid} to production?`,
-});
-if (answer) {
-  await promoteToProduction(deployment);
-} else {
-  console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
-  process.exit(0);
-}
+await interactive();
