@@ -41,7 +41,7 @@ async function githubWorkflows() {
       new Date(workflow.created_at ?? 0).toLocaleString(),
       workflow.display_title.slice(0, 40) +
         (workflow.display_title.length > 40 ? "…" : ""),
-      workflow.conclusion,
+      workflow.conclusion ?? "building…",
     );
   }
   console.log();
@@ -69,7 +69,7 @@ async function getRecentDeployment(): Promise<
       new Date(deplopyment.createdAt ?? 0).toLocaleString(),
       deplopyment.uid,
       deplopyment.target ?? "preview",
-      deplopyment.readySubstate || "building",
+      deplopyment.readySubstate || "building…",
     );
   }
   console.log();
