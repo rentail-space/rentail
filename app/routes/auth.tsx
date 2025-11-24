@@ -17,15 +17,13 @@ clientLoader.hydrate = true as const;
 export async function action({ request }: Route.ActionArgs): Promise<Response> {
   const form = await request.formData();
   try {
-    const email = form.get("email")?.toString();
-    const password = form.get("password")?.toString();
+    const email = form.get("email")?.toString().trim().toLowerCase();
+    const password = form.get("password")?.toString().trim();
     invariant(email, "Email is required");
     invariant(password, "Password is required");
 
     if (form.has("name")) {
-      const name = form.get("name")?.toString();
-      invariant(name, "Name is required");
-
+      const name = form.get("name")?.toString().trim() ?? "Anonymous";
       const returnedHeaders = await signUpEmail({
         email,
         name,
