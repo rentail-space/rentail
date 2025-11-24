@@ -7,37 +7,40 @@
 import { confirm } from "@inquirer/prompts";
 import { Vercel } from "@vercel/sdk";
 import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymentsop.js";
+import dotenv from "dotenv";
+import env from "env-var";
 import { invariant } from "es-toolkit";
-import { execSync } from "node:child_process";
+import { Octokit } from "octokit";
 
-const vercelToken = "XfRm0eJrI7FPexiVLIztdb56";
+dotenv.config();
+
 const vercelTeamId = "team_bjyg9pgn8TQQVP2NLMPnSYSN";
 const vercelProjectId = "prj_SrqYHd1Olo0XfxQHLe9lyGfcoT9z";
+
 const vercel = new Vercel({
-  bearerToken: vercelToken,
+  bearerToken: env.get("VERCEL_TOKEN").required().asString(),
+});
+const octokit = new Octokit({
+  auth: env.get("GITHUB_TOKEN").required().asString(),
 });
 
 async function githubWorkflows() {
   console.log("\x1b[34mGitHub workflow status:\x1b[0m");
-  const stdout = execSync(
-    "gh run list --workflow deploy.yml --json conclusion,databaseId,displayTitle,event,name,number,status,createdAt,name,number,url,updatedAt --status completed --workflow Deploy --limit 10",
-    { stdio: "pipe" },
-  );
-  const workflows = JSON.parse(stdout.toString()) as {
-    conclusion: string;
-    createdAt: string;
-    databaseId: number;
-    displayTitle: string;
-  }[];
-  for (const workflow of workflows) {
+
+  const { data } = await octokit.rest.actions.listWorkflowRuns({
+    owner: "assaf",
+    repo: "rentail",
+    workflow_id: "deploy.yml",
+  });
+  for (const workflow of data.workflow_runs.slice(0, 5)) {
     const status = "  %s\t%s =>\t%s";
     console.log(
       workflow.conclusion === "failure"
         ? `\x1b[31m✗ ${status}\x1b[0m`
         : `\x1b[32m✓ ${status}\x1b[0m`,
-      new Date(workflow.createdAt ?? 0).toLocaleString(),
-      workflow.displayTitle.slice(0, 40) +
-        (workflow.displayTitle.length > 40 ? "…" : ""),
+      new Date(workflow.created_at ?? 0).toLocaleString(),
+      workflow.display_title.slice(0, 40) +
+        (workflow.display_title.length > 40 ? "…" : ""),
       workflow.conclusion,
     );
   }

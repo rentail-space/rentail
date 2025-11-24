@@ -89,6 +89,7 @@
     "checkly": "^6.9.2",
     "diff": "^8.0.2",
     "msw": "^2.12.2",
+    "octokit": "^5.0.5",
     "playwright": "^1.56.1",
     "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3",
