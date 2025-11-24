@@ -105,11 +105,11 @@ async function waitForDeploy(
   const spinner = ora().start();
 
   while (true) {
-    const { status } = await vercel.deployments.getDeployment({
+    const status = await vercel.deployments.getDeployment({
       idOrUrl: deployment.uid,
     });
-    if (status === "READY") break;
-    spinner.text = `${status}…`;
+    if (status.readySubstate === "STAGED") break;
+    spinner.text = `${status.readySubstate || status.readyState || "building"}…`;
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
   spinner.succeed("Deployment is ready");
@@ -121,22 +121,33 @@ async function interactive() {
   // Review Vercel deployment status
   const deployment = await getRecentDeployment();
 
-  if (deployment.readySubstate === "PROMOTED") {
+  const isPromoted =
+    deployment.readyState === "READY" && deployment.target === "production";
+  if (isPromoted) {
     console.log("\x1b[32m✔ Deployment already promoted to production\x1b[0m");
-  } else if (!deployment.readySubstate) {
-    console.log("\x1b[32m✔ Promoting to production …\x1b[0m");
-    await waitForDeploy(deployment);
-  } else {
-    const answer = await confirm({
-      default: false,
-      message: `Are you sure you want to promote deployment ${deployment.uid} to production?`,
-    });
-    if (answer) {
-      await promoteToProduction(deployment);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+    return;
+  }
+
+  const isPreview = deployment.target === null;
+  if (isPreview) {
+    const isBuilding =
+      deployment.readyState === "QUEUED" ||
+      deployment.readyState === "BUILDING";
+    if (isBuilding) {
+      console.log("\x1b[32m✔ Promoting to production …\x1b[0m");
       await waitForDeploy(deployment);
     } else {
-      console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
+      const yesOrNo = await confirm({
+        default: false,
+        message: `Are you sure you want to promote deployment ${deployment.uid} to production?`,
+      });
+      if (yesOrNo) {
+        await promoteToProduction(deployment);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await waitForDeploy(deployment);
+      } else {
+        console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
+      }
     }
   }
 }
