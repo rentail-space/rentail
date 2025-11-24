@@ -133,6 +133,7 @@ async function interactive() {
     });
     if (answer) {
       await promoteToProduction(deployment);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       await waitForDeploy(deployment);
     } else {
       console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
