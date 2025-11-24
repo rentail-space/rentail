@@ -58,18 +58,18 @@ async function getRecentDeployment(): Promise<
     limit: 5,
   });
 
-  for (const deplopyment of deployments) {
+  for (const deployment of deployments) {
     const status = "  %s\t%s => %s\t(%s) ";
     console.log(
-      deplopyment.state === "READY"
+      deployment.state === "READY"
         ? `\x1b[32m✓ ${status}\x1b[0m`
-        : deplopyment.state === "BUILDING"
+        : deployment.state === "BUILDING"
           ? `\x1b[33m⚡ ${status}\x1b[0m`
           : `\x1b[31m✗ ${status}\x1b[0m`,
-      new Date(deplopyment.createdAt ?? 0).toLocaleString(),
-      deplopyment.uid,
-      deplopyment.target ?? "preview",
-      deplopyment.readySubstate || "building…",
+      new Date(deployment.createdAt ?? 0).toLocaleString(),
+      deployment.uid,
+      deployment.target ?? "preview",
+      deployment.readySubstate || "building…",
     );
   }
   console.log();
