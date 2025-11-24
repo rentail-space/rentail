@@ -4,6 +4,7 @@
  * This script promotes the latest deployment to production.
  */
 
+import { confirm } from "@inquirer/prompts";
 import { Vercel } from "@vercel/sdk";
 import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymentsop.js";
 import { invariant } from "es-toolkit";
@@ -85,6 +86,18 @@ async function promoteToProduction(
 
 await githubWorkflows();
 const deployment = await getRecentDeployment();
-if (deployment.readySubstate === "PROMOTED")
+if (deployment.readySubstate === "PROMOTED") {
   console.log("\x1b[32m✔ Deployment already promoted to production\x1b[0m");
-else await promoteToProduction(deployment);
+  process.exit(0);
+}
+
+const answer = await confirm({
+  default: false,
+  message: `Are you sure you want to promote deployment ${deployment.uid} to production?`,
+});
+if (answer) {
+  await promoteToProduction(deployment);
+} else {
+  console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
+  process.exit(0);
+}
