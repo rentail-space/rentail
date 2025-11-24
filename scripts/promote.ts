@@ -97,10 +97,25 @@ async function promoteToProduction(
   console.log("\x1b[32m✔ Deployment promoted to production: %s\x1b[0m", status);
 }
 
+async function waitForDeploy(
+  deployment: GetDeploymentsResponseBody["deployments"][0],
+) {
+  console.log("\x1b[34mWaiting for deployment to be ready...\x1b[0m");
+  while (true) {
+    const { status } = await vercel.deployments.getDeployment({
+      idOrUrl: deployment.uid,
+    });
+    if (status === "READY") break;
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  }
+  console.log("\x1b[32m✔ Deployment is ready\x1b[0m");
+}
+
 await githubWorkflows();
 const deployment = await getRecentDeployment();
 if (deployment.readySubstate === "PROMOTED") {
   console.log("\x1b[32m✔ Deployment already promoted to production\x1b[0m");
+  await waitForDeploy(deployment);
   process.exit(0);
 } else if (!deployment.readySubstate) {
   console.log("\x1b[32m✔ Promoting to production …\x1b[0m");
