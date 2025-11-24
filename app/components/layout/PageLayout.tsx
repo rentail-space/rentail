@@ -5,6 +5,7 @@ import ReactGA from "react-ga4";
 import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
 import schema from "~/data/schema.json";
 import "~/global.css";
+import env from "~/lib/env";
 import PageFooter from "./PageFooter";
 import PageHeader from "./PageHeader";
 
@@ -92,6 +93,7 @@ export default function PageLayout({
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </head>
       <body>
+        <DevTag />
         <NuqsAdapter>
           {hideLayout ? (
             children
@@ -108,5 +110,15 @@ export default function PageLayout({
         {process.env.NODE_ENV === "production" && <SpeedInsights />}
       </body>
     </html>
+  );
+}
+
+function DevTag() {
+  return (
+    env.isDevelopment && (
+      <span className="fixed top-4 right-4 z-1000 rounded-full bg-blue-600 px-4 py-2 font-bold text-white shadow-lg">
+        DEV
+      </span>
+    )
   );
 }
