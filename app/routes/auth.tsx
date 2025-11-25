@@ -3,6 +3,7 @@ import { invariant } from "es-toolkit";
 import { AlertCircle } from "lucide-react";
 import { useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
+import PageFooter from "~/components/layout/PageFooter";
 import { signInEmail, signUpEmail } from "~/sessions.server";
 import type { Route } from "./+types/auth";
 
@@ -11,8 +12,6 @@ export const handle = { hideLayout: true };
 export const clientLoader = async () => {
   return {};
 };
-
-clientLoader.hydrate = true as const;
 
 export async function action({ request }: Route.ActionArgs): Promise<Response> {
   const form = await request.formData();
@@ -59,8 +58,8 @@ export default function AuthPage() {
   const fetcher = useFetcher();
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50 px-4 py-12">
-      <div className="card card-border w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+    <div className="flex flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50">
+      <main className="card card-border mx-4 my-10 w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
         <div className="card-body space-y-6">
           <div>
             <h1 className="text-center font-bold text-3xl">
@@ -163,9 +162,10 @@ export default function AuthPage() {
               : "Don't have an account? Create one"}
           </button>
         </div>
-      </div>
+        <Footer isSignUp={isSignUp} />
+      </main>
 
-      <Footer isSignUp={isSignUp} />
+      <PageFooter />
     </div>
   );
 }
