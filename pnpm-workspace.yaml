@@ -10,7 +10,7 @@ onlyBuiltDependencies:
   - msw
   - prisma
 
-minimumReleaseAge: 1440
+minimumReleaseAge: 2880
 minimumReleaseAgeExclude:
 
 packages:

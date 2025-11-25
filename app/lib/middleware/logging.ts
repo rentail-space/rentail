@@ -11,7 +11,7 @@ const loggingMiddleware: Route.MiddlewareFunction = async (
   const start = Date.now();
   const { method } = request;
   const { pathname } = new URL(request.url);
-  const referrer = request.headers.get("Referer") ?? "";
+  const referrer = request.headers.get("referer") ?? "";
 
   logger("%s %s", method, pathname);
 

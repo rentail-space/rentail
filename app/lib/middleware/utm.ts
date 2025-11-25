@@ -25,6 +25,7 @@ const { getSession, commitSession } = createCookieSessionStorage<
     maxAge: 1 * 24 * 60 * 60, // 1 day
     path: "/",
     sameSite: "lax",
+    secrets: [env.BETTER_AUTH_SECRET],
     secure: env.isProduction,
   },
 });
