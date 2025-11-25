@@ -13,7 +13,7 @@ import { invariant } from "es-toolkit";
 import { Octokit } from "octokit";
 import ora from "ora";
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 const vercelTeamId = "team_bjyg9pgn8TQQVP2NLMPnSYSN";
 const vercelProjectId = "prj_SrqYHd1Olo0XfxQHLe9lyGfcoT9z";
@@ -108,8 +108,11 @@ async function waitForDeploy(
     const status = await vercel.deployments.getDeployment({
       idOrUrl: deployment.uid,
     });
-    if (status.readyState === "READY" && status.target === "production") break;
-    spinner.text = `${status.readySubstate || status.readyState || "building"}…`;
+    const isPromoted =
+      status.readySubstate === "PROMOTED" && status.target === "production";
+    if (isPromoted) break;
+
+    spinner.text = `${status.readySubstate || status.readyState}…`;
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
   spinner.succeed("Deployment is ready");
@@ -122,7 +125,8 @@ async function interactive() {
   const deployment = await getRecentDeployment();
 
   const isPromoted =
-    deployment.readyState === "READY" && deployment.target === "production";
+    deployment.readySubstate === "PROMOTED" &&
+    deployment.target === "production";
   if (isPromoted) {
     console.log("\x1b[32m✔ Deployment already promoted to production\x1b[0m");
     return;
