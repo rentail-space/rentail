@@ -5,7 +5,6 @@ import type {
   EntryContext,
   LoaderFunctionArgs,
 } from "react-router";
-import { RouterContextProvider } from "react-router";
 import { v7 as uuidv7 } from "uuid";
 import env from "~/lib/env";
 import msw from "~/test/mocks/mswHandlers";
@@ -32,7 +31,7 @@ if (env.isProduction && env.SENTRY_DSN) {
 if (env.isTest) msw.listen({ onUnhandledRequest: "error" });
 
 export function getLoadContext() {
-  return new RouterContextProvider();
+  return {};
 }
 
 export default Sentry.wrapSentryHandleRequest(
