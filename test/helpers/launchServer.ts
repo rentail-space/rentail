@@ -2,6 +2,7 @@ import debug from "debug";
 import { delay, invariant } from "es-toolkit";
 import { type ChildProcess, fork } from "node:child_process";
 import { resolve } from "node:path";
+import { afterAll } from "vitest";
 
 let worker: ChildProcess | undefined;
 
@@ -47,6 +48,10 @@ export async function launchServer(port: number): Promise<void> {
       });
   });
 
+  afterAll(() => {
+    closeServer();
+  });
+
   logger("server is ready");
 }
 
@@ -60,8 +65,7 @@ export async function closeServer(): Promise<void> {
     // Wait for graceful shutdown (increased from 500ms to allow Vite server to fully close)
     await delay(1000);
     // Check if process exited, only kill if it's still running
-    if (!worker.killed) {
-      worker.kill("SIGKILL");
-    }
+    if (!worker.killed) worker.kill("SIGKILL");
+    worker.disconnect();
   }
 }

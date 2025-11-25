@@ -10,7 +10,7 @@
  */
 
 import { type Page, type Response, expect } from "playwright/test";
-import { beforeAll, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Blog Post Rendering", () => {
@@ -156,5 +156,9 @@ describe("Blog Post Rendering", () => {
         }),
       ).toBeVisible();
     });
+  });
+
+  afterAll(async () => {
+    await page?.close();
   });
 });

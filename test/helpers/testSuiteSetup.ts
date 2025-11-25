@@ -24,5 +24,18 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await prisma.$disconnect();
+  // Disconnect Prisma with timeout to prevent hanging on macOS
+  try {
+    await Promise.race([
+      prisma.$disconnect(),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("disconnect timeout")), 2000),
+      ),
+    ]);
+  } catch (error) {
+    // Silently ignore timeout errors - the connection pool will be cleaned up on process exit
+    if (!(error instanceof Error) || !error.message.includes("timeout")) {
+      console.error("Prisma disconnect error:", error);
+    }
+  }
 });

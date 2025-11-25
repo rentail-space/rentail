@@ -6,7 +6,6 @@
 /* @see https://streamdown.ai/docs/faq#how-do-i-configure-tailwind-css-to-work-with-streamdown */
 @source "../node_modules/streamdown/dist/index.js";
 
-
 @layer theme {
   :root {
     --spacing: 0.25rem;

@@ -1,5 +1,5 @@
 import { type Page, expect } from "playwright/test";
-import { beforeAll, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vitest";
 import type zod from "zod";
 import prisma from "~/lib/prisma";
 import type { userProfile } from "~/lib/userProfile";
@@ -267,5 +267,9 @@ describe("Anonymous visits chat page", () => {
         });
       });
     });
+  });
+
+  afterAll(async () => {
+    await page?.close();
   });
 });

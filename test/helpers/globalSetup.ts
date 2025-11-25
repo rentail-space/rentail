@@ -54,9 +54,31 @@ export async function teardown() {
     // Ignore if terminal-notifier fails (not installed on all systems)
   }
 
-  // Close MSW first to stop intercepting requests
-  msw.close();
-  await prisma.$disconnect();
+  // Force exit after 5 seconds to prevent hanging on macOS
+  const forceExitTimer = setTimeout(() => {
+    console.warn("Test cleanup timeout - forcing exit");
+    process.exit(0);
+  }, 5000);
+
+  try {
+    // Close MSW first to stop intercepting requests
+    msw.close();
+
+    // Disconnect Prisma with timeout
+    await Promise.race([
+      prisma.$disconnect(),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("disconnect timeout")), 2000),
+      ),
+    ]);
+
+    clearTimeout(forceExitTimer);
+  } catch (error) {
+    // Silently ignore errors on teardown
+    if (error instanceof Error && error.message.includes("timeout")) {
+      // Connection pool will be cleaned on exit
+    }
+  }
 
   process.exit(0);
 }

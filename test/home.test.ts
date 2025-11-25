@@ -1,5 +1,5 @@
 import { type Page, expect } from "playwright/test";
-import { beforeAll, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Home page", () => {
@@ -15,5 +15,9 @@ describe("Home page", () => {
 
   it.runIf(!process.env.CI)("should match visual regression test", async () => {
     await expect(page).toMatchScreenshot();
+  });
+
+  afterAll(async () => {
+    await page?.close();
   });
 });

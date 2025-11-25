@@ -15,7 +15,7 @@ export default defineConfig({
     hideSkippedTests: false,
     hookTimeout: 30_000, // 30 seconds for beforeAll/afterAll (server + browser startup)
     include: ["test/**/*.test.{ts,tsx}"],
-    isolate: true, // NOTE: without isolation sometimes tests hang
+    isolate: true, // NOTE: isolation required for test safety
     onStackTrace,
     pool: "forks",
     reporters: [
@@ -24,8 +24,8 @@ export default defineConfig({
     ],
     setupFiles: "test/helpers/testSuiteSetup.ts",
     globalSetup: "test/helpers/globalSetup.ts",
-    teardownTimeout: 30_000, // 30 seconds for browser/server cleanup (increased to allow proper shutdown)
-    testTimeout: 30_000, // 30 seconds for E2E tests with browser interaction
+    teardownTimeout: 3_000, // 3 seconds - Prisma disconnect will timeout anyway on macOS
+    testTimeout: process.env.CI ? 30_000 : 15_000, // 15s locally, 30s on CI
   },
 });
 
