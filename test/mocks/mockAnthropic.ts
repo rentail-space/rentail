@@ -178,7 +178,7 @@ function createMessageStartEvent(): string {
       type: "message",
       role: "assistant",
       content: [],
-      model: "claude-haiku-4-5",
+      model: "claude-opus-4-5",
       stop_reason: null,
       stop_sequence: null,
       usage: { input_tokens: 0, output_tokens: 0 },

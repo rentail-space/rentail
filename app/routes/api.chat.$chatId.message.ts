@@ -76,7 +76,7 @@ export async function action({ request, params }: Route.ActionArgs) {
   const stream = streamText({
     abortSignal,
     model: createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
-      "claude-haiku-4-5",
+      "claude-opus-4-5",
     ),
     messages: convertToModelMessages(messages),
     system: await systemPrompt({ headers: request.headers, user }),
