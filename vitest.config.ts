@@ -14,7 +14,7 @@ export default defineConfig({
     globals: false,
     hideSkippedTests: false,
     hookTimeout: 30_000, // 30 seconds for beforeAll/afterAll (server + browser startup)
-    include: ["test/*.test.{ts,tsx}"],
+    include: ["test/**/*.test.{ts,tsx}"],
     isolate: true, // NOTE: without isolation sometimes tests hang
     onStackTrace,
     pool: "forks",
