@@ -108,7 +108,7 @@ async function waitForDeploy(
     const status = await vercel.deployments.getDeployment({
       idOrUrl: deployment.uid,
     });
-    if (status.readySubstate === "STAGED") break;
+    if (status.readyState === "READY" && status.target === "production") break;
     spinner.text = `${status.readySubstate || status.readyState || "building"}…`;
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
@@ -128,26 +128,23 @@ async function interactive() {
     return;
   }
 
+  const isBuilding =
+    deployment.readyState === "QUEUED" || deployment.readyState === "BUILDING";
   const isPreview = deployment.target === null;
-  if (isPreview) {
-    const isBuilding =
-      deployment.readyState === "QUEUED" ||
-      deployment.readyState === "BUILDING";
-    if (isBuilding) {
-      console.log("\x1b[32m✔ Promoting to production …\x1b[0m");
+  if (isBuilding) {
+    console.log("\x1b[32m✔ Promoting to production …\x1b[0m");
+    await waitForDeploy(deployment);
+  } else if (isPreview) {
+    const yesOrNo = await confirm({
+      default: false,
+      message: `Are you sure you want to promote deployment ${deployment.uid} to production?`,
+    });
+    if (yesOrNo) {
+      await promoteToProduction(deployment);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       await waitForDeploy(deployment);
     } else {
-      const yesOrNo = await confirm({
-        default: false,
-        message: `Are you sure you want to promote deployment ${deployment.uid} to production?`,
-      });
-      if (yesOrNo) {
-        await promoteToProduction(deployment);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        await waitForDeploy(deployment);
-      } else {
-        console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
-      }
+      console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
     }
   }
 }
