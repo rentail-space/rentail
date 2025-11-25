@@ -62,22 +62,7 @@ export default function UserPage({
   );
 }
 
-import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
-
 function UserInfoCard({ user }: { user: User }) {
-  const table = useReactTable({
-    data: [user],
-    columns: [
-      { header: "Email", accessorKey: "email" },
-      { header: "User Agent", accessorKey: "userAgent" },
-      { header: "Referrer", accessorKey: "referrer" },
-      { header: "IP", accessorKey: "ip" },
-      { header: "Location", accessorKey: "cityStateCountry" },
-      { header: "Created", accessorKey: "createdAt" },
-    ],
-    getCoreRowModel: getCoreRowModel(),
-  });
-
   return (
     <details className="collapse border border-gray-200" open>
       <summary className="collapse-title font-semibold">{user.name}</summary>

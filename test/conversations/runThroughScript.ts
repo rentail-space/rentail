@@ -14,7 +14,7 @@ const apiKey = env.ANTHROPIC_API_KEY;
 // The smartest model for the conversational tasks (replying to the user)
 const conversationalModel = createAnthropic({ apiKey })("claude-sonnet-4-5");
 // The cheapest model for the classification tasks (verifying assistant's response)
-const classifyModel = createAnthropic({ apiKey })("claude-opus-4-5");
+const classifyModel = createAnthropic({ apiKey })("claude-haiku-4-5");
 
 export default async function runThroughScript({
   headers,

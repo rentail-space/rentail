@@ -55,7 +55,7 @@ export default function ChatPage({
     }),
     onError: (error) => {
       captureException(error, { extra: { chatId } });
-      console.error("Chat error: %s", error);
+      console.error(`Chat error: ${error}`);
     },
     onFinish: ({ isAbort }) => {
       setIsAborted(isAbort);
