@@ -143,10 +143,30 @@ The core innovation that prevents message duplication on network interruptions:
 - Minimize `useState`/`useEffect`; prefer context or reducers for state
 - Use `useMemo` and `useCallback` to prevent unnecessary re-renders
 
+**Error Handling:**
+- Handle errors at the beginning of functions with early returns
+- Avoid deeply nested if statements and unnecessary else clauses
+- Implement error boundaries to catch unexpected errors
+- Use Zod for runtime validation and type safety
+
+**Security:**
+- Sanitize user inputs to prevent XSS attacks
+- Never use `dangerouslySetInnerHTML` (use markdown renderers with sanitization)
+- Ensure secure communication with APIs using HTTPS
+- Use bcrypt for password hashing (already configured)
+
 **Formatting (Biome-enforced):**
 - Double quotes, 2-space indent, 80 character line width
 - Import organization via Biome assist
 - `pnpm format --write` before committing
+
+**Biome-Enforced Rules:**
+- Avoid barrel files (re-exporting multiple modules from index files)
+- Prefer `for...of` or `map()` over `forEach()` (forEach triggers warning)
+- Console usage limited to: `console.assert`, `console.error`, `console.info`, `console.warn`
+- Minimize use of `any` type (triggers warning)
+- Use self-closing elements for components without children
+- Use `as const` assertions for literal types
 
 ## Key Architectural Patterns
 
@@ -212,12 +232,14 @@ The app determines user location in this order:
 - Config: `vitest.config.ts` (60s test timeout, 90s hook timeout, 10s teardown timeout)
 - Setup: `/test/helpers/setup.ts` (global) + `/test/helpers/globalSetup.ts`
 - Node.js: 22.0.0 or higher required
+- **Test isolation**: `isolate: true` is required for test safety (prevents state leakage)
 
 **Test Organization:**
 - Use nested `describe` blocks for logical grouping
 - `beforeAll`/`afterAll` for setup/cleanup when sharing state across tests
 - Share state via `let` variables within describe block (tests run sequentially)
 - Each test validates one aspect; state flows through the suite
+- Always clean up database state in `beforeAll` or `beforeEach` to prevent test pollution
 
 **Infrastructure & Mocking:**
 - **MSW Handlers**: `/test/mocks/mswHandlers.ts` prevents external API calls
