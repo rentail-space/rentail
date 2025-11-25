@@ -145,7 +145,7 @@ State clearly that you cannot provide a complete answer due to a fundamental saf
 
 Some people refer to shopping centers as "malls". Some people refer to shopping centers as "centers". Some people call to shopping centers as "properties". These are all valid synonyms for "shopping centers".
 
-$[centers]
+$[nearbyCenters]
 
 
 ## Approximate Pricing
@@ -190,6 +190,13 @@ If the merchant asks, you can inform them that after the start of the contract, 
 - Pay last month's rent
 - Setup automated payment of monthly rent
 - Pay utilities and all other fees
+
+
+## All Centers
+
+Here is a list of all centers we know about in every city:
+
+$[allCenters]
 
 
 ## Keep Answers Short

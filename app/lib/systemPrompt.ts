@@ -3,6 +3,7 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { userProfile, zodToExample } from "~/lib/userProfile";
 import source from "~/prompts/systemPrompt.md?raw";
 import findNearbyCenters from "./findNearbyCenters";
+import prisma from "./prisma";
 
 /**
  * Get the system prompt for the chat.
@@ -19,7 +20,10 @@ export default async function systemPrompt({
   headers: Headers;
   user?: User;
 }): Promise<string> {
-  const centers = await findNearbyCenters({ headers, user });
+  const allCenters = await prisma.property.findMany({
+    select: { name: true, city: true, state: true, country: true },
+  });
+  const nearbyCenters = await findNearbyCenters({ headers, user });
   const [date, time] = new Date().toISOString().split("T");
   const prompt = source
     .replace("$[date]", date)
@@ -28,7 +32,19 @@ export default async function systemPrompt({
       "$[userProfile]",
       JSON.stringify(zodToExample(userProfile), null, 2),
     )
-    .replace("$[centers]", centersToMarkdown({ centers, maxDistance: 20 }));
+    .replace(
+      "$[nearbyCenters]",
+      centersToMarkdown({ centers: nearbyCenters, maxDistance: 20 }),
+    )
+    .replace(
+      "$[allCenters]",
+      allCenters
+        .map(
+          (center) =>
+            `- ${center.name} in ${center.city}, ${center.state}, ${center.country}`,
+        )
+        .join("\n"),
+    );
   return prompt;
 }
 
