@@ -14,7 +14,7 @@ import prisma from "~/lib/prisma";
 import welcome from "~/prompts/welcome.md?raw";
 import { sendNewUserEmail } from "./emails/sendEmails";
 import env from "./lib/env";
-import { readUtmParams } from "./lib/middleware/utm";
+import { readUtmParams, saveUtmParams } from "./lib/middleware/utm";
 
 type SessionData = {
   token: string;
@@ -75,11 +75,12 @@ const { getSession, commitSession, destroySession } =
  * the chat, the HTTP headers with the session cookie set, and whether the user
  * is an admin.
  *
- * @param requestHeaders - The request headers object
+ * @param request - The request object
  * @returns The last chat, messages, response headers with the session cookie
- * set, user, and whether the user is an admin. If the user is not found, return undefined.
+ * set, user, and whether the user is an admin. If the user is not found, return
+ * the response headers with the session cookie set.
  */
-export async function findUserAndLastChat(requestHeaders: Headers): Promise<
+export async function findUserAndLastChat(request: Request): Promise<
   | {
       chat: Chat;
       isAdmin: boolean;
@@ -87,10 +88,12 @@ export async function findUserAndLastChat(requestHeaders: Headers): Promise<
       responseHeaders: Headers;
       user: User;
     }
-  | undefined
+  | {
+      responseHeaders: Headers;
+    }
 > {
-  const session = await userFromCookie(requestHeaders);
-  if (!("user" in session)) return;
+  const session = await userFromCookie(request.headers);
+  if (!("user" in session)) return await saveUtmParams(request);
 
   const { isAdmin, user } = session;
   const chat = await prisma.chat.findFirst({
@@ -98,12 +101,14 @@ export async function findUserAndLastChat(requestHeaders: Headers): Promise<
     take: 1,
     where: { userId: user.id },
   });
-  if (!chat) return;
+  if (!chat) return { responseHeaders: new Headers() };
 
   const messages = await recentMessages(chat.id);
-  const responseHeaders = new Headers({
-    "set-cookie": await commitSession(session.cookieSession),
-  });
+  const { responseHeaders } = await saveUtmParams(request);
+  responseHeaders.append(
+    "set-cookie",
+    await commitSession(session.cookieSession),
+  );
   return { chat, isAdmin, messages, responseHeaders, user };
 }
 

@@ -21,14 +21,16 @@ export const middleware: Route.MiddlewareFunction[] = [
 ];
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const found = await findUserAndLastChat(request.headers);
+  const found = await findUserAndLastChat(request);
   return data(
-    found && {
-      chat: found.chat,
-      isAdmin: found.isAdmin,
-      messages: found.messages,
-      user: found.user,
-    },
+    "chat" in found
+      ? {
+          chat: found.chat,
+          isAdmin: found.isAdmin,
+          messages: found.messages,
+          user: found.user,
+        }
+      : null,
     { headers: found?.responseHeaders },
   );
 }

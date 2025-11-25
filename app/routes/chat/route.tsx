@@ -20,10 +20,10 @@ import CenterCards from "./CenterCards";
 export const handle = { hideLayout: true };
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const found = await findUserAndLastChat(request.headers);
+  const found = await findUserAndLastChat(request);
   const centers = await findNearbyCenters({
     headers: request.headers,
-    user: found?.user,
+    user: "user" in found ? found.user : undefined,
   });
   return { centers };
 }

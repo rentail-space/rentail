@@ -65,6 +65,42 @@ export const utmMiddleware: Route.MiddlewareFunction = async (
   } else return next();
 };
 
+/**
+ * Save UTM parameters from the request URL and store them in the session.
+ *
+ * @param request - The request object
+ * @returns The response headers with the session cookie set if UTM parameters
+ * were saved, or an empty headers object if no UTM parameters were found.
+ */
+export async function saveUtmParams(
+  request: Request,
+): Promise<{ responseHeaders: Headers }> {
+  const searchParams = new URL(request.url).searchParams;
+  const session = await getSession(request.headers.get("cookie"));
+  let hasUtmParams = false;
+  for (const name of ["source", "medium", "campaign", "term", "content"]) {
+    if (searchParams.has(`utm_${name}`)) {
+      session.set(
+        name as keyof UTM,
+        searchParams.get(`utm_${name}`) ?? undefined,
+      );
+      hasUtmParams = true;
+    }
+  }
+
+  if (hasUtmParams) {
+    logger("utmMiddleware", { session, hasUtmParams });
+    const sessionCookie = await commitSession(session);
+    const headers = new Headers({
+      "set-cookie": sessionCookie,
+    });
+    return { responseHeaders: headers };
+  } else
+    return {
+      responseHeaders: new Headers(),
+    };
+}
+
 export async function readUtmParams(requestHeaders: Headers): Promise<UTM> {
   const session = await getSession(requestHeaders.get("cookie"));
   return session.data ?? {};

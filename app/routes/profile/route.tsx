@@ -14,16 +14,12 @@ import ProfileNameForm from "./ProfileNameForm";
 import ProfilePasswordForm from "./ProfilePasswordForm";
 
 export async function loader({ request }: { request: Request }) {
-  const root = await findUserAndLastChat(request.headers);
-  if (!root || root.user.isAnonymous) throw redirect("/auth");
-  return { user: root.user };
+  const user = await getSignedInUser(request);
+  return { user };
 }
 
 export async function action({ request }: { request: Request }) {
-  const root = await findUserAndLastChat(request.headers);
-  if (!root || root.user.isAnonymous) throw redirect("/auth");
-  const user = root.user;
-
+  const user = await getSignedInUser(request);
   const form = await request.formData();
   const name = form.get("name")?.toString();
   if (name) return await updateName({ user, name });
@@ -43,6 +39,20 @@ export async function action({ request }: { request: Request }) {
     });
 
   return { error: "What did you want to update?" };
+}
+
+/**
+ * Get the signed in user from the request. If the user is not signed in, redirect to
+ * the sign in page.
+ *
+ * @param request - The request object
+ * @returns The signed in user.
+ * @throws {Response} 302 Redirect to the sign in page if the user is not signed in.
+ */
+async function getSignedInUser(request: Request): Promise<User> {
+  const user = await findUserAndLastChat(request);
+  if (!("user" in user) || user.user.isAnonymous) throw redirect("/auth");
+  return user.user;
 }
 
 async function updateName({
