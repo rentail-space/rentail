@@ -114,6 +114,7 @@ model User {
   sessions         Session[]
   updatedAt        DateTime  @map("updated_at")         @updatedAt
   userAgent        String?   @map("user_agent")
+  utm              Json?     @map("utm")                @db.Json
   workingMemory    String    @map("working_memory")     @db.Text
 
   @@unique([email])

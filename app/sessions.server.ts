@@ -14,6 +14,7 @@ import prisma from "~/lib/prisma";
 import welcome from "~/prompts/welcome.md?raw";
 import { sendNewUserEmail } from "./emails/sendEmails";
 import env from "./lib/env";
+import { readUtmParams } from "./lib/middleware/utm";
 
 type SessionData = {
   token: string;
@@ -506,6 +507,7 @@ async function createUser({
     Boolean(isAnonymous) !== Boolean(passwordHash),
     "isAnonymous and passwordHash are mutually exclusive",
   );
+  const utm = await readUtmParams(requestHeaders);
 
   const user = await prisma.user.create({
     data: {
@@ -521,6 +523,7 @@ async function createUser({
       passwordHash,
       referrer: requestHeaders.get("referer") ?? "",
       userAgent,
+      utm: JSON.stringify(utm),
       workingMemory: JSON.stringify({ location: geocode }),
 
       chats: {

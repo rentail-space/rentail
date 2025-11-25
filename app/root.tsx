@@ -10,11 +10,15 @@ import {
 } from "react-router";
 import "~/global.css";
 import loggingMiddleware from "~/lib/middleware/logging";
+import { utmMiddleware } from "~/lib/middleware/utm";
 import type { Route } from "./+types/root";
 import PageLayout from "./components/layout/PageLayout";
 import { findUserAndLastChat } from "./sessions.server";
 
-export const middleware: Route.MiddlewareFunction[] = [loggingMiddleware];
+export const middleware: Route.MiddlewareFunction[] = [
+  utmMiddleware,
+  loggingMiddleware,
+];
 
 export async function loader({ request }: Route.LoaderArgs) {
   const found = await findUserAndLastChat(request.headers);
