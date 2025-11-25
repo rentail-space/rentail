@@ -5,7 +5,7 @@ import { goto } from "~/test/helpers/launchBrowser";
 import converse from "./helpers/converse";
 import { getElementsByTagName, removeElements } from "./helpers/formatHTML";
 
-describe("Chage page interface with welcome message", () => {
+describe("Chat page interface with welcome message", () => {
   let page: Page;
 
   beforeAll(async () => {

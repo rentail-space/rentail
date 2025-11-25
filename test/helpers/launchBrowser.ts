@@ -8,7 +8,6 @@ import {
   type Route,
   chromium,
 } from "playwright";
-import { afterAll } from "vitest";
 
 export const port = 9222;
 
@@ -46,9 +45,6 @@ export async function newContext(): Promise<BrowserContext> {
   const browser = await chromium.launch({
     headless,
     slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
-  });
-  afterAll(() => {
-    browser.close();
   });
 
   context = await browser.newContext({

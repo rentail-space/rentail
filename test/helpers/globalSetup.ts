@@ -12,7 +12,7 @@ import seedCenters from "prisma/seed/seedCenters";
 import prisma from "~/lib/prisma";
 import msw from "../mocks/mswHandlers";
 import { port } from "./launchBrowser";
-import { launchServer } from "./launchServer";
+import { closeServer, launchServer } from "./launchServer";
 import { removeNewHTML } from "./toMatchInnerHTML";
 import { removeDiffImages } from "./toMatchScreenshot";
 
@@ -45,40 +45,9 @@ async function killServerOnPort(port: number) {
 }
 
 export async function teardown() {
-  // Notify completion
-  try {
-    await execAsync(
-      'terminal-notifier -sound default -title "Test Suite" -message "Done!"',
-    );
-  } catch {
-    // Ignore if terminal-notifier fails (not installed on all systems)
-  }
-
-  // Force exit after 5 seconds to prevent hanging on macOS
-  const forceExitTimer = setTimeout(() => {
-    console.warn("Test cleanup timeout - forcing exit");
-    process.exit(0);
-  }, 5000);
-
-  try {
-    // Close MSW first to stop intercepting requests
-    msw.close();
-
-    // Disconnect Prisma with timeout
-    await Promise.race([
-      prisma.$disconnect(),
-      new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("disconnect timeout")), 2000),
-      ),
-    ]);
-
-    clearTimeout(forceExitTimer);
-  } catch (error) {
-    // Silently ignore errors on teardown
-    if (error instanceof Error && error.message.includes("timeout")) {
-      // Connection pool will be cleaned on exit
-    }
-  }
-
-  process.exit(0);
+  await execAsync(
+    'terminal-notifier -sound default -title "Test Suite" -message "Done!"',
+  );
+  await closeServer();
+  msw.close();
 }

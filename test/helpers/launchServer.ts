@@ -2,7 +2,6 @@ import debug from "debug";
 import { delay, invariant } from "es-toolkit";
 import { type ChildProcess, fork } from "node:child_process";
 import { resolve } from "node:path";
-import { afterAll } from "vitest";
 
 let worker: ChildProcess | undefined;
 
@@ -46,10 +45,6 @@ export async function launchServer(port: number): Promise<void> {
       .on("exit", (code) => {
         reject(new Error(`Worker stopped with exit code ${code}`));
       });
-  });
-
-  afterAll(() => {
-    closeServer();
   });
 
   logger("server is ready");
