@@ -34,7 +34,7 @@ async function githubWorkflows() {
     workflow_id: "deploy.yml",
   });
   for (const workflow of data.workflow_runs.slice(0, 5)) {
-    const status = "  %s \t(%s)\t%s => %s";
+    const status = " %s \t(%s)\t%s => %s";
     console.log(
       workflow.conclusion === "failure"
         ? `\x1b[31m✗ ${status}\x1b[0m`
@@ -61,12 +61,12 @@ async function getRecentDeployment(): Promise<
   });
 
   for (const deployment of deployments) {
-    const status = "  %s \t(%s)\t%s => %s";
+    const status = " %s \t(%s)\t%s => %s";
     console.log(
       deployment.state === "READY"
         ? `\x1b[32m✓ ${status}\x1b[0m`
         : deployment.state === "BUILDING"
-          ? `\x1b[33m⚡ ${status}\x1b[0m`
+          ? `\x1b[33m⚡${status}\x1b[0m`
           : `\x1b[31m✗ ${status}\x1b[0m`,
       new Date(deployment.createdAt ?? 0).toLocaleString(),
       deployment.meta?.githubCommitSha?.slice(-8),
@@ -122,19 +122,25 @@ async function interactive() {
   // Review Vercel deployment status
   const mostRecent = await getRecentDeployment();
   const isInProduction = mostRecent.target === "production";
-  const isStaged = mostRecent.readySubstate === "STAGED";
 
   if (isInProduction) {
     await waitForDeploy(mostRecent.uid);
     return;
-  } else if (isStaged) {
+  }
+
+  const isReady = mostRecent.readyState === "READY";
+  if (isReady) {
+    const gitId = mostRecent.meta?.githubCommitSha?.slice(-8);
     const shouldPromote = await confirm({
       default: false,
-      message: `Are you sure you want to promote deployment ${mostRecent.uid} to production?`,
+      message: `Promote deployment ${gitId} to production?`,
     });
     if (shouldPromote) await promoteToProduction(mostRecent);
     else console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
-  } else console.log("\x1b[34m⏳ Still building preview…\x1b[0m");
+    return;
+  }
+
+  console.log("\x1b[34m⏳ Still building preview…\x1b[0m");
 }
 
 await interactive();
