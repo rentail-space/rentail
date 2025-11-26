@@ -102,6 +102,12 @@ function UserInfoCard({ user }: { user: User }) {
             </td>
           </tr>
           <tr>
+            <th className="align-middle">UTM</th>
+            <td className="truncate align-middle" title={user.utm as string}>
+              {user.utm as string}
+            </td>
+          </tr>
+          <tr>
             <th className="align-middle">Created</th>
             <td className="whitespace-nowrap align-middle">
               {user.createdAt.toLocaleDateString(undefined, {

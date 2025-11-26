@@ -135,8 +135,11 @@ async function interactive() {
       default: false,
       message: `Promote deployment ${gitId} to production?`,
     });
-    if (shouldPromote) await promoteToProduction(mostRecent);
-    else console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
+    if (!shouldPromote) {
+      console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
+      return;
+    }
+    await promoteToProduction(mostRecent);
     return;
   }
 
