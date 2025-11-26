@@ -34,12 +34,13 @@ async function githubWorkflows() {
     workflow_id: "deploy.yml",
   });
   for (const workflow of data.workflow_runs.slice(0, 5)) {
-    const status = "  %s\t%s =>\t%s";
+    const status = "  %s \t(%s)\t%s => %s";
     console.log(
       workflow.conclusion === "failure"
         ? `\x1b[31m✗ ${status}\x1b[0m`
         : `\x1b[32m✓ ${status}\x1b[0m`,
       new Date(workflow.created_at ?? 0).toLocaleString(),
+      workflow.head_commit?.id.slice(-8),
       workflow.display_title.slice(0, 40) +
         (workflow.display_title.length > 40 ? "…" : ""),
       workflow.conclusion ?? "building…",
@@ -60,7 +61,7 @@ async function getRecentDeployment(): Promise<
   });
 
   for (const deployment of deployments) {
-    const status = "  %s\t%s => %s\t(%s) ";
+    const status = "  %s \t(%s)\t%s => %s";
     console.log(
       deployment.state === "READY"
         ? `\x1b[32m✓ ${status}\x1b[0m`
@@ -68,9 +69,9 @@ async function getRecentDeployment(): Promise<
           ? `\x1b[33m⚡ ${status}\x1b[0m`
           : `\x1b[31m✗ ${status}\x1b[0m`,
       new Date(deployment.createdAt ?? 0).toLocaleString(),
+      deployment.meta?.githubCommitSha?.slice(-8),
       deployment.uid,
       deployment.target ?? "preview",
-      deployment.readySubstate || "building…",
     );
   }
   console.log();
@@ -109,7 +110,7 @@ async function waitForDeploy(
       idOrUrl: deployment.uid,
     });
     const isPromoted =
-      status.readySubstate === "PROMOTED" && status.target === "production";
+      status.readySubstate === "STAGED" && status.target === "production";
     if (isPromoted) break;
 
     spinner.text = `${status.readySubstate || status.readyState}…`;
