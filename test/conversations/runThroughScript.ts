@@ -1,20 +1,13 @@
-import { createAnthropic } from "@ai-sdk/anthropic";
 import { type ModelMessage, generateObject, generateText } from "ai";
 import debug from "debug";
 import type { User } from "prisma/generated/client";
 import { type TestAPI, beforeAll, it } from "vitest";
 import zod from "zod";
-import env from "~/lib/env";
+import { classifyModel, conversationalModel } from "~/lib/model";
 import systemPrompt from "~/lib/systemPrompt";
 import welcome from "~/prompts/welcome.md?raw";
 
 const logger = debug("conversations");
-
-const apiKey = env.ANTHROPIC_API_KEY;
-// The smartest model for the conversational tasks (replying to the user)
-const conversationalModel = createAnthropic({ apiKey })("claude-sonnet-4-5");
-// The cheapest model for the classification tasks (verifying assistant's response)
-const classifyModel = createAnthropic({ apiKey })("claude-haiku-4-5");
 
 export default async function runThroughScript({
   headers,

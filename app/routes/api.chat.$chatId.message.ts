@@ -1,4 +1,3 @@
-import { createAnthropic } from "@ai-sdk/anthropic";
 import { captureException } from "@sentry/react-router";
 import { type UIMessage, convertToModelMessages, streamText } from "ai";
 import debug from "debug";
@@ -9,6 +8,7 @@ import type { InputJsonValue } from "prisma/generated/internal/prismaNamespace";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { ulid } from "ulid";
 import env from "~/lib/env";
+import { conversationalModel } from "~/lib/model";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import systemPrompt from "~/lib/systemPrompt";
@@ -75,9 +75,7 @@ export async function action({ request, params }: Route.ActionArgs) {
 
   const stream = streamText({
     abortSignal,
-    model: createAnthropic({ apiKey: env.ANTHROPIC_API_KEY })(
-      "claude-opus-4-5",
-    ),
+    model: conversationalModel,
     messages: convertToModelMessages(messages),
     system: await systemPrompt({ headers: request.headers, user }),
 
