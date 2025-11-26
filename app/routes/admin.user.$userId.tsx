@@ -55,6 +55,7 @@ export default function UserPage({
       <UserInfoCard user={user} />
       <WorkingMemory user={user} />
       <EditNote user={user} />
+
       {user.chats.map((chat) => (
         <FullChat key={chat.id} chat={chat} />
       ))}
@@ -126,7 +127,7 @@ function UserInfoCard({ user }: { user: User }) {
 function EditNote({ user }: { user: User }) {
   const fetcher = useFetcher<typeof action>();
   return (
-    <details className="collapse border border-gray-200">
+    <details className="collapse border border-gray-200 print:hidden">
       <summary className="collapse-title font-semibold">Note</summary>
       <fetcher.Form
         className="collapse-content"
@@ -173,7 +174,7 @@ function EditNote({ user }: { user: User }) {
 function WorkingMemory({ user }: { user: User }) {
   const workingMemory = cleanParseProfile(user.workingMemory);
   return (
-    <details className="collapse border border-gray-200">
+    <details className="collapse border border-gray-200 print:hidden">
       <summary className="collapse-title font-semibold">
         User's working memory
       </summary>
@@ -191,7 +192,10 @@ function FullChat({
 }) {
   const timestamp = chat.createdAt;
   return (
-    <details className="collapse border border-gray-200" open>
+    <details
+      className="collapse border border-gray-200 print:break-before-page"
+      open
+    >
       <summary className="collapse-title flex justify-between gap-2 font-semibold">
         <span>{chat.title ?? "Untitled chat"}</span>
         <span className="text-gray-500">
