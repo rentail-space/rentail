@@ -75,18 +75,20 @@ async function getRecentDeployment(): Promise<
     );
   }
   console.log();
-  return deployments[0];
+
+  const mostRecentDeployment = deployments[0];
+  return mostRecentDeployment;
 }
 
 async function promoteToProduction(
   deployment: GetDeploymentsResponseBody["deployments"][0],
 ) {
   console.log(
-    `\x1b[34mPromoting deployment ${deployment.uid} to production...\x1b[0m`,
+    `\x1b[34m⏳ Promoting deployment ${deployment.uid} to production...\x1b[0m`,
   );
   invariant(deployment.target === null, "Deployment is already in production");
 
-  const { status } = await vercel.deployments.createDeployment({
+  const { id } = await vercel.deployments.createDeployment({
     slug: deployment.name,
     teamId: vercelTeamId,
     requestBody: {
@@ -96,25 +98,20 @@ async function promoteToProduction(
       target: "production",
     },
   });
-  console.log("\x1b[32m✔ Deployment promoted to production: %s\x1b[0m", status);
+  await waitForDeploy(id);
 }
 
-async function waitForDeploy(
-  deployment: GetDeploymentsResponseBody["deployments"][0],
-) {
+async function waitForDeploy(idOrUrl: string) {
   console.log("\x1b[34mWaiting for deployment to be ready...\x1b[0m");
   const spinner = ora().start();
 
   while (true) {
-    const status = await vercel.deployments.getDeployment({
-      idOrUrl: deployment.uid,
-    });
+    const status = await vercel.deployments.getDeployment({ idOrUrl });
     const isPromoted =
-      status.readySubstate === "STAGED" && status.target === "production";
+      status.readySubstate === "PROMOTED" && status.target === "production";
     if (isPromoted) break;
 
     spinner.text = `${status.readySubstate || status.readyState}…`;
-    await new Promise((resolve) => setTimeout(resolve, 1000));
   }
   spinner.succeed("Deployment is ready");
 }
@@ -123,35 +120,21 @@ async function interactive() {
   // Review GitHub workflow status
   await githubWorkflows();
   // Review Vercel deployment status
-  const deployment = await getRecentDeployment();
+  const mostRecent = await getRecentDeployment();
+  const isInProduction = mostRecent.target === "production";
+  const isStaged = mostRecent.readySubstate === "STAGED";
 
-  const isPromoted =
-    deployment.readySubstate === "PROMOTED" &&
-    deployment.target === "production";
-  if (isPromoted) {
-    console.log("\x1b[32m✔ Deployment already promoted to production\x1b[0m");
+  if (isInProduction) {
+    await waitForDeploy(mostRecent.uid);
     return;
-  }
-
-  const isBuilding =
-    deployment.readyState === "QUEUED" || deployment.readyState === "BUILDING";
-  const isPreview = deployment.target === null;
-  if (isBuilding) {
-    console.log("\x1b[32m✔ Promoting to production …\x1b[0m");
-    await waitForDeploy(deployment);
-  } else if (isPreview) {
-    const yesOrNo = await confirm({
+  } else if (isStaged) {
+    const shouldPromote = await confirm({
       default: false,
-      message: `Are you sure you want to promote deployment ${deployment.uid} to production?`,
+      message: `Are you sure you want to promote deployment ${mostRecent.uid} to production?`,
     });
-    if (yesOrNo) {
-      await promoteToProduction(deployment);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      await waitForDeploy(deployment);
-    } else {
-      console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
-    }
-  }
+    if (shouldPromote) await promoteToProduction(mostRecent);
+    else console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
+  } else console.log("\x1b[34m⏳ Still building preview…\x1b[0m");
 }
 
 await interactive();
