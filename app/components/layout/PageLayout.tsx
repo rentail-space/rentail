@@ -115,7 +115,7 @@ export default function PageLayout({
 function DevTag() {
   return (
     process.env.NODE_ENV === "development" && (
-      <span className="fixed top-4 left-4 z-1000 rounded-full bg-blue-600 px-4 py-2 font-bold text-white shadow-lg">
+      <span className="fixed top-4 left-4 z-1000 rounded-full bg-red-400 px-4 py-2 font-bold text-white shadow-lg">
         DEV
       </span>
     )

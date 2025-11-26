@@ -8,6 +8,7 @@ import {
   isRouteErrorResponse,
   useRouteError,
 } from "react-router";
+import { WaveLoading } from "respinner";
 import "~/global.css";
 import loggingMiddleware from "~/lib/middleware/logging";
 import { utmMiddleware } from "~/lib/middleware/utm";
@@ -102,9 +103,7 @@ export function HydrateFallback() {
   return (
     <PageLayout hideLayout={true}>
       <main className="prose prose-lg mx-auto flex flex-col items-center justify-center gap-4">
-        <div className="flex flex-col items-center justify-center">
-          <div className="h-12 w-12 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
-        </div>
+        <WaveLoading color="#111111" count={2} />
         <p className="text-gray-500 text-sm">Loading, please wait...</p>
       </main>
     </PageLayout>

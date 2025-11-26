@@ -1,5 +1,6 @@
 import type { UIMessage } from "ai";
 import { useEffect, useRef } from "react";
+import { BeatLoading } from "respinner";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import askQuestion from "~/routes/chat/askQuestion";
 import ResponseMessage from "./ResponseMessage";
@@ -53,7 +54,7 @@ export default function Messages({
         ) : null,
       )}
 
-      {isTyping && <TypingIndicator />}
+      {isTyping && <BeatLoading color="lightblue" count={4} />}
       {isAborted && <_AbortedMessage />}
       {error && <ErrorNotice error={error} />}
     </div>
@@ -83,18 +84,6 @@ function _AbortedMessage() {
   return (
     <div className="chat chat-end">
       <div className="text-red-500">The conversation was aborted.</div>
-    </div>
-  );
-}
-
-function TypingIndicator() {
-  return (
-    <div className="rounded-lg bg-white px-4 py-4">
-      <div className="flex space-x-1">
-        <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400" />
-        <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:0.1s]" />
-        <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:0.2s]" />
-      </div>
     </div>
   );
 }

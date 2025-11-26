@@ -150,6 +150,9 @@ importers:
       resend:
         specifier: ^6.5.2
         version: 6.5.2(@react-email/render@2.0.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
+      respinner:
+        specifier: ^5.0.0
+        version: 5.0.0(react@19.2.0)
       resumable-stream:
         specifier: ^2.2.8
         version: 2.2.8
@@ -5457,6 +5460,11 @@ packages:
     resolution: {integrity: sha512-RfqAvLnMl313r7c9oclB1HhUEAezcpLjz95wFH4LVuhk9JF/r22qmVP9AMmOU4vMX7Q8pN8jwNg/CSpdFnMjTQ==}
     engines: {node: '>= 0.4'}
     hasBin: true
+
+  respinner@5.0.0:
+    resolution: {integrity: sha512-XBc5qXyVMv8tNMpyDOPVTUVlqJKe53zJwsmPGyjSIzouoLO2M7sJkY7qyRYs+KIDxeJJ5ie25qGhvX/I3DH4lg==}
+    peerDependencies:
+      react: '>= 18'
 
   restore-cursor@5.1.0:
     resolution: {integrity: sha512-oMA2dcrw6u0YfxJQXm342bFKX/E4sG9rbTzO9ptUcR/e8A33cHuvStiYOwH7fszkZlZ1z/ta9AAoPk2F4qIOHA==}
@@ -12226,6 +12234,10 @@ snapshots:
       is-core-module: 2.16.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
+
+  respinner@5.0.0(react@19.2.0):
+    dependencies:
+      react: 19.2.0
 
   restore-cursor@5.1.0:
     dependencies:
