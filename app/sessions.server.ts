@@ -503,8 +503,10 @@ async function createUser({
   passwordHash?: string;
   requestHeaders: Headers;
 }): Promise<UserGetPayload<{ include: { chats: true } }>> {
+  const utm = await readUtmParams(requestHeaders);
+
   const geocode = await geocodeFromHeaders(requestHeaders);
-  const userAgent = requestHeaders.get("user-agent") ?? "";
+  const userAgent = utm.userAgent ?? "";
   const cityStateCountry = [geocode.city, geocode.state, geocode.country]
     .filter(Boolean)
     .join(", ");
@@ -512,7 +514,6 @@ async function createUser({
     Boolean(isAnonymous) !== Boolean(passwordHash),
     "isAnonymous and passwordHash are mutually exclusive",
   );
-  const utm = await readUtmParams(requestHeaders);
 
   const user = await prisma.user.create({
     data: {
@@ -526,7 +527,7 @@ async function createUser({
       metadata: {},
       name,
       passwordHash,
-      referrer: requestHeaders.get("referer") ?? "",
+      referrer: utm.referer ?? "",
       userAgent,
       utm: JSON.stringify(utm),
       workingMemory: JSON.stringify({ location: geocode }),

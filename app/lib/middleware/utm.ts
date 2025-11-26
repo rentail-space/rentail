@@ -3,18 +3,21 @@ import { createCookieSessionStorage } from "react-router";
 import type { Route } from "../../+types/root";
 import env from "../env";
 
-type UTM = {
+type FirstRequest = {
   source?: string;
   medium?: string;
   campaign?: string;
   term?: string;
   content?: string;
+  ip?: string;
+  userAgent?: string;
+  referer?: string;
 };
 
 const logger = debug("middleware");
 
 const { getSession, commitSession } = createCookieSessionStorage<
-  UTM,
+  FirstRequest,
   undefined
 >({
   // a Cookie from `createCookie` or the CookieOptions to create one
@@ -31,77 +34,76 @@ const { getSession, commitSession } = createCookieSessionStorage<
 });
 
 /**
- * Middleware to capture UTM parameters from the URL and store them in the session
- * on the first request. UTM parameters are only stored if they don't already exist
- * in the session, ensuring we capture the original source of the user's visit.
+ * Middleware to capture UTM parameters from the URL and store them in the
+ * session on the first request. Also capture the IP address, user agent, and
+ * referrer from the first request.
  */
 export const utmMiddleware: Route.MiddlewareFunction = async (
   { request },
   next,
 ) => {
-  const searchParams = new URL(request.url).searchParams;
   const session = await getSession(request.headers.get("cookie"));
-  let hasUtmParams = false;
+  if (session.has("ip") || session.has("referer")) return next();
+
+  const searchParams = new URL(request.url).searchParams;
   for (const name of ["source", "medium", "campaign", "term", "content"]) {
     if (searchParams.has(`utm_${name}`)) {
       session.set(
-        name as keyof UTM,
+        name as keyof FirstRequest,
         searchParams.get(`utm_${name}`) ?? undefined,
       );
-      hasUtmParams = true;
     }
   }
+  session.set("ip", request.headers.get("x-real-ip") ?? undefined);
+  session.set("userAgent", request.headers.get("user-agent") ?? undefined);
+  session.set("referer", request.headers.get("referer") ?? undefined);
 
-  if (hasUtmParams) {
-    logger("utmMiddleware", { session, hasUtmParams });
-    const sessionCookie = await commitSession(session);
-    const response = await next();
-    response.headers.append("set-cookie", sessionCookie);
-    return new Response(response.body, {
-      status: response.status,
-      statusText: response.statusText,
-      headers: response.headers,
-    });
-  } else return next();
+  logger("utmMiddleware", session.data);
+  const sessionCookie = await commitSession(session);
+  const response = await next();
+  response.headers.append("set-cookie", sessionCookie);
+  return response;
 };
 
 /**
- * Save UTM parameters from the request URL and store them in the session.
- *
- * @param request - The request object
- * @returns The response headers with the session cookie set if UTM parameters
- * were saved, or an empty headers object if no UTM parameters were found.
+ * Save UTM parameters from the first request to the server and store them in
+ * the session.  Also capture the IP address, user agent, and referrer from the
+ * first request.
  */
-export async function saveUtmParams(
-  request: Request,
-): Promise<{ responseHeaders: Headers }> {
-  const searchParams = new URL(request.url).searchParams;
+export async function saveUtmParams(request: Request): Promise<{
+  responseHeaders: Headers;
+}> {
   const session = await getSession(request.headers.get("cookie"));
-  let hasUtmParams = false;
+  if (session.has("ip") || session.has("referer"))
+    return { responseHeaders: new Headers() };
+
+  const searchParams = new URL(request.url).searchParams;
   for (const name of ["source", "medium", "campaign", "term", "content"]) {
     if (searchParams.has(`utm_${name}`)) {
       session.set(
-        name as keyof UTM,
+        name as keyof FirstRequest,
         searchParams.get(`utm_${name}`) ?? undefined,
       );
-      hasUtmParams = true;
     }
   }
 
-  if (hasUtmParams) {
-    logger("utmMiddleware", { session, hasUtmParams });
-    const sessionCookie = await commitSession(session);
-    const headers = new Headers({
-      "set-cookie": sessionCookie,
-    });
-    return { responseHeaders: headers };
-  } else
-    return {
-      responseHeaders: new Headers(),
-    };
+  session.set("ip", request.headers.get("x-real-ip") ?? undefined);
+  session.set("userAgent", request.headers.get("user-agent") ?? undefined);
+  session.set("referer", request.headers.get("referer") ?? undefined);
+
+  logger("Saving UTM parameters to session", session.data);
+  const sessionCookie = await commitSession(session);
+  const headers = new Headers({ "set-cookie": sessionCookie });
+  return { responseHeaders: headers };
 }
 
-export async function readUtmParams(requestHeaders: Headers): Promise<UTM> {
+/**
+ * Read UTM parameters from the session. Also include the IP address, user
+ * agent, and referrer from the first request.
+ */
+export async function readUtmParams(
+  requestHeaders: Headers,
+): Promise<FirstRequest> {
   const session = await getSession(requestHeaders.get("cookie"));
   return session.data ?? {};
 }
