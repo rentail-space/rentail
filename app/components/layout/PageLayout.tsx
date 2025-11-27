@@ -87,6 +87,9 @@ export default function PageLayout({
         <meta property="twitter:title" content={title} />
         <meta property="twitter:url" content={url} />
 
+        {/* https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Client_hints */}
+        <meta httpEquiv="Accept-CH" content="Width, Downlink, Sec-CH-UA" />
+
         <Meta />
         <Links />
         <script type="application/ld+json">{JSON.stringify(schema)}</script>

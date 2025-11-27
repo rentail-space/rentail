@@ -13,6 +13,7 @@ import zod from "zod";
 import prisma from "~/lib/prisma";
 import welcome from "~/prompts/welcome.md?raw";
 import { sendNewUserEmail } from "./emails/sendEmails";
+import { getDeviceInfo } from "./lib/deviceDetection.server";
 import env from "./lib/env";
 import { readUtmParams, saveUtmParams } from "./lib/middleware/utm";
 
@@ -577,6 +578,7 @@ async function createUser({
   const cityStateCountry = [geocode.city, geocode.state, geocode.country]
     .filter(Boolean)
     .join(", ");
+  const deviceInfo = getDeviceInfo(requestHeaders);
 
   const user = await prisma.user.create({
     data: {
@@ -588,12 +590,20 @@ async function createUser({
       ip: geocode.ip,
       isAnonymous,
       isBot: isUABot(userAgent) || (await isBotByIP(geocode.ip)),
+      isMobile: deviceInfo.isMobile,
       metadata: {},
       name: isAnonymous ? undefined : name,
       passwordHash: isAnonymous ? undefined : passwordHash,
       referrer: utm.referer ?? "",
       userAgent,
       utm: JSON.stringify(utm),
+      viewport:
+        deviceInfo.viewportWidth && deviceInfo.viewportHeight
+          ? {
+              width: deviceInfo.viewportWidth,
+              height: deviceInfo.viewportHeight,
+            }
+          : undefined,
       workingMemory: JSON.stringify({ location: geocode }),
 
       chats: {

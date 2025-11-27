@@ -107,6 +107,16 @@ function UserInfoCard({ user }: { user: User }) {
             </td>
           </tr>
           <tr>
+            <th className="align-middle">Is Mobile</th>
+            <td className="truncate align-middle">
+              {user.isMobile ? "Yes" : "No"}
+            </td>
+          </tr>
+          <tr>
+            <th className="align-middle">Viewport</th>
+            <td className="truncate align-middle">{user.viewport as string}</td>
+          </tr>
+          <tr>
             <th className="align-middle">UTM</th>
             <td className="truncate align-middle" title={user.utm as string}>
               {user.utm as string}
