@@ -3,7 +3,7 @@ import debug from "debug";
 import type { User } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import prisma from "~/lib/prisma";
-import { cleanParseProfile } from "./userProfile";
+import { cleanParseWorkingMemory } from "./workingMemory";
 
 /**
  * Fallback on the the latitude/longitude of LA midcity.
@@ -122,7 +122,7 @@ async function locationFromWorkingMemory(
       where: { id: user.id },
       select: { workingMemory: true },
     });
-    const { location } = cleanParseProfile(workingMemory);
+    const { location } = cleanParseWorkingMemory(workingMemory);
     const { city, state, country } = location ?? {};
     if (city && state && country)
       logger("Location from working memory: %s %s %s", city, state, country);

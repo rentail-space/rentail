@@ -6,6 +6,7 @@
 
 import { confirm } from "@inquirer/prompts";
 import { Vercel } from "@vercel/sdk";
+import type { GetDeploymentResponseBody } from "@vercel/sdk/models/getdeploymentop.js";
 import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymentsop.js";
 import dotenv from "dotenv";
 import env from "env-var";
@@ -82,7 +83,7 @@ async function getRecentDeployment(): Promise<
 
 async function promoteToProduction(
   deployment: GetDeploymentsResponseBody["deployments"][0],
-) {
+): Promise<GetDeploymentResponseBody> {
   console.log(
     `\x1b[34m⏳ Promoting deployment ${deployment.uid} to production...\x1b[0m`,
   );
@@ -98,10 +99,12 @@ async function promoteToProduction(
       target: "production",
     },
   });
-  await waitForDeploy(id);
+  return await waitForDeploy(id);
 }
 
-async function waitForDeploy(idOrUrl: string) {
+async function waitForDeploy(
+  idOrUrl: string,
+): Promise<GetDeploymentResponseBody> {
   console.log("\x1b[34mWaiting for deployment to be ready...\x1b[0m");
   const spinner = ora().start();
 
@@ -109,11 +112,17 @@ async function waitForDeploy(idOrUrl: string) {
     const status = await vercel.deployments.getDeployment({ idOrUrl });
     const isPromoted =
       status.readySubstate === "PROMOTED" && status.target === "production";
-    if (isPromoted) break;
+    if (isPromoted) {
+      spinner.succeed("Deployment is ready");
+      console.log(
+        "\nTry it out: \x1b[34mhttps://%s\x1b[0m\n",
+        status.alias?.[0] ?? status.url,
+      );
+      return status;
+    }
 
     spinner.text = `${status.readySubstate || status.readyState}…`;
   }
-  spinner.succeed("Deployment is ready");
 }
 
 async function interactive() {
@@ -121,7 +130,6 @@ async function interactive() {
   await githubWorkflows();
   // Review Vercel deployment status
   const mostRecent = await getRecentDeployment();
-  console.log("Try it out: https://%s", mostRecent.url);
   const isInProduction = mostRecent.target === "production";
 
   if (isInProduction) {
@@ -132,6 +140,7 @@ async function interactive() {
   const isReady = mostRecent.readyState === "READY";
   if (isReady) {
     const gitId = mostRecent.meta?.githubCommitSha?.slice(-8);
+    console.log("\nTry it out: \x1b[34mhttps://%s\x1b[0m\n", mostRecent.url);
     const shouldPromote = await confirm({
       default: false,
       message: `Promote deployment ${gitId} to production?`,

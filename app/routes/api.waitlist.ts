@@ -1,5 +1,5 @@
 import { invariant } from "es-toolkit";
-import { sendWaitlistEmail } from "~/emails/sendEmails";
+import sendWaitlistEmail from "~/emails/WaitlistEmail";
 import prisma from "~/lib/prisma";
 import type { Route } from "./+types/api.waitlist";
 

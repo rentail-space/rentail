@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { Link } from "react-router";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
-import { cleanParseProfile } from "~/lib/userProfile";
+import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import { verifyAdmin } from "~/sessions.server";
 import CentersMap from "../components/ui/CentersMap";
 import type { Route } from "./+types/admin.centers";
@@ -14,7 +14,7 @@ const mapboxToken = env.MAPBOX_TOKEN;
 
 export async function loader({ request }: Route.LoaderArgs) {
   const user = await verifyAdmin(request.headers);
-  const { location } = cleanParseProfile(user.workingMemory);
+  const { location } = cleanParseWorkingMemory(user.workingMemory);
   const centers = await prisma.property.findMany({
     include: { spaces: true },
   });

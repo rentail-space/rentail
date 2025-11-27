@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import type { ScrollToBottom } from "use-stick-to-bottom";
-import { maskWorkingMemoryTags } from "~/lib/userProfile";
+import { maskWorkingMemoryTags } from "~/lib/workingMemory";
 
 export default function ResponseMessage({
   askQuestion,

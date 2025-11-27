@@ -2,8 +2,19 @@ import { Button, Section, Text } from "@react-email/components";
 import type { User } from "prisma/generated/client";
 import * as styles from "~/emails/styles";
 import EmailLayout from "./EmailLayout";
+import { sendEmail } from "./sendEmails";
 
-export default function NewUserNotification({
+export default async function sendNewUserEmail({ user }: { user: User }) {
+  await sendEmail({
+    email: "assaf@labnotes.org",
+    subject: "New User Created",
+    component: ({ subject }) => (
+      <NewUserNotification user={user} subject={subject} />
+    ),
+  });
+}
+
+function NewUserNotification({
   user,
   subject,
 }: {

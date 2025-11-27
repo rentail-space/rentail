@@ -4,13 +4,13 @@ import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import zod, { type ZodType } from "zod";
 
-const logger = debug("profile");
+const logger = debug("workingMemory");
 
 /**
- * This is the schema that will be used to store the user's profile in the
+ * This is the schema that will be used to store the user's working memory in the
  * database and update it from the user's messages.
  */
-export const userProfile = zod
+const workingMemorySchema = zod
   .object({
     merchant: zod
       .object({
@@ -129,6 +129,8 @@ export const userProfile = zod
   })
   .partial();
 
+export const workingMemoryExample = zodToExample(workingMemorySchema);
+
 const matchWorkingMemoryTags = /<working_memory>(.*?)<\/working_memory>/ims;
 
 /**
@@ -143,7 +145,7 @@ function extractWorkingMemory(
 ): Record<string, unknown> | undefined {
   const match = responseText.match(matchWorkingMemoryTags)?.[1].trim();
   if (match) {
-    const { data, error } = userProfile.safeParse(safeParseJSON(match));
+    const { data, error } = workingMemorySchema.safeParse(safeParseJSON(match));
     if (data) return data;
     else console.error("Error parsing working memory: %s", error);
   }
@@ -198,15 +200,19 @@ export function maskWorkingMemoryTags(text: string): string {
 }
 
 /**
- * Parse the working memory into a valid user profile. If the working memory is
+ * Parse the working memory into a valid working memory. If the working memory is
  * invalid, return an empty object.
  *
  * @param workingMemory - The working memory to parse.
- * @returns The user profile.
+ * @returns The working memory.
  */
-export function cleanParseProfile(workingMemory: unknown) {
+export function cleanParseWorkingMemory(
+  workingMemory: unknown,
+): zod.infer<typeof workingMemorySchema> {
   try {
-    return userProfile.parse(JSON.parse((workingMemory as string) || "{}"));
+    return workingMemorySchema.parse(
+      JSON.parse((workingMemory as string) || "{}"),
+    );
   } catch (error) {
     captureException(error, { extra: { workingMemory } });
     console.error("Error parsing working memory: %s", error);
@@ -215,15 +221,15 @@ export function cleanParseProfile(workingMemory: unknown) {
 }
 
 /**
- * Update the user's profile based on working memory tags in the assistant's
+ * Update the working memory based on working memory tags in the assistant's
  * response. This matches Mastra's approach where the agent emits
  * `<working_memory>` tags that get parsed and saved.
  *
- * @param messages - The messages to update the profile from
+ * @param messages - The messages to update the working memory from
  * @param workingMemory - The working memory to update
  * @returns The updated working memory
  */
-export default async function updateUserProfile({
+export default async function updateWorkingMemory({
   messages,
   workingMemory,
 }: {
@@ -245,12 +251,12 @@ export default async function updateUserProfile({
     const updates = extractWorkingMemory(lastResponse);
     if (!updates) return workingMemory;
 
-    const current = cleanParseProfile(workingMemory);
+    const current = cleanParseWorkingMemory(workingMemory);
     // Validate the updates against our schema
-    const { data: validated, error } = userProfile.safeParse(updates);
+    const { data: validated, error } = workingMemorySchema.safeParse(updates);
     if (error) throw error;
 
-    // Deep merge with current profile (new values override old ones)
+    // Deep merge with current working memory (new values override old ones)
     const geocoded = validated?.location
       ? await geocodeLocation(validated?.location)
       : null;
@@ -266,12 +272,12 @@ export default async function updateUserProfile({
       projections: { ...current.projections, ...validated.projections },
       selling: { ...current.selling, ...validated.selling },
     };
-    logger("Updating user profile: %o", merged);
+    logger("Updating working memory: %o", merged);
 
     return JSON.stringify(merged);
   } catch (error) {
     captureException(error, { extra: { workingMemory } });
-    console.error("Error updating user profile: %s", error);
+    console.error("Error updating working memory: %s", error);
     return workingMemory;
   }
 }

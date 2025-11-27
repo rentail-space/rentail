@@ -1,22 +1,30 @@
 import type { PropertySpace, User } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
-import { userProfile, zodToExample } from "~/lib/userProfile";
-import source from "~/prompts/systemPrompt.md?raw";
+import {
+  cleanParseWorkingMemory,
+  workingMemoryExample,
+} from "~/lib/workingMemory";
+import generalDirectives from "~/prompts/generalDirectives.md?raw";
 import findNearbyCenters from "./findNearbyCenters";
 import prisma from "./prisma";
 
 /**
- * Get the system prompt for the chat.
+ * Prepare the prompt by replacing the placeholders with the actual values.
+ * This is used during live conversation and for sending alerts to users.
  *
+ * @param prompt - The prompt to prepare.
  * @param headers - The HTTP headers to use to get the user's location.
  * @param user - The user to find the shopping centers for. If not provided, the
  * location will be inferred from the IP address in the headers.
- * @returns The system prompt with the shopping centers included.
+ * @returns The prepared prompt.
+ * @throws An error if there's a mismatched $[tag] in the prompt.
  */
-export default async function systemPrompt({
+export default async function preparePrompt({
+  prompt,
   headers,
   user,
 }: {
+  prompt: string;
   headers: Headers;
   user?: User;
 }): Promise<string> {
@@ -28,18 +36,21 @@ export default async function systemPrompt({
     user,
   });
   const [date, time] = new Date().toISOString().split("T");
-  const prompt = source
+  const workingMemory = cleanParseWorkingMemory(user?.workingMemory);
+  return prompt
     .replace("$[date]", date)
     .replace("$[time]", time)
+    .replace("$[location]", location)
+    .replace("$[name]", user?.name || "not known")
+    .replace("$[workingMemory]", JSON.stringify(workingMemory, null, 2))
     .replace(
-      "$[userProfile]",
-      JSON.stringify(zodToExample(userProfile), null, 2),
+      "$[workingMemorySchema]",
+      JSON.stringify(workingMemoryExample, null, 2),
     )
     .replace(
       "$[nearbyCenters]",
       centersToMarkdown({ centers: nearbyCenters, maxDistance: 20 }),
     )
-    .replace("$[location]", location)
     .replace(
       "$[allCenters]",
       allCenters
@@ -48,8 +59,11 @@ export default async function systemPrompt({
             `- ${center.name} in ${center.city}, ${center.state}, ${center.country}`,
         )
         .join("\n"),
-    );
-  return prompt;
+    )
+    .replace("$[generalDirectives]", generalDirectives)
+    .replace(/\$\[\w+\]/gm, (_match) => {
+      throw new Error(`Section ${_match} not expanded`);
+    });
 }
 
 function centersToMarkdown({

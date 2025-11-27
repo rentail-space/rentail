@@ -9,10 +9,13 @@ import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { ulid } from "ulid";
 import env from "~/lib/env";
 import { conversationalModel } from "~/lib/model";
+import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
-import systemPrompt from "~/lib/systemPrompt";
-import updateUserProfile, { maskWorkingMemoryTags } from "~/lib/userProfile";
+import updateWorkingMemory, {
+  maskWorkingMemoryTags,
+} from "~/lib/workingMemory";
+import chatPrompt from "~/prompts/chatPrompt.md?raw";
 import { findOrCreateUser, recentMessages } from "~/sessions.server";
 import type { Route } from "./+types/api.chat.$chatId.message";
 
@@ -77,7 +80,11 @@ export async function action({ request, params }: Route.ActionArgs) {
     abortSignal,
     model: conversationalModel,
     messages: convertToModelMessages(messages),
-    system: await systemPrompt({ headers: request.headers, user }),
+    system: await preparePrompt({
+      headers: request.headers,
+      user,
+      prompt: chatPrompt,
+    }),
 
     onAbort: async () => {
       logger("Aborted %s by user", chat.id);
@@ -166,7 +173,7 @@ export async function action({ request, params }: Route.ActionArgs) {
       await prisma.user.update({
         where: { id: user.id },
         data: {
-          workingMemory: await updateUserProfile({
+          workingMemory: await updateWorkingMemory({
             messages,
             workingMemory: user.workingMemory,
           }),

@@ -6,7 +6,7 @@ import { useFetcher } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { StickToBottom } from "use-stick-to-bottom";
 import prisma from "~/lib/prisma";
-import { cleanParseProfile } from "~/lib/userProfile";
+import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import { verifyAdmin } from "~/sessions.server";
 import type { Route } from "./+types/admin.user.$userId";
 import Messages from "./chat/Messages";
@@ -186,7 +186,7 @@ function EditNote({ user }: { user: User }) {
 }
 
 function WorkingMemory({ user }: { user: User }) {
-  const workingMemory = cleanParseProfile(user.workingMemory);
+  const workingMemory = cleanParseWorkingMemory(user.workingMemory);
   return (
     <details className="collapse border border-gray-200 print:hidden">
       <summary className="collapse-title font-semibold">

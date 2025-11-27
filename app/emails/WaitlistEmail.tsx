@@ -1,8 +1,17 @@
 import { Section, Text } from "@react-email/components";
 import * as styles from "~/emails/styles";
 import EmailLayout from "./EmailLayout";
+import { sendEmail } from "./sendEmails";
 
-export default function Waitlist({ subject }: { subject: string }) {
+export default async function sendWaitlistEmail({ email }: { email: string }) {
+  await sendEmail({
+    email,
+    subject: "You're on the waitlist!",
+    component: Waitlist,
+  });
+}
+
+function Waitlist({ subject }: { subject: string }) {
   return (
     <EmailLayout isCustomer={false} subject={subject}>
       <Section>

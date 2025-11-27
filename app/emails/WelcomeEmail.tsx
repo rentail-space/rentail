@@ -1,14 +1,23 @@
 import { Button, Link, Section, Text } from "@react-email/components";
 import * as styles from "~/emails/styles";
 import EmailLayout from "./EmailLayout";
+import { sendEmail } from "./sendEmails";
 
-export default function Welcome({
+export default async function sendWelcomeEmail({
+  email,
   name,
-  subject,
 }: {
+  email: string;
   name: string;
-  subject: string;
 }) {
+  await sendEmail({
+    component: ({ subject }) => <Welcome name={name} subject={subject} />,
+    email,
+    subject: "Welcome to rentail.space! 🎉",
+  });
+}
+
+function Welcome({ name, subject }: { name: string; subject: string }) {
   return (
     <EmailLayout subject={subject}>
       <Text style={styles.text}>Hi {name},</Text>

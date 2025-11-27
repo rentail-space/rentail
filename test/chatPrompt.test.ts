@@ -1,12 +1,17 @@
 import { invariant } from "node_modules/es-toolkit/dist/util/invariant.mjs";
 import { beforeAll, describe, expect, it } from "vitest";
-import systemPrompt from "~/lib/systemPrompt";
+import preparePrompt from "~/lib/preparePrompt";
+import chatPrompt from "~/prompts/chatPrompt.md?raw";
 
 describe("prompt()", () => {
   let prompt: string;
 
   beforeAll(async () => {
-    prompt = await systemPrompt({ headers: new Headers() });
+    prompt = await preparePrompt({
+      prompt: chatPrompt,
+      headers: new Headers(),
+      user: undefined,
+    });
   });
 
   it("includes clear instructions", () => {
@@ -91,11 +96,13 @@ describe("prompt()", () => {
   describe("empty centers list", () => {
     let result: string;
     beforeAll(async () => {
-      result = await systemPrompt({
+      result = await preparePrompt({
+        prompt: chatPrompt,
         headers: new Headers({
           "x-vercel-ip-latitude": "37.42240",
           "x-vercel-ip-longitude": "-122.08421",
         }),
+        user: undefined,
       });
     });
 

@@ -12,7 +12,7 @@ import { ulid } from "ulid";
 import zod from "zod";
 import prisma from "~/lib/prisma";
 import welcome from "~/prompts/welcome.md?raw";
-import { sendNewUserEmail } from "./emails/sendEmails";
+import sendNewUserEmail from "./emails/NewUserNotification";
 import { getDeviceInfo } from "./lib/deviceDetection.server";
 import env from "./lib/env";
 import { readUtmParams, saveUtmParams } from "./lib/middleware/utm";

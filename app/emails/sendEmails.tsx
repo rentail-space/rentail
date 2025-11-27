@@ -1,69 +1,14 @@
 import { pretty, render } from "@react-email/components";
 import { captureException } from "@sentry/react-router";
 import debug from "debug";
-import type { User } from "prisma/generated/client";
 import type { JSX } from "react";
 import { Resend } from "resend";
 import env from "~/lib/env";
-import EmailVerification from "./EmailVerification";
-import NewUserNotification from "./NewUserNotification";
-import Waitlist from "./Waitlist";
-import Welcome from "./Welcome";
 
 // Test-only: stores last sent email HTML for visual regression testing
 export let lastEmailHtml: string | null = null;
 const resend = new Resend(env.RESEND_API_KEY);
 const logger = debug("email");
-
-export async function sendWelcomeEmail({
-  email,
-  name,
-}: {
-  email: string;
-  name: string;
-}) {
-  await sendEmail({
-    component: ({ subject }) => <Welcome name={name} subject={subject} />,
-    email,
-    subject: "Welcome to rentail.space! 🎉",
-  });
-}
-
-export async function sendVerificationEmail({
-  email,
-  name,
-  url,
-}: {
-  email: string;
-  name: string;
-  url: string;
-}) {
-  await sendEmail({
-    email,
-    subject: "Verify your email address for rentail.space",
-    component: ({ subject }) => (
-      <EmailVerification name={name} subject={subject} url={url} />
-    ),
-  });
-}
-
-export async function sendWaitlistEmail({ email }: { email: string }) {
-  await sendEmail({
-    email,
-    subject: "You're on the waitlist!",
-    component: Waitlist,
-  });
-}
-
-export async function sendNewUserEmail({ user }: { user: User }) {
-  await sendEmail({
-    email: "assaf@labnotes.org",
-    subject: "New User Created",
-    component: ({ subject }) => (
-      <NewUserNotification user={user} subject={subject} />
-    ),
-  });
-}
 
 /**
  * Send an email using Resend. If an error occurs, it will be captured by Sentry.
@@ -73,7 +18,7 @@ export async function sendNewUserEmail({ user }: { user: User }) {
  * @param component - The React Email component to send.
  * @param subject - The subject of the email.
  */
-async function sendEmail({
+export async function sendEmail({
   email,
   component,
   subject,

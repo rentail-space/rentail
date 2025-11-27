@@ -6,7 +6,7 @@ import { Activity, useState } from "react";
 import { redirect, useLoaderData } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { ulid } from "ulid";
-import { sendVerificationEmail } from "~/emails/sendEmails";
+import sendVerificationEmail from "~/emails/EmailVerification";
 import prisma from "~/lib/prisma";
 import { findUserAndLastChat } from "~/sessions.server";
 import ProfileEmailForm from "./ProfileEmailForm";

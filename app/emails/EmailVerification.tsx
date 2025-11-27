@@ -1,8 +1,27 @@
 import { Button, Section, Text } from "@react-email/components";
 import * as styles from "~/emails/styles";
 import EmailLayout from "./EmailLayout";
+import { sendEmail } from "./sendEmails";
 
-export default function EmailVerification({
+export default async function sendVerificationEmail({
+  email,
+  name,
+  url,
+}: {
+  email: string;
+  name: string;
+  url: string;
+}) {
+  await sendEmail({
+    email,
+    subject: "Verify your email address for rentail.space",
+    component: ({ subject }) => (
+      <EmailVerification name={name} subject={subject} url={url} />
+    ),
+  });
+}
+
+function EmailVerification({
   name,
   subject,
   url: verificationUrl,

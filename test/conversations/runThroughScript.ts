@@ -4,7 +4,8 @@ import type { User } from "prisma/generated/client";
 import { type TestAPI, beforeAll, it } from "vitest";
 import zod from "zod";
 import { classifyModel, conversationalModel } from "~/lib/model";
-import systemPrompt from "~/lib/systemPrompt";
+import preparePrompt from "~/lib/preparePrompt";
+import chatPrompt from "~/prompts/chatPrompt.md?raw";
 import welcome from "~/prompts/welcome.md?raw";
 
 const logger = debug("conversations");
@@ -25,7 +26,11 @@ export default async function runThroughScript({
 
   let prompt: string;
   beforeAll(async () => {
-    prompt = await systemPrompt({ headers: new Headers(headers), user });
+    prompt = await preparePrompt({
+      headers: new Headers(headers),
+      user,
+      prompt: chatPrompt,
+    });
   });
 
   test.runIf(!process.env.CI);
