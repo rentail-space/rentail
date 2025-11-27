@@ -66,15 +66,19 @@ export default function UserPage({
 function UserInfoCard({ user }: { user: User }) {
   return (
     <details className="collapse border border-gray-200" open>
-      <summary className="collapse-title font-semibold">{user.name}</summary>
+      <summary className="collapse-title font-semibold">
+        {user.name || `Anonymous ${user.id}`}
+      </summary>
       <table className="table-bordered collapse-content table">
         <tbody>
-          <tr>
-            <th className="align-middle">Email</th>
-            <td className="truncate align-middle" title={user.email ?? ""}>
-              {user.email}
-            </td>
-          </tr>
+          {!user.isAnonymous && (
+            <tr>
+              <th className="align-middle">Email</th>
+              <td className="truncate align-middle" title={user.email ?? ""}>
+                {user.email}
+              </td>
+            </tr>
+          )}
           <tr>
             <th className="whitespace-nowrap align-middle">User Agent</th>
             <td className="truncate align-middle" title={user.userAgent ?? ""}>

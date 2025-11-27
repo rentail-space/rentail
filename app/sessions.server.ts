@@ -194,13 +194,7 @@ export async function findOrCreateUser({
     return { chat, isAdmin, messages, responseHeaders, user };
   }
 
-  const user = await createUser({
-    chatId,
-    email: `anonymous-${ulid()}@rentail.space`,
-    isAnonymous: true,
-    name: "Anonymous",
-    requestHeaders,
-  });
+  const user = await createAnonymousUser({ chatId, requestHeaders });
   const chat = user.chats[0];
   const messages = await recentMessages(chat.id);
 
@@ -457,10 +451,9 @@ export async function signUpEmail({
     return await signInEmail({ email, password, requestHeaders });
 
   // Create a new user account and return the session cookie.
-  const newUser = await createUser({
+  const newUser = await createAuthenticatedUser({
     chatId: ulid(),
     email,
-    isAnonymous: false,
     name,
     passwordHash,
     requestHeaders,
@@ -488,6 +481,60 @@ export async function signOut(requestHeaders: Headers): Promise<Headers> {
  * @param requestHeaders - The request headers object
  * @returns The new user account
  */
+
+/**
+ * Create a new anonymous user account with a new chat and welcome message.
+ * Anonymous users have no name, email, or password.
+ *
+ * @param chatId - The ID of the chat to create
+ * @param requestHeaders - The request headers object
+ * @returns The new user account
+ */
+export async function createAnonymousUser({
+  chatId,
+  requestHeaders,
+}: {
+  chatId: string;
+  requestHeaders: Headers;
+}): Promise<UserGetPayload<{ include: { chats: true } }>> {
+  return await createUser({ chatId, isAnonymous: true, requestHeaders });
+}
+
+/**
+ *
+ * Create a new authenticated user account with a new chat and welcome message.
+ * Authenticated users have a name, email, and password.
+ *
+ * @param chatId - The ID of the chat to create
+ * @param email - The email of the user
+ * @param name - The name of the user
+ * @param passwordHash - The password hash to create the user account with
+ * @param requestHeaders - The request headers object
+ * @returns The new user account
+ */
+async function createAuthenticatedUser({
+  chatId,
+  email,
+  name,
+  passwordHash,
+  requestHeaders,
+}: {
+  chatId: string;
+  email: string;
+  name: string;
+  passwordHash: string;
+  requestHeaders: Headers;
+}): Promise<UserGetPayload<{ include: { chats: true } }>> {
+  return await createUser({
+    chatId,
+    email,
+    isAnonymous: false,
+    name,
+    passwordHash,
+    requestHeaders,
+  });
+}
+
 async function createUser({
   chatId,
   email,
@@ -497,36 +544,53 @@ async function createUser({
   requestHeaders,
 }: {
   chatId: string;
-  email: string;
-  isAnonymous: boolean;
-  name: string;
-  passwordHash?: string;
   requestHeaders: Headers;
-}): Promise<UserGetPayload<{ include: { chats: true } }>> {
-  const utm = await readUtmParams(requestHeaders);
+} & (
+  | {
+      isAnonymous: true;
+      name?: never;
+      passwordHash?: never;
+      email?: never;
+    }
+  | {
+      isAnonymous: false;
+      email: string;
+      name: string;
+      passwordHash: string;
+    }
+)): Promise<UserGetPayload<{ include: { chats: true } }>> {
+  if (isAnonymous)
+    invariant(
+      !(Boolean(name) && Boolean(email) && Boolean(passwordHash)),
+      "name, email, and passwordHash are not allowed for anonymous users",
+    );
+  else
+    invariant(
+      Boolean(name) && Boolean(email) && Boolean(passwordHash),
+      "name, email, and passwordHash are required for authenticated users",
+    );
 
+  const id = ulid();
+  const utm = await readUtmParams(requestHeaders);
   const geocode = await geocodeFromHeaders(requestHeaders);
   const userAgent = utm.userAgent ?? "";
   const cityStateCountry = [geocode.city, geocode.state, geocode.country]
     .filter(Boolean)
     .join(", ");
-  invariant(
-    Boolean(isAnonymous) !== Boolean(passwordHash),
-    "isAnonymous and passwordHash are mutually exclusive",
-  );
 
   const user = await prisma.user.create({
     data: {
       cityStateCountry,
-      email,
+      // NOTE: Users must have unique emails in their index
+      email: isAnonymous ? `anonymous-${id}@rentail.space` : email,
       geocode,
-      id: ulid(),
+      id,
       ip: geocode.ip,
       isAnonymous,
       isBot: isUABot(userAgent) || (await isBotByIP(geocode.ip)),
       metadata: {},
-      name,
-      passwordHash,
+      name: isAnonymous ? undefined : name,
+      passwordHash: isAnonymous ? undefined : passwordHash,
       referrer: utm.referer ?? "",
       userAgent,
       utm: JSON.stringify(utm),

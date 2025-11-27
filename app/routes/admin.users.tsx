@@ -40,10 +40,10 @@ export default function UsersPage({
             to={`/admin/user/${row.original.id}`}
             className="link link-primary"
           >
-            {row.original.name}
+            {row.original.name || row.original.id}
           </Link>
         ),
-        size: 250,
+        size: 150,
       },
       { header: "Email", accessorKey: "email", size: 150 },
       { header: "User Agent", accessorKey: "userAgent", size: 150 },

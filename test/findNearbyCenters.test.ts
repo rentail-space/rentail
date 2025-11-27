@@ -3,6 +3,7 @@ import type { Property } from "prisma/generated/client";
 import { beforeAll, describe, it } from "vitest";
 import findNearbyCenters from "~/lib/findNearbyCenters";
 import prisma from "~/lib/prisma";
+import { createAnonymousUser } from "~/sessions.server";
 
 /**
  * NOTE:
@@ -153,22 +154,12 @@ async function createUserAndFind(coordinates: {
   longitude: number;
 }): Promise<Property[]> {
   // Create a user with location already in working memory
-  const user = await prisma.user.create({
-    data: {
-      id: `test-user-${Date.now()}`,
-      geocode: {},
-      metadata: {},
-      workingMemory: JSON.stringify({
-        location: {
-          latitude: coordinates.latitude,
-          longitude: coordinates.longitude,
-          city: "Los Angeles",
-          state: "California",
-          country: "USA",
-          timeZone: "America/Los_Angeles",
-        },
-      }),
-    },
+  const user = await createAnonymousUser({
+    requestHeaders: new Headers({
+      "x-vercel-ip-latitude": coordinates.latitude.toString(),
+      "x-vercel-ip-longitude": coordinates.longitude.toString(),
+    }),
+    chatId: `test-chat-${Date.now()}`,
   });
 
   const centers = await findNearbyCenters({ headers: new Headers(), user });
