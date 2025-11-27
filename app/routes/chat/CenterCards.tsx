@@ -10,36 +10,63 @@ import { Link } from "react-router";
  */
 export default function CenterCards({
   centers,
+  location,
+}: {
+  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
+  location: string;
+}) {
+  return (
+    <div className="sticky top-0 my-4 hidden h-fit w-1/4 lg:block">
+      <div className="card card-border bg-base-100 shadow-md">
+        <div className="card-body">
+          {centers.length > 0 ? (
+            <AvailableCenters centers={centers} />
+          ) : (
+            <NoAvailableCenters location={location} />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NoAvailableCenters({ location }: { location?: string }) {
+  return (
+    <>
+      <div className="card-title">No available centers</div>
+      {location && (
+        <p className="text-gray-500 text-sm">We're looking in {location}</p>
+      )}
+    </>
+  );
+}
+
+function AvailableCenters({
+  centers,
 }: {
   centers: PropertyGetPayload<{ include: { spaces: true } }>[];
 }) {
   const [hoveredCenter, setHoveredCenter] = useState<string | null>(null);
 
-  if (centers.length === 0) return null;
-
   return (
-    <div className="sticky top-0 my-4 hidden h-fit lg:block">
-      <div className="card card-border bg-base-100 shadow-md">
-        <div className="card-body">
-          <div className="card-title">Available Centers ({centers.length})</div>
-          {centers
-            // Sort by number of available spaces, then by name
-            .sort((a, b) =>
-              a.spaces.length === b.spaces.length
-                ? a.name.localeCompare(b.name)
-                : b.spaces.length - a.spaces.length,
-            )
-            .map((center) => (
-              <LinkToCenter
-                hoveredCenter={hoveredCenter}
-                key={center.id}
-                center={center}
-                setHoveredCenter={setHoveredCenter}
-              />
-            ))}
-        </div>
-      </div>
-    </div>
+    <>
+      <div className="card-title">Available Centers ({centers.length})</div>
+      {centers
+        // Sort by number of available spaces, then by name
+        .sort((a, b) =>
+          a.spaces.length === b.spaces.length
+            ? a.name.localeCompare(b.name)
+            : b.spaces.length - a.spaces.length,
+        )
+        .map((center) => (
+          <LinkToCenter
+            hoveredCenter={hoveredCenter}
+            key={center.id}
+            center={center}
+            setHoveredCenter={setHoveredCenter}
+          />
+        ))}
+    </>
   );
 }
 
@@ -60,7 +87,7 @@ function LinkToCenter({
       onMouseLeave={() => setHoveredCenter(null)}
     >
       <Link
-        className="flex flex-row items-center gap-2 rounded-lg p-2 hover:bg-base-200"
+        className="flex flex-row items-center gap-2 rounded-lg py-2 hover:bg-base-200"
         target="_blank"
         to={`/center/${center.id}`}
       >

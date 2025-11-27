@@ -21,11 +21,11 @@ export const handle = { hideLayout: true };
 
 export async function loader({ request }: Route.LoaderArgs) {
   const found = await findUserAndLastChat(request);
-  const centers = await findNearbyCenters({
+  const { centers, location } = await findNearbyCenters({
     headers: request.headers,
     user: "user" in found ? found.user : undefined,
   });
-  return { centers };
+  return { centers, location };
 }
 
 export default function ChatPage({
@@ -85,6 +85,7 @@ export default function ChatPage({
 
             <CenterCards
               centers={centersFetcher.data?.centers ?? loaderData.centers}
+              location={centersFetcher.data?.location ?? loaderData.location}
             />
           </div>
         </StickToBottom.Content>

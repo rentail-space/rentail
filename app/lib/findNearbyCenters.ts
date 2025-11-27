@@ -31,11 +31,17 @@ export default async function findNearbyCenters({
 }: {
   headers: Headers;
   user?: User;
-}): Promise<PropertyGetPayload<{ include: { spaces: true } }>[]> {
-  const { longitude, latitude } = await getLocation({ user, headers });
+}): Promise<{
+  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
+  location: string;
+}> {
+  const { location, longitude, latitude } = await getLocation({
+    user,
+    headers,
+  });
 
   const maxDistance = 30; // miles
-  return await prisma.property.findMany({
+  const centers = await prisma.property.findMany({
     include: {
       spaces: {
         where: { available: true },
@@ -52,6 +58,7 @@ export default async function findNearbyCenters({
       },
     },
   });
+  return { centers, location };
 }
 
 /**
@@ -64,19 +71,25 @@ async function getLocation({
 }: {
   user?: User;
   headers: Headers;
-}): Promise<{ longitude: number; latitude: number }> {
+}): Promise<{
+  location: string;
+  longitude: number;
+  latitude: number;
+}> {
   const fromMemory = user && (await locationFromWorkingMemory(user));
   if (fromMemory?.longitude && fromMemory.latitude) return fromMemory;
   const fromHeaders = await locationFromHeaders(headers);
   if (fromHeaders?.longitude && fromHeaders.latitude) return fromHeaders;
 
   logger("Fallback location: midcity, Los Angeles, California");
-  return midcity;
+  return { location: "Los Angeles, California", ...midcity };
 }
 
 async function locationFromHeaders(
   headers: Headers,
-): Promise<{ longitude: number; latitude: number } | undefined> {
+): Promise<
+  { location: string; longitude: number; latitude: number } | undefined
+> {
   const longitude = Number.parseFloat(
     headers.get("x-vercel-ip-longitude") ?? "0",
   );
@@ -90,12 +103,20 @@ async function locationFromHeaders(
   };
   if (city && state && country)
     logger("Location from headers: %s %s %s", city, state, country);
-  return longitude && latitude ? { longitude, latitude } : undefined;
+  return longitude && latitude
+    ? {
+        latitude,
+        location: [city, state].filter(Boolean).join(", "),
+        longitude,
+      }
+    : undefined;
 }
 
 async function locationFromWorkingMemory(
   user: User,
-): Promise<{ longitude: number; latitude: number } | undefined> {
+): Promise<
+  { location: string; longitude: number; latitude: number } | undefined
+> {
   try {
     const { workingMemory } = await prisma.user.findUniqueOrThrow({
       where: { id: user.id },
@@ -106,7 +127,13 @@ async function locationFromWorkingMemory(
     if (city && state && country)
       logger("Location from working memory: %s %s %s", city, state, country);
     const { longitude, latitude } = location ?? {};
-    return longitude && latitude ? { longitude, latitude } : undefined;
+    return longitude && latitude
+      ? {
+          latitude,
+          location: [city, state].filter(Boolean).join(", "),
+          longitude,
+        }
+      : undefined;
   } catch (error) {
     captureException(error, { extra: { user } });
     console.error("Error getting location from working memory: %s", error);

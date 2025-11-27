@@ -162,7 +162,10 @@ async function createUserAndFind(coordinates: {
     chatId: `test-chat-${Date.now()}`,
   });
 
-  const centers = await findNearbyCenters({ headers: new Headers(), user });
+  const { centers } = await findNearbyCenters({
+    headers: new Headers(),
+    user,
+  });
   return centers;
 }
 
