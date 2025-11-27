@@ -60,14 +60,17 @@ The core innovation that prevents message duplication on network interruptions:
 - Completion: `activeStreamId` cleared in `onFinish` callback when stream completes (signals ready for next message)
 - Safety: If a new message request arrives while `activeStreamId` is set, the old stream is aborted (prevents accidental dual streams)
 
-**Working Memory (User Profiles):**
+**Working Memory:**
 - Stores persistent user context as JSON in `User.workingMemory` field
-- Profile schema validated via Zod in `app/lib/userProfile.ts`
-- Profile fields: name, location (city, state, country, lat/lon as numbers, timezone), selling details, preferences
+- Schema validated via Zod in `app/lib/workingMemory.ts`
+- Fields: merchant (business info), selling (product/pricing/audience), location (city/state/country/lat/lon/timezone), projections (goals/timeline)
 - Example working memory object:
   ```json
   {
-    "name": "Sarah Chen",
+    "merchant": {
+      "name": "Sarah Chen",
+      "businessName": "Chen's Artisan Coffee"
+    },
     "location": {
       "city": "Los Angeles",
       "state": "CA",
@@ -81,20 +84,26 @@ The core innovation that prevents message duplication on network interruptions:
       "pricePoint": "Premium",
       "targetAudience": "Young professionals"
     },
-    "preferences": {
-      "communicationStyle": "Formal",
-      "keyDeadlines": ["Q2 2024 expansion"]
+    "projections": {
+      "timeline": "Q2 2024 expansion"
     }
   }
   ```
 
 **Emission & Update Pattern:**
-- System prompt (in `app/prompts/systemPrompt.md`) explicitly instructs Claude to emit `<working_memory>{JSON}</working_memory>` tags when extracting user information
-- Tags automatically parsed and merged into profile via `updateUserProfile()` in `onFinish` callback
+- System prompts instruct Claude to emit `<working_memory>{JSON}</working_memory>` tags when extracting user information
+- Tags automatically parsed and merged via `updateWorkingMemory()` in `onFinish` callback
 - `maskWorkingMemoryTags()` removes tags from user-visible output (users never see the XML markers)
-- Deep merge strategy: new values override existing profile fields (partial updates supported)
+- Deep merge strategy: new values override existing fields (partial updates supported)
 - Async geocoding: When location updates, reverse geocoding via OpenStreetMap API populates city/state/country
-- System prompts: `app/prompts/systemPrompt.md` (main agent instructions with working memory tags), `welcome.md` (first-time user greeting)
+
+**Prompt System:**
+- Prompts use placeholder syntax: `$[placeholder]` (e.g., `$[date]`, `$[workingMemory]`, `$[nearbyCenters]`)
+- `preparePrompt()` in `app/lib/preparePrompt.ts` replaces placeholders with actual values
+- Chat prompt: `app/prompts/chatPrompt.md` - Main conversational agent instructions
+- Daily alert prompt: `app/prompts/dailyAlertPrompt.md` - Automated merchant notifications
+- General directives: `app/prompts/generalDirectives.md` - Shared behavioral guidelines (inserted via `$[generalDirectives]`)
+- Placeholder validation: throws error if any `$[tag]` remains unexpanded
 
 ### Database & Observability
 
@@ -297,16 +306,26 @@ const user = await prisma.user.create({
 5. Test with E2E test in `/test/*.test.tsx`
 
 **Modifying Working Memory Schema:**
-1. Edit schema in `app/lib/userProfile.ts` - Add new Zod field definitions
-2. System prompt (`app/prompts/systemPrompt.md`) will need updating to instruct Claude to populate new fields
-3. Migration: Add `app/lib/updateUserProfile.ts` to handle old → new schema upgrades if needed
-4. Test: Create test user and verify working memory extraction works with mock Anthropic responses
+1. Edit schema in `app/lib/workingMemory.ts` - Add new Zod field definitions
+2. Update `workingMemoryExample` export with new example structure
+3. System prompts (`app/prompts/chatPrompt.md`, `dailyAlertPrompt.md`) may need updating to instruct Claude to populate new fields
+4. Migration: Update `updateWorkingMemory()` to handle old → new schema upgrades if needed
+5. Test: Create test user and verify working memory extraction works with mock Anthropic responses
 
 **Adding a New Chat Feature (e.g., new data access):**
-1. Update system prompt (`app/prompts/systemPrompt.md`) with new instructions
+1. Update system prompt (`app/prompts/chatPrompt.md`) with new instructions
 2. If accessing new data: Create helper function in `app/lib/` (e.g., `findNearbyCenters.ts` pattern)
-3. Pass data to Claude via system prompt injection (inject nearby data in XML format)
-4. Test with `converse()` helper from `~/test/helpers/converse`
+3. Add placeholder to prompt template (e.g., `$[myNewData]`)
+4. Update `preparePrompt()` in `app/lib/preparePrompt.ts` to replace placeholder with actual data
+5. Test with `converse()` helper from `~/test/helpers/converse`
+
+**Adding a New Email Template:**
+1. Create component file in `app/emails/` (e.g., `MyEmail.tsx`)
+2. Export async `sendMyEmail()` function that calls `sendEmail()` from `./sendEmails`
+3. Create internal component function (not exported) for the email template
+4. Use `EmailLayout` wrapper and import styles from `~/emails/styles`
+5. Call the send function from routes/actions where needed
+6. Test email rendering with `renderEmail()` helper from `~/test/helpers/renderEmail`
 
 **Debugging Chat Issues:**
 - Enable debug logging: `DEBUG=agent,server pnpm dev` (see `app/lib/logger.server.ts` for namespaces)
@@ -342,6 +361,12 @@ const user = await prisma.user.create({
 - Common on pages with background requests (chat, streaming endpoints)
 - Example: `await goto("/chat", undefined, { waitUntil: "domcontentloaded" })`
 
+**React Router v7 Middleware on Vercel**
+- `v8_middleware` feature flag is **NOT enabled** in `react-router.config.ts`
+- Middleware requires `RouterContextProvider` from `getLoadContext()` but has compatibility issues with `@vercel/react-router`
+- If enabling middleware in the future, see [React Router middleware docs](https://reactrouter.com/how-to/middleware)
+- Current config uses empty object `{}` from `getLoadContext()` which is the v6-compatible pattern
+
 ## Environment Variables
 
 **Required (.env.local):**
@@ -375,12 +400,19 @@ const user = await prisma.user.create({
 - `lib/` - Shared utilities
   - `env.ts` - Env vars + runtime validation
   - `prisma.ts` - Prisma client
-  - `userProfile.ts` - Working memory schema/validation
-  - `systemPrompt.ts` - System prompt generation
-  - `findNearbyProperties.ts` - Geographic search
+  - `workingMemory.ts` - Working memory schema/validation/updates
+  - `preparePrompt.ts` - Prompt composition with placeholder replacement
+  - `findNearbyCenters.ts` - Geographic search for shopping centers
   - `redis-stop-monitor.ts` - Stream coordination
 - `components/` - Reusable UI components
-- `prompts/` - AI system prompts
+- `prompts/` - AI prompt templates
+  - `chatPrompt.md` - Main conversational agent prompt
+  - `dailyAlertPrompt.md` - Automated daily alert prompt
+  - `generalDirectives.md` - Shared behavioral directives
+- `emails/` - Email templates with co-located send functions
+  - `sendEmails.tsx` - Core `sendEmail()` function and Resend integration
+  - `EmailLayout.tsx` - Shared email wrapper component
+  - `WelcomeEmail.tsx`, `WaitlistEmail.tsx`, etc. - Individual email templates
 
 `/prisma` - Database
 - `schema.prisma` - Models + migrations
