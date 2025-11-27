@@ -1,3 +1,4 @@
-export function loader(request: Request) {
+export function loader() {
+  console.log("Hello from Vercel!");
   return new Response("Hello from Vercel!");
 }
