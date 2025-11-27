@@ -80,6 +80,12 @@ async function classifyAssistantResponse({
   If the rules are not clear, return "unknown".
   If the rules are not applicable, return "no".
   `,
+    providerOptions: {
+      anthropic: {
+        cacheControl: { type: "ephemeral", ttl: "1h" },
+        temperature: 0.0,
+      },
+    },
     schema: zod.object({
       questions: zod.array(
         zod.object({
@@ -119,6 +125,12 @@ async function generateAssistantResponse({
     messages,
     model: conversationalModel,
     system: prompt,
+    providerOptions: {
+      anthropic: {
+        cacheControl: { type: "ephemeral", ttl: "1h" },
+        temperature: 0.0,
+      },
+    },
   });
   messages.push({ role: "assistant", content: response.text });
   logger("User: %s\n=> %s", content.trim(), response.text.trim());
