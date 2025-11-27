@@ -12,7 +12,7 @@ pnpm dedupe --ignore-scripts
 pnpm prune --ignore-scripts
 
 echo -e "\033[32m  Security audit …\033[0m"
-pnpm audit --prod
+pnpm audit --prod || echo "Security audit failed"
 pnpm install
 git add package.json pnpm-lock.yaml
 

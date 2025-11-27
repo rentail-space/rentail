@@ -121,6 +121,7 @@ async function interactive() {
   await githubWorkflows();
   // Review Vercel deployment status
   const mostRecent = await getRecentDeployment();
+  console.log("Try it out: https://%s", mostRecent.url);
   const isInProduction = mostRecent.target === "production";
 
   if (isInProduction) {
