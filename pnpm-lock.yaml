@@ -233,8 +233,8 @@ importers:
         specifier: ^1.17.5
         version: 1.17.5
       checkly:
-        specifier: ^6.9.2
-        version: 6.9.2(@types/node@24.10.1)(debug@4.4.3)(jiti@2.6.1)(typescript@5.9.3)
+        specifier: ^6.9.3
+        version: 6.9.3(@types/node@24.10.1)(debug@4.4.3)(jiti@2.6.1)(typescript@5.9.3)
       diff:
         specifier: ^8.0.2
         version: 8.0.2
@@ -2820,8 +2820,8 @@ packages:
   cheap-ruler@4.0.0:
     resolution: {integrity: sha512-0BJa8f4t141BYKQyn9NSQt1PguFQXMXwZiA5shfoaBYHAb2fFk2RAX+tiWMoQU+Agtzt3mdt0JtuyshAXqZ+Vw==}
 
-  checkly@6.9.2:
-    resolution: {integrity: sha512-kG6U/P46mN04hSHwMshsdi7kNwK82JMsUQZILMmt+o0S4l7VC9OuYwIb9NLsr+bg+GoiRAutUZjV76P6Y+fPqw==}
+  checkly@6.9.3:
+    resolution: {integrity: sha512-bHK7wD0vvtMKspmicVvLqqGavd7MoGwNzUIQmAX8Dbt5AHuquOsOsna6BnR8xUX/b/+Q9KWiBiZ+YIhrQQ5Plg==}
     engines: {node: ^18.19.0 || >=20.5.0}
     hasBin: true
     peerDependencies:
@@ -9219,7 +9219,7 @@ snapshots:
 
   cheap-ruler@4.0.0: {}
 
-  checkly@6.9.2(@types/node@24.10.1)(debug@4.4.3)(jiti@2.6.1)(typescript@5.9.3):
+  checkly@6.9.3(@types/node@24.10.1)(debug@4.4.3)(jiti@2.6.1)(typescript@5.9.3):
     dependencies:
       '@oclif/core': 4.8.0
       '@oclif/plugin-help': 6.2.36
@@ -9238,7 +9238,7 @@ snapshots:
       dotenv: 16.6.1
       execa: 9.6.0
       git-repo-info: 2.1.1
-      glob: 13.0.0
+      glob: 10.5.0
       indent-string: 4.0.0
       json-stream-stringify: 3.1.6
       json5: 2.2.3
