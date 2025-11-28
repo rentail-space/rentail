@@ -28,10 +28,10 @@ type BlogPost = {
 };
 
 const dir = resolve("app/data/blog");
-const [past, future] = await splitPosts();
-await updateFuturePosts(past, future);
+const { past, future } = await splitPosts();
+await updatePosts({ past, future });
 
-async function splitPosts(): Promise<[BlogPost[], BlogPost[]]> {
+async function splitPosts(): Promise<{ future: BlogPost[]; past: BlogPost[] }> {
   const posts = readdirSync(dir)
     .filter((filename) => filename.endsWith(".md"))
     .map((filename) => path.resolve(dir, filename))
@@ -56,9 +56,10 @@ async function splitPosts(): Promise<[BlogPost[], BlogPost[]]> {
       };
     });
   const today = DateTime.now();
-  return partition(posts, (post) => {
+  const [future, past] = partition(posts, (post) => {
     return today.diff(DateTime.fromJSDate(post.date), "days").days < 0;
   });
+  return { future, past };
 }
 
 async function getRecentDate(past: { date: Date }[]) {
@@ -74,12 +75,17 @@ async function getRecentDate(past: { date: Date }[]) {
   return mostRecentPastOrToday ?? new Date();
 }
 
-async function updateFuturePosts(past: BlogPost[], future: BlogPost[]) {
-  // Sort futurePosts alphabetically by filename (as requested)
-  future.sort((a, b) => a.date.getTime() - b.date.getTime());
-
+async function updatePosts({
+  past,
+  future,
+}: {
+  past: BlogPost[];
+  future: BlogPost[];
+}) {
   // Set running date to the most recent past or today post's date, or to today if none
   let currentDate = await getRecentDate(past);
+  // Sort futurePosts alphabetically by filename (as requested)
+  future.sort((a, b) => a.date.getTime() - b.date.getTime());
   // Sequentially update futurePosts, awaiting each rename
   for (const post of future) {
     console.info(`Updating ${post.filename} to ${currentDate}`);

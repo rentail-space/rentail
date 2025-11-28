@@ -1,6 +1,6 @@
 ---
 title: "Viral posts don't need million views"
-image: "2025-12-02-typewriter.jpg"
+image: "2025-12-05-typewriter.jpg"
 alt: "Typewriter with Oscar Wilde quote: 'Be yourself, everyone else is already taken'"
 summary: "You don't need influencer reach. You need customers thinking about your business."
 ---
