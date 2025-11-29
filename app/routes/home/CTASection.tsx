@@ -1,6 +1,7 @@
 import { AlertCircle, CheckCircle, Info } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import { useFetcher } from "react-router";
+import { Button } from "~/components/ui/button";
 
 export default function CTASection() {
   return (
@@ -71,13 +72,15 @@ function JoinWaitlist() {
             type="email"
             value={email}
           />
-          <button
+          <Button
+            className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-xl px-8 transition-all hover:shadow-lg disabled:opacity-50"
             disabled={fetcher.state !== "idle"}
-            className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-8 font-semibold text-blue-600 text-lg transition-all hover:bg-blue-50 hover:shadow-lg disabled:opacity-50"
+            size="xl"
             type="submit"
+            variant="secondary"
           >
             <span>Join Waitlist</span>
-          </button>
+          </Button>
         </div>
       </form>
 

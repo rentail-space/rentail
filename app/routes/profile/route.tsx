@@ -6,6 +6,7 @@ import { Activity, useState } from "react";
 import { redirect, useLoaderData } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { ulid } from "ulid";
+import { Button } from "~/components/ui/button";
 import sendVerificationEmail from "~/emails/EmailVerification";
 import prisma from "~/lib/prisma";
 import { findUserAndLastChat } from "~/sessions.server";
@@ -186,7 +187,7 @@ export default function ProfilePage() {
         <div className="card-body flex flex-col gap-8">
           <div role="tablist" className="tabs tabs-border">
             {tabs.map((tab) => (
-              <button
+              <Button
                 className={twMerge(
                   "tab",
                   activeTab === tab.key && "tab-active",
@@ -194,9 +195,10 @@ export default function ProfilePage() {
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
                 type="button"
+                variant="ghost"
               >
                 {tab.label}
-              </button>
+              </Button>
             ))}
           </div>
 

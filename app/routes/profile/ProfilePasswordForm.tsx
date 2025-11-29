@@ -1,6 +1,7 @@
 import { AlertCircle, CheckCircle } from "lucide-react";
 import { useEffect, useId, useRef } from "react";
 import { useFetcher } from "react-router";
+import { Button } from "~/components/ui/button";
 
 export default function ProfilePasswordForm() {
   const currentPasswordId = useId();
@@ -75,13 +76,14 @@ export default function ProfilePasswordForm() {
         />
       </fieldset>
 
-      <button
-        className="btn btn-primary w-full"
+      <Button
+        className="w-40"
+        variant="default"
         disabled={fetcher.state !== "idle"}
         type="submit"
       >
         {fetcher.state !== "idle" ? "Changing password..." : "Change Password"}
-      </button>
+      </Button>
     </form>
   );
 }

@@ -3,8 +3,8 @@ import { CircleCheck, NotepadTextIcon } from "lucide-react";
 import type { User } from "prisma/generated/client";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { useFetcher } from "react-router";
-import { twMerge } from "tailwind-merge";
 import { StickToBottom } from "use-stick-to-bottom";
+import { Button } from "~/components/ui/button";
 import prisma from "~/lib/prisma";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import { verifyAdmin } from "~/sessions.server";
@@ -163,13 +163,10 @@ function EditNote({ user }: { user: User }) {
           </div>
 
           <div className="flex justify-end">
-            <button
-              className={twMerge(
-                "btn btn-primary btn-sm",
-                fetcher.data?.name ? "btn-success" : "btn-primary",
-              )}
-              type="submit"
+            <Button
               disabled={fetcher.state !== "idle"}
+              type="submit"
+              variant={fetcher.data?.name ? "secondary" : "default"}
             >
               {fetcher.state !== "idle" ? (
                 <span className="loading loading-spinner" />
@@ -177,7 +174,7 @@ function EditNote({ user }: { user: User }) {
                 <CircleCheck className="h-6 w-6 shrink-0 stroke-current" />
               ) : null}
               {fetcher.state !== "idle" ? "Saving..." : "Save"}
-            </button>
+            </Button>
           </div>
         </fieldset>
       </fetcher.Form>

@@ -3,6 +3,7 @@ import type { PropertySpace } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
 import { Link } from "react-router";
+import { Button } from "~/components/ui/button";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
@@ -83,9 +84,7 @@ function Center({
           {center.name}
         </Link>
 
-        <button
-          type="button"
-          className="btn btn-ghost btn-sm"
+        <Button
           onClick={(event) => {
             event.preventDefault();
             centerRef.current?.({
@@ -94,9 +93,11 @@ function Center({
             });
           }}
           title="Center on map"
+          variant="link"
+          className="cursor-pointer"
         >
-          <MapPinIcon className="h-6 w-6 text-blue-500" />
-        </button>
+          <MapPinIcon className="h-10 w-10 text-blue-500" />
+        </Button>
       </h3>
 
       <p>{paragraphs[0]}</p>

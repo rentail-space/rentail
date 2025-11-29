@@ -1,6 +1,7 @@
 import { AlertCircle, CheckCircle } from "lucide-react";
 import { useId } from "react";
 import { useFetcher } from "react-router";
+import { Button } from "~/components/ui/button";
 
 export default function ProfileNameForm({
   user,
@@ -45,13 +46,14 @@ export default function ProfileNameForm({
         </div>
       ) : null}
 
-      <button
-        className="btn btn-primary w-full"
+      <Button
+        variant="default"
+        className="w-40"
         disabled={fetcher.state !== "idle"}
         type="submit"
       >
         {fetcher.state !== "idle" ? "Updating..." : "Update Name"}
-      </button>
+      </Button>
     </form>
   );
 }

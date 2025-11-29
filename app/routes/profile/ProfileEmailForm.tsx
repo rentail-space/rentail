@@ -1,6 +1,7 @@
 import { AlertCircle, AlertTriangle } from "lucide-react";
 import { useId } from "react";
 import { useFetcher } from "react-router";
+import { Button } from "~/components/ui/button";
 
 export default function ProfileEmailForm({
   user,
@@ -48,13 +49,14 @@ export default function ProfileEmailForm({
         />
       </fieldset>
 
-      <button
+      <Button
         type="submit"
         disabled={fetcher.state !== "idle" || fetcher.data?.verificationSent}
-        className="btn btn-primary w-full"
+        className="w-40"
+        variant="default"
       >
         {fetcher.state !== "idle" ? "Sending verification..." : "Change Email"}
-      </button>
+      </Button>
     </form>
   );
 }

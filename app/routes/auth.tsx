@@ -3,6 +3,7 @@ import { invariant } from "es-toolkit";
 import { AlertCircle } from "lucide-react";
 import { useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
+import { Button } from "~/components/ui/button";
 import { signInEmail, signUpEmail } from "~/sessions.server";
 import type { Route } from "./+types/auth";
 
@@ -127,8 +128,9 @@ export default function AuthPage() {
               </div>
             )}
 
-            <button
-              className="btn btn-primary mt-4 flex w-full items-center justify-center gap-2"
+            <Button
+              variant="default"
+              className="mt-4 flex w-full items-center justify-center gap-2"
               name="isSignUp"
               type="submit"
               value={isSignUp.toString()}
@@ -144,13 +146,13 @@ export default function AuthPage() {
                 : fetcher.state === "idle"
                   ? "Sign In"
                   : "Signing You In..."}
-            </button>
+            </Button>
           </fetcher.Form>
         </div>
 
         <div className="card-action text-center">
-          <button
-            className="btn btn-link"
+          <Button
+            variant="link"
             onClick={() => {
               setIsSignUp((isSignUp) => !isSignUp);
             }}
@@ -159,7 +161,7 @@ export default function AuthPage() {
             {isSignUp
               ? "Already have an account? Sign in"
               : "Don't have an account? Create one"}
-          </button>
+          </Button>
         </div>
         <Footer isSignUp={isSignUp} />
       </section>
