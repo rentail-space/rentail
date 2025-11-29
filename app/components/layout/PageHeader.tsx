@@ -1,16 +1,14 @@
 import { NavLink } from "react-router";
 import AccountMenu from "./AccountMenu";
 import PageIconLink from "./PageIconLink";
+import type { HeaderLink } from "./PageLayout";
 
 export default function PageHeader({
   children,
   links,
 }: {
   children?: React.ReactNode;
-  links?: {
-    to: string;
-    label: string;
-  }[];
+  links?: HeaderLink[];
 }) {
   return (
     <header className="navbar mb-1 shadow-sm print:hidden">

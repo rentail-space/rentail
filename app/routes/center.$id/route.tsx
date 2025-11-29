@@ -12,6 +12,8 @@ export async function loader({ params }: Route.LoaderArgs) {
   return center;
 }
 
+export const handle = { headerLinks: [] };
+
 export default function CenterPage({
   loaderData,
 }: {

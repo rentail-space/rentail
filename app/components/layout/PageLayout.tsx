@@ -1,9 +1,17 @@
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { last } from "es-toolkit";
 import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 import { useEffect } from "react";
 import ReactGA from "react-ga4";
-import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
+import {
+  Links,
+  Meta,
+  Scripts,
+  ScrollRestoration,
+  type UIMatch,
+  useMatches,
+} from "react-router";
 import schema from "~/data/schema.json";
 import "~/global.css";
 import PageFooter from "./PageFooter";
@@ -14,24 +22,10 @@ const description =
 const title = "rentail.space — Find your specialty lease with ease";
 const url = "https://rentail.space/";
 
-const headerLinks = [
-  {
-    to: "/about",
-    label: "About",
-  },
-  {
-    to: "/pricing",
-    label: "Pricing",
-  },
-  {
-    to: "/blog",
-    label: "Blog",
-  },
-  {
-    to: "/faq",
-    label: "FAQ",
-  },
-];
+export type HeaderLink = {
+  label: string;
+  to: string;
+};
 
 export default function PageLayout({
   children,
@@ -44,6 +38,14 @@ export default function PageLayout({
     if (process.env.NODE_ENV === "production")
       ReactGA.initialize("G-HLE5G8GC5Y");
   }, []);
+  const matches = useMatches() as UIMatch<
+    unknown,
+    { headerLinks?: { to: string; label: string }[] }
+  >[];
+  const { headerLinks } =
+    last(
+      matches.filter((match) => match.handle && "headerLinks" in match.handle),
+    )?.handle || {};
 
   return (
     <html lang="en">

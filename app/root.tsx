@@ -83,6 +83,15 @@ export const links: LinksFunction = () => [
   },
 ];
 
+export const handle = {
+  headerLinks: [
+    { label: "About", to: "/about" },
+    { label: "Pricing", to: "/pricing" },
+    { label: "Blog", to: "/blog" },
+    { label: "FAQ", to: "/faq" },
+  ],
+};
+
 export default function App({
   matches,
 }: {

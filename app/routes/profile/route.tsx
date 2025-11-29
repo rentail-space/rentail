@@ -13,6 +13,8 @@ import ProfileEmailForm from "./ProfileEmailForm";
 import ProfileNameForm from "./ProfileNameForm";
 import ProfilePasswordForm from "./ProfilePasswordForm";
 
+export const handle = { headerLinks: [] };
+
 export async function loader({ request }: { request: Request }) {
   const user = await getSignedInUser(request);
   return { user };
