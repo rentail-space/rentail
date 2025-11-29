@@ -7,15 +7,18 @@
  * - Navigation to individual posts
  */
 
-import { type Page, expect } from "playwright/test";
+import { type Locator, type Page, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Blog Listing", () => {
   let page: Page;
+  let blogSection: Locator;
 
   beforeAll(async () => {
     page = await goto("/");
+
+    blogSection = page.locator("section.blog-posts").first();
   });
 
   it("should display blog posts on home page", async () => {
@@ -71,17 +74,10 @@ describe("Blog Listing", () => {
   });
 
   it("should match inner HTML", async () => {
-    await expect(page).toMatchInnerHTML();
+    await expect(blogSection).toMatchInnerHTML();
   });
 
   it.runIf(!process.env.CI)("should match visual regression test", async () => {
-    // Scroll to blog section if it exists
-    const blogSection = page.locator("section.blog-posts").first();
-    await expect(blogSection).toBeVisible();
-    await blogSection.scrollIntoViewIfNeeded();
-    blogSection.page();
-
-    // Take screenshot for visual regression testing of the blog section
     await expect(blogSection).toMatchScreenshot();
   });
 

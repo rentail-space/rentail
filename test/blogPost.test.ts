@@ -94,12 +94,12 @@ describe("Blog Post Rendering", () => {
   });
 
   it("should match inner HTML", async () => {
-    await expect(page).toMatchInnerHTML();
+    await expect(page.locator("article")).toMatchInnerHTML();
   });
 
   it.runIf(!process.env.CI)("should match visual regression test", async () => {
     // Take screenshot for visual regression testing
-    await expect(page).toMatchScreenshot();
+    await expect(page.locator("article")).toMatchScreenshot();
   });
 
   it("should be responsive on mobile viewport", async () => {

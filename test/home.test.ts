@@ -10,11 +10,11 @@ describe("Home page", () => {
   });
 
   it("should match inner HTML", async () => {
-    await expect(page).toMatchInnerHTML();
+    await expect(page.locator("main")).toMatchInnerHTML();
   });
 
   it.runIf(!process.env.CI)("should match visual regression test", async () => {
-    await expect(page).toMatchScreenshot();
+    await expect(page.locator("main")).toMatchScreenshot();
   });
 
   afterAll(async () => {

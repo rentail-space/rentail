@@ -16,11 +16,11 @@ describe("Welcome Email", () => {
   });
 
   it("should match inner HTML", async () => {
-    await expect(page.locator("body>table")).toMatchInnerHTML();
+    await expect(page.locator("body")).toMatchInnerHTML();
   });
 
   it.runIf(!process.env.CI)("should match screenshot", async () => {
-    await expect(page).toMatchScreenshot();
+    await expect(page.locator("body")).toMatchScreenshot();
   });
 
   afterAll(async () => {

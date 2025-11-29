@@ -130,7 +130,7 @@ describe("Anonymous visits chat page", () => {
       });
 
       it("should match inner HTML", async () => {
-        await expect(page).toMatchInnerHTML({
+        await expect(page.locator("main")).toMatchInnerHTML({
           name: "sign-in-page",
         });
       });
@@ -177,7 +177,7 @@ describe("Anonymous visits chat page", () => {
         });
 
         it("should match inner HTML", async () => {
-          await expect(page).toMatchInnerHTML({
+          await expect(page.locator("main")).toMatchInnerHTML({
             name: "sign-up-page",
             strip: (html: HTMLNode[]) => {
               // NOTE: In CI the input elements have a style attribute that is

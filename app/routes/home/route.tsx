@@ -18,16 +18,14 @@ export default function Home({
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
   return (
-    <>
-      <main className="flex min-h-screen flex-col">
-        <HeroSection />
-        <FeaturesSection />
-        <CTASection />
-        <BlogPostsGrid className="bg-gray-50" posts={loaderData.posts} />
-        <SpecialtyLeasing />
-      </main>
+    <main className="flex min-h-screen flex-col">
+      <HeroSection />
+      <FeaturesSection />
+      <CTASection />
+      <BlogPostsGrid className="bg-gray-50" posts={loaderData.posts} />
+      <SpecialtyLeasing />
       <HubSpotScript />
-    </>
+    </main>
   );
 }
 

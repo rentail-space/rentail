@@ -71,6 +71,8 @@ describe("Chat page exchange messages", () => {
     });
 
     it("should match inner HTML", async () => {
+      await page.locator(".overflow-y-auto").first().scrollIntoViewIfNeeded();
+      await page.waitForTimeout(100);
       await expect(page).toMatchInnerHTML({
         strip: (html) => {
           // NOTE: The scroll to bottom button is not part of the chat, so we remove it.
