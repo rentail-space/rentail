@@ -6,6 +6,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { ArrowUpDown, NotepadTextIcon } from "lucide-react";
+import type { User, Waitlist } from "prisma/generated/client";
 import { Fragment, useState } from "react";
 import { Link, type LoaderFunctionArgs } from "react-router";
 import { Button } from "~/components/ui/button";
@@ -19,6 +20,7 @@ import {
 } from "~/components/ui/table";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/sessions.server";
+import type { Route } from "./+types/admin.users";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await verifyAdmin(request.headers);
@@ -27,14 +29,28 @@ export async function loader({ request }: LoaderFunctionArgs) {
     orderBy: { createdAt: "desc" },
     where: { isBot: false },
   });
-  return { users };
+
+  const waiting = await prisma.waitlist.findMany();
+  return { users, waiting };
 }
 
-export default function UsersPage({
-  loaderData,
-}: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
-}) {
+export default function UsersPage({ loaderData }: Route.ComponentProps) {
+  return (
+    <main className="flex flex-col gap-8">
+      <section className="flex flex-col gap-4">
+        <h2 className="font-bold text-2xl">All Users</h2>
+        <AllUsers users={loaderData.users} />
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <h2 className="font-bold text-2xl">Waiting List</h2>
+        <WaitingList waiting={loaderData.waiting} />
+      </section>
+    </main>
+  );
+}
+
+function AllUsers({ users }: { users: User[] }) {
   const [sorting, setSorting] = useState<SortingState>([
     { id: "createdAt", desc: true },
   ]);
@@ -69,7 +85,7 @@ export default function UsersPage({
         size: 110,
       },
     ],
-    data: loaderData.users,
+    data: users,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
@@ -123,6 +139,69 @@ export default function UsersPage({
                   </span>
                 </div>
               </TableCell>
+            </TableRow>
+          </Fragment>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+
+function WaitingList({ waiting }: { waiting: Waitlist[] }) {
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: "createdAt", desc: true },
+  ]);
+  const table = useReactTable({
+    columns: [
+      { header: "Email", accessorKey: "email" },
+      {
+        header: "Created",
+        accessorKey: "createdAt",
+        accessorFn: (row) =>
+          row.createdAt.toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          }),
+      },
+    ],
+    data: waiting,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    onSortingChange: setSorting,
+    state: { sorting },
+  });
+  return (
+    <Table>
+      <TableHeader>
+        {table.getHeaderGroups().map((group) => (
+          <TableRow key={group.id}>
+            {group.headers.map((header) => (
+              <TableHead key={header.id}>
+                <Button
+                  onClick={header.column.getToggleSortingHandler()}
+                  variant="ghost"
+                >
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext(),
+                  )}
+                  <ArrowUpDown />
+                </Button>
+              </TableHead>
+            ))}
+          </TableRow>
+        ))}
+      </TableHeader>
+      <TableBody>
+        {table.getRowModel().rows.map((row) => (
+          <Fragment key={row.id}>
+            <TableRow>
+              {row.getVisibleCells().map((cell) => (
+                <TableCell key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </TableCell>
+              ))}
             </TableRow>
           </Fragment>
         ))}
