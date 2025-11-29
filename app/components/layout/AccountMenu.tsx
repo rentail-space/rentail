@@ -1,7 +1,8 @@
-import { ShieldIcon, UserIcon } from "lucide-react";
+import { ShieldIcon, UnlockIcon, UserIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouteLoaderData } from "react-router";
 import type { loader as rootLoader } from "~/root";
+import { Button } from "../ui/button";
 
 export default function AccountMenu() {
   const data = useRouteLoaderData<typeof rootLoader>("root");
@@ -40,16 +41,16 @@ export default function AccountMenu() {
 
 function SignInButton() {
   return (
-    <button
+    <Button
       aria-label="Sign in"
       type="button"
       onClick={() => {
         window.location.href = "/auth";
       }}
-      className="rounded-md px-3 py-1.5 font-medium text-gray-700 text-sm transition-colors hover:bg-blue-50 hover:text-blue-600"
+      variant="ghost"
     >
       Sign In
-    </button>
+    </Button>
   );
 }
 
@@ -86,18 +87,19 @@ function DropdownMenu({
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <button
+      <Button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-md px-3 py-1.5 font-medium text-gray-700 text-sm transition-colors hover:bg-blue-50 hover:text-blue-600"
+        className="flex items-center gap-2"
         aria-expanded={isOpen}
         aria-haspopup="true"
+        variant="ghost"
       >
         <UserIcon className="h-4 w-4" />
         <span className="max-w-[200px] truncate">
           {user.name || user.email}
         </span>
-      </button>
+      </Button>
       {isOpen && (
         <ul className="menu menu-dropdown dropdown-end absolute right-0 z-50 mt-2 w-48 rounded-md border border-gray-200 bg-white py-1 shadow-lg">
           <li className="menu-disabled border-gray-200 border-b px-4 py-2">
@@ -133,8 +135,9 @@ function DropdownMenu({
               onClick={async () => {
                 window.location.href = "/auth/sign-out";
               }}
-              className="w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
+              className="block w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
             >
+              <UnlockIcon className="mr-2 inline-block h-4 w-4" />
               Sign Out
             </button>
           </li>
