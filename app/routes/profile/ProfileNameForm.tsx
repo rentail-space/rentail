@@ -1,7 +1,8 @@
 import { AlertCircle, CheckCircle } from "lucide-react";
-import { useEffect, useId } from "react";
+import { useId } from "react";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/button";
+import { Field, FieldLabel } from "~/components/ui/field";
 import { Input } from "~/components/ui/input";
 
 export default function ProfileNameForm({
@@ -17,16 +18,10 @@ export default function ProfileNameForm({
     fetcher.submit(event.currentTarget);
   }
 
-  useEffect(() => {
-    document.getElementById(nameId)?.focus();
-  }, [nameId]);
-
   return (
     <form className="space-y-6" method="post" onSubmit={onSubmit}>
-      <fieldset className="fieldset">
-        <label className="label" htmlFor={nameId}>
-          Full Name
-        </label>
+      <Field>
+        <FieldLabel htmlFor={nameId}>Full Name</FieldLabel>
         <Input
           type="text"
           id={nameId}
@@ -35,7 +30,7 @@ export default function ProfileNameForm({
           required
           placeholder="John Doe"
         />
-      </fieldset>
+      </Field>
 
       {fetcher.data?.error ? (
         <div role="alert" className="alert alert-error">
@@ -51,7 +46,7 @@ export default function ProfileNameForm({
 
       <Button
         variant="default"
-        className="w-40"
+        className="float-right w-40"
         disabled={fetcher.state !== "idle"}
         type="submit"
       >

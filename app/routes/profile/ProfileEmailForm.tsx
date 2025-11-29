@@ -1,7 +1,8 @@
 import { AlertCircle, AlertTriangle } from "lucide-react";
-import { useEffect, useId } from "react";
+import { useId } from "react";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/button";
+import { Field, FieldLabel } from "~/components/ui/field";
 import { Input } from "~/components/ui/input";
 
 export default function ProfileEmailForm({
@@ -16,10 +17,6 @@ export default function ProfileEmailForm({
     event.preventDefault();
     fetcher.submit(event.currentTarget);
   }
-
-  useEffect(() => {
-    document.getElementById(emailId)?.focus();
-  }, [emailId]);
 
   return (
     <form method="post" onSubmit={onSubmit} className="space-y-6">
@@ -38,25 +35,21 @@ export default function ProfileEmailForm({
         </div>
       ) : null}
 
-      <fieldset className="fieldset">
-        <label className="label" htmlFor={emailId}>
-          New Email Address
-        </label>
+      <Field>
+        <FieldLabel htmlFor={emailId}>New Email Address</FieldLabel>
         <Input
           defaultValue={user.email || ""}
           id={emailId}
-          minLength={3}
           name="email"
           placeholder="you@example.com"
           required
-          type="email"
         />
-      </fieldset>
+      </Field>
 
       <Button
         type="submit"
         disabled={fetcher.state !== "idle" || fetcher.data?.verificationSent}
-        className="w-40"
+        className="float-right w-40"
         variant="default"
       >
         {fetcher.state !== "idle" ? "Sending verification..." : "Change Email"}

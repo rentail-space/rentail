@@ -198,7 +198,7 @@ export default function ProfilePage() {
             </TabsList>
 
             {tabs.map((tab) => (
-              <TabsContent value={tab.key} key={tab.key}>
+              <TabsContent className="mt-8" value={tab.key} key={tab.key}>
                 <tab.component user={user} />
               </TabsContent>
             ))}

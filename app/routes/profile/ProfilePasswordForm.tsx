@@ -2,6 +2,12 @@ import { AlertCircle, CheckCircle } from "lucide-react";
 import { useEffect, useId, useRef } from "react";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/button";
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+} from "~/components/ui/field";
 import { Input } from "~/components/ui/input";
 
 export default function ProfilePasswordForm() {
@@ -34,48 +40,47 @@ export default function ProfilePasswordForm() {
         </div>
       ) : null}
 
-      <fieldset className="fieldset">
-        <label className="label" htmlFor={currentPasswordId}>
-          Current Password
-        </label>
-        <Input
-          type="password"
-          name="currentPassword"
-          id={currentPasswordId}
-          required
-          placeholder="••••••••"
-        />
+      <FieldGroup>
+        <Field>
+          <FieldLabel htmlFor={currentPasswordId}>Current Password</FieldLabel>
+          <Input
+            type="password"
+            name="currentPassword"
+            id={currentPasswordId}
+            required
+            placeholder="••••••••"
+          />
+        </Field>
 
-        <label className="label" htmlFor={newPasswordId}>
-          New Password
-        </label>
-        <Input
-          type="password"
-          id={newPasswordId}
-          name="newPassword"
-          required
-          minLength={8}
-          placeholder="••••••••"
-        />
-        <p className="mt-1 text-gray-500 text-sm">
-          Must be at least 8 characters
-        </p>
-
-        <label className="label" htmlFor={confirmPasswordId}>
-          Confirm New Password
-        </label>
-        <Input
-          type="password"
-          name="confirmPassword"
-          id={confirmPasswordId}
-          required
-          minLength={8}
-          placeholder="••••••••"
-        />
-      </fieldset>
+        <Field>
+          <FieldLabel htmlFor={newPasswordId}>New Password</FieldLabel>
+          <Input
+            type="password"
+            id={newPasswordId}
+            name="newPassword"
+            required
+            minLength={8}
+            placeholder="••••••••"
+          />
+          <FieldDescription>Must be at least 8 characters</FieldDescription>
+        </Field>
+        <Field>
+          <FieldLabel htmlFor={confirmPasswordId}>
+            Confirm New Password
+          </FieldLabel>
+          <Input
+            type="password"
+            name="confirmPassword"
+            id={confirmPasswordId}
+            required
+            minLength={8}
+            placeholder="••••••••"
+          />
+        </Field>
+      </FieldGroup>
 
       <Button
-        className="w-40"
+        className="float-right w-40"
         variant="default"
         disabled={fetcher.state !== "idle"}
         type="submit"

@@ -3,6 +3,7 @@ import { useEffect, useId, useState } from "react";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
 
 export default function CTASection() {
   return (
@@ -11,10 +12,6 @@ export default function CTASection() {
         <h2 className="mb-6 font-bold text-4xl text-white md:text-5xl">
           Ready to find your perfect retail space?
         </h2>
-        <p className="mb-8 text-blue-100 text-xl">
-          Join the waitlist today and be the first to know when we launch in
-          your area.
-        </p>
         <JoinWaitlist />
       </div>
     </section>
@@ -57,10 +54,11 @@ function JoinWaitlist() {
           </div>
         ) : null}
 
+        <Label htmlFor={id} className="mb-8 text-blue-100 text-xl">
+          Join the waitlist today and be the first to know when we launch in
+          your area.
+        </Label>
         <div className="flex flex-col gap-3 sm:flex-row">
-          <label className="sr-only" htmlFor={id}>
-            Email address
-          </label>
           <Input
             autoComplete="email"
             className="h-14 w-full px-6 text-white text-xl! placeholder-white/60! focus:ring-2"
