@@ -1,9 +1,11 @@
 import { type Page, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
+import { type LastEmail, getLastEmailSent } from "~/emails/sendEmails";
 import prisma from "~/lib/prisma";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import converse from "./helpers/converse";
 import { type HTMLNode, getElementsByTagName } from "./helpers/formatHTML";
+import { renderEmail } from "./helpers/launchBrowser";
 
 describe("Anonymous visits chat page", () => {
   let page: Page;
@@ -263,6 +265,44 @@ describe("Anonymous visits chat page", () => {
             const workingMemory = cleanParseWorkingMemory(user.workingMemory);
             expect(workingMemory.location?.latitude).toEqual(33.74901);
             expect(workingMemory.location?.longitude).toEqual(-118.1956);
+          });
+
+          describe("Welcome Email", () => {
+            let emailPage: Page;
+            let lastEmail: LastEmail | undefined;
+
+            beforeAll(async () => {
+              emailPage = await renderEmail(lastEmail?.html);
+              lastEmail = await getLastEmailSent();
+            });
+
+            it("should have sent the email", async () => {
+              expect(lastEmail).toBeDefined();
+            });
+
+            it("should have the correct recipient", async () => {
+              expect(lastEmail?.to).toContain("working-memory@example.com");
+            });
+
+            it("should have the correct subject", async () => {
+              expect(lastEmail?.subject).toBe("Welcome to rentail.space! 🎉");
+            });
+
+            it("should match inner HTML", async () => {
+              await expect(emailPage.locator("body")).toMatchInnerHTML({
+                name: "welcome-email",
+              });
+            });
+
+            it.runIf(!process.env.CI)("should match screenshot", async () => {
+              await expect(emailPage.locator("body")).toMatchScreenshot({
+                name: "welcome-email",
+              });
+            });
+
+            afterAll(async () => {
+              await emailPage?.close();
+            });
           });
         });
       });

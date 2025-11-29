@@ -1,6 +1,7 @@
 import { pretty, render } from "@react-email/components";
 import { captureException } from "@sentry/react-router";
 import debug from "debug";
+import { delay, withTimeout } from "es-toolkit";
 import Redis from "ioredis";
 import type { JSX } from "react";
 import { Resend } from "resend";
@@ -60,16 +61,16 @@ export async function sendEmail({
  * We use different processes for sending emails (Vite worker) and for checking
  * on them (test process), so we use Redis to communicate between the two.
  */
-const subscriber = new Redis(env.REDIS_URL);
-const publisher = new Redis(env.REDIS_URL);
+const subscriber = new Redis();
+const publisher = new Redis();
 
-await subscriber.subscribe("email:last");
 subscriber.on("message", (channel: string, message: unknown) => {
   if (channel === "email:last")
     lastEmailSent = message
       ? (JSON.parse(message as string) as LastEmail)
       : undefined;
 });
+await subscriber.subscribe("email:last");
 
 /**
  * Get the last email that was sent. This is useful for visual regression
@@ -78,8 +79,13 @@ subscriber.on("message", (channel: string, message: unknown) => {
  *
  * @returns The last email that was sent.
  */
-export function getLastEmail(): LastEmail | undefined {
-  return lastEmailSent;
+export async function getLastEmailSent(): Promise<LastEmail | undefined> {
+  await withTimeout(async () => {
+    while (!lastEmailSent) await delay(100);
+  }, 1_000);
+  const lastEmail = lastEmailSent;
+  lastEmailSent = undefined;
+  return lastEmail;
 }
 
 /**

@@ -12,7 +12,8 @@ import { ulid } from "ulid";
 import zod from "zod";
 import prisma from "~/lib/prisma";
 import welcome from "~/prompts/welcome.md?raw";
-import sendNewUserEmail from "./emails/NewUserNotification";
+import sendNewUserNotification from "./emails/NewUserNotification";
+import sendWelcomeEmail from "./emails/WelcomeEmail";
 import { getDeviceInfo } from "./lib/deviceDetection.server";
 import env from "./lib/env";
 import { readUtmParams, saveUtmParams } from "./lib/middleware/utm";
@@ -196,6 +197,7 @@ export async function findOrCreateUser({
   }
 
   const user = await createAnonymousUser({ chatId, requestHeaders });
+  await sendNewUserNotification(user);
   const chat = user.chats[0];
   const messages = await recentMessages(chat.id);
 
@@ -443,6 +445,8 @@ export async function signUpEmail({
       data: { isAnonymous: false, name, email, passwordHash },
       where: { id: anonymousUser.id },
     });
+    await sendWelcomeEmail(user);
+    await sendNewUserNotification(user);
     return await createSession({ requestHeaders, userId: user.id });
   }
 
@@ -459,6 +463,8 @@ export async function signUpEmail({
     passwordHash,
     requestHeaders,
   });
+  await sendWelcomeEmail(newUser);
+  await sendNewUserNotification(newUser);
   return await createSession({ requestHeaders, userId: newUser.id });
 }
 
@@ -580,7 +586,7 @@ async function createUser({
     .join(", ");
   const deviceInfo = getDeviceInfo(requestHeaders);
 
-  const user = await prisma.user.create({
+  return await prisma.user.create({
     data: {
       cityStateCountry,
       // NOTE: Users must have unique emails in their index
@@ -625,11 +631,6 @@ async function createUser({
     },
     include: { chats: true },
   });
-
-  // Notify admin of new user creation
-  if (env.isProduction) await sendNewUserEmail({ user });
-
-  return user;
 }
 
 async function createSession({

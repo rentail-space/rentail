@@ -6,6 +6,7 @@
  */
 
 import * as Sentry from "@sentry/react-router";
+import Redis from "ioredis";
 import { afterAll, beforeAll } from "vitest";
 import prisma from "~/lib/prisma";
 import "./toMatchInnerHTML";
@@ -21,6 +22,10 @@ beforeAll(async () => {
     prisma.verification.deleteMany(),
     prisma.waitlist.deleteMany(),
   ]);
+
+  // Cleanup Redis to avoid stale data between tests
+  const redis = new Redis();
+  await redis.flushdb();
 });
 
 afterAll(async () => {

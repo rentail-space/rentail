@@ -1,6 +1,6 @@
 import { type Page, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import { type LastEmail, getLastEmail } from "~/emails/sendEmails";
+import { type LastEmail, getLastEmailSent } from "~/emails/sendEmails";
 import prisma from "~/lib/prisma";
 import { goto, renderEmail } from "./helpers/launchBrowser";
 
@@ -46,7 +46,7 @@ describe("Waitlist", () => {
     let emailPage: Page;
 
     beforeAll(async () => {
-      lastEmail = getLastEmail();
+      lastEmail = await getLastEmailSent();
       emailPage = await renderEmail(lastEmail?.html);
     });
 

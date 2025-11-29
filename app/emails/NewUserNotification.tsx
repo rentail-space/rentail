@@ -1,10 +1,17 @@
 import { Button, Section, Text } from "@react-email/components";
 import type { User } from "prisma/generated/client";
 import * as styles from "~/emails/styles";
+import env from "~/lib/env";
 import EmailLayout from "./EmailLayout";
 import { sendEmail } from "./sendEmails";
 
-export default async function sendNewUserEmail({ user }: { user: User }) {
+/**
+ * Notify admin of new user creation.  This is only sent in production.
+ *
+ * @param user - The user that was created.
+ */
+export default async function sendNewUserNotification(user: User) {
+  if (!env.isProduction) return;
   await sendEmail({
     email: "assaf@labnotes.org",
     subject: "New User Created",
