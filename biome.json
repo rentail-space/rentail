@@ -18,7 +18,8 @@
       "!.vscode",
       "!build",
       "!prisma/generated",
-      "!test/context"
+      "!test/context",
+      "!app/components/ui"
     ],
     "ignoreUnknown": false
   },
@@ -58,7 +59,12 @@
         "noUnsafeDeclarationMerging": "error",
         "noConsole": {
           "options": {
-            "allow": ["assert", "error", "info", "warn"]
+            "allow": [
+              "assert",
+              "error",
+              "info",
+              "warn"
+            ]
           }
         }
       },

@@ -1,4 +1,5 @@
 import { NavLink } from "react-router";
+import { twMerge } from "tailwind-merge";
 import AccountMenu from "./AccountMenu";
 import PageIconLink from "./PageIconLink";
 import type { HeaderLink } from "./PageLayout";
@@ -20,7 +21,12 @@ export default function PageHeader({
           <NavLink
             key={link.to}
             to={link.to}
-            className="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600"
+            className={({ isActive }) =>
+              twMerge(
+                "font-medium text-gray-600 text-sm transition-colors hover:text-blue-600",
+                isActive && "text-blue-600",
+              )
+            }
           >
             {link.label}
           </NavLink>

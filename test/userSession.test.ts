@@ -21,7 +21,7 @@ describe("Anonymous visits chat page", () => {
   });
 
   it("loads chat page and shows sign-in button", async () => {
-    await expect(page.getByRole("button", { name: "Sign In" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Sign In" })).toBeVisible();
   });
 
   it("should be registered as anonymous user", async () => {
@@ -94,7 +94,7 @@ describe("Anonymous visits chat page", () => {
 
     describe("visits sign-in page", () => {
       beforeAll(async () => {
-        await page.getByRole("button", { name: "Sign In" }).click();
+        await page.getByRole("link", { name: "Sign In" }).click();
         await page.waitForURL("/auth", { waitUntil: "load" });
       });
 

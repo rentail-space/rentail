@@ -66,6 +66,7 @@ export default function PageFooter() {
           <h3 className="footer-title flex flex-col gap-4">{link.title}</h3>
           {link.links.map((link) => (
             <NavLink
+              aria-label={`Go to ${link.label} page`}
               className="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600"
               key={link.to}
               to={link.to}

@@ -1,6 +1,6 @@
 <div class="flex min-h-screen flex-col">
   <header class="navbar mb-1 shadow-sm print:hidden">
-    <a class="font-bold text-2xl hover:text-blue-600 navbar-start" data-discover="true" href="/">
+    <a aria-label="Go to home page" class="font-bold text-2xl hover:text-blue-600 navbar-start" data-discover="true" href="/">
       <span class="text-blue-600">
         rentail
       </span>
@@ -10,9 +10,9 @@
     </a>
     <nav class="navbar-center hidden items-center gap-6 md:flex"></nav>
     <div class="navbar-end">
-      <button aria-label="Sign in" class="rounded-md px-3 py-1.5 font-medium text-gray-700 text-sm transition-colors hover:bg-blue-50 hover:text-blue-600" type="button">
+      <a aria-current="page" aria-label="Go to sign in page" class="h-9 px-4 py-2 hover:bg-accent hover:text-accent-foreground text-blue-600" data-discover="true" href="/auth">
         Sign In
-      </button>
+      </a>
     </div>
   </header>
   <main class="flex flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50">
@@ -27,26 +27,30 @@
           </p>
         </div>
         <form action="/auth" class="space-y-6" data-discover="true" method="post">
-          <fieldset class="fieldset">
-            <label class="label" for="_r_1_">
-              Email Address
-            </label>
-            <input class="input input-lg w-full" id="_r_1_" name="email" placeholder="you@example.com" required type="email" />
-            <label class="fieldset-label" for="_r_2_">
-              Password
-            </label>
-            <input class="input input-lg w-full" id="_r_2_" minlength="8" name="password" placeholder="••••••••" required type="password" />
-            <p class="fieldset-legend" hidden>
-              Must be at least 8 characters
-            </p>
+          <fieldset class="flex flex-col gap-6 has-[&gt;[data-slot=checkbox-group]]:gap-3 has-[&gt;[data-slot=radio-group]]:gap-3" data-slot="field-set">
+            <div class="group/field data-[invalid=true]:text-destructive flex w-full gap-3 flex-col [&amp;&gt;*]:w-full [&amp;&gt;.sr-only]:w-auto" data-orientation="vertical" data-slot="field" role="group">
+              <label class="items-center text-sm font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-[&gt;[data-slot=field]]:w-full has-[&gt;[data-slot=field]]:flex-col has-[&gt;[data-slot=field]]:rounded-md has-[&gt;[data-slot=field]]:border [&amp;&gt;[data-slot=field]]:p-4 has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10" data-slot="field-label" for="_r_2_">
+                Email Address
+              </label>
+              <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" id="_r_2_" name="email" placeholder="you@example.com" required type="email" />
+            </div>
+            <div class="group/field data-[invalid=true]:text-destructive flex w-full gap-3 flex-col [&amp;&gt;*]:w-full [&amp;&gt;.sr-only]:w-auto" data-orientation="vertical" data-slot="field" role="group">
+              <label class="items-center text-sm font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-[&gt;[data-slot=field]]:w-full has-[&gt;[data-slot=field]]:flex-col has-[&gt;[data-slot=field]]:rounded-md has-[&gt;[data-slot=field]]:border [&amp;&gt;[data-slot=field]]:p-4 has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10" data-slot="field-label" for="_r_3_">
+                Password
+              </label>
+              <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" id="_r_3_" minlength="8" name="password" placeholder="••••••••" required type="password" />
+              <p class="text-muted-foreground text-sm font-normal leading-normal group-has-[[data-orientation=horizontal]]/field:text-balance nth-last-2:-mt-1 last:mt-0 [[data-variant=legend]+&amp;]:-mt-1.5 [&amp;&gt;a:hover]:text-primary [&amp;&gt;a]:underline [&amp;&gt;a]:underline-offset-4" data-slot="field-description">
+                Must be at least 8 characters
+              </p>
+            </div>
           </fieldset>
-          <button class="btn btn-primary mt-4 flex w-full items-center justify-center gap-2" name="isSignUp" type="submit" value="false">
+          <button class="whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-blue-600 text-white shadow hover:bg-blue-700 h-9 px-4 py-2 mt-4 flex w-full items-center justify-center gap-2" name="isSignUp" type="submit" value="false">
             Sign In
           </button>
         </form>
       </div>
       <div class="card-action text-center">
-        <button class="btn btn-link" type="button">
+        <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 text-primary underline-offset-4 hover:underline h-9 px-4 py-2" type="button">
           Don't have an account? Create one
         </button>
       </div>
@@ -64,7 +68,7 @@
   </main>
   <footer class="footer sm:footer-horizontal border-t bg-gray-50 px-6 py-12 print:hidden">
     <aside class="flex flex-col gap-4">
-      <a class="font-bold text-2xl hover:text-blue-600" data-discover="true" href="/">
+      <a aria-label="Go to home page" class="font-bold text-2xl hover:text-blue-600" data-discover="true" href="/">
         <span class="text-blue-600">
           rentail
         </span>
@@ -94,10 +98,10 @@
       <h3 class="footer-title flex flex-col gap-4">
         Product
       </h3>
-      <a class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" data-discover="true" href="/pricing">
+      <a aria-label="Go to Pricing page" class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" data-discover="true" href="/pricing">
         Pricing
       </a>
-      <a class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" data-discover="true" href="/faq">
+      <a aria-label="Go to FAQ page" class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" data-discover="true" href="/faq">
         FAQ
       </a>
     </nav>
@@ -105,13 +109,13 @@
       <h3 class="footer-title flex flex-col gap-4">
         Resources
       </h3>
-      <a class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" data-discover="true" href="/blog">
+      <a aria-label="Go to Blog page" class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" data-discover="true" href="/blog">
         Blog
       </a>
-      <a class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" data-discover="true" href="/about">
+      <a aria-label="Go to About page" class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" data-discover="true" href="/about">
         About
       </a>
-      <a class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" href="mailto:hello@rentail.space">
+      <a aria-label="Go to Contact page" class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" href="mailto:hello@rentail.space">
         Contact
       </a>
     </nav>
@@ -119,10 +123,10 @@
       <h3 class="footer-title flex flex-col gap-4">
         Legal
       </h3>
-      <a class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" data-discover="true" href="/privacy">
+      <a aria-label="Go to Privacy Policy page" class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" data-discover="true" href="/privacy">
         Privacy Policy
       </a>
-      <a class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" data-discover="true" href="/terms">
+      <a aria-label="Go to Terms of Service page" class="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600" data-discover="true" href="/terms">
         Terms of Service
       </a>
     </nav>

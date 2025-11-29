@@ -1,6 +1,7 @@
 import { ShieldIcon, UnlockIcon, UserIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Link, useRouteLoaderData } from "react-router";
+import { Link, NavLink, useRouteLoaderData } from "react-router";
+import { twMerge } from "tailwind-merge";
 import type { loader as rootLoader } from "~/root";
 import { Button } from "../ui/button";
 
@@ -41,16 +42,18 @@ export default function AccountMenu() {
 
 function SignInButton() {
   return (
-    <Button
-      aria-label="Sign in"
-      type="button"
-      onClick={() => {
-        window.location.href = "/auth";
-      }}
-      variant="ghost"
+    <NavLink
+      aria-label="Go to sign in page"
+      className={({ isActive }) =>
+        twMerge(
+          "h-9 px-4 py-2 hover:bg-accent hover:text-accent-foreground",
+          isActive && "text-blue-600",
+        )
+      }
+      to="/auth"
     >
       Sign In
-    </Button>
+    </NavLink>
   );
 }
 

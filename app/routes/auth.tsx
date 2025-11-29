@@ -17,10 +17,6 @@ import type { Route } from "./+types/auth";
 
 export const handle = { headerLinks: [] };
 
-export const clientLoader = async () => {
-  return {};
-};
-
 export async function action({ request }: Route.ActionArgs): Promise<Response> {
   const form = await request.formData();
   try {
