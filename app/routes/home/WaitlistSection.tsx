@@ -1,11 +1,12 @@
-import { AlertCircle, CheckCircle, Info } from "lucide-react";
+import { Info } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import { useFetcher } from "react-router";
+import { Alert, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 
-export default function CTASection() {
+export default function WaitlistSection() {
   return (
     <section className="bg-linear-to-br from-blue-600 to-indigo-700 px-4 py-20">
       <div className="container mx-auto max-w-4xl text-center">
@@ -25,7 +26,7 @@ function JoinWaitlist() {
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    fetcher.submit(event.currentTarget);
+    fetcher.submit({ email }, { action: "/api/waitlist", method: "POST" });
   }
 
   useEffect(() => {
@@ -36,22 +37,15 @@ function JoinWaitlist() {
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-4">
-      <form
-        action="/api/waitlist"
-        method="POST"
-        onSubmit={onSubmit}
-        className="flex w-full flex-col gap-4"
-      >
+      <form onSubmit={onSubmit} className="flex w-full flex-col gap-4">
         {fetcher.data?.error ? (
-          <div role="alert" className="alert alert-error">
-            <AlertCircle className="h-6 w-6 shrink-0 stroke-current" />
-            <span>Something went wrong. Please try again.</span>
-          </div>
+          <Alert variant="destructive">
+            <AlertTitle>Something went wrong. Please try again.</AlertTitle>
+          </Alert>
         ) : fetcher.data?.success ? (
-          <div role="alert" className="alert alert-success">
-            <CheckCircle className="h-6 w-6 shrink-0 stroke-current" />
-            <span>Thank you for joining our waitlist! 🚀</span>
-          </div>
+          <Alert variant="default">
+            <AlertTitle>Thank you for joining our waitlist! 🚀</AlertTitle>
+          </Alert>
         ) : null}
 
         <Label htmlFor={id} className="mb-8 text-blue-100 text-xl">

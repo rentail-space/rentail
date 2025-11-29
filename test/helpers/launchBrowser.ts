@@ -1,4 +1,6 @@
+import { pretty, render } from "@react-email/components";
 import debug from "debug";
+import { invariant } from "es-toolkit";
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { URL as URLString } from "node:url";
@@ -8,6 +10,7 @@ import {
   type Route,
   chromium,
 } from "playwright";
+import type { JSX } from "react";
 
 export const port = 9222;
 
@@ -69,6 +72,26 @@ export async function newContext(): Promise<BrowserContext> {
   await mkdir(resolve("__screenshots__"), { recursive: true });
 
   return context;
+}
+
+/**
+ * Render an email to HTML for visual regression testing. The email can be a
+ * string, a JSX element, or a React Email component. Returns a Playwright page
+ * with the email content.
+ *
+ * @param email - The email to render.
+ * @returns The rendered email.
+ */
+export async function renderEmail(email?: string | JSX.Element | null) {
+  invariant(email, "Email is required");
+  const html =
+    typeof email === "string" ? email : await pretty(await render(email));
+
+  // Set the page content and wait for it to load (for images)
+  const context = await newContext();
+  const page = await context.newPage();
+  await page.setContent(html, { waitUntil: "load" });
+  return page;
 }
 
 async function blockOutgoingRequests(route: Route): Promise<void> {

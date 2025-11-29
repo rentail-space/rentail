@@ -1,8 +1,8 @@
 import { type Page, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import { lastEmailHtml } from "~/emails/sendEmails";
+import { getLastEmail } from "~/emails/sendEmails";
 import sendWelcomeEmail from "~/emails/WelcomeEmail";
-import renderEmail from "./helpers/renderEmail";
+import { renderEmail } from "./helpers/launchBrowser";
 
 describe("Welcome Email", () => {
   let page: Page;
@@ -12,7 +12,7 @@ describe("Welcome Email", () => {
       email: "john.doe@example.com",
       name: "John Doe",
     });
-    page = await renderEmail(lastEmailHtml);
+    page = await renderEmail(getLastEmail()?.html);
   });
 
   it("should match inner HTML", async () => {

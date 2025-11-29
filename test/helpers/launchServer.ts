@@ -21,7 +21,7 @@ export async function launchServer(port: number): Promise<void> {
   // instance, which could cause issues with some libraries (eg Prisma)
   worker = fork(resolve("test/helpers/serverWorker.ts"), {
     execArgv: ["--import", "tsx/esm"],
-    stdio: "pipe",
+    stdio: "inherit",
     env: {
       ...process.env,
       NODE_ENV: "test",
@@ -33,17 +33,12 @@ export async function launchServer(port: number): Promise<void> {
   await new Promise<void>((resolve, reject) => {
     invariant(worker, "Server worker is not defined");
     worker
-      .on("message", (msg: { type: string; error?: string }) => {
-        if (msg.type === "ready") resolve();
-        if (msg.type === "error")
-          reject(new Error(`Worker error: ${msg.error}`));
-      })
       .on("error", (error) => {
-        logger("worker error:", error);
+        console.error("Worker error: %s", error);
         reject(error);
       })
-      .on("exit", (code) => {
-        reject(new Error(`Worker stopped with exit code ${code}`));
+      .on("message", (msg?: { type: "ready" }) => {
+        if (msg?.type === "ready") resolve();
       });
   });
 

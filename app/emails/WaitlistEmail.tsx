@@ -6,7 +6,7 @@ import { sendEmail } from "./sendEmails";
 export default async function sendWaitlistEmail({ email }: { email: string }) {
   await sendEmail({
     email,
-    subject: "You're on the waitlist!",
+    subject: "Thank you for joining our waitlist! 🚀",
     component: Waitlist,
   });
 }

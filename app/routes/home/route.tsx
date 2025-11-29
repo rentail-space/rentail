@@ -3,7 +3,7 @@ import { recentBlogPosts } from "~/lib/blogPosts.server";
 import FeaturesSection from "~/routes/home/FeaturesSection";
 import HeroSection from "~/routes/home/HeroSection";
 import SpecialtyLeasing from "~/routes/home/SpecialtyLeasing";
-import CTASection from "./CTASection";
+import CTASection from "./WaitlistSection";
 
 export const handle = { headerLinks: [] };
 

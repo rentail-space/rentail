@@ -27,7 +27,7 @@ const octokit = new Octokit({
 });
 
 async function githubWorkflows() {
-  console.log("\x1b[34mGitHub workflow status:\x1b[0m");
+  console.info("\x1b[34mGitHub workflow status:\x1b[0m");
 
   const { data } = await octokit.rest.actions.listWorkflowRuns({
     owner: "assaf",
@@ -36,7 +36,7 @@ async function githubWorkflows() {
   });
   for (const workflow of data.workflow_runs.slice(0, 5)) {
     const status = " %s \t(%s)\t%s => %s";
-    console.log(
+    console.info(
       workflow.conclusion === "failure"
         ? `\x1b[31m✗ ${status}\x1b[0m`
         : `\x1b[32m✓ ${status}\x1b[0m`,
@@ -47,13 +47,13 @@ async function githubWorkflows() {
       workflow.conclusion ?? "building…",
     );
   }
-  console.log();
+  console.info();
 }
 
 async function getRecentDeployment(): Promise<
   GetDeploymentsResponseBody["deployments"][0]
 > {
-  console.log("\x1b[34mVercel deployments:\x1b[0m");
+  console.info("\x1b[34mVercel deployments:\x1b[0m");
 
   const { deployments } = await vercel.deployments.getDeployments({
     projectId: vercelProjectId,
@@ -63,7 +63,7 @@ async function getRecentDeployment(): Promise<
 
   for (const deployment of deployments) {
     const status = " %s \t(%s)\t%s => %s";
-    console.log(
+    console.info(
       deployment.state === "READY"
         ? `\x1b[32m✓ ${status}\x1b[0m`
         : deployment.state === "BUILDING"
@@ -75,7 +75,7 @@ async function getRecentDeployment(): Promise<
       deployment.target ?? "preview",
     );
   }
-  console.log();
+  console.info();
 
   const mostRecentDeployment = deployments[0];
   return mostRecentDeployment;
@@ -84,7 +84,7 @@ async function getRecentDeployment(): Promise<
 async function promoteToProduction(
   deployment: GetDeploymentsResponseBody["deployments"][0],
 ): Promise<GetDeploymentResponseBody> {
-  console.log(
+  console.info(
     `\x1b[34m⏳ Promoting deployment ${deployment.uid} to production...\x1b[0m`,
   );
   invariant(deployment.target === null, "Deployment is already in production");
@@ -105,7 +105,7 @@ async function promoteToProduction(
 async function waitForDeploy(
   idOrUrl: string,
 ): Promise<GetDeploymentResponseBody> {
-  console.log("\x1b[34mWaiting for deployment to be ready...\x1b[0m");
+  console.info("\x1b[34mWaiting for deployment to be ready...\x1b[0m");
   const spinner = ora().start();
 
   while (true) {
@@ -114,7 +114,7 @@ async function waitForDeploy(
       status.readySubstate === "PROMOTED" && status.target === "production";
     if (isPromoted) {
       spinner.succeed("Deployment is ready");
-      console.log(
+      console.info(
         "\nTry it out: \x1b[34mhttps://%s\x1b[0m\n",
         status.alias?.[0] ?? status.url,
       );
@@ -140,20 +140,20 @@ async function interactive() {
   const isReady = mostRecent.readyState === "READY";
   if (isReady) {
     const gitId = mostRecent.meta?.githubCommitSha?.slice(-8);
-    console.log("\nTry it out: \x1b[34mhttps://%s\x1b[0m\n", mostRecent.url);
+    console.info("\nTry it out: \x1b[34mhttps://%s\x1b[0m\n", mostRecent.url);
     const shouldPromote = await confirm({
       default: false,
       message: `Promote deployment ${gitId} to production?`,
     });
     if (!shouldPromote) {
-      console.log("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
+      console.info("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
       return;
     }
     await promoteToProduction(mostRecent);
     return;
   }
 
-  console.log("\x1b[34m⏳ Still building preview…\x1b[0m");
+  console.info("\x1b[34m⏳ Still building preview…\x1b[0m");
 }
 
 await interactive();
