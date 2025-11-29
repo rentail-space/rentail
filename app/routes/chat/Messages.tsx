@@ -22,6 +22,11 @@ export default function Messages({
   const prevIsTyping = useRef(isTyping);
 
   const { scrollToBottom, isAtBottom } = useStickToBottomContext();
+  // biome-ignore lint/correctness/useExhaustiveDependencies: on first render
+  useEffect(() => {
+    if (!isAtBottom) scrollToBottom();
+  }, []);
+
   // Auto-scroll when new messages arrive or typing state changes
   useEffect(() => {
     const messagesChanged = messages.length !== prevMessagesLength.current;

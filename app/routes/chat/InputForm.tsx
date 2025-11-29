@@ -43,6 +43,7 @@ export default function InputForm({
           type="text"
           value={query}
         />
+
         <div className="-translate-y-1/2 absolute top-1/2 right-2 flex transform gap-2">
           {false && (
             <StopButton isResponding={isResponding} stopChat={stopChat} />
