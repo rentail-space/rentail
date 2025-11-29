@@ -3,7 +3,7 @@ import { afterAll, beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import converse from "./helpers/converse";
-import { getElementsByTagName } from "./helpers/formatHTML";
+import { type HTMLNode, getElementsByTagName } from "./helpers/formatHTML";
 
 describe("Anonymous visits chat page", () => {
   let page: Page;
@@ -119,7 +119,7 @@ describe("Anonymous visits chat page", () => {
 
       it("shows sign-in page with sign-in button", async () => {
         await expect(
-          page.getByRole("button", { name: "Sign In" }),
+          page.getByRole("button", { name: "Sign In" }).last(),
         ).toBeVisible();
       });
 
@@ -178,7 +178,7 @@ describe("Anonymous visits chat page", () => {
         it("should match inner HTML", async () => {
           await expect(page).toMatchInnerHTML({
             name: "sign-up-page",
-            strip: (html) => {
+            strip: (html: HTMLNode[]) => {
               // NOTE: In CI the input elements have a style attribute that is
               // an empty string.  This is not present in the baseline HTML from
               // the local environment.  We remove the style attribute to make

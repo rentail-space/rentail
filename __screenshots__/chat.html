@@ -1,62 +1,60 @@
-<div>
-  <div class="inset-0 flex h-screen flex-col">
-    <header class="navbar mb-1 shadow-sm print:hidden">
-      <a class="font-bold text-2xl hover:text-blue-600 navbar-start" data-discover="true" href="/">
-        <span class="text-blue-600">
-          rentail
-        </span>
-        <span class="text-gray-900">
-          .space
-        </span>
-      </a>
-      <nav class="navbar-center hidden items-center gap-6 md:flex"></nav>
-      <div class="navbar-end">
-        <button aria-label="Sign in" class="rounded-md px-3 py-1.5 font-medium text-gray-700 text-sm transition-colors hover:bg-blue-50 hover:text-blue-600" type="button">
-          Sign In
-        </button>
-      </div>
-    </header>
+<div class="inset-0 flex h-screen flex-col justify-between">
+  <header class="navbar mb-1 shadow-sm print:hidden">
+    <a class="font-bold text-2xl hover:text-blue-600 navbar-start" data-discover="true" href="/">
+      <span class="text-blue-600">
+        rentail
+      </span>
+      <span class="text-gray-900">
+        .space
+      </span>
+    </a>
+    <nav class="navbar-center hidden items-center gap-6 md:flex"></nav>
+    <div class="navbar-end">
+      <button aria-label="Sign in" class="rounded-md px-3 py-1.5 font-medium text-gray-700 text-sm transition-colors hover:bg-blue-50 hover:text-blue-600" type="button">
+        Sign In
+      </button>
+    </div>
+  </header>
+  <div class="flex-1 overflow-y-auto scroll-smooth px-4 py-4">
     <div style="height: 100%; width: 100%; overflow: auto;">
       <div>
         <div class="flex flex-row gap-4 lg:pr-4">
-          <div class="flex min-h-[80lvh] flex-1 flex-col">
-            <div class="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto scroll-smooth p-4">
-              <div class="chat chat-start">
-                <div class="chat-image avatar not-prose w-8">
-                  <img alt="rental space" class height="32px" src="/favicon-96x96.png" width="32px" />
-                </div>
-                <div class="chat-bubble chat-bubble-response">
-                  <div class="space-y-4 whitespace-normal prose prose-base">
-                    <p class="mt-2 mb-2 whitespace-pre-wrap">
-                      Welcome to
-                      <span class="font-semibold">
-                        rentail.space
-                      </span>
-                      !
-                    </p>
-                    <p class="mt-2 mb-2 whitespace-pre-wrap">
-                      I'm your virtual assistant here to help you find the perfect retail space for your business needs. How can I assist you today?
-                    </p>
-                  </div>
-                </div>
+          <div class="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto scroll-smooth p-4">
+            <div class="chat chat-start">
+              <div class="chat-image avatar not-prose w-8">
+                <img alt="rental space" class height="32px" src="/favicon-96x96.png" width="32px" />
               </div>
-              <div class="chat chat-end">
-                <div class="chat-bubble chat-bubble-accent chat-bubble-user prose prose-base">
-                  <p>
-                    looking for a pop-up retail space for my clothing boutique
+              <div class="chat-bubble chat-bubble-response">
+                <div class="space-y-4 whitespace-normal prose prose-base">
+                  <p class="mt-2 mb-2 whitespace-pre-wrap">
+                    Welcome to
+                    <span class="font-semibold">
+                      rentail.space
+                    </span>
+                    !
+                  </p>
+                  <p class="mt-2 mb-2 whitespace-pre-wrap">
+                    I'm your virtual assistant here to help you find the perfect retail space for your business needs. How can I assist you today?
                   </p>
                 </div>
               </div>
-              <div class="chat chat-start">
-                <div class="chat-image avatar not-prose w-8">
-                  <img alt="rental space" class height="32px" src="/favicon-96x96.png" width="32px" />
-                </div>
-                <div class="chat-bubble chat-bubble-response">
-                  <div class="space-y-4 whitespace-normal prose prose-base">
-                    <p class="mt-2 mb-2 whitespace-pre-wrap">
-                      Perfect! I found some great locations for your clothing boutique. Here are the top options with excellent foot traffic.
-                    </p>
-                  </div>
+            </div>
+            <div class="chat chat-end">
+              <div class="chat-bubble chat-bubble-accent chat-bubble-user prose prose-base">
+                <p>
+                  looking for a pop-up retail space for my clothing boutique
+                </p>
+              </div>
+            </div>
+            <div class="chat chat-start">
+              <div class="chat-image avatar not-prose w-8">
+                <img alt="rental space" class height="32px" src="/favicon-96x96.png" width="32px" />
+              </div>
+              <div class="chat-bubble chat-bubble-response">
+                <div class="space-y-4 whitespace-normal prose prose-base">
+                  <p class="mt-2 mb-2 whitespace-pre-wrap">
+                    Perfect! I found some great locations for your clothing boutique. Here are the top options with excellent foot traffic.
+                  </p>
                 </div>
               </div>
             </div>
@@ -421,18 +419,18 @@
         </div>
       </div>
     </div>
-    <div class="w-full items-center justify-center bg-gray-50 p-2">
-      <form class="relative w-full">
-        <input autocapitalize="off" autocomplete="off" autocorrect="off" autofocus class="w-full rounded-2xl border-2 border-gray-200 bg-white py-4 pr-24 pl-5 text-base placeholder-gray-400 outline-none transition-all duration-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" placeholder="Ask me any question about retail spaces..." spellcheck="false" type="text" value />
-        <div class="-translate-y-1/2 absolute top-1/2 right-2 flex transform gap-2">
-          <button aria-label="Send message" class="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-indigo-500 transition-all duration-200 hover:scale-105 hover:bg-indigo-600 active:scale-95 active:scale-[0.6] active:duration-75 disabled:cursor-not-allowed disabled:bg-gray-300" type="submit">
-            <svg aria-hidden="true" class="lucide lucide-send h-6 w-6 text-white" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
-              <path d="m21.854 2.147-10.94 10.939"></path>
-            </svg>
-          </button>
-        </div>
-      </form>
-    </div>
+  </div>
+  <div class="w-full items-center justify-center bg-gray-50 p-2">
+    <form class="relative w-full">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" autofocus class="w-full rounded-2xl border-2 border-gray-200 bg-white py-4 pr-24 pl-5 text-base placeholder-gray-400 outline-none transition-all duration-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" placeholder="Ask me any question about retail spaces..." spellcheck="false" type="text" value />
+      <div class="-translate-y-1/2 absolute top-1/2 right-2 flex transform gap-2">
+        <button aria-label="Send message" class="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-indigo-500 transition-all duration-200 hover:scale-105 hover:bg-indigo-600 active:scale-95 active:scale-[0.6] active:duration-75 disabled:cursor-not-allowed disabled:bg-gray-300" type="submit">
+          <svg aria-hidden="true" class="lucide lucide-send h-6 w-6 text-white" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
+            <path d="m21.854 2.147-10.94 10.939"></path>
+          </svg>
+        </button>
+      </div>
+    </form>
   </div>
 </div>

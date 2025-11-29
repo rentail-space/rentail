@@ -1,48 +1,66 @@
-<div class="flex flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50">
-  <main class="card card-border mx-4 my-10 w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
-    <div class="card-body space-y-6">
-      <div>
-        <h1 class="text-center font-bold text-3xl">
-          Welcome Back
-        </h1>
-        <p class="text-center text-gray-600">
-          Sign in to your account
-        </p>
-      </div>
-      <form action="/auth" class="space-y-6" data-discover="true" method="post">
-        <fieldset class="fieldset">
-          <label class="label" for="_r_1_">
-            Email Address
-          </label>
-          <input class="input input-lg w-full" id="_r_1_" name="email" placeholder="you@example.com" required type="email" />
-          <label class="fieldset-label" for="_r_2_">
-            Password
-          </label>
-          <input class="input input-lg w-full" id="_r_2_" minlength="8" name="password" placeholder="••••••••" required type="password" />
-          <p class="fieldset-legend" hidden>
-            Must be at least 8 characters
-          </p>
-        </fieldset>
-        <button class="btn btn-primary mt-4 flex w-full items-center justify-center gap-2" name="isSignUp" type="submit" value="false">
-          Sign In
-        </button>
-      </form>
-    </div>
-    <div class="card-action text-center">
-      <button class="btn btn-link" type="button">
-        Don't have an account? Create one
+<div class="flex min-h-screen flex-col">
+  <header class="navbar mb-1 shadow-sm print:hidden">
+    <a class="font-bold text-2xl hover:text-blue-600 navbar-start" data-discover="true" href="/">
+      <span class="text-blue-600">
+        rentail
+      </span>
+      <span class="text-gray-900">
+        .space
+      </span>
+    </a>
+    <nav class="navbar-center hidden items-center gap-6 md:flex"></nav>
+    <div class="navbar-end">
+      <button aria-label="Sign in" class="rounded-md px-3 py-1.5 font-medium text-gray-700 text-sm transition-colors hover:bg-blue-50 hover:text-blue-600" type="button">
+        Sign In
       </button>
     </div>
-    <footer class="mt-8 text-center text-gray-600 text-sm">
-      By signing in, you agree to our
-      <a class="link" href="/terms">
-        Terms of Service
-      </a>
-      and
-      <a class="link" href="/privacy">
-        Privacy Policy
-      </a>
-    </footer>
+  </header>
+  <main class="flex flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50">
+    <section class="card card-border mx-4 my-10 w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+      <div class="card-body space-y-6">
+        <div>
+          <h1 class="text-center font-bold text-3xl">
+            Welcome Back
+          </h1>
+          <p class="text-center text-gray-600">
+            Sign in to your account
+          </p>
+        </div>
+        <form action="/auth" class="space-y-6" data-discover="true" method="post">
+          <fieldset class="fieldset">
+            <label class="label" for="_r_1_">
+              Email Address
+            </label>
+            <input class="input input-lg w-full" id="_r_1_" name="email" placeholder="you@example.com" required type="email" />
+            <label class="fieldset-label" for="_r_2_">
+              Password
+            </label>
+            <input class="input input-lg w-full" id="_r_2_" minlength="8" name="password" placeholder="••••••••" required type="password" />
+            <p class="fieldset-legend" hidden>
+              Must be at least 8 characters
+            </p>
+          </fieldset>
+          <button class="btn btn-primary mt-4 flex w-full items-center justify-center gap-2" name="isSignUp" type="submit" value="false">
+            Sign In
+          </button>
+        </form>
+      </div>
+      <div class="card-action text-center">
+        <button class="btn btn-link" type="button">
+          Don't have an account? Create one
+        </button>
+      </div>
+      <footer class="mt-8 text-center text-gray-600 text-sm">
+        By signing in, you agree to our
+        <a class="link" href="/terms">
+          Terms of Service
+        </a>
+        and
+        <a class="link" href="/privacy">
+          Privacy Policy
+        </a>
+      </footer>
+    </section>
   </main>
   <footer class="footer sm:footer-horizontal border-t bg-gray-50 px-6 py-12 print:hidden">
     <aside class="flex flex-col gap-4">

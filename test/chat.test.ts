@@ -94,6 +94,8 @@ describe("Chat page exchange messages", () => {
     });
 
     it.runIf(!process.env.CI)("should look like a real chat", async () => {
+      await page.locator(".overflow-y-auto").first().scrollIntoViewIfNeeded();
+      await page.waitForTimeout(100);
       await expect(page).toMatchScreenshot();
     });
   });
@@ -162,7 +164,7 @@ describe("Chat page exchange messages", () => {
 
 async function scrollToBottom(page: Page) {
   // Scroll to bottom of the page view to ensure "real chat" state for screenshot
-  await page.locator(".overflow-y-auto").scrollIntoViewIfNeeded();
+  await page.locator(".overflow-y-auto").first().scrollIntoViewIfNeeded();
   const scrollButton = page.getByRole("button", {
     name: "Scroll to bottom",
   });

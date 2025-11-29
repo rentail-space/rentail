@@ -3,7 +3,7 @@ import debug from "debug";
 import type { User } from "prisma/generated/client";
 import { type TestAPI, beforeAll, it } from "vitest";
 import zod from "zod";
-import { classifyModel, conversationalModel } from "~/lib/model";
+import { classifyModel } from "~/lib/model";
 import preparePrompt from "~/lib/preparePrompt";
 import chatPrompt from "~/prompts/chatPrompt.md?raw";
 import welcome from "~/prompts/welcome.md?raw";
@@ -128,7 +128,8 @@ async function generateAssistantResponse({
   messages.push({ role: "user", content });
   const response = await generateText({
     messages,
-    model: conversationalModel,
+    model: classifyModel,
+    //mmodel: conversationalModel,
     system: prompt,
     providerOptions: {
       anthropic: {

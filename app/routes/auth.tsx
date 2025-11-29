@@ -3,11 +3,10 @@ import { invariant } from "es-toolkit";
 import { AlertCircle } from "lucide-react";
 import { useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
-import PageFooter from "~/components/layout/PageFooter";
 import { signInEmail, signUpEmail } from "~/sessions.server";
 import type { Route } from "./+types/auth";
 
-export const handle = { hideLayout: true };
+export const handle = { headerLinks: [] };
 
 export const clientLoader = async () => {
   return {};
@@ -58,8 +57,8 @@ export default function AuthPage() {
   const fetcher = useFetcher();
 
   return (
-    <div className="flex flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50">
-      <main className="card card-border mx-4 my-10 w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+    <main className="flex flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50">
+      <section className="card card-border mx-4 my-10 w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
         <div className="card-body space-y-6">
           <div>
             <h1 className="text-center font-bold text-3xl">
@@ -163,10 +162,8 @@ export default function AuthPage() {
           </button>
         </div>
         <Footer isSignUp={isSignUp} />
-      </main>
-
-      <PageFooter />
-    </div>
+      </section>
+    </main>
   );
 }
 
