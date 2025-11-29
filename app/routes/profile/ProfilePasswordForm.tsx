@@ -2,6 +2,7 @@ import { AlertCircle, CheckCircle } from "lucide-react";
 import { useEffect, useId, useRef } from "react";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 
 export default function ProfilePasswordForm() {
   const currentPasswordId = useId();
@@ -37,8 +38,7 @@ export default function ProfilePasswordForm() {
         <label className="label" htmlFor={currentPasswordId}>
           Current Password
         </label>
-        <input
-          className="input input-lg w-full"
+        <Input
           type="password"
           name="currentPassword"
           id={currentPasswordId}
@@ -49,13 +49,12 @@ export default function ProfilePasswordForm() {
         <label className="label" htmlFor={newPasswordId}>
           New Password
         </label>
-        <input
+        <Input
           type="password"
           id={newPasswordId}
           name="newPassword"
           required
           minLength={8}
-          className="input input-lg w-full"
           placeholder="••••••••"
         />
         <p className="mt-1 text-gray-500 text-sm">
@@ -65,8 +64,7 @@ export default function ProfilePasswordForm() {
         <label className="label" htmlFor={confirmPasswordId}>
           Confirm New Password
         </label>
-        <input
-          className="input input-lg w-full"
+        <Input
           type="password"
           name="confirmPassword"
           id={confirmPasswordId}

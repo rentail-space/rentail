@@ -5,6 +5,7 @@ import type { ChatGetPayload } from "prisma/generated/models";
 import { useFetcher } from "react-router";
 import { StickToBottom } from "use-stick-to-bottom";
 import { Button } from "~/components/ui/button";
+import { Textarea } from "~/components/ui/textarea";
 import prisma from "~/lib/prisma";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import { verifyAdmin } from "~/sessions.server";
@@ -155,11 +156,7 @@ function EditNote({ user }: { user: User }) {
         <fieldset className="fieldset">
           <div className="items-top flex gap-2">
             <NotepadTextIcon />
-            <textarea
-              className="textarea textarea-bordered min-h-12 w-full"
-              defaultValue={user.note ?? ""}
-              name="note"
-            />
+            <Textarea defaultValue={user.note ?? ""} name="note" />
           </div>
 
           <div className="flex justify-end">

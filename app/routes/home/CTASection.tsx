@@ -2,6 +2,7 @@ import { AlertCircle, CheckCircle, Info } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 
 export default function CTASection() {
   return (
@@ -60,9 +61,9 @@ function JoinWaitlist() {
           <label className="sr-only" htmlFor={id}>
             Email address
           </label>
-          <input
+          <Input
             autoComplete="email"
-            className="h-14 w-full appearance-none rounded-xl border-2 border-white/20 bg-white/10 px-6 text-lg text-white placeholder-white/60 backdrop-blur-sm transition-all focus:border-white/40 focus:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/30"
+            className="h-14 w-full px-6 text-white text-xl! placeholder-white/60! focus:ring-2"
             id={id}
             name="email"
             onChange={(event) => setEmail(event.target.value)}

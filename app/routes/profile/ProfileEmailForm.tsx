@@ -1,7 +1,8 @@
 import { AlertCircle, AlertTriangle } from "lucide-react";
-import { useId } from "react";
+import { useEffect, useId } from "react";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 
 export default function ProfileEmailForm({
   user,
@@ -15,6 +16,10 @@ export default function ProfileEmailForm({
     event.preventDefault();
     fetcher.submit(event.currentTarget);
   }
+
+  useEffect(() => {
+    document.getElementById(emailId)?.focus();
+  }, [emailId]);
 
   return (
     <form method="post" onSubmit={onSubmit} className="space-y-6">
@@ -37,8 +42,7 @@ export default function ProfileEmailForm({
         <label className="label" htmlFor={emailId}>
           New Email Address
         </label>
-        <input
-          className="input input-lg w-full"
+        <Input
           defaultValue={user.email || ""}
           id={emailId}
           minLength={3}

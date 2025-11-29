@@ -4,6 +4,7 @@ import { AlertCircle } from "lucide-react";
 import { useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
 import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 import { signInEmail, signUpEmail } from "~/sessions.server";
 import type { Route } from "./+types/auth";
 
@@ -79,12 +80,11 @@ export default function AuthPage() {
                   <label htmlFor={nameId} className="label">
                     Full Name
                   </label>
-                  <input
+                  <Input
                     id={nameId}
                     name="name"
                     type="text"
                     required
-                    className="input input-lg w-full"
                     placeholder="John Doe"
                   />
                 </div>
@@ -93,8 +93,7 @@ export default function AuthPage() {
               <label htmlFor={emailId} className="label">
                 Email Address
               </label>
-              <input
-                className="input input-lg w-full"
+              <Input
                 id={emailId}
                 name="email"
                 placeholder="you@example.com"
@@ -106,8 +105,7 @@ export default function AuthPage() {
               <label htmlFor={passwordId} className="fieldset-label">
                 Password
               </label>
-              <input
-                className="input input-lg w-full"
+              <Input
                 id={passwordId}
                 minLength={8}
                 name="password"

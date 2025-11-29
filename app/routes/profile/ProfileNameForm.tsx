@@ -1,7 +1,8 @@
 import { AlertCircle, CheckCircle } from "lucide-react";
-import { useId } from "react";
+import { useEffect, useId } from "react";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 
 export default function ProfileNameForm({
   user,
@@ -13,9 +14,12 @@ export default function ProfileNameForm({
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
     fetcher.submit(event.currentTarget);
   }
+
+  useEffect(() => {
+    document.getElementById(nameId)?.focus();
+  }, [nameId]);
 
   return (
     <form className="space-y-6" method="post" onSubmit={onSubmit}>
@@ -23,13 +27,12 @@ export default function ProfileNameForm({
         <label className="label" htmlFor={nameId}>
           Full Name
         </label>
-        <input
+        <Input
           type="text"
           id={nameId}
           defaultValue={user.name || ""}
           name="name"
           required
-          className="input input-lg w-full"
           placeholder="John Doe"
         />
       </fieldset>
