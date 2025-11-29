@@ -5,10 +5,18 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { NotepadTextIcon } from "lucide-react";
+import { ArrowUpDown, NotepadTextIcon } from "lucide-react";
 import { Fragment, useState } from "react";
 import { Link, type LoaderFunctionArgs } from "react-router";
-import { twMerge } from "tailwind-merge";
+import { Button } from "~/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/table";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/sessions.server";
 
@@ -69,68 +77,56 @@ export default function UsersPage({
   });
 
   return (
-    <table className="table-zebra table">
-      <thead>
+    <Table>
+      <TableHeader>
         {table.getHeaderGroups().map((group) => (
-          <tr key={group.id}>
+          <TableRow key={group.id}>
             {group.headers.map((header) => (
-              <th key={header.id}>
-                <button
-                  type="button"
-                  className={twMerge(
-                    "flex w-full select-none flex-row justify-between gap-2",
-                    header.column.getCanSort() && "cursor-pointer",
-                  )}
+              <TableHead key={header.id}>
+                <Button
                   onClick={header.column.getToggleSortingHandler()}
-                  title={header.column.columnDef.header?.toString()}
+                  variant="ghost"
                 >
-                  <span>
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-                  </span>
-                  <span>
-                    {{
-                      asc: " 🔼",
-                      desc: " 🔽",
-                    }[header.column.getIsSorted() as string] ?? null}
-                  </span>
-                </button>
-              </th>
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext(),
+                  )}
+                  <ArrowUpDown />
+                </Button>
+              </TableHead>
             ))}
-          </tr>
+          </TableRow>
         ))}
-      </thead>
-      <tbody>
+      </TableHeader>
+      <TableBody>
         {table.getRowModel().rows.map((row) => (
           <Fragment key={row.id}>
-            <tr>
+            <TableRow>
               {row.getVisibleCells().map((cell) => (
-                <td
+                <TableCell
                   className="truncate whitespace-nowrap"
                   key={cell.id}
                   style={{ maxWidth: cell.column.columnDef.size }}
                   title={cell.getValue() as string}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+                </TableCell>
               ))}
-            </tr>
-            <tr>
-              <td />
-              <td colSpan={row.getVisibleCells().length - 1}>
+            </TableRow>
+            <TableRow>
+              <TableCell />
+              <TableCell colSpan={row.getVisibleCells().length - 1}>
                 <div className="flex max-w-[900px] items-center gap-2">
                   <NotepadTextIcon className="h-4 w-4 shrink-0" />
                   <span className="truncate" title={row.original.note ?? ""}>
                     {row.original.note ?? "No note"}
                   </span>
                 </div>
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           </Fragment>
         ))}
-      </tbody>
-    </table>
+      </TableBody>
+    </Table>
   );
 }

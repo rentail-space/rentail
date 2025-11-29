@@ -2,11 +2,10 @@ import { captureException } from "@sentry/react-router";
 import bcrypt from "bcrypt";
 import { invariant } from "es-toolkit";
 import type { User } from "prisma/generated/client";
-import { Activity, useState } from "react";
+import { useState } from "react";
 import { redirect, useLoaderData } from "react-router";
-import { twMerge } from "tailwind-merge";
 import { ulid } from "ulid";
-import { Button } from "~/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import sendVerificationEmail from "~/emails/EmailVerification";
 import prisma from "~/lib/prisma";
 import { findUserAndLastChat } from "~/sessions.server";
@@ -185,31 +184,25 @@ export default function ProfilePage() {
         </div>
 
         <div className="card-body flex flex-col gap-8">
-          <div role="tablist" className="tabs tabs-border">
-            {tabs.map((tab) => (
-              <Button
-                className={twMerge(
-                  "tab",
-                  activeTab === tab.key && "tab-active",
-                )}
-                key={tab.key}
-                onClick={() => setActiveTab(tab.key)}
-                type="button"
-                variant="ghost"
-              >
-                {tab.label}
-              </Button>
-            ))}
-          </div>
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <TabsList>
+              {tabs.map((tab) => (
+                <TabsTrigger
+                  key={tab.key}
+                  value={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                >
+                  {tab.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
 
-          {tabs.map((tab) => (
-            <Activity
-              key={tab.key}
-              mode={activeTab === tab.key ? "visible" : "hidden"}
-            >
-              <tab.component user={user} />
-            </Activity>
-          ))}
+            {tabs.map((tab) => (
+              <TabsContent value={tab.key} key={tab.key}>
+                <tab.component user={user} />
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
       </div>
     </div>

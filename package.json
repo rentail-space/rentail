@@ -23,6 +23,7 @@
     "@prisma/adapter-pg": "^7.0.1",
     "@prisma/client": "^7.0.1",
     "@radix-ui/react-slot": "^1.2.4",
+    "@radix-ui/react-tabs": "^1.1.13",
     "@react-email/components": "1.0.1",
     "@react-router/fs-routes": "^7.9.6",
     "@react-router/node": "^7.9.6",
