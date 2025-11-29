@@ -109,19 +109,21 @@ The core innovation that prevents message duplication on network interruptions:
 
 **Database:**
 - PostgreSQL with Prisma ORM + PgAdapter for connection pooling
-- Models: User, Chat, Message, Waitlist, Property, PropertySpace, Session, Account, Verification
+- Models: User, Chat, Messages, Waitlist, Property, PropertySpace, Session, Verification
 - Session-based chat with automatic user creation from IP geolocation
 - Bot detection via `isBot` flag (user-agent based)
+- Mobile detection via `isMobile` flag (device detection)
 - Geographic queries: simple latitude/longitude bounding box calculations (see `app/lib/findNearbyProperties.ts`)
 - Schema updates: `prisma generate && prisma db push`
 
 **Key Database Tables:**
-- `User`: id, name, email, emailVerified, isAnonymous, isBot, geocode (JSON), workingMemory (Text), metadata, createdAt
+- `User`: id, name, email, emailVerified, isAnonymous, isBot, isMobile, geocode (JSON), workingMemory (Text), metadata, cityStateCountry, note, image, ip, userAgent, referrer, utm (JSON), viewport (JSON), passwordHash, lastAlertAt, createdAt, updatedAt
 - `Chat`: id, userId (FK), title, metadata (JSON), activeStreamId, createdAt, updatedAt
-- `Message`: id, chatId (FK), role (assistant|user), content (JSON), type, createdAt
-- `Property`: id, name, address, city, state, country, latitude, longitude, website, phone, imageURLs, squareFootage
-- `PropertySpace`: id, propertyId (FK), number, type (Cart|Inline|Storage|Other), size, floor, available, imageURLs
-- `Session`: id, userId (FK), token (unique), expiresAt, ipAddress, userAgent
+- `Messages`: id, chatId (FK), role (assistant|user), content (JSON), type, createdAt
+- `Property`: id, name, address, city, state, country, latitude, longitude, website, phone, imageURLs, squareFootage, numberOfStores, demographics, description, logoURL, createdAt, updatedAt
+- `PropertySpace`: id, propertyId (FK), number, type (Cart|Inline|Storage|Other), size, floor, available, imageURLs, updatedAt
+- `Session`: id, userId (FK), token (unique), expiresAt, ipAddress, userAgent, createdAt, updatedAt
+- `Verification`: id, identifier, value, expiresAt, createdAt, updatedAt
 - `Waitlist`: email (PK), createdAt
 
 **Monitoring & Logging:**
@@ -238,8 +240,8 @@ The app determines user location in this order:
 **Setup & Configuration:**
 - Test files: `*.test.ts` or `*.test.tsx` in `/test` directory (NOT alongside source in `/app`)
 - Framework: Vitest with browser provider (Playwright) + forks pool
-- Config: `vitest.config.ts` (60s test timeout, 90s hook timeout, 10s teardown timeout)
-- Setup: `/test/helpers/setup.ts` (global) + `/test/helpers/globalSetup.ts`
+- Config: `vitest.config.ts` (15s test timeout locally / 30s on CI, 30s hook timeout, 3s teardown timeout)
+- Setup: `/test/helpers/testSuiteSetup.ts` (test suite setup) + `/test/helpers/globalSetup.ts`
 - Node.js: 22.0.0 or higher required
 - **Test isolation**: `isolate: true` is required for test safety (prevents state leakage)
 
@@ -361,11 +363,12 @@ const user = await prisma.user.create({
 - Common on pages with background requests (chat, streaming endpoints)
 - Example: `await goto("/chat", undefined, { waitUntil: "domcontentloaded" })`
 
-**React Router v7 Middleware on Vercel**
-- `v8_middleware` feature flag is **NOT enabled** in `react-router.config.ts`
-- Middleware requires `RouterContextProvider` from `getLoadContext()` but has compatibility issues with `@vercel/react-router`
-- If enabling middleware in the future, see [React Router middleware docs](https://reactrouter.com/how-to/middleware)
-- Current config uses empty object `{}` from `getLoadContext()` which is the v6-compatible pattern
+**React Router v7 on Vercel**
+- Deployment configured with `@vercel/react-router` preset in `react-router.config.ts`
+- SSR enabled with `ssr: true`
+- Sentry integration via `sentryOnBuildEnd` hook (when `SENTRY_AUTH_TOKEN` is set)
+- No prerendering configured (`prerender: async () => []`)
+- Current config uses Vercel preset for optimal serverless deployment
 
 ## Environment Variables
 
@@ -391,12 +394,35 @@ const user = await prisma.user.create({
 - `routes.ts` - Route config
 - `root.tsx` - App shell + error boundary
 - `routes/` - Individual routes
-  - `api.chat.message.tsx` - Create chat message (streaming)
-  - `api.chat.message.$messageId.stream.tsx` - Resume interrupted stream
-  - `api.chat.$chatId.stop.tsx` - Stop active stream
-  - `api.chat.$chatId.properties.ts` - Fetch nearby properties
-  - `api.chat.$chatId.export.csv.ts` - Export chat as CSV
-  - `chat/route.tsx` - Chat UI component
+  - API Routes:
+    - `api.chat.$chatId.message.ts` - Create chat message (streaming)
+    - `api.chat.$chatId.message.$messageId.stream.ts` - Resume interrupted stream
+    - `api.chat.$chatId.stop.ts` - Stop active stream
+    - `api.chat.$chatId.centers.ts` - Fetch nearby shopping centers
+    - `api.waitlist.ts` - Waitlist signup
+  - Page Routes:
+    - `chat/route.tsx` - Chat UI component
+    - `home/route.tsx` - Landing page
+    - `about/route.tsx` - About page
+    - `pricing/route.tsx` - Pricing page
+    - `faq/route.tsx` - FAQ page
+    - `blog._index.tsx` - Blog listing
+    - `blog.$slug.tsx` - Individual blog post
+    - `center.$id/route.tsx` - Property center detail page
+    - `profile/route.tsx` - User profile management
+    - `auth.tsx` - Authentication (sign-in/sign-up)
+  - Admin Routes (protected):
+    - `admin.tsx` - Admin dashboard layout
+    - `admin.users.tsx` - User management
+    - `admin.user.$userId.tsx` - Individual user detail
+    - `admin.centers.tsx` - Property center management
+  - Utility Routes:
+    - `cron.daily.ts` - Daily scheduled tasks (alerts, notifications)
+    - `email.verify.$verificationId.ts` - Email verification
+    - `auth.sign-out.ts` - Sign out
+    - `robots[.]txt.ts` - Robots.txt generation
+    - `sitemap[.]xml.ts` - Sitemap generation
+    - `blog.feed.ts` - RSS feed
 - `lib/` - Shared utilities
   - `env.ts` - Env vars + runtime validation
   - `prisma.ts` - Prisma client
@@ -404,6 +430,10 @@ const user = await prisma.user.create({
   - `preparePrompt.ts` - Prompt composition with placeholder replacement
   - `findNearbyCenters.ts` - Geographic search for shopping centers
   - `redis-stop-monitor.ts` - Stream coordination
+  - `blogPosts.server.ts` - Blog post management
+  - `deviceDetection.server.ts` - Device/bot detection
+  - `model.ts` - AI model configuration
+  - `middleware/` - Request middleware (logging, UTM tracking)
 - `components/` - Reusable UI components
 - `prompts/` - AI prompt templates
   - `chatPrompt.md` - Main conversational agent prompt
