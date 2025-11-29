@@ -4,6 +4,13 @@ import { AlertCircle } from "lucide-react";
 import { useId, useState } from "react";
 import { redirect, useFetcher } from "react-router";
 import { Button } from "~/components/ui/button";
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+  FieldSet,
+} from "~/components/ui/field";
 import { Input } from "~/components/ui/input";
 import { signInEmail, signUpEmail } from "~/sessions.server";
 import type { Route } from "./+types/auth";
@@ -74,12 +81,10 @@ export default function AuthPage() {
           </div>
 
           <fetcher.Form method="post" className="space-y-6">
-            <fieldset className="fieldset">
+            <FieldSet>
               {isSignUp && (
-                <div>
-                  <label htmlFor={nameId} className="label">
-                    Full Name
-                  </label>
+                <Field>
+                  <FieldLabel htmlFor={nameId}>Full Name</FieldLabel>
                   <Input
                     id={nameId}
                     name="name"
@@ -87,43 +92,45 @@ export default function AuthPage() {
                     required
                     placeholder="John Doe"
                   />
-                </div>
+                </Field>
               )}
 
-              <label htmlFor={emailId} className="label">
-                Email Address
-              </label>
-              <Input
-                id={emailId}
-                name="email"
-                placeholder="you@example.com"
-                required
-                type="email"
-                style={{}}
-              />
+              <Field>
+                <FieldLabel htmlFor={emailId}>Email Address</FieldLabel>
+                <Input
+                  id={emailId}
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                  type="email"
+                  style={{}}
+                />
+              </Field>
 
-              <label htmlFor={passwordId} className="fieldset-label">
-                Password
-              </label>
-              <Input
-                id={passwordId}
-                minLength={8}
-                name="password"
-                placeholder="••••••••"
-                required
-                type="password"
-                style={{}}
-              />
-              <p hidden={!isSignUp} className="fieldset-legend">
-                Must be at least 8 characters
-              </p>
-            </fieldset>
+              <Field>
+                <FieldLabel htmlFor={passwordId}>Password</FieldLabel>
+                <Input
+                  id={passwordId}
+                  minLength={8}
+                  name="password"
+                  placeholder="••••••••"
+                  required
+                  type="password"
+                  style={{}}
+                />
+                <FieldDescription>
+                  Must be at least 8 characters
+                </FieldDescription>
+              </Field>
+            </FieldSet>
 
             {fetcher.data?.error && (
-              <div role="alert" className="alert alert-error">
-                <AlertCircle className="h-6 w-6 shrink-0 stroke-current" />
-                <span>{fetcher.data.error}</span>
-              </div>
+              <FieldError errors={[fetcher.data.error]}>
+                <div className="flex items-center gap-2">
+                  <AlertCircle className="h-6 w-6 shrink-0 stroke-current" />
+                  {fetcher.data.error}
+                </div>
+              </FieldError>
             )}
 
             <Button
