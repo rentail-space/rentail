@@ -1,11 +1,10 @@
 import { ShieldIcon, UnlockIcon, UserIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useRouteLoaderData } from "react-router";
-import { twMerge } from "tailwind-merge";
+import { Link, useRouteLoaderData } from "react-router";
 import type { loader as rootLoader } from "~/root";
 import { Button } from "../ui/button";
 
-export default function AccountMenu() {
+export default function AccountMenu({ className }: { className?: string }) {
   const data = useRouteLoaderData<typeof rootLoader>("root");
   const user = data?.user;
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +29,7 @@ export default function AccountMenu() {
 
   // Show sign-in link for non-authenticated users
   return (
-    <div className="navbar-end">
+    <div className={className}>
       {user && !user.isAnonymous ? (
         <DropdownMenu user={user} isAdmin={data.isAdmin} />
       ) : (
@@ -42,29 +41,24 @@ export default function AccountMenu() {
 
 function SignInButton() {
   return (
-    <NavLink
+    <Link
       aria-label="Go to sign in page"
-      className={({ isActive }) =>
-        twMerge(
-          "h-9 px-4 py-2 hover:bg-accent hover:text-accent-foreground",
-          isActive && "text-blue-600",
-        )
-      }
+      className="h-9 w-22 whitespace-nowrap rounded-md px-4 py-2 hover:bg-accent hover:text-accent-foreground"
       to="/auth"
     >
       Sign In
-    </NavLink>
+    </Link>
   );
 }
 
 function DropdownMenu({
-  user,
   isAdmin,
+  user,
 }: {
   isAdmin: boolean;
   user: {
-    name: string | null;
     email: string | null;
+    name: string | null;
   };
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -103,8 +97,9 @@ function DropdownMenu({
           {user.name || user.email}
         </span>
       </Button>
+
       {isOpen && (
-        <ul className="menu menu-dropdown dropdown-end absolute right-0 z-50 mt-2 w-48 rounded-md border border-gray-200 bg-white py-1 shadow-lg">
+        <menu className="menu menu-dropdown dropdown-end absolute top-8 right-0 z-50 mt-2 w-48 rounded-md border border-gray-200 bg-white py-1 shadow-lg">
           <li className="menu-disabled border-gray-200 border-b px-4 py-2">
             <p className="font-medium text-gray-900 text-sm">{user.name}</p>
             <p className="truncate text-gray-500 text-xs">{user.email}</p>
@@ -144,7 +139,7 @@ function DropdownMenu({
               Sign Out
             </button>
           </li>
-        </ul>
+        </menu>
       )}
     </div>
   );

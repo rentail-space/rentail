@@ -8,6 +8,7 @@
 import * as Sentry from "@sentry/react-router";
 import Redis from "ioredis";
 import { afterAll, beforeAll } from "vitest";
+import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import "./toMatchInnerHTML";
 import "./toMatchScreenshot";
@@ -24,7 +25,7 @@ beforeAll(async () => {
   ]);
 
   // Cleanup Redis to avoid stale data between tests
-  const redis = new Redis();
+  const redis = new Redis(env.REDIS_URL);
   await redis.flushdb();
 });
 

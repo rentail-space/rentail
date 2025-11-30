@@ -4,17 +4,10 @@ import AccountMenu from "./AccountMenu";
 import PageIconLink from "./PageIconLink";
 import type { HeaderLink } from "./PageLayout";
 
-export default function PageHeader({
-  children,
-  links,
-}: {
-  children?: React.ReactNode;
-  links?: HeaderLink[];
-}) {
+export default function PageHeader({ links }: { links?: HeaderLink[] }) {
   return (
     <header className="navbar mb-1 shadow-sm print:hidden">
       <PageIconLink className="navbar-start" />
-      {children}
 
       <nav className="navbar-center hidden items-center gap-6 md:flex">
         {links?.map((link) => (
@@ -33,7 +26,7 @@ export default function PageHeader({
         ))}
       </nav>
 
-      <AccountMenu />
+      <AccountMenu className="navbar-end" />
     </header>
   );
 }
