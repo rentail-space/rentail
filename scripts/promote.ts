@@ -35,7 +35,7 @@ function checkIfUncommittedChanges() {
   const status = execSync("git status --porcelain").toString().trim();
   if (status.length > 0)
     console.error(
-      "\x1b[31m\u26A0 You have uncommitted changes. Please commit or stash them before promoting.\x1b[0m",
+      "\x1b[31m\u26A0 You have uncommitted changes. Please commit or stash them before promoting.\x1b[0m\n",
     );
 }
 
@@ -54,10 +54,14 @@ function checkIfGitAhead() {
 
   if (ahead && Number(ahead) > 0)
     console.error(
-      "\x1b[31m\u26A0 Local Git is ahead of origin/main. Please push your commits before promoting.\x1b[0m",
+      "\x1b[31m\u26A0 Local Git is ahead of origin/main. Please push your commits before promoting.\x1b[0m\n",
     );
 }
 
+/**
+ * Check the status of the GitHub workflow.
+ * Warns if the workflow is still building.
+ */
 async function githubWorkflows() {
   console.info("\x1b[34mGitHub workflow status:\x1b[0m");
 
@@ -79,9 +83,18 @@ async function githubWorkflows() {
       workflow.conclusion ?? "building…",
     );
   }
+
+  if (!data.workflow_runs[0].conclusion)
+    console.error(
+      "\n\x1b[31m\u26A0 GitHub workflow is still building. Please wait for it to complete before promoting.\x1b[0m",
+    );
   console.info();
 }
 
+/**
+ * Get the most recent deployment from Vercel.
+ * Returns the deployment with the most recent createdAt timestamp.
+ */
 async function getRecentDeployment(): Promise<
   GetDeploymentsResponseBody["deployments"][0]
 > {
@@ -113,6 +126,12 @@ async function getRecentDeployment(): Promise<
   return mostRecentDeployment;
 }
 
+/**
+ * Promote a deployment to production.
+ * Creates a new deployment with the same name and URL as the current deployment.
+ * Waits for the deployment to be ready.
+ * Returns the deployment.
+ */
 async function promoteToProduction(
   deployment: GetDeploymentsResponseBody["deployments"][0],
 ): Promise<GetDeploymentResponseBody> {
@@ -134,6 +153,10 @@ async function promoteToProduction(
   return await waitForDeploy(id);
 }
 
+/**
+ * Wait for a deployment to be ready.
+ * Returns the deployment.
+ */
 async function waitForDeploy(
   idOrUrl: string,
 ): Promise<GetDeploymentResponseBody> {
@@ -157,6 +180,11 @@ async function waitForDeploy(
   }
 }
 
+/**
+ * Interactive mode.
+ * Checks for uncommitted changes, Git ahead, GitHub workflow status, and Vercel deployment status.
+ * Promotes the deployment to production if it is not in production.
+ */
 async function interactive() {
   // Check if local Git is ahead of origin/main
   checkIfUncommittedChanges();
@@ -191,4 +219,5 @@ async function interactive() {
   console.info("\x1b[34m⏳ Still building preview…\x1b[0m");
 }
 
+// Run the interactive mode
 await interactive();
