@@ -1,7 +1,7 @@
 import { pretty, render } from "@react-email/components";
 import { captureException } from "@sentry/react-router";
 import debug from "debug";
-import { delay, withTimeout } from "es-toolkit";
+import { delay, invariant, withTimeout } from "es-toolkit";
 import Redis from "ioredis";
 import type { JSX } from "react";
 import { Resend } from "resend";
@@ -79,10 +79,11 @@ await subscriber.subscribe("email:last");
  *
  * @returns The last email that was sent.
  */
-export async function getLastEmailSent(): Promise<LastEmail | undefined> {
+export async function getLastEmailSent(): Promise<LastEmail> {
   await withTimeout(async () => {
     while (!lastEmailSent) await delay(100);
   }, 1_000);
+  invariant(lastEmailSent, "No email sent");
   const lastEmail = lastEmailSent;
   lastEmailSent = undefined;
   return lastEmail;

@@ -269,11 +269,11 @@ describe("Anonymous visits chat page", () => {
 
           describe("Welcome Email", () => {
             let emailPage: Page;
-            let lastEmail: LastEmail | undefined;
+            let lastEmail: LastEmail;
 
             beforeAll(async () => {
-              emailPage = await renderEmail(lastEmail?.html);
               lastEmail = await getLastEmailSent();
+              emailPage = await renderEmail(lastEmail.html);
             });
 
             it("should have sent the email", async () => {

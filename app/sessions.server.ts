@@ -441,13 +441,13 @@ export async function signUpEmail({
     },
   });
   if (anonymousUser) {
-    const user = await prisma.user.update({
+    const updatedUser = await prisma.user.update({
       data: { isAnonymous: false, name, email, passwordHash },
       where: { id: anonymousUser.id },
     });
-    await sendWelcomeEmail(user);
-    await sendNewUserNotification(user);
-    return await createSession({ requestHeaders, userId: user.id });
+    await sendWelcomeEmail(updatedUser);
+    await sendNewUserNotification(updatedUser);
+    return await createSession({ requestHeaders, userId: updatedUser.id });
   }
 
   // Is this email already in use? If so, sign in the user.
