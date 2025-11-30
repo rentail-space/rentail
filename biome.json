@@ -8,18 +8,17 @@
   "files": {
     "includes": [
       "**",
-      "!.react-router",
-      "!node_modules",
-      "!.vercel",
       "!.claude",
       "!.cursor",
-      "!.github",
       "!.git",
+      "!.github",
+      "!.react-router",
+      "!.vercel",
       "!.vscode",
+      "!app/components/ui",
       "!build",
-      "!prisma/generated",
-      "!test/context",
-      "!app/components/ui"
+      "!node_modules",
+      "!prisma/generated"
     ],
     "ignoreUnknown": false
   },
@@ -59,7 +58,12 @@
         "noUnsafeDeclarationMerging": "error",
         "noConsole": {
           "options": {
-            "allow": ["assert", "error", "info", "warn"]
+            "allow": [
+              "assert",
+              "error",
+              "info",
+              "warn"
+            ]
           }
         }
       },

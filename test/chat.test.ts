@@ -95,7 +95,7 @@ describe("Chat page exchange messages", () => {
       });
     });
 
-    it.runIf(!process.env.CI)("should look like a real chat", async () => {
+    it.skipIf(process.env.CI)("should look like a real chat", async () => {
       await page.locator(".overflow-y-auto").first().scrollIntoViewIfNeeded();
       await page.waitForTimeout(100);
       await expect(page).toMatchScreenshot();

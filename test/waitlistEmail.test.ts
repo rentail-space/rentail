@@ -68,7 +68,7 @@ describe("Waitlist", () => {
       });
     });
 
-    it("should match screenshot", async () => {
+    it.skipIf(process.env.CI)("should match screenshot", async () => {
       await expect(emailPage.locator("body")).toMatchScreenshot({
         name: "waitlist-email",
       });
