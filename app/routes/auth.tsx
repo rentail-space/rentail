@@ -1,8 +1,9 @@
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
 import { AlertCircle } from "lucide-react";
-import { useId, useState } from "react";
+import { useId } from "react";
 import { redirect, useFetcher } from "react-router";
+import { useToggle } from "usehooks-ts";
 import { Button } from "~/components/ui/button";
 import {
   Field,
@@ -55,7 +56,7 @@ export async function action({ request }: Route.ActionArgs): Promise<Response> {
 }
 
 export default function AuthPage() {
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [isSignUp, toggleIsSignUp] = useToggle(false);
   const nameId = useId();
   const emailId = useId();
   const passwordId = useId();
@@ -130,12 +131,10 @@ export default function AuthPage() {
             )}
 
             <Button
-              variant="default"
-              className="mt-4 flex w-full items-center justify-center gap-2"
-              name="isSignUp"
-              type="submit"
-              value={isSignUp.toString()}
+              className="flex w-full items-center justify-center gap-2 p-6 font-bold text-lg"
               disabled={fetcher.state !== "idle"}
+              type="submit"
+              variant="default"
             >
               {fetcher.state !== "idle" && (
                 <span className="loading loading-spinner" />
@@ -153,11 +152,10 @@ export default function AuthPage() {
 
         <div className="card-action text-center">
           <Button
-            variant="link"
-            onClick={() => {
-              setIsSignUp((isSignUp) => !isSignUp);
-            }}
+            className="font-bold text-lg"
+            onClick={toggleIsSignUp}
             type="button"
+            variant="ghost"
           >
             {isSignUp
               ? "Already have an account? Sign in"

@@ -264,6 +264,7 @@ function Pagination({ user, users }: { user: User; users: { id: string }[] }) {
         <ArrowLeft className="h-4 w-4" />
         Older
       </Link>
+
       <Link
         className={twMerge(
           "btn btn-ghost flex items-center",

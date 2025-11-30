@@ -27,6 +27,29 @@ const octokit = new Octokit({
   auth: env.get("GITHUB_TOKEN").required().asString(),
 });
 
+const colorCodes: { [key: string]: [string, string] } = {
+  red: ["\x1b[31m", "\x1b[0m"],
+  green: ["\x1b[32m", "\x1b[0m"],
+  yellow: ["\x1b[33m", "\x1b[0m"],
+  blue: ["\x1b[34m", "\x1b[0m"],
+  magenta: ["\x1b[35m", "\x1b[0m"],
+  cyan: ["\x1b[36m", "\x1b[0m"],
+  gray: ["\x1b[90m", "\x1b[0m"],
+  bold: ["\x1b[1m", "\x1b[0m"],
+};
+
+/**
+ * Adds ANSI color codes to a string of text.
+ * @param text - The input string.
+ * @param color - The color to apply. Options: 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'gray', 'bold', or undefined (no color).
+ * @returns Colored string for terminal output.
+ */
+function colorize(color: keyof typeof colorCodes, text: string): string {
+  if (!color || !colorCodes[color]) return text;
+  const [open, close] = colorCodes[color];
+  return `${open}${text}${close}`;
+}
+
 /**
  * Check if there are uncommitted changes in local git.
  * Exits with an error if there are uncommitted files.
@@ -34,8 +57,11 @@ const octokit = new Octokit({
 function checkIfUncommittedChanges() {
   const status = execSync("git status --porcelain").toString().trim();
   if (status.length > 0)
-    console.error(
-      "\x1b[31m\u26A0 You have uncommitted changes. Please commit or stash them before promoting.\x1b[0m\n",
+    console.warn(
+      "%s %s %s\n",
+      colorize("yellow", "\u26A0 You have uncommitted changes. Please"),
+      colorize("blue", "git commit"),
+      colorize("yellow", "before promoting."),
     );
 }
 
@@ -53,8 +79,11 @@ function checkIfGitAhead() {
     .split("\t")[1];
 
   if (ahead && Number(ahead) > 0)
-    console.error(
-      "\x1b[31m\u26A0 Local Git is ahead of origin/main. Please push your commits before promoting.\x1b[0m\n",
+    console.warn(
+      "%s %s %s\n",
+      colorize("yellow", "\u26A0 Local Git is ahead of origin/main. Please"),
+      colorize("blue", "git push"),
+      colorize("yellow", "before promoting."),
     );
 }
 
@@ -63,7 +92,7 @@ function checkIfGitAhead() {
  * Warns if the workflow is still building.
  */
 async function githubWorkflows() {
-  console.info("\x1b[34mGitHub workflow status:\x1b[0m");
+  console.info(colorize("blue", "GitHub workflow status:"));
 
   const { data } = await octokit.rest.actions.listWorkflowRuns({
     owner: "assaf",
@@ -74,8 +103,8 @@ async function githubWorkflows() {
     const status = " %s \t(%s)\t%s => %s";
     console.info(
       workflow.conclusion === "failure"
-        ? `\x1b[31m✗ ${status}\x1b[0m`
-        : `\x1b[32m✓ ${status}\x1b[0m`,
+        ? colorize("red", `✗ ${status}`)
+        : colorize("green", `✓ ${status}`),
       new Date(workflow.created_at ?? 0).toLocaleString(),
       workflow.head_commit?.id.slice(-8),
       workflow.display_title.slice(0, 40) +
@@ -84,10 +113,16 @@ async function githubWorkflows() {
     );
   }
 
-  if (!data.workflow_runs[0].conclusion)
+  if (!data.workflow_runs[0].conclusion) {
     console.error(
-      "\n\x1b[31m\u26A0 GitHub workflow is still building. Please wait for it to complete before promoting.\x1b[0m",
+      colorize(
+        "red",
+        "\n\u26A0 GitHub workflow is still building. Please wait for it to complete before promoting.",
+      ),
     );
+    process.exit(1);
+  }
+
   console.info();
 }
 
@@ -98,7 +133,7 @@ async function githubWorkflows() {
 async function getRecentDeployment(): Promise<
   GetDeploymentsResponseBody["deployments"][0]
 > {
-  console.info("\x1b[34mVercel deployments:\x1b[0m");
+  console.info(colorize("blue", "Vercel deployments:"));
 
   const { deployments } = await vercel.deployments.getDeployments({
     projectId: vercelProjectId,
@@ -110,10 +145,10 @@ async function getRecentDeployment(): Promise<
     const status = " %s \t(%s)\t%s => %s";
     console.info(
       deployment.state === "READY"
-        ? `\x1b[32m✓ ${status}\x1b[0m`
+        ? colorize("green", `✓ ${status}`)
         : deployment.state === "BUILDING"
-          ? `\x1b[33m⚡${status}\x1b[0m`
-          : `\x1b[31m✗ ${status}\x1b[0m`,
+          ? colorize("yellow", `⚡${status}`)
+          : colorize("red", `✗ ${status}`),
       new Date(deployment.createdAt ?? 0).toLocaleString(),
       deployment.meta?.githubCommitSha?.slice(-8),
       deployment.uid,
@@ -136,7 +171,8 @@ async function promoteToProduction(
   deployment: GetDeploymentsResponseBody["deployments"][0],
 ): Promise<GetDeploymentResponseBody> {
   console.info(
-    `\x1b[34m⏳ Promoting deployment ${deployment.uid} to production...\x1b[0m`,
+    colorize("blue", "\n⏳ Promoting deployment %s to production...\n"),
+    deployment.uid,
   );
   invariant(deployment.target === null, "Deployment is already in production");
 
@@ -160,7 +196,7 @@ async function promoteToProduction(
 async function waitForDeploy(
   idOrUrl: string,
 ): Promise<GetDeploymentResponseBody> {
-  console.info("\x1b[34mWaiting for deployment to be ready...\x1b[0m");
+  console.info(colorize("blue", "Waiting for deployment to be ready..."));
   const spinner = ora().start();
 
   while (true) {
@@ -170,8 +206,8 @@ async function waitForDeploy(
     if (isPromoted) {
       spinner.succeed("Deployment is ready");
       console.info(
-        "\nTry it out: \x1b[34mhttps://%s\x1b[0m\n",
-        status.alias?.[0] ?? status.url,
+        colorize("blue", "Try it out: %s"),
+        `https://${status.alias?.[0] ?? status.url}`,
       );
       return status;
     }
@@ -203,20 +239,25 @@ async function interactive() {
   const isReady = mostRecent.readyState === "READY";
   if (isReady) {
     const gitId = mostRecent.meta?.githubCommitSha?.slice(-8);
-    console.info("\nTry it out: \x1b[34mhttps://%s\x1b[0m\n", mostRecent.url);
+    console.info(
+      colorize("blue", "Try it out: %s"),
+      `https://${mostRecent.url}`,
+    );
     const shouldPromote = await confirm({
       default: false,
       message: `Promote deployment ${gitId} to production?`,
     });
     if (!shouldPromote) {
-      console.info("\x1b[31m✘ Deployment not promoted to production\x1b[0m");
-      return;
+      console.error(
+        colorize("red", "\n✘ Deployment not promoted to production"),
+      );
+      process.exit(1);
     }
     await promoteToProduction(mostRecent);
-    return;
+    process.exit(0);
   }
 
-  console.info("\x1b[34m⏳ Still building preview…\x1b[0m");
+  console.info(colorize("blue", "⏳ Still building preview…"));
 }
 
 // Run the interactive mode
