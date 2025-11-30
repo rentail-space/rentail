@@ -1,8 +1,14 @@
 import type { TextUIPart } from "ai";
-import { CircleCheck, NotepadTextIcon } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CircleCheck,
+  NotepadTextIcon,
+} from "lucide-react";
 import type { User } from "prisma/generated/client";
 import type { ChatGetPayload } from "prisma/generated/models";
-import { useFetcher } from "react-router";
+import { Link, useFetcher } from "react-router";
+import { twMerge } from "tailwind-merge";
 import { StickToBottom } from "use-stick-to-bottom";
 import { Button } from "~/components/ui/button";
 import { Textarea } from "~/components/ui/textarea";
@@ -25,7 +31,13 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     where: { id: params.userId },
   });
   if (!user) throw new Response("Not Found", { status: 404 });
-  return { user };
+
+  const users = await prisma.user.findMany({
+    orderBy: { createdAt: "asc" },
+    select: { id: true },
+  });
+
+  return { user, users };
 }
 
 export async function action({ params, request }: Route.ActionArgs) {
@@ -45,21 +57,21 @@ export default function UserPage({
 }: {
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
-  const { user } = loaderData;
-
   return (
     <StickToBottom
       className="prose mx-auto space-y-4"
       initial="smooth"
       resize="smooth"
     >
-      <UserInfoCard user={user} />
-      <WorkingMemory user={user} />
-      <EditNote user={user} />
+      <UserInfoCard user={loaderData.user} />
+      <WorkingMemory user={loaderData.user} />
+      <EditNote user={loaderData.user} />
 
-      {user.chats.map((chat) => (
+      {loaderData.user.chats.map((chat) => (
         <FullChat key={chat.id} chat={chat} />
       ))}
+
+      <Pagination user={loaderData.user} users={loaderData.users} />
     </StickToBottom>
   );
 }
@@ -232,5 +244,36 @@ function FullChat({
         setQuery={() => {}}
       />
     </details>
+  );
+}
+
+function Pagination({ user, users }: { user: User; users: { id: string }[] }) {
+  const index = users.findIndex((u) => u.id === user.id);
+  const older = users[index - 1];
+  const newer = users[index + 1];
+
+  return (
+    <div className="flex justify-between">
+      <Link
+        className={twMerge(
+          "btn btn-ghost flex items-center",
+          !older && "btn-disabled",
+        )}
+        to={`/admin/user/${older?.id}`}
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Older
+      </Link>
+      <Link
+        className={twMerge(
+          "btn btn-ghost flex items-center",
+          !newer && "btn-disabled",
+        )}
+        to={`/admin/user/${newer?.id}`}
+      >
+        Newer
+        <ArrowRight className="h-4 w-4" />
+      </Link>
+    </div>
   );
 }

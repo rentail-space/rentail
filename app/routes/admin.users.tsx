@@ -5,7 +5,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, NotepadTextIcon } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 import type { User, Waitlist } from "prisma/generated/client";
 import { Fragment, useState } from "react";
 import { Link, type LoaderFunctionArgs } from "react-router";
@@ -67,12 +67,12 @@ function AllUsers({ users }: { users: User[] }) {
             {row.original.name || row.original.id}
           </Link>
         ),
-        size: 150,
+        size: 180,
       },
-      { header: "Email", accessorKey: "email", size: 150 },
-      { header: "User Agent", accessorKey: "userAgent", size: 150 },
-      { header: "Referrer", accessorKey: "referrer", size: 150 },
-      { header: "IP", accessorKey: "ip", size: 110 },
+      { header: "Email", accessorKey: "email", size: 180 },
+      { header: "User Agent", accessorKey: "userAgent", size: 180 },
+      { header: "Referrer", accessorKey: "referrer", size: 180 },
+      { header: "IP", accessorKey: "ip", size: 90 },
       {
         header: "Created",
         accessorKey: "createdAt",
@@ -82,7 +82,7 @@ function AllUsers({ users }: { users: User[] }) {
             month: "short",
             day: "numeric",
           }),
-        size: 110,
+        size: 90,
       },
     ],
     data: users,
@@ -120,25 +120,18 @@ function AllUsers({ users }: { users: User[] }) {
             <TableRow>
               {row.getVisibleCells().map((cell) => (
                 <TableCell
-                  className="truncate whitespace-nowrap"
                   key={cell.id}
-                  style={{ maxWidth: cell.column.columnDef.size }}
                   title={cell.getValue() as string}
+                  width={cell.column.getSize()}
                 >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  <div
+                    className="truncate"
+                    style={{ width: cell.column.getSize() }}
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </div>
                 </TableCell>
               ))}
-            </TableRow>
-            <TableRow>
-              <TableCell />
-              <TableCell colSpan={row.getVisibleCells().length - 1}>
-                <div className="flex max-w-[900px] items-center gap-2">
-                  <NotepadTextIcon className="h-4 w-4 shrink-0" />
-                  <span className="truncate" title={row.original.note ?? ""}>
-                    {row.original.note ?? "No note"}
-                  </span>
-                </div>
-              </TableCell>
             </TableRow>
           </Fragment>
         ))}
@@ -153,7 +146,7 @@ function WaitingList({ waiting }: { waiting: Waitlist[] }) {
   ]);
   const table = useReactTable({
     columns: [
-      { header: "Email", accessorKey: "email" },
+      { header: "Email", accessorKey: "email", size: 500 },
       {
         header: "Created",
         accessorKey: "createdAt",
@@ -162,7 +155,10 @@ function WaitingList({ waiting }: { waiting: Waitlist[] }) {
             year: "numeric",
             month: "short",
             day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
           }),
+        size: 80,
       },
     ],
     data: waiting,
@@ -198,7 +194,7 @@ function WaitingList({ waiting }: { waiting: Waitlist[] }) {
           <Fragment key={row.id}>
             <TableRow>
               {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
+                <TableCell key={cell.id} width={cell.column.getSize()}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
               ))}
