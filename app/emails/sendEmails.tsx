@@ -61,8 +61,8 @@ export async function sendEmail({
  * We use different processes for sending emails (Vite worker) and for checking
  * on them (test process), so we use Redis to communicate between the two.
  */
-const subscriber = new Redis();
-const publisher = new Redis();
+const subscriber = new Redis(env.REDIS_URL);
+const publisher = new Redis(env.REDIS_URL);
 
 subscriber.on("message", (channel: string, message: unknown) => {
   if (channel === "email:last")
