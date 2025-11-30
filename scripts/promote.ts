@@ -11,6 +11,7 @@ import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymen
 import dotenv from "dotenv";
 import env from "env-var";
 import { invariant } from "es-toolkit";
+import { execSync } from "node:child_process";
 import { Octokit } from "octokit";
 import ora from "ora";
 
@@ -25,6 +26,37 @@ const vercel = new Vercel({
 const octokit = new Octokit({
   auth: env.get("GITHUB_TOKEN").required().asString(),
 });
+
+/**
+ * Check if there are uncommitted changes in local git.
+ * Exits with an error if there are uncommitted files.
+ */
+function checkIfUncommittedChanges() {
+  const status = execSync("git status --porcelain").toString().trim();
+  if (status.length > 0)
+    console.error(
+      "\x1b[31m\u26A0 You have uncommitted changes. Please commit or stash them before promoting.\x1b[0m",
+    );
+}
+
+/**
+ * Check if local Git is ahead of origin/main.
+ * Exits with an error if there are commits ahead.
+ */
+function checkIfGitAhead() {
+  // Fetch latest from origin
+  execSync("git fetch origin main", { stdio: "ignore" });
+
+  const ahead = execSync("git rev-list --left-right --count origin/main...HEAD")
+    .toString()
+    .trim()
+    .split("\t")[1];
+
+  if (ahead && Number(ahead) > 0)
+    console.error(
+      "\x1b[31m\u26A0 Local Git is ahead of origin/main. Please push your commits before promoting.\x1b[0m",
+    );
+}
 
 async function githubWorkflows() {
   console.info("\x1b[34mGitHub workflow status:\x1b[0m");
@@ -126,6 +158,9 @@ async function waitForDeploy(
 }
 
 async function interactive() {
+  // Check if local Git is ahead of origin/main
+  checkIfUncommittedChanges();
+  checkIfGitAhead();
   // Review GitHub workflow status
   await githubWorkflows();
   // Review Vercel deployment status
