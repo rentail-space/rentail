@@ -16,8 +16,8 @@ describe("prompt()", () => {
       requestHeaders: new Headers(),
     });
     prompt = await preparePrompt({
-      prompt: chatPrompt,
       headers: new Headers(),
+      prompt: chatPrompt,
       user,
     });
   });
@@ -104,12 +104,16 @@ describe("prompt()", () => {
   describe("empty centers list", () => {
     let result: string;
     beforeAll(async () => {
-      result = await preparePrompt({
-        prompt: chatPrompt,
-        headers: new Headers({
+      const user = await createAnonymousUser({
+        chatId: ulid(),
+        requestHeaders: new Headers({
           "x-vercel-ip-latitude": "37.42240",
           "x-vercel-ip-longitude": "-122.08421",
         }),
+      });
+      result = await preparePrompt({
+        headers: new Headers(),
+        prompt: chatPrompt,
         user,
       });
     });

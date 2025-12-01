@@ -59,8 +59,8 @@ async function findAlert(
   const chatId = user.chats[0].id;
   const messages = await recentMessages(chatId);
   const system = await preparePrompt({
-    prompt: dailyAlertPrompt,
     headers: new Headers(),
+    prompt: dailyAlertPrompt,
     user,
   });
 

@@ -82,8 +82,8 @@ export async function action({ request, params }: Route.ActionArgs) {
     messages: convertToModelMessages(messages),
     system: await preparePrompt({
       headers: request.headers,
-      user,
       prompt: chatPrompt,
+      user,
     }),
 
     onAbort: async () => {

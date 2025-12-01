@@ -57,8 +57,8 @@ export default async function runThroughScript({
 
     prompt = await preparePrompt({
       headers: new Headers(headers),
-      user,
       prompt: chatPrompt,
+      user,
     });
   });
 

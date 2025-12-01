@@ -24,7 +24,6 @@ the other airport
 ---
 
 Assistant:
-[ ] Suggests four airports for use to choose from
 [ ] Or user can choose the city
 
 ---
