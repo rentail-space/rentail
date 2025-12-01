@@ -1,16 +1,24 @@
 import { invariant } from "node_modules/es-toolkit/dist/util/invariant.mjs";
+import type { User } from "prisma/generated/client";
+import { ulid } from "ulid";
 import { beforeAll, describe, expect, it } from "vitest";
 import preparePrompt from "~/lib/preparePrompt";
 import chatPrompt from "~/prompts/chatPrompt.md?raw";
+import { createAnonymousUser } from "~/sessions.server";
 
 describe("prompt()", () => {
   let prompt: string;
+  let user: User;
 
   beforeAll(async () => {
+    user = await createAnonymousUser({
+      chatId: ulid(),
+      requestHeaders: new Headers(),
+    });
     prompt = await preparePrompt({
       prompt: chatPrompt,
       headers: new Headers(),
-      user: undefined,
+      user,
     });
   });
 
@@ -102,7 +110,7 @@ describe("prompt()", () => {
           "x-vercel-ip-latitude": "37.42240",
           "x-vercel-ip-longitude": "-122.08421",
         }),
-        user: undefined,
+        user,
       });
     });
 

@@ -169,7 +169,7 @@ export async function action({ request, params }: Route.ActionArgs) {
         },
       });
 
-      // 2. Update the user's working memory asynchronously (slower operation)
+      // 2. Update the user's working memory
       await prisma.user.update({
         where: { id: user.id },
         data: {

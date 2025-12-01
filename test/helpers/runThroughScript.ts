@@ -1,39 +1,66 @@
-import { type ModelMessage, generateObject, generateText } from "ai";
+import { convertToModelMessages, generateObject, generateText } from "ai";
 import debug from "debug";
 import type { User } from "prisma/generated/client";
-import { type TestAPI, beforeAll, it } from "vitest";
+import { ulid } from "ulid";
+import { beforeAll, it } from "vitest";
 import zod from "zod";
 import { classifyModel } from "~/lib/model";
 import preparePrompt from "~/lib/preparePrompt";
+import prisma from "~/lib/prisma";
+import updateWorkingMemory from "~/lib/workingMemory";
 import chatPrompt from "~/prompts/chatPrompt.md?raw";
 import welcome from "~/prompts/welcome.md?raw";
+import { findOrCreateUser, recentMessages } from "~/sessions.server";
 
 const logger = debug("conversations");
 
+/**
+ * Prepare a conversational test with a script that alternates between user
+ * sending messages, and classifying the assistant's response.
+ *
+ * Example:
+ * ```
+ *   runThroughScript({
+ *     headers: {
+ *       "x-vercel-ip-latitude": "47.608013",
+ *       "x-vercel-ip-longitude": "-122.335167",
+ *     },
+ *     script,
+ *   });
+ * ```
+ *
+ * @param headers - The HTTP headers
+ * @param script - The script to run through the chatbot.
+ */
 export default async function runThroughScript({
   headers,
   script,
-  test,
-  user,
 }: {
   headers?: Record<string, string>;
   script: string;
-  test: TestAPI;
-  user?: User;
 }): Promise<void> {
-  // Always start with the welcome message
-  const messages: ModelMessage[] = [{ role: "assistant", content: welcome }];
+  const chatId = ulid();
+  let user: User;
 
   let prompt: string;
   beforeAll(async () => {
+    await prisma.user.deleteMany();
+
+    const found = await findOrCreateUser({
+      chatId,
+      requestHeaders: new Headers(headers),
+    });
+    user = found.user;
+
+    // Always start with the welcome message
+    await addMessage({ chatId, role: "assistant", content: welcome });
+
     prompt = await preparePrompt({
       headers: new Headers(headers),
       user,
       prompt: chatPrompt,
     });
   });
-
-  test.runIf(!process.env.CI);
 
   const parts = script.split("---");
   for (const part of parts) {
@@ -42,14 +69,19 @@ export default async function runThroughScript({
     const combined = content.replaceAll(/\n/gm, " ");
     switch (role.trim()) {
       case "Assistant": {
-        it(`should respond to the user ${combined}`, async () =>
-          classifyAssistantResponse({ content, messages }));
+        it.skipIf(process.env.CI)(
+          `should respond to the user ${combined}`,
+          async () => classifyAssistantResponse({ chatId, content }),
+        );
         break;
       }
 
       case "User": {
-        it(`should ask the chatbot ${combined}`, async () =>
-          generateAssistantResponse({ content, messages, prompt }));
+        it.skipIf(process.env.CI)(
+          `should ask the chatbot ${combined}`,
+          async () =>
+            generateAssistantResponse({ chatId, content, prompt, user }),
+        );
         break;
       }
 
@@ -60,14 +92,14 @@ export default async function runThroughScript({
 }
 
 async function classifyAssistantResponse({
+  chatId,
   content,
-  messages,
 }: {
+  chatId: string;
   content: string;
-  messages: ModelMessage[];
 }): Promise<void> {
   const response = await generateObject({
-    messages,
+    messages: convertToModelMessages(await recentMessages(chatId)),
     model: classifyModel,
     system: `
   This is a sequence of messages between a user and an assistant.
@@ -101,6 +133,7 @@ async function classifyAssistantResponse({
     }),
   });
   if (logger.enabled) {
+    logger("\nAssistant: %s\n", content.trim());
     for (const { question, answer } of response.object.questions)
       logger(`Q: ${question} => ${answer}`);
   }
@@ -117,17 +150,20 @@ async function classifyAssistantResponse({
 }
 
 async function generateAssistantResponse({
+  chatId,
   content,
-  messages,
   prompt,
+  user,
 }: {
+  chatId: string;
   content: string;
-  messages: ModelMessage[];
   prompt: string;
+  user: User;
 }): Promise<void> {
-  messages.push({ role: "user", content });
+  await addMessage({ chatId, role: "user", content });
+
   const response = await generateText({
-    messages,
+    messages: convertToModelMessages(await recentMessages(chatId)),
     model: classifyModel,
     //mmodel: conversationalModel,
     system: prompt,
@@ -138,6 +174,37 @@ async function generateAssistantResponse({
       },
     },
   });
-  messages.push({ role: "assistant", content: response.text });
-  logger("User: %s\n=> %s", content.trim(), response.text.trim());
+
+  await addMessage({ chatId, role: "assistant", content: response.text });
+  logger("\nUser: %s\n\n=> %s\n", content.trim(), response.text.trim());
+
+  await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      workingMemory: await updateWorkingMemory({
+        messages: await recentMessages(chatId),
+        workingMemory: user.workingMemory ?? "",
+      }),
+    },
+  });
+}
+
+async function addMessage({
+  chatId,
+  role,
+  content,
+}: {
+  chatId: string;
+  role: "assistant" | "user";
+  content: string;
+}) {
+  await prisma.messages.create({
+    data: {
+      chatId,
+      content: [{ type: "text", text: content }],
+      id: ulid(),
+      role,
+      type: "text",
+    },
+  });
 }

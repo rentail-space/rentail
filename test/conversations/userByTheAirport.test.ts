@@ -1,0 +1,66 @@
+import { describe, expect, it } from "vitest";
+import prisma from "~/lib/prisma";
+import { cleanParseWorkingMemory } from "~/lib/workingMemory";
+import runThroughScript from "../helpers/runThroughScript";
+
+const script = `Assistant:
+[ ] Welcomes the user
+
+---
+
+User:
+I'm by the airport
+
+---
+
+Assistant:
+[ ] Ask user if they are by LAX
+
+---
+
+User:
+the other airport
+
+---
+
+Assistant:
+[ ] Suggests four airports for use to choose from
+[ ] Or user can choose the city
+
+---
+
+User:
+burbank
+
+---
+
+Assistant:
+[ ] Confirm user is by Burbank Hollywood airport`;
+
+describe.runIf(!process.env.CI)("User is not in Los Angeles area", async () => {
+  await runThroughScript({
+    headers: {
+      "x-vercel-ip-latitude": "34.04209",
+      "x-vercel-ip-longitude": "118.25578",
+    },
+    script,
+  });
+
+  it("should update working memory", async () => {
+    const user = await prisma.user.findFirst();
+    const workingMemory = cleanParseWorkingMemory(user?.workingMemory);
+    expect(workingMemory.location).toMatchObject({
+      city: "Burbank",
+      state: "California",
+      country: "United States",
+      timeZone: "America/Los_Angeles",
+    });
+  });
+
+  it("should update user's geocode", async () => {
+    const user = await prisma.user.findFirst();
+    const workingMemory = cleanParseWorkingMemory(user?.workingMemory);
+    expect(workingMemory.location?.longitude).toBeCloseTo(-118.307201, 2);
+    expect(workingMemory.location?.latitude).toBeCloseTo(34.1812089, 2);
+  });
+});

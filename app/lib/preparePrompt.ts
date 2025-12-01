@@ -14,8 +14,7 @@ import prisma from "./prisma";
  *
  * @param prompt - The prompt to prepare.
  * @param headers - The HTTP headers to use to get the user's location.
- * @param user - The user to find the shopping centers for. If not provided, the
- * location will be inferred from the IP address in the headers.
+ * @param user - The user to prepare the prompt for.
  * @returns The prepared prompt.
  * @throws An error if there's a mismatched $[tag] in the prompt.
  */
@@ -26,7 +25,7 @@ export default async function preparePrompt({
 }: {
   prompt: string;
   headers: Headers;
-  user?: User;
+  user: User;
 }): Promise<string> {
   const allCenters = await prisma.property.findMany({
     select: { name: true, city: true, state: true, country: true },
@@ -41,7 +40,7 @@ export default async function preparePrompt({
     .replace("$[date]", date)
     .replace("$[time]", time)
     .replace("$[location]", location)
-    .replace("$[name]", user?.name || "not known")
+    .replace("$[name]", user.name || "not known")
     .replace("$[workingMemory]", JSON.stringify(workingMemory, null, 2))
     .replace(
       "$[workingMemorySchema]",

@@ -7,7 +7,7 @@ process.env.NODE_ENV = "test";
 export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
-    bail: process.env.CI ? 10 : 3,
+    bail: process.env.CI ? 10 : 5,
     browser: { screenshotDirectory: "__screenshots__" },
     exclude: ["build", "node_modules"],
     fileParallelism: false,
