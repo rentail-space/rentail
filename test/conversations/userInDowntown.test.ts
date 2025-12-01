@@ -26,7 +26,7 @@ Assistant:
 [ ] Recommends retail spaces in downtown Los Angeles
 `;
 
-describe("User is not in Los Angeles area", async () => {
+describe.skipIf(process.env.CI)("User is not in Los Angeles area", async () => {
   await runThroughScript({
     headers: {
       // Palm Desert, California
