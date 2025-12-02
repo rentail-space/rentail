@@ -50,13 +50,14 @@ const links = [
 export default function PageFooter() {
   return (
     <footer className="footer sm:footer-horizontal border-t bg-gray-50 px-6 py-12 print:hidden">
-      <aside className="flex flex-col gap-4">
+      <aside className="flex flex-col gap-4 text-gray-600">
         <PageIconLink />
-        <p className="text-gray-600 text-sm">
+        <p className="text-sm">
           AI-powered short-term retail space marketplace
         </p>
-        <p className="text-gray-600 text-sm">
+        <p className="text-sm">
           © {new Date().getFullYear()} rentail.space. All rights reserved.
+          Patent pending.
         </p>
         <SocialLinks />
       </aside>
