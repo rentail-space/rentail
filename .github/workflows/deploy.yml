@@ -65,7 +65,7 @@ jobs:
       - run: biome lint
 
       - name: Start PostgreSQL
-        run: service postgresql start
+        run: sudo service postgresql start
 
       - name: Setup database schema (for testing)
         run: |
