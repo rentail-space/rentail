@@ -65,9 +65,7 @@ jobs:
       - run: biome lint
 
       - name: Start PostgreSQL
-        run: |
-          sudo service postgresql start
-          sudo -u postgres psql -c "CREATE USER postgres WITH PASSWORD 'postgres' SUPERUSER;"
+        run: service postgresql start
 
       - name: Setup database schema (for testing)
         run: |
@@ -75,6 +73,9 @@ jobs:
           pnpm prisma db push
         env:
           NODE_ENV: "test"
+
+      - name: Start Redis
+        run: service redis-server start
 
       - name: Check secrets
         run: pnpm secretlint "**/*" --format stylish
