@@ -64,6 +64,11 @@ jobs:
           version: latest
       - run: biome lint
 
+      - name: Start PostgreSQL
+        run: |
+          systemctl start postgresql
+          systemctl enable postgresql
+
       - name: Setup database schema (for testing)
         run: |
           pnpm prisma generate 
