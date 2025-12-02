@@ -79,6 +79,11 @@ jobs:
       - name: Start PostgreSQL
         run: sudo service postgresql start
 
+      - name: Create PostgreSQL user
+        run: |
+          sudo -u postgres createuser -e postgres --superuser
+          sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+
       - name: Setup database schema (for testing)
         run: |
           pnpm prisma generate 
