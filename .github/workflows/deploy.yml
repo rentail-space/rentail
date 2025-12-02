@@ -65,7 +65,9 @@ jobs:
       - run: biome lint
 
       - name: Start PostgreSQL
-        run: sudo service postgresql start
+        run: |
+          sudo service postgresql start
+          sudo -u postgres psql -c "CREATE USER postgres WITH PASSWORD 'postgres' SUPERUSER;"
 
       - name: Setup database schema (for testing)
         run: |
