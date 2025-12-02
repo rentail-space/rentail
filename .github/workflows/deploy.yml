@@ -65,9 +65,7 @@ jobs:
       - run: biome lint
 
       - name: Start PostgreSQL
-        run: |
-          systemctl start postgresql
-          systemctl enable postgresql
+        run: service postgresql start
 
       - name: Setup database schema (for testing)
         run: |
