@@ -7,24 +7,20 @@ on:
 jobs:
   test:
     name: Test
-    runs-on: namespace-profile-default
+    runs-on: namespace-profile-rentail
 
     env:
       ANTHROPIC_API_KEY: "***REMOVED***"
       BETTER_AUTH_SECRET: "***REMOVED***"
       DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
       DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+      DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       REDIS_URL: "redis://localhost:6379"
       RESEND_API_KEY: "re_1234567890"
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: "package.json"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -68,21 +64,12 @@ jobs:
           version: latest
       - run: biome lint
 
-      - name: Setup PostgreSQL (for testing)
-        id: postgres
-        uses: nyurik/action-setup-postgis@v2.2
-        with:
-          postgres-version: "17"
-
       - name: Setup database schema (for testing)
         run: |
           pnpm prisma generate 
           pnpm prisma db push
         env:
           NODE_ENV: "test"
-
-      - name: Start Redis (for testing)
-        uses: supercharge/redis-github-action@1.7.0
 
       - name: Check secrets
         run: pnpm secretlint "**/*" --format stylish
@@ -107,56 +94,13 @@ jobs:
           name: playwright-test-results
           path: __screenshots__
 
-  deploy:
-    name: Deploy
-    needs: test
-    runs-on: namespace-profile-default
-
-    env:
-      DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
-      REDIS_URL: "redis://localhost:6379"
-      SENTRY_AUTH_TOKEN: "***REMOVED***"
-      SENTRY_ORG: "labnotes"
-      SENTRY_PROJECT: "rentail"
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: "package.json"
-
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v3
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      - id: cache-node-modules
-        uses: actions/cache/restore@v4
-        with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
-
-      - name: Install NPM dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: pnpm install
-
-      - uses: actions/cache/save@v4
-        with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Fetch DATABASE_URL/DIRECT_URL from Doppler
         run: |
           echo "DATABASE_URL=$(doppler run --config prd -- bash -c 'echo $DATABASE_URL')" >> $GITHUB_ENV
           echo "DIRECT_URL=$(doppler run --config prd -- bash -c 'echo $DIRECT_URL')" >> $GITHUB_ENV
-
-      - name: Generate Prisma schema
-        run: |
-          pnpm prisma generate
 
       - name: Deploy Prisma schema and seed database
         run: |
@@ -175,3 +119,7 @@ jobs:
           production: false
           project-id: "prj_SrqYHd1Olo0XfxQHLe9lyGfcoT9z"
           token: ${{ secrets.VERCEL_TOKEN }}
+        env:
+          SENTRY_AUTH_TOKEN: "***REMOVED***"
+          SENTRY_ORG: "labnotes"
+          SENTRY_PROJECT: "rentail"
