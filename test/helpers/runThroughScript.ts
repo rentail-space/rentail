@@ -4,7 +4,7 @@ import type { User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import { beforeAll, it } from "vitest";
 import zod from "zod";
-import { classifyModel } from "~/lib/model";
+import { conversationalModel } from "~/lib/model";
 import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
 import updateWorkingMemory from "~/lib/workingMemory";
@@ -103,8 +103,7 @@ async function generateAssistantResponse({
 
   const response = await generateText({
     messages: convertToModelMessages(await recentMessages(chatId)),
-    model: classifyModel,
-    //mmodel: conversationalModel,
+    model: conversationalModel,
     system: prompt,
     providerOptions: {
       anthropic: {
@@ -137,7 +136,7 @@ async function classifyAssistantResponse({
   const messages = (await recentMessages(chatId)).slice(0, index + 1);
   const classified = await generateObject({
     messages: convertToModelMessages(messages),
-    model: classifyModel,
+    model: conversationalModel,
     system: `
   This is a sequence of messages between a user and an assistant.
   The first message is a welcome message from the assistant.

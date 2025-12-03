@@ -18,7 +18,7 @@ Tell me all the shopping centers you know about
 
 Assistant:
 [ ] Lists shopping centers in Southern California
-[ ] Lists exactly 12 shopping centers
+[ ] Lists more 10 or more shopping centers
 
 ---
 
