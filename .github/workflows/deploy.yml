@@ -76,17 +76,6 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ env.PLAYWRIGHT_VERSION }}
 
-      - name: Setup Biome
-        uses: biomejs/setup-biome@v2
-        with:
-          version: latest
-      - run: biome lint
-
-      - name: Create PostgreSQL user
-        run: |
-          # sudo -u postgres createuser --host=localhost --port=5432 --no-password postgres --superuser || echo "User already exists"
-          # sudo -u postgres psql --host=localhost --port=5432 --no-password --dbname=postgres -c "ALTER USER postgres WITH PASSWORD 'postgres';"
-
       - name: Setup database schema (for testing)
         run: |
           pnpm prisma generate 
@@ -96,6 +85,14 @@ jobs:
 
       - name: Check secrets
         run: pnpm secretlint "**/*" --format stylish
+
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: latest
+
+      - name: Lint code
+        run: biome lint
 
       - name: Generate React Router types
         run: pnpm react-router typegen
@@ -108,7 +105,7 @@ jobs:
           rm -rf node_modules/.vite .react-router build
           pnpm vitest run --reporter verbose
         env:
-          DEBUG: "browser,server"
+          DEBUG: "browser,chat,server,test"
 
       - name: Upload Playwright Test Results
         uses: actions/upload-artifact@v4
@@ -119,11 +116,6 @@ jobs:
 
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v3
-
-      - name: Fetch DATABASE_URL/DIRECT_URL from Doppler
-        run: |
-          echo "DATABASE_URL=$(doppler run --config prd -- bash -c 'echo $DATABASE_URL')" >> $GITHUB_ENV
-          echo "DIRECT_URL=$(doppler run --config prd -- bash -c 'echo $DIRECT_URL')" >> $GITHUB_ENV
 
       - name: Deploy Prisma schema and seed database
         run: |
