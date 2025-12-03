@@ -76,9 +76,6 @@ jobs:
           version: latest
       - run: biome lint
 
-      - name: Start PostgreSQL
-        run: sudo service postgresql start
-
       - name: Create PostgreSQL user
         run: |
           sudo -u postgres createuser -e postgres --superuser
@@ -90,9 +87,6 @@ jobs:
           pnpm prisma db push
         env:
           NODE_ENV: "test"
-
-      - name: Start Redis
-        run: service redis-server start
 
       - name: Check secrets
         run: pnpm secretlint "**/*" --format stylish
