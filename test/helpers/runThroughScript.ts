@@ -1,6 +1,5 @@
 import { convertToModelMessages, generateObject, generateText } from "ai";
 import debug from "debug";
-import { last } from "es-toolkit";
 import type { User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import { beforeAll, it } from "vitest";
@@ -10,7 +9,6 @@ import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
 import updateWorkingMemory from "~/lib/workingMemory";
 import chatPrompt from "~/prompts/chatPrompt.md?raw";
-import welcome from "~/prompts/welcome.md?raw";
 import { findOrCreateUser, recentMessages } from "~/sessions.server";
 
 const logger = debug("conversations");
@@ -42,8 +40,20 @@ export default async function runThroughScript({
 }): Promise<void> {
   const chatId = ulid();
   let user: User;
-
   let prompt: string;
+
+  const messages = script
+    .split("---")
+    .map((part) => {
+      const [_, role] = part.trim().match(/^(\w+):$/m) ?? [];
+      const content = part.trim().replace(/^(\w+):$/m, "");
+      return { role, content };
+    })
+    .map(({ content, role }) => ({
+      content: content.replace(/^(\w+):$/m, ""),
+      role,
+    }));
+
   beforeAll(async () => {
     await prisma.user.deleteMany();
 
@@ -53,58 +63,78 @@ export default async function runThroughScript({
     });
     user = found.user;
 
-    // Always start with the welcome message
-    await addMessage({ chatId, role: "assistant", content: welcome });
-
     prompt = await preparePrompt({
       headers: new Headers(headers),
       prompt: chatPrompt,
       user,
     });
+
+    for (const { content, role } of messages)
+      if (role.match(/User/i))
+        await generateAssistantResponse({
+          chatId,
+          prompt,
+          user,
+          userInput: content,
+        });
   });
 
-  const parts = script.split("---");
-  for (const part of parts) {
-    const [_, role] = part.trim().match(/^(\w+):$/m) ?? [];
-    const content = part.replace(/^(\w+):$/m, "");
-    const combined = content.replaceAll(/\n/gm, " ");
-    switch (role.trim()) {
-      case "Assistant": {
-        it.skipIf(process.env.CI)(
-          `should respond to the user ${combined}`,
-          async () => classifyAssistantResponse({ chatId, expecting: content }),
-        );
-        break;
-      }
+  for (const [index, { content, role }] of messages.entries())
+    if (role.match(/Assistant/i))
+      it.skipIf(process.env.CI)(
+        `should respond to the user ${content}`,
+        async () =>
+          classifyAssistantResponse({ chatId, index, expecting: content }),
+      );
+}
 
-      case "User": {
-        it.skipIf(process.env.CI)(
-          `should ask the chatbot ${combined}`,
-          async () =>
-            generateAssistantResponse({
-              chatId,
-              userInput: content,
-              prompt,
-              user,
-            }),
-        );
-        break;
-      }
+async function generateAssistantResponse({
+  chatId,
+  prompt,
+  user,
+  userInput,
+}: {
+  chatId: string;
+  prompt: string;
+  user: User;
+  userInput: string;
+}): Promise<void> {
+  await addMessage({ chatId, role: "user", content: userInput });
 
-      default:
-        throw new Error(`Unknown role: ${role}`);
-    }
-  }
+  const response = await generateText({
+    messages: convertToModelMessages(await recentMessages(chatId)),
+    model: classifyModel,
+    //mmodel: conversationalModel,
+    system: prompt,
+    providerOptions: {
+      anthropic: {
+        cacheControl: { type: "ephemeral", ttl: "1h" },
+        temperature: 0.0,
+      },
+    },
+  });
+  await addMessage({ chatId, role: "assistant", content: response.text });
+  await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      workingMemory: await updateWorkingMemory({
+        messages: await recentMessages(chatId),
+        workingMemory: user.workingMemory ?? "",
+      }),
+    },
+  });
 }
 
 async function classifyAssistantResponse({
   chatId,
+  index,
   expecting,
 }: {
   chatId: string;
+  index: number;
   expecting: string;
 }): Promise<void> {
-  const messages = await recentMessages(chatId);
+  const messages = (await recentMessages(chatId)).slice(0, index + 1);
   const classified = await generateObject({
     messages: convertToModelMessages(messages),
     model: classifyModel,
@@ -141,18 +171,23 @@ async function classifyAssistantResponse({
       ),
     }),
   });
-  if (logger.enabled) {
-    logger(
-      "\n\x1b[34mAssistant:\n%s\n\nExpecting:\n%s\n\n%s\x1b[0m",
-      last(messages)
-        ?.parts.map((part) => (part.type === "text" ? part.text : ""))
-        .join(" "),
-      expecting.trim(),
-      classified.object.questions
-        .map(({ question, answer }) => `Q: ${question} => ${answer}`)
-        .join("\n"),
-    );
-  }
+
+  logger(
+    "\n\x1b[34m%s\n\nExpecting:\n%s\n\n%s\x1b[0m",
+    messages
+      .map(
+        (message) =>
+          `[${message.role}] ${message.parts
+            .map((part) => (part.type === "text" ? part.text : ""))
+            .join(" ")
+            .trim()}`,
+      )
+      .join("\n"),
+    expecting.trim(),
+    classified.object.questions
+      .map(({ question, answer }) => `Q: ${question} => ${answer}`)
+      .join("\n"),
+  );
 
   const allCorrect = classified.object.questions.every(
     ({ answer }) => answer === "yes",
@@ -163,46 +198,6 @@ async function classifyAssistantResponse({
       .join("\n");
     throw new Error(allAnswers);
   }
-}
-
-async function generateAssistantResponse({
-  chatId,
-  userInput,
-  prompt,
-  user,
-}: {
-  chatId: string;
-  userInput: string;
-  prompt: string;
-  user: User;
-}): Promise<void> {
-  await addMessage({ chatId, role: "user", content: userInput });
-
-  const response = await generateText({
-    messages: convertToModelMessages(await recentMessages(chatId)),
-    model: classifyModel,
-    //mmodel: conversationalModel,
-    system: prompt,
-    providerOptions: {
-      anthropic: {
-        cacheControl: { type: "ephemeral", ttl: "1h" },
-        temperature: 0.0,
-      },
-    },
-  });
-
-  await addMessage({ chatId, role: "assistant", content: response.text });
-  logger("\n\x1b[34mUser:\n%s\x1b[0m", userInput.trim());
-
-  await prisma.user.update({
-    where: { id: user.id },
-    data: {
-      workingMemory: await updateWorkingMemory({
-        messages: await recentMessages(chatId),
-        workingMemory: user.workingMemory ?? "",
-      }),
-    },
-  });
 }
 
 async function addMessage({

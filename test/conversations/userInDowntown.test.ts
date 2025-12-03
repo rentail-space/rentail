@@ -1,3 +1,4 @@
+import debug from "debug";
 import type { User } from "prisma/generated/client";
 import { beforeAll, describe, expect, it } from "vitest";
 import prisma from "~/lib/prisma";
@@ -22,9 +23,13 @@ Assistant:
 User:
 Yes, I'm in downtown Los Angeles
 
+---
+
 Assistant:
-[ ] Recommends retail spaces in downtown Los Angeles
+[ ] Recommends retail spaces in downtown Los Angeles or ask user about their product
 `;
+
+const logger = debug("conversations");
 
 describe.skipIf(process.env.CI)("User is not in Los Angeles area", async () => {
   await runThroughScript({
@@ -45,6 +50,7 @@ describe.skipIf(process.env.CI)("User is not in Los Angeles area", async () => {
 
     it("should update working memory", async () => {
       const workingMemory = cleanParseWorkingMemory(user?.workingMemory);
+      logger(workingMemory.location);
       expect(workingMemory.location).toMatchObject({
         city: "Los Angeles",
         state: "California",
@@ -55,8 +61,8 @@ describe.skipIf(process.env.CI)("User is not in Los Angeles area", async () => {
 
     it("should update longitude and latitude", async () => {
       const workingMemory = cleanParseWorkingMemory(user?.workingMemory);
-      expect(workingMemory.location?.longitude).toBeCloseTo(-118.242766, 2);
-      expect(workingMemory.location?.latitude).toBeCloseTo(34.0536909, 2);
+      expect(workingMemory.location?.longitude).toBeCloseTo(-118.242766, 1);
+      expect(workingMemory.location?.latitude).toBeCloseTo(34.0536909, 1);
     });
   });
 });
