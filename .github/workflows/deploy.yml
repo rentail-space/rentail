@@ -22,13 +22,19 @@ jobs:
       postgres:
         image: postgres:16-alpine
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
       redis:
         image: redis:latest
         ports:
           - 6379:6379
+        options: --entrypoint redis-server
 
     steps:
       - name: Checkout Repository
@@ -78,8 +84,8 @@ jobs:
 
       - name: Create PostgreSQL user
         run: |
-          sudo -u postgres createuser -h localhost -e postgres --superuser
-          sudo -u postgres psql -h localhost -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+          # sudo -u postgres createuser --host=localhost --port=5432 --no-password postgres --superuser || echo "User already exists"
+          # sudo -u postgres psql --host=localhost --port=5432 --no-password --dbname=postgres -c "ALTER USER postgres WITH PASSWORD 'postgres';"
 
       - name: Setup database schema (for testing)
         run: |
