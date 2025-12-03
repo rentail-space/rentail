@@ -1,5 +1,6 @@
 import { convertToModelMessages, generateObject, generateText } from "ai";
 import debug from "debug";
+import { last } from "es-toolkit";
 import type { User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import { beforeAll, it } from "vitest";
@@ -71,7 +72,7 @@ export default async function runThroughScript({
       case "Assistant": {
         it.skipIf(process.env.CI)(
           `should respond to the user ${combined}`,
-          async () => classifyAssistantResponse({ chatId, content }),
+          async () => classifyAssistantResponse({ chatId, expecting: content }),
         );
         break;
       }
@@ -80,7 +81,12 @@ export default async function runThroughScript({
         it.skipIf(process.env.CI)(
           `should ask the chatbot ${combined}`,
           async () =>
-            generateAssistantResponse({ chatId, content, prompt, user }),
+            generateAssistantResponse({
+              chatId,
+              userInput: content,
+              prompt,
+              user,
+            }),
         );
         break;
       }
@@ -93,27 +99,30 @@ export default async function runThroughScript({
 
 async function classifyAssistantResponse({
   chatId,
-  content,
+  expecting,
 }: {
   chatId: string;
-  content: string;
+  expecting: string;
 }): Promise<void> {
-  const response = await generateObject({
-    messages: convertToModelMessages(await recentMessages(chatId)),
+  const messages = await recentMessages(chatId);
+  const classified = await generateObject({
+    messages: convertToModelMessages(messages),
     model: classifyModel,
     system: `
   This is a sequence of messages between a user and an assistant.
   The first message is a welcome message from the assistant.
   The last message is a response from the assistant to the user.
-  Your job is to analyze the last message in the sequence and determine
-  if the following applies:
+  Your job is to analyze the last message in the sequence (the assistant's
+  response) and determine if the following applies:
 
-  ${content
+  ${expecting
     .split("\n")
     .map((line) => `<rule>${line}</rule>`)
     .join("\n")}
 
-  If the rules apply, return "yes". If the rules do not apply, return "no".
+  The rule is interpreted as "does the assistant _______?"
+  If the rules apply, return "yes".
+  If the rules do not apply, return "no".
   If the rules are not clear, return "unknown".
   If the rules are not applicable, return "no".
   `,
@@ -133,16 +142,23 @@ async function classifyAssistantResponse({
     }),
   });
   if (logger.enabled) {
-    logger("\nAssistant: %s\n", content.trim());
-    for (const { question, answer } of response.object.questions)
-      logger(`Q: ${question} => ${answer}`);
+    logger(
+      "\n\x1b[34mAssistant:\n%s\n\nExpecting:\n%s\n\n%s\x1b[0m",
+      last(messages)
+        ?.parts.map((part) => (part.type === "text" ? part.text : ""))
+        .join(" "),
+      expecting.trim(),
+      classified.object.questions
+        .map(({ question, answer }) => `Q: ${question} => ${answer}`)
+        .join("\n"),
+    );
   }
 
-  const allCorrect = response.object.questions.every(
+  const allCorrect = classified.object.questions.every(
     ({ answer }) => answer === "yes",
   );
   if (!allCorrect) {
-    const allAnswers = response.object.questions
+    const allAnswers = classified.object.questions
       .map(({ question, answer }) => `Q: ${question} => ${answer}`)
       .join("\n");
     throw new Error(allAnswers);
@@ -151,16 +167,16 @@ async function classifyAssistantResponse({
 
 async function generateAssistantResponse({
   chatId,
-  content,
+  userInput,
   prompt,
   user,
 }: {
   chatId: string;
-  content: string;
+  userInput: string;
   prompt: string;
   user: User;
 }): Promise<void> {
-  await addMessage({ chatId, role: "user", content });
+  await addMessage({ chatId, role: "user", content: userInput });
 
   const response = await generateText({
     messages: convertToModelMessages(await recentMessages(chatId)),
@@ -176,7 +192,7 @@ async function generateAssistantResponse({
   });
 
   await addMessage({ chatId, role: "assistant", content: response.text });
-  logger("\nUser: %s\n\n=> %s\n", content.trim(), response.text.trim());
+  logger("\n\x1b[34mUser:\n%s\x1b[0m", userInput.trim());
 
   await prisma.user.update({
     where: { id: user.id },
