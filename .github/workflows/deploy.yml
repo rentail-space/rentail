@@ -78,8 +78,8 @@ jobs:
 
       - name: Create PostgreSQL user
         run: |
-          sudo -u postgres createuser -e postgres --superuser
-          sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+          sudo -u postgres createuser -h localhost -e postgres --superuser
+          sudo -u postgres psql -h localhost -c "ALTER USER postgres WITH PASSWORD 'postgres';"
 
       - name: Setup database schema (for testing)
         run: |
