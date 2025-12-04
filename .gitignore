@@ -18,8 +18,8 @@ __screenshots__/*.html.diff
 package-lock.json
 # Need to re-generate on the server
 prisma/generated
-# Used by playwright for persistent context
-test/context
+# Used for caching LLM responses
+test/cache
 # All local files or directories (eg ./.claude/settings.local.json, /.vercel/.env.production.local) 
 */*.local.*
 */*.local

@@ -86,6 +86,7 @@
     "zod": "^4.1.13"
   },
   "devDependencies": {
+    "@ai-sdk/provider": "^2.0.0",
     "@inquirer/prompts": "^8.0.1",
     "@playwright/test": "^1.57.0",
     "@react-router/dev": "^7.10.0",
