@@ -130,9 +130,11 @@ function UserInfoCard({ user }: { user: User }) {
             <td className="truncate align-middle">{user.viewport as string}</td>
           </tr>
           <tr>
-            <th className="align-middle">UTM</th>
-            <td className="truncate align-middle" title={user.utm as string}>
-              {user.utm as string}
+            <th className="align-top">UTM</th>
+            <td className="align-top" title={user.utm as string}>
+              <pre className="m-0! bg-background p-0 text-primary">
+                {JSON.stringify(JSON.parse(user.utm as string), null, 2)}
+              </pre>
             </td>
           </tr>
           <tr>
@@ -198,7 +200,7 @@ function WorkingMemory({ user }: { user: User }) {
       <summary className="collapse-title font-semibold">
         User's working memory
       </summary>
-      <pre className="collapse-content text-sm">
+      <pre className="m-0! bg-background text-primary">
         {JSON.stringify(workingMemory, null, 2)}
       </pre>
     </details>
