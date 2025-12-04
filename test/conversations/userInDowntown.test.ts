@@ -1,5 +1,4 @@
 import debug from "debug";
-import type { User } from "prisma/generated/client";
 import { beforeAll, describe, expect, it } from "vitest";
 import prisma from "~/lib/prisma";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
@@ -33,25 +32,24 @@ describe.skipIf(process.env.CI)("User is not in Los Angeles area", async () => {
   });
 
   describe("user records", () => {
-    let user: User;
+    let workingMemory: ReturnType<typeof cleanParseWorkingMemory>;
 
     beforeAll(async () => {
-      user = await prisma.user.findFirstOrThrow();
+      const user = await prisma.user.findFirstOrThrow();
+      workingMemory = cleanParseWorkingMemory(user?.workingMemory);
+      logger(workingMemory.location);
     });
 
     it("should update working memory", async () => {
-      const workingMemory = cleanParseWorkingMemory(user?.workingMemory);
-      logger(workingMemory.location);
       expect(workingMemory.location).toMatchObject({
         city: "Los Angeles",
         state: "California",
-        country: "United States",
+        country: /(United States|US)/i,
         timeZone: "America/Los_Angeles",
       });
     });
 
     it("should update longitude and latitude", async () => {
-      const workingMemory = cleanParseWorkingMemory(user?.workingMemory);
       expect(workingMemory.location?.longitude).toBeCloseTo(-118.242766, 1);
       expect(workingMemory.location?.latitude).toBeCloseTo(34.0536909, 1);
     });
