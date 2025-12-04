@@ -9,23 +9,13 @@ Assistant:
 [ ] Offers to help the user
 [ ] Finishes with a question
 
----
-
-User:
-Tell me all the shopping centers you know about
-
----
+User: Tell me all the shopping centers you know about
 
 Assistant:
 [ ] Lists shopping centers in Southern California
 [ ] Lists more 10 or more shopping centers
 
----
-
-User:
-looking for a pop up shop in Oakville
-
----
+User: looking for a pop up shop in Oakville
 
 Assistant:
 [ ] Tells user we don't have centers in Oakville

@@ -7,35 +7,21 @@ import runThroughScript from "../helpers/runThroughScript";
 const script = `Assistant:
 [ ] Welcomes the user
 
----
-
-User:
-I'm by the airport
-
----
+User: I'm by the airport
 
 Assistant:
 [ ] Ask user if they are by LAX
 
----
-
-User:
-the other airport
-
----
+User: the other airport
 
 Assistant:
-[ ] Or user can choose the city
+[ ] Asks the user if they are or confirms the user is at Burbank airport
 
----
-
-User:
-burbank
-
----
+User: burbank
 
 Assistant:
-[ ] Confirm user is by Burbank Hollywood airport`;
+[ ] Recommends shopping centers near Burbank
+  `;
 
 const logger = debug("conversations");
 

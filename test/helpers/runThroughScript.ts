@@ -1,5 +1,6 @@
 import { convertToModelMessages, generateObject, generateText } from "ai";
 import debug from "debug";
+import { last } from "es-toolkit";
 import type { User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import { beforeAll, it } from "vitest";
@@ -24,7 +25,15 @@ const logger = debug("conversations");
  *       "x-vercel-ip-latitude": "47.608013",
  *       "x-vercel-ip-longitude": "-122.335167",
  *     },
- *     script,
+ *     script: `
+ *       Assistant:
+ *         [ ] Welcomes the user
+ *
+ *       User: Hello, how are you?
+ *
+ *       Assistant:
+ *         [ ] Responds to the user
+ *         [ ] Finishes with a question`
  *   });
  * ```
  *
@@ -39,53 +48,48 @@ export default async function runThroughScript({
   script: string;
 }): Promise<void> {
   const chatId = ulid();
-  let user: User;
-  let prompt: string;
 
   const messages = script
-    .split("---")
+    .split("\n\n")
+    .map((part) => part.trim())
     .map((part) => {
-      const [_, role] = part.trim().match(/^(\w+):$/m) ?? [];
-      const content = part.trim().replace(/^(\w+):$/m, "");
+      const [_, role] = part.trim().match(/^(\w+):(?:\s|$)/m) ?? [];
+      const content = part
+        .trim()
+        .replace(/^(\w+):/m, "")
+        .trim();
       return { role, content };
-    })
-    .map(({ content, role }) => ({
-      content: content.replace(/^(\w+):$/m, ""),
-      role,
-    }));
+    });
 
   beforeAll(async () => {
     await prisma.user.deleteMany();
+    await findOrCreateUser({ chatId, requestHeaders: new Headers(headers) });
 
-    const found = await findOrCreateUser({
-      chatId,
-      requestHeaders: new Headers(headers),
-    });
-    user = found.user;
-
-    prompt = await preparePrompt({
-      headers: new Headers(headers),
-      prompt: chatPrompt,
-      user,
-    });
-
-    for (const { content, role } of messages)
-      if (role.match(/User/i))
-        await generateAssistantResponse({
-          chatId,
-          prompt,
-          user,
-          userInput: content,
-        });
+    for (const { content, role } of messages) {
+      if (!role.match(/User/i)) continue;
+      const user = await prisma.user.findFirstOrThrow();
+      const prompt = await preparePrompt({
+        headers: new Headers(headers),
+        prompt: chatPrompt,
+        user,
+      });
+      await generateAssistantResponse({
+        chatId,
+        prompt,
+        user,
+        userInput: content,
+      });
+    }
   });
 
-  for (const [index, { content, role }] of messages.entries())
-    if (role.match(/Assistant/i))
-      it.skipIf(process.env.CI)(
-        `should respond to the user ${content}`,
-        async () =>
-          classifyAssistantResponse({ chatId, index, expecting: content }),
-      );
+  for (const [index, { content, role }] of messages.entries()) {
+    if (!role.match(/Assistant/i)) continue;
+    it.skipIf(process.env.CI)(
+      `should respond to the user ${content}`,
+      async () =>
+        classifyAssistantResponse({ chatId, index, expecting: content }),
+    );
+  }
 }
 
 async function generateAssistantResponse({
@@ -142,18 +146,19 @@ async function classifyAssistantResponse({
   The first message is a welcome message from the assistant.
   The last message is a response from the assistant to the user.
   Your job is to analyze the last message in the sequence (the assistant's
-  response) and determine if the following applies:
+  response) and determine if the following applies.
+  I am only looking at this rules:
 
   ${expecting
+    .trim()
     .split("\n")
     .map((line) => `<rule>${line}</rule>`)
     .join("\n")}
 
-  The rule is interpreted as "does the assistant _______?"
-  If the rules apply, return "yes".
-  If the rules do not apply, return "no".
-  If the rules are not clear, return "unknown".
-  If the rules are not applicable, return "no".
+  Do not make up any rules. Only return "yes" or "no" based on the rules.
+  Each rule is interpreted as "does the assistant _______?"
+  If any rule applies, return "yes".
+  If any rule does not apply, return "no".
   `,
     providerOptions: {
       anthropic: {
@@ -195,7 +200,11 @@ async function classifyAssistantResponse({
     const allAnswers = classified.object.questions
       .map(({ question, answer }) => `Q: ${question} => ${answer}`)
       .join("\n");
-    throw new Error(allAnswers);
+    const lastMessage = last(messages)
+      ?.parts.map((part) => (part.type === "text" ? part.text : ""))
+      .join(" ")
+      .trim();
+    throw new Error(`${lastMessage}\n\n${allAnswers}`);
   }
 }
 
