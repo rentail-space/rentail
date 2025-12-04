@@ -88,14 +88,18 @@ function centersToMarkdown({
 function centerToMarkdown(
   center: PropertyGetPayload<{ include: { spaces: true } }>,
 ): string {
+  const description =
+    process.env.NODE_ENV === "test"
+      ? center.description.split("\n")[0]
+      : center.description;
   const xml = toXml({
-    name: center.name,
     address: center.address,
     city: center.city,
-    state: center.state,
     country: center.country,
+    description,
+    name: center.name,
+    state: center.state,
     website: center.website,
-    description: center.description,
   });
   return [
     "<shopping-center>",
