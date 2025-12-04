@@ -38,12 +38,18 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
   return (
     <main className="flex flex-col gap-8">
       <section className="flex flex-col gap-4">
-        <h2 className="font-bold text-2xl">All Users</h2>
+        <h2 className="font-bold text-2xl">
+          All Users{" "}
+          <span className="text-gray-500">({loaderData.users.length})</span>
+        </h2>
         <AllUsers users={loaderData.users} />
       </section>
 
       <section className="flex flex-col gap-4">
-        <h2 className="font-bold text-2xl">Waiting List</h2>
+        <h2 className="font-bold text-2xl">
+          Waiting List{" "}
+          <span className="text-gray-500">({loaderData.waiting.length})</span>
+        </h2>
         <WaitingList waiting={loaderData.waiting} />
       </section>
     </main>

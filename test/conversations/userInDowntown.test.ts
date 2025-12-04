@@ -5,18 +5,19 @@ import prisma from "~/lib/prisma";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import runThroughScript from "../helpers/runThroughScript";
 
-const script = `Assistant:
-[ ] Welcomes the user
+const script = `
+  Assistant:
+  [ ] Welcomes the user
 
-User: I'm downtown
+  User: I'm downtown
 
-Assistant:
-[ ] Asks user to verify their location
+  Assistant:
+  [ ] Asks user to verify their location
 
-User: Yes, I'm in downtown Los Angeles
+  User: Yes, I'm in downtown Los Angeles
 
-Assistant:
-[ ] Recommends retail spaces in downtown Los Angeles or ask user about their product
+  Assistant:
+  [ ] Recommends retail spaces in downtown Los Angeles or ask user about their product
 `;
 
 const logger = debug("conversations");

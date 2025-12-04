@@ -4,23 +4,24 @@ import prisma from "~/lib/prisma";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import runThroughScript from "../helpers/runThroughScript";
 
-const script = `Assistant:
-[ ] Welcomes the user
+const script = `
+  Assistant:
+  [ ] Welcomes the user
 
-User: I'm by the airport
+  User: I'm by the airport
 
-Assistant:
-[ ] Ask user if they are by LAX
+  Assistant:
+  [ ] Ask user if they are by LAX
 
-User: the other airport
+  User: the other airport
 
-Assistant:
-[ ] Asks the user if they are or confirms the user is at Burbank airport
+  Assistant:
+  [ ] Asks the user if they are near Burbank Airport or confirms the user is near Burbank airport
 
-User: burbank
+  User: burbank
 
-Assistant:
-[ ] Recommends shopping centers near Burbank
+  Assistant:
+  [ ] Recommends shopping centers near Burbank or ask the user what product they're selling
   `;
 
 const logger = debug("conversations");
