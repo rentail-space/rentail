@@ -26,36 +26,39 @@ const script = `
 
 const logger = debug("conversations");
 
-describe.runIf(!process.env.CI)("User is not in Los Angeles area", async () => {
-  await runThroughScript({
-    headers: {
-      "x-vercel-ip-latitude": "34.04209",
-      "x-vercel-ip-longitude": "-118.25578",
-    },
-    script,
-  });
-
-  describe("user records", () => {
-    let workingMemory: ReturnType<typeof cleanParseWorkingMemory>;
-
-    beforeAll(async () => {
-      const user = await prisma.user.findFirstOrThrow();
-      workingMemory = cleanParseWorkingMemory(user?.workingMemory);
-      logger(workingMemory.location);
+describe.runIf(!!process.env.TEST_AI)(
+  "User is not in Los Angeles area",
+  async () => {
+    await runThroughScript({
+      headers: {
+        "x-vercel-ip-latitude": "34.04209",
+        "x-vercel-ip-longitude": "-118.25578",
+      },
+      script,
     });
 
-    it("should update working memory", async () => {
-      expect(workingMemory.location).toMatchObject({
-        city: /(Burbank|Los Angeles)/i,
-        state: "California",
-        country: /(United States|US)/i,
-        timeZone: "America/Los_Angeles",
+    describe("user records", () => {
+      let workingMemory: ReturnType<typeof cleanParseWorkingMemory>;
+
+      beforeAll(async () => {
+        const user = await prisma.user.findFirstOrThrow();
+        workingMemory = cleanParseWorkingMemory(user?.workingMemory);
+        logger(workingMemory.location);
+      });
+
+      it("should update working memory", async () => {
+        expect(workingMemory.location).toMatchObject({
+          city: /(Burbank|Los Angeles)/i,
+          state: "California",
+          country: /(United States|US)/i,
+          timeZone: "America/Los_Angeles",
+        });
+      });
+
+      it("should update user's geocode", async () => {
+        expect(workingMemory.location?.longitude).toBeCloseTo(-118.307201, 0);
+        expect(workingMemory.location?.latitude).toBeCloseTo(34.1812089, 0);
       });
     });
-
-    it("should update user's geocode", async () => {
-      expect(workingMemory.location?.longitude).toBeCloseTo(-118.307201, 0);
-      expect(workingMemory.location?.latitude).toBeCloseTo(34.1812089, 0);
-    });
-  });
-});
+  },
+);

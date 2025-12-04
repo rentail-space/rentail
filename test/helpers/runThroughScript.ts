@@ -84,11 +84,8 @@ export default async function runThroughScript({
 
   for (const [index, { content, role }] of messages.entries()) {
     if (!role.match(/Assistant/i)) continue;
-    it.skipIf(process.env.CI)(
-      `should respond to the user ${content}`,
-      async () =>
-        classifyAssistantResponse({ chatId, index, expecting: content }),
-    );
+    it(`should respond to the user ${content}`, () =>
+      classifyAssistantResponse({ chatId, index, expecting: content }));
   }
 }
 
