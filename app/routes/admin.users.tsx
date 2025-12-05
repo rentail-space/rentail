@@ -91,7 +91,7 @@ function AllUsers({ users }: { users: User[] }) {
           }),
         sortingFn: (rowA, rowB) =>
           rowA.original.createdAt.getTime() - rowB.original.createdAt.getTime(),
-        size: 120,
+        size: 110,
       },
     ],
     data: users,
