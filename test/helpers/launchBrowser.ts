@@ -18,7 +18,8 @@ let context: BrowserContext | undefined;
 const logger = debug("browser");
 
 /**
- * Open a new page in the browser.
+ * Open a new page in the browser. This function will reload the page to ensure
+ * that the page is fully loaded.
  *
  * @param path - The path to open.
  * @param headers - The headers to set on the page (optional).
@@ -28,11 +29,16 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const context = await newContext();
   const page = await context.newPage();
   await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
-  await page.goto(path, { timeout: 30_000, waitUntil: "load" });
-  // Wait for React to actually mount
+  await page.goto(path, { timeout: 10_000 });
+
+  // NOTE: We need to reload the page otherwise React doesn't handle the form
+  // submission correctly on Playwright.
+  await page.reload({ waitUntil: "load" });
   await page.waitForFunction(() => "__reactRouterContext" in window, {
-    timeout: 15000,
+    timeout: 15_000,
   });
+  await page.waitForTimeout(1_000);
+
   return page;
 }
 

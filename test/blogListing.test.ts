@@ -17,7 +17,6 @@ describe("Blog Listing", () => {
 
   beforeAll(async () => {
     page = await goto("/");
-
     blogSection = page.locator("section.blog-posts").first();
   });
 

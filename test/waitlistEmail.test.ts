@@ -9,11 +9,8 @@ describe("Waitlist", () => {
   let homePage: Page;
 
   beforeAll(async () => {
+    await prisma.waitlist.deleteMany();
     homePage = await goto("/");
-    await homePage.reload({ waitUntil: "load" });
-
-    let count = await prisma.waitlist.count();
-    expect(count, "Should have no emails in the waitlist").toBe(0);
 
     const emailInput = homePage.getByPlaceholder("your.email@example.com");
     await emailInput.scrollIntoViewIfNeeded();
@@ -21,6 +18,7 @@ describe("Waitlist", () => {
     await emailInput.pressSequentially("john.doe@example.com");
     await emailInput.press("Enter");
 
+    let count = await prisma.waitlist.count();
     while (count === 0) {
       await delay(100);
       count = await prisma.waitlist.count();
