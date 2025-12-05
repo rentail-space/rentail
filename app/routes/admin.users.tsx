@@ -1,13 +1,12 @@
 import {
-  type SortingState,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import type { User, Waitlist } from "prisma/generated/client";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Link, type LoaderFunctionArgs } from "react-router";
 import { Button } from "~/components/ui/button";
 import {
@@ -57,9 +56,6 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
 }
 
 function AllUsers({ users }: { users: User[] }) {
-  const [sorting, setSorting] = useState<SortingState>([
-    { id: "createdAt", desc: true },
-  ]);
   const table = useReactTable({
     columns: [
       {
@@ -78,7 +74,12 @@ function AllUsers({ users }: { users: User[] }) {
       { header: "Email", accessorKey: "email", size: 180 },
       { header: "User Agent", accessorKey: "userAgent", size: 180 },
       { header: "Referrer", accessorKey: "referrer", size: 180 },
-      { header: "IP", accessorKey: "ip", size: 90 },
+      {
+        header: "IP",
+        accessorKey: "ip",
+        size: 90,
+        sortingFn: "alphanumeric",
+      },
       {
         header: "Created",
         accessorKey: "createdAt",
@@ -88,14 +89,17 @@ function AllUsers({ users }: { users: User[] }) {
             month: "short",
             day: "numeric",
           }),
-        size: 90,
+        sortingFn: (rowA, rowB) =>
+          rowA.original.createdAt.getTime() - rowB.original.createdAt.getTime(),
+        size: 120,
       },
     ],
     data: users,
+    debugTable: true,
+    enableSortingRemoval: false,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    onSortingChange: setSorting,
-    state: { sorting },
+    initialState: { sorting: [{ id: "createdAt", desc: true }] },
   });
 
   return (
@@ -106,6 +110,7 @@ function AllUsers({ users }: { users: User[] }) {
             {group.headers.map((header) => (
               <TableHead key={header.id}>
                 <Button
+                  className="flex w-full justify-between"
                   onClick={header.column.getToggleSortingHandler()}
                   variant="ghost"
                 >
@@ -113,7 +118,13 @@ function AllUsers({ users }: { users: User[] }) {
                     header.column.columnDef.header,
                     header.getContext(),
                   )}
-                  <ArrowUpDown />
+                  {header.column.getIsSorted() === "desc" ? (
+                    <ArrowUp />
+                  ) : header.column.getIsSorted() === "asc" ? (
+                    <ArrowDown />
+                  ) : (
+                    <>&nbsp;</>
+                  )}
                 </Button>
               </TableHead>
             ))}
@@ -147,15 +158,14 @@ function AllUsers({ users }: { users: User[] }) {
 }
 
 function WaitingList({ waiting }: { waiting: Waitlist[] }) {
-  const [sorting, setSorting] = useState<SortingState>([
-    { id: "createdAt", desc: true },
-  ]);
   const table = useReactTable({
     columns: [
-      { header: "Email", accessorKey: "email", size: 500 },
+      { header: "Email", accessorKey: "email" },
       {
         header: "Created",
         accessorKey: "createdAt",
+        sortingFn: (rowA, rowB) =>
+          rowA.original.createdAt.getTime() - rowB.original.createdAt.getTime(),
         accessorFn: (row) =>
           row.createdAt.toLocaleDateString(undefined, {
             year: "numeric",
@@ -164,14 +174,14 @@ function WaitingList({ waiting }: { waiting: Waitlist[] }) {
             hour: "2-digit",
             minute: "2-digit",
           }),
-        size: 80,
+        size: 140,
       },
     ],
     data: waiting,
+    enableSortingRemoval: false,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    onSortingChange: setSorting,
-    state: { sorting },
+    initialState: { sorting: [{ id: "createdAt", desc: true }] },
   });
   return (
     <Table>
@@ -181,6 +191,7 @@ function WaitingList({ waiting }: { waiting: Waitlist[] }) {
             {group.headers.map((header) => (
               <TableHead key={header.id}>
                 <Button
+                  className="flex w-full justify-between"
                   onClick={header.column.getToggleSortingHandler()}
                   variant="ghost"
                 >
@@ -188,7 +199,13 @@ function WaitingList({ waiting }: { waiting: Waitlist[] }) {
                     header.column.columnDef.header,
                     header.getContext(),
                   )}
-                  <ArrowUpDown />
+                  {header.column.getIsSorted() === "desc" ? (
+                    <ArrowUp />
+                  ) : header.column.getIsSorted() === "asc" ? (
+                    <ArrowDown />
+                  ) : (
+                    <>&nbsp;</>
+                  )}
                 </Button>
               </TableHead>
             ))}
