@@ -37,7 +37,7 @@ function JoinWaitlist() {
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-4">
-      <form onSubmit={onSubmit} className="flex w-full flex-col gap-4">
+      <form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
         {fetcher.data?.error ? (
           <Alert variant="destructive">
             <AlertTitle>Something went wrong. Please try again.</AlertTitle>

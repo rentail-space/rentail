@@ -13,7 +13,7 @@ describe("Home page", () => {
     await expect(page.locator("main")).toMatchInnerHTML();
   });
 
-  it.skipIf(process.env.CI)("should match visual regression test", async () => {
+  it("should match visual regression test", async () => {
     await expect(page.locator("main")).toMatchScreenshot();
   });
 

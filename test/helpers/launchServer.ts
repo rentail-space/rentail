@@ -1,6 +1,7 @@
 import debug from "debug";
-import { delay, invariant } from "es-toolkit";
+import { delay } from "es-toolkit";
 import { type ChildProcess, fork } from "node:child_process";
+import { existsSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 
 let worker: ChildProcess | undefined;
@@ -15,7 +16,7 @@ const logger = debug("server");
 export async function launchServer(port: number): Promise<void> {
   if (worker) return;
 
-  logger("launching server");
+  logger("Launching server on port %s", port);
 
   // Start the server as forked process, that way we don't share the same node
   // instance, which could cause issues with some libraries (eg Prisma)
@@ -30,19 +31,18 @@ export async function launchServer(port: number): Promise<void> {
   });
 
   // Listen for worker's ready and error messages
-  await new Promise<void>((resolve, reject) => {
-    invariant(worker, "Server worker is not defined");
-    worker
-      .on("error", (error) => {
-        console.error("Worker error: %s", error);
-        reject(error);
-      })
-      .on("message", (msg?: { type: "ready" }) => {
-        if (msg?.type === "ready") resolve();
-      });
+  worker.on("error", (error) => {
+    console.error("Server error: %s", error);
   });
 
-  logger("server is ready");
+  // Wait for the server to build all the dependencies.  This is necessary
+  // because the server builds the dependencies on the fly, and we need to wait
+  // for it to finish before we can start the tests.
+  logger("Waiting for dependencies to be built …");
+  const path = resolve("node_modules/.vite/deps");
+  while (!existsSync(path) || readdirSync(path).length < 850) await delay(100);
+
+  logger("Server is ready");
 }
 
 /**

@@ -14,5 +14,5 @@ export async function action({ request }: Route.ActionArgs) {
   });
 
   await sendWaitlistEmail({ email });
-  return { success: true };
+  return { success: "Email added to waitlist" };
 }

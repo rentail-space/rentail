@@ -137,7 +137,7 @@ describe("Anonymous visits chat page", () => {
         });
       });
 
-      it.skipIf(process.env.CI)("should match screenshot", async () => {
+      it("should match screenshot", async () => {
         await expect(page.locator("main")).toMatchScreenshot({
           name: "sign-in-page",
         });
@@ -192,7 +192,7 @@ describe("Anonymous visits chat page", () => {
           });
         });
 
-        it.skipIf(process.env.CI)("should match screenshot", async () => {
+        it("should match screenshot", async () => {
           await expect(page.locator("main")).toMatchScreenshot({
             name: "sign-up-page",
           });
@@ -294,7 +294,7 @@ describe("Anonymous visits chat page", () => {
               });
             });
 
-            it.skipIf(process.env.CI)("should match screenshot", async () => {
+            it("should match screenshot", async () => {
               await expect(emailPage.locator("body")).toMatchScreenshot({
                 name: "welcome-email",
               });

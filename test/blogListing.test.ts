@@ -77,7 +77,7 @@ describe("Blog Listing", () => {
     await expect(blogSection).toMatchInnerHTML();
   });
 
-  it.skipIf(process.env.CI)("should match visual regression test", async () => {
+  it("should match visual regression test", async () => {
     await expect(blogSection).toMatchScreenshot();
   });
 

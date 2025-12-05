@@ -1,3 +1,4 @@
+import { delay } from "es-toolkit";
 import { type Page, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import { type LastEmail, getLastEmailSent } from "~/emails/sendEmails";
@@ -9,6 +10,7 @@ describe("Waitlist", () => {
 
   beforeAll(async () => {
     homePage = await goto("/");
+    await homePage.reload({ waitUntil: "load" });
 
     let count = await prisma.waitlist.count();
     expect(count, "Should have no emails in the waitlist").toBe(0);
@@ -20,7 +22,7 @@ describe("Waitlist", () => {
     await emailInput.press("Enter");
 
     while (count === 0) {
-      await homePage.waitForTimeout(100);
+      await delay(100);
       count = await prisma.waitlist.count();
     }
   });
@@ -68,7 +70,7 @@ describe("Waitlist", () => {
       });
     });
 
-    it.skipIf(process.env.CI)("should match screenshot", async () => {
+    it("should match screenshot", async () => {
       await expect(emailPage.locator("body")).toMatchScreenshot({
         name: "waitlist-email",
       });
