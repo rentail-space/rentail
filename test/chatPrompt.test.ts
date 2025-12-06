@@ -34,30 +34,13 @@ describe("prompt()", () => {
   it("includes current date and time", () => {
     // Extract date from prompt (format: YYYY-MM-DD)
     const dateMatch = /date is (\d{4}-\d{2}-\d{2})/.exec(prompt);
-    expect(dateMatch).toBeTruthy();
-    if (!dateMatch) throw new Error("Date match not found");
-
-    // Verify date format is valid and is today's date (UTC)
-    const [year, month, day] = dateMatch[1].split("-").map(Number);
-
-    const today = new Date();
-    expect(year).approximately(today.getFullYear(), 1);
-    expect(month).approximately(today.getUTCMonth() + 1, 1);
-    expect(day).approximately(today.getUTCDate(), 1);
+    expect(dateMatch?.[1]).toEqual("2026-01-15");
   });
 
   it("includes current time", () => {
     // Extract time from prompt (format: HH:MM:SS)
     const timeMatch = /time is (\d{2}:\d{2}:\d{2})/.exec(prompt);
-    expect(timeMatch).toBeTruthy();
-    if (!timeMatch) throw new Error("Time match not found");
-
-    // Verify time format is valid
-    const [hours, minutes, seconds] = timeMatch[1].split(":").map(Number);
-    const now = new Date();
-    expect(hours).approximately(now.getUTCHours(), 1);
-    expect(minutes).approximately(now.getUTCMinutes(), 1);
-    expect(seconds).approximately(now.getUTCSeconds(), 1);
+    expect(timeMatch?.[1]).toEqual("12:00:00");
   });
 
   it("includes user profile schema", () => {

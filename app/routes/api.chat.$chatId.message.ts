@@ -8,7 +8,7 @@ import type { InputJsonValue } from "prisma/generated/internal/prismaNamespace";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { ulid } from "ulid";
 import env from "~/lib/env";
-import { conversationalModel } from "~/lib/model";
+import { conversational } from "~/lib/model";
 import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
@@ -78,13 +78,13 @@ export async function action({ request, params }: Route.ActionArgs) {
 
   const stream = streamText({
     abortSignal,
-    model: conversationalModel,
     messages: convertToModelMessages(messages),
     system: await preparePrompt({
       headers: request.headers,
       prompt: chatPrompt,
       user,
     }),
+    ...conversational,
 
     onAbort: async () => {
       logger("Aborted %s by user", chat.id);

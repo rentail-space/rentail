@@ -5,7 +5,7 @@ import type { User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import { beforeAll, it } from "vitest";
 import zod from "zod";
-import { classifyModel } from "~/lib/model";
+import { classify } from "~/lib/model";
 import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
 import updateWorkingMemory from "~/lib/workingMemory";
@@ -104,14 +104,8 @@ async function generateAssistantResponse({
 
   const response = await generateText({
     messages: convertToModelMessages(await recentMessages(chatId)),
-    model: classifyModel,
     system: prompt,
-    providerOptions: {
-      anthropic: {
-        cacheControl: { type: "ephemeral", ttl: "1h" },
-        temperature: 0.0,
-      },
-    },
+    ...classify,
   });
   await addMessage({ chatId, role: "assistant", content: response.text });
   await prisma.user.update({
@@ -137,7 +131,6 @@ async function classifyAssistantResponse({
   const messages = (await recentMessages(chatId)).slice(0, index + 1);
   const classified = await generateObject({
     messages: convertToModelMessages(messages),
-    model: classifyModel,
     system: `
   This is a sequence of messages between a user and an assistant.
   The first message is a welcome message from the assistant.
@@ -157,12 +150,6 @@ async function classifyAssistantResponse({
   If any rule applies, return "yes".
   If any rule does not apply, return "no".
   `,
-    providerOptions: {
-      anthropic: {
-        cacheControl: { type: "ephemeral", ttl: "1h" },
-        temperature: 0.0,
-      },
-    },
     schema: zod.object({
       questions: zod.array(
         zod.object({
@@ -171,6 +158,7 @@ async function classifyAssistantResponse({
         }),
       ),
     }),
+    ...classify,
   });
 
   logger(
@@ -184,7 +172,10 @@ async function classifyAssistantResponse({
             .trim()}`,
       )
       .join("\n"),
-    expecting.trim(),
+    expecting
+      .split("\n")
+      .map((line) => line.trim())
+      .join("\n"),
     classified.object.questions
       .map(({ question, answer }) => `Q: ${question} => ${answer}`)
       .join("\n"),

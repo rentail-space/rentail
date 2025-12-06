@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 import type { UserGetPayload } from "prisma/generated/models";
 import zod from "zod";
 import sendDailyAlertEmail from "~/emails/EmailDailyAlert";
-import { classifyModel } from "~/lib/model";
+import { classify } from "~/lib/model";
 import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
 import dailyAlertPrompt from "~/prompts/dailyAlertPrompt.md?raw";
@@ -66,15 +66,9 @@ async function findAlert(
 
   const response = await generateObject({
     messages: convertToModelMessages(messages),
-    model: classifyModel,
     system: system,
-    providerOptions: {
-      anthropic: {
-        cacheControl: { type: "ephemeral", ttl: "1h" },
-        temperature: 0.0,
-      },
-    },
     schema: Alert,
+    ...classify,
   });
   return response.object;
 }

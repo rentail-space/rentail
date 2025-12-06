@@ -9,7 +9,7 @@ import type { Tool, ToolChoice } from "ai";
 import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import { ulid } from "ulid";
-import { conversationalModel } from "~/lib/model";
+import { conversational } from "~/lib/model";
 
 const logger = debug("msw");
 
@@ -179,7 +179,7 @@ function createMessageStartEvent(): string {
       type: "message",
       role: "assistant",
       content: [],
-      model: conversationalModel.modelId,
+      model: conversational.model.modelId,
       stop_reason: null,
       stop_sequence: null,
       usage: { input_tokens: 0, output_tokens: 0 },

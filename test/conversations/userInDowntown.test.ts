@@ -21,7 +21,7 @@ const script = `
 
 const logger = debug("conversations");
 
-describe.runIf(!!process.env.TEST_AI)(
+describe.skipIf(!!process.env.CI)(
   "User is not in Los Angeles area",
   async () => {
     await runThroughScript({

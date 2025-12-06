@@ -14,14 +14,16 @@ __screenshots__/*.diff.png
 __screenshots__/*.new.png
 __screenshots__/*.new.html
 __screenshots__/*.html.diff
-# Ignore since we're using pnpm
-package-lock.json
+
 # Need to re-generate on the server
 prisma/generated
+
 # All local files or directories (eg ./.claude/settings.local.json, /.vercel/.env.production.local) 
 */*.local.*
 */*.local
+
 # Server log used when running tests
 server.log
+
 # Used by scripts/clone.sh to clone the production database to the local development database
 prisma/backup.sql
