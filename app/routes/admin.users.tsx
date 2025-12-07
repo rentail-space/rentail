@@ -4,6 +4,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { JWT } from "google-auth-library";
+import { google } from "googleapis";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import type { User, Waitlist } from "prisma/generated/client";
 import { Fragment } from "react";
@@ -17,6 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/sessions.server";
 import deviceDetection from "../lib/deviceDetection";
@@ -31,12 +34,18 @@ export async function loader({ request }: LoaderFunctionArgs) {
   });
 
   const waiting = await prisma.waitlist.findMany();
-  return { users, waiting };
+  const analytics = await getGoogleAnalyticsViewCount();
+  return { users, waiting, analytics };
 }
 
 export default function UsersPage({ loaderData }: Route.ComponentProps) {
   return (
     <main className="flex flex-col gap-8">
+      <section className="flex flex-col gap-4">
+        <h2 className="font-bold text-2xl">Analytics</h2>
+        <Analytics analytics={loaderData.analytics} />
+      </section>
+
       <section className="flex flex-col gap-4">
         <h2 className="font-bold text-2xl">
           All Users{" "}
@@ -53,6 +62,29 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
         <WaitingList waiting={loaderData.waiting} />
       </section>
     </main>
+  );
+}
+
+function Analytics({
+  analytics,
+}: {
+  analytics: { activeUsers: string; screenPageViews: string };
+}) {
+  return (
+    <div className="stats w-72">
+      <div className="stat place-items-center">
+        <div className="stat-title">Active Users</div>
+        <div className="stat-value">
+          {Number(analytics.activeUsers).toLocaleString()}
+        </div>
+      </div>
+      <div className="stat place-items-center">
+        <div className="stat-title">Screen Page Views</div>
+        <div className="stat-value">
+          {Number(analytics.screenPageViews).toLocaleString()}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -231,4 +263,40 @@ function WaitingList({ waiting }: { waiting: Waitlist[] }) {
       </TableBody>
     </Table>
   );
+}
+async function getGoogleAnalyticsViewCount(): Promise<{
+  activeUsers: string;
+  screenPageViews: string;
+}> {
+  const auth = new JWT({
+    scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
+    email: "analytics@rentail-480516.iam.gserviceaccount.com",
+    key: env.GOOGLE_ANALYTICS_PRIVATE_KEY,
+  });
+  const analyticsData = google.analyticsdata({ version: "v1beta", auth });
+  const propertyId = "properties/496833933";
+
+  try {
+    const response = await analyticsData.properties.runReport({
+      property: propertyId,
+      requestBody: {
+        dateRanges: [
+          {
+            startDate: "30daysAgo",
+            endDate: "today",
+          },
+        ],
+        metrics: [{ name: "activeUsers" }, { name: "screenPageViews" }],
+      },
+    });
+    const activeUsers =
+      response.data.rows?.[0].metricValues?.[0]?.value ?? "N/A";
+    const screenPageViews =
+      response.data.rows?.[0].metricValues?.[1]?.value ?? "N/A";
+    return { activeUsers, screenPageViews };
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("Failed to fetch GA view count", error);
+    return { activeUsers: "N/A", screenPageViews: "N/A" };
+  }
 }

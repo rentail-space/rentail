@@ -24,6 +24,11 @@ export default {
   MAPBOX_TOKEN: env.get("MAPBOX_TOKEN").required(false).asString(),
   RESEND_API_KEY: env.get("RESEND_API_KEY").required(true).asString(),
 
+  GOOGLE_ANALYTICS_PRIVATE_KEY: env
+    .get("GOOGLE_ANALYTICS_PRIVATE_KEY")
+    .required()
+    .asString(),
+
   REDIS_URL: env
     .get("REDIS_URL")
     .default("redis://localhost:6379")

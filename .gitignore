@@ -1,6 +1,7 @@
 .DS_Store
 .vercel
 /node_modules/
+google-rentail.json
 
 # React Router
 .env
