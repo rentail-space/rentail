@@ -98,7 +98,7 @@ jobs:
         run: pnpm react-router typegen
 
       - name: Check types
-        run: pnpm typecheck
+        run: pnpm tsc --noEmit --strict
 
       - name: Run Tests
         run: |
