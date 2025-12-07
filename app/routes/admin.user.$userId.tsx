@@ -81,6 +81,11 @@ export default function UserPage({
 function UserInfoCard({ user }: { user: User }) {
   const workingMemory = cleanParseWorkingMemory(user.workingMemory);
   const timeZone = workingMemory.location?.timeZone ?? "UTC";
+  const utm = JSON.parse(user.utm as string);
+  delete utm.ip;
+  delete utm.userAgent;
+  delete utm.referer;
+
   return (
     <details className="collapse border border-gray-200" open>
       <summary className="collapse-title font-semibold">
@@ -136,9 +141,16 @@ function UserInfoCard({ user }: { user: User }) {
           <tr>
             <th className="align-top">UTM</th>
             <td className="align-top" title={user.utm as string}>
-              <pre className="m-0! bg-background p-0 text-primary">
-                {JSON.stringify(JSON.parse(user.utm as string), null, 2)}
-              </pre>
+              <table className="m-0! text-md">
+                <tbody>
+                  {Object.entries(utm).map(([key, value]) => (
+                    <tr key={key}>
+                      <td className="font-semibold">{key}:</td>
+                      <td className="align-top">{value as string}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </td>
           </tr>
           <tr>
