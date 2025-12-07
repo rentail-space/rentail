@@ -7,6 +7,7 @@ import {
 import { JWT } from "google-auth-library";
 import { google } from "googleapis";
 import { ArrowDown, ArrowUp } from "lucide-react";
+import { DateTime } from "luxon";
 import type { User, Waitlist } from "prisma/generated/client";
 import { Fragment } from "react";
 import { Link, type LoaderFunctionArgs } from "react-router";
@@ -43,7 +44,7 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
     <main className="flex flex-col gap-8">
       <section className="flex flex-col gap-4">
         <h2 className="font-bold text-2xl">Analytics</h2>
-        <Analytics analytics={loaderData.analytics} />
+        <Analytics analytics={loaderData.analytics} users={loaderData.users} />
       </section>
 
       <section className="flex flex-col gap-4">
@@ -67,22 +68,37 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
 
 function Analytics({
   analytics,
+  users,
 }: {
   analytics: { activeUsers: string; screenPageViews: string };
+  users: User[];
 }) {
+  const daysAgo = DateTime.now().minus({ days: 30 }).toJSDate();
+  const recent = users.filter(
+    (user) => user.createdAt.getTime() > daysAgo.getTime(),
+  );
+  const activeUsers = Number(analytics.activeUsers);
+  const screenPageViews = Number(analytics.screenPageViews);
+  const conversion = recent.length / activeUsers;
+
   return (
-    <div className="stats w-72">
-      <div className="stat place-items-center">
-        <div className="stat-title">Active Users</div>
-        <div className="stat-value">
-          {Number(analytics.activeUsers).toLocaleString()}
-        </div>
-      </div>
+    <div className="stats mx-auto max-w-xl">
       <div className="stat place-items-center">
         <div className="stat-title">Screen Page Views</div>
-        <div className="stat-value">
-          {Number(analytics.screenPageViews).toLocaleString()}
+        <div className="stat-value">{screenPageViews.toLocaleString()}</div>
+        <div className="stat-desc">&nbsp;</div>
+      </div>
+      <div className="stat place-items-center">
+        <div className="stat-title">Active Users</div>
+        <div className="stat-value">{activeUsers.toLocaleString()}</div>
+        <div className="stat-desc">Last 30 days</div>
+      </div>
+      <div className="stat place-items-center">
+        <div className="stat-title">Conversion</div>
+        <div className="stat-value flex items-center gap-2">
+          {(conversion * 100).toFixed(2)}%
         </div>
+        <div className="stat-desc">{recent.length} new users</div>
       </div>
     </div>
   );
