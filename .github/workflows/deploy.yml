@@ -99,6 +99,8 @@ jobs:
 
       - name: Check types
         run: pnpm tsc --noEmit --strict
+        env:
+          NODE_OPTIONS: "--max-old-space-size=3072"
 
       - name: Run Tests
         run: |
