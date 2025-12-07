@@ -19,6 +19,7 @@ import {
 } from "~/components/ui/table";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/sessions.server";
+import deviceDetection from "../lib/deviceDetection";
 import type { Route } from "./+types/admin.users";
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -69,15 +70,18 @@ function AllUsers({ users }: { users: User[] }) {
             {row.original.name || row.original.id}
           </Link>
         ),
-        size: 180,
+        size: 280,
       },
-      { header: "Email", accessorKey: "email", size: 180 },
-      { header: "User Agent", accessorKey: "userAgent", size: 180 },
-      { header: "Referrer", accessorKey: "referrer", size: 180 },
+      {
+        header: "Device",
+        accessorFn: (row) => deviceDetection(row.userAgent),
+        size: 120,
+      },
+      { header: "Referrer", accessorKey: "referrer", size: 300 },
       {
         header: "IP",
         accessorKey: "ip",
-        size: 90,
+        size: 120,
         sortingFn: "alphanumeric",
       },
       {

@@ -5,6 +5,7 @@ import {
   CircleCheck,
   NotepadTextIcon,
 } from "lucide-react";
+import { DateTime } from "luxon";
 import type { User } from "prisma/generated/client";
 import type { ChatGetPayload } from "prisma/generated/models";
 import { Link, useFetcher } from "react-router";
@@ -15,6 +16,7 @@ import { Textarea } from "~/components/ui/textarea";
 import prisma from "~/lib/prisma";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import { verifyAdmin } from "~/sessions.server";
+import deviceDetection from "../lib/deviceDetection";
 import type { Route } from "./+types/admin.user.$userId";
 import Messages from "./chat/Messages";
 
@@ -77,6 +79,8 @@ export default function UserPage({
 }
 
 function UserInfoCard({ user }: { user: User }) {
+  const workingMemory = cleanParseWorkingMemory(user.workingMemory);
+  const timeZone = workingMemory.location?.timeZone ?? "UTC";
   return (
     <details className="collapse border border-gray-200" open>
       <summary className="collapse-title font-semibold">
@@ -120,9 +124,9 @@ function UserInfoCard({ user }: { user: User }) {
             </td>
           </tr>
           <tr>
-            <th className="align-middle">Is Mobile</th>
-            <td className="truncate align-middle">
-              {user.isMobile ? "Yes" : "No"}
+            <th className="align-middle">Device</th>
+            <td className="truncate align-middle" title={user.userAgent ?? ""}>
+              {deviceDetection(user.userAgent)}
             </td>
           </tr>
           <tr>
@@ -140,11 +144,9 @@ function UserInfoCard({ user }: { user: User }) {
           <tr>
             <th className="align-middle">Created</th>
             <td className="whitespace-nowrap align-middle">
-              {user.createdAt.toLocaleDateString(undefined, {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
+              {DateTime.fromJSDate(user.createdAt)
+                .setZone(timeZone)
+                .toLocaleString(DateTime.DATETIME_FULL)}
             </td>
           </tr>
         </tbody>
