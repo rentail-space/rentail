@@ -26,7 +26,7 @@ export default {
 
   GOOGLE_ANALYTICS_PRIVATE_KEY: env
     .get("GOOGLE_ANALYTICS_PRIVATE_KEY")
-    .required()
+    .required(false)
     .asString(),
 
   REDIS_URL: env
