@@ -108,6 +108,7 @@ jobs:
           pnpm vitest run --reporter verbose
         env:
           DEBUG: "browser,chat,server,test"
+          NODE_OPTIONS: "--max-old-space-size=3072"
 
       - name: Upload Playwright Test Results
         uses: actions/upload-artifact@v4
