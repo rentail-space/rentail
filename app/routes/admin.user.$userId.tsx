@@ -81,15 +81,12 @@ export default function UserPage({
 function UserInfoCard({ user }: { user: User }) {
   const workingMemory = cleanParseWorkingMemory(user.workingMemory);
   const timeZone = workingMemory.location?.timeZone ?? "UTC";
-  const utm = JSON.parse(user.utm as string);
-  delete utm.ip;
-  delete utm.userAgent;
-  delete utm.referer;
+  const utm = user.utm ? JSON.parse(user.utm as string) : undefined;
 
   return (
     <details className="collapse border border-gray-200" open>
       <summary className="collapse-title font-semibold">
-        {user.name || `Anonymous ${user.id}`}
+        {user.name || user.id}
       </summary>
       <table className="table-bordered collapse-content table">
         <tbody>
@@ -107,12 +104,14 @@ function UserInfoCard({ user }: { user: User }) {
               {user.userAgent}
             </td>
           </tr>
-          <tr>
-            <th className="align-middle">Referrer</th>
-            <td className="truncate align-middle" title={user.referrer ?? ""}>
-              {user.referrer}
-            </td>
-          </tr>
+          {user.referrer && (
+            <tr>
+              <th className="align-middle">Referrer</th>
+              <td className="truncate align-middle" title={user.referrer ?? ""}>
+                {user.referrer}
+              </td>
+            </tr>
+          )}
           <tr>
             <th className="align-middle">IP</th>
             <td className="truncate align-middle" title={user.ip ?? ""}>
@@ -134,25 +133,28 @@ function UserInfoCard({ user }: { user: User }) {
               {deviceDetection(user.userAgent)}
             </td>
           </tr>
-          <tr>
-            <th className="align-middle">Viewport</th>
-            <td className="truncate align-middle">{user.viewport as string}</td>
-          </tr>
-          <tr>
-            <th className="align-top">UTM</th>
-            <td className="align-top" title={user.utm as string}>
-              <table className="m-0! text-md">
-                <tbody>
-                  {Object.entries(utm).map(([key, value]) => (
-                    <tr key={key}>
-                      <td className="font-semibold">{key}:</td>
-                      <td className="align-top">{value as string}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </td>
-          </tr>
+          {user.viewport && (
+            <tr>
+              <th className="align-middle">Viewport</th>
+              <td className="truncate align-middle">
+                {user.viewport as string}
+              </td>
+            </tr>
+          )}
+          {utm &&
+            Object.entries<string>(utm)
+              .filter(
+                ([key]) =>
+                  key !== "ip" && key !== "userAgent" && key !== "referer",
+              )
+              .map(([key, value]) => (
+                <tr key={key}>
+                  <th className="whitespace-nowrap align-middle">UTM {key}</th>
+                  <td className="truncate align-middle" title={value}>
+                    {value}
+                  </td>
+                </tr>
+              ))}
           <tr>
             <th className="align-middle">Created</th>
             <td className="whitespace-nowrap align-middle">
