@@ -15,6 +15,7 @@ jobs:
       DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
       DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
       DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
+      NODE_OPTIONS: "--max-old-space-size=3072"
       REDIS_URL: "redis://localhost:6379"
       RESEND_API_KEY: "re_1234567890"
 
@@ -99,8 +100,6 @@ jobs:
 
       - name: Check types
         run: pnpm tsc --noEmit --strict
-        env:
-          NODE_OPTIONS: "--max-old-space-size=3072"
 
       - name: Run Tests
         run: |
@@ -108,7 +107,6 @@ jobs:
           pnpm vitest run --reporter verbose
         env:
           DEBUG: "browser,chat,server,test"
-          NODE_OPTIONS: "--max-old-space-size=3072"
 
       - name: Upload Playwright Test Results
         uses: actions/upload-artifact@v4
