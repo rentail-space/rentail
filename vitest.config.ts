@@ -6,6 +6,17 @@ process.env.NODE_ENV = "test";
 
 export default defineConfig({
   plugins: [tsconfigPaths()],
+  esbuild: {
+    // Reduce memory usage for esbuild transformations
+    logLevel: "error",
+  },
+  optimizeDeps: {
+    // Reduce memory pressure during dependency optimization
+    esbuildOptions: {
+      // Target modern browsers to reduce transform work
+      target: "es2022",
+    },
+  },
   test: {
     bail: process.env.CI ? 10 : 5,
     browser: { screenshotDirectory: "__screenshots__" },
@@ -13,6 +24,7 @@ export default defineConfig({
     fileParallelism: false,
     globals: false,
     hideSkippedTests: false,
+    maxConcurrency: 1, // Run tests sequentially to reduce memory pressure
     hookTimeout: 30_000, // 30 seconds for beforeAll/afterAll (server + browser startup)
     include: ["test/**/*.test.{ts,tsx}"],
     isolate: true, // NOTE: isolation required for test safety
