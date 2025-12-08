@@ -14,8 +14,6 @@ export default defineConfig({
     logLevel: "error",
   },
   optimizeDeps: {
-    // Disable dependency optimization in CI to avoid esbuild crashes
-    disabled: Boolean(process.env.CI),
     // Reduce memory pressure during dependency optimization
     esbuildOptions: {
       // Target modern browsers to reduce transform work
@@ -23,7 +21,7 @@ export default defineConfig({
     },
   },
   test: {
-    bail: process.env.CI ? 10 : 5,
+    bail: 3, // Stop after 3 failing tests
     browser: { screenshotDirectory: "__screenshots__" },
     exclude: ["build", "node_modules"],
     fileParallelism: false,

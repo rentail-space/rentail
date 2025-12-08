@@ -32,23 +32,12 @@ async function startServer() {
       logLevel: "warn", // Reduced log level to avoid noise
       root: process.cwd(),
       optimizeDeps: {
-        disabled: Boolean(process.env.CI), // Disable dependency optimization in CI to avoid esbuild crashes
-        esbuildOptions: {
-          target: "es2022", // Target modern browsers to reduce transform work
-        },
-        // Force pre-bundling on startup
-        include: [
-          "react",
-          "react-dom",
-          "react-router",
-          "@ai-sdk/react",
-          "lucide-react",
-          "tailwindcss",
-          "use-stick-to-bottom",
-          "nuqs",
-          "daisyui",
-        ],
-        noDiscovery: false, // Disable lazy optimization during tests
+        // Experimental optimizeDeps.disabled and deps pre-bundling during build
+        // were removed in Vite 5.1. To disable the deps optimizer, set
+        // optimizeDeps.noDiscovery to true and optimizeDeps.include as
+        // undefined or empty
+        noDiscovery: true,
+        include: undefined,
       },
       server: {
         fs: { allow: ["."] }, // Don't re-optimize already bundled deps
