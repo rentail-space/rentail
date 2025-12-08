@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-table";
 import { JWT } from "google-auth-library";
 import { google } from "googleapis";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUp } from "lucide-react";
 import { DateTime } from "luxon";
 import type { User, Waitlist } from "prisma/generated/client";
 import { Fragment } from "react";
@@ -73,33 +73,54 @@ function Analytics({
   analytics: { activeUsers: string; screenPageViews: string };
   users: User[];
 }) {
+  const screenPageViews = Number(analytics.screenPageViews);
+  const activeUsers = Number(analytics.activeUsers);
   const withoutAdmin = users.filter((user) => !user.isAdmin);
   const daysAgo = DateTime.now().minus({ days: 30 }).toJSDate();
   const recentlyUpdated = withoutAdmin.filter(
     (user) => user.updatedAt.getTime() > daysAgo.getTime(),
   );
-  const activeUsers = Number(analytics.activeUsers);
-  const screenPageViews = Number(analytics.screenPageViews);
-  const conversion = recentlyUpdated.length / activeUsers;
+  const signedUp = withoutAdmin.filter((user) => user.passwordHash !== null);
 
   return (
-    <div className="stats mx-auto max-w-xl">
+    <div className="stats mx-auto">
       <div className="stat place-items-center">
-        <div className="stat-title">Screen Page Views</div>
+        <div className="stat-title">Page Views</div>
         <div className="stat-value">{screenPageViews.toLocaleString()}</div>
         <div className="stat-desc">&nbsp;</div>
+      </div>
+      <div className="py-10">
+        <ArrowRight className="h-8 w-8 text-gray-500" />
       </div>
       <div className="stat place-items-center">
         <div className="stat-title">Active Users</div>
         <div className="stat-value">{activeUsers.toLocaleString()}</div>
         <div className="stat-desc">Last 30 days</div>
       </div>
+      <div className="py-10">
+        <ArrowRight className="h-8 w-8 text-gray-500" />
+      </div>
       <div className="stat place-items-center">
-        <div className="stat-title">Conversion</div>
+        <div className="stat-title">Conversations</div>
         <div className="stat-value flex items-center gap-2">
-          {(conversion * 100).toFixed(2)}%
+          {recentlyUpdated.length.toLocaleString()}
         </div>
-        <div className="stat-desc">{recentlyUpdated.length} new users</div>
+        <div className="stat-desc">
+          {((recentlyUpdated.length / activeUsers) * 100).toFixed(2)}% of active
+        </div>
+      </div>
+      <div className="py-10">
+        <ArrowRight className="h-8 w-8 text-gray-500" />
+      </div>
+      <div className="stat place-items-center">
+        <div className="stat-title">Signed Up</div>
+        <div className="stat-value flex items-center gap-2">
+          {signedUp.length.toLocaleString()}
+        </div>
+        <div className="stat-desc">
+          {((signedUp.length / recentlyUpdated.length) * 100).toFixed(2)}% of
+          chats
+        </div>
       </div>
     </div>
   );
