@@ -104,6 +104,7 @@ model User {
   id               String    @map("id")                 @id
   image            String?   @map("image")
   ip               String?   @map("ip")
+  isAdmin          Boolean   @map("is_admin")           @default(false)
   isAnonymous      Boolean   @map("is_anonymous")       @default(false)
   isBot            Boolean   @map("is_bot")             @default(false)
   isMobile         Boolean   @map("is_mobile")          @default(false)

@@ -1,11 +1,11 @@
 import { last } from "es-toolkit";
 import {
+  data,
   type HeadersFunction,
+  isRouteErrorResponse,
   type LinksFunction,
   Outlet,
   type UIMatch,
-  data,
-  isRouteErrorResponse,
   useRouteError,
 } from "react-router";
 import { WaveLoading } from "respinner";
@@ -27,7 +27,6 @@ export async function loader({ request }: Route.LoaderArgs) {
     "chat" in found
       ? {
           chat: found.chat,
-          isAdmin: found.isAdmin,
           messages: found.messages,
           user: found.user,
         }

@@ -1,4 +1,5 @@
 import { ShieldIcon, UnlockIcon, UserIcon } from "lucide-react";
+import type { User } from "prisma/generated/client";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouteLoaderData } from "react-router";
 import type { loader as rootLoader } from "~/root";
@@ -31,7 +32,7 @@ export default function AccountMenu({ className }: { className?: string }) {
   return (
     <div className={className}>
       {user && !user.isAnonymous ? (
-        <DropdownMenu user={user} isAdmin={data.isAdmin} />
+        <DropdownMenu user={user} />
       ) : (
         <SignInButton />
       )}
@@ -51,16 +52,7 @@ function SignInButton() {
   );
 }
 
-function DropdownMenu({
-  isAdmin,
-  user,
-}: {
-  isAdmin: boolean;
-  user: {
-    email: string | null;
-    name: string | null;
-  };
-}) {
+function DropdownMenu({ user }: { user: User }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -105,7 +97,7 @@ function DropdownMenu({
             <p className="truncate text-gray-500 text-xs">{user.email}</p>
           </li>
 
-          {isAdmin && (
+          {user.isAdmin && (
             <li>
               <Link
                 to="/admin"

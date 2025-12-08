@@ -7,7 +7,7 @@ import { createIsbotFromList, list } from "isbot";
 import { reverse } from "node:dns/promises";
 import type { Chat, User } from "prisma/generated/client";
 import type { UserGetPayload } from "prisma/generated/models";
-import { type Session, createCookieSessionStorage } from "react-router";
+import { createCookieSessionStorage, type Session } from "react-router";
 import { ulid } from "ulid";
 import zod from "zod";
 import prisma from "~/lib/prisma";
@@ -35,8 +35,6 @@ const botUserAgents = [
   "FastmailUA",
   "Vercel",
 ];
-
-const adminUsers = ["assaf@labnotes.org"];
 
 const logger = debug("sessions");
 
@@ -79,13 +77,12 @@ const { getSession, commitSession, destroySession } =
  *
  * @param request - The request object
  * @returns The last chat, messages, response headers with the session cookie
- * set, user, and whether the user is an admin. If the user is not found, return
- * the response headers with the session cookie set.
+ * set, user. If the user is not found, return the response headers with the
+ * session cookie set.
  */
 export async function findUserAndLastChat(request: Request): Promise<
   | {
       chat: Chat;
-      isAdmin: boolean;
       messages: UIMessage[];
       responseHeaders: Headers;
       user: User;
@@ -97,7 +94,7 @@ export async function findUserAndLastChat(request: Request): Promise<
   const session = await userFromCookie(request.headers);
   if (!("user" in session)) return await saveUtmParams(request);
 
-  const { isAdmin, user } = session;
+  const { user } = session;
   const chat = await prisma.chat.findFirst({
     orderBy: { createdAt: "desc" },
     take: 1,
@@ -111,7 +108,7 @@ export async function findUserAndLastChat(request: Request): Promise<
     "set-cookie",
     await commitSession(session.cookieSession),
   );
-  return { chat, isAdmin, messages, responseHeaders, user };
+  return { chat, messages, responseHeaders, user };
 }
 
 /**
@@ -124,7 +121,7 @@ export async function findUserAndLastChat(request: Request): Promise<
  * @param chatId - The ID of the chat to find
  * @param requestHeaders - The request headers object
  * @returns The chat, messages, response headers with the session cookie set,
- * user, and whether the user is an admin.
+ * user.
  * @throws If the user is not found or the chat ID is mismatched
  */
 export async function findUserAndChatById({
@@ -136,7 +133,6 @@ export async function findUserAndChatById({
 }): Promise<
   | {
       chat: Chat;
-      isAdmin: boolean;
       messages: UIMessage[];
       responseHeaders: Headers;
       user: User;
@@ -146,7 +142,7 @@ export async function findUserAndChatById({
   const session = await userFromCookie(requestHeaders);
   if (!("user" in session)) return;
 
-  const { isAdmin, user } = session;
+  const { user } = session;
   const chat = await prisma.chat.findUnique({
     where: { id: chatId, user: { id: user.id } },
   });
@@ -156,7 +152,7 @@ export async function findUserAndChatById({
   const responseHeaders = new Headers({
     "set-cookie": await commitSession(session.cookieSession),
   });
-  return { chat, isAdmin, messages, responseHeaders, user };
+  return { chat, messages, responseHeaders, user };
 }
 
 /**
@@ -176,7 +172,6 @@ export async function findOrCreateUser({
   requestHeaders: Headers;
 }): Promise<{
   chat: Chat;
-  isAdmin: boolean;
   responseHeaders: Headers;
   messages: UIMessage[];
   user: User;
@@ -184,7 +179,7 @@ export async function findOrCreateUser({
   const session = await userFromCookie(requestHeaders);
   // Look in session to see if we already have a user with that chat ID.
   if ("user" in session) {
-    const { isAdmin, user } = session;
+    const { user } = session;
     const chat = await prisma.chat.findUniqueOrThrow({
       where: { id: chatId, user: { id: user.id } },
     });
@@ -193,7 +188,7 @@ export async function findOrCreateUser({
     const responseHeaders = new Headers({
       "set-cookie": await commitSession(session.cookieSession),
     });
-    return { chat, isAdmin, messages, responseHeaders, user };
+    return { chat, messages, responseHeaders, user };
   }
 
   const user = await createAnonymousUser({ chatId, requestHeaders });
@@ -205,7 +200,7 @@ export async function findOrCreateUser({
     requestHeaders,
     userId: user.id,
   });
-  return { chat, isAdmin: false, messages, user, responseHeaders };
+  return { chat, messages, user, responseHeaders };
 }
 
 /**
@@ -329,9 +324,8 @@ async function isBotByIP(ip?: string): Promise<boolean> {
  */
 export async function verifyAdmin(requestHeaders: Headers): Promise<User> {
   const session = await userFromCookie(requestHeaders);
-  if (!("isAdmin" in session && session.isAdmin))
-    throw new Response("Not Found", { status: 404 });
-  return session.user;
+  if ("user" in session && session.user.isAdmin) return session.user;
+  else throw new Response("Not found", { status: 404 });
 }
 
 /**
@@ -345,7 +339,6 @@ export async function verifyAdmin(requestHeaders: Headers): Promise<User> {
 async function userFromCookie(requestHeaders: Headers): Promise<
   | {
       cookieSession: Session<SessionData, SessionFlashData>;
-      isAdmin: boolean;
       user: User;
       responseHeaders: Headers;
     }
@@ -366,8 +359,7 @@ async function userFromCookie(requestHeaders: Headers): Promise<
   const responseHeaders = new Headers({
     "set-cookie": await commitSession(cookieSession),
   });
-  const isAdmin = adminUsers.includes(user.email ?? "anonymous");
-  return { cookieSession, isAdmin, user, responseHeaders };
+  return { cookieSession, user, responseHeaders };
 }
 
 /**

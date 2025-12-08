@@ -22,7 +22,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function Admin() {
   const root = useRouteLoaderData<typeof rootLoader>("root");
   const outlet = useOutlet();
-  return root?.isAdmin ? (
+  return root?.user?.isAdmin ? (
     <main className="container mx-auto my-10">
       {outlet ?? <NotFoundPage />}
     </main>

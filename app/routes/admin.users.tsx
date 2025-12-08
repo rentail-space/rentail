@@ -73,13 +73,14 @@ function Analytics({
   analytics: { activeUsers: string; screenPageViews: string };
   users: User[];
 }) {
+  const withoutAdmin = users.filter((user) => !user.isAdmin);
   const daysAgo = DateTime.now().minus({ days: 30 }).toJSDate();
-  const recent = users.filter(
-    (user) => user.createdAt.getTime() > daysAgo.getTime(),
+  const recentlyUpdated = withoutAdmin.filter(
+    (user) => user.updatedAt.getTime() > daysAgo.getTime(),
   );
   const activeUsers = Number(analytics.activeUsers);
   const screenPageViews = Number(analytics.screenPageViews);
-  const conversion = recent.length / activeUsers;
+  const conversion = recentlyUpdated.length / activeUsers;
 
   return (
     <div className="stats mx-auto max-w-xl">
@@ -98,7 +99,7 @@ function Analytics({
         <div className="stat-value flex items-center gap-2">
           {(conversion * 100).toFixed(2)}%
         </div>
-        <div className="stat-desc">{recent.length} new users</div>
+        <div className="stat-desc">{recentlyUpdated.length} new users</div>
       </div>
     </div>
   );
