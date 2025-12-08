@@ -12,12 +12,14 @@ pnpm dedupe --ignore-scripts
 pnpm prune --ignore-scripts
 
 echo -e "\033[32m  Security audit …\033[0m"
-pnpm audit --prod || echo "Security audit failed"
 pnpm install
 git add package.json pnpm-lock.yaml
 
 echo -e "\033[32m  Running tests …\033[0m"
 pnpm test
+
+echo -e "\033[32m  Auditing dependencies …\033[0m"
+pnpm pnpm audit --prod || echo "Security audit failed"
 
 echo -e "\033[32m  Commiting changes …\033[0m"
 git diff --unified=0 --color --word-diff HEAD~1 package.json
