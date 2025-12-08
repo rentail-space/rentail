@@ -5,6 +5,9 @@ import { defineConfig } from "vitest/config";
 process.env.NODE_ENV = "test";
 
 export default defineConfig({
+  build: {
+    sourcemap: false, // Disable source maps in tests to save memory
+  },
   plugins: [tsconfigPaths()],
   esbuild: {
     // Reduce memory usage for esbuild transformations
@@ -25,6 +28,8 @@ export default defineConfig({
     globals: false,
     hideSkippedTests: false,
     maxConcurrency: 1, // Run tests sequentially to reduce memory pressure
+    maxWorkers: 1, // Use only 1 worker to minimize memory usage
+    minWorkers: 1, // Ensure consistent single worker behavior
     hookTimeout: 30_000, // 30 seconds for beforeAll/afterAll (server + browser startup)
     include: ["test/**/*.test.{ts,tsx}"],
     isolate: true, // NOTE: isolation required for test safety
