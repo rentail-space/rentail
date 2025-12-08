@@ -32,6 +32,10 @@ async function startServer() {
       logLevel: "warn", // Reduced log level to avoid noise
       root: process.cwd(),
       optimizeDeps: {
+        disabled: Boolean(process.env.CI), // Disable dependency optimization in CI to avoid esbuild crashes
+        esbuildOptions: {
+          target: "es2022", // Target modern browsers to reduce transform work
+        },
         // Force pre-bundling on startup
         include: [
           "react",
@@ -44,8 +48,7 @@ async function startServer() {
           "nuqs",
           "daisyui",
         ],
-        force: true, // Force re-optimization in test mode
-        noDiscovery: false, // Disable lazy optimization during dev
+        noDiscovery: false, // Disable lazy optimization during tests
       },
       server: {
         fs: { allow: ["."] }, // Don't re-optimize already bundled deps

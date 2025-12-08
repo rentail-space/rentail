@@ -106,7 +106,7 @@ jobs:
       - name: Run Tests
         run: |
           rm -rf node_modules/.vite .react-router build
-          pnpm vitest run
+          pnpm vitest run --reporter verbose
         env:
           DEBUG: "browser,chat,server,test"
           NODE_OPTIONS: "--max-old-space-size=2048"
