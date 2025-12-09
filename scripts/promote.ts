@@ -11,6 +11,7 @@ import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymen
 import dotenv from "dotenv";
 import env from "env-var";
 import { invariant } from "es-toolkit";
+import { DateTime } from "luxon";
 import { execSync } from "node:child_process";
 import { Octokit } from "octokit";
 import ora from "ora";
@@ -94,21 +95,33 @@ function checkIfGitAhead() {
 async function githubWorkflows() {
   console.info(colorize("blue", "GitHub workflow status:"));
 
+  console.info(
+    "%s  %s  %s    %s",
+    "  Created At".padEnd(21),
+    "Commit".padEnd(10),
+    "Title".padEnd(60),
+    "Conclusion",
+  );
+
   const { data } = await octokit.rest.actions.listWorkflowRuns({
     owner: "assaf",
     repo: "rentail",
     workflow_id: "deploy.yml",
   });
   for (const workflow of data.workflow_runs.slice(0, 5)) {
-    const status = " %s \t(%s)\t%s => %s";
+    const status = "%s  (%s)  %s => %s";
     console.info(
       workflow.conclusion === "failure"
         ? colorize("red", `✗ ${status}`)
         : colorize("green", `✓ ${status}`),
-      new Date(workflow.created_at ?? 0).toLocaleString(),
+      DateTime.fromISO(workflow.created_at ?? "")
+        .setZone("America/Los_Angeles")
+        .toFormat("yyyy-MM-dd HH:mm:ss"),
       workflow.head_commit?.id.slice(-8),
-      workflow.display_title.slice(0, 40) +
-        (workflow.display_title.length > 40 ? "…" : ""),
+      (
+        workflow.display_title.slice(0, 59) +
+        (workflow.display_title.length >= 60 ? "…" : "")
+      ).padEnd(60),
       workflow.conclusion ?? "building…",
     );
   }
@@ -141,17 +154,27 @@ async function getRecentDeployment(): Promise<
     limit: 5,
   });
 
+  console.info(
+    "%s  %s  %s %s",
+    "  Created At".padEnd(21),
+    "Commit".padEnd(10),
+    "URL".padEnd(61),
+    "   Target",
+  );
+
   for (const deployment of deployments) {
-    const status = " %s \t(%s)\t%s => %s";
+    const status = "%s  (%s)  %s => %s";
     console.info(
       deployment.state === "READY"
         ? colorize("green", `✓ ${status}`)
         : deployment.state === "BUILDING"
           ? colorize("yellow", `⚡${status}`)
           : colorize("red", `✗ ${status}`),
-      new Date(deployment.createdAt ?? 0).toLocaleString(),
+      DateTime.fromMillis(deployment.createdAt ?? 0)
+        .setZone("America/Los_Angeles")
+        .toFormat("yyyy-MM-dd HH:mm:ss"),
       deployment.meta?.githubCommitSha?.slice(-8),
-      deployment.uid,
+      `https://${deployment.url}`.padEnd(61),
       deployment.target ?? "preview",
     );
   }
