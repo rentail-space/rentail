@@ -10,9 +10,9 @@ export default defineConfig({
   },
   plugins: [tsconfigPaths()],
   esbuild: {
-    // Reduce memory usage for esbuild transformations
-    logLevel: "error",
+    logLevel: "error", // Reduce memory usage for esbuild transformations
   },
+  logLevel: process.env.CI ? "error" : "warn", // Only show errors in CI
 
   test: {
     bail: 3, // Stop after 3 failing tests
