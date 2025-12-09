@@ -3,7 +3,6 @@ import type { ParsedStack } from "vitest";
 import { defineConfig } from "vitest/config";
 
 process.env.NODE_ENV = "test";
-const isCI = !!process.env.CI;
 
 export default defineConfig({
   build: {
