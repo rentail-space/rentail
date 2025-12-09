@@ -8,6 +8,7 @@ jobs:
   test:
     name: Test
     runs-on: namespace-profile-rentail
+    timeout-minutes: 10
 
     env:
       ANTHROPIC_API_KEY: "***REMOVED***"
@@ -119,10 +120,6 @@ jobs:
 
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v3
-
-      - name: Deploy Prisma schema and seed database
-        run: |
-          doppler run --config prd -- pnpm prisma db push
 
       - name: Seed database
         run: |

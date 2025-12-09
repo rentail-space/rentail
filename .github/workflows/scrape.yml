@@ -8,7 +8,8 @@ on:
 jobs:
   scrape:
     name: Scrape
-    runs-on: namespace-profile-rentail
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     permissions:
       actions: write
