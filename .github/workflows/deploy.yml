@@ -105,7 +105,9 @@ jobs:
 
       - name: Run Tests
         run: |
-          pnpm vitest run
+          for test_file in $(find test -name "*.test.ts" | sort); do
+            pnpm vitest run "$test_file"
+          done
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
           DEBUG: "browser,chat,server,test"
