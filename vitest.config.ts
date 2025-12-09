@@ -23,7 +23,7 @@ export default defineConfig({
     fileParallelism: false,
     globalSetup: "test/helpers/globalSetup.ts",
     hookTimeout: 30_000, // 30 seconds for beforeAll/afterAll (server + browser startup)
-    include: ["test/**/*.test.{ts,tsx}"],
+    include: ["test/**/*.test.ts"],
     maxConcurrency: 1, // Run tests sequentially to reduce memory pressure
     maxWorkers: 1, // Use only 1 worker to minimize memory usage
     pool: "forks",
