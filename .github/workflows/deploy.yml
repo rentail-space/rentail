@@ -119,12 +119,6 @@ jobs:
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v3
 
-      - name: Seed database
-        run: |
-          doppler run --config prd -- pnpm prisma db seed
-        env:
-          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
-
       - name: Deploy to Vercel
         uses: nexterias/actions-vercel@v1
         with:
