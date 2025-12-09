@@ -14,7 +14,7 @@ if (!process.env.DATABASE_URL) {
 // @see https://www.prisma.io/docs/orm/overview/databases/supabase#specific-considerations
 export default defineConfig({
   datasource: {
-    url: env("DIRECT_URL"),
+    url: env("DATABASE_URL"),
   },
   migrations: {
     path: resolve("prisma", "migrations"),
