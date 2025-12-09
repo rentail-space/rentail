@@ -1,9 +1,9 @@
-import prisma from "app/lib/prisma";
 import debug from "debug";
 import { readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path, { basename, resolve } from "node:path";
 import { z } from "zod";
+import prisma from "~/lib/prisma";
 
 const schema = z.object({
   name: z.string(),

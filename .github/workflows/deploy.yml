@@ -10,15 +10,6 @@ jobs:
     runs-on: namespace-profile-rentail
     timeout-minutes: 10
 
-    env:
-      ANTHROPIC_API_KEY: "***REMOVED***"
-      BETTER_AUTH_SECRET: "***REMOVED***"
-      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-      DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-      DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
-      REDIS_URL: "redis://localhost:6379"
-      RESEND_API_KEY: "re_1234567890"
-
     services:
       postgres:
         image: postgres:16-alpine
@@ -77,11 +68,13 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ env.PLAYWRIGHT_VERSION }}
 
-      - name: Setup database schema (for testing)
+      - name: Setup database schema for testing
         run: |
           pnpm prisma generate 
           pnpm prisma db push
         env:
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+          DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
           NODE_ENV: "test"
 
       - name: Check secrets
@@ -108,12 +101,17 @@ jobs:
         run: |
           scripts/test.sh
         env:
-          NODE_OPTIONS: "--max-old-space-size=4096"
+          ANTHROPIC_API_KEY: "***REMOVED***"
+          BETTER_AUTH_SECRET: "***REMOVED***"
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
           DEBUG: ""
+          DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+          NODE_OPTIONS: "--max-old-space-size=4096"
+          REDIS_URL: "redis://localhost:6379"
+          RESEND_API_KEY: "re_"
 
       - name: Upload Playwright Test Results
         uses: actions/upload-artifact@v4
-        if: always()
         with:
           name: playwright-test-results
           path: __screenshots__
@@ -124,6 +122,8 @@ jobs:
       - name: Seed database
         run: |
           doppler run --config prd -- pnpm prisma db seed
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
 
       - name: Deploy to Vercel
         uses: nexterias/actions-vercel@v1
