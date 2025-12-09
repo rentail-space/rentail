@@ -48,7 +48,7 @@ jobs:
         uses: dopplerhq/cli-action@v3
 
       - name: Generate Prisma schema
-        run: pnpm prisma generate
+        run: doppler run --config prd -- pnpm prisma generate
 
       - name: Seed database
         run: doppler run --config prd -- pnpm prisma db seed
