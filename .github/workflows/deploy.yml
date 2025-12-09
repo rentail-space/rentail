@@ -101,13 +101,13 @@ jobs:
         if: false
         run: pnpm tsc --noEmit --strict
         env:
-          NODE_OPTIONS: "--max-old-space-size=3072"
+          NODE_OPTIONS: "--max-old-space-size=4096"
 
       - name: Run Tests
         run: |
           pnpm vitest run
         env:
-          NODE_OPTIONS: "--max-old-space-size=3072"
+          NODE_OPTIONS: "--max-old-space-size=4096"
           DEBUG: "browser,chat,server,test"
 
       - name: Upload Playwright Test Results
