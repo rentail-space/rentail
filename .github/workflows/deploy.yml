@@ -105,10 +105,10 @@ jobs:
 
       - name: Run Tests
         run: |
-          rm -rf node_modules/.vite .react-router build
-          pnpm vitest run --reporter verbose
+          pnpm vitest run
         env:
           NODE_OPTIONS: "--max-old-space-size=3072"
+          DEBUG: "browser,chat,server,test"
 
       - name: Upload Playwright Test Results
         uses: actions/upload-artifact@v4

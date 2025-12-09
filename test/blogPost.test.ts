@@ -104,9 +104,7 @@ describe("Blog Post Rendering", () => {
   it("should be responsive on mobile viewport", async () => {
     // Set mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
-
     await page.reload();
-    await page.waitForLoadState("load");
 
     // Check that content is still visible and properly formatted
     const article = page.locator("article");
@@ -125,7 +123,7 @@ describe("Blog Post Rendering", () => {
     }
   });
 
-  describe("non-existent blog post", () => {
+  describe("404", () => {
     let response: Response | null;
 
     beforeAll(async () => {

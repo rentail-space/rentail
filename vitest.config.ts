@@ -26,13 +26,9 @@ export default defineConfig({
     include: ["test/**/*.test.{ts,tsx}"],
     maxConcurrency: 1, // Run tests sequentially to reduce memory pressure
     maxWorkers: 1, // Use only 1 worker to minimize memory usage
-    name: "Rentail Tests",
     pool: "forks",
     printConsoleTrace: !process.env.CI,
-    reporters: [
-      process.env.GITHUB_ACTIONS ? "github-actions" : "verbose",
-      "hanging-process",
-    ],
+    reporters: [process.env.GITHUB_ACTIONS ? "github-actions" : "verbose"],
     setupFiles: "test/helpers/testSuiteSetup.ts",
     teardownTimeout: 3_000, // 3 seconds - Prisma disconnect will timeout anyway on macOS
     testTimeout: 30_000, // 30 seconds
