@@ -60,7 +60,7 @@ export default function Messages({
       )}
 
       {isTyping && <BeatLoading color="lightblue" count={4} />}
-      {isAborted && <_AbortedMessage />}
+      {isAborted && <Aborted />}
       {error && <ErrorNotice error={error} />}
     </div>
   );
@@ -76,7 +76,7 @@ function UserMessage({ message }: { message: UIMessage }) {
 
   return (
     <div className="chat chat-end">
-      <div className="chat-bubble chat-bubble-accent chat-bubble-user prose prose-base">
+      <div className="prose prose-base max-w-9/10 rounded-b-md rounded-tl-md border-2 border-black bg-[hsl(47,100%,95%)] px-4 py-3 font-medium text-black shadow-[4px_4px_0px_0px_black]">
         {multipleLines.map((line, index) => (
           <p key={index.toString()}>{line}</p>
         ))}
@@ -85,17 +85,19 @@ function UserMessage({ message }: { message: UIMessage }) {
   );
 }
 
-function _AbortedMessage() {
+function Aborted() {
   return (
     <div className="chat chat-end">
-      <div className="text-red-500">The conversation was aborted.</div>
+      <div className="rounded-[10px] border-2 border-black bg-red-100 px-4 py-3 font-bold text-black shadow-[4px_4px_0px_0px_black]">
+        The conversation was aborted.
+      </div>
     </div>
   );
 }
 
 function ErrorNotice({ error }: { error: Error }) {
   return (
-    <div className="p-4 text-red-500">
+    <div className="rounded-[10px] border-2 border-black bg-red-100 p-4 font-bold text-black shadow-[4px_4px_0px_0px_black]">
       {error.message || "Some error happened"}
     </div>
   );

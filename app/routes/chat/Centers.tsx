@@ -1,6 +1,7 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Activity, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import { cn } from "~/lib/utils";
 
 /**
  * A list of centers that are nearby the user.
@@ -8,7 +9,7 @@ import { Link } from "react-router";
  * @param centers - The centers that are nearby the user.
  * @returns A list of centers that are nearby the user.
  */
-export default function CenterCards({
+export default function Centers({
   centers,
   location,
 }: {
@@ -17,14 +18,12 @@ export default function CenterCards({
 }) {
   return (
     <div className="sticky top-0 my-4 hidden h-fit w-1/4 lg:block">
-      <div className="card card-border bg-base-100 shadow-md">
-        <div className="card-body">
-          {centers.length > 0 ? (
-            <AvailableCenters centers={centers} />
-          ) : (
-            <NoAvailableCenters location={location} />
-          )}
-        </div>
+      <div className="rounded-[10px] border-2 border-black bg-white p-6 shadow-[6px_6px_0px_0px_black]">
+        {centers.length > 0 ? (
+          <AvailableCenters centers={centers} />
+        ) : (
+          <NoAvailableCenters location={location} />
+        )}
       </div>
     </div>
   );
@@ -33,9 +32,13 @@ export default function CenterCards({
 function NoAvailableCenters({ location }: { location?: string }) {
   return (
     <>
-      <div className="card-title">No available centers</div>
+      <div className="mb-2 font-bold text-black text-lg">
+        No available centers
+      </div>
       {location && (
-        <p className="text-gray-500 text-sm">We're looking in {location}</p>
+        <p className="font-medium text-black text-sm">
+          We're looking in {location}
+        </p>
       )}
     </>
   );
@@ -50,22 +53,26 @@ function AvailableCenters({
 
   return (
     <>
-      <div className="card-title">Available Centers ({centers.length})</div>
-      {centers
-        // Sort by number of available spaces, then by name
-        .sort((a, b) =>
-          a.spaces.length === b.spaces.length
-            ? a.name.localeCompare(b.name)
-            : b.spaces.length - a.spaces.length,
-        )
-        .map((center) => (
-          <LinkToCenter
-            hoveredCenter={hoveredCenter}
-            key={center.id}
-            center={center}
-            setHoveredCenter={setHoveredCenter}
-          />
-        ))}
+      <div className="mb-3 font-bold text-black text-lg">
+        Available Centers ({centers.length})
+      </div>
+      <div className="flex flex-col gap-2">
+        {centers
+          // Sort by number of available spaces, then by name
+          .sort((a, b) =>
+            a.spaces.length === b.spaces.length
+              ? a.name.localeCompare(b.name)
+              : b.spaces.length - a.spaces.length,
+          )
+          .map((center) => (
+            <LinkToCenter
+              hoveredCenter={hoveredCenter}
+              key={center.id}
+              center={center}
+              setHoveredCenter={setHoveredCenter}
+            />
+          ))}
+      </div>
     </>
   );
 }
@@ -87,20 +94,20 @@ function LinkToCenter({
       onMouseLeave={() => setHoveredCenter(null)}
     >
       <Link
-        className="flex flex-row items-center gap-2 rounded-lg py-2 hover:bg-base-200"
+        className="flex flex-row items-center gap-2 rounded-[5px] border-2 border-black bg-white px-3 py-2 font-medium text-black shadow-[2px_2px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_black]"
         target="_blank"
         to={`/center/${center.id}`}
       >
         <img
           alt="Shopping mall"
-          className="h-4 w-4 shrink-0 object-contain"
+          className="h-5 w-5 shrink-0 rounded-[5px] border border-black object-contain"
           src={center.logoURL || "/images/shopping-mall.png"}
         />
         <div className="flex min-w-0 flex-1 flex-col">
-          <span className="truncate font-medium text-base-content text-sm">
+          <span className="truncate font-bold text-black text-sm">
             {center.name}
           </span>
-          <span className="text-base-content/60 text-xs">
+          <span className="font-medium text-black/70 text-xs">
             {center.spaces.length}{" "}
             {center.spaces.length === 1 ? "space" : "spaces"}
           </span>
@@ -138,7 +145,9 @@ function HoverCard({
           document.querySelectorAll("div"),
         ).find(
           (el) =>
-            el.querySelector("form") && el.classList.contains("bg-gray-50"),
+            el.querySelector("form") &&
+            (el.classList.contains("bg-gray-50") ||
+              el.classList.contains("bg-[hsl(60,100%,99%)]")),
         );
         const header = document.querySelector("header.navbar");
 
@@ -197,17 +206,22 @@ function HoverCard({
     <Activity mode={mode}>
       <div
         ref={cardRef}
-        className="card card-border absolute right-full z-50 mr-[38px] w-96 max-w-[min(20rem,calc(100vw-2rem))] bg-base-100 shadow-md"
+        className={cn(
+          "absolute right-full z-50 my-8 mr-10",
+          "w-96 max-w-[min(20rem,calc(100vw-2rem))] overflow-hidden",
+          "rounded-md border-2 border-black bg-white shadow-[6px_6px_0px_0px_black]",
+        )}
         style={{ top: `${topOffset}px` }}
       >
-        <div className="card-body">
-          <p className="card-title">{center.name}</p>
-          <p className="line-clamp-5 text-sm">
+        <div className="p-4">
+          <p className="mb-2 font-bold text-black text-lg">{center.name}</p>
+          <p className="line-clamp-5 font-medium text-black text-sm">
             {center.description.split("\n")[0]}
           </p>
         </div>
 
         <figure
+          className="border-black border-y-2"
           style={{
             background:
               "repeating-linear-gradient(135deg, #e5e7eb 0 24px, #fff 24px 48px)",
@@ -226,7 +240,7 @@ function HoverCard({
           />
         </figure>
 
-        <div className="card-body">
+        <div className="p-4 font-bold text-black text-sm">
           {center.spaces.length > 1
             ? `${center.spaces.length} available spaces`
             : center.spaces.length === 1

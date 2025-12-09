@@ -15,7 +15,7 @@ import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
 import { findUserAndLastChat } from "~/sessions.server";
 import type { Route } from "./+types/route";
-import CenterCards from "./CenterCards";
+import Centers from "./Centers";
 
 export const handle = { hideLayout: true };
 
@@ -67,7 +67,7 @@ export default function ChatPage({
     <StickToBottom
       initial="smooth"
       resize="smooth"
-      className="inset-0 flex h-screen flex-col justify-between"
+      className="inset-0 flex h-screen flex-col justify-between bg-[hsl(60,100%,99%)]"
     >
       <PageHeader />
       <div className="flex-1 overflow-y-auto scroll-smooth px-4 py-4">
@@ -81,7 +81,7 @@ export default function ChatPage({
               setQuery={setQuery}
             />
 
-            <CenterCards
+            <Centers
               centers={centersFetcher.data?.centers ?? loaderData.centers}
               location={centersFetcher.data?.location ?? loaderData.location}
             />

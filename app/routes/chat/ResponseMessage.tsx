@@ -71,17 +71,21 @@ function MarkdownMessage({
 }) {
   return (
     <div className="chat chat-start">
-      <div className="chat-image avatar not-prose w-8">
+      <div className="chat-image not-prose w-10">
         <img
           alt="rental space"
-          height="32px"
+          height="40px"
           src="/favicon-96x96.png"
-          width="32px"
+          width="40px"
+          className="rounded-md border-2 border-black shadow-[2px_2px_0px_0px_black]"
         />
       </div>
-      <div className="chat-bubble chat-bubble-response" ref={contentRef}>
+      <div
+        className="max-w-9/10 rounded-t-md rounded-br-md border-2 border-black bg-[hsl(120,100%,97%)] px-4 py-3 shadow-[4px_4px_0px_0px_black]"
+        ref={contentRef}
+      >
         <Streamdown
-          className="prose prose-base"
+          className="prose prose-base max-w-none"
           components={getComponents({ askQuestion })}
           controls={{ code: false, mermaid: false, table: false }}
           parseIncompleteMarkdown
@@ -110,7 +114,7 @@ function getComponents({
       const isAsk = href?.startsWith("/?q=");
       return isAsk ? (
         <Link
-          className="btn btn-soft btn-primary"
+          className="inline-block transform cursor-pointer rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-2 font-bold text-black no-underline shadow-[3px_3px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_0px_black]"
           to={`/chat?q=${children}`}
           onClick={(event) => {
             event.preventDefault();
@@ -121,7 +125,7 @@ function getComponents({
         </Link>
       ) : (
         <Link
-          className="text-blue-500 no-underline hover:text-blue-700 hover:underline"
+          className="font-bold text-black underline decoration-2 underline-offset-2 hover:decoration-[hsl(37,92%,65%)]"
           to={href ?? ""}
           target="_blank"
         >
@@ -130,29 +134,34 @@ function getComponents({
       );
     },
     button: ({ children }) => (
-      <button className="btn btn-soft btn-primary" type="button">
+      <button
+        className="inline-block transform cursor-pointer rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-2 font-bold text-black shadow-[3px_3px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_0px_black]"
+        type="button"
+      >
         {children}
       </button>
     ),
     h1: ({ children }) => (
-      <h1 className={"mt-6 mb-2 font-semibold text-xl"}>{children}</h1>
+      <h1 className={"mt-6 mb-2 font-bold text-black text-xl"}>{children}</h1>
     ),
     h2: ({ children }) => (
-      <h2 className={"mt-6 mb-2 font-semibold text-lg"}>{children}</h2>
+      <h2 className={"mt-6 mb-2 font-bold text-black text-lg"}>{children}</h2>
     ),
     h3: ({ children }) => (
-      <h3 className={"mt-6 mb-2 font-semibold text-md"}>{children}</h3>
+      <h3 className={"mt-6 mb-2 font-bold text-black text-md"}>{children}</h3>
     ),
-    hr: () => <hr className="border-gray-300" />,
-    li: ({ children }) => <li className={"py-1"}>{children}</li>,
+    hr: () => <hr className="border-2 border-black" />,
+    li: ({ children }) => <li className={"py-1 text-black"}>{children}</li>,
     ol: ({ children }) => (
-      <ol className={"ml-4 list-outside list-decimal"}>{children}</ol>
+      <ol className={"ml-4 list-outside list-decimal text-black"}>
+        {children}
+      </ol>
     ),
     p: ({ children }) => (
-      <p className="mt-2 mb-2 whitespace-pre-wrap">{children}</p>
+      <p className="mt-2 mb-2 whitespace-pre-wrap text-black">{children}</p>
     ),
     strong: ({ children }) => (
-      <span className={"font-semibold"}>{children}</span>
+      <span className={"font-bold text-black"}>{children}</span>
     ),
     ul: ({ children }) => (
       <ul className={"ml-4 list-outside list-disc"}>{children}</ul>

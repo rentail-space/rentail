@@ -1,5 +1,6 @@
 import { Send, Square } from "lucide-react";
 import { useStickToBottomContext } from "use-stick-to-bottom";
+import { cn } from "~/lib/utils";
 
 export default function InputForm({
   isResponding,
@@ -19,15 +20,15 @@ export default function InputForm({
   const { scrollToBottom } = useStickToBottomContext();
 
   return (
-    <div className="w-full items-center justify-center bg-gray-50 p-2">
+    <div className="w-full items-center justify-center bg-[hsl(60,100%,99%)] p-4">
       <form
+        className="relative w-full"
         onSubmit={(event) => {
           event.preventDefault();
           sendMessage(query.trim());
           setQuery(null);
           scrollToBottom();
         }}
-        className="relative w-full"
       >
         <input
           autoCapitalize="off"
@@ -35,7 +36,7 @@ export default function InputForm({
           autoCorrect="off"
           // biome-ignore lint/a11y/noAutofocus: we want to autofocus the input
           autoFocus={true}
-          className="w-full rounded-2xl border-2 border-gray-200 bg-white py-4 pr-24 pl-5 text-base placeholder-gray-400 outline-none transition-all duration-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+          className="w-full rounded-[5px] border-2 border-black bg-white py-4 pr-24 pl-5 font-medium text-base text-black placeholder-gray-600 shadow-[4px_4px_0px_0px_hsl(37,92%,65%)] outline-none transition-all duration-100 focus:translate-x-[-2px] focus:translate-y-[-2px] focus:shadow-[6px_6px_0px_0px_hsl(37,92%,65%)]"
           disabled={isSubmitting}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Ask me any question about retail spaces..."
@@ -44,25 +45,35 @@ export default function InputForm({
           value={query}
         />
 
-        <div className="-translate-y-1/2 absolute top-1/2 right-2 flex transform gap-2">
+        <div className="-translate-y-1/2 absolute top-1/2 right-3 flex transform gap-2">
           {false && (
             <StopButton isResponding={isResponding} stopChat={stopChat} />
           )}
-          <button
-            aria-label="Send message"
-            className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-indigo-500 transition-all duration-200 hover:scale-105 hover:bg-indigo-600 active:scale-95 active:scale-[0.6] active:duration-75 disabled:cursor-not-allowed disabled:bg-gray-300"
-            disabled={isSubmitting}
-            type="submit"
-          >
-            {isSubmitting ? (
-              <Send className="h-6 w-6 animate-spin" />
-            ) : (
-              <Send className="h-6 w-6 text-white" />
-            )}
-          </button>
+          <SubmitButton isSubmitting={isSubmitting} />
         </div>
       </form>
     </div>
+  );
+}
+
+function SubmitButton({ isSubmitting }: { isSubmitting: boolean }) {
+  return (
+    <button
+      aria-label="Send message"
+      className={cn(
+        "mb-1 flex h-12 w-12 items-center justify-center",
+        "rounded-md border-2 border-black bg-[hsl(37,92%,65%)] font-bold shadow-[3px_3px_0px_0px_black]",
+        "transform cursor-pointer transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_0px_black] disabled:cursor-not-allowed disabled:bg-gray-300 disabled:shadow-none",
+      )}
+      disabled={isSubmitting}
+      type="submit"
+    >
+      {isSubmitting ? (
+        <Send className="h-5 w-5 animate-spin text-black" />
+      ) : (
+        <Send className="h-5 w-5 text-black" />
+      )}
+    </button>
   );
 }
 
@@ -79,10 +90,10 @@ function StopButton({
     <button
       onClick={stopChat}
       aria-label="Stop"
-      className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-xl border-none bg-red-500 transition-all duration-200 hover:scale-105 hover:bg-red-600 active:scale-95 active:scale-[0.6] active:duration-75"
+      className="flex h-12 w-12 transform cursor-pointer items-center justify-center rounded-[5px] border-2 border-black bg-red-500 font-bold shadow-[3px_3px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_0px_black]"
       type="button"
     >
-      <Square className="h-6 w-6 text-white" />
+      <Square className="h-5 w-5 text-black" />
     </button>
   );
 }
