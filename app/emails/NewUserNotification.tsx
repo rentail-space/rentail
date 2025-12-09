@@ -29,6 +29,7 @@ function NewUserNotification({
   subject: string;
 }) {
   const url = `https://rentail.space/admin/user/${user.id}`;
+  const utm = user.utm ? JSON.parse(user.utm as string) : undefined;
   return (
     <EmailLayout subject={subject}>
       <Section>
@@ -41,6 +42,23 @@ function NewUserNotification({
         <Text style={styles.text}>
           <strong>Location:</strong> {user.cityStateCountry}
         </Text>
+        <Text style={styles.text}>
+          <strong>Referrer:</strong> {user.referrer ?? "N/A"}
+        </Text>
+        <Text style={styles.text}>
+          <strong>User Agent:</strong> {user.userAgent ?? "N/A"}
+        </Text>
+        {utm &&
+          Object.entries<string>(utm)
+            .filter(
+              ([key]) =>
+                key !== "ip" && key !== "userAgent" && key !== "referer",
+            )
+            .map(([key, value]) => (
+              <Text key={key} style={styles.text}>
+                <strong>UTM {key}:</strong> {value}
+              </Text>
+            ))}
 
         <Text style={styles.text}>
           <strong>Memory:</strong>
