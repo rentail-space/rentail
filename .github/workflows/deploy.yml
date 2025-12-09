@@ -108,7 +108,7 @@ jobs:
           scripts/test.sh
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
-          DEBUG: "browser,chat,server,test"
+          DEBUG: ""
 
       - name: Upload Playwright Test Results
         uses: actions/upload-artifact@v4
