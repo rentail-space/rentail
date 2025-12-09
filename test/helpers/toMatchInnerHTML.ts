@@ -12,6 +12,7 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import type { Locator, Page } from "playwright";
+import vitestConfig from "vitest.config";
 import {
   type HTMLNode,
   diffHTMLs,
@@ -39,7 +40,9 @@ declare global {
   }
 }
 
-const dirname = path.resolve("./__screenshots__");
+const dirname = path.resolve(
+  vitestConfig.test?.browser?.screenshotDirectory ?? "",
+);
 
 expect.extend({
   async toMatchInnerHTML(
@@ -58,6 +61,7 @@ expect.extend({
     const formattedHtml = formatHTMLTree(html);
 
     try {
+      if (vitestConfig.test?.update) throw new Error("Update is enabled");
       await access(filename, constants.R_OK);
     } catch {
       await mkdir(dirname, { recursive: true });

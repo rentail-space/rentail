@@ -13,6 +13,7 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import type { Locator, Page } from "playwright";
+import vitestConfig from "vitest.config";
 
 declare global {
   namespace PlaywrightTest {
@@ -34,7 +35,9 @@ declare global {
   }
 }
 
-const dirname = path.resolve("./__screenshots__");
+const dirname = path.resolve(
+  vitestConfig.test?.browser?.screenshotDirectory ?? "",
+);
 const defaultTolerance = 2.3;
 
 expect.extend({
@@ -62,6 +65,7 @@ expect.extend({
     });
 
     try {
+      if (vitestConfig.test?.update) throw new Error("Update is enabled");
       await access(filename, constants.R_OK);
     } catch {
       await mkdir(dirname, { recursive: true });

@@ -1,7 +1,6 @@
 import debug from "debug";
 import { delay } from "es-toolkit";
 import { type ChildProcess, fork } from "node:child_process";
-import { existsSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 
 let worker: ChildProcess | undefined;
@@ -30,19 +29,34 @@ export async function launchServer(port: number): Promise<void> {
     },
   });
 
-  // Listen for worker's ready and error messages
-  worker.on("error", (error) => {
-    console.error("Server error: %s", error);
+  // Wait for the server to send ready message
+  logger("Waiting for server to start...");
+  await new Promise<void>((resolve, reject) => {
+    const timeout = setTimeout(() => {
+      reject(new Error("Server startup timeout after 30s"));
+    }, 30000);
+
+    if (worker) {
+      worker.on("message", (msg: { type: string; error?: string }) => {
+        if (msg.type === "ready") {
+          clearTimeout(timeout);
+          logger("Server is ready");
+          resolve();
+        } else if (msg.type === "error") {
+          clearTimeout(timeout);
+          reject(new Error(`Server error: ${msg.error}`));
+        }
+      });
+
+      worker.on("error", (error) => {
+        clearTimeout(timeout);
+        reject(error);
+      });
+    }
   });
 
-  // Wait for the server to build all the dependencies.  This is necessary
-  // because the server builds the dependencies on the fly, and we need to wait
-  // for it to finish before we can start the tests.
-  logger("Waiting for dependencies to be built …");
-  const path = resolve("node_modules/.vite/deps");
-  while (!existsSync(path) || readdirSync(path).length < 850) await delay(100);
-
-  logger("Server is ready");
+  // Additional delay to ensure HTTP server is fully bound
+  await delay(500);
 }
 
 /**
