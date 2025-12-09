@@ -65,7 +65,6 @@ expect.extend({
     });
 
     try {
-      if (vitestConfig.test?.update) throw new Error("Update is enabled");
       await access(filename, constants.R_OK);
     } catch {
       await mkdir(dirname, { recursive: true });

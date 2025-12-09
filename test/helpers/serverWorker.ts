@@ -32,7 +32,7 @@ async function startServer() {
       logLevel: "warn", // Reduced log level to avoid noise
       root: process.cwd(),
       optimizeDeps: {
-        noDiscovery: true,
+        noDiscovery: false,
         force: true, // Force re-optimization in test mode
         include: [
           "react",
