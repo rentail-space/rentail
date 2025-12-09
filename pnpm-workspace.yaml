@@ -9,6 +9,7 @@ onlyBuiltDependencies:
   - esbuild
   - msw
   - prisma
+  - bcrypt
 
 minimumReleaseAge: 2880
 minimumReleaseAgeExclude:

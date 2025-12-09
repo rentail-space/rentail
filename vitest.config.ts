@@ -19,6 +19,7 @@ export default defineConfig({
     browser: { screenshotDirectory: "__screenshots__" },
     disableConsoleIntercept: !process.env.CI,
     exclude: ["test/conversations/**/*.ts"],
+    execArgv: ["--max-old-space-size=3072"],
     fileParallelism: false,
     globalSetup: "test/helpers/globalSetup.ts",
     hookTimeout: 30_000, // 30 seconds for beforeAll/afterAll (server + browser startup)
