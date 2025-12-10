@@ -4,15 +4,15 @@ import { AlertCircle } from "lucide-react";
 import { useId } from "react";
 import { redirect, useFetcher } from "react-router";
 import { useToggle } from "usehooks-ts";
-import { Button } from "~/components/ui/button";
+import { Button } from "~/components/ui/Button";
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldLabel,
   FieldSet,
-} from "~/components/ui/field";
-import { Input } from "~/components/ui/input";
+} from "~/components/ui/FieldSet";
+import { Input } from "~/components/ui/Input";
 import { signInEmail, signUpEmail } from "~/sessions.server";
 import type { Route } from "./+types/auth";
 

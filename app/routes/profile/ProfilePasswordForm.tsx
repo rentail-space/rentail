@@ -1,14 +1,14 @@
 import { AlertCircle, CheckCircle } from "lucide-react";
 import { useEffect, useId, useRef } from "react";
 import { useFetcher } from "react-router";
-import { Button } from "~/components/ui/button";
+import { Button } from "~/components/ui/Button";
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from "~/components/ui/field";
-import { Input } from "~/components/ui/input";
+} from "~/components/ui/FieldSet";
+import { Input } from "~/components/ui/Input";
 
 export default function ProfilePasswordForm() {
   const currentPasswordId = useId();

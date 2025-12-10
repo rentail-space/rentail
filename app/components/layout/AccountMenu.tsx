@@ -3,7 +3,7 @@ import type { User } from "prisma/generated/client";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouteLoaderData } from "react-router";
 import type { loader as rootLoader } from "~/root";
-import { Button } from "../ui/button";
+import { Button } from "../ui/Button";
 
 export default function AccountMenu({ className }: { className?: string }) {
   const data = useRouteLoaderData<typeof rootLoader>("root");

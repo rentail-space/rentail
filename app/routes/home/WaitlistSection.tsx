@@ -1,9 +1,9 @@
 import { Info } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import { useFetcher } from "react-router";
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/label";
+import { Button } from "~/components/ui/Button";
+import { Input } from "~/components/ui/Input";
+import { Label } from "~/components/ui/Label";
 
 export default function WaitlistSection() {
   return (

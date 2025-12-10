@@ -11,7 +11,7 @@ import { DateTime } from "luxon";
 import type { User, Waitlist } from "prisma/generated/client";
 import { Fragment } from "react";
 import { Link, type LoaderFunctionArgs } from "react-router";
-import { Button } from "~/components/ui/button";
+import { Button } from "~/components/ui/Button";
 import {
   Table,
   TableBody,
@@ -19,7 +19,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "~/components/ui/table";
+} from "~/components/ui/Table";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/sessions.server";

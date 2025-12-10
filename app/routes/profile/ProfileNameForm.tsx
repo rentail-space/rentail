@@ -1,9 +1,9 @@
 import { AlertCircle, CheckCircle } from "lucide-react";
 import { useId } from "react";
 import { useFetcher } from "react-router";
-import { Button } from "~/components/ui/button";
-import { Field, FieldLabel } from "~/components/ui/field";
-import { Input } from "~/components/ui/input";
+import { Button } from "~/components/ui/Button";
+import { Field, FieldLabel } from "~/components/ui/FieldSet";
+import { Input } from "~/components/ui/Input";
 
 export default function ProfileNameForm({
   user,
