@@ -208,7 +208,7 @@ function HoverCard({
         <div
           ref={cardRef}
           className={cn(
-            "absolute right-full z-50 my-24  mr-10",
+            "absolute right-full z-50 my-24 mr-10",
             "w-96 max-w-[min(20rem,calc(100vw-2rem))] overflow-hidden",
             "rounded-md border-2 border-black bg-white shadow-[6px_6px_0px_0px_black]",
           )}

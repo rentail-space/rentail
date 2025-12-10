@@ -7,7 +7,7 @@ import { createIsbotFromList, list } from "isbot";
 import { reverse } from "node:dns/promises";
 import type { Chat, User } from "prisma/generated/client";
 import type { UserGetPayload } from "prisma/generated/models";
-import { createCookieSessionStorage, type Session } from "react-router";
+import { type Session, createCookieSessionStorage } from "react-router";
 import { ulid } from "ulid";
 import zod from "zod";
 import prisma from "~/lib/prisma";
@@ -25,6 +25,8 @@ type SessionData = {
 type SessionFlashData = {
   error: string;
 };
+
+const adminEmails = ["assaf@labnotes.org"];
 
 // List of user agents that are considered bots
 const botUserAgents = [
@@ -433,8 +435,10 @@ export async function signUpEmail({
     },
   });
   if (anonymousUser) {
+    const isAnonymous = false;
+    const isAdmin = adminEmails.includes(email);
     const updatedUser = await prisma.user.update({
-      data: { isAnonymous: false, name, email, passwordHash },
+      data: { isAdmin, isAnonymous, name, email, passwordHash },
       where: { id: anonymousUser.id },
     });
     await sendWelcomeEmail(updatedUser);
