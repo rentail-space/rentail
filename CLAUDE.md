@@ -133,6 +133,55 @@ The core innovation that prevents message duplication on network interruptions:
 - **Debug logging**: `debug` package with namespaces (server, browser, agent, prisma, msw)
   - Enable: `DEBUG=server,browser pnpm test` or `DEBUG=* pnpm test`
 
+## Design System
+
+**Neo Brutalism Visual Identity:**
+The application uses a consistent Neo Brutalism design system across all UI components.
+
+**Core Design Tokens:**
+- **Colors:**
+  - Background: `hsl(60,100%,99%)` (off-white)
+  - Primary accent: `hsl(37,92%,65%)` (orange)
+  - User messages: `hsl(47,100%,95%)` (yellow)
+  - Assistant messages: `hsl(120,100%,97%)` (green)
+  - Text: Black (`text-black`)
+  - Font weights: Bold for headings, medium for body
+- **Borders:** 2px solid black everywhere (`border-2 border-black`)
+- **Shadows:** Offset box-shadows (4-8px based on hierarchy)
+  - Small elements: `shadow-[2px_2px_0px_0px_black]`
+  - Cards: `shadow-[4px_4px_0px_0px_black]`
+  - Prominent cards: `shadow-[6px_6px_0px_0px_black]`
+  - Important elements: `shadow-[8px_8px_0px_0px_black]`
+- **Border Radius:**
+  - Small elements: `rounded-[5px]` or `rounded-sm`
+  - Containers/cards: `rounded-[10px]` or `rounded-md`
+- **Typography:**
+  - Headings: `font-bold` with `leading-tight`
+  - Body: `font-medium` with `leading-relaxed`
+
+**Interactive Elements:**
+- **Transform animations:** All clickable elements lift on hover
+  - Hover: `translate-x-[-2px] translate-y-[-2px]` + shadow increases
+  - Active: `translate-x-[2px] translate-y-[2px]` + shadow decreases
+  - Transition: `transition-all duration-100`
+- **Buttons:** Orange background (`bg-[hsl(37,92%,65%)]`) with black text and borders
+- **Links:** Hover state changes to orange accent color
+- **Form inputs:** Black borders with shadows that grow on focus
+
+**Component Patterns:**
+- **Cards:** White background with 2px black border and 4px shadow
+- **Highlighted cards:** 8px shadow for visual hierarchy (e.g., "Most Popular" pricing plan)
+- **Icon containers:** Orange background with 2px border and 2px shadow
+- **Dropdowns/menus:** White background, black borders, 4px shadows
+- **Alerts:** Colored backgrounds (red/green/yellow) with black borders and shadows
+
+**Consistency Notes:**
+- All text should be black unless it's an accent (orange for active/hover states)
+- Avoid gray text colors (use black with medium font weight instead)
+- All borders are 2px solid black (no subtle 1px gray borders)
+- Background sections alternate between off-white and yellow for visual rhythm
+- Never use gradient backgrounds (flat colors only)
+
 ## Code Conventions
 
 **TypeScript & Types:**
