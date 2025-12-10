@@ -47,7 +47,7 @@ export default function AboutTeam() {
               key={member.name}
               to={member.linkedIn}
               target="_blank"
-              className="flex transform flex-col items-center rounded-[10px] border-2 border-black bg-white p-8 text-center shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:shadow-[6px_6px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]"
+              className="flex transform flex-col items-center rounded-[10px] border-2 border-black bg-white p-8 text-center shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_black]"
             >
               <div className="mb-4 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-2 border-black shadow-[2px_2px_0px_0px_black]">
                 <img

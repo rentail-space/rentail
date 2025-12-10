@@ -12,7 +12,7 @@ export default function PricingCTA() {
         </p>
         <Link
           to="/chat"
-          className="inline-flex transform items-center justify-center rounded-[10px] border-2 border-black bg-[hsl(37,92%,65%)] px-8 py-4 font-bold text-black text-lg shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:shadow-[6px_6px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]"
+          className="inline-flex transform items-center justify-center rounded-[10px] border-2 border-black bg-[hsl(37,92%,65%)] px-8 py-4 font-bold text-black text-lg shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_black]"
         >
           Get Started Now
         </Link>

@@ -142,8 +142,8 @@ function PricingPlan({
         to={plan.href}
         className={`mb-8 inline-flex transform items-center justify-center rounded-[5px] border-2 border-black px-6 py-3 text-center font-bold transition-all duration-100 ${
           plan.highlighted
-            ? "bg-[hsl(37,92%,65%)] text-black shadow-[3px_3px_0px_0px_black] hover:shadow-[5px_5px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]"
-            : "bg-white text-black shadow-[3px_3px_0px_0px_black] hover:shadow-[5px_5px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]"
+            ? "bg-[hsl(37,92%,65%)] text-black shadow-[3px_3px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black]"
+            : "bg-white text-black shadow-[3px_3px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black]"
         }`}
       >
         {plan.cta}

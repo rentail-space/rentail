@@ -47,7 +47,7 @@ export default function HeroSection() {
 
           <Link
             to="/chat"
-            className="my-4 inline w-fit transform rounded-[10px] border-2 border-black bg-[hsl(37,92%,65%)] px-8 py-4 font-bold text-black text-lg shadow-[6px_6px_0px_0px_black] no-underline transition-all duration-100 hover:shadow-[8px_8px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px] active:shadow-[4px_4px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px]"
+            className="my-4 inline w-fit transform rounded-[10px] border-2 border-black bg-[hsl(37,92%,65%)] px-8 py-4 font-bold text-black text-lg no-underline shadow-[6px_6px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[4px_4px_0px_0px_black]"
           >
             Get Started
           </Link>

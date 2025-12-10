@@ -1,7 +1,6 @@
 import { Info } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import { useFetcher } from "react-router";
-import { Alert, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
@@ -55,7 +54,7 @@ function JoinWaitlist() {
         <div className="flex flex-col gap-3 sm:flex-row">
           <Input
             autoComplete="email"
-            className="h-14 w-full rounded-[5px] border-2 border-black bg-white px-6 font-medium text-black text-lg shadow-[2px_2px_0px_0px_black] placeholder:text-gray-600 transition-all duration-100 focus-visible:shadow-[4px_4px_0px_0px_black] focus-visible:translate-x-[-2px] focus-visible:translate-y-[-2px]"
+            className="h-14 w-full rounded-[5px] border-2 border-black bg-white px-6 font-medium text-black text-lg shadow-[2px_2px_0px_0px_black] transition-all duration-100 placeholder:text-gray-600 focus-visible:translate-x-[-2px] focus-visible:translate-y-[-2px] focus-visible:shadow-[4px_4px_0px_0px_black]"
             id={id}
             name="email"
             onChange={(event) => setEmail(event.target.value)}

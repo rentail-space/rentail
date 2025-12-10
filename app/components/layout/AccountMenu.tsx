@@ -44,7 +44,7 @@ function SignInButton() {
   return (
     <Link
       aria-label="Go to sign in page"
-      className="h-9 w-22 transform whitespace-nowrap rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-2 font-bold text-black shadow-[2px_2px_0px_0px_black] transition-all duration-100 hover:shadow-[4px_4px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]"
+      className="h-9 w-22 transform whitespace-nowrap rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-2 font-bold text-black shadow-[2px_2px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_black]"
       to="/auth"
     >
       Sign In
