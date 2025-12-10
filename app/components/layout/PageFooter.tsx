@@ -49,13 +49,13 @@ const links = [
 
 export default function PageFooter() {
   return (
-    <footer className="footer sm:footer-horizontal border-t bg-gray-50 px-6 py-12 print:hidden">
-      <aside className="flex flex-col gap-4 text-gray-600">
+    <footer className="footer sm:footer-horizontal border-black border-t-2 bg-[hsl(60,100%,99%)] px-6 py-12 print:hidden">
+      <aside className="flex flex-col gap-4 text-black">
         <PageIconLink />
-        <p className="text-sm">
+        <p className="font-medium text-sm">
           AI-powered short-term retail space marketplace
         </p>
-        <p className="text-sm">
+        <p className="font-medium text-sm">
           © {new Date().getFullYear()} rentail.space. All rights reserved.
           Patent pending.
         </p>
@@ -64,11 +64,13 @@ export default function PageFooter() {
 
       {links.map((link) => (
         <nav key={link.title}>
-          <h3 className="footer-title flex flex-col gap-4">{link.title}</h3>
+          <h3 className="footer-title flex flex-col gap-4 font-bold text-black">
+            {link.title}
+          </h3>
           {link.links.map((link) => (
             <NavLink
               aria-label={`Go to ${link.label} page`}
-              className="font-medium text-gray-600 text-sm transition-colors hover:text-blue-600"
+              className="font-medium text-black text-sm transition-colors hover:text-[hsl(37,92%,65%)]"
               key={link.to}
               to={link.to}
             >
@@ -88,7 +90,7 @@ function SocialLinks() {
         to="https://www.linkedin.com/company/rentail-space/"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1 text-gray-600 text-sm hover:text-blue-700"
+        className="inline-flex items-center gap-1 font-medium text-black text-sm transition-colors hover:text-[hsl(37,92%,65%)]"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
