@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 import env from "env-var";
 
 dotenv.config({ quiet: true });
-const isTest = process.env.NODE_ENV === "test";
 
 export default {
   isProduction: process.env.NODE_ENV === "production",
@@ -17,10 +16,7 @@ export default {
 
   ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required(true).asString(),
   BETTER_AUTH_SECRET: env.get("BETTER_AUTH_SECRET").required(true).asString(),
-  DATABASE_URL: isTest
-    ? // secretlint-disable-next-line
-      "postgresql://postgres:postgres@localhost:5432/postgres?pgbouncer=true"
-    : env.get("DATABASE_URL").required().asUrlString(),
+  DATABASE_URL: env.get("DATABASE_URL").required().asUrlString(),
   MAPBOX_TOKEN: env.get("MAPBOX_TOKEN").required(false).asString(),
   RESEND_API_KEY: env.get("RESEND_API_KEY").required(true).asString(),
 

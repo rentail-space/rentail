@@ -8,16 +8,15 @@ export default function CenterPopup({
   const directionsUrl = `https://maps.google.com/?q=${encodeURIComponent(`${center.address}, ${center.city}, ${center.state} ${center.country}`)}`;
 
   return (
-    <div className="card">
-      <div className="card-body px-0 py-2">
-        <div className="card-title line-clamp-1">{center.name}</div>
-        <address className="card-content">
+    <div className="space-y-2">
+      <h3 className="line-clamp-1 font-bold text-lg">{center.name}</h3>
+      <address className="text-sm text-gray-500">
           <p>{center.address.split(",")[0]}</p>
           <p>{center.address.split(",").slice(1).join(", ")}</p>
         </address>
 
-        <div className="card-actions">
-          <span>
+        <div className="flex flex-row justify-between gap-2">
+          <span className="text-sm text-gray-500">
             {center.spaces.length}{" "}
             {center.spaces.length === 1 ? "space" : "spaces"}
           </span>
@@ -31,6 +30,5 @@ export default function CenterPopup({
           </a>
         </div>
       </div>
-    </div>
   );
 }

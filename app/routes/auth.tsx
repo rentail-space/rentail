@@ -64,104 +64,99 @@ export default function AuthPage() {
 
   return (
     <main className="flex flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50">
-      <section className="card card-border mx-4 my-10 w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
-        <div className="card-body space-y-6">
-          <div>
-            <h1 className="text-center font-bold text-3xl">
-              {isSignUp ? "Create Account" : "Welcome Back"}
-            </h1>
-            <p className="text-center text-gray-600">
-              {isSignUp
-                ? "Sign up to start finding retail spaces"
-                : "Sign in to your account"}
-            </p>
-          </div>
+      <section className="mx-4 my-10 w-full max-w-md space-y-6 rounded-2xl bg-white p-8 shadow-xl">
+        <header>
+          <h1 className="text-center font-bold text-3xl">
+            {isSignUp ? "Create Account" : "Welcome Back"}
+          </h1>
+          <p className="text-center text-gray-600">
+            {isSignUp
+              ? "Sign up to start finding retail spaces"
+              : "Sign in to your account"}
+          </p>
+        </header>
 
-          <fetcher.Form method="post" className="space-y-6">
-            <FieldSet>
-              {isSignUp && (
-                <Field>
-                  <FieldLabel htmlFor={nameId}>Full Name</FieldLabel>
-                  <Input
-                    id={nameId}
-                    name="name"
-                    type="text"
-                    required
-                    placeholder="John Doe"
-                  />
-                </Field>
-              )}
-
+        <fetcher.Form method="post" className="space-y-6">
+          <FieldSet>
+            {isSignUp && (
               <Field>
-                <FieldLabel htmlFor={emailId}>Email Address</FieldLabel>
+                <FieldLabel htmlFor={nameId}>Full Name</FieldLabel>
                 <Input
-                  id={emailId}
-                  name="email"
-                  placeholder="you@example.com"
+                  id={nameId}
+                  name="name"
+                  type="text"
                   required
-                  type="email"
-                  style={{}}
+                  placeholder="John Doe"
                 />
               </Field>
-
-              <Field>
-                <FieldLabel htmlFor={passwordId}>Password</FieldLabel>
-                <Input
-                  id={passwordId}
-                  minLength={8}
-                  name="password"
-                  placeholder="••••••••"
-                  required
-                  type="password"
-                  style={{}}
-                />
-                <FieldDescription>
-                  Must be at least 8 characters
-                </FieldDescription>
-              </Field>
-            </FieldSet>
-
-            {fetcher.data?.error && (
-              <FieldError errors={[fetcher.data.error]}>
-                <div className="flex items-center gap-2">
-                  <AlertCircle className="h-6 w-6 shrink-0 stroke-current" />
-                  {fetcher.data.error}
-                </div>
-              </FieldError>
             )}
 
-            <Button
-              className="flex w-full items-center justify-center gap-2 p-6 font-bold text-lg"
-              disabled={fetcher.state !== "idle"}
-              type="submit"
-              variant="default"
-            >
-              {fetcher.state !== "idle" && (
-                <span className="loading loading-spinner" />
-              )}
-              {isSignUp
-                ? fetcher.state === "idle"
-                  ? "Create Account"
-                  : "Creating Your Account..."
-                : fetcher.state === "idle"
-                  ? "Sign In"
-                  : "Signing You In..."}
-            </Button>
-          </fetcher.Form>
-        </div>
+            <Field>
+              <FieldLabel htmlFor={emailId}>Email Address</FieldLabel>
+              <Input
+                id={emailId}
+                name="email"
+                placeholder="you@example.com"
+                required
+                type="email"
+                style={{}}
+              />
+            </Field>
 
-        <div className="card-action text-center">
+            <Field>
+              <FieldLabel htmlFor={passwordId}>Password</FieldLabel>
+              <Input
+                id={passwordId}
+                minLength={8}
+                name="password"
+                placeholder="••••••••"
+                required
+                type="password"
+                style={{}}
+              />
+              <FieldDescription>Must be at least 8 characters</FieldDescription>
+            </Field>
+          </FieldSet>
+
+          {fetcher.data?.error && (
+            <FieldError errors={[fetcher.data.error]}>
+              <div className="flex items-center gap-2">
+                <AlertCircle className="h-6 w-6 shrink-0 stroke-current" />
+                {fetcher.data.error}
+              </div>
+            </FieldError>
+          )}
+
           <Button
-            className="font-bold text-lg"
-            onClick={toggleIsSignUp}
-            type="button"
-            variant="ghost"
+            className="flex w-full items-center justify-center gap-2 p-6 font-bold text-lg"
+            disabled={fetcher.state !== "idle"}
+            type="submit"
+            variant="default"
           >
+            {fetcher.state !== "idle" && (
+              <span className="loading loading-spinner" />
+            )}
             {isSignUp
-              ? "Already have an account? Sign in"
-              : "Don't have an account? Create one"}
+              ? fetcher.state === "idle"
+                ? "Create Account"
+                : "Creating Your Account..."
+              : fetcher.state === "idle"
+                ? "Sign In"
+                : "Signing You In..."}
           </Button>
-        </div>
+        </fetcher.Form>
+
+        <Button
+          className="text-center font-bold text-lg"
+          onClick={toggleIsSignUp}
+          type="button"
+          variant="ghost"
+        >
+          {isSignUp
+            ? "Already have an account? Sign in"
+            : "Don't have an account? Create one"}
+        </Button>
+
         <Footer isSignUp={isSignUp} />
       </section>
     </main>

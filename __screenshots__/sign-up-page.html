@@ -1,47 +1,43 @@
-<section class="card card-border mx-4 my-10 w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
-  <div class="card-body space-y-6">
-    <div>
-      <h1 class="text-center font-bold text-3xl">
-        Create Account
-      </h1>
-      <p class="text-center text-gray-600">
-        Sign up to start finding retail spaces
-      </p>
-    </div>
-    <form action="/auth" class="space-y-6" data-discover="true" method="post">
-      <fieldset class="flex flex-col gap-6 has-[&gt;[data-slot=checkbox-group]]:gap-3 has-[&gt;[data-slot=radio-group]]:gap-3" data-slot="field-set">
-        <div class="group/field data-[invalid=true]:text-destructive flex w-full gap-3 flex-col [&amp;&gt;*]:w-full [&amp;&gt;.sr-only]:w-auto" data-orientation="vertical" data-slot="field" role="group">
-          <label class="items-center text-sm font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-[&gt;[data-slot=field]]:w-full has-[&gt;[data-slot=field]]:flex-col has-[&gt;[data-slot=field]]:rounded-md has-[&gt;[data-slot=field]]:border [&amp;&gt;[data-slot=field]]:p-4 has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10" data-slot="field-label">
-            Full Name
-          </label>
-          <input class="flex h-12 w-full rounded-[5px] border-2 border-black bg-white px-4 py-3 font-medium text-base text-black shadow-[2px_2px_0px_0px_black] placeholder:text-gray-600 transition-all duration-100 file:border-0 file:bg-transparent file:font-medium file:text-black focus-visible:shadow-[4px_4px_0px_0px_black] focus-visible:translate-x-[-2px] focus-visible:translate-y-[-2px] focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50" name="name" placeholder="John Doe" required type="text" />
-        </div>
-        <div class="group/field data-[invalid=true]:text-destructive flex w-full gap-3 flex-col [&amp;&gt;*]:w-full [&amp;&gt;.sr-only]:w-auto" data-orientation="vertical" data-slot="field" role="group">
-          <label class="items-center text-sm font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-[&gt;[data-slot=field]]:w-full has-[&gt;[data-slot=field]]:flex-col has-[&gt;[data-slot=field]]:rounded-md has-[&gt;[data-slot=field]]:border [&amp;&gt;[data-slot=field]]:p-4 has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10" data-slot="field-label">
-            Email Address
-          </label>
-          <input class="flex h-12 w-full rounded-[5px] border-2 border-black bg-white px-4 py-3 font-medium text-base text-black shadow-[2px_2px_0px_0px_black] placeholder:text-gray-600 transition-all duration-100 file:border-0 file:bg-transparent file:font-medium file:text-black focus-visible:shadow-[4px_4px_0px_0px_black] focus-visible:translate-x-[-2px] focus-visible:translate-y-[-2px] focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50" name="email" placeholder="you@example.com" required type="email" />
-        </div>
-        <div class="group/field data-[invalid=true]:text-destructive flex w-full gap-3 flex-col [&amp;&gt;*]:w-full [&amp;&gt;.sr-only]:w-auto" data-orientation="vertical" data-slot="field" role="group">
-          <label class="items-center text-sm font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-[&gt;[data-slot=field]]:w-full has-[&gt;[data-slot=field]]:flex-col has-[&gt;[data-slot=field]]:rounded-md has-[&gt;[data-slot=field]]:border [&amp;&gt;[data-slot=field]]:p-4 has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10" data-slot="field-label">
-            Password
-          </label>
-          <input class="flex h-12 w-full rounded-[5px] border-2 border-black bg-white px-4 py-3 font-medium text-base text-black shadow-[2px_2px_0px_0px_black] placeholder:text-gray-600 transition-all duration-100 file:border-0 file:bg-transparent file:font-medium file:text-black focus-visible:shadow-[4px_4px_0px_0px_black] focus-visible:translate-x-[-2px] focus-visible:translate-y-[-2px] focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50" minlength="8" name="password" placeholder="••••••••" required type="password" />
-          <p class="text-muted-foreground text-sm font-normal leading-normal group-has-[[data-orientation=horizontal]]/field:text-balance nth-last-2:-mt-1 last:mt-0 [[data-variant=legend]+&amp;]:-mt-1.5 [&amp;&gt;a:hover]:text-primary [&amp;&gt;a]:underline [&amp;&gt;a]:underline-offset-4" data-slot="field-description">
-            Must be at least 8 characters
-          </p>
-        </div>
-      </fieldset>
-      <button class="whitespace-nowrap transition-all duration-100 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[3px_3px_0px_0px_black] hover:shadow-[5px_5px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px] active:shadow-[1px_1px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] h-12 flex w-full items-center justify-center gap-2 p-6 font-bold text-lg" type="submit">
-        Create Account
-      </button>
-    </form>
-  </div>
-  <div class="card-action text-center">
-    <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-all duration-100 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 rounded-[5px] border-2 border-transparent text-black hover:border-black hover:bg-white h-12 px-6 py-3 font-bold text-lg" type="button">
-      Already have an account? Sign in
+<section class="mx-4 my-10 w-full max-w-md space-y-6 rounded-2xl bg-white p-8 shadow-xl">
+  <header>
+    <h1 class="text-center font-bold text-3xl">
+      Create Account
+    </h1>
+    <p class="text-center text-gray-600">
+      Sign up to start finding retail spaces
+    </p>
+  </header>
+  <form action="/auth" class="space-y-6" data-discover="true" method="post">
+    <fieldset class="flex flex-col gap-6 has-[&gt;[data-slot=checkbox-group]]:gap-3 has-[&gt;[data-slot=radio-group]]:gap-3" data-slot="field-set">
+      <div class="group/field data-[invalid=true]:text-destructive flex w-full gap-3 flex-col [&amp;&gt;*]:w-full [&amp;&gt;.sr-only]:w-auto" data-orientation="vertical" data-slot="field" role="group">
+        <label class="items-center text-sm font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-[&gt;[data-slot=field]]:w-full has-[&gt;[data-slot=field]]:flex-col has-[&gt;[data-slot=field]]:rounded-md has-[&gt;[data-slot=field]]:border [&amp;&gt;[data-slot=field]]:p-4 has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10" data-slot="field-label">
+          Full Name
+        </label>
+        <input class="flex h-12 w-full rounded-[5px] border-2 border-black bg-white px-4 py-3 font-medium text-base text-black shadow-[2px_2px_0px_0px_black] placeholder:text-gray-600 transition-all duration-100 file:border-0 file:bg-transparent file:font-medium file:text-black focus-visible:shadow-[4px_4px_0px_0px_black] focus-visible:translate-x-[-2px] focus-visible:translate-y-[-2px] focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50" name="name" placeholder="John Doe" required type="text" />
+      </div>
+      <div class="group/field data-[invalid=true]:text-destructive flex w-full gap-3 flex-col [&amp;&gt;*]:w-full [&amp;&gt;.sr-only]:w-auto" data-orientation="vertical" data-slot="field" role="group">
+        <label class="items-center text-sm font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-[&gt;[data-slot=field]]:w-full has-[&gt;[data-slot=field]]:flex-col has-[&gt;[data-slot=field]]:rounded-md has-[&gt;[data-slot=field]]:border [&amp;&gt;[data-slot=field]]:p-4 has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10" data-slot="field-label">
+          Email Address
+        </label>
+        <input class="flex h-12 w-full rounded-[5px] border-2 border-black bg-white px-4 py-3 font-medium text-base text-black shadow-[2px_2px_0px_0px_black] placeholder:text-gray-600 transition-all duration-100 file:border-0 file:bg-transparent file:font-medium file:text-black focus-visible:shadow-[4px_4px_0px_0px_black] focus-visible:translate-x-[-2px] focus-visible:translate-y-[-2px] focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50" name="email" placeholder="you@example.com" required type="email" />
+      </div>
+      <div class="group/field data-[invalid=true]:text-destructive flex w-full gap-3 flex-col [&amp;&gt;*]:w-full [&amp;&gt;.sr-only]:w-auto" data-orientation="vertical" data-slot="field" role="group">
+        <label class="items-center text-sm font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-[&gt;[data-slot=field]]:w-full has-[&gt;[data-slot=field]]:flex-col has-[&gt;[data-slot=field]]:rounded-md has-[&gt;[data-slot=field]]:border [&amp;&gt;[data-slot=field]]:p-4 has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10" data-slot="field-label">
+          Password
+        </label>
+        <input class="flex h-12 w-full rounded-[5px] border-2 border-black bg-white px-4 py-3 font-medium text-base text-black shadow-[2px_2px_0px_0px_black] placeholder:text-gray-600 transition-all duration-100 file:border-0 file:bg-transparent file:font-medium file:text-black focus-visible:shadow-[4px_4px_0px_0px_black] focus-visible:translate-x-[-2px] focus-visible:translate-y-[-2px] focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50" minlength="8" name="password" placeholder="••••••••" required type="password" />
+        <p class="text-muted-foreground text-sm font-normal leading-normal group-has-[[data-orientation=horizontal]]/field:text-balance nth-last-2:-mt-1 last:mt-0 [[data-variant=legend]+&amp;]:-mt-1.5 [&amp;&gt;a:hover]:text-primary [&amp;&gt;a]:underline [&amp;&gt;a]:underline-offset-4" data-slot="field-description">
+          Must be at least 8 characters
+        </p>
+      </div>
+    </fieldset>
+    <button class="whitespace-nowrap transition-all duration-100 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[3px_3px_0px_0px_black] hover:shadow-[5px_5px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px] active:shadow-[1px_1px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] h-12 flex w-full items-center justify-center gap-2 p-6 font-bold text-lg" type="submit">
+      Create Account
     </button>
-  </div>
+  </form>
+  <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-all duration-100 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 rounded-[5px] border-2 border-transparent text-black hover:border-black hover:bg-white h-12 px-6 py-3 text-center font-bold text-lg" type="button">
+    Already have an account? Sign in
+  </button>
   <footer class="mt-8 text-center text-gray-600 text-sm">
     By signing up, you agree to our
     <a class="link" href="/terms">
