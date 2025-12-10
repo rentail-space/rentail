@@ -33,6 +33,14 @@ jobs:
       - name: Install Playwright (Chromium)
         run: pnpm exec playwright install chromium --with-deps
 
+      - name: Install Doppler CLI
+        uses: dopplerhq/cli-action@v3
+
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: latest
+
       - name: Scrape Los Cerritos
         run: pnpm tsx scripts/scrapeLosCerritos.ts
 
@@ -42,20 +50,12 @@ jobs:
       - name: Scrape Stonewood
         run: pnpm tsx scripts/scrapeStonewood.ts
 
-      - name: Install Doppler CLI
-        uses: dopplerhq/cli-action@v3
-
-      - name: Generate Prisma schema
+      - name: Update database
         run: |
           doppler run --config prd -- pnpm prisma generate
           doppler run --config prd -- pnpm tsx prisma/seed.ts
         env:
           DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
-
-      - name: Setup Biome
-        uses: biomejs/setup-biome@v2
-        with:
-          version: latest
 
       - name: Format seed files
         run: biome format prisma/seed/*.json --fix
