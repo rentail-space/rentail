@@ -581,6 +581,7 @@ async function createUser({
     .filter(Boolean)
     .join(", ");
   const deviceInfo = getDeviceInfo(requestHeaders);
+  const isAdmin = email ? adminEmails.includes(email) : false;
 
   return await prisma.user.create({
     data: {
@@ -590,6 +591,7 @@ async function createUser({
       geocode,
       id,
       ip: geocode.ip,
+      isAdmin,
       isAnonymous,
       isBot: isUABot(userAgent) || (await isBotByIP(geocode.ip)),
       isMobile: deviceInfo.isMobile,
