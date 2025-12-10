@@ -8,6 +8,13 @@ import { twMerge } from "tailwind-merge";
 import { StickToBottom } from "use-stick-to-bottom";
 import { Button } from "~/components/ui/Button";
 import { FieldSet } from "~/components/ui/FieldSet";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "~/components/ui/Table";
 import { Textarea } from "~/components/ui/Textarea";
 import deviceDetection from "~/lib/deviceDetection";
 import prisma from "~/lib/prisma";
@@ -84,59 +91,15 @@ function UserInfoCard({ user }: { user: User }) {
       <summary className="collapse-title font-semibold">
         {user.name || user.id}
       </summary>
-      <table className="table-bordered collapse-content table">
-        <tbody>
-          {!user.isAnonymous && (
-            <tr>
-              <th className="align-middle">Email</th>
-              <td className="truncate align-middle" title={user.email ?? ""}>
-                {user.email}
-              </td>
-            </tr>
-          )}
-          <tr>
-            <th className="whitespace-nowrap align-middle">User Agent</th>
-            <td className="truncate align-middle" title={user.userAgent ?? ""}>
-              {user.userAgent}
-            </td>
-          </tr>
-          {user.referrer && (
-            <tr>
-              <th className="align-middle">Referrer</th>
-              <td className="truncate align-middle" title={user.referrer ?? ""}>
-                {user.referrer}
-              </td>
-            </tr>
-          )}
-          <tr>
-            <th className="align-middle">IP</th>
-            <td className="truncate align-middle" title={user.ip ?? ""}>
-              {user.ip}
-            </td>
-          </tr>
-          <tr>
-            <th className="align-middle">Location</th>
-            <td
-              className="truncate align-middle"
-              title={user.cityStateCountry ?? ""}
-            >
-              {user.cityStateCountry}
-            </td>
-          </tr>
-          <tr>
-            <th className="align-middle">Device</th>
-            <td className="truncate align-middle" title={user.userAgent ?? ""}>
-              {deviceDetection(user.userAgent)}
-            </td>
-          </tr>
-          {user.viewport && (
-            <tr>
-              <th className="align-middle">Viewport</th>
-              <td className="truncate align-middle">
-                {user.viewport as string}
-              </td>
-            </tr>
-          )}
+      <Table>
+        <TableBody>
+          {!user.isAnonymous && <Row title="Email" value={user.email} />}
+          <Row title="User Agent" value={user.userAgent} />
+          <Row title="Referrer" value={user.referrer} />
+          <Row title="IP" value={user.ip} />
+          <Row title="Location" value={user.cityStateCountry} />
+          <Row title="Device" value={deviceDetection(user.userAgent)} />
+          <Row title="Viewport" value={user.viewport as string} />
           {utm &&
             Object.entries<string>(utm)
               .filter(
@@ -144,24 +107,31 @@ function UserInfoCard({ user }: { user: User }) {
                   key !== "ip" && key !== "userAgent" && key !== "referer",
               )
               .map(([key, value]) => (
-                <tr key={key}>
-                  <th className="whitespace-nowrap align-middle">UTM {key}</th>
-                  <td className="truncate align-middle" title={value}>
-                    {value}
-                  </td>
-                </tr>
+                <Row key={key} title={`UTM ${key}`} value={value} />
               ))}
-          <tr>
-            <th className="align-middle">Created</th>
-            <td className="whitespace-nowrap align-middle">
-              {DateTime.fromJSDate(user.createdAt)
-                .setZone(timeZone)
-                .toLocaleString(DateTime.DATETIME_FULL)}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          <Row
+            title="Created"
+            value={DateTime.fromJSDate(user.createdAt)
+              .setZone(timeZone)
+              .toLocaleString(DateTime.DATETIME_FULL)}
+          />
+        </TableBody>
+      </Table>
     </details>
+  );
+}
+
+function Row({ title, value }: { title: string; value: string | null }) {
+  return (
+    <TableRow>
+      <TableHead className="align-middle">{title}</TableHead>
+      <TableCell
+        className="max-w-120 truncate align-middle"
+        title={value ?? undefined}
+      >
+        {value}
+      </TableCell>
+    </TableRow>
   );
 }
 

@@ -5,6 +5,13 @@ import { useRef } from "react";
 import { Link } from "react-router";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/Table";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
@@ -122,16 +129,16 @@ function Spaces({ spaces }: { spaces: PropertySpace[] }) {
     <>
       <h4 className="text-center">Available Spaces</h4>
 
-      <table className="table-zebra table">
-        <thead>
-          <tr>
+      <Table>
+        <TableHeader>
+          <TableRow>
             <th>Number</th>
             <th className="w-24 text-right">Size</th>
             <th className="w-20">Type</th>
             <th className="w-20">Floor</th>
-          </tr>
-        </thead>
-        <tbody>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {spaces
             .sort((a, b) =>
               a.type !== b.type
@@ -139,17 +146,17 @@ function Spaces({ spaces }: { spaces: PropertySpace[] }) {
                 : a.number.localeCompare(b.number),
             )
             .map((space) => (
-              <tr key={space.id}>
-                <td>{space.number}</td>
-                <td className="text-right">
+              <TableRow key={space.id}>
+                <TableCell>{space.number}</TableCell>
+                <TableCell className="text-right">
                   {space.size.toLocaleString()} sq ft
-                </td>
-                <td>{space.type}</td>
-                <td>{space.floor}</td>
-              </tr>
+                </TableCell>
+                <TableCell>{space.type}</TableCell>
+                <TableCell>{space.floor}</TableCell>
+              </TableRow>
             ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </>
   ) : (
     <p className="text-center text-gray-400 text-lg">No spaces available</p>
