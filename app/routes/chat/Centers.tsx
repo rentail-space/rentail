@@ -204,50 +204,52 @@ function HoverCard({
 
   return (
     <Activity mode={mode}>
-      <div
-        ref={cardRef}
-        className={cn(
-          "absolute right-full z-50 my-8 mr-10",
-          "w-96 max-w-[min(20rem,calc(100vw-2rem))] overflow-hidden",
-          "rounded-md border-2 border-black bg-white shadow-[6px_6px_0px_0px_black]",
-        )}
-        style={{ top: `${topOffset}px` }}
-      >
-        <div className="p-4">
-          <p className="mb-2 font-bold text-black text-lg">{center.name}</p>
-          <p className="line-clamp-5 font-medium text-black text-sm">
-            {center.description.split("\n")[0]}
-          </p>
-        </div>
-
-        <figure
-          className="border-black border-y-2"
-          style={{
-            background:
-              "repeating-linear-gradient(135deg, #e5e7eb 0 24px, #fff 24px 48px)",
-          }}
+      <Link target="_blank" to={`/center/${center.id}`}>
+        <div
+          ref={cardRef}
+          className={cn(
+            "absolute right-full z-50 my-24  mr-10",
+            "w-96 max-w-[min(20rem,calc(100vw-2rem))] overflow-hidden",
+            "rounded-md border-2 border-black bg-white shadow-[6px_6px_0px_0px_black]",
+          )}
+          style={{ top: `${topOffset}px` }}
         >
-          <img
-            alt={center.name}
-            onError={(e) => {
-              e.currentTarget.classList.add("hidden");
-            }}
-            onLoad={(e) => {
-              e.currentTarget.classList.remove("opacity-0");
-            }}
-            src={center.imageURLs[0]}
-            className="opacity-0"
-          />
-        </figure>
+          <div className="p-4">
+            <p className="mb-2 font-bold text-black text-lg">{center.name}</p>
+            <p className="line-clamp-5 font-medium text-black text-sm">
+              {center.description.split("\n")[0]}
+            </p>
+          </div>
 
-        <div className="p-4 font-bold text-black text-sm">
-          {center.spaces.length > 1
-            ? `${center.spaces.length} available spaces`
-            : center.spaces.length === 1
-              ? "1 available space"
-              : "All spaces are leased"}
+          <figure
+            className="border-black border-y-2"
+            style={{
+              background:
+                "repeating-linear-gradient(135deg, #e5e7eb 0 24px, #fff 24px 48px)",
+            }}
+          >
+            <img
+              alt={center.name}
+              onError={(e) => {
+                e.currentTarget.classList.add("hidden");
+              }}
+              onLoad={(e) => {
+                e.currentTarget.classList.remove("opacity-0");
+              }}
+              src={center.imageURLs[0]}
+              className="opacity-0"
+            />
+          </figure>
+
+          <div className="p-4 font-bold text-black text-sm">
+            {center.spaces.length > 1
+              ? `${center.spaces.length} available spaces`
+              : center.spaces.length === 1
+                ? "1 available space"
+                : "All spaces are leased"}
+          </div>
         </div>
-      </div>
+      </Link>
     </Activity>
   );
 }
