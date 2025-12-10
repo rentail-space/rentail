@@ -60,9 +60,9 @@ export default function FeaturesSection() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="group relative transform rounded-[10px] border-2 border-black bg-white p-8 shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_black]"
+              className="group relative transform rounded-md border-2 border-black bg-white p-8 shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_black]"
             >
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-[10px] border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-md border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
                 {feature.icon}
               </div>
               <h3 className="mb-4 font-bold text-black text-xl">
@@ -80,9 +80,9 @@ export default function FeaturesSection() {
           {benefits.map((benefit) => (
             <div
               key={benefit.title}
-              className="flex items-start gap-4 rounded-[10px] border-2 border-black bg-white p-6 shadow-[3px_3px_0px_0px_black]"
+              className="flex items-start gap-4 rounded-md border-2 border-black bg-white p-6 shadow-[3px_3px_0px_0px_black]"
             >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
                 {benefit.icon}
               </div>
               <div>

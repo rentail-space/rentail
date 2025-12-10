@@ -18,7 +18,7 @@ export default function Centers({
 }) {
   return (
     <div className="sticky top-0 my-4 hidden h-fit w-1/4 lg:block">
-      <div className="rounded-[10px] border-2 border-black bg-white p-6 shadow-[6px_6px_0px_0px_black]">
+      <div className="rounded-md border-2 border-black bg-white p-6 shadow-[6px_6px_0px_0px_black]">
         {centers.length > 0 ? (
           <AvailableCenters centers={centers} />
         ) : (
@@ -100,7 +100,7 @@ function LinkToCenter({
       >
         <img
           alt="Shopping mall"
-          className="h-5 w-5 shrink-0 rounded-[5px] border border-black object-contain"
+          className="h-5 w-5 shrink-0 rounded-sm border border-black object-contain"
           src={center.logoURL || "/images/shopping-mall.png"}
         />
         <div className="flex min-w-0 flex-1 flex-col">

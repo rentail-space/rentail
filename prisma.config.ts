@@ -5,9 +5,9 @@ import { defineConfig, env } from "prisma/config";
 // Load environment variables only if not already set (e.g., by Doppler)
 // This prevents overwriting variables injected by tools like Doppler
 dotenv.configDotenv({
-  path: process.env.NODE_ENV === "test" ? ".env.test" : ".env",
   quiet: true,
   override: false,
+  debug: true,
 });
 
 // @see https://www.prisma.io/docs/orm/overview/databases/supabase#specific-considerations

@@ -13,7 +13,7 @@ export default function AboutStats() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-[10px] border-2 border-black bg-white p-6 text-center shadow-[4px_4px_0px_0px_black]"
+              className="rounded-md border-2 border-black bg-white p-6 text-center shadow-[4px_4px_0px_0px_black]"
             >
               <div className="mb-2 font-bold text-4xl text-black md:text-5xl">
                 {stat.number}

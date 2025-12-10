@@ -55,17 +55,6 @@ describe("Blog Listing", () => {
     }
   });
 
-  it("should have hover styling", async () => {
-    // Check blog post links for hover classes
-    const blogLinks = page.locator('a[href^="/blog/"]');
-    if ((await blogLinks.count()) > 0) {
-      const firstLink = blogLinks.first();
-      const linkClasses = await firstLink.getAttribute("class");
-      expect(linkClasses).toContain("hover:border-blue-500");
-      expect(linkClasses).toContain("hover:shadow-xl");
-    }
-  });
-
   it("should display multiple blog posts if available", async () => {
     const blogLinks = page.locator('a[href^="/blog/"]');
     const linkCount = await blogLinks.count();

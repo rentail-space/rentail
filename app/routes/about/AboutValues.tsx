@@ -38,7 +38,7 @@ export default function AboutValues() {
           {values.map((value) => (
             <div
               key={value.title}
-              className="rounded-[10px] border-2 border-black bg-white p-8 shadow-[4px_4px_0px_0px_black]"
+              className="rounded-md border-2 border-black bg-white p-8 shadow-[4px_4px_0px_0px_black]"
             >
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
                 {value.icon}

@@ -88,7 +88,7 @@ function UserMessage({ message }: { message: UIMessage }) {
 function Aborted() {
   return (
     <div className="chat chat-end">
-      <div className="rounded-[10px] border-2 border-black bg-red-100 px-4 py-3 font-bold text-black shadow-[4px_4px_0px_0px_black]">
+      <div className="rounded-md border-2 border-black bg-red-100 px-4 py-3 font-bold text-black shadow-[4px_4px_0px_0px_black]">
         The conversation was aborted.
       </div>
     </div>
@@ -97,7 +97,7 @@ function Aborted() {
 
 function ErrorNotice({ error }: { error: Error }) {
   return (
-    <div className="rounded-[10px] border-2 border-black bg-red-100 p-4 font-bold text-black shadow-[4px_4px_0px_0px_black]">
+    <div className="rounded-md border-2 border-black bg-red-100 p-4 font-bold text-black shadow-[4px_4px_0px_0px_black]">
       {error.message || "Some error happened"}
     </div>
   );

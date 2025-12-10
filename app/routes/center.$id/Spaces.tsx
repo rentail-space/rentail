@@ -20,7 +20,7 @@ export function Spaces({ spaces }: { spaces: PropertySpace[] }) {
 
 function NoAvailableSpaces() {
   return (
-    <div className="my-4 rounded-[10px] border-2 border-black bg-[hsl(47,100%,95%)] p-6 text-center shadow-[4px_4px_0px_0px_black]">
+    <div className="my-4 rounded-md border-2 border-black bg-[hsl(47,100%,95%)] p-6 text-center shadow-[4px_4px_0px_0px_black]">
       <p className="font-bold text-black text-lg">
         Sorry, all spaces are currently leased. Please check back later.
       </p>
@@ -30,7 +30,7 @@ function NoAvailableSpaces() {
 
 function Space({ space }: { space: PropertySpace }) {
   return (
-    <div className="grid grid-cols-2 gap-4 rounded-[10px] border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black] lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black] lg:grid-cols-4">
       <Metric title="number" value={space.number} />
       <Metric
         title="size (sqft)"
@@ -47,7 +47,7 @@ function Space({ space }: { space: PropertySpace }) {
 
 function Metric({ title, value }: { title: string; value: string }) {
   return (
-    <div className="flex flex-col items-center gap-2 rounded-[5px] border-2 border-black bg-[hsl(60,100%,99%)] p-4 shadow-[2px_2px_0px_0px_black]">
+    <div className="flex flex-col items-center gap-2 rounded-sm border-2 border-black bg-[hsl(60,100%,99%)] p-4 shadow-[2px_2px_0px_0px_black]">
       <span className="font-bold text-black text-xs uppercase tracking-wide">
         {title}
       </span>

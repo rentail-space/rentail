@@ -15,16 +15,16 @@ export default function HeroSection() {
       <div className="mx-auto flex max-w-7xl flex-col gap-12 lg:flex-row-reverse lg:items-center">
         {/* Right Column - Image */}
         <div className="flex flex-1 flex-col gap-4">
-          <div className="overflow-hidden rounded-[10px] border-2 border-black bg-white p-4 shadow-[8px_8px_0px_0px_black]">
+          <div className="overflow-hidden rounded-md border-2 border-black bg-white p-4 shadow-[8px_8px_0px_0px_black]">
             <img
               alt={heroImage.caption?.toString()}
-              className="h-auto w-full rounded-[5px]"
+              className="h-auto w-full rounded-sm"
               height={heroImage.height?.toString() ?? "auto"}
               src={new URL(heroImage.contentUrl.toString()).pathname}
               width={heroImage.width?.toString() ?? "auto"}
             />
           </div>
-          <div className="rounded-[10px] border-2 border-black bg-[hsl(47,100%,95%)] px-6 py-4 text-center font-bold text-black text-lg shadow-[4px_4px_0px_0px_black]">
+          <div className="rounded-md border-2 border-black bg-[hsl(47,100%,95%)] px-6 py-4 text-center font-bold text-black text-lg shadow-[4px_4px_0px_0px_black]">
             🎉 Rent for days, weeks, or months
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function HeroSection() {
 
           <Link
             to="/chat"
-            className="my-4 inline w-fit transform rounded-[10px] border-2 border-black bg-[hsl(37,92%,65%)] px-8 py-4 font-bold text-black text-lg no-underline shadow-[6px_6px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[4px_4px_0px_0px_black]"
+            className="my-4 inline w-fit transform rounded-md border-2 border-black bg-[hsl(37,92%,65%)] px-8 py-4 font-bold text-black text-lg no-underline shadow-[6px_6px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[4px_4px_0px_0px_black]"
           >
             Get Started
           </Link>

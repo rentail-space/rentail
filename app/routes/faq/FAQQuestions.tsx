@@ -35,7 +35,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 
   return (
     <details
-      className="rounded-[10px] border-2 border-black bg-white shadow-[4px_4px_0px_0px_black]"
+      className="rounded-md border-2 border-black bg-white shadow-[4px_4px_0px_0px_black]"
       onToggle={(event) => setIsOpen(event.currentTarget.open)}
       open
     >

@@ -19,7 +19,7 @@ export default function Center({
             to={center.website}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block transform rounded-[10px] border-2 border-black bg-[hsl(37,92%,65%)] px-6 py-3 font-bold text-black no-underline shadow-[6px_6px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_black]"
+            className="inline-block transform rounded-md border-2 border-black bg-[hsl(37,92%,65%)] px-6 py-3 font-bold text-black no-underline shadow-[6px_6px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_black]"
           >
             {center.name}
           </Link>
@@ -28,7 +28,7 @@ export default function Center({
         )}
       </h1>
 
-      <section className="rounded-[10px] border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
+      <section className="rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
         <Link
           to={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
             `${center.address}, ${center.city}, ${center.state} ${center.country}`,
@@ -45,12 +45,12 @@ export default function Center({
       </section>
 
       {center.imageURLs.length > 0 && (
-        <section className="overflow-hidden rounded-[10px] border-2 border-black shadow-[6px_6px_0px_0px_black]">
+        <section className="overflow-hidden rounded-md border-2 border-black shadow-[6px_6px_0px_0px_black]">
           <img className="w-full" src={center.imageURLs[0]} alt={center.name} />
         </section>
       )}
 
-      <section className="prose prose-lg max-w-none rounded-[10px] border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
+      <section className="prose prose-lg max-w-none rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
         <Streamdown remarkPlugins={[remarkGfm]} mode="static">
           {center.description}
         </Streamdown>
@@ -60,7 +60,7 @@ export default function Center({
         <Spaces spaces={center.spaces} />
       </section>
 
-      <section className="overflow-hidden rounded-[10px] border-2 border-black shadow-[6px_6px_0px_0px_black]">
+      <section className="overflow-hidden rounded-md border-2 border-black shadow-[6px_6px_0px_0px_black]">
         <CentersMap
           centers={[center]}
           latitude={center.latitude ?? 0}

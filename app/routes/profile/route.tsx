@@ -177,7 +177,7 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-2xl rounded-[10px] border-2 border-black bg-white shadow-[8px_8px_0px_0px_black]">
+      <div className="mx-auto max-w-2xl rounded-md border-2 border-black bg-white shadow-[8px_8px_0px_0px_black]">
         <div className="border-black border-b-2 p-8">
           <h1 className="mb-2 font-bold text-3xl text-black">
             Profile Settings

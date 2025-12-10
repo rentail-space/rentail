@@ -33,7 +33,7 @@ export default function PricingFAQ() {
           {faq.map((faq) => (
             <div
               key={faq.question}
-              className="rounded-[10px] border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]"
+              className="rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]"
             >
               <h3 className="mb-3 font-bold text-black text-xl">
                 {faq.question}
