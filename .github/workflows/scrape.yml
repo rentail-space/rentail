@@ -15,9 +15,6 @@ jobs:
       actions: write
       contents: write
 
-    env:
-      DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -49,10 +46,11 @@ jobs:
         uses: dopplerhq/cli-action@v3
 
       - name: Generate Prisma schema
-        run: doppler run --config prd -- pnpm prisma generate
-
-      - name: Seed database
-        run: doppler run --config prd -- pnpm prisma db seed
+        run: |
+          doppler run --config prd -- pnpm prisma generate
+          doppler run --config prd -- pnpm tsx prisma/seed.ts
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
 
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
