@@ -1,4 +1,3 @@
-import { Info } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/Button";
@@ -37,6 +36,10 @@ function JoinWaitlist() {
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-4">
       <form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
+        <Label htmlFor={id} className="mb-8 font-medium text-black text-xl">
+          Join the waitlist today and be the first to know when we launch in
+          your area.
+        </Label>
         {fetcher.data?.error ? (
           <div className="rounded-[5px] border-2 border-black bg-red-100 p-4 text-center font-bold text-black shadow-[2px_2px_0px_0px_black]">
             Something went wrong. Please try again.
@@ -47,10 +50,6 @@ function JoinWaitlist() {
           </div>
         ) : null}
 
-        <Label htmlFor={id} className="mb-8 font-medium text-black text-xl">
-          Join the waitlist today and be the first to know when we launch in
-          your area.
-        </Label>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Input
             autoComplete="email"
@@ -75,12 +74,12 @@ function JoinWaitlist() {
         </div>
       </form>
 
-      <div className="flex items-start gap-2 rounded-[5px] border-2 border-black bg-white p-4 font-medium text-black text-sm shadow-[2px_2px_0px_0px_black]">
-        <Info className="mt-0.5 inline-block h-4 w-4 shrink-0" />
+      <div className="flex flex-col items-center gap-2 text-gray-800">
         <p className="text-left">
           Your data is secure and will only be used to notify you about our
-          launch. No spam, ever.
+          launch.
         </p>
+        <p>No spam, ever.</p>
       </div>
     </div>
   );
