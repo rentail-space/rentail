@@ -8,7 +8,7 @@ import { ulid } from "ulid";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import sendVerificationEmail from "~/emails/EmailVerification";
 import prisma from "~/lib/prisma";
-import { findUserAndLastChat } from "~/sessions.server";
+import { findUserAndLastChat } from "~/lib/sessions.server";
 import ProfileEmailForm from "./ProfileEmailForm";
 import ProfileNameForm from "./ProfileNameForm";
 import ProfilePasswordForm from "./ProfilePasswordForm";

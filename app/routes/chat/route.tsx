@@ -8,12 +8,12 @@ import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import PageHeader from "~/components/layout/PageHeader";
 import findNearbyCenters from "~/lib/findNearbyCenters";
+import { findUserAndLastChat } from "~/lib/sessions.server";
 import welcome from "~/prompts/welcome.md?raw";
 import type { loader as rootLoader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
-import { findUserAndLastChat } from "~/sessions.server";
 import type { Route } from "./+types/route";
 import Centers from "./Centers";
 

@@ -12,6 +12,7 @@
     "paths": {
       "~/*": ["./app/*"],
       "~/test/*": ["./test/*"],
+      "~/types/*": [".react-router/types/*"],
       "prisma": ["./prisma/generated"],
       "prisma/generated": ["./prisma/generated"]
     },

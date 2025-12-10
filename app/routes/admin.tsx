@@ -4,8 +4,8 @@ import {
   useRouteLoaderData,
 } from "react-router";
 import PageLayout from "~/components/layout/PageLayout";
+import { verifyAdmin } from "~/lib/sessions.server";
 import type { loader as rootLoader } from "~/root";
-import { verifyAdmin } from "~/sessions.server";
 import NotFoundPage from "./$";
 
 export const handle = {

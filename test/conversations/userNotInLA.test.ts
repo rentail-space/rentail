@@ -2,7 +2,7 @@ import debug from "debug";
 import { beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
-import runThroughScript from "../helpers/runThroughScript";
+import runThroughScript from "~/test/helpers/runThroughScript";
 
 const script = `
   Assistant:

@@ -13,7 +13,7 @@ import {
   FieldSet,
 } from "~/components/ui/FieldSet";
 import { Input } from "~/components/ui/Input";
-import { signInEmail, signUpEmail } from "~/sessions.server";
+import { signInEmail, signUpEmail } from "~/lib/sessions.server";
 import type { Route } from "./+types/auth";
 
 export const handle = { headerLinks: [] };

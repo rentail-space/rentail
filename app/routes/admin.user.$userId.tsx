@@ -13,10 +13,10 @@ import { twMerge } from "tailwind-merge";
 import { StickToBottom } from "use-stick-to-bottom";
 import { Button } from "~/components/ui/Button";
 import { Textarea } from "~/components/ui/Textarea";
+import deviceDetection from "~/lib/deviceDetection";
 import prisma from "~/lib/prisma";
+import { verifyAdmin } from "~/lib/sessions.server";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
-import { verifyAdmin } from "~/sessions.server";
-import deviceDetection from "../lib/deviceDetection";
 import type { Route } from "./+types/admin.user.$userId";
 import Messages from "./chat/Messages";
 

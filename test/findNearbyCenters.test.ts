@@ -3,7 +3,7 @@ import type { Property } from "prisma/generated/client";
 import { beforeAll, describe, it } from "vitest";
 import findNearbyCenters from "~/lib/findNearbyCenters";
 import prisma from "~/lib/prisma";
-import { createAnonymousUser } from "~/sessions.server";
+import { createAnonymousUser } from "~/lib/sessions.server";
 
 /**
  * NOTE:

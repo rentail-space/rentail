@@ -1,20 +1,20 @@
 import { last } from "es-toolkit";
 import {
-  data,
   type HeadersFunction,
-  isRouteErrorResponse,
   type LinksFunction,
   Outlet,
   type UIMatch,
+  data,
+  isRouteErrorResponse,
   useRouteError,
 } from "react-router";
 import { WaveLoading } from "respinner";
+import PageLayout from "~/components/layout/PageLayout";
 import "~/global.css";
 import loggingMiddleware from "~/lib/middleware/logging";
 import { utmMiddleware } from "~/lib/middleware/utm";
 import type { Route } from "./+types/root";
-import PageLayout from "./components/layout/PageLayout";
-import { findUserAndLastChat } from "./sessions.server";
+import { findUserAndLastChat } from "./lib/sessions.server";
 
 export const middleware: Route.MiddlewareFunction[] = [
   utmMiddleware,

@@ -1,6 +1,6 @@
 import debug from "debug";
-import type { Route } from "../../+types/root";
-import logtail from "../logger.server";
+import logtail from "~/lib/logger.server";
+import type { Route } from "~/types/app/+types/root";
 
 const logger = debug("server");
 

@@ -8,9 +8,9 @@ import zod from "zod";
 import { classify } from "~/lib/model";
 import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
+import { findOrCreateUser, recentMessages } from "~/lib/sessions.server";
 import updateWorkingMemory from "~/lib/workingMemory";
 import chatPrompt from "~/prompts/chatPrompt.md?raw";
-import { findOrCreateUser, recentMessages } from "~/sessions.server";
 
 const logger = debug("conversations");
 

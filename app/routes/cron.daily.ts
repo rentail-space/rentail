@@ -6,8 +6,8 @@ import sendDailyAlertEmail from "~/emails/EmailDailyAlert";
 import { classify } from "~/lib/model";
 import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
+import { recentMessages } from "~/lib/sessions.server";
 import dailyAlertPrompt from "~/prompts/dailyAlertPrompt.md?raw";
-import { recentMessages } from "~/sessions.server";
 
 export async function loader() {
   const users = await prisma.user.findMany({

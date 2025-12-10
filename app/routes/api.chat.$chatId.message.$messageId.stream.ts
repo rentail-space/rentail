@@ -3,7 +3,7 @@ import { UI_MESSAGE_STREAM_HEADERS } from "ai";
 import { Redis } from "ioredis";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import env from "~/lib/env";
-import { findUserAndChatById } from "~/sessions.server";
+import { findUserAndChatById } from "~/lib/sessions.server";
 import type { Route } from "./+types/api.chat.$chatId.message.$messageId.stream";
 
 /**

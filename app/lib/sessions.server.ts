@@ -10,13 +10,13 @@ import type { UserGetPayload } from "prisma/generated/models";
 import { type Session, createCookieSessionStorage } from "react-router";
 import { ulid } from "ulid";
 import zod from "zod";
+import sendNewUserNotification from "~/emails/NewUserNotification";
+import sendWelcomeEmail from "~/emails/WelcomeEmail";
+import { getDeviceInfo } from "~/lib/deviceDetection.server";
+import env from "~/lib/env";
+import { readUtmParams, saveUtmParams } from "~/lib/middleware/utm";
 import prisma from "~/lib/prisma";
 import welcome from "~/prompts/welcome.md?raw";
-import sendNewUserNotification from "./emails/NewUserNotification";
-import sendWelcomeEmail from "./emails/WelcomeEmail";
-import { getDeviceInfo } from "./lib/deviceDetection.server";
-import env from "./lib/env";
-import { readUtmParams, saveUtmParams } from "./lib/middleware/utm";
 
 type SessionData = {
   token: string;

@@ -10,7 +10,7 @@ import { exec, execFile } from "node:child_process";
 import { promisify } from "node:util";
 import seedCenters from "prisma/seed/seedCenters";
 import prisma from "~/lib/prisma";
-import msw from "../mocks/mswHandlers";
+import msw from "~/test/mocks/mswHandlers";
 import { port } from "./launchBrowser";
 import { closeServer, launchServer } from "./launchServer";
 import { removeNewHTML } from "./toMatchInnerHTML";

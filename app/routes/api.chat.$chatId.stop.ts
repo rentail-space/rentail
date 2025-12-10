@@ -1,5 +1,5 @@
 import { stopChat } from "~/lib/redis-stop-monitor";
-import { findUserAndChatById } from "~/sessions.server";
+import { findUserAndChatById } from "~/lib/sessions.server";
 import type { Route } from "./+types/api.chat.$chatId.stop";
 
 /**

@@ -12,11 +12,11 @@ import { conversational } from "~/lib/model";
 import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
+import { findOrCreateUser, recentMessages } from "~/lib/sessions.server";
 import updateWorkingMemory, {
   maskWorkingMemoryTags,
 } from "~/lib/workingMemory";
 import chatPrompt from "~/prompts/chatPrompt.md?raw";
-import { findOrCreateUser, recentMessages } from "~/sessions.server";
 import type { Route } from "./+types/api.chat.$chatId.message";
 
 const logger = debug("chat");

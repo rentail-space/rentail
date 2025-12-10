@@ -20,10 +20,10 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/Table";
+import deviceDetection from "~/lib/deviceDetection";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
-import { verifyAdmin } from "~/sessions.server";
-import deviceDetection from "../lib/deviceDetection";
+import { verifyAdmin } from "~/lib/sessions.server";
 import type { Route } from "./+types/admin.users";
 
 export async function loader({ request }: LoaderFunctionArgs) {
