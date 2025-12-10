@@ -44,7 +44,7 @@ function SignInButton() {
   return (
     <Link
       aria-label="Go to sign in page"
-      className="h-9 w-22 whitespace-nowrap rounded-md px-4 py-2 hover:bg-accent hover:text-accent-foreground"
+      className="h-9 w-22 transform whitespace-nowrap rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-2 font-bold text-black shadow-[2px_2px_0px_0px_black] transition-all duration-100 hover:shadow-[4px_4px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]"
       to="/auth"
     >
       Sign In
@@ -91,17 +91,19 @@ function DropdownMenu({ user }: { user: User }) {
       </Button>
 
       {isOpen && (
-        <menu className="menu menu-dropdown dropdown-end absolute top-8 right-0 z-50 mt-2 w-48 rounded-md border border-gray-200 bg-white py-1 shadow-lg">
-          <li className="menu-disabled border-gray-200 border-b px-4 py-2">
-            <p className="font-medium text-gray-900 text-sm">{user.name}</p>
-            <p className="truncate text-gray-500 text-xs">{user.email}</p>
+        <menu className="menu menu-dropdown dropdown-end absolute top-8 right-0 z-50 mt-2 w-48 rounded-[5px] border-2 border-black bg-white py-1 shadow-[4px_4px_0px_0px_black]">
+          <li className="menu-disabled border-black border-b-2 px-4 py-2">
+            <p className="font-bold text-black text-sm">{user.name}</p>
+            <p className="truncate font-medium text-black text-xs">
+              {user.email}
+            </p>
           </li>
 
           {user.isAdmin && (
             <li>
               <Link
                 to="/admin"
-                className="block w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
+                className="block w-full px-4 py-2 text-left font-medium text-black text-sm transition-colors hover:bg-[hsl(47,100%,95%)] hover:text-[hsl(37,92%,65%)]"
               >
                 <ShieldIcon className="mr-2 inline-block h-4 w-4" />
                 Admin
@@ -112,7 +114,7 @@ function DropdownMenu({ user }: { user: User }) {
           <li>
             <Link
               to="/profile"
-              className="block w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
+              className="block w-full px-4 py-2 text-left font-medium text-black text-sm transition-colors hover:bg-[hsl(47,100%,95%)] hover:text-[hsl(37,92%,65%)]"
             >
               <UserIcon className="mr-2 inline-block h-4 w-4" />
               Profile Settings
@@ -125,7 +127,7 @@ function DropdownMenu({ user }: { user: User }) {
               onClick={async () => {
                 window.location.href = "/auth/sign-out";
               }}
-              className="block w-full px-4 py-2 text-left text-gray-700 text-sm transition-colors hover:bg-gray-100"
+              className="block w-full px-4 py-2 text-left font-medium text-black text-sm transition-colors hover:bg-[hsl(47,100%,95%)] hover:text-[hsl(37,92%,65%)]"
             >
               <UnlockIcon className="mr-2 inline-block h-4 w-4" />
               Sign Out

@@ -6,7 +6,7 @@ import type { HeaderLink } from "./PageLayout";
 
 export default function PageHeader({ links }: { links?: HeaderLink[] }) {
   return (
-    <header className="navbar mb-1 shadow-sm print:hidden">
+    <header className="navbar mb-1 border-black border-b-2 bg-[hsl(60,100%,99%)] print:hidden">
       <PageIconLink className="navbar-start" />
 
       <nav className="navbar-center hidden items-center gap-6 md:flex">
@@ -16,8 +16,8 @@ export default function PageHeader({ links }: { links?: HeaderLink[] }) {
             to={link.to}
             className={({ isActive }) =>
               twMerge(
-                "font-medium text-gray-600 text-sm transition-colors hover:text-blue-600",
-                isActive && "text-blue-600",
+                "font-bold text-black text-sm transition-colors hover:text-[hsl(37,92%,65%)]",
+                isActive && "text-[hsl(37,92%,65%)]",
               )
             }
           >
