@@ -249,18 +249,20 @@ function FullChat({
         </span>
       </summary>
 
-      <Messages
-        key={chat.id}
-        isAborted={false}
-        error={undefined}
-        isTyping={false}
-        messages={chat.messages.map((message) => ({
-          id: message.id,
-          parts: message.content as TextUIPart[],
-          role: message.role,
-        }))}
-        setQuery={() => {}}
-      />
+      <div className="flex w-full flex-col">
+        <Messages
+          key={chat.id}
+          isAborted={false}
+          error={undefined}
+          isTyping={false}
+          messages={chat.messages.map((message) => ({
+            id: message.id,
+            parts: message.content as TextUIPart[],
+            role: message.role,
+          }))}
+          setQuery={() => {}}
+        />
+      </div>
     </details>
   );
 }
@@ -274,19 +276,19 @@ function Pagination({ user, users }: { user: User; users: { id: string }[] }) {
     <div className="flex justify-between">
       <Link
         className={twMerge(
-          "btn btn-ghost flex items-center",
-          !older && "btn-disabled",
+          "flex items-center gap-2 px-4 py-2 font-bold transition-all duration-150 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-black",
+          !older && "pointer-events-none text-gray-400 opacity-50",
         )}
         to={`/admin/user/${older?.id}`}
       >
-        <ArrowLeft className="h-4 w-4" />
-        Older
+        <ArrowLeft className="h-5 w-5" />
+        <span>Older</span>
       </Link>
 
       <Link
         className={twMerge(
-          "btn btn-ghost flex items-center",
-          !newer && "btn-disabled",
+          "flex items-center gap-2 px-4 py-2 font-bold transition-all duration-150 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-black",
+          !newer && "pointer-events-none text-gray-400 opacity-50",
         )}
         to={`/admin/user/${newer?.id}`}
       >

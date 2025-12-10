@@ -2,6 +2,7 @@ import type { UIMessage } from "ai";
 import { useEffect, useRef } from "react";
 import { BeatLoading } from "respinner";
 import { useStickToBottomContext } from "use-stick-to-bottom";
+import { cn } from "~/lib/utils";
 import askQuestion from "~/routes/chat/askQuestion";
 import ResponseMessage from "./ResponseMessage";
 
@@ -75,8 +76,13 @@ function UserMessage({ message }: { message: UIMessage }) {
     .split("\n");
 
   return (
-    <div className="chat-bubble-user">
-      <div className="prose prose-base max-w-9/10 rounded-b-md rounded-tl-md border-2 border-black bg-[hsl(47,100%,95%)] px-4 py-3 font-medium text-black shadow-[4px_4px_0px_0px_black]">
+    <div className={cn("chat-bubble-user", "flex w-full flex-row justify-end")}>
+      <div
+        className={cn(
+          "max-w-9/10 rounded-b-md rounded-tl-md border-2 border-black bg-[hsl(47,100%,95%)] shadow-[4px_4px_0px_0px_black]",
+          "prose prose-base px-4 py-3 font-medium text-black",
+        )}
+      >
         {multipleLines.map((line, index) => (
           <p key={index.toString()}>{line}</p>
         ))}

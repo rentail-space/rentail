@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import type { ScrollToBottom } from "use-stick-to-bottom";
+import { cn } from "~/lib/utils";
 import { maskWorkingMemoryTags } from "~/lib/workingMemory";
 
 export default function ResponseMessage({
@@ -70,8 +71,10 @@ function MarkdownMessage({
   text: string;
 }) {
   return (
-    <div className="chat-bubble-response">
-      <div className="chat-image not-prose w-10">
+    <div
+      className={cn("chat-bubble-response", "flex max-w-9/10 flex-row gap-2")}
+    >
+      <div className="not-prose row-span-2 min-w-10 self-end">
         <img
           alt="rental space"
           height="40px"
@@ -81,7 +84,7 @@ function MarkdownMessage({
         />
       </div>
       <div
-        className="max-w-9/10 rounded-t-md rounded-br-md border-2 border-black bg-[hsl(120,100%,97%)] px-4 py-3 shadow-[4px_4px_0px_0px_black]"
+        className="rounded-t-md rounded-br-md border-2 border-black bg-[hsl(120,100%,97%)] px-4 py-3 shadow-[4px_4px_0px_0px_black]"
         ref={contentRef}
       >
         <Streamdown
