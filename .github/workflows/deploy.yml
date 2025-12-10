@@ -35,6 +35,13 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
+      - name: Configure Go and Rust cache
+        uses: namespacelabs/nscloud-cache-action@v1
+        with:
+          cache: |
+            playwright
+            pnpm
+
       - name: Install NPM dependencies
         run: pnpm install
 
