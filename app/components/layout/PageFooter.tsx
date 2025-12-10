@@ -5,66 +5,47 @@ const links = [
   {
     title: "Product",
     links: [
-      {
-        to: "/pricing",
-        label: "Pricing",
-      },
-      {
-        to: "/faq",
-        label: "FAQ",
-      },
+      { to: "/pricing", label: "Pricing" },
+      { to: "/faq", label: "FAQ" },
     ],
   },
   {
     title: "Resources",
     links: [
-      {
-        to: "/blog",
-        label: "Blog",
-      },
-      {
-        to: "/about",
-        label: "About",
-      },
-      {
-        to: "mailto:hello@rentail.space",
-        label: "Contact",
-      },
+      { to: "/blog", label: "Blog" },
+      { to: "/about", label: "About" },
+      { to: "mailto:hello@rentail.space", label: "Contact" },
     ],
   },
   {
     title: "Legal",
     links: [
-      {
-        to: "/privacy",
-        label: "Privacy Policy",
-      },
-      {
-        to: "/terms",
-        label: "Terms of Service",
-      },
+      { to: "/privacy", label: "Privacy Policy" },
+      { to: "/terms", label: "Terms of Service" },
     ],
   },
 ];
 
 export default function PageFooter() {
   return (
-    <footer className="footer sm:footer-horizontal border-black border-t-2 bg-[hsl(60,100%,99%)] px-6 py-12 print:hidden">
+    <footer className="flex flex-col gap-8 border-black border-t-2 bg-[hsl(60,100%,99%)] px-6 py-12 sm:flex-row sm:justify-between print:hidden">
       <aside className="flex flex-col gap-4 text-black">
         <PageIconLink />
-        <p className="font-medium text-sm">
-          AI-powered short-term retail space marketplace
-        </p>
-        <p className="font-medium text-sm">
-          © {new Date().getFullYear()} rentail.space. All rights reserved.
-          Patent pending.
-        </p>
+        <div className="flex flex-col gap-2">
+          <p className="font-medium text-sm">
+            AI-powered short-term retail space marketplace
+          </p>
+          <p className="font-medium text-sm">
+            © {new Date().getFullYear()} rentail.space. All rights reserved.
+            Patent pending.
+          </p>
+        </div>
         <SocialLinks />
       </aside>
 
       {links.map((link) => (
-        <nav key={link.title}>
-          <h3 className="footer-title flex flex-col gap-4 font-bold text-black">
+        <nav key={link.title} className="flex flex-col gap-2">
+          <h3 className="flex flex-col gap-4 font-bold text-black">
             {link.title}
           </h3>
           {link.links.map((link) => (

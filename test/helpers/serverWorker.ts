@@ -43,7 +43,6 @@ async function startServer() {
           "tailwindcss",
           "use-stick-to-bottom",
           "nuqs",
-          "daisyui",
         ],
       },
       server: {

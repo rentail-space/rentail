@@ -1,6 +1,6 @@
 <div class="inset-0 flex h-screen flex-col justify-between bg-[hsl(60,100%,99%)]">
-  <header class="navbar mb-1 border-black border-b-2 bg-[hsl(60,100%,99%)] print:hidden">
-    <a aria-label="Go to home page" class="flex flex-nowrap items-center gap-2 font-bold text-2xl transition-colors hover:text-[hsl(37,92%,65%)] navbar-start" data-discover="true" href="/">
+  <header class="mb-1 flex min-h-16 w-full items-center border-black border-b-2 bg-[hsl(60,100%,99%)] p-2 print:hidden">
+    <a aria-label="Go to home page" class="flex-nowrap gap-2 font-bold text-2xl transition-colors hover:text-[hsl(37,92%,65%)] inline-flex w-1/2 items-center justify-start" data-discover="true" href="/">
       <img alt="rentail.space" class height="24" src="/images/logo.png" width="24" />
       <div class="flex flex-row flex-nowrap">
         <span class="text-[hsl(37,92%,65%)]">
@@ -11,8 +11,8 @@
         </span>
       </div>
     </a>
-    <nav class="navbar-center hidden items-center gap-6 md:flex"></nav>
-    <div class="navbar-end">
+    <nav class="hidden items-center gap-6 whitespace-nowrap md:flex"></nav>
+    <div class="inline-flex w-1/2 items-center justify-end">
       <a aria-label="Go to sign in page" class="h-9 w-22 transform whitespace-nowrap rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-1 font-bold text-black shadow-[2px_2px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_black]" data-discover="true" href="/auth">
         Sign In
       </a>
@@ -23,11 +23,11 @@
       <div>
         <div class="flex flex-row gap-4 lg:pr-4">
           <div class="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto scroll-smooth p-4">
-            <div class="chat-bubble-response">
-              <div class="chat-image not-prose w-10">
+            <div class="chat-bubble-response flex max-w-9/10 flex-row gap-2">
+              <div class="not-prose row-span-2 min-w-10 self-end">
                 <img alt="rental space" class="rounded-md border-2 border-black shadow-[2px_2px_0px_0px_black]" height="40px" src="/favicon-96x96.png" width="40px" />
               </div>
-              <div class="max-w-9/10 rounded-t-md rounded-br-md border-2 border-black bg-[hsl(120,100%,97%)] px-4 py-3 shadow-[4px_4px_0px_0px_black]">
+              <div class="rounded-t-md rounded-br-md border-2 border-black bg-[hsl(120,100%,97%)] px-4 py-3 shadow-[4px_4px_0px_0px_black]">
                 <div class="space-y-4 whitespace-normal prose prose-base max-w-none">
                   <p class="mt-2 mb-2 whitespace-pre-wrap text-black">
                     Welcome to
@@ -42,18 +42,18 @@
                 </div>
               </div>
             </div>
-            <div class="chat-bubble-user">
-              <div class="prose prose-base max-w-9/10 rounded-b-md rounded-tl-md border-2 border-black bg-[hsl(47,100%,95%)] px-4 py-3 font-medium text-black shadow-[4px_4px_0px_0px_black]">
+            <div class="chat-bubble-user flex w-full flex-row justify-end">
+              <div class="max-w-9/10 rounded-b-md rounded-tl-md border-2 border-black bg-[hsl(47,100%,95%)] shadow-[4px_4px_0px_0px_black] prose prose-base px-4 py-3 font-medium text-black">
                 <p>
                   looking for a pop-up retail space for my clothing boutique
                 </p>
               </div>
             </div>
-            <div class="chat-bubble-response">
-              <div class="chat-image not-prose w-10">
+            <div class="chat-bubble-response flex max-w-9/10 flex-row gap-2">
+              <div class="not-prose row-span-2 min-w-10 self-end">
                 <img alt="rental space" class="rounded-md border-2 border-black shadow-[2px_2px_0px_0px_black]" height="40px" src="/favicon-96x96.png" width="40px" />
               </div>
-              <div class="max-w-9/10 rounded-t-md rounded-br-md border-2 border-black bg-[hsl(120,100%,97%)] px-4 py-3 shadow-[4px_4px_0px_0px_black]">
+              <div class="rounded-t-md rounded-br-md border-2 border-black bg-[hsl(120,100%,97%)] px-4 py-3 shadow-[4px_4px_0px_0px_black]">
                 <div class="space-y-4 whitespace-normal prose prose-base max-w-none">
                   <p class="mt-2 mb-2 whitespace-pre-wrap text-black">
                     Perfect! I found some great locations for your clothing boutique. Here are the top options with excellent foot traffic.

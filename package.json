@@ -43,7 +43,6 @@
     "bcrypt": "^6.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "daisyui": "^5.5.8",
     "debug": "^4.4.3",
     "dotenv": "^17.2.3",
     "env-var": "^7.5.0",
@@ -137,5 +136,5 @@
     },
     "ignoredBuiltDependencies": []
   },
-  "packageManager": "pnpm@10.24.0"
+  "packageManager": "pnpm@10.25.0"
 }
