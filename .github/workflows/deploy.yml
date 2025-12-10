@@ -98,8 +98,7 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=4096"
 
       - name: Run Tests
-        run: |
-          scripts/test.sh
+        run: scripts/tests.sh
         env:
           ANTHROPIC_API_KEY: "***REMOVED***"
           BETTER_AUTH_SECRET: "***REMOVED***"
