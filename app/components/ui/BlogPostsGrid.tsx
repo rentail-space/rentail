@@ -15,7 +15,7 @@ export default function BlogPostsGrid({
       <div className="container mx-auto max-w-7xl">
         {posts.length === 0 ? (
           <div className="py-20 text-center">
-            <p className="text-gray-600 text-xl">
+            <p className="font-medium text-black text-xl">
               No blog posts published yet. Check back soon!
             </p>
           </div>

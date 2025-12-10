@@ -19,88 +19,94 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
   const faqItems = parseFAQ(body);
 
   return (
-    <article className="prose prose-lg mx-auto mt-10 mb-20">
-      <title>{title}</title>
-      <meta name="author" content="Rentail.space" />
-      <meta name="section" content="Blog" />
-      <meta
-        name="og:image"
-        content={`https://rentail.space/blog/${slug}.jpg`}
-      />
-      <meta name="og:published_time" content={published.toISOString()} />
-      <meta name="og:title" content={title} />
-      <meta name="og:type" content="article" />
-      <meta name="og:url" content={`https://rentail.space/blog/${slug}`} />
-      <meta name="og:site_name" content="Rentail.space" />
-      <meta name="og:locale" content="en_US" />
-      <meta name="robots" content="index, follow" />
-      <meta name="googlebot" content="index, follow" />
-      <meta name="bingbot" content="index, follow" />
-      <meta name="yandexbot" content="index, follow" />
-      <meta name="duckduckbot" content="index, follow" />
-      <meta name="slurp" content="index, follow" />
-      <meta name="ia_archiver" content="index, follow" />
-      <meta name="ia_archiver" content="index, follow" />
+    <div className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12">
+      <article className="prose prose-lg mx-auto max-w-4xl rounded-[10px] border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_black] md:p-12">
+        <title>{title}</title>
+        <meta name="author" content="Rentail.space" />
+        <meta name="section" content="Blog" />
+        <meta
+          name="og:image"
+          content={`https://rentail.space/blog/${slug}.jpg`}
+        />
+        <meta name="og:published_time" content={published.toISOString()} />
+        <meta name="og:title" content={title} />
+        <meta name="og:type" content="article" />
+        <meta name="og:url" content={`https://rentail.space/blog/${slug}`} />
+        <meta name="og:site_name" content="Rentail.space" />
+        <meta name="og:locale" content="en_US" />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="bingbot" content="index, follow" />
+        <meta name="yandexbot" content="index, follow" />
+        <meta name="duckduckbot" content="index, follow" />
+        <meta name="slurp" content="index, follow" />
+        <meta name="ia_archiver" content="index, follow" />
+        <meta name="ia_archiver" content="index, follow" />
 
-      <h1>{title}</h1>
+        <h1>{title}</h1>
 
-      {image && (
-        <figure className="relative left-[calc(-50vw+50%)] my-4 w-screen overflow-x-hidden">
-          <img alt={alt} className="h-[60vh] w-full object-cover" src={image} />
-        </figure>
-      )}
+        {image && (
+          <figure className="-mx-8 md:-mx-12 my-6 overflow-hidden">
+            <img
+              alt={alt}
+              className="h-[60vh] w-full object-cover"
+              src={image}
+            />
+          </figure>
+        )}
 
-      <Streamdown
-        className="prose prose-lg mx-auto"
-        controls={{ code: false, mermaid: false, table: false }}
-        mode="static"
-        remarkPlugins={[remarkGfm]}
-      >
-        {body}
-      </Streamdown>
+        <Streamdown
+          className="prose prose-lg mx-auto"
+          controls={{ code: false, mermaid: false, table: false }}
+          mode="static"
+          remarkPlugins={[remarkGfm]}
+        >
+          {body}
+        </Streamdown>
 
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Article",
-          "@id": `https://rentail.space/blog/${slug}`,
-          author: {
-            "@type": "Organization",
-            name: "Rentail.space",
-            url: "https://rentail.space",
-          },
-          datePublished: published,
-          description: summary,
-          headline: title,
-          inLanguage: "en-US",
-          name: title,
-          primaryImageOfPage: image
-            ? {
-                "@id": image,
-                "@type": "ImageObject",
-                caption: alt,
-                contentUrl: image,
-              }
-            : undefined,
-        })}
-      </script>
-      {faqItems && faqItems.length > 0 && (
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faqItems.map(({ question, answer }) => ({
-              "@type": "Question",
-              name: question,
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: answer,
-              },
-            })),
+            "@type": "Article",
+            "@id": `https://rentail.space/blog/${slug}`,
+            author: {
+              "@type": "Organization",
+              name: "Rentail.space",
+              url: "https://rentail.space",
+            },
+            datePublished: published,
+            description: summary,
+            headline: title,
+            inLanguage: "en-US",
+            name: title,
+            primaryImageOfPage: image
+              ? {
+                  "@id": image,
+                  "@type": "ImageObject",
+                  caption: alt,
+                  contentUrl: image,
+                }
+              : undefined,
           })}
         </script>
-      )}
-    </article>
+        {faqItems && faqItems.length > 0 && (
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faqItems.map(({ question, answer }) => ({
+                "@type": "Question",
+                name: question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: answer,
+                },
+              })),
+            })}
+          </script>
+        )}
+      </article>
+    </div>
   );
 }
 
