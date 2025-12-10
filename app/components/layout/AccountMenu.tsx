@@ -91,12 +91,10 @@ function DropdownMenu({ user }: { user: User }) {
       </Button>
 
       {isOpen && (
-        <menu className="menu menu-dropdown dropdown-end absolute top-8 right-0 z-50 mt-2 w-48 rounded-[5px] border-2 border-black bg-white py-1 shadow-[4px_4px_0px_0px_black]">
-          <li className="menu-disabled border-black border-b-2 px-4 py-2">
-            <p className="font-bold text-black text-sm">{user.name}</p>
-            <p className="truncate font-medium text-black text-xs">
-              {user.email}
-            </p>
+        <menu className="absolute top-10 right-0 z-50 mt-2 w-48 rounded-[5px] border-2 border-black bg-white py-1 shadow-[4px_4px_0px_0px_black]">
+          <li className="border-black border-b-2 px-4 py-2 text-gray-600 text-sm">
+            <p className="truncate font-bold">{user.name}</p>
+            <p className="truncate font-medium">{user.email}</p>
           </li>
 
           {user.isAdmin && (
@@ -104,6 +102,7 @@ function DropdownMenu({ user }: { user: User }) {
               <Link
                 to="/admin"
                 className="block w-full px-4 py-2 text-left font-medium text-black text-sm transition-colors hover:bg-[hsl(47,100%,95%)] hover:text-[hsl(37,92%,65%)]"
+                onClick={() => setIsOpen(false)}
               >
                 <ShieldIcon className="mr-2 inline-block h-4 w-4" />
                 Admin
@@ -115,6 +114,7 @@ function DropdownMenu({ user }: { user: User }) {
             <Link
               to="/profile"
               className="block w-full px-4 py-2 text-left font-medium text-black text-sm transition-colors hover:bg-[hsl(47,100%,95%)] hover:text-[hsl(37,92%,65%)]"
+              onClick={() => setIsOpen(false)}
             >
               <UserIcon className="mr-2 inline-block h-4 w-4" />
               Profile Settings
@@ -125,6 +125,7 @@ function DropdownMenu({ user }: { user: User }) {
             <button
               type="button"
               onClick={async () => {
+                setIsOpen(false);
                 window.location.href = "/auth/sign-out";
               }}
               className="block w-full px-4 py-2 text-left font-medium text-black text-sm transition-colors hover:bg-[hsl(47,100%,95%)] hover:text-[hsl(37,92%,65%)]"

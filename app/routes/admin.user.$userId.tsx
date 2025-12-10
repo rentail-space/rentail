@@ -1,10 +1,5 @@
 import type { TextUIPart } from "ai";
-import {
-  ArrowLeft,
-  ArrowRight,
-  CircleCheck,
-  NotepadTextIcon,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, CircleCheck } from "lucide-react";
 import { DateTime } from "luxon";
 import type { User } from "prisma/generated/client";
 import type { ChatGetPayload } from "prisma/generated/models";
@@ -12,6 +7,7 @@ import { Link, useFetcher } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { StickToBottom } from "use-stick-to-bottom";
 import { Button } from "~/components/ui/Button";
+import { FieldSet } from "~/components/ui/FieldSet";
 import { Textarea } from "~/components/ui/Textarea";
 import deviceDetection from "~/lib/deviceDetection";
 import prisma from "~/lib/prisma";
@@ -183,11 +179,8 @@ function EditNote({ user }: { user: User }) {
           });
         }}
       >
-        <fieldset className="fieldset">
-          <div className="items-top flex gap-2">
-            <NotepadTextIcon />
-            <Textarea defaultValue={user.note ?? ""} name="note" />
-          </div>
+        <FieldSet>
+          <Textarea id="note" defaultValue={user.note ?? ""} name="note" />
 
           <div className="flex justify-end">
             <Button
@@ -203,7 +196,7 @@ function EditNote({ user }: { user: User }) {
               {fetcher.state !== "idle" ? "Saving..." : "Save"}
             </Button>
           </div>
-        </fieldset>
+        </FieldSet>
       </fetcher.Form>
     </details>
   );
