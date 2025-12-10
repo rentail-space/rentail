@@ -5,12 +5,12 @@ import faq from "./faq";
 
 export default function FAQQuestions() {
   return (
-    <section className="px-4 py-20">
+    <section className="bg-[hsl(60,100%,99%)] px-4 py-20">
       <div className="container mx-auto max-w-4xl">
         <div className="flex flex-col gap-12">
           {faq.map((category) => (
             <div key={category.category}>
-              <h2 className="mb-6 font-bold text-3xl text-gray-900">
+              <h2 className="mb-6 font-bold text-3xl text-black leading-tight">
                 {category.category}
               </h2>
               <div className="flex flex-col gap-4">
@@ -35,20 +35,21 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 
   return (
     <details
+      className="rounded-[10px] border-2 border-black bg-white shadow-[4px_4px_0px_0px_black]"
       onToggle={(event) => setIsOpen(event.currentTarget.open)}
-      className="rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md"
+      open
     >
-      <summary className="flex w-full items-center justify-between gap-4 p-6 text-left">
-        <h3 className="font-semibold text-gray-900 text-lg">{question}</h3>
+      <summary className="flex w-full cursor-pointer items-center justify-between gap-4 p-6 text-left">
+        <h3 className="font-bold text-black text-lg">{question}</h3>
         <ChevronDown
           className={twMerge(
-            "h-5 w-5 shrink-0 text-blue-600 transition-transform",
+            "h-5 w-5 shrink-0 text-[hsl(37,92%,65%)] transition-transform",
             isOpen && "rotate-180",
           )}
         />
       </summary>
-      <div className="border-gray-200 border-t px-6 pt-4 pb-6">
-        <p className="text-gray-600 leading-relaxed">{answer}</p>
+      <div className="border-black border-t-2 px-6 pt-4 pb-6">
+        <p className="font-medium text-black leading-relaxed">{answer}</p>
       </div>
     </details>
   );

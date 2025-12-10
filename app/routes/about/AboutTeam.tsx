@@ -29,13 +29,13 @@ const team = [
 
 export default function AboutTeam() {
   return (
-    <section className="bg-gray-50 px-4 py-20">
+    <section className="bg-[hsl(60,100%,99%)] px-4 py-20">
       <div className="container mx-auto max-w-6xl">
         <div className="mb-16 text-center">
-          <h2 className="mb-4 font-bold text-4xl text-gray-900">
+          <h2 className="mb-4 font-bold text-4xl text-black leading-tight">
             Meet the Team
           </h2>
-          <p className="mx-auto max-w-2xl text-gray-600 text-xl">
+          <p className="mx-auto max-w-2xl font-medium text-black text-xl leading-relaxed">
             We're a diverse team of retail experts, technologists, and
             entrepreneurs
           </p>
@@ -47,22 +47,22 @@ export default function AboutTeam() {
               key={member.name}
               to={member.linkedIn}
               target="_blank"
-              className="flex flex-col items-center rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm transition-all hover:border-blue-500 hover:shadow-xl"
+              className="flex transform flex-col items-center rounded-[10px] border-2 border-black bg-white p-8 text-center shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:shadow-[6px_6px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]"
             >
-              <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-linear-to-br from-blue-100 to-indigo-100">
+              <div className="mb-4 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-2 border-black shadow-[2px_2px_0px_0px_black]">
                 <img
                   src={member.image}
                   alt={member.name}
                   className="h-full w-full rounded-full"
                 />
               </div>
-              <h3 className="mb-1 font-bold text-gray-900 text-xl">
+              <h3 className="mb-1 font-bold text-black text-xl">
                 {member.name}
               </h3>
-              <p className="mb-3 font-medium text-blue-600 text-sm">
+              <p className="mb-3 font-bold text-[hsl(37,92%,65%)] text-sm">
                 {member.role}
               </p>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="font-medium text-black text-sm leading-relaxed">
                 {member.description}
               </p>
             </Link>

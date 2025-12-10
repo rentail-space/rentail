@@ -7,15 +7,18 @@ const stats = [
 
 export default function AboutStats() {
   return (
-    <section className="bg-blue-600 px-4 py-20">
+    <section className="bg-[hsl(47,100%,95%)] px-4 py-20">
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="mb-2 font-bold text-4xl text-white md:text-5xl">
+            <div
+              key={stat.label}
+              className="rounded-[10px] border-2 border-black bg-white p-6 text-center shadow-[4px_4px_0px_0px_black]"
+            >
+              <div className="mb-2 font-bold text-4xl text-black md:text-5xl">
                 {stat.number}
               </div>
-              <div className="text-blue-100">{stat.label}</div>
+              <div className="font-medium text-black">{stat.label}</div>
             </div>
           ))}
         </div>

@@ -2,18 +2,18 @@ import { Lightbulb } from "lucide-react";
 
 export default function AboutStory() {
   return (
-    <section className="px-4 py-20">
+    <section className="bg-[hsl(60,100%,99%)] px-4 py-20">
       <div className="container mx-auto max-w-4xl">
         <div className="flex flex-col gap-8">
           <div className="flex items-start gap-4">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
               <Lightbulb className="h-6 w-6" />
             </div>
             <div>
-              <h2 className="mb-4 font-bold text-3xl text-gray-900">
+              <h2 className="mb-4 font-bold text-3xl text-black leading-tight">
                 Our Story
               </h2>
-              <div className="flex flex-col gap-4 text-gray-700 text-lg leading-relaxed">
+              <div className="flex flex-col gap-4 font-medium text-black text-lg leading-relaxed">
                 <p>
                   Rentail.space was born from a simple observation: finding
                   short-term retail space shouldn't be this hard. Too many

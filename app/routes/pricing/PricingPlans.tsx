@@ -63,12 +63,12 @@ const mallPlans = [
 export default function PricingPlans() {
   return (
     <>
-      <section className="px-4 py-20">
+      <section className="bg-[hsl(60,100%,99%)] px-4 py-20">
         <div className="container mx-auto max-w-7xl">
-          <h2 className="mb-4 text-center font-bold text-3xl text-gray-900">
+          <h2 className="mb-4 text-center font-bold text-3xl text-black leading-tight">
             For Merchants
           </h2>
-          <p className="mb-12 text-center text-gray-600 text-lg">
+          <p className="mb-12 text-center font-medium text-black text-lg leading-relaxed">
             Find and lease retail spaces with zero platform fees
           </p>
 
@@ -78,12 +78,12 @@ export default function PricingPlans() {
         </div>
       </section>
 
-      <section className="bg-gray-50 px-4 py-20">
+      <section className="bg-[hsl(60,100%,99%)] px-4 py-20">
         <div className="container mx-auto max-w-7xl">
-          <h2 className="mb-4 text-center font-bold text-3xl text-gray-900">
+          <h2 className="mb-4 text-center font-bold text-3xl text-black leading-tight">
             For Shopping Centers & Malls
           </h2>
-          <p className="mb-12 text-center text-gray-600 text-lg">
+          <p className="mb-12 text-center font-medium text-black text-lg leading-relaxed">
             List your spaces and grow your revenue with our platform
           </p>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -114,36 +114,36 @@ function PricingPlan({
   return (
     <div
       key={plan.name}
-      className={`relative flex flex-col rounded-2xl border-2 bg-white p-8 shadow-lg transition-all hover:shadow-2xl ${
+      className={`relative flex flex-col rounded-[10px] border-2 border-black bg-white p-8 ${
         plan.highlighted
-          ? "border-blue-600 ring-4 ring-blue-100"
-          : "border-gray-200"
+          ? "shadow-[8px_8px_0px_0px_black]"
+          : "shadow-[4px_4px_0px_0px_black]"
       }`}
     >
       {plan.highlighted && (
-        <div className="-top-4 -translate-x-1/2 absolute left-1/2 rounded-full bg-blue-600 px-4 py-1 font-semibold text-sm text-white">
+        <div className="-top-4 -translate-x-1/2 absolute left-1/2 rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-1 font-bold text-black text-sm shadow-[2px_2px_0px_0px_black]">
           Most Popular
         </div>
       )}
 
       <div className="mb-6">
-        <h3 className="mb-2 font-bold text-2xl text-gray-900">{plan.name}</h3>
-        <p className="text-gray-600 text-sm">{plan.description}</p>
+        <h3 className="mb-2 font-bold text-2xl text-black">{plan.name}</h3>
+        <p className="font-medium text-black text-sm">{plan.description}</p>
       </div>
 
       <div className="mb-6">
         <div className="flex items-baseline gap-2">
-          <span className="font-bold text-5xl text-gray-900">{plan.price}</span>
-          <span className="text-gray-600 text-sm">{plan.period}</span>
+          <span className="font-bold text-5xl text-black">{plan.price}</span>
+          <span className="font-medium text-black text-sm">{plan.period}</span>
         </div>
       </div>
 
       <Link
         to={plan.href}
-        className={`mb-8 inline-flex items-center justify-center rounded-xl px-6 py-3 text-center font-semibold transition-all ${
+        className={`mb-8 inline-flex transform items-center justify-center rounded-[5px] border-2 border-black px-6 py-3 text-center font-bold transition-all duration-100 ${
           plan.highlighted
-            ? "bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg"
-            : "border-2 border-gray-300 bg-white text-gray-700 hover:border-blue-600 hover:text-blue-600"
+            ? "bg-[hsl(37,92%,65%)] text-black shadow-[3px_3px_0px_0px_black] hover:shadow-[5px_5px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]"
+            : "bg-white text-black shadow-[3px_3px_0px_0px_black] hover:shadow-[5px_5px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]"
         }`}
       >
         {plan.cta}
@@ -152,8 +152,8 @@ function PricingPlan({
       <ul className="flex flex-col gap-4">
         {plan.features.map((feature) => (
           <li key={feature} className="flex items-start gap-3">
-            <Check className="h-5 w-5 shrink-0 text-blue-600" />
-            <span className="text-gray-700 text-sm">{feature}</span>
+            <Check className="h-5 w-5 shrink-0 text-[hsl(37,92%,65%)]" />
+            <span className="font-medium text-black text-sm">{feature}</span>
           </li>
         ))}
       </ul>

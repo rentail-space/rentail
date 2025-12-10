@@ -41,14 +41,15 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section className="px-4 py-20">
+    <section className="bg-[hsl(60,100%,99%)] px-4 py-20">
       <div className="container mx-auto max-w-7xl">
         {/* Main Features */}
         <div className="mb-16 text-center">
-          <h2 className="mb-4 font-bold text-4xl text-gray-900 md:text-5xl">
-            Why Choose <span className="text-blue-600">rentail</span>.space?
+          <h2 className="mb-4 font-bold text-4xl text-black leading-tight md:text-5xl">
+            Why Choose <span className="text-[hsl(37,92%,65%)]">rentail</span>
+            .space?
           </h2>
-          <p className="mx-auto max-w-3xl text-gray-600 text-xl">
+          <p className="mx-auto max-w-3xl font-medium text-black text-xl leading-relaxed">
             We help you find short-term retail spaces in shopping centers near
             you, at reasonable prices, with the foot traffic to make your
             business succeed.
@@ -59,15 +60,15 @@ export default function FeaturesSection() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="group relative rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition-all hover:border-blue-500 hover:shadow-xl"
+              className="group relative transform rounded-[10px] border-2 border-black bg-white p-8 shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:shadow-[6px_6px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]"
             >
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-[10px] border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
                 {feature.icon}
               </div>
-              <h3 className="mb-4 font-bold text-gray-900 text-xl">
+              <h3 className="mb-4 font-bold text-black text-xl">
                 {feature.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="font-medium text-black leading-relaxed">
                 {feature.description}
               </p>
             </div>
@@ -79,16 +80,16 @@ export default function FeaturesSection() {
           {benefits.map((benefit) => (
             <div
               key={benefit.title}
-              className="flex items-start gap-4 rounded-xl bg-blue-50 p-6"
+              className="flex items-start gap-4 rounded-[10px] border-2 border-black bg-white p-6 shadow-[3px_3px_0px_0px_black]"
             >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
                 {benefit.icon}
               </div>
               <div>
-                <h4 className="mb-2 font-semibold text-gray-900">
-                  {benefit.title}
-                </h4>
-                <p className="text-gray-600 text-sm">{benefit.description}</p>
+                <h4 className="mb-2 font-bold text-black">{benefit.title}</h4>
+                <p className="font-medium text-black text-sm">
+                  {benefit.description}
+                </p>
               </div>
             </div>
           ))}

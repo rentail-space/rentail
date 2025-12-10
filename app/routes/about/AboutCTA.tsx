@@ -3,28 +3,30 @@ import { Link } from "react-router";
 
 export default function AboutCTA() {
   return (
-    <section className="bg-linear-to-br from-blue-600 to-indigo-700 px-4 py-20">
+    <section className="bg-[hsl(47,100%,95%)] px-4 py-20">
       <div className="container mx-auto max-w-3xl text-center">
         <div className="mb-8 flex justify-center">
-          <Building2 className="h-16 w-16 text-white" />
+          <div className="flex h-20 w-20 items-center justify-center rounded-[10px] border-2 border-black bg-[hsl(37,92%,65%)] shadow-[4px_4px_0px_0px_black]">
+            <Building2 className="h-10 w-10 text-black" />
+          </div>
         </div>
-        <h2 className="mb-6 font-bold text-4xl text-white md:text-5xl">
+        <h2 className="mb-6 font-bold text-4xl text-black leading-tight md:text-5xl">
           Join us on our journey
         </h2>
-        <p className="mb-8 text-blue-100 text-xl">
+        <p className="mb-8 font-medium text-black text-xl leading-relaxed">
           Whether you're a merchant looking for space or a property owner with
           space to fill, we'd love to work with you.
         </p>
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
           <Link
             to="/chat"
-            className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 font-semibold text-blue-600 text-lg transition-all hover:bg-blue-50 hover:shadow-lg"
+            className="inline-flex transform items-center justify-center rounded-[10px] border-2 border-black bg-[hsl(37,92%,65%)] px-8 py-4 font-bold text-black text-lg shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:shadow-[6px_6px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]"
           >
             Find a Space
           </Link>
           <Link
             to="mailto:hello@rentail.space"
-            className="inline-flex items-center justify-center rounded-xl border-2 border-white bg-transparent px-8 py-4 font-semibold text-lg text-white transition-all hover:bg-white/10"
+            className="inline-flex transform items-center justify-center rounded-[10px] border-2 border-black bg-white px-8 py-4 font-bold text-black text-lg shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:shadow-[6px_6px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]"
           >
             Get in Touch
           </Link>

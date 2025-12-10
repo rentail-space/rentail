@@ -5,7 +5,7 @@ import PricingPlans from "./PricingPlans";
 
 export default function Pricing() {
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]">
       <PricingHeader />
       <PricingPlans />
       <PricingFAQ />
