@@ -50,7 +50,9 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
       <section className="flex flex-col gap-4">
         <h2 className="font-bold text-2xl">
           All Users{" "}
-          <span className="text-gray-500">({loaderData.users.length})</span>
+          <span className="text-gray-500">
+            ({loaderData.users.length} user)
+          </span>
         </h2>
         <AllUsers users={loaderData.users} />
       </section>
@@ -58,7 +60,9 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
       <section className="flex flex-col gap-4">
         <h2 className="font-bold text-2xl">
           Waiting List{" "}
-          <span className="text-gray-500">({loaderData.waiting.length})</span>
+          <span className="text-gray-500">
+            ({loaderData.waiting.length} waiting)
+          </span>
         </h2>
         <WaitingList waiting={loaderData.waiting} />
       </section>
@@ -140,32 +144,31 @@ function AllUsers({ users }: { users: User[] }) {
             {row.original.name || row.original.id}
           </Link>
         ),
-        size: 280,
+        size: 240,
       },
       {
         header: "Device",
         accessorFn: (row) => deviceDetection(row.userAgent),
         size: 120,
       },
-      { header: "Referrer", accessorKey: "referrer", size: 300 },
+      { header: "Referrer", accessorKey: "referrer", size: 350 },
       {
         header: "IP",
         accessorKey: "ip",
-        size: 120,
+        size: 100,
         sortingFn: "alphanumeric",
       },
       {
         header: "Created",
         accessorKey: "createdAt",
         accessorFn: (row) =>
-          row.createdAt.toLocaleDateString(undefined, {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          }),
+          DateTime.fromJSDate(row.createdAt)
+            .setZone((row.geocode as { timeZone: string }).timeZone ?? "UTC")
+            .toFormat("yyyy-MM-dd HH:mm"),
+
         sortingFn: (rowA, rowB) =>
           rowA.original.createdAt.getTime() - rowB.original.createdAt.getTime(),
-        size: 110,
+        size: 130,
       },
     ],
     data: users,
