@@ -139,7 +139,7 @@ function AllUsers({ users }: { users: User[] }) {
         cell: ({ row }) => (
           <Link
             to={`/admin/user/${row.original.id}`}
-            className="link link-primary"
+            className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
           >
             {row.original.name || row.original.id}
           </Link>

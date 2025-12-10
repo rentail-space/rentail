@@ -21,7 +21,7 @@ export default function CenterPopup({
             {center.spaces.length === 1 ? "space" : "spaces"}
           </span>
           <a
-            className="link link-primary link-hover"
+            className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
             href={directionsUrl}
             rel="noopener noreferrer"
             target="_blank"
