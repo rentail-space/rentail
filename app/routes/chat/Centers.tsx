@@ -149,7 +149,7 @@ function HoverCard({
             (el.classList.contains("bg-gray-50") ||
               el.classList.contains("bg-[hsl(60,100%,99%)]")),
         );
-        const header = document.querySelector("header.navbar");
+        const header = document.querySelector("header");
 
         if (!inputFormContainer || !header) return;
 

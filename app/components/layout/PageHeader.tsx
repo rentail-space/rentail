@@ -6,10 +6,10 @@ import type { HeaderLink } from "./PageLayout";
 
 export default function PageHeader({ links }: { links?: HeaderLink[] }) {
   return (
-    <header className="navbar mb-1 border-black border-b-2 bg-[hsl(60,100%,99%)] print:hidden">
-      <PageIconLink className="navbar-start" />
+    <header className="mb-1 flex min-h-16 w-full items-center border-black border-b-2 bg-[hsl(60,100%,99%)] p-2 print:hidden">
+      <PageIconLink className="inline-flex w-1/2 items-center justify-start" />
 
-      <nav className="navbar-center hidden items-center gap-6 md:flex">
+      <nav className="hidden items-center gap-6 whitespace-nowrap md:flex">
         {links?.map((link) => (
           <NavLink
             key={link.to}
@@ -26,7 +26,7 @@ export default function PageHeader({ links }: { links?: HeaderLink[] }) {
         ))}
       </nav>
 
-      <AccountMenu className="navbar-end" />
+      <AccountMenu className="inline-flex w-1/2 items-center justify-end" />
     </header>
   );
 }

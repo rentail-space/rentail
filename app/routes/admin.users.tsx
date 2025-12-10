@@ -42,10 +42,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function UsersPage({ loaderData }: Route.ComponentProps) {
   return (
     <main className="flex flex-col gap-8">
-      <section className="flex flex-col gap-4">
-        <h2 className="font-bold text-2xl">Analytics</h2>
-        <Analytics analytics={loaderData.analytics} users={loaderData.users} />
-      </section>
+      <Analytics analytics={loaderData.analytics} users={loaderData.users} />
 
       <section className="flex flex-col gap-4">
         <h2 className="font-bold text-2xl">
@@ -87,45 +84,48 @@ function Analytics({
   const signedUp = withoutAdmin.filter((user) => user.passwordHash !== null);
 
   return (
-    <div className="stats mx-auto">
-      <div className="stat place-items-center">
-        <div className="stat-title">Page Views</div>
-        <div className="stat-value">{screenPageViews.toLocaleString()}</div>
-        <div className="stat-desc">&nbsp;</div>
-      </div>
-      <div className="py-10">
-        <ArrowRight className="h-8 w-8 text-gray-500" />
-      </div>
-      <div className="stat place-items-center">
-        <div className="stat-title">Active Users</div>
-        <div className="stat-value">{activeUsers.toLocaleString()}</div>
-        <div className="stat-desc">Last 30 days</div>
-      </div>
-      <div className="py-10">
-        <ArrowRight className="h-8 w-8 text-gray-500" />
-      </div>
-      <div className="stat place-items-center">
-        <div className="stat-title">Conversations</div>
-        <div className="stat-value flex items-center gap-2">
-          {recentlyUpdated.length.toLocaleString()}
-        </div>
-        <div className="stat-desc">
-          {((recentlyUpdated.length / activeUsers) * 100).toFixed(2)}% of active
-        </div>
-      </div>
-      <div className="py-10">
-        <ArrowRight className="h-8 w-8 text-gray-500" />
-      </div>
-      <div className="stat place-items-center">
-        <div className="stat-title">Signed Up</div>
-        <div className="stat-value flex items-center gap-2">
-          {signedUp.length.toLocaleString()}
-        </div>
-        <div className="stat-desc">
-          {((signedUp.length / recentlyUpdated.length) * 100).toFixed(2)}% of
-          chats
-        </div>
-      </div>
+    <div className="mx-auto flex flex-row items-center gap-4">
+      <Stat
+        title="Page Views"
+        value={screenPageViews.toLocaleString()}
+        description="Google Analytics"
+      />
+      <ArrowRight className="h-6 w-6 text-gray-400" />
+      <Stat
+        title="Active Users"
+        value={activeUsers.toLocaleString()}
+        description="Last 30 days"
+      />
+      <ArrowRight className="h-6 w-6 text-gray-400" />
+      <Stat
+        title="Conversations"
+        value={recentlyUpdated.length.toLocaleString()}
+        description={`${((recentlyUpdated.length / activeUsers) * 100).toFixed(2)}% of active`}
+      />
+      <ArrowRight className="h-6 w-6 text-gray-400" />
+      <Stat
+        title="Signed Up"
+        value={signedUp.length.toLocaleString()}
+        description={`${((signedUp.length / recentlyUpdated.length) * 100).toFixed(2)}% of chats`}
+      />
+    </div>
+  );
+}
+
+function Stat({
+  title,
+  value,
+  description,
+}: {
+  title: string;
+  value: string;
+  description: string;
+}) {
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <div className="font-medium text-sm">{title}</div>
+      <div className="font-bold text-2xl">{value}</div>
+      <div className="text-gray-500 text-sm">{description}</div>
     </div>
   );
 }
