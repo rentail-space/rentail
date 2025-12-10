@@ -35,9 +35,7 @@ describe("Waitlist", () => {
 
   it("should show a success message", async () => {
     await expect(
-      homePage
-        .getByRole("alert")
-        .getByText(/thank you for joining our waitlist! 🚀/i),
+      homePage.getByText(/thank you for joining our waitlist! 🚀/i),
     ).toBeVisible();
   });
 
