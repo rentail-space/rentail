@@ -103,7 +103,9 @@ describe("Chat page exchange messages", () => {
   });
 
   it("should have welcome message, user message, and assistant response", async () => {
-    const chatCount = await page.locator(".chat-bubble").count();
+    const chatCount = await page
+      .locator(".chat-bubble-user, .chat-bubble-response")
+      .count();
     expect(chatCount).toBeGreaterThanOrEqual(3);
   });
 

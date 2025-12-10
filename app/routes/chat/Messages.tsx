@@ -75,7 +75,7 @@ function UserMessage({ message }: { message: UIMessage }) {
     .split("\n");
 
   return (
-    <div className="chat chat-end">
+    <div className="chat-bubble-user">
       <div className="prose prose-base max-w-9/10 rounded-b-md rounded-tl-md border-2 border-black bg-[hsl(47,100%,95%)] px-4 py-3 font-medium text-black shadow-[4px_4px_0px_0px_black]">
         {multipleLines.map((line, index) => (
           <p key={index.toString()}>{line}</p>

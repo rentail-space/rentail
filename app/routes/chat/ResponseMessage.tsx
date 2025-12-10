@@ -70,7 +70,7 @@ function MarkdownMessage({
   text: string;
 }) {
   return (
-    <div className="chat chat-start">
+    <div className="chat-bubble-response">
       <div className="chat-image not-prose w-10">
         <img
           alt="rental space"
