@@ -176,14 +176,18 @@ export default function ProfilePage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="card card-border mx-auto max-w-2xl rounded-lg bg-white shadow-lg">
-        <div className="card-body">
-          <h1 className="font-bold text-3xl text-gray-900">Profile Settings</h1>
-          <p className="text-gray-600">Manage your account information</p>
+    <div className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-2xl rounded-[10px] border-2 border-black bg-white shadow-[8px_8px_0px_0px_black]">
+        <div className="border-black border-b-2 p-8">
+          <h1 className="mb-2 font-bold text-3xl text-black">
+            Profile Settings
+          </h1>
+          <p className="font-medium text-black">
+            Manage your account information
+          </p>
         </div>
 
-        <div className="card-body flex flex-col gap-8">
+        <div className="flex flex-col gap-8 p-8">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList>
               {tabs.map((tab) => (

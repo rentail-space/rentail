@@ -21,13 +21,19 @@ export default function ProfileEmailForm({
   return (
     <form method="post" onSubmit={onSubmit} className="space-y-6">
       {fetcher.data?.error ? (
-        <div role="alert" className="alert alert-error">
-          <AlertCircle className="h-6 w-6 shrink-0 stroke-current" />
+        <div
+          role="alert"
+          className="flex items-center gap-3 rounded-[5px] border-2 border-black bg-red-100 p-4 font-bold text-black shadow-[2px_2px_0px_0px_black]"
+        >
+          <AlertCircle className="h-6 w-6 shrink-0" />
           <span>{fetcher.data.error}</span>
         </div>
       ) : fetcher.data?.success ? (
-        <div role="alert" className="alert alert-warning">
-          <AlertTriangle className="h-6 w-6 shrink-0 stroke-current" />
+        <div
+          role="alert"
+          className="flex items-center gap-3 rounded-[5px] border-2 border-black bg-yellow-100 p-4 font-bold text-black shadow-[2px_2px_0px_0px_black]"
+        >
+          <AlertTriangle className="h-6 w-6 shrink-0" />
           <span>
             A verification link has been sent to your new email address. You
             must verify your email before you can sign in with it.

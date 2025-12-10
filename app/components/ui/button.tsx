@@ -4,19 +4,21 @@ import * as React from "react";
 import { cn } from "~/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-bold text-sm transition-all duration-100 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-blue-600 text-white shadow hover:bg-blue-700",
+        default:
+          "rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[3px_3px_0px_0px_black] hover:shadow-[5px_5px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px] active:shadow-[1px_1px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px]",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "rounded-[5px] border-2 border-black bg-red-500 text-black shadow-[3px_3px_0px_0px_black] hover:shadow-[5px_5px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px] active:shadow-[1px_1px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px]",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "rounded-[5px] border-2 border-black bg-white text-black shadow-[3px_3px_0px_0px_black] hover:bg-[hsl(60,100%,99%)] hover:shadow-[5px_5px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "rounded-[5px] border-2 border-black bg-[hsl(120,100%,97%)] text-black shadow-[3px_3px_0px_0px_black] hover:shadow-[5px_5px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px]",
+        ghost:
+          "rounded-[5px] border-2 border-transparent text-black hover:border-black hover:bg-white",
+        link: "text-black underline underline-offset-4 hover:decoration-[hsl(37,92%,65%)]",
         neubrutalism: cn(
           "border-[0.5px] duration-200 rounded-sm bg-transparent",
           // light mode
@@ -26,11 +28,11 @@ const buttonVariants = cva(
         ),
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        xl: "h-14 rounded-xl px-8 text-lg",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "h-12 px-6 py-3",
+        sm: "h-10 rounded-[5px] px-4 text-xs",
+        xl: "h-16 rounded-[10px] px-10 text-lg",
+        lg: "h-14 rounded-[5px] px-8",
+        icon: "h-12 w-12",
       },
     },
     defaultVariants: {
