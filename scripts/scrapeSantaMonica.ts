@@ -75,9 +75,6 @@ async function scrapeRetailSpaces() {
       return results;
     });
 
-    // Print preview
-    console.info("\nPreview of scraped data:");
-    console.info(JSON.stringify(spaces.slice(0, 10), null, 2));
     await updateSpace("santa-monica-place.json", spaces);
     return spaces;
   } finally {
@@ -97,7 +94,9 @@ async function updateSpace(filename: string, spaces: RetailSpace[]) {
 // Run the scraper
 scrapeRetailSpaces()
   .then((spaces) => {
-    console.info("\n✅ Successfully scraped %d retail spaces", spaces.length);
+    console.info("\n✅ Successfully scraped %d spaces", spaces.length);
+    for (const space of spaces)
+      console.info(`  ${space.number} (${space.type})`);
     process.exit(0);
   })
   .catch((error) => {
