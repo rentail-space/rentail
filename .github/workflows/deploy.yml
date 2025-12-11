@@ -75,20 +75,19 @@ jobs:
         run: pnpm react-router typegen
 
       - name: Check types
-        if: false
         run: pnpm tsc --noEmit --strict
         env:
-          NODE_OPTIONS: "--max-old-space-size=4096"
+          NODE_OPTIONS: "--max-old-space-size=2096"
 
       - name: Run Tests
-        run: scripts/tests.sh
+        run: pnpm vitest run
         env:
           ANTHROPIC_API_KEY: "***REMOVED***"
           BETTER_AUTH_SECRET: "***REMOVED***"
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
           DEBUG: ""
           DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-          NODE_OPTIONS: "--max-old-space-size=4096"
+          NODE_OPTIONS: "--expose-gc --max-old-space-size=2096"
           REDIS_URL: "redis://localhost:6379"
           RESEND_API_KEY: "re_"
 

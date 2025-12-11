@@ -6,6 +6,7 @@
  */
 
 import * as Sentry from "@sentry/react-router";
+import { invariant } from "es-toolkit";
 import Redis from "ioredis";
 import { afterAll, beforeAll } from "vitest";
 import env from "~/lib/env";
@@ -31,4 +32,8 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await prisma.$disconnect();
+
+  // Must run with NODE_OPTIONS="--expose-gc"
+  invariant(global.gc, "global.gc is not defined");
+  global.gc();
 });
