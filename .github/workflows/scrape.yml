@@ -1,7 +1,6 @@
 name: Scrape
 
 on:
-  push:
   workflow_dispatch:
   schedule:
     - cron: "0 6 * * *" # 10 pm Pacific Time (PST/PDT) = 6 am UTC on the following day
