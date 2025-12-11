@@ -1,11 +1,5 @@
-import {
-  type LoaderFunctionArgs,
-  useOutlet,
-  useRouteLoaderData,
-} from "react-router";
-import PageLayout from "~/components/layout/PageLayout";
+import { type LoaderFunctionArgs, useOutlet } from "react-router";
 import { verifyAdmin } from "~/lib/sessions.server";
-import type { loader as rootLoader } from "~/root";
 import NotFoundPage from "./$";
 
 export const handle = {
@@ -20,15 +14,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function Admin() {
-  const root = useRouteLoaderData<typeof rootLoader>("root");
   const outlet = useOutlet();
-  return root?.user?.isAdmin ? (
+  return (
     <main className="container mx-auto my-10">
       {outlet ?? <NotFoundPage />}
     </main>
-  ) : (
-    <PageLayout>
-      <NotFoundPage />
-    </PageLayout>
   );
 }

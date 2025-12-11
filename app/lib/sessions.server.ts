@@ -7,7 +7,11 @@ import { createIsbotFromList, list } from "isbot";
 import { reverse } from "node:dns/promises";
 import type { Chat, User } from "prisma/generated/client";
 import type { UserGetPayload } from "prisma/generated/models";
-import { type Session, createCookieSessionStorage } from "react-router";
+import {
+  type Session,
+  createCookieSessionStorage,
+  redirect,
+} from "react-router";
 import { ulid } from "ulid";
 import zod from "zod";
 import sendNewUserNotification from "~/emails/NewUserNotification";
@@ -327,7 +331,7 @@ async function isBotByIP(ip?: string): Promise<boolean> {
 export async function verifyAdmin(requestHeaders: Headers): Promise<User> {
   const session = await userFromCookie(requestHeaders);
   if ("user" in session && session.user.isAdmin) return session.user;
-  else throw new Response("Not found", { status: 404 });
+  else throw redirect("/");
 }
 
 /**

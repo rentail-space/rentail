@@ -1,9 +1,23 @@
+import { PrismaPg } from "@prisma/adapter-pg";
 import debug from "debug";
+import dotenv from "dotenv";
+import { invariant } from "es-toolkit";
 import { readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path, { basename, resolve } from "node:path";
+import { PrismaClient } from "prisma/generated/client";
 import { z } from "zod";
-import prisma from "~/lib/prisma";
+
+dotenv.config({ quiet: true });
+invariant(process.env.DATABASE_URL, "DATABASE_URL is required");
+
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({
+    connectionString: process.env.DIRECT_URL,
+  }),
+  errorFormat: "pretty",
+  log: debug.enabled("prisma") ? ["error", "warn", "query", "info"] : ["error"],
+});
 
 const schema = z.object({
   name: z.string(),

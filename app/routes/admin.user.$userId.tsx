@@ -87,10 +87,8 @@ function UserInfoCard({ user }: { user: User }) {
   const utm = user.utm ? JSON.parse(user.utm as string) : undefined;
 
   return (
-    <details className="collapse border border-gray-200" open>
-      <summary className="collapse-title font-semibold">
-        {user.name || user.id}
-      </summary>
+    <details className="rounded-lg border-2 border-gray-400 p-4" open>
+      <summary className="font-semibold">{user.name || user.id}</summary>
       <Table>
         <TableBody>
           {!user.isAnonymous && <Row title="Email" value={user.email} />}
@@ -138,10 +136,9 @@ function Row({ title, value }: { title: string; value: string | null }) {
 function EditNote({ user }: { user: User }) {
   const fetcher = useFetcher<typeof action>();
   return (
-    <details className="collapse border border-gray-200 print:hidden">
-      <summary className="collapse-title font-semibold">Note</summary>
+    <details className="rounded-lg border-2 border-gray-400 p-4 print:hidden">
+      <summary className="font-semibold">Note</summary>
       <fetcher.Form
-        className="collapse-content"
         onSubmit={(event) => {
           event.preventDefault();
           fetcher.submit(event.currentTarget, {
@@ -149,7 +146,7 @@ function EditNote({ user }: { user: User }) {
           });
         }}
       >
-        <FieldSet>
+        <FieldSet className="mt-4">
           <Textarea id="note" defaultValue={user.note ?? ""} name="note" />
 
           <div className="flex justify-end">
@@ -175,13 +172,9 @@ function EditNote({ user }: { user: User }) {
 function WorkingMemory({ user }: { user: User }) {
   const workingMemory = cleanParseWorkingMemory(user.workingMemory);
   return (
-    <details className="collapse border border-gray-200 print:hidden">
-      <summary className="collapse-title font-semibold">
-        User's working memory
-      </summary>
-      <pre className="m-0! bg-background text-primary">
-        {JSON.stringify(workingMemory, null, 2)}
-      </pre>
+    <details className="rounded-lg border-2 border-gray-400 p-4 print:hidden">
+      <summary className="font-semibold">User's working memory</summary>
+      <pre className="not-prose">{JSON.stringify(workingMemory, null, 2)}</pre>
     </details>
   );
 }
@@ -194,10 +187,10 @@ function FullChat({
   const timestamp = chat.createdAt;
   return (
     <details
-      className="collapse border border-gray-200 print:break-before-page"
+      className="rounded-lg border-2 border-gray-400 p-4 print:break-before-page"
       open
     >
-      <summary className="collapse-title flex justify-between gap-2 font-semibold">
+      <summary className="flex justify-between gap-2 font-semibold">
         <span>{chat.title ?? "Untitled chat"}</span>
         <span className="text-gray-500">
           {timestamp.toLocaleDateString(undefined, {

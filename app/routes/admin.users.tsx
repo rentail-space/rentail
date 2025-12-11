@@ -151,7 +151,15 @@ function AllUsers({ users }: { users: User[] }) {
         accessorFn: (row) => deviceDetection(row.userAgent),
         size: 120,
       },
-      { header: "Referrer", accessorKey: "referrer", size: 350 },
+      {
+        header: "Source / Referrer",
+        accessorFn: (row) =>
+          (row.utm && JSON.parse(row.utm as string).source) ||
+          row.referrer ||
+          "N/A",
+
+        size: 350,
+      },
       {
         header: "IP",
         accessorKey: "ip",
