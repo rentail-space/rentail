@@ -9,6 +9,7 @@ import { JWT } from "google-auth-library";
 import { google } from "googleapis";
 import { ArrowDown, ArrowRight, ArrowUp } from "lucide-react";
 import { DateTime } from "luxon";
+import { parseAsInteger, useQueryState } from "nuqs";
 import type { User, Waitlist } from "prisma/generated/client";
 import { Fragment } from "react";
 import { Link, type LoaderFunctionArgs } from "react-router";
@@ -62,9 +63,7 @@ async function getGoogleAnalyticsViewCount(days: number): Promise<
       requestBody: {
         dateRanges: [
           {
-            startDate: DateTime.now()
-              .minus({ days: 90 })
-              .toFormat("yyyy-MM-dd"),
+            startDate: DateTime.now().minus({ days }).toFormat("yyyy-MM-dd"),
             endDate: "today",
           },
         ],
@@ -88,34 +87,54 @@ async function getGoogleAnalyticsViewCount(days: number): Promise<
 }
 
 export default function UsersPage({ loaderData }: Route.ComponentProps) {
+  const [period, setPeriod] = useQueryState(
+    "period",
+    parseAsInteger.withDefault(30),
+  );
+  const daysAgo = DateTime.now()
+    .minus({ days: period ?? 30 })
+    .toJSDate();
+  const recent = loaderData.users.filter(
+    ({ createdAt, isAdmin }) =>
+      createdAt.getTime() > daysAgo.getTime() && !isAdmin,
+  );
+  const analytics = loaderData.analytics.filter(
+    ({ date }) => DateTime.fromFormat(date, "yyyyMMdd").toJSDate() > daysAgo,
+  );
+
   return (
     <main className="flex flex-col gap-8">
-      <Analytics analytics={loaderData.analytics} users={loaderData.users} />
-
-      <section className="flex flex-col gap-4">
-        <h2 className="font-bold text-2xl">
-          All Users{" "}
-          <span className="text-gray-500">
-            ({loaderData.users.length} user)
-          </span>
-        </h2>
-        <AllUsers users={loaderData.users} />
-      </section>
-
-      <section className="flex flex-col gap-4">
-        <h2 className="font-bold text-2xl">
-          Waiting List{" "}
-          <span className="text-gray-500">
-            ({loaderData.waiting.length} waiting)
-          </span>
-        </h2>
-        <WaitingList waiting={loaderData.waiting} />
-      </section>
+      <RangeSelector period={period} setPeriod={setPeriod} />
+      <Analytics analytics={analytics} users={recent} />
+      <AllUsers users={recent} />
+      <WaitingList waiting={loaderData.waiting} />
     </main>
   );
 }
 
-import { parseAsInteger, useQueryState } from "nuqs";
+function RangeSelector({
+  period,
+  setPeriod,
+}: {
+  period: number;
+  setPeriod: (period: number) => void;
+}) {
+  return (
+    <Tabs className="mx-auto" value={period.toString()}>
+      <TabsList>
+        {[10, 30, 90].map((days) => (
+          <TabsTrigger
+            key={days}
+            onClick={() => setPeriod(days)}
+            value={days.toString()}
+          >
+            Last {days} Days
+          </TabsTrigger>
+        ))}
+      </TabsList>
+    </Tabs>
+  );
+}
 
 function Analytics({
   analytics,
@@ -128,46 +147,18 @@ function Analytics({
   }>;
   users: User[];
 }) {
-  const [selectedPeriod, setSelectedPeriod] = useQueryState(
-    "period",
-    parseAsInteger.withDefault(30),
-  );
-  const daysAgo = DateTime.now()
-    .minus({ days: selectedPeriod ?? 30 })
-    .toJSDate();
-  const selectedData = analytics.filter(
-    ({ date }) => DateTime.fromFormat(date, "yyyyMMdd").toJSDate() > daysAgo,
-  );
-  const activeUsers = sumBy(selectedData, (day) => Number(day.activeUsers));
-  const recentlyCreated = users
-    .filter(({ isAdmin }) => !isAdmin)
-    .filter(({ createdAt }) => createdAt.getTime() > daysAgo.getTime());
-  const signedUp = recentlyCreated.filter(
-    ({ passwordHash }) => passwordHash !== null,
-  );
+  const activeUsers = sumBy(analytics, (day) => Number(day.activeUsers));
+  const signedUp = users.filter(({ passwordHash }) => passwordHash !== null);
 
   return (
     <div className="flex flex-col gap-8">
       {/* Tabs for period selection */}
-      <Tabs className="mx-auto" value={selectedPeriod.toString()}>
-        <TabsList>
-          {[10, 30, 90].map((days) => (
-            <TabsTrigger
-              key={days}
-              value={days.toString()}
-              onClick={() => setSelectedPeriod(days)}
-            >
-              Last {days} Days
-            </TabsTrigger>
-          ))}
-        </TabsList>
-      </Tabs>
 
       {/* Conversion Funnel */}
       <div className="mx-auto flex flex-row items-center gap-4">
         <Stat
           title="Page Views"
-          value={sumBy(selectedData, (day) =>
+          value={sumBy(analytics, (day) =>
             Number(day.screenPageViews),
           ).toLocaleString()}
           description="Google Analytics"
@@ -176,19 +167,19 @@ function Analytics({
         <Stat
           title="Active Users"
           value={activeUsers.toLocaleString()}
-          description={`Last ${selectedPeriod} days`}
+          description="From page views"
         />
         <ArrowRight className="h-6 w-6 text-gray-400" />
         <Stat
           title="Conversations"
-          value={recentlyCreated.length.toLocaleString()}
-          description={`${((recentlyCreated.length / activeUsers) * 100).toFixed(2)}% of active`}
+          value={users.length.toLocaleString()}
+          description={`${((users.length / activeUsers) * 100).toFixed(2)}% of active`}
         />
         <ArrowRight className="h-6 w-6 text-gray-400" />
         <Stat
           title="Signed Up"
           value={signedUp.length.toLocaleString()}
-          description={`${((signedUp.length / recentlyCreated.length) * 100).toFixed(2)}% of chats`}
+          description={`${((signedUp.length / users.length) * 100).toFixed(2)}% of chats`}
         />
       </div>
     </div>
@@ -271,57 +262,66 @@ function AllUsers({ users }: { users: User[] }) {
   });
 
   return (
-    <Table>
-      <TableHeader>
-        {table.getHeaderGroups().map((group) => (
-          <TableRow key={group.id}>
-            {group.headers.map((header) => (
-              <TableHead key={header.id}>
-                <Button
-                  className="flex w-full justify-between"
-                  onClick={header.column.getToggleSortingHandler()}
-                  variant="ghost"
-                >
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext(),
-                  )}
-                  {header.column.getIsSorted() === "desc" ? (
-                    <ArrowUp />
-                  ) : header.column.getIsSorted() === "asc" ? (
-                    <ArrowDown />
-                  ) : (
-                    <>&nbsp;</>
-                  )}
-                </Button>
-              </TableHead>
-            ))}
-          </TableRow>
-        ))}
-      </TableHeader>
-      <TableBody>
-        {table.getRowModel().rows.map((row) => (
-          <Fragment key={row.id}>
-            <TableRow>
-              {row.getVisibleCells().map((cell) => (
-                <TableCell
-                  key={cell.id}
-                  title={cell.getValue() as string}
-                  width={cell.column.getSize()}
-                >
-                  <div
-                    className="truncate"
-                    style={{ width: cell.column.getSize() }}
+    <section className="flex flex-col gap-4">
+      <h2 className="font-bold text-2xl">
+        All Users <span className="text-gray-500">({users.length} user)</span>
+      </h2>
+
+      <Table>
+        <TableHeader>
+          {table.getHeaderGroups().map((group) => (
+            <TableRow key={group.id}>
+              {group.headers.map((header) => (
+                <TableHead key={header.id}>
+                  <Button
+                    className="flex w-full justify-between"
+                    onClick={header.column.getToggleSortingHandler()}
+                    variant="ghost"
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </div>
-                </TableCell>
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    )}
+                    {header.column.getIsSorted() === "desc" ? (
+                      <ArrowUp />
+                    ) : header.column.getIsSorted() === "asc" ? (
+                      <ArrowDown />
+                    ) : (
+                      <>&nbsp;</>
+                    )}
+                  </Button>
+                </TableHead>
               ))}
             </TableRow>
-          </Fragment>
-        ))}
-      </TableBody>
-    </Table>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows.map((row) => (
+            <Fragment key={row.id}>
+              <TableRow>
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell
+                    key={cell.id}
+                    title={cell.getValue() as string}
+                    width={cell.column.getSize()}
+                  >
+                    <div
+                      className="truncate"
+                      style={{ width: cell.column.getSize() }}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </div>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </Fragment>
+          ))}
+        </TableBody>
+      </Table>
+    </section>
   );
 }
 
@@ -352,47 +352,54 @@ function WaitingList({ waiting }: { waiting: Waitlist[] }) {
     initialState: { sorting: [{ id: "createdAt", desc: true }] },
   });
   return (
-    <Table>
-      <TableHeader>
-        {table.getHeaderGroups().map((group) => (
-          <TableRow key={group.id}>
-            {group.headers.map((header) => (
-              <TableHead key={header.id}>
-                <Button
-                  className="flex w-full justify-between"
-                  onClick={header.column.getToggleSortingHandler()}
-                  variant="ghost"
-                >
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext(),
-                  )}
-                  {header.column.getIsSorted() === "desc" ? (
-                    <ArrowUp />
-                  ) : header.column.getIsSorted() === "asc" ? (
-                    <ArrowDown />
-                  ) : (
-                    <>&nbsp;</>
-                  )}
-                </Button>
-              </TableHead>
-            ))}
-          </TableRow>
-        ))}
-      </TableHeader>
-      <TableBody>
-        {table.getRowModel().rows.map((row) => (
-          <Fragment key={row.id}>
-            <TableRow>
-              {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id} width={cell.column.getSize()}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
+    <section className="flex flex-col gap-4">
+      <h2 className="font-bold text-2xl">
+        Waiting List{" "}
+        <span className="text-gray-500">({waiting.length} waiting)</span>
+      </h2>
+
+      <Table>
+        <TableHeader>
+          {table.getHeaderGroups().map((group) => (
+            <TableRow key={group.id}>
+              {group.headers.map((header) => (
+                <TableHead key={header.id}>
+                  <Button
+                    className="flex w-full justify-between"
+                    onClick={header.column.getToggleSortingHandler()}
+                    variant="ghost"
+                  >
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    )}
+                    {header.column.getIsSorted() === "desc" ? (
+                      <ArrowUp />
+                    ) : header.column.getIsSorted() === "asc" ? (
+                      <ArrowDown />
+                    ) : (
+                      <>&nbsp;</>
+                    )}
+                  </Button>
+                </TableHead>
               ))}
             </TableRow>
-          </Fragment>
-        ))}
-      </TableBody>
-    </Table>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows.map((row) => (
+            <Fragment key={row.id}>
+              <TableRow>
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id} width={cell.column.getSize()}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </Fragment>
+          ))}
+        </TableBody>
+      </Table>
+    </section>
   );
 }
