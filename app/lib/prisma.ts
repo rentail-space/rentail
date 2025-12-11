@@ -8,13 +8,12 @@ import { PrismaClient } from "prisma/generated/client";
 dotenv.configDotenv({ quiet: true });
 invariant(process.env.DATABASE_URL, "DATABASE_URL is required");
 
-// Configure pg Pool with pgbouncer-compatible settings
+// Configure pg Pool for Supabase pooler (SSL configured via DATABASE_URL)
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }, // Required for Supabase
   max: 1,
-  idleTimeoutMillis: 0, // Disable idle timeout
-  connectionTimeoutMillis: 0, // Disable connection timeout
+  idleTimeoutMillis: 0,
+  connectionTimeoutMillis: 0,
   allowExitOnIdle: true,
 });
 
