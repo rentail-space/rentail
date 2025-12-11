@@ -5,12 +5,7 @@ import type { User } from "prisma/generated/client";
 import { useState } from "react";
 import { redirect, useLoaderData } from "react-router";
 import { ulid } from "ulid";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "~/components/_ui/Tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import sendVerificationEmail from "~/emails/EmailVerification";
 import prisma from "~/lib/prisma";
 import { findUserAndLastChat } from "~/lib/sessions.server";

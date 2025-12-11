@@ -1,8 +1,8 @@
 import { useEffect, useId, useState } from "react";
 import { useFetcher } from "react-router";
-import { Button } from "~/components/_ui/Button";
-import { Input } from "~/components/_ui/Input";
-import { Label } from "~/components/_ui/Label";
+import { Button } from "~/components/ui/Button";
+import { Input } from "~/components/ui/Input";
+import { Label } from "~/components/ui/Label";
 
 export default function WaitlistSection() {
   return (

@@ -3,7 +3,7 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
-import CentersMap from "~/components/_ui/CentersMap";
+import CentersMap from "~/components/ui/CentersMap";
 import { Spaces } from "./Spaces";
 
 export default function Center({

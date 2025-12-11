@@ -1,4 +1,4 @@
-import BlogPostsGrid from "~/components/_ui/BlogPostsGrid";
+import BlogPostsGrid from "~/components/ui/BlogPostsGrid";
 import type { BlogPost } from "~/lib/blogPosts.server";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
 

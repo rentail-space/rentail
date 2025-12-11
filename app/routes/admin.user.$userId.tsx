@@ -6,16 +6,16 @@ import type { ChatGetPayload } from "prisma/generated/models";
 import { Link, useFetcher } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { StickToBottom } from "use-stick-to-bottom";
-import { Button } from "~/components/_ui/Button";
-import { FieldSet } from "~/components/_ui/FieldSet";
+import { Button } from "~/components/ui/Button";
+import { FieldSet } from "~/components/ui/FieldSet";
 import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
-} from "~/components/_ui/Table";
-import { Textarea } from "~/components/_ui/Textarea";
+} from "~/components/ui/Table";
+import { Textarea } from "~/components/ui/Textarea";
 import deviceDetection from "~/lib/deviceDetection";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";

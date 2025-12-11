@@ -138,5 +138,8 @@
     },
     "ignoredBuiltDependencies": []
   },
+  "engines": {
+    "node": ">=24.10.1"
+  },
   "packageManager": "pnpm@10.25.0"
 }
