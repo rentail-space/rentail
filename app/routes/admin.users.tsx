@@ -4,6 +4,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
 import { google } from "googleapis";
 import { ArrowDown, ArrowRight, ArrowUp } from "lucide-react";
@@ -20,6 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/Table";
+import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import deviceDetection from "~/lib/deviceDetection";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma";
@@ -35,8 +37,54 @@ export async function loader({ request }: LoaderFunctionArgs) {
   });
 
   const waiting = await prisma.waitlist.findMany();
-  const analytics = await getGoogleAnalyticsViewCount();
+  const analytics = await getGoogleAnalyticsViewCount(90);
   return { users, waiting, analytics };
+}
+
+async function getGoogleAnalyticsViewCount(days: number): Promise<
+  Array<{
+    activeUsers: string;
+    date: string;
+    screenPageViews: string;
+  }>
+> {
+  const auth = new JWT({
+    scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
+    email: "analytics@rentail-480516.iam.gserviceaccount.com",
+    key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
+  });
+  const analyticsData = google.analyticsdata({ version: "v1beta", auth });
+  const propertyId = "properties/496833933";
+
+  try {
+    const response = await analyticsData.properties.runReport({
+      property: propertyId,
+      requestBody: {
+        dateRanges: [
+          {
+            startDate: DateTime.now()
+              .minus({ days: 90 })
+              .toFormat("yyyy-MM-dd"),
+            endDate: "today",
+          },
+        ],
+        dimensions: [{ name: "date" }],
+        metrics: [{ name: "activeUsers" }, { name: "screenPageViews" }],
+      },
+    });
+
+    return (
+      response.data.rows?.map((row) => ({
+        date: row.dimensionValues?.[0]?.value ?? "N/A",
+        activeUsers: row.metricValues?.[0]?.value ?? "0",
+        screenPageViews: row.metricValues?.[1]?.value ?? "0",
+      })) ?? []
+    );
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("Failed to fetch GA view count", error);
+    return [];
+  }
 }
 
 export default function UsersPage({ loaderData }: Route.ComponentProps) {
@@ -67,47 +115,82 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
   );
 }
 
+import { parseAsInteger, useQueryState } from "nuqs";
+
 function Analytics({
   analytics,
   users,
 }: {
-  analytics: { activeUsers: string; screenPageViews: string };
+  analytics: Array<{
+    activeUsers: string;
+    date: string;
+    screenPageViews: string;
+  }>;
   users: User[];
 }) {
-  const screenPageViews = Number(analytics.screenPageViews);
-  const activeUsers = Number(analytics.activeUsers);
-  const withoutAdmin = users.filter((user) => !user.isAdmin);
-  const daysAgo = DateTime.now().minus({ days: 30 }).toJSDate();
-  const recentlyUpdated = withoutAdmin.filter(
-    (user) => user.updatedAt.getTime() > daysAgo.getTime(),
+  const [selectedPeriod, setSelectedPeriod] = useQueryState(
+    "period",
+    parseAsInteger.withDefault(30),
   );
-  const signedUp = withoutAdmin.filter((user) => user.passwordHash !== null);
+  const daysAgo = DateTime.now()
+    .minus({ days: selectedPeriod ?? 30 })
+    .toJSDate();
+  const selectedData = analytics.filter(
+    ({ date }) => DateTime.fromFormat(date, "yyyyMMdd").toJSDate() > daysAgo,
+  );
+  const activeUsers = sumBy(selectedData, (day) => Number(day.activeUsers));
+  const recentlyCreated = users
+    .filter(({ isAdmin }) => !isAdmin)
+    .filter(({ createdAt }) => createdAt.getTime() > daysAgo.getTime());
+  const signedUp = recentlyCreated.filter(
+    ({ passwordHash }) => passwordHash !== null,
+  );
 
   return (
-    <div className="mx-auto flex flex-row items-center gap-4">
-      <Stat
-        title="Page Views"
-        value={screenPageViews.toLocaleString()}
-        description="Google Analytics"
-      />
-      <ArrowRight className="h-6 w-6 text-gray-400" />
-      <Stat
-        title="Active Users"
-        value={activeUsers.toLocaleString()}
-        description="Last 30 days"
-      />
-      <ArrowRight className="h-6 w-6 text-gray-400" />
-      <Stat
-        title="Conversations"
-        value={recentlyUpdated.length.toLocaleString()}
-        description={`${((recentlyUpdated.length / activeUsers) * 100).toFixed(2)}% of active`}
-      />
-      <ArrowRight className="h-6 w-6 text-gray-400" />
-      <Stat
-        title="Signed Up"
-        value={signedUp.length.toLocaleString()}
-        description={`${((signedUp.length / recentlyUpdated.length) * 100).toFixed(2)}% of chats`}
-      />
+    <div className="flex flex-col gap-8">
+      {/* Tabs for period selection */}
+      <Tabs className="mx-auto" value={selectedPeriod.toString()}>
+        <TabsList>
+          {[10, 30, 90].map((days) => (
+            <TabsTrigger
+              key={days}
+              value={days.toString()}
+              onClick={() => setSelectedPeriod(days)}
+            >
+              Last {days} Days
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
+
+      {/* Conversion Funnel */}
+      <div className="mx-auto flex flex-row items-center gap-4">
+        <Stat
+          title="Page Views"
+          value={sumBy(selectedData, (day) =>
+            Number(day.screenPageViews),
+          ).toLocaleString()}
+          description="Google Analytics"
+        />
+        <ArrowRight className="h-6 w-6 text-gray-400" />
+        <Stat
+          title="Active Users"
+          value={activeUsers.toLocaleString()}
+          description={`Last ${selectedPeriod} days`}
+        />
+        <ArrowRight className="h-6 w-6 text-gray-400" />
+        <Stat
+          title="Conversations"
+          value={recentlyCreated.length.toLocaleString()}
+          description={`${((recentlyCreated.length / activeUsers) * 100).toFixed(2)}% of active`}
+        />
+        <ArrowRight className="h-6 w-6 text-gray-400" />
+        <Stat
+          title="Signed Up"
+          value={signedUp.length.toLocaleString()}
+          description={`${((signedUp.length / recentlyCreated.length) * 100).toFixed(2)}% of chats`}
+        />
+      </div>
     </div>
   );
 }
@@ -312,40 +395,4 @@ function WaitingList({ waiting }: { waiting: Waitlist[] }) {
       </TableBody>
     </Table>
   );
-}
-async function getGoogleAnalyticsViewCount(): Promise<{
-  activeUsers: string;
-  screenPageViews: string;
-}> {
-  const auth = new JWT({
-    scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
-    email: "analytics@rentail-480516.iam.gserviceaccount.com",
-    key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
-  });
-  const analyticsData = google.analyticsdata({ version: "v1beta", auth });
-  const propertyId = "properties/496833933";
-
-  try {
-    const response = await analyticsData.properties.runReport({
-      property: propertyId,
-      requestBody: {
-        dateRanges: [
-          {
-            startDate: "30daysAgo",
-            endDate: "today",
-          },
-        ],
-        metrics: [{ name: "activeUsers" }, { name: "screenPageViews" }],
-      },
-    });
-    const activeUsers =
-      response.data.rows?.[0].metricValues?.[0]?.value ?? "N/A";
-    const screenPageViews =
-      response.data.rows?.[0].metricValues?.[1]?.value ?? "N/A";
-    return { activeUsers, screenPageViews };
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("Failed to fetch GA view count", error);
-    return { activeUsers: "N/A", screenPageViews: "N/A" };
-  }
 }
