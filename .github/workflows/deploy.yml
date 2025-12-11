@@ -107,9 +107,9 @@ jobs:
         uses: dopplerhq/cli-action@v3
 
       - name: Update database
+        if: false
         run: |
-          # doppler run --config prd -- pnpm prisma db push
-          doppler run --config prd -- pnpm tsx prisma/seed.ts
+          doppler run --config prd -- pnpm prisma db push
         env:
           DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
 
