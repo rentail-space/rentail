@@ -3,15 +3,15 @@ import type { PropertySpace } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
 import { Link } from "react-router";
-import { Button } from "~/components/ui/Button";
-import CentersMap from "~/components/ui/CentersMap";
+import { Button } from "~/components/_ui/Button";
+import CentersMap from "~/components/_ui/CentersMap";
 import {
   Table,
   TableBody,
   TableCell,
   TableHeader,
   TableRow,
-} from "~/components/ui/Table";
+} from "~/components/_ui/Table";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";

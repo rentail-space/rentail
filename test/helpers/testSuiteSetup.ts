@@ -34,6 +34,8 @@ afterAll(async () => {
   await prisma.$disconnect();
 
   // Must run with NODE_OPTIONS="--expose-gc"
-  invariant(global.gc, "global.gc is not defined");
-  global.gc();
+  if (process.env.CI) {
+    invariant(global.gc, "global.gc is not defined");
+    global.gc();
+  }
 });

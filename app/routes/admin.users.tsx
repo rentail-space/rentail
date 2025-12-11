@@ -11,7 +11,7 @@ import { DateTime } from "luxon";
 import type { User, Waitlist } from "prisma/generated/client";
 import { Fragment } from "react";
 import { Link, type LoaderFunctionArgs } from "react-router";
-import { Button } from "~/components/ui/Button";
+import { Button } from "~/components/_ui/Button";
 import {
   Table,
   TableBody,
@@ -19,7 +19,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "~/components/ui/Table";
+} from "~/components/_ui/Table";
 import deviceDetection from "~/lib/deviceDetection";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";

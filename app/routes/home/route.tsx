@@ -1,4 +1,4 @@
-import BlogPostsGrid from "~/components/ui/BlogPostsGrid";
+import BlogPostsGrid from "~/components/_ui/BlogPostsGrid";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
 import FeaturesSection from "~/routes/home/FeaturesSection";
 import HeroSection from "~/routes/home/HeroSection";
