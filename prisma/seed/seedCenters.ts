@@ -13,7 +13,10 @@ invariant(process.env.DATABASE_URL, "DATABASE_URL is required");
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg({
-    connectionString: process.env.DIRECT_URL,
+    connectionString: process.env.DATABASE_URL,
+    max: 1, // Limit connections for Supabase pooler
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 10000,
   }),
   errorFormat: "pretty",
   log: debug.enabled("prisma") ? ["error", "warn", "query", "info"] : ["error"],
