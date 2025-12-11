@@ -1,9 +1,9 @@
 name: Scrape
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 6 * * *" # 10 pm Pacific Time (PST/PDT) = 6 am UTC on the following day
+  - push
+  - workflow_dispatch
+  - schedule(cron: "0 6 * * *") # 10 pm Pacific Time (PST/PDT) = 6 am UTC on the following day
 
 jobs:
   scrape:
