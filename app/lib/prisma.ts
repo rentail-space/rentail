@@ -5,7 +5,7 @@ import { invariant } from "es-toolkit";
 import pg from "pg";
 import { PrismaClient } from "prisma/generated/client";
 
-dotenv.configDotenv();
+dotenv.configDotenv({ quiet: true });
 invariant(process.env.DATABASE_URL, "DATABASE_URL is required");
 
 // Configure pg Pool with pgbouncer-compatible settings

@@ -9,24 +9,21 @@ import { Vercel } from "@vercel/sdk";
 import type { GetDeploymentResponseBody } from "@vercel/sdk/models/getdeploymentop.js";
 import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymentsop.js";
 import dotenv from "dotenv";
-import env from "env-var";
 import { invariant } from "es-toolkit";
 import { DateTime } from "luxon";
 import { execSync } from "node:child_process";
 import { Octokit } from "octokit";
 import ora from "ora";
 
-dotenv.configDotenv();
+dotenv.configDotenv({ quiet: true });
+invariant(process.env.VERCEL_TOKEN, "VERCEL_TOKEN is required");
+invariant(process.env.GITHUB_TOKEN, "GITHUB_TOKEN is required");
 
 const vercelTeamId = "team_bjyg9pgn8TQQVP2NLMPnSYSN";
 const vercelProjectId = "prj_SrqYHd1Olo0XfxQHLe9lyGfcoT9z";
 
-const vercel = new Vercel({
-  bearerToken: env.get("VERCEL_TOKEN").required().asString(),
-});
-const octokit = new Octokit({
-  auth: env.get("GITHUB_TOKEN").required().asString(),
-});
+const vercel = new Vercel({ bearerToken: process.env.VERCEL_TOKEN });
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
 const colorCodes: { [key: string]: [string, string] } = {
   red: ["\x1b[31m", "\x1b[0m"],
@@ -113,7 +110,9 @@ async function githubWorkflows() {
     console.info(
       workflow.conclusion === "failure"
         ? colorize("red", `✗ ${status}`)
-        : colorize("green", `✓ ${status}`),
+        : workflow.conclusion === "success"
+          ? colorize("green", `✓ ${status}`)
+          : colorize("yellow", `⚡${status}`),
       DateTime.fromISO(workflow.created_at ?? "")
         .setZone("America/Los_Angeles")
         .toFormat("yyyy-MM-dd HH:mm:ss"),
