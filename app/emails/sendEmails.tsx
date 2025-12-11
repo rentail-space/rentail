@@ -5,7 +5,7 @@ import { delay, invariant, withTimeout } from "es-toolkit";
 import Redis from "ioredis";
 import type { JSX } from "react";
 import { Resend } from "resend";
-import env from "~/lib/env";
+import envVars from "~/lib/env";
 
 export type LastEmail = {
   html: string;
@@ -14,7 +14,7 @@ export type LastEmail = {
 };
 
 export let lastEmailSent: LastEmail | undefined = undefined;
-const resend = new Resend(env.RESEND_API_KEY);
+const resend = new Resend(envVars.RESEND_API_KEY);
 const logger = debug("email");
 
 /**
@@ -61,8 +61,8 @@ export async function sendEmail({
  * We use different processes for sending emails (Vite worker) and for checking
  * on them (test process), so we use Redis to communicate between the two.
  */
-const subscriber = new Redis(env.REDIS_URL);
-const publisher = new Redis(env.REDIS_URL);
+const subscriber = new Redis(envVars.REDIS_URL);
+const publisher = new Redis(envVars.REDIS_URL);
 
 subscriber.on("message", (channel: string, message: unknown) => {
   if (channel === "email:last")

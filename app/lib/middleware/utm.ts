@@ -1,6 +1,6 @@
 import debug from "debug";
 import { createCookieSessionStorage } from "react-router";
-import env from "~/lib/env";
+import envVars from "~/lib/env";
 import type { Route } from "~/types/app/+types/root";
 
 type FirstRequest = {
@@ -23,13 +23,13 @@ const { getSession, commitSession } = createCookieSessionStorage<
   // a Cookie from `createCookie` or the CookieOptions to create one
   cookie: {
     name: "__utm",
-    domain: env.isProduction ? "rentail.space" : "localhost",
+    domain: envVars.isProduction ? "rentail.space" : "localhost",
     httpOnly: true,
     maxAge: 1 * 24 * 60 * 60, // 1 day
     path: "/",
     sameSite: "lax",
-    secrets: [env.BETTER_AUTH_SECRET],
-    secure: env.isProduction,
+    secrets: [envVars.BETTER_AUTH_SECRET],
+    secure: envVars.isProduction,
   },
 });
 

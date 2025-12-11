@@ -8,7 +8,7 @@ import path, { basename, resolve } from "node:path";
 import { PrismaClient } from "prisma/generated/client";
 import { z } from "zod";
 
-dotenv.config({ quiet: true });
+dotenv.configDotenv();
 invariant(process.env.DATABASE_URL, "DATABASE_URL is required");
 
 const prisma = new PrismaClient({

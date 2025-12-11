@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
 import env from "env-var";
 
-dotenv.config({ quiet: true });
+dotenv.configDotenv();
 
-export default {
+const envVars = {
   isProduction: process.env.NODE_ENV === "production",
   isTest: process.env.NODE_ENV === "test",
   isDevelopment: process.env.NODE_ENV === "development",
@@ -30,3 +30,5 @@ export default {
     .default("redis://localhost:6379")
     .asUrlString(),
 };
+
+export default envVars;

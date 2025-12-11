@@ -7,7 +7,7 @@ import { Redis } from "ioredis";
 import type { InputJsonValue } from "prisma/generated/internal/prismaNamespace";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { ulid } from "ulid";
-import env from "~/lib/env";
+import envVars from "~/lib/env";
 import { conversational } from "~/lib/model";
 import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
@@ -122,8 +122,8 @@ export async function action({ request, params }: Route.ActionArgs) {
     consumeSseStream: async ({ stream }) => {
       // Create a resumable stream from the SSE stream
       const streamContext = createResumableStreamContext({
-        publisher: new Redis(env.REDIS_URL),
-        subscriber: new Redis(env.REDIS_URL),
+        publisher: new Redis(envVars.REDIS_URL),
+        subscriber: new Redis(envVars.REDIS_URL),
         waitUntil: async (promise) => await promise,
       });
       await streamContext.createNewResumableStream(

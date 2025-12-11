@@ -16,7 +16,7 @@ import { execSync } from "node:child_process";
 import { Octokit } from "octokit";
 import ora from "ora";
 
-dotenv.config({ quiet: true });
+dotenv.configDotenv();
 
 const vercelTeamId = "team_bjyg9pgn8TQQVP2NLMPnSYSN";
 const vercelProjectId = "prj_SrqYHd1Olo0XfxQHLe9lyGfcoT9z";

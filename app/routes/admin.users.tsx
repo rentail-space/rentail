@@ -21,7 +21,7 @@ import {
   TableRow,
 } from "~/components/_ui/Table";
 import deviceDetection from "~/lib/deviceDetection";
-import env from "~/lib/env";
+import envVars from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
 import type { Route } from "./+types/admin.users";
@@ -320,7 +320,7 @@ async function getGoogleAnalyticsViewCount(): Promise<{
   const auth = new JWT({
     scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
     email: "analytics@rentail-480516.iam.gserviceaccount.com",
-    key: env.GOOGLE_ANALYTICS_PRIVATE_KEY,
+    key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
   });
   const analyticsData = google.analyticsdata({ version: "v1beta", auth });
   const propertyId = "properties/496833933";

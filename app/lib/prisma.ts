@@ -5,15 +5,16 @@ import { invariant } from "es-toolkit";
 import pg from "pg";
 import { PrismaClient } from "prisma/generated/client";
 
-dotenv.config({ quiet: true });
+dotenv.configDotenv();
 invariant(process.env.DATABASE_URL, "DATABASE_URL is required");
 
-// Configure pg Pool for Supabase pooler compatibility
+// Configure pg Pool with pgbouncer-compatible settings
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
-  max: 1, // Limit connections for Supabase pooler
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 10000,
+  max: 1,
+  idleTimeoutMillis: 0, // Disable idle timeout
+  connectionTimeoutMillis: 0, // Disable connection timeout
+  allowExitOnIdle: true,
 });
 
 export default new PrismaClient({

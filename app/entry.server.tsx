@@ -6,13 +6,13 @@ import type {
   LoaderFunctionArgs,
 } from "react-router";
 import { v7 as uuidv7 } from "uuid";
-import env from "~/lib/env";
+import envVars from "~/lib/env";
 import msw from "~/test/mocks/mswHandlers";
 
 // Only enable Sentry in production
-if (env.isProduction && env.SENTRY_DSN) {
+if (envVars.isProduction && envVars.SENTRY_DSN) {
   Sentry.init({
-    dsn: env.SENTRY_DSN,
+    dsn: envVars.SENTRY_DSN,
     enableLogs: true,
     environment: "production",
     integrations: [
@@ -28,7 +28,7 @@ if (env.isProduction && env.SENTRY_DSN) {
 }
 
 // Initialize MSW in test mode (on the server side)
-if (env.isTest) msw.listen({ onUnhandledRequest: "error" });
+if (envVars.isTest) msw.listen({ onUnhandledRequest: "error" });
 
 export function getLoadContext() {
   return {};

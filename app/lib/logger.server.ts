@@ -3,11 +3,11 @@ import type { ILogLevel } from "@logtail/types";
 import { createWriteStream } from "node:fs";
 import { resolve } from "node:path";
 import { format, styleText } from "node:util";
-import env from "~/lib/env";
+import envVars from "~/lib/env";
 
-const logtail = env.LOGTAIL_TOKEN
-  ? new Logtail(env.LOGTAIL_TOKEN, {
-      endpoint: env.LOGTAIL_ENDPOINT,
+const logtail = envVars.LOGTAIL_TOKEN
+  ? new Logtail(envVars.LOGTAIL_TOKEN, {
+      endpoint: envVars.LOGTAIL_ENDPOINT,
     })
   : null;
 
@@ -20,7 +20,7 @@ const colors = {
   error: (text: string) => styleText("red", text),
 };
 
-const logFile = env.isTest
+const logFile = envVars.isTest
   ? createWriteStream(resolve("server.log"), { flags: "a" })
   : null;
 

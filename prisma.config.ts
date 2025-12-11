@@ -7,7 +7,7 @@ import { defineConfig, env } from "prisma/config";
 dotenv.configDotenv({
   quiet: true,
   override: false,
-  debug: true,
+  debug: false,
 });
 
 // @see https://www.prisma.io/docs/orm/overview/databases/supabase#specific-considerations

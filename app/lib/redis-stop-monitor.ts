@@ -1,7 +1,7 @@
 import { captureException } from "@sentry/react-router";
 import debug from "debug";
 import Redis from "ioredis";
-import env from "~/lib/env";
+import envVars from "~/lib/env";
 
 const logger = debug("chat");
 
@@ -16,7 +16,7 @@ export async function monitorStopSignal(chatId: string): Promise<{
   abortSignal: AbortSignal;
   cleanup: () => Promise<void>;
 }> {
-  const subscriber = new Redis(env.REDIS_URL);
+  const subscriber = new Redis(envVars.REDIS_URL);
   const key = `chat:stop:${chatId}`;
   const abort = new AbortController();
   abort.signal.addEventListener("abort", () => {
@@ -31,7 +31,7 @@ export async function monitorStopSignal(chatId: string): Promise<{
 
   // Abort the signal returned to the caller
   try {
-    const redis = new Redis(env.REDIS_URL);
+    const redis = new Redis(envVars.REDIS_URL);
     if ((await redis.get(key)) === "stop") abort.abort();
     await redis.quit();
   } catch (error) {
@@ -46,7 +46,7 @@ export async function monitorStopSignal(chatId: string): Promise<{
         subscriber.disconnect();
       }
 
-      const redis = new Redis(env.REDIS_URL);
+      const redis = new Redis(envVars.REDIS_URL);
       await redis.del(key);
       redis.disconnect();
     } catch (error) {
@@ -64,7 +64,7 @@ export async function monitorStopSignal(chatId: string): Promise<{
  * @param chatId - The ID of the chat to stop.
  */
 export async function stopChat(chatId: string) {
-  const redis = new Redis(env.REDIS_URL);
+  const redis = new Redis(envVars.REDIS_URL);
   const key = `chat:stop:${chatId}`;
   try {
     // Set a stop signal that expires after 30 seconds

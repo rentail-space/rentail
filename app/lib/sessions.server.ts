@@ -17,7 +17,7 @@ import zod from "zod";
 import sendNewUserNotification from "~/emails/NewUserNotification";
 import sendWelcomeEmail from "~/emails/WelcomeEmail";
 import { getDeviceInfo } from "~/lib/deviceDetection.server";
-import env from "~/lib/env";
+import envVars from "~/lib/env";
 import { readUtmParams, saveUtmParams } from "~/lib/middleware/utm";
 import prisma from "~/lib/prisma";
 import welcome from "~/prompts/welcome.md?raw";
@@ -65,13 +65,13 @@ const { getSession, commitSession, destroySession } =
     // a Cookie from `createCookie` or the CookieOptions to create one
     cookie: {
       name: "__session",
-      domain: env.isProduction ? "rentail.space" : "localhost",
+      domain: envVars.isProduction ? "rentail.space" : "localhost",
       httpOnly: true,
       maxAge: 365 * 24 * 60 * 60, // 365 days
       path: "/",
       sameSite: "lax",
-      secrets: [env.BETTER_AUTH_SECRET],
-      secure: env.isProduction,
+      secrets: [envVars.BETTER_AUTH_SECRET],
+      secure: envVars.isProduction,
     },
   });
 

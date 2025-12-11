@@ -6,7 +6,7 @@ import type {
   LanguageModelV2,
   LanguageModelV2CallOptions,
 } from "@ai-sdk/provider";
-import env from "./env";
+import envVars from "./env";
 
 /**
  * The smartest model for the conversational tasks (replying to the user).
@@ -14,7 +14,7 @@ import env from "./env";
 
 export const conversational = {
   model: createAnthropic({
-    apiKey: env.ANTHROPIC_API_KEY,
+    apiKey: envVars.ANTHROPIC_API_KEY,
   })("claude-sonnet-4-5"),
   providerOptions: {
     anthropic: {} satisfies AnthropicProviderOptions,
@@ -29,7 +29,7 @@ export const conversational = {
  */
 export const classify = {
   model: createAnthropic({
-    apiKey: env.ANTHROPIC_API_KEY,
+    apiKey: envVars.ANTHROPIC_API_KEY,
   })("claude-haiku-4-5"),
   providerOptions: {
     anthropic: {

@@ -12,13 +12,13 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/_ui/Table";
-import env from "~/lib/env";
+import envVars from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import type { Route } from "./+types/admin.centers";
 
-const mapboxToken = env.MAPBOX_TOKEN;
+const mapboxToken = envVars.MAPBOX_TOKEN;
 
 export async function loader({ request }: Route.LoaderArgs) {
   const user = await verifyAdmin(request.headers);

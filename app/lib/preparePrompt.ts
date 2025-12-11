@@ -5,7 +5,7 @@ import {
   workingMemoryExample,
 } from "~/lib/workingMemory";
 import generalDirectives from "~/prompts/generalDirectives.md?raw";
-import env from "./env";
+import envVars from "./env";
 import findNearbyCenters from "./findNearbyCenters";
 import prisma from "./prisma";
 
@@ -36,7 +36,7 @@ export default async function preparePrompt({
     user,
   });
   // Use fixed date/time in test mode for consistent LLM caching
-  const [date, time] = env.isTest
+  const [date, time] = envVars.isTest
     ? ["2026-01-15", "12:00:00.000Z"]
     : new Date().toISOString().split("T");
   const workingMemory = cleanParseWorkingMemory(user?.workingMemory);
