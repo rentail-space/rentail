@@ -1,18 +1,16 @@
 import dotenv from "dotenv";
 import { invariant } from "es-toolkit";
 import { resolve } from "node:path";
-import { defineConfig, env } from "prisma/config";
+import { defineConfig } from "prisma/config";
 
 // Load environment variables only if not already set (e.g., by Doppler)
 // This prevents overwriting variables injected by tools like Doppler
 dotenv.configDotenv({ quiet: true });
-invariant(process.env.DATABASE_URL, "DATABASE_URL is required");
+invariant(process.env.DIRECT_URL, "DIRECT_URL is required");
 
 // @see https://www.prisma.io/docs/orm/overview/databases/supabase#specific-considerations
 export default defineConfig({
-  datasource: {
-    url: env("DATABASE_URL"),
-  },
+  datasource: { url: process.env.DIRECT_URL },
   migrations: {
     path: "prisma/migrations",
     seed: "pnpm tsx prisma/seed.ts",
