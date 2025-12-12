@@ -29,6 +29,139 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `/cmd:performance` - Performance optimization analysis
 - `/cmd:conversion-hooks` - Find conversion tracking hooks
 
+## Beads Issue Tracking
+
+**This project uses Beads (`bd`) for issue tracking and workflow management.**
+
+Beads is an AI-native issue tracker integrated with git. All work should be tracked in Beads, NOT in TodoWrite or markdown TODO comments. The `.beads/` directory contains all issues and is automatically synced via git hooks.
+
+### Critical Rules
+
+**NEVER use TodoWrite for this project.** All task tracking must use Beads commands.
+
+**Always end sessions with the sync protocol:**
+```bash
+git status              # Check what changed
+git add <files>         # Stage code changes
+bd sync                 # Commit beads changes
+git commit -m "..."     # Commit code
+bd sync                 # Commit any new beads changes
+git push                # Push to remote
+```
+
+**All issues must have descriptions** that explain:
+- Why the issue exists
+- What needs to be completed
+- How you discovered it (if creating during work)
+
+### Essential Commands
+
+**Finding Work:**
+- `bd ready` - Show issues ready to work (no blockers)
+- `bd list --status=open` - All open issues
+- `bd list --status=in_progress` - Your active work
+- `bd show <id>` - Detailed issue view with dependencies
+- `bd stale --days 30` - Forgotten issues needing attention
+
+**Creating & Updating:**
+- `bd create --title="..." --type=task|bug|feature --description="..."` - New issue (description required)
+- `bd update <id> --status=in_progress` - Claim work
+- `bd update <id> --assignee=username` - Assign to someone
+- `bd close <id>` - Mark complete
+- `bd close <id1> <id2> ...` - Close multiple issues at once (more efficient)
+- `bd close <id> --reason="explanation"` - Close with reason
+
+**Dependencies & Blocking:**
+- `bd dep add <issue> <depends-on>` - Add dependency (issue blocks depends-on; depends-on requires issue)
+- `bd blocked` - Show all blocked issues
+- `bd show <id>` - See what's blocking/blocked by this issue
+
+**Discovered Issues:**
+When you find new issues during work, create them with context:
+```bash
+bd create --title="Bug found" --description="Details" -t bug -p 1 \
+  --deps discovered-from:<parent-id>
+```
+
+**Sync & Collaboration:**
+- `bd sync` - Sync with git remote (run at session end - MANDATORY)
+- `bd sync --status` - Check sync status without syncing
+
+**Project Health:**
+- `bd stats` - Project statistics (open/closed/blocked counts)
+- `bd doctor` - Check for issues (sync problems, missing hooks)
+
+### Priority Levels
+- `0` = Critical (security, data loss)
+- `1` = High (major features, important bugs)
+- `2` = Medium (nice-to-have, default)
+- `3` = Low (polish)
+- `4` = Backlog
+
+### Issue Types
+- `bug` — Something broken
+- `feature` — New functionality
+- `task` — Work item (tests, docs, refactoring)
+- `epic` — Large feature with children (supports 3 levels of nesting)
+- `chore` — Maintenance
+
+### Dependency Types
+- `blocks` — Hard dependency (affects ready work queue)
+- `related` — Soft relationship
+- `parent-child` — Epic structure
+- `discovered-from` — Issues found during work (auto-inherits parent's repo)
+
+### Common Workflows
+
+**Starting work:**
+```bash
+bd ready                # Find available work
+bd show <id>            # Review issue details
+bd update <id> --status=in_progress  # Claim it
+```
+
+**Completing work:**
+```bash
+bd close <id1> <id2> ...    # Close all completed issues at once
+bd sync                     # Push to remote (MANDATORY)
+```
+
+**Creating dependent work:**
+```bash
+# When creating multiple related issues, use parallel subagents for efficiency
+bd create --title="Implement feature X" --type=feature --description="..."
+bd create --title="Write tests for X" --type=task --description="..."
+bd dep add beads-yyy beads-xxx  # Tests depend on Feature
+```
+
+### Dependency Thinking
+
+⚠️ **Avoid temporal language** ("Phase 1," "Step 1") — think in terms of requirements:
+- ✅ RIGHT: "Message rendering NEEDS buffer layout" → `bd dep add msg-rendering buffer-layout`
+- ❌ WRONG: Temporal thinking creates backwards deps → `bd dep add phase1 phase2` (means phase1 depends on phase2!)
+
+### Integration with Development Workflow
+
+**Before starting any task:**
+1. Check `bd ready` for available work
+2. If no issue exists for your task, create one with description
+3. Claim the issue with `bd update <id> --status=in_progress`
+
+**During development:**
+- If you discover bugs or new tasks, create issues immediately with `bd create`
+- Link discovered issues to parent: `--deps discovered-from:<parent-id>`
+- Update issue status as work progresses
+
+**Before completing a session:**
+Follow the mandatory sync protocol (see Critical Rules above)
+
+### After Upgrading bd
+```bash
+bd info --whats-new        # Check workflow-impacting changes
+bd hooks install           # Update hooks to match version
+bd daemons killall         # Restart all daemons
+```
+
 ## Architecture
 
 **rentail.space** is a specialty lease marketplace web application that helps businesses discover short-term retail spaces in shopping centers. It combines server-side rendering, real-time AI-powered chat, and geographic intelligence for space discovery.
