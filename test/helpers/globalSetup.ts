@@ -10,7 +10,6 @@ import { exec, execFile } from "node:child_process";
 import { promisify } from "node:util";
 import seedCenters from "prisma/seed/seedCenters";
 import prisma from "~/lib/prisma";
-import msw from "~/test/mocks/mswHandlers";
 import { port } from "./launchBrowser";
 import { closeServer, launchServer } from "./launchServer";
 import { removeNewHTML } from "./toMatchInnerHTML";
@@ -33,7 +32,6 @@ export default async function setup() {
 
   // Launch server and start test env MSW handlers
   await launchServer(port);
-  msw.listen({ onUnhandledRequest: "error" });
 }
 
 async function killServerOnPort(port: number) {
@@ -49,5 +47,4 @@ export async function teardown() {
     'terminal-notifier -sound default -title "Test Suite" -message "Done!"',
   );
   await closeServer();
-  msw.close();
 }

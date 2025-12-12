@@ -31,7 +31,7 @@ export default async function preparePrompt({
   const allCenters = await prisma.property.findMany({
     select: { name: true, city: true, state: true, country: true },
   });
-  const { centers: nearbyCenters, location } = await findNearbyCenters({
+  const { centers: nearbyCenters, displayName } = await findNearbyCenters({
     headers,
     user,
   });
@@ -43,7 +43,7 @@ export default async function preparePrompt({
   return prompt
     .replace("$[date]", date)
     .replace("$[time]", time)
-    .replace("$[location]", location)
+    .replace("$[location]", displayName)
     .replace("$[name]", user.name || "not known")
     .replace("$[workingMemory]", JSON.stringify(workingMemory, null, 2))
     .replace(

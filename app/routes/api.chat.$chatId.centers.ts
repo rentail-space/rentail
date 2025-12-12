@@ -14,9 +14,9 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     chatId,
     requestHeaders: request.headers,
   });
-  const { centers, location } = await findNearbyCenters({
+  const { centers, displayName } = await findNearbyCenters({
     headers: request.headers,
     user: found?.user,
   });
-  return data({ centers, location }, { headers: found?.responseHeaders });
+  return data({ centers, displayName }, { headers: found?.responseHeaders });
 }

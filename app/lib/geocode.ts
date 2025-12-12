@@ -1,0 +1,233 @@
+import { captureException } from "@sentry/react-router";
+import debug from "debug";
+import { invariant } from "es-toolkit";
+import type { User } from "prisma/generated/client";
+import { cleanParseWorkingMemory } from "./workingMemory";
+
+type GeocodedLocation = {
+  city?: string;
+  country?: string;
+  displayName: string;
+  ip: string;
+  latitude: number;
+  longitude: number;
+  state?: string;
+  timezone: string;
+};
+
+const logger = debug("geocode");
+
+/**
+ * Try in this order:
+ *   working memory (if user exists) ->
+ *   geocode request headers ->
+ *   fallback to LA midcity
+ */
+export async function useMemoryOrHeaders({
+  user,
+  headers,
+}: {
+  user?: User;
+  headers: Headers;
+}): Promise<{
+  displayName: string;
+  longitude: number;
+  latitude: number;
+}> {
+  try {
+    invariant(user, "User is expected");
+    const { location } = cleanParseWorkingMemory(user.workingMemory);
+    const { displayName, longitude, latitude } = location ?? {};
+    invariant(displayName, "DisplayName is expected");
+    invariant(longitude, "Longitude is expected");
+    invariant(latitude, "Latitude is expected");
+    return { displayName, longitude, latitude };
+  } catch {
+    return await geocodeFromHeaders(headers);
+  }
+}
+
+/**
+ * Get the location information from the headers: IP, latitude, longitude, city,
+ * state, country, and time zone.  If the location information is not found,
+ * return a fallback location. The fallback location is Los Angeles, California.
+ *
+ * @param requestHeaders - The headers object
+ * @returns The location information from the headers or the fallback location
+ */
+export async function geocodeFromHeaders(requestHeaders: Headers): Promise<{
+  city?: string;
+  country?: string;
+  displayName: string;
+  ip?: string;
+  latitude: number;
+  longitude: number;
+  state?: string;
+  timeZone?: string;
+}> {
+  try {
+    const ip = requestHeaders.get("x-real-ip");
+    invariant(ip, "IP is required");
+
+    const city = requestHeaders.get("x-vercel-ip-city");
+    const country = requestHeaders.get("x-vercel-ip-country");
+    const latitude = requestHeaders.get("x-vercel-ip-latitude");
+    const longitude = requestHeaders.get("x-vercel-ip-longitude");
+    const state = requestHeaders.get("x-vercel-ip-country-region");
+    const timeZone = requestHeaders.get("x-vercel-ip-timezone");
+
+    const displayName = [city, state, country].filter(Boolean).join(", ");
+    if (displayName)
+      return {
+        city: city ? decodeURIComponent(city) : undefined,
+        country: country ?? undefined,
+        displayName,
+        ip: ip ?? undefined,
+        latitude: Number.parseFloat(latitude ?? "34.0456"),
+        longitude: Number.parseFloat(longitude ?? "-118.2694"),
+        state: state ?? undefined,
+        timeZone: timeZone ?? "America/Los_Angeles",
+      };
+    else {
+      const [location, timeZone] = await Promise.all([
+        geocodeFromIP(ip),
+        getTimezoneFromIP(ip),
+      ]);
+      return { ...location, ip, timeZone };
+    }
+  } catch (error) {
+    captureException(error, { extra: { headers: requestHeaders } });
+    console.error("Error getting geocode from headers: %s", error);
+    return {
+      // fallback location
+      city: "Los Angeles",
+      country: "United States",
+      displayName: "Los Angeles, California",
+      state: "California",
+      ip: "23.241.26.38",
+      latitude: 34.0456,
+      longitude: -118.2694,
+      timeZone: "America/Los_Angeles",
+    };
+  }
+}
+
+/**
+ * Generally we use Vercel IP geolocation headers, but when not available, we
+ * can use this API to geocode from an IP address.
+ *
+ * @param ip - The IP address to geocode.
+ * @returns The geocoded location.
+ * @throws If the IP address is not valid or the API request fails.
+ */
+async function geocodeFromIP(
+  ip: string,
+): Promise<Omit<GeocodedLocation, "ip" | "timezone">> {
+  const url = new URL("https://api.ipgeolocation.io/v2/ipgeo");
+  url.searchParams.set("apiKey", "9b97f61156b74297a2967c6ace8374c0");
+  url.searchParams.set("ip", ip);
+  const response = await fetch(url);
+  invariant(response.ok, "Failed to geocode from IP");
+
+  const data = (await response.json()) as {
+    location: {
+      city: string; // eg "Los Angeles",
+      country_code2: string; // eg "US",
+      latitude: string; // eg "34.05361",
+      longitude: string; // eg "-118.24550",
+      state_code: string; // eg "US-CA",
+    };
+  };
+  const city = data.location.city;
+  const country = data.location.country_code2;
+  const state = data.location.state_code.split("-")[1];
+  const displayName = [city, state, country].filter(Boolean).join(", ");
+  logger("Geocoded location from IP %s => %s", ip, displayName);
+
+  return {
+    city,
+    country,
+    displayName,
+    latitude: Number.parseFloat(data.location.latitude),
+    longitude: Number.parseFloat(data.location.longitude),
+    state,
+  };
+}
+
+/**
+ * Generally we use Vercel IP geolocation headers, but when not available, we
+ * can use this API to get the timezone from an IP address.
+ *
+ * @param ip - The IP address to get the timezone for.
+ * @returns The timezone for the IP address.
+ * @throws If the IP address is not valid or the API request fails.
+ */
+async function getTimezoneFromIP(ip: string): Promise<string> {
+  const url = new URL("https://api.ipgeolocation.io/v2/timezone");
+  url.searchParams.set("apiKey", "9b97f61156b74297a2967c6ace8374c0");
+  url.searchParams.set("ip", ip);
+  const response = await fetch(url);
+  invariant(response.ok, "Failed to get timezone");
+
+  const data = (await response.json()) as {
+    timezone: {
+      name: string; // eg "America/Los_Angeles",
+    };
+  };
+  const timezone = data.timezone.name;
+  logger("Timezone from IP %s => %s", ip, timezone);
+  return timezone;
+}
+
+/**
+ * We use this to geocode user input from working memory, eg if they enter
+ * "Boston centeral", we need to geocode it to get the latitude and longitude of
+ * Boston and also set the display name for our benefit.
+ *
+ * @param location - The location to geocode.
+ * @returns The geocoded location and timezone.
+ */
+export async function geocodeFromUserInput(location: {
+  city?: string;
+  country?: string;
+  state?: string;
+}): Promise<{
+  displayName: string;
+  latitude: number;
+  longitude: number;
+} | null> {
+  const { city, state, country } = location;
+  if (!city || !state || !country) return null;
+
+  const query = [city, state, country].filter(Boolean).join(", ");
+  try {
+    const url = new URL("https://nominatim.openstreetmap.org/search");
+    url.searchParams.set("q", query);
+    url.searchParams.set("format", "json");
+    url.searchParams.set("limit", "1");
+
+    const response = await fetch(url, {
+      headers: { "User-Agent": "rentail.space/1.0 (support@rentail.space)" },
+      signal: AbortSignal.timeout(2_000),
+    });
+    const results = (await response.json()) as Array<{
+      place_id: number;
+      display_name: string;
+      lat: string;
+      lon: string;
+    }>;
+    invariant(results.length > 0, "No results found");
+    const displayName = results[0].display_name;
+
+    logger("Geocoded location from user input %s => %s", query, displayName);
+    return {
+      displayName,
+      latitude: Number.parseFloat(results[0].lat),
+      longitude: Number.parseFloat(results[0].lon),
+    };
+  } catch (error) {
+    captureException(error, { extra: { query } });
+    logger("Error geocoding location %s: %s", query, error);
+    return null;
+  }
+}

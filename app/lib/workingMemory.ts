@@ -3,6 +3,7 @@ import type { UIMessage } from "ai";
 import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import zod, { type ZodType } from "zod";
+import { geocodeFromUserInput } from "./geocode";
 
 const logger = debug("workingMemory");
 
@@ -258,7 +259,7 @@ export default async function updateWorkingMemory({
 
     // Deep merge with current working memory (new values override old ones)
     const geocoded = validated?.location
-      ? await geocodeLocation(validated?.location)
+      ? await geocodeFromUserInput(validated?.location)
       : null;
     const merged = {
       ...current,
@@ -279,49 +280,6 @@ export default async function updateWorkingMemory({
     captureException(error, { extra: { workingMemory } });
     console.error("Error updating working memory: %s", error);
     return workingMemory;
-  }
-}
-
-async function geocodeLocation(location: {
-  city?: string;
-  country?: string;
-  state?: string;
-}): Promise<{
-  displayName: string;
-  latitude: number;
-  longitude: number;
-} | null> {
-  const { city, state, country } = location;
-  if (!city || !state || !country) return null;
-
-  const query = encodeURIComponent(`${city}, ${state}, ${country}`);
-  const url = new URL("https://nominatim.openstreetmap.org/search");
-  url.searchParams.set("q", decodeURIComponent(query));
-  url.searchParams.set("format", "json");
-  url.searchParams.set("limit", "1");
-  logger("Geocoding location: %s", url.toString());
-
-  try {
-    const response = await fetch(url, {
-      headers: { "User-Agent": "rentail.space/1.0 (support@rentail.space)" },
-      signal: AbortSignal.timeout(2_000),
-    });
-    const results = (await response.json()) as Array<{
-      place_id: number;
-      display_name: string;
-      lat: string;
-      lon: string;
-    }>;
-    invariant(results.length > 0, "No results found");
-    return {
-      displayName: results[0].display_name,
-      latitude: Number.parseFloat(results[0].lat),
-      longitude: Number.parseFloat(results[0].lon),
-    };
-  } catch (error) {
-    captureException(error, { extra: { url } });
-    console.error("Error geocoding location %s: %s", query, error);
-    return null;
   }
 }
 

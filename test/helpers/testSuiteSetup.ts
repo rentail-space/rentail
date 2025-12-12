@@ -11,6 +11,7 @@ import Redis from "ioredis";
 import { afterAll, beforeAll } from "vitest";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma";
+import msw from "~/test/mocks/mswHandlers";
 import "./toMatchInnerHTML";
 import "./toMatchScreenshot";
 import "./trimConsole";
@@ -28,6 +29,8 @@ beforeAll(async () => {
   // Cleanup Redis to avoid stale data between tests
   const redis = new Redis(envVars.REDIS_URL);
   await redis.flushdb();
+
+  msw();
 });
 
 afterAll(async () => {

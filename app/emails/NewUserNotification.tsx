@@ -30,6 +30,7 @@ function NewUserNotification({
 }) {
   const url = `https://rentail.space/admin/user/${user.id}`;
   const utm = user.utm ? JSON.parse(user.utm as string) : undefined;
+  const geocode = user.geocode ? JSON.parse(user.geocode as string) : undefined;
   return (
     <EmailLayout subject={subject}>
       <Section>
@@ -40,7 +41,7 @@ function NewUserNotification({
           <strong>Email:</strong> {user.email}
         </Text>
         <Text style={styles.text}>
-          <strong>Location:</strong> {user.cityStateCountry}
+          <strong>Location:</strong> {geocode.displayName ?? "N/A"}
         </Text>
         <Text style={styles.text}>
           <strong>Referrer:</strong> {user.referrer ?? "N/A"}

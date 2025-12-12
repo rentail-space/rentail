@@ -156,6 +156,8 @@ async function createUserAndFind(coordinates: {
   // Create a user with location already in working memory
   const user = await createAnonymousUser({
     requestHeaders: new Headers({
+      "x-real-ip": "127.0.0.1",
+      "x-vercel-ip-city": "Los Angeles",
       "x-vercel-ip-latitude": coordinates.latitude.toString(),
       "x-vercel-ip-longitude": coordinates.longitude.toString(),
     }),

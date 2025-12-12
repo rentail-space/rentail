@@ -1,4 +1,3 @@
-import { captureException } from "@sentry/react-router";
 import type { TextUIPart, UIMessage } from "ai";
 import bcrypt from "bcrypt";
 import debug from "debug";
@@ -13,7 +12,6 @@ import {
   redirect,
 } from "react-router";
 import { ulid } from "ulid";
-import zod from "zod";
 import sendNewUserNotification from "~/emails/NewUserNotification";
 import sendWelcomeEmail from "~/emails/WelcomeEmail";
 import { getDeviceInfo } from "~/lib/deviceDetection.server";
@@ -21,6 +19,7 @@ import envVars from "~/lib/env";
 import { readUtmParams, saveUtmParams } from "~/lib/middleware/utm";
 import prisma from "~/lib/prisma";
 import welcome from "~/prompts/welcome.md?raw";
+import { geocodeFromHeaders } from "./geocode";
 
 type SessionData = {
   token: string;
@@ -43,22 +42,6 @@ const botUserAgents = [
 ];
 
 const logger = debug("sessions");
-
-/**
- * We use Redis to cache the location information for 30 days so we don't have
- * to geocode the IP address every time.
- */
-const cachedLocation = zod
-  .object({
-    city: zod.string(),
-    country: zod.string(),
-    state: zod.string(),
-    ip: zod.string(),
-    latitude: zod.number(),
-    longitude: zod.number(),
-    timeZone: zod.string(),
-  })
-  .partial();
 
 const { getSession, commitSession, destroySession } =
   createCookieSessionStorage<SessionData, SessionFlashData>({
@@ -227,51 +210,6 @@ export async function recentMessages(chatId: string): Promise<UIMessage[]> {
     parts: message.content as TextUIPart[],
     role: message.role,
   }));
-}
-
-/**
- * Get the location information from the headers: IP, latitude, longitude, city,
- * state, country, and time zone.  If the location information is not found,
- * return a fallback location. The fallback location is Los Angeles, California.
- *
- * @param requestHeaders - The headers object
- * @returns The location information from the headers or the fallback location
- */
-async function geocodeFromHeaders(
-  requestHeaders: Headers,
-): Promise<zod.infer<typeof cachedLocation>> {
-  const fallback = {
-    city: "Los Angeles",
-    country: "United States",
-    state: "California",
-    ip: "23.241.26.38",
-    latitude: 34.0456,
-    longitude: -118.2694,
-    timeZone: "America/Los_Angeles",
-  };
-  try {
-    return {
-      city: decodeURIComponent(
-        requestHeaders.get("x-vercel-ip-city") ?? fallback.city,
-      ),
-      country: requestHeaders.get("x-vercel-ip-country") ?? fallback.country,
-      ip: requestHeaders.get("x-real-ip") ?? fallback.ip,
-      latitude: Number.parseFloat(
-        requestHeaders.get("x-vercel-ip-latitude") ??
-          fallback.latitude.toString(),
-      ),
-      longitude: Number.parseFloat(
-        requestHeaders.get("x-vercel-ip-longitude") ??
-          fallback.longitude.toString(),
-      ),
-      state: requestHeaders.get("x-vercel-ip-country-region") ?? fallback.state,
-      timeZone: requestHeaders.get("x-vercel-ip-timezone") ?? fallback.timeZone,
-    };
-  } catch (error) {
-    captureException(error, { extra: { headers: requestHeaders } });
-    console.error("Error getting geocode from headers: %s", error);
-    return fallback;
-  }
 }
 
 /**
@@ -581,15 +519,12 @@ async function createUser({
   const utm = await readUtmParams(requestHeaders);
   const geocode = await geocodeFromHeaders(requestHeaders);
   const userAgent = utm.userAgent ?? "";
-  const cityStateCountry = [geocode.city, geocode.state, geocode.country]
-    .filter(Boolean)
-    .join(", ");
   const deviceInfo = getDeviceInfo(requestHeaders);
   const isAdmin = email ? adminEmails.includes(email) : false;
 
   return await prisma.user.create({
     data: {
-      cityStateCountry,
+      cityStateCountry: geocode.displayName,
       // NOTE: Users must have unique emails in their index
       email: isAnonymous ? `anonymous-${id}@rentail.space` : email,
       geocode,

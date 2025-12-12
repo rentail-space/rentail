@@ -28,7 +28,7 @@ if (envVars.isProduction && envVars.SENTRY_DSN) {
 }
 
 // Initialize MSW in test mode (on the server side)
-if (envVars.isTest) msw.listen({ onUnhandledRequest: "error" });
+if (envVars.isTest) msw();
 
 export function getLoadContext() {
   return {};

@@ -11,10 +11,10 @@ import { cn } from "~/lib/utils";
  */
 export default function Centers({
   centers,
-  location,
+  displayName,
 }: {
   centers: PropertyGetPayload<{ include: { spaces: true } }>[];
-  location: string;
+  displayName: string;
 }) {
   return (
     <div className="sticky top-0 my-4 hidden h-fit w-1/4 lg:block">
@@ -22,22 +22,22 @@ export default function Centers({
         {centers.length > 0 ? (
           <AvailableCenters centers={centers} />
         ) : (
-          <NoAvailableCenters location={location} />
+          <NoAvailableCenters displayName={displayName} />
         )}
       </div>
     </div>
   );
 }
 
-function NoAvailableCenters({ location }: { location?: string }) {
+function NoAvailableCenters({ displayName }: { displayName?: string }) {
   return (
     <>
       <div className="mb-2 font-bold text-black text-lg">
         No available centers
       </div>
-      {location && (
+      {displayName && (
         <p className="font-medium text-black text-sm">
-          We're looking in {location}
+          We're looking in {displayName}
         </p>
       )}
     </>

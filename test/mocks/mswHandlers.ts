@@ -31,19 +31,32 @@ const handlers = [
 
   // Mock OpenStreetMap Nominatim API
   http.get("https://nominatim.openstreetmap.org/search", ({ request }) =>
-    HttpResponse.json(
-      [
-        {
-          place_id: ulid(),
-          display_name:
-            new URL(request.url).searchParams.get("q") ??
-            "Los Angeles, California, United States",
-          lat: "33.74901",
-          lon: "-118.1956",
-        },
-      ],
-      { headers: { "Content-Type": "application/json" } },
-    ),
+    HttpResponse.json([
+      {
+        place_id: ulid(),
+        display_name:
+          new URL(request.url).searchParams.get("q") ??
+          "Los Angeles, California, United States",
+        lat: "33.74901",
+        lon: "-118.1956",
+      },
+    ]),
+  ),
+
+  http.get("https://api.ipgeolocation.io/v2/timezone", () =>
+    HttpResponse.json({ timezone: { name: "America/Los_Angeles" } }),
+  ),
+
+  http.get("https://api.ipgeolocation.io/v2/ipgeo", () =>
+    HttpResponse.json({
+      location: {
+        city: "Los Angeles",
+        country_code2: "US",
+        latitude: "34.05361",
+        longitude: "-118.24550",
+        state_code: "US-CA",
+      },
+    }),
   ),
 
   // Allow all localhost requests to pass through (for dev server communication)
@@ -97,4 +110,8 @@ msw.events
     debug("msw")("%s %s errored!", request.method, request.url, error);
   });
 
-export default msw;
+export default function listen() {
+  msw.listen({
+    onUnhandledRequest: "error",
+  });
+}
