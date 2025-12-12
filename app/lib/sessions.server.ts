@@ -521,12 +521,13 @@ async function createUser({
   const userAgent = utm.userAgent ?? "";
   const deviceInfo = getDeviceInfo(requestHeaders);
   const isAdmin = email ? adminEmails.includes(email) : false;
+  // NOTE: Users must have unique emails in their index
+  const uniqueEmail = isAnonymous ? `anonymous-${id}@rentail.space` : email;
 
   return await prisma.user.create({
     data: {
-      cityStateCountry: geocode.displayName,
       // NOTE: Users must have unique emails in their index
-      email: isAnonymous ? `anonymous-${id}@rentail.space` : email,
+      email: uniqueEmail,
       geocode,
       id,
       ip: geocode.ip,

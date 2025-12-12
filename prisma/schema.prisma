@@ -95,31 +95,30 @@ model Session {
 }
 
 model User {
-  chats            Chat[]
-  cityStateCountry String?   @map("city_state_country")
-  createdAt        DateTime  @map("created_at")         @default(now())
-  email            String?   @map("email")
-  emailVerified    Boolean   @map("email_verified")     @default(false)
-  geocode          Json      @map("geocode")            @db.Json
-  id               String    @map("id")                 @id
-  image            String?   @map("image")
-  ip               String?   @map("ip")
-  isAdmin          Boolean   @map("is_admin")           @default(false)
-  isAnonymous      Boolean   @map("is_anonymous")       @default(false)
-  isBot            Boolean   @map("is_bot")             @default(false)
-  isMobile         Boolean   @map("is_mobile")          @default(false)
-  lastAlertAt      DateTime? @map("last_alert_at")
-  metadata         Json      @map("metadata")           @db.Json
-  name             String?   @map("name")
-  note             String?   @map("note")
-  passwordHash     String?   @map("password_hash")
-  referrer         String?   @map("referrer")
-  sessions         Session[]
-  updatedAt        DateTime  @map("updated_at")         @updatedAt
-  userAgent        String?   @map("user_agent")
-  utm              Json?     @map("utm")                @db.Json
-  viewport         Json?     @map("viewport")           @db.Json
-  workingMemory    String    @map("working_memory")     @db.Text
+  chats         Chat[]
+  createdAt     DateTime  @map("created_at")     @default(now())
+  email         String?   @map("email")
+  emailVerified Boolean   @map("email_verified") @default(false)
+  geocode       Json      @map("geocode")        @db.Json
+  id            String    @map("id")             @id
+  image         String?   @map("image")
+  ip            String?   @map("ip")
+  isAdmin       Boolean   @map("is_admin")       @default(false)
+  isAnonymous   Boolean   @map("is_anonymous")   @default(false)
+  isBot         Boolean   @map("is_bot")         @default(false)
+  isMobile      Boolean   @map("is_mobile")      @default(false)
+  lastAlertAt   DateTime? @map("last_alert_at")
+  metadata      Json      @map("metadata")       @db.Json
+  name          String?   @map("name")
+  note          String?   @map("note")
+  passwordHash  String?   @map("password_hash")
+  referrer      String?   @map("referrer")
+  sessions      Session[]
+  updatedAt     DateTime  @map("updated_at")     @updatedAt
+  userAgent     String?   @map("user_agent")
+  utm           Json?     @map("utm")            @db.Json
+  viewport      Json?     @map("viewport")       @db.Json
+  workingMemory String    @map("working_memory") @db.Text
 
   @@unique([email])
   @@map("users")

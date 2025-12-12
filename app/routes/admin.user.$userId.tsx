@@ -85,6 +85,7 @@ function UserInfoCard({ user }: { user: User }) {
   const workingMemory = cleanParseWorkingMemory(user.workingMemory);
   const timeZone = workingMemory.location?.timeZone ?? "UTC";
   const utm = user.utm ? JSON.parse(user.utm as string) : undefined;
+  const geocode = user.geocode as { displayName: string };
 
   return (
     <details className="rounded-lg border-2 border-gray-400 p-4" open>
@@ -95,7 +96,7 @@ function UserInfoCard({ user }: { user: User }) {
           <Row title="User Agent" value={user.userAgent} />
           <Row title="Referrer" value={user.referrer} />
           <Row title="IP" value={user.ip} />
-          <Row title="Location" value={user.cityStateCountry} />
+          <Row title="Location" value={geocode.displayName} />
           <Row title="Device" value={deviceDetection(user.userAgent)} />
           <Row title="Viewport" value={user.viewport as string} />
           {utm &&
