@@ -17,10 +17,13 @@ const pool = new pg.Pool({
   idleTimeoutMillis: 0,
   connectionTimeoutMillis: 0,
   allowExitOnIdle: true,
-  ssl: {
-    rejectUnauthorized: false,
-    cert: readFileSync(resolve("prisma/prod-ca-2021.crt")),
-  },
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? {
+          rejectUnauthorized: false,
+          cert: readFileSync(resolve("prisma/prod-ca-2021.crt")),
+        }
+      : false,
 });
 
 export default new PrismaClient({
