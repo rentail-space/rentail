@@ -230,9 +230,6 @@ function HoverCard({
           >
             <img
               alt={center.name}
-              onError={(e) => {
-                e.currentTarget.classList.add("hidden");
-              }}
               onLoad={(e) => {
                 e.currentTarget.classList.remove("opacity-0");
               }}

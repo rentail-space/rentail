@@ -90,6 +90,8 @@ describe("prompt()", () => {
       const user = await createAnonymousUser({
         chatId: ulid(),
         requestHeaders: new Headers({
+          "x-real-ip": "127.0.0.1",
+          "x-vercel-ip-city": "Los Angeles",
           "x-vercel-ip-latitude": "37.42240",
           "x-vercel-ip-longitude": "-122.08421",
         }),

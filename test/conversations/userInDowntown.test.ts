@@ -27,6 +27,8 @@ describe.skipIf(!!process.env.CI)(
     await runThroughScript({
       headers: {
         // Palm Desert, California
+        "x-real-ip": "127.0.0.1",
+        "x-vercel-ip-city": "Palm Desert",
         "x-vercel-ip-latitude": "33.83039",
         "x-vercel-ip-longitude": "-116.54560",
       },

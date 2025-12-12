@@ -22,6 +22,8 @@ const logger = debug("conversations");
  * ```
  *   runThroughScript({
  *     headers: {
+ *       "x-real-ip": "127.0.0.1",
+ *       "x-vercel-ip-city": "Los Angeles",
  *       "x-vercel-ip-latitude": "47.608013",
  *       "x-vercel-ip-longitude": "-122.335167",
  *     },
