@@ -1,3 +1,8 @@
+/**
+ * NOTE: This is used by `db seed` (prisma/seed.ts) but also when running test
+ * suite (test/helpers/globalSetup.ts)
+ */
+
 import { PrismaPg } from "@prisma/adapter-pg";
 import debug from "debug";
 import dotenv from "dotenv";
