@@ -38,11 +38,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
   });
 
   const waiting = await prisma.waitlist.findMany();
-  const analytics = await getGoogleAnalyticsViewCount(90);
+  const analytics = await getGoogleAnalyticsViewCount();
   return { users, waiting, analytics };
 }
 
-async function getGoogleAnalyticsViewCount(days: number): Promise<
+async function getGoogleAnalyticsViewCount(): Promise<
   Array<{
     activeUsers: string;
     date: string;
@@ -58,7 +58,7 @@ async function getGoogleAnalyticsViewCount(days: number): Promise<
 
   try {
     const response = await client.runReport({
-      dateRanges: [{ endDate: "today", startDate: "30daysAgo" }],
+      dateRanges: [{ endDate: "today", startDate: "90daysAgo" }],
       dimensions: [{ name: "date" }],
       metrics: [{ name: "activeUsers" }, { name: "screenPageViews" }],
       property: "properties/496833933",
