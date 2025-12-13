@@ -66,7 +66,7 @@
 
 @layer base {
   body {
-    @apply text-foreground font-base bg-background;
+    @apply text-foreground font-base bg-background font-sans;
   }
 
   h1,
@@ -75,6 +75,6 @@
   h4,
   h5,
   h6 {
-    @apply font-heading;
+    @apply font-heading font-sans;
   }
 }
