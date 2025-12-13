@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router";
-import RentailLink from "./RentailLink";
+import RentailIcon from "./RentailLogo";
 
 const links = [
   {
@@ -30,7 +30,7 @@ export default function PageFooter() {
   return (
     <footer className="flex flex-col gap-8 border-black border-t-2 bg-[hsl(60,100%,99%)] px-6 py-12 sm:flex-row sm:justify-between print:hidden">
       <aside className="flex flex-col gap-4 text-black">
-        <RentailLink />
+        <RentailIcon />
         <div className="flex flex-col gap-2">
           <p className="font-medium text-sm">
             AI-powered short-term retail space marketplace

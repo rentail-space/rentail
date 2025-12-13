@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { twMerge } from "tailwind-merge";
 
-export default function RentailLink({ className }: { className?: string }) {
+export default function RentailLogo({ className }: { className?: string }) {
   return (
     <Link
       to="/"
@@ -15,7 +15,7 @@ export default function RentailLink({ className }: { className?: string }) {
     >
       <img
         alt="rentail.space"
-        className="mr-2"
+        className="mt-1 mr-1"
         height={24}
         src="/images/logo.png"
         width={24}
