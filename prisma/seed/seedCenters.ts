@@ -37,7 +37,6 @@ const schema = z.object({
 });
 
 const logger = debug("seed");
-logger.enabled = true;
 
 export default async function seedCenters() {
   logger("Seeding centers");
