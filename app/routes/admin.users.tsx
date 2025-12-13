@@ -72,12 +72,15 @@ async function getGoogleAnalyticsViewCount(days: number): Promise<
       },
     });
 
-    return (
-      response.data.rows?.map((row) => ({
+    return response.data.rows.map(
+      (row: {
+        dimensionValues: { value: string }[];
+        metricValues: { value: string }[];
+      }) => ({
         date: row.dimensionValues?.[0]?.value ?? "N/A",
         activeUsers: row.metricValues?.[0]?.value ?? "0",
         screenPageViews: row.metricValues?.[1]?.value ?? "0",
-      })) ?? []
+      }),
     );
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -208,53 +211,58 @@ function AllUsers({ users }: { users: User[] }) {
   const table = useReactTable({
     columns: [
       {
-        header: "Name",
         accessorKey: "name",
         cell: ({ row }) => (
           <Link
             to={`/admin/user/${row.original.id}`}
-            className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
+            className="truncate text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
           >
-            {row.original.name || row.original.id}
+            {" "}
+            {row.original.name || row.original.id}{" "}
           </Link>
         ),
+        header: "Name",
         size: 240,
       },
       {
-        header: "Device",
         accessorFn: (row) => deviceDetection(row.userAgent),
+        enableResizing: true,
+        header: "Device",
         size: 120,
       },
       {
-        header: "Source / Referrer",
         accessorFn: (row) =>
           (row.utm && JSON.parse(row.utm as string).source) ||
           row.referrer ||
           "N/A",
-
         size: 350,
+        header: "Source",
       },
       {
-        header: "IP",
         accessorKey: "ip",
+        header: "IP",
         size: 100,
         sortingFn: "alphanumeric",
       },
       {
-        header: "Created",
-        accessorKey: "createdAt",
         accessorFn: (row) =>
           DateTime.fromJSDate(row.createdAt)
             .setZone((row.geocode as { timeZone: string }).timeZone ?? "UTC")
             .toFormat("yyyy-MM-dd HH:mm"),
-
+        accessorKey: "createdAt",
+        header: "Created",
+        size: 130,
         sortingFn: (rowA, rowB) =>
           rowA.original.createdAt.getTime() - rowB.original.createdAt.getTime(),
-        size: 130,
       },
     ],
+    columnResizeMode: "onChange",
     data: users,
     debugTable: true,
+    defaultColumn: {
+      minSize: 100,
+      maxSize: 400,
+    },
     enableSortingRemoval: false,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -272,10 +280,16 @@ function AllUsers({ users }: { users: User[] }) {
           {table.getHeaderGroups().map((group) => (
             <TableRow key={group.id}>
               {group.headers.map((header) => (
-                <TableHead key={header.id}>
+                <TableHead
+                  key={header.id}
+                  style={{ width: header.column.getSize() }}
+                >
                   <Button
-                    className="flex w-full justify-between"
+                    className="flex w-full cursor-col-resize justify-between p-2"
                     onClick={header.column.getToggleSortingHandler()}
+                    onDoubleClick={() => header.column.resetSize()}
+                    onMouseDown={header.getResizeHandler()}
+                    onTouchStart={header.getResizeHandler()}
                     variant="ghost"
                   >
                     {flexRender(
@@ -287,7 +301,7 @@ function AllUsers({ users }: { users: User[] }) {
                     ) : header.column.getIsSorted() === "asc" ? (
                       <ArrowDown />
                     ) : (
-                      <>&nbsp;</>
+                      <span />
                     )}
                   </Button>
                 </TableHead>
@@ -301,19 +315,12 @@ function AllUsers({ users }: { users: User[] }) {
               <TableRow>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
+                    className="truncate"
                     key={cell.id}
+                    style={{ maxWidth: cell.column.getSize() }}
                     title={cell.getValue() as string}
-                    width={cell.column.getSize()}
                   >
-                    <div
-                      className="truncate"
-                      style={{ width: cell.column.getSize() }}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </div>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
               </TableRow>
