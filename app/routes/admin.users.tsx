@@ -1,12 +1,12 @@
+import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import {
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { sumBy } from "es-toolkit";
+import { invariant, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
-import { google } from "googleapis";
 import { ArrowDown, ArrowRight, ArrowUp } from "lucide-react";
 import { DateTime } from "luxon";
 import { parseAsInteger, useQueryState } from "nuqs";
@@ -54,36 +54,24 @@ async function getGoogleAnalyticsViewCount(days: number): Promise<
     email: "analytics@rentail-480516.iam.gserviceaccount.com",
     key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
   });
-  const analyticsData = google.analyticsdata({ version: "v1beta", auth });
-  const propertyId = "properties/496833933";
+  const client = new BetaAnalyticsDataClient({ authClient: auth });
 
   try {
-    const response = await analyticsData.properties.runReport({
-      property: propertyId,
-      requestBody: {
-        dateRanges: [
-          {
-            startDate: DateTime.now().minus({ days }).toFormat("yyyy-MM-dd"),
-            endDate: "today",
-          },
-        ],
-        dimensions: [{ name: "date" }],
-        metrics: [{ name: "activeUsers" }, { name: "screenPageViews" }],
-      },
+    const response = await client.runReport({
+      dateRanges: [{ endDate: "today", startDate: "30daysAgo" }],
+      dimensions: [{ name: "date" }],
+      metrics: [{ name: "activeUsers" }, { name: "screenPageViews" }],
+      property: "properties/496833933",
     });
+    const rows = response[0].rows;
+    invariant(rows, "No rows found");
 
-    return response.data.rows.map(
-      (row: {
-        dimensionValues: { value: string }[];
-        metricValues: { value: string }[];
-      }) => ({
-        date: row.dimensionValues?.[0]?.value ?? "N/A",
-        activeUsers: row.metricValues?.[0]?.value ?? "0",
-        screenPageViews: row.metricValues?.[1]?.value ?? "0",
-      }),
-    );
+    return rows.map((row) => ({
+      date: row.dimensionValues?.[0]?.value ?? "",
+      activeUsers: row.metricValues?.[0]?.value ?? "",
+      screenPageViews: row.metricValues?.[1]?.value ?? "",
+    }));
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error("Failed to fetch GA view count", error);
     return [];
   }
