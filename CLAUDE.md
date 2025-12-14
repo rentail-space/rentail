@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+**Note**: This project uses [bd (beads)](https://github.com/steveyegge/beads) for issue tracking. Use `bd` commands instead of markdown TODOs. See AGENTS.md for workflow details.
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Commands Reference
@@ -22,6 +24,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `pnpm test` - Full test suite: lint + db push + typecheck + vitest (verbose reporter)
 - `pnpx vitest run <pattern>` - Run specific test (e.g., `pnpx vitest run chat.test`)
 - `pnpm checkly` - Synthetic monitoring tests with snapshot updates
+
+### Data Collection
+- `tsx scripts/collectCenters.ts "County Name, ST"` - Scrape shopping centers for a county
+- `pnpm scrape` - Run predefined scraping scripts (Los Cerritos, Santa Monica, Stonewood)
+
+### Utilities
+- `pnpm clone` - Clone production data to local environment
+- `pnpm promote` - Promote changes to production
+- `pnpm upgrade` - Upgrade dependencies
 
 ### Slash Commands (in `.claude/commands/`)
 - `/cmd:audit` - Review code for maintainability, flexibility, readability
@@ -361,6 +372,37 @@ The application uses a consistent Neo Brutalism design system across all UI comp
 - Use self-closing elements for components without children
 - Use `as const` assertions for literal types
 
+## Data Collection Pipeline
+
+**Shopping Center Scraping System:**
+The app includes a 4-stage pipeline for discovering and collecting shopping center data:
+
+**Pipeline Stages:**
+1. **Discovery** (`discoverCenters.ts`) - Find shopping centers via Google Places API
+2. **Scraping** (`scrapeCenter.ts`) - Extract data from center websites
+3. **Image Validation** (`validateImages.ts`) - Verify image URLs are accessible
+4. **Enrichment** (`enrichCenter.ts`) - Add metadata via Google Places API
+5. **Writing** (`writeCenterFile.ts`) - Save as JSON in `prisma/seed/{state}/`
+
+**Rate Limiting:**
+- Built-in rate limiter: 1.2s between API calls (~50 requests/minute)
+- Random delays (2-3s) between center scrapes to avoid detection
+- Implemented in `app/lib/scrape/rateLimiter.ts`
+
+**Usage:**
+```bash
+# Collect all centers in a county
+tsx scripts/collectCenters.ts "Orange County, CA"
+
+# Run predefined scraping tasks
+pnpm scrape
+```
+
+**Output Format:**
+Centers saved as JSON files: `prisma/seed/{state}/{state}-{slug}.json`
+- Contains: name, address, coordinates, stores, demographics, images, etc.
+- Files can be imported via `seedCenter.ts` to populate database
+
 ## Key Architectural Patterns
 
 **Location Retrieval (Priority Chain):**
@@ -424,7 +466,7 @@ The app determines user location in this order:
 - Framework: Vitest with browser provider (Playwright) + forks pool
 - Config: `vitest.config.ts` (15s test timeout locally / 30s on CI, 30s hook timeout, 3s teardown timeout)
 - Setup: `/test/helpers/testSuiteSetup.ts` (test suite setup) + `/test/helpers/globalSetup.ts`
-- Node.js: 22.0.0 or higher required
+- Node.js: 24.10.1 or higher required
 - **Test isolation**: `isolate: true` is required for test safety (prevents state leakage)
 
 **Test Organization:**
