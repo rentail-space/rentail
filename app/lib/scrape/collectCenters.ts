@@ -27,13 +27,19 @@ export default async function collectCenters(countyName: string) {
     const center = centers[i];
     try {
       // Stage 2: Scraping
-      await delay(2000 + Math.random() * 1000);
-      const scrapedData = await scrapeCenter(center.website);
+      let scrapedData = {};
+      if (center.website) {
+        await delay(2000 + Math.random() * 1000);
+        scrapedData = await scrapeCenter(center.website);
+      } else {
+        console.info("\x1b[33m  ⚠ No website found, skipping scrape\x1b[0m");
+      }
 
       // Stage 2.5: Validate images
       let validImages: string[] = [];
-      const scrapedImages = scrapedData.images || [];
-      validImages = await validateImages(scrapedImages);
+      const scrapedImages =
+        "images" in scrapedData ? scrapedData.images || [] : [];
+      validImages = await validateImages(scrapedImages as string[]);
 
       // Stage 3: Enrichment
       await rateLimiter.throttle();
