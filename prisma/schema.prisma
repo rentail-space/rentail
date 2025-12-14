@@ -64,6 +64,7 @@ model Property {
   openFrom       Int?            @map("open_from") // Hour:minute eg 930 is 9:30
   openUntil      Int?            @map("open_until") // Hour:minute eg 2100 is 21:00
   summary        String?         @map("summary")
+  centerType     CenterType      @map("center_type")
 
   @@map("properties")
 }
@@ -156,4 +157,12 @@ enum SpaceType {
   Inline
   Storage
   Other
+}
+
+enum CenterType {
+  RegionalMall
+  CommunityCenter
+  StripCenter
+  OutletCenter
+  LifestyleCenter
 }

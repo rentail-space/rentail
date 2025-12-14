@@ -22,6 +22,13 @@ const centerSchema = z.object({
   openFrom: z.number().optional(),
   openUntil: z.number().optional(),
   rating: z.number().optional(),
+  centerType: z.enum([
+    "RegionalMall",
+    "CommunityCenter",
+    "StripCenter",
+    "OutletCenter",
+    "LifestyleCenter",
+  ]),
   spaces: z
     .array(
       z.object({
@@ -75,6 +82,19 @@ Tasks:
 5. Note any demographic info mentioned
 6. If you find individual retail spaces listed, include them
 7. Set country to "USA"
+8. Classify centerType using this hybrid approach:
+   - Primary: Square footage + store count + enclosed/open-air
+   - Secondary: Explicit type mentions in website ("outlet center", "lifestyle center")
+   - Tertiary: Name patterns ("Westfield" = typically RegionalMall)
+
+   Types:
+   - RegionalMall: 400k+ sqft, 50+ stores, enclosed, department store anchors
+   - CommunityCenter: 150k-400k sqft, 20-50 stores, open-air, grocery anchor
+   - StripCenter: <150k sqft, <20 stores, linear open-air layout
+   - OutletCenter: Brand outlet stores (Nike Outlet, etc), variable size
+   - LifestyleCenter: Open-air, upscale tenants, strong dining/entertainment
+
+   If uncertain, choose type matching square footage, or StripCenter if no size data.
 
 Use scraped data as primary source. Fill gaps with your knowledge.
 Mark uncertain fields as null.`;

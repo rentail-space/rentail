@@ -25,6 +25,13 @@ const schema = z.object({
   openFrom: z.number().optional(),
   openUntil: z.number().optional(),
   rating: z.number().optional(),
+  centerType: z.enum([
+    "RegionalMall",
+    "CommunityCenter",
+    "StripCenter",
+    "OutletCenter",
+    "LifestyleCenter",
+  ]),
 
   spaces: z
     .array(
