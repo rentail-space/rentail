@@ -74,16 +74,16 @@ function CenterInfo({
   center: PropertyGetPayload<{ include: { spaces: true } }>;
 }) {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="space-y-6 divide-y divide-gray-200">
       {center.summary && (
-        <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+        <div className="items-top flex flex-row gap-2 pb-4">
           <InfoIcon className="h-8 w-8" />
           <span>{center.summary}</span>
         </div>
       )}
 
       {center.rating && (
-        <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+        <div className="items-top flex flex-row gap-2 pb-4">
           <StarIcon className="h-6 w-6 text-yellow-500" fill="currentColor" />
           <span>
             {clamp(center.rating / 10, 1, 5).toFixed(1)}
@@ -94,7 +94,7 @@ function CenterInfo({
       )}
 
       {center.openUntil && (
-        <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+        <div className="items-top flex flex-row gap-2 pb-4">
           <ClockIcon className="h-6 w-6" />
           <span>
             Open{" "}
@@ -117,7 +117,7 @@ function CenterInfo({
       )}
 
       {center.squareFootage && (
-        <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+        <div className="items-top flex flex-row gap-2 pb-4">
           <RulerDimensionLineIcon className="h-6 w-6" />
           <span>
             {center.squareFootage.toLocaleString(undefined, {
@@ -129,7 +129,7 @@ function CenterInfo({
       )}
 
       {center.numberOfStores && (
-        <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+        <div className="items-top flex flex-row gap-2 pb-4">
           <ShoppingCartIcon className="h-6 w-6" />
           <span>
             {center.numberOfStores.toLocaleString(undefined, {
@@ -140,7 +140,7 @@ function CenterInfo({
         </div>
       )}
 
-      <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+      <div className="items-top flex flex-row gap-2 pb-4">
         <GlobeIcon className="h-6 w-6" />
         <Link to={center.website} target="_blank" rel="noopener noreferrer">
           {center.website}
@@ -148,7 +148,7 @@ function CenterInfo({
       </div>
 
       {center.phone && (
-        <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+        <div className="items-top flex flex-row gap-2 pb-4">
           <PhoneIcon className="h-6 w-6" />
           <span>
             <a href={`tel:${center.phone}`}>
@@ -158,16 +158,16 @@ function CenterInfo({
         </div>
       )}
 
-      <div className="items-top flex flex-row gap-2">
-        <MapPinIcon className="h-6 w-6" />
-        <span>
-          {center.address}
-          {center.city && `, ${center.city}`}
-          {center.state && `, ${center.state}`}
-        </span>
-      </div>
+      <div className="space-y-4">
+        <div className="items-top flex flex-row gap-2">
+          <MapPinIcon className="h-6 w-6" />
+          <span>
+            {center.address}
+            {center.city && `, ${center.city}`}
+            {center.state && `, ${center.state}`}
+          </span>
+        </div>
 
-      <div>
         <Button
           className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
           variant="secondary"
