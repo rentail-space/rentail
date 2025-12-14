@@ -1,6 +1,6 @@
 import { Link } from "react-router";
+import expandStateAbbr from "~/lib/expandStateAbbr";
 import prisma from "~/lib/prisma";
-import getUSState from "./getUSState";
 
 export async function loader() {
   const states = await prisma.property.groupBy({
@@ -22,7 +22,7 @@ export default function StatePage({
   };
 }) {
   return (
-    <main className="mx-auto my-10 max-w-4xl">
+    <main className="container mx-auto my-10 space-y-8">
       <ul
         className="space-y-4"
         itemScope
@@ -35,9 +35,12 @@ export default function StatePage({
             itemScope
             itemType="https://schema.org/ListItem"
           >
-            <Link to={`/state/${state}`}>
+            <Link
+              to={`/state/${state}`}
+              className="flex flex-row items-center justify-between gap-2"
+            >
               <h2 className="font-bold text-xl" itemProp="name">
-                {getUSState(state)}
+                {expandStateAbbr(state)}
               </h2>
               <p className="text-gray-500" itemProp="description">
                 {_count._all} centers

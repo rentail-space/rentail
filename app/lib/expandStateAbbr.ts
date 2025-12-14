@@ -51,7 +51,7 @@ const usStates = {
   WY: "Wyoming",
 };
 
-export default function getUSState(state: string): string {
-  const upper = JSON.stringify(state).toUpperCase();
+export default function expandStateAbbr(state: string): string {
+  const upper = state.toUpperCase();
   return usStates[upper as keyof typeof usStates] ?? upper;
 }

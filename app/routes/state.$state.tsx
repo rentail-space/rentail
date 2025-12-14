@@ -1,15 +1,20 @@
 import { clamp, range } from "es-toolkit";
 import { StarIcon } from "lucide-react";
-import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
+import expandStateAbbr from "~/lib/expandStateAbbr";
 import prisma from "~/lib/prisma";
 import type { Route } from "./+types/state.$state";
-import getUSState from "./getUSState";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const state = params.state.toUpperCase();
   const centers = await prisma.property.findMany({
-    select: { id: true, name: true, rating: true, summary: true },
+    select: {
+      id: true,
+      name: true,
+      rating: true,
+      summary: true,
+      city: true,
+    },
     where: { state },
   });
   return { centers, state };
@@ -18,17 +23,12 @@ export async function loader({ params }: Route.LoaderArgs) {
 export default function StatePage({
   loaderData,
 }: {
-  loaderData: {
-    centers: PropertyGetPayload<{
-      select: { id: true; name: true; rating: true; summary: true };
-    }>[];
-    state: string;
-  };
+  loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
   return (
-    <main className="mx-auto my-10 max-w-4xl space-y-8 px-4">
+    <main className="container mx-auto my-10 space-y-8">
       <h1 className="text-center font-bold text-2xl">
-        {getUSState(loaderData.state)}
+        {expandStateAbbr(loaderData.state)}
       </h1>
       <ul
         className="space-y-4"
@@ -42,8 +42,12 @@ export default function StatePage({
             itemScope
             itemType="https://schema.org/ListItem"
           >
-            <h2 className="font-bold text-xl" itemProp="name">
+            <h2
+              className="flex flex-row items-center justify-between gap-2 font-bold text-xl"
+              itemProp="name"
+            >
               <Link to={`/center/${center.id}`}>{center.name}</Link>
+              <span className="text-gray-500 text-sm">{center.city}</span>
             </h2>
             <p className="space-x-1">
               {center.rating && <Stars rating={center.rating / 10} />}
