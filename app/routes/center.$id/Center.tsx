@@ -2,6 +2,7 @@ import { clamp } from "es-toolkit";
 import {
   ClockIcon,
   GlobeIcon,
+  InfoIcon,
   MapPinIcon,
   PhoneIcon,
   RulerDimensionLineIcon,
@@ -14,6 +15,7 @@ import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
+import formatPhoneNumber from "~/lib/formatPhoneNumber";
 import { Spaces } from "./Spaces";
 
 export default function Center({
@@ -72,63 +74,97 @@ function CenterInfo({
   center: PropertyGetPayload<{ include: { spaces: true } }>;
 }) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
+      {center.summary && (
+        <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+          <InfoIcon className="h-8 w-8" />
+          <span>{center.summary}</span>
+        </div>
+      )}
+
       {center.rating && (
-        <div className="flex flex-row items-center gap-2">
-          <StarIcon className="h-5 w-5 text-yellow-500" fill="currentColor" />
-          {clamp(center.rating / 10, 1, 5).toFixed(1)}
-          {center.reviewCount &&
-            ` (${center.reviewCount.toLocaleString()} reviews)`}
-          {center.summary && ` • ${center.summary}`}
+        <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+          <StarIcon className="h-6 w-6 text-yellow-500" fill="currentColor" />
+          <span>
+            {clamp(center.rating / 10, 1, 5).toFixed(1)}
+            {center.reviewCount &&
+              ` from ${center.reviewCount.toLocaleString()} reviews`}
+          </span>
         </div>
       )}
 
       {center.openUntil && (
-        <div className="flex flex-row items-center gap-2">
-          <ClockIcon className="h-5 w-5" />
-          Open until {clamp(center.openUntil / 100, 0, 23) % 12}:
-          {clamp(center.openUntil % 100, 0, 59)
-            .toString()
-            .padStart(2, "0")}{" "}
-          {clamp(center.openUntil / 100, 0, 23) > 12 ? "PM" : "AM"}
-        </div>
-      )}
-
-      {center.phone && (
-        <div className="flex flex-row items-center gap-2">
-          <PhoneIcon className="h-5 w-5" />
-          <a href={`tel:${center.phone}`}>{center.phone}</a>
+        <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+          <ClockIcon className="h-6 w-6" />
+          <span>
+            Open{" "}
+            {center.openFrom && (
+              <span>
+                {clamp(center.openFrom / 100, 0, 23) % 12}:
+                {clamp(center.openFrom % 100, 0, 59)
+                  .toString()
+                  .padStart(2, "0")}{" "}
+                {clamp(center.openFrom / 100, 0, 23) > 12 ? "PM" : "AM"}
+              </span>
+            )}{" "}
+            until {clamp(center.openUntil / 100, 0, 23) % 12}:
+            {clamp(center.openUntil % 100, 0, 59)
+              .toString()
+              .padStart(2, "0")}{" "}
+            {clamp(center.openUntil / 100, 0, 23) > 12 ? "PM" : "AM"}
+          </span>
         </div>
       )}
 
       {center.squareFootage && (
-        <div className="flex flex-row items-center gap-2">
-          <RulerDimensionLineIcon className="h-5 w-5" />
-          {center.squareFootage.toLocaleString(undefined, { style: "decimal" })}{" "}
-          square feet
+        <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+          <RulerDimensionLineIcon className="h-6 w-6" />
+          <span>
+            {center.squareFootage.toLocaleString(undefined, {
+              style: "decimal",
+            })}{" "}
+            square feet
+          </span>
         </div>
       )}
 
       {center.numberOfStores && (
-        <div className="flex flex-row items-center gap-2">
-          <ShoppingCartIcon className="h-5 w-5" />
-          {center.numberOfStores.toLocaleString(undefined, {
-            style: "decimal",
-          })}{" "}
-          stores
+        <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+          <ShoppingCartIcon className="h-6 w-6" />
+          <span>
+            {center.numberOfStores.toLocaleString(undefined, {
+              style: "decimal",
+            })}{" "}
+            stores
+          </span>
         </div>
       )}
 
-      <div className="flex flex-row items-center gap-2">
-        <GlobeIcon className="h-5 w-5" />
+      <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+        <GlobeIcon className="h-6 w-6" />
         <Link to={center.website} target="_blank" rel="noopener noreferrer">
           {center.website}
         </Link>
       </div>
 
-      <div className="flex flex-row items-center gap-2">
-        <MapPinIcon className="h-5 w-5" />
-        {center.address}
+      {center.phone && (
+        <div className="items-top flex flex-row gap-2 border-gray-200 border-b pb-2">
+          <PhoneIcon className="h-6 w-6" />
+          <span>
+            <a href={`tel:${center.phone}`}>
+              {formatPhoneNumber(center.phone)}
+            </a>
+          </span>
+        </div>
+      )}
+
+      <div className="items-top flex flex-row gap-2">
+        <MapPinIcon className="h-6 w-6" />
+        <span>
+          {center.address}
+          {center.city && `, ${center.city}`}
+          {center.state && `, ${center.state}`}
+        </span>
       </div>
 
       <div>
