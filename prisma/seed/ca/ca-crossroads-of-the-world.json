@@ -1,0 +1,17 @@
+{
+  "name": "Crossroads of the World",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "USA",
+  "address": "6671 Sunset Boulevard",
+  "latitude": 34.098,
+  "longitude": -118.3357,
+  "squareFootage": 50000,
+  "numberOfStores": 15,
+  "website": "https://crossroadsoftheworld.com",
+  "imageURLs": [],
+  "description": "Crossroads of the World is a historic outdoor shopping complex on Sunset Boulevard in Hollywood, built in 1936 and designed to resemble an ocean liner surrounded by village-style cottages representing different countries. This architectural landmark features a distinctive streamline moderne central building with a revolving globe on top, surrounded by themed bungalows housing creative offices and boutique retail spaces. Designated as a Los Angeles Historic-Cultural Monument, it serves as a unique blend of commercial and creative office space in the heart of Hollywood.",
+  "summary": "A historic 1936 architectural landmark in Hollywood featuring a nautical-themed central building and international village-style cottages housing creative offices and boutique retail.",
+  "centerType": "StripCenter",
+  "spaces": []
+}

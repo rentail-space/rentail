@@ -1,0 +1,19 @@
+{
+  "name": "Sunset Plaza",
+  "city": "West Hollywood",
+  "state": "CA",
+  "country": "USA",
+  "address": "8623 W. Sunset Boulevard",
+  "latitude": 34.0939,
+  "longitude": -118.3816,
+  "squareFootage": 75000,
+  "numberOfStores": 50,
+  "website": "https://sunsetplaza.com",
+  "phone": "+13106522622",
+  "imageURLs": [],
+  "description": "Sunset Plaza is a premier open-air shopping destination on the iconic Sunset Boulevard in West Hollywood, featuring over 50 upscale boutiques, restaurants, spas, and fitness studios. This sophisticated street-level center attracts fashion-forward shoppers and celebrities with its curated mix of luxury retailers like Zadig & Voltaire, H. Lorenzo, and Oliver Peoples, alongside acclaimed dining spots like Saltie Girl and Bossa Nova. The center embodies the glamorous West Hollywood lifestyle with high-end fashion, beauty services, fine dining, and wellness offerings all in one walkable location.",
+  "demographics": "Affluent residents and visitors in West Hollywood; celebrity clientele; high-end fashion and lifestyle consumers",
+  "summary": "An upscale open-air shopping and dining destination on Sunset Boulevard featuring luxury boutiques, acclaimed restaurants, and high-end beauty and wellness services.",
+  "centerType": "StripCenter",
+  "spaces": []
+}

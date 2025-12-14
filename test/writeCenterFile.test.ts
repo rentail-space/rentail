@@ -25,7 +25,7 @@ describe("writeCenterFile", () => {
       spaces: [],
     };
 
-    const path = await writeCenterFile(centerData, "Los Angeles County");
+    const path = await writeCenterFile(centerData);
 
     expect(existsSync(path)).toBe(true);
     expect(path).toContain("prisma/seed/ca/los-angeles");

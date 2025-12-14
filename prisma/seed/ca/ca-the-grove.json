@@ -10,18 +10,14 @@
   "numberOfStores": 50,
   "website": "https://thegrovela.com",
   "phone": "+13239008080",
-  "imageURLs": [
-    "https://thegrovela.com/wp-content/themes/caruso-retail/images/logo.png",
-    "https://www.googletagmanager.com/ns.html?id=GTM-N2JLD48",
-    "https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=XwIfp1IW1d10mh"
-  ],
-  "description": "The Grove is Los Angeles' premier open-air shopping, dining, and entertainment destination featuring a mix of upscale retail stores, restaurants, and an AMC movie theater. Set in a beautifully landscaped environment with iconic features like the historic double-decker trolley and choreographed fountain shows, the center pulses with energy and California style. With events throughout the year, family amenities, and premium services including valet parking and concierge, The Grove offers a complete lifestyle experience under the California sun.",
-  "demographics": "Affluent urban shoppers, tourists, and entertainment seekers in the Los Angeles metro area. The Grove attracts a diverse demographic with higher disposable income who value premium retail and dining experiences.",
-  "summary": "Los Angeles' favorite open-air shopping, dining, and lifestyle destination combining upscale retail, entertainment, and iconic attractions in a vibrant, energy-filled environment.",
+  "imageURLs": [],
+  "description": "The Grove is Los Angeles' premier open-air shopping, dining, and entertainment destination featuring a sophisticated mix of retailers, restaurants, and an AMC movie theater. Set in a beautifully landscaped environment with iconic features like a historic double-decker trolley and dancing fountain, The Grove offers an upscale lifestyle experience in the heart of LA. This Caruso-managed property combines Southern California's indoor-outdoor lifestyle with year-round events, family-friendly amenities, and a vibrant atmosphere.",
+  "demographics": "null",
+  "summary": "Los Angeles' favorite open-air lifestyle destination offering upscale shopping, dining, and entertainment in a vibrant, family-friendly environment.",
   "openFrom": 1000,
-  "openUntil": 2100,
+  "openUntil": 2200,
   "rating": 46,
-  "reviewCount": 15000,
+  "reviewCount": 25000,
   "centerType": "LifestyleCenter",
   "spaces": []
 }

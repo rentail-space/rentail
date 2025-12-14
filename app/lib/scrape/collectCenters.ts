@@ -65,7 +65,7 @@ export default async function collectCenters(countyName: string) {
 
       // Stage 4: Write to file
       console.info("  Writing to file...");
-      const path = await writeCenterFile(enrichedData, countyName);
+      const path = await writeCenterFile(enrichedData);
       console.info(`  ✓ Saved: ${path}`);
 
       successCount++;

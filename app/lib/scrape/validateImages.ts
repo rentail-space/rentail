@@ -12,41 +12,36 @@ function preFilterImages(imageURLs: string[]): string[] {
     const lower = url.toLowerCase();
 
     // Exclude small icon sizes
-    if (/_(16|32|64|96|128)x\1\.|-(16|32|64|96|128)\./.test(lower)) {
+    if (/_(16|32|64|96|128)x\1\.|-(16|32|64|96|128)\./.test(lower))
       return false;
-    }
 
     // Exclude non-representative paths
     if (
       /(\/icon\/|\/logo\/|\/social\/|\/avatar\/|\/ui\/|favicon|sprite)/.test(
         lower,
       )
-    ) {
+    )
       return false;
-    }
 
     // Exclude social media images
-    if (/(facebook|twitter|instagram|linkedin|og-image|share)/.test(lower)) {
+    if (/(facebook|twitter|instagram|linkedin|og-image|share)/.test(lower))
       return false;
-    }
 
     // Include size hints
     if (
       /(\/large\/|\/hero\/|\/banner\/|_xl\.|_xxl\.|_1200|_1920|hero|banner|main)/.test(
         lower,
       )
-    ) {
+    )
       return true;
-    }
 
     // Include semantic paths
     if (
       /(\/gallery\/|\/images\/property\/|\/center\/|\/mall\/|\/shopping)/.test(
         lower,
       )
-    ) {
+    )
       return true;
-    }
 
     return true; // Default: include
   });
@@ -97,9 +92,7 @@ async function validateImageSet(
         // Early exit after finding 5 valid images
         if (results.length >= 5) break;
       }
-    } catch (_error) {
-      continue; // Skip failed images
-    }
+    } catch (_error) {}
   }
 
   return results;

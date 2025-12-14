@@ -7,13 +7,26 @@
  */
 
 import { exec, execFile } from "node:child_process";
+import { resolve } from "node:path";
 import { promisify } from "node:util";
-import seedCenters from "prisma/seed/seedCenters";
 import prisma from "~/lib/prisma";
+import seedCenters from "~/lib/scrape/seedCenter";
 import { port } from "./launchBrowser";
 import { closeServer, launchServer } from "./launchServer";
 import { removeNewHTML } from "./toMatchInnerHTML";
 import { removeDiffImages } from "./toMatchScreenshot";
+
+const centers = [
+  "ca/ca-beverly-center.json",
+  "ca/ca-del-amo-fashion-center.json",
+  "ca/ca-glendale-galleria.json",
+  "ca/ca-northridge-fashion-center.json",
+  "ca/ca-sherman-oaks-galleria.json",
+  "ca/ca-south-bay-galleria.json",
+  "ca/ca-the-americana-at-brand.json",
+  "ca/ca-the-grove.json",
+  "ca/ca-the-bloc.json",
+];
 
 const execFileAsync = promisify(execFile);
 const execAsync = promisify(exec);
@@ -24,7 +37,9 @@ export default async function setup() {
   // Clean up database and seed it again
   await prisma.user.deleteMany();
   await prisma.property.deleteMany();
-  await seedCenters();
+
+  for (const center of centers)
+    await seedCenters(resolve("prisma/seed", center));
 
   // Remove regression testing diff images
   await removeDiffImages();

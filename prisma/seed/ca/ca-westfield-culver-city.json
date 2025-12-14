@@ -1,0 +1,21 @@
+{
+  "name": "Westfield Culver City",
+  "city": "Culver City",
+  "state": "CA",
+  "country": "USA",
+  "address": "6000 Sepulveda Boulevard",
+  "latitude": 33.9892,
+  "longitude": -118.3893,
+  "squareFootage": 600000,
+  "numberOfStores": 30,
+  "website": "https://www.westfield.com/culvercity",
+  "phone": "+13103907833",
+  "imageURLs": [],
+  "description": "Westfield Culver City is a premier shopping destination in West Los Angeles featuring major department stores like Macy's, JCPenney, and Target alongside popular retailers including Sephora, H&M, UNIQLO, and Best Buy. The multi-level enclosed mall offers diverse dining options from BJ's Restaurant & Brewhouse to specialty eateries on the dining terrace, plus unique entertainment with Activate, the world's first active gaming facility. With convenient amenities including free Wi-Fi, EV charging stations, and locker services, this Westfield property serves as a comprehensive retail and entertainment hub for the Culver City community.",
+  "demographics": "Affluent West Los Angeles residents, entertainment industry professionals, tourists visiting nearby studios and attractions, diverse demographic mix from surrounding communities",
+  "summary": "A dynamic multi-level Westfield mall in Culver City featuring major anchors, popular brands, diverse dining, and innovative entertainment experiences in the heart of West LA.",
+  "rating": 42,
+  "reviewCount": 3500,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

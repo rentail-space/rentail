@@ -5,19 +5,17 @@
   "country": "USA",
   "address": "6801 Hollywood Boulevard",
   "latitude": 34.1022,
-  "longitude": -118.3407,
+  "longitude": -118.3408,
   "squareFootage": 387000,
-  "numberOfStores": 30,
+  "numberOfStores": 70,
   "website": "https://hollywoodandhighland.com",
-  "imageURLs": [
-    "https://images.squarespace-cdn.com/content/v1/622100331a5f6258ce172735/1647352523231-LO6GVDM942Y0BF7XA0EG/ovation_hollywood_lockup_logo_cream_trimmed.png"
-  ],
+  "imageURLs": [],
   "logoURL": "https://images.squarespace-cdn.com/content/v1/622100331a5f6258ce172735/1647352523231-LO6GVDM942Y0BF7XA0EG/ovation_hollywood_lockup_logo_cream_trimmed.png",
-  "description": "Ovation Hollywood (formerly Hollywood & Highland Center) is a premier entertainment and shopping destination in the heart of Hollywood, steps from the Hollywood Walk of Fame and the TCL Chinese Theatre. This open-air lifestyle center combines shopping, dining, and entertainment experiences with iconic Hollywood views, including shops, restaurants, movie theaters, and bowling. Located at one of Los Angeles' most famous intersections, it serves as a gateway to Hollywood's entertainment district and offers visitors an immersive experience in the entertainment capital of the world.",
-  "demographics": "High tourist traffic in the heart of Hollywood, attracting both local residents and international visitors seeking entertainment, dining, and retail experiences near iconic landmarks.",
-  "summary": "An iconic open-air entertainment and lifestyle destination in the heart of Hollywood, offering world-class shopping, dining, and entertainment steps from the Walk of Fame.",
-  "rating": 41,
-  "reviewCount": 8500,
+  "description": "Ovation Hollywood (formerly Hollywood & Highland) is an iconic entertainment and shopping destination located steps from the Walk of Fame and TCL Chinese Theatre. This open-air complex features shopping, dining, and entertainment experiences in the heart of Hollywood's entertainment district. The center offers visitors a true Hollywood experience with views of the Hollywood Sign and convenient access to major Hollywood attractions.",
+  "demographics": "Located in the heart of Hollywood, serving tourists, entertainment industry professionals, and locals. High foot traffic from Hollywood Walk of Fame visitors and tourists from around the world.",
+  "summary": "A premier open-air entertainment complex in the heart of Hollywood, offering world-class shopping, dining, and entertainment steps from iconic Hollywood landmarks.",
+  "rating": 42,
+  "reviewCount": 15000,
   "centerType": "LifestyleCenter",
   "spaces": []
 }
