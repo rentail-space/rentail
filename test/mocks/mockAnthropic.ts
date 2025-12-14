@@ -8,7 +8,7 @@
 import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import { ulid } from "ulid";
-import { conversational } from "~/lib/model";
+import { conversational } from "~/lib/models";
 
 const logger = debug("msw");
 

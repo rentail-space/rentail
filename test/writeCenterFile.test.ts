@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { readFile, rm } from "node:fs/promises";
 import { afterEach, describe, expect, it } from "vitest";
-import { writeCenterFile } from "~/lib/writeCenterFile";
+import writeCenterFile from "~/lib/scrape/writeCenterFile";
 
 describe("writeCenterFile", () => {
   afterEach(async () => {

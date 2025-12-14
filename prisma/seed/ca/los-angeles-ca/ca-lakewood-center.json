@@ -1,0 +1,15 @@
+{
+  "name": "Lakewood Center",
+  "city": "Lakewood",
+  "state": "CA",
+  "country": "USA",
+  "address": "500 Lakewood Center Mall",
+  "latitude": 33.8475,
+  "longitude": -118.1395,
+  "squareFootage": 2000000,
+  "numberOfStores": 180,
+  "website": "https://www.lakewoodcenter.com",
+  "imageURLs": [],
+  "description": "Lakewood Center is a premier two-level regional shopping mall in Lakewood, California, offering over 180 stores including popular anchor tenants like Macy's, JCPenney, Target, and Forever 21. Located in the heart of Los Angeles County, this expansive retail destination serves the diverse communities of Southeast LA with a comprehensive mix of fashion, dining, entertainment, and services.",
+  "spaces": []
+}

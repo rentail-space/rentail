@@ -1,0 +1,15 @@
+{
+  "name": "Paseo Colorado",
+  "city": "Pasadena",
+  "state": "CA",
+  "country": "USA",
+  "address": "280 East Colorado Boulevard",
+  "latitude": 34.1456,
+  "longitude": -118.1446,
+  "squareFootage": 550000,
+  "numberOfStores": 65,
+  "website": "https://paseocoloradopasadena.com",
+  "imageURLs": [],
+  "description": "Paseo Colorado is a premier open-air shopping and entertainment destination in the heart of downtown Pasadena. Featuring a vibrant mix of retail stores, dining options, and entertainment venues, this urban lifestyle center offers a unique blend of Spanish-inspired architecture and modern amenities. Located just steps from Old Pasadena, it serves as a central gathering place for both locals and visitors.",
+  "spaces": []
+}

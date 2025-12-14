@@ -1,6 +1,6 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { generateSlug } from "~/lib/generateSlug";
+import generateSlug from "~/lib/scrape/generateSlug";
 
 interface CenterData {
   name: string;
@@ -8,7 +8,7 @@ interface CenterData {
   [key: string]: unknown;
 }
 
-export async function writeCenterFile(
+export default async function writeCenterFile(
   centerData: CenterData,
   countyName: string,
 ): Promise<string> {

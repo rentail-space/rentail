@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { discoverCenters } from "~/lib/discoverCenters";
+import discoverCenters from "~/lib/scrape/discoverCenters";
 
 describe("discoverCenters", () => {
   it("validates input and throws error for empty county name", async () => {

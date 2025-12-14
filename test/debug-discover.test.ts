@@ -1,5 +1,5 @@
 import { describe, it } from "vitest";
-import { discoverCenters } from "~/lib/discoverCenters";
+import discoverCenters from "~/lib/scrape/discoverCenters";
 
 describe("debug discoverCenters", () => {
   it("logs the actual error", async () => {

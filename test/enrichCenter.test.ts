@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { enrichCenter } from "~/lib/enrichCenter";
+import enrichCenter from "~/lib/scrape/enrichCenter";
 
 describe("enrichCenter", () => {
   it.skip("structures and validates center data", async () => {

@@ -1,16 +1,16 @@
 import { convertToModelMessages, generateObject, generateText } from "ai";
 import debug from "debug";
 import { last } from "es-toolkit";
+import type { User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import { beforeAll, it } from "vitest";
 import zod from "zod";
-import { classify } from "~/lib/model";
+import { classify } from "~/lib/models";
 import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
 import { findOrCreateUser, recentMessages } from "~/lib/sessions.server";
 import updateWorkingMemory from "~/lib/workingMemory";
 import chatPrompt from "~/prompts/chatPrompt.md?raw";
-import type { User } from "prisma/generated/client";
 
 const logger = debug("conversations");
 

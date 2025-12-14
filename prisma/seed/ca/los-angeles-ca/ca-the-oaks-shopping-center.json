@@ -1,0 +1,15 @@
+{
+  "name": "The Oaks Shopping Center",
+  "city": "Woodland Hills",
+  "state": "CA",
+  "country": "USA",
+  "address": "6100 Topanga Canyon Boulevard",
+  "latitude": 34.1716,
+  "longitude": -118.6034,
+  "squareFootage": 880000,
+  "numberOfStores": 180,
+  "website": "https://www.theoaksshoppingcenter.com",
+  "imageURLs": [],
+  "description": "The Oaks Shopping Center is a premier outdoor lifestyle destination in the heart of Woodland Hills, featuring over 180 specialty shops, restaurants, and entertainment venues. Anchored by Macy's and a state-of-the-art 18-screen Cinemark theater, this iconic mall offers a vibrant shopping and dining experience in the San Fernando Valley. The center's distinctive oak tree-lined walkways and Mediterranean-inspired architecture create an inviting atmosphere for residents and visitors from across Los Angeles.",
+  "spaces": []
+}

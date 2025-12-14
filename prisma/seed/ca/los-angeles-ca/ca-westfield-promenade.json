@@ -1,0 +1,19 @@
+{
+  "name": "Westfield Promenade",
+  "city": "Woodland Hills",
+  "state": "CA",
+  "country": "USA",
+  "address": "6100 Topanga Canyon Boulevard",
+  "latitude": 34.1719,
+  "longitude": -118.6034,
+  "squareFootage": 455000,
+  "numberOfStores": 75,
+  "website": "https://www.westfield.com/promenade",
+  "imageURLs": [
+    "https://www.westfield.com/promenade",
+    "https://acsbapp.com/apps/app/dist/js/app.js",
+    "https://www.googletagmanager.com/ns.html?id=GTM-NMH6ZV9"
+  ],
+  "description": "Westfield Promenade is a premier outdoor shopping destination in the heart of Woodland Hills, offering a curated mix of popular retailers, diverse dining options, and entertainment venues. This open-air center features iconic brands like Apple, H&M, Uniqlo, and Decathlon, creating a vibrant shopping experience in the San Fernando Valley. With convenient amenities including Smart Parking and click-and-collect services, Westfield Promenade combines retail excellence with modern convenience in a beautifully designed setting.",
+  "spaces": []
+}

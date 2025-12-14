@@ -1,0 +1,15 @@
+{
+  "name": "Beverly Center",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "USA",
+  "address": "8500 Beverly Boulevard",
+  "latitude": 34.0755,
+  "longitude": -118.3773,
+  "squareFootage": 840000,
+  "numberOfStores": 100,
+  "website": "https://beverlycenter.com",
+  "imageURLs": [],
+  "description": "Beverly Center is an iconic eight-story luxury shopping destination in the heart of Los Angeles, featuring premier retailers and dining options. Located at the intersection of Beverly Boulevard and La Cienega Boulevard, this architectural landmark offers a distinctive open-air rooftop design with stunning city views. The center attracts fashion-forward shoppers with its collection of high-end brands and contemporary lifestyle stores.",
+  "spaces": []
+}

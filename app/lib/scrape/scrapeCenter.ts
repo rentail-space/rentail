@@ -8,7 +8,7 @@ interface ScrapedData {
   error?: string;
 }
 
-export async function scrapeCenter(url: string): Promise<ScrapedData> {
+export default async function scrapeCenter(url: string): Promise<ScrapedData> {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 

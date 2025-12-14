@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { RateLimiter } from "~/lib/rateLimiter";
+import RateLimiter from "~/lib/scrape/rateLimiter";
 
 describe("RateLimiter", () => {
   it("enforces minimum delay between calls", async () => {

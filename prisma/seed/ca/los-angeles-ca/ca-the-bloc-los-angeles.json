@@ -1,0 +1,20 @@
+{
+  "name": "The Bloc Los Angeles",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "USA",
+  "address": "700 Flower St, Los Angeles, CA 90017",
+  "latitude": 34.047667,
+  "longitude": -118.259016,
+  "squareFootage": 450000,
+  "numberOfStores": 35,
+  "website": "https://theblocla.com",
+  "phone": "(213) 454-4926",
+  "imageURLs": [],
+  "logoURL": "https://cdn-files.eu.placewise.com/f/CO2GPRCfCBoTY21zX2NvbXBvbmVudF9pbWFnZSIaaWQtMTc1NjQ3NjAzMDkyMC0xNDkzLWxvZ284nK3ySYpCPHdI5VRJKM8-iB6aLQc",
+  "description": "The Bloc is a vibrant, LEED Gold-certified open-air urban center encompassing a full city block along LA's iconic 7th Street corridor in downtown Los Angeles. Connecting the financial, fashion, jewelry, and theater districts, The Bloc sits directly above the 7th Street Metro Center Station where four DTLA lines converge. This inclusive community hub features diverse retail, dining, cinema, UCLA Health, and office spaces, making it a central destination in the heart of downtown.",
+  "demographics": "Located in downtown Los Angeles, serving urban professionals, residents, tourists, and metro commuters from surrounding financial, fashion, jewelry, and theater districts",
+  "summary": "LEED Gold-certified mixed-use urban center in downtown LA with retail, dining, entertainment, and office space above Metro hub",
+  "openUntil": 2100,
+  "spaces": []
+}

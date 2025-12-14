@@ -1,6 +1,6 @@
 import { generateObject } from "ai";
 import { z } from "zod";
-import { conversational } from "~/lib/model";
+import { conversational } from "~/lib/models";
 
 const discoverySchema = z.object({
   centers: z.array(
@@ -25,13 +25,12 @@ const discoverySchema = z.object({
   ),
 });
 
-export async function discoverCenters(
+export default async function discoverCenters(
   countyName: string,
   options: { timeout?: number } = {},
 ) {
-  if (!countyName || countyName.trim().length === 0) {
+  if (!countyName || countyName.trim().length === 0)
     throw new Error("County name is required");
-  }
 
   const { timeout = 30000 } = options;
 
@@ -47,30 +46,20 @@ Focus on retail shopping centers, strip malls, and enclosed malls.
 Exclude individual stores or single-building retail.`;
 
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
-
-    try {
-      const { object } = await generateObject({
-        model: conversational.model,
-        schema: discoverySchema,
-        prompt,
-        abortSignal: controller.signal,
-      });
-
-      clearTimeout(timeoutId);
-      return object.centers;
-    } catch (error) {
-      clearTimeout(timeoutId);
-      throw error;
-    }
+    const abortSignal = AbortSignal.timeout(timeout);
+    const { object } = await generateObject({
+      abortSignal,
+      model: conversational.model,
+      prompt,
+      schema: discoverySchema,
+    });
+    return object.centers;
   } catch (error) {
     if (error instanceof Error) {
-      if (error.name === "AbortError") {
+      if (error.name === "AbortError")
         throw new Error(
           `Discovery request timed out after ${timeout}ms for ${countyName}`,
         );
-      }
       // Preserve the original error for debugging
       const wrappedError = new Error(
         `Failed to discover centers for ${countyName}: ${error.message}`,

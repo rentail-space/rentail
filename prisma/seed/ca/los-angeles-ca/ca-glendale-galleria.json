@@ -1,0 +1,15 @@
+{
+  "name": "Glendale Galleria",
+  "city": "Glendale",
+  "state": "CA",
+  "country": "USA",
+  "address": "100 West Broadway",
+  "latitude": 34.1447,
+  "longitude": -118.2556,
+  "squareFootage": 1600000,
+  "numberOfStores": 200,
+  "website": "https://www.glendalegalleriacenter.com",
+  "imageURLs": [],
+  "description": "Glendale Galleria is a premier shopping destination in the heart of Glendale, California, featuring over 200 stores across multiple levels. This major regional mall anchored by leading department stores including Macy's, Target, and JCPenney offers an extensive mix of fashion retailers, dining options, and entertainment venues. With convenient access and ample parking, the Galleria serves as a cornerstone shopping center for the greater Los Angeles area.",
+  "spaces": []
+}

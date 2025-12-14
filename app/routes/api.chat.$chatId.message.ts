@@ -4,10 +4,11 @@ import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import humanFormat from "human-format";
 import { Redis } from "ioredis";
+import type { InputJsonValue } from "prisma/generated/internal/prismaNamespace";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { ulid } from "ulid";
 import envVars from "~/lib/env";
-import { conversational } from "~/lib/model";
+import { conversational } from "~/lib/models";
 import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
@@ -16,7 +17,6 @@ import updateWorkingMemory, {
   maskWorkingMemoryTags,
 } from "~/lib/workingMemory";
 import chatPrompt from "~/prompts/chatPrompt.md?raw";
-import type { InputJsonValue } from "prisma/generated/internal/prismaNamespace";
 import type { Route } from "./+types/api.chat.$chatId.message";
 
 const logger = debug("chat");

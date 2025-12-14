@@ -1,4 +1,6 @@
-export class RateLimiter {
+import { delay } from "es-toolkit";
+
+export default class RateLimiter {
   private lastCall = 0;
   private minDelay: number;
 
@@ -9,11 +11,7 @@ export class RateLimiter {
   async throttle() {
     const now = Date.now();
     const elapsed = now - this.lastCall;
-    if (elapsed < this.minDelay) {
-      await new Promise((resolve) =>
-        setTimeout(resolve, this.minDelay - elapsed),
-      );
-    }
+    if (elapsed < this.minDelay) await delay(this.minDelay - elapsed);
     this.lastCall = Date.now();
   }
 }

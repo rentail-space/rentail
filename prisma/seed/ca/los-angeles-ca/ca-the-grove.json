@@ -1,0 +1,17 @@
+{
+  "name": "The Grove",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "USA",
+  "address": "189 The Grove Drive",
+  "latitude": 34.0719,
+  "longitude": -118.3564,
+  "squareFootage": 575000,
+  "numberOfStores": 50,
+  "website": "https://thegrovela.com",
+  "phone": "323.900.8080",
+  "imageURLs": [],
+  "description": "The Grove is Los Angeles' premier open-air shopping and lifestyle destination, featuring a curated mix of retail, restaurants, and entertainment in a vibrant, pedestrian-friendly environment. Located in the heart of LA, this iconic shopping center combines European-inspired architecture with California energy, offering visitors an unforgettable experience complete with a historic trolley, central fountain, and movie theater. From luxury brands to dining experiences and family-friendly events, The Grove has become a beloved gathering place for locals and tourists alike.",
+  "openUntil": 2200,
+  "spaces": []
+}

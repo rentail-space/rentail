@@ -1,6 +1,6 @@
 import { generateObject } from "ai";
 import { z } from "zod";
-import { conversational } from "~/lib/model";
+import { conversational } from "~/lib/models";
 
 const centerSchema = z.object({
   name: z.string(),
@@ -53,7 +53,7 @@ interface ScrapedData {
   error?: string;
 }
 
-export async function enrichCenter(
+export default async function enrichCenter(
   discoveryData: DiscoveryData,
   scrapedData: ScrapedData,
 ) {

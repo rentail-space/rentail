@@ -1,0 +1,21 @@
+{
+  "name": "Westfield Culver City",
+  "city": "Culver City",
+  "state": "CA",
+  "country": "USA",
+  "address": "6000 Sepulveda Boulevard",
+  "latitude": 33.9846,
+  "longitude": -118.3952,
+  "squareFootage": 1000000,
+  "numberOfStores": 30,
+  "website": "https://www.westfield.com/culvercity",
+  "phone": "310.390.7833",
+  "imageURLs": [
+    "https://www.westfield.com/culvercity",
+    "https://www.westfield.com/culvercity",
+    "https://www.westfield.com/culvercity"
+  ],
+  "description": "Westfield Culver City is a premier shopping destination featuring major retailers including Macy's, JCPenney, Target, Nordstrom Rack, and Sephora, alongside exciting entertainment options like the world's first Activate gaming facility. Located on Sepulveda Boulevard in the heart of Culver City, this multi-level shopping center offers diverse dining experiences from BJ's Restaurant & Brewhouse to California Fish Grill, with convenient amenities including free Wi-Fi, EV charging stations, and secure locker services.",
+  "openUntil": 2100,
+  "spaces": []
+}

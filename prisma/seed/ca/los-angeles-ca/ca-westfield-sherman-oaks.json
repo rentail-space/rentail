@@ -1,0 +1,19 @@
+{
+  "name": "Westfield Sherman Oaks",
+  "city": "Sherman Oaks",
+  "state": "CA",
+  "country": "USA",
+  "address": "14006 Riverside Drive",
+  "latitude": 34.1541,
+  "longitude": -118.4479,
+  "squareFootage": 1050000,
+  "numberOfStores": 110,
+  "website": "https://www.westfield.com/fashion-square",
+  "imageURLs": [
+    "https://www.westfield.com/fashion-square/images/exterior-1.jpg",
+    "https://www.westfield.com/fashion-square/images/interior-1.jpg",
+    "https://www.westfield.com/fashion-square/images/shopping-area.jpg"
+  ],
+  "description": "Westfield Sherman Oaks (formerly Fashion Square) is a premier shopping destination in the heart of the San Fernando Valley, featuring upscale retailers, popular dining options, and modern amenities. Located along Riverside Drive, this Westfield property offers a contemporary shopping experience with a mix of high-end brands and accessible favorites. The center serves the affluent Sherman Oaks community and surrounding neighborhoods with convenient access and stylish architecture.",
+  "spaces": []
+}

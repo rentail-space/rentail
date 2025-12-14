@@ -1,0 +1,19 @@
+{
+  "name": "Burbank Town Center",
+  "city": "Burbank",
+  "state": "CA",
+  "country": "USA",
+  "address": "201 East Magnolia Boulevard",
+  "latitude": 34.1807,
+  "longitude": -118.309,
+  "squareFootage": 900000,
+  "numberOfStores": 100,
+  "website": "https://burbanktowncenter.com",
+  "phone": "818-566-8556",
+  "imageURLs": [],
+  "description": "Located in Downtown Burbank just 25 minutes from Los Angeles and off I-5, Burbank Town Center is a landmark shopping destination featuring more than 100 retail shops, restaurants, entertainment venues, and lifestyle services. Situated in the \"Media Capital of the World,\" the center is just miles from Hollywood and home to iconic studios like Walt Disney and Warner Bros., offering a premier shopping experience with attractions including AMC Theatres and H&M.",
+  "demographics": "The center serves the greater Burbank area, known as the \"Media Capital of the World,\" attracting residents and entertainment industry professionals from the surrounding Los Angeles region including Hollywood. The location benefits from proximity to major studios like Walt Disney and Warner Bros.",
+  "summary": "Premier shopping center in Downtown Burbank with 100+ stores, dining, and entertainment options including AMC Theatres, positioned near major Hollywood studios.",
+  "openUntil": 1900,
+  "spaces": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Citadel Outlets",
+  "city": "Commerce",
+  "state": "CA",
+  "country": "USA",
+  "address": "100 Citadel Drive",
+  "latitude": 33.9997,
+  "longitude": -118.141,
+  "squareFootage": 550000,
+  "numberOfStores": 130,
+  "website": "https://www.citadeloutlets.com",
+  "phone": "(323) 888-1724",
+  "imageURLs": [],
+  "description": "Citadel Outlets is Los Angeles' premier outlet shopping destination featuring over 130 global brands and restaurants in a distinctive Assyrian palace-inspired architectural setting. Located just minutes from downtown LA and LAX, this iconic center offers exceptional savings on top brands including Coach, Nike, Michael Kors, lululemon, The North Face, and many more. The center features festive experiences year-round including the World's Tallest Christmas Tree and magical snow shows during the holiday season.",
+  "openUntil": 2100,
+  "spaces": []
+}

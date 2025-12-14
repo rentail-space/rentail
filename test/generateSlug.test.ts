@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { generateSlug } from "~/lib/generateSlug";
+import generateSlug from "~/lib/scrape/generateSlug";
 
 describe("generateSlug", () => {
   it("generates slug from name and state", () => {
