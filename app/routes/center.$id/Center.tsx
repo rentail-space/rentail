@@ -25,21 +25,8 @@ export default function Center({
 }) {
   return (
     <div className="mx-auto my-10 flex max-w-4xl flex-col gap-6 px-4">
-      <h1 className="font-bold text-4xl text-black">
-        {center.website ? (
-          <Link
-            to={center.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block transform rounded-md border-2 border-black bg-[hsl(37,92%,65%)] px-6 py-3 font-bold text-black no-underline shadow-[6px_6px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_black]"
-          >
-            {center.name}
-          </Link>
-        ) : (
-          <span className="inline-block rounded-md border-2 border-black bg-[hsl(37,92%,65%)] px-6 py-3 font-bold text-black shadow-[6px_6px_0px_0px_black]">
-            {center.name}
-          </span>
-        )}
+      <h1 className="rounded-md border-2 border-black bg-[hsl(37,92%,65%)] px-6 py-3 font-bold text-4xl text-black shadow-[6px_6px_0px_0px_black]">
+        {center.name}
       </h1>
 
       <section className="rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
@@ -58,7 +45,7 @@ export default function Center({
         </Streamdown>
       </section>
 
-      <section className="flex flex-col gap-4">
+      <section className="rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
         <Spaces spaces={center.spaces} />
       </section>
 

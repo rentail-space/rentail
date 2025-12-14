@@ -2,7 +2,7 @@ import type { PropertySpace } from "prisma/generated/client";
 
 export function Spaces({ spaces }: { spaces: PropertySpace[] }) {
   return (
-    <div className="mb-10 flex flex-col gap-4">
+    <div className="space-y-4">
       {spaces.length ? (
         spaces
           .sort((a, b) =>
@@ -20,11 +20,9 @@ export function Spaces({ spaces }: { spaces: PropertySpace[] }) {
 
 function NoAvailableSpaces() {
   return (
-    <div className="my-4 rounded-md border-2 border-black bg-[hsl(47,100%,95%)] p-6 text-center shadow-[4px_4px_0px_0px_black]">
-      <p className="font-bold text-black text-lg">
-        Sorry, all spaces are currently leased. Please check back later.
-      </p>
-    </div>
+    <p className="font-bold text-black text-lg">
+      Sorry, all spaces are currently leased. Please check back later.
+    </p>
   );
 }
 

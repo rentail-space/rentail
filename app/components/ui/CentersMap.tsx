@@ -1,4 +1,4 @@
-import { maxBy, minBy } from "es-toolkit";
+import { invariant, maxBy, minBy } from "es-toolkit";
 import { MapPin } from "lucide-react";
 import mapboxgl from "mapbox-gl";
 import type { PropertyGetPayload } from "prisma/generated/models";
@@ -17,7 +17,7 @@ export declare type CenterMapFunction = (
  * A map showing shopping centers.
  * 
  * @param centers - The centers to display on the map.
- * @param centerRef - A ref to a function that will center the map on a given center. (Optional)
+ * @param centerRef - A ref to a function that will center the map on a given center. 
  * @param latitude - The latitude of the center to display on the map.
  * @param longitude - The longitude of the center to display on the map.
  * @returns A map showing shopping centers.
@@ -268,10 +268,17 @@ function calculateZoomLevel(centers: PropertyGetPayload<{ select: {
   latitude: true;
   longitude: true;
 }}>[]): number {
+  try {
+
+  invariant(centers.length >= 2, "At least two centers are required");
   const latitudeRange = (maxBy(centers, (center) => center.latitude)?.latitude ?? 0) -
     (minBy(centers, (center) => center.latitude)?.latitude ?? 0);
   const longitudeRange = (maxBy(centers, (center) => center.longitude)?.longitude ?? 0) -
     (minBy(centers, (center) => center.longitude)?.longitude ?? 0);
   const maxRange = Math.max(latitudeRange, longitudeRange);
+  invariant(maxRange > 0, "Max range must be greater than 0");
   return 10 + Math.log2(maxRange);
+  } catch  {
+    return 11;
+  }
 }
