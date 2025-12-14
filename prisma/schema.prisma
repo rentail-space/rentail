@@ -66,6 +66,7 @@ model Property {
   openUntil      Int?            @map("open_until") // Hour:minute eg 2100 is 21:00
   summary        String?         @map("summary")
   centerType     CenterType      @map("center_type")                                @default(CommunityCenter)
+  tier           Int             @map("tier")                                       @default(2)
 
   @@map("properties")
 }

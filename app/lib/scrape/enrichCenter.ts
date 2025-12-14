@@ -31,6 +31,7 @@ const centerSchema = z.object({
     "OutletCenter",
     "LifestyleCenter",
   ]),
+  tier: z.number().int().min(1).max(3),
   spaces: z
     .array(
       z.object({
@@ -127,7 +128,22 @@ Tasks:
 
    If uncertain, choose type matching square footage, or StripCenter if no size data.
 
-10. Collect rating and review data using hybrid approach:
+10. Assign a tier classification from 1 to 3 based on desirability and price point:
+   - Tier 3: Upscale, high-end shopping centers with luxury brands and premium retailers
+     Examples: Westfield Century City, The Grove, South Coast Plaza, Fashion Island
+     Indicators: Luxury tenants (Gucci, Louis Vuitton, Tesla), high-end dining, valet parking
+
+   - Tier 2: Average, mid-market shopping centers with mainstream retailers
+     Examples: Beverly Center, Glendale Galleria, standard regional malls
+     Indicators: Chain stores (H&M, Gap, Macy's), food courts, typical mall amenities
+
+   - Tier 1: Value-oriented, budget shopping centers or older facilities
+     Examples: Los Cerritos Center, discount/outlet centers, aging strip malls
+     Indicators: Discount stores, fewer amenities, older facilities, lower price points
+
+   Consider: tenant mix, location prestige, facility condition, and target market.
+
+11. Collect rating and review data using hybrid approach:
    - Primary: Extract ratings displayed on website (Google/Yelp badges, testimonials)
    - Secondary: Use your knowledge of typical ratings for this center
    - Aggregate from all sources into single rating and total review count
