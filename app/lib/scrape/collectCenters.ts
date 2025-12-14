@@ -4,6 +4,7 @@ import discoverCenters from "~/lib/scrape/discoverCenters";
 import enrichCenter from "~/lib/scrape/enrichCenter";
 import RateLimiter from "~/lib/scrape/rateLimiter";
 import scrapeCenter from "~/lib/scrape/scrapeCenter";
+import validateImages from "~/lib/scrape/validateImages";
 import writeCenterFile from "~/lib/scrape/writeCenterFile";
 
 export default async function collectCenters(countyName: string) {
@@ -38,10 +39,29 @@ export default async function collectCenters(countyName: string) {
       if (scrapedData.error)
         console.error("  ⚠ Scraping failed, using LLM-only mode");
 
+      // Stage 2.5: Validate images
+      let validImages: string[] = [];
+      try {
+        console.info("  Validating images...");
+        const scrapedImages = scrapedData.images || [];
+        validImages = await validateImages(scrapedImages);
+        console.info(
+          `  ${scrapedImages.length} scraped → ${validImages.length} validated`,
+        );
+      } catch (error) {
+        console.error(
+          `  ⚠ Image validation failed: ${error instanceof Error ? error.message : String(error)}`,
+        );
+        validImages = [];
+      }
+
       // Stage 3: Enrichment
       console.info("  Enriching data...");
       await rateLimiter.throttle();
-      const enrichedData = await enrichCenter(center, scrapedData);
+      const enrichedData = await enrichCenter(center, {
+        ...scrapedData,
+        images: validImages,
+      });
 
       // Stage 4: Write to file
       console.info("  Writing to file...");

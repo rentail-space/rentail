@@ -80,7 +80,11 @@ Tasks:
 2. Write a compelling 2-3 sentence description
 3. Create a one-sentence summary that captures the essence of the shopping center
 4. Extract: phone (format as E.164: +1XXXXXXXXXX for US numbers), hours (openFrom as HHMM like 930, openUntil as HHMM like 2100), square footage, store count
-5. Select best 3-5 images (prioritize exterior/interior shots)
+5. Select the single best image that represents this shopping center
+   - Prioritize: exterior shot showing building/signage
+   - Fallback: interior shot showing main concourse/atrium
+   - The image should be immediately recognizable as this specific center
+   - If no images available, set imageURLs to empty array
 6. Note any demographic info mentioned
 7. If you find individual retail spaces listed, include them
 8. Set country to "USA"
