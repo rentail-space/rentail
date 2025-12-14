@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import prisma from "~/lib/prisma";
-import getUSState from "./usStates";
+import getUSState from "./getUSState";
 
 export async function loader() {
   const states = await prisma.property.groupBy({
@@ -17,9 +17,7 @@ export default function StatePage({
   loaderData: {
     states: {
       state: string;
-      _count: {
-        _all: number;
-      };
+      _count: { _all: number };
     }[];
   };
 }) {

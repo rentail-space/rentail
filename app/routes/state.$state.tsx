@@ -4,7 +4,7 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
 import prisma from "~/lib/prisma";
 import type { Route } from "./+types/state.$state";
-import getUSState from "./usStates";
+import getUSState from "./getUSState";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const state = params.state.toUpperCase();
