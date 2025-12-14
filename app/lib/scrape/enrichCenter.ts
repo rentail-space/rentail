@@ -104,7 +104,13 @@ Tasks:
    - Fallback: interior shot showing main concourse/atrium
    - The image should be immediately recognizable as this specific center
    - If no images available, set imageURLs to empty array
-6. Note any demographic info mentioned
+6. Research and write a comprehensive demographic summary for this shopping center
+   - Include visitor demographics (age groups, income levels, household composition)
+   - Describe the trade area characteristics and primary market segments
+   - Note shopping patterns and preferences of typical visitors
+   - Reference any demographic data from the website or your knowledge of the area
+   - Format as a 3-5 sentence narrative summary (not bullet points)
+   - If no reliable demographic information is available, set to null
 7. If you find individual retail spaces listed, include them
 8. Set country to "USA"
 9. Classify centerType using this hybrid approach:
