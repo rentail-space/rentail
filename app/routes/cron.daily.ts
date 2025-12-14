@@ -1,6 +1,5 @@
 import { convertToModelMessages, generateObject } from "ai";
 import { DateTime } from "luxon";
-import type { UserGetPayload } from "prisma/generated/models";
 import zod from "zod";
 import sendDailyAlertEmail from "~/emails/EmailDailyAlert";
 import { classify } from "~/lib/model";
@@ -8,6 +7,7 @@ import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
 import { recentMessages } from "~/lib/sessions.server";
 import dailyAlertPrompt from "~/prompts/dailyAlertPrompt.md?raw";
+import type { UserGetPayload } from "prisma/generated/models";
 
 export async function loader() {
   const users = await prisma.user.findMany({

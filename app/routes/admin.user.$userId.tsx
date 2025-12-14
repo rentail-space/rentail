@@ -1,8 +1,5 @@
-import type { TextUIPart } from "ai";
 import { ArrowLeft, ArrowRight, CircleCheck } from "lucide-react";
 import { DateTime } from "luxon";
-import type { User } from "prisma/generated/client";
-import type { ChatGetPayload } from "prisma/generated/models";
 import { Link, useFetcher } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { StickToBottom } from "use-stick-to-bottom";
@@ -20,8 +17,11 @@ import deviceDetection from "~/lib/deviceDetection";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
-import type { Route } from "./+types/admin.user.$userId";
 import Messages from "./chat/Messages";
+import type { TextUIPart } from "ai";
+import type { User } from "prisma/generated/client";
+import type { ChatGetPayload } from "prisma/generated/models";
+import type { Route } from "./+types/admin.user.$userId";
 
 export async function loader({ params, request }: Route.LoaderArgs) {
   await verifyAdmin(request.headers);

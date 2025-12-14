@@ -1,8 +1,8 @@
 import { NavLink } from "react-router";
 import { twMerge } from "tailwind-merge";
 import AccountMenu from "./AccountMenu";
-import type { HeaderLink } from "./PageLayout";
 import RentailIcon from "./RentailLogo";
+import type { HeaderLink } from "./PageLayout";
 
 export default function PageHeader({ links }: { links?: HeaderLink[] }) {
   return (

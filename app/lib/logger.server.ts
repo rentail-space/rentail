@@ -1,9 +1,9 @@
-import { Logtail } from "@logtail/node";
-import type { ILogLevel } from "@logtail/types";
 import { createWriteStream } from "node:fs";
 import { resolve } from "node:path";
 import { format, styleText } from "node:util";
+import { Logtail } from "@logtail/node";
 import envVars from "~/lib/env";
+import type { ILogLevel } from "@logtail/types";
 
 const logtail = envVars.LOGTAIL_TOKEN
   ? new Logtail(envVars.LOGTAIL_TOKEN, {

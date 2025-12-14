@@ -1,7 +1,7 @@
-import type { PropertyGetPayload } from "prisma/generated/models";
 import prisma from "~/lib/prisma";
-import type { Route } from "./+types/route";
 import Center from "./Center";
+import type { PropertyGetPayload } from "prisma/generated/models";
+import type { Route } from "./+types/route";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const center = await prisma.property.findUnique({

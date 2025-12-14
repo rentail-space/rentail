@@ -1,7 +1,7 @@
-import debug from "debug";
-import { readdirSync } from "node:fs";
+import { readdirSync, statSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path, { basename, resolve } from "node:path";
+import debug from "debug";
 import { z } from "zod";
 import prisma from "~/lib/prisma";
 
@@ -41,12 +41,28 @@ const schema = z.object({
 
 const logger = debug("seed");
 
+function findJSONFiles(dir: string): string[] {
+  const results: string[] = [];
+  const entries = readdirSync(dir);
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry);
+    const stat = statSync(fullPath);
+
+    if (stat.isDirectory()) {
+      results.push(...findJSONFiles(fullPath));
+    } else if (entry.endsWith(".json")) {
+      results.push(fullPath);
+    }
+  }
+
+  return results;
+}
+
 export default async function seedCenters() {
   logger("Seeding centers");
   const dirname = resolve("prisma/seed");
-  const filenames = readdirSync(dirname).filter((filename) =>
-    filename.endsWith(".json"),
-  );
+  const filenames = findJSONFiles(dirname);
 
   for (const filename of filenames) {
     logger("Seeding %s", filename);

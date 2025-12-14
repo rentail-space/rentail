@@ -1,7 +1,7 @@
-import type { PropertyGetPayload } from "prisma/generated/models";
 import { Activity, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { cn } from "~/lib/utils";
+import type { PropertyGetPayload } from "prisma/generated/models";
 
 /**
  * A list of centers that are nearby the user.

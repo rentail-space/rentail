@@ -1,12 +1,12 @@
-import type { UIMessage } from "ai";
-import type React from "react";
 import { Children, type JSX, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
-import type { ScrollToBottom } from "use-stick-to-bottom";
 import { cn } from "~/lib/utils";
 import { maskWorkingMemoryTags } from "~/lib/workingMemory";
+import type { UIMessage } from "ai";
+import type React from "react";
+import type { ScrollToBottom } from "use-stick-to-bottom";
 
 export default function ResponseMessage({
   askQuestion,

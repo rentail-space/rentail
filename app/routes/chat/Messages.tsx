@@ -1,10 +1,10 @@
-import type { UIMessage } from "ai";
 import { useEffect, useRef } from "react";
 import { BeatLoading } from "respinner";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import { cn } from "~/lib/utils";
 import askQuestion from "~/routes/chat/askQuestion";
 import ResponseMessage from "./ResponseMessage";
+import type { UIMessage } from "ai";
 
 export default function Messages({
   isAborted,

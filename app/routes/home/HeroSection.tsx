@@ -1,7 +1,7 @@
 import { invariant } from "es-toolkit";
 import { Link } from "react-router";
-import type { ImageObject } from "schema-dts";
 import schema from "~/data/schema.json";
+import type { ImageObject } from "schema-dts";
 
 export default function HeroSection() {
   const heroImage = schema["@graph"].find(

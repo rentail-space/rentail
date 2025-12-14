@@ -10,12 +10,12 @@ import PageHeader from "~/components/layout/PageHeader";
 import findNearbyCenters from "~/lib/findNearbyCenters";
 import { findUserAndLastChat } from "~/lib/sessions.server";
 import welcome from "~/prompts/welcome.md?raw";
-import type { loader as rootLoader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
-import type { Route } from "./+types/route";
 import Centers from "./Centers";
+import type { loader as rootLoader } from "~/root";
+import type { Route } from "./+types/route";
 
 export const handle = { hideLayout: true };
 

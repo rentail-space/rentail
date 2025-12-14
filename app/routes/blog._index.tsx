@@ -1,6 +1,6 @@
 import BlogPostsGrid from "~/components/ui/BlogPostsGrid";
-import type { BlogPost } from "~/lib/blogPosts.server";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
+import type { BlogPost } from "~/lib/blogPosts.server";
 
 export const handle = { showHeader: true, showFooter: true };
 

@@ -1,7 +1,6 @@
 import { captureException } from "@sentry/react-router";
 import bcrypt from "bcrypt";
 import { invariant } from "es-toolkit";
-import type { User } from "prisma/generated/client";
 import { useState } from "react";
 import { redirect, useLoaderData } from "react-router";
 import { ulid } from "ulid";
@@ -12,6 +11,7 @@ import { findUserAndLastChat } from "~/lib/sessions.server";
 import ProfileEmailForm from "./ProfileEmailForm";
 import ProfileNameForm from "./ProfileNameForm";
 import ProfilePasswordForm from "./ProfilePasswordForm";
+import type { User } from "prisma/generated/client";
 
 export const handle = { headerLinks: [] };
 

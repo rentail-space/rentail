@@ -1,5 +1,3 @@
-import type { PropertySpace, User } from "prisma/generated/client";
-import type { PropertyGetPayload } from "prisma/generated/models";
 import {
   cleanParseWorkingMemory,
   workingMemoryExample,
@@ -8,6 +6,8 @@ import generalDirectives from "~/prompts/generalDirectives.md?raw";
 import envVars from "./env";
 import findNearbyCenters from "./findNearbyCenters";
 import prisma from "./prisma";
+import type { PropertySpace, User } from "prisma/generated/client";
+import type { PropertyGetPayload } from "prisma/generated/models";
 
 /**
  * Prepare the prompt by replacing the placeholders with the actual values.

@@ -1,9 +1,9 @@
 import { Button, Section, Text } from "@react-email/components";
-import type { User } from "prisma/generated/client";
 import * as styles from "~/emails/styles";
 import envVars from "~/lib/env";
 import EmailLayout from "./EmailLayout";
 import { sendEmail } from "./sendEmails";
+import type { User } from "prisma/generated/client";
 
 /**
  * Notify admin of new user creation.  This is only sent in production.

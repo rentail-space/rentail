@@ -1,6 +1,6 @@
+import { resolve } from "node:path";
 import dotenv from "dotenv";
 import { invariant } from "es-toolkit";
-import { resolve } from "node:path";
 import { defineConfig } from "prisma/config";
 
 // Load environment variables only if not already set (e.g., by Doppler)
