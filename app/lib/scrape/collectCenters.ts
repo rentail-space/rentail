@@ -1,5 +1,8 @@
 #!/usr/bin/env tsx
 
+import { existsSync } from "node:fs";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { delay } from "es-toolkit";
 import discoverCenters from "~/lib/scrape/discoverCenters";
 import enrichCenter from "~/lib/scrape/enrichCenter";
@@ -10,16 +13,99 @@ import scrapeLoopNet from "~/lib/scrape/scrapeLoopNet";
 import scrapeSpaces from "~/lib/scrape/scrapeSpaces";
 import validateImages from "~/lib/scrape/validateImages";
 
+interface DiscoveryCache {
+  query: string;
+  centers: Array<{
+    name: string;
+    address: string;
+    city: string;
+    state: string;
+    website?: string;
+    latitude: number;
+    longitude: number;
+  }>;
+  discoveredAt: string;
+}
+
+function getCacheFilePath(query: string): string {
+  // Create slug from query for filename
+  const slug = query
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+  return resolve(".cache", `discovery-${slug}.json`);
+}
+
 export default async function collectCenters(countyName: string) {
   console.info('Starting collection for: "%s"', countyName);
 
   // Rate limiter: 1.2s between API calls (~50/min)
   const rateLimiter = new RateLimiter(1200);
 
-  // Stage 1: Discovery
-  console.info("\x1b[32m  Stage 1: Discovering centers...\x1b[0m");
-  await rateLimiter.throttle();
-  const centers = await discoverCenters(countyName);
+  // Stage 1: Discovery (with caching)
+  const cacheDir = resolve(".cache");
+  if (!existsSync(cacheDir)) {
+    await mkdir(cacheDir, { recursive: true });
+  }
+
+  const cacheFile = getCacheFilePath(countyName);
+  let centers: Array<{
+    name: string;
+    address: string;
+    city: string;
+    state: string;
+    website?: string;
+    latitude: number;
+    longitude: number;
+  }>;
+
+  // Try to load from cache
+  if (existsSync(cacheFile)) {
+    try {
+      const cacheData = await readFile(cacheFile, "utf-8");
+      const cache: DiscoveryCache = JSON.parse(cacheData);
+
+      if (cache.query === countyName) {
+        console.info(
+          "\x1b[32m  ✓ Loaded %d centers from cache (discovered: %s)\x1b[0m",
+          cache.centers.length,
+          cache.discoveredAt,
+        );
+        centers = cache.centers;
+      } else {
+        throw new Error("Query mismatch");
+      }
+    } catch {
+      // Cache invalid, run discovery
+      console.info("\x1b[33m  ⚠ Cache invalid, discovering...\x1b[0m");
+      console.info("\x1b[32m  Stage 1: Discovering centers...\x1b[0m");
+      await rateLimiter.throttle();
+      centers = await discoverCenters(countyName);
+
+      // Save to cache
+      const cache: DiscoveryCache = {
+        query: countyName,
+        centers,
+        discoveredAt: new Date().toISOString(),
+      };
+      await writeFile(cacheFile, JSON.stringify(cache, null, 2));
+      console.info("\x1b[32m  ✓ Saved discovery cache\x1b[0m");
+    }
+  } else {
+    // No cache, run discovery
+    console.info("\x1b[32m  Stage 1: Discovering centers...\x1b[0m");
+    await rateLimiter.throttle();
+    centers = await discoverCenters(countyName);
+
+    // Save to cache
+    const cache: DiscoveryCache = {
+      query: countyName,
+      centers,
+      discoveredAt: new Date().toISOString(),
+    };
+    await writeFile(cacheFile, JSON.stringify(cache, null, 2));
+    console.info("\x1b[32m  ✓ Saved discovery cache\x1b[0m");
+  }
 
   let successCount = 0;
   let failCount = 0;
