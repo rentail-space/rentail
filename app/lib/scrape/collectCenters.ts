@@ -6,6 +6,7 @@ import enrichCenter from "~/lib/scrape/enrichCenter";
 import RateLimiter from "~/lib/scrape/rateLimiter";
 import saveCenterFile from "~/lib/scrape/saveCenterFile";
 import scrapeCenter from "~/lib/scrape/scrapeCenter";
+import scrapeLoopNet from "~/lib/scrape/scrapeLoopNet";
 import validateImages from "~/lib/scrape/validateImages";
 
 export default async function collectCenters(countyName: string) {
@@ -26,7 +27,7 @@ export default async function collectCenters(countyName: string) {
   for (let i = 0; i < centers.length; i++) {
     const center = centers[i];
     try {
-      // Stage 2: Scraping
+      // Stage 2: Scraping website
       let scrapedData = {};
       if (center.website) {
         await delay(2000 + Math.random() * 1000);
@@ -35,16 +36,32 @@ export default async function collectCenters(countyName: string) {
         console.info("\x1b[33m  ⚠ No website found, skipping scrape\x1b[0m");
       }
 
+      // Stage 2b: Scraping LoopNet
+      await delay(2000 + Math.random() * 1000);
+      const loopNetData = await scrapeLoopNet(
+        center.name,
+        center.city,
+        center.state,
+      );
+
       // Stage 2.5: Validate images
       let validImages: string[] = [];
-      const scrapedImages =
-        "images" in scrapedData ? scrapedData.images || [] : [];
-      validImages = await validateImages(scrapedImages as string[]);
+      const scrapedImages: string[] =
+        "images" in scrapedData && Array.isArray(scrapedData.images)
+          ? scrapedData.images
+          : [];
+      const loopNetImages: string[] =
+        "images" in loopNetData && Array.isArray(loopNetData.images)
+          ? loopNetData.images
+          : [];
+      const allImages = [...scrapedImages, ...loopNetImages];
+      validImages = await validateImages(allImages);
 
       // Stage 3: Enrichment
       await rateLimiter.throttle();
       const enrichedData = await enrichCenter(center, {
         ...scrapedData,
+        ...loopNetData,
         images: validImages,
       });
 

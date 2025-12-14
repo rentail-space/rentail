@@ -60,6 +60,8 @@ interface ScrapedData {
   images?: string[];
   title?: string;
   description?: string | null;
+  leasableArea?: number;
+  numberOfProperties?: number;
   error?: string;
 }
 
@@ -72,6 +74,11 @@ export default async function enrichCenter(
 
 Discovery Info: ${JSON.stringify(discoveryData)}
 Scraped Website: ${scrapedData.bodyText?.slice(0, 10000) || "No data"}
+LoopNet Data: ${JSON.stringify({
+    leasableArea: scrapedData.leasableArea,
+    numberOfProperties: scrapedData.numberOfProperties,
+    description: scrapedData.description,
+  })}
 Images Found: ${scrapedData.images?.length || 0} images
 
 Extract and structure the following into valid JSON matching this schema:
@@ -79,9 +86,11 @@ ${JSON.stringify(centerSchema.shape, null, 2)}
 
 Tasks:
 1. Verify/correct the address and coordinates
-2. Write a compelling 2-3 sentence description
+2. Write a compelling 2-3 sentence description (prioritize LoopNet description if available)
 3. Create a one-sentence summary that captures the essence of the shopping center
-4. Extract: phone (format as E.164: +1XXXXXXXXXX for US numbers), hours (openFrom as HHMM like 930, openUntil as HHMM like 2100), square footage, store count
+4. Extract: phone (format as E.164: +1XXXXXXXXXX for US numbers), hours (openFrom as HHMM like 930, openUntil as HHMM like 2100)
+   - Square footage: PREFER LoopNet leasableArea if available, otherwise use website data
+   - Store/building count: PREFER LoopNet numberOfProperties if available, otherwise use website data
 5. Select the single best image that represents this shopping center
    - Prioritize: exterior shot showing building/signage
    - Fallback: interior shot showing main concourse/atrium
