@@ -334,7 +334,7 @@ export async function scrapeCenter(url: string): Promise<ScrapedData> {
   const page = await browser.newPage();
 
   try {
-    await page.goto(url, { timeout: 30000 });
+    await page.goto(url, { timeout: 30_000 });
 
     const bodyText = (await page.textContent("body")) || "";
     const images = await page.$$eval("img", (imgs) =>
@@ -1029,7 +1029,7 @@ describe("collectCenters integration", () => {
     // Use a small county to limit API calls
     const { stdout, stderr } = await execAsync(
       'tsx scripts/collectCenters.ts "Santa Barbara County, CA"',
-      { timeout: 180000 }, // 3 minute timeout
+      { timeout: 180_000 }, // 3 minute timeout
     );
 
     expect(stderr).toBe("");
@@ -1039,7 +1039,7 @@ describe("collectCenters integration", () => {
     // Verify at least one file was created
     const hasCenters = existsSync("prisma/seed/ca/santa-barbara");
     expect(hasCenters).toBe(true);
-  }, 180000);
+  }, 180_000);
 });
 ```
 

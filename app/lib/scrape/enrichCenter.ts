@@ -13,7 +13,7 @@ const centerSchema = z.object({
   longitude: z.number(),
   squareFootage: z.number(),
   numberOfStores: z.number(),
-  website: z.string(),
+  website: z.string().optional(),
   phone: z.string().optional(),
   imageURLs: z.array(z.string().url()),
   logoURL: z.string().url().optional(),
@@ -50,7 +50,7 @@ interface DiscoveryData {
   address: string;
   city: string;
   state: string;
-  website: string;
+  website?: string;
   latitude: number;
   longitude: number;
 }

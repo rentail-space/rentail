@@ -14,7 +14,7 @@ const discoverySchema = z.object({
         .string()
         .min(2, "State must be at least 2 characters")
         .max(2, "State must be 2-letter code"),
-      website: z.string().url("Must be a valid URL"),
+      website: z.string().url("Must be a valid URL").optional(),
       latitude: z
         .number()
         .min(-90, "Latitude must be >= -90")
@@ -67,7 +67,10 @@ Exclude individual stores or single-building retail.`;
       "\x1b[32m  Found %d centers:\n%s\x1b[0m",
       centers.length,
       centers
-        .map((center) => `  ${center.name} - ${center.website}`)
+        .map(
+          (center) =>
+            `  ${center.name}${center.website ? ` - ${center.website}` : ""}`,
+        )
         .join("\n"),
     );
     return centers;

@@ -98,7 +98,7 @@ Follow existing pattern from `scrapeStonewood.ts`:
 ```typescript
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();
-await page.goto(websiteUrl, { timeout: 30000 });
+await page.goto(websiteUrl, { timeout: 30_000 });
 ```
 
 ### Data Extraction Strategy

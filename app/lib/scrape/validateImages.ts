@@ -60,7 +60,7 @@ async function validateImageSet(
     try {
       // Download with 10s timeout
       const response = await fetch(url, {
-        signal: AbortSignal.timeout(10000),
+        signal: AbortSignal.timeout(10_000),
       });
 
       if (!response.ok) continue;
