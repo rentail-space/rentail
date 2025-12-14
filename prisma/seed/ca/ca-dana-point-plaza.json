@@ -1,0 +1,17 @@
+{
+  "name": "Dana Point Plaza",
+  "city": "Dana Point",
+  "state": "CA",
+  "country": "USA",
+  "address": "34111 La Plaza",
+  "latitude": 33.4673,
+  "longitude": -117.6989,
+  "squareFootage": 65000,
+  "numberOfStores": 12,
+  "website": "https://www.danapointplaza.com",
+  "imageURLs": [],
+  "description": "Dana Point Plaza is a convenient neighborhood shopping center located in the heart of Dana Point, California, serving the local coastal community with a variety of essential services and retail offerings. This open-air plaza provides easy access to everyday shopping needs in a relaxed Southern California beach town atmosphere.",
+  "summary": "A neighborhood shopping plaza in Dana Point offering convenient retail and services for the local coastal community.",
+  "centerType": "StripCenter",
+  "spaces": []
+}

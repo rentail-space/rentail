@@ -1,15 +1,14 @@
+import ora from "ora";
 import { chromium } from "playwright";
 
-interface ScrapedData {
+export default async function scrapeCenter(url: string): Promise<{
   bodyText?: string;
   images?: string[];
   title?: string;
   description?: string | null;
   error?: string;
-}
-
-export default async function scrapeCenter(url: string): Promise<ScrapedData> {
-  console.info("\x1b[32m  Scraping website: %s\x1b[0m", url);
+}> {
+  const spinner = ora(`Scraping website: ${url}`).start();
 
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
@@ -27,6 +26,7 @@ export default async function scrapeCenter(url: string): Promise<ScrapedData> {
       .catch(() => null);
 
     await browser.close();
+    spinner.succeed(`Scraped website: ${url}`);
 
     return {
       bodyText,
@@ -36,9 +36,8 @@ export default async function scrapeCenter(url: string): Promise<ScrapedData> {
     };
   } catch (_error) {
     await browser.close();
-    console.error(
-      "\x1b[31m  ⚠ Scraping failed: %s\x1b[0m",
-      _error instanceof Error ? _error.message : String(_error),
+    spinner.fail(
+      `Scraping failed: ${_error instanceof Error ? _error.message : String(_error)}`,
     );
     return { error: "scraping_failed" };
   }

@@ -1,0 +1,17 @@
+{
+  "name": "Saddleback Valley Center",
+  "city": "Mission Viejo",
+  "state": "CA",
+  "country": "USA",
+  "address": "28565 Marguerite Parkway",
+  "latitude": 33.5989,
+  "longitude": -117.6564,
+  "squareFootage": 125000,
+  "numberOfStores": 15,
+  "website": "https://www.saddlebackvalleycenter.com",
+  "imageURLs": [],
+  "description": "Saddleback Valley Center is a convenient neighborhood shopping center located in Mission Viejo, California, serving the local community with essential retail and services. Strategically positioned on Marguerite Parkway, this center provides easy access to everyday shopping needs in a comfortable open-air environment.",
+  "summary": "A neighborhood shopping center in Mission Viejo offering convenient retail and services for the local community.",
+  "centerType": "StripCenter",
+  "spaces": []
+}

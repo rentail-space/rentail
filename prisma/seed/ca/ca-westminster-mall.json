@@ -1,0 +1,21 @@
+{
+  "name": "Westminster Mall",
+  "city": "Westminster",
+  "state": "CA",
+  "country": "USA",
+  "address": "1025 Westminster Mall",
+  "latitude": 33.7513,
+  "longitude": -117.9939,
+  "squareFootage": 850000,
+  "numberOfStores": 80,
+  "website": "https://www.westminstermall.com",
+  "phone": "+17148923467",
+  "imageURLs": [],
+  "description": "Westminster Mall has been a cornerstone of the Westminster, California community for over 50 years, serving as a gathering place for shopping and community events. The center features Target as an anchor tenant and has been managed by WPG (Washington Prime Group). The mall appears to be in transition or winding down operations based on the farewell message displayed on the website.",
+  "demographics": "null",
+  "summary": "A longstanding regional mall in Westminster, California that has served the community for over 50 years with Target as a primary anchor.",
+  "rating": 35,
+  "reviewCount": 850,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Brea Mall",
+  "city": "Brea",
+  "state": "CA",
+  "country": "USA",
+  "address": "1065 Brea Mall",
+  "latitude": 33.9147,
+  "longitude": -117.8864,
+  "squareFootage": 1100000,
+  "numberOfStores": 175,
+  "website": "https://www.simon.com/mall/brea-mall",
+  "phone": "+17149900590",
+  "imageURLs": [],
+  "description": "Brea Mall is a premier enclosed regional shopping destination in Orange County, California, featuring over 175 stores and restaurants including Macy's, Nordstrom, and JCPenney as anchor tenants. This Simon Property mall offers an upscale shopping experience with a diverse mix of national retailers, popular dining options, and entertainment venues in the heart of Brea's commercial district.",
+  "demographics": "Affluent Southern California families and young professionals in the Orange County area with strong Asian-American representation",
+  "summary": "A major enclosed shopping mall in Orange County with 175+ stores anchored by Nordstrom, Macy's, and JCPenney, serving the affluent Brea community.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 43,
+  "reviewCount": 8500,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

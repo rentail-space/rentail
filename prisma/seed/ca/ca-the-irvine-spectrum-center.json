@@ -1,0 +1,22 @@
+{
+  "name": "The Irvine Spectrum Center",
+  "city": "Irvine",
+  "state": "CA",
+  "country": "USA",
+  "address": "670 Spectrum Center Drive",
+  "latitude": 33.6517,
+  "longitude": -117.7417,
+  "squareFootage": 1100000,
+  "numberOfStores": 130,
+  "website": "https://www.irvinespectrumcenter.com",
+  "imageURLs": [],
+  "description": "The Irvine Spectrum Center is Orange County's premier open-air lifestyle destination featuring over 130 stores and restaurants, iconic attractions including a Giant Wheel and carousel, and year-round entertainment. Celebrating 30 years of serving the community, this upscale center combines high-end retail with diverse dining options and family-friendly attractions in a vibrant outdoor setting. The center hosts seasonal events, live music, an ice rink, and creates memorable experiences for visitors of all ages.",
+  "demographics": "Affluent families and young professionals in Orange County, California seeking upscale shopping, dining, and entertainment experiences",
+  "summary": "Southern California's iconic open-air lifestyle center combining upscale shopping, acclaimed dining, and unique entertainment attractions including a Giant Wheel and seasonal ice rink.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 45,
+  "reviewCount": 25000,
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Canyon Springs Marketplace",
+  "city": "Riverside",
+  "state": "CA",
+  "country": "USA",
+  "address": "5225 Canyon Crest Drive",
+  "latitude": 33.9739,
+  "longitude": -117.3281,
+  "squareFootage": 120000,
+  "numberOfStores": 15,
+  "website": "https://www.canyonspringsmarketplace.com",
+  "imageURLs": [],
+  "description": "Canyon Springs Marketplace is a convenient neighborhood shopping center located in Riverside's Canyon Crest area, serving the local community with everyday retail and service options. The center provides easy access to essential shopping and dining in a well-maintained open-air format. Strategically positioned along Canyon Crest Drive, it caters to residents of surrounding neighborhoods with convenient parking and accessibility.",
+  "summary": "A neighborhood shopping center in Riverside offering convenient access to everyday retail and services for the Canyon Crest community.",
+  "centerType": "StripCenter",
+  "spaces": []
+}

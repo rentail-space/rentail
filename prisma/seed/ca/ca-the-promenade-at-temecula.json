@@ -1,0 +1,17 @@
+{
+  "name": "The Promenade at Temecula",
+  "city": "Temecula",
+  "state": "CA",
+  "country": "USA",
+  "address": "40820 Winchester Road",
+  "latitude": 33.5069,
+  "longitude": -117.1481,
+  "squareFootage": 500000,
+  "numberOfStores": 110,
+  "website": "https://www.promenadeatemecula.com",
+  "imageURLs": [],
+  "description": "The Promenade at Temecula is a premier shopping destination in Southern California's wine country, featuring a diverse mix of popular retailers, dining options, and entertainment venues. This vibrant lifestyle center serves the growing Temecula Valley community with both national brands and local favorites in an inviting open-air setting. Located along Winchester Road, it offers convenient access to residents and visitors exploring the region's renowned wineries and attractions.",
+  "summary": "An open-air lifestyle center in Temecula's wine country offering diverse shopping, dining, and entertainment experiences for the Southern California community.",
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

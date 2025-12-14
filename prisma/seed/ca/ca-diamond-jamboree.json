@@ -1,0 +1,23 @@
+{
+  "name": "Diamond Jamboree",
+  "city": "Irvine",
+  "state": "CA",
+  "country": "USA",
+  "address": "2625 Irvine Center Drive",
+  "latitude": 33.6586,
+  "longitude": -117.7472,
+  "squareFootage": 120000,
+  "numberOfStores": 30,
+  "website": "https://www.diamondjamboree.com",
+  "phone": "+19498579888",
+  "imageURLs": [],
+  "description": "Diamond Jamboree is a distinctive Asian-themed shopping center in Irvine's bustling business district, featuring a curated mix of authentic Asian restaurants, cafes, and specialty retailers. Known for its diverse culinary offerings including Korean, Chinese, Japanese, and Vietnamese cuisine, the center has become a premier destination for food enthusiasts and families seeking an authentic cultural experience. With its modern architecture and vibrant atmosphere, Diamond Jamboree serves as a cultural hub connecting Orange County's diverse communities.",
+  "demographics": "Affluent Asian-American community with high household incomes, attracting visitors seeking authentic Asian dining and shopping experiences in Orange County",
+  "summary": "A vibrant Asian-themed shopping and dining destination in Irvine offering authentic cuisine and cultural experiences for Orange County's diverse communities.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 43,
+  "reviewCount": 2800,
+  "centerType": "StripCenter",
+  "spaces": []
+}

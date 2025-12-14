@@ -1,0 +1,23 @@
+{
+  "name": "Manhattan Village",
+  "city": "Manhattan Beach",
+  "state": "CA",
+  "country": "USA",
+  "address": "3200 Sepulveda Boulevard",
+  "latitude": 33.8989,
+  "longitude": -118.3931,
+  "squareFootage": 562000,
+  "numberOfStores": 60,
+  "website": "https://www.manhattan-village.com",
+  "phone": "+13105460020",
+  "imageURLs": [],
+  "description": "Manhattan Village is an upscale open-air shopping center in the heart of Manhattan Beach, featuring premier retailers, dining destinations, and a vibrant community atmosphere. With Macy's as its anchor store and a carefully curated mix of fashion, lifestyle, and specialty shops, this center serves the affluent beach communities of the South Bay. The center combines California coastal style with sophisticated shopping in a pedestrian-friendly outdoor setting.",
+  "demographics": "Serves affluent Manhattan Beach and South Bay communities with high household incomes, strong education levels, and a lifestyle-oriented demographic focused on quality and beach culture.",
+  "summary": "Manhattan Village is an upscale open-air lifestyle center in Manhattan Beach offering premier shopping, dining, and entertainment for the South Bay's coastal communities.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 44,
+  "reviewCount": 3200,
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

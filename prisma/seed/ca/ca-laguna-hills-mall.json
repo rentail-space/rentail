@@ -1,0 +1,17 @@
+{
+  "name": "Laguna Hills Mall",
+  "city": "Laguna Hills",
+  "state": "CA",
+  "country": "USA",
+  "address": "24155 Laguna Hills Mall",
+  "latitude": 33.5986,
+  "longitude": -117.7283,
+  "squareFootage": 650000,
+  "numberOfStores": 85,
+  "website": "https://www.lagunahillsmall.com",
+  "imageURLs": [],
+  "description": "Laguna Hills Mall is a prominent regional shopping destination in Orange County, featuring a diverse mix of national retailers, dining options, and entertainment venues. Conveniently located off the I-5 freeway, this enclosed mall serves the surrounding communities with a comfortable shopping experience and popular anchor stores.",
+  "summary": "A well-established regional mall in Orange County offering diverse shopping, dining, and entertainment options for the surrounding communities.",
+  "centerType": "RegionalMall",
+  "spaces": []
+}

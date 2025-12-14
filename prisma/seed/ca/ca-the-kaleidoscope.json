@@ -1,0 +1,17 @@
+{
+  "name": "The Kaleidoscope",
+  "city": "Mission Viejo",
+  "state": "CA",
+  "country": "USA",
+  "address": "27741 Crown Valley Parkway",
+  "latitude": 33.6044,
+  "longitude": -117.6611,
+  "squareFootage": 180000,
+  "numberOfStores": 20,
+  "website": "https://www.thekaleidoscopemv.com",
+  "imageURLs": [],
+  "description": "The Kaleidoscope is a premier open-air lifestyle center in Mission Viejo, featuring upscale retail, dining, and entertainment options in a pedestrian-friendly environment. Known for its distinctive architecture and vibrant atmosphere, this destination shopping center serves the affluent South Orange County community with a curated mix of national brands and local favorites. The center's design creates an inviting outdoor plaza experience that has made it a popular gathering spot for residents and visitors alike.",
+  "summary": "An upscale open-air lifestyle center in Mission Viejo offering a curated mix of shopping, dining, and entertainment in a vibrant outdoor setting.",
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

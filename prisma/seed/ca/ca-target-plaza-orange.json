@@ -1,0 +1,17 @@
+{
+  "name": "Target Plaza Orange",
+  "city": "Orange",
+  "state": "CA",
+  "country": "USA",
+  "address": "2600 North Tustin Avenue",
+  "latitude": 33.8222,
+  "longitude": -117.8267,
+  "squareFootage": 85000,
+  "numberOfStores": 8,
+  "website": "https://www.targetplazaorange.com",
+  "imageURLs": [],
+  "description": "Target Plaza Orange is a convenient neighborhood shopping center located on North Tustin Avenue in Orange, California. Anchored by Target, this plaza serves the local community with essential retail and services in a well-maintained, accessible open-air format. Its prime location offers easy access for residents in the surrounding neighborhoods.",
+  "summary": "A Target-anchored neighborhood shopping plaza serving the Orange community with convenient retail and services.",
+  "centerType": "StripCenter",
+  "spaces": []
+}

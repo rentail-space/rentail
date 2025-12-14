@@ -30,7 +30,13 @@ export default async function collectCenters(countyName: string) {
     try {
       // Stage 2: Scraping website
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let scrapedData: any = {};
+      let scrapedData: {
+        bodyText?: string;
+        images?: string[];
+        title?: string;
+        description?: string | null;
+        error?: string;
+      } = {};
       if (center.website) {
         await delay(2000 + Math.random() * 1000);
         scrapedData = await scrapeCenter(center.website);
@@ -64,7 +70,10 @@ export default async function collectCenters(countyName: string) {
       // Stage 2.5: Validate images
       let validImages: string[] = [];
       const scrapedImages: string[] =
-        "images" in scrapedData && Array.isArray(scrapedData.images)
+        typeof scrapedData === "object" &&
+        scrapedData !== null &&
+        "images" in scrapedData &&
+        Array.isArray(scrapedData.images)
           ? scrapedData.images
           : [];
       const loopNetImages: string[] =

@@ -1,0 +1,17 @@
+{
+  "name": "The District at Tustin Legacy",
+  "city": "Tustin",
+  "state": "CA",
+  "country": "USA",
+  "address": "2437 Park Avenue",
+  "latitude": 33.7256,
+  "longitude": -117.8108,
+  "squareFootage": 500000,
+  "numberOfStores": 40,
+  "website": "https://www.shopdistricttustin.com",
+  "imageURLs": [],
+  "description": "The District at Tustin Legacy is a vibrant open-air lifestyle center located in Tustin, California, offering a premier shopping and dining destination on the site of the former Marine Corps Air Station. This modern retail hub features a diverse mix of popular retailers, restaurants, entertainment venues, and services in a walkable, contemporary setting that serves the Orange County community.",
+  "summary": "A modern open-air lifestyle center in Tustin offering diverse shopping, dining, and entertainment options on the historic Tustin Legacy site.",
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

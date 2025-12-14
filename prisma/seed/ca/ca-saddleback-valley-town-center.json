@@ -1,0 +1,17 @@
+{
+  "name": "Saddleback Valley Town Center",
+  "city": "Mission Viejo",
+  "state": "CA",
+  "country": "USA",
+  "address": "28502 Marguerite Parkway",
+  "latitude": 33.5547,
+  "longitude": -117.6611,
+  "squareFootage": 350000,
+  "numberOfStores": 40,
+  "website": "https://www.saddlebackvalleytowncenter.com",
+  "imageURLs": [],
+  "description": "Saddleback Valley Town Center is a popular open-air shopping destination in Mission Viejo, serving the affluent South Orange County community with a diverse mix of national retailers, dining options, and services. The center features convenient access from Marguerite Parkway and provides ample parking for shoppers visiting its well-maintained plaza layout.",
+  "summary": "A community-focused open-air shopping center offering diverse retail, dining, and service options in the heart of Mission Viejo.",
+  "centerType": "CommunityCenter",
+  "spaces": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Northwood Town Center",
+  "city": "Irvine",
+  "state": "CA",
+  "country": "USA",
+  "address": "4980 Northwood Drive",
+  "latitude": 33.7108,
+  "longitude": -117.7847,
+  "squareFootage": 80000,
+  "numberOfStores": 15,
+  "website": "https://www.northwoodtowncenter.com",
+  "imageURLs": [],
+  "description": "Northwood Town Center is a convenient neighborhood shopping destination in Irvine's Northwood community, serving residents with everyday retail and dining options. This open-air center provides easy access to essential services and local favorites in a walkable setting. Located in one of Irvine's well-planned residential areas, it caters to families and professionals seeking convenient shopping close to home.",
+  "summary": "A neighborhood shopping center serving Irvine's Northwood community with convenient retail, dining, and services.",
+  "centerType": "CommunityCenter",
+  "spaces": []
+}

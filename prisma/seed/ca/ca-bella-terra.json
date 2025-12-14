@@ -1,0 +1,22 @@
+{
+  "name": "Bella Terra",
+  "city": "Huntington Beach",
+  "state": "CA",
+  "country": "USA",
+  "address": "7777 Edinger Avenue",
+  "latitude": 33.7172,
+  "longitude": -117.9808,
+  "squareFootage": 550000,
+  "numberOfStores": 50,
+  "website": "https://www.shopbellaterra.com",
+  "phone": "+17148477390",
+  "imageURLs": [],
+  "description": "Bella Terra is an open-air lifestyle shopping destination in Huntington Beach featuring a dynamic mix of popular retailers, dining destinations, and entertainment options. The center offers a vibrant Southern California shopping experience with walkable streets, outdoor plazas, and a welcoming atmosphere that attracts locals and visitors alike. With convenient access from Edinger Avenue and proximity to the beach, Bella Terra combines shopping convenience with coastal lifestyle charm.",
+  "summary": "Bella Terra is an open-air lifestyle center in Huntington Beach offering premier shopping, dining, and entertainment in a walkable coastal California setting.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 44,
+  "reviewCount": 3200,
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

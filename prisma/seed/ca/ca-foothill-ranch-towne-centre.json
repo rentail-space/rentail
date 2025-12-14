@@ -1,0 +1,17 @@
+{
+  "name": "Foothill Ranch Towne Centre",
+  "city": "Foothill Ranch",
+  "state": "CA",
+  "country": "USA",
+  "address": "26772 Portola Parkway",
+  "latitude": 33.6764,
+  "longitude": -117.6703,
+  "squareFootage": 200000,
+  "numberOfStores": 25,
+  "website": "https://www.foothillranchtownecentre.com",
+  "imageURLs": [],
+  "description": "Foothill Ranch Towne Centre is a convenient community shopping destination located in the heart of Foothill Ranch, offering a diverse mix of dining, shopping, and service options. The center serves the surrounding residential communities with everyday conveniences and popular retailers in an accessible open-air format. With its prime location along Portola Parkway, it provides a neighborhood-focused shopping experience for Orange County residents.",
+  "summary": "A community-focused shopping center in Foothill Ranch offering dining, shopping, and essential services for Orange County residents.",
+  "centerType": "CommunityCenter",
+  "spaces": []
+}
