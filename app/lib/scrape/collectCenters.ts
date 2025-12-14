@@ -7,7 +7,6 @@ import RateLimiter from "~/lib/scrape/rateLimiter";
 import retryWithBackoff from "~/lib/scrape/retryWithBackoff";
 import saveCenterFile from "~/lib/scrape/saveCenterFile";
 import scrapeCenter from "~/lib/scrape/scrapeCenter";
-import scrapeLoopNet from "~/lib/scrape/scrapeLoopNet";
 import scrapeSpaces from "~/lib/scrape/scrapeSpaces";
 import validateImages from "~/lib/scrape/validateImages";
 
@@ -45,15 +44,7 @@ export default async function collectCenters(countyName: string) {
         console.info("\x1b[33m  ⚠ No website found, skipping scrape\x1b[0m");
       }
 
-      // Stage 2b: Scraping LoopNet
-      await delay(3000 + Math.random() * 2000);
-      const loopNetData = await scrapeLoopNet({
-        centerName: center.name,
-        city: center.city,
-        state: center.state,
-      });
-
-      // Stage 2c: Scraping spaces (if website exists)
+      // Stage 2b: Scraping spaces (if website exists)
       let spaces: Array<{
         number: string;
         type: "Cart" | "Inline" | "Storage" | "Other";
@@ -80,19 +71,13 @@ export default async function collectCenters(countyName: string) {
         Array.isArray(scrapedData.images)
           ? scrapedData.images
           : [];
-      const loopNetImages: string[] =
-        "images" in loopNetData && Array.isArray(loopNetData.images)
-          ? loopNetData.images
-          : [];
-      const allImages = [...scrapedImages, ...loopNetImages];
-      validImages = await validateImages(allImages);
+      validImages = await validateImages(scrapedImages);
 
       // Stage 3: Enrichment
       await rateLimiter.throttle();
       const enrichedData = await retryWithBackoff(() =>
         enrichCenter(center, {
           ...scrapedData,
-          ...loopNetData,
           images: validImages,
           spaces,
         }),

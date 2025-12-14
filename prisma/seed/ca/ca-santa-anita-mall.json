@@ -1,0 +1,22 @@
+{
+  "name": "Santa Anita Mall",
+  "city": "Arcadia",
+  "state": "CA",
+  "country": "USA",
+  "address": "400 South Baldwin Avenue",
+  "latitude": 34.1336,
+  "longitude": -118.0539,
+  "squareFootage": 1200000,
+  "numberOfStores": 120,
+  "website": "https://www.westfield.com/santaanita",
+  "phone": "+16264451534",
+  "imageURLs": [],
+  "description": "Westfield Santa Anita Mall is a premier regional shopping destination in Arcadia, California, offering an exceptional retail experience with contemporary fashion, dining, and entertainment options. Managed by Westfield, a global leader in shopping center development with locations across Europe and the United States, this center provides convenient amenities including Smart Parking and click-and-collect services. The mall serves as a dynamic community hub where visitors can shop iconic brands, enjoy diverse culinary offerings, and experience world-class events and entertainment.",
+  "demographics": "Westfield Santa Anita Mall attracts an affluent, diverse demographic with a strong Asian-American presence reflecting the San Gabriel Valley's demographics, including families with above-average household incomes ($75,000-$125,000+) and professional couples aged 25-54. The trade area draws from upscale communities like Arcadia, San Marino, and Pasadena, with shoppers seeking a mix of contemporary fashion, dining, and entertainment options. Visitors demonstrate strong brand loyalty and preferences for both mainstream retailers and specialty stores, with high engagement in dining experiences and family-oriented entertainment activities.",
+  "summary": "Westfield Santa Anita Mall is a premier enclosed regional shopping center in Arcadia offering upscale retail, dining, and entertainment with smart amenities and global brand excellence.",
+  "rating": 43,
+  "reviewCount": 8500,
+  "centerType": "RegionalMall",
+  "tier": 2,
+  "spaces": []
+}
