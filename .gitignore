@@ -35,4 +35,7 @@ prisma/backup.sql
 .beads/bd.sock
 .beads/bd.pipe
 .beads/.exclusive-lock
-.git/beads-worktrees/ 
+.git/beads-worktrees/
+
+# Git worktrees for isolated development
+.worktrees/ 
