@@ -78,12 +78,13 @@ ${JSON.stringify(centerSchema.shape, null, 2)}
 Tasks:
 1. Verify/correct the address and coordinates
 2. Write a compelling 2-3 sentence description
-3. Extract: phone (format as E.164: +1XXXXXXXXXX for US numbers), hours (openFrom as HHMM like 930, openUntil as HHMM like 2100), square footage, store count
-4. Select best 3-5 images (prioritize exterior/interior shots)
-5. Note any demographic info mentioned
-6. If you find individual retail spaces listed, include them
-7. Set country to "USA"
-8. Classify centerType using this hybrid approach:
+3. Create a one-sentence summary that captures the essence of the shopping center
+4. Extract: phone (format as E.164: +1XXXXXXXXXX for US numbers), hours (openFrom as HHMM like 930, openUntil as HHMM like 2100), square footage, store count
+5. Select best 3-5 images (prioritize exterior/interior shots)
+6. Note any demographic info mentioned
+7. If you find individual retail spaces listed, include them
+8. Set country to "USA"
+9. Classify centerType using this hybrid approach:
    - Primary: Square footage + store count + enclosed/open-air
    - Secondary: Explicit type mentions in website ("outlet center", "lifestyle center")
    - Tertiary: Name patterns ("Westfield" = typically RegionalMall)
@@ -97,7 +98,7 @@ Tasks:
 
    If uncertain, choose type matching square footage, or StripCenter if no size data.
 
-9. Collect rating and review data using hybrid approach:
+10. Collect rating and review data using hybrid approach:
    - Primary: Extract ratings displayed on website (Google/Yelp badges, testimonials)
    - Secondary: Use your knowledge of typical ratings for this center
    - Aggregate from all sources into single rating and total review count
