@@ -55,13 +55,13 @@ const fallbackResponse: string = "Fallback response!";
  * Find a matching response for the given message
  */
 export function findMockResponse(body: object): ReadableStream<Uint8Array> {
-  const { messages } = body as {
+  const { messages, tools, tool_choice } = body as {
     messages: Array<{
       role: string;
       content: Array<{ type: string; text: string }>;
     }>;
-    tools: { name: string }[];
-    tool_choice: { type: ToolChoice<Record<string, Tool>> };
+    tools?: { name: string; input_schema?: unknown }[];
+    tool_choice?: { type: string; name?: string };
   };
 
   // Extract the last user message from the request
@@ -75,6 +75,47 @@ export function findMockResponse(body: object): ReadableStream<Uint8Array> {
     "Anthropic API mock - processing message: %s... ",
     messageText.slice(0, 100),
   );
+
+  // Check if this is a structured output request (tool call)
+  if (tools && tool_choice?.type === "tool") {
+    // For structured output, return mock data via tool call
+    const toolName = tool_choice.name || tools[0]?.name;
+    logger("Structured output request for tool: %s", toolName);
+
+    // Generate mock centers data for discoverCenters
+    if (messageText.toLowerCase().includes("shopping centers")) {
+      const mockCenters = {
+        centers: [
+          {
+            name: "Westfield Century City",
+            address: "10250 Santa Monica Blvd",
+            city: "Los Angeles",
+            state: "CA",
+            website: "https://www.westfield.com/centurycity",
+            latitude: 34.0575,
+            longitude: -118.4148,
+          },
+          {
+            name: "The Grove",
+            address: "189 The Grove Dr",
+            city: "Los Angeles",
+            state: "CA",
+            website: "https://thegrovela.com",
+            latitude: 34.0719,
+            longitude: -118.3569,
+          },
+        ],
+      };
+
+      const toolCall: ToolCall = {
+        id: `call_${ulid()}`,
+        name: toolName || "json",
+        input: mockCenters,
+      };
+
+      return createStreamingResponse("", [toolCall]);
+    }
+  }
 
   // Check custom responses first (higher priority)
   const mockResponse =
@@ -138,6 +179,11 @@ export default function createStreamingResponse(
           const contentBlockStop =
             createContentBlockStopEvent(currentBlockIndex);
           controller.enqueue(encoder.encode(contentBlockStop));
+
+          // Send message_delta with stop_reason
+          const stopReason = toolCalls.length > 0 ? "tool_use" : "end_turn";
+          const messageDelta = createMessageDeltaEvent(stopReason);
+          controller.enqueue(encoder.encode(messageDelta));
 
           // Send message_stop event
           const messageStop = createMessageStopEvent();
@@ -265,6 +311,20 @@ function createContentBlockStopEvent(index = 0): string {
     index: index,
   };
   return `event: content_block_stop\ndata: ${JSON.stringify(event)}\n\n`;
+}
+
+/**
+ * Create message_delta event (for stop_reason)
+ */
+function createMessageDeltaEvent(stopReason: string): string {
+  const event = {
+    type: "message_delta",
+    delta: {
+      stop_reason: stopReason,
+    },
+    usage: { output_tokens: 100 },
+  };
+  return `event: message_delta\ndata: ${JSON.stringify(event)}\n\n`;
 }
 
 /**
