@@ -9,7 +9,6 @@ import {
   ShoppingCartIcon,
   StarIcon,
 } from "lucide-react";
-import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
@@ -17,6 +16,7 @@ import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
 import formatPhoneNumber from "~/lib/formatPhoneNumber";
 import { Spaces } from "./Spaces";
+import type { PropertyGetPayload } from "prisma/generated/models";
 
 export default function Center({
   center,
