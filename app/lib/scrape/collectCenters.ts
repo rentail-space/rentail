@@ -7,6 +7,7 @@ import RateLimiter from "~/lib/scrape/rateLimiter";
 import saveCenterFile from "~/lib/scrape/saveCenterFile";
 import scrapeCenter from "~/lib/scrape/scrapeCenter";
 import scrapeLoopNet from "~/lib/scrape/scrapeLoopNet";
+import scrapeSpaces from "~/lib/scrape/scrapeSpaces";
 import validateImages from "~/lib/scrape/validateImages";
 
 export default async function collectCenters(countyName: string) {
@@ -28,7 +29,8 @@ export default async function collectCenters(countyName: string) {
     const center = centers[i];
     try {
       // Stage 2: Scraping website
-      let scrapedData = {};
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let scrapedData: any = {};
       if (center.website) {
         await delay(2000 + Math.random() * 1000);
         scrapedData = await scrapeCenter(center.website);
@@ -38,11 +40,26 @@ export default async function collectCenters(countyName: string) {
 
       // Stage 2b: Scraping LoopNet
       await delay(2000 + Math.random() * 1000);
-      const loopNetData = await scrapeLoopNet(
-        center.name,
-        center.city,
-        center.state,
-      );
+      const loopNetData = await scrapeLoopNet({
+        centerName: center.name,
+        city: center.city,
+        state: center.state,
+      });
+
+      // Stage 2c: Scraping spaces (if website exists)
+      let spaces: Array<{
+        number: string;
+        type: "Cart" | "Inline" | "Storage" | "Other";
+        size: number;
+        floor: number;
+        available: boolean;
+        imageURLs?: string[];
+      }> = [];
+
+      if (center.website) {
+        await delay(2000 + Math.random() * 1000);
+        spaces = await scrapeSpaces(center.website, center.name);
+      }
 
       // Stage 2.5: Validate images
       let validImages: string[] = [];
@@ -63,6 +80,7 @@ export default async function collectCenters(countyName: string) {
         ...scrapedData,
         ...loopNetData,
         images: validImages,
+        spaces,
       });
 
       // Stage 4: Write to file

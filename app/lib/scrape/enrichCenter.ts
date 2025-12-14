@@ -62,6 +62,14 @@ interface ScrapedData {
   description?: string | null;
   leasableArea?: number;
   numberOfProperties?: number;
+  spaces?: Array<{
+    number: string;
+    type: "Cart" | "Inline" | "Storage" | "Other";
+    size: number;
+    floor: number;
+    available: boolean;
+    imageURLs?: string[];
+  }>;
   error?: string;
 }
 
@@ -139,5 +147,15 @@ Mark uncertain fields as null.`;
   });
 
   spinner.succeed();
+
+  // If spaces were provided in scraped data and enrichment didn't find any,
+  // use the scraped spaces
+  if (scrapedData.spaces && scrapedData.spaces.length > 0) {
+    return {
+      ...object,
+      spaces: object.spaces.length > 0 ? object.spaces : scrapedData.spaces,
+    };
+  }
+
   return object;
 }

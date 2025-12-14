@@ -1,24 +1,32 @@
+import ora from "ora";
 import { chromium } from "playwright";
 
-interface LoopNetData {
+/**
+ * Scrape LoopNet for a given center name. LoopNet is a website that lists
+ * commercial properties for lease. It has information about centers that we
+ * don't find elsewhere.
+ *
+ * @param centerName - The name of the center to scrape.
+ * @returns The LoopNet data for the center.
+ */
+export default async function scrapeLoopNet({
+  centerName,
+  city,
+  state,
+}: {
+  centerName: string;
+  city: string;
+  state: string;
+}): Promise<{
   description?: string;
   leasableArea?: number;
   numberOfProperties?: number;
   images?: string[];
   error?: string;
-}
-
-export default async function scrapeLoopNet(
-  centerName: string,
-  city: string,
-  state: string,
-): Promise<LoopNetData> {
-  console.info(
-    "\x1b[32m  Scraping LoopNet: %s, %s %s\x1b[0m",
-    centerName,
-    city,
-    state,
-  );
+}> {
+  const spinner = ora(
+    `Scraping LoopNet: ${centerName}, ${city}, ${state}`,
+  ).start();
 
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
@@ -32,14 +40,12 @@ export default async function scrapeLoopNet(
     await page.waitForLoadState("networkidle", { timeout: 10_000 });
 
     // Find first search result and navigate to it
-    const firstResult = await page
-      .locator('[data-testid="property-card"] a')
-      .first();
+    const firstResult = page.locator('[data-testid="property-card"] a').first();
     const resultUrl = await firstResult.getAttribute("href");
 
     if (!resultUrl) {
       await browser.close();
-      console.warn("\x1b[33m  ⚠ No LoopNet results found\x1b[0m");
+      spinner.fail("No LoopNet results found");
       return { error: "no_results" };
     }
 
@@ -84,11 +90,8 @@ export default async function scrapeLoopNet(
 
     await browser.close();
 
-    console.info(
-      "\x1b[32m  ✓ LoopNet data: %s sqft, %d buildings, %d images\x1b[0m",
-      leasableArea?.toLocaleString() || "unknown",
-      numberOfProperties || 0,
-      images.length,
+    spinner.succeed(
+      `LoopNet data: ${leasableArea?.toLocaleString() || "unknown"} sqft, ${numberOfProperties || 0} buildings, ${images.length} images`,
     );
 
     return {
@@ -99,9 +102,8 @@ export default async function scrapeLoopNet(
     };
   } catch (error) {
     await browser.close();
-    console.error(
-      "\x1b[31m  ⚠ LoopNet scraping failed: %s\x1b[0m",
-      error instanceof Error ? error.message : String(error),
+    spinner.fail(
+      `LoopNet scraping failed: ${error instanceof Error ? error.message : String(error)}`,
     );
     return { error: "scraping_failed" };
   }
