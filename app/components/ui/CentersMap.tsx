@@ -1,17 +1,32 @@
-import { maxBy, meanBy, minBy } from "es-toolkit";
+import { maxBy, minBy } from "es-toolkit";
 import { MapPin } from "lucide-react";
 import mapboxgl from "mapbox-gl";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
-import CenterPopup from "./CenterPopup";
 
-const mapboxToken =
-  "pk.eyJ1IjoiYXNzYWZhcmtpbiIsImEiOiJjbWhwY3ZoazMwYXloMmxvbmxvZTE2eTBmIn0.m1npzYF93dHWeF4W3Yt_xw";
+/**
+ * Called when the user clicks on a center outside the map and we want to center
+ * the map on that center.
+ */
+export declare type CenterMapFunction = (
+  point: { longitude: number; latitude: number }
+) => void;
 
+/**
+ * A map showing shopping centers.
+ * 
+ * @param centers - The centers to display on the map.
+ * @param centerRef - A ref to a function that will center the map on a given center. (Optional)
+ * @param latitude - The latitude of the center to display on the map.
+ * @param longitude - The longitude of the center to display on the map.
+ * @returns A map showing shopping centers.
+ */
 export default function CentersMap({
   centers,
   centerRef,
+  latitude,
+  longitude,
 }: {
   centers: PropertyGetPayload<{ select: {
     address: true;
@@ -23,9 +38,9 @@ export default function CentersMap({
     spaces: { select: { id: true } }
     state: true;
   }}>[]; 
-  centerRef?: React.RefObject<
-    ((center: { longitude: number; latitude: number }) => void) | null
-  >;
+  centerRef?: React.RefObject<CenterMapFunction | null>;
+  latitude: number;
+  longitude: number;
 }) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
@@ -45,15 +60,13 @@ export default function CentersMap({
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
-    mapboxgl.accessToken = mapboxToken;
+    mapboxgl.accessToken =
+    "pk.eyJ1IjoiYXNzYWZhcmtpbiIsImEiOiJjbWhwY3ZoazMwYXloMmxvbmxvZTE2eTBmIn0.m1npzYF93dHWeF4W3Yt_xw";
 
     map.current = new mapboxgl.Map({
+      center: [ longitude, latitude, ],
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v12",
-      center: [
-        meanBy(centers, (center) => center.longitude),
-        meanBy(centers, (center) => center.latitude),
-      ],
       zoom: calculateZoomLevel(centers),
     });
 
@@ -197,14 +210,68 @@ export default function CentersMap({
 }
 
 
+/**
+ * A popup showing information about a shopping center.
+ * 
+ * @param center - The center to display in the popup.
+ * @returns A popup showing information about a shopping center.
+ */
+function CenterPopup({
+  center,
+}: {
+  center: PropertyGetPayload<{ select: {
+    address: true;
+    city: true;
+    country: true;
+    latitude: true; 
+    longitude: true;
+    name: true;
+    spaces: { select: { id: true } }
+    state: true;
+  }}> 
+}) {
+  const directionsUrl = `https://maps.google.com/?q=${encodeURIComponent(`${center.address}, ${center.city}, ${center.state} ${center.country}`)}`;
+
+  return (
+    <div className="space-y-2">
+      <h3 className="line-clamp-1 font-bold text-lg">{center.name}</h3>
+      <address className="text-gray-500 text-sm">
+        <p>{center.address}</p>
+        <p>{center.city}, {center.state}</p>
+      </address>
+
+      <div className="flex flex-row justify-between gap-2">
+        <span className="text-gray-500 text-sm">
+          {center.spaces.length}{" "}
+          {center.spaces.length === 1 ? "space" : "spaces"}
+        </span>
+        <a
+          className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
+          href={directionsUrl}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Directions
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Calculates the zoom level for a map so we can see all the centers.
+ * 
+ * @param centers - The centers to calculate the zoom level for.
+ * @returns The zoom level for the map so we can see all the centers.
+ */
 function calculateZoomLevel(centers: PropertyGetPayload<{ select: {
   latitude: true;
   longitude: true;
-}}>[]) {
-const latitudeRange = (maxBy(centers, (center) => center.latitude)?.latitude ?? 0) - 
-(minBy(centers, (center) => center.latitude)?.latitude ?? 0);
-const longitudeRange = (maxBy(centers, (center) => center.longitude)?.longitude ?? 0) -
-(minBy(centers, (center) => center.longitude)?.longitude ?? 0);
-const maxRange = Math.max(latitudeRange, longitudeRange);
-return 10 + Math.log2(maxRange);
+}}>[]): number {
+  const latitudeRange = (maxBy(centers, (center) => center.latitude)?.latitude ?? 0) -
+    (minBy(centers, (center) => center.latitude)?.latitude ?? 0);
+  const longitudeRange = (maxBy(centers, (center) => center.longitude)?.longitude ?? 0) -
+    (minBy(centers, (center) => center.longitude)?.longitude ?? 0);
+  const maxRange = Math.max(latitudeRange, longitudeRange);
+  return 10 + Math.log2(maxRange);
 }

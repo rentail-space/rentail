@@ -57,6 +57,7 @@ Exclude individual stores or single-building retail.`;
       model: conversational.model,
       prompt,
       schema: discoverySchema,
+      temperature: 0,
     });
     spinner.succeed();
 

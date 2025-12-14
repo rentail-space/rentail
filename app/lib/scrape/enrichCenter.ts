@@ -122,9 +122,11 @@ Use scraped data as primary source. Fill gaps with your knowledge.
 Mark uncertain fields as null.`;
 
   const { object } = await generateObject({
+    abortSignal: AbortSignal.timeout(90_000),
     model: conversational.model,
-    schema: centerSchema,
     prompt: enrichmentPrompt,
+    schema: centerSchema,
+    temperature: 1,
   });
 
   spinner.succeed();

@@ -15,7 +15,7 @@ export default async function scrapeCenter(url: string): Promise<ScrapedData> {
   const page = await browser.newPage();
 
   try {
-    await page.goto(url, { timeout: 30000 });
+    await page.goto(url, { timeout: 30_000 });
 
     const bodyText = (await page.textContent("body")) || "";
     const images = await page.$$eval("img", (imgs) =>

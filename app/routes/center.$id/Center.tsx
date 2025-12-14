@@ -61,7 +61,6 @@ export default function Center({
           centers={[center]}
           latitude={center.latitude ?? 0}
           longitude={center.longitude ?? 0}
-          zoom={12}
         />
       </section>
     </div>

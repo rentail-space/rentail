@@ -1,11 +1,12 @@
 #!/usr/bin/env tsx
+
 import { delay } from "es-toolkit";
 import discoverCenters from "~/lib/scrape/discoverCenters";
 import enrichCenter from "~/lib/scrape/enrichCenter";
 import RateLimiter from "~/lib/scrape/rateLimiter";
+import saveCenterFile from "~/lib/scrape/saveCenterFile";
 import scrapeCenter from "~/lib/scrape/scrapeCenter";
 import validateImages from "~/lib/scrape/validateImages";
-import writeCenterFile from "~/lib/scrape/writeCenterFile";
 
 export default async function collectCenters(countyName: string) {
   console.info('Starting collection for: "%s"', countyName);
@@ -42,7 +43,7 @@ export default async function collectCenters(countyName: string) {
       });
 
       // Stage 4: Write to file
-      await writeCenterFile(enrichedData);
+      await saveCenterFile(enrichedData);
       successCount++;
     } catch (error) {
       console.error(

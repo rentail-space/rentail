@@ -1,4 +1,4 @@
-import { clamp, range } from "es-toolkit";
+import { clamp, meanBy, range } from "es-toolkit";
 import { MapPinIcon, StarIcon } from "lucide-react";
 import { useRef } from "react";
 import { Link } from "react-router";
@@ -38,21 +38,27 @@ export default function StatePage({
 }) {
   const centerRef =
     useRef<(center: { longitude: number; latitude: number }) => void>(null);
+  const { centers, state } = loaderData;
 
   return (
     <main className="container mx-auto my-10 space-y-8">
       <h1 className="text-center font-bold text-2xl">
-        {expandStateAbbr(loaderData.state)}
+        {expandStateAbbr(state)}
       </h1>
 
-      <CentersMap centerRef={centerRef} centers={loaderData.centers} />
+      <CentersMap
+        centerRef={centerRef}
+        centers={centers}
+        latitude={meanBy(centers, (center) => center.latitude)}
+        longitude={meanBy(centers, (center) => center.longitude)}
+      />
 
       <ul
         className="space-y-4"
         itemScope
         itemType="https://schema.org/ItemList"
       >
-        {loaderData.centers.map((center) => (
+        {centers.map((center) => (
           <li
             key={center.id}
             className="border-gray-400 border-b pb-4"

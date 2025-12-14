@@ -6,6 +6,10 @@ export async function loader() {
   const states = await prisma.property.groupBy({
     by: ["state"],
     orderBy: { state: "asc" },
+    _avg: {
+      latitude: true,
+      longitude: true,
+    },
     _count: { _all: true },
   });
   return { states };
@@ -14,15 +18,12 @@ export async function loader() {
 export default function StatePage({
   loaderData,
 }: {
-  loaderData: {
-    states: {
-      state: string;
-      _count: { _all: number };
-    }[];
-  };
+  loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
   return (
     <main className="container mx-auto my-10 space-y-8">
+      <h1 className="font-bold text-2xl">US States</h1>
+
       <ul
         className="space-y-4"
         itemScope

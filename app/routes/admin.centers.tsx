@@ -4,7 +4,7 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
 import { Link } from "react-router";
 import { Button } from "~/components/ui/Button";
-import CentersMap from "~/components/ui/CentersMap";
+import CentersMap, { type CenterMapFunction } from "~/components/ui/CentersMap";
 import {
   Table,
   TableBody,
@@ -34,8 +34,7 @@ export default function CenterPage({
 }: {
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
-  const centerRef =
-    useRef<(center: { longitude: number; latitude: number }) => void>(null);
+  const centerRef = useRef<CenterMapFunction>(null);
   return (
     <div>
       <CentersMap
@@ -43,7 +42,6 @@ export default function CenterPage({
         centers={loaderData.centers}
         latitude={loaderData.latitude ?? 34.0522}
         longitude={loaderData.longitude ?? -118.2437}
-        zoom={9}
       />
 
       <CentersList centerRef={centerRef} centers={loaderData.centers} />

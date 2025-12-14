@@ -4,6 +4,7 @@ import NotFoundPage from "./$";
 
 export const handle = {
   headerLinks: [
+    { label: "States", to: "/states" },
     { label: "All centers", to: "/admin/centers" },
     { label: "All users", to: "/admin/users" },
   ],
