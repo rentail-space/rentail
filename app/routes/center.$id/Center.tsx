@@ -76,7 +76,10 @@ function CenterInfo({
       {center.rating && (
         <div className="flex flex-row items-center gap-2">
           <StarIcon className="h-5 w-5 text-yellow-500" fill="currentColor" />
-          {clamp(center.rating / 10, 1, 5).toFixed(1)} &bull; {center.summary}
+          {clamp(center.rating / 10, 1, 5).toFixed(1)}
+          {center.reviewCount &&
+            ` (${center.reviewCount.toLocaleString()} reviews)`}
+          {center.summary && ` • ${center.summary}`}
         </div>
       )}
 

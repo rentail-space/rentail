@@ -24,7 +24,8 @@ const schema = z.object({
   summary: z.string().optional(),
   openFrom: z.number().optional(),
   openUntil: z.number().optional(),
-  rating: z.number().optional(),
+  rating: z.number().min(10).max(50).optional(),
+  reviewCount: z.number().int().positive().optional(),
   centerType: z.enum([
     "RegionalMall",
     "CommunityCenter",
