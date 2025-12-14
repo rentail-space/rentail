@@ -1,8 +1,8 @@
 import { captureException } from "@sentry/react-router";
 import debug from "debug";
 import { invariant } from "es-toolkit";
-import { cleanParseWorkingMemory } from "./workingMemory";
 import type { User } from "prisma/generated/client";
+import { cleanParseWorkingMemory } from "./workingMemory";
 
 type GeocodedLocation = {
   city?: string;
@@ -96,7 +96,6 @@ export async function geocodeFromHeaders(requestHeaders: Headers): Promise<{
       return { ...location, ip, timeZone };
     }
   } catch (error) {
-    captureException(error, { extra: { headers: requestHeaders } });
     console.error("Error getting geocode from headers: %s", error);
     return {
       // fallback location
