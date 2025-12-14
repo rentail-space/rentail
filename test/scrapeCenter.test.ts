@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { scrapeCenter } from "~/lib/scrape/scrapeCenter";
+import scrapeCenter from "~/lib/scrape/scrapeCenter";
 
 describe("scrapeCenter", () => {
   it("extracts content from a shopping center website", async () => {
