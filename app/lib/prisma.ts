@@ -3,12 +3,12 @@
  * suite (test/helpers/globalSetup.ts)
  */
 
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { PrismaPg } from "@prisma/adapter-pg";
 import debug from "debug";
 import dotenv from "dotenv";
 import { invariant } from "es-toolkit";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
 import pg from "pg";
 import { PrismaClient } from "prisma/generated/client";
 

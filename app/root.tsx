@@ -13,8 +13,8 @@ import PageLayout from "~/components/layout/PageLayout";
 import "~/global.css";
 import loggingMiddleware from "~/lib/middleware/logging";
 import { utmMiddleware } from "~/lib/middleware/utm";
-import type { Route } from "./+types/root";
 import { findUserAndLastChat } from "./lib/sessions.server";
+import type { Route } from "./+types/root";
 
 export const middleware: Route.MiddlewareFunction[] = [
   utmMiddleware,

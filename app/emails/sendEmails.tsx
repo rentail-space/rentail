@@ -3,9 +3,9 @@ import { captureException } from "@sentry/react-router";
 import debug from "debug";
 import { delay, invariant, withTimeout } from "es-toolkit";
 import Redis from "ioredis";
-import type { JSX } from "react";
 import { Resend } from "resend";
 import envVars from "~/lib/env";
+import type { JSX } from "react";
 
 export type LastEmail = {
   html: string;

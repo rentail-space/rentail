@@ -1,6 +1,6 @@
 import tsconfigPaths from "vite-tsconfig-paths";
-import type { ParsedStack } from "vitest";
 import { defineConfig } from "vitest/config";
+import type { ParsedStack } from "vitest";
 
 process.env.NODE_ENV = "test";
 

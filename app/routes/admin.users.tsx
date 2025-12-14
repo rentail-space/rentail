@@ -10,7 +10,6 @@ import { JWT } from "google-auth-library";
 import { ArrowDown, ArrowRight, ArrowUp } from "lucide-react";
 import { DateTime } from "luxon";
 import { parseAsInteger, useQueryState } from "nuqs";
-import type { User, Waitlist } from "prisma/generated/client";
 import { Fragment } from "react";
 import { Link, type LoaderFunctionArgs } from "react-router";
 import { Button } from "~/components/ui/Button";
@@ -27,6 +26,7 @@ import deviceDetection from "~/lib/deviceDetection";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
+import type { User, Waitlist } from "prisma/generated/client";
 import type { Route } from "./+types/admin.users";
 
 export async function loader({ request }: LoaderFunctionArgs) {

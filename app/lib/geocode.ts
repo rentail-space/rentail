@@ -1,8 +1,8 @@
 import { captureException } from "@sentry/react-router";
 import debug from "debug";
 import { invariant } from "es-toolkit";
-import type { User } from "prisma/generated/client";
 import { cleanParseWorkingMemory } from "./workingMemory";
+import type { User } from "prisma/generated/client";
 
 type GeocodedLocation = {
   city?: string;

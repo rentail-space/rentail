@@ -1,7 +1,7 @@
-import debug from "debug";
-import { delay } from "es-toolkit";
 import { type ChildProcess, fork } from "node:child_process";
 import { resolve } from "node:path";
+import debug from "debug";
+import { delay } from "es-toolkit";
 
 let worker: ChildProcess | undefined;
 

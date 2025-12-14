@@ -32,7 +32,7 @@ export async function scrapeCenter(url: string): Promise<ScrapedData> {
       title,
       description,
     };
-  } catch (error) {
+  } catch (_error) {
     await browser.close();
     return { error: "scraping_failed" };
   }

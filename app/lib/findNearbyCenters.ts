@@ -1,7 +1,7 @@
-import type { User } from "prisma/generated/client";
-import type { PropertyGetPayload } from "prisma/generated/models";
 import prisma from "~/lib/prisma";
 import { useMemoryOrHeaders } from "./geocode";
+import type { User } from "prisma/generated/client";
+import type { PropertyGetPayload } from "prisma/generated/models";
 
 /**
  * Find the shopping centers within a given distance from the user. Gets the

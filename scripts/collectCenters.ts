@@ -44,16 +44,16 @@ async function main() {
       const scrapedData = await scrapeCenter(center.website);
 
       if (scrapedData.error) {
-        logger(`  ⚠ Scraping failed, using LLM-only mode`);
+        logger("  ⚠ Scraping failed, using LLM-only mode");
       }
 
       // Stage 3: Enrichment
-      logger(`  Enriching data...`);
+      logger("  Enriching data...");
       await rateLimiter.throttle();
       const enrichedData = await enrichCenter(center, scrapedData);
 
       // Stage 4: Write to file
-      logger(`  Writing to file...`);
+      logger("  Writing to file...");
       const path = await writeCenterFile(enrichedData, countyName);
       logger(`  ✓ Saved: ${path}`);
 

@@ -1,8 +1,5 @@
 // DO NOT add to setup.ts as vitest.config.js cannot upload file that imports vitest
 
-import { expect } from "@playwright/test";
-import { invariant } from "es-toolkit";
-import looksSame from "looks-same";
 import { readdirSync, unlinkSync } from "node:fs";
 import {
   access,
@@ -12,8 +9,11 @@ import {
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
-import type { Locator, Page } from "playwright";
+import { expect } from "@playwright/test";
+import { invariant } from "es-toolkit";
+import looksSame from "looks-same";
 import vitestConfig from "vitest.config";
+import type { Locator, Page } from "playwright";
 
 declare global {
   namespace PlaywrightTest {

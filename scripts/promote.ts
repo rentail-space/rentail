@@ -4,16 +4,16 @@
  * This script promotes the latest deployment to production.
  */
 
+import { execSync } from "node:child_process";
 import { confirm } from "@inquirer/prompts";
 import { Vercel } from "@vercel/sdk";
-import type { GetDeploymentResponseBody } from "@vercel/sdk/models/getdeploymentop.js";
-import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymentsop.js";
 import dotenv from "dotenv";
 import { invariant } from "es-toolkit";
 import { DateTime } from "luxon";
-import { execSync } from "node:child_process";
 import { Octokit } from "octokit";
 import ora from "ora";
+import type { GetDeploymentResponseBody } from "@vercel/sdk/models/getdeploymentop.js";
+import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymentsop.js";
 
 dotenv.configDotenv({ quiet: true });
 invariant(process.env.VERCEL_TOKEN, "VERCEL_TOKEN is required");

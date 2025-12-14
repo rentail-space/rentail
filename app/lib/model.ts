@@ -2,11 +2,11 @@ import {
   type AnthropicProviderOptions,
   createAnthropic,
 } from "@ai-sdk/anthropic";
+import envVars from "./env";
 import type {
   LanguageModelV2,
   LanguageModelV2CallOptions,
 } from "@ai-sdk/provider";
-import envVars from "./env";
 
 /**
  * The smartest model for the conversational tasks (replying to the user).

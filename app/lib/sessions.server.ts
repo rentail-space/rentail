@@ -1,11 +1,8 @@
-import type { TextUIPart, UIMessage } from "ai";
+import { reverse } from "node:dns/promises";
 import bcrypt from "bcrypt";
 import debug from "debug";
 import { invariant } from "es-toolkit";
 import { createIsbotFromList, list } from "isbot";
-import { reverse } from "node:dns/promises";
-import type { Chat, User } from "prisma/generated/client";
-import type { UserGetPayload } from "prisma/generated/models";
 import {
   type Session,
   createCookieSessionStorage,
@@ -20,6 +17,9 @@ import { readUtmParams, saveUtmParams } from "~/lib/middleware/utm";
 import prisma from "~/lib/prisma";
 import welcome from "~/prompts/welcome.md?raw";
 import { geocodeFromHeaders } from "./geocode";
+import type { TextUIPart, UIMessage } from "ai";
+import type { Chat, User } from "prisma/generated/client";
+import type { UserGetPayload } from "prisma/generated/models";
 
 type SessionData = {
   token: string;

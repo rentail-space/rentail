@@ -5,7 +5,6 @@
  * the Anthropic API's Server-Sent Events format.
  */
 
-import type { Tool, ToolChoice } from "ai";
 import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import { ulid } from "ulid";
@@ -83,7 +82,10 @@ export function findMockResponse(body: object): ReadableStream<Uint8Array> {
     logger("Structured output request for tool: %s", toolName);
 
     // Generate mock centers data for discoverCenters
-    if (messageText.toLowerCase().includes("shopping centers")) {
+    if (
+      messageText.toLowerCase().includes("shopping centers") ||
+      messageText.toLowerCase().includes("malls in")
+    ) {
       const mockCenters = {
         centers: [
           {
@@ -166,19 +168,25 @@ export default function createStreamingResponse(
         currentBlockIndex++;
       }
 
-      // Send text content_block_start event
-      const contentBlockStart = createContentBlockStartEvent(currentBlockIndex);
-      controller.enqueue(encoder.encode(contentBlockStart));
+      // Only send text content if there is text to send
+      if (mockResponse.length > 0) {
+        // Send text content_block_start event
+        const contentBlockStart =
+          createContentBlockStartEvent(currentBlockIndex);
+        controller.enqueue(encoder.encode(contentBlockStart));
+      }
 
       // Send content in chunks to simulate streaming
       const chunkSize = 50;
 
       function sendNextChunk() {
         if (index >= mockResponse.length) {
-          // Send content_block_stop event
-          const contentBlockStop =
-            createContentBlockStopEvent(currentBlockIndex);
-          controller.enqueue(encoder.encode(contentBlockStop));
+          // Only send text content block stop if we sent text content
+          if (mockResponse.length > 0) {
+            const contentBlockStop =
+              createContentBlockStopEvent(currentBlockIndex);
+            controller.enqueue(encoder.encode(contentBlockStop));
+          }
 
           // Send message_delta with stop_reason
           const stopReason = toolCalls.length > 0 ? "tool_use" : "end_turn";
@@ -261,12 +269,15 @@ function createToolUseInputDeltaEvent(
   index: number,
   input: Record<string, unknown>,
 ): string {
+  // For generateObject, we need to ensure the JSON is valid and complete
+  // Stream the entire JSON object at once for simplicity in tests
+  const jsonString = JSON.stringify(input);
   const event = {
     type: "content_block_delta",
     index: index,
     delta: {
       type: "input_json_delta",
-      partial_json: JSON.stringify(input),
+      partial_json: jsonString,
     },
   };
   return `event: content_block_delta\ndata: ${JSON.stringify(event)}\n\n`;

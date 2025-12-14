@@ -1,9 +1,9 @@
 import { ShieldIcon, UnlockIcon, UserIcon } from "lucide-react";
-import type { User } from "prisma/generated/client";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouteLoaderData } from "react-router";
 import { Button } from "~/components/ui/Button";
 import { cn } from "~/lib/utils";
+import type { User } from "prisma/generated/client";
 import type { loader as rootLoader } from "~/root";
 
 export default function AccountMenu({ className }: { className?: string }) {

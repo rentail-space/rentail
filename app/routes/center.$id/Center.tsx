@@ -1,10 +1,10 @@
 import { ExternalLink } from "lucide-react";
-import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import CentersMap from "~/components/ui/CentersMap";
 import { Spaces } from "./Spaces";
+import type { PropertyGetPayload } from "prisma/generated/models";
 
 export default function Center({
   center,

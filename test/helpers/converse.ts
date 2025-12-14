@@ -1,8 +1,8 @@
 import { withTimeout } from "es-toolkit";
-import type { Page } from "playwright";
 import { expect } from "vitest";
 import prisma from "~/lib/prisma";
 import { goto } from "./launchBrowser";
+import type { Page } from "playwright";
 
 /**
  * Converse with the chatbot. Send a message to the chatbot and wait for the

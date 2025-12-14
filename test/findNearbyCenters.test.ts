@@ -1,9 +1,9 @@
 import { expect } from "playwright/test";
-import type { Property } from "prisma/generated/client";
 import { beforeAll, describe, it } from "vitest";
 import findNearbyCenters from "~/lib/findNearbyCenters";
 import prisma from "~/lib/prisma";
 import { createAnonymousUser } from "~/lib/sessions.server";
+import type { Property } from "prisma/generated/client";
 
 /**
  * NOTE:
