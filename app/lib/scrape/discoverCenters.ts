@@ -1,4 +1,6 @@
 import { generateObject } from "ai";
+import { invariant } from "node_modules/es-toolkit/dist/util/invariant.mjs";
+import ora from "ora";
 import { z } from "zod";
 import { conversational } from "~/lib/models";
 
@@ -25,16 +27,18 @@ const discoverySchema = z.object({
   ),
 });
 
-export default async function discoverCenters(
-  countyName: string,
-  options: { timeout?: number } = {},
-) {
-  if (!countyName || countyName.trim().length === 0)
-    throw new Error("County name is required");
+/**
+ * Ask Claude to discover shopping centers and malls in a specific area. For
+ * example, "Los Angeles County, CA.", "Bay Area, CA.", etc.
+ *
+ * @param where - The name of the county to discover centers in.
+ * @returns The centers discovered in that area.
+ */
+export default async function discoverCenters(where: string) {
+  invariant(where.trim(), "County name is required");
+  const timeout = 90_000;
 
-  const { timeout = 30000 } = options;
-
-  const prompt = `List all shopping centers and malls in ${countyName}.
+  const prompt = `List all shopping centers and malls in ${where}.
 For each center provide:
 - Official name
 - Full street address
@@ -45,6 +49,7 @@ For each center provide:
 Focus on retail shopping centers, strip malls, and enclosed malls.
 Exclude individual stores or single-building retail.`;
 
+  const spinner = ora(`Discovering centers in ${where}...`).start();
   try {
     const abortSignal = AbortSignal.timeout(timeout);
     const { object } = await generateObject({
@@ -53,22 +58,16 @@ Exclude individual stores or single-building retail.`;
       prompt,
       schema: discoverySchema,
     });
+    spinner.succeed();
     return object.centers;
   } catch (error) {
-    if (error instanceof Error) {
-      if (error.name === "AbortError")
-        throw new Error(
-          `Discovery request timed out after ${timeout}ms for ${countyName}`,
-        );
-      // Preserve the original error for debugging
-      const wrappedError = new Error(
-        `Failed to discover centers for ${countyName}: ${error.message}`,
-      );
-      wrappedError.cause = error;
-      throw wrappedError;
-    }
-    throw new Error(
-      `Failed to discover centers for ${countyName}: Unknown error`,
-    );
+    const reason =
+      error instanceof Error
+        ? error.name === "AbortError"
+          ? `Discovery request timed out after ${timeout}ms for ${where}`
+          : error.message
+        : String(error);
+    spinner.fail(reason);
+    throw new Error(reason);
   }
 }

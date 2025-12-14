@@ -1,0 +1,23 @@
+{
+  "name": "Camarillo Premium Outlets",
+  "city": "Camarillo",
+  "state": "CA",
+  "country": "USA",
+  "address": "740 East Ventura Boulevard",
+  "latitude": 34.2164,
+  "longitude": -119.0336,
+  "squareFootage": 530000,
+  "numberOfStores": 160,
+  "website": "https://www.premiumoutlets.com/camarillo",
+  "phone": "+18054458520",
+  "imageURLs": [],
+  "description": "Camarillo Premium Outlets is an outdoor shopping destination featuring designer and name-brand outlet stores at discounted prices, located in scenic Ventura County. This open-air outlet center offers a premium shopping experience with a curated selection of fashion, home goods, and lifestyle brands. Shoppers enjoy convenient access from the 101 Freeway with ample parking and year-round California weather perfect for outdoor shopping.",
+  "demographics": "null",
+  "summary": "A premier outdoor outlet shopping center featuring over 160 designer and brand-name stores offering exceptional value in the heart of Ventura County.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 43,
+  "reviewCount": 8500,
+  "centerType": "OutletCenter",
+  "spaces": []
+}

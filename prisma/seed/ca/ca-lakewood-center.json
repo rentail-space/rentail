@@ -1,0 +1,17 @@
+{
+  "name": "Lakewood Center",
+  "city": "Lakewood",
+  "state": "CA",
+  "country": "USA",
+  "address": "500 Lakewood Center Mall",
+  "latitude": 33.8476,
+  "longitude": -118.1398,
+  "squareFootage": 1200000,
+  "numberOfStores": 150,
+  "website": "https://www.lakewoodcenter.com",
+  "imageURLs": [],
+  "description": "Lakewood Center is a major enclosed regional shopping mall located in Lakewood, California, serving the greater Los Angeles area. The mall features a diverse mix of department stores, national retailers, dining options, and entertainment venues, making it a popular destination for families and shoppers throughout the region.",
+  "summary": "Lakewood Center is a prominent enclosed regional mall in the Los Angeles area, offering extensive shopping, dining, and entertainment options.",
+  "centerType": "RegionalMall",
+  "spaces": []
+}

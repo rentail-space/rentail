@@ -1,0 +1,23 @@
+{
+  "name": "Fashion Island",
+  "city": "Newport Beach",
+  "state": "CA",
+  "country": "USA",
+  "address": "401 Newport Center Drive",
+  "latitude": 33.6158,
+  "longitude": -117.8764,
+  "squareFootage": 990000,
+  "numberOfStores": 200,
+  "website": "https://www.fashionisland.com",
+  "phone": "+19497212000",
+  "imageURLs": [],
+  "description": "Fashion Island is Newport Beach's premier outdoor shopping destination, featuring an elegant collection of luxury retailers, upscale dining, and entertainment including a movie theater. Set against the backdrop of the California coast, this iconic lifestyle center offers a refined shopping experience with personal shopping services, seasonal events, and meticulously landscaped grounds that create an inviting atmosphere for locals and visitors alike.",
+  "demographics": "Affluent coastal community with high household incomes, serving Newport Beach, Corona del Mar, and surrounding Orange County areas with a focus on luxury consumers and tourists seeking premium retail experiences.",
+  "summary": "An upscale open-air lifestyle center in Newport Beach offering luxury shopping, fine dining, and entertainment with coastal California ambiance.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 45,
+  "reviewCount": 8500,
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Otay Ranch Town Center",
+  "city": "Chula Vista",
+  "state": "CA",
+  "country": "USA",
+  "address": "2015 Birch Road",
+  "latitude": 32.6354,
+  "longitude": -117.0025,
+  "squareFootage": 870000,
+  "numberOfStores": 80,
+  "website": "https://www.otayranchtown.com",
+  "imageURLs": [],
+  "description": "Otay Ranch Town Center is a premier open-air lifestyle shopping destination in Chula Vista, California, featuring a dynamic mix of national retailers, popular dining options, and entertainment venues. Located in the master-planned Otay Ranch community, this center serves the South Bay region with convenient access and ample parking. The center combines upscale shopping with a vibrant outdoor atmosphere, making it a popular gathering place for residents and visitors alike.",
+  "summary": "A vibrant open-air lifestyle center in Chula Vista offering upscale shopping, dining, and entertainment in the heart of the Otay Ranch community.",
+  "rating": 43,
+  "reviewCount": 3200,
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

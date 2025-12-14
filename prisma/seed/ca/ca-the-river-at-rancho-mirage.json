@@ -1,0 +1,25 @@
+{
+  "name": "The River at Rancho Mirage",
+  "city": "Rancho Mirage",
+  "state": "CA",
+  "country": "USA",
+  "address": "71800 Highway 111",
+  "latitude": 33.7596,
+  "longitude": -116.4178,
+  "squareFootage": 250000,
+  "numberOfStores": 25,
+  "website": "https://www.theriveratranchomirage.com",
+  "phone": "+17603412711",
+  "imageURLs": [
+    "https://images.squarespace-cdn.com/content/v1/5dd44ec9809e45468dc6ddf7/1739482993152-NAGHU652KFRLNKNFHNHO/Cowboy_TheRiver_webBanner.jpg"
+  ],
+  "description": "The River at Rancho Mirage is an upscale open-air lifestyle center featuring premier shopping, dining, and entertainment along California's Highway 111. With a movie theater, diverse restaurants, and boutique stores set against a scenic desert backdrop, it offers a sophisticated and relaxed shopping experience in the heart of the Coachella Valley. The center regularly hosts events including live talent performances and Battle of the Bands competitions.",
+  "demographics": "Affluent Coachella Valley residents and tourists, including seasonal visitors and golf resort guests seeking upscale retail and dining options",
+  "summary": "An upscale open-air lifestyle center in Rancho Mirage offering premier shopping, dining, and entertainment experiences in the desert.",
+  "openFrom": 1100,
+  "openUntil": 2300,
+  "rating": 44,
+  "reviewCount": 850,
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

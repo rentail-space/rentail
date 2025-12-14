@@ -1,0 +1,21 @@
+{
+  "name": "Westfield UTC",
+  "city": "San Diego",
+  "state": "CA",
+  "country": "USA",
+  "address": "4545 La Jolla Village Drive",
+  "latitude": 32.8713,
+  "longitude": -117.2089,
+  "squareFootage": 875000,
+  "numberOfStores": 150,
+  "website": "https://www.westfield.com/utc",
+  "phone": "+18585468858",
+  "imageURLs": [],
+  "description": "Westfield UTC is a premier upscale shopping destination in the heart of La Jolla, featuring luxury retailers like Louis Vuitton, CHANEL, and Apple alongside popular brands such as Nordstrom, Macy's, lululemon, and Sephora. The center offers exceptional dining experiences including Din Tai Fung, Shake Shack, and Javier's, plus entertainment options like AMC Theatres, creating a complete lifestyle destination for San Diego's most discerning shoppers.",
+  "demographics": "Affluent, upscale La Jolla community with high disposable income, educated professionals, and university population from nearby UC San Diego",
+  "summary": "An upscale regional mall in La Jolla featuring luxury brands, premier dining, and entertainment in a sophisticated shopping environment near UC San Diego.",
+  "rating": 44,
+  "reviewCount": 5800,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

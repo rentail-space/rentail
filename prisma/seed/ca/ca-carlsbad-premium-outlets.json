@@ -1,0 +1,23 @@
+{
+  "name": "Carlsbad Premium Outlets",
+  "city": "Carlsbad",
+  "state": "CA",
+  "country": "USA",
+  "address": "5620 Paseo Del Norte",
+  "latitude": 33.1303,
+  "longitude": -117.3154,
+  "squareFootage": 430000,
+  "numberOfStores": 90,
+  "website": "https://www.premiumoutlets.com/carlsbad",
+  "phone": "+17606042900",
+  "imageURLs": [],
+  "description": "Carlsbad Premium Outlets is a premier outdoor outlet shopping destination in North San Diego County, featuring over 90 designer and name-brand outlet stores including Coach, Nike, Michael Kors, and Kate Spade. Located just minutes from popular beaches and LEGOLAND California, this Spanish-inspired open-air center offers exceptional savings of 25% to 65% off retail prices in a beautifully landscaped setting. The center combines world-class outlet shopping with Southern California's year-round sunshine and proximity to major tourist attractions.",
+  "demographics": "Carlsbad Premium Outlets attracts affluent tourists and locals from San Diego County, including families and international visitors seeking designer brands at outlet prices in a coastal Southern California location.",
+  "summary": "A premier open-air outlet center in Carlsbad featuring 90+ designer brand stores offering 25-65% savings near San Diego's beaches and attractions.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 44,
+  "reviewCount": 15000,
+  "centerType": "OutletCenter",
+  "spaces": []
+}

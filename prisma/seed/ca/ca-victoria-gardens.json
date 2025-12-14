@@ -1,0 +1,23 @@
+{
+  "name": "Victoria Gardens",
+  "city": "Rancho Cucamonga",
+  "state": "CA",
+  "country": "USA",
+  "address": "12505 North Mainstreet",
+  "latitude": 34.1376,
+  "longitude": -117.5323,
+  "squareFootage": 1200000,
+  "numberOfStores": 150,
+  "website": "https://www.victoriagardensie.com",
+  "phone": "null",
+  "imageURLs": [],
+  "description": "Victoria Gardens is a premier open-air lifestyle center located 40 miles east of Los Angeles in Rancho Cucamonga, featuring over 150 retailers and eateries along with major anchors including Macy's, JCPenney, Bass Pro Shops, and AMC Theatres. The center also includes cultural amenities such as the Victoria Gardens Cultural Art Center and the Rancho Cucamonga Public Library. With its attractive outdoor setting, diverse shopping and dining options, and entertainment venues, Victoria Gardens serves as a complete destination for the Inland Empire community.",
+  "demographics": "null",
+  "summary": "Victoria Gardens is an upscale open-air lifestyle center in Rancho Cucamonga featuring 150+ retailers, major anchors, AMC Theatres, and cultural amenities in a vibrant outdoor setting.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 44,
+  "reviewCount": 7500,
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

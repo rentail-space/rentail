@@ -1,0 +1,22 @@
+{
+  "name": "Ontario Mills",
+  "city": "Ontario",
+  "state": "CA",
+  "country": "USA",
+  "address": "1 Mills Circle",
+  "latitude": 34.0726,
+  "longitude": -117.5643,
+  "squareFootage": 1600000,
+  "numberOfStores": 200,
+  "website": "https://www.simon.com/mall/ontario-mills",
+  "phone": "+19094841900",
+  "imageURLs": [],
+  "description": "Ontario Mills is one of California's largest outlet and value shopping destinations, featuring over 200 stores including premium outlet retailers, entertainment venues, and diverse dining options. This indoor mega-mall combines factory outlets from top brands with entertainment attractions like a 30-screen movie theater and Dave & Buster's, making it a premier destination for Southern California shoppers.",
+  "summary": "Southern California's premier outlet and entertainment destination with over 200 stores spanning 1.6 million square feet of shopping, dining, and family attractions.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 43,
+  "reviewCount": 24000,
+  "centerType": "OutletCenter",
+  "spaces": []
+}

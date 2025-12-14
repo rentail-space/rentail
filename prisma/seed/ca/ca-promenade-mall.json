@@ -1,0 +1,17 @@
+{
+  "name": "Promenade Mall",
+  "city": "Redlands",
+  "state": "CA",
+  "country": "USA",
+  "address": "6 West Redlands Boulevard",
+  "latitude": 34.0556,
+  "longitude": -117.1825,
+  "squareFootage": 450000,
+  "numberOfStores": 60,
+  "website": "https://www.promenadeatredlands.com",
+  "imageURLs": [],
+  "description": "Promenade Mall is a regional shopping destination in Redlands, California, offering a diverse mix of retail stores, dining options, and services. Located on West Redlands Boulevard, this enclosed mall serves the Inland Empire community with convenient access to popular national retailers and local businesses.",
+  "summary": "A regional shopping mall serving the Redlands and Inland Empire community with diverse retail and dining options.",
+  "centerType": "RegionalMall",
+  "spaces": []
+}

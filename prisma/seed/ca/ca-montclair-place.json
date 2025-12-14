@@ -1,0 +1,23 @@
+{
+  "name": "Montclair Place",
+  "city": "Montclair",
+  "state": "CA",
+  "country": "USA",
+  "address": "2060 Montclair Plaza Lane",
+  "latitude": 34.081,
+  "longitude": -117.6898,
+  "squareFootage": 1200000,
+  "numberOfStores": 120,
+  "website": "https://www.montclairplace.com",
+  "phone": "null",
+  "imageURLs": [],
+  "description": "Montclair Place is a premier regional shopping destination in the Inland Empire, offering an extensive collection of retail stores, dining options, and entertainment including a movie theater. With convenient access from major freeways and a climate-controlled environment, this mall provides a comprehensive shopping experience for families and individuals seeking popular national brands and local favorites.",
+  "demographics": "null",
+  "summary": "Montclair Place is a major enclosed regional mall in the Inland Empire featuring extensive shopping, dining, and entertainment options.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 43,
+  "reviewCount": 5200,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

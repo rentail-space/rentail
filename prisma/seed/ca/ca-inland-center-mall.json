@@ -1,0 +1,17 @@
+{
+  "name": "Inland Center Mall",
+  "city": "San Bernardino",
+  "state": "CA",
+  "country": "USA",
+  "address": "500 Inland Center Drive",
+  "latitude": 34.1254,
+  "longitude": -117.2571,
+  "squareFootage": 800000,
+  "numberOfStores": 80,
+  "website": "https://www.inlandcentermall.com",
+  "imageURLs": [],
+  "description": "Inland Center Mall is a regional shopping destination in San Bernardino serving the Inland Empire with a diverse mix of retailers, dining options, and entertainment venues. This enclosed mall features major department store anchors and specialty shops catering to families and value-conscious shoppers. Conveniently located off major freeways, it provides accessible shopping for the surrounding communities.",
+  "summary": "A regional enclosed mall serving San Bernardino's Inland Empire with diverse retail, dining, and entertainment options.",
+  "centerType": "RegionalMall",
+  "spaces": []
+}

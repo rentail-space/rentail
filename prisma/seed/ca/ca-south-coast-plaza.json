@@ -1,0 +1,23 @@
+{
+  "name": "South Coast Plaza",
+  "city": "Costa Mesa",
+  "state": "CA",
+  "country": "USA",
+  "address": "3333 Bristol Street",
+  "latitude": 33.6905,
+  "longitude": -117.8897,
+  "squareFootage": 2700000,
+  "numberOfStores": 250,
+  "website": "https://www.southcoastplaza.com",
+  "phone": "+17145491600",
+  "imageURLs": [],
+  "description": "South Coast Plaza is one of the most prestigious luxury shopping destinations on the West Coast, featuring over 250 world-class retailers including the highest concentration of designer boutiques outside of major metropolitan centers. This iconic enclosed mall anchored by Nordstrom, Bloomingdale's, and Saks Fifth Avenue offers an unparalleled upscale retail experience with exclusive brands, fine dining at multiple restaurants, and contemporary art installations throughout the property.",
+  "demographics": "Affluent shoppers in Orange County with high household incomes; attracts international tourists and luxury brand consumers",
+  "summary": "Southern California's premier luxury shopping destination featuring 250+ high-end retailers and designer boutiques in an elegant enclosed mall setting.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 45,
+  "reviewCount": 15000,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

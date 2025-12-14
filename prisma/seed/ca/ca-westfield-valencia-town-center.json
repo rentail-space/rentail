@@ -1,0 +1,23 @@
+{
+  "name": "Westfield Valencia Town Center",
+  "city": "Valencia",
+  "state": "CA",
+  "country": "USA",
+  "address": "24201 Valencia Boulevard",
+  "latitude": 34.409,
+  "longitude": -118.5593,
+  "squareFootage": 1100000,
+  "numberOfStores": 140,
+  "website": "https://www.westfield.com/valencia",
+  "phone": "+16612554529",
+  "imageURLs": [],
+  "description": "Westfield Valencia Town Center is a premier enclosed regional shopping destination in the Santa Clarita Valley featuring upscale retailers, department store anchors, and diverse dining options. Part of the globally recognized Westfield brand, this center offers world-class shopping with convenient amenities like Smart Parking and click-and-collect services. The mall serves as a dynamic entertainment hub where visitors can shop iconic brands, dine, and enjoy community events.",
+  "demographics": "Affluent suburban families and young professionals in the Santa Clarita Valley area, with a trade area spanning northern Los Angeles County",
+  "summary": "A premier enclosed regional mall in Santa Clarita Valley offering world-class shopping, dining, and entertainment with iconic brands under the globally recognized Westfield portfolio.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 44,
+  "reviewCount": 8500,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

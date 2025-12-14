@@ -1,0 +1,23 @@
+{
+  "name": "The Shops at Montebello",
+  "city": "Montebello",
+  "state": "CA",
+  "country": "USA",
+  "address": "2134 Montebello Town Center",
+  "latitude": 34.0165,
+  "longitude": -118.1138,
+  "squareFootage": 900000,
+  "numberOfStores": 150,
+  "website": "https://www.shopsmontebello.com",
+  "phone": "+13237214828",
+  "imageURLs": [],
+  "description": "The Shops at Montebello is a major regional shopping destination in the heart of Montebello, offering a diverse mix of popular retailers, dining options, and entertainment. With anchor stores and over 150 specialty shops, this enclosed mall serves the diverse communities of East Los Angeles County with convenient access and ample parking. The center provides a comfortable climate-controlled shopping experience for families and shoppers throughout the region.",
+  "demographics": "Serves the diverse East Los Angeles County communities with a predominantly Hispanic/Latino demographic base, along with Asian and multi-generational families seeking value-oriented shopping options.",
+  "summary": "A large enclosed regional mall in Montebello serving East Los Angeles County with over 150 stores, department store anchors, and diverse shopping and dining options.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 41,
+  "reviewCount": 5800,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Horton Plaza",
+  "city": "San Diego",
+  "state": "CA",
+  "country": "USA",
+  "address": "324 Horton Plaza",
+  "latitude": 32.7142,
+  "longitude": -117.1631,
+  "squareFootage": 450000,
+  "numberOfStores": 25,
+  "website": "https://www.hortonplaza.com",
+  "imageURLs": [],
+  "description": "Horton Plaza is a historic downtown San Diego landmark that opened in 1985 as an innovative multi-level urban shopping center featuring colorful postmodern architecture. Once a premier retail destination with major department stores, it has undergone significant transformation in recent years, with portions converted to office and residential space while maintaining its iconic design and central Gaslamp Quarter location.",
+  "summary": "A historic postmodern shopping center in downtown San Diego's Gaslamp Quarter, currently undergoing redevelopment from its original retail mall format.",
+  "centerType": "RegionalMall",
+  "spaces": []
+}

@@ -1,0 +1,22 @@
+{
+  "name": "The Outlets at Orange",
+  "city": "Orange",
+  "state": "CA",
+  "country": "USA",
+  "address": "20 City Boulevard West",
+  "latitude": 33.7828,
+  "longitude": -117.8906,
+  "squareFootage": 630000,
+  "numberOfStores": 120,
+  "website": "https://www.outletsatorange.com",
+  "phone": "+17145672000",
+  "imageURLs": [],
+  "description": "The Outlets at Orange is a premier open-air outlet shopping destination in Orange County, California, featuring over 120 brand-name outlet stores offering designer and brand merchandise at exceptional value. Located just minutes from Disneyland and major Southern California attractions, this expansive center combines factory outlet shopping with dining and entertainment options. Shoppers enjoy a vibrant outdoor environment with convenient access to top brands including Nike, Coach, Michael Kors, and many more.",
+  "summary": "A premier open-air outlet center in Orange County featuring over 120 brand-name stores near Disneyland and major attractions.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 43,
+  "reviewCount": 8500,
+  "centerType": "OutletCenter",
+  "spaces": []
+}

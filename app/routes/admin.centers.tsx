@@ -1,4 +1,6 @@
 import { MapPinIcon } from "lucide-react";
+import type { PropertySpace } from "prisma/generated/client";
+import type { PropertyGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
 import { Link } from "react-router";
 import { Button } from "~/components/ui/Button";
@@ -14,8 +16,6 @@ import envVars from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
-import type { PropertySpace } from "prisma/generated/client";
-import type { PropertyGetPayload } from "prisma/generated/models";
 import type { Route } from "./+types/admin.centers";
 
 const mapboxToken = envVars.MAPBOX_TOKEN;

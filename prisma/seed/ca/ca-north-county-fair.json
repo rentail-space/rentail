@@ -1,0 +1,23 @@
+{
+  "name": "North County Fair",
+  "city": "Escondido",
+  "state": "CA",
+  "country": "USA",
+  "address": "272 East Via Rancho Parkway",
+  "latitude": 33.0916,
+  "longitude": -117.0761,
+  "squareFootage": 1100000,
+  "numberOfStores": 160,
+  "website": "https://www.westfield.com/northcounty",
+  "phone": "+17607891555",
+  "imageURLs": [],
+  "description": "North County Fair is a premier Westfield shopping destination in Escondido, California, featuring over 160 stores including major department store anchors and popular brands like H&M, Sephora, Zara, and Adidas. This enclosed regional mall offers a comprehensive shopping experience with diverse retail, dining, and entertainment options serving North San Diego County.",
+  "demographics": "Serves North San Diego County including Escondido, San Marcos, and surrounding communities with diverse demographics",
+  "summary": "A major enclosed regional mall in North San Diego County offering 160+ stores with department store anchors and world-class brands.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 42,
+  "reviewCount": 3500,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Galleria at Tyler",
+  "city": "Riverside",
+  "state": "CA",
+  "country": "USA",
+  "address": "1299 Galleria at Tyler",
+  "latitude": 33.9169,
+  "longitude": -117.4414,
+  "squareFootage": 1100000,
+  "numberOfStores": 130,
+  "website": "https://www.simon.com/mall/galleria-at-tyler",
+  "phone": "+19516835244",
+  "imageURLs": [],
+  "description": "Galleria at Tyler is a premier regional shopping destination in Riverside, California, featuring top national retailers, dining options, and entertainment venues. Managed by Simon Property Group, this enclosed mall serves the Inland Empire with a diverse mix of fashion, lifestyle, and specialty stores. The center provides a comfortable year-round shopping experience with modern amenities and convenient access from major highways.",
+  "demographics": "null",
+  "summary": "A major enclosed regional mall in Riverside's Inland Empire offering over 130 stores with fashion, dining, and entertainment options.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 42,
+  "reviewCount": 5800,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

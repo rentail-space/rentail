@@ -1,0 +1,23 @@
+{
+  "name": "Westfield Mission Valley",
+  "city": "San Diego",
+  "state": "CA",
+  "country": "USA",
+  "address": "1640 Camino Del Rio North",
+  "latitude": 32.7741,
+  "longitude": -117.156,
+  "squareFootage": 850000,
+  "numberOfStores": 140,
+  "website": "https://www.westfield.com/missionvalley",
+  "phone": "null",
+  "imageURLs": [],
+  "description": "Westfield Mission Valley is a premier enclosed shopping destination in the heart of San Diego, featuring over 140 stores and restaurants. This popular regional mall offers an exceptional mix of national retailers, dining options, and entertainment venues, making it a convenient hub for locals and visitors exploring the Mission Valley area. With modern amenities like Smart Parking and click-and-collect services, the center provides both efficiency for quick trips and variety for all-day shopping experiences.",
+  "demographics": "null",
+  "summary": "A major enclosed regional mall in San Diego's Mission Valley featuring 140+ stores, dining, and entertainment with modern shopping conveniences.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 42,
+  "reviewCount": 8500,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

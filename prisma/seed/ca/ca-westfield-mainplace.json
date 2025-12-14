@@ -1,0 +1,23 @@
+{
+  "name": "Westfield MainPlace",
+  "city": "Santa Ana",
+  "state": "CA",
+  "country": "USA",
+  "address": "2800 North Main Street",
+  "latitude": 33.7697,
+  "longitude": -117.8681,
+  "squareFootage": 1100000,
+  "numberOfStores": 140,
+  "website": "https://www.westfield.com/mainplace",
+  "phone": "+17145479200",
+  "imageURLs": [],
+  "description": "Westfield MainPlace is a premier enclosed regional shopping destination in Santa Ana, California, featuring over 140 specialty stores and department store anchors. The center offers a comprehensive shopping experience with a diverse mix of fashion, dining, and entertainment options, complemented by modern amenities including Smart Parking and click-and-collect services.",
+  "demographics": "Orange County shoppers, families, young professionals, diverse community including Hispanic and Asian demographics",
+  "summary": "A leading regional mall in Orange County offering 140+ stores with upscale shopping, dining, and entertainment in an enclosed climate-controlled environment.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 42,
+  "reviewCount": 3500,
+  "centerType": "RegionalMall",
+  "spaces": []
+}
