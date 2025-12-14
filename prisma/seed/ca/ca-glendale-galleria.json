@@ -1,0 +1,27 @@
+{
+  "name": "Glendale Galleria",
+  "city": "Glendale",
+  "state": "CA",
+  "country": "USA",
+  "address": "2148 Glendale Galleria",
+  "latitude": 34.1436,
+  "longitude": -118.2559,
+  "squareFootage": 1600000,
+  "numberOfStores": 100,
+  "website": "https://www.glendalegalleria.com",
+  "phone": "null",
+  "imageURLs": [
+    "https://www.glendalegalleria.com/en/visit",
+    "https://www.glendalegalleria.com/en/directory",
+    "https://www.glendalegalleria.com/en/map"
+  ],
+  "description": "Glendale Galleria is a premier enclosed regional shopping mall in Glendale, California, featuring major department store anchors like Bloomingdale's and Macy's alongside a distinctive variety of high-end brands and unique retailers. The mall offers holiday events, Santa photos, and a Garden Passage on Level 2, making it a complete shopping and entertainment destination for the Los Angeles community.",
+  "demographics": "Diverse and engaged audience in the greater Los Angeles area with access to high-end brands and unique retail experiences",
+  "summary": "A large enclosed regional mall in Glendale featuring upscale department stores, diverse retail options, and family-friendly holiday experiences in the heart of Los Angeles.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 43,
+  "reviewCount": 3500,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

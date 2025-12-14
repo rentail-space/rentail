@@ -1,0 +1,28 @@
+{
+  "name": "The Village at Westfield Topanga",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "USA",
+  "address": "6250 Topanga Canyon Boulevard",
+  "latitude": 34.1872,
+  "longitude": -118.6016,
+  "squareFootage": 350000,
+  "numberOfStores": 40,
+  "website": "https://www.westfield.com/topanga",
+  "phone": "+18185948732",
+  "imageURLs": [
+    "https://www.westfield.com/topanga",
+    "https://acsbapp.com/apps/app/dist/js/app.js",
+    "https://www.googletagmanager.com/ns.html?id=GTM-NMH6ZV9"
+  ],
+  "logoURL": "https://www.westfield.com/topanga",
+  "description": "The Village at Westfield Topanga is an upscale open-air lifestyle center in Los Angeles featuring luxury retail brands including Prada, Balenciaga, Saint Laurent, and Rolex alongside premium dining destinations like STK Steakhouse and Topanga Social. This modern shopping destination offers a sophisticated blend of high-end fashion, fine dining, and entertainment including an AMC Theatres, all set in an architecturally stunning outdoor environment with convenient amenities like electric vehicle charging stations.",
+  "demographics": "Affluent, upscale shoppers in the Los Angeles metro area seeking luxury brands and premium dining experiences",
+  "summary": "An upscale open-air lifestyle center showcasing luxury brands, premium dining, and entertainment in the heart of Los Angeles.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 44,
+  "reviewCount": 3500,
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

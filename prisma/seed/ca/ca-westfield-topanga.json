@@ -1,0 +1,23 @@
+{
+  "name": "Westfield Topanga",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "USA",
+  "address": "6600 Topanga Canyon Boulevard",
+  "latitude": 34.1899,
+  "longitude": -118.6043,
+  "squareFootage": 1250000,
+  "numberOfStores": 120,
+  "website": "https://www.westfield.com/topanga",
+  "phone": "+18185948732",
+  "imageURLs": [],
+  "description": "Westfield Topanga is a premier luxury shopping destination in Los Angeles featuring high-end retailers like Prada, Balenciaga, Saint Laurent, and Rolex alongside upscale dining options including STK Steakhouse and Topanga Social. This modern regional mall offers an elevated shopping experience with 27 electric vehicle charging stations, AMC Theatres entertainment, and a sophisticated blend of fashion, dining, and lifestyle brands across multiple levels.",
+  "demographics": "null",
+  "summary": "A luxury regional mall in Los Angeles offering premier fashion brands, upscale dining, and entertainment in a modern multi-level setting.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 43,
+  "reviewCount": 2500,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

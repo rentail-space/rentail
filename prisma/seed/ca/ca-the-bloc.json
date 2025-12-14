@@ -1,0 +1,25 @@
+{
+  "name": "The Bloc",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "USA",
+  "address": "700 West 7th Street",
+  "latitude": 34.0476,
+  "longitude": -118.2587,
+  "squareFootage": 350000,
+  "numberOfStores": 45,
+  "website": "https://theblocla.com",
+  "phone": "+12134544926",
+  "imageURLs": [
+    "https://cdn-files.eu.placewise.com/f/CO2GPRCfCBoTY21zX2NvbXBvbmVudF9pbWFnZSIaaWQtMTc1NjQ3NjAzMDkyMC0xNDkzLWxvZ284nK3ySYpCPHdI5VRJKM8-iB6aLQc"
+  ],
+  "description": "The Bloc is a vibrant, open-air urban center and LEED Gold certified project encompassing a full city block along LA's iconic 7th Street corridor in downtown Los Angeles. It connects the financial, fashion, jewelry, and theater districts while serving as a hub for the 7th Street Metro Center Station where four DTLA lines converge. This inclusive community features retail shopping, diverse dining options, entertainment venues including Alamo Drafthouse Cinema, UCLA Health services, and serves as both a commercial destination and office workplace.",
+  "demographics": "Urban professionals, downtown workers, tourists, and local residents seeking dining, entertainment, and retail experiences in the heart of DTLA",
+  "summary": "A vibrant open-air urban lifestyle center in the heart of downtown LA, connecting multiple districts with retail, dining, entertainment, and direct metro access.",
+  "openFrom": 1100,
+  "openUntil": 2100,
+  "rating": 42,
+  "reviewCount": 850,
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

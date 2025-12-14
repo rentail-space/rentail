@@ -1,0 +1,25 @@
+{
+  "name": "The Americana at Brand",
+  "city": "Glendale",
+  "state": "CA",
+  "country": "USA",
+  "address": "889 Americana Way",
+  "latitude": 34.1447,
+  "longitude": -118.2567,
+  "squareFootage": 550000,
+  "numberOfStores": 75,
+  "website": "https://americanaatbrand.com",
+  "phone": "+18186378982",
+  "imageURLs": [
+    "https://americanaatbrand.com/wp-content/themes/caruso-retail/images/placeholder.jpg"
+  ],
+  "description": "The Americana at Brand in Glendale, California, is a one-of-a-kind destination that offers a remarkable blend of shopping, restaurants, activities, movies, and entertainment. Located just a short drive away from Downtown Los Angeles and Hollywood, The Americana at Brand enjoys a unique and advantageous location. This premier open-air lifestyle center features upscale retail, diverse dining options, AMC Theatres, family amenities, and year-round entertainment programming including seasonal events and live performances.",
+  "demographics": "Located near Downtown Los Angeles and Hollywood, serving both locals and tourists in the Glendale area with proximity to major entertainment destinations",
+  "summary": "A premier open-air lifestyle destination in Glendale offering upscale shopping, diverse dining, entertainment, and year-round events near Downtown Los Angeles and Hollywood.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 45,
+  "reviewCount": 8500,
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

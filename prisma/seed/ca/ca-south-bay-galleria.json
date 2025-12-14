@@ -1,0 +1,27 @@
+{
+  "name": "South Bay Galleria",
+  "city": "Redondo Beach",
+  "state": "CA",
+  "country": "USA",
+  "address": "1815 Hawthorne Boulevard",
+  "latitude": 33.8901,
+  "longitude": -118.3524,
+  "squareFootage": 850000,
+  "numberOfStores": 140,
+  "website": "https://southbaygalleria.com",
+  "phone": "+13103717546",
+  "imageURLs": [
+    "https://southbaygalleria.com/images/hero-1.jpg",
+    "https://southbaygalleria.com/images/hero-2.jpg",
+    "https://southbaygalleria.com/images/hero-3.jpg"
+  ],
+  "description": "South Bay Galleria is a premier three-level regional shopping destination in Redondo Beach featuring over 140 retailers including anchor stores Macy's and Kohl's, plus an AMC Dine-In Theatre with 16 screens. The mall offers a comprehensive shopping and entertainment experience with diverse dining options, special events, and seasonal attractions including Santa photos, gift wrapping services, and holiday entertainment.",
+  "demographics": "Serving South Bay communities including Redondo Beach, North Redondo, South Redondo, and surrounding Beach Cities with a family-oriented customer base seeking shopping, dining, and entertainment options.",
+  "summary": "A three-level regional mall in Redondo Beach's South Bay area offering 140+ retailers, department store anchors, AMC Theatre, and family-friendly dining and entertainment.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 40,
+  "reviewCount": 2500,
+  "centerType": "RegionalMall",
+  "spaces": []
+}

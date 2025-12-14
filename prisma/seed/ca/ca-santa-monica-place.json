@@ -1,0 +1,23 @@
+{
+  "name": "Santa Monica Place",
+  "city": "Santa Monica",
+  "state": "CA",
+  "country": "USA",
+  "address": "395 Santa Monica Place",
+  "latitude": 34.0142,
+  "longitude": -118.4933,
+  "squareFootage": 550000,
+  "numberOfStores": 80,
+  "website": "https://santamonicaplace.com",
+  "phone": "+13103941131",
+  "imageURLs": [],
+  "description": "Santa Monica Place is a premier three-level open-air shopping destination located steps from the Pacific Ocean and world-famous Santa Monica Pier, featuring luxury retailers, celebrated restaurants, and stunning ocean views. Redesigned by renowned architect Jon Jerde, this sophisticated shopping center blends Southern California's indoor-outdoor lifestyle with upscale shopping and dining experiences. The rooftop dining deck offers panoramic ocean vistas while shoppers enjoy an exceptional mix of fashion, beauty, and lifestyle brands.",
+  "demographics": "Affluent coastal demographic with high household incomes, mix of local residents and international tourists, strong appeal to millennials and fashion-conscious shoppers seeking premium brands and experiences",
+  "summary": "An upscale open-air shopping destination in Santa Monica featuring luxury retailers, acclaimed dining, and breathtaking ocean views near the iconic Santa Monica Pier.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 44,
+  "reviewCount": 8500,
+  "centerType": "LifestyleCenter",
+  "spaces": []
+}

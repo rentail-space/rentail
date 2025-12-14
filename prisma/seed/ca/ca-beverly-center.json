@@ -1,0 +1,23 @@
+{
+  "name": "Beverly Center",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "USA",
+  "address": "8500 Beverly Boulevard",
+  "latitude": 34.0755,
+  "longitude": -118.3775,
+  "squareFootage": 865000,
+  "numberOfStores": 100,
+  "website": "https://beverlycenter.com",
+  "phone": "+13108544071",
+  "imageURLs": [],
+  "description": "Beverly Center is an iconic eight-story luxury shopping destination in the heart of Los Angeles, featuring over 100 premier retailers and restaurants. Originally opened in 1982 and dramatically renovated in 2018, this architectural landmark offers a contemporary open-air rooftop dining terrace, high-end fashion boutiques including Bloomingdale's and Macy's as anchors, and stunning views of the Hollywood Hills. The center's distinctive design and prime location at Beverly and La Cienega Boulevards make it a premier shopping hub for locals and visitors seeking upscale retail and dining experiences.",
+  "demographics": "Affluent urban shoppers, fashion-forward consumers, tourists visiting the Los Angeles area, and residents of West Hollywood and Beverly Hills seeking luxury retail experiences",
+  "summary": "Beverly Center is a premier eight-story luxury shopping destination in the heart of Los Angeles featuring over 100 upscale retailers, rooftop dining, and iconic views of the Hollywood Hills.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 42,
+  "reviewCount": 15000,
+  "centerType": "RegionalMall",
+  "spaces": []
+}
