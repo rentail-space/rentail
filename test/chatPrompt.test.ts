@@ -1,10 +1,10 @@
 import { invariant } from "node_modules/es-toolkit/dist/util/invariant.mjs";
+import type { User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import { beforeAll, describe, expect, it } from "vitest";
 import preparePrompt from "~/lib/preparePrompt";
 import { createAnonymousUser } from "~/lib/sessions.server";
 import chatPrompt from "~/prompts/chatPrompt.md?raw";
-import type { User } from "prisma/generated/client";
 
 describe("prompt()", () => {
   let prompt: string;
@@ -67,10 +67,10 @@ describe("prompt()", () => {
     const theGrove = findTheGrove(prompt);
     expect(theGrove).toMatchObject({
       name: "The Grove",
-      address: "189 The Grove Drive, Los Angeles, CA 90036",
+      address: "189 The Grove Drive",
       city: "Los Angeles",
       state: "CA",
-      website: "https://thegrovela.com/",
+      website: "https://thegrovela.com",
     });
   });
 
