@@ -44,10 +44,10 @@ model Property {
   address        String          @map("address")
   city           String          @map("city")
   country        String          @map("country")
-  createdAt      DateTime        @map("created_at")       @default(now())
+  createdAt      DateTime        @map("created_at")                               @default(now())
   demographics   String?         @map("demographics")
   description    String          @map("description")
-  id             String          @map("id")               @id
+  id             String          @map("id")                                       @id
   imageURLs      String[]        @map("image_urls")
   latitude       Float           @map("latitude")
   logoURL        String?         @map("logo_url")
@@ -58,8 +58,11 @@ model Property {
   spaces         PropertySpace[]
   squareFootage  Int             @map("square_footage")
   state          String          @map("state")
-  updatedAt      DateTime        @map("updated_at")       @updatedAt
+  updatedAt      DateTime        @map("updated_at")                               @updatedAt
   website        String          @map("website")
+  rating         Int?            @map("rating") // 1-5 as 10-50
+  openUntil      Int?            @map("open_until") // Hour:minute eg 930 is 9:30
+  summary        String?         @map("summary")
 
   @@map("properties")
 }

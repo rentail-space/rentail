@@ -1,8 +1,8 @@
 @layer theme, base, components, utilities;
 
 @font-face {
-  font-family: 'Outfit';
-  src: url("/fonts/Outfit-VariableFont_wght.ttf") format('truetype');
+  font-family: "Outfit";
+  src: url("/fonts/Outfit-VariableFont_wght.ttf") format("truetype");
 }
 
 @font-face {
@@ -19,7 +19,11 @@
 }
 
 @theme {
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    "Outfit", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: "Quando", "Times New Roman", serif;
-  --font-mono: "Atkinson", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
+  --font-mono:
+    "Atkinson", "Monaco", "Consolas", "Liberation Mono", "Courier New",
+    monospace;
 }

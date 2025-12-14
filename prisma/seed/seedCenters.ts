@@ -21,6 +21,9 @@ const schema = z.object({
   logoURL: z.url().optional(),
   description: z.string(),
   demographics: z.string().optional(),
+  summary: z.string().optional(),
+  openUntil: z.number().optional(),
+  rating: z.number().optional(),
 
   spaces: z
     .array(
