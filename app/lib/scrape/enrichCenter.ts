@@ -19,6 +19,7 @@ const centerSchema = z.object({
   description: z.string(),
   demographics: z.string().optional(),
   summary: z.string().optional(),
+  openFrom: z.number().optional(),
   openUntil: z.number().optional(),
   rating: z.number().optional(),
   spaces: z
@@ -69,7 +70,7 @@ ${JSON.stringify(centerSchema.shape, null, 2)}
 Tasks:
 1. Verify/correct the address and coordinates
 2. Write a compelling 2-3 sentence description
-3. Extract: phone (format as E.164: +1XXXXXXXXXX for US numbers), hours (openUntil as HHMM), square footage, store count
+3. Extract: phone (format as E.164: +1XXXXXXXXXX for US numbers), hours (openFrom as HHMM like 930, openUntil as HHMM like 2100), square footage, store count
 4. Select best 3-5 images (prioritize exterior/interior shots)
 5. Note any demographic info mentioned
 6. If you find individual retail spaces listed, include them

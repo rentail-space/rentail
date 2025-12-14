@@ -22,6 +22,7 @@ const schema = z.object({
   description: z.string(),
   demographics: z.string().optional(),
   summary: z.string().optional(),
+  openFrom: z.number().optional(),
   openUntil: z.number().optional(),
   rating: z.number().optional(),
 
