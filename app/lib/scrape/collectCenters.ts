@@ -8,20 +8,15 @@ import validateImages from "~/lib/scrape/validateImages";
 import writeCenterFile from "~/lib/scrape/writeCenterFile";
 
 export default async function collectCenters(countyName: string) {
-  console.info(`Starting collection for: ${countyName}`);
+  console.info('Starting collection for: "%s"', countyName);
 
   // Rate limiter: 1.2s between API calls (~50/min)
   const rateLimiter = new RateLimiter(1200);
 
   // Stage 1: Discovery
-  console.info("Stage 1: Discovering centers...");
+  console.info("\x1b[32m  Stage 1: Discovering centers...\x1b[0m");
   await rateLimiter.throttle();
   const centers = await discoverCenters(countyName);
-  console.info(
-    "Found %d centers:\n%s",
-    centers.length,
-    centers.map((center) => `${center.name} - ${center.website}`).join("\n"),
-  );
 
   let successCount = 0;
   let failCount = 0;
@@ -29,34 +24,17 @@ export default async function collectCenters(countyName: string) {
   // Process each center
   for (let i = 0; i < centers.length; i++) {
     const center = centers[i];
-    console.info(`[${i + 1}/${centers.length}] Processing: ${center.name}`);
-
     try {
       // Stage 2: Scraping
-      console.info(`  Scraping website: ${center.website}`);
       await delay(2000 + Math.random() * 1000);
       const scrapedData = await scrapeCenter(center.website);
-      if (scrapedData.error)
-        console.error("  ⚠ Scraping failed, using LLM-only mode");
 
       // Stage 2.5: Validate images
       let validImages: string[] = [];
-      try {
-        console.info("  Validating images...");
-        const scrapedImages = scrapedData.images || [];
-        validImages = await validateImages(scrapedImages);
-        console.info(
-          `  ${scrapedImages.length} scraped → ${validImages.length} validated`,
-        );
-      } catch (error) {
-        console.error(
-          `  ⚠ Image validation failed: ${error instanceof Error ? error.message : String(error)}`,
-        );
-        validImages = [];
-      }
+      const scrapedImages = scrapedData.images || [];
+      validImages = await validateImages(scrapedImages);
 
       // Stage 3: Enrichment
-      console.info("  Enriching data...");
       await rateLimiter.throttle();
       const enrichedData = await enrichCenter(center, {
         ...scrapedData,
@@ -64,27 +42,22 @@ export default async function collectCenters(countyName: string) {
       });
 
       // Stage 4: Write to file
-      console.info("  Writing to file...");
-      const path = await writeCenterFile(enrichedData);
-      console.info(`  ✓ Saved: ${path}`);
-
+      await writeCenterFile(enrichedData);
       successCount++;
     } catch (error) {
       console.error(
-        `  ✗ Failed: ${error instanceof Error ? error.message : String(error)}`,
+        "\x1b[31m  ✗ Failed: %s\x1b[0m",
+        error instanceof Error ? error.message : String(error),
       );
       failCount++;
     }
   }
 
   // Summary
-  console.log(`
-✓ Processed: ${countyName}
-✓ Centers saved: ${successCount}/${centers.length}
-${failCount > 0 ? `⚠ Failed: ${failCount}` : ""}
-📁 Output: prisma/seed/${centers[0]?.state.toLowerCase()}/${countyName
-    .toLowerCase()
-    .replace(/\s+county\s*/i, "")
-    .replace(/\s+/g, "-")}/*.json
-  `);
+  console.info(
+    "\x1b[32m  ✓ Centers saved: %d/%d\x1b[0m",
+    successCount,
+    centers.length,
+  );
+  if (failCount > 0) console.info("\x1b[31m  ⚠ Failed: %d\x1b[0m", failCount);
 }

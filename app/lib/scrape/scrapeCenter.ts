@@ -9,6 +9,8 @@ interface ScrapedData {
 }
 
 export default async function scrapeCenter(url: string): Promise<ScrapedData> {
+  console.info("\x1b[32m  Scraping website: %s\x1b[0m", url);
+
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
@@ -34,6 +36,10 @@ export default async function scrapeCenter(url: string): Promise<ScrapedData> {
     };
   } catch (_error) {
     await browser.close();
+    console.error(
+      "\x1b[31m  ⚠ Scraping failed: %s\x1b[0m",
+      _error instanceof Error ? _error.message : String(_error),
+    );
     return { error: "scraping_failed" };
   }
 }

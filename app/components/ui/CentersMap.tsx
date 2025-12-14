@@ -1,3 +1,4 @@
+import { maxBy, meanBy, minBy } from "es-toolkit";
 import { MapPin } from "lucide-react";
 import mapboxgl from "mapbox-gl";
 import type { PropertyGetPayload } from "prisma/generated/models";
@@ -10,18 +11,21 @@ const mapboxToken =
 
 export default function CentersMap({
   centers,
-  latitude,
-  longitude,
   centerRef,
-  zoom = 11,
 }: {
-  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
-  latitude: number;
-  longitude: number;
+  centers: PropertyGetPayload<{ select: {
+    address: true;
+    city: true;
+    country: true;
+    latitude: true; 
+    longitude: true;
+    name: true;
+    spaces: { select: { id: true } }
+    state: true;
+  }}>[]; 
   centerRef?: React.RefObject<
     ((center: { longitude: number; latitude: number }) => void) | null
   >;
-  zoom?: number;
 }) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
@@ -46,8 +50,11 @@ export default function CentersMap({
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v12",
-      center: [longitude, latitude],
-      zoom,
+      center: [
+        meanBy(centers, (center) => center.longitude),
+        meanBy(centers, (center) => center.latitude),
+      ],
+      zoom: calculateZoomLevel(centers),
     });
 
     // Add navigation controls
@@ -75,7 +82,7 @@ export default function CentersMap({
         map.current = null;
       }
     };
-  }, [latitude, longitude, zoom]);
+  }, [centers ]);
 
   // Add markers when centers change
   useEffect(() => {
@@ -187,4 +194,17 @@ export default function CentersMap({
       )}
     </section>
   );
+}
+
+
+function calculateZoomLevel(centers: PropertyGetPayload<{ select: {
+  latitude: true;
+  longitude: true;
+}}>[]) {
+const latitudeRange = (maxBy(centers, (center) => center.latitude)?.latitude ?? 0) - 
+(minBy(centers, (center) => center.latitude)?.latitude ?? 0);
+const longitudeRange = (maxBy(centers, (center) => center.longitude)?.longitude ?? 0) -
+(minBy(centers, (center) => center.longitude)?.longitude ?? 0);
+const maxRange = Math.max(latitudeRange, longitudeRange);
+return 10 + Math.log2(maxRange);
 }

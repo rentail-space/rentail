@@ -1,4 +1,5 @@
 import { generateObject } from "ai";
+import ora from "ora";
 import { z } from "zod";
 import { conversational } from "~/lib/models";
 
@@ -66,6 +67,7 @@ export default async function enrichCenter(
   discoveryData: DiscoveryData,
   scrapedData: ScrapedData,
 ) {
+  const spinner = ora(`Enriching ${discoveryData.name}...`).start();
   const enrichmentPrompt = `Given this shopping center data:
 
 Discovery Info: ${JSON.stringify(discoveryData)}
@@ -125,5 +127,6 @@ Mark uncertain fields as null.`;
     prompt: enrichmentPrompt,
   });
 
+  spinner.succeed();
   return object;
 }

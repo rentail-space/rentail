@@ -1,4 +1,5 @@
 import imageSize from "image-size";
+import ora from "ora";
 
 interface ValidatedImage {
   url: string;
@@ -101,11 +102,15 @@ async function validateImageSet(
 export default async function validateImages(
   imageURLs: string[],
 ): Promise<string[]> {
+  const spinner = ora(`Validating ${imageURLs.length} images...`).start();
+
   // 1. Pre-filter URLs using heuristics
   const filtered = preFilterImages(imageURLs);
 
   // 2. Validate filtered images (download + check)
   const validated = await validateImageSet(filtered);
+
+  spinner.succeed(`Validated ${validated.length} images`);
 
   // 3. Return valid URLs (or empty array)
   return validated.map((img) => img.url);

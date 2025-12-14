@@ -1,6 +1,8 @@
 import { clamp, range } from "es-toolkit";
-import { StarIcon } from "lucide-react";
+import { MapPinIcon, StarIcon } from "lucide-react";
+import { useRef } from "react";
 import { Link } from "react-router";
+import CentersMap from "~/components/ui/CentersMap";
 import expandStateAbbr from "~/lib/expandStateAbbr";
 import prisma from "~/lib/prisma";
 import type { Route } from "./+types/state.$state";
@@ -9,11 +11,20 @@ export async function loader({ params }: Route.LoaderArgs) {
   const state = params.state.toUpperCase();
   const centers = await prisma.property.findMany({
     select: {
+      address: true,
+      country: true,
       id: true,
       name: true,
       rating: true,
       summary: true,
       city: true,
+      longitude: true,
+      latitude: true,
+      state: true,
+      spaces: {
+        select: { id: true },
+        where: { available: true },
+      },
     },
     where: { state },
   });
@@ -25,11 +36,17 @@ export default function StatePage({
 }: {
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
+  const centerRef =
+    useRef<(center: { longitude: number; latitude: number }) => void>(null);
+
   return (
     <main className="container mx-auto my-10 space-y-8">
       <h1 className="text-center font-bold text-2xl">
         {expandStateAbbr(loaderData.state)}
       </h1>
+
+      <CentersMap centerRef={centerRef} centers={loaderData.centers} />
+
       <ul
         className="space-y-4"
         itemScope
@@ -47,7 +64,19 @@ export default function StatePage({
               itemProp="name"
             >
               <Link to={`/center/${center.id}`}>{center.name}</Link>
-              <span className="text-gray-500 text-sm">{center.city}</span>
+              <span className="flex flex-row flex-nowrap items-center gap-2 text-gray-500 text-sm">
+                {center.city}
+                <MapPinIcon
+                  onClick={(event) => {
+                    event.preventDefault();
+                    centerRef.current?.({
+                      longitude: center.longitude ?? 0,
+                      latitude: center.latitude ?? 0,
+                    });
+                  }}
+                  className="h-6 w-6 cursor-pointer text-blue-500"
+                />
+              </span>
             </h2>
             <p className="space-x-1">
               {center.rating && <Stars rating={center.rating / 10} />}

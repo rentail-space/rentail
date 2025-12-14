@@ -59,7 +59,17 @@ Exclude individual stores or single-building retail.`;
       schema: discoverySchema,
     });
     spinner.succeed();
-    return object.centers;
+
+    const { centers } = object;
+
+    console.info(
+      "\x1b[32m  Found %d centers:\n%s\x1b[0m",
+      centers.length,
+      centers
+        .map((center) => `  ${center.name} - ${center.website}`)
+        .join("\n"),
+    );
+    return centers;
   } catch (error) {
     const reason =
       error instanceof Error
