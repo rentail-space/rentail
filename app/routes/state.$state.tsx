@@ -85,7 +85,7 @@ export default function StatePage({
               </span>
             </h2>
             <p className="space-x-1">
-              {center.rating && <Stars rating={center.rating / 10} />}
+              {center.rating && <Stars rating={center.rating} />}
               <span itemProp="description">{center.summary}</span>
             </p>
           </li>

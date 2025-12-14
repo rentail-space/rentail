@@ -11,12 +11,14 @@
   "website": "https://www.americanaatbrand.com",
   "phone": "+18186378982",
   "imageURLs": [],
-  "description": "The Americana at Brand in Glendale, California, is a premier open-air lifestyle destination that seamlessly blends upscale shopping, award-winning restaurants, AMC movie theaters, and world-class entertainment. Located just minutes from Downtown Los Angeles and Hollywood, this beautifully designed center features contemporary architecture, lush landscaping, a central dancing fountain, and a charming trolley that creates a vibrant urban village atmosphere. With its unique mix of national retailers, luxury boutiques, and seasonal events like Winterland by Caruso, The Americana at Brand delivers an exceptional experience for both locals and visitors alike.",
-  "summary": "An upscale open-air lifestyle center in Glendale offering premium shopping, dining, entertainment, and year-round events in a beautifully landscaped urban village setting.",
+  "description": "The Americana at Brand offers world-class retail, dining, and entertainment in a premier outdoor lifestyle center setting. Located in Glendale, California, just minutes from Downtown Los Angeles and Hollywood, this upscale destination features an impressive blend of luxury shopping, acclaimed restaurants, AMC Theatres, and year-round events and entertainment. It's an L.A. favorite where friends and family come to shop, dine and unwind in a beautifully designed environment.",
+  "demographics": "The Americana at Brand attracts an affluent, diverse demographic with high disposable income, drawing primarily from Glendale, Burbank, and nearby Los Angeles neighborhoods. The visitor base consists of young professionals, families, and upscale shoppers aged 25-54 with above-average household incomes who seek premium shopping, dining, and entertainment experiences. The trade area encompasses one of Southern California's most prosperous communities, with shoppers exhibiting strong preferences for experiential retail, upscale dining, and leisure activities in an elegant outdoor setting.",
+  "summary": "An upscale outdoor lifestyle center in Glendale offering luxury shopping, acclaimed dining, entertainment, and year-round events in an elegant, pedestrian-friendly environment.",
   "openFrom": 1000,
   "openUntil": 2100,
-  "rating": 45,
-  "reviewCount": 8500,
+  "rating": 4.5,
+  "reviewCount": 15000,
   "centerType": "LifestyleCenter",
+  "tier": 3,
   "spaces": []
 }

@@ -22,7 +22,7 @@ const centerSchema = z.object({
   summary: z.string().optional(),
   openFrom: z.number().optional(),
   openUntil: z.number().optional(),
-  rating: z.number().min(10).max(50).optional(),
+  rating: z.number().min(1.0).max(5.0).optional(),
   reviewCount: z.number().int().positive().optional(),
   centerType: z.enum([
     "RegionalMall",
@@ -148,12 +148,12 @@ Tasks:
    - Secondary: Use your knowledge of typical ratings for this center
    - Aggregate from all sources into single rating and total review count
 
-   Rating format: 1-5 scale multiplied by 10 (4.3 stars = 43, 4.7 = 47)
+   Rating format: 1.0-5.0 scale with one decimal place (4.3 stars, 4.7 stars)
    Review count: Sum of all reviews across sources
 
    Examples:
-   - "4.5 stars (1,200 Google reviews)" → rating: 45, reviewCount: 1200
-   - "4.3 on Google, 4.1 on Yelp (800 + 400)" → rating: 42, reviewCount: 1200
+   - "4.5 stars (1,200 Google reviews)" → rating: 4.5, reviewCount: 1200
+   - "4.3 on Google, 4.1 on Yelp (800 + 400)" → rating: 4.2, reviewCount: 1200
 
    If no reliable data found, omit both fields.
 
