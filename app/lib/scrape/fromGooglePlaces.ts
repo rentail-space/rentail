@@ -1,6 +1,7 @@
 import { invariant } from "es-toolkit";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import ora from "ora";
 import envVars from "../env";
 import prisma from "../prisma";
 
@@ -32,6 +33,7 @@ export async function fromGooglePlaces(placeName: string): Promise<
     }
   | undefined
 > {
+  const spinner = ora(`Fetching Google Places data for ${placeName}`).start();
   try {
     const key = `google-places:${placeName.toLowerCase().replace(/[^a-z0-9\s-]/g, "")}`;
     const cache = await prisma.cache.findUnique({ where: { key } });
@@ -40,12 +42,11 @@ export async function fromGooglePlaces(placeName: string): Promise<
 
     const data = await fromPlacesAPI(placeName);
     await prisma.cache.create({ data: { key, value: data ?? "" } });
+    spinner.succeed();
     return data;
   } catch (error) {
-    console.error(
-      "Failed to fetch %s details from Google Places: %s",
-      placeName,
-      error,
+    spinner.fail(
+      `Failed to fetch ${placeName} details from Google Places: ${error}`,
     );
     return undefined;
   }

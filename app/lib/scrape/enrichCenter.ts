@@ -5,7 +5,7 @@ import { z } from "zod";
 import { conversational } from "~/lib/models";
 import type discoverCenters from "~/lib/scrape/discoverCenters";
 
-const centerSchema = z.object({
+const enrichedSchema = z.object({
   squareFootage: z.number(),
   numberOfStores: z.number(),
   description: z.string(),
@@ -42,10 +42,10 @@ export default async function enrichCenter({
   center: Awaited<ReturnType<typeof discoverCenters>>[number];
   description?: string | null;
   bodyText?: string;
-}): Promise<zod.infer<typeof centerSchema>> {
+}): Promise<zod.infer<typeof enrichedSchema>> {
   const spinner = ora(`Enriching ${center.name}...`).start();
-
-  const enrichmentPrompt = `Given this shopping center data:
+  try {
+    const enrichmentPrompt = `Given this shopping center data:
 
 <discovery>
 ${JSON.stringify(center)}
@@ -56,7 +56,7 @@ ${bodyText?.slice(0, 10000) || "No data"}
 </website>
 
 Extract and structure the following into valid JSON matching this schema:
-${JSON.stringify(centerSchema.shape, null, 2)}
+${JSON.stringify(enrichedSchema.shape, null, 2)}
 
 Tasks:
 1. Write a compelling 2-3 sentence description based on scraped website data (this is DIFFERENT from summary)
@@ -68,6 +68,7 @@ Tasks:
    - Reference any demographic data from the website or your knowledge of the area
    - Format as a 3-5 sentence narrative summary (not bullet points)
    - If no reliable demographic information is available, omit this field
+
 4. Classify centerType using this hybrid approach:
    - Primary: Square footage + store count + enclosed/open-air
    - Secondary: Explicit type mentions in website ("outlet center", "lifestyle center")
@@ -100,17 +101,23 @@ Tasks:
 Use scraped data as primary source. Fill gaps with your knowledge.
 For optional fields without reliable data, omit them entirely (do not set to null).`;
 
-  const { object } = await generateObject({
-    abortSignal: AbortSignal.timeout(90_000),
-    model: conversational.model,
-    prompt: enrichmentPrompt,
-    schema: centerSchema,
-    temperature: 1,
-  });
+    const { object } = await generateObject({
+      abortSignal: AbortSignal.timeout(30_000),
+      model: conversational.model,
+      prompt: enrichmentPrompt,
+      schema: enrichedSchema,
+      temperature: 1,
+      maxRetries: 3,
+    });
 
-  spinner.succeed();
-  // If the description is provided in page metadata, use it instead of the
-  // generated description.
-  if (description) object.description = description;
-  return object;
+    spinner.succeed();
+    // If the description is provided in page metadata, use it instead of the
+    // generated description.
+    if (description) object.description = description;
+    return object;
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : String(error);
+    spinner.fail(`Enrichment failed: ${reason}`);
+    throw new Error(reason);
+  }
 }

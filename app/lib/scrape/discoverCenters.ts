@@ -71,10 +71,9 @@ Focus on retail shopping centers, strip malls, and enclosed malls.
 Exclude individual stores or single-building retail.`;
 
   const spinner = ora(`Discovering centers in ${where}...`).start();
-  const timeout = 90_000;
   try {
     const { object } = await generateObject({
-      abortSignal: AbortSignal.timeout(timeout),
+      abortSignal: AbortSignal.timeout(90_000),
       model: conversational.model,
       prompt,
       schema: discoverySchema,
@@ -104,13 +103,8 @@ Exclude individual stores or single-building retail.`;
 
     return centers;
   } catch (error) {
-    const reason =
-      error instanceof Error
-        ? error.name === "AbortError"
-          ? `Discovery request timed out after ${timeout}ms for ${where}`
-          : error.message
-        : String(error);
-    spinner.fail(reason);
+    const reason = error instanceof Error ? error.message : String(error);
+    spinner.fail(`Discovery failed: ${reason}`);
     throw new Error(reason);
   }
 }
