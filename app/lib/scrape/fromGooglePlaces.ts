@@ -35,7 +35,13 @@ export async function fromGooglePlaces(placeName: string): Promise<
 > {
   const spinner = ora(`Fetching Google Places data for ${placeName}`).start();
   try {
-    const key = `google-places:${placeName.toLowerCase().replace(/[^a-z0-9\s-]/g, "")}`;
+    // eg "google-places:beverly-center"
+    const key = `google-places:${placeName
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")}`;
+
     const cache = await prisma.cache.findUnique({ where: { key } });
     if (cache) {
       spinner.succeed();
@@ -87,7 +93,7 @@ async function fromPlacesAPI(
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify({
-      textQuery: placeName,
+      textQuery: `Shopping center: "${placeName}"`,
       includePureServiceAreaBusinesses: false,
     }),
     headers: {
@@ -99,6 +105,7 @@ async function fromPlacesAPI(
   });
   const data = (await response.json()) as {
     places: Array<{
+      name: string; // eg "Beverly Center",
       internationalPhoneNumber: string; // eg. "+1 310-854-0070",
       addressComponents: Array<{
         longText: string;
@@ -155,14 +162,20 @@ async function fromPlacesAPI(
     }>;
   };
 
-  const place = data.places[0];
-  invariant(place, "No place found");
-  invariant(place.businessStatus === "OPERATIONAL", "Place is not operational");
-  invariant(
-    place.primaryType === "shopping_mall",
-    "Place is not a shopping mall",
+  const places = data.places.filter(
+    (place) => place.primaryType === "shopping_mall",
   );
-  invariant(place.websiteUri, "Place has no website URI");
+  invariant(
+    places.length === 1,
+    `Multiple or no places found for ${placeName}`,
+  );
+  const place = places[0];
+
+  invariant(
+    place.businessStatus === "OPERATIONAL",
+    `Place ${placeName} is not operational`,
+  );
+  invariant(place.websiteUri, `Place ${placeName} has no website URI`);
 
   const state = shortText(
     place.addressComponents,
@@ -344,4 +357,42 @@ function createSlug({ state, name }: { state: string; name: string }): string {
       .replace(/-+/g, "-") // Collapse multiple hyphens
       .replace(/^-|-$/g, "") // Trim hyphens
   }`;
+}
+
+/**
+ * Returns true if the two shopping center names are similar enough to be
+ * considered a match.  Ignores case, punctuation, "&" vs "and", and trims
+ * whitespace/dashes.  Handles things like "The Beverly Center" vs "Beverly
+ * Center", etc.
+ */
+function areNamesSimilar(text: string, placeName: string): boolean {
+  function normalize(str: string): string {
+    return str
+      .toLowerCase()
+      .replace(/\b(the|mall|shopping center|plaza|shops|at|of|on)\b/g, "")
+      .replace(/[&]/g, "and")
+      .replace(/[^a-z0-9]+/g, " ") // Replace non-alphanum with space
+      .replace(/\s+/g, " ") // Collapse whitespace
+      .trim();
+  }
+
+  const normA = normalize(text);
+  const normB = normalize(placeName);
+
+  // Direct match or one contains the other
+  if (normA === normB) return true;
+  if (normA.includes(normB) || normB.includes(normA)) return true;
+
+  // If both are reasonably long, require 80% overlap of words
+  const wordsA = normA.split(" ");
+  const wordsB = normB.split(" ");
+  const setA = new Set(wordsA);
+  const setB = new Set(wordsB);
+  const intersection = [...setA].filter((w) => setB.has(w));
+
+  const overlapA = intersection.length / wordsA.length;
+  const overlapB = intersection.length / wordsB.length;
+  if (overlapA >= 0.8 || overlapB >= 0.8) return true;
+
+  return false;
 }

@@ -18,7 +18,7 @@ export default async function collectCenters(countyName: string) {
 
   // Partition centers into creating and updating so we process new centers
   // first and then update existing ones.
-  const [creating, updating] = partition(centers, (center) =>
+  const [_, creating] = partition(centers, (center) =>
     existsSync(getSaveFilename(center)),
   );
   const browser = await chromium.launch({ headless: true });
@@ -26,7 +26,7 @@ export default async function collectCenters(countyName: string) {
   let successCount = 0;
   let failCount = 0;
 
-  for (const center of [...creating, ...updating]) {
+  for (const center of creating) {
     const { state, name } = center;
     try {
       // From Google Places we collect all additional information about the center:

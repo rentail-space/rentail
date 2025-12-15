@@ -8,7 +8,7 @@ const logger = debug("seed");
 
 const basedir = resolve("prisma/seed");
 const filenames = readdirSync(basedir).flatMap((dir) =>
-  readdirSync(join(basedir, dir)).map((file) => join(basedir, file)),
+  readdirSync(join(basedir, dir)).map((file) => join(dir, file)),
 );
 logger("🔄 Seeding %s files", filenames.length);
 for (const filename of filenames)

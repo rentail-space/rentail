@@ -16,7 +16,7 @@ const schema = z.object({
   numberOfStores: z.number(),
   website: z.string(),
   phone: z.string().optional(),
-  imageURLs: z.array(z.url()),
+  imageURLs: z.array(z.string()),
   logoURL: z.url().optional(),
   description: z.string(),
   demographics: z.string().optional(),
@@ -40,7 +40,6 @@ const schema = z.object({
         type: z.enum(["Cart", "Inline", "Storage", "Other"]),
         size: z.number(),
         floor: z.number(),
-        imageURLs: z.array(z.url()).optional(),
         available: z.boolean().default(false),
       }),
     )
@@ -56,11 +55,15 @@ export default async function seedCenter(filename: string) {
 
   // Generate missing fields
   const id = basename(filename, ".json");
+  const imageURLs = center.imageURLs.map((url) =>
+    new URL(url, "https://rentail.space").toString(),
+  );
 
   await prisma.property.upsert({
     create: {
       ...center,
       id,
+      imageURLs,
       spaces: {
         createMany: {
           data: center.spaces.map((space) => ({
@@ -72,6 +75,7 @@ export default async function seedCenter(filename: string) {
     },
     update: {
       ...center,
+      imageURLs,
       spaces: {
         upsert: center.spaces.map((space) => ({
           where: { id: `${id}-${space.number}` },

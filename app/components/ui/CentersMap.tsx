@@ -9,15 +9,16 @@ import { createRoot } from "react-dom/client";
  * Called when the user clicks on a center outside the map and we want to center
  * the map on that center.
  */
-export declare type CenterMapFunction = (
-  point: { longitude: number; latitude: number }
-) => void;
+export declare type CenterMapFunction = (point: {
+  longitude: number;
+  latitude: number;
+}) => void;
 
 /**
  * A map showing shopping centers.
- * 
+ *
  * @param centers - The centers to display on the map.
- * @param centerRef - A ref to a function that will center the map on a given center. 
+ * @param centerRef - A ref to a function that will center the map on a given center.
  * @param latitude - The latitude of the center to display on the map.
  * @param longitude - The longitude of the center to display on the map.
  * @returns A map showing shopping centers.
@@ -28,16 +29,18 @@ export default function CentersMap({
   latitude,
   longitude,
 }: {
-  centers: PropertyGetPayload<{ select: {
-    address: true;
-    city: true;
-    country: true;
-    latitude: true; 
-    longitude: true;
-    name: true;
-    spaces: { select: { id: true } }
-    state: true;
-  }}>[]; 
+  centers: PropertyGetPayload<{
+    select: {
+      address: true;
+      city: true;
+      country: true;
+      latitude: true;
+      longitude: true;
+      name: true;
+      spaces: { select: { id: true } };
+      state: true;
+    };
+  }>[];
   centerRef?: React.RefObject<CenterMapFunction | null>;
   latitude: number;
   longitude: number;
@@ -61,10 +64,10 @@ export default function CentersMap({
     if (!mapContainer.current || map.current) return;
 
     mapboxgl.accessToken =
-    "pk.eyJ1IjoiYXNzYWZhcmtpbiIsImEiOiJjbWhwY3ZoazMwYXloMmxvbmxvZTE2eTBmIn0.m1npzYF93dHWeF4W3Yt_xw";
+      "pk.eyJ1IjoiYXNzYWZhcmtpbiIsImEiOiJjbWhwY3ZoazMwYXloMmxvbmxvZTE2eTBmIn0.m1npzYF93dHWeF4W3Yt_xw";
 
     map.current = new mapboxgl.Map({
-      center: [ longitude, latitude, ],
+      center: [longitude, latitude],
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v12",
       zoom: calculateZoomLevel(centers),
@@ -95,7 +98,7 @@ export default function CentersMap({
         map.current = null;
       }
     };
-  }, [centers ]);
+  }, [centers]);
 
   // Add markers when centers change
   useEffect(() => {
@@ -209,26 +212,27 @@ export default function CentersMap({
   );
 }
 
-
 /**
  * A popup showing information about a shopping center.
- * 
+ *
  * @param center - The center to display in the popup.
  * @returns A popup showing information about a shopping center.
  */
 function CenterPopup({
   center,
 }: {
-  center: PropertyGetPayload<{ select: {
-    address: true;
-    city: true;
-    country: true;
-    latitude: true; 
-    longitude: true;
-    name: true;
-    spaces: { select: { id: true } }
-    state: true;
-  }}> 
+  center: PropertyGetPayload<{
+    select: {
+      address: true;
+      city: true;
+      country: true;
+      latitude: true;
+      longitude: true;
+      name: true;
+      spaces: { select: { id: true } };
+      state: true;
+    };
+  }>;
 }) {
   const directionsUrl = `https://maps.google.com/?q=${encodeURIComponent(`${center.address}, ${center.city}, ${center.state} ${center.country}`)}`;
 
@@ -237,7 +241,9 @@ function CenterPopup({
       <h3 className="line-clamp-1 font-bold text-lg">{center.name}</h3>
       <address className="text-gray-500 text-sm">
         <p>{center.address}</p>
-        <p>{center.city}, {center.state}</p>
+        <p>
+          {center.city}, {center.state}
+        </p>
       </address>
 
       <div className="flex flex-row justify-between gap-2">
@@ -260,25 +266,30 @@ function CenterPopup({
 
 /**
  * Calculates the zoom level for a map so we can see all the centers.
- * 
+ *
  * @param centers - The centers to calculate the zoom level for.
  * @returns The zoom level for the map so we can see all the centers.
  */
-function calculateZoomLevel(centers: PropertyGetPayload<{ select: {
-  latitude: true;
-  longitude: true;
-}}>[]): number {
+function calculateZoomLevel(
+  centers: PropertyGetPayload<{
+    select: {
+      latitude: true;
+      longitude: true;
+    };
+  }>[],
+): number {
   try {
-
-  invariant(centers.length >= 2, "At least two centers are required");
-  const latitudeRange = (maxBy(centers, (center) => center.latitude)?.latitude ?? 0) -
-    (minBy(centers, (center) => center.latitude)?.latitude ?? 0);
-  const longitudeRange = (maxBy(centers, (center) => center.longitude)?.longitude ?? 0) -
-    (minBy(centers, (center) => center.longitude)?.longitude ?? 0);
-  const maxRange = Math.max(latitudeRange, longitudeRange);
-  invariant(maxRange > 0, "Max range must be greater than 0");
-  return 10 + Math.log2(maxRange);
-  } catch  {
+    invariant(centers.length >= 2, "At least two centers are required");
+    const latitudeRange =
+      (maxBy(centers, (center) => center.latitude)?.latitude ?? 0) -
+      (minBy(centers, (center) => center.latitude)?.latitude ?? 0);
+    const longitudeRange =
+      (maxBy(centers, (center) => center.longitude)?.longitude ?? 0) -
+      (minBy(centers, (center) => center.longitude)?.longitude ?? 0);
+    const maxRange = Math.max(latitudeRange, longitudeRange);
+    invariant(maxRange > 0, "Max range must be greater than 0");
+    return 10 - Math.log2(maxRange * 4);
+  } catch {
     return 11;
   }
 }
