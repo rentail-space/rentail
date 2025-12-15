@@ -24,15 +24,14 @@ export default async function scrapeCenter({
       .$eval('meta[name="description"]', (el) => el.getAttribute("content"))
       .catch(() => null);
 
-    await browser.close();
     spinner.succeed(`Scraped website: ${url}`);
-
     return { bodyText, description };
   } catch (_error) {
-    await page.close();
     spinner.fail(
       `Scraping failed: ${_error instanceof Error ? _error.message : String(_error)}`,
     );
     return {};
+  } finally {
+    await page.close();
   }
 }

@@ -83,8 +83,6 @@ export default async function scrapeSpaces({
       )
       .catch(() => []);
 
-    await page.close();
-
     // Use AI to extract space data
     spinner.text = `Extracting space data for ${centerName}...`;
 
@@ -128,10 +126,11 @@ If no spaces are found or the page doesn't contain leasing information, return a
 
     return object.spaces;
   } catch (error) {
-    await page.close();
     spinner.fail(
       `Failed to scrape spaces for ${centerName}: ${error instanceof Error ? error.message : String(error)}`,
     );
     return [];
+  } finally {
+    await page.close();
   }
 }
