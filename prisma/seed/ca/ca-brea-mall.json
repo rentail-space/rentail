@@ -4,152 +4,11 @@
   "city": "Brea",
   "state": "CA",
   "website": "https://www.simon.com/",
-  "latitude": 33.915613799999996,
+  "latitude": 33.9156138,
   "longitude": -117.8862833,
   "country": "US",
   "phone": "+17149902732",
-  "photos": [
-    {
-      "name": "places/ChIJwS0hgwbV3IARL4oucH0V6P8/photos/AZLasHqYTaRRTANJJDQkdIonmDpLUJDBjXicaRUwO4XfzPa1E_2Bp3IMNMkQmhFA7f_o9r6kyHaM-cs3MHre1kkmdrauiv01uIf21hOy4LdQn_jOX_wzA_4pCa_G3jHL8Duknd4x2JgitvqUSIC5EQWxj3mpWKE6WMxjp4BuLI6GLUOEBnfcloWaDo7LsSEsnprgcsQmKuh8IJZRSrr1eQ3xjcqsHhblVdcIfU4ip3I8DnjbGesgBRN1EcYLxSRiBC4HLiHKYWvdrqcGOnaUtY31JW7H0Q5zds8QSVkaTl2gu8qnWBQ7XMRgQxOBeKUL-M-6gUMmNbATq4_ImSwvMrvsyzUTEPJujMYuPc9kTavRwVsH5Hf-0zwAlaXEymoAVqYhr-gSedjWxR3_NAWRmYyZsmqyV-u_E8cYHQ5hFOx913_YLs-bnkWewxGEJowf6uIM",
-      "widthPx": 4000,
-      "heightPx": 3000,
-      "authorAttributions": [
-        {
-          "displayName": "Julian C",
-          "uri": "https://maps.google.com/maps/contrib/114134326104438027811",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUhGIZ-1RjJA1GmkpSk35AgEu9sNBy26T1R5aULbSaOGBaHqgoU=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhBPo0gV6fT87F6qI0z-Vpgt&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhBPo0gV6fT87F6qI0z-Vpgt!2e10!4m2!3m1!1s0x80dcd50683212dc1:0xffe8157d702e8a2f"
-    },
-    {
-      "name": "places/ChIJwS0hgwbV3IARL4oucH0V6P8/photos/AZLasHrNS3x4EjJ9ghTwE1DZUcZtpi3TXdmDWYApSa1LNqRPRORKY0HrtxNsvq8Qen-N84Ozpka8y8-wP1e-4XAwlunGsxhBhBleX3zLgv3aKhlm-xy5Zoih2qgfXARC7Rp4KquNRw1wswIQgvtauFk0pAptEMXKFXqnbSdQpy_l0ljbFKyg6tTc2n086sAK_Y21X5axeFbfTFDWkgry6AMKCmvQ9Rrc9vbcaemumKePZ9-mOZ6XEkS_gXNslkcEJ_66sRBHqzUIUXTZVmZ_Urz2MVdMUpg3y-iOj7aJwzKiqd3xIcvn14D34qu455LqzDrkXjvICtiPCCSTMkTtS6DNAj4sJmyxAdvlrGDj3HySt1DKvH4hc62LdiTvCWPDGwsCX9S1pwVsrQbborFPIbRiwm_8a6i_JpV_ys4cZjfqy2vOy3VZCCdPReG7emfBfZSr",
-      "widthPx": 4000,
-      "heightPx": 3000,
-      "authorAttributions": [
-        {
-          "displayName": "Julian C",
-          "uri": "https://maps.google.com/maps/contrib/114134326104438027811",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUhGIZ-1RjJA1GmkpSk35AgEu9sNBy26T1R5aULbSaOGBaHqgoU=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhBNaQjdWO2rhsCU8MD-Thc8&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhBNaQjdWO2rhsCU8MD-Thc8!2e10!4m2!3m1!1s0x80dcd50683212dc1:0xffe8157d702e8a2f"
-    },
-    {
-      "name": "places/ChIJwS0hgwbV3IARL4oucH0V6P8/photos/AZLasHqwWe-P1a2qG8vwCCW8aQw50eE18dJqqaw8lJPURLAORspR0c7MSHAEB36VBBtHNDoshUhXcklQZ1lmonYK1C4CTS64hCk4XUaiGlWDX6N7FdKQw4amDwxpiaCE7FbWF6Xe-fNNjQyLiCYhRbUm1p9mi4B0IYWaRHdxVeasqsK5wr-BxUUa3OuoNiqN9KmMcxS9TCc91BEkWBlPHGDLCHIszgipLKxrgY-uoAlu-_2LANDBBxERbulKnmMvDnCwZsAEaSAvegmlk-tvmTzF-AO99-03TkynKKgePpHpJsLjIAArwLCVyZYVMrIZZKlIT26MaZaagk3phAzbeFtgyCpTBWOjADfDEib9i535BRbIjdhXIhT0AN_5ADzwPlN94n_G4ebo_1ZqfHrJW7XJDAGjoq_cIhNzizhp9uMs6cW0aQ",
-      "widthPx": 4032,
-      "heightPx": 3024,
-      "authorAttributions": [
-        {
-          "displayName": "Jim Kara",
-          "uri": "https://maps.google.com/maps/contrib/105107828501464119640",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjU2LZiC_P4hSGcQyHUS2zzNR7RAZn1e78-fsszD-u5hwQK9jp8WDA=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgID2i_CEXg&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgID2i_CEXg!2e10!4m2!3m1!1s0x80dcd50683212dc1:0xffe8157d702e8a2f"
-    },
-    {
-      "name": "places/ChIJwS0hgwbV3IARL4oucH0V6P8/photos/AZLasHpGERKIqXcQDxkoM0r-tntYXVSq2zOdP-7t7UdHqqa5rBOVmnvYFcmPceFP2pvDDGLIOUnO-j35yzS4e2OH4LUJTsNARDUXtiywEqRYsRG2VHepz4PMGGix0qnhcKxWV6z5wCWfa0JJP1B3lMdNt13ubJCRG1NTyGhSPLbKm5x-jXljBhoe5YdVhERNo7-Wsy-rz4ujcpYdcE0g4edmg_Q6j9Ks8uqNzAkHYbohHRoVmofqbBfIa3bpQgfF6el3kYJtoaUHXeXeQSXSYV0uAyBWV09uWjh9vMyhnPeRg75Tngb3WZW6xaqfNF0wTY2_5LOyoIhREtLuaS8xO9vdC4e_GUdTxmSzPVMfiqsPzvQHBZNufU9Hz-Ac9WjRlwZxSx9cYajQJ1Jypuhp6qZoNqjOxyrwE9B3azdvJAGhq4euUA",
-      "widthPx": 4032,
-      "heightPx": 3024,
-      "authorAttributions": [
-        {
-          "displayName": "Shneor Edrey",
-          "uri": "https://maps.google.com/maps/contrib/107996917998535078868",
-          "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJampY6OLdGxd2WQ2_r7I8qA_mpbmw2GuMss3_tJHv8y6TIFUUB=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICa6PmNTQ&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICa6PmNTQ!2e10!4m2!3m1!1s0x80dcd50683212dc1:0xffe8157d702e8a2f"
-    },
-    {
-      "name": "places/ChIJwS0hgwbV3IARL4oucH0V6P8/photos/AZLasHryZApYPRa-RIlrgSBhVV2mpuVPLmyUQ9_kfnY72flL5HQxMsxrEZtgPEafLw4DuUSQwnXo8VH6H68eI2bKW206mh7WFSbKvl_WmrfSanGh8M_9XULRf92x9iEFRq3UXSqCkKU_XbGzngo13xTV2F6Z4BUxaejP8alARbr-QweeqdLOd8d8n6H03Y043PLvd9LkCbneMXGtqOqREZlpXSyM1cIxTsvBNjfswsP5PMseOxefZIqXrg-5B9x1AYmXu3KXiUyJgaScEXbmKKCmmkr9XRzI4b_q8wlgBssjWtZNU13dEtnFKBw4vh6fDojPgqYK_yhSFUoHnaJrKCeupmCCdAdgVlnVAMxQPzVX051-1RQhOzELjqWHB6RbhV3PJ3OhtO0guAw8IzTmoe_LrQngCN0WZzHweQpISRlll6LE53nV",
-      "widthPx": 4032,
-      "heightPx": 3024,
-      "authorAttributions": [
-        {
-          "displayName": "Paul C.",
-          "uri": "https://maps.google.com/maps/contrib/102814613400855157920",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjX-_8HKzYzzlxPIRzB8fUpUY6jEDLzBkU53KK4uuQtPVjaRKRTk=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICm-MHCnQE&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICm-MHCnQE!2e10!4m2!3m1!1s0x80dcd50683212dc1:0xffe8157d702e8a2f"
-    },
-    {
-      "name": "places/ChIJwS0hgwbV3IARL4oucH0V6P8/photos/AZLasHrIr3syMEpRsCWTi56v7IUDy-CL1aJoGwDluPQPIX2c53V18uJaoWEwAkc-kZOutVSfzUWmEuS1_ikvmkTqKHFGmLWK0c49_bRNeVZ3AtxV9xgv0QOC_BpP8Er_24eUxaXVXxnYifrOj-jvqneVlfrdkk8S4alqXYQEwcqwOuqSwKIUNMkrvpt6MlLMeEbo6z8AAdAJO0iA7_bCqUzjDXZneMkmJReUTDHGtxg6xA0JiblSMvdelnMa0DGn_gs78A3_-9SJ4TOEOfhzLJ410Q-vCiO7qrp4dbJiGNC4kPjQ07TA4KwH-x3VvQgck_0sBA5RDTMBAfLdpl8_D2G1a-EeFYkcPCeN9lceQlRPFKIsFCzcjmXbdizb_O0omM32zJXxKP5LB-nHHw2X4dFBfCW38WKUzxFnkj0k0mQ9gviJ-vg",
-      "widthPx": 4032,
-      "heightPx": 3024,
-      "authorAttributions": [
-        {
-          "displayName": "Jim Kara",
-          "uri": "https://maps.google.com/maps/contrib/105107828501464119640",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjU2LZiC_P4hSGcQyHUS2zzNR7RAZn1e78-fsszD-u5hwQK9jp8WDA=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgID2i_CEkQE&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgID2i_CEkQE!2e10!4m2!3m1!1s0x80dcd50683212dc1:0xffe8157d702e8a2f"
-    },
-    {
-      "name": "places/ChIJwS0hgwbV3IARL4oucH0V6P8/photos/AZLasHpZ4Za834bYoIyLUNshj-JIsQ1w9wjfH5wh1OXm-5Wye57-be22zN3qTHnoS4MiyGLxkALuQG5nKTtnzRlJcc_UgxQ4T-iTVFgquDbSGE97nGqeykfPqHcVnwVfxaHRAomc8ZWvcauiN3M2v4DleevNDoZkf0vcyhlY_E3Ywd1Ttff5Z05T_xnyWAW7o80Z3553Atvaw5eQUUTnG7XSvhJpMgug7eUUiGqFpdQaNf_RGW3xZGj0SyV61hUzdl60-2-Q-jHri_yL-_eK4bUkp5z8RJ82iMy3fy37fKpGlT4bEjEFeSmfSeen0JndImeNJ47-vRHG6Sq-eLslmn9e9RlTybdfcfz0fUyuxBeGAaJQMFT11qqqp9SpIW52e03sqTfY3cmSYPcYnIcZeaB01pp9a4wxQzJi4VIW6zNRZhmfy1vw",
-      "widthPx": 4800,
-      "heightPx": 2700,
-      "authorAttributions": [
-        {
-          "displayName": "NAKI STUDIO",
-          "uri": "https://maps.google.com/maps/contrib/112023622972042257383",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjW93kqvMPmW-SkoY5NXrd_GEQZgbp2-zF8PF4bqWDQqtfbJuYJVaw=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIDEn7Pl8QE&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDEn7Pl8QE!2e10!4m2!3m1!1s0x80dcd50683212dc1:0xffe8157d702e8a2f"
-    },
-    {
-      "name": "places/ChIJwS0hgwbV3IARL4oucH0V6P8/photos/AZLasHrzqBdOV99J9oqncGwTK9VA73ZNR62HBvZj6-rgj4W1772EAu1oLiFkkXYHO92Lk4sLLePVA4zxMqQ5ZaqjSi0N-KrEJ327-ZRgUOmilR7eurepwkrUD4b6npUgdafmP95936W42uMqdjC9AvvetZFuOrcbcBU_ZW7dEHoNtGKcKajqwrNsAR-mWk31yjXvNC4OzamnFnhpPt49j0PE_S1FYmRZze_-yXi6vxhrTY3IIWkScBwzyWHUZkoglStzOX4VHH7cwKb_YxrIhMceinY1FMul51oBK1cme3y7_3NC7KJpmPunjnexGUxQ0ZlceYoGeZTm_MZNRbeM_DjL569ohVnzZuyuJo1yo98L1mWdIMcIiGLQ59OfEDLQGouRvsmt_8lLaPmYgwBqphfWza8oDiqwKvKdDWgyL8mIfrAPqH92",
-      "widthPx": 4032,
-      "heightPx": 3024,
-      "authorAttributions": [
-        {
-          "displayName": "VITOR CHAN",
-          "uri": "https://maps.google.com/maps/contrib/116760056391478613183",
-          "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocKGLro6Wa3NgkVNtLkUnpYqGA6XGRCBPXS6SodykYzv4SUZCw=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIDHqODFhgE&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDHqODFhgE!2e10!4m2!3m1!1s0x80dcd50683212dc1:0xffe8157d702e8a2f"
-    },
-    {
-      "name": "places/ChIJwS0hgwbV3IARL4oucH0V6P8/photos/AZLasHpw8F3STxSTdrlo3HN6OWzYggSC5Tr4v4FIYAvdCHPR_3kF09UJMvV0lxWp_PaDXZi_acFaSfBc637fp7JA2c1HTCJNL6ESn9z5FSFxRXqB3Gm3zchPIn5-pqtsIJsc_aEjPJ7DOGYURZmuppG4xW80SGFTkawC8n2BZDDnVVu8H-5we8xWDO0zdZooScfVotV6HiuBx4LldqJ81nq8GZ0oHHD3wPXb6EbzZ2dFDbrVZXSGHagJH5jIxopW1YS1hARgE2eirYpSuJ93yRkmronijGkTYqyMxjA49vzewkP9oYzBTZBqY9JjSRRggK0vvF5bJKuVNntPuXaKiqLSQPqGw18vgL9IIPTJqLIk9WJHY1zsjjf8XZmwbsJcMIUrTSYSi1uYYji6AfhnrQtpsxUjpTK2rgRtHn5pb3J3ze80cR7x",
-      "widthPx": 4032,
-      "heightPx": 3024,
-      "authorAttributions": [
-        {
-          "displayName": "Julio Payán",
-          "uri": "https://maps.google.com/maps/contrib/105027207020713025229",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVDayNCuWBpazKW79Ilnt_n1XUwExeio8BV52O13uJiB7EeVQ4=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICcnru4rwE&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICcnru4rwE!2e10!4m2!3m1!1s0x80dcd50683212dc1:0xffe8157d702e8a2f"
-    },
-    {
-      "name": "places/ChIJwS0hgwbV3IARL4oucH0V6P8/photos/AZLasHqhbYzUiVwVd3H2ZtwdBXyLYZSM50vlFfowThKUXz4V9XIesD153wlM6XoBoAoYCdp7J5Na4Brdb5uZ1O8gdbtVcXo4RGlxU12Hs8cd_ELNEif2blGFfPdNpQsjJMNIYHTqXKQ0Xywvf9wY6ALK91nimrAIym3Y8clNfR2ZyPvRqZqFiJaACEuDiSYSS_br6HaUBrSm9AQLYh94WkgXjA8JmKfZdpdiK_-AQnvZjm_gG4eEcMLbUOOo-HiR2F4-OUtcFMzL7PXsqzMoTlsARHilWtGnpRcrFUYAFso5UahTglcvNbRKDr4G7KYNFU_NyFFUtGajMSDH7Ui-r4vJSmDN6gvmZurdsS6-CuoobTzLlk8OzWg1bbyFA3ZUBh6ZEyFNQ6SFSO0zI0gtYf1PayCbUD0agYt206Cg1viSAoerBA",
-      "widthPx": 4032,
-      "heightPx": 3024,
-      "authorAttributions": [
-        {
-          "displayName": "Robert Carlos",
-          "uri": "https://maps.google.com/maps/contrib/114313350552755038585",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWzKDf9ehW_ex4PDlHp07ewVhCFReNR2gajtkBPlIsdk6CCfWz0_Q=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICEsOvbNg&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICEsOvbNg!2e10!4m2!3m1!1s0x80dcd50683212dc1:0xffe8157d702e8a2f"
-    }
-  ],
+  "photos": [],
   "imageURLs": [
     "/images/malls/ca-brea-mall-1.jpg"
   ],
@@ -158,15 +17,10 @@
   "openUntil": 2100,
   "rating": 4.5,
   "reviewCount": 10273,
-  "bodyText": "\n    \n        /* PerimeterX assignments */\n        window._pxVid = '';\n        window._pxUuid = 'e860e0ab-d9ed-11f0-8f16-75cea51b281a';\n        window._pxAppId = 'PX46SCNLxs';\n        window._pxHostUrl = '/46SCNLxs/xhr';\n        window._pxCustomLogo = '';\n        window._pxJsClientSrc = '/46SCNLxs/init.js';\n        window._pxMobile = false;\n        window._pxFirstPartyEnabled = true;\n\n        var pxCaptchaSrc = '/46SCNLxs/captcha/captcha.js?a=c&u=e860e0ab-d9ed-11f0-8f16-75cea51b281a&v=&m=0&h=R0VU';\n        var script = document.createElement('script');\n        script.src = pxCaptchaSrc;\n        script.onload = onScriptLoad;\n        script.onerror = onScriptError;\n        var onScriptErrorCalled;\n        document.head.appendChild(script);\n        var timeoutID = setTimeout(onScriptError, 5000);\n        function onScriptLoad() {\n            clearTimeout(timeoutID);\n            setTimeout(function() {\n                if (!isContentLoaded()) {\n                    onScriptError();\n                }\n            }, 2500);\n        }\n        function onScriptError() {\n            if (onScriptErrorCalled) {\n                return;\n            }\n            onScriptErrorCalled = true;\n            script = document.createElement('script');\n            script.src = 'https://captcha.px-cloud.net/PX46SCNLxs/captcha.js?a=c&u=e860e0ab-d9ed-11f0-8f16-75cea51b281a&v=&m=0&h=R0VU';\n            script.onload = function() {\n                clearTimeout(timeoutID);\n            };\n            script.onerror = window._pxOnError;\n            document.head.appendChild(script);\n            timeoutID = setTimeout(function() {\n                if (!isContentLoaded()) {\n                    window._pxOnError();\n                }\n            }, 5000);\n        }\n        function isContentLoaded() {\n            return !!document.querySelector('div,span');\n        }\n        window._pxOnError = function () {\n            var style = document.createElement('style');\n            style.innerText = '@import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap);body{background-color:#fafbfc}.px-captcha-error-container{position:fixed;height:340px;background-color:#fff;font-family:Roboto,sans-serif}.px-captcha-error-header{color:#f0f1f2;font-size:29px;margin:67px 0 33px;font-weight:500;line-height:.83;text-align:center}.px-captcha-error-message{color:#f0f1f2;font-size:18px;margin:0 0 29px;line-height:1.33;text-align:center}.px-captcha-error-button{text-align:center;line-height:48px;width:253px;margin:auto;border-radius:50px;border:solid 1px #f0f1f2;font-size:20px;color:#f0f1f2}.px-captcha-error-wrapper{margin:18px 0 0}div.px-captcha-error{margin:auto;text-align:center;width:400px;height:30px;font-size:12px;background-color:#fcf0f2;color:#ce0e2d}img.px-captcha-error{margin:6px 8px -2px 0}.px-captcha-error-refid{border-top:solid 1px #f0eeee;height:27px;margin:13px 0 0;border-radius:0 0 3px 3px;background-color:#fafbfc;font-size:10px;line-height:2.5;text-align:center;color:#b1b5b8}@media (min-width:620px){.px-captcha-error-container{width:530px;top:50%;left:50%;margin-top:-170px;margin-left:-265px;border-radius:3px;box-shadow:0 2px 9px -1px rgba(0,0,0,.13)}}@media (min-width:481px) and (max-width:620px){.px-captcha-error-container{width:85%;top:50%;left:50%;margin-top:-170px;margin-left:-42.5%;border-radius:3px;box-shadow:0 2px 9px -1px rgba(0,0,0,.13)}}@media (max-width:480px){body{background-color:#fff}.px-captcha-error-header{color:#f0f1f2;font-size:29px;margin:55px 0 33px}.px-captcha-error-container{width:530px;top:50%;left:50%;margin-top:-170px;margin-left:-265px}.px-captcha-error-refid{position:fixed;width:100%;left:0;bottom:0;border-radius:0;font-size:14px;line-height:2}}@media (max-width:390px){div.px-captcha-error{font-size:10px}.px-captcha-error-refid{font-size:11px;line-height:2.5}}';\n            document.head.appendChild(style);\n            var div = document.createElement('div');\n            div.className = 'px-captcha-error-container';\n            div.innerHTML = '<div class=\"px-captcha-error-header\">Before we continue...</div><div class=\"px-captcha-error-message\">Press & Hold to confirm you are<br>a human (and not a bot).</div><div class=\"px-captcha-error-button\">Press & Hold</div><div class=\"px-captcha-error-wrapper\"><div class=\"px-captcha-error\"><img class=\"px-captcha-error\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAQCAMAAADDGrRQAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABFUExURUdwTNYELOEGONQILd0AONwALtwEL+AAL9MFLfkJSNQGLdMJLdQJLdQGLdQKLtYFLNcELdUGLdcBL9gFL88OLdUFLNEOLglBhT4AAAAXdFJOUwC8CqgNIRgRoAS1dWWuR4RTjzgryZpYblfkcAAAAI9JREFUGNNdj+sWhCAIhAdvqGVa1r7/oy6RZ7eaH3D4ZACBIed9wlOOMtUnSrEmZ6cHa9YAIfsbCkWrdpi/c50Bk2CO9mNLdMAu03wJA3HpEnfpxbyOg6ruyx8JJi6KNstnslp1dbPd9GnqmuYq7mmcv1zjnbQw8cV0xzkqo+fX1zkjUOO7wnrInUTxJiruC3vtBNRoQQn2AAAAAElFTkSuQmCC\">Please check your internet connection' + (window._pxMobile ? '' : ' or disable your ad-blocker') + '.</div></div><div class=\"px-captcha-error-refid\">Reference ID ' + window._pxUuid + '</div>';\n            document.body.appendChild(div);\n            if (window._pxMobile) {\n                setTimeout(function() {\n                    location.href = '/px/captcha_close?status=-1';\n                }, 5000);\n            }\n        };\n    \n    \n\n\nBefore we continue...Press & Hold to confirm you area human (and not a bot).Reference ID e860e0ab-d9ed-11f0-8f16-75cea51b281a",
-  "images": [
-    "https://assets.simon.com/content/web/logos/Simon-Logo.jpg"
-  ],
-  "title": "Access to this page has been denied",
-  "description": "Brea Mall is a premier enclosed shopping destination in Orange County featuring major department stores and a diverse mix of popular retailers. Managed by Simon Property Group, this regional mall offers extensive shopping, dining, and entertainment options for the surrounding community. Conveniently located in Brea, California, the mall serves as a central retail hub for residents throughout North Orange County.",
   "squareFootage": 1100000,
   "numberOfStores": 175,
-  "demographics": "Brea Mall attracts a diverse, family-oriented demographic with middle to upper-middle income households, including young professionals and families with children from surrounding Orange County communities. The trade area draws heavily from affluent neighborhoods in Brea, Fullerton, Placentia, and Yorba Linda, with visitors typically in the 25-54 age range and household incomes ranging from $75,000 to $150,000+. Shoppers favor a mix of fashion-forward national retailers, value-oriented brands, and dining options, with strong weekend traffic driven by family entertainment and leisure shopping patterns.",
+  "description": "Brea Mall is a premier shopping destination in Orange County featuring an extensive collection of popular retailers, dining options, and entertainment venues. Managed by Simon Property Group, this enclosed regional mall offers a comfortable climate-controlled shopping experience with convenient access from major Southern California highways. The center provides a comprehensive retail mix serving the Brea community and surrounding areas.",
+  "demographics": "Brea Mall attracts a diverse demographic base from North Orange County, with primary visitors including middle to upper-middle income households earning $75,000-$150,000 annually. The trade area encompasses established suburban communities in Brea, Fullerton, Placentia, and Yorba Linda, drawing families with children as well as young professionals aged 25-54. Shoppers typically seek a mix of value and quality, gravitating toward national retailers and brands while enjoying the convenience of a full-service regional mall experience with dining and entertainment options.",
   "centerType": "RegionalMall",
   "tier": 2,
   "spaces": []

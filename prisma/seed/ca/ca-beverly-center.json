@@ -8,148 +8,7 @@
   "longitude": -118.3773546,
   "country": "US",
   "phone": "+13108540070",
-  "photos": [
-    {
-      "name": "places/ChIJbcLfRrO-woARrV-XVvnH-wU/photos/AZLasHqzGTPEnStK4QRg5lfBypE9KUksKe6ULiUE2OYKx2D0DKx-hqazq45V_hWBZev-utuZfh62VGSty5zy8C0wQO0DLsz0MBbGt93g591OQhx1456rs4E9e3mOdtJnU3Z63LF_PpvEHsgs-xae0FnH1D89nINMCXbKOjrXhLPUxHU2vXuUPVmAOL5_9wQDqBQH11EJvQm-zsvzBxKfgN6NFa7-fspd43mWuqAuCr3IYyV_XkDPg6autXzAlFkQ0qOi7DbCQ2ZRjenf_iY0xS_5YFSxOEPdV9yTTtKXVxXqoAhiSw",
-      "widthPx": 2328,
-      "heightPx": 1626,
-      "authorAttributions": [
-        {
-          "displayName": "Beverly Center",
-          "uri": "https://maps.google.com/maps/contrib/102179971736152246121",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUXfXvsleihxbnPYFBpaL8A0uq57eCIO3rvK8F4JP_KVp0ePH73=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipMh8hPdtXNNZTSdS52Aw5yE7LsuNaiopZL9hk7-&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipMh8hPdtXNNZTSdS52Aw5yE7LsuNaiopZL9hk7-!2e10!4m2!3m1!1s0x80c2beb346dfc26d:0x5fbc7f956975fad"
-    },
-    {
-      "name": "places/ChIJbcLfRrO-woARrV-XVvnH-wU/photos/AZLasHoxC5YjdDumfETw0An8ie-Jb7g_xpcS3aSp4hx3VKdlBV2KXQ9fcx0C2Q1h7818OvbOz0o63BW-nDGaSK7di12BI40CI2vnh-FqKPOmUBJVYwSJpkpGsbbmMugpARY8cB0Z3NMK-rCLb4qseNzxgTmAT-P9wIrePcXJyyxJYxAjO5n9Drvd6fLdqVvVxK2ON0jpXtO4tjADxyVK4A3t_GEGJ2jWj6o7bDk9VIYGz4twcgBfevegsiWOv5jtg7gP0xmRUIv61mHU2XbilRzC72Uycq9YBZG8UujerFG7jw9Hi-0twvpKnnoQ0JyRAT_VWPKaUWFo-iKMQj5iZHURdLLM75F2-V1fmynYXlJrCL4CmqdQzUmqss9D3g_l8ilwRfqgSwNu7u-RhrM1BTBNnliKSQ6acEaMoG-3e8Soeat9AP7ZoExemIZzvCnB2lZb",
-      "widthPx": 4000,
-      "heightPx": 1848,
-      "authorAttributions": [
-        {
-          "displayName": "Stazie Ly",
-          "uri": "https://maps.google.com/maps/contrib/117547325167477981613",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVJxWNai61Ah9mj53Eckzfu7Ktx70_qiFv7i8a342DoX814kKwHug=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhBebcBOFK-s2yKxEnBetiY-&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhBebcBOFK-s2yKxEnBetiY-!2e10!4m2!3m1!1s0x80c2beb346dfc26d:0x5fbc7f956975fad"
-    },
-    {
-      "name": "places/ChIJbcLfRrO-woARrV-XVvnH-wU/photos/AZLasHqajUIW-RF2WUA2R14rwpb6x9oOkxoNJcEIQ7EbbdzZ1c35_QhBZtw1u9efgOCPbdJpzftuol_bswwDq1xd2H5fnr9ga6bZLsNWucrFt0DdJjoHwCIAwDjz3RngASzhpBO54S-rNds2sc6nYAAJAkmkNZkIGeScOz2Vjv-dpJuqV-Si3NuDp2K8-5FoAb6fYzx8C9psvYY1H5bpPRd2mJqhlq-1DJuu_YNYKWmbNx6tdXC-HdC4Wy1aLkb9ROg91ZV_-LCVpQ1lPF8zT3Dx-N7WWNke_VSU8IkRBOevXT12yoKoGRmpYtmiIa4tknJzhMDJ3o9DS3QOAXVAffjrRTkQ4FMyKWBThkQfsN7qz7V7AFV8R4pgTvAZzg54bzVxLCBLtuAeLHygBEkro0wrmqdoc2uD1YfDUwO7f7ydAkEGNXyM",
-      "widthPx": 4000,
-      "heightPx": 3000,
-      "authorAttributions": [
-        {
-          "displayName": "Cuong Luu",
-          "uri": "https://maps.google.com/maps/contrib/106532391997383446915",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXbThxJgYZENgMoAP0V-F2Fm7M6pJMbzy792o7yVUkh5lMnn_hY=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICe3cT9qAE&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICe3cT9qAE!2e10!4m2!3m1!1s0x80c2beb346dfc26d:0x5fbc7f956975fad"
-    },
-    {
-      "name": "places/ChIJbcLfRrO-woARrV-XVvnH-wU/photos/AZLasHp4sSGA5PTSM2VxZtoKNT1dHVmPR5iffpSN8f_TZ-y4jI7w3X6hpBVOzBW9ZjZkX1Qdo7U75LKhBzVeXz3Fv3hYgOiGbXnpfAKPxFN9Vvk-0yssUf1iqH-ohmcdZP1EPFkkMXGE66ElNxzRqvCs9cSRfKHTWW0cRBX58rFMURSTQ03G8E3FB_6fuh5D3RLNY5zlBHN_VT_eR2X3MfFXAGXdAZ3RpRxM8j3SUT4OnkXtLAxGANJM7XQLlM44enxnWFIMFMcdYOj_sQpr81t9s-5J03hkrqylhqOwL-BhR90EcS6lSIvNdPVU4Qb1iUUraXbnHt3fAqKU7eJiCDHUAixHZjGPSC5x2w3D-CNsSJgws7bFwfZUEOTNkGDNqS0QScI9uDGFOcvZi5n0ELKz6Y3DQQw0Jc2CnKYB5YZOyGJJAg",
-      "widthPx": 4800,
-      "heightPx": 2473,
-      "authorAttributions": [
-        {
-          "displayName": "Ar. Istiak Ahmed (Nayon)",
-          "uri": "https://maps.google.com/maps/contrib/115753254681555975900",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVvAvpMStctT8UkB6BCAAVI69tXFj-2wNjeD8_M-c6hpgyIrbe-=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgID4j-PSEw&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgID4j-PSEw!2e10!4m2!3m1!1s0x80c2beb346dfc26d:0x5fbc7f956975fad"
-    },
-    {
-      "name": "places/ChIJbcLfRrO-woARrV-XVvnH-wU/photos/AZLasHpDxfAN6OnXNmGyV2A454Gnm8rdzNcdzKXbYDXcPho5NhhP35zQOQO4tR8uK5TIhivGpHzTKNAI9CFv4D3UTpmIxHj0gTFfL78VG3H723dfYNOQiKj7hf5qPG6p-MuwlLGhgPJpOT1S86aNW2yMp8xboMu1zIFg5KHpcryrCb4gQnfKwwwLiNzTL6w3AFgoSamlgnf0SN94bEDRTWPvcVAAwP28M1J_oS_dC7MA3wvRyy3ET0bWkgcc7aDM4Cikh7SBeEjTmY1yc4Nd4RXBR-58OxJZsmntKEZIaw6HQk2id_4-EqtxCSZcq68y6-F-cBp8gNmEE2Q98lYFVmasgCQu0f3BM0bnEB6lK3UTxq12h-bpYa83RQ2VAPlx_Cx4WUbDijTxhZ7M1426m6hWtI6_4JkHQAxD2R5Oc9D3PSbkwg",
-      "widthPx": 4032,
-      "heightPx": 3024,
-      "authorAttributions": [
-        {
-          "displayName": "Jason B. de Leon",
-          "uri": "https://maps.google.com/maps/contrib/110512150408845886535",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUs_GerlFQhUq_kOmksUyGTT5ANUpcbTZilSsOVDuKohA23PKVAQw=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICk0IyveQ&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICk0IyveQ!2e10!4m2!3m1!1s0x80c2beb346dfc26d:0x5fbc7f956975fad"
-    },
-    {
-      "name": "places/ChIJbcLfRrO-woARrV-XVvnH-wU/photos/AZLasHpJTSMPYc-g7ZOZPboqoBUuTZnCIY8W8uCFXELsmm7wAi3oNQcLP781SmpbtSPst4OiUFn58u5JEIa_xOaDD7r5J7LrNHJ33K4YkAuzICAhvbwaimBc7Dd5575iVlbMCFh3qMy-Mqjh4K2oM34DiUW0IQlwbCte3qgVxrl9ISipffvAiASh5DEAIQ7xzRQKt5zkSe9-XAdxoqkS_fS4ElkM3fqcpMFIfBGeJtj_JVFcWF2hLMG2x2XoYNdtegtg3AYd9rKas_8RdCv8X2OTRd9YKguAQEJXWp3dplKBHCk3QPcqHsu0NR1SNBUSo5pZlrwsKbmMHbN09DgN2xHqWxXEHQRVAn71j_uC-lnEIwo02AOhPDsesb0_w1IEBtoH8-bT0HohfmzyUH0ngeN97xUOy0WgfBPLWYXOWO9MhiN3d_FO",
-      "widthPx": 4032,
-      "heightPx": 3024,
-      "authorAttributions": [
-        {
-          "displayName": "Manny S.",
-          "uri": "https://maps.google.com/maps/contrib/104865542887204478837",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWg5SuZom8taKLgPY7neRDvXEY6ZVk-gnaO4Y1bU9Psk01VkFDWcA=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgID4uq6u2AE&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgID4uq6u2AE!2e10!4m2!3m1!1s0x80c2beb346dfc26d:0x5fbc7f956975fad"
-    },
-    {
-      "name": "places/ChIJbcLfRrO-woARrV-XVvnH-wU/photos/AZLasHqSlrZ1W-aMqdettqD-7aEtMauwt_frei3mZaAy5zkrJIkwi510-NslYITZPUSSlSljGhw6aeuKLBZataaf96RudLZAbtknZsqLFufe9YjrLpg4LNwGnjnFKkq5PCSTUreyaTtFmofmhImLVxs_Aeum9s3KICUzMWaQsKUb4BIKvRC_yqs5sPBnQQbrTc5G7nV0JQ6qgFwq8ADGSOXpaf7J1GTUx-bpNqbiCCOA3BsHGaOXuBflNzniskz0clmCVQfe0iOy1dWkBFltvCKHDWvJEkOHYqOBk1osfBnminEKtPLyhgKcFlAiCcLVzzWq3OhNSZzsTqkJKm2j2RxJ-xNhMEg3fpqsV70rKlXopfPlbxFQP-9TcFMjvAXEzdHRgzCPOjRq1KxUWM6pqyr4ZhCspOAMjYzsygTJxNZypS4",
-      "widthPx": 4800,
-      "heightPx": 2700,
-      "authorAttributions": [
-        {
-          "displayName": "Dominic Nelms",
-          "uri": "https://maps.google.com/maps/contrib/102333421951510110107",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXAgeyMMwHzaUiMYIVGUjb2rCbJuk6cQvpAdJg6q7j7TwmRg4_S=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIC4r7iuEQ&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIC4r7iuEQ!2e10!4m2!3m1!1s0x80c2beb346dfc26d:0x5fbc7f956975fad"
-    },
-    {
-      "name": "places/ChIJbcLfRrO-woARrV-XVvnH-wU/photos/AZLasHoqyp904-nfCdUBKS2AildVeDak97gXHzDAs7Qgr_C9uaLo7eKa9f3ppqrRCXvs7Cc82vCBocKDW1XaAgdIDcSJVVmjWwpr7RsAszthKB2epKe7LxyYmxAuS0yrQt7a9KrfqU3YCm9HO_fAnjwtfKRSAvXLnGmPRVEQN1csVshsLN8SKRmkHwkbU0doJITmcaKdLfnGPkSNMvDoNDBWmjbkbcD29Dwa-jjWs6aKrAKdcBn7AC1WnNl4NCiCUmDfu8hc81nIbq-Kqhzt1YeOcFM3Ma72h41Kci0YAfbfcrfnSZ8_PAbnCJ3Od22z8jpei9Ben7qNdVn-IhA8tcalg643aqizekdVX8N8jzQqUwStYa7B-dKfwpg67Msx0f3G06rH3g5-knQtTM_dpiEKcN61D5e5_8TiF7RX8YgUwuVYvly-",
-      "widthPx": 1440,
-      "heightPx": 2560,
-      "authorAttributions": [
-        {
-          "displayName": "weary feladunder",
-          "uri": "https://maps.google.com/maps/contrib/109029622508964196193",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWCpOubN3YipufAOwIuVRRVo_XQ_Kh_VmaFhgFTlGwYxmThxex6jQ=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIC4svLwlgE&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIC4svLwlgE!2e10!4m2!3m1!1s0x80c2beb346dfc26d:0x5fbc7f956975fad"
-    },
-    {
-      "name": "places/ChIJbcLfRrO-woARrV-XVvnH-wU/photos/AZLasHoAozRdeHnrkhFVGsXxvbOr9LcNaku0Oig425nV4cqH2PVSFMMRzgPb24xt0Mq1DBfRFY4ax5y67xxl2RjhAjFDo-yG9MzYjT_Cuv9KI_oOQl61lbsUNFhbMQMNx9PfDucqFnFcitMpi3K9i9ZskZBuu15YaL-4JVTU1PfBC08e89M5G1xkPNTkqYp7hxTaf5MO3TGViC6QrZRzjZMdKr_ioo5EsHKVQtOkcrvVdBLy8KzkJG2saGsoH_eWkb6iXly0YbwLEyKbgm0YhlfPisAEgjTDHJSvr8oHFviSolWuBd14pwoDpU7t310hAvfzyCDZqj7dnAmHQ21yuz8OAlev6GAS9gwAkTb5Gt2muSfgoHvqQZ2_epC4CVG3Dr2AQD5BqSCJ5cV--1-zLy60dYuf2A83dbxigFY9CSy-dCYSJw",
-      "widthPx": 4032,
-      "heightPx": 2268,
-      "authorAttributions": [
-        {
-          "displayName": "Arul Subramanian",
-          "uri": "https://maps.google.com/maps/contrib/110363363545794935463",
-          "photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjW4_HXP7MrO7PAOsItsqxqRbXe6IsYwmxeE7ZJddjc6u21KZ-1B_g=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICcjJejYw&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICcjJejYw!2e10!4m2!3m1!1s0x80c2beb346dfc26d:0x5fbc7f956975fad"
-    },
-    {
-      "name": "places/ChIJbcLfRrO-woARrV-XVvnH-wU/photos/AZLasHoyDvYSahmnUhTdwTdFeLGEkdDoKLkIqZ0hQBuTuevCcYgaDLsUE-SA8pD--sD8vymix3na5zyGoH3G6tkaUxB37vtT83RWDAr_jLlIM3s34IG9-b6VuNiyTpnhegoENJV3jLCM1EO1qIE7TzNHWdC6CkxQinDN4EhYhf_VVkhSntZ9gU6kgEF5WWcrc-BOciPbD8Ju4CujCRefhnSJYTftT9-Qok_jr2N9BpsnAnpvKqb8A-uFIWaPx7DY1J27vWG1l1IfZTNBKHNf7IkoC1Iv9Rzw_jW-fSTxcOL4ja9Qo6LvllJeNjIdI0FnnINksb-v6p-kOv97n_kWYa3NIsKDvfvNvWinYSQs9c1i0wIliBGK17t5BM05MMaKfY6iGoITcbT2bagk1Dd3daAuodFg5eyvaRmpTL5vRdC0GqUS_g",
-      "widthPx": 4128,
-      "heightPx": 2322,
-      "authorAttributions": [
-        {
-          "displayName": "Will Fritz",
-          "uri": "https://maps.google.com/maps/contrib/101164721771966505520",
-          "photoUri": "https://lh3.googleusercontent.com/a/ACg8ocL9I-6uuXFuNA1d6RRebtfiLrqOU1sPFz2EHhJ95WBParKbXA=s100-p-k-no-mo"
-        }
-      ],
-      "flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIDE27LlKg&hl=en-US",
-      "googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDE27LlKg!2e10!4m2!3m1!1s0x80c2beb346dfc26d:0x5fbc7f956975fad"
-    }
-  ],
+  "photos": [],
   "imageURLs": [
     "/images/malls/ca-beverly-center-1.jpg",
     "/images/malls/ca-beverly-center-2.jpg",
@@ -162,13 +21,10 @@
   "openUntil": 2000,
   "rating": 4.3,
   "reviewCount": 7612,
-  "bodyText": "[{\"_errors\":1,\"serverRendered\":2,\"data\":3,\"state\":4},{},false,{},{}]\nwindow.__NUXT__={};window.__NUXT__.config={public:{mmHost:\"https://api.mallmaverick.com\",siteUrl:\"https://beverlycenter.com\",recaptchaSiteKey:\"6LdqAJ4rAAAAAN_vcTeTDkTbEOKPGSOXoj4DZz34\",recaptchaSecretKey:\"6LdqAJ4rAAAAABrro2QYYhqiyefet8XbsRbI2PMo\",gtag:{id:\"\",config:{},initialConsent:true,loadingStrategy:\"defer\"},site:{_context:{defaultLocale:\"defaults\",trailingSlash:\"defaults\",name:\"env\",indexable:\"system\",url:\"nuxt-simple-sitemap:config\",debug:\"nuxt-site-config:config\"},defaultLocale:\"en\",trailingSlash:false,name:\"https://beverlycenter.com\",indexable:true,url:\"https://beverlycenter.com\",debug:false}},app:{baseURL:\"/\",buildAssetsDir:\"/_nuxt/\",cdnURL:\"\"}}\n\n",
-  "images": [],
-  "title": "Beverly Center | LA's Premier Food, Fashion, and Shopping Destination",
-  "description": "Beverly Center is an iconic eight-story shopping destination in the heart of Los Angeles, featuring luxury retailers, contemporary fashion brands, and a renowned rooftop dining terrace. Located at the intersection of Beverly Boulevard and La Cienega, this architectural landmark offers a premier shopping experience with stunning panoramic views of the Hollywood Hills and downtown LA.",
-  "squareFootage": 860000,
+  "squareFootage": 750000,
   "numberOfStores": 100,
-  "demographics": "Beverly Center attracts an affluent, fashion-forward demographic with visitors predominantly aged 25-54, skewing toward higher household incomes ($75,000+) and urban professionals from West Hollywood, Beverly Hills, and surrounding upscale LA neighborhoods. The trade area draws both local residents seeking luxury and contemporary fashion as well as international tourists exploring Los Angeles' premier shopping destinations. Shoppers here prioritize brand-name retailers, designer fashion, and upscale dining experiences, with strong representation from LGBTQ+ community members and entertainment industry professionals who value the center's accessible West Hollywood location and curated tenant mix.",
+  "description": "Beverly Center is an iconic eight-story shopping destination in the heart of Los Angeles, featuring premier fashion retailers, upscale dining, and entertainment options. Located at the crossroads of Beverly Hills and West Hollywood, this modernized center offers a sophisticated shopping experience with contemporary architecture and luxury amenities.",
+  "demographics": "Beverly Center attracts an affluent, fashion-forward demographic with household incomes predominantly above $100,000, drawing heavily from the surrounding Beverly Hills, West Hollywood, and Mid-Wilshire neighborhoods. The primary visitor base consists of professionals aged 25-54, along with international tourists and entertainment industry professionals seeking premium brands and designer fashion. Shoppers typically exhibit strong purchasing power with preferences for contemporary fashion, luxury goods, and experiential dining, making multiple visits per month for both destination shopping and social experiences.",
   "centerType": "RegionalMall",
   "tier": 2,
   "spaces": []
