@@ -4,25 +4,6 @@ import { join } from "node:path";
 import envVars from "../env";
 import prisma from "../prisma";
 
-type PlaceInfo = {
-  address: string;
-  city: string;
-  country: string;
-  imageURLs: string[];
-  latitude: number;
-  longitude: number;
-  name: string;
-  openFrom?: number;
-  openUntil?: number;
-  phone: string | undefined;
-  photos: Array<{ name: string; widthPx: number; heightPx: number }>;
-  rating?: number;
-  reviewCount?: number;
-  state: string;
-  summary?: string;
-  website: string | undefined;
-};
-
 /**
  * Get place details from Google Places API. The Places API charges for usage,
  * so this function uses database caching to avoid redundant API calls.
@@ -30,13 +11,32 @@ type PlaceInfo = {
  * @param placeName Name of the place to search for
  * @returns Place details, or undefined if the place is not found or not operational
  */
-export async function fromGooglePlaces(
-  placeName: string,
-): Promise<PlaceInfo | undefined> {
+export async function fromGooglePlaces(placeName: string): Promise<
+  | {
+      address: string;
+      city: string;
+      country: string;
+      imageURLs: string[];
+      latitude: number;
+      longitude: number;
+      name: string;
+      openFrom?: number;
+      openUntil?: number;
+      phone: string | undefined;
+      photos: Array<{ name: string; widthPx: number; heightPx: number }>;
+      rating?: number;
+      reviewCount?: number;
+      state: string;
+      summary?: string;
+      website: string;
+    }
+  | undefined
+> {
   try {
     const key = `google-places:${placeName.toLowerCase().replace(/[^a-z0-9\s-]/g, "")}`;
     const cache = await prisma.cache.findUnique({ where: { key } });
-    if (cache) return cache.value as PlaceInfo;
+    if (cache)
+      return cache.value as Awaited<ReturnType<typeof fromGooglePlaces>>;
 
     const data = await fromPlacesAPI(placeName);
     await prisma.cache.create({ data: { key, value: data ?? "" } });
@@ -62,7 +62,7 @@ export async function fromGooglePlaces(
  */
 async function fromPlacesAPI(
   placeName: string,
-): Promise<PlaceInfo | undefined> {
+): Promise<Awaited<ReturnType<typeof fromGooglePlaces>> | undefined> {
   const fieldMask = [
     "places.addressComponents",
     "places.businessStatus",
@@ -159,6 +159,7 @@ async function fromPlacesAPI(
     place.primaryType === "shopping_mall",
     "Place is not a shopping mall",
   );
+  invariant(place.websiteUri, "Place has no website URI");
 
   const state = shortText(
     place.addressComponents,

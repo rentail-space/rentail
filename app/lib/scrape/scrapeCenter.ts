@@ -3,10 +3,7 @@ import { chromium } from "playwright";
 
 export default async function scrapeCenter(url: string): Promise<{
   bodyText?: string;
-  images?: string[];
-  title?: string;
   description?: string | null;
-  error?: string;
 }> {
   const spinner = ora(`Scraping website: ${url}`).start();
 
@@ -17,10 +14,6 @@ export default async function scrapeCenter(url: string): Promise<{
     await page.goto(url, { timeout: 30_000 });
 
     const bodyText = (await page.textContent("body")) || "";
-    const images = await page.$$eval("img", (imgs) =>
-      imgs.map((img) => img.src).filter((src) => src.startsWith("http")),
-    );
-    const title = await page.title();
     const description = await page
       .$eval('meta[name="description"]', (el) => el.getAttribute("content"))
       .catch(() => null);
@@ -28,17 +21,12 @@ export default async function scrapeCenter(url: string): Promise<{
     await browser.close();
     spinner.succeed(`Scraped website: ${url}`);
 
-    return {
-      bodyText,
-      images,
-      title,
-      description,
-    };
+    return { bodyText, description };
   } catch (_error) {
     await browser.close();
     spinner.fail(
       `Scraping failed: ${_error instanceof Error ? _error.message : String(_error)}`,
     );
-    return { error: "scraping_failed" };
+    return {};
   }
 }

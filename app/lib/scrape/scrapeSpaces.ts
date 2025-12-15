@@ -31,16 +31,7 @@ const spaceSchema = z.object({
 export default async function scrapeSpaces(
   websiteUrl: string,
   centerName: string,
-): Promise<
-  Array<{
-    number: string;
-    type: "Cart" | "Inline" | "Storage" | "Other";
-    size: number;
-    floor: number;
-    available: boolean;
-    imageURLs?: string[];
-  }>
-> {
+): Promise<z.infer<typeof spaceSchema>["spaces"]> {
   const spinner = ora(`Scraping spaces for ${centerName}...`).start();
 
   const browser = await chromium.launch({ headless: true });
@@ -97,8 +88,10 @@ export default async function scrapeSpaces(
     const prompt = `Extract all available retail space listings from this shopping center website.
 
 Website: ${centerName}
-Body Text (first 15000 chars):
+
+<body>
 ${bodyText.slice(0, 15000)}
+</body>
 
 Look for patterns like:
 - Space numbers (e.g., "A101", "B-45", "Suite 200")

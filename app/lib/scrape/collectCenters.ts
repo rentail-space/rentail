@@ -1,4 +1,4 @@
-import { delay, partition } from "es-toolkit";
+import { invariant, partition } from "es-toolkit";
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
@@ -16,6 +16,8 @@ export default async function collectCenters(countyName: string) {
 
   console.info("\x1b[32m  Stage 1: Discovering centers...\x1b[0m");
   await rateLimiter.throttle();
+  // From Claude we collect very basic information about the centers:
+  // name, address, city, state.
   const centers = await retryWithBackoff(() => discoverCenters(countyName));
 
   // Partition centers into creating and updating so we process new centers
@@ -30,32 +32,58 @@ export default async function collectCenters(countyName: string) {
   for (const center of [...creating, ...updating]) {
     const { state, name } = center;
     try {
+      // From Google Places we collect all additional information about the center:
+      // website, phone, rating, review count, photos, opening hours, etc.
       console.info("\x1b[32m  Stage 2: Fetching Google Places data...\x1b[0m");
       await rateLimiter.throttle();
       const google = await fromGooglePlaces(center.name);
-      if (!google || !google.website) {
-        console.error("\x1b[31m  ✗ Failed: %s has no website\x1b[0m", name);
-        failCount++;
-        continue;
-      }
+      invariant(google, "Failed to fetch Google Places data");
 
+      // From the website we collect the center's spaces and body text:
+      // - The body text is used to enrich the center with additional data.
+      // - The description comes from meta description tag (if available).
       console.info("\x1b[32m  Stage 3: Scraping website...\x1b[0m");
-      const { website } = google;
-      const { scraped, spaces } = await scrapeWebsite({ name, website });
+      const { bodyText, description } = await retryWithBackoff(() =>
+        scrapeCenter(google.website),
+      );
 
+      // For each center we scrape the spaces page and collect the spaces:
+      // - Space number
+      // - Space type (Cart, Inline, Storage, Other)
+      // - Space size (in square feet)
+      // - Space floor (1-10)
+      // - Space available (true/false)
+      // - Space image URLs (array of image URLs)
+      const spaces = await retryWithBackoff(() =>
+        scrapeSpaces(google.website, center.name),
+      );
+
+      // From the scraped data we enrich the center with additional data:
+      // - Square footage
+      // - Store count
+      // - Demographic summary
+      // - Center type (RegionalMall, CommunityCenter, etc)
+      // - Tier (1-3)
+      // - Description (based on scraped website data)
       console.info("\x1b[32m  Stage 4: Enriching center...\x1b[0m");
       await rateLimiter.throttle();
       const enriched = await retryWithBackoff(() =>
-        enrichCenter({ center, bodyText: scraped.bodyText }),
+        enrichCenter({ center, bodyText, description }),
       );
 
       const filename = getSaveFilename({ state, name });
       console.info("\x1b[32m  Stage 5:  Saving %s...\x1b[0m", filename);
       await mkdir(dirname(filename), { recursive: true });
+      google.photos = []; // We don't need photos in the seed file
       await writeFile(
         filename,
         JSON.stringify(
-          { ...center, ...google, ...scraped, ...enriched, spaces },
+          {
+            ...center, // From Claude
+            ...google, // Overwritten by Google Places API
+            ...enriched, // Additional data from Claude
+            spaces, // Spaces scraped from website
+          },
           null,
           2,
         ),
@@ -77,23 +105,6 @@ export default async function collectCenters(countyName: string) {
     centers.length,
   );
   if (failCount > 0) console.info("\x1b[31m  ⚠ Failed: %d\x1b[0m", failCount);
-}
-
-async function scrapeWebsite(center: {
-  name: string;
-  website: string;
-}): Promise<{
-  scraped: Awaited<ReturnType<typeof scrapeCenter>>;
-  spaces: Awaited<ReturnType<typeof scrapeSpaces>>;
-}> {
-  await delay(2000 + Math.random() * 1000);
-  const scraped = await scrapeCenter(center.website);
-
-  await delay(3000 + Math.random() * 2000);
-  const spaces = await retryWithBackoff(() =>
-    scrapeSpaces(center.website, center.name),
-  );
-  return { scraped, spaces };
 }
 
 function getSaveFilename(center: { name: string; state: string }) {

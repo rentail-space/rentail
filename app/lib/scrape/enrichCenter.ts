@@ -18,25 +18,29 @@ const centerSchema = z.object({
     "LifestyleCenter",
   ]),
   tier: z.number().int().min(1).max(3),
-  spaces: z
-    .array(
-      z.object({
-        number: z.string(),
-        type: z.enum(["Cart", "Inline", "Storage", "Other"]),
-        size: z.number(),
-        floor: z.number(),
-        imageURLs: z.array(z.string().url()).optional(),
-        available: z.boolean().default(false),
-      }),
-    )
-    .default([]),
 });
 
+/**
+ * Enrich a center with additional data based on the scraped website data.
+ * - Square footage
+ * - Store count
+ * - Demographic summary
+ * - Center type (RegionalMall, CommunityCenter, etc)
+ * - Tier (1-3)
+ * - Description (based on scraped website data)
+ *
+ * @param center - The center to enrich
+ * @param description - The description from the website metadata (optional)
+ * @param bodyText - The body text from the website
+ * @returns The enriched center
+ */
 export default async function enrichCenter({
   center,
+  description,
   bodyText,
 }: {
   center: Awaited<ReturnType<typeof discoverCenters>>[number];
+  description?: string | null;
   bodyText?: string;
 }): Promise<zod.infer<typeof centerSchema>> {
   const spinner = ora(`Enriching ${center.name}...`).start();
@@ -105,5 +109,8 @@ For optional fields without reliable data, omit them entirely (do not set to nul
   });
 
   spinner.succeed();
+  // If the description is provided in page metadata, use it instead of the
+  // generated description.
+  if (description) object.description = description;
   return object;
 }

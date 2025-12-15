@@ -44,9 +44,6 @@ export default async function discoverCenters(where: string): Promise<
     address: string;
     city: string;
     state: string;
-    website?: string;
-    latitude: number;
-    longitude: number;
   }>
 > {
   invariant(where.trim(), "County name is required");
@@ -54,15 +51,9 @@ export default async function discoverCenters(where: string): Promise<
   const cacheFile = getCacheFilePath(where);
   if (existsSync(cacheFile)) {
     const cacheData = await readFile(cacheFile, "utf-8");
-    const centers = JSON.parse(cacheData) as Array<{
-      name: string;
-      address: string;
-      city: string;
-      state: string;
-      website?: string;
-      latitude: number;
-      longitude: number;
-    }>;
+    const centers = JSON.parse(cacheData) as Awaited<
+      ReturnType<typeof discoverCenters>
+    >;
     console.info(
       "\x1b[32m  ✓ Loaded %d centers from cache\x1b[0m",
       centers.length,
@@ -75,8 +66,6 @@ For each center provide:
 - Official name
 - Full street address
 - City, state
-- Official website URL (if known)
-- Approximate coordinates (latitude/longitude)
 
 Focus on retail shopping centers, strip malls, and enclosed malls.
 Exclude individual stores or single-building retail.`;
@@ -99,6 +88,7 @@ Exclude individual stores or single-building retail.`;
       "\x1b[32m  Found %d centers:\n%s\x1b[0m",
       centers.length,
       centers
+        .sort((a, b) => a.name.localeCompare(b.name))
         .map(
           (center) =>
             `  ${center.name}${center.website ? ` - ${center.website}` : ""}`,
@@ -108,11 +98,7 @@ Exclude individual stores or single-building retail.`;
 
     await writeFile(
       cacheFile,
-      JSON.stringify(
-        sortBy(centers, [(center) => center.name.toLowerCase()]),
-        null,
-        2,
-      ),
+      JSON.stringify(sortBy(centers, ["name"]), null, 2),
     );
     console.info("\x1b[32m  ✓ Saved discovery: %s\x1b[0m", cacheFile);
 
