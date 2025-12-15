@@ -1,4 +1,5 @@
 import { generateObject } from "ai";
+import { sortBy } from "es-toolkit";
 import { existsSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -53,8 +54,20 @@ export default async function discoverCenters(where: string): Promise<
   const cacheFile = getCacheFilePath(where);
   if (existsSync(cacheFile)) {
     const cacheData = await readFile(cacheFile, "utf-8");
-    console.info("\x1b[32m  ✓ Loaded %d centers from cache\x1b[0m", cacheFile);
-    return JSON.parse(cacheData);
+    const centers = JSON.parse(cacheData) as Array<{
+      name: string;
+      address: string;
+      city: string;
+      state: string;
+      website?: string;
+      latitude: number;
+      longitude: number;
+    }>;
+    console.info(
+      "\x1b[32m  ✓ Loaded %d centers from cache\x1b[0m",
+      centers.length,
+    );
+    return centers;
   }
 
   const prompt = `List all shopping centers and malls in ${where}.
@@ -93,7 +106,14 @@ Exclude individual stores or single-building retail.`;
         .join("\n"),
     );
 
-    await writeFile(cacheFile, JSON.stringify(centers, null, 2));
+    await writeFile(
+      cacheFile,
+      JSON.stringify(
+        sortBy(centers, [(center) => center.name.toLowerCase()]),
+        null,
+        2,
+      ),
+    );
     console.info("\x1b[32m  ✓ Saved discovery: %s\x1b[0m", cacheFile);
 
     return centers;

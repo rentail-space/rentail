@@ -1,11 +1,13 @@
 #!/usr/bin/env tsx
 
-import { delay } from "es-toolkit";
+import { delay, partition } from "es-toolkit";
+import { existsSync } from "node:fs";
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
 import discoverCenters from "~/lib/scrape/discoverCenters";
 import enrichCenter from "~/lib/scrape/enrichCenter";
 import RateLimiter from "~/lib/scrape/rateLimiter";
 import retryWithBackoff from "~/lib/scrape/retryWithBackoff";
-import saveCenterFile from "~/lib/scrape/saveCenterFile";
 import scrapeCenter from "~/lib/scrape/scrapeCenter";
 import scrapeSpaces from "~/lib/scrape/scrapeSpaces";
 import validateImages from "~/lib/scrape/validateImages";
@@ -21,70 +23,53 @@ export default async function collectCenters(countyName: string) {
   await rateLimiter.throttle();
   const centers = await retryWithBackoff(() => discoverCenters(countyName));
 
+  // Stage 2: Create new centers first, then update existing ones
+  const [creating, updating] = partition(centers, (center) =>
+    existsSync(getSaveFilename(center)),
+  );
+
   let successCount = 0;
   let failCount = 0;
 
-  // Process each center
-  for (let i = 0; i < centers.length; i++) {
-    const center = centers[i];
+  for (const center of [...creating, ...updating]) {
     try {
-      // Stage 2: Scraping website
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let scrapedData: {
-        bodyText?: string;
-        images?: string[];
-        title?: string;
-        description?: string | null;
-        error?: string;
-      } = {};
+      let enrichedData: typeof center;
+
       if (center.website) {
+        // Stage 3: Scrape website
         await delay(2000 + Math.random() * 1000);
-        scrapedData = await scrapeCenter(center.website);
-      } else {
-        console.info("\x1b[33m  ⚠ No website found, skipping scrape\x1b[0m");
-      }
+        const scrapedData = await scrapeCenter(center.website);
 
-      // Stage 2b: Scraping spaces (if website exists)
-      let spaces: Array<{
-        number: string;
-        type: "Cart" | "Inline" | "Storage" | "Other";
-        size: number;
-        floor: number;
-        available: boolean;
-        imageURLs?: string[];
-      }> = [];
-
-      if (center.website) {
+        // Stage 4: Scrape spaces
         await delay(3000 + Math.random() * 2000);
         const website = center.website;
-        spaces = await retryWithBackoff(() =>
+        const spaces = await retryWithBackoff(() =>
           scrapeSpaces(website, center.name),
         );
+
+        // Stage 5: Validate images
+        if (scrapedData.images)
+          scrapedData.images = await validateImages(scrapedData.images);
+
+        // Stage 6: Enrichment
+        await rateLimiter.throttle();
+        enrichedData = await retryWithBackoff(() =>
+          enrichCenter(center, { ...scrapedData, spaces }),
+        );
+      } else {
+        enrichedData = center;
       }
 
-      // Stage 2.5: Validate images
-      let validImages: string[] = [];
-      const scrapedImages: string[] =
-        typeof scrapedData === "object" &&
-        scrapedData !== null &&
-        "images" in scrapedData &&
-        Array.isArray(scrapedData.images)
-          ? scrapedData.images
-          : [];
-      validImages = await validateImages(scrapedImages);
-
-      // Stage 3: Enrichment
-      await rateLimiter.throttle();
-      const enrichedData = await retryWithBackoff(() =>
-        enrichCenter(center, {
-          ...scrapedData,
-          images: validImages,
-          spaces,
-        }),
+      // Stage 7: Save to file
+      const filename = getSaveFilename(enrichedData);
+      console.info(
+        "\x1b[32m  Saving %s to %s...\x1b[0m",
+        enrichedData.name,
+        filename,
       );
+      await mkdir(dirname(filename), { recursive: true });
+      await writeFile(filename, JSON.stringify(enrichedData, null, 2));
 
-      // Stage 4: Write to file
-      await saveCenterFile(enrichedData);
       successCount++;
     } catch (error) {
       console.error(
@@ -102,4 +87,16 @@ export default async function collectCenters(countyName: string) {
     centers.length,
   );
   if (failCount > 0) console.info("\x1b[31m  ⚠ Failed: %d\x1b[0m", failCount);
+}
+
+function getSaveFilename(center: { name: string; state: string }) {
+  const normalized = center.name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "") // Remove special chars
+    .replace(/\s+/g, "-") // Spaces to hyphens
+    .replace(/-+/g, "-") // Collapse multiple hyphens
+    .replace(/^-|-$/g, ""); // Trim hyphens
+
+  const slug = `${center.state.toLowerCase()}-${normalized}`;
+  return resolve(`prisma/seed/${center.state.toLowerCase()}/${slug}.json`);
 }
