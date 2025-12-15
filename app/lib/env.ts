@@ -25,6 +25,11 @@ const envVars = {
     .required(false)
     .asString(),
 
+  GOOGLE_PLACES_API_KEY: env
+    .get("GOOGLE_PLACES_API_KEY")
+    .required(true)
+    .asString(),
+
   REDIS_URL: env
     .get("REDIS_URL")
     .default("redis://localhost:6379")

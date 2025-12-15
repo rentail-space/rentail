@@ -14,6 +14,14 @@ datasource db {
   relationMode = "foreignKeys"
 }
 
+model Cache {
+  key       String   @map("key")        @id
+  value     Json     @map("value")      @db.Json
+  createdAt DateTime @map("created_at") @default(now())
+
+  @@map("cache")
+}
+
 model Chat {
   activeStreamId String?    @map("active_stream_id")
   createdAt      DateTime   @map("created_at")       @default(now())
