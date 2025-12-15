@@ -2,6 +2,7 @@ import { invariant, partition } from "es-toolkit";
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
+import { chromium } from "playwright";
 import discoverCenters from "~/lib/scrape/discoverCenters";
 import enrichCenter from "~/lib/scrape/enrichCenter";
 import { fromGooglePlaces } from "~/lib/scrape/fromGooglePlaces";
@@ -20,6 +21,7 @@ export default async function collectCenters(countyName: string) {
   const [creating, updating] = partition(centers, (center) =>
     existsSync(getSaveFilename(center)),
   );
+  const browser = await chromium.launch({ headless: true });
 
   let successCount = 0;
   let failCount = 0;
@@ -35,7 +37,10 @@ export default async function collectCenters(countyName: string) {
       // From the website we collect the center's spaces and body text:
       // - The body text is used to enrich the center with additional data.
       // - The description comes from meta description tag (if available).
-      const { bodyText, description } = await scrapeCenter(google.website);
+      const { bodyText, description } = await scrapeCenter({
+        browser,
+        url: google.website,
+      });
 
       // For each center we scrape the spaces page and collect the spaces:
       // - Space number
@@ -44,7 +49,11 @@ export default async function collectCenters(countyName: string) {
       // - Space floor (1-10)
       // - Space available (true/false)
       // - Space image URLs (array of image URLs)
-      const spaces = await scrapeSpaces(google.website, center.name);
+      const spaces = await scrapeSpaces({
+        browser,
+        centerName: center.name,
+        url: google.website,
+      });
 
       // From the scraped data we enrich the center with additional data:
       // - Square footage
@@ -89,6 +98,7 @@ export default async function collectCenters(countyName: string) {
     centers.length,
   );
   if (failCount > 0) console.info("\x1b[31m  ⚠ Failed: %d\x1b[0m", failCount);
+  await browser.close();
 }
 
 function getSaveFilename(center: { name: string; state: string }) {

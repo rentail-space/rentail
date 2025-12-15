@@ -1,6 +1,6 @@
 import { generateObject } from "ai";
 import ora from "ora";
-import { chromium } from "playwright";
+import type { Browser } from "playwright";
 import { z } from "zod";
 import { conversational } from "~/lib/models";
 
@@ -28,18 +28,21 @@ const spaceSchema = z.object({
  * @param centerName - The name of the center (for logging)
  * @returns Array of retail space objects
  */
-export default async function scrapeSpaces(
-  websiteUrl: string,
-  centerName: string,
-): Promise<z.infer<typeof spaceSchema>["spaces"]> {
-  const spinner = ora(`Scraping spaces for ${centerName}...`).start();
-
-  const browser = await chromium.launch({ headless: true });
+export default async function scrapeSpaces({
+  browser,
+  centerName,
+  url,
+}: {
+  browser: Browser;
+  centerName: string;
+  url: string;
+}): Promise<z.infer<typeof spaceSchema>["spaces"]> {
   const page = await browser.newPage();
+  const spinner = ora(`Scraping spaces for ${centerName}...`).start();
 
   try {
     // Navigate to main website
-    await page.goto(websiteUrl, { timeout: 30_000 });
+    await page.goto(url, { timeout: 30_000 });
     await page.waitForLoadState("networkidle", { timeout: 10_000 });
 
     // Try to find and click on leasing/spaces link
@@ -54,7 +57,7 @@ export default async function scrapeSpaces(
 
     for (const selector of leasingLinks) {
       try {
-        const link = await page.locator(selector).first();
+        const link = page.locator(selector).first();
         if (await link.isVisible()) {
           await link.click();
           await page.waitForLoadState("networkidle", { timeout: 10_000 });
@@ -80,10 +83,10 @@ export default async function scrapeSpaces(
       )
       .catch(() => []);
 
-    await browser.close();
+    await page.close();
 
     // Use AI to extract space data
-    spinner.text = `Extracting space data for ${centerName} using AI...`;
+    spinner.text = `Extracting space data for ${centerName}...`;
 
     const prompt = `Extract all available retail space listings from this shopping center website.
 
@@ -125,7 +128,7 @@ If no spaces are found or the page doesn't contain leasing information, return a
 
     return object.spaces;
   } catch (error) {
-    await browser.close();
+    await page.close();
     spinner.fail(
       `Failed to scrape spaces for ${centerName}: ${error instanceof Error ? error.message : String(error)}`,
     );

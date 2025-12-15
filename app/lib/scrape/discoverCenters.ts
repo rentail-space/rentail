@@ -5,6 +5,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { invariant } from "node_modules/es-toolkit/dist/util/invariant.mjs";
 import ora from "ora";
+import type zod from "zod";
 import { z } from "zod";
 import { conversational } from "~/lib/models";
 
@@ -18,15 +19,6 @@ const discoverySchema = z.object({
         .string()
         .min(2, "State must be at least 2 characters")
         .max(2, "State must be 2-letter code"),
-      website: z.string().url("Must be a valid URL").optional(),
-      latitude: z
-        .number()
-        .min(-90, "Latitude must be >= -90")
-        .max(90, "Latitude must be <= 90"),
-      longitude: z
-        .number()
-        .min(-180, "Longitude must be >= -180")
-        .max(180, "Longitude must be <= 180"),
     }),
   ),
 });
@@ -38,15 +30,10 @@ const discoverySchema = z.object({
  * @param where - The name of the county to discover centers in.
  * @returns The centers discovered in that area.
  */
-export default async function discoverCenters(where: string): Promise<
-  Array<{
-    name: string;
-    address: string;
-    city: string;
-    state: string;
-  }>
-> {
-  invariant(where.trim(), "County name is required");
+export default async function discoverCenters(
+  where: string,
+): Promise<zod.infer<typeof discoverySchema>["centers"]> {
+  invariant(where.trim(), "Search query is required");
 
   const cacheFile = getCacheFilePath(where);
   if (existsSync(cacheFile)) {
@@ -61,6 +48,7 @@ export default async function discoverCenters(where: string): Promise<
     return centers;
   }
 
+  const spinner = ora(`Discovering centers in ${where}...`).start();
   const prompt = `List all shopping centers and malls in ${where}.
 For each center provide:
 - Official name
@@ -70,7 +58,6 @@ For each center provide:
 Focus on retail shopping centers, strip malls, and enclosed malls.
 Exclude individual stores or single-building retail.`;
 
-  const spinner = ora(`Discovering centers in ${where}...`).start();
   try {
     const { object } = await generateObject({
       abortSignal: AbortSignal.timeout(90_000),
@@ -88,10 +75,7 @@ Exclude individual stores or single-building retail.`;
       centers.length,
       centers
         .sort((a, b) => a.name.localeCompare(b.name))
-        .map(
-          (center) =>
-            `  ${center.name}${center.website ? ` - ${center.website}` : ""}`,
-        )
+        .map((center) => `  ${center.name}`)
         .join("\n"),
     );
 

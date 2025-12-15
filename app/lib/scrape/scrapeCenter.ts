@@ -1,17 +1,23 @@
 import ora from "ora";
-import { chromium } from "playwright";
+import type { Browser } from "playwright";
 
-export default async function scrapeCenter(url: string): Promise<{
+export default async function scrapeCenter({
+  browser,
+  url,
+}: {
+  browser: Browser;
+  url: string;
+}): Promise<{
   bodyText?: string;
   description?: string | null;
 }> {
-  const spinner = ora(`Scraping website: ${url}`).start();
-
-  const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
-
+  const spinner = ora(`Scraping website: ${url}`).start();
   try {
-    await page.goto(url, { timeout: 30_000 });
+    await page.goto(url, {
+      waitUntil: "domcontentloaded",
+      timeout: 30_000,
+    });
 
     const bodyText = (await page.textContent("body")) || "";
     const description = await page
@@ -23,7 +29,7 @@ export default async function scrapeCenter(url: string): Promise<{
 
     return { bodyText, description };
   } catch (_error) {
-    await browser.close();
+    await page.close();
     spinner.fail(
       `Scraping failed: ${_error instanceof Error ? _error.message : String(_error)}`,
     );

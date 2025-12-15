@@ -37,8 +37,10 @@ export async function fromGooglePlaces(placeName: string): Promise<
   try {
     const key = `google-places:${placeName.toLowerCase().replace(/[^a-z0-9\s-]/g, "")}`;
     const cache = await prisma.cache.findUnique({ where: { key } });
-    if (cache)
+    if (cache) {
+      spinner.succeed();
       return cache.value as Awaited<ReturnType<typeof fromGooglePlaces>>;
+    }
 
     const data = await fromPlacesAPI(placeName);
     await prisma.cache.create({ data: { key, value: data ?? "" } });
