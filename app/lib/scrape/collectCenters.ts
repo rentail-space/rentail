@@ -37,7 +37,7 @@ export default async function collectCenters(countyName: string) {
       // From the website we collect the center's spaces and body text:
       // - The body text is used to enrich the center with additional data.
       // - The description comes from meta description tag (if available).
-      const { bodyText, description } = await scrapeCenter({
+      const { bodyText } = await scrapeCenter({
         browser,
         url: google.website,
       });
@@ -62,7 +62,7 @@ export default async function collectCenters(countyName: string) {
       // - Center type (RegionalMall, CommunityCenter, etc)
       // - Tier (1-3)
       // - Description (based on scraped website data)
-      const enriched = await enrichCenter({ center, bodyText, description });
+      const enriched = await enrichCenter({ center, bodyText });
 
       const filename = getSaveFilename({ state, name });
       await mkdir(dirname(filename), { recursive: true });

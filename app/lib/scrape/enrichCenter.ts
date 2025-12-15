@@ -30,17 +30,14 @@ const enrichedSchema = z.object({
  * - Description (based on scraped website data)
  *
  * @param center - The center to enrich
- * @param description - The description from the website metadata (optional)
  * @param bodyText - The body text from the website
  * @returns The enriched center
  */
 export default async function enrichCenter({
   center,
-  description,
   bodyText,
 }: {
   center: Awaited<ReturnType<typeof discoverCenters>>[number];
-  description?: string | null;
   bodyText?: string;
 }): Promise<zod.infer<typeof enrichedSchema>> {
   const spinner = ora(`Enriching ${center.name}...`).start();
@@ -111,9 +108,6 @@ For optional fields without reliable data, omit them entirely (do not set to nul
     });
 
     spinner.succeed();
-    // If the description is provided in page metadata, use it instead of the
-    // generated description.
-    if (description) object.description = description;
     return object;
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
