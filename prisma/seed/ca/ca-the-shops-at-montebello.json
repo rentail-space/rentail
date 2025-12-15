@@ -9,9 +9,14 @@
   "squareFootage": 900000,
   "numberOfStores": 120,
   "website": "https://www.theshopsatmontebello.com",
+  "phone": "+13237211807",
   "imageURLs": [],
-  "description": "The Shops at Montebello is a major regional shopping destination in Montebello, California, serving the greater Los Angeles area. This enclosed mall features a diverse mix of national retailers, dining options, and entertainment venues, anchored by prominent department stores. Located conveniently near major freeways, it offers a comprehensive shopping experience for families and residents throughout the San Gabriel Valley.",
-  "summary": "A prominent enclosed regional mall in the San Gabriel Valley offering diverse shopping, dining, and entertainment options for the greater Los Angeles community.",
+  "description": "The Shops at Montebello is an enclosed regional shopping mall serving the diverse communities of the San Gabriel Valley in eastern Los Angeles County. Featuring a mix of popular national retailers, dining options, and entertainment venues, this center provides a convenient shopping destination for families and value-conscious shoppers throughout the region.",
+  "demographics": "The Shops at Montebello attracts a diverse, predominantly Hispanic and Asian American customer base with middle-income households and multi-generational families. The trade area serves the greater San Gabriel Valley and eastern Los Angeles County, drawing visitors primarily aged 25-54 with household incomes ranging from $50,000 to $85,000. Shoppers frequent the center for a mix of value-oriented shopping and dining, with strong weekend traffic driven by family outings and local residents seeking convenient access to mainstream retailers and entertainment options.",
+  "summary": "A regional shopping destination in Montebello offering mainstream retail, dining, and entertainment for the diverse San Gabriel Valley community.",
+  "rating": 4.1,
+  "reviewCount": 8500,
   "centerType": "RegionalMall",
+  "tier": 2,
   "spaces": []
 }

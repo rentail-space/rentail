@@ -1,0 +1,22 @@
+{
+  "name": "Moreno Valley Mall",
+  "city": "Moreno Valley",
+  "state": "CA",
+  "country": "USA",
+  "address": "22500 Town Circle",
+  "latitude": 33.9378,
+  "longitude": -117.2306,
+  "squareFootage": 850000,
+  "numberOfStores": 75,
+  "website": "https://www.morenovalleymall.com",
+  "phone": "+19516531177",
+  "imageURLs": [],
+  "description": "Moreno Valley Mall is a regional shopping destination in the heart of Moreno Valley, California, featuring a diverse mix of retail stores, dining options, and entertainment including the popular Harkins Theatres MV 16. The mall offers convenient shopping with extended holiday hours and serves as a community gathering place for residents throughout Riverside County. With ample amenities and a family-friendly atmosphere, it provides a comprehensive retail experience for locals and visitors alike.",
+  "demographics": "Moreno Valley Mall serves a diverse, family-oriented community in the Inland Empire with a median household income in the mid-range bracket and a predominately middle-class demographic. The trade area attracts value-conscious shoppers aged 25-54 with families, drawing from surrounding residential neighborhoods in Riverside County. Visitors typically seek affordable fashion, entertainment options like the Harkins Theatres, and convenient one-stop shopping experiences for everyday needs and weekend family outings.",
+  "summary": "Moreno Valley Mall is a family-friendly regional shopping center featuring diverse retail, dining, and entertainment options including Harkins Theatres in the Inland Empire.",
+  "openFrom": 1100,
+  "openUntil": 2000,
+  "centerType": "RegionalMall",
+  "tier": 2,
+  "spaces": []
+}

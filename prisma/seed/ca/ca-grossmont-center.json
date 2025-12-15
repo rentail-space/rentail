@@ -1,0 +1,21 @@
+{
+  "name": "Grossmont Center",
+  "city": "La Mesa",
+  "state": "CA",
+  "country": "USA",
+  "address": "5500 Grossmont Center Drive",
+  "latitude": 32.7833,
+  "longitude": -117.0147,
+  "squareFootage": 800000,
+  "numberOfStores": 100,
+  "website": "https://www.grossmontcenter.com",
+  "imageURLs": [],
+  "description": "Grossmont Center is East San Diego County's premier open-air shopping destination, featuring over 100 retailers, restaurants, and services in a beautifully landscaped outdoor setting. Originally opened in 1961 and extensively renovated, this iconic La Mesa center combines national brands, local favorites, and diverse dining options to serve the vibrant East County community. With convenient access, ample parking, and a family-friendly atmosphere, Grossmont Center remains the go-to retail hub for residents throughout the region.",
+  "demographics": "Grossmont Center attracts a diverse demographic profile representing East County San Diego, with a strong mix of middle to upper-middle-income families, retirees, and young professionals from La Mesa, El Cajon, and surrounding communities. The trade area is characterized by established residential neighborhoods with median household incomes ranging from $60,000 to $90,000, and shoppers skew toward the 35-65 age demographic with a significant retiree presence. Visitors typically seek convenient, one-stop shopping experiences combining everyday necessities with dining and entertainment options, reflecting the center's role as the primary retail destination for East San Diego County.",
+  "summary": "East San Diego County's premier open-air shopping center featuring over 100 stores, restaurants, and services in a modernized lifestyle setting.",
+  "rating": 4.3,
+  "reviewCount": 5800,
+  "centerType": "RegionalMall",
+  "tier": 2,
+  "spaces": []
+}

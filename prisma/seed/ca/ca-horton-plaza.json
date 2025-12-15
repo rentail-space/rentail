@@ -7,11 +7,13 @@
   "latitude": 32.7142,
   "longitude": -117.1631,
   "squareFootage": 450000,
-  "numberOfStores": 15,
+  "numberOfStores": 50,
   "website": "https://www.hortonplaza.com",
   "imageURLs": [],
-  "description": "Horton Plaza is a historic downtown San Diego shopping and entertainment destination that opened in 1985 as a vibrant, multi-level open-air mall featuring bold postmodern architecture and colorful design. Located in the heart of the Gaslamp Quarter, this urban retail center has undergone significant transformation and redevelopment in recent years, evolving from a traditional shopping mall into a mixed-use complex. The property remains a recognizable landmark in San Diego's downtown core with its distinctive architectural style.",
-  "summary": "A historic downtown San Diego landmark known for its bold postmodern architecture, currently undergoing transformation into a mixed-use development.",
+  "description": "Horton Plaza is a landmark urban shopping destination located in the heart of downtown San Diego, featuring distinctive postmodern architecture designed by Jon Jerde. Originally opened in 1985 as a multi-level retail complex, this iconic center helped revitalize San Diego's downtown core and continues to serve as a major gathering place for locals and tourists alike. Its prime location near the historic Gaslamp Quarter makes it a central hub for shopping, dining, and entertainment in the city.",
+  "demographics": "Horton Plaza attracts a diverse urban demographic including downtown San Diego professionals, tourists visiting the Gaslamp Quarter, and local residents from surrounding neighborhoods. The visitor base skews younger (25-45 years old) with middle to upper-middle income levels, drawn by the center's convenient downtown location and mix of retail, dining, and entertainment options. The trade area benefits from significant foot traffic from nearby office workers, convention center attendees, and the vibrant downtown residential population that values walkable urban shopping experiences.",
+  "summary": "A distinctive urban shopping complex in downtown San Diego featuring postmodern architecture and serving as a central retail and entertainment destination since 1985.",
   "centerType": "RegionalMall",
+  "tier": 2,
   "spaces": []
 }

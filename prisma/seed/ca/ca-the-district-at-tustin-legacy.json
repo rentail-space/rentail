@@ -10,8 +10,10 @@
   "numberOfStores": 40,
   "website": "https://www.thedistrictattustinlegacy.com",
   "imageURLs": [],
-  "description": "The District at Tustin Legacy is a premier outdoor shopping and entertainment destination located in the heart of Tustin, California. This vibrant lifestyle center offers a carefully curated mix of upscale retailers, trendy boutiques, diverse dining options, and entertainment venues in a pedestrian-friendly environment. Developed on the historic Tustin Legacy site, it combines modern amenities with open-air design, creating a dynamic social hub for Orange County residents and visitors.",
-  "summary": "An upscale open-air lifestyle center in Tustin offering shopping, dining, and entertainment on the historic Tustin Legacy site.",
+  "description": "The District at Tustin Legacy is a premier open-air lifestyle center located in the heart of Orange County's dynamic Tustin Legacy development, featuring a curated mix of upscale retailers, popular dining destinations, and entertainment venues. This modern shopping destination offers a walkable, pedestrian-friendly environment that combines convenience with an elevated shopping and dining experience. As part of the master-planned Tustin Legacy community built on the former Marine Corps Air Station, The District serves as the retail and social hub for this thriving mixed-use development.",
+  "demographics": "The District at Tustin Legacy attracts an affluent, educated demographic with median household incomes exceeding $100,000, primarily consisting of young professionals, families with children, and tech industry workers from nearby companies. The trade area serves the rapidly developing Tustin Legacy master-planned community along with surrounding Orange County suburbs, drawing visitors aged 25-54 who seek upscale dining, entertainment, and lifestyle retail experiences. Shoppers here demonstrate preferences for premium casual brands, experiential retail, and frequent dining visits, reflecting the center's positioning as a modern lifestyle destination rather than traditional shopping mall.",
+  "summary": "A vibrant open-air lifestyle center featuring upscale retail, dining, and entertainment in Orange County's modern Tustin Legacy community.",
   "centerType": "LifestyleCenter",
+  "tier": 2,
   "spaces": []
 }

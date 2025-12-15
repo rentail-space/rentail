@@ -1,0 +1,21 @@
+{
+  "name": "Westfield Plaza Camino Real",
+  "city": "Carlsbad",
+  "state": "CA",
+  "country": "USA",
+  "address": "2525 El Camino Real",
+  "latitude": 33.1581,
+  "longitude": -117.3506,
+  "squareFootage": 280000,
+  "numberOfStores": 35,
+  "website": "https://www.westfield.com/plazacaminoreal",
+  "imageURLs": [],
+  "description": "Westfield Plaza Camino Real is a convenient open-air shopping destination located along the prime El Camino Real corridor in coastal Carlsbad, California. This community-focused center offers a carefully curated mix of national retailers, local boutiques, and dining options serving the affluent North County San Diego market. With easy access and ample parking, it provides a streamlined shopping experience for busy families and professionals in the area.",
+  "demographics": "Westfield Plaza Camino Real attracts an affluent demographic with median household incomes exceeding $100,000, reflecting Carlsbad's upscale coastal community. The primary visitor base includes families with children, professionals aged 30-55, and active retirees drawn to the North County San Diego lifestyle. The trade area serves both local Carlsbad residents seeking convenient daily shopping and visitors from surrounding communities like Encinitas, Oceanside, and inland North County who appreciate the center's accessible location along the El Camino Real corridor. Shopping patterns skew toward quality-conscious consumers who value convenience and a curated tenant mix over extensive mall browsing experiences.",
+  "summary": "A convenient open-air community shopping center serving Carlsbad's affluent coastal community with quality retailers and dining along the El Camino Real corridor.",
+  "rating": 4.2,
+  "reviewCount": 850,
+  "centerType": "CommunityCenter",
+  "tier": 2,
+  "spaces": []
+}

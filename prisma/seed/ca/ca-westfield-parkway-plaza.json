@@ -1,0 +1,23 @@
+{
+  "name": "Westfield Parkway Plaza",
+  "city": "El Cajon",
+  "state": "CA",
+  "country": "USA",
+  "address": "415 Parkway Plaza",
+  "latitude": 32.8147,
+  "longitude": -116.9625,
+  "squareFootage": 854000,
+  "numberOfStores": 130,
+  "website": "https://www.westfield.com/parkway",
+  "imageURLs": [],
+  "description": "Westfield Parkway Plaza is a premier enclosed regional shopping destination in East County San Diego, offering over 130 retail stores and dining options under one roof. As part of the globally recognized Westfield brand, this mall features a comprehensive mix of fashion retailers, department store anchors, entertainment venues, and convenient amenities including Smart Parking technology. The center serves as a dynamic community hub where visitors can shop, dine, and experience year-round events and entertainment.",
+  "demographics": "Westfield Parkway Plaza primarily serves East County San Diego residents with a diverse demographic profile spanning middle-income families, young professionals, and retirees. The trade area attracts shoppers from El Cajon, La Mesa, Santee, and surrounding communities, with visitors typically in the 25-54 age range seeking value-oriented national retailers and convenient one-stop shopping. The center caters to a practical, family-focused customer base that values accessibility, variety, and mainstream brands over luxury offerings.",
+  "summary": "A major enclosed regional mall in El Cajon serving East County San Diego with 130+ stores and the signature Westfield shopping experience.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 3800,
+  "centerType": "RegionalMall",
+  "tier": 2,
+  "spaces": []
+}

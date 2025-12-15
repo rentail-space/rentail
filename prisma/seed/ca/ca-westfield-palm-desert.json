@@ -1,0 +1,21 @@
+{
+  "name": "Westfield Palm Desert",
+  "city": "Palm Desert",
+  "state": "CA",
+  "country": "USA",
+  "address": "72840 Highway 111",
+  "latitude": 33.7236,
+  "longitude": -116.3778,
+  "squareFootage": 875000,
+  "numberOfStores": 125,
+  "website": "https://www.westfield.com/palmdesert",
+  "imageURLs": [],
+  "description": "Westfield Palm Desert is a premier enclosed shopping destination located on Highway 111 in the heart of Palm Desert's retail corridor. This upscale regional mall features a carefully curated mix of national retailers, dining options, and entertainment venues, serving both the local Coachella Valley community and visitors to the greater Palm Springs area. With modern amenities and a comfortable climate-controlled environment, it provides a sophisticated shopping experience in the desert.",
+  "demographics": "Westfield Palm Desert attracts an affluent demographic primarily consisting of upper-middle to high-income households, with a significant proportion of retirees and seasonal visitors drawn to the Palm Springs metro area. The trade area serves both local residents and tourists seeking upscale shopping in the Coachella Valley, with visitors typically aged 35-65+ who favor premium brands and dining experiences. The center benefits from Palm Desert's resort community atmosphere, attracting fashion-conscious shoppers with higher discretionary spending power who appreciate both convenience and quality retail offerings.",
+  "summary": "An upscale enclosed regional mall in Palm Desert offering premium shopping, dining, and entertainment in the heart of the Coachella Valley.",
+  "rating": 4.3,
+  "reviewCount": 3500,
+  "centerType": "RegionalMall",
+  "tier": 2,
+  "spaces": []
+}

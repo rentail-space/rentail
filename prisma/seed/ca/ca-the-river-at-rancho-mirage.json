@@ -4,22 +4,21 @@
   "state": "CA",
   "country": "USA",
   "address": "71800 Highway 111",
-  "latitude": 33.7596,
-  "longitude": -116.4178,
+  "latitude": 33.7397,
+  "longitude": -116.4128,
   "squareFootage": 250000,
   "numberOfStores": 25,
   "website": "https://www.theriveratranchomirage.com",
   "phone": "+17603412711",
   "imageURLs": [
-    "https://images.squarespace-cdn.com/content/v1/5dd44ec9809e45468dc6ddf7/1739482993152-NAGHU652KFRLNKNFHNHO/Cowboy_TheRiver_webBanner.jpg"
+    "https://images.squarespace-cdn.com/content/v1/5dd44ec9809e45468dc6ddf7/1726453086711-9WZWH0U8FSRH4SJLUEFU/website+banner.png"
   ],
-  "description": "The River at Rancho Mirage is an upscale open-air lifestyle center featuring premier shopping, dining, and entertainment along California's Highway 111. With a movie theater, diverse restaurants, and boutique stores set against a scenic desert backdrop, it offers a sophisticated and relaxed shopping experience in the heart of the Coachella Valley. The center regularly hosts events including live talent performances and Battle of the Bands competitions.",
-  "demographics": "Affluent Coachella Valley residents and tourists, including seasonal visitors and golf resort guests seeking upscale retail and dining options",
-  "summary": "An upscale open-air lifestyle center in Rancho Mirage offering premier shopping, dining, and entertainment experiences in the desert.",
+  "description": "The River at Rancho Mirage is an upscale open-air lifestyle center featuring a carefully curated mix of restaurants, retail stores, a movie theater, and kiosk vendors in the heart of the Coachella Valley. The center offers a vibrant outdoor experience with regular events including live entertainment, Battle of the Bands, and seasonal celebrations, creating a dynamic gathering place for the community. With its blend of dining, shopping, and entertainment options, The River provides a premier destination for both residents and visitors to Rancho Mirage.",
+  "demographics": "The River at Rancho Mirage attracts an affluent, mature demographic with visitors predominantly aged 45-65+ representing retirees and seasonal residents from the greater Palm Springs area. The trade area serves high-income households with annual incomes exceeding $100,000, many of whom are empty nesters and luxury resort visitors seeking upscale dining and entertainment experiences. Shopping patterns reflect a preference for experiential retail with extended evening visits centered around restaurants, the movie theater, and special events rather than traditional retail shopping.",
+  "summary": "The River at Rancho Mirage is an upscale open-air lifestyle destination combining dining, entertainment, and retail in the heart of California's Coachella Valley.",
   "openFrom": 1100,
   "openUntil": 2300,
-  "rating": 4.4,
-  "reviewCount": 850,
   "centerType": "LifestyleCenter",
+  "tier": 3,
   "spaces": []
 }

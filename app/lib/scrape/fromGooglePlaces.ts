@@ -33,13 +33,22 @@ type PlaceInfo = {
 export async function fromGooglePlaces(
   placeName: string,
 ): Promise<PlaceInfo | undefined> {
-  const key = `google-places:${placeName.toLowerCase().replace(/[^a-z0-9\s-]/g, "")}`;
-  const cache = await prisma.cache.findUnique({ where: { key } });
-  if (cache) return cache.value as PlaceInfo;
+  try {
+    const key = `google-places:${placeName.toLowerCase().replace(/[^a-z0-9\s-]/g, "")}`;
+    const cache = await prisma.cache.findUnique({ where: { key } });
+    if (cache) return cache.value as PlaceInfo;
 
-  const data = await fromPlacesAPI(placeName);
-  await prisma.cache.create({ data: { key, value: data ?? "" } });
-  return data;
+    const data = await fromPlacesAPI(placeName);
+    await prisma.cache.create({ data: { key, value: data ?? "" } });
+    return data;
+  } catch (error) {
+    console.error(
+      "Failed to fetch %s details from Google Places: %s",
+      placeName,
+      error,
+    );
+    return undefined;
+  }
 }
 
 /**

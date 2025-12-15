@@ -1,0 +1,21 @@
+{
+  "name": "Riverside Plaza",
+  "city": "Riverside",
+  "state": "CA",
+  "country": "USA",
+  "address": "1299 Galleria at Tyler",
+  "latitude": 33.9189,
+  "longitude": -117.4647,
+  "squareFootage": 900000,
+  "numberOfStores": 100,
+  "website": "https://www.galleriaattyler.com",
+  "imageURLs": [],
+  "description": "Galleria at Tyler is a prominent regional shopping destination in Riverside, California, serving the Inland Empire community with a comprehensive mix of national retailers, dining options, and entertainment. This enclosed mall provides a comfortable year-round shopping experience with convenient access and ample amenities for families and shoppers throughout the region.",
+  "demographics": "Galleria at Tyler attracts a diverse middle to upper-middle income demographic, with primary visitors ranging from young families to mature adults aged 25-65. The trade area draws from Riverside's growing suburban communities with median household incomes between $55,000-$85,000, appealing to value-conscious shoppers seeking quality mainstream brands. The center serves as a regional destination for the Inland Empire, attracting visitors who prioritize convenience and variety in a traditional enclosed mall setting.",
+  "summary": "Riverside Plaza at Galleria at Tyler is a major enclosed regional mall serving the Inland Empire with diverse shopping, dining, and entertainment options.",
+  "rating": 4.2,
+  "reviewCount": 3500,
+  "centerType": "RegionalMall",
+  "tier": 2,
+  "spaces": []
+}

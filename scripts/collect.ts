@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+
 import collectCenters from "~/lib/scrape/collectCenters";
 
 const countyName = process.argv[2];
