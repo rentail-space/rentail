@@ -1,30 +1,18 @@
 import { clamp, meanBy, range } from "es-toolkit";
 import { MapPinIcon, StarIcon } from "lucide-react";
-import { useRef } from "react";
+import { Children, Fragment, useRef } from "react";
 import { Link } from "react-router";
 import CentersMap from "~/components/ui/CentersMap";
 import expandStateAbbr from "~/lib/expandStateAbbr";
 import prisma from "~/lib/prisma";
+import timeOfDay from "~/lib/timeOfDay";
 import type { Route } from "./+types/state.$state";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const state = params.state.toUpperCase();
   const centers = await prisma.property.findMany({
-    select: {
-      address: true,
-      country: true,
-      id: true,
-      name: true,
-      rating: true,
-      summary: true,
-      city: true,
-      longitude: true,
-      latitude: true,
-      state: true,
-      spaces: {
-        select: { id: true },
-        where: { available: true },
-      },
+    include: {
+      spaces: true,
     },
     orderBy: { name: "asc" },
     where: { state },
@@ -55,14 +43,14 @@ export default function StatePage({
       />
 
       <ul
-        className="space-y-4"
+        className="space-y-4 divide-y divide-gray-400"
         itemScope
         itemType="https://schema.org/ItemList"
       >
         {centers.map((center) => (
           <li
             key={center.id}
-            className="border-gray-400 border-b pb-4"
+            className="space-y-2 pb-4"
             itemScope
             itemType="https://schema.org/ListItem"
           >
@@ -85,10 +73,38 @@ export default function StatePage({
                 />
               </span>
             </h2>
-            <p className="space-x-1">
-              {center.rating && <Stars rating={center.rating} />}
+
+            <p className="space-x-2">
+              {center.rating && center.rating >= 3 && (
+                <RatingStars rating={center.rating} />
+              )}
               <span itemProp="description">{center.summary}</span>
             </p>
+
+            <CenterStats>
+              {center.numberOfStores >= 30 && (
+                <span>{center.numberOfStores.toLocaleString()} stores</span>
+              )}
+              {center.squareFootage >= 100000 && (
+                <span>{center.squareFootage.toLocaleString()} square feet</span>
+              )}
+              {center.openFrom && center.openUntil && (
+                <span>
+                  {timeOfDay(center.openFrom)} &mdash;{" "}
+                  {timeOfDay(center.openUntil)}
+                </span>
+              )}
+              {center.rating && center.rating >= 3 && (
+                <span>
+                  {clamp(center.rating, 1, 5).toFixed(1)}
+                  {center.reviewCount && center.reviewCount >= 5 ? (
+                    <> from {center.reviewCount.toLocaleString()} reviews</>
+                  ) : (
+                    " stars"
+                  )}
+                </span>
+              )}
+            </CenterStats>
           </li>
         ))}
       </ul>
@@ -96,10 +112,10 @@ export default function StatePage({
   );
 }
 
-function Stars({ rating }: { rating: number }) {
+function RatingStars({ rating }: { rating: number }) {
   return (
     <div
-      className="inline-flex flex-row gap-0"
+      className="inline-flex text-yellow-500"
       itemProp="ratingValue"
       itemType="https://schema.org/AggregateRating"
       title={rating.toFixed(1)}
@@ -107,9 +123,23 @@ function Stars({ rating }: { rating: number }) {
       {range(0, 5, 1).map((i) => (
         <StarIcon
           key={i}
-          className="h-4 w-4 text-yellow-500"
+          className="h-4 w-4"
           fill={i + 0.5 <= clamp(rating, 1, 5) ? "currentColor" : "none"}
         />
+      ))}
+    </div>
+  );
+}
+
+function CenterStats({ children }: { children: React.ReactNode }) {
+  const visible = Children.toArray(children).filter((child) => !!child);
+  return (
+    <div className="flex flex-row gap-2 text-gray-500 text-sm">
+      {visible.map((child, index) => (
+        <Fragment key={index.toString()}>
+          {child}
+          {index < visible.length - 1 && <span>&bull;</span>}
+        </Fragment>
       ))}
     </div>
   );

@@ -12,6 +12,7 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
 import { Button } from "~/components/ui/Button";
 import formatPhoneNumber from "~/lib/formatPhoneNumber";
+import timeOfDay from "~/lib/timeOfDay";
 
 export default function CenterInfo({
   center,
@@ -37,25 +38,12 @@ export default function CenterInfo({
         </div>
       )}
 
-      {center.openUntil && (
+      {center.openFrom && center.openUntil && (
         <div className="items-top flex flex-row gap-2 pb-4">
           <ClockIcon className="h-6 w-6" />
           <span>
-            Open{" "}
-            {center.openFrom && (
-              <span>
-                {clamp(center.openFrom / 100, 0, 23) % 12}:
-                {clamp(center.openFrom % 100, 0, 59)
-                  .toString()
-                  .padStart(2, "0")}{" "}
-                {clamp(center.openFrom / 100, 0, 23) > 12 ? "PM" : "AM"}
-              </span>
-            )}{" "}
-            until {clamp(center.openUntil / 100, 0, 23) % 12}:
-            {clamp(center.openUntil % 100, 0, 59)
-              .toString()
-              .padStart(2, "0")}{" "}
-            {clamp(center.openUntil / 100, 0, 23) > 12 ? "PM" : "AM"}
+            Open {timeOfDay(center.openFrom)} until{" "}
+            {timeOfDay(center.openUntil)}
           </span>
         </div>
       )}
