@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+19096463333",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-victoria-gardens-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-victoria-gardens-1.jpg"],
   "summary": "Outdoor retail complex with popular brand-name stores, plus restaurants & a movie theater.",
   "openFrom": 1000,
   "openUntil": 2100,

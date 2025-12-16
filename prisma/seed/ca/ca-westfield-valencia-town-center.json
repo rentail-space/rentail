@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+16698006707",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-valencia-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-valencia-town-center-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.4,

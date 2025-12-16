@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+13105465555",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-manhattan-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-manhattan-village-1.jpg"],
   "summary": "Chain known for unique gadgets, gifts & lifestyle items, such as electronics & travel accessories.",
   "openFrom": 900,
   "openUntil": 2000,

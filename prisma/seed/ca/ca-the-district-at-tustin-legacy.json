@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+17142599090",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-the-district-at-tustin-legacy-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-district-at-tustin-legacy-1.jpg"],
   "summary": "Large outdoor mall with a wide variety of dining options, plus retail stores & regular events.",
   "openFrom": 800,
   "openUntil": 2200,

@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+19497904871",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-irvine-spectrum-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-irvine-spectrum-center-1.jpg"],
   "summary": "Happening open-air mall with dozens of shops, services & restaurants, a Ferris wheel & a multiplex.",
   "openFrom": 1000,
   "openUntil": 2200,

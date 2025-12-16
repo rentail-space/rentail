@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+18054952031",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-the-oaks-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-oaks-1.jpg"],
   "summary": "Refined, indoor-outdoor mall with Nordstrom, Sephora & other popular chains, plus dining & a cinema.",
   "openFrom": 1000,
   "openUntil": 2000,

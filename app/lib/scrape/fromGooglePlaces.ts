@@ -33,7 +33,7 @@ export async function fromGooglePlaces(placeName: string): Promise<
     }
   | undefined
 > {
-  const spinner = ora(`Fetching Google Places data for ${placeName}`).start();
+  const spinner = ora(`Fetching Google Places data for ${name}`).start();
   try {
     // eg "google-places:beverly-center"
     const key = `google-places:${placeName
@@ -93,8 +93,9 @@ async function fromPlacesAPI(
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify({
-      textQuery: `Shopping center: "${placeName}"`,
+      textQuery: placeName,
       includePureServiceAreaBusinesses: false,
+      maxResultCount: 10, // Request more results to increase chance of finding main center
     }),
     headers: {
       "Content-Type": "application/json",
@@ -162,20 +163,21 @@ async function fromPlacesAPI(
     }>;
   };
 
+  // Filter for similar names and non-auxiliary facilities
   const places = data.places.filter(
-    (place) => place.primaryType === "shopping_mall",
+    (place) =>
+      place.primaryType === "shopping_mall" &&
+      place.businessStatus === "OPERATIONAL" &&
+      similarNames(place.displayName.text, placeName),
   );
-  invariant(
-    places.length === 1,
-    `Multiple or no places found for ${placeName}`,
-  );
-  const place = places[0];
+  invariant(places.length, "No matching place");
+  invariant(places.length === 1, "Too many matching places");
 
+  const place = places[0];
   invariant(
-    place.businessStatus === "OPERATIONAL",
-    `Place ${placeName} is not operational`,
+    place.websiteUri,
+    `Place ${place.displayName.text} missing website URI`,
   );
-  invariant(place.websiteUri, `Place ${placeName} has no website URI`);
 
   const state = shortText(
     place.addressComponents,
@@ -183,7 +185,6 @@ async function fromPlacesAPI(
   );
   const slug = createSlug({ state, name: place.displayName.text });
   const imageURLs = await downloadPhotos({ slug, photos: place.photos });
-
   const { openFrom, openUntil } = operatingHours(place.regularOpeningHours);
 
   return {
@@ -202,7 +203,9 @@ async function fromPlacesAPI(
     website: new URL("/", place.websiteUri).toString(),
     phone:
       place.internationalPhoneNumber &&
-      `+${place.internationalPhoneNumber.replace(/\D/g, "")}`,
+      ` + $;
+  place.internationalPhoneNumber.replace(/D/g, "");
+  `,
     photos: place.photos,
     imageURLs,
     summary: place.editorialSummary?.text,
@@ -242,7 +245,8 @@ async function downloadPhotos({
     try {
       // Fetch photo to detect format
       const url = new URL(
-        `https://places.googleapis.com/v1/${photo.name}/media`,
+        `;
+  https: //places.googleapis.com/v1/${photo.name}/media`,
       );
       url.searchParams.set("key", envVars.GOOGLE_PLACES_API_KEY);
       url.searchParams.set("maxHeightPx", "4800");
@@ -365,7 +369,7 @@ function createSlug({ state, name }: { state: string; name: string }): string {
  * whitespace/dashes.  Handles things like "The Beverly Center" vs "Beverly
  * Center", etc.
  */
-function areNamesSimilar(text: string, placeName: string): boolean {
+function similarNames(text: string, placeName: string): boolean {
   function normalize(str: string): string {
     return str
       .toLowerCase()

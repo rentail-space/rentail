@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+13239008080",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-the-grove-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-grove-1.jpg"],
   "summary": "High-end shopping mall features trendy retailers, restaurants & a theater amid a bustling promenade.",
   "openFrom": 1000,
   "openUntil": 2200,

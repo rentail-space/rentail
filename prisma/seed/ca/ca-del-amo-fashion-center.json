@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+13105428525",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-del-amo-fashion-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-del-amo-fashion-center-1.jpg"],
   "summary": "Large mall offers trendy retailers, restaurants & a theater, plus a garden-inspired dining pavilion.",
   "openFrom": 1000,
   "openUntil": 2100,

@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+19497212000",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-fashion-island-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-fashion-island-1.jpg"],
   "summary": "This outdoor shopping mall with water features has popular retailers, restaurants & a cinema.",
   "openFrom": 1000,
   "openUntil": 2000,

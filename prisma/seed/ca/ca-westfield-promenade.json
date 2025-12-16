@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+18185948732",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-westfield-topanga-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westfield-topanga-1.jpg"],
   "summary": "Westfield Promenade serves as a comprehensive shopping and entertainment hub in Woodland Hills, offering a curated mix of international and local retailers alongside diverse dining options. As part of the global Westfield portfolio spanning 12 countries, this center delivers on-trend fashion, entertainment events, and modern conveniences designed to enhance the customer experience.",
   "openFrom": 1000,
   "openUntil": 2100,

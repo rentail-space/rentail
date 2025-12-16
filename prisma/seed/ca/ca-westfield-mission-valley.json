@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+16192966375",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-mission-valley-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-mission-valley-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.3,

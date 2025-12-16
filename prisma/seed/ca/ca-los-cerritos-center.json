@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+15624027467",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-los-cerritos-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-los-cerritos-center-1.jpg"],
   "summary": "Spacious shopping center offers a range of brand-name retailers, plus well-known chain restaurants.",
   "openFrom": 1000,
   "openUntil": 2100,

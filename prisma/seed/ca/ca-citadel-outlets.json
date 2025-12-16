@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+13238881724",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-citadel-outlets-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-citadel-outlets-1.jpg"],
   "summary": "This outdoor shopping center features a variety of popular brand-name outlet stores & restaurants.",
   "openFrom": 900,
   "openUntil": 2200,

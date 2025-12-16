@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+16194652900",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-grossmont-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-grossmont-center-1.jpg"],
   "summary": "Sizable shopping complex with department stores, chain retailers, casual eateries & a movie theater.",
   "openFrom": 1000,
   "openUntil": 2000,

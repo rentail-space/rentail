@@ -58,9 +58,21 @@ Extract and structure the following into valid JSON matching this schema:
 ${JSON.stringify(enrichedSchema.shape, null, 2)}
 
 Tasks:
-1. Write a compelling 2-3 sentence description based on scraped website data (this is DIFFERENT from summary)
-2. Find square footage and store/building count from website data (Google doesn't have this)
-3. Research and write a comprehensive demographic summary for this shopping center (Google doesn't have this)
+1. Write a description based on scraped website data:
+  - When showing the shopping center details page, we show the description
+  - The description should be a compelling story about the center, its history, its tenants, its amenities, etc
+  - The description should be at least 5 sentences long
+  - The description should be written in a way that is easy to understand and engaging
+  - The description should be written in a way that is SEO friendly
+
+2. Write a summary based on scraped website data:
+  - When showing a list of many shopping centers, we show the summary
+  - The summary should be a 2-3 sentences long
+  - The summary should be written in a way that is easy to understand and engaging
+
+3. Find square footage and store/building count from website data (Google doesn't have this)
+
+4. Research and write a comprehensive demographic summary for this shopping center (Google doesn't have this)
    - Include visitor demographics (age groups, income levels, household composition)
    - Describe the trade area characteristics and primary market segments
    - Note shopping patterns and preferences of typical visitors
@@ -68,7 +80,7 @@ Tasks:
    - Format as a 3-5 sentence narrative summary (not bullet points)
    - If no reliable demographic information is available, omit this field
 
-4. Classify centerType using this hybrid approach:
+5. Classify centerType using this hybrid approach:
    - Primary: Square footage + store count + enclosed/open-air
    - Secondary: Explicit type mentions in website ("outlet center", "lifestyle center")
    - Tertiary: Name patterns ("Westfield" = typically RegionalMall)
@@ -82,7 +94,7 @@ Tasks:
 
    If uncertain, choose type matching square footage, or StripCenter if no size data.
 
-5. Assign a tier classification from 1 to 3 based on desirability and price point:
+6. Assign a tier classification from 1 to 3 based on desirability and price point:
    - Tier 3: Upscale, high-end shopping centers with luxury brands and premium retailers
      Examples: Westfield Century City, The Grove, South Coast Plaza, Fashion Island
      Indicators: Luxury tenants (Gucci, Louis Vuitton, Tesla), high-end dining, valet parking
@@ -96,8 +108,6 @@ Tasks:
      Indicators: Discount stores, fewer amenities, older facilities, lower price points
 
    Consider: tenant mix, location prestige, facility condition, and target market.
-
-6. Write a 2-3 sentence summary of the center based on the scraped website data.
 
 Use scraped data as primary source. Fill gaps with your knowledge.
 For optional fields without reliable data, omit them entirely (do not set to null).`;

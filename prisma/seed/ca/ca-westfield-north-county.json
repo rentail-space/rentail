@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+14422770240",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-mershops-north-county-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-mershops-north-county-mall-1.jpg"],
   "openFrom": 900,
   "openUntil": 2100,
   "rating": 4.4,

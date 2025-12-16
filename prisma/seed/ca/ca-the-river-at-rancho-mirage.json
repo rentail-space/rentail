@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+17603412711",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-the-river-at-rancho-mirage-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-river-at-rancho-mirage-1.jpg"],
   "summary": "Large outdoor destination along an artificial river featuring shops, restaurants & a movie theater.",
   "openFrom": 1100,
   "openUntil": 2300,

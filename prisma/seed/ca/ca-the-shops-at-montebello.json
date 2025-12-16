@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+13237221776",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-the-shops-at-montebello-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-shops-at-montebello-1.jpg"],
   "summary": "Indoor mall with brand-name fashion & footwear retailers, plus department stores & a food court.",
   "openFrom": 1000,
   "openUntil": 2100,

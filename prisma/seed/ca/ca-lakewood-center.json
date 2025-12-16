@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+15625316707",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-lakewood-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-lakewood-center-1.jpg"],
   "summary": "Established mall provides well-known retail shops, restaurants & department stores, plus a theater.",
   "openFrom": 1000,
   "openUntil": 2100,

@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+19098847268",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-inland-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-inland-center-1.jpg"],
   "summary": "Bustling retail mall offering familiar stores, a kids' play area, restaurants & a casual food court.",
   "openFrom": 1000,
   "openUntil": 2000,

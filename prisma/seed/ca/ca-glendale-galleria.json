@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+18184594184",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-glendale-galleria-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-glendale-galleria-1.jpg"],
   "summary": "Contemporary shopping mall offers trendy retail shops & restaurants, plus the flagship Apple store.",
   "openFrom": 1000,
   "openUntil": 2100,
