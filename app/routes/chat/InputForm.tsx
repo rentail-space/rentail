@@ -19,6 +19,8 @@ export default function InputForm({
 }) {
   const { scrollToBottom } = useStickToBottomContext();
 
+  const newLocal =
+    "w-full rounded-base border-2 border-black bg-white py-4 pr-24 pl-5 font-medium text-base text-black placeholder-gray-600 shadow-[4px_4px_0px_0px_hsl(37,92%,65%)] outline-none transition-all duration-100 focus:translate-x-[-2px] focus:translate-y-[-2px] focus:shadow-[6px_6px_0px_0px_hsl(37,92%,65%)]";
   return (
     <div className="w-full items-center justify-center bg-[hsl(60,100%,99%)] p-4">
       <form
@@ -36,7 +38,7 @@ export default function InputForm({
           autoCorrect="off"
           // biome-ignore lint/a11y/noAutofocus: we want to autofocus the input
           autoFocus={true}
-          className="w-full rounded-[5px] border-2 border-black bg-white py-4 pr-24 pl-5 font-medium text-base text-black placeholder-gray-600 shadow-[4px_4px_0px_0px_hsl(37,92%,65%)] outline-none transition-all duration-100 focus:translate-x-[-2px] focus:translate-y-[-2px] focus:shadow-[6px_6px_0px_0px_hsl(37,92%,65%)]"
+          className={newLocal}
           disabled={isSubmitting}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Ask me any question about retail spaces..."
@@ -45,7 +47,7 @@ export default function InputForm({
           value={query}
         />
 
-        <div className="-translate-y-1/2 absolute top-1/2 right-3 flex transform gap-2">
+        <div className="absolute top-1/2 right-3 flex -translate-y-1/2 transform gap-2">
           {false && (
             <StopButton isResponding={isResponding} stopChat={stopChat} />
           )}
@@ -90,7 +92,7 @@ function StopButton({
     <button
       onClick={stopChat}
       aria-label="Stop"
-      className="flex h-12 w-12 transform cursor-pointer items-center justify-center rounded-[5px] border-2 border-black bg-red-500 font-bold shadow-[3px_3px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_0px_black]"
+      className="flex h-12 w-12 transform cursor-pointer items-center justify-center rounded-base border-2 border-black bg-red-500 font-bold shadow-[3px_3px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_0px_black]"
       type="button"
     >
       <Square className="h-5 w-5 text-black" />

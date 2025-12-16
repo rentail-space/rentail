@@ -6,7 +6,7 @@ export default function AboutStory() {
       <div className="container mx-auto max-w-4xl">
         <div className="flex flex-col gap-8">
           <div className="flex items-start gap-4">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[5px] border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-base border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
               <Lightbulb className="h-6 w-6" />
             </div>
             <div>

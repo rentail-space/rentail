@@ -46,7 +46,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
         <h1>{title}</h1>
 
         {image && (
-          <figure className="-mx-8 md:-mx-12 my-6 overflow-hidden">
+          <figure className="-mx-8 my-6 overflow-hidden md:-mx-12">
             <img
               alt={alt}
               className="h-[60vh] w-full object-cover"

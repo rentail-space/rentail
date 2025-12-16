@@ -121,7 +121,7 @@ function PricingPlan({
       }`}
     >
       {plan.highlighted && (
-        <div className="-top-4 -translate-x-1/2 absolute left-1/2 rounded-sm border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-1 font-bold text-black text-sm shadow-[2px_2px_0px_0px_black]">
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-sm border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-1 font-bold text-black text-sm shadow-[2px_2px_0px_0px_black]">
           Most Popular
         </div>
       )}

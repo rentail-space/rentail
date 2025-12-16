@@ -1,9 +1,9 @@
 import { ShieldIcon, UnlockIcon, UserIcon } from "lucide-react";
+import type { User } from "prisma/generated/client";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouteLoaderData } from "react-router";
 import { Button } from "~/components/ui/Button";
 import { cn } from "~/lib/utils";
-import type { User } from "prisma/generated/client";
 import type { loader as rootLoader } from "~/root";
 
 export default function AccountMenu({ className }: { className?: string }) {
@@ -92,7 +92,7 @@ function DropdownMenu({ user }: { user: User }) {
       </Button>
 
       {isOpen && (
-        <menu className="absolute top-10 right-0 z-50 mt-2 w-48 rounded-[5px] border-2 border-black bg-white py-1 shadow-[4px_4px_0px_0px_black]">
+        <menu className="absolute top-10 right-0 z-50 mt-2 w-48 rounded-base border-2 border-black bg-white py-1 shadow-[4px_4px_0px_0px_black]">
           <li className="border-black border-b-2 px-4 py-2 text-gray-600 text-sm">
             <p className="truncate font-bold">{user.name}</p>
             <p className="truncate font-medium">{user.email}</p>

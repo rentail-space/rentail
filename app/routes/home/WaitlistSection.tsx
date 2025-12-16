@@ -41,11 +41,11 @@ function JoinWaitlist() {
           your area.
         </Label>
         {fetcher.data?.error ? (
-          <div className="rounded-[5px] border-2 border-black bg-red-100 p-4 text-center font-bold text-black shadow-[2px_2px_0px_0px_black]">
+          <div className="rounded-base border-2 border-black bg-red-100 p-4 text-center font-bold text-black shadow-[2px_2px_0px_0px_black]">
             Something went wrong. Please try again.
           </div>
         ) : fetcher.data?.success ? (
-          <div className="rounded-[5px] border-2 border-black bg-green-100 p-4 text-center font-bold text-black shadow-[2px_2px_0px_0px_black]">
+          <div className="rounded-base border-2 border-black bg-green-100 p-4 text-center font-bold text-black shadow-[2px_2px_0px_0px_black]">
             Thank you for joining our waitlist! 🚀
           </div>
         ) : null}
@@ -53,7 +53,7 @@ function JoinWaitlist() {
         <div className="flex flex-col gap-3 sm:flex-row">
           <Input
             autoComplete="email"
-            className="h-14 w-full rounded-[5px] border-2 border-black bg-white px-6 font-medium text-black text-lg shadow-[2px_2px_0px_0px_black] transition-all duration-100 placeholder:text-gray-600 focus-visible:translate-x-[-2px] focus-visible:translate-y-[-2px] focus-visible:shadow-[4px_4px_0px_0px_black]"
+            className="h-14 w-full rounded-base border-2 border-black bg-white px-6 font-medium text-black text-lg shadow-[2px_2px_0px_0px_black] transition-all duration-100 placeholder:text-gray-600 focus-visible:translate-x-[-2px] focus-visible:translate-y-[-2px] focus-visible:shadow-[4px_4px_0px_0px_black]"
             id={id}
             name="email"
             onChange={(event) => setEmail(event.target.value)}
