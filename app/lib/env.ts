@@ -27,7 +27,7 @@ const envVars = {
 
   GOOGLE_PLACES_API_KEY: env
     .get("GOOGLE_PLACES_API_KEY")
-    .required(true)
+    .required(false)
     .asString(),
 
   REDIS_URL: env
