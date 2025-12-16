@@ -33,7 +33,7 @@ export async function fromGooglePlaces(placeName: string): Promise<
     }
   | undefined
 > {
-  const spinner = ora(`Fetching Google Places data for ${name}`).start();
+  const spinner = ora(`Fetching Google Places data for ${placeName}`).start();
   try {
     // eg "google-places:beverly-center"
     const key = `google-places:${placeName
@@ -106,7 +106,6 @@ async function fromPlacesAPI(
   });
   const data = (await response.json()) as {
     places: Array<{
-      name: string; // eg "Beverly Center",
       internationalPhoneNumber: string; // eg. "+1 310-854-0070",
       addressComponents: Array<{
         longText: string;
@@ -183,7 +182,7 @@ async function fromPlacesAPI(
     place.addressComponents,
     "administrative_area_level_1",
   );
-  const slug = createSlug({ state, name: place.displayName.text });
+  const slug = createSlug({ state, placeName: place.displayName.text });
   const imageURLs = await downloadPhotos({ slug, photos: place.photos });
   const { openFrom, openUntil } = operatingHours(place.regularOpeningHours);
 
@@ -349,12 +348,18 @@ function operatingHours(regularOpeningHours?: {
  * public/images/malls directory.
  *
  * @param state State of the mall
- * @param name Name of the mall
+ * @param placeName Name of the mall
  * @returns Slug for the mall
  */
-function createSlug({ state, name }: { state: string; name: string }): string {
+function createSlug({
+  state,
+  placeName,
+}: {
+  state: string;
+  placeName: string;
+}): string {
   return `${state.toLowerCase()}-${
-    name
+    placeName
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "") // Remove special chars
       .replace(/\s+/g, "-") // Spaces to hyphens
@@ -369,7 +374,7 @@ function createSlug({ state, name }: { state: string; name: string }): string {
  * whitespace/dashes.  Handles things like "The Beverly Center" vs "Beverly
  * Center", etc.
  */
-function similarNames(text: string, placeName: string): boolean {
+function similarNames(displayName: string, placeName: string): boolean {
   function normalize(str: string): string {
     return str
       .toLowerCase()
@@ -380,7 +385,7 @@ function similarNames(text: string, placeName: string): boolean {
       .trim();
   }
 
-  const normA = normalize(text);
+  const normA = normalize(displayName);
   const normB = normalize(placeName);
 
   // Direct match or one contains the other
