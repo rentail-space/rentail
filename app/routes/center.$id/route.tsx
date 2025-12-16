@@ -1,7 +1,6 @@
 import prisma from "~/lib/prisma";
-import Center from "./Center";
-import type { PropertyGetPayload } from "prisma/generated/models";
 import type { Route } from "./+types/route";
+import Center from "./Center";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const center = await prisma.property.findUnique({
@@ -17,7 +16,7 @@ export const handle = { headerLinks: [] };
 export default function CenterPage({
   loaderData,
 }: {
-  loaderData: PropertyGetPayload<{ include: { spaces: true } }>;
+  loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
   return <Center center={loaderData} />;
 }

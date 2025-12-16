@@ -26,6 +26,7 @@ export async function loader({ params }: Route.LoaderArgs) {
         where: { available: true },
       },
     },
+    orderBy: { name: "asc" },
     where: { state },
   });
   return { centers, state };

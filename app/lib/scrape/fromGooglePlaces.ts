@@ -5,33 +5,38 @@ import ora from "ora";
 import envVars from "../env";
 import prisma from "../prisma";
 
+type PlaceDetails = {
+  address: string;
+  city: string;
+  country: string;
+  imageURLs: string[];
+  latitude: number;
+  longitude: number;
+  name: string;
+  openFrom?: number;
+  openUntil?: number;
+  phone: string | undefined;
+  rating?: number;
+  reviewCount?: number;
+  state: string;
+  summary?: string;
+};
+
 /**
  * Get place details from Google Places API. The Places API charges for usage,
  * so this function uses database caching to avoid redundant API calls.
  *
  * @param placeName Name of the place to search for
+ * @param placeID ID of the place to get details for (if available)
  * @returns Place details, or undefined if the place is not found or not operational
  */
-export async function fromGooglePlaces(placeName: string): Promise<
-  | {
-      address: string;
-      city: string;
-      country: string;
-      imageURLs: string[];
-      latitude: number;
-      longitude: number;
-      name: string;
-      openFrom?: number;
-      openUntil?: number;
-      phone: string | undefined;
-      rating?: number;
-      reviewCount?: number;
-      state: string;
-      summary?: string;
-      website?: string;
-    }
-  | undefined
-> {
+export async function fromGooglePlaces({
+  placeName,
+  placeID,
+}: {
+  placeName: string;
+  placeID?: string;
+}): Promise<PlaceDetails | undefined> {
   const spinner = ora(`Fetching Google Places data for ${placeName}`).start();
   try {
     // eg "google-places:beverly-center"
@@ -47,9 +52,9 @@ export async function fromGooglePlaces(placeName: string): Promise<
       return cache.value as Awaited<ReturnType<typeof fromGooglePlaces>>;
     }
 
-    const place = /^places\/[A-Za-z0-9_-]+$/.test(placeName)
-      ? await getPlaceDetails(placeName)
-      : await findPlace(placeName);
+    const place = placeID
+      ? await getPlaceDetails({ placeName, placeID })
+      : await searchText(placeName);
     await prisma.cache.create({ data: { key, value: place ?? "" } });
     spinner.succeed();
     return place;
@@ -60,6 +65,24 @@ export async function fromGooglePlaces(placeName: string): Promise<
     throw error;
   }
 }
+
+/**
+ * Fields to include in the find place request.
+ */
+const findPlaceFields = [
+  "addressComponents",
+  "businessStatus",
+  "displayName",
+  "editorialSummary",
+  "internationalPhoneNumber",
+  "location",
+  "name",
+  "photos",
+  "primaryType",
+  "rating",
+  "regularOpeningHours",
+  "userRatingCount",
+];
 
 /**
  * Google Places API response type.
@@ -117,27 +140,7 @@ type PlacesAPIPlace = {
     }>;
   };
   userRatingCount?: number; // eg 12500
-  websiteUri?: string; // eg "https://www.beverlycenter.com/?utm_source=GoogleMyBusiness&utm_medium=organic&utm_campaign=GMB"
 };
-
-/**
- * Fields to include in the find place request.
- */
-const findPlaceFields = [
-  "addressComponents",
-  "businessStatus",
-  "displayName",
-  "editorialSummary",
-  "internationalPhoneNumber",
-  "location",
-  "name",
-  "photos",
-  "primaryType",
-  "rating",
-  "regularOpeningHours",
-  "userRatingCount",
-  "websiteUri",
-];
 
 /**
  * Find a place by name using the Google Places API.
@@ -145,9 +148,9 @@ const findPlaceFields = [
  * @param placeName Name of the place to search for
  * @returns Place details, or undefined if the place is not found or not operational
  */
-async function findPlace(
+async function searchText(
   placeName: string,
-): Promise<Awaited<ReturnType<typeof fromGooglePlaces>> | undefined> {
+): Promise<PlaceDetails | undefined> {
   const response = await fetch(
     "https://places.googleapis.com/v1/places:searchText",
     {
@@ -170,30 +173,35 @@ async function findPlace(
   );
   invariant(response.ok, "Failed to find place");
 
-  const { places } = (await response.json()) as { places: PlacesAPIPlace[] };
-  const place = places.filter(
-    (place) =>
-      place.primaryType === "shopping_mall" &&
-      place.businessStatus === "OPERATIONAL" &&
-      similarNames(place.displayName.text, placeName),
+  const { places } = (await response.json()) as { places?: PlacesAPIPlace[] };
+  invariant(places, "No places found");
+
+  const place = places.filter((place) =>
+    similarNames(place.displayName.text, placeName),
   )[0];
   invariant(
-    place.websiteUri,
-    `Place ${place.displayName.text} missing website URI`,
+    place.primaryType === "shopping_mall",
+    "Place is not a shopping mall",
   );
-  return await toDatabasePlace(places[0]);
+  invariant(place.businessStatus === "OPERATIONAL", "Place is not operational");
+  return await toDatabasePlace(placeName, places[0]);
 }
 
 /**
  * Get place details from Google Places API.
  *
- * @param id ID of the place to get details for
+ * @param placeName Name of the place to get details for
+ * @param placeID ID of the place to get details for
  * @returns Place details, or undefined if the place is not found or not operational
  */
-async function getPlaceDetails(
-  id: string,
-): Promise<Awaited<ReturnType<typeof fromGooglePlaces>> | undefined> {
-  const response = await fetch(`https://places.googleapis.com/v1/${id}`, {
+async function getPlaceDetails({
+  placeName,
+  placeID,
+}: {
+  placeName: string;
+  placeID: string;
+}): Promise<PlaceDetails> {
+  const response = await fetch(`https://places.googleapis.com/v1/${placeID}`, {
     headers: {
       "Content-Type": "application/json",
       "User-Agent": "rentail.space/1.0 (support@rentail.space)",
@@ -203,7 +211,7 @@ async function getPlaceDetails(
   });
   invariant(response.ok, "Failed to get place details");
   const place = (await response.json()) as PlacesAPIPlace;
-  return await toDatabasePlace(place);
+  return await toDatabasePlace(placeName, place);
 }
 
 /**
@@ -213,8 +221,9 @@ async function getPlaceDetails(
  * @returns Place details
  */
 async function toDatabasePlace(
+  placeName: string,
   place: PlacesAPIPlace,
-): Promise<Awaited<ReturnType<typeof fromGooglePlaces>>> {
+): Promise<PlaceDetails> {
   const address = [
     longText(place.addressComponents, "street_number"),
     longText(place.addressComponents, "route"),
@@ -227,20 +236,18 @@ async function toDatabasePlace(
     "administrative_area_level_1",
   );
   const country = shortText(place.addressComponents, "country");
-  const displayName = place.displayName.text;
-  const slug = createSlug({ state, displayName });
+  const slug = createSlug({ state, placeName });
   const imageURLs = await downloadPhotos({ slug, photos: place.photos });
   const { openFrom, openUntil } = operatingHours(place.regularOpeningHours);
 
   return {
-    name: displayName,
+    name: placeName,
     address,
     city,
     state,
     country,
     latitude: place.location?.latitude,
     longitude: place.location?.longitude,
-    website: place.websiteUri,
     phone: place.internationalPhoneNumber
       ? `+${place.internationalPhoneNumber.replace(/D/g, "")}`
       : undefined,
@@ -384,18 +391,18 @@ function operatingHours(regularOpeningHours?: {
  * public/images/malls directory.
  *
  * @param state State of the mall
- * @param displayName Display name of the mall
+ * @param placeName Name of the mall
  * @returns Slug for the mall
  */
 function createSlug({
   state,
-  displayName,
+  placeName,
 }: {
   state: string;
-  displayName: string;
+  placeName: string;
 }): string {
   return `${state.toLowerCase()}-${
-    displayName
+    placeName
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "") // Remove special chars
       .replace(/\s+/g, "-") // Spaces to hyphens

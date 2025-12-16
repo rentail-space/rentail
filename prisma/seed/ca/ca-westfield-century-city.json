@@ -1,5 +1,5 @@
 {
-  "name": "Westfield mall",
+  "name": "Westfield Century City",
   "address": "10250 Santa Monica Boulevard",
   "city": "Los Angeles",
   "state": "CA",
@@ -8,15 +8,17 @@
   "longitude": -118.4183317,
   "id": "places/ChIJlzcgHgC7woARrzVVJanYMlA",
   "country": "US",
-  "imageURLs": [],
+  "imageURLs": [
+    "/images/malls/ca-westfield-century-city-1.jpg"
+  ],
   "rating": 5,
   "reviewCount": 1,
   "centerType": "RegionalMall",
-  "demographics": "Westfield Century City attracts an affluent demographic with household incomes predominantly exceeding $100,000, skewing towards professionals aged 25-54 and upscale families from nearby Beverly Hills, Westwood, Brentwood, and Santa Monica. The trade area represents one of the wealthiest markets in Los Angeles County, characterized by educated, fashion-conscious consumers with sophisticated tastes and high disposable incomes. Primary visitors include both local residents seeking luxury retail and dining experiences, as well as domestic and international tourists drawn to the center's prestigious brand offerings and proximity to entertainment industry landmarks. Shopping patterns emphasize premium quality over value, with strong performance in luxury goods, designer fashion, gourmet food, and experiential dining and entertainment.",
-  "description": "Westfield Century City stands as one of Los Angeles' most prestigious shopping destinations, located in the heart of the city's westside at 10250 Santa Monica Boulevard. This iconic regional mall underwent a stunning $1 billion renovation that transformed it into an architectural masterpiece featuring an open-air design with soaring atriums, lush landscaping, and cutting-edge contemporary aesthetics. The center boasts an impressive collection of luxury retailers including Nordstrom, Bloomingdale's, Macy's, and Eataly, alongside high-end brands like Gucci, Louis Vuitton, Tiffany & Co., and Tesla. Beyond shopping, Westfield Century City offers an exceptional dining experience with restaurants helmed by celebrity chefs, a state-of-the-art ArcLight Cinemas and Equinox fitness center, making it a true lifestyle destination. The mall's proximity to Beverly Hills, Westwood, and Brentwood ensures it serves the affluent communities of West Los Angeles, cementing its status as a premier retail and entertainment hub in Southern California.",
+  "demographics": "Westfield Century City attracts an affluent, cosmopolitan demographic with household incomes significantly above the Los Angeles median, drawing primarily from the Westside communities of Beverly Hills, Brentwood, Santa Monica, and West Hollywood. The typical visitor profile includes high-earning professionals aged 30-55, entertainment industry executives, and international tourists seeking luxury shopping experiences. The trade area's residents are well-educated urban sophisticates with strong preferences for premium brands, experiential dining, and lifestyle amenities, making this one of the highest-income retail trade areas in the United States.",
+  "description": "Westfield Century City stands as one of Los Angeles' premier luxury shopping destinations, situated in the heart of the city's prestigious Westside. This iconic mall underwent a stunning $1 billion redevelopment completed in 2017, transforming it into an open-air architectural masterpiece that blends Southern California's indoor-outdoor lifestyle with world-class retail. The center features an exceptional collection of over 200 stores and restaurants, including flagship locations of luxury brands like Gucci, Louis Vuitton, Tiffany & Co., and the innovative Eataly food marketplace. The sophisticated design incorporates lush landscaping, outdoor dining terraces, and contemporary gathering spaces that create an elevated shopping experience. With its Gelson's Market, state-of-the-art Equinox fitness club, premiere dining options, and proximity to Beverly Hills and entertainment industry headquarters, Westfield Century City has established itself as a cultural and retail landmark that attracts discerning shoppers from across the Los Angeles basin.",
   "numberOfStores": 200,
   "squareFootage": 1300000,
-  "summary": "Westfield Century City is a premier open-air luxury shopping destination in West Los Angeles featuring over 200 high-end retailers, department stores, and celebrity chef restaurants following a spectacular $1 billion renovation. This architectural landmark serves as the ultimate lifestyle center for the affluent westside communities with world-class shopping, dining, and entertainment experiences.",
+  "summary": "Westfield Century City is a luxury open-air shopping center in Los Angeles featuring over 200 upscale stores and restaurants, including flagship locations of premier brands like Gucci, Louis Vuitton, and Tiffany & Co. Following a $1 billion redevelopment completed in 2017, it has become one of Southern California's most sophisticated retail destinations.",
   "tier": 3,
   "spaces": []
 }

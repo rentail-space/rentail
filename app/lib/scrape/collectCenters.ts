@@ -30,16 +30,17 @@ export default async function collectCenters(countyName: string) {
     const { state, name } = center;
     try {
       // From Google Places we collect all additional information about the center:
-      // website, phone, rating, review count, photos, opening hours, etc.
-      const google = await fromGooglePlaces(center.id ?? center.name);
+      // website, phone, rating, review count, image URLs, opening hours, etc.
+      const google = await fromGooglePlaces({
+        placeName: center.name,
+        placeID: center.id,
+      });
       invariant(google, "Failed to fetch Google Places data");
 
       // From the website we collect the center's spaces and body text:
       // - The body text is used to enrich the center with additional data.
       // - The description comes from meta description tag (if available).
-      const { bodyText } = google.website
-        ? await scrapeCenter({ browser, url: google.website })
-        : {};
+      const { bodyText } = await scrapeCenter({ browser, url: center.website });
 
       // For each center we scrape the spaces page and collect the spaces:
       // - Space number
@@ -48,13 +49,11 @@ export default async function collectCenters(countyName: string) {
       // - Space floor (1-10)
       // - Space available (true/false)
       // - Space image URLs (array of image URLs)
-      const spaces = google.website
-        ? await scrapeSpaces({
-            browser,
-            centerName: center.name,
-            url: google.website,
-          })
-        : [];
+      const spaces = await scrapeSpaces({
+        browser,
+        centerName: center.name,
+        url: center.website,
+      });
 
       // From the scraped data we enrich the center with additional data:
       // - Square footage
