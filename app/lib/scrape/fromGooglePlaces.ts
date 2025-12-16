@@ -28,7 +28,7 @@ export async function fromGooglePlaces(placeName: string): Promise<
       reviewCount?: number;
       state: string;
       summary?: string;
-      website: string;
+      website?: string;
     }
   | undefined
 > {
@@ -47,141 +47,186 @@ export async function fromGooglePlaces(placeName: string): Promise<
       return cache.value as Awaited<ReturnType<typeof fromGooglePlaces>>;
     }
 
-    const data = await fromPlacesAPI(placeName);
-    await prisma.cache.create({ data: { key, value: data ?? "" } });
+    const place = /^places\/[A-Za-z0-9_-]+$/.test(placeName)
+      ? await getPlaceDetails(placeName)
+      : await findPlace(placeName);
+    await prisma.cache.create({ data: { key, value: place ?? "" } });
     spinner.succeed();
-    return data;
+    return place;
   } catch (error) {
     spinner.fail(
       `Failed to fetch ${placeName} details from Google Places: ${error}`,
     );
-    return undefined;
+    throw error;
   }
 }
 
 /**
- * Get place details from Google Places API. This is the main function that
- * fetches the place details from the Places API.
+ * Google Places API response type.
+ */
+type PlacesAPIPlace = {
+  addressComponents: Array<{
+    longText: string;
+    shortText: string;
+    types: Array<
+      | "street_number"
+      | "route"
+      | "locality"
+      | "administrative_area_level_1"
+      | "administrative_area_level_2"
+      | "country"
+      | "postal_code"
+    >; // eg street_number=8500 route=Beverly Blvd locality=Los Angeles administrative_area_level_1=CA country=USA postal_code=90210
+  }>;
+  businessStatus:
+    | "OPERATIONAL"
+    | "CLOSED_TEMPORARILY"
+    | "CLOSED_PERMANENTLY"
+    | "UNKNOWN";
+  displayName: {
+    text: string; // eg "Beverly Center",
+  };
+  editorialSummary?: {
+    text: string; // eg "High-end shopping mall offers luxury designer shops, well-known department stores & restaurants.",
+  };
+  internationalPhoneNumber: string; // eg. "+1 310-854-0070",
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+  photos: Array<{
+    name: string; // eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw/photos/AdDdOWpS8aBFPEm6GtQQhK6w"
+    widthPx: number; // eg 1000,
+    heightPx: number; // eg 1000,
+    googleMapsUri: string; // eg "https://www.google.com/maps/place/?cid=1234567890",
+  }>;
+  primaryType: "shopping_mall" | "establishment";
+  rating?: number; // eg 4.3
+  regularOpeningHours?: {
+    periods: Array<{
+      open: {
+        day: number; // 0-6, 0=Sunday, 1=Monday, etc
+        hour: number;
+        minute: number;
+      };
+      close: {
+        day: number; // 0-6, 0=Sunday, 1=Monday, etc
+        hour: number;
+        minute: number;
+      };
+    }>;
+  };
+  userRatingCount?: number; // eg 12500
+  websiteUri?: string; // eg "https://www.beverlycenter.com/?utm_source=GoogleMyBusiness&utm_medium=organic&utm_campaign=GMB"
+};
+
+/**
+ * Fields to include in the find place request.
+ */
+const findPlaceFields = [
+  "addressComponents",
+  "businessStatus",
+  "displayName",
+  "editorialSummary",
+  "internationalPhoneNumber",
+  "location",
+  "name",
+  "photos",
+  "primaryType",
+  "rating",
+  "regularOpeningHours",
+  "userRatingCount",
+  "websiteUri",
+];
+
+/**
+ * Find a place by name using the Google Places API.
  *
  * @param placeName Name of the place to search for
  * @returns Place details, or undefined if the place is not found or not operational
- * @see https://developers.google.com/maps/documentation/places/web-service/text-search
- * @see https://developers.google.com/maps/billing-and-pricing/pricing#places-legacy-pricing
  */
-async function fromPlacesAPI(
+async function findPlace(
   placeName: string,
 ): Promise<Awaited<ReturnType<typeof fromGooglePlaces>> | undefined> {
-  const fieldMask = [
-    "places.addressComponents",
-    "places.businessStatus",
-    "places.displayName",
-    "places.editorialSummary",
-    "places.internationalPhoneNumber",
-    "places.location",
-    "places.name",
-    "places.photos",
-    "places.primaryType,places.editorialSummary",
-    "places.primaryType",
-    "places.rating",
-    "places.regularOpeningHours",
-    "places.userRatingCount",
-    "places.websiteUri",
-  ].join(",");
-
-  const response = await fetch(url, {
-    method: "POST",
-    body: JSON.stringify({
-      includedType: "shopping_mall",
-      includePureServiceAreaBusinesses: false,
-      maxResultCount: 3,
-      textQuery: placeName,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-      "User-Agent": "rentail.space/1.0 (support@rentail.space)",
-      "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
-      "X-Goog-FieldMask": fieldMask,
+  const response = await fetch(
+    "https://places.googleapis.com/v1/places:searchText",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        includedType: "shopping_mall",
+        includePureServiceAreaBusinesses: false,
+        maxResultCount: 3,
+        textQuery: placeName,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "rentail.space/1.0 (support@rentail.space)",
+        "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
+        "X-Goog-FieldMask": findPlaceFields
+          .map((field) => `places.${field}`)
+          .join(","),
+      },
     },
-  });
-  const { places } = (await response.json()) as {
-    places: Array<{
-      internationalPhoneNumber: string; // eg. "+1 310-854-0070",
-      addressComponents: Array<{
-        longText: string;
-        shortText: string;
-        types: Array<
-          | "street_number"
-          | "route"
-          | "locality"
-          | "administrative_area_level_1"
-          | "administrative_area_level_2"
-          | "country"
-          | "postal_code"
-        >; // eg street_number=8500 route=Beverly Blvd locality=Los Angeles administrative_area_level_1=CA country=USA postal_code=90210
-      }>;
-      location: {
-        latitude: number;
-        longitude: number;
-      };
-      rating?: number; // eg 4.3
-      websiteUri?: string; // eg "https://www.beverlycenter.com/?utm_source=GoogleMyBusiness&utm_medium=organic&utm_campaign=GMB"
-      regularOpeningHours?: {
-        periods: Array<{
-          open: {
-            day: number; // 0-6, 0=Sunday, 1=Monday, etc
-            hour: number;
-            minute: number;
-          };
-          close: {
-            day: number; // 0-6, 0=Sunday, 1=Monday, etc
-            hour: number;
-            minute: number;
-          };
-        }>;
-      };
-      businessStatus:
-        | "OPERATIONAL"
-        | "CLOSED_TEMPORARILY"
-        | "CLOSED_PERMANENTLY"
-        | "UNKNOWN";
-      userRatingCount?: number; // eg 12500
-      displayName: {
-        text: string; // eg "Beverly Center",
-      };
-      primaryType: "shopping_mall" | "establishment";
-      editorialSummary?: {
-        text: string; // eg "High-end shopping mall offers luxury designer shops, well-known department stores & restaurants.",
-      };
-      photos: Array<{
-        name: string; // eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw/photos/AdDdOWpS8aBFPEm6GtQQhK6w"
-        widthPx: number; // eg 1000,
-        heightPx: number; // eg 1000,
-        googleMapsUri: string; // eg "https://www.google.com/maps/place/?cid=1234567890",
-      }>;
-    }>;
-  };
-  console.log(places);
-
-  // Filter for similar names and non-auxiliary facilities
-  const applicable = places.filter(
-    (place) =>
-      place.primaryType === "shopping_mall" ||
-      (place.businessStatus === "OPERATIONAL" &&
-        similarNames(place.displayName.text, placeName)),
   );
-  invariant(applicable.length, "No matching place");
-  invariant(applicable.length === 1, "Too many matching places");
+  invariant(response.ok, "Failed to find place");
 
-  const place = applicable[0];
+  const { places } = (await response.json()) as { places: PlacesAPIPlace[] };
+  const place = places.filter(
+    (place) =>
+      place.primaryType === "shopping_mall" &&
+      place.businessStatus === "OPERATIONAL" &&
+      similarNames(place.displayName.text, placeName),
+  )[0];
   invariant(
     place.websiteUri,
     `Place ${place.displayName.text} missing website URI`,
   );
+  return await toDatabasePlace(places[0]);
+}
 
+/**
+ * Get place details from Google Places API.
+ *
+ * @param id ID of the place to get details for
+ * @returns Place details, or undefined if the place is not found or not operational
+ */
+async function getPlaceDetails(
+  id: string,
+): Promise<Awaited<ReturnType<typeof fromGooglePlaces>> | undefined> {
+  const response = await fetch(`https://places.googleapis.com/v1/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+      "User-Agent": "rentail.space/1.0 (support@rentail.space)",
+      "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
+      "X-Goog-FieldMask": findPlaceFields.join(","),
+    },
+  });
+  invariant(response.ok, "Failed to get place details");
+  const place = (await response.json()) as PlacesAPIPlace;
+  return await toDatabasePlace(place);
+}
+
+/**
+ * Convert a Google Places API place to a database place.
+ *
+ * @param placeDetails Google Places API place details
+ * @returns Place details
+ */
+async function toDatabasePlace(
+  place: PlacesAPIPlace,
+): Promise<Awaited<ReturnType<typeof fromGooglePlaces>>> {
+  const address = [
+    longText(place.addressComponents, "street_number"),
+    longText(place.addressComponents, "route"),
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const city = longText(place.addressComponents, "locality");
   const state = shortText(
     place.addressComponents,
     "administrative_area_level_1",
   );
+  const country = shortText(place.addressComponents, "country");
   const displayName = place.displayName.text;
   const slug = createSlug({ state, displayName });
   const imageURLs = await downloadPhotos({ slug, photos: place.photos });
@@ -189,21 +234,16 @@ async function fromPlacesAPI(
 
   return {
     name: displayName,
-    address: [
-      longText(place.addressComponents, "street_number"),
-      longText(place.addressComponents, "route"),
-    ]
-      .filter(Boolean)
-      .join(" "),
-    city: longText(place.addressComponents, "locality"),
+    address,
+    city,
     state,
-    country: shortText(place.addressComponents, "country"),
-    latitude: place.location.latitude,
-    longitude: place.location.longitude,
-    website: new URL("/", place.websiteUri).toString(),
-    phone:
-      place.internationalPhoneNumber &&
-      `+${place.internationalPhoneNumber.replace(/D/g, "")}`,
+    country,
+    latitude: place.location?.latitude,
+    longitude: place.location?.longitude,
+    website: place.websiteUri,
+    phone: place.internationalPhoneNumber
+      ? `+${place.internationalPhoneNumber.replace(/D/g, "")}`
+      : undefined,
     imageURLs,
     summary: place.editorialSummary?.text,
     openFrom,
@@ -240,20 +280,20 @@ async function downloadPhotos({
   for (let index = 0; index < download.length; index++) {
     const photo = download[index];
     try {
-      // Fetch photo to detect format
+      console.log("Downloading", photo.name);
       const url = new URL(
-        `;
-  https: //places.googleapis.com/v1/${photo.name}/media`,
+        `https://places.googleapis.com/v1/${photo.name}/media`,
       );
-      url.searchParams.set("key", envVars.GOOGLE_PLACES_API_KEY);
-      url.searchParams.set("maxHeightPx", "4800");
-      url.searchParams.set("maxWidthPx", "4800");
-
-      console.log("Downloading photo: %s", url);
-
-      const response = await fetch(url);
-      console.log("Response: %s", response.status);
-      if (!response.ok) continue;
+      url.searchParams.set("max_height_px", photo.heightPx.toString());
+      url.searchParams.set("max_width_px", photo.widthPx.toString());
+      // Fetch photo to detect format
+      const response = await fetch(url, {
+        headers: {
+          "User-Agent": "rentail.space/1.0 (support@rentail.space)",
+          "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
+        },
+      });
+      invariant(response.ok, "Failed to download photo");
 
       // Detect format from content-type
       const contentType = response.headers.get("content-type") || "";
