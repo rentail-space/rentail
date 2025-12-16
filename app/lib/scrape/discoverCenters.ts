@@ -101,5 +101,5 @@ function getCacheFilePath(query: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
-  return resolve(".cache", `discovery-${slug}.json`);
+  return resolve("prisma/seed", `discovery-${slug}.json`);
 }

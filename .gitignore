@@ -29,9 +29,6 @@ server.log
 # Used by scripts/clone.sh to clone the production database to the local development database
 prisma/backup.sql
 
-# Discovery cache for scraping pipeline
-.cache/
-
 # @see https://github.com/steveyegge/beads
 .beads/beads.db
 .beads/beads.db-*
