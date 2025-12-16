@@ -24,7 +24,7 @@ export default async function sendNewUserNotification(user: User) {
 
 function UserInfo({ user }: { user: User }) {
   const utm = user.utm ? JSON.parse(user.utm as string) : undefined;
-  const geocode = user.geocode;
+  const geocode = user.geocode as { displayName: string };
   return (
     <Section>
       <Text style={styles.text}>
