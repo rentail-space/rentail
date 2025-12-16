@@ -17,11 +17,11 @@
   "openUntil": 2000,
   "rating": 4.2,
   "reviewCount": 9509,
-  "squareFootage": 862000,
-  "numberOfStores": 130,
-  "description": "Westfield Parkway Plaza is East County San Diego's premier shopping destination, offering an extensive collection of retail stores, dining options, and entertainment including a movie theater. The center features a pet-friendly environment and hosts seasonal events like Photos with Santa, making it a community gathering place for the entire family.",
-  "demographics": "Westfield Parkway Plaza primarily serves middle to upper-middle class families in the East County San Diego market, including El Cajon, La Mesa, and surrounding communities. The trade area attracts a diverse demographic mix with households ranging from young families to established empty nesters, with median household incomes in the $60,000-$90,000 range. Shoppers typically visit for both convenience shopping and entertainment experiences, with strong weekend traffic driven by family-oriented activities including dining and movies.",
   "centerType": "RegionalMall",
+  "demographics": "Westfield Parkway Plaza primarily serves families and middle-income households in East County San Diego, including El Cajon, Santee, and La Mesa. The trade area consists of a diverse demographic mix with significant Hispanic and working-class populations, with median household incomes ranging from $50,000 to $75,000. Typical visitors include value-conscious shoppers seeking mainstream retailers, families taking advantage of entertainment options like the movie theater, and local residents looking for convenient one-stop shopping for everyday needs.",
+  "description": "Westfield Parkway Plaza is a premier shopping destination in El Cajon offering the latest movie showings, diverse dining options, and a pet-friendly environment where visitors can bark-and-browse their favorite stores. The center features year-round events including Photos with Santa, hot deals from beloved brands, and special promotions delivered directly to insider subscribers.",
+  "numberOfStores": 120,
+  "squareFootage": 850000,
   "tier": 2,
   "spaces": []
 }

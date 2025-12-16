@@ -6,10 +6,6 @@ import { conversational } from "~/lib/models";
 import type discoverCenters from "~/lib/scrape/discoverCenters";
 
 const enrichedSchema = z.object({
-  squareFootage: z.number(),
-  numberOfStores: z.number(),
-  description: z.string(),
-  demographics: z.string().optional(),
   centerType: z.enum([
     "RegionalMall",
     "CommunityCenter",
@@ -17,6 +13,11 @@ const enrichedSchema = z.object({
     "OutletCenter",
     "LifestyleCenter",
   ]),
+  demographics: z.string().optional(),
+  description: z.string(),
+  numberOfStores: z.number(),
+  squareFootage: z.number(),
+  summary: z.string().optional(),
   tier: z.number().int().min(1).max(3),
 });
 
@@ -28,6 +29,7 @@ const enrichedSchema = z.object({
  * - Center type (RegionalMall, CommunityCenter, etc)
  * - Tier (1-3)
  * - Description (based on scraped website data)
+ * - Summary (2-3 sentence summary of the center based on the scraped website data)
  *
  * @param center - The center to enrich
  * @param bodyText - The body text from the website
@@ -94,6 +96,8 @@ Tasks:
      Indicators: Discount stores, fewer amenities, older facilities, lower price points
 
    Consider: tenant mix, location prestige, facility condition, and target market.
+
+6. Write a 2-3 sentence summary of the center based on the scraped website data.
 
 Use scraped data as primary source. Fill gaps with your knowledge.
 For optional fields without reliable data, omit them entirely (do not set to null).`;

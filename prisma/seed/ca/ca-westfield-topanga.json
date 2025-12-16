@@ -16,11 +16,12 @@
   "openUntil": 2100,
   "rating": 4.5,
   "reviewCount": 15330,
-  "squareFootage": 1200000,
-  "numberOfStores": 250,
-  "description": "Westfield Topanga is a premier shopping destination in Canoga Park offering world-class retail, dining, and entertainment experiences. The center features iconic global brands like Sephora, Zara, H&M, Uniqlo, and Adidas, along with exclusive events and seasonal experiences that bring communities together. With convenient amenities including Smart Parking and click-and-collect services, Westfield Topanga delivers both excitement and ease for shoppers seeking the latest fashion trends and entertainment.",
-  "demographics": "Westfield Topanga primarily serves middle to upper-middle-income families and young professionals in the San Fernando Valley, with a diverse visitor base spanning ages 25-54. The trade area encompasses affluent neighborhoods in Woodland Hills, Calabasas, and Canoga Park, attracting shoppers seeking mainstream fashion brands and family-friendly entertainment options. Typical visitors are household shoppers with moderate to high disposable income who value convenience, variety, and a mix of national retailers and dining options in an accessible location.",
   "centerType": "RegionalMall",
+  "demographics": "Westfield Topanga serves the affluent West San Fernando Valley, attracting primarily middle to upper-middle income families and professionals from Canoga Park, Woodland Hills, and Calabasas. The trade area demographics skew toward households earning $75,000-$150,000 annually, with a mix of young families, established professionals aged 25-54, and empty nesters seeking quality retail and dining experiences. Shoppers demonstrate preferences for both mainstream fashion brands and upscale retailers, with strong weekday lunch traffic from nearby office workers and weekend family visits for combined shopping and entertainment outings.",
+  "description": "Westfield Topanga is a premier shopping destination in Canoga Park featuring world-class retail brands, dining, and entertainment experiences. As part of the globally recognized Westfield portfolio, the center offers an exceptional mix of local and international retailers with convenient amenities including Smart Parking and click-and-collect services. The mall serves as a dynamic entertainment destination where visitors can shop, dine, and socialize in a beautifully designed environment.",
+  "numberOfStores": 180,
+  "squareFootage": 1200000,
+  "summary": "Westfield Topanga is a major regional shopping center in the San Fernando Valley offering a comprehensive retail experience with global brands, diverse dining options, and modern shopping amenities. The center positions itself as more than just a mall, serving as a community hub for entertainment, events, and social gatherings.",
   "tier": 2,
   "spaces": []
 }

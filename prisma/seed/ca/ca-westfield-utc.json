@@ -17,11 +17,11 @@
   "openUntil": 2000,
   "rating": 4.5,
   "reviewCount": 13595,
-  "squareFootage": 855000,
-  "numberOfStores": 165,
-  "description": "Westfield UTC is a premier shopping destination in San Diego's affluent La Jolla community, offering an upscale mix of luxury retailers, dining, and entertainment. The center features iconic global brands like Apple, Swarovski, Adidas, and LEGO alongside high-end dining and leisure experiences. As part of Westfield's international portfolio, UTC delivers world-class shopping with modern amenities including smart parking and click-and-collect services.",
-  "demographics": "Westfield UTC draws an affluent, well-educated customer base from the surrounding La Jolla and University City neighborhoods, with visitors typically ranging from upper-middle to high-income households. The trade area is characterized by professionals, academics affiliated with UC San Diego, and affluent families with above-average household incomes exceeding $100,000. Shoppers tend to be style-conscious consumers aged 25-55 who value premium brands, dining experiences, and convenience, with strong representation from both family households and young professionals. The center benefits from its proximity to coastal communities and the university, attracting a diverse mix of locals and visitors seeking upscale shopping and lifestyle amenities.",
   "centerType": "RegionalMall",
+  "demographics": "Westfield UTC attracts an affluent, educated demographic primarily consisting of professionals, families, and university-affiliated visitors from the surrounding La Jolla and University City areas. The trade area serves high-income households with median incomes exceeding $100,000, including nearby UCSD faculty, biotech professionals, and established families drawn to the center's upscale tenant mix. Shoppers typically range from millennials to baby boomers seeking premium brands, with strong preferences for experiential retail, luxury goods, and sophisticated dining options that reflect the coastal San Diego lifestyle.",
+  "description": "Westfield UTC is a premier shopping destination in San Diego's prestigious University Towne Centre area, featuring world-class retail brands, dining, and entertainment experiences. The center offers an exceptional mix of luxury and contemporary retailers, alongside innovative dining options and engaging events that make it more than just a shopping mall. Located in the heart of La Jolla Village, UTC provides a sophisticated, upscale environment for shoppers seeking the latest fashion trends and lifestyle offerings.",
+  "numberOfStores": 150,
+  "squareFootage": 1200000,
   "tier": 3,
   "spaces": []
 }

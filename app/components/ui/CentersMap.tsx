@@ -14,6 +14,11 @@ export declare type CenterMapFunction = (point: {
   latitude: number;
 }) => void;
 
+const centerOfContinentalUS = {
+  latitude: 39.8283,
+  longitude: -98.5795,
+};
+
 /**
  * A map showing shopping centers.
  *
@@ -58,6 +63,7 @@ export default function CentersMap({
     centerRef.current = (center: { longitude: number; latitude: number }) => {
       map.current?.setCenter([center.longitude, center.latitude]);
       map.current?.setZoom(10);
+      mapContainer.current?.scrollIntoView({ behavior: "smooth" });
     };
 
   useEffect(() => {
@@ -66,11 +72,12 @@ export default function CentersMap({
     mapboxgl.accessToken =
       "pk.eyJ1IjoiYXNzYWZhcmtpbiIsImEiOiJjbWhwY3ZoazMwYXloMmxvbmxvZTE2eTBmIn0.m1npzYF93dHWeF4W3Yt_xw";
 
+    const hasCenter = !Number.isNaN(longitude) && !Number.isNaN(latitude);
     map.current = new mapboxgl.Map({
-      center: [longitude, latitude],
+      center: hasCenter ? [longitude, latitude] : [-98.5795, 39.8283],
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v12",
-      zoom: calculateZoomLevel(centers),
+      zoom: hasCenter ? calculateZoomLevel(centers) : 4,
     });
 
     // Add navigation controls
@@ -98,7 +105,7 @@ export default function CentersMap({
         map.current = null;
       }
     };
-  }, [centers]);
+  }, [centers, latitude, longitude]);
 
   // Add markers when centers change
   useEffect(() => {

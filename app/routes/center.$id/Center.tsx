@@ -2,13 +2,13 @@ import { clamp } from "es-toolkit";
 import {
   ClockIcon,
   GlobeIcon,
-  InfoIcon,
   MapPinIcon,
   PhoneIcon,
   RulerDimensionLineIcon,
   ShoppingCartIcon,
   StarIcon,
 } from "lucide-react";
+import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
@@ -16,7 +16,6 @@ import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
 import formatPhoneNumber from "~/lib/formatPhoneNumber";
 import { Spaces } from "./Spaces";
-import type { PropertyGetPayload } from "prisma/generated/models";
 
 export default function Center({
   center,
@@ -69,7 +68,6 @@ function CenterInfo({
     <div className="space-y-6 divide-y divide-gray-200">
       {center.summary && (
         <div className="items-top flex flex-row gap-2 pb-4">
-          <InfoIcon className="h-8 w-8" />
           <span>{center.summary}</span>
         </div>
       )}

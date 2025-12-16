@@ -63,6 +63,7 @@ export default async function collectCenters(countyName: string) {
       // - Tier (1-3)
       // - Description (based on scraped website data)
       const enriched = await enrichCenter({ center, bodyText });
+      const summary = google.summary ?? enriched.summary;
 
       const filename = getSaveFilename({ state, name });
       await mkdir(dirname(filename), { recursive: true });
@@ -74,6 +75,7 @@ export default async function collectCenters(countyName: string) {
             ...center, // From Claude
             ...google, // Overwritten by Google Places API
             ...enriched, // Additional data from Claude
+            summary, // Summary from Google Places or Claude, fallback to Claude
             spaces, // Spaces scraped from website
           },
           null,

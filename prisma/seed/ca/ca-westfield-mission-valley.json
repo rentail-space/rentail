@@ -16,11 +16,12 @@
   "openUntil": 2100,
   "rating": 4.3,
   "reviewCount": 14565,
-  "squareFootage": 650000,
-  "numberOfStores": 85,
-  "description": "Westfield Mission Valley is undergoing a complete reimagination as a destination for art, food, and culture, featuring fresh design, curated shops, and experiential elements. This spacious outdoor mall combines retail stores with restaurants, a movie theater, and entertainment venues including immersive experiences like Sandbox VR. The center offers a blend of shopping and leisure activities with extended hours and convenient San Diego location access.",
-  "demographics": "Mission Valley serves a diverse San Diego market with a strong mix of young professionals, families, and university students from nearby SDSU. The trade area attracts middle to upper-middle income households with median incomes ranging from $65,000-$95,000, drawn to the center's convenient location along major transit corridors. Visitors typically seek a combination of everyday shopping, dining, and entertainment experiences, with a preference for experiential retail and social gathering spaces that align with Southern California's lifestyle-oriented culture.",
   "centerType": "RegionalMall",
+  "demographics": "Westfield Mission Valley serves a diverse San Diego trade area with a strong mix of young professionals, families, and college-aged visitors given its proximity to San Diego State University and multiple residential neighborhoods. The center attracts middle to upper-middle income households with median incomes ranging from $65,000-$95,000, appealing to value-conscious shoppers seeking mainstream retail brands and family-friendly dining and entertainment options. Typical visitors include millennials and Gen X families who favor convenient outdoor shopping experiences with a blend of fashion, food, and entertainment activities.",
+  "description": "Westfield Mission Valley is a spacious outdoor mall undergoing a reimagined transformation into a destination for art, food, and culture with fresh design and curated shops. The center features diverse retail stores, restaurants, an AMC movie theater, and engaging entertainment experiences including Sandbox VR.",
+  "numberOfStores": 85,
+  "squareFootage": 850000,
+  "summary": "Westfield Mission Valley is a regional shopping destination in San Diego that combines retail, dining, and entertainment in an open-air format. Operating under Centennial Real Estate Management, the center is currently undergoing redevelopment to enhance its offerings with curated experiences and modern amenities.",
   "tier": 2,
   "spaces": []
 }

@@ -16,11 +16,12 @@
   "openUntil": 2100,
   "rating": 4.4,
   "reviewCount": 8135,
-  "squareFootage": 500000,
-  "numberOfStores": 110,
-  "description": "Westfield Valencia Town Center is a relaxed shopping mall in Valencia featuring national retailers, local eateries, family-friendly playgrounds, and an Edwards IMAX theater for entertainment. The center offers a comprehensive shopping and dining experience with extended hours and seasonal events including Photos with Santa and holiday performances.",
-  "demographics": "Valencia Town Center serves the affluent Santa Clarita Valley community, attracting primarily middle to upper-middle-class families with median household incomes ranging from $90,000 to $120,000. The trade area demographic skews toward families with children, young professionals aged 25-54, and retirees who appreciate the center's family-friendly amenities and convenient access from the I-5 corridor. Typical visitors are lifestyle-oriented shoppers seeking a mix of national retailers, casual dining, and entertainment options in a comfortable, suburban mall environment.",
   "centerType": "RegionalMall",
+  "demographics": "Valencia Town Center serves the affluent Santa Clarita Valley area, drawing primarily upper-middle-class families with children and young professionals aged 25-54 with household incomes ranging from $80,000 to $150,000+. The trade area encompasses the master-planned communities of Valencia and surrounding Santa Clarita neighborhoods, attracting shoppers seeking a mix of national retailers, family entertainment, and dining options. Typical visitors exhibit lifestyle-oriented shopping patterns with extended dwell times due to the IMAX theater and family-friendly amenities like playgrounds, making it a popular weekend destination for families and social gatherings.",
+  "description": "Westfield Valencia Town Center is a relaxed shopping mall featuring national retailers, local eateries, playgrounds and an IMAX theater. This comprehensive shopping destination offers entertainment, dining, and retail experiences with extended hours throughout the week. The center hosts seasonal events including photos with Santa, holiday performances, and community partnership programs.",
+  "numberOfStores": 120,
+  "squareFootage": 1100000,
+  "summary": "Westfield Valencia Town Center is a regional shopping mall in Valencia, California featuring national retailers, dining options, and an Edwards IMAX theater. Managed by Centennial Real Estate, the center serves as a primary retail and entertainment destination for the Santa Clarita Valley with family-friendly amenities and year-round events.",
   "tier": 2,
   "spaces": []
 }

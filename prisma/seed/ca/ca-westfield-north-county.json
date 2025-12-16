@@ -16,11 +16,12 @@
   "openUntil": 2100,
   "rating": 4.4,
   "reviewCount": 7776,
-  "squareFootage": 1100000,
-  "numberOfStores": 150,
-  "description": "Westfield North County is a premier shopping destination in Escondido featuring a diverse mix of retail stores, dining options, and entertainment venues. The center offers a comprehensive shopping experience with multiple categories including retail, food & drink, and entertainment, along with seasonal events and holiday programming. Located at 272 East Via Rancho Parkway, this Westfield property provides convenient access and amenities for the North County San Diego community.",
-  "demographics": "Westfield North County primarily serves the North San Diego County market, attracting middle to upper-middle income families and professionals from Escondido, San Marcos, and surrounding communities. The trade area encompasses a diverse demographic mix including young families, established households, and retirees with moderate to above-average incomes typical of suburban San Diego. Shoppers tend to favor a mix of value-oriented national retailers and dining options, with visits often centered around convenience shopping, family entertainment, and casual dining experiences.",
   "centerType": "RegionalMall",
+  "demographics": "Westfield North County primarily serves middle to upper-middle income families in North San Diego County, including Escondido, San Marcos, and surrounding communities. The trade area attracts a diverse demographic mix spanning young families, established households, and retirees, with visitors typically seeking convenient access to mainstream retail brands and dining options. Shopping patterns reflect suburban family needs with weekend traffic driven by household shopping, entertainment visits, and dining experiences.",
+  "description": "Westfield North County is a premier enclosed shopping destination in Escondido, featuring a diverse mix of retail stores, dining options, and entertainment venues. The center offers convenient access via Via Rancho Parkway and provides seasonal events including holiday celebrations and Santa visits for families.",
+  "numberOfStores": 150,
+  "squareFootage": 1100000,
+  "summary": "Westfield North County serves as a major shopping hub in North County San Diego with comprehensive retail, dining, and entertainment offerings. The mall features organized sections for retail stores, food and beverage establishments, and entertainment options, along with regular community events and holiday programming.",
   "tier": 2,
   "spaces": []
 }

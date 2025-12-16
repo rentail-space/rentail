@@ -16,11 +16,12 @@
   "openUntil": 2100,
   "rating": 4.5,
   "reviewCount": 14755,
-  "squareFootage": 865000,
-  "numberOfStores": 135,
-  "description": "Westfield Plaza Bonita is a premier shopping destination in National City featuring iconic global brands like H&M, Victoria's Secret, Louis Vuitton, and Nespresso. This Westfield center offers an exceptional blend of fashion, dining, entertainment, and events with time-saving amenities including click-and-collect services and Smart Parking technology.",
-  "demographics": "Westfield Plaza Bonita serves a diverse, middle to upper-middle income trade area in the South Bay region of San Diego County, attracting families and young professionals from National City, Chula Vista, and surrounding communities. The center's visitor base includes a significant Hispanic population alongside diverse demographic segments seeking value-oriented fashion and mainstream retail options. Primary shoppers are budget-conscious families and millennials looking for a mix of national brands and affordable dining options in an accessible, enclosed mall environment.",
   "centerType": "RegionalMall",
+  "demographics": "Westfield Plaza Bonita serves a diverse, working-class to middle-income demographic in the South Bay region, with a significant Hispanic population and multi-generational households. The trade area includes National City, Chula Vista, and southern San Diego communities, attracting value-conscious shoppers seeking affordable fashion, family dining, and convenient one-stop shopping. Primary visitors are families with children and young adults aged 18-45 who prioritize accessibility, variety, and practical retail options over luxury experiences.",
+  "description": "Westfield Plaza Bonita is a premier enclosed shopping destination in National City featuring a diverse mix of national retailers, dining options, and entertainment venues. As part of the renowned Westfield portfolio, this mall offers shoppers a dynamic experience with the latest fashion trends, convenient amenities like Smart Parking and click-and-collect services, and a variety of food offerings from global chains to local eateries. The center serves as a vibrant community hub where visitors can shop, dine, socialize, and enjoy special events throughout the year.",
+  "numberOfStores": 120,
+  "squareFootage": 1028000,
+  "summary": "Westfield Plaza Bonita is a well-established regional mall in National City serving the South Bay area with mainstream retail brands and dining options. The center provides a complete shopping experience with modern conveniences and entertainment amenities typical of the Westfield brand.",
   "tier": 2,
   "spaces": []
 }
