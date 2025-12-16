@@ -24,7 +24,6 @@ export async function fromGooglePlaces(placeName: string): Promise<
       openFrom?: number;
       openUntil?: number;
       phone: string | undefined;
-      photos: Array<{ name: string; widthPx: number; heightPx: number }>;
       rating?: number;
       reviewCount?: number;
       state: string;
@@ -88,14 +87,14 @@ async function fromPlacesAPI(
     "places.userRatingCount",
     "places.websiteUri",
   ].join(",");
-  const url = new URL("https://places.googleapis.com/v1/places:searchText");
 
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify({
-      textQuery: placeName,
+      includedType: "shopping_mall",
       includePureServiceAreaBusinesses: false,
-      maxResultCount: 10, // Request more results to increase chance of finding main center
+      maxResultCount: 3,
+      textQuery: placeName,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -104,7 +103,7 @@ async function fromPlacesAPI(
       "X-Goog-FieldMask": fieldMask,
     },
   });
-  const data = (await response.json()) as {
+  const { places } = (await response.json()) as {
     places: Array<{
       internationalPhoneNumber: string; // eg. "+1 310-854-0070",
       addressComponents: Array<{
@@ -161,18 +160,19 @@ async function fromPlacesAPI(
       }>;
     }>;
   };
+  console.log(places);
 
   // Filter for similar names and non-auxiliary facilities
-  const places = data.places.filter(
+  const applicable = places.filter(
     (place) =>
-      place.primaryType === "shopping_mall" &&
-      place.businessStatus === "OPERATIONAL" &&
-      similarNames(place.displayName.text, placeName),
+      place.primaryType === "shopping_mall" ||
+      (place.businessStatus === "OPERATIONAL" &&
+        similarNames(place.displayName.text, placeName)),
   );
-  invariant(places.length, "No matching place");
-  invariant(places.length === 1, "Too many matching places");
+  invariant(applicable.length, "No matching place");
+  invariant(applicable.length === 1, "Too many matching places");
 
-  const place = places[0];
+  const place = applicable[0];
   invariant(
     place.websiteUri,
     `Place ${place.displayName.text} missing website URI`,
@@ -182,12 +182,13 @@ async function fromPlacesAPI(
     place.addressComponents,
     "administrative_area_level_1",
   );
-  const slug = createSlug({ state, placeName: place.displayName.text });
+  const displayName = place.displayName.text;
+  const slug = createSlug({ state, displayName });
   const imageURLs = await downloadPhotos({ slug, photos: place.photos });
   const { openFrom, openUntil } = operatingHours(place.regularOpeningHours);
 
   return {
-    name: place.displayName.text,
+    name: displayName,
     address: [
       longText(place.addressComponents, "street_number"),
       longText(place.addressComponents, "route"),
@@ -202,10 +203,7 @@ async function fromPlacesAPI(
     website: new URL("/", place.websiteUri).toString(),
     phone:
       place.internationalPhoneNumber &&
-      ` + $;
-  place.internationalPhoneNumber.replace(/D/g, "");
-  `,
-    photos: place.photos,
+      `+${place.internationalPhoneNumber.replace(/D/g, "")}`,
     imageURLs,
     summary: place.editorialSummary?.text,
     openFrom,
@@ -288,9 +286,8 @@ function longText(
   addressComponents: Array<{ types: string[]; longText: string }>,
   type: string,
 ): string {
-  return (
-    addressComponents.find(({ types }) => types.includes(type))?.longText ?? ""
-  );
+  const component = addressComponents.find(({ types }) => types.includes(type));
+  return component?.longText ?? "";
 }
 
 /**
@@ -304,9 +301,8 @@ function shortText(
   addressComponents: Array<{ types: string[]; shortText: string }>,
   type: string,
 ): string {
-  return (
-    addressComponents.find(({ types }) => types.includes(type))?.shortText ?? ""
-  );
+  const component = addressComponents.find(({ types }) => types.includes(type));
+  return component?.shortText ?? "";
 }
 
 /**
@@ -348,18 +344,18 @@ function operatingHours(regularOpeningHours?: {
  * public/images/malls directory.
  *
  * @param state State of the mall
- * @param placeName Name of the mall
+ * @param displayName Display name of the mall
  * @returns Slug for the mall
  */
 function createSlug({
   state,
-  placeName,
+  displayName,
 }: {
   state: string;
-  placeName: string;
+  displayName: string;
 }): string {
   return `${state.toLowerCase()}-${
-    placeName
+    displayName
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "") // Remove special chars
       .replace(/\s+/g, "-") // Spaces to hyphens

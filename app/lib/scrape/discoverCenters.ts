@@ -19,6 +19,7 @@ const discoverySchema = z.object({
         .string()
         .min(2, "State must be at least 2 characters")
         .max(2, "State must be 2-letter code"),
+      website: z.url(),
     }),
   ),
 });
