@@ -8,9 +8,12 @@ import {
   Link,
   Preview,
   Section,
+  Tailwind,
   Text,
+  pixelBasedPreset,
 } from "@react-email/components";
 import * as styles from "~/emails/styles";
+import { colors } from "~/emails/styles";
 
 /**
  * EmailLayout is a component that wraps the email content and provides a consistent layout.
@@ -37,13 +40,26 @@ export default function EmailLayout({
     <Html>
       <Head />
       <Preview>{preview ?? subject}</Preview>
-      <Body style={styles.main}>
-        <Container style={styles.container}>
-          <Header subject={subject} />
-          {children}
-          <Footer isCustomer={isCustomer} />
-        </Container>
-      </Body>
+      <Tailwind
+        config={{
+          presets: [pixelBasedPreset],
+          theme: {
+            extend: {
+              colors: {
+                primary: colors.primary,
+              },
+            },
+          },
+        }}
+      >
+        <Body className="bg-background font-sans text-text">
+          <Container className="mx-auto my-40px max-w-600px rounded-lg border border-borderLight bg-white p-4">
+            <Header subject={subject} />
+            {children}
+            <Footer isCustomer={isCustomer} />
+          </Container>
+        </Body>
+      </Tailwind>
     </Html>
   );
 }
@@ -55,32 +71,40 @@ function Header({ subject }: { subject: string }) {
         alt="Rentail.space Logo"
         height="80"
         src="https://rentail.space/images/logo.png"
-        style={styles.logo}
+        className="mx-auto mb-8 block"
         width="80"
       />
 
-      <Heading style={styles.heading}>{subject}</Heading>
+      <Heading className="mb-6 text-center font-bold text-2xl text-gray-800 leading-snug">
+        {subject}
+      </Heading>
     </Section>
   );
 }
 
 function Footer({ isCustomer = true }: { isCustomer: boolean }) {
   return (
-    <Section style={styles.footer}>
+    <Section className="mt-8 border-gray-200 border-t pt-6">
       {isCustomer && (
-        <Text style={styles.footerText}>
+        <Text className="mb-4 text-center text-gray-500 text-sm leading-relaxed">
           You're receiving this email because you signed up for an account at{" "}
-          <Link href="https://rentail.space" style={styles.footerLink}>
+          <Link href="https://rentail.space" className="text-primary underline">
             rentail.space
           </Link>
         </Text>
       )}
       <Text style={styles.footerText}>
-        <Link href="https://rentail.space/privacy" style={styles.footerLink}>
+        <Link
+          href="https://rentail.space/privacy"
+          className="text-primary underline"
+        >
           Privacy Policy
         </Link>{" "}
         •{" "}
-        <Link href="https://rentail.space/terms" style={styles.footerLink}>
+        <Link
+          href="https://rentail.space/terms"
+          className="text-primary underline"
+        >
           Terms of Service
         </Link>
       </Text>
