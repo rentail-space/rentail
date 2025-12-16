@@ -53,7 +53,7 @@ export default function EmailLayout({
         }}
       >
         <Body className="bg-background font-sans text-text">
-          <Container className="mx-auto my-40px max-w-600px rounded-lg border border-borderLight bg-white p-4">
+          <Container className="mx-auto my-40px max-w-600px bg-white">
             <Header subject={subject} />
             {children}
             <Footer isCustomer={isCustomer} />

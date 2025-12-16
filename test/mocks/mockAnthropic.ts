@@ -102,7 +102,7 @@ export function findMockResponse(body: object): ReadableStream<Uint8Array> {
             address: "189 The Grove Dr",
             city: "Los Angeles",
             state: "CA",
-            website: "https://thegrovela.com",
+            website: "https://thegrovela.com/",
             latitude: 34.0719,
             longitude: -118.3569,
           },
