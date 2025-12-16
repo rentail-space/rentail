@@ -1,8 +1,11 @@
-import { reverse } from "node:dns/promises";
+import type { TextUIPart, UIMessage } from "ai";
 import bcrypt from "bcrypt";
 import debug from "debug";
 import { invariant } from "es-toolkit";
 import { createIsbotFromList, list } from "isbot";
+import { reverse } from "node:dns/promises";
+import type { Chat, User } from "prisma/generated/client";
+import type { UserGetPayload } from "prisma/generated/models";
 import {
   type Session,
   createCookieSessionStorage,
@@ -17,9 +20,6 @@ import { readUtmParams, saveUtmParams } from "~/lib/middleware/utm";
 import prisma from "~/lib/prisma";
 import welcome from "~/prompts/welcome.md?raw";
 import { geocodeFromHeaders } from "./geocode";
-import type { TextUIPart, UIMessage } from "ai";
-import type { Chat, User } from "prisma/generated/client";
-import type { UserGetPayload } from "prisma/generated/models";
 
 type SessionData = {
   token: string;
@@ -181,7 +181,7 @@ export async function findOrCreateUser({
   }
 
   const user = await createAnonymousUser({ chatId, requestHeaders });
-  await sendNewUserNotification(user);
+  if (envVars.isProduction) await sendNewUserNotification(user);
   const chat = user.chats[0];
   const messages = await recentMessages(chat.id);
 
@@ -384,7 +384,7 @@ export async function signUpEmail({
       where: { id: anonymousUser.id },
     });
     await sendWelcomeEmail(updatedUser);
-    await sendNewUserNotification(updatedUser);
+    if (envVars.isProduction) await sendNewUserNotification(updatedUser);
     return await createSession({ requestHeaders, userId: updatedUser.id });
   }
 
@@ -402,7 +402,7 @@ export async function signUpEmail({
     requestHeaders,
   });
   await sendWelcomeEmail(newUser);
-  await sendNewUserNotification(newUser);
+  if (envVars.isProduction) await sendNewUserNotification(newUser);
   return await createSession({ requestHeaders, userId: newUser.id });
 }
 

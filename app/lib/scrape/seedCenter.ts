@@ -52,12 +52,10 @@ export default async function seedCenter(filename: string) {
   logger("🔄 Seeding %s", filename);
   const data = await readFile(filename, "utf-8");
   const center = schema.parse(JSON.parse(data));
-
-  // Generate missing fields
-  const id = basename(filename, ".json");
   const imageURLs = center.imageURLs.map((url) =>
     new URL(url, "https://rentail.space").toString(),
   );
+  const id = basename(filename, ".json");
 
   await prisma.property.upsert({
     create: {

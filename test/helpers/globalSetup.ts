@@ -16,16 +16,18 @@ import { closeServer, launchServer } from "./launchServer";
 import { removeNewHTML } from "./toMatchInnerHTML";
 import { removeDiffImages } from "./toMatchScreenshot";
 
+/**
+ * These are the only centers that are available in testing.
+ */
 const centers = [
   "ca/ca-beverly-center.json",
   "ca/ca-del-amo-fashion-center.json",
   "ca/ca-glendale-galleria.json",
-  "ca/ca-northridge-fashion-center.json",
-  "ca/ca-sherman-oaks-galleria.json",
   "ca/ca-south-bay-galleria.json",
   "ca/ca-the-americana-at-brand.json",
   "ca/ca-the-grove.json",
-  "ca/ca-the-bloc.json",
+  "ca/ca-westfield-culver-city.json",
+  "ca/ca-westfield-century-city.json",
 ];
 
 const execFileAsync = promisify(execFile);
