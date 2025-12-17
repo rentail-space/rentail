@@ -4,6 +4,17 @@ import { invariant } from "es-toolkit";
 import type { User } from "prisma/generated/client";
 import { cleanParseWorkingMemory } from "./workingMemory";
 
+const fallbackLocation = {
+  city: "Los Angeles",
+  country: "United States",
+  displayName: "Los Angeles, California",
+  state: "California",
+  ip: "23.241.26.38",
+  latitude: 34.0456,
+  longitude: -118.2694,
+  timeZone: "America/Los_Angeles",
+};
+
 type GeocodedLocation = {
   city?: string;
   country?: string;
@@ -67,7 +78,7 @@ export async function geocodeFromHeaders(requestHeaders: Headers): Promise<{
 }> {
   try {
     const ip = requestHeaders.get("x-real-ip");
-    invariant(ip, "IP is required");
+    if (!ip) return fallbackLocation;
 
     const city = requestHeaders.get("x-vercel-ip-city");
     const country = requestHeaders.get("x-vercel-ip-country");
@@ -97,17 +108,7 @@ export async function geocodeFromHeaders(requestHeaders: Headers): Promise<{
     }
   } catch (error) {
     console.error("Error getting geocode from headers: %s", error);
-    return {
-      // fallback location
-      city: "Los Angeles",
-      country: "United States",
-      displayName: "Los Angeles, California",
-      state: "California",
-      ip: "23.241.26.38",
-      latitude: 34.0456,
-      longitude: -118.2694,
-      timeZone: "America/Los_Angeles",
-    };
+    return fallbackLocation;
   }
 }
 
