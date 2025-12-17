@@ -151,7 +151,7 @@ export default function StatePage({
 
 function RatingStars({ rating }: { rating: number }) {
   return (
-    <div
+    <span
       className="inline-flex text-yellow-500"
       itemProp="ratingValue"
       itemType="https://schema.org/AggregateRating"
@@ -164,7 +164,7 @@ function RatingStars({ rating }: { rating: number }) {
           fill={i + 0.5 <= clamp(rating, 1, 5) ? "currentColor" : "none"}
         />
       ))}
-    </div>
+    </span>
   );
 }
 
