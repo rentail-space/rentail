@@ -194,6 +194,33 @@ describe("State shopping centers page", () => {
     await expect(page.locator("main")).toMatchScreenshot();
   });
 
+  it("should have proper meta title with state name", async () => {
+    const title = await page.title();
+    expect(title).toContain("California");
+    expect(title).toContain("Shopping Centers");
+    expect(title).toContain("Specialty Leasing");
+    expect(title).toContain("Rentail.space");
+  });
+
+  it("should have meta description with state-specific content", async () => {
+    const metaDescription = page.locator('meta[name="description"]').last();
+    const content = await metaDescription.getAttribute("content");
+    expect(content).toBeTruthy();
+    expect(content).toContain("California");
+    expect(content).toContain("specialty leasing");
+    expect(content).toContain("kiosk");
+    expect(content).toContain("CA");
+  });
+
+  it("should have meta keywords with state-specific terms", async () => {
+    const metaKeywords = page.locator('meta[name="keywords"]').last();
+    const content = await metaKeywords.getAttribute("content");
+    expect(content).toBeTruthy();
+    expect(content).toContain("California");
+    expect(content).toContain("CA");
+    expect(content).toContain("specialty leasing");
+  });
+
   describe("clicks center link", () => {
     let firstCenter: { id: string; name: string };
 

@@ -132,4 +132,27 @@ describe("Glossary page", () => {
   it("should match visual regression test", async () => {
     await expect(page.locator("main")).toMatchScreenshot();
   });
+
+  it("should have proper meta title", async () => {
+    const title = await page.title();
+    expect(title).toContain("Specialty Leasing Glossary");
+    expect(title).toContain("Rentail.space");
+  });
+
+  it("should have meta description with specialty leasing keywords", async () => {
+    const metaDescription = page.locator('meta[name="description"]').last();
+    const content = await metaDescription.getAttribute("content");
+    expect(content).toBeTruthy();
+    expect(content).toContain("specialty leasing");
+    expect(content).toContain("kiosk");
+    expect(content).toContain("pop-up shop");
+  });
+
+  it("should have meta keywords", async () => {
+    const metaKeywords = page.locator('meta[name="keywords"]').last();
+    const content = await metaKeywords.getAttribute("content");
+    expect(content).toBeTruthy();
+    expect(content).toContain("glossary");
+    expect(content).toContain("kiosk");
+  });
 });
