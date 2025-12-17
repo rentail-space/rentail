@@ -8,9 +8,7 @@
   "longitude": -118.4183317,
   "id": "places/ChIJlzcgHgC7woARrzVVJanYMlA",
   "country": "US",
-  "imageURLs": [
-    "/images/malls/ca-westfield-century-city-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westfield-century-city-1.jpg"],
   "rating": 5,
   "reviewCount": 1,
   "centerType": "RegionalMall",

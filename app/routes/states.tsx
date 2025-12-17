@@ -12,6 +12,7 @@ export async function loader() {
     orderBy: { state: "asc" },
     _count: { _all: true },
   });
+
   return { states, centers };
 }
 
@@ -22,6 +23,14 @@ export default function StatePage({
 }) {
   return (
     <main className="container mx-auto my-10 max-w-3xl space-y-8">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: exception
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schemaData(loaderData)),
+        }}
+      />
+
       <h1 className="text-center font-bold text-2xl">US States</h1>
 
       <ul
@@ -35,13 +44,15 @@ export default function StatePage({
               countCenters(loaderData.centers, abbreviation) > 0,
           )
 
-          .map(({ abbreviation, name, lede }) => (
+          .map(({ abbreviation, name, lede }, index) => (
             <li
               key={abbreviation}
               className="border-gray-400 border-b pb-4"
               itemScope
               itemType="https://schema.org/ListItem"
+              itemProp="itemListElement"
             >
+              <meta itemProp="position" content={String(index + 1)} />
               <LinkToState
                 abbreviation={abbreviation}
                 name={name}
@@ -52,6 +63,17 @@ export default function StatePage({
           ))}
       </ul>
     </main>
+  );
+}
+
+function countCenters(
+  centers: { state: string; _count: { _all: number } }[],
+  abbreviation: string,
+): number {
+  return (
+    centers.find(
+      (center) => center.state.toLowerCase() === abbreviation.toLowerCase(),
+    )?._count._all ?? 0
   );
 }
 
@@ -66,8 +88,9 @@ function LinkToState({
   lede: string;
   centers: { state: string; _count: { _all: number } }[];
 }) {
+  const url = `/state/${abbreviation.toLowerCase()}`;
   return (
-    <Link to={`/state/${abbreviation.toLowerCase()}`} className="space-y-2">
+    <Link to={url} className="space-y-2" itemProp="url">
       <div className="flex flex-row justify-between">
         <h2 className="font-bold text-xl" itemProp="name">
           {name}
@@ -83,13 +106,30 @@ function LinkToState({
   );
 }
 
-function countCenters(
-  centers: { state: string; _count: { _all: number } }[],
-  abbreviation: string,
-): number {
-  return (
-    centers.find(
-      (center) => center.state.toLowerCase() === abbreviation.toLowerCase(),
-    )?._count._all ?? 0
-  );
+function schemaData({
+  states,
+  centers,
+}: {
+  states: { abbreviation: string; name: string }[];
+  centers: { state: string; _count: { _all: number } }[];
+}) {
+  // Build JSON-LD structured data for search engines
+  const itemListElements = states
+    .filter(({ abbreviation }) => countCenters(centers, abbreviation) > 0)
+    .map(({ abbreviation, name }, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: name,
+      url: `https://rentail.space/state/${abbreviation.toLowerCase()}`,
+      description: `${countCenters(centers, abbreviation)} shopping centers in ${name}`,
+    }));
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "US States with Shopping Centers",
+    description: "Complete list of US states with available retail spaces",
+    numberOfItems: itemListElements.length,
+    itemListElement: itemListElements,
+  };
 }
