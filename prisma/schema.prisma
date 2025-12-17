@@ -109,6 +109,14 @@ model Session {
   @@map("session")
 }
 
+model State {
+  abbreviation String @map("abbr") @id
+  name         String @map("name")
+  lede         String @map("lede")
+
+  @@map("states")
+}
+
 model User {
   chats         Chat[]
   createdAt     DateTime  @map("created_at")     @default(now())

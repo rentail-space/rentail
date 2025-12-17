@@ -2,20 +2,24 @@ import { clamp, meanBy, range } from "es-toolkit";
 import { MapPinIcon, MoveLeftIcon, StarIcon } from "lucide-react";
 import { Children, Fragment, useRef } from "react";
 import { Link } from "react-router";
+import { Streamdown } from "streamdown";
 import CentersMap from "~/components/ui/CentersMap";
-import expandStateAbbr from "~/lib/expandStateAbbr";
 import prisma from "~/lib/prisma";
 import timeOfDay from "~/lib/timeOfDay";
 import type { Route } from "./+types/state.$state";
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const state = params.state.toUpperCase();
+  const state = await prisma.state.findUnique({
+    where: { abbreviation: params.state.toUpperCase() },
+  });
+  if (!state) throw new Response("Not Found", { status: 404 });
+
   const centers = await prisma.property.findMany({
     include: {
       spaces: true,
     },
     orderBy: { name: "asc" },
-    where: { state },
+    where: { state: state.abbreviation },
   });
   return { centers, state };
 }
@@ -40,12 +44,14 @@ export default function StatePage({
           All States
         </Link>
 
-        <h1 className="text-center font-bold text-2xl">
-          {expandStateAbbr(state)}
-        </h1>
+        <h1 className="text-center font-bold text-2xl">{state.name}</h1>
 
         <span className="w-1/2" />
       </div>
+
+      <Streamdown className="text-gray-600 text-sm" mode="static">
+        {state.lede}
+      </Streamdown>
 
       <CentersMap
         centerRef={centerRef}

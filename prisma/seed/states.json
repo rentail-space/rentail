@@ -1,0 +1,252 @@
+[
+  {
+    "name": "Alabama",
+    "abbreviation": "AL",
+    "lede": "Alabama is a state in the United States. It is the 2nd most populous state in the United States."
+  },
+  {
+    "name": "Alaska",
+    "abbreviation": "AK",
+    "lede": "Alaska is a state in the United States. It is the 49th most populous state in the United States."
+  },
+  {
+    "name": "Arizona",
+    "abbreviation": "AZ",
+    "lede": "Arizona is a state in the United States. It is the 4th most populous state in the United States."
+  },
+  {
+    "name": "Arkansas",
+    "abbreviation": "AR",
+    "lede": "Arkansas is a state in the United States. It is the 5th most populous state in the United States."
+  },
+  {
+    "name": "California",
+    "abbreviation": "CA",
+    "lede": "The world's fifth-largest economy isn't a state—it's a country that happens to share a border with Nevada. 40 million residents with $3.9 trillion GDP and the highest disposable income density in America.\n\n California doesn't follow trends—it creates them. Your test market here becomes your national playbook. Launch in Venice, scale to Virginia. Drop in Haight-Ashbury, expand to Brooklyn. The state's cultural gravitational pull turns local success into viral momentum."
+  },
+  {
+    "name": "Colorado",
+    "abbreviation": "CO",
+    "lede": "Colorado is a state in the United States. It is the 8th most populous state in the United States."
+  },
+  {
+    "name": "Connecticut",
+    "abbreviation": "CT",
+    "lede": "Connecticut is a state in the United States. It is the 9th most populous state in the United States."
+  },
+  {
+    "name": "Delaware",
+    "abbreviation": "DE",
+    "lede": "Delaware is a state in the United States. It is the 10th most populous state in the United States."
+  },
+  {
+    "name": "Florida",
+    "abbreviation": "FL",
+    "lede": "Florida is a state in the United States. It is the 11th most populous state in the United States."
+  },
+  {
+    "name": "Georgia",
+    "abbreviation": "GA",
+    "lede": "Georgia is a state in the United States. It is the 12th most populous state in the United States."
+  },
+  {
+    "name": "Hawaii",
+    "abbreviation": "HI",
+    "lede": "Hawaii is a state in the United States. It is the 13th most populous state in the United States."
+  },
+  {
+    "name": "Idaho",
+    "abbreviation": "ID",
+    "lede": "Idaho is a state in the United States. It is the 14th most populous state in the United States."
+  },
+  {
+    "name": "Illinois",
+    "abbreviation": "IL",
+    "lede": "Illinois is a state in the United States. It is the 15th most populous state in the United States."
+  },
+  {
+    "name": "Indiana",
+    "abbreviation": "IN",
+    "lede": "Indiana is a state in the United States. It is the 16th most populous state in the United States."
+  },
+  {
+    "name": "Iowa",
+    "abbreviation": "IA",
+    "lede": "Iowa is a state in the United States. It is the 17th most populous state in the United States."
+  },
+  {
+    "name": "Kansas",
+    "abbreviation": "KS",
+    "lede": "Kansas is a state in the United States. It is the 18th most populous state in the United States."
+  },
+  {
+    "name": "Kentucky",
+    "abbreviation": "KY",
+    "lede": "Kentucky is a state in the United States. It is the 19th most populous state in the United States."
+  },
+  {
+    "name": "Louisiana",
+    "abbreviation": "LA",
+    "lede": "Louisiana is a state in the United States. It is the 20th most populous state in the United States."
+  },
+  {
+    "name": "Maine",
+    "abbreviation": "ME",
+    "lede": "Maine is a state in the United States. It is the 21st most populous state in the United States."
+  },
+  {
+    "name": "Maryland",
+    "abbreviation": "MD",
+    "lede": "Maryland is a state in the United States. It is the 22nd most populous state in the United States."
+  },
+  {
+    "name": "Massachusetts",
+    "abbreviation": "MA",
+    "lede": "Massachusetts is a state in the United States. It is the 23rd most populous state in the United States."
+  },
+  {
+    "name": "Michigan",
+    "abbreviation": "MI",
+    "lede": "Michigan is a state in the United States. It is the 24th most populous state in the United States."
+  },
+  {
+    "name": "Minnesota",
+    "abbreviation": "MN",
+    "lede": "Minnesota is a state in the United States. It is the 25th most populous state in the United States."
+  },
+  {
+    "name": "Mississippi",
+    "abbreviation": "MS",
+    "lede": "Mississippi is a state in the United States. It is the 26th most populous state in the United States."
+  },
+  {
+    "name": "Missouri",
+    "abbreviation": "MO",
+    "lede": "Missouri is a state in the United States. It is the 27th most populous state in the United States."
+  },
+  {
+    "name": "Montana",
+    "abbreviation": "MT",
+    "lede": "Montana is a state in the United States. It is the 28th most populous state in the United States."
+  },
+  {
+    "name": "Nebraska",
+    "abbreviation": "NE",
+    "lede": "Nebraska is a state in the United States. It is the 29th most populous state in the United States."
+  },
+  {
+    "name": "Nevada",
+    "abbreviation": "NV",
+    "lede": "Nevada is a state in the United States. It is the 30th most populous state in the United States."
+  },
+  {
+    "name": "New Hampshire",
+    "abbreviation": "NH",
+    "lede": "New Hampshire is a state in the United States. It is the 31st most populous state in the United States."
+  },
+  {
+    "name": "New Jersey",
+    "abbreviation": "NJ",
+    "lede": "New Jersey is a state in the United States. It is the 32nd most populous state in the United States."
+  },
+  {
+    "name": "New Mexico",
+    "abbreviation": "NM",
+    "lede": "New Mexico is a state in the United States. It is the 33rd most populous state in the United States."
+  },
+  {
+    "name": "New York",
+    "abbreviation": "NY",
+    "lede": "New York is a state in the United States. It is the 34th most populous state in the United States."
+  },
+  {
+    "name": "North Carolina",
+    "abbreviation": "NC",
+    "lede": "North Carolina is a state in the United States. It is the 35th most populous state in the United States."
+  },
+  {
+    "name": "North Dakota",
+    "abbreviation": "ND",
+    "lede": "North Dakota is a state in the United States. It is the 36th most populous state in the United States."
+  },
+  {
+    "name": "Ohio",
+    "abbreviation": "OH",
+    "lede": "Ohio is a state in the United States. It is the 37th most populous state in the United States."
+  },
+  {
+    "name": "Oklahoma",
+    "abbreviation": "OK",
+    "lede": "Oklahoma is a state in the United States. It is the 38th most populous state in the United States."
+  },
+  {
+    "name": "Oregon",
+    "abbreviation": "OR",
+    "lede": "Oregon is a state in the United States. It is the 39th most populous state in the United States."
+  },
+  {
+    "name": "Pennsylvania",
+    "abbreviation": "PA",
+    "lede": "Pennsylvania is a state in the United States. It is the 40th most populous state in the United States."
+  },
+  {
+    "name": "Rhode Island",
+    "abbreviation": "RI",
+    "lede": "Rhode Island is a state in the United States. It is the 41st most populous state in the United States."
+  },
+  {
+    "name": "South Carolina",
+    "abbreviation": "SC",
+    "lede": "South Carolina is a state in the United States. It is the 42nd most populous state in the United States."
+  },
+  {
+    "name": "South Dakota",
+    "abbreviation": "SD",
+    "lede": "South Dakota is a state in the United States. It is the 43rd most populous state in the United States."
+  },
+  {
+    "name": "Tennessee",
+    "abbreviation": "TN",
+    "lede": "Tennessee is a state in the United States. It is the 44th most populous state in the United States."
+  },
+  {
+    "name": "Texas",
+    "abbreviation": "TX",
+    "lede": "Texas is a state in the United States. It is the 45th most populous state in the United States."
+  },
+  {
+    "name": "Utah",
+    "abbreviation": "UT",
+    "lede": "Utah is a state in the United States. It is the 46th most populous state in the United States."
+  },
+  {
+    "name": "Vermont",
+    "abbreviation": "VT",
+    "lede": "Vermont is a state in the United States. It is the 47th most populous state in the United States."
+  },
+  {
+    "name": "Virginia",
+    "abbreviation": "VA",
+    "lede": "Virginia is a state in the United States. It is the 48th most populous state in the United States."
+  },
+  {
+    "name": "Washington",
+    "abbreviation": "WA",
+    "lede": "Washington is a state in the United States. It is the 49th most populous state in the United States."
+  },
+  {
+    "name": "West Virginia",
+    "abbreviation": "WV",
+    "lede": "West Virginia is a state in the United States. It is the 50th most populous state in the United States."
+  },
+  {
+    "name": "Wisconsin",
+    "abbreviation": "WI",
+    "lede": "Wisconsin is a state in the United States. It is the 51st most populous state in the United States."
+  },
+  {
+    "name": "Wyoming",
+    "abbreviation": "WY",
+    "lede": "Wyoming is a state in the United States. It is the 52nd most populous state in the United States."
+  }
+]
