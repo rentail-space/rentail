@@ -16,11 +16,12 @@ export async function loader({ params }: Route.LoaderArgs) {
 
   const centers = await prisma.property.findMany({
     include: {
-      spaces: true,
+      spaces: { where: { available: true } },
     },
     orderBy: { name: "asc" },
     where: { state: state.abbreviation },
   });
+
   return { centers, state };
 }
 
@@ -35,6 +36,14 @@ export default function StatePage({
 
   return (
     <main className="container mx-auto my-10 space-y-8">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated data
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schemaData(loaderData)),
+        }}
+      />
+
       <div className="flex w-full items-center">
         <Link
           to="/states"
@@ -65,64 +74,74 @@ export default function StatePage({
         itemScope
         itemType="https://schema.org/ItemList"
       >
-        {centers.map((center) => (
+        {centers.map((center, index) => (
           <li
             key={center.id}
-            className="space-y-2 pb-4"
+            className="pb-4"
             itemScope
             itemType="https://schema.org/ListItem"
+            itemProp="itemListElement"
           >
-            <h2
-              className="flex flex-row items-center justify-between gap-2 font-bold text-xl"
-              itemProp="name"
+            <Link
+              className="space-y-2 hover:*:text-blue-500"
+              to={`/center/${center.id}`}
+              itemProp="url"
             >
-              <Link to={`/center/${center.id}`}>{center.name}</Link>
-              <span className="flex flex-row flex-nowrap items-center gap-2 text-gray-500 text-sm">
-                {center.city}
-                <MapPinIcon
-                  onClick={(event) => {
-                    event.preventDefault();
-                    centerRef.current?.({
-                      longitude: center.longitude ?? 0,
-                      latitude: center.latitude ?? 0,
-                    });
-                  }}
-                  className="h-6 w-6 cursor-pointer text-blue-500"
-                />
-              </span>
-            </h2>
-
-            <p className="space-x-2">
-              {center.rating && center.rating >= 3 && (
-                <RatingStars rating={center.rating} />
-              )}
-              <span itemProp="description">{center.summary}</span>
-            </p>
-
-            <CenterStats>
-              {center.numberOfStores >= 30 && (
-                <span>{center.numberOfStores.toLocaleString()} stores</span>
-              )}
-              {center.squareFootage >= 100000 && (
-                <span>{center.squareFootage.toLocaleString()} square feet</span>
-              )}
-              {center.openFrom && center.openUntil && (
-                <span>
-                  {timeOfDay(center.openFrom)} &mdash;{" "}
-                  {timeOfDay(center.openUntil)}
+              <meta itemProp="position" content={String(index + 1)} />
+              <h2
+                className="flex flex-row items-center justify-between gap-2 font-bold text-xl"
+                itemProp="name"
+              >
+                <span>{center.name}</span>
+                <span className="flex flex-row flex-nowrap items-center gap-2 text-gray-500 text-sm">
+                  {center.city}
+                  <MapPinIcon
+                    onClick={(event) => {
+                      event.preventDefault();
+                      centerRef.current?.({
+                        longitude: center.longitude ?? 0,
+                        latitude: center.latitude ?? 0,
+                      });
+                    }}
+                    className="h-6 w-6 cursor-pointer text-blue-500"
+                  />
                 </span>
-              )}
-              {center.rating && center.rating >= 3 && (
-                <span>
-                  {clamp(center.rating, 1, 5).toFixed(1)}
-                  {center.reviewCount && center.reviewCount >= 5 ? (
-                    <> from {center.reviewCount.toLocaleString()} reviews</>
-                  ) : (
-                    " stars"
-                  )}
-                </span>
-              )}
-            </CenterStats>
+              </h2>
+
+              <p className="space-x-2">
+                {center.rating && center.rating >= 3 && (
+                  <RatingStars rating={center.rating} />
+                )}
+                <span itemProp="description">{center.summary}</span>
+              </p>
+
+              <CenterStats>
+                {center.numberOfStores >= 30 && (
+                  <span>{center.numberOfStores.toLocaleString()} stores</span>
+                )}
+                {center.squareFootage >= 100000 && (
+                  <span>
+                    {center.squareFootage.toLocaleString()} square feet
+                  </span>
+                )}
+                {center.openFrom && center.openUntil && (
+                  <span>
+                    {timeOfDay(center.openFrom)} &mdash;{" "}
+                    {timeOfDay(center.openUntil)}
+                  </span>
+                )}
+                {center.rating && center.rating >= 3 && (
+                  <span>
+                    {clamp(center.rating, 1, 5).toFixed(1)}
+                    {center.reviewCount && center.reviewCount >= 5 ? (
+                      <> from {center.reviewCount.toLocaleString()} reviews</>
+                    ) : (
+                      " stars"
+                    )}
+                  </span>
+                )}
+              </CenterStats>
+            </Link>
           </li>
         ))}
       </ul>
@@ -161,4 +180,72 @@ function CenterStats({ children }: { children: React.ReactNode }) {
       ))}
     </div>
   );
+}
+
+function schemaData({
+  centers,
+  state,
+}: {
+  centers: Array<{
+    id: string;
+    name: string;
+    city: string | null;
+    state: string;
+    address: string | null;
+    latitude: number | null;
+    longitude: number | null;
+    rating: number | null;
+    reviewCount: number | null;
+    summary: string | null;
+    squareFootage: number | null;
+    numberOfStores: number | null;
+  }>;
+  state: { name: string; abbreviation: string };
+}) {
+  const itemListElements = centers.map((center, index) => {
+    const item: Record<string, unknown> = {
+      "@type": ["ListItem", "ShoppingCenter"],
+      position: index + 1,
+      name: `${center.name}, ${center.city}`,
+      url: `https://rentail.space/center/${center.id}`,
+    };
+
+    if (center.summary) item.description = center.summary;
+
+    if (center.address && center.city)
+      item.address = {
+        "@type": "PostalAddress",
+        streetAddress: center.address,
+        addressLocality: center.city,
+        addressRegion: center.state,
+        addressCountry: "US",
+      };
+
+    if (center.latitude && center.longitude)
+      item.geo = {
+        "@type": "GeoCoordinates",
+        latitude: center.latitude,
+        longitude: center.longitude,
+      };
+
+    if (center.rating && center.rating >= 3)
+      item.aggregateRating = {
+        "@type": "AggregateRating",
+        ratingValue: clamp(center.rating, 1, 5),
+        bestRating: 5,
+        worstRating: 1,
+        reviewCount: center.reviewCount,
+      };
+
+    return item;
+  });
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `Shopping Centers in ${state.abbreviation}`,
+    description: `Complete list of shopping centers and retail spaces in ${state.name}`,
+    numberOfItems: itemListElements.length,
+    itemListElement: itemListElements,
+  };
 }
