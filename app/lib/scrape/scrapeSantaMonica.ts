@@ -75,7 +75,7 @@ async function scrapeRetailSpaces() {
       return results;
     });
 
-    await updateSpace("santa-monica-place.json", spaces);
+    await updateSpace("ca/ca-santa-monica-place.json", spaces);
     return spaces;
   } finally {
     await browser.close();

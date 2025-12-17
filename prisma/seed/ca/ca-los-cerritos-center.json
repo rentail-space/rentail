@@ -9,7 +9,9 @@
   "country": "US",
   "phone": "+15624027467",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-los-cerritos-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-los-cerritos-center-1.jpg"
+  ],
   "summary": "Spacious shopping center offers a range of brand-name retailers, plus well-known chain restaurants.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -21,5 +23,41 @@
   "demographics": "Los Cerritos Center serves a diverse, middle to upper-middle-class trade area in the Gateway Cities region of Los Angeles County, attracting families and young professionals primarily in the 25-54 age range with median household incomes between $60,000-$90,000. The center draws from surrounding communities including Cerritos, Norwalk, Artesia, and La Mirada, appealing to value-conscious shoppers seeking mainstream retail brands and dining options. Visitors include multigenerational households and represent the area's diverse ethnic composition, with shopping patterns favoring weekend family outings and combining retail purchases with dining and entertainment activities.",
   "centerType": "RegionalMall",
   "tier": 2,
-  "spaces": []
+  "spaces": [
+    {
+      "number": "9008",
+      "type": "Cart",
+      "size": 150,
+      "floor": 1,
+      "available": true
+    },
+    {
+      "number": "CC44",
+      "type": "Cart",
+      "size": 60,
+      "floor": 1,
+      "available": false
+    },
+    {
+      "number": "L46",
+      "type": "Cart",
+      "size": 60,
+      "floor": 1,
+      "available": true
+    },
+    {
+      "number": "L82",
+      "type": "Cart",
+      "size": 60,
+      "floor": 1,
+      "available": false
+    },
+    {
+      "number": "NN47A",
+      "type": "Cart",
+      "size": 60,
+      "floor": 1,
+      "available": false
+    }
+  ]
 }

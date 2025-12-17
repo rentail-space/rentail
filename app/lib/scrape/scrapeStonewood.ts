@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
-import { existsSync } from "node:fs";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import ora from "ora";
 import { chromium } from "playwright";
 
 interface RetailSpace {
@@ -16,14 +16,9 @@ interface RetailSpace {
 async function scrapeSpaces() {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
+  const spinner = ora("Scraping Stonewood Center...").start();
 
   try {
-    console.info("Navigating to Stonewood Center leasing page...");
-    await page.goto(
-      "https://quikspace.macerich.com/commercial-property/us/ca/downey/stonewood-center-1/",
-    );
-
-    console.info("Extracting space data...");
     const spaces = await page.evaluate(() => {
       const results: RetailSpace[] = [];
       const nodes = document.querySelectorAll(".space");
@@ -106,41 +101,8 @@ async function scrapeSpaces() {
 
       return results;
     });
-
-    console.info("Found %d spaces", spaces.length);
-
-    // Try to find and associate images
-    const imageDirs = resolve("stonewood-images");
-    if (!existsSync(imageDirs)) {
-      await mkdir(imageDirs, { recursive: true });
-    }
-
-    // Look for images related to each space
-    for (const space of spaces) {
-      try {
-        const imageUrl = await page.evaluate((spaceNum: string) => {
-          const images = Array.from(document.querySelectorAll("img"));
-          for (const img of images) {
-            const alt = img.getAttribute("alt") || "";
-            const src = img.getAttribute("src") || "";
-
-            if (alt.includes(spaceNum) || src.includes(spaceNum)) {
-              return src.startsWith("http") ? src : undefined;
-            }
-          }
-          return undefined;
-        }, space.number);
-
-        if (imageUrl) {
-          console.info("Found image for space %s", space.number);
-          space.imageURLs = [imageUrl];
-        }
-      } catch {
-        // Silent fail for image search
-      }
-    }
-
-    await updateSpace("stonewood-center.json", spaces);
+    await updateSpace("ca/ca-stonewood-center.json", spaces);
+    spinner.succeed(`Found ${spaces.length} spaces`);
     return spaces;
   } finally {
     await browser.close();
@@ -157,14 +119,6 @@ async function updateSpace(filename: string, spaces: RetailSpace[]) {
 }
 
 // Run the scraper
-scrapeSpaces()
-  .then((spaces) => {
-    console.info("\n✅ Successfully scraped %d spaces", spaces.length);
-    for (const space of spaces)
-      console.info(`  ${space.number} (${space.type})`);
-    process.exit(0);
-  })
-  .catch((error) => {
-    console.error("❌ Error scraping spaces:", error);
-    process.exit(1);
-  });
+const spaces = await scrapeSpaces();
+for (const space of spaces) console.info(`  ${space.number} (${space.type})`);
+process.exit(0);

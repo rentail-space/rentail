@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
-import { existsSync } from "node:fs";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import ora from "ora";
 import { chromium } from "playwright";
 
 interface Space {
@@ -16,9 +16,8 @@ interface Space {
 async function scrapeSpaces() {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
-
+  const spinner = ora("Scraping Los Cerritos Center...").start();
   try {
-    console.info("Navigating to Los Cerritos Center leasing page...");
     await page.goto(
       "https://quikspace.macerich.com/commercial-property/us/ca/cerritos/los-cerritos-center-1/",
     );
@@ -106,42 +105,14 @@ async function scrapeSpaces() {
 
       return results;
     });
-
-    console.info("Found %d spaces", spaces.length);
-
-    // Try to find and associate images
-    const imageDirs = resolve("los-cerritos-images");
-    if (!existsSync(imageDirs)) {
-      await mkdir(imageDirs, { recursive: true });
-    }
-
-    // Look for images related to each space
-    for (const space of spaces) {
-      try {
-        const imageUrl = await page.evaluate((spaceNum: string) => {
-          const images = Array.from(document.querySelectorAll("img"));
-          for (const img of images) {
-            const alt = img.getAttribute("alt") || "";
-            const src = img.getAttribute("src") || "";
-
-            if (alt.includes(spaceNum) || src.includes(spaceNum)) {
-              return src.startsWith("http") ? src : undefined;
-            }
-          }
-          return undefined;
-        }, space.number);
-
-        if (imageUrl) {
-          console.info("Found image for space %s", space.number);
-          space.imageURLs = [imageUrl];
-        }
-      } catch {
-        // Silent fail for image search
-      }
-    }
-
-    await updateSpace("los-cerritos-center.json", spaces);
+    await updateSpace("ca/ca-los-cerritos-center.json", spaces);
+    spinner.succeed(`Found ${spaces.length} spaces`);
     return spaces;
+  } catch (error) {
+    spinner.fail(
+      `Failed to scrape spaces: ${error instanceof Error ? error.message : String(error)}`,
+    );
+    throw error;
   } finally {
     await browser.close();
   }
@@ -157,14 +128,6 @@ async function updateSpace(filename: string, spaces: Space[]) {
 }
 
 // Run the scraper
-scrapeSpaces()
-  .then((spaces) => {
-    console.info("\n✅ Successfully scraped %d spaces", spaces.length);
-    for (const space of spaces)
-      console.info(`  ${space.number} (${space.type})`);
-    process.exit(0);
-  })
-  .catch((error) => {
-    console.error("❌ Error scraping spaces:", error);
-    process.exit(1);
-  });
+const spaces = await scrapeSpaces();
+for (const space of spaces) console.info(`  ${space.number} (${space.type})`);
+process.exit(0);
