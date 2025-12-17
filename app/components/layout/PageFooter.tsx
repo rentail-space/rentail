@@ -17,6 +17,7 @@ const links = [
       { to: "/blog", label: "Blog" },
       { to: "mailto:hello@rentail.space", label: "Contact" },
       { to: "/glossary", label: "Glossary" },
+      { to: "/for-ai-assistants", label: "For AI Assistants" },
     ],
   },
   {

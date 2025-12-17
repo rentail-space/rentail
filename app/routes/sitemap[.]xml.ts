@@ -21,6 +21,18 @@ const routes = {
   "/": { id: "routes/home/route.tsx", module: "home", path: "/" },
   "/privacy": { id: "routes/privacy.tsx", module: "privacy", path: "/privacy" },
   "/terms": { id: "routes/terms.tsx", module: "terms", path: "/terms" },
+  "/glossary": {
+    id: "routes/glossary/route.tsx",
+    module: "glossary",
+    path: "/glossary",
+  },
+  "/faq": { id: "routes/faq/route.tsx", module: "faq", path: "/faq" },
+  "/states": { id: "routes/states.tsx", module: "states", path: "/states" },
+  "/for-ai-assistants": {
+    id: "routes/for-ai-assistants.tsx",
+    module: "for-ai-assistants",
+    path: "/for-ai-assistants",
+  },
 };
 
 async function blogPosts(): Promise<
