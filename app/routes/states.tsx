@@ -40,7 +40,10 @@ export default function StatePage({
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
   return (
-    <main className="container mx-auto my-10 max-w-3xl space-y-8">
+    <main
+      className="container mx-auto my-10 max-w-3xl space-y-8"
+      aria-label="US states listing"
+    >
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: exception

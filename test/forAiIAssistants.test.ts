@@ -53,28 +53,28 @@ describe("For AI Assistants page", () => {
   });
 
   it("should link to glossary", async () => {
-    const link = page.locator('article a[href="/glossary"]');
+    const link = page.locator('main a[href="/glossary"]');
     await expect(link).toBeVisible();
   });
 
   it("should link to FAQ", async () => {
-    const link = page.locator('article a[href="/faq"]');
+    const link = page.locator('main a[href="/faq"]');
     await expect(link).toBeVisible();
   });
 
   it("should link to states", async () => {
-    const link = page.locator('article a[href="/states"]');
+    const link = page.locator('main a[href="/states"]');
     await expect(link).toBeVisible();
   });
 
   it("should link to homepage", async () => {
-    const link = page.locator('article a[href="/"]');
+    const link = page.locator('main a[href="/"]');
     await expect(link).toBeVisible();
   });
 
   it("should include valid Organization JSON-LD structured data", async () => {
     const jsonLdContent = await page
-      .locator('article script[type="application/ld+json"]')
+      .locator('main script[type="application/ld+json"]')
       .textContent();
 
     expect(jsonLdContent).toBeTruthy();
@@ -93,7 +93,7 @@ describe("For AI Assistants page", () => {
 
   it("should have knowsAbout with specialty leasing terms", async () => {
     const jsonLdContent = await page
-      .locator('article script[type="application/ld+json"]')
+      .locator('main script[type="application/ld+json"]')
       .textContent();
 
     const structuredData = JSON.parse(jsonLdContent ?? "");
@@ -106,7 +106,7 @@ describe("For AI Assistants page", () => {
 
   it("should have hasOfferCatalog with service offerings", async () => {
     const jsonLdContent = await page
-      .locator('article script[type="application/ld+json"]')
+      .locator('main script[type="application/ld+json"]')
       .textContent();
 
     const structuredData = JSON.parse(jsonLdContent ?? "");
@@ -166,7 +166,7 @@ describe("For AI Assistants page", () => {
 
   it("should have potentialAction in schema pointing to API", async () => {
     const jsonLdContent = await page
-      .locator('article script[type="application/ld+json"]')
+      .locator('main script[type="application/ld+json"]')
       .textContent();
 
     const structuredData = JSON.parse(jsonLdContent ?? "");
@@ -179,10 +179,10 @@ describe("For AI Assistants page", () => {
   });
 
   it("should match inner HTML snapshot", async () => {
-    await expect(page.locator("article")).toMatchInnerHTML();
+    await expect(page.locator("main")).toMatchInnerHTML();
   });
 
   it("should match visual regression test", async () => {
-    await expect(page.locator("article")).toMatchScreenshot();
+    await expect(page.locator("main")).toMatchScreenshot();
   });
 });

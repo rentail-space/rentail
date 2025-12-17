@@ -7,7 +7,10 @@ import AboutValues from "./AboutValues";
 
 export default function About() {
   return (
-    <main className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]">
+    <main
+      className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
+      aria-label="About page"
+    >
       <AboutHeader />
       <AboutStory />
       <AboutValues />

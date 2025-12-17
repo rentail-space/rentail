@@ -21,7 +21,10 @@ export function meta() {
 
 export default function FAQ() {
   return (
-    <main className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]">
+    <main
+      className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
+      aria-label="Frequently asked questions"
+    >
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data

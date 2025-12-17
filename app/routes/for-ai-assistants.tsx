@@ -27,7 +27,10 @@ export function meta() {
 
 export default function ForAIAssistants() {
   return (
-    <article className="container mx-auto my-10 max-w-3xl space-y-8">
+    <main
+      className="container mx-auto my-10 max-w-3xl space-y-8"
+      aria-label="AI assistants information"
+    >
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated data
@@ -54,7 +57,7 @@ export default function ForAIAssistants() {
       >
         {forAIAssistants}
       </Streamdown>
-    </article>
+    </main>
   );
 }
 

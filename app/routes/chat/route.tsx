@@ -64,54 +64,56 @@ export default function ChatPage({
   });
 
   return (
-    <StickToBottom
-      initial="smooth"
-      resize="smooth"
-      className="inset-0 flex h-screen flex-col justify-between bg-[hsl(60,100%,99%)]"
-    >
-      <PageHeader />
-      <div className="flex-1 overflow-y-auto scroll-smooth px-4 py-4">
-        <StickToBottom.Content>
-          <div className="flex flex-row gap-4 lg:pr-4">
-            <Messages
-              error={error}
-              isAborted={isAborted}
-              isTyping={status === "streaming"}
-              messages={messages}
-              setQuery={setQuery}
-            />
+    <main aria-label="Chat interface">
+      <StickToBottom
+        initial="smooth"
+        resize="smooth"
+        className="inset-0 flex h-screen flex-col justify-between bg-[hsl(60,100%,99%)]"
+      >
+        <PageHeader />
+        <div className="flex-1 overflow-y-auto scroll-smooth px-4 py-4">
+          <StickToBottom.Content>
+            <div className="flex flex-row gap-4 lg:pr-4">
+              <Messages
+                error={error}
+                isAborted={isAborted}
+                isTyping={status === "streaming"}
+                messages={messages}
+                setQuery={setQuery}
+              />
 
-            <Centers
-              centers={centersFetcher.data?.centers ?? loaderData.centers}
-              displayName={
-                centersFetcher.data?.displayName ?? loaderData.displayName
-              }
-            />
-          </div>
-        </StickToBottom.Content>
-      </div>
+              <Centers
+                centers={centersFetcher.data?.centers ?? loaderData.centers}
+                displayName={
+                  centersFetcher.data?.displayName ?? loaderData.displayName
+                }
+              />
+            </div>
+          </StickToBottom.Content>
+        </div>
 
-      <ScrollButton />
+        <ScrollButton />
 
-      <InputForm
-        isResponding={status === "streaming"}
-        isSubmitting={status === "submitted"}
-        query={query ?? ""}
-        sendMessage={async (message: string) => {
-          await sendMessage({
-            parts: [{ text: message, type: "text" }],
-            role: "user",
-          });
-        }}
-        setQuery={setQuery}
-        stopChat={() => {
-          stop();
-          stopFetcher.submit(`/api/chat/${chatId}/stop`, {
-            method: "POST",
-            preventScrollReset: true,
-          });
-        }}
-      />
-    </StickToBottom>
+        <InputForm
+          isResponding={status === "streaming"}
+          isSubmitting={status === "submitted"}
+          query={query ?? ""}
+          sendMessage={async (message: string) => {
+            await sendMessage({
+              parts: [{ text: message, type: "text" }],
+              role: "user",
+            });
+          }}
+          setQuery={setQuery}
+          stopChat={() => {
+            stop();
+            stopFetcher.submit(`/api/chat/${chatId}/stop`, {
+              method: "POST",
+              preventScrollReset: true,
+            });
+          }}
+        />
+      </StickToBottom>
+    </main>
   );
 }

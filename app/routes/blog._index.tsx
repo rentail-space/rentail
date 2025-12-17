@@ -15,7 +15,10 @@ export default function Blog({
   loaderData: { posts: BlogPost[] };
 }) {
   return (
-    <main className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]">
+    <main
+      className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
+      aria-label="Blog"
+    >
       <section className="bg-[hsl(60,100%,99%)] px-4 py-20 md:py-32">
         <div className="container mx-auto max-w-4xl text-center">
           <h1 className="mb-6 font-bold text-5xl text-black leading-tight md:text-6xl">

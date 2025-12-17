@@ -37,7 +37,10 @@ export default function Home({
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
   return (
-    <main className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]">
+    <main
+      className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
+      aria-label="Home page"
+    >
       <HeroSection />
       <FeaturesSection />
       <CTASection />
