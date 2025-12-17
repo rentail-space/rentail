@@ -12,6 +12,14 @@ export default function Center({
 }) {
   return (
     <div className="mx-auto my-10 flex max-w-4xl flex-col gap-6 px-4">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schemaData(center)),
+        }}
+      />
+
       <h1 className="rounded-md border-2 border-black bg-[hsl(37,92%,65%)] px-6 py-3 font-bold text-4xl text-black shadow-[6px_6px_0px_0px_black]">
         {center.name}
       </h1>
@@ -45,4 +53,36 @@ export default function Center({
       </section>
     </div>
   );
+}
+
+function schemaData(center: PropertyGetPayload<{ include: { spaces: true } }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ShoppingCenter",
+    name: center.name,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: center.address,
+      addressLocality: center.city,
+      addressRegion: center.state,
+      addressCountry: center.country || "US",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: center.latitude,
+      longitude: center.longitude,
+    },
+    ...(center.phone && { telephone: center.phone }),
+    ...(center.website && { url: center.website }),
+    ...(center.imageURLs.length > 0 && { image: center.imageURLs }),
+    ...(center.description && { description: center.description }),
+    ...(center.openFrom &&
+      center.openUntil && {
+        openingHoursSpecification: {
+          "@type": "OpeningHoursSpecification",
+          opens: `${Math.floor(center.openFrom / 100)}:${String(center.openFrom % 100).padStart(2, "0")}`,
+          closes: `${Math.floor(center.openUntil / 100)}:${String(center.openUntil % 100).padStart(2, "0")}`,
+        },
+      }),
+  };
 }
