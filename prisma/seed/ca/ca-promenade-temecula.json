@@ -7,9 +7,7 @@
   "latitude": 33.5251895,
   "longitude": -117.1541469,
   "country": "US",
-  "imageURLs": [
-    "/images/malls/ca-promenade-temecula-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-promenade-temecula-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2100,
   "phone": "+19512960975",

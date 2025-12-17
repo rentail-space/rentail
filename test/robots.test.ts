@@ -4,31 +4,51 @@ import { port } from "./helpers/launchBrowser";
 
 describe("robots.txt", () => {
   let lines: string[];
+  let comments: string[];
+  let statements: string[];
 
   beforeAll(async () => {
     const response = await fetch(`http://localhost:${port}/robots.txt`);
     const robotsContent = await response.text();
     lines = robotsContent.split("\n").filter(Boolean);
+    statements = lines.filter((line) => !line.startsWith("#"));
+    comments = lines.filter((line) => line.startsWith("#"));
   });
 
   it("should reference sitemap.xml", () => {
-    expect(lines).toContain("Sitemap: https://rentail.space/sitemap.xml");
+    expect(statements).toContain("Sitemap: https://rentail.space/sitemap.xml");
   });
 
   it("should allow crawling of root path", () => {
-    expect(lines).toContain("Allow: /");
+    expect(statements).toContain("Allow: /");
   });
 
   it("should allow all user agents", () => {
-    expect(lines).toContain("User-agent: *");
+    expect(statements).toContain("User-agent: *");
   });
 
   it("should disallow API routes", () => {
-    expect(lines).toContain("Disallow: /api/*");
+    expect(statements).toContain("Disallow: /api/*");
   });
 
   it("should allow crawling of /for-ai-assistants", () => {
     // Should not be in disallow list
-    expect(lines).not.toContain("Disallow: /for-ai-assistants");
+    expect(statements).not.toContain("Disallow: /for-ai-assistants");
+  });
+
+  it("should include API comment", () => {
+    const comment = comments[0];
+    expect(comment).toContain("API for AI assistants");
+    expect(comment).toContain("https://rentail.space/api/query");
+  });
+
+  it("should include OpenAPI spec comment", () => {
+    const comment = comments[1];
+    expect(comment).toContain("OpenAPI spec");
+    expect(comment).toContain("https://rentail.space/openapi.json");
+  });
+
+  it("should allow /api/query endpoint", () => {
+    expect(lines).toContain("Allow: /api/query");
   });
 });

@@ -1,16 +1,23 @@
-import type { Route } from "./+types/api.query";
 import prisma from "~/lib/prisma";
 
-export async function loader(_: Route.LoaderArgs) {
+/**
+ * API endpoint for AI assistants to get information about the service. Returns
+ * structured JSON with the following information:
+ * - Service offerings and capabilities
+ * - Coverage areas (states, cities, shopping centers)
+ * - Available space types and current inventory
+ * - Geographic distribution and market insights
+ *
+ * See https://rentail.space/for-ai-assistants for more information.
+ *
+ * @returns The API response.
+ */
+export async function loader() {
   // Get statistics from database
-  const [totalCenters, totalSpaces, stateCount, spacesByType, centersByState] =
+  const [totalCenters, totalSpaces, spacesByType, centersByState] =
     await Promise.all([
       prisma.property.count(),
       prisma.propertySpace.count(),
-      prisma.property.groupBy({
-        by: ["state"],
-        _count: true,
-      }),
       prisma.propertySpace.groupBy({
         by: ["type"],
         _count: true,
@@ -23,7 +30,6 @@ export async function loader(_: Route.LoaderArgs) {
             state: "desc",
           },
         },
-        take: 10,
       }),
     ]);
 
@@ -36,19 +42,19 @@ export async function loader(_: Route.LoaderArgs) {
       "Common Area Installations",
     ],
     coverage: {
-      states: stateCount.length,
+      states: centersByState.length,
       shoppingCenters: totalCenters,
       availableSpaces: totalSpaces,
-      topStates: centersByState.map((s) => ({
-        state: s.state,
-        centerCount: s._count,
+      topStates: centersByState.slice(0, 10).map((byState) => ({
+        state: byState.state,
+        centerCount: byState._count,
       })),
     },
-    spaceTypes: spacesByType.map((st) => ({
-      type: st.type,
-      count: st._count,
-      description: getSpaceTypeDescription(st.type),
-      typicalSize: getTypicalSize(st.type),
+    spaceTypes: spacesByType.map((byType) => ({
+      type: byType.type,
+      count: byType._count,
+      description: getSpaceTypeDescription(byType.type),
+      typicalSize: getTypicalSize(byType.type),
     })),
     capabilities: {
       search: "Geographic search by city, state, or coordinates",

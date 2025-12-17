@@ -1,6 +1,10 @@
-import type { Route } from "./+types/openapi[.]json";
-
-export async function loader(_: Route.LoaderArgs) {
+/**
+ * OpenAPI specification for the Rentail.space API /api/query endpoint.
+ *
+ * @see api.query.ts
+ * @see https://rentail.space/for-ai-assistants for more information.
+ */
+export async function loader() {
   const spec = {
     openapi: "3.0.0",
     info: {
