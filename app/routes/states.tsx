@@ -2,6 +2,24 @@ import { Link } from "react-router";
 import { Streamdown } from "streamdown";
 import prisma from "~/lib/prisma";
 
+export function meta() {
+  return [
+    {
+      title: "US States - Specialty Leasing Locations | Rentail.space",
+    },
+    {
+      name: "description",
+      content:
+        "Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces in shopping centers across all 50 US states. Real-time availability for seasonal and temporary retail locations.",
+    },
+    {
+      name: "keywords",
+      content:
+        "specialty leasing by state, kiosk rental locations, pop-up shop states, mall cart by state, temporary retail locations, shopping centers by state",
+    },
+  ];
+}
+
 export async function loader() {
   const states = await prisma.state.findMany({
     orderBy: { name: "asc" },

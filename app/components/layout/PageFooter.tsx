@@ -6,6 +6,7 @@ const links = [
     title: "Product",
     links: [
       { to: "/pricing", label: "Pricing" },
+      { to: "/states", label: "US States" },
       { to: "/faq", label: "FAQ" },
     ],
   },
@@ -15,7 +16,7 @@ const links = [
       { to: "/about", label: "About" },
       { to: "/blog", label: "Blog" },
       { to: "mailto:hello@rentail.space", label: "Contact" },
-      { to: "/states", label: "US States" },
+      { to: "/glossary", label: "Glossary" },
     ],
   },
   {

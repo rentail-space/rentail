@@ -65,9 +65,7 @@ describe("Glossary page", () => {
     expect(structuredData["@context"]).toBe("https://schema.org");
     expect(structuredData["@type"]).toBe("DefinedTermSet");
     expect(structuredData.name).toBe("Specialty Leasing Glossary");
-    expect(
-      structuredData.description,
-    ).toContain("Authoritative glossary");
+    expect(structuredData.description).toContain("Authoritative glossary");
     expect(Array.isArray(structuredData.hasDefinedTerm)).toBe(true);
     expect(structuredData.hasDefinedTerm.length).toBe(expectedTerms.length);
 
@@ -102,9 +100,7 @@ describe("Glossary page", () => {
   it("should have proper microdata attributes for each term", async () => {
     // Check first term has all required microdata
     const firstTerm = page
-      .locator(
-        "div[itemscope][itemtype='https://schema.org/DefinedTerm']",
-      )
+      .locator("div[itemscope][itemtype='https://schema.org/DefinedTerm']")
       .first();
 
     const name = firstTerm.locator("h2[itemprop='name']");

@@ -7,6 +7,25 @@ import CTASection from "./WaitlistSection";
 
 export const handle = { headerLinks: [] };
 
+export function meta() {
+  return [
+    {
+      title:
+        "Rentail.space - Specialty Leasing & Short-Term Retail Spaces in Shopping Centers",
+    },
+    {
+      name: "description",
+      content:
+        "The comprehensive marketplace for specialty leasing and short-term retail spaces in US shopping centers. Find kiosks, pop-up shops, carts, and temporary retail locations nationwide. Real-time availability, transparent pricing, AI-powered matching.",
+    },
+    {
+      name: "keywords",
+      content:
+        "specialty leasing, kiosk rental, pop-up shop, mall cart, temporary retail space, short-term lease, shopping center, seasonal retail, retail kiosk, mall kiosk rental, cart space rental",
+    },
+  ];
+}
+
 export async function loader() {
   const posts = await recentBlogPosts();
   return { posts };
