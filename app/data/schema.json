@@ -4,37 +4,109 @@
     {
       "@type": "Organization",
       "name": "Rentail.space",
+      "alternateName": "Rentail",
+      "legalName": "Rentail.space",
+      "description": "The comprehensive marketplace for specialty leasing and short-term retail spaces in US shopping centers. Find kiosks, pop-up shops, carts, and temporary retail locations nationwide.",
       "email": "hello@rentail.space",
       "url": "https://rentail.space",
+      "logo": "https://rentail.space/images/logo.png",
+      "image": "https://rentail.space/images/og-image.png",
       "address": {
         "@type": "PostalAddress",
+        "addressLocality": "Los Angeles",
         "addressRegion": "CA",
-        "addressCountry": "US",
-        "addressLocality": "Los Angeles"
+        "addressCountry": "US"
       },
-      "image": "https://rentail.space/images/og-image.png",
-      "logo": "https://rentail.space/images/logo.png",
-      "sameAs": ["https://www.linkedin.com/company/rentail-space"]
+      "sameAs": ["https://www.linkedin.com/company/rentail-space"],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "hello@rentail.space",
+        "contactType": "Customer Service",
+        "areaServed": "US",
+        "availableLanguage": "English"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "knowsAbout": [
+        "Specialty Leasing",
+        "Short-term Retail Leasing",
+        "Mall Kiosks",
+        "Pop-up Shops",
+        "Cart Rentals",
+        "Temporary Retail Spaces",
+        "Shopping Center Leasing",
+        "Kiosk Rentals",
+        "Retail Space Marketplace",
+        "Seasonal Retail Opportunities"
+      ],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Specialty Leasing Marketplace",
+            "description": "Platform connecting businesses with short-term retail spaces in shopping centers",
+            "serviceType": "Retail Space Rental",
+            "areaServed": "US"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Kiosk Space Rental",
+            "description": "Find and book kiosk spaces in shopping malls nationwide",
+            "serviceType": "Kiosk Rental"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Pop-up Shop Space Rental",
+            "description": "Discover temporary storefront opportunities in retail centers",
+            "serviceType": "Pop-up Shop Rental"
+          }
+        }
+      ],
+      "slogan": "Find your specialty lease with ease",
+      "foundingDate": "2024",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "value": "10"
+      }
     },
     {
       "@id": "https://rentail.space",
       "@type": "WebSite",
-      "description": "Marketplace for specialty retail spaces and short-term leases. Connect businesses with shopping centers in Los Angeles for pop-up shops and seasonal retail opportunities.",
-      "inLanguage": "en-US",
       "name": "Rentail.space",
+      "alternateName": "Rentail",
+      "description": "Marketplace for specialty retail spaces and short-term leases. Connect businesses with shopping centers nationwide for pop-up shops, kiosks, carts, and seasonal retail opportunities.",
+      "inLanguage": "en-US",
+      "url": "https://rentail.space",
       "potentialAction": {
         "@type": "SearchAction",
-        "query-input": "required name=search_term_string",
-        "target": "https://rentail.space/chat?q={search_term_string}"
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://rentail.space/chat?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
       },
-      "url": "https://rentail.space"
+      "about": {
+        "@type": "Thing",
+        "name": "Specialty Leasing",
+        "description": "Short-term retail space leasing in shopping centers, including kiosks, pop-up shops, carts, and temporary storefronts"
+      },
+      "keywords": "specialty leasing, kiosk rental, pop-up shop, temporary retail space, mall cart, short-term lease, shopping center, seasonal retail"
     },
     {
       "@id": "https://rentail.space#primaryimage",
       "@type": "ImageObject",
+      "name": "Hero Image",
       "caption": "Two people sharing and exchanging items",
       "contentUrl": "https://rentail.space/images/hero-image.jpg",
-      "name": "Hero Image",
       "url": "https://rentail.space/images/hero-image.jpg",
       "height": 533,
       "width": 800
