@@ -10,12 +10,12 @@ import PageHeader from "~/components/layout/PageHeader";
 import findNearbyCenters from "~/lib/findNearbyCenters";
 import { findUserAndLastChat } from "~/lib/sessions.server";
 import welcome from "~/prompts/welcome.md?raw";
+import type { loader as rootLoader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
-import Centers from "./Centers";
-import type { loader as rootLoader } from "~/root";
 import type { Route } from "./+types/route";
+import Centers from "./Centers";
 
 export const handle = { hideLayout: true };
 
@@ -72,7 +72,7 @@ export default function ChatPage({
       >
         <PageHeader />
         <div className="flex-1 overflow-y-auto scroll-smooth px-4 py-4">
-          <StickToBottom.Content>
+          <StickToBottom.Content className="flex h-full flex-col justify-end">
             <div className="flex flex-row gap-4 lg:pr-4">
               <Messages
                 error={error}
