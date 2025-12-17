@@ -42,7 +42,7 @@ jobs:
           version: latest
 
       - name: Scrape centers
-        run: scripts/scrape.sh
+        run: scripts/scrape-spaces.sh
 
       - name: Update database
         run: |

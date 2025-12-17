@@ -1,5 +1,8 @@
 #!/usr/bin/env tsx
 
+/**
+ *  doppler run -- ./scripts/collect.ts "south california"
+ */
 import collectCenters from "~/lib/scrape/collectCenters";
 
 const countyName = process.argv[2];

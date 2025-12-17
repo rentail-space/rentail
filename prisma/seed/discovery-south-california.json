@@ -189,6 +189,15 @@
     "longitude": -118.0539
   },
   {
+    "name": "Santa Monica Place",
+    "address": "395 Santa Monica Pl",
+    "city": "Santa Monica",
+    "state": "CA",
+    "website": "https://www.santamonicaplace.com",
+    "latitude": 34.013805216155106,
+    "longitude": -118.49378230362717
+  },
+  {
     "name": "South Bay Galleria",
     "address": "1815 Hawthorne Boulevard",
     "city": "Redondo Beach",
@@ -205,6 +214,15 @@
     "website": "https://www.southcoastplaza.com",
     "latitude": 33.6906,
     "longitude": -117.8867
+  },
+  {
+    "name": "Stonewood Center",
+    "address": "251 Stonewood St",
+    "city": "Downey",
+    "state": "CA",
+    "website": "https://www.shopstonewoodcenter.com",
+    "latitude": 33.93568820419466,
+    "longitude": -118.1194676766459
   },
   {
     "name": "Temecula Promenade Mall",

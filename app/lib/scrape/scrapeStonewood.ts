@@ -19,6 +19,10 @@ async function scrapeSpaces() {
   const spinner = ora("Scraping Stonewood Center...").start();
 
   try {
+    await page.goto(
+      "https://quikspace.macerich.com/commercial-property/us/ca/downey/stonewood-center-1/",
+    );
+
     const spaces = await page.evaluate(() => {
       const results: RetailSpace[] = [];
       const nodes = document.querySelectorAll(".space");

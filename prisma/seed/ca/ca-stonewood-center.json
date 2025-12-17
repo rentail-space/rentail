@@ -1,0 +1,97 @@
+{
+  "name": "Stonewood Center",
+  "address": "251 Stonewood Street",
+  "city": "Downey",
+  "state": "CA",
+  "website": "https://www.shopstonewoodcenter.com",
+  "latitude": 33.9354835,
+  "longitude": -118.11940329999997,
+  "country": "US",
+  "phone": "++1 562-904-1832",
+  "imageURLs": [
+    "/images/malls/ca-stonewood-center-1.jpg"
+  ],
+  "summary": "Popular brand-name shops, department stores & restaurants are the draw at this contemporary mall.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 13651,
+  "centerType": "RegionalMall",
+  "demographics": "Stonewood Center primarily serves middle-income families and young professionals in the Downey and southeastern Los Angeles County area, with a diverse demographic composition reflecting the local Hispanic, Asian, and Caucasian populations. The trade area includes households with median incomes in the $55,000-$85,000 range, with a strong representation of families with children and multigenerational households. Shopping patterns indicate a preference for value-oriented mainstream retailers, family dining options, and convenience-driven visits that combine errands with entertainment, particularly on evenings and weekends when the center's extended hours accommodate working families.",
+  "description": "Stonewood Center is a prominent shopping destination located in Downey, California, serving the southeastern Los Angeles County community with a diverse mix of retail, dining, and entertainment options. The center features an inviting atmosphere with both indoor and outdoor shopping areas, offering visitors a comfortable and convenient shopping experience. With amenities including events, Santa photos during the holiday season, and a variety of food and drink options including happy hour specials, Stonewood Center has positioned itself as more than just a shopping venue—it's a community gathering place. The center's extended operating hours from 10 AM to 10 PM demonstrate its commitment to accommodating shoppers' busy schedules. Located at 251 Stonewood Street, the center provides easy access for residents of Downey and surrounding communities, with ample parking and a well-maintained facility that continues to serve as a retail anchor in the area.",
+  "numberOfStores": 60,
+  "squareFootage": 450000,
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "JJ25B",
+      "type": "Cart",
+      "size": 60,
+      "floor": 1,
+      "available": true
+    },
+    {
+      "number": "B45",
+      "type": "Inline",
+      "size": 3252,
+      "floor": 1,
+      "available": true
+    },
+    {
+      "number": "C23",
+      "type": "Inline",
+      "size": 5426,
+      "floor": 1,
+      "available": true
+    },
+    {
+      "number": "C29",
+      "type": "Inline",
+      "size": 1180,
+      "floor": 1,
+      "available": true
+    },
+    {
+      "number": "C31",
+      "type": "Inline",
+      "size": 1064,
+      "floor": 1,
+      "available": true
+    },
+    {
+      "number": "FC03",
+      "type": "Inline",
+      "size": 578,
+      "floor": 1,
+      "available": true
+    },
+    {
+      "number": "FC11",
+      "type": "Inline",
+      "size": 1856,
+      "floor": 1,
+      "available": true
+    },
+    {
+      "number": "FC15",
+      "type": "Inline",
+      "size": 731,
+      "floor": 1,
+      "available": true
+    },
+    {
+      "number": "P01",
+      "type": "Inline",
+      "size": 1047,
+      "floor": 1,
+      "available": true
+    },
+    {
+      "number": "P05",
+      "type": "Inline",
+      "size": 884,
+      "floor": 1,
+      "available": false
+    }
+  ]
+}

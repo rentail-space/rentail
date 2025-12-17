@@ -9,6 +9,9 @@ import ora from "ora";
 import envVars from "../env";
 import prisma from "../prisma";
 
+if (!envVars.GOOGLE_PLACES_API_KEY)
+  throw new Error("Use doppler run --config prd -- ");
+
 type PlaceDetails = {
   address: string;
   city: string;
