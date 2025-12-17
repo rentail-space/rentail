@@ -90,12 +90,12 @@ function LinkToState({
 }) {
   const url = `/state/${abbreviation.toLowerCase()}`;
   return (
-    <Link to={url} className="space-y-2" itemProp="url">
-      <div className="flex flex-row justify-between">
+    <Link to={url} className="space-y-2 hover:*:text-blue-500" itemProp="url">
+      <div className="flex flex-row items-center justify-between">
         <h2 className="font-bold text-xl" itemProp="name">
           {name}
         </h2>
-        <span className="text-gray-500" itemProp="description">
+        <span itemProp="description">
           {countCenters(centers, abbreviation)} centers
         </span>
       </div>
