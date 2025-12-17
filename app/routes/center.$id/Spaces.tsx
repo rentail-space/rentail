@@ -1,19 +1,19 @@
 import type { PropertySpace } from "prisma/generated/client";
 
 export function Spaces({ spaces }: { spaces: PropertySpace[] }) {
+  if (spaces.length === 0) return <NoAvailableSpaces />;
   return (
-    <div className="space-y-4">
-      {spaces.length ? (
-        spaces
-          .sort((a, b) =>
-            a.type !== b.type
-              ? a.type.localeCompare(b.type)
-              : a.number.localeCompare(b.number),
-          )
-          .map((space) => <Space key={space.id} space={space} />)
-      ) : (
-        <NoAvailableSpaces />
-      )}
+    <div className="space-y-8">
+      <h4 className="text-center font-bold text-lg">Available Spaces</h4>
+      {spaces
+        .sort((a, b) =>
+          a.type !== b.type
+            ? a.type.localeCompare(b.type)
+            : a.number.localeCompare(b.number),
+        )
+        .map((space) => (
+          <Space key={space.id} space={space} />
+        ))}
     </div>
   );
 }
@@ -28,25 +28,25 @@ function NoAvailableSpaces() {
 
 function Space({ space }: { space: PropertySpace }) {
   return (
-    <div className="grid grid-cols-2 gap-4 rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black] lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
       <Metric title="number" value={space.number} />
       <Metric
         title="size (sqft)"
         value={space.size.toLocaleString(undefined, { style: "decimal" })}
       />
-      <Metric title="type" value={space.type} />
       <Metric
         title="floor"
         value={space.floor.toLocaleString(undefined, { style: "decimal" })}
       />
+      <Metric title="type" value={space.type} />
     </div>
   );
 }
 
 function Metric({ title, value }: { title: string; value: string }) {
   return (
-    <div className="flex flex-col items-center gap-2 rounded-sm border-2 border-black bg-[hsl(60,100%,99%)] p-4 shadow-[2px_2px_0px_0px_black]">
-      <span className="font-bold text-black text-xs uppercase tracking-wide">
+    <div className="flex flex-col items-center gap-2">
+      <span className="font-bold text-gray-500 text-xs uppercase tracking-wide">
         {title}
       </span>
       <span className="font-bold text-2xl text-black">{value}</span>

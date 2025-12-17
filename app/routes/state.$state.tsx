@@ -160,6 +160,13 @@ export default function StatePage({
                     )}
                   </span>
                 )}
+
+                {center.spaces.length > 0 && (
+                  <span>
+                    {center.spaces.length} available{" "}
+                    {center.spaces.length === 1 ? "space" : "spaces"}
+                  </span>
+                )}
               </CenterStats>
             </Link>
           </li>

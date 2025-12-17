@@ -1,12 +1,10 @@
-import { clamp } from "es-toolkit";
 import prisma from "~/lib/prisma";
-import timeOfDay from "~/lib/timeOfDay";
 import type { Route } from "./+types/route";
 import Center from "./Center";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const center = await prisma.property.findUnique({
-    include: { spaces: true },
+    include: { spaces: { where: { available: true } } },
     where: { id: params.id },
   });
   if (!center) throw new Response("Not Found", { status: 404 });
