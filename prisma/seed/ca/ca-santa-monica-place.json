@@ -8,9 +8,7 @@
   "longitude": -118.49378229999999,
   "country": "US",
   "phone": "++1 310-260-8333",
-  "imageURLs": [
-    "/images/malls/ca-santa-monica-place-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-santa-monica-place-1.jpg"],
   "summary": "Contemporary open-air mall since 1980 with luxury-brand shops, plus a food court & a movie theater.",
   "openFrom": 1000,
   "openUntil": 2000,
