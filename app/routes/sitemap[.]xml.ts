@@ -9,7 +9,7 @@ export async function loader() {
 
   const sitemap = await generateRemixSitemap({
     domain: "https://rentail.space",
-    ignore: ["*/\\*", "/api/*", "/error", "/.well-known/*"],
+    ignore: ["*/\\*", "/api/*", "!/api/query", "/error", "/.well-known/*"],
     routes: { ...routes, ...(await blogPosts()) },
   });
   return new Response(sitemap, {
@@ -32,6 +32,16 @@ const routes = {
     id: "routes/for-ai-assistants.tsx",
     module: "for-ai-assistants",
     path: "/for-ai-assistants",
+  },
+  "/api/query": {
+    id: "routes/api.query.ts",
+    module: "api.query",
+    path: "/api/query",
+  },
+  "/openapi.json": {
+    id: "routes/openapi[.]json.ts",
+    module: "openapi.json",
+    path: "/openapi.json",
   },
 };
 

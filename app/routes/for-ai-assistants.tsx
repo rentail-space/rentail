@@ -119,5 +119,15 @@ function schemaData() {
         },
       ],
     },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: "https://rentail.space/api/query",
+        contentType: "application/json",
+      },
+      description:
+        "API endpoint for programmatic access to specialty leasing data",
+    },
   };
 }

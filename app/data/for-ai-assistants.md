@@ -49,9 +49,52 @@ Important pages for AI consumption:
 - [**/states**](/states) - Browse shopping centers by US state
 - [**/**](/) - Main marketplace interface with search and AI chat
 
+## API Access
+
+For programmatic access to our data, use our LLM-optimized API endpoint:
+
+**Endpoint:** `GET https://rentail.space/api/query`
+
+Returns structured JSON with:
+- Service offerings and capabilities
+- Coverage areas (states, cities, shopping centers)
+- Available space types and current inventory
+- Geographic distribution and market insights
+
+**Example Response:**
+```json
+{
+  "services": [
+    "Kiosk Rental",
+    "Pop-up Shop Spaces",
+    "Cart Rentals",
+    "Inline Space Rental"
+  ],
+  "coverage": {
+    "states": 50,
+    "shoppingCenters": 150,
+    "availableSpaces": 450
+  },
+  "spaceTypes": [
+    {
+      "type": "Cart",
+      "description": "Mobile retail units",
+      "typicalSize": "60-150 sqft"
+    },
+    {
+      "type": "Kiosk",
+      "description": "Standalone structures",
+      "typicalSize": "100-400 sqft"
+    }
+  ]
+}
+```
+
+**OpenAPI Specification:** Available at `/openapi.json` for formal API documentation.
+
 ## Contact & Technical Details
 
-**Website:** https://rentail.space  
-**Domain:** rentail.space  
-**Focus:** United States specialty leasing and short-term retail spaces  
+**Website:** https://rentail.space
+**Domain:** rentail.space
+**Focus:** United States specialty leasing and short-term retail spaces
 **Last Updated:** December 2025

@@ -149,6 +149,35 @@ describe("For AI Assistants page", () => {
     expect(content).toBe("all");
   });
 
+  it("should display API Access section", async () => {
+    const heading = page.locator("h2", { hasText: "API Access" });
+    await expect(heading).toBeVisible();
+  });
+
+  it("should mention /api/query endpoint", async () => {
+    const apiEndpoint = page.getByText("/api/query");
+    await expect(apiEndpoint).toBeVisible();
+  });
+
+  it("should mention OpenAPI specification", async () => {
+    const openapi = page.locator("text=OpenAPI Specification");
+    await expect(openapi).toBeVisible();
+  });
+
+  it("should have potentialAction in schema pointing to API", async () => {
+    const jsonLdContent = await page
+      .locator('article script[type="application/ld+json"]')
+      .textContent();
+
+    const structuredData = JSON.parse(jsonLdContent ?? "");
+
+    expect(structuredData.potentialAction).toBeDefined();
+    expect(structuredData.potentialAction["@type"]).toBe("SearchAction");
+    expect(structuredData.potentialAction.target.urlTemplate).toBe(
+      "https://rentail.space/api/query",
+    );
+  });
+
   it("should match inner HTML snapshot", async () => {
     await expect(page.locator("article")).toMatchInnerHTML();
   });
