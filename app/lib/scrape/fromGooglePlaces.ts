@@ -6,28 +6,29 @@ import { invariant } from "es-toolkit";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import ora from "ora";
+import zod from "zod";
 import envVars from "../env";
 import prisma from "../prisma";
 
 if (!envVars.GOOGLE_PLACES_API_KEY)
   throw new Error("Use doppler run --config prd -- ");
 
-type PlaceDetails = {
-  address: string;
-  city: string;
-  country: string;
-  imageURLs: string[];
-  latitude: number;
-  longitude: number;
-  name: string;
-  openFrom?: number;
-  openUntil?: number;
-  phone: string | undefined;
-  rating?: number;
-  reviewCount?: number;
-  state: string;
-  summary?: string;
-};
+const placeDetailsSchema = zod.object({
+  address: zod.string().describe("The place's address"),
+  city: zod.string().describe("The place's city"),
+  country: zod.string().describe("The place's country"),
+  imageURLs: zod.array(zod.string()).describe("The place's image URLs"),
+  latitude: zod.number().describe("The place's latitude"),
+  longitude: zod.number().describe("The place's longitude"),
+  name: zod.string().describe("The place's name"),
+  openFrom: zod.number().describe("The place's opening from").optional(),
+  openUntil: zod.number().describe("The place's opening until").optional(),
+  phone: zod.string().describe("The place's phone number").optional(),
+  rating: zod.number().describe("The place's rating").optional(),
+  reviewCount: zod.number().describe("The place's review count").optional(),
+  state: zod.string().describe("The place's state"),
+  summary: zod.string().describe("The place's summary").optional(),
+});
 
 /**
  * Get place details from Google Places API. The Places API charges for usage,
@@ -43,7 +44,7 @@ export async function fromGooglePlaces({
 }: {
   placeName: string;
   placeID?: string;
-}): Promise<PlaceDetails | undefined> {
+}): Promise<zod.infer<typeof placeDetailsSchema> | undefined> {
   const spinner = ora(`Fetching Google Places data for ${placeName}`).start();
   try {
     // eg "google-places:beverly-center"
@@ -55,8 +56,9 @@ export async function fromGooglePlaces({
 
     const cache = await prisma.cache.findUnique({ where: { key } });
     if (cache) {
+      const place = placeDetailsSchema.parse(cache.value);
       spinner.succeed();
-      return cache.value as Awaited<ReturnType<typeof fromGooglePlaces>>;
+      return place;
     }
 
     const place = placeID
@@ -157,7 +159,7 @@ type PlacesAPIPlace = {
  */
 async function searchText(
   placeName: string,
-): Promise<PlaceDetails | undefined> {
+): Promise<zod.infer<typeof placeDetailsSchema> | undefined> {
   const response = await fetch(
     "https://places.googleapis.com/v1/places:searchText",
     {
@@ -207,7 +209,7 @@ async function getPlaceDetails({
 }: {
   placeName: string;
   placeID: string;
-}): Promise<PlaceDetails> {
+}): Promise<zod.infer<typeof placeDetailsSchema>> {
   const response = await fetch(`https://places.googleapis.com/v1/${placeID}`, {
     headers: {
       "Content-Type": "application/json",
@@ -230,7 +232,7 @@ async function getPlaceDetails({
 async function toDatabasePlace(
   placeName: string,
   place: PlacesAPIPlace,
-): Promise<PlaceDetails> {
+): Promise<zod.infer<typeof placeDetailsSchema>> {
   const address = [
     longText(place.addressComponents, "street_number"),
     longText(place.addressComponents, "route"),

@@ -166,7 +166,7 @@
     "address": "40820 Winchester Road",
     "city": "Temecula",
     "state": "CA",
-    "website": "https://www.promenadeatemecula.com",
+    "website": "https://www.promenadetemecula.com/",
     "latitude": 33.5069,
     "longitude": -117.1486
   },
@@ -223,15 +223,6 @@
     "website": "https://www.shopstonewoodcenter.com",
     "latitude": 33.93568820419466,
     "longitude": -118.1194676766459
-  },
-  {
-    "name": "Temecula Promenade Mall",
-    "address": "40820 Winchester Road",
-    "city": "Temecula",
-    "state": "CA",
-    "website": "https://www.promenadeatemecula.com",
-    "latitude": 33.5069,
-    "longitude": -117.1486
   },
   {
     "name": "The Americana at Brand",
@@ -395,15 +386,6 @@
     "website": "https://www.westfield.com/plazabonita",
     "latitude": 32.6542,
     "longitude": -117.0739
-  },
-  {
-    "name": "Westfield Santa Anita",
-    "address": "400 South Baldwin Avenue",
-    "city": "Arcadia",
-    "state": "CA",
-    "website": "https://www.westfield.com/santaanita",
-    "latitude": 34.1336,
-    "longitude": -118.0539
   },
   {
     "name": "Westfield Topanga",

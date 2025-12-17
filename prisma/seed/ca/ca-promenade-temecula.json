@@ -7,19 +7,20 @@
   "latitude": 33.5251895,
   "longitude": -117.1541469,
   "country": "US",
-  "phone": "+19512960975",
-  "photos": [],
-  "imageURLs": ["/images/malls/ca-promenade-temecula-1.jpg"],
-  "summary": "Chain known for unique gadgets, gifts & lifestyle items, such as electronics & travel accessories.",
+  "imageURLs": [
+    "/images/malls/ca-promenade-temecula-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2100,
+  "phone": "+19512960975",
   "rating": 4.5,
   "reviewCount": 7828,
-  "squareFootage": 550000,
-  "numberOfStores": 80,
-  "description": "Promenade Temecula is Temecula's premier shopping destination featuring an exciting lineup of the best brands in the market alongside a diverse array of dining options. Whether you're seeking retail therapy, family-friendly events, or a delicious meal, this modern shopping center delivers a complete shopping and entertainment experience.",
-  "demographics": "Promenade Temecula serves the growing Temecula Valley region, attracting middle to upper-middle income families with median household incomes ranging from $75,000 to $110,000. The primary trade area consists of young families and professionals aged 25-54 with children, drawn to Temecula's wine country proximity and suburban lifestyle. Shoppers typically seek a mix of value and quality retailers, with strong preferences for family dining, entertainment options like the Regal Edwards Cinema, and convenient one-stop shopping experiences that combine fashion, home goods, and dining.",
+  "summary": "Chain known for unique gadgets, gifts & lifestyle items, such as electronics & travel accessories.",
   "centerType": "LifestyleCenter",
+  "demographics": "Promenade Temecula primarily serves the rapidly growing Temecula Valley region, attracting affluent suburban families and young professionals with above-average household incomes ranging from $80,000 to $150,000+. The trade area draws from both local residents and tourists visiting Temecula's renowned wine country, creating a diverse customer base that skews toward families with children and adults aged 25-54. Visitors tend to be educated, quality-conscious shoppers who value experiential retail and are willing to spend on both lifestyle brands and dining experiences. The center benefits from Temecula's position as one of Southern California's fastest-growing cities, with strong population growth among middle-to-upper-middle-class households seeking family-friendly shopping and entertainment options.",
+  "description": "Promenade Temecula is a premier shopping destination located in the heart of Temecula, California, offering visitors an exceptional blend of retail, dining, and entertainment experiences. This open-air lifestyle center features an exciting lineup of the best brands in the market, complemented by a diverse variety of dining options that cater to every taste and occasion. Beyond shopping, the center creates memorable experiences throughout the year with engaging seasonal events, including holiday festivities with Photos with Santa and extended holiday shopping hours. The property also includes a Regal Edwards movie theater with IMAX, making it a complete entertainment destination for families and friends. Managed by Brookfield Properties, Promenade Temecula has established itself as the go-to gathering place in Temecula, where community connection meets contemporary retail convenience in a vibrant, walkable environment.",
+  "numberOfStores": 75,
+  "squareFootage": 550000,
   "tier": 2,
   "spaces": []
 }
