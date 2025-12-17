@@ -1,46 +1,16 @@
 import { type Page, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import prisma from "~/lib/prisma";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Center detail page", () => {
   let page: Page;
-  const centerId = "test-center-1";
 
   beforeAll(async () => {
-    // Create a test center
-    await prisma.property.create({
-      data: {
-        id: centerId,
-        name: "Los Cerritos Center",
-        address: "239 Los Cerritos Center",
-        city: "Cerritos",
-        state: "CA",
-        country: "US",
-        latitude: 33.8622482,
-        longitude: -118.0948809,
-        website: "https://www.shoploscerritos.com/",
-        phone: "+15624027467",
-        imageURLs: [
-          "https://rentail.space/images/malls/ca-los-cerritos-center-1.jpg",
-        ],
-        description:
-          "Los Cerritos Center is a premier shopping destination featuring stores, dining, and entertainment.",
-        summary:
-          "Spacious shopping center offers a range of brand-name retailers, plus well-known chain restaurants.",
-        squareFootage: 1200000,
-        numberOfStores: 130,
-        openFrom: 1000,
-        openUntil: 2100,
-      },
-    });
-
-    page = await goto(`/center/${centerId}`);
+    page = await goto("/center/ca-los-cerritos-center");
   });
 
   afterAll(async () => {
     await page?.close();
-    await prisma.property.delete({ where: { id: centerId } });
   });
 
   it("should display the center name", async () => {

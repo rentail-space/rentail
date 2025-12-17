@@ -24,11 +24,12 @@ const centers = [
   "ca/ca-beverly-center.json",
   "ca/ca-del-amo-fashion-center.json",
   "ca/ca-glendale-galleria.json",
+  "ca/ca-los-cerritos-center.json",
   "ca/ca-south-bay-galleria.json",
   "ca/ca-the-americana-at-brand.json",
   "ca/ca-the-grove.json",
-  "ca/ca-westfield-culver-city.json",
   "ca/ca-westfield-century-city.json",
+  "ca/ca-westfield-culver-city.json",
 ];
 
 const execFileAsync = promisify(execFile);
