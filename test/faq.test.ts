@@ -18,6 +18,10 @@ describe("FAQ page", () => {
     await page?.close();
   });
 
+  it("should have at least 10 questions", async () => {
+    expect(totalQuestions).toBeGreaterThanOrEqual(10);
+  });
+
   it("should display all FAQ categories", async () => {
     for (const category of faq) {
       const heading = page.locator("h2", { hasText: category.category });
