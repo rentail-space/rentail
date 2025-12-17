@@ -1,11 +1,12 @@
 import { expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
+import { port } from "./helpers/launchBrowser";
 
 describe("sitemap.xml", () => {
   let sitemapContent: string;
 
   beforeAll(async () => {
-    const response = await fetch("http://localhost:5173/sitemap.xml");
+    const response = await fetch(`http://localhost:${port}/sitemap.xml`);
     sitemapContent = await response.text();
   });
 

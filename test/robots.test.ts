@@ -1,11 +1,12 @@
 import { expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
+import { port } from "./helpers/launchBrowser";
 
 describe("robots.txt", () => {
   let lines: string[];
 
   beforeAll(async () => {
-    const response = await fetch("http://localhost:5173/robots.txt");
+    const response = await fetch(`http://localhost:${port}/robots.txt`);
     const robotsContent = await response.text();
     lines = robotsContent.split("\n").filter(Boolean);
   });

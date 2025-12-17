@@ -1,3 +1,7 @@
+/**
+ * https://console.cloud.google.com/google/maps-apis/metrics?project=rentail-480516
+ */
+
 import { invariant } from "es-toolkit";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
