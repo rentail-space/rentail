@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { Streamdown } from "streamdown";
 import prisma from "~/lib/prisma";
 
 export async function loader() {
@@ -20,29 +21,35 @@ export default function StatePage({
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
   return (
-    <main className="container mx-auto my-10 space-y-8">
-      <h1 className="font-bold text-2xl">US States</h1>
+    <main className="container mx-auto my-10 max-w-3xl space-y-8">
+      <h1 className="text-center font-bold text-2xl">US States</h1>
 
       <ul
         className="space-y-4"
         itemScope
         itemType="https://schema.org/ItemList"
       >
-        {loaderData.states.map(({ abbreviation, name, lede }) => (
-          <li
-            key={abbreviation}
-            className="border-gray-400 border-b pb-4"
-            itemScope
-            itemType="https://schema.org/ListItem"
-          >
-            <LinkToState
-              abbreviation={abbreviation}
-              name={name}
-              lede={lede}
-              centers={loaderData.centers}
-            />
-          </li>
-        ))}
+        {loaderData.states
+          .filter(
+            ({ abbreviation }) =>
+              countCenters(loaderData.centers, abbreviation) > 0,
+          )
+
+          .map(({ abbreviation, name, lede }) => (
+            <li
+              key={abbreviation}
+              className="border-gray-400 border-b pb-4"
+              itemScope
+              itemType="https://schema.org/ListItem"
+            >
+              <LinkToState
+                abbreviation={abbreviation}
+                name={name}
+                lede={lede}
+                centers={loaderData.centers}
+              />
+            </li>
+          ))}
       </ul>
     </main>
   );
@@ -59,24 +66,30 @@ function LinkToState({
   lede: string;
   centers: { state: string; _count: { _all: number } }[];
 }) {
-  const centerCount = centers.find(
-    (center) => center.state.toLowerCase() === abbreviation.toLowerCase(),
-  )?._count._all;
   return (
     <Link to={`/state/${abbreviation.toLowerCase()}`} className="space-y-2">
       <div className="flex flex-row justify-between">
         <h2 className="font-bold text-xl" itemProp="name">
           {name}
         </h2>
-        {centerCount && centerCount > 5 && (
-          <span className="text-gray-500" itemProp="description">
-            {centerCount} centers
-          </span>
-        )}
+        <span className="text-gray-500" itemProp="description">
+          {countCenters(centers, abbreviation)} centers
+        </span>
       </div>
-      <p className="text-gray-500" itemProp="description">
+      <Streamdown className="text-gray-500" mode="static">
         {lede}
-      </p>
+      </Streamdown>
     </Link>
+  );
+}
+
+function countCenters(
+  centers: { state: string; _count: { _all: number } }[],
+  abbreviation: string,
+): number {
+  return (
+    centers.find(
+      (center) => center.state.toLowerCase() === abbreviation.toLowerCase(),
+    )?._count._all ?? 0
   );
 }

@@ -12,9 +12,10 @@ const links = [
   {
     title: "Resources",
     links: [
-      { to: "/blog", label: "Blog" },
       { to: "/about", label: "About" },
+      { to: "/blog", label: "Blog" },
       { to: "mailto:hello@rentail.space", label: "Contact" },
+      { to: "/states", label: "US States" },
     ],
   },
   {
