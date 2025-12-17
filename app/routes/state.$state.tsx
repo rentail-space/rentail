@@ -1,5 +1,5 @@
 import { clamp, meanBy, range } from "es-toolkit";
-import { MapPinIcon, StarIcon } from "lucide-react";
+import { MapPinIcon, MoveLeftIcon, StarIcon } from "lucide-react";
 import { Children, Fragment, useRef } from "react";
 import { Link } from "react-router";
 import CentersMap from "~/components/ui/CentersMap";
@@ -31,9 +31,21 @@ export default function StatePage({
 
   return (
     <main className="container mx-auto my-10 space-y-8">
-      <h1 className="text-center font-bold text-2xl">
-        {expandStateAbbr(state)}
-      </h1>
+      <div className="flex w-full items-center">
+        <Link
+          to="/states"
+          className="hidden w-1/2 flex-row items-center gap-2 md:flex print:hidden"
+        >
+          <MoveLeftIcon className="h-4 w-4" />
+          All States
+        </Link>
+
+        <h1 className="text-center font-bold text-2xl">
+          {expandStateAbbr(state)}
+        </h1>
+
+        <span className="w-1/2" />
+      </div>
 
       <CentersMap
         centerRef={centerRef}
