@@ -14,11 +14,6 @@ export declare type CenterMapFunction = (point: {
   latitude: number;
 }) => void;
 
-const centerOfContinentalUS = {
-  latitude: 39.8283,
-  longitude: -98.5795,
-};
-
 /**
  * A map showing shopping centers.
  *
@@ -74,6 +69,7 @@ export default function CentersMap({
 
     const hasCenter = !Number.isNaN(longitude) && !Number.isNaN(latitude);
     map.current = new mapboxgl.Map({
+      interactive: false,
       center: hasCenter ? [longitude, latitude] : [-98.5795, 39.8283],
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v12",
@@ -262,6 +258,7 @@ function CenterPopup({
           className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
           href={directionsUrl}
           rel="noopener noreferrer"
+          tabIndex={-1}
           target="_blank"
         >
           Directions
