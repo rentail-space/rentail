@@ -2,33 +2,32 @@ import { expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
 
 describe("robots.txt", () => {
-  let robotsContent: string;
+  let lines: string[];
 
   beforeAll(async () => {
     const response = await fetch("http://localhost:5173/robots.txt");
-    robotsContent = await response.text();
+    const robotsContent = await response.text();
+    lines = robotsContent.split("\n").filter(Boolean);
   });
 
   it("should reference sitemap.xml", () => {
-    expect(robotsContent).toContain(
-      "Sitemap: https://rentail.space/sitemap.xml",
-    );
+    expect(lines).toContain("Sitemap: https://rentail.space/sitemap.xml");
   });
 
   it("should allow crawling of root path", () => {
-    expect(robotsContent).toContain("Allow: /");
+    expect(lines).toContain("Allow: /");
   });
 
   it("should allow all user agents", () => {
-    expect(robotsContent).toContain("User-agent: *");
+    expect(lines).toContain("User-agent: *");
   });
 
   it("should disallow API routes", () => {
-    expect(robotsContent).toContain("Disallow: /api/*");
+    expect(lines).toContain("Disallow: /api/*");
   });
 
   it("should allow crawling of /for-ai-assistants", () => {
     // Should not be in disallow list
-    expect(robotsContent).not.toContain("Disallow: /for-ai-assistants");
+    expect(lines).not.toContain("Disallow: /for-ai-assistants");
   });
 });

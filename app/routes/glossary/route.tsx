@@ -1,4 +1,3 @@
-import { MoveLeftIcon } from "lucide-react";
 import { Link } from "react-router";
 import glossary from "./glossary";
 
@@ -31,23 +30,11 @@ export default function Glossary() {
         }}
       />
 
-      <div className="flex w-full items-center">
-        <Link
-          to="/"
-          className="hidden w-1/2 flex-row items-center gap-2 md:flex print:hidden"
-        >
-          <MoveLeftIcon className="h-4 w-4" />
-          Home
-        </Link>
+      <h1 className="text-center font-bold text-3xl">
+        Specialty Leasing Glossary
+      </h1>
 
-        <h1 className="text-center font-bold text-2xl">
-          Specialty Leasing Glossary
-        </h1>
-
-        <span className="w-1/2" />
-      </div>
-
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-4xl">
         <p className="font-medium text-gray-600 leading-relaxed">
           Comprehensive definitions of specialty leasing and short-term retail
           terminology. This glossary serves as the authoritative reference for
