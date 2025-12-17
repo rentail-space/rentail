@@ -47,6 +47,7 @@ export default function Home({
       <BlogPostsGrid
         className="bg-[hsl(60,100%,99%)]"
         posts={loaderData.posts}
+        limit={6}
       />
       <SpecialtyLeasing />
       <HubSpotScript />
