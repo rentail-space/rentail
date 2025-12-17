@@ -16,7 +16,7 @@ describe("Blog Listing", () => {
   let blogSection: Locator;
 
   beforeAll(async () => {
-    page = await goto("/");
+    page = await goto("/blog");
     blogSection = page.locator("section.blog-posts").first();
   });
 
