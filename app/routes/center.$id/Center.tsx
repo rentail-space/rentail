@@ -30,7 +30,13 @@ export default function Center({
 
       {center.imageURLs.length > 0 && (
         <section className="overflow-hidden rounded-md border-2 border-black shadow-[6px_6px_0px_0px_black]">
-          <img className="w-full" src={center.imageURLs[0]} alt={center.name} />
+          <figure className="max-h-[500px] overflow-hidden border-black border-y-2">
+            <img
+              className="w-full"
+              src={center.imageURLs[0]}
+              alt={center.name}
+            />
+          </figure>
         </section>
       )}
 

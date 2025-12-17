@@ -1,3 +1,4 @@
+import { sortBy } from "es-toolkit";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Activity, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
@@ -53,25 +54,16 @@ function AvailableCenters({
 
   return (
     <>
-      <div className="mb-3 font-bold text-black text-lg">
-        Available Centers ({centers.length})
-      </div>
+      <div className="mb-3 font-bold text-black text-lg">Shopping Centers</div>
       <div className="flex flex-col gap-2">
-        {centers
-          // Sort by number of available spaces, then by name
-          .sort((a, b) =>
-            a.spaces.length === b.spaces.length
-              ? a.name.localeCompare(b.name)
-              : b.spaces.length - a.spaces.length,
-          )
-          .map((center) => (
-            <LinkToCenter
-              hoveredCenter={hoveredCenter}
-              key={center.id}
-              center={center}
-              setHoveredCenter={setHoveredCenter}
-            />
-          ))}
+        {sortCenters(centers, 10).map((center) => (
+          <LinkToCenter
+            hoveredCenter={hoveredCenter}
+            key={center.id}
+            center={center}
+            setHoveredCenter={setHoveredCenter}
+          />
+        ))}
       </div>
     </>
   );
@@ -104,13 +96,15 @@ function LinkToCenter({
           src={center.logoURL || "/images/shopping-mall.png"}
         />
         <div className="flex min-w-0 flex-1 flex-col">
-          <span className="truncate font-bold text-black text-sm">
+          <div className="truncate font-bold text-black text-sm">
             {center.name}
-          </span>
-          <span className="font-medium text-black/70 text-xs">
-            {center.spaces.length}{" "}
-            {center.spaces.length === 1 ? "space" : "spaces"}
-          </span>
+          </div>
+          {center.spaces.length > 0 && (
+            <div className="font-medium text-black/70 text-xs">
+              {center.spaces.length} available{" "}
+              {center.spaces.length === 1 ? "space" : "spaces"}
+            </div>
+          )}
         </div>
       </Link>
 
@@ -183,9 +177,7 @@ function HoverCard({
         }
 
         // Ensure card top is below header
-        if (adjustedTop < minTop) {
-          adjustedTop = minTop;
-        }
+        if (adjustedTop < minTop) adjustedTop = minTop;
 
         setTopOffset(adjustedTop);
       });
@@ -222,7 +214,7 @@ function HoverCard({
           </div>
 
           <figure
-            className="border-black border-y-2"
+            className="max-h-48 overflow-hidden border-black border-y-2"
             style={{
               background:
                 "repeating-linear-gradient(135deg, #e5e7eb 0 24px, #fff 24px 48px)",
@@ -233,8 +225,11 @@ function HoverCard({
               onLoad={(e) => {
                 e.currentTarget.classList.remove("opacity-0");
               }}
+              onError={(e) => {
+                e.currentTarget.parentElement?.remove();
+              }}
               src={center.imageURLs[0]}
-              className="opacity-0"
+              className="object-cover opacity-0"
             />
           </figure>
 
@@ -249,4 +244,32 @@ function HoverCard({
       </Link>
     </Activity>
   );
+}
+
+/**
+ * Sort centers so we show the most relevant centers first:
+ * - Most available spaces
+ * - Highest tier
+ * - Highest rating
+ * - Alphabetically
+ *
+ * We need limit so can pick top N based on criteria (available spaces, rating,
+ * etc) and then sort alphabetically.
+ *
+ * @param centers - The centers to sort.
+ * @param limit - The number of centers to return.
+ * @returns The sorted centers.
+ */
+function sortCenters(
+  centers: PropertyGetPayload<{ include: { spaces: true } }>[],
+  limit: number,
+) {
+  const sorted = sortBy(centers, [
+    (center) => center.spaces.length,
+    (center) => center.tier,
+    (center) => center.rating ?? 0,
+  ])
+    .reverse()
+    .slice(0, limit);
+  return sortBy(sorted, ["name"]);
 }
