@@ -55,7 +55,7 @@ export default function StatePage({
       <h1 className="text-center font-bold text-2xl">US States</h1>
 
       <ul
-        className="space-y-4"
+        className="space-y-4 divide-y divide-gray-400"
         itemScope
         itemType="https://schema.org/ItemList"
       >
@@ -68,7 +68,7 @@ export default function StatePage({
           .map(({ abbreviation, name, lede }, index) => (
             <li
               key={abbreviation}
-              className="border-gray-400 border-b pb-4"
+              className="pb-4"
               itemScope
               itemType="https://schema.org/ListItem"
               itemProp="itemListElement"
