@@ -62,7 +62,7 @@ function BlogPostCard({ post }: { post: BlogPost }) {
       ) : (
         <div className="aspect-video w-full bg-[hsl(47,100%,95%)]" />
       )}
-      <div className="flex flex-col gap-3 p-6">
+      <div className="flex flex-col gap-3 p-6 h-64">
         <div className="flex items-center gap-2 font-medium text-black text-xs">
           <time dateTime={post.published.toISOString()}>
             {DateTime.fromJSDate(post.published, {
@@ -76,7 +76,7 @@ function BlogPostCard({ post }: { post: BlogPost }) {
         <p className="line-clamp-3 font-medium text-black text-sm">
           {post.summary}
         </p>
-        <div className="mt-2 flex items-center gap-2 font-bold text-[hsl(37,92%,65%)] text-sm">
+        <div className="flex items-center gap-2 font-bold text-[hsl(37,92%,65%)] text-sm mt-auto">
           <span>Read more</span>
           <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </div>
