@@ -18,7 +18,7 @@
     "upgrade": "./scripts/upgrade.sh"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^2.0.54",
+    "@ai-sdk/anthropic": "^2.0.56",
     "@ai-sdk/react": "^2.0.111",
     "@forge42/seo-tools": "^1.4.5",
     "@google-analytics/data": "^5.2.1",
@@ -50,7 +50,7 @@
     "debug": "^4.4.3",
     "dotenv": "^17.2.3",
     "env-var": "^7.5.0",
-    "es-toolkit": "^1.42.0",
+    "es-toolkit": "^1.43.0",
     "feed": "^5.1.0",
     "google-auth-library": "^10.5.0",
     "human-format": "^1.2.1",
@@ -66,8 +66,8 @@
     "pg": "^8.16.3",
     "prisma": "^7.1.0",
     "radashi": "^12.7.1",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-email": "^5.0.7",
     "react-ga4": "^2.1.0",
     "react-router": "^7.10.1",
@@ -90,11 +90,11 @@
     "usehooks-ts": "^3.1.1",
     "uuid": "^13.0.0",
     "yaml": "^2.8.2",
-    "zod": "^4.1.13"
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "@ai-sdk/provider": "^2.0.0",
-    "@inquirer/prompts": "^8.0.2",
+    "@inquirer/prompts": "^8.1.0",
     "@playwright/test": "^1.57.0",
     "@react-router/dev": "^7.10.1",
     "@secretlint/secretlint-rule-preset-recommend": "^11.2.5",
@@ -102,12 +102,12 @@
     "@types/debug": "^4.1.12",
     "@types/luxon": "^3.7.1",
     "@types/mapbox-gl": "^3.4.1",
-    "@types/node": "^25.0.0",
+    "@types/node": "^25.0.3",
     "@types/pg": "^8.16.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vercel/sdk": "^1.18.2",
-    "checkly": "^6.9.5",
+    "checkly": "^6.9.7",
     "diff": "^8.0.2",
     "fast-xml-parser": "^5.3.3",
     "msw": "^2.12.4",
@@ -116,10 +116,10 @@
     "playwright": "^1.57.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
-    "vite": "^7.2.7",
+    "vite": "^7.3.0",
     "vite-plugin-devtools-json": "^1.0.0",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^4.0.15",
+    "vitest": "^4.0.16",
     "why-is-node-running": "^3.2.2"
   },
   "overrides": {},
@@ -146,5 +146,5 @@
   "engines": {
     "node": ">=24.10.1"
   },
-  "packageManager": "pnpm@10.25.0"
+  "packageManager": "pnpm@10.26.0"
 }
