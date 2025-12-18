@@ -62,21 +62,21 @@ function BlogPostCard({ post }: { post: BlogPost }) {
       ) : (
         <div className="aspect-video w-full bg-[hsl(47,100%,95%)]" />
       )}
-      <div className="flex flex-col gap-3 p-6 h-64">
-        <div className="flex items-center gap-2 font-medium text-black text-xs">
-          <time dateTime={post.published.toISOString()}>
-            {DateTime.fromJSDate(post.published, {
-              zone: "utc",
-            }).toLocaleString(DateTime.DATE_MED)}
-          </time>
+      <div className="flex flex-col gap-3 p-6 h-60 justify-between">
+        <div>
+            <time dateTime={post.published.toISOString()} className="text-gray-500 text-sm">
+              {DateTime.fromJSDate(post.published, {
+                zone: "utc",
+              }).toLocaleString(DateTime.DATE_MED)}
+            </time>
+          <h2 className="line-clamp-2 font-bold text-black text-xl group-hover:text-[hsl(37,92%,65%)]">
+            {post.title}
+          </h2>
         </div>
-        <h2 className="line-clamp-2 font-bold text-black text-xl group-hover:text-[hsl(37,92%,65%)]">
-          {post.title}
-        </h2>
         <p className="line-clamp-3 font-medium text-black text-sm">
           {post.summary}
         </p>
-        <div className="flex items-center gap-2 font-bold text-[hsl(37,92%,65%)] text-sm mt-auto">
+        <div className="flex items-center gap-2 font-bold text-[hsl(37,92%,65%)] text-sm">
           <span>Read more</span>
           <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </div>
