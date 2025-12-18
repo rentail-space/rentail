@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^2.0.56",
-    "@ai-sdk/react": "^2.0.111",
+    "@ai-sdk/react": "^2.0.116",
     "@forge42/seo-tools": "^1.4.5",
     "@google-analytics/data": "^5.2.1",
     "@logtail/node": "^0.5.6",
@@ -34,7 +34,7 @@
     "@react-router/fs-routes": "^7.10.1",
     "@react-router/node": "^7.10.1",
     "@react-router/serve": "^7.10.1",
-    "@sentry/react-router": "^10.30.0",
+    "@sentry/react-router": "^10.31.0",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/typography": "^0.5.19",
@@ -43,7 +43,7 @@
     "@vercel/analytics": "^1.6.1",
     "@vercel/react-router": "^1.2.4",
     "@vercel/speed-insights": "^1.3.1",
-    "ai": "^5.0.109",
+    "ai": "^5.0.114",
     "bcrypt": "^6.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -58,7 +58,7 @@
     "ioredis": "^5.8.2",
     "isbot": "^5.1.32",
     "looks-same": "^10.0.1",
-    "lucide-react": "^0.559.0",
+    "lucide-react": "^0.561.0",
     "luxon": "^3.7.2",
     "mapbox-gl": "^3.17.0",
     "marked": "^17.0.1",
@@ -68,7 +68,7 @@
     "radashi": "^12.7.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-email": "^5.0.7",
+    "react-email": "^5.0.8",
     "react-ga4": "^2.1.0",
     "react-router": "^7.10.1",
     "rehype-harden": "^1.1.7",
@@ -118,21 +118,22 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.0",
     "vite-plugin-devtools-json": "^1.0.0",
-    "vite-tsconfig-paths": "^5.1.4",
+    "vite-tsconfig-paths": "^6.0.1",
     "vitest": "^4.0.16",
     "why-is-node-running": "^3.2.2"
   },
   "overrides": {},
   "pnpm": {
     "onlyBuiltDependencies": [
-      "@parcel/watcher",
       "@prisma/client",
       "@prisma/engines",
       "@sentry/cli",
       "@tailwindcss/oxide",
+      "bcrypt",
       "esbuild",
       "msw",
-      "prisma"
+      "prisma",
+      "protobufjs"
     ],
     "overrides": {
       "glob@>=10.3.7 <10.5.0": ">=10.5.0",
@@ -141,7 +142,9 @@
       "hono@>=1.1.0 <4.10.2": ">=4.10.2",
       "hono@<4.10.3": ">=4.10.3"
     },
-    "ignoredBuiltDependencies": []
+    "ignoredBuiltDependencies": [
+      "yarn"
+    ]
   },
   "engines": {
     "node": ">=24.10.1"
