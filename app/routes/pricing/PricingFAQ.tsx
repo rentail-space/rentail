@@ -23,27 +23,25 @@ const faq = [
 
 export default function PricingFAQ() {
   return (
-    <section className="bg-[hsl(60,100%,99%)] px-4 py-20">
-      <div className="container mx-auto max-w-3xl">
-        <h2 className="mb-12 text-center font-bold text-4xl text-black leading-tight">
-          Frequently asked questions
-        </h2>
+    <section className="bg-[hsl(60,100%,99%)] py-20">
+      <h2 className="mb-12 text-center font-bold text-4xl text-black leading-tight">
+        Frequently asked questions
+      </h2>
 
-        <div className="flex flex-col gap-6">
-          {faq.map((faq) => (
-            <div
-              key={faq.question}
-              className="rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]"
-            >
-              <h3 className="mb-3 font-bold text-black text-xl">
-                {faq.question}
-              </h3>
-              <p className="font-medium text-black leading-relaxed">
-                {faq.answer}
-              </p>
-            </div>
-          ))}
-        </div>
+      <div className="flex flex-col gap-6">
+        {faq.map((faq) => (
+          <div
+            key={faq.question}
+            className="rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]"
+          >
+            <h3 className="mb-3 font-bold text-black text-xl">
+              {faq.question}
+            </h3>
+            <p className="font-medium text-black leading-relaxed">
+              {faq.answer}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );

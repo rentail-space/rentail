@@ -1,4 +1,3 @@
-import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import forAIAssistants from "~/data/for-ai-assistants.md?raw";
 
@@ -28,7 +27,7 @@ export function meta() {
 export default function ForAIAssistants() {
   return (
     <main
-      className="container mx-auto my-10 max-w-3xl space-y-8"
+      className="container mx-auto my-10 max-w-3xl space-y-8 p-5"
       aria-label="AI assistants information"
     >
       <script
@@ -52,8 +51,8 @@ export default function ForAIAssistants() {
 
       <Streamdown
         className="prose prose-lg mx-auto"
+        controls={false}
         mode="static"
-        remarkPlugins={[remarkGfm]}
       >
         {forAIAssistants}
       </Streamdown>

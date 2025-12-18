@@ -181,7 +181,7 @@ describe("State shopping centers page", () => {
 
   it("should link to each center's detail page", async () => {
     for (const center of californiaCenters) {
-      const centerLink = page.locator(`a[href="/center/${center.id}"]`);
+      const centerLink = page.locator(`a[href="/center/${center.id}"]`).first();
       await expect(centerLink).toBeVisible();
     }
   });

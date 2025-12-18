@@ -11,11 +11,13 @@ export default function About() {
       className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
       aria-label="About page"
     >
-      <AboutHeader />
-      <AboutStory />
-      <AboutValues />
-      <AboutTeam />
-      <AboutMission />
+      <div className="container mx-auto my-10 space-y-8 p-5">
+        <AboutHeader />
+        <AboutStory />
+        <AboutValues />
+        <AboutTeam />
+        <AboutMission />
+      </div>
       <AboutCTA />
     </main>
   );

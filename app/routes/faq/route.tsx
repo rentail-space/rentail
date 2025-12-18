@@ -32,8 +32,10 @@ export default function FAQ() {
           __html: JSON.stringify(schemaData()),
         }}
       />
-      <FAQHeader />
-      <FAQQuestions />
+      <div className="container mx-auto my-10 p-5">
+        <FAQHeader />
+        <FAQQuestions />
+      </div>
       <FAQCTA />
     </main>
   );

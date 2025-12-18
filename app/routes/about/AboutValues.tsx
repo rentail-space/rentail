@@ -23,35 +23,31 @@ const values = [
 
 export default function AboutValues() {
   return (
-    <section className="bg-[hsl(60,100%,99%)] px-4 py-20">
-      <div className="container mx-auto max-w-6xl">
-        <div className="mb-16 text-center">
-          <h2 className="mb-4 font-bold text-4xl text-black leading-tight">
-            Our Values
-          </h2>
-          <p className="mx-auto max-w-2xl font-medium text-black text-xl leading-relaxed">
-            These principles guide everything we do at rentail.space
-          </p>
-        </div>
+    <section className="mx-auto max-w-6xl bg-[hsl(60,100%,99%)] py-20">
+      <div className="mb-16 text-center">
+        <h2 className="mb-4 font-bold text-4xl text-black leading-tight">
+          Our Values
+        </h2>
+        <p className="mx-auto max-w-2xl font-medium text-black text-xl leading-relaxed">
+          These principles guide everything we do at rentail.space
+        </p>
+      </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {values.map((value) => (
-            <div
-              key={value.title}
-              className="rounded-md border-2 border-black bg-white p-8 shadow-[4px_4px_0px_0px_black]"
-            >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-base border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
-                {value.icon}
-              </div>
-              <h3 className="mb-3 font-bold text-black text-xl">
-                {value.title}
-              </h3>
-              <p className="font-medium text-black leading-relaxed">
-                {value.description}
-              </p>
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        {values.map((value) => (
+          <div
+            key={value.title}
+            className="rounded-md border-2 border-black bg-white p-8 shadow-[4px_4px_0px_0px_black]"
+          >
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-base border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
+              {value.icon}
             </div>
-          ))}
-        </div>
+            <h3 className="mb-3 font-bold text-black text-xl">{value.title}</h3>
+            <p className="font-medium text-black leading-relaxed">
+              {value.description}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );

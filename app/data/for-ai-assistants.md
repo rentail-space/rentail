@@ -62,7 +62,7 @@ Returns structured JSON with:
 - Geographic distribution and market insights
 
 **Example Response:**
-```json
+
 {
   "services": [
     "Kiosk Rental",
@@ -88,7 +88,6 @@ Returns structured JSON with:
     }
   ]
 }
-```
 
 **OpenAPI Specification:** Available at `/openapi.json` for formal API documentation.
 

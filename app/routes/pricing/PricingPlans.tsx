@@ -63,7 +63,7 @@ const mallPlans = [
 export default function PricingPlans() {
   return (
     <>
-      <section className="bg-[hsl(60,100%,99%)] px-4 py-20">
+      <section className="bg-[hsl(60,100%,99%)] py-20">
         <div className="container mx-auto max-w-7xl">
           <h2 className="mb-4 text-center font-bold text-3xl text-black leading-tight">
             For Merchants
@@ -78,7 +78,7 @@ export default function PricingPlans() {
         </div>
       </section>
 
-      <section className="bg-[hsl(60,100%,99%)] px-4 py-20">
+      <section className="bg-[hsl(60,100%,99%)] py-20">
         <div className="container mx-auto max-w-7xl">
           <h2 className="mb-4 text-center font-bold text-3xl text-black leading-tight">
             For Shopping Centers & Malls

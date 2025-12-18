@@ -41,5 +41,9 @@ export default function CenterPage({
 }: {
   loaderData: Awaited<ReturnType<typeof loader>>;
 }) {
-  return <Center center={loaderData} />;
+  return (
+    <main className="container mx-auto my-10 space-y-8 p-5">
+      <Center center={loaderData} />
+    </main>
+  );
 }

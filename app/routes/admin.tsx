@@ -17,7 +17,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function Admin() {
   const outlet = useOutlet();
   return (
-    <main className="container mx-auto my-10">
+    <main className="container mx-auto my-10 p-5">
       {outlet ?? <NotFoundPage />}
     </main>
   );

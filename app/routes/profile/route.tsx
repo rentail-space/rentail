@@ -1,6 +1,7 @@
 import { captureException } from "@sentry/react-router";
 import bcrypt from "bcrypt";
 import { invariant } from "es-toolkit";
+import type { User } from "prisma/generated/client";
 import { useState } from "react";
 import { redirect, useLoaderData } from "react-router";
 import { ulid } from "ulid";
@@ -11,7 +12,6 @@ import { findUserAndLastChat } from "~/lib/sessions.server";
 import ProfileEmailForm from "./ProfileEmailForm";
 import ProfileNameForm from "./ProfileNameForm";
 import ProfilePasswordForm from "./ProfilePasswordForm";
-import type { User } from "prisma/generated/client";
 
 export const handle = { headerLinks: [] };
 
@@ -176,7 +176,7 @@ export default function ProfilePage() {
   );
 
   return (
-    <div className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12 sm:px-6 lg:px-8">
+    <main className="container min-h-screen bg-[hsl(60,100%,99%)] px-5 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-2xl rounded-md border-2 border-black bg-white shadow-[8px_8px_0px_0px_black]">
         <div className="border-black border-b-2 p-8">
           <h1 className="mb-2 font-bold text-3xl text-black">
@@ -209,6 +209,6 @@ export default function ProfilePage() {
           </Tabs>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

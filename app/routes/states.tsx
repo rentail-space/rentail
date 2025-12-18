@@ -1,5 +1,7 @@
+import { ArrowRightIcon } from "lucide-react";
 import { Link } from "react-router";
 import { Streamdown } from "streamdown";
+import { Button } from "~/components/ui/Button";
 import prisma from "~/lib/prisma";
 
 export function meta() {
@@ -41,7 +43,7 @@ export default function StatePage({
 }) {
   return (
     <main
-      className="container mx-auto my-10 max-w-3xl space-y-8"
+      className="container mx-auto my-10 max-w-3xl space-y-8 p-5"
       aria-label="US states listing"
     >
       <script
@@ -78,7 +80,6 @@ export default function StatePage({
                 abbreviation={abbreviation}
                 name={name}
                 lede={lede}
-                centers={loaderData.centers}
               />
             </li>
           ))}
@@ -102,28 +103,34 @@ function LinkToState({
   abbreviation,
   name,
   lede,
-  centers,
 }: {
   abbreviation: string;
   name: string;
   lede: string;
-  centers: { state: string; _count: { _all: number } }[];
 }) {
   const url = `/state/${abbreviation.toLowerCase()}`;
   return (
-    <Link to={url} className="space-y-2 hover:*:text-blue-500" itemProp="url">
-      <div className="flex flex-row items-center justify-between">
-        <h2 className="font-bold text-xl" itemProp="name">
-          {name}
-        </h2>
-        <span itemProp="description">
-          {countCenters(centers, abbreviation)} centers
-        </span>
+    <div>
+      <Link to={url} className="space-y-2" itemProp="url">
+        <div className="flex flex-row items-center justify-between">
+          <h2 className="font-bold text-xl" itemProp="name">
+            {name}
+          </h2>
+        </div>
+        <Streamdown className="text-gray-500" mode="static">
+          {lede}
+        </Streamdown>
+      </Link>
+
+      <div className="flex w-full flex-row justify-end">
+        <Button variant="secondary" asChild>
+          <Link to={`/state/${abbreviation.toLowerCase()}`}>
+            See all centers
+            <ArrowRightIcon className="h-4 w-4" />
+          </Link>
+        </Button>
       </div>
-      <Streamdown className="text-gray-500" mode="static">
-        {lede}
-      </Streamdown>
-    </Link>
+    </div>
   );
 }
 

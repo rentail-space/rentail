@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { basename } from "node:path";
 import { z } from "zod";
 import prisma from "~/lib/prisma";
+import envVars from "../env";
 
 const schema = z.object({
   name: z.string(),
@@ -53,7 +54,9 @@ export default async function seedCenter(filename: string) {
   const data = await readFile(filename, "utf-8");
   const center = schema.parse(JSON.parse(data));
   const imageURLs = center.imageURLs.map((url) =>
-    new URL(url, "https://rentail.space").toString(),
+    envVars.isProduction
+      ? new URL(url, "https://rentail.space").toString()
+      : url,
   );
   const id = basename(filename, ".json");
 

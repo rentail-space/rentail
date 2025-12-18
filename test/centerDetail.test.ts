@@ -99,4 +99,12 @@ describe("Center detail page", () => {
     expect(content).toContain("shopping center");
     expect(content).toContain("kiosk rental");
   });
+
+  it("should match inner HTML snapshot", async () => {
+    await expect(page.locator("main")).toMatchInnerHTML();
+  });
+
+  it("should match visual regression test", async () => {
+    await expect(page.locator("main")).toMatchScreenshot();
+  });
 });

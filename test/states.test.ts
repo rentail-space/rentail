@@ -1,18 +1,11 @@
 import { type Page, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import prisma from "~/lib/prisma";
 import { goto } from "~/test/helpers/launchBrowser";
 
 describe("States listing page", () => {
   let page: Page;
-  let californiaCount: number;
 
   beforeAll(async () => {
-    // Count shopping centers in California
-    californiaCount = await prisma.property.count({
-      where: { state: "CA" },
-    });
-
     // Navigate to states page
     page = await goto("/states");
   });
@@ -24,12 +17,6 @@ describe("States listing page", () => {
   it("should display California in the list", async () => {
     const californiaHeading = page.locator("h2", { hasText: "California" });
     await expect(californiaHeading).toBeVisible();
-  });
-
-  it("should show the correct number of centers for California", async () => {
-    const centerCountText = `${californiaCount} centers`;
-    const centerCount = page.locator(`text=${centerCountText}`);
-    await expect(centerCount).toBeVisible();
   });
 
   it("should include valid JSON-LD structured data", async () => {

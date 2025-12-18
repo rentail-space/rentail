@@ -13,8 +13,8 @@ import PageLayout from "~/components/layout/PageLayout";
 import "~/global.css";
 import loggingMiddleware from "~/lib/middleware/logging";
 import { utmMiddleware } from "~/lib/middleware/utm";
-import { findUserAndLastChat } from "./lib/sessions.server";
 import type { Route } from "./+types/root";
+import { findUserAndLastChat } from "./lib/sessions.server";
 
 export const middleware: Route.MiddlewareFunction[] = [
   utmMiddleware,
@@ -88,6 +88,8 @@ export const handle = {
     { label: "Pricing", to: "/pricing" },
     { label: "Blog", to: "/blog" },
     { label: "FAQ", to: "/faq" },
+    { label: "States", to: "/states" },
+    { label: "🚀 Get Started", to: "/chat" },
   ],
 };
 

@@ -1,8 +1,15 @@
 import { clamp, meanBy, range } from "es-toolkit";
-import { MapPinIcon, MoveLeftIcon, StarIcon } from "lucide-react";
+import {
+  ArrowRightIcon,
+  MapPinIcon,
+  MoveLeftIcon,
+  StarIcon,
+} from "lucide-react";
+import type { PropertyGetPayload } from "prisma/generated/models";
 import { Children, Fragment, useRef } from "react";
 import { Link } from "react-router";
 import { Streamdown } from "streamdown";
+import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
 import prisma from "~/lib/prisma";
 import timeOfDay from "~/lib/timeOfDay";
@@ -55,7 +62,7 @@ export default function StatePage({
   const { centers, state } = loaderData;
 
   return (
-    <main className="container mx-auto my-10 space-y-8">
+    <main className="container mx-auto my-10 space-y-8 p-5">
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated data
@@ -102,77 +109,70 @@ export default function StatePage({
             itemType="https://schema.org/ListItem"
             itemProp="itemListElement"
           >
-            <Link
-              className="space-y-2 hover:*:text-blue-500"
-              to={`/center/${center.id}`}
-              itemProp="url"
-            >
-              <meta itemProp="position" content={String(index + 1)} />
-              <h2
-                className="flex flex-row items-center justify-between gap-2 font-bold text-xl"
-                itemProp="name"
-              >
-                <span>{center.name}</span>
-                <span className="flex flex-row flex-nowrap items-center gap-2 text-gray-500 text-sm">
-                  {center.city}
-                  <MapPinIcon
-                    onClick={(event) => {
-                      event.preventDefault();
-                      centerRef.current?.({
-                        longitude: center.longitude ?? 0,
-                        latitude: center.latitude ?? 0,
-                      });
-                    }}
-                    className="h-6 w-6 cursor-pointer text-blue-500"
-                  />
-                </span>
-              </h2>
-
-              <p className="space-x-2">
-                {center.rating && center.rating >= 3 && (
-                  <RatingStars rating={center.rating} />
-                )}
-                <span itemProp="description">{center.summary}</span>
-              </p>
-
-              <CenterStats>
-                {center.numberOfStores >= 30 && (
-                  <span>{center.numberOfStores.toLocaleString()} stores</span>
-                )}
-                {center.squareFootage >= 100000 && (
-                  <span>
-                    {center.squareFootage.toLocaleString()} square feet
-                  </span>
-                )}
-                {center.openFrom && center.openUntil && (
-                  <span>
-                    {timeOfDay(center.openFrom)} &mdash;{" "}
-                    {timeOfDay(center.openUntil)}
-                  </span>
-                )}
-                {center.rating && center.rating >= 3 && (
-                  <span>
-                    {clamp(center.rating, 1, 5).toFixed(1)}
-                    {center.reviewCount && center.reviewCount >= 5 ? (
-                      <> from {center.reviewCount.toLocaleString()} reviews</>
-                    ) : (
-                      " stars"
-                    )}
-                  </span>
-                )}
-
-                {center.spaces.length > 0 && (
-                  <span>
-                    {center.spaces.length} available{" "}
-                    {center.spaces.length === 1 ? "space" : "spaces"}
-                  </span>
-                )}
-              </CenterStats>
-            </Link>
+            <meta itemProp="position" content={String(index + 1)} />
+            <LinkToCenter center={center} centerRef={centerRef} />
           </li>
         ))}
       </ul>
     </main>
+  );
+}
+
+function LinkToCenter({
+  center,
+  centerRef,
+}: {
+  center: PropertyGetPayload<{ include: { spaces: true } }>;
+  centerRef: React.RefObject<
+    ((center: { longitude: number; latitude: number }) => void) | null
+  >;
+}) {
+  return (
+    <div className="space-y-2" itemProp="url">
+      <div className="flex flex-row flex-nowrap items-center justify-between gap-4">
+        <h2
+          className="flex flex-row items-center justify-between gap-2 font-bold text-xl"
+          itemProp="name"
+        >
+          <Link to={`/center/${center.id}`}>{center.name}</Link>
+        </h2>
+        <button
+          type="button"
+          className="flex cursor-pointer flex-row flex-nowrap items-center gap-2 text-gray-500 text-sm"
+          title="Show center on map"
+          onClick={(event) => {
+            event.preventDefault();
+            centerRef.current?.(center);
+          }}
+        >
+          {center.city}
+          <MapPinIcon className="h-6 w-6 text-blue-500" />
+        </button>
+      </div>
+
+      <div className="flex flex-row flex-nowrap items-end justify-between gap-4">
+        <Link to={`/center/${center.id}`} className="space-y-2">
+          <p className="space-x-2">
+            {center.rating && center.rating >= 3 && (
+              <RatingStars rating={center.rating} />
+            )}
+            <span itemProp="description">{center.summary}</span>
+          </p>
+          <KeyCenterStats center={center} />
+        </Link>
+
+        <Button
+          variant="secondary"
+          className="flex flex-row flex-nowrap items-center gap-2"
+          asChild
+        >
+          <Link to={`/center/${center.id}`}>
+            See center
+            <ArrowRightIcon className="h-4 w-4" />
+          </Link>
+        </Button>
+      </div>
+    </div>
   );
 }
 
@@ -195,16 +195,62 @@ function RatingStars({ rating }: { rating: number }) {
   );
 }
 
-function CenterStats({ children }: { children: React.ReactNode }) {
+function KeyCenterStats({
+  center,
+}: {
+  center: PropertyGetPayload<{ include: { spaces: true } }>;
+}) {
+  return (
+    <SplitCenterStats>
+      {center.numberOfStores >= 30 && (
+        <span className="whitespace-nowrap">
+          {center.numberOfStores.toLocaleString()} stores
+        </span>
+      )}
+      {center.squareFootage >= 100000 && (
+        <span className="whitespace-nowrap">
+          {center.squareFootage.toLocaleString()} square feet
+        </span>
+      )}
+      {center.openFrom && center.openUntil && (
+        <span className="whitespace-nowrap">
+          {timeOfDay(center.openFrom)} &mdash; {timeOfDay(center.openUntil)}
+        </span>
+      )}
+      {center.rating && center.rating >= 3 && (
+        <span className="whitespace-nowrap">
+          {clamp(center.rating, 1, 5).toFixed(1)}
+          {center.reviewCount && center.reviewCount >= 5 ? (
+            <> from {center.reviewCount.toLocaleString()} reviews</>
+          ) : (
+            " stars"
+          )}
+        </span>
+      )}
+
+      {center.spaces.length > 0 && (
+        <span className="whitespace-nowrap">
+          {center.spaces.length} available{" "}
+          {center.spaces.length === 1 ? "space" : "spaces"}
+        </span>
+      )}
+    </SplitCenterStats>
+  );
+}
+
+function SplitCenterStats({ children }: { children: React.ReactNode[] }) {
   const visible = Children.toArray(children).filter((child) => !!child);
   return (
-    <div className="flex flex-row gap-2 text-gray-500 text-sm">
-      {visible.map((child, index) => (
-        <Fragment key={index.toString()}>
-          {child}
-          {index < visible.length - 1 && <span>&bull;</span>}
-        </Fragment>
-      ))}
+    <div className="flex flex-row flex-wrap gap-x-2 text-gray-500 text-sm">
+      {children.map(
+        (child, index) =>
+          child && (
+            <Fragment key={index.toString()}>
+              {child}
+              {index < visible.length - 1 && <span>&bull;</span>}
+            </Fragment>
+          ),
+      )}
     </div>
   );
 }

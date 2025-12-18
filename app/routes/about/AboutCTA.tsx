@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 export default function AboutCTA() {
   return (
-    <section className="bg-[hsl(47,100%,95%)] px-4 py-20">
+    <section className="bg-[hsl(47,100%,95%)] px-5 py-20">
       <div className="container mx-auto max-w-3xl text-center">
         <div className="mb-8 flex justify-center">
           <div className="flex h-20 w-20 items-center justify-center rounded-md border-2 border-black bg-[hsl(37,92%,65%)] shadow-[4px_4px_0px_0px_black]">

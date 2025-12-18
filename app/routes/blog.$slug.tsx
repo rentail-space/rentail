@@ -20,7 +20,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
 
   return (
     <div className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12">
-      <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_black] md:p-12">
+      <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-12 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
         <title>{title}</title>
         <meta name="author" content="Rentail.space" />
         <meta name="section" content="Blog" />

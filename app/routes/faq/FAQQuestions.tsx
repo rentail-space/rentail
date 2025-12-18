@@ -6,29 +6,27 @@ import faq from "./faq";
 export default function FAQQuestions() {
   return (
     <section
-      className="bg-[hsl(60,100%,99%)] px-4 py-20"
+      className="mx-auto max-w-4xl bg-[hsl(60,100%,99%)] py-20"
       itemScope
       itemType="https://schema.org/FAQPage"
     >
-      <div className="container mx-auto max-w-4xl">
-        <div className="flex flex-col gap-12">
-          {faq.map((category) => (
-            <div key={category.category}>
-              <h2 className="mb-6 font-bold text-3xl text-black leading-tight">
-                {category.category}
-              </h2>
-              <div className="flex flex-col gap-4">
-                {category.questions.map((faq) => (
-                  <FAQItem
-                    key={faq.question}
-                    question={faq.question}
-                    answer={faq.answer}
-                  />
-                ))}
-              </div>
+      <div className="flex flex-col gap-12">
+        {faq.map((category) => (
+          <div key={category.category}>
+            <h2 className="mb-6 font-bold text-3xl text-black leading-tight">
+              {category.category}
+            </h2>
+            <div className="flex flex-col gap-4">
+              {category.questions.map((faq) => (
+                <FAQItem
+                  key={faq.question}
+                  question={faq.question}
+                  answer={faq.answer}
+                />
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   );

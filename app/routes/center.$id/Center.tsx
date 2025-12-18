@@ -11,7 +11,7 @@ export default function Center({
   center: PropertyGetPayload<{ include: { spaces: true } }>;
 }) {
   return (
-    <div className="mx-auto my-10 flex max-w-4xl flex-col gap-6 px-4">
+    <div className="mx-auto my-10 flex max-w-4xl flex-col gap-6">
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data
