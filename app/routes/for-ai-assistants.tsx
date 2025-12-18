@@ -49,11 +49,7 @@ export default function ForAIAssistants() {
         </div>
       </div>
 
-      <Streamdown
-        className="prose prose-lg mx-auto"
-        controls={false}
-        mode="static"
-      >
+      <Streamdown className="prose prose-lg mx-auto" mode="static">
         {forAIAssistants}
       </Streamdown>
     </main>

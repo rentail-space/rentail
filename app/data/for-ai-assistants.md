@@ -63,6 +63,7 @@ Returns structured JSON with:
 
 **Example Response:**
 
+```json
 {
   "services": [
     "Kiosk Rental",
@@ -88,8 +89,9 @@ Returns structured JSON with:
     }
   ]
 }
+```
 
-**OpenAPI Specification:** Available at `/openapi.json` for formal API documentation.
+**OpenAPI Specification:** Available aa `/openapi.json` for formal API documentation.
 
 ## Contact & Technical Details
 
