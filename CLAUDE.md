@@ -249,6 +249,45 @@ The core innovation that prevents message duplication on network interruptions:
 - General directives: `app/prompts/generalDirectives.md` - Shared behavioral guidelines (inserted via `$[generalDirectives]`)
 - Placeholder validation: throws error if any `$[tag]` remains unexpanded
 
+### LLM-Optimized API Endpoints
+
+**`/api/query` Endpoint:**
+- Machine-readable JSON endpoint optimized for LLM consumption
+- Returns real-time service information: services, coverage, space types, capabilities, data quality
+- Uses Prisma aggregations for live statistics (`groupBy`, `count`)
+- Documented at `/for-ai-assistants` page for human and AI discovery
+- OpenAPI 3.0 specification available at `/openapi.json`
+
+**Discoverability Mechanisms:**
+1. Human-readable docs on `/for-ai-assistants` with examples
+2. OpenAPI 3.0 spec at `/openapi.json` with full schema documentation
+3. Schema.org `potentialAction` (SearchAction) in structured data
+4. robots.txt comments and `Allow: /api/query` directive
+5. sitemap.xml inclusion for crawler discovery
+
+**Implementation Pattern:**
+```typescript
+// Use Prisma aggregations for real-time statistics
+const [totalCenters, spacesByType, centersByState] = await Promise.all([
+  prisma.property.count(),
+  prisma.propertySpace.groupBy({ by: ["type"], _count: true }),
+  prisma.property.groupBy({ by: ["state"], _count: true }),
+]);
+
+// Return with appropriate caching
+return Response.json(response, {
+  headers: {
+    "Content-Type": "application/json",
+    "Cache-Control": "public, max-age=3600",
+  },
+});
+```
+
+**Testing:**
+- Test suite in `test/apiQuery.test.ts` validates response structure
+- Ensures OpenAPI spec validity and sitemap inclusion
+- Verifies robots.txt directives
+
 ### Database & Observability
 
 **Database:**
@@ -325,6 +364,30 @@ The application uses a consistent Neo Brutalism design system across all UI comp
 - All borders are 2px solid black (no subtle 1px gray borders)
 - Background sections alternate between off-white and yellow for visual rhythm
 - Never use gradient backgrounds (flat colors only)
+
+## Semantic HTML & Accessibility
+
+**Main Tag Requirements:**
+- All pages must have a `<main>` tag with descriptive `aria-label`
+- Use `<main>` for primary page content (not `<article>` unless it's syndicated content)
+- Examples of proper aria-labels:
+  - Home page: `aria-label="Home page"`
+  - Chat interface: `aria-label="Chat interface"`
+  - FAQ page: `aria-label="Frequently asked questions"`
+  - Blog: `aria-label="Blog"`
+  - States listing: `aria-label="US states listing"`
+
+**Heading Hierarchy:**
+- Maintain proper h1 → h2 → h3 structure (no skipping levels)
+- One h1 per page (typically in the header section)
+- Use h2 for major sections, h3 for subsections
+- Example: Home page has h1 in HeroSection, h2 in FeaturesSection, h3/h4 for features
+
+**Why This Matters:**
+- Screen readers announce page purpose immediately via aria-labels
+- LLMs can parse page structure more effectively with semantic elements
+- Search engines better understand content hierarchy
+- Improved accessibility compliance (WCAG guidelines)
 
 ## Code Conventions
 
@@ -571,6 +634,25 @@ const user = await prisma.user.create({
 - Update mocks before test if new Claude behavior is needed
 - Example: `{"pattern": "test", "response": "This is a test response"}`
 
+**Adding a New Blog Post:**
+1. Create markdown file in `app/data/blog/` (e.g., `my-post.md`)
+2. Add YAML frontmatter with required fields:
+   ```yaml
+   ---
+   title: "Your Post Title"
+   description: "SEO-friendly description"
+   date: "2025-01-15"
+   author: "Author Name"
+   tags: ["specialty-leasing", "kiosk-rental"]
+   ---
+   ```
+3. Blog posts are auto-discovered via `blogPosts.server.ts`
+4. Images go in `public/blog/` directory
+5. Use descriptive filenames for SEO (e.g., `how-to-rent-kiosk-space.md`)
+6. Test blog rendering at `/blog` (listing) and `/blog/your-slug` (detail)
+7. Add FAQPage schema if post contains Q&A content for rich snippets
+8. Follow heading hierarchy: h1 for title (auto-generated), h2 for sections
+
 ## Known Issues & Troubleshooting
 
 **Vitest RPC Error: "rpc is closed, cannot call onCancel"**
@@ -619,6 +701,8 @@ const user = await prisma.user.create({
 - `root.tsx` - App shell + error boundary
 - `routes/` - Individual routes
   - API Routes:
+    - `api.query.ts` - LLM-optimized service information endpoint
+    - `openapi[.]json.ts` - OpenAPI 3.0 specification
     - `api.chat.$chatId.message.ts` - Create chat message (streaming)
     - `api.chat.$chatId.message.$messageId.stream.ts` - Resume interrupted stream
     - `api.chat.$chatId.stop.ts` - Stop active stream
