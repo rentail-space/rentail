@@ -1,0 +1,18 @@
+2025-12-19 10:30:03.839 PST [6552] LOG:  starting PostgreSQL 17.7 (Homebrew) on aarch64-apple-darwin25.1.0, compiled by Apple clang version 17.0.0 (clang-1700.4.4.1), 64-bit
+2025-12-19 10:30:03.841 PST [6552] LOG:  listening on IPv6 address "::1", port 5432
+2025-12-19 10:30:03.841 PST [6552] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-12-19 10:30:03.841 PST [6552] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2025-12-19 10:30:03.844 PST [6555] LOG:  database system was shut down at 2025-12-19 10:29:56 PST
+2025-12-19 10:30:03.846 PST [6552] LOG:  database system is ready to accept connections
+2025-12-19 10:32:31.108 PST [10251] FATAL:  role "postgres" does not exist
+2025-12-19 10:32:31.111 PST [10252] FATAL:  role "postgres" does not exist
+2025-12-19 10:32:57.545 PST [6574] ERROR:  session user cannot be renamed
+2025-12-19 10:32:57.545 PST [6574] STATEMENT:  ALTER USER "assaf" RENAME TO "postgres";
+2025-12-19 10:33:08.346 PST [6574] ERROR:  session user cannot be renamed
+2025-12-19 10:33:08.346 PST [6574] STATEMENT:  ALTER USER "assaf" RENAME TO "postgres";
+2025-12-19 10:33:38.980 PST [6574] ERROR:  session user cannot be renamed
+2025-12-19 10:33:38.980 PST [6574] STATEMENT:  ALTER USER "assaf" RENAME TO "postgres";
+2025-12-19 10:34:39.872 PST [14150] ERROR:  permission denied for schema public
+2025-12-19 10:34:39.872 PST [14150] STATEMENT:  CREATE TYPE "Role" AS ENUM ('assistant', 'user')
+2025-12-19 10:35:03.850 PST [6553] LOG:  checkpoint starting: time
+2025-12-19 10:35:17.964 PST [6553] LOG:  checkpoint complete: wrote 142 buffers (0.9%); 0 WAL file(s) added, 0 removed, 0 recycled; write=14.105 s, sync=0.007 s, total=14.115 s; sync files=104, longest=0.002 s, average=0.001 s; distance=684 kB, estimate=684 kB; lsn=0/15CE3D0, redo lsn=0/15C3A60
