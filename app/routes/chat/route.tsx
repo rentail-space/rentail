@@ -81,8 +81,9 @@ export default function ChatPage({
         className="inset-0 flex h-screen flex-col justify-between bg-[hsl(60,100%,99%)]"
       >
         <PageHeader />
-        <div className="flex-1 overflow-y-auto scroll-smooth px-4 py-4">
-          <StickToBottom.Content className="flex h-full flex-col justify-end">
+
+        <div className="overflow-y-auto scroll-smooth px-4">
+          <StickToBottom.Content className="flex flex-1 flex-col justify-end">
             <div className="flex flex-row gap-4 lg:pr-4">
               <Messages
                 error={error}

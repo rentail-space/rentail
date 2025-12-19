@@ -1,10 +1,10 @@
+import type { UIMessage } from "ai";
 import { useEffect, useRef } from "react";
 import { BeatLoading } from "respinner";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import { cn } from "~/lib/utils";
 import askQuestion from "~/routes/chat/askQuestion";
 import ResponseMessage from "./ResponseMessage";
-import type { UIMessage } from "ai";
 
 export default function Messages({
   isAborted,
@@ -45,7 +45,13 @@ export default function Messages({
   }, [messages.length, isTyping, scrollToBottom, isAtBottom]);
 
   return (
-    <div className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent mx-auto flex max-w-3xl flex-1 flex-col justify-end gap-4 overflow-y-auto scroll-smooth p-4">
+    <div
+      className={cn(
+        "scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent overflow-y-auto scroll-smooth",
+        "mx-auto flex max-w-3xl p-4",
+        "flex flex-col justify-end gap-4",
+      )}
+    >
       {messages.map((message) =>
         message.role === "user" ? (
           <UserMessage key={message.id} message={message} />
