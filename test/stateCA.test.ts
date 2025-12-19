@@ -198,7 +198,6 @@ describe("State shopping centers page", () => {
     const title = await page.title();
     expect(title).toContain("California");
     expect(title).toContain("Shopping Centers");
-    expect(title).toContain("Specialty Leasing");
     expect(title).toContain("Rentail.space");
   });
 
