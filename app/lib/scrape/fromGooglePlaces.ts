@@ -296,7 +296,6 @@ async function downloadPhotos({
   for (let index = 0; index < download.length; index++) {
     const photo = download[index];
     try {
-      console.log("Downloading", photo.name);
       const url = new URL(
         `https://places.googleapis.com/v1/${photo.name}/media`,
       );

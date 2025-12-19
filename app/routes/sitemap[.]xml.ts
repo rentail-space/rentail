@@ -7,8 +7,6 @@ export async function loader() {
   // They do support lastmod, but seo-tools doesn't seem to support it.
   // https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping
 
-  console.log(routes);
-
   const sitemap = await generateRemixSitemap({
     domain: "https://rentail.space",
     ignore: ["*/\\*", "/error", "/.well-known/*"],

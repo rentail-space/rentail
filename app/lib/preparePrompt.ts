@@ -35,7 +35,6 @@ export default async function preparePrompt({
     headers,
     user,
   });
-  console.log("displayName", displayName);
   // Use fixed date/time in test mode for consistent LLM caching
   const [date, time] = envVars.isTest
     ? ["2026-01-15", "12:00:00.000Z"]
