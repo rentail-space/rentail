@@ -5,11 +5,12 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { invariant, sumBy } from "es-toolkit";
+import { groupBy, invariant, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
 import { ArrowDown, ArrowRight, ArrowUp } from "lucide-react";
 import { DateTime } from "luxon";
 import { parseAsInteger, useQueryState } from "nuqs";
+import type { User, Waitlist } from "prisma/generated/client";
 import { Fragment } from "react";
 import { Link, type LoaderFunctionArgs } from "react-router";
 import { Button } from "~/components/ui/Button";
@@ -26,7 +27,6 @@ import deviceDetection from "~/lib/deviceDetection";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
-import type { User, Waitlist } from "prisma/generated/client";
 import type { Route } from "./+types/admin.users";
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -38,15 +38,16 @@ export async function loader({ request }: LoaderFunctionArgs) {
   });
 
   const waiting = await prisma.waitlist.findMany();
-  const analytics = await getGoogleAnalyticsViewCount();
+  const analytics = await fromGoogleAnalytics();
   return { users, waiting, analytics };
 }
 
-async function getGoogleAnalyticsViewCount(): Promise<
+async function fromGoogleAnalytics(): Promise<
   Array<{
-    activeUsers: string;
+    activeUsers: number;
+    averageSessionDuration: number;
     date: string;
-    screenPageViews: string;
+    sessionSource: string;
   }>
 > {
   const auth = new JWT({
@@ -59,8 +60,8 @@ async function getGoogleAnalyticsViewCount(): Promise<
   try {
     const response = await client.runReport({
       dateRanges: [{ endDate: "today", startDate: "90daysAgo" }],
-      dimensions: [{ name: "date" }],
-      metrics: [{ name: "activeUsers" }, { name: "screenPageViews" }],
+      dimensions: [{ name: "date" }, { name: "sessionSource" }],
+      metrics: [{ name: "activeUsers" }, { name: "averageSessionDuration" }],
       property: "properties/496833933",
     });
     const rows = response[0].rows;
@@ -68,8 +69,11 @@ async function getGoogleAnalyticsViewCount(): Promise<
 
     return rows.map((row) => ({
       date: row.dimensionValues?.[0]?.value ?? "",
-      activeUsers: row.metricValues?.[0]?.value ?? "",
-      screenPageViews: row.metricValues?.[1]?.value ?? "",
+      sessionSource: row.dimensionValues?.[1]?.value ?? "",
+      activeUsers: Number.parseInt(row.metricValues?.[0]?.value ?? "", 10),
+      averageSessionDuration: Number.parseFloat(
+        row.metricValues?.[1]?.value ?? "",
+      ),
     }));
   } catch (error) {
     console.error("Failed to fetch GA view count", error);
@@ -98,6 +102,7 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
       <RangeSelector period={period} setPeriod={setPeriod} />
       <Analytics analytics={analytics} users={recent} />
       <AllUsers users={recent} />
+      <Sources analytics={analytics} />
       <WaitingList waiting={loaderData.waiting} />
     </main>
   );
@@ -131,11 +136,7 @@ function Analytics({
   analytics,
   users,
 }: {
-  analytics: Array<{
-    activeUsers: string;
-    date: string;
-    screenPageViews: string;
-  }>;
+  analytics: Awaited<ReturnType<typeof fromGoogleAnalytics>>;
   users: User[];
 }) {
   const activeUsers = sumBy(analytics, (day) => Number(day.activeUsers));
@@ -143,15 +144,12 @@ function Analytics({
 
   return (
     <div className="flex flex-col gap-8">
-      {/* Tabs for period selection */}
-
-      {/* Conversion Funnel */}
       <div className="mx-auto flex flex-row items-center gap-4">
         <Stat
           title="Page Views"
-          value={sumBy(analytics, (day) =>
-            Number(day.screenPageViews),
-          ).toLocaleString()}
+          value={analytics
+            .filter((entry) => entry.sessionSource === "chatgpt.com")
+            .length.toLocaleString()}
           description="Google Analytics"
         />
         <ArrowRight className="h-6 w-6 text-gray-400" />
@@ -192,6 +190,38 @@ function Stat({
       <div className="font-bold text-2xl">{value}</div>
       <div className="text-gray-500 text-sm">{description}</div>
     </div>
+  );
+}
+
+function Sources({
+  analytics,
+}: {
+  analytics: Awaited<ReturnType<typeof fromGoogleAnalytics>>;
+}) {
+  const grouped = groupBy(analytics, (entry) => entry.sessionSource);
+
+  return (
+    <section className="flex flex-col gap-4">
+      <h2 className="font-bold text-2xl">
+        Sources{" "}
+        <span className="text-gray-500">
+          ({Object.keys(grouped).length} source)
+        </span>
+      </h2>
+      <Table>
+        <TableBody>
+          {Object.entries(grouped).map(([sessionSource, entries], index) => (
+            <TableRow key={sessionSource}>
+              <TableHead className="w-10">{index + 1}</TableHead>
+              <TableCell>{sessionSource}</TableCell>
+              <TableCell className="text-right">
+                {entries.length.toLocaleString()} sessions
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </section>
   );
 }
 
