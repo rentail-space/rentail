@@ -82,7 +82,7 @@ describe("States listing page", () => {
 
   it("should have proper meta title", async () => {
     const title = await page.title();
-    expect(title).toContain("US States");
+    expect(title).toContain("Shopping Centers by State");
     expect(title).toContain("Specialty Leasing");
     expect(title).toContain("Rentail.space");
   });
