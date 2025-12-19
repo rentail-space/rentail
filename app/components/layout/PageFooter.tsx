@@ -46,23 +46,25 @@ export default function PageFooter() {
         <SocialLinks />
       </aside>
 
-      {links.map((link) => (
-        <nav key={link.title} className="flex flex-col gap-2">
-          <h3 className="flex flex-col gap-4 font-bold text-black">
-            {link.title}
-          </h3>
-          {link.links.map((link) => (
-            <NavLink
-              aria-label={`Go to ${link.label} page`}
-              className="font-medium text-black text-sm transition-colors hover:text-[hsl(37,92%,65%)]"
-              key={link.to}
-              to={link.to}
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </nav>
-      ))}
+      <div className="mx-auto grid w-full grid-cols-3 gap-4 md:max-w-1/2">
+        {links.map((column) => (
+          <nav key={column.title} className="flex flex-col gap-2">
+            <h3 className="flex flex-col gap-4 font-bold text-black">
+              {column.title}
+            </h3>
+            {column.links.map((link) => (
+              <NavLink
+                aria-label={`Go to ${link.label} page`}
+                className="font-medium text-black text-sm transition-colors hover:text-[hsl(37,92%,65%)]"
+                key={link.to}
+                to={link.to}
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </nav>
+        ))}
+      </div>
     </footer>
   );
 }
