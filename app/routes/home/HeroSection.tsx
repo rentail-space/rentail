@@ -1,7 +1,8 @@
 import { invariant } from "es-toolkit";
 import { Link } from "react-router";
-import schema from "~/data/schema.json";
 import type { ImageObject } from "schema-dts";
+import schema from "~/data/schema.json";
+import { cn } from "~/lib/utils";
 
 export default function HeroSection() {
   const heroImage = schema["@graph"].find(
@@ -14,7 +15,12 @@ export default function HeroSection() {
     <section className="bg-[hsl(60,100%,99%)] p-10">
       <div className="mx-auto flex max-w-7xl flex-col gap-12 lg:flex-row-reverse lg:items-center">
         {/* Right Column - Image */}
-        <div className="flex flex-1 flex-col gap-4">
+        <div
+          className={cn(
+            "flex flex-1 flex-col gap-4 bg-conic",
+            "-rotate-3 duration-200 hover:rotate-2",
+          )}
+        >
           <div className="overflow-hidden rounded-md border-2 border-black bg-white p-4 shadow-[8px_8px_0px_0px_black]">
             <img
               alt={heroImage.caption?.toString()}

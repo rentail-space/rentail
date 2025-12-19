@@ -1,10 +1,16 @@
 import { Lightbulb } from "lucide-react";
+import { cn } from "~/lib/utils";
 
 export default function SpecialtyLeasing() {
   return (
     <section className="bg-[hsl(60,100%,99%)] px-4 py-20">
       <div className="container mx-auto max-w-4xl">
-        <div className="rounded-md border-2 border-black bg-white p-8 shadow-[6px_6px_0px_0px_black] md:p-12">
+        <div
+          className={cn(
+            "rounded-md border-2 border-black bg-white p-8 shadow-[6px_6px_0px_0px_black] duration-200 hover:-rotate-1 md:p-12",
+            "rotate-1 duration-200 hover:-rotate-1",
+          )}
+        >
           <div className="flex items-start gap-4">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
               <Lightbulb className="h-6 w-6" />

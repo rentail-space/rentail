@@ -56,7 +56,6 @@ function BlogPostCard({ post }: { post: BlogPost }) {
         "transform transition-all duration-200 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:rotate-1 hover:shadow-[6px_6px_0px_0px_black]",
       )}
     >
-      hover:rotate-1
       {post.image ? (
         <div className="aspect-video w-full overflow-hidden">
           <img
