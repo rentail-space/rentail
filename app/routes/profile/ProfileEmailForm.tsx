@@ -1,5 +1,4 @@
 import { AlertCircle, AlertTriangle } from "lucide-react";
-import { useId } from "react";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/Button";
 import { Field, FieldLabel } from "~/components/ui/FieldSet";
@@ -10,7 +9,6 @@ export default function ProfileEmailForm({
 }: {
   user: { email: string | null };
 }) {
-  const emailId = useId();
   const fetcher = useFetcher();
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -42,10 +40,10 @@ export default function ProfileEmailForm({
       ) : null}
 
       <Field>
-        <FieldLabel htmlFor={emailId}>New Email Address</FieldLabel>
+        <FieldLabel htmlFor="email">New Email Address</FieldLabel>
         <Input
           defaultValue={user.email || ""}
-          id={emailId}
+          id="email"
           name="email"
           placeholder="you@example.com"
           required

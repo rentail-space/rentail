@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/Button";
 import { Input } from "~/components/ui/Input";
@@ -19,7 +19,6 @@ export default function WaitlistSection() {
 
 function JoinWaitlist() {
   const [email, setEmail] = useState("");
-  const id = useId();
   const fetcher = useFetcher();
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -36,7 +35,7 @@ function JoinWaitlist() {
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-4">
       <form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
-        <Label htmlFor={id} className="mb-8 font-medium text-black text-xl">
+        <Label htmlFor="email" className="mb-8 font-medium text-black text-xl">
           Join the waitlist today and be the first to know when we launch in
           your area.
         </Label>
@@ -54,7 +53,7 @@ function JoinWaitlist() {
           <Input
             autoComplete="email"
             className="h-14 w-full rounded-base border-2 border-black bg-white px-6 font-medium text-black text-lg shadow-[2px_2px_0px_0px_black] transition-all duration-100 placeholder:text-gray-600 focus-visible:translate-x-[-2px] focus-visible:translate-y-[-2px] focus-visible:shadow-[4px_4px_0px_0px_black]"
-            id={id}
+            id="email"
             name="email"
             onChange={(event) => setEmail(event.target.value)}
             pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"

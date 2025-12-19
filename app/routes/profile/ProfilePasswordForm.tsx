@@ -1,5 +1,5 @@
 import { AlertCircle, CheckCircle } from "lucide-react";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/Button";
 import {
@@ -11,9 +11,6 @@ import {
 import { Input } from "~/components/ui/Input";
 
 export default function ProfilePasswordForm() {
-  const currentPasswordId = useId();
-  const newPasswordId = useId();
-  const confirmPasswordId = useId();
   const fetcher = useFetcher();
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -48,21 +45,21 @@ export default function ProfilePasswordForm() {
 
       <FieldGroup>
         <Field>
-          <FieldLabel htmlFor={currentPasswordId}>Current Password</FieldLabel>
+          <FieldLabel htmlFor="current">Current Password</FieldLabel>
           <Input
             type="password"
             name="currentPassword"
-            id={currentPasswordId}
+            id="current"
             required
             placeholder="••••••••"
           />
         </Field>
 
         <Field>
-          <FieldLabel htmlFor={newPasswordId}>New Password</FieldLabel>
+          <FieldLabel htmlFor="new">New Password</FieldLabel>
           <Input
             type="password"
-            id={newPasswordId}
+            id="new"
             name="newPassword"
             required
             minLength={8}
@@ -71,13 +68,11 @@ export default function ProfilePasswordForm() {
           <FieldDescription>Must be at least 8 characters</FieldDescription>
         </Field>
         <Field>
-          <FieldLabel htmlFor={confirmPasswordId}>
-            Confirm New Password
-          </FieldLabel>
+          <FieldLabel htmlFor="confirm">Confirm New Password</FieldLabel>
           <Input
             type="password"
             name="confirmPassword"
-            id={confirmPasswordId}
+            id="confirm"
             required
             minLength={8}
             placeholder="••••••••"

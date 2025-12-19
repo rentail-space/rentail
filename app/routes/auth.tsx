@@ -1,7 +1,6 @@
 import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
 import { AlertCircle } from "lucide-react";
-import { useId } from "react";
 import { redirect, useFetcher } from "react-router";
 import { useToggle } from "usehooks-ts";
 import { Button } from "~/components/ui/Button";
@@ -57,9 +56,6 @@ export async function action({ request }: Route.ActionArgs): Promise<Response> {
 
 export default function AuthPage() {
   const [isSignUp, toggleIsSignUp] = useToggle(false);
-  const nameId = useId();
-  const emailId = useId();
-  const passwordId = useId();
   const fetcher = useFetcher();
 
   return (
@@ -90,9 +86,9 @@ export default function AuthPage() {
           <FieldSet>
             {isSignUp && (
               <Field>
-                <FieldLabel htmlFor={nameId}>Full Name</FieldLabel>
+                <FieldLabel htmlFor="name">Full Name</FieldLabel>
                 <Input
-                  id={nameId}
+                  id="name"
                   name="name"
                   type="text"
                   required
@@ -102,9 +98,9 @@ export default function AuthPage() {
             )}
 
             <Field>
-              <FieldLabel htmlFor={emailId}>Email Address</FieldLabel>
+              <FieldLabel htmlFor="email">Email Address</FieldLabel>
               <Input
-                id={emailId}
+                id="email"
                 name="email"
                 placeholder="you@example.com"
                 required
@@ -114,9 +110,9 @@ export default function AuthPage() {
             </Field>
 
             <Field>
-              <FieldLabel htmlFor={passwordId}>Password</FieldLabel>
+              <FieldLabel htmlFor="password">Password</FieldLabel>
               <Input
-                id={passwordId}
+                id="password"
                 minLength={8}
                 name="password"
                 placeholder="••••••••"
