@@ -1,11 +1,11 @@
 import { captureException } from "@sentry/react-router";
+import type { UIMessage } from "ai";
 import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import zod, { type ZodType } from "zod";
 import { geocodeFromUserInput } from "./geocode";
-import type { UIMessage } from "ai";
 
-const logger = debug("workingMemory");
+const logger = debug("server:workingMemory");
 
 /**
  * This is the schema that will be used to store the user's working memory in the

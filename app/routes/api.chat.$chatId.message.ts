@@ -19,7 +19,7 @@ import updateWorkingMemory, {
 import chatPrompt from "~/prompts/chatPrompt.md?raw";
 import type { Route } from "./+types/api.chat.$chatId.message";
 
-const logger = debug("chat");
+const logger = debug("server:chat");
 
 /**
  * Send a message to the chat.

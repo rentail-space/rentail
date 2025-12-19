@@ -14,7 +14,7 @@ type FirstRequest = {
   referer?: string;
 };
 
-const logger = debug("middleware");
+const logger = debug("server:middleware:utm");
 
 const { getSession, commitSession } = createCookieSessionStorage<
   FirstRequest,

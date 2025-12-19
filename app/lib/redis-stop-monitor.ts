@@ -3,7 +3,7 @@ import debug from "debug";
 import Redis from "ioredis";
 import envVars from "~/lib/env";
 
-const logger = debug("chat");
+const logger = debug("server:chat");
 
 /**
  * Creates a Redis-based stop signal monitor for a chat.

@@ -107,7 +107,7 @@ msw.events
     }
   })
   .on("unhandledException", ({ request, error }) => {
-    debug("msw")("%s %s errored!", request.method, request.url, error);
+    debug("server:msw")("%s %s errored!", request.method, request.url, error);
   });
 
 export default function listen() {

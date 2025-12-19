@@ -12,7 +12,7 @@ import { findOrCreateUser, recentMessages } from "~/lib/sessions.server";
 import updateWorkingMemory from "~/lib/workingMemory";
 import chatPrompt from "~/prompts/chatPrompt.md?raw";
 
-const logger = debug("conversations");
+const logger = debug("server:conversations");
 
 /**
  * Prepare a conversational test with a script that alternates between user

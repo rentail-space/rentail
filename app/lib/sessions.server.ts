@@ -41,7 +41,7 @@ const botUserAgents = [
   "Vercel",
 ];
 
-const logger = debug("sessions");
+const logger = debug("server:sessions");
 
 const { getSession, commitSession, destroySession } =
   createCookieSessionStorage<SessionData, SessionFlashData>({
