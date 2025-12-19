@@ -1,16 +1,7 @@
-import { invariant } from "es-toolkit";
 import { Link } from "react-router";
-import type { ImageObject } from "schema-dts";
-import schema from "~/data/schema.json";
 import { cn } from "~/lib/utils";
 
 export default function HeroSection() {
-  const heroImage = schema["@graph"].find(
-    (item) => item["@type"] === "ImageObject",
-  ) as ImageObject;
-  invariant(heroImage, "Hero image not found");
-  invariant(heroImage.contentUrl, "Hero image content URL not found");
-
   return (
     <section className="bg-[hsl(60,100%,99%)] p-10">
       <div className="mx-auto flex max-w-7xl flex-col gap-12 lg:flex-row-reverse lg:items-center">
@@ -23,11 +14,11 @@ export default function HeroSection() {
         >
           <div className="overflow-hidden rounded-md border-2 border-black bg-white p-4 shadow-[8px_8px_0px_0px_black]">
             <img
-              alt={heroImage.caption?.toString()}
+              alt="Two people sharing and exchanging items"
               className="h-auto w-full rounded-sm"
-              height={heroImage.height?.toString() ?? "auto"}
-              src={new URL(heroImage.contentUrl.toString()).pathname}
-              width={heroImage.width?.toString() ?? "auto"}
+              height="533"
+              src="/images/hero-image.jpg"
+              width="800"
             />
           </div>
           <div className="rounded-md border-2 border-black bg-[hsl(47,100%,95%)] px-6 py-4 text-center font-bold text-black text-lg shadow-[4px_4px_0px_0px_black]">
