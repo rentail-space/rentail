@@ -2,11 +2,12 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import { DateTime } from "luxon";
 import { Link } from "react-router";
 import type { BlogPost } from "~/lib/blogPosts.server";
+import { cn } from "~/lib/utils";
 
 export default function BlogPostsGrid({
   className,
   posts,
-  limit
+  limit,
 }: {
   className?: string;
   posts: BlogPost[];
@@ -25,14 +26,14 @@ export default function BlogPostsGrid({
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {posts.slice(0, limit ).map((post) => (
+            {posts.slice(0, limit).map((post) => (
               <BlogPostCard key={post.slug} post={post} />
             ))}
             {limit && posts.length > limit && (
               <div className="col-span-full text-center">
                 <Link
                   to="/blog"
-                  className="flex flex-row flex-nowrap gap-2 items-center justify-center font-medium text-black text-xl hover:text-[hsl(37,92%,65%)]"
+                  className="flex flex-row flex-nowrap items-center justify-center gap-2 font-medium text-black text-xl hover:text-[hsl(37,92%,65%)]"
                 >
                   See all blog posts <ArrowRight className="h-6 w-6" />
                 </Link>
@@ -49,8 +50,13 @@ function BlogPostCard({ post }: { post: BlogPost }) {
   return (
     <Link
       to={`/blog/${post.slug}`}
-      className="group flex transform flex-col overflow-hidden rounded-md border-2 border-black bg-white shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_black]"
+      className={cn(
+        "flex flex-col overflow-hidden rounded-md border-2 border-black bg-white shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_black]",
+        "rounded-md border-2 border-black bg-white shadow-[4px_4px_0px_0px_black]",
+        "transform transition-all duration-200 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:rotate-1 hover:shadow-[6px_6px_0px_0px_black]",
+      )}
     >
+      hover:rotate-1
       {post.image ? (
         <div className="aspect-video w-full overflow-hidden">
           <img
@@ -62,13 +68,16 @@ function BlogPostCard({ post }: { post: BlogPost }) {
       ) : (
         <div className="aspect-video w-full bg-[hsl(47,100%,95%)]" />
       )}
-      <div className="flex flex-col gap-3 p-6 h-60 justify-between">
+      <div className="flex h-60 flex-col justify-between gap-3 p-6">
         <div>
-            <time dateTime={post.published.toISOString()} className="text-gray-500 text-sm">
-              {DateTime.fromJSDate(post.published, {
-                zone: "utc",
-              }).toLocaleString(DateTime.DATE_MED)}
-            </time>
+          <time
+            dateTime={post.published.toISOString()}
+            className="text-gray-500 text-sm"
+          >
+            {DateTime.fromJSDate(post.published, {
+              zone: "utc",
+            }).toLocaleString(DateTime.DATE_MED)}
+          </time>
           <h2 className="line-clamp-2 font-bold text-black text-xl group-hover:text-[hsl(37,92%,65%)]">
             {post.title}
           </h2>

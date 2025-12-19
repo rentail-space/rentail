@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { Link } from "react-router";
+import { cn } from "~/lib/utils";
 
 const merchantPlans = {
   name: "For Merchants",
@@ -72,7 +73,7 @@ export default function PricingPlans() {
             Find and lease retail spaces with zero platform fees
           </p>
 
-          <div className="mx-auto grid max-w-xl grid-cols-1">
+          <div className="mx-auto grid max-w-xl grid-cols-1 hover:rotate-1">
             <PricingPlan plan={merchantPlans} />
           </div>
         </div>
@@ -114,11 +115,12 @@ function PricingPlan({
   return (
     <div
       key={plan.name}
-      className={`relative flex flex-col rounded-md border-2 border-black bg-white p-8 ${
+      className={cn(
+        "relative flex flex-col rounded-md border-2 border-black bg-white p-8",
         plan.highlighted
           ? "shadow-[8px_8px_0px_0px_black]"
-          : "shadow-[4px_4px_0px_0px_black]"
-      }`}
+          : "shadow-[4px_4px_0px_0px_black]",
+      )}
     >
       {plan.highlighted && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-sm border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-1 font-bold text-black text-sm shadow-[2px_2px_0px_0px_black]">
