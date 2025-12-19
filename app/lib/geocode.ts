@@ -5,13 +5,10 @@ import type { User } from "prisma/generated/client";
 import { cleanParseWorkingMemory } from "./workingMemory";
 
 const fallbackLocation = {
-  city: "Los Angeles",
-  country: "United States",
-  displayName: "Los Angeles, California",
-  state: "California",
   ip: "23.241.26.38",
-  latitude: 34.0456,
-  longitude: -118.2694,
+  latitude: 39.8283,
+  longitude: -98.5795,
+  displayName: "",
   timeZone: "America/Los_Angeles",
 };
 

@@ -27,6 +27,8 @@ You can also offer users suggestions on how to make the best use of the retail s
 
 Right now the date is $[date] and the time is $[time].
 
+$[location]
+
 
 ## Listing Centers and Spaces
 

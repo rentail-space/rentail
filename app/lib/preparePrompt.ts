@@ -1,3 +1,5 @@
+import type { PropertySpace, User } from "prisma/generated/client";
+import type { PropertyGetPayload } from "prisma/generated/models";
 import {
   cleanParseWorkingMemory,
   workingMemoryExample,
@@ -6,8 +8,6 @@ import generalDirectives from "~/prompts/generalDirectives.md?raw";
 import envVars from "./env";
 import findNearbyCenters from "./findNearbyCenters";
 import prisma from "./prisma";
-import type { PropertySpace, User } from "prisma/generated/client";
-import type { PropertyGetPayload } from "prisma/generated/models";
 
 /**
  * Prepare the prompt by replacing the placeholders with the actual values.
@@ -35,6 +35,7 @@ export default async function preparePrompt({
     headers,
     user,
   });
+  console.log("displayName", displayName);
   // Use fixed date/time in test mode for consistent LLM caching
   const [date, time] = envVars.isTest
     ? ["2026-01-15", "12:00:00.000Z"]
@@ -43,7 +44,12 @@ export default async function preparePrompt({
   return prompt
     .replace("$[date]", date)
     .replace("$[time]", time)
-    .replace("$[location]", displayName)
+    .replace(
+      "$[location]",
+      displayName
+        ? `The user is in ${displayName}`
+        : "Ask the user where are they looking for?",
+    )
     .replace("$[name]", user.name || "not known")
     .replace("$[workingMemory]", JSON.stringify(workingMemory, null, 2))
     .replace(
@@ -77,7 +83,7 @@ function centersToMarkdown({
   maxDistance: number;
 }): string {
   if (centers.length === 0)
-    return "I don't know where you are, so I can't find any shopping centers near you.";
+    return "I can't find any shopping centers near the user.";
 
   const prefix = `Here are the shopping centers in the area which are within ${maxDistance} miles of the user.
     These are all the shopping centers you know about.
