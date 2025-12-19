@@ -177,6 +177,18 @@ export default function ProfilePage() {
 
   return (
     <main className="container min-h-screen bg-[hsl(60,100%,99%)] px-5 py-12 sm:px-6 lg:px-8">
+      <title>
+        Profile Settings - Specialty Leasing & Retail Spaces | Rentail.space
+      </title>
+      <meta
+        name="description"
+        content="Manage your account information and settings."
+      />
+      <meta
+        name="keywords"
+        content="profile settings, retail spaces, rentail.space"
+      />
+
       <div className="mx-auto max-w-2xl rounded-md border-2 border-black bg-white shadow-[8px_8px_0px_0px_black]">
         <div className="border-black border-b-2 p-8">
           <h1 className="mb-2 font-bold text-3xl text-black">

@@ -5,6 +5,18 @@ import privacy from "~/data/privacy.md?raw";
 export default function PrivacyPolicy() {
   return (
     <article className="container mx-auto my-10 max-w-4xl space-y-8 p-5">
+      <title>
+        Privacy Policy - Specialty Leasing & Retail Spaces | Rentail.space
+      </title>
+      <meta
+        name="description"
+        content="Our privacy policy explains how we collect, use, and share your personal information when you use our website."
+      />
+      <meta
+        name="keywords"
+        content="privacy policy, specialty leasing, retail spaces, rentail.space"
+      />
+
       <Streamdown
         className="prose prose-lg mx-auto"
         mode="static"

@@ -19,6 +19,16 @@ export default function Blog({
       className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
       aria-label="Blog"
     >
+      <title>Blog - Specialty Leasing & Retail Spaces | Rentail.space</title>
+      <meta
+        name="description"
+        content="Tips, insights, and success stories for retail entrepreneurs"
+      />
+      <meta
+        name="keywords"
+        content="blog, specialty leasing, retail spaces, rentail.space"
+      />
+
       <section className="bg-[hsl(60,100%,99%)] px-4 py-20 md:py-32">
         <div className="container mx-auto max-w-4xl text-center">
           <h1 className="mb-6 font-bold text-5xl text-black leading-tight md:text-6xl">

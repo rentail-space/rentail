@@ -43,10 +43,7 @@ export default function StatePage({
 
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
-      <title>
-        Shopping Centers in {state.name} - Specialty Leasing & Retail Spaces |
-        Rentail.space
-      </title>
+      <title>{`Shopping Centers in ${state.name} | Rentail.space`}</title>
       <meta
         name="description"
         content={`Find specialty leasing and short-term retail spaces in ${state.name}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities in ${state.abbreviation}.`}

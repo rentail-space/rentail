@@ -20,29 +20,28 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
 
   return (
     <div className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12">
-      <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-12 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
-        <title>{title}</title>
-        <meta name="author" content="Rentail.space" />
-        <meta name="section" content="Blog" />
-        <meta
-          name="og:image"
-          content={`https://rentail.space/blog/${slug}.jpg`}
-        />
-        <meta name="og:published_time" content={published.toISOString()} />
-        <meta name="og:title" content={title} />
-        <meta name="og:type" content="article" />
-        <meta name="og:url" content={`https://rentail.space/blog/${slug}`} />
-        <meta name="og:site_name" content="Rentail.space" />
-        <meta name="og:locale" content="en_US" />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta name="bingbot" content="index, follow" />
-        <meta name="yandexbot" content="index, follow" />
-        <meta name="duckduckbot" content="index, follow" />
-        <meta name="slurp" content="index, follow" />
-        <meta name="ia_archiver" content="index, follow" />
-        <meta name="ia_archiver" content="index, follow" />
+      <title>{`${title} | Rentail.space`}</title>
+      <meta name="author" content="Rentail.space" />
+      <meta name="section" content="Blog" />
+      <meta
+        name="og:image"
+        content={`https://rentail.space/blog/${slug}.jpg`}
+      />
+      <meta name="og:published_time" content={published.toISOString()} />
+      <meta name="og:title" content={title} />
+      <meta name="og:type" content="article" />
+      <meta name="og:url" content={`https://rentail.space/blog/${slug}`} />
+      <meta name="og:site_name" content="Rentail.space" />
+      <meta name="og:locale" content="en_US" />
+      <meta name="robots" content="index, follow" />
+      <meta name="googlebot" content="index, follow" />
+      <meta name="bingbot" content="index, follow" />
+      <meta name="yandexbot" content="index, follow" />
+      <meta name="duckduckbot" content="index, follow" />
+      <meta name="slurp" content="index, follow" />
+      <meta name="ia_archiver" content="index, follow" />
 
+      <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-12 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
         <h1>{title}</h1>
 
         {image && (

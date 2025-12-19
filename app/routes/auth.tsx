@@ -64,6 +64,16 @@ export default function AuthPage() {
 
   return (
     <main className="flex flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50">
+      <title>Specialty Leasing & Retail Spaces | Rentail.space</title>
+      <meta
+        name="description"
+        content="Sign up or sign in to your account to start finding retail spaces."
+      />
+      <meta
+        name="keywords"
+        content="sign up, sign in, retail spaces, rentail.space"
+      />
+
       <section className="mx-4 my-10 w-full max-w-md space-y-6 rounded-2xl bg-white p-8 shadow-xl">
         <header>
           <h1 className="text-center font-bold text-3xl">
