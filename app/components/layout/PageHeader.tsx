@@ -1,8 +1,8 @@
 import { NavLink } from "react-router";
 import { twMerge } from "tailwind-merge";
 import AccountMenu from "./AccountMenu";
-import RentailIcon from "./RentailLogo";
 import type { HeaderLink } from "./PageLayout";
+import RentailIcon from "./RentailLogo";
 
 export default function PageHeader({ links }: { links?: HeaderLink[] }) {
   return (
@@ -16,7 +16,8 @@ export default function PageHeader({ links }: { links?: HeaderLink[] }) {
             to={link.to}
             className={({ isActive }) =>
               twMerge(
-                "font-bold text-black text-sm transition-colors hover:text-[hsl(37,92%,65%)]",
+                "whitespace-nowrap font-bold text-black text-sm",
+                "transition-colors hover:text-[hsl(37,92%,65%)]",
                 isActive && "text-[hsl(37,92%,65%)]",
               )
             }

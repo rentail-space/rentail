@@ -4,24 +4,6 @@ import { Streamdown } from "streamdown";
 import { Button } from "~/components/ui/Button";
 import prisma from "~/lib/prisma";
 
-export function meta() {
-  return [
-    {
-      title: "US States - Specialty Leasing Locations | Rentail.space",
-    },
-    {
-      name: "description",
-      content:
-        "Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces in shopping centers across all 50 US states. Real-time availability for seasonal and temporary retail locations.",
-    },
-    {
-      name: "keywords",
-      content:
-        "specialty leasing by state, kiosk rental locations, pop-up shop states, mall cart by state, temporary retail locations, shopping centers by state",
-    },
-  ];
-}
-
 export async function loader() {
   const states = await prisma.state.findMany({
     orderBy: { name: "asc" },
@@ -46,6 +28,19 @@ export default function StatePage({
       className="container mx-auto my-10 max-w-3xl space-y-8 p-5"
       aria-label="US states listing"
     >
+      <title>
+        Shopping Centers by State - Specialty Leasing & Retail Spaces |
+        Rentail.space
+      </title>
+      <meta
+        name="description"
+        content="Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces in shopping centers across all 50 US states. Real-time availability for seasonal and temporary retail locations."
+      />
+      <meta
+        name="keywords"
+        content="specialty leasing by state, kiosk rental locations, pop-up shop states, mall cart by state, temporary retail locations, shopping centers by state"
+      />
+
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: exception

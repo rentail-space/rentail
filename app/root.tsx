@@ -88,7 +88,7 @@ export const handle = {
     { label: "Pricing", to: "/pricing" },
     { label: "Blog", to: "/blog" },
     { label: "FAQ", to: "/faq" },
-    { label: "States", to: "/states" },
+    { label: "US States", to: "/states" },
     { label: "🚀 Get Started", to: "/chat" },
   ],
 };

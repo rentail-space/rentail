@@ -11,31 +11,6 @@ export async function loader({ params }: Route.LoaderArgs) {
   return center;
 }
 
-export function meta({ data: loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [];
-
-  const center = loaderData;
-  const description = center.summary
-    ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state}.`
-    : `Shopping center at ${center.address}, ${center.city}, ${center.state} with ${center.numberOfStores} stores and ${center.squareFootage.toLocaleString()} square feet.`;
-
-  return [
-    {
-      title: `${center.name} - ${center.city}, ${center.state} | Rentail.space`,
-    },
-    {
-      name: "description",
-      content: description,
-    },
-    {
-      name: "keywords",
-      content: `${center.name}, ${center.city} ${center.state}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`,
-    },
-  ];
-}
-
-export const handle = { headerLinks: [] };
-
 export default function CenterPage({
   loaderData,
 }: {
@@ -43,6 +18,24 @@ export default function CenterPage({
 }) {
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
+      <title>
+        {loaderData.name} - {loaderData.city}, {loaderData.state} |
+        Rentail.space
+      </title>
+      <meta
+        name="description"
+        content={
+          loaderData.summary
+            ? `${loaderData.summary} Located at ${loaderData.address}, ${loaderData.city}, ${loaderData.state}.`
+            : `Shopping center at ${loaderData.address}, ${loaderData.city}, ${loaderData.state} with ${loaderData.numberOfStores} stores and ${loaderData.squareFootage.toLocaleString()} square feet.`
+        }
+      />
+      <meta
+        name="keywords"
+        content={`${loaderData.name}, ${loaderData.city} ${loaderData.state}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`}
+      />
+      <meta name="author" content="rentail.space" />
+
       <Center center={loaderData} />
     </main>
   );

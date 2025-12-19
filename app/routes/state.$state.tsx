@@ -32,26 +32,6 @@ export async function loader({ params }: Route.LoaderArgs) {
   return { centers, state };
 }
 
-export function meta({ data: loaderData }: Route.MetaArgs) {
-  if (!loaderData) return [];
-
-  const { state, centers } = loaderData;
-
-  return [
-    {
-      title: `${state.name} Shopping Centers - Specialty Leasing & Retail Spaces | Rentail.space`,
-    },
-    {
-      name: "description",
-      content: `Find specialty leasing and short-term retail spaces in ${state.name}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities in ${state.abbreviation}.`,
-    },
-    {
-      name: "keywords",
-      content: `${state.name} specialty leasing, ${state.abbreviation} kiosk rental, ${state.name} pop-up shops, ${state.abbreviation} mall carts, ${state.name} temporary retail, shopping centers in ${state.name}`,
-    },
-  ];
-}
-
 export default function StatePage({
   loaderData,
 }: {
@@ -63,6 +43,19 @@ export default function StatePage({
 
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
+      <title>
+        Shopping Centers in {state.name} - Specialty Leasing & Retail Spaces |
+        Rentail.space
+      </title>
+      <meta
+        name="description"
+        content={`Find specialty leasing and short-term retail spaces in ${state.name}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities in ${state.abbreviation}.`}
+      />
+      <meta
+        name="keywords"
+        content={`${state.name} specialty leasing, ${state.abbreviation} kiosk rental, ${state.name} pop-up shops, ${state.abbreviation} mall carts, ${state.name} temporary retail, shopping centers in ${state.name}`}
+      />
+
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated data
