@@ -1,6 +1,6 @@
 ---
 title: "How to Find a Kiosk Space in Your Local Mall: A Step-by-Step Guide"
-image: "2025-12-26-kiosk-space.jpg"
+image: "2026-01-02-kiosk-space.jpg"
 alt: "Shopping mall interior with kiosks and retail spaces, showing vendors and foot traffic in common area"
 summary: "Finding a kiosk space in your local mall used to mean hours of research and cold calling. With Rentail.space, you can search comprehensive listings, find verified leasing contacts, and secure the perfect location faster. This guide shows you how to leverage Rentail and navigate the entire process from search to signed lease."
 ---
