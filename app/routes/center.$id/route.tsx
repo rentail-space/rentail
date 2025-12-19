@@ -19,8 +19,7 @@ export default function CenterPage({
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
       <title>
-        {loaderData.name} - {loaderData.city}, {loaderData.state} |
-        Rentail.space
+        {`${loaderData.name} - ${loaderData.city}, ${loaderData.state} | Rentail.space`}
       </title>
       <meta
         name="description"
