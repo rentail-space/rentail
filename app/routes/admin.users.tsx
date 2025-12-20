@@ -9,11 +9,12 @@ import { groupBy, invariant, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
 import { ArrowDown, ArrowRight, ArrowUp } from "lucide-react";
 import { DateTime } from "luxon";
-import { parseAsInteger, useQueryState } from "nuqs";
-import type { User, Waitlist } from "prisma/generated/client";
+import { parseAsString, useQueryState } from "nuqs";
+import type { User } from "prisma/generated/client";
 import { Fragment } from "react";
 import { Link, type LoaderFunctionArgs } from "react-router";
 import { Button } from "~/components/ui/Button";
+import { Input } from "~/components/ui/Input";
 import {
   Table,
   TableBody,
@@ -58,10 +59,16 @@ async function fromGoogleAnalytics(): Promise<
   const client = new BetaAnalyticsDataClient({ authClient: auth });
 
   try {
+    // https://support.google.com/analytics/table/13948007
     const response = await client.runReport({
       dateRanges: [{ endDate: "today", startDate: "90daysAgo" }],
       dimensions: [{ name: "date" }, { name: "sessionSource" }],
-      metrics: [{ name: "activeUsers" }, { name: "averageSessionDuration" }],
+      metrics: [
+        // The number of distinct users who visited your website or application.
+        { name: "activeUsers" },
+        // The average duration of user sessions, in seconds.
+        { name: "averageSessionDuration" },
+      ],
       property: "properties/496833933",
     });
     const rows = response[0].rows;
@@ -82,53 +89,99 @@ async function fromGoogleAnalytics(): Promise<
 }
 
 export default function UsersPage({ loaderData }: Route.ComponentProps) {
-  const [period, setPeriod] = useQueryState(
-    "period",
-    parseAsInteger.withDefault(30),
+  const today = DateTime.now();
+  const [from, setFrom] = useQueryState(
+    "from",
+    parseAsString.withDefault(today.minus({ days: 30 }).toFormat("yyyy-MM-dd")),
   );
-  const daysAgo = DateTime.now()
-    .minus({ days: period ?? 30 })
-    .toJSDate();
-  const recent = loaderData.users.filter(
+  const [until, setUntil] = useQueryState(
+    "until",
+    parseAsString.withDefault(today.toFormat("yyyy-MM-dd")),
+  );
+
+  const recentUsers = loaderData.users.filter(
     ({ createdAt, isAdmin }) =>
-      createdAt.getTime() > daysAgo.getTime() && !isAdmin,
+      DateTime.fromJSDate(createdAt).toJSDate().getTime() >=
+        DateTime.fromFormat(from, "yyyy-MM-dd").toJSDate().getTime() &&
+      DateTime.fromJSDate(createdAt).minus({ days: 1 }).toJSDate().getTime() <=
+        DateTime.fromFormat(until, "yyyy-MM-dd").toJSDate().getTime() &&
+      !isAdmin,
   );
   const analytics = loaderData.analytics.filter(
-    ({ date }) => DateTime.fromFormat(date, "yyyyMMdd").toJSDate() > daysAgo,
+    ({ date }) =>
+      DateTime.fromFormat(date, "yyyyMMdd").toJSDate() >
+      DateTime.fromFormat(from, "yyyy-MM-dd").toJSDate(),
   );
 
   return (
     <main className="flex flex-col gap-8">
-      <RangeSelector period={period} setPeriod={setPeriod} />
-      <Analytics analytics={analytics} users={recent} />
-      <AllUsers users={recent} />
+      <RangeSelector
+        from={from}
+        setFrom={setFrom}
+        until={until}
+        setUntil={setUntil}
+      />
+      <Analytics analytics={analytics} users={recentUsers} />
+      <AllUsers users={recentUsers} />
       <Sources analytics={analytics} />
-      <WaitingList waiting={loaderData.waiting} />
     </main>
   );
 }
 
 function RangeSelector({
-  period,
-  setPeriod,
+  from,
+  setFrom,
+  until,
+  setUntil,
 }: {
-  period: number;
-  setPeriod: (period: number) => void;
+  from: string;
+  setFrom: (from: string) => void;
+  until: string;
+  setUntil: (until: string) => void;
 }) {
+  const daysInPeriod = DateTime.fromFormat(until, "yyyy-MM-dd").diff(
+    DateTime.fromFormat(from, "yyyy-MM-dd"),
+    "days",
+  ).days;
+
   return (
-    <Tabs className="mx-auto" value={period.toString()}>
-      <TabsList>
-        {[10, 30, 90].map((days) => (
-          <TabsTrigger
-            key={days}
-            onClick={() => setPeriod(days)}
-            value={days.toString()}
-          >
-            Last {days} Days
-          </TabsTrigger>
-        ))}
-      </TabsList>
-    </Tabs>
+    <div className="flex flex-row items-center justify-between">
+      <Tabs value={daysInPeriod.toString()}>
+        <TabsList>
+          {[10, 30, 90].map((daysInPeriod) => (
+            <TabsTrigger
+              key={daysInPeriod}
+              onClick={() => {
+                const today = DateTime.now();
+                setFrom(
+                  today.minus({ days: daysInPeriod }).toFormat("yyyy-MM-dd"),
+                );
+                setUntil(today.toFormat("yyyy-MM-dd"));
+              }}
+              value={daysInPeriod.toString()}
+            >
+              Last {daysInPeriod} Days
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
+
+      <div className="flex flex-row items-center">
+        <Input
+          className="w-36"
+          type="date"
+          value={from}
+          onChange={(e) => setFrom(e.target.value)}
+        />
+        <ArrowRight className="h-8 w-8 text-gray-500" />
+        <Input
+          className="w-36"
+          type="date"
+          value={until}
+          onChange={(e) => setUntil(e.target.value)}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -140,35 +193,39 @@ function Analytics({
   users: User[];
 }) {
   const activeUsers = sumBy(analytics, (day) => Number(day.activeUsers));
-  const signedUp = users.filter(({ passwordHash }) => passwordHash !== null);
 
   return (
     <div className="flex flex-col gap-8">
       <div className="mx-auto flex flex-row items-center gap-4">
         <Stat
-          title="Page Views"
-          value={analytics
-            .filter((entry) => entry.sessionSource === "chatgpt.com")
-            .length.toLocaleString()}
-          description="Google Analytics"
-        />
-        <ArrowRight className="h-6 w-6 text-gray-400" />
-        <Stat
           title="Active Users"
           value={activeUsers.toLocaleString()}
           description="From page views"
         />
-        <ArrowRight className="h-6 w-6 text-gray-400" />
         <Stat
-          title="Conversations"
+          title="From LLM"
+          value={sumBy(
+            analytics.filter(
+              (entry) =>
+                entry.sessionSource === "chatgpt.com" ||
+                entry.sessionSource === "perplexity.ai",
+            ),
+            (entry) => entry.activeUsers,
+          ).toLocaleString()}
+          description="ChatGPT/Perplexity"
+        />
+        <Stat
+          title="Chats"
           value={users.length.toLocaleString()}
           description={`${((users.length / activeUsers) * 100).toFixed(2)}% of active`}
         />
-        <ArrowRight className="h-6 w-6 text-gray-400" />
         <Stat
-          title="Signed Up"
-          value={signedUp.length.toLocaleString()}
-          description={`${((signedUp.length / users.length) * 100).toFixed(2)}% of chats`}
+          title="Session Duration"
+          value={`${(
+            sumBy(analytics, (entry) => entry.averageSessionDuration) /
+              analytics.length
+          ).toFixed(0)} sec`}
+          description="Seconds"
         />
       </div>
     </div>
@@ -215,7 +272,8 @@ function Sources({
               <TableHead className="w-10">{index + 1}</TableHead>
               <TableCell>{sessionSource}</TableCell>
               <TableCell className="text-right">
-                {entries.length.toLocaleString()} sessions
+                {sumBy(entries, (entry) => entry.activeUsers).toLocaleString()}{" "}
+                users
               </TableCell>
             </TableRow>
           ))}
@@ -338,85 +396,6 @@ function AllUsers({ users }: { users: User[] }) {
                     style={{ maxWidth: cell.column.getSize() }}
                     title={cell.getValue() as string}
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </Fragment>
-          ))}
-        </TableBody>
-      </Table>
-    </section>
-  );
-}
-
-function WaitingList({ waiting }: { waiting: Waitlist[] }) {
-  const table = useReactTable({
-    columns: [
-      { header: "Email", accessorKey: "email" },
-      {
-        header: "Created",
-        accessorKey: "createdAt",
-        sortingFn: (rowA, rowB) =>
-          rowA.original.createdAt.getTime() - rowB.original.createdAt.getTime(),
-        accessorFn: (row) =>
-          row.createdAt.toLocaleDateString(undefined, {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-        size: 140,
-      },
-    ],
-    data: waiting,
-    enableSortingRemoval: false,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    initialState: { sorting: [{ id: "createdAt", desc: true }] },
-  });
-  return (
-    <section className="flex flex-col gap-4">
-      <h2 className="font-bold text-2xl">
-        Waiting List{" "}
-        <span className="text-gray-500">({waiting.length} waiting)</span>
-      </h2>
-
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((group) => (
-            <TableRow key={group.id}>
-              {group.headers.map((header) => (
-                <TableHead key={header.id}>
-                  <Button
-                    className="flex w-full justify-between"
-                    onClick={header.column.getToggleSortingHandler()}
-                    variant="ghost"
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-                    {header.column.getIsSorted() === "desc" ? (
-                      <ArrowUp />
-                    ) : header.column.getIsSorted() === "asc" ? (
-                      <ArrowDown />
-                    ) : (
-                      <>&nbsp;</>
-                    )}
-                  </Button>
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows.map((row) => (
-            <Fragment key={row.id}>
-              <TableRow>
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} width={cell.column.getSize()}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
