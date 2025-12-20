@@ -17,13 +17,15 @@ describe("Blog Post Rendering", () => {
   let page: Page;
 
   beforeAll(async () => {
-    page = await goto("/blog/2025-10-31-the-name");
+    page = await goto("/blog/2025-12-19-why-hunkering-down-kills-momentum");
   });
 
   it("should render blog post with proper title and metadata", async () => {
     // Check title rendering
-    const title = await page.locator("article h1").textContent();
-    expect(title).toBe("The Birth of Rentail Space");
+    const title = await page.locator("article h1").first().textContent();
+    expect(title).toBe(
+      "The Hermit Leader Problem: Why Hunkering Down Kills Momentum",
+    );
   });
 
   it("should render blog post image with proper attributes", async () => {
@@ -91,6 +93,29 @@ describe("Blog Post Rendering", () => {
     // Verify the layout wrapper is present
     const layout = page.locator("body > div"); // Assuming Layout component wraps content
     await expect(layout).toBeVisible();
+  });
+
+  it("should start with a quote", async () => {
+    const quote = page.locator("blockquote", {
+      hasText: "Early on in my journey, every little setback would derail me.",
+    });
+    await expect(quote).toBeVisible();
+    const cite = page.locator("blockquote + p");
+    expect(await cite.textContent()).toContain("Brad Savage");
+  });
+
+  it("should have a section TL;DR with 4 items", async () => {
+    const tldr = page.locator("h2", { hasText: "TL;DR" });
+    await expect(tldr).toBeVisible();
+    const items = page.locator("h2:has-text('TL;DR') + ul > li");
+    await expect(items).toHaveCount(4);
+  });
+
+  it("should have a section FAQ with 5 question items", async () => {
+    const faq = page.locator("h1", { hasText: "FAQ" });
+    await expect(faq).toBeVisible();
+    const items = page.locator("h1:has-text('FAQ') ~ p:has-text('Q: ')");
+    await expect(items).toHaveCount(5);
   });
 
   it("should match inner HTML", async () => {
