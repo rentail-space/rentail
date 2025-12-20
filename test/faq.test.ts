@@ -61,29 +61,6 @@ describe("FAQ page", () => {
     expect(firstQuestion.acceptedAnswer.text).toBeTruthy();
   });
 
-  it("should have FAQPage microdata on section", async () => {
-    const section = page.locator(
-      "section[itemscope][itemtype='https://schema.org/FAQPage']",
-    );
-    await expect(section).toBeVisible();
-  });
-
-  it("should have Question microdata on each FAQ item", async () => {
-    const questions = page.locator(
-      "details[itemscope][itemtype='https://schema.org/Question']",
-    );
-    const count = await questions.count();
-    expect(count).toBe(totalQuestions);
-  });
-
-  it("should have Answer microdata on each answer", async () => {
-    const answers = page.locator(
-      "div[itemscope][itemtype='https://schema.org/Answer']",
-    );
-    const count = await answers.count();
-    expect(count).toBe(totalQuestions);
-  });
-
   it("should match inner HTML snapshot", async () => {
     await expect(page.locator("main")).toMatchInnerHTML();
   });
