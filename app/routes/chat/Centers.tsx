@@ -12,10 +12,8 @@ import { cn } from "~/lib/utils";
  */
 export default function Centers({
   centers,
-  displayName,
 }: {
   centers: PropertyGetPayload<{ include: { spaces: true } }>[];
-  displayName: string;
 }) {
   return (
     <div className="fixed right-0 bottom-24 mr-4 hidden h-fit lg:block lg:w-1/4">

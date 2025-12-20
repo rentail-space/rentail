@@ -94,9 +94,6 @@ export default function ChatPage({
           </StickToBottom.Content>
           <Centers
             centers={centersFetcher.data?.centers ?? loaderData.centers}
-            displayName={
-              centersFetcher.data?.displayName ?? loaderData.displayName
-            }
           />
         </div>
 
