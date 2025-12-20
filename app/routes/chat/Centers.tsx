@@ -18,7 +18,7 @@ export default function Centers({
   displayName: string;
 }) {
   return (
-    <div className="sticky top-0 my-4 hidden h-fit w-1/4 lg:block">
+    <div className="fixed right-10 bottom-24 hidden h-fit lg:block lg:w-1/4">
       <div className="rounded-md border-2 border-black bg-white p-6 shadow-[6px_6px_0px_0px_black]">
         {centers.length > 0 ? (
           <AvailableCenters centers={centers} />

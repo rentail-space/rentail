@@ -82,25 +82,22 @@ export default function ChatPage({
       >
         <PageHeader />
 
-        <div className="overflow-y-auto scroll-smooth px-4">
-          <StickToBottom.Content className="flex flex-1 flex-col justify-end">
-            <div className="flex flex-row gap-4 lg:pr-4">
-              <Messages
-                error={error}
-                isAborted={isAborted}
-                isTyping={status === "streaming"}
-                messages={messages}
-                setQuery={setQuery}
-              />
-
-              <Centers
-                centers={centersFetcher.data?.centers ?? loaderData.centers}
-                displayName={
-                  centersFetcher.data?.displayName ?? loaderData.displayName
-                }
-              />
-            </div>
+        <div className="h-full overflow-y-auto scroll-smooth">
+          <StickToBottom.Content className="h-full w-full lg:w-3/4 lg:px-5">
+            <Messages
+              error={error}
+              isAborted={isAborted}
+              isTyping={status === "streaming"}
+              messages={messages}
+              setQuery={setQuery}
+            />
           </StickToBottom.Content>
+          <Centers
+            centers={centersFetcher.data?.centers ?? loaderData.centers}
+            displayName={
+              centersFetcher.data?.displayName ?? loaderData.displayName
+            }
+          />
         </div>
 
         <ScrollButton />

@@ -48,7 +48,7 @@ export default function Messages({
     <div
       className={cn(
         "scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent overflow-y-auto scroll-smooth",
-        "mx-auto flex max-w-3xl p-4",
+        "mx-auto flex min-h-full max-w-3xl p-4",
         "flex flex-col justify-end gap-4",
       )}
     >
