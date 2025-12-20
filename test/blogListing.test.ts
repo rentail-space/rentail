@@ -73,7 +73,9 @@ describe("Blog Listing", () => {
     beforeAll(async () => {
       await page.goto("/");
       await page
-        .locator('a[href^="/blog/2025-11-07-ultimate-guide"]')
+        .locator(
+          'a[href^="/blog/2025-12-19-why-hunkering-down-kills-momentum"]',
+        )
         .last()
         .click();
       await page.waitForURL(/.*\/blog\/.*/);
@@ -81,7 +83,9 @@ describe("Blog Listing", () => {
 
     it("should navigate to blog post when clicking link", async () => {
       // Verify we're on a blog post page
-      expect(page.url()).toContain("/blog/2025-11-07-ultimate-guide");
+      expect(page.url()).toContain(
+        "/blog/2025-12-19-why-hunkering-down-kills-momentum",
+      );
     });
 
     it("should display the blog post content", async () => {
@@ -91,7 +95,9 @@ describe("Blog Listing", () => {
       await expect(article).toBeVisible();
       const h1 = page.locator("h1").first();
       await expect(h1).toBeVisible();
-      await expect(h1).toHaveText("The Ultimate Guide");
+      await expect(h1).toHaveText(
+        "The Hermit Leader Problem: Why Hunkering Down Kills Momentum",
+      );
     });
   });
 
