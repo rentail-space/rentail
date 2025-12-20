@@ -18,7 +18,7 @@ export default function Centers({
   displayName: string;
 }) {
   return (
-    <div className="fixed right-10 bottom-24 hidden h-fit lg:block lg:w-1/4">
+    <div className="fixed right-0 bottom-24 mr-4 hidden h-fit lg:block lg:w-1/4">
       <div className="rounded-md border-2 border-black bg-white p-6 shadow-[6px_6px_0px_0px_black]">
         {centers.length > 0 ? (
           <AvailableCenters centers={centers} />
@@ -123,7 +123,7 @@ function HoverCard({
   mode: "hidden" | "visible";
   center: PropertyGetPayload<{ include: { spaces: true } }>;
 }) {
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLAnchorElement>(null);
   const [topOffset, setTopOffset] = useState(0);
 
   useEffect(() => {
@@ -180,6 +180,9 @@ function HoverCard({
         if (adjustedTop < minTop) adjustedTop = minTop;
 
         setTopOffset(adjustedTop);
+        requestAnimationFrame(() => {
+          card.classList.remove("hidden");
+        });
       });
     };
 
@@ -196,9 +199,13 @@ function HoverCard({
 
   return (
     <Activity mode={mode}>
-      <Link target="_blank" to={`/center/${center.id}`}>
+      <Link
+        target="_blank"
+        to={`/center/${center.id}`}
+        ref={cardRef}
+        className="hidden"
+      >
         <div
-          ref={cardRef}
           className={cn(
             "absolute right-full z-50 my-24 mr-10",
             "w-96 max-w-[min(20rem,calc(100vw-2rem))] overflow-hidden",
