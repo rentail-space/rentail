@@ -9,7 +9,7 @@ import { groupBy, invariant, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
 import { ArrowDown, ArrowRight, ArrowUp } from "lucide-react";
 import { DateTime } from "luxon";
-import { parseAsString, useQueryState } from "nuqs";
+import { parseAsIsoDate, useQueryState } from "nuqs";
 import type { User } from "prisma/generated/client";
 import { Link, type LoaderFunctionArgs } from "react-router";
 import { Button } from "~/components/ui/Button";
@@ -88,28 +88,28 @@ async function fromGoogleAnalytics(): Promise<
 }
 
 export default function UsersPage({ loaderData }: Route.ComponentProps) {
-  const today = DateTime.now();
+  const today = new Date(new Date().toISOString().split("T")[0]);
   const [from, setFrom] = useQueryState(
     "from",
-    parseAsString.withDefault(today.minus({ days: 30 }).toFormat("yyyy-MM-dd")),
+    parseAsIsoDate.withDefault(
+      DateTime.fromJSDate(today).minus({ days: 30 }).toJSDate(),
+    ),
   );
   const [until, setUntil] = useQueryState(
     "until",
-    parseAsString.withDefault(today.toFormat("yyyy-MM-dd")),
+    parseAsIsoDate.withDefault(today),
   );
 
   const recentUsers = loaderData.users.filter(
     ({ createdAt, isAdmin }) =>
-      DateTime.fromJSDate(createdAt).toJSDate().getTime() >=
-        DateTime.fromFormat(from, "yyyy-MM-dd").toJSDate().getTime() &&
-      DateTime.fromJSDate(createdAt).minus({ days: 1 }).toJSDate().getTime() <=
-        DateTime.fromFormat(until, "yyyy-MM-dd").toJSDate().getTime() &&
+      DateTime.fromJSDate(createdAt).toJSDate() >= from &&
+      DateTime.fromJSDate(createdAt).minus({ days: 1 }).toJSDate() <= until &&
       !isAdmin,
   );
   const analytics = loaderData.analytics.filter(
     ({ date }) =>
-      DateTime.fromFormat(date, "yyyyMMdd").toJSDate() >
-      DateTime.fromFormat(from, "yyyy-MM-dd").toJSDate(),
+      DateTime.fromFormat(date, "yyyyMMdd").toJSDate() > from &&
+      DateTime.fromFormat(date, "yyyyMMdd").toJSDate() < until,
   );
 
   return (
@@ -133,15 +133,17 @@ function RangeSelector({
   until,
   setUntil,
 }: {
-  from: string;
-  setFrom: (from: string) => void;
-  until: string;
-  setUntil: (until: string) => void;
+  from: Date;
+  setFrom: (from: Date) => void;
+  until: Date;
+  setUntil: (until: Date) => void;
 }) {
-  const daysInPeriod = DateTime.fromFormat(until, "yyyy-MM-dd").diff(
-    DateTime.fromFormat(from, "yyyy-MM-dd"),
-    "days",
-  ).days;
+  const today = new Date(new Date().toISOString().split("T")[0]);
+  const daysInPeriod =
+    until.getTime() === today.getTime() &&
+    Math.floor(
+      DateTime.fromJSDate(until).diff(DateTime.fromJSDate(from), "days").days,
+    );
 
   return (
     <div className="flex flex-row items-center justify-between">
@@ -151,11 +153,13 @@ function RangeSelector({
             <TabsTrigger
               key={daysInPeriod}
               onClick={() => {
-                const today = DateTime.now();
+                const today = new Date(new Date().toISOString().split("T")[0]);
                 setFrom(
-                  today.minus({ days: daysInPeriod }).toFormat("yyyy-MM-dd"),
+                  DateTime.fromJSDate(today)
+                    .minus({ days: daysInPeriod })
+                    .toJSDate(),
                 );
-                setUntil(today.toFormat("yyyy-MM-dd"));
+                setUntil(new Date(today.toISOString().split("T")[0]));
               }}
               value={daysInPeriod.toString()}
             >
@@ -168,16 +172,16 @@ function RangeSelector({
       <div className="flex flex-row items-center">
         <Input
           className="w-36"
+          onChange={({ target }) => setFrom(new Date(target.value))}
           type="date"
-          value={from}
-          onChange={(e) => setFrom(e.target.value)}
+          value={from.toISOString().split("T")[0]}
         />
         <ArrowRight className="h-8 w-8 text-gray-500" />
         <Input
           className="w-36"
+          onChange={({ target }) => setUntil(new Date(target.value))}
           type="date"
-          value={until}
-          onChange={(e) => setUntil(e.target.value)}
+          value={until.toISOString().split("T")[0]}
         />
       </div>
     </div>
