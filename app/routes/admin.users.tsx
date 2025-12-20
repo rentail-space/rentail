@@ -11,7 +11,6 @@ import { ArrowDown, ArrowRight, ArrowUp } from "lucide-react";
 import { DateTime } from "luxon";
 import { parseAsString, useQueryState } from "nuqs";
 import type { User } from "prisma/generated/client";
-import { Fragment } from "react";
 import { Link, type LoaderFunctionArgs } from "react-router";
 import { Button } from "~/components/ui/Button";
 import { Input } from "~/components/ui/Input";
@@ -387,20 +386,18 @@ function AllUsers({ users }: { users: User[] }) {
         </TableHeader>
         <TableBody>
           {table.getRowModel().rows.map((row) => (
-            <Fragment key={row.id}>
-              <TableRow>
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell
-                    className="truncate"
-                    key={cell.id}
-                    style={{ maxWidth: cell.column.getSize() }}
-                    title={cell.getValue() as string}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </Fragment>
+            <TableRow key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <TableCell
+                  className="truncate"
+                  key={cell.id}
+                  style={{ maxWidth: cell.column.getSize() }}
+                  title={cell.getValue() as string}
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </TableCell>
+              ))}
+            </TableRow>
           ))}
         </TableBody>
       </Table>
