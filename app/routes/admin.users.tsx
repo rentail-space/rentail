@@ -249,39 +249,6 @@ function Stat({
   );
 }
 
-function Sources({
-  analytics,
-}: {
-  analytics: Awaited<ReturnType<typeof fromGoogleAnalytics>>;
-}) {
-  const grouped = groupBy(analytics, (entry) => entry.sessionSource);
-
-  return (
-    <section className="flex flex-col gap-4">
-      <h2 className="font-bold text-2xl">
-        Sources{" "}
-        <span className="text-gray-500">
-          ({Object.keys(grouped).length} source)
-        </span>
-      </h2>
-      <Table>
-        <TableBody>
-          {Object.entries(grouped).map(([sessionSource, entries], index) => (
-            <TableRow key={sessionSource}>
-              <TableHead className="w-10">{index + 1}</TableHead>
-              <TableCell>{sessionSource}</TableCell>
-              <TableCell className="text-right">
-                {sumBy(entries, (entry) => entry.activeUsers).toLocaleString()}{" "}
-                users
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </section>
-  );
-}
-
 function AllUsers({ users }: { users: User[] }) {
   const table = useReactTable({
     columns: [
@@ -386,7 +353,7 @@ function AllUsers({ users }: { users: User[] }) {
         </TableHeader>
         <TableBody>
           {table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id}>
+            <TableRow key={row.id} className="hover:bg-gray-100">
               {row.getVisibleCells().map((cell) => (
                 <TableCell
                   className="truncate"
@@ -397,6 +364,39 @@ function AllUsers({ users }: { users: User[] }) {
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
               ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </section>
+  );
+}
+
+function Sources({
+  analytics,
+}: {
+  analytics: Awaited<ReturnType<typeof fromGoogleAnalytics>>;
+}) {
+  const grouped = groupBy(analytics, (entry) => entry.sessionSource);
+
+  return (
+    <section className="flex flex-col gap-4">
+      <h2 className="font-bold text-2xl">
+        Sources{" "}
+        <span className="text-gray-500">
+          ({Object.keys(grouped).length} source)
+        </span>
+      </h2>
+      <Table>
+        <TableBody>
+          {Object.entries(grouped).map(([sessionSource, entries], index) => (
+            <TableRow key={sessionSource} className="hover:bg-gray-100">
+              <TableHead className="w-10">{index + 1}</TableHead>
+              <TableCell>{sessionSource}</TableCell>
+              <TableCell className="text-right">
+                {sumBy(entries, (entry) => entry.activeUsers).toLocaleString()}{" "}
+                users
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

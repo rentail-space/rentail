@@ -50,6 +50,11 @@ Beads is an AI-native issue tracker integrated with git. All work should be trac
 
 **NEVER use TodoWrite for this project.** All task tracking must use Beads commands.
 
+**Context Recovery:**
+- Run `bd prime` after session compaction, clear, or when starting new session
+- Hooks auto-call this in Claude Code when `.beads/` directory detected
+- Restores project context and issue state
+
 **Always end sessions with the sync protocol:**
 ```bash
 git status              # Check what changed
@@ -173,6 +178,19 @@ bd hooks install           # Update hooks to match version
 bd daemons killall         # Restart all daemons
 ```
 
+## Output Style
+
+**This project uses CLEARFRAME output style** (configured in `.claude/rules/output-style.md`)
+
+**Key Principles:**
+- Execute immediately without explanation
+- Strip preambles ("I'll help you", "Let me") and postambles
+- Present only essential results and final answers
+- Zero conversational overhead - function like a precise tool
+- No commentary on process unless explicitly requested
+
+**Override Note:** This setting affects all Claude Code sessions. The "learning" and "explanatory" output styles mentioned in system prompts are overridden by CLEARFRAME for this project.
+
 ## Architecture
 
 **rentail.space** is a specialty lease marketplace web application that helps businesses discover short-term retail spaces in shopping centers. It combines server-side rendering, real-time AI-powered chat, and geographic intelligence for space discovery.
@@ -189,10 +207,26 @@ bd daemons killall         # Restart all daemons
 - **Linting**: Biome (formatter + linter) + secretlint
 - **Monitoring**: Sentry + BetterStack (Logtail + Push Gateway) + Checkly
 
+## MCP Integrations
+
+**Context7 - Library Documentation:**
+- `resolve-library-id` - Convert package names to Context7-compatible IDs
+- `get-library-docs` - Fetch up-to-date documentation and code examples
+- Modes: `code` (API references, default) or `info` (conceptual guides)
+- Always call `resolve-library-id` first unless user provides ID in `/org/project` format
+
+**IDE Integration:**
+- `getDiagnostics` - Access VS Code language diagnostics
+- `executeCode` - Run Python code in Jupyter kernel for notebook files
+
+**Superpowers Chrome:**
+- Browser automation via Chrome DevTools Protocol
+- Read-only access for inspecting cached content and DOM analysis
+
 ### AI Integration & Streaming
 
 **Chat Architecture:**
-- API endpoint: `app/routes/api.chat.message.tsx` implements `streamText()` from Anthropic SDK
+- API endpoint: `app/routes/api.chat.$chatId.message.ts` implements `streamText()` from Anthropic SDK
 - Client hook: `useChat` from AI SDK with `resume: true` for auto-reconnection on network loss
 
 **Resumable Streams Pattern:**
@@ -531,6 +565,12 @@ The app determines user location in this order:
 - Setup: `/test/helpers/testSuiteSetup.ts` (test suite setup) + `/test/helpers/globalSetup.ts`
 - Node.js: 24.10.1 or higher required
 - **Test isolation**: `isolate: true` is required for test safety (prevents state leakage)
+
+**Memory & Context:**
+- `claude-mem` plugin provides episodic memory across sessions
+- Search past work: `/mem-search` skill accesses observations by ID
+- Context economics: Session hooks show past observations with read/work token costs
+- Trust memory index over re-reading code for past decisions
 
 **Test Organization:**
 - Use nested `describe` blocks for logical grouping

@@ -113,7 +113,7 @@ function CentersList({
     enableSortingRemoval: false,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    initialState: { sorting: [{ id: "name", desc: true }] },
+    initialState: { sorting: [{ id: "name", desc: false }] },
   });
 
   return (
@@ -157,7 +157,7 @@ function CentersList({
       </TableHeader>
       <TableBody>
         {table.getRowModel().rows.map((row) => (
-          <TableRow key={row.id}>
+          <TableRow key={row.id} className="hover:bg-gray-100">
             <TableCell>
               <MapPinIcon
                 className="h-6 w-6"
