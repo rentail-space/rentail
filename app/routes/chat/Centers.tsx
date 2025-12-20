@@ -23,25 +23,12 @@ export default function Centers({
         {centers.length > 0 ? (
           <AvailableCenters centers={centers} />
         ) : (
-          <NoAvailableCenters displayName={displayName} />
+          <div className="mb-2 font-bold text-black text-lg">
+            I'll find centers for you
+          </div>
         )}
       </div>
     </div>
-  );
-}
-
-function NoAvailableCenters({ displayName }: { displayName?: string }) {
-  return (
-    <>
-      <div className="mb-2 font-bold text-black text-lg">
-        No available centers
-      </div>
-      {displayName && (
-        <p className="font-medium text-black text-sm">
-          We're looking in {displayName}
-        </p>
-      )}
-    </>
   );
 }
 
