@@ -15,6 +15,12 @@ Ann McFerran watched competitors launch while she polished. Her products were fl
 
 The perfectionist's trap looks responsible. It feels like quality control. In reality, it's a strategic failure disguised as standards.
 
+## TL;DR
+
+- **Three vulnerabilities from perfectionism**: Market timing evaporates (customer needs evolve, competitors claim positioning), customer feedback comes too late (months optimizing for wrong variables), innovation velocity collapses (teams learn to move slowly, best people leave)
+- **Iterative advantage relocates excellence**: Launch strong v1.0 in two months, treat as learning event, improve continuously based on real customer data vs six months building "perfect" product that hasn't faced customers
+- **Operationalizing speed requires three principles**: Define "good enough to launch" (core value proposition works, ready for feedback), build feedback loops from day one (surveys, analytics, support tickets become R&D lab), plan v2 before v1 launches (iteration is continuous improvement, not fixing mistakes)
+- **Markets reward speed + learning velocity**: Company that ships fast and iterates based on real feedback outmaneuvers perfectionist every time
 
 ## The Hidden Cost of Perfect
 

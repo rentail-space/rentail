@@ -7,6 +7,12 @@ summary: "Finding the perfect retail space goes beyond simply looking at rent pr
 
 Finding the perfect retail space goes beyond simply looking at rent prices. The location you choose can make or break your retail business success, making this step crucial in your leasing journey.
 
+## TL;DR
+
+- **Foot traffic analysis is critical**: Use location analytics tools or personal observation to assess demographic alignment, traffic patterns (volume and timing), and competitive/complementary businesses
+- **Property visits assess three factors**: Visibility to passing customers (especially for impulse purchases), layout functionality for your business needs, and signage opportunities (check restrictions before signing)
+- **Negotiate beyond base rent**: Landlords often build tenant improvement costs into rent; negotiate CAM charge caps, segmented renewal options (multiple one-month renewals vs one-year term), and understand legal obligations completely before signing
+
 ## Research neighborhoods and foot traffic
 
 Foot traffic—the number of people passing by a location—serves as a critical metric for retail success. This behavioral data shows actual customer movement patterns rather than just opinions, providing real insights into potential customer exposure [\[1\]](https://www.placer.ai/guides/foot-traffic). To properly evaluate locations, consider these factors:

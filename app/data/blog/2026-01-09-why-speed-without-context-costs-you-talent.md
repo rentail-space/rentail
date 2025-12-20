@@ -17,6 +17,12 @@ It also destroys relationships.
 
 Henry Penix recognized the double edge. His instinct to jump to the end of conversations—to skip the context and land on the solution—was alienating the very people he needed most. The speed that made him effective as an operator was making him ineffective as a leader.
 
+## TL;DR
+
+- **Three breakdowns from velocity-only leadership**: You miss critical information (assume low performance vs parent in hospice), talented people leave (won't tolerate leaders who don't listen), culture becomes defensive (people stop bringing problems forward, information flow breaks)
+- **Behavior isn't character**: Someone acting different than their norm signals something (personal crisis, unclear expectations, misaligned incentives, missing information); skipping straight to judgment misses the signal entirely
+- **Three practices for shift**: Pause before concluding (assume context you don't have), place yourself in their position (imagine their pressures and information), separate behavior from character (one missed deadline isn't a flaw)
+- **Speed with context beats instant decisions with blind spots**: 10 minutes gathering context (ask "What's changed?" and "What support do you need?") loads data for better decisions; teams respect informed decisions over reactive ones
 
 ## The Cost of Snap Judgments
 

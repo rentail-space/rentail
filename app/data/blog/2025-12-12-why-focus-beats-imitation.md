@@ -15,6 +15,12 @@ Every founder hits this wall. You're building something real, gaining traction, 
 
 Chelsea's realization cuts to the core of what kills promising brands: the comparison trap. When you're measuring your chapter three against someone else's chapter twenty, you're not just wasting energy—you're actively sabotaging your strategic advantage.
 
+## TL;DR
+
+- **Comparison creates three critical failures**: Misallocates resources across ten mediocre initiatives vs three exceptional ones, destroys morale when teams feel defensive catch-up posture, blinds you to actual opportunities (underserved segments, operational efficiencies, authentic relationships)
+- **Focus framework delivers distinction**: Select 2-3 areas aligning with core value proposition and dominate them completely; markets reward distinction over imitation (depth beats breadth when resources are limited)
+- **Three actions to shift**: Stop daily competitor monitoring (check quarterly), audit and kill anything that exists solely because "competitors do it," define three non-negotiables you'll be exceptional at regardless of competition
+
 ## The Hidden Cost of Comparison
 
 Constantly benchmarking against better-funded competitors creates three critical failures:

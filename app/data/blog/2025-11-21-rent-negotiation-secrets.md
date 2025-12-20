@@ -15,6 +15,13 @@ His Portland food hall stall was generating $47,000 monthly, but the proposed re
 
 By the end of that phone call, Marcus had negotiated his $6,800 monthly rent down to $4,100—a 40% reduction that saved him $32,400 annually. Here's the exact playbook he used, and how any smart merchant can replicate his success.
 
+## TL;DR
+
+- **Hidden leverage through research**: Marcus discovered food hall had 47% annual vendor turnover (vs 22% industry average), 4.2-month average to fill stalls, $306K in lost annual revenue from six closures, and was below loan covenant occupancy requirement (67% vs required 85%)
+- **Psychology principles that work**: Frame as preventing losses vs requesting benefits (loss aversion), position as business partner solving mutual problems (partnership beats confrontation), use objective market data to remove emotion from negotiation
+- **Advanced tactics multiply leverage**: Competitive intelligence (rival food hall opening nearby), seasonal timing (negotiated pre-year-end for landlord's reporting certainty), ecosystem value proposition (proved his crowds drove adjacent vendor sales), professional presentation approach (PowerPoint vs complaint)
+- **Fatal mistakes to avoid**: Desperation signals weakness, threats create adversarial relationships, emotion-over-data inspires resistance, single-issue demands feel confrontational vs packages that feel like partnerships
+
 ---
 
 ## The leverage most tenants never discover

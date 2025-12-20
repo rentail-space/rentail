@@ -15,6 +15,13 @@ Brad Savage learned what destroys more startups than bad products or market timi
 
 Early-stage founders face relentless uncertainty. Missed sales target. Key employee quits. Product launch flops. The instinct is to hunker down—withdraw, overthink, wait for clarity before moving forward. It feels protective. It's actually poisonous.
 
+## TL;DR
+
+- **Withdrawal triggers three cascading failures**: Team confidence evaporates (top performers take recruiter calls), decision velocity collapses (problems sit in limbo while leader processes), feedback loop breaks (avoiding customers/investors who could provide perspective)
+- **90-day trailing average reframes volatility**: Track weekly sentiment (1-10 scale), calculate rolling 90-day average to distinguish noise from signal; daily emotional swings don't reveal trajectory—quarters do
+- **Persistence as operational discipline**: Control what you can (customer calls, product improvements, communication), release what you can't (market timing, competitor moves), trust compounding (most founders quit right before inflection point)
+- **Leadership mandate**: Teams take emotional cues from you—persisting through setbacks with clear-eyed execution signals permission to do the same; markets reward persistence over perfection
+
 ## The Withdrawal Trap
 
 When leaders go dark after setbacks, three failures cascade:

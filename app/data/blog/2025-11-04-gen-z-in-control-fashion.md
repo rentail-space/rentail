@@ -9,6 +9,13 @@ Brands spent decades telling consumers what to wear. That era ended.
 
 Gen Z and Gen Alpha now dictate the rules—and 40% of fashion spending over the next decade belongs to them, according to the WWD x BCG Future of Fashion Report analyzing 9,000+ consumers and 50,000+ social posts.
 
+## TL;DR
+
+- **Gen Z spends 7% more on apparel, 10% less on dining**: Fashion is identity infrastructure, not discretionary spending—they curate identities by mixing brands rather than staying loyal
+- **Four behaviors drive modern journeys**: Streaming, scrolling, searching, shopping happen simultaneously across overlapping touchpoints; brand content alone is too static
+- **AI and social media acceleration**: Trend cycles move at warp speed (viral moments peak and die in days); winners embed young talent for cultural pulse, move at internet speed, and master AI distribution (LLMs, TikTok, gaming) before competitors
+- **Co-creation beats consumption**: Successful brands solve problems through authenticity, personalization, and scarcity—making customers feel like the deepest version of themselves
+
 ## The New Economics
 
 Under-28s spend **7% more on apparel** and **10% less on dining** than older shoppers. Translation: fashion isn't discretionary for them—it's identity infrastructure.

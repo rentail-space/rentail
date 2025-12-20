@@ -11,6 +11,12 @@ Small business "viral" means customers share, comment, buy.
 
 **The reality check:** You don't need influencer reach. You need customers thinking about your business.
 
+## TL;DR
+
+- **Lo-fi beats professional production**: Unpolished, personal videos outperform filmmaker content because they reflect reality (college student video beat professional for Excused Absence Comedy)
+- **Cultural relevance drives engagement**: Nostalgia (1973 homecoming photo), banned books debates, personal journeys (cotton picker to chef), and local event hijacking (Morgan Wallen walkout recreation) generate organic conversation
+- **Educational SEO wins long-term**: Specific problem-solving content (e.g., "The #1 Most Harmful Mistake With Citizen Eco-Drive Watch") attracts 1M+ views from people actively searching for solutions
+
 ### What actually goes viral:
 
 **Lo-fi beats professional.** Excused Absence Comedy (Austin) hired a filmmaker for a polished video. A college sophomore's personal, unpolished video got more response. "She knows me. Her video reflects reality."

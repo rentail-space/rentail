@@ -7,6 +7,12 @@ summary: "Specialty leasing is the retail world's answer to \"try before you buy
 
 As a small business owner, you've probably dreamed of having your own storefront. But between sky-high rents, multi-year commitments, and hefty build-out costs, traditional retail leases can feel overwhelming—especially when you're just starting out or testing a new market. That's where specialty leasing comes in.
 
+## TL;DR
+
+- **Lower risk, faster testing**: Kiosks, pop-ups, and carts cost thousands vs tens of thousands for traditional stores; run days to months vs 3-5 year commitments; let you test concepts, refine pricing, and validate demand with real customer feedback
+- **Built-in advantages**: Access established shopping center traffic without building from scratch, capitalize on seasonal peaks without paying rent during slow months, network with established retailers for advice and opportunities
+- **Reality check constraints**: Limited space requires creative inventory management and off-site storage, temporary nature ends just as momentum builds, mall regulations control hours/displays/interactions, variable costs include unpredictable percentage rent
+- **Getting started**: Contact leasing offices directly (malls, mixed-use developments, transit stations), prepare one-page business overview with photos/pricing/social proof, understand terms (flat vs percentage vs hybrid rent), plan for success with customer capture systems
 
 ## What Is Specialty Leasing?
 

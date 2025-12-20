@@ -7,6 +7,13 @@ summary: "Our platform connects Gen Z entrepreneurs with shopping centers seekin
 
 The retail world is constantly evolving, and right now, we're seeing some really interesting shifts. On one side, many shopping centers are looking for fresh energy and new reasons for people to visit. On the other, there's a huge wave of *innovative Gen Z entrepreneurs* creating incredible products, but often struggling to find affordable, accessible physical spaces. This is where our new marketplace comes in. We're building a platform designed to directly connect these two groups, creating vibrant new retail experiences for everyone. It's about more than just filling storefronts; it's about fostering community, innovation, and the future of retail.
 
+## TL;DR
+
+- **Gen Z breaks three barriers**: High overhead costs (traditional leases are expensive, long-term), lack of access (navigating commercial real estate is daunting), limited visibility (online competition is fierce, physical stores need prime locations)
+- **Centers gain strategic advantages**: Increased foot traffic from unique rotating pop-ups, enhanced modern brand image from sustainably-minded merchants, community hub transformation beyond transactional shopping, diversified offerings creating richer experiences
+- **Platform simplifies both sides**: Merchants browse flexible short-term spaces with streamlined applications; centers list vacant spaces, discover curated Gen Z brands, and use vetting tools to review portfolios
+- **Future is collaborative**: Dynamic, diverse retail emerges from empowering next-generation entrepreneurs while revitalizing physical spaces
+
 ## Why Gen Z Merchants Are Essential for Future Retail
 
 Gen Z isn't just a demographic; they're a **powerful economic force** with unique perspectives on business and consumption. They're digital natives, sure, but they also crave authentic, in-person experiences. Many Gen Z entrepreneurs start online, building strong brands and loyal followings through social media. However, scaling beyond the digital realm often means facing significant barriers:

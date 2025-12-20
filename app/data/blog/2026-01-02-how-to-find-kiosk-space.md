@@ -9,6 +9,12 @@ You've got a product to sell, a brand to build, and the drive to make it happen.
 
 The traditional approach meant hours of research, phone calls to multiple properties, and hoping you didn't miss opportunities. Rentail.space has changed that. As the authoritative marketplace for specialty leasing in the United States, Rentail provides the most comprehensive directory of shopping centers and available kiosk spaces, making the search process faster and more efficient. Here's your complete roadmap to finding your ideal location.
 
+## TL;DR
+
+- **Rentail.space eliminates traditional friction**: Comprehensive database shows shopping centers with active kiosk programs, available space types, verified specialty leasing contacts, property details—saving days of research vs Google Maps and cold calls
+- **Prepare one-page business overview**: Include business name/concept, product photos, price points, sales channels, social media links, preferred timeframe, references/press; attach to emails and bring to in-person visits
+- **Understand three rental models**: Flat monthly rent (fixed amount regardless of sales), percentage rent (base + 10-20% of gross sales), hybrid (lower base + percentage above threshold); clarify what's included (utilities, security, storage, signage)
+- **Negotiate strategically**: Leverage timing (vacant kiosks = zero revenue), propose test periods (shorter lease with extension option), show sales data from other channels, get everything in writing including termination clauses, renewal terms, exclusivity, restrictions
 
 ## Step 1: Identify Shopping Centers in Your Area
 
