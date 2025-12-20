@@ -97,13 +97,13 @@ export default function PageLayout({
         <Links />
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </head>
-      <body>
+      <body className="relative">
         <DevTag />
         <NuqsAdapter>
           {hideLayout ? (
             children
           ) : (
-            <div className="flex min-h-screen flex-col">
+            <div className="isolate flex min-h-screen flex-col">
               <PageHeader links={headerLinks} />
               {children}
               <PageFooter />
