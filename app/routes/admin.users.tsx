@@ -5,6 +5,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { timeAgo } from "date-buddy";
 import { groupBy, invariant, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
 import {
@@ -175,17 +176,7 @@ function RangeSelector({
         </TabsList>
       </Tabs>
 
-      <div className="flex flex-row items-center gap-2">
-        <Button
-          variant="outline"
-          onClick={() => {
-            setFrom(DateTime.fromJSDate(from).minus({ days: 1 }).toJSDate());
-            setUntil(DateTime.fromJSDate(until).minus({ days: 1 }).toJSDate());
-          }}
-        >
-          <MoveLeft className="h-10 w-10 text-gray-500" />
-        </Button>
-
+      <div className="flex flex-row items-center gap-0">
         <Input
           className="w-36"
           onChange={({ target }) => setFrom(new Date(target.value))}
@@ -199,6 +190,18 @@ function RangeSelector({
           type="date"
           value={until.toISOString().split("T")[0]}
         />
+      </div>
+
+      <div className="flex flex-row items-center gap-2">
+        <Button
+          variant="outline"
+          onClick={() => {
+            setFrom(DateTime.fromJSDate(from).minus({ days: 1 }).toJSDate());
+            setUntil(DateTime.fromJSDate(until).minus({ days: 1 }).toJSDate());
+          }}
+        >
+          <MoveLeft className="h-10 w-10 text-gray-500" />
+        </Button>
         <Button
           variant="outline"
           onClick={() => {
@@ -306,23 +309,32 @@ function AllUsers({ users }: { users: User[] }) {
           (row.utm && JSON.parse(row.utm as string).source) ||
           row.referrer ||
           "N/A",
-        size: 350,
+        size: 280,
         header: "Source",
       },
       {
         accessorKey: "ip",
         header: "IP",
-        size: 100,
+        size: 120,
         sortingFn: "alphanumeric",
       },
       {
-        accessorFn: (row) =>
-          DateTime.fromJSDate(row.createdAt)
-            .setZone((row.geocode as { timeZone: string }).timeZone ?? "UTC")
-            .toFormat("yyyy-MM-dd HH:mm"),
         accessorKey: "createdAt",
+        cell: ({ row }) => (
+          <span className="flex flex-row items-center justify-between gap-2">
+            <span className="w-48">
+              {DateTime.fromJSDate(row.original.createdAt)
+                .setZone(
+                  (row.original.geocode as { timeZone: string }).timeZone ??
+                    "UTC",
+                )
+                .toFormat("yyyy-MM-dd HH:mm")}
+            </span>
+            <span className="w-24">{timeAgo(row.original.createdAt)}</span>
+          </span>
+        ),
         header: "Created",
-        size: 130,
+        size: 220,
         sortingFn: (rowA, rowB) =>
           rowA.original.createdAt.getTime() - rowB.original.createdAt.getTime(),
       },
