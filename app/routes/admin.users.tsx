@@ -5,6 +5,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+// @ts-expect-error No declaration file found
 import { timeAgo } from "date-buddy";
 import { groupBy, invariant, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
