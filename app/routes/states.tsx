@@ -120,7 +120,7 @@ function LinkToState({
       <div className="flex w-full flex-row justify-end">
         <Button variant="secondary" asChild>
           <Link to={`/state/${abbreviation.toLowerCase()}`}>
-            See all centers
+            Visit all centers
             <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </Button>

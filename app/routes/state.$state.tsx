@@ -159,7 +159,7 @@ function LinkToCenter({
           asChild
         >
           <Link to={`/center/${center.id}`}>
-            See center
+            Visit {center.name}
             <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </Button>

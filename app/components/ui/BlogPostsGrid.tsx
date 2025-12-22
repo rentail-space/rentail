@@ -35,7 +35,7 @@ export default function BlogPostsGrid({
                   to="/blog"
                   className="flex flex-row flex-nowrap items-center justify-center gap-2 font-medium text-black text-xl hover:text-[hsl(37,92%,65%)]"
                 >
-                  See all blog posts <ArrowRight className="h-6 w-6" />
+                  Explore all blog posts <ArrowRight className="h-6 w-6" />
                 </Link>
               </div>
             )}
