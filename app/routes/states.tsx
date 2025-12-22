@@ -105,13 +105,11 @@ function LinkToState({
 }) {
   const url = `/state/${abbreviation.toLowerCase()}`;
   return (
-    <div>
-      <Link to={url} className="space-y-2" itemProp="url">
-        <div className="flex flex-row items-center justify-between">
-          <h2 className="font-bold text-xl" itemProp="name">
-            {name}
-          </h2>
-        </div>
+    <div className="flex flex-col gap-4">
+      <Link to={url} className="space-y-4" itemProp="url">
+        <h2 className="font-bold text-xl" itemProp="name">
+          {name}
+        </h2>
         <Streamdown className="text-gray-500" mode="static">
           {lede}
         </Streamdown>
@@ -120,7 +118,7 @@ function LinkToState({
       <div className="flex w-full flex-row justify-end">
         <Button variant="secondary" asChild>
           <Link to={`/state/${abbreviation.toLowerCase()}`}>
-            Visit all centers
+            Visit {name} centers
             <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </Button>
