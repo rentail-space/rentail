@@ -126,7 +126,7 @@ export default function AuthPage() {
 
           {fetcher.data?.error && (
             <FieldError errors={[fetcher.data.error]}>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 font-bold text-lg text-red-500">
                 <AlertCircle className="h-6 w-6 shrink-0 stroke-current" />
                 {fetcher.data.error}
               </div>
