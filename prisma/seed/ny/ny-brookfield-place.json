@@ -1,0 +1,26 @@
+{
+  "name": "Brookfield Place",
+  "address": "230 Vesey Street",
+  "city": "New York",
+  "state": "NY",
+  "website": "https://www.brookfieldplaceny.com",
+  "country": "US",
+  "latitude": 40.712782499999996,
+  "longitude": -74.01525649999999,
+  "phone": "++1 212-978-1673",
+  "imageURLs": [
+    "/images/malls/ny-brookfield-place-1.jpg"
+  ],
+  "summary": "Towering waterfront office complex offering shopping, dining & ice-skating, plus special events.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.6,
+  "reviewCount": 21941,
+  "centerType": "LifestyleCenter",
+  "demographics": "Brookfield Place attracts a highly affluent demographic of professionals, tourists, and luxury shoppers, with visitors primarily aged 25-55 in high-income brackets reflecting the Financial District's executive workforce and Manhattan's upper-class residents. The trade area encompasses nearby office towers housing finance, legal, and tech professionals, along with Battery Park City's upscale residential community and international tourists visiting the World Trade Center area. Typical visitors exhibit sophisticated shopping preferences with strong interest in luxury fashion, artisanal dining experiences, and premium lifestyle brands, often combining shopping with business meetings or cultural events in the complex's public spaces.",
+  "description": "Brookfield Place is a prestigious mixed-use complex located in the heart of Manhattan's Financial District at 230 Vesey Street, directly adjacent to the World Trade Center. This architectural landmark features a stunning glass atrium designed by César Pelli and houses an impressive collection of upscale retail boutiques, fine dining restaurants, and luxury amenities. The complex seamlessly blends contemporary design with world-class shopping and dining experiences, including renowned tenants such as Hermès, Gucci, Louis Vuitton, and culinary destinations from celebrity chefs. Brookfield Place serves as both a shopping destination and a cultural hub, hosting art installations, performances, and community events throughout the year in its dramatic Winter Garden atrium. With its prime waterfront location overlooking the Hudson River, proximity to major office towers, and curated mix of luxury retailers and experiential dining, Brookfield Place has established itself as one of New York City's premier lifestyle destinations.",
+  "numberOfStores": 50,
+  "squareFootage": 250000,
+  "tier": 3,
+  "spaces": []
+}

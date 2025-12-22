@@ -1,0 +1,26 @@
+{
+  "name": "Queens Place Mall",
+  "address": "88-01 Queens Boulevard",
+  "city": "Queens",
+  "state": "NY",
+  "website": "https://www.queensplacemall.com",
+  "country": "US",
+  "latitude": 40.7357829,
+  "longitude": -73.87441989999999,
+  "phone": "++1 718-393-9400",
+  "imageURLs": [
+    "/images/malls/ny-queens-place-mall-1.jpg"
+  ],
+  "summary": "5-level indoor mall with eateries, big-box shops & a range of retailers from electronics to clothes.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 8729,
+  "centerType": "RegionalMall",
+  "demographics": "Queens Place Mall serves a highly diverse, multicultural community reflective of Elmhurst's position as one of the most ethnically varied neighborhoods in New York City, with significant Asian, Hispanic, and immigrant populations. The primary trade area consists of middle-income households, young families, and multi-generational households seeking value-oriented shopping and convenient access to everyday necessities. Visitors typically exhibit practical shopping patterns, prioritizing accessibility via subway and bus routes, with preferences for affordable national chains, ethnic dining options, and service-oriented retailers that cater to the neighborhood's working-class and immigrant demographics.",
+  "description": "Queens Place Mall is a prominent shopping destination located at 88-01 Queens Boulevard in the vibrant neighborhood of Elmhurst, Queens. This enclosed regional shopping center serves as a vital retail hub for the diverse communities of central Queens, offering a convenient mix of national retailers, dining options, and services. Strategically positioned along the bustling Queens Boulevard corridor, the mall benefits from excellent accessibility via public transportation and major roadways, making it a popular gathering place for local residents. Throughout its history, Queens Place has adapted to serve the evolving needs of Queens' multicultural population, providing essential shopping and community services. The center continues to play an important role in the neighborhood's commercial landscape, drawing shoppers from Elmhurst and surrounding areas with its mix of practical retail offerings and convenient location.",
+  "numberOfStores": 40,
+  "squareFootage": 350000,
+  "tier": 2,
+  "spaces": []
+}

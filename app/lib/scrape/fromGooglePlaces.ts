@@ -255,7 +255,6 @@ async function toDatabasePlace(
   const slug = createSlug({ state, placeName });
   const imageURLs = await downloadPhotos({ slug, photos: place.photos });
   const { openFrom, openUntil } = operatingHours(place.regularOpeningHours);
-  console.log({ openFrom, openUntil });
 
   return {
     name: placeName,

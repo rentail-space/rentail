@@ -1,0 +1,128 @@
+[
+  {
+    "name": "Atlantic Terminal Mall",
+    "address": "139 Flatbush Avenue",
+    "city": "Brooklyn",
+    "state": "NY",
+    "website": "https://www.atlanticterminal.com"
+  },
+  {
+    "name": "Bay Plaza Shopping Center",
+    "address": "200 Baychester Avenue",
+    "city": "Bronx",
+    "state": "NY",
+    "website": "https://www.bayplazashoppingcenter.com"
+  },
+  {
+    "name": "Brookfield Place",
+    "address": "230 Vesey Street",
+    "city": "New York",
+    "state": "NY",
+    "website": "https://www.brookfieldplaceny.com"
+  },
+  {
+    "name": "City Point",
+    "address": "445 Albee Square West",
+    "city": "Brooklyn",
+    "state": "NY",
+    "website": "https://www.citypointbrooklyn.com"
+  },
+  {
+    "name": "Empire Outlets",
+    "address": "55 Richmond Terrace",
+    "city": "Staten Island",
+    "state": "NY",
+    "website": "https://www.empireoutlets.nyc"
+  },
+  {
+    "name": "Gateway Center",
+    "address": "519 Gateway Drive",
+    "city": "Brooklyn",
+    "state": "NY",
+    "website": "https://www.gatewaycenterbrooklyn.com"
+  },
+  {
+    "name": "Kings Plaza Shopping Center",
+    "address": "5100 Kings Plaza",
+    "city": "Brooklyn",
+    "state": "NY",
+    "website": "https://www.kingsplazaonline.com"
+  },
+  {
+    "name": "Manhattan Mall",
+    "address": "100 West 33rd Street",
+    "city": "New York",
+    "state": "NY",
+    "website": "https://www.manhattanmallny.com"
+  },
+  {
+    "name": "Queens Center",
+    "address": "90-15 Queens Boulevard",
+    "city": "Elmhurst",
+    "state": "NY",
+    "website": "https://www.simon.com/mall/queens-center"
+  },
+  {
+    "name": "Queens Place Mall",
+    "address": "88-01 Queens Boulevard",
+    "city": "Elmhurst",
+    "state": "NY",
+    "website": "https://www.queensplacemall.com"
+  },
+  {
+    "name": "Staten Island Mall",
+    "address": "2655 Richmond Avenue",
+    "city": "Staten Island",
+    "state": "NY",
+    "website": "https://www.simon.com/mall/staten-island-mall"
+  },
+  {
+    "name": "The Fulton Center",
+    "address": "200 Broadway",
+    "city": "New York",
+    "state": "NY",
+    "website": "https://www.westfield.com/fultoncenter"
+  },
+  {
+    "name": "The Mall at Bay Plaza",
+    "address": "2210 Bartow Avenue",
+    "city": "Bronx",
+    "state": "NY",
+    "website": "https://www.themallatbayplaza.com"
+  },
+  {
+    "name": "The Oculus at Westfield World Trade Center",
+    "address": "185 Greenwich Street",
+    "city": "New York",
+    "state": "NY",
+    "website": "https://www.westfield.com/worldtradecenter"
+  },
+  {
+    "name": "The Shops at Atlas Park",
+    "address": "80-00 Cooper Avenue",
+    "city": "Glendale",
+    "state": "NY",
+    "website": "https://www.theshopsatatlaspark.com"
+  },
+  {
+    "name": "The Shops at Columbus Circle",
+    "address": "10 Columbus Circle",
+    "city": "New York",
+    "state": "NY",
+    "website": "https://www.theshopsatcolumbuscircle.com"
+  },
+  {
+    "name": "The Shops at Hudson Yards",
+    "address": "20 Hudson Yards",
+    "city": "New York",
+    "state": "NY",
+    "website": "https://www.theshopsandrestaurantsathudson.com"
+  },
+  {
+    "name": "The Shops at SkyView Center",
+    "address": "40-24 College Point Boulevard",
+    "city": "Flushing",
+    "state": "NY",
+    "website": "https://www.theshopsatskyviewcenter.com"
+  }
+]

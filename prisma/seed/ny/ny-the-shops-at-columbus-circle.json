@@ -1,0 +1,25 @@
+{
+  "name": "The Shops at Columbus Circle",
+  "address": "10 Columbus Circle",
+  "city": "New York",
+  "state": "NY",
+  "website": "https://www.theshopsatcolumbuscircle.com",
+  "country": "US",
+  "latitude": 40.7685811,
+  "longitude": -73.9831811,
+  "imageURLs": [
+    "/images/malls/ny-the-shops-at-columbus-circle-1.jpg"
+  ],
+  "summary": "This gallery in the Time Warner Center hosts dozens of retailers, plus dining & nightlife options.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 10191,
+  "centerType": "LifestyleCenter",
+  "demographics": "The Shops at Columbus Circle attracts an affluent, cosmopolitan demographic consisting of high-income Manhattan residents, particularly from the Upper West Side and Midtown neighborhoods, as well as international tourists and business travelers staying at nearby luxury hotels. The typical visitor profile includes professionals aged 30-65 with household incomes exceeding $150,000, sophisticated urban dwellers seeking premium brands, and cultural enthusiasts attending Jazz at Lincoln Center performances. Shopping patterns emphasize quality over quantity, with visitors drawn to upscale retailers, fine dining establishments, and the convenience of a prestigious central location that combines retail therapy with cultural experiences and easy access to Central Park.",
+  "description": "The Shops at Columbus Circle represents a sophisticated urban shopping destination located within the iconic Time Warner Center at one of Manhattan's most prestigious addresses. Situated at the gateway to Central Park and adjacent to Jazz at Lincoln Center, this upscale center seamlessly blends luxury retail, fine dining, and cultural experiences in the heart of New York City. The property features carefully curated shops and restaurants that cater to both discerning locals and international visitors seeking premium brands and exceptional culinary experiences. With its prime location at Columbus Circle, the center benefits from exceptional foot traffic and serves as a central hub connecting the Upper West Side, Midtown, and Central Park neighborhoods. The center's integration with the Mandarin Oriental Hotel and Jazz at Lincoln Center creates a unique mixed-use environment where shopping, dining, entertainment, and hospitality converge to offer an unparalleled urban retail experience.",
+  "numberOfStores": 50,
+  "squareFootage": 175000,
+  "tier": 3,
+  "spaces": []
+}

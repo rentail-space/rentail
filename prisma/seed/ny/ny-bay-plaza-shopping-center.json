@@ -1,0 +1,26 @@
+{
+  "name": "Bay Plaza Shopping Center",
+  "address": "200 Baychester Avenue",
+  "city": "The Bronx",
+  "state": "NY",
+  "website": "https://www.bayplazashoppingcenter.com",
+  "country": "US",
+  "latitude": 40.864391999999995,
+  "longitude": -73.8279165,
+  "phone": "++1 718-208-2750",
+  "imageURLs": [
+    "/images/malls/ny-bay-plaza-shopping-center-1.jpg"
+  ],
+  "summary": "Large retail complex with department, discount & specialty stores, services & food/grocery options.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 25003,
+  "centerType": "RegionalMall",
+  "demographics": "Bay Plaza Shopping Center primarily serves a diverse, working to middle-class demographic from the northeast Bronx and southern Westchester County, with a strong representation of Hispanic and African American families. The trade area consists predominantly of households with annual incomes ranging from $40,000 to $85,000, including young families and middle-aged shoppers seeking value-oriented national brands and convenient one-stop shopping. Visitors typically prioritize accessibility, affordability, and practical everyday shopping needs, with strong traffic on weekends when multi-generational family shopping trips are common.",
+  "description": "Bay Plaza Shopping Center stands as one of the Bronx's premier retail destinations, serving as a vital shopping hub for the northeast Bronx community and surrounding areas. Located at 200 Baychester Avenue, this expansive shopping center has established itself as a go-to destination for families seeking convenient access to a wide variety of national retailers, dining options, and entertainment venues. The center features a diverse tenant mix that caters to everyday shopping needs, from fashion and home goods to electronics and specialty stores. With its strategic location near major transportation routes, Bay Plaza has become an integral part of the community's commercial landscape, drawing visitors from across the Bronx and nearby Westchester County. The shopping center continues to serve as an important economic anchor for the area, providing both retail convenience and community gathering space for residents.",
+  "numberOfStores": 100,
+  "squareFootage": 780000,
+  "tier": 2,
+  "spaces": []
+}

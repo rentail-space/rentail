@@ -1,0 +1,26 @@
+{
+  "name": "City Point",
+  "address": "445 Albee Square West",
+  "city": "Brooklyn",
+  "state": "NY",
+  "website": "https://www.citypointbrooklyn.com",
+  "country": "US",
+  "latitude": 40.690939799999995,
+  "longitude": -73.9830629,
+  "phone": "++1 718-673-8800",
+  "imageURLs": [
+    "/images/malls/ny-city-point-1.jpg"
+  ],
+  "summary": "A food hall & cool movie theater lend a happening vibe to this enclosed shopping & dining complex.",
+  "openFrom": 700,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 7992,
+  "centerType": "LifestyleCenter",
+  "demographics": "City Point attracts a predominantly urban, millennial and Gen Z demographic with above-average income levels, reflecting Downtown Brooklyn's rapid gentrification and influx of young professionals and students. The trade area includes both the growing residential population of new luxury apartment buildings surrounding the center and commuters from across Brooklyn and neighboring boroughs who pass through the nearby transit hub. Typical visitors are ethnically diverse, tech-savvy consumers who value convenience, experiential retail, and dining options that align with contemporary urban lifestyles. The center draws heavily from households with higher educational attainment and discretionary spending power, particularly young families and singles seeking quality everyday shopping and entertainment options within walking distance of their homes or workplaces.",
+  "description": "City Point is a dynamic mixed-use development located in the heart of Downtown Brooklyn at 445 Albee Square West, representing a modern transformation of Brooklyn's historic commercial district. This vibrant destination seamlessly combines shopping, dining, entertainment, and community spaces to create an urban lifestyle experience that reflects the energy and diversity of Brooklyn. With its strategic location near major transportation hubs and cultural attractions, City Point has become a central gathering place for both residents and visitors exploring Downtown Brooklyn. The center features a carefully curated mix of national retailers, unique dining concepts, and entertainment venues that cater to the neighborhood's diverse and sophisticated population. City Point's contemporary design and commitment to community programming make it more than just a shopping destination—it's an integral part of Brooklyn's urban fabric, offering events and experiences that bring people together in a welcoming, open-air environment.",
+  "numberOfStores": 30,
+  "squareFootage": 300000,
+  "tier": 2,
+  "spaces": []
+}

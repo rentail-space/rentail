@@ -1,0 +1,26 @@
+{
+  "name": "Queens Center",
+  "address": "90-15 Queens Boulevard",
+  "city": "Queens",
+  "state": "NY",
+  "website": "https://www.simon.com/mall/queens-center",
+  "country": "US",
+  "latitude": 40.7347872,
+  "longitude": -73.8688409,
+  "phone": "++1 718-592-3900",
+  "imageURLs": [
+    "/images/malls/ny-queens-center-1.jpg"
+  ],
+  "summary": "This coliseum-like indoor shopping mall houses dozens of retail stores plus a food court.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 31708,
+  "centerType": "RegionalMall",
+  "demographics": "Queens Center attracts a highly diverse, multi-generational customer base reflecting the demographics of Queens, one of the most ethnically diverse areas in the United States. The primary trade area consists of middle-income families with household incomes ranging from $40,000 to $90,000, including significant Asian, Hispanic, and immigrant populations who value accessible pricing and practical retail options. Shoppers tend to be value-conscious but brand-aware, seeking a mix of affordable fashion, family necessities, and aspirational purchases, with strong weekend and evening traffic driven by multi-generational family shopping trips. The center serves as a community gathering place for residents who rely heavily on public transportation, with many visitors combining shopping with dining and entertainment in a single trip.",
+  "description": "Queens Center is one of New York City's premier shopping destinations, strategically located in the heart of Elmhurst, Queens along Queens Boulevard. As a Simon Property Group asset, this enclosed regional mall has established itself as a vital retail hub serving the diverse and vibrant communities of Queens and the broader New York metropolitan area. The center features a comprehensive mix of popular national retailers, department store anchors, and specialty shops that cater to the fashion-forward and value-conscious shoppers who make Queens Center one of the highest-traffic malls in the country. With its convenient accessibility via multiple subway lines and bus routes, Queens Center has become an integral part of the local community's shopping culture. The mall provides a climate-controlled shopping environment with modern amenities, dining options, and a retail experience that serves the everyday needs and aspirations of one of America's most ethnically diverse neighborhoods.",
+  "numberOfStores": 150,
+  "squareFootage": 965000,
+  "tier": 2,
+  "spaces": []
+}

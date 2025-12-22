@@ -1,0 +1,26 @@
+{
+  "name": "Atlantic Terminal Mall",
+  "address": "139 Flatbush Avenue",
+  "city": "Brooklyn",
+  "state": "NY",
+  "website": "https://www.atlanticterminal.com",
+  "country": "US",
+  "latitude": 40.684568,
+  "longitude": -73.97697699999999,
+  "phone": "++1 718-834-3400",
+  "imageURLs": [
+    "/images/malls/ny-atlantic-terminal-mall-1.jpg"
+  ],
+  "summary": "Multi-level center with a variety of stores, including big-box chains, plus several dining options.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.3,
+  "reviewCount": 17897,
+  "centerType": "RegionalMall",
+  "demographics": "Atlantic Terminal Mall serves a predominantly young, diverse urban demographic with visitors ranging from college-aged to middle-aged professionals, reflecting Brooklyn's multicultural population. The trade area captures both local residents from surrounding neighborhoods like Fort Greene, Prospect Heights, and Bedford-Stuyvesant, as well as daily commuters who utilize the adjacent Atlantic Terminal transportation hub. Primary shoppers include middle-income households seeking convenient access to everyday retail and dining needs, with shopping patterns characterized by frequent, quick visits driven by the center's transit-oriented location. The center attracts a blend of students, working professionals, and families who value accessibility and time efficiency in their shopping experience.",
+  "description": "Atlantic Terminal Mall is a dynamic urban shopping destination located in the heart of Downtown Brooklyn, directly adjacent to the Atlantic Terminal transportation hub. This multi-level enclosed mall serves as a vital retail anchor in one of New York City's most rapidly growing neighborhoods, offering convenient access via multiple subway lines and the Long Island Rail Road. The center features a diverse mix of national retailers and dining options that cater to the daily needs of Brooklyn's residents, commuters, and visitors. Its strategic location within the bustling Atlantic Terminal complex makes it an integral part of the neighborhood's transformation into a major commercial and residential district. The mall provides an essential shopping experience for urban dwellers seeking convenience, variety, and accessibility all under one roof in the vibrant Brooklyn community.",
+  "numberOfStores": 25,
+  "squareFootage": 300000,
+  "tier": 2,
+  "spaces": []
+}
