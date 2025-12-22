@@ -7,7 +7,13 @@ import {
 } from "@tanstack/react-table";
 import { groupBy, invariant, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
-import { ArrowDown, ArrowRight, ArrowUp } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUp,
+  MoveLeft,
+  MoveRight,
+} from "lucide-react";
 import { DateTime } from "luxon";
 import { parseAsIsoDate, useQueryState } from "nuqs";
 import type { User } from "prisma/generated/client";
@@ -169,7 +175,17 @@ function RangeSelector({
         </TabsList>
       </Tabs>
 
-      <div className="flex flex-row items-center">
+      <div className="flex flex-row items-center gap-2">
+        <Button
+          variant="outline"
+          onClick={() => {
+            setFrom(DateTime.fromJSDate(from).minus({ days: 1 }).toJSDate());
+            setUntil(DateTime.fromJSDate(until).minus({ days: 1 }).toJSDate());
+          }}
+        >
+          <MoveLeft className="h-10 w-10 text-gray-500" />
+        </Button>
+
         <Input
           className="w-36"
           onChange={({ target }) => setFrom(new Date(target.value))}
@@ -183,6 +199,15 @@ function RangeSelector({
           type="date"
           value={until.toISOString().split("T")[0]}
         />
+        <Button
+          variant="outline"
+          onClick={() => {
+            setFrom(DateTime.fromJSDate(from).plus({ days: 1 }).toJSDate());
+            setUntil(DateTime.fromJSDate(until).plus({ days: 1 }).toJSDate());
+          }}
+        >
+          <MoveRight className="h-10 w-10 text-gray-500" />
+        </Button>
       </div>
     </div>
   );
