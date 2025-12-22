@@ -70,7 +70,9 @@ export default function StatePage({
           All States
         </Link>
 
-        <h1 className="text-center font-bold text-2xl">{state.name}</h1>
+        <h1 className="whitespace-nowrap text-center font-bold text-2xl">
+          {state.name}
+        </h1>
 
         <span className="w-1/2" />
       </div>
