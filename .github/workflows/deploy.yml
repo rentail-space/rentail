@@ -8,7 +8,7 @@ jobs:
   test:
     name: Test
     runs-on: namespace-profile-rentail
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     services:
       postgres:
@@ -55,6 +55,7 @@ jobs:
         run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version)" >> $GITHUB_ENV
 
       - name: Install Playwright (Chromium)
+        timeout-minutes: 5
         run: pnpm exec playwright install chromium --with-deps
 
       - name: Setup database schema for testing
