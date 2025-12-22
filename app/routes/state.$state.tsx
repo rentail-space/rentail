@@ -202,11 +202,17 @@ function KeyCenterStats({
           {center.squareFootage.toLocaleString()} square feet
         </span>
       )}
-      {center.openFrom && center.openUntil && (
-        <span className="whitespace-nowrap">
-          {timeOfDay(center.openFrom)} &mdash; {timeOfDay(center.openUntil)}
-        </span>
+      {center.openFrom === 0 && center.openUntil === 2400 ? (
+        <span className="whitespace-nowrap">24 hours</span>
+      ) : (
+        center.openFrom &&
+        center.openUntil && (
+          <span className="whitespace-nowrap">
+            {timeOfDay(center.openFrom)} &mdash; {timeOfDay(center.openUntil)}
+          </span>
+        )
       )}
+
       {center.rating && center.rating >= 3 && (
         <span className="whitespace-nowrap">
           {clamp(center.rating, 1, 5).toFixed(1)}

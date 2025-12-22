@@ -38,14 +38,22 @@ export default function CenterInfo({
         </div>
       )}
 
-      {center.openFrom && center.openUntil && (
+      {center.openFrom === 0 && center.openUntil === 2400 ? (
         <div className="items-top flex flex-row gap-2 pb-4">
           <ClockIcon className="h-6 w-6" />
-          <span>
-            Open {timeOfDay(center.openFrom)} until{" "}
-            {timeOfDay(center.openUntil)}
-          </span>
+          <span>Open 24 hours</span>
         </div>
+      ) : (
+        center.openFrom &&
+        center.openUntil && (
+          <div className="items-top flex flex-row gap-2 pb-4">
+            <ClockIcon className="h-6 w-6" />
+            <span>
+              Open {timeOfDay(center.openFrom)} until{" "}
+              {timeOfDay(center.openUntil)}
+            </span>
+          </div>
+        )
       )}
 
       {center.squareFootage && (

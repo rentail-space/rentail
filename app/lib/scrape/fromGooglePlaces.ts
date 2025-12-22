@@ -234,12 +234,19 @@ async function toDatabasePlace(
   place: PlacesAPIPlace,
 ): Promise<zod.infer<typeof placeDetailsSchema>> {
   const address = [
+    // eg "8500 Beverly Blvd"
     longText(place.addressComponents, "street_number"),
     longText(place.addressComponents, "route"),
   ]
     .filter(Boolean)
     .join(" ");
-  const city = longText(place.addressComponents, "locality");
+  const city = [
+    // eg "Bronx, New York"
+    longText(place.addressComponents, "sublocality"),
+    longText(place.addressComponents, "locality"),
+  ]
+    .filter(Boolean)
+    .join(", ");
   const state = shortText(
     place.addressComponents,
     "administrative_area_level_1",
@@ -248,6 +255,7 @@ async function toDatabasePlace(
   const slug = createSlug({ state, placeName });
   const imageURLs = await downloadPhotos({ slug, photos: place.photos });
   const { openFrom, openUntil } = operatingHours(place.regularOpeningHours);
+  console.log({ openFrom, openUntil });
 
   return {
     name: placeName,
@@ -375,22 +383,26 @@ function operatingHours(regularOpeningHours?: {
     close: { day: number; hour: number; minute: number };
   }>;
 }): { openFrom?: number; openUntil?: number } {
-  return {
-    openFrom:
-      regularOpeningHours &&
-      Math.min(
-        ...regularOpeningHours.periods.map((period) => {
-          return period.open.hour * 100 + period.open.minute;
-        }),
-      ),
-    openUntil:
-      regularOpeningHours &&
-      Math.max(
-        ...regularOpeningHours.periods.map((period) => {
-          return period.close.hour * 100 + period.close.minute;
-        }),
-      ),
-  };
+  const periods = regularOpeningHours?.periods.filter(
+    (period) => period.open && period.close,
+  );
+  if (!periods) return {};
+
+  const openFrom = Math.min(
+    ...periods.map((period) => {
+      return period.open.hour * 100 + period.open.minute;
+    }),
+  );
+  const openUntil = Math.max(
+    ...periods.map((period) => {
+      return period.close.hour * 100 + period.close.minute;
+    }),
+  );
+  // Note: if center is open 24 hours, we get Infinity/Infinity, so we default
+  // to 0-2400.
+  return Number.isFinite(openFrom) && Number.isFinite(openUntil)
+    ? { openFrom, openUntil }
+    : { openFrom: 0, openUntil: 2400 };
 }
 
 /**
