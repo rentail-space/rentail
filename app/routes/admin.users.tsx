@@ -426,7 +426,8 @@ function Sources({
       <h2 className="font-bold text-2xl">
         Sources{" "}
         <span className="text-gray-500">
-          ({Object.keys(grouped).length} source)
+          ({sumBy(Object.values(analytics), (entry) => entry.activeUsers)} users
+          / {Object.keys(grouped).length} sources)
         </span>
       </h2>
       <Table>
