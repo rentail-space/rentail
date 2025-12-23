@@ -8,9 +8,9 @@ import { confirm } from "@inquirer/prompts";
 import { Vercel } from "@vercel/sdk";
 import type { GetDeploymentResponseBody } from "@vercel/sdk/models/getdeploymentop.js";
 import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymentsop.js";
+import { timeAgo } from "date-buddy";
 import dotenv from "dotenv";
 import { invariant } from "es-toolkit";
-import { DateTime } from "luxon";
 import { execSync } from "node:child_process";
 import { Octokit } from "octokit";
 import ora from "ora";
@@ -94,7 +94,7 @@ async function githubWorkflows() {
 
   console.info(
     "%s  %s  %s    %s",
-    "  Created At".padEnd(21),
+    "  Created At".padEnd(15),
     "Commit".padEnd(10),
     "Title".padEnd(60),
     "Conclusion",
@@ -113,9 +113,7 @@ async function githubWorkflows() {
         : workflow.conclusion === "success"
           ? colorize("green", `✓ ${status}`)
           : colorize("yellow", `⚡${status}`),
-      DateTime.fromISO(workflow.created_at ?? "")
-        .setZone("America/Los_Angeles")
-        .toFormat("yyyy-MM-dd HH:mm:ss"),
+      timeAgo(workflow.created_at ?? "").padEnd(15),
       workflow.head_commit?.id.slice(-8),
       (
         workflow.display_title.slice(0, 59) +
@@ -155,7 +153,7 @@ async function getRecentDeployment(): Promise<
 
   console.info(
     "%s  %s  %s %s",
-    "  Created At".padEnd(21),
+    "  Created At".padEnd(15),
     "Commit".padEnd(10),
     "URL".padEnd(61),
     "   Target",
@@ -169,9 +167,7 @@ async function getRecentDeployment(): Promise<
         : deployment.state === "BUILDING"
           ? colorize("yellow", `⚡${status}`)
           : colorize("red", `✗ ${status}`),
-      DateTime.fromMillis(deployment.createdAt ?? 0)
-        .setZone("America/Los_Angeles")
-        .toFormat("yyyy-MM-dd HH:mm:ss"),
+      timeAgo(deployment.createdAt ?? "").padEnd(15),
       deployment.meta?.githubCommitSha?.slice(-8),
       `https://${deployment.url}`.padEnd(61),
       deployment.target ?? "preview",
