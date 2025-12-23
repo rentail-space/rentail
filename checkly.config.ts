@@ -7,7 +7,7 @@ import { Frequency } from "checkly/constructs";
 export default defineConfig({
   logicalId: "rentail",
   projectName: "rentail",
-  repoUrl: "https://github.com/assaf/rentail",
+  repoUrl: "https://github.com/rentail-space/rentail",
   checks: {
     ignoreDirectoriesMatch: ["node_modules", "dist", "build"],
     activated: true,
