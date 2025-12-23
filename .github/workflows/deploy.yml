@@ -7,7 +7,11 @@ on:
 jobs:
   test:
     name: Test
-    runs-on: namespace-profile-rentail
+    runs-on:
+      - nscloud-ubuntu-24.04-amd64-4x8-with-cache
+      - nscloud-cache-tag-rentail-e2e-tests
+      - nscloud-cache-size-20gb
+      - nscloud-container-image-cache
     timeout-minutes: 15
 
     services:
