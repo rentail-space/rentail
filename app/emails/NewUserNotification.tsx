@@ -1,6 +1,7 @@
 import { Button, Section, Text } from "@react-email/components";
 import type { User } from "prisma/generated/client";
 import * as styles from "~/emails/styles";
+import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import EmailLayout from "./EmailLayout";
 import { sendEmail } from "./sendEmails";
 
@@ -24,7 +25,7 @@ export default async function sendNewUserNotification(user: User) {
 
 function UserInfo({ user }: { user: User }) {
   const utm = user.utm ? JSON.parse(user.utm as string) : undefined;
-  const geocode = user.geocode as { displayName: string };
+  const workingMemory = cleanParseWorkingMemory(user.workingMemory);
   return (
     <Section>
       <Text style={styles.text}>
@@ -34,7 +35,8 @@ function UserInfo({ user }: { user: User }) {
         <strong>Email:</strong> {user.email}
       </Text>
       <Text style={styles.text}>
-        <strong>Location:</strong> {geocode.displayName ?? "N/A"}
+        <strong>Location:</strong>{" "}
+        {workingMemory?.location?.displayName ?? "N/A"}
       </Text>
       <Text style={styles.text}>
         <strong>Referrer:</strong> {user.referrer ?? "N/A"}
