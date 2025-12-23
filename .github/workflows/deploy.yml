@@ -103,6 +103,12 @@ jobs:
           name: playwright-test-results
           path: __screenshots__
 
+      - name: Upload Playwright screenshots
+        uses: namespace-actions/upload-artifact@v1
+        with:
+          name: playwright-screenshots
+          path: __screenshots__/
+
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v3
 
