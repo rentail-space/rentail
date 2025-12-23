@@ -1,0 +1,26 @@
+{
+  "name": "The Shops at Willow Bend",
+  "address": "6121 West Park Boulevard",
+  "city": "Plano",
+  "state": "TX",
+  "website": "https://www.theshopsatwillowbend.com",
+  "country": "US",
+  "latitude": 33.0308529,
+  "longitude": -96.8320851,
+  "phone": "++1 972-202-4900",
+  "imageURLs": [
+    "/images/malls/tx-the-shops-at-willow-bend-1.jpg"
+  ],
+  "summary": "Low-key mall with department stores, national chains & a food court, plus sit-down restaurants.",
+  "openFrom": 1100,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 6221,
+  "centerType": "RegionalMall",
+  "demographics": "The Shops at Willow Bend attracts an affluent demographic profile, with visitors primarily consisting of households earning $100,000+ annually, reflecting Plano's status as one of the wealthiest suburbs in the Dallas-Fort Worth metroplex. The primary trade area includes established professionals aged 35-65, dual-income families, and luxury-minded shoppers from Plano, Frisco, and North Dallas who appreciate high-end brands and premium shopping experiences. Visitors demonstrate a strong preference for designer labels, personalized service, and curated shopping environments, with shopping patterns skewing toward planned destination visits rather than convenience-based trips. The center's customer base is highly educated, style-conscious, and willing to invest in quality products, making it one of the most desirable retail addresses in North Texas.",
+  "description": "The Shops at Willow Bend is a premier upscale shopping destination located in the heart of Plano's affluent West Plano corridor. This distinguished two-level enclosed regional mall opened in 2001 and quickly established itself as a sophisticated retail hub serving the Dallas-Fort Worth metroplex's most discerning shoppers. The center features an impressive collection of high-end retailers and boutiques, including Neiman Marcus and Dillard's as anchor tenants, alongside luxury brands like Tiffany & Co., Hermès, and Louis Vuitton. With its elegant architecture, refined interior design, and carefully curated tenant mix, The Shops at Willow Bend offers an elevated shopping experience that combines upscale retail with fine dining options and personalized customer service. The center's strategic location on West Park Boulevard makes it easily accessible to Plano's prosperous residential communities and serves as a cornerstone of the area's vibrant commercial landscape.",
+  "numberOfStores": 125,
+  "squareFootage": 900000,
+  "tier": 3,
+  "spaces": []
+}

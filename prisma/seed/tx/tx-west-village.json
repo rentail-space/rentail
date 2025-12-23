@@ -1,0 +1,26 @@
+{
+  "name": "West Village",
+  "address": "3699 McKinney Avenue",
+  "city": "Dallas",
+  "state": "TX",
+  "website": "https://www.westvillagedallas.com",
+  "country": "US",
+  "latitude": 32.808715899999996,
+  "longitude": -96.7961747,
+  "phone": "++1 469-759-2890",
+  "imageURLs": [
+    "/images/malls/tx-west-village-1.jpg"
+  ],
+  "summary": "Laid-back retail complex with fashion boutiques, fitness studios, restaurants & a movie theater.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 4.5,
+  "reviewCount": 3086,
+  "centerType": "LifestyleCenter",
+  "demographics": "West Village attracts an affluent, educated demographic primarily consisting of young professionals and urban dwellers aged 25-45 with above-average household incomes exceeding $75,000 annually. The trade area encompasses Dallas's prestigious Uptown neighborhood and surrounding affluent communities, drawing visitors who prioritize walkability, experiential retail, and curated dining experiences over traditional mall shopping. This sophisticated customer base values quality over quantity, seeking unique boutique retailers, wellness services, and chef-driven culinary experiences, with shopping patterns that emphasize lifestyle amenities and social experiences rather than pure transactional retail.",
+  "description": "West Village is a vibrant mixed-use lifestyle destination located at 3699 McKinney Avenue in the heart of Dallas' Uptown neighborhood. This urban lifestyle center seamlessly blends shopping, dining, wellness, entertainment, and residential living into a walkable, pedestrian-friendly district that has become a cornerstone of Dallas's modern urban lifestyle. The center features an impressive array of upscale retailers, chef-driven restaurants, wellness studios, and service businesses, along with unique attractions like the Yellow Rose by Kendra Scott boutique and curated public art installations including the Super Deluxe art experience. West Village hosts regular community events and activities, from food drives to holiday markets, creating a dynamic social hub where residents and visitors come together to dine, shop, and connect. With its own cinema, boutique hotel, and residential component, West Village represents a complete live-work-play environment that captures the sophisticated, urban energy of contemporary Dallas living.",
+  "numberOfStores": 50,
+  "squareFootage": 250000,
+  "tier": 3,
+  "spaces": []
+}

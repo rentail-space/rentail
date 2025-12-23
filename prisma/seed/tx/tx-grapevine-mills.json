@@ -1,0 +1,26 @@
+{
+  "name": "Grapevine Mills",
+  "address": "3000 Grapevine Mills Parkway",
+  "city": "Grapevine",
+  "state": "TX",
+  "website": "https://www.grapevinemills.com",
+  "country": "US",
+  "latitude": 32.965993,
+  "longitude": -97.04276039999999,
+  "phone": "++1 972-724-4900",
+  "imageURLs": [
+    "/images/malls/tx-grapevine-mills-1.jpg"
+  ],
+  "summary": "Large mall with outlet stores from major brands, plus a food court, a multiplex & kids' activities.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 28393,
+  "centerType": "OutletCenter",
+  "demographics": "Grapevine Mills attracts a diverse visitor base that includes value-conscious families, tourists staying near DFW Airport, and middle-income shoppers from throughout the Dallas-Fort Worth metroplex seeking brand-name merchandise at outlet prices. The trade area draws heavily from Tarrant and Dallas counties, with primary visitors consisting of households with annual incomes ranging from $50,000 to $100,000, including young families with children who are attracted to both the shopping discounts and entertainment offerings. The center sees significant tourist traffic due to its proximity to the airport and Grapevine's wine country attractions, with shopping patterns reflecting a mix of planned outlet shopping trips and leisurely browsing combined with entertainment and dining experiences.",
+  "description": "Grapevine Mills is a premier outlet shopping and entertainment destination located in Grapevine, Texas, strategically positioned near Dallas-Fort Worth International Airport. Since its opening in 1997, this expansive indoor outlet mall has established itself as one of the largest and most visited shopping centers in the Dallas-Fort Worth metroplex, offering visitors an unparalleled combination of outlet shopping, dining, and entertainment under one roof. The center features over 180 outlet stores representing a diverse mix of popular brands and retailers offering significant discounts on fashion, accessories, home goods, and sporting equipment. Beyond shopping, Grapevine Mills serves as a complete entertainment hub with attractions including a state-of-the-art movie theater, SEA LIFE Grapevine Aquarium, LEGOLAND Discovery Center, and numerous dining options ranging from quick-service to sit-down restaurants. Its convenient location just minutes from DFW Airport and major highways makes it a favorite destination for both local shoppers and tourists visiting the Dallas-Fort Worth area.",
+  "numberOfStores": 180,
+  "squareFootage": 1600000,
+  "tier": 2,
+  "spaces": []
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Legacy West",
+  "address": "5908 Headquarters Drive",
+  "city": "Plano",
+  "state": "TX",
+  "website": "https://www.legacywest.com",
+  "country": "US",
+  "latitude": 33.0810576,
+  "longitude": -96.8263461,
+  "phone": "++1 469-609-1500",
+  "imageURLs": [
+    "/images/malls/tx-legacy-west-1.jpg"
+  ],
+  "summary": "Stylish shopping street lined with designer stores, chic restaurants & a gourmet food hall.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.7,
+  "reviewCount": 7723,
+  "centerType": "LifestyleCenter",
+  "demographics": "Legacy West primarily attracts affluent professionals and families from Plano, Frisco, and surrounding North Dallas suburbs, with a core demographic of college-educated adults aged 30-55 earning household incomes exceeding $100,000 annually. The trade area includes some of the most desirable ZIP codes in Texas, characterized by young families in executive homes, dual-income professionals working in nearby corporate campuses, and empty nesters seeking upscale shopping and dining experiences. Visitors tend to favor experiential shopping, premium brands, and chef-driven restaurants, often combining retail visits with social dining and entertainment activities in an environment that emphasizes quality over value pricing.",
+  "description": "Legacy West is a premier mixed-use destination in the heart of Plano's Legacy business district, representing one of North Texas's most ambitious urban developments. This upscale lifestyle center seamlessly blends high-end retail, fine dining, luxury residential living, and Class A office space into a walkable, pedestrian-friendly environment that has transformed the North Dallas corridor. The center features a carefully curated collection of retailers and restaurants, including both national brands and local favorites, along with a robust calendar of community events and seasonal celebrations like the Legacy North Pole experience. With its modern architecture, wide boulevards, public art installations, and year-round programming, Legacy West has established itself as a cultural and social hub for affluent North Dallas residents and business professionals. The development offers premium amenities including personal styling services, valet parking, and a sophisticated atmosphere that appeals to discerning shoppers seeking an elevated retail experience beyond the traditional mall format.",
+  "numberOfStores": 50,
+  "squareFootage": 250000,
+  "tier": 3,
+  "spaces": []
+}

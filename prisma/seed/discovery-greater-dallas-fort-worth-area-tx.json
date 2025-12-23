@@ -1,0 +1,177 @@
+[
+  {
+    "name": "Allen Premium Outlets",
+    "address": "820 West Stacy Road",
+    "city": "Allen",
+    "state": "TX",
+    "website": "https://www.premiumoutlets.com/allen"
+  },
+  {
+    "name": "Cityline Market",
+    "address": "1251 State Street",
+    "city": "Richardson",
+    "state": "TX",
+    "website": "https://www.citylinemarket.com"
+  },
+  {
+    "name": "Firewheel Town Center",
+    "address": "245 Cedar Sage Drive",
+    "city": "Garland",
+    "state": "TX",
+    "website": "https://www.firewheeltowncenter.com"
+  },
+  {
+    "name": "Galleria Dallas",
+    "address": "13350 Dallas Parkway",
+    "city": "Dallas",
+    "state": "TX",
+    "website": "https://www.galleriadallas.com"
+  },
+  {
+    "name": "Grand Prairie Premium Outlets",
+    "address": "2950 West Interstate 20",
+    "city": "Grand Prairie",
+    "state": "TX",
+    "website": "https://www.premiumoutlets.com/grandprairie"
+  },
+  {
+    "name": "Grapevine Mills",
+    "address": "3000 Grapevine Mills Parkway",
+    "city": "Grapevine",
+    "state": "TX",
+    "website": "https://www.grapevinemills.com"
+  },
+  {
+    "name": "Highland Park Village",
+    "address": "47 Highland Park Village",
+    "city": "Dallas",
+    "state": "TX",
+    "website": "https://www.hpvillage.com"
+  },
+  {
+    "name": "Hulen Mall",
+    "address": "4800 South Hulen Street",
+    "city": "Fort Worth",
+    "state": "TX",
+    "website": "https://www.hulenmall.com"
+  },
+  {
+    "name": "Irving Mall",
+    "address": "3880 West Irving Mall",
+    "city": "Irving",
+    "state": "TX",
+    "website": "https://www.irvingmall.com"
+  },
+  {
+    "name": "Legacy West",
+    "address": "7700 Windrose Avenue",
+    "city": "Plano",
+    "state": "TX",
+    "website": "https://www.legacywest.com"
+  },
+  {
+    "name": "Mockingbird Station",
+    "address": "5331 East Mockingbird Lane",
+    "city": "Dallas",
+    "state": "TX",
+    "website": "https://www.mockingbirdstation.com"
+  },
+  {
+    "name": "North East Mall",
+    "address": "1101 Melbourne Road",
+    "city": "Hurst",
+    "state": "TX",
+    "website": "https://www.northeastmall.com"
+  },
+  {
+    "name": "NorthPark Center",
+    "address": "8687 North Central Expressway",
+    "city": "Dallas",
+    "state": "TX",
+    "website": "https://www.northparkcenter.com"
+  },
+  {
+    "name": "Ridgmar Mall",
+    "address": "1888 Green Oaks Road",
+    "city": "Fort Worth",
+    "state": "TX",
+    "website": "https://www.ridgmarmall.com"
+  },
+  {
+    "name": "Southlake Town Square",
+    "address": "1400 Main Street",
+    "city": "Southlake",
+    "state": "TX",
+    "website": "https://www.southlaketownsquare.com"
+  },
+  {
+    "name": "Stonebriar Centre",
+    "address": "2601 Preston Road",
+    "city": "Frisco",
+    "state": "TX",
+    "website": "https://www.stonebriarcentre.com"
+  },
+  {
+    "name": "The Parks at Arlington",
+    "address": "3811 South Cooper Street",
+    "city": "Arlington",
+    "state": "TX",
+    "website": "https://www.theparksatarlington.com"
+  },
+  {
+    "name": "The Shops at Legacy",
+    "address": "7200 Bishop Road",
+    "city": "Plano",
+    "state": "TX",
+    "website": "https://www.theshopsatlegacy.com"
+  },
+  {
+    "name": "The Shops at Park Lane",
+    "address": "8300 North Central Expressway",
+    "city": "Dallas",
+    "state": "TX",
+    "website": "https://www.theshopsatparklane.com"
+  },
+  {
+    "name": "The Shops at Willow Bend",
+    "address": "6121 West Park Boulevard",
+    "city": "Plano",
+    "state": "TX",
+    "website": "https://www.theshopsatwillowbend.com"
+  },
+  {
+    "name": "The Village at Allen",
+    "address": "190 East Stacy Road",
+    "city": "Allen",
+    "state": "TX",
+    "website": "https://www.thevillageatallen.com"
+  },
+  {
+    "name": "Town East Mall",
+    "address": "2063 Town East Mall",
+    "city": "Mesquite",
+    "state": "TX",
+    "website": "https://www.towneastmall.com"
+  },
+  {
+    "name": "Vista Ridge Mall",
+    "address": "2401 South Stemmons Freeway",
+    "city": "Lewisville",
+    "state": "TX",
+    "website": "https://www.vistaridgemall.com"
+  },
+  {
+    "name": "Watters Creek Village",
+    "address": "970 Garden Park Drive",
+    "city": "Allen",
+    "state": "TX",
+    "website": "https://www.watterscreek.com"
+  },
+  {
+    "name": "West Village",
+    "address": "3699 McKinney Avenue",
+    "city": "Dallas",
+    "state": "TX",
+    "website": "https://www.westvillagedallas.com"
+  }
+]

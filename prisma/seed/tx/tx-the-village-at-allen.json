@@ -1,0 +1,26 @@
+{
+  "name": "The Village at Allen",
+  "address": "190 East Stacy Road",
+  "city": "Allen",
+  "state": "TX",
+  "website": "https://www.thevillageatallen.com",
+  "country": "US",
+  "latitude": 33.126635799999995,
+  "longitude": -96.6564509,
+  "phone": "++1 972-678-4939",
+  "imageURLs": [
+    "/images/malls/tx-the-village-at-allen-1.jpg"
+  ],
+  "summary": "Sprawling outdoor shopping mall featuring department stores, restaurants, salons, book shops & more.",
+  "openFrom": 900,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 7065,
+  "centerType": "LifestyleCenter",
+  "demographics": "The Village at Allen attracts an affluent, educated demographic primarily consisting of families and professionals from Collin County, one of the wealthiest counties in Texas, with median household incomes exceeding $100,000. The trade area includes young to middle-aged adults (25-54 years old) with high disposable incomes who prioritize quality shopping experiences and are drawn to upscale national retailers and dining concepts. Shoppers at this center typically exhibit preferences for convenience, lifestyle-oriented retail, and experiential shopping environments, reflecting the growth and prosperity of Allen and surrounding communities like McKinney and Plano.",
+  "description": "The Village at Allen is a premier open-air lifestyle shopping destination located in the thriving Dallas-Fort Worth suburb of Allen, Texas. Named for its charming village-inspired architecture and pedestrian-friendly layout, this center offers a sophisticated blend of upscale retailers, popular dining establishments, and entertainment venues that cater to the affluent residents of Collin County. The center features a carefully curated mix of national brands and specialty boutiques, creating an inviting atmosphere where shoppers can stroll through tree-lined walkways and enjoy an elevated retail experience. Since its development, The Village at Allen has become a cornerstone of the community, drawing visitors from throughout the northern Dallas suburbs with its combination of quality shopping, diverse dining options, and year-round events. The center's design emphasizes outdoor gathering spaces and a walkable environment that sets it apart from traditional enclosed malls, making it a popular destination for both everyday shopping and leisurely weekend outings.",
+  "numberOfStores": 40,
+  "squareFootage": 350000,
+  "tier": 2,
+  "spaces": []
+}

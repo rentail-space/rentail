@@ -1,0 +1,26 @@
+{
+  "name": "Stonebriar Centre",
+  "address": "2601 Preston Road",
+  "city": "Frisco",
+  "state": "TX",
+  "website": "https://www.stonebriarcentre.com",
+  "country": "US",
+  "latitude": 33.099101,
+  "longitude": -96.81135599999999,
+  "phone": "++1 972-668-4900",
+  "imageURLs": [
+    "/images/malls/tx-stonebriar-centre-1.jpg"
+  ],
+  "summary": "Expansive shopping mall with department stores, restaurants, a food court & a variety of shops.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 15008,
+  "centerType": "RegionalMall",
+  "demographics": "Stonebriar Centre primarily serves the affluent and rapidly growing Frisco market, attracting families and professionals in the 25-54 age range with above-average household incomes, reflecting the area's strong economic growth and highly educated population. The trade area includes North Dallas suburbs known for excellent schools, corporate headquarters, and professional sports facilities, drawing upper-middle-class shoppers who value convenience and variety. Visitors typically engage in combination shopping trips that blend retail purchases with dining and entertainment, taking advantage of the mall's comprehensive tenant mix that caters to family-oriented spending patterns.",
+  "description": "Stonebriar Centre stands as one of North Texas' premier shopping destinations, located in the heart of Frisco's thriving retail corridor on Preston Road. This expansive enclosed mall has served as a cornerstone of the rapidly growing Frisco community since its opening in 2000, offering shoppers an impressive collection of over 165 stores and restaurants. The center features major department store anchors including Macy's, Dillard's, JCPenney, Dick's Sporting Goods, and Nordstrom, alongside popular national retailers and dining establishments. With its modern amenities, including a 24-screen AMC Theatre, Dave & Buster's entertainment complex, and family-friendly features like a carousel and children's play area, Stonebriar Centre provides a comprehensive shopping and entertainment experience. The mall's convenient location near major highways and its position in one of the fastest-growing suburbs in America makes it a retail hub for both local residents and visitors from surrounding communities.",
+  "numberOfStores": 165,
+  "squareFootage": 1600000,
+  "tier": 2,
+  "spaces": []
+}

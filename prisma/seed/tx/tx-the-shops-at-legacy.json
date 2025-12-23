@@ -1,0 +1,26 @@
+{
+  "name": "The Shops at Legacy",
+  "address": "5741 Legacy Drive",
+  "city": "Plano",
+  "state": "TX",
+  "website": "https://www.theshopsatlegacy.com",
+  "country": "US",
+  "latitude": 33.078619499999995,
+  "longitude": -96.8211311,
+  "phone": "++1 469-467-9995",
+  "imageURLs": [
+    "/images/malls/tx-the-shops-at-legacy-1.jpg"
+  ],
+  "summary": "Spacious shopping mall housing upscale retailers & beauty services, plus various eateries.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.6,
+  "reviewCount": 7086,
+  "centerType": "LifestyleCenter",
+  "demographics": "The Shops at Legacy attracts an affluent, educated demographic primarily consisting of young professionals and families with household incomes significantly above the Dallas-Fort Worth average, typically exceeding $100,000 annually. The trade area draws heavily from Plano's west side and surrounding upscale suburbs like Frisco and McKinney, with visitors skewing toward the 30-55 age range who value convenience, quality, and experience-driven retail. Shopping patterns reflect a preference for upscale dining experiences, boutique fashion, and lifestyle services, with many visitors combining retail trips with entertainment and social activities in the mixed-use environment.",
+  "description": "The Shops at Legacy is a premier mixed-use lifestyle center located in the heart of Plano's Legacy West development, one of North Texas's most dynamic urban districts. This sophisticated open-air destination seamlessly blends upscale retail, dining, entertainment, and residential elements to create a vibrant walkable community. Situated at 7200 Bishop Road, the center has become a cornerstone of Plano's transformation into a cosmopolitan hub, attracting both local residents and visitors from across the Dallas-Fort Worth metroplex. The Shops at Legacy features a carefully curated mix of fashion retailers, specialty boutiques, chef-driven restaurants, and entertainment venues, all set within an architecturally distinctive environment with tree-lined streets and contemporary urban design. As part of the larger Legacy development, the shopping center benefits from its proximity to corporate headquarters, luxury hotels, and high-end residential towers, creating a 24/7 live-work-play environment that has redefined suburban retail in North Texas.",
+  "numberOfStores": 40,
+  "squareFootage": 250000,
+  "tier": 3,
+  "spaces": []
+}

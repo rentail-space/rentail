@@ -1,0 +1,26 @@
+{
+  "name": "Town East Mall",
+  "address": "2063 Town East Mall",
+  "city": "Mesquite",
+  "state": "TX",
+  "website": "https://www.towneastmall.com",
+  "country": "US",
+  "latitude": 32.8076709,
+  "longitude": -96.6237137,
+  "phone": "++1 972-270-4431",
+  "imageURLs": [
+    "/images/malls/tx-town-east-mall-1.jpg"
+  ],
+  "summary": "Casual mall with 160+ shops, including department stores & familiar brands, plus a big food court.",
+  "openFrom": 1100,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 12164,
+  "centerType": "RegionalMall",
+  "demographics": "Town East Mall primarily serves middle-income families and value-conscious shoppers from Mesquite and the eastern Dallas suburbs, with a diverse visitor base reflecting the area's multicultural population. The trade area encompasses working and middle-class households with a strong representation of families with children, young adults, and Hispanic and African American communities who are drawn to the mall's mix of affordable national retailers and dining options. Typical visitors exhibit practical shopping patterns, seeking value-oriented purchases at mainstream chain stores while utilizing the mall as a convenient all-in-one destination for family outings, particularly on weekends.",
+  "description": "Town East Mall stands as a premier shopping destination in Mesquite, Texas, offering an exceptional retail experience that has served the community for decades. With more than 160 specialty shops spread throughout its expansive enclosed layout, the mall provides an impressive variety of shopping options ranging from fashion and accessories to electronics and home goods. At the heart of the mall experience is an impressive 850-seat food court featuring over 25 diverse eateries, ensuring visitors can refuel during their shopping adventures with cuisine options to satisfy every craving. The mall is anchored by major department stores and provides a climate-controlled environment perfect for year-round shopping comfort. As part of the Brookfield Properties portfolio, Town East Mall maintains modern amenities and regularly hosts seasonal events, including the beloved Photos with Santa during the holiday season, making it not just a shopping center but a community gathering place for families throughout the Dallas-Fort Worth metroplex.",
+  "numberOfStores": 160,
+  "squareFootage": 1200000,
+  "tier": 2,
+  "spaces": []
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Allen Premium Outlets",
+  "address": "820 West Stacy Road",
+  "city": "Allen",
+  "state": "TX",
+  "website": "https://www.premiumoutlets.com/allen",
+  "country": "US",
+  "latitude": 33.132717899999996,
+  "longitude": -96.6607514,
+  "phone": "++1 972-678-7000",
+  "imageURLs": [
+    "/images/malls/tx-allen-premium-outlets-1.jpg"
+  ],
+  "summary": "Outdoor outlet mall with dining options, featuring clothing, accessory, shoe & home stores.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 14210,
+  "centerType": "OutletCenter",
+  "demographics": "Allen Premium Outlets primarily attracts middle to upper-middle income families and individuals from the Dallas-Fort Worth metroplex, with a strong concentration of visitors aged 25-55 who are value-conscious yet brand-aware shoppers. The trade area includes affluent suburbs like Allen, Plano, Frisco, and McKinney, drawing households with annual incomes typically ranging from $75,000 to $150,000+ who seek designer and premium brands at discounted prices. Shoppers exhibit a destination-oriented pattern, often traveling 30-60 minutes specifically for outlet shopping trips, with a mix of planned purchases for special occasions and recreational browsing for deals on luxury and contemporary brands.",
+  "description": "Allen Premium Outlets is a premier outlet shopping destination located in Allen, Texas, offering an exceptional blend of designer and brand-name retailers at compelling value prices. As part of the renowned Premium Outlets collection, this open-air shopping center features a carefully curated mix of outlet stores from top brands, providing shoppers with significant savings on luxury and contemporary fashion, accessories, home goods, and more. The center's strategic location at 820 West Stacy Road makes it easily accessible to residents of the Dallas-Fort Worth metroplex and serves as a regional draw for bargain-seeking shoppers from throughout North Texas. With its attractive outdoor walkways and modern architecture, Allen Premium Outlets creates an upscale shopping experience that distinguishes it from traditional outlet centers, combining the thrill of deal-hunting with a refined retail environment. The center has become a cornerstone of Allen's retail landscape, attracting both local residents and destination shoppers looking for premium brands at outlet prices.",
+  "numberOfStores": 100,
+  "squareFootage": 540000,
+  "tier": 2,
+  "spaces": []
+}

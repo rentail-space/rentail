@@ -1,0 +1,26 @@
+{
+  "name": "Watters Creek Village",
+  "address": "970 Garden Park Drive",
+  "city": "Allen",
+  "state": "TX",
+  "website": "https://www.watterscreek.com",
+  "country": "US",
+  "latitude": 33.088515199999996,
+  "longitude": -96.68379689999999,
+  "phone": "++1 972-747-8000",
+  "imageURLs": [
+    "/images/malls/tx-watters-creek-village-1.jpg"
+  ],
+  "summary": "Scenic neighborhood shopping center featuring an array of stores & eateries plus a kids' play area.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.6,
+  "reviewCount": 3628,
+  "centerType": "LifestyleCenter",
+  "demographics": "Watters Creek Village primarily serves affluent suburban families and young professionals in the Allen and North Dallas area, with visitors typically representing upper-middle-class households with annual incomes ranging from $75,000 to $150,000+. The trade area attracts a mix of family-oriented shoppers aged 30-55 seeking quality lifestyle retailers and dining experiences, as well as empty nesters and young couples drawn to the upscale yet approachable atmosphere. Allen's strong school districts and growing population of educated, dual-income families create a customer base that values both convenience and experience-oriented shopping, with preferences leaning toward specialty retailers, sit-down restaurants, and community events that foster social connections.",
+  "description": "Watters Creek Village is North Dallas' premier mixed-use lifestyle destination located in Allen, Texas, offering a unique blend of shopping, dining, and entertainment in a beautifully designed open-air setting. The center features a distinctive village green as its centerpiece, complemented by public art installations, scenic water views, and thoughtfully integrated residential lofts that create a vibrant community atmosphere. With a diverse collection of retail boutiques and culinary options ranging from casual to upscale dining, Watters Creek provides visitors with a sophisticated yet welcoming shopping experience. The center's commitment to sustainability and environmental stewardship is evident through its \"Going Green\" initiatives and wildlife-friendly policies that preserve the natural beauty of the area. Managed and leased by DuWest Realty, Watters Creek Village has become a beloved gathering place that seamlessly combines everyday convenience with special occasion destinations, hosting regular community events and seasonal celebrations throughout the year.",
+  "numberOfStores": 50,
+  "squareFootage": 300000,
+  "tier": 2,
+  "spaces": []
+}

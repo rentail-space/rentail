@@ -1,0 +1,26 @@
+{
+  "name": "Vista Ridge Mall",
+  "address": "2401 South Stemmons Freeway",
+  "city": "Lewisville",
+  "state": "TX",
+  "website": "https://www.vistaridgemall.com",
+  "country": "US",
+  "latitude": 33.0022926,
+  "longitude": -96.9717506,
+  "phone": "++1 972-315-0015",
+  "imageURLs": [
+    "/images/malls/tx-vista-ridge-mall-1.jpg"
+  ],
+  "summary": "Clothing chain with trendy apparel, shoes & accessories for teen girls & young women.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 3.8,
+  "reviewCount": 4273,
+  "centerType": "RegionalMall",
+  "demographics": "Vista Ridge Mall primarily serves middle-income families and young professionals in the growing northern Dallas-Fort Worth suburbs, with a trade area encompassing Lewisville, Flower Mound, Highland Village, and The Colony. The visitor base consists largely of households with children, ranging from young families to established homeowners, with median household incomes in the $60,000-$90,000 range typical of the Denton County suburbs. Shoppers tend to seek convenient, value-oriented retail options with a mix of national chain stores, family dining, and practical services that cater to everyday needs rather than luxury shopping experiences.",
+  "description": "Vista Ridge Mall is a regional shopping destination located at 2401 South Stemmons Freeway in Lewisville, Texas, serving the northern Dallas-Fort Worth metroplex. The mall has established itself as a convenient shopping hub for residents of Lewisville and surrounding communities including Flower Mound, Highland Village, and The Colony. While the website data does not provide extensive details about current tenants and amenities, Vista Ridge Mall's position along the Stemmons Freeway corridor provides excellent accessibility for shoppers throughout the region. The center operates as a traditional enclosed regional mall format, offering a climate-controlled shopping environment that is particularly appealing in the Texas heat. Vista Ridge Mall continues to serve the growing northern suburbs of the Dallas-Fort Worth area with retail, dining, and entertainment options for local families and visitors.",
+  "numberOfStores": 60,
+  "squareFootage": 500000,
+  "tier": 2,
+  "spaces": []
+}

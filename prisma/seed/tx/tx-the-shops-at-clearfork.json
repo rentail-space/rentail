@@ -1,0 +1,26 @@
+{
+  "name": "The Shops at Clearfork",
+  "address": "5188 Monahans Avenue",
+  "city": "Fort Worth",
+  "state": "TX",
+  "website": "https://www.theshopsatclearfork.com",
+  "country": "US",
+  "latitude": 32.709823899999996,
+  "longitude": -97.3995023,
+  "phone": "++1 817-985-3773",
+  "imageURLs": [
+    "/images/malls/tx-the-shops-at-clearfork-1.jpg"
+  ],
+  "summary": "Upscale shopping center with department stores, boutiques, restaurants & a multiplex cinema.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.6,
+  "reviewCount": 2641,
+  "centerType": "LifestyleCenter",
+  "demographics": "The Shops at Clearfork attracts an affluent, well-educated demographic with household incomes predominantly exceeding $100,000, drawing from Fort Worth's prosperous Westside neighborhoods including Tanglewood, Westover Hills, and the surrounding Clearfork area. The primary visitor base consists of professionals aged 30-65, along with young families and empty nesters who prioritize quality, convenience, and experiential shopping. The trade area encompasses some of Tarrant County's most desirable ZIP codes, with shoppers demonstrating strong preferences for premium brands, upscale dining, and lifestyle-oriented retail experiences. Weekend traffic includes regional visitors from across the Dallas-Fort Worth metroplex attracted by the center's unique tenant mix and resort-style atmosphere.",
+  "description": "The Shops at Clearfork is Fort Worth's premier upscale lifestyle destination, strategically positioned along Camp Bowie Boulevard in one of the city's most affluent and rapidly developing areas. This sophisticated open-air shopping center has transformed the Clearfork corridor into a vibrant mixed-use district, blending high-end retail, chef-driven restaurants, and contemporary entertainment venues. The center's thoughtful design encourages pedestrian exploration with tree-lined walkways, outdoor gathering spaces, and modern architectural elements that reflect Fort Worth's unique blend of Western heritage and cosmopolitan style. Anchored by prestigious retailers and complemented by an exceptional dining scene, The Shops at Clearfork caters to discerning shoppers seeking both luxury brands and elevated everyday experiences. The development has become a cornerstone of Fort Worth's Westside renaissance, drawing visitors from across the Dallas-Fort Worth metroplex who appreciate its curated tenant mix and resort-like ambiance.",
+  "numberOfStores": 45,
+  "squareFootage": 350000,
+  "tier": 3,
+  "spaces": []
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Galleria Dallas",
+  "address": "13350 Dallas Parkway",
+  "city": "Dallas",
+  "state": "TX",
+  "website": "https://www.galleriadallas.com",
+  "country": "US",
+  "latitude": 32.929809,
+  "longitude": -96.81988059999999,
+  "phone": "++1 972-702-7100",
+  "imageURLs": [
+    "/images/malls/tx-galleria-dallas-1.jpg"
+  ],
+  "summary": "3-level mall with department stores, dining, shops, a skating rink & hotel under one roof.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.5,
+  "reviewCount": 22393,
+  "centerType": "RegionalMall",
+  "demographics": "Galleria Dallas attracts an affluent, style-conscious demographic primarily consisting of middle to upper-income professionals and families from the North Dallas corridor, including nearby communities like Addison, Plano, and Far North Dallas. The typical visitor profile skews toward ages 25-54 with household incomes exceeding $75,000, drawn by the mall's luxury tenant mix and upscale positioning in one of the Dallas-Fort Worth metroplex's most prosperous trade areas. Shoppers visiting Galleria Dallas demonstrate a preference for premium brands, experiential retail, and lifestyle amenities, often combining shopping trips with dining and entertainment activities like ice skating, reflecting the center's role as a social and recreational hub for the affluent North Dallas market.",
+  "description": "Galleria Dallas stands as one of the premier shopping destinations in the Dallas metropolitan area, offering an unparalleled retail experience that combines luxury, convenience, and entertainment. Located at 13350 Dallas Parkway in the heart of North Dallas, this upscale enclosed regional mall features an impressive collection of high-end retailers including Apple, Gucci, Louis Vuitton, Bachendorf's Jewelers, and department store anchor Nordstrom, alongside popular brands like Zara, Sephora, Abercrombie & Fitch, and Banana Republic. Beyond shopping, the center provides a distinctive entertainment experience with its signature indoor ice skating rink, a diverse array of dining options, and year-round programming through initiatives like the Artist Collective that showcases local creatives and makers. The mall's commitment to community engagement is evident through special programs including PALS, The Green Initiative, and regular events like Showtime Saturdays and holiday celebrations. With convenient hours Monday through Saturday from 10am to 8pm and Sunday from 12pm to 6pm, plus ample parking and guest services, Galleria Dallas has established itself as an inviting and invigorating destination where visitors come to shop, dine, and recharge in an upscale environment.",
+  "numberOfStores": 200,
+  "squareFootage": 1600000,
+  "tier": 3,
+  "spaces": []
+}

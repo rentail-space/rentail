@@ -1,0 +1,26 @@
+{
+  "name": "Ridgmar Mall",
+  "address": "1888 Green Oaks Road",
+  "city": "Fort Worth",
+  "state": "TX",
+  "website": "https://www.ridgmarmall.com",
+  "country": "US",
+  "latitude": 32.740738,
+  "longitude": -97.4370442,
+  "phone": "++1 817-731-6591",
+  "imageURLs": [
+    "/images/malls/tx-ridgmar-mall-1.jpg"
+  ],
+  "summary": "2-story mall attracting visitors for its well-known department stores, food court & aquarium.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 3.7,
+  "reviewCount": 6908,
+  "centerType": "RegionalMall",
+  "demographics": "Ridgmar Mall primarily serves middle-income families and households in western Fort Worth and surrounding suburban communities, with a visitor base spanning multiple generations from young families to older adults. The trade area includes a diverse demographic mix with a strong representation of working professionals and families seeking convenient access to everyday shopping needs and services. Typical shoppers include parents with children, professionals stopping by after work, and retirees who appreciate the mall's accessibility and enclosed format, reflecting the broader Fort Worth suburban demographic profile of mixed-income households with moderate to middle-class spending power.",
+  "description": "Ridgmar Mall is a landmark shopping destination in Fort Worth, Texas, serving the western Fort Worth community since 1976. Located at 1888 Green Oaks Road, this enclosed regional mall has been a cornerstone of retail activity in the area for nearly five decades. The mall features a diverse mix of national retailers, specialty shops, and dining options that cater to families and shoppers throughout the Fort Worth metropolitan area. Over the years, Ridgmar Mall has maintained its position as a convenient shopping hub for residents in west Fort Worth and surrounding neighborhoods, offering a climate-controlled environment with ample parking and accessibility. The center continues to adapt to changing retail trends while maintaining its role as a community gathering place for shopping, dining, and entertainment.",
+  "numberOfStores": 75,
+  "squareFootage": 850000,
+  "tier": 2,
+  "spaces": []
+}

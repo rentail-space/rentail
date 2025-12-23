@@ -1,0 +1,26 @@
+{
+  "name": "Cityline Market",
+  "address": "1405-1425 East Renner Road",
+  "city": "Richardson",
+  "state": "TX",
+  "website": "https://www.citylinemarket.com",
+  "country": "US",
+  "latitude": 32.9981998,
+  "longitude": -96.6977555,
+  "phone": "++1 214-706-2500",
+  "imageURLs": [
+    "/images/malls/tx-cityline-market-1.jpg"
+  ],
+  "summary": "Shopping center anchored by Whole Foods & CVS also featuring salons & several casual restaurants.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.5,
+  "reviewCount": 2870,
+  "centerType": "LifestyleCenter",
+  "demographics": "Cityline Market serves a predominantly affluent demographic with median household incomes exceeding $85,000, attracting young professionals aged 25-45 and growing families drawn to the CityLine district's urban lifestyle amenities. The trade area is characterized by highly educated residents working in nearby corporate offices and tech companies, with a significant percentage of dual-income households seeking convenience and quality retail experiences. Shopping patterns reflect a preference for experiential retail, with visitors typically combining multiple activities such as dining, entertainment, and shopping in a single trip, taking advantage of the walkable mixed-use environment.",
+  "description": "Cityline Market is a vibrant mixed-use development located in Richardson's dynamic CityLine district, a master-planned urban village that has transformed the area into one of North Texas's most desirable live-work-play destinations. This modern lifestyle center serves as the retail heart of the CityLine community, offering residents and visitors a carefully curated mix of shopping, dining, and entertainment options in a walkable, pedestrian-friendly environment. The center embodies the contemporary urban lifestyle that has made CityLine a model for new urbanism in the Dallas-Fort Worth metroplex, featuring open-air plazas and streetscape designs that encourage social interaction and community gathering. With its prime location along State Street, Cityline Market benefits from the surrounding density of residential towers, corporate offices, and hotels that create a built-in customer base throughout the day and evening hours. The development represents Richardson's successful evolution from a traditional suburb into a more cosmopolitan destination, attracting young professionals and families seeking an urban lifestyle without leaving the suburbs.",
+  "numberOfStores": 25,
+  "squareFootage": 180000,
+  "tier": 2,
+  "spaces": []
+}

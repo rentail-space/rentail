@@ -1,0 +1,26 @@
+{
+  "name": "Highland Park Village",
+  "address": "47 Highland Park Village",
+  "city": "Dallas",
+  "state": "TX",
+  "website": "https://www.hpvillage.com",
+  "country": "US",
+  "latitude": 32.8356649,
+  "longitude": -96.8056735,
+  "phone": "++1 214-443-9898",
+  "imageURLs": [
+    "/images/malls/tx-highland-park-village-1.jpg"
+  ],
+  "summary": "Stylish designer boutiques, shoe stores, gift shops & diverse eateries fill this upscale mall.",
+  "openFrom": 1000,
+  "openUntil": 1800,
+  "rating": 4.6,
+  "reviewCount": 1842,
+  "centerType": "LifestyleCenter",
+  "demographics": "Highland Park Village attracts an affluent, sophisticated clientele primarily consisting of high-net-worth individuals and families from the Highland Park and University Park communities, where median household incomes exceed $200,000. The primary trade area includes some of Dallas's wealthiest zip codes, with shoppers typically aged 35-65 who appreciate luxury brands, personalized service, and curated shopping experiences. Visitors demonstrate strong purchasing power and brand loyalty, frequently seeking exclusive designer pieces, high-end fashion, and luxury accessories while prioritizing quality and prestige over value-oriented shopping.",
+  "description": "Highland Park Village, established in 1931, is a historic luxury shopping destination located in one of Dallas's most prestigious neighborhoods. Recognized as the first self-contained shopping center in America and as a National Historic Landmark, this architectural gem features Mediterranean Revival and Spanish Colonial Revival design that creates an elegant outdoor shopping experience. The center is home to an exclusive collection of high-end boutiques and luxury brands including Hermès, Dior, Chanel, and other designer retailers that cater to discerning shoppers. Beyond world-class shopping, Highland Park Village offers fine dining experiences and personalized service in a beautifully landscaped setting with fountains and courtyards. This iconic destination continues to set the standard for upscale retail environments, seamlessly blending its rich heritage with contemporary luxury retail offerings.",
+  "numberOfStores": 35,
+  "squareFootage": 150000,
+  "tier": 3,
+  "spaces": []
+}
