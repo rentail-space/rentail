@@ -10,22 +10,23 @@ import type { GetDeploymentResponseBody } from "@vercel/sdk/models/getdeployment
 import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymentsop.js";
 import { timeAgo } from "date-buddy";
 import dotenv from "dotenv";
+import env from "env-var";
 import { invariant } from "es-toolkit";
 import { execSync } from "node:child_process";
 import { Octokit } from "octokit";
 import ora from "ora";
 
-/// <reference path="./app/types/index.d.ts" />
-
 dotenv.configDotenv({ quiet: true });
-invariant(process.env.VERCEL_TOKEN, "VERCEL_TOKEN is required");
-invariant(process.env.GITHUB_TOKEN, "GITHUB_TOKEN is required");
 
 const vercelTeamId = "team_bjyg9pgn8TQQVP2NLMPnSYSN";
 const vercelProjectId = "prj_SrqYHd1Olo0XfxQHLe9lyGfcoT9z";
 
-const vercel = new Vercel({ bearerToken: process.env.VERCEL_TOKEN });
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+const vercel = new Vercel({
+  bearerToken: env.get("VERCEL_TOKEN").required(true).asString(),
+});
+const octokit = new Octokit({
+  auth: env.get("GITHUB_TOKEN").required(true).asString(),
+});
 
 const colorCodes: { [key: string]: [string, string] } = {
   red: ["\x1b[31m", "\x1b[0m"],
@@ -103,7 +104,7 @@ async function githubWorkflows() {
   );
 
   const { data } = await octokit.rest.actions.listWorkflowRuns({
-    owner: "assaf",
+    owner: "rentail-space",
     repo: "rentail",
     workflow_id: "deploy.yml",
   });
