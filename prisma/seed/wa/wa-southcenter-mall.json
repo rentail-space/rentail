@@ -1,0 +1,26 @@
+{
+  "name": "Southcenter Mall",
+  "address": "2800 Southcenter Mall",
+  "city": "Seattle",
+  "state": "WA",
+  "website": "https://www.westfield.com/southcenter",
+  "country": "US",
+  "latitude": 47.4588849,
+  "longitude": -122.25796399999999,
+  "phone": "++1 206-246-0423",
+  "imageURLs": [
+    "/images/malls/wa-southcenter-mall-1.jpg"
+  ],
+  "summary": "2-level indoor shopping mall with more than 200 stores & eateries plus a multiplex with IMAX.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 24975,
+  "centerType": "RegionalMall",
+  "demographics": "Westfield Southcenter attracts a diverse, multi-generational customer base spanning middle to upper-middle income households in the Seattle metropolitan area, with strong appeal to families, young professionals, and Asian-American communities drawn to the extensive Asian dining options. The trade area encompasses affluent suburbs south of Seattle including Tukwila, SeaTac, Renton, and Kent, serving both local residents seeking everyday shopping needs and destination shoppers traveling from throughout the Puget Sound region. Visitors typically range from millennials and Gen Z consumers attracted to trendy retailers like Urban Outfitters and Sephora, to established families shopping at anchor department stores, with shopping patterns reflecting both planned destination visits for dining and entertainment as well as regular convenience shopping trips.",
+  "description": "Westfield Southcenter, located in Seattle, Washington, stands as one of the Pacific Northwest's premier shopping destinations, offering an exceptional retail experience with over 140 stores and dining options. The mall features prestigious anchor tenants including Nordstrom, Macy's, and JCPenney, alongside popular retailers such as Apple, Sephora, H&M, UNIQLO, and Urban Outfitters. Beyond shopping, visitors can enjoy an extensive dining scene with notable restaurants including Din Tai Fung, The Cheesecake Factory, JOEY Southcenter, Gen Korean BBQ, and Duke's Seafood, as well as entertainment options like AMC Theatres and Great Big Game Show. The center seamlessly blends retail therapy with culinary excellence and family-friendly amenities, including a LEGO store, Toys R Us, and seasonal attractions like Photos with Santa. With modern conveniences like free Wi-Fi throughout the property, the Westfield app for easy navigation, and comprehensive services, Westfield Southcenter delivers a complete shopping experience that keeps visitors coming back year after year.",
+  "numberOfStores": 140,
+  "squareFootage": 1400000,
+  "tier": 2,
+  "spaces": []
+}

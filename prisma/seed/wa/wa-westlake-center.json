@@ -1,0 +1,26 @@
+{
+  "name": "Westlake Center",
+  "address": "400 Pine Street",
+  "city": "Seattle",
+  "state": "WA",
+  "website": "https://www.westlakecenter.com",
+  "country": "US",
+  "latitude": 47.6120485,
+  "longitude": -122.33743249999999,
+  "phone": "++1 206-467-1600",
+  "imageURLs": [
+    "/images/malls/wa-westlake-center-1.jpg"
+  ],
+  "summary": "4-story, glass-enclosed retail center for shopping & dining with a food court.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 4.1,
+  "reviewCount": 5984,
+  "centerType": "RegionalMall",
+  "demographics": "Westlake Center attracts a diverse urban demographic including downtown Seattle office workers aged 25-45, tourists visiting the Pacific Northwest, and local residents from surrounding neighborhoods with above-average household incomes. The trade area encompasses Seattle's urban core with strong representation from young professionals, tech industry workers, and students who prefer convenient downtown shopping experiences. The center sees high foot traffic from transit users and benefits from Seattle's affluent metropolitan population that values accessibility and specialty retail offerings over traditional suburban mall experiences.",
+  "description": "Westlake Center stands as an iconic urban shopping destination in the heart of downtown Seattle, located at 400 Pine Street in the vibrant retail core. This multi-level enclosed center offers a curated collection of specialty stores and restaurants, providing a quintessential Seattle shopping experience for both locals and tourists. With its prime location in downtown Seattle, Westlake Center serves as a central gathering point and transit hub, connecting seamlessly to the city's monorail and bus systems. The center features extended holiday hours and special discounts for students, educators, military personnel, and first responders, demonstrating its commitment to the community. Managed by Brookfield Properties, Westlake Center continues to attract an esteemed group of retailers who benefit from exposure to a diverse and engaged audience in one of the Pacific Northwest's most dynamic urban environments.",
+  "numberOfStores": 40,
+  "squareFootage": 200000,
+  "tier": 2,
+  "spaces": []
+}

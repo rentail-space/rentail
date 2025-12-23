@@ -1,0 +1,26 @@
+{
+  "name": "Alderwood Mall",
+  "address": "3000 184th Street Southwest",
+  "city": "Lynnwood",
+  "state": "WA",
+  "website": "https://www.simon.com/mall/alderwood",
+  "country": "US",
+  "latitude": 47.830763499999996,
+  "longitude": -122.270296,
+  "phone": "++1 425-778-7675",
+  "imageURLs": [
+    "/images/malls/wa-alderwood-mall-1.jpg"
+  ],
+  "summary": "Popular indoor-outdoor mall with chain retailers, department stores, a multiplex & casual eateries.",
+  "openFrom": 1100,
+  "openUntil": 2000,
+  "rating": 4.3,
+  "reviewCount": 12448,
+  "centerType": "RegionalMall",
+  "demographics": "Alderwood Mall attracts a diverse middle to upper-middle income demographic from throughout the Snohomish and King County areas, with a strong concentration of family households and young professionals aged 25-54. The primary trade area includes affluent suburban communities like Lynnwood, Edmonds, Mukilteo, and Bothell, where median household incomes exceed regional averages and residents demonstrate strong discretionary spending power. Shoppers at Alderwood typically seek a mix of value and quality, gravitating toward both anchor department stores and contemporary fashion retailers, with particular strength in tech-savvy consumers drawn to electronics and lifestyle brands. The center benefits from its proximity to major employment centers and residential growth corridors, attracting both destination shoppers and convenient weekday traffic from office workers and local residents.",
+  "description": "Alderwood Mall is a premier shopping destination in the Seattle metropolitan area, located in Lynnwood, Washington. Managed by Simon Property Group, one of the nation's leading retail real estate companies, this enclosed regional mall offers shoppers a comprehensive retail experience with a diverse mix of national retailers, dining options, and entertainment venues. The mall features well-known anchor stores and popular specialty retailers spanning fashion, beauty, home goods, and technology. With its convenient location off Interstate 5 and easy accessibility from throughout the Puget Sound region, Alderwood serves as a central gathering place for both everyday shopping needs and special occasions. The center continues to evolve to meet the changing needs of its community, providing a comfortable indoor shopping environment perfect for the Pacific Northwest climate.",
+  "numberOfStores": 180,
+  "squareFootage": 1100000,
+  "tier": 2,
+  "spaces": []
+}
