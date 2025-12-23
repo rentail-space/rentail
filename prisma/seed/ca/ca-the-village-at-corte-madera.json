@@ -1,0 +1,26 @@
+{
+  "name": "The Village at Corte Madera",
+  "address": "1618 Redwood Highway",
+  "city": "Corte Madera",
+  "state": "CA",
+  "website": "https://www.thevillageatcortemadera.com",
+  "country": "US",
+  "latitude": 37.9293142,
+  "longitude": -122.51448169999998,
+  "phone": "++1 415-924-8588",
+  "imageURLs": [
+    "/images/malls/ca-the-village-at-corte-madera-1.jpg"
+  ],
+  "summary": "High-end department stores, brand-name shops & dining set amid landscaped pedestrian walkways.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 2178,
+  "centerType": "LifestyleCenter",
+  "demographics": "The Village at Corte Madera serves one of the most affluent trade areas in the San Francisco Bay Area, drawing primarily from Marin County residents with high household incomes and strong educational attainment. The typical visitor demographic skews toward professionals aged 35-65, families with above-average incomes exceeding $150,000 annually, and educated consumers with sophisticated shopping preferences. The trade area encompasses the wealthy communities of Corte Madera, Larkspur, Mill Valley, and surrounding Marin County towns, where residents prioritize quality, sustainability, and lifestyle-oriented retail experiences. Shoppers at this center tend to favor premium brands, frequent dining experiences, and value convenience and curated retail offerings over discount pricing.",
+  "description": "The Village at Corte Madera is a premier outdoor shopping destination nestled along the Redwood Highway in the heart of Marin County, California. This open-air lifestyle center offers a sophisticated shopping and dining experience in one of the Bay Area's most affluent communities, combining the natural beauty of Northern California with an upscale retail environment. The center features a carefully curated mix of national retailers, specialty boutiques, and diverse dining options including restaurants with happy hour offerings, creating a vibrant gathering place for the local community. With convenient amenities including ample parking and extended shopping hours (typically 9 AM to 9 PM), The Village at Corte Madera provides a comfortable and accessible retail experience. The center regularly hosts community events and seasonal celebrations, including Santa photo opportunities during the holidays, reinforcing its role as a central hub for both shopping and entertainment in the Corte Madera area.",
+  "numberOfStores": 50,
+  "squareFootage": 350000,
+  "tier": 3,
+  "spaces": []
+}

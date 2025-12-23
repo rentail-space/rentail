@@ -1,0 +1,26 @@
+{
+  "name": "Westfield San Francisco Centre",
+  "address": "865 Market Street",
+  "city": "San Francisco",
+  "state": "CA",
+  "website": "https://www.westfield.com/sanfrancisco",
+  "country": "US",
+  "latitude": 37.7842834,
+  "longitude": -122.40712,
+  "phone": "++1 415-512-6776",
+  "imageURLs": [
+    "/images/malls/ca-westfield-san-francisco-centre-1.jpg"
+  ],
+  "summary": "9-story mall featuring over 170 shops & restaurants, a multiplex & a dome-covered atrium.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.3,
+  "reviewCount": 20203,
+  "centerType": "RegionalMall",
+  "demographics": "The shopping center attracts a diverse, affluent urban demographic including young professionals aged 25-45, tourists, and downtown residents with above-average household incomes typical of San Francisco's premium retail corridor. The trade area encompasses the Financial District, Union Square, and surrounding neighborhoods, drawing shoppers seeking premium brands and convenient downtown access. Visitors exhibit sophisticated shopping preferences with strong interest in technology, fashion-forward apparel, and experiential retail, reflecting San Francisco's cosmopolitan character and tech-influenced consumer base.",
+  "description": "Westfield San Francisco Centre stands as a premier shopping destination in the heart of downtown San Francisco at 865 Market Street, offering an exceptional urban retail experience. As part of the globally recognized Westfield brand with over 900 million visitors across 72 shopping centres worldwide, this location brings together iconic brands like Apple, Nike, Adidas, Sephora, H&M, and Lego under one roof. The center is designed as a dynamic entertainment destination where visitors can eat, shop, and play, featuring a carefully curated mix of international and local retailers that never compromise on quality. With convenient amenities including click-and-collect services and Smart Parking technology, the center accommodates both quick shopping trips and all-day experiences. Beyond retail, Westfield San Francisco Centre serves as a vibrant community hub with diverse food offerings ranging from global staples to local eateries, beautiful architecture, and regular entertainment events that create connections and inspiration for shoppers and visitors alike.",
+  "numberOfStores": 75,
+  "squareFootage": 550000,
+  "tier": 3,
+  "spaces": []
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Bay Street Emeryville",
+  "address": "5616 Bay Street",
+  "city": "Emeryville",
+  "state": "CA",
+  "website": "https://www.baystreet-emeryville.com",
+  "country": "US",
+  "latitude": 37.834877399999996,
+  "longitude": -122.29215440000002,
+  "phone": "++1 510-655-4002",
+  "imageURLs": [
+    "/images/malls/ca-bay-street-emeryville-1.jpg"
+  ],
+  "summary": "Walkable bayside complex with architectural & landscaping features, shopping, restaurants & movies.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.3,
+  "reviewCount": 5008,
+  "centerType": "LifestyleCenter",
+  "demographics": "Bay Street Emeryville attracts a predominantly affluent, educated demographic with median household incomes significantly above the national average, reflecting the surrounding Bay Area communities of Emeryville, Berkeley, and Oakland. The typical visitor base skews towards millennials and Gen X professionals (ages 25-54) working in tech, education, and healthcare industries, along with young families and urban-dwelling empty nesters seeking convenience and quality. The trade area benefits from high population density, cultural diversity, and shoppers who value sustainability, innovation, and experiential retail, with strong preference for both established brands and unique dining concepts. The center serves as a primary shopping destination for Emeryville's growing residential community and captures significant cross-shopping traffic from neighboring cities due to its strategic location near major employment centers and transportation corridors.",
+  "description": "Bay Street Emeryville is a premier mixed-use lifestyle center located in the vibrant city of Emeryville, California, strategically positioned between Oakland and Berkeley along the San Francisco Bay waterfront. This open-air shopping and entertainment destination has transformed the area into a thriving urban hub, combining retail, dining, entertainment, and residential spaces in a walkable, pedestrian-friendly environment. The center features a diverse mix of national retailers, specialty boutiques, and popular dining establishments that cater to the Bay Area's sophisticated and tech-savvy population. With its modern architecture, public plazas, and carefully curated tenant mix, Bay Street Emeryville has become a favorite gathering place for residents and visitors seeking a contemporary shopping experience. The center's proximity to major employers, universities, and residential neighborhoods makes it a convenient and attractive destination for both everyday errands and leisurely weekend outings.",
+  "numberOfStores": 65,
+  "squareFootage": 300000,
+  "tier": 2,
+  "spaces": []
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Serramonte Center",
+  "address": "3 Serramonte Center",
+  "city": "Daly City",
+  "state": "CA",
+  "website": "https://www.serramontecenter.com",
+  "country": "US",
+  "latitude": 37.672119099999996,
+  "longitude": -122.4708116,
+  "imageURLs": [
+    "/images/malls/ca-serramonte-center-1.jpg"
+  ],
+  "summary": "Clothing chain with trendy apparel, shoes & accessories for teen girls & young women.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.2,
+  "reviewCount": 7075,
+  "centerType": "RegionalMall",
+  "demographics": "Serramonte Center primarily serves the diverse, middle-class communities of Daly City and the northern San Mateo County area, with a significant Asian-American population and multigenerational households. The trade area attracts value-conscious shoppers seeking convenient access to mainstream retailers without the premium pricing of San Francisco's luxury shopping districts. Typical visitors include working families, young professionals, and suburban residents who appreciate the covered mall format and extended evening hours that accommodate their busy schedules.",
+  "description": "Serramonte Center stands as Daly City's premier shopping destination, offering a comprehensive retail experience that brings together shopping, dining, and entertainment all under one roof. Located at 3 Serramonte Center in the heart of Daly City, California, this enclosed shopping center has served the San Francisco Peninsula community for decades as a convenient and comfortable place to shop. The center features extended hours throughout the week, staying open until 9 PM on most days to accommodate busy schedules, and offers special holiday hours to serve shoppers during peak seasons. Serramonte Center demonstrates strong community engagement through programs like \"Earning For Learning,\" which allows shoppers to support local schools with their purchases, and seasonal events such as Santa visits and photo opportunities during the holiday season. With its convenient location just south of San Francisco, ample parking, and diverse mix of retailers, Serramonte Center continues to be a beloved shopping hub for residents throughout the Bay Area.",
+  "numberOfStores": 75,
+  "squareFootage": 850000,
+  "tier": 2,
+  "spaces": []
+}

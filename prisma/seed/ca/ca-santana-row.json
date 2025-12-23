@@ -1,0 +1,26 @@
+{
+  "name": "Santana Row",
+  "address": "377 Santana Row",
+  "city": "San Jose",
+  "state": "CA",
+  "website": "https://www.santanarow.com",
+  "country": "US",
+  "latitude": 37.3204835,
+  "longitude": -121.947858,
+  "phone": "++1 408-551-4611",
+  "imageURLs": [
+    "/images/malls/ca-santana-row-1.jpg"
+  ],
+  "summary": "Upscale collection of shops, bars & restaurants, with outdoor seating & frequent live music.",
+  "openFrom": 1100,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 16367,
+  "centerType": "LifestyleCenter",
+  "demographics": "Santana Row attracts affluent, educated professionals and families from Silicon Valley's tech corridor, with visitors typically ranging from millennials to Gen X with household incomes exceeding $150,000. The primary trade area encompasses San Jose's upscale neighborhoods and nearby communities like Los Gatos, Saratoga, and Campbell, drawing customers seeking premium brands and experiential shopping. The center caters to trend-conscious consumers who value quality over value pricing, with shopping patterns reflecting preferences for upscale fashion, artisanal dining, and lifestyle experiences rather than traditional discount-driven retail.",
+  "description": "Santana Row is a premier mixed-use lifestyle destination located in the heart of San Jose, California, where community and commerce converge in a vibrant outdoor setting. Developed by Federal Realty Investment Trust, this upscale center is designed as \"A Place Where Community Starts,\" offering a sophisticated blend of high-end shopping, acclaimed dining, residential living, and luxury hotel accommodations. The center features an open-air European-inspired streetscape that creates an inviting atmosphere for shoppers, residents, and visitors to gather and connect. Beyond retail and restaurants, Santana Row serves as a community hub hosting year-round events including the annual Race to the Row, Lunar New Year celebrations, and Spirit of The Row gatherings. With its emphasis on creating experiences for trendsetters, foodies, innovators, and dwellers, Santana Row has established itself as one of Silicon Valley's most desirable destinations for both lifestyle and commerce.",
+  "numberOfStores": 50,
+  "squareFootage": 675000,
+  "tier": 3,
+  "spaces": []
+}

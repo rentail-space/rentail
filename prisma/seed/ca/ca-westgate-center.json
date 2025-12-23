@@ -1,0 +1,25 @@
+{
+  "name": "Westgate Center",
+  "address": "1600 Saratoga Avenue",
+  "city": "San Jose",
+  "state": "CA",
+  "website": "https://www.westgatecentersj.com",
+  "country": "US",
+  "latitude": 37.2923806,
+  "longitude": -121.98878329999998,
+  "imageURLs": [
+    "/images/malls/ca-westgate-center-1.jpg"
+  ],
+  "summary": "Standard retail mall with department & discount stores, specialty shops & casual food options.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 5058,
+  "centerType": "CommunityCenter",
+  "demographics": "Westgate Center primarily serves affluent Silicon Valley families and professionals from the surrounding San Jose neighborhoods, with visitors typically representing middle to upper-middle income households. The trade area includes a highly educated demographic with strong purchasing power, reflecting the broader South Bay technology corridor's prosperity. Shoppers at this location tend to prioritize convenience for everyday needs and services, with frequent visits for groceries, dining, and routine errands typical of established suburban community centers.",
+  "description": "Westgate Center is a well-established community shopping destination located on Saratoga Avenue in San Jose, California. Serving the western San Jose area for decades, this center has become a familiar gathering place for local residents seeking everyday shopping and services. The center features a convenient open-air layout that provides easy access to a diverse mix of retailers and service providers catering to the neighborhood's daily needs. Its location on busy Saratoga Avenue ensures excellent visibility and accessibility for shoppers throughout the greater San Jose metropolitan area. Westgate Center continues to serve as an important retail hub for the surrounding residential communities in this prosperous Silicon Valley location.",
+  "numberOfStores": 25,
+  "squareFootage": 200000,
+  "tier": 2,
+  "spaces": []
+}

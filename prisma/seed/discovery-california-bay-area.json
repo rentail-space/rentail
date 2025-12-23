@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Almaden Plaza",
+    "address": "5353 Almaden Expressway",
+    "city": "San Jose",
+    "state": "CA",
+    "website": "https://www.almadenplaza.com"
+  },
+  {
+    "name": "Bay Street Emeryville",
+    "address": "5616 Bay Street",
+    "city": "Emeryville",
+    "state": "CA",
+    "website": "https://www.baystreet-emeryville.com"
+  },
+  {
+    "name": "Broadway Plaza",
+    "address": "1275 Broadway Plaza",
+    "city": "Walnut Creek",
+    "state": "CA",
+    "website": "https://www.broadwayplaza.com"
+  },
+  {
+    "name": "Eastridge Center",
+    "address": "2200 Eastridge Loop",
+    "city": "San Jose",
+    "state": "CA",
+    "website": "https://www.eastridgecenter.com"
+  },
+  {
+    "name": "Hillsdale Shopping Center",
+    "address": "60 31st Avenue",
+    "city": "San Mateo",
+    "state": "CA",
+    "website": "https://www.hillsdale.com"
+  },
+  {
+    "name": "Newpark Mall",
+    "address": "2086 Newpark Mall",
+    "city": "Newark",
+    "state": "CA",
+    "website": "https://www.newparkmall.com"
+  },
+  {
+    "name": "Santana Row",
+    "address": "377 Santana Row",
+    "city": "San Jose",
+    "state": "CA",
+    "website": "https://www.santanarow.com"
+  },
+  {
+    "name": "Serramonte Center",
+    "address": "3 Serramonte Center",
+    "city": "Daly City",
+    "state": "CA",
+    "website": "https://www.serramontecenter.com"
+  },
+  {
+    "name": "Southland Mall",
+    "address": "1 Southland Mall",
+    "city": "Hayward",
+    "state": "CA",
+    "website": "https://www.southlandmall.com"
+  },
+  {
+    "name": "Stanford Shopping Center",
+    "address": "660 Stanford Shopping Center",
+    "city": "Palo Alto",
+    "state": "CA",
+    "website": "https://www.simon.com/mall/stanford-shopping-center"
+  },
+  {
+    "name": "Stoneridge Shopping Center",
+    "address": "1 Stoneridge Mall Road",
+    "city": "Pleasanton",
+    "state": "CA",
+    "website": "https://www.stoneridgeshoppingcenter.com"
+  },
+  {
+    "name": "Stonestown Galleria",
+    "address": "3251 20th Avenue",
+    "city": "San Francisco",
+    "state": "CA",
+    "website": "https://www.stonestown.com"
+  },
+  {
+    "name": "Tanforan",
+    "address": "1150 El Camino Real",
+    "city": "San Bruno",
+    "state": "CA",
+    "website": "https://www.shoptanforan.com"
+  },
+  {
+    "name": "The Pruneyard Shopping Center",
+    "address": "1875 South Bascom Avenue",
+    "city": "Campbell",
+    "state": "CA",
+    "website": "https://www.pruneyard.com"
+  },
+  {
+    "name": "The Village at Corte Madera",
+    "address": "1618 Redwood Highway",
+    "city": "Corte Madera",
+    "state": "CA",
+    "website": "https://www.thevillageatcortemadera.com"
+  },
+  {
+    "name": "Vintage Oaks Shopping Center",
+    "address": "1202 Vintage Way",
+    "city": "Novato",
+    "state": "CA",
+    "website": "https://www.vintageoaksnovato.com"
+  },
+  {
+    "name": "Westfield Oakridge",
+    "address": "925 Blossom Hill Road",
+    "city": "San Jose",
+    "state": "CA",
+    "website": "https://www.westfield.com/oakridge"
+  },
+  {
+    "name": "Westfield San Francisco Centre",
+    "address": "865 Market Street",
+    "city": "San Francisco",
+    "state": "CA",
+    "website": "https://www.westfield.com/sanfrancisco"
+  },
+  {
+    "name": "Westfield Valley Fair",
+    "address": "2855 Stevens Creek Blvd",
+    "city": "Santa Clara",
+    "state": "CA",
+    "website": "https://www.westfield.com/valleyfair"
+  },
+  {
+    "name": "Westgate Center",
+    "address": "1600 Saratoga Avenue",
+    "city": "San Jose",
+    "state": "CA",
+    "website": "https://www.westgatecentersj.com"
+  }
+]

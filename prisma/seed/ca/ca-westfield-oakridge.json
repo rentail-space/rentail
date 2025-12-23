@@ -1,0 +1,26 @@
+{
+  "name": "Westfield Oakridge",
+  "address": "925 Blossom Hill Road",
+  "city": "San Jose",
+  "state": "CA",
+  "website": "https://www.westfield.com/oakridge",
+  "country": "US",
+  "latitude": 37.2512044,
+  "longitude": -121.86245529999998,
+  "phone": "++1 408-878-4600",
+  "imageURLs": [
+    "/images/malls/ca-westfield-oakridge-1.jpg"
+  ],
+  "summary": "Westfield Oakridge is a premier regional mall in San Jose featuring top brands like Nike, Adidas, and Uniqlo alongside diverse dining and entertainment options. This modern shopping destination combines convenient technology like Smart Parking with a vibrant community atmosphere that makes it more than just a place to shop.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 10642,
+  "centerType": "RegionalMall",
+  "demographics": "Westfield Oakridge serves the affluent South San Jose market, attracting a diverse mix of middle to upper-middle-class families and young professionals with household incomes ranging from $80,000 to $150,000+. The trade area encompasses the thriving Silicon Valley corridor, drawing tech-savvy shoppers aged 25-54 who value convenience, quality, and the latest trends. Visitors typically include dual-income households and multicultural families who seek a one-stop destination for fashion, dining, and entertainment experiences.",
+  "description": "Westfield Oakridge is a premier shopping destination located in the heart of San Jose, California, at 925 Blossom Hill Road. As part of the globally recognized Westfield brand, this regional mall offers an exceptional shopping experience that combines the best of international fashion, diverse dining options, and entertainment all under one roof. The center features iconic brands including Uniqlo, Nike, Adidas, Starbucks, and Decathlon, ensuring shoppers have access to the latest trends and premium retail offerings. Westfield Oakridge is designed to be more than just a shopping mall—it's a dynamic community hub where visitors can socialize, dine, and be entertained. With convenient amenities like click-and-collect services and Smart Parking technology, the center seamlessly blends modern innovation with an all-day shopping experience that enriches the South San Jose community.",
+  "numberOfStores": 120,
+  "squareFootage": 1200000,
+  "tier": 2,
+  "spaces": []
+}

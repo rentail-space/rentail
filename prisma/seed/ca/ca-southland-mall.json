@@ -1,0 +1,26 @@
+{
+  "name": "Southland Mall",
+  "address": "One Southland Mall",
+  "city": "Hayward",
+  "state": "CA",
+  "website": "https://www.southlandmall.com",
+  "country": "US",
+  "latitude": 37.6511869,
+  "longitude": -122.1021994,
+  "phone": "++1 510-782-5050",
+  "imageURLs": [
+    "/images/malls/ca-southland-mall-1.jpg"
+  ],
+  "summary": "Large indoor mall with department & specialty stores, clothing, shoes, electronics & casual dining.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 3.9,
+  "reviewCount": 5564,
+  "centerType": "RegionalMall",
+  "demographics": "Southland Mall serves a diverse, middle-income demographic in the East Bay region, primarily attracting families and value-conscious shoppers from Hayward and surrounding communities. The trade area includes a multicultural population with a significant representation of Hispanic, Asian, and African American households seeking affordable, everyday shopping options. Typical visitors are budget-minded consumers looking for convenient access to national chain retailers, essential services, and casual dining in a traditional enclosed mall format.",
+  "description": "Southland Mall is a long-standing regional shopping destination located in Hayward, California, serving the East Bay community for decades. The mall features a diverse mix of retail tenants including national brands like Victoria's Secret, Firestone, and Daniel's Jewelers, offering shoppers a convenient one-stop location for fashion, services, and dining. Visitors can enjoy casual dining at Applebee's or grab a sweet treat at Mrs. Fields Cookies while exploring the center's variety of stores. The mall is managed by Namdar Realty Group and provides essential services like Quest Diagnostics alongside its retail offerings. With its VIP loyalty program, Southland Mall keeps shoppers engaged with exclusive deals and savings opportunities, making it a valued community gathering place in the East Bay.",
+  "numberOfStores": 50,
+  "squareFootage": 450000,
+  "tier": 1,
+  "spaces": []
+}

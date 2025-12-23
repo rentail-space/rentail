@@ -1,0 +1,26 @@
+{
+  "name": "Hillsdale Shopping Center",
+  "address": "60 31st Avenue",
+  "city": "San Mateo",
+  "state": "CA",
+  "website": "https://www.hillsdale.com",
+  "country": "US",
+  "latitude": 37.5378764,
+  "longitude": -122.300907,
+  "phone": "++1 650-586-7750",
+  "imageURLs": [
+    "/images/malls/ca-hillsdale-shopping-center-1.jpg"
+  ],
+  "summary": "Indoor mall featuring department stores, popular chain retailers & a food terrace for global eats.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 6967,
+  "centerType": "RegionalMall",
+  "demographics": "Hillsdale Shopping Center primarily attracts affluent, educated shoppers from San Mateo County and surrounding Peninsula communities, with median household incomes significantly above the national average ranging from $120,000 to $180,000+. The core demographic includes families with children, young professionals aged 25-54, and tech industry workers from nearby Silicon Valley companies, representing a diverse, multicultural population reflective of the Bay Area's Asian-American, Hispanic, and Caucasian communities. Shoppers typically exhibit preferences for quality brands, convenience, and a mix of value and premium offerings, with strong purchasing power for both everyday needs and discretionary spending on fashion, electronics, and dining experiences.",
+  "description": "Hillsdale Shopping Center is a premier shopping destination located in the heart of San Mateo, California, serving the vibrant communities of the San Francisco Peninsula. Since its establishment, this regional mall has been a cornerstone of retail activity in San Mateo County, offering a comprehensive shopping experience with a diverse mix of department stores, specialty retailers, dining options, and entertainment venues. The center features an enclosed climate-controlled environment that provides comfort year-round, making it a preferred destination for families and shoppers throughout the Bay Area. With convenient access from Highway 101 and surrounded by affluent suburban neighborhoods, Hillsdale has consistently evolved to meet the changing needs of Peninsula residents, featuring modern amenities and a carefully curated tenant mix. The shopping center's strategic location at 60 31st Avenue positions it as a central gathering place that combines retail therapy with community engagement, offering everything from fashion and electronics to dining and services under one roof.",
+  "numberOfStores": 110,
+  "squareFootage": 1100000,
+  "tier": 2,
+  "spaces": []
+}

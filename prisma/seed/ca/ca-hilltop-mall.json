@@ -1,0 +1,26 @@
+{
+  "name": "Hilltop Mall",
+  "address": "5011 2nd Avenue",
+  "city": "Kearney",
+  "state": "NE",
+  "website": "https://www.hilltopmall.com",
+  "country": "US",
+  "latitude": 40.723390699999996,
+  "longitude": -99.0813438,
+  "phone": "++1 308-236-9798",
+  "imageURLs": [
+    "/images/malls/ne-hilltop-mall-1.jpg"
+  ],
+  "summary": "Hilltop Mall is a traditional enclosed regional shopping center in Richmond, California that has served the East Bay community since 1976. The property has experienced significant changes in recent years and is currently undergoing transformation discussions for redevelopment into mixed-use purposes.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4,
+  "reviewCount": 1357,
+  "centerType": "RegionalMall",
+  "demographics": "Hilltop Mall primarily serves the Richmond and East Bay area communities, drawing from diverse middle to lower-middle income households with a significant percentage of families and multigenerational households. The trade area includes substantial Hispanic and African American populations, with visitors typically seeking value-oriented shopping options and essential retail services. Shopping patterns reflect price-conscious consumers who prioritize convenience and accessibility, with many visitors coming from within a 5-10 mile radius of the center.",
+  "description": "Hilltop Mall, located at 2200 Hilltop Mall Road in Richmond, California, has served the East Bay community for decades as a traditional enclosed regional shopping center. Originally opened in 1976, this mall was once a thriving retail destination featuring multiple department store anchors and dozens of specialty retailers spread across its expansive indoor corridors. Over the years, Hilltop Mall has faced challenges common to many traditional enclosed malls, including declining foot traffic and store closures as retail patterns shifted toward e-commerce and lifestyle centers. The property has undergone various redevelopment discussions aimed at reimagining the space for modern mixed-use purposes, including residential, office, and entertainment components. Despite its challenges, Hilltop Mall remains a recognizable landmark in Richmond, representing both the golden age of American mall culture and the ongoing transformation of retail real estate.",
+  "numberOfStores": 25,
+  "squareFootage": 1000000,
+  "tier": 1,
+  "spaces": []
+}

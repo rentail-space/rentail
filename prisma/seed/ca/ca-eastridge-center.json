@@ -1,0 +1,26 @@
+{
+  "name": "Eastridge Center",
+  "address": "2200 Eastridge Loop",
+  "city": "San Jose",
+  "state": "CA",
+  "website": "https://www.eastridgecenter.com",
+  "country": "US",
+  "latitude": 37.325384,
+  "longitude": -121.81374849999997,
+  "phone": "++1 408-238-3600",
+  "imageURLs": [
+    "/images/malls/ca-eastridge-center-1.jpg"
+  ],
+  "summary": "Large mall featuring department & specialty shops & services, plus a food court & multiplex theater.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 11509,
+  "centerType": "RegionalMall",
+  "demographics": "Eastridge Center primarily serves a diverse, middle-income demographic in East San Jose, with a significant representation of Hispanic and Asian families, young professionals, and multi-generational households. The trade area consists of value-conscious shoppers with household incomes ranging from $50,000 to $90,000, including many first-time homebuyers and renters in the surrounding neighborhoods. Typical visitors are families seeking affordable, convenient shopping for everyday needs, with shopping patterns focused on practical purchases, back-to-school needs, and budget-friendly dining options rather than luxury or aspirational spending.",
+  "description": "Eastridge Center is a prominent regional shopping destination located in San Jose, California, serving the diverse communities of the South Bay area. This enclosed mall has been a cornerstone of retail activity in the Eastridge neighborhood, providing convenient access to a wide variety of shopping, dining, and entertainment options for local residents and visitors alike. The center features a comprehensive mix of national retailers, specialty stores, and services that cater to the everyday needs of families throughout the region. With convenient amenities including ample parking and accessibility features, Eastridge Center has established itself as a reliable shopping venue for value-conscious consumers in one of Silicon Valley's most dynamic markets. The mall continues to serve as an important community gathering place and commercial hub in East San Jose.",
+  "numberOfStores": 100,
+  "squareFootage": 1050000,
+  "tier": 1,
+  "spaces": []
+}

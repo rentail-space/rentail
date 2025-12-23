@@ -292,7 +292,7 @@ function calculateZoomLevel(
       (minBy(centers, (center) => center.longitude)?.longitude ?? 0);
     const maxRange = Math.max(latitudeRange, longitudeRange);
     invariant(maxRange > 0, "Max range must be greater than 0");
-    return 10 - Math.log2(maxRange * 4);
+    return 10 - Math.log2(maxRange * 8);
   } catch {
     return 11;
   }

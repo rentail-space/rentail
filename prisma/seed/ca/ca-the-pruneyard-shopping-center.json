@@ -1,0 +1,26 @@
+{
+  "name": "The Pruneyard Shopping Center",
+  "address": "1875 South Bascom Avenue",
+  "city": "Campbell",
+  "state": "CA",
+  "website": "https://www.pruneyard.com",
+  "country": "US",
+  "latitude": 37.2879599,
+  "longitude": -121.93328229999999,
+  "phone": "++1 408-796-3277",
+  "imageURLs": [
+    "/images/malls/ca-the-pruneyard-shopping-center-1.jpg"
+  ],
+  "summary": "Enormous mall with shopping, services, multiple dining options & a movie theater amid outdoor space.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.3,
+  "reviewCount": 3997,
+  "centerType": "LifestyleCenter",
+  "demographics": "The Pruneyard Shopping Center serves the affluent South Bay and Silicon Valley market, attracting primarily middle to upper-middle-income professionals and families with household incomes ranging from $100,000 to $200,000+. The trade area demographics skew toward educated millennials and Gen X shoppers aged 25-54, many employed in the nearby tech industry, along with established baby boomers who have frequented the center for decades. Visitors typically seek a convenient, quality shopping and dining experience close to home, favoring a mix of everyday services, casual dining, and specialty retail that caters to their tech-savvy, health-conscious lifestyle.",
+  "description": "The Pruneyard Shopping Center is a historic landmark destination in Campbell, California, that has been serving the South Bay community for decades. Originally developed in the 1960s, this open-air center has evolved into a beloved gathering place that seamlessly blends shopping, dining, and entertainment. The property features a diverse mix of retailers, restaurants, and service providers, along with professional office space, creating a vibrant mixed-use environment. Pruneyard is renowned for its charming courtyards, mature landscaping, and Mediterranean-inspired architecture that provides a pleasant outdoor shopping experience year-round. The center has also played a significant role in constitutional law history, as it was the subject of a landmark Supreme Court case regarding free speech rights on private property.",
+  "numberOfStores": 35,
+  "squareFootage": 250000,
+  "tier": 2,
+  "spaces": []
+}

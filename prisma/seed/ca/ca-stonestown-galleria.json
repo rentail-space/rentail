@@ -1,0 +1,26 @@
+{
+  "name": "Stonestown Galleria",
+  "address": "3251 20th Avenue",
+  "city": "San Francisco",
+  "state": "CA",
+  "website": "https://www.stonestown.com",
+  "country": "US",
+  "latitude": 37.7280313,
+  "longitude": -122.477088,
+  "phone": "++1 415-564-8848",
+  "imageURLs": [
+    "/images/malls/ca-stonestown-galleria-1.jpg"
+  ],
+  "summary": "2-story shopping center offers name-brand retail shops, department stores, restaurants & a theater.",
+  "openFrom": 1100,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 6828,
+  "centerType": "RegionalMall",
+  "demographics": "Stonestown Galleria draws primarily from middle to upper-middle income households in San Francisco's western neighborhoods, with a significant student population from nearby San Francisco State University. The trade area includes diverse families, young professionals, and retirees from the Sunset and Parkside districts, with median household incomes ranging from $80,000 to $120,000. Shoppers tend to be value-conscious yet quality-focused, seeking convenient access to everyday shopping needs, dining, and entertainment options close to home. The center's demographic mix reflects San Francisco's multicultural character, with strong representation from Asian-American, Hispanic, and Caucasian households who value the mall's accessibility and practical retail offerings.",
+  "description": "Stonestown Galleria is a landmark shopping destination in San Francisco's southwestern neighborhoods, serving as a vital retail and community hub since its opening in 1952. Originally developed as one of the first suburban-style shopping centers in San Francisco, this enclosed regional mall has evolved over the decades to meet the changing needs of the diverse San Francisco community. The center features a thoughtful mix of national retailers, dining options, and services that cater to local residents and visitors alike. With its convenient location on 20th Avenue near the 19th Avenue corridor and proximity to San Francisco State University, Stonestown provides accessible shopping for students, families, and professionals throughout the western San Francisco area. The mall continues to serve as an important gathering place and shopping resource for the Sunset District and surrounding neighborhoods.",
+  "numberOfStores": 125,
+  "squareFootage": 640000,
+  "tier": 2,
+  "spaces": []
+}

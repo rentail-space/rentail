@@ -1,0 +1,26 @@
+{
+  "name": "Stanford Shopping Center",
+  "address": "660 Stanford Shopping Center",
+  "city": "Palo Alto",
+  "state": "CA",
+  "website": "https://www.simon.com/mall/stanford-shopping-center",
+  "country": "US",
+  "latitude": 37.4434721,
+  "longitude": -122.17129229999999,
+  "phone": "++1 650-617-8200",
+  "imageURLs": [
+    "/images/malls/ca-stanford-shopping-center-1.jpg"
+  ],
+  "summary": "Open-air, garden-lined mall with high-end department stores & boutiques, specialty shops & eateries.",
+  "openFrom": 1000,
+  "openUntil": 1900,
+  "rating": 4.5,
+  "reviewCount": 10877,
+  "centerType": "LifestyleCenter",
+  "demographics": "Stanford Shopping Center attracts an exceptionally affluent demographic with visitors typically aged 30-65, representing high-income professionals, tech executives, and Stanford University faculty with household incomes significantly above the national median. The trade area encompasses Palo Alto, Menlo Park, Atherton, and surrounding Silicon Valley communities known for having some of the highest household incomes in the United States. Shoppers seek premium quality merchandise, luxury brands, and elevated retail experiences, with strong preferences for designer fashion, high-end home goods, and upscale dining options. The center's demographic profile is characterized by highly educated consumers with sophisticated tastes who value convenience, quality, and curated retail offerings.",
+  "description": "Stanford Shopping Center is a premier open-air shopping destination in the heart of Silicon Valley, nestled in the prestigious city of Palo Alto adjacent to Stanford University. Since its opening, this upscale lifestyle center has been a cultural and retail landmark, offering a sophisticated shopping experience with tree-lined walkways and beautiful outdoor architecture. The center features an impressive collection of luxury and contemporary retailers including high-end fashion brands, premium home furnishings, and acclaimed dining establishments that cater to the discerning tastes of the affluent Bay Area community. With its proximity to Stanford University and the tech corridor, Stanford Shopping Center attracts a diverse clientele of academics, entrepreneurs, and professionals seeking quality merchandise and exceptional service. The center's commitment to maintaining a curated tenant mix and providing an elevated retail experience has solidified its position as one of the most desirable shopping destinations on the Peninsula.",
+  "numberOfStores": 140,
+  "squareFootage": 1200000,
+  "tier": 3,
+  "spaces": []
+}

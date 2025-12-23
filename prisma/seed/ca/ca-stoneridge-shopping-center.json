@@ -1,0 +1,26 @@
+{
+  "name": "Stoneridge Shopping Center",
+  "address": "1 Stoneridge Mall Road",
+  "city": "Pleasanton",
+  "state": "CA",
+  "website": "https://www.stoneridgeshoppingcenter.com",
+  "country": "US",
+  "latitude": 37.6952657,
+  "longitude": -121.92884490000002,
+  "phone": "++1 925-463-2778",
+  "imageURLs": [
+    "/images/malls/ca-stoneridge-shopping-center-1.jpg"
+  ],
+  "summary": "Large, 2-level indoor mall with department stores, brand-name shopping, specialty kiosks & dining.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.3,
+  "reviewCount": 6516,
+  "centerType": "RegionalMall",
+  "demographics": "Stoneridge Shopping Center attracts an affluent demographic from the Tri-Valley region, with primary visitors being middle to upper-middle-income families and professionals with household incomes typically ranging from $100,000 to $200,000+. The trade area encompasses the prosperous communities of Pleasanton, Dublin, Livermore, and San Ramon, characterized by highly educated residents, young families, and established professionals aged 25-54. Shoppers tend to prefer a mix of national brands and full-service dining experiences, with strong spending power reflected in the presence of premium retailers like Nordstrom alongside mainstream anchors. The center benefits from Pleasanton's position as one of the Bay Area's most desirable suburban communities, drawing visitors seeking quality retail in a convenient, well-maintained indoor mall environment.",
+  "description": "Stoneridge Shopping Center is a premier enclosed regional mall serving the Tri-Valley area in Pleasanton, California. Anchored by major department stores including Macy's and Nordstrom, this shopping destination has been a cornerstone of the East Bay retail landscape since opening in 1980. The center features over 165 specialty stores and restaurants, offering everything from fashion and beauty to dining and entertainment options. With its convenient location along Interstate 580 and ample parking, Stoneridge attracts shoppers from throughout Alameda and Contra Costa counties. The mall underwent significant renovations and expansions over the years, maintaining its status as one of the region's most popular shopping destinations with a strong mix of national retailers, popular dining venues, and family-friendly amenities.",
+  "numberOfStores": 165,
+  "squareFootage": 1300000,
+  "tier": 2,
+  "spaces": []
+}
