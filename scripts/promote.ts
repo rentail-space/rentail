@@ -15,6 +15,8 @@ import { execSync } from "node:child_process";
 import { Octokit } from "octokit";
 import ora from "ora";
 
+/// <reference path="./app/types/index.d.ts" />
+
 dotenv.configDotenv({ quiet: true });
 invariant(process.env.VERCEL_TOKEN, "VERCEL_TOKEN is required");
 invariant(process.env.GITHUB_TOKEN, "GITHUB_TOKEN is required");
