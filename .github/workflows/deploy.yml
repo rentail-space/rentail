@@ -41,13 +41,6 @@ jobs:
           node-version-file: "package.json"
           cache: "pnpm"
 
-      - name: Configure PNPM/Playwright cache
-        uses: namespacelabs/nscloud-cache-action@v1
-        with:
-          cache: |
-            playwright
-            pnpm
-
       - name: Install NPM dependencies
         run: pnpm install
 
@@ -102,12 +95,6 @@ jobs:
         with:
           name: playwright-test-results
           path: __screenshots__
-
-      - name: Upload Playwright screenshots
-        uses: namespace-actions/upload-artifact@v1
-        with:
-          name: playwright-screenshots
-          path: __screenshots__/
 
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v3
