@@ -34,6 +34,7 @@ import deviceDetection from "~/lib/deviceDetection";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
+import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import type { Route } from "./+types/admin.users";
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -323,9 +324,12 @@ function AllUsers({ users }: { users: User[] }) {
         cell: ({ row }) => (
           <span className="flex flex-row items-center justify-between gap-2">
             <span className="w-48">
-              {DateTime.fromJSDate(row.original.createdAt).toFormat(
-                "yyyy-MM-dd HH:mm",
-              )}
+              {DateTime.fromJSDate(row.original.createdAt)
+                .setZone(
+                  cleanParseWorkingMemory(row.original.workingMemory).location
+                    ?.timeZone ?? "UTC",
+                )
+                .toFormat("yyyy-MM-dd HH:mm")}
             </span>
             <span className="w-24">{timeAgo(row.original.createdAt)}</span>
           </span>

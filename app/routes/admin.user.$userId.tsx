@@ -70,6 +70,7 @@ export default function UserPage({
     >
       <UserInfoCard user={loaderData.user} />
       <WorkingMemory user={loaderData.user} />
+      <Geocode user={loaderData.user} />
       <EditNote user={loaderData.user} />
 
       {loaderData.user.chats.map((chat) => (
@@ -178,6 +179,15 @@ function WorkingMemory({ user }: { user: User }) {
     <details className="rounded-lg border-2 border-gray-400 p-4 print:hidden">
       <summary className="font-semibold">User's working memory</summary>
       <pre className="not-prose">{JSON.stringify(workingMemory, null, 2)}</pre>
+    </details>
+  );
+}
+
+function Geocode({ user }: { user: User }) {
+  return (
+    <details className="rounded-lg border-2 border-gray-400 p-4 print:hidden">
+      <summary className="font-semibold">Original geocode</summary>
+      <pre className="not-prose">{JSON.stringify(user.geocode, null, 2)}</pre>
     </details>
   );
 }
