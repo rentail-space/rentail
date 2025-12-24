@@ -6,6 +6,7 @@ import {
 } from "~/lib/workingMemory";
 import generalDirectives from "~/prompts/generalDirectives.md?raw";
 import envVars from "./env";
+import externalLink from "./externalLink";
 import findNearbyCenters from "./findNearbyCenters";
 import prisma from "./prisma";
 
@@ -108,7 +109,7 @@ function centerToMarkdown(
     description,
     name: center.name,
     state: center.state,
-    website: center.website,
+    website: center.website ? externalLink(center.website) : null,
   });
   return [
     "<shopping-center>",

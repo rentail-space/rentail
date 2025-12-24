@@ -11,6 +11,7 @@ import {
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
 import { Button } from "~/components/ui/Button";
+import externalLink from "~/lib/externalLink";
 import formatPhoneNumber from "~/lib/formatPhoneNumber";
 import timeOfDay from "~/lib/timeOfDay";
 
@@ -83,7 +84,11 @@ export default function CenterInfo({
       {center.website && (
         <div className="items-top flex flex-row gap-2 pb-4">
           <GlobeIcon className="h-6 w-6" />
-          <Link to={center.website} target="_blank" rel="noopener noreferrer">
+          <Link
+            to={externalLink(center.website)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {center.website}
           </Link>
         </div>

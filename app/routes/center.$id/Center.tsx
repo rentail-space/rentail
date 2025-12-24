@@ -2,6 +2,7 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import CentersMap from "~/components/ui/CentersMap";
+import externalLink from "~/lib/externalLink";
 import CenterInfo from "./CenterInfo";
 import { Spaces } from "./Spaces";
 
@@ -79,7 +80,7 @@ function schemaData(center: PropertyGetPayload<{ include: { spaces: true } }>) {
       longitude: center.longitude,
     },
     ...(center.phone && { telephone: center.phone }),
-    ...(center.website && { url: center.website }),
+    ...(center.website && { url: externalLink(center.website) }),
     ...(center.imageURLs.length > 0 && { image: center.imageURLs }),
     ...(center.description && { description: center.description }),
     ...(center.openFrom === 0 && center.openUntil === 2400
