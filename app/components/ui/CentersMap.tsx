@@ -68,10 +68,13 @@ export default function CentersMap({
       "pk.eyJ1IjoiYXNzYWZhcmtpbiIsImEiOiJjbWhwY3ZoazMwYXloMmxvbmxvZTE2eTBmIn0.m1npzYF93dHWeF4W3Yt_xw";
 
     const hasCenter = !Number.isNaN(longitude) && !Number.isNaN(latitude);
+    // https://docs.mapbox.com/mapbox-gl-js/api/map/#instance-members-interaction-handlers
     map.current = new mapboxgl.Map({
-      interactive: false,
       center: hasCenter ? [longitude, latitude] : [-98.5795, 39.8283],
       container: mapContainer.current,
+      doubleClickZoom: false,
+      dragPan: true,
+      scrollZoom: false,
       style: "mapbox://styles/mapbox/streets-v12",
       zoom: hasCenter ? calculateZoomLevel(centers) : 4,
     });
