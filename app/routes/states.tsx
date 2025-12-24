@@ -49,7 +49,9 @@ export default function StatePage({
         }}
       />
 
-      <h1 className="text-center font-bold text-2xl">US States</h1>
+      <h1 className="whitespace-nowrap text-center font-bold text-2xl">
+        US States
+      </h1>
 
       <ul
         className="space-y-4 divide-y divide-gray-400"
