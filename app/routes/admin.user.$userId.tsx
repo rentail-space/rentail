@@ -1,5 +1,8 @@
+import type { TextUIPart } from "ai";
 import { ArrowLeft, ArrowRight, CircleCheck } from "lucide-react";
 import { DateTime } from "luxon";
+import type { User } from "prisma/generated/client";
+import type { ChatGetPayload } from "prisma/generated/models";
 import { Link, useFetcher } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { StickToBottom } from "use-stick-to-bottom";
@@ -17,11 +20,8 @@ import deviceDetection from "~/lib/deviceDetection";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
-import Messages from "./chat/Messages";
-import type { TextUIPart } from "ai";
-import type { User } from "prisma/generated/client";
-import type { ChatGetPayload } from "prisma/generated/models";
 import type { Route } from "./+types/admin.user.$userId";
+import Messages from "./chat/Messages";
 
 export async function loader({ params, request }: Route.LoaderArgs) {
   await verifyAdmin(request.headers);
@@ -85,7 +85,6 @@ function UserInfoCard({ user }: { user: User }) {
   const workingMemory = cleanParseWorkingMemory(user.workingMemory);
   const timeZone = workingMemory.location?.timeZone ?? "UTC";
   const utm = user.utm ? JSON.parse(user.utm as string) : undefined;
-  const geocode = user.geocode as { displayName: string };
 
   return (
     <details className="rounded-lg border-2 border-gray-400 p-4" open>
@@ -96,7 +95,10 @@ function UserInfoCard({ user }: { user: User }) {
           <Row title="User Agent" value={user.userAgent} />
           <Row title="Referrer" value={user.referrer} />
           <Row title="IP" value={user.ip} />
-          <Row title="Location" value={geocode.displayName} />
+          <Row
+            title="Location"
+            value={workingMemory.location?.displayName ?? null}
+          />
           <Row title="Device" value={deviceDetection(user.userAgent)} />
           <Row title="Viewport" value={user.viewport as string} />
           {utm &&

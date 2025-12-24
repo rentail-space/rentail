@@ -517,7 +517,7 @@ async function createUser({
 
   const id = ulid();
   const utm = await readUtmParams(requestHeaders);
-  const geocode = await geocodeFromHeaders(requestHeaders);
+  const { ip, location } = await geocodeFromHeaders(requestHeaders);
   const userAgent = utm.userAgent ?? "";
   const deviceInfo = getDeviceInfo(requestHeaders);
   const isAdmin = email ? adminEmails.includes(email) : false;
@@ -528,12 +528,12 @@ async function createUser({
     data: {
       // NOTE: Users must have unique emails in their index
       email: uniqueEmail,
-      geocode,
+      geocode: JSON.stringify(location),
       id,
-      ip: geocode.ip,
+      ip,
       isAdmin,
       isAnonymous,
-      isBot: isUABot(userAgent) || (await isBotByIP(geocode.ip)),
+      isBot: isUABot(userAgent) || (await isBotByIP(ip)),
       isMobile: deviceInfo.isMobile,
       metadata: {},
       name: isAnonymous ? undefined : name,
@@ -548,7 +548,7 @@ async function createUser({
               height: deviceInfo.viewportHeight,
             }
           : undefined,
-      workingMemory: JSON.stringify({ location: geocode }),
+      workingMemory: JSON.stringify({ location }),
 
       chats: {
         create: {

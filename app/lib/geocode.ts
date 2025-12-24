@@ -51,7 +51,8 @@ export async function useMemoryOrHeaders({
     invariant(latitude, "Latitude is expected");
     return { displayName, longitude, latitude };
   } catch {
-    return await geocodeFromHeaders(headers);
+    const { location } = await geocodeFromHeaders(headers);
+    return location;
   }
 }
 
@@ -64,19 +65,20 @@ export async function useMemoryOrHeaders({
  * @returns The location information from the headers or the fallback location
  */
 export async function geocodeFromHeaders(requestHeaders: Headers): Promise<{
-  city?: string;
-  country?: string;
-  displayName: string;
   ip?: string;
-  latitude: number;
-  longitude: number;
-  state?: string;
-  timeZone?: string;
+  location: {
+    city?: string;
+    country?: string;
+    displayName: string;
+    latitude: number;
+    longitude: number;
+    state?: string;
+    timeZone?: string;
+  };
 }> {
+  const ip = requestHeaders.get("x-real-ip");
+  if (!ip) return { ip: undefined, location: fallbackLocation };
   try {
-    const ip = requestHeaders.get("x-real-ip");
-    if (!ip) return fallbackLocation;
-
     const city = requestHeaders.get("x-vercel-ip-city");
     const country = requestHeaders.get("x-vercel-ip-country");
     const latitude = requestHeaders.get("x-vercel-ip-latitude");
@@ -87,25 +89,27 @@ export async function geocodeFromHeaders(requestHeaders: Headers): Promise<{
     const displayName = [city, state, country].filter(Boolean).join(", ");
     if (displayName)
       return {
-        city: city ? decodeURIComponent(city) : undefined,
-        country: country ?? undefined,
-        displayName,
-        ip: ip ?? undefined,
-        latitude: Number.parseFloat(latitude ?? "34.0456"),
-        longitude: Number.parseFloat(longitude ?? "-118.2694"),
-        state: state ?? undefined,
-        timeZone: timeZone ?? "America/Los_Angeles",
+        ip,
+        location: {
+          city: city ? decodeURIComponent(city) : undefined,
+          country: country ?? undefined,
+          displayName,
+          latitude: Number.parseFloat(latitude ?? "34.0456"),
+          longitude: Number.parseFloat(longitude ?? "-118.2694"),
+          state: state ?? undefined,
+          timeZone: timeZone ?? "America/Los_Angeles",
+        },
       };
     else {
       const [location, timeZone] = await Promise.all([
         geocodeFromIP(ip),
         getTimezoneFromIP(ip),
       ]);
-      return { ...location, ip, timeZone };
+      return { ip, location: { ...location, timeZone } };
     }
   } catch (error) {
     console.error("Error getting geocode from headers: %s", error);
-    return fallbackLocation;
+    return { ip, location: fallbackLocation };
   }
 }
 
