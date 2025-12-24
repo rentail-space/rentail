@@ -1,0 +1,26 @@
+{
+  "name": "Rice Village",
+  "address": "2400 University Boulevard",
+  "city": "Houston",
+  "state": "TX",
+  "website": "https://www.ricevillagehouston.com",
+  "country": "US",
+  "latitude": 29.716315599999998,
+  "longitude": -95.41629139999999,
+  "phone": "++1 713-302-8918",
+  "imageURLs": [
+    "/images/malls/tx-rice-village-1.jpg"
+  ],
+  "summary": "Rice Village is a historic, walkable 16-block lifestyle district in Houston featuring a sophisticated mix of local boutiques, national retailers, and acclaimed restaurants near Rice University and the museum district. This iconic neighborhood destination combines vintage charm with contemporary shopping and dining experiences.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.6,
+  "reviewCount": 291,
+  "centerType": "LifestyleCenter",
+  "demographics": "Rice Village attracts an affluent, well-educated demographic primarily consisting of Rice University students and faculty, young professionals aged 25-45, and families from nearby upscale neighborhoods like West University Place and Southampton with median household incomes exceeding $100,000. The trade area draws culturally sophisticated visitors to the adjacent Museum District and medical center, with shoppers demonstrating preferences for unique local boutiques, upscale dining experiences, and specialty retail over mass-market chains. The center sees a blend of convenience-driven local traffic from the densely populated surrounding residential areas and destination visitors seeking the walkable urban village experience that is rare in Houston's predominantly car-centric retail landscape.",
+  "description": "Rice Village is a historic and vibrant 16-block shopping and dining district located in the heart of Houston's museum district, adjacent to Rice University. Established in the 1930s, this walkable neighborhood has evolved into one of Houston's most beloved destinations, combining a charming village atmosphere with modern retail and culinary experiences. The district features a diverse mix of local boutiques, national retailers, acclaimed restaurants, and entertainment venues, all within tree-lined streets that encourage pedestrian exploration. Rice Village has maintained its unique character while continuously evolving to meet the needs of its sophisticated clientele, including Rice University students, museum visitors, and residents from nearby upscale neighborhoods like West University Place and Southampton. With its blend of historic charm, contemporary amenities, and prime location near Houston's cultural institutions, Rice Village stands as a premier lifestyle destination that captures the essence of Houston's dynamic retail landscape.",
+  "numberOfStores": 300,
+  "squareFootage": 500000,
+  "tier": 3,
+  "spaces": []
+}

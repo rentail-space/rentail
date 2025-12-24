@@ -1,0 +1,26 @@
+{
+  "name": "River Oaks Shopping Center",
+  "address": "1964 West Gray Street",
+  "city": "Houston",
+  "state": "TX",
+  "website": "https://www.riveroaksshoppingcenter.com",
+  "country": "US",
+  "latitude": 29.753441,
+  "longitude": -95.4073559,
+  "phone": "++1 833-800-4343",
+  "imageURLs": [
+    "/images/malls/tx-river-oaks-shopping-center-1.jpg"
+  ],
+  "summary": "Sizable plaza with eateries & stores for apparel, kitchen goods, art & spa, with free valet parking.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 4357,
+  "centerType": "LifestyleCenter",
+  "demographics": "River Oaks Shopping Center caters to Houston's most affluent demographic, serving the ultra-high-net-worth residents of the River Oaks neighborhood and surrounding upscale areas like Tanglewood and Memorial. The primary visitor profile includes households with incomes exceeding $200,000 annually, consisting of established professionals, business executives, and wealthy families aged 35-65 who prioritize quality and exclusivity. The trade area is characterized by luxury single-family homes, high property values, and residents who seek premium shopping and dining experiences with a preference for boutique retailers, upscale restaurants, and personalized service over mass-market chains.",
+  "description": "River Oaks Shopping Center holds a special place in Houston's retail history as the city's original shopping center, standing as an iconic destination that has truly stood the test of time. Located in the prestigious River Oaks neighborhood at 1966 West Gray Street, this center embodies timeless quality and classic style that cannot be duplicated. The shopping center features an impressive mix of newly opened establishments including Maison Chinoise, Sense Pilates, Seviin Cosmetics, Goode Co. Bar Buena, Goode Co. Kitchen & Cantina, Honest Mary's, and Leo's River Oaks, showcasing a sophisticated blend of dining, retail, and wellness offerings. With its open-air design and patio guide, River Oaks Shopping Center creates an upscale lifestyle experience that appeals to discerning shoppers seeking quality over fleeting trends. The center's commitment to excellence and its prime location in one of Houston's most affluent neighborhoods make it a cherished destination that continues to thrive in an ever-changing retail landscape.",
+  "numberOfStores": 30,
+  "squareFootage": 200000,
+  "tier": 3,
+  "spaces": []
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Highland Village",
+  "address": "4055 Westheimer Road",
+  "city": "Houston",
+  "state": "TX",
+  "website": "https://www.highlandvillagehouston.com",
+  "country": "US",
+  "latitude": 29.742075,
+  "longitude": -95.446562,
+  "phone": "++1 713-850-3100",
+  "imageURLs": [
+    "/images/malls/tx-highland-village-1.jpg"
+  ],
+  "summary": "Buzzy outdoor shopping mall with elevated boutiques & well-known national stores, plus restaurants.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.5,
+  "reviewCount": 2031,
+  "centerType": "LifestyleCenter",
+  "demographics": "Highland Village attracts an affluent, sophisticated demographic with high household incomes typically exceeding $150,000, drawing primarily from the nearby River Oaks, Memorial, and Tanglewood neighborhoods. The typical visitor is college-educated, aged 35-65, with significant disposable income and a preference for luxury brands, designer fashion, and upscale dining experiences. The trade area consists of established professionals, successful business owners, and wealthy families who value quality over price and seek personalized service and exclusive shopping experiences. Shoppers here exhibit strong brand loyalty and frequently visit for both special occasion purchases and regular lifestyle needs, with many considering Highland Village their neighborhood shopping destination.",
+  "description": "Highland Village is a premier upscale shopping destination located in the heart of Houston's prestigious River Oaks neighborhood at 4055 Westheimer Road. This open-air lifestyle center has established itself as one of Houston's most sophisticated retail addresses, offering a carefully curated collection of luxury boutiques, high-end retailers, and acclaimed dining establishments. The center features an elegant European-inspired architectural design with tree-lined walkways, creating an intimate and refined shopping atmosphere that appeals to Houston's affluent residents. Highland Village is home to prestigious retailers and has become a social hub where shopping, dining, and lifestyle converge in one of Houston's most desirable locations. The center's prime location near River Oaks and Memorial provides easy access to some of the city's wealthiest neighborhoods, making it a go-to destination for discerning shoppers seeking quality brands and personalized service.",
+  "numberOfStores": 30,
+  "squareFootage": 200000,
+  "tier": 3,
+  "spaces": []
+}

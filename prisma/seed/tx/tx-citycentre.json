@@ -1,0 +1,26 @@
+{
+  "name": "CityCentre",
+  "address": "800 Town and Country Boulevard",
+  "city": "Houston",
+  "state": "TX",
+  "website": "https://www.citycentrehouston.com",
+  "country": "US",
+  "latitude": 29.781022800000002,
+  "longitude": -95.55926679999999,
+  "phone": "++1 713-463-4692",
+  "imageURLs": [
+    "/images/malls/tx-citycentre-1.jpg"
+  ],
+  "summary": "Contemporary shopping compound featuring brand-name stores, restaurants & live music in the plaza.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.6,
+  "reviewCount": 8539,
+  "centerType": "LifestyleCenter",
+  "demographics": "CityCentre attracts an affluent, educated demographic primarily consisting of professionals aged 30-55 with household incomes exceeding $100,000, including many dual-income households without children or empty nesters. The trade area draws from Houston's upscale Memorial and Energy Corridor neighborhoods, appealing to upper-middle-class consumers who prioritize quality, convenience, and experiential retail. Visitors exhibit sophisticated shopping patterns, favoring premium brands, upscale dining experiences, and cultural amenities, with frequent visits for both planned shopping trips and spontaneous leisure activities. The center's mixed-use format particularly resonates with urban-minded professionals seeking walkable, European-style retail environments that offer lifestyle integration beyond traditional shopping.",
+  "description": "CityCentre is a premier mixed-use destination in Houston, Texas, developed by Midway, a distinguished real estate firm with over 50 years of experience creating projects of distinction and enduring value. Located at 800 Town and Country Boulevard, this upscale lifestyle center seamlessly blends shopping, dining, living, and working spaces into a vibrant urban environment. The center features an impressive mix of retail shops, from upscale boutiques like Beyond Yoga to fine dining establishments and global cuisine options with inviting patios, creating a sophisticated atmosphere for visitors. CityCentre goes beyond traditional retail with regular entertainment programming including live music on weekends, special holiday events, and cultural elements like the \"Art @ CITYCENTRE\" installations featuring works by artists such as Dual and Melissa Borrell. Developed as a walkable, mixed-use community, CityCentre represents Midway's commitment to creating environments where people can live, work, and thrive, making it a cornerstone destination in Houston's upscale retail landscape.",
+  "numberOfStores": 40,
+  "squareFootage": 500000,
+  "tier": 3,
+  "spaces": []
+}

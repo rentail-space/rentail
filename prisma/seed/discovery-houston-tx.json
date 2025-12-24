@@ -1,0 +1,114 @@
+[
+  {
+    "name": "Almeda Mall",
+    "address": "12200 Gulf Freeway",
+    "city": "Houston",
+    "state": "TX",
+    "website": "https://www.almedamall.com"
+  },
+  {
+    "name": "Baybrook Mall",
+    "address": "500 Baybrook Mall",
+    "city": "Friendswood",
+    "state": "TX",
+    "website": "https://www.simon.com/mall/baybrook-mall"
+  },
+  {
+    "name": "CityCentre",
+    "address": "800 Town and Country Boulevard",
+    "city": "Houston",
+    "state": "TX",
+    "website": "https://www.citycentrehouston.com"
+  },
+  {
+    "name": "Deerbrook Mall",
+    "address": "20131 Highway 59 North",
+    "city": "Humble",
+    "state": "TX",
+    "website": "https://www.deerbrookmall.com"
+  },
+  {
+    "name": "Highland Village",
+    "address": "4055 Westheimer Road",
+    "city": "Houston",
+    "state": "TX",
+    "website": "https://www.highlandvillagehouston.com"
+  },
+  {
+    "name": "Houston Premium Outlets",
+    "address": "29300 Hempstead Road",
+    "city": "Cypress",
+    "state": "TX",
+    "website": "https://www.premiumoutlets.com/outlet/houston"
+  },
+  {
+    "name": "Katy Mills",
+    "address": "5000 Katy Mills Circle",
+    "city": "Katy",
+    "state": "TX",
+    "website": "https://www.simon.com/mall/katy-mills"
+  },
+  {
+    "name": "Market Street The Woodlands",
+    "address": "9595 Six Pines Drive",
+    "city": "The Woodlands",
+    "state": "TX",
+    "website": "https://www.marketstreet-thewoodlands.com"
+  },
+  {
+    "name": "Memorial City Mall",
+    "address": "303 Memorial City Way",
+    "city": "Houston",
+    "state": "TX",
+    "website": "https://www.memorialcitymall.com"
+  },
+  {
+    "name": "Meyerland Plaza",
+    "address": "4700 Beechnut Street",
+    "city": "Houston",
+    "state": "TX",
+    "website": "https://www.meyerlandplaza.com"
+  },
+  {
+    "name": "Rice Village",
+    "address": "2500 University Boulevard",
+    "city": "Houston",
+    "state": "TX",
+    "website": "https://www.ricevillagehouston.com"
+  },
+  {
+    "name": "River Oaks Shopping Center",
+    "address": "1966 West Gray Street",
+    "city": "Houston",
+    "state": "TX",
+    "website": "https://www.riveroaksshoppingcenter.com"
+  },
+  {
+    "name": "The Galleria",
+    "address": "5085 Westheimer Road",
+    "city": "Houston",
+    "state": "TX",
+    "website": "https://www.simon.com/mall/the-galleria"
+  },
+  {
+    "name": "The Shops at Houston Center",
+    "address": "1200 McKinney Street",
+    "city": "Houston",
+    "state": "TX",
+    "website": "https://www.theshopsathoustoncenter.com"
+  },
+  {
+    "name": "Town & Country Village",
+    "address": "12850 Memorial Drive",
+    "city": "Houston",
+    "state": "TX",
+    "website": "https://www.townandcountryvillage.com"
+  },
+  {
+    "name": "West Oaks Mall",
+    "address": "1000 West Oaks Mall",
+    "city": "Houston",
+    "state": "TX",
+    "website": "https://www.westoaksmall.com"
+  }
+]

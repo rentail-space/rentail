@@ -1,0 +1,26 @@
+{
+  "name": "Meyerland Plaza",
+  "address": "420 Meyerland Plaza",
+  "city": "Houston",
+  "state": "TX",
+  "website": "https://www.meyerlandplaza.com",
+  "country": "US",
+  "latitude": 29.6876684,
+  "longitude": -95.4619464,
+  "phone": "++1 713-664-1166",
+  "imageURLs": [
+    "/images/malls/tx-meyerland-plaza-1.jpg"
+  ],
+  "summary": "Huge shopping center with department stores, a gym, dining, electronics, beauty & clothing shops.",
+  "openFrom": 700,
+  "openUntil": 2200,
+  "rating": 4.5,
+  "reviewCount": 9027,
+  "centerType": "CommunityCenter",
+  "demographics": "Meyerland Plaza serves a diverse, middle to upper-middle class demographic in southwest Houston, with visitors typically ranging from families with children to professionals aged 30-65. The trade area includes the established Meyerland neighborhood and surrounding communities, characterized by a mix of single-family homes and apartments with moderate to above-average household incomes. Shoppers at this location tend to prioritize convenience for everyday shopping needs, including groceries, services, and casual dining options. The demographic profile reflects Houston's diversity, with a mix of household compositions seeking neighborhood-oriented retail close to home.",
+  "description": "Meyerland Plaza, located at 4700 Beechnut Street in Houston, Texas, has served as a neighborhood shopping destination in the Meyerland community for decades. Situated in southwest Houston, this shopping center has weathered significant challenges including Hurricane Harvey flooding in 2017, demonstrating the resilience of both the center and the community it serves. The plaza has undergone various renovations and tenant changes over the years to meet the evolving needs of local residents. As a community-oriented shopping center, Meyerland Plaza typically features a mix of neighborhood-serving retailers, services, and dining options that cater to daily shopping needs. The center's location in the established Meyerland neighborhood positions it as a convenient retail hub for families and professionals in southwest Houston's diverse communities.",
+  "numberOfStores": 25,
+  "squareFootage": 200000,
+  "tier": 2,
+  "spaces": []
+}

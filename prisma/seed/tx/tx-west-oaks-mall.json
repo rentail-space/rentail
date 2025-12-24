@@ -1,0 +1,26 @@
+{
+  "name": "West Oaks Mall",
+  "address": "9401 West Colonial Drive",
+  "city": "Ocoee",
+  "state": "FL",
+  "website": "https://www.westoaksmall.com",
+  "country": "US",
+  "latitude": 28.5570597,
+  "longitude": -81.5157433,
+  "phone": "++1 407-294-1494",
+  "imageURLs": [
+    "/images/malls/fl-west-oaks-mall-1.jpg"
+  ],
+  "summary": "Indoor mall hosting clothing & gift stores, a 14-screen cinema & a carousel plus a food court.",
+  "openFrom": 1000,
+  "openUntil": 1900,
+  "rating": 3.7,
+  "reviewCount": 4608,
+  "centerType": "RegionalMall",
+  "demographics": "West Oaks Mall primarily serves middle-income families and households in the western Houston area, with a diverse demographic mix reflecting the broader Houston metropolitan region. The trade area encompasses suburban neighborhoods with a blend of young families, working professionals, and established residents seeking convenient access to everyday retail needs and services. Shoppers tend to visit for routine purchases, family outings, and practical shopping rather than luxury or destination shopping experiences, reflecting the center's role as a community-oriented retail hub.",
+  "description": "West Oaks Mall is a well-established regional shopping destination located in the western Houston area, serving the communities along the West Houston corridor. Since opening its doors, this enclosed mall has been a cornerstone of retail activity for families and shoppers seeking a convenient, climate-controlled shopping experience. The center features a diverse mix of national retailers, specialty shops, and dining options that cater to the everyday needs of the surrounding neighborhoods. With its accessible location at 1000 West Oaks Mall, the property provides ample parking and easy access for visitors throughout the greater Houston metropolitan area. Over the years, West Oaks Mall has adapted to changing retail trends while maintaining its role as a community gathering place for shopping, dining, and entertainment.",
+  "numberOfStores": 75,
+  "squareFootage": 900000,
+  "tier": 2,
+  "spaces": []
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Houston Premium Outlets",
+  "address": "29300 Hempstead Road",
+  "city": "Houston",
+  "state": "TX",
+  "website": "https://www.premiumoutlets.com/outlet/houston",
+  "country": "US",
+  "latitude": 29.996790599999997,
+  "longitude": -95.7567342,
+  "phone": "++1 281-304-5820",
+  "imageURLs": [
+    "/images/malls/tx-houston-premium-outlets-1.jpg"
+  ],
+  "summary": "Off-retail designer outposts selling women's & men's premium apparel, shoes, gifts & accessories.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 17054,
+  "centerType": "OutletCenter",
+  "demographics": "The center primarily attracts middle to upper-middle income households from the Cypress area and greater Houston metropolitan region, with a strong presence of families and value-conscious shoppers seeking premium brands at outlet prices. The trade area encompasses the rapidly growing northwest Houston suburbs, including Cypress, Tomball, and The Woodlands, drawing visitors ranging from young professionals to families with disposable income who prioritize quality shopping at discounted prices. Typical visitors exhibit shopping patterns focused on destination trips for special purchases and seasonal wardrobe updates, with many willing to drive 30-45 minutes for the outlet shopping experience and brand selection not available at traditional retail centers.",
+  "description": "Houston Premium Outlets is a premier outlet shopping destination located in Cypress, Texas, just northwest of Houston. As part of the renowned Premium Outlets collection, this center offers shoppers an exceptional retail experience featuring designer and name-brand merchandise at savings of 25% to 65% every day. The open-air shopping environment provides a comfortable and convenient experience for bargain hunters seeking luxury brands at outlet prices. The center attracts both local Houston residents and tourists looking to maximize their shopping value while enjoying access to a curated collection of high-quality retailers. With its strategic location on Hempstead Road, the outlet center serves as a major retail anchor for the rapidly growing Cypress community and the greater Houston metropolitan area.",
+  "numberOfStores": 145,
+  "squareFootage": 430000,
+  "tier": 2,
+  "spaces": []
+}

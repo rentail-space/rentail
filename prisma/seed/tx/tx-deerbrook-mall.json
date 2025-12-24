@@ -1,0 +1,26 @@
+{
+  "name": "Deerbrook Mall",
+  "address": "20131 Highway 59 North",
+  "city": "Humble",
+  "state": "TX",
+  "website": "https://www.deerbrookmall.com",
+  "country": "US",
+  "latitude": 30.0094843,
+  "longitude": -95.2702395,
+  "phone": "++1 281-446-6626",
+  "imageURLs": [
+    "/images/malls/tx-deerbrook-mall-1.jpg"
+  ],
+  "summary": "Complex with a cinema, department stores & retail outlets for clothing, toys, jewelry & electronics.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 11811,
+  "centerType": "RegionalMall",
+  "demographics": "Deerbrook Mall primarily serves middle-income families and households in the Humble and northeastern Houston area, with a strong representation of young families and working professionals aged 25-54. The trade area encompasses growing suburban communities including Kingwood, Atascocita, and Porter, characterized by moderate to middle-income households with an emphasis on value and convenience. Shoppers at Deerbrook Mall typically seek accessible, everyday retail options and family-friendly amenities, with shopping patterns reflecting a mix of planned trips for specific purchases and browsing visits for entertainment and dining.",
+  "description": "Deerbrook Mall, located at 20131 Highway 59 North in Humble, Texas, serves as a prominent regional shopping destination in the northeastern Houston metropolitan area. The mall has been a cornerstone of the community for decades, providing residents with convenient access to a comprehensive mix of national retailers, dining options, and entertainment venues. Situated along the major Highway 59 corridor, Deerbrook Mall benefits from excellent visibility and accessibility, drawing shoppers from Humble and surrounding communities including Kingwood, Atascocita, and Porter. The enclosed mall format offers a comfortable, climate-controlled shopping environment that appeals to families and individuals seeking a traditional mall experience. With its strategic location in one of Houston's growing suburban markets, Deerbrook Mall continues to serve as a central gathering place for the community's retail and social activities.",
+  "numberOfStores": 70,
+  "squareFootage": 850000,
+  "tier": 2,
+  "spaces": []
+}
