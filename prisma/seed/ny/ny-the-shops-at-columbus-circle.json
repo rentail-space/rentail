@@ -7,9 +7,7 @@
   "country": "US",
   "latitude": 40.7685811,
   "longitude": -73.9831811,
-  "imageURLs": [
-    "/images/malls/ny-the-shops-at-columbus-circle-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ny-the-shops-at-columbus-circle-1.jpg"],
   "summary": "This gallery in the Time Warner Center hosts dozens of retailers, plus dining & nightlife options.",
   "openFrom": 1000,
   "openUntil": 2000,

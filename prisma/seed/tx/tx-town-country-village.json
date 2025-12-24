@@ -8,9 +8,7 @@
   "latitude": 37.4385356,
   "longitude": -122.15945869999999,
   "phone": "++1 650-325-3266",
-  "imageURLs": [
-    "/images/malls/ca-town-country-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-town-country-village-1.jpg"],
   "summary": "Upscale mall with chains & specialty stores, services & eateries amid pedestrian walkways & gardens.",
   "openFrom": 0,
   "openUntil": 2400,

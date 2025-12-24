@@ -8,9 +8,7 @@
   "latitude": 29.6876684,
   "longitude": -95.4619464,
   "phone": "++1 713-664-1166",
-  "imageURLs": [
-    "/images/malls/tx-meyerland-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-meyerland-plaza-1.jpg"],
   "summary": "Huge shopping center with department stores, a gym, dining, electronics, beauty & clothing shops.",
   "openFrom": 700,
   "openUntil": 2200,

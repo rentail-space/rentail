@@ -8,9 +8,7 @@
   "latitude": 37.7842834,
   "longitude": -122.40712,
   "phone": "++1 415-512-6776",
-  "imageURLs": [
-    "/images/malls/ca-westfield-san-francisco-centre-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westfield-san-francisco-centre-1.jpg"],
   "summary": "9-story mall featuring over 170 shops & restaurants, a multiplex & a dome-covered atrium.",
   "openFrom": 1000,
   "openUntil": 2000,

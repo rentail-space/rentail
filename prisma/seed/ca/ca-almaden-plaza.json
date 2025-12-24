@@ -7,9 +7,7 @@
   "country": "US",
   "latitude": 37.251292299999996,
   "longitude": -121.87747139999999,
-  "imageURLs": [
-    "/images/malls/ca-almaden-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-almaden-plaza-1.jpg"],
   "summary": "Large shopping plaza, offering a variety of retail stores, restaurants, banks & other services.",
   "openFrom": 1000,
   "openUntil": 2100,

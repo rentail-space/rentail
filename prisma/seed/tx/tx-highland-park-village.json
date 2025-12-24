@@ -8,9 +8,7 @@
   "latitude": 32.8356649,
   "longitude": -96.8056735,
   "phone": "++1 214-443-9898",
-  "imageURLs": [
-    "/images/malls/tx-highland-park-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-highland-park-village-1.jpg"],
   "summary": "Stylish designer boutiques, shoe stores, gift shops & diverse eateries fill this upscale mall.",
   "openFrom": 1000,
   "openUntil": 1800,

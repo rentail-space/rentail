@@ -8,9 +8,7 @@
   "latitude": 36.1497998,
   "longitude": -115.3330209,
   "phone": "++1 702-832-1000",
-  "imageURLs": [
-    "/images/malls/nv-downtown-summerlin-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/nv-downtown-summerlin-1.jpg"],
   "summary": "Stylish, modern development with clothing & lifestyle stores, restaurants & the Las Vegas Ballpark.",
   "openFrom": 1000,
   "openUntil": 2100,

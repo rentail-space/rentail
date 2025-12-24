@@ -8,9 +8,7 @@
   "latitude": 47.6165932,
   "longitude": -122.19239959999999,
   "phone": "++1 425-456-8795",
-  "imageURLs": [
-    "/images/malls/wa-the-shops-at-the-bravern-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/wa-the-shops-at-the-bravern-1.jpg"],
   "summary": "European-inspired shopping destination with upscale retailers & restaurants, plus valet parking.",
   "openFrom": 1100,
   "openUntil": 1900,

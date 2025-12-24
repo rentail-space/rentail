@@ -8,9 +8,7 @@
   "latitude": 29.780700200000002,
   "longitude": -95.5379007,
   "phone": "++1 713-464-8640",
-  "imageURLs": [
-    "/images/malls/tx-memorial-city-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-memorial-city-mall-1.jpg"],
   "summary": "Large complex with familiar retail shops, dining, movies, a carousel, play area & ice-skating rink.",
   "openFrom": 1000,
   "openUntil": 2100,

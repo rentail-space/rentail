@@ -8,9 +8,7 @@
   "latitude": 40.7086697,
   "longitude": -73.86936659999999,
   "phone": "++1 718-326-3300",
-  "imageURLs": [
-    "/images/malls/ny-the-shops-at-atlas-park-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ny-the-shops-at-atlas-park-1.jpg"],
   "summary": "Shopping mall featuring a landscaped courtyard bordered by stores, eateries & a multiplex cinema.",
   "openFrom": 1000,
   "openUntil": 2100,

@@ -8,9 +8,7 @@
   "latitude": 36.1676389,
   "longitude": -115.28657639999999,
   "phone": "++1 702-534-0000",
-  "imageURLs": [
-    "/images/malls/nv-tivoli-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/nv-tivoli-village-1.jpg"],
   "summary": "Mall with everything from candy to clothing, dining to dog grooming plus kid stuff, salon & gym.",
   "openFrom": 1000,
   "openUntil": 2100,

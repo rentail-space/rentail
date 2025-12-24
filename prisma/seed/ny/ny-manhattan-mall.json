@@ -7,9 +7,7 @@
   "country": "US",
   "latitude": 40.749310699999995,
   "longitude": -73.98929849999999,
-  "imageURLs": [
-    "/images/malls/ny-manhattan-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ny-manhattan-mall-1.jpg"],
   "summary": "1/2 block from the Empire State Building, this indoor mall houses a wide range of retailers.",
   "rating": 4,
   "reviewCount": 7810,

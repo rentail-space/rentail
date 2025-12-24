@@ -8,9 +8,7 @@
   "latitude": 40.864391999999995,
   "longitude": -73.8279165,
   "phone": "++1 718-208-2750",
-  "imageURLs": [
-    "/images/malls/ny-bay-plaza-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ny-bay-plaza-shopping-center-1.jpg"],
   "summary": "Large retail complex with department, discount & specialty stores, services & food/grocery options.",
   "openFrom": 1000,
   "openUntil": 2100,

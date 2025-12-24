@@ -8,9 +8,7 @@
   "latitude": 32.965993,
   "longitude": -97.04276039999999,
   "phone": "++1 972-724-4900",
-  "imageURLs": [
-    "/images/malls/tx-grapevine-mills-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-grapevine-mills-1.jpg"],
   "summary": "Large mall with outlet stores from major brands, plus a food court, a multiplex & kids' activities.",
   "openFrom": 1000,
   "openUntil": 2100,

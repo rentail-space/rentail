@@ -8,9 +8,7 @@
   "latitude": 38.0911435,
   "longitude": -122.55507829999998,
   "phone": "++1 415-897-9999",
-  "imageURLs": [
-    "/images/malls/ca-vintage-oaks-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-vintage-oaks-shopping-center-1.jpg"],
   "summary": "Vintage Oaks Shopping Center is a neighborhood retail destination in Novato, California, offering convenient access to local shops and services. The center serves the surrounding Marin County community with everyday retail and service options.",
   "openFrom": 1000,
   "openUntil": 2200,

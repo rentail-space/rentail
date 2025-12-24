@@ -8,9 +8,7 @@
   "latitude": 32.678639,
   "longitude": -97.398763,
   "phone": "++1 817-294-1205",
-  "imageURLs": [
-    "/images/malls/tx-hulen-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-hulen-mall-1.jpg"],
   "summary": "Relaxed mall with department stores, fashion chains & a food court, plus open-air restaurants.",
   "openFrom": 1100,
   "openUntil": 2100,

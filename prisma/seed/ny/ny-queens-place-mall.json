@@ -8,9 +8,7 @@
   "latitude": 40.7357829,
   "longitude": -73.87441989999999,
   "phone": "++1 718-393-9400",
-  "imageURLs": [
-    "/images/malls/ny-queens-place-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ny-queens-place-mall-1.jpg"],
   "summary": "5-level indoor mall with eateries, big-box shops & a range of retailers from electronics to clothes.",
   "openFrom": 1000,
   "openUntil": 2100,

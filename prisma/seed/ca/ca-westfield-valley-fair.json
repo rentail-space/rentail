@@ -8,9 +8,7 @@
   "latitude": 37.3247587,
   "longitude": -121.9463098,
   "phone": "++1 408-248-4450",
-  "imageURLs": [
-    "/images/malls/ca-westfield-valley-fair-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westfield-valley-fair-1.jpg"],
   "summary": "Westfield Valley Fair is Silicon Valley's premier luxury shopping destination featuring an exceptional collection of high-end retailers including Bloomingdale's, Cartier, Christian Dior, and Patek Philippe. The upscale regional mall offers world-class dining with Din Tai Fung, Eataly, and Mastro's Steakhouse, along with modern amenities like EV charging stations.",
   "openFrom": 1000,
   "openUntil": 2100,

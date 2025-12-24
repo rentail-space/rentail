@@ -8,9 +8,7 @@
   "latitude": 32.929809,
   "longitude": -96.81988059999999,
   "phone": "++1 972-702-7100",
-  "imageURLs": [
-    "/images/malls/tx-galleria-dallas-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-galleria-dallas-1.jpg"],
   "summary": "3-level mall with department stores, dining, shops, a skating rink & hotel under one roof.",
   "openFrom": 1000,
   "openUntil": 2000,

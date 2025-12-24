@@ -8,9 +8,7 @@
   "latitude": 37.6511869,
   "longitude": -122.1021994,
   "phone": "++1 510-782-5050",
-  "imageURLs": [
-    "/images/malls/ca-southland-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-southland-mall-1.jpg"],
   "summary": "Large indoor mall with department & specialty stores, clothing, shoes, electronics & casual dining.",
   "openFrom": 1000,
   "openUntil": 2100,

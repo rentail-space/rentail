@@ -8,9 +8,7 @@
   "latitude": 37.9293142,
   "longitude": -122.51448169999998,
   "phone": "++1 415-924-8588",
-  "imageURLs": [
-    "/images/malls/ca-the-village-at-corte-madera-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-village-at-corte-madera-1.jpg"],
   "summary": "High-end department stores, brand-name shops & dining set amid landscaped pedestrian walkways.",
   "openFrom": 1000,
   "openUntil": 2000,

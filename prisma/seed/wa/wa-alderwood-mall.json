@@ -8,9 +8,7 @@
   "latitude": 47.830763499999996,
   "longitude": -122.270296,
   "phone": "++1 425-778-7675",
-  "imageURLs": [
-    "/images/malls/wa-alderwood-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/wa-alderwood-mall-1.jpg"],
   "summary": "Popular indoor-outdoor mall with chain retailers, department stores, a multiplex & casual eateries.",
   "openFrom": 1100,
   "openUntil": 2000,

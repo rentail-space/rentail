@@ -8,9 +8,7 @@
   "latitude": 37.5262467,
   "longitude": -122.00075450000001,
   "phone": "++1 510-931-5049",
-  "imageURLs": [
-    "/images/malls/ca-newpark-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-newpark-mall-1.jpg"],
   "summary": "Large mall with plentiful shopping, a food court, play areas for kids & a Sunday farmer's market.",
   "openFrom": 1100,
   "openUntil": 2000,

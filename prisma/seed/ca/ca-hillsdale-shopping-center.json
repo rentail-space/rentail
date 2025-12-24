@@ -8,9 +8,7 @@
   "latitude": 37.5378764,
   "longitude": -122.300907,
   "phone": "++1 650-586-7750",
-  "imageURLs": [
-    "/images/malls/ca-hillsdale-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-hillsdale-shopping-center-1.jpg"],
   "summary": "Indoor mall featuring department stores, popular chain retailers & a food terrace for global eats.",
   "openFrom": 1000,
   "openUntil": 2100,

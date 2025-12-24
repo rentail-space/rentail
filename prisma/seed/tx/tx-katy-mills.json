@@ -8,9 +8,7 @@
   "latitude": 29.775634800000002,
   "longitude": -95.80918190000001,
   "phone": "++1 281-644-5000",
-  "imageURLs": [
-    "/images/malls/tx-katy-mills-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-katy-mills-1.jpg"],
   "summary": "Complex with outlet stores for designer clothes, footwear & accessories, plus eateries & movies.",
   "openFrom": 1000,
   "openUntil": 2100,

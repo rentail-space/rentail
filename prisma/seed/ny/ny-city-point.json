@@ -8,9 +8,7 @@
   "latitude": 40.690939799999995,
   "longitude": -73.9830629,
   "phone": "++1 718-673-8800",
-  "imageURLs": [
-    "/images/malls/ny-city-point-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ny-city-point-1.jpg"],
   "summary": "A food hall & cool movie theater lend a happening vibe to this enclosed shopping & dining complex.",
   "openFrom": 700,
   "openUntil": 2100,

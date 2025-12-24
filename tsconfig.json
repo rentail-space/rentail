@@ -1,5 +1,10 @@
 {
-  "include": ["**/*.ts", "**/*.tsx", ".react-router/types/**/*", "app/types/*.d.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".react-router/types/**/*",
+    "app/types/*.d.ts"
+  ],
   "exclude": ["node_modules", "build", ".vercel"],
   "compilerOptions": {
     "baseUrl": ".",

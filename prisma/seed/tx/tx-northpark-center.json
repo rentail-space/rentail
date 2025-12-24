@@ -8,9 +8,7 @@
   "latitude": 32.868639,
   "longitude": -96.77392979999999,
   "phone": "++1 214-363-7441",
-  "imageURLs": [
-    "/images/malls/tx-northpark-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-northpark-center-1.jpg"],
   "summary": "Long-standing, upscale enclosed shopping mall with public art, a movie theater & a library.",
   "openFrom": 1000,
   "openUntil": 2100,

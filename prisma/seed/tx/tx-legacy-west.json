@@ -8,9 +8,7 @@
   "latitude": 33.0810576,
   "longitude": -96.8263461,
   "phone": "++1 469-609-1500",
-  "imageURLs": [
-    "/images/malls/tx-legacy-west-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-legacy-west-1.jpg"],
   "summary": "Stylish shopping street lined with designer stores, chic restaurants & a gourmet food hall.",
   "openFrom": 1000,
   "openUntil": 2100,

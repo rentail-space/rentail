@@ -8,9 +8,7 @@
   "latitude": 32.9981998,
   "longitude": -96.6977555,
   "phone": "++1 214-706-2500",
-  "imageURLs": [
-    "/images/malls/tx-cityline-market-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-cityline-market-1.jpg"],
   "summary": "Shopping center anchored by Whole Foods & CVS also featuring salons & several casual restaurants.",
   "openFrom": 600,
   "openUntil": 2300,

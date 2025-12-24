@@ -7,9 +7,7 @@
   "country": "US",
   "latitude": 37.2923806,
   "longitude": -121.98878329999998,
-  "imageURLs": [
-    "/images/malls/ca-westgate-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westgate-center-1.jpg"],
   "summary": "Standard retail mall with department & discount stores, specialty shops & casual food options.",
   "openFrom": 1000,
   "openUntil": 2100,

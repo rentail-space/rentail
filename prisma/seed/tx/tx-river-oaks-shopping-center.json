@@ -8,9 +8,7 @@
   "latitude": 29.753441,
   "longitude": -95.4073559,
   "phone": "++1 833-800-4343",
-  "imageURLs": [
-    "/images/malls/tx-river-oaks-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-river-oaks-shopping-center-1.jpg"],
   "summary": "Sizable plaza with eateries & stores for apparel, kitchen goods, art & spa, with free valet parking.",
   "openFrom": 1000,
   "openUntil": 2100,

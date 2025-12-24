@@ -8,9 +8,7 @@
   "latitude": 32.9438618,
   "longitude": -97.1301388,
   "phone": "++1 817-329-5566",
-  "imageURLs": [
-    "/images/malls/tx-southlake-town-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-southlake-town-square-1.jpg"],
   "summary": "Open-air shopping district with fine & casual dining, upscale fashion boutiques & year-round events.",
   "openFrom": 1000,
   "openUntil": 2100,

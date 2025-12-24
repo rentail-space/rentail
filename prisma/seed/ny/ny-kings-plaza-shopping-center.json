@@ -8,9 +8,7 @@
   "latitude": 40.610047099999996,
   "longitude": -73.92004969999999,
   "phone": "++1 718-253-6842",
-  "imageURLs": [
-    "/images/malls/ny-kings-plaza-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ny-kings-plaza-shopping-center-1.jpg"],
   "summary": "This indoor mall offers a wide retail mix, including national chain outlets & fast-food stops.",
   "openFrom": 1000,
   "openUntil": 2100,

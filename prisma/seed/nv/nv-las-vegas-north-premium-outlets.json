@@ -8,9 +8,7 @@
   "latitude": 36.1636508,
   "longitude": -115.15774919999998,
   "phone": "++1 702-474-7500",
-  "imageURLs": [
-    "/images/malls/nv-las-vegas-north-premium-outlets-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/nv-las-vegas-north-premium-outlets-1.jpg"],
   "summary": "Large mall with 150 shops of designer & household brands in clothing, accessories, leather & gifts.",
   "openFrom": 1000,
   "openUntil": 2000,

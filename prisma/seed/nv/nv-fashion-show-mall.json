@@ -8,9 +8,7 @@
   "latitude": 36.127477600000006,
   "longitude": -115.17119699999999,
   "phone": "++1 702-784-7000",
-  "imageURLs": [
-    "/images/malls/nv-fashion-show-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/nv-fashion-show-mall-1.jpg"],
   "summary": "Large mall with over 200 shops, 6 department stores & numerous eateries, plus weekly fashion shows.",
   "openFrom": 1000,
   "openUntil": 2100,

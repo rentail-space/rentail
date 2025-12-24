@@ -8,9 +8,7 @@
   "latitude": 36.172508199999996,
   "longitude": -115.1964086,
   "phone": "++1 702-880-6601",
-  "imageURLs": [
-    "/images/malls/nv-meadows-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/nv-meadows-mall-1.jpg"],
   "summary": "Plaza with well-known department stores anchoring clothing, home goods, beauty, tech & toy shops.",
   "openFrom": 1100,
   "openUntil": 2000,

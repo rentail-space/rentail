@@ -8,9 +8,7 @@
   "latitude": 37.3204835,
   "longitude": -121.947858,
   "phone": "++1 408-551-4611",
-  "imageURLs": [
-    "/images/malls/ca-santana-row-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-santana-row-1.jpg"],
   "summary": "Upscale collection of shops, bars & restaurants, with outdoor seating & frequent live music.",
   "openFrom": 1100,
   "openUntil": 2100,

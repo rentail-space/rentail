@@ -8,9 +8,7 @@
   "latitude": 33.1903866,
   "longitude": -97.10790279999999,
   "phone": "++1 940-566-6024",
-  "imageURLs": [
-    "/images/malls/tx-golden-triangle-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-golden-triangle-mall-1.jpg"],
   "summary": "Department store chain with designer apparel, shoes & accessories, beauty products & home goods.",
   "openFrom": 1000,
   "openUntil": 2000,

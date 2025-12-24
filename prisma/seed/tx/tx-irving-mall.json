@@ -8,9 +8,7 @@
   "latitude": 32.8404735,
   "longitude": -96.9950129,
   "phone": "++1 972-255-0572",
-  "imageURLs": [
-    "/images/malls/tx-irving-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-irving-mall-1.jpg"],
   "summary": "Long-standing, bi-level indoor shopping center with department stores, a cinema & a food court.",
   "openFrom": 1100,
   "openUntil": 2000,

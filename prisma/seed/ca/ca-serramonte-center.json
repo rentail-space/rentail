@@ -7,9 +7,7 @@
   "country": "US",
   "latitude": 37.672119099999996,
   "longitude": -122.4708116,
-  "imageURLs": [
-    "/images/malls/ca-serramonte-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-serramonte-center-1.jpg"],
   "summary": "Clothing chain with trendy apparel, shoes & accessories for teen girls & young women.",
   "openFrom": 600,
   "openUntil": 2300,

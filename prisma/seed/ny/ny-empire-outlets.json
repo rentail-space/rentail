@@ -8,9 +8,7 @@
   "latitude": 40.6444979,
   "longitude": -74.0762802,
   "phone": "++1 718-679-9069",
-  "imageURLs": [
-    "/images/malls/ny-empire-outlets-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ny-empire-outlets-1.jpg"],
   "summary": "Empire Outlets is NYC's first and only outlet shopping center, situated on Staten Island's waterfront with stunning views of Manhattan and the Statue of Liberty. This open-air destination offers designer and name-brand outlets with significant savings, creating a unique blend of value shopping and scenic harbor-side experience.",
   "openFrom": 1000,
   "openUntil": 2000,

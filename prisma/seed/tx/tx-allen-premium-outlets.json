@@ -8,9 +8,7 @@
   "latitude": 33.132717899999996,
   "longitude": -96.6607514,
   "phone": "++1 972-678-7000",
-  "imageURLs": [
-    "/images/malls/tx-allen-premium-outlets-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-allen-premium-outlets-1.jpg"],
   "summary": "Outdoor outlet mall with dining options, featuring clothing, accessory, shoe & home stores.",
   "openFrom": 1000,
   "openUntil": 2100,

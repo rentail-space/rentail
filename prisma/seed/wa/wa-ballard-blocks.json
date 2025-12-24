@@ -8,9 +8,7 @@
   "latitude": 47.6627064,
   "longitude": -122.37436470000002,
   "phone": "++1 503-603-4700",
-  "imageURLs": [
-    "/images/malls/wa-ballard-blocks-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/wa-ballard-blocks-1.jpg"],
   "summary": "Ballard Blocks is a neighborhood shopping center situated in Seattle's trendy Ballard district along historic Ballard Avenue NW. This retail destination captures the eclectic, community-oriented spirit of one of Seattle's most walkable and culturally vibrant neighborhoods.",
   "openFrom": 600,
   "openUntil": 2300,

@@ -8,9 +8,7 @@
   "latitude": 47.6120485,
   "longitude": -122.33743249999999,
   "phone": "++1 206-467-1600",
-  "imageURLs": [
-    "/images/malls/wa-westlake-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/wa-westlake-center-1.jpg"],
   "summary": "4-story, glass-enclosed retail center for shopping & dining with a food court.",
   "openFrom": 1100,
   "openUntil": 1900,

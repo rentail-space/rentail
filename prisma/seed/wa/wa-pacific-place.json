@@ -8,9 +8,7 @@
   "latitude": 47.6046229,
   "longitude": -122.3350624,
   "phone": "++1 206-956-1000",
-  "imageURLs": [
-    "/images/malls/wa-pacific-place-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/wa-pacific-place-1.jpg"],
   "summary": "Huge nautical-themed mall with mainstream & luxury shops, eateries & kids' play areas with rides.",
   "openFrom": 1000,
   "openUntil": 2200,

@@ -8,9 +8,7 @@
   "latitude": 32.8377771,
   "longitude": -96.7761238,
   "phone": "++1 469-676-1930",
-  "imageURLs": [
-    "/images/malls/tx-mockingbird-station-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-mockingbird-station-1.jpg"],
   "summary": "Modern shopping mall with boutique & big-name stores, dining options, a cinema & a comedy club.",
   "openFrom": 500,
   "openUntil": 2230,

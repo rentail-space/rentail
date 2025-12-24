@@ -8,9 +8,7 @@
   "latitude": 47.6616885,
   "longitude": -122.2990339,
   "phone": "++1 206-523-0622",
-  "imageURLs": [
-    "/images/malls/wa-university-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/wa-university-village-1.jpg"],
   "summary": "Al fresco shopping center since the 1950s, with local stores, well-known brands & dining options.",
   "openFrom": 1000,
   "openUntil": 2000,

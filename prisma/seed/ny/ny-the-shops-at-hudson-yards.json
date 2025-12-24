@@ -8,9 +8,7 @@
   "latitude": 40.753380299999996,
   "longitude": -74.00106459999999,
   "phone": "++1 646-954-3155",
-  "imageURLs": [
-    "/images/malls/ny-the-shops-at-hudson-yards-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ny-the-shops-at-hudson-yards-1.jpg"],
   "summary": "Sprawling retail space featuring more than 100 shops & 25 restaurants, many from celebrity chefs.",
   "openFrom": 1000,
   "openUntil": 2000,

@@ -8,9 +8,7 @@
   "latitude": 40.7347872,
   "longitude": -73.8688409,
   "phone": "++1 718-592-3900",
-  "imageURLs": [
-    "/images/malls/ny-queens-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ny-queens-center-1.jpg"],
   "summary": "This coliseum-like indoor shopping mall houses dozens of retail stores plus a food court.",
   "openFrom": 1000,
   "openUntil": 2100,

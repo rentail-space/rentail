@@ -8,9 +8,7 @@
   "latitude": 37.834877399999996,
   "longitude": -122.29215440000002,
   "phone": "++1 510-655-4002",
-  "imageURLs": [
-    "/images/malls/ca-bay-street-emeryville-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-bay-street-emeryville-1.jpg"],
   "summary": "Walkable bayside complex with architectural & landscaping features, shopping, restaurants & movies.",
   "openFrom": 1000,
   "openUntil": 2000,

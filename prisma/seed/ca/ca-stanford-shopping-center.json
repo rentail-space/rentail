@@ -8,9 +8,7 @@
   "latitude": 37.4434721,
   "longitude": -122.17129229999999,
   "phone": "++1 650-617-8200",
-  "imageURLs": [
-    "/images/malls/ca-stanford-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-stanford-shopping-center-1.jpg"],
   "summary": "Open-air, garden-lined mall with high-end department stores & boutiques, specialty shops & eateries.",
   "openFrom": 1000,
   "openUntil": 1900,

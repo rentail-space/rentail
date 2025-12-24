@@ -5,9 +5,7 @@
   "state": "WA",
   "website": "https://www.simon.com/mall/northgate-mall",
   "country": "US",
-  "imageURLs": [
-    "/images/malls/wa-northgate-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/wa-northgate-mall-1.jpg"],
   "latitude": 47.70612269999999,
   "longitude": -122.3258649,
   "openFrom": 1000,

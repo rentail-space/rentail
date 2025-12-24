@@ -8,9 +8,7 @@
   "latitude": 33.088515199999996,
   "longitude": -96.68379689999999,
   "phone": "++1 972-747-8000",
-  "imageURLs": [
-    "/images/malls/tx-watters-creek-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-watters-creek-village-1.jpg"],
   "summary": "Scenic neighborhood shopping center featuring an array of stores & eateries plus a kids' play area.",
   "openFrom": 1000,
   "openUntil": 2000,

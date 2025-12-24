@@ -8,9 +8,7 @@
   "latitude": 29.622942300000002,
   "longitude": -95.2278291,
   "phone": "++1 713-944-1010",
-  "imageURLs": [
-    "/images/malls/tx-almeda-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-almeda-mall-1.jpg"],
   "summary": "Casual indoor shopping plaza with department stores, eateries &  clothing, footwear & jewelry shops.",
   "openFrom": 1100,
   "openUntil": 2000,

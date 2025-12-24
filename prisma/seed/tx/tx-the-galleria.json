@@ -8,9 +8,7 @@
   "latitude": 29.7391955,
   "longitude": -95.46343420000001,
   "phone": "++1 713-622-0663",
-  "imageURLs": [
-    "/images/malls/tx-the-galleria-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-the-galleria-1.jpg"],
   "summary": "Bright center with a glass roof offers ice skating & cafes, plus electronics & department stores.",
   "openFrom": 1000,
   "openUntil": 2100,

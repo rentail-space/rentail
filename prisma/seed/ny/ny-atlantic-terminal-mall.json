@@ -8,9 +8,7 @@
   "latitude": 40.684568,
   "longitude": -73.97697699999999,
   "phone": "++1 718-834-3400",
-  "imageURLs": [
-    "/images/malls/ny-atlantic-terminal-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ny-atlantic-terminal-mall-1.jpg"],
   "summary": "Multi-level center with a variety of stores, including big-box chains, plus several dining options.",
   "openFrom": 800,
   "openUntil": 2200,
