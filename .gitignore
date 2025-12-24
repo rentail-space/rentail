@@ -38,4 +38,4 @@ prisma/backup.sql
 .git/beads-worktrees/
 
 # Git worktrees for isolated development
-.worktrees/ 
+.worktrees/ .worktrees/
