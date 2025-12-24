@@ -1,0 +1,26 @@
+{
+  "name": "The Shops at Crystals",
+  "address": "3720 South Las Vegas Boulevard",
+  "city": "Las Vegas",
+  "state": "NV",
+  "website": "https://www.simon.com/mall/the-shops-at-crystals",
+  "country": "US",
+  "latitude": 36.1078894,
+  "longitude": -115.1744628,
+  "phone": "++1 702-590-9299",
+  "imageURLs": [
+    "/images/malls/nv-the-shops-at-crystals-1.jpg"
+  ],
+  "summary": "A tony collection of 40 shops showcasing major couture designers & luxury brands in the Aria Resort.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 9395,
+  "centerType": "LifestyleCenter",
+  "demographics": "The Shops at Crystals attracts an affluent, internationally-diverse clientele with a median household income exceeding $150,000, comprised primarily of high-net-worth tourists (35-65 years old) visiting the Las Vegas Strip and wealthy local residents. The trade area encompasses luxury hotel guests from surrounding CityCenter properties, international shoppers seeking tax-free luxury goods, and established professionals from the greater Las Vegas metropolitan area. Typical visitors demonstrate strong preferences for designer fashion, fine jewelry, and exclusive brand experiences, with shopping patterns reflecting high per-transaction values and brand loyalty. The center's demographic profile skews toward sophisticated consumers who prioritize quality, exclusivity, and premium service over price considerations.",
+  "description": "The Shops at Crystals stands as a premier luxury shopping destination along the iconic Las Vegas Boulevard, offering an unparalleled retail experience in the heart of the Las Vegas Strip. This architectural marvel features a stunning contemporary design with dramatic angles and a crystalline facade that captures the essence of modern luxury. Home to the world's most prestigious fashion houses and luxury brands, Crystals showcases an exceptional collection of high-end retailers including Louis Vuitton, Gucci, Prada, Tom Ford, and Tiffany & Co., among many others. The center seamlessly integrates upscale dining experiences with world-class shopping, creating a sophisticated urban retail environment that caters to discerning international visitors and affluent local residents. As part of the CityCenter complex, Crystals represents the pinnacle of luxury retail in Las Vegas, offering an exclusive shopping sanctuary where elegance and innovation converge.",
+  "numberOfStores": 50,
+  "squareFootage": 500000,
+  "tier": 3,
+  "spaces": []
+}

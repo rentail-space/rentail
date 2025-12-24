@@ -1,0 +1,26 @@
+{
+  "name": "Tivoli Village",
+  "address": "400 South Rampart Boulevard",
+  "city": "Las Vegas",
+  "state": "NV",
+  "website": "https://www.tivolivillagelv.com",
+  "country": "US",
+  "latitude": 36.1676389,
+  "longitude": -115.28657639999999,
+  "phone": "++1 702-534-0000",
+  "imageURLs": [
+    "/images/malls/nv-tivoli-village-1.jpg"
+  ],
+  "summary": "Mall with everything from candy to clothing, dining to dog grooming plus kid stuff, salon & gym.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.6,
+  "reviewCount": 3890,
+  "centerType": "LifestyleCenter",
+  "demographics": "Tivoli Village attracts an affluent demographic primarily consisting of households with annual incomes exceeding $100,000, with a significant concentration of visitors aged 35-65 who are established professionals and retirees residing in the master-planned community of Summerlin. The trade area encompasses one of Las Vegas's most desirable neighborhoods, known for high home values, excellent schools, and a family-oriented lifestyle, drawing visitors who prefer boutique shopping experiences over traditional mall environments. Typical shoppers demonstrate a preference for quality over quantity, seeking unique fashion, artisanal dining experiences, and upscale lifestyle products, with strong evening and weekend traffic driven by the center's restaurant and entertainment offerings.",
+  "description": "Tivoli Village is a premier open-air lifestyle destination located in the heart of Summerlin, Las Vegas, offering a sophisticated European-inspired shopping and dining experience. Named after the famous Tivoli Gardens in Copenhagen, this upscale center features elegant architecture with cobblestone walkways, fountains, and lush landscaping that transport visitors to a charming Mediterranean village. The center has become a coveted gathering place for locals and tourists alike, featuring an impressive collection of upscale boutiques, fine dining restaurants, and entertainment venues. With its carefully curated tenant mix of both national and local retailers, Tivoli Village caters to discerning shoppers seeking unique fashion, home décor, and lifestyle products in an elegant outdoor setting. The center regularly hosts community events, live music, and seasonal celebrations, making it not just a shopping destination but a vibrant social hub in one of Las Vegas's most affluent neighborhoods.",
+  "numberOfStores": 40,
+  "squareFootage": 350000,
+  "tier": 3,
+  "spaces": []
+}

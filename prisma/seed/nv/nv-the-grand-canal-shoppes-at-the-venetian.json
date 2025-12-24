@@ -1,0 +1,26 @@
+{
+  "name": "The Grand Canal Shoppes at The Venetian",
+  "address": "3377 Las Vegas Boulevard South",
+  "city": "Las Vegas",
+  "state": "NV",
+  "website": "https://www.grandcanalshoppes.com",
+  "country": "US",
+  "latitude": 36.1223898,
+  "longitude": -115.1674242,
+  "phone": "++1 702-414-4525",
+  "imageURLs": [
+    "/images/malls/nv-the-grand-canal-shoppes-at-the-venetian-1.jpg"
+  ],
+  "summary": "Upscale resort mall with a range of shops including designer fashion, toys & tech, music & gifts.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.6,
+  "reviewCount": 17997,
+  "centerType": "LifestyleCenter",
+  "demographics": "The Grand Canal Shoppes attracts an affluent, international visitor base with a strong tourism component, drawing millions of visitors annually to the Las Vegas Strip. The primary demographic consists of middle-to-upper income tourists aged 25-65, including high-spending international travelers, luxury shoppers, and entertainment seekers with household incomes exceeding $75,000. The trade area extends globally given its location within The Venetian Resort, with a significant mix of leisure travelers, convention attendees, and domestic tourists seeking premium shopping and dining experiences. Visitor spending patterns skew toward luxury goods, experiential purchases, and upscale dining, with peak traffic occurring during weekends, holidays, and major convention periods.",
+  "description": "The Grand Canal Shoppes at The Venetian Resort Las Vegas is an extraordinary shopping destination located on the famous Las Vegas Strip, offering an immersive Venetian-themed experience that transports visitors to the romantic streets of Venice. This premier retail destination features over 160 signature stores and premier luxury brands, combined with more than a dozen award-winning dining venues that cater to discerning tastes. The center's unique atmosphere is enhanced by daily live entertainment, romantic gondola rides beneath painted skies, and a stunning waterfall and garden display in the Atrium. Managed by Brookfield Properties, this upscale shopping venue seamlessly blends retail therapy with entertainment, creating a memorable experience for both tourists and locals alike. The Venetian-inspired architecture, complete with cobblestone walkways and canal-side shopping, makes it one of the most distinctive and vibrant shopping destinations in Las Vegas.",
+  "numberOfStores": 160,
+  "squareFootage": 500000,
+  "tier": 3,
+  "spaces": []
+}

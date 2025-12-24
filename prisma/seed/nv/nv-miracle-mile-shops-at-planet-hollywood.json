@@ -1,0 +1,26 @@
+{
+  "name": "Miracle Mile Shops at Planet Hollywood",
+  "address": "3663 Las Vegas Boulevard South",
+  "city": "Las Vegas",
+  "state": "NV",
+  "website": "https://www.miraclemileshopslv.com",
+  "country": "US",
+  "latitude": 36.1093404,
+  "longitude": -115.17257280000001,
+  "phone": "++1 702-866-0703",
+  "imageURLs": [
+    "/images/malls/nv-miracle-mile-shops-at-planet-hollywood-1.jpg"
+  ],
+  "summary": "Indoor mall with popular chain stores, restaurants, a rainstorm water feature & live entertainment.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.5,
+  "reviewCount": 23540,
+  "centerType": "LifestyleCenter",
+  "demographics": "The shopping center primarily attracts tourists visiting Las Vegas, with a demographic mix spanning middle to upper-middle income visitors aged 25-55 who are drawn to the Strip's entertainment and hospitality offerings. The trade area includes both domestic and international tourists staying at Planet Hollywood Resort and nearby casino hotels, as well as local Las Vegas residents seeking upscale shopping and dining experiences. Typical visitors demonstrate high discretionary spending patterns focused on entertainment, dining, and impulse shopping purchases characteristic of Las Vegas tourism, with extended evening and weekend shopping hours catering to the 24-hour lifestyle of Strip visitors.",
+  "description": "Miracle Mile Shops at Planet Hollywood is a premier indoor shopping, dining, and entertainment destination located in the heart of the Las Vegas Strip inside the iconic Planet Hollywood Resort and Casino. This spectacular shopping center features over 150 stores, offering visitors a shopper's paradise with an impressive mix of retail, dining, and live entertainment options. The center is designed as an enclosed, climate-controlled environment that provides a unique shopping experience with its distinctive atmosphere and convenient location directly connected to one of Las Vegas's most popular casino resorts. Miracle Mile Shops has positioned itself as one of the most sought-after shopping malls on the Las Vegas Strip, combining retail therapy with world-class dining experiences and memorable live shows. The center offers extended hours to accommodate the 24/7 lifestyle of Las Vegas, operating Sunday through Thursday from 10 AM to 9 PM, and Friday through Saturday from 10 AM to 10 PM, with special holiday hours to serve both tourists and locals alike.",
+  "numberOfStores": 150,
+  "squareFootage": 475000,
+  "tier": 2,
+  "spaces": []
+}

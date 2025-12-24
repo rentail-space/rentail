@@ -1,0 +1,26 @@
+{
+  "name": "Las Vegas South Premium Outlets",
+  "address": "7400 Las Vegas Boulevard South",
+  "city": "Las Vegas",
+  "state": "NV",
+  "website": "https://www.premiumoutlets.com/outlet/las-vegas-south",
+  "country": "US",
+  "latitude": 36.0539333,
+  "longitude": -115.16892829999999,
+  "phone": "++1 702-896-5599",
+  "imageURLs": [
+    "/images/malls/nv-las-vegas-south-premium-outlets-1.jpg"
+  ],
+  "summary": "Large mall with 140 shops of designer & household brands in clothing, accessories, leather & gifts.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 23136,
+  "centerType": "OutletCenter",
+  "demographics": "The shopping center attracts a diverse mix of tourists and Las Vegas residents, with significant visitor traffic from middle to upper-middle income households seeking value on premium brands. The trade area draws heavily from international tourists and domestic visitors to Las Vegas, typically aged 25-55, who are looking to combine entertainment with shopping opportunities. Primary shoppers include fashion-conscious consumers, families seeking brand-name goods at outlet prices, and bargain hunters with moderate to high disposable incomes. The center benefits from Las Vegas's year-round tourism, capturing both leisure travelers staying on the Strip and locals from surrounding suburban communities who appreciate the outlet pricing model.",
+  "description": "Las Vegas South Premium Outlets is a premier outlet shopping destination located at 7400 Las Vegas Boulevard South in Las Vegas, Nevada. As part of the Premium Outlets collection, this outdoor shopping center offers visitors access to designer and brand-name merchandise at exceptional savings, featuring outlet stores from top fashion, accessories, and lifestyle brands. The center's strategic location along the Las Vegas Strip corridor makes it easily accessible for both tourists and locals seeking quality shopping experiences. With its open-air layout designed for the desert climate, shoppers can enjoy a comfortable browsing experience while discovering deals from their favorite retailers. The center provides a perfect complement to the Las Vegas experience, offering visitors a chance to take home luxury goods at outlet prices.",
+  "numberOfStores": 140,
+  "squareFootage": 375000,
+  "tier": 2,
+  "spaces": []
+}
