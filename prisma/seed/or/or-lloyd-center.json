@@ -1,0 +1,26 @@
+{
+  "name": "Lloyd Center",
+  "address": "2201 Lloyd Center",
+  "city": "Portland",
+  "state": "OR",
+  "website": "https://www.lloydcenter.com",
+  "country": "US",
+  "latitude": 45.532561099999995,
+  "longitude": -122.65358610000001,
+  "phone": "++1 503-528-8515",
+  "imageURLs": [
+    "/images/malls/or-lloyd-center-1.jpg"
+  ],
+  "summary": "Energetic mall with chain stores, restaurants & an indoor ice-skating rink open year-round.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 3.8,
+  "reviewCount": 10806,
+  "centerType": "RegionalMall",
+  "demographics": "Lloyd Center serves a diverse urban trade area in Northeast Portland with a mix of young professionals, families, and students drawn from the surrounding Lloyd District and inner eastside neighborhoods. The primary market includes middle-income households with varied ethnic backgrounds, reflecting Portland's increasingly diverse population, along with transit-dependent shoppers who access the mall via the adjacent MAX light rail station. Typical visitors range from value-conscious shoppers seeking everyday retail needs to local residents using the center for convenience shopping and dining options.",
+  "description": "Lloyd Center, located in Portland, Oregon, stands as one of the Pacific Northwest's historic shopping destinations. Originally opened in 1960, it was one of the largest shopping centers in the United States at the time and featured an innovative open-air design before being enclosed in 1990. The mall has served generations of Portland families as a central retail and community gathering place in the Lloyd District neighborhood. Over the decades, Lloyd Center has undergone various transformations to adapt to changing retail landscapes while maintaining its role as an important shopping destination in Northeast Portland. The center offers a diverse mix of retail stores, dining options, and services that cater to the surrounding urban community.",
+  "numberOfStores": 50,
+  "squareFootage": 1100000,
+  "tier": 1,
+  "spaces": []
+}

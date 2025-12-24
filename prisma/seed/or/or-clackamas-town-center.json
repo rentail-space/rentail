@@ -1,0 +1,26 @@
+{
+  "name": "Clackamas Town Center",
+  "address": "12000 Southeast 82nd Avenue",
+  "city": "Happy Valley",
+  "state": "OR",
+  "website": "https://www.clackamastowncenter.com",
+  "country": "US",
+  "latitude": 45.4358909,
+  "longitude": -122.57328940000001,
+  "phone": "++1 503-653-6613",
+  "imageURLs": [
+    "/images/malls/or-clackamas-town-center-1.jpg"
+  ],
+  "summary": "Chain retailer offering trendy, brand-name clothing & shoes, plus gear for skate- & snowboarders.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 13765,
+  "centerType": "RegionalMall",
+  "demographics": "Clackamas Town Center serves a diverse suburban market in the Portland metro area, primarily attracting middle to upper-middle-income families from Happy Valley and surrounding Clackamas County communities. The trade area includes a mix of young families, professionals, and established households with moderate to high disposable incomes who seek convenient one-stop shopping for retail, dining, and entertainment. Visitors typically include multi-generational shoppers drawn to the center's broad tenant mix spanning value retailers to mid-tier brands, along with moviegoers and diners taking advantage of Oregon's largest restaurant collection.",
+  "description": "Clackamas Town Center stands as one of the premier shopping destinations in the Portland metro area, located in Happy Valley, Oregon. This expansive enclosed regional mall offers an exceptional retail experience with a diverse mix of stores and the largest collection of restaurants in Oregon, making it a true destination for shopping, dining, and entertainment. The center features a 20-screen Century Theatres, providing a complete entertainment experience for visitors. Managed by Brookfield Properties, Clackamas Town Center combines traditional mall anchors with popular retail chains like J.Crew Factory and specialty stores like Banter by Piercing Pagoda. The mall enhances the visitor experience with seasonal attractions including Photos with Santa during the holidays and extended holiday hours to accommodate busy shoppers throughout the festive season.",
+  "numberOfStores": 100,
+  "squareFootage": 1200000,
+  "tier": 2,
+  "spaces": []
+}

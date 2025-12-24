@@ -1,0 +1,26 @@
+{
+  "name": "Bridgeport Village",
+  "address": "7455 Southwest Bridgeport Road",
+  "city": "Tigard",
+  "state": "OR",
+  "website": "https://www.bridgeportvillage.com",
+  "country": "US",
+  "latitude": 45.3957237,
+  "longitude": -122.75282439999998,
+  "phone": "++1 503-968-1704",
+  "imageURLs": [
+    "/images/malls/or-bridgeport-village-1.jpg"
+  ],
+  "summary": "Outdoor shopping complex featuring entertainment, high-end retailers & sit-down & casual dining.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 4688,
+  "centerType": "LifestyleCenter",
+  "demographics": "Bridgeport Village primarily attracts affluent shoppers from the southwest Portland metropolitan area, including nearby Tigard, Lake Oswego, and Beaverton, with a customer base skewing toward middle to upper-middle income households with annual incomes exceeding $75,000. The typical visitor demographic includes families with children, professional couples aged 30-55, and educated consumers who value quality brands and a pleasant shopping environment. The trade area is characterized by high homeownership rates, strong educational attainment levels, and a preference for lifestyle retail experiences over traditional enclosed malls, with shoppers drawn to the center's mix of fashion retailers, home goods stores, and upscale casual dining options.",
+  "description": "Bridgeport Village is a premier open-air lifestyle shopping destination located in the Tigard area of greater Portland, Oregon. Since opening in 2005, this upscale shopping center has established itself as a favorite among Portland-area residents seeking a sophisticated retail and dining experience. The center features a carefully curated mix of national retailers, upscale boutiques, and popular dining establishments arranged in an attractive outdoor village setting with European-inspired architecture and landscaping. With its pedestrian-friendly layout, covered walkways, and pleasant common areas, Bridgeport Village offers a refined alternative to traditional enclosed malls. The center serves as a regional shopping hub for the southwest Portland metro area, drawing visitors from across the region who appreciate its blend of quality retailers, diverse restaurant options, and inviting atmosphere.",
+  "numberOfStores": 65,
+  "squareFootage": 500000,
+  "tier": 3,
+  "spaces": []
+}

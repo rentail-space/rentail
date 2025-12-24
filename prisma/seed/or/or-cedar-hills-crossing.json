@@ -1,0 +1,26 @@
+{
+  "name": "Cedar Hills Crossing",
+  "address": "3205 Southwest Cedar Hills Boulevard",
+  "city": "Beaverton",
+  "state": "OR",
+  "website": "https://www.cedarhillscrossing.com",
+  "country": "US",
+  "latitude": 45.496112499999995,
+  "longitude": -122.81195369999999,
+  "phone": "++1 503-643-6563",
+  "imageURLs": [
+    "/images/malls/or-cedar-hills-crossing-1.jpg"
+  ],
+  "summary": "Expansive shopping complex with apparel retailers, informal dining options & a movie theater.",
+  "openFrom": 800,
+  "openUntil": 2000,
+  "rating": 4.2,
+  "reviewCount": 8081,
+  "centerType": "RegionalMall",
+  "demographics": "Cedar Hills Crossing primarily serves middle-income families and households in the Beaverton and Southwest Portland suburbs, with a strong presence of young families with children as evidenced by the concentration of children-focused tenants like dance studios, kids' hair salons, and toy stores. The trade area encompasses suburban residential neighborhoods with a mix of homeowners and renters who seek convenient, value-oriented shopping options close to home. Typical visitors are budget-conscious shoppers looking for everyday retail needs, family dining, and specialty services, with shopping patterns showing preference for practical, accessible retail over luxury experiences.",
+  "description": "Cedar Hills Crossing, formerly known as Beaverton Mall, is a vibrant retail shopping center located in Beaverton, Oregon, serving the Portland metropolitan area. This enclosed regional mall features approximately 100 shops and restaurants, making it a comprehensive destination for shopping, dining, and entertainment in the Southwest Portland suburbs. The center has undergone significant transformation and revitalization, welcoming exciting new tenants including Goodskin Dermatology, Dance Togs, MVP Dance Elite, Lovely Kuddle'z, and the boutique kids' hair salon Snips & Styles. With convenient hours operating Monday through Saturday from 9am to 9pm and Sundays from 10am to 9pm, Cedar Hills Crossing provides a welcoming environment where families can shop, eat, and play. The center embraces community engagement through initiatives like hosting Santa experiences during the holidays and supporting the Salvation Army Angel Tree program, demonstrating its commitment to being more than just a shopping destination but a true community gathering place.",
+  "numberOfStores": 100,
+  "squareFootage": 450000,
+  "tier": 2,
+  "spaces": []
+}

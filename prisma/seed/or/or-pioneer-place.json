@@ -1,0 +1,26 @@
+{
+  "name": "Pioneer Place",
+  "address": "700 Southwest 5th Avenue",
+  "city": "Portland",
+  "state": "OR",
+  "website": "https://www.pioneerplace.com",
+  "country": "US",
+  "latitude": 45.518354699999996,
+  "longitude": -122.67729999999999,
+  "phone": "++1 503-228-5800",
+  "imageURLs": [
+    "/images/malls/or-pioneer-place-1.jpg"
+  ],
+  "summary": "Chain known for unique gadgets, gifts & lifestyle items, such as electronics & travel accessories.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.2,
+  "reviewCount": 5703,
+  "centerType": "RegionalMall",
+  "demographics": "Pioneer Place attracts a diverse urban demographic including downtown Portland professionals, young adults aged 25-45, and tourists visiting the city center. The trade area serves higher-income urban dwellers and suburban shoppers drawn to the downtown location, with household incomes typically ranging from middle to upper-middle class. Visitors include office workers seeking convenient lunch and after-work shopping, urban residents preferring walkable retail experiences, and tourists staying in nearby hotels, with shopping patterns favoring fashion-forward brands, quick-service dining, and entertainment options like the on-site movie theater.",
+  "description": "Pioneer Place stands as Portland's premier downtown shopping destination, located in the heart of the city's bustling business district at 700 SW 5th Avenue. This enclosed regional mall offers an unparalleled shopping experience with a carefully curated mix of fashion and beauty brands alongside some of Portland's favorite restaurant and food options. Managed by Brookfield Properties, Pioneer Place features convenient downtown access with extended holiday hours to serve the community during peak shopping seasons. The center includes a Regal movie theater, providing entertainment beyond retail, and offers special discounts for students, educators, military personnel, and first responders. With its prime location in Portland's urban core, Pioneer Place serves as both a shopping hub and gathering place for residents, tourists, and downtown professionals seeking quality retail experiences.",
+  "numberOfStores": 50,
+  "squareFootage": 450000,
+  "tier": 2,
+  "spaces": []
+}

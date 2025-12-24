@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Bridgeport Village",
+    "address": "7455 SW Bridgeport Road",
+    "city": "Portland",
+    "state": "OR",
+    "website": "https://www.bridgeportvillage.com"
+  },
+  {
+    "name": "Cascade Station",
+    "address": "9000 NE Cascades Parkway",
+    "city": "Portland",
+    "state": "OR",
+    "website": "https://www.cascadestation.com"
+  },
+  {
+    "name": "Cedar Hills Crossing",
+    "address": "3205 SW Cedar Hills Boulevard",
+    "city": "Portland",
+    "state": "OR",
+    "website": "https://www.cedarhillscrossing.com"
+  },
+  {
+    "name": "Clackamas Town Center",
+    "address": "12000 SE 82nd Avenue",
+    "city": "Portland",
+    "state": "OR",
+    "website": "https://www.clackamastowncenter.com"
+  },
+  {
+    "name": "Lloyd Center",
+    "address": "2201 Lloyd Center",
+    "city": "Portland",
+    "state": "OR",
+    "website": "https://www.lloydcenter.com"
+  },
+  {
+    "name": "Pioneer Place",
+    "address": "700 SW 5th Avenue",
+    "city": "Portland",
+    "state": "OR",
+    "website": "https://www.pioneerplace.com"
+  },
+  {
+    "name": "Washington Square",
+    "address": "9585 SW Washington Square Road",
+    "city": "Portland",
+    "state": "OR",
+    "website": "https://www.washingtonSquare.com"
+  }
+]

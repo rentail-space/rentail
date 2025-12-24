@@ -1,0 +1,26 @@
+{
+  "name": "Washington Square",
+  "address": "9585 Southwest Washington Square Road",
+  "city": "Portland",
+  "state": "OR",
+  "website": "https://www.washingtonSquare.com",
+  "country": "US",
+  "latitude": 45.4502491,
+  "longitude": -122.78121829999999,
+  "phone": "++1 503-639-8860",
+  "imageURLs": [
+    "/images/malls/or-washington-square-1.jpg"
+  ],
+  "summary": "Large shopping center with a variety of department stores, specialty shops & food options.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 15625,
+  "centerType": "RegionalMall",
+  "demographics": "Washington Square attracts a diverse demographic from Portland's affluent southwestern suburbs, including Tigard, Beaverton, and Lake Oswego, with a strong representation of middle to upper-middle-class families with household incomes ranging from $75,000 to $150,000+. The trade area encompasses well-educated professionals aged 25-54, tech industry workers from the nearby Silicon Forest, and families with children who value quality retailers and convenient shopping experiences. The center draws visitors seeking a mix of affordable national brands and aspirational retailers, with shopping patterns reflecting both destination visits for specific purchases and extended browsing sessions that include dining and entertainment.",
+  "description": "Washington Square, located in Portland, Oregon, stands as one of the Pacific Northwest's premier shopping destinations, serving the greater Portland metropolitan area since its opening. This expansive regional mall offers visitors a comprehensive retail experience with an impressive selection of national retailers, department stores, and specialty shops all under one roof. The center's convenient location at 9585 SW Washington Square Road provides easy access for shoppers throughout the region, making it a go-to destination for both everyday needs and special purchases. Washington Square combines traditional mall amenities with modern conveniences, creating a comfortable environment where families and individuals can shop, dine, and spend quality time together. The mall continues to evolve with changing retail trends while maintaining its position as a cornerstone of the Portland retail landscape.",
+  "numberOfStores": 140,
+  "squareFootage": 1300000,
+  "tier": 2,
+  "spaces": []
+}
