@@ -323,12 +323,9 @@ function AllUsers({ users }: { users: User[] }) {
         cell: ({ row }) => (
           <span className="flex flex-row items-center justify-between gap-2">
             <span className="w-48">
-              {DateTime.fromJSDate(row.original.createdAt)
-                .setZone(
-                  (row.original.geocode as { timeZone: string }).timeZone ??
-                    "UTC",
-                )
-                .toFormat("yyyy-MM-dd HH:mm")}
+              {DateTime.fromJSDate(row.original.createdAt).toFormat(
+                "yyyy-MM-dd HH:mm",
+              )}
             </span>
             <span className="w-24">{timeAgo(row.original.createdAt)}</span>
           </span>
