@@ -218,7 +218,8 @@ export async function geocodeFromUserInput(location: {
       lon: string;
     }>;
     invariant(results.length > 0, "No results found");
-    const displayName = results[0].display_name;
+    // NOTE: Handle strings like "Las%20Vegas, NV, US" properly.
+    const displayName = decodeURIComponent(results[0].display_name);
 
     logger("Geocoded location from user input %s => %s", query, displayName);
     return {
