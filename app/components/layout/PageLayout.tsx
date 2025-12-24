@@ -112,8 +112,8 @@ export default function PageLayout({
         </NuqsAdapter>
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === "production" && <Analytics />}
-        {process.env.NODE_ENV === "production" && <SpeedInsights />}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -139,9 +139,9 @@ async function geocodeFromIP(
       state_code: string; // eg "US-CA",
     };
   };
-  const city = data.location.city;
-  const country = data.location.country_code2;
-  const state = data.location.state_code.split("-")[1];
+  const city = decodeURIComponent(data.location.city);
+  const country = decodeURIComponent(data.location.country_code2);
+  const state = decodeURIComponent(data.location.state_code.split("-")[1]);
   const displayName = [city, state, country].filter(Boolean).join(", ");
   logger("Geocoded location from IP %s => %s", ip, displayName);
 
