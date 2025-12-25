@@ -3,11 +3,13 @@
   "address": "200 Broadway",
   "city": "Manhattan, New York",
   "state": "NY",
-  "website": "https://www.westfield.com/fultoncenter",
+  "website": "http://www.fultoncenternyc.com/",
   "country": "US",
   "latitude": 40.710557,
   "longitude": -74.0089723,
-  "imageURLs": ["/images/malls/ny-the-fulton-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ny-the-fulton-center-1.jpg"
+  ],
   "summary": "Sleek retail center at a subway station featuring a circular layout with a spiral staircase.",
   "openFrom": 0,
   "openUntil": 2400,

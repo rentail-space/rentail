@@ -3,13 +3,15 @@
   "address": "14006 Riverside Drive",
   "city": "Los Angeles",
   "state": "CA",
-  "website": "https://www.westfield.com/",
+  "website": "https://www.westfield.com/united-states/fashionsquare/",
   "latitude": 34.1569734,
   "longitude": -118.4374051,
   "country": "US",
   "phone": "+18187830550",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-westfield-fashion-square-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-westfield-fashion-square-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.4,

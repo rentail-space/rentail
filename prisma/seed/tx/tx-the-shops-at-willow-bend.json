@@ -3,12 +3,14 @@
   "address": "6121 West Park Boulevard",
   "city": "Plano",
   "state": "TX",
-  "website": "https://www.theshopsatwillowbend.com",
+  "website": "https://www.shopwillowbend.com/",
   "country": "US",
   "latitude": 33.0308529,
   "longitude": -96.8320851,
   "phone": "++1 972-202-4900",
-  "imageURLs": ["/images/malls/tx-the-shops-at-willow-bend-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-the-shops-at-willow-bend-1.jpg"
+  ],
   "summary": "Low-key mall with department stores, national chains & a food court, plus sit-down restaurants.",
   "openFrom": 1100,
   "openUntil": 2000,

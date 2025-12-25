@@ -3,12 +3,14 @@
   "address": "3699 McKinney Avenue",
   "city": "Dallas",
   "state": "TX",
-  "website": "https://www.westvillagedallas.com",
+  "website": "http://www.westvillagedallas.com/",
   "country": "US",
   "latitude": 32.808715899999996,
   "longitude": -96.7961747,
   "phone": "++1 469-759-2890",
-  "imageURLs": ["/images/malls/tx-west-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-west-village-1.jpg"
+  ],
   "summary": "Laid-back retail complex with fashion boutiques, fitness studios, restaurants & a movie theater.",
   "openFrom": 1100,
   "openUntil": 1900,

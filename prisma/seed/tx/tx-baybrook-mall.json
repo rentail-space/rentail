@@ -3,12 +3,14 @@
   "address": "500 Baybrook Mall",
   "city": "Friendswood",
   "state": "TX",
-  "website": "https://www.simon.com/mall/baybrook-mall",
+  "website": "https://www.baybrookmall.com/en.html",
   "country": "US",
   "latitude": 29.5427508,
   "longitude": -95.14850799999999,
   "phone": "++1 281-667-9100",
-  "imageURLs": ["/images/malls/tx-baybrook-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-baybrook-mall-1.jpg"
+  ],
   "summary": "Casual shopping plaza with stores for apparel, footwear, jewelry, home goods & kids, plus dining.",
   "openFrom": 1000,
   "openUntil": 2100,

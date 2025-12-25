@@ -3,12 +3,14 @@
   "address": "730 South Rampart Boulevard",
   "city": "Las Vegas",
   "state": "NV",
-  "website": "https://www.bocapark.com",
+  "website": "https://www.bocaparklv.com/",
   "country": "US",
   "latitude": 36.1626015,
   "longitude": -115.28815499999999,
   "phone": "++1 702-213-4513",
-  "imageURLs": ["/images/malls/nv-boca-park-fashion-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/nv-boca-park-fashion-village-1.jpg"
+  ],
   "summary": "Boca Park Fashion Village is an upscale open-air lifestyle center in Las Vegas that offers a sophisticated mix of premium retail, dining, and entertainment options. Serving the affluent Summerlin area, it provides a refined shopping experience with its walkable design and carefully curated tenant selection.",
   "openFrom": 700,
   "openUntil": 2300,

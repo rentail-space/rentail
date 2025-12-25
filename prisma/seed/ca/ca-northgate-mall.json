@@ -3,12 +3,14 @@
   "address": "401 Northeast Northgate Way",
   "city": "Seattle",
   "state": "WA",
-  "website": "https://www.northgatemall.com",
+  "website": "https://www.shopatnorthgate.com",
   "country": "US",
   "latitude": 47.706122699999995,
   "longitude": -122.32586490000001,
   "phone": "++1 206-362-4777",
-  "imageURLs": ["/images/malls/wa-northgate-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/wa-northgate-mall-1.jpg"
+  ],
   "summary": "Indoor shopping mall with department stores, a play area & a couple dozen eateries.",
   "openFrom": 1000,
   "openUntil": 2000,

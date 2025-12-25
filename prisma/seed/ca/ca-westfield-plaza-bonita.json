@@ -3,13 +3,15 @@
   "address": "3030 Plaza Bonita Road",
   "city": "National City",
   "state": "CA",
-  "website": "https://www.westfield.com/",
+  "website": "https://www.westfield.com/en/united-states/plazabonita",
   "latitude": 32.6559042,
   "longitude": -117.0654853,
   "country": "US",
   "phone": "+16192672850",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-westfield-plaza-bonita-1.png"],
+  "imageURLs": [
+    "/images/malls/ca-westfield-plaza-bonita-1.png"
+  ],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.5,

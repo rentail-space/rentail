@@ -3,13 +3,15 @@
   "address": "7007 Friars Road",
   "city": "San Diego",
   "state": "CA",
-  "website": "https://www.simon.com/",
+  "website": "https://www.simon.com/mall/fashion-valley",
   "latitude": 32.7681182,
   "longitude": -117.1667284,
   "country": "US",
   "phone": "+16196889113",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-fashion-valley-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-fashion-valley-1.jpg"
+  ],
   "summary": "Large shopping center with chain department stores, a movie theater & casual dining options.",
   "openFrom": 1000,
   "openUntil": 2100,

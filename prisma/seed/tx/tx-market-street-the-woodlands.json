@@ -3,12 +3,14 @@
   "address": "9595 Six Pines Drive",
   "city": "The Woodlands",
   "state": "TX",
-  "website": "https://www.marketstreet-thewoodlands.com",
+  "website": "https://shopatmarketstreet.com",
   "country": "US",
   "latitude": 30.1638371,
   "longitude": -95.4635036,
   "phone": "++1 281-419-4774",
-  "imageURLs": ["/images/malls/tx-market-street-the-woodlands-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-market-street-the-woodlands-1.jpg"
+  ],
   "summary": "Trendy, mixed-use town center housing luxury retailers, upscale restaurants, bars & a movie theater.",
   "openFrom": 1000,
   "openUntil": 2000,

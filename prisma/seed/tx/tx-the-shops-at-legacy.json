@@ -3,12 +3,14 @@
   "address": "5741 Legacy Drive",
   "city": "Plano",
   "state": "TX",
-  "website": "https://www.theshopsatlegacy.com",
+  "website": "https://www.shopsatlegacy.com",
   "country": "US",
   "latitude": 33.078619499999995,
   "longitude": -96.8211311,
   "phone": "++1 469-467-9995",
-  "imageURLs": ["/images/malls/tx-the-shops-at-legacy-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-the-shops-at-legacy-1.jpg"
+  ],
   "summary": "Spacious shopping mall housing upscale retailers & beauty services, plus various eateries.",
   "openFrom": 1000,
   "openUntil": 2200,

@@ -3,12 +3,14 @@
   "address": "800 Town and Country Boulevard",
   "city": "Houston",
   "state": "TX",
-  "website": "https://www.citycentrehouston.com",
+  "website": "https://www.citycentrehouston.com/",
   "country": "US",
   "latitude": 29.781022800000002,
   "longitude": -95.55926679999999,
   "phone": "++1 713-463-4692",
-  "imageURLs": ["/images/malls/tx-citycentre-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-citycentre-1.jpg"
+  ],
   "summary": "Contemporary shopping compound featuring brand-name stores, restaurants & live music in the plaza.",
   "openFrom": 0,
   "openUntil": 2400,

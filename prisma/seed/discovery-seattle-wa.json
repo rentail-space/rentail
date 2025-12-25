@@ -3,56 +3,48 @@
     "name": "Alderwood Mall",
     "address": "3000 184th Street SW",
     "city": "Seattle",
-    "state": "WA",
-    "website": "https://www.simon.com/mall/alderwood"
+    "state": "WA"
   },
   {
     "name": "Ballard Blocks",
     "address": "5400 Ballard Avenue NW",
     "city": "Seattle",
-    "state": "WA",
-    "website": "https://www.ballardblocks.com"
+    "state": "WA"
   },
   {
     "name": "Northgate Mall",
     "address": "401 NE Northgate Way",
     "city": "Seattle",
-    "state": "WA",
-    "website": "https://www.simon.com/mall/northgate-mall"
+    "state": "WA"
   },
   {
     "name": "Pacific Place",
     "address": "600 Pine Street",
     "city": "Seattle",
-    "state": "WA",
-    "website": "https://www.pacificplaceseattle.com"
+    "state": "WA"
   },
   {
     "name": "Southcenter Mall",
     "address": "2800 Southcenter Mall",
     "city": "Seattle",
-    "state": "WA",
-    "website": "https://www.westfield.com/southcenter"
+    "state": "WA"
   },
   {
     "name": "The Shops at The Bravern",
     "address": "11111 NE 8th Street",
     "city": "Seattle",
-    "state": "WA",
-    "website": "https://www.thebravern.com"
+    "state": "WA"
   },
   {
     "name": "University Village",
     "address": "2623 NE University Village Street",
     "city": "Seattle",
-    "state": "WA",
-    "website": "https://www.uvillage.com"
+    "state": "WA"
   },
   {
     "name": "Westlake Center",
     "address": "400 Pine Street",
     "city": "Seattle",
-    "state": "WA",
-    "website": "https://www.westlakecenter.com"
+    "state": "WA"
   }
 ]

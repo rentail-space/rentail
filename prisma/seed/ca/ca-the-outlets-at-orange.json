@@ -3,13 +3,15 @@
   "address": "20 City Boulevard West",
   "city": "Orange",
   "state": "CA",
-  "website": "https://www.simon.com/",
+  "website": "https://www.simon.com/mall/the-outlets-at-orange",
   "latitude": 33.7826657,
   "longitude": -117.8930882,
   "country": "US",
   "phone": "+17147694001",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-the-outlets-at-orange-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-outlets-at-orange-1.jpg"
+  ],
   "summary": "Tree-lined open-air outlet mall with 25 restaurants, an indoor skate park & an IMAX cinema.",
   "openFrom": 1000,
   "openUntil": 2100,

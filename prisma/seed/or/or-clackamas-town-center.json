@@ -8,9 +8,7 @@
   "latitude": 45.4358909,
   "longitude": -122.57328940000001,
   "phone": "++1 503-653-6613",
-  "imageURLs": [
-    "/images/malls/or-clackamas-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/or-clackamas-town-center-1.jpg"],
   "summary": "Chain retailer offering trendy, brand-name clothing & shoes, plus gear for skate- & snowboarders.",
   "openFrom": 1000,
   "openUntil": 2100,

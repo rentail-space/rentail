@@ -3,105 +3,90 @@
     "name": "Boca Park Fashion Village",
     "address": "750 South Rampart Boulevard",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.bocapark.com"
+    "state": "NV"
   },
   {
     "name": "Downtown Summerlin",
     "address": "1980 Festival Plaza Drive",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.downtownsummerlin.com"
+    "state": "NV"
   },
   {
     "name": "Fashion Show Mall",
     "address": "3200 Las Vegas Boulevard South",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.thefashionshow.com"
+    "state": "NV"
   },
   {
     "name": "Galleria at Sunset",
     "address": "1300 West Sunset Road",
     "city": "Henderson",
-    "state": "NV",
-    "website": "https://www.galleriaatsunset.com"
+    "state": "NV"
   },
   {
     "name": "Las Vegas North Premium Outlets",
     "address": "875 South Grand Central Parkway",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.premiumoutlets.com/outlet/las-vegas-north"
+    "state": "NV"
   },
   {
     "name": "Las Vegas South Premium Outlets",
     "address": "7400 Las Vegas Boulevard South",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.premiumoutlets.com/outlet/las-vegas-south"
+    "state": "NV"
   },
   {
     "name": "Meadows Mall",
     "address": "4300 Meadows Lane",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.meadowsmall.com"
+    "state": "NV"
   },
   {
     "name": "Miracle Mile Shops at Planet Hollywood",
     "address": "3663 Las Vegas Boulevard South",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.miraclemileshopslv.com"
+    "state": "NV"
   },
   {
     "name": "The Boulevard Mall",
     "address": "3528 South Maryland Parkway",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.boulevardmall.com"
+    "state": "NV"
   },
   {
     "name": "The District at Green Valley Ranch",
     "address": "2240 Village Walk Drive",
     "city": "Henderson",
-    "state": "NV",
-    "website": "https://www.thedistrictgvr.com"
+    "state": "NV"
   },
   {
     "name": "The Forum Shops at Caesars",
     "address": "3500 Las Vegas Boulevard South",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.simon.com/mall/the-forum-shops-at-caesars"
+    "state": "NV"
   },
   {
     "name": "The Grand Canal Shoppes at The Venetian",
     "address": "3377 Las Vegas Boulevard South",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.grandcanalshoppes.com"
+    "state": "NV"
   },
   {
     "name": "The Shops at Crystals",
     "address": "3720 Las Vegas Boulevard South",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.simon.com/mall/the-shops-at-crystals"
+    "state": "NV"
   },
   {
     "name": "Tivoli Village",
     "address": "400 South Rampart Boulevard",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.tivolivillagelv.com"
+    "state": "NV"
   },
   {
     "name": "Town Square Las Vegas",
     "address": "6605 Las Vegas Boulevard South",
     "city": "Las Vegas",
-    "state": "NV",
-    "website": "https://www.mytownsquarelasvegas.com"
+    "state": "NV"
   }
 ]

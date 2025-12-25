@@ -8,9 +8,7 @@
   "latitude": 45.496112499999995,
   "longitude": -122.81195369999999,
   "phone": "++1 503-643-6563",
-  "imageURLs": [
-    "/images/malls/or-cedar-hills-crossing-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/or-cedar-hills-crossing-1.jpg"],
   "summary": "Expansive shopping complex with apparel retailers, informal dining options & a movie theater.",
   "openFrom": 800,
   "openUntil": 2000,

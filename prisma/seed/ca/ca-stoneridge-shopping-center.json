@@ -3,12 +3,14 @@
   "address": "1 Stoneridge Mall Road",
   "city": "Pleasanton",
   "state": "CA",
-  "website": "https://www.stoneridgeshoppingcenter.com",
+  "website": "https://www.simon.com/mall/stoneridge-shopping-center",
   "country": "US",
   "latitude": 37.6952657,
   "longitude": -121.92884490000002,
   "phone": "++1 925-463-2778",
-  "imageURLs": ["/images/malls/ca-stoneridge-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-stoneridge-shopping-center-1.jpg"
+  ],
   "summary": "Large, 2-level indoor mall with department stores, brand-name shopping, specialty kiosks & dining.",
   "openFrom": 1000,
   "openUntil": 2000,

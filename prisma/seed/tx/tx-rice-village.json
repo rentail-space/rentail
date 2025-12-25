@@ -3,12 +3,14 @@
   "address": "2400 University Boulevard",
   "city": "Houston",
   "state": "TX",
-  "website": "https://www.ricevillagehouston.com",
+  "website": "https://rice-village.com/",
   "country": "US",
   "latitude": 29.716315599999998,
   "longitude": -95.41629139999999,
   "phone": "++1 713-302-8918",
-  "imageURLs": ["/images/malls/tx-rice-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-rice-village-1.jpg"
+  ],
   "summary": "Rice Village is a historic, walkable 16-block lifestyle district in Houston featuring a sophisticated mix of local boutiques, national retailers, and acclaimed restaurants near Rice University and the museum district. This iconic neighborhood destination combines vintage charm with contemporary shopping and dining experiences.",
   "openFrom": 1000,
   "openUntil": 2000,

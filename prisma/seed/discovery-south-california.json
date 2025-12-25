@@ -3,415 +3,276 @@
     "name": "Beverly Center",
     "address": "8500 Beverly Boulevard",
     "city": "Los Angeles",
-    "state": "CA",
-    "website": "https://www.beverlycenter.com",
-    "latitude": 34.0755,
-    "longitude": -118.3775
+    "state": "CA"
   },
   {
     "name": "Brea Mall",
     "address": "1065 Brea Mall",
     "city": "Brea",
-    "state": "CA",
-    "website": "https://www.simon.com/mall/brea-mall",
-    "latitude": 33.9147,
-    "longitude": -117.8864
+    "state": "CA"
   },
   {
     "name": "Carlsbad Premium Outlets",
     "address": "5620 Paseo Del Norte",
     "city": "Carlsbad",
-    "state": "CA",
-    "website": "https://www.premiumoutlets.com/outlet/carlsbad",
-    "latitude": 33.1281,
-    "longitude": -117.3136
+    "state": "CA"
   },
   {
     "name": "Citadel Outlets",
     "address": "100 Citadel Drive",
     "city": "Commerce",
-    "state": "CA",
-    "website": "https://www.citadeloutlets.com",
-    "latitude": 34.0097,
-    "longitude": -118.1453
+    "state": "CA"
   },
   {
     "name": "Del Amo Fashion Center",
     "address": "3525 Carson Street",
     "city": "Torrance",
-    "state": "CA",
-    "website": "https://www.simon.com/mall/del-amo-fashion-center",
-    "latitude": 33.8308,
-    "longitude": -118.3531
+    "state": "CA"
   },
   {
     "name": "Fashion Island",
     "address": "401 Newport Center Drive",
     "city": "Newport Beach",
-    "state": "CA",
-    "website": "https://www.fashionisland.com",
-    "latitude": 33.6158,
-    "longitude": -117.8764
+    "state": "CA"
   },
   {
     "name": "Fashion Valley",
     "address": "7007 Friars Road",
     "city": "San Diego",
-    "state": "CA",
-    "website": "https://www.simon.com/mall/fashion-valley",
-    "latitude": 32.7678,
-    "longitude": -117.1664
+    "state": "CA"
   },
   {
     "name": "Glendale Galleria",
     "address": "100 West Broadway",
     "city": "Glendale",
-    "state": "CA",
-    "website": "https://www.glendalegalleria.com",
-    "latitude": 34.1447,
-    "longitude": -118.2553
+    "state": "CA"
   },
   {
     "name": "Grossmont Center",
     "address": "5500 Grossmont Center Drive",
     "city": "La Mesa",
-    "state": "CA",
-    "website": "https://www.grossmontcenter.com",
-    "latitude": 32.7833,
-    "longitude": -117.0147
+    "state": "CA"
   },
   {
     "name": "Inland Center Mall",
     "address": "500 Inland Center Drive",
     "city": "San Bernardino",
-    "state": "CA",
-    "website": "https://www.inlandcentermall.com",
-    "latitude": 34.1236,
-    "longitude": -117.2897
+    "state": "CA"
   },
   {
     "name": "Lakewood Center",
     "address": "500 Lakewood Center Mall",
     "city": "Lakewood",
-    "state": "CA",
-    "website": "https://www.lakewoodcenter.com",
-    "latitude": 33.8472,
-    "longitude": -118.1447
+    "state": "CA"
   },
   {
     "name": "Los Cerritos Center",
     "address": "239 Los Cerritos Center",
     "city": "Cerritos",
-    "state": "CA",
-    "website": "https://www.loscerritoscenter.com",
-    "latitude": 33.8572,
-    "longitude": -118.0831
+    "state": "CA"
   },
   {
     "name": "Manhattan Village",
     "address": "3200 North Sepulveda Boulevard",
     "city": "Manhattan Beach",
-    "state": "CA",
-    "website": "https://www.manhattan-village.com",
-    "latitude": 33.8997,
-    "longitude": -118.3953
+    "state": "CA"
   },
   {
     "name": "Montclair Place",
     "address": "5060 Montclair Plaza Lane",
     "city": "Montclair",
-    "state": "CA",
-    "website": "https://www.montclairplace.com",
-    "latitude": 34.0772,
-    "longitude": -117.6897
+    "state": "CA"
   },
   {
     "name": "Moreno Valley Mall",
     "address": "22500 Town Circle",
     "city": "Moreno Valley",
-    "state": "CA",
-    "website": "https://www.morenovalleymall.com",
-    "latitude": 33.9378,
-    "longitude": -117.2306
+    "state": "CA"
   },
   {
     "name": "Ontario Mills",
     "address": "1 Mills Circle",
     "city": "Ontario",
-    "state": "CA",
-    "website": "https://www.simon.com/mall/ontario-mills",
-    "latitude": 34.0728,
-    "longitude": -117.5631
+    "state": "CA"
   },
   {
     "name": "Otay Ranch Town Center",
     "address": "2015 Birch Road",
     "city": "Chula Vista",
-    "state": "CA",
-    "website": "https://www.otayranchtown.com",
-    "latitude": 32.6017,
-    "longitude": -116.9328
+    "state": "CA"
   },
   {
     "name": "Paseo Colorado",
     "address": "280 East Colorado Boulevard",
     "city": "Pasadena",
-    "state": "CA",
-    "website": "https://www.paseocoloradopasadena.com",
-    "latitude": 34.1458,
-    "longitude": -118.1442
+    "state": "CA"
   },
   {
     "name": "Promenade Temecula",
     "address": "40820 Winchester Road",
     "city": "Temecula",
-    "state": "CA",
-    "website": "https://www.promenadetemecula.com/",
-    "latitude": 33.5069,
-    "longitude": -117.1486
+    "state": "CA"
   },
   {
     "name": "Riverside Plaza",
     "address": "1299 Galleria at Tyler",
     "city": "Riverside",
-    "state": "CA",
-    "website": "https://www.galleriaattyler.com",
-    "latitude": 33.9189,
-    "longitude": -117.4647
+    "state": "CA"
   },
   {
     "name": "Santa Anita Mall",
     "address": "400 South Baldwin Avenue",
     "city": "Arcadia",
-    "state": "CA",
-    "website": "https://www.westfield.com/santaanita",
-    "latitude": 34.1336,
-    "longitude": -118.0539
+    "state": "CA"
   },
   {
     "name": "Santa Monica Place",
     "address": "395 Santa Monica Pl",
     "city": "Santa Monica",
-    "state": "CA",
-    "website": "https://www.santamonicaplace.com",
-    "latitude": 34.013805216155106,
-    "longitude": -118.49378230362717
+    "state": "CA"
   },
   {
     "name": "South Bay Galleria",
     "address": "1815 Hawthorne Boulevard",
     "city": "Redondo Beach",
-    "state": "CA",
-    "website": "https://www.southbaygalleria.com",
-    "latitude": 33.8631,
-    "longitude": -118.3528
+    "state": "CA"
   },
   {
     "name": "South Coast Plaza",
     "address": "3333 Bristol Street",
     "city": "Costa Mesa",
-    "state": "CA",
-    "website": "https://www.southcoastplaza.com",
-    "latitude": 33.6906,
-    "longitude": -117.8867
+    "state": "CA"
   },
   {
     "name": "Stonewood Center",
     "address": "251 Stonewood St",
     "city": "Downey",
-    "state": "CA",
-    "website": "https://www.shopstonewoodcenter.com",
-    "latitude": 33.93568820419466,
-    "longitude": -118.1194676766459
+    "state": "CA"
   },
   {
     "name": "The Americana at Brand",
     "address": "889 Americana Way",
     "city": "Glendale",
-    "state": "CA",
-    "website": "https://www.americanaatbrand.com",
-    "latitude": 34.1447,
-    "longitude": -118.2567
+    "state": "CA"
   },
   {
     "name": "The District at Tustin Legacy",
     "address": "2437 Park Avenue",
     "city": "Tustin",
-    "state": "CA",
-    "website": "https://www.thedistrictattustinlegacy.com",
-    "latitude": 33.7236,
-    "longitude": -117.8069
+    "state": "CA"
   },
   {
     "name": "The Grove",
     "address": "189 The Grove Drive",
     "city": "Los Angeles",
-    "state": "CA",
-    "website": "https://www.thegrovela.com",
-    "latitude": 34.0719,
-    "longitude": -118.3564
+    "state": "CA"
   },
   {
     "name": "The Irvine Spectrum Center",
     "address": "670 Spectrum Center Drive",
     "city": "Irvine",
-    "state": "CA",
-    "website": "https://www.irvinespectrumcenter.com",
-    "latitude": 33.6517,
-    "longitude": -117.7417
+    "state": "CA"
   },
   {
     "name": "The Oaks Shopping Center",
     "address": "350 West Hillcrest Drive",
     "city": "Thousand Oaks",
-    "state": "CA",
-    "website": "https://www.theoaksshoppingcenter.com",
-    "latitude": 34.1806,
-    "longitude": -118.8797
+    "state": "CA"
   },
   {
     "name": "The Outlets at Orange",
     "address": "20 City Boulevard West",
     "city": "Orange",
-    "state": "CA",
-    "website": "https://www.outletsatorange.com",
-    "latitude": 33.7825,
-    "longitude": -117.8906
+    "state": "CA"
   },
   {
     "name": "The River at Rancho Mirage",
     "address": "71800 Highway 111",
     "city": "Rancho Mirage",
-    "state": "CA",
-    "website": "https://www.theriveratranchomirage.com",
-    "latitude": 33.7397,
-    "longitude": -116.4128
+    "state": "CA"
   },
   {
     "name": "The Shops at Montebello",
     "address": "1 Montebello Town Center",
     "city": "Montebello",
-    "state": "CA",
-    "website": "https://www.theshopsatmontebello.com",
-    "latitude": 34.0158,
-    "longitude": -118.1136
+    "state": "CA"
   },
   {
     "name": "Victoria Gardens",
     "address": "12505 North Mainstreet",
     "city": "Rancho Cucamonga",
-    "state": "CA",
-    "website": "https://www.victoriagardensie.com",
-    "latitude": 34.1364,
-    "longitude": -117.5328
+    "state": "CA"
   },
   {
     "name": "Westfield Century City",
     "address": "10250 Santa Monica Boulevard",
     "city": "Los Angeles",
-    "state": "CA",
-    "website": "https://www.westfield.com/centurycity",
-    "latitude": 34.0575,
-    "longitude": -118.4175,
-    "id": "places/ChIJlzcgHgC7woARrzVVJanYMlA"
+    "state": "CA"
   },
   {
     "name": "Westfield Culver City",
     "address": "6000 Sepulveda Boulevard",
     "city": "Culver City",
-    "state": "CA",
-    "website": "https://www.westfield.com/culvercity",
-    "latitude": 33.9789,
-    "longitude": -118.3917
+    "state": "CA"
   },
   {
     "name": "Westfield Fashion Square",
     "address": "14006 Riverside Drive",
     "city": "Sherman Oaks",
-    "state": "CA",
-    "website": "https://www.westfield.com/fashionsquare",
-    "latitude": 34.1508,
-    "longitude": -118.4431
+    "state": "CA"
   },
   {
     "name": "Westfield MainPlace",
     "address": "2800 North Main Street",
     "city": "Santa Ana",
-    "state": "CA",
-    "website": "https://www.westfield.com/mainplace",
-    "latitude": 33.7697,
-    "longitude": -117.8686
+    "state": "CA"
   },
   {
     "name": "Westfield Mission Valley",
     "address": "1640 Camino Del Rio North",
     "city": "San Diego",
-    "state": "CA",
-    "website": "https://www.westfield.com/missionvalley",
-    "latitude": 32.7678,
-    "longitude": -117.1631
+    "state": "CA"
   },
   {
     "name": "Westfield North County",
     "address": "272 East Via Rancho Parkway",
     "city": "Escondido",
-    "state": "CA",
-    "website": "https://www.westfield.com/northcounty",
-    "latitude": 33.0892,
-    "longitude": -117.0739
+    "state": "CA"
   },
   {
     "name": "Westfield Palm Desert",
     "address": "72840 Highway 111",
     "city": "Palm Desert",
-    "state": "CA",
-    "website": "https://www.westfield.com/palmdesert",
-    "latitude": 33.7236,
-    "longitude": -116.3778
+    "state": "CA"
   },
   {
     "name": "Westfield Parkway Plaza",
     "address": "415 Parkway Plaza",
     "city": "El Cajon",
-    "state": "CA",
-    "website": "https://www.westfield.com/parkway",
-    "latitude": 32.8147,
-    "longitude": -116.9625
+    "state": "CA"
   },
   {
     "name": "Westfield Plaza Bonita",
     "address": "3030 Plaza Bonita Road",
     "city": "National City",
-    "state": "CA",
-    "website": "https://www.westfield.com/plazabonita",
-    "latitude": 32.6542,
-    "longitude": -117.0739
+    "state": "CA"
   },
   {
     "name": "Westfield Topanga",
     "address": "6600 Topanga Canyon Boulevard",
     "city": "Canoga Park",
-    "state": "CA",
-    "website": "https://www.westfield.com/topanga",
-    "latitude": 34.1897,
-    "longitude": -118.6006
+    "state": "CA"
   },
   {
     "name": "Westfield UTC",
     "address": "4545 La Jolla Village Drive",
     "city": "San Diego",
-    "state": "CA",
-    "website": "https://www.westfield.com/utc",
-    "latitude": 32.8711,
-    "longitude": -117.2089
+    "state": "CA"
   },
   {
     "name": "Westfield Valencia Town Center",
     "address": "24201 Valencia Boulevard",
     "city": "Valencia",
-    "state": "CA",
-    "website": "https://www.westfield.com/valencia",
-    "latitude": 34.4144,
-    "longitude": -118.5569
+    "state": "CA"
   }
 ]

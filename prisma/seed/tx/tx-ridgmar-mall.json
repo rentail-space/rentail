@@ -3,12 +3,14 @@
   "address": "1888 Green Oaks Road",
   "city": "Fort Worth",
   "state": "TX",
-  "website": "https://www.ridgmarmall.com",
+  "website": "https://www.ridgmar.com/",
   "country": "US",
   "latitude": 32.740738,
   "longitude": -97.4370442,
   "phone": "++1 817-731-6591",
-  "imageURLs": ["/images/malls/tx-ridgmar-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-ridgmar-mall-1.jpg"
+  ],
   "summary": "2-story mall attracting visitors for its well-known department stores, food court & aquarium.",
   "openFrom": 1000,
   "openUntil": 2000,

@@ -3,11 +3,13 @@
   "address": "6600 Topanga Canyon Boulevard",
   "city": "Los Angeles",
   "state": "CA",
-  "website": "https://www.westfield.com/topanga",
+  "website": "https://www.westfield.com/en/united-states/topanga",
   "latitude": 34.190191,
   "longitude": -118.6030615,
   "country": "US",
-  "imageURLs": ["/images/malls/ca-westfield-topanga-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-westfield-topanga-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2100,
   "phone": "+18185948732",

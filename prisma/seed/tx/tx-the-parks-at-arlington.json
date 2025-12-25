@@ -3,12 +3,14 @@
   "address": "3811 South Cooper Street",
   "city": "Arlington",
   "state": "TX",
-  "website": "https://www.theparksatarlington.com",
+  "website": "https://www.theparksmallarlington.com/en.html",
   "country": "US",
   "latitude": 32.6808682,
   "longitude": -97.1296876,
   "phone": "++1 817-467-6496",
-  "imageURLs": ["/images/malls/tx-the-parks-at-arlington-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-the-parks-at-arlington-1.jpg"
+  ],
   "summary": "Popular mall with brand-name retailers, department stores, an ice rink & a multiplex movie theater.",
   "openFrom": 1000,
   "openUntil": 2100,

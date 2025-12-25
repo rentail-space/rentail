@@ -3,12 +3,14 @@
   "address": "4055 Westheimer Road",
   "city": "Houston",
   "state": "TX",
-  "website": "https://www.highlandvillagehouston.com",
+  "website": "https://www.houstonhighlandvillage.com/",
   "country": "US",
   "latitude": 29.742075,
   "longitude": -95.446562,
   "phone": "++1 713-850-3100",
-  "imageURLs": ["/images/malls/tx-highland-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-highland-village-1.jpg"
+  ],
   "summary": "Buzzy outdoor shopping mall with elevated boutiques & well-known national stores, plus restaurants.",
   "openFrom": 1000,
   "openUntil": 2000,

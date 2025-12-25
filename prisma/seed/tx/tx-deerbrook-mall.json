@@ -3,12 +3,14 @@
   "address": "20131 Highway 59 North",
   "city": "Humble",
   "state": "TX",
-  "website": "https://www.deerbrookmall.com",
+  "website": "https://www.shopdeerbrookmall.com/en.html",
   "country": "US",
   "latitude": 30.0094843,
   "longitude": -95.2702395,
   "phone": "++1 281-446-6626",
-  "imageURLs": ["/images/malls/tx-deerbrook-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-deerbrook-mall-1.jpg"
+  ],
   "summary": "Complex with a cinema, department stores & retail outlets for clothing, toys, jewelry & electronics.",
   "openFrom": 1000,
   "openUntil": 2100,

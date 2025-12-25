@@ -3,13 +3,15 @@
   "address": "1065 Brea Mall",
   "city": "Brea",
   "state": "CA",
-  "website": "https://www.simon.com/",
+  "website": "https://www.simon.com/mall/brea-mall",
   "latitude": 33.9156138,
   "longitude": -117.8862833,
   "country": "US",
   "phone": "+17149902732",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-brea-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-brea-mall-1.jpg"
+  ],
   "summary": "Clothing chain with trendy apparel, shoes & accessories for teen girls & young women.",
   "openFrom": 1000,
   "openUntil": 2100,

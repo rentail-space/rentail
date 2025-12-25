@@ -3,12 +3,14 @@
   "address": "3251 20th Avenue",
   "city": "San Francisco",
   "state": "CA",
-  "website": "https://www.stonestown.com",
+  "website": "https://www.stonestowngalleria.com/en/",
   "country": "US",
   "latitude": 37.7280313,
   "longitude": -122.477088,
   "phone": "++1 415-564-8848",
-  "imageURLs": ["/images/malls/ca-stonestown-galleria-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-stonestown-galleria-1.jpg"
+  ],
   "summary": "2-story shopping center offers name-brand retail shops, department stores, restaurants & a theater.",
   "openFrom": 1100,
   "openUntil": 2100,

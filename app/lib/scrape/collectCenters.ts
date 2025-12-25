@@ -36,11 +36,12 @@ export default async function collectCenters(countyName: string) {
         placeID: center.id,
       });
       invariant(google, "Failed to fetch Google Places data");
+      invariant(google.website, "Google Places data missing website");
 
       // From the website we collect the center's spaces and body text:
       // - The body text is used to enrich the center with additional data.
       // - The description comes from meta description tag (if available).
-      const { bodyText } = await scrapeCenter({ browser, url: center.website });
+      const { bodyText } = await scrapeCenter({ browser, url: google.website });
 
       // For each center we scrape the spaces page and collect the spaces:
       // - Space number
@@ -52,7 +53,7 @@ export default async function collectCenters(countyName: string) {
       const spaces = await scrapeSpaces({
         browser,
         centerName: center.name,
-        url: center.website,
+        url: google.website,
       });
 
       // From the scraped data we enrich the center with additional data:

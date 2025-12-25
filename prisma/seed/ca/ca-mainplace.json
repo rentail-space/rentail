@@ -3,13 +3,15 @@
   "address": "2800 North Main Street",
   "city": "Santa Ana",
   "state": "CA",
-  "website": "http://shopmainplacemall.com/",
+  "website": "https://www.shopmainplacemall.com",
   "latitude": 33.77405299999999,
   "longitude": -117.8693764,
   "country": "US",
   "phone": "+17145596525",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-mainplace-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-mainplace-mall-1.jpg"
+  ],
   "summary": "Spacious shopping center featuring department stores, a gym, a movie theater & a bowling alley.",
   "openFrom": 1000,
   "openUntil": 2100,

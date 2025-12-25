@@ -3,12 +3,14 @@
   "address": "2000 Willowbrook Mall",
   "city": "Houston",
   "state": "TX",
-  "website": "https://www.willowbrookmall.com",
+  "website": "https://www.shopwillowbrookmall.com/en.html",
   "country": "US",
   "latitude": 29.9599148,
   "longitude": -95.53900279999999,
   "phone": "++1 281-890-8001",
-  "imageURLs": ["/images/malls/tx-willowbrook-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-willowbrook-mall-1.jpg"
+  ],
   "summary": "Airy indoor shopping plaza with department stores, clothing, footwear, accessories & upscale shops.",
   "openFrom": 1100,
   "openUntil": 2100,

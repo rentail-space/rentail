@@ -3,12 +3,14 @@
   "address": "8080 Park Lane",
   "city": "Dallas",
   "state": "TX",
-  "website": "https://www.theshopsatparklane.com",
+  "website": "http://shopsatparklane.com/",
   "country": "US",
   "latitude": 32.869817,
   "longitude": -96.7681262,
   "phone": "++1 214-365-0222",
-  "imageURLs": ["/images/malls/tx-the-shops-at-park-lane-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-the-shops-at-park-lane-1.jpg"
+  ],
   "summary": "Urban complex with brand-name fashion retailers, restaurants, a grocery store & bowling alley.",
   "openFrom": 0,
   "openUntil": 2400,

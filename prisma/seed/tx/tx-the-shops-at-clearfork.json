@@ -3,12 +3,14 @@
   "address": "5188 Monahans Avenue",
   "city": "Fort Worth",
   "state": "TX",
-  "website": "https://www.theshopsatclearfork.com",
+  "website": "https://www.simon.com/mall/the-shops-at-clearfork",
   "country": "US",
   "latitude": 32.709823899999996,
   "longitude": -97.3995023,
   "phone": "++1 817-985-3773",
-  "imageURLs": ["/images/malls/tx-the-shops-at-clearfork-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-the-shops-at-clearfork-1.jpg"
+  ],
   "summary": "Upscale shopping center with department stores, boutiques, restaurants & a multiplex cinema.",
   "openFrom": 1000,
   "openUntil": 2000,

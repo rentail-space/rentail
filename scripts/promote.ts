@@ -1,7 +1,9 @@
 #!/usr/bin/env tsx
 
 /**
- * This script promotes the latest deployment to production.
+ * Use this to promote the latest deployment to production:
+ *
+ * pnpm promote
  */
 
 import { confirm } from "@inquirer/prompts";
@@ -20,7 +22,6 @@ dotenv.configDotenv({ quiet: true });
 
 const vercelTeamId = "team_bjyg9pgn8TQQVP2NLMPnSYSN";
 const vercelProjectId = "prj_SrqYHd1Olo0XfxQHLe9lyGfcoT9z";
-
 const vercel = new Vercel({
   bearerToken: env.get("VERCEL_TOKEN").required(true).asString(),
 });
@@ -133,7 +134,6 @@ async function githubWorkflows() {
         "\n\u26A0 GitHub workflow is still building. Please wait for it to complete before promoting.",
       ),
     );
-    process.exit(1);
   }
 
   console.info();

@@ -28,6 +28,7 @@ const placeDetailsSchema = zod.object({
   reviewCount: zod.number().describe("The place's review count").optional(),
   state: zod.string().describe("The place's state"),
   summary: zod.string().describe("The place's summary").optional(),
+  website: zod.string().describe("The place's website"),
 });
 
 /**
@@ -91,6 +92,7 @@ const findPlaceFields = [
   "rating",
   "regularOpeningHours",
   "userRatingCount",
+  "websiteUri",
 ];
 
 /**
@@ -149,6 +151,7 @@ type PlacesAPIPlace = {
     }>;
   };
   userRatingCount?: number; // eg 12500
+  websiteUri?: string; // eg "https://baystreetemeryville.com"
 };
 
 /**
@@ -255,6 +258,9 @@ async function toDatabasePlace(
   const slug = createSlug({ state, placeName });
   const imageURLs = await downloadPhotos({ slug, photos: place.photos });
   const { openFrom, openUntil } = operatingHours(place.regularOpeningHours);
+  invariant(place.websiteUri, "Google Places data missing website");
+  invariant(place.location?.latitude, "Google Places data missing latitude");
+  invariant(place.location?.longitude, "Google Places data missing longitude");
 
   return {
     name: placeName,
@@ -262,8 +268,8 @@ async function toDatabasePlace(
     city,
     state,
     country,
-    latitude: place.location?.latitude,
-    longitude: place.location?.longitude,
+    latitude: place.location.latitude,
+    longitude: place.location.longitude,
     phone: place.internationalPhoneNumber
       ? `+${place.internationalPhoneNumber.replace(/D/g, "")}`
       : undefined,
@@ -273,6 +279,7 @@ async function toDatabasePlace(
     openUntil,
     rating: place.rating,
     reviewCount: place.userRatingCount,
+    website: place.websiteUri,
   };
 }
 

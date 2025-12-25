@@ -1,14 +1,16 @@
 {
-  "name": "Vista Ridge Mall",
+  "name": "The Vista",
   "address": "2401 South Stemmons Freeway",
   "city": "Lewisville",
   "state": "TX",
-  "website": "https://www.vistaridgemall.com",
+  "website": "https://thevistacenter.com/",
   "country": "US",
   "latitude": 33.0022926,
   "longitude": -96.9717506,
   "phone": "++1 972-315-0015",
-  "imageURLs": ["/images/malls/tx-vista-ridge-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/tx-vista-ridge-mall-1.jpg"
+  ],
   "summary": "Clothing chain with trendy apparel, shoes & accessories for teen girls & young women.",
   "openFrom": 1100,
   "openUntil": 1900,

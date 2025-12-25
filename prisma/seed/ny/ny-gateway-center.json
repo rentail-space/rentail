@@ -3,12 +3,14 @@
   "address": "579 Gateway Drive",
   "city": "Brooklyn",
   "state": "NY",
-  "website": "https://www.gatewaycenterbrooklyn.com",
+  "website": "http://shopgatewaycenterbrooklyn.com/",
   "country": "US",
   "latitude": 40.6530035,
   "longitude": -73.87025469999999,
   "phone": "++1 718-235-0467",
-  "imageURLs": ["/images/malls/ny-gateway-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ny-gateway-center-1.jpg"
+  ],
   "summary": "Shopping destination hosting a mix of national megastores & familiar restaurant chains.",
   "openFrom": 900,
   "openUntil": 2300,

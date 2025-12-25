@@ -3,13 +3,15 @@
   "address": "1 Mills Circle",
   "city": "Ontario",
   "state": "CA",
-  "website": "https://www.simon.com/",
+  "website": "https://www.simon.com/mall/ontario-mills",
   "latitude": 34.0729843,
   "longitude": -117.551993,
   "country": "US",
   "phone": "+19094848300",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-ontario-mills-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-ontario-mills-1.jpg"
+  ],
   "summary": "Indoor outlet mall with over 200 stores as well as a food court,  movie theatres & comedy club.",
   "openFrom": 1000,
   "openUntil": 2100,

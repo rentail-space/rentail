@@ -12,15 +12,14 @@ import { conversational } from "~/lib/models";
 const discoverySchema = z.object({
   centers: z.array(
     z.object({
-      name: z.string().min(1, "Name must not be empty"),
       address: z.string().min(1, "Address must not be empty"),
       city: z.string().min(1, "City must not be empty"),
-      state: z.string().regex(/^[A-Z]{2}$/, "State must be a 2-letter code"),
-      website: z.url(),
       id: z
         .string()
         .regex(/^places\/[a-zA-Z0-9_-]+$/)
         .optional(),
+      name: z.string().min(1, "Name must not be empty"),
+      state: z.string().regex(/^[A-Z]{2}$/, "State must be a 2-letter code"),
     }),
   ),
 });

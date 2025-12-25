@@ -3,12 +3,14 @@
   "address": "2655 Richmond Avenue",
   "city": "Staten Island",
   "state": "NY",
-  "website": "https://www.simon.com/mall/staten-island-mall",
+  "website": "https://www.statenislandmall.com/en.html",
   "country": "US",
   "latitude": 40.581845099999995,
   "longitude": -74.1658599,
   "phone": "++1 718-761-6666",
-  "imageURLs": ["/images/malls/ny-staten-island-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ny-staten-island-mall-1.jpg"
+  ],
   "summary": "Large indoor mall featuring a variety of stores, plus eateries, a mall-walking program & free Wi-Fi.",
   "openFrom": 1000,
   "openUntil": 2000,

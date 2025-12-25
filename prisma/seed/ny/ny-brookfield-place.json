@@ -3,12 +3,14 @@
   "address": "230 Vesey Street",
   "city": "New York",
   "state": "NY",
-  "website": "https://www.brookfieldplaceny.com",
+  "website": "https://bfplny.com/",
   "country": "US",
   "latitude": 40.712782499999996,
   "longitude": -74.01525649999999,
   "phone": "++1 212-978-1673",
-  "imageURLs": ["/images/malls/ny-brookfield-place-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ny-brookfield-place-1.jpg"
+  ],
   "summary": "Towering waterfront office complex offering shopping, dining & ice-skating, plus special events.",
   "openFrom": 1000,
   "openUntil": 2000,

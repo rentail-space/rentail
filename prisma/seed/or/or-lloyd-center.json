@@ -8,9 +8,7 @@
   "latitude": 45.532561099999995,
   "longitude": -122.65358610000001,
   "phone": "++1 503-528-8515",
-  "imageURLs": [
-    "/images/malls/or-lloyd-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/or-lloyd-center-1.jpg"],
   "summary": "Energetic mall with chain stores, restaurants & an indoor ice-skating rink open year-round.",
   "openFrom": 1100,
   "openUntil": 1900,
