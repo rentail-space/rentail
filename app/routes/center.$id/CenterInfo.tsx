@@ -103,7 +103,13 @@ export default function CenterInfo({
         <div className="items-top flex flex-row gap-2 pb-4">
           <PhoneIcon className="h-6 w-6" />
           <span>
-            <a href={`tel:${center.phone}`}>
+            <a
+              className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
+              href={`tel:${center.phone}`}
+              onClick={() =>
+                trackEvent("click_phone_number", { category: "center_info" })
+              }
+            >
               {formatPhoneNumber(center.phone)}
             </a>
           </span>
