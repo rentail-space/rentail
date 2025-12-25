@@ -1,8 +1,11 @@
 import type { TextUIPart } from "ai";
-import { ArrowLeft, ArrowRight, CircleCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, CircleCheck, InfoIcon } from "lucide-react";
 import { DateTime } from "luxon";
 import type { User } from "prisma/generated/client";
-import type { ChatGetPayload } from "prisma/generated/models";
+import type {
+  ChatGetPayload,
+  PropertyGetPayload,
+} from "prisma/generated/models";
 import { Link, useFetcher } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { StickToBottom } from "use-stick-to-bottom";
@@ -17,6 +20,7 @@ import {
 } from "~/components/ui/Table";
 import { Textarea } from "~/components/ui/Textarea";
 import deviceDetection from "~/lib/deviceDetection";
+import findNearbyCenters from "~/lib/findNearbyCenters";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
@@ -37,12 +41,14 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   });
   if (!user) throw new Response("Not Found", { status: 404 });
 
+  const { centers } = await findNearbyCenters({ headers: new Headers(), user });
+
   const users = await prisma.user.findMany({
     orderBy: { createdAt: "asc" },
     select: { id: true },
   });
 
-  return { user, users };
+  return { user, users, centers };
 }
 
 export async function action({ params, request }: Route.ActionArgs) {
@@ -78,6 +84,8 @@ export default function UserPage({
       ))}
 
       <Pagination user={loaderData.user} users={loaderData.users} />
+
+      <Centers centers={loaderData.centers} />
     </StickToBottom>
   );
 }
@@ -265,5 +273,44 @@ function Pagination({ user, users }: { user: User; users: { id: string }[] }) {
         <ArrowRight className="h-4 w-4" />
       </Link>
     </div>
+  );
+}
+
+function Centers({
+  centers,
+}: {
+  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
+}) {
+  if (centers.length === 0) return null;
+
+  return (
+    <details className="rounded-lg border-2 border-gray-400 p-4 print:hidden">
+      <summary className="font-semibold">Nearby Centers</summary>
+      <Table>
+        <TableBody>
+          {centers
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((center) => (
+              <TableRow key={center.id} className="hover:bg-gray-100">
+                <TableHead className="max-w-48 truncate">
+                  <Link
+                    className="truncate text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
+                    target="_blank"
+                    to={`/center/${center.id}`}
+                  >
+                    {center.name}
+                  </Link>
+                </TableHead>
+                <TableHead className="w-48">{center.city}</TableHead>
+                <TableHead className="w-6">{center.state}</TableHead>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+      <p className="flex items-center gap-2">
+        <InfoIcon className="h-4 w-4" />
+        These are the centers that were found nearby the user.
+      </p>
+    </details>
   );
 }
