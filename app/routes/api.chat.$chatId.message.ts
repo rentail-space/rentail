@@ -78,7 +78,7 @@ export async function action({ request, params }: Route.ActionArgs) {
 
   const stream = streamText({
     abortSignal,
-    messages: convertToModelMessages(messages),
+    messages: await convertToModelMessages(messages),
     system: await preparePrompt({
       headers: request.headers,
       prompt: chatPrompt,

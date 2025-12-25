@@ -65,7 +65,7 @@ async function findAlert(
   });
 
   const response = await generateObject({
-    messages: convertToModelMessages(messages),
+    messages: await convertToModelMessages(messages),
     system: system,
     schema: Alert,
     ...classify,

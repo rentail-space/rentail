@@ -105,7 +105,7 @@ async function generateAssistantResponse({
   await addMessage({ chatId, role: "user", content: userInput });
 
   const response = await generateText({
-    messages: convertToModelMessages(await recentMessages(chatId)),
+    messages: await convertToModelMessages(await recentMessages(chatId)),
     system: prompt,
     ...classify,
   });
@@ -132,7 +132,7 @@ async function classifyAssistantResponse({
 }): Promise<void> {
   const messages = (await recentMessages(chatId)).slice(0, index + 1);
   const classified = await generateObject({
-    messages: convertToModelMessages(messages),
+    messages: await convertToModelMessages(messages),
     system: `
   This is a sequence of messages between a user and an assistant.
   The first message is a welcome message from the assistant.

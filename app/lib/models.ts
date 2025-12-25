@@ -2,11 +2,11 @@ import {
   type AnthropicProviderOptions,
   createAnthropic,
 } from "@ai-sdk/anthropic";
-import envVars from "./env";
 import type {
-  LanguageModelV2,
-  LanguageModelV2CallOptions,
+  LanguageModelV3,
+  LanguageModelV3CallOptions,
 } from "@ai-sdk/provider";
+import envVars from "./env";
 
 /**
  * The smartest model for the conversational tasks (replying to the user).
@@ -20,8 +20,8 @@ export const conversational = {
     anthropic: {} satisfies AnthropicProviderOptions,
   },
   temperature: 0.0,
-} satisfies Omit<LanguageModelV2CallOptions, "prompt"> & {
-  model: LanguageModelV2;
+} satisfies Omit<LanguageModelV3CallOptions, "prompt"> & {
+  model: LanguageModelV3;
 };
 
 /**
@@ -37,6 +37,6 @@ export const classify = {
     } satisfies AnthropicProviderOptions,
   },
   temperature: 0.0,
-} satisfies Omit<LanguageModelV2CallOptions, "prompt"> & {
-  model: LanguageModelV2;
+} satisfies Omit<LanguageModelV3CallOptions, "prompt"> & {
+  model: LanguageModelV3;
 };
