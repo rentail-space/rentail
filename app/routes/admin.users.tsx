@@ -16,7 +16,7 @@ import {
   MoveRight,
 } from "lucide-react";
 import { DateTime } from "luxon";
-import { parseAsIsoDate, useQueryState } from "nuqs";
+import { useQueryState } from "nuqs";
 import type { User } from "prisma/generated/client";
 import { Link, type LoaderFunctionArgs } from "react-router";
 import { Button } from "~/components/ui/Button";
@@ -96,29 +96,28 @@ async function fromGoogleAnalytics(): Promise<
 }
 
 export default function UsersPage({ loaderData }: Route.ComponentProps) {
-  const today = new Date(new Date().toISOString().split("T")[0]);
-  const [from, setFrom] = useQueryState(
-    "from",
-    parseAsIsoDate.withDefault(
-      DateTime.fromJSDate(today).minus({ days: 30 }).toJSDate(),
-    ),
-  );
-  const [until, setUntil] = useQueryState(
-    "until",
-    parseAsIsoDate.withDefault(today),
-  );
+  const today = DateTime.now();
+  const [from, setFrom] = useQueryState("from", {
+    defaultValue: today.minus({ days: 30 }).toFormat("yyyy-MM-dd"),
+    history: "replace",
+  });
+  const [until, setUntil] = useQueryState("until", {
+    defaultValue: today.toFormat("yyyy-MM-dd"),
+    history: "replace",
+  });
 
+  const start = DateTime.fromFormat(from, "yyyy-MM-dd")
+    .startOf("day")
+    .toJSDate();
+  const end = DateTime.fromFormat(until, "yyyy-MM-dd").endOf("day").toJSDate();
   const recentUsers = loaderData.users.filter(
     ({ createdAt, isAdmin }) =>
-      DateTime.fromJSDate(createdAt).toJSDate() >= from &&
-      DateTime.fromJSDate(createdAt).minus({ days: 1 }).toJSDate() <= until &&
-      !isAdmin,
+      createdAt >= start && createdAt <= end && !isAdmin,
   );
-  const analytics = loaderData.analytics.filter(
-    ({ date }) =>
-      DateTime.fromFormat(date, "yyyyMMdd").toJSDate() > from &&
-      DateTime.fromFormat(date, "yyyyMMdd").toJSDate() < until,
-  );
+  const analytics = loaderData.analytics.filter(({ date }) => {
+    const day = DateTime.fromFormat(date, "yyyyMMdd").startOf("day").toJSDate();
+    return day >= start && day <= end;
+  });
 
   return (
     <main className="flex flex-col gap-8">
@@ -141,16 +140,16 @@ function RangeSelector({
   until,
   setUntil,
 }: {
-  from: Date;
-  setFrom: (from: Date) => void;
-  until: Date;
-  setUntil: (until: Date) => void;
+  from: string;
+  setFrom: (from: string) => void;
+  until: string;
+  setUntil: (until: string) => void;
 }) {
-  const today = new Date(new Date().toISOString().split("T")[0]);
+  const today = DateTime.now();
   const daysInPeriod =
-    until.getTime() === today.getTime() &&
+    until === today.toFormat("yyyy-MM-dd") &&
     Math.floor(
-      DateTime.fromJSDate(until).diff(DateTime.fromJSDate(from), "days").days,
+      today.diff(DateTime.fromFormat(from, "yyyy-MM-dd"), "days").days,
     );
 
   return (
@@ -161,13 +160,10 @@ function RangeSelector({
             <TabsTrigger
               key={daysInPeriod}
               onClick={() => {
-                const today = new Date(new Date().toISOString().split("T")[0]);
                 setFrom(
-                  DateTime.fromJSDate(today)
-                    .minus({ days: daysInPeriod })
-                    .toJSDate(),
+                  today.minus({ days: daysInPeriod }).toFormat("yyyy-MM-dd"),
                 );
-                setUntil(new Date(today.toISOString().split("T")[0]));
+                setUntil(today.toFormat("yyyy-MM-dd"));
               }}
               value={daysInPeriod.toString()}
             >
@@ -180,16 +176,16 @@ function RangeSelector({
       <div className="flex flex-row items-center gap-0">
         <Input
           className="w-36"
-          onChange={({ target }) => setFrom(new Date(target.value))}
+          onChange={({ target }) => setFrom(target.value)}
           type="date"
-          value={from.toISOString().split("T")[0]}
+          value={from}
         />
         <ArrowRight className="h-8 w-8 text-gray-500" />
         <Input
           className="w-36"
-          onChange={({ target }) => setUntil(new Date(target.value))}
+          onChange={({ target }) => setUntil(target.value)}
           type="date"
-          value={until.toISOString().split("T")[0]}
+          value={until}
         />
       </div>
 
@@ -197,8 +193,16 @@ function RangeSelector({
         <Button
           variant="outline"
           onClick={() => {
-            setFrom(DateTime.fromJSDate(from).minus({ days: 1 }).toJSDate());
-            setUntil(DateTime.fromJSDate(until).minus({ days: 1 }).toJSDate());
+            setFrom(
+              DateTime.fromFormat(from, "yyyy-MM-dd")
+                .minus({ days: 1 })
+                .toFormat("yyyy-MM-dd"),
+            );
+            setUntil(
+              DateTime.fromFormat(until, "yyyy-MM-dd")
+                .minus({ days: 1 })
+                .toFormat("yyyy-MM-dd"),
+            );
           }}
         >
           <MoveLeft className="h-10 w-10 text-gray-500" />
@@ -206,8 +210,16 @@ function RangeSelector({
         <Button
           variant="outline"
           onClick={() => {
-            setFrom(DateTime.fromJSDate(from).plus({ days: 1 }).toJSDate());
-            setUntil(DateTime.fromJSDate(until).plus({ days: 1 }).toJSDate());
+            setFrom(
+              DateTime.fromFormat(from, "yyyy-MM-dd")
+                .plus({ days: 1 })
+                .toFormat("yyyy-MM-dd"),
+            );
+            setUntil(
+              DateTime.fromFormat(until, "yyyy-MM-dd")
+                .plus({ days: 1 })
+                .toFormat("yyyy-MM-dd"),
+            );
           }}
         >
           <MoveRight className="h-10 w-10 text-gray-500" />
