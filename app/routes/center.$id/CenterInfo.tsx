@@ -11,6 +11,7 @@ import {
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Link } from "react-router";
 import { Button } from "~/components/ui/Button";
+import { trackEvent } from "~/lib/analytics";
 import externalLink from "~/lib/externalLink";
 import formatPhoneNumber from "~/lib/formatPhoneNumber";
 import timeOfDay from "~/lib/timeOfDay";
@@ -85,9 +86,13 @@ export default function CenterInfo({
         <div className="items-top flex flex-row gap-2 pb-4">
           <GlobeIcon className="h-6 w-6" />
           <Link
-            to={externalLink(center.website)}
-            target="_blank"
+            className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
+            onClick={() =>
+              trackEvent("click_external_link", { category: "center_info" })
+            }
             rel="noopener noreferrer"
+            target="_blank"
+            to={externalLink(center.website)}
           >
             {center.website}
           </Link>

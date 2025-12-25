@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import type { ScrollToBottom } from "use-stick-to-bottom";
+import { trackEvent } from "~/lib/analytics";
 import { cn } from "~/lib/utils";
 import { maskWorkingMemoryTags } from "~/lib/workingMemory";
 
@@ -122,6 +123,7 @@ function getComponents({
           onClick={(event) => {
             event.preventDefault();
             askQuestion(Children.toArray(children).join(""));
+            trackEvent("click_ask_question", { category: "chat" });
           }}
         >
           {children}
@@ -129,8 +131,11 @@ function getComponents({
       ) : (
         <Link
           className="font-bold text-black underline decoration-2 underline-offset-2 hover:decoration-[hsl(37,92%,65%)]"
-          to={href ?? ""}
+          onClick={() =>
+            trackEvent("click_external_link", { category: "chat" })
+          }
           target="_blank"
+          to={href ?? ""}
         >
           {children}
         </Link>

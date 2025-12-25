@@ -2,8 +2,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { last } from "es-toolkit";
 import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
-import { useEffect } from "react";
-import ReactGA from "react-ga4";
 import {
   Links,
   Meta,
@@ -14,6 +12,7 @@ import {
 } from "react-router";
 import schema from "~/data/schema.json";
 import "~/global.css";
+import { useGoogleAnalytics } from "~/lib/analytics";
 import PageFooter from "./PageFooter";
 import PageHeader from "./PageHeader";
 
@@ -34,10 +33,7 @@ export default function PageLayout({
   children: React.ReactNode;
   hideLayout?: boolean;
 }) {
-  useEffect(() => {
-    if (process.env.NODE_ENV === "production")
-      ReactGA.initialize("G-HLE5G8GC5Y");
-  }, []);
+  useGoogleAnalytics();
   const matches = useMatches() as UIMatch<
     unknown,
     { headerLinks?: { to: string; label: string }[] }

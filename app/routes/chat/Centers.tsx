@@ -2,6 +2,7 @@ import { sortBy } from "es-toolkit";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Activity, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import { trackEvent } from "~/lib/analytics";
 import { cn } from "~/lib/utils";
 
 /**
@@ -72,6 +73,7 @@ function LinkToCenter({
     >
       <Link
         className="flex flex-row items-center gap-2 rounded-base border-2 border-black bg-white px-3 py-2 font-medium text-black shadow-[2px_2px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_black]"
+        onClick={() => trackEvent("view_center", { category: "chat" })}
         target="_blank"
         to={`/center/${center.id}`}
       >

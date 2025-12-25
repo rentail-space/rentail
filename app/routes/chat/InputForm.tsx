@@ -1,6 +1,7 @@
 import { Send, Square } from "lucide-react";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import { Button } from "~/components/ui/Button";
+import { trackEvent } from "~/lib/analytics";
 import { cn } from "~/lib/utils";
 
 export default function InputForm({
@@ -29,6 +30,7 @@ export default function InputForm({
           sendMessage(query.trim());
           setQuery(null);
           scrollToBottom();
+          trackEvent("send_message", { category: "chat" });
         }}
       >
         <input
