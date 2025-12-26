@@ -3,13 +3,15 @@
   "address": "100 Citadel Drive",
   "city": "Commerce",
   "state": "CA",
-  "website": "http://citadeloutlets.com/",
+  "website": "https://www.citadeloutlets.com",
   "latitude": 34.0073187,
   "longitude": -118.1529856,
   "country": "US",
   "phone": "+13238881724",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-citadel-outlets-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-citadel-outlets-1.jpg"
+  ],
   "summary": "This outdoor shopping center features a variety of popular brand-name outlet stores & restaurants.",
   "openFrom": 900,
   "openUntil": 2200,

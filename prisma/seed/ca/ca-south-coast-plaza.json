@@ -3,13 +3,15 @@
   "address": "3333 Bristol Street",
   "city": "Costa Mesa",
   "state": "CA",
-  "website": "http://www.southcoastplaza.com/",
+  "website": "https://www.southcoastplaza.com",
   "latitude": 33.69100299999999,
   "longitude": -117.8889767,
   "country": "US",
   "phone": "+17144352000",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-south-coast-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-south-coast-plaza-1.jpg"
+  ],
   "summary": "Energetic shopping complex featuring department stores, boutiques, fine restaurants & casual fare.",
   "openFrom": 1000,
   "openUntil": 2100,

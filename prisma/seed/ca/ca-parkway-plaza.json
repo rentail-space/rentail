@@ -3,13 +3,15 @@
   "address": "415 Fletcher Parkway",
   "city": "El Cajon",
   "state": "CA",
-  "website": "http://www.visitparkwayplaza.com/",
+  "website": "https://www.visitparkwayplaza.com",
   "latitude": 32.8054517,
   "longitude": -116.9671883,
   "country": "US",
   "phone": "+16195799932",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-parkway-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-parkway-plaza-1.jpg"
+  ],
   "summary": "Mall with department stores, restaurants, movie theater & family amenities like a 2-level carousel.",
   "openFrom": 1100,
   "openUntil": 2000,

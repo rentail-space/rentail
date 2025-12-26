@@ -3,13 +3,15 @@
   "address": "22500 Town Circle",
   "city": "Moreno Valley",
   "state": "CA",
-  "website": "http://www.morenovalleymall.com/",
+  "website": "https://www.morenovalleymall.com",
   "latitude": 33.9387132,
   "longitude": -117.2710454,
   "country": "US",
   "phone": "+19516531177",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-moreno-valley-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-moreno-valley-mall-1.jpg"
+  ],
   "summary": "Old-school retail complex offering brand-name stores, a food court, a multiplex cinema & bowling.",
   "openFrom": 1100,
   "openUntil": 2000,

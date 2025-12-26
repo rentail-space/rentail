@@ -3,13 +3,15 @@
   "address": "2437 Park Avenue",
   "city": "Tustin",
   "state": "CA",
-  "website": "http://thedistricttl.com/",
+  "website": "https://thedistricttl.com",
   "latitude": 33.6979539,
   "longitude": -117.8283326,
   "country": "US",
   "phone": "+17142599090",
   "photos": [],
-  "imageURLs": ["/images/malls/ca-the-district-at-tustin-legacy-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-district-at-tustin-legacy-1.jpg"
+  ],
   "summary": "Large outdoor mall with a wide variety of dining options, plus retail stores & regular events.",
   "openFrom": 800,
   "openUntil": 2200,
