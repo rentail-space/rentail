@@ -8,9 +8,7 @@
   "latitude": 37.636595899999996,
   "longitude": -122.41792410000001,
   "phone": "++1 650-873-2000",
-  "imageURLs": [
-    "/images/malls/ca-tanforan-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-tanforan-1.jpg"],
   "summary": "Eclectic mall with a range of shopping options, plus a kids' play area, food court & movie theaters.",
   "openFrom": 1000,
   "openUntil": 2000,

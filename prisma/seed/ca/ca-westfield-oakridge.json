@@ -8,9 +8,7 @@
   "latitude": 37.2512044,
   "longitude": -121.86245529999998,
   "phone": "++1 408-878-4600",
-  "imageURLs": [
-    "/images/malls/ca-westfield-oakridge-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westfield-oakridge-1.jpg"],
   "summary": "Westfield Oakridge is a premier regional mall in San Jose featuring top brands like Nike, Adidas, and Uniqlo alongside diverse dining and entertainment options. This modern shopping destination combines convenient technology like Smart Parking with a vibrant community atmosphere that makes it more than just a place to shop.",
   "openFrom": 1000,
   "openUntil": 2100,

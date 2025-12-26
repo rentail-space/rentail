@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+17147694001",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-the-outlets-at-orange-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-outlets-at-orange-1.jpg"],
   "summary": "Tree-lined open-air outlet mall with 25 restaurants, an indoor skate park & an IMAX cinema.",
   "openFrom": 1000,
   "openUntil": 2100,

@@ -8,9 +8,7 @@
   "latitude": 33.126635799999995,
   "longitude": -96.6564509,
   "phone": "++1 972-678-4939",
-  "imageURLs": [
-    "/images/malls/tx-the-village-at-allen-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-the-village-at-allen-1.jpg"],
   "summary": "Sprawling outdoor shopping mall featuring department stores, restaurants, salons, book shops & more.",
   "openFrom": 900,
   "openUntil": 2100,

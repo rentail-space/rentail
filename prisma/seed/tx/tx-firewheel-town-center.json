@@ -8,9 +8,7 @@
   "latitude": 32.953870699999996,
   "longitude": -96.6126318,
   "phone": "++1 972-675-1041",
-  "imageURLs": [
-    "/images/malls/tx-firewheel-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-firewheel-town-center-1.jpg"],
   "summary": "Open-air shopping venue offering brand-name department stores & boutiques, eateries & a cinema.",
   "openFrom": 1000,
   "openUntil": 2100,

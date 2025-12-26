@@ -8,9 +8,7 @@
   "latitude": 32.8298638,
   "longitude": -97.1997676,
   "phone": "++1 817-284-3427",
-  "imageURLs": [
-    "/images/malls/tx-north-east-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-north-east-mall-1.jpg"],
   "summary": "Busy mall with department stores, fashion & sports chains, a multiplex & a food court.",
   "openFrom": 1000,
   "openUntil": 2100,

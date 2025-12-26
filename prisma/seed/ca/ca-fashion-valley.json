@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+16196889113",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-fashion-valley-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-fashion-valley-1.jpg"],
   "summary": "Large shopping center with chain department stores, a movie theater & casual dining options.",
   "openFrom": 1000,
   "openUntil": 2100,

@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+19516531177",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-moreno-valley-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-moreno-valley-mall-1.jpg"],
   "summary": "Old-school retail complex offering brand-name stores, a food court, a multiplex cinema & bowling.",
   "openFrom": 1100,
   "openUntil": 2000,

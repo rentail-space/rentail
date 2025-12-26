@@ -8,9 +8,7 @@
   "latitude": 45.4502491,
   "longitude": -122.78121829999999,
   "phone": "++1 503-639-8860",
-  "imageURLs": [
-    "/images/malls/or-washington-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/or-washington-square-1.jpg"],
   "summary": "Large shopping center with a variety of department stores, specialty shops & food options.",
   "openFrom": 1000,
   "openUntil": 2100,

@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+13103907833",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-westfield-culver-city-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westfield-culver-city-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.5,

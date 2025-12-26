@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+17144352000",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-south-coast-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-south-coast-plaza-1.jpg"],
   "summary": "Energetic shopping complex featuring department stores, boutiques, fine restaurants & casual fare.",
   "openFrom": 1000,
   "openUntil": 2100,

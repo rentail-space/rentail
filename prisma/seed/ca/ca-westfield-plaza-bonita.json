@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+16192672850",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-westfield-plaza-bonita-1.png"
-  ],
+  "imageURLs": ["/images/malls/ca-westfield-plaza-bonita-1.png"],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.5,

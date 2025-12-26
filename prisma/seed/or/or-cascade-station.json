@@ -8,9 +8,7 @@
   "latitude": 45.573743099999994,
   "longitude": -122.55650709999999,
   "phone": "++1 503-477-9381",
-  "imageURLs": [
-    "/images/malls/or-cascade-station-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/or-cascade-station-1.jpg"],
   "summary": "Sprawling shopping center featuring big-box stores, casual restaurants & familiar chain retailers.",
   "openFrom": 1000,
   "openUntil": 2100,

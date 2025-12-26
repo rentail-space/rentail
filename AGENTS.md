@@ -2,6 +2,15 @@
 
 **IMPORTANT**: This project uses **bd (beads)** for ALL issue tracking. Do NOT use markdown TODOs, task lists, or other tracking methods.
 
+---
+
+### Additional Agent Workflow Restrictions
+
+- ❌ **Do NOT use Git worktrees**. Always perform all work in the current directory of the repository. Do not create, switch to, or operate in any alternate git worktree.
+- ❌ **Do NOT call `git push` or request anyone to perform a `git push` operation**. All workflow should remain local unless otherwise instructed by a human.
+
+---
+
 ### Why bd?
 
 - Dependency-aware: Track blockers and relationships between issues

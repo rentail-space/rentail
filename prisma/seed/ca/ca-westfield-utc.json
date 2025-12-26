@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+18585468858",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-westfield-utc-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westfield-utc-1.jpg"],
   "summary": "Outdoor shopping center with upmarket chain retailers, a movie theater & a skating rink.",
   "openFrom": 1000,
   "openUntil": 2000,

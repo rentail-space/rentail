@@ -8,9 +8,7 @@
   "latitude": 47.4588849,
   "longitude": -122.25796399999999,
   "phone": "++1 206-246-0423",
-  "imageURLs": [
-    "/images/malls/wa-southcenter-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/wa-southcenter-mall-1.jpg"],
   "summary": "2-level indoor shopping mall with more than 200 stores & eateries plus a multiplex with IMAX.",
   "openFrom": 1000,
   "openUntil": 2100,

@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+18187830550",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-westfield-fashion-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westfield-fashion-square-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.4,

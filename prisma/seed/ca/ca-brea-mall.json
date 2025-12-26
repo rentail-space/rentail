@@ -9,9 +9,7 @@
   "country": "US",
   "phone": "+17149902732",
   "photos": [],
-  "imageURLs": [
-    "/images/malls/ca-brea-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-brea-mall-1.jpg"],
   "summary": "Clothing chain with trendy apparel, shoes & accessories for teen girls & young women.",
   "openFrom": 1000,
   "openUntil": 2100,

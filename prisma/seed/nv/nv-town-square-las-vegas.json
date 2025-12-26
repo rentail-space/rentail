@@ -8,9 +8,7 @@
   "latitude": 36.067796799999996,
   "longitude": -115.17622550000002,
   "phone": "++1 702-269-5001",
-  "imageURLs": [
-    "/images/malls/nv-town-square-las-vegas-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/nv-town-square-las-vegas-1.jpg"],
   "summary": "Open-air entertainment center with retail shops, restaurants & a movie theater.",
   "openFrom": 1000,
   "openUntil": 2200,

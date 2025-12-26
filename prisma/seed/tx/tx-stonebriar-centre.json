@@ -8,9 +8,7 @@
   "latitude": 33.099101,
   "longitude": -96.81135599999999,
   "phone": "++1 972-668-4900",
-  "imageURLs": [
-    "/images/malls/tx-stonebriar-centre-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/tx-stonebriar-centre-1.jpg"],
   "summary": "Expansive shopping mall with department stores, restaurants, a food court & a variety of shops.",
   "openFrom": 1000,
   "openUntil": 2100,

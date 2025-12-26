@@ -497,8 +497,10 @@ pnpm scrape
 
 **Output Format:**
 Centers saved as JSON files: `prisma/seed/{state}/{state}-{slug}.json`
-- Contains: name, address, coordinates, stores, demographics, images, etc.
+- Contains: name, address, coordinates, stores, demographics, images, website, etc.
 - Files can be imported via `seedCenter.ts` to populate database
+- **Critical**: All center files MUST have a valid `website` property with HTTP/HTTPS URL
+- Discovery files (e.g., `discovery-*.json`) and `states.json` don't require websites
 
 ## Key Architectural Patterns
 

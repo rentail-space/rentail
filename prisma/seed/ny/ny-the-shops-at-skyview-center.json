@@ -8,9 +8,7 @@
   "latitude": 40.7572609,
   "longitude": -73.8356116,
   "phone": "++1 718-460-2000",
-  "imageURLs": [
-    "/images/malls/ny-the-shops-at-skyview-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ny-the-shops-at-skyview-center-1.jpg"],
   "summary": "Multilevel retail center with a supermarket & midrange, chain retailers, plus casual eateries.",
   "openFrom": 800,
   "openUntil": 2200,
