@@ -1,4 +1,4 @@
-import { type LoaderFunctionArgs, useOutlet } from "react-router";
+import { type LoaderFunctionArgs, redirect, useOutlet } from "react-router";
 import { verifyAdmin } from "~/lib/sessions.server";
 
 export const handle = {
@@ -9,7 +9,9 @@ export const handle = {
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  return await verifyAdmin(request.headers);
+  await verifyAdmin(request.headers);
+  const { pathname } = new URL(request.url);
+  return pathname === "/admin" ? redirect("/admin/users") : null;
 }
 
 export default function Admin() {
