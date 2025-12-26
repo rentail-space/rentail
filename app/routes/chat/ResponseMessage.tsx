@@ -141,7 +141,7 @@ function getComponents({
       );
     },
     button: ({ children }) => (
-      <Button className="inline-block bg-[hsl(37,92%,65%)]">{children}</Button>
+      <Button className="inline-block">{children}</Button>
     ),
     h1: ({ children }) => (
       <h1 className={"mt-6 mb-2 font-bold text-black text-xl"}>{children}</h1>

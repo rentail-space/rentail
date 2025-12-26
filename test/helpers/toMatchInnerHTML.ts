@@ -1,5 +1,7 @@
 // DO NOT add to setup.ts as vitest.config.js cannot upload file that imports vitest
 
+import { expect } from "@playwright/test";
+import { invariant } from "es-toolkit";
 import { readdirSync, unlinkSync } from "node:fs";
 import {
   access,
@@ -9,8 +11,7 @@ import {
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
-import { expect } from "@playwright/test";
-import { invariant } from "es-toolkit";
+import type { Locator, Page } from "playwright";
 import vitestConfig from "vitest.config";
 import {
   type HTMLNode,
@@ -18,7 +19,6 @@ import {
   formatHTMLTree,
   parseHTMLTree,
 } from "./formatHTML";
-import type { Locator, Page } from "playwright";
 
 declare global {
   namespace PlaywrightTest {
@@ -102,6 +102,7 @@ function getTestName(): string {
 }
 
 export async function removeNewHTML() {
+  await mkdir(dirname, { recursive: true });
   const list = readdirSync(dirname);
   for (const file of list)
     if (file.endsWith(".new.html") || file.endsWith(".html.diff"))

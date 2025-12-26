@@ -1,5 +1,8 @@
 // DO NOT add to setup.ts as vitest.config.js cannot upload file that imports vitest
 
+import { expect } from "@playwright/test";
+import { invariant } from "es-toolkit";
+import looksSame from "looks-same";
 import { readdirSync, unlinkSync } from "node:fs";
 import {
   access,
@@ -9,11 +12,8 @@ import {
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
-import { expect } from "@playwright/test";
-import { invariant } from "es-toolkit";
-import looksSame from "looks-same";
-import vitestConfig from "vitest.config";
 import type { Locator, Page } from "playwright";
+import vitestConfig from "vitest.config";
 
 declare global {
   namespace PlaywrightTest {
@@ -113,6 +113,7 @@ function getTestName(): string {
 }
 
 export async function removeDiffImages() {
+  await mkdir(dirname, { recursive: true });
   const list = readdirSync(dirname);
   for (const file of list)
     if (file.endsWith(".diff.png") || file.endsWith(".new.png"))
