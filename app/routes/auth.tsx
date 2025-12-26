@@ -2,6 +2,7 @@ import { captureException } from "@sentry/react-router";
 import { invariant } from "es-toolkit";
 import { AlertCircle } from "lucide-react";
 import { redirect, useFetcher } from "react-router";
+import { CircularLoading } from "respinner";
 import { useToggle } from "usehooks-ts";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
@@ -146,13 +147,13 @@ export default function AuthPage() {
             )}
 
             <Button
-              className="flex w-full items-center justify-center gap-2 p-6 font-bold text-lg"
+              className="w-full p-6 font-bold text-lg"
               disabled={fetcher.state !== "idle"}
               type="submit"
               variant="default"
             >
               {fetcher.state !== "idle" && (
-                <span className="loading loading-spinner" />
+                <CircularLoading size={40} color="#888" strokeWidth={8} />
               )}
               {isSignUp
                 ? fetcher.state === "idle"

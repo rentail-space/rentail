@@ -68,20 +68,14 @@ function SubmitButton({ isSubmitting }: { isSubmitting: boolean }) {
   return (
     <Button
       aria-label="Send message"
-      className={cn(
-        "mb-1 flex h-12 w-12 items-center justify-center",
-        "transform transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black]",
-        "active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_0px_black] disabled:cursor-not-allowed disabled:bg-gray-300 disabled:shadow-none",
-      )}
+      className={"mb-1 h-12 w-12"}
       disabled={isSubmitting}
       type="submit"
       variant="default"
     >
-      {isSubmitting ? (
-        <Send className="h-5 w-5 animate-spin text-black" />
-      ) : (
-        <Send className="h-5 w-5 text-black" />
-      )}
+      <Send
+        className={cn("h-5 w-5 text-black", isSubmitting && "animate-spin")}
+      />
     </Button>
   );
 }
@@ -96,13 +90,13 @@ function StopButton({
   if (!isResponding) return null;
 
   return (
-    <button
-      onClick={stopChat}
+    <Button
       aria-label="Stop"
-      className="flex h-12 w-12 transform cursor-pointer items-center justify-center rounded-base border-2 border-black bg-red-500 font-bold shadow-[3px_3px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_0px_black]"
+      className="h-12 w-12"
+      onClick={stopChat}
       type="button"
     >
       <Square className="h-5 w-5 text-black" />
-    </button>
+    </Button>
   );
 }

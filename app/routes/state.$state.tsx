@@ -10,6 +10,7 @@ import { Children, Fragment, useRef } from "react";
 import { Link } from "react-router";
 import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
+import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
 import prisma from "~/lib/prisma";
 import timeOfDay from "~/lib/timeOfDay";
@@ -125,9 +126,9 @@ function LinkToCenter({
         >
           <Link to={`/center/${center.id}`}>{center.name}</Link>
         </h2>
-        <button
-          type="button"
-          className="flex cursor-pointer flex-row flex-nowrap items-center gap-2 text-gray-500 text-sm"
+        <Button
+          variant="link"
+          className="text-gray-500 text-sm"
           title="Show center on map"
           onClick={(event) => {
             event.preventDefault();
@@ -136,7 +137,7 @@ function LinkToCenter({
         >
           {center.city}
           <MapPinIcon className="h-6 w-6 text-blue-500" />
-        </button>
+        </Button>
       </div>
 
       <div className="flex flex-row flex-nowrap items-end justify-between gap-4">
