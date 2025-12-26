@@ -12,8 +12,10 @@ import {
   ArrowDown,
   ArrowRight,
   ArrowUp,
+  LockIcon,
   MoveLeft,
   MoveRight,
+  UserIcon,
 } from "lucide-react";
 import { DateTime } from "luxon";
 import { useQueryState } from "nuqs";
@@ -302,6 +304,11 @@ function AllUsers({ users }: { users: User[] }) {
         accessorKey: "name",
         cell: ({ row }) => (
           <ActiveLink to={`/admin/user/${row.original.id}`}>
+            {row.original.isAnonymous ? (
+              <UserIcon className="h-4 w-4 text-gray-500" />
+            ) : (
+              <LockIcon className="h-4 w-4" />
+            )}
             {row.original.name || row.original.id}
           </ActiveLink>
         ),
