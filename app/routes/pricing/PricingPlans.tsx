@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { ActiveLink } from "~/components/ui/ActiveLink";
+import { Badge } from "~/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import { cn } from "~/lib/utils";
 
@@ -120,9 +121,9 @@ function PricingPlan({
       )}
     >
       {plan.highlighted && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-sm border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-1 font-bold text-black text-sm shadow-[2px_2px_0px_0px_black]">
+        <Badge className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[hsl(37,92%,65%)] text-md">
           Most Popular
-        </div>
+        </Badge>
       )}
 
       <CardHeader>
