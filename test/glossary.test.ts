@@ -33,14 +33,16 @@ describe("Glossary page", () => {
 
   it("should display all glossary terms", async () => {
     for (const term of expectedTerms) {
-      const termHeading = page.locator("h2", { hasText: term });
+      const termHeading = page.locator('[data-slot="card-title"]', {
+        hasText: term,
+      });
       await expect(termHeading).toBeVisible();
     }
   });
 
   it("should display definitions for all terms", async () => {
     const definitions = page.locator(
-      '[itemscope][itemtype="https://schema.org/DefinedTerm"] p[itemprop="description"]',
+      '[itemscope][itemtype="https://schema.org/DefinedTerm"] [data-slot="card-content"]',
     );
     const count = await definitions.count();
     expect(count).toBe(expectedTerms.length);
@@ -48,7 +50,9 @@ describe("Glossary page", () => {
 
   it("should display alternate names for terms", async () => {
     // Check that "Also known as:" appears for terms with alternates
-    const alternateLabels = page.locator('p:has-text("Also known as:")');
+    const alternateLabels = page.locator('[data-slot="card-description"]', {
+      hasText: "Also known as:",
+    });
     const count = await alternateLabels.count();
     expect(count).toBeGreaterThan(0);
   });
@@ -84,14 +88,14 @@ describe("Glossary page", () => {
 
   it("should have DefinedTermSet microdata on container", async () => {
     const container = page.locator(
-      "div[itemscope][itemtype='https://schema.org/DefinedTermSet']",
+      "[itemscope][itemtype='https://schema.org/DefinedTermSet']",
     );
     await expect(container).toBeVisible();
   });
 
   it("should have DefinedTerm microdata on each term", async () => {
     const terms = page.locator(
-      "div[itemscope][itemtype='https://schema.org/DefinedTerm']",
+      '[itemscope][itemtype="https://schema.org/DefinedTerm"]',
     );
     const count = await terms.count();
     expect(count).toBe(expectedTerms.length);
@@ -99,14 +103,14 @@ describe("Glossary page", () => {
 
   it("should have proper microdata attributes for each term", async () => {
     // Check first term has all required microdata
-    const firstTerm = page
-      .locator("div[itemscope][itemtype='https://schema.org/DefinedTerm']")
-      .first();
+    const firstTerm = page.locator(
+      '[itemscope][itemtype="https://schema.org/DefinedTerm"]',
+    );
 
-    const name = firstTerm.locator("h2[itemprop='name']");
+    const name = firstTerm.locator('[itemprop="name"]').first();
     await expect(name).toBeVisible();
 
-    const description = firstTerm.locator("p[itemprop='description']");
+    const description = firstTerm.locator('[itemprop="description"]').first();
     await expect(description).toBeVisible();
   });
 

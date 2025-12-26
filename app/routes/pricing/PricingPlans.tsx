@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { ActiveLink } from "~/components/ui/ActiveLink";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import { cn } from "~/lib/utils";
 
 const merchantPlans = {
@@ -63,38 +64,34 @@ const mallPlans = [
 
 export default function PricingPlans() {
   return (
-    <>
-      <section className="bg-[hsl(60,100%,99%)] py-20">
-        <div className="container mx-auto max-w-7xl">
-          <h2 className="mb-4 text-center font-bold text-3xl text-black leading-tight">
-            For Merchants
-          </h2>
-          <p className="mb-12 text-center font-medium text-black text-lg leading-relaxed">
-            Find and lease retail spaces with zero platform fees
-          </p>
+    <section className="space-y-20">
+      <div className="container mx-auto max-w-7xl bg-[hsl(60,100%,99%)]">
+        <h2 className="mb-4 text-center font-bold text-3xl text-black leading-tight">
+          For Merchants
+        </h2>
+        <p className="mb-12 text-center font-medium text-black text-lg leading-relaxed">
+          Find and lease retail spaces with zero platform fees
+        </p>
 
-          <div className="mx-auto grid max-w-xl grid-cols-1 hover:rotate-1">
-            <PricingPlan plan={merchantPlans} />
-          </div>
+        <div className="mx-auto grid max-w-xl grid-cols-1 hover:rotate-1">
+          <PricingPlan plan={merchantPlans} />
         </div>
-      </section>
+      </div>
 
-      <section className="bg-[hsl(60,100%,99%)] py-20">
-        <div className="container mx-auto max-w-7xl">
-          <h2 className="mb-4 text-center font-bold text-3xl text-black leading-tight">
-            For Shopping Centers & Malls
-          </h2>
-          <p className="mb-12 text-center font-medium text-black text-lg leading-relaxed">
-            List your spaces and grow your revenue with our platform
-          </p>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            {mallPlans.map((plan) => (
-              <PricingPlan key={plan.name} plan={plan} />
-            ))}
-          </div>
+      <div className="container mx-auto max-w-7xl bg-[hsl(60,100%,99%)]">
+        <h2 className="mb-4 text-center font-bold text-3xl text-black leading-tight">
+          For Shopping Centers & Malls
+        </h2>
+        <p className="mb-12 text-center font-medium text-black text-lg leading-relaxed">
+          List your spaces and grow your revenue with our platform
+        </p>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {mallPlans.map((plan) => (
+            <PricingPlan key={plan.name} plan={plan} />
+          ))}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 
@@ -113,7 +110,7 @@ function PricingPlan({
   };
 }) {
   return (
-    <div
+    <Card
       key={plan.name}
       className={cn(
         "relative flex flex-col rounded-md border-2 border-black bg-white p-8",
@@ -128,36 +125,40 @@ function PricingPlan({
         </div>
       )}
 
-      <div className="mb-6">
-        <h3 className="mb-2 font-bold text-2xl text-black">{plan.name}</h3>
-        <p className="font-medium text-black text-sm">{plan.description}</p>
-      </div>
+      <CardHeader>
+        <CardTitle>
+          <div className="mb-6">
+            <h3 className="mb-2 font-bold text-2xl text-black">{plan.name}</h3>
+            <p className="font-medium text-black text-sm">{plan.description}</p>
+          </div>
+        </CardTitle>
+      </CardHeader>
 
-      <div className="mb-6">
+      <CardContent className="flex flex-col gap-6">
         <div className="flex items-baseline gap-2">
           <span className="font-bold text-5xl text-black">{plan.price}</span>
-          <span className="font-medium text-black text-sm">{plan.period}</span>
+          <span className="font-medium text-black text-md">{plan.period}</span>
         </div>
-      </div>
 
-      <ActiveLink
-        bg={plan.highlighted ? "yellow" : "white"}
-        className={"mb-8 px-6 py-3 text-center"}
-        size="xl"
-        to={plan.href}
-        variant="button"
-      >
-        {plan.cta}
-      </ActiveLink>
+        <ActiveLink
+          bg={plan.highlighted ? "yellow" : "white"}
+          className={"w-full px-6 py-3 text-center"}
+          size="xl"
+          to={plan.href}
+          variant="button"
+        >
+          {plan.cta}
+        </ActiveLink>
 
-      <ul className="flex flex-col gap-4">
-        {plan.features.map((feature) => (
-          <li key={feature} className="flex items-start gap-3">
-            <Check className="h-5 w-5 shrink-0 text-[hsl(37,92%,65%)]" />
-            <span className="font-medium text-black text-sm">{feature}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+        <ul className="flex flex-col gap-4">
+          {plan.features.map((feature) => (
+            <li key={feature} className="flex items-start gap-3">
+              <Check className="h-5 w-5 shrink-0 text-[hsl(37,92%,65%)]" />
+              <span className="font-medium text-black text-sm">{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
+    </Card>
   );
 }

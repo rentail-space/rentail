@@ -1,4 +1,5 @@
 import { Heart, Users, Zap } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 
 const values = [
   {
@@ -35,18 +36,22 @@ export default function AboutValues() {
 
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {values.map((value) => (
-          <div
+          <Card
             key={value.title}
             className="rounded-md border-2 border-black bg-white p-8 shadow-[4px_4px_0px_0px_black]"
           >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-base border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
-              {value.icon}
-            </div>
-            <h3 className="mb-3 font-bold text-black text-xl">{value.title}</h3>
-            <p className="font-medium text-black leading-relaxed">
-              {value.description}
-            </p>
-          </div>
+            <CardHeader>
+              <CardTitle>
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-base border-2 border-black bg-[hsl(37,92%,65%)] text-black shadow-[2px_2px_0px_0px_black]">
+                  {value.icon}
+                </div>
+                <h3 className="mb-3 font-bold text-black text-xl">
+                  {value.title}
+                </h3>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>{value.description}</CardContent>
+          </Card>
         ))}
       </div>
     </section>

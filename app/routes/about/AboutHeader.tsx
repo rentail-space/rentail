@@ -1,6 +1,6 @@
 export default function AboutHeader() {
   return (
-    <section className="mx-auto max-w-4xl bg-[hsl(60,100%,99%)] py-20 text-center md:py-32">
+    <section className="mx-auto max-w-4xl bg-[hsl(60,100%,99%)] py-20 text-center">
       <h1 className="mb-6 font-bold text-5xl text-black leading-tight md:text-6xl">
         Making retail space accessible for everyone
       </h1>

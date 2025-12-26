@@ -1,3 +1,5 @@
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
+
 const faq = [
   {
     question: "How does the 15% commission work for malls?",
@@ -30,17 +32,17 @@ export default function PricingFAQ() {
 
       <div className="flex flex-col gap-6">
         {faq.map((faq) => (
-          <div
+          <Card
             key={faq.question}
             className="rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]"
           >
-            <h3 className="mb-3 font-bold text-black text-xl">
-              {faq.question}
-            </h3>
-            <p className="font-medium text-black leading-relaxed">
-              {faq.answer}
-            </p>
-          </div>
+            <CardHeader>
+              <CardTitle>
+                <h3 className="font-bold text-black text-xl">{faq.question}</h3>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>{faq.answer}</CardContent>
+          </Card>
         ))}
       </div>
     </section>

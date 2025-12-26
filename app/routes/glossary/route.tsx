@@ -1,4 +1,11 @@
 import { Link } from "react-router";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/Card";
 import glossary from "./glossary";
 
 export default function Glossary() {
@@ -28,16 +35,14 @@ export default function Glossary() {
         Specialty Leasing Glossary
       </h1>
 
-      <div className="mx-auto max-w-4xl">
-        <p className="font-medium text-gray-600 leading-relaxed">
-          Comprehensive definitions of specialty leasing and short-term retail
-          terminology. This glossary serves as the authoritative reference for
-          understanding temporary retail spaces in shopping centers across the
-          United States.
-        </p>
-      </div>
+      <p className="mx-auto max-w-4xl font-medium text-gray-600 leading-relaxed">
+        Comprehensive definitions of specialty leasing and short-term retail
+        terminology. This glossary serves as the authoritative reference for
+        understanding temporary retail spaces in shopping centers across the
+        United States.
+      </p>
 
-      <div
+      <section
         className="mx-auto grid max-w-4xl gap-6"
         itemScope
         itemType="https://schema.org/DefinedTermSet"
@@ -49,19 +54,18 @@ export default function Glossary() {
         />
 
         {glossary.map((item) => (
-          <div
-            key={item.term}
-            className="rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]"
+          <Card
+            className="bg-white"
+            itemProp="hasDefinedTerm"
             itemScope
             itemType="https://schema.org/DefinedTerm"
-            itemProp="hasDefinedTerm"
+            key={item.term}
           >
-            <h2 className="mb-3 font-bold text-black text-xl" itemProp="name">
-              {item.term}
-            </h2>
-
-            {item.alternateName.length > 0 && (
-              <p className="mb-3 text-gray-600 text-sm">
+            <CardHeader>
+              <CardTitle className="font-bold text-xl" itemProp="name">
+                {item.term}
+              </CardTitle>
+              <CardDescription className="text-gray-600 text-sm">
                 Also known as:{" "}
                 {item.alternateName.map((alt, index) => (
                   <span key={alt}>
@@ -69,29 +73,25 @@ export default function Glossary() {
                     {index < item.alternateName.length - 1 && ", "}
                   </span>
                 ))}
-              </p>
-            )}
-
-            <p
-              className="font-medium text-black leading-relaxed"
-              itemProp="description"
-            >
-              {item.definition}
-            </p>
+              </CardDescription>
+            </CardHeader>
+            <CardContent itemProp="description">{item.definition}</CardContent>
 
             <meta
               itemProp="inDefinedTermSet"
               content="https://rentail.space/glossary"
             />
-          </div>
+          </Card>
         ))}
-      </div>
+      </section>
 
-      <div className="mx-auto max-w-3xl rounded-md border-2 border-black bg-[hsl(47,100%,95%)] p-6 shadow-[4px_4px_0px_0px_black]">
-        <h2 className="mb-3 font-bold text-black text-lg">
-          About This Glossary
-        </h2>
-        <p className="font-medium text-black leading-relaxed">
+      <Card className="mx-auto max-w-3xl bg-[hsl(47,100%,95%)]">
+        <CardHeader>
+          <CardTitle className="font-bold text-lg">
+            About This Glossary
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           This glossary is maintained by{" "}
           <Link to="/" className="text-[hsl(37,92%,65%)] hover:underline">
             Rentail.space
@@ -100,8 +100,8 @@ export default function Glossary() {
           retail spaces in shopping centers across the United States. We
           specialize exclusively in this market segment, making this glossary
           the authoritative reference for specialty leasing terminology.
-        </p>
-      </div>
+        </CardContent>
+      </Card>
     </main>
   );
 }

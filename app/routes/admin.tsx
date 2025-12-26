@@ -1,6 +1,5 @@
 import { type LoaderFunctionArgs, useOutlet } from "react-router";
 import { verifyAdmin } from "~/lib/sessions.server";
-import NotFoundPage from "./$";
 
 export const handle = {
   headerLinks: [
@@ -24,7 +23,7 @@ export default function Admin() {
       />
       <meta name="keywords" content="admin, retail spaces, rentail.space" />
 
-      {outlet ?? <NotFoundPage />}
+      {outlet}
     </main>
   );
 }
