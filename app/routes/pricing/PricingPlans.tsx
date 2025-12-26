@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { ActiveLink } from "~/components/ui/ActiveLink";
-import { Badge } from "~/components/ui/badge";
+import { Badge } from "~/components/ui/Badge";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import { cn } from "~/lib/utils";
 
