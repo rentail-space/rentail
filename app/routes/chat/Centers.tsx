@@ -67,36 +67,38 @@ function LinkToCenter({
   setHoveredCenter: (centerId: string | null) => void;
 }) {
   return (
-    <ActiveLink
-      className="flex flex-row items-center gap-2"
-      onClick={() => trackEvent("view_center", { category: "chat" })}
-      onMouseEnter={() => setHoveredCenter(center.id)}
-      onMouseLeave={() => setHoveredCenter(null)}
-      target="_blank"
-      to={`/center/${center.id}`}
-      variant="button"
-    >
-      <img
-        alt="Shopping mall"
-        className="h-5 w-5 shrink-0 rounded-sm border border-black object-contain"
-        src={center.logoURL || "/images/shopping-mall.png"}
-      />
-      <div className="flex min-w-0 flex-1 flex-col">
-        <div className="truncate font-bold text-black text-sm">
-          {center.name}
-        </div>
-        {center.spaces.length > 0 && (
-          <div className="font-medium text-black/70 text-xs">
-            {center.spaces.length} available{" "}
-            {center.spaces.length === 1 ? "space" : "spaces"}
+    <>
+      <ActiveLink
+        className="flex flex-row items-center gap-2"
+        onClick={() => trackEvent("view_center", { category: "chat" })}
+        onMouseEnter={() => setHoveredCenter(center.id)}
+        onMouseLeave={() => setHoveredCenter(null)}
+        target="_blank"
+        to={`/center/${center.id}`}
+        variant="button"
+      >
+        <img
+          alt="Shopping mall"
+          className="h-5 w-5 shrink-0 rounded-sm border border-black object-contain"
+          src={center.logoURL || "/images/shopping-mall.png"}
+        />
+        <div className="flex min-w-0 flex-1 flex-col">
+          <div className="truncate font-bold text-black text-sm">
+            {center.name}
           </div>
-        )}
-      </div>
+          {center.spaces.length > 0 && (
+            <div className="font-medium text-black/70 text-xs">
+              {center.spaces.length} available{" "}
+              {center.spaces.length === 1 ? "space" : "spaces"}
+            </div>
+          )}
+        </div>
+      </ActiveLink>
       <HoverCard
         mode={hoveredCenter === center.id ? "visible" : "hidden"}
         center={center}
       />
-    </ActiveLink>
+    </>
   );
 }
 

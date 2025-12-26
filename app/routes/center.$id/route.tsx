@@ -1,6 +1,6 @@
 import prisma from "~/lib/prisma";
 import type { Route } from "./+types/route";
-import Center from "./Center";
+import CenterDetails from "./CenterDetails";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const center = await prisma.property.findUnique({
@@ -35,7 +35,7 @@ export default function CenterPage({
       />
       <meta name="author" content="rentail.space" />
 
-      <Center center={loaderData} />
+      <CenterDetails center={loaderData} />
     </main>
   );
 }

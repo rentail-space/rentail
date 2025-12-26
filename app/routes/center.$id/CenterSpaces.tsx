@@ -1,10 +1,10 @@
 import type { PropertySpace } from "prisma/generated/client";
 
-export function Spaces({ spaces }: { spaces: PropertySpace[] }) {
+export function CenterSpaces({ spaces }: { spaces: PropertySpace[] }) {
   if (spaces.length === 0) return <NoAvailableSpaces />;
   return (
-    <div className="space-y-8">
-      <h4 className="text-center font-bold text-lg">Available Spaces</h4>
+    <>
+      <h4 className="text-center font-bold text-2xl">Available Spaces</h4>
       {spaces
         .sort((a, b) =>
           a.type !== b.type
@@ -14,7 +14,7 @@ export function Spaces({ spaces }: { spaces: PropertySpace[] }) {
         .map((space) => (
           <Space key={space.id} space={space} />
         ))}
-    </div>
+    </>
   );
 }
 
@@ -28,7 +28,7 @@ function NoAvailableSpaces() {
 
 function Space({ space }: { space: PropertySpace }) {
   return (
-    <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 py-4 lg:grid-cols-4">
       <Metric title="number" value={space.number} />
       <Metric
         title="size (sqft)"

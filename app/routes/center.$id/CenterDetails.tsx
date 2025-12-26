@@ -4,9 +4,9 @@ import { Streamdown } from "streamdown";
 import CentersMap from "~/components/ui/CentersMap";
 import externalLink from "~/lib/externalLink";
 import CenterInfo from "./CenterInfo";
-import { Spaces } from "./Spaces";
+import { CenterSpaces } from "./CenterSpaces";
 
-export default function Center({
+export default function CenterDetails({
   center,
 }: {
   center: PropertyGetPayload<{ include: { spaces: true } }>;
@@ -42,13 +42,23 @@ export default function Center({
       )}
 
       <section className="prose prose-lg max-w-none rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
+        <h2 className="font-bold text-2xl">Summary</h2>
         <Streamdown remarkPlugins={[remarkGfm]} mode="static">
           {center.description}
         </Streamdown>
       </section>
 
+      {center.demographics && (
+        <section className="prose prose-lg max-w-none rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
+          <h2 className="font-bold text-2xl">Demographics</h2>
+          <Streamdown remarkPlugins={[remarkGfm]} mode="static">
+            {center.demographics}
+          </Streamdown>
+        </section>
+      )}
+
       <section className="rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
-        <Spaces spaces={center.spaces} />
+        <CenterSpaces spaces={center.spaces} />
       </section>
 
       <section className="overflow-hidden rounded-md border-2 border-black shadow-[6px_6px_0px_0px_black]">
