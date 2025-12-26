@@ -18,7 +18,8 @@ import {
 import { DateTime } from "luxon";
 import { useQueryState } from "nuqs";
 import type { User } from "prisma/generated/client";
-import { Link, type LoaderFunctionArgs } from "react-router";
+import type { LoaderFunctionArgs } from "react-router";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import { Input } from "~/components/ui/Input";
 import {
@@ -300,13 +301,9 @@ function AllUsers({ users }: { users: User[] }) {
       {
         accessorKey: "name",
         cell: ({ row }) => (
-          <Link
-            to={`/admin/user/${row.original.id}`}
-            className="truncate text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
-          >
-            {" "}
-            {row.original.name || row.original.id}{" "}
-          </Link>
+          <ActiveLink to={`/admin/user/${row.original.id}`}>
+            {row.original.name || row.original.id}
+          </ActiveLink>
         ),
         header: "Name",
         size: 240,

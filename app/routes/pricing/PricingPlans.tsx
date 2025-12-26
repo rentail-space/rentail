@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { Link } from "react-router";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 import { cn } from "~/lib/utils";
 
 const merchantPlans = {
@@ -140,16 +140,15 @@ function PricingPlan({
         </div>
       </div>
 
-      <Link
+      <ActiveLink
+        bg={plan.highlighted ? "yellow" : "white"}
+        className={"mb-8 px-6 py-3 text-center"}
+        size="xl"
         to={plan.href}
-        className={`mb-8 inline-flex transform items-center justify-center rounded-sm border-2 border-black px-6 py-3 text-center font-bold transition-all duration-100 ${
-          plan.highlighted
-            ? "bg-[hsl(37,92%,65%)] text-black shadow-[3px_3px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black]"
-            : "bg-white text-black shadow-[3px_3px_0px_0px_black] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black]"
-        }`}
+        variant="button"
       >
         {plan.cta}
-      </Link>
+      </ActiveLink>
 
       <ul className="flex flex-col gap-4">
         {plan.features.map((feature) => (

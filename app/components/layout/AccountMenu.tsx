@@ -1,7 +1,7 @@
 import { ShieldIcon, UnlockIcon, UserIcon } from "lucide-react";
 import type { User } from "prisma/generated/client";
 import { useEffect, useRef, useState } from "react";
-import { Link, useRouteLoaderData } from "react-router";
+import { Link, useNavigate, useRouteLoaderData } from "react-router";
 import { Button } from "~/components/ui/Button";
 import { cn } from "~/lib/utils";
 import type { loader as rootLoader } from "~/root";
@@ -42,14 +42,19 @@ export default function AccountMenu({ className }: { className?: string }) {
 }
 
 function SignInButton() {
+  const navigate = useNavigate();
+
   return (
-    <Link
+    <Button
       aria-label="Go to sign in page"
-      className="h-9 w-22 transform whitespace-nowrap rounded-base border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-1 font-bold text-black shadow-[2px_2px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_black]"
-      to="/auth"
+      className="h-9"
+      onClick={() => {
+        navigate("/auth");
+      }}
+      type="button"
     >
       Sign In
-    </Link>
+    </Button>
   );
 }
 

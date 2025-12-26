@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 
 export default function FAQCTA() {
   return (
@@ -10,12 +10,14 @@ export default function FAQCTA() {
         Our team is here to help. Reach out and we'll get back to you within 24
         hours.
       </p>
-      <Link
+      <ActiveLink
+        bg="yellow"
+        size="xl"
         to={`mailto:hello@rentail.space?subject=${encodeURIComponent("I have questions")}`}
-        className="inline-flex transform items-center justify-center rounded-md border-2 border-black bg-[hsl(37,92%,65%)] px-8 py-4 font-bold text-black text-lg shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_black]"
+        variant="button"
       >
         Contact Support
-      </Link>
+      </ActiveLink>
     </section>
   );
 }

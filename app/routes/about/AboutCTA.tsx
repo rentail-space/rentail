@@ -1,5 +1,5 @@
 import { Building2 } from "lucide-react";
-import { Link } from "react-router";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 
 export default function AboutCTA() {
   return (
@@ -18,18 +18,17 @@ export default function AboutCTA() {
           space to fill, we'd love to work with you.
         </p>
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-          <Link
-            to="/chat"
-            className="inline-flex transform items-center justify-center rounded-md border-2 border-black bg-[hsl(37,92%,65%)] px-8 py-4 font-bold text-black text-lg shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_black]"
-          >
+          <ActiveLink variant="button" to="/chat" bg="yellow" size="xl">
             Find a Space
-          </Link>
-          <Link
+          </ActiveLink>
+          <ActiveLink
+            className="px-8"
+            size="xl"
             to="mailto:hello@rentail.space"
-            className="inline-flex transform items-center justify-center rounded-md border-2 border-black bg-white px-8 py-4 font-bold text-black text-lg shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_black]"
+            variant="button"
           >
             Get in Touch
-          </Link>
+          </ActiveLink>
         </div>
       </div>
     </section>

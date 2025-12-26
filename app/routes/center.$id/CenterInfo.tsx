@@ -9,8 +9,7 @@ import {
   StarIcon,
 } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
-import { Link } from "react-router";
-import { Button } from "~/components/ui/Button";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 import { trackEvent } from "~/lib/analytics";
 import externalLink from "~/lib/externalLink";
 import formatPhoneNumber from "~/lib/formatPhoneNumber";
@@ -85,17 +84,15 @@ export default function CenterInfo({
       {center.website && (
         <div className="items-top flex flex-row gap-2 pb-4">
           <GlobeIcon className="h-6 w-6" />
-          <Link
-            className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
+          <ActiveLink
             onClick={() =>
               trackEvent("click_external_link", { category: "center_info" })
             }
-            rel="noopener noreferrer"
             target="_blank"
             to={externalLink(center.website)}
           >
             {center.website}
-          </Link>
+          </ActiveLink>
         </div>
       )}
 
@@ -103,44 +100,37 @@ export default function CenterInfo({
         <div className="items-top flex flex-row gap-2 pb-4">
           <PhoneIcon className="h-6 w-6" />
           <span>
-            <a
-              className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
-              href={`tel:${center.phone}`}
+            <ActiveLink
               onClick={() =>
                 trackEvent("click_phone_number", { category: "center_info" })
               }
+              to={`tel:${center.phone}`}
             >
               {formatPhoneNumber(center.phone)}
-            </a>
+            </ActiveLink>
           </span>
         </div>
       )}
 
-      <div className="space-y-4">
-        <div className="items-top flex flex-row gap-2">
-          <MapPinIcon className="h-6 w-6" />
+      <div className="items-top flex flex-row gap-2">
+        <MapPinIcon className="h-6 w-6" />
+
+        <div className="flex w-full flex-row items-center justify-between gap-2">
           <span>
             {center.address}
             {center.city && `, ${center.city}`}
             {center.state && `, ${center.state}`}
           </span>
-        </div>
 
-        <Button
-          className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
-          variant="secondary"
-          asChild={true}
-        >
-          <Link
+          <ActiveLink
             to={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
               `${center.address}, ${center.city}, ${center.state} ${center.country}`,
             )}`}
             target="_blank"
-            rel="noopener noreferrer"
           >
             Directions
-          </Link>
-        </Button>
+          </ActiveLink>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from "lucide-react";
 import { Link } from "react-router";
 import { Streamdown } from "streamdown";
-import { Button } from "~/components/ui/Button";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 import prisma from "~/lib/prisma";
 
 export async function loader() {
@@ -118,12 +118,13 @@ function LinkToState({
       </Link>
 
       <div className="flex w-full flex-row justify-end">
-        <Button variant="secondary" asChild>
-          <Link to={`/state/${abbreviation.toLowerCase()}`}>
-            Visit {name} centers
-            <ArrowRightIcon className="h-4 w-4" />
-          </Link>
-        </Button>
+        <ActiveLink
+          variant="button"
+          to={`/state/${abbreviation.toLowerCase()}`}
+        >
+          Visit {name} centers
+          <ArrowRightIcon className="h-4 w-4" />
+        </ActiveLink>
       </div>
     </div>
   );

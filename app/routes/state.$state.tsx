@@ -9,7 +9,7 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { Children, Fragment, useRef } from "react";
 import { Link } from "react-router";
 import { Streamdown } from "streamdown";
-import { Button } from "~/components/ui/Button";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 import CentersMap from "~/components/ui/CentersMap";
 import prisma from "~/lib/prisma";
 import timeOfDay from "~/lib/timeOfDay";
@@ -61,21 +61,18 @@ export default function StatePage({
         }}
       />
 
-      <div className="flex w-full items-center">
-        <Link
-          to="/states"
-          className="hidden w-1/2 flex-row items-center gap-2 md:flex print:hidden"
-        >
-          <MoveLeftIcon className="h-4 w-4" />
-          All States
-        </Link>
+      <ActiveLink
+        to="/states"
+        variant="silent"
+        className="hidden md:inline-flex print:hidden"
+      >
+        <MoveLeftIcon className="h-4 w-4" />
+        All States
+      </ActiveLink>
 
-        <h1 className="whitespace-nowrap text-center font-bold text-2xl">
-          {state.name}
-        </h1>
-
-        <span className="w-1/2" />
-      </div>
+      <h1 className="whitespace-nowrap text-center font-bold text-2xl">
+        {state.name}
+      </h1>
 
       <Streamdown className="text-gray-600 text-sm" mode="static">
         {state.lede}
@@ -153,16 +150,10 @@ function LinkToCenter({
           <KeyCenterStats center={center} />
         </Link>
 
-        <Button
-          variant="secondary"
-          className="flex flex-row flex-nowrap items-center gap-2"
-          asChild
-        >
-          <Link to={`/center/${center.id}`}>
-            Visit {center.name}
-            <ArrowRightIcon className="h-4 w-4" />
-          </Link>
-        </Button>
+        <ActiveLink to={`/center/${center.id}`} variant="button">
+          Visit {center.name}
+          <ArrowRightIcon className="h-4 w-4" />
+        </ActiveLink>
       </div>
     </div>
   );

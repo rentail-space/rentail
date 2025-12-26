@@ -7,8 +7,8 @@ import type {
   PropertyGetPayload,
 } from "prisma/generated/models";
 import { Link, useFetcher } from "react-router";
-import { twMerge } from "tailwind-merge";
 import { StickToBottom } from "use-stick-to-bottom";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import { FieldSet } from "~/components/ui/FieldSet";
 import {
@@ -251,27 +251,15 @@ function Pagination({ user, users }: { user: User; users: { id: string }[] }) {
 
   return (
     <div className="flex justify-between">
-      <Link
-        className={twMerge(
-          "flex items-center gap-2 px-4 py-2 font-bold transition-all duration-150 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-black",
-          !older && "pointer-events-none text-gray-400 opacity-50",
-        )}
-        to={`/admin/user/${older?.id}`}
-      >
+      <ActiveLink disabled={!older} to={`/admin/user/${older?.id}`}>
         <ArrowLeft className="h-5 w-5" />
         <span>Older</span>
-      </Link>
+      </ActiveLink>
 
-      <Link
-        className={twMerge(
-          "flex items-center gap-2 px-4 py-2 font-bold transition-all duration-150 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-black",
-          !newer && "pointer-events-none text-gray-400 opacity-50",
-        )}
-        to={`/admin/user/${newer?.id}`}
-      >
+      <ActiveLink disabled={!newer} to={`/admin/user/${newer?.id}`}>
         Newer
         <ArrowRight className="h-4 w-4" />
-      </Link>
+      </ActiveLink>
     </div>
   );
 }

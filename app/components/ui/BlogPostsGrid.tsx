@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import { Link } from "react-router";
 import type { BlogPost } from "~/lib/blogPosts.server";
 import { cn } from "~/lib/utils";
+import { ActiveLink } from "./ActiveLink";
 
 export default function BlogPostsGrid({
   className,
@@ -31,12 +32,12 @@ export default function BlogPostsGrid({
             ))}
             {limit && posts.length > limit && (
               <div className="col-span-full text-center">
-                <Link
+                <ActiveLink
                   to="/blog"
-                  className="flex flex-row flex-nowrap items-center justify-center gap-2 font-medium text-black text-xl hover:text-[hsl(37,92%,65%)]"
+                  variant="highlight"
                 >
                   Explore all blog posts <ArrowRight className="h-6 w-6" />
-                </Link>
+                </ActiveLink>
               </div>
             )}
           </div>

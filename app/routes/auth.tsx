@@ -3,7 +3,16 @@ import { invariant } from "es-toolkit";
 import { AlertCircle } from "lucide-react";
 import { redirect, useFetcher } from "react-router";
 import { useToggle } from "usehooks-ts";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/Card";
 import {
   Field,
   FieldDescription,
@@ -70,116 +79,110 @@ export default function AuthPage() {
         content="sign up, sign in, retail spaces, rentail.space"
       />
 
-      <section className="mx-4 my-10 w-full max-w-md space-y-6 rounded-2xl bg-white p-8 shadow-xl">
-        <header>
-          <h1 className="text-center font-bold text-3xl">
+      <Card className="mx-4 my-10 w-full max-w-md">
+        <CardHeader className="text-center">
+          <CardTitle className="font-bold text-3xl">
             {isSignUp ? "Create Account" : "Welcome Back"}
-          </h1>
-          <p className="text-center text-gray-600">
+          </CardTitle>
+          <CardDescription>
             {isSignUp
               ? "Sign up to start finding retail spaces"
               : "Sign in to your account"}
-          </p>
-        </header>
+          </CardDescription>
+        </CardHeader>
 
-        <fetcher.Form method="post" className="space-y-6">
-          <FieldSet>
-            {isSignUp && (
+        <CardContent>
+          <fetcher.Form method="post" className="space-y-6">
+            <FieldSet>
+              {isSignUp && (
+                <Field>
+                  <FieldLabel htmlFor="name">Full Name</FieldLabel>
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder="John Doe"
+                  />
+                </Field>
+              )}
+
               <Field>
-                <FieldLabel htmlFor="name">Full Name</FieldLabel>
+                <FieldLabel htmlFor="email">Email Address</FieldLabel>
                 <Input
-                  id="name"
-                  name="name"
-                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="you@example.com"
                   required
-                  placeholder="John Doe"
+                  type="email"
+                  style={{}}
                 />
               </Field>
+
+              <Field>
+                <FieldLabel htmlFor="password">Password</FieldLabel>
+                <Input
+                  id="password"
+                  minLength={8}
+                  name="password"
+                  placeholder="••••••••"
+                  required
+                  type="password"
+                  style={{}}
+                />
+                <FieldDescription>
+                  Must be at least 8 characters
+                </FieldDescription>
+              </Field>
+            </FieldSet>
+
+            {fetcher.data?.error && (
+              <FieldError errors={[fetcher.data.error]}>
+                <div className="flex items-center gap-2 font-bold text-lg text-red-500">
+                  <AlertCircle className="h-6 w-6 shrink-0 stroke-current" />
+                  {fetcher.data.error}
+                </div>
+              </FieldError>
             )}
 
-            <Field>
-              <FieldLabel htmlFor="email">Email Address</FieldLabel>
-              <Input
-                id="email"
-                name="email"
-                placeholder="you@example.com"
-                required
-                type="email"
-                style={{}}
-              />
-            </Field>
+            <Button
+              className="flex w-full items-center justify-center gap-2 p-6 font-bold text-lg"
+              disabled={fetcher.state !== "idle"}
+              type="submit"
+              variant="default"
+            >
+              {fetcher.state !== "idle" && (
+                <span className="loading loading-spinner" />
+              )}
+              {isSignUp
+                ? fetcher.state === "idle"
+                  ? "Create Account"
+                  : "Creating Your Account..."
+                : fetcher.state === "idle"
+                  ? "Sign In"
+                  : "Signing You In..."}
+            </Button>
+          </fetcher.Form>
+        </CardContent>
 
-            <Field>
-              <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input
-                id="password"
-                minLength={8}
-                name="password"
-                placeholder="••••••••"
-                required
-                type="password"
-                style={{}}
-              />
-              <FieldDescription>Must be at least 8 characters</FieldDescription>
-            </Field>
-          </FieldSet>
-
-          {fetcher.data?.error && (
-            <FieldError errors={[fetcher.data.error]}>
-              <div className="flex items-center gap-2 font-bold text-lg text-red-500">
-                <AlertCircle className="h-6 w-6 shrink-0 stroke-current" />
-                {fetcher.data.error}
-              </div>
-            </FieldError>
-          )}
-
+        <CardFooter className="flex flex-col items-center gap-4 text-center">
           <Button
-            className="flex w-full items-center justify-center gap-2 p-6 font-bold text-lg"
-            disabled={fetcher.state !== "idle"}
-            type="submit"
-            variant="default"
+            className="text-center font-bold text-lg"
+            onClick={toggleIsSignUp}
+            type="button"
+            variant="ghost"
           >
-            {fetcher.state !== "idle" && (
-              <span className="loading loading-spinner" />
-            )}
             {isSignUp
-              ? fetcher.state === "idle"
-                ? "Create Account"
-                : "Creating Your Account..."
-              : fetcher.state === "idle"
-                ? "Sign In"
-                : "Signing You In..."}
+              ? "Already have an account? Sign in"
+              : "Don't have an account? Create one"}
           </Button>
-        </fetcher.Form>
-
-        <Button
-          className="text-center font-bold text-lg"
-          onClick={toggleIsSignUp}
-          type="button"
-          variant="ghost"
-        >
-          {isSignUp
-            ? "Already have an account? Sign in"
-            : "Don't have an account? Create one"}
-        </Button>
-
-        <Footer isSignUp={isSignUp} />
-      </section>
+          <p>
+            By {isSignUp ? "signing up" : "signing in"}, you agree to our{" "}
+            <ActiveLink to="/terms">Terms of Service</ActiveLink> and{" "}
+            <ActiveLink to="/privacy">Privacy Policy</ActiveLink>
+          </p>
+        </CardFooter>
+      </Card>
     </main>
-  );
-}
-
-function Footer({ isSignUp }: { isSignUp: boolean }) {
-  return (
-    <footer className="mt-8 text-center text-gray-600 text-sm">
-      By {isSignUp ? "signing up" : "signing in"}, you agree to our{" "}
-      <a href="/terms" className="link">
-        Terms of Service
-      </a>{" "}
-      and{" "}
-      <a href="/privacy" className="link">
-        Privacy Policy
-      </a>
-    </footer>
   );
 }

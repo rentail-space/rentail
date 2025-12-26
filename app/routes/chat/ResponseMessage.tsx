@@ -1,10 +1,10 @@
 import type { UIMessage } from "ai";
 import type React from "react";
 import { Children, type JSX, useEffect, useRef } from "react";
-import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import type { ScrollToBottom } from "use-stick-to-bottom";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 import { trackEvent } from "~/lib/analytics";
 import { cn } from "~/lib/utils";
 import { maskWorkingMemoryTags } from "~/lib/workingMemory";
@@ -117,8 +117,7 @@ function getComponents({
     a: ({ children, href }) => {
       const isAsk = href?.startsWith("/?q=");
       return isAsk ? (
-        <Link
-          className="inline-block transform cursor-pointer rounded-base border-2 border-black bg-[hsl(37,92%,65%)] px-4 py-2 font-bold text-black no-underline shadow-[3px_3px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_black] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_0px_black]"
+        <ActiveLink
           to={`/chat?q=${children}`}
           onClick={(event) => {
             event.preventDefault();
@@ -127,10 +126,9 @@ function getComponents({
           }}
         >
           {children}
-        </Link>
+        </ActiveLink>
       ) : (
-        <Link
-          className="font-bold text-black underline decoration-2 underline-offset-2 hover:decoration-[hsl(37,92%,65%)]"
+        <ActiveLink
           onClick={() =>
             trackEvent("click_external_link", { category: "chat" })
           }
@@ -138,7 +136,7 @@ function getComponents({
           to={href ?? ""}
         >
           {children}
-        </Link>
+        </ActiveLink>
       );
     },
     button: ({ children }) => (

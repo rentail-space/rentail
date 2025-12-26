@@ -7,7 +7,7 @@ import {
 import { ArrowDown, ArrowUp, MapPinIcon } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
-import { Link } from "react-router";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 import CentersMap, { type CenterMapFunction } from "~/components/ui/CentersMap";
 import {
   Table,
@@ -65,48 +65,11 @@ function CentersList({
 }) {
   const table = useReactTable({
     columns: [
-      {
-        id: " ",
-        enableSorting: false,
-        size: 40,
-      },
-      {
-        accessorKey: "name",
-        cell: ({ row }) => (
-          <Link
-            to={`/center/${row.original.id}`}
-            className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
-          >
-            {row.original.name}
-          </Link>
-        ),
-        size: 600,
-        header: "Shopping Center",
-      },
-      {
-        accessorKey: "city",
-        size: 140,
-        header: "City",
-      },
-      {
-        accessorKey: "state",
-        cell: ({ row }) => (
-          <Link
-            to={`/state/${row.original.state}`}
-            className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
-          >
-            {row.original.state}
-          </Link>
-        ),
-        header: "State",
-        size: 100,
-      },
-      {
-        accessorKey: "spaces",
-        cell: ({ row }) => row.original.spaces.length,
-        size: 120,
-        header: "Spaces",
-      },
+      { enableSorting: false, id: " ", size: 40 },
+      { accessorKey: "name", size: 600, header: "Shopping Center" },
+      { accessorKey: "city", size: 140, header: "City" },
+      { accessorKey: "state", header: "State", size: 100 },
+      { accessorKey: "spaces", size: 120, header: "Spaces" },
     ],
     data: centers,
     debugTable: true,
@@ -170,21 +133,15 @@ function CentersList({
               />
             </TableCell>
             <TableCell>
-              <Link
-                className="text-blue-500 no-underline hover:text-blue-700 hover:underline"
-                to={`/center/${row.original.id}`}
-              >
+              <ActiveLink to={`/center/${row.original.id}`}>
                 {row.original.name}
-              </Link>
+              </ActiveLink>
             </TableCell>
             <TableCell>{row.original.city}</TableCell>
             <TableCell>
-              <Link
-                to={`/state/${row.original.state}`}
-                className="text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
-              >
+              <ActiveLink to={`/state/${row.original.state}`}>
                 {row.original.state}
-              </Link>
+              </ActiveLink>
             </TableCell>
             <TableCell className="text-right">
               {row.original.spaces.length}

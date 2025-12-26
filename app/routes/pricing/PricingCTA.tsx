@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 
 export default function PricingCTA() {
   return (
@@ -10,12 +10,9 @@ export default function PricingCTA() {
         <p className="mb-8 font-medium text-black text-xl leading-relaxed">
           Start finding your perfect retail space today.
         </p>
-        <Link
-          to="/chat"
-          className="inline-flex transform items-center justify-center rounded-md border-2 border-black bg-[hsl(37,92%,65%)] px-8 py-4 font-bold text-black text-lg shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_black]"
-        >
+        <ActiveLink to="/chat" variant="button" bg="yellow" size="xl">
           Get Started Now
-        </Link>
+        </ActiveLink>
       </div>
     </section>
   );
