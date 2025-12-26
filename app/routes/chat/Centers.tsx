@@ -2,6 +2,8 @@ import { sortBy } from "es-toolkit";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Activity, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import { ActiveLink } from "~/components/ui/ActiveLink";
+import { Card, CardContent } from "~/components/ui/Card";
 import { trackEvent } from "~/lib/analytics";
 import { cn } from "~/lib/utils";
 
@@ -17,8 +19,8 @@ export default function Centers({
   centers: PropertyGetPayload<{ include: { spaces: true } }>[];
 }) {
   return (
-    <div className="fixed right-0 bottom-24 mr-4 hidden h-fit lg:block lg:w-1/4">
-      <div className="rounded-md border-2 border-black bg-white p-6 shadow-[6px_6px_0px_0px_black]">
+    <Card className="fixed right-0 bottom-24 mr-4 hidden h-fit bg-white lg:block lg:w-1/4">
+      <CardContent>
         {centers.length > 0 ? (
           <AvailableCenters centers={centers} />
         ) : (
@@ -26,8 +28,8 @@ export default function Centers({
             I'll find centers for you
           </div>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -41,7 +43,7 @@ function AvailableCenters({
   return (
     <>
       <div className="mb-3 font-bold text-black text-lg">Shopping Centers</div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4">
         {sortCenters(centers, 10).map((center) => (
           <LinkToCenter
             hoveredCenter={hoveredCenter}
@@ -65,41 +67,36 @@ function LinkToCenter({
   setHoveredCenter: (centerId: string | null) => void;
 }) {
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: container for hover card positioning
-    <div
-      className="relative"
+    <ActiveLink
+      className="flex flex-row items-center gap-2"
+      onClick={() => trackEvent("view_center", { category: "chat" })}
       onMouseEnter={() => setHoveredCenter(center.id)}
       onMouseLeave={() => setHoveredCenter(null)}
+      target="_blank"
+      to={`/center/${center.id}`}
+      variant="button"
     >
-      <Link
-        className="flex flex-row items-center gap-2 rounded-base border-2 border-black bg-white px-3 py-2 font-medium text-black shadow-[2px_2px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_black]"
-        onClick={() => trackEvent("view_center", { category: "chat" })}
-        target="_blank"
-        to={`/center/${center.id}`}
-      >
-        <img
-          alt="Shopping mall"
-          className="h-5 w-5 shrink-0 rounded-sm border border-black object-contain"
-          src={center.logoURL || "/images/shopping-mall.png"}
-        />
-        <div className="flex min-w-0 flex-1 flex-col">
-          <div className="truncate font-bold text-black text-sm">
-            {center.name}
-          </div>
-          {center.spaces.length > 0 && (
-            <div className="font-medium text-black/70 text-xs">
-              {center.spaces.length} available{" "}
-              {center.spaces.length === 1 ? "space" : "spaces"}
-            </div>
-          )}
+      <img
+        alt="Shopping mall"
+        className="h-5 w-5 shrink-0 rounded-sm border border-black object-contain"
+        src={center.logoURL || "/images/shopping-mall.png"}
+      />
+      <div className="flex min-w-0 flex-1 flex-col">
+        <div className="truncate font-bold text-black text-sm">
+          {center.name}
         </div>
-      </Link>
-
+        {center.spaces.length > 0 && (
+          <div className="font-medium text-black/70 text-xs">
+            {center.spaces.length} available{" "}
+            {center.spaces.length === 1 ? "space" : "spaces"}
+          </div>
+        )}
+      </div>
       <HoverCard
         mode={hoveredCenter === center.id ? "visible" : "hidden"}
         center={center}
       />
-    </div>
+    </ActiveLink>
   );
 }
 

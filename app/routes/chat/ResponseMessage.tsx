@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import type { ScrollToBottom } from "use-stick-to-bottom";
 import { ActiveLink } from "~/components/ui/ActiveLink";
+import { Card, CardContent } from "~/components/ui/Card";
 import { trackEvent } from "~/lib/analytics";
 import { cn } from "~/lib/utils";
 import { maskWorkingMemoryTags } from "~/lib/workingMemory";
@@ -85,22 +86,24 @@ function MarkdownMessage({
           className="rounded-md border-2 border-black shadow-[2px_2px_0px_0px_black]"
         />
       </div>
-      <div
-        className="rounded-t-md rounded-br-md border-2 border-black bg-[hsl(120,100%,97%)] px-4 py-3 shadow-[4px_4px_0px_0px_black]"
+      <Card
+        className="rounded-bl-none bg-[hsl(120,100%,97%)] py-2"
         ref={contentRef}
       >
-        <Streamdown
-          className="prose prose-base max-w-none"
-          components={getComponents({ askQuestion })}
-          controls={{ code: false, mermaid: false, table: false }}
-          parseIncompleteMarkdown
-          remarkPlugins={[remarkGfm]}
-          isAnimating={isStreaming}
-          mode={isStreaming ? "streaming" : "static"}
-        >
-          {maskWorkingMemoryTags(text)}
-        </Streamdown>
-      </div>
+        <CardContent>
+          <Streamdown
+            className="prose prose-base max-w-none"
+            components={getComponents({ askQuestion })}
+            controls={{ code: false, mermaid: false, table: false }}
+            parseIncompleteMarkdown
+            remarkPlugins={[remarkGfm]}
+            isAnimating={isStreaming}
+            mode={isStreaming ? "streaming" : "static"}
+          >
+            {maskWorkingMemoryTags(text)}
+          </Streamdown>
+        </CardContent>
+      </Card>
     </div>
   );
 }

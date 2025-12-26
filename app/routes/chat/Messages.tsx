@@ -4,7 +4,9 @@ import { BeatLoading } from "respinner";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import { cn } from "~/lib/utils";
 import askQuestion from "~/routes/chat/askQuestion";
+import ErrorMessage from "./ErrorMessage";
 import ResponseMessage from "./ResponseMessage";
+import UserMessage from "./UserMessage";
 
 export default function Messages({
   isAborted,
@@ -67,50 +69,10 @@ export default function Messages({
       )}
 
       {isTyping && <BeatLoading color="lightblue" count={4} />}
-      {isAborted && <Aborted />}
-      {error && <ErrorNotice error={error} />}
-    </div>
-  );
-}
-
-function UserMessage({ message }: { message: UIMessage }) {
-  // NOTE: always render as plain text to avoid HTML injection
-  const multipleLines = message.parts
-    .filter((part) => part.type === "text")
-    .map((part) => part.text)
-    .join("\n")
-    .split("\n");
-
-  return (
-    <div className={cn("chat-bubble-user", "flex w-full flex-row justify-end")}>
-      <div
-        className={cn(
-          "max-w-9/10 rounded-b-md rounded-tl-md border-2 border-black bg-[hsl(47,100%,95%)] shadow-[4px_4px_0px_0px_black]",
-          "prose prose-base px-4 py-3 font-medium text-black",
-        )}
-      >
-        {multipleLines.map((line, index) => (
-          <p key={index.toString()}>{line}</p>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Aborted() {
-  return (
-    <div className="chat chat-end">
-      <div className="rounded-md border-2 border-black bg-red-100 px-4 py-3 font-bold text-black shadow-[4px_4px_0px_0px_black]">
-        The conversation was aborted.
-      </div>
-    </div>
-  );
-}
-
-function ErrorNotice({ error }: { error: Error }) {
-  return (
-    <div className="rounded-md border-2 border-black bg-red-100 p-4 font-bold text-black shadow-[4px_4px_0px_0px_black]">
-      {error.message || "Some error happened"}
+      {error && <ErrorMessage error={error} />}
+      {isAborted && (
+        <ErrorMessage error={new Error("The conversation was aborted.")} />
+      )}
     </div>
   );
 }
