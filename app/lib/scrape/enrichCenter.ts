@@ -114,11 +114,10 @@ For optional fields without reliable data, omit them entirely (do not set to nul
 
     const { output } = await generateText({
       abortSignal: AbortSignal.timeout(30_000),
-      model: conversational.model,
       prompt: enrichmentPrompt,
       output: Output.object({ schema: enrichedSchema }),
-      temperature: 1,
       maxRetries: 3,
+      ...conversational,
     });
 
     spinner.succeed();

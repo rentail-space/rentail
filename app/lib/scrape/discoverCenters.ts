@@ -58,10 +58,9 @@ Exclude individual stores or single-building retail.`;
   try {
     const { output: centers } = await generateText({
       abortSignal: AbortSignal.timeout(90_000),
-      model: conversational.model,
       prompt,
       output: Output.array({ element: discoverySchema }),
-      temperature: 0,
+      ...conversational,
     });
     spinner.succeed();
 

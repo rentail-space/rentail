@@ -2,7 +2,7 @@ import { Output, generateText } from "ai";
 import ora from "ora";
 import type { Browser } from "playwright";
 import { z } from "zod";
-import { conversational } from "~/lib/models";
+import { classify } from "~/lib/models";
 
 const spaceSchema = z.object({
   number: z.string().min(1, "Space number required"),
@@ -112,10 +112,9 @@ If no spaces are found or the page doesn't contain leasing information, return a
 
     const { output } = await generateText({
       abortSignal: AbortSignal.timeout(60_000),
-      model: conversational.model,
       prompt,
       output: Output.array({ element: spaceSchema }),
-      temperature: 0,
+      ...classify,
     });
 
     spinner.succeed(`Found ${output.length} spaces for ${centerName}`);

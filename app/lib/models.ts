@@ -20,6 +20,7 @@ export const conversational = {
     anthropic: {} satisfies AnthropicProviderOptions,
   },
   temperature: 0.0,
+  seed: 42,
 } satisfies Omit<LanguageModelV3CallOptions, "prompt"> & {
   model: LanguageModelV3;
 };
@@ -37,6 +38,7 @@ export const classify = {
     } satisfies AnthropicProviderOptions,
   },
   temperature: 0.0,
+  seed: 42,
 } satisfies Omit<LanguageModelV3CallOptions, "prompt"> & {
   model: LanguageModelV3;
 };
