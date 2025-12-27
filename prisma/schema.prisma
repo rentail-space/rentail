@@ -129,6 +129,7 @@ model User {
   isAdmin       Boolean   @map("is_admin")       @default(false)
   isAnonymous   Boolean   @map("is_anonymous")   @default(false)
   isBot         Boolean   @map("is_bot")         @default(false)
+  isMCP         Boolean   @map("is_mcp")         @default(false)
   isMobile      Boolean   @map("is_mobile")      @default(false)
   lastAlertAt   DateTime? @map("last_alert_at")
   metadata      Json      @map("metadata")       @db.Json

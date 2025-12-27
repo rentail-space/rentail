@@ -534,6 +534,7 @@ async function createUser({
       isAdmin,
       isAnonymous,
       isBot: isUABot(userAgent) || (await isBotByIP(ip)),
+      isMCP: false,
       isMobile: deviceInfo.isMobile,
       metadata: {},
       name: isAnonymous ? undefined : name,

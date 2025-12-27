@@ -1,6 +1,8 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
+import type { IsomorphicHeaders } from "@modelcontextprotocol/sdk/types.js";
 import { invariant } from "es-toolkit";
+import type { User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import zod from "zod";
 import { geocodeFromUserInput } from "./geocode";
@@ -44,7 +46,11 @@ mcpServer.registerTool(
     }),
     outputSchema,
   },
-  async (params, _extra) => {
+  async (params, extra) => {
+    await getUserForSession(
+      extra.sessionId ?? ulid(),
+      extra.requestInfo?.headers ?? {},
+    );
     const geocode = await geocodeFromUserInput(params.location);
     if (!geocode) throw new Error("I do not have your location");
 
@@ -91,3 +97,27 @@ const transport = new WebStandardStreamableHTTPServerTransport({
 mcpServer.connect(transport);
 
 export default transport;
+
+async function getUserForSession(
+  sessionId: string,
+  headers: IsomorphicHeaders,
+): Promise<User> {
+  const id = `mcp:${sessionId}`;
+  return (
+    (await prisma.user.findUnique({ where: { id } })) ??
+    (await prisma.user.create({
+      data: {
+        email: `mcp-${id}@rentail.space`,
+        geocode: {},
+        id,
+        ip: headers["X-Forwarded-For"]?.[0] ?? "",
+        isAnonymous: true,
+        isMCP: true,
+        metadata: {},
+        referrer: headers.referer?.[0] ?? "",
+        userAgent: headers.userAgent?.[0] ?? "",
+        workingMemory: "",
+      },
+    }))
+  );
+}
