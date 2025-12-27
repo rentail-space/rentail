@@ -1,4 +1,4 @@
-import { generateObject } from "ai";
+import { Output, generateText } from "ai";
 import { sortBy } from "es-toolkit";
 import { existsSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
@@ -60,16 +60,16 @@ Focus on retail shopping centers, strip malls, and enclosed malls.
 Exclude individual stores or single-building retail.`;
 
   try {
-    const { object } = await generateObject({
+    const { output } = await generateText({
       abortSignal: AbortSignal.timeout(90_000),
       model: conversational.model,
       prompt,
-      schema: discoverySchema,
+      output: Output.object({ schema: discoverySchema }),
       temperature: 0,
     });
     spinner.succeed();
 
-    const { centers } = object;
+    const { centers } = output;
 
     console.info(
       "\x1b[32m  Found %d centers:\n%s\x1b[0m",

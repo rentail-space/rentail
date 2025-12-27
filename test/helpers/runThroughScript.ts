@@ -1,4 +1,4 @@
-import { convertToModelMessages, generateObject, generateText } from "ai";
+import { Output, convertToModelMessages, generateText } from "ai";
 import debug from "debug";
 import { last } from "es-toolkit";
 import type { User } from "prisma/generated/client";
@@ -131,7 +131,7 @@ async function classifyAssistantResponse({
   expecting: string;
 }): Promise<void> {
   const messages = (await recentMessages(chatId)).slice(0, index + 1);
-  const classified = await generateObject({
+  const { output } = await generateText({
     messages: await convertToModelMessages(messages),
     system: `
   This is a sequence of messages between a user and an assistant.
@@ -152,13 +152,15 @@ async function classifyAssistantResponse({
   If any rule applies, return "yes".
   If any rule does not apply, return "no".
   `,
-    schema: zod.object({
-      questions: zod.array(
-        zod.object({
-          question: zod.string(),
-          answer: zod.enum(["yes", "no", "unknown"]),
-        }),
-      ),
+    output: Output.object({
+      schema: zod.object({
+        questions: zod.array(
+          zod.object({
+            question: zod.string(),
+            answer: zod.enum(["yes", "no", "unknown"]),
+          }),
+        ),
+      }),
     }),
     ...classify,
   });
@@ -178,16 +180,14 @@ async function classifyAssistantResponse({
       .split("\n")
       .map((line) => line.trim())
       .join("\n"),
-    classified.object.questions
+    output.questions
       .map(({ question, answer }) => `Q: ${question} => ${answer}`)
       .join("\n"),
   );
 
-  const allCorrect = classified.object.questions.every(
-    ({ answer }) => answer === "yes",
-  );
+  const allCorrect = output.questions.every(({ answer }) => answer === "yes");
   if (!allCorrect) {
-    const allAnswers = classified.object.questions
+    const allAnswers = output.questions
       .map(({ question, answer }) => `Q: ${question} => ${answer}`)
       .join("\n");
     const lastMessage = last(messages)

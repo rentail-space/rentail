@@ -1,4 +1,4 @@
-import { convertToModelMessages, generateObject } from "ai";
+import { Output, convertToModelMessages, generateText } from "ai";
 import { DateTime } from "luxon";
 import type { UserGetPayload } from "prisma/generated/models";
 import zod from "zod";
@@ -64,11 +64,11 @@ async function findAlert(
     user,
   });
 
-  const response = await generateObject({
+  const { output } = await generateText({
     messages: await convertToModelMessages(messages),
     system: system,
-    schema: Alert,
+    output: Output.object({ schema: Alert }),
     ...classify,
   });
-  return response.object;
+  return output;
 }

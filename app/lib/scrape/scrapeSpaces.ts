@@ -1,4 +1,4 @@
-import { generateObject } from "ai";
+import { Output, generateText } from "ai";
 import ora from "ora";
 import type { Browser } from "playwright";
 import { z } from "zod";
@@ -114,17 +114,18 @@ ${images.map((img) => `- ${img.alt}: ${img.src}`).join("\n")}
 
 If no spaces are found or the page doesn't contain leasing information, return an empty array.`;
 
-    const { object } = await generateObject({
+    const { output } = await generateText({
       abortSignal: AbortSignal.timeout(60_000),
       model: conversational.model,
       prompt,
-      schema: spaceSchema,
+      output: Output.object({ schema: spaceSchema }),
       temperature: 0,
     });
 
-    spinner.succeed(`Found ${object.spaces.length} spaces for ${centerName}`);
+    const { spaces } = output;
+    spinner.succeed(`Found ${spaces.length} spaces for ${centerName}`);
 
-    return object.spaces;
+    return spaces;
   } catch (error) {
     spinner.fail(
       `Failed to scrape spaces for ${centerName}: ${error instanceof Error ? error.message : String(error)}`,

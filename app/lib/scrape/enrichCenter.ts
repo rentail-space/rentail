@@ -1,4 +1,4 @@
-import { generateObject } from "ai";
+import { Output, generateText } from "ai";
 import ora from "ora";
 import type zod from "zod";
 import { z } from "zod";
@@ -112,17 +112,17 @@ Tasks:
 Use scraped data as primary source. Fill gaps with your knowledge.
 For optional fields without reliable data, omit them entirely (do not set to null).`;
 
-    const { object } = await generateObject({
+    const { output } = await generateText({
       abortSignal: AbortSignal.timeout(30_000),
       model: conversational.model,
       prompt: enrichmentPrompt,
-      schema: enrichedSchema,
+      output: Output.object({ schema: enrichedSchema }),
       temperature: 1,
       maxRetries: 3,
     });
 
     spinner.succeed();
-    return object;
+    return output;
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
     spinner.fail(`Enrichment failed: ${reason}`);

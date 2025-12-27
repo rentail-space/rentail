@@ -269,8 +269,6 @@ function createToolUseInputDeltaEvent(
   index: number,
   input: Record<string, unknown>,
 ): string {
-  // For generateObject, we need to ensure the JSON is valid and complete
-  // Stream the entire JSON object at once for simplicity in tests
   const jsonString = JSON.stringify(input);
   const event = {
     type: "content_block_delta",
