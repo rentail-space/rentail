@@ -35,6 +35,9 @@ function UserInfo({ user }: { user: User }) {
         <strong>Email:</strong> {user.email}
       </Text>
       <Text style={styles.text}>
+        <strong>Is Anonymous:</strong> {user.isAnonymous ? "Yes" : "No"}
+      </Text>
+      <Text style={styles.text}>
         <strong>Location:</strong>{" "}
         {workingMemory?.location?.displayName ?? "N/A"}
       </Text>
@@ -54,13 +57,6 @@ function UserInfo({ user }: { user: User }) {
               <strong>UTM {key}:</strong> {value}
             </Text>
           ))}
-
-      <Text style={styles.text}>
-        <strong>Memory:</strong>
-      </Text>
-      <pre style={styles.code}>
-        {JSON.stringify(JSON.parse(user.workingMemory), null, 2)}
-      </pre>
     </Section>
   );
 }
