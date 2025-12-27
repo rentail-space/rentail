@@ -10,18 +10,14 @@ import { z } from "zod";
 import { conversational } from "~/lib/models";
 
 const discoverySchema = z.object({
-  centers: z.array(
-    z.object({
-      address: z.string().min(1, "Address must not be empty"),
-      city: z.string().min(1, "City must not be empty"),
-      id: z
-        .string()
-        .regex(/^places\/[a-zA-Z0-9_-]+$/)
-        .optional(),
-      name: z.string().min(1, "Name must not be empty"),
-      state: z.string().regex(/^[A-Z]{2}$/, "State must be a 2-letter code"),
-    }),
-  ),
+  address: z.string().min(1, "Address must not be empty"),
+  city: z.string().min(1, "City must not be empty"),
+  id: z
+    .string()
+    .regex(/^places\/[a-zA-Z0-9_-]+$/)
+    .optional(),
+  name: z.string().min(1, "Name must not be empty"),
+  state: z.string().regex(/^[A-Z]{2}$/, "State must be a 2-letter code"),
 });
 
 /**
@@ -33,7 +29,7 @@ const discoverySchema = z.object({
  */
 export default async function discoverCenters(
   where: string,
-): Promise<zod.infer<typeof discoverySchema>["centers"]> {
+): Promise<zod.infer<typeof discoverySchema>[]> {
   invariant(where.trim(), "Search query is required");
 
   const cacheFile = getCacheFilePath(where);
@@ -60,16 +56,14 @@ Focus on retail shopping centers, strip malls, and enclosed malls.
 Exclude individual stores or single-building retail.`;
 
   try {
-    const { output } = await generateText({
+    const { output: centers } = await generateText({
       abortSignal: AbortSignal.timeout(90_000),
       model: conversational.model,
       prompt,
-      output: Output.object({ schema: discoverySchema }),
+      output: Output.array({ element: discoverySchema }),
       temperature: 0,
     });
     spinner.succeed();
-
-    const { centers } = output;
 
     console.info(
       "\x1b[32m  Found %d centers:\n%s\x1b[0m",

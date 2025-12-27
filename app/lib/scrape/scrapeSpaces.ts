@@ -5,16 +5,12 @@ import { z } from "zod";
 import { conversational } from "~/lib/models";
 
 const spaceSchema = z.object({
-  spaces: z.array(
-    z.object({
-      number: z.string().min(1, "Space number required"),
-      type: z.enum(["Cart", "Inline", "Storage", "Other"]),
-      size: z.number().int().positive().describe("Size in square feet"),
-      floor: z.number().int().min(1).max(10),
-      available: z.boolean().default(false),
-      imageURLs: z.array(z.string().url()).optional(),
-    }),
-  ),
+  number: z.string().min(1, "Space number required"),
+  type: z.enum(["Cart", "Inline", "Storage", "Other"]),
+  size: z.number().int().positive().describe("Size in square feet"),
+  floor: z.number().int().min(1).max(10),
+  available: z.boolean().default(false),
+  imageURLs: z.array(z.string().url()).optional(),
 });
 
 /**
@@ -36,7 +32,7 @@ export default async function scrapeSpaces({
   browser: Browser;
   centerName: string;
   url: string;
-}): Promise<z.infer<typeof spaceSchema>["spaces"]> {
+}): Promise<z.infer<typeof spaceSchema>[]> {
   const page = await browser.newPage();
   const spinner = ora(`Scraping spaces for ${centerName}...`).start();
 
@@ -118,14 +114,13 @@ If no spaces are found or the page doesn't contain leasing information, return a
       abortSignal: AbortSignal.timeout(60_000),
       model: conversational.model,
       prompt,
-      output: Output.object({ schema: spaceSchema }),
+      output: Output.array({ element: spaceSchema }),
       temperature: 0,
     });
 
-    const { spaces } = output;
-    spinner.succeed(`Found ${spaces.length} spaces for ${centerName}`);
+    spinner.succeed(`Found ${output.length} spaces for ${centerName}`);
 
-    return spaces;
+    return output;
   } catch (error) {
     spinner.fail(
       `Failed to scrape spaces for ${centerName}: ${error instanceof Error ? error.message : String(error)}`,

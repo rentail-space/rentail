@@ -131,7 +131,7 @@ async function classifyAssistantResponse({
   expecting: string;
 }): Promise<void> {
   const messages = (await recentMessages(chatId)).slice(0, index + 1);
-  const { output } = await generateText({
+  const { output: questions } = await generateText({
     messages: await convertToModelMessages(messages),
     system: `
   This is a sequence of messages between a user and an assistant.
@@ -152,14 +152,10 @@ async function classifyAssistantResponse({
   If any rule applies, return "yes".
   If any rule does not apply, return "no".
   `,
-    output: Output.object({
-      schema: zod.object({
-        questions: zod.array(
-          zod.object({
-            question: zod.string(),
-            answer: zod.enum(["yes", "no", "unknown"]),
-          }),
-        ),
+    output: Output.array({
+      element: zod.object({
+        question: zod.string(),
+        answer: zod.enum(["yes", "no", "unknown"]),
       }),
     }),
     ...classify,
@@ -180,14 +176,14 @@ async function classifyAssistantResponse({
       .split("\n")
       .map((line) => line.trim())
       .join("\n"),
-    output.questions
+    questions
       .map(({ question, answer }) => `Q: ${question} => ${answer}`)
       .join("\n"),
   );
 
-  const allCorrect = output.questions.every(({ answer }) => answer === "yes");
+  const allCorrect = questions.every(({ answer }) => answer === "yes");
   if (!allCorrect) {
-    const allAnswers = output.questions
+    const allAnswers = questions
       .map(({ question, answer }) => `Q: ${question} => ${answer}`)
       .join("\n");
     const lastMessage = last(messages)
