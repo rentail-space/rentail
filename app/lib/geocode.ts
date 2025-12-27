@@ -186,24 +186,18 @@ async function getTimezoneFromIP(ip: string): Promise<string> {
  * Boston and also set the display name for our benefit.
  *
  * @param location - The location to geocode.
- * @returns The geocoded location and timezone.
+ * @returns The geocoded location or null if the location is not found.
  */
-export async function geocodeFromUserInput(location: {
-  city?: string;
-  country?: string;
-  state?: string;
-}): Promise<{
+export async function geocodeFromUserInput(location: string): Promise<{
   displayName: string;
   latitude: number;
   longitude: number;
 } | null> {
-  const { city, state, country } = location;
-  if (!city || !state || !country) return null;
+  if (!location.trim()) return null;
 
-  const query = [city, state, country].filter(Boolean).join(", ");
   try {
     const url = new URL("https://nominatim.openstreetmap.org/search");
-    url.searchParams.set("q", query);
+    url.searchParams.set("q", location);
     url.searchParams.set("format", "json");
     url.searchParams.set("limit", "1");
 
@@ -221,15 +215,15 @@ export async function geocodeFromUserInput(location: {
     // NOTE: Handle strings like "Las%20Vegas, NV, US" properly.
     const displayName = decodeURIComponent(results[0].display_name);
 
-    logger("Geocoded location from user input %s => %s", query, displayName);
+    logger("Geocoded location from user input %s => %s", location, displayName);
     return {
       displayName,
       latitude: Number.parseFloat(results[0].lat),
       longitude: Number.parseFloat(results[0].lon),
     };
   } catch (error) {
-    captureException(error, { extra: { query } });
-    logger("Error geocoding location %s: %s", query, error);
+    captureException(error, { extra: { location } });
+    logger("Error geocoding location %s: %s", location, error);
     return null;
   }
 }

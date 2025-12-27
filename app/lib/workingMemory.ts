@@ -259,7 +259,15 @@ export default async function updateWorkingMemory({
 
     // Deep merge with current working memory (new values override old ones)
     const geocoded = validated?.location
-      ? await geocodeFromUserInput(validated?.location)
+      ? await geocodeFromUserInput(
+          [
+            validated.location.city,
+            validated.location.state,
+            validated.location.country,
+          ]
+            .filter(Boolean)
+            .join(", "),
+        )
       : null;
     const merged = {
       ...current,
