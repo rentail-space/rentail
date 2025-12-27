@@ -1,5 +1,7 @@
+import { HeartIcon } from "lucide-react";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 import { type BlogPost, loadBlogPost } from "~/lib/blogPosts.server";
 import type { Route } from "./+types/blog.$slug";
 
@@ -62,6 +64,17 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
         >
           {body}
         </Streamdown>
+
+        <p className="flex items-center gap-2 text-gray-500 text-sm">
+          <HeartIcon className="h-4 w-4 text-red-500" fill="currentColor" />
+          <span>
+            Brought to you by{" "}
+            <ActiveLink variant="silent" to="https://rentail.space">
+              Rentail.space
+            </ActiveLink>{" "}
+            on {published.toLocaleDateString()}
+          </span>
+        </p>
 
         <script type="application/ld+json">
           {JSON.stringify({
