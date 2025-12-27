@@ -19,8 +19,8 @@ export const conversational = {
   providerOptions: {
     anthropic: {} satisfies AnthropicProviderOptions,
   },
-  temperature: 0.0,
   seed: 42,
+  temperature: 0.0,
 } satisfies Omit<LanguageModelV3CallOptions, "prompt"> & {
   model: LanguageModelV3;
 };
@@ -37,8 +37,8 @@ export const classify = {
       cacheControl: { type: "ephemeral", ttl: "1h" },
     } satisfies AnthropicProviderOptions,
   },
-  temperature: 0.0,
   seed: 42,
+  temperature: 0.0,
 } satisfies Omit<LanguageModelV3CallOptions, "prompt"> & {
   model: LanguageModelV3;
 };
