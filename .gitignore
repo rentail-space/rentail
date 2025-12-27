@@ -39,3 +39,4 @@ prisma/backup.sql
 
 # Git worktrees for isolated development
 .worktrees/ .worktrees/
+.devtools

@@ -9,6 +9,7 @@
     "clean": "rm -rf node_modules/.vite .react-router build",
     "clone": "./scripts/clone.sh",
     "dev": "react-router dev",
+    "devtool": "npx @ai-sdk/devtools",
     "format": "biome format --write",
     "lint": "secretlint **/* --format stylish && biome lint",
     "promote": "./scripts/promote.ts",
@@ -96,6 +97,7 @@
     "zod": "^4.2.1"
   },
   "devDependencies": {
+    "@ai-sdk/devtools": "^0.0.1",
     "@ai-sdk/provider": "^3.0.0",
     "@inquirer/prompts": "^8.1.0",
     "@playwright/test": "^1.57.0",
