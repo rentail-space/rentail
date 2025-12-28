@@ -1,0 +1,48 @@
+import { InMemoryEventStore } from "@modelcontextprotocol/sdk/examples/shared/inMemoryEventStore.js";
+import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
+import { invariant } from "es-toolkit";
+import { ulid } from "ulid";
+import createMcpServer from "./mcpServer";
+
+/**
+ * GET and POST requests share similar handlers: create the MCP server and
+ * transport, and delegate to the transport to handle the request. This method
+ * is fairly complicated because we need to maintain streamable HTTP transports
+ * across multiple requests in the same session.
+ */
+export default async function handleRequest(
+  request: Request,
+): Promise<Response> {
+  const sessionId = request.headers.get("mcp-session-id");
+  if (sessionId && transports.has(sessionId)) {
+    const transport = transports.get(sessionId);
+    invariant(transport, "Transport not found");
+    return await transport.handleRequest(request);
+  } else {
+    const server = createMcpServer();
+    const eventStore = new InMemoryEventStore();
+    const transport = new WebStandardStreamableHTTPServerTransport({
+      sessionIdGenerator: () => ulid(),
+      eventStore, // Enable resumability
+      onsessioninitialized: (sessionId: string) => {
+        // Store the transport by session ID when a session is initialized. This
+        // avoids race conditions where requests might come in before the
+        // session is stored.
+        console.log(`Session initialized with ID: ${sessionId}`);
+        transports.set(sessionId, transport);
+      },
+    });
+    server.server.onclose = async () => {
+      if (transport.sessionId) transports.delete(transport.sessionId);
+    };
+    await server.connect(transport);
+    return await transport.handleRequest(request);
+  }
+}
+
+/**
+ * Hold the active MCP transports by session ID. This is necessary since a given
+ * client would make several HTTP requests to the MCP server, and it gets
+ * confused if we use different transports for each request.
+ */
+const transports = new Map<string, WebStandardStreamableHTTPServerTransport>();
