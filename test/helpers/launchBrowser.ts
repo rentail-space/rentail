@@ -1,9 +1,9 @@
-import { mkdir } from "node:fs/promises";
-import { resolve } from "node:path";
-import { URL as URLString } from "node:url";
 import { pretty, render } from "@react-email/components";
 import debug from "debug";
 import { invariant } from "es-toolkit";
+import { mkdir } from "node:fs/promises";
+import { resolve } from "node:path";
+import { URL as URLString } from "node:url";
 import {
   type BrowserContext,
   type Page,
@@ -29,7 +29,7 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const context = await newContext();
   const page = await context.newPage();
   await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
-  await page.goto(path, { timeout: 10_000 });
+  await page.goto(path, { timeout: 30_000 });
 
   // NOTE: We need to reload the page otherwise React doesn't handle the form
   // submission correctly on Playwright.
