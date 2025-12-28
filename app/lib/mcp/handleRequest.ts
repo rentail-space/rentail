@@ -1,6 +1,5 @@
 import { InMemoryEventStore } from "@modelcontextprotocol/sdk/examples/shared/inMemoryEventStore.js";
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
-import { invariant } from "es-toolkit";
 import { ulid } from "ulid";
 import createMcpServer from "./mcpServer";
 
@@ -14,11 +13,19 @@ export default async function handleRequest(
   request: Request,
 ): Promise<Response> {
   const sessionId = request.headers.get("mcp-session-id");
-  if (sessionId && transports.has(sessionId)) {
-    const transport = transports.get(sessionId);
-    invariant(transport, "Transport not found");
-    return await transport.handleRequest(request);
-  } else {
+
+  if (request.method === "DELETE") {
+    if (sessionId) transports.delete(sessionId);
+    return new Response(null, { status: 204 });
+  }
+
+  if (request.method === "GET" || request.method === "POST") {
+    if (sessionId) {
+      const transport = transports.get(sessionId);
+      if (!transport) throw new Response("Not Found", { status: 404 });
+      return await transport.handleRequest(request);
+    }
+
     const server = createMcpServer();
     const eventStore = new InMemoryEventStore();
     const transport = new WebStandardStreamableHTTPServerTransport({
@@ -28,7 +35,6 @@ export default async function handleRequest(
         // Store the transport by session ID when a session is initialized. This
         // avoids race conditions where requests might come in before the
         // session is stored.
-        console.log(`Session initialized with ID: ${sessionId}`);
         transports.set(sessionId, transport);
       },
     });
@@ -38,6 +44,8 @@ export default async function handleRequest(
     await server.connect(transport);
     return await transport.handleRequest(request);
   }
+
+  throw new Response("Method Not Allowed", { status: 405 });
 }
 
 /**
