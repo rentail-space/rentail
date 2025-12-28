@@ -85,22 +85,26 @@ export default function Charts({
           dataKey="activeUsers"
           fill={chartConfig.activeUsers.color}
           grouping={grouping}
-          name={chartConfig.activeUsers.label as string}
+          name={chartConfig.activeUsers.label}
         />
         <GroupedChart
           chartData={chartData}
           dataKey="chats"
           fill={chartConfig.chats.color}
           grouping={grouping}
-          name={chartConfig.chats.label as string}
+          name={chartConfig.chats.label}
         />
         <GroupedChart
           chartData={chartData}
           dataKey="sessionDuration"
           fill={chartConfig.sessionDuration.color}
           grouping={grouping}
-          name={chartConfig.sessionDuration.label as string}
-          yAxisFormatter={(value) => `${value} sec`}
+          name={chartConfig.sessionDuration.label}
+          yAxisFormatter={(value) =>
+            `${Math.floor(value / 60)}m ${(value % 60)
+              .toString()
+              .padStart(2, "0")}s`
+          }
         />
       </CardContent>
 
@@ -120,17 +124,17 @@ export default function Charts({
 
 const chartConfig = {
   activeUsers: {
-    label: "Active Users",
+    label: "Unique Visitors",
     icon: PersonStandingIcon,
     color: "var(--chart-1)",
   },
   chats: {
-    label: "Chats",
+    label: "Chats Started",
     icon: BubblesIcon,
     color: "var(--chart-2)",
   },
   sessionDuration: {
-    label: "Duration",
+    label: "Avg Session Duration",
     icon: ClockIcon,
     color: "var(--chart-3)",
   },
