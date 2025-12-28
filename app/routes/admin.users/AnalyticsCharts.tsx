@@ -54,9 +54,10 @@ export default function Charts({
             DateTime.fromISO(date).startOf(grouping).toJSDate() &&
           user.createdAt <= DateTime.fromISO(date).endOf(grouping).toJSDate(),
       ).length,
-      sessionDuration:
+      sessionDuration: Math.round(
         sumBy(entries, (entry) => entry.averageSessionDuration) /
-        entries.length,
+          entries.length,
+      ),
     })),
     ["date"],
   );
@@ -114,7 +115,7 @@ const chartConfig = {
     color: "var(--chart-2)",
   },
   sessionDuration: {
-    label: "Session Duration",
+    label: "Duration",
     icon: ClockIcon,
     color: "var(--chart-3)",
   },
@@ -163,11 +164,7 @@ function GroupedChart({
           type="monotone"
         />
 
-        <ChartLegend
-          content={
-            <ChartLegendContent payload={chartConfig} verticalAlign="top" />
-          }
-        />
+        <ChartLegend content={<ChartLegendContent verticalAlign="top" />} />
         <ChartTooltip
           cursor
           content={<ChartTooltipContent indicator="line" />}

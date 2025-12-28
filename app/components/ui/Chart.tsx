@@ -1,8 +1,7 @@
-import * as RechartsPrimitive from "recharts"
-
-import * as React from "react"
-
-import { cn } from "~/lib/utils"
+import * as React from "react";
+import * as RechartsPrimitive from "recharts";
+import type { NameType, Payload, ValueType } from "recharts/types/component/DefaultTooltipContent";
+import { cn } from "~/lib/utils";
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const
@@ -55,7 +54,7 @@ function ChartContainer({
         data-chart={chartId}
         className={cn(
           "[&_.recharts-cartesian-axis-tick_text]:fill-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-[#80808080] [&_.recharts-curve.recharts-tooltip-cursor]:stroke-[#80808080] [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-black [&_.recharts-polar-grid_[stroke='#ccc']]:dark:stroke-white [&_.recharts-reference-line_[stroke='#ccc']]:stroke-black [&_.recharts-reference-line_[stroke='#ccc']]:dark:stroke-white flex aspect-video justify-center text-xs [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-border [&_.recharts-surface]:outline-hidden",
-          "[&_.recharts-layer_path]:[fill-opacity:1] [&_.recharts-layer_path]:[stroke-width:2] [&_.recharts-layer_path]:[stroke:var(--color-border)]",
+          "[&_.recharts-layer_path]:[fill-opacity:1] [&_.recharts-layer_path]:stroke-2 [&_.recharts-layer_path]:[stroke:var(--color-border)]",
           className,
         )}
         {...props}
@@ -125,6 +124,8 @@ function ChartTooltipContent({
     indicator?: "line" | "dot" | "dashed"
     nameKey?: string
     labelKey?: string
+    label?: string
+    payload?: readonly Payload<ValueType, NameType>[]
   }) {
   const { config } = useChart()
 
@@ -173,7 +174,7 @@ function ChartTooltipContent({
   return (
     <div
       className={cn(
-        "border-border bg-background grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl",
+        "border-border bg-background grid min-w-32 items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl",
         className,
       )}
     >
@@ -186,7 +187,7 @@ function ChartTooltipContent({
 
           return (
             <div
-              key={item.dataKey}
+              key={item.dataKey as string}
               className={cn(
                 "[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 ",
                 indicator === "dot" && "items-center",
@@ -258,7 +259,8 @@ function ChartLegendContent({
   verticalAlign = "bottom",
   nameKey,
 }: React.ComponentProps<"div"> &
-  Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+  Pick<RechartsPrimitive.LegendProps, "verticalAlign"> & {
+    payload?: readonly Payload<ValueType, NameType>[]
     hideIcon?: boolean
     nameKey?: string
   }) {
@@ -282,7 +284,7 @@ function ChartLegendContent({
 
         return (
           <div
-            key={item.value}
+            key={item.value as string}
             className={cn(
               "[&>svg]:text-foreground flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3",
             )}
@@ -345,10 +347,9 @@ function getPayloadConfigFromPayload(
 }
 
 export {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  ChartLegend,
+  ChartContainer, ChartLegend,
   ChartLegendContent,
-  ChartStyle,
-}
+  ChartStyle, ChartTooltip,
+  ChartTooltipContent
+};
+
