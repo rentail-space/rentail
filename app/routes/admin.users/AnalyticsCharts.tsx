@@ -2,7 +2,14 @@ import { groupBy, sortBy, sumBy } from "es-toolkit";
 import { BubblesIcon, ClockIcon, PersonStandingIcon } from "lucide-react";
 import { DateTime } from "luxon";
 import type { User } from "prisma/generated/client";
-import { Area, AreaChart, CartesianGrid, type DataKey, XAxis } from "recharts";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  type DataKey,
+  XAxis,
+  YAxis,
+} from "recharts";
 import {
   Card,
   CardContent,
@@ -93,6 +100,7 @@ export default function Charts({
           fill={chartConfig.sessionDuration.color}
           grouping={grouping}
           name={chartConfig.sessionDuration.label as string}
+          yAxisFormatter={(value) => `${value} sec`}
         />
       </CardContent>
 
@@ -123,16 +131,18 @@ const chartConfig = {
 
 function GroupedChart({
   chartData,
-  grouping,
   dataKey,
-  name,
   fill,
+  grouping,
+  name,
+  yAxisFormatter,
 }: {
   chartData: Array<{ date: string }>;
-  grouping: "week" | "day";
   dataKey: DataKey<(typeof chartData)[number]>;
-  name: string;
   fill: string;
+  grouping: "week" | "day";
+  name: string;
+  yAxisFormatter?: (value: number) => string;
 }) {
   return (
     <ChartContainer config={chartConfig} className="h-32 w-full">
@@ -155,6 +165,13 @@ function GroupedChart({
           tickLine={false}
           tickMargin={8}
         />
+        <YAxis
+          allowDecimals={false}
+          tickFormatter={yAxisFormatter}
+          tickLine={false}
+          tickMargin={8}
+          type="number"
+        />
 
         <Area
           activeDot={{ fill: "var(--chart-active-dot)" }}
@@ -167,7 +184,18 @@ function GroupedChart({
         <ChartLegend content={<ChartLegendContent verticalAlign="top" />} />
         <ChartTooltip
           cursor
-          content={<ChartTooltipContent indicator="line" />}
+          content={
+            <ChartTooltipContent
+              formatter={(value, name) => (
+                <div className="grid w-full grid-cols-2 gap-2">
+                  <span>{name}</span>
+                  <span className="text-right font-bold tabular-nums">
+                    {yAxisFormatter ? yAxisFormatter(Number(value)) : value}
+                  </span>
+                </div>
+              )}
+            />
+          }
         />
       </AreaChart>
     </ChartContainer>
