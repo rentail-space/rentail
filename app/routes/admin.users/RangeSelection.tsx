@@ -133,12 +133,12 @@ function RangeSelector({
           onClick={() => {
             setFrom(
               DateTime.fromFormat(from, "yyyy-MM-dd")
-                .minus({ days: 1 })
+                .minus({ weeks: 1 })
                 .toFormat("yyyy-MM-dd"),
             );
             setUntil(
               DateTime.fromFormat(until, "yyyy-MM-dd")
-                .minus({ days: 1 })
+                .minus({ weeks: 1 })
                 .toFormat("yyyy-MM-dd"),
             );
           }}
@@ -150,12 +150,12 @@ function RangeSelector({
           onClick={() => {
             setFrom(
               DateTime.fromFormat(from, "yyyy-MM-dd")
-                .plus({ days: 1 })
+                .plus({ weeks: 1 })
                 .toFormat("yyyy-MM-dd"),
             );
             setUntil(
               DateTime.fromFormat(until, "yyyy-MM-dd")
-                .plus({ days: 1 })
+                .plus({ weeks: 1 })
                 .toFormat("yyyy-MM-dd"),
             );
           }}

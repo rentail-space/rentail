@@ -105,11 +105,11 @@ export default function Charts({
       </CardContent>
 
       <CardFooter className="mx-auto flex items-center gap-2 text-muted-foreground leading-none">
-        {DateTime.fromISO(chartData[0].date)
+        {DateTime.fromISO(chartData[0]?.date)
           .startOf(grouping)
           .toFormat("MMM d, yyyy")}{" "}
         &mdash;{" "}
-        {DateTime.fromISO(chartData[chartData.length - 1].date)
+        {DateTime.fromISO(chartData[chartData.length - 1]?.date)
           .endOf(grouping)
           .toFormat("MMM d, yyyy")}{" "}
         {grouping === "week" && "(weekly metrics)"}
