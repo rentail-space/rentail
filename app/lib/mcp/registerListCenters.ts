@@ -39,14 +39,10 @@ export default function registerListCenters(mcpServer: McpServer) {
     "list_shopping_centers",
     listCentersSpec,
     async (params, { _meta, ...extra }) => {
-      console.log("%o", extra);
-      console.log("%o", _meta);
-
       const userId =
         _meta?.["openai/subject"]?.toString() || extra.sessionId || ulid();
       const location =
         _meta?.["openai/userLocation"]?.toString() ?? params.location ?? "";
-      console.log("location", location);
 
       await getUserForSession({
         location: JSON.parse(location),

@@ -1,3 +1,4 @@
+import { invariant } from "es-toolkit";
 import { ArrowRight, MoveLeft, MoveRight } from "lucide-react";
 import { DateTime } from "luxon";
 import { useQueryState } from "nuqs";
@@ -17,15 +18,19 @@ export default function RangeSelection({
     date: string;
     sessionSource: string;
   }>;
-  children: (
-    recentUsers: User[],
+  children: ({
+    recentUsers,
+    analytics,
+  }: {
+    recentUsers: User[];
     analytics: Array<{
       activeUsers: number;
       averageSessionDuration: number;
       date: string;
       sessionSource: string;
-    }>,
-  ) => React.ReactNode;
+    }>;
+    selectorUI: () => React.ReactNode;
+  }) => React.ReactNode;
   users: User[];
 }) {
   const today = DateTime.now();
@@ -46,26 +51,25 @@ export default function RangeSelection({
     ({ createdAt, isAdmin }) =>
       createdAt >= start && createdAt <= end && !isAdmin,
   );
+  invariant(children instanceof Function, "children must be a function");
 
-  return (
-    <>
+  return children({
+    recentUsers,
+    analytics: analytics.filter(({ date }) => {
+      const day = DateTime.fromFormat(date, "yyyyMMdd")
+        .startOf("day")
+        .toJSDate();
+      return day >= start && day <= end;
+    }),
+    selectorUI: () => (
       <RangeSelector
         from={from}
         setFrom={setFrom}
         until={until}
         setUntil={setUntil}
       />
-      {children(
-        recentUsers,
-        analytics.filter(({ date }) => {
-          const day = DateTime.fromFormat(date, "yyyyMMdd")
-            .startOf("day")
-            .toJSDate();
-          return day >= start && day <= end;
-        }),
-      )}
-    </>
-  );
+    ),
+  });
 }
 
 function RangeSelector({

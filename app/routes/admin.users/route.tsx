@@ -74,9 +74,10 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
   return (
     <main className="flex flex-col gap-8">
       <RangeSelection analytics={loaderData.analytics} users={loaderData.users}>
-        {(recentUsers, analytics) => (
+        {({ recentUsers, analytics, selectorUI }) => (
           <>
             <Charts analytics={analytics} users={recentUsers} />
+            {selectorUI()}
             <AnalyticsSummary analytics={analytics} users={recentUsers} />
             <RecentUsers users={recentUsers} />
             <UserSources analytics={analytics} />

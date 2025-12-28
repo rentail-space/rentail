@@ -79,7 +79,7 @@ export default function Charts({
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="flex flex-col gap-8">
+      <CardContent className="space-y-4">
         <GroupedChart
           chartData={chartData}
           dataKey="activeUsers"
@@ -145,7 +145,7 @@ function GroupedChart({
   yAxisFormatter?: (value: number) => string;
 }) {
   return (
-    <ChartContainer config={chartConfig} className="h-32 w-full">
+    <ChartContainer config={chartConfig} className="h-38 w-full">
       <AreaChart
         accessibilityLayer
         data={chartData}
