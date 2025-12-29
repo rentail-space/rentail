@@ -1,5 +1,10 @@
 import { groupBy, meanBy, sortBy, sumBy } from "es-toolkit";
-import { BubblesIcon, ClockIcon, PersonStandingIcon } from "lucide-react";
+import {
+  BotIcon,
+  BubblesIcon,
+  ClockIcon,
+  PersonStandingIcon,
+} from "lucide-react";
 import { DateTime } from "luxon";
 import type { User } from "prisma/generated/client";
 import {
@@ -28,6 +33,29 @@ import {
 } from "~/components/ui/Chart";
 import type { loader } from "./route";
 
+const chartConfig = {
+  visitors: {
+    label: "Unique Visitors",
+    icon: PersonStandingIcon,
+    color: "var(--chart-1)",
+  },
+  fromLLM: {
+    label: "Visitors from LLM",
+    icon: BotIcon,
+    color: "var(--chart-2)",
+  },
+  chats: {
+    label: "Chats Started",
+    icon: BubblesIcon,
+    color: "var(--chart-3)",
+  },
+  sessionDuration: {
+    label: "Avg Session Duration",
+    icon: ClockIcon,
+    color: "var(--chart-4)",
+  },
+} satisfies ChartConfig;
+
 export default function Charts({
   analytics,
   users,
@@ -51,6 +79,14 @@ export default function Charts({
     groupedByDate.map(([date, entries]) => ({
       date,
       visitors: sumBy(entries, (entry) => entry.visitors),
+      fromLLM: sumBy(
+        entries.filter(
+          (entry) =>
+            entry.sessionSource === "chatgpt.com" ||
+            entry.sessionSource === "perplexity.ai",
+        ),
+        (entry) => entry.visitors,
+      ),
       chats: users.filter(
         (user) =>
           user.createdAt >=
@@ -73,34 +109,26 @@ export default function Charts({
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <GroupedChart
-          chartData={chartData}
-          dataKey="visitors"
-          fill={chartConfig.activeUsers.color}
-          grouping={grouping}
-          name={chartConfig.activeUsers.label}
-        />
-        <GroupedChart
-          chartData={chartData}
-          dataKey="chats"
-          fill={chartConfig.chats.color}
-          grouping={grouping}
-          name={chartConfig.chats.label}
-        />
-        <GroupedChart
-          chartData={chartData}
-          dataKey="sessionDuration"
-          fill={chartConfig.sessionDuration.color}
-          grouping={grouping}
-          name={chartConfig.sessionDuration.label}
-          yAxisFormatter={(value) =>
-            `${Math.floor(value / 60).toLocaleString()}m ${Math.floor(
-              value % 60,
-            )
-              .toString()
-              .padStart(2, "0")}s`
-          }
-        />
+        {Object.entries(chartConfig).map(([key, value]) => (
+          <GroupedChart
+            key={key}
+            chartData={chartData}
+            dataKey={key}
+            fill={value.color}
+            grouping={grouping}
+            name={value.label}
+            yAxisFormatter={
+              key === "sessionDuration"
+                ? (value) =>
+                    `${Math.floor(value / 60).toLocaleString()}m${Math.floor(
+                      value % 60,
+                    )
+                      .toString()
+                      .padStart(2, "0")}s`
+                : undefined
+            }
+          />
+        ))}
       </CardContent>
 
       <CardFooter className="mx-auto flex items-center gap-2 text-muted-foreground leading-none">
@@ -116,24 +144,6 @@ export default function Charts({
     </Card>
   );
 }
-
-const chartConfig = {
-  activeUsers: {
-    label: "Unique Visitors",
-    icon: PersonStandingIcon,
-    color: "var(--chart-1)",
-  },
-  chats: {
-    label: "Chats Started",
-    icon: BubblesIcon,
-    color: "var(--chart-2)",
-  },
-  sessionDuration: {
-    label: "Avg Session Duration",
-    icon: ClockIcon,
-    color: "var(--chart-3)",
-  },
-} satisfies ChartConfig;
 
 function GroupedChart({
   chartData,
