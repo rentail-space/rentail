@@ -1,5 +1,7 @@
+import NumberFlow from "@number-flow/react";
 import { meanBy, sumBy } from "es-toolkit";
 import type { User } from "prisma/generated/client";
+import type { ReactNode } from "react";
 import type { loader } from "./route";
 
 export default function AnalyticsSummary({
@@ -18,43 +20,44 @@ export default function AnalyticsSummary({
     ),
     (entry) => entry.visitors,
   );
-  const avgSessionDuration = meanBy(
-    analytics,
-    (entry) => entry.averageSessionDuration,
-  );
+  const avgSessionDuration =
+    meanBy(analytics, (entry) => entry.averageSessionDuration) || 0;
 
   return (
     <div className="flex flex-col gap-8">
       <div className="mx-auto flex flex-row items-center gap-4">
         <Stat
           title="Unique Visitors"
-          value={visitors.toLocaleString()}
+          value={visitors}
           description="From page views"
         />
         <Stat
           title="From LLM"
-          value={`${fromLLM.toLocaleString()} (${formatPercentage(
-            fromLLM / visitors,
-          )})`}
+          value={fromLLM}
+          percentage={fromLLM / visitors}
           description="ChatGPT/Perplexity"
         />
         <Stat
           title="New Chats"
-          value={`${users.length.toLocaleString()} (${formatPercentage(
-            users.length / visitors,
-          )})`}
+          value={users.length}
+          percentage={users.length / visitors}
           description="% of unique visitors"
         />
         <Stat
           title="Avg Session Duration"
           value={
-            avgSessionDuration > 0
-              ? `${Math.floor(avgSessionDuration / 60)}m ${Math.floor(
-                  avgSessionDuration % 60,
-                )
-                  .toString()
-                  .padStart(2, "0")}s`
-              : "N/A"
+            <span>
+              <NumberFlow
+                format={{ notation: "compact" }}
+                value={Math.floor(avgSessionDuration / 60)}
+              />
+              m{" "}
+              <NumberFlow
+                format={{ notation: "compact" }}
+                value={avgSessionDuration % 60}
+              />
+              s
+            </span>
           }
           description="Chat and all"
         />
@@ -63,23 +66,38 @@ export default function AnalyticsSummary({
   );
 }
 
-function formatPercentage(value: number): string {
-  return value > 0 ? `${(value * 100).toFixed(2)}%` : "N/A";
-}
-
 function Stat({
   title,
   value,
+  percentage,
   description,
 }: {
   title: string;
-  value: string;
+  value: number | ReactNode;
+  percentage?: number;
   description: string;
 }) {
   return (
     <div className="flex flex-col items-center gap-1">
       <div className="font-medium text-sm">{title}</div>
-      <div className="font-bold text-2xl">{value}</div>
+      <div className="flex flex-row items-center gap-1 font-bold text-2xl">
+        {typeof value === "number" ? (
+          <>
+            <NumberFlow format={{ notation: "compact" }} value={value} />
+            {percentage !== undefined && Number.isFinite(percentage) && (
+              <NumberFlow
+                className="text-gray-500 text-sm"
+                prefix=" ("
+                format={{ notation: "compact" }}
+                value={percentage * 100}
+                suffix="%)"
+              />
+            )}
+          </>
+        ) : (
+          value
+        )}
+      </div>
       <div className="text-gray-500 text-sm">{description}</div>
     </div>
   );
