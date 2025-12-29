@@ -1,4 +1,4 @@
-import { groupBy, sortBy, sumBy } from "es-toolkit";
+import { groupBy, meanBy, sortBy, sumBy } from "es-toolkit";
 import { BubblesIcon, ClockIcon, PersonStandingIcon } from "lucide-react";
 import { DateTime } from "luxon";
 import type { User } from "prisma/generated/client";
@@ -57,10 +57,7 @@ export default function Charts({
             DateTime.fromISO(date).startOf(grouping).toJSDate() &&
           user.createdAt <= DateTime.fromISO(date).endOf(grouping).toJSDate(),
       ).length,
-      sessionDuration: Math.round(
-        sumBy(entries, (entry) => entry.averageSessionDuration) /
-          entries.length,
-      ),
+      sessionDuration: meanBy(entries, (entry) => entry.averageSessionDuration),
     })),
     ["date"],
   );
@@ -97,7 +94,9 @@ export default function Charts({
           grouping={grouping}
           name={chartConfig.sessionDuration.label}
           yAxisFormatter={(value) =>
-            `${Math.floor(value / 60)}m ${(value % 60)
+            `${Math.floor(value / 60).toLocaleString()}m ${Math.floor(
+              value % 60,
+            )
               .toString()
               .padStart(2, "0")}s`
           }

@@ -33,26 +33,38 @@ export default function AnalyticsSummary({
         />
         <Stat
           title="From LLM"
-          value={`${fromLLM.toLocaleString()} (${((fromLLM / visitors) * 100).toFixed(2)}%)`}
+          value={`${fromLLM.toLocaleString()} (${formatPercentage(
+            fromLLM / visitors,
+          )})`}
           description="ChatGPT/Perplexity"
         />
         <Stat
           title="New Chats"
-          value={`${users.length.toLocaleString()} (${((users.length / visitors) * 100).toFixed(2)}%)`}
+          value={`${users.length.toLocaleString()} (${formatPercentage(
+            users.length / visitors,
+          )})`}
           description="% of unique visitors"
         />
         <Stat
           title="Avg Session Duration"
-          value={`${Math.floor(avgSessionDuration / 60)}m ${Math.floor(
-            avgSessionDuration % 60,
-          )
-            .toString()
-            .padStart(2, "0")}s`}
+          value={
+            avgSessionDuration > 0
+              ? `${Math.floor(avgSessionDuration / 60)}m ${Math.floor(
+                  avgSessionDuration % 60,
+                )
+                  .toString()
+                  .padStart(2, "0")}s`
+              : "N/A"
+          }
           description="Chat and all"
         />
       </div>
     </div>
   );
+}
+
+function formatPercentage(value: number): string {
+  return value > 0 ? `${(value * 100).toFixed(2)}%` : "N/A";
 }
 
 function Stat({
