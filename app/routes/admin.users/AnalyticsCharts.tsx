@@ -75,7 +75,7 @@ export default function Charts({
       <CardContent className="space-y-4">
         <GroupedChart
           chartData={chartData}
-          dataKey="activeUsers"
+          dataKey="visitors"
           fill={chartConfig.activeUsers.color}
           grouping={grouping}
           name={chartConfig.activeUsers.label}
