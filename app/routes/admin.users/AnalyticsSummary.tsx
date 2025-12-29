@@ -1,52 +1,54 @@
-import { sumBy } from "es-toolkit";
+import { meanBy, sumBy } from "es-toolkit";
 import type { User } from "prisma/generated/client";
+import type { loader } from "./route";
 
 export default function AnalyticsSummary({
   analytics,
   users,
 }: {
-  analytics: Array<{
-    activeUsers: number;
-    averageSessionDuration: number;
-    date: string;
-    sessionSource: string;
-  }>;
+  analytics: Awaited<ReturnType<typeof loader>>["analytics"];
   users: User[];
 }) {
-  const activeUsers = sumBy(analytics, (day) => Number(day.activeUsers));
+  const visitors = sumBy(analytics, (day) => Number(day.visitors));
+  const fromLLM = sumBy(
+    analytics.filter(
+      (entry) =>
+        entry.sessionSource === "chatgpt.com" ||
+        entry.sessionSource === "perplexity.ai",
+    ),
+    (entry) => entry.visitors,
+  );
+  const avgSessionDuration = meanBy(
+    analytics,
+    (entry) => entry.averageSessionDuration,
+  );
 
   return (
     <div className="flex flex-col gap-8">
       <div className="mx-auto flex flex-row items-center gap-4">
         <Stat
-          title="Active Users"
-          value={activeUsers.toLocaleString()}
+          title="Unique Visitors"
+          value={visitors.toLocaleString()}
           description="From page views"
         />
         <Stat
           title="From LLM"
-          value={sumBy(
-            analytics.filter(
-              (entry) =>
-                entry.sessionSource === "chatgpt.com" ||
-                entry.sessionSource === "perplexity.ai",
-            ),
-            (entry) => entry.activeUsers,
-          ).toLocaleString()}
+          value={`${fromLLM.toLocaleString()} (${((fromLLM / visitors) * 100).toFixed(2)}%)`}
           description="ChatGPT/Perplexity"
         />
         <Stat
-          title="Chats"
-          value={users.length.toLocaleString()}
-          description={`${((users.length / activeUsers) * 100).toFixed(2)}% of active`}
+          title="New Chats"
+          value={`${users.length.toLocaleString()} (${((users.length / visitors) * 100).toFixed(2)}%)`}
+          description="% of unique visitors"
         />
         <Stat
-          title="Session Duration"
-          value={`${(
-            sumBy(analytics, (entry) => entry.averageSessionDuration) /
-              analytics.length
-          ).toFixed(0)} sec`}
-          description="Seconds"
+          title="Avg Session Duration"
+          value={`${Math.floor(avgSessionDuration / 60)}m ${Math.floor(
+            avgSessionDuration % 60,
+          )
+            .toString()
+            .padStart(2, "0")}s`}
+          description="Chat and all"
         />
       </div>
     </div>

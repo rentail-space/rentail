@@ -6,29 +6,20 @@ import type { User } from "prisma/generated/client";
 import { Button } from "~/components/ui/Button";
 import { Input } from "~/components/ui/Input";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
+import type { loader } from "./route";
 
 export default function RangeSelection({
   analytics,
   children,
   users,
 }: {
-  analytics: Array<{
-    activeUsers: number;
-    averageSessionDuration: number;
-    date: string;
-    sessionSource: string;
-  }>;
+  analytics: Awaited<ReturnType<typeof loader>>["analytics"];
   children: ({
     recentUsers,
     analytics,
   }: {
     recentUsers: User[];
-    analytics: Array<{
-      activeUsers: number;
-      averageSessionDuration: number;
-      date: string;
-      sessionSource: string;
-    }>;
+    analytics: Awaited<ReturnType<typeof loader>>["analytics"];
     selectorUI: () => React.ReactNode;
   }) => React.ReactNode;
   users: User[];

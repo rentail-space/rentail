@@ -27,10 +27,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 async function fromGoogleAnalytics(): Promise<
   Array<{
-    activeUsers: number;
     averageSessionDuration: number;
     date: string;
     sessionSource: string;
+    visitors: number;
   }>
 > {
   const auth = new JWT({
@@ -46,7 +46,7 @@ async function fromGoogleAnalytics(): Promise<
       dateRanges: [{ endDate: "today", startDate: "90daysAgo" }],
       dimensions: [{ name: "date" }, { name: "sessionSource" }],
       metrics: [
-        // The number of distinct users who visited your website or application.
+        // The number of distinct GA users -> unique visitors
         { name: "activeUsers" },
         // The average duration of user sessions, in seconds.
         { name: "averageSessionDuration" },
@@ -57,12 +57,12 @@ async function fromGoogleAnalytics(): Promise<
     invariant(rows, "No rows found");
 
     return rows.map((row) => ({
-      date: row.dimensionValues?.[0]?.value ?? "",
-      sessionSource: row.dimensionValues?.[1]?.value ?? "",
-      activeUsers: Number.parseInt(row.metricValues?.[0]?.value ?? "", 10),
       averageSessionDuration: Number.parseFloat(
         row.metricValues?.[1]?.value ?? "",
       ),
+      date: row.dimensionValues?.[0]?.value ?? "",
+      sessionSource: row.dimensionValues?.[1]?.value ?? "",
+      visitors: Number.parseInt(row.metricValues?.[0]?.value ?? "", 10),
     }));
   } catch (error) {
     console.error("Failed to fetch GA view count", error);

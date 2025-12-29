@@ -7,19 +7,16 @@ import {
   TableHead,
   TableRow,
 } from "~/components/ui/Table";
+import type { loader } from "./route";
 
 export default function Sources({
   analytics,
 }: {
-  analytics: Array<{
-    sessionSource: string;
-    activeUsers: number;
-  }>;
+  analytics: Awaited<ReturnType<typeof loader>>["analytics"];
 }) {
   const grouped = groupBy(
     analytics,
-    (entry: { sessionSource: string; activeUsers: number }) =>
-      entry.sessionSource,
+    (entry: { sessionSource: string }) => entry.sessionSource,
   );
 
   return (
@@ -27,7 +24,7 @@ export default function Sources({
       <h2 className="font-bold text-2xl">
         Sources{" "}
         <span className="text-gray-500">
-          ({sumBy(Object.values(analytics), (entry) => entry.activeUsers)} users
+          ({sumBy(Object.values(analytics), (entry) => entry.visitors)} visitors
           / {Object.keys(grouped).length} sources)
         </span>
       </h2>
@@ -38,7 +35,7 @@ export default function Sources({
               <TableHead className="w-10">{index + 1}</TableHead>
               <TableCell>{sessionSource}</TableCell>
               <TableCell className="text-right">
-                {sumBy(entries, (entry) => entry.activeUsers).toLocaleString()}{" "}
+                {sumBy(entries, (entry) => entry.visitors).toLocaleString()}{" "}
                 users
               </TableCell>
             </TableRow>

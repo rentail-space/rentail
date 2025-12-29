@@ -26,17 +26,13 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "~/components/ui/Chart";
+import type { loader } from "./route";
 
 export default function Charts({
   analytics,
   users,
 }: {
-  analytics: Array<{
-    activeUsers: number;
-    averageSessionDuration: number;
-    date: string;
-    sessionSource: string;
-  }>;
+  analytics: Awaited<ReturnType<typeof loader>>["analytics"];
   users: User[];
 }) {
   const allDates = analytics.map((entry) => DateTime.fromISO(entry.date));
@@ -54,7 +50,7 @@ export default function Charts({
   const chartData = sortBy(
     groupedByDate.map(([date, entries]) => ({
       date,
-      activeUsers: sumBy(entries, (entry) => entry.activeUsers),
+      visitors: sumBy(entries, (entry) => entry.visitors),
       chats: users.filter(
         (user) =>
           user.createdAt >=
@@ -72,10 +68,10 @@ export default function Charts({
   return (
     <Card className="bg-secondary-background text-foreground">
       <CardHeader className="text-center">
-        <CardTitle>Active Users &rarr; Chats + Session Duration</CardTitle>
+        <CardTitle>Visitors &rarr; Chats + Session Duration</CardTitle>
         <CardDescription>
-          Showing active users (page views), chats started, and average session
-          duration (seconds).
+          Showing unique visitors, chats started by these visitors, and average
+          session duration across all visitors.
         </CardDescription>
       </CardHeader>
 
