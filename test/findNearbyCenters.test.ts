@@ -1,9 +1,9 @@
 import { expect } from "playwright/test";
+import type { Property } from "prisma/generated/client";
 import { beforeAll, describe, it } from "vitest";
 import findNearbyCenters from "~/lib/findNearbyCenters";
 import prisma from "~/lib/prisma";
 import { createAnonymousUser } from "~/lib/sessions.server";
-import type { Property } from "prisma/generated/client";
 
 /**
  * NOTE:
@@ -157,7 +157,7 @@ async function createUserAndFind(coordinates: {
   const user = await createAnonymousUser({
     requestHeaders: new Headers({
       "x-real-ip": "127.0.0.1",
-      "x-vercel-ip-city": "Los Angeles",
+      "x-vercel-ip-city": "Los%20Angeles",
       "x-vercel-ip-latitude": coordinates.latitude.toString(),
       "x-vercel-ip-longitude": coordinates.longitude.toString(),
     }),

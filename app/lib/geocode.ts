@@ -79,25 +79,37 @@ export async function geocodeFromHeaders(requestHeaders: Headers): Promise<{
   const ip = requestHeaders.get("x-real-ip");
   if (!ip) return { ip: undefined, location: fallbackLocation };
   try {
-    const city = requestHeaders.get("x-vercel-ip-city");
-    const country = requestHeaders.get("x-vercel-ip-country");
-    const latitude = requestHeaders.get("x-vercel-ip-latitude");
-    const longitude = requestHeaders.get("x-vercel-ip-longitude");
-    const state = requestHeaders.get("x-vercel-ip-country-region");
-    const timeZone = requestHeaders.get("x-vercel-ip-timezone");
+    const city = decodeURIComponent(
+      requestHeaders.get("x-vercel-ip-city") ?? "",
+    );
+    const country = decodeURIComponent(
+      requestHeaders.get("x-vercel-ip-country") ?? "",
+    );
+    const state = decodeURIComponent(
+      requestHeaders.get("x-vercel-ip-country-region") ?? "",
+    );
+    const timeZone =
+      requestHeaders.get("x-vercel-ip-timezone") ?? "America/Los_Angeles";
+
+    const latitude = Number.parseFloat(
+      requestHeaders.get("x-vercel-ip-latitude") ?? "34.0456",
+    );
+    const longitude = Number.parseFloat(
+      requestHeaders.get("x-vercel-ip-longitude") ?? "-118.2694",
+    );
 
     const displayName = [city, state, country].filter(Boolean).join(", ");
     if (displayName)
       return {
         ip,
         location: {
-          city: city ? decodeURIComponent(city) : undefined,
-          country: country ?? undefined,
+          city,
+          country,
           displayName,
-          latitude: Number.parseFloat(latitude ?? "34.0456"),
-          longitude: Number.parseFloat(longitude ?? "-118.2694"),
-          state: state ?? undefined,
-          timeZone: timeZone ?? "America/Los_Angeles",
+          latitude,
+          longitude,
+          state,
+          timeZone,
         },
       };
     else {

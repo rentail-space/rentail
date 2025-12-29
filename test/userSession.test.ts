@@ -13,7 +13,7 @@ describe("Anonymous visits chat page", () => {
   beforeAll(async () => {
     page = await converse("Hello, how are you?", {
       "x-real-ip": "146.70.195.182",
-      "x-vercel-ip-city": "Los Angeles",
+      "x-vercel-ip-city": "Los%20Angeles",
       "x-vercel-ip-country": "United States",
       "x-vercel-ip-country-region": "California",
       "x-vercel-ip-timezone": "America/Los_Angeles",
