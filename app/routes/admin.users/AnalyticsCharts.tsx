@@ -108,7 +108,7 @@ export default function Charts({
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="grid gap-4 md:grid-cols-2">
         {Object.entries(chartConfig).map(([key, value]) => (
           <GroupedChart
             key={key}
