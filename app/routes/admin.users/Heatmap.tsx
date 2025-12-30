@@ -2,6 +2,7 @@ import { HeatmapRect } from "@visx/heatmap";
 import { scaleLinear } from "@visx/scale";
 import { clamp, groupBy, range, sumBy } from "es-toolkit";
 import { DateTime } from "luxon";
+import { parseAsStringEnum, useQueryState } from "nuqs";
 import {
   Table,
   TableBody,
@@ -9,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/Table";
+import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import type { loader } from "./route";
 
 export default function Heatmap({
@@ -16,11 +18,31 @@ export default function Heatmap({
 }: {
   analytics: Awaited<ReturnType<typeof loader>>["analytics"];
 }) {
+  const [onlyFrom, setOnlyFrom] = useQueryState(
+    "onlyFrom",
+    parseAsStringEnum(["all", "llm", "search"]).withDefault("all").withOptions({
+      history: "replace",
+    }),
+  );
+
+  // NOTE: We could use a single filter function here, but it's more readable this way.
+  function selectEntries(entries: typeof analytics) {
+    return onlyFrom === "llm"
+      ? entries.filter((entry) =>
+          ["chatgpt.com", "perplexity.ai"].includes(entry.sessionSource),
+        )
+      : onlyFrom === "search"
+        ? entries.filter((entry) =>
+            ["google", "duckduckgo.com", "bing"].includes(entry.sessionSource),
+          )
+        : entries;
+  }
+
   const groupedByHour = groupBy(analytics, (entry) => clamp(entry.hour, 6, 22));
   const columns = Object.entries(groupedByHour).map(([hour, entries]) => {
-    // Luxon: 1 is Monday and 7 is Sunday -> JS: 0 is Sunday and 6 is Saturday
     const groupByDay = groupBy(
-      entries,
+      selectEntries(entries),
+      // Luxon: 1 is Monday and 7 is Sunday -> JS: 0 is Sunday and 6 is Saturday
       (entry) => DateTime.fromISO(entry.date).weekday % 6,
     );
     return {
@@ -44,8 +66,6 @@ export default function Heatmap({
     range: [0, height],
   });
 
-  console.log("%o", columns);
-
   const colorMax = Math.max(
     ...columns.flatMap(({ bins }) => bins.map(({ count }) => count)),
   );
@@ -60,7 +80,21 @@ export default function Heatmap({
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="font-bold text-2xl">Heatmap of activity by day/hour</h2>
+      <h2 className="font-bold text-2xl">Heatmap of Visitors by Day & Hour</h2>
+
+      <Tabs value={onlyFrom} className="mx-auto">
+        <TabsList>
+          <TabsTrigger value="all" onClick={() => setOnlyFrom("all")}>
+            All Sources
+          </TabsTrigger>
+          <TabsTrigger value="llm" onClick={() => setOnlyFrom("llm")}>
+            Only from LLM
+          </TabsTrigger>
+          <TabsTrigger value="search" onClick={() => setOnlyFrom("search")}>
+            Only from Search
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
 
       <div className="relative">
         <Table className="w-70">
