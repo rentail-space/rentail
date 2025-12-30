@@ -71,13 +71,13 @@ export default function Heatmap({
             All Sources
           </TabsTrigger>
           <TabsTrigger value="llm" onClick={() => setOnlyFrom("llm")}>
-            Only from LLM
+            LLM Visitors
           </TabsTrigger>
           <TabsTrigger value="search" onClick={() => setOnlyFrom("search")}>
-            Only from Search
+            Search Visitors
           </TabsTrigger>
           <TabsTrigger value="users" onClick={() => setOnlyFrom("users")}>
-            Only from Users
+            Chats
           </TabsTrigger>
         </TabsList>
       </Tabs>
