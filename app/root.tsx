@@ -1,4 +1,6 @@
+import Clarity from "@microsoft/clarity";
 import { last } from "es-toolkit";
+import { useEffect } from "react";
 import {
   type HeadersFunction,
   type LinksFunction,
@@ -6,6 +8,7 @@ import {
   type UIMatch,
   data,
   isRouteErrorResponse,
+  useLoaderData,
   useRouteError,
 } from "react-router";
 import { WaveLoading } from "respinner";
@@ -101,6 +104,7 @@ export default function App({
   const { hideLayout } = last(
     matches.filter((match) => match.handle && "hideLayout" in match.handle),
   )?.handle || { hideLayout: false };
+  useClarity();
 
   return (
     <PageLayout hideLayout={hideLayout}>
@@ -142,4 +146,14 @@ export function ErrorBoundary() {
       </main>
     </PageLayout>
   );
+}
+
+function useClarity() {
+  const found = useLoaderData<typeof loader>();
+  useEffect(() => {
+    Clarity.init("utqohlkqlf");
+  }, []);
+  useEffect(() => {
+    if (found?.user) Clarity.identify(found.user.id);
+  }, [found]);
 }
