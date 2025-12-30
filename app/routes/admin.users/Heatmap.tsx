@@ -71,7 +71,7 @@ export default function Heatmap({
   );
   const rectColorScale = scaleLinear<string>({
     domain: [0, colorMax],
-    range: ["#122549", "#b4fbde"],
+    range: ["#020509", "#05E17A"],
   });
   const opacityScale = scaleLinear<number>({
     domain: [0, colorMax],
