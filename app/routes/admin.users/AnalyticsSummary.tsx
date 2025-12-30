@@ -54,7 +54,7 @@ export default function AnalyticsSummary({
               m{" "}
               <NumberFlow
                 format={{ notation: "compact" }}
-                value={avgSessionDuration % 60}
+                value={Math.floor(avgSessionDuration % 60)}
               />
               s
             </span>
