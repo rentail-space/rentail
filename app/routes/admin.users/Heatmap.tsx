@@ -3,6 +3,7 @@ import { scaleLinear } from "@visx/scale";
 import { clamp, groupBy, range, sumBy } from "es-toolkit";
 import { DateTime } from "luxon";
 import { parseAsStringEnum, useQueryState } from "nuqs";
+import type { User } from "prisma/generated/client";
 import {
   Table,
   TableBody,
@@ -13,54 +14,36 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import type { loader } from "./route";
 
+const hours = range(6, 23);
+const weekdays = range(0, 7);
+
 export default function Heatmap({
   analytics,
+  users,
 }: {
   analytics: Awaited<ReturnType<typeof loader>>["analytics"];
+  users: User[];
 }) {
   const [onlyFrom, setOnlyFrom] = useQueryState(
     "onlyFrom",
-    parseAsStringEnum(["all", "llm", "search"]).withDefault("all").withOptions({
-      history: "replace",
-    }),
+    parseAsStringEnum(["all", "llm", "search", "users"])
+      .withDefault("all")
+      .withOptions({
+        history: "replace",
+      }),
   );
 
-  // NOTE: We could use a single filter function here, but it's more readable this way.
-  function selectEntries(entries: typeof analytics) {
-    return onlyFrom === "llm"
-      ? entries.filter((entry) =>
-          ["chatgpt.com", "perplexity.ai"].includes(entry.sessionSource),
-        )
-      : onlyFrom === "search"
-        ? entries.filter((entry) =>
-            ["google", "duckduckgo.com", "bing"].includes(entry.sessionSource),
-          )
-        : entries;
-  }
-
-  const groupedByHour = groupBy(analytics, (entry) => clamp(entry.hour, 6, 22));
-  const columns = Object.entries(groupedByHour).map(([hour, entries]) => {
-    const groupByDay = groupBy(
-      selectEntries(entries),
-      // Luxon: 1 is Monday and 7 is Sunday -> JS: 0 is Sunday and 6 is Saturday
-      (entry) => DateTime.fromISO(entry.date).weekday % 6,
-    );
-    return {
-      bin: hour,
-      bins: range(0, 7).map((day) => ({
-        bin: day,
-        count: sumBy(groupByDay[day] ?? [], (entry) => entry.visitors),
-      })),
-    };
-  });
-
+  const columns =
+    onlyFrom === "users"
+      ? usersToBins(users)
+      : analyticsToBins(analytics, onlyFrom);
   const size = 52;
   const width = columns.length * size;
   const xScale = scaleLinear<number>({
     domain: [0, columns.length],
     range: [0, width],
   });
-  const height = 7 * size;
+  const height = weekdays.length * size;
   const yScale = scaleLinear<number>({
     domain: [0, Math.max(...columns.map(({ bins }) => bins.length))],
     range: [0, height],
@@ -93,6 +76,9 @@ export default function Heatmap({
           <TabsTrigger value="search" onClick={() => setOnlyFrom("search")}>
             Only from Search
           </TabsTrigger>
+          <TabsTrigger value="users" onClick={() => setOnlyFrom("users")}>
+            Only from Users
+          </TabsTrigger>
         </TabsList>
       </Tabs>
 
@@ -101,7 +87,7 @@ export default function Heatmap({
           <TableHeader>
             <TableRow>
               <TableCell style={{ minWidth: size }}>&nbsp;</TableCell>
-              {range(6, 23).map((hour) => (
+              {hours.map((hour) => (
                 <TableCell
                   key={hour}
                   style={{ minWidth: size }}
@@ -113,7 +99,7 @@ export default function Heatmap({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat  "].map((day) => (
+            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
               <TableRow key={day}>
                 <TableCell
                   style={{ width: size, height: size }}
@@ -139,7 +125,7 @@ export default function Heatmap({
             colorScale={rectColorScale}
             opacityScale={opacityScale}
             binWidth={width / columns.length}
-            binHeight={height / 7}
+            binHeight={height / weekdays.length}
             gap={8}
           >
             {(heatmap) =>
@@ -162,4 +148,75 @@ export default function Heatmap({
       </div>
     </section>
   );
+}
+
+function analyticsToBins(
+  analytics: Awaited<ReturnType<typeof loader>>["analytics"],
+  onlyFrom: "all" | "llm" | "search",
+) {
+  const selected =
+    onlyFrom === "llm"
+      ? analytics.filter((entry) =>
+          ["chatgpt.com", "perplexity.ai"].includes(entry.sessionSource),
+        )
+      : onlyFrom === "search"
+        ? analytics.filter((entry) =>
+            ["google", "duckduckgo.com", "bing"].includes(entry.sessionSource),
+          )
+        : analytics;
+
+  // Adjust to local timezone, fix weekday number, and clamp the hour to 6-22
+  const adjusted = selected.map((entry) => {
+    const date = DateTime.fromISO(
+      `${entry.date}T${entry.hour.toString().padStart(2, "0")}`,
+      { zone: "UTC" },
+    ).setZone("America/Los_Angeles");
+    // Luxon: 1 is Monday and 7 is Sunday -> JS: 0 is Sunday and 6 is Saturday
+    const weekday = date.weekday % 6;
+    // Visually we're only showing 6-22 hours
+    const hour = clamp(date.hour, hours[0], hours[hours.length - 1]);
+    return {
+      hour,
+      sessionSource: entry.sessionSource,
+      visitors: entry.visitors,
+      weekday,
+    };
+  });
+
+  return hours.map((hour) => {
+    const thisHour = groupBy(adjusted, (entry) => entry.hour)[hour] ?? [];
+    return {
+      bin: hour,
+      bins: weekdays.map((weekday) => {
+        const thisWeekday =
+          groupBy(thisHour, (entry) => entry.weekday)[weekday] ?? [];
+        return {
+          bin: weekday,
+          count: sumBy(thisWeekday, (entry) => entry.visitors),
+        };
+      }),
+    };
+  });
+}
+
+function usersToBins(users: User[]) {
+  // Adjust to local timezone and clamp hours to between 6am and 10pm
+  const adjusted = users.map((user) => {
+    const { hour, weekday } = DateTime.fromJSDate(user.createdAt, {
+      zone: "America/Los_Angeles",
+    });
+    const clamped = clamp(hour, hours[0], hours[hours.length - 1]);
+    return { hour: clamped, user, weekday };
+  });
+  return hours.map((hour) => {
+    const thisHour = groupBy(adjusted, (user) => user.hour)[hour] ?? [];
+    return {
+      bin: hour,
+      bins: weekdays.map((weekday) => {
+        const thisWeekday =
+          groupBy(thisHour, (user) => user.weekday)[weekday] ?? [];
+        return { bin: weekday, count: thisWeekday.length };
+      }),
+    };
+  });
 }

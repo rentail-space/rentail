@@ -43,7 +43,7 @@ async function fromGoogleAnalytics(): Promise<
   const client = new BetaAnalyticsDataClient({ authClient: auth });
 
   try {
-    // https://support.google.com/analytics/table/13948007
+    // @see https://support.google.com/analytics/table/13948007
     const response = await client.runReport({
       dateRanges: [{ endDate: "today", startDate: "90daysAgo" }],
       dimensions: [
@@ -88,7 +88,7 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
             <AnalyticsSummary analytics={analytics} users={recentUsers} />
             <RecentUsers users={recentUsers} />
             <UserSources analytics={analytics} />
-            <Heatmap analytics={analytics} />
+            <Heatmap analytics={analytics} users={recentUsers} />
           </>
         )}
       </RangeSelection>
