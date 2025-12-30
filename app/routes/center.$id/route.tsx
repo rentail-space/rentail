@@ -34,6 +34,10 @@ export default function CenterPage({
         content={`${loaderData.name}, ${loaderData.city} ${loaderData.state}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`}
       />
       <meta name="author" content="rentail.space" />
+      <link
+        rel="canonical"
+        href={`https://rentail.space/center/${loaderData.id}`}
+      />
 
       <CenterDetails center={loaderData} />
     </main>

@@ -22,12 +22,13 @@ export default function Blog({
       <title>Blog - Specialty Leasing & Retail Spaces | Rentail.space</title>
       <meta
         name="description"
-        content="Tips, insights, and success stories for retail entrepreneurs"
+        content="Discover tips, insights, and real-world success stories to help retail entrepreneurs thrive—specialty leasing ideas, marketing, and more."
       />
       <meta
         name="keywords"
         content="blog, specialty leasing, retail spaces, rentail.space"
       />
+      <link rel="canonical" href="https://rentail.space/blog" />
 
       <section className="bg-[hsl(60,100%,99%)] px-4 py-20 md:py-32">
         <div className="container mx-auto max-w-4xl text-center">

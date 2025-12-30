@@ -22,6 +22,7 @@ export default function Glossary() {
         name="keywords"
         content="specialty leasing glossary, kiosk definition, pop-up shop meaning, mall cart terms, retail terminology, shopping center glossary, temporary retail definitions"
       />
+      <link rel="canonical" href="https://rentail.space/glossary" />
 
       <script
         type="application/ld+json"

@@ -10,12 +10,13 @@ export default function TermsOfService() {
       </title>
       <meta
         name="description"
-        content="Our terms of service explain how we use and protect your personal information when you use our website."
+        content="Read the Rentail.space Terms of Service: your rights, obligations, and important policies for using our specialty leasing platform."
       />
       <meta
         name="keywords"
         content="terms of service, specialty leasing, retail spaces, rentail.space"
       />
+      <link rel="canonical" href="https://rentail.space/terms" />
 
       <Streamdown
         className="prose prose-lg mx-auto"

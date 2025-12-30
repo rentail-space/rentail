@@ -75,7 +75,7 @@ Ready to explore specialty leasing opportunities in your area? Rentail will help
 
 ---
 
-# FAQ: Specialty Leasing for Small Business
+## FAQ: Specialty Leasing for Small Business
 
 **Q: What exactly is specialty leasing and how is it different from a regular retail lease?**
 

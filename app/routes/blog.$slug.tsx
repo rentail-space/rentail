@@ -43,6 +43,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
       <meta name="duckduckbot" content="index, follow" />
       <meta name="slurp" content="index, follow" />
       <meta name="ia_archiver" content="index, follow" />
+      <link rel="canonical" href={`https://rentail.space/blog/${slug}`} />
 
       <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-12 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
         <h1>{title}</h1>
@@ -127,7 +128,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
 }
 
 function parseFAQ(body: string): { question: string; answer: string }[] | null {
-  const faqMatch = body.match(/# FAQ:[\s\S]*$/i);
+  const faqMatch = body.match(/## FAQ:[\s\S]*$/i);
   if (!faqMatch) return null;
 
   const faqSection = faqMatch[0];

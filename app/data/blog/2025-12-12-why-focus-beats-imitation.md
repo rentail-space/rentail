@@ -59,7 +59,7 @@ Focus wins. Every time.
 
 ---
 
-# FAQ: Breaking the Comparison Trap and Building Through Focus
+## FAQ: Breaking the Comparison Trap and Building Through Focus
 
 **Q: How do I actually identify what we can "genuinely excel at" versus what I just wish we were good at?**
 

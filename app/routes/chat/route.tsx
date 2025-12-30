@@ -68,12 +68,13 @@ export default function ChatPage({
       <title>Specialty Leasing & Retail Spaces | Rentail.space</title>
       <meta
         name="description"
-        content="Chat with our AI assistant to find the perfect retail space for your business."
+        content="Get instant help finding your ideal retail space. Chat with our AI assistant for expert recommendations and personalized matches."
       />
       <meta
         name="keywords"
         content="chat, specialty leasing, retail spaces, rentail.space"
       />
+      <link rel="canonical" href="https://rentail.space/chat" />
 
       <StickToBottom
         initial="smooth"

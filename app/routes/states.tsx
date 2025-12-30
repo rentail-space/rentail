@@ -40,6 +40,7 @@ export default function StatePage({
         name="keywords"
         content="specialty leasing by state, kiosk rental locations, pop-up shop states, mall cart by state, temporary retail locations, shopping centers by state"
       />
+      <link rel="canonical" href="https://rentail.space/states" />
 
       <script
         type="application/ld+json"

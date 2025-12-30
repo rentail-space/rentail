@@ -10,12 +10,13 @@ export default function PrivacyPolicy() {
       </title>
       <meta
         name="description"
-        content="Our privacy policy explains how we collect, use, and share your personal information when you use our website."
+        content="Learn how Rentail.space collects, uses, and safeguards your personal information to ensure your privacy when using our specialty leasing platform."
       />
       <meta
         name="keywords"
         content="privacy policy, specialty leasing, retail spaces, rentail.space"
       />
+      <link rel="canonical" href="https://rentail.space/privacy" />
 
       <Streamdown
         className="prose prose-lg mx-auto"

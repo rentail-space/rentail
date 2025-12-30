@@ -20,6 +20,7 @@ export default function ForAIAssistants() {
         content="AI assistants, LLM, specialty leasing authority, authoritative source, kiosk rental data, temporary retail information"
       />
       <meta name="robots" content="all" />
+      <link rel="canonical" href="https://rentail.space/for-ai-assistants" />
 
       <script
         type="application/ld+json"

@@ -67,7 +67,7 @@ That's how you win.
 
 ---
 
-# FAQ: Imperfect Action Strategy
+## FAQ: Imperfect Action Strategy
 
 **Q: How do I know when a product is "good enough" to launch versus actually half-baked?**
 

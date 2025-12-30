@@ -62,7 +62,7 @@ Keep moving. Always.
 
 ---
 
-# FAQ: Persisting Through Setbacks Without Hunkering Down
+## FAQ: Persisting Through Setbacks Without Hunkering Down
 
 **Q: How do I actually calculate and use a "90-day trailing average" of my sentiment about the business?**
 

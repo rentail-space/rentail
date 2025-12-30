@@ -188,6 +188,7 @@ export default function ProfilePage() {
         name="keywords"
         content="profile settings, retail spaces, rentail.space"
       />
+      <link rel="canonical" href="https://rentail.space/profile" />
 
       <div className="mx-auto max-w-2xl rounded-md border-2 border-black bg-white shadow-[8px_8px_0px_0px_black]">
         <div className="border-black border-b-2 p-8">

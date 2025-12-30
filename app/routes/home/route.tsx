@@ -34,6 +34,7 @@ export default function Home({
         name="keywords"
         content="specialty leasing, kiosk rental, pop-up shop, mall cart, temporary retail space, short-term lease, shopping center, seasonal retail, retail kiosk, mall kiosk rental, cart space rental"
       />
+      <link rel="canonical" href="https://rentail.space" />
 
       <HeroSection />
       <FeaturesSection />

@@ -192,7 +192,7 @@ Your first kiosk might not be in the highest-traffic location or during peak sea
 
 ---
 
-# FAQ: Finding Mall Kiosk Space
+## FAQ: Finding Mall Kiosk Space
 
 **Q: How far in advance should I start looking for a mall kiosk space?**
 

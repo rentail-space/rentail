@@ -67,7 +67,7 @@ Listen first. Decide fast. Execute with clarity.
 
 ---
 
-# FAQ: Moving from Snap Judgments to Open Listening
+## FAQ: Moving from Snap Judgments to Open Listening
 
 **Q: How do I balance listening with the need to make fast decisions in high-pressure situations?**
 

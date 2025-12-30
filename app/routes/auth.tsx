@@ -79,6 +79,7 @@ export default function AuthPage() {
         name="keywords"
         content="sign up, sign in, retail spaces, rentail.space"
       />
+      <link rel="canonical" href="https://rentail.space/auth" />
 
       <Card className="mx-4 my-10 w-full max-w-md">
         <CardHeader className="text-center">

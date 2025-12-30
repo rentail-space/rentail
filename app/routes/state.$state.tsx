@@ -53,6 +53,10 @@ export default function StatePage({
         name="keywords"
         content={`${state.name} specialty leasing, ${state.abbreviation} kiosk rental, ${state.name} pop-up shops, ${state.abbreviation} mall carts, ${state.name} temporary retail, shopping centers in ${state.name}`}
       />
+      <link
+        rel="canonical"
+        href={`https://rentail.space/state/${state.abbreviation}`}
+      />
 
       <script
         type="application/ld+json"

@@ -17,6 +17,7 @@ export default function FAQ() {
         name="keywords"
         content="specialty leasing FAQ, kiosk rental questions, pop-up shop info, mall cart rental, temporary retail FAQ, short-term lease questions"
       />
+      <link rel="canonical" href="https://rentail.space/faq" />
 
       <script
         type="application/ld+json"

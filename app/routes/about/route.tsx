@@ -16,12 +16,13 @@ export default function About() {
       </title>
       <meta
         name="description"
-        content="We're on a mission to democratize retail space and help micro-merchants thrive in brick-and-mortar locations."
+        content="Rentail.space empowers micro-merchants by making retail spaces more accessible, flexible, and affordable for everyone."
       />
       <meta
         name="keywords"
         content="about rentail.space, retail space, micro-merchants, brick-and-mortar, democratize retail space"
       />
+      <link rel="canonical" href="https://rentail.space/about" />
 
       <div className="container mx-auto my-10 space-y-8 p-5">
         <AboutHeader />
