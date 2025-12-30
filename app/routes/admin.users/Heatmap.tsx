@@ -146,7 +146,69 @@ export default function Heatmap({
           </HeatmapRect>
         </svg>
       </div>
+
+      <Legend
+        onlyFrom={onlyFrom}
+        colorMax={colorMax}
+        opacityScale={opacityScale}
+        rectColorScale={rectColorScale}
+      />
     </section>
+  );
+}
+
+function Legend({
+  onlyFrom,
+  colorMax,
+  opacityScale,
+  rectColorScale,
+}: {
+  onlyFrom: "all" | "llm" | "search" | "users";
+  colorMax: number;
+  opacityScale: (value: number) => number;
+  rectColorScale: (value: number) => string;
+}) {
+  // Determine the range for the legend (steps)
+  // Use 5 color stops spanning the range
+  const steps = 5;
+  const stops = Array.from({ length: steps }, (_, i) =>
+    Math.round((i / (steps - 1)) * colorMax),
+  );
+  // Ensure unique and sorted stops (if colorMax=0, just show 0)
+  const uniqueStops = [...new Set(stops)].sort((a, b) => a - b);
+
+  return (
+    <div className="flex items-center gap-4">
+      <span>{onlyFrom === "users" ? "Users" : "Visitors"}:</span>
+      {uniqueStops.map((value, i) => (
+        <div key={value} className="flex items-center gap-2">
+          <svg
+            width={24}
+            height={24}
+            style={{ display: "inline" }}
+            aria-hidden="true"
+          >
+            <rect
+              x={0}
+              y={0}
+              width={24}
+              height={24}
+              rx={3}
+              fill={rectColorScale(value)}
+              fillOpacity={opacityScale(value)}
+              stroke="#666"
+              strokeWidth={0.5}
+            />
+          </svg>
+          <span className="text-muted-foreground text-xs">
+            {value}
+            {i === uniqueStops.length - 1 && colorMax > 0 && value !== colorMax
+              ? "+" // indicate max value, for the last stop, if colorMax wasn't already included due to rounding
+              : ""}
+          </span>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -165,12 +227,11 @@ function analyticsToBins(
           )
         : analytics;
 
-  // Adjust to local timezone, fix weekday number, and clamp the hour to 6-22
   const adjusted = selected.map((entry) => {
     const date = DateTime.fromISO(
       `${entry.date}T${entry.hour.toString().padStart(2, "0")}`,
       { zone: "UTC" },
-    ).setZone("America/Los_Angeles");
+    );
     // Luxon: 1 is Monday and 7 is Sunday -> JS: 0 is Sunday and 6 is Saturday
     const weekday = date.weekday % 6;
     // Visually we're only showing 6-22 hours
@@ -200,11 +261,8 @@ function analyticsToBins(
 }
 
 function usersToBins(users: User[]) {
-  // Adjust to local timezone and clamp hours to between 6am and 10pm
   const adjusted = users.map((user) => {
-    const { hour, weekday } = DateTime.fromJSDate(user.createdAt, {
-      zone: "America/Los_Angeles",
-    });
+    const { hour, weekday } = DateTime.fromJSDate(user.createdAt);
     const clamped = clamp(hour, hours[0], hours[hours.length - 1]);
     return { hour: clamped, user, weekday };
   });

@@ -92,8 +92,8 @@ export default function UserPage({
 
 function UserInfoCard({ user }: { user: User }) {
   const workingMemory = cleanParseWorkingMemory(user.workingMemory);
-  const timeZone = workingMemory.location?.timeZone ?? "UTC";
   const utm = user.utm ? JSON.parse(user.utm as string) : undefined;
+  // Get the browser timezone if we're on the client
 
   return (
     <details className="rounded-lg border-2 border-gray-400 p-4" open>
@@ -121,9 +121,9 @@ function UserInfoCard({ user }: { user: User }) {
               ))}
           <Row
             title="Created"
-            value={DateTime.fromJSDate(user.createdAt)
-              .setZone(timeZone)
-              .toLocaleString(DateTime.DATETIME_FULL)}
+            value={DateTime.fromJSDate(user.createdAt).toLocaleString(
+              DateTime.DATETIME_FULL,
+            )}
           />
         </TableBody>
       </Table>
