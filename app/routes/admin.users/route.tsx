@@ -8,6 +8,7 @@ import { verifyAdmin } from "~/lib/sessions.server";
 import type { Route } from "./+types/route";
 import Charts from "./AnalyticsCharts";
 import AnalyticsSummary from "./AnalyticsSummary";
+import Heatmap from "./Heatmap";
 import RangeSelection from "./RangeSelection";
 import RecentUsers from "./RecentUsers";
 import UserSources from "./UserSources";
@@ -29,6 +30,7 @@ async function fromGoogleAnalytics(): Promise<
   Array<{
     averageSessionDuration: number;
     date: string;
+    hour: number;
     sessionSource: string;
     visitors: number;
   }>
@@ -44,7 +46,11 @@ async function fromGoogleAnalytics(): Promise<
     // https://support.google.com/analytics/table/13948007
     const response = await client.runReport({
       dateRanges: [{ endDate: "today", startDate: "90daysAgo" }],
-      dimensions: [{ name: "date" }, { name: "sessionSource" }],
+      dimensions: [
+        { name: "date" },
+        { name: "hour" },
+        { name: "sessionSource" },
+      ],
       metrics: [
         // The number of distinct GA users -> unique visitors
         { name: "activeUsers" },
@@ -61,7 +67,8 @@ async function fromGoogleAnalytics(): Promise<
         row.metricValues?.[1]?.value ?? "",
       ),
       date: row.dimensionValues?.[0]?.value ?? "",
-      sessionSource: row.dimensionValues?.[1]?.value ?? "",
+      hour: Number.parseInt(row.dimensionValues?.[1]?.value ?? "0", 10),
+      sessionSource: row.dimensionValues?.[2]?.value ?? "",
       visitors: Number.parseInt(row.metricValues?.[0]?.value ?? "", 10),
     }));
   } catch (error) {
@@ -72,7 +79,7 @@ async function fromGoogleAnalytics(): Promise<
 
 export default function UsersPage({ loaderData }: Route.ComponentProps) {
   return (
-    <main className="flex flex-col gap-8">
+    <section className="flex flex-col gap-8">
       <RangeSelection analytics={loaderData.analytics} users={loaderData.users}>
         {({ recentUsers, analytics, selectorUI }) => (
           <>
@@ -81,9 +88,10 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
             <AnalyticsSummary analytics={analytics} users={recentUsers} />
             <RecentUsers users={recentUsers} />
             <UserSources analytics={analytics} />
+            <Heatmap analytics={analytics} />
           </>
         )}
       </RangeSelection>
-    </main>
+    </section>
   );
 }
