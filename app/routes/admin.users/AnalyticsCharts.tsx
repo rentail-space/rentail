@@ -18,7 +18,6 @@ import {
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -101,11 +100,9 @@ export default function Charts({
   return (
     <Card className="bg-secondary-background text-foreground">
       <CardHeader className="text-center">
-        <CardTitle>Visitors &rarr; Chats + Session Duration</CardTitle>
-        <CardDescription>
-          Showing unique visitors, chats started by these visitors, and average
-          session duration across all visitors.
-        </CardDescription>
+        <CardTitle className="font-bold text-lg">
+          Visitors &rarr; Chats + Session Duration
+        </CardTitle>
       </CardHeader>
 
       <CardContent className="grid gap-4 md:grid-cols-2">
