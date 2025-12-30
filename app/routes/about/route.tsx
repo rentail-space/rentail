@@ -16,7 +16,7 @@ export default function About() {
       </title>
       <meta
         name="description"
-        content="Rentail.space empowers micro-merchants by making retail spaces more accessible, flexible, and affordable for everyone."
+        content="Rentail.space helps micro-merchants find affordable, flexible retail space—making brick-and-mortar accessible to everyone."
       />
       <meta
         name="keywords"
