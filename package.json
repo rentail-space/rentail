@@ -36,7 +36,7 @@
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-tabs": "^1.1.13",
-    "@react-email/components": "1.0.2",
+    "@react-email/components": "1.0.3",
     "@react-router/fs-routes": "^7.11.0",
     "@react-router/node": "^7.11.0",
     "@react-router/serve": "^7.11.0",
@@ -78,7 +78,7 @@
     "radashi": "^12.7.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-email": "^5.1.0",
+    "react-email": "^5.1.1",
     "react-ga4": "^2.1.0",
     "react-router": "^7.11.0",
     "recharts": "^3.6.0",
@@ -160,5 +160,5 @@
   "engines": {
     "node": ">=24.10.1"
   },
-  "packageManager": "pnpm@10.26.2"
+  "packageManager": "pnpm@10.26.0"
 }
