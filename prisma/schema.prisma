@@ -67,7 +67,7 @@ model Property {
   squareFootage  Int             @map("square_footage")
   state          String          @map("state")
   updatedAt      DateTime        @map("updated_at")                                 @updatedAt
-  website        String?         @map("website")
+  website        String          @map("website")
   rating         Float?          @map("rating") // 1.0-5.0
   reviewCount    Int?            @map("review_count")
   openFrom       Int?            @map("open_from") // Hour:minute eg 930 is 9:30

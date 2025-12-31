@@ -3,6 +3,7 @@ import { invariant } from "es-toolkit";
 import type { User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import zod from "zod";
+import externalLink from "../externalLink";
 import { geocodeFromUserInput } from "../geocode";
 import prisma from "../prisma";
 
@@ -42,15 +43,16 @@ export default function registerListCenters(mcpServer: McpServer) {
       const userId =
         _meta?.["openai/subject"]?.toString() || extra.sessionId || ulid();
       const location =
-        _meta?.["openai/userLocation"]?.toString() ?? params.location ?? "";
+        _meta?.["openai/userLocation"]?.toString() || params.location || "";
 
-      await getUserForSession({
-        location: JSON.parse(location),
-        userAgent: _meta?.["openai/userAgent"]?.toString() ?? "N/A",
-        userId,
-      });
       const geocode = await geocodeFromUserInput(location);
       if (!geocode) throw new Error("I do not have your location");
+
+      await getUserForSession({
+        location: geocode,
+        userAgent: _meta?.["openai/userAgent"]?.toString() || "N/A",
+        userId,
+      });
 
       const maxDistance = 30; // miles
       const centers = await prisma.property.findMany({
@@ -78,7 +80,7 @@ export default function registerListCenters(mcpServer: McpServer) {
             .join(", "),
           name: center.name,
           summary: center.summary,
-          website: center.website,
+          website: externalLink(center.website),
         })),
       } as zod.infer<typeof listCentersSpec.outputSchema>;
       invariant(
@@ -104,12 +106,9 @@ async function getUserForSession({
   userId,
 }: {
   location: {
-    city: string;
-    region: string;
-    country: string;
-    timezone: string;
-    longitude: number;
+    displayName: string;
     latitude: number;
+    longitude: number;
   };
   userAgent: string;
   userId: string;
