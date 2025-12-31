@@ -9,17 +9,27 @@ import prisma from "../prisma";
 
 const listCentersSpec = {
   annotations: { readOnlyHint: true },
-  description: "List all shopping centers in a given city or area",
+  description:
+    "List all shopping centers and enclosed malls in a given city or area. Focus on retail shopping centers, strip malls, and enclosed malls. Exclude individual stores or single-building retail. Helps the user find a space to rent in a shopping center or mall.",
   inputSchema: zod.object({
-    location: zod.string().describe("The merchant's location").optional(),
+    location: zod
+      .string()
+      .describe("The location to search for shopping centers and malls")
+      .optional(),
   }),
   outputSchema: zod.object({
     centers: zod.array(
       zod.object({
-        name: zod.string().describe("The shopping center's name"),
-        address: zod.string().describe("The shopping center's full address"),
-        summary: zod.string().describe("The shopping center's summary"),
-        website: zod.string().describe("The shopping center's website"),
+        name: zod.string().describe("The shopping center or mall's name"),
+        address: zod
+          .string()
+          .describe("The shopping center or mall's full address"),
+        summary: zod
+          .string()
+          .describe("The shopping center or mall's summary description"),
+        website: zod
+          .string()
+          .describe("The shopping center or mall's website URL"),
       }),
     ),
   }),
