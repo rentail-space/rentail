@@ -1,6 +1,6 @@
 import { sortBy } from "es-toolkit";
 import type { PropertyGetPayload } from "prisma/generated/models";
-import { Activity, useEffect, useRef, useState } from "react";
+import { Activity, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import { trackEvent } from "~/lib/analytics";
@@ -104,7 +104,7 @@ function HoverCard({
   const cardRef = useRef<HTMLAnchorElement>(null);
   const [topOffset, setTopOffset] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!centerShown || !cardRef.current) return;
 
     const updatePosition = () => {
