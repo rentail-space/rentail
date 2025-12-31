@@ -1,8 +1,8 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import CentersMap from "~/components/ui/CentersMap";
-import externalLink from "~/lib/externalLink";
 import CenterInfo from "./CenterInfo";
 import { CenterSpaces } from "./CenterSpaces";
 
@@ -12,102 +12,56 @@ export default function CenterDetails({
   center: PropertyGetPayload<{ include: { spaces: true } }>;
 }) {
   return (
-    <div className="mx-auto my-10 flex max-w-4xl flex-col gap-6">
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemaData(center)),
-        }}
-      />
+    <>
+      <Card className="bg-[hsl(37,92%,65%)]">
+        <CardContent>
+          <h1 className="font-bold text-4xl text-black">{center.name}</h1>
+        </CardContent>
+      </Card>
 
-      <h1 className="rounded-md border-2 border-black bg-[hsl(37,92%,65%)] px-6 py-3 font-bold text-4xl text-black shadow-[6px_6px_0px_0px_black]">
-        {center.name}
-      </h1>
-
-      <section className="rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
-        <CenterInfo center={center} />
-      </section>
+      <CenterInfo center={center} />
 
       {center.imageURLs.length > 0 && (
-        <section className="overflow-hidden rounded-md border-2 border-black shadow-[6px_6px_0px_0px_black]">
-          <figure className="max-h-[500px] overflow-hidden border-black border-y-2">
-            <img
-              className="w-full"
-              src={center.imageURLs[0]}
-              alt={center.name}
-            />
-          </figure>
-        </section>
+        <Card className="bg-white p-0!">
+          <picture className="max-h-[500px] w-full overflow-hidden">
+            <img src={center.imageURLs[0]} alt={center.name} />
+          </picture>
+        </Card>
       )}
 
-      <section className="prose prose-lg max-w-none rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
-        <h2 className="font-bold text-2xl">Summary</h2>
-        <Streamdown remarkPlugins={[remarkGfm]} mode="static">
-          {center.description}
-        </Streamdown>
-      </section>
+      <Card className="bg-white">
+        <CardHeader>
+          <CardTitle className="font-bold text-2xl">Summary</CardTitle>
+        </CardHeader>
+        <CardContent className="text-lg">
+          <Streamdown remarkPlugins={[remarkGfm]} mode="static">
+            {center.description}
+          </Streamdown>
+        </CardContent>
+      </Card>
 
       {center.demographics && (
-        <section className="prose prose-lg max-w-none rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
-          <h2 className="font-bold text-2xl">Demographics</h2>
-          <Streamdown remarkPlugins={[remarkGfm]} mode="static">
-            {center.demographics}
-          </Streamdown>
-        </section>
+        <Card className="bg-white">
+          <CardHeader>
+            <CardTitle className="font-bold text-2xl">Demographics</CardTitle>
+          </CardHeader>
+          <CardContent className="text-lg">
+            <Streamdown remarkPlugins={[remarkGfm]} mode="static">
+              {center.demographics}
+            </Streamdown>
+          </CardContent>
+        </Card>
       )}
 
-      <section className="rounded-md border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_black]">
-        <CenterSpaces spaces={center.spaces} />
-      </section>
+      <CenterSpaces spaces={center.spaces} />
 
-      <section className="overflow-hidden rounded-md border-2 border-black shadow-[6px_6px_0px_0px_black]">
+      <Card className="bg-white p-0!">
         <CentersMap
           centers={[center]}
           latitude={center.latitude}
           longitude={center.longitude}
         />
-      </section>
-    </div>
+      </Card>
+    </>
   );
-}
-
-function schemaData(center: PropertyGetPayload<{ include: { spaces: true } }>) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "ShoppingCenter",
-    name: center.name,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: center.address,
-      addressLocality: center.city,
-      addressRegion: center.state,
-      addressCountry: center.country || "US",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: center.latitude,
-      longitude: center.longitude,
-    },
-    ...(center.phone && { telephone: center.phone }),
-    ...(center.website && { url: externalLink(center.website) }),
-    ...(center.imageURLs.length > 0 && { image: center.imageURLs }),
-    ...(center.description && { description: center.description }),
-    ...(center.openFrom === 0 && center.openUntil === 2400
-      ? {
-          openingHoursSpecification: {
-            "@type": "OpeningHoursSpecification",
-            opens: "00:00",
-            closes: "24:00",
-          },
-        }
-      : center.openFrom &&
-        center.openUntil && {
-          openingHoursSpecification: {
-            "@type": "OpeningHoursSpecification",
-            opens: `${Math.floor(center.openFrom / 100)}:${String(center.openFrom % 100).padStart(2, "0")}`,
-            closes: `${Math.floor(center.openUntil / 100)}:${String(center.openUntil % 100).padStart(2, "0")}`,
-          },
-        }),
-  };
 }

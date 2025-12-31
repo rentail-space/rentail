@@ -1,28 +1,24 @@
 import type { PropertySpace } from "prisma/generated/client";
+import { Card, CardContent } from "~/components/ui/Card";
 
 export function CenterSpaces({ spaces }: { spaces: PropertySpace[] }) {
-  if (spaces.length === 0) return <NoAvailableSpaces />;
   return (
-    <>
-      <h4 className="text-center font-bold text-2xl">Available Spaces</h4>
-      {spaces
-        .sort((a, b) =>
-          a.type !== b.type
-            ? a.type.localeCompare(b.type)
-            : a.number.localeCompare(b.number),
-        )
-        .map((space) => (
-          <Space key={space.id} space={space} />
-        ))}
-    </>
-  );
-}
-
-function NoAvailableSpaces() {
-  return (
-    <p className="font-bold text-black text-lg">
-      Sorry, all spaces are currently leased. Please check back later.
-    </p>
+    <Card className="bg-white">
+      <CardContent>
+        <h2 className="text-center font-bold text-2xl">
+          {spaces.length === 0 ? "No available spaces" : "Available Spaces"}
+        </h2>
+        {spaces
+          .sort((a, b) =>
+            a.type !== b.type
+              ? a.type.localeCompare(b.type)
+              : a.number.localeCompare(b.number),
+          )
+          .map((space) => (
+            <Space key={space.id} space={space} />
+          ))}
+      </CardContent>
+    </Card>
   );
 }
 
