@@ -2,8 +2,7 @@ import { sortBy } from "es-toolkit";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Activity, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import { ActiveLink } from "~/components/ui/ActiveLink";
-import { Card, CardContent } from "~/components/ui/Card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import { trackEvent } from "~/lib/analytics";
 import { cn } from "~/lib/utils";
 
@@ -18,102 +17,95 @@ export default function Centers({
 }: {
   centers: PropertyGetPayload<{ include: { spaces: true } }>[];
 }) {
+  const [centerShown, setCenterShown] = useState<string | null>(null);
+
   return (
     <Card className="fixed right-0 bottom-24 mr-4 hidden h-fit bg-white lg:block lg:w-1/4">
-      <CardContent>
-        {centers.length > 0 ? (
-          <AvailableCenters centers={centers} />
+      <CardHeader>
+        <CardTitle className="font-bold text-2xl">Shopping Centers</CardTitle>
+      </CardHeader>
+      <CardContent className="mt-4 space-y-4">
+        {centers.length === 0 ? (
+          <p>I can't find any shopping centers near you.</p>
         ) : (
-          <div className="mb-2 font-bold text-black text-lg">
-            I'll find centers for you
-          </div>
+          sortCenters(centers, 8).map((center) => (
+            <LinkToCenter
+              center={center}
+              centerShown={centerShown}
+              key={center.id}
+              setCenterShown={setCenterShown}
+            />
+          ))
         )}
       </CardContent>
     </Card>
   );
 }
 
-function AvailableCenters({
-  centers,
-}: {
-  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
-}) {
-  const [hoveredCenter, setHoveredCenter] = useState<string | null>(null);
-
-  return (
-    <>
-      <div className="mb-3 font-bold text-black text-lg">Shopping Centers</div>
-      <div className="flex flex-col gap-4">
-        {sortCenters(centers, 10).map((center) => (
-          <LinkToCenter
-            hoveredCenter={hoveredCenter}
-            key={center.id}
-            center={center}
-            setHoveredCenter={setHoveredCenter}
-          />
-        ))}
-      </div>
-    </>
-  );
-}
-
 function LinkToCenter({
-  hoveredCenter,
+  centerShown,
   center,
-  setHoveredCenter,
+  setCenterShown,
 }: {
-  hoveredCenter: string | null;
+  centerShown: string | null;
   center: PropertyGetPayload<{ include: { spaces: true } }>;
-  setHoveredCenter: (centerId: string | null) => void;
+  setCenterShown: (centerId: string | null) => void;
 }) {
   return (
     <>
-      <ActiveLink
-        className="flex flex-row items-center gap-2"
+      <Link
+        className="block"
         onClick={() => trackEvent("view_center", { category: "chat" })}
-        onMouseEnter={() => setHoveredCenter(center.id)}
-        onMouseLeave={() => setHoveredCenter(null)}
+        onMouseEnter={() => setCenterShown(center.id)}
+        onMouseLeave={() => setCenterShown(null)}
         target="_blank"
         to={`/center/${center.id}`}
-        variant="button"
       >
-        <img
-          alt="Shopping mall"
-          className="h-5 w-5 shrink-0 rounded-sm border border-black object-contain"
-          src={center.logoURL || "/images/shopping-mall.png"}
-        />
-        <div className="flex min-w-0 flex-1 flex-col">
-          <div className="truncate font-bold text-black text-sm">
-            {center.name}
-          </div>
-          {center.spaces.length > 0 && (
-            <div className="font-medium text-black/70 text-xs">
-              {center.spaces.length} available{" "}
-              {center.spaces.length === 1 ? "space" : "spaces"}
+        <Card className="p-2!">
+          <CardContent className="flex flex-row items-center gap-2 p-0">
+            <img
+              alt="Shopping mall"
+              className="h-5 w-5 shrink-0 rounded-sm border border-black object-contain"
+              src={center.logoURL || "/images/shopping-mall.png"}
+            />
+            <div className="flex min-w-0 flex-1 flex-col">
+              <div className="truncate font-bold text-black text-sm">
+                {center.name}
+              </div>
+              {center.spaces.length > 0 && (
+                <div className="font-medium text-black/70 text-xs">
+                  {center.spaces.length} available{" "}
+                  {center.spaces.length === 1 ? "space" : "spaces"}
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </ActiveLink>
+          </CardContent>
+        </Card>
+      </Link>
+
       <HoverCard
-        mode={hoveredCenter === center.id ? "visible" : "hidden"}
         center={center}
+        centerShown={centerShown}
+        setCenterShown={setCenterShown}
       />
     </>
   );
 }
 
 function HoverCard({
-  mode,
   center,
+  centerShown,
+  setCenterShown,
 }: {
-  mode: "hidden" | "visible";
   center: PropertyGetPayload<{ include: { spaces: true } }>;
+  centerShown: string | null;
+  setCenterShown: (centerId: string | null) => void;
 }) {
   const cardRef = useRef<HTMLAnchorElement>(null);
   const [topOffset, setTopOffset] = useState(0);
 
   useEffect(() => {
-    if (mode !== "visible" || !cardRef.current) return;
+    if (!centerShown || !cardRef.current) return;
 
     const updatePosition = () => {
       requestAnimationFrame(() => {
@@ -181,19 +173,21 @@ function HoverCard({
       window.removeEventListener("resize", updatePosition);
       window.removeEventListener("scroll", updatePosition, true);
     };
-  }, [mode]);
+  }, [centerShown]);
 
   return (
-    <Activity mode={mode}>
+    <Activity mode={centerShown === center.id ? "visible" : "hidden"}>
       <Link
+        className="hidden"
+        onMouseEnter={() => setCenterShown(center.id)}
+        onMouseLeave={() => setCenterShown(null)}
+        ref={cardRef}
         target="_blank"
         to={`/center/${center.id}`}
-        ref={cardRef}
-        className="hidden"
       >
         <div
           className={cn(
-            "absolute right-full z-50 my-24 mr-10",
+            "absolute right-full z-50 my-24 mr-5",
             "w-96 max-w-[min(20rem,calc(100vw-2rem))] overflow-hidden",
             "rounded-md border-2 border-black bg-white shadow-[6px_6px_0px_0px_black]",
           )}
