@@ -28,5 +28,8 @@ export default defineConfig(async (config) =>
         "rehype-harden",
       ],
     },
+    server: {
+      allowedHosts: [".ngrok-free.app"],
+    },
   } satisfies UserConfig),
 );
