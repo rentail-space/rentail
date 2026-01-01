@@ -58,6 +58,10 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
           </figure>
         )}
 
+        <p className="prose prose-lg mx-auto text-gray-400 text-md italic">
+          {summary}
+        </p>
+
         <Streamdown
           className="prose prose-lg mx-auto"
           controls={{ code: false, mermaid: false, table: false }}
