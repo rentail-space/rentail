@@ -5,9 +5,7 @@ import terms from "~/data/terms.md?raw";
 export default function TermsOfService() {
   return (
     <article className="container mx-auto my-10 max-w-4xl space-y-8 p-5">
-      <title>
-        Terms of Service - Specialty Leasing & Retail Spaces | Rentail.space
-      </title>
+      <title>Terms of Service | Rentail.space</title>
       <meta
         name="description"
         content="Read the Rentail.space Terms of Service: your rights, obligations, and important policies for using our specialty leasing platform."

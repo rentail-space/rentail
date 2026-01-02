@@ -19,7 +19,7 @@ export default function Blog({
       className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
       aria-label="Blog"
     >
-      <title>Blog - Specialty Leasing & Retail Spaces | Rentail.space</title>
+      <title>Blog | Rentail.space</title>
       <meta
         name="description"
         content="Discover tips, insights, and real-world success stories to help retail entrepreneurs thrive—specialty leasing ideas, marketing, and more."

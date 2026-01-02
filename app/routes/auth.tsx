@@ -70,7 +70,7 @@ export default function AuthPage() {
 
   return (
     <main className="flex flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50">
-      <title>Specialty Leasing & Retail Spaces | Rentail.space</title>
+      <title>Sign Up or Sign In | Rentail.space</title>
       <meta
         name="description"
         content="Sign up or sign in to your account to start finding retail spaces."

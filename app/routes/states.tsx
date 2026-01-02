@@ -28,10 +28,7 @@ export default function StatePage({
       className="container mx-auto my-10 max-w-3xl space-y-8 p-5"
       aria-label="US states listing"
     >
-      <title>
-        Shopping Centers by State - Specialty Leasing & Retail Spaces |
-        Rentail.space
-      </title>
+      <title>Shopping Centers by State | Rentail.space</title>
       <meta
         name="description"
         content="Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces in shopping centers across all 50 US states. Real-time availability for seasonal and temporary retail locations."

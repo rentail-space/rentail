@@ -5,9 +5,7 @@ import privacy from "~/data/privacy.md?raw";
 export default function PrivacyPolicy() {
   return (
     <article className="container mx-auto my-10 max-w-4xl space-y-8 p-5">
-      <title>
-        Privacy Policy - Specialty Leasing & Retail Spaces | Rentail.space
-      </title>
+      <title>Privacy Policy | Rentail.space</title>
       <meta
         name="description"
         content="Learn how Rentail.space collects, uses, and safeguards your personal information to ensure your privacy when using our specialty leasing platform."

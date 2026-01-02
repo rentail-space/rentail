@@ -5,7 +5,7 @@ import PricingPlans from "./PricingPlans";
 export default function Pricing() {
   return (
     <main className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]">
-      <title>Pricing - Specialty Leasing & Retail Spaces | Rentail.space</title>
+      <title>Pricing | Rentail.space</title>
       <meta
         name="description"
         content="Compare our simple, transparent pricing plans for specialty leasing. Find the right solution for your business—no hidden fees, no surprises."

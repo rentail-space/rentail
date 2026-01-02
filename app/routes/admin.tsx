@@ -18,7 +18,7 @@ export default function Admin() {
   const outlet = useOutlet();
   return (
     <main className="container mx-auto my-10 p-5">
-      <title>Admin - Specialty Leasing & Retail Spaces | Rentail.space</title>
+      <title>Admin | Rentail.space</title>
       <meta
         name="description"
         content="Manage your account information and settings."
