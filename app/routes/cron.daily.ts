@@ -26,7 +26,7 @@ export async function loader() {
       data: { lastAlertAt: new Date() },
       where: { id: user.id },
     });
-    await sendDailyAlertEmail(alert);
+    await sendDailyAlertEmail({ user, ...alert });
   }
   return new Response();
 }
@@ -66,8 +66,8 @@ async function findAlert(
 
   const { output } = await generateText({
     messages: await convertToModelMessages(messages),
-    system: system,
     output: Output.object({ schema: Alert }),
+    system: system,
     ...classify,
   });
   return output;
