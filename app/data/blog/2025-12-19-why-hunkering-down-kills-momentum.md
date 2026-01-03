@@ -25,17 +25,10 @@ The hermit response isn't just uncomfortable. It's lethal.
 
 ## TL;DR
 
-**The Withdrawal Trap:**
-When you go dark after a setback, three failures cascade fast: top performers start interviewing elsewhere, critical decisions sit in limbo, and you cut yourself off from the customers and investors who could provide perspective.
-
-**The 90-Day Reset:**
-Track weekly sentiment (1-10 scale), then calculate your rolling 90-day average. That brutal week where two deals fell through? Noise. The actual trajectory reveals itself across quarters, not days.
-
-**Persistence as Discipline:**
-Control what you can (customer calls, product improvements, team communication). Release what you can't (market timing, competitor moves). Trust the process—most founders quit right before the inflection point.
-
-**The Leadership Effect:**
-Your team takes emotional cues from you. When you persist through setbacks with clear-eyed execution, you give them permission to do the same. Markets reward persistence over perfection.
+* **The Withdrawal Trap:** When you go dark after a setback, three failures cascade fast: top performers start interviewing elsewhere, critical decisions sit in limbo, and you cut yourself off from the customers and investors who could provide perspective.
+* **The 90-Day Reset:** Track weekly sentiment (1-10 scale), then calculate your rolling 90-day average. That brutal week where two deals fell through? Noise. The actual trajectory reveals itself across quarters, not days.
+* **Persistence as Discipline:** Control what you can (customer calls, product improvements, team communication). Release what you can't (market timing, competitor moves). Trust the process—most founders quit right before the inflection point.
+* **The Leadership Effect:** Your team takes emotional cues from you. When you persist through setbacks with clear-eyed execution, you give them permission to do the same. Markets reward persistence over perfection.
 
 ## The Withdrawal Trap
 
