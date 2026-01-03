@@ -20,6 +20,7 @@
     "upgrade": "./scripts/upgrade.sh"
   },
   "dependencies": {
+    "@a2a-js/sdk": "^0.3.7",
     "@ai-sdk/anthropic": "^3.0.2",
     "@ai-sdk/devtools": "^0.0.3",
     "@ai-sdk/react": "^3.0.5",
