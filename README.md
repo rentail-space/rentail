@@ -1,11 +1,18 @@
-# Rentail Space - Specialty Lease Marketplace
+# Rentail Space
 
-[CLAUDE.md](./CLAUDE.md)
+AI-powered specialty lease marketplace connecting businesses with short-term retail spaces in shopping centers.
 
-## 📚 Additional Resources
+**Stack:** React Router v7 • PostgreSQL • Claude AI • Tailwind CSS
 
-- [React Router v7 Documentation](https://reactrouter.com)
-- [Anthropic AI SDK Documentation](https://sdk.vercel.ai/docs)
-- [Prisma Documentation](https://prisma.io/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Biome Documentation](https://biomejs.dev)
+## Quick Start
+
+```bash
+pnpm install
+pnpm dev
+```
+
+## Important
+
+- See [CLAUDE.md](./CLAUDE.md) for full development guide
+- See [AGENTS.md](./AGENTS.md) for agent workflow and issue tracking rules
+- Run `pnpm check` before committing (lint + typecheck)

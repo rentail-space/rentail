@@ -1,17 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(pnpm run typecheck:*)",
-      "Bash(pnpm audit:*)",
-      "Bash(pnpm run lint)",
-      "Bash(pnpm run build:*)",
-      "Bash(pnpm run test:*)",
-      "Bash(pnpm install:*)",
       "Bash(git add:*)"
     ]
   },
   "enableAllProjectMcpServers": false,
-  "outputStyle": "clearframe",
   "hooks": {
     "PostToolUse": [
       {
@@ -28,5 +21,6 @@
         ]
       }
     ]
-  }
+  },
+  "outputStyle": "clearframe"
 }

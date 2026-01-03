@@ -1,805 +1,142 @@
 # CLAUDE.md
 
-**Note**: This project uses [bd (beads)](https://github.com/steveyegge/beads) for issue tracking. Use `bd` commands instead of markdown TODOs. See AGENTS.md for workflow details.
+Guidance for Claude Code when working with this repository.
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Essential Commands
 
-## Commands Reference
+**Development:**
+- `pnpm dev` - Start dev server (port 5173)
+- `pnpm build` - Build for production
+- `pnpm check` - Lint + typecheck (run before committing)
+- `pnpm test` - Full test suite
 
-**Package Management:** Uses pnpm (v10.21.0+)
+**Common Tasks:**
+- `tsx scripts/collect.ts "County, ST"` - Scrape shopping centers
+- `tsx scripts/checkWebsites.ts` - Validate seed file websites
 
-### Development & Building
-- `pnpm dev` - Start dev server with HMR on port 5173
-- `pnpm build` - Build for production (prisma generate + react-router build)
-- `pnpm start` - Start production server with instrumentation
-- `pnpm clean` - Remove Vite cache, .react-router cache, and build directory
+## Project Overview
 
-### Code Quality
-- `pnpm lint` - Run secretlint + Biome linter
-- `pnpm typecheck` - Type check with TypeScript + react-router typegen (auto-generates route types)
-- `pnpm format --write` - Format code with Biome (80 char line width, double quotes, 2-space indent)
-- `pnpm check` - Run both lint and typecheck
+**rentail.space** is an AI-powered specialty lease marketplace connecting businesses with short-term retail spaces in shopping centers.
 
-### Testing
-- `pnpm test` - Full test suite: lint + db push + typecheck + vitest (verbose reporter)
-- `pnpx vitest run <pattern>` - Run specific test (e.g., `pnpx vitest run chat.test`)
-- `pnpm checkly` - Synthetic monitoring tests with snapshot updates
-
-### Data Collection
-- `tsx scripts/collectCenters.ts "County Name, ST"` - Scrape shopping centers for a county
-- `pnpm scrape` - Run predefined scraping scripts (Los Cerritos, Santa Monica, Stonewood)
-
-### Utilities
-- `pnpm clone` - Clone production data to local environment
-- `pnpm promote` - Promote changes to production
-- `pnpm upgrade` - Upgrade dependencies
-
-### Slash Commands (in `.claude/commands/`)
-- `/cmd:audit` - Review code for maintainability, flexibility, readability
-- `/cmd:security` - Security audit and vulnerability assessment
-- `/cmd:performance` - Performance optimization analysis
-- `/cmd:conversion-hooks` - Find conversion tracking hooks
-
-## Beads Issue Tracking
-
-**This project uses Beads (`bd`) for issue tracking and workflow management.**
-
-Beads is an AI-native issue tracker integrated with git. All work should be tracked in Beads, NOT in TodoWrite or markdown TODO comments. The `.beads/` directory contains all issues and is automatically synced via git hooks.
-
-### Critical Rules
-
-**NEVER use TodoWrite for this project.** All task tracking must use Beads commands.
-
-**Context Recovery:**
-- Run `bd prime` after session compaction, clear, or when starting new session
-- Hooks auto-call this in Claude Code when `.beads/` directory detected
-- Restores project context and issue state
-
-**Always end sessions with the sync protocol:**
-```bash
-git status              # Check what changed
-git add <files>         # Stage code changes
-bd sync                 # Commit beads changes
-git commit -m "..."     # Commit code
-bd sync                 # Commit any new beads changes
-git push                # Push to remote
-```
-
-**All issues must have descriptions** that explain:
-- Why the issue exists
-- What needs to be completed
-- How you discovered it (if creating during work)
-
-### Essential Commands
-
-**Finding Work:**
-- `bd ready` - Show issues ready to work (no blockers)
-- `bd list --status=open` - All open issues
-- `bd list --status=in_progress` - Your active work
-- `bd show <id>` - Detailed issue view with dependencies
-- `bd stale --days 30` - Forgotten issues needing attention
-
-**Creating & Updating:**
-- `bd create --title="..." --type=task|bug|feature --description="..."` - New issue (description required)
-- `bd update <id> --status=in_progress` - Claim work
-- `bd update <id> --assignee=username` - Assign to someone
-- `bd close <id>` - Mark complete
-- `bd close <id1> <id2> ...` - Close multiple issues at once (more efficient)
-- `bd close <id> --reason="explanation"` - Close with reason
-
-**Dependencies & Blocking:**
-- `bd dep add <issue> <depends-on>` - Add dependency (issue blocks depends-on; depends-on requires issue)
-- `bd blocked` - Show all blocked issues
-- `bd show <id>` - See what's blocking/blocked by this issue
-
-**Discovered Issues:**
-When you find new issues during work, create them with context:
-```bash
-bd create --title="Bug found" --description="Details" -t bug -p 1 \
-  --deps discovered-from:<parent-id>
-```
-
-**Sync & Collaboration:**
-- `bd sync` - Sync with git remote (run at session end - MANDATORY)
-- `bd sync --status` - Check sync status without syncing
-
-**Project Health:**
-- `bd stats` - Project statistics (open/closed/blocked counts)
-- `bd doctor` - Check for issues (sync problems, missing hooks)
-
-### Priority Levels
-- `0` = Critical (security, data loss)
-- `1` = High (major features, important bugs)
-- `2` = Medium (nice-to-have, default)
-- `3` = Low (polish)
-- `4` = Backlog
-
-### Issue Types
-- `bug` — Something broken
-- `feature` — New functionality
-- `task` — Work item (tests, docs, refactoring)
-- `epic` — Large feature with children (supports 3 levels of nesting)
-- `chore` — Maintenance
-
-### Dependency Types
-- `blocks` — Hard dependency (affects ready work queue)
-- `related` — Soft relationship
-- `parent-child` — Epic structure
-- `discovered-from` — Issues found during work (auto-inherits parent's repo)
-
-### Common Workflows
-
-**Starting work:**
-```bash
-bd ready                # Find available work
-bd show <id>            # Review issue details
-bd update <id> --status=in_progress  # Claim it
-```
-
-**Completing work:**
-```bash
-bd close <id1> <id2> ...    # Close all completed issues at once
-bd sync                     # Push to remote (MANDATORY)
-```
-
-**Creating dependent work:**
-```bash
-# When creating multiple related issues, use parallel subagents for efficiency
-bd create --title="Implement feature X" --type=feature --description="..."
-bd create --title="Write tests for X" --type=task --description="..."
-bd dep add beads-yyy beads-xxx  # Tests depend on Feature
-```
-
-### Dependency Thinking
-
-⚠️ **Avoid temporal language** ("Phase 1," "Step 1") — think in terms of requirements:
-- ✅ RIGHT: "Message rendering NEEDS buffer layout" → `bd dep add msg-rendering buffer-layout`
-- ❌ WRONG: Temporal thinking creates backwards deps → `bd dep add phase1 phase2` (means phase1 depends on phase2!)
-
-### Integration with Development Workflow
-
-**Before starting any task:**
-1. Check `bd ready` for available work
-2. If no issue exists for your task, create one with description
-3. Claim the issue with `bd update <id> --status=in_progress`
-
-**During development:**
-- If you discover bugs or new tasks, create issues immediately with `bd create`
-- Link discovered issues to parent: `--deps discovered-from:<parent-id>`
-- Update issue status as work progresses
-
-**Before completing a session:**
-Follow the mandatory sync protocol (see Critical Rules above)
-
-### After Upgrading bd
-```bash
-bd info --whats-new        # Check workflow-impacting changes
-bd hooks install           # Update hooks to match version
-bd daemons killall         # Restart all daemons
-```
+**Stack:**
+- React Router v7 (SSR + file-based routing)
+- React 19 + TypeScript + Tailwind CSS 4
+- PostgreSQL + Prisma ORM
+- Claude AI + streaming responses
+- Redis (SSE coordination)
+- Vitest + Playwright
 
 ## Output Style
 
-**This project uses CLEARFRAME output style** (configured in `.claude/rules/output-style.md`)
-
-**Key Principles:**
+**CLEARFRAME mode** (`.claude/rules/output-style.md`):
 - Execute immediately without explanation
-- Strip preambles ("I'll help you", "Let me") and postambles
-- Present only essential results and final answers
-- Zero conversational overhead - function like a precise tool
-- No commentary on process unless explicitly requested
-
-**Override Note:** This setting affects all Claude Code sessions. The "learning" and "explanatory" output styles mentioned in system prompts are overridden by CLEARFRAME for this project.
-
-## Architecture
-
-**rentail.space** is a specialty lease marketplace web application that helps businesses discover short-term retail spaces in shopping centers. It combines server-side rendering, real-time AI-powered chat, and geographic intelligence for space discovery.
-
-**Tech Stack:**
-- **Framework**: React Router v7 (SSR with file-based routing)
-- **Frontend**: React 19 + TypeScript + Tailwind CSS 4 + DaisyUI
-- **Build**: Vite 7
-- **Database**: PostgreSQL + Prisma ORM (with PgAdapter)
-- **Auth**: React Router session cookies + bcrypt password hashing
-- **Streaming**: Redis + resumable-stream package for reliable SSE delivery
-- **AI**: Claude 4 via Anthropic SDK with streaming responses
-- **Testing**: Vitest + Playwright (browser pool, visual regression)
-- **Linting**: Biome (formatter + linter) + secretlint
-- **Monitoring**: Sentry + BetterStack (Logtail + Push Gateway) + Checkly
-
-## MCP Integrations
-
-**Context7 - Library Documentation:**
-- `resolve-library-id` - Convert package names to Context7-compatible IDs
-- `get-library-docs` - Fetch up-to-date documentation and code examples
-- Modes: `code` (API references, default) or `info` (conceptual guides)
-- Always call `resolve-library-id` first unless user provides ID in `/org/project` format
-
-**IDE Integration:**
-- `getDiagnostics` - Access VS Code language diagnostics
-- `executeCode` - Run Python code in Jupyter kernel for notebook files
-
-**Superpowers Chrome:**
-- Browser automation via Chrome DevTools Protocol
-- Read-only access for inspecting cached content and DOM analysis
-
-### AI Integration & Streaming
-
-**Chat Architecture:**
-- API endpoint: `app/routes/api.chat.$chatId.message.ts` implements `streamText()` from Anthropic SDK
-- Client hook: `useChat` from AI SDK with `resume: true` for auto-reconnection on network loss
-
-**Resumable Streams Pattern:**
-The core innovation that prevents message duplication on network interruptions:
-- Stream ID generation: Each new response gets a unique ID stored in `Chat.activeStreamId`
-- Storage: Active stream ID persisted in database (identifies which message is currently streaming)
-- Resumption: When network reconnects, client requests `/api/chat/message.$messageId.stream.tsx` with the message ID
-- Redis coordination: `resumable-stream` context created via Redis pub/sub to track already-sent chunks
-- Completion: `activeStreamId` cleared in `onFinish` callback when stream completes (signals ready for next message)
-- Safety: If a new message request arrives while `activeStreamId` is set, the old stream is aborted (prevents accidental dual streams)
-
-**Working Memory:**
-- Stores persistent user context as JSON in `User.workingMemory` field
-- Schema validated via Zod in `app/lib/workingMemory.ts`
-- Fields: merchant (business info), selling (product/pricing/audience), location (city/state/country/lat/lon/timezone), projections (goals/timeline)
-- Example working memory object:
-  ```json
-  {
-    "merchant": {
-      "name": "Sarah Chen",
-      "businessName": "Chen's Artisan Coffee"
-    },
-    "location": {
-      "city": "Los Angeles",
-      "state": "CA",
-      "country": "USA",
-      "latitude": 34.0522,
-      "longitude": -118.2437,
-      "timeZone": "America/Los_Angeles"
-    },
-    "selling": {
-      "productType": "Artisan Coffee",
-      "pricePoint": "Premium",
-      "targetAudience": "Young professionals"
-    },
-    "projections": {
-      "timeline": "Q2 2024 expansion"
-    }
-  }
-  ```
-
-**Emission & Update Pattern:**
-- System prompts instruct Claude to emit `<working_memory>{JSON}</working_memory>` tags when extracting user information
-- Tags automatically parsed and merged via `updateWorkingMemory()` in `onFinish` callback
-- `maskWorkingMemoryTags()` removes tags from user-visible output (users never see the XML markers)
-- Deep merge strategy: new values override existing fields (partial updates supported)
-- Async geocoding: When location updates, reverse geocoding via OpenStreetMap API populates city/state/country
-
-**Prompt System:**
-- Prompts use placeholder syntax: `$[placeholder]` (e.g., `$[date]`, `$[workingMemory]`, `$[nearbyCenters]`)
-- `preparePrompt()` in `app/lib/preparePrompt.ts` replaces placeholders with actual values
-- Chat prompt: `app/prompts/chatPrompt.md` - Main conversational agent instructions
-- Daily alert prompt: `app/prompts/dailyAlertPrompt.md` - Automated merchant notifications
-- General directives: `app/prompts/generalDirectives.md` - Shared behavioral guidelines (inserted via `$[generalDirectives]`)
-- Placeholder validation: throws error if any `$[tag]` remains unexpanded
-
-### LLM-Optimized API Endpoints
-
-**`/api/query` Endpoint:**
-- Machine-readable JSON endpoint optimized for LLM consumption
-- Returns real-time service information: services, coverage, space types, capabilities, data quality
-- Uses Prisma aggregations for live statistics (`groupBy`, `count`)
-- Documented at `/for-ai-assistants` page for human and AI discovery
-- OpenAPI 3.0 specification available at `/openapi.json`
-
-**Discoverability Mechanisms:**
-1. Human-readable docs on `/for-ai-assistants` with examples
-2. OpenAPI 3.0 spec at `/openapi.json` with full schema documentation
-3. Schema.org `potentialAction` (SearchAction) in structured data
-4. robots.txt comments and `Allow: /api/query` directive
-5. sitemap.xml inclusion for crawler discovery
-
-**Implementation Pattern:**
-```typescript
-// Use Prisma aggregations for real-time statistics
-const [totalCenters, spacesByType, centersByState] = await Promise.all([
-  prisma.property.count(),
-  prisma.propertySpace.groupBy({ by: ["type"], _count: true }),
-  prisma.property.groupBy({ by: ["state"], _count: true }),
-]);
-
-// Return with appropriate caching
-return Response.json(response, {
-  headers: {
-    "Content-Type": "application/json",
-    "Cache-Control": "public, max-age=3600",
-  },
-});
-```
-
-**Testing:**
-- Test suite in `test/apiQuery.test.ts` validates response structure
-- Ensures OpenAPI spec validity and sitemap inclusion
-- Verifies robots.txt directives
-
-### Database & Observability
-
-**Database:**
-- PostgreSQL with Prisma ORM + PgAdapter for connection pooling
-- Models: User, Chat, Messages, Waitlist, Property, PropertySpace, Session, Verification
-- Session-based chat with automatic user creation from IP geolocation
-- Bot detection via `isBot` flag (user-agent based)
-- Mobile detection via `isMobile` flag (device detection)
-- Geographic queries: simple latitude/longitude bounding box calculations (see `app/lib/findNearbyProperties.ts`)
-- Schema updates: `prisma generate && prisma db push`
-
-**Key Database Tables:**
-- `User`: id, name, email, emailVerified, isAnonymous, isBot, isMobile, geocode (JSON), workingMemory (Text), metadata, cityStateCountry, note, image, ip, userAgent, referrer, utm (JSON), viewport (JSON), passwordHash, lastAlertAt, createdAt, updatedAt
-- `Chat`: id, userId (FK), title, metadata (JSON), activeStreamId, createdAt, updatedAt
-- `Messages`: id, chatId (FK), role (assistant|user), content (JSON), type, createdAt
-- `Property`: id, name, address, city, state, country, latitude, longitude, website, phone, imageURLs, squareFootage, numberOfStores, demographics, description, logoURL, createdAt, updatedAt
-- `PropertySpace`: id, propertyId (FK), number, type (Cart|Inline|Storage|Other), size, floor, available, imageURLs, updatedAt
-- `Session`: id, userId (FK), token (unique), expiresAt, ipAddress, userAgent, createdAt, updatedAt
-- `Verification`: id, identifier, value, expiresAt, createdAt, updatedAt
-- `Waitlist`: email (PK), createdAt
-
-**Monitoring & Logging:**
-- **Error tracking**: Sentry (configured in `app/lib/instrument.server.ts`)
-- **Structured logging**: BetterStack Logtail + Push Gateway for metrics
-- **Synthetic monitoring**: Checkly (see `checkly.config.ts`)
-- **Debug logging**: `debug` package with namespaces (server, browser, agent, prisma, msw)
-  - Enable: `DEBUG=server,browser pnpm test` or `DEBUG=* pnpm test`
-
-## Design System
-
-**Neo Brutalism Visual Identity:**
-The application uses a consistent Neo Brutalism design system across all UI components.
-
-**Core Design Tokens:**
-- **Colors:**
-  - Background: `hsl(60,100%,99%)` (off-white)
-  - Primary accent: `hsl(37,92%,65%)` (orange)
-  - User messages: `hsl(47,100%,95%)` (yellow)
-  - Assistant messages: `hsl(120,100%,97%)` (green)
-  - Text: Black (`text-black`)
-  - Font weights: Bold for headings, medium for body
-- **Borders:** 2px solid black everywhere (`border-2 border-black`)
-- **Shadows:** Offset box-shadows (4-8px based on hierarchy)
-  - Small elements: `shadow-[2px_2px_0px_0px_black]`
-  - Cards: `shadow-[4px_4px_0px_0px_black]`
-  - Prominent cards: `shadow-[6px_6px_0px_0px_black]`
-  - Important elements: `shadow-[8px_8px_0px_0px_black]`
-- **Border Radius:**
-  - Small elements: `rounded-[5px]` or `rounded-sm`
-  - Containers/cards: `rounded-[10px]` or `rounded-md`
-- **Typography:**
-  - Headings: `font-bold` with `leading-tight`
-  - Body: `font-medium` with `leading-relaxed`
-
-**Interactive Elements:**
-- **Transform animations:** All clickable elements lift on hover
-  - Hover: `translate-x-[-2px] translate-y-[-2px]` + shadow increases
-  - Active: `translate-x-[2px] translate-y-[2px]` + shadow decreases
-  - Transition: `transition-all duration-100`
-- **Buttons:** Orange background (`bg-[hsl(37,92%,65%)]`) with black text and borders
-- **Links:** Hover state changes to orange accent color
-- **Form inputs:** Black borders with shadows that grow on focus
-
-**Component Patterns:**
-- **Cards:** White background with 2px black border and 4px shadow
-- **Highlighted cards:** 8px shadow for visual hierarchy (e.g., "Most Popular" pricing plan)
-- **Icon containers:** Orange background with 2px border and 2px shadow
-- **Dropdowns/menus:** White background, black borders, 4px shadows
-- **Alerts:** Colored backgrounds (red/green/yellow) with black borders and shadows
-
-**Consistency Notes:**
-- All text should be black unless it's an accent (orange for active/hover states)
-- Avoid gray text colors (use black with medium font weight instead)
-- All borders are 2px solid black (no subtle 1px gray borders)
-- Background sections alternate between off-white and yellow for visual rhythm
-- Never use gradient backgrounds (flat colors only)
-
-## Semantic HTML & Accessibility
-
-**Main Tag Requirements:**
-- All pages must have a `<main>` tag with descriptive `aria-label`
-- Use `<main>` for primary page content (not `<article>` unless it's syndicated content)
-- Examples of proper aria-labels:
-  - Home page: `aria-label="Home page"`
-  - Chat interface: `aria-label="Chat interface"`
-  - FAQ page: `aria-label="Frequently asked questions"`
-  - Blog: `aria-label="Blog"`
-  - States listing: `aria-label="US states listing"`
-
-**Heading Hierarchy:**
-- Maintain proper h1 → h2 → h3 structure (no skipping levels)
-- One h1 per page (typically in the header section)
-- Use h2 for major sections, h3 for subsections
-- Example: Home page has h1 in HeroSection, h2 in FeaturesSection, h3/h4 for features
-
-**Why This Matters:**
-- Screen readers announce page purpose immediately via aria-labels
-- LLMs can parse page structure more effectively with semantic elements
-- Search engines better understand content hierarchy
-- Improved accessibility compliance (WCAG guidelines)
+- No preamble/postamble phrases
+- Present only essential results
+- Zero conversational overhead
 
 ## Code Conventions
 
-**TypeScript & Types:**
-- Strict mode enabled; use interfaces over types
-- Avoid enums (use discriminated unions or const maps instead)
-- Descriptive variable names with auxiliary verbs (`isLoading`, `hasError`, `didUpdate`)
+**TypeScript:**
+- Strict mode; interfaces over types
+- Avoid enums (use discriminated unions)
+- Descriptive names with auxiliary verbs (`isLoading`, `hasError`)
 
-**Components & Files:**
-- Components: PascalCase + default exports
-- Utilities & functions: camelCase + named/default exports
-- Directories: lowercase with dashes (e.g., `components/auth-wizard`)
-- Path alias: `~/*` = `./app/*`, `~/test/*` = `./test/*`
+**Components:**
+- PascalCase + default exports
+- Path alias: `~/*` = `./app/*`
+- Functional patterns (no classes)
+- Early returns, no unnecessary else
 
-**Code Organization:**
-- Imports: React → external packages → local files
-- Functional and declarative patterns (no classes)
-- Pure functions use `function` keyword
-- Early returns, no unnecessary else statements
-- Minimize `useState`/`useEffect`; prefer context or reducers for state
-- Use `useMemo` and `useCallback` to prevent unnecessary re-renders
-
-**Error Handling:**
-- Handle errors at the beginning of functions with early returns
-- Avoid deeply nested if statements and unnecessary else clauses
-- Implement error boundaries to catch unexpected errors
-- Use Zod for runtime validation and type safety
+**Formatting (Biome):**
+- Double quotes, 2-space indent, 80 char width
+- `pnpm format --write` before committing
+- Avoid `forEach()` (use `for...of` or `map()`)
+- Limit `console` to: `.assert`, `.error`, `.info`, `.warn`
 
 **Security:**
-- Sanitize user inputs to prevent XSS attacks
-- Never use `dangerouslySetInnerHTML` (use markdown renderers with sanitization)
-- Ensure secure communication with APIs using HTTPS
-- Use bcrypt for password hashing (already configured)
+- Sanitize user inputs (prevent XSS)
+- Never use `dangerouslySetInnerHTML`
+- Use bcrypt for passwords (configured)
 
-**Formatting (Biome-enforced):**
-- Double quotes, 2-space indent, 80 character line width
-- Import organization via Biome assist
-- `pnpm format --write` before committing
+## Key Architecture Patterns
 
-**Biome-Enforced Rules:**
-- Avoid barrel files (re-exporting multiple modules from index files)
-- Prefer `for...of` or `map()` over `forEach()` (forEach triggers warning)
-- Console usage limited to: `console.assert`, `console.error`, `console.info`, `console.warn`
-- Minimize use of `any` type (triggers warning)
-- Use self-closing elements for components without children
-- Use `as const` assertions for literal types
+**AI Streaming:**
+- `streamText()` from Anthropic SDK in `app/routes/api.chat.$chatId.message.ts`
+- Resumable streams via Redis coordination (prevents duplication on reconnect)
+- `Chat.activeStreamId` tracks active stream (null when idle)
 
-## Data Collection Pipeline
+**Working Memory:**
+- User context stored in `User.workingMemory` JSON field
+- Schema: `app/lib/workingMemory.ts` (Zod validation)
+- Claude emits `<working_memory>` tags → parsed in `onFinish` → merged into user profile
+- Fields: merchant, location, selling, projections
 
-**Shopping Center Scraping System:**
-The app includes a 4-stage pipeline for discovering and collecting shopping center data:
+**Location Detection:**
+1. `User.workingMemory.location` (highest priority)
+2. Vercel IP geolocation headers
+3. Fallback: LA Midcity (34.04592, -118.34574)
 
-**Pipeline Stages:**
-1. **Discovery** (`discoverCenters.ts`) - Find shopping centers via Google Places API
-2. **Scraping** (`scrapeCenter.ts`) - Extract data from center websites
-3. **Image Validation** (`validateImages.ts`) - Verify image URLs are accessible
-4. **Enrichment** (`enrichCenter.ts`) - Add metadata via Google Places API
-5. **Writing** (`writeCenterFile.ts`) - Save as JSON in `prisma/seed/{state}/`
-
-**Rate Limiting:**
-- Built-in rate limiter: 1.2s between API calls (~50 requests/minute)
-- Random delays (2-3s) between center scrapes to avoid detection
-- Implemented in `app/lib/scrape/rateLimiter.ts`
-
-**Usage:**
-```bash
-# Collect all centers in a county
-tsx scripts/collectCenters.ts "Orange County, CA"
-
-# Run predefined scraping tasks
-pnpm scrape
-```
-
-**Output Format:**
-Centers saved as JSON files: `prisma/seed/{state}/{state}-{slug}.json`
-- Contains: name, address, coordinates, stores, demographics, images, website, etc.
-- Files can be imported via `seedCenter.ts` to populate database
-- **Critical**: All center files MUST have a valid `website` property with HTTP/HTTPS URL
-- Discovery files (e.g., `discovery-*.json`) and `states.json` don't require websites
-
-## Key Architectural Patterns
-
-**Location Retrieval (Priority Chain):**
-The app determines user location in this order:
-1. `User.workingMemory.location` - Most recent location from conversation (highest priority)
-2. Vercel IP geolocation headers (`x-vercel-ip-latitude`, `x-vercel-ip-longitude`) - Automatic via platform
-3. Fallback: LA Midcity (`34.04592, -118.34574`) - Used if no other source available
-- Implemented in `app/lib/findNearbyCenters.ts`
-
-**Geographic Search (Non-PostGIS):**
-- Uses simple latitude/longitude bounding box calculations (no PostGIS required)
-- Formula: `lat ± (miles / 69.172)` and `lon ± (miles / 57.393)`
-- Default radius: 30 miles for search, 20 miles for display
-- Centers returned sorted by distance for relevance
-
-**Geocoding (Location Name Resolution):**
-- When user provides location in chat (e.g., "I'm in Denver"), Claude extracts it via working memory tags
-- Async reverse geocoding via OpenStreetMap Nominatim API enriches coordinates with city/state/country
-- Populates `workingMemory.location.{city, state, country}` for future use without geocoding API
-- Implemented in `app/lib/userProfile.ts` via `geocodeLocation()`
-
-**State Management:**
-- **Server-side (SSR):** React Router loaders/actions handle data fetching; Prisma queries return database state
-- **Client-side:**
-  - `useChat` hook from AI SDK manages message array, streaming status, and auto-resume on reconnect
-  - URL parameters via `nuqs` for queryable state (search queries)
-  - Component-level `useState` minimized; prefers loader data
-- **Persistent state:** React Router session cookies + localStorage (implicitly via useChat)
-- **No Redux/Zustand:** Codebase relies on React Router's data layer for state management
-
-## Git & Commits
-
-**Commit Format (Conventional Commits):**
-- Use descriptive emoji prefixes:
-  - ✨ `feat:` New features
-  - 🐛 `fix:` Bug fixes
-  - 📝 `docs:` Documentation
-  - ♻️ `refactor:` Code restructuring
-  - 🎨 `style:` Formatting (Biome)
-  - ⚡️ `perf:` Performance improvements
-  - ✅ `test:` Test additions/fixes
-  - 🔧 `chore:` Config, tooling, maintenance
-  - ⬆️ `upgrade:` Dependency updates
-  - 🚑 `hotfix:` Critical fixes for production
-  - 🔒 `security:` Security improvements
-  - 🔥 `remove:` Removing code or files
-  - 🚧 `wip:` Work in progress
-
-**Commit Guidelines:**
-- Imperative mood: "Add feature" not "Added feature"
-- Single concern per commit (atomic)
-- Reference relevant files in description when helpful
-- Format: `emoji type(scope): description` (e.g., `✨ feat(chat): Add streaming message support`)
-- Include body for complex changes explaining the "why"
-- Suggest splitting commits across different concerns
+**Geographic Search:**
+- Simple lat/lon bounding box (no PostGIS)
+- Formula: `lat ± (miles / 69.172)`, `lon ± (miles / 57.393)`
+- Default: 30-mile search, 20-mile display
 
 ## Testing
 
-**Setup & Configuration:**
-- Test files: `*.test.ts` or `*.test.tsx` in `/test` directory (NOT alongside source in `/app`)
-- Framework: Vitest with browser provider (Playwright) + forks pool
-- Config: `vitest.config.ts` (15s test timeout locally / 30s on CI, 30s hook timeout, 3s teardown timeout)
-- Setup: `/test/helpers/testSuiteSetup.ts` (test suite setup) + `/test/helpers/globalSetup.ts`
-- Node.js: 24.10.1 or higher required
-- **Test isolation**: `isolate: true` is required for test safety (prevents state leakage)
+**Setup:**
+- Test files in `/test/*.test.ts` (NOT alongside source)
+- Vitest + Playwright browser provider
+- `isolate: true` required for safety
 
-**Memory & Context:**
-- `claude-mem` plugin provides episodic memory across sessions
-- Search past work: `/mem-search` skill accesses observations by ID
-- Context economics: Session hooks show past observations with read/work token costs
-- Trust memory index over re-reading code for past decisions
-
-**Test Organization:**
-- Use nested `describe` blocks for logical grouping
-- `beforeAll`/`afterAll` for setup/cleanup when sharing state across tests
-- Share state via `let` variables within describe block (tests run sequentially)
-- Each test validates one aspect; state flows through the suite
-- Always clean up database state in `beforeAll` or `beforeEach` to prevent test pollution
-
-**Infrastructure & Mocking:**
-- **MSW Handlers**: `/test/mocks/mswHandlers.ts` prevents external API calls
-- **Anthropic Mock**: `/test/mocks/mockAnthropic.ts` with pattern matching
-- **Database**: Reset with `await prisma.user.deleteMany()` in beforeAll or beforeEach
-- **Visual regression**: `await expect(page).toMatchScreenshot()` (screenshots in `__screenshots__/`)
-
-**Navigation & Page Loading:**
-- `goto(path, headers?, { waitUntil?, timeout? })` - Navigate with flexible options
-  - `waitUntil`: "load" | "domcontentloaded" | "networkidle" (default: "networkidle")
-  - `timeout`: milliseconds (default: 25_000)
-  - Use `waitUntil: "domcontentloaded"` for pages with background streaming (e.g., chat)
-  - Example: `page = await goto("/chat?q=test", undefined, { waitUntil: "domcontentloaded" })`
-
-**HTML Snapshot Testing:**
-- `await expect(page).toMatchInnerHTML()` - Test HTML structure against baseline snapshots
-- Uses regex-based Node.js formatter in `/test/helpers/formatHTML.ts` (no JSDOM required)
-- Formats HTML into indented tree structure with 2-space indentation
-- Compares against baseline HTML files; creates `.new.html` on mismatch
-- Automatically removes `<script>` tags before comparison
-
-**Common Patterns:**
-
-*E2E Chat Testing:*
-```typescript
-import { converse } from "~/test/helpers/converse";
-await converse(page, "Hello, how are you?");
-// Automatically: fills input, clicks Send, polls Chat.activeStreamId until null
-```
-
-*Unit Testing (Database/Logic):*
-```typescript
-const user = await prisma.user.create({
-  data: {
-    geocode: { lat: 40.0, lon: -118.0 },
-    metadata: { ip: "127.0.0.1" },
-    workingMemory: {},
-  },
-});
-// Call functions directly; clean up after test
-```
+**Key Helpers:**
+- `converse(page, "message")` - E2E chat testing
+- `goto(path, headers?, options?)` - Navigate with flexible wait options
+- MSW handlers: `/test/mocks/mswHandlers.ts`
+- Anthropic mock: `/test/mocks/mockAnthropic.ts`
 
 **Commands:**
-- Run all: `pnpm test` (includes lint + db push + typecheck)
-- Run specific: `pnpx vitest run <pattern>` (e.g., `pnpx vitest run chat.test`)
-- Debug: `DEBUG=* pnpm test` to enable all debug namespaces
+- `pnpm test` - Full suite
+- `pnpx vitest run <pattern>` - Specific test
+- `DEBUG=* pnpm test` - Enable debug logging
 
-## Common Development Tasks
+## Common Tasks
 
-**Adding a New API Route:**
-1. Create file: `app/routes/api.newfeature.ts` (or `.tsx` for JSX)
-2. Export `action()` or `loader()` from React Router
-3. For streaming responses, use `streamText()` from `@ai-sdk/anthropic`
-4. Return Response object: `new Response(stream, { headers: { "Content-Type": "text/event-stream" } })`
-5. Test with E2E test in `/test/*.test.tsx`
+**Add API Route:**
+1. Create `app/routes/api.feature.ts`
+2. Export `action()` or `loader()`
+3. For streaming: use `streamText()` + `text/event-stream` header
+4. Test in `/test/*.test.tsx`
 
-**Modifying Working Memory Schema:**
-1. Edit schema in `app/lib/workingMemory.ts` - Add new Zod field definitions
-2. Update `workingMemoryExample` export with new example structure
-3. System prompts (`app/prompts/chatPrompt.md`, `dailyAlertPrompt.md`) may need updating to instruct Claude to populate new fields
-4. Migration: Update `updateWorkingMemory()` to handle old → new schema upgrades if needed
-5. Test: Create test user and verify working memory extraction works with mock Anthropic responses
+**Modify Working Memory:**
+1. Edit schema in `app/lib/workingMemory.ts`
+2. Update prompts (`app/prompts/*.md`) to instruct Claude
+3. Test with mock Anthropic responses
 
-**Adding a New Chat Feature (e.g., new data access):**
-1. Update system prompt (`app/prompts/chatPrompt.md`) with new instructions
-2. If accessing new data: Create helper function in `app/lib/` (e.g., `findNearbyCenters.ts` pattern)
-3. Add placeholder to prompt template (e.g., `$[myNewData]`)
-4. Update `preparePrompt()` in `app/lib/preparePrompt.ts` to replace placeholder with actual data
-5. Test with `converse()` helper from `~/test/helpers/converse`
+**Add Blog Post:**
+1. Create markdown in `app/data/blog/my-post.md`
+2. Add YAML frontmatter (title, description, date, author, tags)
+3. Images go in `public/blog/`
+4. Auto-discovered via `blogPosts.server.ts`
 
-**Adding a New Email Template:**
-1. Create component file in `app/emails/` (e.g., `MyEmail.tsx`)
-2. Export async `sendMyEmail()` function that calls `sendEmail()` from `./sendEmails`
-3. Create internal component function (not exported) for the email template
-4. Use `EmailLayout` wrapper and import styles from `~/emails/styles`
-5. Call the send function from routes/actions where needed
-6. Test email rendering with `renderEmail()` helper from `~/test/helpers/renderEmail`
+## Git Commits
 
-**Debugging Chat Issues:**
-- Enable debug logging: `DEBUG=agent,server pnpm dev` (see `app/lib/logger.server.ts` for namespaces)
-- Inspect active stream: Check `Chat.activeStreamId` in database (should be null when idle)
-- Check working memory updates: Query `User.workingMemory` JSON directly
-- Vitest browser debugging: `pnpx vitest --ui` opens browser inspector
+Use conventional commits with emoji prefixes:
+- ✨ `feat:` New features
+- 🐛 `fix:` Bug fixes
+- 📝 `docs:` Documentation
+- ♻️ `refactor:` Code restructuring
+- ✅ `test:` Tests
+- 🔧 `chore:` Maintenance
 
-**Adding a New Database Model:**
-1. Update `prisma/schema.prisma` with new model definition
-2. Run: `prisma generate && prisma db push` (auto-migrates)
-3. Update types in TypeScript files importing from Prisma client
-4. Run `pnpm typecheck` to catch type errors
+Format: `emoji type(scope): description`
 
-**Testing AI Responses:**
-- Use mock Anthropic: `test/mocks/mockAnthropic.ts` with pattern matching
-- Mock responds to patterns like "tell me your name" with pre-set responses
-- Update mocks before test if new Claude behavior is needed
-- Example: `{"pattern": "test", "response": "This is a test response"}`
+Imperative mood, atomic commits, reference files when helpful.
 
-**Adding a New Blog Post:**
-1. Create markdown file in `app/data/blog/` (e.g., `my-post.md`)
-2. Add YAML frontmatter with required fields:
-   ```yaml
-   ---
-   title: "Your Post Title"
-   description: "SEO-friendly description"
-   date: "2025-01-15"
-   author: "Author Name"
-   tags: ["specialty-leasing", "kiosk-rental"]
-   ---
-   ```
-3. Blog posts are auto-discovered via `blogPosts.server.ts`
-4. Images go in `public/blog/` directory
-5. Use descriptive filenames for SEO (e.g., `how-to-rent-kiosk-space.md`)
-6. Test blog rendering at `/blog` (listing) and `/blog/your-slug` (detail)
-7. Add FAQPage schema if post contains Q&A content for rich snippets
-8. Follow heading hierarchy: h1 for title (auto-generated), h2 for sections
+## Important Reminders
 
-## Known Issues & Troubleshooting
-
-**Vitest RPC Error: "rpc is closed, cannot call onCancel"**
-- Occurs in watch mode, typically with coverage enabled or during test reruns
-- Root causes: Missing dependencies, coverage temp directory race condition, or module resolution issues
-- **Workarounds:**
-  - Run `pnpm install` to ensure all transitive dependencies are installed
-  - Disable coverage during development: use `pnpm test -- --run` instead of watch mode
-  - Clear temp files manually if needed: `rm -rf /tmp/vitest-coverage-*.tmp`
-  - Update Vitest/VSCode to latest compatible versions
-
-**Test Navigation Timeouts**
-- If `goto()` times out waiting for `"networkidle"`, change to `"domcontentloaded"`
-- Common on pages with background requests (chat, streaming endpoints)
-- Example: `await goto("/chat", undefined, { waitUntil: "domcontentloaded" })`
-
-**React Router v7 on Vercel**
-- Deployment configured with `@vercel/react-router` preset in `react-router.config.ts`
-- SSR enabled with `ssr: true`
-- Sentry integration via `sentryOnBuildEnd` hook (when `SENTRY_AUTH_TOKEN` is set)
-- No prerendering configured (`prerender: async () => []`)
-- Current config uses Vercel preset for optimal serverless deployment
-
-## Environment Variables
-
-**Required (.env.local):**
-- `ANTHROPIC_API_KEY` - Claude AI API key
-- `DATABASE_URL` - PostgreSQL connection string
-- `REDIS_URL` - Redis for stream coordination (default: redis://localhost:6379)
-- `RESEND_API_KEY` - Email service (Resend)
-- `LOGTAIL_TOKEN` / `LOGTAIL_ENDPOINT` - BetterStack logging
-- `PUSHGATEWAY_URL` / `PUSHGATEWAY_TOKEN` - BetterStack metrics
-- `CHECKLY_ACCOUNT_ID` / `CHECKLY_API_KEY` - Synthetic monitoring
-
-**Optional:**
-- `SENTRY_DSN` / `SENTRY_AUTH_TOKEN` - Error tracking
-- `NODE_ENV` - Environment (development/production/test)
-- `DEBUG` - Debug logging namespaces (e.g., `DEBUG=server,browser` or `DEBUG=*`)
-
-## Project Structure
-
-**Key Directories:**
-
-`/app` - Main application (React Router v7 file-based routing)
-- `routes.ts` - Route config
-- `root.tsx` - App shell + error boundary
-- `routes/` - Individual routes
-  - API Routes:
-    - `api.query.ts` - LLM-optimized service information endpoint
-    - `openapi[.]json.ts` - OpenAPI 3.0 specification
-    - `api.chat.$chatId.message.ts` - Create chat message (streaming)
-    - `api.chat.$chatId.message.$messageId.stream.ts` - Resume interrupted stream
-    - `api.chat.$chatId.stop.ts` - Stop active stream
-    - `api.chat.$chatId.centers.ts` - Fetch nearby shopping centers
-    - `api.waitlist.ts` - Waitlist signup
-  - Page Routes:
-    - `chat/route.tsx` - Chat UI component
-    - `home/route.tsx` - Landing page
-    - `about/route.tsx` - About page
-    - `pricing/route.tsx` - Pricing page
-    - `faq/route.tsx` - FAQ page
-    - `blog._index.tsx` - Blog listing
-    - `blog.$slug.tsx` - Individual blog post
-    - `center.$id/route.tsx` - Property center detail page
-    - `profile/route.tsx` - User profile management
-    - `auth.tsx` - Authentication (sign-in/sign-up)
-  - Admin Routes (protected):
-    - `admin.tsx` - Admin dashboard layout
-    - `admin.users.tsx` - User management
-    - `admin.user.$userId.tsx` - Individual user detail
-    - `admin.centers.tsx` - Property center management
-  - Utility Routes:
-    - `cron.daily.ts` - Daily scheduled tasks (alerts, notifications)
-    - `email.verify.$verificationId.ts` - Email verification
-    - `auth.sign-out.ts` - Sign out
-    - `robots[.]txt.ts` - Robots.txt generation
-    - `sitemap[.]xml.ts` - Sitemap generation
-    - `blog.feed.ts` - RSS feed
-- `lib/` - Shared utilities
-  - `env.ts` - Env vars + runtime validation
-  - `prisma.ts` - Prisma client
-  - `workingMemory.ts` - Working memory schema/validation/updates
-  - `preparePrompt.ts` - Prompt composition with placeholder replacement
-  - `findNearbyCenters.ts` - Geographic search for shopping centers
-  - `redis-stop-monitor.ts` - Stream coordination
-  - `blogPosts.server.ts` - Blog post management
-  - `deviceDetection.server.ts` - Device/bot detection
-  - `model.ts` - AI model configuration
-  - `middleware/` - Request middleware (logging, UTM tracking)
-- `components/` - Reusable UI components
-- `prompts/` - AI prompt templates
-  - `chatPrompt.md` - Main conversational agent prompt
-  - `dailyAlertPrompt.md` - Automated daily alert prompt
-  - `generalDirectives.md` - Shared behavioral directives
-- `emails/` - Email templates with co-located send functions
-  - `sendEmails.tsx` - Core `sendEmail()` function and Resend integration
-  - `EmailLayout.tsx` - Shared email wrapper component
-  - `WelcomeEmail.tsx`, `WaitlistEmail.tsx`, etc. - Individual email templates
-
-`/prisma` - Database
-- `schema.prisma` - Models + migrations
-
-`/test` - Test infrastructure
-- `helpers/` - Utilities (converse, launchBrowser, setup)
-- `mocks/` - MSW + Anthropic mocks
-
-`/__screenshots__` - Visual regression tests (git-ignored)
-`vitest.config.ts` - Test configuration
+- See [AGENTS.md](./AGENTS.md) for workflow and issue tracking
+- Run `pnpm check` before committing
+- Database updates: `prisma generate && prisma db push`
+- All pages need `<main>` with `aria-label`
+- Center seed files MUST have valid `website` property
+- Debug logging: `DEBUG=server,browser pnpm dev`
