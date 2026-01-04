@@ -3,7 +3,7 @@
  * Comprehensive coverage using Google Places Nearby Search
  */
 
-import { partition } from "es-toolkit";
+import { mapAsync, partition } from "es-toolkit";
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
@@ -30,7 +30,7 @@ export default async function collectCenters(cityInput: string) {
   console.info("Metro area counties: %s", counties.join(", "));
 
   // Step 2: Geocode all counties
-  const geocoded = await Promise.all(counties.map((c) => geocodeCounty(c)));
+  const geocoded = await mapAsync(counties, geocodeCounty);
 
   // Step 3: Merge bounding boxes
   const mergedBounds = mergeBounds(geocoded.map((g) => g.bounds));
@@ -49,20 +49,16 @@ export default async function collectCenters(cityInput: string) {
   const spinner = ora("Searching grid points...").start();
   const centers: Awaited<ReturnType<typeof nearbySearch>> = [];
 
-  for (let i = 0; i < grid.length; i++) {
-    const point = grid[i];
-    spinner.text = `Searching grid point ${i + 1}/${grid.length}`;
-
+  for (const point of grid) {
+    spinner.text = `Searching grid point ${point.lat.toFixed(3)},${point.lng.toFixed(3)}`;
     try {
       const results = await nearbySearch(point, radiusKm * 1000); // Convert km to meters
       centers.push(...results);
     } catch (error) {
-      console.error(
-        "\x1b[31m  ✗ Grid point %d/%d failed: %s\x1b[0m",
-        i + 1,
-        grid.length,
-        error instanceof Error ? error.message : String(error),
+      spinner.fail(
+        `Grid point ${point.lat.toFixed(3)},${point.lng.toFixed(3)} failed: ${error instanceof Error ? error.message : String(error)}`,
       );
+      throw error;
     }
   }
   spinner.succeed(`Searched ${grid.length} grid points`);

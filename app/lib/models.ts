@@ -27,7 +27,6 @@ export const conversational = {
     })("claude-sonnet-4-5"),
   ),
   providerOptions: { anthropic: {} as AnthropicProviderOptions },
-  seed: 42,
   temperature: 0.0,
 } satisfies Omit<LanguageModelV3CallOptions, "prompt"> & {
   model: LanguageModelV3;
@@ -47,7 +46,6 @@ export const classify = {
       cacheControl: { type: "ephemeral", ttl: "1h" },
     } as AnthropicProviderOptions,
   },
-  seed: 42,
   temperature: 0.0,
 } satisfies Omit<LanguageModelV3CallOptions, "prompt"> & {
   model: LanguageModelV3;

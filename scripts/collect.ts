@@ -3,7 +3,7 @@
 /**
  * Collect shopping centers:
  *
- * Usage: doppler run -- tsx scripts/collect.ts "LA"
+ *   doppler run -- tsx scripts/collect.ts "LA"
  *
  * Collects all shopping centers in a metro area using comprehensive
  * grid-based search with Google Places API

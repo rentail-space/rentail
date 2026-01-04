@@ -1,5 +1,6 @@
 /**
- * https://console.cloud.google.com/google/maps-apis/metrics?project=rentail-480516
+ * @see https://console.cloud.google.com/google/maps-apis/metrics?project=rentail-480516
+ * @see https://console.cloud.google.com/billing/015C92-88EA69-E2A38C/reports?project=rentail-480516&organizationId=316438173672
  */
 
 import type { InputJsonValue } from "@prisma/client/runtime/client";
@@ -131,7 +132,7 @@ export type PlacesAPIPlace = {
     latitude: number;
     longitude: number;
   };
-  photos: Array<{
+  photos?: Array<{
     name: string; // eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw/photos/AdDdOWpS8aBFPEm6GtQQhK6w"
     widthPx: number; // eg 1000,
     heightPx: number; // eg 1000,
@@ -371,7 +372,9 @@ async function toDatabasePlace({
   );
   const country = shortText(place.addressComponents, "country");
   const slug = createSlug({ state, displayName });
-  const imageURLs = await downloadPhotos({ slug, photos: place.photos });
+  const imageURLs = place.photos
+    ? await downloadPhotos({ slug, photos: place.photos })
+    : [];
   const { openFrom, openUntil } = operatingHours(place.regularOpeningHours);
   invariant(place.websiteUri, "Google Places data missing website");
   invariant(place.location?.latitude, "Google Places data missing latitude");
