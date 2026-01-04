@@ -83,6 +83,7 @@ export async function geocodeCounty(
     const cached = await prisma.cache.findUnique({ where: { key } });
     if (cached) {
       spinner.succeed(`Geocoding ${countyName} (cached)`);
+      console.info("%s => %s", countyName);
       return cached.value as unknown as GeocodedCounty;
     }
 
@@ -145,11 +146,11 @@ export async function geocodeCounty(
  */
 export function mergeBounds(boxes: BoundingBox[]): BoundingBox {
   invariant(boxes.length > 0, "Cannot merge empty array of bounds");
-
-  return {
+  const coverage = {
     north: Math.max(...boxes.map((b) => b.north)),
     south: Math.min(...boxes.map((b) => b.south)),
     east: Math.max(...boxes.map((b) => b.east)),
     west: Math.min(...boxes.map((b) => b.west)),
   };
+  return coverage;
 }

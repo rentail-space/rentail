@@ -32,7 +32,7 @@ export default async function collectCenters(countyName: string) {
       // From Google Places we collect all additional information about the center:
       // website, phone, rating, review count, image URLs, opening hours, etc.
       const google = await fromGooglePlaces({
-        placeName: center.name,
+        displayName: center.name,
         placeID: center.id,
       });
       invariant(google, "Failed to fetch Google Places data");

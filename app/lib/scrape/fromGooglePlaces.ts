@@ -35,21 +35,21 @@ const placeDetailsSchema = zod.object({
  * Get place details from Google Places API. The Places API charges for usage,
  * so this function uses database caching to avoid redundant API calls.
  *
- * @param placeName Name of the place to search for
- * @param placeID ID of the place to get details for (if available)
+ * @param searchName Name of the place to search for
+ * @param placeID ID of the place (eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw")
  * @returns Place details, or undefined if the place is not found or not operational
  */
 export async function fromGooglePlaces({
-  placeName,
+  displayName,
   placeID,
 }: {
-  placeName: string;
+  displayName: string;
   placeID?: string;
 }): Promise<zod.infer<typeof placeDetailsSchema> | undefined> {
-  const spinner = ora(`Fetching Google Places data for ${placeName}`).start();
+  const spinner = ora(`Fetching Google Places data for ${displayName}`).start();
   try {
     // eg "google-places:beverly-center"
-    const key = `google-places:${placeName
+    const key = `google-places:${displayName
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "")
       .replace(/\s+/g, "-")
@@ -63,14 +63,14 @@ export async function fromGooglePlaces({
     }
 
     const place = placeID
-      ? await getPlaceDetails({ placeName, placeID })
-      : await searchText(placeName);
+      ? await getPlaceDetails({ displayName, placeID })
+      : await searchText(displayName);
     await prisma.cache.create({ data: { key, value: place ?? "" } });
     spinner.succeed();
     return place;
   } catch (error) {
     spinner.fail(
-      `Failed to fetch ${placeName} details from Google Places: ${error}`,
+      `Failed to fetch ${displayName} details from Google Places: ${error}`,
     );
     throw error;
   }
@@ -99,7 +99,7 @@ const findPlaceFields = [
  * Google Places API response type.
  */
 export type PlacesAPIPlace = {
-  id?: string; // eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw"
+  name: string; // eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw"
   addressComponents: Array<{
     longText: string;
     shortText: string;
@@ -158,11 +158,11 @@ export type PlacesAPIPlace = {
 /**
  * Find a place by name using the Google Places API.
  *
- * @param placeName Name of the place to search for
- * @returns Place details, or undefined if the place is not found or not operational
+ * @param searchName Name of the place to search for
+ * @returns First place details, or undefined if the place is not found or not operational
  */
 async function searchText(
-  placeName: string,
+  searchName: string,
 ): Promise<zod.infer<typeof placeDetailsSchema> | undefined> {
   const response = await fetch(
     "https://places.googleapis.com/v1/places:searchText",
@@ -172,7 +172,7 @@ async function searchText(
         includedType: "shopping_mall",
         includePureServiceAreaBusinesses: false,
         maxResultCount: 3,
-        textQuery: placeName,
+        textQuery: searchName,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -190,14 +190,14 @@ async function searchText(
   invariant(places, "No places found");
 
   const place = places.filter((place) =>
-    similarNames(place.displayName.text, placeName),
+    similarNames(place.displayName.text, searchName),
   )[0];
   invariant(
     place.primaryType === "shopping_mall",
     "Place is not a shopping mall",
   );
   invariant(place.businessStatus === "OPERATIONAL", "Place is not operational");
-  return await toDatabasePlace(placeName, places[0]);
+  return await toDatabasePlace({ displayName: searchName, place });
 }
 
 /**
@@ -256,16 +256,16 @@ export async function searchNearbyRaw({
 /**
  * Get place details from Google Places API.
  *
- * @param placeName Name of the place to get details for
- * @param placeID ID of the place to get details for
- * @returns Place details, or undefined if the place is not found or not operational
+ * @param placeID ID of the place (eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw")
+ * @param displayName Display name of the place
+ * @returns Place details
  */
 async function getPlaceDetails({
-  placeName,
   placeID,
+  displayName,
 }: {
-  placeName: string;
   placeID: string;
+  displayName: string;
 }): Promise<zod.infer<typeof placeDetailsSchema>> {
   const response = await fetch(`https://places.googleapis.com/v1/${placeID}`, {
     headers: {
@@ -277,19 +277,23 @@ async function getPlaceDetails({
   });
   invariant(response.ok, "Failed to get place details");
   const place = (await response.json()) as PlacesAPIPlace;
-  return await toDatabasePlace(placeName, place);
+  return await toDatabasePlace({ displayName, place });
 }
 
 /**
  * Convert a Google Places API place to a database place.
  *
- * @param placeDetails Google Places API place details
+ * @param displayName Display name of the place
+ * @param place Google Places API place details
  * @returns Place details
  */
-async function toDatabasePlace(
-  placeName: string,
-  place: PlacesAPIPlace,
-): Promise<zod.infer<typeof placeDetailsSchema>> {
+async function toDatabasePlace({
+  displayName,
+  place,
+}: {
+  displayName: string;
+  place: PlacesAPIPlace;
+}): Promise<zod.infer<typeof placeDetailsSchema>> {
   const address = [
     // eg "8500 Beverly Blvd"
     longText(place.addressComponents, "street_number"),
@@ -309,7 +313,7 @@ async function toDatabasePlace(
     "administrative_area_level_1",
   );
   const country = shortText(place.addressComponents, "country");
-  const slug = createSlug({ state, placeName });
+  const slug = createSlug({ state, displayName });
   const imageURLs = await downloadPhotos({ slug, photos: place.photos });
   const { openFrom, openUntil } = operatingHours(place.regularOpeningHours);
   invariant(place.websiteUri, "Google Places data missing website");
@@ -317,7 +321,7 @@ async function toDatabasePlace(
   invariant(place.location?.longitude, "Google Places data missing longitude");
 
   return {
-    name: placeName,
+    name: displayName,
     address,
     city,
     state,
@@ -476,13 +480,13 @@ function operatingHours(regularOpeningHours?: {
  */
 function createSlug({
   state,
-  placeName,
+  displayName,
 }: {
   state: string;
-  placeName: string;
+  displayName: string;
 }): string {
   return `${state.toLowerCase()}-${
-    placeName
+    displayName
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "") // Remove special chars
       .replace(/\s+/g, "-") // Spaces to hyphens

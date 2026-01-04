@@ -3,7 +3,6 @@ import ora from "ora";
 import type zod from "zod";
 import { z } from "zod";
 import { conversational } from "~/lib/models";
-import type discoverCenters from "~/lib/scrape/discoverCenters";
 
 const enrichedSchema = z.object({
   centerType: z.enum([
@@ -39,10 +38,12 @@ export default async function enrichCenter({
   center,
   bodyText,
 }: {
-  center: Awaited<ReturnType<typeof discoverCenters>>[number];
+  center: {
+    displayName: string;
+  };
   bodyText?: string;
 }): Promise<zod.infer<typeof enrichedSchema>> {
-  const spinner = ora(`Enriching ${center.name}...`).start();
+  const spinner = ora(`Enriching ${center.displayName}...`).start();
   try {
     const enrichmentPrompt = `Given this shopping center data:
 

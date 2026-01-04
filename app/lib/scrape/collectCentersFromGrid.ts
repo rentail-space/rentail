@@ -7,23 +7,23 @@ import { invariant, partition } from "es-toolkit";
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { chromium } from "playwright";
 import ora from "ora";
-import { resolveMetroArea } from "./metroAreas";
-import { geocodeCounty, mergeBounds, type BoundingBox } from "./geocoding";
-import { estimateGridSize, generateHexGrid } from "./gridSearch";
-import { nearbySearch, type PlaceResult } from "./nearbySearch";
+import { chromium } from "playwright";
 import enrichCenter from "./enrichCenter";
 import { fromGooglePlaces } from "./fromGooglePlaces";
+import { type BoundingBox, geocodeCounty, mergeBounds } from "./geocoding";
+import { estimateGridSize, generateHexGrid } from "./gridSearch";
+import { resolveMetroArea } from "./metroAreas";
+import { type PlaceResult, nearbySearch } from "./nearbySearch";
 import scrapeCenter from "./scrapeCenter";
 import scrapeSpaces from "./scrapeSpaces";
 
 interface DiscoveredCenter {
   address: string;
   city: string;
-  id: string;
-  name: string;
   state: string;
+  placeID: string;
+  displayName: string;
 }
 
 /**
@@ -43,13 +43,6 @@ export default async function collectCentersFromGrid(cityInput: string) {
 
   // Step 3: Merge bounding boxes
   const mergedBounds = mergeBounds(geocoded.map((g) => g.bounds));
-  console.info(
-    "Coverage area: (%.4f, %.4f) to (%.4f, %.4f)",
-    mergedBounds.south,
-    mergedBounds.west,
-    mergedBounds.north,
-    mergedBounds.east,
-  );
 
   // Step 4: Generate grid
   const radiusKm = 50; // Google Places max radius
@@ -88,20 +81,15 @@ export default async function collectCentersFromGrid(cityInput: string) {
   const uniqueCenters: DiscoveredCenter[] = [];
 
   for (const result of allResults) {
-    if (!seenIds.has(result.placeId)) {
-      seenIds.add(result.placeId);
-
-      // Extract state from result (we'll get it from Google Places details later)
-      // For now, use the first county's state as fallback
-      const fallbackState =
-        geocoded[0]?.formattedAddress.match(/,\s+([A-Z]{2})/)?.[1];
+    if (!seenIds.has(result.placeID)) {
+      seenIds.add(result.placeID);
 
       uniqueCenters.push({
-        id: result.placeId,
-        name: result.name,
-        address: "", // Will be filled by Google Places
-        city: "", // Will be filled by Google Places
-        state: fallbackState ?? "CA",
+        address: result.address,
+        city: result.city,
+        displayName: result.displayName.text,
+        placeID: result.placeID,
+        state: result.state,
       });
     }
   }
@@ -126,7 +114,6 @@ export default async function collectCentersFromGrid(cityInput: string) {
   const [_, creating] = partition(uniqueCenters, (center) =>
     existsSync(getSaveFilename(center)),
   );
-
   console.info(
     "\x1b[33m  → Processing %d new centers (skipping %d existing)\x1b[0m",
     creating.length,
@@ -141,8 +128,8 @@ export default async function collectCentersFromGrid(cityInput: string) {
     try {
       // Fetch Google Places data
       const google = await fromGooglePlaces({
-        placeName: center.name,
-        placeID: center.id,
+        displayName: center.displayName,
+        placeID: center.placeID,
       });
       invariant(google, "Failed to fetch Google Places data");
       invariant(google.website, "Google Places data missing website");
@@ -158,7 +145,7 @@ export default async function collectCentersFromGrid(cityInput: string) {
       // Extract spaces
       const spaces = await scrapeSpaces({
         browser,
-        centerName: center.name,
+        centerName: center.displayName,
         url: google.website,
       });
 
@@ -168,8 +155,8 @@ export default async function collectCentersFromGrid(cityInput: string) {
 
       // Save to file
       const filename = getSaveFilename({
+        displayName: center.displayName,
         state: center.state,
-        name: center.name,
       });
       await mkdir(dirname(filename), { recursive: true });
       await writeFile(
@@ -192,7 +179,7 @@ export default async function collectCentersFromGrid(cityInput: string) {
     } catch (error) {
       console.error(
         "\x1b[31m  ✗ Failed: %s - %s\x1b[0m",
-        center.name,
+        center.displayName,
         error instanceof Error ? error.message : String(error),
       );
       failCount++;
@@ -213,8 +200,8 @@ export default async function collectCentersFromGrid(cityInput: string) {
 /**
  * Get save filename for a center
  */
-function getSaveFilename(center: { name: string; state: string }) {
-  const normalized = center.name
+function getSaveFilename(center: { displayName: string; state: string }) {
+  const normalized = center.displayName
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, "")
     .replace(/\s+/g, "-")

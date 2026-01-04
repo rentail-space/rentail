@@ -4,7 +4,6 @@
  */
 
 import type { InputJsonValue } from "@prisma/client/runtime/client";
-import { invariant } from "node_modules/es-toolkit/dist/util/invariant.mjs";
 import ora from "ora";
 import prisma from "../prisma";
 import { searchNearbyRaw } from "./fromGooglePlaces";
@@ -14,9 +13,13 @@ import RateLimiter from "./rateLimiter";
 const rateLimiter = new RateLimiter(50); // 50ms minimum delay between calls
 
 export interface PlaceResult {
-  placeId: string;
-  name: string;
+  address: string;
+  city: string;
+  displayName: { text: string };
   location: LatLng;
+  placeID: string;
+  state: string;
+  websiteUri: string;
 }
 
 /**
@@ -31,7 +34,7 @@ export async function nearbySearch(
   radiusMeters: number,
 ): Promise<PlaceResult[]> {
   const spinner = ora(
-    `Searching near (${location.lat.toFixed(4)}, ${location.lng.toFixed(4)})`,
+    `Searching near (${location.lat.toFixed(3)}, ${location.lng.toFixed(3)})`,
   ).start();
 
   try {
@@ -54,19 +57,33 @@ export async function nearbySearch(
     const places = await searchNearbyRaw({ location, radiusMeters });
 
     // Convert to simplified result format
-    const results: PlaceResult[] = places
-      .filter((place) => place.id) // Only include places with IDs
-      .map((place) => {
-        invariant(place.id, "Place ID is required");
-        return {
-          placeId: place.id,
-          name: place.displayName.text,
-          location: {
-            lat: place.location.latitude,
-            lng: place.location.longitude,
-          },
-        };
-      });
+    const results: PlaceResult[] = places.map((place) => {
+      return {
+        address: place.addressComponents
+          .filter(
+            (component) =>
+              component.types.includes("street_number") ||
+              component.types.includes("route"),
+          )
+          .map((component) => component.longText)
+          .join(", "),
+        city:
+          place.addressComponents.find((component) =>
+            component.types.includes("locality"),
+          )?.longText ?? "",
+        displayName: place.displayName,
+        location: {
+          lat: place.location.latitude,
+          lng: place.location.longitude,
+        },
+        placeID: place.name,
+        state:
+          place.addressComponents.find((component) =>
+            component.types.includes("administrative_area_level_1"),
+          )?.shortText ?? "",
+        websiteUri: place.websiteUri ?? "",
+      };
+    });
 
     // Cache results (30-day TTL)
     await prisma.cache.create({
