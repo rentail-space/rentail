@@ -98,7 +98,8 @@ const findPlaceFields = [
 /**
  * Google Places API response type.
  */
-type PlacesAPIPlace = {
+export type PlacesAPIPlace = {
+  id?: string; // eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw"
   addressComponents: Array<{
     longText: string;
     shortText: string;
@@ -197,6 +198,59 @@ async function searchText(
   );
   invariant(place.businessStatus === "OPERATIONAL", "Place is not operational");
   return await toDatabasePlace(placeName, places[0]);
+}
+
+/**
+ * Search for shopping malls near a location using Google Places Nearby Search API
+ *
+ * @param location Center point (latitude, longitude)
+ * @param radiusMeters Search radius in meters (max 50,000)
+ * @returns Array of places found (up to 20 results, no pagination support)
+ */
+export async function searchNearbyRaw({
+  location,
+  radiusMeters,
+}: {
+  location: { lat: number; lng: number };
+  radiusMeters: number;
+}): Promise<PlacesAPIPlace[]> {
+  const response = await fetch(
+    "https://places.googleapis.com/v1/places:searchNearby",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        includedTypes: ["shopping_mall"],
+        maxResultCount: 20,
+        locationRestriction: {
+          circle: {
+            center: {
+              latitude: location.lat,
+              longitude: location.lng,
+            },
+            radius: radiusMeters,
+          },
+        },
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "rentail.space/1.0 (support@rentail.space)",
+        "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
+        "X-Goog-FieldMask": findPlaceFields
+          .map((field) => `places.${field}`)
+          .join(","),
+      },
+    },
+  );
+  invariant(response.ok, "Nearby search failed");
+
+  const { places } = (await response.json()) as { places?: PlacesAPIPlace[] };
+
+  // Filter to operational shopping malls only
+  return (places ?? []).filter(
+    (place) =>
+      place.primaryType === "shopping_mall" &&
+      place.businessStatus === "OPERATIONAL",
+  );
 }
 
 /**
