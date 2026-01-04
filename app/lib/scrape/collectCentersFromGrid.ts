@@ -17,14 +17,6 @@ import { resolveMetroArea } from "./metroAreas";
 import scrapeCenter from "./scrapeCenter";
 import scrapeSpaces from "./scrapeSpaces";
 
-interface DiscoveredCenter {
-  address: string;
-  city: string;
-  state: string;
-  placeID: string;
-  displayName: string;
-}
-
 /**
  * Collect shopping centers using grid-based search
  *

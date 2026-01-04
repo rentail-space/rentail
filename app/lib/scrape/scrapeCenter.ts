@@ -25,10 +25,7 @@ export default async function scrapeCenter({
       timeout: 30_000,
     });
 
-    const bodyText =
-      (await page.locator("body").filter({ visible: true }).textContent()) ||
-      "";
-
+    const bodyText = (await page.locator("body").allTextContents()).join("\n");
     spinner.succeed(`Scraped website: ${url}`);
     return { bodyText };
   } catch (_error) {

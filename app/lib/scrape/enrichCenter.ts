@@ -17,7 +17,7 @@ const enrichedSchema = z.object({
   numberOfStores: z.int().positive().optional(),
   squareFootage: z.int().positive().optional(),
   summary: z.string().optional(),
-  tier: z.int().min(1).max(3),
+  tier: z.int().min(1).max(3).optional(),
 });
 
 /**
@@ -124,7 +124,6 @@ For optional fields without reliable data, omit them entirely (do not set to nul
     });
 
     spinner.succeed();
-    console.log(output);
     return output;
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
