@@ -3,18 +3,17 @@
  * Comprehensive coverage using Google Places Nearby Search
  */
 
-import { invariant, partition } from "es-toolkit";
+import { partition } from "es-toolkit";
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import ora from "ora";
 import { chromium } from "playwright";
 import enrichCenter from "./enrichCenter";
-import { fromGooglePlaces } from "./fromGooglePlaces";
+import { nearbySearch } from "./fromGooglePlaces";
 import { type BoundingBox, geocodeCounty, mergeBounds } from "./geocoding";
 import { estimateGridSize, generateHexGrid } from "./gridSearch";
 import { resolveMetroArea } from "./metroAreas";
-import { type PlaceResult, nearbySearch } from "./nearbySearch";
 import scrapeCenter from "./scrapeCenter";
 import scrapeSpaces from "./scrapeSpaces";
 
@@ -56,7 +55,7 @@ export default async function collectCentersFromGrid(cityInput: string) {
 
   // Step 5: Search each grid point
   const spinner = ora("Searching grid points...").start();
-  const allResults: PlaceResult[] = [];
+  const centers: Awaited<ReturnType<typeof nearbySearch>> = [];
 
   for (let i = 0; i < grid.length; i++) {
     const point = grid[i];
@@ -64,7 +63,7 @@ export default async function collectCentersFromGrid(cityInput: string) {
 
     try {
       const results = await nearbySearch(point, radiusKm * 1000); // Convert km to meters
-      allResults.push(...results);
+      centers.push(...results);
     } catch (error) {
       console.error(
         "\x1b[31m  ✗ Grid point %d/%d failed: %s\x1b[0m",
@@ -76,29 +75,7 @@ export default async function collectCentersFromGrid(cityInput: string) {
   }
   spinner.succeed(`Searched ${grid.length} grid points`);
 
-  // Step 6: Deduplicate by place ID
-  const seenIds = new Set<string>();
-  const uniqueCenters: DiscoveredCenter[] = [];
-
-  for (const result of allResults) {
-    if (!seenIds.has(result.placeID)) {
-      seenIds.add(result.placeID);
-
-      uniqueCenters.push({
-        address: result.address,
-        city: result.city,
-        displayName: result.displayName.text,
-        placeID: result.placeID,
-        state: result.state,
-      });
-    }
-  }
-
-  console.info(
-    "\x1b[32m  ✓ Found %d unique centers (from %d total results)\x1b[0m",
-    uniqueCenters.length,
-    allResults.length,
-  );
+  console.info("\x1b[32m  ✓ Found %d unique centers\x1b[0m", centers.length);
 
   // Save grid metadata for cache/resume capability
   await saveGridMetadata({
@@ -106,18 +83,18 @@ export default async function collectCentersFromGrid(cityInput: string) {
     counties,
     bounds: mergedBounds,
     gridPoints: grid,
-    centersFound: uniqueCenters.length,
+    centersFound: centers.length,
   });
 
   // Step 7: Enrich each center (same as collectCenters.ts)
   // Partition into new vs existing
-  const [_, creating] = partition(uniqueCenters, (center) =>
+  const [_, creating] = partition(centers, (center) =>
     existsSync(getSaveFilename(center)),
   );
   console.info(
     "\x1b[33m  → Processing %d new centers (skipping %d existing)\x1b[0m",
     creating.length,
-    uniqueCenters.length - creating.length,
+    centers.length - creating.length,
   );
 
   const browser = await chromium.launch({ headless: true });
@@ -126,36 +103,22 @@ export default async function collectCentersFromGrid(cityInput: string) {
 
   for (const center of creating) {
     try {
-      // Fetch Google Places data
-      const google = await fromGooglePlaces({
-        displayName: center.displayName,
-        placeID: center.placeID,
-      });
-      invariant(google, "Failed to fetch Google Places data");
-      invariant(google.website, "Google Places data missing website");
-
-      // Update center with Google data
-      center.address = google.address;
-      center.city = google.city;
-      center.state = google.state;
-
       // Scrape website
-      const { bodyText } = await scrapeCenter({ browser, url: google.website });
+      const { bodyText } = await scrapeCenter({ browser, url: center.website });
 
       // Extract spaces
       const spaces = await scrapeSpaces({
         browser,
-        centerName: center.displayName,
-        url: google.website,
+        centerName: center.name,
+        url: center.website,
       });
 
       // Enrich with Claude
       const enriched = await enrichCenter({ center, bodyText });
-      const summary = google.summary ?? enriched.summary;
 
       // Save to file
       const filename = getSaveFilename({
-        displayName: center.displayName,
+        name: center.name,
         state: center.state,
       });
       await mkdir(dirname(filename), { recursive: true });
@@ -164,9 +127,8 @@ export default async function collectCentersFromGrid(cityInput: string) {
         JSON.stringify(
           {
             ...center,
-            ...google,
             ...enriched,
-            summary,
+            summary: enriched.summary ?? center.summary,
             spaces,
           },
           null,
@@ -179,7 +141,7 @@ export default async function collectCentersFromGrid(cityInput: string) {
     } catch (error) {
       console.error(
         "\x1b[31m  ✗ Failed: %s - %s\x1b[0m",
-        center.displayName,
+        center.name,
         error instanceof Error ? error.message : String(error),
       );
       failCount++;
@@ -192,7 +154,7 @@ export default async function collectCentersFromGrid(cityInput: string) {
   console.info(
     "\x1b[32m\n✓ Collection complete: %d/%d centers saved\x1b[0m",
     successCount,
-    uniqueCenters.length,
+    creating.length,
   );
   if (failCount > 0) console.info("\x1b[31m  ⚠ Failed: %d\x1b[0m", failCount);
 }
@@ -200,8 +162,8 @@ export default async function collectCentersFromGrid(cityInput: string) {
 /**
  * Get save filename for a center
  */
-function getSaveFilename(center: { displayName: string; state: string }) {
-  const normalized = center.displayName
+function getSaveFilename(center: { name: string; state: string }) {
+  const normalized = center.name
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, "")
     .replace(/\s+/g, "-")

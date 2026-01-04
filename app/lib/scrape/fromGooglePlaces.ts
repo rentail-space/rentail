@@ -2,13 +2,15 @@
  * https://console.cloud.google.com/google/maps-apis/metrics?project=rentail-480516
  */
 
-import { invariant } from "es-toolkit";
+import type { InputJsonValue } from "@prisma/client/runtime/client";
+import { invariant, mapAsync } from "es-toolkit";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import ora from "ora";
 import zod from "zod";
 import envVars from "../env";
 import prisma from "../prisma";
+import type { LatLng } from "./geocoding";
 
 if (!envVars.GOOGLE_PLACES_API_KEY)
   throw new Error("Use doppler run --config prd -- ");
@@ -201,13 +203,68 @@ async function searchText(
 }
 
 /**
+ * Search for shopping malls near a location with caching
+ *
+ * @param location Center point
+ * @param radiusMeters Search radius in meters (max 50,000)
+ * @returns Array of shopping malls near the location
+ */
+export async function nearbySearch(
+  location: LatLng,
+  radiusMeters: number,
+): Promise<zod.infer<typeof placeDetailsSchema>[]> {
+  const spinner = ora(
+    `Searching near (${location.lat.toFixed(3)}, ${location.lng.toFixed(3)})`,
+  ).start();
+
+  try {
+    // Create cache key
+    const key = `nearby-search:${location.lat.toFixed(6)},${location.lng.toFixed(6)}:${radiusMeters}`;
+
+    // Check cache
+    const cached = await prisma.cache.findUnique({ where: { key } });
+    if (cached) {
+      spinner.succeed(
+        `Nearby search (${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}) - cached`,
+      );
+      return cached.value as unknown as zod.infer<typeof placeDetailsSchema>[];
+    }
+    // Call API with retry logic
+    const openPlaces = await searchNearbyRaw({ location, radiusMeters });
+    const structured = await mapAsync(
+      openPlaces,
+      async (place) =>
+        await toDatabasePlace({ displayName: place.displayName.text, place }),
+    );
+
+    // Cache results (30-day TTL)
+    await prisma.cache.create({
+      data: {
+        key,
+        value: structured as unknown as InputJsonValue,
+      },
+    });
+
+    spinner.succeed(
+      `Found ${openPlaces.length} centers near (${location.lat.toFixed(4)}, ${location.lng.toFixed(4)})`,
+    );
+    return structured;
+  } catch (error) {
+    spinner.fail(
+      `Nearby search failed at (${location.lat.toFixed(4)}, ${location.lng.toFixed(4)})`,
+    );
+    throw error;
+  }
+}
+
+/**
  * Search for shopping malls near a location using Google Places Nearby Search API
  *
  * @param location Center point (latitude, longitude)
  * @param radiusMeters Search radius in meters (max 50,000)
  * @returns Array of places found (up to 20 results, no pagination support)
  */
-export async function searchNearbyRaw({
+async function searchNearbyRaw({
   location,
   radiusMeters,
 }: {
@@ -244,12 +301,12 @@ export async function searchNearbyRaw({
   invariant(response.ok, "Nearby search failed");
 
   const { places } = (await response.json()) as { places?: PlacesAPIPlace[] };
-
   // Filter to operational shopping malls only
   return (places ?? []).filter(
     (place) =>
       place.primaryType === "shopping_mall" &&
-      place.businessStatus === "OPERATIONAL",
+      place.businessStatus === "OPERATIONAL" &&
+      place.websiteUri,
   );
 }
 

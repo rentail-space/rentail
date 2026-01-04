@@ -14,10 +14,10 @@ const enrichedSchema = z.object({
   ]),
   demographics: z.string().optional(),
   description: z.string(),
-  numberOfStores: z.number(),
-  squareFootage: z.number(),
+  numberOfStores: z.int().positive().optional(),
+  squareFootage: z.int().positive().optional(),
   summary: z.string().optional(),
-  tier: z.number().int().min(1).max(3),
+  tier: z.int().min(1).max(3),
 });
 
 /**
@@ -39,11 +39,11 @@ export default async function enrichCenter({
   bodyText,
 }: {
   center: {
-    displayName: string;
+    name: string;
   };
   bodyText?: string;
 }): Promise<zod.infer<typeof enrichedSchema>> {
-  const spinner = ora(`Enriching ${center.displayName}...`).start();
+  const spinner = ora(`Enriching ${center.name}...`).start();
   try {
     const enrichmentPrompt = `Given this shopping center data:
 
@@ -113,6 +113,8 @@ Tasks:
 Use scraped data as primary source. Fill gaps with your knowledge.
 For optional fields without reliable data, omit them entirely (do not set to null).`;
 
+    console.log(enrichmentPrompt);
+
     const { output } = await generateText({
       abortSignal: AbortSignal.timeout(30_000),
       prompt: enrichmentPrompt,
@@ -122,6 +124,7 @@ For optional fields without reliable data, omit them entirely (do not set to nul
     });
 
     spinner.succeed();
+    console.log(output);
     return output;
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);

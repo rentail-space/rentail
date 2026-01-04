@@ -25,7 +25,9 @@ export default async function scrapeCenter({
       timeout: 30_000,
     });
 
-    const bodyText = (await page.textContent("body")) || "";
+    const bodyText =
+      (await page.locator("body").filter({ visible: true }).textContent()) ||
+      "";
 
     spinner.succeed(`Scraped website: ${url}`);
     return { bodyText };
