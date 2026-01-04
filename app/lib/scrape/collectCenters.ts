@@ -11,7 +11,7 @@ import ora from "ora";
 import { chromium } from "playwright";
 import enrichCenter from "./enrichCenter";
 import { nearbySearch } from "./fromGooglePlaces";
-import { type BoundingBox, geocodeCounty, mergeBounds } from "./geocoding";
+import { type BoundingBox, geocodeCounty, mergeBounds } from "./geocodeCounty";
 import { estimateGridSize, generateHexGrid } from "./gridSearch";
 import { resolveMetroArea } from "./metroAreas";
 import scrapeCenter from "./scrapeCenter";
@@ -22,7 +22,7 @@ import scrapeSpaces from "./scrapeSpaces";
  *
  * @param cityInput City name or alias (e.g., "LA", "Los Angeles")
  */
-export default async function collectCentersFromGrid(cityInput: string) {
+export default async function collectCenters(cityInput: string) {
   console.info('Starting grid-based collection for: "%s"', cityInput);
 
   // Step 1: Resolve metro area

@@ -10,7 +10,7 @@ import ora from "ora";
 import zod from "zod";
 import envVars from "../env";
 import prisma from "../prisma";
-import type { LatLng } from "./geocoding";
+import type { LatLng } from "./geocodeCounty";
 
 if (!envVars.GOOGLE_PLACES_API_KEY)
   throw new Error("Use doppler run --config prd -- ");

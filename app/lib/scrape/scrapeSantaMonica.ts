@@ -11,7 +11,7 @@ interface RetailSpace {
   available?: boolean;
 }
 
-async function scrapeRetailSpaces() {
+async function scrapeSantaMonica() {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
@@ -92,14 +92,6 @@ async function updateSpace(filename: string, spaces: RetailSpace[]) {
 }
 
 // Run the scraper
-scrapeRetailSpaces()
-  .then((spaces) => {
-    console.info("\n✅ Successfully scraped %d spaces", spaces.length);
-    for (const space of spaces)
-      console.info(`  ${space.number} (${space.type})`);
-    process.exit(0);
-  })
-  .catch((error) => {
-    console.error("❌ Error scraping retail spaces:", error);
-    process.exit(1);
-  });
+const spaces = await scrapeSantaMonica();
+for (const space of spaces) console.info(`  ${space.number} (${space.type})`);
+process.exit(0);

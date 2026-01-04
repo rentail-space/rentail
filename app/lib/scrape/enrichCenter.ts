@@ -113,8 +113,6 @@ Tasks:
 Use scraped data as primary source. Fill gaps with your knowledge.
 For optional fields without reliable data, omit them entirely (do not set to null).`;
 
-    console.log(enrichmentPrompt);
-
     const { output } = await generateText({
       abortSignal: AbortSignal.timeout(30_000),
       prompt: enrichmentPrompt,

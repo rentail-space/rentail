@@ -13,7 +13,7 @@ interface Space {
   imageURLs?: string[];
 }
 
-async function scrapeSpaces() {
+async function scrapeLosCerritos() {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
   const spinner = ora("Scraping Los Cerritos Center...").start();
@@ -128,6 +128,6 @@ async function updateSpace(filename: string, spaces: Space[]) {
 }
 
 // Run the scraper
-const spaces = await scrapeSpaces();
+const spaces = await scrapeLosCerritos();
 for (const space of spaces) console.info(`  ${space.number} (${space.type})`);
 process.exit(0);

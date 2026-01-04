@@ -13,7 +13,7 @@ interface RetailSpace {
   imageURLs?: string[];
 }
 
-async function scrapeSpaces() {
+async function scrapeStonewood() {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
   const spinner = ora("Scraping Stonewood Center...").start();
@@ -123,6 +123,6 @@ async function updateSpace(filename: string, spaces: RetailSpace[]) {
 }
 
 // Run the scraper
-const spaces = await scrapeSpaces();
+const spaces = await scrapeStonewood();
 for (const space of spaces) console.info(`  ${space.number} (${space.type})`);
 process.exit(0);
