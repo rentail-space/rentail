@@ -83,7 +83,6 @@ export async function geocodeCounty(
     const cached = await prisma.cache.findUnique({ where: { key } });
     if (cached) {
       spinner.succeed(`Geocoding ${countyName} (cached)`);
-      console.info("%s => %s", countyName);
       return cached.value as unknown as GeocodedCounty;
     }
 

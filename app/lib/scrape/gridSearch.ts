@@ -19,7 +19,7 @@ import type { BoundingBox, LatLng } from "./geocodeCounty";
  */
 export function generateHexGrid(
   bounds: BoundingBox,
-  radiusKm = 50,
+  radiusKm = 32, // 20 miles
   bufferKm = 10,
 ): LatLng[] {
   // Hexagonal spacing calculations

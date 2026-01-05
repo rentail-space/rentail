@@ -37,7 +37,7 @@ export default async function collectCenters(search: string) {
   const mergedBounds = mergeBounds(geocoded.map((g) => g.bounds));
 
   // Step 4: Generate grid of search points
-  const radiusKm = 50; // Google Places max radius (31 miles)
+  const radiusKm = 32; // Google Places max radius (20 miles)
   const grid = generateHexGrid(mergedBounds, radiusKm);
 
   // Step 5: Search each grid point for shopping centers

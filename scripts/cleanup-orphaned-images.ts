@@ -12,7 +12,7 @@
  * Usage: tsx scripts/cleanup-orphaned-images.ts
  */
 
-import { readdir, readFile, unlink } from "node:fs/promises";
+import { readFile, readdir, unlink } from "node:fs/promises";
 import { join } from "node:path";
 import ora from "ora";
 
@@ -98,13 +98,13 @@ async function cleanupOrphanedImages() {
     );
 
     if (orphanedImages.length === 0) {
-      console.log("\n✓ No orphaned images found!");
+      console.info("\n✓ No orphaned images found!");
       return;
     }
 
-    console.log(`\n⚠ Found ${orphanedImages.length} orphaned images:`);
+    console.info(`\n⚠ Found ${orphanedImages.length} orphaned images:`);
     for (const image of orphanedImages) {
-      console.log(`  - ${image}`);
+      console.info(`  - ${image}`);
     }
 
     // Delete orphaned images
@@ -127,10 +127,10 @@ async function cleanupOrphanedImages() {
     );
 
     // Summary
-    console.log("\n✓ Cleanup complete");
-    console.log(`  Referenced images: ${referencedImages.size}`);
-    console.log(`  Orphaned images deleted: ${deleted}`);
-    console.log(`  Remaining images: ${imageFiles.length - deleted}`);
+    console.info("\n✓ Cleanup complete");
+    console.info(`  Referenced images: ${referencedImages.size}`);
+    console.info(`  Orphaned images deleted: ${deleted}`);
+    console.info(`  Remaining images: ${imageFiles.length - deleted}`);
   } catch (error) {
     spinner.fail(
       `Failed: ${error instanceof Error ? error.message : String(error)}`,

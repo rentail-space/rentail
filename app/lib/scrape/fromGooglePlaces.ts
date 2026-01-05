@@ -148,7 +148,7 @@ export async function nearbySearch({
   const openPlaces = await searchNearbyRaw({ point, radiusMeters });
   const structured = await mapAsync(
     openPlaces,
-    async (place) => await toDatabasePlace(place),
+    async (place) => await prepareSave(place),
   );
 
   // Cache results (30-day TTL)
@@ -240,23 +240,20 @@ export async function updatePlaceDetails(property: Property) {
   );
   invariant(response.ok, "Failed to get place details");
   const place = (await response.json()) as PlacesAPIPlace;
-  const readyToSave = await toDatabasePlace(place);
+  const readyToSave = await prepareSave(place);
   spinner.succeed();
   return readyToSave;
 }
 
 /**
- * Convert a Google Places API place to a database place.
+ * Convert a Google Places API place to a place details schema.
  *
- * @param displayName Display name of the place
  * @param place Google Places API place details
- * @returns Place details
+ * @returns Place details schema
  */
-async function toDatabasePlace(
+async function prepareSave(
   place: PlacesAPIPlace,
 ): Promise<zod.infer<typeof placeDetailsSchema>> {
-  console.log(place.addressComponents);
-
   const address = [
     // eg "8500 Beverly Blvd"
     longText(place.addressComponents, "street_number"),
