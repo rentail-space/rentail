@@ -91,6 +91,7 @@
     "resumable-stream": "^2.2.10",
     "schema-dts": "^1.1.5",
     "secretlint": "^11.2.5",
+    "sharp": "^0.34.5",
     "sonner": "^2.0.7",
     "streamdown": "^1.6.10",
     "tailwind-merge": "^3.4.0",
@@ -145,7 +146,8 @@
       "esbuild",
       "msw",
       "prisma",
-      "protobufjs"
+      "protobufjs",
+      "sharp"
     ],
     "overrides": {
       "glob@>=10.3.7 <10.5.0": ">=10.5.0",

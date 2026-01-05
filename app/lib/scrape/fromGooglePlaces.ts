@@ -8,6 +8,7 @@ import { invariant, mapAsync } from "es-toolkit";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import ora from "ora";
+import sharp from "sharp";
 import zod from "zod";
 import envVars from "../env";
 import prisma from "../prisma";
@@ -406,6 +407,10 @@ async function toDatabasePlace({
  * photos that are at least 600x500 pixels. Since the Places API charges for
  * usage, we only download the first photo.
  *
+ * Images are automatically:
+ * - Resized to max 1024px width (if wider)
+ * - Compressed to JPEG format with high quality (90%)
+ *
  * @see https://developers.google.com/maps/billing-and-pricing/pricing#places-legacy-pricing
  * @param slug Slug for the mall
  * @param photos Photos to download
@@ -442,17 +447,31 @@ async function downloadPhotos({
       });
       invariant(response.ok, "Failed to download photo");
 
-      // Detect format from content-type
-      const contentType = response.headers.get("content-type") || "";
-      const format = contentType.includes("png") ? "png" : "jpg";
+      // Process image: resize if needed and compress
+      const buffer = Buffer.from(await response.arrayBuffer());
+      const image = sharp(buffer);
+      const metadata = await image.metadata();
 
-      // Save with naming convention: {state}-{slug}-{index}.{format}
-      const filename = `${slug}-${index + 1}.${format}`;
+      // Resize if wider than 1024px
+      let processed = image;
+      if (metadata.width && metadata.width > 1024) {
+        processed = processed.resize(1024, null, {
+          fit: "inside",
+          withoutEnlargement: true,
+        });
+      }
+
+      // Convert to JPEG with high quality compression
+      const compressed = await processed
+        .jpeg({ quality: 90, mozjpeg: true })
+        .toBuffer();
+
+      // Save with naming convention: {state}-{slug}-{index}.jpg
+      const filename = `${slug}-${index + 1}.jpg`;
       const filepath = join("public", "images", "malls", filename);
 
-      const buffer = Buffer.from(await response.arrayBuffer());
       await mkdir(join(filepath, ".."), { recursive: true });
-      await writeFile(filepath, buffer);
+      await writeFile(filepath, compressed);
 
       imageURLs.push(`/images/malls/${filename}`);
     } catch (error) {
