@@ -136,7 +136,7 @@ export async function nearbySearch({
   spinner.text = `Searching for shopping centers near ${location}`;
 
   // Create cache key
-  const key = `nearby-search:${location}:${radiusMeters}`;
+  const key = `nearby-search:${location}`;
 
   // Check cache
   const cached = await prisma.cache.findUnique({ where: { key } });
@@ -226,44 +226,9 @@ async function searchNearbyRaw({
  */
 export async function updatePlaceDetails(property: Property) {
   const spinner = ora(`Updating details for ${property.name}`).start();
-  try {
-    // eg "google-places:property-id"
-    const key = `google-places:${property.name
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "")
-      .replace(/\s+/g, "-")
-      .replace(/-+/g, "-")}`;
 
-    const cache = await prisma.cache.findUnique({ where: { key } });
-    if (cache) {
-      const place = placeDetailsSchema.parse(cache.value);
-      spinner.succeed();
-      return place;
-    }
-
-    const place = await getPlaceDetails(property.googlePlaceID);
-    await prisma.cache.create({ data: { key, value: place ?? "" } });
-    spinner.succeed();
-    return place;
-  } catch (error) {
-    spinner.fail(
-      `Failed to fetch ${property.name} details from Google Places: ${error}`,
-    );
-    throw error;
-  }
-}
-
-/**
- * Get place details from Google Places API.
- *
- * @param googlePlaceID ID of the place (eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw")
- * @returns Place details
- */
-async function getPlaceDetails(
-  googlePlaceID: string,
-): Promise<zod.infer<typeof placeDetailsSchema>> {
   const response = await fetch(
-    `https://places.googleapis.com/v1/${googlePlaceID}`,
+    `https://places.googleapis.com/v1/${property.googlePlaceID}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -275,7 +240,9 @@ async function getPlaceDetails(
   );
   invariant(response.ok, "Failed to get place details");
   const place = (await response.json()) as PlacesAPIPlace;
-  return await toDatabasePlace(place);
+  const readyToSave = await toDatabasePlace(place);
+  spinner.succeed();
+  return readyToSave;
 }
 
 /**
