@@ -48,7 +48,11 @@ export default async function collectCenters(search: string) {
   for (const point of grid) {
     spinner.text = `Searching for shopping centers at ${point.lat.toFixed(3)},${point.lng.toFixed(3)}`;
     try {
-      const results = await nearbySearch(point, radiusKm * 1000); // Convert km to meters
+      const results = await nearbySearch({
+        point,
+        radiusMeters: radiusKm * 1000,
+        spinner,
+      }); // Convert km to meters
       centers.push(...results);
     } catch (error) {
       spinner.fail(

@@ -7,13 +7,12 @@ import type { InputJsonValue } from "@prisma/client/runtime/client";
 import { invariant, mapAsync } from "es-toolkit";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import ora from "ora";
+import ora, { type Ora } from "ora";
 import type { Property } from "prisma/generated/client";
 import sharp from "sharp";
 import zod from "zod";
 import envVars from "../env";
 import prisma from "../prisma";
-import type { LatLng } from "./geocodeCounty";
 
 if (!envVars.GOOGLE_PLACES_API_KEY)
   throw new Error("Use doppler run --config prd -- ");
@@ -117,71 +116,65 @@ export type PlacesAPIPlace = {
 };
 
 /**
- * Search for shopping malls near a location with caching
+ * Search for shopping centers near a location with caching
  *
- * @param location Center point
+ * @param point Center point
  * @param radiusMeters Search radius in meters (max 50,000)
- * @returns Array of shopping malls near the location
+ * @param spinner Spinner to update the progress
+ * @returns Array of shopping centers near the location
  */
-export async function nearbySearch(
-  location: LatLng,
-  radiusMeters: number,
-): Promise<zod.infer<typeof placeDetailsSchema>[]> {
-  const spinner = ora(
-    `Searching near (${location.lat.toFixed(3)}, ${location.lng.toFixed(3)})`,
-  ).start();
+export async function nearbySearch({
+  point,
+  radiusMeters,
+  spinner,
+}: {
+  point: { lat: number; lng: number };
+  radiusMeters: number;
+  spinner: Ora;
+}): Promise<zod.infer<typeof placeDetailsSchema>[]> {
+  const location = `${point.lat.toFixed(3)},${point.lng.toFixed(3)}`;
+  spinner.text = `Searching for shopping centers near ${location}`;
 
-  try {
-    // Create cache key
-    const key = `nearby-search:${location.lat.toFixed(6)},${location.lng.toFixed(6)}:${radiusMeters}`;
+  // Create cache key
+  const key = `nearby-search:${location}:${radiusMeters}`;
 
-    // Check cache
-    const cached = await prisma.cache.findUnique({ where: { key } });
-    if (cached) {
-      spinner.succeed(
-        `Nearby search (${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}) - cached`,
-      );
-      return cached.value as unknown as zod.infer<typeof placeDetailsSchema>[];
-    }
-    // Call API with retry logic
-    const openPlaces = await searchNearbyRaw({ location, radiusMeters });
-    const structured = await mapAsync(
-      openPlaces,
-      async (place) => await toDatabasePlace(place),
-    );
-
-    // Cache results (30-day TTL)
-    await prisma.cache.create({
-      data: {
-        key,
-        value: structured as unknown as InputJsonValue,
-      },
-    });
-
-    spinner.succeed(
-      `Found ${openPlaces.length} centers near (${location.lat.toFixed(4)}, ${location.lng.toFixed(4)})`,
-    );
-    return structured;
-  } catch (error) {
-    spinner.fail(
-      `Nearby search failed at (${location.lat.toFixed(4)}, ${location.lng.toFixed(4)})`,
-    );
-    throw error;
+  // Check cache
+  const cached = await prisma.cache.findUnique({ where: { key } });
+  if (cached) {
+    spinner.text = `Nearby search (${location}) - cached`;
+    return cached.value as unknown as zod.infer<typeof placeDetailsSchema>[];
   }
+  // Call API with retry logic
+  const openPlaces = await searchNearbyRaw({ point, radiusMeters });
+  const structured = await mapAsync(
+    openPlaces,
+    async (place) => await toDatabasePlace(place),
+  );
+
+  // Cache results (30-day TTL)
+  await prisma.cache.create({
+    data: {
+      key,
+      value: structured as unknown as InputJsonValue,
+    },
+  });
+
+  spinner.text = `Found ${structured.length} centers near ${location}`;
+  return structured;
 }
 
 /**
  * Search for shopping malls near a location using Google Places Nearby Search API
  *
- * @param location Center point (latitude, longitude)
+ * @param point Center point (latitude, longitude)
  * @param radiusMeters Search radius in meters (max 50,000)
  * @returns Array of places found (up to 20 results, no pagination support)
  */
 async function searchNearbyRaw({
-  location,
+  point,
   radiusMeters,
 }: {
-  location: { lat: number; lng: number };
+  point: { lat: number; lng: number };
   radiusMeters: number;
 }): Promise<PlacesAPIPlace[]> {
   const response = await fetch(
@@ -194,8 +187,8 @@ async function searchNearbyRaw({
         locationRestriction: {
           circle: {
             center: {
-              latitude: location.lat,
-              longitude: location.lng,
+              latitude: point.lat,
+              longitude: point.lng,
             },
             radius: radiusMeters,
           },
