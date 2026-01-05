@@ -61,6 +61,11 @@ export default async function seedCenter(filename: string) {
   );
   const id = basename(filename, ".json");
 
+  // Remove duplicates from center.spaces by space.number and store in 'spaces'
+  const spaces = new Map<string, (typeof center.spaces)[number]>(
+    center.spaces.map((space) => [space.number, space]),
+  );
+
   await prisma.property.upsert({
     create: {
       ...center,
@@ -68,7 +73,7 @@ export default async function seedCenter(filename: string) {
       imageURLs,
       spaces: {
         createMany: {
-          data: center.spaces.map((space) => ({
+          data: Object.values(spaces).map((space) => ({
             ...space,
             id: `${id}-${space.number}`,
           })),
@@ -79,7 +84,7 @@ export default async function seedCenter(filename: string) {
       ...center,
       imageURLs,
       spaces: {
-        upsert: center.spaces.map((space) => ({
+        upsert: Object.values(spaces).map((space) => ({
           where: { id: `${id}-${space.number}` },
           update: space,
           create: { ...space, id: `${id}-${space.number}` },

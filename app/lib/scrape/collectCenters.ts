@@ -37,8 +37,12 @@ export default async function collectCenters(search: string) {
   const mergedBounds = mergeBounds(geocoded.map((g) => g.bounds));
 
   // Step 4: Generate grid of search points
-  const radiusKm = 32; // Google Places max radius (20 miles)
-  const grid = generateHexGrid(mergedBounds, radiusKm);
+  //
+  // NOTE Google Places API max radius is 50km (31 miles). However, for denser
+  // areas (eg LA, NYC), we need to use a smaller radius to make sure we collect
+  // all the centers, since each query can only return up to 20 results.
+  const radiusKm = 15; // 9.3 miles
+  const grid = generateHexGrid(mergedBounds, radiusKm, radiusKm / 2);
 
   // Step 5: Search each grid point for shopping centers
   const spinner = ora(
@@ -51,9 +55,9 @@ export default async function collectCenters(search: string) {
     try {
       const results = await nearbySearch({
         point,
-        radiusMeters: radiusKm * 1000,
+        radiusMeters: radiusKm * 1000, // Convert km to meters
         spinner,
-      }); // Convert km to meters
+      });
       centers.push(...results);
     } catch (error) {
       spinner.fail(

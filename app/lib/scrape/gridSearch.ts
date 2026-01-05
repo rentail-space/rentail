@@ -13,14 +13,14 @@ import type { BoundingBox, LatLng } from "./geocodeCounty";
  * Horizontal spacing: radiusKm × 1.5
  *
  * @param bounds Bounding box to cover
- * @param radiusKm Search radius in kilometers (default 50km for Google Places max)
- * @param bufferKm Extra buffer around bounds in km (default 10km to catch edge cases)
+ * @param radiusKm Search radius in kilometers
+ * @param bufferKm Extra buffer around bounds in km to catch edge cases
  * @returns Array of center points for searches
  */
 export function generateHexGrid(
   bounds: BoundingBox,
-  radiusKm = 32, // 20 miles
-  bufferKm = 10,
+  radiusKm: number,
+  bufferKm: number,
 ): LatLng[] {
   // Hexagonal spacing calculations
   const verticalSpacingKm = radiusKm * Math.sqrt(3); // ≈ 86.6km for 50km radius
