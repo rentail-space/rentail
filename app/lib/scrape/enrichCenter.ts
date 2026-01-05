@@ -52,7 +52,7 @@ ${JSON.stringify(center)}
 </discovery>
 
 <website>
-${bodyText?.slice(0, 10000) || "No data"}
+${bodyText?.slice(0, 10_000) || "No data"}
 </website>
 
 Extract and structure the following into valid JSON matching this schema:

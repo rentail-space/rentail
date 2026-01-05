@@ -147,7 +147,7 @@ function LinkToCenter({
       <div className="flex flex-row flex-nowrap items-end justify-between gap-4">
         <Link to={`/center/${center.id}`} className="space-y-2">
           <p className="space-x-2">
-            {center.rating && center.rating >= 3 && (
+            {center.rating && center.rating > 3 && (
               <RatingStars rating={center.rating} />
             )}
             <span itemProp="description">{center.summary}</span>
@@ -190,12 +190,12 @@ function KeyCenterStats({
 }) {
   return (
     <SplitCenterStats>
-      {center.numberOfStores >= 30 && (
+      {center.numberOfStores && center.numberOfStores >= 30 && (
         <span className="whitespace-nowrap">
           {center.numberOfStores.toLocaleString()} stores
         </span>
       )}
-      {center.squareFootage >= 100000 && (
+      {center.squareFootage && center.squareFootage >= 10_0000 && (
         <span className="whitespace-nowrap">
           {center.squareFootage.toLocaleString()} square feet
         </span>
@@ -211,7 +211,7 @@ function KeyCenterStats({
         )
       )}
 
-      {center.rating && center.rating >= 3 && (
+      {center.rating && center.rating > 3 && (
         <span className="whitespace-nowrap">
           {clamp(center.rating, 1, 5).toFixed(1)}
           {center.reviewCount && center.reviewCount >= 5 ? (
@@ -295,7 +295,7 @@ function schemaData({
         longitude: center.longitude,
       };
 
-    if (center.rating && center.rating >= 3)
+    if (center.rating && center.rating > 3)
       item.aggregateRating = {
         "@type": "AggregateRating",
         ratingValue: clamp(center.rating, 1, 5),

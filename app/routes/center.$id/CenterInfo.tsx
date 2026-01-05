@@ -30,7 +30,7 @@ export default function CenterInfo({
           </div>
         )}
 
-        {center.rating && (
+        {center.rating && center.rating > 3 && (
           <div className="items-top flex flex-row gap-2 pb-4">
             <StarIcon className="h-6 w-6 text-yellow-500" fill="currentColor" />
             <span>
@@ -59,7 +59,7 @@ export default function CenterInfo({
           )
         )}
 
-        {center.squareFootage && (
+        {center.squareFootage && center.squareFootage > 10_000 && (
           <div className="items-top flex flex-row gap-2 pb-4">
             <RulerDimensionLineIcon className="h-6 w-6" />
             <span>
@@ -71,7 +71,7 @@ export default function CenterInfo({
           </div>
         )}
 
-        {center.numberOfStores && (
+        {center.numberOfStores && center.numberOfStores >= 20 && (
           <div className="items-top flex flex-row gap-2 pb-4">
             <ShoppingCartIcon className="h-6 w-6" />
             <span>

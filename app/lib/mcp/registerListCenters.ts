@@ -22,9 +22,17 @@ const listCentersSpec = {
       zod.object({
         address: zod.string().describe("Full address"),
         name: zod.string().describe("The shopping center or mall's name"),
-        numberOfStores: zod.number().describe("Number of stores"),
-        rating: zod.number().describe("Rating (1-5)"),
-        squareFootage: zod.number().describe("Square footage"),
+        numberOfStores: zod
+          .int()
+          .positive()
+          .optional()
+          .describe("Number of stores"),
+        rating: zod.int().positive().optional().describe("Rating (1-5)"),
+        squareFootage: zod
+          .int()
+          .positive()
+          .optional()
+          .describe("Square footage"),
         summary: zod.string().describe("Summary description"),
         website: zod.string().describe("Website URL"),
       }),

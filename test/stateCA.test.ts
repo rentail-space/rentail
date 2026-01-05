@@ -50,9 +50,9 @@ describe("State shopping centers page", () => {
     }
   });
 
-  it("should display star ratings for centers with ratings >= 3", async () => {
+  it("should display star ratings for centers with ratings > 3", async () => {
     const centersWithRatings = californiaCenters.filter(
-      (c) => c.rating !== null && c.rating >= 3,
+      (c) => c.rating !== null && c.rating > 3,
     );
 
     for (const center of centersWithRatings) {
@@ -76,7 +76,7 @@ describe("State shopping centers page", () => {
 
   it("should display square footage for large centers", async () => {
     const centersWithLargeSquareFootage = californiaCenters.filter(
-      (c) => c.squareFootage !== null && c.squareFootage >= 100000,
+      (c) => c.squareFootage !== null && c.squareFootage >= 10_0000,
     );
 
     for (const center of centersWithLargeSquareFootage) {
@@ -153,7 +153,7 @@ describe("State shopping centers page", () => {
       expect(centerItem.url).toBe(`https://rentail.space/center/${center.id}`);
 
       // Validate rating if present
-      if (center.rating !== null && center.rating >= 3) {
+      if (center.rating !== null && center.rating > 3) {
         expect(centerItem.aggregateRating).toBeDefined();
         expect(centerItem.aggregateRating["@type"]).toBe("AggregateRating");
         expect(centerItem.aggregateRating.ratingValue).toBeGreaterThanOrEqual(

@@ -28,7 +28,7 @@ const placeDetailsSchema = zod.object({
   openFrom: zod.number().describe("The place's opening from").optional(),
   openUntil: zod.number().describe("The place's opening until").optional(),
   phone: zod.string().describe("The place's phone number").optional(),
-  rating: zod.number().describe("The place's rating").optional(),
+  rating: zod.number().min(1).max(1).describe("The place's rating").optional(),
   reviewCount: zod.number().describe("The place's review count").optional(),
   state: zod.string().describe("The place's state"),
   summary: zod.string().describe("The place's summary").optional(),

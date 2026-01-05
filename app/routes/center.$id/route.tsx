@@ -28,7 +28,7 @@ export default function CenterPage({
         content={
           center.summary
             ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state}.`
-            : `Shopping center at ${center.address}, ${center.city}, ${center.state} with ${center.numberOfStores} stores and ${center.squareFootage.toLocaleString()} square feet.`
+            : `Shopping center at ${center.address}, ${center.city}, ${center.state}`
         }
       />
       <meta
