@@ -28,11 +28,15 @@ function Space({ space }: { space: PropertySpace }) {
       <Metric title="number" value={space.number} />
       <Metric
         title="size (sqft)"
-        value={space.size.toLocaleString(undefined, { style: "decimal" })}
+        value={
+          space.size?.toLocaleString(undefined, { style: "decimal" }) ?? "N/A"
+        }
       />
       <Metric
         title="floor"
-        value={space.floor.toLocaleString(undefined, { style: "decimal" })}
+        value={
+          space.floor?.toLocaleString(undefined, { style: "decimal" }) ?? "N/A"
+        }
       />
       <Metric title="type" value={space.type} />
     </div>

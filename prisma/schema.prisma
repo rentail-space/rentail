@@ -96,8 +96,8 @@ model PropertySpace {
   id         String    @map("id")          @id
   number     String    @map("number")
   type       SpaceType @map("type")
-  size       Int       @map("size")
-  floor      Int       @map("floor")
+  size       Int?      @map("size")
+  floor      Int?      @map("floor")
   imageURLs  String[]  @map("image_urls")
   property   Property  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   propertyId String    @map("property_id")

@@ -40,8 +40,8 @@ const schema = z.object({
       z.object({
         number: z.string(),
         type: z.enum(["Cart", "Inline", "Storage", "Other"]),
-        size: z.number(),
-        floor: z.number(),
+        size: z.number().optional(),
+        floor: z.number().optional(),
         available: z.boolean().default(false),
       }),
     )
