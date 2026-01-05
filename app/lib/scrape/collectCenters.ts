@@ -11,73 +11,58 @@ import ora from "ora";
 import { chromium } from "playwright";
 import enrichCenter from "./enrichCenter";
 import { nearbySearch } from "./fromGooglePlaces";
-import { type BoundingBox, geocodeCounty, mergeBounds } from "./geocodeCounty";
-import { estimateGridSize, generateHexGrid } from "./gridSearch";
-import { resolveMetroArea } from "./metroAreas";
+import { geocodeCounty, mergeBounds } from "./geocodeCounty";
+import { generateHexGrid } from "./gridSearch";
+import resolveMetroArea from "./metroAreas";
 import scrapeCenter from "./scrapeCenter";
 import scrapeSpaces from "./scrapeSpaces";
 
 /**
  * Collect shopping centers using grid-based search
  *
- * @param cityInput City name or alias (e.g., "LA", "Los Angeles")
+ * @param search City name or alias (e.g., "LA", "Los Angeles")
  */
-export default async function collectCenters(cityInput: string) {
-  console.info('Starting grid-based collection for: "%s"', cityInput);
+export default async function collectCenters(search: string) {
+  console.info('Starting collection for: "%s"', search);
 
-  // Step 1: Resolve metro area
-  const counties = resolveMetroArea(cityInput);
-  console.info("Metro area counties: %s", counties.join(", "));
+  // Step 1: Resolve metro area from city/county name (e.g., "LA", "Los Angeles")
+  const counties = resolveMetroArea(search);
+  console.info("Counties: %s", counties.join(", "));
 
-  // Step 2: Geocode all counties
+  // Step 2: Geocode all counties to get bounding boxes
   const geocoded = await mapAsync(counties, geocodeCounty);
 
-  // Step 3: Merge bounding boxes
+  // Step 3: Merge bounding boxes to get a single bounding box
   const mergedBounds = mergeBounds(geocoded.map((g) => g.bounds));
 
-  // Step 4: Generate grid
+  // Step 4: Generate grid of search points
   const radiusKm = 50; // Google Places max radius
   const grid = generateHexGrid(mergedBounds, radiusKm);
-  const estimate = estimateGridSize(mergedBounds, radiusKm);
-  console.info(
-    "Generated %d grid points (estimated %d needed)",
-    grid.length,
-    estimate,
-  );
 
-  // Step 5: Search each grid point
-  const spinner = ora("Searching grid points...").start();
+  // Step 5: Search each grid point for shopping centers
+  const spinner = ora(
+    `Searching for shopping centers in ${counties.join(", ")}...`,
+  ).start();
   const centers: Awaited<ReturnType<typeof nearbySearch>> = [];
 
   for (const point of grid) {
-    spinner.text = `Searching grid point ${point.lat.toFixed(3)},${point.lng.toFixed(3)}`;
+    spinner.text = `Searching for shopping centers at ${point.lat.toFixed(3)},${point.lng.toFixed(3)}`;
     try {
       const results = await nearbySearch(point, radiusKm * 1000); // Convert km to meters
       centers.push(...results);
     } catch (error) {
       spinner.fail(
-        `Grid point ${point.lat.toFixed(3)},${point.lng.toFixed(3)} failed: ${error instanceof Error ? error.message : String(error)}`,
+        `Searching for shopping centers at ${point.lat.toFixed(3)},${point.lng.toFixed(3)} failed: ${error instanceof Error ? error.message : String(error)}`,
       );
       throw error;
     }
   }
-  spinner.succeed(`Searched ${grid.length} grid points`);
-
-  console.info("\x1b[32m  ✓ Found %d unique centers\x1b[0m", centers.length);
-
-  // Save grid metadata for cache/resume capability
-  await saveGridMetadata({
-    cityInput,
-    counties,
-    bounds: mergedBounds,
-    gridPoints: grid,
-    centersFound: centers.length,
-  });
+  spinner.succeed(`Found ${centers.length} shopping centers in ${search}`);
 
   // Step 7: Enrich each center (same as collectCenters.ts)
   // Partition into new vs existing
   const [_, creating] = partition(centers, (center) =>
-    existsSync(getSaveFilename(center)),
+    existsSync(getCenterSaveFilename(center)),
   );
   console.info(
     "\x1b[33m  → Processing %d new centers (skipping %d existing)\x1b[0m",
@@ -105,10 +90,7 @@ export default async function collectCenters(cityInput: string) {
       const enriched = await enrichCenter({ center, bodyText });
 
       // Save to file
-      const filename = getSaveFilename({
-        name: center.name,
-        state: center.state,
-      });
+      const filename = getCenterSaveFilename(center);
       await mkdir(dirname(filename), { recursive: true });
       await writeFile(
         filename,
@@ -150,7 +132,7 @@ export default async function collectCenters(cityInput: string) {
 /**
  * Get save filename for a center
  */
-function getSaveFilename(center: { name: string; state: string }) {
+function getCenterSaveFilename(center: { name: string; state: string }) {
   const normalized = center.name
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, "")
@@ -160,35 +142,4 @@ function getSaveFilename(center: { name: string; state: string }) {
 
   const slug = `${center.state.toLowerCase()}-${normalized}`;
   return resolve(`prisma/seed/${center.state.toLowerCase()}/${slug}.json`);
-}
-
-/**
- * Save grid metadata for resumability
- */
-async function saveGridMetadata(metadata: {
-  cityInput: string;
-  counties: string[];
-  bounds: BoundingBox;
-  gridPoints: Array<{ lat: number; lng: number }>;
-  centersFound: number;
-}) {
-  const slug = metadata.cityInput
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-");
-
-  const filename = resolve(`prisma/seed/grid-${slug}.json`);
-  await writeFile(
-    filename,
-    JSON.stringify(
-      {
-        ...metadata,
-        searchDate: new Date().toISOString(),
-      },
-      null,
-      2,
-    ),
-  );
-
-  console.info("\x1b[32m  ✓ Saved grid metadata: %s\x1b[0m", filename);
 }

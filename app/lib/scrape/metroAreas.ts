@@ -89,7 +89,7 @@ export const METRO_AREAS: Record<string, string[]> = {
  * @param input City name or alias (e.g., "LA", "Los Angeles")
  * @returns Array of county names, or single-item array with input if no mapping found
  */
-export function resolveMetroArea(input: string): string[] {
+export default function resolveMetroArea(input: string): string[] {
   const normalized = input.trim();
 
   // Check direct match (case-insensitive)

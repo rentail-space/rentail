@@ -8,6 +8,7 @@ import { invariant, mapAsync } from "es-toolkit";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import ora from "ora";
+import type { Property } from "prisma/generated/client";
 import sharp from "sharp";
 import zod from "zod";
 import envVars from "../env";
@@ -21,6 +22,7 @@ const placeDetailsSchema = zod.object({
   address: zod.string().describe("The place's address"),
   city: zod.string().describe("The place's city"),
   country: zod.string().describe("The place's country"),
+  googlePlaceID: zod.string().describe("The place's Google Place ID"),
   imageURLs: zod.array(zod.string()).describe("The place's image URLs"),
   latitude: zod.number().describe("The place's latitude"),
   longitude: zod.number().describe("The place's longitude"),
@@ -34,51 +36,6 @@ const placeDetailsSchema = zod.object({
   summary: zod.string().describe("The place's summary").optional(),
   website: zod.string().describe("The place's website"),
 });
-
-/**
- * Get place details from Google Places API. The Places API charges for usage,
- * so this function uses database caching to avoid redundant API calls.
- *
- * @param searchName Name of the place to search for
- * @param placeID ID of the place (eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw")
- * @returns Place details, or undefined if the place is not found or not operational
- */
-export async function fromGooglePlaces({
-  displayName,
-  placeID,
-}: {
-  displayName: string;
-  placeID?: string;
-}): Promise<zod.infer<typeof placeDetailsSchema> | undefined> {
-  const spinner = ora(`Fetching Google Places data for ${displayName}`).start();
-  try {
-    // eg "google-places:beverly-center"
-    const key = `google-places:${displayName
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "")
-      .replace(/\s+/g, "-")
-      .replace(/-+/g, "-")}`;
-
-    const cache = await prisma.cache.findUnique({ where: { key } });
-    if (cache) {
-      const place = placeDetailsSchema.parse(cache.value);
-      spinner.succeed();
-      return place;
-    }
-
-    const place = placeID
-      ? await getPlaceDetails({ displayName, placeID })
-      : await searchText(displayName);
-    await prisma.cache.create({ data: { key, value: place ?? "" } });
-    spinner.succeed();
-    return place;
-  } catch (error) {
-    spinner.fail(
-      `Failed to fetch ${displayName} details from Google Places: ${error}`,
-    );
-    throw error;
-  }
-}
 
 /**
  * Fields to include in the find place request.
@@ -160,51 +117,6 @@ export type PlacesAPIPlace = {
 };
 
 /**
- * Find a place by name using the Google Places API.
- *
- * @param searchName Name of the place to search for
- * @returns First place details, or undefined if the place is not found or not operational
- */
-async function searchText(
-  searchName: string,
-): Promise<zod.infer<typeof placeDetailsSchema> | undefined> {
-  const response = await fetch(
-    "https://places.googleapis.com/v1/places:searchText",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        includedType: "shopping_mall",
-        includePureServiceAreaBusinesses: false,
-        maxResultCount: 3,
-        textQuery: searchName,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        "User-Agent": "rentail.space/1.0 (support@rentail.space)",
-        "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
-        "X-Goog-FieldMask": findPlaceFields
-          .map((field) => `places.${field}`)
-          .join(","),
-      },
-    },
-  );
-  invariant(response.ok, "Failed to find place");
-
-  const { places } = (await response.json()) as { places?: PlacesAPIPlace[] };
-  invariant(places, "No places found");
-
-  const place = places.filter((place) =>
-    similarNames(place.displayName.text, searchName),
-  )[0];
-  invariant(
-    place.primaryType === "shopping_mall",
-    "Place is not a shopping mall",
-  );
-  invariant(place.businessStatus === "OPERATIONAL", "Place is not operational");
-  return await toDatabasePlace({ displayName: searchName, place });
-}
-
-/**
  * Search for shopping malls near a location with caching
  *
  * @param location Center point
@@ -235,8 +147,7 @@ export async function nearbySearch(
     const openPlaces = await searchNearbyRaw({ location, radiusMeters });
     const structured = await mapAsync(
       openPlaces,
-      async (place) =>
-        await toDatabasePlace({ displayName: place.displayName.text, place }),
+      async (place) => await toDatabasePlace(place),
     );
 
     // Cache results (30-day TTL)
@@ -313,30 +224,65 @@ async function searchNearbyRaw({
 }
 
 /**
+ * Get place details from Google Places API. The Places API charges for usage,
+ * so this function uses database caching to avoid redundant API calls.
+ *
+ * @param searchName Name of the place to search for
+ * @param placeID ID of the place (eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw")
+ * @returns Place details, or undefined if the place is not found or not operational
+ */
+export async function updatePlaceDetails(property: Property) {
+  const spinner = ora(`Updating details for ${property.name}`).start();
+  try {
+    // eg "google-places:property-id"
+    const key = `google-places:${property.name
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")}`;
+
+    const cache = await prisma.cache.findUnique({ where: { key } });
+    if (cache) {
+      const place = placeDetailsSchema.parse(cache.value);
+      spinner.succeed();
+      return place;
+    }
+
+    const place = await getPlaceDetails(property.googlePlaceID);
+    await prisma.cache.create({ data: { key, value: place ?? "" } });
+    spinner.succeed();
+    return place;
+  } catch (error) {
+    spinner.fail(
+      `Failed to fetch ${property.name} details from Google Places: ${error}`,
+    );
+    throw error;
+  }
+}
+
+/**
  * Get place details from Google Places API.
  *
- * @param placeID ID of the place (eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw")
- * @param displayName Display name of the place
+ * @param googlePlaceID ID of the place (eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw")
  * @returns Place details
  */
-async function getPlaceDetails({
-  placeID,
-  displayName,
-}: {
-  placeID: string;
-  displayName: string;
-}): Promise<zod.infer<typeof placeDetailsSchema>> {
-  const response = await fetch(`https://places.googleapis.com/v1/${placeID}`, {
-    headers: {
-      "Content-Type": "application/json",
-      "User-Agent": "rentail.space/1.0 (support@rentail.space)",
-      "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
-      "X-Goog-FieldMask": findPlaceFields.join(","),
+async function getPlaceDetails(
+  googlePlaceID: string,
+): Promise<zod.infer<typeof placeDetailsSchema>> {
+  const response = await fetch(
+    `https://places.googleapis.com/v1/${googlePlaceID}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "rentail.space/1.0 (support@rentail.space)",
+        "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
+        "X-Goog-FieldMask": findPlaceFields.join(","),
+      },
     },
-  });
+  );
   invariant(response.ok, "Failed to get place details");
   const place = (await response.json()) as PlacesAPIPlace;
-  return await toDatabasePlace({ displayName, place });
+  return await toDatabasePlace(place);
 }
 
 /**
@@ -346,13 +292,9 @@ async function getPlaceDetails({
  * @param place Google Places API place details
  * @returns Place details
  */
-async function toDatabasePlace({
-  displayName,
-  place,
-}: {
-  displayName: string;
-  place: PlacesAPIPlace;
-}): Promise<zod.infer<typeof placeDetailsSchema>> {
+async function toDatabasePlace(
+  place: PlacesAPIPlace,
+): Promise<zod.infer<typeof placeDetailsSchema>> {
   const address = [
     // eg "8500 Beverly Blvd"
     longText(place.addressComponents, "street_number"),
@@ -372,6 +314,7 @@ async function toDatabasePlace({
     "administrative_area_level_1",
   );
   const country = shortText(place.addressComponents, "country");
+  const displayName = place.displayName.text;
   const slug = createSlug({ state, displayName });
   const imageURLs = place.photos
     ? await downloadPhotos({ slug, photos: place.photos })
@@ -382,11 +325,12 @@ async function toDatabasePlace({
   invariant(place.location?.longitude, "Google Places data missing longitude");
 
   return {
-    name: displayName,
     address,
     city,
-    state,
     country,
+    googlePlaceID: place.name,
+    name: displayName,
+    state,
     latitude: place.location.latitude,
     longitude: place.location.longitude,
     phone: place.internationalPhoneNumber
@@ -572,42 +516,4 @@ function createSlug({
       .replace(/-+/g, "-") // Collapse multiple hyphens
       .replace(/^-|-$/g, "") // Trim hyphens
   }`;
-}
-
-/**
- * Returns true if the two shopping center names are similar enough to be
- * considered a match.  Ignores case, punctuation, "&" vs "and", and trims
- * whitespace/dashes.  Handles things like "The Beverly Center" vs "Beverly
- * Center", etc.
- */
-function similarNames(displayName: string, placeName: string): boolean {
-  function normalize(str: string): string {
-    return str
-      .toLowerCase()
-      .replace(/\b(the|mall|shopping center|plaza|shops|at|of|on)\b/g, "")
-      .replace(/[&]/g, "and")
-      .replace(/[^a-z0-9]+/g, " ") // Replace non-alphanum with space
-      .replace(/\s+/g, " ") // Collapse whitespace
-      .trim();
-  }
-
-  const normA = normalize(displayName);
-  const normB = normalize(placeName);
-
-  // Direct match or one contains the other
-  if (normA === normB) return true;
-  if (normA.includes(normB) || normB.includes(normA)) return true;
-
-  // If both are reasonably long, require 80% overlap of words
-  const wordsA = normA.split(" ");
-  const wordsB = normB.split(" ");
-  const setA = new Set(wordsA);
-  const setB = new Set(wordsB);
-  const intersection = [...setA].filter((w) => setB.has(w));
-
-  const overlapA = intersection.length / wordsA.length;
-  const overlapB = intersection.length / wordsB.length;
-  if (overlapA >= 0.8 || overlapB >= 0.8) return true;
-
-  return false;
 }

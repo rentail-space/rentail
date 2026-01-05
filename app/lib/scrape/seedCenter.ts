@@ -33,6 +33,7 @@ const schema = z.object({
     "OutletCenter",
     "LifestyleCenter",
   ]),
+  googlePlaceID: z.string(),
 
   spaces: z
     .array(
