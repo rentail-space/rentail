@@ -5,12 +5,12 @@ import { z } from "zod";
 import { classify } from "~/lib/models";
 
 const spaceSchema = z.object({
-  number: z.string().min(1, "Space number required"),
+  number: z.string().optional(),
   type: z.enum(["Cart", "Inline", "Storage", "Other"]),
-  size: z.number().int().positive().describe("Size in square feet"),
-  floor: z.number().int().min(1).max(10),
-  available: z.boolean().default(false),
-  imageURLs: z.array(z.string().url()).optional(),
+  size: z.number().optional().describe("Size in square feet"),
+  floor: z.number().optional(),
+  available: z.boolean().optional().default(false),
+  imageURLs: z.array(z.string()).optional(),
 });
 
 /**
@@ -116,9 +116,7 @@ If no spaces are found or the page doesn't contain leasing information, return a
       output: Output.array({ element: spaceSchema }),
       ...classify,
     });
-
     spinner.succeed(`Found ${output.length} spaces for ${centerName}`);
-
     return output;
   } catch (error) {
     spinner.fail(

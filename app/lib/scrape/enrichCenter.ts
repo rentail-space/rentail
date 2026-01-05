@@ -1,4 +1,4 @@
-import { Output, generateText } from "ai";
+import { generateText } from "ai";
 import ora from "ora";
 import type zod from "zod";
 import { z } from "zod";
@@ -17,7 +17,7 @@ const enrichedSchema = z.object({
   numberOfStores: z.int().positive().optional(),
   squareFootage: z.int().positive().optional(),
   summary: z.string().optional(),
-  tier: z.int().min(1).max(3).optional(),
+  tier: z.int().int().min(1).max(3).optional(),
 });
 
 /**
@@ -71,9 +71,13 @@ Tasks:
   - The summary should be a 2-3 sentences long
   - The summary should be written in a way that is easy to understand and engaging
 
-3. Find square footage and store/building count from website data (Google doesn't have this)
+3. Find the current square footage from the website data. If no square footage
+   is found, set to null.
 
-4. Research and write a comprehensive demographic summary for this shopping center (Google doesn't have this)
+4. Find the current store/building count from the website data. If no store/building count
+   is found, set to null.
+
+5. Research and write a comprehensive demographic summary for this shopping center (Google doesn't have this)
    - Include visitor demographics (age groups, income levels, household composition)
    - Describe the trade area characteristics and primary market segments
    - Note shopping patterns and preferences of typical visitors
@@ -81,7 +85,7 @@ Tasks:
    - Format as a 3-5 sentence narrative summary (not bullet points)
    - If no reliable demographic information is available, omit this field
 
-5. Classify centerType using this hybrid approach:
+6. Classify centerType using this hybrid approach:
    - Primary: Square footage + store count + enclosed/open-air
    - Secondary: Explicit type mentions in website ("outlet center", "lifestyle center")
    - Tertiary: Name patterns ("Westfield" = typically RegionalMall)
@@ -95,7 +99,7 @@ Tasks:
 
    If uncertain, choose type matching square footage, or StripCenter if no size data.
 
-6. Assign a tier classification from 1 to 3 based on desirability and price point:
+7. Assign a tier classification from 1 to 3 based on desirability and price point:
    - Tier 3: Upscale, high-end shopping centers with luxury brands and premium retailers
      Examples: Westfield Century City, The Grove, South Coast Plaza, Fashion Island
      Indicators: Luxury tenants (Gucci, Louis Vuitton, Tesla), high-end dining, valet parking
@@ -113,16 +117,23 @@ Tasks:
 Use scraped data as primary source. Fill gaps with your knowledge.
 For optional fields without reliable data, omit them entirely (do not set to null).`;
 
-    const { output } = await generateText({
+    const { text } = await generateText({
       abortSignal: AbortSignal.timeout(30_000),
-      prompt: enrichmentPrompt,
-      output: Output.object({ schema: enrichedSchema }),
+      prompt: `${enrichmentPrompt}\n\nRespond with ONLY valid JSON, no other text.`,
       maxRetries: 3,
       ...conversational,
     });
-
+    // NOTE: Anthropic's structured outputs don't support numerical constraints
+    // like minimum, maximum, exclusiveMinimum in JSON Schema, so we can't use
+    // Output.object({ schema: enrichedSchema }) directly. Instead, we parse the
+    // JSON string and validate it using Zod.
+    const cleaned = text
+      .replace(/^```(?:json)?\s*\n?/g, "")
+      .replace(/\n?```\s*$/g, "");
+    const parsed = JSON.parse(cleaned);
+    const validated = enrichedSchema.parse(parsed);
     spinner.succeed();
-    return output;
+    return validated;
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
     spinner.fail(`Enrichment failed: ${reason}`);
