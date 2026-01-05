@@ -9,6 +9,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import ora from "ora";
 import { chromium } from "playwright";
+import externalLink from "../externalLink";
 import enrichCenter from "./enrichCenter";
 import { nearbySearch } from "./fromGooglePlaces";
 import { geocodeCounty, mergeBounds } from "./geocodeCounty";
@@ -81,14 +82,11 @@ export default async function collectCenters(search: string) {
   for (const center of creating) {
     try {
       // Scrape website
-      const { bodyText } = await scrapeCenter({ browser, url: center.website });
+      center.website = externalLink(center.website);
+      const { bodyText } = await scrapeCenter({ browser, center });
 
       // Extract spaces
-      const spaces = await scrapeSpaces({
-        browser,
-        centerName: center.name,
-        url: center.website,
-      });
+      const spaces = await scrapeSpaces({ browser, center });
 
       // Enrich with Claude
       const enriched = await enrichCenter({ center, bodyText });

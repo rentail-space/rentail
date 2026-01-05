@@ -20,25 +20,23 @@ const spaceSchema = z.object({
  * This function attempts to find the leasing/spaces page and extract all
  * available retail space listings with their details (number, type, size, etc.)
  *
- * @param websiteUrl - The center's main website URL
- * @param centerName - The name of the center (for logging)
+ * @param browser - The browser to use
+ * @param center - The center to scrape
  * @returns Array of retail space objects
  */
 export default async function scrapeSpaces({
   browser,
-  centerName,
-  url,
+  center,
 }: {
   browser: Browser;
-  centerName: string;
-  url: string;
+  center: { name: string; website: string };
 }): Promise<z.infer<typeof spaceSchema>[]> {
   const page = await browser.newPage();
-  const spinner = ora(`Scraping spaces for ${centerName}...`).start();
+  const spinner = ora(`Scraping spaces for ${center.name}...`).start();
 
   try {
     // Navigate to main website
-    await page.goto(url, { timeout: 30_000 });
+    await page.goto(center.website, { timeout: 30_000 });
     await page.waitForLoadState("networkidle", { timeout: 10_000 });
 
     // Try to find and click on leasing/spaces link
@@ -80,11 +78,11 @@ export default async function scrapeSpaces({
       .catch(() => []);
 
     // Use AI to extract space data
-    spinner.text = `Extracting space data for ${centerName}...`;
+    spinner.text = `Extracting space data for ${center.name}...`;
 
     const prompt = `Extract all available retail space listings from this shopping center website.
 
-Website: ${centerName}
+Website: ${center.website}
 
 <body>
 ${bodyText.slice(0, 15000)}
@@ -116,11 +114,11 @@ If no spaces are found or the page doesn't contain leasing information, return a
       output: Output.array({ element: spaceSchema }),
       ...classify,
     });
-    spinner.succeed(`Found ${output.length} spaces for ${centerName}`);
+    spinner.succeed(`Found ${output.length} spaces for ${center.name}`);
     return output;
   } catch (error) {
     spinner.fail(
-      `Failed to scrape spaces for ${centerName}: ${error instanceof Error ? error.message : String(error)}`,
+      `Failed to scrape spaces for ${center.name}: ${error instanceof Error ? error.message : String(error)}`,
     );
     return [];
   } finally {
