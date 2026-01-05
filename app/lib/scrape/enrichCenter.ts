@@ -131,7 +131,10 @@ For optional fields without reliable data, omit them entirely (do not set to nul
       .replace(/^```(?:json)?\s*\n?/g, "")
       .replace(/\n?```\s*$/g, "");
     const parsed = JSON.parse(cleaned);
-    const validated = enrichedSchema.parse(parsed);
+    const validated = enrichedSchema.parse(parsed, {
+      jitless: true,
+      reportInput: true,
+    });
     spinner.succeed();
     return validated;
   } catch (error) {

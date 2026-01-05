@@ -288,6 +288,8 @@ async function getPlaceDetails(
 async function toDatabasePlace(
   place: PlacesAPIPlace,
 ): Promise<zod.infer<typeof placeDetailsSchema>> {
+  console.log(place.addressComponents);
+
   const address = [
     // eg "8500 Beverly Blvd"
     longText(place.addressComponents, "street_number"),
@@ -426,10 +428,12 @@ async function downloadPhotos({
  * @returns Long text of the address component
  */
 function longText(
-  addressComponents: Array<{ types: string[]; longText: string }>,
+  addressComponents: Array<{ types?: string[]; longText: string }>,
   type: string,
 ): string {
-  const component = addressComponents.find(({ types }) => types.includes(type));
+  const component = addressComponents.find(({ types }) =>
+    types?.includes(type),
+  );
   return component?.longText ?? "";
 }
 
@@ -441,10 +445,12 @@ function longText(
  * @returns Short text of the address component
  */
 function shortText(
-  addressComponents: Array<{ types: string[]; shortText: string }>,
+  addressComponents: Array<{ types?: string[]; shortText: string }>,
   type: string,
 ): string {
-  const component = addressComponents.find(({ types }) => types.includes(type));
+  const component = addressComponents.find(({ types }) =>
+    types?.includes(type),
+  );
   return component?.shortText ?? "";
 }
 
