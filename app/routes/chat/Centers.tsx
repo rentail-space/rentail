@@ -3,6 +3,7 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { Activity, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
+import LoadingImage from "~/components/ui/LoadingImage";
 import { trackEvent } from "~/lib/analytics";
 import { cn } from "~/lib/utils";
 
@@ -199,27 +200,11 @@ function HoverCard({
               {center.description.split("\n")[0]}
             </p>
           </div>
-
-          <figure
-            className="max-h-48 overflow-hidden border-black border-y-2"
-            style={{
-              background:
-                "repeating-linear-gradient(135deg, #e5e7eb 0 24px, #fff 24px 48px)",
-            }}
-          >
-            <img
-              alt={center.name}
-              onLoad={(e) => {
-                e.currentTarget.classList.remove("opacity-0");
-              }}
-              onError={(e) => {
-                e.currentTarget.parentElement?.remove();
-              }}
-              src={center.imageURLs[0]}
-              className="object-cover opacity-0"
-            />
-          </figure>
-
+          <LoadingImage
+            maxHeight={300}
+            alt={center.name}
+            url={center.imageURLs[0]}
+          />
           <div className="p-4 font-bold text-black text-sm">
             {center.spaces.length > 1
               ? `${center.spaces.length} available spaces`

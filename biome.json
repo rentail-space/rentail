@@ -15,7 +15,6 @@
       "!.react-router",
       "!.vercel",
       "!.vscode",
-      "!app/components/ui",
       "!build",
       "!node_modules",
       "!prisma/generated"
@@ -58,7 +57,12 @@
         "noUnsafeDeclarationMerging": "error",
         "noConsole": {
           "options": {
-            "allow": ["assert", "error", "info", "warn"]
+            "allow": [
+              "assert",
+              "error",
+              "info",
+              "warn"
+            ]
           }
         }
       },

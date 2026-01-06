@@ -32,10 +32,7 @@ export default function BlogPostsGrid({
             ))}
             {limit && posts.length > limit && (
               <div className="col-span-full text-center">
-                <ActiveLink
-                  to="/blog"
-                  variant="highlight"
-                >
+                <ActiveLink to="/blog" variant="highlight">
                   Explore all blog posts <ArrowRight className="h-6 w-6" />
                 </ActiveLink>
               </div>
