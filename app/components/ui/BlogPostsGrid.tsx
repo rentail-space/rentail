@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import type { BlogPost } from "~/lib/blogPosts.server";
 import { cn } from "~/lib/utils";
 import { ActiveLink } from "./ActiveLink";
+import LoadingImage from "./LoadingImage";
 
 export default function BlogPostsGrid({
   className,
@@ -54,17 +55,12 @@ function BlogPostCard({ post }: { post: BlogPost }) {
         "transform transition-all duration-200 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:rotate-1 hover:shadow-[6px_6px_0px_0px_black]",
       )}
     >
-      {post.image ? (
-        <div className="aspect-video w-full overflow-hidden">
-          <img
-            alt={post.alt}
-            className="h-full w-full object-cover transition-transform group-hover:scale-105"
-            src={`/blog/${post.image}`}
-          />
-        </div>
-      ) : (
-        <div className="aspect-video w-full bg-[hsl(47,100%,95%)]" />
-      )}
+      <LoadingImage
+        alt={post.alt}
+        figureClassName="border-b-2 border-black"
+        maxHeight={200}
+        src={`/blog/${post.image}`}
+      />
       <div className="flex h-60 flex-col justify-between gap-3 p-6">
         <div>
           <time

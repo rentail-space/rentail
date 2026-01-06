@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
+import LoadingImage from "~/components/ui/LoadingImage";
 import { type BlogPost, loadBlogPost } from "~/lib/blogPosts.server";
 import type { Route } from "./+types/blog.$slug";
 
@@ -48,20 +49,16 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
       <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-12 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
         <h1>{title}</h1>
 
-        {image && (
-          <figure className="-mx-8 my-6 overflow-hidden md:-mx-12">
-            <img
-              alt={alt}
-              className="h-[60vh] w-full object-cover"
-              src={image}
-            />
-          </figure>
-        )}
+        <LoadingImage
+          alt={alt}
+          minHeight={300}
+          maxHeight={600}
+          src={`/blog/${image}`}
+        />
 
         <p className="prose prose-lg mx-auto text-gray-400 text-md italic">
           {summary}
         </p>
-
         <Streamdown
           className="prose prose-lg mx-auto"
           controls={{ code: false, mermaid: false, table: false }}
@@ -70,7 +67,6 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
         >
           {body}
         </Streamdown>
-
         <p className="flex items-center gap-2 text-gray-500 text-sm">
           <HeartIcon className="h-4 w-4 text-red-500" fill="currentColor" />
           <span>
@@ -84,7 +80,6 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
             )}
           </span>
         </p>
-
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",

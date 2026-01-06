@@ -201,9 +201,10 @@ function HoverCard({
             </p>
           </div>
           <LoadingImage
-            maxHeight={300}
             alt={center.name}
-            url={center.imageURLs[0]}
+            figureClassName="border-y-2 border-black"
+            maxHeight={300}
+            src={center.imageURLs[0]}
           />
           <div className="p-4 font-bold text-black text-sm">
             {center.spaces.length > 1

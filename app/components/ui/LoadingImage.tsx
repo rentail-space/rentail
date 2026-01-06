@@ -1,17 +1,30 @@
+import { useEffect, useRef } from "react";
+import { cn } from "~/lib/utils";
+
 export default function LoadingImage({
   alt,
-  url,
+  figureClassName,
+  imgClassName,
   maxHeight,
   minHeight = maxHeight,
+  src,
 }: {
   alt: string;
-  url: string;
+  figureClassName?: string;
+  imgClassName?: string;
   maxHeight: number;
   minHeight?: number;
+  src: string;
 }) {
+  const imgRef = useRef<HTMLImageElement>(null);
+  useEffect(() => {
+    // NOTE React doesn't fire onLoad for SSR, so we need this hack.
+    if (imgRef.current?.complete) imgRef.current.classList.remove("opacity-0");
+  }, []);
+
   return (
     <figure
-      className="max-fill overflow-hidden border-black border-y-2"
+      className={cn("w-full overflow-hidden", figureClassName)}
       style={{
         background:
           "repeating-linear-gradient(135deg, #e5e7eb 0 24px, #fff 24px 48px)",
@@ -21,14 +34,18 @@ export default function LoadingImage({
     >
       <img
         alt={alt}
-        onLoad={(e) => {
-          e.currentTarget.classList.remove("opacity-0");
-        }}
+        className={cn(
+          "h-full w-full object-cover object-center opacity-0",
+          imgClassName,
+        )}
         onError={(e) => {
           e.currentTarget.remove();
         }}
-        src={url}
-        className="h-full w-full object-cover object-center opacity-0"
+        onLoad={(e) => {
+          e.currentTarget.classList.remove("opacity-0");
+        }}
+        ref={imgRef}
+        src={src}
       />
     </figure>
   );

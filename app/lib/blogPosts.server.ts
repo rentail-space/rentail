@@ -1,8 +1,8 @@
+import { invariant } from "es-toolkit";
+import { DateTime } from "luxon";
 import { readFileSync, readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path, { basename, join } from "node:path";
-import { invariant } from "es-toolkit";
-import { DateTime } from "luxon";
 import removeMd from "remove-markdown";
 import parseFrontMatter from "~/lib/parseFrontMatter";
 import truncateWords from "~/lib/truncateWords";
@@ -10,9 +10,9 @@ import truncateWords from "~/lib/truncateWords";
 const dirname = path.resolve("./app/data/blog");
 
 export type BlogPost = {
-  alt?: string;
+  alt: string;
   body: string;
-  image?: string;
+  image: string;
   published: Date;
   slug: string;
   summary: string;
@@ -86,9 +86,9 @@ export async function loadBlogPost(slug?: string): Promise<BlogPost> {
   const published = getPublishedData(filename).toJSDate();
   const { attributes, body } = parseFrontMatter<{
     title: string;
-    alt?: string;
-    image?: string;
-    summary?: string;
+    alt: string;
+    image: string;
+    summary: string;
   }>(post);
   return {
     ...attributes,

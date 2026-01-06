@@ -36,7 +36,6 @@ describe("Blog Post Rendering", () => {
     // Check image styling classes
     const imageClasses = await heroImage.getAttribute("class");
     expect(imageClasses).toContain("w-full");
-    expect(imageClasses).toContain("h-[60vh]");
     expect(imageClasses).toContain("object-cover");
   });
 

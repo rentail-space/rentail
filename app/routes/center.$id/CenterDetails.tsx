@@ -3,6 +3,7 @@ import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import CentersMap from "~/components/ui/CentersMap";
+import LoadingImage from "~/components/ui/LoadingImage";
 import CenterAttributes from "./CenterAttributes";
 import { CenterSpaces } from "./CenterSpaces";
 
@@ -23,9 +24,11 @@ export default function CenterDetails({
 
       {center.imageURLs.length > 0 && (
         <Card className="bg-white p-0!">
-          <picture className="max-h-[500px] w-full overflow-hidden">
-            <img src={center.imageURLs[0]} alt={center.name} />
-          </picture>
+          <LoadingImage
+            alt={center.name}
+            maxHeight={500}
+            src={center.imageURLs[0]}
+          />
         </Card>
       )}
 
