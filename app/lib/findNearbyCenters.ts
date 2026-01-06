@@ -48,6 +48,7 @@ export default async function findNearbyCenters({
       { tier: "desc" },
       { spaces: { _count: "desc" } },
       { rating: "desc" },
+      { name: "asc" },
     ],
     take: limit,
     where: {
