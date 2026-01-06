@@ -16,7 +16,7 @@ import externalLink from "~/lib/externalLink";
 import formatPhoneNumber from "~/lib/formatPhoneNumber";
 import timeOfDay from "~/lib/timeOfDay";
 
-export default function CenterInfo({
+export default function CenterAttributes({
   center,
 }: {
   center: PropertyGetPayload<{ include: { spaces: true } }>;
@@ -87,13 +87,14 @@ export default function CenterInfo({
           <div className="items-top flex flex-row gap-2 pb-4">
             <GlobeIcon className="h-6 w-6" />
             <ActiveLink
+              className="truncate"
               onClick={() =>
                 trackEvent("click_external_link", { category: "center_info" })
               }
               target="_blank"
               to={externalLink(center.website)}
             >
-              {center.website}
+              {new URL(center.website).hostname}
             </ActiveLink>
           </div>
         )}

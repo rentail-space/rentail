@@ -3,7 +3,7 @@ import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import CentersMap from "~/components/ui/CentersMap";
-import CenterInfo from "./CenterInfo";
+import CenterAttributes from "./CenterAttributes";
 import { CenterSpaces } from "./CenterSpaces";
 
 export default function CenterDetails({
@@ -19,7 +19,7 @@ export default function CenterDetails({
         </CardContent>
       </Card>
 
-      <CenterInfo center={center} />
+      <CenterAttributes center={center} />
 
       {center.imageURLs.length > 0 && (
         <Card className="bg-white p-0!">
