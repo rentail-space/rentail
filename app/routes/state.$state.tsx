@@ -6,7 +6,7 @@ import {
   StarIcon,
 } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
-import { Children, Fragment, useRef } from "react";
+import { Fragment, useRef } from "react";
 import { Link } from "react-router";
 import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
@@ -212,15 +212,19 @@ function KeyCenterStats({
       )}
 
       {center.rating && center.rating > 3 && (
-        <span className="whitespace-nowrap">
+        <span className="flex flex-row items-center gap-1">
           {clamp(center.rating, 1, 5).toFixed(1)}
-          {center.reviewCount && center.reviewCount >= 5 ? (
-            <> from {center.reviewCount.toLocaleString()} reviews</>
-          ) : (
-            " stars"
-          )}
+          <StarIcon className="h-4 w-4 text-yellow-500" fill="currentColor" />
         </span>
       )}
+      {center.reviewCount &&
+        center.reviewCount >= 3 &&
+        center.rating &&
+        center.rating >= 3 && (
+          <span className="whitespace-nowrap">
+            {center.reviewCount.toLocaleString()} reviews
+          </span>
+        )}
 
       {center.spaces.length > 0 && (
         <span className="whitespace-nowrap">
@@ -233,15 +237,14 @@ function KeyCenterStats({
 }
 
 function SplitCenterStats({ children }: { children: React.ReactNode[] }) {
-  const visible = Children.toArray(children).filter((child) => !!child);
   return (
     <div className="flex flex-row flex-wrap gap-x-2 text-gray-500 text-sm">
       {children.map(
         (child, index) =>
           child && (
             <Fragment key={index.toString()}>
+              {index > 0 && <span>&bull;</span>}
               {child}
-              {index < visible.length - 1 && <span>&bull;</span>}
             </Fragment>
           ),
       )}
