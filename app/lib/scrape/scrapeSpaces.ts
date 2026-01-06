@@ -5,12 +5,18 @@ import { z } from "zod";
 import { classify } from "~/lib/models";
 
 const spaceSchema = z.object({
-  number: z.string().optional(),
-  type: z.enum(["Cart", "Inline", "Storage", "Other"]),
+  number: z.string().describe("Space number (eg 'A101', 'B-45', 'Suite 200')"),
+  type: z
+    .enum(["Cart", "Inline", "Storage", "Other"])
+    .describe("Space type (eg 'Cart', 'Inline', 'Storage', 'Other')"),
   size: z.number().optional().describe("Size in square feet"),
-  floor: z.number().optional(),
-  available: z.boolean().optional().default(false),
-  imageURLs: z.array(z.string()).optional(),
+  floor: z.number().optional().describe("Floor number"),
+  available: z
+    .boolean()
+    .optional()
+    .default(false)
+    .describe("Availability status, if known"),
+  imageURLs: z.array(z.string()).optional().describe("Image URLs (optional)"),
 });
 
 /**
@@ -102,6 +108,14 @@ Common patterns to look for:
 - Any section containing multiple retail space listings
 
 Return ALL spaces found. If you can match images to specific spaces based on space numbers in alt text or filenames, include those URLs.
+
+For each space, include the following:
+- Space number (eg "A101", "B-45", "Suite 200")
+- Space type (eg "Cart", "Inline", "Storage", "Other")
+- Size in square feet (optional)
+- Floor number (optional)
+- Availability status, if known
+- Image URLs (optional)
 
 Available images:
 ${images.map((img) => `- ${img.alt}: ${img.src}`).join("\n")}

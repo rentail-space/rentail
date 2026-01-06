@@ -67,7 +67,7 @@ model Property {
   createdAt      DateTime        @map("created_at")                                 @default(now())
   demographics   String?         @map("demographics")
   description    String          @map("description")
-  googlePlaceID  String          @map("google_place_id")
+  googlePlaceID  String          @map("google_place_id")                            @default("")
   id             String          @map("id")                                         @id
   imageURLs      String[]        @map("image_urls")
   latitude       Float           @map("latitude")
@@ -93,17 +93,17 @@ model Property {
 
 model PropertySpace {
   available  Boolean   @map("available")
-  id         String    @map("id")          @id
-  number     String    @map("number")
+  number     String    @map("number") // Unique identifier for the space
   type       SpaceType @map("type")
   size       Int?      @map("size")
   floor      Int?      @map("floor")
   imageURLs  String[]  @map("image_urls")
   property   Property  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   propertyId String    @map("property_id")
-  updatedAt  DateTime  @map("updated_at")  @updatedAt
+  updatedAt  DateTime  @map("updated_at")                                @updatedAt
 
   @@map("property_spaces")
+  @@unique([propertyId, number])
 }
 
 model Session {

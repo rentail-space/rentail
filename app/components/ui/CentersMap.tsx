@@ -37,7 +37,7 @@ export default function CentersMap({
       latitude: true;
       longitude: true;
       name: true;
-      spaces: { select: { id: true } };
+      spaces: { select: { number: true } };
       state: true;
     };
   }>[];
@@ -235,7 +235,7 @@ function CenterPopup({
       latitude: true;
       longitude: true;
       name: true;
-      spaces: { select: { id: true } };
+      spaces: { select: { number: true } };
       state: true;
     };
   }>;

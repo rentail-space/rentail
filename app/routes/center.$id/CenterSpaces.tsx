@@ -15,7 +15,7 @@ export function CenterSpaces({ spaces }: { spaces: PropertySpace[] }) {
               : a.number.localeCompare(b.number),
           )
           .map((space) => (
-            <Space key={space.id} space={space} />
+            <Space key={space.number} space={space} />
           ))}
       </CardContent>
     </Card>
