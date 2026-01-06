@@ -1,0 +1,26 @@
+{
+  "address": "2244 Otay Lakes Road",
+  "city": "Chula Vista",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ7QLa0G1F2YARfi-w0zyesbE",
+  "name": "Eastlake Village Center",
+  "state": "CA",
+  "latitude": 32.6468584,
+  "longitude": -116.9675306,
+  "phone": "++1 619-661-6681",
+  "imageURLs": [
+    "/images/malls/ca-eastlake-village-center-1.jpg"
+  ],
+  "openFrom": 700,
+  "openUntil": 2200,
+  "rating": 4.5,
+  "reviewCount": 1250,
+  "website": "http://evcsouth.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Eastlake Village Center serves the affluent Eastlake community in Chula Vista, attracting primarily middle to upper-middle income families with household incomes ranging from $75,000 to $150,000+. The trade area demographics skew toward young families and professionals aged 25-54, with a significant Hispanic population reflective of South San Diego County. The center draws from the master-planned Eastlake community, which features newer residential developments with higher homeownership rates and household sizes averaging 3-4 members. Shoppers typically visit for convenience-oriented needs including grocery shopping, dining, and personal services, with strong weekday evening and weekend traffic patterns.",
+  "description": "Eastlake Village Center is a vibrant community shopping destination strategically located in the heart of the Eastlake master-planned community in Chula Vista, California. Situated right off Otay Lakes Road, this well-established center serves as the retail hub for one of South San Diego County's most desirable residential neighborhoods. The center features over 30 diverse tenants carefully curated to meet the daily needs of local residents, offering a comprehensive mix of shopping, dining, and essential services all in one convenient location. With categories spanning food, health and beauty, retail, and professional services, Eastlake Village Center provides a one-stop destination for busy families and professionals. The center's strong 4.5-star rating from over 1,250 reviews reflects its commitment to serving the community with quality tenants and a well-maintained shopping environment that has made it a trusted neighborhood gathering place for years.",
+  "numberOfStores": 30,
+  "summary": "Eastlake Village Center is a community shopping hub in Chula Vista's desirable Eastlake neighborhood, featuring over 30 tenants offering shopping, dining, and services. Conveniently located on Otay Lakes Road, the center serves as a one-stop destination for local residents with its diverse mix of food, retail, health and beauty, and professional service providers.",
+  "tier": 2,
+  "spaces": []
+}

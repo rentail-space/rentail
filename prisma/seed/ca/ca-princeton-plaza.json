@@ -1,0 +1,24 @@
+{
+  "address": "3360 San Pablo Dam Road",
+  "city": "San Pablo",
+  "country": "US",
+  "googlePlaceID": "places/ChIJreUyPI53hYARPEVm7z8wv9g",
+  "name": "Princeton Plaza",
+  "state": "CA",
+  "latitude": 37.9619632,
+  "longitude": -122.32517840000001,
+  "imageURLs": [
+    "/images/malls/ca-princeton-plaza-1.jpg"
+  ],
+  "summary": "Princeton Plaza is a neighborhood shopping center in San Pablo, California, offering convenient access to local retail and services. With a 4.2-star rating and nearly 1,000 reviews, it serves as a reliable community retail destination.",
+  "openFrom": 900,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 970,
+  "website": "http://www.jnmcommercial.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Princeton Plaza serves a diverse, working-class community in San Pablo and the greater Contra Costa County area. The primary trade area consists of middle-income families and households seeking convenient, value-oriented shopping options close to home. Typical visitors include local residents running everyday errands, with a demographic mix reflecting the broader San Pablo community's ethnic diversity and family-oriented household composition. The center attracts practical, convenience-focused shoppers who prioritize accessibility and everyday necessities over luxury or experiential retail.",
+  "description": "Princeton Plaza is a well-established neighborhood shopping center located on San Pablo Dam Road in San Pablo, California. This convenient retail destination serves the local community with a practical mix of everyday services and businesses. The center maintains strong community ties with a solid 4.2-star rating from nearly 1,000 customer reviews, reflecting its consistent service to area residents. Open daily from 9:00 AM to 9:00 PM, Princeton Plaza provides accessible shopping hours for working families and busy professionals. Managed by JNM Commercial, the plaza continues to be a reliable retail hub for San Pablo residents seeking convenient access to neighborhood goods and services.",
+  "tier": 1,
+  "spaces": []
+}

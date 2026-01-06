@@ -1,0 +1,25 @@
+{
+  "address": "2665-2781 Calloway Drive",
+  "city": "Bakersfield",
+  "country": "US",
+  "googlePlaceID": "places/ChIJiQDE3qBD6oARDuEirpsZ7ng",
+  "name": "Rosedale Village",
+  "state": "CA",
+  "latitude": 35.3844376,
+  "longitude": -119.11028329999999,
+  "phone": "++1 800-613-5189",
+  "imageURLs": [
+    "/images/malls/ca-rosedale-village-1.jpg"
+  ],
+  "summary": "Rosedale Village is a community shopping center in Northwest Bakersfield featuring a diverse mix of retail stores, restaurants, and entertainment including SMG Bakersfield movie theater. As one of only two community centers serving the entire Northwest trade area, it provides convenient access to everyday shopping, dining, and leisure activities for local residents.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.4,
+  "reviewCount": 721,
+  "website": "http://shoprosedalevillage.com/",
+  "centerType": "CommunityCenter",
+  "demographics": "Rosedale Village serves the affluent Northwest Bakersfield trade area, attracting middle to upper-middle income families and professionals. The primary market consists of households with above-average incomes seeking convenient access to everyday shopping, dining, and entertainment options. Visitors typically include working parents aged 25-54, young professionals, and families with children who value the center's community-oriented atmosphere and diverse tenant mix that caters to both routine shopping needs and leisure activities.",
+  "description": "Rosedale Village is a premier community shopping center strategically located in the heart of Northwest Bakersfield's most desirable trade area at 2665-2781 Calloway Drive. As one of only two community centers serving the entire Northwest Bakersfield region, Rosedale Village has established itself as an essential destination for residents seeking a comprehensive shopping, dining, and entertainment experience. The center offers a carefully curated mix of retail stores, restaurants, and services designed to meet the everyday needs of the surrounding community. A standout feature is the SMG Bakersfield movie theater, providing first-run entertainment that draws visitors from across the region. With its convenient location, diverse tenant mix, and commitment to providing \"a little something for everyone,\" Rosedale Village has become a cornerstone of the Northwest Bakersfield lifestyle, offering shops, services, and eateries that make it the perfect destination for a complete day out.",
+  "tier": 2,
+  "spaces": []
+}

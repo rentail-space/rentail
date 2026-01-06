@@ -1,0 +1,25 @@
+{
+  "address": "73-061 El Paseo",
+  "city": "Palm Desert",
+  "country": "US",
+  "googlePlaceID": "places/ChIJQSL0-nr-2oAR1EkqwSeBYX4",
+  "name": "The Shops on El Paseo",
+  "state": "CA",
+  "latitude": 33.7200552,
+  "longitude": -116.38852360000001,
+  "phone": "++1 760-341-4058",
+  "imageURLs": [
+    "/images/malls/ca-the-shops-on-el-paseo-1.jpg"
+  ],
+  "summary": "The Shops on El Paseo is Palm Desert's premier upscale lifestyle destination featuring luxury designer boutiques, art galleries, and elevated dining experiences. With complimentary valet parking and a sophisticated open-air setting, it offers the refined shopping and hospitality that defines the Coachella Valley's celebrated desert lifestyle.",
+  "openFrom": 1000,
+  "openUntil": 1800,
+  "rating": 4.6,
+  "reviewCount": 756,
+  "website": "http://www.theshopsonelpaseo.com/",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Shops on El Paseo attracts an affluent, mature demographic with visitors primarily aged 45-75 and household incomes exceeding $100,000, reflecting Palm Desert's status as a premier desert resort destination. The trade area draws from both year-round residents of the Coachella Valley and seasonal visitors who maintain second homes in the region, creating a sophisticated customer base with high discretionary spending power. Shoppers here seek curated luxury experiences, artisan goods, and upscale dining, with strong preferences for personalized service and exclusive boutique offerings rather than mass-market chains.",
+  "description": "The Shops on El Paseo represents the pinnacle of luxury shopping in Palm Desert, offering an upscale open-air retail experience along the renowned El Paseo shopping district, often called the \"Rodeo Drive of the Desert.\" This sophisticated lifestyle center features an carefully curated collection of specialty boutiques, art galleries, and elevated dining establishments that capture the essence of Coachella Valley's celebrated hospitality and refined desert lifestyle. Visitors can explore designer fashion, fine jewelry, home décor, and contemporary art while enjoying the year-round sunshine and mountain views that make Palm Desert a world-class destination. The center provides premium amenities including complimentary valet parking, ensuring a seamless and luxurious shopping experience for discerning guests. Whether seeking casual bites at artisan eateries or fine dining experiences, The Shops on El Paseo delivers the vibrant charm and upscale atmosphere that has made it a cornerstone of Palm Desert's thriving retail and cultural scene.",
+  "tier": 3,
+  "spaces": []
+}

@@ -1,0 +1,25 @@
+{
+  "address": "16759 Bernardo Center Drive",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJO-DaRdLw24ARqxO30-io4Yo",
+  "name": "Plaza At Rancho Bernardo",
+  "state": "CA",
+  "latitude": 33.0183316,
+  "longitude": -117.0739716,
+  "imageURLs": [
+    "/images/malls/ca-plaza-at-rancho-bernardo-1.jpg"
+  ],
+  "openFrom": 0,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 991,
+  "website": "https://www.theplazarb.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Plaza at Rancho Bernardo serves an affluent suburban community in North San Diego County, attracting primarily middle to upper-middle income families and active retirees. The trade area consists of well-established residential neighborhoods with high homeownership rates and household incomes significantly above the county median. Typical visitors are educated professionals, families with children, and empty nesters who value convenience and quality in their shopping experience. The center draws regular traffic from local residents seeking everyday services, dining options, and specialty retail in a familiar neighborhood setting.",
+  "description": "The Plaza at Rancho Bernardo is a well-established community shopping destination located in the heart of Rancho Bernardo, conveniently situated next to the post office on Bernardo Center Drive. Featuring over 50 favorite stores, restaurants, and services, this open-air center has been serving the North San Diego community since 2010, becoming an integral part of the neighborhood's daily life. The Plaza offers a diverse mix of retail, dining, and service tenants that cater to the everyday needs of local residents and families. Through its Plaza Perks loyalty program, shoppers can enjoy exclusive promotions, special events, and rewards that enhance their shopping experience. With an active social media presence and community engagement, The Plaza at Rancho Bernardo maintains strong connections with its customer base while providing a convenient, accessible shopping environment in one of San Diego's most desirable suburban communities.",
+  "numberOfStores": 50,
+  "summary": "The Plaza at Rancho Bernardo is a neighborhood shopping center featuring over 50 stores, restaurants, and services in the heart of Rancho Bernardo. Conveniently located next to the post office, it serves as a go-to destination for everyday shopping, dining, and services for the local community.",
+  "tier": 2,
+  "spaces": []
+}

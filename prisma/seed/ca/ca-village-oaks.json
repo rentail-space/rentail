@@ -1,0 +1,45 @@
+{
+  "address": "5760 Cottle Road",
+  "city": "San Jose",
+  "country": "US",
+  "googlePlaceID": "places/ChIJswJuV88vjoARYd1rc7jy1eo",
+  "name": "Village Oaks",
+  "state": "CA",
+  "latitude": 37.248583599999996,
+  "longitude": -121.8027555,
+  "imageURLs": [
+    "/images/malls/ca-village-oaks-1.jpg"
+  ],
+  "summary": "Village Oaks is an open-air community shopping center in South San Jose, recently added to the EDENS West Coast portfolio. This neighborhood retail destination features 32 spaces serving local residents with convenient access to everyday shopping and services.",
+  "rating": 4.1,
+  "reviewCount": 11,
+  "website": "https://edens.com/property/village-oaks/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Village Oaks serves the South San Jose community, attracting middle to upper-middle income families and professionals in the Cottle Road corridor. The trade area includes a diverse demographic mix typical of San Jose's southern neighborhoods, with households ranging from young families to established homeowners seeking convenient neighborhood shopping. The center draws visitors looking for everyday retail services and essential shopping needs within a comfortable, accessible open-air environment.",
+  "description": "Village Oaks is a newly acquired open-air retail destination in San Jose's Cottle Road corridor, representing EDENS' expansion into the West Coast market. This community-focused shopping center serves as a gathering place for South San Jose residents, offering convenient access to everyday retail and services in a welcoming outdoor environment. The center features a thoughtfully designed site plan with 32 available retail spaces, providing a mix of national retailers and local businesses that cater to the neighborhood's daily needs. With its strategic location at 5760 Cottle Road, Village Oaks connects the surrounding residential communities to essential shopping, dining, and services. As part of the EDENS portfolio, the center benefits from the company's commitment to enriching communities and creating vibrant retail destinations that foster local connections and enhance the shopping experience for San Jose families.",
+  "numberOfStores": 32,
+  "tier": 2,
+  "spaces": [
+    {
+      "type": "Other",
+      "number": "450",
+      "size": 1050,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "210",
+      "size": 1800
+    },
+    {
+      "type": "Other",
+      "number": "260",
+      "size": 5600
+    },
+    {
+      "type": "Other",
+      "number": "300",
+      "size": 4500
+    }
+  ]
+}

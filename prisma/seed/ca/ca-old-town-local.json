@@ -1,0 +1,24 @@
+{
+  "address": "2611 Congress Street",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJM1kjHd6q3oAR2gEQ2wHKcZk",
+  "name": "Old Town Local",
+  "state": "CA",
+  "latitude": 32.7526626,
+  "longitude": -117.197043,
+  "imageURLs": [
+    "/images/malls/ca-old-town-local-1.jpg"
+  ],
+  "openFrom": 900,
+  "openUntil": 1900,
+  "rating": 4.7,
+  "reviewCount": 115,
+  "website": "http://www.oldtownlocalsd.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Old Town Local attracts a diverse mix of locals and tourists visiting San Diego's historic Old Town district. The primary demographic includes millennials and young professionals aged 25-45 with middle to upper-middle income levels, drawn to the artisan marketplace and locally-sourced products. The center also appeals to culturally-conscious shoppers and tourists seeking authentic San Diego experiences, with visitors typically interested in supporting local businesses and discovering unique, handcrafted goods.",
+  "description": "Old Town Local is a distinctive artisan marketplace located in the heart of San Diego's historic Old Town district at 2611 Congress Street. This lifestyle-oriented shopping destination celebrates local craftsmanship and San Diego's vibrant maker community, offering visitors a curated collection of locally-made goods, artisan products, and unique finds. The center operates daily from 9:00 AM to 7:00 PM, providing a convenient shopping experience for both residents and the millions of tourists who visit Old Town each year. With an impressive 4.7-star rating from 115 reviews, Old Town Local has established itself as a beloved destination for those seeking authentic, locally-sourced products in a welcoming atmosphere. The marketplace embodies the spirit of San Diego's creative community, serving as a hub where local artisans, makers, and small businesses can showcase their talents while providing shoppers with an alternative to mass-market retail.",
+  "summary": "Old Town Local is an artisan marketplace in San Diego's historic Old Town district, featuring locally-made goods and handcrafted products from San Diego makers. With a 4.7-star rating, this lifestyle center offers visitors a unique shopping experience celebrating local craftsmanship and community.",
+  "tier": 2,
+  "spaces": []
+}

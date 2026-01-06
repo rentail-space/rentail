@@ -1,0 +1,25 @@
+{
+  "address": "",
+  "city": "Anaheim",
+  "country": "US",
+  "googlePlaceID": "places/ChIJtQw0jtfX3IARiwjloLOkQs0",
+  "name": "Downtown Disney District",
+  "state": "CA",
+  "latitude": 33.8097925,
+  "longitude": -117.92378690000001,
+  "phone": "++1 714-781-4636",
+  "imageURLs": [
+    "/images/malls/ca-downtown-disney-district-1.jpg"
+  ],
+  "summary": "Downtown Disney District is a whimsical outdoor promenade at Disneyland featuring an engaging mix of shops, restaurants, and entertainment venues. This centrally located lifestyle destination serves as the gateway to the Disneyland Resort, offering visitors a blend of Disney magic and Southern California dining and shopping experiences.",
+  "openFrom": 700,
+  "openUntil": 2300,
+  "rating": 4.6,
+  "reviewCount": 38621,
+  "website": "https://disneyland.disney.go.com/destinations/downtown-disney-district/?CMP=OKC-336978_GM_DLR_destination_downtowndisneydistrict_NA",
+  "centerType": "LifestyleCenter",
+  "demographics": "Downtown Disney District attracts a diverse, family-oriented demographic with above-average household incomes, primarily consisting of Disney theme park visitors and Southern California residents. The trade area draws heavily from affluent Orange County families, international tourists, and millennial adults aged 25-45 with disposable income for entertainment and dining experiences. Visitors typically engage in experiential shopping patterns, prioritizing entertainment, dining, and Disney-branded merchandise over traditional retail needs, with peak traffic during evenings, weekends, and holiday periods when Disneyland attendance is highest.",
+  "description": "Downtown Disney District is a vibrant outdoor promenade that serves as the gateway between the Disneyland Resort theme parks and the surrounding Anaheim area. This whimsical entertainment and shopping destination offers visitors a unique blend of Disney magic and Southern California lifestyle, featuring an eclectic mix of retail shops, diverse dining options, and live entertainment venues. The district operates as an open-air lifestyle center where guests can experience Disney-themed stores alongside popular national brands, all set within beautifully landscaped walkways adorned with creative architectural elements and artistic touches. From early morning until late evening, the promenade buzzes with energy as families, tourists, and locals gather to shop, dine at restaurants ranging from quick-service to upscale establishments, and enjoy special events and seasonal celebrations. With its prime location adjacent to the Disneyland Resort and its carefully curated tenant mix that balances Disney exclusivity with mainstream appeal, Downtown Disney District has established itself as a must-visit destination that extends the theme park experience beyond the gates.",
+  "tier": 3,
+  "spaces": []
+}

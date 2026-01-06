@@ -1,0 +1,25 @@
+{
+  "address": "300 East Colorado Boulevard",
+  "city": "Pasadena",
+  "country": "US",
+  "googlePlaceID": "places/ChIJpSudbW_DwoAR72DNpO107zA",
+  "name": "The Paseo",
+  "state": "CA",
+  "latitude": 34.1455438,
+  "longitude": -118.1438719,
+  "phone": "++1 626-795-9100",
+  "imageURLs": [
+    "/images/malls/ca-the-paseo-1.jpg"
+  ],
+  "summary": "The Paseo is an upscale open-air lifestyle center in downtown Pasadena featuring trendy retailers, diverse dining options, and a multiplex theater. This sprawling shopping district offers a sophisticated blend of shopping and entertainment in a walkable outdoor setting.",
+  "openFrom": 1100,
+  "openUntil": 2000,
+  "rating": 4.3,
+  "reviewCount": 3509,
+  "website": "https://www.thepaseopasadena.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Paseo attracts an affluent, educated demographic primarily consisting of young professionals and families from Pasadena and surrounding San Gabriel Valley communities. The trade area serves households with above-average incomes who value walkable, open-air shopping experiences and appreciate the center's proximity to Old Pasadena's cultural attractions. Visitors typically range from 25-54 years old with discretionary income for dining and entertainment, seeking a mix of national retailers and local dining options in an upscale outdoor setting.",
+  "description": "The Paseo is a premier open-air lifestyle center located in the heart of Pasadena on East Colorado Boulevard, offering a sophisticated shopping and dining destination that complements the city's renowned cultural district. This sprawling shopping complex features a carefully curated mix of trendy retailers, diverse restaurants, and a state-of-the-art multiplex theater, creating a vibrant gathering place for the community. The center's open-air design encourages leisurely strolling through its terraces and walkways, providing an inviting atmosphere that blends retail therapy with entertainment and culinary experiences. With its prime location just steps from Old Pasadena's historic attractions and its commitment to bringing together national brands with local favorites, The Paseo has established itself as a cornerstone of Pasadena's retail landscape. The center's thoughtful amenities, including specialty leasing opportunities and filming location services, demonstrate its role as both a commercial hub and community asset in one of Southern California's most desirable cities.",
+  "tier": 2,
+  "spaces": []
+}

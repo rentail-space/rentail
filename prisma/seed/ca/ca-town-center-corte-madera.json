@@ -1,0 +1,25 @@
+{
+  "address": "100 Corte Madera Town Center",
+  "city": "Corte Madera",
+  "country": "US",
+  "googlePlaceID": "places/ChIJHUd7-4yahYARQS2QTLJS-Yg",
+  "name": "Town Center Corte Madera",
+  "state": "CA",
+  "latitude": 37.9276237,
+  "longitude": -122.5170799,
+  "phone": "++1 415-924-2961",
+  "imageURLs": [
+    "/images/malls/ca-town-center-corte-madera-1.jpg"
+  ],
+  "summary": "Town Center Corte Madera is a stylish open-air lifestyle center in affluent Marin County featuring specialty retailers, artisan restaurants with outdoor dining, and community amenities including a Kid's Club and Farmers Market. This premier shopping destination combines quality brands with a welcoming atmosphere designed for families and discerning shoppers.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 1746,
+  "website": "http://www.shoptowncenter.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Town Center Corte Madera attracts affluent shoppers from Marin County, one of California's wealthiest areas, with median household incomes exceeding $125,000. The primary visitor base consists of families and professionals aged 35-65 who value quality, convenience, and outdoor shopping experiences. The trade area draws from upscale communities including Corte Madera, Larkspur, Mill Valley, and Tiburon, with shoppers seeking premium brands and artisan dining options. Visitors typically exhibit sophisticated tastes with preferences for specialty retailers, chef-driven restaurants, and experiential shopping in an open-air environment.",
+  "description": "Town Center Corte Madera is a premier open-air lifestyle shopping destination nestled in the heart of affluent Marin County, just north of San Francisco. This stylish shopping plaza seamlessly blends specialty retailers, artisan dining, and community-focused amenities to create an experience that goes beyond traditional shopping. The center features a carefully curated mix of national brands and local favorites, complemented by well-crafted restaurants offering outdoor seating where visitors can enjoy the Bay Area's temperate climate. Beyond retail and dining, Town Center Corte Madera serves as a community hub with unique offerings like a Kid's Club providing activities to entertain children, a Farmers Market, and even a Community Room for local events. With its emphasis on creating spaces designed for life's everyday moments—from family gatherings to casual dining with friends—the center has earned a strong reputation with a 4.4-star rating from over 1,700 reviews, making it a beloved destination for Marin County residents and visitors alike.",
+  "tier": 2,
+  "spaces": []
+}

@@ -1,0 +1,25 @@
+{
+  "address": "3380 Blackhawk Plaza Circle",
+  "city": "Danville",
+  "country": "US",
+  "googlePlaceID": "places/ChIJKQKoCzryj4AR3gojIyyDia0",
+  "name": "Blackhawk Plaza",
+  "state": "CA",
+  "latitude": 37.80061,
+  "longitude": -121.9187168,
+  "phone": "++1 925-736-2751",
+  "imageURLs": [
+    "/images/malls/ca-blackhawk-plaza-1.jpg"
+  ],
+  "summary": "Blackhawk Plaza is an upscale lifestyle center in Danville featuring high-end retail shops, restaurants, a theater, and museum set amid beautifully landscaped grounds with ponds. This sophisticated outdoor destination serves the affluent Blackhawk community with a carefully curated mix of specialty retailers and dining options in an elegant, walkable environment.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.5,
+  "reviewCount": 1372,
+  "website": "http://www.shopblackhawkplaza.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Blackhawk Plaza attracts an affluent, upscale demographic primarily consisting of high-income households from the Blackhawk and Danville communities, with median household incomes significantly above the national average. The visitor base skews toward families aged 35-65 with substantial disposable income, including professionals, executives, and retirees who value quality shopping and dining experiences. The trade area encompasses the affluent East Bay suburbs, drawing shoppers seeking premium brands, specialty retailers, and upscale restaurants in an outdoor setting. Shopping patterns reflect a preference for experiential retail combined with leisure activities, with visitors often spending extended time enjoying the landscaped grounds, museum, and dining options rather than quick transactional visits.",
+  "description": "Blackhawk Plaza stands as one of the East Bay's premier upscale shopping destinations, nestled in the heart of Danville's exclusive Blackhawk community. This sophisticated lifestyle center seamlessly blends high-end retail, fine dining, cultural attractions, and entertainment within beautifully landscaped grounds featuring serene ponds and meticulously maintained outdoor spaces. The plaza's distinctive architecture and open-air design create an inviting atmosphere that encourages visitors to stroll, shop, and dine at their leisure. Beyond its retail offerings, Blackhawk Plaza is home to a museum and theater, making it a true community gathering place that serves both daily shopping needs and special occasion destinations. The center's carefully curated tenant mix caters to the discerning tastes of the affluent Blackhawk and greater Danville communities, offering everything from specialty boutiques to acclaimed restaurants. With its combination of upscale amenities, cultural attractions, and picturesque setting, Blackhawk Plaza has established itself as more than just a shopping center—it's a lifestyle destination that reflects the sophistication and quality of life that defines the Blackhawk area.",
+  "tier": 3,
+  "spaces": []
+}

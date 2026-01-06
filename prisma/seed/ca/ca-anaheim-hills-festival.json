@@ -1,0 +1,25 @@
+{
+  "address": "8020 East Santa Ana Canyon Road",
+  "city": "Anaheim",
+  "country": "US",
+  "googlePlaceID": "places/ChIJi8hQhtHR3IARnjQU9fIfEzU",
+  "name": "Anaheim Hills Festival",
+  "state": "CA",
+  "latitude": 33.8663325,
+  "longitude": -117.749236,
+  "phone": "++1 714-283-3535",
+  "imageURLs": [
+    "/images/malls/ca-anaheim-hills-festival-1.jpg"
+  ],
+  "summary": "Anaheim Hills Festival is a popular open-air community center featuring major retailers like Target and Hobby Lobby, complemented by a movie theater and diverse dining options. Serving the affluent Anaheim Hills neighborhood, it provides convenient shopping and entertainment for local families and residents.",
+  "openFrom": 800,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 1693,
+  "website": "http://anaheimhillsfestival.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Anaheim Hills Festival attracts an affluent, family-oriented demographic from the surrounding Anaheim Hills community, with median household incomes significantly above the Orange County average. The primary trade area consists of upper-middle-class families with children, professionals aged 35-65, and active retirees who value convenience and quality. Shoppers typically seek a mix of everyday necessities and specialty retail, with strong preferences for national brands and family-friendly dining options that cater to the area's suburban lifestyle.",
+  "description": "Anaheim Hills Festival serves as the premier shopping destination for the affluent Anaheim Hills community in eastern Orange County. This open-air community center combines essential retail anchors like Target and Hobby Lobby with a diverse mix of specialty stores, creating a convenient one-stop shopping experience for local residents. The center features a modern movie theater that serves as a popular entertainment hub for families and moviegoers throughout the week. Complementing the retail offerings, the Festival includes a carefully curated selection of eateries ranging from quick-service options to sit-down restaurants, making it an ideal gathering place for the community. With its prime location on Santa Ana Canyon Road and ample parking, Anaheim Hills Festival has established itself as the go-to neighborhood center for residents seeking quality shopping, dining, and entertainment without venturing into the more congested areas of Orange County.",
+  "tier": 2,
+  "spaces": []
+}

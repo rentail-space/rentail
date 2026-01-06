@@ -1,0 +1,26 @@
+{
+  "address": "394 East H Street",
+  "city": "Chula Vista",
+  "country": "US",
+  "googlePlaceID": "places/ChIJVe9Yyj5O2YAR6o9yEWB9ui8",
+  "name": "Terra Nova Plaza",
+  "state": "CA",
+  "latitude": 32.6396838,
+  "longitude": -117.0495093,
+  "phone": "++1 760-630-8247",
+  "imageURLs": [
+    "/images/malls/ca-terra-nova-plaza-1.jpg"
+  ],
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.4,
+  "reviewCount": 3620,
+  "website": "http://www.terranovaplaza.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Terra Nova Plaza serves the diverse Chula Vista community, attracting primarily middle-income Hispanic and multi-cultural families with household incomes ranging from $50,000 to $85,000. The trade area draws heavily from the surrounding residential neighborhoods east of Interstate 805, with shoppers typically aged 25-55 who prioritize convenience and value. The center caters to daily needs shopping patterns with a strong emphasis on grocery, services, and family dining, reflecting the practical shopping preferences of working families in South San Diego County.",
+  "description": "Terra Nova Plaza stands as a vibrant community gathering place in Chula Vista, California, strategically positioned at the highly visible corner of Interstate 805 and East H Street. This open-air shopping destination brings together over 40 diverse merchants under one roof, creating a comprehensive shopping experience that serves the daily needs of South San Diego County residents. The plaza has established itself as more than just a retail center—it's a true community hub that hosts free events throughout the year, including seasonal celebrations like their popular Valentine's Day Contest. With convenient freeway access and ample parking, Terra Nova Plaza offers an ideal mix of shopping, dining, entertainment, and essential services all in one location. Managed by Newmark Merrill Companies, the center embodies a commitment to fostering the American Dream by supporting local businesses and creating a welcoming environment where the community can shop, dine, and connect.",
+  "numberOfStores": 40,
+  "summary": "Terra Nova Plaza is a community-focused shopping center located at the 805 freeway and East H Street in Chula Vista, featuring over 40 merchants offering shopping, dining, entertainment, and services. The plaza serves as a neighborhood gathering place with convenient access and regular free community events.",
+  "tier": 2,
+  "spaces": []
+}

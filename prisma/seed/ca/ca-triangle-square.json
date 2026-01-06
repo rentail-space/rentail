@@ -1,0 +1,25 @@
+{
+  "address": "1870 Harbor Boulevard",
+  "city": "Costa Mesa",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ08rQII_f3IARjHasUDnm8Es",
+  "name": "Triangle Square",
+  "state": "CA",
+  "latitude": 33.6425997,
+  "longitude": -117.9181264,
+  "phone": "++1 949-650-0732",
+  "imageURLs": [
+    "/images/malls/ca-triangle-square-1.jpg"
+  ],
+  "summary": "Triangle Square is Costa Mesa's vibrant outdoor lifestyle center featuring a compelling mix of restaurants, bars, cinema, bowling, fitness facilities, and nightlife venues. This entertainment-focused destination has earned strong community acclaim with its diverse amenities and social atmosphere.",
+  "openFrom": 1700,
+  "openUntil": 200,
+  "rating": 4.4,
+  "reviewCount": 1949,
+  "website": "https://www.go2triangle.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Triangle Square attracts a diverse, entertainment-focused demographic primarily consisting of young professionals and millennials aged 25-45 with middle to upper-middle income levels. The Costa Mesa location draws visitors from Orange County's affluent coastal communities, including nearby Newport Beach and Irvine, with household incomes typically ranging from $75,000 to $150,000+. The center's mix of dining, nightlife, bowling, and cinema creates a social destination that appeals to both singles and young couples seeking experiential entertainment rather than traditional retail shopping.",
+  "description": "Triangle Square stands as Costa Mesa's premier entertainment and lifestyle destination, offering a vibrant outdoor experience that goes far beyond traditional shopping. Located at 1870 Harbor Boulevard in the heart of Orange County, this dynamic center has established itself as a social hub where dining, entertainment, and nightlife converge. The property features an impressive array of amenities including a state-of-the-art cinema, modern fitness facilities, an upscale bowling alley, and a popular nightclub that draws crowds throughout the week. The center's restaurant and bar scene is particularly noteworthy, with diverse culinary options ranging from casual eateries to upscale dining establishments, all set within an inviting open-air environment. With a strong 4.4-star rating from nearly 2,000 reviews, Triangle Square has proven its appeal to both locals and visitors seeking a complete entertainment experience in Costa Mesa's thriving retail corridor.",
+  "tier": 2,
+  "spaces": []
+}

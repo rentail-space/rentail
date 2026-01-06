@@ -1,0 +1,25 @@
+{
+  "address": "50 Cabrillo Highway North",
+  "city": "Half Moon Bay",
+  "country": "US",
+  "googlePlaceID": "places/ChIJNYoVJ7B0j4ARrYNTqsZ7nRQ",
+  "name": "Strawflower Village",
+  "state": "CA",
+  "latitude": 37.4695525,
+  "longitude": -122.43406479999999,
+  "phone": "++1 925-279-1800",
+  "imageURLs": [
+    "/images/malls/ca-strawflower-village-1.jpg"
+  ],
+  "summary": "Strawflower Village is an outdoor shopping center in Half Moon Bay offering a convenient mix of retailers, services, and casual restaurants. Managed by Regency Centers, this community-focused destination serves both local residents and coastal visitors with diverse shopping and dining options.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.1,
+  "reviewCount": 942,
+  "website": "http://www.regencycenters.com/retail-space/ca/half-moon-bay/strawflower-village?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Strawflower Village serves the affluent coastal community of Half Moon Bay and surrounding San Mateo County areas, attracting both local residents and tourists visiting the scenic California coastline. The primary trade area consists of middle to upper-middle income families and professionals, with a significant proportion of homeowners in the 35-65 age range who value convenience and quality. The center also captures tourist traffic from San Francisco Bay Area visitors seeking coastal destinations, creating a mixed demographic of local daily-needs shoppers and weekend leisure visitors with higher discretionary spending patterns.",
+  "description": "Strawflower Village is a welcoming outdoor shopping center located in the heart of Half Moon Bay, California, serving as a convenient retail hub for this picturesque coastal community. Managed by Regency Centers, this open-air center provides residents and visitors with easy access to a diverse mix of retailers, services, and casual dining options in a relaxed, coastal atmosphere. The center's strategic location along Cabrillo Highway North makes it a natural stopping point for both locals running daily errands and tourists exploring the famous Half Moon Bay coastline. With its variety of tenants offering everything from everyday necessities to specialty goods, Strawflower Village has established itself as an essential part of the community's retail landscape. The center's outdoor design complements the area's natural beauty and mild climate, creating an enjoyable shopping experience that reflects the laid-back character of this beloved coastal town.",
+  "tier": 2,
+  "spaces": []
+}

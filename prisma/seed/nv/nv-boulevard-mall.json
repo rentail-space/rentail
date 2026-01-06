@@ -1,0 +1,26 @@
+{
+  "address": "3528 South Maryland Parkway",
+  "city": "Las Vegas",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ4SL2NvHEyIARFb7KRah8Ic4",
+  "name": "Boulevard Mall",
+  "state": "NV",
+  "latitude": 36.1244912,
+  "longitude": -115.13632009999999,
+  "phone": "++1 702-735-7430",
+  "imageURLs": [
+    "/images/malls/nv-boulevard-mall-1.jpg"
+  ],
+  "summary": "Boulevard Mall is a 100-shop regional mall in Las Vegas that positions itself as the center for family fun and best values in the city. Anchored by Galaxy Theatres and John's Incredible Pizza, the mall serves as a community hub with diverse shopping, entertainment, and regular family-friendly events.",
+  "openFrom": 1100,
+  "openUntil": 2000,
+  "rating": 4,
+  "reviewCount": 7557,
+  "website": "http://boulevardmall.com/",
+  "centerType": "RegionalMall",
+  "demographics": "Boulevard Mall serves a diverse, value-conscious demographic in the heart of Las Vegas, attracting families and budget-minded shoppers from the surrounding residential neighborhoods. The center draws heavily from middle-income households seeking affordable entertainment and shopping options, with a significant Hispanic and Filipino community presence as evidenced by the Mercado section and Filipino community events. The mall appeals to multi-generational families looking for family-friendly entertainment like John's Incredible Pizza and Galaxy Theatres, as well as UNLV students who benefit from special discounts. The trade area consists primarily of local residents rather than tourists, with visitors seeking practical shopping and entertainment value in a convenient, accessible location.",
+  "description": "Boulevard Mall has been a cornerstone of the Las Vegas community since its establishment, serving as a family-oriented shopping and entertainment destination in the heart of the city on South Maryland Parkway. This 100-shop regional mall positions itself as \"The CENTER for Family Fun\" and the \"Best VALUES in Las Vegas,\" offering an affordable alternative to the tourist-focused Strip properties. The center features major entertainment anchors including Galaxy Theatres with its rewards program and UNLV student discounts, John's Incredible Pizza for family dining and entertainment, and One World as additional attractions. Beyond traditional retail, Boulevard Mall has evolved into a community hub hosting regular events such as \"Walk & Talk with a COP\" community policing programs, \"Selfies with Santa\" during the holidays, and the Safe Santa bicycle safety initiative. The mall also celebrates its diverse community with a dedicated Mercado section and special events for the Filipino community, reflecting the multicultural fabric of Las Vegas and creating a welcoming environment for families seeking value-oriented shopping and entertainment experiences.",
+  "numberOfStores": 100,
+  "tier": 1,
+  "spaces": []
+}

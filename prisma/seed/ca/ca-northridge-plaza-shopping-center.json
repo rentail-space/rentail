@@ -1,0 +1,24 @@
+{
+  "address": "8741 Corbin Avenue",
+  "city": "Los Angeles",
+  "country": "US",
+  "googlePlaceID": "places/ChIJwd268p6bwoAR0UiofPi2KAs",
+  "name": "Northridge Plaza Shopping Center",
+  "state": "CA",
+  "latitude": 34.2306877,
+  "longitude": -118.5603068,
+  "imageURLs": [
+    "/images/malls/ca-northridge-plaza-shopping-center-1.jpg"
+  ],
+  "summary": "Northridge Plaza Shopping Center is a large single-story retail complex in Los Angeles's San Fernando Valley, featuring a market, pharmacy, and diverse everyday shops and eateries. With extended hours and a strong 4.4-star rating from over 3,600 reviews, it serves as a convenient neighborhood destination for daily shopping needs.",
+  "openFrom": 800,
+  "openUntil": 2230,
+  "rating": 4.4,
+  "reviewCount": 3631,
+  "website": "https://google.com/url?q=https%3A%2F%2Fbusiness.google.com%2Fwebsite_shared%2Flaunch_bw.html%3Ff%3Dhttps%3A%2F%2Famzn.to%2F4kfipFS&utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Northridge Plaza attracts a diverse, middle-class demographic primarily from the San Fernando Valley, with a strong representation of families and working professionals aged 25-54. The trade area serves a mix of Hispanic, Asian, and Caucasian households with median incomes ranging from $60,000 to $90,000, reflecting the surrounding Northridge neighborhood's suburban character. Shoppers typically visit for convenience-oriented needs including groceries, pharmacy services, and everyday dining, with frequent repeat visits for routine errands rather than destination shopping trips.",
+  "description": "Northridge Plaza Shopping Center stands as a cornerstone retail destination in the heart of Los Angeles's San Fernando Valley, serving the Northridge community at 8741 Corbin Avenue. This large single-story shopping complex has established itself as a convenient one-stop destination for everyday needs, anchored by a full-service market and pharmacy that draw consistent foot traffic throughout the week. The center's thoughtful tenant mix includes several popular eateries and everyday shops that cater to the practical needs of local residents and families. With extended operating hours from 8:00 AM to 10:30 PM, Northridge Plaza accommodates busy schedules and provides accessibility for working professionals and families alike. The shopping center has earned strong community approval, reflected in its impressive 4.4-star rating from over 3,600 reviews, demonstrating its reliability and value to the neighborhood it serves.",
+  "tier": 2,
+  "spaces": []
+}

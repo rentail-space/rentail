@@ -1,0 +1,27 @@
+{
+  "address": "1127 Industrial Road",
+  "city": "San Carlos",
+  "country": "US",
+  "googlePlaceID": "places/ChIJPbWuDxWij4ARm6JUZdnbuDU",
+  "name": "San Carlos Marketplace",
+  "state": "CA",
+  "latitude": 37.502351,
+  "longitude": -122.24413279999999,
+  "phone": "++1 925-279-1800",
+  "imageURLs": [
+    "/images/malls/ca-san-carlos-marketplace-1.jpg"
+  ],
+  "summary": "San Carlos Marketplace is a 153,510 square foot community center anchored by Best Buy, PetSmart, and TJ Maxx, strategically located near the Bayshore Freeway in one of the Bay Area's most affluent markets. The center attracts over 2.5 million annual visits from a premium demographic with average household incomes exceeding $261,000.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.3,
+  "reviewCount": 1545,
+  "website": "https://www.regencycenters.com/property/detail/80071/San-Carlos-Marketplace?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "San Carlos Marketplace serves an exceptionally affluent trade area with an average household income of $261,320 within 3 miles, representing one of the highest income demographics in the San Francisco Bay Area. The center attracts 143,732 residents and a daytime population of 157,643, indicating strong employment centers nearby. The typical visitor resides in high-value homes averaging $1.7 million and represents educated, professional households with significant discretionary spending power. Shopping patterns reflect preferences for quality retailers and convenience-oriented services, with the center recording over 2.5 million annual visits from this premium demographic base.",
+  "description": "San Carlos Marketplace is a premier community shopping center strategically located at 1127 Industrial Road in San Carlos, California, serving the affluent San Francisco Peninsula market. Positioned near the Bayshore Freeway, this 153,510 square foot center offers exceptional visibility and accessibility to one of the nation's most prosperous communities. The property features a best-in-class tenant mix anchored by major national retailers including Best Buy, PetSmart, and TJ Maxx, providing a compelling combination of electronics, pet supplies, and off-price fashion. With over 2.5 million annual visits, the center has established itself as a vital shopping destination for the surrounding community, which boasts an average household income exceeding $261,000 within three miles. Developed and managed by Regency Centers, a leader in grocery-anchored shopping center development, San Carlos Marketplace exemplifies the company's Fresh Look® philosophy of creating thriving neighborhood centers that serve as essential gathering places for their communities.",
+  "numberOfStores": 2,
+  "squareFootage": 153510,
+  "tier": 2,
+  "spaces": []
+}

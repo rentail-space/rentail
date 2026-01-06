@@ -1,0 +1,25 @@
+{
+  "address": "44400 Valley Central Way",
+  "city": "Lancaster",
+  "country": "US",
+  "googlePlaceID": "places/ChIJbS_HNjJbwoARY3vjRUxzrzM",
+  "name": "Valley Central",
+  "state": "CA",
+  "latitude": 34.6931724,
+  "longitude": -118.17270699999999,
+  "phone": "++1 855-640-6400",
+  "imageURLs": [
+    "/images/malls/ca-valley-central-1.jpg"
+  ],
+  "summary": "Valley Central is a well-established community shopping center in Lancaster, California, serving the Antelope Valley with a convenient mix of retail stores, dining, and services. With extended daily hours and a strong local reputation, it functions as a primary shopping destination for residents throughout the region.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.1,
+  "reviewCount": 5041,
+  "website": "http://merlonegeier.com/PropertyInfo.aspx?Id=1804",
+  "centerType": "CommunityCenter",
+  "demographics": "Valley Central serves the Antelope Valley community of Lancaster, attracting a diverse mix of middle-income families and working professionals. The trade area draws primarily from Lancaster and Palmdale residents, with household incomes ranging from moderate to upper-middle class levels. Shoppers tend to be value-conscious families seeking convenient access to everyday retail, dining, and services in this growing high-desert community north of Los Angeles.",
+  "description": "Valley Central is a prominent shopping destination located in Lancaster, California, serving the thriving Antelope Valley region. Situated at 44400 Valley Central Way, this community-oriented retail center has established itself as a convenient hub for residents of Lancaster and neighboring Palmdale. The center offers a diverse mix of national retailers, local businesses, dining options, and essential services that cater to the everyday needs of the community. With extended operating hours from 6:00 AM to 11:00 PM, Valley Central provides flexibility for shoppers with varying schedules, whether they're stopping by before work or enjoying an evening meal. The center's strong reputation is reflected in its 4.1-star rating from over 5,000 Google reviews, demonstrating its consistent appeal to local residents and visitors exploring the Antelope Valley area.",
+  "tier": 2,
+  "spaces": []
+}

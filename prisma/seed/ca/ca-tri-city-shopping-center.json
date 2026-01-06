@@ -1,0 +1,25 @@
+{
+  "address": "1380 Industrial Park Avenue",
+  "city": "Redlands",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ9WcQVVuq3IARlzDa3Y0sv80",
+  "name": "Tri City Shopping Center",
+  "state": "CA",
+  "latitude": 34.0654005,
+  "longitude": -117.2043274,
+  "imageURLs": [
+    "/images/malls/ca-tri-city-shopping-center-1.jpg"
+  ],
+  "summary": "Tri City Shopping Center is a convenient open-air community center in Redlands featuring 60 retail shops, restaurants, and personal services with easy freeway access off Interstate 10. The center offers a comprehensive mix of beauty and health services, fashion retailers, casual dining, and family entertainment in a stress-free shopping environment.",
+  "openFrom": 900,
+  "openUntil": 1800,
+  "rating": 4.1,
+  "reviewCount": 1729,
+  "website": "http://tricitycenter.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Tri City Shopping Center serves a diverse family-oriented demographic in the Inland Empire, attracting middle-income households from Redlands and surrounding communities. The center appeals primarily to value-conscious shoppers aged 25-55 seeking convenient, time-saving shopping experiences with easy parking and personal service. The trade area includes young families and working professionals who prioritize quick errands and one-stop shopping for everyday needs, beauty services, and casual dining options.",
+  "description": "Tri City Shopping Center in Redlands is a convenient open-air shopping destination strategically located along the south side of Interstate 10, easily accessible via the Alabama or Tennessee exits. This established community center features 60 retail shops, restaurants, and personal service businesses designed to help visitors save time and money while enjoying quick, friendly service and easy storefront parking. The center offers a comprehensive mix of tenants across multiple categories, including beauty and health services ranging from hair and nail salons to medical massage therapy, a diverse selection of shops featuring women's, men's, and children's fashion, accessories, shoes, and jewelry, and an appealing array of dining options from hot meals to sweet treats at See's Chocolates. Family-friendly amenities include High 5 Indoor Playground, making it a destination for both practical shopping needs and entertainment. With its focus on providing quality goods and services in a stress-free environment, Tri City Shopping Center has become a valued community hub where shoppers can accomplish more while spending quality time with family.",
+  "numberOfStores": 60,
+  "tier": 2,
+  "spaces": []
+}

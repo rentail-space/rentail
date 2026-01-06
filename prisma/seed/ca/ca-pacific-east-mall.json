@@ -1,0 +1,25 @@
+{
+  "address": "3288 Pierce Street",
+  "city": "Richmond",
+  "country": "US",
+  "googlePlaceID": "places/ChIJG_gPBSF5hYARFpD64CGRjXc",
+  "name": "Pacific East Mall",
+  "state": "CA",
+  "latitude": 37.8987711,
+  "longitude": -122.3075033,
+  "phone": "++1 510-527-3000",
+  "imageURLs": [
+    "/images/malls/ca-pacific-east-mall-1.jpg"
+  ],
+  "summary": "Pacific East Mall is a Pan-Asian shopping destination in Richmond that has served the East Bay community since 1998, offering authentic groceries, dining, clothing, and beauty services. Currently undergoing major renovations, the center provides a unique cultural marketplace experience with extended daily hours from 9 AM to 10 PM.",
+  "openFrom": 900,
+  "openUntil": 2200,
+  "rating": 4.1,
+  "reviewCount": 1708,
+  "website": "https://www.visitpacificeast.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Pacific East Mall serves a predominantly Asian-American community in the Richmond and East Bay area, attracting families and multi-generational households seeking authentic Pan-Asian products and dining experiences. The primary trade area includes Richmond, El Cerrito, and Albany, with visitors typically representing middle-income households interested in ethnic grocery shopping, specialty retail, and cultural dining options. The center has become a cultural hub for the Asian diaspora community since 1998, drawing shoppers who value authentic imported goods, traditional services, and community gathering spaces.",
+  "description": "Since opening its doors in 1998, Pacific East Mall has established itself as an indispensable cultural and commercial destination in the Richmond Bay Area, serving the communities of Richmond, El Cerrito, Albany, and surrounding cities. Located at 3288 Pierce Street in Richmond, California, this unique shopping center specializes in Pan-Asian retail and dining experiences, offering an authentic marketplace atmosphere that celebrates Asian culture and commerce. The mall features a diverse mix of tenants providing groceries, clothing, beauty products and services, alongside an impressive array of Pan-Asian dining options that have made it a culinary destination in the East Bay. Currently undergoing brand new interior and exterior renovations and upgrades, Pacific East Mall is evolving to meet the needs of modern shoppers while maintaining its cultural authenticity and community focus. Open daily from 9:00 AM to 10:00 PM, the center continues to thrive as a gathering place where tradition meets contemporary retail, offering visitors a distinctive shopping experience that reflects the rich diversity of the Bay Area's Asian-American community.",
+  "tier": 2,
+  "spaces": []
+}

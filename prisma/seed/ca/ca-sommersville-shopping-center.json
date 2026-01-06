@@ -1,0 +1,25 @@
+{
+  "address": "2500 Sycamore Drive",
+  "city": "Antioch",
+  "country": "US",
+  "googlePlaceID": "places/ChIJhSfJdsBZhYARCuUcUu7rbdg",
+  "name": "Sommersville Shopping Center",
+  "state": "CA",
+  "latitude": 38.0066055,
+  "longitude": -121.83326040000001,
+  "phone": "++1 925-754-8000",
+  "imageURLs": [
+    "/images/malls/ca-sommersville-shopping-center-1.jpg"
+  ],
+  "summary": "Sommersville Shopping Center is a community-focused retail destination in Antioch, California, serving the daily shopping needs of local residents. With convenient hours and a practical tenant mix, this neighborhood center provides accessible retail options for families in eastern Contra Costa County.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 3.8,
+  "reviewCount": 110,
+  "website": "http://www.somersvilletownecenter.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Sommersville Shopping Center serves the diverse Antioch community in eastern Contra Costa County, attracting primarily middle-income families and working professionals with household incomes ranging from $60,000 to $90,000. The trade area draws heavily from young families with children and multi-generational households typical of this growing suburban region. Shoppers tend to focus on convenience-oriented retail and everyday necessities, with strong preference for value-driven national chains and grocery-anchored shopping trips that serve the practical needs of the surrounding residential neighborhoods.",
+  "description": "Sommersville Shopping Center, also known as Sommersville Towne Center, serves as a convenient neighborhood shopping destination in Antioch, California, located at 2500 Sycamore Drive. This community-oriented retail center caters to the daily needs of residents in eastern Contra Costa County, offering a practical mix of stores and services for families and working professionals in the area. The center operates with consistent hours from 11:00 AM to 7:00 PM, providing accessible shopping options for the local community. With a solid 3.8-star rating from over 110 reviews, Sommersville Shopping Center has established itself as a reliable retail hub in the rapidly growing Antioch market. The center's strategic location and tenant mix reflect the evolving needs of this diverse suburban community, making it a practical choice for everyday shopping and errands.",
+  "tier": 2,
+  "spaces": []
+}

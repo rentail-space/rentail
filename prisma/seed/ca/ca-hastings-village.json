@@ -1,0 +1,24 @@
+{
+  "address": "3341 East Foothill Boulevard",
+  "city": "Pasadena",
+  "country": "US",
+  "googlePlaceID": "places/ChIJAaZ3eJ3cwoARSKgjcRVY-Cw",
+  "name": "Hastings Village",
+  "state": "CA",
+  "latitude": 34.151560499999995,
+  "longitude": -118.08089020000001,
+  "imageURLs": [
+    "/images/malls/ca-hastings-village-1.jpg"
+  ],
+  "summary": "Hastings Village is a convenient open-air shopping center on East Foothill Boulevard in Pasadena, featuring national retailers and local service providers. With a 4.3-star rating from over 2,400 reviews, this accessible neighborhood center serves the community's everyday shopping and service needs.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 2466,
+  "website": "http://google.com/url?q=https%3A%2F%2Fbusiness.google.com%2Fwebsite_shared%2Flaunch_bw.html%3Ff%3Dhttps%3A%2F%2Famzn.to%2F3XPuv0c&utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Hastings Village attracts a diverse mix of middle to upper-middle income families and professionals from the Pasadena and East San Gabriel Valley areas. The trade area serves households with median incomes ranging from $75,000 to $125,000, including young professionals, established families, and empty nesters. Shoppers are typically convenience-focused, seeking everyday services and national retailers for routine shopping needs. The center draws from a well-educated demographic reflective of Pasadena's professional workforce, with visitors prioritizing accessibility and familiar brand names for quick shopping trips.",
+  "description": "Hastings Village is a well-established open-air shopping center located on East Foothill Boulevard in Pasadena, California, serving the community's everyday retail and service needs. This convenient neighborhood center features a carefully curated mix of national retailers and local service providers, making it a go-to destination for residents seeking quality shopping without the hassle of larger regional malls. The center's accessible layout and ample parking create a comfortable shopping experience where customers can easily navigate between stores and complete multiple errands in one visit. With operating hours from 10 AM to 9 PM daily, Hastings Village accommodates busy schedules and provides flexibility for both daytime and evening shoppers. The center has earned a strong reputation in the community, reflected in its 4.3-star rating from over 2,400 reviews, demonstrating consistent customer satisfaction and its role as a trusted retail destination in the Pasadena area.",
+  "tier": 2,
+  "spaces": []
+}

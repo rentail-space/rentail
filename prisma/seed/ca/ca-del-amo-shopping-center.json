@@ -1,0 +1,24 @@
+{
+  "address": "21880 Hawthorne Boulevard",
+  "city": "Torrance",
+  "country": "US",
+  "googlePlaceID": "places/ChIJNxF5VihL3YAR0EtEQQYxEr4",
+  "name": "Del Amo Shopping Center",
+  "state": "CA",
+  "latitude": 33.8285737,
+  "longitude": -118.34896440000001,
+  "imageURLs": [
+    "/images/malls/ca-del-amo-shopping-center-1.jpg"
+  ],
+  "summary": "Del Amo Shopping Center is a well-established regional mall in Torrance managed by Simon Property Group, serving as a major retail hub for the South Bay area. With a strong 4.6-star rating and diverse tenant mix, it offers a comprehensive shopping and dining experience for families and shoppers throughout the greater Los Angeles region.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.6,
+  "reviewCount": 202,
+  "website": "https://www.simon.com/mall/del-amo-fashion-center?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Del Amo Shopping Center attracts a diverse middle to upper-middle class demographic from the South Bay area of Los Angeles, including families and professionals from Torrance, Redondo Beach, and surrounding communities. The trade area serves households with median incomes ranging from $75,000 to $125,000, with a strong representation of dual-income families and established homeowners aged 35-65. The center draws shoppers seeking a mix of value and quality, with visitors typically making planned shopping trips for fashion, home goods, and dining experiences that balance affordability with brand recognition.",
+  "description": "Del Amo Shopping Center, located at 21880 Hawthorne Boulevard in Torrance, California, stands as one of the South Bay's premier shopping destinations. Managed by Simon Property Group, one of the nation's largest retail real estate companies, this expansive regional mall has served the greater Los Angeles area for decades as a cornerstone of retail activity. The center offers visitors a comprehensive shopping experience with a diverse mix of national retailers, dining options, and entertainment venues that cater to the entire family. With convenient access from major South Bay thoroughfares and ample parking, Del Amo provides a comfortable and accessible shopping environment for residents throughout the region. The mall's strong performance is reflected in its impressive 4.6-star rating from over 200 Google reviews, demonstrating consistent customer satisfaction and its enduring appeal as a go-to destination for both everyday needs and special shopping occasions.",
+  "tier": 2,
+  "spaces": []
+}

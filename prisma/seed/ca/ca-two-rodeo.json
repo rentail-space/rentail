@@ -1,0 +1,25 @@
+{
+  "address": "9480 Dayton Way",
+  "city": "Beverly Hills",
+  "country": "US",
+  "googlePlaceID": "places/ChIJn5939vi7woARcuLusF0eq-o",
+  "name": "Two Rodeo",
+  "state": "CA",
+  "latitude": 34.0676614,
+  "longitude": -118.4008132,
+  "phone": "++1 310-247-7040",
+  "imageURLs": [
+    "/images/malls/ca-two-rodeo-1.jpg"
+  ],
+  "summary": "Two Rodeo Drive is Beverly Hills' iconic luxury outdoor shopping plaza featuring world-renowned designer boutiques, fine jewelry, and upscale dining in an elegant European-inspired setting. This prestigious destination on legendary Rodeo Drive offers an exclusive collection of high-end fashion brands and personalized shopping experiences for discerning international clientele.",
+  "openFrom": 1000,
+  "openUntil": 1800,
+  "rating": 4.7,
+  "reviewCount": 2032,
+  "website": "http://2rodeo.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Two Rodeo attracts an affluent, sophisticated demographic with household incomes exceeding $150,000 annually, primarily consisting of high-net-worth individuals aged 35-65 and international luxury shoppers. The trade area draws from Beverly Hills' prestigious residential neighborhoods, West Los Angeles, and global tourists seeking exclusive designer shopping experiences. Visitors are typically fashion-conscious professionals, celebrities, and affluent families who prioritize quality over price and seek personalized service in an upscale outdoor environment.",
+  "description": "Two Rodeo Drive stands as Beverly Hills' premier luxury shopping destination, offering an exclusive collection of the world's most prestigious designer brands in an elegant European-inspired outdoor plaza. Located at the heart of the legendary Rodeo Drive shopping district, this architectural gem features cobblestone streets reminiscent of Italian piazzas, creating an intimate and sophisticated atmosphere for discerning shoppers. The center showcases an carefully curated selection of high-end fashion boutiques, fine jewelry retailers, luxury eyewear specialists, and upscale dining establishments that cater to an international clientele. With its prime Beverly Hills location at 9480 Dayton Way, Two Rodeo has become synonymous with luxury retail, attracting celebrities, fashion enthusiasts, and affluent visitors from around the globe who seek the finest in designer fashion and personalized shopping experiences. The center's commitment to excellence extends beyond its retail offerings, providing impeccable service, exclusive events, and a refined ambiance that embodies the glamour and prestige of Beverly Hills.",
+  "tier": 3,
+  "spaces": []
+}

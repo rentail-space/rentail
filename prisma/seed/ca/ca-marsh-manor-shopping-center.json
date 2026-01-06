@@ -1,0 +1,25 @@
+{
+  "address": "3700 Florence Street",
+  "city": "Redwood City",
+  "country": "US",
+  "googlePlaceID": "places/ChIJQbl1wUejj4ARJ83XFomeFhw",
+  "name": "Marsh Manor Shopping Center",
+  "state": "CA",
+  "latitude": 37.4784065,
+  "longitude": -122.18712310000001,
+  "imageURLs": [
+    "/images/malls/ca-marsh-manor-shopping-center-1.jpg"
+  ],
+  "summary": "Marsh Manor Shopping Center is a family-managed community destination in Redwood City that has served the mid-peninsula since the 1950s. With locally-owned shops, diverse dining options, fitness studios, and a vibrant outdoor patio hosting live music and community events, it offers a charming neighborhood atmosphere that blends convenience with community connection.",
+  "openFrom": 900,
+  "openUntil": 1800,
+  "rating": 4.3,
+  "reviewCount": 729,
+  "website": "http://www.marshmanor.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Marsh Manor attracts a diverse, family-oriented demographic from the mid-peninsula area, including Redwood City and Menlo Park neighborhoods. The visitor base consists primarily of middle to upper-middle income households who value locally-owned businesses and community engagement. The center appeals to young professionals working remotely, health-conscious residents utilizing the fitness studios, and families seeking convenient neighborhood shopping and dining. The trade area reflects Silicon Valley's educated, tech-savvy population with strong preferences for quality local establishments, craft beverages, and community events over big-box retail experiences.",
+  "description": "Marsh Manor Shopping Center has been a beloved mid-peninsula destination since the 1950s, managed by the same family for over seven decades. This charming open-air community center offers a unique blend of locally-owned shops, restaurants, and services that create a true neighborhood gathering place. The center features an inviting outdoor patio that serves as the heart of community life, hosting live music on Thursday nights, trivia events, wine tastings, art fairs, and a popular summer concert series. Tenants include Delucchi's Market and Delicatessen as the grocery anchor, complemented by diverse dining options like Freewheel Brewing Company, State of Mind Pizzeria, Los Gallos Taqueria, and Feast and Floral Wine Bar. Health and wellness offerings include CorePower Yoga, StretchWorks, Studio K-Fit, and Bay Area Integrative Health Center, while essential services like Wells Fargo Bank, UPS Shipping, and Nature's Green Cleaners round out the tenant mix. The center's commitment to maintaining a friendly, personal atmosphere while providing modern amenities like free Wi-Fi and EV charging stations makes it a standout destination for both daily errands and social gatherings.",
+  "numberOfStores": 20,
+  "tier": 2,
+  "spaces": []
+}

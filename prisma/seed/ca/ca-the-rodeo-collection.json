@@ -1,0 +1,27 @@
+{
+  "address": "421 North Rodeo Drive",
+  "city": "Beverly Hills",
+  "country": "US",
+  "googlePlaceID": "places/ChIJDdxo7ge8woARPZ0N2nSkN0k",
+  "name": "The Rodeo Collection🛍",
+  "state": "CA",
+  "latitude": 34.0696398,
+  "longitude": -118.4038963,
+  "phone": "++1 310-276-9600",
+  "imageURLs": [
+    "/images/malls/ca-the-rodeo-collection-1.jpg"
+  ],
+  "summary": "The Rodeo Collection is a prestigious 70,000 square foot outdoor shopping plaza on Rodeo Drive, housing over 45 luxury boutiques, world-class salons, and premier cosmetic-medical practices. Located in Beverly Hills' Golden Triangle since 1980, it offers an exclusive blend of high-end shopping, beauty services, and fine dining in one of the world's most iconic luxury destinations.",
+  "openFrom": 900,
+  "openUntil": 1800,
+  "rating": 4.7,
+  "reviewCount": 774,
+  "website": "http://www.rodeocollection.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Rodeo Collection attracts an affluent, sophisticated demographic with high disposable income, primarily consisting of luxury shoppers aged 35-65 with household incomes exceeding $200,000 annually. The trade area draws from Beverly Hills' wealthy residential neighborhoods and international tourists seeking premium shopping experiences on Rodeo Drive. Visitors are typically professionals, executives, and high-net-worth individuals who prioritize quality, exclusivity, and personalized service in both retail and medical/beauty services.",
+  "description": "The Rodeo Collection stands as a prestigious 70,000 square foot shopping destination in the heart of Beverly Hills' legendary Golden Triangle, first opened in 1980 on the iconic 400 block of North Rodeo Drive. This breathtaking two-level outdoor plaza houses over 45 luxury boutiques, world-renowned salons, and the country's finest cosmetic-medical practices, offering an unparalleled blend of high-end retail, beauty, and wellness services. The center's distinguished tenant roster includes ultra-luxury brands like Bijan, Bvlgari, and The Rodeo Vault, complemented by premier medical professionals such as Dr. Cat Begovic and Rodeo Surgical Arts, alongside celebrated salons including Adriano Salon and Ferit Salon. Visitors can indulge in fine dining experiences at The Hideaway and Sushi Note, or enjoy French pastries at Sweet Angeles while browsing the storefronts beneath tall palm trees. The property's rich history traces back to the area's origins as \"El Rodeo de las Aguas\" (The Gathering of the Waters), a sacred site for the Tongva people, evolving through centuries into today's symbol of luxury and glamour that defines the Rodeo Drive shopping experience.",
+  "numberOfStores": 45,
+  "squareFootage": 70000,
+  "tier": 3,
+  "spaces": []
+}

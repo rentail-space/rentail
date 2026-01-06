@@ -1,0 +1,23 @@
+{
+  "address": "2751 Park View Court",
+  "city": "Oxnard",
+  "country": "US",
+  "googlePlaceID": "places/ChIJd7zN-_hM6IARoervXFZir90",
+  "name": "The Collection Riverpark",
+  "state": "CA",
+  "latitude": 34.2404706,
+  "longitude": -119.1778333,
+  "phone": "++1 805-278-9500",
+  "imageURLs": ["/images/malls/ca-the-collection-riverpark-1.jpg"],
+  "summary": "The Collection Riverpark is a modern, sophisticated outdoor lifestyle center in Oxnard featuring upscale shopping, a gourmet food hall, and beauty services. This highly-rated destination combines contemporary retail with experiential dining and regular community events in an attractive open-air setting.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.6,
+  "reviewCount": 5852,
+  "website": "http://www.thecollectionrp.com/",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Collection Riverpark attracts an affluent, family-oriented demographic from Oxnard and surrounding Ventura County communities, with primary visitors in the 30-55 age range and above-average household incomes. The trade area serves young professionals, established families, and empty nesters seeking upscale shopping and dining experiences in an outdoor setting. Shoppers demonstrate preferences for contemporary fashion, specialty retail, and experiential dining options including the Annex Food Hall, with strong weekend traffic from families and couples seeking entertainment and leisure activities.",
+  "description": "The Collection Riverpark stands as Oxnard's premier outdoor lifestyle destination, offering a sophisticated shopping and dining experience in a modern, open-air setting. Located at 2751 Park View Court, this upscale center features a carefully curated mix of contemporary retailers, beauty services, and distinctive dining options anchored by the popular Annex Food Hall. The center's design emphasizes a walkable, park-like atmosphere that encourages visitors to explore its diverse offerings, from fashion and accessories at retailers like Sunglass Hut and Carter's to wellness experiences at Club Pilates. With its strong focus on entertainment and events, The Collection regularly hosts community gatherings and seasonal activities that transform shopping into a social experience. The center's commitment to quality is reflected in its 4.6-star rating from nearly 6,000 reviews, convenient parking facilities, and thoughtful amenities that make it a preferred destination for Ventura County residents seeking an elevated retail experience.",
+  "tier": 2,
+  "spaces": []
+}

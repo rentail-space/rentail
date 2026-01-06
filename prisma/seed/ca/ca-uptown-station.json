@@ -1,0 +1,22 @@
+{
+  "address": "1955 Broadway",
+  "city": "Oakland",
+  "country": "US",
+  "googlePlaceID": "places/ChIJq9LxqIGBj4AR8sMnkK7d1dE",
+  "name": "Uptown Station",
+  "state": "CA",
+  "latitude": 37.8085832,
+  "longitude": -122.2687484,
+  "imageURLs": [
+    "/images/malls/ca-uptown-station-1.jpg"
+  ],
+  "summary": "Uptown Station is a historic 1928 landmark at 1955 Broadway in Oakland, reconstructed as a modern mixed-use destination for creative businesses and retail. Perched atop Oakland's transportation hub in the vibrant Uptown district, it combines over eighty years of heritage with contemporary workplace innovation.",
+  "rating": 3.8,
+  "reviewCount": 4,
+  "website": "https://uptownstationoakland.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Uptown Station attracts a diverse, urban demographic reflective of Oakland's creative and professional workforce. The primary trade area includes young professionals, tech workers, and entrepreneurs aged 25-45 with middle to upper-middle income levels, drawn to the area's transit accessibility and urban lifestyle. The center serves both daytime office workers seeking convenient amenities and local residents who value the historic neighborhood's cultural vibrancy and walkability. Visitors tend to prioritize convenience, authenticity, and locally-oriented shopping experiences over traditional mall retail.",
+  "description": "Uptown Station stands as a landmark of Oakland's urban renaissance, boasting over eighty years of heritage since its establishment in 1928 as an anchor of the central shopping district. This historic property has been thoughtfully reconstructed for modern use, transforming into a contemporary workplace and commercial destination designed with innovation and inspiration in mind. Perched atop the hub of Oakland's transportation network at 1955 Broadway, the center offers unparalleled accessibility for commuters and visitors alike. Located at the heart of Uptown Oakland, a neighborhood steeped in history and recognized as a center of creativity and innovation, Uptown Station provides an ideal environment for startups to launch brilliant ideas, realize ambitions, and defy expectations. The property reimagines the traditional workplace concept while maintaining its role as a vital part of Oakland's shopping and business community.",
+  "tier": 2,
+  "spaces": []
+}

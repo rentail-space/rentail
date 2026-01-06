@@ -1,0 +1,26 @@
+{
+  "address": "1855 41st Avenue",
+  "city": "Capitola",
+  "country": "US",
+  "googlePlaceID": "places/ChIJZ8sNqmkVjoARbsogtqmCI0E",
+  "name": "Capitola Mall",
+  "state": "CA",
+  "latitude": 36.9756737,
+  "longitude": -121.96867909999999,
+  "phone": "++1 831-476-9616",
+  "imageURLs": [
+    "/images/malls/ca-capitola-mall-1.jpg"
+  ],
+  "summary": "Capitola Mall is the only enclosed shopping center in Santa Cruz County, featuring over 80 specialty stores and restaurants anchored by Kohl's, Macy's, and Target. The mall serves both local residents and tourists with a traditional indoor shopping experience, food court, and family amenities including a kids' museum.",
+  "openFrom": 1000,
+  "openUntil": 1900,
+  "rating": 3.7,
+  "reviewCount": 2710,
+  "website": "http://shopcapitolamall.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Capitola Mall serves a diverse mix of Santa Cruz County residents and tourists visiting the picturesque coastal area. The primary trade area includes middle-income families and young professionals, with a significant seasonal influx of tourists during summer months. Shoppers tend to be value-conscious consumers seeking convenient access to department stores and everyday retail needs, with household incomes ranging from moderate to upper-middle class levels typical of the Santa Cruz region.",
+  "description": "Capitola Mall stands as the only enclosed shopping center in picturesque Santa Cruz County, serving as a vital retail hub for both local residents and the area's many tourists. Since its establishment, the mall has anchored the region's retail landscape with a solid mix of department stores including Kohl's, Macy's, and Target, complemented by more than 80 specialty stores and restaurants. The center offers a traditional enclosed mall experience with climate-controlled shopping, a food court, and family-friendly amenities including a kids' museum. Located at 1855 41st Avenue in Capitola, the mall provides convenient access to the coastal communities of Santa Cruz County while maintaining its position as the area's premier destination for department store shopping and everyday retail needs. Managed by MerloneGeier Partners, Capitola Mall continues to serve the community with extended hours Monday through Saturday from 10:00 AM to 7:00 PM, and Sunday from 11:00 AM to 6:00 PM, offering a comprehensive shopping experience in one of California's most scenic coastal regions.",
+  "numberOfStores": 80,
+  "tier": 2,
+  "spaces": []
+}

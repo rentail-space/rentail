@@ -1,0 +1,27 @@
+{
+  "address": "10823 Zelzah Avenue",
+  "city": "Los Angeles",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ_wfe8NyawoARm8gWkpHLCdA",
+  "name": "Granada Village",
+  "state": "CA",
+  "latitude": 34.2664198,
+  "longitude": -118.5237356,
+  "phone": "++1 213-553-2200",
+  "imageURLs": [
+    "/images/malls/ca-granada-village-1.jpg"
+  ],
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.5,
+  "reviewCount": 2595,
+  "website": "https://www.regencycenters.com/property/detail/90002/Granada-Village?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Granada Village serves an affluent residential community in Granada Hills with a 3-mile trade area population of 148,839 and daytime population of 137,225. The primary market consists of upper-middle-class families with an average household income of $156,698 and home values averaging $991,419, indicating strong purchasing power. The center attracts value-conscious yet quality-seeking shoppers who frequent off-price retailers and specialty stores for everyday needs and discretionary purchases. With over 5.1 million annual visits, the demographic profile skews toward established families and professionals seeking convenient neighborhood shopping for home goods, groceries, and pet supplies.",
+  "description": "Granada Village is a LEED Gold Certified community shopping center strategically located at 10823 Zelzah Avenue in Granada Hills, California, serving the dense residential neighborhoods near the 118 Freeway and just 1.5 miles from California State University, Northridge. This 226,488 square foot open-air center has established itself as a premier neighborhood destination, attracting over 5.1 million visitors annually with its compelling mix of value-oriented and specialty retailers. Anchored by major national brands including TJ MAXX, Burlington, HomeGoods, Petco, and Sprouts Farmers Market, Granada Village offers shoppers a comprehensive retail experience combining off-price fashion, home décor, natural groceries, and pet care under one convenient location. The center's commitment to sustainability is demonstrated through its LEED Gold certification, reflecting modern environmental standards while serving one of Los Angeles County's most affluent communities. Managed by Regency Centers, a national leader in grocery-anchored shopping center development, Granada Village continues to thrive as a vital retail hub for Granada Hills residents seeking quality merchandise at exceptional values in an environmentally conscious setting.",
+  "numberOfStores": 3,
+  "squareFootage": 226488,
+  "summary": "Granada Village is a LEED Gold Certified, 226,488 square foot community center in Granada Hills anchored by TJ MAXX, Burlington, HomeGoods, Petco, and Sprouts Farmers Market. Located near Cal State Northridge and the 118 Freeway, this thriving neighborhood destination serves an affluent residential community with over 5.1 million annual visits.",
+  "tier": 2,
+  "spaces": []
+}

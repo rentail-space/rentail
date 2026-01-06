@@ -1,0 +1,25 @@
+{
+  "address": "3200 Naglee Road",
+  "city": "Tracy",
+  "country": "US",
+  "googlePlaceID": "places/ChIJg_NvtA4YkIAR9cBa-DbfSUk",
+  "name": "West Valley Mall",
+  "state": "CA",
+  "latitude": 37.7600307,
+  "longitude": -121.45818000000001,
+  "phone": "++1 209-836-4091",
+  "imageURLs": [
+    "/images/malls/ca-west-valley-mall-1.jpg"
+  ],
+  "summary": "West Valley Mall is Tracy's enclosed regional shopping center featuring dozens of retail stores, a food court with multiple dining options, and an on-site cinema. This climate-controlled mall serves as the primary shopping and entertainment destination for the Tracy community and surrounding San Joaquin County areas.",
+  "openFrom": 1100,
+  "openUntil": 2000,
+  "rating": 3.9,
+  "reviewCount": 3848,
+  "website": "https://amzn.to/4kQIBaF?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "West Valley Mall serves the Tracy and San Joaquin County community, attracting primarily middle-income families and value-conscious shoppers from the surrounding suburban areas. The trade area draws from a diverse population base with a mix of young families, working professionals, and retirees, with household incomes ranging from moderate to middle class. Typical visitors are budget-minded consumers seeking convenient access to everyday retail needs, dining options, and entertainment, with shopping patterns focused on practical purchases rather than luxury goods.",
+  "description": "West Valley Mall stands as Tracy's primary enclosed shopping destination, serving the growing San Joaquin County community since its establishment. This regional mall offers a comprehensive shopping experience with dozens of retail stores spanning fashion, electronics, home goods, and specialty shops, all under one climate-controlled roof. The center features a full-service food court and multiple restaurant options, providing diverse dining choices for shoppers and families throughout the day. Entertainment is anchored by an on-site cinema, making West Valley Mall not just a shopping destination but a community gathering place for leisure and social activities. With convenient access from Naglee Road and ample parking, the mall continues to serve as a vital retail hub for Tracy residents and visitors from surrounding Central Valley communities.",
+  "tier": 2,
+  "spaces": []
+}

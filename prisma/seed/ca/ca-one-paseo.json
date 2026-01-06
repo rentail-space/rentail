@@ -1,0 +1,23 @@
+{
+  "address": "3725 Paseo Place",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJDbJX3qAJ3IARF0yynKXJcH4",
+  "name": "One Paseo",
+  "state": "CA",
+  "latitude": 32.951659299999996,
+  "longitude": -117.23579539999999,
+  "phone": "++1 858-523-2298",
+  "imageURLs": ["/images/malls/ca-one-paseo-1.jpg"],
+  "summary": "One Paseo is Del Mar's premier outdoor lifestyle destination, voted \"Best Shopping Center in San Diego\" for 2025, featuring curated shops, stellar dining, and luxury residential and office spaces. This urban village combines a coastal-meets-country aesthetic with engaging community events and gathering spaces, creating a vibrant mixed-use environment just minutes from the beach.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.5,
+  "reviewCount": 680,
+  "website": "http://onepaseo.com/",
+  "centerType": "LifestyleCenter",
+  "demographics": "One Paseo attracts an affluent, educated demographic from the Del Mar and greater San Diego coastal communities, with visitors typically in the 30-55 age range with household incomes exceeding $100,000. The trade area draws from nearby residential developments and office workers, appealing to professionals and families seeking upscale shopping, dining, and entertainment experiences. The center's coastal-meets-country aesthetic and curated tenant mix resonates with health-conscious, style-savvy consumers who value quality over quantity and prefer outdoor, experiential retail environments.",
+  "description": "One Paseo is an award-winning urban village in Del Mar, California, recognized as the \"Best Shopping Center in San Diego\" for 2025 by San Diego Magazine. This mixed-use lifestyle destination seamlessly blends curated retail shops, stellar dining options, luxury residential living, and Class-A office space into a cohesive outdoor environment that captures the essence of Southern California living. Developed by Kilroy Realty Corporation, One Paseo features a distinctive \"coastal meets country\" aesthetic with thoughtfully designed gathering spaces, outdoor courtyards, and floor-to-ceiling windows that maximize natural light and create an inviting atmosphere. The center offers a relaxing outdoor shopping experience covering everything from fitness and wellness to salon services, complemented by diverse dining options ranging from poke bowls to local microbrews. Beyond retail and dining, One Paseo serves as a community hub hosting year-round events including Summer Movie Nights and Holiday Festivities, while its residential component offers luxury apartment homes and its office spaces provide high-performance work environments in one of San Diego's most central and desirable locations, just minutes from the beach.",
+  "tier": 3,
+  "spaces": []
+}

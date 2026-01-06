@@ -1,0 +1,26 @@
+{
+  "address": "4400 Ontario Mills Parkway",
+  "city": "Ontario",
+  "country": "US",
+  "googlePlaceID": "places/ChIJi4t7sn41w4AR83jiENfwIPs",
+  "name": "Ontario Gateway Center",
+  "state": "CA",
+  "latitude": 34.0684632,
+  "longitude": -117.5521837,
+  "phone": "++1 949-398-8750",
+  "imageURLs": [
+    "/images/malls/ca-ontario-gateway-center-1.jpg"
+  ],
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 2756,
+  "website": "https://shopontariogateway.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Ontario Gateway Center serves a diverse, family-oriented demographic in the Inland Empire region of Southern California. The primary trade area attracts middle-income households with a mix of young families and working professionals, typically ranging from ages 25-54. The center draws from Ontario's growing population and benefits from proximity to major transportation corridors, appealing to value-conscious shoppers seeking convenient access to big-box retailers, dining, and entertainment options. The visitor base reflects the broader San Bernardino County demographics with a strong Hispanic and multi-cultural presence, favoring one-stop shopping destinations with ample parking and family-friendly amenities.",
+  "description": "Located in the heart of Ontario, California, Ontario Gateway Center is a premier shopping destination spanning 225,749 square feet of retail, dining, and entertainment space. This open-air community center offers a family-friendly shopping experience with convenient access to superstores, restaurants, and entertainment venues, all situated in a safe, well-lit environment with ample parking. The center's strategic location at 4400-4510 Ontario Mills Parkway places it in one of Southern California's most accessible retail corridors, serving the thriving Inland Empire community. Ontario Gateway Center features easy-to-access storefronts designed for maximum convenience, allowing visitors to shop, dine, and enjoy entertainment all in one location. Managed by JH Real Estate Partners, Inc., the center has established itself as a go-to destination for residents and visitors seeking a diverse mix of national retailers and dining options in a welcoming, accessible setting.",
+  "squareFootage": 225749,
+  "summary": "Ontario Gateway Center is a 225,749 square foot open-air shopping destination in Ontario, California, featuring superstores, restaurants, and entertainment options. This family-friendly center offers convenient access, ample parking, and a diverse mix of retailers in a safe, well-lit environment.",
+  "tier": 2,
+  "spaces": []
+}

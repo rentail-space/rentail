@@ -1,0 +1,25 @@
+{
+  "address": "2930 Bristol Street",
+  "city": "Costa Mesa",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ53Vy0hvf3IARfOLUAGnHxAY",
+  "name": "The LAB Anti-Mall",
+  "state": "CA",
+  "latitude": 33.6774672,
+  "longitude": -117.8861176,
+  "phone": "++1 657-232-0049",
+  "imageURLs": [
+    "/images/malls/ca-the-lab-anti-mall-1.jpg"
+  ],
+  "summary": "The LAB Anti-Mall is a modern, open-air lifestyle center in Costa Mesa that rejects traditional mall conventions in favor of independent boutiques, diverse dining options, and an on-site art gallery. This trendy destination attracts creative-minded shoppers seeking unique retail experiences and community-focused events in a contemporary urban setting.",
+  "openFrom": 700,
+  "openUntil": 200,
+  "rating": 4.5,
+  "reviewCount": 1839,
+  "website": "http://www.thelab.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "The LAB Anti-Mall attracts a young, creative, and culturally diverse demographic, primarily millennials and Gen Z visitors aged 18-35 with middle to upper-middle income levels. The trade area draws from Orange County's artistic and progressive communities, particularly appealing to urban professionals, students, and families seeking unique shopping and dining experiences. Visitors tend to be socially conscious consumers who value independent retailers, local artisans, and experiential retail over traditional mall shopping, with strong interest in art, music, and community events.",
+  "description": "The LAB Anti-Mall stands as Costa Mesa's bold reimagining of the traditional shopping center experience, embracing an alternative, creative spirit that has made it a cultural landmark in Orange County since its transformation. This open-air lifestyle destination deliberately positions itself as the antithesis of conventional retail, featuring an eclectic mix of independent boutiques, trendy shops, and locally-owned businesses that celebrate individuality and artistic expression. The center's modern architecture and urban design create an inviting atmosphere where visitors can explore unique retail concepts, dine at diverse restaurants ranging from casual eateries to innovative culinary experiences, and engage with rotating art gallery exhibitions. With its commitment to supporting local entrepreneurs and fostering community connections, The LAB has cultivated a loyal following among those seeking authentic, non-corporate shopping experiences. The center's vibrant event programming, Instagram-worthy spaces, and carefully curated tenant mix have established it as more than just a shopping destination—it's a cultural hub where creativity, commerce, and community converge in Costa Mesa's dynamic retail landscape.",
+  "tier": 2,
+  "spaces": []
+}

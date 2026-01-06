@@ -1,0 +1,25 @@
+{
+  "address": "5395 Napa Street",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJyR1IuKOr3oARDe-MEJTMetA",
+  "name": "Shops at Arrive Mission Valley",
+  "state": "CA",
+  "latitude": 32.7641307,
+  "longitude": -117.1965503,
+  "phone": "++1 858-257-3671",
+  "imageURLs": [
+    "/images/malls/ca-shops-at-arrive-mission-valley-1.jpg"
+  ],
+  "openFrom": 900,
+  "openUntil": 1800,
+  "rating": 5,
+  "reviewCount": 5,
+  "website": "https://arrivemissionvalley.com/retail-directory/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Shops at Arrive Mission Valley attracts a diverse, urban demographic primarily consisting of young professionals and millennials aged 25-45 with above-average incomes, drawn to the mixed-use development's modern residential and retail integration. The trade area serves San Diego's Mission Valley corridor, appealing to both local residents seeking convenience and visitors exploring the city's central shopping district. Typical visitors value walkability, contemporary dining options, and a curated retail experience that blends everyday needs with lifestyle amenities in an open-air, transit-accessible environment.",
+  "description": "Shops at Arrive Mission Valley represents a new generation of urban retail destinations in San Diego's dynamic Mission Valley neighborhood. This modern lifestyle center is part of the larger Arrive mixed-use development, seamlessly integrating residential living with contemporary shopping and dining experiences. The open-air center features a carefully curated selection of retailers and restaurants designed to serve both the on-site residential community and the broader Mission Valley area. With its walkable layout and modern architecture, the center offers a refreshing alternative to traditional enclosed malls, emphasizing convenience and community connection. The property's prime location at 5395 Napa Street provides easy access to major transportation corridors while maintaining an intimate, neighborhood-focused atmosphere that encourages visitors to explore, dine, and shop in a relaxed outdoor setting.",
+  "summary": "Shops at Arrive Mission Valley is a contemporary lifestyle center integrated within a modern mixed-use development in San Diego's Mission Valley. The open-air property offers a curated mix of retail and dining options designed to serve both residents and the surrounding community in a walkable, urban environment.",
+  "tier": 2,
+  "spaces": []
+}

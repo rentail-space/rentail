@@ -1,0 +1,25 @@
+{
+  "address": "707 East Fremont Street",
+  "city": "Las Vegas",
+  "country": "US",
+  "googlePlaceID": "places/ChIJheDMS3TDyIARIcCpZZIdnjM",
+  "name": "Downtown Container Park",
+  "state": "NV",
+  "latitude": 36.167560099999996,
+  "longitude": -115.13848370000001,
+  "phone": "++1 702-359-9982",
+  "imageURLs": [
+    "/images/malls/nv-downtown-container-park-1.jpg"
+  ],
+  "summary": "Downtown Container Park is an innovative open-air shopping center built from repurposed shipping containers in downtown Las Vegas, featuring boutique retail shops, unique restaurants, and live entertainment. The center offers a distinctive blend of local businesses, award-winning dining, and family attractions including an interactive playground, making it a must-visit destination in the revitalized Fremont Street area.",
+  "openFrom": 1000,
+  "openUntil": 2300,
+  "rating": 4.5,
+  "reviewCount": 11211,
+  "website": "http://downtowncontainerpark.com/",
+  "centerType": "LifestyleCenter",
+  "demographics": "Downtown Container Park attracts a diverse mix of urban millennials, young professionals, and tourists visiting downtown Las Vegas, with a strong emphasis on experience-seekers aged 25-45. The trade area serves both local residents of the revitalized downtown Las Vegas area and the significant tourist population drawn to the Fremont Street Experience and downtown entertainment district. Visitors tend to be culturally curious, value unique shopping and dining experiences over traditional retail, and have moderate to above-average disposable income for entertainment and specialty purchases.",
+  "description": "Downtown Container Park stands as one of Las Vegas's most innovative and distinctive shopping destinations, constructed entirely from repurposed shipping containers in the heart of downtown Las Vegas. This open-air lifestyle center represents a bold reimagining of retail space, combining sustainable architecture with a vibrant mix of boutique shops, unique restaurants, and family-friendly entertainment. The center features an eclectic collection of local and independent retailers alongside award-winning dining options like Oak & Ivy, known for its craft cocktails, and the Downtown Terrace offering gourmet quick-service dining. Families are drawn to the interactive playground featuring The Treehouse, a multi-level play structure that has become an iconic attraction, while adults enjoy free concerts, movies, and live entertainment on the main stage throughout the year. Located at 707 East Fremont Street, the Container Park has become a cornerstone of downtown Las Vegas's urban revitalization, offering a refreshing alternative to the Strip's mega-resorts with its walkable, community-focused atmosphere that celebrates local culture and creativity.",
+  "tier": 2,
+  "spaces": []
+}

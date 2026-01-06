@@ -1,0 +1,25 @@
+{
+  "address": "Jefferson Street",
+  "city": "La Quinta",
+  "country": "US",
+  "googlePlaceID": "places/ChIJS2o9hqP52oAR2m0TK-hKv94",
+  "name": "Jefferson Square",
+  "state": "CA",
+  "latitude": 33.7282632,
+  "longitude": -116.2703195,
+  "phone": "++1 858-847-4600",
+  "imageURLs": [
+    "/images/malls/ca-jefferson-square-1.jpg"
+  ],
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 296,
+  "website": "https://www.regencycenters.com/property/detail/288/Jefferson-Square?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Jefferson Square serves the affluent La Quinta community in the Coachella Valley, attracting upper-middle-income residents and seasonal visitors with household incomes typically exceeding $100,000. The primary trade area includes families, retirees, and resort community residents who value convenience and quality in their daily shopping needs. The center draws a mix of local professionals, golf community residents, and part-time desert dwellers who seek accessible neighborhood retail with a focus on essential services, dining, and personal care options.",
+  "description": "Jefferson Square is a well-established community shopping center located on Jefferson Street in La Quinta, California, serving the upscale desert communities of the Coachella Valley. Developed and managed by Regency Centers, a preeminent national owner and operator of shopping centers, Jefferson Square exemplifies the company's commitment to creating thriving neighborhood retail destinations in suburban trade areas with compelling demographics. The center features a carefully curated mix of retailers, restaurants, salons, medical offices, and fitness facilities designed to meet the daily needs of the surrounding residential communities. With convenient hours from 6:00 AM to 11:00 PM, Jefferson Square provides accessible shopping and services for busy families, professionals, and the area's significant retiree population. The center's strong 4.4-star rating from nearly 300 reviews reflects its popularity among locals who appreciate the quality tenant mix and well-maintained facilities that have made it a cornerstone of La Quinta's retail landscape.",
+  "summary": "Jefferson Square is a community shopping center in La Quinta, California, managed by Regency Centers and featuring a diverse mix of retail, dining, and service tenants. The center serves the affluent Coachella Valley communities with convenient daily shopping and amenities, earning strong customer ratings for its quality tenant mix and accessibility.",
+  "tier": 2,
+  "spaces": []
+}

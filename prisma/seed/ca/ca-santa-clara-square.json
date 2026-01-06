@@ -1,0 +1,23 @@
+{
+  "address": "Augustine Drive",
+  "city": "Santa Clara",
+  "country": "US",
+  "googlePlaceID": "places/ChIJmWJ3oPLJj4ARoEkoEkc4JO0",
+  "name": "Santa Clara Square",
+  "state": "CA",
+  "latitude": 37.3821365,
+  "longitude": -121.9749523,
+  "phone": "++1 844-488-4768",
+  "imageURLs": [
+    "/images/malls/ca-santa-clara-square-1.jpg"
+  ],
+  "summary": "Santa Clara Square is a mixed-use residential and retail community in Santa Clara's Silicon Valley area, featuring ground-floor retail services beneath modern apartments. Managed by Irvine Company, the property serves local residents and tech workers with convenient neighborhood amenities.",
+  "rating": 4.4,
+  "reviewCount": 647,
+  "website": "https://www.irvinecompanyapartments.com/locations/northern-california/santa-clara/santa-clara-square.html?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Santa Clara Square primarily serves young professionals and tech workers in the Silicon Valley area, with residents typically in the 25-45 age range and above-average household incomes reflecting the region's technology sector employment. The trade area attracts a diverse, educated demographic with a high percentage of dual-income households and singles seeking convenient access to shopping and services. Visitors tend to prioritize convenience and quality, with shopping patterns reflecting busy professional lifestyles and a preference for efficient, accessible retail options near residential areas.",
+  "description": "Santa Clara Square is a residential apartment community with ground-floor retail located on Augustine Drive in Santa Clara, California, developed and managed by Irvine Company Apartments. Situated in the heart of Silicon Valley, this mixed-use property combines modern apartment living with convenient neighborhood retail services. The center serves the surrounding residential community and nearby tech campuses with essential services and amenities. With a strong 4.4-star rating from over 647 reviews, Santa Clara Square has established itself as a well-regarded destination in the Santa Clara area. The property benefits from its prime location in one of the nation's most dynamic technology hubs, offering residents and visitors easy access to shopping, dining, and services in a walkable, community-oriented environment.",
+  "tier": 2,
+  "spaces": []
+}

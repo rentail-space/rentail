@@ -1,0 +1,26 @@
+{
+  "address": "1841 University Drive",
+  "city": "Vista",
+  "country": "US",
+  "googlePlaceID": "places/ChIJd-5Koat13IARcLVlFxJHmsc",
+  "name": "North County Square",
+  "state": "CA",
+  "latitude": 33.1715557,
+  "longitude": -117.2183861,
+  "phone": "++1 949-253-8980",
+  "imageURLs": [
+    "/images/malls/ca-north-county-square-1.jpg"
+  ],
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 2124,
+  "website": "http://www.shopnorthcountysquare.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "North County Square attracts a diverse, family-oriented demographic in the Vista area, serving middle-income households with a mix of young families, working professionals, and value-conscious shoppers. The trade area draws from North County San Diego communities seeking convenient access to everyday essentials and affordable retail options. Primary visitors include budget-minded shoppers aged 25-54 with household incomes in the $50,000-$90,000 range, who appreciate the center's combination of discount retailers, grocery options, and family-friendly services.",
+  "description": "North County Square is a vibrant community shopping destination located in Vista, California, offering a comprehensive retail experience for the entire family. The center features an impressive lineup of national retailers including Walmart, Target, ALDI, and Ross, providing shoppers with exceptional value and variety under one roof. Fashion-forward visitors can explore Old Navy for trendy apparel and Famous Footwear for the latest shoe styles, while home décor enthusiasts will appreciate Living Spaces for furniture solutions. The center has recently welcomed exciting new additions including Sephora, bringing beauty and cosmetics to the mix, and Planet Fitness for health-conscious community members. Beyond shopping, North County Square offers family entertainment through Play City & Ninja Factory, along with convenient services like T-Mobile and dining options including Starbucks, making it a true one-stop destination for all your needs in North County San Diego.",
+  "numberOfStores": 10,
+  "summary": "North County Square is a family-friendly community shopping center in Vista featuring major retailers like Walmart, Target, ALDI, and Ross, along with newly opened Sephora and Planet Fitness. The center offers a convenient mix of value-oriented shopping, dining, and entertainment options for North County San Diego residents.",
+  "tier": 2,
+  "spaces": []
+}

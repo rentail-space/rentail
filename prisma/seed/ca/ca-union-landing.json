@@ -1,0 +1,26 @@
+{
+  "address": "Interstate 880",
+  "city": "Union City",
+  "country": "US",
+  "googlePlaceID": "places/ChIJDRft38WVj4ARiInBsNmM4_U",
+  "name": "Union Landing",
+  "state": "CA",
+  "latitude": 37.6014134,
+  "longitude": -122.06666159999997,
+  "imageURLs": [
+    "/images/malls/ca-union-landing-1.jpg"
+  ],
+  "summary": "Union Landing is Union City's largest shopping destination, featuring over 70 stores, restaurants, and entertainment options across 1,000,000 square feet of open-air retail space. Conveniently located off Interstate 880, this lifestyle center offers a comprehensive one-stop shopping experience with big-box retailers, diverse dining, hotels, and regular community events.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.3,
+  "reviewCount": 6899,
+  "website": "https://unionlanding.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Union Landing attracts a diverse, family-oriented demographic from Union City and surrounding East Bay communities, with a strong representation of middle to upper-middle income households. The trade area serves a multicultural population with significant Asian and Hispanic market segments, reflecting the broader demographics of southern Alameda County. Primary visitors include working families aged 25-54 seeking convenient one-stop shopping for everyday needs, dining, and entertainment, with household incomes ranging from $75,000 to $150,000. The center draws both local residents for routine shopping trips and regional visitors from nearby cities like Fremont, Hayward, and Newark who are attracted by the extensive retail mix and entertainment options.",
+  "description": "Union Landing Shopping Center stands as Union City's premier retail destination, offering an expansive open-air shopping experience that has transformed the local retail landscape since its development. Strategically positioned at the intersection of Interstate 880, Alvarado-Niles Road, and Whipple Road, this sprawling 1,000,000 square foot shopping center serves as the largest retail hub in Union City and a major draw for the entire East Bay region. The center's thoughtful design creates a welcoming outdoor environment where visitors can explore over 70 diverse stores, restaurants, entertainment venues, hotels, and service providers all in one convenient location. Union Landing has established itself as a true lifestyle destination, going beyond traditional shopping to offer a comprehensive experience that includes dining options ranging from casual to upscale, entertainment facilities, and hospitality services that cater to both local residents and regional visitors. The center's commitment to providing value through regular deals, discounts, promotions, and live events ensures that each visit offers something new, making Union Landing not just a shopping center but a community gathering place where East Bay residents can shop, dine, and create lasting memories.",
+  "numberOfStores": 70,
+  "squareFootage": 1000000,
+  "tier": 2,
+  "spaces": []
+}

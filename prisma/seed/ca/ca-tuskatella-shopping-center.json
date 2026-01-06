@@ -1,0 +1,24 @@
+{
+  "address": "1344 North Tustin Street",
+  "city": "Orange",
+  "country": "US",
+  "googlePlaceID": "places/ChIJM0toa07X3IARH3ldOaI1J3A",
+  "name": "Tuskatella Shopping Center",
+  "state": "CA",
+  "latitude": 33.8099201,
+  "longitude": -117.8382294,
+  "imageURLs": [
+    "/images/malls/ca-tuskatella-shopping-center-1.jpg"
+  ],
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.3,
+  "reviewCount": 1464,
+  "website": "http://tuskatella-center.edan.io/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Tuskatella Shopping Center serves the Orange, California community with a diverse mix of middle-income families and young professionals typical of North Orange County. The trade area attracts residents from nearby neighborhoods seeking convenient shopping for everyday needs, party supplies, and gift items. Visitors tend to be value-conscious shoppers looking for variety in specialty retail categories, with a strong emphasis on practical household goods and celebration supplies.",
+  "description": "Tuskatella Shopping Center is a neighborhood shopping destination located at 1344 North Tustin Street in Orange, California. This community-focused retail center has earned a solid reputation with a 4.3-star rating from over 1,400 reviews, reflecting its popularity among local residents. The center offers a diverse selection of specialty retailers, with particular strength in gift wrap, gift bags, party favors, and office supplies, making it a go-to destination for celebration planning and everyday essentials. Shoppers consistently praise the center for its variety of options and clean, well-maintained facilities. Operating daily from 8:00 AM to 10:00 PM, Tuskatella Shopping Center provides convenient access to quality retail services in the heart of Orange County, serving as a reliable neighborhood hub for residents seeking practical shopping solutions in a welcoming environment.",
+  "summary": "Tuskatella Shopping Center is a well-rated neighborhood retail destination in Orange, California, known for its variety of specialty stores offering gift wrap, party supplies, and office goods. With over 1,400 reviews and a 4.3-star rating, this clean and convenient center serves as a popular local shopping hub for everyday needs.",
+  "tier": 2,
+  "spaces": []
+}

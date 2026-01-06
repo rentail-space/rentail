@@ -1,0 +1,207 @@
+{
+  "address": "5600 East Santa Ana Canyon Road",
+  "city": "Anaheim",
+  "country": "US",
+  "googlePlaceID": "places/ChIJcQR-jv3Q3IARwH0H-lDov60",
+  "name": "Crossroads Shopping Center",
+  "state": "CA",
+  "latitude": 33.8505575,
+  "longitude": -117.7914599,
+  "imageURLs": [
+    "/images/malls/ca-crossroads-shopping-center-1.jpg"
+  ],
+  "openFrom": 700,
+  "openUntil": 2200,
+  "rating": 4.2,
+  "reviewCount": 761,
+  "website": "https://sihiproperties.com/property/crossroads/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Crossroads Shopping Center serves the affluent Anaheim Hills community with a highly educated and prosperous customer base. The trade area features households with median incomes ranging from $117,498 to $131,120, with average household incomes reaching $157,183 within a 3-mile radius. The primary market consists of established families and professionals with a median age of 40-45 years, where nearly half hold college degrees. The center benefits from strong daytime traffic of over 56,000 vehicles daily and foot traffic from nearby Canyon High School and Imperial Elementary School, attracting both convenience-focused grocery shoppers and service-oriented customers seeking dining, personal care, and professional services.",
+  "description": "Crossroads Shopping Center is a thriving 114,000+ square foot grocery-anchored community center strategically located in the prestigious Anaheim Hills area of Orange County, California. Positioned at the highly visible corner of Imperial Highway and East Santa Ana Canyon Road, just south of the 91 freeway, the center commands exceptional exposure with over 56,000 vehicles passing daily. The property is anchored by Vons supermarket and features a diverse tenant mix including popular national brands like Raising Cane's, Taco Bell, Bank of America, and AT&T, alongside local favorites such as Zito's Pizza, Bagel Me!, and Anaheim Hills Jewelers. The center serves as a vital community hub for the affluent Anaheim Hills neighborhood, drawing consistent foot traffic from nearby Canyon High School and Imperial Elementary School. With its strong tenant roster, prime location, and access to one of Orange County's most desirable residential communities, Crossroads Shopping Center offers a convenient one-stop destination for grocery shopping, dining, banking, and essential services.",
+  "numberOfStores": 19,
+  "squareFootage": 114000,
+  "summary": "Crossroads Shopping Center is a 114,000+ square foot grocery-anchored community center in affluent Anaheim Hills, featuring Vons, Raising Cane's, Bank of America, and a diverse mix of dining and service tenants. Located at a high-traffic intersection near the 91 freeway, the center serves as a convenient community hub with over 56,000 vehicles passing daily.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "5600",
+      "type": "Inline",
+      "size": 42404,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/vons.png"
+      ]
+    },
+    {
+      "number": "5560",
+      "type": "Inline",
+      "size": 20100,
+      "available": true,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/available-blue-1.png"
+      ]
+    },
+    {
+      "number": "5550",
+      "type": "Inline",
+      "size": 3219,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/att.png"
+      ]
+    },
+    {
+      "number": "5550 1/2",
+      "type": "Inline",
+      "size": 1167,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/KCnails.png"
+      ]
+    },
+    {
+      "number": "5552",
+      "type": "Inline",
+      "size": 2089,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/bagelme.png"
+      ]
+    },
+    {
+      "number": "5556-B",
+      "type": "Inline",
+      "size": 1210,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/supercuts.png"
+      ]
+    },
+    {
+      "number": "5556-A",
+      "type": "Inline",
+      "size": 820,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/poke-wave.png"
+      ]
+    },
+    {
+      "number": "5562",
+      "type": "Inline",
+      "size": 1113,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/anaheimhills.png"
+      ]
+    },
+    {
+      "number": "5564",
+      "type": "Inline",
+      "size": 1852,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/ricardo-hair.png"
+      ]
+    },
+    {
+      "number": "5566",
+      "type": "Inline",
+      "size": 1608,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/greenclean.png"
+      ]
+    },
+    {
+      "number": "5568",
+      "type": "Inline",
+      "size": 1530,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/mysmiledental.png"
+      ]
+    },
+    {
+      "number": "5572",
+      "type": "Inline",
+      "size": 4068,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/zitos.png"
+      ]
+    },
+    {
+      "number": "5576",
+      "type": "Inline",
+      "size": 1372,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/Pick_Up_Stix_logo_plain.svg_.png"
+      ]
+    },
+    {
+      "number": "5614",
+      "type": "Inline",
+      "size": 4139,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/leslies.png"
+      ]
+    },
+    {
+      "number": "5616",
+      "type": "Inline",
+      "size": 4055,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/sherwin-williams.png"
+      ]
+    },
+    {
+      "number": "5620",
+      "type": "Inline",
+      "size": 2010,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/ding-tea.png"
+      ]
+    },
+    {
+      "number": "5626",
+      "type": "Inline",
+      "size": 1727,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/tacobell.png"
+      ]
+    },
+    {
+      "number": "5630",
+      "type": "Inline",
+      "size": 6215,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/providence-urgent-care.png"
+      ]
+    },
+    {
+      "number": "5640",
+      "type": "Inline",
+      "size": 9856,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/bofa.png"
+      ]
+    },
+    {
+      "number": "191",
+      "type": "Inline",
+      "size": 3233,
+      "available": false,
+      "imageURLs": [
+        "https://sihiproperties.com/wp-content/uploads/raising-canes.png"
+      ]
+    }
+  ]
+}

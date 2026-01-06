@@ -1,0 +1,25 @@
+{
+  "address": "7610 Hazard Center Drive",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJUdl3tDtV2YARcNhVCjBL5n0",
+  "name": "Hazard Center",
+  "state": "CA",
+  "latitude": 32.7708649,
+  "longitude": -117.1584995,
+  "phone": "++1 619-543-8111",
+  "imageURLs": [
+    "/images/malls/ca-hazard-center-1.jpg"
+  ],
+  "summary": "Hazard Center is a popular community shopping destination in San Diego's Mission Valley featuring chain retailers, casual dining options, a movie theater, and a dance studio. With convenient hours and a strong 4.3-star rating from thousands of reviews, it serves as an accessible hub for both local residents and area professionals.",
+  "openFrom": 900,
+  "openUntil": 2200,
+  "rating": 4.3,
+  "reviewCount": 2885,
+  "website": "https://hazardcenter.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Hazard Center attracts a diverse mix of professionals and families from the Mission Valley and surrounding San Diego neighborhoods, with a strong representation of middle to upper-middle income households. The trade area draws heavily from nearby office workers during weekday lunch hours and early evenings, as well as local residents seeking convenient shopping and dining options. The center appeals to a broad age demographic from young professionals to families with children, with visitors typically seeking a mix of practical retail, casual dining, and entertainment options in an accessible urban location.",
+  "description": "Hazard Center is a vibrant community shopping destination located in the heart of San Diego's Mission Valley at 7610 Hazard Center Drive. This open-air shopping center has established itself as a convenient hub for both local residents and professionals working in the surrounding area, offering a well-curated mix of chain retailers, casual dining restaurants, entertainment venues including a movie theater, and unique amenities like a dance studio. The center's strategic location in Mission Valley provides easy accessibility and ample parking, making it a popular choice for everyday shopping needs and leisure activities. With operating hours from 9:00 AM to 10:00 PM, Hazard Center accommodates busy schedules while maintaining a welcoming atmosphere that encourages visitors to explore its diverse tenant offerings. The shopping center has earned strong community recognition, reflected in its impressive 4.3-star rating from nearly 3,000 reviews, demonstrating its consistent appeal and value to San Diego shoppers seeking quality retail and dining experiences in a comfortable, accessible setting.",
+  "tier": 2,
+  "spaces": []
+}

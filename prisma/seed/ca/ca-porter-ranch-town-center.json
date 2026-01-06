@@ -1,0 +1,25 @@
+{
+  "address": "118 Ronald Reagan Freeway",
+  "city": "Los Angeles",
+  "country": "US",
+  "googlePlaceID": "places/ChIJaeQT3q2EwoARPa-uJZR4hFE",
+  "name": "Porter Ranch Town Center",
+  "state": "CA",
+  "latitude": 34.2765392,
+  "longitude": -118.567169,
+  "imageURLs": [
+    "/images/malls/ca-porter-ranch-town-center-1.jpg"
+  ],
+  "summary": "Porter Ranch Town Center is a sprawling open-air shopping destination serving the affluent Porter Ranch community with over 200,000 square feet of retail space. The center offers a comprehensive mix of grocery stores, diverse restaurants, and essential service providers, making it the go-to convenience hub for northwest San Fernando Valley residents.",
+  "openFrom": 700,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 5744,
+  "website": "https://shapell.com/portfolio/porter-ranch-town-center/",
+  "centerType": "StripCenter",
+  "demographics": "Porter Ranch Town Center serves an affluent suburban community in the northwest San Fernando Valley, attracting primarily upper-middle-class families with household incomes significantly above the Los Angeles County median. The trade area draws residents from Porter Ranch and neighboring communities like Northridge and Granada Hills, with a demographic mix that skews toward families with children, professionals aged 30-55, and retirees. Shoppers typically visit for convenience-oriented needs including grocery shopping, dining, and personal services, with strong daytime traffic from local residents and evening restaurant patronage. The center benefits from Porter Ranch's reputation as one of LA's more desirable master-planned communities with newer housing stock and highly-rated schools.",
+  "description": "Porter Ranch Town Center stands as the commercial heart of Porter Ranch, one of Los Angeles County's premier master-planned communities in the northwest San Fernando Valley. Spanning over 202,000 square feet along Rinaldi Street, this open-air shopping destination has evolved into an essential gathering place for the surrounding affluent residential neighborhoods. The center's thoughtful design creates a welcoming environment where residents can accomplish their daily errands, enjoy diverse dining options, and access essential services all in one convenient location. From well-stocked grocery stores offering fresh produce and gourmet selections to an impressive array of restaurants serving cuisines from around the world, the tenant mix reflects the sophisticated tastes of the Porter Ranch community. The center's service-oriented shops provide everything from banking and healthcare to personal care and professional services, making it a true one-stop destination. Managed by Shapell Properties, a multi-generational real estate company with deep roots in Southern California development, Porter Ranch Town Center benefits from professional stewardship that maintains high standards for the property. The center's stabilized status and strong occupancy reflect its importance to the local community and its success in meeting the evolving needs of Porter Ranch residents.",
+  "squareFootage": 202986,
+  "tier": 2,
+  "spaces": []
+}

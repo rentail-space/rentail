@@ -1,0 +1,25 @@
+{
+  "address": "43440 Boscell Road",
+  "city": "Fremont",
+  "country": "US",
+  "googlePlaceID": "places/ChIJr6dFOGvHj4ARH_uq9R7o7vY",
+  "name": "Pacific Commons Shopping Center",
+  "state": "CA",
+  "latitude": 37.502678,
+  "longitude": -121.9713578,
+  "phone": "++1 510-770-9798",
+  "imageURLs": [
+    "/images/malls/ca-pacific-commons-shopping-center-1.jpg"
+  ],
+  "summary": "Pacific Commons Shopping Center is a large, interconnected lifestyle center in Fremont featuring big-box retailers, specialty shops, and diverse dining options. This popular East Bay destination serves the area's affluent, tech-oriented community with convenient access and extended hours.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 7011,
+  "website": "http://www.pacificcommons.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Pacific Commons attracts a diverse, affluent demographic from the Fremont and broader East Bay area, with a strong representation of tech professionals and families given its proximity to Silicon Valley. The trade area serves middle to upper-middle income households with median incomes significantly above the national average, reflecting the Bay Area's economic profile. Primary visitors include dual-income families aged 30-55 seeking convenient shopping and dining options, as well as younger professionals drawn to the center's modern retail mix and entertainment offerings. The center benefits from Fremont's highly educated, multicultural population with strong Asian-American representation, influencing tenant mix and dining options.",
+  "description": "Pacific Commons Shopping Center stands as one of Fremont's premier retail destinations, offering a comprehensive shopping and dining experience in the heart of the East Bay. This large interconnected retail complex seamlessly blends big-box retailers with specialty shops and casual dining establishments, creating a vibrant lifestyle center that serves the diverse needs of the Bay Area community. Located at 43440 Boscell Road, the center has established itself as a go-to destination for both everyday essentials and leisure activities, with convenient access from major highways serving Fremont and surrounding cities. The open-air design encourages a pleasant shopping experience, while the carefully curated mix of national retailers and service providers ensures visitors can accomplish multiple errands in one trip. With extended operating hours from 6 AM to 11 PM and consistently high ratings from thousands of visitors, Pacific Commons has become an integral part of the local retail landscape, reflecting the area's dynamic growth and the sophisticated preferences of Silicon Valley's tech-savvy population.",
+  "tier": 2,
+  "spaces": []
+}

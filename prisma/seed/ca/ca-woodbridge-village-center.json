@@ -1,0 +1,25 @@
+{
+  "address": "4500 - 4820 Barranca Parkway",
+  "city": "Irvine",
+  "country": "US",
+  "googlePlaceID": "places/ChIJryWtErHd3IAR1PT16nOIuYg",
+  "name": "Woodbridge Village Center",
+  "state": "CA",
+  "latitude": 33.6772436,
+  "longitude": -117.7996506,
+  "phone": "++1 949-720-3100",
+  "imageURLs": [
+    "/images/malls/ca-woodbridge-village-center-1.jpg"
+  ],
+  "summary": "Woodbridge Village Center is a scenic open-air shopping plaza overlooking North Lake in Irvine, offering everyday essentials, diverse dining options, and family entertainment including an AMC theater. This tree-studded lakeside destination serves as a neighborhood hub with community events, fitness options, and a relaxing atmosphere that combines practical shopping with recreational amenities.",
+  "openFrom": 700,
+  "openUntil": 0,
+  "rating": 4.5,
+  "reviewCount": 1292,
+  "website": "https://www.shopirvinecompany.com/centers/irvine/woodbridge-village-center/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Woodbridge Village Center attracts an affluent, family-oriented demographic from the surrounding Irvine master-planned communities, with households typically earning above-median incomes and including young professionals and families with children. The trade area consists primarily of well-educated residents aged 25-54 who value convenience, quality dining options, and family-friendly entertainment. Visitors demonstrate shopping patterns focused on everyday essentials combined with lifestyle amenities, frequenting the center for grocery runs, fitness activities at CorePower Yoga, casual dining experiences, and family movie outings at the AMC theater. The lakeside location and community event programming appeal particularly to residents seeking a neighborhood gathering place that combines practical shopping with recreational activities.",
+  "description": "Woodbridge Village Center is a distinctive open-air shopping destination nestled along the scenic shores of North Lake in Irvine, California. This lakeside plaza offers a unique blend of everyday conveniences and lifestyle amenities, creating a true neighborhood hub for the surrounding Woodbridge master-planned community. The center's tree-studded seating areas and serene lake views provide a tranquil backdrop for shopping, dining, and entertainment, setting it apart from typical retail destinations. Anchored by essential services and featuring popular attractions like the AMC Woodbridge 5 movie theater, CorePower Yoga, and Sessions West Coast Deli, the center caters to both daily needs and leisure activities. Family-friendly community events throughout the year, combined with amenities including a kids play area, complimentary WiFi, and wheelchair accessibility, make Woodbridge Village Center a welcoming gathering place where residents can energize, unwind, and connect with their community while enjoying the natural beauty of its lakeside setting.",
+  "tier": 2,
+  "spaces": []
+}

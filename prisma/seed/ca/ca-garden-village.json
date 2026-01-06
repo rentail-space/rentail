@@ -1,0 +1,25 @@
+{
+  "address": "28134 South Western Avenue",
+  "city": "Los Angeles",
+  "country": "US",
+  "googlePlaceID": "places/ChIJZ4copgJK3YAR6oIlPDZlWK4",
+  "name": "Garden Village",
+  "state": "CA",
+  "latitude": 33.764929599999995,
+  "longitude": -118.3098799,
+  "phone": "++1 281-970-3300",
+  "imageURLs": [
+    "/images/malls/ca-garden-village-1.jpg"
+  ],
+  "summary": "Garden Village is a neighborhood shopping center on South Western Avenue in Los Angeles, serving the Harbor Gateway and San Pedro communities. With a 4.4-star rating and convenient daily hours, it provides local residents with accessible retail and service options.",
+  "openFrom": 1000,
+  "openUntil": 1800,
+  "rating": 4.4,
+  "reviewCount": 686,
+  "website": "http://inventrust.propertycapsule.com/properties/40044654/#maps",
+  "centerType": "StripCenter",
+  "demographics": "Garden Village serves the San Pedro and Harbor Gateway neighborhoods of South Los Angeles, attracting a diverse, working-class demographic with a significant Hispanic population. The trade area consists primarily of families with moderate incomes ranging from $40,000 to $75,000 annually, including young families and middle-aged households seeking convenient neighborhood shopping. Visitors typically engage in routine shopping patterns focused on everyday necessities, groceries, and services, with a preference for value-oriented retailers and local businesses that cater to the community's cultural preferences.",
+  "description": "Garden Village is a neighborhood shopping center located at 28134 South Western Avenue in the Harbor Gateway area of Los Angeles, California. Serving the local San Pedro and South Los Angeles communities, this convenient retail destination provides residents with easy access to everyday shopping needs and services. The center operates daily from 10:00 AM to 6:00 PM, offering a practical shopping experience for the surrounding neighborhoods. With a solid 4.4-star rating from 686 Google reviews, Garden Village has established itself as a reliable community resource for local residents. The center's location along South Western Avenue provides excellent visibility and accessibility for shoppers in this diverse Los Angeles neighborhood.",
+  "tier": 1,
+  "spaces": []
+}

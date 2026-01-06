@@ -1,0 +1,25 @@
+{
+  "address": "1010 North El Camino Real",
+  "city": "Encinitas",
+  "country": "US",
+  "googlePlaceID": "places/ChIJU2Aa_4AL3IAROOSIZjHvwu8",
+  "name": "Encinitas Ranch Town Center",
+  "state": "CA",
+  "latitude": 33.06677430000001,
+  "longitude": -117.2655252,
+  "phone": "++1 760-944-3604",
+  "imageURLs": [
+    "/images/malls/ca-encinitas-ranch-town-center-1.jpg"
+  ],
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 1565,
+  "website": "http://google.com/url?q=https%3A%2F%2Fbusiness.google.com%2Fwebsite_shared%2Flaunch_bw.html%3Ff%3Dhttps%3A%2F%2Famzn.to%2F4f9T5Pz&utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Encinitas Ranch Town Center serves an affluent coastal North San Diego County market with median household incomes exceeding $100,000. The primary trade area attracts upper-middle-class families, active retirees, and young professionals drawn to the area's beach lifestyle and excellent schools. Shoppers tend to be health-conscious, environmentally aware, and favor convenience-oriented retail with a preference for quality grocery options and service-based tenants. The center captures both daily needs shopping from nearby residential communities and destination visits from throughout the Encinitas area.",
+  "description": "Encinitas Ranch Town Center is a well-established community shopping destination located at 1010 North El Camino Real in the heart of Encinitas, California. Serving the affluent coastal communities of North San Diego County, this open-air center has become an integral part of the local retail landscape since its development. The center maintains strong community connections with a 4.4-star rating from over 1,500 reviews, reflecting its popularity among residents and visitors alike. Operating daily from 10:00 AM to 9:00 PM, the center provides convenient access to a diverse mix of retailers and services that cater to the daily needs and lifestyle preferences of the surrounding neighborhoods. Its prime location along the El Camino Real corridor ensures excellent visibility and accessibility, making it a go-to destination for both routine shopping trips and leisurely visits in one of Southern California's most desirable coastal communities.",
+  "summary": "Encinitas Ranch Town Center is a popular community shopping destination in coastal North San Diego County, serving affluent neighborhoods with convenient daily retail and services. With a 4.4-star rating from over 1,500 reviews, this well-maintained open-air center offers accessible shopping along the El Camino Real corridor.",
+  "tier": 2,
+  "spaces": []
+}

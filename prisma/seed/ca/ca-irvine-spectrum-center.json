@@ -1,0 +1,25 @@
+{
+  "address": "670 Spectrum Center Drive",
+  "city": "Irvine",
+  "country": "US",
+  "googlePlaceID": "places/ChIJR892-fvn3IARQnnqgTu-Phc",
+  "name": "Irvine Spectrum Center",
+  "state": "CA",
+  "latitude": 33.6499958,
+  "longitude": -117.7437013,
+  "phone": "++1 949-790-4871",
+  "imageURLs": [
+    "/images/malls/ca-irvine-spectrum-center-1.jpg"
+  ],
+  "summary": "Irvine Spectrum Center is a premier open-air lifestyle destination in Orange County featuring an extensive collection of retail stores, restaurants, and entertainment attractions including the iconic Giant Wheel, carousel, ice rink, and newly opened venues like Hijinx Hotel and Holey Moley. Celebrating 30 years of operation, this award-winning center combines upscale shopping and dining with year-round events and seasonal programming that make it a beloved community gathering place.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.6,
+  "reviewCount": 17271,
+  "website": "https://www.irvinespectrumcenter.com/",
+  "centerType": "LifestyleCenter",
+  "demographics": "Irvine Spectrum Center attracts an affluent, family-oriented demographic with median household incomes exceeding $100,000, reflecting the surrounding Irvine area's highly educated professional population. The primary visitor base consists of millennials and Gen X families with children, as well as young professionals aged 25-45 who are drawn to the center's experiential retail and dining offerings. The trade area encompasses Orange County's most prosperous communities, with shoppers exhibiting preferences for premium brands, experiential entertainment, and upscale dining experiences. Weekend traffic includes significant tourist and regional draw from across Southern California, attracted by the center's entertainment amenities and special events.",
+  "description": "Irvine Spectrum Center stands as Southern California's premier open-air lifestyle destination, celebrating over 30 years of serving the Orange County community since its opening in the 1990s. This expansive entertainment and shopping complex features an impressive mix of retail stores spanning women's and men's apparel, beauty, and accessories, complemented by an extensive dining scene that includes both full-service restaurants and casual quick-service options. The center has evolved into a true experiential destination with signature attractions including the iconic Giant Wheel offering panoramic views, a classic carousel, and newly opened entertainment venues like Hijinx Hotel and Holey Moley mini golf. Seasonal programming enhances the visitor experience year-round, from the popular ice skating rink and nightly tree lighting ceremonies during the holidays to the Sounds of the Season musical performances and Palm Lights displays. Located at 670 Spectrum Center Drive in the heart of Irvine, this award-winning center combines the convenience of modern retail with the ambiance of a community gathering place, drawing millions of visitors annually with its blend of shopping, dining, and entertainment offerings.",
+  "tier": 3,
+  "spaces": []
+}

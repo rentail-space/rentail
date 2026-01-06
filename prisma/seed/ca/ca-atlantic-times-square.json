@@ -1,0 +1,25 @@
+{
+  "address": "500 North Atlantic Boulevard",
+  "city": "Monterey Park",
+  "country": "US",
+  "googlePlaceID": "places/ChIJGfrjIELFwoARNT0e17yYj68",
+  "name": "Atlantic Times Square",
+  "state": "CA",
+  "latitude": 34.0686422,
+  "longitude": -118.1336659,
+  "phone": "++1 626-570-9453",
+  "imageURLs": [
+    "/images/malls/ca-atlantic-times-square-1.jpg"
+  ],
+  "summary": "Atlantic Times Square is an open-air lifestyle center in Monterey Park featuring a quaint streetscape design with world-class retail, restaurants, entertainment, and residential condominiums. The center is particularly renowned for its diverse collection of Asian eateries and serves as a cultural gathering place for the San Gabriel Valley community.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.3,
+  "reviewCount": 2387,
+  "website": "http://atlantictimesquare.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Atlantic Times Square attracts a predominantly Asian-American demographic, reflecting the diverse Monterey Park community with significant Chinese, Vietnamese, and other Asian populations. The center draws middle to upper-middle income families and young professionals, typically aged 25-55, who seek authentic Asian dining experiences and specialty retail. The trade area serves as a cultural hub for the San Gabriel Valley's Asian communities, with visitors traveling from across Los Angeles County for the unique mix of restaurants and shops that cater to both traditional and contemporary Asian-American tastes.",
+  "description": "Atlantic Times Square stands as a distinctive mixed-use destination in Monterey Park, California, seamlessly blending retail, dining, entertainment, and residential living into one vibrant community gathering place. This open-air lifestyle center features a charming streetscape design that creates an inviting pedestrian-friendly environment where visitors can stroll through a carefully curated collection of shops and restaurants. The center has become renowned throughout the San Gabriel Valley for its exceptional concentration of Asian eateries, offering an authentic culinary journey through Chinese, Japanese, Korean, Vietnamese, and other Asian cuisines that reflect the rich cultural diversity of the surrounding community. Above the retail spaces, modern residential condominiums provide urban living opportunities, creating a true live-work-play environment that keeps the center active throughout the day and evening. With its unique positioning as both a shopping destination and cultural hub, Atlantic Times Square has established itself as a premier gathering place where friends and families come together to shop, dine, and unwind in an atmosphere that celebrates the area's multicultural heritage.",
+  "tier": 2,
+  "spaces": []
+}

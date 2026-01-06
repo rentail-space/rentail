@@ -1,0 +1,27 @@
+{
+  "address": "2802 Juan Street",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJLQb7gOeq3oAR0eahLqw9tj0",
+  "name": "Presidio Plaza - Old Town",
+  "state": "CA",
+  "latitude": 32.7561891,
+  "longitude": -117.1972264,
+  "phone": "++1 619-642-2711",
+  "imageURLs": [
+    "/images/malls/ca-presidio-plaza-old-town-1.jpg"
+  ],
+  "openFrom": 700,
+  "openUntil": 2230,
+  "rating": 4.3,
+  "reviewCount": 11,
+  "website": "http://www.mckeecommercialrealestate.com/presidio-plaza--old-town?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Presidio Plaza - Old Town attracts a diverse mix of professionals, tourists, and local residents drawn to the historic Old Town San Diego area. The trade area serves middle to upper-middle income households with a median age range of 35-55, including both working professionals seeking office space and visitors to the adjacent Old Town State Park and Presidio Hills Golf Course. The location benefits from high tourist traffic given its proximity to one of San Diego's most visited historic districts, while also serving local businesses and medical offices that cater to the surrounding residential neighborhoods.",
+  "description": "Presidio Plaza - Old Town is an attractive Spanish-style retail and office building located in the heart of historic Old Town San Diego, one of the city's most iconic and visited neighborhoods. Built in 1980, this 12,701 square foot property features distinctive tile roofing and architectural charm that complements the historic character of the surrounding area. The plaza enjoys excellent street frontage on busy Juan Street, positioned directly across from Old Town State Park and Presidio Hills Golf Course, providing exceptional visibility and access to both tourist and local traffic. The property offers versatile office, medical, and retail spaces with modern amenities including underground garage parking for employees, ample surface parking with a generous 4.7/1,000 ratio, and common area restrooms. With its strategic location near the intersection of I-5 and I-8 freeways and close proximity to the Santa Fe Depot train station, Presidio Plaza combines historic ambiance with contemporary convenience, making it an ideal destination for businesses seeking a unique setting in one of San Diego's most culturally significant areas.",
+  "numberOfStores": 1,
+  "squareFootage": 12701,
+  "summary": "Presidio Plaza - Old Town is a charming Spanish-style retail and office building totaling 12,701 square feet in historic Old Town San Diego. Located across from Old Town State Park with excellent freeway access, the property offers versatile office, medical, and retail spaces with ample parking and competitive lease rates.",
+  "tier": 2,
+  "spaces": []
+}

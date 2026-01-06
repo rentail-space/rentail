@@ -1,0 +1,25 @@
+{
+  "address": "7028 Santa Teresa Boulevard",
+  "city": "San Jose",
+  "country": "US",
+  "googlePlaceID": "places/ChIJV73L4qQvjoAR_gZ5V2NzxXA",
+  "name": "Santa Teresa Village",
+  "state": "CA",
+  "latitude": 37.2266884,
+  "longitude": -121.77404779999999,
+  "phone": "++1 858-677-0900",
+  "imageURLs": [
+    "/images/malls/ca-santa-teresa-village-1.jpg"
+  ],
+  "summary": "Santa Teresa Village is a neighborhood shopping plaza in South San Jose offering convenient access to fast-food restaurants, a thrift store, hardware supplier, and essential services. This community-oriented center serves local residents with practical retail options in an accessible open-air format.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.1,
+  "reviewCount": 1252,
+  "website": "https://www.roireit.net/shopping-centers/property-details/shopping-centers_20121029.htm?state=California&utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Santa Teresa Village serves a diverse suburban San Jose community with a mix of middle-income families and young professionals in the Santa Teresa neighborhood. The trade area attracts residents seeking convenient everyday shopping and services, with a demographic profile reflecting Silicon Valley's tech-influenced population including both established homeowners and renters. Primary visitors are value-conscious shoppers looking for practical retail options, fast-casual dining, and essential services within a neighborhood setting.",
+  "description": "Santa Teresa Village is a community-focused shopping plaza located in the growing Santa Teresa neighborhood of South San Jose, California. Situated at 7028 Santa Teresa Boulevard, this open-air retail center has established itself as a convenient destination for local residents seeking everyday essentials and services. The plaza features a practical mix of fast-food eateries, a thrift store, and a hardware supplier, along with various service-oriented businesses that cater to the neighborhood's daily needs. With its accessible layout and ample parking, Santa Teresa Village provides a straightforward shopping experience for busy families and professionals in the area. The center's strong community presence is reflected in its solid 4.1-star rating from over 1,200 reviews, demonstrating its value as a reliable neighborhood retail hub in South San Jose's expanding residential corridor.",
+  "tier": 1,
+  "spaces": []
+}

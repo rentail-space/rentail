@@ -1,0 +1,25 @@
+{
+  "address": "21878 Outer Highway 18 North",
+  "city": "Apple Valley",
+  "country": "US",
+  "googlePlaceID": "places/ChIJB9e3MxVhw4ARLiYbcCKEWww",
+  "name": "The Village Vault",
+  "state": "CA",
+  "latitude": 34.500935,
+  "longitude": -117.1865363,
+  "phone": "++1 760-503-5078",
+  "imageURLs": [
+    "/images/malls/ca-the-village-vault-1.jpg"
+  ],
+  "summary": "The Village Vault is a community-focused marketplace in Apple Valley featuring local artisans and small business vendors offering unique, handcrafted products. This shop-local destination emphasizes supporting the community economy while providing customers with quality goods and exceptional service in a boutique shopping environment.",
+  "openFrom": 1000,
+  "openUntil": 1700,
+  "rating": 5,
+  "reviewCount": 18,
+  "website": "https://shopvillagevault.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "The Village Vault attracts a diverse customer base in Apple Valley, California, primarily consisting of local community members who value supporting small businesses and artisan vendors. The shopping center appeals to middle-income households seeking unique, handcrafted products and personalized shopping experiences rather than mass-market retail. Visitors tend to be families and individuals aged 30-65 who appreciate boutique shopping and are willing to invest in quality, locally-sourced goods that support the community economy.",
+  "description": "The Village Vault is a unique small business marketplace located in Apple Valley, California, dedicated to supporting local artisans and vendors while providing customers with distinctive, high-quality products. This community-focused shopping destination operates with a clear vision to become the preferred destination for customers seeking affordable, quality products that cater to different needs, preferences, and styles. The center features multiple small business vendors, including Sttar Boutique, offering a curated selection of goods that you won't find in typical big-box retailers. With a strong commitment to the local economy, The Village Vault emphasizes that 68 cents of every dollar spent at small businesses stays within the community, according to the American Express 2022 Small Business Economic Impact Study. The center provides exceptional customer service and a seamless shopping experience, operating daily from 10:00 AM to 5:00 PM, with special closures for major holidays like Easter Sunday and Mother's Day. Beyond retail, The Village Vault offers classes and opportunities for vendors to join their community, creating a vibrant hub for local commerce and creativity in the High Desert region of Southern California.",
+  "tier": 2,
+  "spaces": []
+}

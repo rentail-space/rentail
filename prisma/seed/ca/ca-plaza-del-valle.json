@@ -1,0 +1,26 @@
+{
+  "address": "8610 Van Nuys Boulevard",
+  "city": "Los Angeles",
+  "country": "US",
+  "googlePlaceID": "places/ChIJdWQdgdGQwoARwd7QcgJy6X4",
+  "name": "Plaza Del Valle",
+  "state": "CA",
+  "latitude": 34.2266056,
+  "longitude": -118.4489533,
+  "phone": "++1 818-892-7816",
+  "imageURLs": [
+    "/images/malls/ca-plaza-del-valle-1.jpg"
+  ],
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.3,
+  "reviewCount": 2870,
+  "website": "http://plazadelvalle.net/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Plaza Del Valle primarily serves the Hispanic/Latino community of Panorama City and surrounding San Fernando Valley neighborhoods. The center attracts families and multi-generational households with moderate income levels who value community gathering spaces and culturally relevant shopping experiences. Visitors typically seek affordable retail options, authentic dining, and entertainment that reflects their cultural heritage, with strong weekend traffic driven by families attending live events and festivals.",
+  "description": "Plaza Del Valle, known as \"El corazon palpitante de tu comunidad\" (The beating heart of your community), is a vibrant family-oriented community plaza located at the heart of Panorama City at the northeast intersection of Van Nuys Boulevard and Chase Street. Since its establishment, this gathering place has served as a cultural hub for people who live and work in the vicinity, offering approximately 100 small retail shops and restaurants that cater to the local community's needs and preferences. The center distinguishes itself through its strong emphasis on community engagement, hosting weekly live entertainment every weekend featuring vendors, performers, and cultural celebrations including annual festivals for Halloween, Thanksgiving, and Fiestas Patrias. The plaza's open-air design creates an inviting atmosphere where families and friends can shop, dine, and participate in festivities that celebrate their cultural heritage. With its convenient location on Van Nuys Boulevard between Chase and Parthenia, Plaza Del Valle has become an essential destination for the Panorama City community, providing not just retail and dining options, but a true gathering space where neighbors can connect and celebrate together.",
+  "numberOfStores": 100,
+  "summary": "Plaza Del Valle is a family-oriented community plaza in Panorama City featuring approximately 100 small retail shops and restaurants. The center serves as a cultural hub with weekly live entertainment and annual festivals, creating a vibrant gathering place for the local Hispanic/Latino community.",
+  "tier": 1,
+  "spaces": []
+}

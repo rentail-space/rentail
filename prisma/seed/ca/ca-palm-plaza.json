@@ -1,0 +1,25 @@
+{
+  "address": "Winchester Road",
+  "city": "Temecula",
+  "country": "US",
+  "googlePlaceID": "places/ChIJNWzxezt-24AR1lVO_8aVPgE",
+  "name": "Palm Plaza",
+  "state": "CA",
+  "latitude": 33.523058,
+  "longitude": -117.15904479999999,
+  "imageURLs": [
+    "/images/malls/ca-palm-plaza-1.jpg"
+  ],
+  "summary": "Palm Plaza is a 342,336-square-foot community shopping center located at a prime intersection off I-15 and Winchester Road in Temecula, California. The property features big-box retail, boutiques, restaurants, and a grocery store, serving an affluent trade area near the Promenade Mall.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.2,
+  "reviewCount": 1364,
+  "website": "https://www.kimcorealty.com/properties/palm-plaza-sc/107620/view?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Palm Plaza serves the affluent Temecula market with a median household income of $110,117 within a 1-mile radius and $119,400 within 10 miles. The trade area attracts middle to upper-middle-class families with an average household income of $128,444 nearby, reflecting the area's strong residential growth. The center draws from a substantial daytime population of 23,494 within 1 mile and 341,292 within 10 miles, indicating significant workforce and commuter traffic. Primary visitors are suburban families seeking convenient shopping for everyday needs, with strong representation from households earning $100,000-$200,000 annually.",
+  "description": "Palm Plaza is a prominent 342,336-square-foot community shopping center strategically positioned at the prime intersection of I-15 and Winchester Road (State Highway 39) in Temecula, California. Located near the Promenade Mall, this well-established center serves as a convenient retail destination for the rapidly growing Temecula community and surrounding Riverside-San Bernardino-Ontario metro area. The property features ample parking with a ratio of 5.18 spaces per 1,000 square feet, ensuring easy access for shoppers. With its mix of big-box retailers, boutiques, restaurants, and a grocery store anchor, Palm Plaza caters to the daily shopping needs of an affluent trade area where median household incomes exceed $110,000. The center's excellent visibility and accessibility from major transportation corridors make it a go-to destination for both local residents and the substantial daytime workforce population in the area.",
+  "squareFootage": 342336,
+  "tier": 2,
+  "spaces": []
+}

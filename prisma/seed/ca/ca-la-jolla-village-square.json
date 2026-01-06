@@ -1,0 +1,25 @@
+{
+  "address": "8657 Villa La Jolla Drive",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ2el6d80G3IAR01B8PQS7UQ8",
+  "name": "La Jolla Village Square",
+  "state": "CA",
+  "latitude": 32.8656579,
+  "longitude": -117.2319514,
+  "phone": "++1 858-455-7550",
+  "imageURLs": [
+    "/images/malls/ca-la-jolla-village-square-1.jpg"
+  ],
+  "summary": "La Jolla Village Square is a community-focused shopping center featuring chain stores, casual restaurants, and a movie theater in the heart of La Jolla Village. With its inviting open-air layout and emphasis on food and entertainment, it serves as a popular neighborhood destination for both everyday shopping and leisure activities.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 4154,
+  "website": "http://ljvillagesquare.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "La Jolla Village Square attracts an affluent, educated demographic reflective of the surrounding La Jolla and University City neighborhoods, with median household incomes significantly above the San Diego average. The trade area draws a mix of young professionals, university faculty and students from nearby UC San Diego, and established families with higher disposable incomes. Primary visitors are typically aged 25-54, with strong representation of dual-income households seeking convenient shopping and dining options. The center serves as a community hub for residents prioritizing quality casual dining and entertainment over luxury shopping experiences.",
+  "description": "La Jolla Village Square stands as a vibrant community gathering place in the heart of La Jolla Village, offering residents and visitors an inviting escape from their daily routines. This open-air shopping center combines the convenience of chain retail stores for clothing and household goods with an appealing selection of casual dining establishments and entertainment options, including a movie theater that makes it a popular destination for both quick errands and leisurely afternoons. The center's tagline, \"Escape the Routine,\" perfectly captures its mission to provide a relaxed atmosphere where shoppers can enjoy retail therapy and let someone else do the cooking. Strategically located near UC San Diego and the coastal communities of La Jolla, the Square serves as an accessible neighborhood hub that balances practical shopping needs with food and fun. With its focus on creating an enjoyable experience rather than just transactions, La Jolla Village Square has earned a strong 4.4-star rating from over 4,000 reviews, cementing its reputation as a beloved local destination where the community comes together to dine, shop, and unwind.",
+  "tier": 2,
+  "spaces": []
+}

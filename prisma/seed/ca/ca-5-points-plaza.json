@@ -1,0 +1,25 @@
+{
+  "address": "18593 Main Street",
+  "city": "Huntington Beach",
+  "country": "US",
+  "googlePlaceID": "places/ChIJh9LqwsYm3YARrEFDBhV_Leg",
+  "name": "5 Points Plaza",
+  "state": "CA",
+  "latitude": 33.6925898,
+  "longitude": -117.9916088,
+  "imageURLs": [
+    "/images/malls/ca-5-points-plaza-1.jpg"
+  ],
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 1121,
+  "website": "https://www.5pointsplaza.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "5 Points Plaza serves a diverse Huntington Beach community with a strong family orientation, attracting middle to upper-middle income households drawn to the coastal lifestyle. The trade area captures both local residents seeking convenient neighborhood shopping and visitors to the beach community, with demographics skewing toward health-conscious consumers aged 25-55. The tenant mix reflects the area's active lifestyle preferences, with fitness studios, healthy dining options like Sweetgreen, and family-oriented services including swim schools and pet care, indicating a market that values wellness and quality of life amenities.",
+  "description": "5 Points Plaza is a vibrant community shopping center located in the heart of Huntington Beach, California, serving as a neighborhood hub for residents and visitors alike. The plaza features a carefully curated mix of national retailers, local boutiques, and dining establishments that reflect the coastal community's active and health-conscious lifestyle. Anchor tenants include popular brands like Hot Topic, Lane Bryant, and Torrid, while the center has recently welcomed exciting additions such as Sweetgreen for farm-to-table dining, The Camp Transformation Center fitness facility, and Coeur Pilates boutique studio. The plaza also offers essential services including 5 Points Companion Animal Hospital, Big Blue Swim School for aquatic education, and Phenix Salon Suites for beauty professionals. Throughout the year, 5 Points Plaza hosts community events like the annual Coats for Kids Holiday Celebration, demonstrating its commitment to being more than just a shopping destination but a gathering place that gives back to the Huntington Beach community. With convenient hours and ample parking, the center provides an accessible and welcoming environment for families and individuals seeking quality shopping, dining, and services in Surf City.",
+  "numberOfStores": 15,
+  "summary": "5 Points Plaza is a community-focused shopping center in Huntington Beach featuring a diverse mix of national retailers, health-conscious dining options, and fitness studios. The plaza serves as a neighborhood hub with popular tenants like Sweetgreen, Hot Topic, and Big Blue Swim School, while hosting community events throughout the year.",
+  "tier": 2,
+  "spaces": []
+}

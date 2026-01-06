@@ -1,0 +1,25 @@
+{
+  "address": "1603-1695 Hollenbeck Avenue",
+  "city": "Sunnyvale",
+  "country": "US",
+  "googlePlaceID": "places/ChIJg2WwrjO0j4ARixvgGNJxxFM",
+  "name": "Loehmann's Plaza",
+  "state": "CA",
+  "latitude": 37.3395655,
+  "longitude": -122.0425379,
+  "phone": "++1 925-279-1885",
+  "imageURLs": [
+    "/images/malls/ca-loehmanns-plaza-1.jpg"
+  ],
+  "summary": "Loehmann's Plaza is a neighborhood strip center on Hollenbeck Avenue in Sunnyvale, offering convenient retail and services to the local Silicon Valley community. Managed by Regency Centers, this open-air plaza provides accessible shopping for residents and professionals in the area.",
+  "openFrom": 800,
+  "openUntil": 2300,
+  "rating": 3.8,
+  "reviewCount": 268,
+  "website": "http://www.regencycenters.com/retail-space/ca/sunnyvale/loehmanns-plaza?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Loehmann's Plaza serves the affluent Sunnyvale community in the heart of Silicon Valley, attracting a tech-savvy demographic with above-average household incomes typical of the San Francisco Bay Area. The primary trade area consists of young professionals and families, many employed in the technology sector, with median household incomes exceeding $140,000. Shoppers tend to prioritize convenience and quality, seeking everyday services and dining options close to home and work, with a preference for efficient shopping experiences that fit their busy lifestyles.",
+  "description": "Loehmann's Plaza is a neighborhood shopping center conveniently located on Hollenbeck Avenue in Sunnyvale, California, serving the local community with a mix of retail and service offerings. Situated in the heart of Silicon Valley, this plaza has been a fixture in the area for decades, originally anchored by the now-defunct Loehmann's department store chain known for designer fashion at discount prices. Today, the center continues to serve residents and workers in the surrounding neighborhoods with convenient access to everyday shopping needs and services. The open-air strip center format provides easy parking and accessibility, making it a practical choice for quick shopping trips and errands. Managed by Regency Centers, a national shopping center developer and operator, Loehmann's Plaza maintains its role as a community-oriented retail destination in one of the Bay Area's most dynamic cities.",
+  "tier": 2,
+  "spaces": []
+}

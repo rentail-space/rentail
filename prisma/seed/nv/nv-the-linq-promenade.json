@@ -1,0 +1,25 @@
+{
+  "address": "3535 South Las Vegas Boulevard",
+  "city": "Las Vegas",
+  "country": "US",
+  "googlePlaceID": "places/ChIJd1tXQznEyIAR6hB3hvz06RY",
+  "name": "The LINQ Promenade",
+  "state": "NV",
+  "latitude": 36.1180684,
+  "longitude": -115.17088099999998,
+  "phone": "++1 702-332-0543",
+  "imageURLs": [
+    "/images/malls/nv-the-linq-promenade-1.jpg"
+  ],
+  "summary": "The LINQ Promenade is a dynamic open-air entertainment district on the Las Vegas Strip featuring the iconic High Roller observation wheel, diverse dining options, retail shops, and thrilling attractions like ziplines. This pedestrian-friendly destination combines shopping, entertainment, and world-class experiences in the heart of Las Vegas.",
+  "openFrom": 1000,
+  "openUntil": 2300,
+  "rating": 4.5,
+  "reviewCount": 2483,
+  "website": "https://www.caesars.com/linq/promenade/things-to-do?utm_campaign=gmb&utm_source=goolge&utm_medium=local&utm_term=Influence&utm_content=entertainment&y_source=1_MTk5NjAzNzAtNzE1LWxvY2F0aW9uLndlYnNpdGU%3D",
+  "centerType": "LifestyleCenter",
+  "demographics": "The LINQ Promenade attracts a diverse mix of tourists and locals, with a strong emphasis on millennials and Gen Z visitors aged 21-45 who are drawn to the entertainment-focused atmosphere. The visitor base skews toward middle to upper-middle income households with significant discretionary spending on dining, entertainment, and experiential activities. As a Las Vegas Strip destination, the center sees a high concentration of tourists from across the United States and internationally, along with local Las Vegas residents seeking upscale casual dining and entertainment options. Shopping patterns emphasize impulse purchases, souvenir shopping, and experience-driven visits centered around the High Roller observation wheel and entertainment venues.",
+  "description": "The LINQ Promenade stands as one of Las Vegas Boulevard's premier open-air entertainment and dining destinations, seamlessly blending shopping, dining, and world-class attractions in the heart of the Strip. Anchored by the iconic High Roller observation wheel, the world's tallest observation wheel at 550 feet, this vibrant promenade offers visitors an immersive experience that captures the energy and excitement of Las Vegas. The center features a carefully curated mix of retail shops, restaurants, and entertainment venues spread across a pedestrian-friendly walkway that connects Caesars Palace to The LINQ Hotel + Experience. Visitors can enjoy everything from zipline adventures on the FLY LINQ to diverse dining options ranging from casual eateries to upscale restaurants, along with unique retail experiences and live entertainment. The LINQ Promenade has transformed this section of the Las Vegas Strip into a must-visit destination that appeals to both tourists seeking memorable experiences and locals looking for a dynamic social gathering place, operating daily from 10 AM to 11 PM to accommodate the city's vibrant nightlife culture.",
+  "tier": 2,
+  "spaces": []
+}

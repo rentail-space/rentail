@@ -1,0 +1,26 @@
+{
+  "address": "Benton Road",
+  "city": "Winchester",
+  "country": "US",
+  "googlePlaceID": "places/ChIJt4cKh1N824ARMaJ2JZFZFxw",
+  "name": "French Valley Village Center",
+  "state": "CA",
+  "latitude": 33.5924777,
+  "longitude": -117.1224163,
+  "phone": "++1 858-847-4600",
+  "imageURLs": [
+    "/images/malls/ca-french-valley-village-center-1.jpg"
+  ],
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 1864,
+  "website": "https://www.regencycenters.com/property/detail/541/French-Valley-Village-Center?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "French Valley Village Center serves a prosperous suburban family market with a 3-mile trade area population of 77,292 residents and an impressive average household income of $157,021. The primary shoppers are affluent homeowners with an average home value of $713,183, representing upper-middle-class families in this rapidly growing Winchester area. The center attracts over 3.3 million annual visits from residents seeking convenient neighborhood shopping for groceries, pharmacy needs, and everyday services, with the daytime population of 57,463 indicating a strong residential character with some commuter activity.",
+  "description": "French Valley Village Center is a thriving neighborhood shopping destination strategically located on Benton Road in Winchester, California, serving the rapidly growing French Valley community in the Riverside-San Bernardino-Ontario market. This 113,928 square foot community center benefits from exceptional visibility and accessibility along the main thoroughfare, making it a convenient daily stop for the area's affluent residents. Anchored by trusted household names including CVS Pharmacy and Stater Brothers supermarket, the center provides essential goods and services that draw over 3.3 million visits annually. The property is professionally managed by Regency Centers, a nationally recognized shopping center developer and operator known for creating best-in-class retail environments. With strong residential growth surrounding the center and a trade area characterized by high household incomes exceeding $157,000 and home values over $713,000, French Valley Village Center serves as a vital community hub for one of Southern California's most desirable suburban markets.",
+  "squareFootage": 113928,
+  "summary": "French Valley Village Center is a 113,928 square foot neighborhood shopping center anchored by CVS and Stater Brothers, serving Winchester's affluent and rapidly growing residential community. With over 3.3 million annual visits and excellent visibility on Benton Road, this Regency Centers property provides convenient access to essential retail and services for the surrounding trade area.",
+  "tier": 2,
+  "spaces": []
+}

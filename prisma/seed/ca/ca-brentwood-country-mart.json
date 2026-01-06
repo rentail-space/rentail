@@ -1,0 +1,26 @@
+{
+  "address": "225 26th Street",
+  "city": "Santa Monica",
+  "country": "US",
+  "googlePlaceID": "places/ChIJDTVwjVWjwoARv1KuBLF9Mnk",
+  "name": "Brentwood Country Mart",
+  "state": "CA",
+  "latitude": 34.0475609,
+  "longitude": -118.49044839999999,
+  "phone": "++1 310-458-6682",
+  "imageURLs": [
+    "/images/malls/ca-brentwood-country-mart-1.jpg"
+  ],
+  "summary": "Brentwood Country Mart is a historic, upscale lifestyle center featuring rustic barnlike buildings housing over 30 curated boutiques and acclaimed restaurants. This beloved Westside destination offers a charming village atmosphere with high-end fashion, artisanal goods, and farm-to-table dining that attracts affluent shoppers from Brentwood and Santa Monica.",
+  "openFrom": 700,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 741,
+  "website": "http://brentwoodcountrymart.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Brentwood Country Mart attracts an affluent, educated demographic primarily consisting of families and professionals aged 30-55 with household incomes exceeding $150,000. The trade area draws from the upscale Brentwood and Santa Monica neighborhoods, appealing to style-conscious consumers who value curated, boutique shopping experiences over mass-market retail. Visitors typically seek artisanal goods, designer fashion, and farm-to-table dining options, reflecting a preference for quality, sustainability, and locally-sourced products.",
+  "description": "Brentwood Country Mart is a beloved historic shopping destination that has served the Westside Los Angeles community since its establishment, featuring charming rustic, barnlike buildings that create an intimate village atmosphere. This carefully curated lifestyle center showcases an impressive collection of over 30 upscale boutiques, artisanal shops, and acclaimed dining establishments that reflect the sophisticated tastes of the Brentwood and Santa Monica communities. The retail mix includes coveted fashion brands like Jenni Kayne, James Perse, Clare V., and Sézane, alongside specialty stores such as Diesel Bookstore, Goop, and Edelweiss Chocolates, offering visitors a distinctive alternative to traditional mall shopping. Dining options range from the popular Farmshop restaurant to Barney's Burgers, Caffe Luxxe, and Sweet Rose Creamery, creating a vibrant culinary scene that draws locals throughout the day. With its open-air layout, walkable design, and commitment to quality independent retailers, Brentwood Country Mart has become an iconic gathering place that seamlessly blends shopping, dining, and community in one of Los Angeles' most desirable neighborhoods.",
+  "numberOfStores": 32,
+  "tier": 3,
+  "spaces": []
+}

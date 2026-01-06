@@ -1,0 +1,24 @@
+{
+  "address": "2140 Florence Avenue",
+  "city": "Walnut Park",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ4UOI7RbJwoARVcJdCJVsDl0",
+  "name": "Plaza La Alameda",
+  "state": "CA",
+  "latitude": 33.9744301,
+  "longitude": -118.2336056,
+  "imageURLs": [
+    "/images/malls/ca-plaza-la-alameda-1.jpg"
+  ],
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 5583,
+  "website": "http://plazalaalameda.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Plaza La Alameda serves the predominantly Hispanic community of Walnut Park and surrounding Southeast Los Angeles areas, attracting families and working-class households with moderate income levels. The trade area consists primarily of multigenerational Hispanic households seeking culturally relevant shopping, dining, and services. Visitors typically engage in weekly shopping trips combining grocery needs with retail and service visits, with strong foot traffic during evenings and weekends when families shop together.",
+  "description": "Plaza La Alameda is a vibrant community shopping center located in Walnut Park, California, serving the diverse Southeast Los Angeles community since its establishment. Developed and managed by Primestor Development, Inc., a company known for creating culturally relevant retail destinations in underserved communities, the center has become a cornerstone of local commerce and community gathering. The center features a carefully curated mix of shops, services, and dining options that cater specifically to the needs and preferences of the surrounding Hispanic community. Plaza La Alameda hosts special events throughout the year, including Dia De Los Muertos celebrations that bring the community together and honor cultural traditions. With convenient hours from 10 AM to 9 PM daily and a strong 4.4-star rating from over 5,500 reviews, the center has established itself as a trusted and beloved destination for families seeking quality shopping and services in a welcoming, culturally connected environment.",
+  "summary": "Plaza La Alameda is a community-focused shopping center in Walnut Park that serves the Southeast Los Angeles Hispanic community with culturally relevant retail, dining, and services. Managed by Primestor Development, the center hosts cultural events like Dia De Los Muertos celebrations and maintains strong community connections.",
+  "tier": 2,
+  "spaces": []
+}

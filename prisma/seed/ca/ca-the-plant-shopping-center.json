@@ -1,0 +1,24 @@
+{
+  "address": "7880 Van Nuys Boulevard",
+  "city": "Los Angeles",
+  "country": "US",
+  "googlePlaceID": "places/ChIJof7ayS6XwoARuiLw6V30RW8",
+  "name": "The Plant Shopping Center",
+  "state": "CA",
+  "latitude": 34.214672,
+  "longitude": -118.4467316,
+  "imageURLs": [
+    "/images/malls/ca-the-plant-shopping-center-1.jpg"
+  ],
+  "openFrom": 900,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 3824,
+  "website": "https://amzn.to/43jC7ZV?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "The Plant Shopping Center serves a diverse, middle-class demographic in the Van Nuys neighborhood of Los Angeles's San Fernando Valley. The primary trade area attracts families and working professionals with moderate to middle incomes, typical of the surrounding residential communities. Shoppers tend to be convenience-oriented, seeking everyday goods and services within a neighborhood setting. The center draws from a multicultural population reflective of Van Nuys's ethnic diversity, with visitors ranging from young adults to seniors who value accessible, local shopping options.",
+  "description": "The Plant Shopping Center is a neighborhood retail destination located on Van Nuys Boulevard in the heart of Los Angeles's San Fernando Valley. This community-oriented shopping venue has served local residents for decades, providing convenient access to everyday retail and services along one of the Valley's main commercial corridors. The center's name pays homage to the area's agricultural heritage, when the San Fernando Valley was known for its vast orchards and farmland before urban development transformed the region. With a solid 4.3-star rating from nearly 4,000 Google reviews, The Plant Shopping Center has established itself as a reliable neighborhood gathering place. The center operates daily from 9:00 AM to 9:00 PM, offering extended hours that accommodate the busy schedules of Valley residents who depend on its accessible location and practical mix of retailers and service providers.",
+  "summary": "The Plant Shopping Center is a neighborhood retail destination on Van Nuys Boulevard serving the San Fernando Valley community. With a 4.3-star rating from thousands of reviews, this local shopping venue provides convenient access to everyday retail and services for Valley residents.",
+  "tier": 2,
+  "spaces": []
+}

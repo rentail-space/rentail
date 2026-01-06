@@ -1,0 +1,25 @@
+{
+  "address": "3460 Ontario Ranch Road",
+  "city": "Ontario",
+  "country": "US",
+  "googlePlaceID": "places/ChIJv__ThRfL3IARvwhiyny7JA0",
+  "name": "New Haven Marketplace",
+  "state": "CA",
+  "latitude": 33.9994513,
+  "longitude": -117.5771331,
+  "imageURLs": [
+    "/images/malls/ca-new-haven-marketplace-1.jpg"
+  ],
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.6,
+  "reviewCount": 261,
+  "website": "https://newhavenlife.com/new-haven-marketplace?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "New Haven Marketplace serves the growing Ontario Ranch community in Ontario, California, attracting young families and professionals with middle to upper-middle income levels. The trade area consists primarily of new residential developments including Row at Sundance Park, Dwell at Sundance Park, and Bloom at Edenglen, drawing homeowners aged 25-45 with household incomes ranging from $80,000 to $150,000. Visitors are convenience-focused shoppers seeking everyday services, fitness amenities, and casual dining options within walking distance of their homes. The center caters to health-conscious residents with offerings like YogaSIX and The Camp Transformation Center, while also serving families with essential services including grocery shopping at Stater Bros. Market and pet care at New Haven Animal Hospital.",
+  "description": "New Haven Marketplace is Ontario's newest community gathering place, strategically located at 3460 Ontario Ranch Road to serve the rapidly expanding Ontario Ranch master-planned community. This modern open-air shopping center has quickly become the heart of the neighborhood, offering residents convenient access to daily essentials, wellness services, and dining options just steps from their homes. The center features a carefully curated mix of national retailers and local favorites, anchored by Stater Bros. Market and complemented by popular tenants including Starbucks, Jersey Mike's, Chase Bank, and Carl's Jr. Health and wellness are central to the center's identity, with YogaSIX, The Camp Transformation Center, and New Haven Animal Hospital providing comprehensive lifestyle services. The dining and entertainment scene continues to evolve with the recent opening of Rodeo X, Brew Haven Tap House, Shootz, and Slice of Haven Pizzeria, creating inviting spaces for the community to gather and relax. With additional tenants like Great Clips, The Ranch Nails Spa, Kona Cleaners, and Berry Brands, plus exciting new concepts like Feeling Groovy and Popping Yolk Cafe on the horizon, New Haven Marketplace is establishing itself as the premier destination for Ontario Ranch residents seeking convenience, quality, and community connection.",
+  "numberOfStores": 20,
+  "summary": "New Haven Marketplace is a modern community shopping center serving the Ontario Ranch master-planned community with essential services, dining, and wellness amenities. The center features popular tenants including Stater Bros. Market, Starbucks, YogaSIX, and the newly opened Rodeo X entertainment venue, with additional stores and restaurants continuing to open.",
+  "tier": 2,
+  "spaces": []
+}

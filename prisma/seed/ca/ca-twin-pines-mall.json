@@ -1,0 +1,24 @@
+{
+  "address": "",
+  "city": "City of Industry",
+  "country": "US",
+  "googlePlaceID": "places/ChIJLaHmeSTVwoARoKeNdkAVdN8",
+  "name": "Twin Pines Mall",
+  "state": "CA",
+  "latitude": 33.9912102,
+  "longitude": -117.9266015,
+  "imageURLs": [
+    "/images/malls/ca-twin-pines-mall-1.jpg"
+  ],
+  "openFrom": 830,
+  "openUntil": 2000,
+  "rating": 4.8,
+  "reviewCount": 79,
+  "website": "http://twin-pines-mall.keeq.io/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Twin Pines Mall serves the City of Industry and surrounding San Gabriel Valley communities, attracting a diverse mix of middle-income families and value-conscious shoppers. The trade area includes a significant Asian-American population along with Hispanic and multi-generational households seeking convenient shopping options. Visitors typically range from young families to older adults looking for everyday retail needs and specialty items, with shopping patterns focused on weekend visits and practical purchases rather than luxury spending.",
+  "description": "Twin Pines Mall is a community shopping destination located in the City of Industry, California, serving the greater San Gabriel Valley region. Situated at Robyn Road in the Puente Hills Mall area, this shopping center has established itself as a reliable retail hub for local residents seeking a variety of shopping options. The mall features diverse tenants including the popular Collectors Outlet, which offers an extensive selection of gift items and collectibles that have garnered positive feedback from visitors. With a strong 4.8-star rating based on 79 reviews, Twin Pines Mall has built a reputation for providing a pleasant browsing and shopping experience. Operating daily from 8:30 AM to 8:00 PM, the center offers convenient hours for shoppers to explore its retail offerings and discover unique finds in a welcoming environment.",
+  "summary": "Twin Pines Mall is a well-rated shopping destination in City of Industry, California, featuring diverse retail options including the popular Collectors Outlet. With a 4.8-star rating and convenient daily hours, it serves as a reliable community shopping hub in the San Gabriel Valley.",
+  "tier": 2,
+  "spaces": []
+}

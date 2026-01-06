@@ -1,0 +1,25 @@
+{
+  "address": "19401 Stevens Creek Boulevard",
+  "city": "Cupertino",
+  "country": "US",
+  "googlePlaceID": "places/ChIJASO65Z21j4ARKODIVSbFa-8",
+  "name": "Main Street Cupertino",
+  "state": "CA",
+  "latitude": 37.324059999999996,
+  "longitude": -122.01050799999999,
+  "phone": "++1 408-777-3080",
+  "imageURLs": [
+    "/images/malls/ca-main-street-cupertino-1.jpg"
+  ],
+  "summary": "Main Street Cupertino is an upscale mixed-use lifestyle center in the heart of Silicon Valley, combining retail, dining, residential, hotel, and office components. Managed by Sand Hill Property Company, the center serves as a community gathering place with regular events and a carefully curated tenant mix.",
+  "openFrom": 1100,
+  "openUntil": 2200,
+  "rating": 4.5,
+  "reviewCount": 2631,
+  "website": "http://mainstreetcupertino.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Main Street Cupertino attracts affluent, tech-savvy professionals and families from the surrounding Silicon Valley area, with median household incomes exceeding $150,000. The primary trade area includes Cupertino and nearby communities like Sunnyvale and San Jose, drawing visitors aged 25-54 who work in technology and professional services. Shoppers here prioritize quality, convenience, and experiential retail, with strong preferences for upscale dining, specialty retail, and community-oriented events. The center serves a highly educated demographic with significant disposable income, reflected in the premium tenant mix and residential components including apartments and hotel facilities.",
+  "description": "Main Street Cupertino is a premier mixed-use lifestyle destination located at 19401 Stevens Creek Boulevard in the heart of Silicon Valley's most prestigious community. Developed and managed by Sand Hill Property Company, this open-air center seamlessly integrates retail, dining, residential apartments, hotel accommodations, and office space to create a vibrant urban village atmosphere. The property hosts community-focused events throughout the year, including the popular Holiday on Main celebration featuring seasonal entertainment, festive activities, and community singalongs that bring together residents and visitors. With its convenient location on Stevens Creek Boulevard and thoughtfully curated mix of tenants, Main Street Cupertino serves as a gathering place for Cupertino's affluent, tech-oriented population. The center's integration of multiple uses reflects modern lifestyle center design principles, offering visitors a complete experience beyond traditional shopping.",
+  "tier": 3,
+  "spaces": []
+}

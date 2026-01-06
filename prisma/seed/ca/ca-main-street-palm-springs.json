@@ -1,0 +1,24 @@
+{
+  "address": "266 North Palm Canyon Drive",
+  "city": "Palm Springs",
+  "country": "US",
+  "googlePlaceID": "places/ChIJu43b0rob24ARRFSBN3IZIXI",
+  "name": "Main Street Palm Springs",
+  "state": "CA",
+  "latitude": 33.8259833,
+  "longitude": -116.54665840000001,
+  "imageURLs": [
+    "/images/malls/ca-main-street-palm-springs-1.jpg"
+  ],
+  "summary": "Main Street Palm Springs is the vibrant commercial corridor along North Palm Canyon Drive, featuring an eclectic mix of boutiques, art galleries, restaurants, and bars in the heart of downtown and uptown Palm Springs. This open-air lifestyle destination celebrates the city's unique desert culture with independent retailers, upscale dining, and community events that attract both tourists and locals.",
+  "openFrom": 1100,
+  "openUntil": 1700,
+  "rating": 4.5,
+  "reviewCount": 736,
+  "website": "http://www.palmcanyondrive.org/",
+  "centerType": "LifestyleCenter",
+  "demographics": "Main Street Palm Springs attracts an affluent, diverse demographic including upscale tourists, seasonal residents, and the local LGBTQ+ community. The primary visitor base consists of adults aged 35-65 with above-average household incomes who appreciate art, culture, and boutique shopping experiences. The trade area draws heavily from the greater Palm Springs resort community, including nearby cities like Rancho Mirage and Palm Desert, with visitors seeking unique galleries, independent boutiques, and upscale dining options. Shopping patterns reflect a preference for experiential retail, art collecting, and leisurely browsing rather than utilitarian shopping trips.",
+  "description": "Main Street Palm Springs encompasses the vibrant downtown and uptown districts along North Palm Canyon Drive, serving as the cultural and commercial heart of this iconic desert resort city. This bustling lifestyle destination features an eclectic mix of fashion boutiques, home goods stores, art galleries, restaurants, and bars that reflect Palm Springs' unique blend of mid-century modern aesthetics and contemporary desert chic. The business district is organized through Main Street Palm Springs, a proactive business association that represents the interests of the downtown and uptown commercial community. Notable tenants include Shag Gallery, Kiehl's Palm Springs, Mitchell's Palm Springs, and local favorites like Las Casuelas Terrazza and Kaiser Grille, alongside unique shops like Crystal Fantasy and Revenge Boutique. The area celebrates its diverse, inclusive community through special events including the Pride Window Contest, Art Bench Project, and Holiday Banner Art displays, making it a premier destination for both residents and the millions of tourists who visit Palm Springs annually.",
+  "tier": 2,
+  "spaces": []
+}

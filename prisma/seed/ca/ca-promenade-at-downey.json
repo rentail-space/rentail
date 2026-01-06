@@ -1,0 +1,25 @@
+{
+  "address": "12214 Lakewood Boulevard",
+  "city": "Downey",
+  "country": "US",
+  "googlePlaceID": "places/ChIJJ-vAvnHNwoARANLRPLpIIz8",
+  "name": "Promenade at Downey",
+  "state": "CA",
+  "latitude": 33.9233331,
+  "longitude": -118.1322125,
+  "phone": "++1 562-368-4814",
+  "imageURLs": [
+    "/images/malls/ca-promenade-at-downey-1.jpg"
+  ],
+  "summary": "The Promenade at Downey is an everyday shopping destination featuring discount department stores, chain restaurants, and a multiplex cinema. This open-air center serves as a convenient one-stop location for value-conscious shoppers in the Southeast Los Angeles County area.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 4100,
+  "website": "http://www.promenade-downey.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Promenade at Downey attracts a diverse, middle-class demographic primarily from the Southeast Los Angeles County area, including families and young professionals from Downey, Norwalk, and surrounding communities. The trade area serves a predominantly Hispanic population with household incomes ranging from $50,000 to $85,000 annually, featuring a mix of homeowners and renters. Shoppers are typically value-conscious consumers seeking convenient access to discount retailers, family dining options, and entertainment venues for weekend outings and everyday shopping needs.",
+  "description": "The Promenade at Downey stands as a cornerstone shopping destination in Southeast Los Angeles County, serving the vibrant community of Downey and its neighboring cities. This open-air shopping center has established itself as a go-to location for everyday shopping needs, combining discount department stores with popular chain restaurants and a multiplex cinema that draws families and moviegoers throughout the week. The center's convenient location on Lakewood Boulevard provides easy access for residents across the region, making it a natural gathering place for both routine errands and leisure activities. With its mix of value-oriented retailers and dining options, the Promenade caters to budget-conscious shoppers seeking quality merchandise at competitive prices. The addition of entertainment amenities, particularly the movie theater, transforms the center from a simple shopping venue into a complete destination where visitors can shop, dine, and enjoy entertainment all in one convenient location, contributing to its strong 4.5-star rating from over 4,100 reviews.",
+  "tier": 2,
+  "spaces": []
+}

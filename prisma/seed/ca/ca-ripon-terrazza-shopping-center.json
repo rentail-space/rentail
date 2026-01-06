@@ -1,0 +1,25 @@
+{
+  "address": "222 West River Road",
+  "city": "Ripon",
+  "country": "US",
+  "googlePlaceID": "places/ChIJg0EvIXlFkIARDcaX-Ja6QLs",
+  "name": "Ripon Terrazza Shopping Center",
+  "state": "CA",
+  "latitude": 37.76067080000001,
+  "longitude": -121.12642199999999,
+  "phone": "++1 209-235-6233",
+  "imageURLs": [
+    "/images/malls/ca-ripon-terrazza-shopping-center-1.jpg"
+  ],
+  "summary": "Ripon Terrazza Shopping Center is a neighborhood retail destination in Ripon, California, developed by JKB Living to serve the city's growing residential communities. With convenient hours and a strong community reputation, the center provides essential shopping and services to local families and residents.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.7,
+  "reviewCount": 21,
+  "website": "https://www.jkbliving.com/commercial/ripon?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Ripon Terrazza Shopping Center serves the growing residential community of Ripon, California, attracting primarily middle-income families and young professionals drawn to the area's new housing developments. The trade area consists of households with moderate to above-average incomes seeking convenient neighborhood shopping options close to home. Typical visitors include families shopping for everyday needs, residents of nearby JKB Living communities, and commuters from the greater San Joaquin County area who value accessibility and practical retail options.",
+  "description": "Ripon Terrazza Shopping Center is a neighborhood retail destination located at 222 West River Road in Ripon, California, serving the city's expanding residential communities. Developed and managed by JKB Living, the same company behind numerous residential projects in the area including Canterbury, Legends Ripon, and Belmont communities, the center provides convenient shopping and services to local residents. The shopping center benefits from its strategic location in one of California's fastest-growing small cities, positioned to serve both established neighborhoods and new housing developments throughout Ripon. With a strong 4.7-star rating from community reviews, Ripon Terrazza has established itself as a trusted local shopping destination. The center operates daily from 10:00 AM to 10:00 PM, offering extended hours to accommodate the schedules of working families and providing essential retail services to the Ripon community.",
+  "tier": 2,
+  "spaces": []
+}

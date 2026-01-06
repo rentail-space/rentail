@@ -1,0 +1,25 @@
+{
+  "address": "3650 West Martin Luther King Junior Boulevard",
+  "city": "Los Angeles",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ40FaFy-4woARka4nLrITZaE",
+  "name": "Baldwin Hills Crenshaw",
+  "state": "CA",
+  "latitude": 34.0108033,
+  "longitude": -118.337194,
+  "phone": "++1 323-290-6636",
+  "imageURLs": [
+    "/images/malls/ca-baldwin-hills-crenshaw-1.jpg"
+  ],
+  "summary": "Baldwin Hills Crenshaw Plaza is a two-story regional shopping mall serving South Los Angeles with a mix of national retailers like TJ Maxx, Victoria's Secret, and Foot Locker, plus a 14-screen Cinemark theatre. The center functions as a vital community hub offering shopping, dining, entertainment, weekly farmers markets, and convenient Metro transit access.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.3,
+  "reviewCount": 10640,
+  "website": "https://www.baldwinhillscrenshawmall.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Baldwin Hills Crenshaw Plaza serves a predominantly African American community in South Los Angeles, attracting middle-income families and young professionals from the surrounding Baldwin Hills, Crenshaw, and Leimert Park neighborhoods. The trade area includes households with diverse income levels, with a strong representation of working families seeking value-oriented shopping combined with entertainment options. Visitors typically range from young adults to seniors, with many multi-generational shopping trips, and the center serves as a community gathering place with strong local loyalty and transit accessibility via the Metro Expo Line.",
+  "description": "Baldwin Hills Crenshaw Plaza stands as a cornerstone of the South Los Angeles community, serving as more than just a shopping destination—it's a vital neighborhood hub that connects residents through retail, dining, entertainment, and public transit. This enduring two-story enclosed mall has been a fixture in the Baldwin Hills-Crenshaw area for decades, offering a diverse mix of national retailers including TJ Maxx, Foot Locker, Victoria's Secret, House of Hoops, and Staples, alongside unique locally-owned businesses that reflect the community's character. The center features a 14-screen Cinemark theatre that draws moviegoers from across the region, while Albertsons anchors the grocery needs of local residents. Beyond traditional shopping, Baldwin Hills Crenshaw Plaza hosts weekly farmers markets and special community events that strengthen neighborhood bonds and celebrate local culture. With convenient access via the Metro Expo Line and ample parking, the plaza continues to evolve as a dynamic gathering place where the community comes together to shop, dine, socialize, and stay connected.",
+  "tier": 2,
+  "spaces": []
+}

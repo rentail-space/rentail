@@ -1,0 +1,118 @@
+{
+  "address": "435 South Cedros Avenue",
+  "city": "Solana Beach",
+  "country": "US",
+  "googlePlaceID": "places/ChIJjwPBY9MO3IARzNZJOGDse7c",
+  "name": "Cedros Collective Mall",
+  "state": "CA",
+  "latitude": 32.9877392,
+  "longitude": -117.26978450000001,
+  "phone": "++1 858-546-4614",
+  "imageURLs": [
+    "/images/malls/ca-cedros-collective-mall-1.jpg"
+  ],
+  "summary": "Cedros Collective is a 10,014 square foot urban creative redevelopment center in Solana Beach's Cedros Avenue Design District, featuring a unique mix of six retail shops, a café with outdoor seating, and six creative office units. The completely remodeled center offers exposed ceilings, operable doors, individual patios, and modern amenities that blend indoor-outdoor workspace with boutique retail in a distinctive industrial-chic environment.",
+  "openFrom": 1000,
+  "openUntil": 1700,
+  "rating": 4.8,
+  "reviewCount": 23,
+  "website": "http://cedroscollective.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Cedros Collective attracts a creative professional demographic with above-average income levels, primarily consisting of millennials and Gen X visitors aged 25-55 who appreciate artisanal retail and design-forward spaces. The Solana Beach location draws from an affluent coastal community with high household incomes and educated residents who value unique shopping experiences over mass-market retail. The mixed-use nature appeals to both local creative entrepreneurs seeking office space and design-conscious shoppers interested in boutique retail, with strong representation from dual-income households without children and young families seeking curated lifestyle products.",
+  "description": "Cedros Collective Mall is a distinctive 10,014 square foot urban creative redevelopment center located in the heart of Solana Beach's renowned Cedros Avenue Design District. This completely remodeled mixed-use destination seamlessly blends retail, café, and creative office spaces with a modern industrial aesthetic featuring exposed full-height ceilings, operable windows and barn doors, and individual outdoor patio work areas. The center offers six retail units ranging from 483 to 2,599 square feet, each with individual identity and signage directly on Cedros Avenue, plus a 1,333 square foot café with a 540 square foot outdoor patio for al fresco dining. The innovative design includes 5,607 square feet of creative office space across six units, each with access to water and sewer for in-unit coffee bars, creating a work-inside-or-outside environment perfect for Solana Beach's creative community. With upgraded amenities including new facade, enhanced landscaping, multiple patios, 26 on-site parking spaces plus street parking, and common area restrooms, Cedros Collective represents a unique urban village concept that celebrates the artistic spirit of the Cedros Avenue Design District.",
+  "numberOfStores": 12,
+  "squareFootage": 10014,
+  "tier": 2,
+  "spaces": [
+    {
+      "type": "Inline",
+      "number": "Retail Unit 1",
+      "size": 483,
+      "available": true
+    },
+    {
+      "type": "Inline",
+      "number": "Retail Unit 2",
+      "size": 2599,
+      "available": true
+    },
+    {
+      "type": "Inline",
+      "number": "Retail Unit 3",
+      "size": 1000,
+      "available": true
+    },
+    {
+      "type": "Inline",
+      "number": "Retail Unit 4",
+      "size": 800,
+      "available": true
+    },
+    {
+      "type": "Inline",
+      "number": "Retail Unit 5",
+      "size": 600,
+      "available": true
+    },
+    {
+      "type": "Inline",
+      "number": "Retail Unit 6",
+      "size": 500,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Café",
+      "size": 1333,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Café Patio",
+      "size": 540,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Office Unit 1",
+      "size": 541,
+      "floor": 2,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Office Unit 2",
+      "size": 1200,
+      "floor": 2,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Office Unit 3",
+      "size": 1500,
+      "floor": 2,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Office Unit 4",
+      "size": 1000,
+      "floor": 2,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Office Unit 5",
+      "size": 800,
+      "floor": 2,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Office Unit 6 (Suite 304)",
+      "size": 3814,
+      "floor": 2,
+      "available": true
+    }
+  ]
+}

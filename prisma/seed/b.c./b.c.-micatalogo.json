@@ -1,0 +1,23 @@
+{
+  "address": "850 Callejón Francisco I. Madero",
+  "city": "El Refugio, Tecate",
+  "country": "MX",
+  "googlePlaceID": "places/ChIJd1dUCk8w-xQRw0EN5mtCac4",
+  "name": "micatalogo",
+  "state": "B.C.",
+  "latitude": 32.5740286,
+  "longitude": -116.6486691,
+  "phone": "++52 665 121 0040",
+  "imageURLs": [
+    "/images/malls/b.c.-micatalogo-1.jpg"
+  ],
+  "rating": 4.3,
+  "reviewCount": 6,
+  "website": "https://micatalogo.org/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Micatalogo serves the local community of El Refugio and Tecate, Baja California, an area characterized by working-class families and small business owners. The trade area consists primarily of middle-income households with a mix of young families and established residents who value local commerce and community connections. Shoppers in this region typically seek convenient access to everyday goods and services, with a preference for supporting local businesses and maintaining strong neighborhood relationships.",
+  "description": "Micatalogo is a community-focused shopping destination located in El Refugio, Tecate, Baja California, serving as a vital commercial hub for local residents and businesses. This center operates as a digital-physical hybrid platform, connecting local merchants with the community through both its physical location on Callejón Francisco I. Madero and its innovative online catalog system accessible via micatalogo.org. The center emphasizes accessibility and convenience, offering WhatsApp communication for easy customer engagement and business inquiries. With a solid 4.3-star rating from local customers, Micatalogo has established itself as a trusted resource for the Tecate community. The shopping center's unique approach combines traditional retail presence with modern digital connectivity, making it easier for local businesses to reach customers and for residents to discover and support neighborhood merchants.",
+  "summary": "Micatalogo is a community-oriented shopping center in El Refugio, Tecate that bridges traditional retail with digital innovation through its online catalog platform. The center serves as a local commercial hub, connecting neighborhood businesses with residents through both physical storefronts and convenient WhatsApp-based customer service.",
+  "tier": 1,
+  "spaces": []
+}

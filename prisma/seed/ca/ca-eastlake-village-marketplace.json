@@ -1,0 +1,26 @@
+{
+  "address": "2275 Otay Lakes Road",
+  "city": "Chula Vista",
+  "country": "US",
+  "googlePlaceID": "places/ChIJw0HrJWxF2YARqm2xP18EWeA",
+  "name": "Eastlake Village Marketplace",
+  "state": "CA",
+  "latitude": 32.6481658,
+  "longitude": -116.9673357,
+  "phone": "++1 858-875-4668",
+  "imageURLs": [
+    "/images/malls/ca-eastlake-village-marketplace-1.jpg"
+  ],
+  "summary": "Eastlake Village Marketplace is a convenient open-air shopping center in Chula Vista's Eastlake community, anchored by Target and Lowe's with over 30 shops and services. The center offers everything from retail and dining to everyday services like banking and dry cleaning, making it a one-stop destination for local residents.",
+  "openFrom": 700,
+  "openUntil": 2200,
+  "rating": 4.5,
+  "reviewCount": 2697,
+  "website": "https://shopeastlakemarketplace.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Eastlake Village Marketplace serves the growing Eastlake community in Chula Vista, attracting primarily middle to upper-middle income families with children who value convenience and one-stop shopping. The trade area draws from the master-planned Eastlake neighborhood, characterized by newer homes, young professional households, and families seeking quality retail and dining options close to home. Shoppers typically range from young families to middle-aged professionals with household incomes above the regional median, prioritizing convenience and variety for their daily shopping needs.",
+  "description": "Eastlake Village Marketplace stands as the premier shopping destination in the heart of Chula Vista's thriving Eastlake community, offering residents and visitors a comprehensive retail experience at the convenient intersection of Eastlake Parkway and Otay Lakes Road, just off State Route 125. This open-air shopping center brings together over 30 shops and services anchored by major retailers Target and Lowe's, creating a one-stop destination for household essentials, home improvement needs, and family shopping. The center's thoughtfully curated tenant mix includes 13 dining and specialty food options that cater to diverse tastes, ensuring every family member finds something to enjoy. Beyond retail therapy, Eastlake Village Marketplace serves as a true community hub where residents can efficiently handle everyday errands from dry cleaning and banking to floral arrangements and office supplies, all in one convenient location. The center's strategic location in the master-planned Eastlake neighborhood, combined with ample parking and easy freeway access, makes it an indispensable part of daily life for South Bay residents seeking quality, convenience, and variety.",
+  "numberOfStores": 30,
+  "tier": 2,
+  "spaces": []
+}

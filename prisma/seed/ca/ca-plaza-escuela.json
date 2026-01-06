@@ -1,0 +1,27 @@
+{
+  "address": "1100-1181 Locust Street",
+  "city": "Walnut Creek",
+  "country": "US",
+  "googlePlaceID": "places/ChIJOYyXGcJhhYARGYJ5lsvj6eE",
+  "name": "Plaza Escuela",
+  "state": "CA",
+  "latitude": 37.8952236,
+  "longitude": -122.06057349999998,
+  "phone": "++1 925-279-1800",
+  "imageURLs": [
+    "/images/malls/ca-plaza-escuela-1.jpg"
+  ],
+  "summary": "Plaza Escuela is a premier community shopping center in downtown Walnut Creek featuring quality retailers like The Container Store, Barnes & Noble, and The Cheesecake Factory. With over 2.4 million annual visits, this 153,577 square foot center serves the East Bay's prestigious retail market with high pedestrian traffic and an upscale tenant mix.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.3,
+  "reviewCount": 1175,
+  "website": "https://www.regencycenters.com/property/detail/80061/Plaza-Escuela?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Plaza Escuela serves an affluent East Bay demographic with a population of over 103,000 within a 3-mile radius. The trade area attracts educated, higher-income households typical of Walnut Creek's prestigious downtown district, with visitors seeking quality retailers and dining experiences. The center draws over 2.4 million annual visits from professionals, families, and empty nesters who value convenience and upscale shopping options. The high pedestrian traffic reflects the area's walkable urban environment and strong daytime population from nearby offices and residential neighborhoods.",
+  "description": "Plaza Escuela stands as a premier shopping destination in Walnut Creek's prestigious downtown retail district, offering an exceptional mix of national retailers and dining experiences in the heart of the East Bay. This thriving community center spans 153,577 square feet and welcomes over 2.4 million visitors annually who are drawn to its high-quality tenant mix and prime location. Anchored by notable retailers including The Container Store, Barnes & Noble, Talbots, and The Cheesecake Factory, Plaza Escuela provides a sophisticated shopping and dining experience that reflects Walnut Creek's upscale character. The center benefits from exceptional pedestrian traffic in one of the East Bay's most desirable downtown locations, serving a prosperous trade area of over 103,000 residents within three miles. Managed by Regency Centers, Plaza Escuela exemplifies the company's commitment to developing thriving retail destinations that serve as community gathering places.",
+  "numberOfStores": 2,
+  "squareFootage": 153577,
+  "tier": 2,
+  "spaces": []
+}

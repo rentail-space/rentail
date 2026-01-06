@@ -1,0 +1,25 @@
+{
+  "address": "7863 & 7877 Girard Avenue",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ1T2CXD0D3IARvYrII2HyPAo",
+  "name": "La Plaza La Jolla",
+  "state": "CA",
+  "latitude": 32.8462882,
+  "longitude": -117.2741222,
+  "phone": "++1 888-555-1234",
+  "imageURLs": [
+    "/images/malls/ca-la-plaza-la-jolla-1.jpg"
+  ],
+  "summary": "La Plaza La Jolla is a well-regarded shopping center on Girard Avenue in the heart of La Jolla's prestigious coastal community. With a 4.6-star rating, this intimate plaza serves the area's affluent residents with quality shops and services in a convenient, accessible location.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.6,
+  "reviewCount": 89,
+  "website": "http://www.laplazalajolla.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "La Plaza La Jolla attracts an affluent, educated demographic reflective of the La Jolla community, with median household incomes exceeding $120,000 and a significant concentration of professionals, retirees, and university-affiliated residents. The trade area serves a sophisticated customer base aged 35-65+ who value convenience, quality, and personalized service in their shopping experiences. Visitors typically engage in frequent, purposeful shopping trips for specialty goods, dining, and professional services rather than destination shopping, with strong preferences for boutique retailers and locally-owned establishments that complement La Jolla's upscale village character.",
+  "description": "La Plaza La Jolla is a distinguished shopping destination nestled in the heart of one of San Diego's most prestigious coastal communities at 7863 & 7877 Girard Avenue. This charming retail center serves the affluent La Jolla neighborhood with a carefully curated selection of shops and services that reflect the area's sophisticated tastes and lifestyle preferences. The plaza's prime location on Girard Avenue places it within walking distance of La Jolla's renowned beaches, the Museum of Contemporary Art, and the village's vibrant dining and cultural scene. With a strong 4.6-star rating from nearly 90 reviews, La Plaza La Jolla has established itself as a trusted community gathering place where residents and visitors alike can enjoy quality shopping in an intimate, accessible setting. The center maintains convenient operating hours from 10:00 AM to 9:00 PM, providing ample opportunity for both daytime errands and evening visits, while its boutique-style atmosphere offers a refreshing alternative to larger, impersonal shopping venues.",
+  "tier": 3,
+  "spaces": []
+}

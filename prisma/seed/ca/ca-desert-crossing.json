@@ -1,0 +1,25 @@
+{
+  "address": "Fred Waring Dr",
+  "city": "Palm Desert",
+  "country": "US",
+  "googlePlaceID": "places/ChIJVSmNu-P92oARtLl92xJotYA",
+  "name": "Desert Crossing",
+  "state": "CA",
+  "latitude": 33.725819,
+  "longitude": -116.40352939999998,
+  "phone": "++1 760-341-0258",
+  "imageURLs": [
+    "/images/malls/ca-desert-crossing-1.jpg"
+  ],
+  "summary": "Desert Crossing is a well-appointed open-air shopping center in Palm Desert featuring household name stores, restaurants, and a supermarket around a convenient parking lot. Located at Fred Waring Drive and Highway 111, it offers a superior shopping and dining environment serving the Coachella Valley community.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 2187,
+  "website": "https://www.shopdesertcrossing.com/",
+  "centerType": "CommunityCenter",
+  "demographics": "Desert Crossing serves the affluent Palm Desert community and surrounding Coachella Valley, attracting a mix of year-round residents and seasonal visitors. The primary demographic includes middle to upper-income households, with a significant proportion of retirees and second-home owners drawn to the desert lifestyle. The trade area captures both local daily needs shoppers and tourists visiting the Palm Springs area, with visitors typically seeking convenient access to everyday services, dining, and household goods in an open-air desert setting.",
+  "description": "Desert Crossing is a premier open-air shopping destination located at the intersection of Fred Waring Drive and Highway 111 in the heart of Palm Desert's retail district. This community-focused center provides a superior mix of tenants and an overall shopping and casual dining environment that is unsurpassed in the Coachella Valley. The center features a thoughtfully curated selection of household name stores, restaurants, and essential services including a supermarket, all arranged around a large, convenient parking lot that makes shopping effortless in the desert climate. With its strategic location in one of Southern California's most desirable resort communities, Desert Crossing serves both local residents and the area's substantial seasonal population. The center's open-air design takes full advantage of the region's renowned sunny weather, creating a comfortable and accessible shopping experience that reflects the relaxed Palm Desert lifestyle.",
+  "tier": 2,
+  "spaces": []
+}

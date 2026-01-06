@@ -1,0 +1,25 @@
+{
+  "address": "3810 Valley Centre Drive",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJd55c5S8G3IARs4GmB56504g",
+  "name": "Piazza Carmel",
+  "state": "CA",
+  "latitude": 32.938502,
+  "longitude": -117.2312016,
+  "phone": "++1 760-630-8247",
+  "imageURLs": [
+    "/images/malls/ca-piazza-carmel-1.jpg"
+  ],
+  "openFrom": 500,
+  "openUntil": 100,
+  "rating": 4.3,
+  "reviewCount": 804,
+  "website": "http://piazza-carmel.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Piazza Carmel serves the affluent Del Mar Heights and Carmel Valley neighborhoods of North San Diego County, attracting primarily upper-middle-class families and professionals with household incomes exceeding $100,000. The trade area consists of well-educated residents aged 30-55 with children, who value convenience and quality in their shopping experiences. Visitors typically engage in multi-purpose trips combining grocery shopping, dining, and professional services, reflecting the center's role as a neighborhood hub for daily needs rather than destination shopping.",
+  "description": "Piazza Carmel is a premier community shopping center strategically positioned at the corner of Valley Centre Drive and Carmel Creek Road in the heart of San Diego's thriving Carmel Valley neighborhood. This well-appointed center serves as a convenient one-stop destination for the surrounding community, offering a carefully curated mix of specialty retail stores, diverse dining and entertainment options, and essential services including financial and health services. The center's thoughtful design and tenant mix reflect its commitment to serving local residents with quality everyday conveniences in an accessible, open-air format. With a strong 4.3-star rating from over 800 reviews, Piazza Carmel has established itself as a trusted neighborhood gathering place. The center is managed by Newmark Merrill Companies, a respected retail property management firm known for fostering community connections and supporting local businesses, embodying their mission of \"Fostering the American Dream\" through quality retail experiences.",
+  "summary": "Piazza Carmel is a convenient community shopping center located at Valley Centre Drive and Carmel Creek Road in San Diego's Carmel Valley area. This neighborhood destination offers a well-rounded mix of specialty shops, dining, entertainment, and essential services including financial and health providers, serving as a true one-stop experience for local residents.",
+  "tier": 2,
+  "spaces": []
+}

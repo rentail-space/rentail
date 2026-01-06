@@ -1,0 +1,26 @@
+{
+  "address": "2510 Jamacha Road",
+  "city": "El Cajon",
+  "country": "US",
+  "googlePlaceID": "places/ChIJDcfBxyxb2YARGgNhhs4xul0",
+  "name": "Rancho San Diego",
+  "state": "CA",
+  "latitude": 32.7449791,
+  "longitude": -116.9317081,
+  "phone": "++1 833-800-4343",
+  "imageURLs": [
+    "/images/malls/ca-rancho-san-diego-1.jpg"
+  ],
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 681,
+  "website": "https://www.kimcorealty.com/properties/rancho-san-diego/111670/view?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Rancho San Diego attracts a predominantly middle to upper-middle class demographic, with the 3-mile trade area showing an average household income of $144,470 and median household income of $114,825. The center serves a family-oriented suburban population of approximately 60,000 residents within 3 miles, with a daytime population of over 61,000, indicating strong employment in the area. The trade area encompasses 20,745 households within 3 miles, with shoppers typically seeking value-oriented retail and convenient everyday shopping options. The demographic profile skews toward established families and working professionals who prioritize accessibility and practical shopping experiences.",
+  "description": "Rancho San Diego is an attractively landscaped open-air shopping center located at 2516 Jamacha Road in El Cajon, California, serving the greater San Diego metropolitan area. This well-maintained community center spans 98,316 square feet of gross leasable area and offers ample parking with a ratio of 5.11 spaces per 1,000 square feet, ensuring convenient access for shoppers. The center is anchored by Ross Dress for Less, a popular off-price retailer that draws consistent traffic, complemented by a diverse mix of smaller specialty stores and restaurants that cater to the everyday needs of the surrounding community. Strategically positioned in the Rancho San Diego neighborhood, the center serves a prosperous trade area with an average household income of $144,470 within 3 miles and a population of nearly 60,000 residents. Managed by Kimco Realty Corporation, one of North America's largest publicly traded owners and operators of open-air shopping centers, Rancho San Diego benefits from professional property management and a commitment to maintaining an inviting shopping environment for the local community.",
+  "squareFootage": 98316,
+  "summary": "Rancho San Diego is an attractively landscaped open-air community shopping center in El Cajon featuring Ross Dress for Less as its anchor tenant, along with a variety of smaller stores and restaurants. The 98,316 square foot center serves a prosperous suburban trade area with excellent parking and convenient access for everyday shopping needs.",
+  "tier": 2,
+  "spaces": []
+}

@@ -1,0 +1,26 @@
+{
+  "address": "12013 5th Street",
+  "city": "Yucaipa",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ2Uu-iBhR24AR8Hv5msa0uqM",
+  "name": "Marketplace at 5th Street Shopping Center",
+  "state": "CA",
+  "latitude": 34.0349835,
+  "longitude": -117.0555169,
+  "phone": "++1 909-300-0270",
+  "imageURLs": [
+    "/images/malls/ca-marketplace-at-5th-street-shopping-center-1.jpg"
+  ],
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.3,
+  "reviewCount": 1214,
+  "website": "http://www.marketplaceat5th.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Marketplace at 5th Street serves the Yucaipa community and surrounding Inland Empire areas, attracting primarily middle-income families and working professionals. The trade area draws from suburban households with moderate to middle-income levels, typical of the San Bernardino County region. Shoppers tend to be convenience-focused residents seeking everyday retail and services within a local shopping destination, with a mix of young families, established households, and retirees who value accessible, one-stop shopping options.",
+  "description": "Marketplace at 5th Street Shopping Center stands as Yucaipa's premiere shopping destination, strategically located at the intersection of Yucaipa Boulevard and 5th Street. This community-focused retail center brings together over 30 stores within one convenient location, serving as the primary shopping hub for residents of Yucaipa and the surrounding Inland Empire communities. The center offers a diverse mix of retail, dining, and service tenants that cater to the everyday needs of local families and professionals. With its accessible layout and ample parking, Marketplace at 5th Street has established itself as an essential part of the community's commercial landscape since its development. The shopping center continues to offer leasing opportunities for new businesses, including retail and office spaces, demonstrating its ongoing commitment to serving the evolving needs of the Yucaipa market.",
+  "numberOfStores": 30,
+  "summary": "Marketplace at 5th Street is Yucaipa's premiere shopping destination, featuring over 30 stores at the convenient intersection of Yucaipa Boulevard and 5th Street. This community-focused center serves as the primary retail hub for local residents seeking everyday shopping, dining, and services.",
+  "tier": 2,
+  "spaces": []
+}

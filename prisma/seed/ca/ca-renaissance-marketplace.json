@@ -1,0 +1,24 @@
+{
+  "address": "1309 West Renaissance Parkway",
+  "city": "Rialto",
+  "country": "US",
+  "googlePlaceID": "places/ChIJP9DiN8FNw4ARf4xfph91hKE",
+  "name": "Renaissance Marketplace",
+  "state": "CA",
+  "latitude": 34.134859399999996,
+  "longitude": -117.3974641,
+  "imageURLs": [
+    "/images/malls/ca-renaissance-marketplace-1.jpg"
+  ],
+  "summary": "Renaissance Marketplace is an upbeat, open-air shopping plaza in Rialto featuring familiar retail chains, casual restaurants, and a movie theater. This family-friendly destination serves as a convenient one-stop shopping and entertainment hub for the Inland Empire community.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.6,
+  "reviewCount": 3773,
+  "website": "https://www.rialtorenaissance.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Renaissance Marketplace attracts a diverse, family-oriented demographic from Rialto and surrounding Inland Empire communities, with a strong representation of middle-income households earning between $40,000 and $75,000 annually. The trade area serves a predominantly younger demographic with families that include school-age children, drawn by the combination of value-oriented retail, casual dining options, and entertainment amenities like the movie theater. Shoppers typically seek convenient, one-stop destinations for everyday needs combined with leisure activities, reflecting the practical shopping patterns common to suburban Southern California communities.",
+  "description": "Renaissance Marketplace stands as Rialto's premier open-air shopping destination, offering a vibrant mix of familiar retail chains, casual dining establishments, and entertainment options that serve the growing Inland Empire community. Located at 1309 West Renaissance Parkway, this upbeat plaza has become a central gathering place for families and shoppers seeking a convenient, all-in-one experience. The center's thoughtfully designed open-air layout creates an inviting atmosphere where visitors can easily navigate between their favorite national retailers and enjoy Southern California's pleasant weather year-round. A standout feature is the on-site movie theater, which transforms the marketplace into an entertainment hub perfect for date nights and family outings. With its strong tenant mix, ample parking, and accessible location along major transportation corridors, Renaissance Marketplace has established itself as an essential retail anchor for Rialto residents and visitors from throughout the San Bernardino area.",
+  "tier": 2,
+  "spaces": []
+}

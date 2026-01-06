@@ -1,0 +1,26 @@
+{
+  "address": "Sierra Avenue",
+  "city": "Fontana",
+  "country": "US",
+  "googlePlaceID": "places/ChIJt-ov0rhMw4ARFyLPvlJnS7o",
+  "name": "Fontana Indoor Swap Meet Inc",
+  "state": "CA",
+  "latitude": 34.075874299999995,
+  "longitude": -117.43416590000001,
+  "phone": "++1 909-428-0818",
+  "imageURLs": [
+    "/images/malls/ca-fontana-indoor-swap-meet-inc-1.jpg"
+  ],
+  "summary": "Established in 1992, the Fontana Indoor Swap Meet is the Inland Empire's most successful swap meet, featuring 70 diverse vendor stores offering everything from essential items to unique treasures. This beloved indoor marketplace provides a one-stop shopping experience where customers can support local businesses while finding great deals in a family-friendly environment.",
+  "openFrom": 1000,
+  "openUntil": 1830,
+  "rating": 4.2,
+  "reviewCount": 1567,
+  "website": "http://www.fontanaindoorswapmeet.net/",
+  "centerType": "CommunityCenter",
+  "demographics": "The Fontana Indoor Swap Meet attracts a diverse, value-conscious demographic primarily from the Inland Empire region, including families and bargain hunters seeking affordable goods. The visitor base skews toward middle to lower-middle income households who appreciate the variety of products at competitive prices. The swap meet format appeals to multi-generational shoppers, including Hispanic and multi-cultural communities that represent a significant portion of Fontana's population, with many visitors making it a weekend family outing tradition.",
+  "description": "Established in 1992, the Fontana Indoor Swap Meet has become the most visited and successful swap meet in the Inland Empire, serving as a beloved shopping destination for over three decades. Located at 9773 Sierra Avenue in Fontana, California, this indoor marketplace offers a unique shopping experience with approximately 70 vendor stores under one roof, providing everything from essential items to one-of-a-kind treasures. The swap meet prides itself on being a one-stop shopping center where customers can find diverse products ranging from seasonal delights to everyday necessities, all while supporting local small businesses and independent vendors. Open Monday, Wednesday, Thursday, and Sunday from 10:00 AM to 6:00 PM, and Friday and Saturday with extended hours until 6:30 PM, the center provides a convenient shopping schedule for the community. With a strong commitment to quality and customer satisfaction, the Fontana Indoor Swap Meet continues to offer aspiring entrepreneurs the opportunity to own their own business through vendor spaces, fostering a vibrant marketplace atmosphere that has made it a cornerstone of the local shopping scene for generations.",
+  "numberOfStores": 70,
+  "tier": 1,
+  "spaces": []
+}

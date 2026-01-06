@@ -1,0 +1,25 @@
+{
+  "address": "140 Rancho Del Mar",
+  "city": "Aptos",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ4c7tHdoVjoARAqREJm4f510",
+  "name": "Rancho Del Mar Shopping Center",
+  "state": "CA",
+  "latitude": 36.9779048,
+  "longitude": -121.90706899999999,
+  "phone": "++1 925-277-3000",
+  "imageURLs": [
+    "/images/malls/ca-rancho-del-mar-shopping-center-1.jpg"
+  ],
+  "summary": "Rancho Del Mar Shopping Center is a community-focused shopping destination in Aptos, California, offering a convenient mix of shopping, dining, and services. Located along the scenic Central Coast near Highway 1, the center serves both local residents and visitors with its accessible open-air layout.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.3,
+  "reviewCount": 439,
+  "website": "http://ranchodelmarshops.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Rancho Del Mar Shopping Center serves the affluent coastal community of Aptos and surrounding Santa Cruz County areas, attracting primarily middle to upper-middle income families and professionals. The trade area draws from both local residents and visitors to the Monterey Bay region, with a demographic mix that includes young families, established professionals aged 35-65, and retirees seeking convenient neighborhood shopping. Visitors typically exhibit preferences for quality retailers and services that cater to an educated, environmentally-conscious coastal California lifestyle, with household incomes generally above the state median.",
+  "description": "Rancho Del Mar Shopping Center has been a cornerstone of the Aptos community, serving residents and visitors along California's scenic Central Coast. Located at 140 Rancho Del Mar in Aptos, this neighborhood shopping destination offers a carefully curated mix of shopping, dining, and service options that cater to the needs of the local community. The center's convenient location near Highway 1 makes it easily accessible to both Aptos residents and visitors exploring the greater Santa Cruz County area. With its open-air design and ample parking, Rancho Del Mar provides a comfortable and welcoming shopping experience that reflects the relaxed coastal California lifestyle. The center continues to evolve to meet the changing needs of its community while maintaining its commitment to providing quality retailers and services.",
+  "tier": 2,
+  "spaces": []
+}

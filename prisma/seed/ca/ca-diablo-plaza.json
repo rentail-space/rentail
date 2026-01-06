@@ -1,0 +1,27 @@
+{
+  "address": "2415-2505 San Ramon Valley Boulevard",
+  "city": "San Ramon",
+  "country": "US",
+  "googlePlaceID": "places/ChIJq0CJCMfyj4ARWFp5rESaIAU",
+  "name": "Diablo Plaza",
+  "state": "CA",
+  "latitude": 37.774198399999996,
+  "longitude": -121.9771735,
+  "phone": "++1 925-279-1800",
+  "imageURLs": [
+    "/images/malls/ca-diablo-plaza-1.jpg"
+  ],
+  "summary": "Diablo Plaza is a 63,265 square foot community shopping center in affluent San Ramon, anchored by Safeway, CVS, and BevMo!. Strategically located near Bishop Ranch business park with excellent I-680 access, the center serves one of the Bay Area's most prosperous communities with over 4 million annual visits.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.3,
+  "reviewCount": 1507,
+  "website": "https://www.regencycenters.com/property/detail/635/Diablo-Plaza?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Diablo Plaza serves an exceptionally affluent trade area with households earning an average income of $248,125 within a 3-mile radius, significantly above national averages. The center attracts approximately 65,356 residents and a daytime population of 76,122, reflecting the nearby Bishop Ranch business park's professional workforce. The typical visitor profile includes upper-income families and professionals residing in homes valued at an average of $1.46 million, seeking convenient access to everyday necessities and services in an upscale suburban setting.",
+  "description": "Diablo Plaza is a well-established 63,265 square foot community shopping center strategically located at 2433 San Ramon Valley Boulevard in the heart of San Ramon's most affluent neighborhood. Developed and managed by Regency Centers, this thriving retail destination benefits from its prime location near the prestigious Bishop Ranch business park and excellent freeway access via I-680, making it a convenient stop for both residents and the area's substantial daytime workforce. The center is anchored by essential retailers including Safeway, CVS, and BevMo!, providing a strong mix of grocery, pharmacy, and specialty retail services that generate an impressive 4.17 million annual visits. With 4 available spaces and a tenant roster focused on daily needs and services, Diablo Plaza serves one of the Bay Area's most desirable markets, where average household incomes exceed $248,000 and home values average $1.46 million within a 3-mile radius. The center's Fresh Look® design and best-in-class merchant mix reflect Regency Centers' commitment to creating neighborhood gathering places that enhance the shopping experience for San Ramon's discerning community.",
+  "numberOfStores": 4,
+  "squareFootage": 63265,
+  "tier": 2,
+  "spaces": []
+}

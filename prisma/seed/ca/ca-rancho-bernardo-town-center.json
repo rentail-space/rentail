@@ -1,0 +1,26 @@
+{
+  "address": "11922-11987 Bernardo Plaza Drive",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJZfaDb9Hw24ARuBNyCnqF77E",
+  "name": "Rancho Bernardo Town Center",
+  "state": "CA",
+  "latitude": 33.0206909,
+  "longitude": -117.0734547,
+  "phone": "++1 858-485-9300",
+  "imageURLs": [
+    "/images/malls/ca-rancho-bernardo-town-center-1.jpg"
+  ],
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.4,
+  "reviewCount": 870,
+  "website": "http://ranchobernardotowncenter.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Rancho Bernardo Town Center serves an affluent suburban community in North San Diego County, attracting primarily middle to upper-middle-class families and professionals aged 35-65. The trade area consists of well-established residential neighborhoods with above-average household incomes, homeownership rates, and educational attainment levels. Typical visitors are convenience-focused shoppers seeking everyday services, quick dining options, and personal care amenities within their local community. The center draws from a stable, family-oriented demographic that values quality service providers and familiar brands in an accessible neighborhood setting.",
+  "description": "Rancho Bernardo Town Center is a convenient neighborhood shopping destination located at 11922-11987 Bernardo Plaza Drive in the heart of San Diego's Rancho Bernardo community. Anchored by Vons grocery store, this well-maintained center offers residents a diverse mix of essential services and dining options that cater to everyday needs. The tenant lineup includes popular establishments like Peet's Coffee for morning beverages, Sidny's Delicatessen and The Kebab Shop for casual dining, and BHC Chicken and China Fun for international cuisine. Professional services are well-represented with Town Center Dentistry, Dr. Lee and Associates Optometry, San Diego County Credit Union, and Postal Annex providing convenient access to healthcare and financial services. Personal care and lifestyle amenities round out the mix with Sport Clips Haircuts, Strands Salon, Dip Nails Spa, Premier Martial Arts, and THE BXNG CLUB, making this center a one-stop destination for the Rancho Bernardo community. Managed by Boardwalk Development, the center maintains a strong 4.4-star rating with 870 reviews, reflecting its reputation as a reliable neighborhood gathering place.",
+  "numberOfStores": 19,
+  "summary": "Rancho Bernardo Town Center is a neighborhood shopping center anchored by Vons and featuring a practical mix of dining, personal services, and professional amenities. With 19 tenants including Peet's Coffee, Sidny's Delicatessen, dental and optometry offices, and various salon and fitness options, it serves as a convenient one-stop destination for the Rancho Bernardo community.",
+  "tier": 2,
+  "spaces": []
+}

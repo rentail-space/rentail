@@ -1,0 +1,24 @@
+{
+  "address": "1892-1978 Contra Costa Boulevard",
+  "city": "Pleasant Hill",
+  "country": "US",
+  "googlePlaceID": "places/ChIJs9o0jKNhhYAR7JfSwHj4IZ4",
+  "name": "Pleasant Hill Plaza",
+  "state": "CA",
+  "latitude": 37.948963,
+  "longitude": -122.05898409999999,
+  "imageURLs": [
+    "/images/malls/ca-pleasant-hill-plaza-1.jpg"
+  ],
+  "summary": "Pleasant Hill Plaza is a neighborhood shopping center on Contra Costa Boulevard featuring local retail and service businesses, including Salon Hanover. With convenient hours and a strong community reputation reflected in its 4.3-star rating, the plaza serves as a reliable destination for Pleasant Hill residents.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.3,
+  "reviewCount": 581,
+  "website": "http://salonhanover.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Pleasant Hill Plaza serves a diverse suburban demographic in Contra Costa County, with primary visitors being middle to upper-middle income families and professionals aged 30-65. The trade area draws from Pleasant Hill's established residential neighborhoods, characterized by homeowners with household incomes ranging from $80,000 to $150,000 annually. The center attracts convenience-oriented shoppers seeking personal services and local businesses, with a customer base that values accessibility and neighborhood-focused retail experiences.",
+  "description": "Pleasant Hill Plaza is a neighborhood shopping center located along Contra Costa Boulevard in Pleasant Hill, California, serving the local community with convenient retail and service offerings. The center has established itself as a go-to destination for residents seeking personal care services, with Salon Hanover being a prominent tenant offering professional hair and beauty services. The plaza maintains extended operating hours from early morning until midnight, providing flexibility for busy professionals and families in the area. With a strong 4.3-star rating from over 580 reviews, Pleasant Hill Plaza has built a reputation for quality service and accessibility in the heart of Pleasant Hill. The center's strategic location on Contra Costa Boulevard ensures high visibility and easy access for the surrounding residential communities, making it a reliable choice for everyday shopping and service needs.",
+  "tier": 2,
+  "spaces": []
+}

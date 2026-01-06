@@ -1,0 +1,25 @@
+{
+  "address": "306 East Main Street",
+  "city": "Stockton",
+  "country": "US",
+  "googlePlaceID": "places/ChIJe2AJYZgSkIARrVxEPk2_Ohg",
+  "name": "Courthouse Plaza",
+  "state": "CA",
+  "latitude": 37.953036499999996,
+  "longitude": -121.28696049999999,
+  "imageURLs": [
+    "/images/malls/ca-courthouse-plaza-1.jpg"
+  ],
+  "summary": "Courthouse Plaza is a unique community-focused center in downtown Stockton featuring an eclectic mix of local retailers, cafes, salons, and social enterprises. The historic building is home to The Underground Arcade, a youth-led entertainment space, alongside diverse shops, restaurants, and nonprofit services that support community revitalization.",
+  "openFrom": 700,
+  "openUntil": 1700,
+  "rating": 4.4,
+  "reviewCount": 94,
+  "website": "https://courthouseplaza.net/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Courthouse Plaza serves downtown Stockton's diverse urban population, attracting a mix of working professionals, families, and young adults. The center draws visitors from Stockton's revitalized downtown core, with a focus on community-oriented services and local entrepreneurship. Primary visitors include middle-income households seeking local services, youth and families utilizing the social enterprise programs, and downtown workers looking for convenient dining and retail options during business hours.",
+  "description": "Courthouse Plaza is a historic multi-story building located in the heart of downtown Stockton at 306 East Main Street, serving as a vibrant community hub that blends commerce, social services, and youth development. This unique center houses an eclectic mix of tenants including Martinez Tailor Shop, multiple cafes and restaurants like Bagel Cafe and Plaza Perks, MoKaH Hair Salon specializing in extensions and braids, and distinctive retail shops such as Makers Made offering handmade goods and plants, Main Street Gifts, Fashion Safari, and DeVines Antiques. A standout feature is The Underground Arcade, a youth-led social enterprise providing safe recreation, job training, and leadership opportunities for young people while offering classic and modern arcade games for family-friendly entertainment. The plaza also hosts Main Street Youth & Family Services, a non-profit supporting vulnerable children and families through supportive housing and workforce development programs, alongside WellnessMart offering pre-employment services and Agape Worship Arts music school. With its focus on community revitalization, local entrepreneurship, and social impact, Courthouse Plaza represents downtown Stockton's exciting transformation into a thriving destination for shopping, dining, services, and community connection.",
+  "numberOfStores": 12,
+  "tier": 1,
+  "spaces": []
+}

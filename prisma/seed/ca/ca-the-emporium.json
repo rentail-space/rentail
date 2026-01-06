@@ -1,0 +1,25 @@
+{
+  "address": "42030 Main Street",
+  "city": "Temecula",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ3VfPTr9_24ARngu9Q2rwk3M",
+  "name": "The Emporium",
+  "state": "CA",
+  "latitude": 33.4929912,
+  "longitude": -117.1489249,
+  "phone": "++1 951-505-7149",
+  "imageURLs": [
+    "/images/malls/ca-the-emporium-1.jpg"
+  ],
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 24,
+  "website": "http://boulevardemporioum.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "The Emporium serves the Temecula community, which attracts a diverse mix of families and young professionals drawn to the area's wine country tourism and growing residential developments. The trade area includes middle to upper-middle income households with median incomes ranging from $75,000 to $110,000, with a strong presence of families with children and active retirees. Shoppers in this area tend to value convenience and local businesses, with shopping patterns reflecting both daily needs and leisure activities tied to Temecula's tourism economy.",
+  "description": "The Emporium, located at 42030 Main Street in the heart of Temecula, California, offers a distinctive shopping experience in one of Southern California's most vibrant communities. Situated in the renowned Temecula Valley wine country region, this shopping destination serves both local residents and the area's many visitors who come to explore the region's wineries and attractions. The center maintains convenient operating hours from 10:00 AM to 8:00 PM daily, making it accessible for shoppers throughout the week. With a solid 4.4-star rating from customer reviews, The Emporium has established itself as a trusted retail destination in the community. The center's location on Main Street positions it perfectly to capture both local traffic and tourists exploring Temecula's charming Old Town district and surrounding wine country attractions.",
+  "summary": "The Emporium is a well-rated shopping destination on Main Street in Temecula's wine country region, serving both local residents and tourists. With convenient daily hours and a 4.4-star rating, it provides a reliable retail experience in one of Southern California's fastest-growing communities.",
+  "tier": 2,
+  "spaces": []
+}

@@ -1,0 +1,27 @@
+{
+  "address": "Osborne Street",
+  "city": "Los Angeles",
+  "country": "US",
+  "googlePlaceID": "places/ChIJKyaWRT6RwoARhTxuMW_Og5Q",
+  "name": "Pacoima Center",
+  "state": "CA",
+  "latitude": 34.245313,
+  "longitude": -118.4194137,
+  "phone": "++1 610-215-7939",
+  "imageURLs": [
+    "/images/malls/ca-pacoima-center-1.jpg"
+  ],
+  "openFrom": 600,
+  "openUntil": 0,
+  "rating": 4.2,
+  "reviewCount": 3032,
+  "website": "https://properties.brixmor.com/p/retail-real-estate/Pacoima-CA-91331/pacoimacenter?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Pacoima Center serves a diverse, family-oriented community with a population of 268,000+ within 3 miles. The trade area features households with an average income of $105,033, representing working and middle-class families seeking value-oriented shopping options. The center attracts approximately 4.9 million annual visits, drawing shoppers primarily interested in grocery, discount retail, and everyday essentials. The demographic profile skews toward budget-conscious consumers who prioritize convenience and value, with strong representation from multi-generational Hispanic households typical of the San Fernando Valley's Pacoima neighborhood.",
+  "description": "Pacoima Center is a market-dominant community shopping center strategically located at 9727 Laurel Canyon Drive and Osborne Street in Pacoima, California. Spanning 215,930 square feet, this open-air retail destination is anchored by three major retailers: Food 4 Less, Target, and Ross Dress For Less, creating a powerful value-oriented shopping experience for the local community. The center benefits from exceptional visibility and accessibility, with over 32,000 vehicles per day passing on Osborne Street and 21,000+ on Laurel Canyon Boulevard, plus direct access to Interstate 5 which sees more than 310,000 vehicles daily. Managed by Brixmor Property Group, one of the nation's largest owners and operators of open-air shopping centers, Pacoima Center serves a dense population of over 268,000 residents within a 3-mile radius. Additional tenants include Chase Bank, AutoZone, Starbucks, and Magicland Dental Group, providing a comprehensive mix of retail, financial, automotive, and service offerings that generate an impressive 4.9 million annual visits according to 2024 data.",
+  "numberOfStores": 7,
+  "squareFootage": 215930,
+  "summary": "Pacoima Center is a 215,930 square foot community shopping center anchored by Food 4 Less, Target, and Ross Dress For Less, drawing 4.9 million annual visits. Located at a high-traffic intersection with direct I-5 access, the center serves over 268,000 residents within 3 miles with value-oriented retail and essential services.",
+  "tier": 1,
+  "spaces": []
+}

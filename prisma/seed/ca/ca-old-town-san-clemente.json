@@ -1,0 +1,126 @@
+{
+  "address": "111 West Avenida Palizada",
+  "city": "San Clemente",
+  "country": "US",
+  "googlePlaceID": "places/ChIJi72vHuv13IARjFr3F2nN4Fo",
+  "name": "Old Town San Clemente",
+  "state": "CA",
+  "latitude": 33.4290517,
+  "longitude": -117.6153118,
+  "imageURLs": [
+    "/images/malls/ca-old-town-san-clemente-1.jpg"
+  ],
+  "openFrom": 800,
+  "openUntil": 2100,
+  "rating": 4.6,
+  "reviewCount": 183,
+  "website": "http://www.oldtownsanclemente.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Old Town San Clemente attracts an affluent, family-oriented demographic from the surrounding Orange County coastal communities, with a median household income well above the national average. The primary trade area draws from San Clemente's growing population of nearly 100,000 residents, characterized by upper-middle-class families, young professionals, and retirees seeking a beach lifestyle. Visitors tend to be health-conscious, culturally diverse food enthusiasts who appreciate the center's international dining options and specialty wellness services. The location's position between San Diego and Los Angeles also captures significant tourist traffic and day-trippers seeking authentic local experiences in a historic coastal setting.",
+  "description": "Old Town San Clemente is a unique Wild West-themed outdoor lifestyle center that combines historic charm with diverse international dining and specialty retail experiences. Located at 111 West Avenida Palizada, this hidden gem occupies a historically significant site that once served as a hitching and freight change-off point between the harbor and the El Camino Real mission route. The center features an impressive collection of restaurants representing cuisines from around the world, including New Mandarin Garden for Chinese fare, Inka Mama's Peruvian cuisine, Dark Magic Sushi, HOT-N-CHILI Indian restaurant, Los Patios Mexican, and ALOHANA Acai Bowls & Coffee. Beyond its culinary offerings, Old Town San Clemente provides a comprehensive mix of health and wellness services including Cappola Chiropractic, Simple Touch Skin Care, Sugaring Studio, and Signature Supplements, alongside unique attractions like Casa Carreras Cigars & Wine with its impressive two-level walk-in humidor, and a butterfly garden featuring monarch butterflies. The center embraces its Spanish spaghetti western theme throughout, creating a romantic and inviting atmosphere with live music in summer, treasure hunts, and connections to San Clemente's rich history including its ties to the original Nixon Museum location. With operating hours from 8:00 AM to 9:00 PM and a strong 4.6-star rating from 183 reviews, Old Town San Clemente has established itself as a beloved community gathering place that celebrates both local heritage and global flavors.",
+  "numberOfStores": 28,
+  "summary": "Old Town San Clemente is a Wild West-themed outdoor lifestyle center featuring diverse international restaurants, specialty wellness services, and unique attractions including a cigar shop with an extensive humidor and a monarch butterfly garden. This historic destination combines San Clemente's mission-era heritage with modern culinary adventures and family-friendly entertainment in a romantic Spanish spaghetti western atmosphere.",
+  "tier": 2,
+  "spaces": [
+    {
+      "type": "Inline",
+      "number": "307",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "306",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "305",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "304",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "303",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "202",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "100",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "106",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "103",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "106",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "107",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "108",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "111",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "113",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "114",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "200",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "203",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "204",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "205",
+      "available": false
+    },
+    {
+      "type": "Inline",
+      "number": "400",
+      "available": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "address": "400 South Baldwin Avenue",
+  "city": "Arcadia",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ4YnG77zbwoARFQvP5LH-EVg",
+  "name": "The Shops at Santa Anita",
+  "state": "CA",
+  "latitude": 34.134382699999996,
+  "longitude": -118.0515692,
+  "phone": "++1 626-445-3116",
+  "imageURLs": [
+    "/images/malls/ca-the-shops-at-santa-anita-1.jpg"
+  ],
+  "summary": "The Shops at Santa Anita is a highly-rated regional shopping destination in Arcadia's San Gabriel Valley, featuring a diverse mix of retail stores, dining options, and entertainment. With nearly 16,000 Google reviews and a 4.5-star rating, this established mall serves as a premier gathering place for families and shoppers throughout Southern California.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 15816,
+  "website": "https://www.shopsatsantaanita.com/",
+  "centerType": "RegionalMall",
+  "demographics": "The Shops at Santa Anita attracts a diverse, multi-generational customer base from the San Gabriel Valley, with a strong representation of affluent Asian-American families and middle to upper-middle income households. The trade area includes Arcadia, Pasadena, and surrounding communities known for excellent schools and high household incomes averaging $80,000-$120,000. Shoppers tend to be family-oriented with a mix of young professionals and established families who value both premium brands and dining experiences. The center draws visitors seeking a full-day shopping and entertainment destination with strong appeal to fashion-conscious consumers aged 25-54.",
+  "description": "The Shops at Santa Anita is a premier shopping destination in Arcadia, California, offering an exceptional retail and entertainment experience in the heart of the San Gabriel Valley. This renowned regional mall has served the community for decades, evolving from its origins as the historic Santa Anita Fashion Park into a modern shopping center that seamlessly blends fashion, dining, and entertainment. With an impressive 4.5-star rating from nearly 16,000 reviews, the center has established itself as a beloved gathering place for families and shoppers throughout Southern California. The mall features a carefully curated mix of popular retailers, specialty boutiques, and dining options that cater to diverse tastes and preferences. Conveniently located at 400 South Baldwin Avenue with ample parking and accessibility, The Shops at Santa Anita continues to be a cornerstone of the Arcadia community, offering visitors a comfortable and engaging shopping environment seven days a week.",
+  "tier": 2,
+  "spaces": []
+}

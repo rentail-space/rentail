@@ -1,0 +1,25 @@
+{
+  "address": "1595 Joy Lane",
+  "city": "Fort Mohave",
+  "country": "US",
+  "googlePlaceID": "places/ChIJXRb2ZSk_zoARh-PvDGp6KXI",
+  "name": "Mohave Trading Post",
+  "state": "AZ",
+  "latitude": 34.997609499999996,
+  "longitude": -114.5953501,
+  "phone": "++1 928-650-5679",
+  "imageURLs": [
+    "/images/malls/az-mohave-trading-post-1.jpg"
+  ],
+  "summary": "Mohave Trading Post, operating as The Treasure Trove, is a specialty retail destination in Fort Mohave offering antiques, collectibles, and unique vintage finds. With a 4.5-star rating, this trading post attracts treasure hunters and collectors seeking distinctive merchandise in a welcoming Southwest setting.",
+  "openFrom": 900,
+  "openUntil": 1600,
+  "rating": 4.5,
+  "reviewCount": 41,
+  "website": "https://the-treasure-trove-103232.square.site/",
+  "centerType": "StripCenter",
+  "demographics": "Mohave Trading Post serves the Fort Mohave community and surrounding Mohave County area, attracting a mix of local residents, retirees, and tourists traveling along the Colorado River corridor. The trade area consists primarily of middle-income households, with a significant proportion of retirees and seasonal visitors drawn to the region's affordable desert living and recreational opportunities. Shoppers tend to seek unique finds, antiques, collectibles, and locally-sourced goods, reflecting the area's appreciation for treasure hunting and vintage items.",
+  "description": "Mohave Trading Post is a distinctive shopping destination located in Fort Mohave, Arizona, offering visitors a unique treasure hunting experience in the heart of the Colorado River Valley. Operating as \"The Treasure Trove,\" this specialty retail center has earned a strong reputation with a 4.5-star rating from 41 reviews, reflecting its appeal to both locals and tourists seeking one-of-a-kind finds. The trading post specializes in antiques, collectibles, and curated vintage items that capture the spirit of the American Southwest. Open daily from 9:00 AM to 4:00 PM, the center provides a welcoming atmosphere for shoppers looking to discover hidden gems and unique merchandise. Its convenient location on Joy Lane makes it an accessible stop for residents of Fort Mohave and visitors exploring the tri-state area where Arizona, Nevada, and California meet.",
+  "tier": 1,
+  "spaces": []
+}

@@ -1,0 +1,23 @@
+{
+  "address": "",
+  "city": "Tijuana",
+  "country": "MX",
+  "googlePlaceID": "places/ChIJMzHwwJdH2YAR5lEG1t5hK4o",
+  "name": "Plaza Alameda Otay Town Center",
+  "state": "B.C.",
+  "latitude": 32.53061400000001,
+  "longitude": -116.95125229999998,
+  "phone": "++52 664 977 3172",
+  "imageURLs": ["/images/malls/b.c.-plaza-alameda-otay-town-center-1.jpg"],
+  "summary": "Plaza Alameda Otay Town Center is a contemporary open-air lifestyle destination in Tijuana featuring a diverse mix of fashion, dining, banking, wellness, and medical services. With its modern design and family-friendly atmosphere, the center serves as a premier mixed-use complex offering shopping, entertainment, and professional services under one roof.",
+  "openFrom": 500,
+  "openUntil": 2300,
+  "rating": 4.6,
+  "reviewCount": 11777,
+  "website": "https://alamedaotay.mx/",
+  "centerType": "LifestyleCenter",
+  "demographics": "Plaza Alameda Otay Town Center attracts a diverse cross-border demographic, serving primarily middle to upper-middle income families from both Tijuana and San Diego County. The visitor base includes young professionals and families aged 25-54 who seek contemporary shopping and dining experiences in a modern open-air environment. The trade area benefits from significant cross-border traffic, with shoppers drawn to the mix of Mexican and international retailers, banking services, and entertainment options. The center appeals to health-conscious consumers, evidenced by Family Fitness and wellness services, as well as families seeking convenient one-stop shopping for fashion, dining, and medical services at Torre Medica.",
+  "description": "Plaza Alameda Otay Town Center stands as Tijuana's premier open-air lifestyle destination, offering a contemporary mixed-use experience that seamlessly blends shopping, dining, entertainment, and professional services. Located in the strategic Otay area of Tijuana, Baja California, this modern complex has become a cornerstone for both local residents and cross-border visitors seeking a sophisticated retail environment. The center features a carefully curated mix of tenants across multiple categories, including fashion boutiques like Promoda and Etcetera accesorios, culinary experiences such as Mr. Cajún, and essential services including Santander and Banregio banking facilities. Health and wellness play a significant role in the center's identity, with Family Fitness, PINAMART beauty salon, Rosevelour spa services, and the Torre Medica medical tower providing comprehensive lifestyle amenities. With its inviting atmosphere designed for families, the center encourages visitors to \"Quedate un rato más\" (stay a little longer), offering events, promotions, and entertainment that create a vibrant community gathering place. The center's commitment to accessibility and convenience is evident through its extended operating hours and focus on creating experiences for the entire family, making it a destination rather than just a shopping stop.",
+  "tier": 2,
+  "spaces": []
+}

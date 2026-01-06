@@ -1,0 +1,25 @@
+{
+  "address": "27511 San Bernardino Avenue",
+  "city": "Redlands",
+  "country": "US",
+  "googlePlaceID": "places/ChIJff4fAPaq3IARW7ClRzY0_zg",
+  "name": "Mountain Grove Shopping Center",
+  "state": "CA",
+  "latitude": 34.075677899999995,
+  "longitude": -117.2033641,
+  "phone": "++1 909-307-6035",
+  "imageURLs": [
+    "/images/malls/ca-mountain-grove-shopping-center-1.jpg"
+  ],
+  "summary": "Mountain Grove Shopping Center is a sizable lifestyle destination in Redlands featuring brand-name retailers like Nike, Nordstrom Rack, and Ulta Beauty alongside diverse dining options and entertainment venues including Harkins Theatres. With convenient freeway access and landscaped outdoor spaces, it serves as a comprehensive shopping hub for the Inland Empire community.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.5,
+  "reviewCount": 5507,
+  "website": "http://www.mtgrove.com/",
+  "centerType": "LifestyleCenter",
+  "demographics": "Mountain Grove Shopping Center attracts a diverse middle to upper-middle class demographic from the Redlands and San Bernardino area, with households earning between $60,000 and $120,000 annually. The primary visitor base consists of families with children and young professionals aged 25-54 who value convenient access to both shopping and dining options. The trade area draws from suburban communities seeking a one-stop destination for fashion, home goods, and entertainment, with shoppers typically making weekly visits for both planned purchases and leisure activities. The center's proximity to the I-210 and I-10 freeways expands its reach to surrounding Inland Empire communities, attracting value-conscious consumers who appreciate brand-name retailers at accessible price points.",
+  "description": "Mountain Grove Shopping Center stands as a premier shopping destination in Redlands, California, offering a comprehensive retail and dining experience across beautifully landscaped grounds. Conveniently located just one block from the CA-210 and I-10 Freeways on Alabama Street and San Bernardino Avenue, this expansive lifestyle center provides easy access for shoppers throughout the Inland Empire. The center features an impressive mix of national brand-name retailers including Nike, Old Navy, Gap, Banana Republic, Nordstrom Rack, TJ Maxx, Ross, HomeGoods, Hobby Lobby, and Ulta Beauty, alongside specialty stores like Skechers, Tilly's, Hot Topic, Lane Bryant, and Kay Jewelers. Dining options range from quick-service to sit-down restaurants, complemented by a food court that serves as a gathering place for families and friends. Additional amenities include a Harkins movie theater for entertainment, 24 Hour Fitness for health-conscious visitors, and Aldi for grocery shopping, making Mountain Grove a true one-stop destination where guests can complete their entire to-do list in one convenient location.",
+  "tier": 2,
+  "spaces": []
+}

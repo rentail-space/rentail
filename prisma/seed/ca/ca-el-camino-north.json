@@ -1,0 +1,26 @@
+{
+  "address": "2741 Vista Way",
+  "city": "Oceanside",
+  "country": "US",
+  "googlePlaceID": "places/ChIJa2WuDo1x3IARf-tHP5FxCB0",
+  "name": "El Camino North",
+  "state": "CA",
+  "latitude": 33.1822443,
+  "longitude": -117.3329197,
+  "phone": "++1 833-800-4343",
+  "imageURLs": [
+    "/images/malls/ca-el-camino-north-1.jpg"
+  ],
+  "summary": "El Camino North is a bustling 363,163 square foot shopping center in Oceanside featuring nationally known chain retailers and restaurants. Strategically located near Marine Corps Base Camp Pendleton with prime visibility from Highway 78, the center serves the greater San Diego metropolitan area with convenient access and ample parking.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 2233,
+  "website": "https://www.kimcorealty.com/properties/el-camino-north/114090/view?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "El Camino North serves a diverse middle to upper-middle class market with median household incomes ranging from $94,652 to $109,746 within a 10-mile radius. The trade area population of over 515,000 residents within 10 miles includes military families from nearby Marine Corps Base Camp Pendleton, established suburban households, and coastal California professionals. The center attracts a daytime population that exceeds residential counts, indicating strong commuter and employee traffic, with average household incomes reaching $144,640 in the broader market area.",
+  "description": "El Camino North is a prominent 363,163 square foot shopping center strategically positioned in Oceanside, California, near the Marine Corps Base Camp Pendleton. The center commands exceptional visibility along the major east-west corridor of Highway 78 and sits at the highly congested intersection of Vista Way and El Camino Real, ensuring consistent traffic flow and accessibility for the San Diego-Chula Vista-Carlsbad metropolitan area. Developed and managed by Kimco Realty, one of North America's largest publicly traded owners and operators of open-air, grocery-anchored shopping centers, El Camino North features a diverse mix of nationally recognized chain retailers and restaurants that cater to both local residents and the substantial military community. With ample parking at a ratio of 6.00 spaces per 1,000 square feet, the center provides convenient access for shoppers throughout North County San Diego. The property's strong performance is reflected in its 4.3-star rating from over 2,200 reviews, demonstrating its role as a trusted retail destination serving a trade area population exceeding half a million residents within a 10-mile radius.",
+  "squareFootage": 363163,
+  "tier": 2,
+  "spaces": []
+}

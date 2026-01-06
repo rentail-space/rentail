@@ -1,0 +1,23 @@
+{
+  "address": "1302 El Camino Real",
+  "city": "Menlo Park",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ59UouPilj4ARpZB-snJyd5U",
+  "name": "Springline - The Plaza",
+  "state": "CA",
+  "latitude": 37.455335,
+  "longitude": -122.1857687,
+  "phone": "++1 650-241-3300",
+  "imageURLs": [
+    "/images/malls/ca-springline-the-plaza-1.jpg"
+  ],
+  "summary": "Springline - The Plaza is a modern mixed-use lifestyle center in downtown Menlo Park featuring resort-style amenities, creative office spaces, and a curated collection of dining destinations. This walkable campus combines upscale residences with culinary experiences and outdoor gathering spaces, creating a new neighborhood hub for Silicon Valley professionals.",
+  "rating": 4.4,
+  "reviewCount": 16,
+  "website": "https://springline.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Springline attracts affluent professionals and young families in the Menlo Park area, with visitors typically in the 25-55 age range and household incomes exceeding $150,000. The mixed-use development draws Silicon Valley tech workers who value walkability and work-life integration, along with local residents seeking upscale dining and entertainment options. The trade area serves the high-income Menlo Park and Palo Alto communities, with shoppers prioritizing quality, convenience, and experiential retail over traditional shopping patterns.",
+  "description": "Springline - The Plaza is redefining downtown Menlo Park as a premier mixed-use destination that seamlessly blends modern living, creative workspaces, and culinary experiences. This resort-style campus represents a new vision for urban development, bringing together contemporary residences, professional office spaces, and a carefully curated collection of dining and retail destinations all within a walkable neighborhood setting. The development features extensive outdoor amenities including a dog park, fitness studios, sun-splashed pool areas with cabanas, and private fire pit enclaves nestled within organic landscaping. Springline has established itself as a culinary destination along El Camino Real and Oak Grove, offering everything from craft coffee spots and casual cafes to upscale dining options and a boutique grocery store. With its emphasis on work-life balance, smart home features, and al fresco gathering spaces, Springline creates a unique environment where residents and office workers can live, collaborate, and socialize in one of Silicon Valley's most desirable locations.",
+  "tier": 3,
+  "spaces": []
+}

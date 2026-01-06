@@ -1,0 +1,25 @@
+{
+  "address": "12925 El Camino Real",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJAzaa1ZwI3IARheNs8Rneqbo",
+  "name": "Del Mar Highlands Town Center",
+  "state": "CA",
+  "latitude": 32.9522222,
+  "longitude": -117.2325,
+  "phone": "++1 858-793-5757",
+  "imageURLs": [
+    "/images/malls/ca-del-mar-highlands-town-center-1.jpg"
+  ],
+  "summary": "Del Mar Highlands Town Center is an upscale open-air lifestyle destination in San Diego's North County featuring the innovative Sky Deck restaurant collective, Cinépolis luxury cinema, and curated retail mix. This community-focused center combines quality dining, entertainment, and shopping in an inviting outdoor setting that serves the affluent Del Mar and Carmel Valley neighborhoods.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.5,
+  "reviewCount": 2874,
+  "website": "http://www.delmarhighlandstowncenter.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Del Mar Highlands Town Center attracts an affluent, educated demographic from the surrounding Del Mar and Carmel Valley communities, with median household incomes exceeding $150,000. The primary visitor base consists of families with children, young professionals, and active retirees aged 30-65 who value quality dining, entertainment, and convenient shopping experiences. The trade area draws from some of San Diego's most desirable coastal neighborhoods, with shoppers seeking upscale casual dining options, specialty retail, and lifestyle amenities like the Sky Deck restaurant collective and Cinépolis cinema. Visitors typically exhibit preferences for health-conscious options, outdoor gathering spaces, and experiential retail over traditional mall shopping.",
+  "description": "Del Mar Highlands Town Center is a premier open-air lifestyle destination located in the heart of San Diego's affluent North County coastal region at 12925 El Camino Real. This thoughtfully designed shopping center combines upscale retail, diverse dining experiences, and entertainment options in an inviting outdoor setting that captures the essence of Southern California living. The center's crown jewel is the Sky Deck, an innovative restaurant and beverage collective operated by 13 unique entrepreneurs, offering visitors an elevated dining experience with diverse culinary options ranging from casual to upscale. Beyond dining, the center features Cinépolis luxury cinema, Jimbo's natural foods market, and a carefully curated mix of shops and services that cater to the discerning tastes of the surrounding Del Mar and Carmel Valley communities. The center's commitment to community engagement is evident through its impressive philanthropic contributions of over $700,000 to San Diego-area causes, seasonal events like the Pop Jet fountain gatherings, and live music performances that create a vibrant gathering place for locals and visitors alike. Owned and operated by First Washington Realty, Del Mar Highlands Town Center offers ample parking including a multi-level structure with EV charging stations, making it easily accessible for the health-conscious, environmentally aware clientele it serves.",
+  "tier": 3,
+  "spaces": []
+}

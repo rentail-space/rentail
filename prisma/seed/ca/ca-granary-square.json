@@ -1,0 +1,26 @@
+{
+  "address": "25830 McBean Parkway",
+  "city": "Santa Clarita",
+  "country": "US",
+  "googlePlaceID": "places/ChIJi0oyaxiHwoARXIrAjxZoY_E",
+  "name": "Granary Square",
+  "state": "CA",
+  "latitude": 34.4040212,
+  "longitude": -118.5508037,
+  "phone": "++1 833-800-4343",
+  "imageURLs": [
+    "/images/malls/ca-granary-square-1.jpg"
+  ],
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 806,
+  "website": "https://www.kimcorealty.com/properties/granary-square/114160/view?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Granary Square serves an affluent suburban market in Valencia, California, with the surrounding 5-mile trade area comprising 192,032 residents and a median household income of $126,214. The primary shopper base consists of middle to upper-middle-class families with an average household income of $153,992, reflecting a well-educated demographic typical of the Santa Clarita Valley. The center attracts a diverse mix of convenience-oriented shoppers seeking grocery and everyday services, with strong daytime population of 248,501 indicating significant workforce presence in the area.",
+  "description": "Granary Square is a well-established grocery-anchored shopping center located at 25930 McBean Parkway in Valencia, California, serving the thriving Santa Clarita Valley community. Spanning over 147,000 square feet of gross leasable area, this open-air community center offers a diverse and convenient tenant mix designed to meet the everyday needs of local residents and the substantial daytime workforce population. Strategically positioned in one of Southern California's most desirable suburban markets, Granary Square benefits from strong demographics with a median household income exceeding $126,000 within a 5-mile radius and a trade area population of nearly 200,000 residents. The center's grocery anchor provides a consistent traffic driver, complemented by a carefully curated selection of service-oriented retailers, dining options, and specialty tenants that create a one-stop shopping destination. Managed by Kimco Realty, one of North America's largest publicly traded owners and operators of open-air, grocery-anchored shopping centers, Granary Square exemplifies the company's commitment to providing quality retail experiences in high-performing suburban markets throughout the Los Angeles metropolitan area.",
+  "squareFootage": 147142,
+  "summary": "Granary Square is a 147,000+ square-foot, grocery-anchored community shopping center in Valencia, California, offering a diverse tenant mix serving the affluent Santa Clarita Valley. The center benefits from strong demographics with median household incomes exceeding $126,000 and serves a trade area population of nearly 200,000 residents.",
+  "tier": 2,
+  "spaces": []
+}

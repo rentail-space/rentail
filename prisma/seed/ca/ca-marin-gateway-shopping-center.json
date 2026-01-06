@@ -1,0 +1,26 @@
+{
+  "address": "190 Donahue Street",
+  "city": "Sausalito",
+  "country": "US",
+  "googlePlaceID": "places/ChIJHwJhDBSFhYARUu36AKfBSRw",
+  "name": "Marin Gateway Shopping Center",
+  "state": "CA",
+  "latitude": 37.8730049,
+  "longitude": -122.51021089999999,
+  "phone": "++1 415-289-0743",
+  "imageURLs": [
+    "/images/malls/ca-marin-gateway-shopping-center-1.jpg"
+  ],
+  "summary": "Marin Gateway Shopping Center is a community-focused retail destination in Sausalito featuring popular anchors like Target, Ross Dress for Less, and Grocery Outlet alongside diverse dining and essential services. The center serves as a convenient one-stop shopping hub for Marin City residents and surrounding communities.",
+  "openFrom": 500,
+  "openUntil": 2200,
+  "rating": 4.2,
+  "reviewCount": 686,
+  "website": "https://maringatewayshopping.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Marin Gateway Shopping Center serves the diverse community of Marin City and surrounding Sausalito area, attracting a mix of middle-income families, young professionals, and local residents seeking convenient everyday shopping. The trade area includes both the immediate Marin City neighborhood and visitors from nearby affluent Sausalito communities, creating a demographic blend of working families and established households. Shoppers are drawn to the center's value-oriented anchors like Target, Ross Dress for Less, and Grocery Outlet, indicating a price-conscious customer base focused on practical, everyday needs rather than luxury shopping experiences.",
+  "description": "Marin Gateway Shopping Center is a convenient community shopping destination located at 190 Donahue Street in Sausalito, California, serving as a vital retail hub for Marin City and the surrounding area. The center offers a comprehensive mix of national retailers including Target, Ross Dress for Less, West Marine, and Grocery Outlet, providing residents with one-stop shopping for groceries, household goods, clothing, and marine supplies. Beyond retail, the center features diverse dining options ranging from Show de Carnes Brazilian Steakhouse and Oha Hawaiian BBQ to quick-service favorites like Starbucks, Panda Express, and Subway. Essential services round out the tenant mix, including Marin City Animal Hospital, Anytime Fitness, Jet Physio Sports Physical Therapy, Salons by JC, and O'Reilly Auto Parts, making it a true community gathering place. The center also houses the Marin City Library and Creative Gardens by Gymboree Play & Music, demonstrating its commitment to serving families and educational needs in the community.",
+  "numberOfStores": 16,
+  "tier": 2,
+  "spaces": []
+}

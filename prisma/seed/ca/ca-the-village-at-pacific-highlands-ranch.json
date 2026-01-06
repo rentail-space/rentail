@@ -1,0 +1,25 @@
+{
+  "address": "13490 Pacific Highlands Ranch Parkway",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJj5UHfAkI3IARyBAsw9djUEE",
+  "name": "The Village at Pacific Highlands Ranch",
+  "state": "CA",
+  "latitude": 32.9617822,
+  "longitude": -117.1893626,
+  "phone": "++1 858-546-4604",
+  "imageURLs": [
+    "/images/malls/ca-the-village-at-pacific-highlands-ranch-1.jpg"
+  ],
+  "openFrom": 500,
+  "openUntil": 2200,
+  "rating": 4.5,
+  "reviewCount": 867,
+  "website": "http://phrvillage.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Village at Pacific Highlands Ranch attracts affluent families and professionals from one of San Diego's most desirable master-planned communities. The primary trade area consists of households with above-average incomes, typically ranging from $100,000 to $200,000+ annually, with a strong presence of young families and educated professionals aged 30-55. The community draws residents who value walkability, outdoor amenities, and convenient access to quality retail and dining options within their neighborhood setting.",
+  "description": "The Village at Pacific Highlands Ranch serves as the vibrant town center for one of San Diego's premier master-planned communities in the Carmel Valley area. This thoughtfully designed lifestyle center seamlessly integrates retail, dining, and community gathering spaces to create a walkable, pedestrian-friendly environment that reflects the modern California lifestyle. Located along Pacific Highlands Ranch Parkway, the center has become a beloved neighborhood destination where residents can shop, dine, and socialize without leaving their community. The open-air design features a carefully curated mix of local boutiques, national retailers, restaurants, and service providers that cater to the affluent families and professionals who call Pacific Highlands Ranch home. With its convenient location, welcoming atmosphere, and strong community focus, The Village has established itself as an essential part of daily life in this thriving North County San Diego neighborhood.",
+  "summary": "The Village at Pacific Highlands Ranch is a modern lifestyle center serving as the town center for one of San Diego's premier master-planned communities. This walkable, open-air destination offers a curated mix of retail, dining, and services tailored to the affluent families and professionals of the Carmel Valley area.",
+  "tier": 2,
+  "spaces": []
+}

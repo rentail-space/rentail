@@ -1,0 +1,37 @@
+{
+  "address": "20568 Stevens Creek Boulevard",
+  "city": "Cupertino",
+  "country": "US",
+  "googlePlaceID": "places/ChIJL4-KqK21j4ARpxXtEtJ-AeU",
+  "name": "The Crossroads",
+  "state": "CA",
+  "latitude": 37.3222729,
+  "longitude": -122.0349466,
+  "imageURLs": [
+    "/images/malls/ca-the-crossroads-1.jpg"
+  ],
+  "summary": "Cupertino Crossroads is a neighborhood shopping center in the heart of Cupertino, anchored by TJ Maxx Home Goods and Party City. The property features popular dining destinations including Boudin Bakery, Philz Coffee, Islands Fine Burgers, and Freebirds World Burritos, serving the affluent Silicon Valley community.",
+  "openFrom": 900,
+  "openUntil": 2030,
+  "rating": 4.4,
+  "reviewCount": 340,
+  "website": "http://www.cupertinocrossroads.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Cupertino Crossroads serves an affluent, highly educated demographic typical of Silicon Valley, with a significant concentration of technology professionals and families with above-average household incomes exceeding $150,000. The trade area attracts a diverse, multicultural customer base including Asian-American and Indian-American communities who represent a substantial portion of Cupertino's population. Primary shoppers include dual-income households aged 30-55 seeking convenient neighborhood shopping for everyday needs, dining, and family-oriented services. The center benefits from strong daytime traffic from nearby tech campuses and residential density from surrounding single-family neighborhoods and apartment complexes.",
+  "description": "Cupertino Crossroads is a vibrant neighborhood shopping center strategically located in the heart of Cupertino, California, one of Silicon Valley's most desirable communities. Anchored by major retailers TJ Maxx Home Goods and Party City, the center has evolved into a dynamic destination that blends essential shopping with exciting dining experiences. The property features an impressive lineup of popular restaurants including San Francisco's renowned Boudin Bakery, the beloved local coffee chain Philz Coffee, Islands Fine Burgers and Drinks, and Freebirds World Burritos, creating a compelling mix of retail and culinary offerings. The center's thoughtful design includes attractive nighttime lighting and fountain features that enhance the shopping experience and create an inviting atmosphere for the community. Serving the affluent Cupertino market at 20750 Stevens Creek Boulevard, Cupertino Crossroads has established itself as a convenient and essential gathering place for local residents and the broader Silicon Valley community.",
+  "tier": 2,
+  "spaces": [
+    {
+      "type": "Other",
+      "number": "Sweet Passions Bakery",
+      "size": 750,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Bay Area Sports Nutrition",
+      "size": 720,
+      "available": true
+    }
+  ]
+}

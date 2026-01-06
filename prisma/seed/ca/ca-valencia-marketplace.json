@@ -1,0 +1,25 @@
+{
+  "address": "25888 The Old Road",
+  "city": "Stevenson Ranch",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ5wiFSNCGwoARbCg_F1GHATg",
+  "name": "Valencia Marketplace",
+  "state": "CA",
+  "latitude": 34.383494299999995,
+  "longitude": -118.5705387,
+  "phone": "++1 818-707-9494",
+  "imageURLs": [
+    "/images/malls/ca-valencia-marketplace-1.jpg"
+  ],
+  "summary": "Valencia Marketplace is an outdoor shopping complex in Stevenson Ranch featuring big-box retail anchors complemented by diverse dining and specialty retail options. This community-oriented center serves as a convenient one-stop destination for residents of the Santa Clarita Valley.",
+  "openFrom": 830,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 3282,
+  "website": "http://www.valenciamarketplace.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Valencia Marketplace attracts a diverse mix of families and professionals from the Santa Clarita Valley, particularly from Stevenson Ranch and surrounding Valencia communities. The primary trade area consists of middle to upper-middle income households with median incomes ranging from $90,000 to $130,000, skewing toward families with children and young professionals aged 25-54. The center serves as a convenient shopping destination for residents seeking everyday necessities and dining options, with shopping patterns reflecting a preference for one-stop convenience combining big-box retailers with specialty shops and restaurants.",
+  "description": "Valencia Marketplace stands as a premier outdoor shopping destination in Stevenson Ranch, California, serving the thriving Santa Clarita Valley community. This open-air retail complex offers a convenient and diverse shopping experience anchored by several big-box retailers that provide everything from home goods to electronics and groceries. The center's thoughtfully designed layout creates an accessible shopping environment where visitors can easily navigate between stores while enjoying the Southern California climate. Beyond its retail offerings, Valencia Marketplace has become a community gathering place featuring a varied selection of dining options ranging from quick-service restaurants to sit-down eateries, making it an ideal destination for both shopping trips and casual meals. With its strong tenant mix, ample parking, and strategic location along The Old Road, the center has established itself as an essential part of daily life for residents throughout Stevenson Ranch and the greater Valencia area.",
+  "tier": 2,
+  "spaces": []
+}

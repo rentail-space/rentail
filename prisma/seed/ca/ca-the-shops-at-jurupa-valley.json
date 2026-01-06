@@ -1,0 +1,24 @@
+{
+  "address": "Mission Boulevard",
+  "city": "Jurupa Valley",
+  "country": "US",
+  "googlePlaceID": "places/ChIJFQVCEQC13IAR-fwZqgXM3Yg",
+  "name": "The Shops at Jurupa Valley",
+  "state": "CA",
+  "latitude": 34.0119304,
+  "longitude": -117.46215,
+  "imageURLs": [
+    "/images/malls/ca-the-shops-at-jurupa-valley-1.jpg"
+  ],
+  "openFrom": 0,
+  "openUntil": 0,
+  "rating": 4.6,
+  "reviewCount": 31,
+  "website": "https://srsre.com/properties/lease/retail/california/jurupa-valley/pyrite-st-ca-60/l10513?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Shops at Jurupa Valley serves a diverse suburban community in the Inland Empire with a mix of working and middle-class families. The primary trade area attracts households with moderate income levels, including young families and established residents seeking convenient neighborhood shopping. Visitors typically prioritize value-oriented shopping with a focus on everyday necessities, groceries, and family dining options. The center draws from the surrounding residential neighborhoods of Jurupa Valley and nearby Riverside communities, serving as a convenient local shopping destination for routine purchases.",
+  "description": "The Shops at Jurupa Valley is a community-focused retail destination strategically located on Mission Boulevard in Jurupa Valley, California. This open-air shopping center serves the growing Inland Empire community with a convenient mix of retail, dining, and service-oriented tenants designed to meet everyday shopping needs. The center's accessible location along a major thoroughfare makes it a popular stop for local residents seeking a practical and efficient shopping experience. With its well-maintained facilities and ample parking, The Shops at Jurupa Valley has established itself as a reliable neighborhood gathering place. The center continues to serve the Jurupa Valley community as a convenient retail hub that combines essential services with quality shopping options in a comfortable, open-air environment.",
+  "summary": "The Shops at Jurupa Valley is a community-oriented shopping center on Mission Boulevard serving the Inland Empire with convenient retail and dining options. This open-air center provides local residents with accessible neighborhood shopping in a well-maintained facility.",
+  "tier": 2,
+  "spaces": []
+}

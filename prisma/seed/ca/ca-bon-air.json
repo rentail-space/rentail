@@ -1,0 +1,25 @@
+{
+  "address": "50 Bon Air Center",
+  "city": "Larkspur",
+  "country": "US",
+  "googlePlaceID": "places/ChIJNT3DHBmbhYARSom6AkEzgx4",
+  "name": "Bon Air",
+  "state": "CA",
+  "latitude": 37.946980499999995,
+  "longitude": -122.526195,
+  "phone": "++1 415-461-0200",
+  "imageURLs": [
+    "/images/malls/ca-bon-air-1.jpg"
+  ],
+  "summary": "Bon Air is a community-focused shopping center in Larkspur, Marin County, featuring gourmet groceries, specialty dining, wellness services, and unique boutique retailers. With its emphasis on local spirit and convenience, the center serves as a neighborhood gathering place offering everything from everyday essentials to special occasion needs.",
+  "openFrom": 1000,
+  "openUntil": 1800,
+  "rating": 4.5,
+  "reviewCount": 399,
+  "website": "https://bonair.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Bon Air serves the affluent Marin County community of Larkspur and surrounding areas, attracting upper-middle to high-income families and professionals with household incomes typically exceeding $150,000. The primary trade area includes educated, health-conscious residents aged 35-65 who value quality, convenience, and local businesses. Shoppers demonstrate a strong preference for specialty foods, wellness services, and unique boutique offerings over mass-market chains, reflecting the area's sophisticated and environmentally-aware consumer base.",
+  "description": "Bon Air is a beloved neighborhood shopping center in the heart of Larkspur, California, serving the Marin County community since its establishment. Located at 50 Bon Air Center, this open-air destination has become a cornerstone of local life where connections grow and traditions thrive. The center features a carefully curated mix of specialty retailers, gourmet food purveyors, wellness services, and dining establishments that cater to the discerning tastes of Marin residents. From Mollie Stone's gourmet groceries and Susie Cakes' delicious desserts to McConnell's ice cream and Gott's Roadside dining, Bon Air offers everything needed for both everyday convenience and special occasions. The center emphasizes local roots and community spirit, providing stress-free shopping with catering options, holiday table essentials, wellness services including salons and spas, and pet care facilities. With its tagline \"Around the Corner - Everything You Need,\" Bon Air has positioned itself as a one-stop destination where neighbors can stroll or cycle to find unique gifts, fresh ingredients, and personal services in a welcoming, accessible environment.",
+  "tier": 2,
+  "spaces": []
+}

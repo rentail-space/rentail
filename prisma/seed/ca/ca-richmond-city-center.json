@@ -1,0 +1,24 @@
+{
+  "address": "1100 Macdonald Avenue",
+  "city": "Richmond",
+  "country": "US",
+  "googlePlaceID": "places/ChIJL9M-OKiChYARkUFmvQql_bU",
+  "name": "Richmond City Center",
+  "state": "CA",
+  "latitude": 37.9354078,
+  "longitude": -122.35835829999999,
+  "imageURLs": [
+    "/images/malls/ca-richmond-city-center-1.jpg"
+  ],
+  "summary": "Richmond City Center is the primary civic and government services hub for the City of Richmond, providing residents with centralized access to city departments, business resources, and community programs. Located on Macdonald Avenue in the East Bay, this municipal facility serves as an essential community gathering place with extended operating hours.",
+  "openFrom": 700,
+  "openUntil": 0,
+  "rating": 3.9,
+  "reviewCount": 1510,
+  "website": "http://www.ci.richmond.ca.us/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Richmond City Center serves a diverse, working-class to middle-income population in the East Bay area of the San Francisco Bay Area. The primary trade area includes families and professionals from Richmond and surrounding communities, with a mix of age groups skewing toward working adults aged 25-54. The center attracts value-conscious shoppers seeking convenient access to city services and community resources, with visitors typically combining errands with shopping trips. The demographic composition reflects Richmond's multicultural population, with strong representation from Hispanic, African American, and Asian communities.",
+  "description": "Richmond City Center serves as the civic and community hub for the City of Richmond, California, located at 1100 Macdonald Avenue in the heart of the East Bay. This municipal complex functions as more than just a traditional shopping center, operating as the central location for city government services, departments, and community resources. The facility provides residents and visitors with convenient access to essential city services, business resources, and community programs all under one roof. With a rating of 3.9 stars from over 1,500 reviews, Richmond City Center has established itself as an important gathering place for the local community. The center's extended hours of operation, from 7:00 AM until midnight, ensure accessibility for residents with varying schedules who need to conduct city business or access community services.",
+  "tier": 2,
+  "spaces": []
+}

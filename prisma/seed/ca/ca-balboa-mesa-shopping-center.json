@@ -1,0 +1,26 @@
+{
+  "address": "5401-5605 Balboa Avenue",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJo30Nc3QA3IARfPpHn_dKaMk",
+  "name": "Balboa Mesa Shopping Center",
+  "state": "CA",
+  "latitude": 32.819205,
+  "longitude": -117.1788223,
+  "phone": "++1 858-847-4600",
+  "imageURLs": [
+    "/images/malls/ca-balboa-mesa-shopping-center-1.jpg"
+  ],
+  "summary": "Balboa Mesa Shopping Center is a contemporary, LEED Silver Certified strip mall located at one of San Diego's busiest intersections, featuring 207,147 square feet of retail space anchored by Vons and CVS. The palm-treed center attracts over 4.2 million annual visits with popular tenants including Luna Grill, The Habit Burger Grill, and 85C Bakery Cafe, serving an affluent community with average household incomes of $139,632.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.3,
+  "reviewCount": 4033,
+  "website": "https://www.regencycenters.com/property/detail/60617/Balboa-Mesa-Shopping-Center?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Balboa Mesa Shopping Center serves an affluent San Diego community with a 3-mile trade area population of 128,628 residents and a daytime population of 168,371, indicating strong employment centers nearby. The primary market consists of upper-middle to high-income households with an average household income of $139,632 and average home values exceeding $1 million at $1,030,368. The demographic profile skews toward established professionals and families who value convenience shopping for everyday needs, with shopping patterns focused on grocery, pharmacy, quick-service dining, and personal services. With over 4.2 million annual visits, the center attracts both local residents seeking daily necessities and daytime workers from surrounding business districts.",
+  "description": "Balboa Mesa Shopping Center is a contemporary, palm-treed strip mall strategically positioned at one of San Diego's busiest intersections at Balboa Avenue and Genesee Avenue. This LEED Silver Certified shopping destination spans 207,147 square feet and serves as a vital community hub for the affluent neighborhoods of San Diego, drawing over 4.2 million visitors annually. The center features a strong tenant mix anchored by Vons grocery store and CVS pharmacy, complemented by popular dining destinations including Luna Grill, The Habit Burger Grill, and 85C Bakery Cafe. Developed and managed by Regency Centers, the property exemplifies sustainable design principles while providing convenient access to retail and services for a trade area with household incomes averaging nearly $140,000. The center's prime location, quality tenant roster, and modern amenities make it an essential shopping destination for both local residents and the substantial daytime population of over 168,000 workers in the surrounding area.",
+  "squareFootage": 207147,
+  "tier": 2,
+  "spaces": []
+}

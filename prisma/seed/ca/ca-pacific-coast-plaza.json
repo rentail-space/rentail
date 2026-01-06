@@ -1,0 +1,24 @@
+{
+  "address": "2160 Vista Way",
+  "city": "Oceanside",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ6VGGn41x3IARJOOOqqIyvwA",
+  "name": "Pacific Coast Plaza",
+  "state": "CA",
+  "latitude": 33.1821146,
+  "longitude": -117.3454579,
+  "imageURLs": [
+    "/images/malls/ca-pacific-coast-plaza-1.jpg"
+  ],
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 1373,
+  "website": "http://google.com/url?q=https%3A%2F%2Fbusiness.google.com%2Fwebsite_shared%2Flaunch_bw.html%3Ff%3Dhttps%3A%2F%2Famzn.to%2F3Sfv93i&utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Pacific Coast Plaza serves a diverse coastal community in North San Diego County, attracting middle to upper-middle income families and retirees typical of the Oceanside area. The trade area draws from both local residents and tourists visiting the nearby beaches, with shoppers ranging from young professionals to active seniors aged 35-65. The center caters to convenience-oriented shoppers seeking everyday necessities and services, with strong daytime traffic from the surrounding residential neighborhoods and consistent weekend activity from both locals and visitors exploring the Vista Way corridor.",
+  "description": "Pacific Coast Plaza stands as a prominent shopping destination along Vista Way in Oceanside, California, serving the North San Diego County coastal community since its establishment. This open-air community center has become an integral part of the local retail landscape, offering convenient access to a diverse mix of national retailers, local businesses, and essential services. With its prime location just minutes from the Pacific Ocean and Interstate 5, the plaza attracts both residents and visitors seeking a practical shopping experience in a relaxed Southern California setting. The center maintains extended operating hours from 6:00 AM to 11:00 PM, accommodating early morning shoppers and evening diners alike. Boasting a strong 4.4-star rating from over 1,300 Google reviews, Pacific Coast Plaza has earned its reputation as a reliable neighborhood shopping hub where convenience meets community, reflecting the laid-back yet active lifestyle characteristic of the Oceanside area.",
+  "summary": "Pacific Coast Plaza is a well-established community shopping center on Vista Way in Oceanside, offering convenient access to diverse retail and services. With strong community ratings and extended hours, it serves as a practical neighborhood hub for North San Diego County residents and coastal visitors.",
+  "tier": 2,
+  "spaces": []
+}

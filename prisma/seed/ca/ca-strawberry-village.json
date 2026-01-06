@@ -1,0 +1,47 @@
+{
+  "address": "800 Redwood Highway",
+  "city": "Mill Valley",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ88Dz-kSQhYAR3uTzA2yjNnY",
+  "name": "Strawberry Village",
+  "state": "CA",
+  "latitude": 37.898086299999996,
+  "longitude": -122.51540469999999,
+  "imageURLs": [
+    "/images/malls/ca-strawberry-village-1.jpg"
+  ],
+  "summary": "Built in 1964, Strawberry Village is Mill Valley's iconic Town & Country shopping center featuring a reimagined central plaza, diverse dining options, and community-focused amenities. The center hosts popular events including the weekly Mill Valley Farmers Market and serves as a vibrant gathering place for Marin County's coastal communities.",
+  "rating": 4.4,
+  "reviewCount": 715,
+  "website": "http://www.strawberryvillage.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Strawberry Village serves the affluent communities of Mill Valley, Tiburon, Belvedere, and Sausalito in Marin County, attracting upper-middle to high-income households with median household incomes exceeding $150,000. The primary visitor base consists of educated professionals aged 35-65, families with children, and active retirees who value quality, convenience, and community engagement. The trade area is characterized by health-conscious, environmentally aware consumers who prefer local businesses, artisanal products, and experiential shopping over mass-market retail. Shoppers typically visit for weekly grocery runs, specialty dining experiences, and community events like the popular Tuesday Farmers Market, reflecting a lifestyle-oriented approach to retail.",
+  "description": "Strawberry Village is an iconic Town & Country shopping center that has been serving the heart of Marin County since 1964, capturing the coastal charm and community spirit of Mill Valley, California. This vibrant destination serves as a central gathering place for the surrounding communities of Tiburon, Belvedere, Mill Valley, and Sausalito, offering residents and visitors a welcoming blend of shopping, dining, and community experiences. The center recently underwent a thoughtful reimagination that includes a central plaza with outdoor seating and green spaces, creating an inviting atmosphere for social gatherings and community events. Strawberry Village hosts the beloved Mill Valley Farmers Market every Tuesday, along with special events like the annual Marin Chanukah Festival and Porsche Marin's Motor Social cars and coffee gatherings. The center features diverse dining options ranging from cozy neighborhood restaurants to exciting new additions like the upcoming Tartine Bakery expansion, alongside specialty retailers and service providers that cater to the discerning tastes of Marin County residents, making it a true community hub where coastal California lifestyle meets everyday convenience.",
+  "tier": 2,
+  "spaces": [
+    {
+      "type": "Inline",
+      "number": "310",
+      "available": true,
+      "imageURLs": [
+        "https://edens.com/wp-content/plugins/instagram-feed/img/placeholder.png"
+      ]
+    },
+    {
+      "type": "Inline",
+      "number": "216",
+      "available": true,
+      "imageURLs": [
+        "https://edens.com/wp-content/plugins/instagram-feed/img/placeholder.png"
+      ]
+    },
+    {
+      "type": "Inline",
+      "number": "612",
+      "available": true,
+      "imageURLs": [
+        "https://edens.com/wp-content/plugins/instagram-feed/img/placeholder.png"
+      ]
+    }
+  ]
+}

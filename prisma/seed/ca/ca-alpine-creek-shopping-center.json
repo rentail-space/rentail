@@ -1,0 +1,25 @@
+{
+  "address": "1347 Tavern Road",
+  "city": "Alpine",
+  "country": "US",
+  "googlePlaceID": "places/ChIJd5FBo41g2YAR4lUo_SRkfQk",
+  "name": "Alpine Creek Shopping Center",
+  "state": "CA",
+  "latitude": 32.8370226,
+  "longitude": -116.7776582,
+  "phone": "++1 619-445-8631",
+  "imageURLs": [
+    "/images/malls/ca-alpine-creek-shopping-center-1.jpg"
+  ],
+  "openFrom": 800,
+  "openUntil": 2100,
+  "rating": 4.6,
+  "reviewCount": 337,
+  "website": "https://www.alpinecreekcenter.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Alpine Creek Town Center serves the Alpine community and surrounding East County San Diego areas, attracting middle-income families and outdoor enthusiasts typical of this rural mountain region. The trade area draws residents from Alpine, Descanso, and nearby communities who value convenience and local shopping options. Visitors tend to be active lifestyle-oriented individuals and families seeking everyday necessities, hardware supplies, and specialty items like surf, skate, and bike gear from West Coast Rideshop, reflecting the area's outdoor recreation culture.",
+  "description": "Alpine Creek Town Center serves as the heart of Alpine, California, providing a convenient one-stop shopping destination for this charming East County San Diego community. Located at 1347 Tavern Road, this community center has evolved to meet the diverse needs of local residents and visitors exploring the scenic mountain region. The center offers a practical mix of essential services and specialty retail, from sundries to plumbing and hardware supplies, making it an indispensable resource for both everyday needs and home improvement projects. For the area's active outdoor enthusiasts, West Coast Rideshop stands out as a premier destination, featuring the latest California surf, skate, and bike apparel and accessories that reflect the region's adventure-loving spirit. With a strong 4.6-star rating from over 337 reviews, Alpine Creek Town Center has established itself as a trusted gathering place where the community comes together for shopping, dining, and special events throughout the year, from Valentine's Day celebrations to brewery tours that showcase the best of Alpine's local culture.",
+  "summary": "Alpine Creek Town Center is Alpine's go-to community shopping destination, offering everything from everyday essentials and hardware supplies to specialty surf, skate, and bike gear at West Coast Rideshop. This well-rated center serves as a convenient hub for East County San Diego residents seeking practical services and local shopping in a welcoming mountain community setting.",
+  "tier": 2,
+  "spaces": []
+}

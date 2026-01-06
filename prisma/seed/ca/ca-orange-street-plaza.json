@@ -1,0 +1,24 @@
+{
+  "address": "522 Orange Street",
+  "city": "Redlands",
+  "country": "US",
+  "googlePlaceID": "places/ChIJH25cMHOq3IARVYd4zKLPab0",
+  "name": "Orange Street Plaza",
+  "state": "CA",
+  "latitude": 34.0602254,
+  "longitude": -117.1815299,
+  "imageURLs": [
+    "/images/malls/ca-orange-street-plaza-1.jpg"
+  ],
+  "openFrom": 800,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 1791,
+  "website": "http://google.com/url?q=https%3A%2F%2Fbusiness.google.com%2Fwebsite_shared%2Flaunch_bw.html%3Ff%3Dhttps%3A%2F%2Famzn.to%2F3Y5gnQF&utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Orange Street Plaza serves the Redlands community, attracting middle to upper-middle income families and professionals typical of this historic San Bernardino County city. The trade area draws from Redlands' educated population, with many visitors being homeowners aged 35-65 who value convenience and quality. The center appeals to both working professionals seeking quick shopping trips and retirees who appreciate the accessible layout and local atmosphere.",
+  "description": "Orange Street Plaza is a convenient neighborhood shopping destination located in the heart of Redlands, California, at 522 Orange Street. This well-established center serves the local community with a practical mix of retail and service offerings that cater to everyday needs. With operating hours from 8:00 AM to 9:00 PM daily, the plaza provides accessible shopping for busy families and professionals throughout the week. The center has earned a solid reputation among local shoppers, reflected in its 4.3-star rating from nearly 1,800 customer reviews. Situated in one of Southern California's most charming historic cities, Orange Street Plaza benefits from Redlands' strong sense of community and its position as a cultural and educational hub in the Inland Empire region.",
+  "summary": "Orange Street Plaza is a neighborhood shopping center in Redlands, California, offering convenient retail and services for the local community. With nearly 1,800 reviews and a 4.3-star rating, this accessible plaza serves as a reliable destination for everyday shopping needs.",
+  "tier": 2,
+  "spaces": []
+}

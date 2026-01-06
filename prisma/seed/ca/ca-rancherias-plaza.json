@@ -1,0 +1,24 @@
+{
+  "address": "20180 California 18",
+  "city": "Apple Valley",
+  "country": "US",
+  "googlePlaceID": "places/ChIJW7dgbdNjw4ARRU0LsNYsScE",
+  "name": "Rancherias Plaza",
+  "state": "CA",
+  "latitude": 34.528478,
+  "longitude": -117.2223269,
+  "imageURLs": [
+    "/images/malls/ca-rancherias-plaza-1.jpg"
+  ],
+  "summary": "Rancherias Plaza is a community-oriented strip center located on Highway 18 in Apple Valley, serving High Desert residents with convenient shopping and services. With a 4-star rating from over 1,300 reviews, this open-air center provides accessible retail options for everyday needs in the growing San Bernardino County community.",
+  "openFrom": 800,
+  "openUntil": 2100,
+  "rating": 4,
+  "reviewCount": 1301,
+  "website": "http://rancherias-plaza.edan.io/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Rancherias Plaza serves the Apple Valley community in the High Desert region of San Bernardino County, attracting primarily middle-income families and retirees who have relocated to this affordable suburban area. The trade area draws from a population seeking value-oriented shopping options, with household incomes typically ranging from $40,000 to $75,000 annually. Visitors are predominantly local residents conducting routine shopping trips, with a mix of young families, working-class households, and seniors who appreciate the convenient strip center format and ample parking typical of High Desert retail developments.",
+  "description": "Rancherias Plaza is a neighborhood shopping center conveniently located at 20180 California Highway 18 in Apple Valley, California, serving the High Desert community of San Bernardino County. This open-air retail center provides essential shopping and services to local residents in a convenient strip center format with easy access and parking. Operating daily from 8:00 AM to 9:00 PM, Rancherias Plaza offers a practical shopping destination for Apple Valley families and residents seeking everyday goods and services. The center has earned a solid 4-star rating from over 1,300 Google reviews, reflecting its role as a reliable community shopping destination. With its location along the busy CA-18 corridor, Rancherias Plaza serves as an accessible retail hub for the growing Apple Valley area, providing convenient shopping options in the heart of the High Desert region.",
+  "tier": 1,
+  "spaces": []
+}

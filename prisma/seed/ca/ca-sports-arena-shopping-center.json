@@ -1,0 +1,138 @@
+{
+  "address": "3225 Sports Arena Boulevard",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJOy0J1fqq3oARNgmOVX_Rt8w",
+  "name": "Sports Arena Shopping Center",
+  "state": "CA",
+  "latitude": 32.752339899999996,
+  "longitude": -117.2104256,
+  "phone": "++1 858-495-4900",
+  "imageURLs": [
+    "/images/malls/ca-sports-arena-shopping-center-1.jpg"
+  ],
+  "summary": "Sports Arena Shopping Center is a 494,000 square foot power center featuring major national retailers including Target, The Home Depot, Ralph's, and Dick's Sporting Goods. Strategically located near major highways and San Diego International Airport, this regional destination serves shoppers throughout San Diego County with its comprehensive mix of retail, dining, and service tenants.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.3,
+  "reviewCount": 5041,
+  "website": "https://sihiproperties.com/property/sports-arena/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Sports Arena Shopping Center serves a diverse regional market with a 3-mile trade area population of over 118,000 residents and a median household income of $89,804. The primary shopper demographic skews slightly older with a median age of 39 and is highly educated, with nearly 59% holding college degrees. The center attracts affluent families and professionals from surrounding neighborhoods like Point Loma and Mission Bay, as well as international shoppers from south of the U.S.-Mexican border. With strong daytime population of 58,256 within 3 miles, the center benefits from both residential shoppers and employees working in the area, drawn to its convenient location near I-5, I-8, and San Diego International Airport.",
+  "description": "Sports Arena Shopping Center is a premier power center spanning over 494,000 square feet in San Diego's vibrant Point Loma area, strategically positioned at 3245 Sports Arena Boulevard. This regional shopping destination has established itself as a cornerstone of the community, drawing shoppers from throughout San Diego County and even from south of the U.S.-Mexican border thanks to its exceptional accessibility from Interstate-5, I-8, and San Diego International Airport. The center boasts an impressive lineup of national retailers including The Home Depot, Target, Ralph's supermarket, Dick's Sporting Goods, Old Navy, Ross, Golf Galaxy, and Petco, complemented by popular dining options like Olive Garden and The Habit Burger Grill. Beyond its strong anchor tenant mix, the center features a diverse array of specialty retailers and services including FedEx Office, US Bank, SDCCU, Carter's, and Nothing Bundt Cakes, creating a comprehensive one-stop shopping experience. The property's future looks even brighter with its adjacency to the highly anticipated Midway Rising mixed-use redevelopment project, which will bring over 4,250 housing units and a new 16,000-seat world-class sports and entertainment center to the area within the next five to ten years, further cementing Sports Arena Shopping Center's position as the community's leading retail destination.",
+  "numberOfStores": 26,
+  "squareFootage": 494000,
+  "tier": 2,
+  "spaces": [
+    {
+      "type": "Inline",
+      "number": "Home Depot",
+      "size": 131439
+    },
+    {
+      "type": "Inline",
+      "number": "Target",
+      "size": 161164
+    },
+    {
+      "type": "Inline",
+      "number": "Ralphs",
+      "size": 58146
+    },
+    {
+      "type": "Inline",
+      "number": "Dick's Sporting Goods",
+      "size": 46019
+    },
+    {
+      "type": "Inline",
+      "number": "Old Navy",
+      "size": 14100
+    },
+    {
+      "type": "Inline",
+      "number": "Ross",
+      "size": 24419
+    },
+    {
+      "type": "Inline",
+      "number": "Golf Galaxy",
+      "size": 20706
+    },
+    {
+      "type": "Inline",
+      "number": "Olive Garden",
+      "size": 9100
+    },
+    {
+      "type": "Inline",
+      "number": "US Bank",
+      "size": 7600
+    },
+    {
+      "type": "Inline",
+      "number": "Petco",
+      "size": 16000
+    },
+    {
+      "type": "Inline",
+      "number": "B101/4",
+      "size": 6000
+    },
+    {
+      "type": "Inline",
+      "number": "Midway-Express Car Wash",
+      "size": 3072
+    },
+    {
+      "type": "Inline",
+      "number": "Valvoline",
+      "size": 2684
+    },
+    {
+      "type": "Inline",
+      "number": "Key Shop",
+      "size": 320
+    },
+    {
+      "type": "Inline",
+      "number": "ATM",
+      "size": 105
+    },
+    {
+      "type": "Inline",
+      "number": "A101",
+      "size": 3000
+    },
+    {
+      "type": "Inline",
+      "number": "A102/103",
+      "size": 2200
+    },
+    {
+      "type": "Inline",
+      "number": "A104",
+      "size": 1200
+    },
+    {
+      "type": "Inline",
+      "number": "A105",
+      "size": 1700
+    },
+    {
+      "type": "Inline",
+      "number": "A110",
+      "size": 2400
+    },
+    {
+      "type": "Inline",
+      "number": "A120",
+      "size": 3046
+    },
+    {
+      "type": "Inline",
+      "number": "A130",
+      "size": 2400
+    }
+  ]
+}

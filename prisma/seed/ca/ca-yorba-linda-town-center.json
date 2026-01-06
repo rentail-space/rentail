@@ -1,0 +1,24 @@
+{
+  "address": "18421 Yorba Linda Boulevard",
+  "city": "Yorba Linda",
+  "country": "US",
+  "googlePlaceID": "places/ChIJneQV0zbT3IARleopR5cZ-6I",
+  "name": "Yorba Linda Town Center",
+  "state": "CA",
+  "latitude": 33.88919670000001,
+  "longitude": -117.8122475,
+  "imageURLs": [
+    "/images/malls/ca-yorba-linda-town-center-1.jpg"
+  ],
+  "openFrom": 900,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 341,
+  "website": "https://www.yorbalindaca.gov/175/Yorba-Linda-Town-Center?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Yorba Linda Town Center serves an affluent suburban community with median household incomes significantly above the national average, attracting primarily upper-middle-class families and professionals aged 35-65. The trade area draws from Yorba Linda's well-educated population, known as one of Orange County's most desirable residential communities with strong household incomes exceeding $120,000. Shoppers typically seek convenience-oriented retail and services for daily needs, with a preference for quality brands and family-friendly amenities that align with the community's upscale suburban lifestyle.",
+  "description": "Yorba Linda Town Center serves as the civic and commercial heart of Yorba Linda, California, one of Orange County's most prestigious residential communities. Located at 18421 Yorba Linda Boulevard, this community-oriented shopping destination has earned a strong reputation among locals, reflected in its impressive 4.5-star rating from over 340 reviews. The center operates daily from 9:00 AM to 9:00 PM, providing convenient access to essential retail services and amenities for the surrounding affluent neighborhoods. As a key gathering place in this historic city known as the birthplace of President Richard Nixon, the Town Center blends practical shopping convenience with community-focused programming. The development's strategic location along Yorba Linda Boulevard ensures easy accessibility for residents seeking quality retail, dining, and services in their hometown setting.",
+  "summary": "Yorba Linda Town Center is a well-regarded community shopping destination serving one of Orange County's most affluent suburban areas. With a 4.5-star rating and convenient daily hours, it provides essential retail and services to the prestigious Yorba Linda community.",
+  "tier": 2,
+  "spaces": []
+}

@@ -1,0 +1,24 @@
+{
+  "address": "South Western Avenue",
+  "city": "Los Angeles",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ-0TXBuVJ3YARzeFqNJf9ZrQ",
+  "name": "Park Plaza",
+  "state": "CA",
+  "latitude": 33.751325,
+  "longitude": -118.30795920000001,
+  "imageURLs": [
+    "/images/malls/ca-park-plaza-1.jpg"
+  ],
+  "summary": "Park Plaza is a neighborhood strip center on South Western Avenue in Los Angeles, offering a practical mix of shops, dining, and grocery options with ample parking. The center serves the San Pedro and Harbor communities with everyday retail needs and local services, maintaining strong community ties and convenient extended hours.",
+  "openFrom": 800,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 1571,
+  "website": "http://ronsjewelers.com/",
+  "centerType": "StripCenter",
+  "demographics": "Park Plaza serves a diverse, working-class to middle-income demographic in the Los Angeles Harbor area, with a strong representation of families and long-term residents. The trade area encompasses San Pedro and surrounding communities, attracting shoppers seeking everyday necessities, value-oriented retail, and local services. Visitors typically include multi-generational households with moderate income levels who prioritize convenience and practical shopping options over luxury experiences.",
+  "description": "Park Plaza is a well-established strip center located on South Western Avenue in Los Angeles, serving the San Pedro and Harbor area communities for decades. This neighborhood shopping destination offers a practical mix of retail shops, dining options, and essential services, anchored by grocery and everyday convenience stores that cater to local residents' daily needs. Among its notable tenants is Ron's Jewelers, an award-winning jewelry store that has built a reputation for quality craftsmanship, GIA-certified diamonds, and custom design services, even earning recognition from Los Angeles Lakers star Kobe Bryant. The center provides ample parking and maintains extended operating hours from 8:00 AM to 11:00 PM, making it accessible for shoppers throughout the day. With a solid 4.4-star rating from over 1,500 reviews, Park Plaza has established itself as a reliable community shopping hub that balances convenience, variety, and local character in the greater Los Angeles area.",
+  "tier": 1,
+  "spaces": []
+}

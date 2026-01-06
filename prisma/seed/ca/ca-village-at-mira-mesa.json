@@ -1,0 +1,27 @@
+{
+  "address": "10750 Camino Ruiz",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ7VwAw-v424ARLcRmjp5g9rA",
+  "name": "Village at Mira Mesa",
+  "state": "CA",
+  "latitude": 32.9143507,
+  "longitude": -117.1467635,
+  "phone": "++1 610-215-7939",
+  "imageURLs": [
+    "/images/malls/ca-village-at-mira-mesa-1.jpg"
+  ],
+  "summary": "Village at Mira Mesa is a 433,684 square foot multi-anchored community center drawing 7.8 million annual visits with major retailers including Sprouts, Vons, Marshalls, and Burlington. Located in an affluent San Diego neighborhood, the center offers diverse shopping, extensive Asian dining options, and essential services serving over 105,000 residents within 3 miles.",
+  "openFrom": 600,
+  "openUntil": 0,
+  "rating": 4.3,
+  "reviewCount": 3524,
+  "website": "https://brixmor.com/leasing/retail-space/ca/san-diego/village-at-mira-mesa?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Village at Mira Mesa serves an affluent and highly educated trade area with average household incomes exceeding $163,000 within 3 miles and 54% of residents holding college degrees. The center draws from a dense population of over 105,000 residents and a strong daytime population of 177,000+ workers within 3 miles, creating a diverse customer base of professionals, families, and students. The area's demographics skew toward middle to upper-middle class households seeking convenient access to grocery, dining, and everyday retail needs, with a notable Asian-American population reflected in the center's diverse Asian dining options.",
+  "description": "Village at Mira Mesa is a highly trafficked multi-anchored community shopping center located at the intersection of Mira Mesa Boulevard and Camino Ruiz in San Diego's thriving Mira Mesa neighborhood. This 433,684 square foot outdoor retail complex draws an impressive 7.8 million annual visits, anchored by major national retailers including Sprouts Farmers Market, Vons, Marshalls, Burlington, Michaels, and Petco. The center benefits from exceptional visibility with over 46,000 vehicles passing daily on Mira Mesa Boulevard and serves one of San Diego's most affluent communities with average household incomes exceeding $163,000 within 3 miles. Beyond its strong retail anchors, the center has become a dining destination featuring diverse culinary options including numerous Asian restaurants such as Bafang Dumpling, Manna BBQ, and Chubby Cattle BBQ, alongside popular chains like Chick-fil-A, Chipotle, and Buffalo Wild Wings. The property also includes essential services like Chase Bank, CVS pharmacy, AFC Urgent Care, and childcare facilities, making it a true one-stop destination for the surrounding community's shopping, dining, and service needs.",
+  "numberOfStores": 81,
+  "squareFootage": 433684,
+  "tier": 2,
+  "spaces": []
+}

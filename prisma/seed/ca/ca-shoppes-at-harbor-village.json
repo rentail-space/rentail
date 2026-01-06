@@ -1,0 +1,25 @@
+{
+  "address": "270 Capistrano Road",
+  "city": "Half Moon Bay",
+  "country": "US",
+  "googlePlaceID": "places/ChIJO7F517dzj4ARuIlFeMnGi3U",
+  "name": "Shoppes at Harbor Village",
+  "state": "CA",
+  "latitude": 37.5043333,
+  "longitude": -122.48317779999999,
+  "phone": "++1 650-726-5400",
+  "imageURLs": [
+    "/images/malls/ca-shoppes-at-harbor-village-1.jpg"
+  ],
+  "summary": "Shoppes at Harbor Village is an airy, tranquil lifestyle center in coastal Half Moon Bay featuring a curated mix of boutiques, restaurants, fitness centers, and beauty services. This open-air shopping gallery offers a sophisticated, village-style atmosphere that appeals to both locals and tourists seeking quality retail and wellness experiences.",
+  "openFrom": 800,
+  "openUntil": 2330,
+  "rating": 4.2,
+  "reviewCount": 785,
+  "website": "http://shopharborvillage.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Shoppes at Harbor Village attracts an affluent, coastal demographic with visitors primarily consisting of upper-middle to high-income households drawn to Half Moon Bay's scenic oceanside location. The trade area serves both local residents and tourists seeking boutique shopping and dining experiences, with a customer base skewing toward adults aged 35-65 who appreciate specialty retail and wellness services. The center caters to families and professionals from the San Francisco Peninsula who value quality over quantity, with shopping patterns emphasizing leisurely visits that combine retail therapy with dining and personal care services in a relaxed, upscale coastal setting.",
+  "description": "Nestled in the picturesque coastal town of Half Moon Bay, Shoppes at Harbor Village offers a distinctive shopping experience that perfectly captures the essence of California's scenic coastline. This airy and tranquil shopping gallery has established itself as a premier destination for both locals and visitors seeking a curated selection of boutiques, restaurants, fitness centers, and beauty services. The center's open-air design creates an inviting atmosphere where shoppers can enjoy the mild coastal climate while exploring a thoughtfully selected mix of specialty retailers and service providers. With its emphasis on wellness, personal care, and unique shopping experiences, Harbor Village has become an integral part of Half Moon Bay's community fabric, serving as a gathering place that goes beyond traditional retail. The center's commitment to quality tenants and its prime location at 270 Capistrano Road make it a must-visit destination for those exploring the Half Moon Bay area, offering a sophisticated alternative to conventional shopping centers with its boutique-focused approach and serene village ambiance.",
+  "tier": 2,
+  "spaces": []
+}

@@ -1,0 +1,25 @@
+{
+  "address": "16847 Algonquin Street",
+  "city": "Huntington Beach",
+  "country": "US",
+  "googlePlaceID": "places/ChIJjxDq-rol3YARc8uNa381u9Y",
+  "name": "Huntington Harbour Mall",
+  "state": "CA",
+  "latitude": 33.7172835,
+  "longitude": -118.0503824,
+  "phone": "++1 714-840-6460",
+  "imageURLs": [
+    "/images/malls/ca-huntington-harbour-mall-1.jpg"
+  ],
+  "openFrom": 600,
+  "openUntil": 2200,
+  "rating": 4.5,
+  "reviewCount": 736,
+  "website": "https://huntingtonharbourmall.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Huntington Harbour Place serves an affluent coastal community in Huntington Beach, attracting upper-middle-class families and retirees with above-average household incomes. The trade area draws from the surrounding Huntington Harbour waterfront neighborhoods, known for their boat slips and luxury homes, as well as nearby residential areas seeking convenient neighborhood shopping. Primary visitors include health-conscious shoppers drawn to Trader Joe's, local residents seeking everyday services, and families looking for a community gathering place with easy access and free parking.",
+  "description": "Huntington Harbour Place is a vibrant community shopping center located at 16897 Algonquin Street in the heart of Huntington Beach, California. Serving as Huntington Harbour's local gathering place, this center offers more than just shopping and dining—it's where community moments happen. The center features a diverse mix of shops, restaurants, and services designed to meet the everyday needs of local residents and visitors. Anchored by the popular Trader Joe's, which offers fresh produce, specialty groceries, and favorite snacks daily from 8 AM to 9 PM, the center provides convenient access to quality retailers. With plenty of free parking and modern amenities including EV charging stations, Huntington Harbour Place combines convenience with community spirit in one of Southern California's most desirable coastal locations.",
+  "summary": "Huntington Harbour Place is a vibrant community shopping center in Huntington Beach featuring shops, restaurants, and services anchored by Trader Joe's. Located at 16897 Algonquin Street, it serves as the local gathering place with free parking and EV charging stations.",
+  "tier": 2,
+  "spaces": []
+}

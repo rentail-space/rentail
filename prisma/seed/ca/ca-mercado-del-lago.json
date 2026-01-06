@@ -1,0 +1,26 @@
+{
+  "address": "31441 Santa Margarita Parkway",
+  "city": "Rancho Santa Margarita",
+  "country": "US",
+  "googlePlaceID": "places/ChIJfb-XmRzr3IARYcqFV1MDPkY",
+  "name": "Mercado Del Lago",
+  "state": "CA",
+  "latitude": 33.6498475,
+  "longitude": -117.582115,
+  "phone": "++1 310-820-5443",
+  "imageURLs": [
+    "/images/malls/ca-mercado-del-lago-1.jpg"
+  ],
+  "openFrom": 1000,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 863,
+  "website": "http://shopmercadodellago.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Mercado Del Lago attracts an affluent, family-oriented demographic from Rancho Santa Margarita and surrounding South Orange County communities. The primary trade area consists of upper-middle-class households with median incomes exceeding $100,000, featuring a mix of young professionals and established families with children. Visitors typically range from 30-55 years old and seek convenient neighborhood shopping combined with quality dining experiences. The center serves a well-educated population that values the lakeside setting and Mediterranean ambiance, with shopping patterns focused on specialty services, casual dining, and everyday convenience needs rather than major retail purchases.",
+  "description": "Mercado Del Lago is a premier open-air lifestyle center located at 31441 Santa Margarita Parkway in the heart of Rancho Santa Margarita, offering a distinctive shopping and dining experience along the picturesque Santa Margarita Lake. The center features charming Mediterranean-inspired architecture that creates a vibrant, resort-like atmosphere unique to South Orange County. Tenants include a carefully curated mix of dining destinations like Carmelita's Kitchen and IL SOLE La Nuova Cucina, service-oriented businesses such as Belo Salon and Luxe Organic Nails & Spa, and convenience retailers including the soon-to-open Westlake Ace Hardware and the popular KD's Donuts. The center's lakeside location and architectural character make it a community gathering place that goes beyond typical shopping, offering residents and visitors an inviting environment for both everyday errands and leisurely dining experiences. Managed by Westwood Financial, Mercado Del Lago has established itself as a beloved neighborhood destination that captures the essence of Southern California's outdoor lifestyle.",
+  "numberOfStores": 6,
+  "summary": "Mercado Del Lago is a charming Mediterranean-style lifestyle center nestled along Rancho Santa Margarita Lake, featuring quality dining options, personal services, and specialty retailers. The open-air center combines convenient neighborhood shopping with a vibrant lakeside atmosphere that makes it a popular community gathering destination.",
+  "tier": 2,
+  "spaces": []
+}

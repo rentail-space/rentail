@@ -1,0 +1,25 @@
+{
+  "address": "Santa Maria Avenue",
+  "city": "Castro Valley",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ138TeCWSj4ARsXBSF6JGIpA",
+  "name": "Castro Village Shopping Center",
+  "state": "CA",
+  "latitude": 37.69670190000001,
+  "longitude": -122.0759707,
+  "phone": "++1 415-288-6888",
+  "imageURLs": [
+    "/images/malls/ca-castro-village-shopping-center-1.jpg"
+  ],
+  "summary": "Castro Village Shopping Center has served Castro Valley for over 60 years as a convenient neighborhood destination offering a unique mix of dining, shopping, and essential services. Located at Castro Valley Boulevard and Santa Maria Avenue, this community-focused center provides everything from specialty retailers to everyday necessities with a personal, familiar touch.",
+  "openFrom": 700,
+  "openUntil": 2200,
+  "rating": 4.2,
+  "reviewCount": 2757,
+  "website": "http://www.castrovillage.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Castro Village Shopping Center primarily serves middle-income families and professionals in the Castro Valley area, with a strong representation of homeowners aged 35-65. The trade area attracts a diverse suburban demographic seeking convenient, everyday shopping and services close to home. Typical visitors include working parents, retirees, and local residents who value the center's neighborhood-oriented mix of essential services, dining options, and specialty retailers that have served the community for over 60 years.",
+  "description": "Castro Village Shopping Center has been the heart of Castro Valley's retail community for more than 60 years, serving generations of local families with its convenient blend of shopping, dining, and essential services. Located at the intersection of Castro Valley Boulevard and Santa Maria Avenue, this neighborhood shopping destination has built its reputation on providing \"Convenient Places and Familiar Faces\" to busy residents who appreciate having everything from lattes to loans in one accessible location. The center features a carefully curated mix of eateries, specialty stores, and service providers that cater to the everyday needs of the Castro Valley community. With its strong emphasis on small business owners and local entrepreneurs, such as Mark-Jason Solofa Men's Grooming, Castro Village maintains a personal, community-focused atmosphere that sets it apart from larger commercial developments. The shopping center's enduring success reflects its ability to evolve with the community while maintaining the friendly, neighborhood character that has made it Castro Valley residents' first choice for convenient shopping for over six decades.",
+  "tier": 2,
+  "spaces": []
+}

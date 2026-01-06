@@ -1,0 +1,25 @@
+{
+  "address": "1233 Rancho Vista Boulevard",
+  "city": "Palmdale",
+  "country": "US",
+  "googlePlaceID": "places/ChIJe7ICOplZwoAROGAzzTwxXwQ",
+  "name": "Antelope Valley Mall",
+  "state": "CA",
+  "latitude": 34.605188999999996,
+  "longitude": -118.15302020000001,
+  "phone": "++1 661-266-9150",
+  "imageURLs": [
+    "/images/malls/ca-antelope-valley-mall-1.jpg"
+  ],
+  "summary": "Antelope Valley Mall is Palmdale's premier indoor shopping destination, featuring a diverse mix of retail stores, dining options, and a movie theater. The family-friendly center offers modern amenities including free Wi-Fi, a kids' play area, and stroller rentals, making it the Antelope Valley's go-to location for shopping and entertainment.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 8227,
+  "website": "https://www.av-mall.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Antelope Valley Mall serves a diverse, family-oriented community in Palmdale and the broader Antelope Valley region, drawing primarily middle-income households from the rapidly growing northern Los Angeles County area. The trade area includes young families, military personnel from nearby Edwards Air Force Base, and commuters seeking convenient shopping options outside the congested Los Angeles basin. Visitors typically range from budget-conscious shoppers to middle-class families looking for value-oriented retail, dining, and entertainment options in a climate-controlled indoor environment. The center attracts a broad age demographic, with significant foot traffic from teenagers and young adults drawn to the movie theater and entertainment offerings, as well as parents with children utilizing the kids' play area.",
+  "description": "Antelope Valley Mall stands as the premier shopping destination in Palmdale, California, serving the growing communities of the Antelope Valley region in northern Los Angeles County. This classic indoor mall offers a comprehensive retail experience with climate-controlled comfort, making it an ideal escape from the desert climate while providing visitors with a diverse mix of shopping, dining, and entertainment options. The center features modern amenities designed with families in mind, including a dedicated kids' play area where children can enjoy supervised fun, complimentary stroller rentals for parents with young ones, and free Wi-Fi throughout the property to keep shoppers connected. Entertainment is a cornerstone of the mall's appeal, anchored by a full-service movie theater that draws crowds for the latest blockbusters and family films. With convenient hours from 10 AM to 9 PM daily, ample parking, and a welcoming atmosphere, Antelope Valley Mall has established itself as the go-to gathering place for residents across Palmdale, Lancaster, and surrounding communities seeking a complete shopping and leisure experience under one roof.",
+  "tier": 2,
+  "spaces": []
+}

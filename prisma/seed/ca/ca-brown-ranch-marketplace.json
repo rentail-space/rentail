@@ -1,0 +1,40 @@
+{
+  "address": "3555 Clares Street",
+  "city": "Capitola",
+  "country": "US",
+  "googlePlaceID": "places/ChIJDVX4TlQVjoARe2nYXyGGKWk",
+  "name": "Brown Ranch Marketplace",
+  "state": "CA",
+  "latitude": 36.9785429,
+  "longitude": -121.9701506,
+  "phone": "++1 831-475-0500",
+  "imageURLs": [
+    "/images/malls/ca-brown-ranch-marketplace-1.jpg"
+  ],
+  "summary": "Brown Ranch Marketplace is a family-owned 85,000 square foot shopping center featuring 30 stores including Trader Joe's, Michaels, and a diverse mix of specialty shops and international foods. Conveniently located off Highway 1 in Capitola, this community center has been serving the area since 1911.",
+  "openFrom": 800,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 603,
+  "website": "https://www.brownranch.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Brown Ranch Marketplace serves the Capitola community and surrounding Santa Cruz County areas, attracting middle to upper-middle income families and professionals. The trade area draws from coastal residents who value convenience and specialty shopping, with a demographic mix that includes young professionals, established families, and retirees seeking quality groceries and services. Visitors typically prioritize one-stop shopping convenience with an emphasis on specialty foods, home improvement, and personal services, reflecting the area's educated and lifestyle-conscious population.",
+  "description": "Brown Ranch Marketplace has been a cornerstone of the Capitola community since its establishment by the Brown family, proud local residents since 1911. This 85,000 square foot shopping center features 30 diverse stores and is conveniently located off Highway 1 across from the Capitola Mall. The center is anchored by popular retailers including Trader Joe's and Michaels, complemented by an impressive array of specialty shops, international food options, and exceptional services. From Paradise Valley Spas and FedEx Office to Wing Stop, Wasabi Sushi, and Nothing Bundt Cakes, the marketplace offers a carefully curated mix of national brands and local favorites. The family-owned and operated center prides itself on providing one-stop shopping convenience where customers can get everything they need with time to spare, all while maintaining the personal touch and community connection that comes from over a century of local stewardship.",
+  "numberOfStores": 30,
+  "squareFootage": 85000,
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "P",
+      "type": "Inline",
+      "size": 2065,
+      "available": true
+    },
+    {
+      "number": "Y",
+      "type": "Inline",
+      "size": 5600,
+      "available": true
+    }
+  ]
+}

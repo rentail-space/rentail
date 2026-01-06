@@ -1,0 +1,26 @@
+{
+  "address": "201-205 West Mission Avenue",
+  "city": "Escondido",
+  "country": "US",
+  "googlePlaceID": "places/ChIJCQ4w7qL024ARKMlB_Ux2YUg",
+  "name": "Mission Escondido Shopping Center",
+  "state": "CA",
+  "latitude": 33.1292472,
+  "longitude": -117.0874051,
+  "phone": "++1 760-804-6900",
+  "imageURLs": [
+    "/images/malls/ca-mission-escondido-shopping-center-1.jpg"
+  ],
+  "openFrom": 900,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 330,
+  "website": "http://www.missionescondidoshops.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Mission Escondido Shopping Center serves a diverse, multi-cultural community in North San Diego County, attracting middle-income families and working professionals from the surrounding Escondido area. The tenant mix of ethnic restaurants (Korean BBQ, Mediterranean, Thai, Mexican) and service-oriented businesses indicates a customer base that values authentic international cuisine and convenient neighborhood services. The trade area draws from Escondido's growing Hispanic and Asian populations, with shoppers typically seeking value-oriented dining and personal care services in a convenient strip center format.",
+  "description": "Mission Escondido Shopping Center is a vibrant neighborhood retail destination located at 201-205 West Mission Avenue in the heart of Escondido, California. This community-focused shopping center has recently undergone stunning upgrades to enhance the shopping and dining experience for local residents and visitors alike. The center features an eclectic mix of tenants that reflect the diverse cultural fabric of North San Diego County, including authentic international dining options such as Ali Baba Mediterranean Cuisine, Dongbu Korean BBQ, Pad Thai Restaurant, and El Tejate Restaurant. Beyond its culinary offerings, Mission Escondido provides essential services to the community with A+ Dental, Lotus Nails & Spa, Detail Garage auto detailing supplies, and Precision Assembly. The center's convenient location on West Mission Avenue, combined with its recently renovated facilities and diverse tenant mix, makes it a go-to destination for families seeking quality ethnic cuisine and neighborhood services in a welcoming, accessible environment.",
+  "numberOfStores": 8,
+  "summary": "Mission Escondido Shopping Center is a recently upgraded neighborhood retail destination in Escondido featuring diverse international dining options including Korean BBQ, Mediterranean, Thai, and Mexican restaurants. The center also offers essential services like dental care, nail spa, and auto detailing supplies, serving the local community's everyday needs.",
+  "tier": 2,
+  "spaces": []
+}

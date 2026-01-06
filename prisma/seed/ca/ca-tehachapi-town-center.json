@@ -1,0 +1,24 @@
+{
+  "address": "807 Tucker Road",
+  "city": "Tehachapi",
+  "country": "US",
+  "googlePlaceID": "places/ChIJL7JwSuv3wYARXD4Ze9P3pZE",
+  "name": "Tehachapi Town Center",
+  "state": "CA",
+  "latitude": 35.123325,
+  "longitude": -118.46864330000001,
+  "imageURLs": [
+    "/images/malls/ca-tehachapi-town-center-1.jpg"
+  ],
+  "summary": "Tehachapi Town Center is the primary retail hub serving the mountain community of Tehachapi, offering grocery shopping, dining options including a popular Chinese buffet, and essential services. With a 4.4-star rating, the center is known for its friendly small-town atmosphere and convenient access to everyday necessities.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.4,
+  "reviewCount": 666,
+  "website": "http://tehachapi-center.keeq.io/",
+  "centerType": "CommunityCenter",
+  "demographics": "Tehachapi Town Center serves a small-town community in Kern County with a population that skews toward middle-income families, retirees, and working-class residents. The trade area draws from Tehachapi's approximately 14,000 residents plus surrounding rural communities, with visitors typically seeking convenient everyday shopping and dining options. The customer base reflects the town's character as a mountain community with a mix of long-time residents and newer arrivals attracted to the area's affordability and quality of life.",
+  "description": "Tehachapi Town Center is the primary retail destination serving the mountain community of Tehachapi, California, located at 807 Tucker Road. This community shopping center provides essential retail and dining services to the local population and surrounding areas in the Tehachapi Mountains. The center features a diverse mix of tenants including grocery stores offering quality produce with friendly service, popular fast-food restaurants known for their small-town hospitality, and a Chinese restaurant with a well-regarded buffet. With a strong 4.4-star rating from 666 reviews, the center has earned a reputation for friendly service and meeting the everyday needs of the community. As the main shopping hub in this mountain town, Tehachapi Town Center serves as a vital gathering place where residents can access convenient shopping, dining, and services all in one location.",
+  "tier": 2,
+  "spaces": []
+}

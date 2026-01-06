@@ -1,0 +1,72 @@
+{
+  "address": "1200 South Castle Dome Avenue",
+  "city": "Yuma",
+  "country": "US",
+  "googlePlaceID": "places/ChIJXQzX2fH11oARAGZCuZA7EWY",
+  "name": "Las Palmillas Shopping Center",
+  "state": "AZ",
+  "latitude": 32.706415,
+  "longitude": -114.60899279999998,
+  "phone": "++1 928-329-5080",
+  "imageURLs": ["/images/malls/az-las-palmillas-shopping-center-1.jpg"],
+  "summary": "Las Palmillas Shopping Center is a well-positioned retail destination in Yuma, Arizona, located adjacent to the Yuma Palms regional mall with excellent I-8 interstate visibility. The center offers a diverse mix of local and national retailers with flexible leasing options in a high-traffic location.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 611,
+  "website": "http://shoplaspalmillas.com/",
+  "centerType": "CommunityCenter",
+  "demographics": "Las Palmillas Shopping Center serves Yuma's diverse population, attracting middle-income families and households with a mix of age groups from young professionals to retirees. The trade area benefits from Yuma's position as a regional hub for southwestern Arizona and nearby California communities, drawing shoppers seeking convenient access to both local and national retailers. The center's proximity to I-8 captures interstate travelers and military families from nearby Yuma Proving Ground and Marine Corps Air Station Yuma, creating a steady flow of value-conscious consumers seeking everyday goods and services.",
+  "description": "Las Palmillas Shopping Center is a prominent retail destination strategically located in Yuma, Arizona, directly adjacent to Yuma Palms, a 1,150,000 square foot regional shopping center. Positioned between two major I-8 interchanges at 1200 South Castle Dome Avenue, the center enjoys exceptional interstate and arterial visibility, making it easily accessible to both local residents and travelers passing through southwestern Arizona. The shopping center offers a diverse mix of local, regional, and national retailers, providing convenient shopping options for the Yuma community. With flexible leasing opportunities including ground lease and build-to-suit options, Las Palmillas features incredible lease rates that attract quality tenants to this high-traffic location. The center's strategic positioning and comprehensive retail offerings have earned it a strong reputation in the market, reflected in its 4.4-star rating from over 600 customer reviews.",
+  "tier": 2,
+  "spaces": [
+    {
+      "type": "Other",
+      "number": "Major 2",
+      "size": 23400,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Major 6",
+      "size": 22070,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Pad 2",
+      "size": 25972,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Pad 3",
+      "size": 22704,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Pad 4",
+      "size": 22704,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Pad 7",
+      "size": 277163,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Pad 8",
+      "size": 29494,
+      "available": true
+    },
+    {
+      "type": "Other",
+      "number": "Pad 9",
+      "size": 16036,
+      "available": true
+    }
+  ]
+}

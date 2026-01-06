@@ -1,0 +1,25 @@
+{
+  "address": "1555 Camino Del Mar",
+  "city": "Del Mar",
+  "country": "US",
+  "googlePlaceID": "places/ChIJS9i-CrUI3IARHNSQsn48JXw",
+  "name": "Del Mar Plaza",
+  "state": "CA",
+  "latitude": 32.96006390000001,
+  "longitude": -117.26499179999998,
+  "phone": "++1 858-847-2284",
+  "imageURLs": [
+    "/images/malls/ca-del-mar-plaza-1.jpg"
+  ],
+  "summary": "Del Mar Plaza is an upscale, open-air lifestyle center perched above the Pacific Ocean, featuring specialty boutiques, award-winning restaurants with panoramic ocean views, and European-inspired architecture. This dog-friendly destination combines sophisticated shopping, gourmet dining, and live entertainment in one of Southern California's most picturesque coastal settings.",
+  "openFrom": 900,
+  "openUntil": 2330,
+  "rating": 4.5,
+  "reviewCount": 933,
+  "website": "http://www.delmarplaza.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Del Mar Plaza attracts an affluent, upscale demographic reflective of the Del Mar coastal community, with visitors typically in the 35-65 age range and household incomes exceeding $150,000. The trade area draws from wealthy North County San Diego neighborhoods including Rancho Santa Fe, Solana Beach, and Carmel Valley, with a strong presence of professionals, retirees, and tourists seeking premium coastal experiences. Shoppers demonstrate preferences for specialty boutiques, gourmet dining, and personalized services over mass-market retail, with high spending capacity for luxury goods and fine dining experiences.",
+  "description": "Del Mar Plaza stands as a premier oceanfront destination in the heart of Del Mar, California, offering an unparalleled blend of upscale shopping, award-winning dining, and breathtaking Pacific Ocean views. This European-inspired, open-air lifestyle center features stylish architecture complemented by fountains and public viewing decks that showcase stunning coastal vistas and daily sunset displays. The plaza is home to a carefully curated collection of specialty boutiques, local shops, and personal service providers including salons and wellness services, creating an intimate and sophisticated shopping experience. Dining is a cornerstone of the Del Mar Plaza experience, with gourmet restaurants like Il Fornaio, Pacifica Breeze, and Tamarindo offering panoramic ocean views alongside their culinary offerings, while newer additions like An Gelato and the upcoming Valley Farm Market continue to enhance the food and beverage landscape. Beyond shopping and dining, the plaza serves as a vibrant community gathering space, hosting live music performances, pop-up events, and private celebrations, all set against the backdrop of the Pacific Ocean and the charming coastal atmosphere that defines Del Mar living.",
+  "tier": 3,
+  "spaces": []
+}

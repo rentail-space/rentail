@@ -1,0 +1,25 @@
+{
+  "address": "48750 Seminole Drive",
+  "city": "Cabazon",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ77vor4U_24ARbLVUPhP-L4g",
+  "name": "Cabazon Outlets",
+  "state": "CA",
+  "latitude": 33.925194399999995,
+  "longitude": -116.81045280000001,
+  "phone": "++1 951-922-3000",
+  "imageURLs": [
+    "/images/malls/ca-cabazon-outlets-1.jpg"
+  ],
+  "summary": "Cabazon Outlets is an open-air outlet shopping center located off Interstate 10 between Los Angeles and Palm Springs, offering up to 70% off premium brands in a compact, mountain-backed desert setting. The center provides a relaxed shopping experience with convenient freeway access, making it a popular stop for both travelers and local bargain hunters.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 5816,
+  "website": "http://www.cabazonoutlets.com/",
+  "centerType": "OutletCenter",
+  "demographics": "Cabazon Outlets attracts a diverse mix of bargain-seeking shoppers, including middle-income families and tourists traveling between Los Angeles and Palm Springs. The trade area draws heavily from the Inland Empire region as well as destination shoppers from Southern California's major metropolitan areas who are willing to drive for premium brand discounts. Visitors typically include value-conscious millennials and Gen X families with household incomes ranging from $50,000 to $100,000, seeking designer and brand-name merchandise at outlet prices. The center benefits from significant tourist traffic due to its strategic location on Interstate 10, attracting both domestic travelers and international visitors heading to Palm Springs resort destinations.",
+  "description": "Cabazon Outlets is a charming open-air outlet shopping destination strategically positioned off Interstate 10 in Cabazon, California, serving as a convenient shopping stop between Los Angeles and Palm Springs. Known for offering discounts of up to 70% off retail prices on premium brands, this compact outlet center provides a curated selection of designer and brand-name stores in an easy-to-navigate layout that appeals to both local shoppers and travelers. The center's relaxed desert atmosphere is enhanced by its scenic mountain backdrop, creating a pleasant shopping environment that stands in contrast to the hustle of larger metropolitan malls. Visitors appreciate the center's convenient freeway access and calm vibe, making it an ideal destination for a quick shopping getaway or a strategic stop during longer road trips. The outlet center operates seven days a week with extended hours on Fridays and Saturdays, and offers additional perks through its VIP Savings Book program, which provides members with hundreds of dollars in extra discounts at participating stores.",
+  "tier": 2,
+  "spaces": []
+}

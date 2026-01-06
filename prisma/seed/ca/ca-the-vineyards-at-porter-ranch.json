@@ -1,0 +1,23 @@
+{
+  "address": "20065 Rinaldi Street",
+  "city": "Los Angeles",
+  "country": "US",
+  "googlePlaceID": "places/ChIJkzIWSg-FwoAR6aCABuezK4k",
+  "name": "The Vineyards at Porter Ranch",
+  "state": "CA",
+  "latitude": 34.2756762,
+  "longitude": -118.5727745,
+  "phone": "++1 818-332-7220",
+  "imageURLs": ["/images/malls/ca-the-vineyards-at-porter-ranch-1.jpg"],
+  "openFrom": 530,
+  "openUntil": 2200,
+  "rating": 4.6,
+  "reviewCount": 842,
+  "website": "http://www.thevineyards.com/",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Vineyards at Porter Ranch attracts an affluent, family-oriented demographic from the surrounding Porter Ranch community, with visitors typically in the 30-55 age range and above-average household incomes. The trade area serves upper-middle-class families and professionals who value convenience, quality dining options, and a boutique shopping experience. Shoppers demonstrate preferences for fresh, health-conscious food options as evidenced by tenants like Mendocino Farms and Toastique, along with the weekly farmers market that draws community-minded residents seeking local products and a neighborhood gathering place.",
+  "description": "The Vineyards at Porter Ranch is a premier lifestyle shopping destination located in the heart of Porter Ranch, Los Angeles, offering a sophisticated blend of dining, retail, and entertainment experiences. This open-air center has established itself as a community hub, featuring popular culinary destinations like Mendocino Farms, known for creative sandwiches and vibrant salads, and the newly opened Toastique, a boutique gourmet toast and juice bar perfect for health-conscious visitors. The center enhances its community appeal with a weekly farmers market every Sunday from 9am to 2pm, providing residents with access to fresh, local produce and artisanal goods. With convenient amenities including electric vehicle charging stations and a thoughtfully curated tenant mix, The Vineyards caters to the modern shopper's lifestyle needs. The center continues to evolve with exciting additions like Salina, an Italian kitchen celebrating tradition and taste, set to open in 2025, further cementing its position as Porter Ranch's go-to destination for quality dining and shopping experiences.",
+  "summary": "The Vineyards at Porter Ranch is an upscale lifestyle center in Los Angeles featuring a curated mix of dining and retail options, including Mendocino Farms, Toastique, and a weekly Sunday farmers market. With modern amenities like EV charging stations and upcoming additions like Salina Italian kitchen, it serves as a premier community gathering place for Porter Ranch residents.",
+  "tier": 2,
+  "spaces": []
+}

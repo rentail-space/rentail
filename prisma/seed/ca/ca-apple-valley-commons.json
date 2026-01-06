@@ -1,0 +1,52 @@
+{
+  "address": "Bass Hill Road",
+  "city": "Apple Valley",
+  "country": "US",
+  "googlePlaceID": "places/ChIJacEF1oJjw4AROJN-ZnQyM2s",
+  "name": "Apple Valley Commons",
+  "state": "CA",
+  "latitude": 34.526809899999996,
+  "longitude": -117.2175772,
+  "phone": "++1 909-946-7518",
+  "imageURLs": [
+    "/images/malls/ca-apple-valley-commons-1.jpg"
+  ],
+  "summary": "Apple Valley Commons is a 424,000 square foot community shopping center anchored by Super Target and featuring popular retailers like Old Navy, Ross Dress for Less, and Ulta. Located at a prime intersection in Apple Valley, this 49-acre open-air center serves nearly 94,000 residents within a 5-mile radius with a diverse mix of value-oriented shopping and dining options.",
+  "openFrom": 700,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 1579,
+  "website": "https://lewisretailcenters.com/property/apple-valley-commons/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Apple Valley Commons serves a diverse suburban population of approximately 93,696 residents within a 5-mile radius, primarily consisting of middle-income families and working professionals. The trade area attracts value-conscious shoppers seeking convenient access to everyday necessities and affordable retail options, with household compositions skewing toward families with children. The center's tenant mix of discount retailers like Ross Dress for Less, Dollar Tree, and Target appeals to budget-minded consumers looking for quality merchandise at competitive prices, while the variety of quick-service dining options caters to busy families seeking convenient meal solutions.",
+  "description": "Apple Valley Commons is a prominent 424,000 square foot community shopping center strategically located at the northwest corner of Highway 18 and Dale Evans Parkway in Apple Valley, California. Spanning 49 acres in the heart of the High Desert region, this open-air retail destination has established itself as a vital shopping hub for the local community and surrounding areas. Anchored by Super Target and featuring major national retailers including Old Navy, Ross Dress for Less, Ulta, and Five Below, the center offers a comprehensive mix of value-oriented shopping, dining, and service options. The property's diverse tenant roster includes popular quick-service restaurants such as Panda Express, Wingstop, Del Taco, and Starbucks, alongside specialty retailers like Bath & Body Works, Sally Beauty, and T-Mobile. With convenient access from major thoroughfares and ample parking across its expansive site, Apple Valley Commons serves as the go-to destination for everyday shopping needs, combining national brand recognition with local service providers including Pacific Dental, The UPS Store, and various personal care establishments.",
+  "numberOfStores": 37,
+  "squareFootage": 424000,
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "3",
+      "type": "Inline",
+      "size": 4302,
+      "available": true
+    },
+    {
+      "number": "25",
+      "type": "Inline",
+      "size": 6000,
+      "available": true
+    },
+    {
+      "number": "26",
+      "type": "Inline",
+      "size": 6000,
+      "available": true
+    },
+    {
+      "number": "28",
+      "type": "Inline",
+      "size": 1000,
+      "available": true
+    }
+  ]
+}

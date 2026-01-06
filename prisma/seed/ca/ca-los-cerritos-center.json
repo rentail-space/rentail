@@ -1,25 +1,25 @@
 {
-  "name": "Los Cerritos Center",
   "address": "239 Los Cerritos Center",
   "city": "Cerritos",
-  "state": "CA",
-  "website": "https://www.shoploscerritos.com/",
-  "latitude": 33.8622482,
-  "longitude": -118.0948809,
   "country": "US",
-  "phone": "+15624027467",
-  "photos": [],
-  "imageURLs": ["/images/malls/ca-los-cerritos-center-1.jpg"],
-  "summary": "Spacious shopping center offers a range of brand-name retailers, plus well-known chain restaurants.",
+  "googlePlaceID": "places/ChIJ539XJnQt3YARx_PLXvgj8rI",
+  "name": "Los Cerritos Center",
+  "state": "CA",
+  "latitude": 33.862248199999996,
+  "longitude": -118.09488089999999,
+  "phone": "++1 562-402-7467",
+  "imageURLs": [
+    "/images/malls/ca-los-cerritos-center-1.jpg"
+  ],
+  "summary": "Los Cerritos Center is a spacious regional mall in Southeast LA County featuring a wide range of brand-name retailers, popular chain restaurants, and entertainment options including a movie theater. This family-friendly destination serves the diverse Cerritos community with convenient shopping and dining experiences.",
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.5,
-  "reviewCount": 16842,
-  "squareFootage": 1200000,
-  "numberOfStores": 130,
-  "description": "Los Cerritos Center is a premier shopping destination featuring an extensive collection of stores, dining options, and entertainment including a movie theater and seasonal events like Santa Photos. With convenient hours from 10 AM to 10 PM, the center offers a comprehensive retail experience with interactive features including a chat service and real-time center information.",
-  "demographics": "Los Cerritos Center serves a diverse, middle to upper-middle-class trade area in the Gateway Cities region of Los Angeles County, attracting families and young professionals primarily in the 25-54 age range with median household incomes between $60,000-$90,000. The center draws from surrounding communities including Cerritos, Norwalk, Artesia, and La Mirada, appealing to value-conscious shoppers seeking mainstream retail brands and dining options. Visitors include multigenerational households and represent the area's diverse ethnic composition, with shopping patterns favoring weekend family outings and combining retail purchases with dining and entertainment activities.",
+  "reviewCount": 16879,
+  "website": "https://www.shoploscerritos.com/?utm_source=google&utm_medium=onlinesearch&utm_content=gmp_website_button&utm_campaign=yext",
   "centerType": "RegionalMall",
+  "demographics": "Los Cerritos Center attracts a diverse, middle-income demographic from the greater Cerritos and Southeast Los Angeles County area, including families and young adults aged 25-54. The trade area serves a multicultural population with significant Asian-American and Hispanic communities, reflecting the demographics of Cerritos and surrounding cities like Norwalk, Artesia, and La Mirada. Shoppers typically seek value-oriented retail options and family-friendly dining experiences, with strong weekend traffic from households looking for convenient one-stop shopping. The center draws from a trade area with median household incomes ranging from $60,000 to $90,000, appealing to budget-conscious consumers seeking national brands at accessible price points.",
+  "description": "Los Cerritos Center stands as a prominent regional shopping destination in Southeast Los Angeles County, serving the diverse communities of Cerritos and surrounding areas for decades. This spacious enclosed mall offers an extensive selection of brand-name retailers spanning fashion, electronics, home goods, and specialty stores, making it a comprehensive shopping experience for the entire family. Beyond retail, the center features well-known chain restaurants and a robust food court, providing diverse dining options from quick bites to sit-down meals. The mall also includes entertainment amenities such as a movie theater, hosting regular events that bring the community together throughout the year. With convenient access from major freeways and ample parking, Los Cerritos Center has established itself as a reliable shopping hub where value meets variety, catering to the practical needs of middle-income families seeking quality brands at accessible prices.",
   "tier": 2,
   "spaces": [
     {
@@ -34,7 +34,7 @@
       "type": "Cart",
       "size": 60,
       "floor": 1,
-      "available": false
+      "available": true
     },
     {
       "number": "L46",
@@ -48,7 +48,7 @@
       "type": "Cart",
       "size": 60,
       "floor": 1,
-      "available": false
+      "available": true
     },
     {
       "number": "NN47A",

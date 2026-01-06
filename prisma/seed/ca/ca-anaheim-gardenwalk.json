@@ -1,0 +1,25 @@
+{
+  "address": "321 West Katella Avenue",
+  "city": "Anaheim",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ5wafBMPX3IARLs-BhEgB7Nk",
+  "name": "Anaheim GardenWalk",
+  "state": "CA",
+  "latitude": 33.8036758,
+  "longitude": -117.91194730000001,
+  "phone": "++1 562-695-1513",
+  "imageURLs": [
+    "/images/malls/ca-anaheim-gardenwalk-1.jpg"
+  ],
+  "summary": "Anaheim GardenWalk is a lush open-air lifestyle center in the Anaheim Resort District featuring popular restaurants, retail stores, vibrant nightlife with dance clubs, and the House of Blues live music venue. Located steps from Disneyland and the Convention Center, it serves as a premier entertainment and dining destination for tourists and locals alike.",
+  "openFrom": 900,
+  "openUntil": 100,
+  "rating": 4.4,
+  "reviewCount": 8336,
+  "website": "http://anaheimgardenwalk.com/",
+  "centerType": "LifestyleCenter",
+  "demographics": "Anaheim GardenWalk attracts a diverse mix of tourists and local residents, with a significant portion being families visiting nearby Disneyland Resort and convention attendees from the Anaheim Convention Center. The visitor base skews toward middle to upper-middle income households, with age groups ranging from young families with children to adults aged 25-54. The trade area benefits from high tourist traffic, with visitors seeking dining and entertainment options within walking distance of major attractions, creating a unique demographic blend of leisure travelers and affluent Orange County residents.",
+  "description": "Anaheim GardenWalk is a distinctive open-air entertainment and dining destination located in the heart of the Anaheim Resort District, just steps from Disneyland Resort and the Anaheim Convention Center. This vibrant lifestyle center offers visitors a compelling mix of popular restaurants, retail stores, and entertainment venues, anchored by the renowned House of Blues Anaheim live concert venue. The property features a lush, pedestrian-friendly environment that creates an inviting atmosphere for both tourists and local residents seeking quality dining and entertainment experiences. With its strategic location at 400 West Disney Way, GardenWalk serves as a premier gathering place offering everything from casual dining to upscale restaurants, complemented by two energetic dance clubs that bring the nightlife scene to life. The center's pet-friendly policies, art installations along the walk, and family-oriented entertainment options like bowling make it a versatile destination that caters to diverse visitor needs throughout the day and into the late evening hours.",
+  "tier": 2,
+  "spaces": []
+}

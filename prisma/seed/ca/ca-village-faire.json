@@ -1,0 +1,26 @@
+{
+  "address": "300 Carlsbad Village Drive",
+  "city": "Carlsbad",
+  "country": "US",
+  "googlePlaceID": "places/ChIJF94c5Q9y3IARz6gy0OsIa6c",
+  "name": "Village Faire",
+  "state": "CA",
+  "latitude": 33.158839799999996,
+  "longitude": -117.3506041,
+  "phone": "++1 760-434-3838",
+  "imageURLs": [
+    "/images/malls/ca-village-faire-1.jpg"
+  ],
+  "summary": "Village Faire is a charming boutique shopping center in Historic Carlsbad Village featuring New England-style architecture with Caribbean flair. With over 36 restaurants, shops, and services surrounding a family-friendly fountain courtyard, it's located just one block from the beach and offers a unique coastal shopping and dining experience.",
+  "openFrom": 700,
+  "openUntil": 200,
+  "rating": 4.6,
+  "reviewCount": 1483,
+  "website": "https://www.shopvillagefaire.com/?utm_medium=organic&utm_source=google.com&utm_campaign=gbp",
+  "centerType": "LifestyleCenter",
+  "demographics": "Village Faire attracts an affluent, coastal demographic with above-average household incomes typical of the Carlsbad area, where median household incomes exceed $100,000. The primary visitor base consists of families and professionals aged 35-65, along with tourists visiting the beach community. The trade area draws from both local Carlsbad residents seeking boutique shopping and dining experiences, as well as visitors from throughout North County San Diego attracted to the historic village's walkable, beach-adjacent lifestyle environment.",
+  "description": "Village Faire is a distinctive boutique shopping center nestled in the heart of Historic Carlsbad Village, California, just one block from the beach and train station. This charming enclave features New England-style architecture with a Caribbean flair, creating a unique coastal ambiance that sets it apart from typical shopping destinations. The center encompasses over 36 restaurants, shops, and services arranged around a family-friendly fountain courtyard, offering visitors a pedestrian-friendly environment perfect for leisurely browsing and dining. Owned and managed by SIMA Corporation, a Santa Barbara-based company with an impressive portfolio of 1.25 million square feet of commercial properties nationwide, Village Faire represents the company's commitment to boutique retail experiences. Located at the corner of Carlsbad Boulevard and Carlsbad Village Drive, the center serves as a vibrant gathering place for both locals and tourists, combining convenient access to dining, shopping, health and fitness services, and regular community events that celebrate the area's coastal lifestyle and rich history.",
+  "numberOfStores": 36,
+  "tier": 2,
+  "spaces": []
+}

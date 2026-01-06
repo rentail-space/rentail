@@ -1,0 +1,25 @@
+{
+  "address": "2550 Somersville Road",
+  "city": "Antioch",
+  "country": "US",
+  "googlePlaceID": "places/ChIJwQ5WeLtZhYARSMYLe_0dHtM",
+  "name": "Somersville Towne Center",
+  "state": "CA",
+  "latitude": 38.0020593,
+  "longitude": -121.8429519,
+  "phone": "++1 925-754-5230",
+  "imageURLs": [
+    "/images/malls/ca-somersville-towne-center-1.jpg"
+  ],
+  "summary": "Somersville Towne Center is a community-focused shopping destination in Antioch, California, offering convenient access to everyday retail, dining, and services. The open-air center serves the diverse eastern Contra Costa County community with a practical mix of national retailers and local businesses.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 3.6,
+  "reviewCount": 1432,
+  "website": "http://www.somersvilletownecenter.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Somersville Towne Center serves the diverse, family-oriented community of Antioch in eastern Contra Costa County, attracting primarily middle-income households with median incomes ranging from $60,000 to $85,000. The trade area draws a mix of young families, working professionals, and retirees, with a significant Hispanic and African American population that reflects the city's multicultural character. Shoppers typically seek convenient, value-oriented retail options for everyday needs, with strong preferences for grocery, discount retailers, and family dining establishments that cater to budget-conscious consumers.",
+  "description": "Somersville Towne Center is a community shopping destination located in Antioch, California, serving the eastern Contra Costa County region. Situated at 2550 Somersville Road, this open-air retail center provides convenient access to everyday shopping needs for local residents and families. The center features a practical mix of national retailers, dining options, and service providers that cater to the diverse community of Antioch. With its accessible location and ample parking, Somersville Towne Center has established itself as a neighborhood gathering place where residents can accomplish multiple errands in one trip. The center maintains regular operating hours from 11:00 AM to 7:00 PM, offering a welcoming environment for shoppers throughout the week.",
+  "tier": 2,
+  "spaces": []
+}

@@ -1,0 +1,25 @@
+{
+  "address": "4033 West Avenue L",
+  "city": "Lancaster",
+  "country": "US",
+  "googlePlaceID": "places/ChIJP5Bp2GJbwoARLD82KOPbwUM",
+  "name": "Quartz Hill Towne Centre",
+  "state": "CA",
+  "latitude": 34.661531,
+  "longitude": -118.20342719999998,
+  "phone": "++1 929-388-7922",
+  "imageURLs": [
+    "/images/malls/ca-quartz-hill-towne-centre-1.jpg"
+  ],
+  "summary": "Quartz Hill Towne Centre is a community shopping center in Lancaster, California, managed by Phillips Edison & Company. With a 4.3-star rating and convenient daily hours, it serves as a neighborhood hub for essential retail and dining needs in the Quartz Hill area.",
+  "openFrom": 900,
+  "openUntil": 2000,
+  "rating": 4.3,
+  "reviewCount": 1343,
+  "website": "https://www.phillipsedison.com/property/california/los-angeles-ca/lancaster/quartz-hill-towne-centre",
+  "centerType": "CommunityCenter",
+  "demographics": "Quartz Hill Towne Centre serves the Lancaster and Quartz Hill communities in northern Los Angeles County, attracting primarily middle-income families and working professionals. The trade area consists of suburban households with a mix of young families, established homeowners, and retirees seeking convenient neighborhood shopping. Visitors typically prioritize value-oriented shopping with a focus on everyday necessities, groceries, and family dining options, reflecting the practical needs of the surrounding residential communities.",
+  "description": "Quartz Hill Towne Centre is a community-focused shopping destination located at 4033 West Avenue L in Lancaster, California, serving the growing Quartz Hill area of northern Los Angeles County. Managed by Phillips Edison & Company, a leading owner and operator of grocery-anchored shopping centers, this center provides essential retail and dining options for local residents and families. The center has earned a strong reputation in the community with a 4.3-star rating from over 1,300 reviews, reflecting its commitment to serving neighborhood needs. Open daily from 9:00 AM to 8:00 PM, Quartz Hill Towne Centre offers convenient access to everyday shopping and services in a welcoming open-air environment. As part of Phillips Edison's portfolio of neighborhood shopping centers, the property emphasizes accessibility, community connection, and a tenant mix designed to meet the daily needs of the surrounding residential areas.",
+  "tier": 2,
+  "spaces": []
+}

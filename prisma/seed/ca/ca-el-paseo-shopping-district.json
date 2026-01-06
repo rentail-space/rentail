@@ -1,0 +1,25 @@
+{
+  "address": "El Paseo",
+  "city": "Palm Desert",
+  "country": "US",
+  "googlePlaceID": "places/ChIJVeu1Ugv-2oARHonTT9l4NAs",
+  "name": "El Paseo Shopping District",
+  "state": "CA",
+  "latitude": 33.7195602,
+  "longitude": -116.3816568,
+  "phone": "++1 877-735-7273",
+  "imageURLs": [
+    "/images/malls/ca-el-paseo-shopping-district-1.jpg"
+  ],
+  "summary": "El Paseo Shopping District is Palm Desert's premier upscale open-air shopping destination, featuring designer fashion, fine art galleries, interior design showrooms, and acclaimed restaurants along an elegant promenade. Known as the \"Rodeo Drive of the Desert,\" it hosts major events including Fashion Week El Paseo and Palm Desert Food & Wine, attracting sophisticated shoppers to the heart of the Coachella Valley.",
+  "openFrom": 1000,
+  "openUntil": 1900,
+  "rating": 4.5,
+  "reviewCount": 457,
+  "website": "https://www.elpaseocatalogue.com/",
+  "centerType": "LifestyleCenter",
+  "demographics": "El Paseo Shopping District attracts an affluent, sophisticated demographic primarily consisting of adults aged 45-75 with high household incomes exceeding $100,000 annually. The trade area draws from Palm Desert's wealthy seasonal residents and year-round retirees, along with tourists visiting the Coachella Valley resort communities. Visitors are typically empty nesters and retirees who appreciate upscale shopping, fine dining, and art galleries, with strong preferences for designer fashion, home décor, and experiential retail. The center serves as a lifestyle destination for discerning shoppers seeking luxury brands and personalized service in an open-air, walkable environment.",
+  "description": "El Paseo Shopping District stands as the premier upscale shopping destination in the heart of the Coachella Valley, often referred to as the \"Rodeo Drive of the Desert.\" This sophisticated open-air promenade in Palm Desert features an elegant collection of designer fashion boutiques, fine art galleries, interior design showrooms, and acclaimed restaurants set against a stunning backdrop of swaying palms and mountain views. The district has evolved into a cultural hub, hosting major annual events including Fashion Week El Paseo (March 13-18, 2026), the largest fashion week on the West Coast, and Palm Desert Food & Wine (March 19-22, 2026), featuring celebrity chefs like Curtis Stone, Alex Guarnaschelli, and Jet Tila. Visitors can explore curated experiences through The Shops on El Paseo, discover contemporary art at venues like Dawson Cole Fine Art, and enjoy the district's growing collection of wine bars and upscale dining establishments. With its commitment to elevated retail experiences, special events, and the innovative El Paseo Pass program that rewards visitors with points and gift cards, this chic destination offers a refined shopping and lifestyle experience unique to Southern California's desert communities.",
+  "tier": 3,
+  "spaces": []
+}

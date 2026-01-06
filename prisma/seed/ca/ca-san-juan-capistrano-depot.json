@@ -1,0 +1,24 @@
+{
+  "address": "26701 Verdugo Street",
+  "city": "San Juan Capistrano",
+  "country": "US",
+  "googlePlaceID": "places/ChIJz56fNebx3IARJ-jKGxlJWQA",
+  "name": "San Juan Capistrano Depot",
+  "state": "CA",
+  "latitude": 33.5011479,
+  "longitude": -117.6638252,
+  "imageURLs": [
+    "/images/malls/ca-san-juan-capistrano-depot-1.jpg"
+  ],
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.8,
+  "reviewCount": 10,
+  "website": "http://www.sanjuancapistrano.net/depot/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The San Juan Capistrano Depot attracts a diverse mix of visitors including history enthusiasts, families with children exploring California's mission heritage, daily commuters using Amtrak and Metrolink services, and tourists seeking authentic cultural experiences. The area draws middle to upper-middle income households who appreciate historic preservation and cultural amenities, with significant visitation from Orange County residents and out-of-area tourists. The depot serves as both a functional transportation hub and a heritage destination, appealing to educated professionals, retirees interested in California history, and families seeking educational experiences for their children, particularly fourth-grade students on mission tours.",
+  "description": "The San Juan Capistrano Depot stands as one of the most outstanding architectural treasures in beautiful San Juan Capistrano, completed on October 8, 1894, as what was described as \"the finest depot on the Santa Fe system.\" This historic landmark features stunning mission-style architecture with distinctive arches, a magnificent 40-foot high dome crowned with a mission bell, and charming period details including a dainty ticket office and quaint old-fashioned fireplace that captures visitors as they breathe the balmy sea air. The depot is home to Trevors at the Tracks, an exceptional restaurant located at the south end below the dome, offering excellent cuisine in a beautiful historic setting with both outdoor patio dining and intimate fireside tables, complemented by brick archways and an incredible art gallery. Throughout the week, the sounds of children echo as they ride the trains for exciting experiences or journey to tour the nearby Mission San Juan Capistrano, while daily commuters arrive and depart with regularity via Amtrak and Metrolink to avoid congested freeways. This architectural gem, with its unique blend of transportation functionality and historic charm, remains an essential highlight for any visit to San Juan Capistrano, serving as a living testament to California's rich railroad heritage and mission-era architectural influence.",
+  "summary": "The San Juan Capistrano Depot is a stunning historic train station completed in 1894, featuring mission-style architecture with a 40-foot dome and mission bell. This active Amtrak and Metrolink station houses Trevors at the Tracks restaurant and serves as both a functional transportation hub and a beloved cultural landmark for visitors exploring California's heritage.",
+  "tier": 2,
+  "spaces": []
+}

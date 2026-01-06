@@ -1,0 +1,26 @@
+{
+  "address": "101 West Avenida Vista Hermosa",
+  "city": "San Clemente",
+  "country": "US",
+  "googlePlaceID": "places/ChIJi5uMrffz3IARnLim6IHbsrk",
+  "name": "Outlets at San Clemente",
+  "state": "CA",
+  "latitude": 33.4392912,
+  "longitude": -117.6279166,
+  "phone": "++1 949-535-2323",
+  "imageURLs": [
+    "/images/malls/ca-outlets-at-san-clemente-1.jpg"
+  ],
+  "summary": "Outlets at San Clemente is Orange County's only coastal outlet shopping destination, featuring over 60 designer brands with savings up to 70% off retail prices. This open-air center combines Pacific Ocean views with an upscale outlet experience, offering fashion, dining, entertainment, and an Elite Rewards loyalty program for frequent shoppers.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 5824,
+  "website": "http://www.outletsatsanclemente.com/",
+  "centerType": "OutletCenter",
+  "demographics": "The Outlets at San Clemente attracts a diverse mix of value-conscious shoppers and tourists drawn to Orange County's coastal lifestyle. The primary trade area includes affluent families from South Orange County communities seeking designer brands at discounted prices, with household incomes typically ranging from $75,000 to $150,000+. The center appeals to both local residents aged 25-55 and destination shoppers visiting the San Clemente beach area, including young professionals and families looking for vacation wear and activewear. The coastal location attracts a higher proportion of leisure shoppers and tourists compared to inland outlet centers, with visitors willing to combine beach activities with outlet shopping experiences.",
+  "description": "Outlets at San Clemente is Orange County's only coastal outlet shopping destination, offering a unique combination of Pacific Ocean views and designer savings. Located at 101 West Avenida Vista Hermosa in San Clemente, this open-air outlet center features more than 60 designer and brand-name stores offering savings up to 70% off retail prices year-round. The center provides an elevated outlet shopping experience with its Elite Rewards loyalty program, where members earn 10 points per dollar spent and receive exclusive discounts, VIP event access, and special perks throughout the year. Shoppers can explore a diverse mix of fashion, footwear, activewear, and lifestyle brands while enjoying the Southern California coastal atmosphere. The center also features dining options and entertainment including an on-site movie theater operated by Metro Theatres, making it a complete destination for both locals and tourists visiting the San Clemente area. With convenient hours from 10:00 AM to 8:00 PM daily and a prime location near Interstate 5, the Outlets at San Clemente has become a popular shopping destination for value-seeking consumers throughout Orange County and beyond.",
+  "numberOfStores": 60,
+  "tier": 2,
+  "spaces": []
+}

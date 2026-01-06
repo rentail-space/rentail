@@ -1,0 +1,26 @@
+{
+  "address": "10808 Foothill Boulevard",
+  "city": "Rancho Cucamonga",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ_TC85N41w4ARxAf1YxV0Gpk",
+  "name": "Terra Vista Town Center",
+  "state": "CA",
+  "latitude": 34.1076629,
+  "longitude": -117.56895979999997,
+  "phone": "++1 909-989-4207",
+  "imageURLs": [
+    "/images/malls/ca-terra-vista-town-center-1.jpg"
+  ],
+  "summary": "Terra Vista Town Center is the Inland Empire's favorite open-air lifestyle destination in Rancho Cucamonga, featuring over 50 retailers, diverse dining options, and a movie theater. This outdoor shopping complex offers a comprehensive mix of shopping, entertainment, and dining experiences in a cheerful, family-friendly environment.",
+  "openFrom": 800,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 4365,
+  "website": "http://www.terravistatowncenter.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Terra Vista Town Center attracts a diverse mix of families and young professionals from the Rancho Cucamonga area and broader Inland Empire region. The primary trade area consists of middle to upper-middle income households with median household incomes ranging from $75,000 to $110,000, reflecting the area's suburban growth and development. Visitors typically include families with children seeking convenient shopping and dining options, as well as younger demographics drawn to the entertainment offerings including the movie theater. The center serves a predominantly suburban market with strong representation of homeowners aged 25-54 who value the open-air shopping experience and mix of national retailers with dining and leisure activities.",
+  "description": "Terra Vista Town Center stands as the Inland Empire's premier open-air lifestyle destination, offering a vibrant shopping and entertainment experience in the heart of Rancho Cucamonga, California. This cheerful outdoor shopping complex has established itself as a community gathering place, featuring over 50 retailers that span popular chain stores, diverse dining options, and a full-service movie theater. The center's open-air design creates an inviting atmosphere where visitors can explore the latest trends and brands while enjoying Southern California's pleasant climate. With its carefully curated mix of shopping, restaurants, and entertainment experiences, Terra Vista Town Center has become a shopping haven for residents and visitors seeking everything from everyday essentials to the latest fashion trends. The center's convenient location on Foothill Boulevard, combined with its comprehensive retail offerings and family-friendly amenities, has made it a favorite destination for the Inland Empire community, earning an impressive 4.4-star rating from thousands of satisfied visitors.",
+  "numberOfStores": 50,
+  "tier": 2,
+  "spaces": []
+}

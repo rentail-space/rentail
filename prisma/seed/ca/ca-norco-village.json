@@ -1,0 +1,40 @@
+{
+  "address": "River Road",
+  "city": "Norco",
+  "country": "US",
+  "googlePlaceID": "places/ChIJCw9AnCzJ3IARLQrgCTkLlJk",
+  "name": "Norco Village",
+  "state": "CA",
+  "latitude": 33.9154857,
+  "longitude": -117.590079,
+  "phone": "++1 909-946-7518",
+  "imageURLs": [
+    "/images/malls/ca-norco-village-1.jpg"
+  ],
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.6,
+  "reviewCount": 520,
+  "website": "https://lewisretailcenters.com/property/norco-village/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Norco Village serves a family-oriented suburban community with a mix of middle to upper-middle income households. The trade area is anchored by The Preserve, an 11,980-unit master planned community, attracting young families and professionals seeking convenient neighborhood shopping. Primary visitors include households with children who value accessible grocery shopping, everyday services, and quick-service dining options. The center draws from Norco's equestrian-focused community and surrounding Riverside County suburbs, with shoppers prioritizing convenience and value-oriented retail.",
+  "description": "Norco Village is a well-established 113,600 square foot neighborhood shopping center strategically positioned at the corner of River Road and Corydon Street in Norco, California. Anchored by the trusted Stater Bros. Markets grocery store and CVS pharmacy, this community-focused center serves as a convenient one-stop destination for daily needs and services. The property benefits from its prime location adjacent to The Preserve, a massive 11,980-unit master planned community, ensuring a strong and growing customer base. The diverse tenant mix includes popular dining options like El Pollo Loco, Miguel's Jr, Starbucks, and Big Island BBQ, complemented by essential services such as The UPS Store, Great Clips, West Coast Dental, and Club Pilates. With ample parking, excellent visibility, and a thoughtfully curated blend of national brands and local businesses, Norco Village has established itself as the go-to neighborhood center for residents seeking quality, convenience, and community in the heart of Norco.",
+  "numberOfStores": 24,
+  "squareFootage": 113600,
+  "summary": "Norco Village is a 113,600 square foot neighborhood center anchored by Stater Bros. Markets and CVS, strategically located next to The Preserve master planned community. The center offers a convenient mix of dining, services, and retail including Starbucks, El Pollo Loco, Great Clips, and The UPS Store.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "5",
+      "type": "Inline",
+      "size": 1575,
+      "available": true
+    },
+    {
+      "number": "23",
+      "type": "Inline",
+      "size": 1292,
+      "available": true
+    }
+  ]
+}

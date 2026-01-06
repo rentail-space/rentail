@@ -1,24 +1,25 @@
 {
-  "name": "Stonewood Center",
   "address": "251 Stonewood Street",
   "city": "Downey",
+  "country": "US",
+  "googlePlaceID": "places/ChIJt6yNaYLNwoARQoIbG9W1L0w",
+  "name": "Stonewood Center",
   "state": "CA",
-  "website": "https://www.shopstonewoodcenter.com",
   "latitude": 33.9354835,
   "longitude": -118.11940329999997,
-  "country": "US",
   "phone": "++1 562-904-1832",
-  "imageURLs": ["/images/malls/ca-stonewood-center-1.jpg"],
-  "summary": "Popular brand-name shops, department stores & restaurants are the draw at this contemporary mall.",
+  "imageURLs": [
+    "/images/malls/ca-stonewood-center-1.jpg"
+  ],
+  "summary": "Stonewood Center is Downey's contemporary regional mall featuring popular brand-name retailers, department stores, and diverse dining options. With over 13,000 positive reviews and a 4.4-star rating, it serves as the primary shopping and entertainment destination for Southeast Los Angeles communities.",
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.4,
-  "reviewCount": 13651,
+  "reviewCount": 13672,
+  "website": "https://www.shopstonewoodcenter.com/?utm_source=rentail.space",
   "centerType": "RegionalMall",
-  "demographics": "Stonewood Center primarily serves middle-income families and young professionals in the Downey and southeastern Los Angeles County area, with a diverse demographic composition reflecting the local Hispanic, Asian, and Caucasian populations. The trade area includes households with median incomes in the $55,000-$85,000 range, with a strong representation of families with children and multigenerational households. Shopping patterns indicate a preference for value-oriented mainstream retailers, family dining options, and convenience-driven visits that combine errands with entertainment, particularly on evenings and weekends when the center's extended hours accommodate working families.",
-  "description": "Stonewood Center is a prominent shopping destination located in Downey, California, serving the southeastern Los Angeles County community with a diverse mix of retail, dining, and entertainment options. The center features an inviting atmosphere with both indoor and outdoor shopping areas, offering visitors a comfortable and convenient shopping experience. With amenities including events, Santa photos during the holiday season, and a variety of food and drink options including happy hour specials, Stonewood Center has positioned itself as more than just a shopping venue—it's a community gathering place. The center's extended operating hours from 10 AM to 10 PM demonstrate its commitment to accommodating shoppers' busy schedules. Located at 251 Stonewood Street, the center provides easy access for residents of Downey and surrounding communities, with ample parking and a well-maintained facility that continues to serve as a retail anchor in the area.",
-  "numberOfStores": 60,
-  "squareFootage": 450000,
+  "demographics": "Stonewood Center attracts a diverse, middle-income demographic primarily from the Downey area and surrounding Southeast Los Angeles communities. The trade area serves families and young professionals with household incomes ranging from $50,000 to $90,000, reflecting the working-class to middle-class composition of Downey and neighboring cities. Shoppers tend to be value-conscious consumers seeking popular brand names at accessible price points, with a significant Hispanic population that comprises a large portion of the local community. The center draws multi-generational shopping groups, particularly on weekends, with visitors seeking both practical retail needs and dining entertainment options.",
+  "description": "Stonewood Center stands as Downey's premier shopping destination, offering a contemporary mall experience that has served the Southeast Los Angeles community for decades. This enclosed regional mall features an impressive collection of popular brand-name shops and department stores that cater to the diverse needs of local families and shoppers. The center has evolved to become more than just a retail hub, incorporating a robust dining scene with numerous restaurants that make it a social gathering place for the community. With operating hours from 10 AM to 9 PM daily, Stonewood Center provides convenient access to shopping, dining, and entertainment under one roof. The mall's modern amenities and well-curated tenant mix have earned it a strong 4.4-star rating from over 13,000 reviews, reflecting its popularity and consistent appeal to visitors seeking quality retail experiences in the Downey area.",
   "tier": 2,
   "spaces": [
     {
@@ -26,7 +27,7 @@
       "type": "Cart",
       "size": 60,
       "floor": 1,
-      "available": true
+      "available": false
     },
     {
       "number": "B45",

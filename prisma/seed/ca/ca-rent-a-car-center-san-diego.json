@@ -1,0 +1,24 @@
+{
+  "address": "",
+  "city": "San Diego",
+  "country": "US",
+  "googlePlaceID": "places/ChIJKaYyZL-b3IARg5yz4hpHcaY",
+  "name": "Rent a Car Center SAN Diego",
+  "state": "CA",
+  "latitude": 32.7361875,
+  "longitude": -117.17818749999998,
+  "imageURLs": [
+    "/images/malls/ca-rent-a-car-center-san-diego-1.jpg"
+  ],
+  "summary": "The San Diego Airport Rental Car Center is a modern, 24-hour consolidated facility serving San Diego International Airport with convenient access to all major rental car brands. This essential travel hub streamlines the car rental experience for millions of visitors to San Diego each year.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.1,
+  "reviewCount": 1145,
+  "website": "https://www.sanrcc.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The San Diego Airport Rental Car Center primarily serves air travelers, business professionals, and tourists visiting the San Diego metropolitan area. The demographic profile skews toward middle to upper-middle income travelers aged 25-65, including both leisure vacationers and corporate business travelers. The facility serves a diverse, transient population with visitors from across the United States and internationally, reflecting San Diego's status as a major tourist destination and business hub.",
+  "description": "The San Diego Airport Rental Car Center (SANRCC) is a state-of-the-art consolidated rental car facility serving San Diego International Airport, one of the busiest single-runway commercial airports in the United States. This modern facility centralizes all rental car operations for the airport, providing travelers with convenient access to multiple major rental car brands under one roof. The center features a streamlined design that simplifies the car rental process for millions of annual visitors to San Diego, offering easy shuttle connections to and from the airport terminals. Operating 24 hours a day, seven days a week, the facility ensures that travelers can pick up and return vehicles at any time, accommodating early morning flights and late-night arrivals. With its strategic location near the airport and efficient operations, the San Diego Airport Rental Car Center has become an essential gateway for visitors exploring America's Finest City and the greater Southern California region.",
+  "tier": 2,
+  "spaces": []
+}

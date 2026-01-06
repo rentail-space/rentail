@@ -1,0 +1,26 @@
+{
+  "address": "3377 Las Vegas Boulevard South",
+  "city": "Las Vegas",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ5VWO1j3EyIAR6Rt0b_ZeVUs",
+  "name": "Grand Canal Shoppes at The Venetian Resort Las Vegas",
+  "state": "NV",
+  "latitude": 36.1223898,
+  "longitude": -115.1674242,
+  "phone": "++1 702-414-4525",
+  "imageURLs": [
+    "/images/malls/nv-grand-canal-shoppes-at-the-venetian-resort-las-vegas-1.jpg"
+  ],
+  "summary": "Grand Canal Shoppes at The Venetian Resort is an upscale shopping destination on the Las Vegas Strip featuring over 160 signature stores, premier luxury brands, and award-winning dining venues. The center offers a unique Venetian-themed experience complete with gondola rides along an indoor canal, daily live entertainment, and stunning Italian-inspired architecture.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.6,
+  "reviewCount": 18052,
+  "website": "https://www.grandcanalshoppes.com/en.html",
+  "centerType": "RegionalMall",
+  "demographics": "Grand Canal Shoppes attracts an affluent, international visitor base with a median household income significantly above the national average, drawing heavily from tourists staying at The Venetian Resort and Las Vegas Strip visitors. The demographic skews toward adults aged 25-54 with high disposable income, including both domestic luxury shoppers and international tourists, particularly from Asia and Latin America. The trade area extends globally given its tourist destination status, with visitors seeking premium shopping experiences, fine dining, and entertainment as part of their Las Vegas vacation.",
+  "description": "Grand Canal Shoppes at The Venetian Resort Las Vegas stands as one of the most extraordinary shopping destinations on the famous Las Vegas Strip, seamlessly blending Venetian-inspired architecture with world-class retail. This upscale resort mall features over 160 signature stores and premier luxury brands, offering everything from designer fashion to toys, tech, music, and gifts across its expansive indoor streetscape. The center distinguishes itself with its stunning recreation of Venice, complete with hand-painted frescoes, cobblestone walkways, and a quarter-mile Grand Canal where visitors can enjoy romantic gondola rides serenaded by singing gondoliers. Beyond shopping, the destination boasts more than a dozen award-winning dining venues and daily live entertainment, creating an immersive experience that transports guests to the heart of Italy. With its prime location at The Venetian Resort, convenient parking, and vibrant atmosphere featuring a colorful waterfall and garden in the Atrium, Grand Canal Shoppes has earned an impressive 4.6-star rating from over 18,000 reviews, cementing its status as a must-visit destination for both tourists and locals seeking an unparalleled luxury shopping experience.",
+  "numberOfStores": 160,
+  "tier": 3,
+  "spaces": []
+}

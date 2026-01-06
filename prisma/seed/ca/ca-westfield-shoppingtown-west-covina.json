@@ -1,0 +1,25 @@
+{
+  "address": "Plaza Drive",
+  "city": "West Covina",
+  "country": "US",
+  "googlePlaceID": "places/ChIJxX9MfwDXwoARIMCo-uVNpPM",
+  "name": "Westfield Shoppingtown West Covina",
+  "state": "CA",
+  "latitude": 34.0706849,
+  "longitude": -117.9326256,
+  "phone": "++1 626-960-8032",
+  "imageURLs": [
+    "/images/malls/ca-westfield-shoppingtown-west-covina-1.jpg"
+  ],
+  "openFrom": 1100,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 6,
+  "website": "http://westfield.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Westfield Shoppingtown West Covina attracts a diverse, middle-class demographic from the San Gabriel Valley, with a strong representation of families and Hispanic and Asian-American households. The trade area includes West Covina, Covina, Baldwin Park, and surrounding communities, with visitors typically in the 25-54 age range and household incomes ranging from $50,000 to $100,000. The center serves as a primary shopping destination for everyday needs and family-oriented shopping trips, with visitors seeking value-oriented national retailers and dining options. The mall draws both weekday shoppers and weekend family groups looking for a convenient, one-stop shopping experience.",
+  "description": "Westfield Shoppingtown West Covina is a prominent regional shopping destination located on Plaza Drive in West Covina, California, serving the San Gabriel Valley community. As part of the globally recognized Westfield brand, this shopping center offers visitors access to a curated mix of national retailers, dining options, and entertainment amenities that have made Westfield malls iconic destinations across Europe and the United States. The center features popular brands including H&M, Uniqlo, Sephora, Starbucks, and Lego, providing shoppers with the latest fashion, beauty, and lifestyle offerings. With convenient operating hours from 11:00 AM to 9:00 PM and modern amenities including click-and-collect services and Smart Parking technology, the mall is designed to accommodate both quick shopping trips and all-day family outings. Westfield Shoppingtown West Covina maintains a strong 4.3-star rating, reflecting its commitment to delivering quality retail experiences, community engagement, and the dynamic blend of shopping, dining, and entertainment that defines the Westfield brand.",
+  "summary": "Westfield Shoppingtown West Covina is a regional shopping center in the San Gabriel Valley featuring popular national retailers like H&M, Uniqlo, and Sephora. Part of the global Westfield brand, the mall offers modern conveniences including Smart Parking and click-and-collect services, along with diverse dining and entertainment options for the local community.",
+  "tier": 2,
+  "spaces": []
+}

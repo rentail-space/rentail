@@ -1,0 +1,22 @@
+{
+  "address": "22950 Vanowen Street",
+  "city": "Los Angeles",
+  "country": "US",
+  "googlePlaceID": "places/ChIJk9Ww2jScwoARxRSorVkejOY",
+  "name": "Fallbrook Center",
+  "state": "CA",
+  "latitude": 34.1901995,
+  "longitude": -118.6256637,
+  "imageURLs": ["/images/malls/ca-fallbrook-center-1.jpg"],
+  "summary": "Fallbrook Center is a well-established community shopping destination in Canoga Park that has served the West San Fernando Valley since 1963. The center offers a diverse mix of retail stores, restaurants, and a movie theater, providing convenient access to everyday shopping and entertainment for local residents.",
+  "openFrom": 700,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 5329,
+  "website": "http://www.fallbrookcenter.com/",
+  "centerType": "CommunityCenter",
+  "demographics": "Fallbrook Center serves a diverse, middle-class demographic in the West San Fernando Valley, attracting families and working professionals from the surrounding Canoga Park and Woodland Hills neighborhoods. The trade area includes a mix of homeowners and renters with moderate to middle income levels, with shoppers typically seeking convenient access to everyday retail, dining, and entertainment options. The center draws regular visits from local residents who value its accessibility and variety of national retailers and services.",
+  "description": "Fallbrook Center has been a cornerstone of the West San Fernando Valley community since opening its doors in 1963, serving generations of Los Angeles residents with convenient shopping and entertainment. Located at 22950 Vanowen Street in Canoga Park, this established shopping destination spans a diverse mix of retail stores, restaurants, and a movie theater, creating a one-stop experience for the local community. Managed by Perform Properties, a best-in-class real estate operating platform focused on creating dynamic spaces where people choose to work, shop, and gather, Fallbrook Center exemplifies the company's commitment to properties with \"People-Appeal.\" The center maintains strong community ties through its accessible location and tenant mix that caters to everyday needs, from grocery shopping to dining and entertainment. With over six decades of service to the area, Fallbrook Center continues to adapt and evolve while maintaining its role as a reliable neighborhood shopping hub that enhances the vitality of the surrounding community.",
+  "tier": 2,
+  "spaces": []
+}

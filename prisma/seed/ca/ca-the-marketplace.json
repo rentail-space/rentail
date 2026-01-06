@@ -1,0 +1,25 @@
+{
+  "address": "9000 Ming Avenue",
+  "city": "Bakersfield",
+  "country": "US",
+  "googlePlaceID": "places/ChIJIyPWx3pB6oARRtQWxpweR6E",
+  "name": "The Marketplace",
+  "state": "CA",
+  "latitude": 35.341361899999995,
+  "longitude": -119.10351700000001,
+  "phone": "++1 714-545-1400",
+  "imageURLs": [
+    "/images/malls/ca-the-marketplace-1.jpg"
+  ],
+  "summary": "The Marketplace Bakersfield is a premier open-air lifestyle center featuring national retailers like Vons, Ulta Beauty, and Starbucks, along with Edwards Cinemas and diverse dining options. Located near California State University Bakersfield, this beautifully landscaped shopping destination offers a welcoming, family-friendly environment with convenient parking and regular community events.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 2792,
+  "website": "https://www.themarketplacebakersfield.com/",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Marketplace Bakersfield attracts a diverse mix of families, young professionals, and college students from the surrounding Southwest Bakersfield area, with a strong presence from nearby California State University Bakersfield. The trade area serves middle to upper-middle income households seeking convenient access to national retailers, dining, and entertainment options. Primary shoppers include families with children drawn to the Edwards Cinemas and casual dining options, as well as younger demographics aged 18-35 who frequent Ulta Beauty, Starbucks, and the entertainment venues. The center benefits from its location in one of Bakersfield's more affluent residential corridors along Ming Avenue, attracting shoppers who value the convenience of an open-air shopping experience with ample parking.",
+  "description": "The Marketplace Bakersfield stands as a premier open-air lifestyle shopping destination in Southwest Bakersfield, California, strategically positioned at the corner of Ming Avenue and Haggin Oaks Boulevard. This beautifully landscaped shopping center offers a carefully curated mix of national retailers, local boutiques, restaurants, and entertainment venues that create a welcoming, family-friendly atmosphere for the community. Anchored by Vons grocery store and featuring popular destinations like Edwards Cinemas, Ulta Beauty, and Starbucks, The Marketplace has established itself as a go-to destination for shopping, dining, and entertainment in the region. The center's open-air design with attractive walkways and ample parking provides a comfortable and accessible shopping experience, while its proximity to California State University Bakersfield ensures a steady flow of diverse visitors. With its commitment to providing exclusive sales, community events, and the latest entertainment options including first-run movies, The Marketplace Bakersfield continues to serve as a vibrant gathering place that meets the everyday needs and lifestyle aspirations of Southwest Bakersfield residents.",
+  "tier": 2,
+  "spaces": []
+}

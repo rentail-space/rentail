@@ -1,0 +1,24 @@
+{
+  "address": "2234 Westborough Boulevard",
+  "city": "South San Francisco",
+  "country": "US",
+  "googlePlaceID": "places/ChIJQcBj7St6j4ARzSj56uVvkVI",
+  "name": "Westborough Square",
+  "state": "CA",
+  "latitude": 37.6446019,
+  "longitude": -122.45213799999999,
+  "imageURLs": [
+    "/images/malls/ca-westborough-square-1.jpg"
+  ],
+  "summary": "Westborough Square is a community shopping center in South San Francisco featuring multiple retail buildings with anchor tenants and neighborhood services. With over 1,640 reviews and a 4.2-star rating, it serves as a trusted local destination for everyday shopping needs.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.2,
+  "reviewCount": 1640,
+  "website": "http://westboroughsquare.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Westborough Square serves the diverse South San Francisco community, attracting middle-income families and working professionals from the surrounding residential neighborhoods. The trade area includes a mix of homeowners and renters with household incomes ranging from $75,000 to $150,000, reflecting the Bay Area's suburban workforce demographic. Primary shoppers include busy families seeking convenient access to everyday necessities, grocery shopping, and services, with a significant Asian-American population that influences tenant mix and shopping patterns.",
+  "description": "Westborough Square is a well-established community shopping center located at 2234 Westborough Boulevard in South San Francisco, California. This multi-building retail complex features a convenient layout with multiple structures including two anchor buildings and several additional buildings numbered 1, 2, 3, and 6, providing diverse retail and service options for the local community. Strategically positioned in South San Francisco's Westborough neighborhood, the center serves as a neighborhood hub for daily shopping needs and essential services. With a strong 4.2-star rating from over 1,640 Google reviews, Westborough Square has earned the trust and loyalty of local residents who appreciate its accessible location and practical tenant mix. The center's open-air design and ample parking make it a convenient destination for busy families and professionals seeking efficient shopping experiences in the heart of the Peninsula.",
+  "tier": 2,
+  "spaces": []
+}

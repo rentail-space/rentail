@@ -1,0 +1,25 @@
+{
+  "address": "Alabama Street",
+  "city": "Redlands",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ4bJ5rFeq3IAR6_qg-xJbPvs",
+  "name": "Redlands Town Center",
+  "state": "CA",
+  "latitude": 34.0718244,
+  "longitude": -117.2098943,
+  "phone": "++1 949-398-8750",
+  "imageURLs": [
+    "/images/malls/ca-redlands-town-center-1.jpg"
+  ],
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.5,
+  "reviewCount": 919,
+  "website": "http://www.redlandstowncenter.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Redlands Town Center attracts a diverse mix of families and professionals from the Redlands area and surrounding Inland Empire communities. The trade area serves middle to upper-middle income households, with a strong representation of families with children and young professionals aged 25-54. Located off the I-10 freeway along major thoroughfares Alabama Street and Lugonia Avenue, the center draws from both local residents seeking convenient shopping and dining options, as well as regional visitors traveling through the area. The customer base values accessibility, variety, and a mix of everyday retail and dining experiences.",
+  "description": "Redlands Town Center is a vibrant community shopping destination conveniently located off the 10 freeway along the major thoroughfares of Alabama Street and Lugonia Avenue in Redlands, California. This open-air shopping center offers visitors a diverse selection of stores, restaurants, and services, making it a one-stop destination for shopping, dining, and entertainment. The center's strategic location in the heart of the Inland Empire provides easy access for both local residents and regional visitors seeking quality retail experiences. With its thoughtfully curated mix of national retailers, local dining favorites, and essential services, Redlands Town Center has established itself as a gathering place for the community. The center's commitment to providing \"A Little Something for Everybody\" is evident in its varied tenant mix that caters to diverse shopping needs, from everyday essentials to special occasions, complemented by an array of culinary options that invite guests to take a bite and explore.",
+  "summary": "Redlands Town Center is a community shopping destination in Redlands, California, featuring a diverse selection of stores, restaurants, and services. Conveniently located off the I-10 freeway, the center offers easy access and a welcoming environment for shopping, dining, and entertainment.",
+  "tier": 2,
+  "spaces": []
+}

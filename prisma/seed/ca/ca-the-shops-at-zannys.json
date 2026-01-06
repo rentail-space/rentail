@@ -1,0 +1,24 @@
+{
+  "address": "61877 29 Palms Highway",
+  "city": "Joshua Tree",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ0VlQb5zb2oARBypt6ttqL1E",
+  "name": "The Shops at Zanny's",
+  "state": "CA",
+  "latitude": 34.1347249,
+  "longitude": -116.31348630000001,
+  "phone": "++1 760-574-5267",
+  "imageURLs": [
+    "/images/malls/ca-the-shops-at-zannys-1.jpg"
+  ],
+  "summary": "The Shops at Zanny's is a distinctive collection of artisan bungalows in Joshua Tree's East Village Shopping District, featuring nine unique merchants offering crystals, desert art, handcrafted goods, and specialty coffee. This bohemian shopping destination captures the creative spirit of the Joshua Tree community with locally-made products and an authentic desert atmosphere.",
+  "openFrom": 1000,
+  "openUntil": 1800,
+  "website": "http://shopsatzannys.com/",
+  "centerType": "StripCenter",
+  "demographics": "The Shops at Zanny's attracts a diverse mix of creative professionals, artists, and tourists visiting Joshua Tree National Park. The primary demographic includes millennials and Gen X visitors aged 25-55 with middle to upper-middle income levels, drawn to the area's artistic community and desert lifestyle. The trade area serves both local residents of the Morongo Basin and a significant tourist population seeking unique, handcrafted goods and desert-inspired art. Shoppers here value authenticity, sustainability, and locally-made products over mass-market retail.",
+  "description": "The Shops at Zanny's is a unique desert shopping destination located in the heart of Joshua Tree's East Village Shopping District. This charming collection of permanent bungalows and sheds houses an eclectic mix of independent merchants offering everything from crystals and desert-inspired art to handcrafted goods and specialty coffee. The center features distinctive vendors including Realm of Crystal, Sharkbite Desert Emporium, Lost Horse Goods, other Desert Cities Art, Forged in Flowers, Earthloving Art, Rainbow SparkZ Circus, Cactus Flower Coffee, and Love Earth Designs. The shopping center embraces the artistic spirit of Joshua Tree, providing a platform for local artisans and creative entrepreneurs to showcase their work in a welcoming, community-focused environment. With its bohemian atmosphere and carefully curated selection of unique merchants, The Shops at Zanny's has become a beloved destination for both locals and visitors exploring the Joshua Tree area, offering an authentic desert shopping experience that reflects the creative soul of this iconic California desert community.",
+  "numberOfStores": 9,
+  "tier": 2,
+  "spaces": []
+}

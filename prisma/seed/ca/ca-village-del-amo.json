@@ -1,0 +1,24 @@
+{
+  "address": "21221 Hawthorne Boulevard",
+  "city": "Torrance",
+  "country": "US",
+  "googlePlaceID": "places/ChIJTT5r49K0woARu9FYARTvcMU",
+  "name": "Village Del Amo",
+  "state": "CA",
+  "latitude": 33.8362495,
+  "longitude": -118.3542133,
+  "imageURLs": [
+    "/images/malls/ca-village-del-amo-1.jpg"
+  ],
+  "summary": "Village Del Amo is a community-oriented shopping center in Torrance offering a convenient mix of dining, shopping, fitness, and services for South Bay residents. With strong ratings and a neighborhood-focused tenant mix, it serves as a reliable destination for everyday needs.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 1602,
+  "website": "https://www.villagedelamo.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Village Del Amo attracts a diverse middle to upper-middle class demographic from the South Bay area of Los Angeles, including families and professionals from Torrance, Redondo Beach, and surrounding communities. The trade area serves households with median incomes ranging from $75,000 to $125,000, with a strong representation of dual-income families and homeowners aged 35-65. The center draws convenience-oriented shoppers seeking everyday services, fitness options, and casual dining in a neighborhood setting, with visitors typically making frequent trips for routine shopping and service needs rather than destination retail experiences.",
+  "description": "Village Del Amo is a community-focused shopping destination located in the heart of Torrance, California, serving the South Bay area with a convenient mix of shopping, dining, fitness, and professional services. Situated at 21221 Hawthorne Boulevard, this open-air center has established itself as a neighborhood hub where residents can accomplish multiple errands in one visit. The center features a thoughtfully curated tenant mix that includes dining options, retail shops, fitness facilities, and office spaces, creating a versatile environment that meets the daily needs of the local community. With operating hours from 10:00 AM to 9:00 PM and a strong 4.3-star rating from over 1,600 Google reviews, Village Del Amo has earned the trust and loyalty of South Bay residents. The center's accessible layout and diverse offerings make it an essential part of the Torrance retail landscape, providing a welcoming atmosphere for families, professionals, and fitness enthusiasts alike.",
+  "tier": 2,
+  "spaces": []
+}

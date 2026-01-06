@@ -1,0 +1,26 @@
+{
+  "address": "998 Laurel Road",
+  "city": "Oakley",
+  "country": "US",
+  "googlePlaceID": "places/ChIJgRveJwD_j4ARVmYPEF7pI_A",
+  "name": "Oakley Shops at Laurel Fields",
+  "state": "CA",
+  "latitude": 37.984235,
+  "longitude": -121.71282699999999,
+  "imageURLs": [
+    "/images/malls/ca-oakley-shops-at-laurel-fields-1.jpg"
+  ],
+  "summary": "Oakley Shops at Laurel Fields is a 78,230 square foot community shopping center anchored by Safeway, located at the gateway between the Bay Area and Central Valley. The center serves an affluent Oakley community with household incomes averaging $165,321 and features a mix of retail, dining, and service tenants.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 5,
+  "reviewCount": 1,
+  "website": "https://www.regencycenters.com/property/detail/60992/Oakley-Shops-at-Laurel-Fields?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Oakley Shops at Laurel Fields serves a prosperous suburban community with a 3-mile trade area population of 86,091 residents and an average household income of $165,321. The primary market consists of middle to upper-middle class families with an average home value of $807,199, reflecting the area's strong residential growth between the Bay Area and Central Valley. The daytime population of 61,639 indicates a mix of local residents and commuters, with shopping patterns focused on convenience-oriented grocery and service needs anchored by Safeway.",
+  "description": "Oakley Shops at Laurel Fields is a thriving community shopping center strategically positioned at the gateway between the Bay Area and Central Valley along Laurel Road and O'Hara Avenue in Oakley, California. This 78,230 square foot center serves as a vital retail hub in the heart of the Oakley community, anchored by Safeway and featuring a carefully curated mix of retailers, restaurants, salons, medical spaces, and fitness facilities. Developed and managed by Regency Centers, the property exemplifies the company's Fresh Look® philosophy of creating neighborhood gathering places that meet the daily needs of local residents. The center benefits from its location in one of the fastest-growing communities in Contra Costa County, serving an affluent trade area with household incomes averaging over $165,000 within three miles. With two spaces currently available for lease and strong demographics supporting continued growth, Oakley Shops at Laurel Fields represents a premier shopping destination for East Bay families seeking quality retail and services close to home.",
+  "numberOfStores": 2,
+  "squareFootage": 78230,
+  "tier": 2,
+  "spaces": []
+}

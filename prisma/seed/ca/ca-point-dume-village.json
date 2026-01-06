@@ -1,0 +1,26 @@
+{
+  "address": "Heathercliff Road",
+  "city": "Malibu",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ6Txm8_YY6IARm7fvxUFiO7k",
+  "name": "Point Dume Village",
+  "state": "CA",
+  "latitude": 34.0211429,
+  "longitude": -118.809605,
+  "phone": "++1 310-457-3606",
+  "imageURLs": [
+    "/images/malls/ca-point-dume-village-1.jpg"
+  ],
+  "openFrom": 500,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 824,
+  "website": "https://pointdumevillage.com/shops/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Point Dume Village serves an affluent coastal Malibu community with high household incomes exceeding $150,000 annually and a demographic skewing toward families and professionals aged 35-65. The trade area attracts both local residents from the Point Dume neighborhood and visitors to the Malibu coastal region, with shoppers seeking convenience-oriented services, organic and health-focused options, and upscale everyday amenities. The center caters to an educated, health-conscious clientele who value quality, local businesses, and a relaxed beach community atmosphere.",
+  "description": "Point Dume Village is a neighborhood shopping center located on Heathercliff Road in the prestigious Point Dume area of Malibu, California, serving the local coastal community for decades. This family-friendly center features a carefully curated mix of essential services and specialty retailers, anchored by Pavilions grocery store which has been a neighborhood staple for almost 100 years. The center is home to beloved local establishments including Lily's Malibu, a family-owned business operating for over 25 years, and D'amore's Naturally Pizza, serving the best tasting pizza since 1987. Health and wellness are central to the Point Dume Village experience, with tenants like Sun Life Organics offering handcrafted vegan and classic ice cream, Good Point Pilates providing quality movement instruction, and Point Dume Cleaners offering 100% natural and chemical-free wet cleaning services. Beyond retail and dining, the center provides professional services including Chase Bank with Private Client services, Dume Plaza Pharmacy serving Malibu for over 20 years, B.W. Baker Insurance as the largest locally-owned insurance agency in Malibu, and personal care services like SALT Salon Malibu and a neighborhood nail salon, making it a true one-stop destination for the Point Dume community.",
+  "numberOfStores": 17,
+  "summary": "Point Dume Village is a neighborhood shopping center in Malibu's prestigious Point Dume area, featuring Pavilions grocery store alongside beloved local businesses like Lily's Malibu and D'amore's Pizza. The center offers a complete mix of retail, dining, health and wellness services, and professional offices serving the coastal community.",
+  "tier": 2,
+  "spaces": []
+}

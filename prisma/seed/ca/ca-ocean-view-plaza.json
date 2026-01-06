@@ -1,0 +1,27 @@
+{
+  "address": "638 Camino De Los Mares",
+  "city": "San Clemente",
+  "country": "US",
+  "googlePlaceID": "places/ChIJj6aDqWXx3IARi1kV1sef55U",
+  "name": "Ocean View Plaza",
+  "state": "CA",
+  "latitude": 33.4573946,
+  "longitude": -117.6516352,
+  "phone": "++1 610-215-7939",
+  "imageURLs": [
+    "/images/malls/ca-ocean-view-plaza-1.jpg"
+  ],
+  "openFrom": 600,
+  "openUntil": 0,
+  "rating": 4.4,
+  "reviewCount": 816,
+  "website": "https://properties.brixmor.com/p/retail-real-estate/San%20Clemente-CA-92673/oceanviewplaza?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Ocean View Plaza serves an affluent and highly educated trade area with average household incomes exceeding $175,000 within 3 miles and 47% of residents holding college degrees. The center draws from a strong daytime population of over 72,000 workers within 3 miles, complementing the residential base of approximately 69,000 people in the surrounding area. The demographic profile reflects San Clemente's coastal community character, attracting health-conscious, active lifestyle consumers who value quality retailers and convenient shopping experiences. The center's estimated 2.7 million annual visits indicate strong appeal to both local residents and the broader Orange County market seeking everyday necessities and specialty services.",
+  "description": "Ocean View Plaza is a premier dual-anchored community shopping center located at 638 Camino de Los Mares in the heart of San Clemente, California. Spanning 169,963 square feet, this highly trafficked destination draws an impressive 2.7 million annual visits and serves one of Orange County's most affluent communities. The center features powerhouse anchors Ralphs and Trader Joe's, complemented by a carefully curated mix of national retailers including CVS/pharmacy, Starbucks Coffee, Chase Bank, and Wells Fargo, alongside fitness destination Crunch and popular dining options like The Habit Burger Grill and Yoshiharu Ramen. Strategically positioned adjacent to Plaza by the Sea with exceptional visibility on Camino de Los Mares, the center benefits from over 34,000 vehicles passing daily and serves a trade area where average household incomes exceed $175,000 within 3 miles. With its strong tenant roster, affluent customer base, and prime coastal location in the Los Angeles-Long Beach-Anaheim metro area, Ocean View Plaza represents a thriving retail hub that combines everyday convenience with specialty shopping and services for San Clemente's discerning residents.",
+  "numberOfStores": 50,
+  "squareFootage": 169963,
+  "summary": "Ocean View Plaza is a 169,963 square foot community shopping center in San Clemente anchored by Ralphs and Trader Joe's, featuring over 50 national and regional retailers. The center draws 2.7 million annual visits and serves an affluent coastal trade area with average household incomes exceeding $175,000.",
+  "tier": 2,
+  "spaces": []
+}

@@ -1,0 +1,24 @@
+{
+  "address": "",
+  "city": "Torrance",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ____uz9L3YARML_KGUbbWac",
+  "name": "Plaza Mayor Shopping Center",
+  "state": "CA",
+  "latitude": 33.813083299999995,
+  "longitude": -118.3683768,
+  "imageURLs": [
+    "/images/malls/ca-plaza-mayor-shopping-center-1.jpg"
+  ],
+  "summary": "Plaza Mayor Shopping Center is a community-oriented open-air retail destination in Torrance, California, offering a practical mix of shops, restaurants, and services. With a strong 4.4-star rating and convenient South Bay location, it serves as a reliable neighborhood shopping hub for local residents.",
+  "openFrom": 600,
+  "openUntil": 100,
+  "rating": 4.4,
+  "reviewCount": 438,
+  "website": "http://www.shopplazamayor.com/shops--restaurants.html",
+  "centerType": "CommunityCenter",
+  "demographics": "Plaza Mayor Shopping Center serves a diverse, middle-class demographic in the South Bay area of Los Angeles County, with a strong representation of families and working professionals. The trade area attracts a multicultural customer base reflective of Torrance's demographics, including significant Asian-American and Hispanic populations with moderate to upper-middle income levels. Primary shoppers include households seeking convenient neighborhood retail and dining options, with typical visitors ranging from young families to established homeowners aged 25-65 who value accessibility and practical shopping experiences.",
+  "description": "Plaza Mayor Shopping Center is a well-established community shopping destination located in Torrance, California, serving the South Bay area of Los Angeles County. This open-air shopping center has been a neighborhood fixture for decades, providing residents with convenient access to everyday retail, dining, and service options. The center features a practical mix of national retailers, local businesses, and restaurants that cater to the diverse community of Torrance and surrounding cities. With its accessible location and ample parking, Plaza Mayor has maintained its relevance as a go-to destination for routine shopping needs and casual dining experiences. The center's strong rating of 4.4 stars from hundreds of reviews reflects its consistent service to the local community and its role as a reliable neighborhood shopping hub.",
+  "tier": 2,
+  "spaces": []
+}

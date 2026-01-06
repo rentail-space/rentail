@@ -1,0 +1,24 @@
+{
+  "address": "North Main Street",
+  "city": "Corona",
+  "country": "US",
+  "googlePlaceID": "places/ChIJg_5przvI3IARNfIeLfSyP8o",
+  "name": "North Main Plaza",
+  "state": "CA",
+  "latitude": 33.8923904,
+  "longitude": -117.5649884,
+  "imageURLs": [
+    "/images/malls/ca-north-main-plaza-1.jpg"
+  ],
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 626,
+  "website": "http://rodrigos.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "North Main Plaza serves a diverse, family-oriented community in Corona, California, with a strong Hispanic demographic base reflective of the surrounding neighborhoods. The trade area attracts middle-income households seeking convenient, value-oriented shopping and dining options, with visitors typically ranging from young families to established households. Shopping patterns emphasize frequent visits for everyday needs, casual dining, and family gatherings, with strong weekend traffic from the local residential community within a 3-5 mile radius.",
+  "description": "North Main Plaza is a neighborhood shopping destination located on North Main Street in Corona, California, serving the local community with convenient retail and dining options. This accessible plaza has established itself as a gathering place for residents seeking everyday shopping needs and casual dining experiences. The center maintains a welcoming, community-focused atmosphere that reflects the character of Corona's diverse neighborhoods. With its convenient location along North Main Street, the plaza provides easy access for local shoppers and families looking for a quick shopping trip or meal out. North Main Plaza has earned a solid reputation among local residents, as evidenced by its 4.4-star rating from over 600 reviews, demonstrating its consistent service to the Corona community.",
+  "summary": "North Main Plaza is a community-oriented shopping center on North Main Street in Corona, California, offering convenient retail and dining options for local residents. With a 4.4-star rating from over 600 reviews, this accessible plaza serves as a neighborhood gathering place for everyday shopping needs.",
+  "tier": 2,
+  "spaces": []
+}

@@ -1,0 +1,25 @@
+{
+  "address": "31176 Hawthorne Boulevard",
+  "city": "Rancho Palos Verdes",
+  "country": "US",
+  "googlePlaceID": "places/ChIJvWkL6RpM3YARfLamQGmW7H0",
+  "name": "Golden Cove Center",
+  "state": "CA",
+  "latitude": 33.7487372,
+  "longitude": -118.40639630000001,
+  "imageURLs": [
+    "/images/malls/ca-golden-cove-center-1.jpg"
+  ],
+  "summary": "Golden Cove Center is a well-appointed neighborhood shopping center in Rancho Palos Verdes, anchored by Trader Joe's and featuring a diverse mix of dining, retail, and professional services. This community-focused destination serves the affluent Palos Verdes Peninsula with quality tenants ranging from specialty food markets to wellness providers.",
+  "openFrom": 600,
+  "openUntil": 0,
+  "rating": 4.5,
+  "reviewCount": 1058,
+  "website": "https://www.shopgoldencove.com/shops--restaurants.html",
+  "centerType": "StripCenter",
+  "demographics": "Golden Cove Center serves the affluent Rancho Palos Verdes community, attracting primarily upper-middle-class to wealthy families with household incomes exceeding $150,000. The trade area draws educated professionals, retirees, and established families who value quality and convenience in their daily shopping. Visitors typically seek specialty groceries, health and wellness services, and upscale dining options, reflecting the sophisticated tastes of the Palos Verdes Peninsula's residential population.",
+  "description": "Golden Cove Center is a premier neighborhood shopping destination nestled in the scenic coastal community of Rancho Palos Verdes, California. Anchored by the beloved Trader Joe's, this well-curated center offers an exceptional mix of specialty retail, dining, and professional services that cater to the discerning tastes of Peninsula residents. The center features an impressive array of culinary options, from authentic international cuisine at Swan Thai and Asaka Sushi to casual favorites like Peninsula Tap House and Tomatillo Mexican Grill, complemented by artisanal treats from Golden Scoop Gelato. Beyond dining and grocery shopping, Golden Cove Center serves as a comprehensive community hub with essential services including Golden Cove Pharmacy, Chase Bank, urgent care facilities, and wellness providers like YouthFill MD MedSpa and Peak Orthopedic Physical Therapy. With its prime location on Hawthorne Boulevard and stunning coastal proximity, the center combines everyday convenience with the upscale character that defines the Palos Verdes lifestyle.",
+  "numberOfStores": 27,
+  "tier": 2,
+  "spaces": []
+}
