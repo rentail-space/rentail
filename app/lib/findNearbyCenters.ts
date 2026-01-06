@@ -1,7 +1,7 @@
 import type { User } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import prisma from "~/lib/prisma";
-import { useMemoryOrHeaders } from "./geocode";
+import { geocodeFromUserInput, geocodeMemoryOrHeaders } from "./geocode";
 
 /**
  * Find the shopping centers within a given distance from the user. Gets the
@@ -18,17 +18,20 @@ import { useMemoryOrHeaders } from "./geocode";
 export default async function findNearbyCenters({
   headers,
   user,
+  limit = 10,
+  location,
 }: {
   headers: Headers;
   user?: User;
+  limit?: number;
+  location?: string;
 }): Promise<{
   centers: PropertyGetPayload<{ include: { spaces: true } }>[];
   displayName: string;
 }> {
-  const { displayName, longitude, latitude } = await useMemoryOrHeaders({
-    user,
-    headers,
-  });
+  const { displayName, longitude, latitude } =
+    (location && (await geocodeFromUserInput(location))) ||
+    (await geocodeMemoryOrHeaders({ user, headers }));
 
   const maxDistance = 30; // miles
   const centers = await prisma.property.findMany({
@@ -37,6 +40,16 @@ export default async function findNearbyCenters({
         where: { available: true },
       },
     },
+    // Sort by:
+    // - Highest tier (3rd tier is the best)
+    // - More available spaces
+    // - Highest rating (5 star is the best)
+    orderBy: [
+      { tier: "desc" },
+      { spaces: { _count: "desc" } },
+      { rating: "desc" },
+    ],
+    take: limit,
     where: {
       latitude: {
         gte: latitude - maxDistance / 69.172,
@@ -46,6 +59,7 @@ export default async function findNearbyCenters({
         gte: longitude - maxDistance / 57.393,
         lte: longitude + maxDistance / 57.393,
       },
+      rating: { gte: 4 },
     },
   });
   return { centers, displayName };

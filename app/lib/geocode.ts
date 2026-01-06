@@ -31,7 +31,7 @@ const logger = debug("geocode");
  *   geocode request headers ->
  *   fallback to LA midcity
  */
-export async function useMemoryOrHeaders({
+export async function geocodeMemoryOrHeaders({
   user,
   headers,
 }: {
