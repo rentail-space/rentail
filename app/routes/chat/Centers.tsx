@@ -204,6 +204,7 @@ function HoverCard({
             alt={center.name}
             figureClassName="border-y-2 border-black"
             maxHeight={300}
+            minHeight={100}
             src={center.imageURLs[0]}
           />
           <div className="p-4 font-bold text-black text-sm">
