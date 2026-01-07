@@ -8,7 +8,9 @@
   "latitude": 34.0706843,
   "longitude": -117.9326269,
   "phone": "++1 626-960-8032",
-  "imageURLs": ["/images/malls/ca-plaza-west-covina-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-plaza-west-covina-1.jpg"
+  ],
   "summary": "Plaza West Covina is west Los Angeles County's premier shopping destination featuring over 185 stores and restaurants, including Nordstrom Rack, H&M, and Victoria's Secret. This expansive regional center offers exceptional dining options like Lazy Dog Restaurant & Bar and Gen Korean BBQ House, along with entertainment venues and regular community events.",
   "openFrom": 1100,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Plaza West Covina stands as the premier shopping and entertainment destination in west Los Angeles County, conveniently located off the 10 Freeway and Vincent Avenue. This expansive regional shopping center features over 185 stores and restaurants, offering an impressive mix of national retailers and unique local boutiques that cater to every shopping need. Anchor tenants and popular retailers include Nordstrom Rack, H&M, Victoria's Secret, Bath & Body Works, and Forever 21, providing fashion-forward shoppers with endless options. The center has evolved into a true lifestyle destination with exceptional dining experiences, featuring full-service restaurants like Lazy Dog Restaurant & Bar, Lucille's Smokehouse Bar-B-Que, Gen Korean BBQ House, and Mikomi Sushi, alongside quick-service favorites like Chipotle Mexican Grill. Beyond shopping and dining, Plaza West Covina offers entertainment options including Jump n Jammin and fitness facilities like Gold's Gym, while hosting regular community events that bring neighbors together. The light-filled, modern complex creates an inviting atmosphere for families and individuals alike, making it the go-to destination for the west Los Angeles County community seeking quality retail, exceptional dining, and memorable experiences all in one convenient location.",
   "numberOfStores": 185,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 35.15618133389788
 }

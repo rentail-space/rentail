@@ -8,7 +8,9 @@
   "latitude": 37.415738,
   "longitude": -121.897412,
   "phone": "++1 408-956-2033",
-  "imageURLs": ["/images/malls/ca-great-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-great-mall-1.jpg"
+  ],
   "summary": "Great Mall is the Bay Area's largest indoor outlet shopping center, featuring over 200 brand-name stores offering discounted prices on fashion, electronics, and home goods. Located in Milpitas near major Silicon Valley tech hubs, this Simon Property Group destination combines extensive retail options with diverse dining in a climate-controlled environment.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Great Mall attracts a diverse, value-conscious demographic spanning middle to upper-middle income families from the greater San Jose and Silicon Valley area. The primary trade area includes tech-savvy professionals, young families, and Asian-American shoppers who represent a significant portion of Milpitas' population. Visitors typically range from ages 25-54 with household incomes between $75,000-$150,000, drawn by the outlet pricing and brand-name selection. The center serves as a regional destination for bargain hunters willing to travel 20-30 minutes for discounted merchandise from premium brands.",
   "description": "Great Mall stands as one of Northern California's premier outlet shopping destinations, located in the heart of Silicon Valley in Milpitas. Originally opened in 1994 as a traditional enclosed mall, the center was transformed into an outlet format in 2003, becoming the largest indoor outlet mall in the Bay Area. Managed by Simon Property Group, Great Mall features over 200 brand-name specialty shops and department stores offering discounted prices on everything from fashion and footwear to home goods and electronics. The center's extensive dining options include a diverse food court and numerous restaurants catering to the area's multicultural population. With its convenient location near major highways and tech employment centers, Great Mall has become a go-to shopping destination for value-seeking consumers throughout the San Francisco Bay Area, combining the convenience of indoor shopping with the savings of outlet pricing.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 37.53884745003745
 }

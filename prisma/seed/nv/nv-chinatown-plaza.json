@@ -8,7 +8,9 @@
   "latitude": 36.1256917,
   "longitude": -115.19605000000001,
   "phone": "++1 702-221-8448",
-  "imageURLs": ["/images/malls/nv-chinatown-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/nv-chinatown-plaza-1.jpg"
+  ],
   "summary": "Chinatown Plaza is Las Vegas's premier Asian cultural destination featuring authentic Tang Dynasty architecture, diverse Asian dining options, and specialty shops. The center hosts major cultural events including Lunar New Year celebrations and the Japan Fair, serving as a vibrant hub for the Asian-American community and cultural enthusiasts.",
   "openFrom": 0,
   "openUntil": 2400,
@@ -19,5 +21,6 @@
   "demographics": "Chinatown Plaza attracts a diverse demographic with a strong concentration of Asian-American visitors, particularly Chinese, Japanese, and other East Asian communities seeking authentic cultural experiences and cuisine. The center draws middle to upper-middle income households ranging from young professionals to families and seniors who value cultural authenticity and traditional Asian products. The trade area extends beyond the immediate Las Vegas Chinatown district, attracting tourists from the Strip and locals from across the Las Vegas valley seeking authentic Asian dining and shopping experiences. Visitors typically engage in destination shopping for specialty groceries, dining experiences, and cultural events, with increased traffic during cultural celebrations like Lunar New Year.",
   "description": "Chinatown Plaza stands as Las Vegas's premier Asian cultural destination, offering an authentic slice of East Asian heritage in the heart of the Entertainment Capital of the World. Established as the centerpiece of Las Vegas's Chinatown district on Spring Mountain Road, the plaza features stunning Tang Dynasty-inspired architecture that transports visitors to ancient China with its traditional design elements and cultural authenticity. The center serves as a vibrant hub for the Asian-American community and curious visitors alike, hosting major cultural celebrations including the annual Year of the Dragon festivities and the Las Vegas Japan Fair, which draw thousands of attendees for traditional performances, authentic cuisine, and cultural exhibitions. With its diverse collection of restaurants serving cuisine from across Asia—including Chinese, Japanese, Korean, and Vietnamese establishments—alongside specialty shops offering everything from traditional herbs to imported goods, Chinatown Plaza provides an immersive cultural experience unmatched in Southern Nevada. Operating daily from 10 AM to 9 PM, the plaza has earned a stellar 4.2-star rating from nearly 5,000 reviews, cementing its reputation as a must-visit destination for both locals seeking authentic Asian products and tourists looking to experience genuine cultural diversity beyond the Las Vegas Strip.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.0184338729135
 }

@@ -8,7 +8,9 @@
   "latitude": 38.0635966,
   "longitude": -122.53317670000001,
   "phone": "++1 415-277-6836",
-  "imageURLs": ["/images/malls/ca-hamilton-marketplace-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-hamilton-marketplace-1.jpg"
+  ],
   "summary": "Hamilton Marketplace is a community-focused shopping center in Novato anchored by Safeway and featuring a strong mix of fast-casual dining, wellness services, and everyday conveniences. The center caters to Marin County's health-conscious residents with tenants like Nekter Juice, Massage Heights, and Sutter Walk-In Care alongside popular eateries and essential services.",
   "openFrom": 700,
   "openUntil": 1900,
@@ -20,5 +22,6 @@
   "description": "Hamilton Marketplace is a vibrant community shopping destination located in Novato, California, serving the North Bay area with a carefully curated mix of essential services and lifestyle retailers. Anchored by Safeway, the center has evolved into a neighborhood hub featuring an impressive array of dining options including Super Duper Burgers, Teriyaki Madness, World Famous Hot Boys Chicken, Sourdough & Co., and the artisan Rustic Bakery. Health and wellness are central to the marketplace's identity, with tenants like Massage Heights, Nekter Juice, Sutter Walk-In Care, and the upcoming X·Core Studio fitness facility catering to Marin County's health-conscious residents. The center also provides convenient everyday services through Wells Fargo banking, Pet Food Express, and the beloved Peet's Coffee & Tea, creating a one-stop destination for the community. With its open-air design and accessible location at 5800 Nave Drive, Hamilton Marketplace maintains extended hours seven days a week, making it a convenient gathering place for Novato families and professionals seeking quality shopping and dining experiences.",
   "numberOfStores": 14,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 19.372294694019974
 }

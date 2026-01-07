@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 34.0380767,
   "longitude": -118.6856217,
-  "imageURLs": ["/images/malls/ca-malibu-park-at-cross-creek-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-malibu-park-at-cross-creek-1.jpg"
+  ],
   "openFrom": 630,
   "openUntil": 2100,
   "rating": 4.8,
@@ -18,5 +20,6 @@
   "description": "The Park at Cross Creek stands as a premier lifestyle destination in the heart of Malibu, California, offering a thoughtfully curated shopping and dining experience that reflects the sophisticated tastes of the coastal community. Anchored by Whole Foods Market, which serves as the cornerstone tenant, this open-air center seamlessly blends grocery shopping with a synergistic mix of specialty retailers, restaurants, and wellness services designed to cater to the needs of both residents and visitors. The center's commitment to community extends beyond commerce through its partnership with Big Green, a nationwide organization that connects children to real food through Learning Gardens and food literacy programs. With amenities spanning wellness, quality retail, and dining in style, The Park at Cross Creek has established itself as more than just a shopping center—it's a gathering place where the Malibu community can eat, shop, play, and relax in an environment that celebrates healthy living and sustainable practices. Located at 23401 Civic Center Way, the center maintains a strong reputation with a 4.8-star rating, reflecting its success in delivering an elevated retail experience that honors the unique character of Malibu.",
   "summary": "The Park at Cross Creek is a premier lifestyle center in Malibu anchored by Whole Foods Market, featuring a curated mix of specialty retailers, restaurants, and wellness services. This open-air destination serves the community with an emphasis on healthy living, quality goods, and sustainable practices, including a partnership with Big Green's food literacy programs.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 23.224087536764188
 }

@@ -8,7 +8,9 @@
   "latitude": 35.3378163,
   "longitude": -119.0337556,
   "phone": "++1 661-396-2801",
-  "imageURLs": ["/images/malls/ca-valley-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-valley-plaza-1.jpg"
+  ],
   "summary": "Valley Plaza is the largest shopping mall in the San Joaquin Valley, featuring over 140 specialty stores, a 16-screen cinema, and diverse dining options. This family-friendly destination in Bakersfield serves as the premier retail and entertainment hub for central California.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Valley Plaza stands as the premier shopping destination in Bakersfield and the largest shopping mall in the entire San Joaquin Valley, offering an unparalleled retail experience in central California. This spacious and stylish complex features more than 140 specialty stores showcasing favorite national brands, providing everything from fashion and accessories to home goods and electronics. Beyond shopping, Valley Plaza serves as a complete entertainment hub with a 16-screen Reading Cinemas movie theater and an array of delicious dining options ranging from quick casual to sit-down restaurants. The mall's family-friendly atmosphere and diverse tenant mix make it the go-to gathering place for the community, whether visitors are seeking the latest fashion trends, enjoying a meal with friends, or catching the newest blockbuster film. Managed by Brookfield Properties, Valley Plaza continues to evolve and adapt to meet the needs of its diverse customer base, maintaining its position as the retail anchor of the region.",
   "numberOfStores": 140,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 33.68366846435302
 }

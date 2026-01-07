@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.6711345,
   "longitude": -117.952334,
-  "imageURLs": ["/images/malls/ca-brookhurst-adams-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-brookhurst-adams-1.jpg"
+  ],
   "openFrom": 900,
   "openUntil": 2200,
   "rating": 4.5,
@@ -18,5 +20,6 @@
   "description": "Brookhurst & Adams is a convenient neighborhood shopping center located at the intersection of Brookhurst Street and Adams Avenue in Huntington Beach, California. This well-positioned retail destination serves the local community with easy access and ample parking for everyday shopping needs. The center maintains strong visibility along one of Huntington Beach's major thoroughfares, making it a go-to location for residents seeking convenient retail and service options. With operating hours from 9:00 AM to 10:00 PM daily, Brookhurst & Adams accommodates busy schedules and provides flexible shopping times for the surrounding neighborhoods. The property has earned a solid 4.5-star rating from 482 reviews, reflecting its role as a reliable community shopping destination in Orange County's coastal region.",
   "summary": "Brookhurst & Adams is a neighborhood shopping center conveniently located at a major intersection in Huntington Beach. With a 4.5-star rating and extended daily hours, it serves as a reliable retail destination for the local community.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 12.073711672074824
 }

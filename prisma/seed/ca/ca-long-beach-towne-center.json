@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.8289653,
   "longitude": -118.0881214,
-  "imageURLs": ["/images/malls/ca-long-beach-towne-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-long-beach-towne-center-1.jpg"
+  ],
   "summary": "Long Beach Towne Center is an open-air lifestyle destination featuring 50+ national retailers, restaurants, and a movie theater in Long Beach, California. The center serves as a community hub with seasonal entertainment including popular summer concerts, offering a convenient one-stop shopping and dining experience.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "description": "Long Beach Towne Center stands as a premier open-air lifestyle destination in the heart of Long Beach, California, offering visitors a dynamic blend of shopping, dining, and entertainment experiences. With over 50 chain stores and restaurants spread across its thoughtfully designed outdoor layout, the center has become a cornerstone of the local retail landscape since its development. The property features a diverse tenant mix that caters to everyday needs and leisure activities, anchored by popular national retailers and complemented by a full-service movie theater that draws crowds throughout the week. Beyond traditional shopping, Long Beach Towne Center has cultivated a community gathering place atmosphere, hosting summer concert series that bring together residents and visitors for outdoor entertainment. Its convenient location on Carson Boulevard, combined with ample parking and pedestrian-friendly walkways, makes it an accessible and welcoming destination for families, young professionals, and shoppers throughout the greater Long Beach area.",
   "numberOfStores": 50,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 35.01521538657755
 }

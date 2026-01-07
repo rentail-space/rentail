@@ -8,7 +8,9 @@
   "latitude": 34.0719407,
   "longitude": -118.35751640000001,
   "phone": "++1 323-900-8080",
-  "imageURLs": ["/images/malls/ca-the-grove-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-grove-1.jpg"
+  ],
   "summary": "The Grove is Los Angeles' favorite open-air lifestyle destination, featuring a sophisticated mix of high-end retailers, restaurants, and entertainment in a beautifully designed Mediterranean-inspired environment. With premium brands, an AMC Theatres, exclusive amenities like Caruso Signature membership, and regular events ranging from fashion showcases to live performances, it offers a complete experiential destination for shopping, dining, and entertainment.",
   "openFrom": 1000,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "The Grove attracts an affluent, style-conscious demographic with household incomes predominantly above $100,000, skewing toward millennials and Gen X visitors aged 25-45 who appreciate experiential retail. The trade area draws from West Los Angeles, Hollywood, and Beverly Hills, with shoppers seeking premium brands and dining experiences in an upscale outdoor environment. Visitors are typically urban professionals, young families, and tourists who value curated shopping experiences combined with entertainment options. The center's proximity to the Fairfax District and Mid-Wilshire area positions it as a destination for both local residents and international visitors seeking Los Angeles' signature lifestyle retail experience.",
   "description": "The Grove stands as Los Angeles' premier open-air lifestyle destination, seamlessly blending high-end retail, world-class dining, and entertainment in a vibrant Mediterranean-inspired setting. Since its opening, this iconic shopping center has become a cultural landmark in the heart of Los Angeles, featuring a carefully curated mix of trendy retailers, flagship stores like Nike and Apple, and fashion-forward brands such as REVOLVE. The center's distinctive architecture includes a charming trolley that traverses the property, a central fountain with choreographed water shows, and lush landscaping that creates an inviting atmosphere under the California sun. Beyond shopping, The Grove offers exceptional amenities including valet parking, car wash services, concierge services, and the exclusive Caruso Signature membership program that provides enhanced events and exclusive rewards. With an AMC Theatres complex, regular entertainment programming including Kids Club sessions, live performances, and Today at Apple workshops, The Grove has established itself as more than just a shopping center—it's a complete lifestyle destination where visitors create lasting memories with friends and family.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 61.282156236729975
 }

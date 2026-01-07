@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 32.6198586,
   "longitude": -116.9677516,
-  "imageURLs": ["/images/malls/ca-millenia-town-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-millenia-town-center-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2000,
   "rating": 4,
@@ -18,5 +20,6 @@
   "description": "Millenia Town Center, comprised of Millenia Commons and Millenia Place, offers a convenient open-air shopping and dining destination in the heart of Chula Vista, California. Located just off Highway 125 at Birch Road, this dual-center complex provides a fresh alternative for South Bay residents seeking everyday essentials and casual dining options. The center features a diverse array of popular retailers including World Market, HomeGoods, and Ross Dress for Less, catering to shoppers looking for home goods, apparel, and value-oriented merchandise. With over 15 restaurants and eateries, visitors can enjoy an eclectic mix of dining experiences ranging from quick-service options to sit-down restaurants serving specialty cuisines. The open-air layout creates a comfortable shopping environment where guests can easily navigate between stores and restaurants while enjoying Southern California's pleasant climate.",
   "summary": "Millenia Town Center combines two open-air shopping destinations—Millenia Commons and Millenia Place—offering convenient access to popular retailers like World Market, HomeGoods, and Ross Dress for Less. With over 15 dining options and a diverse mix of shops and services, this Chula Vista center provides a one-stop destination for everyday shopping and casual dining.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 7.633940075514599
 }

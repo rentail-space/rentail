@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 34.1462162,
   "longitude": -118.4129368,
-  "imageURLs": ["/images/malls/ca-the-shops-at-sportsmens-lodge-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-shops-at-sportsmens-lodge-1.jpg"
+  ],
   "openFrom": 700,
   "openUntil": 2200,
   "rating": 4.3,
@@ -18,5 +20,6 @@
   "description": "The Shops at Sportsmen's Lodge represents a modern transformation of a historic Studio City landmark, reimagined as a vibrant lifestyle destination in the heart of the San Fernando Valley. Located on Ventura Boulevard, this open-air shopping center seamlessly blends retail, dining, and wellness offerings to serve the sophisticated tastes of Valley residents. The center's tagline, 'The Heart of The Valley,' reflects its central role in the community as a gathering place where neighbors can shop, dine, and connect. With carefully curated tenants spanning shopping, dining, and wellness categories, the center caters to the lifestyle needs of Studio City's discerning residents. The property maintains the welcoming, neighborhood-focused atmosphere that has made Ventura Boulevard a premier destination, while offering modern amenities and a thoughtfully designed environment that encourages visitors to linger and explore.",
   "summary": "The Shops at Sportsmen's Lodge is a contemporary lifestyle center on Ventura Boulevard in Studio City, offering a curated mix of retail, dining, and wellness tenants. Positioned as 'The Heart of The Valley,' it serves as a neighborhood gathering place for the San Fernando Valley's affluent communities.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 19.86281943986273
 }

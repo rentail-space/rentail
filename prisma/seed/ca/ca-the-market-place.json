@@ -8,7 +8,9 @@
   "latitude": 33.7243551,
   "longitude": -117.7913322,
   "phone": "++1 714-730-4124",
-  "imageURLs": ["/images/malls/ca-the-market-place-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-market-place-1.jpg"
+  ],
   "summary": "The Market Place is Orange County's premier outdoor lifestyle destination, featuring a comprehensive mix of trend-forward retailers, specialty grocers, diverse dining options, and a movie theater. This sprawling open-air center creates a vibrant community atmosphere with regular wellness events and an elevated shopping experience under the California sun.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "The Market Place attracts an affluent, family-oriented demographic from Tustin and surrounding Orange County communities, with visitors typically in the 30-55 age range and household incomes above $100,000. The trade area serves a well-educated suburban population that values convenience and quality, with a strong presence of dual-income families and young professionals. Shopping patterns reflect a preference for one-stop destinations that combine everyday needs with lifestyle amenities, including specialty grocers, health and fitness options, and diverse dining experiences.",
   "description": "The Market Place stands as Orange County's most comprehensive shopping, dining, and lifestyle destination, offering an elevated outdoor shopping experience in the heart of Tustin. This sprawling open-air center brings together a trend-forward mix of lifestyle brands, health and beauty boutiques, home improvement retailers, and specialty grocers under the Southern California sun. Beyond its extensive retail offerings, The Market Place has cultivated a vibrant community atmosphere through carefully curated events focused on health, wellness, and social connection, creating spaces where visitors can try new things and spend quality time with friends and family. The center features a diverse array of categories including Fashion & Style, Food & Beverage, Health & Fitness, and Services & Specialty, complemented by a full-service cineplex for entertainment. Managed by Irvine Company Retail, The Market Place exemplifies the modern lifestyle center concept, where shopping seamlessly blends with dining, entertainment, and community engagement in an inviting outdoor setting.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 35.34771906787526
 }

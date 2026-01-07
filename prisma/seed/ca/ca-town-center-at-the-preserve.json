@@ -8,7 +8,9 @@
   "latitude": 33.9577976,
   "longitude": -117.6218843,
   "phone": "++1 909-946-7518",
-  "imageURLs": ["/images/malls/ca-town-center-at-the-preserve-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-town-center-at-the-preserve-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2200,
   "rating": 4.6,
@@ -20,5 +22,6 @@
   "numberOfStores": 30,
   "summary": "Town Center at The Preserve is a modern community shopping center in Chino featuring Stater Bros Markets, popular quick-service restaurants including Chipotle and Panera Bread, and essential services like urgent care and banking. This open-air destination serves the growing Preserve neighborhood with over 30 convenient tenants and modern amenities including Tesla charging stations.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 17.30348504898328
 }

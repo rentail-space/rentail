@@ -8,7 +8,9 @@
   "latitude": 33.909611999999996,
   "longitude": -117.45699,
   "phone": "++1 951-351-3112",
-  "imageURLs": ["/images/malls/ca-galleria-at-tyler-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-galleria-at-tyler-1.jpg"
+  ],
   "summary": "Galleria at Tyler is Riverside County's premier shopping destination, featuring over 180 stores and restaurants, an AMC movie theater, and a diverse mix of department stores and specialty retailers. This expansive regional mall serves as the retail and entertainment hub for the Inland Empire, offering everything from fashion and dining to movies in one convenient location.",
   "openFrom": 1100,
   "openUntil": 2000,
@@ -20,5 +22,6 @@
   "description": "Galleria at Tyler stands as the premier retail, dining, and entertainment destination in Riverside County, offering an exceptional shopping experience that has served the community for decades. This expansive regional mall features over 180 stores and restaurants, anchored by major department stores and complemented by a diverse mix of specialty retailers, from popular fashion brands to unique boutiques. The center's commitment to providing comprehensive entertainment is evident through its AMC Tyler Galleria 16 movie theater, offering the latest films in a state-of-the-art setting. Shoppers can enjoy both fast-casual and sit-down dining options, making it easy to spend an entire day exploring everything the center has to offer. Located at 1299 Galleria at Tyler in Riverside, this roomy retail center has established itself as the go-to destination for residents throughout the Inland Empire, combining convenience, variety, and quality in one accessible location. With its prime location and extensive tenant mix, Galleria at Tyler continues to evolve to meet the changing needs of its diverse customer base while maintaining its position as Riverside County's retail hub.",
   "numberOfStores": 180,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 35.88722852357642
 }

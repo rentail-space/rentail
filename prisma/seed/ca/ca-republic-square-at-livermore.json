@@ -8,7 +8,9 @@
   "latitude": 37.698982099999995,
   "longitude": -121.83852560000001,
   "phone": "++1 408-292-1601",
-  "imageURLs": ["/images/malls/ca-republic-square-at-livermore-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-republic-square-at-livermore-1.jpg"
+  ],
   "summary": "Republic Square at Livermore is an open-air outlet shopping center in California's Tri-Valley region, offering a mix of outlet retail, dining, and entertainment options. The center serves as a community destination with convenient access from Interstate 580 and hosts regular events for visitors throughout the East Bay area.",
   "openFrom": 0,
   "openUntil": 2400,
@@ -19,5 +21,6 @@
   "demographics": "Republic Square at Livermore attracts a diverse mix of value-conscious shoppers from the Tri-Valley area, including families and professionals from Livermore, Pleasanton, and Dublin with median household incomes ranging from $100,000 to $150,000. The trade area serves a growing suburban population with a significant proportion of homeowners aged 35-54 with children, as well as younger millennials seeking outlet shopping deals. Visitors typically combine outlet shopping trips with dining and entertainment, drawn by the center's convenient location near Interstate 580 and its appeal to both local residents and Bay Area visitors seeking brand-name merchandise at discounted prices.",
   "description": "Republic Square at Livermore is a dynamic outlet shopping destination located in the heart of California's Tri-Valley region at 3505 Livermore Outlets Drive. This open-air center combines the appeal of outlet shopping with a vibrant mix of hospitality, dining, and entertainment options, creating a comprehensive retail experience for visitors throughout the East Bay area. The center features convenient access and ample parking, making it an ideal destination for both local residents and regional shoppers seeking quality brands at outlet prices. With its modern design and thoughtfully curated tenant mix, Republic Square serves as a community gathering place that hosts regular events and activities throughout the year. The center's strategic location in Livermore, one of the fastest-growing cities in the Bay Area, positions it as a premier shopping destination that continues to evolve and expand its offerings to meet the needs of its diverse customer base.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 19.42006770908028
 }

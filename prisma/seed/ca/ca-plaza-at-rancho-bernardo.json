@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.0183316,
   "longitude": -117.0739716,
-  "imageURLs": ["/images/malls/ca-plaza-at-rancho-bernardo-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-plaza-at-rancho-bernardo-1.jpg"
+  ],
   "openFrom": 0,
   "openUntil": 2000,
   "rating": 4.4,
@@ -19,5 +21,6 @@
   "numberOfStores": 50,
   "summary": "The Plaza at Rancho Bernardo is a neighborhood shopping center featuring over 50 stores, restaurants, and services in the heart of Rancho Bernardo. Conveniently located next to the post office, it serves as a go-to destination for everyday shopping, dining, and services for the local community.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.365448159470425
 }

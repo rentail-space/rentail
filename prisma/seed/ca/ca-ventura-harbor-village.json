@@ -8,7 +8,9 @@
   "latitude": 34.2409846,
   "longitude": -119.2655502,
   "phone": "++1 805-477-0470",
-  "imageURLs": ["/images/malls/ca-ventura-harbor-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-ventura-harbor-village-1.jpg"
+  ],
   "summary": "Ventura Harbor Village is a waterfront retail complex featuring specialty boutiques and restaurants with spectacular sunset and ocean views. This pet-friendly destination offers a unique blend of shopping, dining, and recreational activities including whale watching trips and harbor exploration.",
   "openFrom": 1100,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "Ventura Harbor Village attracts a diverse mix of tourists and local families, with visitors typically ranging from middle to upper-middle income households. The waterfront location draws both retirees and young families seeking leisure activities, dining, and entertainment experiences. Primary visitors include coastal California residents and tourists interested in marine activities, with strong appeal to pet owners given the pet-friendly amenities. The trade area encompasses both Ventura County locals and visitors from the greater Los Angeles and Santa Barbara regions seeking weekend getaway experiences.",
   "description": "Ventura Harbor Village is a distinctive waterfront retail complex located at 1583 Spinnaker Drive in Ventura, California, offering visitors a unique blend of specialty boutiques, restaurants, and recreational activities with stunning sunset and ocean views. This pet-friendly destination has established itself as a premier coastal gathering place, featuring a carefully curated mix of dining, shopping, and entertainment options that celebrate the harbor's maritime heritage. The village hosts year-round events including winter whale watching trips, live music performances, and cultural celebrations like the annual Epiphany Celebration and Blessing of the Waters Ceremony. With its open-air layout and waterfront setting, the center provides visitors with access to onsite boat rentals, harbor exploration opportunities, and a vibrant atmosphere that captures the essence of California coastal living. The village's strong community focus, combined with its 4.6-star rating from over 3,300 reviews, demonstrates its success as both a local favorite and tourist destination that offers an authentic harbor village experience.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 32.45063667077041
 }

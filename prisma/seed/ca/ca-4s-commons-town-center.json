@@ -8,7 +8,9 @@
   "latitude": 33.0195407,
   "longitude": -117.11285609999999,
   "phone": "++1 858-847-4600",
-  "imageURLs": ["/images/malls/ca-4s-commons-town-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-4s-commons-town-center-1.jpg"
+  ],
   "summary": "4S Commons Town Center is a well-appointed neighborhood shopping center serving the affluent 4S Ranch community in North San Diego County. Managed by Regency Centers, this community hub offers a convenient mix of retail, dining, and service tenants tailored to local residents' daily needs.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -19,5 +21,6 @@
   "demographics": "4S Commons Town Center serves the affluent 4S Ranch master-planned community in North San Diego County, attracting primarily upper-middle-class families with household incomes exceeding $120,000. The trade area consists of young professionals and families with children, typically aged 30-55, who value convenience and quality in their shopping experience. Visitors demonstrate strong preferences for grocery-anchored convenience shopping, health and wellness services, and family-friendly dining options that support their active suburban lifestyle.",
   "description": "4S Commons Town Center is a thriving neighborhood shopping destination located in the heart of the prestigious 4S Ranch community in San Diego, California. Developed and managed by Regency Centers, this well-maintained community center serves as the primary retail hub for one of North San Diego County's most desirable master-planned communities. The center features a carefully curated mix of essential services, dining options, and specialty retailers that cater to the daily needs of local residents. With convenient access from 4S Commons Drive and ample parking, the center provides an easy and comfortable shopping experience for busy families and professionals. The property maintains high standards with its Fresh Look® design philosophy, ensuring a modern and inviting atmosphere that reflects the quality expectations of the surrounding community.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 29.336109057329374
 }

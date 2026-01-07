@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 34.2839809,
   "longitude": -118.4429877,
-  "imageURLs": ["/images/malls/ca-san-fernando-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-san-fernando-mall-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2000,
   "rating": 4.5,
@@ -18,5 +20,6 @@
   "description": "San Fernando Mall serves as the vibrant heart of downtown San Fernando, offering a unique blend of shopping, dining, and community services that reflect the rich cultural heritage of the San Fernando Valley. This lifestyle-oriented destination features an eclectic mix of vintage and specialty shops, western wear boutiques, and bridal stores specializing in quinceañera and baptism celebrations, catering to the area's strong Hispanic traditions. The center's diverse tenant roster includes ready-to-wear fashion, jewelry stores, furniture retailers, and a variety of dining options ranging from coffee shops and ice cream parlors to taverns and authentic restaurants. Beyond retail, San Fernando Mall functions as a comprehensive community hub with beauty salons, barbershops, fitness centers, medical and dental offices, and professional services including financial institutions and real estate agencies. With its walkable downtown location and commitment to serving local residents, the mall maintains a 4.5-star rating and continues to be a gathering place for celebrations, events, and everyday shopping needs in the San Fernando community.",
   "summary": "San Fernando Mall is a community-focused lifestyle center in downtown San Fernando featuring a diverse mix of specialty shops, dining venues, and services that celebrate the area's cultural heritage. From vintage boutiques and western wear to quinceañera specialists and authentic restaurants, this walkable destination serves as the heart of the local community.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 18.809146002954584
 }

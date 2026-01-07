@@ -8,7 +8,9 @@
   "latitude": 32.70882770000001,
   "longitude": -117.1684887,
   "phone": "++1 619-530-0704",
-  "imageURLs": ["/images/malls/ca-seaport-village-lighthouse-district-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-seaport-village-lighthouse-district-1.jpg"
+  ],
   "summary": "Seaport Village | Lighthouse District is a charming waterfront lifestyle center on San Diego Bay, featuring specialty shopping, diverse dining options, and live entertainment in a scenic seaside village setting. This popular destination combines boutique retail with stunning harbor views, attracting both tourists and locals to its unique collection of shops and restaurants.",
   "openFrom": 700,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Seaport Village attracts a diverse mix of tourists and affluent local residents, with visitors typically ranging from middle to upper-income households. The waterfront location draws families, couples, and international tourists exploring San Diego's harbor district, with a strong presence of visitors aged 25-65. The trade area encompasses downtown San Diego's urban professionals, convention attendees, and cruise ship passengers, creating a cosmopolitan shopping demographic with above-average discretionary spending power.",
   "description": "Seaport Village | Lighthouse District is San Diego's premier waterfront shopping and dining destination, nestled along the picturesque San Diego Bay at 809 West Harbor Drive. This charming open-air lifestyle center captures the essence of a historic seaside village, offering visitors a unique blend of specialty shopping, waterfront dining, and entertainment experiences against the backdrop of stunning harbor views. The center features an eclectic mix of boutique shops, casual and upscale dining establishments, sweet shops, and spirit venues, all connected by winding pathways that evoke the charm of an early California seaport. With live music performances and special events throughout the year, Seaport Village has become a beloved gathering place for both tourists and locals seeking a distinctive San Diego experience. The property's exceptional 4.6-star rating reflects its commitment to providing memorable experiences in one of Southern California's most scenic waterfront locations.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 12.350288663564296
 }

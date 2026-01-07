@@ -8,7 +8,9 @@
   "latitude": 33.1036739,
   "longitude": -117.2678834,
   "phone": "++1 858-876-1163",
-  "imageURLs": ["/images/malls/ca-plaza-paseo-real-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-plaza-paseo-real-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.3,
@@ -19,5 +21,6 @@
   "description": "Plaza Paseo Real is a well-established neighborhood shopping center located along the prominent El Camino Real corridor in Carlsbad, California. Spanning addresses 6941-6985 El Camino Real, this open-air retail destination has served the North County San Diego community for years as a convenient hub for everyday shopping and services. The center benefits from its prime location in one of San Diego County's most desirable coastal communities, offering easy access and ample parking for local residents and visitors alike. With a solid 4.3-star rating from over 650 Google reviews, Plaza Paseo Real has built a reputation as a reliable neighborhood gathering place. The center maintains extended operating hours from 6:00 AM to 11:00 PM, accommodating the busy schedules of Carlsbad's active population and providing a mix of retail, dining, and service-oriented tenants that cater to daily needs.",
   "summary": "Plaza Paseo Real is a neighborhood shopping center conveniently located on El Camino Real in Carlsbad, California. This open-air retail destination serves the local community with a practical mix of shops and services, earning strong reviews from area residents.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 24.202529323294513
 }

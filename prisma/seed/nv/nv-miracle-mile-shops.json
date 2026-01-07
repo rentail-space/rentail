@@ -8,7 +8,9 @@
   "latitude": 36.1093404,
   "longitude": -115.17257280000001,
   "phone": "++1 702-866-0703",
-  "imageURLs": ["/images/malls/nv-miracle-mile-shops-1.jpg"],
+  "imageURLs": [
+    "/images/malls/nv-miracle-mile-shops-1.jpg"
+  ],
   "summary": "Miracle Mile Shops is a 1.2-mile indoor shopping destination inside Planet Hollywood Resort and Casino, featuring over 150 stores, restaurants, and live entertainment venues. This premier Las Vegas Strip mall combines popular retail chains with diverse dining options and unique attractions like a rainstorm water feature, creating a comprehensive shopping and entertainment experience.",
   "openFrom": 1000,
   "openUntil": 2200,
@@ -20,5 +22,6 @@
   "description": "Miracle Mile Shops is a premier indoor shopping destination located inside the iconic Planet Hollywood Resort and Casino on the Las Vegas Strip. Spanning an impressive 1.2 miles, this enclosed mall stands as one of the largest shopping centers in Las Vegas, featuring over 150 stores that cater to visitors from around the world. The center offers a unique blend of popular chain retailers, dining establishments, and live entertainment venues, creating a comprehensive retail and entertainment experience. Notable features include a dramatic rainstorm water feature and live performances that enhance the shopping atmosphere. With operating hours extending until 10 PM on weekends, Miracle Mile Shops provides both tourists and locals with convenient access to world-class shopping, diverse dining options ranging from casual to upscale, and memorable entertainment experiences. The center also offers free local parking and has become a must-visit destination for those seeking the complete Las Vegas Strip shopping experience, combining retail therapy with the excitement and energy that Las Vegas is known for.",
   "numberOfStores": 150,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 39.35239689143722
 }

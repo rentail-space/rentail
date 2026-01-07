@@ -8,7 +8,9 @@
   "latitude": 33.8000749,
   "longitude": -117.2275431,
   "phone": "++1 310-901-3556",
-  "imageURLs": ["/images/malls/ca-perris-towne-square-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-perris-towne-square-1.jpg"
+  ],
   "openFrom": 830,
   "openUntil": 2200,
   "rating": 4.2,
@@ -19,5 +21,6 @@
   "description": "Perris Towne Square is a community shopping destination located at 47 West Nuevo Road in Perris, California, serving the growing Inland Empire region. This open-air shopping center has established itself as a convenient hub for local residents, offering a practical mix of retail, dining, and service options that cater to everyday needs. With operating hours from 8:30 AM to 10:00 PM, the center provides extended accessibility for busy families and working professionals throughout the week. The shopping center has earned a solid reputation among visitors, maintaining a 4.2-star rating from over 1,750 reviews, reflecting its consistent service and community value. Strategically positioned in Perris, the center serves as an important retail anchor for the surrounding neighborhoods, providing essential shopping and dining options in a welcoming, accessible environment that continues to meet the evolving needs of the local community.",
   "summary": "Perris Towne Square is a community shopping center in Perris, California, offering convenient access to retail, dining, and services for local residents. With a 4.2-star rating from over 1,750 reviews, this open-air center serves as a practical everyday destination for the Inland Empire community.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.258158514197127
 }

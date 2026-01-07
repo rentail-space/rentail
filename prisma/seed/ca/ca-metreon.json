@@ -8,7 +8,9 @@
   "latitude": 37.7843318,
   "longitude": -122.40336629999999,
   "phone": "++1 415-369-6000",
-  "imageURLs": ["/images/malls/ca-metreon-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-metreon-1.jpg"
+  ],
   "summary": "Metreon is a modern urban lifestyle center in downtown San Francisco featuring a diverse dining terrace with ethnic cuisine, big-box retail shops, and a 16-screen cinema. Located in the Yerba Buena district, it serves as a popular entertainment and dining destination for both locals and tourists.",
   "openFrom": 1100,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Metreon attracts a diverse urban demographic including young professionals aged 25-45, tech workers from nearby offices, and tourists visiting San Francisco's downtown attractions. The visitor base skews toward middle to upper-middle income households with above-average education levels, reflecting the Yerba Buena district's position as a cultural and entertainment hub. Shoppers typically seek dining and entertainment experiences rather than traditional retail, with strong evening and weekend traffic from both residents and visitors exploring the city's urban core.",
   "description": "Metreon stands as San Francisco's premier urban entertainment destination in the heart of the Yerba Buena district at 135 4th Street. This modern lifestyle center has transformed the downtown shopping and entertainment landscape since its opening, offering a unique blend of dining, retail, and cinema experiences. The center's signature feature is its expansive dining terrace, which showcases an impressive array of ethnic cuisine options that reflect San Francisco's diverse culinary scene. Anchored by a state-of-the-art 16-screen cinema, Metreon serves as both a neighborhood gathering place and a tourist destination, drawing visitors who appreciate its contemporary design and convenient location near Moscone Center and other downtown attractions. With big-box retail shops complementing its entertainment offerings, Metreon has established itself as a go-to destination for urban dwellers and visitors seeking a complete dining and entertainment experience in one of San Francisco's most vibrant neighborhoods.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 33.16630974576803
 }

@@ -8,7 +8,9 @@
   "latitude": 33.6415373,
   "longitude": -117.9199969,
   "phone": "++1 714-259-9090",
-  "imageURLs": ["/images/malls/ca-costa-mesa-courtyards-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-costa-mesa-courtyards-1.jpg"
+  ],
   "openFrom": 800,
   "openUntil": 2200,
   "rating": 4.3,
@@ -19,5 +21,6 @@
   "description": "Costa Mesa Courtyards is a vibrant community shopping center located at 1835 Newport Boulevard in the heart of Costa Mesa, California. This popular destination has established itself as a go-to location for residents and visitors seeking quality dining and retail experiences in Orange County. With its convenient location and accessible layout, the center serves the surrounding neighborhoods with a carefully curated mix of tenants that cater to everyday needs and lifestyle preferences. The property maintains strong community appeal with a 4.3-star rating from over 1,400 reviews, reflecting its consistent service and tenant quality. Operating daily from 8:00 AM to 10:00 PM, Costa Mesa Courtyards provides flexible hours that accommodate both morning shoppers and evening diners, making it a versatile destination for the local community.",
   "summary": "Costa Mesa Courtyards is a well-regarded community shopping center on Newport Boulevard in Costa Mesa, offering a convenient mix of retail and dining options. With strong ratings and extended operating hours, it serves as a popular neighborhood destination for local residents and visitors.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.10441558528461
 }

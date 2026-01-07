@@ -8,7 +8,9 @@
   "latitude": 33.9665434,
   "longitude": -117.0361988,
   "phone": "++1 909-795-1005",
-  "imageURLs": ["/images/malls/ca-the-marketplace-at-calimesa-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-marketplace-at-calimesa-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.6,
@@ -40,5 +42,6 @@
       "size": 1260,
       "available": true
     }
-  ]
+  ],
+  "ranking": 21.745230215007727
 }

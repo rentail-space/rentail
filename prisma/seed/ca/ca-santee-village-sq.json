@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 32.8377028,
   "longitude": -116.9880935,
-  "imageURLs": ["/images/malls/ca-santee-village-sq-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-santee-village-sq-1.jpg"
+  ],
   "openFrom": 900,
   "openUntil": 2100,
   "rating": 4.4,
@@ -18,5 +20,6 @@
   "description": "Santee Village Square is a convenient neighborhood shopping center located at 9621 Mission Gorge Road in the heart of Santee, California, serving the East County San Diego community. This open-air retail destination has established itself as a reliable hub for everyday shopping needs, offering visitors easy access to essential services and retailers in a straightforward, accessible format. With a solid 4.4-star rating from over 1,500 Google reviews, the center has built a reputation for convenience and practicality among local residents. Operating daily from 9:00 AM to 9:00 PM, Santee Village Square provides consistent hours that accommodate both working professionals and families throughout the week. The center's location along the well-traveled Mission Gorge Road corridor ensures high visibility and easy access for the surrounding Santee community, making it a go-to destination for routine shopping trips and quick errands in East County San Diego.",
   "summary": "Santee Village Square is a neighborhood shopping center on Mission Gorge Road serving the Santee community with convenient access to everyday retail and services. With a 4.4-star rating from over 1,500 reviews, this accessible center provides reliable shopping options for East County San Diego residents.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.962321199382792
 }

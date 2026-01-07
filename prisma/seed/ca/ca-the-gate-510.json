@@ -8,7 +8,9 @@
   "latitude": 37.7157974,
   "longitude": -122.17905420000001,
   "phone": "++1 510-906-7095",
-  "imageURLs": ["/images/malls/ca-the-gate-510-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-gate-510-1.jpg"
+  ],
   "summary": "The Gate 510 is an established research and development innovation campus in San Leandro serving over 30 resident companies in tech, biotech, and life sciences. The facility offers flexible lab, office, and production spaces ranging from 1,000 to 100,000 square feet with specialized amenities designed for scientists, entrepreneurs, and visionaries.",
   "openFrom": 1130,
   "openUntil": 2200,
@@ -20,5 +22,6 @@
   "description": "The Gate 510 is a pioneering research and development innovation campus located in San Leandro, California, specifically designed for scientists, entrepreneurs, makers, creators, and visionaries shaping the future. This unique tech, biotech, and life science campus has established itself as a thriving community with over 30 resident companies working across biological, chemistry, and clean tech applications. The facility offers flexible spaces ranging from 1,000 to 100,000 square feet, featuring impressive 20-foot ceilings, large windows, interior skylights, polished concrete floors, and industrial finishes that create an inspiring environment for innovation. Gate 510 provides various configurations including research labs, clean rooms, and specialized spaces, along with the Launch Pad membership program that offers access to a 10,000 square foot flexible lab space designed to maximize functionality and efficiency for growth-minded companies. The campus also features the Town Center, a multi-functional amenity space where creative minds can meet and mingle, fostering collaboration and community among the diverse ecosystem of startups and industry leaders. From incubating startups to supporting established companies, Gate 510 has built the flexibility and infrastructure to rapidly scale businesses in the life sciences and technology sectors.",
   "numberOfStores": 30,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 23.695163789342804
 }

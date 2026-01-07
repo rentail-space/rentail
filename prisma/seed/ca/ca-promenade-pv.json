@@ -8,7 +8,9 @@
   "latitude": 33.7719705,
   "longitude": -118.37374969999999,
   "phone": "++1 310-541-0688",
-  "imageURLs": ["/images/malls/ca-promenade-pv-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-promenade-pv-1.jpg"
+  ],
   "summary": "Promenade | PV is an open-air lifestyle center in Rolling Hills Estates undergoing revitalization to become a community-focused destination featuring local shops, dining, and family entertainment. The center emphasizes nostalgic charm and neighborhood connection, creating a welcoming gathering place for Palos Verdes Peninsula residents.",
   "openFrom": 800,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "Promenade | PV serves the affluent Palos Verdes Peninsula community, attracting upper-middle to high-income families with household incomes typically exceeding $150,000. The primary visitor base consists of local residents aged 35-65, including established professionals and retirees, along with younger families seeking community-oriented shopping and dining experiences. The trade area encompasses Rolling Hills Estates and surrounding Palos Verdes communities, known for their high property values and educated demographics. Shoppers here prioritize quality, convenience, and community connection over discount shopping, with strong preferences for local businesses, family-friendly amenities, and casual dining options.",
   "description": "Promenade | PV is an open-air lifestyle shopping center located in the heart of Rolling Hills Estates on the prestigious Palos Verdes Peninsula. This community-focused destination is undergoing an exciting transformation to recapture the nostalgic charm and sense of togetherness that once defined the area, bringing back beloved experiences like the courtyard gatherings, seasonal events, and local merchant relationships that residents fondly remember. The center's vision emphasizes creating a welcoming neighborhood hub where families can reconnect, children can play by the fountain, and friends can unexpectedly meet while enjoying good food and entertainment. With its focus on mom-and-pop shops alongside quality dining options, Promenade | PV aims to fill the void left by departed entertainment venues like Gablehouse and Mulligans, providing a safe space where the next generation can create lasting memories. The mall's commitment to community events, from trick-or-treating to school fundraisers, positions it as more than just a shopping destination—it's a gathering place designed to strengthen the unique bonds that make Palos Verdes special.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 25.157683986896984
 }

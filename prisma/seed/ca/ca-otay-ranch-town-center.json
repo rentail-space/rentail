@@ -8,7 +8,9 @@
   "latitude": 32.6235991,
   "longitude": -116.9679165,
   "phone": "++1 619-656-1393",
-  "imageURLs": ["/images/malls/ca-otay-ranch-town-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-otay-ranch-town-center-1.jpg"
+  ],
   "summary": "Otay Ranch Town Center is a contemporary open-air lifestyle destination in Chula Vista featuring over 90 specialty stores, restaurants, and an AMC movie theater. This pedestrian-friendly center offers a pet-friendly shopping experience with a weekly farmers' market, serving as the premier retail hub for South Bay San Diego.",
   "openFrom": 1100,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Otay Ranch Town Center stands as Chula Vista's premier open-air lifestyle shopping destination, offering a contemporary streetscape experience just minutes from downtown San Diego. This pedestrian-friendly center features more than 90 specialty stores, restaurants, and entertainment venues spread across a thoughtfully designed outdoor environment that encourages strolling and exploration. Anchored by popular retailers and complemented by an AMC movie theater, the center provides a comprehensive shopping and entertainment experience for the entire family. The property distinguishes itself with pet-friendly policies throughout its public spaces and common areas, welcoming four-legged companions to join their owners while shopping. Adding to its community appeal, Otay Ranch Town Center hosts a weekly farmers' market, creating a gathering place that extends beyond traditional retail. The center's location in the rapidly growing Otay Ranch master-planned community positions it as a central hub for South Bay residents, offering convenient access to national chains and local favorites alike. With extended hours on weekends and special holiday schedules, the center adapts to meet the needs of its diverse shopper base throughout the year.",
   "numberOfStores": 90,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 33.535408195554794
 }

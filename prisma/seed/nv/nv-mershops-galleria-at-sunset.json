@@ -8,7 +8,9 @@
   "latitude": 36.067290799999995,
   "longitude": -115.0420052,
   "phone": "++1 702-434-2409",
-  "imageURLs": ["/images/malls/nv-mershops-galleria-at-sunset-1.jpg"],
+  "imageURLs": [
+    "/images/malls/nv-mershops-galleria-at-sunset-1.jpg"
+  ],
   "summary": "Galleria at Sunset is Henderson's premier enclosed shopping mall featuring Southwestern-themed architecture and over 125 stores, restaurants, and entertainment venues. This community-focused destination combines major department stores with specialty retailers and diverse dining options, serving as a comprehensive shopping and social hub for the greater Las Vegas valley.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Galleria at Sunset stands as Henderson's premier enclosed shopping destination, featuring distinctive Southwestern-themed architecture that reflects the vibrant character of Southern Nevada. Since opening its doors, this expansive mall has served as a cornerstone of the Henderson community, offering residents and visitors access to over 125 diverse retailers, restaurants, and entertainment venues under one climate-controlled roof. The center's impressive tenant mix includes major department store anchors alongside popular specialty shops, creating a comprehensive shopping experience that caters to every need and budget. Beyond retail therapy, Galleria at Sunset has established itself as a social hub where families gather for dining experiences ranging from quick casual bites to sit-down restaurants, complemented by entertainment options that make it more than just a shopping trip. With its convenient location on West Sunset Road and strong community reputation reflected in its 4.5-star rating from over 8,000 reviews, the Galleria continues to evolve as Henderson's go-to destination for shopping, dining, and entertainment.",
   "numberOfStores": 125,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 35.149734435915434
 }

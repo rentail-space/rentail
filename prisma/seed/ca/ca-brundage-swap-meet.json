@@ -8,7 +8,9 @@
   "latitude": 35.3534011,
   "longitude": -119.0278015,
   "phone": "++1 661-748-1981",
-  "imageURLs": ["/images/malls/ca-brundage-swap-meet-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-brundage-swap-meet-1.jpg"
+  ],
   "summary": "Brundage Swap Meet is a popular open-air marketplace in Bakersfield featuring over 100 vendor spaces offering diverse merchandise at affordable prices. Operating daily Tuesday through Sunday, this community-focused swap meet provides free parking and a casual shopping atmosphere for bargain hunters and families.",
   "openFrom": 1000,
   "openUntil": 1900,
@@ -20,5 +22,6 @@
   "description": "Brundage Swap Meet is a vibrant open-air marketplace located at 2207 Brundage Lane in Bakersfield, California, offering a unique shopping experience that combines the excitement of treasure hunting with everyday value. Operating Tuesday through Sunday from 10:00 AM to 7:00 PM, this bustling swap meet features over 100 vendor spaces where shoppers can discover everything from fresh produce and clothing to electronics and household goods. The facility provides a one-stop shopping destination with reasonable prices that appeal to budget-conscious families and bargain hunters throughout the Central Valley. With free parking and convenient restroom facilities, Brundage Swap Meet creates a welcoming environment where vendors and customers come together in a traditional marketplace atmosphere. The swap meet has earned a solid reputation in the community, reflected in its 4.1-star rating from over 300 reviews, making it a beloved local institution for those seeking variety, value, and the thrill of discovering unexpected deals.",
   "numberOfStores": 100,
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 10.23741155710018
 }

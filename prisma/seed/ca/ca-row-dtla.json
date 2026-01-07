@@ -8,7 +8,9 @@
   "latitude": 34.0341528,
   "longitude": -118.24073949999999,
   "phone": "++1 213-988-8890",
-  "imageURLs": ["/images/malls/ca-row-dtla-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-row-dtla-1.jpg"
+  ],
   "summary": "ROW DTLA is a 30-acre historic district transformed into LA's creative hub for independent retail, restaurants, and events. This open-air lifestyle destination features curated shops, innovative dining, and regular community events in the heart of downtown Los Angeles.",
   "openFrom": 800,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "ROW DTLA attracts a creative, urban demographic primarily consisting of millennials and Gen Z visitors aged 25-40 with middle to upper-middle income levels. The trade area draws from downtown Los Angeles professionals, arts district residents, and culturally-engaged visitors seeking independent retail and dining experiences. Typical visitors are trend-conscious, value authenticity and local businesses, and prefer experiential shopping combined with dining and entertainment in an open-air, walkable environment.",
   "description": "ROW DTLA is Los Angeles' premier creative hub, transforming a historic 30-acre district on South Alameda Street into a vibrant city within a city. Originally an industrial area, this lifestyle destination has been reimagined as a curated collective of independent retail shops, innovative restaurants, creative office spaces, and dynamic event venues. The open-air campus celebrates local entrepreneurship and craftsmanship, featuring pop-up shops alongside established boutiques, with tenants like Flask & Field offering tastings and Rappahannock providing waterfront-inspired dining experiences. Operating daily from 10:00 AM to 10:00 PM, ROW DTLA has become a cultural gathering place where shopping, dining, and entertainment converge in a uniquely LA setting. With its emphasis on independent businesses, regular events, and community-focused programming, ROW DTLA represents the evolution of retail spaces into experiential destinations that reflect the creative spirit of downtown Los Angeles.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 24.966573888130714
 }

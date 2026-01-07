@@ -8,7 +8,9 @@
   "latitude": 38.0034485,
   "longitude": -122.54386539999999,
   "phone": "++1 415-479-5956",
-  "imageURLs": ["/images/malls/ca-northgate-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-northgate-1.jpg"
+  ],
   "summary": "Northgate Mall is an indoor regional shopping center in San Rafael, California, featuring department store anchors, specialty retailers, a Century Theatres multiplex, and diverse dining options. Conveniently located 20 miles north of the Golden Gate Bridge, it serves as Marin County's primary shopping and entertainment destination.",
   "openFrom": 1100,
   "openUntil": 1900,
@@ -19,5 +21,6 @@
   "demographics": "Northgate Mall serves the affluent Marin County market, attracting middle to upper-middle income families and professionals from San Rafael and surrounding communities. The trade area draws from households with above-average incomes typical of the San Francisco Bay Area's North Bay region, with a mix of established families, young professionals, and retirees. Shoppers tend to seek convenient access to both everyday necessities and specialty retail, with strong preferences for dining and entertainment options alongside traditional shopping.",
   "description": "Located just 20 miles north of the iconic Golden Gate Bridge in San Rafael, California, Northgate Mall has served as Marin County's premier shopping destination for decades. This indoor regional mall features a comprehensive mix of department store anchors, specialty retailers, and diverse dining options that cater to the discerning tastes of North Bay residents. The center's anchor lineup provides a strong foundation for the retail mix, complemented by a Century Theatres multiplex that serves as a major entertainment draw for the community. Northgate offers both dine-in restaurants and convenient takeout options, making it a versatile destination for shoppers seeking everything from quick meals to leisurely dining experiences. With its strategic location in the heart of Marin County and commitment to providing a complete shopping, dining, and entertainment experience, Northgate Mall continues to evolve to meet the needs of its loyal customer base while attracting new visitors from throughout the region.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.220873714432727
 }

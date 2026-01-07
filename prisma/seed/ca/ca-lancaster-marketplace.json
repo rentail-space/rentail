@@ -8,7 +8,9 @@
   "latitude": 34.6992012,
   "longitude": -118.172615,
   "phone": "++1 661-942-7897",
-  "imageURLs": ["/images/malls/ca-lancaster-marketplace-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-lancaster-marketplace-1.jpg"
+  ],
   "summary": "Lancaster Marketplace is a family-friendly community shopping center conveniently located off the 14 Freeway in Lancaster, offering a diverse mix of retail shops, dining options, and services. Ideally positioned near the Lancaster Poppy Reserve, it serves as a popular destination for both local residents and visitors exploring the Antelope Valley.",
   "openFrom": 900,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "Lancaster Marketplace serves the Antelope Valley community, attracting families and middle-income households from Lancaster and surrounding areas. The trade area draws visitors who combine shopping trips with recreational activities, particularly those visiting the nearby Lancaster Poppy Reserve during bloom season. The center caters to value-conscious shoppers seeking convenient access to everyday retail, dining, and services in a family-friendly environment with ample parking and security.",
   "description": "Lancaster Marketplace is a family-friendly shopping destination conveniently located off the 14 Freeway in the heart of the Antelope Valley at 44960 Valley Central Way, Lancaster, CA. This open-air community center offers a diverse mix of retail shops, dining options, and essential services designed to meet the everyday needs of local residents and visitors alike. Strategically positioned just a short distance from the famous Lancaster Poppy Reserve, the center serves as the perfect stop for dining and shopping after enjoying the spectacular wildflower displays during bloom season. The property features spacious suites with ample parking and comprehensive security surveillance, ensuring a safe and comfortable shopping experience for all patrons. With its accessible location, variety of tenant offerings, and commitment to serving the community, Lancaster Marketplace has established itself as a go-to destination for families throughout the Antelope Valley region.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.120718448115056
 }

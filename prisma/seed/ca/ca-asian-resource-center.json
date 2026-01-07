@@ -8,7 +8,9 @@
   "latitude": 37.7995565,
   "longitude": -122.27027419999999,
   "phone": "++1 510-287-5353",
-  "imageURLs": ["/images/malls/ca-asian-resource-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-asian-resource-center-1.jpg"
+  ],
   "summary": "The Asian Resource Center is a community-focused facility in Oakland's Chinatown operated by EBALDC, providing multilingual social services, housing resources, and community programs to diverse Asian-American and immigrant populations. This trusted community hub serves as a vital resource center rather than a traditional retail shopping destination.",
   "openFrom": 900,
   "openUntil": 1700,
@@ -19,5 +21,6 @@
   "demographics": "The Asian Resource Center serves a predominantly Asian-American community in Oakland's Chinatown district, with visitors primarily consisting of immigrant families, seniors, and working-class households. The trade area attracts residents seeking culturally-specific services, affordable housing resources, and community support programs. The center's multilingual services (Arabic, Chinese, English, Korean, Spanish, Vietnamese) reflect the diverse Asian and immigrant populations it serves, with typical visitors ranging from low to moderate income levels seeking social services and community resources.",
   "description": "The Asian Resource Center, located at 310 8th Street in Oakland's historic Chinatown, serves as a vital community hub operated by the East Bay Asian Local Development Corporation (EBALDC). This multi-purpose facility provides essential resources and services to Oakland's diverse Asian-American and immigrant communities, offering programs in six languages including Chinese, Korean, Vietnamese, Spanish, Arabic, and English. The center operates as more than just a traditional shopping destination, functioning as a comprehensive community resource that combines affordable housing initiatives with social services and cultural programs. With a strong 4.5-star rating from community members, the Asian Resource Center has established itself as a trusted institution serving residents who need access to housing assistance, community programs, and culturally-sensitive support services. The facility's strategic location in Oakland's Chinatown makes it easily accessible to the populations it serves, reinforcing EBALDC's mission to build healthy communities through affordable housing and community development.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 5.537020146202233
 }

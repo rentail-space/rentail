@@ -8,7 +8,9 @@
   "latitude": 32.6507499,
   "longitude": -115.4712268,
   "phone": "++52 664 368 6743",
-  "imageURLs": ["/images/malls/b.c.-plaza-caballito-1.jpg"],
+  "imageURLs": [
+    "/images/malls/b.c.-plaza-caballito-1.jpg"
+  ],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.2,
@@ -19,5 +21,6 @@
   "description": "Plaza Caballito is a community shopping center located in the Industrial district of Mexicali, Baja California, strategically positioned to serve the city's growing manufacturing and residential communities. Managed by Bexalta, a real estate company with over 30 years of experience and part of Grupo Beckmann, the plaza benefits from professional property management and a commitment to service excellence. Bexalta's extensive portfolio includes over 137,000 square meters of rentable space across Baja California and Jalisco, demonstrating their expertise in commercial real estate development and leasing. The shopping center maintains strong operational standards, reflecting Bexalta's institutional values of integrity, continuous improvement, and customer service. With a solid 4.2-star rating from 86 reviews, Plaza Caballito has established itself as a reliable retail destination for local residents and workers in Mexicali's industrial corridor, offering convenient access to shopping and services throughout extended operating hours.",
   "summary": "Plaza Caballito is a community shopping center in Mexicali's Industrial district, professionally managed by Bexalta, a leading real estate company with over 30 years of experience. The center serves local residents and industrial workers with convenient retail and service options.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 16.24978699044597
 }

@@ -8,7 +8,9 @@
   "latitude": 37.6962802,
   "longitude": -121.8496833,
   "phone": "++1 510-770-9798",
-  "imageURLs": ["/images/malls/ca-pacific-pearl-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-pacific-pearl-1.jpg"
+  ],
   "summary": "Pacific Pearl is a contemporary strip mall in Pleasanton specializing in Asian cuisine and groceries, featuring an Asian supermarket anchor and multiple authentic Asian restaurants. This cultural shopping destination serves the East Bay's diverse community with specialty products and dining experiences.",
   "openFrom": 800,
   "openUntil": 0,
@@ -19,5 +21,6 @@
   "demographics": "Pacific Pearl primarily serves the Asian-American community in Pleasanton and the broader East Bay area, attracting families and professionals with middle to upper-middle income levels. The center draws visitors specifically seeking authentic Asian groceries, dining experiences, and specialty products, with a customer base that includes both local residents and regional shoppers willing to travel for specialty items. The trade area encompasses Pleasanton's diverse suburban population as well as visitors from neighboring cities like Dublin, Livermore, and San Ramon who seek Asian cultural shopping and dining experiences.",
   "description": "Pacific Pearl is a contemporary strip mall located in Pleasanton, California, that has established itself as a premier destination for Asian cuisine and specialty groceries in the East Bay region. Situated at 2693-2733 Stoneridge Drive, this shopping center features an Asian supermarket as its anchor tenant, providing an extensive selection of authentic Asian groceries, fresh produce, and specialty ingredients that are difficult to find elsewhere in the area. The center is particularly renowned for its collection of Asian-style restaurants, offering diverse culinary experiences ranging from traditional Chinese and Japanese cuisine to Vietnamese, Korean, and other Pan-Asian dining options. With its modern design and convenient location in Pleasanton's retail corridor, Pacific Pearl has become a cultural hub that serves both the local Asian-American community and food enthusiasts from throughout the region. The center maintains strong customer satisfaction with a 4.3-star rating from over 740 reviews, reflecting its quality tenants and the authentic shopping and dining experiences it provides to visitors seeking Asian products and cuisine.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 24.71555374163437
 }

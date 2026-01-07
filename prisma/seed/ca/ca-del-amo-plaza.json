@@ -8,7 +8,9 @@
   "latitude": 33.8477423,
   "longitude": -118.212169,
   "phone": "++1 310-762-6262",
-  "imageURLs": ["/images/malls/ca-del-amo-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-del-amo-plaza-1.jpg"
+  ],
   "summary": "Del Amo Plaza is an indoor swapmeet offering diverse vendors, dining options, and specialty shops in a spacious warehouse setting. Located near major freeways and the Metro A Line, this value-oriented shopping destination serves the South Bay community with affordable merchandise and cultural products.",
   "openFrom": 1000,
   "openUntil": 1800,
@@ -19,5 +21,6 @@
   "demographics": "Del Amo Plaza serves a diverse, working-class to middle-income community in the Rancho Dominguez area, with a strong Hispanic and Asian demographic base. The indoor swapmeet format attracts budget-conscious shoppers and families seeking value-oriented merchandise, cultural products, and authentic ethnic goods. Visitors typically include multi-generational households from surrounding South Bay communities who appreciate the affordable pricing and variety of small vendor offerings. The center's proximity to the Metro A Line Del Amo Station draws transit-dependent shoppers and residents from nearby Carson, Compton, and Long Beach areas.",
   "description": "Del Amo Plaza is a unique indoor swapmeet shopping destination located at 2787 E. Del Amo Boulevard in Rancho Dominguez, California. This spacious warehouse-style shopping center offers a distinctive retail experience featuring a diverse collection of small vendors, counter-serve eateries, and specialty shops including tattoo parlors and custom apparel businesses. Conveniently positioned near the intersection of the 710, 405, and 91 freeways and directly across from the Del Amo Metro A Line station, the center provides excellent accessibility for shoppers throughout the South Bay region. The plaza operates Monday through Sunday from 10am to 6pm (closed Tuesdays) and maintains special holiday hours to accommodate community shopping needs. With spaces available for new businesses ranging from small to large, Del Amo Plaza actively seeks unique vendors including pet shops, smoke shops, sporting goods, and other diverse retail concepts, fostering an ever-evolving marketplace atmosphere. The center also serves as a community hub, hosting events such as UCLA Vietnamese Community Health free health screenings, demonstrating its commitment to serving the local multicultural population.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 14.721366134850763
 }

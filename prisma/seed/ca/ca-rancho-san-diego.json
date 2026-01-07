@@ -8,7 +8,9 @@
   "latitude": 32.7449791,
   "longitude": -116.9317081,
   "phone": "++1 833-800-4343",
-  "imageURLs": ["/images/malls/ca-rancho-san-diego-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-rancho-san-diego-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.5,
@@ -20,5 +22,6 @@
   "squareFootage": 98316,
   "summary": "Rancho San Diego is an attractively landscaped open-air community shopping center in El Cajon featuring Ross Dress for Less as its anchor tenant, along with a variety of smaller stores and restaurants. The 98,316 square foot center serves a prosperous suburban trade area with excellent parking and convenient access for everyday shopping needs.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 25.498324007215068
 }

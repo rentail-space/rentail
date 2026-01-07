@@ -8,7 +8,9 @@
   "latitude": 34.2266056,
   "longitude": -118.4489533,
   "phone": "++1 818-892-7816",
-  "imageURLs": ["/images/malls/ca-plaza-del-valle-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-plaza-del-valle-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2200,
   "rating": 4.3,
@@ -20,5 +22,6 @@
   "numberOfStores": 100,
   "summary": "Plaza Del Valle is a family-oriented community plaza in Panorama City featuring approximately 100 small retail shops and restaurants. The center serves as a cultural hub with weekly live entertainment and annual festivals, creating a vibrant gathering place for the local Hispanic/Latino community.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 14.868892155956166
 }

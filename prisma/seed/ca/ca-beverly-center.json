@@ -8,7 +8,9 @@
   "latitude": 34.0751706,
   "longitude": -118.3773546,
   "phone": "++1 310-854-0070",
-  "imageURLs": ["/images/malls/ca-beverly-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-beverly-center-1.jpg"
+  ],
   "summary": "Beverly Center is a premier eight-story luxury shopping destination in West Hollywood featuring over 100 high-end retailers including Bloomingdale's, Macy's, and designer boutiques like Louis Vuitton and Gucci. Recently renovated with modern open-air terraces and stunning city views, it offers an elevated shopping and dining experience at the heart of Los Angeles's most fashionable neighborhood.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -20,5 +22,6 @@
   "description": "Beverly Center stands as one of Los Angeles's premier luxury shopping destinations, strategically positioned at the intersection of Beverly Boulevard and La Cienega Boulevard in the heart of West Hollywood. Since its opening in 1982, this iconic eight-story shopping center has undergone extensive renovations to maintain its status as a world-class retail destination, featuring a distinctive modern design with open-air terraces and stunning views of the Hollywood Hills. The center houses an impressive collection of over 100 luxury retailers and contemporary fashion brands, including flagship stores for Bloomingdale's and Macy's as well as coveted designer boutiques like Louis Vuitton, Gucci, and Prada. Beyond shopping, Beverly Center offers an elevated dining experience with a curated selection of restaurants and eateries ranging from casual cafes to upscale dining establishments. The center's recent multi-million dollar transformation has created a sophisticated retail environment that seamlessly blends indoor luxury shopping with California's outdoor lifestyle, making it a must-visit destination for both local residents and international visitors seeking the quintessential Los Angeles shopping experience.",
   "numberOfStores": 100,
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 50.085300750852426
 }

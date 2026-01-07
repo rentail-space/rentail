@@ -61,14 +61,14 @@ model Messages {
 
 model Property {
   address        String          @map("address")
-  centerType     CenterType      @map("center_type")                                @default(CommunityCenter)
+  centerType     CenterType      @map("center_type")                                           @default(CommunityCenter)
   city           String          @map("city")
   country        String          @map("country")
-  createdAt      DateTime        @map("created_at")                                 @default(now())
+  createdAt      DateTime        @map("created_at")                                            @default(now())
   demographics   String?         @map("demographics")
   description    String          @map("description")
   googlePlaceID  String          @map("google_place_id")
-  id             String          @map("id")                                         @id
+  id             String          @map("id")                                                    @id
   imageURLs      String[]        @map("image_urls")
   latitude       Float           @map("latitude")
   logoURL        String?         @map("logo_url")
@@ -78,14 +78,15 @@ model Property {
   openFrom       Int?            @map("open_from") // Hour:minute eg 930 is 9:30
   openUntil      Int?            @map("open_until") // Hour:minute eg 2100 is 21:00
   phone          String?         @map("phone")
+  ranking        Int?            @map("rated") // Rating (1-5) * log(reviewCount) * tier (1-3)
   rating         Float?          @map("rating") // 1.0-5.0
   reviewCount    Int?            @map("review_count")
   spaces         PropertySpace[]
   squareFootage  Int?            @map("square_footage")
   state          String          @map("state")
   summary        String?         @map("summary")
-  tier           Int             @map("tier")                                       @default(1) // 1 - Value 2 - Average 3 - Upscale
-  updatedAt      DateTime        @map("updated_at")                                 @updatedAt
+  tier           Int             @map("tier")                                                  @default(1) // 1 - Value 2 - Average 3 - Upscale
+  updatedAt      DateTime        @map("updated_at")                                            @updatedAt
   website        String          @map("website")
 
   @@map("properties")

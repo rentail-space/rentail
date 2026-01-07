@@ -8,7 +8,9 @@
   "latitude": 33.725331,
   "longitude": -117.9873913,
   "phone": "++1 833-800-4343",
-  "imageURLs": ["/images/malls/ca-pavilions-place-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-pavilions-place-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.3,
@@ -20,5 +22,6 @@
   "squareFootage": 209749,
   "summary": "Pavilions Place is a 209,749-square-foot community shopping center located on Beach Boulevard in Westminster, California, offering excellent visibility and convenient access to Interstate 405. The center serves the affluent Orange County communities of Westminster and Huntington Beach with a strong mix of retail and service tenants.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.468047210965004
 }

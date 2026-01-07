@@ -8,7 +8,9 @@
   "latitude": 36.7166802,
   "longitude": -121.65776799999999,
   "phone": "++1 831-449-7227",
-  "imageURLs": ["/images/malls/ca-northridge-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-northridge-mall-1.jpg"
+  ],
   "summary": "Northridge Mall is Salinas' spacious enclosed shopping center featuring diverse retail stores, a movie theater, food court, and family-friendly amenities including a kids' play area. This regional mall serves as the primary shopping and entertainment destination for the Salinas Valley community.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Northridge Mall serves a diverse middle-income demographic in Salinas, California, primarily attracting families and young adults from the surrounding agricultural region. The trade area encompasses Monterey County residents with household incomes ranging from $50,000 to $85,000, including a significant Hispanic population reflective of the Salinas Valley community. Shoppers typically visit for value-oriented retail, family entertainment including the movie theater and kids' play area, and convenient food court dining options that cater to multi-generational family outings.",
   "description": "Northridge Mall stands as Salinas' premier enclosed shopping destination, serving the heart of California's agricultural Salinas Valley since its establishment. This spacious regional mall offers a comprehensive retail experience with a diverse mix of stores spanning fashion, electronics, home goods, and specialty retail, complemented by convenient services that make it a one-stop destination for local families. The mall's entertainment amenities include a modern movie theater complex and a dedicated children's play area, making it an ideal gathering place for families throughout Monterey County. Visitors can enjoy a variety of dining options in the food court, providing everything from quick bites to casual meals in a comfortable indoor setting. With ample parking, accessible location on Northridge Drive, and operating hours from 10 AM to 9 PM daily, the mall continues to serve as a vital community hub where residents come together for shopping, entertainment, and social connection.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.317489822318144
 }

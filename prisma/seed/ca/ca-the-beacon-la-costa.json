@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.0840339,
   "longitude": -117.2669067,
-  "imageURLs": ["/images/malls/ca-the-beacon-la-costa-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-beacon-la-costa-1.jpg"
+  ],
   "rating": 4.4,
   "reviewCount": 84,
   "website": "https://www.thebeaconlacosta.com/?utm_source=rentail.space",
@@ -16,5 +18,6 @@
   "description": "The Beacon La Costa is a contemporary community shopping center located along the prestigious El Camino Real corridor in Carlsbad's La Costa neighborhood, one of North County San Diego's most desirable coastal communities. This open-air center serves as a convenient lifestyle destination for the surrounding affluent residential areas, offering a carefully curated mix of dining, services, and retail options that cater to the discerning tastes of local residents and visitors alike. The center's modern architecture and well-maintained grounds create an inviting atmosphere that reflects the upscale character of the La Costa area. With its prime location near the renowned La Costa Resort and Spa and easy access from Interstate 5, The Beacon La Costa has established itself as a go-to destination for everyday needs and casual dining experiences. The center's tenant mix emphasizes quality and convenience, making it a valued community asset that serves the daily lifestyle needs of one of Southern California's most sought-after coastal neighborhoods.",
   "summary": "The Beacon La Costa is a modern community shopping center situated in Carlsbad's upscale La Costa neighborhood along El Camino Real. This open-air destination offers a convenient mix of dining, services, and retail options tailored to the affluent coastal community it serves.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 16.93365771734456
 }

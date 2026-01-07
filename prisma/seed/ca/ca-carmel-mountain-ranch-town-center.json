@@ -8,7 +8,9 @@
   "latitude": 32.9808902,
   "longitude": -117.0760154,
   "phone": "++1 858-546-3000",
-  "imageURLs": ["/images/malls/ca-carmel-mountain-ranch-town-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-carmel-mountain-ranch-town-center-1.jpg"
+  ],
   "openFrom": 900,
   "openUntil": 2200,
   "rating": 4.4,
@@ -20,5 +22,6 @@
   "numberOfStores": 40,
   "summary": "Carmel Mountain Ranch Town Center is a neighborhood shopping hub featuring over 40 stores and services, anchored by Trader Joe's and Ralphs grocery stores. The center offers diverse dining options across 13 restaurants, essential services, and convenient amenities that serve the Carmel Mountain Ranch community's daily needs.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.387268724864665
 }

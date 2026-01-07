@@ -8,7 +8,9 @@
   "latitude": 34.1076629,
   "longitude": -117.56895979999997,
   "phone": "++1 909-989-4207",
-  "imageURLs": ["/images/malls/ca-terra-vista-town-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-terra-vista-town-center-1.jpg"
+  ],
   "summary": "Terra Vista Town Center is the Inland Empire's favorite open-air lifestyle destination in Rancho Cucamonga, featuring over 50 retailers, diverse dining options, and a movie theater. This outdoor shopping complex offers a comprehensive mix of shopping, entertainment, and dining experiences in a cheerful, family-friendly environment.",
   "openFrom": 800,
   "openUntil": 2300,
@@ -20,5 +22,6 @@
   "description": "Terra Vista Town Center stands as the Inland Empire's premier open-air lifestyle destination, offering a vibrant shopping and entertainment experience in the heart of Rancho Cucamonga, California. This cheerful outdoor shopping complex has established itself as a community gathering place, featuring over 50 retailers that span popular chain stores, diverse dining options, and a full-service movie theater. The center's open-air design creates an inviting atmosphere where visitors can explore the latest trends and brands while enjoying Southern California's pleasant climate. With its carefully curated mix of shopping, restaurants, and entertainment experiences, Terra Vista Town Center has become a shopping haven for residents and visitors seeking everything from everyday essentials to the latest fashion trends. The center's convenient location on Foothill Boulevard, combined with its comprehensive retail offerings and family-friendly amenities, has made it a favorite destination for the Inland Empire community, earning an impressive 4.4-star rating from thousands of satisfied visitors.",
   "numberOfStores": 50,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 32.03186138276598
 }

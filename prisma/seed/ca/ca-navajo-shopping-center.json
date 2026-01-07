@@ -8,7 +8,9 @@
   "latitude": 32.8018442,
   "longitude": -117.0125535,
   "phone": "++1 858-847-4600",
-  "imageURLs": ["/images/malls/ca-navajo-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-navajo-shopping-center-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.3,
@@ -21,5 +23,6 @@
   "squareFootage": 102227,
   "summary": "Navajo Shopping Center is a 102,227 square foot community shopping center in San Diego's San Carlos neighborhood, anchored by Albertsons and featuring convenient access to I-8 and SR 125. The center serves an affluent trade area with household incomes averaging $132,736 and attracts over 1.7 million annual visits.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.114936528986227
 }

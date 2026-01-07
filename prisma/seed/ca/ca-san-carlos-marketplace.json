@@ -8,7 +8,9 @@
   "latitude": 37.502351,
   "longitude": -122.24413279999999,
   "phone": "++1 925-279-1800",
-  "imageURLs": ["/images/malls/ca-san-carlos-marketplace-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-san-carlos-marketplace-1.jpg"
+  ],
   "summary": "San Carlos Marketplace is a 153,510 square foot community center anchored by Best Buy, PetSmart, and TJ Maxx, strategically located near the Bayshore Freeway in one of the Bay Area's most affluent markets. The center attracts over 2.5 million annual visits from a premium demographic with average household incomes exceeding $261,000.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -21,5 +23,6 @@
   "numberOfStores": 2,
   "squareFootage": 153510,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.424784960343338
 }

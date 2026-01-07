@@ -8,7 +8,9 @@
   "latitude": 37.4175675,
   "longitude": -121.8969393,
   "phone": "++1 408-514-0025",
-  "imageURLs": ["/images/malls/ca-the-great-mall-milpitas-outlet-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-great-mall-milpitas-outlet-1.jpg"
+  ],
   "summary": "The Great Mall in Milpitas is Northern California's largest outlet shopping center, featuring over 200 brand-name stores offering discounted prices on fashion, accessories, and home goods. Strategically located in Silicon Valley, this indoor mall serves as a premier regional destination for value-conscious shoppers throughout the Bay Area.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "The Great Mall in Milpitas stands as one of Northern California's premier outlet shopping destinations, offering an impressive collection of brand-name retailers at discounted prices. Originally opened in 1994 as a converted Ford assembly plant, this expansive indoor mall has transformed into a shopper's paradise featuring over 200 outlet stores from top brands including Nike, Coach, Michael Kors, and many more. Located conveniently off Highway 880 in the heart of Silicon Valley, the center serves as a regional draw for bargain hunters throughout the San Francisco Bay Area. The mall's climate-controlled environment provides year-round comfort while shoppers explore multiple levels of fashion, footwear, accessories, home goods, and electronics retailers. With its combination of outlet pricing, extensive tenant mix, and strategic location near major tech employment centers, The Great Mall has established itself as a go-to destination for value-oriented shopping in one of the nation's most affluent regions.",
   "numberOfStores": 200,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.23510418108888
 }

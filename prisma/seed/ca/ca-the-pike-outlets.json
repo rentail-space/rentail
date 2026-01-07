@@ -8,7 +8,9 @@
   "latitude": 33.7650308,
   "longitude": -118.1941165,
   "phone": "++1 877-225-5337",
-  "imageURLs": ["/images/malls/ca-the-pike-outlets-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-pike-outlets-1.jpg"
+  ],
   "summary": "The Pike Outlets is a waterfront entertainment and shopping destination in downtown Long Beach featuring outlet stores, diverse dining options, and attractions including a Ferris wheel and theater. This open-air center combines value shopping with community events and nightlife, creating a vibrant gathering place along the Long Beach harbor.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "The Pike Outlets attracts a diverse mix of visitors including young professionals, families, and tourists drawn to the downtown Long Beach waterfront location. The trade area serves middle to upper-middle income households from Long Beach and surrounding communities, with a significant tourist component due to the entertainment district atmosphere and proximity to the harbor. Visitors typically seek a combination of value shopping, dining experiences, and entertainment options, with strong weekend and evening traffic patterns driven by the waterfront location and entertainment venues including the Ferris wheel and theater.",
   "description": "The Pike Outlets is a distinctive waterfront entertainment and shopping destination located in the heart of downtown Long Beach, California. Situated at 95 South Pine Avenue, this open-air outlet center combines value-oriented retail with a vibrant entertainment district featuring restaurants, nightlife venues, a theater, and an iconic Ferris wheel overlooking the harbor. The center hosts community events throughout the year, including the Pike Market featuring local vendors and artisans, and the Festival of Trees charitable event running from November through December. With new additions like Paris Baguette opening in early 2026, The Pike Outlets continues to evolve as a neighborhood gathering place that blends shopping, dining, and entertainment. The center's waterfront location and mix of outlet stores, restaurants along Bay Street and The Paseo, and family-friendly attractions make it a unique destination that serves both locals and tourists seeking a complete Long Beach experience.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 35.595397606112606
 }

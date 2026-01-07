@@ -8,7 +8,9 @@
   "latitude": 33.9381652,
   "longitude": -117.22310049999999,
   "phone": "++1 951-247-0100",
-  "imageURLs": ["/images/malls/ca-rio-rancho-super-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-rio-rancho-super-mall-1.jpg"
+  ],
   "summary": "Rio Rancho Super Mall is a well-established regional shopping center located on Sunnymead Boulevard in Moreno Valley, serving the Inland Empire community. With a 4-star rating from over 2,100 reviews, this mall offers a diverse retail experience with convenient hours and a family-friendly atmosphere.",
   "openFrom": 1000,
   "openUntil": 1930,
@@ -19,5 +21,6 @@
   "demographics": "Rio Rancho Super Mall serves a diverse, middle-income demographic in Moreno Valley, with a strong representation of families and value-conscious shoppers. The trade area draws primarily from the Inland Empire region, attracting households with median incomes ranging from $50,000 to $75,000, including young families, working professionals, and multi-generational households. Visitors typically seek affordable shopping options, everyday necessities, and family-friendly dining experiences. The center appeals to a multicultural customer base reflective of Moreno Valley's diverse population, with shopping patterns focused on weekend family outings and practical, budget-minded purchases.",
   "description": "Rio Rancho Super Mall stands as a prominent shopping destination in Moreno Valley, California, serving the vibrant Inland Empire community along Sunnymead Boulevard. This regional mall has established itself as a go-to location for families and shoppers seeking a diverse retail experience in the heart of Moreno Valley. With convenient operating hours from 10:00 AM to 7:30 PM, the mall provides accessibility for both weekday and weekend shoppers looking to explore its variety of stores and services. The center has earned a solid reputation among local residents, reflected in its 4-star rating from over 2,100 reviews, demonstrating its consistent appeal to the community. Rio Rancho Super Mall continues to serve as an important retail hub in the region, offering a mix of shopping, dining, and entertainment options that cater to the diverse needs of Moreno Valley residents and visitors from surrounding areas.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.59590586646125
 }

@@ -8,7 +8,9 @@
   "latitude": 33.9154857,
   "longitude": -117.590079,
   "phone": "++1 909-946-7518",
-  "imageURLs": ["/images/malls/ca-norco-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-norco-village-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.6,
@@ -34,5 +36,6 @@
       "size": 1292,
       "available": true
     }
-  ]
+  ],
+  "ranking": 24.98723076144015
 }

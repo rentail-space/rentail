@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.0467728,
   "longitude": -117.293313,
-  "imageURLs": ["/images/malls/ca-moonlight-marketplace-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-moonlight-marketplace-1.jpg"
+  ],
   "openFrom": 900,
   "openUntil": 2000,
   "rating": 4.5,
@@ -18,5 +20,6 @@
   "description": "Moonlight Marketplace is a vibrant weekend flea market and artisan marketplace located at 459 South Coast Highway 101 in the heart of Encinitas, California, just steps from the iconic Moonlight Beach. Open every Saturday and Sunday from 10am to 4pm, this curated marketplace has become a beloved destination for locals and visitors seeking unique vintage finds, handmade goods, succulents, swimwear, home decor, and artisanal products. The marketplace features rotating vendors including popular sellers like @succulentbella for succulents, @taylorjeanneyoga for wellness products, @jordyn_bev_ for vintage and home decor, and @layne.swimm for bikinis and beachwear. With its prime location in North County San Diego's coastal corridor, Moonlight Marketplace captures the laid-back, creative spirit of Encinitas while providing an accessible platform for small businesses and artisans to connect with the community. The venue also hosts special events like Vegan Fest, further establishing itself as a community gathering space that celebrates local culture, sustainability, and the Southern California lifestyle.",
   "summary": "Moonlight Marketplace is a weekend flea market and artisan marketplace in Encinitas, open Saturdays and Sundays from 10am-4pm, featuring rotating vendors selling vintage goods, handmade items, succulents, beachwear, and home decor. Located at 459 South Coast Highway 101 near Moonlight Beach, it serves as a vibrant community hub for local artisans and small businesses in North County San Diego.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 22.201808583186985
 }

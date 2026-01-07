@@ -8,7 +8,9 @@
   "latitude": 33.8504554,
   "longitude": -118.1403782,
   "phone": "++1 562-531-6707",
-  "imageURLs": ["/images/malls/ca-lakewood-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-lakewood-center-1.jpg"
+  ],
   "summary": "Lakewood Center is an established regional mall near Long Beach featuring over 225 retailers including Macy's, JCPenney, Target, and Costco, with convenient freeway access. The center combines shopping with entertainment through its 16-screen cinema, Round One complex, and diverse dining options ranging from food court favorites to full-service restaurants.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Lakewood Center stands as a cornerstone shopping destination in the Long Beach area, strategically positioned at the intersection of Lakewood Boulevard and Del Amo Boulevard with convenient access from three major freeways. This established regional mall has evolved into a comprehensive retail hub featuring over 225 stores, anchored by major department stores including Macy's and JCPenney, alongside big-box powerhouses like Target, Home Depot, and Costco. The center offers an impressive mix of national retailers ranging from fashion favorites like H&M and Victoria's Secret to electronics giant Best Buy, ensuring shoppers find everything they need under one roof. Beyond shopping, Lakewood Center has transformed into a true entertainment destination with its 16-screen Starlight Cinemas, Round One entertainment complex, and diverse dining options including California Pizza Kitchen, Outback Steakhouse, Luna Grill, and the trendy Dave's Hot Chicken. The mall's food court and full-service restaurants cater to every taste and occasion, making it a popular gathering place for families and friends throughout the Southeast Los Angeles County region.",
   "numberOfStores": 225,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 38.1426621688966
 }

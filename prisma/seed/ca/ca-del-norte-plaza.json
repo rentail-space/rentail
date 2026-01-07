@@ -8,7 +8,9 @@
   "latitude": 33.1427437,
   "longitude": -117.093966,
   "phone": "++1 833-800-4343",
-  "imageURLs": ["/images/malls/ca-del-norte-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-del-norte-plaza-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.3,
@@ -20,5 +22,6 @@
   "squareFootage": 223203,
   "summary": "Del Norte Plaza is a 223,203 square foot community shopping center located in Escondido, California, just off the I-15 Freeway in North San Diego County. Managed by Kimco Realty, the center serves a thriving trade area with nearly 500,000 residents within 10 miles and offers convenient access to everyday shopping needs.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.054032344629714
 }

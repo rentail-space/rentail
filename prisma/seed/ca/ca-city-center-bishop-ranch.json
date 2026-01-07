@@ -8,7 +8,9 @@
   "latitude": 37.763008,
   "longitude": -121.9590578,
   "phone": "++1 925-815-1902",
-  "imageURLs": ["/images/malls/ca-city-center-bishop-ranch-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-city-center-bishop-ranch-1.jpg"
+  ],
   "summary": "City Center Bishop Ranch is a Renzo Piano-designed lifestyle center featuring upscale shops, acclaimed restaurants, and THE LOT Cinema in a beautifully landscaped open-air setting. This premier San Ramon destination combines luxury retail like Rolex and Nike with chef-driven dining experiences and community gathering spaces.",
   "openFrom": 1000,
   "openUntil": 1900,
@@ -19,5 +21,6 @@
   "demographics": "City Center Bishop Ranch attracts affluent professionals and families from the San Ramon Valley and East Bay suburbs, with visitors typically in the 30-55 age range and household incomes exceeding $150,000. The trade area serves educated, dual-income households who value premium dining experiences, boutique shopping, and lifestyle amenities. Shoppers demonstrate preferences for upscale brands, experiential retail like SandboxVR, and chef-driven restaurants, reflecting the sophisticated tastes of the surrounding Bishop Ranch business community and residential neighborhoods.",
   "description": "City Center Bishop Ranch stands as a premier lifestyle destination in San Ramon, distinguished by its award-winning design by renowned architect Renzo Piano. This upscale open-air center seamlessly integrates high-end retail, acclaimed dining, and entertainment around beautifully landscaped public spaces, gardens, and trails. The property features an impressive tenant roster including luxury retailers like Madewell, Nike, and Heller Jewelers & Rolex, alongside celebrated restaurants such as LB Steak, The Slanted Door, and Delarosa. The center's crown jewel, THE LOT Cinema, offers an elevated movie-going experience complete with a full-service restaurant and bar. Beyond shopping and dining, City Center serves as the vibrant heart of the Bishop Ranch master-planned community, hosting local events, providing modern office space for leading companies, and featuring unique amenities like an ice rink, making it a true mixed-use destination that redefines the traditional shopping center experience.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 37.37938947764669
 }

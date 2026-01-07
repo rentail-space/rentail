@@ -8,7 +8,9 @@
   "latitude": 34.1441443,
   "longitude": -118.7548997,
   "phone": "++1 818-223-9499",
-  "imageURLs": ["/images/malls/ca-whizin-market-square-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-whizin-market-square-1.jpg"
+  ],
   "openFrom": 800,
   "openUntil": 2200,
   "rating": 4.5,
@@ -19,5 +21,6 @@
   "description": "Whizin Market Square is a vibrant community shopping destination located in the heart of Agoura Hills, California, serving the western San Fernando Valley and Conejo Valley communities. This open-air center has established itself as a neighborhood gathering place, offering a carefully curated mix of shopping, dining, and service businesses that cater to the daily needs and lifestyle preferences of local residents. The Square features diverse retail options alongside popular dining establishments, creating a convenient one-stop destination for everything from grocery shopping to professional services. Throughout the year, Whizin Market Square hosts special events and concerts that bring the community together, fostering a sense of connection among neighbors and visitors. With its accessible location on Roadside Drive and commitment to providing quality tenant experiences, the center has maintained strong community ties and continues to evolve to meet the changing needs of Agoura Hills residents.",
   "summary": "Whizin Market Square is a community-focused open-air shopping center in Agoura Hills offering a diverse mix of retail, dining, and service businesses. The center serves as a neighborhood gathering place with regular events and concerts that bring the local community together.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.05544166090188
 }

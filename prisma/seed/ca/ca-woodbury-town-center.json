@@ -8,7 +8,9 @@
   "latitude": 33.697859099999995,
   "longitude": -117.74054429999998,
   "phone": "++1 949-720-3100",
-  "imageURLs": ["/images/malls/ca-woodbury-town-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-woodbury-town-center-1.jpg"
+  ],
   "summary": "Woodbury Town Center is an expansive open-air community destination in Irvine featuring big-box anchors like The Home Depot, LA Fitness, Ralphs, and Trader Joe's alongside popular dining options including Chipotle, Panera Bread, and Chick-fil-A. The center offers modern conveniences such as EV charging stations, curbside pickup, and complimentary WiFi, serving as a one-stop hub for everyday essentials and family-friendly experiences.",
   "rating": 4.5,
   "reviewCount": 2622,
@@ -17,5 +19,6 @@
   "demographics": "Woodbury Town Center serves the affluent Irvine community, attracting primarily upper-middle-class families and young professionals with household incomes exceeding $100,000. The trade area draws heavily from the surrounding Woodbury master-planned community, characterized by well-educated residents aged 25-54 with children, who value convenience and quality. Shoppers typically visit for weekly grocery runs, fitness activities, and casual dining experiences, with a preference for efficient one-stop shopping that combines everyday essentials with family-friendly dining options.",
   "description": "Woodbury Town Center stands as an expansive community destination in the heart of Irvine, California, designed to meet the daily needs of the surrounding Woodbury master-planned community. This open-air shopping center seamlessly combines everyday essentials with lifestyle amenities, featuring major anchors like The Home Depot, LA Fitness, Ralphs, and Trader Joe's that draw consistent foot traffic throughout the week. The center has cultivated a strong dining scene with popular family-friendly restaurants including Chipotle, Panera Bread, Chick-fil-A, and Niko Niko Sushi, making it a go-to destination for both quick meals and casual dining experiences. HomeGoods adds to the retail mix, providing home décor and furnishings that complement the home improvement offerings. With modern amenities including EV charging stations, curbside pickup, complimentary WiFi, and Amazon Hub lockers, Woodbury Town Center reflects the tech-savvy, convenience-oriented lifestyle of Irvine residents, positioning itself as more than just a shopping center but a true community hub.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.76769418618659
 }

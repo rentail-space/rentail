@@ -8,7 +8,9 @@
   "latitude": 34.0696398,
   "longitude": -118.4038963,
   "phone": "++1 310-276-9600",
-  "imageURLs": ["/images/malls/ca-the-rodeo-collection-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-rodeo-collection-1.jpg"
+  ],
   "summary": "The Rodeo Collection is a prestigious 70,000 square foot outdoor shopping plaza on Rodeo Drive, housing over 45 luxury boutiques, world-class salons, and premier cosmetic-medical practices. Located in Beverly Hills' Golden Triangle since 1980, it offers an exclusive blend of high-end shopping, beauty services, and fine dining in one of the world's most iconic luxury destinations.",
   "openFrom": 900,
   "openUntil": 1800,
@@ -21,5 +23,6 @@
   "numberOfStores": 45,
   "squareFootage": 70000,
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 40.73124754562879
 }

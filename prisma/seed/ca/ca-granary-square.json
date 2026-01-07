@@ -8,7 +8,9 @@
   "latitude": 34.4040212,
   "longitude": -118.5508037,
   "phone": "++1 833-800-4343",
-  "imageURLs": ["/images/malls/ca-granary-square-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-granary-square-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.4,
@@ -20,5 +22,6 @@
   "squareFootage": 147142,
   "summary": "Granary Square is a 147,000+ square-foot, grocery-anchored community shopping center in Valencia, California, offering a diverse tenant mix serving the affluent Santa Clarita Valley. The center benefits from strong demographics with median household incomes exceeding $126,000 and serves a trade area population of nearly 200,000 residents.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 25.575748367884803
 }

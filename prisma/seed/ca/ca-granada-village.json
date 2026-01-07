@@ -8,7 +8,9 @@
   "latitude": 34.2664198,
   "longitude": -118.5237356,
   "phone": "++1 213-553-2200",
-  "imageURLs": ["/images/malls/ca-granada-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-granada-village-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.5,
@@ -21,5 +23,6 @@
   "squareFootage": 226488,
   "summary": "Granada Village is a LEED Gold Certified, 226,488 square foot community center in Granada Hills anchored by TJ MAXX, Burlington, HomeGoods, Petco, and Sprouts Farmers Market. Located near Cal State Northridge and the 118 Freeway, this thriving neighborhood destination serves an affluent residential community with over 5.1 million annual visits.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.72723625966029
 }

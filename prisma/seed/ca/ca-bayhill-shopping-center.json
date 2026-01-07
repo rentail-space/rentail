@@ -8,7 +8,9 @@
   "latitude": 37.6261179,
   "longitude": -122.42729209999999,
   "phone": "++1 925-279-1800",
-  "imageURLs": ["/images/malls/ca-bayhill-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-bayhill-shopping-center-1.jpg"
+  ],
   "summary": "Bayhill Shopping Center is a convenient strip mall in San Bruno featuring familiar restaurants, a pharmacy, grocery store, and essential services. Strategically located near major tech campuses including YouTube and Google, the center serves a daytime population of 192,000+ within 3 miles and offers easy access from I-280.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -19,5 +21,6 @@
   "demographics": "Bayhill Shopping Center serves a highly educated, affluent professional demographic working at nearby tech campuses including YouTube, Google, and @WalmartLabs, contributing to a daytime population exceeding 192,000 within a 3-mile radius. The trade area attracts young to middle-aged professionals with above-average household incomes typical of the San Francisco Bay Area market. Primary visitors include tech workers seeking convenient lunch options, grocery shopping, and everyday services during work hours, as well as local San Bruno residents utilizing the pharmacy and essential retail offerings. The center benefits from its proximity to I-280, drawing commuters and creating a mixed demographic of both workplace-driven traffic and residential neighborhood shoppers.",
   "description": "Bayhill Shopping Center is a well-established strip mall located at 851 Cherry Avenue in San Bruno, California, strategically positioned near major tech employers including YouTube, Google, and @WalmartLabs offices. The center serves a thriving daytime population of over 192,000 people within a 3-mile radius, making it a convenient destination for tech professionals and local residents alike. With easy access from Interstate 280, the shopping center offers a practical mix of familiar restaurants, a pharmacy, a grocery store, and various other essential services that cater to both weekday lunch crowds and everyday shopping needs. Operating from 6:00 AM to 11:00 PM, Bayhill Shopping Center provides extended hours to accommodate the busy schedules of its diverse customer base. The property is managed by Regency Centers, a nationally recognized shopping center developer and operator known for creating thriving retail destinations, and maintains a strong 4.2-star rating from over 1,800 reviews, reflecting its consistent service to the San Bruno community.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.352386878929753
 }

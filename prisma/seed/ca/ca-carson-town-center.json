@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.840473599999996,
   "longitude": -118.2855728,
-  "imageURLs": ["/images/malls/ca-carson-town-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-carson-town-center-1.jpg"
+  ],
   "summary": "Carson Town Center is a community-oriented shopping destination in Carson, California, serving the diverse South Bay area with convenient retail and services. With a 4.3-star rating from over 1,200 reviews, this accessible center provides essential shopping options for local residents and families.",
   "openFrom": 700,
   "openUntil": 1800,
@@ -18,5 +20,6 @@
   "demographics": "Carson Town Center serves a diverse, working-class to middle-income community in the South Bay region of Los Angeles County. The primary trade area includes families with varied household compositions, with a significant representation of Hispanic, African American, and Asian populations reflecting Carson's multicultural character. Shoppers typically range from young families to middle-aged residents seeking convenient access to essential retail and services, with household incomes spanning lower-middle to middle class ranges. The center attracts value-conscious consumers who prioritize accessibility and practical shopping options over luxury experiences.",
   "description": "Carson Town Center is a community-focused shopping destination located in the heart of Carson, California, serving the diverse South Bay community since its establishment. Situated at 500 Carson Town Center North, this open-air retail center has been an integral part of the city's commercial landscape, providing residents with convenient access to essential shopping and services. The center operates Monday through Thursday from 7:00 AM to 6:00 PM, accommodating the schedules of working families and local residents. With a strong 4.3-star rating from over 1,200 reviews, Carson Town Center has earned its reputation as a reliable neighborhood shopping hub. The property is managed in coordination with the City of Carson's Community Development department, reflecting the municipality's commitment to maintaining quality retail infrastructure for its residents. The center's strategic location in Carson, a city known for its rich multicultural heritage and strong community connections, makes it an accessible destination for South Bay shoppers seeking everyday retail needs and services.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.588335835322887
 }

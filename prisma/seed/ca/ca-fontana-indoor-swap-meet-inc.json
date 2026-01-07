@@ -8,7 +8,9 @@
   "latitude": 34.075874299999995,
   "longitude": -117.43416590000001,
   "phone": "++1 909-428-0818",
-  "imageURLs": ["/images/malls/ca-fontana-indoor-swap-meet-inc-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-fontana-indoor-swap-meet-inc-1.jpg"
+  ],
   "summary": "Established in 1992, the Fontana Indoor Swap Meet is the Inland Empire's most successful swap meet, featuring 70 diverse vendor stores offering everything from essential items to unique treasures. This beloved indoor marketplace provides a one-stop shopping experience where customers can support local businesses while finding great deals in a family-friendly environment.",
   "openFrom": 1000,
   "openUntil": 1830,
@@ -20,5 +22,6 @@
   "description": "Established in 1992, the Fontana Indoor Swap Meet has become the most visited and successful swap meet in the Inland Empire, serving as a beloved shopping destination for over three decades. Located at 9773 Sierra Avenue in Fontana, California, this indoor marketplace offers a unique shopping experience with approximately 70 vendor stores under one roof, providing everything from essential items to one-of-a-kind treasures. The swap meet prides itself on being a one-stop shopping center where customers can find diverse products ranging from seasonal delights to everyday necessities, all while supporting local small businesses and independent vendors. Open Monday, Wednesday, Thursday, and Sunday from 10:00 AM to 6:00 PM, and Friday and Saturday with extended hours until 6:30 PM, the center provides a convenient shopping schedule for the community. With a strong commitment to quality and customer satisfaction, the Fontana Indoor Swap Meet continues to offer aspiring entrepreneurs the opportunity to own their own business through vendor spaces, fostering a vibrant marketplace atmosphere that has made it a cornerstone of the local shopping scene for generations.",
   "numberOfStores": 70,
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 13.41928978516808
 }

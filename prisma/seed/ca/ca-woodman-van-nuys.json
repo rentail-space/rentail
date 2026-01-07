@@ -8,7 +8,9 @@
   "latitude": 34.246388,
   "longitude": -118.446551,
   "phone": "++1 213-553-2200",
-  "imageURLs": ["/images/malls/ca-woodman-van-nuys-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-woodman-van-nuys-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.3,
@@ -21,5 +23,6 @@
   "squareFootage": 107613,
   "summary": "Woodman Van Nuys is a 107,613 square foot community shopping center anchored by EL SUPER, a high-volume Hispanic grocer serving the dense Arleta neighborhood. Located next to a local high school, the center attracts over 1.5 million annual visits from a diverse community of nearly 285,000 residents within three miles.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.343767686163837
 }

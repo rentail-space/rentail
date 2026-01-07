@@ -8,7 +8,9 @@
   "latitude": 32.7630397,
   "longitude": -115.53065339999999,
   "phone": "++1 760-352-0800",
-  "imageURLs": ["/images/malls/ca-imperial-valley-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-imperial-valley-mall-1.jpg"
+  ],
   "summary": "Imperial Valley Mall is El Centro's premier enclosed shopping destination featuring 75 retail, dining, and entertainment options including a cinema and carousel. This modern regional mall serves the Imperial Valley with familiar chain retailers, a diverse food court, and family-friendly amenities.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -20,5 +22,6 @@
   "description": "Imperial Valley Mall stands as the premier enclosed shopping destination in El Centro, California, serving the Imperial Valley region with 75 retail, dining, and entertainment experiences under one roof. This modern regional mall features familiar chain retailers alongside a diverse food court, providing a comprehensive shopping experience for the entire family. The center's entertainment offerings include a cinema and a distinctive carousel, making it a popular gathering place for community events and family outings. With convenient hours operating from 10:00 AM to 8:00 PM most days, the mall serves as the retail hub for Imperial County residents and visitors from nearby Mexicali, Mexico. Managed professionally with a focus on creating memorable experiences, Imperial Valley Mall combines practical shopping convenience with engaging amenities that have earned it a strong 4.5-star rating from nearly 5,000 reviews.",
   "numberOfStores": 75,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 33.20138105125355
 }

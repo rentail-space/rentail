@@ -7,7 +7,9 @@
   "state": "B.C.",
   "latitude": 32.6527414,
   "longitude": -115.39523519999999,
-  "imageURLs": ["/images/malls/b.c.-plaza-686-1.jpg"],
+  "imageURLs": [
+    "/images/malls/b.c.-plaza-686-1.jpg"
+  ],
   "summary": "Plaza 686 is a community-oriented shopping center in San Pedro, Mexicali, serving local residents with convenient retail and services. With strong community ratings and consistent hours, it provides accessible shopping for everyday needs in the neighborhood.",
   "openFrom": 1000,
   "openUntil": 1900,
@@ -18,5 +20,6 @@
   "demographics": "Plaza 686 serves the San Pedro district of Mexicali, attracting middle-income families and working professionals from the surrounding residential neighborhoods. The trade area consists primarily of Mexican households with a mix of young families and established residents seeking convenient shopping options. Visitors typically engage in routine shopping trips for everyday needs, with a preference for accessible parking and familiar retail brands that cater to local tastes and budgets.",
   "description": "Plaza 686 is a neighborhood shopping center located on Calzada Cetys in the San Pedro district of Mexicali, Baja California. Serving the local community with convenient access to everyday retail and services, this center has established itself as a reliable destination for residents in the area. The plaza maintains consistent operating hours from 10:00 AM to 7:00 PM, accommodating the schedules of working families and local shoppers. With a solid 4.5-star rating based on over 900 reviews, Plaza 686 has earned the trust and loyalty of the San Pedro community. The center's straightforward layout and accessible location on Calzada Cetys make it an easy stop for routine shopping needs and local services.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.678336671771643
 }

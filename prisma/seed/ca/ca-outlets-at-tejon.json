@@ -8,7 +8,9 @@
   "latitude": 34.9848377,
   "longitude": -118.9415835,
   "phone": "++1 661-858-2155",
-  "imageURLs": ["/images/malls/ca-outlets-at-tejon-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-outlets-at-tejon-1.jpg"
+  ],
   "summary": "Outlets at Tejon is an open-air outlet center featuring nearly 60 designer and brand-name stores along California's I-5 corridor. The center offers unbeatable savings on popular brands like Nike, Old Navy, Gap, Tommy Hilfiger, and H&M in a tranquil shopping environment.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -20,5 +22,6 @@
   "description": "Outlets at Tejon is California's premier outlet shopping destination strategically located along Interstate 5 in Arvin, serving as a convenient retail oasis for travelers and residents alike. This open-air outlet center features nearly 60 designer and brand-name stores in a tranquil, easy-to-navigate environment that offers a refreshing alternative to crowded urban malls. Anchored by popular retailers including Nike Factory Store, Old Navy Outlet, Gap Outlet, H&M, and Tommy Hilfiger, the center delivers unbeatable savings on fashion, footwear, accessories, and home goods. The property's location at the gateway between Southern California and the Central Valley makes it an ideal stopping point for shoppers seeking outlet deals without the congestion of metropolitan shopping districts. With its strong tenant mix of recognizable national brands, family-friendly atmosphere, and commitment to value pricing, Outlets at Tejon has established itself as a regional shopping destination that combines convenience, savings, and quality merchandise in one accessible location.",
   "numberOfStores": 60,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.532149210923883
 }

@@ -8,7 +8,9 @@
   "latitude": 34.0160639,
   "longitude": -118.49622719999999,
   "phone": "++1 310-393-8355",
-  "imageURLs": ["/images/malls/ca-downtown-santa-monica-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-downtown-santa-monica-1.jpg"
+  ],
   "summary": "Downtown Santa Monica is Southern California's premier open-air lifestyle destination featuring the iconic Third Street Promenade with hundreds of upscale retailers, restaurants, and entertainment venues. This sophisticated pedestrian district combines premium shopping with year-round events and California's first Entertainment Zone, all just blocks from the beach.",
   "openFrom": 900,
   "openUntil": 2300,
@@ -19,5 +21,6 @@
   "demographics": "Downtown Santa Monica attracts an affluent, diverse demographic with a median household income significantly above the national average, drawing both local residents and tourists from across Southern California and internationally. The primary visitor base consists of millennials and Gen X professionals aged 25-54, along with affluent families and empty nesters who appreciate the upscale retail, dining, and entertainment offerings. The trade area serves Santa Monica's high-income coastal communities, West Los Angeles, and the broader Westside market, with visitors typically seeking premium shopping experiences, outdoor dining, and cultural activities. Shopping patterns reflect a preference for experiential retail, with extended dwell times driven by the pedestrian-friendly promenade environment and concentration of restaurants and entertainment venues.",
   "description": "Downtown Santa Monica, anchored by the iconic Third Street Promenade, stands as Southern California's premier open-air shopping and entertainment destination in the heart of one of the region's most desirable coastal communities. This stylish pedestrian promenade has evolved into a sophisticated lifestyle center featuring hundreds of businesses ranging from upscale retailers to acclaimed restaurants and entertainment venues, all set against the backdrop of Santa Monica's perfect year-round climate. The district has recently launched Southern California's first Entertainment Zone, allowing visitors to enjoy drinks from participating businesses while strolling the promenade, adding a new dimension to the already vibrant street life. Throughout the year, Downtown Santa Monica hosts signature events including Holiday Thursdays with complimentary activities, the beloved ice skating rink presented by Disney+ and Hulu, and numerous community gatherings that draw both locals and tourists. With its combination of premium shopping, diverse dining options, cultural attractions, and proximity to the Santa Monica Pier and beach, Downtown Santa Monica offers an unparalleled retail and entertainment experience that captures the essence of Southern California coastal living.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 63.604593265417876
 }

@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.7034949,
   "longitude": -117.9329904,
-  "imageURLs": ["/images/malls/ca-shops-at-costco-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-shops-at-costco-plaza-1.jpg"
+  ],
   "summary": "Low-key, open-air retail complex in Fountain Valley featuring a big-box anchor store, local services, and diverse international dining options. This convenient neighborhood shopping destination serves the community with practical everyday retail and has earned strong ratings from thousands of local shoppers.",
   "openFrom": 800,
   "openUntil": 2030,
@@ -18,5 +20,6 @@
   "demographics": "Shops at Costco Plaza attracts a diverse, middle to upper-middle class demographic primarily consisting of families and working professionals aged 30-65. The trade area serves the Fountain Valley and surrounding Orange County communities, drawing shoppers with household incomes ranging from $75,000 to $150,000 annually. Visitors are typically value-conscious consumers who appreciate the convenience of big-box retail combined with international dining options, reflecting the area's multicultural population. The center sees consistent weekday traffic from local residents running errands and weekend family shopping trips, with a strong emphasis on practical, everyday shopping needs rather than leisure browsing.",
   "description": "Shops at Costco Plaza is a convenient open-air retail destination located in the heart of Fountain Valley, California, serving the diverse Orange County community with practical shopping and dining options. Anchored by a major big-box retailer, this low-key shopping complex has established itself as a neighborhood hub where residents can efficiently handle their everyday needs in one location. The center features an appealing mix of local services and international eateries that reflect the multicultural character of the surrounding area, offering everything from quick-service dining to specialty restaurants. With ample parking and easy accessibility from Newhope Street, the plaza provides a straightforward shopping experience without the overwhelming crowds of larger regional malls. The center's strong 4.4-star rating from over 3,400 reviews demonstrates its consistent appeal to local shoppers who value convenience, variety, and quality service in their neighborhood retail destination.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.132808036644814
 }

@@ -8,7 +8,9 @@
   "latitude": 33.9027524,
   "longitude": -118.3950837,
   "phone": "++1 310-414-5280",
-  "imageURLs": ["/images/malls/ca-the-point-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-point-1.jpg"
+  ],
   "summary": "The Point is a hip, modern outdoor lifestyle center in El Segundo featuring upscale boutiques, popular restaurants like Hopdoddy, and wellness amenities including a SoulCycle studio. This coastal-inspired destination offers a curated shopping and dining experience with seasonal events and a vibrant social atmosphere.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "The Point attracts an affluent, health-conscious demographic primarily consisting of young professionals and families from El Segundo and the surrounding South Bay communities. The trade area includes high-income households with median incomes exceeding $100,000, drawn by the center's upscale boutiques, fitness offerings like SoulCycle, and premium dining options. Visitors tend to be style-conscious millennials and Gen X shoppers who value experiential retail, outdoor shopping environments, and coastal lifestyle brands, reflecting the beach-adjacent location and modern aesthetic of the property.",
   "description": "The Point is a hip, modern outdoor lifestyle center located at 850 South Pacific Coast Highway in El Segundo, California, offering a distinctive coastal shopping and dining experience. This contemporary open-air destination features upscale boutiques including Madewell with its signature denim bar, alongside carefully curated retailers that reflect the Southern California beach lifestyle. The center has become a social gathering place for the South Bay community, hosting seasonal events like spook-tacular Halloween celebrations and snow showers during the holidays. Dining is a cornerstone of The Point's appeal, with popular restaurants like Hopdoddy Burger Bar drawing crowds throughout the week, complemented by cafes and other eateries that create a vibrant culinary scene. The property also emphasizes wellness and self-care with amenities including salons and a SoulCycle studio, making it more than just a shopping destination but a lifestyle hub where visitors can shop coastal, gather local, and enjoy the modern outdoor mall atmosphere that has earned it a 4.5-star rating from over 2,100 reviews.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 44.861117429002974
 }

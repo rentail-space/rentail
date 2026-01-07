@@ -8,7 +8,9 @@
   "latitude": 37.5336403,
   "longitude": -122.3273835,
   "phone": "++1 650-349-0431",
-  "imageURLs": ["/images/malls/ca-laurelwood-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-laurelwood-shopping-center-1.jpg"
+  ],
   "summary": "Laurelwood Shopping Center is a vibrant neighborhood hub in San Mateo featuring the beloved Piazza's Fine Foods Market alongside diverse dining, shopping, and service options. Conveniently located off Highway 92, this welcoming open-air center serves as the community's go-to destination for everyday needs and quality time with family and friends.",
   "openFrom": 700,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Laurelwood Shopping Center serves a diverse mix of San Mateo families, professionals, and retirees in the mid to upper-middle income brackets. The trade area draws from nearby residential neighborhoods with household incomes ranging from $100,000 to $200,000+, reflecting the affluent Peninsula market. Primary visitors include busy professionals seeking convenient services, families shopping at Piazza's Fine Foods for quality groceries, and local residents utilizing the center's everyday amenities. The center's location near Highway 92 and Hillsdale Boulevard also attracts commuters and workers from surrounding office parks who frequent the dining and service establishments during lunch hours and after work.",
   "description": "Laurelwood Shopping Center stands as a beloved neighborhood destination in the heart of San Mateo, California, serving the community with its thoughtful mix of local and national retailers. Conveniently positioned off Highway 92 and Hillsdale Boulevard, this open-air shopping center has established itself as a go-to location for Peninsula residents seeking quality shopping, dining, and services in a welcoming atmosphere. The center's crown jewel is the family-owned Piazza's Fine Foods Market, a local institution that anchors the property and draws loyal customers from across San Mateo County. Beyond groceries, visitors can explore a diverse array of popular cafes and restaurants offering both local and international cuisines, making it an ideal spot for casual dining and social gatherings. The center demonstrates its commitment to modern convenience with EV charging stations, catering to the environmentally-conscious Bay Area community. Whether families are running weekend errands, professionals are grabbing lunch between meetings, or neighbors are meeting for coffee, Laurelwood Shopping Center provides an accessible and charming retail experience that reflects the character of San Mateo itself.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 23.473699591937027
 }

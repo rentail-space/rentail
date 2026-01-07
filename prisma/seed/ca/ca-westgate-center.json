@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 37.2923806,
   "longitude": -121.98878329999998,
-  "imageURLs": ["/images/malls/ca-westgate-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-westgate-center-1.jpg"
+  ],
   "summary": "Westgate Center is a community-focused shopping destination on San Jose's Saratoga Avenue, featuring a growing mix of dining options including Jack's Restaurant and Mendocino Farms, with the exciting addition of T&T Supermarket coming soon. The open-air center serves west San Jose residents with convenient retail and specialty services in a welcoming neighborhood setting.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -18,5 +20,6 @@
   "demographics": "Westgate Center serves a diverse, middle to upper-middle class demographic in San Jose's west side, attracting families and professionals from nearby residential neighborhoods. The trade area includes a mix of tech industry workers, established families, and Asian-American communities who value convenient access to both specialty grocers like the incoming T&T Supermarket and casual dining options. Shoppers typically seek everyday convenience combined with quality dining experiences, reflected in the center's mix of practical retail and restaurant offerings like Jack's Restaurant and Mendocino Farms.",
   "description": "Westgate Center stands as a cornerstone shopping destination in San Jose's Saratoga Avenue corridor, serving the community with a thoughtful blend of retail, dining, and specialty services. Located at 1600 Saratoga Avenue, this open-air community center has evolved to meet the changing needs of west San Jose residents, offering convenient access to everyday essentials and quality dining experiences. The center recently welcomed Jack's Restaurant and Mendocino Farms, expanding its culinary offerings to complement its existing tenant mix. With the highly anticipated arrival of T&T Supermarket, Westgate Center is positioning itself as a hub for diverse shopping experiences, particularly appealing to the area's significant Asian-American population seeking specialty groceries and authentic products. Operating Monday through Saturday from 10am to 9pm and Sundays from 11am to 7pm, the center provides flexible shopping hours that accommodate busy professionals and families alike, maintaining its reputation as a reliable neighborhood gathering place in one of Silicon Valley's most desirable residential areas.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.118467377448916
 }

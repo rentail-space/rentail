@@ -8,7 +8,9 @@
   "latitude": 37.7842834,
   "longitude": -122.40712,
   "phone": "++1 415-512-6776",
-  "imageURLs": ["/images/malls/ca-san-francisco-centre-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-san-francisco-centre-1.jpg"
+  ],
   "summary": "San Francisco Centre is a 9-story downtown shopping landmark featuring over 170 shops and restaurants beneath a distinctive dome-covered atrium. Located at the heart of Market Street, this major regional mall combines extensive retail variety with dining and entertainment options including a multiplex cinema.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -20,5 +22,6 @@
   "description": "San Francisco Centre stands as a landmark shopping destination in the heart of downtown San Francisco at 865 Market Street, serving as a premier retail hub since its opening. This impressive 9-story enclosed mall features a stunning dome-covered atrium that creates a dramatic architectural centerpiece, housing over 170 shops and restaurants across its multiple levels. The center combines the convenience of urban shopping with the breadth of a major regional mall, offering everything from fashion and accessories to dining and entertainment, including a multiplex cinema for moviegoers. Located in the bustling Market Street corridor, San Francisco Centre benefits from exceptional accessibility via public transportation and serves as a retail anchor for the city's downtown shopping district. With its extensive tenant mix, modern amenities, and prime location, the center has established itself as an essential destination for both San Francisco residents and the millions of tourists who visit the city annually.",
   "numberOfStores": 170,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 37.02860944773697
 }

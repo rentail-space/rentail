@@ -8,7 +8,9 @@
   "latitude": 33.774052999999995,
   "longitude": -117.8693764,
   "phone": "++1 714-559-6525",
-  "imageURLs": ["/images/malls/ca-mainplace-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-mainplace-mall-1.jpg"
+  ],
   "summary": "MainPlace Mall is a nearly 200-store indoor shopping destination in Santa Ana, anchored by Macy's and JCPenney, featuring top brands in fashion and beauty. The center offers extensive entertainment options including a movie theater, bowling alley, fitness center, and family amusement facilities, all conveniently located at the 5, 22, and 57 freeways.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "MainPlace Mall stands as a premier indoor shopping destination in the heart of Orange County, strategically positioned at the intersection of the 5, 22, and 57 freeways in Santa Ana. This expansive regional mall features nearly 200 stores offering an impressive mix of fashion, beauty, dining, and entertainment options for the entire family. Anchored by major department stores Macy's and JCPenney, the center provides a comprehensive retail experience complemented by specialty retailers and popular brands. Beyond traditional shopping, MainPlace Mall has evolved into a true lifestyle destination with exceptional entertainment amenities including 24 Hour Fitness Super Sport, Ashley Furniture HomeStore, Round 1 Bowling & Amusement, Funparx, and Picture Show Theater. The mall's convenient central Orange County location and diverse tenant mix make it the go-to spot for residents throughout the region to shop, dine, and play under one roof.",
   "numberOfStores": 200,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 35.27643080891748
 }

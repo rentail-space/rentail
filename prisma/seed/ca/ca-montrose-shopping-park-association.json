@@ -8,7 +8,9 @@
   "latitude": 34.2046511,
   "longitude": -118.2278834,
   "phone": "++1 818-646-2880",
-  "imageURLs": ["/images/malls/ca-montrose-shopping-park-association-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-montrose-shopping-park-association-1.jpg"
+  ],
   "rating": 4.6,
   "reviewCount": 45,
   "website": "https://shopmontrose.com/?utm_source=rentail.space",
@@ -17,5 +19,6 @@
   "description": "Montrose Shopping Park Association represents a charming historic shopping district located along Honolulu Avenue in Glendale, California, offering a distinctive small-town atmosphere within the Los Angeles metropolitan area. This walkable outdoor shopping destination features an eclectic mix of locally-owned boutiques, restaurants, beauty salons, fitness studios, and service businesses that create a vibrant community gathering place. The district is renowned for its year-round calendar of community events, including the popular Harvest Market held every Sunday from 8am to 1pm, the annual Arts & Crafts Festival in June, Oktoberfest celebrations, the Montrose Car Show, and festive holiday activities including a beloved Christmas tree lighting ceremony and parade. The shopping park's tree-lined streets and historic character provide a pedestrian-friendly environment that encourages browsing and community connection, distinguishing it from typical commercial centers. With its strong emphasis on local businesses, community engagement, and family-friendly events, Montrose Shopping Park has maintained its reputation as a beloved neighborhood destination that preserves the charm of old-town California while serving modern retail and dining needs.",
   "summary": "Montrose Shopping Park is a historic, walkable shopping district along Honolulu Avenue in Glendale featuring locally-owned boutiques, restaurants, and services. Known for its small-town charm and year-round community events including the Sunday Harvest Market, Arts & Crafts Festival, and holiday celebrations, it serves as a beloved neighborhood gathering place.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 15.20955512673316
 }

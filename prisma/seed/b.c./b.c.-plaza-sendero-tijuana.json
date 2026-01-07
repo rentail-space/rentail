@@ -8,7 +8,9 @@
   "latitude": 32.4550921,
   "longitude": -116.83760840000001,
   "phone": "++52 664 979 5036",
-  "imageURLs": ["/images/malls/b.c.-plaza-sendero-tijuana-1.jpg"],
+  "imageURLs": [
+    "/images/malls/b.c.-plaza-sendero-tijuana-1.jpg"
+  ],
   "summary": "Plaza Sendero Tijuana is a family-friendly shopping center in Tijuana, Baja California, part of Mexico's largest shopping center network with over 30 years of experience. The center offers a diverse mix of retail, dining, and entertainment options, serving as a popular destination for both local residents and cross-border visitors.",
   "openFrom": 1000,
   "openUntil": 2130,
@@ -19,5 +21,6 @@
   "demographics": "Plaza Sendero Tijuana attracts a diverse cross-border demographic, serving middle to upper-middle income Mexican families from Tijuana and the surrounding Baja California region, as well as American visitors from San Diego seeking shopping and entertainment options. The center draws a broad age range with a strong presence of young families and millennials aged 25-45, reflecting Tijuana's growing urban population. Shoppers typically seek value-oriented retail combined with entertainment and dining experiences, with high foot traffic on weekends and holidays when cross-border shopping activity peaks.",
   "description": "Plaza Sendero Tijuana is part of Mexico's most beloved family of shopping centers, operated by a company with over 30 years of experience in retail development across the country. Located in the Fideicomiso el Florido area of Tijuana, Baja California, this shopping destination serves as one of 20 Plaza Sendero locations throughout Mexico, collectively attracting over 150 million visits annually. The center offers a comprehensive mix of entertainment, culture, restaurants, and essential services designed to meet the diverse needs of local families and visitors. With a strong rating of 4.6 stars from over 21,000 reviews, Plaza Sendero Tijuana has established itself as a trusted community gathering place. The center operates daily from 10:00 AM to 9:30 PM, providing convenient access to its 5,300+ tenant retailers across the entire Plaza Sendero network, making it a premier shopping and lifestyle destination in the Tijuana metropolitan area.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 39.827277786911345
 }

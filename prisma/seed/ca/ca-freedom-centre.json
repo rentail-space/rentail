@@ -8,7 +8,9 @@
   "latitude": 36.938851,
   "longitude": -121.7757297,
   "phone": "++1 833-800-4343",
-  "imageURLs": ["/images/malls/ca-freedom-centre-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-freedom-centre-1.jpg"
+  ],
   "summary": "Freedom Centre is a 151,865 square foot Safeway-anchored community shopping center strategically located at the intersection of Freedom Boulevard and Airport Boulevard in Watsonville, California. The property benefits from high visibility and excellent access to Highway 101, serving a diverse trade area of over 127,000 residents within 10 miles.",
   "openFrom": 500,
   "openUntil": 200,
@@ -20,5 +22,6 @@
   "description": "Freedom Centre is a well-positioned community shopping center located at the high-profile intersection of Freedom Boulevard and Airport Boulevard, two of Watsonville's major thoroughfares in Santa Cruz County, California. Anchored by Safeway, this 151,865 square foot center serves as a convenient shopping destination for the surrounding Freedom and Watsonville communities, situated approximately 1.5 miles from historic downtown Watsonville. The property benefits from exceptional accessibility, with Airport Boulevard providing direct access to Highway 101, Watsonville Airport, and Watsonville Community Medical Center, all of which generate significant traffic flow to the center. Managed by Kimco Realty Corporation, one of North America's largest publicly traded owners and operators of open-air, grocery-anchored shopping centers, Freedom Centre offers a practical mix of retail and service tenants catering to the daily needs of local residents. The center's strategic location and strong grocery anchor make it an essential part of the community's retail infrastructure, serving a diverse trade area with a population of over 127,000 within a 10-mile radius.",
   "squareFootage": 151865,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 22.72519487408224
 }

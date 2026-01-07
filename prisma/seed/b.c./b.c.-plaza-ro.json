@@ -8,7 +8,9 @@
   "latitude": 32.528303199999996,
   "longitude": -117.019839,
   "phone": "++52 664 200 2828",
-  "imageURLs": ["/images/malls/b.c.-plaza-ro-1.jpg"],
+  "imageURLs": [
+    "/images/malls/b.c.-plaza-ro-1.jpg"
+  ],
   "summary": "Plaza Río is a premier shopping center located in Tijuana's Zona Urbana Rio district, offering a comprehensive retail and entertainment experience. With over 8,600 positive reviews and a 4.6-star rating, it serves as a major destination for both local residents and cross-border shoppers from Southern California.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Plaza Río attracts a diverse cross-border demographic, serving both Tijuana's affluent urban residents and American visitors from San Diego County. The primary market consists of middle to upper-middle income families, with a significant portion of shoppers aged 25-54 who have disposable income for retail and dining experiences. The trade area benefits from its strategic location in Zona Urbana Rio Tijuana, one of the city's most developed commercial districts, drawing professionals, families, and cross-border shoppers seeking quality retail options. Shopping patterns reflect a mix of destination shopping for fashion and electronics, combined with entertainment and dining visits, particularly during evenings and weekends.",
   "description": "Plaza Río stands as one of Tijuana's premier shopping destinations, strategically located at 98 Paseo de los Héroes in the heart of Zona Urbana Rio Tijuana. Since its establishment, this landmark shopping center has served as a cornerstone of retail and entertainment for both local residents and cross-border visitors from Southern California. With an impressive 4.6-star rating from over 8,600 reviews, Plaza Río has earned its reputation as a trusted and beloved shopping venue in the region. The center operates daily from 10:00 AM to 9:00 PM, providing convenient access to a comprehensive mix of retail stores, dining options, and entertainment venues. Its prime location along one of Tijuana's most important commercial corridors makes it easily accessible and positions it as a must-visit destination for anyone seeking a quality shopping experience in Baja California.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 36.22562595512352
 }

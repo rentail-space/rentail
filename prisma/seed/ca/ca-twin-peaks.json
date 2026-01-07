@@ -8,7 +8,9 @@
   "latitude": 32.9812267,
   "longitude": -117.0607111,
   "phone": "++1 858-847-4600",
-  "imageURLs": ["/images/malls/ca-twin-peaks-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-twin-peaks-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.3,
@@ -21,5 +23,6 @@
   "squareFootage": 207741,
   "summary": "Twin Peaks is a high-performing 207,741 square foot community center in affluent Poway, anchored by Target and Amazon Fresh with over 30 diverse tenants. The center attracts 3.3 million annual visits, serving a prosperous trade area with average household incomes of $178,123 and offering a comprehensive mix of retail, dining, fitness, and professional services.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.877299733130315
 }

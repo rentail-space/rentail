@@ -8,7 +8,9 @@
   "latitude": 33.1268042,
   "longitude": -117.0869478,
   "phone": "++1 760-753-7722",
-  "imageURLs": ["/images/malls/ca-escondido-square-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-escondido-square-shopping-center-1.jpg"
+  ],
   "openFrom": 700,
   "openUntil": 2200,
   "rating": 4.3,
@@ -20,5 +22,6 @@
   "numberOfStores": 10,
   "summary": "Escondido Square Shopping Center is a neighborhood retail hub anchored by Northgate Market and featuring a diverse mix of value-oriented stores, authentic Latin American eateries, and essential services. Located at the corner of Escondido Boulevard and Washington Avenue, the center serves as a convenient one-stop destination for everyday shopping needs.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 13.487898438772548
 }

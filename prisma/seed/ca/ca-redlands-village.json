@@ -8,7 +8,9 @@
   "latitude": 34.0708008,
   "longitude": -117.1397619,
   "phone": "++1 909-946-7518",
-  "imageURLs": ["/images/malls/ca-redlands-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-redlands-village-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.6,
@@ -72,5 +74,6 @@
       "number": "10",
       "available": false
     }
-  ]
+  ],
+  "ranking": 25.80435024423469
 }

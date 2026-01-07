@@ -8,7 +8,9 @@
   "latitude": 33.4629135,
   "longitude": -117.5982367,
   "phone": "++1 858-847-4600",
-  "imageURLs": ["/images/malls/ca-talega-village-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-talega-village-center-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.5,
@@ -19,5 +21,6 @@
   "description": "Talega Village Center serves as the vibrant commercial heart of San Clemente's prestigious Talega master-planned community, offering residents and visitors a carefully curated mix of shopping, dining, and services. Nestled in the rolling hills of southern Orange County, this open-air center has become an integral gathering place for the surrounding neighborhoods since its development as part of the larger Talega community vision. The center features a thoughtful blend of national retailers and local businesses that cater to the daily needs and lifestyle preferences of the area's discerning residents. With its convenient location on Avenue Talega and ample parking, the center provides easy access for families, professionals, and retirees who call this coastal region home. The shopping center maintains a welcoming atmosphere with well-maintained landscaping and pedestrian-friendly design that reflects the quality and character of the surrounding Talega community.",
   "summary": "Talega Village Center is a community-oriented shopping destination serving San Clemente's upscale Talega neighborhood with a convenient mix of retail, dining, and service businesses. This open-air center provides residents with everyday shopping needs in a well-maintained, accessible setting.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 22.98494723979487
 }

@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 36.7207925,
   "longitude": -121.6573191,
-  "imageURLs": ["/images/malls/ca-tesla-holiday-pop-up-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-tesla-holiday-pop-up-1.jpg"
+  ],
   "summary": "Tesla Holiday Pop Up is a temporary retail location in Salinas offering direct access to Tesla's electric vehicles and sustainable energy products. Open daily from 10 AM to 9 PM, this pop-up provides the Central Coast community with personalized consultations and test drive opportunities for Tesla's innovative automotive technology.",
   "openFrom": 1000,
   "openUntil": 2100,

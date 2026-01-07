@@ -8,7 +8,9 @@
   "latitude": 33.696146999999996,
   "longitude": -117.798564,
   "phone": "++1 949-720-3100",
-  "imageURLs": ["/images/malls/ca-culver-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-culver-plaza-1.jpg"
+  ],
   "summary": "Culver Plaza is a diverse community shopping center in Irvine anchored by 99 Ranch Market, offering a unique mix of cultural and casual dining, everyday services, and specialty retail. With convenient amenities including ample parking, curbside pickup, and complimentary WiFi, it serves as a one-stop destination for families seeking both cultural authenticity and everyday convenience.",
   "rating": 4.3,
   "reviewCount": 2159,
@@ -17,5 +19,6 @@
   "demographics": "Culver Plaza serves a diverse, multicultural community in Irvine with a significant Asian-American population, reflected by the anchor tenant 99 Ranch Market. The trade area attracts middle to upper-middle income families and professionals, with household incomes typically ranging from $80,000 to $150,000+. Primary visitors include working parents seeking convenient everyday shopping, young professionals, and multi-generational households looking for cultural dining and specialty groceries. The center draws from surrounding residential neighborhoods within a 3-5 mile radius, with shoppers valuing the mix of Asian specialty retail, services, and family-friendly dining options.",
   "description": "Culver Plaza is a vibrant community shopping center located in the heart of Irvine, California, offering a unique blend of cultural diversity and everyday convenience. Anchored by the popular 99 Ranch Market, this center has become a destination for families seeking authentic Asian groceries, fresh produce, and specialty items alongside traditional American retail offerings. The center features a diverse array of full-service cultural and casual dining options that reflect the multicultural character of the Irvine community, making it a gathering place for food enthusiasts and families alike. Beyond shopping and dining, Culver Plaza provides essential everyday services including pet supplies, dry cleaning, self-care amenities, and more, all designed to simplify family life in one convenient location. With ample parking, wheelchair accessibility, complimentary WiFi, bicycle parking, and curbside pickup options, the center prioritizes convenience and accessibility for all visitors, making it a trusted neighborhood hub for the surrounding residential communities.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.674572724074384
 }

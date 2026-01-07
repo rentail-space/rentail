@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 34.1848832,
   "longitude": -118.6045074,
-  "imageURLs": ["/images/malls/ca-topanga-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-topanga-village-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.6,
@@ -19,5 +21,6 @@
   "numberOfStores": 70,
   "summary": "Topanga Village is a premier open-air lifestyle center in Woodland Hills featuring upscale retailers like REI and Crate & Barrel, acclaimed restaurants including Larsen's Steakhouse and Joey's, and comprehensive wellness services. The center serves as the San Fernando Valley's central gathering place for shopping, dining, and entertainment with convenient parking and a sophisticated tenant mix.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.237200326713847
 }

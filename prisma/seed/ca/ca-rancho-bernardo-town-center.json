@@ -8,7 +8,9 @@
   "latitude": 33.0206909,
   "longitude": -117.0734547,
   "phone": "++1 858-485-9300",
-  "imageURLs": ["/images/malls/ca-rancho-bernardo-town-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-rancho-bernardo-town-center-1.jpg"
+  ],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.4,
@@ -20,5 +22,6 @@
   "numberOfStores": 19,
   "summary": "Rancho Bernardo Town Center is a neighborhood shopping center anchored by Vons and featuring a practical mix of dining, personal services, and professional amenities. With 19 tenants including Peet's Coffee, Sidny's Delicatessen, dental and optometry offices, and various salon and fitness options, it serves as a convenient one-stop destination for the Rancho Bernardo community.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 25.867769423043846
 }

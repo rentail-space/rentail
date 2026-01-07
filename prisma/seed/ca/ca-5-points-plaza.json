@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.6925898,
   "longitude": -117.9916088,
-  "imageURLs": ["/images/malls/ca-5-points-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-5-points-plaza-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.4,
@@ -19,5 +21,6 @@
   "numberOfStores": 15,
   "summary": "5 Points Plaza is a community-focused shopping center in Huntington Beach featuring a diverse mix of national retailers, health-conscious dining options, and fitness studios. The plaza serves as a neighborhood hub with popular tenants like Sweetgreen, Hot Topic, and Big Blue Swim School, while hosting community events throughout the year.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.836529390835764
 }

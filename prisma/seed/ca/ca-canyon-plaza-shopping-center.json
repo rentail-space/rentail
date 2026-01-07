@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.7870778,
   "longitude": -116.4825451,
-  "imageURLs": ["/images/malls/ca-canyon-plaza-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-canyon-plaza-shopping-center-1.jpg"
+  ],
   "summary": "Canyon Plaza Shopping Center is a neighborhood retail destination on East Palm Canyon Drive in Cathedral City, serving the local community and Coachella Valley visitors. With convenient hours and a solid reputation reflected in its 4.3-star rating, it offers practical shopping and services in the heart of the desert.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -18,5 +20,6 @@
   "demographics": "Canyon Plaza Shopping Center serves the Cathedral City community in the Coachella Valley, attracting a diverse mix of year-round residents and seasonal visitors. The primary trade area includes middle-income families, retirees, and working professionals who value convenient neighborhood shopping. The center draws from Cathedral City's growing population as well as nearby Palm Springs visitors seeking everyday retail and services. Shopping patterns reflect a preference for practical, value-oriented retail with easy access and ample parking typical of desert communities.",
   "description": "Canyon Plaza Shopping Center is a convenient neighborhood shopping destination located on East Palm Canyon Drive in Cathedral City, California. Situated in the heart of the Coachella Valley, this open-air shopping center serves the local community with a practical mix of retail stores, services, and dining options. The center benefits from its prime location along one of the main thoroughfares connecting Cathedral City to Palm Springs and other desert communities. With operating hours from 10:00 AM to 9:00 PM daily, Canyon Plaza provides accessible shopping for both residents and the many seasonal visitors who flock to the desert region. The center's strong 4.3-star rating from over 1,450 reviews reflects its role as a reliable community shopping hub in the greater Palm Springs area.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.192912900731045
 }

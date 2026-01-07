@@ -8,7 +8,9 @@
   "latitude": 37.5262467,
   "longitude": -122.00075450000001,
   "phone": "++1 510-931-5049",
-  "imageURLs": ["/images/malls/ca-newpark-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-newpark-1.jpg"
+  ],
   "summary": "NewPark is a 1.1-million-square-foot enclosed regional mall in Newark, California, recently renovated to serve as the East Bay's premier shopping, dining, and entertainment destination. The center features diverse retail options, a food court, children's play areas, and a popular Sunday farmer's market.",
   "openFrom": 1100,
   "openUntil": 2000,
@@ -20,5 +22,6 @@
   "description": "NewPark Mall stands as Newark's premier shopping destination, offering 1.1 million square feet of retail, dining, and entertainment experiences in the heart of California's East Bay. Recently transformed through a multimillion-dollar renovation, this enclosed regional mall has been reimagined to serve as the area's leading hub for shopping, entertainment, and community gathering. The center features an extensive mix of national retailers, a vibrant food court, and family-friendly amenities including dedicated play areas for children. Every Sunday, the mall hosts a popular farmer's market that draws locals seeking fresh produce and artisanal goods, reinforcing NewPark's role as a community cornerstone. With convenient access from major East Bay communities and ample parking, NewPark Mall continues to evolve as a modern retail destination that balances traditional mall shopping with contemporary lifestyle experiences.",
   "squareFootage": 1100000,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 29.345595873589296
 }

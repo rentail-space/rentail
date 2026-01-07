@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 34.0119304,
   "longitude": -117.46215,
-  "imageURLs": ["/images/malls/ca-the-shops-at-jurupa-valley-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-shops-at-jurupa-valley-1.jpg"
+  ],
   "openFrom": 0,
   "openUntil": 0,
   "rating": 4.6,
@@ -18,5 +20,6 @@
   "description": "The Shops at Jurupa Valley is a community-focused retail destination strategically located on Mission Boulevard in Jurupa Valley, California. This open-air shopping center serves the growing Inland Empire community with a convenient mix of retail, dining, and service-oriented tenants designed to meet everyday shopping needs. The center's accessible location along a major thoroughfare makes it a popular stop for local residents seeking a practical and efficient shopping experience. With its well-maintained facilities and ample parking, The Shops at Jurupa Valley has established itself as a reliable neighborhood gathering place. The center continues to serve the Jurupa Valley community as a convenient retail hub that combines essential services with quality shopping options in a comfortable, open-air environment.",
   "summary": "The Shops at Jurupa Valley is a community-oriented shopping center on Mission Boulevard serving the Inland Empire with convenient retail and dining options. This open-air center provides local residents with accessible neighborhood shopping in a well-maintained facility.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 13.720527583275308
 }

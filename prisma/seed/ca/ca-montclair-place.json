@@ -8,7 +8,9 @@
   "latitude": 34.0867809,
   "longitude": -117.69382979999999,
   "phone": "++1 909-626-2501",
-  "imageURLs": ["/images/malls/ca-montclair-place-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-montclair-place-1.jpg"
+  ],
   "summary": "Montclair Place is a modern two-story enclosed regional mall in the Inland Empire featuring familiar department stores, national retailers, and a food court. This well-established shopping destination serves families throughout San Bernardino County with convenient access and a diverse mix of stores.",
   "openFrom": 1100,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "Montclair Place attracts a diverse, middle-income demographic from the Inland Empire region, serving families and young professionals from Montclair, Ontario, Upland, and surrounding communities. The trade area consists primarily of households with median incomes ranging from $50,000 to $85,000, with a strong representation of Hispanic and Asian-American shoppers. Visitors typically include value-conscious families seeking convenient access to department stores and national retailers, with shopping patterns emphasizing weekend family outings and back-to-school seasonal trips. The center serves as a regional destination for the eastern San Bernardino County market, drawing from a 15-20 mile radius.",
   "description": "Montclair Place stands as a premier shopping destination in the Inland Empire, offering a modern two-story enclosed mall experience that has served the community for decades. This regional mall features familiar department stores alongside a diverse collection of national retailers, providing shoppers with everything from fashion and accessories to home goods and electronics. The center's contemporary design creates an inviting atmosphere for families and shoppers throughout the San Bernardino County area. Visitors can enjoy a full day of shopping and dining with the convenience of a food court and multiple restaurant options. With its central location on North Montclair Plaza Lane and easy freeway access, Montclair Place continues to be a go-to retail hub for residents across the eastern Los Angeles metropolitan area, combining shopping convenience with community gathering spaces.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 33.9836050111245
 }

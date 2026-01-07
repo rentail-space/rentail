@@ -8,7 +8,9 @@
   "latitude": 32.7685992,
   "longitude": -117.1480084,
   "phone": "++1 619-296-6375",
-  "imageURLs": ["/images/malls/ca-mission-valley-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-mission-valley-1.jpg"
+  ],
   "summary": "Mission Valley is a spacious outdoor shopping center in San Diego featuring stores, restaurants, and an AMC movie theater. Currently undergoing a transformation with fresh design and curated experiences, it's becoming a reimagined destination for art, food, and culture in the heart of the city.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Mission Valley attracts a diverse mix of San Diego residents and visitors, with a strong representation of young professionals and families aged 25-54 from middle to upper-middle income households. The trade area draws from both the immediate Mission Valley neighborhood and broader San Diego metro area, benefiting from its central location and accessibility. Shoppers tend to seek a blend of convenience, entertainment, and dining experiences, with preferences for both national retailers and unique local offerings. The center's proximity to hotels and tourist attractions also brings a significant visitor demographic seeking shopping and entertainment options.",
   "description": "Mission Valley is undergoing an exciting transformation into a reimagined destination for art, food, and culture in the heart of San Diego. This spacious outdoor shopping center combines retail, dining, and entertainment in a dynamic environment that serves both locals and visitors. With fresh design elements and curated experiences, Mission Valley offers a diverse mix of stores, restaurants, and a movie theater featuring AMC Theatres. The center's convenient location at 1640 Camino Del Rio North provides easy access for the entire San Diego community. As part of the Centennial Collection, Mission Valley is evolving beyond traditional retail to create a vibrant gathering place where shopping, dining, and entertainment converge in an open-air setting that celebrates Southern California's indoor-outdoor lifestyle.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 35.81266702899488
 }

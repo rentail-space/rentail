@@ -8,7 +8,9 @@
   "latitude": 32.747836299999996,
   "longitude": -117.20579350000001,
   "phone": "++1 833-800-4343",
-  "imageURLs": ["/images/malls/ca-loma-square-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-loma-square-1.jpg"
+  ],
   "summary": "Loma Square is a 205,853 square foot community shopping center in San Diego's Point Loma area, featuring an organic grocery anchor, major retail chains, and 10 casual dining options. Strategically located near Mission Bay and SeaWorld at the junction of I-5 and I-8, the center serves an affluent, diverse population with strong demographics and convenient access.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Loma Square is a well-positioned community shopping center located at 3355 Rosecrans Street in San Diego's Point Loma area, offering 205,853 square feet of gross leasable area. Strategically situated near Mission Bay and SeaWorld, the center benefits from its prime location at the crossroads of Interstate Highways 5 and 8, off State Route 209, serving as the gateway to the Point Loma peninsula. The center combines an organic grocery store anchor with major national chains and features 10 casual eateries, creating a convenient one-stop shopping and dining destination for the surrounding community. Drawing from an exceptionally dense and affluent population within a few miles, Loma Square serves a diverse customer base with strong demographics including an average household income of $147,591 within 3 miles. Managed by Kimco Realty, one of North America's largest publicly traded owners and operators of open-air, grocery-anchored shopping centers, the property exemplifies the modern community center format with its mix of essential retail, dining, and services that cater to daily needs and lifestyle preferences of the surrounding neighborhoods.",
   "squareFootage": 205853,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.150217300850475
 }

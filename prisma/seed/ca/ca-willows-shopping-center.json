@@ -8,7 +8,9 @@
   "latitude": 37.968931000000005,
   "longitude": -122.0575538,
   "phone": "++1 925-279-1800",
-  "imageURLs": ["/images/malls/ca-willows-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-willows-shopping-center-1.jpg"
+  ],
   "summary": "Willows Shopping Center is a well-established community shopping destination in Concord featuring national clothing and home goods retailers alongside popular casual dining options. With convenient hours and a strong community reputation, it serves as a go-to location for everyday shopping needs in the East Bay area.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -19,5 +21,6 @@
   "demographics": "Willows Shopping Center attracts a diverse mix of middle to upper-middle class families and professionals from Concord and surrounding East Bay communities. The primary trade area consists of households with median incomes ranging from $75,000 to $125,000, with a strong representation of families with children and working professionals aged 25-54. The center serves as a convenient neighborhood shopping destination for residents seeking everyday necessities, casual dining, and national brand retailers, with shopping patterns reflecting a preference for one-stop convenience and value-oriented purchases.",
   "description": "Willows Shopping Center has served as a cornerstone retail destination in Concord, California since its establishment on Diamond Boulevard. This open-air shopping center offers a carefully curated mix of national clothing retailers, home goods stores, and popular casual dining options that cater to the everyday needs of East Bay residents. The center's convenient layout and ample parking make it an accessible choice for families and professionals seeking a comfortable shopping experience. With extended operating hours from 6 AM to 11 PM, Willows Shopping Center accommodates busy schedules and provides flexibility for shoppers throughout the day. The property has earned a solid reputation in the community, reflected in its 4.2-star rating from over 3,000 reviews, demonstrating its consistent appeal as a reliable neighborhood shopping destination that balances convenience with quality retail offerings.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 29.2126793979899
 }

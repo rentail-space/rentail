@@ -45,7 +45,10 @@ export async function geocodeMemoryOrHeaders({
   try {
     invariant(user, "User is expected");
     const { location } = cleanParseWorkingMemory(user.workingMemory);
-    const { displayName, longitude, latitude } = location ?? {};
+    const { longitude, latitude } = location ?? {};
+    const displayName = [location?.city, location?.state, location?.country]
+      .filter(Boolean)
+      .join(", ");
     invariant(displayName, "DisplayName is expected");
     invariant(longitude, "Longitude is expected");
     invariant(latitude, "Latitude is expected");

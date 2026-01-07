@@ -8,7 +8,9 @@
   "latitude": 33.47895930000001,
   "longitude": -117.09778269999998,
   "phone": "++1 909-973-3517",
-  "imageURLs": ["/images/malls/ca-vail-headquarters-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-vail-headquarters-1.jpg"
+  ],
   "summary": "Vail Headquarters is a lifestyle destination in Temecula featuring The Cookhouse Food Hall with four chef-owned kitchens, alongside curated shopping, dining, and service offerings. This open-air center emphasizes local operators and communal experiences, making it a popular gathering place for both residents and wine country visitors.",
   "openFrom": 900,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Vail Headquarters attracts an affluent, family-oriented demographic from the Temecula Valley wine country region, with visitors typically in the 30-55 age range and above-average household incomes. The trade area draws both local residents seeking upscale dining and shopping experiences as well as tourists visiting Temecula's wine country and entertainment districts. Shopping patterns reflect a preference for experiential retail, chef-driven dining concepts, and community gathering spaces, with strong weekend traffic from families and wine country visitors seeking quality food and beverage options in a relaxed outdoor setting.",
   "description": "Vail Headquarters is a distinctive lifestyle destination in Temecula's wine country that reimagines the traditional shopping center experience with a focus on culinary excellence and community gathering. At the heart of the property is The Cookhouse Food Hall, featuring four chef-owned and operated kitchens that come together to create a unique communal dining experience with both indoor and outdoor seating. The center offers a carefully curated mix of shopping, dining, experiences, and services that reflect the sophisticated tastes of Temecula Valley residents and visitors. With its open-air design and emphasis on local, independent operators, Vail HQ has become a beloved gathering place that celebrates the region's culinary culture and entrepreneurial spirit. The property's strong 4.7-star rating from over 500 reviews reflects its success in creating an authentic, community-focused destination that stands apart from conventional retail centers.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 25.676934392755346
 }

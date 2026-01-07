@@ -8,7 +8,9 @@
   "latitude": 34.1462627,
   "longitude": -118.2567687,
   "phone": "++1 818-459-4184",
-  "imageURLs": ["/images/malls/ca-glendale-galleria-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-glendale-galleria-1.jpg"
+  ],
   "summary": "Glendale Galleria is a contemporary regional shopping mall featuring trendy retail shops, diverse restaurants, and the flagship Apple store. Located in the heart of Glendale, this popular destination offers a distinctive variety of high-end brands and unique stores that attract shoppers from across the greater Los Angeles area.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Glendale Galleria attracts a diverse, multi-generational customer base reflective of the greater Los Angeles area, with a strong representation of middle to upper-middle income households. The trade area draws heavily from Glendale's affluent Armenian-American community as well as families from neighboring Burbank, Pasadena, and the San Fernando Valley. Shoppers tend to be fashion-conscious millennials and Gen X families seeking a mix of contemporary brands and dining options. The center benefits from high foot traffic driven by both destination shoppers seeking flagship stores like Apple and local residents using it as their primary regional shopping venue.",
   "description": "Glendale Galleria stands as one of Southern California's premier shopping destinations, offering a contemporary retail experience in the heart of Glendale. This enclosed regional mall features a distinctive variety of stores ranging from trendy fashion retailers to its flagship Apple store, making it a technology and style hub for the greater Los Angeles area. The center provides an engaging shopping environment with high-end brands alongside popular mainstream retailers, complemented by diverse restaurant options that cater to the area's multicultural community. With its prime location at 100 West Broadway, the Galleria serves as a central gathering place for residents of Glendale, Burbank, Pasadena, and surrounding communities. The mall's modern amenities and carefully curated tenant mix have earned it a strong reputation, reflected in its impressive 4.5-star rating from over 17,000 reviews, cementing its status as a beloved shopping destination in the San Fernando Valley region.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 38.15617263374889
 }

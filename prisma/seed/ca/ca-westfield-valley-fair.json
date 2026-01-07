@@ -8,7 +8,9 @@
   "latitude": 37.3247587,
   "longitude": -121.9463098,
   "phone": "++1 408-248-4450",
-  "imageURLs": ["/images/malls/ca-westfield-valley-fair-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-westfield-valley-fair-1.jpg"
+  ],
   "summary": "Westfield Valley Fair is Silicon Valley's premier luxury shopping destination, featuring high-end retailers like Bloomingdale's, Cartier, Christian Dior, and Patek Philippe alongside acclaimed dining options including Din Tai Fung and Mastro's. This upscale regional mall serves the affluent South Bay market with a sophisticated blend of luxury retail, fine dining, and entertainment experiences.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Westfield Valley Fair attracts an affluent, tech-savvy demographic reflective of Silicon Valley's prosperity, with visitors typically ranging from upper-middle to high-income households earning $100,000+. The primary trade area encompasses Santa Clara County's professional workforce, including tech industry employees and their families, along with international tourists drawn to the Bay Area. Shoppers tend to be fashion-conscious millennials and Gen X consumers who appreciate both luxury and contemporary brands, with a significant Asian-American population that aligns with the region's diverse demographics. The center serves as a destination for both everyday shopping and special occasion purchases, attracting visitors willing to travel from throughout the South Bay and Peninsula areas.",
   "description": "Westfield Valley Fair stands as one of the premier luxury shopping destinations in Silicon Valley, located in the heart of Santa Clara at 2855 Stevens Creek Boulevard. This upscale regional mall has evolved into a sophisticated retail environment featuring an impressive collection of high-end retailers and luxury brands, including Bloomingdale's as an anchor tenant alongside prestigious names like Cartier, Christian Dior, Celine, Patek Philippe, and Omega. The center offers a comprehensive shopping and dining experience with notable culinary destinations such as Din Tai Fung, Mastro's Steakhouse, Eataly, and Baekjeong Korean BBQ, complemented by entertainment options like Bowlero and the newly opened Sandbox VR. Westfield Valley Fair caters to the affluent Silicon Valley market with modern amenities including EV charging stations in the Monroe Parking Garage, free Wi-Fi throughout the property, and convenient package check lockers for shoppers. The center operates daily from 10:00 AM to 9:00 PM and maintains a strong reputation with a 4.3-star rating from nearly 15,000 reviews, solidifying its position as a premier retail destination that seamlessly blends luxury shopping, fine dining, and entertainment in the Bay Area.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 53.78538768601503
 }

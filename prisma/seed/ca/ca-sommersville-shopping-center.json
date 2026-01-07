@@ -8,7 +8,9 @@
   "latitude": 38.0066055,
   "longitude": -121.83326040000001,
   "phone": "++1 925-754-8000",
-  "imageURLs": ["/images/malls/ca-sommersville-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-sommersville-shopping-center-1.jpg"
+  ],
   "summary": "Sommersville Shopping Center is a community-focused retail destination in Antioch, California, serving the daily shopping needs of local residents. With convenient hours and a practical tenant mix, this neighborhood center provides accessible retail options for families in eastern Contra Costa County.",
   "openFrom": 1100,
   "openUntil": 1900,

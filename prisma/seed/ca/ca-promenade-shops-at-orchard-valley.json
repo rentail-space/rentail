@@ -8,7 +8,9 @@
   "latitude": 37.7810789,
   "longitude": -121.22877349999999,
   "phone": "++1 209-629-6834",
-  "imageURLs": ["/images/malls/ca-promenade-shops-at-orchard-valley-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-promenade-shops-at-orchard-valley-1.jpg"
+  ],
   "summary": "The Promenade Shops at Orchard Valley is Manteca's premier open-air lifestyle center featuring a diverse collection of national retailers specializing in sporting goods, apparel, and dining. With over 2,300 positive reviews and a 4.4-star rating, this popular destination serves as the community's go-to shopping venue for families and active lifestyle enthusiasts.",
   "openFrom": 900,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "The Promenade Shops at Orchard Valley attracts a diverse mix of families and young professionals from Manteca and surrounding San Joaquin County communities. The primary trade area consists of middle to upper-middle income households with median incomes ranging from $65,000 to $95,000, drawn by the center's convenient location and mix of national retailers and dining options. Shoppers typically include parents aged 30-55 seeking sporting goods and family apparel, as well as younger demographics aged 18-35 attracted to the dining and entertainment offerings. The center serves as a primary retail destination for Manteca's growing population, which has experienced significant residential development in recent years, bringing families seeking suburban lifestyle amenities.",
   "description": "The Promenade Shops at Orchard Valley stands as Manteca's premier shopping destination, offering residents and visitors a vibrant open-air retail experience in the heart of California's Central Valley. Located at 1422 Grove Avenue, this lifestyle center has become a cornerstone of the community since its development, providing a carefully curated mix of national retailers, sporting goods stores, apparel shops, and diverse dining options. The center's design emphasizes walkability and convenience, with ample parking and an inviting atmosphere that encourages shoppers to explore multiple stores and restaurants in a single visit. With a strong 4.4-star rating from over 2,300 reviews, the Promenade has earned its reputation as a reliable and enjoyable shopping venue. Whether visitors are seeking athletic gear, the latest fashion trends, or a casual meal with family and friends, the Promenade Shops at Orchard Valley delivers a comprehensive retail experience that reflects the growing sophistication of Manteca's retail landscape.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 29.670272959148992
 }

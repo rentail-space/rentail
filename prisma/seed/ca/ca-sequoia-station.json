@@ -8,7 +8,9 @@
   "latitude": 37.484368499999995,
   "longitude": -122.23109380000001,
   "phone": "++1 925-279-1800",
-  "imageURLs": ["/images/malls/ca-sequoia-station-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-sequoia-station-1.jpg"
+  ],
   "summary": "Sequoia Station is a casual, open-air shopping center in Redwood City featuring brand-name retailers, restaurants, salons, and tech services. Managed by Regency Centers, this community destination serves Silicon Valley residents with convenient access to everyday shopping and dining needs.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -19,5 +21,6 @@
   "demographics": "Sequoia Station attracts an affluent, educated demographic reflective of Redwood City's Silicon Valley location, with visitors primarily consisting of tech professionals, young families, and dual-income households with above-average incomes. The trade area serves a highly educated population with strong purchasing power, drawn to the center's mix of convenience retail, technology services, and dining options. Shopping patterns reflect time-conscious professionals seeking one-stop convenience for everyday needs, tech services, and casual dining experiences.",
   "description": "Sequoia Station is a thriving community shopping center located along El Camino Real in Redwood City, California, serving the heart of Silicon Valley's Peninsula region. Developed and managed by Regency Centers, a preeminent national owner and operator of shopping centers, Sequoia Station exemplifies the company's commitment to creating neighborhood destinations that bring communities together. The center features a carefully curated mix of brand-name shops, restaurants, salons, technology stores, and essential services, all designed to meet the daily needs of the surrounding affluent residential and business communities. With its convenient open-air layout and ample parking, Sequoia Station provides an accessible and comfortable shopping experience for busy professionals and families alike. The center's strong performance is reflected in its impressive 4.1-star rating from over 3,000 reviews, demonstrating its popularity as a go-to destination for both everyday errands and leisure activities in the Redwood City area.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.51239428870123
 }

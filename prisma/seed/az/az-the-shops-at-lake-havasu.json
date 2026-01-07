@@ -8,7 +8,9 @@
   "latitude": 34.5688327,
   "longitude": -114.367199,
   "phone": "++1 928-764-2400",
-  "imageURLs": ["/images/malls/az-the-shops-at-lake-havasu-1.jpg"],
+  "imageURLs": [
+    "/images/malls/az-the-shops-at-lake-havasu-1.jpg"
+  ],
   "summary": "The Shops at Lake Havasu is an open-air lifestyle center that opened in 2008, featuring over 720,000 square feet of retail space anchored by Dillard's, JC Penney, and Walmart Supercenter. The center offers a comfortable outdoor shopping experience with fountains and misters, serving as Lake Havasu City's primary retail and entertainment destination for both residents and tourists.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -20,5 +22,6 @@
   "description": "The Shops at Lake Havasu opened in 2008 as Lake Havasu City's premier outdoor shopping destination, featuring over 720,000 square feet of commercial space designed to serve both residents and the city's thriving tourist population. This open-air lifestyle center anchors the retail landscape with major department stores including Dillard's and JC Penney, complemented by a diverse tenant mix that includes Walmart Supercenter, PetSmart, home décor specialist Kirkland's, and Star Cinemas for entertainment. The center's thoughtful outdoor design embraces the desert climate with attractive fountains and cooling misters that create a comfortable shopping environment even during Arizona's warm summer months, encouraging visitors to stroll leisurely between stores. Beyond traditional retail, The Shops at Lake Havasu serves as a community gathering place, hosting special events throughout the year while continuously expanding its offerings with new retailers, boutiques, restaurants, and family attractions. Located at 5601 Highway 95 North, the center has established itself as an essential destination that combines the convenience of national retailers with the welcoming atmosphere that reflects Lake Havasu City's unique character as a premier waterfront recreation community.",
   "squareFootage": 720000,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.2982938573369
 }

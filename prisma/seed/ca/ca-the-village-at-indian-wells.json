@@ -8,7 +8,9 @@
   "latitude": 33.720664899999996,
   "longitude": -116.35704039999997,
   "phone": "++1 760-346-2500",
-  "imageURLs": ["/images/malls/ca-the-village-at-indian-wells-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-village-at-indian-wells-1.jpg"
+  ],
   "summary": "The Village at Indian Wells is an upscale open-air lifestyle center featuring over 30 unique boutiques, art galleries, and restaurants set against the majestic Santa Rosa Mountains. Located in the heart of Indian Wells near El Paseo, this beautifully designed shopping destination offers an elevated retail experience that caters to the area's affluent residents and resort visitors.",
   "openFrom": 900,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "The Village at Indian Wells is a premier open-air lifestyle shopping destination nestled in the heart of Indian Wells, California, set against the stunning backdrop of the Santa Rosa Mountains. This upscale shopping center features over 30 unique boutiques, art galleries, restaurants, and personal service establishments, all arranged in an astoundingly beautiful atmosphere that captures the essence of desert luxury living. Located at 74895 Highway 111, just moments from the world-famous El Paseo shopping district, The Village offers visitors a sophisticated yet relaxed shopping experience that perfectly complements the resort community's refined lifestyle. The center recently welcomed Sprouts Farmers Market as a key tenant, adding a premium grocery option to its already impressive mix of specialty retailers and dining venues. With its combination of upscale shopping, fine dining, and picturesque mountain views, The Village at Indian Wells has established itself as a must-visit destination for both local residents and the area's many resort guests seeking an elevated retail experience in the Coachella Valley.",
   "numberOfStores": 30,
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 35.343649305613255
 }

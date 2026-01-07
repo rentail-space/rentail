@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.1363584,
   "longitude": -117.1766161,
-  "imageURLs": ["/images/malls/ca-creekside-marketplace-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-creekside-marketplace-1.jpg"
+  ],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.4,
@@ -18,5 +20,6 @@
   "description": "Creekside Marketplace is a community-oriented shopping center located in San Marcos, California, serving the vibrant North County San Diego region. Anchored by WinCo Foods, a popular employee-owned discount grocery chain known for its competitive prices and bulk food offerings, the center provides essential retail services to local residents and the surrounding communities. The marketplace has earned a strong reputation among shoppers, reflected in its impressive 4.4-star rating from nearly 1,000 Google reviews, demonstrating consistent customer satisfaction and community trust. Conveniently positioned in a growing area of San Marcos, Creekside Marketplace offers accessible shopping with extended hours to accommodate busy families and working professionals. The center's focus on value-oriented retail makes it a go-to destination for budget-conscious shoppers seeking quality products at affordable prices.",
   "summary": "Creekside Marketplace is a community shopping center in San Marcos, California, anchored by WinCo Foods discount grocery store. With a 4.4-star rating and nearly 1,000 reviews, it serves as a popular value-oriented destination for North County San Diego residents.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 13.057211095362993
 }

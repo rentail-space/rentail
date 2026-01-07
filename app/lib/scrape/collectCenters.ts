@@ -15,6 +15,7 @@ import { nearbySearch } from "./fromGooglePlaces";
 import { geocodeCounty, mergeBounds } from "./geocodeCounty";
 import { generateHexGrid } from "./gridSearch";
 import resolveMetroArea from "./metroAreas";
+import ranking from "./ranking";
 import scrapeCenter from "./scrapeCenter";
 import scrapeSpaces from "./scrapeSpaces";
 
@@ -106,6 +107,7 @@ export default async function collectCenters(search: string) {
             ...enriched,
             summary: enriched.summary ?? center.summary,
             spaces,
+            ranking: ranking({ ...center, ...enriched }),
           },
           null,
           2,

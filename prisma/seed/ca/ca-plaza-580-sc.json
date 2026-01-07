@@ -8,7 +8,9 @@
   "latitude": 37.7003881,
   "longitude": -121.7434827,
   "phone": "++1 833-800-4343",
-  "imageURLs": ["/images/malls/ca-plaza-580-sc-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-plaza-580-sc-1.jpg"
+  ],
   "summary": "Plaza 580 S.C. is a 104,165 square-foot community shopping center located off Highway 580 in Livermore's affluent East Bay community. Anchored by Target, TJ Maxx, Ross, and Petco, the center offers a strong mix of value-oriented national retailers serving the local residential market.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Plaza 580 S.C. is a 104,165 square-foot community shopping center strategically located off Highway 580 in Livermore, California, serving the affluent residential communities of the East Bay Area. The center features a strong lineup of nationally-recognized anchor tenants including Target, TJ Maxx, Ross, and Petco, providing a compelling mix of retail, service, and dining options for local residents. Positioned within the San Francisco-Oakland-Berkeley metro area, Plaza 580 benefits from its location in one of the Bay Area's most prosperous communities, with surrounding households earning well above national averages. The center's convenient highway access and diverse tenant mix make it a go-to destination for value-conscious shoppers seeking quality brands at competitive prices. Managed by Kimco Realty, one of North America's largest publicly traded owners and operators of open-air shopping centers, Plaza 580 S.C. continues to serve as an essential retail hub for the Livermore community.",
   "squareFootage": 104165,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 24.729506550619682
 }

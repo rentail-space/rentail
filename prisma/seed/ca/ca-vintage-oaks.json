@@ -8,7 +8,9 @@
   "latitude": 38.0911435,
   "longitude": -122.55507829999998,
   "phone": "++1 415-897-9999",
-  "imageURLs": ["/images/malls/ca-vintage-oaks-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-vintage-oaks-1.jpg"
+  ],
   "summary": "Vintage Oaks is an open-air lifestyle center in Novato featuring sixty popular retail and dining destinations including Costco, Target, Nordstrom Rack, and diverse restaurants. The center uniquely combines everyday shopping with wellness studios, live entertainment, and Bay Area art installations, creating a vibrant community gathering place for Marin County's active lifestyle.",
   "openFrom": 1000,
   "openUntil": 2200,
@@ -20,5 +22,6 @@
   "description": "Vintage Oaks is a premier open-air lifestyle destination in scenic Novato, California, serving as the heart of Marin County's retail and dining scene. This vibrant gathering place features sixty distinct retail and dining destinations thoughtfully curated for the active Northern California lifestyle, including major anchors like Costco, Target, and Nordstrom Rack alongside specialty retailers such as Sephora, ULTA, DSW, and the newly opened J.Crew Factory. The center has distinguished itself as more than just a shopping venue by incorporating wellness-focused tenants including Club Pilates, F45 Training, and Pure Barre, reflecting the health-conscious values of the local community. Food enthusiasts will discover an impressive array of dining options ranging from Dave's Hot Chicken and Chipotle to HopMonk Tavern and SushiHolic, with live patio music creating an inviting nightlife atmosphere. What truly sets Vintage Oaks apart is its commitment to art and community, featuring whimsical art installations and floral murals created by talented Bay Area artists throughout the property, making it an Instagram-worthy destination where visitors are encouraged to explore, shop, dine, and capture memorable selfies. Operated by Crosspoint Realty and conveniently located off the Rowland Boulevard exit on Highway 101, Vintage Oaks has become an essential community hub where everyday necessities meet exceptional experiences.",
   "numberOfStores": 60,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.715862127098596
 }

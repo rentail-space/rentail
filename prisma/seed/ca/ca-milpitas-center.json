@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 37.4276589,
   "longitude": -121.91304199999999,
-  "imageURLs": ["/images/malls/ca-milpitas-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-milpitas-center-1.jpg"
+  ],
   "summary": "Milpitas Center is a practical community shopping destination offering casual dining, essential retailers, and service providers in the heart of Silicon Valley. With convenient hours and a diverse tenant mix, it serves as a reliable hub for everyday needs in the growing Milpitas community.",
   "openFrom": 700,
   "openUntil": 2100,
@@ -18,5 +20,6 @@
   "demographics": "Milpitas Center serves a diverse, tech-savvy demographic reflective of Silicon Valley's workforce, with a strong representation of Asian-American families and young professionals working in nearby tech companies. The trade area attracts middle to upper-middle income households with median incomes ranging from $90,000 to $130,000, including many dual-income families with children. Primary visitors are convenience-focused shoppers seeking everyday necessities, casual dining options, and service providers within a practical, accessible setting that caters to busy professionals and families balancing work and home life.",
   "description": "Milpitas Center stands as a practical shopping destination in the heart of Silicon Valley, serving the diverse and growing community of Milpitas, California. Located at 20 South Abbott Avenue, this community-oriented shopping center has established itself as a reliable hub for everyday needs, combining essential retailers, service providers, and casual dining options in one convenient location. The center's strategic position in Milpitas, a city known for its proximity to major tech employers and its multicultural population, makes it an accessible choice for busy professionals and families seeking efficiency in their shopping experience. With a solid 4.2-star rating from over 1,200 reviews, Milpitas Center has earned recognition for its practical approach to retail, offering a straightforward shopping environment that prioritizes convenience and accessibility. The center operates daily from 7:00 AM to 9:00 PM, providing extended hours that accommodate the schedules of working families and individuals throughout the week. As a community gathering place, Milpitas Center reflects the evolving needs of Silicon Valley residents, balancing traditional retail services with the modern demands of a tech-forward population that values both efficiency and variety in their local shopping destinations.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.1091039135494
 }

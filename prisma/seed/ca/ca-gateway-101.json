@@ -8,7 +8,9 @@
   "latitude": 37.460257299999995,
   "longitude": -122.13686750000001,
   "phone": "++1 925-279-1800",
-  "imageURLs": ["/images/malls/ca-gateway-101-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-gateway-101-1.jpg"
+  ],
   "summary": "Gateway 101 is a well-regarded community shopping center in East Palo Alto, managed by Regency Centers and serving the Silicon Valley Peninsula. The center offers a convenient mix of retail, dining, and service tenants with extended daily hours from 6:00 AM to 11:00 PM.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -19,5 +21,6 @@
   "demographics": "Gateway 101 serves the East Palo Alto and surrounding Silicon Valley communities, attracting a diverse demographic mix of tech professionals, young families, and local residents. The trade area benefits from the high-income Peninsula market with household incomes significantly above national averages, driven by proximity to major tech employers in Palo Alto and Menlo Park. Primary shoppers include convenience-oriented professionals seeking quick shopping trips, families doing weekly grocery runs, and service-focused visitors utilizing the center's salon, fitness, and medical offerings.",
   "description": "Gateway 101 is a thriving community shopping center strategically located at 1781 East Bayshore Road in East Palo Alto, California, serving the heart of Silicon Valley's Peninsula region. Developed and managed by Regency Centers, a preeminent national owner and operator of shopping centers, Gateway 101 exemplifies the company's commitment to creating neighborhood destinations that bring communities together. The center operates daily from 6:00 AM to 11:00 PM, providing convenient access to essential retail, dining, and services for local residents and the surrounding tech corridor. With an impressive 4.2-star rating from over 2,700 reviews, Gateway 101 has established itself as a trusted shopping destination. The center features a carefully curated mix of tenants including restaurants, salons, medical spaces, and fitness facilities, all designed to meet the daily needs of the diverse Peninsula community while maintaining the high standards expected in this affluent market.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.866437838079758
 }

@@ -8,7 +8,9 @@
   "latitude": 33.9596505,
   "longitude": -117.594997,
   "phone": "++1 909-946-7518",
-  "imageURLs": ["/images/malls/ca-the-marketplace-at-the-enclave-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-marketplace-at-the-enclave-1.jpg"
+  ],
   "openFrom": 430,
   "openUntil": 2200,
   "rating": 4.4,
@@ -21,5 +23,6 @@
   "squareFootage": 94000,
   "summary": "The Marketplace at the Enclave is a 94,000 square foot neighborhood center in Eastvale, California, anchored by CVS, AutoZone, Starbucks, and Jack in the Box. Serving the nearby master-planned Enclave community, this 16-tenant center offers a convenient mix of retail, dining, healthcare, and personal services for local families.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 21.367586187453345
 }

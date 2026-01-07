@@ -8,7 +8,9 @@
   "latitude": 33.6500553,
   "longitude": -117.8390564,
   "phone": "++1 949-720-3100",
-  "imageURLs": ["/images/malls/ca-university-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-university-center-1.jpg"
+  ],
   "summary": "University Center is a pedestrian-friendly outdoor shopping plaza adjacent to UC Irvine, featuring diverse shops including Target and Trader Joe's, casual dining options, and entertainment venues. The center offers modern amenities like courtyard seating, complimentary WiFi, and curbside pickup, serving as a convenient community gathering place for students and local residents.",
   "rating": 4.4,
   "reviewCount": 2964,
@@ -17,5 +19,6 @@
   "demographics": "University Center attracts a predominantly young, educated demographic given its proximity to UC Irvine, with a significant student population aged 18-24 alongside young professionals and faculty. The trade area serves affluent Irvine residents with above-average household incomes, as well as university-affiliated visitors seeking convenient access to everyday essentials and casual dining. Shopping patterns reflect a preference for quick-service dining, grocery runs, and entertainment options that cater to a tech-savvy, health-conscious consumer base. The center benefits from high foot traffic during academic terms and serves as a community gathering place for the university neighborhood.",
   "description": "University Center stands as the premier community shopping destination serving UC Irvine and the surrounding Irvine neighborhoods, offering an ideal blend of everyday conveniences and trending dining experiences. This pedestrian-friendly, open-air shopping plaza features a carefully curated mix of retailers including Target for general merchandise, Trader Joe's for groceries, and an array of casual dining options that cater to the vibrant university community. The center's design emphasizes accessibility and comfort with courtyard seating areas, complimentary WiFi, bicycle parking, and wheelchair accessibility throughout. Beyond shopping and dining, visitors can enjoy entertainment at the on-site movie theater, practice self-care at health and beauty establishments like 3 Thirty 3 Nail Bar, and take advantage of modern conveniences such as Amazon Hub Locker+ and curbside pickup options. As a university-adjacent gathering place, University Center has established itself as an essential part of daily life for students, faculty, and local residents, providing a welcoming environment that simplifies everyday errands while fostering community connections.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.55252815390416
 }

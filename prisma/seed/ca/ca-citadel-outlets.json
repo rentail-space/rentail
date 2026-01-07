@@ -8,7 +8,9 @@
   "latitude": 34.0073187,
   "longitude": -118.1529856,
   "phone": "++1 323-888-1724",
-  "imageURLs": ["/images/malls/ca-citadel-outlets-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-citadel-outlets-1.jpg"
+  ],
   "summary": "Citadel Outlets is Los Angeles' leading outlet shopping destination featuring over 130 global brands including Coach, Nike, Michael Kors, and lululemon in a distinctive Assyrian palace-inspired setting. Located minutes from downtown LA and LAX, this open-air center offers designer and premium brands at outlet prices, complemented by diverse dining options and a California Welcome Center for tourists.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Citadel Outlets stands as Los Angeles' premier outlet shopping destination, housed in a distinctive Assyrian palace-inspired architectural setting that makes it one of the most visually striking retail centers in Southern California. Located just minutes from downtown LA, LAX, and major Southern California attractions at 100 Citadel Drive in Commerce, this open-air outlet center features over 130 global brands and restaurants offering significant savings on premium merchandise. The center's impressive tenant roster includes sought-after brands such as adidas, Coach, kate spade, Levi's, lululemon, Marc Jacobs, Michael Kors, The North Face, Tory Burch, Nike, and Vuori, providing shoppers with access to designer and athletic wear at outlet prices. Beyond shopping, Citadel Outlets serves as a California Welcome Center, offering visitor information and resources for tourists exploring the region, while hosting seasonal events like their \"Joy to the Holidays\" celebration. With convenient transportation options, ample parking, and a strategic location that serves both local residents and international tourists, Citadel Outlets has established itself as a must-visit destination where world-class brands meet exceptional value in an unforgettable architectural setting.",
   "numberOfStores": 130,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 40.472366832658935
 }

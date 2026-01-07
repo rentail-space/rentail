@@ -8,7 +8,9 @@
   "latitude": 37.777102899999996,
   "longitude": -121.97035570000001,
   "phone": "++1 877-265-7417",
-  "imageURLs": ["/images/malls/ca-crow-canyon-commons-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-crow-canyon-commons-1.jpg"
+  ],
   "summary": "Crow Canyon Commons is a well-maintained community shopping center in San Ramon offering a convenient mix of restaurants, retail stores, and services. Managed by Federal Realty Investment Trust, this accessible open-air center serves as a popular everyday destination for East Bay residents.",
   "openFrom": 900,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Crow Canyon Commons serves the affluent San Ramon community in the East Bay, attracting primarily upper-middle-class families and professionals with household incomes significantly above the national average. The trade area draws from nearby suburban neighborhoods with a high concentration of college-educated residents, many working in technology and professional services sectors. Shoppers tend to be convenience-focused, seeking quality everyday services, dining options, and specialty retail in a accessible open-air format that fits their busy lifestyles.",
   "description": "Crow Canyon Commons is a well-established community shopping center located in the heart of San Ramon, California, serving as a convenient retail destination for the thriving East Bay community. Owned and operated by Federal Realty Investment Trust, a premier national retail real estate company known for high-quality shopping centers, Crow Canyon Commons offers visitors a diverse mix of restaurants, stores, and essential services in a comfortable open-air setting. The center's strategic location at 3181 Crow Canyon Place makes it easily accessible to residents throughout San Ramon and neighboring communities, providing a one-stop destination for everyday needs and dining experiences. With operating hours from 9:00 AM to 9:00 PM daily, the shopping center accommodates busy schedules while maintaining a welcoming atmosphere that has earned it a strong 4.2-star rating from over 1,000 customer reviews. As part of Federal Realty's portfolio of quality retail properties, Crow Canyon Commons benefits from professional management and a commitment to creating vibrant community gathering spaces that enhance the local retail landscape.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 25.261496004551056
 }

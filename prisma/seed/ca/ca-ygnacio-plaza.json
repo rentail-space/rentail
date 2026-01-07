@@ -8,7 +8,9 @@
   "latitude": 37.9181825,
   "longitude": -122.03774449999999,
   "phone": "++1 925-279-1800",
-  "imageURLs": ["/images/malls/ca-ygnacio-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-ygnacio-plaza-1.jpg"
+  ],
   "summary": "Ygnacio Plaza is a 109,701 square foot community shopping center located on a major Walnut Creek thoroughfare, anchored by Sports Basement and TJ Maxx. Serving an affluent trade area with average household incomes of $188,295, the center generates over 2.4 million annual visits from both residential and daytime populations.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -20,5 +22,6 @@
   "description": "Ygnacio Plaza is a proven neighborhood shopping center strategically located at 1881 Ygnacio Valley Road in Walnut Creek, California, positioned along a major city thoroughfare that ensures excellent visibility and accessibility. Spanning 109,701 square feet, this well-established community center serves one of the Bay Area's most affluent markets, with surrounding households averaging $188,295 in income and home values exceeding $1.2 million. The center is anchored by popular retailers including Sports Basement and TJ Maxx, providing a compelling mix of sporting goods, off-price fashion, and complementary services that drive over 2.4 million annual visits. With strong daytime business supported by a robust daytime population of 143,197 within three miles, Ygnacio Plaza benefits from both residential shoppers and nearby office workers seeking convenient retail options. Managed by Regency Centers, a nationally recognized shopping center developer and operator, the property maintains high standards and continues to serve as a vital retail destination in the thriving San Francisco-Oakland-Fremont metropolitan market.",
   "squareFootage": 109701,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.745276422004622
 }

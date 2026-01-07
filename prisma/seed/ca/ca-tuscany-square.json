@@ -8,7 +8,9 @@
   "latitude": 34.2785463,
   "longitude": -118.8840815,
   "phone": "++1 714-687-0000",
-  "imageURLs": ["/images/malls/ca-tuscany-square-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-tuscany-square-1.jpg"
+  ],
   "openFrom": 900,
   "openUntil": 2200,
   "rating": 4.4,
@@ -20,5 +22,6 @@
   "squareFootage": 9668,
   "summary": "Tuscany Square is a neighborhood shopping center located at a prime signalized intersection in Moorpark, serving Ventura County's highest per capita income community. With strong daily traffic counts and available anchor and retail spaces, the center offers excellent visibility in an affluent residential market.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 21.177553587818807
 }

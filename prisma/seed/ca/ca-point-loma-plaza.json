@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 32.7518829,
   "longitude": -117.21717939999999,
-  "imageURLs": ["/images/malls/ca-point-loma-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-point-loma-plaza-1.jpg"
+  ],
   "summary": "Point Loma Plaza is a 205,076 square foot community shopping center in San Diego's affluent Point Loma neighborhood, featuring Vons, Marshalls, and UFC Gym as key tenants. With direct access to I-5 and I-8, the center serves over 2.2 million annual visitors from one of San Diego's most desirable coastal markets.",
   "rating": 4.4,
   "reviewCount": 264,
@@ -18,5 +20,6 @@
   "numberOfStores": 5,
   "squareFootage": 205076,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 21.31011455645452
 }

@@ -8,7 +8,9 @@
   "latitude": 37.511502899999996,
   "longitude": -122.29333439999999,
   "phone": "++1 650-593-8075",
-  "imageURLs": ["/images/malls/ca-carlmont-village-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-carlmont-village-shopping-center-1.jpg"
+  ],
   "summary": "Carlmont Village Shopping Center is Belmont's favorite neighborhood destination featuring over 45 shops and restaurants in an outdoor setting. Anchored by a supermarket and offering diverse dining and retail options, this community-focused center serves as a convenient one-stop destination for local residents.",
   "openFrom": 1100,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Carlmont Village Shopping Center has been Belmont, California's favorite neighborhood destination, serving the community with over 45 shops and restaurants in a convenient outdoor setting. Located at 1049 Alameda de las Pulgas in the heart of Belmont, this well-established shopping center combines essential services with dining and retail options that cater to the daily needs of local residents. The center features a supermarket anchor alongside a diverse mix of casual restaurants, service providers, and specialty retailers, creating a true community gathering place. With its open-air design and ample parking, Carlmont Village offers an accessible and comfortable shopping experience that has made it a trusted destination for generations of Bay Area families. The center's strong 4.4-star rating from nearly 800 reviews reflects its consistent quality and the loyalty of its customer base, who appreciate the blend of convenience, variety, and neighborhood charm that defines this Belmont landmark.",
   "numberOfStores": 45,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 25.53283322828579
 }

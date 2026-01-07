@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.9788171,
   "longitude": -118.3937294,
-  "imageURLs": ["/images/malls/ca-howard-hughes-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-howard-hughes-center-1.jpg"
+  ],
   "openFrom": 900,
   "openUntil": 2000,
   "rating": 4.1,
@@ -18,5 +20,6 @@
   "description": "Howard Hughes Center is a premier entertainment and lifestyle destination located in the heart of West Los Angeles on Center Drive West. Named after the legendary aviator and businessman, this dynamic center has evolved into a hub for immersive entertainment experiences, featuring the newly opened 60out, which offers cutting-edge interactive entertainment that has quickly become a signature attraction. The center's carefully curated mix of entertainment, dining, shopping, and movie venues creates a vibrant atmosphere that appeals to both local residents and visitors from across the Los Angeles area. With its strategic location near major business districts and residential communities, Howard Hughes Center serves as a convenient gathering place for professionals, families, and entertainment seekers. The center's focus on experiential offerings and quality dining options positions it as a modern lifestyle destination that goes beyond traditional shopping to deliver memorable experiences.",
   "summary": "Howard Hughes Center is a dynamic entertainment and lifestyle destination in West Los Angeles featuring immersive experiences like the newly opened 60out, along with diverse dining, shopping, and movie options. This modern center serves as a vibrant gathering place for professionals and families seeking quality entertainment in a convenient location.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 15.078562544045491
 }

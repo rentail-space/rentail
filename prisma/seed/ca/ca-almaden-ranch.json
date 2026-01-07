@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 37.2583093,
   "longitude": -121.8730038,
-  "imageURLs": ["/images/malls/ca-almaden-ranch-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-almaden-ranch-1.jpg"
+  ],
   "summary": "Almaden Ranch is a popular outdoor shopping center in South San Jose's Almaden Valley, featuring specialty retailers, chain restaurants, a supermarket, and a bowling alley. This community-oriented destination serves local families and professionals with a convenient mix of shopping, dining, and entertainment options.",
   "openFrom": 0,
   "openUntil": 2400,
@@ -18,5 +20,6 @@
   "demographics": "Almaden Ranch attracts primarily middle to upper-middle-class families and professionals from the Almaden Valley area of South San Jose, one of the more affluent neighborhoods in Silicon Valley. The trade area serves households with above-average incomes, typically dual-income families with children, as well as young professionals working in the tech industry. Shoppers here prioritize convenience and quality, seeking everyday necessities combined with dining and entertainment options in a comfortable outdoor setting. The center draws from a well-educated demographic that values both practical shopping experiences and leisure activities like bowling.",
   "description": "Almaden Ranch is a vibrant outdoor shopping center located in the heart of South San Jose's desirable Almaden Valley neighborhood. This community-focused destination combines everyday convenience with entertainment and dining, featuring a well-curated mix of specialty retailers, popular chain eateries, and a full-service supermarket that serves as the anchor for daily shopping needs. The center's standout amenity is its bowling alley, which adds a unique entertainment component that draws families and groups looking for recreational activities beyond traditional shopping. With its open-air design and ample parking, Almaden Ranch provides an accessible and comfortable shopping experience that caters to the busy lifestyles of Silicon Valley residents. The center has earned strong community support, reflected in its impressive 4.4-star rating from over 1,500 reviews, making it a trusted gathering place for Almaden Valley families and professionals alike.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.95215009174078
 }

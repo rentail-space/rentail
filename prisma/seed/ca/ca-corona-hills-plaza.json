@@ -8,7 +8,9 @@
   "latitude": 33.8882303,
   "longitude": -117.5203465,
   "phone": "++1 833-800-4343",
-  "imageURLs": ["/images/malls/ca-corona-hills-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-corona-hills-plaza-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 1700,
   "rating": 4.3,
@@ -19,5 +21,6 @@
   "description": "Corona Hills Plaza is a community shopping center located at 350 North McKinley Street in Corona, California, serving as a convenient retail destination for local residents. Managed by Kimco Realty, one of North America's largest publicly traded owners and operators of open-air, grocery-anchored shopping centers, the plaza provides essential shopping and services to the Corona community. The center maintains a strong reputation with a 4.3-star rating from nearly 5,000 customer reviews, reflecting its role as a trusted neighborhood shopping destination. Strategically positioned in the heart of Corona, the plaza offers accessible parking and a practical mix of tenants catering to everyday needs. With operating hours from 10:00 AM to 5:00 PM, Corona Hills Plaza continues to serve as a reliable community gathering place for residents of Riverside County.",
   "summary": "Corona Hills Plaza is a community shopping center in Corona, California, managed by Kimco Realty and serving local residents with convenient retail and services. With a strong 4.3-star rating from nearly 5,000 reviews, it has established itself as a trusted neighborhood destination.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.689670110141943
 }

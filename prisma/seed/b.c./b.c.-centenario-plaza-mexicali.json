@@ -8,7 +8,9 @@
   "latitude": 32.625604100000004,
   "longitude": -115.44340589999997,
   "phone": "++52 686 220 0330",
-  "imageURLs": ["/images/malls/b.c.-centenario-plaza-mexicali-1.jpg"],
+  "imageURLs": [
+    "/images/malls/b.c.-centenario-plaza-mexicali-1.jpg"
+  ],
   "summary": "Centenario Plaza Mexicali is a prominent regional shopping center located on Boulevard Benito Juárez, serving as a major retail destination for Mexicali and cross-border shoppers. With a 4.4-star rating from over 6,000 reviews and extended operating hours, it offers a comprehensive shopping experience in a modern facility.",
   "openFrom": 0,
   "openUntil": 2400,
@@ -19,5 +21,6 @@
   "demographics": "Centenario Plaza Mexicali attracts a diverse cross-border demographic, serving both local Mexicali residents and visitors from the Imperial Valley region of California. The primary shopper base consists of middle to upper-middle income families, with a significant proportion of bilingual households aged 25-54 who engage in cross-border retail activity. The trade area benefits from Mexicali's population of over 1 million residents, with shoppers seeking a mix of Mexican and international retail brands in a modern mall environment. Shopping patterns reflect both destination shopping trips and regular family visits, with strong weekend and holiday traffic from both sides of the border.",
   "description": "Centenario Plaza Mexicali stands as one of the premier shopping destinations in Baja California, strategically located on Boulevard Benito Juárez in the Residencias area of Mexicali. This modern regional shopping center serves as a retail hub for the bustling border city of Mexicali and attracts cross-border shoppers from the nearby Imperial Valley in California. With its contemporary design and comprehensive tenant mix, the plaza has established itself as a go-to destination for families and shoppers seeking a diverse retail experience. The center's strong reputation is reflected in its impressive 4.4-star rating from over 6,000 reviews, demonstrating consistent customer satisfaction. Operating with extended hours from early morning until midnight, Centenario Plaza Mexicali accommodates the busy schedules of its diverse customer base, offering convenience and accessibility that has made it a cornerstone of the region's retail landscape.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 33.34768979599424
 }

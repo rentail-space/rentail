@@ -8,7 +8,9 @@
   "latitude": 37.3081874,
   "longitude": -121.8114938,
   "phone": "++1 833-800-4343",
-  "imageURLs": ["/images/malls/ca-silver-creek-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-silver-creek-plaza-1.jpg"
+  ],
   "summary": "Silver Creek Plaza is a 131,821 square foot community shopping center serving an upscale residential area in East San Jose with convenient access from East Capitol Expressway. The center provides a well-positioned retail destination for local families and professionals in this affluent neighborhood where average household incomes exceed $168,000.",
   "openFrom": 930,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Silver Creek Plaza is a key shopping destination strategically developed to serve the upscale residential community in East San Jose, California. Located at 1771 East Capitol Expressway, this 131,821 square foot community center offers convenient access from the major thoroughfare, making it an easily accessible hub for local residents and commuters. The center was purposefully designed and positioned to meet the shopping needs of this affluent neighborhood, where average household incomes exceed $168,000 within a one-mile radius. Managed by Kimco Realty Corporation, one of North America's largest publicly traded owners and operators of open-air, grocery-anchored shopping centers, Silver Creek Plaza benefits from professional property management and leasing expertise. The center features a mix of retail, service, and dining tenants tailored to the community's preferences, with spaces designed to accommodate various uses including former restaurant locations, medical offices, salons, and other specialty retail concepts that serve the daily needs of local families and professionals.",
   "squareFootage": 131821,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 15.7015464457402
 }

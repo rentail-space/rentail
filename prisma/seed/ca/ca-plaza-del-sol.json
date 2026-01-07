@@ -8,7 +8,9 @@
   "latitude": 34.2004097,
   "longitude": -118.3694772,
   "phone": "++1 626-564-1066",
-  "imageURLs": ["/images/malls/ca-plaza-del-sol-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-plaza-del-sol-1.jpg"
+  ],
   "openFrom": 700,
   "openUntil": 2200,
   "rating": 4.3,
@@ -19,5 +21,6 @@
   "description": "Plaza del Sol is a well-established community shopping center located at 10950 Sherman Way in Burbank, California, serving the San Fernando Valley with convenient retail and services. This open-air center has been a neighborhood staple for decades, providing local residents with accessible shopping options in a practical layout. With operating hours from 7:00 AM to 10:00 PM daily, the center accommodates both early morning shoppers and evening visitors. The property maintains a solid 4.3-star rating from over 1,374 reviews, reflecting its consistent service to the community. Managed by Perform Properties, a company focused on community-oriented retail centers, Plaza del Sol continues to serve as a reliable shopping destination for Burbank families and professionals seeking everyday conveniences.",
   "summary": "Plaza del Sol is a community shopping center in Burbank serving the San Fernando Valley with convenient retail and services. Operating daily from 7 AM to 10 PM, this neighborhood center maintains strong community ties with a 4.3-star rating from over 1,300 reviews.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.986685901422373
 }

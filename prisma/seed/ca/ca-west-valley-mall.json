@@ -8,7 +8,9 @@
   "latitude": 37.7600307,
   "longitude": -121.45818000000001,
   "phone": "++1 209-836-4091",
-  "imageURLs": ["/images/malls/ca-west-valley-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-west-valley-mall-1.jpg"
+  ],
   "summary": "West Valley Mall is Tracy's enclosed regional shopping center featuring dozens of retail stores, a food court with multiple dining options, and an on-site cinema. This climate-controlled mall serves as the primary shopping and entertainment destination for the Tracy community and surrounding San Joaquin County areas.",
   "openFrom": 1100,
   "openUntil": 2000,

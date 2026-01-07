@@ -8,7 +8,9 @@
   "latitude": 34.1479473,
   "longitude": -118.7948618,
   "phone": "++1 805-495-5400",
-  "imageURLs": ["/images/malls/ca-shoppes-at-westlake-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-shoppes-at-westlake-village-1.jpg"
+  ],
   "openFrom": 800,
   "openUntil": 2200,
   "rating": 4.5,
@@ -19,5 +21,6 @@
   "description": "The Shoppes at Westlake Village stands as the jewel of Westlake Village and the premier destination for dining, style, and wellness in the Conejo Valley. This open-air lifestyle center offers a carefully curated mix of shopping, dining, beauty and wellness services that cater to the sophisticated tastes of the local community. The center has positioned itself as more than just a shopping destination, emphasizing a complete lifestyle experience with offerings like CELÉ Wellness, a complete wellness studio, gym, and day spa focused on inspiring their community through movement, self-care, and education. Visitors can take a leisurely stroll around the beautifully designed property while enjoying an afternoon of boutique shopping, upscale dining, and premium services. Located at 30770 Russell Ranch Road in the heart of Westlake Village, the Shoppes maintains an active community presence through social media engagement and regular events, fostering a strong connection with residents who value quality, wellness, and an elevated shopping experience.",
   "summary": "The Shoppes at Westlake Village is the Conejo Valley's premier open-air lifestyle destination, offering a curated collection of dining, shopping, and wellness experiences. Known as the jewel of Westlake Village, this upscale center emphasizes quality lifestyle amenities including boutique retail, upscale dining, and comprehensive wellness services.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 40.60459500300999
 }

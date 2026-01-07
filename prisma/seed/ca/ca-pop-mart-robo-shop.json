@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 34.4166151,
   "longitude": -118.558391,
-  "imageURLs": ["/images/malls/ca-pop-mart-robo-shop-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-pop-mart-robo-shop-1.jpg"
+  ],
   "summary": "POP MART ROBO SHOP is an automated retail concept in Santa Clarita offering collectible designer toys and blind box figures through innovative vending technology. Part of the global POP MART brand, this location provides 24/7 access to exclusive art toys and limited edition collectibles for enthusiasts throughout Southern California.",
   "openFrom": 1000,
   "openUntil": 2100,

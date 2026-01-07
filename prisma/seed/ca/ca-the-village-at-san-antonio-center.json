@@ -8,7 +8,9 @@
   "latitude": 37.40406900000001,
   "longitude": -122.1111885,
   "phone": "++1 415-675-7742",
-  "imageURLs": ["/images/malls/ca-the-village-at-san-antonio-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-village-at-san-antonio-center-1.jpg"
+  ],
   "summary": "The Village at San Antonio Center is Mountain View's premier open-air lifestyle destination featuring upscale dining, boutique fitness studios, and entertainment options including Alamo Drafthouse cinema. This urban live-work-play center serves Silicon Valley's tech community with sophisticated experiences ranging from Il Fornaio and Pacific Catch to OrangeTheory Fitness and Solidcore, plus an on-site Hyatt Centric hotel.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -20,5 +22,6 @@
   "description": "The Village at San Antonio Center represents Mountain View's premier urban live-work-play destination, seamlessly blending upscale dining, entertainment, and wellness experiences in an open-air environment. Located at 645 San Antonio Road in the heart of Silicon Valley, this lifestyle center has evolved into a community gathering place that reflects the area's innovative spirit and sophisticated tastes. The center features an impressive collection of culinary destinations including Il Fornaio, Pacific Catch, Mendocino Farms, and the upcoming Shake Shack and Sushi Adachi, catering to diverse palates with both established favorites and exciting new concepts. Fitness enthusiasts are drawn to the center's exceptional wellness offerings, including BODYROK, OrangeTheory Fitness, Solidcore, Yoga 6, and Stretch Lab, creating a hub for health-conscious Silicon Valley residents. Entertainment is anchored by the Alamo Drafthouse cinema, while the on-site Hyatt Centric hotel connects visitors to the local community, and specialty retailers like Ben's Barketplace and Cardinale Way add unique shopping experiences. The center's thoughtful design and tenant mix reflect its position as a sophisticated gathering place where technology professionals and local families can dine, shop, exercise, and socialize in a vibrant, walkable setting.",
   "numberOfStores": 26,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.95034418423507
 }

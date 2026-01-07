@@ -8,7 +8,9 @@
   "latitude": 34.0731826,
   "longitude": -118.3841303,
   "phone": "++1 646-407-5409",
-  "imageURLs": ["/images/malls/ca-eclipse-sample-sales-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-eclipse-sample-sales-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 1800,
   "rating": 4,
@@ -19,5 +21,6 @@
   "description": "Eclipse Sample Sales is a premier sample sale destination located on the iconic Robertson Boulevard in Los Angeles, offering fashion enthusiasts access to designer brands at significantly reduced prices. This specialized retail concept operates as a curated sample sale venue where shoppers can discover high-end fashion pieces, accessories, and lifestyle products from contemporary and luxury brands at a fraction of their original retail prices. The boutique-style space provides an intimate shopping experience that differs from traditional retail environments, with rotating inventory that keeps the selection fresh and exciting for repeat visitors. With a strong 4-star rating from 66 reviews, Eclipse Sample Sales has built a loyal following among Los Angeles fashion insiders who appreciate the thrill of discovering designer deals in the heart of one of LA's most fashionable shopping districts. Open daily from 10 AM to 6 PM, the store serves as a go-to destination for savvy shoppers looking to build their wardrobes with premium brands without the premium price tags.",
   "summary": "Eclipse Sample Sales is a specialized sample sale boutique on Robertson Boulevard offering designer fashion and accessories at discounted prices. This curated shopping destination attracts fashion-conscious Los Angeles shoppers seeking high-end brands at accessible price points.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 14.55635148433495
 }

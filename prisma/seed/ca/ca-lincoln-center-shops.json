@@ -8,7 +8,9 @@
   "latitude": 38.012124199999995,
   "longitude": -121.3225233,
   "phone": "++1 209-477-4868",
-  "imageURLs": ["/images/malls/ca-lincoln-center-shops-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-lincoln-center-shops-1.jpg"
+  ],
   "summary": "Lincoln Center is Stockton's premiere 35-acre outdoor lifestyle center established in 1951, featuring over 90 businesses with more than 80% being locally owned and family-operated. The center offers a distinctive blend of boutique shopping, upscale dining, fitness facilities, and regular community events, all centered around the iconic 'Big L' landmark.",
   "openFrom": 1000,
   "openUntil": 2200,
@@ -20,5 +22,6 @@
   "description": "Lincoln Center has been Stockton's premiere outdoor shopping destination since 1951, marked by its iconic 'Big L' landmark that has welcomed generations of shoppers. Spanning 35 acres, this lifestyle center is home to over 90 businesses, with more than 80% being locally owned and family-operated establishments, creating a unique community-focused shopping experience. The center offers an impressive mix of stylish boutiques, specialty shops, higher-end restaurants, salons, and fitness facilities including Club Pilates. Notable tenants include Podesto's Market, Market Tavern, Heirloom, Papapavlos, and Play It Again Sports, providing visitors with diverse shopping and dining options. Beyond retail, Lincoln Center serves as a community hub hosting weekly events including in-store shopping parties, live music performances, fitness classes, and non-profit events, while also giving back through their scholarship program that awards $2,000 to four local high school seniors annually.",
   "numberOfStores": 90,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.968295818619062
 }

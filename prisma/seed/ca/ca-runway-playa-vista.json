@@ -8,7 +8,9 @@
   "latitude": 33.9766474,
   "longitude": -118.4168421,
   "phone": "++1 310-862-9461",
-  "imageURLs": ["/images/malls/ca-runway-playa-vista-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-runway-playa-vista-1.jpg"
+  ],
   "summary": "Runway Playa Vista is a contemporary lifestyle center in Los Angeles's Silicon Beach featuring diverse shops, restaurants, a movie theater, and a Whole Foods Market anchor. This open-air destination serves the affluent Playa Vista community with a modern mix of retail, dining, and entertainment options in a walkable, urban setting.",
   "openFrom": 700,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "Runway Playa Vista attracts an affluent, tech-savvy demographic primarily consisting of young professionals and families aged 25-45 with above-average household incomes exceeding $100,000. The trade area serves the rapidly developing Playa Vista neighborhood, known as Silicon Beach, drawing residents and workers from the technology and entertainment industries. Visitors tend to favor experiential shopping combined with dining and entertainment options, reflecting the modern urban lifestyle preferences of the Westside Los Angeles market. The center appeals to health-conscious consumers, evidenced by the Whole Foods Market anchor, and attracts both local residents seeking convenience and destination shoppers drawn to the movie theater and diverse restaurant offerings.",
   "description": "Runway Playa Vista stands as a premier lifestyle destination in the heart of Los Angeles's Silicon Beach, serving the vibrant and rapidly growing Playa Vista community. This modern open-air shopping center seamlessly blends retail, dining, and entertainment to create a dynamic gathering place for the neighborhood's tech-savvy residents and professionals. The center is anchored by Whole Foods Market, providing premium grocery options, while also featuring a state-of-the-art movie theater that serves as a major entertainment draw. With its thoughtfully curated mix of shops spanning fashion, lifestyle, and services, Runway Playa Vista caters to the sophisticated tastes of Westside Los Angeles visitors. The center's contemporary design and walkable layout reflect the urban sensibilities of its surroundings, offering diverse dining options that range from casual eateries to upscale restaurants. Located at 12775 West Millennium Drive, Runway Playa Vista has established itself as the commercial heart of one of LA's most innovative neighborhoods, providing a convenient and engaging shopping experience that complements the area's modern residential and office developments.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.479175702059933
 }

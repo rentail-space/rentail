@@ -8,7 +8,9 @@
   "latitude": 34.1587747,
   "longitude": -118.8208989,
   "phone": "++1 818-637-8923",
-  "imageURLs": ["/images/malls/ca-the-promenade-at-westlake-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-promenade-at-westlake-1.jpg"
+  ],
   "summary": "The Promenade at Westlake is a sophisticated outdoor lifestyle center in Thousand Oaks featuring specialty shops, upscale dining including RED O and Marmalade Cafe, and a cinema. Managed by Caruso, the center offers a premium shopping experience with the upcoming addition of Whole Foods Market and exclusive membership benefits through the Caruso Signature program.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "The Promenade at Westlake attracts an affluent, family-oriented demographic from the Conejo Valley area, with visitors typically in the 30-55 age range and above-average household incomes exceeding $100,000. The trade area serves upscale suburban communities including Thousand Oaks, Westlake Village, and Agoura Hills, drawing professionals and families seeking premium shopping and dining experiences. Shoppers demonstrate preferences for specialty retail, organic and natural foods (evidenced by the incoming Whole Foods Market), and experiential dining at restaurants like RED O and Marmalade Cafe. The center caters to lifestyle-conscious consumers who value quality, convenience, and a sophisticated outdoor shopping environment.",
   "description": "The Promenade at Westlake is a sophisticated outdoor lifestyle center located in the heart of Thousand Oaks, California, offering an elevated shopping and dining experience to the affluent Conejo Valley community. Developed and managed by Caruso, the renowned real estate company known for creating premier retail destinations, this open-air center combines specialty retail, upscale dining, and entertainment in a beautifully landscaped setting. The center features a carefully curated mix of fashion and beauty retailers, including Warby Parker, alongside home goods stores and a variety of dining options ranging from Shake Shack to RED O and Marmalade Cafe. A major enhancement is underway with the addition of Whole Foods Market, the world's leading natural and organic foods retailer, which will further elevate the center's appeal to health-conscious, quality-focused shoppers. With a cinema for entertainment, seasonal events, and the exclusive Caruso Signature membership program offering enhanced experiences and rewards, The Promenade at Westlake has established itself as the premier destination for shopping, dining, and community gathering in the Thousand Oaks area.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 43.16744897482827
 }

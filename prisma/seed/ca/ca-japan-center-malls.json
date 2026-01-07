@@ -8,7 +8,9 @@
   "latitude": 37.785277799999996,
   "longitude": -122.4294444,
   "phone": "++1 415-440-1171",
-  "imageURLs": ["/images/malls/ca-japan-center-malls-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-japan-center-malls-1.jpg"
+  ],
   "summary": "Japan Center Malls is San Francisco's premier destination for authentic Japanese culture, featuring over 25 specialty shops and restaurants offering everything from traditional cultural merchandise to contemporary anime goods and authentic Japanese cuisine. Operating since 1968 in the heart of Japantown, this beloved community hub welcomes visitors daily with diverse dining options, unique retailers like Daiso Japan and Nijiya Market, and an immersive cultural experience.",
   "openFrom": 830,
   "openUntil": 2300,
@@ -20,5 +22,6 @@
   "description": "Japan Center Malls has been providing authentic Japanese cultural shopping experiences in the heart of San Francisco's Japantown since 1968, serving as a vibrant hub for Japanese culture and commerce for over five decades. The center welcomes visitors with the warm Japanese greeting \"Okaeri\" (welcome home), embodying the spirit of community and belonging that defines this unique destination. Spanning multiple buildings at 1737 Post Street and 22 Peace Plaza, the mall complex features an impressive array of specialty retailers and restaurants offering everything from traditional Japanese housewares and cultural merchandise to contemporary anime goods and beauty products. Anchor tenants include Nijiya Market for authentic Japanese groceries, Daiso Japan for affordable household items, and popular dining destinations like Benihana, multiple ramen shops, and authentic sushi restaurants. The center operates daily from 8:30am to 10pm, though individual merchant hours vary, and has earned a strong 4.5-star rating from nearly 7,000 reviews, testament to its enduring appeal as San Francisco's premier destination for Japanese culture, cuisine, and shopping.",
   "numberOfStores": 27,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 34.4776067307775
 }

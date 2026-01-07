@@ -8,7 +8,9 @@
   "latitude": 37.5378764,
   "longitude": -122.300907,
   "phone": "++1 650-586-7750",
-  "imageURLs": ["/images/malls/ca-hillsdale-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-hillsdale-shopping-center-1.jpg"
+  ],
   "summary": "Hillsdale Shopping Center is San Mateo's premier indoor mall featuring department stores, popular chain retailers, and a food terrace with global dining options. With nearly 7,000 reviews and a 4.3-star rating, it serves as a trusted shopping destination for Peninsula residents.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Hillsdale Shopping Center attracts a diverse, affluent demographic from the San Mateo and broader Peninsula area, with visitors typically representing middle to upper-middle income households earning $100,000+. The trade area draws heavily from families and young professionals aged 25-54 who value convenience and variety in their shopping experience. The center serves as a primary retail destination for Peninsula residents seeking department store shopping combined with dining options, with typical visitors showing preferences for both national chain retailers and accessible food court dining. The location benefits from San Mateo's educated, tech-industry workforce and family-oriented community demographics.",
   "description": "Hillsdale Shopping Center stands as one of the San Francisco Peninsula's premier indoor shopping destinations, serving the San Mateo community and surrounding areas since its establishment. Located at 60 31st Avenue in San Mateo, this enclosed regional mall offers a comprehensive retail experience featuring department store anchors, popular chain retailers, and a diverse food terrace serving global cuisine. The center has earned a strong reputation among local shoppers, reflected in its 4.3-star rating from nearly 7,000 reviews, making it a trusted destination for both everyday shopping needs and special purchases. With convenient operating hours from 10 AM to 9 PM, Hillsdale provides a climate-controlled shopping environment that appeals to Peninsula families, professionals, and visitors seeking a traditional mall experience. The center's combination of national retailers, dining variety, and accessible location has established it as a cornerstone of San Mateo's retail landscape, continuing to serve the community's evolving shopping preferences.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 33.05662150560285
 }

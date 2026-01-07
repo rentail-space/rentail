@@ -8,7 +8,9 @@
   "latitude": 37.6987272,
   "longitude": -121.84404810000001,
   "phone": "++1 925-292-2868",
-  "imageURLs": ["/images/malls/ca-san-francisco-premium-outlets-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-san-francisco-premium-outlets-1.jpg"
+  ],
   "summary": "San Francisco Premium Outlets is the East Bay's premier outlet shopping destination, featuring designer and brand-name stores offering daily savings of 25-65% in an open-air setting. Conveniently located in Livermore near wine country, it attracts shoppers from throughout the Bay Area seeking quality brands at exceptional values.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "San Francisco Premium Outlets attracts a diverse mix of value-conscious shoppers from the greater San Francisco Bay Area, including families and millennials with middle to upper-middle income levels seeking designer brands at discounted prices. The trade area draws heavily from the Tri-Valley region including Livermore, Pleasanton, and Dublin, as well as weekend visitors from San Francisco, Oakland, and San Jose willing to drive 45-60 minutes for outlet shopping. Primary visitors are deal-seeking professionals aged 25-54 with household incomes of $75,000-$150,000 who appreciate premium brands but prioritize value, along with tourists exploring the Bay Area wine country.",
   "description": "San Francisco Premium Outlets stands as the premier outlet shopping destination in the East Bay, offering an exceptional collection of designer and brand-name stores at savings of 25% to 65% every day. Located in Livermore at the gateway to California's renowned wine country, this open-air outlet center combines the thrill of discount shopping with the convenience of a well-designed retail environment. Shoppers can explore a curated selection of fashion, footwear, accessories, and home goods from coveted brands, all while enjoying the pleasant Northern California climate. The center's strategic location along the I-580 corridor makes it easily accessible from throughout the Bay Area, attracting both local residents and tourists seeking quality merchandise at outlet prices. With ample parking, contemporary amenities, and a constantly evolving tenant mix, San Francisco Premium Outlets has established itself as a must-visit shopping destination for savvy consumers who refuse to compromise on style or savings.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 37.03026137154218
 }

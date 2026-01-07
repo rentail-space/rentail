@@ -8,7 +8,9 @@
   "latitude": 32.8410218,
   "longitude": -116.9808709,
   "phone": "++1 833-800-4343",
-  "imageURLs": ["/images/malls/ca-trolley-square-at-santee-town-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-trolley-square-at-santee-town-center-1.jpg"
+  ],
   "summary": "Trolley Square at Santee Town Center is a massive open-air shopping complex featuring chain stores, an outdoor amphitheater, and fitness facilities, all accessible via San Diego's trolley system. This community-focused destination combines everyday retail convenience with entertainment amenities, serving as a central gathering place for East County San Diego residents.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Trolley Square at Santee Town Center serves a diverse, family-oriented demographic in East County San Diego, with a strong middle-class customer base. The trade area attracts households with median incomes ranging from $60,000 to $90,000, including young families, working professionals, and retirees seeking convenient access to everyday shopping needs. The center's trolley accessibility draws visitors from throughout the San Diego metropolitan area, particularly value-conscious shoppers looking for a mix of national retailers and essential services in an outdoor setting.",
   "description": "Trolley Square at Santee Town Center stands as a massive shopping complex in the heart of Santee, California, offering a unique blend of convenience and entertainment for East County San Diego residents. This expansive open-air center distinguishes itself with direct trolley access via the San Diego Metropolitan Transit System, making it one of the most accessible shopping destinations in the region. The center features a diverse mix of national chain stores, providing shoppers with everything from fashion and home goods to dining and fitness options. A standout amenity is the outdoor amphitheater, which hosts community events and entertainment throughout the year, transforming the center into a true gathering place for local residents. With its combination of retail variety, public transit connectivity, and community-focused amenities including an on-site gym, Trolley Square has established itself as a cornerstone of the Santee community since its development, serving as both a practical shopping destination and a social hub for families and individuals throughout East County.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.993141543538826
 }

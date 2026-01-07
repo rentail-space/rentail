@@ -8,7 +8,9 @@
   "latitude": 32.6651799,
   "longitude": -115.50944270000001,
   "phone": "++1 760-768-9002",
-  "imageURLs": ["/images/malls/ca-gran-plaza-outlets-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-gran-plaza-outlets-1.jpg"
+  ],
   "summary": "Gran Plaza Outlets is an outdoor outlet shopping center located on the California-Mexico border in Calexico, featuring 35+ brand-name stores offering discounted apparel, shoes, and accessories. The center serves as a premier cross-border shopping destination for families seeking quality American brands at outlet prices.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -20,5 +22,6 @@
   "description": "Gran Plaza Outlets stands as the premier outlet shopping destination on the California-Mexico border, strategically located in Calexico at 888 West 2nd Street. Created to offer customers products of excellence at attractive costs, this outdoor outlet complex features over 35 brand-name stores specializing in clothing, shoes, and accessories at discounted prices. The center's unique position on the international border makes it an unforgettable shopping experience for families from both sides, serving as a gateway for Mexican shoppers seeking American brands and quality merchandise. With its VIP Club membership program, shoppers receive advance notice of exciting offers, new products, and seasonal events, including popular celebrations like the annual Christmas Tree Lighting and ArtWalk. The center maintains convenient shopping hours seven days a week, operating from 10:00 AM to 8:00 PM Monday through Saturday and 10:00 AM to 7:00 PM on Sundays, making it accessible for both local residents and international visitors planning their cross-border shopping trips.",
   "numberOfStores": 35,
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 16.669835673240783
 }

@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 38.0080358,
   "longitude": -122.5477131,
-  "imageURLs": ["/images/malls/ca-northgate-one-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-northgate-one-1.jpg"
+  ],
   "summary": "Northgate One in San Rafael is a community shopping destination anchored by the family-owned Northgate Sew and Vac, which has served Marin County for over 60 years. The center specializes in quality home goods including sewing machines, vacuum cleaners, and air purifiers, offering personalized service that has earned strong customer loyalty.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -18,5 +20,6 @@
   "demographics": "Northgate One serves the affluent Marin County market, attracting middle to upper-middle income households with median incomes significantly above the national average. The primary visitor base consists of homeowners aged 35-65 who value quality home goods and specialized services, with a strong preference for personalized customer service and long-term product relationships. The trade area draws from San Rafael and surrounding North Bay communities, where residents prioritize home maintenance, crafting hobbies, and sustainable product choices over disposable alternatives.",
   "description": "Northgate One, located at 270 Northgate Drive in San Rafael, California, is home to the family-owned Northgate Sew and Vac, a beloved local institution that has been serving the Marin County community for over six decades. This specialized shopping destination has built its reputation on providing quality sewing machines, vacuum cleaners, air purifiers, and sewing furniture to generations of North Bay residents. The center's anchor tenant exemplifies the kind of expert, personalized service that has become increasingly rare in today's retail landscape, offering customers hands-on guidance for their home care and creative sewing projects. With convenient hours from 6:00 AM to 11:00 PM and a strong 4.1-star rating from nearly 500 Google reviews, Northgate One has established itself as a trusted resource in the San Rafael community. The shopping center's focus on durable goods and specialized equipment reflects the values of Marin County residents who prioritize quality, sustainability, and supporting local family businesses.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 21.96385070812893
 }

@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 37.6014134,
   "longitude": -122.06666159999997,
-  "imageURLs": ["/images/malls/ca-union-landing-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-union-landing-1.jpg"
+  ],
   "summary": "Union Landing is Union City's largest shopping destination, featuring over 70 stores, restaurants, and entertainment options across 1,000,000 square feet of open-air retail space. Conveniently located off Interstate 880, this lifestyle center offers a comprehensive one-stop shopping experience with big-box retailers, diverse dining, hotels, and regular community events.",
   "openFrom": 800,
   "openUntil": 2200,
@@ -20,5 +22,6 @@
   "numberOfStores": 70,
   "squareFootage": 1000000,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 33.01356084654071
 }

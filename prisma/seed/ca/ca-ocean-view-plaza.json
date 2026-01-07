@@ -8,7 +8,9 @@
   "latitude": 33.4573946,
   "longitude": -117.6516352,
   "phone": "++1 610-215-7939",
-  "imageURLs": ["/images/malls/ca-ocean-view-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-ocean-view-plaza-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 0,
   "rating": 4.4,
@@ -21,5 +23,6 @@
   "squareFootage": 169963,
   "summary": "Ocean View Plaza is a 169,963 square foot community shopping center in San Clemente anchored by Ralphs and Trader Joe's, featuring over 50 national and regional retailers. The center draws 2.7 million annual visits and serves an affluent coastal trade area with average household incomes exceeding $175,000.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 25.62287339703398
 }

@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.6802412,
   "longitude": -118.0044278,
-  "imageURLs": ["/images/malls/ca-seacliff-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-seacliff-village-1.jpg"
+  ],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.4,
@@ -18,5 +20,6 @@
   "description": "Seacliff Village Shopping Center is a well-established community destination located on Main Street in the heart of Huntington Beach, California. Serving the coastal community for decades, this open-air shopping center has become an integral part of the neighborhood fabric, offering residents convenient access to everyday essentials and specialty retail. The center's prime location in one of Southern California's most desirable beach communities makes it a natural gathering place for locals and visitors alike. With its strong rating of 4.4 stars from nearly 1,400 reviews, Seacliff Village has earned a reputation for providing quality shopping and services in a welcoming, accessible environment. The center's extended hours of operation, open from early morning until midnight, ensure that busy families and professionals can shop at their convenience throughout the day.",
   "summary": "Seacliff Village is a well-regarded community shopping center on Main Street in Huntington Beach, serving the coastal neighborhood with convenient retail and services. With a 4.4-star rating and extended daily hours, it has established itself as a trusted local destination for residents' everyday needs.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.680463108405036
 }

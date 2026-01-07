@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.9994513,
   "longitude": -117.5771331,
-  "imageURLs": ["/images/malls/ca-new-haven-marketplace-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-new-haven-marketplace-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.6,
@@ -19,5 +21,6 @@
   "numberOfStores": 20,
   "summary": "New Haven Marketplace is a modern community shopping center serving the Ontario Ranch master-planned community with essential services, dining, and wellness amenities. The center features popular tenants including Stater Bros. Market, Starbucks, YogaSIX, and the newly opened Rodeo X entertainment venue, with additional stores and restaurants continuing to open.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 22.23309266751218
 }

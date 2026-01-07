@@ -8,7 +8,9 @@
   "latitude": 34.984845199999995,
   "longitude": -118.9417643,
   "phone": "++1 661-858-2155",
-  "imageURLs": ["/images/malls/ca-tejon-ranch-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-tejon-ranch-1.jpg"
+  ],
   "summary": "Tejon Ranch Outlets is a convenient shopping destination located on historic Tejon Ranch along Interstate 5, positioned between Los Angeles and Bakersfield. The center serves travelers and local residents with outlet shopping in a unique setting that balances commercial development with the natural heritage of California's largest private landholding.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "Tejon Ranch attracts visitors traveling along Interstate 5 between Los Angeles and the Central Valley, including families and tourists seeking a convenient shopping stop. The trade area draws from both Southern California urban markets and Central Valley communities, with a mix of middle to upper-middle income households. Primary visitors include travelers making the journey between major California cities, local residents from Bakersfield and surrounding areas, and tourists exploring the region. Shopping patterns reflect convenience-oriented purchases combined with outlet shopping seeking value on brand-name merchandise.",
   "description": "Tejon Ranch Outlets represents a unique shopping destination situated on California's largest expanse of private land, located just off Interstate 5 between Los Angeles and Bakersfield. The center is part of the historic Tejon Ranch, a working ranch with roots dating back to 1843 that encompasses mountains, valleys, canyons, and high desert country. The outlets provide a convenient shopping stop for travelers journeying between Southern California and the Central Valley, positioned just an hour north of Los Angeles and 30 minutes from Bakersfield. The shopping center operates within a broader vision of sustainable development, where the Tejon Ranch Company balances commercial growth with environmental stewardship and conservation. Visitors to the outlets can experience shopping in a distinctive setting that combines retail convenience with the natural beauty and heritage of one of California's most significant ranching properties.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 29.47987519561179
 }

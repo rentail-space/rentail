@@ -8,7 +8,9 @@
   "latitude": 37.971860199999995,
   "longitude": -122.05965080000001,
   "phone": "++1 925-265-6755",
-  "imageURLs": ["/images/malls/ca-the-veranda-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-veranda-1.jpg"
+  ],
   "summary": "The Veranda is an upscale lifestyle shopping center in Concord featuring premium retail, diverse dining options, and extensive entertainment including a luxury cinema with IMAX, Dave & Buster's, and seasonal attractions. This landscaped open-air destination serves as a community hub for the East Bay, combining sophisticated shopping with family-friendly experiences and events.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "The Veranda attracts affluent families and professionals from Concord and the surrounding East Bay communities, with visitors typically in the 30-55 age range with above-average household incomes. The trade area serves families seeking upscale shopping and dining experiences, drawn by the center's premium grocery anchors and entertainment options. Shopping patterns reflect a preference for convenience and quality, with visitors combining grocery shopping, dining, and entertainment in single trips, particularly on weekends when families utilize the cinema, Dave & Buster's, and seasonal attractions like the ice rink.",
   "description": "The Veranda is a premier lifestyle shopping destination located in Concord, California, recognized as one of the best places in California to raise a family. This beautifully landscaped open-air center combines upscale retail, dining, and entertainment in a sophisticated setting along Diamond Boulevard in the heart of the East Bay. The center features a carefully curated mix of upscale supermarkets, national retail chains, and distinctive dining options that cater to the discerning tastes of local families and professionals. Entertainment is a cornerstone of The Veranda experience, with the Veranda Luxe Cinema and IMAX providing state-of-the-art movie viewing, Dave & Buster's offering interactive gaming and dining, and the Red Door Escape Room providing unique group experiences. Seasonal attractions like Ice at The Veranda and family-focused programming through the Kids Club create year-round community gathering opportunities. The center's commitment to creating memorable experiences extends to hosting parties and events, making it more than just a shopping destination but a true community hub. With ample parking, modern amenities, and a focus on customer experience, The Veranda has established itself as the East Bay's premier lifestyle center, serving the thriving Concord community with style and sophistication.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.551061617632403
 }

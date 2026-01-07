@@ -8,7 +8,9 @@
   "latitude": 33.993764899999995,
   "longitude": -117.9285387,
   "phone": "++1 626-912-8777",
-  "imageURLs": ["/images/malls/ca-puente-hills-mall-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-puente-hills-mall-1.jpg"
+  ],
   "summary": "Puente Hills Mall has served as the City of Industry's premier shopping destination since 1974, offering a comprehensive mix of retail, dining, and entertainment including an AMC 20-screen theater. This community-focused regional mall provides a welcoming gathering place for families with diverse shopping options, monthly events, and a strong connection to the surrounding neighborhoods.",
   "openFrom": 1100,
   "openUntil": 1900,
@@ -19,5 +21,6 @@
   "demographics": "Puente Hills Mall serves a diverse, family-oriented community in the San Gabriel Valley with a strong Hispanic and Asian-American presence. The trade area draws middle-income households from City of Industry, Hacienda Heights, Rowland Heights, and surrounding communities, with visitors typically ranging from young families to middle-aged shoppers. The center attracts value-conscious consumers seeking affordable fashion, dining, and entertainment options, with strong weekend traffic from multi-generational family groups. The demographic profile reflects the broader East Los Angeles County market with household incomes in the $50,000-$80,000 range and a preference for accessible, community-focused shopping experiences.",
   "description": "Puente Hills Mall has been the heart of the City of Industry community since 1974, serving as a beloved gathering place for neighbors, friends, and families for nearly five decades. This regional shopping destination offers a comprehensive retail experience with diverse shopping, dining, and entertainment options that cater to the entire family. The mall features a wide array of national retailers offering trendy fashions for men, women, and children, alongside home-decor items and specialty stores. Entertainment is anchored by the AMC Puente Hills 20 movie theater, providing the latest blockbuster films in a modern cinema setting. Beyond shopping and movies, Puente Hills Mall creates a true community experience with monthly events, special promotions, and deals that keep visitors engaged and coming back. The center prides itself on being more than just a mall—it's a communal hub where the surrounding community comes together to shop, dine, and create lasting memories in a welcoming, family-friendly environment.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.15762922087384
 }

@@ -8,7 +8,9 @@
   "latitude": 33.6071914,
   "longitude": -117.6890659,
   "phone": "++1 310-665-9696",
-  "imageURLs": ["/images/malls/ca-alicia-landing-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-alicia-landing-1.jpg"
+  ],
   "rating": 4.1,
   "reviewCount": 7,
   "website": "http://festivalcos.com/property/alicia-landing?utm_source=rentail.space",
@@ -19,5 +21,6 @@
   "squareFootage": 11700,
   "summary": "Alicia Landing is a Target-anchored community center at I-5 and Alicia Parkway in Mission Viejo, featuring 11,700 square feet of contemporary restaurant and retail space with popular tenants like Dave's Hot Chicken, Mendocino Farms, and Philz Coffee. The center serves an affluent trade area with over 165,000 residents earning average household incomes above $155,700, benefiting from exceptional visibility with 353,513 daily freeway cars passing the site.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 6.929803928116905
 }

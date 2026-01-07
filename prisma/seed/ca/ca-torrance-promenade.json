@@ -8,7 +8,9 @@
   "latitude": 33.8530806,
   "longitude": -118.35219810000001,
   "phone": "++1 833-800-4343",
-  "imageURLs": ["/images/malls/ca-torrance-promenade-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-torrance-promenade-1.jpg"
+  ],
   "summary": "Torrance Promenade is a 270,535 square foot community shopping center located on Hawthorne Boulevard in Torrance, California. The center features national and regional tenants serving the affluent South Bay area of Los Angeles County.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Torrance Promenade is a premier community shopping destination strategically positioned on the major retail artery of Hawthorne Boulevard at Redondo Beach Boulevard in the heart of Torrance, California. Spanning 270,535 square feet of gross leasable area, this well-established center serves the affluent South Bay region of Los Angeles County with a carefully curated mix of national and regional tenants. Located within the safe and desirable enclave of Torrance, the Promenade benefits from its proximity to one of California's most prosperous communities, drawing shoppers from surrounding cities including Redondo Beach, Gardena, and the greater Los Angeles-Long Beach-Anaheim metropolitan area. The center's convenient location and strong tenant roster make it a go-to destination for residents seeking quality retail, dining, and services in a comfortable, accessible setting. Managed by Kimco Realty, one of North America's largest publicly traded owners and operators of open-air, grocery-anchored shopping centers, Torrance Promenade exemplifies the company's commitment to providing exceptional retail experiences in high-performing markets.",
   "squareFootage": 270535,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.12837440338569
 }

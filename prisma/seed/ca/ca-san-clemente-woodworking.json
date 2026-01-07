@@ -8,7 +8,9 @@
   "latitude": 33.4537085,
   "longitude": -117.5954855,
   "phone": "++1 949-939-3802",
-  "imageURLs": ["/images/malls/ca-san-clemente-woodworking-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-san-clemente-woodworking-1.jpg"
+  ],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.7,
@@ -19,5 +21,6 @@
   "description": "Founded in 1986, San Clemente Woodworking is a family-owned and operated custom staircase business that has become one of the largest custom staircase builders in Southern California. Specializing in elegant custom staircases, the company expertly crafts wood staircases, curved stairs, and stainless steel designs using traditional woodworking techniques combined with modern precision. Their skilled craftsmen excel in bending rails, custom woodturning, and precise duplication of architectural designs, serving numerous residents and building contractors throughout Orange County. By selectively using their own local milling and purchasing materials directly from manufacturers, San Clemente Woodworking maintains competitive pricing while delivering exceptional quality. Located at 1030 Calle Sombra in San Clemente, the business operates Monday through Friday from 7 AM to 3 PM, providing expert stair building services that transform homes with beautiful, custom-designed staircases that become the envy of the neighborhood.",
   "summary": "San Clemente Woodworking is a family-owned custom staircase business founded in 1986, specializing in elegant wood, curved, and stainless steel staircases. As one of Southern California's largest custom staircase builders, they serve Orange County homeowners and contractors with expert craftsmanship and competitive pricing.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 12.800241658565373
 }

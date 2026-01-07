@@ -8,7 +8,9 @@
   "latitude": 34.1159705,
   "longitude": -117.8342308,
   "phone": "++1 626-914-8200",
-  "imageURLs": ["/images/malls/ca-glendora-marketplace-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-glendora-marketplace-shopping-center-1.jpg"
+  ],
   "openFrom": 800,
   "openUntil": 0,
   "rating": 4.5,
@@ -19,5 +21,6 @@
   "description": "Glendora Marketplace Shopping Center stands as a cornerstone retail destination in the heart of Glendora, California, serving the community at 1301 South Lone Avenue. This well-established community shopping center has earned an impressive 4.5-star rating from over 4,400 reviews, reflecting its popularity among local residents and visitors alike. The center operates with extended hours from 8:00 AM until midnight, providing convenient access to essential retail and services throughout the day. Strategically located in Glendora's primary commercial district, the Marketplace benefits from the city's strong economic development initiatives and commitment to supporting local businesses. As part of the city's broader retail ecosystem, Glendora Marketplace Shopping Center serves as a vital gathering place for this San Gabriel Valley community, offering residents a convenient shopping experience close to home while contributing to the city's vibrant commercial landscape.",
   "summary": "Glendora Marketplace Shopping Center is a highly-rated community retail destination in Glendora, California, serving local residents with convenient access to shopping and services. With a 4.5-star rating from over 4,400 reviews and extended operating hours, it has established itself as a trusted neighborhood shopping hub in the San Gabriel Valley.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 32.864118649792125
 }

@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 34.5795767,
   "longitude": -118.0805245,
-  "imageURLs": ["/images/malls/ca-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-shopping-center-1.jpg"
+  ],
   "openFrom": 1100,
   "openUntil": 1900,
   "rating": 4.3,
@@ -18,5 +20,6 @@
   "description": "Located on East Palmdale Boulevard in the heart of Palmdale, California, this shopping center serves as a vibrant retail destination for the Antelope Valley community. The mall features an extensive variety of shopping categories including auto services, beauty supplies, bridal and party supplies, entertainment venues, and a food court offering diverse dining options. Fashion enthusiasts can explore dedicated sections for men's fashion, women's and children's fashion, shoes, and jewelry, while specialty services, technology stores, and health services round out the tenant mix. The center also showcases unique offerings such as Mexican handcrafts and home essentials, reflecting the diverse cultural fabric of the Palmdale community. With convenient hours from 11 AM to 7 PM and a strong 4.3-star rating from 75 reviews, this shopping destination has established itself as a go-to location for both everyday needs and special occasions, welcoming vendors and hosting regular events that bring the community together.",
   "summary": "A diverse shopping destination in Palmdale featuring a comprehensive mix of retail categories from fashion and jewelry to entertainment and dining. The center serves the Antelope Valley community with convenient hours and a variety of specialty services including Mexican handcrafts and health services.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 16.12552686516862
 }

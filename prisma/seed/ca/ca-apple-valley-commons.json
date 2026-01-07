@@ -8,7 +8,9 @@
   "latitude": 34.526809899999996,
   "longitude": -117.2175772,
   "phone": "++1 909-946-7518",
-  "imageURLs": ["/images/malls/ca-apple-valley-commons-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-apple-valley-commons-1.jpg"
+  ],
   "summary": "Apple Valley Commons is a 424,000 square foot community shopping center anchored by Super Target and featuring popular retailers like Old Navy, Ross Dress for Less, and Ulta. Located at a prime intersection in Apple Valley, this 49-acre open-air center serves nearly 94,000 residents within a 5-mile radius with a diverse mix of value-oriented shopping and dining options.",
   "openFrom": 700,
   "openUntil": 2200,
@@ -46,5 +48,6 @@
       "size": 1000,
       "available": true
     }
-  ]
+  ],
+  "ranking": 28.145762744072993
 }

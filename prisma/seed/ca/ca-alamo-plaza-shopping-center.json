@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 37.850835499999995,
   "longitude": -122.035163,
-  "imageURLs": ["/images/malls/ca-alamo-plaza-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-alamo-plaza-shopping-center-1.jpg"
+  ],
   "summary": "Alamo Plaza Shopping Center is a 200,282-square-foot community retail destination in downtown Alamo, anchored by Safeway and Rite-Aid. Recently revitalized by EDENS with vibrant murals and community events including a popular Sunday Farmers Market, the center serves as a vital gathering place for the local community.",
   "openFrom": 1000,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "description": "Alamo Plaza Shopping Center stands as the heart of downtown Alamo, California, serving as a vital community gathering place for residents of this charming East Bay town and neighboring Walnut Creek. Spanning 200,282 square feet of retail space, the center is anchored by trusted national retailers Safeway and Rite-Aid, providing essential grocery and pharmacy services to the local community. Since EDENS acquired the property in 2022, the shopping center has undergone significant revitalization efforts, including the installation of vibrant murals created by Oakland-based ABG Art Group, featuring the eye-catching \"Tunnel of Love / Welcome to Beautiful Alamo, California\" artwork that has generated tremendous positive community feedback. The center has become a true community hub, hosting a popular weekly Farmers Market every Sunday from 9 AM to 2 PM in the parking lot near Bank of America, where locals gather to enjoy fresh, locally-sourced produce and connect with neighbors. With its convenient location, essential retail offerings, and commitment to enriching the community through art and events, Alamo Plaza Shopping Center exemplifies EDENS' mission to create places where people want to be.",
   "squareFootage": 200282,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 23.49858633447753
 }

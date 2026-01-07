@@ -8,7 +8,9 @@
   "latitude": 32.9813845,
   "longitude": -117.25070690000001,
   "phone": "++1 858-481-2904",
-  "imageURLs": ["/images/malls/ca-flower-hill-promenade-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-flower-hill-promenade-1.jpg"
+  ],
   "summary": "Flower Hill Promenade is an upscale, open-air lifestyle center in Del Mar featuring a curated mix of unique local boutiques, global brands, and diverse dining options. The center offers a vibrant community atmosphere with carefully selected shops, restaurants, and services in a beautifully designed coastal California setting.",
   "openFrom": 700,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "Flower Hill Promenade attracts an affluent, educated demographic from the Del Mar and surrounding North County coastal communities, with visitors typically in the 35-65 age range and household incomes exceeding $150,000. The trade area draws from nearby upscale residential neighborhoods including Carmel Valley, Solana Beach, and Rancho Santa Fe, with shoppers seeking curated boutique experiences and artisanal dining options. The center appeals to both established professionals and active retirees who value quality over quantity, preferring unique local retailers and specialty services over mass-market chains. Shopping patterns reflect a lifestyle-oriented approach, with visitors often combining retail browsing with dining and social activities in the open-air promenade setting.",
   "description": "Flower Hill Promenade is a distinctive lifestyle shopping destination nestled in the heart of Del Mar, California, offering a carefully curated collection of unique retailers, restaurants, and services. This open-air center embodies the relaxed sophistication of coastal Southern California living, featuring a thoughtful mix of local boutiques with handmade items alongside select global brands. The promenade creates an inviting village atmosphere where visitors can explore creative shops, enjoy diverse dining options, and access premium services all within a beautifully landscaped setting. The center's commitment to supporting local businesses and fostering a vibrant community is evident in its tenant selection, which emphasizes quality and uniqueness over typical mall chains. With its prime location on Via De La Valle and strong reputation reflected in its 4.4-star rating from over 1,300 reviews, Flower Hill Promenade has established itself as a beloved gathering place for Del Mar residents and visitors seeking an elevated shopping and dining experience.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 41.17417773846877
 }

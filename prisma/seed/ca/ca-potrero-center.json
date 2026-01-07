@@ -8,7 +8,9 @@
   "latitude": 37.7669107,
   "longitude": -122.4093073,
   "phone": "++1 925-279-1800",
-  "imageURLs": ["/images/malls/ca-potrero-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-potrero-center-1.jpg"
+  ],
   "summary": "Potrero Center is a 226,642 square foot power center in San Francisco's Mission District, anchored by Safeway, Ross Dress For Less, 24 Hour Fitness, and Petco. With over 3.2 million annual visits, this well-positioned shopping destination serves one of the city's most affluent neighborhoods with convenient access to groceries, fitness, and everyday retail needs.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -21,5 +23,6 @@
   "numberOfStores": 23,
   "squareFootage": 226642,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.501913038742526
 }

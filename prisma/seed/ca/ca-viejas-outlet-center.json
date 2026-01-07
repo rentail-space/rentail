@@ -8,7 +8,9 @@
   "latitude": 32.840976999999995,
   "longitude": -116.7053027,
   "phone": "++1 619-659-2070",
-  "imageURLs": ["/images/malls/ca-viejas-outlet-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-viejas-outlet-center-1.jpg"
+  ],
   "summary": "Viejas Outlet Center is San Diego's premier outlet shopping destination featuring dozens of popular American brands offering up to 70% off retail prices in a family-friendly, open-air environment. Located just 30 minutes from downtown San Diego, the center combines brand-name outlet shopping with entertainment amenities including bowling, seasonal ice skating, and diverse dining options.",
   "openFrom": 1100,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "Viejas Outlet Center attracts a diverse mix of value-conscious shoppers and tourists seeking brand-name merchandise at discounted prices, typically ranging from middle to upper-middle income households. The center draws families from the greater San Diego metropolitan area, particularly from East County communities, as well as visitors to the adjacent Viejas Casino & Resort. The trade area extends approximately 30 minutes from downtown San Diego, capturing both local residents and destination shoppers willing to travel for outlet deals. Primary visitors include families with children who appreciate the entertainment amenities like bowling and ice skating, as well as bargain hunters aged 25-65 seeking discounts of up to 70% off retail prices on popular American brands.",
   "description": "Opened in May 1998, Viejas Outlet Center has established itself as the premier outlet shopping destination in San Diego County, located just 30 minutes from downtown San Diego in the scenic community of Alpine. This open-air outlet center features dozens of America's most popular brand names in apparel, accessories, footwear, and housewares, with retailers offering savings of up to 70% off regular retail prices. The center's tenant mix includes high-profile brands such as Coach, Nike Clearance Store, Michael Kors, Polo Ralph Lauren, Levi's Outlet, Gap Outlet, and Skechers, providing shoppers with an impressive selection of quality merchandise at outlet prices. Beyond shopping, Viejas Outlets distinguishes itself with a family-friendly atmosphere that includes soothing water features, artisan-crafted sculptures, an interactive fountain, and multi-media performances in the ShowCourt. The center's entertainment offerings extend to Viejas Bowl with 12 lanes and Galactic Bowl nights, a seasonal ice skating rink, and various dining options ranging from handcrafted pizza to fresh Mexican cuisine. Located adjacent to the Viejas Casino & Resort, the outlet center benefits from significant tourist traffic while serving as a regional shopping destination for East County San Diego residents seeking brand-name bargains in a relaxed, outdoor setting.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.732603028643776
 }

@@ -8,7 +8,9 @@
   "latitude": 32.7476115,
   "longitude": -116.9600601,
   "phone": "++1 858-847-4600",
-  "imageURLs": ["/images/malls/ca-rancho-san-diego-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-rancho-san-diego-village-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.4,
@@ -19,5 +21,6 @@
   "description": "Rancho San Diego Village is a well-established community shopping center located at 3681 Avocado Boulevard in La Mesa, California, serving the East County San Diego region. Developed and managed by Regency Centers, this thriving neighborhood center has become a cornerstone of the local community, offering residents convenient access to a strong mix of everyday retailers and services. The center features an attractive open-air layout that creates an inviting shopping environment for families and professionals alike. With its strategic location in an established residential area, Rancho San Diego Village has cultivated a loyal customer base that appreciates the center's blend of national retailers, dining options, and service-oriented tenants including restaurants, salons, medical spaces, and fitness facilities. The property maintains high occupancy and continues to serve as a vital community gathering place, reflecting Regency Centers' commitment to developing and managing neighborhood shopping destinations that enhance the quality of life for local residents.",
   "summary": "Rancho San Diego Village is a community shopping center in La Mesa serving an established neighborhood with a strong mix of everyday retailers, dining, and services. Managed by Regency Centers, this well-maintained open-air center provides convenient access to grocery, restaurants, salons, medical offices, and fitness facilities for local residents.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 29.411582018374958
 }

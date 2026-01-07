@@ -4,7 +4,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowUp, EqualIcon } from "lucide-react";
 import { Form } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
@@ -49,14 +49,28 @@ export default function RankingPage({
         size: 600,
       },
       { accessorKey: "city", size: 140, header: "City" },
-      { accessorKey: "state", header: "State", size: 100 },
-      { accessorKey: "tier", header: "Tier", size: 100 },
-      { accessorKey: "rating", header: "Rating", size: 100 },
+      { accessorKey: "state", header: "State", size: 80 },
       {
         accessorFn: (row) => row.spaces.length,
         accessorKey: "spaces",
         header: "Spaces",
-        size: 120,
+        size: 80,
+      },
+      {
+        accessorKey: "ranking",
+        cell: ({ row }) => (
+          <span className="flex flex-row justify-between gap-2">
+            <span>
+              {row.original.rating} * log(
+              {row.original.reviewCount?.toLocaleString()}) *{" "}
+              {row.original.tier}
+            </span>
+            <EqualIcon className="h-4 w-4" />
+            <span>{row.original.ranking}</span>
+          </span>
+        ),
+        header: "Ranking",
+        size: 220,
       },
     ],
     data: loaderData.centers,

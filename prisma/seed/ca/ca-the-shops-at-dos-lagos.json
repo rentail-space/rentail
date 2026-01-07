@@ -8,7 +8,9 @@
   "latitude": 33.8120184,
   "longitude": -117.50757340000001,
   "phone": "++1 951-277-7601",
-  "imageURLs": ["/images/malls/ca-the-shops-at-dos-lagos-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-shops-at-dos-lagos-1.jpg"
+  ],
   "summary": "The Shops at Dos Lagos is an elegant open-air lifestyle center built on a historic site, offering upscale shopping, destination dining, and entertainment including a luxury theater and amphitheater. With its garden-like atmosphere, children's playground, and regular community events, it serves as Corona's premier gathering place for families and shoppers seeking an elevated retail experience.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "The Shops at Dos Lagos attracts an affluent, family-oriented demographic from Corona and surrounding Inland Empire communities, with visitors typically in the 30-55 age range and above-average household incomes. The trade area draws from growing suburban neighborhoods with a mix of young professionals and established families seeking upscale retail and dining experiences. The center's amenities, including a children's playground, amphitheater for concerts, and luxury movie theater, appeal to families and entertainment-seekers who value experiential shopping over traditional mall visits.",
   "description": "The Shops at Dos Lagos stands on the historic site of the Temescal Tin Mines and the Butterfield Stage Coach Route, blending Corona's rich heritage with contemporary outdoor shopping. This elegant lifestyle center offers an al fresco shopping experience with a distinctive garden atmosphere, creating an inviting environment for the community to gather and shop. The center features a carefully curated mix of retailers including Brighton Collectibles and Pinkberry, complemented by destination dining options and the Dos Lagos Luxury Theatres for premium entertainment. Regular community events and concerts at the on-site amphitheater transform the center into a true gathering place, while amenities like free Wi-Fi in the children's play area, mall gift cards, and attentive service demonstrate the center's commitment to providing an elevated retail experience. The Shops at Dos Lagos continues to attract visitors seeking the perfect blend of shopping, dining, and entertainment in an elegant outdoor setting.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.05224197487425
 }

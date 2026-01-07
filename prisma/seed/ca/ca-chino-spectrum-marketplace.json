@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 34.0004005,
   "longitude": -117.7174028,
-  "imageURLs": ["/images/malls/ca-chino-spectrum-marketplace-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-chino-spectrum-marketplace-1.jpg"
+  ],
   "openFrom": 800,
   "openUntil": 2100,
   "rating": 4.5,
@@ -18,5 +20,6 @@
   "description": "Chino Spectrum Marketplace is a vibrant lifestyle shopping destination located at 4016 Grand Avenue in Chino, California, serving the growing Inland Empire community. This open-air shopping center offers visitors the ultimate shopping experience with a unique blend of specialty retailers and an extensive selection of dining options ranging from quick-service to full-service restaurants. The marketplace creates an inviting atmosphere where shoppers can immerse themselves in a modern retail environment that combines convenience with variety. Managed by Shin Yen Retail Property Management, the center has established itself as a go-to destination for both everyday shopping needs and leisurely dining experiences. With its strategic location and carefully curated tenant mix, Chino Spectrum Marketplace continues to serve as a community gathering place where residents can shop, dine, and connect in a welcoming outdoor setting.",
   "summary": "Chino Spectrum Marketplace is a modern lifestyle center in Chino offering a diverse mix of specialty retailers and dining experiences in an open-air format. The center provides convenient shopping and restaurant options for Inland Empire families and professionals seeking quality brands in an accessible location.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 19.787913782589804
 }

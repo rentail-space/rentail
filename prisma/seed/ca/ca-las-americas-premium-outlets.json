@@ -8,7 +8,9 @@
   "latitude": 32.5436943,
   "longitude": -117.04146519999999,
   "phone": "++1 619-934-8400",
-  "imageURLs": ["/images/malls/ca-las-americas-premium-outlets-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-las-americas-premium-outlets-1.jpg"
+  ],
   "summary": "Las Americas Premium Outlets is San Diego's leading outlet shopping destination, featuring premium brand-name stores offering significant daily savings near the US-Mexico border. The center attracts a diverse mix of local and international shoppers seeking designer and name-brand merchandise at outlet prices.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "Las Americas Premium Outlets attracts a diverse cross-border shopping demographic, drawing heavily from both San Diego County residents and Mexican nationals from Tijuana and Baja California. The center appeals primarily to value-conscious middle-income shoppers aged 25-54, including families and young professionals seeking premium brands at discounted prices. The trade area benefits from its strategic location near the US-Mexico border, with a significant portion of visitors being international tourists and cross-border shoppers with household incomes ranging from $40,000 to $100,000. Shopping patterns reflect a destination-oriented approach, with visitors typically spending 2-4 hours and making multiple purchases across various outlet stores.",
   "description": "Las Americas Premium Outlets stands as San Diego's premier outlet shopping destination, strategically located at 4211 Camino De La Plaza in the South Bay region near the US-Mexico border. This open-air outlet center has established itself as a cross-border shopping hub, attracting millions of visitors annually from both the United States and Mexico who seek premium brand names at exceptional values. The center features a carefully curated collection of designer and name-brand outlet stores, offering savings of 25% to 65% every day on merchandise from leading fashion, accessories, home goods, and lifestyle brands. With its convenient location just minutes from the San Ysidro Port of Entry, the center has become an essential stop for international shoppers and San Diego residents alike. The property maintains high standards with well-maintained facilities, ample parking, and a shopping environment designed to provide an enjoyable outlet shopping experience that keeps visitors returning throughout the year.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 40.46520125011117
 }

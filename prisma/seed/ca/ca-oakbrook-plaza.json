@@ -8,7 +8,9 @@
   "latitude": 34.209899,
   "longitude": -118.8461755,
   "phone": "++1 213-553-2200",
-  "imageURLs": ["/images/malls/ca-oakbrook-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-oakbrook-plaza-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.4,
@@ -21,5 +23,6 @@
   "squareFootage": 83344,
   "summary": "Oakbrook Plaza is an upscale 83,344 square foot community center in affluent Thousand Oaks, anchored by Gelson's Markets and featuring a strong mix of fitness, wellness, and specialty dining tenants. Serving a high-income community with over 2.7 million annual visits, the center offers convenient access near Highway 23 and caters to health-conscious, quality-focused shoppers.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.960635322644475
 }

@@ -8,7 +8,9 @@
   "latitude": 34.1569734,
   "longitude": -118.4374051,
   "phone": "++1 818-783-0550",
-  "imageURLs": ["/images/malls/ca-westfield-fashion-square-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-westfield-fashion-square-1.jpg"
+  ],
   "summary": "Westfield Fashion Square is a prominent regional mall in Sherman Oaks featuring major anchors Bloomingdale's and Macy's alongside popular retailers like Apple, Sephora, and H&M. The center offers diverse dining, fitness options, and modern amenities including EV charging and free Wi-Fi, serving as a premier shopping destination in the San Fernando Valley.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Westfield Fashion Square attracts an affluent, fashion-conscious demographic from the Sherman Oaks and greater San Fernando Valley area, with visitors typically ranging from middle to upper-middle income households. The trade area serves a diverse mix of young professionals, families, and established residents who value convenient access to premium retail and dining options. Primary shoppers include women aged 25-54 with household incomes exceeding $75,000, drawn to the center's mix of contemporary fashion, beauty, and lifestyle brands. The location in Sherman Oaks positions it within one of Los Angeles's more prosperous neighborhoods, attracting visitors seeking quality retail experiences without traveling to West LA or Beverly Hills.",
   "description": "Westfield Fashion Square stands as a premier shopping destination in Sherman Oaks, California, offering an exceptional retail experience in the heart of the San Fernando Valley. This Westfield-managed regional mall features an impressive collection of anchor stores including Bloomingdale's and Macy's, complemented by popular national retailers such as Apple, Sephora, H&M, Coach, and Victoria's Secret. The center has evolved to meet modern consumer demands with diverse dining options ranging from Kura Revolving Sushi Bar to Panini Kabob Grill, alongside contemporary lifestyle amenities including Orangetheory Fitness and a Tesla Motors showroom. Shoppers enjoy convenient features such as free Wi-Fi throughout the property and electric vehicle charging stations, demonstrating the center's commitment to sustainability and customer convenience. With its strategic location on Riverside Drive and strong tenant mix spanning fashion, beauty, technology, and dining, Westfield Fashion Square continues to serve as a vital retail and social hub for the Sherman Oaks community and surrounding San Fernando Valley neighborhoods.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 32.26700519785511
 }

@@ -8,7 +8,9 @@
   "latitude": 32.5703265,
   "longitude": -116.6271927,
   "phone": "++52 665 131 6327",
-  "imageURLs": ["/images/malls/b.c.-plaza-california-1.jpg"],
+  "imageURLs": [
+    "/images/malls/b.c.-plaza-california-1.jpg"
+  ],
   "summary": "Plaza California is a community shopping center in Tecate, Baja California, serving local residents and cross-border shoppers with convenient retail options. Operating daily with a 4.2-star rating, it provides essential shopping services in this vibrant border community.",
   "openFrom": 800,
   "openUntil": 1800,
@@ -19,5 +21,6 @@
   "demographics": "Plaza California serves the border community of Tecate, Baja California, attracting a diverse mix of local Mexican families and cross-border shoppers from Southern California. The primary trade area consists of middle-income households with multi-generational family structures typical of the region. Visitors tend to be value-conscious shoppers seeking everyday goods and services, with shopping patterns influenced by both Mexican and American retail preferences due to the proximity to the U.S. border.",
   "description": "Plaza California is a community shopping center located in La Viñita, Tecate, Baja California, strategically positioned along Boulevard Defensores de Baja California. Serving the vibrant border community of Tecate, this shopping destination provides essential retail and services to local residents and cross-border visitors alike. The center operates daily from 8:00 AM to 6:00 PM, offering convenient access to a variety of stores and amenities. With a solid 4.2-star rating from over 211 reviews, Plaza California has established itself as a reliable shopping option in the region. Its location in Tecate, a city known for its brewing heritage and proximity to the California border, makes it an accessible retail hub for both Mexican nationals and international shoppers seeking quality goods and services in a welcoming environment.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 19.52397262450062
 }

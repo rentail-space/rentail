@@ -8,7 +8,9 @@
   "latitude": 33.6498475,
   "longitude": -117.582115,
   "phone": "++1 310-820-5443",
-  "imageURLs": ["/images/malls/ca-mercado-del-lago-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-mercado-del-lago-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2300,
   "rating": 4.4,
@@ -20,5 +22,6 @@
   "numberOfStores": 6,
   "summary": "Mercado Del Lago is a charming Mediterranean-style lifestyle center nestled along Rancho Santa Margarita Lake, featuring quality dining options, personal services, and specialty retailers. The open-air center combines convenient neighborhood shopping with a vibrant lakeside atmosphere that makes it a popular community gathering destination.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 25.836895002293847
 }

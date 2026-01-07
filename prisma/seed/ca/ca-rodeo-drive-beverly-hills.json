@@ -8,7 +8,9 @@
   "latitude": 34.0677435,
   "longitude": -118.4008508,
   "phone": "++1 310-248-1015",
-  "imageURLs": ["/images/malls/ca-rodeo-drive-beverly-hills-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-rodeo-drive-beverly-hills-1.jpg"
+  ],
   "openFrom": 900,
   "openUntil": 1700,
   "rating": 4.7,
@@ -20,5 +22,6 @@
   "numberOfStores": 100,
   "summary": "Rodeo Drive is Beverly Hills' crown jewel and one of the world's most famous luxury shopping streets, featuring over 100 prestigious boutiques and flagship stores along three palm-lined blocks. Anchored by the legendary Beverly Wilshire hotel and the European-style Two Rodeo enclave, this iconic destination offers an unparalleled luxury shopping experience with world-class dining and amenities.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 36.19507176284275
 }

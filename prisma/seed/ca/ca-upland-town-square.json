@@ -8,7 +8,9 @@
   "latitude": 34.1077612,
   "longitude": -117.661962,
   "phone": "++1 610-215-7939",
-  "imageURLs": ["/images/malls/ca-upland-town-square-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-upland-town-square-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 0,
   "rating": 4.5,
@@ -21,5 +23,6 @@
   "squareFootage": 100090,
   "summary": "Upland Town Square is a 100,090 square foot Sprouts-anchored community center featuring 28 national and local retailers on West Foothill Boulevard. The property serves an affluent trade area with household incomes over $116,000 and benefits from high visibility with 28,000+ daily vehicle traffic.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 25.94272084159392
 }

@@ -8,7 +8,9 @@
   "latitude": 32.6654784,
   "longitude": -115.4827869,
   "phone": "++52 686 552 5403",
-  "imageURLs": ["/images/malls/b.c.-plaza-paris-1.jpg"],
+  "imageURLs": [
+    "/images/malls/b.c.-plaza-paris-1.jpg"
+  ],
   "openFrom": 800,
   "openUntil": 1600,
   "rating": 4.3,
@@ -19,5 +21,6 @@
   "description": "Plaza Paris is a specialized medical and commercial plaza strategically located at Avenida Francisco I. Madero in the heart of Primera Sección, Mexicali, near the downtown border crossing. This unique shopping center has carved out a distinctive niche by focusing primarily on healthcare services, housing a comprehensive medical center with multiple consulting rooms, a full-service pharmacy, and diagnostic laboratory facilities. The plaza operates Monday through Friday from 8:00 AM to 6:00 PM, providing convenient access to medical professionals and complementary health services for the local community. Beyond its medical offerings, Plaza Paris features select retail shops and specialty clinics, creating a one-stop destination for health and wellness needs. With its comfortable and exclusive spaces, the center has earned a solid 4.3-star rating from 384 reviews, reflecting its commitment to quality service and accessibility in central Mexicali.",
   "summary": "Plaza Paris is a medical-focused commercial center in central Mexicali featuring a comprehensive medical center, pharmacy, laboratory, and various medical clinics. Located near the downtown border crossing, it serves as a convenient healthcare hub for the local community with operating hours Monday through Friday.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 22.225248529560766
 }

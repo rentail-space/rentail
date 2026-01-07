@@ -8,7 +8,9 @@
   "latitude": 33.344479,
   "longitude": -118.3269368,
   "phone": "++1 800-541-8528",
-  "imageURLs": ["/images/malls/ca-metropole-market-place-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-metropole-market-place-1.jpg"
+  ],
   "summary": "Metropole Market Place is a charming French Quarter-inspired shopping and dining destination in Avalon, Catalina Island, featuring cobblestone walkways and approximately 20 specialty boutiques, restaurants, and wellness services. This unique lifestyle center offers visitors an eclectic mix of island-themed shops, fine art galleries, spa services, and diverse dining options in a picturesque harbor-side setting.",
   "rating": 4.7,
   "reviewCount": 120,
@@ -18,5 +20,6 @@
   "description": "Metropole Market Place is a charming boutique shopping and dining destination located in the heart of Avalon on Catalina Island, California. This unique lifestyle center features a distinctive French Quarter atmosphere with cobblestone walkways and cooling fountains, creating an enchanting environment for visitors exploring the island. The center is home to approximately 20 specialty shops and eateries, including A Touch of Heaven Day Spa, Catalina Coffee & Cookie Co., and the upscale M Restaurant & Event Venue overlooking the harbor. Shoppers can discover an eclectic mix of boutiques offering fine art, jewelry, children's wear, sportswear, beach accessories, and unique island-themed gifts. The center also features diverse dining options ranging from Cafe Metropole's healthy fare and Katie's Kitchen's Asian fusion to Coney Island West's flame-broiled burgers and Three Palms Arcade and Restaurant. As part of the Hotel Metropole property, the Market Place serves as a central gathering spot for both hotel guests and day-trippers, offering everything from wellness services and beauty treatments to entertainment and special events in a picturesque island setting.",
   "numberOfStores": 20,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 19.54430371284767
 }

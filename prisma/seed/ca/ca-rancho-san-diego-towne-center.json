@@ -8,7 +8,9 @@
   "latitude": 32.7397239,
   "longitude": -116.937214,
   "phone": "++1 619-223-9400",
-  "imageURLs": ["/images/malls/ca-rancho-san-diego-towne-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-rancho-san-diego-towne-center-1.jpg"
+  ],
   "summary": "Rancho San Diego Towne Center is a scenic outdoor shopping destination in El Cajon featuring grocery and department store anchors, casual dining options, and a cinema. This well-rated community center serves East County San Diego with a convenient mix of everyday retailers and entertainment in an open-air setting.",
   "openFrom": 0,
   "openUntil": 2400,
@@ -19,5 +21,6 @@
   "demographics": "Rancho San Diego Towne Center serves a predominantly suburban family demographic in East County San Diego, with a strong representation of middle to upper-middle income households. The trade area attracts residents from Rancho San Diego, Spring Valley, and surrounding communities, with typical visitors being families with children, young professionals, and retirees seeking convenient access to everyday shopping and dining. The center's tenant mix caters to value-conscious shoppers who prioritize convenience and variety, with shopping patterns reflecting regular weekly visits for groceries, casual dining, and entertainment rather than destination shopping trips.",
   "description": "Rancho San Diego Towne Center stands as a premier outdoor shopping destination in El Cajon, California, serving the vibrant communities of East County San Diego. Located at 2891 Jamacha Road, this scenic open-air center has established itself as a community hub where convenience meets variety in a pleasant outdoor setting. The center features a diverse mix of anchor tenants including grocery and department stores, complemented by an array of casual chain eateries that cater to every taste and budget. Entertainment options are highlighted by a modern cinema complex, making the center a popular destination for both everyday errands and leisure activities. With its well-maintained grounds, ample parking, and thoughtfully curated tenant mix, Rancho San Diego Towne Center has earned an impressive 4.4-star rating from over 3,000 reviews, reflecting its strong reputation among local shoppers. The center's open-air design takes advantage of Southern California's favorable climate, creating an inviting atmosphere for families and individuals to shop, dine, and socialize throughout the year.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.684327126437104
 }

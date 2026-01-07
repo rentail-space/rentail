@@ -8,7 +8,9 @@
   "latitude": 33.8862734,
   "longitude": -118.40847049999998,
   "phone": "++1 626-535-0318",
-  "imageURLs": ["/images/malls/ca-metlox-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-metlox-1.jpg"
+  ],
   "summary": "Metlox Plaza is an upscale lifestyle center in Manhattan Beach built on the historic site of the former Metlox pottery factory. This open-air destination offers boutique shopping and dining experiences that cater to the affluent South Bay coastal community.",
   "openFrom": 0,
   "openUntil": 2400,
@@ -19,5 +21,6 @@
   "demographics": "Metlox attracts an affluent, educated demographic reflective of Manhattan Beach's upscale coastal community, with median household incomes exceeding $150,000. The primary visitor base consists of families aged 35-65, young professionals, and empty nesters who prioritize quality dining and boutique shopping experiences. The trade area draws from the South Bay beach communities including Manhattan Beach, Hermosa Beach, and Redondo Beach, with shoppers seeking a relaxed, open-air environment that complements the coastal lifestyle and emphasizes experiential retail over traditional mall shopping.",
   "description": "Metlox Plaza is a distinctive lifestyle shopping center located in the heart of Manhattan Beach, one of Southern California's most prestigious coastal communities. Built on the historic site of the Metlox pottery manufacturing company, which operated from 1927 to 1989, the center pays homage to its industrial heritage while offering a modern, open-air shopping and dining experience. The development transformed the former pottery factory grounds into an upscale retail destination that seamlessly blends with Manhattan Beach's relaxed beach town atmosphere. Metlox features a carefully curated mix of boutique retailers, restaurants, and service providers that cater to the sophisticated tastes of South Bay residents and visitors. With its convenient location on Manhattan Beach Boulevard and proximity to the beach, Metlox has become a popular gathering place where locals can enjoy al fresco dining, specialty shopping, and community events in a pedestrian-friendly environment that captures the essence of coastal California living.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 33.99247955304513
 }

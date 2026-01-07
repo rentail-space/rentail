@@ -8,7 +8,9 @@
   "latitude": 37.86935,
   "longitude": -122.3006359,
   "phone": "++1 510-644-3002",
-  "imageURLs": ["/images/malls/ca-fourth-street-shops-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-fourth-street-shops-1.jpg"
+  ],
   "summary": "Fourth Street Shops is Berkeley's upscale lifestyle shopping district featuring trendy boutiques for clothing and home goods, specialty retailers, and popular outdoor dining options. This pedestrian-friendly neighborhood offers a curated mix of independent shops and select national brands in a charming, tree-lined setting.",
   "openFrom": 1100,
   "openUntil": 1900,
@@ -19,5 +21,6 @@
   "demographics": "Fourth Street Shops attracts an affluent, educated demographic typical of Berkeley's upscale neighborhoods, with visitors primarily consisting of professionals aged 30-55 and young families with above-average household incomes exceeding $100,000. The trade area draws from Berkeley's well-educated population, including university faculty, tech professionals, and established residents who value quality over quantity. Shoppers here prefer curated, independent boutiques and artisanal dining experiences over mass-market chains, reflecting Berkeley's progressive, environmentally-conscious consumer culture with an emphasis on locally-owned businesses and sustainable products.",
   "description": "Fourth Street Shops is Berkeley's premier lifestyle shopping destination, offering a distinctive neighborhood of fine shops and outdoor dining along a charming tree-lined street. This upscale open-air district features trendy boutiques spanning multiple categories including fashion, home goods, beauty and body care, children's stores, and specialty retailers, complemented by popular coffee shops and acclaimed diners like Bette's Diner. The center has evolved into a beloved community gathering place where visitors can enjoy a leisurely shopping experience in a pedestrian-friendly environment with outdoor seating areas and thoughtfully landscaped public spaces. With its carefully curated mix of independent retailers and select national brands like Design Within Reach, Fourth Street has established itself as a destination for discerning shoppers seeking quality merchandise and personalized service. The district's walkable layout, combined with its proximity to Berkeley's waterfront and residential neighborhoods, creates an inviting atmosphere that encourages visitors to spend time exploring the diverse offerings while enjoying the area's distinctive Berkeley character.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.702115651150166
 }

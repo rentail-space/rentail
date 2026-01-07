@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 37.984235,
   "longitude": -121.71282699999999,
-  "imageURLs": ["/images/malls/ca-oakley-shops-at-laurel-fields-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-oakley-shops-at-laurel-fields-1.jpg"
+  ],
   "summary": "Oakley Shops at Laurel Fields is a 78,230 square foot community shopping center anchored by Safeway, located at the gateway between the Bay Area and Central Valley. The center serves an affluent Oakley community with household incomes averaging $165,321 and features a mix of retail, dining, and service tenants.",
   "openFrom": 0,
   "openUntil": 2400,
@@ -20,5 +22,6 @@
   "numberOfStores": 2,
   "squareFootage": 78230,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 0
 }

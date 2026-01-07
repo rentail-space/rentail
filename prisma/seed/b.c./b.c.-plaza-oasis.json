@@ -8,7 +8,9 @@
   "latitude": 32.4842359,
   "longitude": -116.8489595,
   "phone": "++52 664 971 9050",
-  "imageURLs": ["/images/malls/b.c.-plaza-oasis-1.jpg"],
+  "imageURLs": [
+    "/images/malls/b.c.-plaza-oasis-1.jpg"
+  ],
   "summary": "Plaza Oasis is a modern community shopping center in Tijuana featuring over 50 stores and services in a family-friendly environment. With extended daily hours and a strong 4.2-star rating from thousands of reviews, it serves as a convenient one-stop destination for the local community.",
   "openFrom": 800,
   "openUntil": 2230,
@@ -20,5 +22,6 @@
   "description": "Plaza Oasis stands as a premier shopping destination in Tijuana, Baja California, offering residents and visitors a comprehensive retail experience in a modern, family-friendly environment. Located at 23911 Real de Baja California, this vibrant commercial center has established itself as a cornerstone of the community, serving shoppers with convenient access to over 50 stores and services under one roof. The plaza's contemporary design and welcoming atmosphere create an ideal setting for families to shop, dine, and spend quality time together. With generous operating hours from 8:00 AM to 11:00 PM daily, Plaza Oasis accommodates the busy schedules of Tijuana's diverse population, making it easy for customers to visit at their convenience. The center's strong reputation is reflected in its impressive 4.2-star rating from over 7,000 reviews, demonstrating consistent customer satisfaction and community trust. Whether visitors are seeking everyday essentials, specialty retail, dining options, or professional services, Plaza Oasis delivers a complete shopping experience that has made it a beloved fixture in Tijuana's retail landscape.",
   "numberOfStores": 50,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 32.39905870549004
 }

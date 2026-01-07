@@ -8,7 +8,9 @@
   "latitude": 33.6882775,
   "longitude": -117.8343585,
   "phone": "++1 626-285-5550",
-  "imageURLs": ["/images/malls/ca-diamond-jamboree-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-diamond-jamboree-shopping-center-1.jpg"
+  ],
   "summary": "Diamond Jamboree Shopping Center is Orange County's International Eatertainment Destination, featuring an Asian supermarket and diverse collection of restaurants serving pho, sushi, hot pot, and authentic Asian cuisines. This vibrant lifestyle plaza has become a cultural hub and beloved dining destination for Irvine and surrounding communities.",
   "openFrom": 800,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "Diamond Jamboree attracts a predominantly Asian-American demographic, particularly Chinese, Korean, and Vietnamese communities, with middle to upper-middle income households. The trade area draws families and young professionals from Irvine and surrounding Orange County cities who seek authentic Asian dining and shopping experiences. Visitors typically range from 25-55 years old with household incomes above $75,000, reflecting Irvine's affluent residential base. The center serves as a cultural hub for the Asian community while also attracting diverse food enthusiasts and international students from nearby UC Irvine.",
   "description": "Diamond Jamboree Shopping Center has established itself as Orange County's premier International Eatertainment Destination, offering an authentic Asian cultural and culinary experience in the heart of Irvine. Located at 2700-2750 Alton Parkway, this vibrant lifestyle center features an upbeat plaza atmosphere centered around an Asian supermarket and an impressive collection of restaurants serving diverse cuisines including pho, sushi, hot pot, and much more. The center has become a beloved gathering place for both the local Asian community and food enthusiasts throughout Orange County who seek genuine international flavors and experiences. With its carefully curated mix of dining establishments and services, Diamond Jamboree creates a unique destination that goes beyond traditional shopping, offering visitors an immersive cultural experience. The center's strong reputation is reflected in its 4.3-star rating from over 3,300 reviews, demonstrating its consistent appeal and quality offerings that keep guests returning time and again.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.261482792770263
 }

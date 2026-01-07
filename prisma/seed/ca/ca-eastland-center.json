@@ -8,7 +8,9 @@
   "latitude": 34.0738444,
   "longitude": -117.88549549999998,
   "phone": "++1 877-206-5656",
-  "imageURLs": ["/images/malls/ca-eastland-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-eastland-center-1.jpg"
+  ],
   "summary": "Eastland Center is West Covina's popular outdoor shopping destination featuring a variety of large brand-name retail outlets and eateries with ample parking. This open-air lifestyle center serves the San Gabriel Valley community with convenient hours and a diverse mix of national retailers.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -19,5 +21,6 @@
   "demographics": "Eastland Center serves a diverse middle to upper-middle class demographic in the San Gabriel Valley, with primary visitors ranging from young families to established professionals aged 25-65. The trade area encompasses West Covina and surrounding communities with median household incomes between $60,000-$90,000, featuring a significant Asian-American and Hispanic population. Shoppers typically visit for convenience-oriented shopping trips, combining errands with dining experiences, and demonstrate strong brand loyalty to national retailers while seeking value and variety in their shopping destinations.",
   "description": "Eastland Center stands as West Covina's premier outdoor shopping destination, offering a modern retail experience that combines convenience with community. Located at 2753 East Eastland Center Drive, this open-air lifestyle center has evolved to meet the changing needs of San Gabriel Valley shoppers, featuring a carefully curated mix of large brand-name retail outlets and diverse dining options. The center's spacious layout and ample parking make it an accessible choice for families and professionals alike, while its outdoor design creates a pleasant California shopping atmosphere. With operating hours from 6:00 AM to 11:00 PM, Eastland Center accommodates early morning shoppers and evening diners, serving as a versatile community hub. The center's strong 4.4-star rating from over 6,000 reviews reflects its consistent appeal and commitment to providing a quality retail experience in the heart of West Covina.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 33.291430809916115
 }

@@ -8,7 +8,9 @@
   "latitude": 33.5604196,
   "longitude": -117.6716916,
   "phone": "++1 657-554-2379",
-  "imageURLs": ["/images/malls/ca-union-market-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-union-market-1.jpg"
+  ],
   "openFrom": 1100,
   "openUntil": 2300,
   "rating": 4.6,
@@ -19,5 +21,6 @@
   "description": "Union Market is a neighborhood-oriented shopping destination located in the heart of Mission Viejo's Crown Valley Parkway corridor. This community-focused center serves the surrounding residential areas with a curated mix of retailers and services designed for the daily needs of local families and professionals. The center operates daily from 11:00 AM to 11:00 PM, providing extended hours for the convenience of busy shoppers. With a strong 4.6-star rating, Union Market has established itself as a reliable shopping option within Mission Viejo's well-planned commercial landscape. The center's location along Crown Valley Parkway positions it within one of Orange County's most desirable master-planned communities, offering easy accessibility and ample parking for neighborhood residents.",
   "summary": "Union Market is a community shopping center serving Mission Viejo residents along Crown Valley Parkway. The center offers convenient daily shopping with extended hours and maintains a strong 4.6-star customer rating.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 6.430524039891373
 }

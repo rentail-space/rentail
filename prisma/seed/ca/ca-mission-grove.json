@@ -8,7 +8,9 @@
   "latitude": 33.9147489,
   "longitude": -117.3254164,
   "phone": "++1 951-780-5099",
-  "imageURLs": ["/images/malls/ca-mission-grove-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-mission-grove-1.jpg"
+  ],
   "rating": 4.4,
   "reviewCount": 3228,
   "website": "https://missiongroveshoppingcenter.com/?utm_source=rentail.space",
@@ -17,5 +19,6 @@
   "description": "Mission Grove Shopping Center stands as Riverside's premier open-air shopping destination, sprawling across more than 70 acres in the heart of the city's eastern corridor. Located at 321 East Alessandro Boulevard, this expansive retail hub has established itself as the go-to location for residents seeking a comprehensive shopping, dining, and entertainment experience all in one convenient location. The center's thoughtfully designed open-air layout creates an inviting atmosphere where visitors can easily navigate between diverse offerings, from essential grocery shopping and fitness facilities to specialty services and casual dining options. One of the center's standout features is its luxury movie theater, recognized as one of Riverside's top cinema destinations, providing state-of-the-art entertainment for the whole family. With its extensive array of specialty services tailored to meet every need, Mission Grove has successfully positioned itself as more than just a shopping center—it's a community gathering place where locals can accomplish their daily errands, enjoy a meal, catch a movie, and discover new retail finds all in one visit.",
   "summary": "Mission Grove is Riverside's premier 70+ acre open-air shopping center offering a comprehensive mix of dining, shopping, entertainment, and specialty services. The center features diverse retail options from groceries to fitness, along with one of Riverside's top luxury movie theaters.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.87861502924029
 }

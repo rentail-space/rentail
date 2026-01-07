@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 34.132850999999995,
   "longitude": -117.63335300000001,
-  "imageURLs": ["/images/malls/ca-colonies-crossroads-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-colonies-crossroads-1.jpg"
+  ],
   "summary": "Colonies Crossroads is the Inland Empire's most accessible one-stop shopping destination, featuring over 50 stores including major retailers like Target, Kohl's, Nordstrom Rack, Home Depot, and Dick's Sporting Goods. Set in a distinctive outdoor environment at the foothills of the San Gabriel Mountains, the center combines national retailers, specialty boutiques, a grocery store, and diverse dining options from casual to fine dining.",
   "openFrom": 700,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "description": "Colonies Crossroads is the Inland Empire's premier one-stop shopping destination, beautifully situated in the foothills of the San Gabriel Mountains in Upland, California. This distinctive outdoor shopping center serves as the commercial and social hub for the region, offering over 50 diverse destinations that combine convenience with variety. The center features an impressive lineup of major national retailers including Kohl's, Target, Nordstrom Rack, TJ Maxx, Dick's Sporting Goods, Home Depot, Ulta, Tilly's, Office Depot, PetSmart, and BevMo, providing shoppers with everything they need under one roof. Beyond its retail offerings, Colonies Crossroads has established itself as a dining destination with an eclectic mix of restaurants ranging from casual eateries like Chipotle, The Habit, Panera Bread, and Pieology to fine dining establishments such as The Heights American Grill and The Back Abbey. The center's easily accessible location and outdoor setting make it a favorite gathering place for residents from Upland, Rancho Cucamonga, La Verne, Montclair, Fontana, and Rialto, who return again and again for the unique combination of shopping, dining, and community atmosphere.",
   "numberOfStores": 50,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.51234615422886
 }

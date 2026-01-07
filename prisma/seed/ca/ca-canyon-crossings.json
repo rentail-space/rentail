@@ -8,7 +8,9 @@
   "latitude": 33.9401446,
   "longitude": -117.2872471,
   "phone": "++1 619-515-0100",
-  "imageURLs": ["/images/malls/ca-canyon-crossings-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-canyon-crossings-1.jpg"
+  ],
   "openFrom": 800,
   "openUntil": 2300,
   "rating": 4.3,
@@ -19,5 +21,6 @@
   "description": "Canyon Crossings is a contemporary community shopping center located in the heart of Riverside's thriving Canyon Springs area at 2550 Canyon Springs Parkway. This open-air retail destination serves the rapidly expanding Inland Empire market, offering residents and visitors a convenient mix of shopping, dining, and services in a modern, accessible setting. The center has become a popular gathering place for the surrounding master-planned communities, providing a welcoming atmosphere with ample parking and easy freeway access. With operating hours from 8:00 AM to 11:00 PM daily, Canyon Crossings caters to busy families and professionals who appreciate the flexibility of extended shopping hours. The center's strong 4.3-star rating from over 3,000 reviews reflects its popularity among local shoppers who value its tenant mix and convenient location in one of Riverside's fastest-growing corridors.",
   "summary": "Canyon Crossings is a modern community shopping center in Riverside's Canyon Springs area, offering convenient access to shopping, dining, and services. With extended daily hours and a strong local reputation, it serves as a popular retail destination for the surrounding residential communities.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 29.955169203566022
 }

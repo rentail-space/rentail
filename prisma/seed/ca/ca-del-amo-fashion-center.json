@@ -8,7 +8,9 @@
   "latitude": 33.8311286,
   "longitude": -118.34938830000002,
   "phone": "++1 310-542-8525",
-  "imageURLs": ["/images/malls/ca-del-amo-fashion-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-del-amo-fashion-center-1.jpg"
+  ],
   "summary": "Del Amo Fashion Center is a large regional mall in Torrance featuring trendy retailers, diverse restaurants, and a movie theater, anchored by a distinctive garden-inspired dining pavilion. This highly-rated South Bay destination combines traditional mall shopping with modern open-air dining and entertainment experiences.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Del Amo Fashion Center attracts a diverse, middle to upper-middle income demographic from the South Bay region of Los Angeles, including families and young professionals from Torrance, Redondo Beach, and surrounding communities. The trade area serves a mix of household types with median incomes ranging from $75,000 to $120,000, appealing to value-conscious shoppers seeking both mainstream and trendy fashion options. Visitors typically range from millennials to Gen X families who appreciate the convenience of a large enclosed mall with extensive dining and entertainment options. The center draws both destination shoppers for special purchases and regular visitors for everyday retail needs and social dining experiences.",
   "description": "Del Amo Fashion Center stands as one of the largest shopping destinations in the South Bay area of Los Angeles, offering an impressive collection of trendy retailers, diverse dining options, and entertainment venues. Located at 3525 West Carson Street in Torrance, this expansive regional mall has evolved into a modern shopping experience that combines traditional enclosed mall shopping with contemporary open-air elements, including a distinctive garden-inspired dining pavilion. The center features a carefully curated mix of fashion-forward retailers catering to style-conscious shoppers, complemented by a full-service movie theater for entertainment. With operating hours from 10 AM to 9 PM daily, Del Amo Fashion Center serves as a central gathering place for the South Bay community, consistently earning high ratings from thousands of visitors who appreciate its blend of shopping, dining, and leisure activities. The mall's commitment to creating an inviting atmosphere is evident in its thoughtful design elements and diverse tenant mix, making it a premier destination for both everyday shopping needs and special occasions.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 37.131380333753874
 }

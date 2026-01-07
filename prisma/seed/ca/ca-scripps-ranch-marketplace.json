@@ -8,7 +8,9 @@
   "latitude": 32.9363962,
   "longitude": -117.0993287,
   "phone": "++1 858-847-4600",
-  "imageURLs": ["/images/malls/ca-scripps-ranch-marketplace-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-scripps-ranch-marketplace-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.5,
@@ -19,5 +21,6 @@
   "description": "Scripps Ranch Marketplace is a thriving community shopping center located at 10755 Scripps Poway Parkway in the heart of San Diego's desirable Scripps Ranch neighborhood. Developed and managed by Regency Centers, a nationally recognized leader in neighborhood shopping center development, this property exemplifies the company's Fresh Look® philosophy of creating vibrant retail destinations that serve as community gathering places. The center operates daily from 6:00 AM to 11:00 PM, providing convenient access to a diverse mix of retailers, restaurants, salons, medical offices, and fitness facilities that cater to the daily needs of local residents. With an impressive 4.5-star rating from over 1,100 reviews, Scripps Ranch Marketplace has established itself as a trusted and valued resource for the surrounding community. The center's strategic location along Scripps Poway Parkway ensures excellent visibility and accessibility, making it a natural destination for families and professionals seeking quality shopping and services in northern San Diego.",
   "summary": "Scripps Ranch Marketplace is a well-regarded community shopping center in San Diego's Scripps Ranch neighborhood, managed by Regency Centers. Featuring a diverse mix of restaurants, salons, medical offices, and fitness facilities, the center serves as a convenient daily destination for local residents with a 4.5-star rating.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.40790680907992
 }

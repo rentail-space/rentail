@@ -8,7 +8,9 @@
   "latitude": 35.3684242,
   "longitude": -119.05010969999998,
   "phone": "++1 610-215-7939",
-  "imageURLs": ["/images/malls/ca-bakersfield-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-bakersfield-plaza-1.jpg"
+  ],
   "summary": "Bakersfield Plaza is a 240,068-square-foot community shopping center featuring popular national retailers like Burlington, Ross Dress for Less, and a top-ranked Hobby Lobby, along with dining and entertainment options including AMC Theatres and Panera Bread. With 4 million annual visits and excellent visibility from major traffic corridors, this well-positioned center serves as a convenient one-stop destination for over 102,000 residents within 3 miles.",
   "openFrom": 600,
   "openUntil": 0,
@@ -21,5 +23,6 @@
   "numberOfStores": 24,
   "squareFootage": 240068,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 29.51661875913318
 }

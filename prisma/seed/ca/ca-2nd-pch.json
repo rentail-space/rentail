@@ -8,7 +8,9 @@
   "latitude": 33.7557627,
   "longitude": -118.1094424,
   "phone": "++1 424-217-2337",
-  "imageURLs": ["/images/malls/ca-2nd-pch-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-2nd-pch-1.jpg"
+  ],
   "summary": "2ND & PCH is an upscale open-air lifestyle center on Pacific Coast Highway featuring upmarket stores, restaurants, and wellness concepts with bay views and landscaped spaces. The center offers a sophisticated coastal shopping and dining experience with year-round events and entertainment.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "2ND & PCH attracts an affluent, coastal demographic with above-average household incomes, drawn from Long Beach's waterfront communities and surrounding South Bay areas. The visitor base skews toward millennials and Gen X professionals aged 25-54, along with families seeking upscale dining and shopping experiences. The trade area captures both local residents from nearby Marina Pacifica and Belmont Shore neighborhoods, as well as tourists visiting Long Beach's waterfront attractions, creating a mix of regular shoppers and destination visitors who value quality retail and experiential amenities.",
   "description": "2ND & PCH is Long Beach's premier open-air lifestyle destination, perfectly positioned along the iconic Pacific Coast Highway with stunning bay views and landscaped outdoor spaces. This upbeat retail center combines upmarket shopping with exceptional dining experiences, creating a sophisticated coastal atmosphere that reflects the best of Southern California living. The center features a carefully curated mix of women's fashion, beauty, lifestyle, and accessory retailers, complemented by an impressive dining scene that includes Beachwood Brewing with its innovative West Coast IPAs and seasonal craft beers. Recently welcoming SWTHZ, a cutting-edge contrast therapy studio specializing in heat and cold wellness experiences, 2ND & PCH continues to evolve as more than just a shopping destination. With year-round events including live music, outdoor movies, and seasonal celebrations, the center has become a vibrant community gathering place where coastal style meets modern convenience, all set against the backdrop of the Long Beach Marina and waterfront.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 36.10990547601598
 }

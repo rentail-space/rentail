@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.7322723,
   "longitude": -117.99455870000001,
-  "imageURLs": ["/images/malls/ca-bella-terra-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-bella-terra-1.jpg"
+  ],
   "summary": "Bella Terra is a laid-back, open-air lifestyle center in Huntington Beach featuring big-box stores, casual restaurants, bars, and a Century Theatres movie complex. This popular destination combines shopping, dining, and entertainment in a relaxed outdoor setting that reflects the coastal Southern California lifestyle.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -18,5 +20,6 @@
   "demographics": "Bella Terra attracts an affluent, family-oriented demographic from Huntington Beach and surrounding Orange County communities, with visitors typically in the 25-54 age range and above-average household incomes. The trade area draws from coastal Orange County residents who value convenience and outdoor shopping experiences, including young professionals, established families, and active retirees. Shopping patterns reflect a preference for casual dining, entertainment options like the Century Theatres, and a mix of national retailers and specialty stores in an open-air environment.",
   "description": "Bella Terra is a premier open-air lifestyle center located in the heart of Huntington Beach, California, offering a distinctive shopping and entertainment experience just minutes from the Pacific Coast. Spanning a thoughtfully designed outdoor environment, this vibrant destination combines big-box retailers, specialty shops, and an impressive array of casual dining options and bars that create a relaxed, Southern California atmosphere. The center features Century Theatres as a major entertainment anchor, providing moviegoers with the latest films in a modern setting. Whether visitors are enjoying an afternoon with family, a romantic evening out, or simply meeting friends for a meal, Bella Terra serves as a community gathering place that reflects the laid-back coastal lifestyle of Huntington Beach. With convenient hours Monday through Saturday from 10:00 AM to 9:00 PM and Sunday from 11:00 AM to 6:00 PM, the center regularly hosts seasonal events and wellness activities, including their \"Bella Terra Takes a Bite Out of Hunger\" community initiative and winter shopping experiences that enhance the visitor experience throughout the year.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 34.42568250516541
 }

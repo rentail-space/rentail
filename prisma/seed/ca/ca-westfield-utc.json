@@ -8,7 +8,9 @@
   "latitude": 32.87105460000001,
   "longitude": -117.21142230000001,
   "phone": "++1 858-546-8858",
-  "imageURLs": ["/images/malls/ca-westfield-utc-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-westfield-utc-1.jpg"
+  ],
   "summary": "Westfield UTC is San Diego's premier outdoor lifestyle center featuring luxury retailers like Louis Vuitton and CHANEL alongside popular brands, acclaimed restaurants including Din Tai Fung and Javier's, and entertainment options like AMC Theatres and an ice skating rink. Located in the affluent La Jolla area, this upscale open-air destination offers a sophisticated shopping and dining experience with modern amenities and sustainable features.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "Westfield UTC attracts an affluent, educated demographic primarily consisting of professionals, families, and students from the surrounding La Jolla and University City neighborhoods. The trade area includes high-income households with median incomes exceeding $100,000, drawn from nearby UCSD campus, biotech corridor employees, and coastal San Diego residents. Visitors tend to be style-conscious consumers aged 25-55 who prioritize quality and experience, with strong representation of tech professionals, academics, and young families seeking premium retail and dining options in an upscale outdoor setting.",
   "description": "Westfield UTC stands as San Diego's premier outdoor lifestyle destination, seamlessly blending luxury retail, world-class dining, and entertainment in the heart of La Jolla's University City neighborhood. This upscale open-air center has evolved into a sophisticated shopping experience featuring an impressive roster of high-end retailers including Louis Vuitton, CHANEL Fragrance and Beauty Boutique, Apple, and Nordstrom, alongside contemporary favorites like Aritzia, lululemon, and UNIQLO. The center's culinary landscape rivals any urban dining district, with acclaimed destinations such as Din Tai Fung, Javier's, Shake Shack, and the elegant Lady M Cake Boutique offering diverse gastronomic experiences. Beyond shopping and dining, Westfield UTC provides comprehensive entertainment with an AMC Theatres, ice skating rink, and modern amenities including electric vehicle charging stations and free Wi-Fi throughout the property. The center's commitment to sustainability, convenient services, and carefully curated tenant mix has established it as the go-to destination for discerning San Diego shoppers seeking an elevated retail experience in a beautiful Southern California setting.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 55.82085361013424
 }

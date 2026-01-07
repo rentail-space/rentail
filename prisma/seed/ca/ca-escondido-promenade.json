@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.1120178,
   "longitude": -117.0980502,
-  "imageURLs": ["/images/malls/ca-escondido-promenade-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-escondido-promenade-1.jpg"
+  ],
   "summary": "Escondido Promenade is an outdoor community shopping center featuring popular retailers like Target and TJ Maxx, along with salons and casual dining options. Located conveniently on Auto Park Way, this neighborhood destination offers practical one-stop shopping in a comfortable open-air setting for North San Diego County residents.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -18,5 +20,6 @@
   "demographics": "Escondido Promenade attracts a diverse, family-oriented demographic from the North San Diego County area, with a strong representation of middle-income households seeking convenient, value-driven shopping options. The trade area serves a mix of young families, working professionals, and retirees who appreciate the center's accessible location along Auto Park Way and its practical tenant mix. Primary visitors are budget-conscious shoppers aged 25-55 who prioritize one-stop shopping convenience, with household incomes ranging from $50,000 to $90,000 annually. The center draws from Escondido's growing suburban population and surrounding communities, with shoppers favoring national retailers like Target and TJ Maxx for everyday needs and value purchases.",
   "description": "Escondido Promenade is a vibrant outdoor shopping destination located at 1200 Auto Park Way in Escondido, California, serving the North San Diego County community with convenient access to everyday essentials and lifestyle services. This open-air community center features a carefully curated mix of familiar national retailers, including anchor stores Target and TJ Maxx, alongside a variety of salons and casual dining establishments that cater to the practical needs of local families and professionals. The center's layout encourages easy navigation with ample parking and a comfortable outdoor shopping environment that takes advantage of Southern California's pleasant climate year-round. Operating Monday through Friday from 10am to 9pm, with extended weekend hours, Escondido Promenade has established itself as a reliable neighborhood shopping hub where visitors can accomplish multiple errands in one trip. With a strong 4.3-star rating from nearly 3,000 Google reviews, the center has earned its reputation as a trusted community gathering place that balances convenience, value, and accessibility for Escondido residents and visitors from surrounding areas.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 29.586401233826056
 }

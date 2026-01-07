@@ -8,7 +8,9 @@
   "latitude": 37.2512044,
   "longitude": -121.86245529999998,
   "phone": "++1 408-878-4600",
-  "imageURLs": ["/images/malls/ca-westfield-oakridge-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-westfield-oakridge-1.jpg"
+  ],
   "summary": "Westfield Oakridge is a major regional shopping mall in South San Jose featuring anchor stores like Macy's, Target, and Nordstrom Rack, alongside popular retailers including Apple, H&M, and UNIQLO. The center offers comprehensive entertainment with a 20-screen Century theater, Bowlero, and diverse dining options from Shake Shack to full-service restaurants.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Westfield Oakridge stands as a premier shopping destination in South San Jose, offering an extensive retail experience at 925 Blossom Hill Road. This enclosed regional mall features major anchor stores including Macy's, Macy's Backstage, Target, and Nordstrom Rack, complemented by popular national retailers such as Apple, H&M, UNIQLO, Old Navy, and Hollister Co. Beyond shopping, the center provides comprehensive entertainment options with Century Oakridge 20 movie theater and Bowlero bowling facility, making it a true lifestyle destination for the entire family. The dining scene ranges from casual favorites like Shake Shack and BJ's Restaurant & Brewhouse to Izumi Seafood & Sushi Buffet, plus specialty treats from See's Candies and Lolli and Pops. With amenities including free Wi-Fi, convenient parking, and the Westfield mobile app for enhanced shopping convenience, Westfield Oakridge serves as a central gathering place for the South Bay community, combining retail therapy with entertainment and dining in one accessible location.",
   "numberOfStores": 30,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 34.63660915505977
 }

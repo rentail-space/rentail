@@ -8,7 +8,9 @@
   "latitude": 37.325384,
   "longitude": -121.81374849999997,
   "phone": "++1 408-238-3600",
-  "imageURLs": ["/images/malls/ca-eastridge-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-eastridge-center-1.jpg"
+  ],
   "summary": "Large enclosed regional mall featuring department stores, specialty retailers, a food court, and multiplex theater. A comprehensive shopping and entertainment destination serving the East San Jose community with diverse retail and dining options.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Eastridge Center serves a diverse, middle-income demographic in East San Jose, with a significant Hispanic and Asian population. The trade area attracts families and value-conscious shoppers from surrounding neighborhoods, with household incomes ranging from $50,000 to $90,000 annually. Primary visitors include young families, teenagers, and multi-generational households seeking affordable shopping, dining, and entertainment options. The center draws from a densely populated urban area with a mix of renters and homeowners who prioritize convenience and variety in their shopping experiences.",
   "description": "Eastridge Center stands as a prominent shopping destination in East San Jose, serving the community since its opening as one of the area's major enclosed regional malls. This expansive retail complex features department store anchors alongside a diverse mix of specialty shops and services, creating a comprehensive shopping experience under one roof. The center's amenities include a bustling food court offering varied dining options and a multiplex theater providing entertainment for the whole family. With over 11,500 Google reviews and a solid 4.3-star rating, Eastridge Center has established itself as a reliable community gathering place. The mall's convenient location at 2200 Eastridge Loop, combined with its extensive tenant mix and entertainment offerings, makes it a go-to destination for East San Jose residents seeking everything from fashion and electronics to dining and movies in one accessible location.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 34.93076012117511
 }

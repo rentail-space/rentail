@@ -8,7 +8,9 @@
   "latitude": 33.1715557,
   "longitude": -117.2183861,
   "phone": "++1 949-253-8980",
-  "imageURLs": ["/images/malls/ca-north-county-square-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-north-county-square-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.3,
@@ -20,5 +22,6 @@
   "numberOfStores": 10,
   "summary": "North County Square is a family-friendly community shopping center in Vista featuring major retailers like Walmart, Target, ALDI, and Ross, along with newly opened Sephora and Planet Fitness. The center offers a convenient mix of value-oriented shopping, dining, and entertainment options for North County San Diego residents.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.61352880672111
 }

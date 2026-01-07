@@ -8,7 +8,9 @@
   "latitude": 37.9500503,
   "longitude": -121.95794970000001,
   "phone": "++1 925-279-1800",
-  "imageURLs": ["/images/malls/ca-clayton-valley-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-clayton-valley-shopping-center-1.jpg"
+  ],
   "summary": "Clayton Valley Shopping Center is the largest retail destination in its immediate trade area, featuring 260,205 square feet of space anchored by Ross Dress for Less, Grocery Outlet, and CVS. The center attracts over 3.2 million annual visits from Concord's affluent residential community.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -21,5 +23,6 @@
   "numberOfStores": 8,
   "squareFootage": 260205,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.866576405223327
 }

@@ -8,7 +8,9 @@
   "latitude": 37.305351,
   "longitude": -121.899188,
   "phone": "++1 408-298-2100",
-  "imageURLs": ["/images/malls/ca-willow-glen-downtown-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-willow-glen-downtown-1.jpg"
+  ],
   "summary": "Downtown Willow Glen is a charming, tree-lined lifestyle district in San Jose featuring boutique shops, sidewalk cafes, and local businesses with a strong community focus. The walkable avenue offers free parking, year-round events including farmers markets and wine walks, and a small-town atmosphere within a major metropolitan area.",
   "rating": 4.7,
   "reviewCount": 53,
@@ -17,5 +19,6 @@
   "demographics": "Willow Glen attracts an affluent, family-oriented demographic with above-average household incomes, drawn to the neighborhood's tree-lined streets and small-town charm within San Jose. The trade area serves young professionals, established families with children, and empty nesters who value walkability, local businesses, and community engagement. Typical visitors are educated, environmentally conscious consumers who prefer boutique shopping experiences over big-box retail, with strong support for farmers markets and local events. The area's high homeownership rates and stable residential character create a loyal customer base that frequents the sidewalk cafes, specialty shops, and personal service businesses regularly.",
   "description": "Downtown Willow Glen is San Jose's beloved local treasure, offering a charming small-town atmosphere nestled within California's 10th largest city. The tree-lined streets of Lincoln Avenue create an inviting pedestrian-friendly environment where sidewalk cafes, boutique shops, vintage stores, and specialty retailers thrive alongside essential services like banks, optometrists, and pharmacies. This vibrant lifestyle center has cultivated a strong sense of community through year-round events including the popular Saturday Farmers' Market, seasonal Wine Walks and Beer Walks, and family-friendly celebrations like the Mrs. Roper Romp. The district's walkable layout features convenient free parking in public lots and on-street spaces, making it easy for visitors to explore the diverse mix of restaurants, coffee shops, fitness studios, and unique children's stores. Managed by the active Willow Glen Business Association, this thriving commercial corridor continues to attract new businesses like Copita Tequileria y Comida while maintaining its distinctive character that has made it a cherished destination for both locals and visitors seeking an authentic neighborhood shopping and dining experience.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 16.20819317424742
 }

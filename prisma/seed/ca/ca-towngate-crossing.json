@@ -8,7 +8,9 @@
   "latitude": 33.9382526,
   "longitude": -117.2771754,
   "phone": "++1 949-723-7100",
-  "imageURLs": ["/images/malls/ca-towngate-crossing-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-towngate-crossing-1.jpg"
+  ],
   "openFrom": 700,
   "openUntil": 2300,
   "rating": 4.3,
@@ -21,5 +23,6 @@
   "squareFootage": 246930,
   "summary": "TownGate Crossing is a 246,930 square foot shopping center built in 2007, conveniently located off the 60 Freeway in Moreno Valley. Anchored by Lowe's and Jerome's Furniture, the center features popular tenants including Starbucks, Panera Bread, T-Mobile, and Buffalo Wild Wings, serving the community's everyday shopping and dining needs.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.360740395452552
 }

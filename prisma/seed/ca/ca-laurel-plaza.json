@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 36.6986407,
   "longitude": -121.65269259999998,
-  "imageURLs": ["/images/malls/ca-laurel-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-laurel-plaza-1.jpg"
+  ],
   "summary": "Laurel Plaza is a neighborhood business plaza in Salinas featuring a variety of offices and retail establishments, including the popular Collier Pet Supplies. With convenient hours and a practical mix of services, it serves as a reliable destination for everyday shopping needs in the local community.",
   "openFrom": 900,
   "openUntil": 2000,
@@ -18,5 +20,6 @@
   "demographics": "Laurel Plaza serves the Salinas community, which has a diverse, predominantly Hispanic population with a strong agricultural workforce base. The trade area attracts middle-income families and working professionals seeking convenient shopping for everyday needs and services. Typical visitors include local residents shopping for pet supplies, professional services, and routine errands, with a practical, value-conscious shopping orientation reflective of Salinas' agricultural economy and family-oriented demographic profile.",
   "description": "Laurel Plaza is a convenient neighborhood shopping center located at 21 West Laurel Drive in Salinas, California, serving the local community with a variety of essential services and retail options. This business plaza features a well-stocked Collier Pet Supplies, known for its excellent customer service and comprehensive inventory for pet owners throughout the area. The center provides a practical mix of offices and retail establishments that cater to the everyday needs of Salinas residents. With a solid 4.2-star rating from 83 reviews, visitors consistently appreciate the variety of businesses and the accessible location. Operating daily from 9:00 AM to 8:00 PM, Laurel Plaza offers convenient hours for busy families and professionals seeking quality services in a straightforward, no-frills shopping environment.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 16.120255975959022
 }

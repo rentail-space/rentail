@@ -8,7 +8,9 @@
   "latitude": 32.6524762,
   "longitude": -116.9690668,
   "phone": "++1 858-546-3000",
-  "imageURLs": ["/images/malls/ca-village-walk-at-eastlake-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-village-walk-at-eastlake-1.jpg"
+  ],
   "openFrom": 900,
   "openUntil": 2100,
   "rating": 4.6,
@@ -19,5 +21,6 @@
   "description": "Village Walk at Eastlake is a distinctive lifestyle shopping center located in Chula Vista's master-planned Eastlake community, offering a charming outdoor shopping experience unlike any other in San Diego. The center features inviting architectural elements including meandering walking paths, custom bronze statues, imported Italian light fixtures, a hand-carved stone fountain, and a grand clock tower that create a European-inspired ambiance. At the heart of the center is a large decorative pond filled with koi and turtles that serves as a popular gathering spot for visitors, while families with young children are drawn to the dedicated sandbox and play area. The tenant mix includes popular anchors such as T.J. Maxx, Trader Joe's, and Sprouts Farmers Market, complemented by Five Below, Petco, and CVS, along with a complete array of restaurants, eateries, and service providers. With both indoor and outdoor dining options, curbside pickup services, and a focus on creating a lifestyle destination rather than just a shopping stop, Village Walk at Eastlake has established itself as a beloved community gathering place that combines convenience with a truly magical shopping atmosphere.",
   "summary": "Village Walk at Eastlake is a charming lifestyle center featuring European-inspired architecture with custom bronze statues, Italian light fixtures, and a signature koi pond. The center offers popular retailers including T.J. Maxx, Trader Joe's, and Sprouts, along with diverse dining options and family-friendly amenities in an inviting outdoor setting.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.779691497687548
 }

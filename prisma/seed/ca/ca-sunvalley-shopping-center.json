@@ -8,7 +8,9 @@
   "latitude": 37.9671801,
   "longitude": -122.0606765,
   "phone": "++1 925-825-0400",
-  "imageURLs": ["/images/malls/ca-sunvalley-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-sunvalley-shopping-center-1.jpg"
+  ],
   "summary": "Sunvalley Shopping Center is a major regional mall in Concord featuring over 160 stores, including department store anchors, specialty retailers, and diverse dining options. This established East Bay destination offers comprehensive shopping and entertainment in a convenient, enclosed environment serving the greater Contra Costa County area.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -20,5 +22,6 @@
   "description": "Sunvalley Shopping Center stands as one of the East Bay's premier shopping destinations, serving the Concord community and greater Contra Costa County since its opening. This expansive regional mall features over 160 stores spanning department stores, specialty retailers, and diverse dining options, making it a comprehensive shopping experience under one roof. The center has evolved over the decades to meet changing consumer preferences, maintaining its position as a go-to destination for families seeking everything from fashion and electronics to home goods and entertainment. With major anchor stores and a carefully curated mix of national chains and local favorites, Sunvalley offers convenient access to quality retail in a climate-controlled environment. The mall's central location along major transportation corridors and ample parking make it easily accessible to shoppers throughout the East Bay, while its commitment to providing a welcoming atmosphere and regular community events has cemented its role as more than just a shopping center—it's a gathering place for the community.",
   "numberOfStores": 160,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 32.58922132730925
 }

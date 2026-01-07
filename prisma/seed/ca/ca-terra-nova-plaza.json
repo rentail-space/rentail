@@ -8,7 +8,9 @@
   "latitude": 32.6396838,
   "longitude": -117.0495093,
   "phone": "++1 760-630-8247",
-  "imageURLs": ["/images/malls/ca-terra-nova-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-terra-nova-plaza-1.jpg"
+  ],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.4,
@@ -20,5 +22,6 @@
   "numberOfStores": 40,
   "summary": "Terra Nova Plaza is a community-focused shopping center located at the 805 freeway and East H Street in Chula Vista, featuring over 40 merchants offering shopping, dining, entertainment, and services. The plaza serves as a neighborhood gathering place with convenient access and regular free community events.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.316635420691863
 }

@@ -8,7 +8,9 @@
   "latitude": 33.7559615,
   "longitude": -118.3111625,
   "phone": "++1 310-544-5234",
-  "imageURLs": ["/images/malls/ca-the-terraces-at-south-bay-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-terraces-at-south-bay-1.jpg"
+  ],
   "summary": "The Terraces at South Bay is an upscale community shopping center serving the affluent Palos Verdes Peninsula with a quality mix of retailers, dining, and services. Located in Rancho Palos Verdes, this well-regarded center provides convenient, refined shopping for one of Southern California's most prestigious residential areas.",
   "openFrom": 800,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "The Terraces at South Bay attracts affluent shoppers from the Palos Verdes Peninsula and surrounding South Bay communities, with visitors typically representing upper-middle to high-income households with median incomes exceeding $100,000. The primary demographic consists of families with children, professionals aged 35-65, and active retirees who value quality shopping in a convenient, upscale setting. The trade area encompasses the wealthy hillside communities of Rancho Palos Verdes, Rolling Hills, and Palos Verdes Estates, where residents prefer neighborhood shopping convenience over regional mall destinations. Shoppers demonstrate preferences for specialty retailers, quality dining options, and service-oriented businesses that cater to an educated, discerning clientele.",
   "description": "The Terraces at South Bay is a premier shopping destination nestled in the affluent community of Rancho Palos Verdes, California, serving the distinguished residents of the Palos Verdes Peninsula since its development. Located at 28901 South Western Avenue, this well-maintained community center offers a refined shopping experience that caters to the sophisticated tastes of South Bay residents. The center features a carefully curated mix of retailers, dining establishments, and service providers that reflect the upscale character of the surrounding neighborhoods. With its convenient location and quality tenant mix, The Terraces has established itself as the go-to shopping destination for Peninsula residents seeking everyday necessities and specialty goods without the drive to larger regional malls. The center maintains high standards of appearance and service, earning an impressive 4.4-star rating from over 1,400 Google reviews, and operates daily from 8:00 AM to 10:00 PM to accommodate the busy schedules of its discerning clientele.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.75088790584737
 }

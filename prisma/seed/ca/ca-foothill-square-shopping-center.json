@@ -8,7 +8,9 @@
   "latitude": 37.7429313,
   "longitude": -122.15017759999998,
   "phone": "++1 510-562-9500",
-  "imageURLs": ["/images/malls/ca-foothill-square-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-foothill-square-shopping-center-1.jpg"
+  ],
   "summary": "Foothill Square Shopping Center is a neighborhood shopping plaza on MacArthur Boulevard offering a practical mix of retail shops, beauty services, healthcare facilities, and recreation options. Serving the East Oakland community with convenient access and extended hours, this center provides everyday essentials and services for local residents.",
   "openFrom": 600,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "Foothill Square Shopping Center serves a diverse, middle-income community in East Oakland, with a trade area comprising working families, young professionals, and established residents. The center attracts value-conscious shoppers seeking everyday necessities, health services, and convenient retail options. Primary visitors include households with median incomes ranging from $50,000-$80,000, with a mix of age groups skewing toward 25-55 year-olds who prioritize accessibility and practical shopping experiences over luxury retail.",
   "description": "Foothill Square Shopping Center has served the East Oakland community along MacArthur Boulevard for decades as a reliable neighborhood shopping destination. This open-air plaza offers residents a practical mix of retail shops, beauty services, healthcare facilities, and recreational options all in one convenient location. The center's strategic position on MacArthur Boulevard provides easy access for local families and commuters seeking everyday essentials and services. With extended operating hours from 6 AM to 10 PM, Foothill Square accommodates the busy schedules of working professionals and families throughout the Oakland area. The shopping center has earned a solid 4.1-star rating from over 2,200 reviews, reflecting its consistent service to the community and its role as a dependable neighborhood retail hub where locals can handle multiple errands in a single visit.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 13.71603229529226
 }

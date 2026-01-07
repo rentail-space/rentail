@@ -8,7 +8,9 @@
   "latitude": 37.417772899999996,
   "longitude": -121.87419779999999,
   "phone": "++1 408-263-2131",
-  "imageURLs": ["/images/malls/ca-park-town-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-park-town-plaza-1.jpg"
+  ],
   "summary": "Park Town Plaza is a neighborhood strip center in Milpitas offering convenient retail and dining options, anchored by Park Town Pizza. With strong community ratings and accessible hours, it serves as a practical destination for local residents' everyday needs.",
   "openFrom": 1100,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "Park Town Plaza serves a diverse, middle-income demographic in Milpitas, a city with a significant Asian-American population and many tech industry workers from nearby Silicon Valley companies. The trade area attracts families and young professionals with household incomes ranging from $80,000 to $150,000, drawn to the center's ethnic dining options and convenience retail. Shoppers typically visit for quick errands, casual dining, and specialty food shopping, with strong weekday lunch traffic from nearby office parks and weekend family visits.",
   "description": "Park Town Plaza is a neighborhood shopping center located at 1350 South Park Victoria Drive in Milpitas, California, serving the local community with convenient retail and dining options. Despite its name suggesting a broader retail focus, the center is notably home to Park Town Pizza, which has become a recognizable anchor for the property. The plaza operates daily from 11:00 AM to 10:00 PM, providing accessible hours for both lunch and dinner crowds. With a solid 4.1-star rating from 660 Google reviews, the center has established itself as a reliable destination for local residents seeking everyday conveniences. Its location in Milpitas positions it well to serve the diverse, tech-savvy population of the South Bay area, offering a practical shopping experience in a straightforward strip center format.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 23.12026027144332
 }

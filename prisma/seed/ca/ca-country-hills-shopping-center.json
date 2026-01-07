@@ -8,7 +8,9 @@
   "latitude": 33.7893903,
   "longitude": -118.34041610000001,
   "phone": "++1 610-215-7939",
-  "imageURLs": ["/images/malls/ca-country-hills-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-country-hills-shopping-center-1.jpg"
+  ],
   "summary": "Country Hills Shopping Center is a Ralphs-anchored community center in Torrance featuring 53,200 square feet of retail space with a strong mix of grocery, dining, healthcare, and personal services. Located on a major thoroughfare with excellent visibility, the center serves an affluent trade area with average household incomes exceeding $186,000 within 3 miles.",
   "openFrom": 600,
   "openUntil": 0,
@@ -21,5 +23,6 @@
   "numberOfStores": 15,
   "squareFootage": 53200,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 23.31414675666685
 }

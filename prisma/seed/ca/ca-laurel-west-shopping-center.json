@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 36.6961519,
   "longitude": -121.6673381,
-  "imageURLs": ["/images/malls/ca-laurel-west-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-laurel-west-shopping-center-1.jpg"
+  ],
   "summary": "Laurel West Shopping Center is anchored by Vallarta Supermarkets, offering an authentic Mexican and Latin American shopping experience with specialized departments including fresh tortillas, butcher services, bakery, and prepared foods from La Cocina. The center serves as a cultural hub for Salinas' Latino community with traditional products, fresh ingredients, and convenient services including grocery delivery.",
   "openFrom": 900,
   "openUntil": 2000,

@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.6187215,
   "longitude": -117.9292645,
-  "imageURLs": ["/images/malls/ca-lido-marina-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-lido-marina-village-1.jpg"
+  ],
   "summary": "Lido Marina Village is a stylish waterfront lifestyle center in Newport Beach featuring curated boutiques, artisanal dining, and al fresco experiences along the marina. This charming open-air village combines coastal sophistication with a relaxed ambience, offering unique shopping, waterside restaurants, and dock-and-dine amenities for an authentic Newport Beach experience.",
   "openFrom": 1000,
   "openUntil": 1900,
@@ -18,5 +20,6 @@
   "demographics": "Lido Marina Village attracts an affluent, style-conscious demographic primarily consisting of upper-income professionals and families aged 35-65 from Newport Beach and surrounding coastal Orange County communities. The trade area is characterized by high household incomes exceeding $150,000, with many visitors being homeowners in nearby waterfront properties and luxury residential areas. Shoppers here seek curated, boutique experiences rather than mass-market retail, with a strong preference for artisanal dining, unique fashion brands, and lifestyle goods that reflect coastal California sophistication. The center also draws tourists and boating enthusiasts who appreciate the waterfront location and dock-and-dine amenities.",
   "description": "Lido Marina Village is a distinctive waterfront lifestyle destination located at 3434 Via Lido in Newport Beach, California, where coastal elegance meets curated retail and dining experiences. This charming open-air village showcases a carefully selected collection of boutiques, restaurants, and cafes that embody the relaxed yet sophisticated Newport Beach lifestyle. The center features notable tenants including LoveShackFancy, The Great, Shoppe Amber Interiors, Aloha Collection, Skål Pizza, and Zinqué, bringing together artisans, tastemakers, and chefs who draw inspiration from the sun and sea. With its unique waterfront setting, the village offers al fresco dining with water views and convenient dock-and-dine facilities for boating enthusiasts, making it a true destination for both locals and visitors. The delightfully scaled village ambience invites guests to stroll and discover creative details at every turn, from stylish shops to live music events, all while enjoying the casual, comfortable, and chic atmosphere that defines Newport Beach at its best.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 42.12186557513306
 }

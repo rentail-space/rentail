@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 37.434006800000006,
   "longitude": -121.8969453,
-  "imageURLs": ["/images/malls/ca-milpitas-town-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-milpitas-town-center-1.jpg"
+  ],
   "summary": "Milpitas Town Center is a community shopping destination featuring specialty retailers, diverse dining options, and a supermarket anchor. Serving the heart of Silicon Valley, the center offers convenient shopping with extended hours and a strong mix of services tailored to the area's multicultural population.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -18,5 +20,6 @@
   "demographics": "Milpitas Town Center serves a diverse, tech-savvy community with a significant Asian-American population, reflecting the broader Silicon Valley demographics. The primary trade area attracts middle to upper-middle income households, with many visitors employed in the technology sector at nearby companies in San Jose and Fremont. Shoppers tend to be family-oriented, ranging from young professionals to established families, with a strong preference for convenient one-stop shopping that combines grocery, dining, and specialty retail. The center draws both local residents seeking everyday necessities and regional visitors attracted to its ethnic dining options and specialty stores.",
   "description": "Milpitas Town Center stands as a vital community hub in the heart of Silicon Valley, serving the diverse and growing population of Milpitas and surrounding areas. Located on East Calaveras Boulevard, this shopping destination has evolved to meet the needs of the tech-forward community with a carefully curated mix of specialty retailers, essential services, and diverse dining options. The center is anchored by a full-service supermarket, providing convenient grocery shopping alongside an array of specialty stores that cater to the multicultural tastes of the local population. With extended operating hours from 6 AM to 11 PM, the center accommodates the busy schedules of Silicon Valley professionals and families alike. The property has earned strong community recognition with a 4.2-star rating from nearly 2,000 reviews, reflecting its role as a trusted neighborhood gathering place where convenience meets quality in the heart of one of California's most dynamic communities.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.690144671333726
 }

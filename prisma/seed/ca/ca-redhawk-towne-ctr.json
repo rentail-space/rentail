@@ -8,7 +8,9 @@
   "latitude": 33.48033789999999,
   "longitude": -117.0969473,
   "phone": "++1 833-800-4343",
-  "imageURLs": ["/images/malls/ca-redhawk-towne-ctr-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-redhawk-towne-ctr-1.jpg"
+  ],
   "openFrom": 700,
   "openUntil": 2200,
   "rating": 4.3,
@@ -20,5 +22,6 @@
   "squareFootage": 417252,
   "summary": "Redhawk Towne Center is a fully-leased, 417,252 square foot community shopping center anchored by Walmart and Kohl's at the intersection of Temecula Parkway and Redhawk Parkway. Serving an affluent trade area with median household incomes exceeding $126,000, the center provides convenient shopping for Temecula's growing residential communities.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.722699534123677
 }

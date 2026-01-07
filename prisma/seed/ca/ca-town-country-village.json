@@ -8,7 +8,9 @@
   "latitude": 37.4385356,
   "longitude": -122.15945869999999,
   "phone": "++1 650-325-3266",
-  "imageURLs": ["/images/malls/ca-town-country-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-town-country-village-1.jpg"
+  ],
   "summary": "Town & Country Village is Palo Alto's upscale open-air lifestyle center featuring over 70 specialty shops, restaurants, and services set among pedestrian walkways and gardens. Located at El Camino Real and Embarcadero Road, this well-established destination offers a curated mix of dining and retail in a village-like atmosphere.",
   "openFrom": 0,
   "openUntil": 2400,
@@ -20,5 +22,6 @@
   "description": "Town & Country Village stands as Palo Alto's premier open-air shopping destination, offering a distinctive blend of over 70 shops, restaurants, and services amid beautifully landscaped pedestrian walkways and gardens. Located at the prominent intersection of El Camino Real and Embarcadero Road, this upscale lifestyle center has served the Palo Alto community for decades as a gathering place that combines convenience with an elevated shopping experience. The center's thoughtfully designed layout features pedestrian-friendly pathways that connect specialty retailers, dining establishments, and service providers in a village-like atmosphere that encourages browsing and lingering. From exclusive culinary experiences like Horsefeather's happy hour and Oren's Hummus Express to specialty retailers such as Sur La Table showcasing exclusive Miyabi Hisho knives, Town & Country Village curates a sophisticated mix of local and national tenants. With convenient hours from 10:00 a.m. to 7:00 p.m. and extended dining hours, the center serves as both a daily destination for Palo Alto residents and a regional draw for those seeking quality shopping and dining in the heart of Silicon Valley.",
   "numberOfStores": 70,
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 45.15865371327334
 }

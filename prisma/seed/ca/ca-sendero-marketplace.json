@@ -8,7 +8,9 @@
   "latitude": 33.5217769,
   "longitude": -117.6174465,
   "phone": "++1 949-226-5807",
-  "imageURLs": ["/images/malls/ca-sendero-marketplace-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-sendero-marketplace-1.jpg"
+  ],
   "openFrom": 0,
   "openUntil": 2100,
   "rating": 4.5,
@@ -19,5 +21,6 @@
   "description": "Sendero Marketplace is a modern community shopping center located in the heart of Rancho Mission Viejo, one of Southern California's newest and most desirable master-planned communities. Situated at 30721 Gateway Place, this contemporary retail destination serves as the commercial hub for the rapidly growing residential area, providing residents with convenient access to everyday shopping, dining, and services. The center's thoughtfully designed open-air layout reflects the Southern California lifestyle, creating an inviting atmosphere for families and professionals who call this area home. With a strong rating of 4.5 stars from nearly 500 reviews, Sendero Marketplace has quickly established itself as a valued community gathering place since its development. The center's strategic location in Rancho Mission Viejo positions it perfectly to serve the needs of this upscale residential community, offering a carefully curated mix of retailers and restaurants that cater to the discerning tastes of local residents.",
   "summary": "Sendero Marketplace is a contemporary community shopping center serving the master-planned community of Rancho Mission Viejo in Southern California. This well-rated retail destination offers residents convenient access to shopping, dining, and services in a modern open-air setting.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 24.25144679040212
 }

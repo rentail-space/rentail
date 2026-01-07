@@ -8,7 +8,9 @@
   "latitude": 32.8303572,
   "longitude": -117.2033988,
   "phone": "++1 858-272-0992",
-  "imageURLs": ["/images/malls/ca-clairemont-town-square-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-clairemont-town-square-1.jpg"
+  ],
   "summary": "Clairemont Town Square is a community-focused shopping destination in San Diego featuring a diverse mix of national retailers, local boutiques, casual and traditional dining options, and a movie theater. This open-air center serves as a convenient one-stop location for everyday shopping, entertainment, and dining needs in the Clairemont neighborhood.",
   "openFrom": 700,
   "openUntil": 2300,
@@ -19,5 +21,6 @@
   "demographics": "Clairemont Town Square serves a diverse, middle-class demographic in the Clairemont Mesa neighborhood of San Diego, attracting families and working professionals aged 25-55. The trade area consists primarily of suburban households with moderate to middle-income levels, drawn to the center's convenient location and mix of everyday necessities and entertainment options. Shoppers typically visit for routine errands, family dining, and movie outings, with strong weekday traffic from nearby residential communities and office workers. The center appeals to value-conscious consumers seeking national retailers and casual dining in an accessible, open-air format.",
   "description": "Clairemont Town Square stands as a vibrant community gathering place in San Diego's Clairemont neighborhood, offering residents a carefully curated mix of shopping, dining, and entertainment options. This open-air shopping destination has established itself as a go-to location for both everyday essentials and leisure activities, featuring a diverse collection of national retail anchors, specialty boutiques, and unique eateries alongside traditional restaurants. The center's layout encourages exploration and discovery, with convenient access to everything from quick-service dining to sit-down restaurants perfect for special occasions. Anchored by a movie theater that draws crowds for evening entertainment, Clairemont Town Square has become an integral part of the community fabric, serving as a one-stop destination where neighbors can shop for groceries, enjoy a meal, catch a film, or simply spend an afternoon browsing. With its commitment to delivering what customers want in the way they want it, the center continues to evolve while maintaining its focus on accessibility, variety, and community connection.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 32.29898004192149
 }

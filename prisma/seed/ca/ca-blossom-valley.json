@@ -8,7 +8,9 @@
   "latitude": 37.37245,
   "longitude": -122.08790560000001,
   "phone": "++1 925-279-1800",
-  "imageURLs": ["/images/malls/ca-blossom-valley-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-blossom-valley-1.jpg"
+  ],
   "summary": "Blossom Valley is a convenient neighborhood shopping plaza in Mountain View featuring a variety of shops, casual restaurants, and services with plenty of parking. Located in the heart of Silicon Valley, this well-rated center serves local residents and tech professionals with extended hours and easy accessibility.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -19,5 +21,6 @@
   "demographics": "Blossom Valley attracts a diverse mix of Mountain View residents and tech professionals, with a strong representation of middle to upper-middle income households earning $100,000+. The trade area serves young professionals and families in the 25-54 age range who work in nearby Silicon Valley tech companies, seeking convenient neighborhood shopping for everyday needs. Visitors prioritize accessibility and efficiency, favoring quick trips for groceries, casual dining, and essential services, with high foot traffic during weekday lunch hours and weekend afternoons.",
   "description": "Blossom Valley is a well-established neighborhood shopping plaza located at the intersection of Miramonte and Cuesta in Mountain View, California, serving the heart of Silicon Valley's residential community. This open-air center has become a local favorite for its convenient access and ample parking, making it an ideal destination for busy professionals and families seeking everyday essentials and casual dining options. The plaza features a carefully curated mix of shops, services, and restaurants that cater to the diverse needs of Mountain View's tech-savvy population. With its prime location in one of the Bay Area's most desirable communities, Blossom Valley offers a comfortable, accessible shopping experience that emphasizes convenience and community connection. The center's extended operating hours from 6 AM to 11 PM accommodate the flexible schedules of Silicon Valley workers, while its strong 4.2-star rating from over 600 reviews reflects its consistent appeal to local residents.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 23.35466542197727
 }

@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.5002105,
   "longitude": -117.6647421,
-  "imageURLs": ["/images/malls/ca-river-street-marketplace-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-river-street-marketplace-1.jpg"
+  ],
   "summary": "River Street Marketplace is an inviting lifestyle center in historic San Juan Capistrano, featuring a curated selection of shops and restaurants in an open-air setting. This community-focused destination combines convenient retail with quality dining options, serving both locals and visitors to Orange County's coastal region.",
   "openFrom": 1000,
   "openUntil": 2200,
@@ -18,5 +20,6 @@
   "demographics": "River Street Marketplace attracts an affluent demographic reflective of San Juan Capistrano's upscale coastal community, with visitors typically consisting of middle to upper-income families and professionals with household incomes exceeding $100,000. The trade area draws from South Orange County's educated population, including young families, empty nesters, and tourists visiting the historic mission district. Shopping patterns emphasize quality dining experiences, specialty retail, and convenience-oriented services that cater to time-conscious, discerning consumers who value walkable, open-air environments.",
   "description": "River Street Marketplace is a charming lifestyle center nestled in the heart of historic San Juan Capistrano, California, offering a distinctive blend of shopping, dining, and entertainment experiences. Located at 31856 Paseo Adelanto, this open-air destination serves as a community gathering place that reflects the character and heritage of one of Orange County's most beloved coastal towns. The center features a carefully curated mix of retailers and restaurants that cater to both local residents and visitors exploring the nearby Mission San Juan Capistrano. With its walkable layout and inviting atmosphere, River Street Marketplace provides a refreshing alternative to traditional enclosed malls, emphasizing quality over quantity in its tenant selection. The center operates daily from 10:00 AM to 10:00 PM, making it a convenient destination for daytime shopping, lunch meetings, or evening dining experiences in the picturesque South Orange County setting.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 15.83419683519152
 }

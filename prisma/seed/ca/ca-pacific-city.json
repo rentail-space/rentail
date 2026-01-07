@@ -8,7 +8,9 @@
   "latitude": 33.6550556,
   "longitude": -117.99774579999999,
   "phone": "++1 714-960-1238",
-  "imageURLs": ["/images/malls/ca-pacific-city-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-pacific-city-1.jpg"
+  ],
   "summary": "Pacific City is a premier outdoor lifestyle center on the Huntington Beach coastline, featuring high-end retail shops, diverse dining options, and entertainment including miniature golf. With breathtaking Pacific Ocean views and complimentary validated parking, this beachfront destination offers an upscale shopping experience that captures the essence of Southern California coastal living.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Pacific City attracts an affluent, coastal demographic with above-average household incomes, primarily consisting of young professionals, families, and tourists drawn to the beachfront location. The trade area encompasses the upscale Huntington Beach community and surrounding Orange County coastal cities, with visitors typically aged 25-54 who prioritize experiential shopping and dining. The center appeals to lifestyle-oriented consumers seeking premium retail experiences combined with ocean views and entertainment options, with strong weekend and tourist traffic patterns year-round.",
   "description": "Pacific City stands as a premier outdoor lifestyle destination on the Southern California coast, offering an unparalleled shopping and dining experience just steps from the majestic Pacific Ocean. This high-end beachfront development seamlessly blends trendy retail shops with an eclectic array of restaurants and eateries, creating a vibrant atmosphere that captures the essence of coastal living. The center features complimentary parking with validation from participating merchants, as well as convenient valet parking services for guests. Beyond traditional shopping, Pacific City offers unique entertainment options including miniature golf and hosts regular community events, making it a true gathering place for locals and visitors alike. With its breathtaking ocean views, carefully curated tenant mix, and commitment to creating memorable experiences from the moment guests arrive, Pacific City has established itself as a must-visit destination that celebrates the Southern California lifestyle.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 49.040906129467835
 }

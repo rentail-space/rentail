@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 38.103011099999996,
   "longitude": -122.571312,
-  "imageURLs": ["/images/malls/ca-novato-fair-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-novato-fair-shopping-center-1.jpg"
+  ],
   "summary": "Novato Fair Shopping Center is a 133,485 square foot neighborhood center anchored by a dominant grocer at the key intersection of Redwood Boulevard and Diablo Avenue in affluent Novato. The center serves as a daily destination for the community with a mix of essential services, dining, fitness, and retail options that cater to the area's upscale demographic.",
   "openFrom": 900,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "description": "Novato Fair Shopping Center is a premier neighborhood shopping destination located at the prominent intersection of Redwood Boulevard and Diablo Avenue in the affluent community of Novato, California. Spanning 133,485 square feet of gross leasable area, this well-established center serves as the daily hub for local residents in the San Francisco-Oakland-Berkeley metro area. The center is anchored by the dominant grocer in the area and features a carefully curated mix of tenants that cater to the community's everyday needs and lifestyle preferences. From morning coffee at Starbucks and fitness routines at the gym, to lunch spots serving burgers, professional dental services, beauty salons, and dinner destinations, Novato Fair Shopping Center provides a complete neighborhood experience. Its strategic location and diverse tenant mix make it the go-to destination that is truly \"just around the corner\" for the surrounding affluent residential community, offering convenience and quality in one accessible location.",
   "squareFootage": 133485,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 24.56786845729279
 }

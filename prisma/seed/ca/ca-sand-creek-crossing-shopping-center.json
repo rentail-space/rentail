@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 37.941733,
   "longitude": -121.7377928,
-  "imageURLs": ["/images/malls/ca-sand-creek-crossing-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-sand-creek-crossing-shopping-center-1.jpg"
+  ],
   "summary": "Sand Creek Crossing is Brentwood's premier open-air shopping destination, offering a diverse mix of retail stores, dining options, and services in a convenient, modern setting. With its strong community connection and comprehensive tenant lineup, the center serves as the primary shopping hub for eastern Contra Costa County residents.",
   "openFrom": 800,
   "openUntil": 2200,
@@ -18,5 +20,6 @@
   "demographics": "Sand Creek Crossing serves the growing Brentwood community in eastern Contra Costa County, attracting primarily middle to upper-middle income families with household incomes ranging from $80,000 to $150,000. The trade area draws young professionals and established families, typically aged 25-54, who are drawn to Brentwood's suburban lifestyle and newer housing developments. Shoppers at this center prioritize convenience and value a mix of everyday necessities, dining options, and specialty retail in an accessible open-air format. The center benefits from Brentwood's population growth and serves as a primary shopping destination for residents seeking alternatives to longer drives into the Bay Area's urban centers.",
   "description": "Sand Creek Crossing Shopping Center stands as Brentwood's premier shopping destination, offering residents and visitors a comprehensive retail experience at 2400 Sand Creek Road. This open-air community center has established itself as the go-to location for food, fashion, and furnishings in eastern Contra Costa County, serving the rapidly growing Brentwood area with convenient access and ample parking. The center's thoughtfully curated tenant mix provides everything from everyday essentials to specialty shopping, complemented by diverse dining options that cater to the community's varied tastes. With its modern design and well-maintained facilities, Sand Creek Crossing creates an inviting atmosphere where shoppers can enjoy a comfortable outdoor shopping experience year-round. The center has earned strong community support, reflected in its impressive 4.4-star rating from over 1,200 reviews, and maintains an active social media presence that keeps visitors engaged with the latest offerings and events through #sandcreekcrossing and #foodfashionfurnishings.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.295374250728027
 }

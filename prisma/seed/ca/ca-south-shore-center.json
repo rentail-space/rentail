@@ -8,7 +8,9 @@
   "latitude": 37.7569634,
   "longitude": -122.25228699999998,
   "phone": "++1 510-521-8100",
-  "imageURLs": ["/images/malls/ca-south-shore-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-south-shore-center-1.jpg"
+  ],
   "summary": "South Shore Center is Alameda's premier open-air waterfront shopping destination, featuring a diverse mix of national retailers, local businesses, and popular dining options. This family-friendly lifestyle center serves as a community hub where residents gather for shopping, entertainment, and special events in a scenic Bay Area setting.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "South Shore Center serves the affluent island community of Alameda and surrounding East Bay areas, attracting primarily middle to upper-middle income families and professionals with household incomes ranging from $80,000 to $150,000+. The trade area draws a diverse mix of young professionals, established families with children, and active retirees who value the waterfront location and community-oriented atmosphere. Shoppers typically seek convenient access to both national retailers and local businesses for everyday needs, dining experiences, and family entertainment, with strong preferences for open-air shopping environments and walkable layouts that complement the Bay Area lifestyle.",
   "description": "Alameda South Shore Center stands as the premiere open-air shopping destination on the San Francisco Bay waterfront, serving the island community of Alameda and the greater East Bay region. This expansive lifestyle center has evolved into a beloved community gathering place, seamlessly blending nationally recognized retailers with cherished local businesses and Alameda originals that reflect the unique character of the area. The center's waterfront location provides a scenic backdrop for shopping, dining, and entertainment, creating an inviting atmosphere where families and friends can gather, enjoy, and indulge throughout the day. With its thoughtfully curated mix of retail stores, diverse dining options offering dine-in, takeout, and delivery services, and regular community events, South Shore Center has become far more than just a shopping venue—it's a central hub for the Alameda lifestyle. The center's commitment to serving local residents is evident in its family-friendly approach, convenient hours, and dedication to providing both everyday essentials and special experiences that keep the community connected.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 31.74466043556204
 }

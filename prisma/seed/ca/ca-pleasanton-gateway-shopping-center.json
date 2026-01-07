@@ -8,7 +8,9 @@
   "latitude": 37.6568119,
   "longitude": -121.89857149999999,
   "phone": "++1 800-762-1641",
-  "imageURLs": ["/images/malls/ca-pleasanton-gateway-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-pleasanton-gateway-shopping-center-1.jpg"
+  ],
   "summary": "Pleasanton Gateway Shopping Center is a contemporary community center conveniently located off I-680 at Bernal Avenue, anchored by a state-of-the-art Safeway and featuring diverse dining options from The Habit to Toast Café & Grill. The center offers comprehensive services including fitness facilities, spa treatments, banking, and personal care, all with the convenience of ample free parking.",
   "openFrom": 700,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "Pleasanton Gateway Shopping Center serves an affluent suburban demographic in the Tri-Valley area, attracting middle to upper-middle-class families and professionals with household incomes significantly above the national average. The primary trade area consists of Pleasanton residents and commuters along the I-680 corridor, typically aged 30-55, with a mix of dual-income households and young families seeking convenient shopping for daily needs. Visitors prioritize convenience and quality, favoring the center for quick grocery runs at Safeway, casual dining experiences, and essential services like banking and personal care, with shopping patterns reflecting busy lifestyles that value one-stop accessibility and ample free parking.",
   "description": "Pleasanton Gateway Shopping Center is a contemporary community shopping destination strategically positioned just off Interstate 680 at Bernal Avenue in Pleasanton, California. This well-appointed center serves as a convenient hub for the affluent Tri-Valley community, anchored by a state-of-the-art Safeway supermarket that provides comprehensive grocery shopping for local residents and commuters alike. The center has cultivated a diverse tenant mix that caters to everyday needs and lifestyle preferences, featuring popular dining options including The Habit Burger Grill, Starbucks, Bagel Street Café, and the recently added Toast Café & Grill, offering cuisines ranging from classic American fare to Asian specialties. Beyond dining and groceries, Pleasanton Gateway distinguishes itself with an extensive array of services including banking, hair salons, spa treatments, organic nail care, fitness facilities, and even bike services, creating a true one-stop destination for busy families and professionals. With its convenient freeway access, ample free parking, and thoughtfully curated mix of national retailers and local favorites, the center has earned a strong 4.3-star rating from over 1,000 reviews, establishing itself as a beloved neighborhood gathering place where visitors can efficiently accomplish multiple errands while enjoying quality amenities in a pleasant, accessible environment.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.115008500114584
 }

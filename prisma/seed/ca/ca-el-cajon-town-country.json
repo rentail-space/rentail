@@ -8,7 +8,9 @@
   "latitude": 32.799114,
   "longitude": -116.9361522,
   "phone": "++1 760-630-8247",
-  "imageURLs": ["/images/malls/ca-el-cajon-town-country-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-el-cajon-town-country-1.jpg"
+  ],
   "openFrom": 900,
   "openUntil": 2300,
   "rating": 4.3,
@@ -20,5 +22,6 @@
   "squareFootage": 53233,
   "summary": "El Cajon Town & Country is a 53,233 square foot community shopping center located at a prime signalized intersection with over 35,000 daily vehicle counts. The center serves a densely populated trade area of 145,000+ residents and offers convenient neighborhood shopping with excellent visibility and accessibility.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.724406931887977
 }

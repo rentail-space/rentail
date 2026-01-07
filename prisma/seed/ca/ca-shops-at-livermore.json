@@ -8,7 +8,9 @@
   "latitude": 37.696874699999995,
   "longitude": -121.84545580000001,
   "phone": "++1 862-203-4352",
-  "imageURLs": ["/images/malls/ca-shops-at-livermore-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-shops-at-livermore-1.jpg"
+  ],
   "summary": "The Shops at Livermore is a community shopping center located on West Jack London Boulevard, offering convenient neighborhood retail and dining options for Tri-Valley residents. Managed by WAS Group, this open-air center serves Livermore's growing population with accessible shopping in a well-maintained environment.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "The Shops at Livermore attracts a diverse demographic mix reflective of the Tri-Valley area, including young professionals, established families, and retirees with median to upper-middle income levels. The trade area serves Livermore's growing population of approximately 90,000 residents, along with visitors from nearby Pleasanton and Dublin, characterized by household incomes ranging from $80,000 to $150,000 annually. Primary shoppers include dual-income families aged 30-55 seeking convenient neighborhood retail and dining options, as well as empty nesters and seniors who value accessible, open-air shopping environments. The center benefits from Livermore's educated workforce, with many residents employed in technology, wine industry, and professional services sectors.",
   "description": "The Shops at Livermore, located at 3020 West Jack London Boulevard, serves as a convenient neighborhood shopping destination in the heart of Livermore's growing commercial corridor. Managed by WAS Group, this open-air community center provides residents and visitors with easy access to everyday retail and dining options in a comfortable, accessible setting. The center's strategic location along Jack London Boulevard positions it within Livermore's expanding retail landscape, serving the Tri-Valley area's affluent and growing population. With a solid 4.4-star rating from 178 reviews, the shopping center has established itself as a reliable choice for local shoppers seeking convenience and variety. Operating daily from 10:00 AM to 8:00 PM, The Shops at Livermore offers flexible shopping hours that accommodate the busy schedules of working professionals and families throughout the East Bay community.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 19.80369602031827
 }

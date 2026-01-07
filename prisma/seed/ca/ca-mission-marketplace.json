@@ -8,7 +8,9 @@
   "latitude": 33.2453104,
   "longitude": -117.2924021,
   "phone": "++1 760-630-8247",
-  "imageURLs": ["/images/malls/ca-mission-marketplace-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-mission-marketplace-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.3,
@@ -19,5 +21,6 @@
   "description": "Mission Marketplace stands as a prominent shopping destination in Oceanside, California, strategically positioned at 427 College Boulevard in the heart of North County San Diego. This well-established community center serves the diverse coastal population with a carefully curated mix of retail stores, dining establishments, and service providers that cater to everyday needs and lifestyle preferences. The center's convenient location and accessible layout make it a popular choice for local residents, military families from nearby Camp Pendleton, and visitors exploring the Oceanside area. With extended operating hours from 6:00 AM to 11:00 PM, Mission Marketplace accommodates busy schedules and provides flexibility for shoppers throughout the day. The center has earned a strong reputation in the community, reflected in its 4.3-star rating from over 2,000 reviews, demonstrating its consistent appeal and value to North County San Diego shoppers seeking quality retail experiences in a comfortable, open-air environment.",
   "summary": "Mission Marketplace is a well-regarded community shopping center located on College Boulevard in Oceanside, California, serving North County San Diego residents with a diverse mix of retail and dining options. With extended daily hours and a strong 4.3-star rating from over 2,000 reviews, it has established itself as a convenient and popular destination for everyday shopping needs.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.44998145628713
 }

@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.8382127,
   "longitude": -117.9389392,
-  "imageURLs": ["/images/malls/ca-anaheim-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-anaheim-plaza-1.jpg"
+  ],
   "summary": "Anaheim Plaza is a modern strip mall along the Santa Ana Freeway featuring big-box stores, familiar retail chains, and casual dining options. This convenient open-air shopping center serves as a practical neighborhood destination for everyday shopping needs.",
   "openFrom": 930,
   "openUntil": 2200,
@@ -18,5 +20,6 @@
   "demographics": "Anaheim Plaza attracts a diverse, middle-income demographic reflective of central Orange County's multicultural population, with a strong representation of Hispanic and Asian families. The trade area serves primarily local residents within a 3-5 mile radius, including young families and working professionals seeking convenient access to everyday necessities and value-oriented shopping. Visitors typically range from ages 25-54 with household incomes between $50,000-$85,000, drawn to the center's mix of big-box retailers and practical dining options that cater to budget-conscious shoppers making weekly or bi-weekly trips.",
   "description": "Anaheim Plaza is a modern strip mall conveniently located along the Santa Ana Freeway in Anaheim, California, serving as a practical shopping destination for Orange County residents. This open-air retail center features a strategic mix of big-box stores and familiar retail chains that cater to everyday shopping needs, from groceries and home goods to electronics and apparel. The plaza's casual dining options provide convenient meal solutions for busy families and workers in the area, making it a one-stop destination for both shopping and dining. With its accessible freeway location and ample parking, Anaheim Plaza has established itself as a reliable neighborhood shopping hub that prioritizes convenience and value. The center maintains strong community appeal with its straightforward layout and tenant mix designed to serve the practical needs of local shoppers.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 33.85228864949486
 }

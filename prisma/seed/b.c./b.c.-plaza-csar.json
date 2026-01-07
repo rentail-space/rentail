@@ -7,7 +7,9 @@
   "state": "B.C.",
   "latitude": 32.7174845,
   "longitude": -114.7294727,
-  "imageURLs": ["/images/malls/b.c.-plaza-csar-1.jpg"],
+  "imageURLs": [
+    "/images/malls/b.c.-plaza-csar-1.jpg"
+  ],
   "openFrom": 800,
   "openUntil": 1900,
   "rating": 5,
@@ -18,5 +20,6 @@
   "description": "Plaza César serves as a gateway to Los Algodones, Mexico, famously known as 'Molar City' - the world's premier dental tourism destination. Located just 7 miles from Yuma, Arizona, this shopping center caters to the thousands of daily visitors who cross the border seeking affordable, high-quality dental care at savings of up to 70% compared to U.S. and Canadian prices. The center operates Monday through Saturday from 8:00 AM to 7:00 PM, with Sunday appointments available by request, perfectly accommodating the schedules of international dental patients. With over 300 certified dental clinics in the surrounding area, Plaza César has become an essential hub for the estimated 5,000 daily visitors who travel to this small border town for procedures ranging from routine cleanings to complex full-mouth restorations. The center's strategic location and focus on serving English-speaking medical tourists has made it an integral part of Los Algodones' reputation as a senior-friendly, accessible destination for affordable healthcare services.",
   "summary": "Plaza César is a community shopping center in Los Algodones, Mexico, serving as a key hub for the thousands of dental tourists who visit 'Molar City' daily from the United States and Canada. The center supports the town's thriving medical tourism industry, offering convenient access to dental services with savings of up to 70% compared to North American prices.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 0
 }

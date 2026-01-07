@@ -8,7 +8,9 @@
   "latitude": 33.898402,
   "longitude": -118.39374880000001,
   "phone": "++1 310-546-5555",
-  "imageURLs": ["/images/malls/ca-manhattan-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-manhattan-village-1.jpg"
+  ],
   "summary": "Manhattan Village is the South Bay's premier open-air lifestyle center, offering an upscale shopping and dining experience tailored to the affluent beach communities of Manhattan Beach and surrounding areas. This well-established destination combines national retailers with specialty shops in a sophisticated coastal California setting.",
   "openFrom": 900,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "Manhattan Village attracts an affluent, educated demographic reflective of the South Bay beach communities, with median household incomes exceeding $150,000. The primary trade area draws families and professionals aged 30-55 from Manhattan Beach, Hermosa Beach, and El Segundo, with a strong presence of dual-income households with children. Shoppers tend to be style-conscious consumers who value quality and convenience, seeking a mix of fashion, dining, and lifestyle services in an upscale open-air environment. The center also captures significant spending from nearby aerospace and tech professionals working in the El Segundo corridor.",
   "description": "Manhattan Village stands as the South Bay's premier open-air shopping destination, serving the affluent beach communities of Manhattan Beach and surrounding areas since its establishment. Located at 3200 North Sepulveda Boulevard, this upscale lifestyle center has evolved into a sophisticated retail hub that perfectly captures the relaxed yet refined sensibility of coastal Southern California living. The center features a carefully curated mix of national retailers, specialty boutiques, and dining establishments that cater to the discerning tastes of local residents and visitors alike. With its open-air design, the property offers a pleasant shopping experience enhanced by the area's ideal climate and proximity to the Pacific Ocean. Manhattan Village has maintained its position as a community gathering place, combining retail therapy with lifestyle amenities that reflect the active, health-conscious culture of the South Bay, making it an essential destination for both everyday needs and special shopping occasions.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 49.0457292849902
 }

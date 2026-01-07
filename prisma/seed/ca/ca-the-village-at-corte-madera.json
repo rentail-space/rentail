@@ -8,7 +8,9 @@
   "latitude": 37.9293142,
   "longitude": -122.51448169999998,
   "phone": "++1 415-924-8588",
-  "imageURLs": ["/images/malls/ca-the-village-at-corte-madera-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-village-at-corte-madera-1.jpg"
+  ],
   "summary": "The Village at Corte Madera is Marin County's premier open-air lifestyle center featuring high-end department stores, brand-name retailers, and upscale dining amid beautifully landscaped pedestrian walkways. This sophisticated shopping destination serves the affluent North Bay community with a carefully curated mix of quality retailers in an inviting outdoor environment.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "The Village at Corte Madera attracts an affluent, educated demographic from Marin County, one of the wealthiest counties in California. Primary visitors are middle to upper-income households with median incomes exceeding $125,000, skewing toward families and professionals aged 35-65. The trade area draws from nearby communities like Mill Valley, Larkspur, and San Rafael, with shoppers seeking premium brands and upscale dining experiences. Visitors typically exhibit sophisticated shopping preferences, favoring quality over value, with strong interest in fashion, home goods, and experiential retail.",
   "description": "The Village at Corte Madera stands as Marin County's premier open-air shopping destination, offering an elevated retail experience along landscaped pedestrian walkways just north of San Francisco. This upscale lifestyle center seamlessly blends high-end department stores with sought-after brand-name shops and diverse dining options, creating a sophisticated shopping environment that reflects the refined tastes of Marin County residents. The center's thoughtfully designed outdoor layout encourages leisurely strolling through its collection of retailers, with wide walkways and attractive landscaping that enhance the shopping experience. Located along the historic Redwood Highway in Corte Madera, the Village serves as a retail hub for the North Bay area, drawing visitors from throughout Marin County and beyond. With its carefully curated tenant mix, the center caters to discerning shoppers seeking quality brands, contemporary fashion, and upscale amenities in an inviting outdoor setting that takes advantage of the region's temperate climate.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 44.070254785638845
 }

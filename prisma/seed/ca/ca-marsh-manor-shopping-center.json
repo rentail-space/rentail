@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 37.4784065,
   "longitude": -122.18712310000001,
-  "imageURLs": ["/images/malls/ca-marsh-manor-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-marsh-manor-shopping-center-1.jpg"
+  ],
   "summary": "Marsh Manor Shopping Center is a family-managed community destination in Redwood City that has served the mid-peninsula since the 1950s. With locally-owned shops, diverse dining options, fitness studios, and a vibrant outdoor patio hosting live music and community events, it offers a charming neighborhood atmosphere that blends convenience with community connection.",
   "openFrom": 900,
   "openUntil": 1800,
@@ -19,5 +21,6 @@
   "description": "Marsh Manor Shopping Center has been a beloved mid-peninsula destination since the 1950s, managed by the same family for over seven decades. This charming open-air community center offers a unique blend of locally-owned shops, restaurants, and services that create a true neighborhood gathering place. The center features an inviting outdoor patio that serves as the heart of community life, hosting live music on Thursday nights, trivia events, wine tastings, art fairs, and a popular summer concert series. Tenants include Delucchi's Market and Delicatessen as the grocery anchor, complemented by diverse dining options like Freewheel Brewing Company, State of Mind Pizzeria, Los Gallos Taqueria, and Feast and Floral Wine Bar. Health and wellness offerings include CorePower Yoga, StretchWorks, Studio K-Fit, and Bay Area Integrative Health Center, while essential services like Wells Fargo Bank, UPS Shipping, and Nature's Green Cleaners round out the tenant mix. The center's commitment to maintaining a friendly, personal atmosphere while providing modern amenities like free Wi-Fi and EV charging stations makes it a standout destination for both daily errands and social gatherings.",
   "numberOfStores": 20,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 24.61945674353458
 }

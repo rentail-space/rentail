@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 37.672119099999996,
   "longitude": -122.4708116,
-  "imageURLs": ["/images/malls/ca-serramonte-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-serramonte-center-1.jpg"
+  ],
   "summary": "Serramonte Center is Daly City's top shopping destination, offering a comprehensive mix of retail, dining, and entertainment options in one convenient location. This regional mall serves the diverse San Francisco Peninsula community with popular national brands and actively supports local schools through community programs.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -18,5 +20,6 @@
   "demographics": "Serramonte Center serves a diverse, middle-income demographic in the San Francisco Peninsula, drawing primarily from Daly City's large Asian-American population and surrounding communities including Pacifica, South San Francisco, and San Bruno. The trade area attracts families and young professionals with household incomes ranging from $60,000 to $120,000, with a significant concentration of first-generation immigrants and multigenerational households. Shoppers typically seek value-oriented fashion, dining options that reflect the area's cultural diversity, and convenient one-stop shopping for everyday needs. The center benefits from its proximity to BART and major highways, making it a regional destination for budget-conscious consumers seeking mainstream retail brands.",
   "description": "Serramonte Center stands as Daly City's premier shopping destination, serving the diverse communities of the San Francisco Peninsula since its opening. This enclosed regional mall offers a comprehensive retail experience with shopping, dining, and entertainment all under one roof, making it a convenient hub for families and shoppers throughout the Bay Area. The center features a strong mix of national retailers and popular brands that cater to the area's multicultural population, with particular strength in fashion, accessories, and family-oriented stores. Beyond shopping, Serramonte Center actively engages with the local community through programs like \"Earning For Learning,\" which supports local schools and demonstrates the center's commitment to giving back. With convenient access via public transportation and major highways, extended operating hours seven days a week, and a welcoming atmosphere, Serramonte Center has established itself as more than just a shopping mall—it's a gathering place where the community comes together to shop, dine, and create lasting memories.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 32.33976406356234
 }

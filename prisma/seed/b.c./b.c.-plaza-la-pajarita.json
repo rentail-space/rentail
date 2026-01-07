@@ -8,7 +8,9 @@
   "latitude": 32.4442851,
   "longitude": -117.0351598,
   "phone": "++52 664 975 2374",
-  "imageURLs": ["/images/malls/b.c.-plaza-la-pajarita-1.jpg"],
+  "imageURLs": [
+    "/images/malls/b.c.-plaza-la-pajarita-1.jpg"
+  ],
   "summary": "Plaza La Pajarita is a well-regarded community shopping center serving the Pórtico de San Antonio neighborhood in eastern Tijuana. With over 2,300 positive reviews and a 4.5-star rating, it provides convenient retail, dining, and services for local residents.",
   "openFrom": 900,
   "openUntil": 1900,
@@ -19,5 +21,6 @@
   "demographics": "Plaza La Pajarita serves the growing residential communities of Pórtico de San Antonio in eastern Tijuana, attracting primarily middle-income Mexican families and young professionals. The trade area consists of households with moderate to middle income levels, with a mix of families with children and working-age adults seeking convenient neighborhood shopping. Visitors typically engage in routine shopping patterns, combining grocery runs with services and casual dining, reflecting the practical needs of the surrounding suburban residential developments.",
   "description": "Plaza La Pajarita is a community shopping center located in the Pórtico de San Antonio neighborhood of eastern Tijuana, Baja California. Situated along Boulevard Francisco Zarco, this center serves as a convenient retail destination for the growing residential communities in this part of the city. The plaza provides essential shopping and services to local families and residents, offering a mix of retail stores, dining options, and service providers that cater to everyday needs. With a solid 4.5-star rating from over 2,300 reviews, Plaza La Pajarita has established itself as a reliable neighborhood shopping destination. The center operates daily from 9:00 AM to 7:00 PM, providing accessible hours for working families and residents throughout the week.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.294442888202116
 }

@@ -8,7 +8,9 @@
   "latitude": 37.7280313,
   "longitude": -122.477088,
   "phone": "++1 415-564-8848",
-  "imageURLs": ["/images/malls/ca-stonestown-galleria-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-stonestown-galleria-1.jpg"
+  ],
   "summary": "Stonestown Galleria is a two-story regional shopping center in San Francisco featuring name-brand retailers, department stores, diverse dining options, and a premium Regal Cinemas theater. The mall is pet-friendly and currently undergoing an exciting transformation into a mixed-use neighborhood with new homes, parks, and enhanced community spaces.",
   "openFrom": 1100,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Stonestown Galleria attracts a diverse mix of San Francisco residents and visitors, with a strong representation of middle to upper-middle income households from the surrounding Sunset District, Parkmerced, and West Portal neighborhoods. The trade area draws families, young professionals, and students from nearby San Francisco State University, creating a balanced demographic profile spanning ages 25-65. Shoppers typically seek convenient access to both everyday necessities and specialty retail, with preferences for name-brand retailers and dining options that reflect San Francisco's multicultural population.",
   "description": "Stonestown Galleria stands as an iconic shopping destination in San Francisco's southwestern neighborhoods, serving the community as a comprehensive retail and entertainment hub since its establishment. This two-story enclosed regional mall features an impressive collection of name-brand retail shops, department stores, restaurants, and a state-of-the-art Regal Cinemas theater with ScreenX, 4DX, and RPX experiences. The center welcomes visitors with a pet-friendly policy, allowing dogs in designated stores, public spaces, and common areas, making it a truly inclusive community gathering place. Stonestown Galleria is currently embarking on an exciting transformation known as \"Stonestown: The Next Chapter,\" which will gradually evolve this shopping destination into a vibrant, walkable mixed-use neighborhood featuring new residential homes, green spaces, parks, and a bustling main street that integrates retail, dining, and community amenities. With convenient hours throughout the week and extended Friday and Saturday shopping until 9:00 PM, Stonestown Galleria continues to serve as a cornerstone of San Francisco's retail landscape while embracing a forward-thinking vision for urban development.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 32.98475729529598
 }

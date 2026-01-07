@@ -8,7 +8,9 @@
   "latitude": 34.1549292,
   "longitude": -118.46655069999998,
   "phone": "++1 818-382-4100",
-  "imageURLs": ["/images/malls/ca-sherman-oaks-galleria-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-sherman-oaks-galleria-1.jpg"
+  ],
   "summary": "Sherman Oaks Galleria is a chic open-air lifestyle center that has served the San Fernando Valley for over 30 years, featuring popular dining destinations like The Cheesecake Factory and Buffalo Wild Wings, a Regal multiplex theater, and a 24-hour gym. This vibrant community hub seamlessly combines retail, restaurants, office space, and entertainment in the heart of Sherman Oaks.",
   "openFrom": 0,
   "openUntil": 2400,
@@ -19,5 +21,6 @@
   "demographics": "Sherman Oaks Galleria attracts an affluent, educated demographic from the San Fernando Valley, with visitors primarily aged 25-54 representing middle to upper-middle income households. The trade area draws from Sherman Oaks, Encino, and Studio City, neighborhoods known for high median incomes exceeding $100,000 and a mix of young professionals, families, and entertainment industry workers. Shoppers here prefer upscale casual dining experiences and quality retail over discount shopping, with strong evening and weekend traffic driven by the Regal multiplex theater and restaurant scene.",
   "description": "Sherman Oaks Galleria has been providing magnificent experiences for over 30 years as one of the San Fernando Valley's premier open-air lifestyle destinations. Located at 15301 Ventura Boulevard in the heart of Sherman Oaks, this chic shopping and entertainment complex seamlessly blends retail, dining, office space, and entertainment into a vibrant community gathering place. The Galleria features an impressive array of dining options including The Cheesecake Factory, Buffalo Wild Wings, Almost Famous Burger, Hana Grill, Ben & Jerry's, and Robeks Juice, catering to diverse tastes from casual to upscale. Entertainment is anchored by a Regal multiplex theater offering the latest films, while the center also houses a 24-hour fitness facility for health-conscious visitors. With its convenient location on Ventura Boulevard, ample parking, and the exclusive Galleria Gold Program offering members first access to deals and promotions, Sherman Oaks Galleria continues to serve as a cornerstone of the community, drawing locals and visitors alike for shopping, dining, and entertainment experiences.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 29.919259980279243
 }

@@ -8,7 +8,9 @@
   "latitude": 33.7601621,
   "longitude": -118.1149465,
   "phone": "++1 562-598-2728",
-  "imageURLs": ["/images/malls/ca-marina-pacifica-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-marina-pacifica-1.jpg"
+  ],
   "summary": "Marina Pacifica is Long Beach's premier waterfront lifestyle center featuring movie theaters, diverse shopping, and dining options in an open-air setting along Pacific Coast Highway. With its marina-adjacent location and ample parking, the center offers a relaxed coastal shopping experience that has earned strong ratings from thousands of visitors.",
   "openFrom": 600,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "Marina Pacifica attracts an affluent, coastal demographic primarily consisting of upper-middle-class families and professionals aged 35-65 with household incomes exceeding $100,000. The trade area draws from the upscale neighborhoods of Long Beach's coastal communities, including Naples Island and Belmont Shore, where residents seek convenient access to quality shopping and dining near the marina. Visitors typically exhibit preferences for experiential retail, waterfront dining, and entertainment options like the movie theater, with shopping patterns reflecting a lifestyle-oriented approach rather than necessity-based trips.",
   "description": "Marina Pacifica stands as Long Beach's premier waterfront shopping destination, offering a sophisticated blend of retail, dining, and entertainment along the scenic Pacific Coast Highway. This open-air lifestyle center has established itself as a cornerstone of the coastal community, providing residents and visitors with convenient access to quality shopping experiences complemented by its picturesque marina-adjacent location. The center features a diverse tenant mix that caters to the discerning tastes of Long Beach's coastal communities, anchored by popular movie theaters that serve as a major entertainment draw. With copious parking and an inviting outdoor atmosphere, Marina Pacifica creates a relaxed shopping environment where guests can enjoy the Southern California coastal lifestyle. The center's strategic location along Pacific Coast Highway makes it easily accessible to both local residents and visitors exploring the Long Beach waterfront, while its strong ratings and thousands of positive reviews reflect its enduring popularity as a community gathering place.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.21294922971623
 }

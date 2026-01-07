@@ -8,7 +8,9 @@
   "latitude": 34.0355958,
   "longitude": -118.685654,
   "phone": "++1 310-826-5636",
-  "imageURLs": ["/images/malls/ca-malibu-country-mart-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-malibu-country-mart-1.jpg"
+  ],
   "summary": "Malibu Country Mart is California's premier seaside lifestyle destination, offering 50 years of high-end shopping, trendy dining, and wellness services in a relaxed outdoor setting. This upscale open-air complex features chic boutiques and restaurants that perfectly capture Malibu's sophisticated yet casual coastal lifestyle.",
   "openFrom": 700,
   "openUntil": 2300,
@@ -19,5 +21,6 @@
   "demographics": "Malibu Country Mart attracts an affluent, upscale demographic reflective of its exclusive Malibu location, with visitors primarily consisting of high-income households earning well above the national median. The trade area draws wealthy residents from Malibu and surrounding coastal communities, along with tourists seeking premium shopping and dining experiences. Typical visitors include affluent families, professionals aged 35-65, and fashion-conscious consumers with significant discretionary income. The center caters to shoppers seeking luxury boutiques, wellness services, and upscale dining in a relaxed, outdoor seaside setting.",
   "description": "Malibu Country Mart stands as California's premier seaside destination for high-end shopping and dining, celebrating over 50 years of serving the exclusive Malibu community. This relaxed outdoor shopping complex features chic boutiques, trendy restaurants, and wellness services set against the backdrop of Malibu's stunning coastal landscape. The center offers a carefully curated mix of upscale retailers and dining establishments, including newly opened tenants like LA Sculpt wellness studio and The Bunker surf and skate shop, blending luxury shopping with the laid-back California beach lifestyle. Visitors can explore diverse categories including shopping, dining, wellness, and services, all within an open-air environment that includes family-friendly amenities like a playground. Located at 3835 Cross Creek Road, Malibu Country Mart has established itself as a beloved destination where sophisticated retail meets the casual elegance of coastal living, making it a must-visit location for both locals and tourists seeking an authentic Malibu experience.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 45.383325786237506
 }

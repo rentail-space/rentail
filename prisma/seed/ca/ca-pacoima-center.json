@@ -8,7 +8,9 @@
   "latitude": 34.245313,
   "longitude": -118.4194137,
   "phone": "++1 610-215-7939",
-  "imageURLs": ["/images/malls/ca-pacoima-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-pacoima-center-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 0,
   "rating": 4.2,
@@ -21,5 +23,6 @@
   "squareFootage": 215930,
   "summary": "Pacoima Center is a 215,930 square foot community shopping center anchored by Food 4 Less, Target, and Ross Dress For Less, drawing 4.9 million annual visits. Located at a high-traffic intersection with direct I-5 access, the center serves over 268,000 residents within 3 miles with value-oriented retail and essential services.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 14.623262627232068
 }

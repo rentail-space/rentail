@@ -8,7 +8,9 @@
   "latitude": 36.1507438,
   "longitude": -115.2057734,
   "phone": "++1 702-877-0087",
-  "imageURLs": ["/images/malls/nv-fantastic-indoor-swap-meet-las-vegas-1.jpg"],
+  "imageURLs": [
+    "/images/malls/nv-fantastic-indoor-swap-meet-las-vegas-1.jpg"
+  ],
   "summary": "The Fantastic Indoor Swap Meet is a long-running, expansive indoor flea market featuring numerous independent vendors selling new goods, collectibles, and specialty items. Open Friday through Sunday, this climate-controlled marketplace offers a unique alternative shopping experience in Las Vegas with hundreds of vendor booths under one roof.",
   "openFrom": 1000,
   "openUntil": 1800,
@@ -19,5 +21,6 @@
   "demographics": "The Fantastic Indoor Swap Meet attracts a diverse, value-conscious demographic spanning multiple generations and income levels. The primary visitor base consists of bargain hunters, collectors, and families seeking affordable shopping alternatives in the Las Vegas area. The trade area draws from both local residents in the surrounding neighborhoods near Decatur and Oakey, as well as tourists looking for unique finds and collectibles. Shoppers typically visit on weekends to browse the extensive vendor offerings, with many being repeat customers who appreciate the flea market atmosphere and the opportunity to discover one-of-a-kind items at competitive prices.",
   "description": "The Fantastic Indoor Swap Meet has been a Las Vegas institution for decades, offering a unique shopping experience at the corner of Decatur Boulevard and Oakey. This vast indoor marketplace brings together numerous independent vendors under one roof, creating a vibrant community hub where shoppers can discover everything from collectibles and Funko Pops at Geeky Collectiblez to custom products, perfumes at A Plus Perfume, and curated clothing at Dee & Her Sons. Operating Friday through Sunday from 10am to 6pm, the swap meet provides a climate-controlled alternative to traditional outdoor flea markets, making it comfortable to shop year-round in the Las Vegas heat. The facility features hundreds of individual vendor booths, each offering their own specialty items, creating an ever-changing treasure hunt experience for visitors. Beyond just shopping, the swap meet has become a destination for entrepreneurs and small business owners, with booth rental opportunities available and a dedicated sales office to support vendors in building their businesses within this thriving marketplace community.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 15.277036530542691
 }

@@ -8,7 +8,9 @@
   "latitude": 33.0417313,
   "longitude": -117.1584687,
   "phone": "++1 858-546-4617",
-  "imageURLs": ["/images/malls/ca-cielo-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-cielo-village-1.jpg"
+  ],
   "openFrom": 900,
   "openUntil": 1700,
   "rating": 4.5,
@@ -19,5 +21,6 @@
   "description": "Cielo Village is a captivating Tuscan-style event venue nestled in the beautiful landscape of Rancho Santa Fe, California, offering an enchanting Italian village setting for weddings, showers, and special celebrations. This unique open-air venue recreates the picturesque ambiance of an authentic Italian village, providing couples and event planners with a memorable European-inspired backdrop without the burden of an exorbitant price tag. The venue accommodates up to 250 guests and features a charming courtyard perfect for ceremonies and receptions, complemented by ample parking with over 100 spots in above and below-ground facilities. Located on Calle Ambiente, just six miles east of Interstate 5 via Del Dios Road, Cielo Village operates Monday through Friday from 5:30 p.m. to 10 p.m. and weekends from 9 a.m. to 10 p.m., offering flexible event hosting with options for food trucks, mobile bars, and live music or DJ entertainment until 10 p.m. The venue provides a full-service event experience with competitive pricing, 10% discounts for nonprofits, military, and religious events, and the flexibility to accommodate custom decorations, making it an ideal choice for creating unforgettable memories in Southern California's most prestigious community.",
   "summary": "Cielo Village is an enchanting Tuscan-style event venue in Rancho Santa Fe offering an authentic Italian village setting for weddings, showers, and celebrations. With capacity for up to 250 guests, the open-air venue features charming courtyard spaces, flexible event options, and competitive pricing in one of Southern California's most prestigious locations.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.881552021848677
 }

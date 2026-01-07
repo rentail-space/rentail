@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.976576,
   "longitude": -117.3418637,
-  "imageURLs": ["/images/malls/ca-farm-house-collective-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-farm-house-collective-1.jpg"
+  ],
   "summary": "Farm House Collective is a community-oriented lifestyle center in Riverside featuring locally-sourced products, artisanal goods, and unique dining experiences. Located near UC Riverside on University Avenue, this curated destination offers an authentic alternative to traditional retail with a focus on supporting local businesses and sustainable practices.",
   "openFrom": 1000,
   "openUntil": 2200,
@@ -18,5 +20,6 @@
   "demographics": "Farm House Collective attracts a diverse mix of Riverside residents and University of California, Riverside students, with a strong representation of millennials and Gen Z shoppers aged 18-35. The trade area draws from middle to upper-middle income households who value locally-sourced products, artisanal goods, and community-oriented shopping experiences. Visitors typically seek unique, curated retail and dining options rather than mass-market chains, with shopping patterns emphasizing quality over quantity and a preference for supporting local businesses and sustainable practices.",
   "description": "Farm House Collective is a distinctive lifestyle destination located on University Avenue in Riverside, California, offering a refreshing alternative to traditional shopping centers. This thoughtfully curated center embraces a farm-to-table philosophy and community-focused approach, bringing together local artisans, specialty retailers, and dining establishments under one roof. The center's name reflects its commitment to showcasing locally-sourced products, handcrafted goods, and authentic experiences that celebrate the rich agricultural heritage of the Inland Empire region. With its convenient location near UC Riverside, Farm House Collective has become a popular gathering spot for students, families, and residents seeking unique shopping and dining experiences. The center maintains a welcoming atmosphere with extended hours from 10 AM to 10 PM daily, earning an impressive 4.6-star rating from over 169 reviews, testament to its quality offerings and community appeal.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 20.496557682445793
 }

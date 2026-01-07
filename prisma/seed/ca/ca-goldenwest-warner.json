@@ -8,7 +8,9 @@
   "latitude": 33.7163047,
   "longitude": -118.0043547,
   "phone": "++1 714-587-0202",
-  "imageURLs": ["/images/malls/ca-goldenwest-warner-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-goldenwest-warner-1.jpg"
+  ],
   "openFrom": 900,
   "openUntil": 2200,
   "rating": 4.4,
@@ -19,5 +21,6 @@
   "description": "Goldenwest & Warner is a neighborhood shopping center conveniently located at the intersection of Goldenwest Street and Warner Avenue in Huntington Beach, California. This community-oriented retail destination serves the local residential population with a practical mix of everyday services and conveniences. The center's strategic location in Orange County's desirable coastal region provides easy access for residents seeking quick shopping trips and essential services. With a solid 4.4-star rating from nearly 800 reviews, the property has established itself as a reliable neighborhood retail hub. The center maintains convenient operating hours from 9:00 AM to 10:00 PM, accommodating the busy schedules of Huntington Beach residents and visitors alike.",
   "summary": "Goldenwest & Warner is a neighborhood shopping center located at a prime Huntington Beach intersection, serving the local community with convenient retail and services. The property maintains strong customer satisfaction with a 4.4-star rating from nearly 800 reviews.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 25.537625443886423
 }

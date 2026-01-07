@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 35.341673,
   "longitude": -119.0057862,
-  "imageURLs": ["/images/malls/ca-la-pulga-el-remate-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-la-pulga-el-remate-1.jpg"
+  ],
   "summary": "La Pulga El Remate is a popular flea market-style shopping center on Ming Avenue in Bakersfield, offering diverse vendors with great bargains and authentic cultural products. With a 4.3-star rating and extended daily hours, it serves as a vibrant community hub known for good prices and welcoming atmosphere.",
   "openFrom": 600,
   "openUntil": 2100,
@@ -18,5 +20,6 @@
   "demographics": "La Pulga El Remate primarily serves Bakersfield's Hispanic and Latino community, attracting families and value-conscious shoppers seeking affordable goods and authentic cultural products. The trade area draws from working-class and middle-income households in east Bakersfield, with visitors typically ranging from young families to middle-aged adults. Shoppers come for bargain hunting, traditional foods, and a community-oriented marketplace atmosphere that reflects the cultural preferences of the local Hispanic population.",
   "description": "La Pulga El Remate is a vibrant community marketplace located on Ming Avenue in Bakersfield, California, serving as a cultural hub for the local Hispanic community. This bustling shopping center operates as a traditional flea market-style venue, offering visitors a unique shopping experience with diverse vendors selling everything from clothing and household goods to authentic food and cultural items. Open daily from 6:00 AM to 9:00 PM, the center provides extended hours to accommodate shoppers throughout the day. With a strong 4.3-star rating from nearly 600 reviews, customers consistently praise the center for its great bargains, good prices, and welcoming atmosphere. The marketplace has become a beloved destination where families can find affordable products while enjoying good food and connecting with their community in an authentic, traditional market setting.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 11.917826167789398
 }

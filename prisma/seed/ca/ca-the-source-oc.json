@@ -8,7 +8,9 @@
   "latitude": 33.8597034,
   "longitude": -117.99782420000001,
   "phone": "++1 714-521-8858",
-  "imageURLs": ["/images/malls/ca-the-source-oc-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-source-oc-1.jpg"
+  ],
   "summary": "The Source OC is Southern California's premier Asian-inspired lifestyle destination, featuring an eclectic mix of international dining, K-pop and cosmetics shopping, cinema entertainment, and comprehensive services. This modern open-air complex offers both indoor and outdoor spaces where visitors can experience authentic global culture through food, retail, and entertainment.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "The Source OC attracts a diverse, multicultural demographic with a strong Asian-American presence, particularly Korean and pan-Asian communities drawn to the center's authentic international dining and retail offerings. The primary visitor base consists of millennials and Gen Z shoppers aged 18-35, along with families seeking unique cultural experiences and entertainment options. The trade area serves middle to upper-middle income households with annual incomes ranging from $60,000 to $120,000, who value experiential shopping and are willing to travel for specialty goods like K-pop merchandise, Asian cosmetics, and authentic international cuisine. Shopping patterns reflect a destination-oriented approach, with visitors often spending extended time enjoying the entertainment and dining options rather than quick convenience shopping.",
   "description": "The Source OC stands as Southern California's premier Asian-inspired dining and entertainment destination, offering an eclectic fusion of international culture and modern lifestyle amenities in the heart of Buena Park. This innovative lifestyle center has transformed the traditional shopping experience into a vibrant cultural hub, featuring everything from South Korea's popular Myrung Rang Hot Dog to the elegant Italian restaurant Il Fiora, alongside a diverse array of K-pop goods, cosmetics, skincare, and fashion from around the world. The center's entertainment offerings include a cinema showcasing foreign films, gaming venues, and interactive experiences that create an immersive environment for visitors seeking more than just retail therapy. With both indoor and outdoor dining spaces, The Source OC provides a comfortable year-round destination where guests can explore authentic international flavors and unique shopping experiences. The center also offers comprehensive services including banking, hair styling, and photo studio facilities, making it a true one-stop destination for the community's diverse needs.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 29.41694460454804
 }

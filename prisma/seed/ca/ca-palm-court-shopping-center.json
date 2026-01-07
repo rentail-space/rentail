@@ -8,7 +8,9 @@
   "latitude": 34.0645972,
   "longitude": -117.43175729999999,
   "phone": "++1 909-799-8460",
-  "imageURLs": ["/images/malls/ca-palm-court-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-palm-court-shopping-center-1.jpg"
+  ],
   "summary": "Palm Court Shopping Center is a casual neighborhood retail destination in Fontana featuring discount department stores, local services, and casual dining options. With over 3,600 positive reviews and a 4.4-star rating, this accessible shopping spot serves as a convenient hub for everyday shopping needs in the Inland Empire community.",
   "openFrom": 1000,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "Palm Court Shopping Center serves a diverse, middle-income demographic in Fontana, California, with a strong representation of families and value-conscious shoppers. The trade area draws primarily from the Inland Empire region, attracting households with median incomes ranging from $50,000 to $75,000 annually. Typical visitors include working families seeking convenient access to discount retailers, everyday services, and casual dining options. The center's tenant mix reflects the practical shopping needs of its community, with a focus on affordability and accessibility rather than luxury or experiential retail.",
   "description": "Palm Court Shopping Center is a well-established neighborhood retail destination located at 16920 Slover Avenue in Fontana, California. This casual shopping spot has become a community staple, offering residents convenient access to discount department stores, local services, and a variety of casual eateries all in one accessible location. The center operates daily from 10:00 AM to 10:00 PM, providing flexible shopping hours for busy families and working professionals throughout the Inland Empire. With an impressive 4.4-star rating from over 3,600 reviews, Palm Court has earned a reputation for delivering value-oriented retail options that meet the everyday needs of Fontana residents. The center's open-air layout and practical tenant mix make it an ideal destination for quick errands, family shopping trips, and casual dining experiences in a relaxed, neighborhood-friendly atmosphere.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 15.654090063222462
 }

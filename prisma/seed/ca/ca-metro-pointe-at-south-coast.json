@@ -8,7 +8,9 @@
   "latitude": 33.6889641,
   "longitude": -117.895049,
   "phone": "++1 844-462-7342",
-  "imageURLs": ["/images/malls/ca-metro-pointe-at-south-coast-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-metro-pointe-at-south-coast-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2200,
   "rating": 4.7,
@@ -20,5 +22,6 @@
   "numberOfStores": 30,
   "summary": "Metro Pointe at South Coast is an open-air lifestyle center in Costa Mesa featuring premier off-price retailers including Nordstrom Rack, Saks OFF 5TH, Marshalls, and Bloomingdale's Outlet alongside popular stores like Best Buy and The Container Store. The center offers a complete shopping and entertainment experience with diverse dining options, Edwards Theatre, and regular live entertainment programming.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 23.10408982929953
 }

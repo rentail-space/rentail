@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 34.0248391,
   "longitude": -118.28413479999999,
-  "imageURLs": ["/images/malls/ca-usc-village-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-usc-village-1.jpg"
+  ],
   "summary": "USC Village is a modern lifestyle center serving the University of Southern California community with diverse dining, shopping, fitness, and service options. The open-air development features popular brands like CAVA, Amazon, and specialty coffee shops, while hosting community events that make it a vibrant gathering place for students, faculty, and local residents.",
   "openFrom": 600,
   "openUntil": 2000,
@@ -18,5 +20,6 @@
   "demographics": "USC Village primarily serves the University of Southern California student population, faculty, and staff, along with surrounding South Los Angeles residents. The trade area attracts a younger demographic aged 18-35, with a significant student population seeking convenient dining, services, and everyday essentials. The center caters to diverse income levels, from budget-conscious students to higher-income professionals and families in the university community. Shopping patterns emphasize quick-service dining, grab-and-go food options, fitness services, and essential retail that supports the daily needs of an active, education-focused population.",
   "description": "USC Village is a vibrant mixed-use development located at 3201 South Hoover Street in Los Angeles, serving as the retail and dining hub for the University of Southern California community and surrounding neighborhoods. This modern lifestyle center transforms everyday errands into engaging experiences, offering a carefully curated mix of dining, shopping, fitness, and service options that cater to students, faculty, and local residents. The center features popular tenants including CAVA for customizable Mediterranean bowls, Dulce for specialty coffee and Vietnamese-style beverages, Amazon 4-star for top-rated products, and GNC for health and wellness needs. Beyond retail, USC Village hosts signature community events and provides essential services through its Mobility Hub, creating a true gathering place for the Trojan community. With its open-air design, diverse cuisine options, and focus on convenience and community engagement, USC Village has become an integral part of campus life and the broader South Los Angeles neighborhood since its opening.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 24.438900877492664
 }

@@ -8,7 +8,9 @@
   "latitude": 33.1292472,
   "longitude": -117.0874051,
   "phone": "++1 760-804-6900",
-  "imageURLs": ["/images/malls/ca-mission-escondido-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-mission-escondido-shopping-center-1.jpg"
+  ],
   "openFrom": 900,
   "openUntil": 2100,
   "rating": 4.2,
@@ -20,5 +22,6 @@
   "numberOfStores": 8,
   "summary": "Mission Escondido Shopping Center is a recently upgraded neighborhood retail destination in Escondido featuring diverse international dining options including Korean BBQ, Mediterranean, Thai, and Mexican restaurants. The center also offers essential services like dental care, nail spa, and auto detailing supplies, serving the local community's everyday needs.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 21.155517094974257
 }

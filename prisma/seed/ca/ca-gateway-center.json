@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.613882,
   "longitude": -117.6793707,
-  "imageURLs": ["/images/malls/ca-gateway-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-gateway-center-1.jpg"
+  ],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.3,
@@ -18,5 +20,6 @@
   "description": "Gateway Center is a neighborhood shopping destination located at 24000 Alicia Parkway in the heart of Mission Viejo, California. This community-oriented center serves the surrounding residential neighborhoods with a carefully curated mix of dining, shopping, fitness, and essential services that cater to daily lifestyle needs. The center's convenient location off Alicia Parkway makes it easily accessible for local residents seeking quality options close to home. Gateway Center has established itself as a gathering place for the Mission Viejo community, offering a welcoming environment where neighbors can enjoy meals, complete errands, and access various services all in one location. Managed by DJM Properties, the center continues to provide exceptional leasing opportunities for businesses looking to serve this thriving South Orange County market.",
   "summary": "Gateway Center is a neighborhood shopping destination in Mission Viejo offering dining, shopping, fitness, and services conveniently located off Alicia Parkway. The center serves the local community with a mix of everyday amenities and quality retailers in an accessible location.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 23.043079910864222
 }

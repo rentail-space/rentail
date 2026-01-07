@@ -8,7 +8,9 @@
   "latitude": 32.8385696,
   "longitude": -116.7772979,
   "phone": "++1 619-445-5800",
-  "imageURLs": ["/images/malls/ca-ayres-lodge-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-ayres-lodge-center-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2200,
   "rating": 4.3,
@@ -19,5 +21,6 @@
   "description": "Ayres Lodge Center is a small commercial development located at 1263-1271 Alpine Boulevard in the heart of Alpine, California, a charming mountain community in eastern San Diego County. The center is anchored by the Ayres Lodge Alpine, a well-regarded hotel property that serves as both a destination for travelers and a community gathering point for this rural area. With its convenient location along Alpine Boulevard, the center provides essential services to both local residents and visitors exploring the scenic backcountry of San Diego County. The property maintains strong ratings with a 4.3-star average across 264 reviews, reflecting its reputation for quality service and hospitality. Operating daily from 6:00 AM to 10:00 PM, the center offers accessibility and convenience to the Alpine community, which sits at an elevation of approximately 1,800 feet and attracts outdoor enthusiasts year-round.",
   "summary": "Ayres Lodge Center is a small commercial property in Alpine, California, anchored by the Ayres Lodge hotel. Located along Alpine Boulevard in this scenic mountain community, the center serves both local residents and travelers with convenient services and hospitality.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 20.825793771080548
 }

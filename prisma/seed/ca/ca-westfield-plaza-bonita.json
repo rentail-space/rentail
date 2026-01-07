@@ -8,7 +8,9 @@
   "latitude": 32.656186,
   "longitude": -117.065741,
   "phone": "++1 619-267-2850",
-  "imageURLs": ["/images/malls/ca-westfield-plaza-bonita-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-westfield-plaza-bonita-1.jpg"
+  ],
   "summary": "Westfield Plaza Bonita is a major regional mall in National City featuring over 100 stores including Macy's, Target, Nordstrom Rack, and JCPenney, plus diverse dining and entertainment options like AMC Theatres and Round1 Bowling & Arcade. This popular South Bay destination offers a comprehensive shopping experience with popular fashion retailers, specialty stores, and family-friendly amenities.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Westfield Plaza Bonita serves a diverse, middle-income demographic in the South Bay region of San Diego County, with a strong Hispanic population and multi-generational households. The trade area includes National City, Chula Vista, and surrounding communities, attracting families and young adults seeking value-oriented shopping and entertainment options. Visitors typically range from middle to moderate income levels, with a preference for accessible fashion retailers, family dining, and entertainment venues like AMC Theatres and Round1 Bowling & Arcade.",
   "description": "Westfield Plaza Bonita is a prominent regional shopping destination located in National City, California, serving the vibrant South Bay communities of San Diego County. This enclosed mall features a diverse mix of over 100 retailers and dining establishments, anchored by major department stores including Macy's, JCPenney, Target, and Nordstrom Rack. The center offers an extensive selection of popular fashion brands such as H&M, Aerie, Aeropostale, JD Sports, and Shoe Palace, alongside specialty retailers like Bath & Body Works, Crocs, Pandora, and the newly opened Miniso and K MOMO. Entertainment options abound with AMC Theatres providing the latest movie releases and Round1 Bowling & Arcade offering family-friendly fun. The dining scene is equally impressive, featuring a variety of options from Outback Steakhouse and The Broken Yolk Cafe to authentic Asian cuisine at Manna BBQ, Tajima Ramen, and the newly opened Tacos El Franc, plus quick bites at Potato Corner. With convenient amenities including free Wi-Fi throughout the center, ample parking, and the Westfield mobile app for easy navigation, Plaza Bonita provides a comprehensive shopping and entertainment experience for the entire family.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 37.5305063152572
 }

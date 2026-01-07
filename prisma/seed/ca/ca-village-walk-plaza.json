@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.5654067,
   "longitude": -117.2115253,
-  "imageURLs": ["/images/malls/ca-village-walk-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-village-walk-plaza-1.jpg"
+  ],
   "summary": "Village Walk Plaza is a community-focused shopping center in Murrieta featuring a diverse tenant mix including Planet Fitness, Jerome's Furniture, Tikka Tikka, and Urban Air Adventure Park. The center serves as a local hub with regular community events like the weekly Farmers Market and seasonal celebrations that bring neighbors together.",
   "openFrom": 900,
   "openUntil": 2100,
@@ -18,5 +20,6 @@
   "demographics": "Village Walk Plaza serves the growing Murrieta community, attracting primarily young families and middle-income households in the 25-54 age range. The trade area draws from Murrieta's suburban residential neighborhoods, characterized by family-oriented households with children seeking convenient access to fitness, dining, educational services, and everyday shopping needs. The center appeals to health-conscious consumers and parents looking for children's activities, as evidenced by tenants like Planet Fitness, Kumon, martial arts studios, and nutrition spots, alongside practical services and casual dining options that cater to busy family lifestyles.",
   "description": "Village Walk Plaza is a vibrant community hub located in Murrieta, California, proudly serving as a local gathering place that brings neighbors together. Positioned as 'Your Local Community Hub,' this open-air shopping center features a diverse mix of tenants designed to meet the everyday needs of Murrieta families. The plaza is home to popular anchors including Planet Fitness for fitness enthusiasts, Jerome's Furniture for home décor, Petco for pet lovers, and Sally Beauty for beauty needs. Dining options range from the bold flavors of Tikka Tikka Indian cuisine and Sharon's Creole Kitchen to the health-focused offerings at Cactus Nutrition Spot and Bev Mo for beverage selections. Beyond shopping and dining, Village Walk Plaza enriches the community through family-friendly amenities like Urban Air Adventure Park, educational services including Kumon and Lakeshore Learning, and wellness services such as Giordano Martial Arts and Happiness Nails & Spa. The center hosts engaging community events including the weekly Murrieta Farmers Market every Sunday from 9 AM to 1 PM, the SoCal Etsy Guild Night Market featuring local artisans, and seasonal celebrations like the popular Cruise into Christmas event. With its welcoming atmosphere, convenient location at 24510 Village Walk Place, and commitment to fostering local connections, Village Walk Plaza has become an essential destination for Murrieta residents seeking quality shopping, dining, entertainment, and community engagement all in one place.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 17.675681511504877
 }

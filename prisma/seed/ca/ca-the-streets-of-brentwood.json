@@ -8,7 +8,9 @@
   "latitude": 37.9452656,
   "longitude": -121.73837440000001,
   "phone": "++1 925-516-8500",
-  "imageURLs": ["/images/malls/ca-the-streets-of-brentwood-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-streets-of-brentwood-1.jpg"
+  ],
   "summary": "The Streets of Brentwood is a premier open-air lifestyle center featuring popular retailers, diverse dining options, and entertainment venues including an AMC movie theater and Barnes & Noble. Strategically located at the crossroads of the Bay Area, Tri-Valley, Sacramento Delta, and Central Valley regions, it serves as the primary shopping destination for eastern Contra Costa County's growing communities.",
   "rating": 4.4,
   "reviewCount": 3129,
@@ -17,5 +19,6 @@
   "demographics": "The Streets of Brentwood attracts an affluent, family-oriented demographic from the surrounding East Bay communities, with visitors typically in the 30-55 age range and above-average household incomes. The trade area draws from Brentwood's growing suburban population as well as shoppers from nearby Antioch, Oakley, and Discovery Bay, representing middle to upper-middle class families seeking convenient shopping and entertainment options. The center serves as a regional destination for residents who prefer a modern outdoor shopping experience with a mix of national retailers, dining, and entertainment, particularly appealing to families with children and young professionals.",
   "description": "The Streets of Brentwood stands as the premier shopping, dining, and entertainment lifestyle destination strategically positioned at the hub of four major regions: the Bay Area, Tri-Valley, Sacramento Delta, and the Central Valley. Located at 2455 Sand Creek Road in Brentwood, California, this open-air lifestyle center offers a carefully curated mix of popular retailers, restaurants, and entertainment venues that cater to the diverse needs of East Bay residents. The center features major anchors including AMC Brentwood 14 movie theater and Barnes & Noble bookstore, alongside popular retailers such as Bath & Body Works, AT&T Store, and MAC Cosmetics, creating a comprehensive shopping experience for the entire family. With its modern outdoor design and convenient layout, The Streets of Brentwood provides a welcoming atmosphere where visitors can shop, dine, and be entertained all in one location. The center's strategic location makes it easily accessible from multiple regions, serving as a vital retail hub for the rapidly growing communities of eastern Contra Costa County and beyond.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.7595689556865
 }

@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 37.2497025,
   "longitude": -121.84535699999999,
-  "imageURLs": ["/images/malls/ca-sunrise-plaza-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-sunrise-plaza-shopping-center-1.jpg"
+  ],
   "summary": "Sunrise Plaza Shopping Center is a neighborhood strip center on Blossom Hill Road in South San Jose, featuring approximately 18 tenants including casual dining restaurants like Marie Callender's and Outback Steakhouse, alongside everyday services and specialty retail. The center serves the surrounding Blossom Valley and Santa Teresa communities with convenient, value-oriented shopping options.",
   "openFrom": 830,
   "openUntil": 1700,
@@ -19,5 +21,6 @@
   "description": "Sunrise Plaza Shopping Center is a neighborhood retail destination located along Blossom Hill Road in South San Jose, serving the Blossom Valley, Santa Teresa, and surrounding communities. This convenient strip center features approximately 18 businesses offering a practical mix of everyday services, casual dining, and specialty retail. Dining options include popular chains like Marie Callender's, Outback Steakhouse, and Kentucky Fried Chicken, alongside local favorites such as Shin Sushi, Juicy Burger, and City Expresso Gourmet Coffee. The center provides essential services including Wells Fargo Financial, Chicago Title Company, Great Clips For Hair, and a Sunrise Unocal service station. Additional tenants like Beck's Red Wing Shoe Store, Western Appliance, Sally Beauty Supply, and Verizon Wireless round out the tenant mix, making Sunrise Plaza a one-stop destination for South San Jose residents seeking convenience and value in their daily shopping needs.",
   "numberOfStores": 18,
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 11.96177258916544
 }

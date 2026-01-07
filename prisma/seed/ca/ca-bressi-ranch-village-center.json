@@ -8,7 +8,9 @@
   "latitude": 33.1268195,
   "longitude": -117.2531843,
   "phone": "++1 949-398-8750",
-  "imageURLs": ["/images/malls/ca-bressi-ranch-village-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-bressi-ranch-village-center-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.5,
@@ -19,5 +21,6 @@
   "description": "Bressi Ranch Village Center is a thoughtfully designed lifestyle destination located in the heart of Carlsbad's prestigious Bressi Ranch master-planned community. Situated at 2629 Gateway Road, this open-air village-style center was created to complement the diverse lifestyles of North County San Diego residents, transforming everyday errands into enjoyable experiences. The center features a carefully curated mix of shops, services, restaurants, and eateries that cater to the community's sophisticated tastes and daily needs. From high-end boutiques and jewelers to culinary delights spanning Indian, Mexican, Mediterranean, and Italian cuisines, Bressi Village offers something for everyone. The center's walkable design and comprehensive service offerings—including optometry, dental care, banking, pet care, and pharmacy services—make it a true community hub where residents can accomplish multiple tasks while enjoying the pleasant Southern California climate and village atmosphere.",
   "summary": "Bressi Ranch Village Center is an upscale, open-air lifestyle destination in Carlsbad featuring a unique blend of boutique shops, diverse dining options, and comprehensive services. Designed with a village atmosphere, this community-focused center transforms routine shopping into an enjoyable experience for North County San Diego residents.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 25.812507256407372
 }

@@ -8,7 +8,9 @@
   "latitude": 37.2879599,
   "longitude": -121.93328229999999,
   "phone": "++1 408-796-3277",
-  "imageURLs": ["/images/malls/ca-the-pruneyard-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-pruneyard-shopping-center-1.jpg"
+  ],
   "summary": "The Pruneyard Shopping Center is Campbell's premier open-air lifestyle destination featuring diverse shopping, multiple dining options, and a movie theater. This well-established center serves the affluent Silicon Valley community with a carefully curated mix of retailers and entertainment in an inviting outdoor setting.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -19,5 +21,6 @@
   "demographics": "The Pruneyard Shopping Center attracts an affluent, educated demographic from Campbell and surrounding Silicon Valley communities, with median household incomes significantly above the national average. The primary visitor base consists of professionals aged 30-55, families with children, and tech industry workers seeking convenient shopping and dining options. The trade area draws from Campbell's population of approximately 42,000 plus neighboring San Jose and Los Gatos residents, with shoppers typically seeking quality retailers, diverse dining experiences, and entertainment options in an upscale outdoor setting.",
   "description": "The Pruneyard Shopping Center stands as Campbell's premier shopping and entertainment destination, offering a distinctive open-air experience in the heart of Silicon Valley. Originally developed in the 1960s on land once occupied by prune orchards that gave the center its name, The Pruneyard has evolved into a sophisticated lifestyle center that serves the affluent South Bay community. The center features an impressive mix of shopping, dining, and entertainment options, including a modern movie theater that draws visitors throughout the week. With its outdoor plaza design and carefully curated tenant mix, The Pruneyard creates a welcoming atmosphere where shoppers can enjoy California's pleasant weather while browsing stores and dining at multiple restaurant options. The center's convenient location on South Bascom Avenue, combined with its extensive amenities and high customer ratings, has established it as a cornerstone of Campbell's retail landscape and a popular gathering place for Silicon Valley residents seeking quality shopping and entertainment experiences.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.979582924981656
 }

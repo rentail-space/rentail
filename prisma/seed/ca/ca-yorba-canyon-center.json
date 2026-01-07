@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.8777336,
   "longitude": -117.7522343,
-  "imageURLs": ["/images/malls/ca-yorba-canyon-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-yorba-canyon-center-1.jpg"
+  ],
   "openFrom": 1130,
   "openUntil": 2100,
   "rating": 4.5,
@@ -20,5 +22,6 @@
   "squareFootage": 58136,
   "summary": "Yorba Canyon Center is a recently renovated 58,136 square foot community shopping center anchored by Smart & Final Extra in affluent Yorba Linda. The center serves a high-income trade area averaging $168,000 household income and features diverse tenants including Citibank, Jack in the Box, and Woody's Diner with convenient 91 Freeway access.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 22.666625458900988
 }

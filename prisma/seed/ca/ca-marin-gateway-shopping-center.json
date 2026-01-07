@@ -8,7 +8,9 @@
   "latitude": 37.8730049,
   "longitude": -122.51021089999999,
   "phone": "++1 415-289-0743",
-  "imageURLs": ["/images/malls/ca-marin-gateway-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-marin-gateway-shopping-center-1.jpg"
+  ],
   "summary": "Marin Gateway Shopping Center is a community-focused retail destination in Sausalito featuring popular anchors like Target, Ross Dress for Less, and Grocery Outlet alongside diverse dining and essential services. The center serves as a convenient one-stop shopping hub for Marin City residents and surrounding communities.",
   "openFrom": 500,
   "openUntil": 2200,
@@ -20,5 +22,6 @@
   "description": "Marin Gateway Shopping Center is a convenient community shopping destination located at 190 Donahue Street in Sausalito, California, serving as a vital retail hub for Marin City and the surrounding area. The center offers a comprehensive mix of national retailers including Target, Ross Dress for Less, West Marine, and Grocery Outlet, providing residents with one-stop shopping for groceries, household goods, clothing, and marine supplies. Beyond retail, the center features diverse dining options ranging from Show de Carnes Brazilian Steakhouse and Oha Hawaiian BBQ to quick-service favorites like Starbucks, Panda Express, and Subway. Essential services round out the tenant mix, including Marin City Animal Hospital, Anytime Fitness, Jet Physio Sports Physical Therapy, Salons by JC, and O'Reilly Auto Parts, making it a true community gathering place. The center also houses the Marin City Library and Creative Gardens by Gymboree Play & Music, demonstrating its commitment to serving families and educational needs in the community.",
   "numberOfStores": 16,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 23.825122571936713
 }

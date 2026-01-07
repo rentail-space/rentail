@@ -8,7 +8,9 @@
   "latitude": 33.1478354,
   "longitude": -117.1066287,
   "phone": "++1 858-847-4600",
-  "imageURLs": ["/images/malls/ca-el-norte-pkwy-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-el-norte-pkwy-plaza-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.3,
@@ -21,5 +23,6 @@
   "squareFootage": 90549,
   "summary": "El Norte Pkwy Plaza is a recently renovated 90,549 square foot neighborhood center located at a prime intersection in Escondido, anchored by Vons, ACE Hardware, and Children's Paradise. Serving an affluent community with household incomes averaging $117,475, the center attracts over 1.7 million annual visits as a convenient destination for everyday shopping needs.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 27.587970361320043
 }

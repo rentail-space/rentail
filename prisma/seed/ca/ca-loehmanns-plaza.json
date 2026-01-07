@@ -8,7 +8,9 @@
   "latitude": 37.3395655,
   "longitude": -122.0425379,
   "phone": "++1 925-279-1885",
-  "imageURLs": ["/images/malls/ca-loehmanns-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-loehmanns-plaza-1.jpg"
+  ],
   "summary": "Loehmann's Plaza is a neighborhood strip center on Hollenbeck Avenue in Sunnyvale, offering convenient retail and services to the local Silicon Valley community. Managed by Regency Centers, this open-air plaza provides accessible shopping for residents and professionals in the area.",
   "openFrom": 800,
   "openUntil": 2300,

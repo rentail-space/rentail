@@ -8,7 +8,9 @@
   "latitude": 34.4737316,
   "longitude": -117.3471916,
   "phone": "++1 760-241-3145",
-  "imageURLs": ["/images/malls/ca-the-mall-of-victor-valley-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-mall-of-victor-valley-1.jpg"
+  ],
   "summary": "The Mall of Victor Valley is the High Desert's premier enclosed shopping destination, featuring a wide range of national retailers, a food court, and an on-site cinema. Conveniently located off Interstate 15 in Victorville, this bustling regional mall serves as the primary retail hub for the Victor Valley communities.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -19,5 +21,6 @@
   "demographics": "The Mall of Victor Valley serves the High Desert region of Southern California, attracting a diverse, family-oriented demographic with middle-income households. The primary trade area includes Victorville, Hesperia, and Apple Valley, drawing visitors ranging from young families to retirees seeking value-oriented shopping options. The center appeals to budget-conscious shoppers and serves as the primary retail destination for the region's growing population, which includes a significant military presence from nearby George Air Force Base and a mix of commuters working in the Inland Empire.",
   "description": "The Mall of Victor Valley stands as the premier enclosed shopping destination in California's High Desert region, serving the communities of Victorville, Hesperia, and Apple Valley. This bustling regional mall offers visitors a comprehensive shopping experience with a diverse mix of familiar national retailers, making it the go-to destination for residents across San Bernardino County's Victor Valley. Beyond shopping, the center features a full-service food court where families can enjoy a variety of dining options, and an on-site cinema providing entertainment for moviegoers of all ages. The mall's convenient location at 14400 Bear Valley Road makes it easily accessible from Interstate 15, drawing shoppers from throughout the High Desert and beyond. With its climate-controlled environment and wide selection of stores, The Mall of Victor Valley has established itself as an essential retail hub in a region where shopping options are limited, consistently earning strong ratings from its community of loyal visitors.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 32.99134521681413
 }

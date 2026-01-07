@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.9598037,
   "longitude": -117.3928476,
-  "imageURLs": ["/images/malls/ca-magnolia-town-center-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-magnolia-town-center-shopping-center-1.jpg"
+  ],
   "openFrom": 600,
   "openUntil": 100,
   "rating": 4.3,
@@ -18,5 +20,6 @@
   "description": "Magnolia Town Center Shopping Center is a community-focused retail destination located on Magnolia Avenue in Riverside, California, serving the local community with a diverse mix of everyday shopping and dining options. The center features a well-rounded tenant lineup anchored by Ralph's supermarket, which offers convenient services including a meat department that provides complimentary deep-frying for customers. Dining options at the center include popular establishments such as El Torito, California Pizza Kitchen, and Korean BBQ, providing visitors with a variety of culinary choices for casual meals and family gatherings. With a strong 4.3-star rating from over 2,000 reviews, the shopping center has built a reputation for friendly service and community engagement, with recent feedback highlighting improved customer service and a welcoming atmosphere. The center's convenient location and extended operating hours make it an accessible destination for Riverside residents seeking quality retail and dining experiences in a comfortable, open-air shopping environment.",
   "summary": "Magnolia Town Center Shopping Center is a community-oriented retail destination in Riverside featuring Ralph's supermarket and popular dining options including California Pizza Kitchen, El Torito, and Korean BBQ. With over 2,000 reviews and a 4.3-star rating, the center serves local residents with convenient everyday shopping and casual dining in an accessible location.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 28.426021777240965
 }

@@ -8,7 +8,9 @@
   "latitude": 34.0684632,
   "longitude": -117.5521837,
   "phone": "++1 949-398-8750",
-  "imageURLs": ["/images/malls/ca-ontario-gateway-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-ontario-gateway-center-1.jpg"
+  ],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.4,
@@ -20,5 +22,6 @@
   "squareFootage": 225749,
   "summary": "Ontario Gateway Center is a 225,749 square foot open-air shopping destination in Ontario, California, featuring superstores, restaurants, and entertainment options. This family-friendly center offers convenient access, ample parking, and a diverse mix of retailers in a safe, well-lit environment.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.27445707647318
 }

@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 34.0322626,
   "longitude": -117.6841716,
-  "imageURLs": ["/images/malls/ca-chino-town-square-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-chino-town-square-1.jpg"
+  ],
   "summary": "Chino Town Square is a practical community shopping center in Chino featuring department stores, discount retailers, and beauty salons. With extended hours and a convenient location, it serves as a reliable neighborhood destination for everyday shopping needs.",
   "openFrom": 800,
   "openUntil": 2300,
@@ -18,5 +20,6 @@
   "demographics": "Chino Town Square attracts a diverse, value-conscious customer base primarily consisting of middle-income families and working-class households from the Inland Empire region. The trade area draws heavily from Chino's growing Hispanic population and young families seeking affordable shopping options, with typical visitors ranging from 25-54 years old with household incomes between $50,000-$80,000. Shopping patterns reflect a focus on everyday needs and discount retail, with customers making frequent trips for groceries, personal care services, and budget-friendly apparel.",
   "description": "Chino Town Square serves as a practical shopping destination in the heart of Chino, California, offering residents of the Inland Empire a convenient hub for everyday retail needs. This down-to-earth retail center features a diverse mix of department stores, discount clothing retailers, and beauty salons that cater to budget-conscious shoppers seeking value and convenience. The center's open-air layout provides easy access to its various tenants, making it a popular choice for families and working professionals in the area. With extended operating hours from 8 AM to 11 PM, Chino Town Square accommodates shoppers throughout the day, whether they're running quick errands or spending an afternoon browsing. The property's strong community presence is reflected in its impressive 4.4-star rating from over 2,300 reviews, demonstrating its role as a reliable neighborhood shopping destination. Located on Philadelphia Street, the center benefits from excellent visibility and accessibility, serving the growing Chino community with practical retail options that meet the daily needs of local residents.",
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 14.826182319239916
 }

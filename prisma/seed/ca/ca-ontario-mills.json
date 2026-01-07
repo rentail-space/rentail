@@ -8,7 +8,9 @@
   "latitude": 34.0729843,
   "longitude": -117.55199300000001,
   "phone": "++1 909-484-8300",
-  "imageURLs": ["/images/malls/ca-ontario-mills-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-ontario-mills-1.jpg"
+  ],
   "summary": "Ontario Mills is Southern California's largest indoor outlet mall featuring over 200 brand-name stores offering significant discounts. This entertainment-focused destination combines outlet shopping with movie theatres and a comedy club, making it a premier regional attraction in the Inland Empire.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -20,5 +22,6 @@
   "description": "Ontario Mills stands as Southern California's premier outlet shopping destination, offering an unparalleled retail experience with over 200 stores under one roof. Since opening its doors, this massive indoor outlet mall has become a regional landmark in Ontario, California, attracting millions of visitors annually from across the Inland Empire and beyond. The center features an impressive collection of brand-name outlet stores offering significant savings on everything from fashion and footwear to home goods and electronics. Beyond shopping, Ontario Mills has evolved into a complete entertainment destination with a full-service movie theatre complex and comedy club, making it the perfect spot for a full day of family fun. The expansive food court and dining options ensure visitors can refuel between shopping sessions, while ample parking and climate-controlled indoor comfort make it an ideal year-round destination. With its convenient location near major freeways and its reputation for delivering exceptional value, Ontario Mills has cemented its position as one of the most visited shopping centers in the region.",
   "numberOfStores": 200,
   "tier": 1,
-  "spaces": []
+  "spaces": [],
+  "ranking": 20.146589583823133
 }

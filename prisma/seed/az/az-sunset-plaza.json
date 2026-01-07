@@ -7,7 +7,9 @@
   "state": "AZ",
   "latitude": 34.4722984,
   "longitude": -114.3426276,
-  "imageURLs": ["/images/malls/az-sunset-plaza-1.jpg"],
+  "imageURLs": [
+    "/images/malls/az-sunset-plaza-1.jpg"
+  ],
   "summary": "Sunset Plaza is a neighborhood shopping center in Lake Havasu City featuring a practical mix of retail stores, services, and dining options including O'Reilly Auto Parts and a bank. The plaza serves local residents with convenient everyday shopping, though parking can be challenging during busy periods.",
   "openFrom": 900,
   "openUntil": 2100,
@@ -18,5 +20,6 @@
   "demographics": "Sunset Plaza primarily serves Lake Havasu City's diverse population, which includes a significant retiree demographic (age 55+) drawn to the area's waterfront lifestyle, as well as year-round residents and seasonal visitors. The trade area encompasses middle-income households with a mix of families and empty nesters who value convenience and practical shopping options. Visitors typically seek everyday necessities, automotive services, and quick-service dining, reflecting the community-oriented nature of this desert resort town where practical amenities are prioritized over luxury retail experiences.",
   "description": "Sunset Plaza is a convenient neighborhood shopping center located on Lake Havasu Avenue in Lake Havasu City, Arizona, serving as a practical retail destination for local residents and visitors to this popular Colorado River community. The plaza features a diverse mix of tenants including O'Reilly Auto Parts, which customers praise for its excellent prices and service, along with various other shops and even a bank, making it a one-stop location for everyday needs. The center has recently seen some changes in its tenant mix, with Starbucks relocating across the street, which has helped alleviate some of the parking congestion that shoppers previously experienced. Despite its functional layout and good selection of stores, the parking lot remains a notable challenge and is frequently mentioned in customer feedback as one of the more difficult aspects of visiting the plaza. With operating hours from 9:00 AM to 9:00 PM and a solid 4.1-star rating from over 230 reviews, Sunset Plaza continues to serve as a reliable shopping option for the Lake Havasu City community.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 19.47293643728285
 }

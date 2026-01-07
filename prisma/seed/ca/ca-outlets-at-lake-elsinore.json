@@ -8,7 +8,9 @@
   "latitude": 33.6993194,
   "longitude": -117.34906919999999,
   "phone": "++1 951-245-0087",
-  "imageURLs": ["/images/malls/ca-outlets-at-lake-elsinore-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-outlets-at-lake-elsinore-1.jpg"
+  ],
   "summary": "Outlets at Lake Elsinore is a 318,000 square foot outlet shopping center featuring over 20 brand-name retailers including Levi's, Vans, Gap, and Guess. Located in Lake Elsinore, California, this open-air destination offers significant savings on quality merchandise in a convenient Inland Empire location.",
   "openFrom": 1000,
   "openUntil": 2000,

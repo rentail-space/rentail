@@ -8,7 +8,9 @@
   "latitude": 34.0359243,
   "longitude": -118.0841127,
   "phone": "++1 323-722-1776",
-  "imageURLs": ["/images/malls/ca-the-shops-at-montebello-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-shops-at-montebello-1.jpg"
+  ],
   "summary": "The Shops at Montebello is an indoor regional mall featuring brand-name fashion and footwear retailers, department stores, and a food court. With a 4.5-star rating and nearly 10,000 reviews, it serves as a popular shopping destination for the diverse communities of East Los Angeles and the San Gabriel Valley.",
   "openFrom": 1000,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "The Shops at Montebello attracts a diverse, predominantly Hispanic and Asian-American customer base reflecting the demographics of the San Gabriel Valley and East Los Angeles area. The primary trade area consists of middle-income families with household incomes ranging from $50,000 to $85,000, with a strong representation of multigenerational households. Shoppers tend to be value-conscious consumers seeking a mix of affordable fashion, family dining options, and entertainment, with peak traffic occurring on weekends when families visit for both shopping and social activities.",
   "description": "The Shops at Montebello stands as a prominent indoor shopping destination in the heart of Montebello, California, serving the diverse communities of East Los Angeles and the San Gabriel Valley. This enclosed regional mall features an extensive collection of brand-name fashion and footwear retailers alongside major department store anchors, providing a comprehensive shopping experience under one roof. The center's convenient food court offers visitors a variety of dining options, making it an ideal destination for families and groups spending extended time browsing the mall's offerings. With a strong 4.5-star rating from nearly 10,000 reviews, The Shops at Montebello has established itself as a trusted community gathering place where locals can find everything from everyday essentials to special occasion purchases. The mall's accessible location at 2134 Montebello Town Center, combined with its diverse tenant mix and comfortable indoor environment, continues to draw shoppers seeking a traditional mall experience with modern retail options.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 35.73521375143366
 }

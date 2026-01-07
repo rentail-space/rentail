@@ -7,7 +7,9 @@
   "state": "CA",
   "latitude": 33.9288527,
   "longitude": -118.21390179999999,
-  "imageURLs": ["/images/malls/ca-plaza-mexico-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-plaza-mexico-1.jpg"
+  ],
   "summary": "Plaza Mexico is an open-air lifestyle center in Lynwood featuring ornate Spanish colonial architecture and authentic Mexican shopping, dining, and entertainment experiences. This cultural destination offers a unique marketplace atmosphere with traditional restaurants, specialty retailers, and community events that celebrate Mexican heritage.",
   "openFrom": 1000,
   "openUntil": 2000,
@@ -18,5 +20,6 @@
   "demographics": "Plaza Mexico attracts a predominantly Hispanic and Latino demographic, reflecting the cultural character of Lynwood and surrounding South Los Angeles communities. The visitor base includes middle-income families with children who are drawn to the authentic Mexican shopping and dining experiences. The trade area serves multigenerational households seeking cultural goods, traditional foods, and entertainment that connects them to Mexican heritage, with shoppers typically ranging from young adults to seniors who value the plaza's community-oriented atmosphere.",
   "description": "Plaza Mexico stands as a vibrant cultural destination in Lynwood, California, celebrating Mexican heritage through its distinctive Spanish colonial architecture and authentic marketplace atmosphere. This open-air plaza features ornate architectural details that transport visitors to a traditional Mexican town square, creating an immersive shopping and dining experience unlike typical American retail centers. The center offers an extensive array of authentic Mexican restaurants serving traditional cuisine, alongside retailers specializing in cultural goods, fashion, and specialty items that cater to the local Hispanic community. With its strong emphasis on food, shopping, and entertainment, Plaza Mexico has become a beloved gathering place for families seeking authentic cultural experiences. The plaza's commitment to preserving and celebrating Mexican traditions while providing modern amenities has earned it an impressive 4.4-star rating from over 13,000 reviews, establishing it as a premier destination for both everyday shopping and special cultural events in the greater Los Angeles area.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 36.267414944859524
 }

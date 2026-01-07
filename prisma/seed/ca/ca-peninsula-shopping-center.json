@@ -8,7 +8,9 @@
   "latitude": 33.774740099999995,
   "longitude": -118.3765414,
   "phone": "++1 310-541-2242",
-  "imageURLs": ["/images/malls/ca-peninsula-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-peninsula-shopping-center-1.jpg"
+  ],
   "summary": "Peninsula Shopping Center is a well-established community shopping destination in Rolling Hills Estates, offering a diverse mix of clothing stores, restaurants, medical offices, and service businesses. With its convenient location and quality tenant mix, the center serves as a neighborhood hub for the affluent Palos Verdes Peninsula community.",
   "openFrom": 900,
   "openUntil": 2100,
@@ -19,5 +21,6 @@
   "demographics": "Peninsula Shopping Center attracts an affluent demographic from Rolling Hills Estates and the surrounding Palos Verdes Peninsula communities, with visitors typically representing upper-middle to high-income households with median incomes exceeding $150,000. The primary trade area consists of established families, professionals, and retirees who value convenience and quality in their shopping experience. Shoppers tend to be well-educated homeowners aged 35-65+ who prefer a neighborhood shopping environment for everyday needs, dining, and professional services, with a strong emphasis on quality retailers and restaurants that cater to discerning tastes.",
   "description": "Peninsula Shopping Center has served as the premier neighborhood shopping destination for Rolling Hills Estates and the greater Palos Verdes Peninsula since its establishment. Located at 67 Peninsula Center, this well-maintained community center offers residents a convenient blend of retail, dining, medical offices, and essential services all in one accessible location. The center's thoughtfully curated tenant mix includes popular clothing stores, diverse restaurant options ranging from casual to upscale dining, and professional service businesses that cater to the affluent local community. With operating hours from 9:00 AM to 9:00 PM daily, Peninsula Shopping Center provides a comfortable, open-air shopping environment that reflects the relaxed yet sophisticated lifestyle of the Palos Verdes Peninsula. The center's strong 4.4-star rating from nearly 1,000 reviews speaks to its consistent quality and its role as a beloved community gathering place for residents seeking both everyday conveniences and specialty shopping experiences.",
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 26.22002569739604
 }

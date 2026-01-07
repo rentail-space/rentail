@@ -8,7 +8,9 @@
   "latitude": 34.1448204,
   "longitude": -118.25645569999999,
   "phone": "++1 818-637-8982",
-  "imageURLs": ["/images/malls/ca-the-americana-at-brand-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-the-americana-at-brand-1.jpg"
+  ],
   "summary": "The Americana at Brand is a premier open-air lifestyle center in Glendale featuring luxury retailers, upscale dining, and entertainment in an elegant Parisian-inspired setting with landscaped parks and an electric trolley. Located near Downtown Los Angeles and Hollywood, this destination offers a sophisticated shopping experience with high-end brands, fine restaurants, a movie theater, and exclusive member benefits through the Caruso Signature program.",
   "openFrom": 1000,
   "openUntil": 2200,
@@ -19,5 +21,6 @@
   "demographics": "The Americana at Brand attracts an affluent, upscale demographic with household incomes significantly above the Los Angeles metro average, drawing primarily from Glendale and surrounding communities including Burbank, Pasadena, and La Cañada Flintridge. The visitor base skews toward families with children and young professionals aged 25-54 who appreciate the center's blend of high-end retail, dining, and entertainment options. The trade area serves a well-educated, style-conscious consumer base with strong purchasing power, seeking premium shopping experiences in an open-air, pedestrian-friendly environment. Shopping patterns reflect a preference for experiential retail, with visitors often combining retail therapy with dining at upscale restaurants and entertainment activities.",
   "description": "The Americana at Brand stands as one of Southern California's premier lifestyle destinations, offering an unparalleled blend of luxury shopping, fine dining, and entertainment in the heart of Glendale. This open-air shopping center features a distinctive Parisian-inspired design with landscaped parks, an electric trolley, and a central fountain that creates an elegant, walkable environment. The property showcases an impressive roster of high-end retailers alongside unique dining experiences, from the newly opened Michelina Bakery patisserie to the sophisticated Bourbon Steak Los Angeles with its nightly piano bar. Located just minutes from Downtown Los Angeles and Hollywood, The Americana at Brand serves as a convenient yet upscale destination for both locals and tourists seeking a refined shopping experience. The center's commitment to creating a complete lifestyle destination is evident through its AMC Theatres, weekly Kids Club events in collaboration with Apple TV, Today at Apple Sessions, and exclusive Caruso Signature membership program that offers enhanced events and early access to special offerings.",
   "tier": 3,
-  "spaces": []
+  "spaces": [],
+  "ranking": 56.52295705800389
 }

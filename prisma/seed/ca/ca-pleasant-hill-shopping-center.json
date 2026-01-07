@@ -8,7 +8,9 @@
   "latitude": 37.9773053,
   "longitude": -122.0662604,
   "phone": "++1 925-279-1800",
-  "imageURLs": ["/images/malls/ca-pleasant-hill-shopping-center-1.jpg"],
+  "imageURLs": [
+    "/images/malls/ca-pleasant-hill-shopping-center-1.jpg"
+  ],
   "summary": "Pleasant Hill Shopping Center is a 230,883 square foot community retail destination featuring Target, HomeGoods, and Ross Dress for Less with exceptional visibility from I-680. The center attracts over 5.6 million annual visits, serving an affluent East Bay trade area with average household incomes exceeding $149,000.",
   "openFrom": 600,
   "openUntil": 2300,
@@ -20,5 +22,6 @@
   "description": "Pleasant Hill Shopping Center is a premier 230,883 square foot community shopping destination strategically located at 560 Contra Costa Boulevard in Pleasant Hill, California, directly across from I-680 on- and off-ramps. This highly desired center benefits from exceptional visibility and access along one of the East Bay's major transportation corridors, serving the affluent communities of Pleasant Hill, Walnut Creek, and Concord. The property features a strong tenant mix anchored by major national retailers including Target, HomeGoods, and Ross Dress for Less, complemented by the popular In-N-Out Burger restaurant. With over 5.6 million annual visits, the center has established itself as a go-to shopping destination for the surrounding community's 129,491 residents within a three-mile radius. Managed by Regency Centers, a leading national shopping center developer and operator, Pleasant Hill Shopping Center exemplifies the company's commitment to creating thriving neighborhood retail destinations that serve the daily needs of their communities while maintaining high occupancy and strong retailer performance.",
   "squareFootage": 230883,
   "tier": 2,
-  "spaces": []
+  "spaces": [],
+  "ranking": 30.22248155810124
 }
