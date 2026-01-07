@@ -6,7 +6,7 @@ export async function loader() {
   try {
     const feed = new Feed({
       author: { email: "info@rentail.space", name: "Rentail.space" },
-      copyright: "Copyright 2025 Rentail.space",
+      copyright: "Copyright 2026 Rentail.space",
       description: "Short-term retail space marketplace insights and guides",
       favicon: "https://rentail.space/favicon-96x96.png",
       feedLinks: { atom: "https://rentail.space/blog/feed" },

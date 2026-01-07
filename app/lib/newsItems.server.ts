@@ -7,12 +7,10 @@ import removeMd from "remove-markdown";
 import parseFrontMatter from "~/lib/parseFrontMatter";
 import truncateWords from "~/lib/truncateWords";
 
-const dirname = path.resolve("./app/data/blog");
+const dirname = path.resolve("./app/data/news");
 
-export type BlogPost = {
-  alt: string;
+export type NewsItem = {
   body: string;
-  image: string;
   published: Date;
   slug: string;
   summary: string;
@@ -20,12 +18,12 @@ export type BlogPost = {
 };
 
 /**
- * Lists all blog posts that are published based on the published date in the
+ * Lists all news items that are published based on the published date in the
  * filename.
  *
- * @returns An array of blog posts.
+ * @returns An array of news items.
  */
-export async function recentBlogPosts(): Promise<BlogPost[]> {
+export async function recentNewsItems(): Promise<NewsItem[]> {
   const filenames = readdirSync(dirname);
   const now = DateTime.now();
   return filenames
@@ -34,46 +32,43 @@ export async function recentBlogPosts(): Promise<BlogPost[]> {
       const published = getPublishedData(filename).toJSDate();
       const content = readFileSync(path.resolve(dirname, filename), "utf8");
       const { attributes, body } = parseFrontMatter<{
-        alt: string;
-        image: string;
         summary: string;
         title: string;
       }>(content);
       const slug = basename(filename, ".md");
       return {
-        ...attributes,
         body,
         published,
         slug,
+        summary: attributes.summary,
+        title: attributes.title,
       };
     })
     .filter(
       ({ published }) =>
-        DateTime.fromJSDate(published).diff(now, "days").days < -1,
+        DateTime.fromJSDate(published).diff(now, "days").days < 0,
     )
     .sort((a, b) => b.published.getTime() - a.published.getTime());
 }
 
 /**
- * Loads a blog post by slug. Throws an error if:
- * - the blog post is not found
+ * Loads a news item by slug. Throws an error if:
+ * - the news item is not found
  * - the slug is not provided
  * - the published date is in the future
  * - the slug is not a valid slug
  *
- * @param slug The slug of the blog post.
- * @returns The blog post, published date, slug, filename, alt text, and title.
+ * @param slug The slug of the news item.
+ * @returns The news item, published date, slug, filename, and title.
  */
-export async function loadBlogPost(slug?: string): Promise<BlogPost> {
+export async function loadNewsItem(slug?: string): Promise<NewsItem> {
   invariant(slug, "Slug is required");
   const filename = join(dirname, `${slug}.md`);
   const post = await readFile(filename, "utf8");
   const published = getPublishedData(filename).toJSDate();
   const { attributes, body } = parseFrontMatter<{
-    title: string;
-    alt: string;
-    image: string;
     summary: string;
+    title: string;
   }>(post);
   return {
     ...attributes,
@@ -88,7 +83,7 @@ export async function loadBlogPost(slug?: string): Promise<BlogPost> {
  * Gets the published date from the filename. We use the filename to get the
  * published date because the published date is stored in the filename.
  *
- * @param filename The filename of the blog post.
+ * @param filename The filename of the news item.
  * @returns The published date.
  */
 function getPublishedData(filename: string): DateTime {

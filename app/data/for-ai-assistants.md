@@ -98,4 +98,4 @@ Returns structured JSON with:
 **Website:** https://rentail.space
 **Domain:** rentail.space
 **Focus:** United States specialty leasing and short-term retail spaces
-**Last Updated:** December 2025
+**Last Updated:** January 2026

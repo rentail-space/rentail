@@ -7,8 +7,6 @@ import LoadingImage from "~/components/ui/LoadingImage";
 import { type BlogPost, loadBlogPost } from "~/lib/blogPosts.server";
 import type { Route } from "./+types/blog.$slug";
 
-export const handle = { showHeader: true, showFooter: true };
-
 export async function loader({ params }: Route.LoaderArgs): Promise<BlogPost> {
   try {
     const { slug } = params;
@@ -21,7 +19,7 @@ export async function loader({ params }: Route.LoaderArgs): Promise<BlogPost> {
 export default function Post({ loaderData }: { loaderData: BlogPost }) {
   const { alt, body, image, slug, published, summary, title } = loaderData;
   const faqItems = parseFAQ(body);
-
+  const url = `https://rentail.space/blog/${slug}`;
   return (
     <div className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12">
       <title>{`${title} | Rentail.space`}</title>
@@ -34,7 +32,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
       <meta name="og:published_time" content={published.toISOString()} />
       <meta name="og:title" content={title} />
       <meta name="og:type" content="article" />
-      <meta name="og:url" content={`https://rentail.space/blog/${slug}`} />
+      <meta name="og:url" content={url} />
       <meta name="og:site_name" content="Rentail.space" />
       <meta name="og:locale" content="en_US" />
       <meta name="robots" content="index, follow" />
@@ -44,9 +42,9 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
       <meta name="duckduckbot" content="index, follow" />
       <meta name="slurp" content="index, follow" />
       <meta name="ia_archiver" content="index, follow" />
-      <link rel="canonical" href={`https://rentail.space/blog/${slug}`} />
+      <link rel="canonical" href={url} />
 
-      <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-12 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
+      <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
         <h1>{title}</h1>
 
         <LoadingImage
@@ -67,6 +65,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
         >
           {body}
         </Streamdown>
+
         <p className="flex items-center gap-2 text-gray-500 text-sm">
           <HeartIcon className="h-4 w-4 text-red-500" fill="currentColor" />
           <span>
@@ -80,19 +79,21 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
             )}
           </span>
         </p>
+
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            "@id": `https://rentail.space/blog/${slug}`,
+            "@id": url,
             author: {
               "@type": "Organization",
               name: "Rentail.space",
               url: "https://rentail.space",
             },
-            datePublished: published,
-            description: summary,
-            headline: title,
+            datePublished: DateTime.fromJSDate(published, {
+              zone: "utc",
+            }).toISO(),
+            headline: summary,
             inLanguage: "en-US",
             name: title,
             primaryImageOfPage: image

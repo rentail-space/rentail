@@ -1,0 +1,104 @@
+import { invariant } from "es-toolkit";
+import { NewspaperIcon } from "lucide-react";
+import { DateTime } from "luxon";
+import { Link } from "react-router";
+import remarkGfm from "remark-gfm";
+import { Streamdown } from "streamdown";
+import { loadNewsItem } from "~/lib/newsItems.server";
+import type { Route } from "../+types/root";
+
+export async function loader({ params }: Route.LoaderArgs): Promise<NewsPost> {
+  try {
+    const { slug } = params;
+    invariant(slug, "Slug is required");
+    return await loadNewsItem(slug);
+  } catch {
+    throw new Response("Not Found", { status: 404 });
+  }
+}
+
+type NewsPost = {
+  title: string;
+  summary: string;
+  body: string;
+  published: Date;
+  slug: string;
+};
+
+export default function NewsPost({ loaderData }: { loaderData: NewsPost }) {
+  const { body, slug, published, summary, title } = loaderData;
+  const url = `https://rentail.space/news/${slug}`;
+
+  return (
+    <div className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12">
+      <title>{`${title} | Rentail.space`}</title>
+      <meta name="author" content="Rentail.space" />
+      <meta name="section" content="News" />
+      <meta name="og:published_time" content={published.toISOString()} />
+      <meta name="og:title" content={title} />
+      <meta name="og:type" content="article" />
+      <meta name="og:url" content={url} />
+      <meta name="og:site_name" content="Rentail.space" />
+      <meta name="og:locale" content="en_US" />
+      <meta name="robots" content="index, follow" />
+      <meta name="googlebot" content="index, follow" />
+      <meta name="bingbot" content="index, follow" />
+      <meta name="yandexbot" content="index, follow" />
+      <meta name="duckduckbot" content="index, follow" />
+      <meta name="slurp" content="index, follow" />
+      <meta name="ia_archiver" content="index, follow" />
+      <link rel="canonical" href={url} />
+
+      <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
+        <h1>{title}</h1>
+
+        <Streamdown
+          className="prose prose-lg mx-auto"
+          controls={{ code: false, mermaid: false, table: false }}
+          mode="static"
+          remarkPlugins={[remarkGfm]}
+        >
+          {body}
+        </Streamdown>
+
+        <section className="mt-10 text-gray-400 text-md italic">
+          <p>
+            Rentail.space is an AI-powered marketplace connecting businesses
+            with short-term retail spaces in shopping centers. By combining
+            intelligent matching algorithms with comprehensive property data,
+            the platform streamlines specialty lease discovery and placement.
+            For more information, visit https://rentail.space
+          </p>
+
+          <p className="flex items-center gap-2">
+            <NewspaperIcon className="h-4 w-4 text-blue-500" />
+            <span>
+              Media Contact:{" "}
+              <Link to="mailto:media@rentail.space">media@rentail.space</Link>
+            </span>
+          </p>
+        </section>
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            "@id": url,
+            author: {
+              "@type": "Organization",
+              name: "Rentail.space",
+              url: "https://rentail.space",
+            },
+            dateline: `LOS ANGELES, CA — ${DateTime.fromJSDate(published, { zone: "utc" }).toLocaleString(DateTime.DATE_MED)}`,
+            datePublished: DateTime.fromJSDate(published, {
+              zone: "utc",
+            }).toISO(),
+            headline: summary,
+            inLanguage: "en-US",
+            name: title,
+          })}
+        </script>
+      </article>
+    </div>
+  );
+}
