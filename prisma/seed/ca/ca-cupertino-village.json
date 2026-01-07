@@ -8,9 +8,7 @@
   "latitude": 37.335726300000005,
   "longitude": -122.0154226,
   "phone": "++1 833-800-4343",
-  "imageURLs": [
-    "/images/malls/ca-cupertino-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-cupertino-village-1.jpg"],
   "summary": "Cupertino Village is a community shopping center in the heart of Silicon Valley, featuring specialty retailers, numerous Asian eateries, and professional services. This popular destination serves Cupertino's diverse, affluent population with a unique blend of multicultural dining and convenient shopping options.",
   "openFrom": 1000,
   "openUntil": 2100,

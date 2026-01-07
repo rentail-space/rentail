@@ -8,9 +8,7 @@
   "latitude": 34.0719407,
   "longitude": -118.35751640000001,
   "phone": "++1 323-900-8080",
-  "imageURLs": [
-    "/images/malls/ca-the-grove-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-grove-1.jpg"],
   "summary": "The Grove is Los Angeles' favorite open-air lifestyle destination, featuring a sophisticated mix of high-end retailers, restaurants, and entertainment in a beautifully designed Mediterranean-inspired environment. With premium brands, an AMC Theatres, exclusive amenities like Caruso Signature membership, and regular events ranging from fashion showcases to live performances, it offers a complete experiential destination for shopping, dining, and entertainment.",
   "openFrom": 1000,
   "openUntil": 2200,

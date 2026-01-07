@@ -8,9 +8,7 @@
   "latitude": 37.777102899999996,
   "longitude": -121.97035570000001,
   "phone": "++1 877-265-7417",
-  "imageURLs": [
-    "/images/malls/ca-crow-canyon-commons-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-crow-canyon-commons-1.jpg"],
   "summary": "Crow Canyon Commons is a well-maintained community shopping center in San Ramon offering a convenient mix of restaurants, retail stores, and services. Managed by Federal Realty Investment Trust, this accessible open-air center serves as a popular everyday destination for East Bay residents.",
   "openFrom": 900,
   "openUntil": 2100,

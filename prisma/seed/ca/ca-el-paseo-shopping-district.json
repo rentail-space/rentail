@@ -8,9 +8,7 @@
   "latitude": 33.7195602,
   "longitude": -116.3816568,
   "phone": "++1 877-735-7273",
-  "imageURLs": [
-    "/images/malls/ca-el-paseo-shopping-district-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-el-paseo-shopping-district-1.jpg"],
   "summary": "El Paseo Shopping District is Palm Desert's premier upscale open-air shopping destination, featuring designer fashion, fine art galleries, interior design showrooms, and acclaimed restaurants along an elegant promenade. Known as the \"Rodeo Drive of the Desert,\" it hosts major events including Fashion Week El Paseo and Palm Desert Food & Wine, attracting sophisticated shoppers to the heart of the Coachella Valley.",
   "openFrom": 1000,
   "openUntil": 1900,

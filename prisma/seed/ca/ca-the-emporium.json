@@ -8,9 +8,7 @@
   "latitude": 33.4929912,
   "longitude": -117.1489249,
   "phone": "++1 951-505-7149",
-  "imageURLs": [
-    "/images/malls/ca-the-emporium-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-emporium-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2000,
   "rating": 4.4,

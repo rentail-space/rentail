@@ -8,9 +8,7 @@
   "latitude": 32.7641307,
   "longitude": -117.1965503,
   "phone": "++1 858-257-3671",
-  "imageURLs": [
-    "/images/malls/ca-shops-at-arrive-mission-valley-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-shops-at-arrive-mission-valley-1.jpg"],
   "openFrom": 900,
   "openUntil": 1800,
   "rating": 5,

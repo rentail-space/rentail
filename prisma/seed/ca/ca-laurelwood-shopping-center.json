@@ -8,9 +8,7 @@
   "latitude": 37.5336403,
   "longitude": -122.3273835,
   "phone": "++1 650-349-0431",
-  "imageURLs": [
-    "/images/malls/ca-laurelwood-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-laurelwood-shopping-center-1.jpg"],
   "summary": "Laurelwood Shopping Center is a vibrant neighborhood hub in San Mateo featuring the beloved Piazza's Fine Foods Market alongside diverse dining, shopping, and service options. Conveniently located off Highway 92, this welcoming open-air center serves as the community's go-to destination for everyday needs and quality time with family and friends.",
   "openFrom": 700,
   "openUntil": 2100,

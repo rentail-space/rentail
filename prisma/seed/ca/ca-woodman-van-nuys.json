@@ -8,9 +8,7 @@
   "latitude": 34.246388,
   "longitude": -118.446551,
   "phone": "++1 213-553-2200",
-  "imageURLs": [
-    "/images/malls/ca-woodman-van-nuys-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-woodman-van-nuys-1.jpg"],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.3,

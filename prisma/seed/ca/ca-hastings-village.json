@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.151560499999995,
   "longitude": -118.08089020000001,
-  "imageURLs": [
-    "/images/malls/ca-hastings-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-hastings-village-1.jpg"],
   "summary": "Hastings Village is a convenient open-air shopping center on East Foothill Boulevard in Pasadena, featuring national retailers and local service providers. With a 4.3-star rating from over 2,400 reviews, this accessible neighborhood center serves the community's everyday shopping and service needs.",
   "openFrom": 1000,
   "openUntil": 2100,

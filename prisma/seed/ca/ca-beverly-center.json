@@ -8,9 +8,7 @@
   "latitude": 34.0751706,
   "longitude": -118.3773546,
   "phone": "++1 310-854-0070",
-  "imageURLs": [
-    "/images/malls/ca-beverly-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-beverly-center-1.jpg"],
   "summary": "Beverly Center is a premier eight-story luxury shopping destination in West Hollywood featuring over 100 high-end retailers including Bloomingdale's, Macy's, and designer boutiques like Louis Vuitton and Gucci. Recently renovated with modern open-air terraces and stunning city views, it offers an elevated shopping and dining experience at the heart of Los Angeles's most fashionable neighborhood.",
   "openFrom": 1000,
   "openUntil": 2000,

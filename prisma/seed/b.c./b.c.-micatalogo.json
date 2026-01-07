@@ -8,9 +8,7 @@
   "latitude": 32.5740286,
   "longitude": -116.6486691,
   "phone": "++52 665 121 0040",
-  "imageURLs": [
-    "/images/malls/b.c.-micatalogo-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/b.c.-micatalogo-1.jpg"],
   "rating": 4.3,
   "reviewCount": 6,
   "website": "https://micatalogo.org/?utm_source=rentail.space",

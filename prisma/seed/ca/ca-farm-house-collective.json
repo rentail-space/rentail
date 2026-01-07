@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.976576,
   "longitude": -117.3418637,
-  "imageURLs": [
-    "/images/malls/ca-farm-house-collective-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-farm-house-collective-1.jpg"],
   "summary": "Farm House Collective is a community-oriented lifestyle center in Riverside featuring locally-sourced products, artisanal goods, and unique dining experiences. Located near UC Riverside on University Avenue, this curated destination offers an authentic alternative to traditional retail with a focus on supporting local businesses and sustainable practices.",
   "openFrom": 1000,
   "openUntil": 2200,

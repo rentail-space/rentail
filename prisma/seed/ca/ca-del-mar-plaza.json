@@ -8,9 +8,7 @@
   "latitude": 32.96006390000001,
   "longitude": -117.26499179999998,
   "phone": "++1 858-847-2284",
-  "imageURLs": [
-    "/images/malls/ca-del-mar-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-del-mar-plaza-1.jpg"],
   "summary": "Del Mar Plaza is an upscale, open-air lifestyle center perched above the Pacific Ocean, featuring specialty boutiques, award-winning restaurants with panoramic ocean views, and European-inspired architecture. This dog-friendly destination combines sophisticated shopping, gourmet dining, and live entertainment in one of Southern California's most picturesque coastal settings.",
   "openFrom": 900,
   "openUntil": 2330,

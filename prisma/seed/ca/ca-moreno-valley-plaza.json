@@ -8,9 +8,7 @@
   "latitude": 33.9381785,
   "longitude": -117.2492059,
   "phone": "++1 951-242-5247",
-  "imageURLs": [
-    "/images/malls/ca-moreno-valley-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-moreno-valley-plaza-1.jpg"],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.2,

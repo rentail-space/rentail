@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.948963,
   "longitude": -122.05898409999999,
-  "imageURLs": [
-    "/images/malls/ca-pleasant-hill-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-pleasant-hill-plaza-1.jpg"],
   "summary": "Pleasant Hill Plaza is a neighborhood shopping center on Contra Costa Boulevard featuring local retail and service businesses, including Salon Hanover. With convenient hours and a strong community reputation reflected in its 4.3-star rating, the plaza serves as a reliable destination for Pleasant Hill residents.",
   "openFrom": 0,
   "openUntil": 2400,

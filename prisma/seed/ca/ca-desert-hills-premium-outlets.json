@@ -8,9 +8,7 @@
   "latitude": 33.9287776,
   "longitude": -116.8154907,
   "phone": "++1 951-849-6641",
-  "imageURLs": [
-    "/images/malls/ca-desert-hills-premium-outlets-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-desert-hills-premium-outlets-1.jpg"],
   "summary": "Desert Hills Premium Outlets is an upscale outdoor shopping destination in Cabazon featuring high-end designer fashion outlets at discounted prices. Located conveniently between Los Angeles and Palm Springs, this popular center offers premium brand shopping with casual dining options in an open-air setting.",
   "openFrom": 1000,
   "openUntil": 2100,

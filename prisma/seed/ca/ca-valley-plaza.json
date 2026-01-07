@@ -8,9 +8,7 @@
   "latitude": 35.3378163,
   "longitude": -119.0337556,
   "phone": "++1 661-396-2801",
-  "imageURLs": [
-    "/images/malls/ca-valley-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-valley-plaza-1.jpg"],
   "summary": "Valley Plaza is the largest shopping mall in the San Joaquin Valley, featuring over 140 specialty stores, a 16-screen cinema, and diverse dining options. This family-friendly destination in Bakersfield serves as the premier retail and entertainment hub for central California.",
   "openFrom": 1000,
   "openUntil": 2100,

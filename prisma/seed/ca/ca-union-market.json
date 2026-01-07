@@ -8,9 +8,7 @@
   "latitude": 33.5604196,
   "longitude": -117.6716916,
   "phone": "++1 657-554-2379",
-  "imageURLs": [
-    "/images/malls/ca-union-market-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-union-market-1.jpg"],
   "openFrom": 1100,
   "openUntil": 2300,
   "rating": 4.6,

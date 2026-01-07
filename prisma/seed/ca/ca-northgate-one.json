@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 38.0080358,
   "longitude": -122.5477131,
-  "imageURLs": [
-    "/images/malls/ca-northgate-one-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-northgate-one-1.jpg"],
   "summary": "Northgate One in San Rafael is a community shopping destination anchored by the family-owned Northgate Sew and Vac, which has served Marin County for over 60 years. The center specializes in quality home goods including sewing machines, vacuum cleaners, and air purifiers, offering personalized service that has earned strong customer loyalty.",
   "openFrom": 600,
   "openUntil": 2300,

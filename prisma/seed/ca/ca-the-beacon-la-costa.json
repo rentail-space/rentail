@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.0840339,
   "longitude": -117.2669067,
-  "imageURLs": [
-    "/images/malls/ca-the-beacon-la-costa-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-beacon-la-costa-1.jpg"],
   "rating": 4.4,
   "reviewCount": 84,
   "website": "https://www.thebeaconlacosta.com/?utm_source=rentail.space",

@@ -8,9 +8,7 @@
   "latitude": 34.1441443,
   "longitude": -118.7548997,
   "phone": "++1 818-223-9499",
-  "imageURLs": [
-    "/images/malls/ca-whizin-market-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-whizin-market-square-1.jpg"],
   "openFrom": 800,
   "openUntil": 2200,
   "rating": 4.5,

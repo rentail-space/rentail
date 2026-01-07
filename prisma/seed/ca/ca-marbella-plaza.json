@@ -8,9 +8,7 @@
   "latitude": 33.5080033,
   "longitude": -117.6595841,
   "phone": "++1 949-661-4342",
-  "imageURLs": [
-    "/images/malls/ca-marbella-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-marbella-plaza-1.jpg"],
   "openFrom": 800,
   "openUntil": 1800,
   "rating": 4.5,

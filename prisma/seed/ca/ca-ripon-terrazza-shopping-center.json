@@ -8,9 +8,7 @@
   "latitude": 37.76067080000001,
   "longitude": -121.12642199999999,
   "phone": "++1 209-235-6233",
-  "imageURLs": [
-    "/images/malls/ca-ripon-terrazza-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-ripon-terrazza-shopping-center-1.jpg"],
   "summary": "Ripon Terrazza Shopping Center is a neighborhood retail destination in Ripon, California, developed by JKB Living to serve the city's growing residential communities. With convenient hours and a strong community reputation, the center provides essential shopping and services to local families and residents.",
   "openFrom": 1000,
   "openUntil": 2200,

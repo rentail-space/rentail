@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.813083299999995,
   "longitude": -118.3683768,
-  "imageURLs": [
-    "/images/malls/ca-plaza-mayor-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-plaza-mayor-shopping-center-1.jpg"],
   "summary": "Plaza Mayor Shopping Center is a community-oriented open-air retail destination in Torrance, California, offering a practical mix of shops, restaurants, and services. With a strong 4.4-star rating and convenient South Bay location, it serves as a reliable neighborhood shopping hub for local residents.",
   "openFrom": 600,
   "openUntil": 100,

@@ -8,9 +8,7 @@
   "latitude": 32.9522222,
   "longitude": -117.2325,
   "phone": "++1 858-793-5757",
-  "imageURLs": [
-    "/images/malls/ca-del-mar-highlands-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-del-mar-highlands-town-center-1.jpg"],
   "summary": "Del Mar Highlands Town Center is an upscale open-air lifestyle destination in San Diego's North County featuring the innovative Sky Deck restaurant collective, Cinépolis luxury cinema, and curated retail mix. This community-focused center combines quality dining, entertainment, and shopping in an inviting outdoor setting that serves the affluent Del Mar and Carmel Valley neighborhoods.",
   "openFrom": 1000,
   "openUntil": 2200,

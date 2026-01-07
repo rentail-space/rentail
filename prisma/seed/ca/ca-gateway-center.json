@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.613882,
   "longitude": -117.6793707,
-  "imageURLs": [
-    "/images/malls/ca-gateway-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-gateway-center-1.jpg"],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.3,

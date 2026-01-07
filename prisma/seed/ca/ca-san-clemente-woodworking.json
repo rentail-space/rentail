@@ -8,9 +8,7 @@
   "latitude": 33.4537085,
   "longitude": -117.5954855,
   "phone": "++1 949-939-3802",
-  "imageURLs": [
-    "/images/malls/ca-san-clemente-woodworking-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-san-clemente-woodworking-1.jpg"],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.7,

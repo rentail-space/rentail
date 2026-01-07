@@ -8,9 +8,7 @@
   "latitude": 32.8656579,
   "longitude": -117.2319514,
   "phone": "++1 858-455-7550",
-  "imageURLs": [
-    "/images/malls/ca-la-jolla-village-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-la-jolla-village-square-1.jpg"],
   "summary": "La Jolla Village Square is a community-focused shopping center featuring chain stores, casual restaurants, and a movie theater in the heart of La Jolla Village. With its inviting open-air layout and emphasis on food and entertainment, it serves as a popular neighborhood destination for both everyday shopping and leisure activities.",
   "openFrom": 1000,
   "openUntil": 2200,

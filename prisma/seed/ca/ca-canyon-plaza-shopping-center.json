@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.7870778,
   "longitude": -116.4825451,
-  "imageURLs": [
-    "/images/malls/ca-canyon-plaza-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-canyon-plaza-shopping-center-1.jpg"],
   "summary": "Canyon Plaza Shopping Center is a neighborhood retail destination on East Palm Canyon Drive in Cathedral City, serving the local community and Coachella Valley visitors. With convenient hours and a solid reputation reflected in its 4.3-star rating, it offers practical shopping and services in the heart of the desert.",
   "openFrom": 1000,
   "openUntil": 2100,

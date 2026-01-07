@@ -8,9 +8,7 @@
   "latitude": 33.8862734,
   "longitude": -118.40847049999998,
   "phone": "++1 626-535-0318",
-  "imageURLs": [
-    "/images/malls/ca-metlox-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-metlox-1.jpg"],
   "summary": "Metlox Plaza is an upscale lifestyle center in Manhattan Beach built on the historic site of the former Metlox pottery factory. This open-air destination offers boutique shopping and dining experiences that cater to the affluent South Bay coastal community.",
   "openFrom": 0,
   "openUntil": 2400,

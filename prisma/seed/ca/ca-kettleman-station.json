@@ -8,9 +8,7 @@
   "latitude": 38.115465,
   "longitude": -121.26442490000001,
   "phone": "++1 209-224-5071",
-  "imageURLs": [
-    "/images/malls/ca-kettleman-station-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-kettleman-station-1.jpg"],
   "summary": "Kettleman Station is a community-oriented shopping center in Lodi, California, focused on serving family lifestyle needs through locally-owned businesses centered around home, health, and family services. The plaza offers dining, medical offices, fitness facilities, personal care services, and flexible commercial space options.",
   "openFrom": 900,
   "openUntil": 1700,

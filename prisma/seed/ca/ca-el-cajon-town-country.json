@@ -8,9 +8,7 @@
   "latitude": 32.799114,
   "longitude": -116.9361522,
   "phone": "++1 760-630-8247",
-  "imageURLs": [
-    "/images/malls/ca-el-cajon-town-country-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-el-cajon-town-country-1.jpg"],
   "openFrom": 900,
   "openUntil": 2300,
   "rating": 4.3,

@@ -8,9 +8,7 @@
   "latitude": 33.158839799999996,
   "longitude": -117.3506041,
   "phone": "++1 760-434-3838",
-  "imageURLs": [
-    "/images/malls/ca-village-faire-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-village-faire-1.jpg"],
   "summary": "Village Faire is a charming boutique shopping center in Historic Carlsbad Village featuring New England-style architecture with Caribbean flair. With over 36 restaurants, shops, and services surrounding a family-friendly fountain courtyard, it's located just one block from the beach and offers a unique coastal shopping and dining experience.",
   "openFrom": 700,
   "openUntil": 200,

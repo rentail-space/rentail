@@ -8,9 +8,7 @@
   "latitude": 33.955937399999996,
   "longitude": -117.39271169999999,
   "phone": "++1 562-938-1722",
-  "imageURLs": [
-    "/images/malls/ca-riverside-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-riverside-plaza-1.jpg"],
   "summary": "Riverside Plaza is a cheerful community shopping center in Riverside featuring a supermarket anchor, specialty retail stores, casual dining options, and a cinema. With its classy atmosphere and convenient mix of everyday shopping and entertainment, it serves as a popular destination for local residents.",
   "openFrom": 1000,
   "openUntil": 2100,

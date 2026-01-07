@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.703948499999996,
   "longitude": -121.85266270000001,
-  "imageURLs": [
-    "/images/malls/ca-fallon-gateway-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-fallon-gateway-1.jpg"],
   "summary": "Modern shopping center with a variety of household-name retailers, services & several restaurants. Located in the heart of Dublin, this well-rated community destination serves the Tri-Valley area with convenient shopping and dining options.",
   "openFrom": 900,
   "openUntil": 1800,

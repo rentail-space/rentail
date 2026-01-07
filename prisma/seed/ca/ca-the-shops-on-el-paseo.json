@@ -8,9 +8,7 @@
   "latitude": 33.7200552,
   "longitude": -116.38852360000001,
   "phone": "++1 760-341-4058",
-  "imageURLs": [
-    "/images/malls/ca-the-shops-on-el-paseo-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-shops-on-el-paseo-1.jpg"],
   "summary": "The Shops on El Paseo is Palm Desert's premier upscale lifestyle destination featuring luxury designer boutiques, art galleries, and elevated dining experiences. With complimentary valet parking and a sophisticated open-air setting, it offers the refined shopping and hospitality that defines the Coachella Valley's celebrated desert lifestyle.",
   "openFrom": 1000,
   "openUntil": 1800,

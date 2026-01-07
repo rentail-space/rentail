@@ -8,9 +8,7 @@
   "latitude": 34.0160639,
   "longitude": -118.49622719999999,
   "phone": "++1 310-393-8355",
-  "imageURLs": [
-    "/images/malls/ca-downtown-santa-monica-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-downtown-santa-monica-1.jpg"],
   "summary": "Downtown Santa Monica is Southern California's premier open-air lifestyle destination featuring the iconic Third Street Promenade with hundreds of upscale retailers, restaurants, and entertainment venues. This sophisticated pedestrian district combines premium shopping with year-round events and California's first Entertainment Zone, all just blocks from the beach.",
   "openFrom": 900,
   "openUntil": 2300,

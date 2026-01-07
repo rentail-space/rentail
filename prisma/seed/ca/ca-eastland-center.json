@@ -8,9 +8,7 @@
   "latitude": 34.0738444,
   "longitude": -117.88549549999998,
   "phone": "++1 877-206-5656",
-  "imageURLs": [
-    "/images/malls/ca-eastland-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-eastland-center-1.jpg"],
   "summary": "Eastland Center is West Covina's popular outdoor shopping destination featuring a variety of large brand-name retail outlets and eateries with ample parking. This open-air lifestyle center serves the San Gabriel Valley community with convenient hours and a diverse mix of national retailers.",
   "openFrom": 600,
   "openUntil": 2300,

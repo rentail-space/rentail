@@ -8,9 +8,7 @@
   "latitude": 33.616565,
   "longitude": -117.87592169999998,
   "phone": "++1 949-721-2000",
-  "imageURLs": [
-    "/images/malls/ca-fashion-island-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-fashion-island-1.jpg"],
   "summary": "Fashion Island is Orange County's premier luxury outdoor shopping destination in Newport Beach, featuring high-end retailers, upscale dining, and a cinema within an elegant open-air setting with water features. This sophisticated lifestyle center offers personalized shopping services and exclusive events, attracting affluent shoppers seeking a resort-like retail experience.",
   "openFrom": 1000,
   "openUntil": 2000,

@@ -8,9 +8,7 @@
   "latitude": 32.6524762,
   "longitude": -116.9690668,
   "phone": "++1 858-546-3000",
-  "imageURLs": [
-    "/images/malls/ca-village-walk-at-eastlake-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-village-walk-at-eastlake-1.jpg"],
   "openFrom": 900,
   "openUntil": 2100,
   "rating": 4.6,

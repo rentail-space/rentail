@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.6802412,
   "longitude": -118.0044278,
-  "imageURLs": [
-    "/images/malls/ca-seacliff-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-seacliff-village-1.jpg"],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.4,

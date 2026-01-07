@@ -8,9 +8,7 @@
   "latitude": 33.0417313,
   "longitude": -117.1584687,
   "phone": "++1 858-546-4617",
-  "imageURLs": [
-    "/images/malls/ca-cielo-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-cielo-village-1.jpg"],
   "openFrom": 900,
   "openUntil": 1700,
   "rating": 4.5,

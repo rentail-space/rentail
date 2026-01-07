@@ -8,9 +8,7 @@
   "latitude": 37.502678,
   "longitude": -121.9713578,
   "phone": "++1 510-770-9798",
-  "imageURLs": [
-    "/images/malls/ca-pacific-commons-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-pacific-commons-shopping-center-1.jpg"],
   "summary": "Pacific Commons Shopping Center is a large, interconnected lifestyle center in Fremont featuring big-box retailers, specialty shops, and diverse dining options. This popular East Bay destination serves the area's affluent, tech-oriented community with convenient access and extended hours.",
   "openFrom": 600,
   "openUntil": 2300,

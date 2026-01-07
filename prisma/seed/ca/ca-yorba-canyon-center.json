@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.8777336,
   "longitude": -117.7522343,
-  "imageURLs": [
-    "/images/malls/ca-yorba-canyon-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-yorba-canyon-center-1.jpg"],
   "openFrom": 1130,
   "openUntil": 2100,
   "rating": 4.5,

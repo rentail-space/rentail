@@ -8,9 +8,7 @@
   "latitude": 37.40406900000001,
   "longitude": -122.1111885,
   "phone": "++1 415-675-7742",
-  "imageURLs": [
-    "/images/malls/ca-the-village-at-san-antonio-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-village-at-san-antonio-center-1.jpg"],
   "summary": "The Village at San Antonio Center is Mountain View's premier open-air lifestyle destination featuring upscale dining, boutique fitness studios, and entertainment options including Alamo Drafthouse cinema. This urban live-work-play center serves Silicon Valley's tech community with sophisticated experiences ranging from Il Fornaio and Pacific Catch to OrangeTheory Fitness and Solidcore, plus an on-site Hyatt Centric hotel.",
   "openFrom": 1000,
   "openUntil": 2000,

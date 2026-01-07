@@ -8,9 +8,7 @@
   "latitude": 37.878652599999995,
   "longitude": -122.07385540000001,
   "phone": "++1 949-474-0440",
-  "imageURLs": [
-    "/images/malls/ca-rossmoor-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-rossmoor-shopping-center-1.jpg"],
   "summary": "Rossmoor Shopping Center is a neighborhood retail destination in Walnut Creek serving the affluent Rossmoor retirement community and surrounding Tice Valley area. This well-maintained community center offers convenient access to essential services and shopping for local residents in one of the East Bay's most desirable locations.",
   "openFrom": 0,
   "openUntil": 2400,

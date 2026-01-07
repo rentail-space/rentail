@@ -8,9 +8,7 @@
   "latitude": 32.8303572,
   "longitude": -117.2033988,
   "phone": "++1 858-272-0992",
-  "imageURLs": [
-    "/images/malls/ca-clairemont-town-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-clairemont-town-square-1.jpg"],
   "summary": "Clairemont Town Square is a community-focused shopping destination in San Diego featuring a diverse mix of national retailers, local boutiques, casual and traditional dining options, and a movie theater. This open-air center serves as a convenient one-stop location for everyday shopping, entertainment, and dining needs in the Clairemont neighborhood.",
   "openFrom": 700,
   "openUntil": 2300,

@@ -8,9 +8,7 @@
   "latitude": 37.688736299999995,
   "longitude": -121.0540259,
   "phone": "++1 209-527-3401",
-  "imageURLs": [
-    "/images/malls/ca-vintage-faire-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-vintage-faire-mall-1.jpg"],
   "summary": "Vintage Faire Mall is Modesto's premier enclosed regional shopping center featuring department stores, national retail chains, and entertainment options including Dave & Buster's. The spacious mall offers a complete shopping experience with a food court, indoor play area, and regular community events.",
   "openFrom": 1000,
   "openUntil": 2100,

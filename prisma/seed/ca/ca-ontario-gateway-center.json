@@ -8,9 +8,7 @@
   "latitude": 34.0684632,
   "longitude": -117.5521837,
   "phone": "++1 949-398-8750",
-  "imageURLs": [
-    "/images/malls/ca-ontario-gateway-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-ontario-gateway-center-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.4,

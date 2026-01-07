@@ -8,9 +8,7 @@
   "latitude": 33.1036739,
   "longitude": -117.2678834,
   "phone": "++1 858-876-1163",
-  "imageURLs": [
-    "/images/malls/ca-plaza-paseo-real-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-plaza-paseo-real-1.jpg"],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.3,

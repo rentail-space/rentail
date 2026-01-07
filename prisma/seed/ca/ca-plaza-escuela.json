@@ -8,9 +8,7 @@
   "latitude": 37.8952236,
   "longitude": -122.06057349999998,
   "phone": "++1 925-279-1800",
-  "imageURLs": [
-    "/images/malls/ca-plaza-escuela-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-plaza-escuela-1.jpg"],
   "summary": "Plaza Escuela is a premier community shopping center in downtown Walnut Creek featuring quality retailers like The Container Store, Barnes & Noble, and The Cheesecake Factory. With over 2.4 million annual visits, this 153,577 square foot center serves the East Bay's prestigious retail market with high pedestrian traffic and an upscale tenant mix.",
   "openFrom": 600,
   "openUntil": 2300,

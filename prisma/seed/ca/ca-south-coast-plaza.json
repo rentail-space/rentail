@@ -8,9 +8,7 @@
   "latitude": 33.691002999999995,
   "longitude": -117.8889767,
   "phone": "++1 714-435-2000",
-  "imageURLs": [
-    "/images/malls/ca-south-coast-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-south-coast-plaza-1.jpg"],
   "summary": "South Coast Plaza is Southern California's premier luxury shopping destination, featuring over 250 stores including flagship boutiques for the world's top designer brands such as Gucci, Chanel, Hermès, and Louis Vuitton. With exceptional dining, cultural programming, and personalized services, it offers an unparalleled upscale retail experience in Costa Mesa.",
   "openFrom": 1000,
   "openUntil": 2100,

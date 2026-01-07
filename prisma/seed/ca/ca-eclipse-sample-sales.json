@@ -8,9 +8,7 @@
   "latitude": 34.0731826,
   "longitude": -118.3841303,
   "phone": "++1 646-407-5409",
-  "imageURLs": [
-    "/images/malls/ca-eclipse-sample-sales-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-eclipse-sample-sales-1.jpg"],
   "openFrom": 1000,
   "openUntil": 1800,
   "rating": 4,

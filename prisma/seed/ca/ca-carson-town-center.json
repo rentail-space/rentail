@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.840473599999996,
   "longitude": -118.2855728,
-  "imageURLs": [
-    "/images/malls/ca-carson-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-carson-town-center-1.jpg"],
   "summary": "Carson Town Center is a community-oriented shopping destination in Carson, California, serving the diverse South Bay area with convenient retail and services. With a 4.3-star rating from over 1,200 reviews, this accessible center provides essential shopping options for local residents and families.",
   "openFrom": 700,
   "openUntil": 1800,

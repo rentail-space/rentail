@@ -8,9 +8,7 @@
   "latitude": 33.7172835,
   "longitude": -118.0503824,
   "phone": "++1 714-840-6460",
-  "imageURLs": [
-    "/images/malls/ca-huntington-harbour-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-huntington-harbour-mall-1.jpg"],
   "openFrom": 600,
   "openUntil": 2200,
   "rating": 4.5,

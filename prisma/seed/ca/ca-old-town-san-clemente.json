@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.4290517,
   "longitude": -117.6153118,
-  "imageURLs": [
-    "/images/malls/ca-old-town-san-clemente-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-old-town-san-clemente-1.jpg"],
   "openFrom": 800,
   "openUntil": 2100,
   "rating": 4.6,

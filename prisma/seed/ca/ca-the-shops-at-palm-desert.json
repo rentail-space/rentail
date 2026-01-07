@@ -8,9 +8,7 @@
   "latitude": 33.7230856,
   "longitude": -116.39535439999997,
   "phone": "++1 760-346-2121",
-  "imageURLs": [
-    "/images/malls/ca-the-shops-at-palm-desert-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-shops-at-palm-desert-1.jpg"],
   "summary": "The Shops at Palm Desert is the Coachella Valley's premier lifestyle destination, featuring major anchors like Macy's, Dick's Sporting Goods, and JCPenney alongside a rich blend of national brands and local retailers. With over 15 dining options and a vibrant open-air design, it serves as the region's central hub for shopping, dining, and entertainment.",
   "openFrom": 1100,
   "openUntil": 2100,

@@ -8,9 +8,7 @@
   "latitude": 33.8477423,
   "longitude": -118.212169,
   "phone": "++1 310-762-6262",
-  "imageURLs": [
-    "/images/malls/ca-del-amo-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-del-amo-plaza-1.jpg"],
   "summary": "Del Amo Plaza is an indoor swapmeet offering diverse vendors, dining options, and specialty shops in a spacious warehouse setting. Located near major freeways and the Metro A Line, this value-oriented shopping destination serves the South Bay community with affordable merchandise and cultural products.",
   "openFrom": 1000,
   "openUntil": 1800,

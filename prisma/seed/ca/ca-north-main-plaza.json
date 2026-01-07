@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.8923904,
   "longitude": -117.5649884,
-  "imageURLs": [
-    "/images/malls/ca-north-main-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-north-main-plaza-1.jpg"],
   "openFrom": 800,
   "openUntil": 2200,
   "rating": 4.4,

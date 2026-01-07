@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.5056862,
   "longitude": -117.14844240000001,
-  "imageURLs": [
-    "/images/malls/ca-temecula-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-temecula-town-center-1.jpg"],
   "summary": "Temecula Town Center is a sprawling open-air shopping complex in the heart of Temecula's wine country, featuring a major department store anchor, boutiques, services, and diverse dining options. This popular community destination serves both local residents and tourists with convenient shopping and a welcoming atmosphere.",
   "openFrom": 900,
   "openUntil": 2200,

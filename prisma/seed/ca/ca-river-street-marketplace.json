@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.5002105,
   "longitude": -117.6647421,
-  "imageURLs": [
-    "/images/malls/ca-river-street-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-river-street-marketplace-1.jpg"],
   "summary": "River Street Marketplace is an inviting lifestyle center in historic San Juan Capistrano, featuring a curated selection of shops and restaurants in an open-air setting. This community-focused destination combines convenient retail with quality dining options, serving both locals and visitors to Orange County's coastal region.",
   "openFrom": 1000,
   "openUntil": 2200,

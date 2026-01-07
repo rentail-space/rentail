@@ -8,9 +8,7 @@
   "latitude": 32.8462882,
   "longitude": -117.2741222,
   "phone": "++1 888-555-1234",
-  "imageURLs": [
-    "/images/malls/ca-la-plaza-la-jolla-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-la-plaza-la-jolla-1.jpg"],
   "summary": "La Plaza La Jolla is a well-regarded shopping center on Girard Avenue in the heart of La Jolla's prestigious coastal community. With a 4.6-star rating, this intimate plaza serves the area's affluent residents with quality shops and services in a convenient, accessible location.",
   "openFrom": 1000,
   "openUntil": 2100,

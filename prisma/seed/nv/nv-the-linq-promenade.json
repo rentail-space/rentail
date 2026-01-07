@@ -8,9 +8,7 @@
   "latitude": 36.1180684,
   "longitude": -115.17088099999998,
   "phone": "++1 702-332-0543",
-  "imageURLs": [
-    "/images/malls/nv-the-linq-promenade-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/nv-the-linq-promenade-1.jpg"],
   "summary": "The LINQ Promenade is a dynamic open-air entertainment district on the Las Vegas Strip featuring the iconic High Roller observation wheel, diverse dining options, retail shops, and thrilling attractions like ziplines. This pedestrian-friendly destination combines shopping, entertainment, and world-class experiences in the heart of Las Vegas.",
   "openFrom": 1000,
   "openUntil": 2300,

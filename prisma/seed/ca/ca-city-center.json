@@ -8,9 +8,7 @@
   "latitude": 37.782046099999995,
   "longitude": -122.44655030000001,
   "phone": "++1 914-288-3330",
-  "imageURLs": [
-    "/images/malls/ca-city-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-city-center-1.jpg"],
   "summary": "City Center is an urban retail property located on Geary Boulevard in San Francisco, serving the affluent neighborhoods of Pacific Heights, Presidio Heights, and Laurel Heights. The center offers flexible retail spaces and benefits from its proximity to Golden Gate Park, major medical centers, and the University of San Francisco.",
   "openFrom": 900,
   "openUntil": 2100,

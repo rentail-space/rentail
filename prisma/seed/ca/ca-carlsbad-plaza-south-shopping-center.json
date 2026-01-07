@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.1761218,
   "longitude": -117.3252608,
-  "imageURLs": [
-    "/images/malls/ca-carlsbad-plaza-south-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-carlsbad-plaza-south-shopping-center-1.jpg"],
   "openFrom": 900,
   "openUntil": 2100,
   "rating": 4.3,

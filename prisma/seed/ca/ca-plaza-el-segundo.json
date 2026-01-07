@@ -8,9 +8,7 @@
   "latitude": 33.9057021,
   "longitude": -118.3936665,
   "phone": "++1 310-414-5280",
-  "imageURLs": [
-    "/images/malls/ca-plaza-el-segundo-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-plaza-el-segundo-1.jpg"],
   "summary": "Plaza El Segundo is a contemporary open-air lifestyle center featuring mid- to upmarket stores, diverse dining options including al fresco experiences, and essential services. Located on Pacific Coast Highway in El Segundo, this modern shopping destination serves the South Bay community with quality retail and restaurant offerings.",
   "openFrom": 1000,
   "openUntil": 2100,

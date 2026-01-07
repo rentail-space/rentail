@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.8382127,
   "longitude": -117.9389392,
-  "imageURLs": [
-    "/images/malls/ca-anaheim-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-anaheim-plaza-1.jpg"],
   "summary": "Anaheim Plaza is a modern strip mall along the Santa Ana Freeway featuring big-box stores, familiar retail chains, and casual dining options. This convenient open-air shopping center serves as a practical neighborhood destination for everyday shopping needs.",
   "openFrom": 930,
   "openUntil": 2200,

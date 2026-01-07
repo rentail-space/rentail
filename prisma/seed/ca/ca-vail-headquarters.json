@@ -8,9 +8,7 @@
   "latitude": 33.47895930000001,
   "longitude": -117.09778269999998,
   "phone": "++1 909-973-3517",
-  "imageURLs": [
-    "/images/malls/ca-vail-headquarters-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-vail-headquarters-1.jpg"],
   "summary": "Vail Headquarters is a lifestyle destination in Temecula featuring The Cookhouse Food Hall with four chef-owned kitchens, alongside curated shopping, dining, and service offerings. This open-air center emphasizes local operators and communal experiences, making it a popular gathering place for both residents and wine country visitors.",
   "openFrom": 900,
   "openUntil": 2100,

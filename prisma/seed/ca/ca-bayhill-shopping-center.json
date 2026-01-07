@@ -8,9 +8,7 @@
   "latitude": 37.6261179,
   "longitude": -122.42729209999999,
   "phone": "++1 925-279-1800",
-  "imageURLs": [
-    "/images/malls/ca-bayhill-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-bayhill-shopping-center-1.jpg"],
   "summary": "Bayhill Shopping Center is a convenient strip mall in San Bruno featuring familiar restaurants, a pharmacy, grocery store, and essential services. Strategically located near major tech campuses including YouTube and Google, the center serves a daytime population of 192,000+ within 3 miles and offers easy access from I-280.",
   "openFrom": 600,
   "openUntil": 2300,

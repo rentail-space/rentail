@@ -8,9 +8,7 @@
   "latitude": 34.1736024,
   "longitude": -118.8465044,
   "phone": "++1 818-637-8938",
-  "imageURLs": [
-    "/images/malls/ca-the-lakes-at-thousand-oaks-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-lakes-at-thousand-oaks-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.5,

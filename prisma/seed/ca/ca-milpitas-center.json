@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.4276589,
   "longitude": -121.91304199999999,
-  "imageURLs": [
-    "/images/malls/ca-milpitas-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-milpitas-center-1.jpg"],
   "summary": "Milpitas Center is a practical community shopping destination offering casual dining, essential retailers, and service providers in the heart of Silicon Valley. With convenient hours and a diverse tenant mix, it serves as a reliable hub for everyday needs in the growing Milpitas community.",
   "openFrom": 700,
   "openUntil": 2100,

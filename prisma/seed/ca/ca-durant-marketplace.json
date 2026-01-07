@@ -8,9 +8,7 @@
   "latitude": 37.7367395,
   "longitude": -122.16410880000001,
   "phone": "++1 510-577-2800",
-  "imageURLs": [
-    "/images/malls/ca-durant-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-durant-marketplace-1.jpg"],
   "summary": "DURANT Marketplace is Oakland's popular indoor flea market featuring a diverse mix of new and used items including clothing, electronics, and household goods. With over 1,400 reviews and a 4-star rating, this community destination offers bargain hunters an exciting treasure-hunting experience in a convenient indoor setting.",
   "openFrom": 1000,
   "openUntil": 1900,

@@ -8,9 +8,7 @@
   "latitude": 34.251144,
   "longitude": -117.18855930000001,
   "phone": "++1 909-337-2533",
-  "imageURLs": [
-    "/images/malls/ca-lake-arrowhead-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-lake-arrowhead-village-1.jpg"],
   "summary": "Lake Arrowhead Village is a charming alpine-style shopping and dining destination set along a pristine mountain lake within the San Bernardino National Forest. This European-inspired village features boutique merchants, diverse restaurants, and regular community events, all with stunning lakeside views at 5,174 feet elevation.",
   "openFrom": 800,
   "openUntil": 2200,

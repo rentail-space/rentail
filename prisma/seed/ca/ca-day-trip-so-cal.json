@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.4034915,
   "longitude": -116.96069449999999,
-  "imageURLs": [
-    "/images/malls/ca-day-trip-so-cal-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-day-trip-so-cal-1.jpg"],
   "summary": "Day Trip So Cal is a specialized outdoor lifestyle boutique in Lucerne Valley offering curated products for Southern California adventures, from desert-ready sunglasses to road trip guides. This unique retail destination caters to explorers seeking authentic SoCal gear and travel resources for scenic routes like Angeles Crest Highway.",
   "website": "https://daytripsocal.com/?utm_source=rentail.space",
   "centerType": "StripCenter",

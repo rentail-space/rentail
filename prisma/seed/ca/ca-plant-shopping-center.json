@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.3029684,
   "longitude": -121.8652684,
-  "imageURLs": [
-    "/images/malls/ca-plant-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-plant-shopping-center-1.jpg"],
   "summary": "The Plant San Jose is a sizable community shopping center offering a diverse mix of stores, services, and casual dining options. Open daily from 8 AM to 10 PM, this neighborhood destination combines convenient shopping with a welcoming, community-focused atmosphere where locals can shop, dine, and connect.",
   "openFrom": 800,
   "openUntil": 2200,

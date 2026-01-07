@@ -8,9 +8,7 @@
   "latitude": 34.0490218,
   "longitude": -118.2611684,
   "phone": "++1 213-955-7170",
-  "imageURLs": [
-    "/images/malls/ca-figat7th-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-figat7th-1.jpg"],
   "summary": "FIGat7th is Downtown Los Angeles's premier open-air shopping and entertainment destination, offering a curated mix of fashion retail, diverse dining, fitness facilities, and cultural programming. Located in the heart of DTLA's financial district, this urban lifestyle center serves as a vibrant community hub with regular events, a Thursday farmer's market, and a dynamic arts program.",
   "openFrom": 1100,
   "openUntil": 2100,

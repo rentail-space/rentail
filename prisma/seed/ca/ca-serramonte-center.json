@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.672119099999996,
   "longitude": -122.4708116,
-  "imageURLs": [
-    "/images/malls/ca-serramonte-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-serramonte-center-1.jpg"],
   "summary": "Serramonte Center is Daly City's top shopping destination, offering a comprehensive mix of retail, dining, and entertainment options in one convenient location. This regional mall serves the diverse San Francisco Peninsula community with popular national brands and actively supports local schools through community programs.",
   "openFrom": 1000,
   "openUntil": 2100,

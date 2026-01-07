@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.4784065,
   "longitude": -122.18712310000001,
-  "imageURLs": [
-    "/images/malls/ca-marsh-manor-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-marsh-manor-shopping-center-1.jpg"],
   "summary": "Marsh Manor Shopping Center is a family-managed community destination in Redwood City that has served the mid-peninsula since the 1950s. With locally-owned shops, diverse dining options, fitness studios, and a vibrant outdoor patio hosting live music and community events, it offers a charming neighborhood atmosphere that blends convenience with community connection.",
   "openFrom": 900,
   "openUntil": 1800,

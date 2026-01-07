@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.8362495,
   "longitude": -118.3542133,
-  "imageURLs": [
-    "/images/malls/ca-village-del-amo-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-village-del-amo-1.jpg"],
   "summary": "Village Del Amo is a community-oriented shopping center in Torrance offering a convenient mix of dining, shopping, fitness, and services for South Bay residents. With strong ratings and a neighborhood-focused tenant mix, it serves as a reliable destination for everyday needs.",
   "openFrom": 1000,
   "openUntil": 2100,

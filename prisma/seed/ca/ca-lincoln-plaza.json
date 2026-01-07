@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.9096674,
   "longitude": -117.436233,
-  "imageURLs": [
-    "/images/malls/ca-lincoln-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-lincoln-plaza-1.jpg"],
   "openFrom": 1130,
   "openUntil": 2200,
   "rating": 4.3,

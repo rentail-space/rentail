@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.50810440000001,
   "longitude": -117.34590430000002,
-  "imageURLs": [
-    "/images/malls/ca-victorville-galleria-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-victorville-galleria-1.jpg"],
   "summary": "Victorville Galleria is a diverse indoor marketplace in Victorville offering an eclectic mix of retail shops, service providers, and eateries under one roof. Known for affordable prices and multicultural offerings, the center features everything from clothing and electronics to tattoo parlors, nail salons, and fresh produce vendors.",
   "openFrom": 1000,
   "openUntil": 1900,

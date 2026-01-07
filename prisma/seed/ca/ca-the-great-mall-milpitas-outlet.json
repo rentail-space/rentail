@@ -8,9 +8,7 @@
   "latitude": 37.4175675,
   "longitude": -121.8969393,
   "phone": "++1 408-514-0025",
-  "imageURLs": [
-    "/images/malls/ca-the-great-mall-milpitas-outlet-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-great-mall-milpitas-outlet-1.jpg"],
   "summary": "The Great Mall in Milpitas is Northern California's largest outlet shopping center, featuring over 200 brand-name stores offering discounted prices on fashion, accessories, and home goods. Strategically located in Silicon Valley, this indoor mall serves as a premier regional destination for value-conscious shoppers throughout the Bay Area.",
   "openFrom": 1000,
   "openUntil": 2100,

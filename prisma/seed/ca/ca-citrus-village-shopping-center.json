@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.047832,
   "longitude": -117.1708504,
-  "imageURLs": [
-    "/images/malls/ca-citrus-village-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-citrus-village-shopping-center-1.jpg"],
   "openFrom": 700,
   "openUntil": 2300,
   "rating": 4.3,

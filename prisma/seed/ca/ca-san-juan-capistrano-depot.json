@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.5011479,
   "longitude": -117.6638252,
-  "imageURLs": [
-    "/images/malls/ca-san-juan-capistrano-depot-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-san-juan-capistrano-depot-1.jpg"],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.8,

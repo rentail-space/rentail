@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.9598037,
   "longitude": -117.3928476,
-  "imageURLs": [
-    "/images/malls/ca-magnolia-town-center-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-magnolia-town-center-shopping-center-1.jpg"],
   "openFrom": 600,
   "openUntil": 100,
   "rating": 4.3,

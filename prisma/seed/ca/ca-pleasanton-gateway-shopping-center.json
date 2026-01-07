@@ -8,9 +8,7 @@
   "latitude": 37.6568119,
   "longitude": -121.89857149999999,
   "phone": "++1 800-762-1641",
-  "imageURLs": [
-    "/images/malls/ca-pleasanton-gateway-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-pleasanton-gateway-shopping-center-1.jpg"],
   "summary": "Pleasanton Gateway Shopping Center is a contemporary community center conveniently located off I-680 at Bernal Avenue, anchored by a state-of-the-art Safeway and featuring diverse dining options from The Habit to Toast Café & Grill. The center offers comprehensive services including fitness facilities, spa treatments, banking, and personal care, all with the convenience of ample free parking.",
   "openFrom": 700,
   "openUntil": 2200,

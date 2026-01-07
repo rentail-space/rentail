@@ -8,9 +8,7 @@
   "latitude": 33.9577976,
   "longitude": -117.6218843,
   "phone": "++1 909-946-7518",
-  "imageURLs": [
-    "/images/malls/ca-town-center-at-the-preserve-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-town-center-at-the-preserve-1.jpg"],
   "openFrom": 600,
   "openUntil": 2200,
   "rating": 4.6,

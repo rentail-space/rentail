@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.528478,
   "longitude": -117.2223269,
-  "imageURLs": [
-    "/images/malls/ca-rancherias-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-rancherias-plaza-1.jpg"],
   "summary": "Rancherias Plaza is a community-oriented strip center located on Highway 18 in Apple Valley, serving High Desert residents with convenient shopping and services. With a 4-star rating from over 1,300 reviews, this open-air center provides accessible retail options for everyday needs in the growing San Bernardino County community.",
   "openFrom": 800,
   "openUntil": 2100,

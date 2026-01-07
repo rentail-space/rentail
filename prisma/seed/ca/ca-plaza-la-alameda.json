@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.9744301,
   "longitude": -118.2336056,
-  "imageURLs": [
-    "/images/malls/ca-plaza-la-alameda-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-plaza-la-alameda-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.4,

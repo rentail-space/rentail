@@ -8,9 +8,7 @@
   "latitude": 34.0686422,
   "longitude": -118.1336659,
   "phone": "++1 626-570-9453",
-  "imageURLs": [
-    "/images/malls/ca-atlantic-times-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-atlantic-times-square-1.jpg"],
   "summary": "Atlantic Times Square is an open-air lifestyle center in Monterey Park featuring a quaint streetscape design with world-class retail, restaurants, entertainment, and residential condominiums. The center is particularly renowned for its diverse collection of Asian eateries and serves as a cultural gathering place for the San Gabriel Valley community.",
   "openFrom": 0,
   "openUntil": 2400,

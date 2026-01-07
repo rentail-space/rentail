@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.88919670000001,
   "longitude": -117.8122475,
-  "imageURLs": [
-    "/images/malls/ca-yorba-linda-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-yorba-linda-town-center-1.jpg"],
   "openFrom": 900,
   "openUntil": 2100,
   "rating": 4.5,

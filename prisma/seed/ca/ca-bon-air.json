@@ -8,9 +8,7 @@
   "latitude": 37.946980499999995,
   "longitude": -122.526195,
   "phone": "++1 415-461-0200",
-  "imageURLs": [
-    "/images/malls/ca-bon-air-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-bon-air-1.jpg"],
   "summary": "Bon Air is a community-focused shopping center in Larkspur, Marin County, featuring gourmet groceries, specialty dining, wellness services, and unique boutique retailers. With its emphasis on local spirit and convenience, the center serves as a neighborhood gathering place offering everything from everyday essentials to special occasion needs.",
   "openFrom": 1000,
   "openUntil": 1800,

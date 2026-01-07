@@ -27,16 +27,12 @@
       "includeLogsCount": 50
     }
   },
-  "include": [
-    "app/**/*"
-  ],
+  "include": ["app/**/*"],
   "ignore": {
     "useGitignore": true,
     "useDotIgnore": true,
     "useDefaultPatterns": true,
-    "customPatterns": [
-      "app/data/**/*"
-    ]
+    "customPatterns": ["app/data/**/*"]
   },
   "security": {
     "enableSecurityCheck": true

@@ -8,9 +8,7 @@
   "latitude": 32.8018442,
   "longitude": -117.0125535,
   "phone": "++1 858-847-4600",
-  "imageURLs": [
-    "/images/malls/ca-navajo-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-navajo-shopping-center-1.jpg"],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.3,

@@ -8,9 +8,7 @@
   "latitude": 33.6498475,
   "longitude": -117.582115,
   "phone": "++1 310-820-5443",
-  "imageURLs": [
-    "/images/malls/ca-mercado-del-lago-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-mercado-del-lago-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2300,
   "rating": 4.4,

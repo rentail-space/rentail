@@ -8,9 +8,7 @@
   "latitude": 36.9785429,
   "longitude": -121.9701506,
   "phone": "++1 831-475-0500",
-  "imageURLs": [
-    "/images/malls/ca-brown-ranch-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-brown-ranch-marketplace-1.jpg"],
   "summary": "Brown Ranch Marketplace is a family-owned 85,000 square foot shopping center featuring 30 stores including Trader Joe's, Michaels, and a diverse mix of specialty shops and international foods. Conveniently located off Highway 1 in Capitola, this community center has been serving the area since 1911.",
   "openFrom": 800,
   "openUntil": 2100,

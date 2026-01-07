@@ -8,9 +8,7 @@
   "latitude": 33.8120184,
   "longitude": -117.50757340000001,
   "phone": "++1 951-277-7601",
-  "imageURLs": [
-    "/images/malls/ca-the-shops-at-dos-lagos-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-shops-at-dos-lagos-1.jpg"],
   "summary": "The Shops at Dos Lagos is an elegant open-air lifestyle center built on a historic site, offering upscale shopping, destination dining, and entertainment including a luxury theater and amphitheater. With its garden-like atmosphere, children's playground, and regular community events, it serves as Corona's premier gathering place for families and shoppers seeking an elevated retail experience.",
   "openFrom": 1000,
   "openUntil": 2100,

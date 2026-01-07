@@ -8,9 +8,7 @@
   "latitude": 33.725331,
   "longitude": -117.9873913,
   "phone": "++1 833-800-4343",
-  "imageURLs": [
-    "/images/malls/ca-pavilions-place-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-pavilions-place-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.3,

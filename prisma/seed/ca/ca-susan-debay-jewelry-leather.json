@@ -8,9 +8,7 @@
   "latitude": 34.437481,
   "longitude": -117.2352431,
   "phone": "++1 909-374-8357",
-  "imageURLs": [
-    "/images/malls/ca-susan-debay-jewelry-leather-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-susan-debay-jewelry-leather-1.jpg"],
   "openFrom": 900,
   "openUntil": 1700,
   "rating": 4,

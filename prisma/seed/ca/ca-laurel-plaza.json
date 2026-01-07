@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 36.6986407,
   "longitude": -121.65269259999998,
-  "imageURLs": [
-    "/images/malls/ca-laurel-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-laurel-plaza-1.jpg"],
   "summary": "Laurel Plaza is a neighborhood business plaza in Salinas featuring a variety of offices and retail establishments, including the popular Collier Pet Supplies. With convenient hours and a practical mix of services, it serves as a reliable destination for everyday shopping needs in the local community.",
   "openFrom": 900,
   "openUntil": 2000,

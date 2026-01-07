@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.4371365,
   "longitude": -117.6217249,
-  "imageURLs": [
-    "/images/malls/ca-pico-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-pico-plaza-1.jpg"],
   "openFrom": 530,
   "openUntil": 2200,
   "rating": 4.5,

@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.0762384,
   "longitude": -117.5620958,
-  "imageURLs": [
-    "/images/malls/ca-piemonte-at-ontario-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-piemonte-at-ontario-center-1.jpg"],
   "openFrom": 900,
   "openUntil": 1700,
   "rating": 4.3,

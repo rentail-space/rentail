@@ -8,9 +8,7 @@
   "latitude": 37.339277300000006,
   "longitude": -122.04261210000001,
   "phone": "++1 925-279-1800",
-  "imageURLs": [
-    "/images/malls/ca-shoppes-at-homestead-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-shoppes-at-homestead-1.jpg"],
   "summary": "Shoppes at Homestead is a 116,109 square foot community shopping center in Sunnyvale's Silicon Valley, serving an exceptionally affluent population near the Apple campus. The center features key anchors including CRUNCH FITNESS, CVS, and Orchard Supply Hardware, along with diverse dining options, attracting over 2.4 million annual visits.",
   "openFrom": 600,
   "openUntil": 2300,

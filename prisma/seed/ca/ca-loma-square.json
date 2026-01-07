@@ -8,9 +8,7 @@
   "latitude": 32.747836299999996,
   "longitude": -117.20579350000001,
   "phone": "++1 833-800-4343",
-  "imageURLs": [
-    "/images/malls/ca-loma-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-loma-square-1.jpg"],
   "summary": "Loma Square is a 205,853 square foot community shopping center in San Diego's Point Loma area, featuring an organic grocery anchor, major retail chains, and 10 casual dining options. Strategically located near Mission Bay and SeaWorld at the junction of I-5 and I-8, the center serves an affluent, diverse population with strong demographics and convenient access.",
   "openFrom": 1000,
   "openUntil": 2100,

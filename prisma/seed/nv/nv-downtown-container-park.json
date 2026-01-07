@@ -8,9 +8,7 @@
   "latitude": 36.167560099999996,
   "longitude": -115.13848370000001,
   "phone": "++1 702-359-9982",
-  "imageURLs": [
-    "/images/malls/nv-downtown-container-park-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/nv-downtown-container-park-1.jpg"],
   "summary": "Downtown Container Park is an innovative open-air shopping center built from repurposed shipping containers in downtown Las Vegas, featuring boutique retail shops, unique restaurants, and live entertainment. The center offers a distinctive blend of local businesses, award-winning dining, and family attractions including an interactive playground, making it a must-visit destination in the revitalized Fremont Street area.",
   "openFrom": 1000,
   "openUntil": 2300,

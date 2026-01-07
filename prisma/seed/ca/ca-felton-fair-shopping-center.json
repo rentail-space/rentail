@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.0523908,
   "longitude": -122.06893230000001,
-  "imageURLs": [
-    "/images/malls/ca-felton-fair-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-felton-fair-shopping-center-1.jpg"],
   "summary": "Felton Fair Shopping Center is a community-focused retail destination in the Santa Cruz Mountains, anchored by Safeway and CVS with additional dining options. Known for its friendly local atmosphere and convenient location, it serves as the primary shopping hub for Felton and surrounding San Lorenzo Valley residents.",
   "rating": 4.3,
   "reviewCount": 210,

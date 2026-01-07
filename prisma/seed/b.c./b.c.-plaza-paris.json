@@ -8,9 +8,7 @@
   "latitude": 32.6654784,
   "longitude": -115.4827869,
   "phone": "++52 686 552 5403",
-  "imageURLs": [
-    "/images/malls/b.c.-plaza-paris-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/b.c.-plaza-paris-1.jpg"],
   "openFrom": 800,
   "openUntil": 1600,
   "rating": 4.3,

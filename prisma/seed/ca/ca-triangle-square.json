@@ -8,9 +8,7 @@
   "latitude": 33.6425997,
   "longitude": -117.9181264,
   "phone": "++1 949-650-0732",
-  "imageURLs": [
-    "/images/malls/ca-triangle-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-triangle-square-1.jpg"],
   "summary": "Triangle Square is Costa Mesa's vibrant outdoor lifestyle center featuring a compelling mix of restaurants, bars, cinema, bowling, fitness facilities, and nightlife venues. This entertainment-focused destination has earned strong community acclaim with its diverse amenities and social atmosphere.",
   "openFrom": 1700,
   "openUntil": 200,

@@ -8,9 +8,7 @@
   "latitude": 33.6774672,
   "longitude": -117.8861176,
   "phone": "++1 657-232-0049",
-  "imageURLs": [
-    "/images/malls/ca-the-lab-anti-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-lab-anti-mall-1.jpg"],
   "summary": "The LAB Anti-Mall is a modern, open-air lifestyle center in Costa Mesa that rejects traditional mall conventions in favor of independent boutiques, diverse dining options, and an on-site art gallery. This trendy destination attracts creative-minded shoppers seeking unique retail experiences and community-focused events in a contemporary urban setting.",
   "openFrom": 700,
   "openUntil": 200,

@@ -8,9 +8,7 @@
   "latitude": 38.0166925,
   "longitude": -121.94270909999999,
   "phone": "++1 925-291-6485",
-  "imageURLs": [
-    "/images/malls/ca-oak-hills-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-oak-hills-shopping-center-1.jpg"],
   "summary": "Oak Hills Shopping Center is a neighborhood retail destination in Pittsburg, California, offering convenient shopping and services for the local community. With extended operating hours and a solid reputation among residents, the center serves as a practical shopping hub for everyday needs in eastern Contra Costa County.",
   "openFrom": 0,
   "openUntil": 2400,

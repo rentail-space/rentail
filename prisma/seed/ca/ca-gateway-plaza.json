@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.737949,
   "longitude": -121.45167589999998,
-  "imageURLs": [
-    "/images/malls/ca-gateway-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-gateway-plaza-1.jpg"],
   "summary": "Gateway Plaza is a community shopping center in Tracy, California, offering convenient daily shopping from 8 AM to 10 PM. With a 4.2-star rating and accessible amenities, it serves as a practical retail destination for local residents seeking everyday services and retail options.",
   "openFrom": 800,
   "openUntil": 2200,

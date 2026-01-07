@@ -8,9 +8,7 @@
   "latitude": 34.0341528,
   "longitude": -118.24073949999999,
   "phone": "++1 213-988-8890",
-  "imageURLs": [
-    "/images/malls/ca-row-dtla-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-row-dtla-1.jpg"],
   "summary": "ROW DTLA is a 30-acre historic district transformed into LA's creative hub for independent retail, restaurants, and events. This open-air lifestyle destination features curated shops, innovative dining, and regular community events in the heart of downtown Los Angeles.",
   "openFrom": 800,
   "openUntil": 2200,

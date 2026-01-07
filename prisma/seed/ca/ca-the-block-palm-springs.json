@@ -8,9 +8,7 @@
   "latitude": 33.8252355,
   "longitude": -116.54712850000001,
   "phone": "++1 760-846-8900",
-  "imageURLs": [
-    "/images/malls/ca-the-block-palm-springs-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-block-palm-springs-1.jpg"],
   "summary": "The Block Palm Springs is downtown's premier lifestyle destination, combining upscale dining, boutique shopping, and world-class art installations in a walkable open-air setting. Anchored by the Kimpton Rowan hotel and featuring celebrated restaurants like 4 Saints Steakhouse and Il Corso, this cultural hub offers an authentic Palm Springs experience with iconic art pieces and breathtaking mountain views.",
   "openFrom": 0,
   "openUntil": 2400,

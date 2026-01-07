@@ -8,9 +8,7 @@
   "latitude": 37.6987272,
   "longitude": -121.84404810000001,
   "phone": "++1 925-292-2868",
-  "imageURLs": [
-    "/images/malls/ca-san-francisco-premium-outlets-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-san-francisco-premium-outlets-1.jpg"],
   "summary": "San Francisco Premium Outlets is the East Bay's premier outlet shopping destination, featuring designer and brand-name stores offering daily savings of 25-65% in an open-air setting. Conveniently located in Livermore near wine country, it attracts shoppers from throughout the Bay Area seeking quality brands at exceptional values.",
   "openFrom": 1000,
   "openUntil": 2100,

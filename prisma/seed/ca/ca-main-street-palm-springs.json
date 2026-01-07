@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.8259833,
   "longitude": -116.54665840000001,
-  "imageURLs": [
-    "/images/malls/ca-main-street-palm-springs-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-main-street-palm-springs-1.jpg"],
   "summary": "Main Street Palm Springs is the vibrant commercial corridor along North Palm Canyon Drive, featuring an eclectic mix of boutiques, art galleries, restaurants, and bars in the heart of downtown and uptown Palm Springs. This open-air lifestyle destination celebrates the city's unique desert culture with independent retailers, upscale dining, and community events that attract both tourists and locals.",
   "openFrom": 1100,
   "openUntil": 1700,

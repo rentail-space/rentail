@@ -8,9 +8,7 @@
   "latitude": 33.9596505,
   "longitude": -117.594997,
   "phone": "++1 909-946-7518",
-  "imageURLs": [
-    "/images/malls/ca-the-marketplace-at-the-enclave-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-marketplace-at-the-enclave-1.jpg"],
   "openFrom": 430,
   "openUntil": 2200,
   "rating": 4.4,

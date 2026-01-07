@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.1821146,
   "longitude": -117.3454579,
-  "imageURLs": [
-    "/images/malls/ca-pacific-coast-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-pacific-coast-plaza-1.jpg"],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.4,

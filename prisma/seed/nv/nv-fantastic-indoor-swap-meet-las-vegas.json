@@ -8,9 +8,7 @@
   "latitude": 36.1507438,
   "longitude": -115.2057734,
   "phone": "++1 702-877-0087",
-  "imageURLs": [
-    "/images/malls/nv-fantastic-indoor-swap-meet-las-vegas-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/nv-fantastic-indoor-swap-meet-las-vegas-1.jpg"],
   "summary": "The Fantastic Indoor Swap Meet is a long-running, expansive indoor flea market featuring numerous independent vendors selling new goods, collectibles, and specialty items. Open Friday through Sunday, this climate-controlled marketplace offers a unique alternative shopping experience in Las Vegas with hundreds of vendor booths under one roof.",
   "openFrom": 1000,
   "openUntil": 1800,

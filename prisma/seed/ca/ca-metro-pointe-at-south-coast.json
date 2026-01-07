@@ -8,9 +8,7 @@
   "latitude": 33.6889641,
   "longitude": -117.895049,
   "phone": "++1 844-462-7342",
-  "imageURLs": [
-    "/images/malls/ca-metro-pointe-at-south-coast-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-metro-pointe-at-south-coast-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2200,
   "rating": 4.7,

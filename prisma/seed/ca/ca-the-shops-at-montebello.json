@@ -8,9 +8,7 @@
   "latitude": 34.0359243,
   "longitude": -118.0841127,
   "phone": "++1 323-722-1776",
-  "imageURLs": [
-    "/images/malls/ca-the-shops-at-montebello-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-shops-at-montebello-1.jpg"],
   "summary": "The Shops at Montebello is an indoor regional mall featuring brand-name fashion and footwear retailers, department stores, and a food court. With a 4.5-star rating and nearly 10,000 reviews, it serves as a popular shopping destination for the diverse communities of East Los Angeles and the San Gabriel Valley.",
   "openFrom": 1000,
   "openUntil": 2100,

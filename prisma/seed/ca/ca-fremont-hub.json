@@ -8,9 +8,7 @@
   "latitude": 37.5450245,
   "longitude": -121.9888002,
   "phone": "++1 833-800-4343",
-  "imageURLs": [
-    "/images/malls/ca-fremont-hub-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-fremont-hub-1.jpg"],
   "summary": "Fremont Hub is a 504,666 square foot open-air shopping center featuring over 60 stores and restaurants, anchored by Target, Safeway, and Trader Joe's. Located at the corner of Fremont Boulevard and Mowry Avenue, it serves as a convenient shopping destination for Fremont's affluent suburban community.",
   "openFrom": 1000,
   "openUntil": 2100,

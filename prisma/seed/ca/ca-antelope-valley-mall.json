@@ -8,9 +8,7 @@
   "latitude": 34.605188999999996,
   "longitude": -118.15302020000001,
   "phone": "++1 661-266-9150",
-  "imageURLs": [
-    "/images/malls/ca-antelope-valley-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-antelope-valley-mall-1.jpg"],
   "summary": "Antelope Valley Mall is Palmdale's premier indoor shopping destination, featuring a diverse mix of retail stores, dining options, and a movie theater. The family-friendly center offers modern amenities including free Wi-Fi, a kids' play area, and stroller rentals, making it the Antelope Valley's go-to location for shopping and entertainment.",
   "openFrom": 1000,
   "openUntil": 2100,

@@ -8,9 +8,7 @@
   "latitude": 37.696874699999995,
   "longitude": -121.84545580000001,
   "phone": "++1 862-203-4352",
-  "imageURLs": [
-    "/images/malls/ca-shops-at-livermore-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-shops-at-livermore-1.jpg"],
   "summary": "The Shops at Livermore is a community shopping center located on West Jack London Boulevard, offering convenient neighborhood retail and dining options for Tri-Valley residents. Managed by WAS Group, this open-air center serves Livermore's growing population with accessible shopping in a well-maintained environment.",
   "openFrom": 1000,
   "openUntil": 2000,

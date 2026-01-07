@@ -8,9 +8,7 @@
   "latitude": 34.0073187,
   "longitude": -118.1529856,
   "phone": "++1 323-888-1724",
-  "imageURLs": [
-    "/images/malls/ca-citadel-outlets-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-citadel-outlets-1.jpg"],
   "summary": "Citadel Outlets is Los Angeles' leading outlet shopping destination featuring over 130 global brands including Coach, Nike, Michael Kors, and lululemon in a distinctive Assyrian palace-inspired setting. Located minutes from downtown LA and LAX, this open-air center offers designer and premium brands at outlet prices, complemented by diverse dining options and a California Welcome Center for tourists.",
   "openFrom": 1000,
   "openUntil": 2100,

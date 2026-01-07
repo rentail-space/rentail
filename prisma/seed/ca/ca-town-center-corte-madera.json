@@ -8,9 +8,7 @@
   "latitude": 37.9276237,
   "longitude": -122.5170799,
   "phone": "++1 415-924-2961",
-  "imageURLs": [
-    "/images/malls/ca-town-center-corte-madera-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-town-center-corte-madera-1.jpg"],
   "summary": "Town Center Corte Madera is a stylish open-air lifestyle center in affluent Marin County featuring specialty retailers, artisan restaurants with outdoor dining, and community amenities including a Kid's Club and Farmers Market. This premier shopping destination combines quality brands with a welcoming atmosphere designed for families and discerning shoppers.",
   "openFrom": 1000,
   "openUntil": 2000,

@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.706472000000005,
   "longitude": -121.9300071,
-  "imageURLs": [
-    "/images/malls/ca-dublin-place-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-dublin-place-1.jpg"],
   "summary": "Dublin Place is a sprawling open-air shopping complex in Dublin, California, featuring a diverse mix of large and small chain stores alongside familiar restaurants. Anchored by major retailers like Target and PetSmart, the center serves as a convenient one-stop destination for East Bay families and residents.",
   "rating": 4.2,
   "reviewCount": 1206,

@@ -8,9 +8,7 @@
   "latitude": 37.305351,
   "longitude": -121.899188,
   "phone": "++1 408-298-2100",
-  "imageURLs": [
-    "/images/malls/ca-willow-glen-downtown-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-willow-glen-downtown-1.jpg"],
   "summary": "Downtown Willow Glen is a charming, tree-lined lifestyle district in San Jose featuring boutique shops, sidewalk cafes, and local businesses with a strong community focus. The walkable avenue offers free parking, year-round events including farmers markets and wine walks, and a small-town atmosphere within a major metropolitan area.",
   "rating": 4.7,
   "reviewCount": 53,

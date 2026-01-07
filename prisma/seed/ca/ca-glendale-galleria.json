@@ -8,9 +8,7 @@
   "latitude": 34.1462627,
   "longitude": -118.2567687,
   "phone": "++1 818-459-4184",
-  "imageURLs": [
-    "/images/malls/ca-glendale-galleria-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-glendale-galleria-1.jpg"],
   "summary": "Glendale Galleria is a contemporary regional shopping mall featuring trendy retail shops, diverse restaurants, and the flagship Apple store. Located in the heart of Glendale, this popular destination offers a distinctive variety of high-end brands and unique stores that attract shoppers from across the greater Los Angeles area.",
   "openFrom": 1000,
   "openUntil": 2100,

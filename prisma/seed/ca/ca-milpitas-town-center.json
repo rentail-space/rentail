@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.434006800000006,
   "longitude": -121.8969453,
-  "imageURLs": [
-    "/images/malls/ca-milpitas-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-milpitas-town-center-1.jpg"],
   "summary": "Milpitas Town Center is a community shopping destination featuring specialty retailers, diverse dining options, and a supermarket anchor. Serving the heart of Silicon Valley, the center offers convenient shopping with extended hours and a strong mix of services tailored to the area's multicultural population.",
   "openFrom": 600,
   "openUntil": 2300,

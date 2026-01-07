@@ -8,9 +8,7 @@
   "latitude": 33.7348253,
   "longitude": -117.9961953,
   "phone": "++1 714-895-8020",
-  "imageURLs": [
-    "/images/malls/ca-old-world-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-old-world-village-1.jpg"],
   "summary": "Old World Village is a charming European-themed lifestyle center featuring cobblestone streets, specialty shops, authentic restaurants with a biergarten, and year-round cultural festivals. This unique outdoor shopping destination offers visitors an immersive Old World experience with live entertainment, seasonal events like the Kris Kringle Market, and a carefully curated mix of merchants celebrating European heritage.",
   "openFrom": 900,
   "openUntil": 2000,

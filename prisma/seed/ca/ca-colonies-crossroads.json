@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.132850999999995,
   "longitude": -117.63335300000001,
-  "imageURLs": [
-    "/images/malls/ca-colonies-crossroads-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-colonies-crossroads-1.jpg"],
   "summary": "Colonies Crossroads is the Inland Empire's most accessible one-stop shopping destination, featuring over 50 stores including major retailers like Target, Kohl's, Nordstrom Rack, Home Depot, and Dick's Sporting Goods. Set in a distinctive outdoor environment at the foothills of the San Gabriel Mountains, the center combines national retailers, specialty boutiques, a grocery store, and diverse dining options from casual to fine dining.",
   "openFrom": 700,
   "openUntil": 2200,

@@ -8,9 +8,7 @@
   "latitude": 37.025183,
   "longitude": -121.56447059999999,
   "phone": "++1 408-842-3729",
-  "imageURLs": [
-    "/images/malls/ca-gilroy-premium-outlets-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-gilroy-premium-outlets-1.jpg"],
   "summary": "Gilroy Premium Outlets is a major outlet shopping destination in Northern California, featuring designer and brand-name stores offering 25-65% off retail prices. Located conveniently along Highway 101 between San Jose and the Central Coast, this popular open-air center attracts bargain hunters from throughout the Bay Area with its extensive selection and excellent value proposition.",
   "openFrom": 1000,
   "openUntil": 2100,

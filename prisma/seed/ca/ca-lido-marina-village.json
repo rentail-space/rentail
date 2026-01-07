@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.6187215,
   "longitude": -117.9292645,
-  "imageURLs": [
-    "/images/malls/ca-lido-marina-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-lido-marina-village-1.jpg"],
   "summary": "Lido Marina Village is a stylish waterfront lifestyle center in Newport Beach featuring curated boutiques, artisanal dining, and al fresco experiences along the marina. This charming open-air village combines coastal sophistication with a relaxed ambience, offering unique shopping, waterside restaurants, and dock-and-dine amenities for an authentic Newport Beach experience.",
   "openFrom": 1000,
   "openUntil": 1900,

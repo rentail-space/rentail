@@ -8,9 +8,7 @@
   "latitude": 36.9726947,
   "longitude": -122.02545250000001,
   "phone": "++1 831-332-7422",
-  "imageURLs": [
-    "/images/malls/ca-downtown-santa-cruz-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-downtown-santa-cruz-1.jpg"],
   "summary": "Downtown Santa Cruz is a vibrant open-air lifestyle district on Pacific Avenue featuring locally-owned shops, diverse dining, and year-round community events. This historic downtown serves as the cultural heart of Santa Cruz, blending beach town charm with eclectic retail and entertainment options.",
   "openFrom": 800,
   "openUntil": 2200,

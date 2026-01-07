@@ -8,9 +8,7 @@
   "latitude": 37.474139199999996,
   "longitude": -122.216669,
   "phone": "++1 925-279-1800",
-  "imageURLs": [
-    "/images/malls/ca-woodside-central-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-woodside-central-1.jpg"],
   "summary": "Woodside Central is an 80,591 square foot community shopping center on El Camino Real in Redwood City, featuring Target, Marshalls, and Chuck E. Cheese as key anchors. Strategically located near Highway 101, the center serves Silicon Valley's affluent Peninsula communities with over 1.2 million annual visits.",
   "openFrom": 600,
   "openUntil": 2300,

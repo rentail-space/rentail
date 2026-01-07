@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.7034949,
   "longitude": -117.9329904,
-  "imageURLs": [
-    "/images/malls/ca-shops-at-costco-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-shops-at-costco-plaza-1.jpg"],
   "summary": "Low-key, open-air retail complex in Fountain Valley featuring a big-box anchor store, local services, and diverse international dining options. This convenient neighborhood shopping destination serves the community with practical everyday retail and has earned strong ratings from thousands of local shoppers.",
   "openFrom": 800,
   "openUntil": 2030,

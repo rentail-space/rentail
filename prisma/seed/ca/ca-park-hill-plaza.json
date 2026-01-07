@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.124711999999995,
   "longitude": -116.40911539999999,
-  "imageURLs": [
-    "/images/malls/ca-park-hill-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-park-hill-plaza-1.jpg"],
   "summary": "Park Hill Plaza is a clean, well-maintained neighborhood shopping center in Yucca Valley anchored by Vons supermarket, US Bank, and Angle View. The plaza serves as a convenient one-stop destination for essential shopping and banking services for local residents and Joshua Tree area visitors.",
   "openFrom": 1000,
   "openUntil": 2000,

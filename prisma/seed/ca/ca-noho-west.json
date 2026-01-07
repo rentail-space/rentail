@@ -8,9 +8,7 @@
   "latitude": 34.1811727,
   "longitude": -118.3946268,
   "phone": "++1 855-640-6400",
-  "imageURLs": [
-    "/images/malls/ca-noho-west-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-noho-west-1.jpg"],
   "openFrom": 500,
   "openUntil": 2300,
   "rating": 4.5,

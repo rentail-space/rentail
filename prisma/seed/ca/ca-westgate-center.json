@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.2923806,
   "longitude": -121.98878329999998,
-  "imageURLs": [
-    "/images/malls/ca-westgate-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westgate-center-1.jpg"],
   "summary": "Westgate Center is a community-focused shopping destination on San Jose's Saratoga Avenue, featuring a growing mix of dining options including Jack's Restaurant and Mendocino Farms, with the exciting addition of T&T Supermarket coming soon. The open-air center serves west San Jose residents with convenient retail and specialty services in a welcoming neighborhood setting.",
   "openFrom": 1000,
   "openUntil": 2100,

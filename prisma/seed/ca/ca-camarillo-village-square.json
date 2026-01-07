@@ -8,9 +8,7 @@
   "latitude": 34.2359076,
   "longitude": -119.0367446,
   "phone": "++1 714-687-0000 ext. 400",
-  "imageURLs": [
-    "/images/malls/ca-camarillo-village-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-camarillo-village-square-1.jpg"],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.4,

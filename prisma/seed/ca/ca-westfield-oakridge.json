@@ -8,9 +8,7 @@
   "latitude": 37.2512044,
   "longitude": -121.86245529999998,
   "phone": "++1 408-878-4600",
-  "imageURLs": [
-    "/images/malls/ca-westfield-oakridge-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westfield-oakridge-1.jpg"],
   "summary": "Westfield Oakridge is a major regional shopping mall in South San Jose featuring anchor stores like Macy's, Target, and Nordstrom Rack, alongside popular retailers including Apple, H&M, and UNIQLO. The center offers comprehensive entertainment with a 20-screen Century theater, Bowlero, and diverse dining options from Shake Shack to full-service restaurants.",
   "openFrom": 1000,
   "openUntil": 2100,

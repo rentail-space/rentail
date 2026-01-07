@@ -8,9 +8,7 @@
   "latitude": 33.7194247,
   "longitude": -116.3818632,
   "phone": "++1 760-862-1990",
-  "imageURLs": [
-    "/images/malls/ca-the-gardens-on-el-paseo-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-gardens-on-el-paseo-1.jpg"],
   "summary": "The Gardens on El Paseo is Palm Desert's premier upscale lifestyle center, featuring a bi-level open-air design with high-end retail stores and fine dining options including two steakhouses. Located on the prestigious El Paseo shopping district, this sophisticated destination serves the Coachella Valley's affluent community with curated brands and an elegant shopping atmosphere.",
   "openFrom": 1000,
   "openUntil": 1900,

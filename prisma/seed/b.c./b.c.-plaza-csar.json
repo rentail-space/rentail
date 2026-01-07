@@ -7,9 +7,7 @@
   "state": "B.C.",
   "latitude": 32.7174845,
   "longitude": -114.7294727,
-  "imageURLs": [
-    "/images/malls/b.c.-plaza-csar-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/b.c.-plaza-csar-1.jpg"],
   "openFrom": 800,
   "openUntil": 1900,
   "rating": 5,

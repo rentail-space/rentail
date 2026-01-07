@@ -8,9 +8,7 @@
   "latitude": 37.7569634,
   "longitude": -122.25228699999998,
   "phone": "++1 510-521-8100",
-  "imageURLs": [
-    "/images/malls/ca-south-shore-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-south-shore-center-1.jpg"],
   "summary": "South Shore Center is Alameda's premier open-air waterfront shopping destination, featuring a diverse mix of national retailers, local businesses, and popular dining options. This family-friendly lifestyle center serves as a community hub where residents gather for shopping, entertainment, and special events in a scenic Bay Area setting.",
   "openFrom": 1000,
   "openUntil": 2100,

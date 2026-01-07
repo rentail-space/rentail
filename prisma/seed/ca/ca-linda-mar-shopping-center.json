@@ -8,9 +8,7 @@
   "latitude": 37.594586199999995,
   "longitude": -122.5037069,
   "phone": "++1 833-800-4343",
-  "imageURLs": [
-    "/images/malls/ca-linda-mar-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-linda-mar-shopping-center-1.jpg"],
   "summary": "Linda Mar Shopping Center is a 168,231 square foot grocery-anchored community center located directly off Highway 1 in Pacifica, California. Anchored by Safeway, this well-maintained property serves an affluent coastal community with a variety of everyday retail, fitness, dining, and service tenants.",
   "openFrom": 1000,
   "openUntil": 2100,

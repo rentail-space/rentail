@@ -8,9 +8,7 @@
   "latitude": 37.8307459,
   "longitude": -122.28028719999999,
   "phone": "++1 877-265-7417",
-  "imageURLs": [
-    "/images/malls/ca-east-bay-bridge-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-east-bay-bridge-1.jpg"],
   "summary": "East Bay Bridge is a renovated 32-acre retail park in Emeryville featuring household-name department stores and national retailers, serving the East Bay community since 1994. The open-air center offers convenient parking and accessible shopping with operating hours from 9:00 AM to 9:00 PM daily.",
   "openFrom": 900,
   "openUntil": 2100,

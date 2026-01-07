@@ -8,9 +8,7 @@
   "latitude": 38.012124199999995,
   "longitude": -121.3225233,
   "phone": "++1 209-477-4868",
-  "imageURLs": [
-    "/images/malls/ca-lincoln-center-shops-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-lincoln-center-shops-1.jpg"],
   "summary": "Lincoln Center is Stockton's premiere 35-acre outdoor lifestyle center established in 1951, featuring over 90 businesses with more than 80% being locally owned and family-operated. The center offers a distinctive blend of boutique shopping, upscale dining, fitness facilities, and regular community events, all centered around the iconic 'Big L' landmark.",
   "openFrom": 1000,
   "openUntil": 2200,

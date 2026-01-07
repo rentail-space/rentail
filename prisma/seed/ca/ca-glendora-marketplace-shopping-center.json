@@ -8,9 +8,7 @@
   "latitude": 34.1159705,
   "longitude": -117.8342308,
   "phone": "++1 626-914-8200",
-  "imageURLs": [
-    "/images/malls/ca-glendora-marketplace-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-glendora-marketplace-shopping-center-1.jpg"],
   "openFrom": 800,
   "openUntil": 0,
   "rating": 4.5,

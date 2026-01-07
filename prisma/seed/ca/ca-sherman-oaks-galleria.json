@@ -8,9 +8,7 @@
   "latitude": 34.1549292,
   "longitude": -118.46655069999998,
   "phone": "++1 818-382-4100",
-  "imageURLs": [
-    "/images/malls/ca-sherman-oaks-galleria-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-sherman-oaks-galleria-1.jpg"],
   "summary": "Sherman Oaks Galleria is a chic open-air lifestyle center that has served the San Fernando Valley for over 30 years, featuring popular dining destinations like The Cheesecake Factory and Buffalo Wild Wings, a Regal multiplex theater, and a 24-hour gym. This vibrant community hub seamlessly combines retail, restaurants, office space, and entertainment in the heart of Sherman Oaks.",
   "openFrom": 0,
   "openUntil": 2400,

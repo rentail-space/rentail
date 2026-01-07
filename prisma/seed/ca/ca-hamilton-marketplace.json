@@ -8,9 +8,7 @@
   "latitude": 38.0635966,
   "longitude": -122.53317670000001,
   "phone": "++1 415-277-6836",
-  "imageURLs": [
-    "/images/malls/ca-hamilton-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-hamilton-marketplace-1.jpg"],
   "summary": "Hamilton Marketplace is a community-focused shopping center in Novato anchored by Safeway and featuring a strong mix of fast-casual dining, wellness services, and everyday conveniences. The center caters to Marin County's health-conscious residents with tenants like Nekter Juice, Massage Heights, and Sutter Walk-In Care alongside popular eateries and essential services.",
   "openFrom": 700,
   "openUntil": 1900,

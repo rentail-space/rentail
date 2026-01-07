@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.9266254,
   "longitude": -118.1287328,
-  "imageURLs": [
-    "/images/malls/ca-downey-landing-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-downey-landing-1.jpg"],
   "summary": "Downey Landing is a popular open-air shopping plaza in Downey featuring brand-name clothing and electronics stores, a food court, and a fitness center. With excellent ratings and convenient access, it serves as a community hub for shopping, dining, and wellness activities.",
   "openFrom": 0,
   "openUntil": 2400,

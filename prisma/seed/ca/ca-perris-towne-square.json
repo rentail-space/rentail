@@ -8,9 +8,7 @@
   "latitude": 33.8000749,
   "longitude": -117.2275431,
   "phone": "++1 310-901-3556",
-  "imageURLs": [
-    "/images/malls/ca-perris-towne-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-perris-towne-square-1.jpg"],
   "openFrom": 830,
   "openUntil": 2200,
   "rating": 4.2,

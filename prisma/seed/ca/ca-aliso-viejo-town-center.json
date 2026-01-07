@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.5743362,
   "longitude": -117.7250509,
-  "imageURLs": [
-    "/images/malls/ca-aliso-viejo-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-aliso-viejo-town-center-1.jpg"],
   "summary": "Aliso Viejo Town Center is the primary open-air lifestyle center serving the master-planned community of Aliso Viejo in South Orange County. This well-rated destination offers a convenient mix of shopping, dining, and services in a walkable environment that caters to the area's affluent, family-oriented residents.",
   "openFrom": 700,
   "openUntil": 2130,

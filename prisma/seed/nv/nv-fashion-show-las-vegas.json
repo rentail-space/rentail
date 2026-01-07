@@ -8,9 +8,7 @@
   "latitude": 36.127477600000006,
   "longitude": -115.17119699999999,
   "phone": "++1 702-784-7000",
-  "imageURLs": [
-    "/images/malls/nv-fashion-show-las-vegas-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/nv-fashion-show-las-vegas-1.jpg"],
   "summary": "Fashion Show Las Vegas is the Strip's largest shopping destination, featuring over 250 retailers and 30 restaurants across 2 million square feet. With six department store anchors and weekly fashion shows, it offers an unmatched blend of shopping, dining, and entertainment for tourists and locals alike.",
   "openFrom": 1000,
   "openUntil": 2100,

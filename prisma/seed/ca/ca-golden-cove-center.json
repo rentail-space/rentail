@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.7487372,
   "longitude": -118.40639630000001,
-  "imageURLs": [
-    "/images/malls/ca-golden-cove-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-golden-cove-center-1.jpg"],
   "summary": "Golden Cove Center is a well-appointed neighborhood shopping center in Rancho Palos Verdes, anchored by Trader Joe's and featuring a diverse mix of dining, retail, and professional services. This community-focused destination serves the affluent Palos Verdes Peninsula with quality tenants ranging from specialty food markets to wellness providers.",
   "openFrom": 600,
   "openUntil": 0,

@@ -8,9 +8,7 @@
   "latitude": 34.209899,
   "longitude": -118.8461755,
   "phone": "++1 213-553-2200",
-  "imageURLs": [
-    "/images/malls/ca-oakbrook-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-oakbrook-plaza-1.jpg"],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.4,

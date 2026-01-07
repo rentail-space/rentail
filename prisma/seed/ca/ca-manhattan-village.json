@@ -8,9 +8,7 @@
   "latitude": 33.898402,
   "longitude": -118.39374880000001,
   "phone": "++1 310-546-5555",
-  "imageURLs": [
-    "/images/malls/ca-manhattan-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-manhattan-village-1.jpg"],
   "summary": "Manhattan Village is the South Bay's premier open-air lifestyle center, offering an upscale shopping and dining experience tailored to the affluent beach communities of Manhattan Beach and surrounding areas. This well-established destination combines national retailers with specialty shops in a sophisticated coastal California setting.",
   "openFrom": 900,
   "openUntil": 2000,

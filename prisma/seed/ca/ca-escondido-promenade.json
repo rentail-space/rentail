@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.1120178,
   "longitude": -117.0980502,
-  "imageURLs": [
-    "/images/malls/ca-escondido-promenade-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-escondido-promenade-1.jpg"],
   "summary": "Escondido Promenade is an outdoor community shopping center featuring popular retailers like Target and TJ Maxx, along with salons and casual dining options. Located conveniently on Auto Park Way, this neighborhood destination offers practical one-stop shopping in a comfortable open-air setting for North San Diego County residents.",
   "openFrom": 1000,
   "openUntil": 2100,

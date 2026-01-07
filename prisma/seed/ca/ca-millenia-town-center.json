@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 32.6198586,
   "longitude": -116.9677516,
-  "imageURLs": [
-    "/images/malls/ca-millenia-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-millenia-town-center-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2000,
   "rating": 4,

@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.2281735,
   "longitude": -116.3785329,
-  "imageURLs": [
-    "/images/malls/ca-sellvia-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-sellvia-1.jpg"],
   "summary": "Sellvia is a 24-hour digital shopping platform serving Borrego Springs, California, offering trending products and contemporary merchandise through an accessible online marketplace. This modern e-commerce destination provides convenient retail solutions for the desert community and surrounding areas.",
   "openFrom": 0,
   "openUntil": 2400,

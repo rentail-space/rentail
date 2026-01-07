@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.6810683,
   "longitude": -117.17371700000001,
-  "imageURLs": [
-    "/images/malls/ca-countryside-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-countryside-marketplace-1.jpg"],
   "summary": "Countryside Marketplace is a convenient community shopping center in Menifee featuring over 20 well-known retailers including Target, Kohl's, Lowe's, and Best Buy. Located at I-215 and Newport Road, this accessible destination combines everyday necessities with specialty shopping in a charming, old-timey atmosphere.",
   "openFrom": 900,
   "openUntil": 2200,

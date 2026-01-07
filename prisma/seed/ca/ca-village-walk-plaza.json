@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.5654067,
   "longitude": -117.2115253,
-  "imageURLs": [
-    "/images/malls/ca-village-walk-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-village-walk-plaza-1.jpg"],
   "summary": "Village Walk Plaza is a community-focused shopping center in Murrieta featuring a diverse tenant mix including Planet Fitness, Jerome's Furniture, Tikka Tikka, and Urban Air Adventure Park. The center serves as a local hub with regular community events like the weekly Farmers Market and seasonal celebrations that bring neighbors together.",
   "openFrom": 900,
   "openUntil": 2100,

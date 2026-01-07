@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.8099201,
   "longitude": -117.8382294,
-  "imageURLs": [
-    "/images/malls/ca-tuskatella-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-tuskatella-shopping-center-1.jpg"],
   "openFrom": 800,
   "openUntil": 2200,
   "rating": 4.3,

@@ -8,9 +8,7 @@
   "latitude": 36.7166802,
   "longitude": -121.65776799999999,
   "phone": "++1 831-449-7227",
-  "imageURLs": [
-    "/images/malls/ca-northridge-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-northridge-mall-1.jpg"],
   "summary": "Northridge Mall is Salinas' spacious enclosed shopping center featuring diverse retail stores, a movie theater, food court, and family-friendly amenities including a kids' play area. This regional mall serves as the primary shopping and entertainment destination for the Salinas Valley community.",
   "openFrom": 1000,
   "openUntil": 2100,

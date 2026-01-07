@@ -8,9 +8,7 @@
   "latitude": 34.0764508,
   "longitude": -117.3722732,
   "phone": "++1 818-710-6100",
-  "imageURLs": [
-    "/images/malls/ca-rialto-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-rialto-marketplace-1.jpg"],
   "openFrom": 900,
   "openUntil": 2030,
   "rating": 4.4,

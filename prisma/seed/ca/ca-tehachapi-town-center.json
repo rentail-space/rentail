@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 35.123325,
   "longitude": -118.46864330000001,
-  "imageURLs": [
-    "/images/malls/ca-tehachapi-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-tehachapi-town-center-1.jpg"],
   "summary": "Tehachapi Town Center is the primary retail hub serving the mountain community of Tehachapi, offering grocery shopping, dining options including a popular Chinese buffet, and essential services. With a 4.4-star rating, the center is known for its friendly small-town atmosphere and convenient access to everyday necessities.",
   "openFrom": 0,
   "openUntil": 2400,

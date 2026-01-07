@@ -8,9 +8,7 @@
   "latitude": 37.5880438,
   "longitude": -122.33608339999999,
   "phone": "++1 650-679-8180",
-  "imageURLs": [
-    "/images/malls/ca-la-paradita-peru-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-la-paradita-peru-1.jpg"],
   "summary": "La Paradita Peru is a specialty Peruvian grocery store in Burlingame offering authentic South American ingredients, from traditional Andean grains and peppers to specialty seasonings and natural products. This cultural marketplace serves the Bay Area's Peruvian community with hard-to-find items essential for authentic Latin American cooking.",
   "openFrom": 1000,
   "openUntil": 2000,

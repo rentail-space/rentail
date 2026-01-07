@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.2497025,
   "longitude": -121.84535699999999,
-  "imageURLs": [
-    "/images/malls/ca-sunrise-plaza-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-sunrise-plaza-shopping-center-1.jpg"],
   "summary": "Sunrise Plaza Shopping Center is a neighborhood strip center on Blossom Hill Road in South San Jose, featuring approximately 18 tenants including casual dining restaurants like Marie Callender's and Outback Steakhouse, alongside everyday services and specialty retail. The center serves the surrounding Blossom Valley and Santa Teresa communities with convenient, value-oriented shopping options.",
   "openFrom": 830,
   "openUntil": 1700,

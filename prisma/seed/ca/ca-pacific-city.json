@@ -8,9 +8,7 @@
   "latitude": 33.6550556,
   "longitude": -117.99774579999999,
   "phone": "++1 714-960-1238",
-  "imageURLs": [
-    "/images/malls/ca-pacific-city-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-pacific-city-1.jpg"],
   "summary": "Pacific City is a premier outdoor lifestyle center on the Huntington Beach coastline, featuring high-end retail shops, diverse dining options, and entertainment including miniature golf. With breathtaking Pacific Ocean views and complimentary validated parking, this beachfront destination offers an upscale shopping experience that captures the essence of Southern California coastal living.",
   "openFrom": 1000,
   "openUntil": 2100,

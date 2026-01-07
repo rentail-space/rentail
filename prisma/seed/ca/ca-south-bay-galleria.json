@@ -8,9 +8,7 @@
   "latitude": 33.8712777,
   "longitude": -118.3550423,
   "phone": "++1 310-371-7546",
-  "imageURLs": [
-    "/images/malls/ca-south-bay-galleria-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-south-bay-galleria-1.jpg"],
   "summary": "South Bay Galleria is a three-level regional shopping center featuring over 140 retailers including Macy's, Kohl's, and an AMC Dine-In theater with 16 screens. Located in Redondo Beach, this premier destination offers comprehensive shopping, dining, and entertainment options in a light-filled atrium setting that serves the entire South Bay community.",
   "openFrom": 1100,
   "openUntil": 1900,

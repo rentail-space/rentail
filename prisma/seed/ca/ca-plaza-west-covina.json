@@ -8,9 +8,7 @@
   "latitude": 34.0706843,
   "longitude": -117.9326269,
   "phone": "++1 626-960-8032",
-  "imageURLs": [
-    "/images/malls/ca-plaza-west-covina-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-plaza-west-covina-1.jpg"],
   "summary": "Plaza West Covina is west Los Angeles County's premier shopping destination featuring over 185 stores and restaurants, including Nordstrom Rack, H&M, and Victoria's Secret. This expansive regional center offers exceptional dining options like Lazy Dog Restaurant & Bar and Gen Korean BBQ House, along with entertainment venues and regular community events.",
   "openFrom": 1100,
   "openUntil": 2100,

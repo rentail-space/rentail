@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.0654005,
   "longitude": -117.2043274,
-  "imageURLs": [
-    "/images/malls/ca-tri-city-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-tri-city-shopping-center-1.jpg"],
   "summary": "Tri City Shopping Center is a convenient open-air community center in Redlands featuring 60 retail shops, restaurants, and personal services with easy freeway access off Interstate 10. The center offers a comprehensive mix of beauty and health services, fashion retailers, casual dining, and family entertainment in a stress-free shopping environment.",
   "openFrom": 900,
   "openUntil": 1800,

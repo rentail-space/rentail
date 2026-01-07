@@ -8,9 +8,7 @@
   "latitude": 33.5217769,
   "longitude": -117.6174465,
   "phone": "++1 949-226-5807",
-  "imageURLs": [
-    "/images/malls/ca-sendero-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-sendero-marketplace-1.jpg"],
   "openFrom": 0,
   "openUntil": 2100,
   "rating": 4.5,

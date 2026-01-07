@@ -8,9 +8,7 @@
   "latitude": 32.9877392,
   "longitude": -117.26978450000001,
   "phone": "++1 858-546-4614",
-  "imageURLs": [
-    "/images/malls/ca-cedros-collective-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-cedros-collective-mall-1.jpg"],
   "summary": "Cedros Collective is a 10,014 square foot urban creative redevelopment center in Solana Beach's Cedros Avenue Design District, featuring a unique mix of six retail shops, a café with outdoor seating, and six creative office units. The completely remodeled center offers exposed ceilings, operable doors, individual patios, and modern amenities that blend indoor-outdoor workspace with boutique retail in a distinctive industrial-chic environment.",
   "openFrom": 1000,
   "openUntil": 1700,

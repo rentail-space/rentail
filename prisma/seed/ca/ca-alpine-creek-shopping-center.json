@@ -8,9 +8,7 @@
   "latitude": 32.8370226,
   "longitude": -116.7776582,
   "phone": "++1 619-445-8631",
-  "imageURLs": [
-    "/images/malls/ca-alpine-creek-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-alpine-creek-shopping-center-1.jpg"],
   "openFrom": 800,
   "openUntil": 2100,
   "rating": 4.6,

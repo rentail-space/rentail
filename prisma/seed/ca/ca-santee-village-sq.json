@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 32.8377028,
   "longitude": -116.9880935,
-  "imageURLs": [
-    "/images/malls/ca-santee-village-sq-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-santee-village-sq-1.jpg"],
   "openFrom": 900,
   "openUntil": 2100,
   "rating": 4.4,

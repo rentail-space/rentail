@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.0004005,
   "longitude": -117.7174028,
-  "imageURLs": [
-    "/images/malls/ca-chino-spectrum-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-chino-spectrum-marketplace-1.jpg"],
   "openFrom": 800,
   "openUntil": 2100,
   "rating": 4.5,

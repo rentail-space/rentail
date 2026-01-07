@@ -8,9 +8,7 @@
   "latitude": 33.06677430000001,
   "longitude": -117.2655252,
   "phone": "++1 760-944-3604",
-  "imageURLs": [
-    "/images/malls/ca-encinitas-ranch-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-encinitas-ranch-town-center-1.jpg"],
   "openFrom": 1000,
   "openUntil": 2100,
   "rating": 4.4,

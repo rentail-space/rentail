@@ -8,9 +8,7 @@
   "latitude": 32.8686692,
   "longitude": -117.2318609,
   "phone": "++1 626-564-1066",
-  "imageURLs": [
-    "/images/malls/ca-the-shops-at-la-jolla-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-shops-at-la-jolla-village-1.jpg"],
   "summary": "The Shops at La Jolla Village is the #1 ranked neighborhood retail center in La Jolla, anchored by Whole Foods, Nordstrom Rack, and CVS. This open-air shopping destination offers premium shopping, dining, and services in one of California's most desirable coastal communities, with a unique connection to The Terraces residential community above.",
   "openFrom": 1000,
   "openUntil": 2000,

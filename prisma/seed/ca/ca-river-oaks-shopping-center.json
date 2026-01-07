@@ -8,9 +8,7 @@
   "latitude": 34.4199967,
   "longitude": -118.55865840000001,
   "phone": "++1 281-970-3300",
-  "imageURLs": [
-    "/images/malls/ca-river-oaks-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-river-oaks-shopping-center-1.jpg"],
   "summary": "River Oaks Shopping Center is a community-focused open-air shopping destination in Santa Clarita, serving the Valencia area with convenient retail, dining, and services. With strong community ratings and a prime Magic Mountain Parkway location, it provides a reliable neighborhood shopping experience for local families and residents.",
   "openFrom": 1000,
   "openUntil": 1800,

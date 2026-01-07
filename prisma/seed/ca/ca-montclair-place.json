@@ -8,9 +8,7 @@
   "latitude": 34.0867809,
   "longitude": -117.69382979999999,
   "phone": "++1 909-626-2501",
-  "imageURLs": [
-    "/images/malls/ca-montclair-place-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-montclair-place-1.jpg"],
   "summary": "Montclair Place is a modern two-story enclosed regional mall in the Inland Empire featuring familiar department stores, national retailers, and a food court. This well-established shopping destination serves families throughout San Bernardino County with convenient access and a diverse mix of stores.",
   "openFrom": 1100,
   "openUntil": 2000,

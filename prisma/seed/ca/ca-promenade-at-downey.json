@@ -8,9 +8,7 @@
   "latitude": 33.9233331,
   "longitude": -118.1322125,
   "phone": "++1 562-368-4814",
-  "imageURLs": [
-    "/images/malls/ca-promenade-at-downey-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-promenade-at-downey-1.jpg"],
   "summary": "The Promenade at Downey is an everyday shopping destination featuring discount department stores, chain restaurants, and a multiplex cinema. This open-air center serves as a convenient one-stop location for value-conscious shoppers in the Southeast Los Angeles County area.",
   "openFrom": 1000,
   "openUntil": 2100,

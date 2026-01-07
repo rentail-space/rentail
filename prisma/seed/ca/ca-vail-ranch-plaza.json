@@ -8,9 +8,7 @@
   "latitude": 33.4809799,
   "longitude": -117.0920028,
   "phone": "++1 833-800-4343",
-  "imageURLs": [
-    "/images/malls/ca-vail-ranch-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-vail-ranch-plaza-1.jpg"],
   "openFrom": 800,
   "openUntil": 2200,
   "rating": 4.4,

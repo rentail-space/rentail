@@ -8,9 +8,7 @@
   "latitude": 33.7243551,
   "longitude": -117.7913322,
   "phone": "++1 714-730-4124",
-  "imageURLs": [
-    "/images/malls/ca-the-market-place-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-market-place-1.jpg"],
   "summary": "The Market Place is Orange County's premier outdoor lifestyle destination, featuring a comprehensive mix of trend-forward retailers, specialty grocers, diverse dining options, and a movie theater. This sprawling open-air center creates a vibrant community atmosphere with regular wellness events and an elevated shopping experience under the California sun.",
   "openFrom": 1000,
   "openUntil": 2100,

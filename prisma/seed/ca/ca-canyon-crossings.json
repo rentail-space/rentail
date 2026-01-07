@@ -8,9 +8,7 @@
   "latitude": 33.9401446,
   "longitude": -117.2872471,
   "phone": "++1 619-515-0100",
-  "imageURLs": [
-    "/images/malls/ca-canyon-crossings-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-canyon-crossings-1.jpg"],
   "openFrom": 800,
   "openUntil": 2300,
   "rating": 4.3,

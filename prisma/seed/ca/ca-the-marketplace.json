@@ -8,9 +8,7 @@
   "latitude": 35.341361899999995,
   "longitude": -119.10351700000001,
   "phone": "++1 714-545-1400",
-  "imageURLs": [
-    "/images/malls/ca-the-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-marketplace-1.jpg"],
   "summary": "The Marketplace Bakersfield is a premier open-air lifestyle center featuring national retailers like Vons, Ulta Beauty, and Starbucks, along with Edwards Cinemas and diverse dining options. Located near California State University Bakersfield, this beautifully landscaped shopping destination offers a welcoming, family-friendly environment with convenient parking and regular community events.",
   "openFrom": 800,
   "openUntil": 2200,

@@ -8,9 +8,7 @@
   "latitude": 33.9780174,
   "longitude": -118.3919372,
   "phone": "++1 310-641-8073",
-  "imageURLs": [
-    "/images/malls/ca-hhla-entertainment-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-hhla-entertainment-1.jpg"],
   "summary": "HHLA Entertainment is an innovative open-air lifestyle center in Los Angeles that emphasizes experiential entertainment with attractions like 60out immersive experiences and a multiplex theater. The center combines diverse dining, retail, and entertainment options in a modern outdoor setting designed for social experiences.",
   "openFrom": 1000,
   "openUntil": 2200,

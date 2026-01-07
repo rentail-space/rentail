@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.7322723,
   "longitude": -117.99455870000001,
-  "imageURLs": [
-    "/images/malls/ca-bella-terra-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-bella-terra-1.jpg"],
   "summary": "Bella Terra is a laid-back, open-air lifestyle center in Huntington Beach featuring big-box stores, casual restaurants, bars, and a Century Theatres movie complex. This popular destination combines shopping, dining, and entertainment in a relaxed outdoor setting that reflects the coastal Southern California lifestyle.",
   "openFrom": 1000,
   "openUntil": 2100,

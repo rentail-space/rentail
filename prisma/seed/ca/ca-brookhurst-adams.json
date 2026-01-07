@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.6711345,
   "longitude": -117.952334,
-  "imageURLs": [
-    "/images/malls/ca-brookhurst-adams-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-brookhurst-adams-1.jpg"],
   "openFrom": 900,
   "openUntil": 2200,
   "rating": 4.5,

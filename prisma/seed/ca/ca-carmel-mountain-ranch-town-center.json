@@ -8,9 +8,7 @@
   "latitude": 32.9808902,
   "longitude": -117.0760154,
   "phone": "++1 858-546-3000",
-  "imageURLs": [
-    "/images/malls/ca-carmel-mountain-ranch-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-carmel-mountain-ranch-town-center-1.jpg"],
   "openFrom": 900,
   "openUntil": 2200,
   "rating": 4.4,

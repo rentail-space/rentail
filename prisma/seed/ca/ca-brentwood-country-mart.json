@@ -8,9 +8,7 @@
   "latitude": 34.0475609,
   "longitude": -118.49044839999999,
   "phone": "++1 310-458-6682",
-  "imageURLs": [
-    "/images/malls/ca-brentwood-country-mart-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-brentwood-country-mart-1.jpg"],
   "summary": "Brentwood Country Mart is a historic, upscale lifestyle center featuring rustic barnlike buildings housing over 30 curated boutiques and acclaimed restaurants. This beloved Westside destination offers a charming village atmosphere with high-end fashion, artisanal goods, and farm-to-table dining that attracts affluent shoppers from Brentwood and Santa Monica.",
   "openFrom": 700,
   "openUntil": 2300,

@@ -8,9 +8,7 @@
   "latitude": 37.5232684,
   "longitude": -122.25153259999999,
   "phone": "++1 800-762-1641",
-  "imageURLs": [
-    "/images/malls/ca-the-marketplace-at-redwood-shores-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-marketplace-at-redwood-shores-1.jpg"],
   "summary": "The Marketplace at Redwood Shores is a well-regarded community shopping center serving the affluent Redwood Shores peninsula and nearby Silicon Valley corporate campuses. With a 4.5-star rating and convenient location near Oracle headquarters, it offers a curated mix of retail, dining, and services for time-conscious professionals and local residents.",
   "openFrom": 700,
   "openUntil": 2200,

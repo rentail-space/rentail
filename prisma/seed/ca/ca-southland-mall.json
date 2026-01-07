@@ -8,9 +8,7 @@
   "latitude": 37.6511869,
   "longitude": -122.1021994,
   "phone": "++1 510-782-5050",
-  "imageURLs": [
-    "/images/malls/ca-southland-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-southland-mall-1.jpg"],
   "summary": "Southland Mall is a large indoor shopping center in Hayward featuring department stores, specialty retailers, and casual dining options. The enclosed mall offers a diverse selection of clothing, shoes, and electronics, serving as a convenient retail destination for East Bay shoppers.",
   "openFrom": 1100,
   "openUntil": 2000,

@@ -8,9 +8,7 @@
   "latitude": 33.2003885,
   "longitude": -117.2452931,
   "phone": "++1 877-225-5337",
-  "imageURLs": [
-    "/images/malls/ca-vista-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-vista-village-1.jpg"],
   "summary": "Vista Village is a well-regarded community shopping center in Vista, California, offering a convenient mix of retail stores, restaurants, and services for North San Diego County residents. With its accessible location and strong community reputation, the center serves as a popular everyday shopping destination for local families and professionals.",
   "openFrom": 0,
   "openUntil": 2400,

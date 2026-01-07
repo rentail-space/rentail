@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.5795767,
   "longitude": -118.0805245,
-  "imageURLs": [
-    "/images/malls/ca-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-shopping-center-1.jpg"],
   "openFrom": 1100,
   "openUntil": 1900,
   "rating": 4.3,

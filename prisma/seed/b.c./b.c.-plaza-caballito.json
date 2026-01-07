@@ -8,9 +8,7 @@
   "latitude": 32.6507499,
   "longitude": -115.4712268,
   "phone": "++52 664 368 6743",
-  "imageURLs": [
-    "/images/malls/b.c.-plaza-caballito-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/b.c.-plaza-caballito-1.jpg"],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.2,

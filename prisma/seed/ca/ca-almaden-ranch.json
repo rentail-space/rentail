@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.2583093,
   "longitude": -121.8730038,
-  "imageURLs": [
-    "/images/malls/ca-almaden-ranch-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-almaden-ranch-1.jpg"],
   "summary": "Almaden Ranch is a popular outdoor shopping center in South San Jose's Almaden Valley, featuring specialty retailers, chain restaurants, a supermarket, and a bowling alley. This community-oriented destination serves local families and professionals with a convenient mix of shopping, dining, and entertainment options.",
   "openFrom": 0,
   "openUntil": 2400,

@@ -8,9 +8,7 @@
   "latitude": 37.7843318,
   "longitude": -122.40336629999999,
   "phone": "++1 415-369-6000",
-  "imageURLs": [
-    "/images/malls/ca-metreon-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-metreon-1.jpg"],
   "summary": "Metreon is a modern urban lifestyle center in downtown San Francisco featuring a diverse dining terrace with ethnic cuisine, big-box retail shops, and a 16-screen cinema. Located in the Yerba Buena district, it serves as a popular entertainment and dining destination for both locals and tourists.",
   "openFrom": 1100,
   "openUntil": 2100,

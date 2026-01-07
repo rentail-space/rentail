@@ -8,9 +8,7 @@
   "latitude": 37.9949307,
   "longitude": -121.31183680000001,
   "phone": "++1 209-477-0245",
-  "imageURLs": [
-    "/images/malls/ca-weberstown-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-weberstown-mall-1.jpg"],
   "summary": "Weberstown Mall is Stockton's large enclosed regional shopping center featuring department stores, familiar chain retailers, and a food court. With over 4,300 customer reviews and a 4.1-star rating, it serves as a convenient one-stop shopping destination for San Joaquin Valley families.",
   "openFrom": 1000,
   "openUntil": 2000,

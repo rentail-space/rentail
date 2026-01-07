@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.9912102,
   "longitude": -117.9266015,
-  "imageURLs": [
-    "/images/malls/ca-twin-pines-mall-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-twin-pines-mall-1.jpg"],
   "openFrom": 830,
   "openUntil": 2000,
   "rating": 4.8,

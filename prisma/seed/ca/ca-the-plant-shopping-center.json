@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.214672,
   "longitude": -118.4467316,
-  "imageURLs": [
-    "/images/malls/ca-the-plant-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-plant-shopping-center-1.jpg"],
   "openFrom": 900,
   "openUntil": 2100,
   "rating": 4.3,

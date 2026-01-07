@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.8052253,
   "longitude": -118.3293022,
-  "imageURLs": [
-    "/images/malls/ca-torrance-crossroads-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-torrance-crossroads-shopping-center-1.jpg"],
   "summary": "Torrance Crossroads is a well-established neighborhood strip mall featuring over 40 shops and restaurants with Northern Italian architectural touches. This convenient South Bay destination combines brand-name retailers, a supermarket anchor, service providers, and diverse dining options to serve the daily needs of local residents.",
   "openFrom": 900,
   "openUntil": 2200,

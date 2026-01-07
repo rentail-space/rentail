@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.9633468,
   "longitude": -121.7374304,
-  "imageURLs": [
-    "/images/malls/ca-slatten-ranch-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-slatten-ranch-shopping-center-1.jpg"],
   "summary": "Slatten Ranch Shopping Center is a community-oriented retail destination in Antioch offering a convenient mix of shops, restaurants, and services with ample parking. With over 2,200 positive reviews, it serves as a popular neighborhood gathering spot for everyday shopping and dining needs.",
   "openFrom": 800,
   "openUntil": 2300,

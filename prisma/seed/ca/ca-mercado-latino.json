@@ -8,9 +8,7 @@
   "latitude": 35.3715967,
   "longitude": -118.97077540000001,
   "phone": "++1 661-633-0346",
-  "imageURLs": [
-    "/images/malls/ca-mercado-latino-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-mercado-latino-1.jpg"],
   "summary": "Mercado Latino is a family-owned cultural shopping center established in 1994, featuring over 100 traditional Mexican and Latin American businesses. The center offers authentic restaurants, traditional shops, recreational areas, and live weekend entertainment, creating a vibrant community gathering place that brings a piece of Mexico to Bakersfield.",
   "openFrom": 1000,
   "openUntil": 1900,

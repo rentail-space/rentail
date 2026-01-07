@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.8187811,
   "longitude": -117.520357,
-  "imageURLs": [
-    "/images/malls/ca-bedford-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-bedford-marketplace-1.jpg"],
   "rating": 4.7,
   "reviewCount": 45,
   "website": "https://www.bedfordmarketplacecorona.com/?utm_source=rentail.space",

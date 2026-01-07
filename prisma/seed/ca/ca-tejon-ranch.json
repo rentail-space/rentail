@@ -8,9 +8,7 @@
   "latitude": 34.984845199999995,
   "longitude": -118.9417643,
   "phone": "++1 661-858-2155",
-  "imageURLs": [
-    "/images/malls/ca-tejon-ranch-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-tejon-ranch-1.jpg"],
   "summary": "Tejon Ranch Outlets is a convenient shopping destination located on historic Tejon Ranch along Interstate 5, positioned between Los Angeles and Bakersfield. The center serves travelers and local residents with outlet shopping in a unique setting that balances commercial development with the natural heritage of California's largest private landholding.",
   "openFrom": 1000,
   "openUntil": 2000,

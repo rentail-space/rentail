@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.472503599999996,
   "longitude": -117.2893661,
-  "imageURLs": [
-    "/images/malls/ca-victor-valley-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-victor-valley-town-center-1.jpg"],
   "summary": "Victor Valley Town Center is the High Desert's primary enclosed regional mall, serving Victorville and surrounding communities with a diverse mix of national retailers and dining options. With extended daily hours and a strong community reputation, it remains the area's go-to destination for climate-controlled shopping and entertainment.",
   "openFrom": 600,
   "openUntil": 2300,

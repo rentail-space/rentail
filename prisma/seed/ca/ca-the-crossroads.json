@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.3222729,
   "longitude": -122.0349466,
-  "imageURLs": [
-    "/images/malls/ca-the-crossroads-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-crossroads-1.jpg"],
   "summary": "Cupertino Crossroads is a neighborhood shopping center in the heart of Cupertino, anchored by TJ Maxx Home Goods and Party City. The property features popular dining destinations including Boudin Bakery, Philz Coffee, Islands Fine Burgers, and Freebirds World Burritos, serving the affluent Silicon Valley community.",
   "openFrom": 900,
   "openUntil": 2030,

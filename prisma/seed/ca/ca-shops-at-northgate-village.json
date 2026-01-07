@@ -8,9 +8,7 @@
   "latitude": 37.7620673,
   "longitude": -121.41231309999999,
   "phone": "++1 415-710-9250",
-  "imageURLs": [
-    "/images/malls/ca-shops-at-northgate-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-shops-at-northgate-village-1.jpg"],
   "summary": "Northgate Village is a community-focused shopping center in Tracy, California, serving over 215,600 residents with exceptional Interstate 205 visibility. The recently expanded center offers a diverse mix of coworking spaces, dining, youth activities, and community services with ample parking and flexible zoning.",
   "openFrom": 1000,
   "openUntil": 2200,

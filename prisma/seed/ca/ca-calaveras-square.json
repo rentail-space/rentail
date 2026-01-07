@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 38.0017306,
   "longitude": -121.29346659999999,
-  "imageURLs": [
-    "/images/malls/ca-calaveras-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-calaveras-square-1.jpg"],
   "summary": "Calaveras Square is a community shopping center on Stockton's east side, anchored by Walmart and serving local residents with convenient access to everyday shopping needs. With a 4.1-star rating from over 2,200 reviews, the center offers value-oriented retail options and extended operating hours from 6:00 AM to 9:00 PM daily.",
   "openFrom": 600,
   "openUntil": 2100,

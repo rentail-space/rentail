@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.6446019,
   "longitude": -122.45213799999999,
-  "imageURLs": [
-    "/images/malls/ca-westborough-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westborough-square-1.jpg"],
   "summary": "Westborough Square is a community shopping center in South San Francisco featuring multiple retail buildings with anchor tenants and neighborhood services. With over 1,640 reviews and a 4.2-star rating, it serves as a trusted local destination for everyday shopping needs.",
   "openFrom": 0,
   "openUntil": 2400,

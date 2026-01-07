@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Guidance for Claude Code when working with this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Essential Commands
 
@@ -64,12 +64,23 @@ Guidance for Claude Code when working with this repository.
 - `streamText()` from Anthropic SDK in `app/routes/api.chat.$chatId.message.ts`
 - Resumable streams via Redis coordination (prevents duplication on reconnect)
 - `Chat.activeStreamId` tracks active stream (null when idle)
+- Stream lifecycle: Generate `streamId` (ULID) → Set `Chat.activeStreamId` → Stream → `onFinish` clears `activeStreamId`
+- Stop signal monitoring via `redis-stop-monitor.ts`
 
 **Working Memory:**
 - User context stored in `User.workingMemory` JSON field
 - Schema: `app/lib/workingMemory.ts` (Zod validation)
 - Claude emits `<working_memory>` tags → parsed in `onFinish` → merged into user profile
 - Fields: merchant, location, selling, projections
+- Tags are masked from user display in UI
+
+**Authentication:**
+- Cookie-based sessions (365-day expiration) via `sessions.server.ts`
+- Password hashing: bcrypt with 10 salt rounds
+- Two user types: anonymous (auto-created) and authenticated (email/password)
+- Admin emails hardcoded in `sessions.server.ts:32`
+- Email verification: 24-hour ULID tokens in `Verification` model
+- Session guards: `verifyAdmin()` for admin routes, `getSignedInUser()` for profile
 
 **Location Detection:**
 1. `User.workingMemory.location` (highest priority)
@@ -80,6 +91,14 @@ Guidance for Claude Code when working with this repository.
 - Simple lat/lon bounding box (no PostGIS)
 - Formula: `lat ± (miles / 69.172)`, `lon ± (miles / 57.393)`
 - Default: 30-mile search, 20-mile display
+- Implementation: `findNearbyCenters()` in `app/lib/findNearbyCenters.ts`
+
+**Data Collection:**
+- Grid-based Google Places API search via `app/lib/scrape/metroAreas.ts`
+- Hexagonal grid with 50km radius for comprehensive coverage
+- Enrichment pipeline: Google Places → Website scraping (Playwright) → AI enrichment (Claude)
+- Metro area aliases: "LA" → 4 counties, "NYC" → 5 boroughs, etc.
+- Caching: Prisma Cache for geocoding and search results
 
 ## Testing
 
@@ -95,8 +114,9 @@ Guidance for Claude Code when working with this repository.
 - Anthropic mock: `/test/mocks/mockAnthropic.ts`
 
 **Commands:**
-- `pnpm test` - Full suite
+- `pnpm test` - Full suite (lint + typecheck + vitest)
 - `pnpx vitest run <pattern>` - Specific test
+- `pnpx vitest run --reporter=verbose` - Detailed output
 - `DEBUG=* pnpm test` - Enable debug logging
 
 ## Common Tasks
@@ -113,10 +133,16 @@ Guidance for Claude Code when working with this repository.
 3. Test with mock Anthropic responses
 
 **Add Blog Post:**
-1. Create markdown in `app/data/blog/my-post.md`
+1. Create markdown in `app/data/blog/YYYY-MM-DD-slug.md`
 2. Add YAML frontmatter (title, description, date, author, tags)
 3. Images go in `public/blog/`
 4. Auto-discovered via `blogPosts.server.ts`
+
+**Run Data Collection:**
+1. Use `tsx scripts/collect.ts "Location"` (e.g., "Los Angeles, CA")
+2. System resolves to metro area and generates search grid
+3. Results saved as seed files in `app/data/seeds/`
+4. Import: `tsx scripts/seedCenter.ts path/to/seed.json`
 
 ## Git Commits
 
@@ -132,11 +158,43 @@ Format: `emoji type(scope): description`
 
 Imperative mood, atomic commits, reference files when helpful.
 
+## Database Management
+
+**Schema Updates:**
+1. Edit `prisma/schema.prisma`
+2. Generate client: `pnpm prisma generate`
+3. Push to dev: `pnpm prisma db push`
+4. Create migration: `pnpm prisma migrate dev --name migration_name`
+
+**Models:**
+- `User` - Authentication and working memory
+- `Chat` - Conversation threads with `activeStreamId`
+- `Messages` - Chat messages (JSON content, UIMessage format)
+- `Property` - Shopping centers (lat/lon, demographics, tier)
+- `PropertySpace` - Individual retail spaces
+- `Session` - Auth sessions (token, expiration)
+- `Verification` - Email verification tokens
+- `Cache` - Generic key-value store (geocoding, API results)
+
+## Environment Variables
+
+**Required:**
+- `BETTER_AUTH_SECRET` - Session cookie secret
+- `DATABASE_URL` - PostgreSQL connection string
+- `ANTHROPIC_API_KEY` - Claude AI API key
+- `GOOGLE_MAPS_API_KEY` - For geocoding and Places API
+- `RESEND_API_KEY` - Email delivery
+
+**Optional:**
+- `REDIS_URL` - For stream coordination (falls back to memory)
+- `SENTRY_DSN` - Error tracking
+- `VERCEL_*` - Auto-set in Vercel deployments
+
 ## Important Reminders
 
-- See [AGENTS.md](./AGENTS.md) for workflow and issue tracking
-- Run `pnpm check` before committing
-- Database updates: `prisma generate && prisma db push`
-- All pages need `<main>` with `aria-label`
+- See [AGENTS.md](./AGENTS.md) for bd (beads) issue tracking workflow
+- Run `pnpm check` before committing (lint + typecheck)
+- All pages need `<main>` with `aria-label` for accessibility
 - Center seed files MUST have valid `website` property
 - Debug logging: `DEBUG=server,browser pnpm dev`
+- Store AI planning docs in `history/` directory (not repo root)

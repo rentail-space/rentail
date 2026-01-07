@@ -8,9 +8,7 @@
   "latitude": 37.688177499999995,
   "longitude": -122.13715119999999,
   "phone": "++1 833-800-4343",
-  "imageURLs": [
-    "/images/malls/ca-greenhouse-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-greenhouse-marketplace-1.jpg"],
   "summary": "Greenhouse Marketplace is a 142,638-square-foot community shopping center in San Leandro with prime Interstate 880 access, featuring multiple anchors, diverse retailers, and outparcel restaurants. The center serves a high-density East Bay community and benefits from long-term tenant success with impressive sales performance.",
   "openFrom": 700,
   "openUntil": 2300,

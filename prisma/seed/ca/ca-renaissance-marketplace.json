@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.134859399999996,
   "longitude": -117.3974641,
-  "imageURLs": [
-    "/images/malls/ca-renaissance-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-renaissance-marketplace-1.jpg"],
   "summary": "Renaissance Marketplace is an upbeat, open-air shopping plaza in Rialto featuring familiar retail chains, casual restaurants, and a movie theater. This family-friendly destination serves as a convenient one-stop shopping and entertainment hub for the Inland Empire community.",
   "openFrom": 1000,
   "openUntil": 2200,

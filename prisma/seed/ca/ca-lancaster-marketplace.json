@@ -8,9 +8,7 @@
   "latitude": 34.6992012,
   "longitude": -118.172615,
   "phone": "++1 661-942-7897",
-  "imageURLs": [
-    "/images/malls/ca-lancaster-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-lancaster-marketplace-1.jpg"],
   "summary": "Lancaster Marketplace is a family-friendly community shopping center conveniently located off the 14 Freeway in Lancaster, offering a diverse mix of retail shops, dining options, and services. Ideally positioned near the Lancaster Poppy Reserve, it serves as a popular destination for both local residents and visitors exploring the Antelope Valley.",
   "openFrom": 900,
   "openUntil": 2000,

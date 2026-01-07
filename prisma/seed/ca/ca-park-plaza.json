@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.751325,
   "longitude": -118.30795920000001,
-  "imageURLs": [
-    "/images/malls/ca-park-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-park-plaza-1.jpg"],
   "summary": "Park Plaza is a neighborhood strip center on South Western Avenue in Los Angeles, offering a practical mix of shops, dining, and grocery options with ample parking. The center serves the San Pedro and Harbor communities with everyday retail needs and local services, maintaining strong community ties and convenient extended hours.",
   "openFrom": 800,
   "openUntil": 2300,

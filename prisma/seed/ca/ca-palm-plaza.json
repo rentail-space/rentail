@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.523058,
   "longitude": -117.15904479999999,
-  "imageURLs": [
-    "/images/malls/ca-palm-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-palm-plaza-1.jpg"],
   "summary": "Palm Plaza is a 342,336-square-foot community shopping center located at a prime intersection off I-15 and Winchester Road in Temecula, California. The property features big-box retail, boutiques, restaurants, and a grocery store, serving an affluent trade area near the Promenade Mall.",
   "openFrom": 0,
   "openUntil": 2400,

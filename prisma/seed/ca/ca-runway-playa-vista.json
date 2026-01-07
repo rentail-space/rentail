@@ -8,9 +8,7 @@
   "latitude": 33.9766474,
   "longitude": -118.4168421,
   "phone": "++1 310-862-9461",
-  "imageURLs": [
-    "/images/malls/ca-runway-playa-vista-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-runway-playa-vista-1.jpg"],
   "summary": "Runway Playa Vista is a contemporary lifestyle center in Los Angeles's Silicon Beach featuring diverse shops, restaurants, a movie theater, and a Whole Foods Market anchor. This open-air destination serves the affluent Playa Vista community with a modern mix of retail, dining, and entertainment options in a walkable, urban setting.",
   "openFrom": 700,
   "openUntil": 2200,

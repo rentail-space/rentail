@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 32.7361875,
   "longitude": -117.17818749999998,
-  "imageURLs": [
-    "/images/malls/ca-rent-a-car-center-san-diego-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-rent-a-car-center-san-diego-1.jpg"],
   "summary": "The San Diego Airport Rental Car Center is a modern, 24-hour consolidated facility serving San Diego International Airport with convenient access to all major rental car brands. This essential travel hub streamlines the car rental experience for millions of visitors to San Diego each year.",
   "openFrom": 0,
   "openUntil": 2400,

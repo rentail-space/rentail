@@ -8,9 +8,7 @@
   "latitude": 37.9293142,
   "longitude": -122.51448169999998,
   "phone": "++1 415-924-8588",
-  "imageURLs": [
-    "/images/malls/ca-the-village-at-corte-madera-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-village-at-corte-madera-1.jpg"],
   "summary": "The Village at Corte Madera is Marin County's premier open-air lifestyle center featuring high-end department stores, brand-name retailers, and upscale dining amid beautifully landscaped pedestrian walkways. This sophisticated shopping destination serves the affluent North Bay community with a carefully curated mix of quality retailers in an inviting outdoor environment.",
   "openFrom": 1000,
   "openUntil": 2000,

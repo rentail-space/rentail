@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.9354078,
   "longitude": -122.35835829999999,
-  "imageURLs": [
-    "/images/malls/ca-richmond-city-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-richmond-city-center-1.jpg"],
   "summary": "Richmond City Center is the primary civic and government services hub for the City of Richmond, providing residents with centralized access to city departments, business resources, and community programs. Located on Macdonald Avenue in the East Bay, this municipal facility serves as an essential community gathering place with extended operating hours.",
   "openFrom": 700,
   "openUntil": 0,

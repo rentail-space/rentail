@@ -8,9 +8,7 @@
   "latitude": 33.4858071,
   "longitude": -117.7245424,
   "phone": "++1 760-753-7722",
-  "imageURLs": [
-    "/images/malls/ca-monarch-bay-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-monarch-bay-plaza-1.jpg"],
   "openFrom": 700,
   "openUntil": 2200,
   "rating": 4.5,

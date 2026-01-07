@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.2235085,
   "longitude": -118.3978128,
-  "imageURLs": [
-    "/images/malls/ca-canyon-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-canyon-plaza-1.jpg"],
   "summary": "Canyon Plaza is a convenient strip mall in Los Angeles featuring familiar chain retailers and cafes with ample parking. This straightforward shopping center serves the local community with everyday shopping and dining options in an accessible, easy-to-navigate format.",
   "openFrom": 600,
   "openUntil": 100,

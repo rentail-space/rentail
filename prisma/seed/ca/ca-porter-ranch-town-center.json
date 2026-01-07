@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.2765392,
   "longitude": -118.567169,
-  "imageURLs": [
-    "/images/malls/ca-porter-ranch-town-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-porter-ranch-town-center-1.jpg"],
   "summary": "Porter Ranch Town Center is a sprawling open-air shopping destination serving the affluent Porter Ranch community with over 200,000 square feet of retail space. The center offers a comprehensive mix of grocery stores, diverse restaurants, and essential service providers, making it the go-to convenience hub for northwest San Fernando Valley residents.",
   "openFrom": 700,
   "openUntil": 2300,

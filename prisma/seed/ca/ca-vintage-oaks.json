@@ -8,9 +8,7 @@
   "latitude": 38.0911435,
   "longitude": -122.55507829999998,
   "phone": "++1 415-897-9999",
-  "imageURLs": [
-    "/images/malls/ca-vintage-oaks-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-vintage-oaks-1.jpg"],
   "summary": "Vintage Oaks is an open-air lifestyle center in Novato featuring sixty popular retail and dining destinations including Costco, Target, Nordstrom Rack, and diverse restaurants. The center uniquely combines everyday shopping with wellness studios, live entertainment, and Bay Area art installations, creating a vibrant community gathering place for Marin County's active lifestyle.",
   "openFrom": 1000,
   "openUntil": 2200,

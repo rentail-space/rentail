@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.1232251,
   "longitude": -117.1941634,
-  "imageURLs": [
-    "/images/malls/ca-highland-village-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-highland-village-plaza-1.jpg"],
   "openFrom": 900,
   "openUntil": 2000,
   "rating": 4.2,

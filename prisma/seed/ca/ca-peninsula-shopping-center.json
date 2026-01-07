@@ -8,9 +8,7 @@
   "latitude": 33.774740099999995,
   "longitude": -118.3765414,
   "phone": "++1 310-541-2242",
-  "imageURLs": [
-    "/images/malls/ca-peninsula-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-peninsula-shopping-center-1.jpg"],
   "summary": "Peninsula Shopping Center is a well-established community shopping destination in Rolling Hills Estates, offering a diverse mix of clothing stores, restaurants, medical offices, and service businesses. With its convenient location and quality tenant mix, the center serves as a neighborhood hub for the affluent Palos Verdes Peninsula community.",
   "openFrom": 900,
   "openUntil": 2100,

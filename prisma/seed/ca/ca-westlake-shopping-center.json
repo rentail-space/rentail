@@ -8,9 +8,7 @@
   "latitude": 37.7010858,
   "longitude": -122.48318039999998,
   "phone": "++1 833-800-4343",
-  "imageURLs": [
-    "/images/malls/ca-westlake-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-westlake-shopping-center-1.jpg"],
   "summary": "Westlake Shopping Center is a community-focused shopping destination in Daly City featuring big-box retailers, specialty stores, and diverse dining options. This accessible neighborhood center serves local residents with convenient services and everyday shopping needs.",
   "openFrom": 0,
   "openUntil": 2400,

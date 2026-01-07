@@ -8,9 +8,7 @@
   "latitude": 37.8365128,
   "longitude": -122.29429249999998,
   "phone": "++1 925-279-1800",
-  "imageURLs": [
-    "/images/malls/ca-powell-street-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-powell-street-plaza-1.jpg"],
   "summary": "Powell Street Plaza is a premier outdoor shopping center in Emeryville featuring popular retailers like Trader Joe's, BevMo!, Ross, Old Navy, and Marshalls, with unobstructed visibility from I-80. Drawing 3.7 million annual visits, the center serves an affluent Bay Area trade area with household incomes averaging over $152,000.",
   "openFrom": 600,
   "openUntil": 2300,

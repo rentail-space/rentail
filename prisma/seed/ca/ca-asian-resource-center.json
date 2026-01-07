@@ -8,9 +8,7 @@
   "latitude": 37.7995565,
   "longitude": -122.27027419999999,
   "phone": "++1 510-287-5353",
-  "imageURLs": [
-    "/images/malls/ca-asian-resource-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-asian-resource-center-1.jpg"],
   "summary": "The Asian Resource Center is a community-focused facility in Oakland's Chinatown operated by EBALDC, providing multilingual social services, housing resources, and community programs to diverse Asian-American and immigrant populations. This trusted community hub serves as a vital resource center rather than a traditional retail shopping destination.",
   "openFrom": 900,
   "openUntil": 1700,

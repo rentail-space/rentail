@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.850835499999995,
   "longitude": -122.035163,
-  "imageURLs": [
-    "/images/malls/ca-alamo-plaza-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-alamo-plaza-shopping-center-1.jpg"],
   "summary": "Alamo Plaza Shopping Center is a 200,282-square-foot community retail destination in downtown Alamo, anchored by Safeway and Rite-Aid. Recently revitalized by EDENS with vibrant murals and community events including a popular Sunday Farmers Market, the center serves as a vital gathering place for the local community.",
   "openFrom": 1000,
   "openUntil": 2200,

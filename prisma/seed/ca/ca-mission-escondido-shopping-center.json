@@ -8,9 +8,7 @@
   "latitude": 33.1292472,
   "longitude": -117.0874051,
   "phone": "++1 760-804-6900",
-  "imageURLs": [
-    "/images/malls/ca-mission-escondido-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-mission-escondido-shopping-center-1.jpg"],
   "openFrom": 900,
   "openUntil": 2100,
   "rating": 4.2,

@@ -8,9 +8,7 @@
   "latitude": 37.37245,
   "longitude": -122.08790560000001,
   "phone": "++1 925-279-1800",
-  "imageURLs": [
-    "/images/malls/ca-blossom-valley-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-blossom-valley-1.jpg"],
   "summary": "Blossom Valley is a convenient neighborhood shopping plaza in Mountain View featuring a variety of shops, casual restaurants, and services with plenty of parking. Located in the heart of Silicon Valley, this well-rated center serves local residents and tech professionals with extended hours and easy accessibility.",
   "openFrom": 600,
   "openUntil": 2300,

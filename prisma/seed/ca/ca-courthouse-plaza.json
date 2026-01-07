@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.953036499999996,
   "longitude": -121.28696049999999,
-  "imageURLs": [
-    "/images/malls/ca-courthouse-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-courthouse-plaza-1.jpg"],
   "summary": "Courthouse Plaza is a unique community-focused center in downtown Stockton featuring an eclectic mix of local retailers, cafes, salons, and social enterprises. The historic building is home to The Underground Arcade, a youth-led entertainment space, alongside diverse shops, restaurants, and nonprofit services that support community revitalization.",
   "openFrom": 700,
   "openUntil": 1700,

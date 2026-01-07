@@ -8,9 +8,7 @@
   "latitude": 37.704457999999995,
   "longitude": -121.88520039999999,
   "phone": "++1 510-460-6922",
-  "imageURLs": [
-    "/images/malls/ca-hacienda-crossings-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-hacienda-crossings-shopping-center-1.jpg"],
   "summary": "Hacienda Crossings Shopping Center is a popular community destination in Dublin featuring a diverse mix of retail stores, restaurants, and a multiplex theater with IMAX. The center serves the affluent Tri-Valley area with convenient shopping and entertainment options that attract families and professionals throughout the week.",
   "openFrom": 1000,
   "openUntil": 2100,

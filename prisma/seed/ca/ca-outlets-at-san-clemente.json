@@ -8,9 +8,7 @@
   "latitude": 33.4392912,
   "longitude": -117.6279166,
   "phone": "++1 949-535-2323",
-  "imageURLs": [
-    "/images/malls/ca-outlets-at-san-clemente-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-outlets-at-san-clemente-1.jpg"],
   "summary": "Outlets at San Clemente is Orange County's only coastal outlet shopping destination, featuring over 60 designer brands with savings up to 70% off retail prices. This open-air center combines Pacific Ocean views with an upscale outlet experience, offering fashion, dining, entertainment, and an Elite Rewards loyalty program for frequent shoppers.",
   "openFrom": 1000,
   "openUntil": 2000,

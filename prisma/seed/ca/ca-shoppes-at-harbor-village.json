@@ -8,9 +8,7 @@
   "latitude": 37.5043333,
   "longitude": -122.48317779999999,
   "phone": "++1 650-726-5400",
-  "imageURLs": [
-    "/images/malls/ca-shoppes-at-harbor-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-shoppes-at-harbor-village-1.jpg"],
   "summary": "Shoppes at Harbor Village is an airy, tranquil lifestyle center in coastal Half Moon Bay featuring a curated mix of boutiques, restaurants, fitness centers, and beauty services. This open-air shopping gallery offers a sophisticated, village-style atmosphere that appeals to both locals and tourists seeking quality retail and wellness experiences.",
   "openFrom": 800,
   "openUntil": 2330,

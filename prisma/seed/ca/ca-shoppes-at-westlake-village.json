@@ -8,9 +8,7 @@
   "latitude": 34.1479473,
   "longitude": -118.7948618,
   "phone": "++1 805-495-5400",
-  "imageURLs": [
-    "/images/malls/ca-shoppes-at-westlake-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-shoppes-at-westlake-village-1.jpg"],
   "openFrom": 800,
   "openUntil": 2200,
   "rating": 4.5,

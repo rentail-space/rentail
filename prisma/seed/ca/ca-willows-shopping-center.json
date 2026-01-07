@@ -8,9 +8,7 @@
   "latitude": 37.968931000000005,
   "longitude": -122.0575538,
   "phone": "++1 925-279-1800",
-  "imageURLs": [
-    "/images/malls/ca-willows-shopping-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-willows-shopping-center-1.jpg"],
   "summary": "Willows Shopping Center is a well-established community shopping destination in Concord featuring national clothing and home goods retailers alongside popular casual dining options. With convenient hours and a strong community reputation, it serves as a go-to location for everyday shopping needs in the East Bay area.",
   "openFrom": 600,
   "openUntil": 2300,

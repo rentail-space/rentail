@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.469068899999996,
   "longitude": -117.3497802,
-  "imageURLs": [
-    "/images/malls/ca-dunia-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-dunia-plaza-1.jpg"],
   "summary": "Dunia Plaza is a thriving open-air shopping center on Bear Valley Road in Victorville, featuring over 52 stores anchored by Lowe's, Kohl's, and Walmart, alongside the High Desert's premier Restaurant Row with 19 dining options. With exceptional I-15 freeway visibility and over $400 million in annual sales, it serves as the region's premier one-stop destination for shopping, dining, and entertainment.",
   "openFrom": 600,
   "openUntil": 2300,

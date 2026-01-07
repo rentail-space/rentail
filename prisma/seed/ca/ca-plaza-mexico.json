@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.9288527,
   "longitude": -118.21390179999999,
-  "imageURLs": [
-    "/images/malls/ca-plaza-mexico-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-plaza-mexico-1.jpg"],
   "summary": "Plaza Mexico is an open-air lifestyle center in Lynwood featuring ornate Spanish colonial architecture and authentic Mexican shopping, dining, and entertainment experiences. This cultural destination offers a unique marketplace atmosphere with traditional restaurants, specialty retailers, and community events that celebrate Mexican heritage.",
   "openFrom": 1000,
   "openUntil": 2000,

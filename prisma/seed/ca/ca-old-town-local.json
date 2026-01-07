@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 32.7526626,
   "longitude": -117.197043,
-  "imageURLs": [
-    "/images/malls/ca-old-town-local-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-old-town-local-1.jpg"],
   "openFrom": 900,
   "openUntil": 1900,
   "rating": 4.7,

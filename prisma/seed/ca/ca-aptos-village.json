@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 36.9782225,
   "longitude": -121.90082840000001,
-  "imageURLs": [
-    "/images/malls/ca-aptos-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-aptos-village-1.jpg"],
   "summary": "Aptos Village is a charming 11.5-acre lifestyle center in Aptos featuring a pedestrian-friendly town square with quaint shops, diverse restaurants, and a historic apple barn grocer. This mixed-use development combines traditional architecture with modern amenities, creating a vibrant community atmosphere between the trees and ocean.",
   "openFrom": 0,
   "openUntil": 2400,

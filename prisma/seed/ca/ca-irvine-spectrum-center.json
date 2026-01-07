@@ -8,9 +8,7 @@
   "latitude": 33.6499958,
   "longitude": -117.7437013,
   "phone": "++1 949-790-4871",
-  "imageURLs": [
-    "/images/malls/ca-irvine-spectrum-center-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-irvine-spectrum-center-1.jpg"],
   "summary": "Irvine Spectrum Center is a premier open-air lifestyle destination in Orange County featuring an extensive collection of retail stores, restaurants, and entertainment attractions including the iconic Giant Wheel, carousel, ice rink, and newly opened venues like Hijinx Hotel and Holey Moley. Celebrating 30 years of operation, this award-winning center combines upscale shopping and dining with year-round events and seasonal programming that make it a beloved community gathering place.",
   "openFrom": 1000,
   "openUntil": 2200,

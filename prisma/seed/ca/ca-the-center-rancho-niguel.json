@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.5573012,
   "longitude": -117.686122,
-  "imageURLs": [
-    "/images/malls/ca-the-center-rancho-niguel-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-center-rancho-niguel-1.jpg"],
   "openFrom": 800,
   "openUntil": 2100,
   "rating": 4.5,

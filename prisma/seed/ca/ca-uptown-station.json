@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.8085832,
   "longitude": -122.2687484,
-  "imageURLs": [
-    "/images/malls/ca-uptown-station-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-uptown-station-1.jpg"],
   "summary": "Uptown Station is a historic 1928 landmark at 1955 Broadway in Oakland, reconstructed as a modern mixed-use destination for creative businesses and retail. Perched atop Oakland's transportation hub in the vibrant Uptown district, it combines over eighty years of heritage with contemporary workplace innovation.",
   "rating": 3.8,
   "reviewCount": 4,

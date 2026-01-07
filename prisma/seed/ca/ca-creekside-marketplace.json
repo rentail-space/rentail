@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.1363584,
   "longitude": -117.1766161,
-  "imageURLs": [
-    "/images/malls/ca-creekside-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-creekside-marketplace-1.jpg"],
   "openFrom": 0,
   "openUntil": 2400,
   "rating": 4.4,

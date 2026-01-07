@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.9619632,
   "longitude": -122.32517840000001,
-  "imageURLs": [
-    "/images/malls/ca-princeton-plaza-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-princeton-plaza-1.jpg"],
   "summary": "Princeton Plaza is a neighborhood shopping center in San Pablo, California, offering convenient access to local retail and services. With a 4.2-star rating and nearly 1,000 reviews, it serves as a reliable community retail destination.",
   "openFrom": 900,
   "openUntil": 2100,

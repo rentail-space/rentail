@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 37.898086299999996,
   "longitude": -122.51540469999999,
-  "imageURLs": [
-    "/images/malls/ca-strawberry-village-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-strawberry-village-1.jpg"],
   "summary": "Built in 1964, Strawberry Village is Mill Valley's iconic Town & Country shopping center featuring a reimagined central plaza, diverse dining options, and community-focused amenities. The center hosts popular events including the weekly Mill Valley Farmers Market and serves as a vibrant gathering place for Marin County's coastal communities.",
   "rating": 4.4,
   "reviewCount": 715,

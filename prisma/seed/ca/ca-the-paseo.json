@@ -8,9 +8,7 @@
   "latitude": 34.1455438,
   "longitude": -118.1438719,
   "phone": "++1 626-795-9100",
-  "imageURLs": [
-    "/images/malls/ca-the-paseo-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-paseo-1.jpg"],
   "summary": "The Paseo is an upscale open-air lifestyle center in downtown Pasadena featuring trendy retailers, diverse dining options, and a multiplex theater. This sprawling shopping district offers a sophisticated blend of shopping and entertainment in a walkable outdoor setting.",
   "openFrom": 1100,
   "openUntil": 2000,

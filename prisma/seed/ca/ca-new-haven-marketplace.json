@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 33.9994513,
   "longitude": -117.5771331,
-  "imageURLs": [
-    "/images/malls/ca-new-haven-marketplace-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-new-haven-marketplace-1.jpg"],
   "openFrom": 600,
   "openUntil": 2300,
   "rating": 4.6,

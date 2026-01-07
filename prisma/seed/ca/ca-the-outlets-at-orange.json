@@ -8,9 +8,7 @@
   "latitude": 33.7826657,
   "longitude": -117.8930882,
   "phone": "++1 714-769-4001",
-  "imageURLs": [
-    "/images/malls/ca-the-outlets-at-orange-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-the-outlets-at-orange-1.jpg"],
   "summary": "The Outlets at Orange is a premier open-air outlet shopping center featuring over 120 brand-name stores, 25 restaurants, and unique entertainment options including an indoor skate park and IMAX cinema. This tree-lined destination combines exceptional shopping value with diverse dining and family-friendly entertainment in the heart of Orange County.",
   "openFrom": 1000,
   "openUntil": 2100,

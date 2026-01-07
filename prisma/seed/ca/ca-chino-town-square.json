@@ -7,9 +7,7 @@
   "state": "CA",
   "latitude": 34.0322626,
   "longitude": -117.6841716,
-  "imageURLs": [
-    "/images/malls/ca-chino-town-square-1.jpg"
-  ],
+  "imageURLs": ["/images/malls/ca-chino-town-square-1.jpg"],
   "summary": "Chino Town Square is a practical community shopping center in Chino featuring department stores, discount retailers, and beauty salons. With extended hours and a convenient location, it serves as a reliable neighborhood destination for everyday shopping needs.",
   "openFrom": 800,
   "openUntil": 2300,
