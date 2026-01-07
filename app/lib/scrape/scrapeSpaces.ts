@@ -129,7 +129,7 @@ If no spaces are found or the page doesn't contain leasing information, return a
       ...classify,
     });
     spinner.succeed(`Found ${output.length} spaces for ${center.name}`);
-    return output;
+    return uniqueSpaces(output);
   } catch (error) {
     spinner.fail(
       `Failed to scrape spaces for ${center.name}: ${error instanceof Error ? error.message : String(error)}`,
@@ -138,4 +138,20 @@ If no spaces are found or the page doesn't contain leasing information, return a
   } finally {
     await page.close();
   }
+}
+
+/**
+ * Return unique spaces, no two spaces have the same space number.
+ *
+ * @param spaces - The spaces to make unique
+ * @returns The unique spaces
+ */
+function uniqueSpaces(spaces: z.infer<typeof spaceSchema>[]) {
+  const unique = new Map<string, z.infer<typeof spaceSchema>>(
+    spaces.map((space) => [space.number, space]),
+  );
+  // Spaces are sorted by space number for convenience only
+  return Array.from(unique.values()).sort((a, b) =>
+    a.number.localeCompare(b.number),
+  );
 }
