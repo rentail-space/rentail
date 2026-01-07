@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { loadNewsItem } from "~/lib/newsItems.server";
-import type { Route } from "../+types/root";
+import type { Route } from "./+types/news.$slug";
 
 export async function loader({ params }: Route.LoaderArgs): Promise<NewsPost> {
   try {
