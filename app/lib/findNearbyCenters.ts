@@ -5,9 +5,12 @@ import { geocodeFromUserInput, geocodeMemoryOrHeaders } from "./geocode";
 
 /**
  * Find the shopping centers within a given distance from the user. Gets the
- * current location from working memory, updates it, if necessary. Returns a
- * list of centers with only their available spaces and the location's display
- * name.
+ * current location from working memory. Returns a set of most specific centers
+ * prioritized by the following criteria:
+ * - Only looking at centers with 4.0 rating or above
+ * - Prioritize centers that have more available spaces
+ * - Prioritize higher tier centers
+ * - Prioritize centers with higher rating*log(reviewers)
  *
  * @param headers The HTTP headers to use to get the user's location.
  * @param user The user to find the shopping centers for. If not provided, the
@@ -45,8 +48,8 @@ export default async function findNearbyCenters({
     // - More available spaces
     // - Highest rating (5 star is the best)
     orderBy: [
-      { tier: "desc" },
       { spaces: { _count: "desc" } },
+      { tier: "desc" },
       { rating: "desc" },
       { name: "asc" },
     ],
