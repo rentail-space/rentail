@@ -102,7 +102,6 @@ jobs:
       - name: Update database
         run: |
           doppler run --config prd -- pnpm prisma db push
-          doppler run --config prd -- pnpm prisma db seed
         env:
           DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
 
