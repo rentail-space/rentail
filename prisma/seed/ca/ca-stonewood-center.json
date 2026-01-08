@@ -37,20 +37,6 @@
       "available": true
     },
     {
-      "number": "C23",
-      "type": "Inline",
-      "size": 5426,
-      "floor": 1,
-      "available": true
-    },
-    {
-      "number": "C29",
-      "type": "Inline",
-      "size": 1180,
-      "floor": 1,
-      "available": true
-    },
-    {
       "number": "C31",
       "type": "Inline",
       "size": 1064,
