@@ -4,6 +4,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { ArrowDown, ArrowUp, MapPinIcon } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { useRef } from "react";
@@ -63,6 +64,12 @@ function CentersList({
     ((center: { longitude: number; latitude: number }) => void) | null
   >;
 }) {
+  const virtualizer = useVirtualizer({
+    count: centers.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 40,
+    overscan: 20,
+  });
   const table = useReactTable({
     columns: [
       { enableSorting: false, id: " ", size: 40 },
@@ -78,77 +85,82 @@ function CentersList({
     getSortedRowModel: getSortedRowModel(),
     initialState: { sorting: [{ id: "name", desc: false }] },
   });
+  const parentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Table>
-      <TableHeader>
-        {table.getHeaderGroups().map((group) => (
-          <TableRow key={group.id}>
-            {group.headers.map((header) => (
-              <TableHead
-                key={header.id}
-                style={{ width: header.column.getSize() }}
-              >
-                {header.getContext().column.getCanSort() ? (
-                  <button
-                    className="flex w-full justify-between p-2 font-bold"
-                    onClick={header.column.getToggleSortingHandler()}
-                    type="button"
+    <div className="container" ref={parentRef}>
+      <div style={{ height: `${virtualizer.getTotalSize()}px` }}>
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((group) => (
+              <TableRow key={group.id}>
+                {group.headers.map((header) => (
+                  <TableHead
+                    key={header.id}
+                    style={{ width: header.column.getSize() }}
                   >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-                    {header.column.getIsSorted() === "desc" ? (
-                      <ArrowUp />
-                    ) : header.column.getIsSorted() === "asc" ? (
-                      <ArrowDown />
+                    {header.getContext().column.getCanSort() ? (
+                      <button
+                        className="flex w-full justify-between p-2 font-bold"
+                        onClick={header.column.getToggleSortingHandler()}
+                        type="button"
+                      >
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                        {header.column.getIsSorted() === "desc" ? (
+                          <ArrowUp />
+                        ) : header.column.getIsSorted() === "asc" ? (
+                          <ArrowDown />
+                        ) : (
+                          <span />
+                        )}
+                      </button>
                     ) : (
-                      <span />
+                      flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )
                     )}
-                  </button>
-                ) : (
-                  flexRender(
-                    header.column.columnDef.header,
-                    header.getContext(),
-                  )
-                )}
-              </TableHead>
+                  </TableHead>
+                ))}
+              </TableRow>
             ))}
-          </TableRow>
-        ))}
-      </TableHeader>
-      <TableBody>
-        {table.getRowModel().rows.map((row) => (
-          <TableRow key={row.id} className="hover:bg-gray-100">
-            <TableCell>
-              <MapPinIcon
-                className="h-6 w-6"
-                onClick={() => {
-                  centerRef.current?.({
-                    longitude: row.original.longitude ?? 0,
-                    latitude: row.original.latitude ?? 0,
-                  });
-                }}
-              />
-            </TableCell>
-            <TableCell>
-              <ActiveLink to={`/center/${row.original.id}`}>
-                {row.original.name}
-              </ActiveLink>
-            </TableCell>
-            <TableCell>{row.original.city}</TableCell>
-            <TableCell>
-              <ActiveLink to={`/state/${row.original.state}`}>
-                {row.original.state}
-              </ActiveLink>
-            </TableCell>
-            <TableCell className="text-right">
-              {row.original.spaces.length}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.map((row) => (
+              <TableRow key={row.id} className="hover:bg-gray-100">
+                <TableCell>
+                  <MapPinIcon
+                    className="h-6 w-6"
+                    onClick={() => {
+                      centerRef.current?.({
+                        longitude: row.original.longitude ?? 0,
+                        latitude: row.original.latitude ?? 0,
+                      });
+                    }}
+                  />
+                </TableCell>
+                <TableCell>
+                  <ActiveLink to={`/center/${row.original.id}`}>
+                    {row.original.name}
+                  </ActiveLink>
+                </TableCell>
+                <TableCell>{row.original.city}</TableCell>
+                <TableCell>
+                  <ActiveLink to={`/state/${row.original.state}`}>
+                    {row.original.state}
+                  </ActiveLink>
+                </TableCell>
+                <TableCell className="text-right">
+                  {row.original.spaces.length}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
   );
 }
