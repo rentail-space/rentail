@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { last } from "es-toolkit";
@@ -95,17 +96,19 @@ export default function PageLayout({
       </head>
       <body className="relative">
         <DevTag />
-        <NuqsAdapter>
-          {hideLayout ? (
-            children
-          ) : (
-            <div className="isolate flex min-h-screen flex-col">
-              <PageHeader links={headerLinks} />
-              {children}
-              <PageFooter />
-            </div>
-          )}
-        </NuqsAdapter>
+        <QueryClientProvider client={new QueryClient()}>
+          <NuqsAdapter>
+            {hideLayout ? (
+              children
+            ) : (
+              <div className="isolate flex min-h-screen flex-col">
+                <PageHeader links={headerLinks} />
+                {children}
+                <PageFooter />
+              </div>
+            )}
+          </NuqsAdapter>
+        </QueryClientProvider>
         <ScrollRestoration />
         <Scripts />
         <Analytics />

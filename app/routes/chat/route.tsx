@@ -1,38 +1,25 @@
 import { useChat } from "@ai-sdk/react";
 import { captureException } from "@sentry/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { DefaultChatTransport } from "ai";
+import { invariant } from "es-toolkit";
 import { useQueryState } from "nuqs";
 import { useState } from "react";
-import { useFetcher, useRouteLoaderData } from "react-router";
+import { useRouteLoaderData } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import PageHeader from "~/components/layout/PageHeader";
-import findNearbyCenters from "~/lib/findNearbyCenters";
-import { findUserAndLastChat } from "~/lib/sessions.server";
 import welcome from "~/prompts/welcome.md?raw";
 import type { loader as rootLoader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
-import type { Route } from "./+types/route";
+import type { Route as CentersRoute } from "../+types/api.chat.$chatId.centers";
 import Centers from "./Centers";
 
 export const handle = { hideLayout: true };
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const found = await findUserAndLastChat(request);
-  const { centers, displayName } = await findNearbyCenters({
-    headers: request.headers,
-    user: "user" in found ? found.user : undefined,
-  });
-  return { centers, displayName };
-}
-
-export default function ChatPage({
-  loaderData,
-}: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
-}) {
+export default function ChatPage() {
   const [query, setQuery] = useQueryState("q");
 
   // Access data from root loader first, our loaded depends on it
@@ -42,8 +29,15 @@ export default function ChatPage({
     { id: chatId, parts: [{ text: welcome, type: "text" }], role: "assistant" },
   ];
   const [isAborted, setIsAborted] = useState(false);
-  const centersFetcher = useFetcher<Awaited<ReturnType<typeof loader>>>();
-  const stopFetcher = useFetcher();
+
+  const centersQuery = useQuery({
+    queryFn: async () => {
+      const response = await fetch(`/api/chat/${chatId}/centers`);
+      invariant(response.ok, "Failed to fetch centers");
+      return (await response.json()) as CentersRoute.ComponentProps["loaderData"];
+    },
+    queryKey: ["centers", chatId],
+  });
 
   const { error, messages, sendMessage, status, stop } = useChat({
     id: chatId,
@@ -59,7 +53,7 @@ export default function ChatPage({
     },
     onFinish: ({ isAbort }) => {
       setIsAborted(isAbort);
-      if (!isAbort) centersFetcher.load("/chat");
+      if (!isAbort) centersQuery.refetch();
     },
   });
 
@@ -94,7 +88,8 @@ export default function ChatPage({
             />
           </StickToBottom.Content>
           <Centers
-            centers={centersFetcher.data?.centers ?? loaderData.centers}
+            centers={centersQuery.data?.centers}
+            isPending={centersQuery.isPending}
           />
         </div>
 
@@ -113,10 +108,7 @@ export default function ChatPage({
           setQuery={setQuery}
           stopChat={() => {
             stop();
-            stopFetcher.submit(`/api/chat/${chatId}/stop`, {
-              method: "POST",
-              preventScrollReset: true,
-            });
+            fetch(`/api/chat/${chatId}/stop`, { method: "POST" });
           }}
         />
       </StickToBottom>

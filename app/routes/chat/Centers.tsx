@@ -15,8 +15,10 @@ import { cn } from "~/lib/utils";
  */
 export default function Centers({
   centers,
+  isPending,
 }: {
-  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
+  centers?: PropertyGetPayload<{ include: { spaces: true } }>[];
+  isPending: boolean;
 }) {
   const [centerShown, setCenterShown] = useState<string | null>(null);
 
@@ -26,7 +28,9 @@ export default function Centers({
         <CardTitle className="font-bold text-2xl">Shopping Centers</CardTitle>
       </CardHeader>
       <CardContent className="mt-4 space-y-4">
-        {centers.length === 0 ? (
+        {isPending ? (
+          <p>Loading...</p>
+        ) : !centers || centers.length === 0 ? (
           <p>I can't find any shopping centers near you.</p>
         ) : (
           sortCenters(centers, 8).map((center) => (
