@@ -1,9 +1,10 @@
 import { Lightbulb } from "lucide-react";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 import { cn } from "~/lib/utils";
 
 export default function SpecialtyLeasing() {
   return (
-    <section className="bg-[hsl(47,100%,95%)] px-5 py-20">
+    <section className="bg-[hsl(47,100%,95%)] px-5 py-20 flex flex-col items-center gap-8">
       <div className="container mx-auto max-w-4xl">
         <div
           className={cn(
@@ -31,6 +32,16 @@ export default function SpecialtyLeasing() {
           </div>
         </div>
       </div>
+
+      <ActiveLink
+        to="/chat"
+        variant="button"
+        bg="yellow"
+        size="xl"
+        className="my-4 w-fit"
+      >
+        Find a Space
+      </ActiveLink>
     </section>
   );
 }
