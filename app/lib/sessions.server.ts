@@ -266,7 +266,9 @@ async function isBotByIP(ip?: string): Promise<boolean> {
  * @param requestHeaders - The request headers object
  * @returns The user if the user is an admin, or throws an error if the user is not an admin.
  */
-export async function verifyAdmin(requestHeaders: Headers): Promise<User> {
+export async function verifyAdmin(
+  requestHeaders: Headers,
+): Promise<User & { email: string; name: string }> {
   const session = await userFromCookie(requestHeaders);
   if ("user" in session && session.user.isAdmin) return session.user;
   else throw redirect("/");
