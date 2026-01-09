@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useInterval, useTimeout } from "usehooks-ts";
 import { timeToMs } from "~/lib/utils";
 
 const collection = [
@@ -27,27 +28,22 @@ const collection = [
 ];
 
 export default function ActivityCounter() {
-  const [messages, setMessages] = useState(
-    collection.sort(() => Math.random() - 0.5),
-  );
+  const [, setMessages] = useState(collection.sort(() => Math.random() - 0.5));
   const [message, setMessage] = useState<string | undefined>(undefined);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: on first render
-  useEffect(() => {
+  useTimeout(() => {
     setMessages((messages) => {
       setMessage(messages[0]);
       return messages.slice(1);
     });
+  }, timeToMs("3s"));
 
-    const timer = setInterval(() => {
-      setMessages((messages) => {
-        setMessage(messages[0]);
-        return messages.slice(1);
-      });
-      if (messages.length === 0) clearInterval(timer);
-    }, timeToMs("15s"));
-    return () => clearInterval(timer);
-  }, []);
+  useInterval(() => {
+    setMessages((messages) => {
+      setMessage(messages[0]);
+      return messages.slice(1);
+    });
+  }, timeToMs("15s"));
 
   if (process.env.NODE_ENV === "test") return null;
 
