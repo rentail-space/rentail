@@ -13,8 +13,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Common Tasks:**
 
-- `tsx scripts/collect.ts "County, ST"` - Scrape shopping centers
+- `tsx scripts/collect.ts "Location"` - Collect shopping centers (supports metro areas like "LA", "NYC", or counties)
 - `tsx scripts/checkWebsites.ts` - Validate seed file websites
+- `pnpx vitest run <pattern>` - Run specific test file
+- `pnpx vitest run --reporter=verbose` - Detailed test output
 
 ## Project Overview
 
@@ -105,6 +107,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Formula: `lat ± (miles / 69.172)`, `lon ± (miles / 57.393)`
 - Default: 30-mile search, 20-mile display
 - Implementation: `findNearbyCenters()` in `app/lib/findNearbyCenters.ts`
+- Ordered by: available spaces count (desc) → ranking (desc) → name (asc)
+- Only includes properties with rating ≥ 4
 
 **Data Collection:**
 
@@ -194,11 +198,12 @@ Imperative mood, atomic commits, reference files when helpful.
 - `User` - Authentication and working memory
 - `Chat` - Conversation threads with `activeStreamId`
 - `Messages` - Chat messages (JSON content, UIMessage format)
-- `Property` - Shopping centers (lat/lon, demographics, tier)
+- `Property` - Shopping centers (lat/lon, demographics, tier, ranking)
 - `PropertySpace` - Individual retail spaces
 - `Session` - Auth sessions (token, expiration)
 - `Verification` - Email verification tokens
 - `Cache` - Generic key-value store (geocoding, API results)
+- `State` - US state data (abbreviation, name, lede)
 
 ## Environment Variables
 
