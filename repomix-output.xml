@@ -99,6 +99,7 @@ app/
       geocodeCounty.ts
       gridSearch.ts
       metroAreas.ts
+      ranking.ts
       scrapeCenter.ts
       scrapeLosCerritos.ts
       scrapeSantaMonica.ts
@@ -117,6 +118,7 @@ app/
     geocode.ts
     logger.server.ts
     models.ts
+    newsItems.server.ts
     parseFrontMatter.ts
     preparePrompt.ts
     prisma.ts
@@ -213,6 +215,8 @@ app/
     email.verify.$verificationId.ts
     error.tsx
     for-ai-assistants.tsx
+    news._index.tsx
+    news.$slug.tsx
     openapi[.]json.ts
     privacy.tsx
     robots[.]txt.ts
@@ -251,46 +255,6 @@ const handleClickOutside = (event: MouseEvent) =>
 <div className=
 ⋮----
 // Close dropdown when clicking outside
-</file>
-
-<file path="app/components/layout/PageFooter.tsx">
-import { Link, NavLink } from "react-router";
-import RentailIcon from "./RentailLogo";
-</file>
-
-<file path="app/components/layout/PageLayout.tsx">
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
-import { last } from "es-toolkit";
-import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
-import {
-  Links,
-  Meta,
-  Scripts,
-  ScrollRestoration,
-  type UIMatch,
-  useMatches,
-} from "react-router";
-import schema from "~/data/schema.json";
-⋮----
-import { useGoogleAnalytics } from "~/lib/analytics";
-import PageFooter from "./PageFooter";
-import PageHeader from "./PageHeader";
-⋮----
-export type HeaderLink = {
-  label: string;
-  to: string;
-};
-⋮----
-{/* Touch web app title */}
-⋮----
-{/* Google / Search Engine Tags */}
-⋮----
-{/* Facebook Meta Tags */}
-⋮----
-{/* Twitter Meta Tags */}
-⋮----
-{/* https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Client_hints */}
 </file>
 
 <file path="app/components/layout/RentailLogo.tsx">
@@ -521,6 +485,34 @@ import type { User } from "prisma/generated/client";
  * users.
  *
  * @param user - The user to send the welcome email to.
+ */
+</file>
+
+<file path="app/lib/mcp/handleRequest.ts">
+import { InMemoryEventStore } from "@modelcontextprotocol/sdk/examples/shared/inMemoryEventStore.js";
+import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
+import { ulid } from "ulid";
+import createMcpServer from "./mcpServer";
+/**
+ * GET and POST requests share similar handlers: create the MCP server and
+ * transport, and delegate to the transport to handle the request. This method
+ * is fairly complicated because we need to maintain streamable HTTP transports
+ * across multiple requests in the same session.
+ */
+export default async function handleRequest(
+  request: Request,
+): Promise<Response>
+⋮----
+eventStore, // Enable resumability
+⋮----
+// Store the transport by session ID when a session is initialized. This
+// avoids race conditions where requests might come in before the
+// session is stored.
+⋮----
+/**
+ * Hold the active MCP transports by session ID. This is necessary since a given
+ * client would make several HTTP requests to the MCP server, and it gets
+ * confused if we use different transports for each request.
  */
 </file>
 
@@ -1611,6 +1603,40 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 export default function AboutValues()
 </file>
 
+<file path="app/routes/admin.users/RangeSelection.tsx">
+import { invariant } from "es-toolkit";
+import { ArrowRight, MoveLeft, MoveRight } from "lucide-react";
+import { DateTime } from "luxon";
+import { useQueryState } from "nuqs";
+import type { User } from "prisma/generated/client";
+import { Button } from "~/components/ui/Button";
+import { Input } from "~/components/ui/Input";
+import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
+import type { loader } from "./route";
+⋮----
+<Tabs value=
+⋮----
+setFrom(
+                  today.minus({ days: daysInPeriod }).toFormat("yyyy-MM-dd"),
+                );
+setUntil(today.toFormat("yyyy-MM-dd"));
+⋮----
+value=
+</file>
+
+<file path="app/routes/admin.users/UserSources.tsx">
+import { groupBy } from "node_modules/es-toolkit/dist/array/groupBy.mjs";
+import { sumBy } from "node_modules/es-toolkit/dist/math/sumBy.mjs";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "~/components/ui/Table";
+import type { loader } from "./route";
+</file>
+
 <file path="app/routes/chat/askQuestion.tsx">
 import { delay } from "es-toolkit";
 import { useTimeout } from "usehooks-ts";
@@ -1856,40 +1882,6 @@ export async function loader()
 export default function NotFoundPage()
 </file>
 
-<file path="app/routes/admin.centers.tsx">
-import {
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { ArrowDown, ArrowUp, MapPinIcon } from "lucide-react";
-import type { PropertyGetPayload } from "prisma/generated/models";
-import { useRef } from "react";
-import { ActiveLink } from "~/components/ui/ActiveLink";
-import CentersMap, { type CenterMapFunction } from "~/components/ui/CentersMap";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "~/components/ui/Table";
-import envVars from "~/lib/env";
-import prisma from "~/lib/prisma";
-import { verifyAdmin } from "~/lib/sessions.server";
-import { cleanParseWorkingMemory } from "~/lib/workingMemory";
-import type { Route } from "./+types/admin.centers";
-⋮----
-export async function loader(
-export default function CenterPage({
-  loaderData,
-}: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
-})
-</file>
-
 <file path="app/routes/api.chat.$chatId.centers.ts">
 import { data } from "react-router";
 import findNearbyCenters from "~/lib/findNearbyCenters";
@@ -2051,16 +2043,6 @@ import type { Route } from "./+types/blog.$slug[.]jpg";
 export async function loader(
 </file>
 
-<file path="app/routes/blog.feed.ts">
-import { Feed } from "feed";
-import { marked } from "marked";
-import { recentBlogPosts } from "~/lib/blogPosts.server";
-export async function loader()
-⋮----
-const recent = blogPosts.slice(0, 10); // Take most recent 10
-// Blog post entries for feed
-</file>
-
 <file path="app/routes/email.verify.$verificationId.ts">
 import { redirect } from "react-router";
 import prisma from "~/lib/prisma";
@@ -2164,6 +2146,11 @@ import { type RouteConfig, index } from "@react-router/dev/routes";
 import { flatRoutes } from "@react-router/fs-routes";
 </file>
 
+<file path="app/components/layout/PageFooter.tsx">
+import { Link, NavLink } from "react-router";
+import RentailIcon from "./RentailLogo";
+</file>
+
 <file path="app/components/layout/PageHeader.tsx">
 import { NavLink } from "react-router";
 import { twMerge } from "tailwind-merge";
@@ -2172,6 +2159,42 @@ import type { HeaderLink } from "./PageLayout";
 import RentailIcon from "./RentailLogo";
 ⋮----
 twMerge(
+</file>
+
+<file path="app/components/layout/PageLayout.tsx">
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import { last } from "es-toolkit";
+import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
+import {
+  Links,
+  Meta,
+  Scripts,
+  ScrollRestoration,
+  type UIMatch,
+  useMatches,
+} from "react-router";
+import schema from "~/data/schema.json";
+⋮----
+import { useGoogleAnalytics } from "~/lib/analytics";
+import PageFooter from "./PageFooter";
+import PageHeader from "./PageHeader";
+⋮----
+export type HeaderLink = {
+  label: string;
+  to: string;
+};
+⋮----
+{/* Touch web app title */}
+⋮----
+{/* Google / Search Engine Tags */}
+⋮----
+{/* Facebook Meta Tags */}
+⋮----
+{/* Twitter Meta Tags */}
+⋮----
+{/* https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Client_hints */}
 </file>
 
 <file path="app/components/ui/ActiveLink.tsx">
@@ -2187,35 +2210,6 @@ export interface ActiveLinkProps
 }
 ⋮----
 className=
-</file>
-
-<file path="app/components/ui/Badge.tsx">
-import { Slot } from "@radix-ui/react-slot";
-import { type VariantProps, cva } from "class-variance-authority";
-⋮----
-import { cn } from "~/lib/utils";
-⋮----
-function Badge({
-  className,
-  variant,
-  asChild = false,
-  ...props
-}: React.ComponentProps<"span"> &
-  VariantProps<typeof badgeVariants> & {
-    asChild?: boolean;
-})
-⋮----
-className=
-</file>
-
-<file path="app/components/ui/Card.tsx">
-import { cn } from "~/lib/utils";
-⋮----
-className=
-⋮----
-function CardDescription(
-⋮----
-function CardFooter(
 </file>
 
 <file path="app/components/ui/CentersMap.tsx">
@@ -2399,34 +2393,6 @@ async execute(
 async function converse(requestContext: RequestContext): Promise<Message>
 </file>
 
-<file path="app/lib/mcp/handleRequest.ts">
-import { InMemoryEventStore } from "@modelcontextprotocol/sdk/examples/shared/inMemoryEventStore.js";
-import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
-import { ulid } from "ulid";
-import createMcpServer from "./mcpServer";
-/**
- * GET and POST requests share similar handlers: create the MCP server and
- * transport, and delegate to the transport to handle the request. This method
- * is fairly complicated because we need to maintain streamable HTTP transports
- * across multiple requests in the same session.
- */
-export default async function handleRequest(
-  request: Request,
-): Promise<Response>
-⋮----
-eventStore, // Enable resumability
-⋮----
-// Store the transport by session ID when a session is initialized. This
-// avoids race conditions where requests might come in before the
-// session is stored.
-⋮----
-/**
- * Hold the active MCP transports by session ID. This is necessary since a given
- * client would make several HTTP requests to the MCP server, and it gets
- * confused if we use different transports for each request.
- */
-</file>
-
 <file path="app/lib/mcp/mcpServer.ts">
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import registerListCenters from "./registerListCenters";
@@ -2436,6 +2402,30 @@ import registerListCenters from "./registerListCenters";
  * @returns A new MCP server instance.
  */
 export default function createMcpServer(): McpServer
+</file>
+
+<file path="app/lib/scrape/ranking.ts">
+/**
+ * Ranking formula for a center:
+ * - Centers with 4.0 rating or above
+ * - Higher rating is better (5.0 is the best)
+ * - Higher review count is better (1000 > 100 > 10 )
+ * - Higher tier centers are better (3 > 2 > 1)
+ *
+ * @param rating - The rating of the center.
+ * @param reviewCount - The number of reviews for the center.
+ * @param tier - The tier of the center.
+ * @returns The ranking score for the center.
+ */
+export default function calculateRanking({
+  rating,
+  reviewCount,
+  tier,
+}: {
+  rating?: number;
+  reviewCount?: number;
+  tier?: number;
+}): number | undefined
 </file>
 
 <file path="app/lib/scrape/scrapeLosCerritos.ts">
@@ -2540,53 +2530,6 @@ async function updateSpace(filename: string, spaces: RetailSpace[])
 // Run the scraper
 </file>
 
-<file path="app/lib/blogPosts.server.ts">
-import { invariant } from "es-toolkit";
-import { DateTime } from "luxon";
-import { readFileSync, readdirSync } from "node:fs";
-import { readFile } from "node:fs/promises";
-import path, { basename, join } from "node:path";
-import removeMd from "remove-markdown";
-import parseFrontMatter from "~/lib/parseFrontMatter";
-import truncateWords from "~/lib/truncateWords";
-⋮----
-export type BlogPost = {
-  alt: string;
-  body: string;
-  image: string;
-  published: Date;
-  slug: string;
-  summary: string;
-  title: string;
-};
-/**
- * Lists all blog posts that are published based on the published date in the
- * filename.
- *
- * @returns An array of blog posts.
- */
-export async function recentBlogPosts(): Promise<BlogPost[]>
-/**
- * Gets the published date from the filename. We use the filename to get the
- * published date because the published date is stored in the filename.
- *
- * @param filename The filename of the blog post.
- * @returns The published date.
- */
-function getPublishedData(filename: string): DateTime
-/**
- * Loads a blog post by slug. Throws an error if:
- * - the blog post is not found
- * - the slug is not provided
- * - the published date is in the future
- * - the slug is not a valid slug
- *
- * @param slug The slug of the blog post.
- * @returns The blog post, published date, slug, filename, alt text, and title.
- */
-export async function loadBlogPost(slug?: string): Promise<BlogPost>
-</file>
-
 <file path="app/lib/externalLink.ts">
 /**
  * When sharing links to other sites (eg shopping center websites), always use
@@ -2620,6 +2563,85 @@ function addMiddleware(model: LanguageModelV3): LanguageModelV3
  */
 </file>
 
+<file path="app/lib/newsItems.server.ts">
+import { invariant } from "es-toolkit";
+import { DateTime } from "luxon";
+import { readFileSync, readdirSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import path, { basename, join } from "node:path";
+import removeMd from "remove-markdown";
+import parseFrontMatter from "~/lib/parseFrontMatter";
+import truncateWords from "~/lib/truncateWords";
+⋮----
+export type NewsItem = {
+  body: string;
+  published: Date;
+  slug: string;
+  summary: string;
+  title: string;
+};
+/**
+ * Lists all news items that are published based on the published date in the
+ * filename.
+ *
+ * @returns An array of news items.
+ */
+export async function recentNewsItems(): Promise<NewsItem[]>
+/**
+ * Loads a news item by slug. Throws an error if:
+ * - the news item is not found
+ * - the slug is not provided
+ * - the published date is in the future
+ * - the slug is not a valid slug
+ *
+ * @param slug The slug of the news item.
+ * @returns The news item, published date, slug, filename, and title.
+ */
+export async function loadNewsItem(slug?: string): Promise<NewsItem>
+/**
+ * Gets the published date from the filename. We use the filename to get the
+ * published date because the published date is stored in the filename.
+ *
+ * @param filename The filename of the news item.
+ * @returns The published date.
+ */
+function getPublishedData(filename: string): DateTime
+</file>
+
+<file path="app/routes/admin.users/AnalyticsSummary.tsx">
+import NumberFlow from "@number-flow/react";
+import { meanBy, sumBy } from "es-toolkit";
+import type { User } from "prisma/generated/client";
+import type { ReactNode } from "react";
+import type { loader } from "./route";
+⋮----
+value=
+</file>
+
+<file path="app/routes/admin.users/RecentUsers.tsx">
+import {
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import { timeAgo } from "date-buddy";
+import { ArrowDown, ArrowUp, LockIcon, UserIcon } from "lucide-react";
+import { DateTime } from "luxon";
+import type { User } from "prisma/generated/client";
+import { ActiveLink } from "~/components/ui/ActiveLink";
+import { Button } from "~/components/ui/Button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/Table";
+import deviceDetection from "~/lib/deviceDetection";
+</file>
+
 <file path="app/routes/center.$id/CenterAttributes.tsx">
 import { clamp } from "es-toolkit";
 import {
@@ -2642,40 +2664,6 @@ import timeOfDay from "~/lib/timeOfDay";
 Open
 ⋮----
 trackEvent("click_phone_number",
-</file>
-
-<file path="app/routes/chat/route.tsx">
-import { useChat } from "@ai-sdk/react";
-import { captureException } from "@sentry/react-router";
-import { DefaultChatTransport } from "ai";
-import { useQueryState } from "nuqs";
-import { useState } from "react";
-import { useFetcher, useRouteLoaderData } from "react-router";
-import { ulid } from "ulid";
-import { StickToBottom } from "use-stick-to-bottom";
-import PageHeader from "~/components/layout/PageHeader";
-import findNearbyCenters from "~/lib/findNearbyCenters";
-import { findUserAndLastChat } from "~/lib/sessions.server";
-import welcome from "~/prompts/welcome.md?raw";
-import type { loader as rootLoader } from "~/root";
-import InputForm from "~/routes/chat/InputForm";
-import Messages from "~/routes/chat/Messages";
-import ScrollButton from "~/routes/chat/ScrollButton";
-import type { Route } from "./+types/route";
-import Centers from "./Centers";
-⋮----
-export async function loader(
-export default function ChatPage({
-  loaderData,
-}: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
-})
-⋮----
-// Access data from root loader first, our loaded depends on it
-⋮----
-resume: true, // Enable automatic stream resumption
-⋮----
-sendMessage=
 </file>
 
 <file path="app/routes/faq/route.tsx">
@@ -2725,18 +2713,19 @@ export async function loader()
 export async function loader()
 </file>
 
-<file path="app/routes/admin.ranking.tsx">
+<file path="app/routes/admin.centers.tsx">
 import {
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowDown, ArrowUp } from "lucide-react";
-import { Form } from "react-router";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import { ArrowDown, ArrowUp, MapPinIcon } from "lucide-react";
+import type { PropertyGetPayload } from "prisma/generated/models";
+import { useRef } from "react";
 import { ActiveLink } from "~/components/ui/ActiveLink";
-import { Button } from "~/components/ui/Button";
-import { Input } from "~/components/ui/Input";
+import CentersMap, { type CenterMapFunction } from "~/components/ui/CentersMap";
 import {
   Table,
   TableBody,
@@ -2745,9 +2734,18 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/Table";
-import findNearbyCenters from "~/lib/findNearbyCenters";
+import envVars from "~/lib/env";
+import prisma from "~/lib/prisma";
+import { verifyAdmin } from "~/lib/sessions.server";
+import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import type { Route } from "./+types/admin.centers";
+⋮----
 export async function loader(
+export default function CenterPage({
+  loaderData,
+}: {
+  loaderData: Awaited<ReturnType<typeof loader>>;
+})
 </file>
 
 <file path="app/routes/api.a2a.jsonrpc.ts">
@@ -2768,6 +2766,16 @@ import requestHandler from "~/lib/a2a/requestHandler";
 ⋮----
 export async function loader(
 export async function action(
+</file>
+
+<file path="app/routes/blog.feed.ts">
+import { Feed } from "feed";
+import { marked } from "marked";
+import { recentBlogPosts } from "~/lib/blogPosts.server";
+export async function loader()
+⋮----
+const recent = blogPosts.slice(0, 10); // Take most recent 10
+// Blog post entries for feed
 </file>
 
 <file path="app/routes/cron.daily.ts">
@@ -2793,6 +2801,14 @@ import { Streamdown } from "streamdown";
 import forAIAssistants from "~/data/for-ai-assistants.md?raw";
 ⋮----
 // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated data
+</file>
+
+<file path="app/routes/news._index.tsx">
+import { ArrowRightIcon } from "lucide-react";
+import { Link } from "react-router";
+import type { BlogPost } from "~/lib/blogPosts.server";
+import { recentNewsItems } from "~/lib/newsItems.server";
+export async function loader()
 </file>
 
 <file path="app/root.tsx">
@@ -2829,6 +2845,25 @@ export default function App({
 export function HydrateFallback()
 </file>
 
+<file path="app/components/ui/Badge.tsx">
+import { Slot } from "@radix-ui/react-slot";
+import { type VariantProps, cva } from "class-variance-authority";
+⋮----
+import { cn } from "~/lib/utils";
+⋮----
+function Badge({
+  className,
+  variant,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"span"> &
+  VariantProps<typeof badgeVariants> & {
+    asChild?: boolean;
+})
+⋮----
+className=
+</file>
+
 <file path="app/components/ui/BlogPostsGrid.tsx">
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { DateTime } from "luxon";
@@ -2839,6 +2874,51 @@ import { ActiveLink } from "./ActiveLink";
 import LoadingImage from "./LoadingImage";
 ⋮----
 className=
+</file>
+
+<file path="app/components/ui/Card.tsx">
+import { cn } from "~/lib/utils";
+⋮----
+className=
+⋮----
+function CardDescription(
+⋮----
+function CardFooter(
+</file>
+
+<file path="app/components/ui/Chart.tsx">
+import type {
+  NameType,
+  Payload,
+  ValueType,
+} from "recharts/types/component/DefaultTooltipContent";
+import { cn } from "~/lib/utils";
+// Format: { THEME_NAME: CSS_SELECTOR }
+⋮----
+export type ChartConfig = {
+  [k in string]: {
+    label?: React.ReactNode;
+    icon?: React.ComponentType;
+  } & (
+    | { color?: string; theme?: never }
+    | { color?: never; theme: Record<keyof typeof THEMES, string> }
+  );
+};
+type ChartContextProps = {
+  config: ChartConfig;
+};
+⋮----
+function useChart()
+⋮----
+className=
+⋮----
+// biome-ignore lint/security/noDangerouslySetInnerHtml: use theme
+⋮----
+<div className=
+⋮----
+return <div className=
+⋮----
+// Helper to extract item config from a payload.
 </file>
 
 <file path="app/components/ui/LoadingImage.tsx">
@@ -2944,41 +3024,368 @@ export default function resolveMetroArea(input: string): string[]
 // No mapping found - return input as-is (assume it's a county or city name)
 </file>
 
-<file path="app/lib/findNearbyCenters.ts">
-import type { User } from "prisma/generated/client";
-import type { PropertyGetPayload } from "prisma/generated/models";
-import prisma from "~/lib/prisma";
-import { geocodeFromUserInput, geocodeMemoryOrHeaders } from "./geocode";
+<file path="app/lib/blogPosts.server.ts">
+import { invariant } from "es-toolkit";
+import { DateTime } from "luxon";
+import { readFileSync, readdirSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import path, { basename, join } from "node:path";
+import removeMd from "remove-markdown";
+import parseFrontMatter from "~/lib/parseFrontMatter";
+import truncateWords from "~/lib/truncateWords";
+⋮----
+export type BlogPost = {
+  alt: string;
+  body: string;
+  image: string;
+  published: Date;
+  slug: string;
+  summary: string;
+  title: string;
+};
 /**
- * Find the shopping centers within a given distance from the user. Gets the
- * current location from working memory, updates it, if necessary. Returns a
- * list of centers with only their available spaces and the location's display
- * name.
+ * Lists all blog posts that are published based on the published date in the
+ * filename.
  *
- * @param headers The HTTP headers to use to get the user's location.
- * @param user The user to find the shopping centers for. If not provided, the
- * location will be inferred from the IP address in the headers.
- * @returns A list of centers with only their available spaces and the
- * location's display name.
+ * @returns An array of blog posts.
  */
-export default async function findNearbyCenters({
-  headers,
+export async function recentBlogPosts(): Promise<BlogPost[]>
+/**
+ * Loads a blog post by slug. Throws an error if:
+ * - the blog post is not found
+ * - the slug is not provided
+ * - the published date is in the future
+ * - the slug is not a valid slug
+ *
+ * @param slug The slug of the blog post.
+ * @returns The blog post, published date, slug, filename, alt text, and title.
+ */
+export async function loadBlogPost(slug?: string): Promise<BlogPost>
+/**
+ * Gets the published date from the filename. We use the filename to get the
+ * published date because the published date is stored in the filename.
+ *
+ * @param filename The filename of the blog post.
+ * @returns The published date.
+ */
+function getPublishedData(filename: string): DateTime
+</file>
+
+<file path="app/routes/about/route.tsx">
+import AboutCTA from "./AboutCTA";
+import AboutHeader from "./AboutHeader";
+import AboutMission from "./AboutMission";
+import AboutStory from "./AboutStory";
+import AboutTeam from "./AboutTeam";
+import AboutValues from "./AboutValues";
+export default function About()
+</file>
+
+<file path="app/routes/admin.users/route.tsx">
+import { BetaAnalyticsDataClient } from "@google-analytics/data";
+import { invariant } from "es-toolkit";
+import { JWT } from "google-auth-library";
+import type { LoaderFunctionArgs } from "react-router";
+import envVars from "~/lib/env";
+import prisma from "~/lib/prisma";
+import { verifyAdmin } from "~/lib/sessions.server";
+import type { Route } from "./+types/route";
+import Charts from "./AnalyticsCharts";
+import AnalyticsSummary from "./AnalyticsSummary";
+import Heatmap from "./Heatmap";
+import RangeSelection from "./RangeSelection";
+import RecentUsers from "./RecentUsers";
+import UserSources from "./UserSources";
+export async function loader(
+async function fromGoogleAnalytics(): Promise<
+  Array<{
+    averageSessionDuration: number;
+    date: string;
+    hour: number;
+    sessionSource: string;
+    visitors: number;
+  }>
+> {
+  const auth = new JWT({
+    scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
+    email: "analytics@rentail-480516.iam.gserviceaccount.com",
+    key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
+  });
+⋮----
+// @see https://support.google.com/analytics/table/13948007
+⋮----
+// The number of distinct GA users -> unique visitors
+⋮----
+// The average duration of user sessions, in seconds.
+⋮----
+</file>
+
+<file path="app/routes/chat/route.tsx">
+import { useChat } from "@ai-sdk/react";
+import { captureException } from "@sentry/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { DefaultChatTransport } from "ai";
+import { invariant } from "es-toolkit";
+import { useQueryState } from "nuqs";
+import { useState } from "react";
+import { useRouteLoaderData } from "react-router";
+import { ulid } from "ulid";
+import { StickToBottom } from "use-stick-to-bottom";
+import PageHeader from "~/components/layout/PageHeader";
+import welcome from "~/prompts/welcome.md?raw";
+import type { loader as rootLoader } from "~/root";
+import InputForm from "~/routes/chat/InputForm";
+import Messages from "~/routes/chat/Messages";
+import ScrollButton from "~/routes/chat/ScrollButton";
+import type { Route as CentersRoute } from "../+types/api.chat.$chatId.centers";
+import Centers from "./Centers";
+⋮----
+export default function ChatPage()
+⋮----
+// Access data from root loader first, our loaded depends on it
+⋮----
+resume: true, // Enable automatic stream resumption
+⋮----
+sendMessage=
+</file>
+
+<file path="app/routes/pricing/route.tsx">
+import { ActiveLink } from "~/components/ui/ActiveLink";
+import PricingFAQ from "./PricingFAQ";
+import PricingPlans from "./PricingPlans";
+</file>
+
+<file path="app/routes/profile/route.tsx">
+import { captureException } from "@sentry/react-router";
+import bcrypt from "bcrypt";
+import { invariant } from "es-toolkit";
+import type { User } from "prisma/generated/client";
+import { useState } from "react";
+import { redirect, useLoaderData } from "react-router";
+import { ulid } from "ulid";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/Tabs";
+import sendVerificationEmail from "~/emails/EmailVerification";
+import prisma from "~/lib/prisma";
+import { findUserAndLastChat } from "~/lib/sessions.server";
+import ProfileEmailForm from "./ProfileEmailForm";
+import ProfileNameForm from "./ProfileNameForm";
+import ProfilePasswordForm from "./ProfilePasswordForm";
+⋮----
+export async function loader(
+export async function action(
+/**
+ * Get the signed in user from the request. If the user is not signed in, redirect to
+ * the sign in page.
+ *
+ * @param request - The request object
+ * @returns The signed in user.
+ * @throws {Response} 302 Redirect to the sign in page if the user is not signed in.
+ */
+async function getSignedInUser(request: Request): Promise<User>
+async function updateName({
   user,
-  limit = 10,
-  location,
+  name,
 }: {
-  headers: Headers;
-  user?: User;
-  limit?: number;
-  location?: string;
+  user: { id: string };
+  name: string;
+})
+async function updateEmail({
+  newEmail,
+  request,
+  user,
+}: {
+  newEmail: string;
+  request: Request;
+  user: User;
+})
+⋮----
+expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24), // 24 hours
+⋮----
+async function updatePassword({
+  confirmPassword,
+  currentPassword,
+  newPassword,
+  user,
+}: {
+  confirmPassword: string;
+  currentPassword: string;
+  newPassword: string;
+  user: User;
+})
+⋮----
+onClick=
+</file>
+
+<file path="app/routes/[.]well-known.oauth-protected-resource.ts">
+import { agentCardHandler } from "@a2a-js/sdk/server/express";
+import type { LoaderFunctionArgs } from "react-router";
+import requestHandler from "~/lib/a2a/requestHandler";
+⋮----
+export async function loader(
+</file>
+
+<file path="app/routes/admin.ranking.tsx">
+import {
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import { ArrowDown, ArrowUp, EqualIcon } from "lucide-react";
+import { Form } from "react-router";
+import { ActiveLink } from "~/components/ui/ActiveLink";
+import { Button } from "~/components/ui/Button";
+import { Input } from "~/components/ui/Input";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/Table";
+import findNearbyCenters from "~/lib/findNearbyCenters";
+import type { Route } from "./+types/admin.centers";
+export async function loader(
+</file>
+
+<file path="app/routes/admin.tsx">
+import { type LoaderFunctionArgs, redirect, useOutlet } from "react-router";
+import { verifyAdmin } from "~/lib/sessions.server";
+⋮----
+export async function loader(
+export default function Admin()
+</file>
+
+<file path="app/routes/admin.user.$userId.tsx">
+import type { TextUIPart } from "ai";
+import { ArrowLeft, ArrowRight, CircleCheck, InfoIcon } from "lucide-react";
+import { DateTime } from "luxon";
+import type { User } from "prisma/generated/client";
+import type {
+  ChatGetPayload,
+  PropertyGetPayload,
+} from "prisma/generated/models";
+import { Link, useFetcher } from "react-router";
+import { StickToBottom } from "use-stick-to-bottom";
+import { ActiveLink } from "~/components/ui/ActiveLink";
+import { Button } from "~/components/ui/Button";
+import { FieldSet } from "~/components/ui/FieldSet";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "~/components/ui/Table";
+import { Textarea } from "~/components/ui/Textarea";
+import deviceDetection from "~/lib/deviceDetection";
+import findNearbyCenters from "~/lib/findNearbyCenters";
+import prisma from "~/lib/prisma";
+import { verifyAdmin } from "~/lib/sessions.server";
+import { cleanParseWorkingMemory } from "~/lib/workingMemory";
+import type { Route } from "./+types/admin.user.$userId";
+import Messages from "./chat/Messages";
+export async function loader(
+export async function action(
+⋮----
+// Get the browser timezone if we're on the client
+</file>
+
+<file path="app/routes/auth.tsx">
+import { captureException } from "@sentry/react-router";
+import { invariant } from "es-toolkit";
+import { AlertCircle } from "lucide-react";
+import { redirect, useFetcher } from "react-router";
+import { CircularLoading } from "respinner";
+import { useToggle } from "usehooks-ts";
+import { ActiveLink } from "~/components/ui/ActiveLink";
+import { Button } from "~/components/ui/Button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/Card";
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+  FieldSet,
+} from "~/components/ui/FieldSet";
+import { Input } from "~/components/ui/Input";
+import { signInEmail, signUpEmail } from "~/lib/sessions.server";
+import type { Route } from "./+types/auth";
+⋮----
+export async function action(
+</file>
+
+<file path="app/routes/news.$slug.tsx">
+import { invariant } from "es-toolkit";
+import { NewspaperIcon } from "lucide-react";
+import { DateTime } from "luxon";
+import { Link } from "react-router";
+import remarkGfm from "remark-gfm";
+import { Streamdown } from "streamdown";
+import { loadNewsItem } from "~/lib/newsItems.server";
+import type { Route } from "./+types/news.$slug";
+export async function loader(
+type NewsPost = {
+  title: string;
+  summary: string;
+  body: string;
+  published: Date;
+  slug: string;
+};
+</file>
+
+<file path="app/routes/privacy.tsx">
+import remarkGfm from "remark-gfm";
+import { Streamdown } from "streamdown";
+import privacy from "~/data/privacy.md?raw";
+export default function PrivacyPolicy()
+</file>
+
+<file path="app/routes/states.tsx">
+import { ArrowRightIcon } from "lucide-react";
+import { Link } from "react-router";
+import { Streamdown } from "streamdown";
+import { ActiveLink } from "~/components/ui/ActiveLink";
+import prisma from "~/lib/prisma";
+export async function loader()
+⋮----
+// biome-ignore lint/security/noDangerouslySetInnerHtml: exception
+⋮----
+// Build JSON-LD structured data for search engines
+</file>
+
+<file path="app/routes/terms.tsx">
+import remarkGfm from "remark-gfm";
+import { Streamdown } from "streamdown";
+import terms from "~/data/terms.md?raw";
+export default function TermsOfService()
+</file>
+
+<file path="app/lib/scrape/scrapeCenter.ts">
+import ora from "ora";
+import type { Browser } from "playwright";
+/**
+ * Scrape the body text from a website.
+ *
+ * @param browser - The browser to use
+ * @param center - The center to scrape
+ * @returns The body text of the website
+ */
+export default async function scrapeCenter({
+  browser,
+  center,
+}: {
+  browser: Browser;
+  center: { name: string; website: string };
 }): Promise<
-⋮----
-const maxDistance = 30; // miles
-⋮----
-// Sort by:
-// - Highest tier (3rd tier is the best)
-// - More available spaces
-// - Highest rating (5 star is the best)
 </file>
 
 <file path="app/lib/geocode.ts">
@@ -3064,333 +3471,42 @@ export async function geocodeFromUserInput(location: string): Promise<
 // NOTE: Handle strings like "Las%20Vegas, NV, US" properly.
 </file>
 
-<file path="app/routes/about/route.tsx">
-import AboutCTA from "./AboutCTA";
-import AboutHeader from "./AboutHeader";
-import AboutMission from "./AboutMission";
-import AboutStory from "./AboutStory";
-import AboutTeam from "./AboutTeam";
-import AboutValues from "./AboutValues";
-export default function About()
-</file>
-
-<file path="app/routes/admin.users/RecentUsers.tsx">
+<file path="app/routes/admin.users/AnalyticsCharts.tsx">
+import { groupBy, meanBy, sortBy, sumBy } from "es-toolkit";
 import {
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { timeAgo } from "date-buddy";
-import { ArrowDown, ArrowUp, LockIcon, UserIcon } from "lucide-react";
+  BotIcon,
+  BubblesIcon,
+  ClockIcon,
+  PersonStandingIcon,
+} from "lucide-react";
 import { DateTime } from "luxon";
 import type { User } from "prisma/generated/client";
-import { ActiveLink } from "~/components/ui/ActiveLink";
-import { Button } from "~/components/ui/Button";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "~/components/ui/Table";
-import deviceDetection from "~/lib/deviceDetection";
-</file>
-
-<file path="app/routes/admin.users/UserSources.tsx">
-import { groupBy } from "node_modules/es-toolkit/dist/array/groupBy.mjs";
-import { sumBy } from "node_modules/es-toolkit/dist/math/sumBy.mjs";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "~/components/ui/Table";
-import type { loader } from "./route";
-</file>
-
-<file path="app/routes/pricing/route.tsx">
-import { ActiveLink } from "~/components/ui/ActiveLink";
-import PricingFAQ from "./PricingFAQ";
-import PricingPlans from "./PricingPlans";
-</file>
-
-<file path="app/routes/profile/route.tsx">
-import { captureException } from "@sentry/react-router";
-import bcrypt from "bcrypt";
-import { invariant } from "es-toolkit";
-import type { User } from "prisma/generated/client";
-import { useState } from "react";
-import { redirect, useLoaderData } from "react-router";
-import { ulid } from "ulid";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/Tabs";
-import sendVerificationEmail from "~/emails/EmailVerification";
-import prisma from "~/lib/prisma";
-import { findUserAndLastChat } from "~/lib/sessions.server";
-import ProfileEmailForm from "./ProfileEmailForm";
-import ProfileNameForm from "./ProfileNameForm";
-import ProfilePasswordForm from "./ProfilePasswordForm";
-⋮----
-export async function loader(
-export async function action(
-/**
- * Get the signed in user from the request. If the user is not signed in, redirect to
- * the sign in page.
- *
- * @param request - The request object
- * @returns The signed in user.
- * @throws {Response} 302 Redirect to the sign in page if the user is not signed in.
- */
-async function getSignedInUser(request: Request): Promise<User>
-async function updateName({
-  user,
-  name,
-}: {
-  user: { id: string };
-  name: string;
-})
-async function updateEmail({
-  newEmail,
-  request,
-  user,
-}: {
-  newEmail: string;
-  request: Request;
-  user: User;
-})
-⋮----
-expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24), // 24 hours
-⋮----
-async function updatePassword({
-  confirmPassword,
-  currentPassword,
-  newPassword,
-  user,
-}: {
-  confirmPassword: string;
-  currentPassword: string;
-  newPassword: string;
-  user: User;
-})
-⋮----
-onClick=
-</file>
-
-<file path="app/routes/[.]well-known.oauth-protected-resource.ts">
-import { agentCardHandler } from "@a2a-js/sdk/server/express";
-import type { LoaderFunctionArgs } from "react-router";
-import requestHandler from "~/lib/a2a/requestHandler";
-⋮----
-export async function loader(
-</file>
-
-<file path="app/routes/admin.tsx">
-import { type LoaderFunctionArgs, redirect, useOutlet } from "react-router";
-import { verifyAdmin } from "~/lib/sessions.server";
-⋮----
-export async function loader(
-export default function Admin()
-</file>
-
-<file path="app/routes/admin.user.$userId.tsx">
-import type { TextUIPart } from "ai";
-import { ArrowLeft, ArrowRight, CircleCheck, InfoIcon } from "lucide-react";
-import { DateTime } from "luxon";
-import type { User } from "prisma/generated/client";
-import type {
-  ChatGetPayload,
-  PropertyGetPayload,
-} from "prisma/generated/models";
-import { Link, useFetcher } from "react-router";
-import { StickToBottom } from "use-stick-to-bottom";
-import { ActiveLink } from "~/components/ui/ActiveLink";
-import { Button } from "~/components/ui/Button";
-import { FieldSet } from "~/components/ui/FieldSet";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "~/components/ui/Table";
-import { Textarea } from "~/components/ui/Textarea";
-import deviceDetection from "~/lib/deviceDetection";
-import findNearbyCenters from "~/lib/findNearbyCenters";
-import prisma from "~/lib/prisma";
-import { verifyAdmin } from "~/lib/sessions.server";
-import { cleanParseWorkingMemory } from "~/lib/workingMemory";
-import type { Route } from "./+types/admin.user.$userId";
-import Messages from "./chat/Messages";
-export async function loader(
-export async function action(
-⋮----
-// Get the browser timezone if we're on the client
-</file>
-
-<file path="app/routes/auth.tsx">
-import { captureException } from "@sentry/react-router";
-import { invariant } from "es-toolkit";
-import { AlertCircle } from "lucide-react";
-import { redirect, useFetcher } from "react-router";
-import { CircularLoading } from "respinner";
-import { useToggle } from "usehooks-ts";
-import { ActiveLink } from "~/components/ui/ActiveLink";
-import { Button } from "~/components/ui/Button";
+  Area,
+  AreaChart,
+  CartesianGrid,
+  type DataKey,
+  XAxis,
+  YAxis,
+} from "recharts";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "~/components/ui/Card";
 import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-  FieldSet,
-} from "~/components/ui/FieldSet";
-import { Input } from "~/components/ui/Input";
-import { signInEmail, signUpEmail } from "~/lib/sessions.server";
-import type { Route } from "./+types/auth";
+  type ChartConfig,
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "~/components/ui/Chart";
+import type { loader } from "./route";
 ⋮----
-export async function action(
-</file>
-
-<file path="app/routes/blog._index.tsx">
-import BlogPostsGrid from "~/components/ui/BlogPostsGrid";
-import type { BlogPost } from "~/lib/blogPosts.server";
-import { recentBlogPosts } from "~/lib/blogPosts.server";
-⋮----
-export async function loader()
-export default function Blog({
-  loaderData,
-}: {
-  loaderData: { posts: BlogPost[] };
-})
-</file>
-
-<file path="app/routes/privacy.tsx">
-import remarkGfm from "remark-gfm";
-import { Streamdown } from "streamdown";
-import privacy from "~/data/privacy.md?raw";
-export default function PrivacyPolicy()
-</file>
-
-<file path="app/routes/states.tsx">
-import { ArrowRightIcon } from "lucide-react";
-import { Link } from "react-router";
-import { Streamdown } from "streamdown";
-import { ActiveLink } from "~/components/ui/ActiveLink";
-import prisma from "~/lib/prisma";
-export async function loader()
-⋮----
-// biome-ignore lint/security/noDangerouslySetInnerHtml: exception
-⋮----
-// Build JSON-LD structured data for search engines
-</file>
-
-<file path="app/routes/terms.tsx">
-import remarkGfm from "remark-gfm";
-import { Streamdown } from "streamdown";
-import terms from "~/data/terms.md?raw";
-export default function TermsOfService()
-</file>
-
-<file path="app/components/ui/Chart.tsx">
-import type {
-  NameType,
-  Payload,
-  ValueType,
-} from "recharts/types/component/DefaultTooltipContent";
-import { cn } from "~/lib/utils";
-// Format: { THEME_NAME: CSS_SELECTOR }
-⋮----
-export type ChartConfig = {
-  [k in string]: {
-    label?: React.ReactNode;
-    icon?: React.ComponentType;
-  } & (
-    | { color?: string; theme?: never }
-    | { color?: never; theme: Record<keyof typeof THEMES, string> }
-  );
-};
-type ChartContextProps = {
-  config: ChartConfig;
-};
-⋮----
-function useChart()
-⋮----
-className=
-⋮----
-// biome-ignore lint/security/noDangerouslySetInnerHtml: use theme
-⋮----
-<div className=
-⋮----
-return <div className=
-⋮----
-// Helper to extract item config from a payload.
-</file>
-
-<file path="app/lib/scrape/scrapeCenter.ts">
-import ora from "ora";
-import type { Browser } from "playwright";
-/**
- * Scrape the body text from a website.
- *
- * @param browser - The browser to use
- * @param center - The center to scrape
- * @returns The body text of the website
- */
-export default async function scrapeCenter({
-  browser,
-  center,
-}: {
-  browser: Browser;
-  center: { name: string; website: string };
-}): Promise<
-</file>
-
-<file path="app/lib/scrape/scrapeSpaces.ts">
-import { Output, generateText } from "ai";
-import ora from "ora";
-import type { Browser } from "playwright";
-import { z } from "zod";
-import { classify } from "~/lib/models";
-⋮----
-/**
- * Scrape available retail spaces from a shopping center's website using AI
- * to extract structured data from the HTML.
- *
- * This function attempts to find the leasing/spaces page and extract all
- * available retail space listings with their details (number, type, size, etc.)
- *
- * @param browser - The browser to use
- * @param center - The center to scrape
- * @returns Array of retail space objects
- */
-export default async function scrapeSpaces({
-  browser,
-  center,
-}: {
-  browser: Browser;
-  center: { name: string; website: string };
-}): Promise<z.infer<typeof spaceSchema>[]>
-⋮----
-// Navigate to main website
-⋮----
-// Try to find and click on leasing/spaces link
-⋮----
-// Continue to next selector
-⋮----
-// Extract page content
-⋮----
-// Extract images that might be related to spaces
-⋮----
-// Use AI to extract space data
+].join(" - ")
 </file>
 
 <file path="app/routes/center.$id/CenterDetails.tsx">
@@ -3420,19 +3536,16 @@ export async function loader(
 // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data
 </file>
 
-<file path="app/routes/blog.$slug.tsx">
-import { HeartIcon } from "lucide-react";
-import { DateTime } from "luxon";
-import remarkGfm from "remark-gfm";
-import { Streamdown } from "streamdown";
-import { ActiveLink } from "~/components/ui/ActiveLink";
-import LoadingImage from "~/components/ui/LoadingImage";
-import { type BlogPost, loadBlogPost } from "~/lib/blogPosts.server";
-import type { Route } from "./+types/blog.$slug";
-⋮----
-export async function loader(
-⋮----
-content={`https://rentail.space/blog/${slug}.jpg`}
+<file path="app/routes/blog._index.tsx">
+import BlogPostsGrid from "~/components/ui/BlogPostsGrid";
+import type { BlogPost } from "~/lib/blogPosts.server";
+import { recentBlogPosts } from "~/lib/blogPosts.server";
+export async function loader()
+export default function Blog({
+  loaderData,
+}: {
+  loaderData: { posts: BlogPost[] };
+})
 </file>
 
 <file path="app/routes/state.$state.tsx">
@@ -3460,6 +3573,40 @@ href={`https://rentail.space/state/${state.abbreviation}`}
 // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated data
 ⋮----
 <Fragment key=
+</file>
+
+<file path="app/lib/mcp/registerListCenters.ts">
+import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { invariant } from "es-toolkit";
+import type { User } from "prisma/generated/client";
+import { ulid } from "ulid";
+import zod from "zod";
+import externalLink from "../externalLink";
+import { geocodeFromUserInput } from "../geocode";
+import prisma from "../prisma";
+⋮----
+/**
+ * Register the `list_shopping_centers` tool with the MCP server.
+ *
+ * @param mcpServer - The MCP server instance.
+ */
+export default function registerListCenters(mcpServer: McpServer)
+⋮----
+const maxDistance = 30; // miles
+⋮----
+async function getUserForSession({
+  location,
+  userAgent,
+  userId,
+}: {
+  location: {
+    displayName: string;
+    latitude: number;
+    longitude: number;
+  };
+  userAgent: string;
+  userId: string;
+}): Promise<User>
 </file>
 
 <file path="app/lib/scrape/gridSearch.ts">
@@ -3529,59 +3676,100 @@ export function estimateGridSize(bounds: BoundingBox, radiusKm = 50): number
 // Account for hexagonal packing efficiency (~15% overlap)
 </file>
 
-<file path="app/routes/admin.users/RangeSelection.tsx">
-import { invariant } from "es-toolkit";
-import { ArrowRight, MoveLeft, MoveRight } from "lucide-react";
-import { DateTime } from "luxon";
-import { useQueryState } from "nuqs";
-import type { User } from "prisma/generated/client";
-import { Button } from "~/components/ui/Button";
-import { Input } from "~/components/ui/Input";
-import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
-import type { loader } from "./route";
-⋮----
-<Tabs value=
-⋮----
-setFrom(
-                  today.minus({ days: daysInPeriod }).toFormat("yyyy-MM-dd"),
-                );
-setUntil(today.toFormat("yyyy-MM-dd"));
-⋮----
-value=
-</file>
-
-<file path="app/lib/mcp/registerListCenters.ts">
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { invariant } from "es-toolkit";
-import type { User } from "prisma/generated/client";
-import { ulid } from "ulid";
-import zod from "zod";
-import externalLink from "../externalLink";
-import { geocodeFromUserInput } from "../geocode";
-import prisma from "../prisma";
+<file path="app/lib/scrape/scrapeSpaces.ts">
+import { Output, generateText } from "ai";
+import ora from "ora";
+import type { Browser } from "playwright";
+import { z } from "zod";
+import { classify } from "~/lib/models";
 ⋮----
 /**
- * Register the `list_shopping_centers` tool with the MCP server.
+ * Scrape available retail spaces from a shopping center's website using AI
+ * to extract structured data from the HTML.
  *
- * @param mcpServer - The MCP server instance.
+ * This function attempts to find the leasing/spaces page and extract all
+ * available retail space listings with their details (number, type, size, etc.)
+ *
+ * @param browser - The browser to use
+ * @param center - The center to scrape
+ * @returns Array of retail space objects
  */
-export default function registerListCenters(mcpServer: McpServer)
+export default async function scrapeSpaces({
+  browser,
+  center,
+}: {
+  browser: Browser;
+  center: { name: string; website: string };
+}): Promise<z.infer<typeof spaceSchema>[]>
+⋮----
+// Navigate to main website
+⋮----
+// Try to find and click on leasing/spaces link
+⋮----
+// Continue to next selector
+⋮----
+// Extract page content
+⋮----
+// Extract images that might be related to spaces
+⋮----
+// Use AI to extract space data
+⋮----
+/**
+ * Return unique spaces, no two spaces have the same space number.
+ *
+ * @param spaces - The spaces to make unique
+ * @returns The unique spaces
+ */
+function uniqueSpaces(spaces: z.infer<typeof spaceSchema>[])
+⋮----
+// Spaces are sorted by space number for convenience only
+</file>
+
+<file path="app/lib/findNearbyCenters.ts">
+import type { User } from "prisma/generated/client";
+import type { PropertyGetPayload } from "prisma/generated/models";
+import prisma from "~/lib/prisma";
+import { geocodeFromUserInput, geocodeMemoryOrHeaders } from "./geocode";
+/**
+ * Find the shopping centers within a given distance from the user. Gets the
+ * current location from working memory. The list is ordered by:
+ * - More available spaces
+ * - Higher ranking
+ * - Alphabetically
+ *
+ * @param headers The HTTP headers to use to get the user's location.
+ * @param user The user to find the shopping centers for. If not provided, the
+ * location will be inferred from the IP address in the headers.
+ * @returns A list of centers with only their available spaces and the
+ * location's display name.
+ */
+export default async function findNearbyCenters({
+  headers,
+  user,
+  limit = 10,
+  location,
+}: {
+  headers: Headers;
+  user?: User;
+  limit?: number;
+  location?: string;
+}): Promise<
 ⋮----
 const maxDistance = 30; // miles
+</file>
+
+<file path="app/routes/blog.$slug.tsx">
+import { HeartIcon } from "lucide-react";
+import { DateTime } from "luxon";
+import remarkGfm from "remark-gfm";
+import { Streamdown } from "streamdown";
+import { ActiveLink } from "~/components/ui/ActiveLink";
+import LoadingImage from "~/components/ui/LoadingImage";
+import { type BlogPost, loadBlogPost } from "~/lib/blogPosts.server";
+import type { Route } from "./+types/blog.$slug";
+export async function loader(
 ⋮----
-async function getUserForSession({
-  location,
-  userAgent,
-  userId,
-}: {
-  location: {
-    displayName: string;
-    latitude: number;
-    longitude: number;
-  };
-  userAgent: string;
-  userId: string;
-}): Promise<User>
+content={`https://rentail.space/blog/${slug}.jpg`}
 </file>
 
 <file path="app/lib/scrape/seedCenter.ts">
@@ -3595,116 +3783,6 @@ import envVars from "../env";
 export default async function seedCenter(filename: string)
 ⋮----
 // Remove duplicates from center.spaces by space.number and store in 'spaces'
-</file>
-
-<file path="app/routes/admin.users/AnalyticsSummary.tsx">
-import NumberFlow from "@number-flow/react";
-import { meanBy, sumBy } from "es-toolkit";
-import type { User } from "prisma/generated/client";
-import type { ReactNode } from "react";
-import type { loader } from "./route";
-⋮----
-value=
-</file>
-
-<file path="app/routes/admin.users/route.tsx">
-import { BetaAnalyticsDataClient } from "@google-analytics/data";
-import { invariant } from "es-toolkit";
-import { JWT } from "google-auth-library";
-import type { LoaderFunctionArgs } from "react-router";
-import envVars from "~/lib/env";
-import prisma from "~/lib/prisma";
-import { verifyAdmin } from "~/lib/sessions.server";
-import type { Route } from "./+types/route";
-import Charts from "./AnalyticsCharts";
-import AnalyticsSummary from "./AnalyticsSummary";
-import Heatmap from "./Heatmap";
-import RangeSelection from "./RangeSelection";
-import RecentUsers from "./RecentUsers";
-import UserSources from "./UserSources";
-export async function loader(
-async function fromGoogleAnalytics(): Promise<
-  Array<{
-    averageSessionDuration: number;
-    date: string;
-    hour: number;
-    sessionSource: string;
-    visitors: number;
-  }>
-> {
-  const auth = new JWT({
-    scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
-    email: "analytics@rentail-480516.iam.gserviceaccount.com",
-    key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
-  });
-⋮----
-// @see https://support.google.com/analytics/table/13948007
-⋮----
-// The number of distinct GA users -> unique visitors
-⋮----
-// The average duration of user sessions, in seconds.
-⋮----
-</file>
-
-<file path="app/routes/chat/Centers.tsx">
-import { sortBy } from "es-toolkit";
-import type { PropertyGetPayload } from "prisma/generated/models";
-import { Activity, useLayoutEffect, useRef, useState } from "react";
-import { Link } from "react-router";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
-import LoadingImage from "~/components/ui/LoadingImage";
-import { trackEvent } from "~/lib/analytics";
-import { cn } from "~/lib/utils";
-/**
- * A list of centers that are nearby the user.
- *
- * @param centers - The centers that are nearby the user.
- * @returns A list of centers that are nearby the user.
- */
-export default function Centers({
-  centers,
-}: {
-  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
-})
-⋮----
-onMouseEnter=
-⋮----
-const updatePosition = () =>
-⋮----
-// Find the input form container (the div wrapping the form)
-⋮----
-// Measure actual card height
-⋮----
-// Natural top position (aligned with list item top)
-⋮----
-// Calculate where card bottom would be if at natural top (in viewport coordinates)
-⋮----
-// Maximum allowed bottom (10px above input field)
-⋮----
-// Minimum allowed top (below header, in parent-relative coordinates)
-⋮----
-// If card would extend below input field, adjust upward
-⋮----
-// Calculate new top so bottom is 10px above input
-⋮----
-// Ensure card top is below header
-⋮----
-// Update position immediately and on resize/scroll
-⋮----
-/**
- * Sort centers so we show the most relevant centers first:
- * - Most available spaces
- * - Highest tier
- * - Highest rating
- * - Alphabetically
- *
- * We need limit so can pick top N based on criteria (available spaces, rating,
- * etc) and then sort alphabetically.
- *
- * @param centers - The centers to sort.
- * @param limit - The number of centers to return.
- * @returns The sorted centers.
- */
 </file>
 
 <file path="app/routes/admin.users/Heatmap.tsx">
@@ -3750,6 +3828,62 @@ fill=
 // Luxon: 1 is Monday and 7 is Sunday -> JS: 0 is Sunday and 6 is Saturday
 ⋮----
 // Visually we're only showing 6-22 hours
+</file>
+
+<file path="app/routes/chat/Centers.tsx">
+import { sortBy } from "es-toolkit";
+import type { PropertyGetPayload } from "prisma/generated/models";
+import { Activity, useLayoutEffect, useRef, useState } from "react";
+import { Link } from "react-router";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
+import LoadingImage from "~/components/ui/LoadingImage";
+import { trackEvent } from "~/lib/analytics";
+import { cn } from "~/lib/utils";
+/**
+ * A list of centers that are nearby the user.
+ *
+ * @param centers - The centers that are nearby the user.
+ * @returns A list of centers that are nearby the user.
+ */
+⋮----
+onMouseEnter=
+⋮----
+const updatePosition = () =>
+⋮----
+// Find the input form container (the div wrapping the form)
+⋮----
+// Measure actual card height
+⋮----
+// Natural top position (aligned with list item top)
+⋮----
+// Calculate where card bottom would be if at natural top (in viewport coordinates)
+⋮----
+// Maximum allowed bottom (10px above input field)
+⋮----
+// Minimum allowed top (below header, in parent-relative coordinates)
+⋮----
+// If card would extend below input field, adjust upward
+⋮----
+// Calculate new top so bottom is 10px above input
+⋮----
+// Ensure card top is below header
+⋮----
+// Update position immediately and on resize/scroll
+⋮----
+/**
+ * Sort centers so we show the most relevant centers first:
+ * - Most available spaces
+ * - Highest tier
+ * - Highest rating
+ * - Alphabetically
+ *
+ * We need limit so can pick top N based on criteria (available spaces, rating,
+ * etc) and then sort alphabetically.
+ *
+ * @param centers - The centers to sort.
+ * @param limit - The number of centers to return.
+ * @returns The sorted centers.
+ */
 </file>
 
 <file path="app/lib/scrape/enrichCenter.ts">
@@ -3806,6 +3940,7 @@ import { nearbySearch } from "./fromGooglePlaces";
 import { geocodeCounty, mergeBounds } from "./geocodeCounty";
 import { generateHexGrid } from "./gridSearch";
 import resolveMetroArea from "./metroAreas";
+import ranking from "./ranking";
 import scrapeCenter from "./scrapeCenter";
 import scrapeSpaces from "./scrapeSpaces";
 /**
@@ -4118,44 +4253,6 @@ function createSlug({
 .replace(/\s+/g, "-") // Spaces to hyphens
 .replace(/-+/g, "-") // Collapse multiple hyphens
 .replace(/^-|-$/g, "") // Trim hyphens
-</file>
-
-<file path="app/routes/admin.users/AnalyticsCharts.tsx">
-import { groupBy, meanBy, sortBy, sumBy } from "es-toolkit";
-import {
-  BotIcon,
-  BubblesIcon,
-  ClockIcon,
-  PersonStandingIcon,
-} from "lucide-react";
-import { DateTime } from "luxon";
-import type { User } from "prisma/generated/client";
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  type DataKey,
-  XAxis,
-  YAxis,
-} from "recharts";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/Card";
-import {
-  type ChartConfig,
-  ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "~/components/ui/Chart";
-import type { loader } from "./route";
-⋮----
-].join(" - ")
 </file>
 
 </files>

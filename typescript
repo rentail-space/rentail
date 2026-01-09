@@ -1,17 +1,0 @@
-Script started on Sat Dec 13 12:09:52 2025
-[?u[>0q[?1049hP+q696e646e\[?1049l[0cWelcome to fish, the friendly interactive shell
-Type [32mhelp[m for instructions on how to use fish
-[6 q]7;file://Assafs-MacBook-Air.local/Users/assaf/Projects/rentail]0;~/P/rentail[m[6n[0c[?2004h[=5u]133;A;click_events=1[32m[1m[I][m [32m~/P/rentail[m> [17C[?2004l[=0u[?2004h[=5uscript[23C[6D[38;2;195;151;216mscript[m[23C[38;2;195;151;216m [m[24C [24C-[25C[38;2;122;166;218m-[m[25C[38;2;150;152;150ma [m[25C[38;2;122;166;218m-[m[K[26C[38;2;122;166;218mh[m[27C[38;2;122;166;218me[m[28C[38;2;122;166;218ml[m[29C[38;2;122;166;218mp[m[30C[?2004l[=0u
-[m]133;C;cmdline_url=script%20--help[2 q]0;script --help ~/P/rentail[mscript: illegal option -- -
-usage: script [-aeFkpqr] [-t time] [file [command ...]]
-       script -p [-deq] [-T fmt] [file]
-]133;D;1[6 q[?25h[2m⏎[m                                                                                                                         ⏎ [K]0;~/P/rentail[m[6n[0c[?2004h[=5u]133;A;click_events=1[32m[1m[I][m [32m~/P/rentail[m> [K[17C[?2004l[=0u[?2004h[=5uscript --help[30C[13D[38;2;195;151;216mscript[m [38;2;122;166;218m--help[m[30C[K[29C[K[28C[K[27C[K[26C[K[25C[K[24Cd[25C[38;2;122;166;218md[m[25C[?2004l[=0u
-[m]133;C;cmdline_url=script%20d[2 q]0;script d ~/P/rentail[mScript started, output file is d
-[?u[>0q[?1049hP+q696e646e\[?1049l[0cWelcome to fish, the friendly interactive shell
-Type [32mhelp[m for instructions on how to use fish
-[6 q]7;file://Assafs-MacBook-Air.local/Users/assaf/Projects/rentail]0;~/P/rentail[m[6n[0c[?2004h[=5u]133;A;click_events=1[32m[1m[I][m [32m~/P/rentail[m> [17Ce[18C[38;2;213;78;83me[m[18C[18C[38;2;213;78;83mx[m[19C[2D[38;2;195;151;216mex[m[19C[38;2;195;151;216mi[m[20C[38;2;150;152;150mt[m[20C[3D[38;2;213;78;83mexi[38;2;150;152;150mt[m[20C[38;2;213;78;83mt[m[21C[4D[38;2;195;151;216mexit[m[21C[21C[?2004l[=0u[21C
-[m]133;C;cmdline_url=exit[2 q]0;exit ~/P/rentail[m]133;D;0[6 q[?25h[m[2 q
-Script done, output file is d
-]133;D;0[6 q[?25h[2m⏎[m                                                                                                                         ⏎ [K]0;~/P/rentail[m[6n[0c[?2004h[=5u]133;A;click_events=1[32m[1m[I][m [32m~/P/rentail[m> [K[17Ce[18C[18C[38;2;213;78;83me[m[18C[38;2;213;78;83mx[m[19C[2D[38;2;195;151;216mex[m[19C[38;2;195;151;216mi[m[20C[3D[38;2;213;78;83mexi[m[20C[38;2;150;152;150mt[m[20C[38;2;213;78;83mt[m[21C[4D[38;2;195;151;216mexit[m[21C[21C[?2004l[=0u[21C
-[m]133;C;cmdline_url=exit[2 q]0;exit ~/P/rentail[m]133;D;0[6 q[?25h[m[2 q
-Script done on Sat Dec 13 12:10:10 2025
