@@ -6,11 +6,7 @@ import { createIsbotFromList, list } from "isbot";
 import { reverse } from "node:dns/promises";
 import type { Chat, User } from "prisma/generated/client";
 import type { UserGetPayload } from "prisma/generated/models";
-import {
-  type Session,
-  createCookieSessionStorage,
-  redirect,
-} from "react-router";
+import { type Session, createCookieSessionStorage } from "react-router";
 import { ulid } from "ulid";
 import sendNewUserNotification from "~/emails/NewUserNotification";
 import sendWelcomeEmail from "~/emails/WelcomeEmail";
@@ -266,12 +262,12 @@ async function isBotByIP(ip?: string): Promise<boolean> {
  * @param requestHeaders - The request headers object
  * @returns The user if the user is an admin, or throws an error if the user is not an admin.
  */
-export async function verifyAdmin(
-  requestHeaders: Headers,
-): Promise<User & { email: string; name: string }> {
+export async function verifyAdmin(requestHeaders: Headers): Promise<User> {
   const session = await userFromCookie(requestHeaders);
-  if ("user" in session && session.user.isAdmin) return session.user;
-  else throw redirect("/");
+  invariant("user" in session, "User not found");
+  const { user } = session;
+  invariant(user.isAdmin, "User is not an admin");
+  return user;
 }
 
 /**
