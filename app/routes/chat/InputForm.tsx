@@ -47,7 +47,7 @@ export default function InputForm({
           )}
           disabled={isSubmitting}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Ask me any question about retail spaces..."
+          placeholder="Show me mall spaces for [product type] under $X/month"
           spellCheck="false"
           type="text"
           value={query}

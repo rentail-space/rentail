@@ -21,9 +21,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
     where: { isBot: false },
   });
 
-  const waiting = await prisma.waitlist.findMany();
   const analytics = await fromGoogleAnalytics();
-  return { users, waiting, analytics };
+  return { users, analytics };
 }
 
 async function fromGoogleAnalytics(): Promise<

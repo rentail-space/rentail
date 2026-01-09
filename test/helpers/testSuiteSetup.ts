@@ -23,7 +23,6 @@ beforeAll(async () => {
   await Promise.all([
     prisma.user.deleteMany(),
     prisma.verification.deleteMany(),
-    prisma.waitlist.deleteMany(),
   ]);
 
   // Cleanup Redis to avoid stale data between tests

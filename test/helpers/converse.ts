@@ -1,8 +1,8 @@
 import { withTimeout } from "es-toolkit";
+import type { Page } from "playwright";
 import { expect } from "vitest";
 import prisma from "~/lib/prisma";
 import { goto } from "./launchBrowser";
-import type { Page } from "playwright";
 
 /**
  * Converse with the chatbot. Send a message to the chatbot and wait for the
@@ -27,6 +27,7 @@ export default async function converse(
   // NOTE: We need to focus on the input and then type text into it, which
   // properly triggers React events.
   const input = page.locator('input[type="text"]');
+  await input.clear();
   await input.focus();
   await input.pressSequentially(message);
   // Sanity check that we got the correct message in the input.
