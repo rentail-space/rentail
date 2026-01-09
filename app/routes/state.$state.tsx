@@ -3,6 +3,7 @@ import {
   ArrowRightIcon,
   MapPinIcon,
   MoveLeftIcon,
+  StarHalfIcon,
   StarIcon,
 } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
@@ -14,6 +15,7 @@ import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
 import prisma from "~/lib/prisma";
 import timeOfDay from "~/lib/timeOfDay";
+import { pluralize } from "~/lib/utils";
 import type { Route } from "./+types/state.$state";
 
 export async function loader({ params }: Route.LoaderArgs) {
@@ -172,13 +174,21 @@ function RatingStars({ rating }: { rating: number }) {
       itemType="https://schema.org/AggregateRating"
       title={rating.toFixed(1)}
     >
-      {range(0, 5, 1).map((i) => (
-        <StarIcon
-          key={i}
-          className="h-4 w-4"
-          fill={i + 0.5 <= clamp(rating, 1, 5) ? "currentColor" : "none"}
-        />
-      ))}
+      {range(0, 5, 1).map((i) =>
+        rating >= i + 1 ? (
+          <StarIcon key={i} className="h-4 w-4" fill="currentColor" />
+        ) : rating >= i + 0.5 ? (
+          <span key={i} className="relative inline-block h-4 w-4">
+            <StarIcon className="absolute inset-0 h-4 w-4" strokeWidth={2} />
+            <StarHalfIcon
+              className="absolute inset-0 h-4 w-4"
+              fill="currentColor"
+            />
+          </span>
+        ) : (
+          <StarIcon key={i} className="h-4 w-4" />
+        ),
+      )}
     </span>
   );
 }
@@ -190,48 +200,26 @@ function KeyCenterStats({
 }) {
   return (
     <SplitCenterStats>
-      {center.numberOfStores && center.numberOfStores >= 30 && (
-        <span className="whitespace-nowrap">
-          {center.numberOfStores.toLocaleString()} stores
-        </span>
-      )}
-      {center.squareFootage && center.squareFootage >= 10_0000 && (
-        <span className="whitespace-nowrap">
-          {center.squareFootage.toLocaleString()} square feet
-        </span>
-      )}
-      {center.openFrom === 0 && center.openUntil === 2400 ? (
-        <span className="whitespace-nowrap">24 hours</span>
-      ) : (
-        center.openFrom &&
-        center.openUntil && (
-          <span className="whitespace-nowrap">
-            {timeOfDay(center.openFrom)} &mdash; {timeOfDay(center.openUntil)}
-          </span>
-        )
-      )}
+      {center.numberOfStores &&
+        center.numberOfStores >= 30 &&
+        `${center.numberOfStores.toLocaleString()} stores`}
+      {center.squareFootage &&
+        center.squareFootage >= 10_0000 &&
+        `${center.squareFootage.toLocaleString()} square feet`}
+      {center.openFrom === 0 && center.openUntil === 2400
+        ? "24 hours"
+        : center.openFrom && center.openUntil
+          ? `${timeOfDay(center.openFrom)}—${timeOfDay(center.openUntil)}`
+          : null}
 
-      {center.rating && center.rating > 3 && (
-        <span className="flex flex-row items-center gap-1">
-          {clamp(center.rating, 1, 5).toFixed(1)}
-          <StarIcon className="h-4 w-4 text-yellow-500" fill="currentColor" />
-        </span>
-      )}
       {center.reviewCount &&
         center.reviewCount >= 3 &&
         center.rating &&
-        center.rating >= 3 && (
-          <span className="whitespace-nowrap">
-            {center.reviewCount.toLocaleString()} reviews
-          </span>
-        )}
+        center.rating >= 3 &&
+        pluralize(center.reviewCount, "review", "reviews")}
 
-      {center.spaces.length > 0 && (
-        <span className="whitespace-nowrap">
-          {center.spaces.length} available{" "}
-          {center.spaces.length === 1 ? "space" : "spaces"}
-        </span>
-      )}
+      {center.spaces.length > 0 &&
+        pluralize(center.spaces.length, "available space", "available spaces")}
     </SplitCenterStats>
   );
 }
@@ -239,11 +227,11 @@ function KeyCenterStats({
 function SplitCenterStats({ children }: { children: React.ReactNode[] }) {
   return (
     <div className="flex flex-row flex-wrap gap-x-2 text-gray-500 text-sm">
-      {children.map(
+      {children.filter(Boolean).map(
         (child, index) =>
           child && (
             <Fragment key={index.toString()}>
-              {index > 0 && <span>&bull;</span>}
+              {index > 0 && <span>&bull; </span>}
               {child}
             </Fragment>
           ),

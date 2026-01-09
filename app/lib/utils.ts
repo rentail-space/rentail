@@ -12,5 +12,5 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function pluralize(count: number, singular: string, plural: string) {
-  return `${count} ${count === 1 ? singular : plural}`;
+  return `${count.toLocaleString()} ${count === 1 ? singular : plural}`;
 }
