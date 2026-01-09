@@ -1,5 +1,6 @@
 import BlogPostsGrid from "~/components/ui/BlogPostsGrid";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
+import ActivityCounter from "~/routes/home/ActivityCounter";
 import FeaturesSection from "~/routes/home/FeaturesSection";
 import HeroSection from "~/routes/home/HeroSection";
 import SpecialtyLeasing from "~/routes/home/SpecialtyLeasing";
@@ -44,6 +45,7 @@ export default function Home({
         limit={6}
       />
       <HubSpotScript />
+      <ActivityCounter />
     </main>
   );
 }

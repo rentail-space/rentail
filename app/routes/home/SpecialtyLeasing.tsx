@@ -4,7 +4,7 @@ import { cn } from "~/lib/utils";
 
 export default function SpecialtyLeasing() {
   return (
-    <section className="bg-[hsl(47,100%,95%)] px-5 py-20 flex flex-col items-center gap-8">
+    <section className="flex flex-col items-center gap-8 bg-[hsl(47,100%,95%)] px-5 py-20">
       <div className="container mx-auto max-w-4xl">
         <div
           className={cn(
