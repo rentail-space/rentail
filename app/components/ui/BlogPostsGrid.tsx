@@ -32,11 +32,13 @@ export default function BlogPostsGrid({
               <BlogPostCard key={post.slug} post={post} />
             ))}
             {limit && posts.length > limit && (
-              <div className="col-span-full text-center">
-                <ActiveLink to="/blog" variant="highlight">
-                  Explore all blog posts <ArrowRight className="h-6 w-6" />
-                </ActiveLink>
-              </div>
+              <ActiveLink
+                to="/blog"
+                variant="highlight"
+                className="col-span-full text-center text-2xl"
+              >
+                Explore all blog posts <ArrowRight strokeWidth={4} />
+              </ActiveLink>
             )}
           </div>
         )}

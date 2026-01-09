@@ -29,17 +29,17 @@ export default function HeroSection() {
         {/* Left Column - Text Content */}
         <div className="flex flex-1 flex-col gap-8">
           <h1 className="font-bold text-5xl text-black leading-tight tracking-tight md:text-6xl">
-            <span>Find your</span>
+            <span>Find </span>
             <span className="mx-4 text-[hsl(37,92%,65%)]">
-              short-term retail space
+              Your Next Mall Space
             </span>
-            <span>with ease</span>
+            <span>in Under 2 Minutes</span>
           </h1>
 
           <p className="font-medium text-black text-xl leading-relaxed md:text-2xl">
-            An AI-powered platform for micro-merchants that matches you with
-            your ideal retail space and handles all the details. Stop scrolling
-            Craigslist—start selling.
+            147 micro-merchants found their mall locations using our site. No
+            broker meetings. No endless calls. Just instant matches with spaces
+            ready for your products.
           </p>
 
           <ActiveLink
@@ -49,7 +49,7 @@ export default function HeroSection() {
             size="xl"
             className="my-4 w-fit"
           >
-            Get Started
+            Find My Match
           </ActiveLink>
         </div>
       </div>
