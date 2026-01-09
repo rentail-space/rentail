@@ -1,5 +1,6 @@
 import ora from "ora";
 import type { Browser } from "playwright";
+import { timeToMs } from "../utils";
 
 /**
  * Scrape the body text from a website.
@@ -22,7 +23,7 @@ export default async function scrapeCenter({
   try {
     await page.goto(center.website, {
       waitUntil: "domcontentloaded",
-      timeout: 30_000,
+      timeout: timeToMs("30s"),
     });
 
     const bodyText = (await page.locator("body").allTextContents()).join("\n");

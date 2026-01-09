@@ -38,11 +38,10 @@ export function pluralize(count: number, singular: string, plural: string) {
  */
 export function timeToMs(timeStr: string): number {
   const match = timeStr.match(/^(\d+(?:\.\d+)?)(ms|s|m|h|d)$/i);
-  if (!match) {
+  if (!match)
     throw new Error(
       `Invalid time format: ${timeStr}. Expected format: "5ms", "6m", "10s", etc.`,
     );
-  }
 
   const value = Number.parseFloat(match[1]);
   const unit = match[2].toLowerCase();

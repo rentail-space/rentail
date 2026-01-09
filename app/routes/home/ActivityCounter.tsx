@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { timeToMs } from "~/lib/utils";
 
 const collection = [
   "12 merchants are searching spaces right now",
@@ -44,7 +45,7 @@ export default function ActivityCounter() {
         return messages.slice(1);
       });
       if (messages.length === 0) clearInterval(timer);
-    }, 15_000);
+    }, timeToMs("15s"));
     return () => clearInterval(timer);
   }, []);
 
