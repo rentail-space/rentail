@@ -173,13 +173,6 @@ model Verification {
   @@map("verification")
 }
 
-model Waitlist {
-  createdAt DateTime @map("created_at") @default(now())
-  email     String   @map("email")      @id @default(uuid(4))
-
-  @@map("waitlist")
-}
-
 enum Role {
   assistant
   user
