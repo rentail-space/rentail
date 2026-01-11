@@ -30,6 +30,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "~/components/ui/Chart";
+import { dateRange } from "~/lib/time";
 import type { loader } from "./route";
 
 const chartConfig = {
@@ -147,11 +148,10 @@ export default function AnalyticsCharts({
       </CardContent>
 
       <CardFooter className="mx-auto flex items-center gap-2 text-muted-foreground leading-none">
-        {allDates[0].startOf(groupingBy).toFormat("MMM d, yyyy")} &mdash;{" "}
-        {allDates[allDates.length - 1]
-          .endOf(groupingBy)
-          .toFormat("MMM d, yyyy")}{" "}
-        {groupingBy === "week" && "(weekly metrics)"}
+        {dateRange(
+          allDates[0].toJSDate(),
+          allDates[allDates.length - 1].toJSDate(),
+        )}
       </CardFooter>
     </Card>
   );

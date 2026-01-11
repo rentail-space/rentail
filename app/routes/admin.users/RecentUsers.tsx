@@ -17,7 +17,7 @@ import {
   TableRow,
 } from "~/components/ui/Table";
 import deviceDetection from "~/lib/deviceDetection";
-import { timeago } from "~/lib/time";
+import { humanDate } from "~/lib/time";
 
 export default function AllUsers({ users }: { users: User[] }) {
   const table = useReactTable({
@@ -59,13 +59,9 @@ export default function AllUsers({ users }: { users: User[] }) {
       },
       {
         accessorKey: "createdAt",
-        cell: ({ row }) => (
-          <span className="w-24">
-            {timeago(row.original.createdAt, Date.now())}
-          </span>
-        ),
+        cell: ({ row }) => humanDate(row.original.createdAt),
         header: "Created",
-        size: 120,
+        size: 140,
         sortingFn: (rowA, rowB) =>
           rowA.original.createdAt.getTime() - rowB.original.createdAt.getTime(),
       },

@@ -39,7 +39,6 @@ export function timeago(
   const ts = normalizeTimestamp(timestamp);
   const ref =
     reference !== undefined ? normalizeTimestamp(reference) : Date.now();
-  console.log(ts, ref);
 
   const absDiffSec = Math.floor(Math.abs((ref - ts) / 1000));
   const isPast = ts < ref;
@@ -73,11 +72,6 @@ export function timeago(
 
   const years = Math.round(absDiffSec / (365 * 24 * 60 * 60));
   return isPast ? `${years} years ago` : `in ${years} years`;
-}
-
-interface DurationOptions {
-  compact?: boolean;
-  max_units?: number;
 }
 
 /**
@@ -267,7 +261,8 @@ export function humanDate(
   reference?: number | string | Date,
 ): string {
   const ts = normalizeTimestamp(timestamp);
-  const ref = reference !== undefined ? normalizeTimestamp(reference) : ts;
+  const ref =
+    reference !== undefined ? normalizeTimestamp(reference) : Date.now();
 
   // Convert to UTC dates for comparison
   const targetDate = new Date(ts);
