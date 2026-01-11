@@ -15,6 +15,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - `tsx scripts/collect.ts "Location"` - Collect shopping centers (supports metro areas like "LA", "NYC", or counties)
 - `tsx scripts/checkWebsites.ts` - Validate seed file websites
+- `tsx scripts/promote.ts` - Promote preview deployment to production on Vercel
+- `tsx scripts/updateBlogSchedule.ts` - Schedule blog posts for future publication
 - `pnpx vitest run <pattern>` - Run specific test file
 - `pnpx vitest run --reporter=verbose` - Detailed test output
 
@@ -30,6 +32,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Claude AI + streaming responses
 - Redis (SSE coordination)
 - Vitest + Playwright
+- MCP + A2A protocols (AI agent interoperability)
 
 ## Output Style
 
@@ -118,6 +121,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Metro area aliases: "LA" → 4 counties, "NYC" → 5 boroughs, etc.
 - Caching: Prisma Cache for geocoding and search results
 
+**Agent Interoperability:**
+
+- **MCP (Model Context Protocol)**: Exposes `list_shopping_centers` tool at `/api/mcp` endpoint
+- **A2A (Agent-to-Agent)**: JSONRPC + REST endpoints at `/a2a/jsonrpc` and `/a2a/rest`
+- Agent card published at `/.well-known/agent.json` (OpenAPI spec at `/openapi.json`)
+- No authentication required for agent-to-agent communication
+- Implementation: `app/lib/mcp/mcpServer.ts` and `app/lib/a2a/requestHandler.ts`
+
 ## Testing
 
 **Setup:**
@@ -161,6 +172,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 2. Add YAML frontmatter (title, description, date, author, tags)
 3. Images go in `public/blog/`
 4. Auto-discovered via `blogPosts.server.ts`
+5. Use `tsx scripts/updateBlogSchedule.ts` to manage post scheduling
+
+**Add MCP Tool:**
+
+1. Create tool handler in `app/lib/mcp/register*.ts`
+2. Register in `app/lib/mcp/mcpServer.ts`
+3. Tools are automatically exposed via `/api/mcp` endpoint
+4. Test with: `pnpm devmcp` (launches MCP inspector)
 
 **Run Data Collection:**
 
@@ -221,11 +240,24 @@ Imperative mood, atomic commits, reference files when helpful.
 - `SENTRY_DSN` - Error tracking
 - `VERCEL_*` - Auto-set in Vercel deployments
 
+## Development Tools
+
+**Debugging:**
+
+- `DEBUG=server,browser pnpm dev` - Enable debug logging
+- `pnpm devmcp` - Inspect MCP server with Model Context Protocol inspector
+- `pnpm devai` - Launch AI SDK devtools for streaming debugging
+
+**Code Quality:**
+
+- `pnpm format` - Auto-format with Biome
+- `pnpm lint` - Lint code + check for secrets (secretlint)
+- `pnpm check` - Full check (lint + typecheck) - run before committing
+
 ## Important Reminders
 
 - See [AGENTS.md](./AGENTS.md) for bd (beads) issue tracking workflow
 - Run `pnpm check` before committing (lint + typecheck)
 - All pages need `<main>` with `aria-label` for accessibility
 - Center seed files MUST have valid `website` property
-- Debug logging: `DEBUG=server,browser pnpm dev`
 - Store AI planning docs in `history/` directory (not repo root)
