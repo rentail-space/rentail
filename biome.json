@@ -17,7 +17,8 @@
       "!.vscode",
       "!build",
       "!node_modules",
-      "!prisma/generated"
+      "!prisma/generated",
+      "!prisma/seed"
     ],
     "ignoreUnknown": false
   },
