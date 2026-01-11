@@ -8,6 +8,16 @@ import { Input } from "~/components/ui/Input";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import type { loader } from "./route";
 
+/**
+ * A component that allows the user to select a range of dates.  It will call
+ * the children components with the range of dates and the recent users.
+ *
+ * @param analytics - The analytics data.
+ * @param children - A function that will be called with the range of dates and
+ * the recent users.
+ * @param users - The users data.
+ * @returns The children components.
+ */
 export default function RangeSelection({
   analytics,
   children,
@@ -15,9 +25,11 @@ export default function RangeSelection({
 }: {
   analytics: Awaited<ReturnType<typeof loader>>["analytics"];
   children: ({
+    range,
     recentUsers,
     analytics,
   }: {
+    range: [Date, Date];
     recentUsers: User[];
     analytics: Awaited<ReturnType<typeof loader>>["analytics"];
     selectorUI: () => React.ReactNode;
@@ -45,6 +57,7 @@ export default function RangeSelection({
   invariant(children instanceof Function, "children must be a function");
 
   return children({
+    range: [start, end],
     recentUsers,
     analytics: analytics.filter(({ date }) => {
       const day = DateTime.fromFormat(date, "yyyyMMdd")
@@ -95,6 +108,7 @@ function RangeSelector({
                 setUntil(today.toFormat("yyyy-MM-dd"));
               }}
               value={daysInPeriod.toString()}
+              title={`Select the last ${daysInPeriod} days`}
             >
               Last {daysInPeriod} Days
             </TabsTrigger>
@@ -133,6 +147,7 @@ function RangeSelector({
                 .toFormat("yyyy-MM-dd"),
             );
           }}
+          title="Retreat the range by 1 week"
         >
           <MoveLeft className="h-10 w-10 text-gray-500" />
         </Button>
@@ -150,6 +165,7 @@ function RangeSelector({
                 .toFormat("yyyy-MM-dd"),
             );
           }}
+          title="Advance the range by 1 week"
         >
           <MoveRight className="h-10 w-10 text-gray-500" />
         </Button>

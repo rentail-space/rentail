@@ -1,4 +1,4 @@
-import { groupBy, meanBy, sortBy, sumBy } from "es-toolkit";
+import { groupBy, meanBy, sumBy } from "es-toolkit";
 import {
   BotIcon,
   BubblesIcon,
@@ -55,47 +55,66 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function Charts({
+/**
+ * A component that displays the analytics charts.
+ *
+ * @param param0 analytics - The analytics data.
+ * @param param0 range - The range of dates.
+ * @param param0 users - The users data.
+ * @returns The analytics charts.
+ */
+export default function AnalyticsCharts({
   analytics,
+  range,
   users,
 }: {
   analytics: Awaited<ReturnType<typeof loader>>["analytics"];
+  range: [Date, Date];
   users: User[];
 }) {
-  const allDates = analytics.map((entry) => DateTime.fromISO(entry.date));
-  const minDate = DateTime.min(...allDates);
-  const maxDate = DateTime.max(...allDates);
-  const datesBetween =
-    minDate && maxDate ? maxDate.diff(minDate, "days").days : 0;
-  const grouping = datesBetween >= 21 ? "week" : "day";
+  // Create a range of DateTime objects from start to end (inclusive), by day
+  const allDates: DateTime[] = [];
+  const endDate = DateTime.fromJSDate(range[1]).startOf("day");
+  for (
+    let current = DateTime.fromJSDate(range[0]).startOf("day");
+    current <= endDate;
+    current = current.plus({ days: 1 })
+  )
+    allDates.push(current);
 
-  const groupedByDate = Object.entries(
-    groupBy(analytics, (entry) =>
-      DateTime.fromISO(entry.date).startOf(grouping).toFormat("yyyy-MM-dd"),
-    ),
-  );
-  const chartData = sortBy(
-    groupedByDate.map(([date, entries]) => ({
-      date,
-      visitors: sumBy(entries, (entry) => entry.visitors),
-      fromLLM: sumBy(
-        entries.filter(
-          (entry) =>
-            entry.sessionSource === "chatgpt.com" ||
-            entry.sessionSource === "perplexity.ai",
-        ),
-        (entry) => entry.visitors,
-      ),
-      chats: users.filter(
-        (user) =>
-          user.createdAt >=
-            DateTime.fromISO(date).startOf(grouping).toJSDate() &&
-          user.createdAt <= DateTime.fromISO(date).endOf(grouping).toJSDate(),
-      ).length,
-      sessionDuration: meanBy(entries, (entry) => entry.averageSessionDuration),
-    })),
-    ["date"],
-  );
+  const groupingBy = allDates.length >= 21 ? "week" : "day";
+  const dateRanges = Object.entries(
+    groupBy(allDates, (date) => date.startOf(groupingBy).toFormat("yyyyMMdd")),
+  ).map(([, dates]) => [dates[0], dates[dates.length - 1]]);
+
+  const chartData = dateRanges.map(([startDate, endDate]) => {
+    const entries = analytics.filter(
+      (entry) =>
+        DateTime.fromISO(entry.date) >= startDate &&
+        DateTime.fromISO(entry.date) <= endDate,
+    );
+    const chats = users.filter(
+      (user) =>
+        user.createdAt >= startDate.toJSDate() &&
+        user.createdAt <= endDate.toJSDate(),
+    );
+    return {
+      date: startDate.toFormat("yyyyMMdd"),
+      visitors: sumBy(entries, (entry) => entry.visitors) ?? 0,
+      fromLLM:
+        sumBy(
+          entries.filter(
+            (entry) =>
+              entry.sessionSource === "chatgpt.com" ||
+              entry.sessionSource === "perplexity.ai",
+          ),
+          (entry) => entry.visitors,
+        ) ?? 0,
+      chats: chats.length,
+      sessionDuration:
+        meanBy(entries, (entry) => entry.averageSessionDuration) ?? 0,
+    };
+  });
 
   return (
     <Card className="bg-secondary-background text-foreground">
@@ -112,7 +131,6 @@ export default function Charts({
             chartData={chartData}
             dataKey={key}
             fill={value.color}
-            grouping={grouping}
             name={value.label}
             yAxisFormatter={
               key === "sessionDuration"
@@ -129,14 +147,11 @@ export default function Charts({
       </CardContent>
 
       <CardFooter className="mx-auto flex items-center gap-2 text-muted-foreground leading-none">
-        {DateTime.fromISO(chartData[0]?.date)
-          .startOf(grouping)
+        {allDates[0].startOf(groupingBy).toFormat("MMM d, yyyy")} &mdash;{" "}
+        {allDates[allDates.length - 1]
+          .endOf(groupingBy)
           .toFormat("MMM d, yyyy")}{" "}
-        &mdash;{" "}
-        {DateTime.fromISO(chartData[chartData.length - 1]?.date)
-          .endOf(grouping)
-          .toFormat("MMM d, yyyy")}{" "}
-        {grouping === "week" && "(weekly metrics)"}
+        {groupingBy === "week" && "(weekly metrics)"}
       </CardFooter>
     </Card>
   );
@@ -146,37 +161,39 @@ function GroupedChart({
   chartData,
   dataKey,
   fill,
-  grouping,
   name,
   yAxisFormatter,
 }: {
   chartData: Array<{ date: string }>;
   dataKey: DataKey<(typeof chartData)[number]>;
   fill: string;
-  grouping: "week" | "day";
   name: string;
   yAxisFormatter?: (value: number) => string;
 }) {
   return (
-    <ChartContainer config={chartConfig} className="h-38 w-full">
+    <ChartContainer config={chartConfig} className="h-40 w-full">
       <AreaChart
         accessibilityLayer
         data={chartData}
         responsive
-        margin={{ left: 12, right: 12 }}
+        margin={{ left: 0, right: 0 }}
       >
         <CartesianGrid vertical={false} />
         <XAxis
-          dataKey={({ date }) =>
-            grouping === "week"
-              ? [
-                  DateTime.fromISO(date).toFormat("MMM d"),
-                  DateTime.fromISO(date).endOf(grouping).toFormat("MMM d"),
-                ].join(" - ")
-              : DateTime.fromISO(date).toFormat("MMM d")
-          }
-          tickLine={false}
-          tickMargin={8}
+          dataKey={({ date }) => DateTime.fromISO(date).toFormat("MMM d")}
+          tick={({ x, y, payload, ...rest }) => (
+            <text
+              x={x + 15}
+              y={y + 10}
+              textAnchor="end"
+              transform={`rotate(45 ${x},${y})`}
+              fill="#8884d8"
+              fontSize={12}
+              {...rest}
+            >
+              {payload.value}
+            </text>
+          )}
         />
         <YAxis
           allowDecimals={false}
