@@ -4,88 +4,74 @@
  */
 
 /**
- * Normalizes a timestamp to Unix seconds
- * Accepts: Unix seconds (number), ISO 8601 string, or Date object
+ * Normalizes a timestamp to Unix (milliseconds)
+ * Accepts: Unix milliseconds (number), ISO 8601 string, or Date object
  */
 function normalizeTimestamp(timestamp: number | string | Date): number {
-  if (typeof timestamp === "number") {
-    return timestamp;
-  }
+  if (typeof timestamp === "number") return timestamp;
   if (typeof timestamp === "string") {
     const date = new Date(timestamp);
-    if (Number.isNaN(date.getTime())) {
+    if (Number.isNaN(date.getTime()))
       throw new Error(`Invalid ISO 8601 timestamp: ${timestamp}`);
-    }
-    return Math.floor(date.getTime() / 1000);
+    return date.getTime();
   }
-  if (timestamp instanceof Date) {
-    return Math.floor(timestamp.getTime() / 1000);
-  }
+  if (timestamp instanceof Date) return timestamp.getTime();
   throw new Error(`Invalid timestamp type: ${typeof timestamp}`);
 }
 
 /**
  * Returns a human-readable relative time string like "3 hours ago" or "in 2 days"
  *
- * @param timestamp - The timestamp to format (Unix seconds, ISO 8601 string, or Date)
- * @param reference - Optional reference time (defaults to timestamp itself, returning "just now")
+ * @param timestamp - The timestamp to format (Unix milliseconds, ISO 8601
+ * string, or Date)
+ * @param reference - Optional reference time (defaults to timestamp itself,
+ * returning "just now")
  * @returns Human-readable relative time string
  *
  * @example
- * timeago(Date.now() / 1000 - 3600, Date.now() / 1000) // "1 hour ago"
- * timeago(Date.now() / 1000 + 7200, Date.now() / 1000) // "in 2 hours"
+ * timeago(Date.now()  - 60 * 60 * 1000, Date.now()) // "1 hour ago"
+ * timeago(Date.now() + 2 * 60 * 60 * 1000, Date.now()) // "in 2 hours"
  */
 export function timeago(
   timestamp: number | string | Date,
   reference?: number | string | Date,
 ): string {
   const ts = normalizeTimestamp(timestamp);
-  const ref = reference !== undefined ? normalizeTimestamp(reference) : ts;
+  const ref =
+    reference !== undefined ? normalizeTimestamp(reference) : Date.now();
+  console.log(ts, ref);
 
-  const diff = ref - ts;
-  const absDiff = Math.abs(diff);
-  const isPast = diff >= 0;
+  const absDiffSec = Math.floor(Math.abs((ref - ts) / 1000));
+  const isPast = ts < ref;
 
   // Thresholds and logic for past times
-  if (absDiff < 45) {
-    return "just now";
-  }
-  if (absDiff < 90) {
-    return isPast ? "1 minute ago" : "in 1 minute";
-  }
-  if (absDiff < 45 * 60) {
-    const minutes = Math.round(absDiff / 60);
+  if (absDiffSec < 45) return "just now";
+  if (absDiffSec < 90) return isPast ? "1 minute ago" : "in 1 minute";
+  if (absDiffSec < 45 * 60) {
+    const minutes = Math.round(absDiffSec / 60);
     return isPast ? `${minutes} minutes ago` : `in ${minutes} minutes`;
   }
-  if (absDiff < 90 * 60) {
-    return isPast ? "1 hour ago" : "in 1 hour";
-  }
-  if (absDiff < 22 * 3600) {
-    const hours = Math.round(absDiff / 3600);
+  if (absDiffSec < 90 * 60) return isPast ? "1 hour ago" : "in 1 hour";
+  if (absDiffSec < 22 * 3600) {
+    const hours = Math.round(absDiffSec / 3600);
     return isPast ? `${hours} hours ago` : `in ${hours} hours`;
   }
-  if (absDiff < 36 * 3600) {
-    return isPast ? "1 day ago" : "in 1 day";
-  }
-  if (absDiff < 26 * 86400) {
-    const days = Math.round(absDiff / 86400);
+  if (absDiffSec < 36 * 3600) return isPast ? "1 day ago" : "in 1 day";
+  if (absDiffSec < 26 * 86400) {
+    const days = Math.round(absDiffSec / 86400);
     return isPast ? `${days} days ago` : `in ${days} days`;
   }
-  if (absDiff < 46 * 86400) {
-    return isPast ? "1 month ago" : "in 1 month";
-  }
-  if (absDiff < 320 * 86400) {
+  if (absDiffSec < 46 * 86400) return isPast ? "1 month ago" : "in 1 month";
+  if (absDiffSec < 320 * 86400) {
     // Calculate months - round but cap at reasonable values
     // 319 days should give 10 months, not 11
-    const days = absDiff / 86400;
+    const days = absDiffSec / 86400;
     const months = Math.min(Math.round(days / 30), 10);
     return isPast ? `${months} months ago` : `in ${months} months`;
   }
-  if (absDiff < 548 * 86400) {
-    return isPast ? "1 year ago" : "in 1 year";
-  }
+  if (absDiffSec < 548 * 86400) return isPast ? "1 year ago" : "in 1 year";
 
-  const years = Math.round(absDiff / (365 * 86400));
+  const years = Math.round(absDiffSec / (365 * 24 * 60 * 60));
   return isPast ? `${years} years ago` : `in ${years} years`;
 }
 
@@ -97,7 +83,7 @@ interface DurationOptions {
 /**
  * Formats a duration in seconds as a human-readable string
  *
- * @param seconds - Non-negative duration in seconds
+ * @param milliseconds - Non-negative duration in milliseconds
  * @param options - Formatting options
  *   - compact: If true, use "2h 30m" style instead of "2 hours, 30 minutes"
  *   - max_units: Maximum number of units to display (default: 2)
@@ -109,19 +95,21 @@ interface DurationOptions {
  * duration(3661, { max_units: 1 }) // "1 hour"
  */
 export function duration(
-  seconds: number,
-  options: DurationOptions = {},
+  milliseconds: number,
+  options: { compact?: boolean; max_units?: number } = {},
 ): string {
-  if (seconds < 0 || Number.isNaN(seconds) || !Number.isFinite(seconds)) {
+  if (
+    milliseconds < 0 ||
+    Number.isNaN(milliseconds) ||
+    !Number.isFinite(milliseconds)
+  )
     throw new Error("Duration must be a non-negative finite number");
-  }
 
   const { compact = false, max_units = 2 } = options;
 
-  if (seconds === 0) {
-    return compact ? "0s" : "0 seconds";
-  }
+  if (milliseconds === 0) return compact ? "0s" : "0 seconds";
 
+  const seconds = Math.floor(milliseconds / 1000);
   const units = [
     { name: "year", short: "y", seconds: 365 * 86400 },
     { name: "month", short: "mo", seconds: 30 * 86400 },
@@ -135,9 +123,7 @@ export function duration(
   let remaining = seconds;
 
   for (let i = 0; i < units.length; i++) {
-    if (parts.length >= max_units) {
-      break;
-    }
+    if (parts.length >= max_units) break;
 
     const unit = units[i];
     let value = Math.floor(remaining / unit.seconds);
@@ -150,10 +136,9 @@ export function duration(
     if (shouldAdd) {
       // If this will be the last unit we show (due to max_units), round it
       const willBeLastUnit = parts.length === max_units - 1;
-      if (willBeLastUnit && hasValue) {
+      if (willBeLastUnit && hasValue)
         // Recalculate with rounding to include all remaining time
         value = Math.round(remaining / unit.seconds);
-      }
 
       if (compact) {
         parts.push(`${value}${unit.short}`);
@@ -178,26 +163,24 @@ export function duration(
  * - Colon notation: "2:30" (h:mm), "2:30:00" (h:mm:ss)
  *
  * @param input - Duration string to parse
- * @returns Duration in seconds
+ * @returns Duration in milliseconds
  * @throws Error if string is empty, unparseable, or results in negative duration
  *
  * @example
- * parseDuration("2h30m") // 9000
- * parseDuration("2 hours 30 minutes") // 9000
- * parseDuration("2.5 hours") // 9000
- * parseDuration("2:30") // 9000
+ * parseDuration("2h30m") // 9000000
+ * parseDuration("2 hours 30 minutes") // 9000000
+ * parseDuration("2.5 hours") // 9000000
+ * parseDuration("2:30") // 9000000
  */
 export function parseDuration(input: string): number {
-  if (!input || input.trim() === "") {
+  if (!input || input.trim() === "")
     throw new Error("Cannot parse empty duration string");
-  }
 
   const trimmed = input.trim();
 
   // Check for negative sign
-  if (trimmed.includes("-") && /^-/.test(trimmed)) {
+  if (trimmed.includes("-") && /^-/.test(trimmed))
     throw new Error("Duration cannot be negative");
-  }
 
   // Try colon notation first (h:mm or h:mm:ss)
   const colonMatch = trimmed.match(/^(\d+):(\d+)(?::(\d+))?$/);
@@ -206,10 +189,8 @@ export function parseDuration(input: string): number {
     const minutes = Number.parseInt(colonMatch[2], 10);
     const seconds = colonMatch[3] ? Number.parseInt(colonMatch[3], 10) : 0;
     const total = hours * 3600 + minutes * 60 + seconds;
-    if (total < 0) {
-      throw new Error("Duration cannot be negative");
-    }
-    return total;
+    if (total < 0) throw new Error("Duration cannot be negative");
+    return total * 1000;
   }
 
   // Unit definitions with aliases
@@ -249,9 +230,7 @@ export function parseDuration(input: string): number {
   const pattern = /(\d+(?:\.\d+)?)\s*([a-z]+)/gi;
   const matches = [...trimmed.matchAll(pattern)];
 
-  if (matches.length === 0) {
-    throw new Error(`Cannot parse duration: ${input}`);
-  }
+  if (matches.length === 0) throw new Error(`Cannot parse duration: ${input}`);
 
   let totalSeconds = 0;
 
@@ -259,28 +238,22 @@ export function parseDuration(input: string): number {
     const value = Number.parseFloat(match[1]);
     const unit = match[2].toLowerCase();
 
-    if (!(unit in unitMap)) {
-      throw new Error(`Unknown duration unit: ${unit}`);
-    }
+    if (!(unit in unitMap)) throw new Error(`Unknown duration unit: ${unit}`);
 
     totalSeconds += value * unitMap[unit];
   }
 
-  if (totalSeconds < 0) {
-    throw new Error("Duration cannot be negative");
-  }
+  if (totalSeconds < 0) throw new Error("Duration cannot be negative");
 
-  if (totalSeconds === 0) {
-    throw new Error(`Cannot parse duration: ${input}`);
-  }
+  if (totalSeconds === 0) throw new Error(`Cannot parse duration: ${input}`);
 
-  return totalSeconds;
+  return totalSeconds * 1000;
 }
 
 /**
  * Returns a contextual date string like "Today", "Yesterday", "Last Monday", or "March 5"
  *
- * @param timestamp - The date to format (Unix seconds, ISO 8601 string, or Date)
+ * @param timestamp - The date to format (Unix milliseconds, ISO 8601 string, or Date)
  * @param reference - Optional reference time for comparison (defaults to timestamp)
  * @returns Contextual date string
  *
@@ -297,8 +270,8 @@ export function humanDate(
   const ref = reference !== undefined ? normalizeTimestamp(reference) : ts;
 
   // Convert to UTC dates for comparison
-  const targetDate = new Date(ts * 1000);
-  const refDate = new Date(ref * 1000);
+  const targetDate = new Date(ts);
+  const refDate = new Date(ref);
 
   // Get UTC date components
   const targetYear = targetDate.getUTCFullYear();
@@ -315,19 +288,13 @@ export function humanDate(
   const dayDiff = Math.round((refDayStart - targetDayStart) / 86400000);
 
   // Same day
-  if (dayDiff === 0) {
-    return "Today";
-  }
+  if (dayDiff === 0) return "Today";
 
   // Yesterday
-  if (dayDiff === 1) {
-    return "Yesterday";
-  }
+  if (dayDiff === 1) return "Yesterday";
 
   // Tomorrow
-  if (dayDiff === -1) {
-    return "Tomorrow";
-  }
+  if (dayDiff === -1) return "Tomorrow";
 
   // Within past 7 days - "Last {weekday}"
   if (dayDiff > 1 && dayDiff <= 7) {
@@ -378,9 +345,7 @@ export function humanDate(
   const monthName = months[targetMonth];
   const sameYear = targetYear === refYear;
 
-  if (sameYear) {
-    return `${monthName} ${targetDay}`;
-  }
+  if (sameYear) return `${monthName} ${targetDay}`;
   return `${monthName} ${targetDay}, ${targetYear}`;
 }
 
@@ -392,8 +357,8 @@ export function humanDate(
  * - Same year: "March 5 – April 7, 2024"
  * - Different years: "December 28, 2024 – January 3, 2025"
  *
- * @param start - Start timestamp (Unix seconds, ISO 8601 string, or Date)
- * @param end - End timestamp (Unix seconds, ISO 8601 string, or Date)
+ * @param start - Start timestamp (Unix milliseconds, ISO 8601 string, or Date)
+ * @param end - End timestamp (Unix milliseconds, ISO 8601 string, or Date)
  * @returns Formatted date range string
  *
  * @example
@@ -409,12 +374,10 @@ export function dateRange(
   let endTs = normalizeTimestamp(end);
 
   // Swap if start is after end
-  if (startTs > endTs) {
-    [startTs, endTs] = [endTs, startTs];
-  }
+  if (startTs > endTs) [startTs, endTs] = [endTs, startTs];
 
-  const startDate = new Date(startTs * 1000);
-  const endDate = new Date(endTs * 1000);
+  const startDate = new Date(startTs);
+  const endDate = new Date(endTs);
 
   const startYear = startDate.getUTCFullYear();
   const startMonth = startDate.getUTCMonth();
@@ -443,19 +406,16 @@ export function dateRange(
   const endMonthName = months[endMonth];
 
   // Same day
-  if (startYear === endYear && startMonth === endMonth && startDay === endDay) {
+  if (startYear === endYear && startMonth === endMonth && startDay === endDay)
     return `${startMonthName} ${startDay}, ${startYear}`;
-  }
 
   // Same month
-  if (startYear === endYear && startMonth === endMonth) {
+  if (startYear === endYear && startMonth === endMonth)
     return `${startMonthName} ${startDay}–${endDay}, ${startYear}`;
-  }
 
   // Same year
-  if (startYear === endYear) {
+  if (startYear === endYear)
     return `${startMonthName} ${startDay} – ${endMonthName} ${endDay}, ${startYear}`;
-  }
 
   // Different years
   return `${startMonthName} ${startDay}, ${startYear} – ${endMonthName} ${endDay}, ${endYear}`;

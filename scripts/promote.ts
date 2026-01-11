@@ -10,13 +10,13 @@ import { confirm } from "@inquirer/prompts";
 import { Vercel } from "@vercel/sdk";
 import type { GetDeploymentResponseBody } from "@vercel/sdk/models/getdeploymentop.js";
 import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymentsop.js";
-import { timeAgo } from "date-buddy";
 import dotenv from "dotenv";
 import env from "env-var";
 import { invariant } from "es-toolkit";
 import { execSync } from "node:child_process";
 import { Octokit } from "octokit";
 import ora from "ora";
+import { timeago } from "~/lib/time";
 
 dotenv.configDotenv({ quiet: true });
 
@@ -117,7 +117,7 @@ async function githubWorkflows() {
         : workflow.conclusion === "success"
           ? colorize("green", `✓ ${status}`)
           : colorize("yellow", `⚡${status}`),
-      timeAgo(workflow.created_at ?? "").padEnd(15),
+      timeago(workflow.created_at ?? "").padEnd(15),
       workflow.head_commit?.id.slice(-8),
       (
         workflow.display_title.slice(0, 59) +
@@ -170,7 +170,7 @@ async function getRecentDeployment(): Promise<
         : deployment.state === "BUILDING"
           ? colorize("yellow", `⚡${status}`)
           : colorize("red", `✗ ${status}`),
-      timeAgo(deployment.createdAt ?? "").padEnd(15),
+      timeago(deployment.createdAt ?? "").padEnd(15),
       deployment.meta?.githubCommitSha?.slice(-8),
       `https://${deployment.url}`.padEnd(61),
       deployment.target ?? "preview",

@@ -264,10 +264,9 @@ async function isBotByIP(ip?: string): Promise<boolean> {
  */
 export async function verifyAdmin(requestHeaders: Headers): Promise<User> {
   const session = await userFromCookie(requestHeaders);
-  invariant("user" in session, "User not found");
-  const { user } = session;
-  invariant(user.isAdmin, "User is not an admin");
-  return user;
+  if (!("user" in session && session.user.isAdmin))
+    throw new Response("Not found", { status: 404 });
+  return session.user;
 }
 
 /**

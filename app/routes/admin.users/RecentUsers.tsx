@@ -4,9 +4,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { timeAgo } from "date-buddy";
 import { ArrowDown, ArrowUp, LockIcon, UserIcon } from "lucide-react";
-import { DateTime } from "luxon";
 import type { User } from "prisma/generated/client";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
@@ -19,6 +17,7 @@ import {
   TableRow,
 } from "~/components/ui/Table";
 import deviceDetection from "~/lib/deviceDetection";
+import { timeago } from "~/lib/time";
 
 export default function AllUsers({ users }: { users: User[] }) {
   const table = useReactTable({
@@ -61,17 +60,12 @@ export default function AllUsers({ users }: { users: User[] }) {
       {
         accessorKey: "createdAt",
         cell: ({ row }) => (
-          <span className="flex flex-row items-center justify-between gap-2">
-            <span className="w-48">
-              {DateTime.fromJSDate(row.original.createdAt).toFormat(
-                "yyyy-MM-dd HH:mm",
-              )}
-            </span>
-            <span className="w-24">{timeAgo(row.original.createdAt)}</span>
+          <span className="w-24">
+            {timeago(row.original.createdAt, Date.now())}
           </span>
         ),
         header: "Created",
-        size: 220,
+        size: 120,
         sortingFn: (rowA, rowB) =>
           rowA.original.createdAt.getTime() - rowB.original.createdAt.getTime(),
       },
