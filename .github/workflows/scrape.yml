@@ -50,9 +50,6 @@ jobs:
         env:
           DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
 
-      - name: Format seed files
-        run: biome format prisma/seed/*.json --fix
-
       - name: Commit files
         run: |
           git config --local user.email "assaf@labnotes.org"
