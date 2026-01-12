@@ -37,8 +37,7 @@ export function timeago(
   reference?: number | string | Date,
 ): string {
   const ts = normalizeTimestamp(timestamp);
-  const ref =
-    reference !== undefined ? normalizeTimestamp(reference) : Date.now();
+  const ref = reference !== undefined ? normalizeTimestamp(reference) : ts;
 
   const absDiffSec = Math.floor(Math.abs((ref - ts) / 1000));
   const isPast = ts < ref;
@@ -261,8 +260,7 @@ export function humanDate(
   reference?: number | string | Date,
 ): string {
   const ts = normalizeTimestamp(timestamp);
-  const ref =
-    reference !== undefined ? normalizeTimestamp(reference) : Date.now();
+  const ref = reference !== undefined ? normalizeTimestamp(reference) : ts;
 
   // Convert to UTC dates for comparison
   const targetDate = new Date(ts);
