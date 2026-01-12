@@ -4,22 +4,6 @@
  */
 
 /**
- * Normalizes a timestamp to Unix (milliseconds)
- * Accepts: Unix milliseconds (number), ISO 8601 string, or Date object
- */
-function normalizeTimestamp(timestamp: number | string | Date): number {
-  if (typeof timestamp === "number") return timestamp;
-  if (typeof timestamp === "string") {
-    const date = new Date(timestamp);
-    if (Number.isNaN(date.getTime()))
-      throw new Error(`Invalid ISO 8601 timestamp: ${timestamp}`);
-    return date.getTime();
-  }
-  if (timestamp instanceof Date) return timestamp.getTime();
-  throw new Error(`Invalid timestamp type: ${typeof timestamp}`);
-}
-
-/**
  * Returns a human-readable relative time string like "3 hours ago" or "in 2 days"
  *
  * @param timestamp - The timestamp to format (Unix milliseconds, ISO 8601
@@ -412,4 +396,20 @@ export function dateRange(
 
   // Different years
   return `${startMonthName} ${startDay}, ${startYear} – ${endMonthName} ${endDay}, ${endYear}`;
+}
+
+/**
+ * Normalizes a timestamp to Unix (milliseconds)
+ * Accepts: Unix milliseconds (number), ISO 8601 string, or Date object
+ */
+function normalizeTimestamp(timestamp: number | string | Date): number {
+  if (typeof timestamp === "number") return timestamp;
+  if (typeof timestamp === "string") {
+    const date = new Date(timestamp);
+    if (Number.isNaN(date.getTime()))
+      throw new Error(`Invalid ISO 8601 timestamp: ${timestamp}`);
+    return date.getTime();
+  }
+  if (timestamp instanceof Date) return timestamp.getTime();
+  throw new Error(`Invalid timestamp type: ${typeof timestamp}`);
 }

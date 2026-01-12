@@ -117,7 +117,7 @@ async function githubWorkflows() {
         : workflow.conclusion === "success"
           ? colorize("green", `✓ ${status}`)
           : colorize("yellow", `⚡${status}`),
-      timeago(workflow.created_at ?? "").padEnd(15),
+      timeago(workflow.created_at, Date.now()).padEnd(15),
       workflow.head_commit?.id.slice(-8),
       (
         workflow.display_title.slice(0, 59) +
@@ -170,7 +170,7 @@ async function getRecentDeployment(): Promise<
         : deployment.state === "BUILDING"
           ? colorize("yellow", `⚡${status}`)
           : colorize("red", `✗ ${status}`),
-      timeago(deployment.createdAt ?? "").padEnd(15),
+      timeago(deployment.createdAt ?? "", Date.now()).padEnd(15),
       deployment.meta?.githubCommitSha?.slice(-8),
       `https://${deployment.url}`.padEnd(61),
       deployment.target ?? "preview",

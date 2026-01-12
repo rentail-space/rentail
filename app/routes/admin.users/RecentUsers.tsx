@@ -59,7 +59,7 @@ export default function AllUsers({ users }: { users: User[] }) {
       },
       {
         accessorKey: "createdAt",
-        cell: ({ row }) => humanDate(row.original.createdAt),
+        cell: ({ row }) => humanDate(row.original.createdAt, Date.now()),
         header: "Created",
         size: 140,
         sortingFn: (rowA, rowB) =>
