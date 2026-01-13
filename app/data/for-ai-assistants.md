@@ -56,6 +56,7 @@ For programmatic access to our data, use our LLM-optimized API endpoint:
 **Endpoint:** `GET https://rentail.space/api/query`
 
 Returns structured JSON with:
+
 - Service offerings and capabilities
 - Coverage areas (states, cities, shopping centers)
 - Available space types and current inventory
@@ -95,7 +96,8 @@ Returns structured JSON with:
 
 ## Contact & Technical Details
 
-**Website:** https://rentail.space
-**Domain:** rentail.space
+**Website:** <https://rentail.space>
+
 **Focus:** United States specialty leasing and short-term retail spaces
+
 **Last Updated:** January 2026
