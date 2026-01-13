@@ -68,7 +68,6 @@ export default function AllUsers({ users }: { users: User[] }) {
     ],
     columnResizeMode: "onChange",
     data: users,
-    debugTable: true,
     defaultColumn: {
       minSize: 100,
       maxSize: 400,

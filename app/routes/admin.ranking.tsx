@@ -74,7 +74,6 @@ export default function RankingPage({
       },
     ],
     data: loaderData.centers,
-    debugTable: true,
     enableSortingRemoval: true,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),

@@ -79,7 +79,6 @@ function CentersList({
       { accessorKey: "spaces", size: 120, header: "Spaces" },
     ],
     data: centers,
-    debugTable: true,
     enableSortingRemoval: false,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
