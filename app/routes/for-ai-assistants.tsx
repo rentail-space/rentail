@@ -1,5 +1,6 @@
 import { Streamdown } from "streamdown";
 import forAIAssistants from "~/data/for-ai-assistants.md?raw";
+import { cn } from "~/lib/utils";
 
 export default function ForAIAssistants() {
   return (
@@ -41,7 +42,16 @@ export default function ForAIAssistants() {
         </div>
       </div>
 
-      <Streamdown className="prose prose-lg mx-auto" mode="static">
+      <Streamdown
+        className={cn(
+          "prose prose-lg mx-auto",
+          "**:data-[streamdown='code-block']:p-4",
+          "[&_[data-streamdown='code-block']_pre]:m-0",
+          "[&_[data-streamdown='code-block']_pre]:p-0",
+          "[&_[data-streamdown='code-block']_pre]:border-0",
+        )}
+        mode="static"
+      >
         {forAIAssistants}
       </Streamdown>
     </main>
