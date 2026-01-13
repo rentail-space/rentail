@@ -1,3 +1,6 @@
+allowedDeprecatedVersions:
+  - glob@>=10.3.7 <10.5.0
+
 ignoredBuiltDependencies:
   - yarn
 
@@ -10,9 +13,10 @@ onlyBuiltDependencies:
   - msw
   - prisma
   - bcrypt
+  - protobufjs
+  - sharp
 
 minimumReleaseAge: 2880
 minimumReleaseAgeExclude:
-
-packages:
-  - "*"
+  - "streamdown"
+  - "remend"

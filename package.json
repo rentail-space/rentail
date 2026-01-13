@@ -91,7 +91,7 @@
     "secretlint": "^11.2.5",
     "sharp": "^0.34.5",
     "sonner": "^2.0.7",
-    "streamdown": "^1.6.11",
+    "streamdown": "^2.0.1",
     "tailwind-merge": "^3.4.0",
     "tailwindcss-animate": "^1.0.7",
     "tsx": "^4.21.0",
@@ -134,30 +134,6 @@
     "why-is-node-running": "^3.2.2"
   },
   "overrides": {},
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@prisma/client",
-      "@prisma/engines",
-      "@sentry/cli",
-      "@tailwindcss/oxide",
-      "bcrypt",
-      "esbuild",
-      "msw",
-      "prisma",
-      "protobufjs",
-      "sharp"
-    ],
-    "overrides": {
-      "glob@>=10.3.7 <10.5.0": ">=10.5.0",
-      "glob@>=11.0.0 <11.1.0": ">=11.1.0",
-      "hono@<4.9.7": ">=4.9.7",
-      "hono@>=1.1.0 <4.10.2": ">=4.10.2",
-      "hono@<4.10.3": ">=4.10.3"
-    },
-    "ignoredBuiltDependencies": [
-      "yarn"
-    ]
-  },
   "engines": {
     "node": ">=24.10.1"
   },

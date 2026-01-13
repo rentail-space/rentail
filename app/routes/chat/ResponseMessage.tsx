@@ -92,13 +92,25 @@ function MarkdownMessage({
       >
         <CardContent>
           <Streamdown
+            caret="block"
             className="prose prose-base max-w-none"
             components={getComponents({ askQuestion })}
             controls={{ code: false, mermaid: false, table: false }}
-            parseIncompleteMarkdown
-            remarkPlugins={[remarkGfm]}
             isAnimating={isStreaming}
             mode={isStreaming ? "streaming" : "static"}
+            parseIncompleteMarkdown
+            remarkPlugins={[remarkGfm]}
+            remend={{
+              bold: true,
+              boldItalic: true,
+              images: true,
+              inlineCode: true,
+              italic: true,
+              katex: true,
+              links: true,
+              setextHeadings: true,
+              strikethrough: true,
+            }}
           >
             {maskWorkingMemoryTags(text)}
           </Streamdown>

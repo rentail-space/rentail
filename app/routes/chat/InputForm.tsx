@@ -44,6 +44,7 @@ export default function InputForm({
             "rounded-base border-2 border-black bg-white shadow-[4px_4px_0px_0px_hsl(37,92%,65%)] outline-none",
             "font-medium text-base text-black placeholder-gray-600",
             "transition-all duration-100 focus:translate-x-[-2px] focus:translate-y-[-2px] focus:shadow-[6px_6px_0px_0px_hsl(37,92%,65%)]",
+            "placeholder:text-gray-400",
           )}
           disabled={isSubmitting}
           onChange={(e) => setQuery(e.target.value)}

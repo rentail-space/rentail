@@ -54,13 +54,13 @@ export default function Messages({
         "flex flex-col justify-end gap-4",
       )}
     >
-      {messages.map((message) =>
+      {messages.map((message, index) =>
         message.role === "user" ? (
           <UserMessage key={message.id} message={message} />
         ) : message.role === "assistant" ? (
           <ResponseMessage
             askQuestion={askQuestion({ scrollToBottom, setQuery })}
-            isStreaming={isTyping}
+            isStreaming={index === messages.length - 1 && isTyping}
             key={message.id}
             message={message}
             scrollToBottom={scrollToBottom}
