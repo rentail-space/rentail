@@ -51,6 +51,7 @@ export default function ForAIAssistants() {
           "[&_[data-streamdown='code-block']_pre]:border-0",
         )}
         mode="static"
+        shikiTheme={["github-light", "github-dark"]}
       >
         {forAIAssistants}
       </Streamdown>
