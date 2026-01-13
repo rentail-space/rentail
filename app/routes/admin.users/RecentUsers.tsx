@@ -4,7 +4,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowDown, ArrowUp, LockIcon, UserIcon } from "lucide-react";
+import { LockIcon, UserIcon } from "lucide-react";
 import type { User } from "prisma/generated/client";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
@@ -96,7 +96,6 @@ export default function AllUsers({ users }: { users: User[] }) {
                 >
                   <Button
                     className="flex w-full cursor-col-resize justify-between p-2"
-                    onClick={header.column.getToggleSortingHandler()}
                     onDoubleClick={() => header.column.resetSize()}
                     onMouseDown={header.getResizeHandler()}
                     onTouchStart={header.getResizeHandler()}
@@ -105,13 +104,6 @@ export default function AllUsers({ users }: { users: User[] }) {
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext(),
-                    )}
-                    {header.column.getIsSorted() === "desc" ? (
-                      <ArrowUp />
-                    ) : header.column.getIsSorted() === "asc" ? (
-                      <ArrowDown />
-                    ) : (
-                      <span />
                     )}
                   </Button>
                 </TableHead>
