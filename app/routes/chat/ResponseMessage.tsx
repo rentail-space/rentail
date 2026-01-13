@@ -25,22 +25,11 @@ export default function ResponseMessage({
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll during streaming updates
+  // biome-ignore lint/correctness/useExhaustiveDependencies: run when streaming and text changes
   useEffect(() => {
-    const observer = new MutationObserver(() => {
-      // Small delay to allow content to render
-      setTimeout(scrollToBottom, 10);
-    });
-
-    if (contentRef.current) {
-      observer.observe(contentRef.current, {
-        characterData: true,
-        childList: true,
-        subtree: true,
-      });
-    }
-
-    return () => observer.disconnect();
-  }, [scrollToBottom]);
+    if (!isStreaming) return;
+    setTimeout(scrollToBottom, 10);
+  }, [scrollToBottom, message.parts, isStreaming]);
 
   return message.parts.map((part, index) => {
     switch (part.type) {
@@ -100,17 +89,6 @@ function MarkdownMessage({
             mode={isStreaming ? "streaming" : "static"}
             parseIncompleteMarkdown
             remarkPlugins={[remarkGfm]}
-            remend={{
-              bold: true,
-              boldItalic: true,
-              images: true,
-              inlineCode: true,
-              italic: true,
-              katex: true,
-              links: true,
-              setextHeadings: true,
-              strikethrough: true,
-            }}
           >
             {maskWorkingMemoryTags(text)}
           </Streamdown>
