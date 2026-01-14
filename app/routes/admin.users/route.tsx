@@ -6,12 +6,11 @@ import envVars from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
 import type { Route } from "./+types/route";
-import Charts from "./AnalyticsCharts";
+import AnalyticsCharts from "./AnalyticsCharts";
 import AnalyticsSummary from "./AnalyticsSummary";
 import Heatmap from "./Heatmap";
 import RangeSelection from "./RangeSelection";
 import RecentUsers from "./RecentUsers";
-import UserSources from "./UserSources";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await verifyAdmin(request.headers);
@@ -82,11 +81,14 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
       <RangeSelection analytics={loaderData.analytics} users={loaderData.users}>
         {({ range, recentUsers, analytics, selectorUI }) => (
           <>
-            <Charts analytics={analytics} range={range} users={recentUsers} />
+            <AnalyticsCharts
+              analytics={analytics}
+              range={range}
+              users={recentUsers}
+            />
             {selectorUI()}
             <AnalyticsSummary analytics={analytics} users={recentUsers} />
             <RecentUsers users={recentUsers} />
-            <UserSources analytics={analytics} />
             <Heatmap analytics={analytics} users={recentUsers} />
           </>
         )}

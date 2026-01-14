@@ -22,11 +22,11 @@ export default function Sources({
 }: {
   analytics: Awaited<ReturnType<typeof loader>>["analytics"];
 }) {
-  const grouped = groupBy(
-    analytics,
-    (entry: { sessionSource: string }) => entry.sessionSource,
+  const grouped = groupBy(analytics, ({ sessionSource }) => sessionSource);
+  const totalVisitors = sumBy(
+    Object.values(analytics),
+    (entry) => entry.visitors,
   );
-  const total = sumBy(Object.values(analytics), (entry) => entry.visitors);
   const table = useReactTable({
     columns: [
       {
@@ -37,21 +37,20 @@ export default function Sources({
       {
         accessorKey: "visitors",
         header: "Visitors",
-        meta: { align: "right" },
         size: 80,
       },
       {
         accessorFn: (row) => `${row.percentage.toFixed(2)}%`,
         accessorKey: "percentage",
         header: "Percentage",
-        meta: { align: "right" },
         size: 80,
       },
     ],
     data: Object.entries(grouped).map(([source, entries]) => ({
       source,
-      visitors: sumBy(entries, (entry) => entry.visitors),
-      percentage: (sumBy(entries, (entry) => entry.visitors) / total) * 100,
+      visitors: sumBy(entries, ({ visitors }) => visitors),
+      percentage:
+        (sumBy(entries, ({ visitors }) => visitors) / totalVisitors) * 100,
     })),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -67,6 +66,7 @@ export default function Sources({
           / {Object.keys(grouped).length} sources)
         </span>
       </h2>
+
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((group) => (

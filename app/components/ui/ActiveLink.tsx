@@ -46,9 +46,10 @@ export interface ActiveLinkProps
 }
 
 const ActiveLink = React.forwardRef<HTMLAnchorElement, ActiveLinkProps>(
-  ({ className, disabled, variant, size, bg, to, ...props }) => {
+  ({ className, disabled, variant, size, bg, to, ...props }, ref) => {
     return (
       <Link
+        ref={ref}
         className={cn(
           activeLinkVariants({ variant, size, disabled, className, bg }),
         )}
