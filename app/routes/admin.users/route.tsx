@@ -79,14 +79,14 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
   return (
     <section className="flex flex-col gap-8">
       <RangeSelection analytics={loaderData.analytics} users={loaderData.users}>
-        {({ range, recentUsers, analytics, selectorUI }) => (
+        {({ range, recentUsers, analytics, selector }) => (
           <>
             <AnalyticsCharts
               analytics={analytics}
               range={range}
               users={recentUsers}
             />
-            {selectorUI()}
+            {selector}
             <AnalyticsSummary analytics={analytics} users={recentUsers} />
             <RecentUsers users={recentUsers} />
             <Heatmap analytics={analytics} users={recentUsers} />

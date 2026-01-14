@@ -32,11 +32,11 @@ export default function RangeSelection({
     range: [Date, Date];
     recentUsers: User[];
     analytics: Awaited<ReturnType<typeof loader>>["analytics"];
-    selectorUI: () => React.ReactNode;
+    selector: React.ReactNode;
   }) => React.ReactNode;
   users: User[];
 }) {
-  const today = DateTime.now();
+  const today = DateTime.now().minus({ days: 1 });
   const [from, setFrom] = useQueryState("from", {
     defaultValue: today.minus({ days: 30 }).toFormat("yyyy-MM-dd"),
     history: "replace",
@@ -65,12 +65,13 @@ export default function RangeSelection({
         .toJSDate();
       return day >= start && day <= end;
     }),
-    selectorUI: () => (
+    selector: (
       <RangeSelector
         from={from}
         setFrom={setFrom}
         until={until}
         setUntil={setUntil}
+        today={today}
       />
     ),
   });
@@ -81,13 +82,14 @@ function RangeSelector({
   setFrom,
   until,
   setUntil,
+  today,
 }: {
   from: string;
   setFrom: (from: string) => void;
   until: string;
   setUntil: (until: string) => void;
+  today: DateTime;
 }) {
-  const today = DateTime.now();
   const daysInPeriod =
     until === today.toFormat("yyyy-MM-dd") &&
     Math.floor(

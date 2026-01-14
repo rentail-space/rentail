@@ -172,7 +172,12 @@ function GroupedChart({
 }) {
   return (
     <ChartContainer config={chartConfig} className="h-40 w-full">
-      <AreaChart accessibilityLayer data={chartData} responsive>
+      <AreaChart
+        accessibilityLayer
+        data={chartData}
+        margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+        responsive
+      >
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey={({ date }) => DateTime.fromISO(date).toFormat("MMM d")}
