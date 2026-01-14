@@ -9,19 +9,18 @@ export default function HeroSection() {
         <div
           className={cn(
             "flex flex-1 flex-col gap-4 bg-conic",
-            "-rotate-3 duration-200 hover:rotate-2",
+            "rotate-2 duration-200 hover:-rotate-3",
+            "*:overflow-hidden *:rounded-md *:border-2 *:border-black *:shadow-[6px_6px_0px_0px_black]",
           )}
         >
-          <div className="overflow-hidden rounded-md border-2 border-black bg-white p-4 shadow-[8px_8px_0px_0px_black]">
+          <div className="h-auto w-full bg-white p-0">
             <img
               alt="Two people sharing and exchanging items"
-              className="h-auto w-full rounded-sm"
-              height="533"
-              src="/images/hero-image.jpg"
+              src="/images/home/intro.png"
               width="800"
             />
           </div>
-          <div className="rounded-md border-2 border-black bg-[hsl(47,100%,95%)] px-6 py-4 text-center font-bold text-black text-lg shadow-[4px_4px_0px_0px_black]">
+          <div className="bg-[hsl(47,100%,95%)] px-6 py-4 text-center font-bold text-black text-lg">
             🎉 Rent for days, weeks, or months
           </div>
         </div>
