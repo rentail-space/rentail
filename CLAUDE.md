@@ -1,6 +1,7 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with
+code in this repository.
 
 ## Essential Commands
 
@@ -13,16 +14,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Common Tasks:**
 
-- `tsx scripts/collect.ts "Location"` - Collect shopping centers (supports metro areas like "LA", "NYC", or counties)
+- `tsx scripts/collect.ts "Location"` - Collect shopping centers (supports metro
+  areas like "LA", "NYC", or counties)
 - `tsx scripts/checkWebsites.ts` - Validate seed file websites
 - `tsx scripts/promote.ts` - Promote preview deployment to production on Vercel
-- `tsx scripts/updateBlogSchedule.ts` - Schedule blog posts for future publication
+- `tsx scripts/updateBlogSchedule.ts` - Schedule blog posts for future
+  publication
 - `pnpx vitest run <pattern>` - Run specific test file
 - `pnpx vitest run --reporter=verbose` - Detailed test output
 
 ## Project Overview
 
-**rentail.space** is an AI-powered specialty lease marketplace connecting businesses with short-term retail spaces in shopping centers.
+**rentail.space** is an AI-powered specialty lease marketplace connecting
+businesses with short-term retail spaces in shopping centers.
 
 **Stack:**
 
@@ -78,14 +82,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `streamText()` from Anthropic SDK in `app/routes/api.chat.$chatId.message.ts`
 - Resumable streams via Redis coordination (prevents duplication on reconnect)
 - `Chat.activeStreamId` tracks active stream (null when idle)
-- Stream lifecycle: Generate `streamId` (ULID) → Set `Chat.activeStreamId` → Stream → `onFinish` clears `activeStreamId`
+- Stream lifecycle: Generate `streamId` (ULID) → Set `Chat.activeStreamId` →
+  Stream → `onFinish` clears `activeStreamId`
 - Stop signal monitoring via `redis-stop-monitor.ts`
 
 **Working Memory:**
 
 - User context stored in `User.workingMemory` JSON field
 - Schema: `app/lib/workingMemory.ts` (Zod validation)
-- Claude emits `<working_memory>` tags → parsed in `onFinish` → merged into user profile
+- Claude emits `<working_memory>` tags → parsed in `onFinish` → merged into user
+  profile
 - Fields: merchant, location, selling, projections
 - Tags are masked from user display in UI
 
@@ -96,7 +102,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Two user types: anonymous (auto-created) and authenticated (email/password)
 - Admin emails hardcoded in `sessions.server.ts:32`
 - Email verification: 24-hour ULID tokens in `Verification` model
-- Session guards: `verifyAdmin()` for admin routes, `getSignedInUser()` for profile
+- Session guards: `verifyAdmin()` for admin routes, `getSignedInUser()` for
+  profile
 
 **Location Detection:**
 
@@ -117,15 +124,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - Grid-based Google Places API search via `app/lib/scrape/metroAreas.ts`
 - Hexagonal grid with 50km radius for comprehensive coverage
-- Enrichment pipeline: Google Places → Website scraping (Playwright) → AI enrichment (Claude)
+- Enrichment pipeline: Google Places → Website scraping (Playwright) → AI
+  enrichment (Claude)
 - Metro area aliases: "LA" → 4 counties, "NYC" → 5 boroughs, etc.
 - Caching: Prisma Cache for geocoding and search results
 
 **Agent Interoperability:**
 
-- **MCP (Model Context Protocol)**: Exposes `list_shopping_centers` tool at `/api/mcp` endpoint
-- **A2A (Agent-to-Agent)**: JSONRPC + REST endpoints at `/a2a/jsonrpc` and `/a2a/rest`
-- Agent card published at `/.well-known/agent.json` (OpenAPI spec at `/openapi.json`)
+- **MCP (Model Context Protocol)**: Exposes `list_shopping_centers` tool at
+  `/api/mcp` endpoint
+- **A2A (Agent-to-Agent)**: JSONRPC + REST endpoints at `/a2a/jsonrpc` and
+  `/a2a/rest`
+- Agent card published at `/.well-known/agent.json` (OpenAPI spec at
+  `/openapi.json`)
 - No authentication required for agent-to-agent communication
 - Implementation: `app/lib/mcp/mcpServer.ts` and `app/lib/a2a/requestHandler.ts`
 

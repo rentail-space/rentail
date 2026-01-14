@@ -29,10 +29,13 @@ account. You agree to:
 You agree not to:
 
 - Use the Service for any illegal or unauthorized purpose
-- Violate any laws in your jurisdiction (including but not limited to copyright laws)
+- Violate any laws in your jurisdiction (including but not limited to copyright
+  laws)
 - Transmit any worms, viruses, or any code of a destructive nature
-- Attempt to interfere with, compromise the system integrity or security, or decipher any transmissions
-- Use automated systems to access the Service in a manner that sends more request messages than a human can reasonably produce
+- Attempt to interfere with, compromise the system integrity or security, or
+  decipher any transmissions
+- Use automated systems to access the Service in a manner that sends more
+  request messages than a human can reasonably produce
 
 ## 5. Intellectual Property
 

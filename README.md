@@ -1,6 +1,7 @@
 # Rentail Space
 
-AI-powered specialty lease marketplace connecting businesses with short-term retail spaces in shopping centers.
+AI-powered specialty lease marketplace connecting businesses with short-term
+retail spaces in shopping centers.
 
 **Stack:** React Router v7 • PostgreSQL • Claude AI • Tailwind CSS
 

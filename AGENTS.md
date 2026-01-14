@@ -1,24 +1,29 @@
-## Issue Tracking with bd (beads)
+# Issue Tracking with bd (beads)
 
-**IMPORTANT**: This project uses **bd (beads)** for ALL issue tracking. Do NOT use markdown TODOs, task lists, or other tracking methods.
-
----
-
-### Additional Agent Workflow Restrictions
-
-- ❌ **Do NOT use Git worktrees**. Always perform all work in the current directory of the repository. Do not create, switch to, or operate in any alternate git worktree.
-- ❌ **Do NOT call `git push` or request anyone to perform a `git push` operation**. All workflow should remain local unless otherwise instructed by a human.
+**IMPORTANT**: This project uses **bd (beads)** for ALL issue tracking. Do NOT
+use markdown TODOs, task lists, or other tracking methods.
 
 ---
 
-### Why bd?
+## Additional Agent Workflow Restrictions
+
+- ❌ **Do NOT use Git worktrees**. Always perform all work in the current
+  directory of the repository. Do not create, switch to, or operate in any
+  alternate git worktree.
+- ❌ **Do NOT call `git push` or request anyone to perform a `git push`
+  operation**. All workflow should remain local unless otherwise instructed by a
+  human.
+
+---
+
+## Why bd?
 
 - Dependency-aware: Track blockers and relationships between issues
 - Git-friendly: Auto-syncs to JSONL for version control
 - Agent-optimized: JSON output, ready work detection, discovered-from links
 - Prevents duplicate tracking systems and confusion
 
-### Quick Start
+## Quick Start
 
 **Check for ready work:**
 
@@ -31,7 +36,7 @@ bd ready --json
 ```bash
 bd create "Issue title" -t bug|feature|task -p 0-4 --json
 bd create "Issue title" -p 1 --deps discovered-from:bd-123 --json
-bd create "Subtask" --parent <epic-id> --json  # Hierarchical subtask (gets ID like epic-id.1)
+bd create "Subtask" --parent <epic-id> --json  # Hierarchical subtask
 ```
 
 **Claim and update:**
@@ -47,7 +52,7 @@ bd update bd-42 --priority 1 --json
 bd close bd-42 --reason "Completed" --json
 ```
 
-### Issue Types
+## Issue Types
 
 - `bug` - Something broken
 - `feature` - New functionality
@@ -55,7 +60,7 @@ bd close bd-42 --reason "Completed" --json
 - `epic` - Large feature with subtasks
 - `chore` - Maintenance (dependencies, tooling)
 
-### Priorities
+## Priorities
 
 - `0` - Critical (security, data loss, broken builds)
 - `1` - High (major features, important bugs)
@@ -63,7 +68,7 @@ bd close bd-42 --reason "Completed" --json
 - `3` - Low (polish, optimization)
 - `4` - Backlog (future ideas)
 
-### Workflow for AI Agents
+## Workflow for AI Agents
 
 1. **Check ready work**: `bd ready` shows unblocked issues
 2. **Claim your task**: `bd update <id> --status in_progress`
@@ -71,9 +76,10 @@ bd close bd-42 --reason "Completed" --json
 4. **Discover new work?** Create linked issue:
    - `bd create "Found bug" -p 1 --deps discovered-from:<parent-id>`
 5. **Complete**: `bd close <id> --reason "Done"`
-6. **Commit together**: Always commit the `.beads/issues.jsonl` file together with the code changes so issue state stays in sync with code state
+6. **Commit together**: Always commit the `.beads/issues.jsonl` file together
+   with the code changes so issue state stays in sync with code state
 
-### Auto-Sync
+## Auto-Sync
 
 bd automatically syncs with git:
 
@@ -81,12 +87,13 @@ bd automatically syncs with git:
 - Imports from JSONL when newer (e.g., after `git pull`)
 - No manual export/import needed!
 
-### GitHub Copilot Integration
+## GitHub Copilot Integration
 
-If using GitHub Copilot, also create `.github/copilot-instructions.md` for automatic instruction loading.
+If using GitHub Copilot, also create `.github/copilot-instructions.md` for
+automatic instruction loading.
 Run `bd onboard` to get the content, or see step 2 of the onboard instructions.
 
-### MCP Server (Recommended)
+## MCP Server (Recommended)
 
 If using Claude or MCP-compatible clients, install the beads MCP server:
 
@@ -107,7 +114,7 @@ Add to MCP config (e.g., `~/.config/claude/config.json`):
 
 Then use `mcp__beads__*` functions instead of CLI commands.
 
-### Managing AI-Generated Planning Documents
+## Managing AI-Generated Planning Documents
 
 AI assistants often create planning and design documents during development:
 
@@ -115,7 +122,7 @@ AI assistants often create planning and design documents during development:
 - DESIGN.md, CODEBASE_SUMMARY.md, INTEGRATION_PLAN.md
 - TESTING_GUIDE.md, TECHNICAL_DESIGN.md, and similar files
 
-**Best Practice: Use a dedicated directory for these ephemeral files**
+Best Practice: Use a dedicated directory for these ephemeral files
 
 **Recommended approach:**
 
@@ -126,7 +133,7 @@ AI assistants often create planning and design documents during development:
 
 **Example .gitignore entry (optional):**
 
-```
+```.gitignore
 # AI planning documents (ephemeral)
 history/
 ```
@@ -139,12 +146,12 @@ history/
 - ✅ Preserves planning history for archeological research
 - ✅ Reduces noise when browsing the project
 
-### CLI Help
+## CLI Help
 
 Run `bd <command> --help` to see all available flags for any command.
 For example: `bd create --help` shows `--parent`, `--deps`, `--assignee`, etc.
 
-### Important Rules
+## Important Rules
 
 - ✅ Use bd for ALL task tracking
 - ✅ Always use `--json` flag for programmatic use

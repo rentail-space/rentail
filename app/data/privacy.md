@@ -48,9 +48,11 @@ request deletion of your chat history at any time.
 We do not sell your personal information. We may share your information in the
 following circumstances:
 
-- Service Providers: With third-party vendors who perform services on our behalf (e.g., hosting, analytics, AI processing)
+- Service Providers: With third-party vendors who perform services on our behalf
+  (e.g., hosting, analytics, AI processing)
 - Legal Requirements: When required by law or to protect our rights
-- Business Transfers: In connection with a merger, acquisition, or sale of assets
+- Business Transfers: In connection with a merger, acquisition, or sale of
+  assets
 - With Your Consent: When you explicitly authorize us to share your information
 
 ## 6. Data Security
@@ -82,7 +84,8 @@ Depending on your location, you may have the following rights:
 - Opt-out: Unsubscribe from marketing communications
 - Object: Object to certain processing of your data
 
-To exercise these rights, please contact us at privacy@rentail.space
+To exercise these rights, please contact us at
+[privacy@rentail.space](privacy@rentail.space)
 
 ## 9. Data Retention
 
