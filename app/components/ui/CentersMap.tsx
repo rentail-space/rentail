@@ -90,9 +90,14 @@ export default function CentersMap({
         escapeHandlerRef.current = null;
       }
 
-      // Unmount all React roots
-      for (const root of rootsRef.current) root.unmount();
+      // Store old roots and clear ref immediately
+      const oldRoots = rootsRef.current;
       rootsRef.current = [];
+
+      // Unmount all React roots asynchronously to avoid race conditions
+      queueMicrotask(() => {
+        for (const root of oldRoots) root.unmount();
+      });
 
       // Remove all markers
       for (const marker of markersRef.current) marker.remove();
@@ -110,9 +115,14 @@ export default function CentersMap({
   useEffect(() => {
     if (!map.current) return;
 
-    // Unmount existing React roots
-    for (const root of rootsRef.current) root.unmount();
+    // Store old roots and clear ref immediately
+    const oldRoots = rootsRef.current;
     rootsRef.current = [];
+
+    // Unmount old React roots asynchronously to avoid race conditions
+    queueMicrotask(() => {
+      for (const root of oldRoots) root.unmount();
+    });
 
     // Remove existing markers and popups
     for (const marker of markersRef.current) marker.remove();

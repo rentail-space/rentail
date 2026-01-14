@@ -181,7 +181,7 @@ function GroupedChart({
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey={({ date }) => DateTime.fromISO(date).toFormat("MMM d")}
-          tick={({ x, y, payload, ...rest }) => (
+          tick={({ x, y, payload }) => (
             <text
               x={x + 15}
               y={y + 10}
@@ -189,7 +189,6 @@ function GroupedChart({
               transform={`rotate(45 ${x},${y})`}
               fill="#8884d8"
               fontSize={12}
-              {...rest}
             >
               {payload.value}
             </text>
