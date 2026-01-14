@@ -118,7 +118,6 @@
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",
     "@vercel/sdk": "^1.18.7",
-    "checkly": "^6.9.8",
     "diff": "^8.0.2",
     "fast-xml-parser": "^5.3.3",
     "msw": "^2.12.7",
