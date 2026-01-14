@@ -26,7 +26,7 @@ describe("For AI Assistants page", () => {
   });
 
   it("should display About section", async () => {
-    const heading = page.locator("h2", { hasText: "About Rentail.space" });
+    const heading = page.locator("h1", { hasText: "About Rentail.space" });
     await expect(heading).toBeVisible();
   });
 
