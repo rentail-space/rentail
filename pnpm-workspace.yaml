@@ -18,5 +18,3 @@ onlyBuiltDependencies:
 
 minimumReleaseAge: 2880
 minimumReleaseAgeExclude:
-  - "streamdown"
-  - "remend"
