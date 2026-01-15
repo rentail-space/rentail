@@ -180,8 +180,8 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
       react-email:
-        specifier: ^5.2.2
-        version: 5.2.2
+        specifier: ^5.2.3
+        version: 5.2.3
       react-ga4:
         specifier: ^2.1.0
         version: 2.1.0
@@ -928,8 +928,8 @@ packages:
     peerDependencies:
       hono: ^4
 
-  '@hono/node-server@1.19.8':
-    resolution: {integrity: sha512-0/g2lIOPzX8f3vzW1ggQgvG5mjtFBDBHFAzI5SFAi2DzSqS9luJwqg9T6O/gKYLi+inS7eNxBeIFkkghIPvrMA==}
+  '@hono/node-server@1.19.9':
+    resolution: {integrity: sha512-vHL6w3ecZsky+8P5MD+eFfaGTyCeOHUIFYMGpQGbrBTSmNNoxv0if69rEZ5giu36weC5saFuznL411gRX7bJDw==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
@@ -2967,8 +2967,8 @@ packages:
     resolution: {integrity: sha512-NZKeq9AfyQvEeNlN0zSYAaWrmBffJh3IELMZfRpJVWgrpEbtEpnjvzqBPf+mxoI287JohRDoa+/nsfqqiZmF6g==}
     engines: {node: '>= 6.0.0'}
 
-  babel-dead-code-elimination@1.0.11:
-    resolution: {integrity: sha512-mwq3W3e/pKSI6TG8lXMiDWvEi1VXYlSBlJlB3l+I0bAb5u1RNUl88udos85eOPNK3m5EXK9uO7d2g08pesTySQ==}
+  babel-dead-code-elimination@1.0.12:
+    resolution: {integrity: sha512-GERT7L2TiYcYDtYk1IpD+ASAYXjKbLTDPhBtYj7X1NuRMDTMtAx9kyBenub1Ev41lo91OHCKdmP+egTDmfQ7Ig==}
 
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
@@ -4993,8 +4993,8 @@ packages:
     peerDependencies:
       react: ^19.2.3
 
-  react-email@5.2.2:
-    resolution: {integrity: sha512-tRamuPw48cH1hYxPJXvnqqA+z49JkUjDkHVJ5lrQ/8h2Oo31H2M7HW11qfqJTMaqh4TmmgaVyAqEey+hO0vT4Q==}
+  react-email@5.2.3:
+    resolution: {integrity: sha512-EJZLLsdaFD7DYHQKMotpm5tiUp5Fp/FFB6x8VlZA5z20itiJsQ5zBaTTPBDE0KhJXvAUhBbKjC1BheCEchVoOg==}
     engines: {node: '>=20.0.0'}
     hasBin: true
 
@@ -6065,7 +6065,7 @@ snapshots:
   '@ai-sdk/devtools@0.0.4':
     dependencies:
       '@ai-sdk/provider': 3.0.2
-      '@hono/node-server': 1.19.8(hono@4.11.4)
+      '@hono/node-server': 1.19.9(hono@4.11.4)
       hono: 4.11.4
 
   '@ai-sdk/gateway@3.0.13(zod@4.3.5)':
@@ -6565,7 +6565,7 @@ snapshots:
     dependencies:
       hono: 4.10.6
 
-  '@hono/node-server@1.19.8(hono@4.11.4)':
+  '@hono/node-server@1.19.9(hono@4.11.4)':
     dependencies:
       hono: 4.11.4
 
@@ -6903,7 +6903,7 @@ snapshots:
 
   '@modelcontextprotocol/sdk@1.25.2(hono@4.11.4)(zod@4.3.5)':
     dependencies:
-      '@hono/node-server': 1.19.8(hono@4.11.4)
+      '@hono/node-server': 1.19.9(hono@4.11.4)
       ajv: 8.17.1
       ajv-formats: 3.0.1(ajv@8.17.1)
       content-type: 1.0.5
@@ -7610,7 +7610,7 @@ snapshots:
       '@react-router/node': 7.12.0(react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
       '@remix-run/node-fetch-server': 0.9.0
       arg: 5.0.2
-      babel-dead-code-elimination: 1.0.11
+      babel-dead-code-elimination: 1.0.12
       chokidar: 4.0.3
       dedent: 1.7.1
       es-module-lexer: 1.7.0
@@ -8695,7 +8695,7 @@ snapshots:
 
   aws-ssl-profiles@1.1.2: {}
 
-  babel-dead-code-elimination@1.0.11:
+  babel-dead-code-elimination@1.0.12:
     dependencies:
       '@babel/core': 7.28.6
       '@babel/parser': 7.28.6
@@ -11078,7 +11078,7 @@ snapshots:
       react: 19.2.3
       scheduler: 0.27.0
 
-  react-email@5.2.2:
+  react-email@5.2.3:
     dependencies:
       '@babel/parser': 7.28.6
       '@babel/traverse': 7.28.6

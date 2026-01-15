@@ -76,7 +76,7 @@
     "radashi": "^12.7.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-email": "^5.2.2",
+    "react-email": "^5.2.3",
     "react-ga4": "^2.1.0",
     "react-router": "^7.12.0",
     "recharts": "^3.6.0",
