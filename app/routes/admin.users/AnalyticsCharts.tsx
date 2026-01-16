@@ -186,14 +186,12 @@ function SpecificChart({
       >
         <CartesianGrid vertical={false} />
         <XAxis
-          angle={45}
           dataKey={({ date }) => DateTime.fromISO(date).toFormat("yyyy-MM-dd")}
           tick={({ x, y, payload }) => (
             <text x={x + 20} y={y + 10} textAnchor="end" fontSize={12}>
               {DateTime.fromISO(payload.value).toFormat("MMM d")}
             </text>
           )}
-          tickCount={5}
         />
         <YAxis
           allowDecimals={false}
