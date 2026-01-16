@@ -75,9 +75,9 @@ export default function AnalyticsCharts({
 }) {
   // Create a range of DateTime objects from start to end (inclusive), by day
   const allDates: DateTime[] = [];
-  const endDate = DateTime.fromJSDate(range[1]).startOf("day");
+  const endDate = DateTime.fromJSDate(range[1]);
   for (
-    let current = DateTime.fromJSDate(range[0]).startOf("day");
+    let current = DateTime.fromJSDate(range[0]);
     current <= endDate;
     current = current.plus({ days: 1 })
   )
@@ -86,9 +86,12 @@ export default function AnalyticsCharts({
   const groupingBy = allDates.length >= 21 ? "week" : "day";
   const dateRanges = Object.entries(
     groupBy(allDates, (date) => date.startOf(groupingBy).toFormat("yyyyMMdd")),
-  ).map(([, dates]) => [dates[0], dates[dates.length - 1]]);
+  ).map(([, dates]) => [
+    dates[0].startOf("day"),
+    dates[dates.length - 1].endOf("day"),
+  ]);
 
-  const chartData = dateRanges.map(([startDate, endDate]) => {
+  const data = dateRanges.map(([startDate, endDate]) => {
     const entries = analytics.filter(
       (entry) =>
         DateTime.fromISO(entry.date) >= startDate &&
@@ -96,8 +99,8 @@ export default function AnalyticsCharts({
     );
     const chats = users.filter(
       (user) =>
-        user.createdAt >= startDate.toJSDate() &&
-        user.createdAt <= endDate.toJSDate(),
+        user.createdAt >= startDate.startOf("day").toJSDate() &&
+        user.createdAt <= endDate.endOf("day").toJSDate(),
     );
     return {
       date: startDate.toFormat("yyyyMMdd"),
@@ -127,12 +130,13 @@ export default function AnalyticsCharts({
 
       <CardContent className="grid gap-4 md:grid-cols-2">
         {Object.entries(chartConfig).map(([key, value]) => (
-          <GroupedChart
+          <SpecificChart
             key={key}
-            chartData={chartData}
+            data={data}
             dataKey={key}
             fill={value.color}
             name={value.label}
+            groupingBy={groupingBy}
             yAxisFormatter={
               key === "sessionDuration"
                 ? (value) =>
@@ -157,35 +161,39 @@ export default function AnalyticsCharts({
   );
 }
 
-function GroupedChart({
-  chartData,
+function SpecificChart({
+  data,
   dataKey,
   fill,
   name,
+  groupingBy,
   yAxisFormatter,
 }: {
-  chartData: Array<{ date: string }>;
-  dataKey: DataKey<(typeof chartData)[number]>;
+  data: Array<{ date: string }>;
+  dataKey: DataKey<(typeof data)[number]>;
   fill: string;
   name: string;
+  groupingBy: "day" | "week";
   yAxisFormatter?: (value: number) => string;
 }) {
   return (
     <ChartContainer config={chartConfig} className="h-40 w-full">
       <AreaChart
         accessibilityLayer
-        data={chartData}
+        data={data}
         margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
         responsive
       >
         <CartesianGrid vertical={false} />
         <XAxis
-          dataKey={({ date }) => DateTime.fromISO(date).toFormat("MMM d")}
+          angle={45}
+          dataKey={({ date }) => DateTime.fromISO(date).toFormat("yyyy-MM-dd")}
           tick={({ x, y, payload }) => (
             <text x={x + 20} y={y + 10} textAnchor="end" fontSize={12}>
-              {payload.value}
+              {DateTime.fromISO(payload.value).toFormat("MMM d")}
             </text>
           )}
+          tickCount={5}
         />
         <YAxis
           allowDecimals={false}
@@ -208,6 +216,16 @@ function GroupedChart({
           cursor
           content={
             <ChartTooltipContent
+              labelFormatter={(value) => {
+                const from = DateTime.fromISO(value).startOf("day");
+                const to = from
+                  .plus({ [groupingBy]: 1 })
+                  .minus({ days: 1 })
+                  .startOf("day");
+                return from.equals(to)
+                  ? from.toFormat("MMM d")
+                  : `${from.toFormat("MMM d")} — ${to.toFormat("MMM d")}`;
+              }}
               formatter={(value, name) => (
                 <div className="grid w-full grid-cols-2 gap-2">
                   <span>{name}</span>

@@ -67,8 +67,6 @@ export default async function seedCenter(filename: string) {
       center.spaces.map((space) => [space.number, space]),
     ),
   );
-  if (spaces.length > 0) console.log("****\n\n\n", spaces, "\n\n\n****");
-
   await prisma.property.upsert({
     create: {
       ...center,
