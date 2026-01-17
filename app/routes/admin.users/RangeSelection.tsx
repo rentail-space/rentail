@@ -7,6 +7,13 @@ import { Button } from "~/components/ui/Button";
 import { Input } from "~/components/ui/Input";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import type { loader } from "./route";
+import { da, ta } from "zod/v4/locales";
+
+/**
+ * These are the time periods user can tab through: 10 days, 30 days (5 ticks),
+ * and 90 days (15 ticks).
+ */
+const periods = [10, 5 * 6, 15 * 6];
 
 /**
  * A component that allows the user to select a range of dates.  It will call
@@ -29,85 +36,98 @@ export default function RangeSelection({
     recentUsers,
     analytics,
   }: {
-    range: [Date, Date];
+    range: [DateTime, DateTime];
     recentUsers: User[];
     analytics: Awaited<ReturnType<typeof loader>>["analytics"];
     selector: React.ReactNode;
   }) => React.ReactNode;
   users: User[];
 }) {
-  const today = DateTime.now().minus({ days: 1 });
+  invariant(children instanceof Function, "children must be a function");
+
   const [from, setFrom] = useQueryState("from", {
-    defaultValue: today.minus({ days: 30 }).toFormat("yyyy-MM-dd"),
+    defaultValue: DateTime.utc()
+      .minus({ days: periods[1] })
+      .toFormat("yyyy-MM-dd"),
     history: "replace",
   });
   const [until, setUntil] = useQueryState("until", {
-    defaultValue: today.toFormat("yyyy-MM-dd"),
+    defaultValue: DateTime.utc().minus({ days: 1 }).toFormat("yyyy-MM-dd"),
     history: "replace",
   });
 
-  const start = DateTime.fromFormat(from, "yyyy-MM-dd")
-    .startOf("day")
-    .toJSDate();
-  const end = DateTime.fromFormat(until, "yyyy-MM-dd").endOf("day").toJSDate();
-  const recentUsers = users.filter(
-    ({ createdAt, isAdmin }) =>
-      createdAt >= start && createdAt <= end && !isAdmin,
-  );
-  invariant(children instanceof Function, "children must be a function");
+  const startOf = DateTime.fromISO(from, { zone: "utc" }).startOf("day");
+  const endOf = DateTime.fromISO(until, { zone: "utc" }).endOf("day");
 
   return children({
-    range: [start, end],
-    recentUsers,
     analytics: analytics.filter(({ date }) => {
-      const day = DateTime.fromFormat(date, "yyyyMMdd")
-        .startOf("day")
-        .toJSDate();
-      return day >= start && day <= end;
+      const day = DateTime.fromFormat(date, "yyyyMMdd", {
+        zone: "utc",
+      }).startOf("day");
+      return day >= startOf && day <= endOf;
     }),
+    range: [startOf, endOf],
+    recentUsers: users.filter(
+      ({ createdAt, isAdmin }) =>
+        createdAt >= startOf.toJSDate() &&
+        createdAt <= endOf.toJSDate() &&
+        !isAdmin,
+    ),
     selector: (
       <RangeSelector
         from={from}
         setFrom={setFrom}
-        until={until}
         setUntil={setUntil}
-        today={today}
+        until={until}
       />
     ),
   });
 }
 
+/**
+ * Selects the range of dates to show in the chart.
+ *
+ * @param from The start date
+ * @param setFrom Update the start date
+ * @param setUntil Update the end date
+ * @param until The end date
+ */
 function RangeSelector({
   from,
   setFrom,
-  until,
   setUntil,
-  today,
+  until,
 }: {
   from: string;
   setFrom: (from: string) => void;
-  until: string;
   setUntil: (until: string) => void;
-  today: DateTime;
+  until: string;
 }) {
+  const yesterday = DateTime.utc().minus({ days: 1 });
+  // Difference in days between start date and end date, so we can highlight the
+  // selected date range.
   const daysInPeriod =
-    until === today.toFormat("yyyy-MM-dd") &&
+    until === yesterday.toFormat("yyyy-MM-dd") &&
     Math.floor(
-      today.diff(DateTime.fromFormat(from, "yyyy-MM-dd"), "days").days,
+      DateTime.utc().diff(DateTime.fromISO(from, { zone: "utc" }), "days").days,
     );
 
   return (
     <div className="flex flex-row items-center justify-between">
       <Tabs value={daysInPeriod.toString()}>
         <TabsList>
-          {[10, 30, 90].map((daysInPeriod) => (
+          {periods.map((daysInPeriod) => (
             <TabsTrigger
               key={daysInPeriod}
               onClick={() => {
                 setFrom(
-                  today.minus({ days: daysInPeriod }).toFormat("yyyy-MM-dd"),
+                  DateTime.utc()
+                    .minus({ days: daysInPeriod })
+                    .toFormat("yyyy-MM-dd"),
                 );
-                setUntil(today.toFormat("yyyy-MM-dd"));
+                setUntil(
+                  DateTime.utc().minus({ days: 1 }).toFormat("yyyy-MM-dd"),
+                );
               }}
               value={daysInPeriod.toString()}
               title={`Select the last ${daysInPeriod} days`}

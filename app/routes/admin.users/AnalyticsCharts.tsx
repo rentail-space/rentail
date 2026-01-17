@@ -1,4 +1,4 @@
-import { groupBy, meanBy, sumBy } from "es-toolkit";
+import { groupBy, meanBy, range, sumBy } from "es-toolkit";
 import {
   BotIcon,
   BubblesIcon,
@@ -66,57 +66,42 @@ const chartConfig = {
  */
 export default function AnalyticsCharts({
   analytics,
-  range,
+  fromUntil,
   users,
 }: {
   analytics: Awaited<ReturnType<typeof loader>>["analytics"];
-  range: [Date, Date];
+  fromUntil: [DateTime, DateTime];
   users: User[];
 }) {
-  // Create a range of DateTime objects from start to end (inclusive), by day
-  const allDates: DateTime[] = [];
-  const endDate = DateTime.fromJSDate(range[1]);
-  for (
-    let current = DateTime.fromJSDate(range[0]);
-    current <= endDate;
-    current = current.plus({ days: 1 })
-  )
-    allDates.push(current);
-
-  const groupingBy = allDates.length >= 21 ? "week" : "day";
-  const dateRanges = Object.entries(
-    groupBy(allDates, (date) => date.startOf(groupingBy).toFormat("yyyyMMdd")),
-  ).map(([, dates]) => [
-    dates[0].startOf("day"),
-    dates[dates.length - 1].endOf("day"),
-  ]);
-
-  const data = dateRanges.map(([startDate, endDate]) => {
+  const range = rangeOfDates(...fromUntil);
+  const groupOfDays = range.length >= 21 ? 6 : 1;
+  const data = Object.entries(
+    groupBy(range, (date) => Math.floor(range.indexOf(date) / groupOfDays)),
+  ).map(([, dates]) => {
+    const startAt = dates[0].setZone("UTC").startOf("day");
+    const endAt = dates[dates.length - 1].setZone("UTC").endOf("day");
     const entries = analytics.filter(
       (entry) =>
-        DateTime.fromISO(entry.date) >= startDate &&
-        DateTime.fromISO(entry.date) <= endDate,
-    );
-    const chats = users.filter(
-      (user) =>
-        user.createdAt >= startDate.startOf("day").toJSDate() &&
-        user.createdAt <= endDate.endOf("day").toJSDate(),
+        DateTime.fromISO(entry.date, { zone: "UTC" }) >= startAt &&
+        DateTime.fromISO(entry.date, { zone: "UTC" }) <= endAt,
     );
     return {
-      date: startDate.toFormat("yyyyMMdd"),
-      visitors: sumBy(entries, (entry) => entry.visitors) ?? 0,
-      fromLLM:
-        sumBy(
-          entries.filter(
-            (entry) =>
-              entry.sessionSource === "chatgpt.com" ||
-              entry.sessionSource === "perplexity.ai",
-          ),
-          (entry) => entry.visitors,
-        ) ?? 0,
-      chats: chats.length,
-      sessionDuration:
-        meanBy(entries, (entry) => entry.averageSessionDuration) ?? 0,
+      chats: users.filter(
+        (user) =>
+          user.createdAt >= startAt.toJSDate() &&
+          user.createdAt <= endAt.toJSDate(),
+      ).length,
+      date: startAt,
+      fromLLM: sumBy(
+        entries.filter(
+          (entry) =>
+            entry.sessionSource === "chatgpt.com" ||
+            entry.sessionSource === "perplexity.ai",
+        ),
+        (entry) => entry.visitors,
+      ),
+      sessionDuration: meanBy(entries, (entry) => entry.averageSessionDuration),
+      visitors: sumBy(entries, (entry) => entry.visitors),
     };
   });
 
@@ -131,12 +116,12 @@ export default function AnalyticsCharts({
       <CardContent className="grid gap-4 md:grid-cols-2">
         {Object.entries(chartConfig).map(([key, value]) => (
           <SpecificChart
-            key={key}
             data={data}
             dataKey={key}
             fill={value.color}
+            groupDays={groupOfDays}
+            key={key}
             name={value.label}
-            groupingBy={groupingBy}
             yAxisFormatter={
               key === "sessionDuration"
                 ? (value) =>
@@ -152,10 +137,7 @@ export default function AnalyticsCharts({
       </CardContent>
 
       <CardFooter className="mx-auto flex items-center gap-2 text-muted-foreground leading-none">
-        {dateRange(
-          allDates[0].toJSDate(),
-          allDates[allDates.length - 1].toJSDate(),
-        )}
+        {dateRange(range[0].toJSDate(), range[range.length - 1].toJSDate())}
       </CardFooter>
     </Card>
   );
@@ -165,15 +147,15 @@ function SpecificChart({
   data,
   dataKey,
   fill,
+  groupDays,
   name,
-  groupingBy,
   yAxisFormatter,
 }: {
-  data: Array<{ date: string }>;
+  groupDays: number;
+  data: Array<{ date: DateTime }>;
   dataKey: DataKey<(typeof data)[number]>;
   fill: string;
   name: string;
-  groupingBy: "day" | "week";
   yAxisFormatter?: (value: number) => string;
 }) {
   return (
@@ -186,7 +168,7 @@ function SpecificChart({
       >
         <CartesianGrid vertical={false} />
         <XAxis
-          dataKey={({ date }) => DateTime.fromISO(date).toFormat("yyyy-MM-dd")}
+          dataKey={({ date }) => date.toFormat("yyyy-MM-dd")}
           tick={({ x, y, payload }) => (
             <text x={x + 20} y={y + 10} textAnchor="end" fontSize={12}>
               {DateTime.fromISO(payload.value).toFormat("MMM d")}
@@ -217,7 +199,7 @@ function SpecificChart({
               labelFormatter={(value) => {
                 const from = DateTime.fromISO(value).startOf("day");
                 const to = from
-                  .plus({ [groupingBy]: 1 })
+                  .plus({ days: groupDays })
                   .minus({ days: 1 })
                   .startOf("day");
                 return from.equals(to)
@@ -238,4 +220,16 @@ function SpecificChart({
       </AreaChart>
     </ChartContainer>
   );
+}
+
+function rangeOfDates(from: DateTime, until: DateTime): DateTime[] {
+  const allDates: DateTime[] = [];
+  for (
+    let current = from;
+    current <= until;
+    current = current.plus({ days: 1 })
+  )
+    allDates.push(current);
+
+  return allDates;
 }

@@ -83,7 +83,7 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
           <>
             <AnalyticsCharts
               analytics={analytics}
-              range={range}
+              fromUntil={range}
               users={recentUsers}
             />
             {selector}
