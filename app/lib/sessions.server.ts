@@ -200,12 +200,22 @@ export async function recentMessages(chatId: string): Promise<UIMessage[]> {
     take: 50,
     where: { chatId },
   });
-  // Ensure correct transformation to ModelMessage[]
-  return recent.reverse().map((message) => ({
-    id: message.id,
-    parts: message.content as TextUIPart[],
-    role: message.role,
-  }));
+  return (
+    recent
+      // NOTE: skip empty messages, API doesn't support empty messages
+      .filter((message) =>
+        (message.content as TextUIPart[]).some(
+          (part) => part.text.trim() !== "",
+        ),
+      )
+      .reverse()
+      // NOTE: ensure correct transformation to ModelMessage[]
+      .map((message) => ({
+        id: message.id,
+        parts: message.content as TextUIPart[],
+        role: message.role,
+      }))
+  );
 }
 
 /**

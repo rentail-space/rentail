@@ -100,6 +100,7 @@ export default function ChatPage() {
           isSubmitting={status === "submitted"}
           query={query ?? ""}
           sendMessage={async (message: string) => {
+            if (message.trim() === "") return;
             await sendMessage({
               parts: [{ text: message, type: "text" }],
               role: "user",
