@@ -267,7 +267,6 @@ Imperative mood, atomic commits, reference files when helpful.
 
 ## Important Reminders
 
-- See [AGENTS.md](./AGENTS.md) for bd (beads) issue tracking workflow
 - Run `pnpm check` before committing (lint + typecheck)
 - All pages need `<main>` with `aria-label` for accessibility
 - Center seed files MUST have valid `website` property
