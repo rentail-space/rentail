@@ -1,4 +1,5 @@
 import { Feed } from "feed";
+import { DateTime } from "luxon";
 import { marked } from "marked";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
 
@@ -35,14 +36,17 @@ export async function loader() {
       const content =
         `<img src="${imageURL}" alt="${alt}" />` +
         (await marked.parse(body, { gfm: true }));
+      const publishedDate = DateTime.fromISO(published, {
+        zone: "utc",
+      }).toJSDate();
       feed.addItem({
         content,
-        date: published,
+        date: publishedDate,
         description: summary,
         id: `rentail.space:${slug}`,
         image: imageURL,
         link: `https://rentail.space/blog/${slug}`,
-        published: published,
+        published: publishedDate,
         title: title,
       });
     }

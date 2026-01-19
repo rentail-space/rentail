@@ -65,11 +65,8 @@ function BlogPostCard({ post }: { post: BlogPost }) {
       />
       <div className="flex h-60 flex-col justify-between gap-3 p-6">
         <div>
-          <time
-            dateTime={post.published.toISOString()}
-            className="text-gray-500 text-sm"
-          >
-            {DateTime.fromJSDate(post.published, {
+          <time dateTime={post.published} className="text-gray-500 text-sm">
+            {DateTime.fromISO(post.published, {
               zone: "utc",
             }).toLocaleString(DateTime.DATE_MED)}
           </time>

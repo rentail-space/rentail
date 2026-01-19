@@ -29,7 +29,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
         name="og:image"
         content={`https://rentail.space/blog/${slug}.jpg`}
       />
-      <meta name="og:published_time" content={published.toISOString()} />
+      <meta name="og:published_time" content={published} />
       <meta name="og:title" content={title} />
       <meta name="og:type" content="article" />
       <meta name="og:url" content={url} />
@@ -74,7 +74,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
               Rentail.space
             </ActiveLink>{" "}
             on{" "}
-            {DateTime.fromJSDate(published, { zone: "utc" }).toLocaleString(
+            {DateTime.fromISO(published, { zone: "utc" }).toLocaleString(
               DateTime.DATE_MED,
             )}
           </span>
@@ -90,10 +90,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
               name: "Rentail.space",
               url: "https://rentail.space",
             },
-            datePublished: DateTime.fromJSDate(published, {
-              zone: "utc",
-            }).toISO(),
-            headline: summary,
+            datePublished: published,
             inLanguage: "en-US",
             name: title,
             primaryImageOfPage: image

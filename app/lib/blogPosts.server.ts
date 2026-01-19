@@ -13,7 +13,7 @@ export type BlogPost = {
   alt: string;
   body: string;
   image: string;
-  published: Date;
+  published: string; // YYYY-MM-DD
   slug: string;
   summary: string;
   title: string;
@@ -27,11 +27,11 @@ export type BlogPost = {
  */
 export async function recentBlogPosts(): Promise<BlogPost[]> {
   const filenames = readdirSync(dirname);
-  const now = DateTime.now();
+  const today = DateTime.utc().toFormat("yyyy-MM-dd");
   return filenames
     .filter((filename) => filename.endsWith(".md"))
     .map((filename) => {
-      const published = getPublishedData(filename).toJSDate();
+      const published = getPublishedData(filename);
       const content = readFileSync(path.resolve(dirname, filename), "utf8");
       const { attributes, body } = parseFrontMatter<{
         alt: string;
@@ -47,11 +47,8 @@ export async function recentBlogPosts(): Promise<BlogPost[]> {
         slug,
       };
     })
-    .filter(
-      ({ published }) =>
-        DateTime.fromJSDate(published).diff(now, "days").days < -1,
-    )
-    .sort((a, b) => b.published.getTime() - a.published.getTime());
+    .filter(({ published }) => published <= today)
+    .sort((a, b) => b.published.localeCompare(a.published));
 }
 
 /**
@@ -68,7 +65,7 @@ export async function loadBlogPost(slug?: string): Promise<BlogPost> {
   invariant(slug, "Slug is required");
   const filename = join(dirname, `${slug}.md`);
   const post = await readFile(filename, "utf8");
-  const published = getPublishedData(filename).toJSDate();
+  const published = getPublishedData(filename);
   const { attributes, body } = parseFrontMatter<{
     title: string;
     alt: string;
@@ -89,12 +86,8 @@ export async function loadBlogPost(slug?: string): Promise<BlogPost> {
  * published date because the published date is stored in the filename.
  *
  * @param filename The filename of the blog post.
- * @returns The published date.
+ * @returns The published date (YYYY-MM-DD).
  */
-function getPublishedData(filename: string): DateTime {
-  const published = DateTime.fromISO(
-    basename(filename).match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "",
-    { zone: "utc" },
-  );
-  return published;
+function getPublishedData(filename: string): string {
+  return basename(filename).match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "";
 }
