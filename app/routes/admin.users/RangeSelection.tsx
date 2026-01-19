@@ -7,7 +7,6 @@ import { Button } from "~/components/ui/Button";
 import { Input } from "~/components/ui/Input";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import type { loader } from "./route";
-import { da, ta } from "zod/v4/locales";
 
 /**
  * These are the time periods user can tab through: 10 days, 30 days (5 ticks),

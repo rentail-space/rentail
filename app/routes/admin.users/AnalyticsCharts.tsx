@@ -1,4 +1,4 @@
-import { groupBy, meanBy, range, sumBy } from "es-toolkit";
+import { groupBy, meanBy, sumBy } from "es-toolkit";
 import {
   BotIcon,
   BubblesIcon,

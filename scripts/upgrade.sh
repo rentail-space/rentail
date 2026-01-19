@@ -23,7 +23,6 @@ pnpm pnpm audit --prod || echo "Security audit failed"
 
 echo -e "\033[32m  Commiting changes …\033[0m"
 git diff --unified=0 --color --word-diff HEAD~1 package.json
-git add .beads/.local_version
 git commit -m "Upgrade dependencies" || echo
 
 echo -e "\033[32m  Cleaning up …\033[0m"

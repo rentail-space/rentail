@@ -29,15 +29,4 @@ server.log
 # Used by scripts/clone.sh to clone the production database to the local development database
 prisma/backup.sql
 
-# @see https://github.com/steveyegge/beads
-.beads/beads.db
-.beads/beads.db-*
-.beads/bd.sock
-.beads/bd.pipe
-.beads/.exclusive-lock
-.beads/.local_version
-.git/beads-worktrees/
-
-# Git worktrees for isolated development
-.worktrees/ .worktrees/
 .devtools
