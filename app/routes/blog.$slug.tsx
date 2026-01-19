@@ -5,6 +5,7 @@ import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import LoadingImage from "~/components/ui/LoadingImage";
 import { type BlogPost, loadBlogPost } from "~/lib/blogPosts.server";
+import externalLink from "~/lib/externalLink";
 import type { Route } from "./+types/blog.$slug";
 
 export async function loader({ params }: Route.LoaderArgs): Promise<BlogPost> {
@@ -59,6 +60,17 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
         </p>
         <Streamdown
           className="prose prose-lg mx-auto"
+          components={{
+            a: ({ children, href }) => (
+              <ActiveLink
+                rel="noopener"
+                target="_blank"
+                to={externalLink(href ?? "")}
+              >
+                {children}
+              </ActiveLink>
+            ),
+          }}
           controls={{ code: false, mermaid: false, table: false }}
           mode="static"
           remarkPlugins={[remarkGfm]}

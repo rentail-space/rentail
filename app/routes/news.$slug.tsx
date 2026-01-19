@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
+import externalLink from "~/lib/externalLink";
 import { type NewsItem, loadNewsItem } from "~/lib/newsItems.server";
 import type { Route } from "./+types/news.$slug";
 
@@ -46,6 +47,17 @@ export default function NewsPost({ loaderData }: { loaderData: NewsItem }) {
 
         <Streamdown
           className="prose prose-lg mx-auto"
+          components={{
+            a: ({ children, href }) => (
+              <ActiveLink
+                rel="noopener"
+                target="_blank"
+                to={externalLink(href ?? "")}
+              >
+                {children}
+              </ActiveLink>
+            ),
+          }}
           controls={{ code: false, mermaid: false, table: false }}
           mode="static"
           remarkPlugins={[remarkGfm]}
@@ -73,7 +85,7 @@ export default function NewsPost({ loaderData }: { loaderData: NewsItem }) {
             <dt>Name</dt>
             <dd>Assaf Arkin</dd>
             <dt>Title</dt>
-            <dd>Founder & CEO</dd>
+            <dd>CEO</dd>
             <dt>Email</dt>
             <dd>
               <Link to="mailto:media@rentail.space">media@rentail.space</Link>
