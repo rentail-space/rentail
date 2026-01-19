@@ -4,10 +4,10 @@ import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
-import { loadNewsItem } from "~/lib/newsItems.server";
+import { type NewsItem, loadNewsItem } from "~/lib/newsItems.server";
 import type { Route } from "./+types/news.$slug";
 
-export async function loader({ params }: Route.LoaderArgs): Promise<NewsPost> {
+export async function loader({ params }: Route.LoaderArgs): Promise<NewsItem> {
   try {
     const { slug } = params;
     invariant(slug, "Slug is required");
@@ -17,15 +17,7 @@ export async function loader({ params }: Route.LoaderArgs): Promise<NewsPost> {
   }
 }
 
-type NewsPost = {
-  title: string;
-  summary: string;
-  body: string;
-  published: Date;
-  slug: string;
-};
-
-export default function NewsPost({ loaderData }: { loaderData: NewsPost }) {
+export default function NewsPost({ loaderData }: { loaderData: NewsItem }) {
   const { body, slug, published, summary, title } = loaderData;
   const url = `https://rentail.space/news/${slug}`;
 
@@ -34,7 +26,7 @@ export default function NewsPost({ loaderData }: { loaderData: NewsPost }) {
       <title>{`${title} | Rentail.space`}</title>
       <meta name="author" content="Rentail.space" />
       <meta name="section" content="News" />
-      <meta name="og:published_time" content={published.toISOString()} />
+      <meta name="og:published_time" content={published} />
       <meta name="og:title" content={title} />
       <meta name="og:type" content="article" />
       <meta name="og:url" content={url} />
@@ -103,10 +95,8 @@ export default function NewsPost({ loaderData }: { loaderData: NewsPost }) {
               name: "Rentail.space",
               url: "https://rentail.space",
             },
-            dateline: `LOS ANGELES, CA — ${DateTime.fromJSDate(published, { zone: "utc" }).toLocaleString(DateTime.DATE_MED)}`,
-            datePublished: DateTime.fromJSDate(published, {
-              zone: "utc",
-            }).toISO(),
+            dateline: `LOS ANGELES, CA — ${DateTime.fromISO(published, { zone: "utc" }).toLocaleString(DateTime.DATE_MED)}`,
+            datePublished: published,
             headline: summary,
             inLanguage: "en-US",
             name: title,
