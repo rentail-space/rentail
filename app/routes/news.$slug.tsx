@@ -1,9 +1,9 @@
 import { invariant } from "es-toolkit";
-import { NewspaperIcon } from "lucide-react";
 import { DateTime } from "luxon";
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
+import { ActiveLink } from "~/components/ui/ActiveLink";
 import { loadNewsItem } from "~/lib/newsItems.server";
 import type { Route } from "./+types/news.$slug";
 
@@ -67,16 +67,30 @@ export default function NewsPost({ loaderData }: { loaderData: NewsPost }) {
             with short-term retail spaces in shopping centers. By combining
             intelligent matching algorithms with comprehensive property data,
             the platform streamlines specialty lease discovery and placement.
-            For more information, visit https://rentail.space
+            For more information, visit
+            <ActiveLink to="https://rentail.space">
+              https://rentail.space
+            </ActiveLink>
           </p>
 
-          <p className="flex items-center gap-2">
-            <NewspaperIcon className="h-4 w-4 text-blue-500" />
-            <span>
-              Media Contact:{" "}
+          <h3>Media Contact</h3>
+          <dl
+            className="grid gap-2 [&_dd]:my-0 [&_dd]:text-black [&_dt]:my-0 [&_dt]:font-bold"
+            style={{ gridTemplateColumns: "2rem 1fr" }}
+          >
+            <dt>Name</dt>
+            <dd>Assaf Arkin</dd>
+            <dt>Title</dt>
+            <dd>Founder & CEO</dd>
+            <dt>Email</dt>
+            <dd>
               <Link to="mailto:media@rentail.space">media@rentail.space</Link>
-            </span>
-          </p>
+            </dd>
+            <dt>Phone</dt>
+            <dd>
+              <a href="tel:4156831143">415-683-1143</a>
+            </dd>
+          </dl>
         </section>
 
         <script type="application/ld+json">
