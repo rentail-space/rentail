@@ -15,5 +15,4 @@ pnpm dev
 ## Important
 
 - See [CLAUDE.md](./CLAUDE.md) for full development guide
-- See [AGENTS.md](./AGENTS.md) for agent workflow and issue tracking rules
 - Run `pnpm check` before committing (lint + typecheck)
