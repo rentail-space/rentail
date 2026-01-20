@@ -13,7 +13,7 @@ import { type Page, type Response, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import { goto } from "~/test/helpers/launchBrowser";
 
-describe.skip("News Post Rendering", () => {
+describe("News Post Rendering", () => {
   let page: Page;
 
   beforeAll(async () => {
