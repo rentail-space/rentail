@@ -27,11 +27,11 @@ export type BlogPost = {
  */
 export async function recentBlogPosts(): Promise<BlogPost[]> {
   const filenames = readdirSync(dirname);
-  const today = DateTime.utc().toFormat("yyyy-MM-dd");
+  const morning = DateTime.local({ zone: "America/Los_Angeles" }).toISO();
   return filenames
     .filter((filename) => filename.endsWith(".md"))
     .map((filename) => {
-      const published = getPublishedData(filename);
+      const published = getPublishedDataTime(filename);
       const content = readFileSync(path.resolve(dirname, filename), "utf8");
       const { attributes, body } = parseFrontMatter<{
         alt: string;
@@ -47,7 +47,7 @@ export async function recentBlogPosts(): Promise<BlogPost[]> {
         slug,
       };
     })
-    .filter(({ published }) => published <= today)
+    .filter(({ published }) => published <= morning)
     .sort((a, b) => b.published.localeCompare(a.published));
 }
 
@@ -55,7 +55,6 @@ export async function recentBlogPosts(): Promise<BlogPost[]> {
  * Loads a blog post by slug. Throws an error if:
  * - the blog post is not found
  * - the slug is not provided
- * - the published date is in the future
  * - the slug is not a valid slug
  *
  * @param slug The slug of the blog post.
@@ -65,20 +64,15 @@ export async function loadBlogPost(slug?: string): Promise<BlogPost> {
   invariant(slug, "Slug is required");
   const filename = join(dirname, `${slug}.md`);
   const post = await readFile(filename, "utf8");
-  const published = getPublishedData(filename);
+  const published = getPublishedDataTime(filename);
   const { attributes, body } = parseFrontMatter<{
     title: string;
     alt: string;
     image: string;
     summary: string;
   }>(post);
-  return {
-    ...attributes,
-    body,
-    published,
-    slug,
-    summary: attributes.summary || truncateWords(removeMd(body), 20),
-  };
+  const summary = attributes.summary || truncateWords(removeMd(body), 20);
+  return { ...attributes, body, published, slug, summary };
 }
 
 /**
@@ -86,8 +80,12 @@ export async function loadBlogPost(slug?: string): Promise<BlogPost> {
  * published date because the published date is stored in the filename.
  *
  * @param filename The filename of the blog post.
- * @returns The published date (YYYY-MM-DD).
+ * @returns The published date as a DateTime object.
  */
-function getPublishedData(filename: string): string {
-  return basename(filename).match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "";
+function getPublishedDataTime(filename: string): string {
+  const date = basename(filename).match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "";
+  const published = DateTime.fromISO(`${date}T08:00:00`, {
+    zone: "America/Los_Angeles",
+  });
+  return published.toISO() ?? "";
 }
