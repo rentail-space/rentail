@@ -105,6 +105,15 @@ businesses with short-term retail spaces in shopping centers.
 - Session guards: `verifyAdmin()` for admin routes, `getSignedInUser()` for
   profile
 
+**UTM Tracking:**
+
+- Middleware captures UTM parameters on first request (`app/lib/middleware/utm.ts`)
+- Separate `__utm` session cookie (1-day expiration, httpOnly, lax SameSite)
+- Parameters stored: `source`, `medium`, `campaign`, `term`, `content`
+- Also captures: IP address (`x-real-ip`), user agent, referrer
+- Data persisted to `User.utm` (JSON), `User.referrer`, `User.ip`, `User.userAgent`
+- Applied globally via middleware in `app/root.tsx`
+
 **Location Detection:**
 
 1. `User.workingMemory.location` (highest priority)
@@ -150,10 +159,11 @@ businesses with short-term retail spaces in shopping centers.
 
 **Key Helpers:**
 
-- `converse(page, "message")` - E2E chat testing
-- `goto(path, headers?, options?)` - Navigate with flexible wait options
+- `converse("message", headers?)` - E2E chat testing with message submission and response wait
+- `goto(path, headers?)` - Navigate with reload and React context wait
 - MSW handlers: `/test/mocks/mswHandlers.ts`
 - Anthropic mock: `/test/mocks/mockAnthropic.ts`
+- Cleanup: Always `await prisma.user.deleteMany()` in tests requiring fresh state
 
 **Commands:**
 
