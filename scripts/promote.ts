@@ -13,7 +13,8 @@ import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymen
 import dotenv from "dotenv";
 import env from "env-var";
 import { invariant } from "es-toolkit";
-import { execSync } from "node:child_process";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { Octokit } from "octokit";
 import ora from "ora";
 import { timeago } from "~/lib/time";
@@ -56,9 +57,9 @@ function colorize(color: keyof typeof colorCodes, text: string): string {
  * Check if there are uncommitted changes in local git.
  * Exits with an error if there are uncommitted files.
  */
-function checkIfUncommittedChanges() {
-  const status = execSync("git status --porcelain").toString().trim();
-  if (status.length > 0)
+async function checkIfUncommittedChanges() {
+  const status = await promisify(execFile)("git", ["status", "--porcelain"]);
+  if (status.stdout.trim().length > 0)
     console.warn(
       "%s %s %s\n",
       colorize("yellow", "\u26A0 You have uncommitted changes. Please"),
@@ -71,15 +72,17 @@ function checkIfUncommittedChanges() {
  * Check if local Git is ahead of origin/main.
  * Exits with an error if there are commits ahead.
  */
-function checkIfGitAhead() {
+async function checkIfGitAhead() {
   // Fetch latest from origin
-  execSync("git fetch origin main", { stdio: "ignore" });
+  await promisify(execFile)("git", ["fetch", "origin", "main"]);
 
-  const ahead = execSync("git rev-list --left-right --count origin/main...HEAD")
-    .toString()
-    .trim()
-    .split("\t")[1];
-
+  const result = await promisify(execFile)("git", [
+    "rev-list",
+    "--left-right",
+    "--count",
+    "origin/main...HEAD",
+  ]);
+  const ahead = result.stdout.trim().split("\t")[1];
   if (ahead && Number(ahead) > 0)
     console.warn(
       "%s %s %s\n",
@@ -244,8 +247,8 @@ async function waitForDeploy(
  */
 async function interactive() {
   // Check if local Git is ahead of origin/main
-  checkIfUncommittedChanges();
-  checkIfGitAhead();
+  await checkIfUncommittedChanges();
+  await checkIfGitAhead();
   // Review GitHub workflow status
   await githubWorkflows();
   // Review Vercel deployment status
@@ -254,32 +257,40 @@ async function interactive() {
 
   if (isInProduction) {
     await waitForDeploy(mostRecent.uid);
-    return;
-  }
-
-  const isReady = mostRecent.readyState === "READY";
-  if (isReady) {
-    const gitId = mostRecent.meta?.githubCommitSha?.slice(-8);
-    console.info(
-      colorize("blue", "Try it out: %s"),
-      `https://${mostRecent.url}`,
-    );
-    const shouldPromote = await confirm({
-      default: false,
-      message: `Promote deployment ${gitId} to production?`,
-    });
-    if (!shouldPromote) {
-      console.error(
-        colorize("red", "\n✘ Deployment not promoted to production"),
+  } else {
+    const isReady = mostRecent.readyState === "READY";
+    if (isReady) {
+      const gitId = mostRecent.meta?.githubCommitSha?.slice(-8);
+      console.info(
+        colorize("blue", "Try it out: %s"),
+        `https://${mostRecent.url}`,
       );
-      process.exit(1);
+      const shouldPromote = await confirm({
+        default: false,
+        message: `Promote deployment ${gitId} to production?`,
+      });
+      if (shouldPromote) await promoteToProduction(mostRecent);
+      else {
+        console.error(
+          colorize("red", "\n✘ Deployment not promoted to production"),
+        );
+        process.exit(1);
+      }
     }
-    await promoteToProduction(mostRecent);
-    execSync('open --background "https://rentail.space"');
-    process.exit(0);
   }
 
-  console.info(colorize("blue", "⏳ Still building preview…"));
+  await promisify(execFile)("open", ["--background", "https://rentail.space"]);
+  await promisify(execFile)("terminal-notifier", [
+    "-message",
+    "Browser opened to rentail.space",
+    "-title",
+    "Promoted to Production",
+    "-open",
+    "https://rentail.space",
+    "-contentImage",
+    "https://rentail.space/images/logo.png",
+  ]);
+  process.exit(0);
 }
 
 // Run the interactive mode
