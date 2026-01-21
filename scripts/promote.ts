@@ -275,7 +275,7 @@ async function interactive() {
       process.exit(1);
     }
     await promoteToProduction(mostRecent);
-    execSync('open "https://rentail.space"');
+    execSync('open --background "https://rentail.space"');
     process.exit(0);
   }
 
