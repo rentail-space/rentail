@@ -1,8 +1,8 @@
 import { Button, Link, Section, Text } from "@react-email/components";
+import type { User } from "prisma/generated/client";
 import * as styles from "~/emails/styles";
 import EmailLayout from "./EmailLayout";
 import { sendEmail } from "./sendEmails";
-import type { User } from "prisma/generated/client";
 
 /**
  * Send a welcome email to a new user.  This is only sent to authenticated
@@ -13,7 +13,7 @@ import type { User } from "prisma/generated/client";
 export default async function sendWelcomeEmail(user: User) {
   if (user.isAnonymous) return;
   await sendEmail({
-    component: ({ subject }) => (
+    content: ({ subject }) => (
       <Welcome name={user.name ?? ""} subject={subject} />
     ),
     email: user.email ?? "",

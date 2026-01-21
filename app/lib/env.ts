@@ -34,6 +34,8 @@ const envVars = {
     .get("REDIS_URL")
     .default("redis://localhost:6379")
     .asUrlString(),
+
+  OPENAI_API_KEY: env.get("OPENAI_API_KEY").required(true).asString(),
 };
 
 export default envVars;

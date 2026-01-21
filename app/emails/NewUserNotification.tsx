@@ -14,7 +14,7 @@ export default async function sendNewUserNotification(user: User) {
   await sendEmail({
     email: "assaf@labnotes.org",
     subject: "New User Created",
-    component: ({ subject }) => (
+    content: ({ subject }) => (
       <EmailLayout subject={subject}>
         <UserInfo user={user} />
         <LinkToUser user={user} />

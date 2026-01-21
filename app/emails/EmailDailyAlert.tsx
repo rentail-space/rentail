@@ -38,7 +38,7 @@ export default async function sendDailyAlertEmail({
   await sendEmail({
     email: "assaf@labnotes.org",
     subject,
-    component: ({ subject }) => (
+    content: ({ subject }) => (
       <EmailDailyAlert
         center={center}
         helpful={helpful}

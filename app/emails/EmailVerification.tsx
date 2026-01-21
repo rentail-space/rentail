@@ -15,7 +15,7 @@ export default async function sendVerificationEmail({
   await sendEmail({
     email,
     subject: "Verify your email address for rentail.space",
-    component: ({ subject }) => (
+    content: ({ subject }) => (
       <EmailVerification name={name} subject={subject} url={url} />
     ),
   });

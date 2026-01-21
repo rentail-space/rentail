@@ -22,6 +22,7 @@
     "@a2a-js/sdk": "^0.3.8",
     "@ai-sdk/anthropic": "^3.0.15",
     "@ai-sdk/devtools": "^0.0.6",
+    "@ai-sdk/openai": "^3.0.12",
     "@ai-sdk/react": "^3.0.43",
     "@base-ui/react": "^1.1.0",
     "@forge42/seo-tools": "^1.4.5",

@@ -3,7 +3,6 @@ import { captureException } from "@sentry/react-router";
 import debug from "debug";
 import { delay, invariant, withTimeout } from "es-toolkit";
 import Redis from "ioredis";
-import type { JSX } from "react";
 import { Resend } from "resend";
 import envVars from "~/lib/env";
 import { timeToMs } from "~/lib/utils";
@@ -23,21 +22,21 @@ const logger = debug("email");
  * The email will be stored in `lastEmailSent` for visual regression testing.
  *
  * @param email - The email address to send the email to.
- * @param component - The React Email component to send.
+ * @param content - The content of the email.
  * @param subject - The subject of the email.
  */
 export async function sendEmail({
   email,
-  component,
+  content,
   subject,
 }: {
   email: string;
-  component: ({ subject }: { subject: string }) => JSX.Element;
+  content: ({ subject }: { subject: string }) => React.ReactNode;
   subject: string;
 }) {
   lastEmailSent = undefined;
   try {
-    const html = await pretty(await render(component({ subject })));
+    const html = await pretty(await render(content({ subject })));
     await captureLastEmail({ html, to: email, subject });
 
     // In tests, we don't want to actually send emails, we just want to render them
