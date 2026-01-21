@@ -1,3 +1,8 @@
+/**
+ * Cron job to send daily alerts to users.
+ */
+
+import { captureException } from "@sentry/react-router";
 import { Output, convertToModelMessages, generateText } from "ai";
 import { DateTime } from "luxon";
 import type { UserGetPayload } from "prisma/generated/models";
@@ -10,25 +15,32 @@ import { recentMessages } from "~/lib/sessions.server";
 import dailyAlertPrompt from "~/prompts/dailyAlertPrompt.md?raw";
 
 export async function loader() {
-  const users = await prisma.user.findMany({
-    include: { chats: true },
-    where: {
-      OR: [
-        { lastAlertAt: { lte: DateTime.now().minus({ weeks: 1 }).toJSDate() } },
-        { lastAlertAt: null },
-      ],
-    },
-  });
-  for (const user of users) {
-    const alert = await findAlert(user);
-    console.info("Sending alert to %s\n%o", user.email, alert);
-    await prisma.user.update({
-      data: { lastAlertAt: new Date() },
-      where: { id: user.id },
+  try {
+    const users = await prisma.user.findMany({
+      include: { chats: true },
+      where: {
+        OR: [
+          {
+            lastAlertAt: { lte: DateTime.now().minus({ weeks: 1 }).toJSDate() },
+          },
+          { lastAlertAt: null },
+        ],
+      },
     });
-    await sendDailyAlertEmail({ user, ...alert });
+    for (const user of users) {
+      const alert = await findAlert(user);
+      console.info("Sending alert to %s\n%o", user.email, alert);
+      await prisma.user.update({
+        data: { lastAlertAt: new Date() },
+        where: { id: user.id },
+      });
+      await sendDailyAlertEmail({ user, ...alert });
+    }
+    return null;
+  } catch (error) {
+    captureException(error);
+    throw error;
   }
-  return new Response();
 }
 
 const Alert = zod
