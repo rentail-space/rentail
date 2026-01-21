@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import terms from "~/data/terms.md?raw";
@@ -20,6 +21,10 @@ export default function TermsOfService() {
         className="prose prose-lg mx-auto"
         mode="static"
         remarkPlugins={[remarkGfm]}
+        components={{
+          a: ({ children, href }) =>
+            href ? <Link to={href}>{children}</Link> : children,
+        }}
       >
         {terms}
       </Streamdown>

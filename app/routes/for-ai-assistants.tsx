@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { Streamdown } from "streamdown";
 import forAIAssistants from "~/data/for-ai-assistants.md?raw";
 
@@ -48,6 +49,8 @@ export default function ForAIAssistants() {
         components={{
           pre: ({ children }) => <pre>{children}</pre>,
           code: ({ children }) => <code>{children}</code>,
+          a: ({ children, href }) =>
+            href ? <Link to={href}>{children}</Link> : children,
         }}
       >
         {forAIAssistants}
