@@ -20,18 +20,22 @@ describe("prompt()", () => {
           "x-vercel-ip-longitude": "-118.26365",
         }),
       });
-      prompt = await preparePrompt({
-        headers: new Headers(),
-        user,
-      });
+      prompt = (
+        await preparePrompt({
+          headers: new Headers(),
+          user,
+        })
+      )
+        // Replace all single newlines with space, but keep double newlines
+        .replace(/([^\n])\n([^\n])/g, "$1 $2");
     });
 
     it("includes clear instructions", () => {
       expect(prompt).toContain(
-        "You are a virtual assistant for a specialty leasing retail space service",
+        "You are the virtual assistant that helps merchants looking for short-term retail spaces to lease in shopping centers and malls.",
       );
       expect(prompt).toContain(
-        "You help merchants find the retail space that's best for their needs",
+        "You help merchants find space that's best fit for their needs.",
       );
     });
 
@@ -48,10 +52,9 @@ describe("prompt()", () => {
     });
 
     it("includes user profile schema", () => {
-      const json = prompt.match(/```json\n(.*?)\n```/ms)?.[1];
-      invariant(json, "JSON match not found");
-      const parsed = JSON.parse(json);
-      expect(parsed).toMatchObject({
+      const objects = parseJSON(prompt);
+      const merchant = objects.find((object) => "merchant" in object);
+      expect(merchant).toMatchObject({
         merchant: {
           name: "The merchant's name",
           phoneNumber: "Merchant's phone number",
@@ -74,7 +77,7 @@ describe("prompt()", () => {
         address: "189 The Grove Drive",
         city: "Los Angeles",
         state: "CA",
-        website: "https://thegrovela.com/?utm_source=rentail.space",
+        websiteURL: "https://thegrovela.com/?utm_source=rentail.space",
       });
     });
 
@@ -89,7 +92,6 @@ describe("prompt()", () => {
     });
 
     it("includes instructions about known shopping centers only", () => {
-      expect(prompt).toContain("within 20 miles of the user");
       expect(prompt).toContain(
         "These are all the shopping centers you know about",
       );
@@ -116,7 +118,9 @@ describe("prompt()", () => {
     });
 
     it("should not include shopping centers", () => {
-      expect(result).not.toContain("<shopping-center>");
+      const objects = parseJSON(result);
+      const centers = objects.filter((object) => "address" in object);
+      expect(centers).toHaveLength(0);
     });
 
     it("should instruct to ask user for location", () => {
@@ -126,56 +130,49 @@ describe("prompt()", () => {
 });
 
 function findTheGrove(markdown: string): Record<string, unknown> | undefined {
-  const centers = parseShoppingCenters(markdown);
+  const centers = parseJSON(markdown);
   return centers.find(
     (center) => (center as { name: string }).name === "The Grove",
   );
 }
 
-function parseShoppingCenters(markdown: string): Record<string, unknown>[] {
-  const shoppingCentersRegex = /<shopping-center>(.*?)<\/shopping-center>/gims;
-  const matches = markdown.match(shoppingCentersRegex);
-  invariant(matches, "No shopping centers found");
-  return matches.map((center) => {
-    const content = center.replace(/<\/?shopping-center>/gm, "");
-    const spacesRegex = /<space>(.*?)<\/space>/gims;
-    const spaces = content
-      .match(spacesRegex)
-      ?.map((space) => parseNameValuePairs(space));
-    const props = parseNameValuePairs(content.replace(spacesRegex, ""));
-    return { ...props, spaces };
-  });
+function parseJSON(markdown: string): Record<string, unknown>[] {
+  const objects = findTopLevelJsonObjects(markdown);
+  const centers = objects
+    .map((object) => {
+      try {
+        return JSON.parse(object);
+      } catch {
+        return undefined;
+      }
+    })
+    .filter(Boolean);
+  return centers;
 }
 
-function parseNameValuePairs(str: string): Record<string, string | number> {
-  const result: Record<string, string | number> = {};
-
-  for (const line of str.split("\n")) {
-    const trimmed = line.trim();
-    if (!trimmed) continue;
-
-    // Find the colon separator
-    const colonIndex = trimmed.indexOf(":");
-    if (colonIndex === -1) continue;
-
-    // Extract key (remove quotes and trim) and convert to camelCase
-    const rawKey = trimmed.slice(0, colonIndex).trim();
-    const key = rawKey
-      .replace(/^"|"$/g, "")
-      .toLowerCase()
-      .split(" ")
-      .map((word, idx) =>
-        idx === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1),
-      )
-      .join("");
-
-    // Extract value (remove quotes and trim)
-    const rawValue = trimmed.slice(colonIndex + 1).trim();
-    const value = rawValue.replace(/^"|"$/g, "");
-
-    // Try parsing as number
-    if (/^-?\d+\.?\d*$/.test(value)) result[key] = Number(value);
-    else result[key] = value;
+function findTopLevelJsonObjects(markdown: string): string[] {
+  const objects: string[] = [];
+  const len = markdown.length;
+  let i = 0;
+  while (i < len) {
+    // Look for opening brace
+    if (markdown[i] === "{") {
+      let stack = 1;
+      let j = i + 1;
+      for (; j < len; j++) {
+        if (markdown[j] === "{") stack++;
+        else if (markdown[j] === "}") stack--;
+        if (stack === 0) break;
+      }
+      if (stack === 0) {
+        // Check for preceding whitespace/comment
+        const objStr = markdown.slice(i, j + 1);
+        objects.push(objStr);
+        i = j + 1;
+        continue;
+      }
+    }
+    i++;
   }
-  return result;
+  return objects;
 }

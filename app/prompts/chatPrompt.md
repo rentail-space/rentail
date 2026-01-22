@@ -86,7 +86,7 @@ the updated JSON. For example:
   "name": "Sarah",
   "location": {
     "city": "Boston",
-    "state": "Massachusetts"
+    "state": "Massachusetts",
     "latitude": 42.3584,
     "longitude": -71.0598
   },
