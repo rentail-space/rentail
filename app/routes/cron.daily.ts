@@ -12,7 +12,6 @@ import { classify } from "~/lib/models";
 import preparePrompt from "~/lib/preparePrompt";
 import prisma from "~/lib/prisma";
 import { recentMessages } from "~/lib/sessions.server";
-import dailyAlertPrompt from "~/prompts/dailyAlertPrompt.md?raw";
 
 export async function loader() {
   try {
@@ -72,7 +71,6 @@ async function findAlert(
   const messages = await recentMessages(chatId);
   const system = await preparePrompt({
     headers: new Headers(),
-    prompt: dailyAlertPrompt,
     user,
   });
 

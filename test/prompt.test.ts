@@ -4,7 +4,6 @@ import { ulid } from "ulid";
 import { beforeAll, describe, expect, it } from "vitest";
 import preparePrompt from "~/lib/preparePrompt";
 import { createAnonymousUser } from "~/lib/sessions.server";
-import chatPrompt from "~/prompts/chatPrompt.md?raw";
 
 describe("prompt()", () => {
   let prompt: string;
@@ -23,7 +22,6 @@ describe("prompt()", () => {
       });
       prompt = await preparePrompt({
         headers: new Headers(),
-        prompt: chatPrompt,
         user,
       });
     });
@@ -113,7 +111,6 @@ describe("prompt()", () => {
       });
       result = await preparePrompt({
         headers: new Headers({}),
-        prompt: chatPrompt,
         user,
       });
     });

@@ -13,6 +13,8 @@ import { geocodeFromUserInput, geocodeMemoryOrHeaders } from "./geocode";
  * @param headers The HTTP headers to use to get the user's location.
  * @param user The user to find the shopping centers for. If not provided, the
  * location will be inferred from the IP address in the headers.
+ * @param maxDistance The maximum distance in miles to search for shopping centers.
+ * @param limit The maximum number of shopping centers to return.
  * @returns A list of centers with only their available spaces and the
  * location's display name.
  */
@@ -21,11 +23,13 @@ export default async function findNearbyCenters({
   user,
   limit = 10,
   location,
+  maxDistance = 30,
 }: {
   headers: Headers;
   user?: User;
   limit?: number;
   location?: string;
+  maxDistance?: number;
 }): Promise<{
   centers: PropertyGetPayload<{ include: { spaces: true } }>[];
   displayName: string;
@@ -34,7 +38,6 @@ export default async function findNearbyCenters({
     (location && (await geocodeFromUserInput(location))) ||
     (await geocodeMemoryOrHeaders({ user, headers }));
 
-  const maxDistance = 30; // miles
   const centers = await prisma.property.findMany({
     include: {
       spaces: {

@@ -8,7 +8,6 @@ import {
 } from "@a2a-js/sdk/server";
 import { generateText } from "ai";
 import { ulid } from "ulid";
-import chatPrompt from "~/prompts/chatPrompt.md?raw";
 import { conversational } from "../models";
 import preparePrompt from "../preparePrompt";
 import prisma from "../prisma";
@@ -62,11 +61,7 @@ async function converse(requestContext: RequestContext): Promise<Message> {
       id: message.id,
       role: message.role as "user" | "assistant",
     })),
-    system: await preparePrompt({
-      headers: new Headers(),
-      prompt: chatPrompt,
-      user,
-    }),
+    system: await preparePrompt({ headers: new Headers(), user }),
     ...conversational,
   });
 

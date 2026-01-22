@@ -1,9 +1,10 @@
-import type { PropertySpace, User } from "prisma/generated/client";
+import type { User } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import {
   cleanParseWorkingMemory,
   workingMemoryExample,
 } from "~/lib/workingMemory";
+import chatPrompt from "~/prompts/chatPrompt.md?raw";
 import generalDirectives from "~/prompts/generalDirectives.md?raw";
 import envVars from "./env";
 import externalLink from "./externalLink";
@@ -21,19 +22,19 @@ import prisma from "./prisma";
  * @throws An error if there's a mismatched $[tag] in the prompt.
  */
 export default async function preparePrompt({
-  prompt,
   headers,
   user,
 }: {
-  prompt: string;
   headers: Headers;
   user: User;
 }): Promise<string> {
   const allCenters = await prisma.property.findMany({
     select: { name: true, city: true, state: true, country: true },
   });
+  const maxDistance = 30; // miles
   const { centers: nearbyCenters, displayName } = await findNearbyCenters({
     headers,
+    maxDistance,
     user,
   });
   // Use fixed date/time in test mode for consistent LLM caching
@@ -41,7 +42,7 @@ export default async function preparePrompt({
     ? ["2026-01-15", "12:00:00.000Z"]
     : new Date().toISOString().split("T");
   const workingMemory = cleanParseWorkingMemory(user?.workingMemory);
-  return prompt
+  return chatPrompt
     .replace("$[date]", date)
     .replace("$[time]", time)
     .replace(
@@ -58,7 +59,9 @@ export default async function preparePrompt({
     )
     .replace(
       "$[nearbyCenters]",
-      centersToMarkdown({ centers: nearbyCenters, maxDistance: 20 }),
+      nearbyCenters.length === 0
+        ? "I can't find any shopping centers near the user."
+        : nearbyCenters.map(centerToJSON).join("\n\n"),
     )
     .replace(
       "$[allCenters]",
@@ -75,85 +78,31 @@ export default async function preparePrompt({
     });
 }
 
-function centersToMarkdown({
-  centers,
-  maxDistance,
-}: {
-  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
-  maxDistance: number;
-}): string {
-  if (centers.length === 0)
-    return "I can't find any shopping centers near the user.";
-
-  const prefix = `Here are the shopping centers in the area which are within ${maxDistance} miles of the user.
-    These are all the shopping centers you know about.
-    You do not know about any other shopping centers.
-    If the user asks about a shopping center you do not know about, you should say so.
-    Do not make up information about shopping centers you do not know about.
-    Do not even mention shopping centers you do not know about.`;
-
-  return `${prefix}\n\n${centers.map(centerToMarkdown).join("\n\n")}`;
-}
-
-function centerToMarkdown(
+function centerToJSON(
   center: PropertyGetPayload<{ include: { spaces: true } }>,
 ): string {
-  const description =
-    process.env.NODE_ENV === "test"
-      ? center.description.split("\n")[0]
-      : center.description;
-  const xml = toXml({
-    address: center.address,
-    city: center.city,
-    country: center.country,
-    description,
-    name: center.name,
-    state: center.state,
-    website: center.website ? externalLink(center.website) : null,
-  });
-  return [
-    "<shopping-center>",
-    xml,
-    demographics(center.demographics),
-    spaces(center.spaces),
-    "</shopping-center>",
-  ]
-    .filter(Boolean)
-    .join("\n");
-}
-
-function demographics(demographics: string | null): string {
-  return demographics ? `<demographics>\n${demographics}\n</demographics>` : "";
-}
-
-function spaces(spaces: PropertySpace[]): string {
-  return spaces
-    .map((space) =>
-      toXml({
+  return JSON.stringify(
+    {
+      address: center.address,
+      city: center.city,
+      country: center.country,
+      description: center.description,
+      demographics: center.demographics ?? "Unknown",
+      name: center.name,
+      state: center.state,
+      websiteURL: externalLink(center.website),
+      centerURL: `https://rentail.space/center/${encodeURIComponent(
+        center.id,
+      )}`,
+      googleMapsURL: `https://maps.google.com/?q=${encodeURIComponent(center.name)}`,
+      spaces: center.spaces.map((space) => ({
         number: space.number,
         type: space.type,
-        size: space.size,
-        floor: space.floor,
-      }),
-    )
-    .map((space) => `<space>\n${space}\n</space>`)
-    .join("\n");
-}
-
-function toXml(obj: Record<string, unknown>): string {
-  return Object.entries(obj)
-    .map(([key, value]) => {
-      if (Array.isArray(value))
-        return value.map((item) => `  ${toLabel(key)}: ${item}`).join("\n");
-      return `  ${toLabel(key)}: ${value}`;
-    })
-    .join("\n");
-}
-
-function toLabel(key: string): string {
-  return key
-    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2") // Handle acronyms: "URLSet" -> "URL Set"
-    .replace(/([a-z])([A-Z])/g, "$1 $2") // CamelCase: "footTraffic" -> "foot Traffic"
-    .replace(/^./, (str) => str.toUpperCase()) // Capitalize first
-    .trim();
+        size: space.size ?? "Unknown",
+        floor: space.floor ?? "Unknown",
+      })),
+    },
+    null,
+    2,
+  );
 }

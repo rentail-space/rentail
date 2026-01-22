@@ -16,7 +16,6 @@ import { findOrCreateUser, recentMessages } from "~/lib/sessions.server";
 import updateWorkingMemory, {
   maskWorkingMemoryTags,
 } from "~/lib/workingMemory";
-import chatPrompt from "~/prompts/chatPrompt.md?raw";
 import type { Route } from "./+types/api.chat.$chatId.message";
 
 const logger = debug("server:chat");
@@ -81,7 +80,6 @@ export async function action({ request, params }: Route.ActionArgs) {
     messages: await convertToModelMessages(messages),
     system: await preparePrompt({
       headers: request.headers,
-      prompt: chatPrompt,
       user,
     }),
     ...conversational,
