@@ -5,17 +5,17 @@
 import { captureException } from "@sentry/react-router";
 import sendQueryAlert from "~/lib/chatgpt-visibility/QueryAlert";
 import runAllQueries from "~/lib/chatgpt-visibility/runAllQueries";
-import { calculateAggregateScore } from "~/lib/chatgpt-visibility/scorer";
 
 export async function loader() {
   try {
-    const scores = await runAllQueries(false);
-    const aggregate = calculateAggregateScore(scores);
-    console.info(aggregate);
-    await sendQueryAlert(aggregate);
+    const sources = await runAllQueries(false);
+    await sendQueryAlert({ sources });
     return null;
   } catch (error) {
     captureException(error);
     throw error;
   }
 }
+
+const sources = await runAllQueries(false);
+await sendQueryAlert({ sources });

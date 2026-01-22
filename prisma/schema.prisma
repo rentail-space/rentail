@@ -174,21 +174,13 @@ model Verification {
 }
 
 model VisibilityCheck {
-  id                 String   @id @default(cuid())
-  createdAt          DateTime @default(now()) @map("created_at")
-  queryId            String   @map("query_id")
-  query              String   @map("query")
-  response           String   @map("response")          @db.Text
-  citations          Json     @map("citations")         @db.Json
-  score              Int      @map("score")
-  firstPlace         Boolean  @map("first_place")
-  mentions           Int      @map("mentions")
-  totalCitations     Int      @map("total_citations")
-  citationPercentage Float    @map("citation_percentage")
-  model              String   @map("model")
+  id        String                      @id @default(cuid())
+  createdAt DateTime @map("created_at") @default(now())
+  citations Json     @map("citations")  @db.Json
+  model     String   @map("model")
+  queryId   String   @map("query_id")
+  query     String   @map("query")
 
-  @@index([createdAt])
-  @@index([queryId])
   @@map("visibility_checks")
 }
 

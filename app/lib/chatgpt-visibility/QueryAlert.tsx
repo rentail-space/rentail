@@ -1,24 +1,48 @@
 import { Section } from "@react-email/components";
+import { meanBy, sumBy } from "es-toolkit";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails";
-import type { AggregateScore, QueryScore } from "./scorer";
+import type { Source } from "./runAllQueries";
 
-export default async function sendQueryAlert(
-  aggregate: AggregateScore,
-): Promise<void> {
+export default async function sendQueryAlert({
+  sources,
+}: {
+  sources: Source[];
+}): Promise<void> {
   await sendEmail({
     email: "assaf@labnotes.org",
-    subject: `ChatGPT Visibility Alert - ${aggregate.alertLevel}`,
+    subject: "ChatGPT Visibility Alert",
     content: () => (
-      <EmailLayout subject={aggregate.recommendation}>
-        <SummarySection aggregate={aggregate} />
-        <ScoreTable scores={aggregate.scores} />
+      <EmailLayout subject={getRecommendation(sources)}>
+        <SummarySection sources={sources} />
+        <SourcesTable sources={sources} />
       </EmailLayout>
     ),
   });
 }
 
-function SummarySection({ aggregate }: { aggregate: AggregateScore }) {
+function getRecommendation(sources: Source[]): string {
+  const avgScore = meanBy(sources, scoreSource);
+  return avgScore >= 90
+    ? "Excellent visibility! Rentail.space is dominating ChatGPT search results."
+    : avgScore >= 50
+      ? "Good visibility. Rentail.space appears consistently in top results."
+      : avgScore >= 30
+        ? "Visibility declining. Consider content marketing or SEO improvements."
+        : "Critical: Low visibility in ChatGPT results. Immediate action needed.";
+}
+
+function SummarySection({ sources }: { sources: Source[] }) {
+  const avgScore = meanBy(sources, scoreSource);
+  const allMentions = sumBy(sources, (source) => source.citations.length);
+  const allRentailMentions = sumBy(
+    sources,
+    (source) =>
+      source.citations.filter(
+        (citation) => new URL(citation).hostname === "rentail.space",
+      ).length,
+  );
+
   return (
     <Section>
       <table
@@ -34,24 +58,22 @@ function SummarySection({ aggregate }: { aggregate: AggregateScore }) {
       >
         <tbody>
           <tr>
-            <th align="left" style={{ background: "#f6f8fa" }}>
+            <th align="left" className="whitespace-nowrap bg-gray-200">
               Average score
             </th>
-            <td>{aggregate.averageScore.toFixed(1)} points</td>
+            <td>{avgScore.toLocaleString()}</td>
           </tr>
           <tr>
-            <th align="left" style={{ background: "#f6f8fa" }}>
-              Total mentions
+            <th align="left" className="whitespace-nowrap bg-gray-200">
+              All mentions
             </th>
-            <td>{aggregate.totalMentions}</td>
+            <td>{allMentions.toLocaleString()}</td>
           </tr>
           <tr>
-            <th align="left" style={{ background: "#f6f8fa" }}>
-              First place
+            <th align="left" className="whitespace-nowrap bg-gray-200">
+              Rentail mentions
             </th>
-            <td>
-              {aggregate.firstPlaceCount}/{aggregate.totalQueries} queries
-            </td>
+            <td>{allRentailMentions.toLocaleString()}</td>
           </tr>
         </tbody>
       </table>
@@ -59,7 +81,7 @@ function SummarySection({ aggregate }: { aggregate: AggregateScore }) {
   );
 }
 
-function ScoreTable({ scores }: { scores: QueryScore[] }) {
+function SourcesTable({ sources }: { sources: Source[] }) {
   return (
     <Section>
       <table
@@ -75,33 +97,50 @@ function ScoreTable({ scores }: { scores: QueryScore[] }) {
       >
         <thead>
           <tr>
-            <th align="left" style={{ background: "#f6f8fa" }}>
+            <th align="left" className="whitespace-nowrap bg-gray-200">
               Query
             </th>
-            <th align="center" style={{ background: "#f6f8fa" }}>
-              Meets Target
+            <th align="center" className="whitespace-nowrap bg-gray-200">
+              2+ Citations
             </th>
-            <th align="center" style={{ background: "#f6f8fa" }}>
-              Rentail Space %
+            <th align="center" className="whitespace-nowrap bg-gray-200">
+              Score
             </th>
           </tr>
         </thead>
         <tbody>
-          {scores
+          {sources
             .sort((a, b) => a.queryId.localeCompare(b.queryId))
-            .map((score) => (
-              <tr key={score.queryId}>
-                <td align="left">
-                  <strong>{score.queryId}</strong>: {score.query}
-                </td>
-                <td align="center">{score.meetsTarget ? "🟢" : "🔴"}</td>
-                <td align="right">
-                  {score.rentailSpacePercentage.toFixed(1)}%
-                </td>
-              </tr>
+            .map((source) => (
+              <SourceRecord key={source.queryId} source={source} />
             ))}
         </tbody>
       </table>
     </Section>
   );
+}
+
+function SourceRecord({ source }: { source: Source }) {
+  const isRentail = source.citations.filter(
+    (citation) => new URL(citation).hostname === "rentail.space",
+  );
+  const score = scoreSource(source);
+
+  return (
+    <tr key={source.queryId}>
+      <td align="left">
+        <strong>{source.queryId}</strong>: {source.query}
+      </td>
+      <td align="center">{isRentail.length >= 2 ? "🟢" : "🔴"}</td>
+      <td align="right">{score.toLocaleString()}</td>
+    </tr>
+  );
+}
+
+function scoreSource(source: Source): number {
+  const isFirstPlace = source.citations[0].includes("rentail.space");
+  const isRentail = source.citations.filter(
+    (citation) => new URL(citation).hostname === "rentail.space",
+  );
+  return (isFirstPlace ? 50 : 0) + isRentail.length * 10;
 }

@@ -9,12 +9,9 @@
 
 import runAllQueries from "~/lib/chatgpt-visibility/runAllQueries";
 import prisma from "~/lib/prisma";
-import { calculateAggregateScore } from "../app/lib/chatgpt-visibility/scorer";
 
 try {
-  const scores = await runAllQueries(true);
-  const aggregate = calculateAggregateScore(scores);
-  console.info(aggregate);
+  await runAllQueries(true);
   process.exit(0);
 } catch (error) {
   console.error("\n❌ Fatal error:", error);

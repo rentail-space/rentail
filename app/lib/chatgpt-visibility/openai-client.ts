@@ -1,30 +1,31 @@
 /**
  * OpenAI client for querying ChatGPT with search capability.
  *
- * Note: ChatGPT's web search is powered by their API. We need to use
- * the proper model with search capabilities enabled.
  */
 
-import { createOpenAI } from "@ai-sdk/openai";
-import env from "~/lib/env";
+import { openai } from "@ai-sdk/openai";
+import type { LanguageModelV3, LanguageModelV3Source } from "@ai-sdk/provider";
+import { generateText } from "ai";
 
 /**
  * This uses OpenAI's API to simulate how users would query ChatGPT with web
  * search enabled.
  *
  * @param query - The query to search for.
- * @returns The response from ChatGPT
+ * @param model - The model to use.
+ * @returns The sources from ChatGPT
+ * @see https://ai-sdk.dev/providers/ai-sdk-providers/openai
  */
-export default async function queryChatGPTWithSearch(query: string): Promise<{
+export default async function queryChatGPTWithSearch({
+  model,
+  query,
+}: {
+  model: LanguageModelV3;
   query: string;
-  model: string;
-  response: string;
-}> {
-  const model = "gpt-5-mini";
-  const provider = createOpenAI({ apiKey: env.OPENAI_API_KEY }).responses(
+}): Promise<LanguageModelV3Source[]> {
+  const { sources } = await generateText({
+    maxOutputTokens: 2000,
     model,
-  );
-  const { content } = await provider.doGenerate({
     prompt: [
       {
         role: "system",
@@ -36,11 +37,18 @@ export default async function queryChatGPTWithSearch(query: string): Promise<{
         content: [{ text: query, type: "text" }],
       },
     ],
-    maxOutputTokens: 2000,
+    tools: {
+      web_search: openai.tools.webSearch({
+        externalWebAccess: true,
+        searchContextSize: "high",
+        userLocation: {
+          type: "approximate",
+          city: "Los Angeles",
+          region: "California",
+        },
+      }),
+    },
+    toolChoice: { type: "tool", toolName: "web_search" },
   });
-  const response = content
-    .filter((c) => c.type === "text")
-    .map((c) => c.text)
-    .join("\n");
-  return { model, query, response };
+  return sources;
 }

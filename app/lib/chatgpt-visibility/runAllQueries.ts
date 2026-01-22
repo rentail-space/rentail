@@ -1,29 +1,37 @@
+import { openai } from "@ai-sdk/openai";
+import type { LanguageModelV3 } from "@ai-sdk/provider";
+import { partition } from "es-toolkit";
 import { delay } from "node_modules/msw/lib/core/delay.mjs";
 import ora from "ora";
 import prisma from "~/lib/prisma";
-import parseCitations from "./citation-parser";
 import queryChatGPTWithSearch from "./openai-client";
 import queries from "./queries";
-import { type QueryScore, calculateQueryScore } from "./scorer";
+
+export type Source = {
+  citations: string[];
+  queryId: string;
+  query: string;
+};
 
 /**
- * Runs all queries and returns the scores for all queries.  The queries are run
- * sequentially to avoid rate limits.  The scores are saved to the database.
+ * Runs all queries and returns the sources from all queries.  The queries are
+ * run sequentially to avoid rate limits.
  *
- * @returns The scores for all queries.
+ * @returns The sources from all queries
  */
 export default async function runAllQueries(
   verbose: boolean,
-): Promise<QueryScore[]> {
-  const scores: QueryScore[] = [];
+): Promise<Source[]> {
+  const sources: Source[] = [];
+  const model = openai("gpt-5-chat-latest");
 
   // Run queries sequentially to avoid rate limits
   for (let i = 0; i < queries.length; i++) {
     const query = queries[i];
     if (verbose) console.info(`Running query ${i + 1} of ${queries.length}`);
 
-    const score = await runSingleQuery({ ...query, verbose });
-    scores.push(score);
+    const source = await runSingleQuery({ ...query, model, verbose });
+    sources.push(source);
 
     // Rate limiting: wait 2 seconds between queries
     if (i < queries.length - 1) {
@@ -31,59 +39,49 @@ export default async function runAllQueries(
       await delay(2_000);
     }
   }
-  return scores;
+  return sources;
 }
 
 async function runSingleQuery({
-  id,
+  id: queryId,
   query,
+  model,
   verbose,
 }: {
   id: string;
+  model: LanguageModelV3;
   query: string;
   verbose: boolean;
-}): Promise<QueryScore> {
+}): Promise<Source> {
   const spinner = ora(`Querying ChatGPT for ${query}`).start();
 
   try {
-    const response = await queryChatGPTWithSearch(query);
-    const parsed = parseCitations(response.response);
-    const score = calculateQueryScore(id, query, parsed);
-    if (score.totalScore > 0) spinner.succeed(`${score.totalScore} points`);
-    else spinner.info("0 points");
+    const sources = await queryChatGPTWithSearch({ model, query });
+    const citations = sources
+      .filter((s) => s.sourceType === "url")
+      .map((s) => s.url);
+    const [isRentail] = partition(
+      citations,
+      (url) => new URL(url).hostname === "rentail.space",
+    );
+    const isFirstPlace = new URL(citations[0]).hostname === "rentail.space";
+    const score = (isFirstPlace ? 50 : 0) + isRentail.length * 10;
+    spinner.succeed(`${score} points`);
 
     if (verbose)
-      console.info(`Total citations found: ${parsed.totalCitations}`);
-    for (const citation of parsed.rentailSpaceCitations)
-      if (verbose)
-        console.info(
-          `  ${citation.position}. ${citation.url}\n     Context: ${citation.context.slice(0, 80)}...`,
-        );
-
-    for (const citation of parsed.citations) {
-      const marker = citation.isRentailSpace ? "★" : " ";
-      console.info(`  ${marker} ${citation.position}. ${citation.url}`);
-    }
+      for (const url of citations) {
+        const marker = new URL(url).hostname === "rentail.space" ? "★" : " ";
+        console.info("%s %s", marker, url);
+      }
 
     // Save to database
     await prisma.visibilityCheck.create({
-      data: {
-        citationPercentage: score.rentailSpacePercentage,
-        citations: JSON.stringify(parsed.citations),
-        firstPlace: score.firstPlaceBonus > 0,
-        mentions: score.rentailSpaceCount,
-        model: response.model,
-        query,
-        queryId: id,
-        response: response.response,
-        score: score.totalScore,
-        totalCitations: parsed.totalCitations,
-      },
+      data: { citations, model: model.modelId, query, queryId },
     });
 
-    return score;
+    return { citations, query, queryId };
   } catch (error) {
-    spinner.fail(`Error querying "${query}": ${error}`);
+    spinner.fail(`Error querying "${query}": $error`);
     throw error;
   }
 }
