@@ -6,6 +6,7 @@ export const handle = {
     { label: "All centers", to: "/admin/centers" },
     { label: "All users", to: "/admin/users" },
     { label: "Ranking", to: "/admin/ranking" },
+    { label: "Visibility", to: "/admin/visibility" },
   ],
 };
 

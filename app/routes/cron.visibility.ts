@@ -3,13 +3,13 @@
  */
 
 import { captureException } from "@sentry/react-router";
-import sendQueryAlert from "~/lib/chatgpt-visibility/QueryAlert";
 import runAllQueries from "~/lib/chatgpt-visibility/runAllQueries";
+import sendVisibilityAlert from "~/lib/chatgpt-visibility/VisibilityAlert";
 
 export async function loader() {
   try {
     const sources = await runAllQueries(false);
-    await sendQueryAlert({ sources });
+    await sendVisibilityAlert({ sources });
     return null;
   } catch (error) {
     captureException(error);

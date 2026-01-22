@@ -114,7 +114,6 @@ export default function AllUsers({ users }: { users: User[] }) {
                   className="truncate"
                   key={cell.id}
                   style={{ maxWidth: cell.column.getSize() }}
-                  title={cell.getValue() as string}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>

@@ -4,14 +4,14 @@ import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails";
 import type { Source } from "./runAllQueries";
 
-export default async function sendQueryAlert({
+export default async function sendVisibilityAlert({
   sources,
 }: {
   sources: Source[];
 }): Promise<void> {
   await sendEmail({
     email: "assaf@labnotes.org",
-    subject: "ChatGPT Visibility Alert",
+    subject: "Visibility Alert",
     content: () => (
       <EmailLayout subject={getRecommendation(sources)}>
         <SummarySection sources={sources} />
@@ -101,7 +101,7 @@ function SourcesTable({ sources }: { sources: Source[] }) {
               Query
             </th>
             <th align="center" className="whitespace-nowrap bg-gray-200">
-              2+ Citations
+              Citations
             </th>
             <th align="center" className="whitespace-nowrap bg-gray-200">
               Score
@@ -124,15 +124,17 @@ function SourceRecord({ source }: { source: Source }) {
   const isRentail = source.citations.filter(
     (citation) => new URL(citation).hostname === "rentail.space",
   );
-  const score = scoreSource(source);
 
   return (
     <tr key={source.queryId}>
       <td align="left">
         <strong>{source.queryId}</strong>: {source.query}
       </td>
-      <td align="center">{isRentail.length >= 2 ? "🟢" : "🔴"}</td>
-      <td align="right">{score.toLocaleString()}</td>
+      <td align="center" className="whitespace-nowrap">
+        {isRentail.length.toLocaleString()} /{" "}
+        {source.citations.length.toLocaleString()}
+      </td>
+      <td align="right">{scoreSource(source).toLocaleString()}</td>
     </tr>
   );
 }
