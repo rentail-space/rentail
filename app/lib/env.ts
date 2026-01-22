@@ -14,11 +14,11 @@ const envVars = {
   PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required(false).asUrlString(),
   SENTRY_DSN: env.get("SENTRY_DSN").required(false).asUrlString(),
 
-  ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required(true).asString(),
-  BETTER_AUTH_SECRET: env.get("BETTER_AUTH_SECRET").required(true).asString(),
+  ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),
+  BETTER_AUTH_SECRET: env.get("BETTER_AUTH_SECRET").required().asString(),
   DATABASE_URL: env.get("DATABASE_URL").required().asUrlString(),
   MAPBOX_TOKEN: env.get("MAPBOX_TOKEN").required(false).asString(),
-  RESEND_API_KEY: env.get("RESEND_API_KEY").required(true).asString(),
+  RESEND_API_KEY: env.get("RESEND_API_KEY").required().asString(),
 
   GOOGLE_ANALYTICS_PRIVATE_KEY: env
     .get("GOOGLE_ANALYTICS_PRIVATE_KEY")
@@ -35,7 +35,7 @@ const envVars = {
     .default("redis://localhost:6379")
     .asUrlString(),
 
-  OPENAI_API_KEY: env.get("OPENAI_API_KEY").required(true).asString(),
+  OPENAI_API_KEY: env.get("OPENAI_API_KEY").required().asString(),
 };
 
 export default envVars;
