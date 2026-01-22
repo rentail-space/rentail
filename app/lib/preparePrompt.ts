@@ -102,9 +102,8 @@ function centerToJSON(
     {
       ...open,
       address: center.address,
-      centerURL: `https://rentail.space/center/${encodeURIComponent(
-        center.id,
-      )}`,
+      centerType: center.centerType,
+      centerURL: `https://rentail.space/center/${center.id}`,
       city: center.city,
       country: center.country,
       demographics: center.demographics ?? "Unknown",
