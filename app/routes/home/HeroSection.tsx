@@ -27,12 +27,10 @@ export default function HeroSection() {
 
         {/* Left Column - Text Content */}
         <div className="flex flex-1 flex-col gap-8">
-          <h1 className="font-bold text-5xl text-black leading-tight tracking-tight md:text-6xl">
+          <h1 className="font-bold text-6xl text-black leading-tight tracking-tight md:text-6xl">
             <span>Find </span>
-            <span className="mx-4 text-[hsl(37,92%,65%)]">
-              Your Next Mall Space
-            </span>
-            <span>in Under 2 Minutes</span>
+            <span className="text-[hsl(37,92%,65%)]">Your Next Mall Space</span>
+            <span> in Under 2 Minutes</span>
           </h1>
 
           <p className="font-medium text-black text-xl leading-relaxed md:text-2xl">
