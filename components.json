@@ -18,5 +18,8 @@
     "lib": "~/lib",
     "hooks": "~/hooks"
   },
-  "registries": {}
+  "registries": {
+    "@retroui": "https://retroui.dev/r/{name}.json",
+    "@neobrutalism": "https://www.neobrutalism.dev/r/{name}.json"
+  }
 }
