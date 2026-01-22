@@ -1,7 +1,6 @@
 import {
   flexRender,
   getCoreRowModel,
-  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { LockIcon, UserIcon } from "lucide-react";
@@ -18,12 +17,12 @@ import {
 } from "~/components/ui/Table";
 import deviceDetection from "~/lib/deviceDetection";
 import { humanDate } from "~/lib/time";
+import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 
 export default function AllUsers({ users }: { users: User[] }) {
   const table = useReactTable({
     columns: [
       {
-        accessorKey: "name",
         cell: ({ row }) => (
           <ActiveLink to={`/admin/user/${row.original.id}`}>
             {row.original.isAnonymous ? (
@@ -39,7 +38,6 @@ export default function AllUsers({ users }: { users: User[] }) {
       },
       {
         accessorFn: (row) => deviceDetection(row.userAgent),
-        enableResizing: true,
         header: "Device",
         size: 120,
       },
@@ -48,22 +46,22 @@ export default function AllUsers({ users }: { users: User[] }) {
           (row.utm && JSON.parse(row.utm as string).source) ||
           row.referrer ||
           "N/A",
-        size: 280,
+        size: 180,
         header: "Source",
       },
       {
-        accessorKey: "ip",
-        header: "IP",
-        size: 120,
-        sortingFn: "alphanumeric",
+        accessorFn: (row) =>
+          row.workingMemory
+            ? cleanParseWorkingMemory(row.workingMemory).location?.displayName
+            : null,
+        header: "Location",
+        size: 240,
       },
       {
         accessorKey: "createdAt",
         cell: ({ row }) => humanDate(row.original.createdAt, Date.now()),
         header: "Created",
         size: 140,
-        sortingFn: (rowA, rowB) =>
-          rowA.original.createdAt.getTime() - rowB.original.createdAt.getTime(),
       },
     ],
     columnResizeMode: "onChange",
@@ -72,10 +70,7 @@ export default function AllUsers({ users }: { users: User[] }) {
       minSize: 100,
       maxSize: 400,
     },
-    enableSortingRemoval: false,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    initialState: { sorting: [{ id: "createdAt", desc: true }] },
   });
 
   return (

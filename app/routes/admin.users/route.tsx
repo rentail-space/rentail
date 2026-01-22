@@ -17,7 +17,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   const users = await prisma.user.findMany({
     orderBy: { createdAt: "desc" },
-    where: { isBot: false },
+    where: { isBot: false, isAdmin: false },
   });
 
   const analytics = await fromGoogleAnalytics();
