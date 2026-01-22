@@ -10,6 +10,7 @@ import envVars from "./env";
 import externalLink from "./externalLink";
 import findNearbyCenters from "./findNearbyCenters";
 import prisma from "./prisma";
+import timeOfDay from "./timeOfDay";
 
 /**
  * Prepare the prompt by replacing the placeholders with the actual values.
@@ -81,26 +82,43 @@ export default async function preparePrompt({
 function centerToJSON(
   center: PropertyGetPayload<{ include: { spaces: true } }>,
 ): string {
+  const open =
+    center.openFrom === 0 && center.openUntil === 2400
+      ? { open24Hours: true }
+      : center.openFrom && center.openUntil
+        ? {
+            openFrom: timeOfDay(center.openFrom),
+            openUntil: timeOfDay(center.openUntil),
+          }
+        : null;
+  const spaces = center.spaces.map((space) => ({
+    number: space.number,
+    type: space.type,
+    size: space.size ?? "Unknown",
+    floor: space.floor ?? "Unknown",
+  }));
+
   return JSON.stringify(
     {
+      ...open,
       address: center.address,
-      city: center.city,
-      country: center.country,
-      description: center.description,
-      demographics: center.demographics ?? "Unknown",
-      name: center.name,
-      state: center.state,
-      websiteURL: externalLink(center.website),
       centerURL: `https://rentail.space/center/${encodeURIComponent(
         center.id,
       )}`,
+      city: center.city,
+      country: center.country,
+      demographics: center.demographics ?? "Unknown",
+      description: center.description,
       googleMapsURL: `https://maps.google.com/?q=${encodeURIComponent(center.name)}`,
-      spaces: center.spaces.map((space) => ({
-        number: space.number,
-        type: space.type,
-        size: space.size ?? "Unknown",
-        floor: space.floor ?? "Unknown",
-      })),
+      name: center.name,
+      numberOfStores: center.numberOfStores ?? "Unknown",
+      ranking: center.ranking ?? "Unknown",
+      rating: center.rating ?? "Unknown",
+      reviewCount: center.reviewCount ?? "Unknown",
+      spaces,
+      squareFootage: center.squareFootage ?? "Unknown",
+      state: center.state,
+      websiteURL: externalLink(center.website),
     },
     null,
     2,

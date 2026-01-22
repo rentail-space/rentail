@@ -10,6 +10,7 @@
       "**",
       "!.claude",
       "!.cursor",
+      "!.devtools",
       "!.git",
       "!.github",
       "!.react-router",
@@ -58,7 +59,12 @@
         "noUnsafeDeclarationMerging": "error",
         "noConsole": {
           "options": {
-            "allow": ["assert", "error", "info", "warn"]
+            "allow": [
+              "assert",
+              "error",
+              "info",
+              "warn"
+            ]
           }
         }
       },
