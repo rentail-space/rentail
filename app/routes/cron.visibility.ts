@@ -16,6 +16,3 @@ export async function loader() {
     throw error;
   }
 }
-
-const sources = await runAllQueries(false);
-await sendQueryAlert({ sources });
