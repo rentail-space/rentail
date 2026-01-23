@@ -110,9 +110,9 @@ function SourcesTable({ sources }: { sources: Source[] }) {
         </thead>
         <tbody>
           {sources
-            .sort((a, b) => a.queryId.localeCompare(b.queryId))
+            .sort((a, b) => a.category.localeCompare(b.category))
             .map((source) => (
-              <SourceRecord key={source.queryId} source={source} />
+              <SourceRecord key={source.id} source={source} />
             ))}
         </tbody>
       </table>
@@ -126,9 +126,9 @@ function SourceRecord({ source }: { source: Source }) {
   );
 
   return (
-    <tr key={source.queryId}>
+    <tr>
       <td align="left">
-        <strong>{source.queryId}</strong>: {source.query}
+        <strong>{source.category}</strong>: {source.query}
       </td>
       <td align="center" className="whitespace-nowrap">
         {isRentail.length.toLocaleString()} /{" "}

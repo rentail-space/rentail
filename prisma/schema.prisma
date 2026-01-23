@@ -174,12 +174,12 @@ model Verification {
 }
 
 model VisibilityCheck {
+  category  String   @map("category")
   citations String[] @map("citations")
   createdAt DateTime @map("created_at") @default(now())
   id        String                      @id @default(cuid())
   model     String   @map("model")
   query     String   @map("query")
-  queryId   String   @map("query_id")
 
   @@map("visibility_checks")
 }

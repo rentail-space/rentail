@@ -4,7 +4,7 @@ import {
   getGroupedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { mean, median, sum } from "es-toolkit";
+import { mean, median, sortBy, sum } from "es-toolkit";
 import {
   Table,
   TableBody,
@@ -19,7 +19,7 @@ export default function RecentVisibility({
   queries,
 }: {
   queries: {
-    queryId: string;
+    category: string;
     query: string;
     citations: string[];
     score: number;
@@ -30,9 +30,9 @@ export default function RecentVisibility({
   const table = useReactTable({
     columns: [
       {
-        accessorKey: "queryId",
+        accessorKey: "category",
         cell: ({ row }) => (
-          <span className="font-bold">{row.original.queryId}</span>
+          <span className="font-bold">{row.original.category}</span>
         ),
         enableGrouping: false,
         header: "Query ID",
@@ -64,7 +64,7 @@ export default function RecentVisibility({
         size: 60,
       },
     ],
-    data: queries,
+    data: sortBy(queries, ["category", "query"]),
     getCoreRowModel: getCoreRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
   });

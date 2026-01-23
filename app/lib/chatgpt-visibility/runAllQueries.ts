@@ -8,8 +8,9 @@ import queryChatGPTWithSearch from "./openai-client";
 import queries from "./queries";
 
 export type Source = {
+  id: string;
+  category: string;
   citations: string[];
-  queryId: string;
   query: string;
 };
 
@@ -24,13 +25,19 @@ export default async function runAllQueries(
 ): Promise<Source[]> {
   const sources: Source[] = [];
   const model = openai("gpt-5-chat-latest");
+  const createdAt = new Date();
 
   // Run queries sequentially to avoid rate limits
   for (let i = 0; i < queries.length; i++) {
     const query = queries[i];
     if (verbose) console.info(`Running query ${i + 1} of ${queries.length}`);
 
-    const source = await runSingleQuery({ ...query, model, verbose });
+    const source = await runSingleQuery({
+      createdAt,
+      model,
+      verbose,
+      ...query,
+    });
     sources.push(source);
 
     // Rate limiting: wait 2 seconds between queries
@@ -43,12 +50,14 @@ export default async function runAllQueries(
 }
 
 async function runSingleQuery({
-  id: queryId,
+  createdAt,
+  category,
   query,
   model,
   verbose,
 }: {
-  id: string;
+  createdAt: Date;
+  category: string;
   model: LanguageModelV3;
   query: string;
   verbose: boolean;
@@ -75,11 +84,17 @@ async function runSingleQuery({
       }
 
     // Save to database
-    await prisma.visibilityCheck.create({
-      data: { citations, model: model.modelId, query, queryId },
+    const { id } = await prisma.visibilityCheck.create({
+      data: {
+        category,
+        citations,
+        createdAt,
+        model: model.modelId,
+        query,
+      },
     });
 
-    return { citations, query, queryId };
+    return { citations, query, category, id };
   } catch (error) {
     spinner.fail(`Error querying "${query}": $error`);
     throw error;

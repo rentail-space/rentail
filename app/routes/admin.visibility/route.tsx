@@ -32,12 +32,12 @@ export default function VisibilityPage({
   ).map(([date, queries]) => ({
     date: DateTime.fromISO(date, { zone: "UTC" }),
     queries: queries.map((query) => ({
-      queryId: query.queryId,
-      query: query.query,
+      category: query.category,
       citations: query.citations,
-      score: scoreCitations(query.citations),
+      query: query.query,
       ratio: citationRatio(query.citations),
       rentail: query.citations.filter(isRentail).length,
+      score: scoreCitations(query.citations),
     })),
   }));
   const mostRecentQueries = last(groupedByDate)?.queries ?? [];
