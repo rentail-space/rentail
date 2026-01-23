@@ -107,25 +107,30 @@ Treat culture isn't going anywhere—it's just getting more intentional.
 
 ---
 
-## FAQ: Treat Culture & Micro-Luxuries
+## FAQ
 
-**Q: What is "treat culture"?**  
-A: Treat culture refers to the trend of people—especially Gen Z—buying small,
+### Q: What is "treat culture"?
+
+Treat culture refers to the trend of people—especially Gen Z—buying small,
 affordable luxuries as a way to boost their mood or add a little joy to their
 day.
 
-**Q: Why are treats so popular right now?**  
-A: Big life goals feel harder to reach, so people look for small rewards to feel
+### Q: Why are treats so popular right now?
+
+Big life goals feel harder to reach, so people look for small rewards to feel
 good and maintain a sense of control.
 
-**Q: How is treat culture different from impulse shopping?**  
-A: Many people now plan and budget for treats—it's an intentional ritual for
+### Q: How is treat culture different from impulse shopping?
+
+Many people now plan and budget for treats—it's an intentional ritual for
 self-care, not just a random splurge.
 
-**Q: What kinds of products are considered micro-luxuries?**  
-A: Things like fancy coffees, skincare masks, snacks, candles, or anything that
+### Q: What kinds of products are considered micro-luxuries?
+
+Things like fancy coffees, skincare masks, snacks, candles, or anything that
 feels special but isn't super expensive.
 
-**Q: How can small businesses use this trend?**  
-A: Focus on experience—unique, well-presented products in flexible retail spaces
+### Q: How can small businesses use this trend?
+
+Focus on experience—unique, well-presented products in flexible retail spaces
 attract treat-seekers and encourage sharing on social media.

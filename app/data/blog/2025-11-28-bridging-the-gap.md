@@ -116,22 +116,27 @@ merchants and forward-thinking shopping centers to join us on this journey.
 
 ## FAQ
 
-**Q: Who can use this marketplace?**  
-A: Gen Z entrepreneurs looking for short-term retail opportunities and shopping
+### Q: Who can use this marketplace?
+
+Gen Z entrepreneurs looking for short-term retail opportunities and shopping
 centers seeking fresh concepts are ideal users.
 
-**Q: What types of retail spaces are available?**  
-A: The platform offers a variety of spaces including kiosks, pop-ups, and
+### Q: What types of retail spaces are available?
+
+The platform offers a variety of spaces including kiosks, pop-ups, and
 storefronts, with flexible daily, weekly, or monthly lease options.
 
-**Q: How do Gen Z merchants apply for spaces?**  
-A: Merchants can browse available listings and use a simple application process
+### Q: How do Gen Z merchants apply for spaces?
+
+Merchants can browse available listings and use a simple application process
 to submit their business information and product showcases.
 
-**Q: How do shopping centers benefit from the marketplace?**  
-A: Centers attract new foot traffic, revitalize their brand, and diversify their
+### Q: How do shopping centers benefit from the marketplace?
+
+Centers attract new foot traffic, revitalize their brand, and diversify their
 tenant mix by partnering with innovative young merchants.
 
-**Q: Is this only for large businesses?**
-A: No, the marketplace is designed to make retail accessible to businesses of
+### Q: Is this only for large businesses?
+
+No, the marketplace is designed to make retail accessible to businesses of
 all sizes, from individual creators to scaling brands.

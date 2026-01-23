@@ -134,20 +134,18 @@ identifying the available spaces in each shopping center.
 
 ---
 
-## FAQ: Specialty Leasing for Small Business
+## FAQ
 
-**Q: What exactly is specialty leasing and how is it different from a regular
-retail lease?**
+### Q: What exactly is specialty leasing and how is it different from a regular retail lease?
 
 Specialty leasing provides temporary retail space—kiosks, pop-ups, carts, or
-
 shared spaces—for days to months instead of the standard 3-5 year commitments.
 You get access to high-traffic locations like malls and shopping centers without
 long-term obligations, massive upfront costs, or expensive build-outs. Shopping
 centers use this to fill vacant space and add variety while giving smaller
 retailers access to prime locations.
-**Q: How much does specialty leasing actually cost compared to traditional
-retail?**
+
+### Q: How much does specialty leasing actually cost compared to traditional retail?
 
 Initial investment drops dramatically—a few thousand for a kiosk setup versus
 tens of thousands for traditional store build-out. No multi-month rent deposits
@@ -157,7 +155,7 @@ confirm what's included (utilities, security, maintenance) versus what you pay
 separately. The temporary nature and lower square footage translate directly to
 lower financial risk.
 
-**Q: What are the major disadvantages I need to consider?**
+### Q: What are the major disadvantages I need to consider?
 
 Four primary constraints: Limited space forces creative inventory management and
 may require off-site storage. Temporary leases end just as you build
@@ -167,8 +165,7 @@ interaction methods. Percentage rent structures create unpredictable costs as
 sales fluctuate. If you can't operate within tight physical and regulatory
 constraints, specialty leasing won't work.
 
-**Q: Is specialty leasing worth it as a long-term business strategy or just a
-stepping stone?**
+### Q: Is specialty leasing worth it as a long-term business strategy or just a stepping stone?
 
 Depends on your business model. For seasonal businesses (Halloween costumes,
 holiday gifts), specialty leasing matches your revenue cycle without paying rent

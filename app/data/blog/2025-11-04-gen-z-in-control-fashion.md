@@ -109,21 +109,26 @@ Adapt or become irrelevant. There's no middle ground.
 
 ## FAQ
 
-**Q: How much will Gen Z and Gen Alpha control fashion spending?**  
-A: 40% of all fashion spending over the next decade, per the WWD x BCG report.
+### Q: How much will Gen Z and Gen Alpha control fashion spending?
 
-**Q: What's different about how younger consumers shop?**  
-A: They prioritize products that feel distinctive and relevant in the moment,
+40% of all fashion spending over the next decade, per the WWD x BCG report.
+
+### Q: What's different about how younger consumers shop?
+
+They prioritize products that feel distinctive and relevant in the moment,
 mixing brands rather than staying loyal to one house.
 
-**Q: Why is social media killing traditional fashion cycles?**  
-A: Trends go viral and die within days, making seasonal calendars obsolete.
+### Q: Why is social media killing traditional fashion cycles?
+
+Trends go viral and die within days, making seasonal calendars obsolete.
 Real-time response is now mandatory.
 
-**Q: How should brands use AI for Gen Z?**  
-A: Show up where they spend time (LLMs, TikTok, gaming), optimize for how they
+### Q: How should brands use AI for Gen Z?
+
+Show up where they spend time (LLMs, TikTok, gaming), optimize for how they
 ask questions, and enable AI-friendly content architecture.
 
-**Q: What do younger consumers want from fashion brands?**  
-A: Authenticity, self-expression, co-creation opportunities, and products that
+### Q: What do younger consumers want from fashion brands?
+
+Authenticity, self-expression, co-creation opportunities, and products that
 help them influence peers—without premium pricing.

@@ -113,7 +113,7 @@ describe("Blog Post Rendering", () => {
   it("should have a section FAQ with 5 question items", async () => {
     const faq = page.locator("h2", { hasText: "FAQ" });
     await expect(faq).toBeVisible();
-    const items = page.locator("h2:has-text('FAQ') ~ p:has-text('Q: ')");
+    const items = page.locator("h2:has-text('FAQ') ~ h3:has-text('Q: ')");
     await expect(items).toHaveCount(5);
   });
 

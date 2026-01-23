@@ -92,24 +92,29 @@ can wait until you're ready.
 
 ---
 
-## FAQ: Soft Launching a Business
+## FAQ
 
-**Q: What does "soft launching" a business mean?**  
-A: It means starting a business quietly, without a big public announcement, to
+### Q: What does "soft launching" a business mean?
+
+It means starting a business quietly, without a big public announcement, to
 test ideas and gather feedback before a full launch.
 
-**Q: Why would someone choose a soft launch over a traditional grand opening?**
-A: A soft launch reduces pressure, allows for real-time feedback, and gives
+### Q: Why would someone choose a soft launch over a traditional grand opening?
+
+A soft launch reduces pressure, allows for real-time feedback, and gives
 flexibility to make changes before going public.
 
-**Q: What are common ways to soft launch a business?**  
-A: Popular methods include pop-up shops, landing pages, limited product drops,
+### Q: What are common ways to soft launch a business?
+
+Popular methods include pop-up shops, landing pages, limited product drops,
 or sharing teasers on social media.
 
-**Q: How does a soft launch support sustainable growth?**  
-A: It lets entrepreneurs experiment in small ways, adapt based on feedback, and
+### Q: How does a soft launch support sustainable growth?
+
+It lets entrepreneurs experiment in small ways, adapt based on feedback, and
 grow at their own pace without risking too much upfront.
 
-**Q: Is soft launching only for new businesses?**  
-A: No—existing businesses can use soft launches for new products, locations, or
+### Q: Is soft launching only for new businesses?
+
+No—existing businesses can use soft launches for new products, locations, or
 ideas to test the market before a big rollout.

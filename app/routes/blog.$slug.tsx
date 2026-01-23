@@ -137,17 +137,20 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
 }
 
 function parseFAQ(body: string): { question: string; answer: string }[] | null {
-  const faqMatch = body.match(/## FAQ:[\s\S]*$/i);
+  const faqMatch = body.match(/## FAQ:?[\s\S]*$/i);
   if (!faqMatch) return null;
 
   const faqSection = faqMatch[0];
-  const qaPattern = /\*\*Q:\s*([^*]+)\*\*\s*\n\n([^*]+?)(?=\n\n\*\*Q:|$)/g;
+  // Match format: ### Q: question\n\nanswer
+  // Capture everything until next ### Q: or end
+  const qaPattern =
+    /### Q:\s*([^\n]+)\n\n((?:(?!### Q:)[\s\S])+?)(?=\n### Q:|$)/gi;
   const matches = [...faqSection.matchAll(qaPattern)];
 
   if (matches.length === 0) return null;
 
   return matches.map((match) => ({
     question: match[1].trim(),
-    answer: match[2].trim(),
+    answer: match[2].replaceAll(/\n/g, " ").trim(),
   }));
 }

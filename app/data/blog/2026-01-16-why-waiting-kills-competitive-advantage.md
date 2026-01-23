@@ -107,10 +107,9 @@ That's how you win.
 
 ---
 
-## FAQ: Imperfect Action Strategy
+## FAQ
 
-**Q: How do I know when a product is "good enough" to launch versus actually
-half-baked?**
+### Q: How do I know when a product is "good enough" to launch versus actually half-baked?
 
 Good enough means the core value proposition works and won't damage customer
 trust. Ask: Does this solve the primary problem we promised to solve? Is it
@@ -120,7 +119,7 @@ experience is frustrating enough to create negative brand association. The
 distinction: good enough delights on the main promise, half-baked fails the
 basic use case.
 
-**Q: Won't launching imperfect products damage our brand reputation?**
+### Q: Won't launching imperfect products damage our brand reputation?
 
 Only if you're launching broken products and calling them finished. Customers
 distinguish between "new product with room for improvement" and "sloppy
@@ -129,8 +128,7 @@ communicate that you're actively improving based on feedback, and deliver on
 that promise with visible iterations. Customers respect brands that listen and
 improve. They abandon brands that overpromise and underdeliver or never evolve.
 
-**Q: How do I convince risk-averse stakeholders or team members to embrace
-faster launches?**
+### Q: How do I convince risk-averse stakeholders or team members to embrace faster launches?
 
 Show the opportunity cost in concrete terms. Calculate revenue lost from delayed
 launches. Present competitor moves happening while you perfect internally. Frame
@@ -139,7 +137,7 @@ testing assumptions with real data instead of expensive internal guessing. Start
 with lower-stakes launches to build confidence, then scale the approach as
 results prove the model.
 
-**Q: Are there situations where perfectionism is actually the right approach?**
+### Q: Are there situations where perfectionism is actually the right approach?
 
 Yes. High-stakes, low-iteration-opportunity scenarios demand more upfront rigor.
 Medical devices, financial products with regulatory constraints, or one-shot
@@ -147,7 +145,7 @@ opportunities where you can't rapidly iterate. But most companies overestimate
 how often they're in this category. If you can update, patch, or improve
 post-launch, bias toward speed.
 
-**Q: What systems or processes make iterative launches work operationally?**
+### Q: What systems or processes make iterative launches work operationally?
 
 Three requirements: rapid feedback collection (surveys, analytics, support
 ticket tracking), clear product roadmap showing planned improvements, and

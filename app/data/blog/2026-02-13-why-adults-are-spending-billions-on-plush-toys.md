@@ -112,25 +112,29 @@ impact.
 
 ---
 
-## FAQ: Plush Toys, Kidults & Experiential Retail
+## FAQ
 
-**Q: Why are so many adults buying plush toys right now?**  
-A: Plush toys offer comfort, nostalgia, and a quick dose of happiness during
-stressful times––they’re an easy, affordable “treat.”
+### Q: Why are so many adults buying plush toys right now?
 
-**Q: Is this just a temporary trend, or will it last?**  
-A: While trends shift, emotional consumption and the desire for fun, collectible
+Plush toys offer comfort, nostalgia, and a quick dose of happiness during
+stressful times––they're an easy, affordable "treat."
+
+### Q: Is this just a temporary trend, or will it last?
+
+While trends shift, emotional consumption and the desire for fun, collectible
 items show signs of long-term staying power across age groups.
 
-**Q: How are brands like Pop Mart and Jellycat fueling demand?**  
-A: They use limited-edition drops, themed pop-up shops, and social media hype to
+### Q: How are brands like Pop Mart and Jellycat fueling demand?
+
+They use limited-edition drops, themed pop-up shops, and social media hype to
 keep things exciting and create a sense of urgency.
 
-**Q: Do I have to sell toys to benefit from this trend as a retailer?**  
-A: No! You can win by focusing on emotionally engaging experiences—think limited
+### Q: Do I have to sell toys to benefit from this trend as a retailer?
+
+No! You can win by focusing on emotionally engaging experiences—think limited
 releases, pop-ups, and products that spark joy or nostalgia.
 
-**Q: Are pop-up shops better than traditional stores for this kind of product?**
+### Q: Are pop-up shops better than traditional stores for this kind of product?
 
-A: Pop-ups allow brands to stay flexible, create hype, and quickly meet
+Pop-ups allow brands to stay flexible, create hype, and quickly meet
 customers where demand is hottest—without the risk of long leases.

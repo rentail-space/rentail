@@ -195,10 +195,9 @@ Keep moving. Always.
 
 ---
 
-## FAQ: Persisting Through Setbacks Without Hunkering Down
+## FAQ
 
-**Q: How do I actually calculate and use a "90-day trailing average" of my
-sentiment about the business?**
+### Q: How do I actually calculate and use a "90-day trailing average" of my sentiment about the business?
 
 **The Setup:**
 
@@ -220,8 +219,7 @@ Make major pivots or strategic changes only when the 90-day average shifts
 significantly—not when you have one rough week. This stops emotional
 overreaction to single bad days.
 
-**Q: Aren't there times when you should hunker down and analyze what went wrong
-instead of just pushing forward?**
+### Q: Aren't there times when you should hunker down and analyze what went wrong instead of just pushing forward?
 
 Yes—but there's a critical distinction between productive analysis and
 destructive withdrawal:
@@ -244,8 +242,7 @@ destructive withdrawal:
 setback, you're ruminating, not analyzing. Analysis without execution is just
 expensive anxiety.
 
-**Q: How do I communicate with my team during setbacks without either
-sugarcoating reality or spreading panic?**
+### Q: How do I communicate with my team during setbacks without either sugarcoating reality or spreading panic?
 
 Use the **"Fact → Plan → Focus"** framework:
 
@@ -272,8 +269,7 @@ when panic spreads. Your visibility and clear direction during chaos is what
 stabilizes teams. Show them persistence through presence and action, not through
 motivational speeches.
 
-**Q: How do I know if I'm being persistent versus just stubborn about a failing
-strategy?**
+### Q: How do I know if I'm being persistent versus just stubborn about a failing strategy?
 
 Here's the distinction:
 
@@ -300,8 +296,7 @@ defending your original approach despite evidence it's not working? Persistent
 founders iterate tactics while maintaining strategic vision. Stubborn founders
 repeat the same actions expecting different results.
 
-**Q: What specific actions should I take immediately after a major setback to
-avoid the hermit response?**
+### Q: What specific actions should I take immediately after a major setback to avoid the hermit response?
 
 **Within 24 Hours — The Anti-Hermit Protocol:**
 

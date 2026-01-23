@@ -100,10 +100,9 @@ Focus wins. Every time.
 
 ---
 
-## FAQ: Breaking the Comparison Trap and Building Through Focus
+## FAQ
 
-**Q: How do I actually identify what we can "genuinely excel at" versus what I
-just wish we were good at?**
+### Q: How do I actually identify what we can "genuinely excel at" versus what I just wish we were good at?
 
 Three filters: First, where do customers already praise you unprompted? Read
 support tickets, reviews, and testimonials—what specific things do people value?
@@ -114,8 +113,7 @@ your background gives you an unfair advantage in enterprise sales or community
 building, that's differentiation. The intersection of these three is where you
 focus.
 
-**Q: What if I stop monitoring competitors daily and miss a critical market
-shift or competitive threat?**
+### Q: What if I stop monitoring competitors daily and miss a critical market shift or competitive threat?
 
 You won't. Strategic intelligence comes from quarterly competitive reviews,
 customer conversations, and industry publications—not daily social media
@@ -125,8 +123,7 @@ daily competitor monitoring creates anxiety and reactive decision-making.
 Quarterly check-ins provide strategic insight without the noise. If a genuine
 threat emerges, your customers, advisors, or investors will surface it.
 
-**Q: How do I shut down initiatives my team has invested time in without
-destroying morale?**
+### Q: How do I shut down initiatives my team has invested time in without destroying morale?
 
 Frame it as strategic reallocation, not failure. Be direct: "We're killing X not
 because it's bad work, but because it's not differentiated enough to win. We're
@@ -136,8 +133,7 @@ actually deliver: the budget and attention saved from killing mediocre
 initiatives goes directly to the focus areas. Teams respect strategic discipline
 when they see the resources flow to what matters.
 
-**Q: The article mentions "three non-negotiables"—is three the magic number, or
-could it be two or five?**
+### Q: The article mentions "three non-negotiables"—is three the magic number, or could it be two or five?
 
 Three is a forcing function, not gospel. The principle: few enough that you can
 genuinely resource them properly, enough that you create a defensible market
@@ -146,8 +142,7 @@ resource-constrained companies. Test it: if you can't allocate at least 20% of
 budget and leadership attention to each "non-negotiable," you have too many.
 Better to own three things completely than spread across five inadequately.
 
-**Q: What if focusing on our strengths means we're not competing on features
-that customers expect as table stakes?**
+### Q: What if focusing on our strengths means we're not competing on features that customers expect as table stakes?
 
 Meet table stakes adequately, own differentiators exceptionally. Customers
 expect functional basics—if you're e-commerce, checkout needs to work. But they
