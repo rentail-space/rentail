@@ -28,7 +28,7 @@ const chartConfig = {
     label: "Citation Ratio",
     icon: PercentIcon,
     color: "var(--chart-3)",
-    valueFormatter: (value: number) => `${(value * 100).toFixed(2)}%`,
+    valueFormatter: (value: number) => value.toLocaleString(),
   },
   score: {
     label: "Score",
@@ -96,14 +96,7 @@ function SpecificChart({
         responsive
       >
         <CartesianGrid vertical={false} />
-        <XAxis
-          dataKey={({ date }) => date.toFormat("yyyy-MM-dd")}
-          tick={({ x, y, payload }) => (
-            <text x={x + 20} y={y + 10} textAnchor="end" fontSize={12}>
-              {DateTime.fromISO(payload.value).toFormat("MMM d")}
-            </text>
-          )}
-        />
+        <XAxis dataKey={({ date }) => date.toFormat("yyyy-MM-dd")} />
         <YAxis
           allowDecimals={false}
           tickFormatter={valueFormatter}

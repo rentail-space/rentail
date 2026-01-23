@@ -15,7 +15,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   return await prisma.visibilityCheck.findMany({
     orderBy: { createdAt: "desc" },
     where: {
-      createdAt: { gte: DateTime.now().minus({ days: 30 }).toJSDate() },
+      createdAt: { gte: DateTime.now().minus({ days: 90 }).toJSDate() },
     },
   });
 }
@@ -28,9 +28,7 @@ export default function VisibilityPage({ loaderData }: Route.ComponentProps) {
           {(visibility) => {
             const groupedByDate = Object.entries(
               groupBy(visibility, (visibility) =>
-                DateTime.fromJSDate(visibility.createdAt, {
-                  zone: "UTC",
-                }).toFormat("yyyy-MM-dd"),
+                visibility.createdAt.toISOString(),
               ),
             ).map(([date, queries]) => ({
               date: DateTime.fromISO(date, { zone: "UTC" }),
