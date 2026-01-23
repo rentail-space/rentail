@@ -4,8 +4,7 @@ import {
   getGroupedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { groupBy, last, mean, median, sum } from "es-toolkit";
-import { DateTime } from "luxon";
+import { mean, median, sum } from "es-toolkit";
 import {
   Table,
   TableBody,
@@ -15,30 +14,19 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/Table";
-import prisma from "~/lib/prisma";
-import { verifyAdmin } from "~/lib/sessions.server";
-import type { Route } from "./+types/admin.visibility";
 
-export async function loader({ request }: Route.LoaderArgs) {
-  await verifyAdmin(request.headers);
-
-  const visibility = await prisma.visibilityCheck.findMany({
-    orderBy: { createdAt: "desc" },
-    where: {
-      createdAt: { gte: DateTime.now().minus({ days: 30 }).toJSDate() },
-    },
-  });
-  return { visibility };
-}
-
-export default function VisibilityPage({
-  loaderData,
+export default function RecentVisibility({
+  queries,
 }: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
+  queries: {
+    queryId: string;
+    query: string;
+    citations: string[];
+    score: number;
+    ratio: number;
+    rentail: number;
+  }[];
 }) {
-  const grouped = groupBy(loaderData.visibility, (visibility) =>
-    DateTime.fromJSDate(visibility.createdAt).toFormat("yyyy-MM-dd"),
-  );
   const table = useReactTable({
     columns: [
       {
@@ -57,14 +45,11 @@ export default function VisibilityPage({
         size: 600,
       },
       {
-        accessorFn: (row) =>
-          row.citations.filter(
-            (citation) => new URL(citation).hostname === "rentail.space",
-          ).length,
+        accessorFn: (row) => row.rentail,
         aggregationFn: "mean",
-        cell: ({ row, getValue }) => (
+        cell: ({ row }) => (
           <span>
-            {getValue()}/{row.original.citations.length}
+            {row.original.rentail} / {row.original.citations.length}
           </span>
         ),
         enableGrouping: true,
@@ -72,20 +57,20 @@ export default function VisibilityPage({
         size: 60,
       },
       {
-        accessorFn: (row) => scoreCitations(row.citations),
+        accessorFn: (row) => row.score,
         aggregationFn: "mean",
         enableGrouping: true,
         header: "Score",
         size: 60,
       },
     ],
-    data: last(Object.values(grouped)) ?? [],
+    data: queries,
     getCoreRowModel: getCoreRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
   });
 
   return (
-    <section className="flex flex-col gap-8">
+    <section>
       <h1 className="font-bold text-2xl">Recent Visibility Checks</h1>
       <Table>
         <TableHeader>
@@ -159,13 +144,4 @@ export default function VisibilityPage({
       </Table>
     </section>
   );
-}
-
-function scoreCitations(citations: string[]): number {
-  const isRentail = citations.filter(
-    (citation) => new URL(citation).hostname === "rentail.space",
-  );
-  const isFirstPlace =
-    citations.length > 0 && new URL(citations[0]).hostname === "rentail.space";
-  return (isFirstPlace ? 50 : 0) + isRentail.length * 10;
 }

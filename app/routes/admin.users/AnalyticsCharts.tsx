@@ -23,7 +23,6 @@ import {
   CardTitle,
 } from "~/components/ui/Card";
 import {
-  type ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
@@ -38,23 +37,30 @@ const chartConfig = {
     label: "Unique Visitors",
     icon: PersonStandingIcon,
     color: "var(--chart-1)",
+    valueFormatter: (value: number) => value.toLocaleString(),
   },
   fromLLM: {
     label: "Visitors from LLM",
     icon: BotIcon,
     color: "var(--chart-2)",
+    valueFormatter: (value: number) => value.toLocaleString(),
   },
   chats: {
     label: "Chats Started",
     icon: BubblesIcon,
     color: "var(--chart-3)",
+    valueFormatter: (value: number) => value.toLocaleString(),
   },
   sessionDuration: {
     label: "Avg Session Duration",
     icon: ClockIcon,
     color: "var(--chart-4)",
+    valueFormatter: (value: number) =>
+      `${Math.floor(value / 60).toLocaleString()}m${Math.floor(value % 60)
+        .toString()
+        .padStart(2, "0")}s`,
   },
-} satisfies ChartConfig;
+};
 
 /**
  * A component that displays the analytics charts.
@@ -122,16 +128,7 @@ export default function AnalyticsCharts({
             groupDays={groupOfDays}
             key={key}
             name={value.label}
-            yAxisFormatter={
-              key === "sessionDuration"
-                ? (value) =>
-                    `${Math.floor(value / 60).toLocaleString()}m${Math.floor(
-                      value % 60,
-                    )
-                      .toString()
-                      .padStart(2, "0")}s`
-                : undefined
-            }
+            valueFormatter={value.valueFormatter}
           />
         ))}
       </CardContent>
@@ -149,14 +146,14 @@ function SpecificChart({
   fill,
   groupDays,
   name,
-  yAxisFormatter,
+  valueFormatter,
 }: {
   groupDays: number;
   data: Array<{ date: DateTime }>;
   dataKey: DataKey<(typeof data)[number]>;
   fill: string;
   name: string;
-  yAxisFormatter?: (value: number) => string;
+  valueFormatter: (value: number) => string;
 }) {
   return (
     <ChartContainer config={chartConfig} className="h-40 w-full">
@@ -177,7 +174,7 @@ function SpecificChart({
         />
         <YAxis
           allowDecimals={false}
-          tickFormatter={yAxisFormatter}
+          tickFormatter={valueFormatter}
           tickLine={false}
           tickMargin={8}
           type="number"
@@ -210,7 +207,7 @@ function SpecificChart({
                 <div className="grid w-full grid-cols-2 gap-2">
                   <span>{name}</span>
                   <span className="text-right font-bold tabular-nums">
-                    {yAxisFormatter ? yAxisFormatter(Number(value)) : value}
+                    {valueFormatter(Number(value))}
                   </span>
                 </div>
               )}
