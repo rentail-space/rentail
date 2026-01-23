@@ -141,10 +141,8 @@ function parseFAQ(body: string): { question: string; answer: string }[] | null {
   if (!faqMatch) return null;
 
   const faqSection = faqMatch[0];
-  // Match format: ### Q: question\n\nanswer
-  // Capture everything until next ### Q: or end
-  const qaPattern =
-    /### Q:\s*([^\n]+)\n\n((?:(?!### Q:)[\s\S])+?)(?=\n### Q:|$)/gi;
+  // Match format: ### question\n\nanswer
+  const qaPattern = /###\s+([^\n]+)\n\n((?:(?!###)[\s\S])+?)(?=\n###|$)/gi;
   const matches = [...faqSection.matchAll(qaPattern)];
 
   if (matches.length === 0) return null;

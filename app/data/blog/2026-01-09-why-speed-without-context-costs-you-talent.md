@@ -115,51 +115,22 @@ Listen first. Decide fast. Execute with clarity.
 
 ## FAQ
 
-### Q: How do I balance listening with the need to make fast decisions in high-pressure situations?
+### How do I make fast decisions as a leader?
 
-Listening doesn't mean endless deliberation. The framework: spend 10 minutes
-gathering context, then decide with full information. A quick conversation
-asking "What's changed?" and "What support do you need?" loads the data you need
-for a better decision. Fast decisions with context beat instant decisions with
-blind spots. Your decisiveness becomes more accurate, not slower.
+Spend 10 minutes gathering context, then decide with full information. Ask "What's changed?" and "What support do you need?"—fast decisions with context beat instant decisions with blind spots.
 
-### Q: What if I listen and discover it really is a performance issue? Haven't I just wasted time?
+### What should I ask when someone's performance drops?
 
-You've gained precision. Performance issues require specific
-interventions—clearer expectations, additional training, or role adjustment.
-Personal crises require different support. Listening reveals which problem
-you're actually solving. Managing someone out without understanding context
-creates legal exposure and damages team morale. The 10-minute conversation
-protects you from expensive mistakes.
+Three questions: "I've noticed [behavior change]—is everything okay?" Then "What's driving this?" Finally "What do you need from me?" This opens dialogue without forcing disclosure.
 
-### Q: What specific questions should I ask to understand context without overstepping boundaries?
+### Does listening make me look weak?
 
-Three direct questions work: "I've noticed [specific behavior change]. Is
-everything okay?" Then: "What's driving this change?" Finally: "What do you need
-from me to get back on track?" This gives them the opening to share what's
-relevant without forcing disclosure. If they don't want to elaborate, respect
-that—but you've signaled you're paying attention and available to help.
+The opposite. Teams respect informed decisions, not reactive ones. Asking questions, processing quickly, then executing with clarity shows thoroughness—not impulsiveness.
 
-### Q: Won't pausing to listen make me appear weak or indecisive to my team?
-
-The opposite. Teams respect leaders who make informed decisions, not reactive
-ones. Weakness is changing your mind repeatedly because you didn't gather
-context upfront. Strength is asking direct questions, processing answers
-quickly, then executing with clarity. Your team sees a leader who's thorough,
-not impulsive. That builds confidence.
-
-### Q: How do I retrain my instinct to jump to conclusions when it's been my operating mode for years?
-
-Create a forcing function. When you notice behavioral changes, schedule a
-15-minute conversation before making any decisions. Make it a hard rule for 90
-days. Your Type-A brain will adapt—you'll start loading context automatically
-before forming judgments. The pattern becomes reflexive. Most leaders report the
-shift takes 60-90 days of consistent practice.
-
-### Q: Where can I find retail space to test business concepts quickly?
+### Where can I find retail space to test concepts?
 
 [Browse rentail.space](https://rentail.space) for available temporary spaces at shopping centers. Test with real customers, gather context, iterate fast.
 
-### Q: How do I find short-term retail space without broker calls?
+### How do I find short-term retail space?
 
 Search by location to see available kiosks, pop-ups, and carts with photos, pricing, and terms.

@@ -102,61 +102,22 @@ deliver exceptionally well.
 
 ## FAQ
 
-### Q: How do I actually identify what we can "genuinely excel at" versus what I just wish we were good at?
+### How do I focus my business strategy?
 
-Three filters: First, where do customers already praise you unprompted? Read
-support tickets, reviews, and testimonials—what specific things do people value?
-Second, what can you execute better than competitors with your current resources
-and team? Not what you could do with unlimited budget, but what you can dominate
-today. Third, what aligns with your founders' unique expertise or network? If
-your background gives you an unfair advantage in enterprise sales or community
-building, that's differentiation. The intersection of these three is where you
-focus.
+Identify what customers praise unprompted, what you execute better than competitors today, and what aligns with your unique expertise. Focus on the intersection of these three—not what competitors do.
 
-### Q: What if I stop monitoring competitors daily and miss a critical market shift or competitive threat?
+### Should I monitor competitors daily?
 
-You won't. Strategic intelligence comes from quarterly competitive reviews,
-customer conversations, and industry publications—not daily social media
-stalking. Major market shifts don't happen in 24 hours. Critical threats reveal
-themselves in customer feedback, not competitor press releases. The reality:
-daily competitor monitoring creates anxiety and reactive decision-making.
-Quarterly check-ins provide strategic insight without the noise. If a genuine
-threat emerges, your customers, advisors, or investors will surface it.
+No. Check quarterly for strategic insights, not daily for anxiety. Major shifts surface through customer feedback and industry publications, not competitor social media.
 
-### Q: How do I shut down initiatives my team has invested time in without destroying morale?
+### How do I stop doing things that don't matter?
 
-Frame it as strategic reallocation, not failure. Be direct: "We're killing X not
-because it's bad work, but because it's not differentiated enough to win. We're
-concentrating resources on Y and Z where we can dominate." Show the team what
-they're gaining—more resources, clearer mandate, better odds of winning. Then
-actually deliver: the budget and attention saved from killing mediocre
-initiatives goes directly to the focus areas. Teams respect strategic discipline
-when they see the resources flow to what matters.
+Frame cuts as strategic reallocation, not failure. Show your team what they gain—more resources, clearer direction, better odds of winning in areas where you can dominate.
 
-### Q: The article mentions "three non-negotiables"—is three the magic number, or could it be two or five?
-
-Three is a forcing function, not gospel. The principle: few enough that you can
-genuinely resource them properly, enough that you create a defensible market
-position. Two works if they're substantial. Five spreads too thin for most
-resource-constrained companies. Test it: if you can't allocate at least 20% of
-budget and leadership attention to each "non-negotiable," you have too many.
-Better to own three things completely than spread across five inadequately.
-
-### Q: What if focusing on our strengths means we're not competing on features that customers expect as table stakes?
-
-Meet table stakes adequately, own differentiators exceptionally. Customers
-expect functional basics—if you're e-commerce, checkout needs to work. But they
-choose brands based on what's exceptional, not what's adequate. The boutique
-fitness example: streaming classes are table stakes (needs to work), but
-personalized coaching is the differentiator (needs to be exceptional). Resource
-accordingly: 20% budget on table stakes functionality, 80% on what makes you
-distinct. If "table stakes" is consuming most resources, you're in a commodity
-business—find a different market.
-
-### Q: Where can I test focused retail concepts without major commitments?
+### Where can I test retail concepts without long commitments?
 
 [Browse rentail.space](https://rentail.space) for temporary spaces at shopping centers. Test what you excel at, iterate, scale winners—no multi-year leases.
 
-### Q: How do I find short-term retail space to validate my strengths?
+### How do I find short-term retail space?
 
-Search by location for available kiosks, pop-ups, and inline spaces with flexible terms.
+Search by location for available kiosks, pop-ups, and inline spaces with flexible terms. Test concepts in weeks, not years.

@@ -197,138 +197,22 @@ who avoid setbacks—they're the ones who execute through them.
 
 ## FAQ
 
-### Q: How do I actually calculate and use a "90-day trailing average" of my sentiment about the business?
+### How do I handle business setbacks?
 
-**The Setup:**
+Track weekly sentiment, calculate a 90-day average, and make decisions based on trends—not single bad days. Rate your week 1-10, and don't pivot unless the average shifts significantly over time.
 
-- Every Friday, rate how you feel about the business (1-10 scale)
-- After 12 weeks, calculate your baseline average
-- Each new week: drop the oldest data point, add the new one
+### What should I do immediately after a failure?
 
-**How to Use It:**
+Communicate with your team within 2 hours using "Fact → Plan → Focus." Schedule external conversations same day. Identify one quick win to execute this week—movement beats analysis paralysis.
 
-- Today feels like a 3, but your 90-day average is 7? → You're experiencing
-  noise, not decline
-- Today feels like a 9, but your 90-day average is 4? → Don't celebrate yet, one
-  win doesn't change trajectory
-- Your 90-day average dropped from 7 to 5 over two months? → Time for a
-  strategic review
+### How do I keep my team motivated during tough times?
 
-**The Decision Filter:**
-Make major pivots or strategic changes only when the 90-day average shifts
-significantly—not when you have one rough week. This stops emotional
-overreaction to single bad days.
+Stay visible and give clear direction. Don't hide after bad news—your presence stabilizes teams. Show persistence through action, not motivational speeches.
 
-### Q: Aren't there times when you should hunker down and analyze what went wrong instead of just pushing forward?
-
-Yes—but there's a critical distinction between productive analysis and
-destructive withdrawal:
-
-**Productive Post-Mortem:**
-
-- Scheduled and time-boxed (2 hours max)
-- Documents what happened and what to change
-- Produces specific action items
-- Execution starts within 48 hours
-
-**Destructive Hunkering:**
-
-- Open-ended, no clear endpoint
-- Withdrawal from team and customers
-- No execution plan emerges
-- Days/weeks pass without action
-
-**The Test:** If you're not producing specific action items within 48 hours of a
-setback, you're ruminating, not analyzing. Analysis without execution is just
-expensive anxiety.
-
-### Q: How do I communicate with my team during setbacks without either sugarcoating reality or spreading panic?
-
-Use the **"Fact → Plan → Focus"** framework:
-
-**1. Acknowledge the setback in factual terms (30 seconds):**
-
-- "We missed Q2 targets by 15%"
-- "Our enterprise deal fell through this morning"
-- "Two key team members resigned this week"
-
-**2. Immediately follow with the action plan (2 minutes):**
-
-- Here's what we're adjusting
-- Here's what stays the same
-- Here's what success looks like next quarter
-
-**3. Give each team clear weekly focus (1 minute):**
-
-- Engineering: Ship X feature by Friday
-- Sales: Focus on these three verticals
-- Marketing: Launch the case study campaign
-
-**Critical Rule:** Never hide in your office after announcing bad news. That's
-when panic spreads. Your visibility and clear direction during chaos is what
-stabilizes teams. Show them persistence through presence and action, not through
-motivational speeches.
-
-### Q: How do I know if I'm being persistent versus just stubborn about a failing strategy?
-
-Here's the distinction:
-
-**Persistent Execution:**
-
-- Same strategic vision
-- Continuous tactical improvements
-- Adapts based on customer feedback
-- Changes approach when data says so
-- Example: "We're still targeting enterprise, but shifting from outbound to
-  partner channels after 6 months showed better conversion"
-
-**Stubborn Execution:**
-
-- Ignores market feedback
-- Repeats the same failing approach
-- Defends original plan despite evidence
-- Interprets all setbacks as "we just need more time"
-- Example: "We've cold-called 5,000 enterprises with 0.1% conversion, but we're
-  sticking with it because that's the plan"
-
-**The Test:** Are you making tactical pivots based on what you're learning, or
-defending your original approach despite evidence it's not working? Persistent
-founders iterate tactics while maintaining strategic vision. Stubborn founders
-repeat the same actions expecting different results.
-
-### Q: What specific actions should I take immediately after a major setback to avoid the hermit response?
-
-**Within 24 Hours — The Anti-Hermit Protocol:**
-
-**1. Communicate to your team (within 2 hours):**
-
-- Schedule an all-hands or send a company update
-- Use the "Fact → Plan → Focus" framework (see above)
-- Be visible—don't hide in your office or go remote
-
-**2. Schedule external conversations (same day):**
-
-- Customer calls: "What are you seeing in the market?"
-- Investor/advisor check-ins: "Here's what happened, here's our response"
-- Peer founder coffee: External perspective breaks the internal spiral
-
-**3. Identify one quick win (execute this week):**
-
-- Close a minor deal
-- Ship a feature update
-- Hire a strong candidate
-- Launch a content piece
-- Fix a nagging customer complaint
-
-**Why This Works:**
-Small wins break the paralysis pattern and signal to your team that execution
-continues regardless of setbacks. Your team is watching to see if you'll freeze
-or move. Show them movement.
-
-### Q: Where can I find retail space to test concepts after setbacks?
+### Where can I find retail space to test new concepts?
 
 [Browse rentail.space](https://rentail.space) for temporary spaces at shopping centers. Test ideas, gather feedback, iterate—don't hunker down.
 
-### Q: How do I find short-term retail space to keep momentum?
+### How do I find short-term retail space?
 
 Search by location for available kiosks, pop-ups, and carts with flexible terms. Launch fast, learn, improve.
