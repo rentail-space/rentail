@@ -36,6 +36,7 @@ const envVars = {
     .asUrlString(),
 
   OPENAI_API_KEY: env.get("OPENAI_API_KEY").required().asString(),
+  SERPAPI_KEY: env.get("SERPAPI_KEY").required().asString(),
 };
 
 export default envVars;

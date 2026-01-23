@@ -11,6 +11,10 @@ export const config: VercelConfig = {
       path: "/cron/visibility",
       schedule: "0 6 * * *",
     },
+    {
+      path: "/cron/ranking",
+      schedule: "0 7 * * *",
+    },
   ],
   github: {
     enabled: false,
