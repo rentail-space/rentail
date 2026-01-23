@@ -7,11 +7,12 @@
  */
 export default function externalLink(url: string): string {
   const proper = new URL(url);
-  if (proper.hostname && proper.hostname !== "rentail.space") {
+  proper.searchParams.delete("utm_source");
+  proper.searchParams.delete("utm_medium");
+  proper.searchParams.delete("utm_content");
+  proper.searchParams.delete("utm_campaign");
+  // Only absolute links to other sites need UTM parameters
+  if (proper.hostname && proper.hostname !== "rentail.space")
     proper.searchParams.set("utm_source", "rentail.space");
-    proper.searchParams.delete("utm_medium");
-    proper.searchParams.delete("utm_content");
-    proper.searchParams.delete("utm_campaign");
-  }
   return proper.toString();
 }
