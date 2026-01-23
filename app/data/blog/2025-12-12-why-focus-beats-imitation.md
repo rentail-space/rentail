@@ -96,7 +96,7 @@ Your constraints aren't liabilities—they're forcing functions for strategic
 clarity. The question isn't what competitors are doing. It's what only you can
 deliver exceptionally well.
 
-Focus wins. Every time.
+**Test your focus:** [Find temporary retail spaces on rentail.space](https://rentail.space) to validate what you can genuinely excel at—without spreading thin across competitor features.
 
 ---
 
@@ -152,3 +152,11 @@ personalized coaching is the differentiator (needs to be exceptional). Resource
 accordingly: 20% budget on table stakes functionality, 80% on what makes you
 distinct. If "table stakes" is consuming most resources, you're in a commodity
 business—find a different market.
+
+### Q: Where can I test focused retail concepts without major commitments?
+
+[Browse rentail.space](https://rentail.space) for temporary spaces at shopping centers. Test what you excel at, iterate, scale winners—no multi-year leases.
+
+### Q: How do I find short-term retail space to validate my strengths?
+
+Search by location for available kiosks, pop-ups, and inline spaces with flexible terms.

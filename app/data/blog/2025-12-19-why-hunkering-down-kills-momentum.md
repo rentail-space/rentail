@@ -191,7 +191,7 @@ down, you signal defeat.
 Markets reward persistence, not perfection. The founders who win aren't the ones
 who avoid setbacks—they're the ones who execute through them.
 
-Keep moving. Always.
+**Keep moving in retail:** [Find temporary spaces on rentail.space](https://rentail.space) to test concepts after setbacks. Iterate fast, don't hunker down.
 
 ---
 
@@ -324,3 +324,11 @@ repeat the same actions expecting different results.
 Small wins break the paralysis pattern and signal to your team that execution
 continues regardless of setbacks. Your team is watching to see if you'll freeze
 or move. Show them movement.
+
+### Q: Where can I find retail space to test concepts after setbacks?
+
+[Browse rentail.space](https://rentail.space) for temporary spaces at shopping centers. Test ideas, gather feedback, iterate—don't hunker down.
+
+### Q: How do I find short-term retail space to keep momentum?
+
+Search by location for available kiosks, pop-ups, and carts with flexible terms. Launch fast, learn, improve.

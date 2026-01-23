@@ -109,6 +109,8 @@ the trigger.
 
 Listen first. Decide fast. Execute with clarity.
 
+**Building a retail business?** [Find temporary spaces on rentail.space](https://rentail.space) to test concepts with real customers before committing long-term.
+
 ---
 
 ## FAQ
@@ -153,3 +155,11 @@ Create a forcing function. When you notice behavioral changes, schedule a
 days. Your Type-A brain will adapt—you'll start loading context automatically
 before forming judgments. The pattern becomes reflexive. Most leaders report the
 shift takes 60-90 days of consistent practice.
+
+### Q: Where can I find retail space to test business concepts quickly?
+
+[Browse rentail.space](https://rentail.space) for available temporary spaces at shopping centers. Test with real customers, gather context, iterate fast.
+
+### Q: How do I find short-term retail space without broker calls?
+
+Search by location to see available kiosks, pop-ups, and carts with photos, pricing, and terms.

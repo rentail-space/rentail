@@ -101,9 +101,7 @@ perfectionist every time.
 
 Your competitors aren't waiting. Your customers aren't either.
 
-Launch. Learn. Improve. Repeat.
-
-That's how you win.
+**Test retail concepts fast:** [Browse temporary spaces on rentail.space](https://rentail.space) to launch v1.0 without multi-year commitments. Iterate based on real customer feedback.
 
 ---
 
@@ -153,3 +151,11 @@ cross-functional sprint cycles that can turn feedback into updates quickly.
 Monthly or bi-weekly release cycles keep momentum. Most important:
 decision-making authority that doesn't require ten approvals for minor
 improvements. Speed dies in committee.
+
+### Q: Where can I test retail concepts without long-term commitments?
+
+[Browse rentail.space](https://rentail.space) for temporary retail spaces at shopping centers. Test concepts in weeks or months, iterate based on real customer feedback, scale what works.
+
+### Q: How do I find short-term retail space to launch fast?
+
+Search by location to see available kiosks, pop-ups, and inline spaces with photos, pricing, and terms—no broker calls needed.

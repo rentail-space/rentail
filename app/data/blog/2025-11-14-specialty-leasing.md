@@ -13,35 +13,16 @@ comes in.
 
 ## TL;DR
 
-- **Lower risk, faster testing**: Kiosks, pop-ups, and carts cost thousands vs
-  tens of thousands for traditional stores; run days to months vs 3-5 year
-  commitments; let you test concepts, refine pricing, and validate demand with
-  real customer feedback
-- **Built-in advantages**: Access established shopping center traffic without
-  building from scratch, capitalize on seasonal peaks without paying rent during
-  slow months, network with established retailers for advice and opportunities
-- **Reality check constraints**: Limited space requires creative inventory
-  management and off-site storage, temporary nature ends just as momentum
-  builds, mall regulations control hours/displays/interactions, variable costs
-  include unpredictable percentage rent
-- **Getting started**: Contact leasing offices directly (malls, mixed-use
-  developments, transit stations), prepare one-page business overview with
-  photos/pricing/social proof, understand terms (flat vs percentage vs hybrid
-  rent), plan for success with customer capture systems
+**Test your retail concept in weeks, not years, with kiosks and pop-ups that cost 90% less than traditional stores.** Browse available short-term spaces at shopping centers near you—no broker calls, no complex negotiations.
+
+- **Lower risk**: Thousands vs tens of thousands; days to months vs 3-5 years
+- **Built-in traffic**: Tap established foot traffic without building from scratch
+- **Seasonal flexibility**: Rent only during peak months, not year-round
+- **Constraints**: Limited space, temporary leases, mall rules, variable percentage rent
 
 ## What Is Specialty Leasing?
 
-Specialty leasing is the retail world's answer to "try before you buy." Instead
-of signing a traditional long-term lease for a permanent store, specialty
-leasing offers temporary, flexible retail opportunities. Think mall kiosks
-during the holiday season, weekend pop-up shops, carts in high-traffic areas, or
-even shared retail spaces that rotate vendors.
-
-These arrangements typically run anywhere from a few days to several months,
-rather than the standard 3-5 year commitments of traditional retail leases.
-Shopping center owners use specialty leasing to fill vacant spaces, add variety
-to their tenant mix, and create buzz—while giving smaller retailers a chance to
-access prime locations they might not otherwise afford.
+Specialty leasing gives you temporary retail space—kiosks, pop-ups, carts—for days to months instead of 3-5 years. Shopping centers offer these flexible arrangements to fill vacant spaces and add variety. You get prime locations without the crushing commitment.
 
 ## Why Small Businesses Are Embracing Specialty Leasing
 
@@ -90,88 +71,44 @@ customers. Make sure you can work within these constraints.
 a base rent plus a percentage of sales), which can be unpredictable as your
 business grows.
 
-## Getting Started with Specialty Leasing
+## How to Find Specialty Leasing Opportunities
 
-**Research Your Options** Contact the leasing offices of local malls, shopping
-centers, and mixed-use developments. Many have dedicated specialty leasing
-managers who handle short-term opportunities. Also explore farmers' markets,
-transit stations, and office buildings—specialty leasing isn't limited to
-traditional retail centers.
+**Skip the broker calls.** Browse available kiosks, pop-ups, and carts at shopping centers near you. See photos, terms, and availability without contacting dozens of leasing offices.
 
-**Prepare Your Pitch** Property managers want to know you'll enhance their
-tenant mix and drive sales. Prepare a simple one-page overview of your business,
-including product photos, price points, and any press coverage or social media
-following you have.
+Once you find a space:
 
-**Understand the Terms** Specialty leases can vary widely. Some charge flat
-monthly rates, others use percentage rent, and some combine both. Make sure you
-understand what's included (utilities, security, maintenance) and what's not.
+**Prepare Your Pitch**: One-page overview with product photos, price points, and social proof (press, followers, reviews).
 
-**Plan for Success** If your specialty lease goes well, what's next? Have a plan
-for capturing customer information, building your online presence, and
-potentially transitioning to a permanent location.
+**Understand Terms**: Flat monthly, percentage rent, or hybrid? What's included (utilities, security, maintenance)?
 
-**Start Small** Consider starting with a weekend pop-up or holiday kiosk before
-committing to a longer specialty lease. This gives you invaluable experience
-with minimal risk.
+**Start Small**: Weekend pop-up or holiday kiosk first. Test with minimal risk.
 
 ## The Bottom Line
 
-Specialty leasing offers small business owners a unique opportunity to access
-prime retail locations without the crushing overhead of traditional leases.
-While it requires flexibility and creativity, it can be the perfect stepping
-stone between online sales and a permanent brick-and-mortar presence.
+Specialty leasing gives you prime retail locations without crushing overhead. Test products, capitalize on seasonal demand, or build brand awareness—all with flexibility traditional leases can't match.
 
-Whether you're testing a new product line, capitalizing on seasonal demand, or
-building your brand awareness, specialty leasing might be the retail solution
-you didn't know you needed. In today's retail environment, where flexibility and
-adaptability are key to survival, specialty leasing gives small businesses the
-chance to think big while starting small.
-
-Ready to explore specialty leasing opportunities in your area? Rentail will help
-you with that by listing all the shopping centers in your general area, and
-identifying the available spaces in each shopping center.
+**[Browse available spaces at rentail.space](https://rentail.space)** and see shopping centers with open kiosks, pop-ups, and carts near you.
 
 ---
 
 ## FAQ
 
-### Q: What exactly is specialty leasing and how is it different from a regular retail lease?
+### How do I find short-term retail space in shopping malls?
 
-Specialty leasing provides temporary retail space—kiosks, pop-ups, carts, or
-shared spaces—for days to months instead of the standard 3-5 year commitments.
-You get access to high-traffic locations like malls and shopping centers without
-long-term obligations, massive upfront costs, or expensive build-outs. Shopping
-centers use this to fill vacant space and add variety while giving smaller
-retailers access to prime locations.
+Browse available spaces at [rentail.space](https://rentail.space). See kiosks, pop-ups, and carts with photos, pricing, and availability—no broker calls needed.
 
-### Q: How much does specialty leasing actually cost compared to traditional retail?
+### Where can I lease a mall kiosk for 3-6 months?
 
-Initial investment drops dramatically—a few thousand for a kiosk setup versus
-tens of thousands for traditional store build-out. No multi-month rent deposits
-or personal guarantees required. Rental structures vary: flat monthly rates,
-percentage rent (base plus percentage of sales), or hybrid models. Critical:
-confirm what's included (utilities, security, maintenance) versus what you pay
-separately. The temporary nature and lower square footage translate directly to
-lower financial risk.
+Search by location and timeframe. Filter for kiosks with flexible 3-6 month terms at shopping centers near you.
 
-### Q: What are the major disadvantages I need to consider?
+### How much does specialty leasing cost vs traditional retail?
 
-Four primary constraints: Limited space forces creative inventory management and
-may require off-site storage. Temporary leases end just as you build
-momentum—you need customer retention strategies between locations. Mall
-regulations control your operating hours, display standards, and customer
-interaction methods. Percentage rent structures create unpredictable costs as
-sales fluctuate. If you can't operate within tight physical and regulatory
-constraints, specialty leasing won't work.
+Thousands vs tens of thousands. Kiosk setup costs a fraction of traditional build-out. No multi-month deposits or personal guarantees. Rental structures: flat monthly, percentage of sales, or hybrid.
 
-### Q: Is specialty leasing worth it as a long-term business strategy or just a stepping stone?
+### What are the biggest disadvantages of specialty leasing?
 
-Depends on your business model. For seasonal businesses (Halloween costumes,
-holiday gifts), specialty leasing matches your revenue cycle without paying rent
-during slow periods. For testing new markets or product lines, it provides real
-customer data with minimal investment. For year-round operations, it's typically
-a stepping stone to permanent locations—use it to build customer base, refine
-operations, and establish relationships with property managers who control
-permanent spaces. Build customer capture systems and online presence during
-specialty leases to maintain continuity between locations.
+Limited space, temporary leases end as momentum builds, strict mall rules, and unpredictable percentage rent. Not ideal if you need consistency or control.
+
+### How does specialty leasing work in shopping centers?
+
+Centers offer temporary spaces (kiosks, carts, pop-ups) for days to months. You get prime foot traffic without long-term commitment.
