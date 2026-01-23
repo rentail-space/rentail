@@ -36,7 +36,7 @@ export default function RecentVisibility({
         ),
         enableGrouping: false,
         header: "Query ID",
-        size: 60,
+        size: 120,
       },
       {
         accessorKey: "query",
