@@ -14,6 +14,7 @@ import AnalyticsSummary from "./AnalyticsSummary";
 import Heatmap from "./Heatmap";
 import RangeSelection from "./RangeSelection";
 import RecentUsers from "./RecentUsers";
+import UserSources from "./UserSources";
 
 export type Analytics = {
   averageSessionDuration: number;
@@ -126,6 +127,8 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
       />
       <RecentUsers users={loaderData.users} />
       <Heatmap analytics={loaderData.analytics} users={loaderData.users} />
+
+      <UserSources analytics={loaderData.analytics} />
     </section>
   );
 }

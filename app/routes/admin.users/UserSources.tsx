@@ -6,6 +6,9 @@ import {
 } from "@tanstack/react-table";
 import { groupBy } from "node_modules/es-toolkit/dist/array/groupBy.mjs";
 import { sumBy } from "node_modules/es-toolkit/dist/math/sumBy.mjs";
+import { Suspense } from "react";
+import { Await } from "react-router";
+import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
   TableBody,
@@ -15,13 +18,23 @@ import {
   TableRow,
 } from "~/components/ui/Table";
 import { cn } from "~/lib/utils";
-import type { loader } from "./route";
+import type { Analytics } from "./route";
 
-export default function Sources({
+export default function UserSources({
   analytics,
 }: {
-  analytics: Awaited<ReturnType<typeof loader>>["analytics"];
+  analytics: Promise<Analytics[]>;
 }) {
+  return (
+    <Suspense fallback={<LoadingProgress />}>
+      <Await resolve={analytics}>
+        {(analytics) => <SourcesTable analytics={analytics} />}
+      </Await>
+    </Suspense>
+  );
+}
+
+function SourcesTable({ analytics }: { analytics: Analytics[] }) {
   const grouped = groupBy(analytics, ({ sessionSource }) => sessionSource);
   const totalVisitors = sumBy(
     Object.values(analytics),
