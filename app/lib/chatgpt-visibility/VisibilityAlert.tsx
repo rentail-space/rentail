@@ -2,6 +2,7 @@ import { Section } from "@react-email/components";
 import { meanBy, sumBy } from "es-toolkit";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails";
+import { cn } from "../utils";
 import type { Source } from "./runAllQueries";
 
 export default async function sendVisibilityAlert({
@@ -112,7 +113,22 @@ function SourcesTable({ sources }: { sources: Source[] }) {
           {sources
             .sort((a, b) => a.category.localeCompare(b.category))
             .map((source) => (
-              <SourceRecord key={source.id} source={source} />
+              <tr key={source.id}>
+                <td align="left">
+                  <strong>{source.category}</strong>: {source.query}
+                </td>
+                <td
+                  align="center"
+                  className={cn(
+                    isRentail(source.citations) > 0 && "font-bold",
+                    "whitespace-nowrap",
+                  )}
+                >
+                  {isRentail(source.citations).toLocaleString()} /{" "}
+                  {source.citations.length.toLocaleString()}
+                </td>
+                <td align="right">{scoreSource(source).toLocaleString()}</td>
+              </tr>
             ))}
         </tbody>
       </table>
@@ -120,29 +136,13 @@ function SourcesTable({ sources }: { sources: Source[] }) {
   );
 }
 
-function SourceRecord({ source }: { source: Source }) {
-  const isRentail = source.citations.filter(
+function isRentail(citations: string[]): number {
+  return citations.filter(
     (citation) => new URL(citation).hostname === "rentail.space",
-  );
-
-  return (
-    <tr>
-      <td align="left">
-        <strong>{source.category}</strong>: {source.query}
-      </td>
-      <td align="center" className="whitespace-nowrap">
-        {isRentail.length.toLocaleString()} /{" "}
-        {source.citations.length.toLocaleString()}
-      </td>
-      <td align="right">{scoreSource(source).toLocaleString()}</td>
-    </tr>
-  );
+  ).length;
 }
 
 function scoreSource(source: Source): number {
   const isFirstPlace = source.citations[0].includes("rentail.space");
-  const isRentail = source.citations.filter(
-    (citation) => new URL(citation).hostname === "rentail.space",
-  );
-  return (isFirstPlace ? 50 : 0) + isRentail.length * 10;
+  return (isFirstPlace ? 50 : 0) + isRentail(source.citations) * 10;
 }
