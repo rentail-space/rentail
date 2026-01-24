@@ -2,6 +2,7 @@ import { Section } from "@react-email/components";
 import { groupBy } from "es-toolkit";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails";
+import { cn } from "../utils";
 import type { RankingResults } from "./checkRanking";
 
 export default async function sendSEORankAlert({
@@ -22,17 +23,15 @@ export default async function sendSEORankAlert({
 
 function getRecommendation(results: RankingResults[]): string {
   const count = results.filter((result) =>
-    result.results.some(isRentailSpace),
+    result.results.some(
+      ({ link }) => new URL(link).hostname === "rentail.space",
+    ),
   ).length;
   return count >= 8
     ? "Excellent visibility! Rentail.space is dominating ChatGPT search results."
     : count >= 5
       ? "Good visibility. Rentail.space appears consistently in top results."
       : "Visibility declining. Consider content marketing or SEO improvements.";
-}
-
-function isRentailSpace({ link }: { link: string }): boolean {
-  return new URL(link).hostname === "rentail.space";
 }
 
 function SummarySection({ queries }: { queries: RankingResults[] }) {
@@ -74,8 +73,18 @@ function SummarySection({ queries }: { queries: RankingResults[] }) {
             .sort((a, b) => b.count - a.count)
             .map(({ hostname, count }) => (
               <tr key={hostname}>
-                <td align="left">{hostname}</td>
-                <td align="right">{count}</td>
+                <td
+                  align="left"
+                  className={cn(hostname === "rentail.space" && "font-bold")}
+                >
+                  {hostname}
+                </td>
+                <td
+                  align="right"
+                  className={cn(hostname === "rentail.space" && "font-bold")}
+                >
+                  {count}
+                </td>
               </tr>
             ))}
         </tbody>
