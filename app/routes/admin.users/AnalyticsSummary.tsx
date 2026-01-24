@@ -2,13 +2,34 @@ import NumberFlow from "@number-flow/react";
 import { meanBy, sumBy } from "es-toolkit";
 import type { User } from "prisma/generated/client";
 import type { ReactNode } from "react";
-import type { loader } from "./route";
+import { Suspense } from "react";
+import { Await } from "react-router";
+import LoadingProgress from "~/components/ui/LoadingProgress";
+import type { Analytics } from "./route";
 
 export default function AnalyticsSummary({
   analytics,
   users,
 }: {
-  analytics: Awaited<ReturnType<typeof loader>>["analytics"];
+  analytics: Promise<Analytics[]>;
+  users: Promise<User[]>;
+}) {
+  return (
+    <Suspense fallback={<LoadingProgress />}>
+      <Await resolve={Promise.all([analytics, users])}>
+        {([analytics, users]) => (
+          <AnalyticsSummaryTable analytics={analytics} users={users} />
+        )}
+      </Await>
+    </Suspense>
+  );
+}
+
+function AnalyticsSummaryTable({
+  analytics,
+  users,
+}: {
+  analytics: Analytics[];
   users: User[];
 }) {
   const visitors = sumBy(analytics, (day) => Number(day.visitors));

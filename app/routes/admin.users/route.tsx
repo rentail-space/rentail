@@ -1,6 +1,9 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import { invariant } from "es-toolkit";
 import { JWT } from "google-auth-library";
+import { DateTime } from "luxon";
+import { useQueryState } from "nuqs";
+import { createLoader, parseAsIsoDate } from "nuqs/server";
 import type { LoaderFunctionArgs } from "react-router";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma";
@@ -12,27 +15,45 @@ import Heatmap from "./Heatmap";
 import RangeSelection from "./RangeSelection";
 import RecentUsers from "./RecentUsers";
 
+export type Analytics = {
+  averageSessionDuration: number;
+  date: string;
+  hour: number;
+  sessionSource: string;
+  visitors: number;
+};
+
+const rangeParams = {
+  from: parseAsIsoDate
+    .withDefault(DateTime.utc().minus({ days: 30 }).toJSDate())
+    .withOptions({ history: "replace", shallow: false }),
+  until: parseAsIsoDate
+    .withDefault(DateTime.utc().minus({ days: 1 }).toJSDate())
+    .withOptions({ history: "replace", shallow: false }),
+};
+
 export async function loader({ request }: LoaderFunctionArgs) {
   await verifyAdmin(request.headers);
 
-  const users = await prisma.user.findMany({
+  const { from, until } = createLoader(rangeParams)(request);
+  const users = prisma.user.findMany({
     orderBy: { createdAt: "desc" },
-    where: { isBot: false, isAdmin: false },
+    where: {
+      isBot: false,
+      isAdmin: false,
+      createdAt: { gte: from, lte: until },
+    },
   });
-
-  const analytics = await fromGoogleAnalytics();
-  return { users, analytics };
+  return {
+    analytics: fromGoogleAnalytics(from, until),
+    users: Promise.resolve(users),
+  };
 }
 
-async function fromGoogleAnalytics(): Promise<
-  Array<{
-    averageSessionDuration: number;
-    date: string;
-    hour: number;
-    sessionSource: string;
-    visitors: number;
-  }>
-> {
+async function fromGoogleAnalytics(
+  from: Date,
+  until: Date,
+): Promise<Analytics[]> {
   const auth = new JWT({
     scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
     email: "analytics@rentail-480516.iam.gserviceaccount.com",
@@ -43,7 +64,12 @@ async function fromGoogleAnalytics(): Promise<
   try {
     // @see https://support.google.com/analytics/table/13948007
     const response = await client.runReport({
-      dateRanges: [{ endDate: "today", startDate: "90daysAgo" }],
+      dateRanges: [
+        {
+          startDate: DateTime.fromJSDate(from).toFormat("yyyy-MM-dd"),
+          endDate: DateTime.fromJSDate(until).toFormat("yyyy-MM-dd"),
+        },
+      ],
       dimensions: [
         { name: "date" },
         { name: "hour" },
@@ -76,23 +102,30 @@ async function fromGoogleAnalytics(): Promise<
 }
 
 export default function UsersPage({ loaderData }: Route.ComponentProps) {
+  const [from, setFrom] = useQueryState("from", rangeParams.from);
+  const [until, setUntil] = useQueryState("until", rangeParams.until);
+
   return (
     <section className="flex flex-col gap-8">
-      <RangeSelection analytics={loaderData.analytics} users={loaderData.users}>
-        {({ range, recentUsers, analytics, selector }) => (
-          <>
-            <AnalyticsCharts
-              analytics={analytics}
-              fromUntil={range}
-              users={recentUsers}
-            />
-            {selector}
-            <AnalyticsSummary analytics={analytics} users={recentUsers} />
-            <RecentUsers users={recentUsers} />
-            <Heatmap analytics={analytics} users={recentUsers} />
-          </>
-        )}
-      </RangeSelection>
+      <RangeSelection
+        from={from}
+        setFrom={setFrom}
+        setUntil={setUntil}
+        until={until}
+      />
+
+      <AnalyticsCharts
+        analytics={loaderData.analytics}
+        from={from}
+        until={until}
+        users={loaderData.users}
+      />
+      <AnalyticsSummary
+        analytics={loaderData.analytics}
+        users={loaderData.users}
+      />
+      <RecentUsers users={loaderData.users} />
+      <Heatmap analytics={loaderData.analytics} users={loaderData.users} />
     </section>
   );
 }

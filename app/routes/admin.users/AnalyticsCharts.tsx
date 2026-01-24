@@ -7,6 +7,8 @@ import {
 } from "lucide-react";
 import { DateTime } from "luxon";
 import type { User } from "prisma/generated/client";
+import { Suspense } from "react";
+import { Await } from "react-router";
 import {
   Area,
   AreaChart,
@@ -15,13 +17,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/Card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import {
   ChartContainer,
   ChartLegend,
@@ -29,8 +25,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "~/components/ui/Chart";
-import { dateRange } from "~/lib/time";
-import type { loader } from "./route";
+import LoadingProgress from "~/components/ui/LoadingProgress";
+import type { Analytics } from "./route";
 
 const chartConfig = {
   visitors: {
@@ -62,24 +58,55 @@ const chartConfig = {
   },
 };
 
-/**
- * A component that displays the analytics charts.
- *
- * @param param0 analytics - The analytics data.
- * @param param0 range - The range of dates.
- * @param param0 users - The users data.
- * @returns The analytics charts.
- */
 export default function AnalyticsCharts({
   analytics,
-  fromUntil,
+  from,
+  until,
   users,
 }: {
-  analytics: Awaited<ReturnType<typeof loader>>["analytics"];
-  fromUntil: [DateTime, DateTime];
+  analytics: Promise<Analytics[]>;
+  from: Date;
+  until: Date;
+  users: Promise<User[]>;
+}) {
+  return (
+    <Card className="bg-secondary-background text-foreground">
+      <CardHeader className="text-center">
+        <CardTitle className="font-bold text-lg">
+          Visitors &rarr; Chats + Session Duration
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent>
+        <Suspense fallback={<LoadingProgress />}>
+          <Await resolve={Promise.all([analytics, users])}>
+            {([analytics, users]) => (
+              <SquareAnalyticsCharts
+                analytics={analytics}
+                from={from}
+                until={until}
+                users={users}
+              />
+            )}
+          </Await>
+        </Suspense>
+      </CardContent>
+    </Card>
+  );
+}
+
+function SquareAnalyticsCharts({
+  analytics,
+  from,
+  until,
+  users,
+}: {
+  analytics: Analytics[];
+  from: Date;
+  until: Date;
   users: User[];
 }) {
-  const range = rangeOfDates(...fromUntil);
+  const range = rangeOfDates(from, until);
   const groupOfDays = range.length >= 21 ? 6 : 1;
   const data = Object.entries(
     groupBy(range, (date) => Math.floor(range.indexOf(date) / groupOfDays)),
@@ -112,31 +139,19 @@ export default function AnalyticsCharts({
   });
 
   return (
-    <Card className="bg-secondary-background text-foreground">
-      <CardHeader className="text-center">
-        <CardTitle className="font-bold text-lg">
-          Visitors &rarr; Chats + Session Duration
-        </CardTitle>
-      </CardHeader>
-
-      <CardContent className="grid gap-4 md:grid-cols-2">
-        {Object.entries(chartConfig).map(([key, value]) => (
-          <SpecificChart
-            data={data}
-            dataKey={key}
-            fill={value.color}
-            groupDays={groupOfDays}
-            key={key}
-            name={value.label}
-            valueFormatter={value.valueFormatter}
-          />
-        ))}
-      </CardContent>
-
-      <CardFooter className="mx-auto flex items-center gap-2 text-muted-foreground leading-none">
-        {dateRange(range[0].toJSDate(), range[range.length - 1].toJSDate())}
-      </CardFooter>
-    </Card>
+    <div className="grid gap-4 md:grid-cols-2">
+      {Object.entries(chartConfig).map(([key, value]) => (
+        <SpecificChart
+          data={data}
+          dataKey={key}
+          fill={value.color}
+          groupDays={groupOfDays}
+          key={key}
+          name={value.label}
+          valueFormatter={value.valueFormatter}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -212,11 +227,11 @@ function SpecificChart({
   );
 }
 
-function rangeOfDates(from: DateTime, until: DateTime): DateTime[] {
+function rangeOfDates(from: Date, until: Date): DateTime[] {
   const allDates: DateTime[] = [];
   for (
-    let current = from;
-    current <= until;
+    let current = DateTime.fromJSDate(from);
+    current <= DateTime.fromJSDate(until);
     current = current.plus({ days: 1 })
   )
     allDates.push(current);

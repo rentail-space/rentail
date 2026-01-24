@@ -4,6 +4,9 @@ import { clamp, groupBy, range, sumBy } from "es-toolkit";
 import { DateTime } from "luxon";
 import { parseAsStringEnum, useQueryState } from "nuqs";
 import type { User } from "prisma/generated/client";
+import { Suspense } from "react";
+import { Await } from "react-router";
+import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
   TableBody,
@@ -12,7 +15,7 @@ import {
   TableRow,
 } from "~/components/ui/Table";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
-import type { loader } from "./route";
+import type { Analytics } from "./route";
 
 const hours = range(6, 23);
 const weekdays = range(0, 7);
@@ -21,8 +24,8 @@ export default function Heatmap({
   analytics,
   users,
 }: {
-  analytics: Awaited<ReturnType<typeof loader>>["analytics"];
-  users: User[];
+  analytics: Promise<Analytics[]>;
+  users: Promise<User[]>;
 }) {
   const [onlyFrom, setOnlyFrom] = useQueryState(
     "onlyFrom",
@@ -32,7 +35,51 @@ export default function Heatmap({
         history: "replace",
       }),
   );
+  return (
+    <section className="flex flex-col gap-4">
+      <h2 className="font-bold text-2xl">Heatmap of Visitors by Day & Hour</h2>
 
+      <Tabs value={onlyFrom} className="mx-auto">
+        <TabsList>
+          <TabsTrigger value="all" onClick={() => setOnlyFrom("all")}>
+            All Sources
+          </TabsTrigger>
+          <TabsTrigger value="llm" onClick={() => setOnlyFrom("llm")}>
+            LLM Visitors
+          </TabsTrigger>
+          <TabsTrigger value="search" onClick={() => setOnlyFrom("search")}>
+            Search Visitors
+          </TabsTrigger>
+          <TabsTrigger value="users" onClick={() => setOnlyFrom("users")}>
+            Chats
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
+
+      <Suspense fallback={<LoadingProgress />}>
+        <Await resolve={Promise.all([analytics, users])}>
+          {([analytics, users]) => (
+            <HeatmapTable
+              analytics={analytics}
+              users={users}
+              onlyFrom={onlyFrom}
+            />
+          )}
+        </Await>
+      </Suspense>
+    </section>
+  );
+}
+
+function HeatmapTable({
+  analytics,
+  users,
+  onlyFrom,
+}: {
+  analytics: Analytics[];
+  users: User[];
+  onlyFrom: "all" | "llm" | "search" | "users";
+}) {
   const columns =
     onlyFrom === "users"
       ? usersToBins(users)
@@ -63,25 +110,6 @@ export default function Heatmap({
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="font-bold text-2xl">Heatmap of Visitors by Day & Hour</h2>
-
-      <Tabs value={onlyFrom} className="mx-auto">
-        <TabsList>
-          <TabsTrigger value="all" onClick={() => setOnlyFrom("all")}>
-            All Sources
-          </TabsTrigger>
-          <TabsTrigger value="llm" onClick={() => setOnlyFrom("llm")}>
-            LLM Visitors
-          </TabsTrigger>
-          <TabsTrigger value="search" onClick={() => setOnlyFrom("search")}>
-            Search Visitors
-          </TabsTrigger>
-          <TabsTrigger value="users" onClick={() => setOnlyFrom("users")}>
-            Chats
-          </TabsTrigger>
-        </TabsList>
-      </Tabs>
-
       <div className="relative">
         <Table className="w-70">
           <TableHeader>
@@ -213,7 +241,7 @@ function Legend({
 }
 
 function analyticsToBins(
-  analytics: Awaited<ReturnType<typeof loader>>["analytics"],
+  analytics: Analytics[],
   onlyFrom: "all" | "llm" | "search",
 ) {
   const selected =

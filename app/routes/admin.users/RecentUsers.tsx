@@ -5,8 +5,11 @@ import {
 } from "@tanstack/react-table";
 import { LockIcon, UserIcon } from "lucide-react";
 import type { User } from "prisma/generated/client";
+import { Suspense } from "react";
+import { Await } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
+import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
   TableBody,
@@ -19,7 +22,17 @@ import deviceDetection from "~/lib/deviceDetection";
 import { humanDate } from "~/lib/time";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 
-export default function AllUsers({ users }: { users: User[] }) {
+export default function RecentUsers({ users }: { users: Promise<User[]> }) {
+  return (
+    <Suspense fallback={<LoadingProgress />}>
+      <Await resolve={users}>
+        {(users) => <RecentUsersTable users={users} />}
+      </Await>
+    </Suspense>
+  );
+}
+
+function RecentUsersTable({ users }: { users: User[] }) {
   const table = useReactTable({
     columns: [
       {
@@ -76,7 +89,8 @@ export default function AllUsers({ users }: { users: User[] }) {
   return (
     <section className="flex flex-col gap-4">
       <h2 className="font-bold text-2xl">
-        All Users <span className="text-gray-500">({users.length} user)</span>
+        Recent Users{" "}
+        <span className="text-gray-500">({users.length} user)</span>
       </h2>
 
       <Table>
