@@ -1,18 +1,18 @@
 import * as Sentry from "@sentry/react-router";
 import { handleRequest } from "@vercel/react-router/entry.server";
-import { v7 as uuidv7 } from "uuid";
-import envVars from "~/lib/env";
-import msw from "~/test/mocks/mswHandlers";
 import type {
   ActionFunctionArgs,
   EntryContext,
   LoaderFunctionArgs,
 } from "react-router";
+import { v7 as uuidv7 } from "uuid";
+import envVars from "~/lib/env";
+import msw from "~/test/mocks/mswHandlers";
 
 // Only enable Sentry in production
-if (envVars.isProduction && envVars.SENTRY_DSN) {
+if (envVars.isProduction) {
   Sentry.init({
-    dsn: envVars.SENTRY_DSN,
+    dsn: "https://gkbTW4mifBshCeYcJiZDRH3s@s1693597.eu-nbg-2.betterstackdata.com/1693597",
     enableLogs: true,
     environment: "production",
     integrations: [

@@ -258,7 +258,6 @@ Imperative mood, atomic commits, reference files when helpful.
 **Optional:**
 
 - `REDIS_URL` - For stream coordination (falls back to memory)
-- `SENTRY_DSN` - Error tracking
 - `VERCEL_*` - Auto-set in Vercel deployments
 
 ## Development Tools

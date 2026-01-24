@@ -10,7 +10,7 @@ export async function loader() {
   try {
     const queries = await checkRankings("serpapi");
     await sendSEORankAlert({ queries });
-    return null;
+    return new Response("OK");
   } catch (error) {
     captureException(error);
     throw error;

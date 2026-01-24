@@ -10,7 +10,7 @@ export async function loader() {
   try {
     const sources = await runAllQueries(false);
     await sendVisibilityAlert({ sources });
-    return null;
+    return new Response("OK");
   } catch (error) {
     captureException(error);
     throw error;
