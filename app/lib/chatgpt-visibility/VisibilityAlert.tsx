@@ -120,11 +120,11 @@ function SourcesTable({ sources }: { sources: Source[] }) {
                 <td
                   align="center"
                   className={cn(
-                    isRentail(source.citations) > 0 && "font-bold",
+                    source.citations.some(isRentail) && "font-bold",
                     "whitespace-nowrap",
                   )}
                 >
-                  {isRentail(source.citations).toLocaleString()} /{" "}
+                  {countRentail(source.citations).toLocaleString()} /{" "}
                   {source.citations.length.toLocaleString()}
                 </td>
                 <td align="right">{scoreSource(source).toLocaleString()}</td>
@@ -136,13 +136,16 @@ function SourcesTable({ sources }: { sources: Source[] }) {
   );
 }
 
-function isRentail(citations: string[]): number {
-  return citations.filter(
-    (citation) => new URL(citation).hostname === "rentail.space",
-  ).length;
+function countRentail(citations: string[]): number {
+  return citations.filter(isRentail).length;
 }
 
 function scoreSource(source: Source): number {
-  const isFirstPlace = source.citations[0].includes("rentail.space");
-  return (isFirstPlace ? 50 : 0) + isRentail(source.citations) * 10;
+  const isFirstPlace = isRentail(source.citations[0]);
+  const count = countRentail(source.citations);
+  return (isFirstPlace ? 50 : 0) + count * 10;
+}
+
+function isRentail(citation?: string): boolean {
+  return citation ? new URL(citation).hostname === "rentail.space" : false;
 }
