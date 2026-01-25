@@ -82,7 +82,7 @@ describe("County shopping centers page", () => {
   });
 
   it("should display appropriate text for county", async () => {
-    const text = page.locator("text=Find your perfect retail space in");
+    const text = page.locator("text=Lease your perfect space in");
     await expect(text).toBeVisible();
   });
 

@@ -88,8 +88,8 @@ export default function RegionalPage({ loaderData }: Route.ComponentProps) {
         {regional.name}
       </h1>
 
-      <p className="text-center text-gray-600 text-sm">
-        Find your perfect retail space in {regional.name}
+      <p className="text-center text-gray-600 text-lg">
+        Lease your perfect space in {regional.name}.
       </p>
 
       {centers.length > 0 && (

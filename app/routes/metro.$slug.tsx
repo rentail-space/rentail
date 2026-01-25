@@ -88,8 +88,8 @@ export default function MetroPage({ loaderData }: Route.ComponentProps) {
         {metro.name} Metro Area
       </h1>
 
-      <p className="text-center text-gray-600 text-sm">
-        Find your perfect retail space in the {metro.name} metro area
+      <p className="text-center text-gray-600 text-lg">
+        Lease your perfect space in the {metro.name} metro area.
       </p>
 
       {centers.length > 0 && (

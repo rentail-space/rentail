@@ -87,8 +87,8 @@ export default function CountyPage({ loaderData }: Route.ComponentProps) {
         {county.name}, {county.state.abbreviation}
       </h1>
 
-      <p className="text-center text-gray-600 text-sm">
-        Find your perfect retail space in {county.name}
+      <p className="text-center text-gray-600 text-lg">
+        Lease your perfect space in {county.name}, {county.state.abbreviation}.
       </p>
 
       {centers.length > 0 && (

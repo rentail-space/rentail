@@ -82,8 +82,8 @@ export default function CityPage({ loaderData }: Route.ComponentProps) {
         {city.name}, {city.state.abbreviation}
       </h1>
 
-      <p className="text-center text-gray-600 text-sm">
-        Find your perfect retail space in {city.name}
+      <p className="text-center text-gray-600 text-lg">
+        Lease your perfect space in {city.name}, {city.state.abbreviation}.
       </p>
 
       {centers.length > 0 && (
