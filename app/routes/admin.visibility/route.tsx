@@ -1,4 +1,4 @@
-import { groupBy, last, sumBy } from "es-toolkit";
+import { groupBy, meanBy, orderBy, sumBy } from "es-toolkit";
 import { DateTime } from "luxon";
 import { Fragment, Suspense } from "react";
 import { Await } from "react-router";
@@ -27,11 +27,9 @@ export default function VisibilityPage({ loaderData }: Route.ComponentProps) {
         <Await resolve={loaderData}>
           {(visibility) => {
             const groupedByDate = Object.entries(
-              groupBy(visibility, (visibility) =>
-                visibility.createdAt.toISOString(),
-              ),
+              groupBy(visibility, ({ createdAt }) => createdAt.toISOString()),
             ).map(([date, queries]) => ({
-              date: DateTime.fromISO(date, { zone: "UTC" }),
+              date,
               queries: queries.map((query) => ({
                 category: query.category,
                 citations: query.citations,
@@ -41,8 +39,15 @@ export default function VisibilityPage({ loaderData }: Route.ComponentProps) {
                 score: scoreCitations(query.citations),
               })),
             }));
-            const mostRecentQueries = last(groupedByDate)?.queries ?? [];
-            const metrics = groupedByDate.map(({ date, queries }) => {
+            const mostRecentQueries = orderBy(
+              Object.entries(groupedByDate),
+              [([date]) => date],
+              ["desc"],
+            )[0][1].queries;
+
+            // Group by day so we have score, ratio, etc calculated from all
+            // queries for that day
+            const dailyTotals = groupedByDate.map(({ date, queries }) => {
               return {
                 date,
                 rentail: sumBy(queries, (query) => query.rentail),
@@ -50,6 +55,19 @@ export default function VisibilityPage({ loaderData }: Route.ComponentProps) {
                 ratio: sumBy(queries, (query) => query.ratio),
               };
             });
+
+            // Group by week so we have average score, ratio, etc for that week.
+            const metrics = Object.entries(
+              groupBy(dailyTotals, ({ date }) =>
+                DateTime.fromISO(date).startOf("day").toFormat("yyyy-MM-dd"),
+              ),
+            ).map(([date, metrics]) => ({
+              date,
+              rentail: meanBy(metrics, (metric) => metric.rentail),
+              score: meanBy(metrics, (metric) => metric.score),
+              ratio: meanBy(metrics, (metric) => metric.ratio),
+            }));
+
             return (
               <Fragment>
                 <RecentVisibility queries={mostRecentQueries} />

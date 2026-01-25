@@ -42,7 +42,7 @@ export default function VisibilityCharts({
   metrics: data,
 }: {
   metrics: Array<{
-    date: DateTime;
+    date: string;
     ratio: number;
     rentail: number;
     score: number;
@@ -74,10 +74,9 @@ function SpecificChart({
   dataKey,
   fill,
   name,
-  valueFormatter,
 }: {
   data: Array<{
-    date: DateTime;
+    date: string;
     ratio: number;
     rentail: number;
     score: number;
@@ -96,10 +95,9 @@ function SpecificChart({
         responsive
       >
         <CartesianGrid vertical={false} />
-        <XAxis dataKey={({ date }) => date.toFormat("yyyy-MM-dd")} />
+        <XAxis dataKey={({ date }) => date} />
         <YAxis
           allowDecimals={false}
-          tickFormatter={valueFormatter}
           tickLine={false}
           tickMargin={8}
           type="number"
@@ -126,7 +124,7 @@ function SpecificChart({
                 <div className="grid w-full grid-cols-2 gap-2">
                   <span>{name}</span>
                   <span className="text-right font-bold tabular-nums">
-                    {valueFormatter(Number(value))}
+                    {Number(value).toLocaleString()}
                   </span>
                 </div>
               )}

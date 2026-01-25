@@ -1,7 +1,8 @@
-import { Section } from "@react-email/components";
+import { Button, Section } from "@react-email/components";
 import { meanBy, sumBy } from "es-toolkit";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails";
+import * as styles from "~/emails/styles";
 import { cn } from "../utils";
 import type { Source } from "./runAllQueries";
 
@@ -17,6 +18,13 @@ export default async function sendVisibilityAlert({
       <EmailLayout subject={getRecommendation(sources)}>
         <SummarySection sources={sources} />
         <SourcesTable sources={sources} />
+
+        <Button
+          href="https://rentail.space/admin/visibility"
+          style={styles.button}
+        >
+          Charts and Graphs
+        </Button>
       </EmailLayout>
     ),
   });
@@ -35,14 +43,6 @@ function getRecommendation(sources: Source[]): string {
 
 function SummarySection({ sources }: { sources: Source[] }) {
   const avgScore = meanBy(sources, scoreSource);
-  const allMentions = sumBy(sources, (source) => source.citations.length);
-  const allRentailMentions = sumBy(
-    sources,
-    (source) =>
-      source.citations.filter(
-        (citation) => new URL(citation).hostname === "rentail.space",
-      ).length,
-  );
 
   return (
     <Section>
@@ -66,15 +66,25 @@ function SummarySection({ sources }: { sources: Source[] }) {
           </tr>
           <tr>
             <th align="left" className="whitespace-nowrap bg-gray-200">
-              All mentions
+              All Citations
             </th>
-            <td>{allMentions.toLocaleString()}</td>
+            <td>
+              {sumBy(
+                sources,
+                (source) => source.citations.length,
+              ).toLocaleString()}
+            </td>
           </tr>
           <tr>
             <th align="left" className="whitespace-nowrap bg-gray-200">
-              Rentail mentions
+              Rentail Citations
             </th>
-            <td>{allRentailMentions.toLocaleString()}</td>
+            <td>
+              {sumBy(
+                sources,
+                (source) => source.citations.filter(isRentail).length,
+              ).toLocaleString()}
+            </td>
           </tr>
         </tbody>
       </table>
