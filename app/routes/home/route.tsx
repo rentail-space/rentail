@@ -28,7 +28,7 @@ export default function Home({
       </title>
       <meta
         name="description"
-        content="The comprehensive marketplace for specialty leasing and short-term retail spaces in US shopping centers. Find kiosks, pop-up shops, carts, and temporary retail locations nationwide. Real-time availability, transparent pricing, AI-powered matching."
+        content="The leading marketplace for finding short-term retail spaces in shopping centers. Find kiosks, pop-ups, and RMUs nationwide. Built for small businesses—AI-powered matching, transparent pricing, no broker fees."
       />
       <meta
         name="keywords"

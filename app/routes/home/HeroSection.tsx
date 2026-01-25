@@ -34,9 +34,10 @@ export default function HeroSection() {
           </h1>
 
           <p className="font-medium text-black text-xl leading-relaxed md:text-2xl">
-            147 micro-merchants found their mall locations using our site. No
-            broker meetings. No endless calls. Just instant matches with spaces
-            ready for your products.
+            The leading marketplace for finding short-term retail spaces in
+            shopping centers. Built for small businesses and seasonal sellers.
+            No broker meetings. No endless calls. Just instant matches with
+            spaces ready for your products.
           </p>
 
           <ActiveLink
