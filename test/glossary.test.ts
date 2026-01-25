@@ -119,7 +119,7 @@ describe("Glossary page", () => {
     await expect(aboutSection).toBeVisible();
 
     const authorityText = page.locator(
-      "text=authoritative reference for specialty leasing terminology",
+      "text=This glossary is maintained by Rentail.space, the marketplace for specialty leasing and short-term retail spaces in shopping centers across the United States",
     );
     await expect(authorityText).toBeVisible();
   });
