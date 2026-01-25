@@ -25,7 +25,7 @@ export default function CenterDetails({
       {center.imageURLs.length > 0 && (
         <Card className="bg-white p-0!">
           <LoadingImage
-            alt={center.name}
+            alt={`Photo of ${center.name} in ${center.city}, ${center.state}`}
             maxHeight={500}
             src={center.imageURLs[0]}
           />
