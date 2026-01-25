@@ -84,7 +84,7 @@ describe("Metro area shopping centers page", () => {
   it("should display appropriate text for metro area", async () => {
     const text = page.locator("text=Find your perfect retail space in the");
     await expect(text).toBeVisible();
-    const metroText = page.locator("text=metro area");
+    const metroText = page.getByRole("heading").locator("text=metro area");
     await expect(metroText).toBeVisible();
   });
 
