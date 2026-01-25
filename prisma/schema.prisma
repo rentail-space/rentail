@@ -46,7 +46,7 @@ model City {
   metroAreaId       String         @map("metro_area_id")
   name              String         @map("name")
   regionalNames     RegionalName[] @relation("city_regional_name")
-  slug              String?        @map("slug")
+  slug              String         @map("slug")
   state             State          @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
   stateAbbreviation String         @map("state")
 
@@ -63,7 +63,7 @@ model County {
   id                String                       @id
   name              String         @map("name")
   regionalNames     RegionalName[] @relation("county_regional_name")
-  slug              String?        @map("slug")
+  slug              String         @map("slug")
   state             State          @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
   stateAbbreviation String         @map("state")
 
@@ -102,7 +102,7 @@ model MetroArea {
   id                String                       @id
   name              String         @map("name")
   regionalNames     RegionalName[]
-  slug              String?        @map("slug")
+  slug              String         @map("slug")
   state             State          @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
   stateAbbreviation String         @map("state")
 
@@ -170,7 +170,7 @@ model RegionalName {
   name              String    @map("name")
   relatedCities     City[]    @relation("city_regional_name")
   relatedCounties   County[]  @relation("county_regional_name")
-  slug              String?   @map("slug")
+  slug              String    @map("slug")
   state             State     @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
   stateAbbreviation String    @map("state")
 
