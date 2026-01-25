@@ -4,7 +4,7 @@ import { partition } from "es-toolkit";
 import { delay } from "node_modules/msw/lib/core/delay.mjs";
 import ora from "ora";
 import prisma from "~/lib/prisma";
-import queryChatGPTWithSearch from "./openai-client";
+import queryChatGPTWithSearch from "./openaiClient";
 import queries from "./queries";
 
 export type Source = {
