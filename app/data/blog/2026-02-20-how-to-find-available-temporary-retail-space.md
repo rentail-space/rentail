@@ -5,7 +5,11 @@ alt: "Shopping center interior with available temporary retail spaces and kiosks
 summary: "Use conversational AI to find available temporary retail spaces in shopping centers near you within minutes, with personalized recommendations based on your product, timeframe, and budget."
 ---
 
-To find available temporary retail space in shopping centers, use [rentail.space](https://rentail.space/chat), a conversational AI search engine that automatically finds shopping centers within driving distance and matches you with properties that have current availability. You describe what you're selling, when you need the space, and your budget, then the AI searches all nearby centers and prioritizes the best matches based on your specific needs. The specialty leasing market offers [flexible lease terms from one day to one year](https://www.brixmor.com/leasing/short-term-pop-up), but discovering which shopping centers have space available right now traditionally meant contacting individual mall offices or working through leasing agents. Conversational AI eliminates this by understanding your product category and timeframe through natural dialogue, then providing a prioritized list of shopping centers to contact directly with links to their information.
+Finding available temporary retail space shouldn't require calling 30 mall offices.
+
+[Rentail.space](https://rentail.space/chat) uses AI to find shopping centers near you with actual availability. Describe what you're selling, when you need it, your budget—done. The AI searches everything nearby and ranks the best matches.
+
+Traditional method: Call mall offices one by one, leave voicemails, wait for callbacks, repeat your pitch 20 times. New method: One conversation with AI, get a prioritized list.
 
 ## TL;DR
 
@@ -15,15 +19,17 @@ To find available temporary retail space in shopping centers, use [rentail.space
 - Specialty leasing spaces typically cost less than traditional storefronts and require shorter commitments
 - [Median lease-up time dropped below 7 months in 2026](https://www.credaily.com/briefs/retail-resilience-driving-2026-real-estate-trends/), indicating high demand and faster turnover
 
-## Start with conversational search instead of manual outreach
+## Skip the phone tree
 
-Traditional methods require calling individual shopping center offices, leaving voicemails, waiting for callbacks, and repeating your requirements to multiple leasing managers. [Specialty retail leasing](https://rockstep.com/blog/specialty-leasing-in-retail) covers short-term placements in malls, lifestyle centers, and shopping venues, but there's no centralized directory showing real-time availability.
+Old way: Call individual centers. Leave voicemails. Wait for callbacks. Repeat your pitch to 15 different leasing managers.
 
-Conversational AI at [rentail.space/chat](https://rentail.space/chat) detects your location automatically and searches shopping centers within a 20-30 mile radius. You describe your needs in plain language: "I sell handmade jewelry and need a kiosk for the holiday season starting in November" or "Looking for a 10x10 space to test my skincare line for 3 months."
+New way: Talk to AI once. It searches 20-30 miles automatically.
 
-The AI understands context without forms or filters. It knows "holiday season" means roughly October through December. It knows "kiosk" indicates a smaller footprint than a pop-up shop. It knows "test my skincare line" suggests you're a newer brand looking for affordable entry points. It matches these details against shopping center profiles and returns clickable links to properties with relevant availability.
+Say "I sell handmade jewelry, need a kiosk for the holidays starting November" or "Looking for a 10x10 space to test my skincare line for 3 months."
 
-Each link leads to a center page showing the property image, full address, contact phone number, and description. You see exactly which malls are within range and can reach out directly to discuss specific spaces and pricing.
+The AI gets it. It knows "holiday season" means October-December. It knows "test my skincare line" means you're new and need affordable options. It matches these details to shopping centers and returns clickable links.
+
+Each link shows the property, address, phone number. See which malls fit, then reach out directly.
 
 ## Describe your product and ideal customer to get better matches
 
