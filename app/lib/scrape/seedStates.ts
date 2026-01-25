@@ -11,6 +11,7 @@ import type {
 } from "prisma/generated/client";
 import z from "zod";
 import prisma from "~/lib/prisma";
+import { slugify } from "../utils";
 
 const logger = debug("seed");
 
@@ -77,15 +78,18 @@ async function seedMetroAreas({
   logger("🔄 Seeding %d/%d metro areas", seedable.length, metroAreas.length);
 
   for (const metroArea of seedable) {
+    const slug = slugify(metroArea.state, metroArea.metro_name);
     await prisma.metroArea.upsert({
       where: { id: metroArea.metro_id },
       update: {
         name: metroArea.metro_name,
+        slug,
         state: { connect: { abbreviation: metroArea.state } },
       },
       create: {
         id: metroArea.metro_id,
         name: metroArea.metro_name,
+        slug,
         state: { connect: { abbreviation: metroArea.state } },
       },
     });
@@ -107,15 +111,18 @@ async function seedCounties({
   logger("🔄 Seeding %d/%d counties", seedable.length, counties.length);
 
   for (const county of seedable) {
+    const slug = slugify(county.state, county.county_name);
     await prisma.county.upsert({
       where: { id: county.county_id },
       create: {
         id: county.county_id,
         name: county.county_name,
+        slug,
         state: { connect: { abbreviation: county.state } },
       },
       update: {
         name: county.county_name,
+        slug,
         state: { connect: { abbreviation: county.state } },
       },
     });
@@ -148,17 +155,20 @@ async function seedCities({
   logger("🔄 Seeding %d/%d cities", seedable.length, cities.length);
 
   for (const city of seedable) {
+    const slug = slugify(city.state, city.city_name);
     await prisma.city.upsert({
       where: { id: city.city_id },
       create: {
         id: city.city_id,
         name: city.city_name,
+        slug,
         metroArea: { connect: { id: city.metro_id } },
         county: { connect: { id: city.county_id } },
         state: { connect: { abbreviation: city.state } },
       },
       update: {
         name: city.city_name,
+        slug,
         metroArea: { connect: { id: city.metro_id } },
         county: { connect: { id: city.county_id } },
         state: { connect: { abbreviation: city.state } },
@@ -203,11 +213,13 @@ async function seedRegionalNames({
   for (const regionalName of seedable) {
     const relatedCities = regionalName.related_cities.split("|");
     const relatedCounties = regionalName.related_counties.split("|");
+    const slug = slugify(regionalName.state, regionalName.region_name);
     await prisma.regionalName.upsert({
       where: { id: regionalName.region_id },
       create: {
         id: regionalName.region_id,
         name: regionalName.region_name,
+        slug,
         metroArea: { connect: { id: regionalName.metro_id } },
         relatedCounties: {
           connect: relatedCounties.map((county) => ({ id: county })),
@@ -217,6 +229,7 @@ async function seedRegionalNames({
       },
       update: {
         name: regionalName.region_name,
+        slug,
         metroArea: { connect: { id: regionalName.metro_id } },
         relatedCounties: {
           connect: relatedCounties.map((county) => ({ id: county })),

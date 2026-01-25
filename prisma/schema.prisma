@@ -46,11 +46,13 @@ model City {
   metroAreaId       String         @map("metro_area_id")
   name              String         @map("name")
   regionalNames     RegionalName[] @relation("city_regional_name")
+  slug              String?        @map("slug")
   state             State          @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
   stateAbbreviation String         @map("state")
 
   @@map("cities")
   @@unique([name,   stateAbbreviation])
+  @@unique([slug])
 }
 
 model County {
@@ -60,12 +62,14 @@ model County {
   cities            City[]
   id                String                       @id
   name              String         @map("name")
-  stateAbbreviation String         @map("state")
-  state             State          @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
   regionalNames     RegionalName[] @relation("county_regional_name")
+  slug              String?        @map("slug")
+  state             State          @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
+  stateAbbreviation String         @map("state")
 
   @@map("counties")
   @@unique([name,   stateAbbreviation])
+  @@unique([slug])
 }
 
 model FollowUp {
@@ -98,11 +102,13 @@ model MetroArea {
   id                String                       @id
   name              String         @map("name")
   regionalNames     RegionalName[]
-  stateAbbreviation String         @map("state")
+  slug              String?        @map("slug")
   state             State          @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
+  stateAbbreviation String         @map("state")
 
   @@map("metro_areas")
   @@unique([name,   stateAbbreviation])
+  @@unique([slug])
 }
 
 model Property {
@@ -164,11 +170,13 @@ model RegionalName {
   name              String    @map("name")
   relatedCities     City[]    @relation("city_regional_name")
   relatedCounties   County[]  @relation("county_regional_name")
+  slug              String?   @map("slug")
   state             State     @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
   stateAbbreviation String    @map("state")
 
   @@map("regional_names")
   @@unique([name, metroAreaId, stateAbbreviation])
+  @@unique([slug])
 }
 
 model Session {
