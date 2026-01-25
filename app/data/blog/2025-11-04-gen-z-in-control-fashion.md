@@ -5,17 +5,17 @@ alt: "Gen Z and Gen Alpha wearing fashion clothing, representing the new power s
 summary: "Gen Z controls 40% of fashion spending and demands physical spaces that match their speed. Pop-ups and kiosks let brands test concepts before Gen Z moves to the next trend."
 ---
 
-Gen Z and Gen Alpha control 40% of fashion spending—and they shop differently. They demand physical spaces that move at internet speed.
+Gen Z and Gen Alpha control 40% of fashion spending. They shop differently. They demand physical spaces that move at internet speed.
 
-**Physical testing matters:** Gen Z trend cycles die in days. Test concepts in pop-ups before committing years.
+**Physical testing matters:** Gen Z trend cycles die in days. Test concepts in pop-ups before committing years. Before the moment passes.
 
 ## TL;DR
 
-**Gen Z shops fast, demands authenticity.** Test retail concepts in kiosks and pop-ups before trends die.
+**Gen Z shops fast. Demands authenticity.** Test retail concepts in kiosks and pop-ups before trends die.
 
 - **Fashion = identity**: Gen Z spends 7% more on apparel, 10% less on dining
-- **Speed kills**: Viral moments peak and die in days; seasonal calendars are obsolete
-- **Physical + digital**: Streaming, scrolling, searching, shopping happen simultaneously
+- **Speed kills**: Viral moments peak and die in days—seasonal calendars are obsolete
+- **Physical + digital**: Streaming, scrolling, searching, shopping all at once
 - **Co-creation wins**: Solve problems through authenticity, personalization, scarcity
 
 ## The New Economics

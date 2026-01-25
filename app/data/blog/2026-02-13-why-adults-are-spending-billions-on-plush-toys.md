@@ -14,15 +14,19 @@ summary: "Pop Mart grew 362% using temporary retail spaces and product drops. Le
 - **Emotional resonance**: Deliver "must-have" moments, not just products
 - **Stay flexible**: Find temporary spaces to capture trends fast
 
-Adults are buying plush toys as emotional comfort. Pop Mart: **362.8% profit surge**. Jellycat: **66% revenue jump to £333M**. This isn't a fad—it's emotional consumption.
+Adults are buying plush toys. Not for kids—for themselves.
+
+Pop Mart: **362.8% profit surge**. Jellycat: **66% revenue jump to £333M**.
+
+This isn't a fad. It's emotional consumption.
 
 ## Why It Works
 
-- **Scarcity**: Limited releases create urgency
-- **Social currency**: Latest character = connection
-- **Low barrier**: $50 plush beats $500 handbag
+- **Scarcity**: Limited releases create urgency (FOMO is real)
+- **Social currency**: Latest character = instant connection with the in-crowd
+- **Low barrier**: $50 plush beats $500 handbag for treat purchases
 
-**Want to test emotional products?** Find temporary retail spaces to capture trends without long-term commitments.
+**Want to test emotional products?** Find temporary retail spaces. Capture trends before they die.
 
 ## Experiential Retail Wins
 

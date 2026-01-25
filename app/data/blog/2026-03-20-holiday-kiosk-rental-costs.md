@@ -5,7 +5,11 @@ alt: "Busy mall corridor during holiday season with kiosks displaying merchandis
 summary: "Holiday kiosk rentals range from $2,000 to $10,000+ monthly, with CAM fees, percentage rent, and deposits adding thousands more."
 ---
 
-Holiday kiosk rentals cost between [$2,000 and $10,000 monthly](https://kiosksretail.com/retail-kiosk-rental-cost-a-breakdown/) in most markets. High-traffic malls like Mall of America exceed $10,000. On top of base rent, you'll pay [Common Area Maintenance fees that add 10-20%](https://rtdisplay.com/how-much-does-it-cost-to-build-a-mall-kiosk-in-usa-canada/). Percentage rent takes 5-15% of sales. Upfront deposits equal first month plus security. Total two-month holiday investment typically runs $6,000 to $25,000 depending on location tier. This doesn't count inventory or staffing.
+Holiday kiosk rentals? [$2,000 to $10,000 monthly](https://kiosksretail.com/retail-kiosk-rental-cost-a-breakdown/) in most markets. High-traffic malls like Mall of America blow past $10,000.
+
+But wait, there's more. [Common Area Maintenance fees add 10-20%](https://rtdisplay.com/how-much-does-it-cost-to-build-a-mall-kiosk-in-usa-canada/). Percentage rent takes another 5-15% of sales. Upfront deposits = first month plus security.
+
+Total two-month holiday investment: $6,000 to $25,000 depending on location. And that's before inventory or staffing.
 
 ## TL;DR
 
@@ -19,11 +23,11 @@ Holiday kiosk rentals cost between [$2,000 and $10,000 monthly](https://kiosksre
 
 ## Base Rent Varies Wildly by Mall Tier
 
-Monthly kiosk rent depends entirely on [mall prestige and foot traffic](https://mallkioskreview.com/how-much-is-a-mall-kiosk/). [Low-traffic regional malls start around $900 monthly](https://uniquekiosk.com/how-much-does-a-kiosk-cost-to-rent-at-the-mall/). Westfield and Brookfield properties begin at $3,000 for standard 10×10 spaces.
+Kiosk rent depends on [mall prestige and foot traffic](https://mallkioskreview.com/how-much-is-a-mall-kiosk/). [Low-traffic regional malls start around $900](https://uniquekiosk.com/how-much-does-a-kiosk-cost-to-rent-at-the-mall/). Westfield and Brookfield? Try $3,000 for a standard 10×10.
 
-Location within the mall matters too. [Mid-corridor spots facing entrances run $2,000+ monthly](https://uniquekiosk.com/how-much-does-a-kiosk-cost-to-rent-at-the-mall/). Corner or wall-adjacent spaces drop to around $1,400. During holidays, [expect rent increases of 20% or more](https://kiosksretail.com/retail-kiosk-rental-cost-a-breakdown/). Malls capitalize on peak shopping traffic.
+Location within the mall matters too. [Mid-corridor spots facing entrances run $2,000+](https://uniquekiosk.com/how-much-does-a-kiosk-cost-to-rent-at-the-mall/). Corner or wall-adjacent spaces drop to $1,400. During holidays? [Add 20% or more](https://kiosksretail.com/retail-kiosk-rental-cost-a-breakdown/). Malls capitalize on peak traffic.
 
-High-end properties in major metros command premium pricing. A 220 sq ft kiosk in New Jersey runs $7,800 monthly. Yorkdale Shopping Centre in Toronto charges $12,000 CAD monthly for custom builds.
+High-end properties in major metros command premium pricing. A 220 sq ft kiosk in New Jersey: $7,800 monthly. Yorkdale in Toronto: $12,000 CAD for custom builds.
 
 ## CAM Charges and Percentage Rent Add Thousands
 

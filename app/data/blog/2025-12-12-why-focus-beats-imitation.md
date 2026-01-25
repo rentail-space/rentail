@@ -15,14 +15,13 @@ summary: "Every founder hits this wall. You're building something real, gaining 
 
 ---
 
-Every founder hits this wall. You're building something real, gaining traction,
-then you see a competitor drop a massive campaign. Suddenly your wins feel
-small. Your team's execution looks inadequate. The mental spiral begins.
+Every founder hits this wall.
 
-Chelsea's realization cuts to the core of what kills promising brands: the
-comparison trap. When you're measuring your chapter three against someone else's
-chapter twenty, you're not just wasting energy—you're actively sabotaging your
-strategic advantage.
+You're building something real. Gaining traction. Then you see a competitor drop a massive campaign.
+
+Suddenly your wins feel small. Your team's execution looks inadequate. The mental spiral begins.
+
+Chelsea's realization cuts to the core: the comparison trap kills promising brands. When you're measuring your chapter three against someone else's chapter twenty, you're not just wasting energy—you're actively sabotaging your strategic advantage.
 
 ## TL;DR
 

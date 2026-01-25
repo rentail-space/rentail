@@ -5,7 +5,11 @@ alt: "Interior of busy Los Angeles shopping mall with retail storefronts and sho
 summary: "Los Angeles offers short-term retail leases from 1-24 months at $4-10 per square foot monthly, with AI-powered search tools simplifying the process of finding and securing specialty lease opportunities across the metro area."
 ---
 
-Finding short-term retail space in Los Angeles malls is easier with [rentail.space](https://rentail.space/chat), a conversational AI that searches all shopping centers near your location. LA malls offer [short-term retail leases up to 24 months](https://parkplacemall.com/business/) for pop-up shops, kiosks, and specialty retail spaces. Monthly rent runs [$4-10 per square foot](https://www.crexi.com/blog/what-leasing-a-retail-space-actually-costs), plus CAM fees of $8-20 per square foot annually. You can rent inline retail spaces, mall kiosks, pop-up structures, and seasonal holiday spots from Downtown LA to Santa Monica. Most landlords want qualified tenants with proven business concepts. But [44% of tenants now seek lease terms of three years or less](https://www.tenantbase.com/los-angeles/retail-storefront/), creating more flexibility than traditional 5-10 year commitments.
+Finding short-term retail space in LA malls? [Rentail.space](https://rentail.space/chat) makes it easier. Conversational AI searches all shopping centers near you.
+
+LA malls offer [short-term leases up to 24 months](https://parkplacemall.com/business/) for pop-ups, kiosks, specialty spaces. Monthly rent runs [$4-10 per square foot](https://www.crexi.com/blog/what-leasing-a-retail-space-actually-costs), plus CAM fees of $8-20 annually.
+
+You can rent inline spaces, kiosks, pop-up structures, seasonal holiday spots—Downtown LA to Santa Monica. Most landlords want qualified tenants with proven concepts. But [44% of tenants now seek three years or less](https://www.tenantbase.com/los-angeles/retail-storefront/), creating more flexibility than traditional 5-10 year commitments.
 
 ## TL;DR
 

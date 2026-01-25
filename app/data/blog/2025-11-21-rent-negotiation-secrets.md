@@ -7,16 +7,13 @@ summary: "Every day you overpay rent is profit you'll never recover. Every month
 
 ## The Phone Call That Changed Everything
 
-Marcus Rodriguez was 90 seconds into the most important conversation of his
-business life when his landlord said the words every tenant dreads: "I'm sorry,
-but the best I can do is a 15% increase."
+Marcus Rodriguez was 90 seconds into the most important conversation of his business life when his landlord dropped the bomb: "I'm sorry, but the best I can do is a 15% increase."
 
-His Portland food hall stall was generating $47,000 monthly, but the proposed
-rent hike would push his occupancy costs to 38% of revenue—a death sentence in
-food service. Marcus had 30 days to decide: accept financial ruin or walk away
-from three years of customer loyalty and brand building.
+His Portland food hall stall was generating $47,000 monthly. The proposed rent hike would push occupancy costs to 38% of revenue—a death sentence in food service.
 
-**Instead, he did something else entirely. He turned the tables.**
+Marcus had 30 days to decide: accept financial ruin or walk away from three years of customer loyalty and brand building.
+
+**Instead, he did something else. He turned the tables.**
 
 By the end of that phone call, Marcus had negotiated his $6,800 monthly rent
 down to $4,100—a 40% reduction that saved him $32,400 annually. Here's the exact

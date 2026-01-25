@@ -17,16 +17,15 @@ summary: "Type-A leaders have a superpower: decisiveness. They see patterns fast
 
 ---
 
-Type-A leaders have a superpower: decisiveness. They see patterns fast,
-synthesize information quickly, and drive toward conclusions while others are
-still processing. This trait builds companies.
+Type-A leaders have a superpower: decisiveness. They see patterns fast, synthesize quickly, drive toward conclusions while others are still processing.
+
+This trait builds companies.
 
 It also destroys relationships.
 
-Henry Penix recognized the double edge. His instinct to jump to the end of
-conversations—to skip the context and land on the solution—was alienating the
-very people he needed most. The speed that made him effective as an operator was
-making him ineffective as a leader.
+Henry Penix recognized the double edge. His instinct to jump to the end of conversations—skip the context, land on the solution—was alienating the people he needed most.
+
+The speed that made him effective as an operator was making him ineffective as a leader.
 
 ## TL;DR
 

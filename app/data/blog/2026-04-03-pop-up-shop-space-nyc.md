@@ -5,11 +5,11 @@ alt: "Modern pop-up retail space in a New York City shopping center with large w
 summary: "NYC pop-up shop space in shopping centers ranges from $10,000 to $200,000 monthly depending on borough and location, with Manhattan commanding $40-$1,000+ per square foot annually while Brooklyn and Queens offer more affordable alternatives."
 ---
 
-Finding pop-up shop space in NYC shopping centers is simple with [rentail.space](https://rentail.space/chat). This conversational AI automatically searches shopping centers near your New York location and matches you with properties based on your budget and product.
+Finding pop-up space in NYC? [Rentail.space](https://rentail.space/chat) makes it simple. Conversational AI searches shopping centers near you and matches based on budget and product.
 
-New York City shopping centers offer pop-up retail spaces from $10,000 to $200,000 monthly. Pricing depends heavily on borough and location. [Manhattan retail space averages $69 per square foot](https://latestcost.com/average-cost-of-retail-space/), though premium areas like Fifth Avenue and Madison Avenue can exceed [$1,000 per square foot annually](https://www.retail-officespace.com/meatpacking-district-retail-space/).
+NYC shopping centers offer pop-up space from $10,000 to $200,000 monthly. Pricing depends on borough and location. [Manhattan averages $69 per square foot](https://latestcost.com/average-cost-of-retail-space/). Premium areas like Fifth Avenue? [$1,000+ per square foot annually](https://www.retail-officespace.com/meatpacking-district-retail-space/).
 
-Brooklyn and Queens provide more accessible entry points at $30-$50 per square foot for neighborhood storefronts. Lease durations flex from single-day rentals to multi-month commitments. This lets brands test markets without long-term obligations.
+Brooklyn and Queens are more accessible: $30-$50 per square foot. Lease durations flex from single-day rentals to multi-month commitments. Test markets without long-term pain.
 
 ## TL;DR
 

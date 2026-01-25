@@ -18,11 +18,13 @@ summary: "The perfectionist's trap looks responsible. It feels like quality cont
 
 ---
 
-Ann McFerran watched competitors launch while she polished. Her products were
-flawless. Her market share was shrinking.
+Ann McFerran watched competitors launch while she polished. Her products were flawless.
 
-The perfectionist's trap looks responsible. It feels like quality control. In
-reality, it's a strategic failure disguised as standards.
+Her market share was shrinking.
+
+The perfectionist's trap looks responsible. Feels like quality control.
+
+In reality? Strategic failure disguised as standards.
 
 ## TL;DR
 

@@ -7,11 +7,13 @@ summary: "Early-stage founders face relentless uncertainty. Missed sales target.
 
 Missed sales target. Key hire quits. Product launch flops.
 
-Your instinct screams: retreat. Analyze everything. Don't make the next move
-until you've figured out what went wrong. Wait for clarity.
+Your instinct screams: retreat. Analyze everything. Don't make the next move until you've figured out what went wrong.
 
-This feels like responsible leadership. It's actually the fastest way to kill
-your company.
+Wait for clarity.
+
+This feels like responsible leadership.
+
+It's actually the fastest way to kill your company.
 
 > Early on in my journey, every little setback would derail me. This often made
   me a hermit instead of a leader, discouraged my team, and limited all of our

@@ -16,15 +16,17 @@ summary: "53% of Gen Z budgets for daily 'micro-luxuries.' Pop-ups and kiosks ar
 
 ## The Micro-Luxury Economy
 
-3 PM Tuesday. Tired, house feels unattainable, so you buy a $7 ube latte. It's a "treat"—modern **Lipstick Effect**.
+It's 3 PM Tuesday. You're tired. Homeownership feels like a fantasy. So you buy a $7 ube latte.
 
-**53% of Gen Z** indulge because traditional milestones (homeownership, vacations) feel impossible. Reclaim agency in the present.
+It's a "treat"—the modern Lipstick Effect.
+
+**53% of Gen Z** indulge because traditional milestones feel impossible. Can't buy a house? At least you can reclaim agency with a fancy coffee.
 
 ## Intentional, Not Impulse
 
-**40% now budget** for treats. **62%** view them as essential self-care—modern rituals to combat mental fatigue.
+**40% now budget** for treats. Not impulse buys—planned spending. **62%** view them as essential self-care. Modern rituals to combat mental fatigue.
 
-**Opportunity:** Find temporary retail spaces in high-traffic areas to capture spontaneous "treat" purchases.
+**Opportunity:** Find temporary retail spaces in high-traffic areas. Capture these spontaneous "I deserve this" moments.
 
 ## Perfect for Pop-Ups
 

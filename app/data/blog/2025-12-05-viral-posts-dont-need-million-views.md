@@ -19,17 +19,17 @@ Small business "viral" means customers share, comment, buy—not influencer reac
 
 ### What actually goes viral
 
-**Lo-fi beats professional.** Excused Absence Comedy (Austin) hired a filmmaker
-for a polished video. A college sophomore's personal, unpolished video got more
-response. "She knows me. Her video reflects reality."
+**Lo-fi beats professional.** Excused Absence Comedy (Austin) hired a filmmaker for a polished video. A college sophomore's personal, unpolished video got more response.
 
-**Family nostalgia.** The Midwest Girl (Dubuque, IA) posts a 1973 photo of their
-parents—homecoming king and queen—every fall. "People see that and think, 'Oh
-wow.' So many Midwest girls have similar stories. That's why they buy from us."
+"She knows me. Her video reflects reality."
 
-**Cultural relevance.** Gardner's Used Books (Tulsa) posts about Banned Books
-Week. When they listed The Great Gatsby and To Kill a Mockingbird, comments
-exploded: "Why is that one banned?" Debate = engagement.
+**Family nostalgia.** The Midwest Girl (Dubuque, IA) posts a 1973 photo of their parents—homecoming king and queen—every fall.
+
+"People see that and think, 'Oh wow.' So many Midwest girls have similar stories. That's why they buy from us."
+
+**Cultural relevance.** Gardner's Used Books (Tulsa) posts about Banned Books Week. Lists The Great Gatsby and To Kill a Mockingbird. Comments explode: "Why is that one banned?"
+
+Debate = engagement.
 
 **Personal journey.** Charles Pan-Fried Chicken (Harlem) posted Chef Charles'
 story: cotton picker to street vendor to three restaurants. "I'm trying to

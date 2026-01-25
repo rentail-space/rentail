@@ -11,9 +11,9 @@ summary: "The best retail leasing deals aren't advertised on billboards. They em
 
 ---
 
-The best retail leasing deals aren't advertised on billboards. They emerge from timing mismatches, repositioning properties, and landlords who value tenant quality over maximum rent extraction.
+The best retail leasing deals aren't advertised on billboards. They emerge from timing mismatches, repositioning properties, landlords who value tenant quality over squeezing every dollar.
 
-Maria's experience reveals the pattern: exceptional deals come from understanding landlord motivations and market timing, not from chasing publicly listed spaces with twenty competing tenants.
+Maria's experience reveals the pattern: exceptional deals come from understanding landlord motivations and market timing. Not from chasing publicly listed spaces with twenty competing tenants.
 
 ## TL;DR
 

@@ -50,7 +50,7 @@ Within seconds, you get a complete list of properties with direct access to info
 Compare this to manual methods:
 
 | Method | Time Required | Result Quality |
-|--------|---------------|----------------|
+| ------- | --------------- | ---------------- |
 | Calling property managers individually | 3-5 days | Hit or miss, depends on who answers |
 | Commercial real estate broker | 1-2 weeks for initial matches | Good filtering but adds 10-15% cost |
 | Generic property search sites | 2-4 hours of filtering | Miss specialty lease opportunities |
