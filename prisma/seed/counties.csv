@@ -1,0 +1,31 @@
+county_id,county_name,state
+county_001,Los Angeles County,CA
+county_002,Orange County,CA
+county_003,San Diego County,CA
+county_004,Santa Clara County,CA
+county_005,Alameda County,CA
+county_006,San Francisco County,CA
+county_007,San Mateo County,CA
+county_008,Contra Costa County,CA
+county_009,Marin County,CA
+county_010,Sonoma County,CA
+county_011,Ventura County,CA
+county_012,Riverside County,CA
+county_013,San Bernardino County,CA
+county_014,Sacramento County,CA
+county_015,Kern County,CA
+county_020,New York County,NY
+county_021,Kings County,NY
+county_022,Queens County,NY
+county_023,Bronx County,NY
+county_024,Westchester County,NY
+county_030,Cook County,IL
+county_031,Harris County,TX
+county_032,Maricopa County,AZ
+county_033,Miami-Dade County,FL
+county_034,Clark County,NV
+county_035,King County,WA
+county_036,Denver County,CO
+county_037,Hennepin County,MN
+county_038,Wayne County,MI
+county_039,Philadelphia County,PA

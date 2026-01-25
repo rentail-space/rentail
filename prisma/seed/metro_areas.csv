@@ -1,0 +1,31 @@
+metro_id,metro_name,state
+metro_001,New York-Newark-Jersey City,NY
+metro_002,Los Angeles-Long Beach-Anaheim,CA
+metro_003,Chicago-Naperville-Elgin,IL
+metro_004,Dallas-Fort Worth-Arlington,TX
+metro_005,Houston-The Woodlands-Sugar Land,TX
+metro_006,Phoenix-Mesa-Chandler,AZ
+metro_007,San Francisco-Oakland-San Jose,CA
+metro_008,Washington-Arlington-Alexandria,DC
+metro_009,Miami-Fort Lauderdale-West Palm Beach,FL
+metro_010,Boston-Cambridge-Newton,MA
+metro_011,Seattle-Tacoma-Bellevue,WA
+metro_012,Denver-Aurora-Lakewood,CO
+metro_013,Atlanta-Sandy Springs-Roswell,GA
+metro_014,Philadelphia-Camden-Wilmington,PA
+metro_015,San Diego-Carlsbad,CA
+metro_016,Minneapolis-St. Paul-Bloomington,MN
+metro_017,Detroit-Warren-Dearborn,MI
+metro_018,Las Vegas-Henderson-Paradise,NV
+metro_019,Orlando-Kissimmee-Sanford,FL
+metro_020,Austin-Round Rock-Georgetown,TX
+metro_021,Tampa-St. Petersburg-Clearwater,FL
+metro_022,"St. Louis, MO-IL",MO
+metro_023,Portland-Vancouver-Hillsboro,OR
+metro_024,Nashville-Davidson--Murfreesboro--Franklin,TN
+metro_025,"Memphis, TN-MS-AR",TN
+metro_026,"Cincinnati, OH-KY-IN",OH
+metro_027,"Columbus, OH",OH
+metro_028,"Cleveland-Elyria, OH",OH
+metro_029,"Pittsburgh, PA",PA
+metro_030,"Kansas City, MO-KS",MO

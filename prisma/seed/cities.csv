@@ -1,0 +1,37 @@
+city_id,city_name,metro_id,county_id,state
+city_001,San Francisco,metro_007,county_006,CA
+city_002,Oakland,metro_007,county_005,CA
+city_003,San Jose,metro_007,county_004,CA
+city_004,Palo Alto,metro_007,county_004,CA
+city_005,Mountain View,metro_007,county_004,CA
+city_006,Fremont,metro_007,county_005,CA
+city_007,Berkeley,metro_007,county_005,CA
+city_008,Hayward,metro_007,county_005,CA
+city_009,Sunnyvale,metro_007,county_004,CA
+city_010,Santa Clara,metro_007,county_004,CA
+city_011,Daly City,metro_007,county_007,CA
+city_020,Los Angeles,metro_002,county_001,CA
+city_021,Long Beach,metro_002,county_001,CA
+city_022,Anaheim,metro_002,county_002,CA
+city_023,Santa Ana,metro_002,county_002,CA
+city_024,Irvine,metro_002,county_002,CA
+city_025,Glendale,metro_002,county_001,CA
+city_026,Pasadena,metro_002,county_001,CA
+city_027,Torrance,metro_002,county_001,CA
+city_028,Santa Monica,metro_002,county_001,CA
+city_029,Beverly Hills,metro_002,county_001,CA
+city_030,Culver City,metro_002,county_001,CA
+city_031,West Hollywood,metro_002,county_001,CA
+city_040,San Diego,metro_015,county_003,CA
+city_050,New York City,metro_001,county_020,NY
+city_051,Brooklyn,metro_001,county_021,NY
+city_052,Queens,metro_001,county_022,NY
+city_053,Bronx,metro_001,county_023,NY
+city_060,Houston,metro_005,county_031,TX
+city_061,Dallas,metro_004,county_030,TX
+city_062,Austin,metro_020,county_030,TX
+city_070,Phoenix,metro_006,county_032,AZ
+city_071,Scottsdale,metro_006,county_032,AZ
+city_080,Miami,metro_009,county_033,FL
+city_081,Orlando,metro_019,county_030,FL
+city_090,Seattle,metro_011,county_035,WA

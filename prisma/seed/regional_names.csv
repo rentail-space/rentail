@@ -1,0 +1,11 @@
+region_id,region_name,metro_id,related_cities,related_counties,state
+region_001,Bay Area,metro_007,city_001|city_002|city_003,county_004|county_005|county_006,CA
+region_002,The Bay,metro_007,city_001|city_002|city_003,county_004|county_005|county_006,CA
+region_003,Silicon Valley,metro_007,city_004|city_005|city_009|city_010,county_004,CA
+region_004,SoCal,metro_002,city_020|city_040,county_001|county_002|county_003,CA
+region_005,Southern California,metro_002,city_020|city_040,county_001|county_002|county_003,CA
+region_006,NorCal,metro_007,city_001|city_002|city_003,county_004|county_005|county_006,CA
+region_007,Northern California,metro_007,city_001|city_002|city_003,county_004|county_005|county_006,CA
+region_008,K-Town,metro_002,city_020,county_001,CA
+region_009,Koreatown,metro_002,city_020,county_001,CA
+region_010,Greater New York,metro_001,city_050|city_051|city_052|city_053,county_020|county_021|county_022|county_023,NY

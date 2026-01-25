@@ -36,6 +36,38 @@ model Chat {
   @@map("chats")
 }
 
+model City {
+  // All cities across the US. Cities are related to one state, one county, and
+  // one metro area. No two cities can have the same name in the same state.
+  county            County         @relation(fields: [countyId], references: [id], onDelete: Cascade)
+  countyId          String         @map("county_id")
+  id                String                               @id
+  metroArea         MetroArea      @relation(fields: [metroAreaId], references: [id], onDelete: Cascade)
+  metroAreaId       String         @map("metro_area_id")
+  name              String         @map("name")
+  regionalNames     RegionalName[] @relation("city_regional_name")
+  state             State          @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
+  stateAbbreviation String         @map("state")
+
+  @@map("cities")
+  @@unique([name,   stateAbbreviation])
+}
+
+model County {
+  // All counties across the US. Counties are related to one state and one metro
+  // area.  County may have multiple cities. For example, "Los Angeles County"
+  // is related to the "Los Angeles" city and the "San Fernando Valley" region.
+  cities            City[]
+  id                String                       @id
+  name              String         @map("name")
+  stateAbbreviation String         @map("state")
+  state             State          @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
+  regionalNames     RegionalName[] @relation("county_regional_name")
+
+  @@map("counties")
+  @@unique([name,   stateAbbreviation])
+}
+
 model FollowUp {
   createdAt DateTime @map("created_at") @default(now())
   id        String                      @id
@@ -57,6 +89,20 @@ model Messages {
   type      String   @map("type")
 
   @@map("messages")
+}
+
+model MetroArea {
+  // All major metro areas across the US. Metro area belongs to one state and
+  // have a descriptive name, eg "San Francisco-Oakland-San Jose".
+  cities            City[]
+  id                String                       @id
+  name              String         @map("name")
+  regionalNames     RegionalName[]
+  stateAbbreviation String         @map("state")
+  state             State          @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
+
+  @@map("metro_areas")
+  @@unique([name,   stateAbbreviation])
 }
 
 model Property {
@@ -107,6 +153,24 @@ model PropertySpace {
   @@unique([propertyId, number])
 }
 
+model RegionalName {
+  // Regional names are used to group cities together. For example, "San
+  // Fernando Valley" is a regional name for the cities of San Fernando,
+  // Pacoima, and Van Nuys. K-Town is a regional name for the cities of
+  // Koreatown, Chinatown, and Little Tokyo.
+  id                String                          @id
+  metroArea         MetroArea @relation(fields: [metroAreaId], references: [id], onDelete: Cascade)
+  metroAreaId       String    @map("metro_area_id")
+  name              String    @map("name")
+  relatedCities     City[]    @relation("city_regional_name")
+  relatedCounties   County[]  @relation("county_regional_name")
+  state             State     @relation(fields: [stateAbbreviation], references: [abbreviation], onDelete: Cascade)
+  stateAbbreviation String    @map("state")
+
+  @@map("regional_names")
+  @@unique([name, metroAreaId, stateAbbreviation])
+}
+
 model Session {
   id        String                      @id
   expiresAt DateTime @map("expires_at")
@@ -123,9 +187,13 @@ model Session {
 }
 
 model State {
-  abbreviation String @map("abbr") @id
-  name         String @map("name")
-  lede         String @map("lede")
+  abbreviation  String         @map("abbreviation") @id
+  cities        City[]
+  counties      County[]
+  lede          String         @map("lede")
+  metroAreas    MetroArea[]
+  name          String         @map("name")
+  regionalNames RegionalName[]
 
   @@map("states")
 }
