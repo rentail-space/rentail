@@ -11,12 +11,13 @@
  *   pnpm check-seo --method=playwright  # Use browser automation instead of API
  */
 
+import { ms } from "convert";
+import { delay } from "es-toolkit";
 import ora from "ora";
 import { chromium } from "playwright";
 import { getJson } from "serpapi";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma";
-import { timeToMs } from "../utils";
 import terms from "./searchTerms";
 
 export type RankingResults = {
@@ -43,7 +44,7 @@ export default async function checkRankings(
     );
     results.push(ranking);
     // Rate limit: 1 request per second
-    await new Promise((resolve) => setTimeout(resolve, timeToMs("2s")));
+    await delay(ms("2s"));
   }
   spinner.succeed(`Checked ${terms.length} terms`);
   return results;

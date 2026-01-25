@@ -1,9 +1,9 @@
 import { generateText } from "ai";
+import { ms } from "convert";
 import ora from "ora";
 import type zod from "zod";
 import { z } from "zod";
 import { conversational } from "~/lib/models";
-import { timeToMs } from "../utils";
 
 const enrichedSchema = z.object({
   centerType: z.enum([
@@ -119,7 +119,7 @@ Use scraped data as primary source. Fill gaps with your knowledge.
 For optional fields without reliable data, omit them entirely (do not set to null).`;
 
     const { text } = await generateText({
-      abortSignal: AbortSignal.timeout(timeToMs("30s")),
+      abortSignal: AbortSignal.timeout(ms("30s")),
       prompt: `${enrichmentPrompt}\n\nRespond with ONLY valid JSON, no other text.`,
       maxRetries: 3,
       ...conversational,

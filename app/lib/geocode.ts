@@ -1,8 +1,8 @@
 import { captureException } from "@sentry/react-router";
+import { ms } from "convert";
 import debug from "debug";
 import { invariant } from "es-toolkit";
 import type { User } from "prisma/generated/client";
-import { timeToMs } from "./utils";
 import { cleanParseWorkingMemory } from "./workingMemory";
 
 const fallbackLocation = {
@@ -219,7 +219,7 @@ export async function geocodeFromUserInput(location: string): Promise<{
 
     const response = await fetch(url, {
       headers: { "User-Agent": "rentail.space/1.0 (support@rentail.space)" },
-      signal: AbortSignal.timeout(timeToMs("2s")),
+      signal: AbortSignal.timeout(ms("2s")),
     });
     const results = (await response.json()) as Array<{
       place_id: number;

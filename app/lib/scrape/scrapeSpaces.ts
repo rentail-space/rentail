@@ -1,9 +1,9 @@
 import { Output, generateText } from "ai";
+import { ms } from "convert";
 import ora from "ora";
 import type { Browser } from "playwright";
 import { z } from "zod";
 import { classify } from "~/lib/models";
-import { timeToMs } from "../utils";
 
 const spaceSchema = z.object({
   number: z.string().describe("Space number (eg 'A101', 'B-45', 'Suite 200')"),
@@ -43,8 +43,8 @@ export default async function scrapeSpaces({
 
   try {
     // Navigate to main website
-    await page.goto(center.website, { timeout: timeToMs("30s") });
-    await page.waitForLoadState("networkidle", { timeout: timeToMs("10s") });
+    await page.goto(center.website, { timeout: ms("30s") });
+    await page.waitForLoadState("networkidle", { timeout: ms("10s") });
 
     // Try to find and click on leasing/spaces link
     const leasingLinks = [
@@ -62,7 +62,7 @@ export default async function scrapeSpaces({
         if (await link.isVisible()) {
           await link.click();
           await page.waitForLoadState("networkidle", {
-            timeout: timeToMs("10s"),
+            timeout: ms("10s"),
           });
           break;
         }
@@ -126,7 +126,7 @@ ${images.map((img) => `- ${img.alt}: ${img.src}`).join("\n")}
 If no spaces are found or the page doesn't contain leasing information, return an empty array.`;
 
     const { output } = await generateText({
-      abortSignal: AbortSignal.timeout(timeToMs("60s")),
+      abortSignal: AbortSignal.timeout(ms("60s")),
       prompt,
       output: Output.array({ element: spaceSchema }),
       ...classify,

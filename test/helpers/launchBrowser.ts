@@ -1,4 +1,5 @@
 import { pretty, render } from "@react-email/components";
+import { ms } from "convert";
 import debug from "debug";
 import { invariant } from "es-toolkit";
 import { mkdir } from "node:fs/promises";
@@ -11,7 +12,6 @@ import {
   chromium,
 } from "playwright";
 import type { JSX } from "react";
-import { timeToMs } from "~/lib/utils";
 
 export const port = 9222;
 
@@ -30,15 +30,15 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
   const context = await newContext();
   const page = await context.newPage();
   await page.setExtraHTTPHeaders(Object.fromEntries(new Headers(headers)));
-  await page.goto(path, { timeout: timeToMs("30s") });
+  await page.goto(path, { timeout: ms("30s") });
 
   // NOTE: We need to reload the page otherwise React doesn't handle the form
   // submission correctly on Playwright.
   await page.reload({ waitUntil: "load" });
   await page.waitForFunction(() => "__reactRouterContext" in window, {
-    timeout: timeToMs("15s"),
+    timeout: ms("15s"),
   });
-  await page.waitForTimeout(timeToMs("1s"));
+  await page.waitForTimeout(ms("1s"));
 
   return page;
 }
@@ -74,7 +74,7 @@ export async function newContext(): Promise<BrowserContext> {
     });
 
   // Set navigation timeout to 5s less than hook timeout for better error messages
-  context.setDefaultNavigationTimeout(timeToMs("10s"));
+  context.setDefaultNavigationTimeout(ms("10s"));
   // Ensure the __screenshots__ directory exists
   await mkdir(resolve("__screenshots__"), { recursive: true });
 

@@ -1,6 +1,6 @@
+import { ms } from "convert";
 import { useState } from "react";
 import { useInterval, useTimeout } from "usehooks-ts";
-import { timeToMs } from "~/lib/utils";
 
 const collection = [
   "12 merchants are searching spaces right now",
@@ -36,14 +36,14 @@ export default function ActivityCounter() {
       setMessage(messages[0]);
       return messages.slice(1);
     });
-  }, timeToMs("3s"));
+  }, ms("3s"));
 
   useInterval(() => {
     setMessages((messages) => {
       setMessage(messages[0]);
       return messages.slice(1);
     });
-  }, timeToMs("15s"));
+  }, ms("15s"));
 
   if (process.env.NODE_ENV === "test") return null;
 

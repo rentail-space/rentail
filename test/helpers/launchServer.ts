@@ -1,8 +1,8 @@
+import { ms } from "convert";
 import debug from "debug";
 import { delay } from "es-toolkit";
 import { type ChildProcess, fork } from "node:child_process";
 import { resolve } from "node:path";
-import { timeToMs } from "~/lib/utils";
 
 let worker: ChildProcess | undefined;
 
@@ -35,7 +35,7 @@ export async function launchServer(port: number): Promise<void> {
   await new Promise<void>((resolve, reject) => {
     const timeout = setTimeout(() => {
       reject(new Error("Server startup timeout after 30s"));
-    }, timeToMs("30s"));
+    }, ms("30s"));
 
     if (worker) {
       worker.on("message", (msg: { type: string; error?: string }) => {

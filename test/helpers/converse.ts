@@ -1,8 +1,8 @@
+import { ms } from "convert";
 import { withTimeout } from "es-toolkit";
 import type { Page } from "playwright";
 import { expect } from "vitest";
 import prisma from "~/lib/prisma";
-import { timeToMs } from "~/lib/utils";
 import { goto } from "./launchBrowser";
 
 /**
@@ -47,7 +47,7 @@ export default async function converse(
     (count) =>
       document.querySelectorAll(".chat-bubble-response").length >= count,
     responseCount + 1,
-    { timeout: timeToMs("10s") },
+    { timeout: ms("10s") },
   );
 
   // Wait for the assistant to finish streaming. It should have completed by
@@ -61,7 +61,7 @@ export default async function converse(
       if (chat && chat.activeStreamId === null) break;
       await page.waitForTimeout(100);
     }
-  }, timeToMs("10s"));
+  }, ms("10s"));
 
   // We expect at least 2 new messages: one from the user and one from the assistant
   expect(await prisma.messages.count()).toBeGreaterThanOrEqual(
