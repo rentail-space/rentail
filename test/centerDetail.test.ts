@@ -30,8 +30,8 @@ describe("Center detail page", () => {
     const structuredData = JSON.parse(jsonLdContent ?? "");
 
     expect(structuredData["@context"]).toBe("https://schema.org");
-    expect(structuredData["@type"]).toBe("ShoppingCenter");
-    expect(structuredData.name).toBe("Los Cerritos Center");
+    expect(structuredData["@graph"][0]["@type"]).toBe("ShoppingCenter");
+    expect(structuredData["@graph"][0].name).toBe("Los Cerritos Center");
   });
 
   it("should have PostalAddress with complete address fields", async () => {
@@ -42,12 +42,12 @@ describe("Center detail page", () => {
 
     const structuredData = JSON.parse(jsonLdContent ?? "");
 
-    expect(structuredData.address).toBeDefined();
-    expect(structuredData.address["@type"]).toBe("PostalAddress");
-    expect(structuredData.address.streetAddress).toBeTruthy();
-    expect(structuredData.address.addressLocality).toBeTruthy();
-    expect(structuredData.address.addressRegion).toBeTruthy();
-    expect(structuredData.address.addressCountry).toBeTruthy();
+    expect(structuredData["@graph"][0].address).toBeDefined();
+    expect(structuredData["@graph"][0].address["@type"]).toBe("PostalAddress");
+    expect(structuredData["@graph"][0].address.streetAddress).toBeTruthy();
+    expect(structuredData["@graph"][0].address.addressLocality).toBeTruthy();
+    expect(structuredData["@graph"][0].address.addressRegion).toBeTruthy();
+    expect(structuredData["@graph"][0].address.addressCountry).toBeTruthy();
   });
 
   it("should have GeoCoordinates with latitude and longitude", async () => {
@@ -58,10 +58,10 @@ describe("Center detail page", () => {
 
     const structuredData = JSON.parse(jsonLdContent ?? "");
 
-    expect(structuredData.geo).toBeDefined();
-    expect(structuredData.geo["@type"]).toBe("GeoCoordinates");
-    expect(typeof structuredData.geo.latitude).toBe("number");
-    expect(typeof structuredData.geo.longitude).toBe("number");
+    expect(structuredData["@graph"][0].geo).toBeDefined();
+    expect(structuredData["@graph"][0].geo["@type"]).toBe("GeoCoordinates");
+    expect(typeof structuredData["@graph"][0].geo.latitude).toBe("number");
+    expect(typeof structuredData["@graph"][0].geo.longitude).toBe("number");
   });
 
   it("should have image URLs if available", async () => {

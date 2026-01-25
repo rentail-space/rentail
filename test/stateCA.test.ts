@@ -134,18 +134,24 @@ describe("State shopping centers page", () => {
     const structuredData = JSON.parse(jsonLdContent ?? "");
 
     expect(structuredData["@context"]).toBe("https://schema.org");
-    expect(structuredData["@type"]).toBe("ItemList");
-    expect(structuredData.name).toContain("Shopping Centers in CA");
-    expect(structuredData.description).toContain("California");
-    expect(structuredData.numberOfItems).toBe(californiaCenters.length);
-    expect(Array.isArray(structuredData.itemListElement)).toBe(true);
-    expect(structuredData.itemListElement.length).toBe(
+    expect(structuredData["@graph"][0]["@type"]).toBe("ItemList");
+    expect(structuredData["@graph"][0].name).toContain(
+      "Shopping Centers in CA",
+    );
+    expect(structuredData["@graph"][0].description).toContain("California");
+    expect(structuredData["@graph"][0].numberOfItems).toBe(
+      californiaCenters.length,
+    );
+    expect(Array.isArray(structuredData["@graph"][0].itemListElement)).toBe(
+      true,
+    );
+    expect(structuredData["@graph"][0].itemListElement.length).toBe(
       californiaCenters.length,
     );
 
     // Validate each shopping center in the structured data
     for (const [index, center] of californiaCenters.entries()) {
-      const centerItem = structuredData.itemListElement[index];
+      const centerItem = structuredData["@graph"][0].itemListElement[index];
 
       expect(centerItem["@type"]).toEqual(["ListItem", "ShoppingCenter"]);
       expect(centerItem.position).toBe(index + 1);

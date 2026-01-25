@@ -36,8 +36,10 @@ export default function PageFooter() {
       <aside className="flex flex-col gap-4 text-black">
         <RentailIcon />
         <div className="flex flex-col gap-2">
-          <p className="font-medium text-sm">
-            AI-powered short-term retail space marketplace
+          <p className="font-medium">
+            Leading marketplace for finding short-term retail spaces in shopping
+            centers. Built for small businesses and seasonal sellers. AI
+            powered.
           </p>
           <p className="font-medium text-sm">
             © {new Date().getFullYear()} rentail.space. All rights reserved.
