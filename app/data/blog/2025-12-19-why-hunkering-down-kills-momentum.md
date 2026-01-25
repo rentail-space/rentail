@@ -191,7 +191,7 @@ down, you signal defeat.
 Markets reward persistence, not perfection. The founders who win aren't the ones
 who avoid setbacks—they're the ones who execute through them.
 
-**Keep moving in retail:** [Find temporary spaces on rentail.space](https://rentail.space) to test concepts after setbacks. Iterate fast, don't hunker down.
+**Keep moving in retail:** [Find temporary spaces on rentail.space](https://rentail.space/chat) to test concepts after setbacks. Iterate fast, don't hunker down.
 
 ---
 
@@ -211,7 +211,7 @@ Stay visible and give clear direction. Don't hide after bad news—your presence
 
 ### Where can I find retail space to test new concepts?
 
-[Browse rentail.space](https://rentail.space) for temporary spaces at shopping centers. Test ideas, gather feedback, iterate—don't hunker down.
+[Browse rentail.space](https://rentail.space/chat) for temporary spaces at shopping centers. Test ideas, gather feedback, iterate—don't hunker down.
 
 ### How do I find short-term retail space?
 

@@ -96,7 +96,7 @@ Your constraints aren't liabilities—they're forcing functions for strategic
 clarity. The question isn't what competitors are doing. It's what only you can
 deliver exceptionally well.
 
-**Test your focus:** [Find temporary retail spaces on rentail.space](https://rentail.space) to validate what you can genuinely excel at—without spreading thin across competitor features.
+**Test your focus:** [Find temporary retail spaces on rentail.space](https://rentail.space/chat) to validate what you can genuinely excel at—without spreading thin across competitor features.
 
 ---
 
@@ -116,7 +116,7 @@ Frame cuts as strategic reallocation, not failure. Show your team what they gain
 
 ### Where can I test retail concepts without long commitments?
 
-[Browse rentail.space](https://rentail.space) for temporary spaces at shopping centers. Test what you excel at, iterate, scale winners—no multi-year leases.
+[Browse rentail.space](https://rentail.space/chat) for temporary spaces at shopping centers. Test what you excel at, iterate, scale winners—no multi-year leases.
 
 ### How do I find short-term retail space?
 

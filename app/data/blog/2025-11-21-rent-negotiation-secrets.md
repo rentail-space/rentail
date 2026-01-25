@@ -240,7 +240,7 @@ predictability.
 recover. Every month you delay negotiation is money left on the table. Every
 year you accept above-market terms is competitive advantage you're giving away.
 
-**Ready to find your next retail space?** [Browse available spaces on rentail.space](https://rentail.space) and compare pricing across shopping centers before you negotiate.
+**Ready to find your next retail space?** [Browse available spaces on rentail.space](https://rentail.space/chat) and compare pricing across shopping centers before you negotiate.
 
 ---
 
@@ -248,7 +248,7 @@ year you accept above-market terms is competitive advantage you're giving away.
 
 ### How much does it cost to rent mall kiosk space?
 
-Costs vary by location, season, and foot traffic. [Browse rentail.space](https://rentail.space) to see actual pricing at shopping centers near you—compare before you negotiate.
+Costs vary by location, season, and foot traffic. [Browse rentail.space](https://rentail.space/chat) to see actual pricing at shopping centers near you—compare before you negotiate.
 
 ### How to contact mall managers about temporary retail space?
 

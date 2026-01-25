@@ -45,7 +45,7 @@ Start with the smallest test:
 
 Get moving without "definitive narrative." Evolve based on what works.
 
-**Ready to test your concept?** [Browse temporary retail spaces on rentail.space](https://rentail.space).
+**Ready to test your concept?** [Browse temporary retail spaces on rentail.space](https://rentail.space/chat).
 
 ---
 
@@ -53,7 +53,7 @@ Get moving without "definitive narrative." Evolve based on what works.
 
 ### Where can I find temporary retail space to test my business idea?
 
-[Browse rentail.space](https://rentail.space) for available pop-ups, kiosks, and carts at shopping centers. Test concepts without multi-year commitments.
+[Browse rentail.space](https://rentail.space/chat) for available pop-ups, kiosks, and carts at shopping centers. Test concepts without multi-year commitments.
 
 ### How do I soft launch a retail business?
 

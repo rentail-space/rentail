@@ -53,7 +53,7 @@ Negotiation saves thousands and provides flexibility.
 
 Once signed, leases bind you—whether or not you got legal advice. Review everything. Clarify complex clauses before signing.
 
-**Ready to find retail space?** [Browse available spaces at shopping centers near you](https://rentail.space) and start your search today.
+**Ready to find retail space?** [Browse available spaces at shopping centers near you](https://rentail.space/chat) and start your search today.
 
 ---
 
@@ -61,7 +61,7 @@ Once signed, leases bind you—whether or not you got legal advice. Review every
 
 ### How do I find short-term retail space in shopping malls?
 
-[Browse rentail.space](https://rentail.space) to see available spaces at shopping centers near you—with photos, pricing, and foot traffic data. No broker calls needed.
+[Browse rentail.space](https://rentail.space/chat) to see available spaces at shopping centers near you—with photos, pricing, and foot traffic data. No broker calls needed.
 
 ### What are the best platforms for finding pop-up shops in shopping centers?
 

@@ -109,7 +109,7 @@ the trigger.
 
 Listen first. Decide fast. Execute with clarity.
 
-**Building a retail business?** [Find temporary spaces on rentail.space](https://rentail.space) to test concepts with real customers before committing long-term.
+**Building a retail business?** [Find temporary spaces on rentail.space](https://rentail.space/chat) to test concepts with real customers before committing long-term.
 
 ---
 
@@ -129,7 +129,7 @@ The opposite. Teams respect informed decisions, not reactive ones. Asking questi
 
 ### Where can I find retail space to test concepts?
 
-[Browse rentail.space](https://rentail.space) for available temporary spaces at shopping centers. Test with real customers, gather context, iterate fast.
+[Browse rentail.space](https://rentail.space/chat) for available temporary spaces at shopping centers. Test with real customers, gather context, iterate fast.
 
 ### How do I find short-term retail space?
 

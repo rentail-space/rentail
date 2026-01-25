@@ -37,7 +37,7 @@ Treats are spontaneous dopamine hits. Short-term spaces are ideal—meet custome
 - **High-traffic locations**: Browse pop-ups where foot traffic is
 - **Validate purchases**: Remind customers self-care is okay
 
-**[Find temporary retail spaces](https://rentail.space)** to capture spontaneous treat purchases without long-term overhead.
+**[Find temporary retail spaces](https://rentail.space/chat)** to capture spontaneous treat purchases without long-term overhead.
 
 ---
 
@@ -45,7 +45,7 @@ Treats are spontaneous dopamine hits. Short-term spaces are ideal—meet custome
 
 ### Where can I find retail space to sell impulse "treat" products?
 
-[Browse rentail.space](https://rentail.space) for kiosks and pop-ups in high-traffic areas—perfect for capturing spontaneous "I need a treat" purchases.
+[Browse rentail.space](https://rentail.space/chat) for kiosks and pop-ups in high-traffic areas—perfect for capturing spontaneous "I need a treat" purchases.
 
 ### How do I test micro-luxury products in retail?
 

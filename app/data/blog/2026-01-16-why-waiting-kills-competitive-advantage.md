@@ -101,7 +101,7 @@ perfectionist every time.
 
 Your competitors aren't waiting. Your customers aren't either.
 
-**Test retail concepts fast:** [Browse temporary spaces on rentail.space](https://rentail.space) to launch v1.0 without multi-year commitments. Iterate based on real customer feedback.
+**Test retail concepts fast:** [Browse temporary spaces on rentail.space](https://rentail.space/chat) to launch v1.0 without multi-year commitments. Iterate based on real customer feedback.
 
 ---
 
@@ -121,7 +121,7 @@ Build rapid feedback loops (surveys, analytics, support tickets) and bi-weekly r
 
 ### Where can I test retail products without long commitments?
 
-[Browse rentail.space](https://rentail.space) for temporary retail spaces at shopping centers. Test concepts in weeks or months, iterate based on real customer feedback, scale what works.
+[Browse rentail.space](https://rentail.space/chat) for temporary retail spaces at shopping centers. Test concepts in weeks or months, iterate based on real customer feedback, scale what works.
 
 ### How do I find short-term retail space?
 

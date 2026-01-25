@@ -44,7 +44,7 @@ Winners will:
 - **Test in physical spaces** before scaling
 - **Solve problems** instead of pushing heritage
 
-**Ready to test your concept?** [Browse temporary retail spaces](https://rentail.space) where Gen Z actually shops.
+**Ready to test your concept?** [Browse temporary retail spaces](https://rentail.space/chat) where Gen Z actually shops.
 
 ---
 
@@ -56,7 +56,7 @@ Test concepts at shopping centers where Gen Z shops. Move fast, iterate based on
 
 ### Where can I find short-term retail space to test fashion concepts?
 
-[Browse rentail.space](https://rentail.space) for available pop-ups, kiosks, and inline spaces. Test products before committing long-term.
+[Browse rentail.space](https://rentail.space/chat) for available pop-ups, kiosks, and inline spaces. Test products before committing long-term.
 
 ### Why do fashion brands need temporary retail spaces?
 

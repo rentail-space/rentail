@@ -34,7 +34,7 @@ Jellycat's "Fish and Chips" pop-up at Selfridges: temporary, themed, theatrical.
 
 Focus on **emotional consumption**. Create "must-have" moments. Turn products into collectibles. Make experiences feel like destinations.
 
-**[Browse temporary retail spaces](https://rentail.space)** to test emotional products without crushing overhead.
+**[Browse temporary retail spaces](https://rentail.space/chat)** to test emotional products without crushing overhead.
 
 ---
 
@@ -42,7 +42,7 @@ Focus on **emotional consumption**. Create "must-have" moments. Turn products in
 
 ### Where can I find temporary retail space for pop-up concepts?
 
-[Browse rentail.space](https://rentail.space) for available kiosks, pop-ups, and carts at shopping centers. Test emotional products without long-term commitments.
+[Browse rentail.space](https://rentail.space/chat) for available kiosks, pop-ups, and carts at shopping centers. Test emotional products without long-term commitments.
 
 ### How do brands like Jellycat use temporary retail?
 

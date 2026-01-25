@@ -46,7 +46,7 @@ million views. Result: four-to-five hour waitlist all weekend.
 
 Authenticity, relatability, and cultural timing beat polish every time.
 
-**Ready to test retail concepts?** [Browse temporary spaces at shopping centers](https://rentail.space) where you can validate what resonates with real customers.
+**Ready to test retail concepts?** [Browse temporary spaces at shopping centers](https://rentail.space/chat) where you can validate what resonates with real customers.
 
 ---
 
@@ -54,7 +54,7 @@ Authenticity, relatability, and cultural timing beat polish every time.
 
 ### How do I test a retail concept before committing long-term?
 
-[Find short-term spaces on rentail.space](https://rentail.space)—kiosks and pop-ups let you test products, pricing, and marketing with real customers before signing multi-year leases.
+[Find short-term spaces on rentail.space](https://rentail.space/chat)—kiosks and pop-ups let you test products, pricing, and marketing with real customers before signing multi-year leases.
 
 ### Where can I find temporary retail space to validate my business idea?
 

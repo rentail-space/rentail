@@ -48,7 +48,7 @@ List your available spaces and connect with vetted merchants ready to lease.
 - Review merchant applications and portfolios
 - Connect directly with vetted brands
 
-**[Get started on rentail.space](https://rentail.space)**—browse or list spaces today.
+**[Get started on rentail.space](https://rentail.space/chat)**—browse or list spaces today.
 
 ---
 
@@ -56,7 +56,7 @@ List your available spaces and connect with vetted merchants ready to lease.
 
 ### How do I find short-term retail space in shopping malls?
 
-[Browse rentail.space](https://rentail.space) to see available kiosks, pop-ups, and inline spaces at shopping centers near you. Filter by location, timeframe, and space type.
+[Browse rentail.space](https://rentail.space/chat) to see available kiosks, pop-ups, and inline spaces at shopping centers near you. Filter by location, timeframe, and space type.
 
 ### What platforms help find pop-up shops in shopping centers?
 

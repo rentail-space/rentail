@@ -87,7 +87,7 @@ Once you find a space:
 
 Specialty leasing gives you prime retail locations without crushing overhead. Test products, capitalize on seasonal demand, or build brand awareness—all with flexibility traditional leases can't match.
 
-**[Browse available spaces at rentail.space](https://rentail.space)** and see shopping centers with open kiosks, pop-ups, and carts near you.
+**[Browse available spaces at rentail.space](https://rentail.space/chat)** and see shopping centers with open kiosks, pop-ups, and carts near you.
 
 ---
 
@@ -95,7 +95,7 @@ Specialty leasing gives you prime retail locations without crushing overhead. Te
 
 ### How do I find short-term retail space in shopping malls?
 
-Browse available spaces at [rentail.space](https://rentail.space). See kiosks, pop-ups, and carts with photos, pricing, and availability—no broker calls needed.
+Browse available spaces at [rentail.space](https://rentail.space/chat). See kiosks, pop-ups, and carts with photos, pricing, and availability—no broker calls needed.
 
 ### Where can I lease a mall kiosk for 3-6 months?
 
