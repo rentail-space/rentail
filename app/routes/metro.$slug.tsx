@@ -22,7 +22,8 @@ export async function loader({ params }: Route.LoaderArgs) {
     where: { slug: params.slug },
     include: {
       state: true,
-      cities: true,
+      cities: { orderBy: { name: "asc" } },
+      regionalNames: { orderBy: { name: "asc" } },
     },
   });
 
@@ -123,6 +124,36 @@ export default function MetroPage({ loaderData }: Route.ComponentProps) {
             </li>
           ))}
         </ul>
+      )}
+
+      {(metro.cities.length > 0 || metro.regionalNames.length > 0) && (
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            ...metro.cities.map((city) => ({
+              type: "city" as const,
+              name: city.name,
+              slug: city.slug,
+              id: city.id,
+            })),
+            ...metro.regionalNames.map((regional) => ({
+              type: "regional" as const,
+              name: regional.name,
+              slug: regional.slug,
+              id: regional.id,
+            })),
+          ]
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((area) => (
+              <ActiveLink
+                key={`${area.type}-${area.id}`}
+                to={`/${area.type}/${area.slug}`}
+                variant="silent"
+                className="rounded border border-gray-300 p-3 hover:border-blue-500"
+              >
+                {area.name}
+              </ActiveLink>
+            ))}
+        </div>
       )}
     </main>
   );

@@ -22,7 +22,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     where: { slug: params.slug },
     include: {
       state: true,
-      cities: true,
+      cities: { orderBy: { name: "asc" } },
     },
   });
 
@@ -123,6 +123,21 @@ export default function CountyPage({ loaderData }: Route.ComponentProps) {
             </li>
           ))}
         </ul>
+      )}
+
+      {county.cities.length > 0 && (
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+          {county.cities.map((city) => (
+            <ActiveLink
+              key={city.id}
+              to={`/city/${city.slug}`}
+              variant="silent"
+              className="rounded border border-gray-300 p-3 hover:border-blue-500"
+            >
+              {city.name}
+            </ActiveLink>
+          ))}
+        </div>
       )}
     </main>
   );

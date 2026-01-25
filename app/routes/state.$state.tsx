@@ -33,13 +33,23 @@ export async function loader({ params }: Route.LoaderArgs) {
     where: { stateAbbreviation: state.abbreviation },
   });
 
-  return { centers, state };
+  const metroAreas = await prisma.metroArea.findMany({
+    where: { stateAbbreviation: state.abbreviation },
+    orderBy: { name: "asc" },
+  });
+
+  const counties = await prisma.county.findMany({
+    where: { stateAbbreviation: state.abbreviation },
+    orderBy: { name: "asc" },
+  });
+
+  return { centers, state, metroAreas, counties };
 }
 
 export default function StatePage({ loaderData }: Route.ComponentProps) {
   const centerRef =
     useRef<(center: { longitude: number; latitude: number }) => void>(null);
-  const { centers, state } = loaderData;
+  const { centers, state, metroAreas, counties } = loaderData;
 
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
@@ -107,6 +117,36 @@ export default function StatePage({ loaderData }: Route.ComponentProps) {
           </li>
         ))}
       </ul>
+
+      {(metroAreas.length > 0 || counties.length > 0) && (
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            ...metroAreas.map((metro) => ({
+              type: "metro" as const,
+              name: metro.name,
+              slug: metro.slug,
+              id: metro.id,
+            })),
+            ...counties.map((county) => ({
+              type: "county" as const,
+              name: county.name,
+              slug: county.slug,
+              id: county.id,
+            })),
+          ]
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((area) => (
+              <ActiveLink
+                key={`${area.type}-${area.id}`}
+                to={`/${area.type}/${area.slug}`}
+                variant="silent"
+                className="rounded border border-gray-300 p-3 hover:border-blue-500"
+              >
+                {area.name}
+              </ActiveLink>
+            ))}
+        </div>
+      )}
     </main>
   );
 }

@@ -7,6 +7,7 @@ import { goto } from "~/test/helpers/launchBrowser";
 describe("County shopping centers page", () => {
   let page: Page;
   let testCounty: {
+    id: string;
     name: string;
     stateAbbreviation: string;
     state: { name: string; abbreviation: string };
@@ -141,5 +142,21 @@ describe("County shopping centers page", () => {
       `a[href="/state/${testCounty.stateAbbreviation.toLowerCase()}"]`,
     );
     await expect(backLink).toBeVisible();
+  });
+
+  it("should display cities in the county", async () => {
+    const cities = await prisma.city.findMany({
+      where: { countyId: testCounty.id },
+      orderBy: { name: "asc" },
+    });
+
+    if (cities.length > 0) {
+      for (const city of cities) {
+        if (city.slug) {
+          const cityLink = page.locator(`a[href="/city/${city.slug}"]`);
+          await expect(cityLink).toBeVisible();
+        }
+      }
+    }
   });
 });

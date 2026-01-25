@@ -7,6 +7,7 @@ import { goto } from "~/test/helpers/launchBrowser";
 describe("Metro area shopping centers page", () => {
   let page: Page;
   let testMetro: {
+    id: string;
     name: string;
     stateAbbreviation: string;
     state: { name: string; abbreviation: string };
@@ -143,5 +144,35 @@ describe("Metro area shopping centers page", () => {
       `a[href="/state/${testMetro.stateAbbreviation.toLowerCase()}"]`,
     );
     await expect(backLink).toBeVisible();
+  });
+
+  it("should display cities and regional areas in the metro area", async () => {
+    const cities = await prisma.city.findMany({
+      where: { metroAreaId: testMetro.id },
+      orderBy: { name: "asc" },
+    });
+
+    const regionalNames = await prisma.regionalName.findMany({
+      where: { metroAreaId: testMetro.id },
+      orderBy: { name: "asc" },
+    });
+
+    if (cities.length > 0 || regionalNames.length > 0) {
+      for (const city of cities) {
+        if (city.slug) {
+          const cityLink = page.locator(`a[href="/city/${city.slug}"]`);
+          await expect(cityLink).toBeVisible();
+        }
+      }
+
+      for (const regional of regionalNames) {
+        if (regional.slug) {
+          const regionalLink = page.locator(
+            `a[href="/regional/${regional.slug}"]`,
+          );
+          await expect(regionalLink).toBeVisible();
+        }
+      }
+    }
   });
 });

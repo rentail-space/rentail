@@ -227,6 +227,28 @@ describe("State shopping centers page", () => {
     expect(content).toContain("specialty leasing");
   });
 
+  it("should display metro areas and counties in California", async () => {
+    const metroAreas = await prisma.metroArea.findMany({
+      where: { stateAbbreviation: "CA" },
+    });
+
+    const counties = await prisma.county.findMany({
+      where: { stateAbbreviation: "CA" },
+    });
+
+    if (metroAreas.length > 0 || counties.length > 0) {
+      for (const metro of metroAreas) {
+        const metroLink = page.locator(`a[href="/metro/${metro.slug}"]`);
+        await expect(metroLink).toBeVisible();
+      }
+
+      for (const county of counties) {
+        const countyLink = page.locator(`a[href="/county/${county.slug}"]`);
+        await expect(countyLink).toBeVisible();
+      }
+    }
+  });
+
   describe("clicks center link", () => {
     let firstCenter: { id: string; name: string };
 
