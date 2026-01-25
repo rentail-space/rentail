@@ -16,6 +16,103 @@ export default function Pricing() {
       />
       <link rel="canonical" href="https://rentail.space/pricing" />
 
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "Pricing | Rentail.space",
+            description:
+              "Compare our simple, transparent pricing plans for specialty leasing",
+            url: "https://rentail.space/pricing",
+            mainEntity: [
+              {
+                "@type": "Offer",
+                name: "For Merchants",
+                description:
+                  "Find and lease retail spaces with zero platform fees",
+                price: "0",
+                priceCurrency: "USD",
+                availability: "https://schema.org/InStock",
+                seller: {
+                  "@type": "Organization",
+                  name: "Rentail.space",
+                },
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Specialty Retail Space Discovery",
+                  description:
+                    "Browse retail spaces, AI-powered recommendations, direct messaging with property managers",
+                },
+              },
+              {
+                "@type": "Offer",
+                name: "Space Listing",
+                description:
+                  "List your retail spaces and attract quality merchants",
+                price: "15",
+                priceCurrency: "USD",
+                priceSpecification: {
+                  "@type": "UnitPriceSpecification",
+                  price: "15",
+                  priceCurrency: "USD",
+                  referenceQuantity: {
+                    "@type": "QuantitativeValue",
+                    value: "1",
+                    unitText: "PERCENT",
+                  },
+                },
+                availability: "https://schema.org/InStock",
+                seller: {
+                  "@type": "Organization",
+                  name: "Rentail.space",
+                },
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Space Listing Service",
+                  description:
+                    "List unlimited retail spaces with AI-powered merchant matching and automated lease management",
+                },
+              },
+              {
+                "@type": "Offer",
+                name: "Specialty Leasing Booking App",
+                description:
+                  "Complete booking management for your shopping center",
+                price: "250",
+                priceCurrency: "USD",
+                priceSpecification: {
+                  "@type": "UnitPriceSpecification",
+                  price: "250",
+                  priceCurrency: "USD",
+                  unitText: "MONTH",
+                  referenceQuantity: {
+                    "@type": "QuantitativeValue",
+                    value: "1",
+                    unitText: "SHOPPING_CENTER",
+                  },
+                },
+                availability: "https://schema.org/InStock",
+                seller: {
+                  "@type": "Organization",
+                  name: "Rentail.space",
+                },
+                itemOffered: {
+                  "@type": "SoftwareApplication",
+                  name: "Specialty Leasing Booking App",
+                  description:
+                    "Custom booking calendar, automated scheduling, analytics dashboard, multi-location management",
+                  applicationCategory: "BusinessApplication",
+                  operatingSystem: "Web",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
       <div className="container mx-auto my-10 space-y-8 p-5">
         <section className="bg-[hsl(60,100%,99%)] py-20 text-center">
           <h1 className="mb-6 font-bold text-5xl text-black leading-tight md:text-6xl">

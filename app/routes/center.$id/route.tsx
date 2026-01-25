@@ -57,39 +57,66 @@ export default function CenterPage({
 function schemaData(center: PropertyGetPayload<{ include: { spaces: true } }>) {
   return {
     "@context": "https://schema.org",
-    "@type": "ShoppingCenter",
-    name: center.name,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: center.address,
-      addressLocality: center.city,
-      addressRegion: center.state,
-      addressCountry: center.country || "US",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: center.latitude,
-      longitude: center.longitude,
-    },
-    ...(center.phone && { telephone: center.phone }),
-    ...(center.website && { url: externalLink(center.website) }),
-    ...(center.imageURLs.length > 0 && { image: center.imageURLs }),
-    ...(center.description && { description: center.description }),
-    ...(center.openFrom === 0 && center.openUntil === 2400
-      ? {
-          openingHoursSpecification: {
-            "@type": "OpeningHoursSpecification",
-            opens: "00:00",
-            closes: "24:00",
+    "@graph": [
+      {
+        "@type": "ShoppingCenter",
+        name: center.name,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: center.address,
+          addressLocality: center.city,
+          addressRegion: center.state,
+          addressCountry: center.country || "US",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: center.latitude,
+          longitude: center.longitude,
+        },
+        ...(center.phone && { telephone: center.phone }),
+        ...(center.website && { url: externalLink(center.website) }),
+        ...(center.imageURLs.length > 0 && { image: center.imageURLs }),
+        ...(center.description && { description: center.description }),
+        ...(center.openFrom === 0 && center.openUntil === 2400
+          ? {
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                opens: "00:00",
+                closes: "24:00",
+              },
+            }
+          : center.openFrom &&
+            center.openUntil && {
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                opens: `${Math.floor(center.openFrom / 100)}:${String(center.openFrom % 100).padStart(2, "0")}`,
+                closes: `${Math.floor(center.openUntil / 100)}:${String(center.openUntil % 100).padStart(2, "0")}`,
+              },
+            }),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://rentail.space",
           },
-        }
-      : center.openFrom &&
-        center.openUntil && {
-          openingHoursSpecification: {
-            "@type": "OpeningHoursSpecification",
-            opens: `${Math.floor(center.openFrom / 100)}:${String(center.openFrom % 100).padStart(2, "0")}`,
-            closes: `${Math.floor(center.openUntil / 100)}:${String(center.openUntil % 100).padStart(2, "0")}`,
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: center.state,
+            item: `https://rentail.space/state/${center.state}`,
           },
-        }),
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: center.name,
+            item: `https://rentail.space/center/${center.id}`,
+          },
+        ],
+      },
+    ],
   };
 }

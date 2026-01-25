@@ -95,24 +95,51 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Article",
-            "@id": url,
-            author: {
-              "@type": "Organization",
-              name: "Rentail.space",
-              url: "https://rentail.space",
-            },
-            datePublished: published,
-            inLanguage: "en-US",
-            name: title,
-            primaryImageOfPage: image
-              ? {
-                  "@id": image,
-                  "@type": "ImageObject",
-                  caption: alt,
-                  contentUrl: image,
-                }
-              : undefined,
+            "@graph": [
+              {
+                "@type": "Article",
+                "@id": url,
+                author: {
+                  "@type": "Organization",
+                  name: "Rentail.space",
+                  url: "https://rentail.space",
+                },
+                datePublished: published,
+                inLanguage: "en-US",
+                name: title,
+                primaryImageOfPage: image
+                  ? {
+                      "@id": image,
+                      "@type": "ImageObject",
+                      caption: alt,
+                      contentUrl: image,
+                    }
+                  : undefined,
+              },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://rentail.space",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Blog",
+                    item: "https://rentail.space/blog",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: title,
+                    item: url,
+                  },
+                ],
+              },
+            ],
           })}
         </script>
         {faqItems && faqItems.length > 0 && (

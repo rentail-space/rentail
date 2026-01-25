@@ -300,10 +300,37 @@ function schemaData({
 
   return {
     "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: `Shopping Centers in ${state.abbreviation}`,
-    description: `Complete list of shopping centers and retail spaces in ${state.name}`,
-    numberOfItems: itemListElements.length,
-    itemListElement: itemListElements,
+    "@graph": [
+      {
+        "@type": "ItemList",
+        name: `Shopping Centers in ${state.abbreviation}`,
+        description: `Complete list of shopping centers and retail spaces in ${state.name}`,
+        numberOfItems: itemListElements.length,
+        itemListElement: itemListElements,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://rentail.space",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "States",
+            item: "https://rentail.space/states",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: state.name,
+            item: `https://rentail.space/state/${state.abbreviation}`,
+          },
+        ],
+      },
+    ],
   };
 }

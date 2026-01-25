@@ -100,18 +100,45 @@ export default function NewsPost({ loaderData }: { loaderData: NewsItem }) {
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "NewsArticle",
-            "@id": url,
-            author: {
-              "@type": "Organization",
-              name: "Rentail.space",
-              url: "https://rentail.space",
-            },
-            dateline: `LOS ANGELES, CA — ${DateTime.fromISO(published, { zone: "utc" }).toLocaleString(DateTime.DATE_MED)}`,
-            datePublished: published,
-            headline: summary,
-            inLanguage: "en-US",
-            name: title,
+            "@graph": [
+              {
+                "@type": "NewsArticle",
+                "@id": url,
+                author: {
+                  "@type": "Organization",
+                  name: "Rentail.space",
+                  url: "https://rentail.space",
+                },
+                dateline: `LOS ANGELES, CA — ${DateTime.fromISO(published, { zone: "utc" }).toLocaleString(DateTime.DATE_MED)}`,
+                datePublished: published,
+                headline: summary,
+                inLanguage: "en-US",
+                name: title,
+              },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: "https://rentail.space",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "News",
+                    item: "https://rentail.space/news",
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: title,
+                    item: url,
+                  },
+                ],
+              },
+            ],
           })}
         </script>
       </article>

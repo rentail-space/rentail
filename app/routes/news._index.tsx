@@ -29,6 +29,40 @@ export default function News({
       />
       <link rel="canonical" href="https://rentail.space/news" />
 
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: "Rentail.space News",
+            description: "The latest news and updates from Rentail.space",
+            url: "https://rentail.space/news",
+            mainEntity: {
+              "@type": "ItemList",
+              itemListElement: loaderData.posts.map((post, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                item: {
+                  "@type": "NewsArticle",
+                  "@id": `https://rentail.space/news/${post.slug}`,
+                  headline: post.title,
+                  description: post.summary,
+                  datePublished: post.published,
+                  url: `https://rentail.space/news/${post.slug}`,
+                  author: {
+                    "@type": "Organization",
+                    name: "Rentail.space",
+                    url: "https://rentail.space",
+                  },
+                },
+              })),
+            },
+          }),
+        }}
+      />
+
       <section className="bg-[hsl(60,100%,99%)] px-4 py-20 md:py-32">
         <div className="container mx-auto max-w-4xl text-center">
           <h1 className="mb-6 font-bold text-5xl text-black leading-tight md:text-6xl">
