@@ -1,8 +1,8 @@
 import { Section } from "@react-email/components";
 import { groupBy } from "es-toolkit";
+import { twMerge } from "tailwind-merge";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails";
-import { cn } from "../utils";
 import type { RankingResults } from "./checkRanking";
 
 export default async function sendSEORankAlert({
@@ -75,13 +75,17 @@ function SummarySection({ queries }: { queries: RankingResults[] }) {
               <tr key={hostname}>
                 <td
                   align="left"
-                  className={cn(hostname === "rentail.space" && "font-bold")}
+                  className={twMerge(
+                    hostname === "rentail.space" && "font-bold",
+                  )}
                 >
                   {hostname}
                 </td>
                 <td
                   align="right"
-                  className={cn(hostname === "rentail.space" && "font-bold")}
+                  className={twMerge(
+                    hostname === "rentail.space" && "font-bold",
+                  )}
                 >
                   {count}
                 </td>

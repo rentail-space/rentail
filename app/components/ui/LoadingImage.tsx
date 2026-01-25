@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { cn } from "~/lib/utils";
+import { twMerge } from "tailwind-merge";
 
 export default function LoadingImage({
   alt,
@@ -24,7 +24,7 @@ export default function LoadingImage({
 
   return (
     <figure
-      className={cn("w-full overflow-hidden", figureClassName)}
+      className={twMerge("w-full overflow-hidden", figureClassName)}
       style={{
         background:
           "repeating-linear-gradient(135deg, #e5e7eb 0 24px, #fff 24px 48px)",
@@ -34,7 +34,7 @@ export default function LoadingImage({
     >
       <img
         alt={alt}
-        className={cn(
+        className={twMerge(
           "h-full w-full object-cover object-center opacity-0",
           imgClassName,
         )}

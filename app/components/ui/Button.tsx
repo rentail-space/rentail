@@ -1,7 +1,7 @@
-import * as React from "react";
 import { useRender } from "@base-ui/react";
 import { type VariantProps, cva } from "class-variance-authority";
-import { cn } from "~/lib/utils";
+import { forwardRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap font-bold text-sm transition-all duration-100 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -19,7 +19,7 @@ const buttonVariants = cva(
         ghost:
           "rounded-base border-2 border-transparent text-black hover:border-black hover:bg-white",
         link: "text-black underline underline-offset-4 hover:decoration-[hsl(37,92%,65%)]",
-        neubrutalism: cn(
+        neubrutalism: twMerge(
           "border-[0.5px] duration-200 rounded-sm bg-transparent",
           // light mode
           "shadow-[4px_4px_0px_0px_rgba(0,0,0)] active:shadow-none border-zinc-800 hover:bg-zinc-50 text-zinc-800",
@@ -48,14 +48,14 @@ export interface ButtonProps
   render?: React.ReactElement;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, render, ...props }, ref) => {
     return useRender({
       defaultTagName: "button",
       render,
       props: {
         ...props,
-        className: cn(buttonVariants({ variant, size, className })),
+        className: twMerge(buttonVariants({ variant, size, className })),
         ref,
       },
     });

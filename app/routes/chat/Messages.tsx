@@ -1,8 +1,8 @@
 import type { UIMessage } from "ai";
 import { useEffect, useRef } from "react";
 import { BeatLoading } from "respinner";
+import { twMerge } from "tailwind-merge";
 import { useStickToBottomContext } from "use-stick-to-bottom";
-import { cn } from "~/lib/utils";
 import askQuestion from "~/routes/chat/askQuestion";
 import ErrorMessage from "./ErrorMessage";
 import ResponseMessage from "./ResponseMessage";
@@ -48,7 +48,7 @@ export default function Messages({
 
   return (
     <div
-      className={cn(
+      className={twMerge(
         "scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent overflow-y-auto scroll-smooth",
         "mx-auto flex min-h-full max-w-3xl p-4",
         "flex flex-col justify-end gap-4",

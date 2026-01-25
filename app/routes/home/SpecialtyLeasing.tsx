@@ -1,13 +1,13 @@
 import { Lightbulb } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 import { ActiveLink } from "~/components/ui/ActiveLink";
-import { cn } from "~/lib/utils";
 
 export default function SpecialtyLeasing() {
   return (
     <section className="flex flex-col items-center gap-8 bg-[hsl(47,100%,95%)] px-5 py-20">
       <div className="container mx-auto max-w-4xl">
         <div
-          className={cn(
+          className={twMerge(
             "rounded-md border-2 border-black bg-white p-8 shadow-[6px_6px_0px_0px_black] duration-200 hover:-rotate-1 md:p-12",
             "rotate-1 duration-200 hover:-rotate-1",
           )}

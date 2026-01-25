@@ -1,8 +1,8 @@
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { DateTime } from "luxon";
 import { Link } from "react-router";
+import { twMerge } from "tailwind-merge";
 import type { BlogPost } from "~/lib/blogPosts.server";
-import { cn } from "~/lib/utils";
 import { ActiveLink } from "./ActiveLink";
 import LoadingImage from "./LoadingImage";
 
@@ -51,7 +51,7 @@ function BlogPostCard({ post }: { post: BlogPost }) {
   return (
     <Link
       to={`/blog/${post.slug}`}
-      className={cn(
+      className={twMerge(
         "flex flex-col overflow-hidden rounded-md border-2 border-black bg-white shadow-[4px_4px_0px_0px_black] transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_black]",
         "rounded-md border-2 border-black bg-white shadow-[4px_4px_0px_0px_black]",
         "transform transition-all duration-200 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:rotate-1 hover:shadow-[6px_6px_0px_0px_black]",

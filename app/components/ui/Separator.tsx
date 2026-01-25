@@ -1,6 +1,6 @@
-import type * as React from "react";
 import { Separator as BaseUISeparator } from "@base-ui/react/separator";
-import { cn } from "~/lib/utils";
+import type * as React from "react";
+import { twMerge } from "tailwind-merge";
 
 function Separator({
   className,
@@ -11,9 +11,9 @@ function Separator({
     <BaseUISeparator
       data-slot="separator"
       orientation={orientation}
-      className={cn(
+      className={twMerge(
         "shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=vertical]:h-full data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px",
-        className,
+        className?.toString(),
       )}
       {...props}
     />

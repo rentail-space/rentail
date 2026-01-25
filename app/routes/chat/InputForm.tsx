@@ -1,8 +1,8 @@
 import { Send, Square } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import { Button } from "~/components/ui/Button";
 import { trackEvent } from "~/lib/analytics";
-import { cn } from "~/lib/utils";
 
 export default function InputForm({
   isResponding,
@@ -39,7 +39,7 @@ export default function InputForm({
           autoCorrect="off"
           // biome-ignore lint/a11y/noAutofocus: we want to autofocus the input
           autoFocus={true}
-          className={cn(
+          className={twMerge(
             "w-full py-4 pr-24 pl-5",
             "rounded-base border-2 border-black bg-white shadow-[4px_4px_0px_0px_hsl(37,92%,65%)] outline-none",
             "font-medium text-base text-black placeholder-gray-600",
@@ -75,7 +75,10 @@ function SubmitButton({ isSubmitting }: { isSubmitting: boolean }) {
       variant="default"
     >
       <Send
-        className={cn("h-5 w-5 text-black", isSubmitting && "animate-spin")}
+        className={twMerge(
+          "h-5 w-5 text-black",
+          isSubmitting && "animate-spin",
+        )}
       />
     </Button>
   );

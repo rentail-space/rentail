@@ -4,11 +4,11 @@ import type React from "react";
 import { Children, type JSX, useEffect, useRef } from "react";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
+import { twMerge } from "tailwind-merge";
 import type { ScrollToBottom } from "use-stick-to-bottom";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Card, CardContent } from "~/components/ui/Card";
 import { trackEvent } from "~/lib/analytics";
-import { cn } from "~/lib/utils";
 import { maskWorkingMemoryTags } from "~/lib/workingMemory";
 
 export default function ResponseMessage({
@@ -64,7 +64,10 @@ function MarkdownMessage({
 }) {
   return (
     <div
-      className={cn("chat-bubble-response", "flex max-w-9/10 flex-row gap-2")}
+      className={twMerge(
+        "chat-bubble-response",
+        "flex max-w-9/10 flex-row gap-2",
+      )}
     >
       <div className="not-prose row-span-2 min-w-10 self-end">
         <img

@@ -8,6 +8,7 @@ import { groupBy } from "node_modules/es-toolkit/dist/array/groupBy.mjs";
 import { sumBy } from "node_modules/es-toolkit/dist/math/sumBy.mjs";
 import { Suspense } from "react";
 import { Await } from "react-router";
+import { twMerge } from "tailwind-merge";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
@@ -17,7 +18,6 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/Table";
-import { cn } from "~/lib/utils";
 import type { Analytics } from "./route";
 
 export default function UserSources({
@@ -104,7 +104,7 @@ function SourcesTable({ analytics }: { analytics: Analytics[] }) {
             <TableRow key={row.id} className="hover:bg-gray-100">
               {row.getVisibleCells().map((cell) => (
                 <TableCell
-                  className={cn(
+                  className={twMerge(
                     "truncate",
                     cell.column.columnDef.meta &&
                       "align" in cell.column.columnDef.meta &&

@@ -1,14 +1,14 @@
 import { ChevronsDown } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import { Button } from "~/components/ui/Button";
-import { cn } from "~/lib/utils";
 
 export default function ScrollButton() {
   const { isAtBottom, scrollToBottom } = useStickToBottomContext();
 
   return isAtBottom ? null : (
     <Button
-      className={cn(
+      className={twMerge(
         "fixed right-6 bottom-24 z-10 h-12 w-12",
         "animate-bounce transition-all duration-1500",
       )}

@@ -1,6 +1,6 @@
 import * as ProgressPrimitive from "@radix-ui/react-progress";
 import type * as React from "react";
-import { cn } from "~/lib/utils";
+import { twMerge } from "tailwind-merge";
 
 function Progress({
   className,
@@ -12,7 +12,7 @@ function Progress({
   return (
     <ProgressPrimitive.Root
       data-slot="progress"
-      className={cn(
+      className={twMerge(
         "relative h-4 w-full overflow-hidden rounded-base border-2 border-border bg-secondary-background",
         className,
       )}

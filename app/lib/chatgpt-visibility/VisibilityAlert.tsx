@@ -1,9 +1,9 @@
 import { Button, Section } from "@react-email/components";
 import { meanBy, sumBy } from "es-toolkit";
+import { twMerge } from "tailwind-merge";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails";
 import * as styles from "~/emails/styles";
-import { cn } from "../utils";
 import type { Source } from "./runAllQueries";
 
 export default async function sendVisibilityAlert({
@@ -129,7 +129,7 @@ function SourcesTable({ sources }: { sources: Source[] }) {
                 </td>
                 <td
                   align="center"
-                  className={cn(
+                  className={twMerge(
                     source.citations.some(isRentail) && "font-bold",
                     "whitespace-nowrap",
                   )}

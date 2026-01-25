@@ -1,5 +1,5 @@
+import { twMerge } from "tailwind-merge";
 import { ActiveLink } from "~/components/ui/ActiveLink";
-import { cn } from "~/lib/utils";
 
 export default function HeroSection() {
   return (
@@ -7,7 +7,7 @@ export default function HeroSection() {
       <div className="mx-auto flex max-w-7xl flex-col gap-12 lg:flex-row-reverse lg:items-center">
         {/* Right Column - Image */}
         <div
-          className={cn(
+          className={twMerge(
             "flex flex-1 flex-col gap-4 bg-conic",
             "rotate-2 duration-200 hover:-rotate-3",
             "*:overflow-hidden *:rounded-md *:border-2 *:border-black *:shadow-[6px_6px_0px_0px_black]",

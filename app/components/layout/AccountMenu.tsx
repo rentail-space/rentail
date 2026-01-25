@@ -2,8 +2,8 @@ import { ShieldIcon, UnlockIcon, UserIcon } from "lucide-react";
 import type { User } from "prisma/generated/client";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useRouteLoaderData } from "react-router";
+import { twMerge } from "tailwind-merge";
 import { Button } from "~/components/ui/Button";
-import { cn } from "~/lib/utils";
 import type { loader as rootLoader } from "~/root";
 
 export default function AccountMenu({ className }: { className?: string }) {
@@ -31,7 +31,9 @@ export default function AccountMenu({ className }: { className?: string }) {
 
   // Show sign-in link for non-authenticated users
   return (
-    <div className={cn("inline-flex items-center justify-center", className)}>
+    <div
+      className={twMerge("inline-flex items-center justify-center", className)}
+    >
       {user && !user.isAnonymous ? (
         <DropdownMenu user={user} />
       ) : (

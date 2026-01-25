@@ -1,8 +1,8 @@
 import { Check } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Badge } from "~/components/ui/Badge";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
-import { cn } from "~/lib/utils";
 
 const merchantPlans = {
   name: "For Merchants",
@@ -113,7 +113,7 @@ function PricingPlan({
   return (
     <Card
       key={plan.name}
-      className={cn(
+      className={twMerge(
         "relative flex flex-col rounded-md border-2 border-black bg-white p-8",
         plan.highlighted
           ? "shadow-[8px_8px_0px_0px_black]"

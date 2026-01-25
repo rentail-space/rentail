@@ -1,7 +1,7 @@
 import { type VariantProps, cva } from "class-variance-authority";
 import * as React from "react";
 import { Link } from "react-router";
-import { cn } from "~/lib/utils";
+import { twMerge } from "tailwind-merge";
 
 const activeLinkVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap transition-all duration-100 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -50,7 +50,7 @@ const ActiveLink = React.forwardRef<HTMLAnchorElement, ActiveLinkProps>(
     return (
       <Link
         ref={ref}
-        className={cn(
+        className={twMerge(
           activeLinkVariants({ variant, size, disabled, className, bg }),
         )}
         to={to}
