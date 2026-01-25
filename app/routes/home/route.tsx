@@ -28,7 +28,7 @@ export default function Home({
       </title>
       <meta
         name="description"
-        content="The leading marketplace for finding short-term retail spaces in shopping centers. Find kiosks, pop-ups, and RMUs nationwide. Built for small businesses—AI-powered matching, transparent pricing, no broker fees."
+        content="Find short-term retail spaces in shopping centers. Kiosks, pop-ups, and RMUs nationwide. Built for small businesses—AI-powered matching, transparent pricing, no broker fees."
       />
       <meta
         name="keywords"

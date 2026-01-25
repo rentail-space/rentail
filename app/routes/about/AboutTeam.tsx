@@ -5,7 +5,7 @@ const team = [
     name: "Assaf Arkin",
     role: "CEO & Co-founder",
     description:
-      "Repeat founder with years of experience working with LLMs and serving SMBs.",
+      "Repeat founder. Years working with LLMs and serving small businesses.",
     image: "/images/team/avatar-assaf.jpg",
     linkedIn: "https://www.linkedin.com/in/assafarkin/",
   },
@@ -13,7 +13,7 @@ const team = [
     name: "Jon Sofield",
     role: "Chief Marketplace Officer",
     description:
-      "Scaled Google My Business to 100+ million users, VP of Business Development at several startups.",
+      "Scaled Google My Business to 100+ million users. VP of Business Development at several startups.",
     image: "/images/team/avatar-jon.jpg",
     linkedIn: "https://www.linkedin.com/in/jonsofield/",
   },
@@ -21,7 +21,7 @@ const team = [
     name: "Alex Storey",
     role: "Chief Sales Officer",
     description:
-      "From channel growth at Google to starting multiple companies in the proptech space.",
+      "Channel growth at Google. Started multiple companies in proptech.",
     image: "/images/team/avatar-alex.jpg",
     linkedIn: "https://www.linkedin.com/in/a-c-s/",
   },

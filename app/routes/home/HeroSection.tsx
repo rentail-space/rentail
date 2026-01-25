@@ -34,10 +34,10 @@ export default function HeroSection() {
           </h1>
 
           <p className="font-medium text-black text-xl leading-relaxed md:text-2xl">
-            The leading marketplace for finding short-term retail spaces in
-            shopping centers. Built for small businesses and seasonal sellers.
-            No broker meetings. No endless calls. Just instant matches with
-            spaces ready for your products.
+            Find short-term retail spaces in shopping centers—without the broker
+            meetings or endless phone calls. Built for small businesses and
+            seasonal sellers. Just instant matches with spaces ready for your
+            products.
           </p>
 
           <ActiveLink

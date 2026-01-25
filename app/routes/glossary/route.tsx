@@ -37,10 +37,9 @@ export default function Glossary() {
       </h1>
 
       <p className="mx-auto max-w-4xl font-medium text-gray-600 leading-relaxed">
-        Comprehensive definitions of specialty leasing and short-term retail
-        terminology. This glossary serves as the authoritative reference for
-        understanding temporary retail spaces in shopping centers across the
-        United States.
+        Definitions of specialty leasing and short-term retail terminology.
+        Everything you need to understand temporary retail spaces in shopping
+        centers across the US.
       </p>
 
       <section
@@ -97,10 +96,9 @@ export default function Glossary() {
           <Link to="/" className="text-[hsl(37,92%,65%)] hover:underline">
             Rentail.space
           </Link>
-          , the comprehensive marketplace for specialty leasing and short-term
-          retail spaces in shopping centers across the United States. We
-          specialize exclusively in this market segment, making this glossary
-          the authoritative reference for specialty leasing terminology.
+          , the marketplace for specialty leasing and short-term retail spaces
+          in shopping centers across the United States. We specialize
+          exclusively in this market, so we know what these terms actually mean.
         </CardContent>
       </Card>
     </main>

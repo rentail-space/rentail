@@ -6,19 +6,19 @@ export default function FeaturesSection() {
       icon: <Zap className="h-8 w-8" />,
       title: "Find the Perfect Space",
       description:
-        "AI-powered matching finds retail spaces with the foot traffic and location your business needs to thrive.",
+        "AI-powered matching finds spaces with the foot traffic and location you actually need. No guessing.",
     },
     {
       icon: <Clock className="h-8 w-8" />,
       title: "24/7 Availability",
       description:
-        "Browse and book retail spaces anytime, anywhere. No waiting for business hours or property managers.",
+        "Browse and book anytime, anywhere. No waiting for business hours or playing phone tag with property managers.",
     },
     {
       icon: <Shield className="h-8 w-8" />,
       title: "Seamless Booking",
       description:
-        "Sign up once to access all shopping centers in your area. We handle contracts and payment processing.",
+        "Sign up once, access all shopping centers in your area. We handle the contracts and payment processing.",
     },
   ];
 
@@ -26,17 +26,18 @@ export default function FeaturesSection() {
     {
       icon: <CircleDollarSign className="h-6 w-6" />,
       title: "Flexible Pricing",
-      description: "Daily, weekly, or monthly rates that fit your budget",
+      description:
+        "Daily, weekly, or monthly rates. Whatever fits your budget.",
     },
     {
       icon: <Pen className="h-6 w-6" />,
       title: "No Long-term Commitment",
-      description: "Test markets without multi-year leases",
+      description: "Test markets without getting locked into multi-year leases",
     },
     {
       icon: <Users className="h-6 w-6" />,
       title: "Dedicated Support",
-      description: "Expert help throughout your rental journey",
+      description: "Real people who actually help throughout your rental",
     },
   ];
 
@@ -50,9 +51,9 @@ export default function FeaturesSection() {
             .space?
           </h2>
           <p className="mx-auto max-w-3xl font-medium text-black text-xl leading-relaxed">
-            We help you find short-term retail spaces in shopping centers near
-            you, at reasonable prices, with the foot traffic to make your
-            business succeed.
+            Short-term retail spaces in shopping centers near you. Reasonable
+            prices. Real foot traffic. Everything you need to make your business
+            work.
           </p>
         </div>
 

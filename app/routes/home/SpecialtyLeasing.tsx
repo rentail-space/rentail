@@ -21,12 +21,11 @@ export default function SpecialtyLeasing() {
                 What is Specialty Leasing?
               </h2>
               <p className="font-medium text-black text-lg leading-relaxed">
-                Specialty leasing refers to short-term retail space in malls,
-                shopping centers, and other retail centers. It includes flexible
-                options like RMUs (Retail Merchandising Units), retail carts,
-                booth rentals, kiosk spaces, and pop-up shops. These options
-                allow businesses to test new concepts while adding variety to
-                the consumer experience—all without long-term commitments.
+                Specialty leasing = short-term retail space in malls and
+                shopping centers. Think RMUs (Retail Merchandising Units),
+                retail carts, kiosks, and pop-up shops. Test new concepts, add
+                variety to the shopping experience—all without signing your life
+                away for five years.
               </p>
             </div>
           </div>

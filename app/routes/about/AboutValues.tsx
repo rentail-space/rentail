@@ -6,19 +6,19 @@ const values = [
     icon: <Heart className="h-6 w-6" />,
     title: "Empowering Entrepreneurs",
     description:
-      "We believe every small business deserves a chance to succeed. Our platform removes barriers and makes retail space accessible to all.",
+      "Every small business deserves a shot at success. Our platform removes the barriers and makes retail space accessible to everyone.",
   },
   {
     icon: <Zap className="h-6 w-6" />,
     title: "Innovation First",
     description:
-      "We use AI and modern technology to solve age-old problems in retail leasing, making it faster, easier, and more transparent.",
+      "Use AI and modern tech to solve age-old retail leasing problems. Make it faster, easier, more transparent.",
   },
   {
     icon: <Users className="h-6 w-6" />,
     title: "Community Driven",
     description:
-      "We're building a marketplace that benefits everyone—merchants, property owners, and shoppers alike.",
+      "Building a marketplace that benefits everyone—merchants, property owners, and shoppers. Not just the people at the top.",
   },
 ];
 

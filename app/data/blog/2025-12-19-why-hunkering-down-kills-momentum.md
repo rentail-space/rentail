@@ -179,7 +179,7 @@ Here's what this looks like in action—same setbacks, completely different
 execution patterns:
 
 | Scenario | Hermit Response (Typical) | Persistence Response (Brad's Model) | 90-Day Outcome |
-|----------|---------------------------|-------------------------------------|---------|
+| -------- | ------------------------- | ----------------------------------- | -------------- |
 | Major customer churns | 7-day analysis paralysis, delayed outreach | 2-hour post-mortem, 15 new calls same week | +$47K recovered pipeline |
 | Product launch flops | Retreat to rework for 6 weeks | Ship fixes in 10 days, user feedback loop | 2.3x engagement in iteration 2 |
 | Key hire rejects offer | Freeze hiring, question strategy | Restart search next day, close backup candidate | -5 days time to fill |

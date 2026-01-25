@@ -5,7 +5,7 @@ export default function AboutHeader() {
         Making retail space accessible for everyone
       </h1>
       <p className="font-medium text-black text-xl leading-relaxed md:text-2xl">
-        We're on a mission to democratize retail space and help micro-merchants
+        We're on a mission to open up retail space and help micro-merchants
         thrive in brick-and-mortar locations.
       </p>
     </section>
