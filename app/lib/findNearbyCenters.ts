@@ -31,7 +31,7 @@ export default async function findNearbyCenters({
   location?: string;
   maxDistance?: number;
 }): Promise<{
-  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
+  centers: PropertyGetPayload<{ include: { spaces: true; state: true } }>[];
   displayName: string;
 }> {
   const { displayName, longitude, latitude } =
@@ -43,6 +43,7 @@ export default async function findNearbyCenters({
       spaces: {
         where: { available: true },
       },
+      state: true,
     },
     orderBy: [
       { spaces: { _count: "desc" } },

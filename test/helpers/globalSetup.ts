@@ -7,11 +7,10 @@
  */
 
 import { exec, execFile } from "node:child_process";
-import { resolve } from "node:path";
 import { promisify } from "node:util";
 import prisma from "~/lib/prisma";
-import seedCenters from "~/lib/scrape/seedCenter";
-import seedStates from "~/lib/scrape/seedStates";
+import seedCenters from "~/lib/scrape/seedCenters";
+import seedStatesAndRelatedData from "~/lib/scrape/seedStates";
 import { port } from "./launchBrowser";
 import { closeServer, launchServer } from "./launchServer";
 import { removeNewHTML } from "./toMatchInnerHTML";
@@ -42,9 +41,8 @@ export default async function setup() {
   await prisma.user.deleteMany();
   await prisma.property.deleteMany();
 
-  await seedStates();
-  for (const center of centers)
-    await seedCenters(resolve("prisma/seed", center));
+  await seedStatesAndRelatedData();
+  await seedCenters(centers);
 
   // Remove regression testing diff images
   await removeDiffImages();

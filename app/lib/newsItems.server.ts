@@ -6,6 +6,7 @@ import path, { basename, join } from "node:path";
 import removeMd from "remove-markdown";
 import parseFrontMatter from "~/lib/parseFrontMatter";
 import truncateWords from "~/lib/truncateWords";
+import { slugify } from "./utils";
 
 const dirname = path.resolve("./app/data/news");
 
@@ -34,7 +35,7 @@ export async function recentNewsItems(): Promise<NewsItem[]> {
         summary: string;
         title: string;
       }>(content);
-      const slug = basename(filename, ".md");
+      const slug = slugify(basename(filename, ".md"));
       const published = getPublishedDataTime(filename);
       const summary = attributes.summary;
       const title = attributes.title;

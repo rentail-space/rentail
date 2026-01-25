@@ -19,7 +19,7 @@ import timeOfDay from "~/lib/timeOfDay";
 export default function CenterAttributes({
   center,
 }: {
-  center: PropertyGetPayload<{ include: { spaces: true } }>;
+  center: PropertyGetPayload<{ include: { spaces: true; state: true } }>;
 }) {
   return (
     <Card className="bg-white">
@@ -124,12 +124,12 @@ export default function CenterAttributes({
             <span>
               {center.address}
               {center.city && `, ${center.city}`}
-              {center.state && `, ${center.state}`}
+              {center.state.abbreviation && `, ${center.state.abbreviation}`}
             </span>
 
             <ActiveLink
               to={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                `${center.address}, ${center.city}, ${center.state} ${center.country}`,
+                `${center.address}, ${center.city}, ${center.state.abbreviation} ${center.state.country}`,
               )}`}
               target="_blank"
             >

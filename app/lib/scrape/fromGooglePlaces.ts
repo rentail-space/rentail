@@ -13,6 +13,7 @@ import sharp from "sharp";
 import zod from "zod";
 import envVars from "../env";
 import prisma from "../prisma";
+import { slugify } from "../utils";
 
 if (!envVars.GOOGLE_PLACES_API_KEY)
   throw new Error("Use doppler run --config prd -- ");
@@ -274,7 +275,7 @@ async function prepareSave(
   );
   const country = shortText(place.addressComponents, "country");
   const displayName = place.displayName.text;
-  const slug = createSlug({ state, displayName });
+  const slug = slugify(state, displayName);
   const imageURLs = place.photos
     ? await downloadPhotos({ slug, photos: place.photos })
     : [];
@@ -453,30 +454,4 @@ function operatingHours(regularOpeningHours?: {
   return Number.isFinite(openFrom) && Number.isFinite(openUntil)
     ? { openFrom, openUntil }
     : { openFrom: 0, openUntil: 2400 };
-}
-
-/**
- * Create a slug for the mall. This takes the form of {state}-{name}, eg
- * "ca-beverly-center". We use the slug to store images in the
- * public/images/malls directory.
- *
- * @param state State of the mall
- * @param placeName Name of the mall
- * @returns Slug for the mall
- */
-function createSlug({
-  state,
-  displayName,
-}: {
-  state: string;
-  displayName: string;
-}): string {
-  return `${state.toLowerCase()}-${
-    displayName
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "") // Remove special chars
-      .replace(/\s+/g, "-") // Spaces to hyphens
-      .replace(/-+/g, "-") // Collapse multiple hyphens
-      .replace(/^-|-$/g, "") // Trim hyphens
-  }`;
 }

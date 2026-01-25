@@ -30,7 +30,7 @@ export default async function preparePrompt({
   user: User;
 }): Promise<string> {
   const allCenters = await prisma.property.findMany({
-    select: { name: true, city: true, state: true, country: true },
+    include: { spaces: true, state: true },
   });
   const maxDistance = 30; // miles
   const { centers: nearbyCenters, displayName } = await findNearbyCenters({
@@ -69,7 +69,7 @@ export default async function preparePrompt({
       allCenters
         .map(
           (center) =>
-            `- ${center.name} in ${center.city}, ${center.state}, ${center.country}`,
+            `- ${center.name} in ${center.city}, ${center.state.abbreviation}, ${center.state.country}`,
         )
         .join("\n"),
     )
@@ -80,7 +80,7 @@ export default async function preparePrompt({
 }
 
 function centerToJSON(
-  center: PropertyGetPayload<{ include: { spaces: true } }>,
+  center: PropertyGetPayload<{ include: { spaces: true; state: true } }>,
 ): string {
   const open =
     center.openFrom === 0 && center.openUntil === 2400
@@ -105,7 +105,7 @@ function centerToJSON(
       centerType: center.centerType,
       centerURL: `https://rentail.space/center/${center.id}`,
       city: center.city,
-      country: center.country,
+      country: center.state.country,
       demographics: center.demographics ?? "Unknown",
       description: center.description,
       googleMapsURL: `https://maps.google.com/?q=${encodeURIComponent(center.name)}`,
@@ -116,7 +116,7 @@ function centerToJSON(
       reviewCount: center.reviewCount ?? "Unknown",
       spaces,
       squareFootage: center.squareFootage ?? "Unknown",
-      state: center.state,
+      state: center.state.abbreviation,
       websiteURL: externalLink(center.website),
     },
     null,

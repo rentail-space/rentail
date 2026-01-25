@@ -1,4 +1,5 @@
-import { type Page, expect } from "playwright/test";
+import type { Page } from "playwright";
+import { expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma";
 import { goto } from "~/test/helpers/launchBrowser";
@@ -25,7 +26,7 @@ describe("State shopping centers page", () => {
         numberOfStores: true,
         city: true,
       },
-      where: { state: "CA" },
+      where: { stateAbbreviation: "CA" },
       orderBy: { name: "asc" },
     });
 

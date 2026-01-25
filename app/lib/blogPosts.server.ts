@@ -6,6 +6,7 @@ import path, { basename, join } from "node:path";
 import removeMd from "remove-markdown";
 import parseFrontMatter from "~/lib/parseFrontMatter";
 import truncateWords from "~/lib/truncateWords";
+import { slugify } from "./utils";
 
 const dirname = path.resolve("./app/data/blog");
 
@@ -39,7 +40,7 @@ export async function recentBlogPosts(): Promise<BlogPost[]> {
         summary: string;
         title: string;
       }>(content);
-      const slug = basename(filename, ".md");
+      const slug = slugify(basename(filename, ".md"));
       return {
         ...attributes,
         body,

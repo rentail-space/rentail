@@ -27,19 +27,16 @@ export async function loader({ params }: Route.LoaderArgs) {
   const centers = await prisma.property.findMany({
     include: {
       spaces: { where: { available: true } },
+      state: true,
     },
     orderBy: { name: "asc" },
-    where: { state: state.abbreviation },
+    where: { stateAbbreviation: state.abbreviation },
   });
 
   return { centers, state };
 }
 
-export default function StatePage({
-  loaderData,
-}: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
-}) {
+export default function StatePage({ loaderData }: Route.ComponentProps) {
   const centerRef =
     useRef<(center: { longitude: number; latitude: number }) => void>(null);
   const { centers, state } = loaderData;
@@ -118,7 +115,7 @@ function LinkToCenter({
   center,
   centerRef,
 }: {
-  center: PropertyGetPayload<{ include: { spaces: true } }>;
+  center: PropertyGetPayload<{ include: { spaces: true; state: true } }>;
   centerRef: React.RefObject<
     ((center: { longitude: number; latitude: number }) => void) | null
   >;
@@ -244,20 +241,7 @@ function schemaData({
   centers,
   state,
 }: {
-  centers: Array<{
-    id: string;
-    name: string;
-    city: string | null;
-    state: string;
-    address: string | null;
-    latitude: number | null;
-    longitude: number | null;
-    rating: number | null;
-    reviewCount: number | null;
-    summary: string | null;
-    squareFootage: number | null;
-    numberOfStores: number | null;
-  }>;
+  centers: PropertyGetPayload<{ include: { spaces: true; state: true } }>[];
   state: { name: string; abbreviation: string };
 }) {
   const itemListElements = centers.map((center, index) => {
@@ -275,8 +259,8 @@ function schemaData({
         "@type": "PostalAddress",
         streetAddress: center.address,
         addressLocality: center.city,
-        addressRegion: center.state,
-        addressCountry: "US",
+        addressRegion: center.state.abbreviation,
+        addressCountry: center.state.country,
       };
 
     if (center.latitude && center.longitude)

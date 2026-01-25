@@ -6,7 +6,7 @@ import CenterDetails from "./CenterDetails";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const center = await prisma.property.findUnique({
-    include: { spaces: { where: { available: true } } },
+    include: { spaces: { where: { available: true } }, state: true },
     where: { id: params.id },
   });
   if (!center) throw new Response("Not Found", { status: 404 });
@@ -15,25 +15,23 @@ export async function loader({ params }: Route.LoaderArgs) {
 
 export default function CenterPage({
   loaderData: center,
-}: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
-}) {
+}: Route.ComponentProps) {
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
       <title>
-        {`${center.name} - ${center.city}, ${center.state} | Rentail.space`}
+        {`${center.name} - ${center.city}, ${center.state.abbreviation} | Rentail.space`}
       </title>
       <meta
         name="description"
         content={
           center.summary
-            ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state}.`
-            : `Shopping center at ${center.address}, ${center.city}, ${center.state}`
+            ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
+            : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`
         }
       />
       <meta
         name="keywords"
-        content={`${center.name}, ${center.city} ${center.state}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`}
+        content={`${center.name}, ${center.city} ${center.state.abbreviation}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`}
       />
       <meta name="author" content="rentail.space" />
       <link
@@ -54,7 +52,9 @@ export default function CenterPage({
   );
 }
 
-function schemaData(center: PropertyGetPayload<{ include: { spaces: true } }>) {
+function schemaData(
+  center: PropertyGetPayload<{ include: { spaces: true; state: true } }>,
+) {
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -65,8 +65,8 @@ function schemaData(center: PropertyGetPayload<{ include: { spaces: true } }>) {
           "@type": "PostalAddress",
           streetAddress: center.address,
           addressLocality: center.city,
-          addressRegion: center.state,
-          addressCountry: center.country || "US",
+          addressRegion: center.state.abbreviation,
+          addressCountry: center.state.country || "US",
         },
         geo: {
           "@type": "GeoCoordinates",
@@ -106,8 +106,8 @@ function schemaData(center: PropertyGetPayload<{ include: { spaces: true } }>) {
           {
             "@type": "ListItem",
             position: 2,
-            name: center.state,
-            item: `https://rentail.space/state/${center.state}`,
+            name: center.state.abbreviation,
+            item: `https://rentail.space/state/${center.state.abbreviation}`,
           },
           {
             "@type": "ListItem",

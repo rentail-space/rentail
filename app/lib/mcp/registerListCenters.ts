@@ -75,6 +75,7 @@ export default function registerListCenters(mcpServer: McpServer) {
           spaces: {
             where: { available: true },
           },
+          state: true,
         },
         where: {
           latitude: {
@@ -90,7 +91,12 @@ export default function registerListCenters(mcpServer: McpServer) {
 
       const output = {
         centers: centers.map((center) => ({
-          address: [center.address, center.city, center.state, center.country]
+          address: [
+            center.address,
+            center.city,
+            center.state.abbreviation,
+            center.state.country,
+          ]
             .filter(Boolean)
             .join(", "),
           name: center.name,

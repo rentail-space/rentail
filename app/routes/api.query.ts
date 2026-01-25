@@ -23,11 +23,11 @@ export async function loader() {
         _count: true,
       }),
       prisma.property.groupBy({
-        by: ["state"],
+        by: ["stateAbbreviation"],
         _count: true,
         orderBy: {
           _count: {
-            state: "desc",
+            stateAbbreviation: "desc",
           },
         },
       }),
@@ -46,7 +46,7 @@ export async function loader() {
       shoppingCenters: totalCenters,
       availableSpaces: totalSpaces,
       topStates: centersByState.slice(0, 10).map((byState) => ({
-        state: byState.state,
+        state: byState.stateAbbreviation,
         centerCount: byState._count,
       })),
     },

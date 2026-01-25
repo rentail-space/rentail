@@ -30,14 +30,8 @@ export default function CentersMap({
   longitude,
 }: {
   centers: PropertyGetPayload<{
-    select: {
-      address: true;
-      city: true;
-      country: true;
-      latitude: true;
-      longitude: true;
-      name: true;
-      spaces: { select: { number: true } };
+    include: {
+      spaces: true;
       state: true;
     };
   }>[];
@@ -238,19 +232,13 @@ function CenterPopup({
   center,
 }: {
   center: PropertyGetPayload<{
-    select: {
-      address: true;
-      city: true;
-      country: true;
-      latitude: true;
-      longitude: true;
-      name: true;
-      spaces: { select: { number: true } };
+    include: {
+      spaces: true;
       state: true;
     };
   }>;
 }) {
-  const directionsUrl = `https://maps.google.com/?q=${encodeURIComponent(`${center.address}, ${center.city}, ${center.state} ${center.country}`)}`;
+  const directionsUrl = `https://maps.google.com/?q=${encodeURIComponent(`${center.address}, ${center.city}, ${center.state} ${center.state.country}`)}`;
 
   return (
     <div className="space-y-2">
@@ -258,7 +246,7 @@ function CenterPopup({
       <address className="text-gray-500 text-sm">
         <p>{center.address}</p>
         <p>
-          {center.city}, {center.state}
+          {center.city}, {center.state.abbreviation}
         </p>
       </address>
 

@@ -266,7 +266,7 @@ function Pagination({ user, users }: { user: User; users: { id: string }[] }) {
 function Centers({
   centers,
 }: {
-  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
+  centers: PropertyGetPayload<{ include: { spaces: true; state: true } }>[];
 }) {
   if (centers.length === 0) return null;
 
@@ -289,7 +289,9 @@ function Centers({
                   </Link>
                 </TableHead>
                 <TableHead className="w-48">{center.city}</TableHead>
-                <TableHead className="w-6">{center.state}</TableHead>
+                <TableHead className="w-6">
+                  {center.state.abbreviation}
+                </TableHead>
               </TableRow>
             ))}
         </TableBody>

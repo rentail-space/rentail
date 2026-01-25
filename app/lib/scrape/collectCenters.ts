@@ -10,6 +10,7 @@ import { dirname, resolve } from "node:path";
 import ora from "ora";
 import { chromium } from "playwright";
 import externalLink from "../externalLink";
+import { slugify } from "../utils";
 import enrichCenter from "./enrichCenter";
 import { nearbySearch } from "./fromGooglePlaces";
 import { geocodeCounty, mergeBounds } from "./geocodeCounty";
@@ -148,6 +149,6 @@ function getCenterSaveFilename(center: { name: string; state: string }) {
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
 
-  const slug = `${center.state.toLowerCase()}-${normalized}`;
+  const slug = slugify(center.state, normalized);
   return resolve(`prisma/seed/${center.state.toLowerCase()}/${slug}.json`);
 }

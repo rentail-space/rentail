@@ -56,3 +56,20 @@ export function timeToMs(timeStr: string): number {
 
   return Math.round(value * multipliers[unit]);
 }
+
+/**
+ * Slugify a text(s). For example, slugify("CA", "Los Angeles") returns
+ * "ca-los-angeles".
+ *
+ * @param texts - The text(s) to slugify.
+ * @returns The slugified text.
+ */
+export function slugify(...texts: string[]) {
+  return texts
+    .join("-")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}

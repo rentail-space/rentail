@@ -10,7 +10,7 @@ import { CenterSpaces } from "./CenterSpaces";
 export default function CenterDetails({
   center,
 }: {
-  center: PropertyGetPayload<{ include: { spaces: true } }>;
+  center: PropertyGetPayload<{ include: { spaces: true; state: true } }>;
 }) {
   return (
     <>
@@ -25,7 +25,7 @@ export default function CenterDetails({
       {center.imageURLs.length > 0 && (
         <Card className="bg-white p-0!">
           <LoadingImage
-            alt={`Photo of ${center.name} in ${center.city}, ${center.state}`}
+            alt={`Photo of ${center.name} in ${center.city}, ${center.state.abbreviation}`}
             maxHeight={500}
             src={center.imageURLs[0]}
           />

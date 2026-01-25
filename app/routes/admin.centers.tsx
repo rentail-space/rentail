@@ -30,16 +30,12 @@ export async function loader({ request }: Route.LoaderArgs) {
   const user = await verifyAdmin(request.headers);
   const { location } = cleanParseWorkingMemory(user.workingMemory);
   const centers = await prisma.property.findMany({
-    include: { spaces: true },
+    include: { spaces: true, state: true },
   });
   return { centers, ...location, mapboxToken };
 }
 
-export default function CenterPage({
-  loaderData,
-}: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
-}) {
+export default function CenterPage({ loaderData }: Route.ComponentProps) {
   const centerRef = useRef<CenterMapFunction>(null);
   return (
     <div className="flex flex-col gap-8">
@@ -59,7 +55,7 @@ function CentersList({
   centers,
   centerRef,
 }: {
-  centers: PropertyGetPayload<{ include: { spaces: true } }>[];
+  centers: PropertyGetPayload<{ include: { spaces: true; state: true } }>[];
   centerRef: React.RefObject<
     ((center: { longitude: number; latitude: number }) => void) | null
   >;
@@ -148,8 +144,8 @@ function CentersList({
                 </TableCell>
                 <TableCell>{row.original.city}</TableCell>
                 <TableCell>
-                  <ActiveLink to={`/state/${row.original.state}`}>
-                    {row.original.state}
+                  <ActiveLink to={`/state/${row.original.state.abbreviation}`}>
+                    {row.original.state.abbreviation}
                   </ActiveLink>
                 </TableCell>
                 <TableCell className="text-right">

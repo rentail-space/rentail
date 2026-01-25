@@ -1,15 +1,16 @@
 import debug from "debug";
-import { readFile } from "node:fs/promises";
-import { basename } from "node:path";
+import { partition } from "es-toolkit";
+import { readFileSync, readdirSync } from "node:fs";
+import { join, resolve } from "node:path";
 import { z } from "zod";
 import prisma from "~/lib/prisma";
+import { slugify } from "~/lib/utils";
 import envVars from "../env";
 
 const schema = z.object({
   name: z.string(),
   city: z.string(),
   state: z.string(),
-  country: z.string(),
   address: z.string(),
   latitude: z.number(),
   longitude: z.number(),
@@ -50,16 +51,51 @@ const schema = z.object({
 
 const logger = debug("seed");
 
-export default async function seedCenter(filename: string) {
-  logger("🔄 Seeding %s", filename);
-  const data = await readFile(filename, "utf-8");
-  const center = schema.parse(JSON.parse(data));
+/**
+ * Seed centers from the seed directory. If `centerSlugs` is provided, only the
+ * centers with the given slugs will be seeded (global setup for testing).
+ * Otherwise, all centers in the seed directory will be seeded (prisma db seed).
+ *
+ * @param centerSlugs - The slugs of the centers to seed. If not provided, all
+ * centers in the seed directory will be seeded.
+ */
+export default async function seedCenters(centerSlugs?: string[]) {
+  const basedir = resolve("prisma/seed");
+  const filenames = readdirSync(basedir, { withFileTypes: true })
+    .filter((file) => file.isDirectory())
+    .flatMap((dir) =>
+      readdirSync(join(basedir, dir.name)).map((filename) =>
+        join(dir.name, filename),
+      ),
+    );
+  const centers = (centerSlugs || filenames).map((filename) => {
+    const data = readFileSync(resolve(basedir, filename), "utf-8");
+    return schema.parse(JSON.parse(data)) as z.infer<typeof schema>;
+  });
+
+  const states = await prisma.state.findMany();
+  const [seedable, noState] = partition(
+    centers,
+    (center) =>
+      !!states.find(({ abbreviation }) => abbreviation === center.state),
+  );
+  logger("🔄 Seeding %d/%d centers", seedable.length, filenames.length);
+
+  for (const center of seedable) await seedCenter(center);
+
+  const unknownStates = new Set(noState.map((center) => center.state)).values();
+  logger("❌ Unknown states: %s", ...unknownStates);
+}
+
+async function seedCenter(center: z.infer<typeof schema>) {
+  logger("🔄 Seeding %s in %s", center.name, center.state);
+
   const imageURLs = center.imageURLs.map((url) =>
     envVars.isProduction
       ? new URL(url, "https://rentail.space").toString()
       : url,
   );
-  const id = basename(filename, ".json");
+  const id = slugify(center.state, center.name);
 
   // Remove duplicates from center.spaces by space.number and store in 'spaces'
   const spaces = Object.values(
@@ -71,6 +107,7 @@ export default async function seedCenter(filename: string) {
     create: {
       ...center,
       id,
+      state: { connect: { abbreviation: center.state } },
       imageURLs,
       spaces: {
         createMany: { data: spaces },
@@ -78,6 +115,7 @@ export default async function seedCenter(filename: string) {
     },
     update: {
       ...center,
+      state: { connect: { abbreviation: center.state } },
       imageURLs,
       spaces: {
         upsert: spaces.map((space) => ({

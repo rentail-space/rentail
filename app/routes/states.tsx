@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import prisma from "~/lib/prisma";
+import type { Route } from "./+types/states";
 
 export async function loader() {
   const states = await prisma.state.findMany({
@@ -10,19 +11,15 @@ export async function loader() {
   });
 
   const centers = await prisma.property.groupBy({
-    by: ["state"],
-    orderBy: { state: "asc" },
+    by: ["stateAbbreviation"],
+    orderBy: { stateAbbreviation: "asc" },
     _count: { _all: true },
   });
 
   return { states, centers };
 }
 
-export default function StatePage({
-  loaderData,
-}: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
-}) {
+export default function StatePage({ loaderData }: Route.ComponentProps) {
   return (
     <main
       className="container mx-auto my-10 max-w-3xl space-y-8 p-5"
@@ -84,12 +81,13 @@ export default function StatePage({
 }
 
 function countCenters(
-  centers: { state: string; _count: { _all: number } }[],
+  centers: { stateAbbreviation: string; _count: { _all: number } }[],
   abbreviation: string,
 ): number {
   return (
     centers.find(
-      (center) => center.state.toLowerCase() === abbreviation.toLowerCase(),
+      (center) =>
+        center.stateAbbreviation.toLowerCase() === abbreviation.toLowerCase(),
     )?._count._all ?? 0
   );
 }
@@ -133,7 +131,7 @@ function schemaData({
   centers,
 }: {
   states: { abbreviation: string; name: string }[];
-  centers: { state: string; _count: { _all: number } }[];
+  centers: { stateAbbreviation: string; _count: { _all: number } }[];
 }) {
   // Build JSON-LD structured data for search engines
   const itemListElements = states
