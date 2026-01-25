@@ -16,8 +16,10 @@
       "!.react-router",
       "!.vercel",
       "!.vscode",
+      "!biome.json",
       "!build",
       "!node_modules",
+      "!package.json",
       "!prisma/generated",
       "!prisma/seed"
     ],
@@ -59,7 +61,12 @@
         "noUnsafeDeclarationMerging": "error",
         "noConsole": {
           "options": {
-            "allow": ["assert", "error", "info", "warn"]
+            "allow": [
+              "assert",
+              "error",
+              "info",
+              "warn"
+            ]
           }
         }
       },
