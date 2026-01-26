@@ -3,8 +3,8 @@
  */
 
 import { captureException } from "@sentry/react-router";
+import sendVisibilityAlert from "~/lib/chatgpt-visibility/EmailVisibilityAlert";
 import runAllQueries from "~/lib/chatgpt-visibility/runAllQueries";
-import sendVisibilityAlert from "~/lib/chatgpt-visibility/VisibilityAlert";
 
 export async function loader() {
   try {

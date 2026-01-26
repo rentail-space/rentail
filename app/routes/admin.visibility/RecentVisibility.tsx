@@ -58,7 +58,7 @@ export default function RecentVisibility({
       },
       {
         accessorFn: (row) => row.score,
-        aggregationFn: "mean",
+        aggregationFn: "sum",
         enableGrouping: true,
         header: "Score",
         size: 60,
@@ -125,13 +125,13 @@ export default function RecentVisibility({
                       case "max":
                         return Math.max(...values).toFixed(2);
                       case "mean":
-                        return mean(values).toFixed(2);
+                        return mean(values).toLocaleString();
                       case "median":
-                        return median(values).toFixed(2);
+                        return median(values).toLocaleString();
                       case "sum":
-                        return sum(values).toFixed(2);
+                        return sum(values).toLocaleString();
                       case "count":
-                        return values.length.toString();
+                        return values.length.toLocaleString();
                       default:
                         return null;
                     }

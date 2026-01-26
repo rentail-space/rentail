@@ -2,9 +2,7 @@ import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import { invariant } from "es-toolkit";
 import { JWT } from "google-auth-library";
 import { DateTime } from "luxon";
-import { useQueryState } from "nuqs";
-import { createLoader, parseAsIsoDate } from "nuqs/server";
-import type { LoaderFunctionArgs } from "react-router";
+import { type LoaderFunctionArgs, useSearchParams } from "react-router";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
@@ -24,19 +22,12 @@ export type Analytics = {
   visitors: number;
 };
 
-const rangeParams = {
-  from: parseAsIsoDate
-    .withDefault(DateTime.utc().minus({ days: 30 }).toJSDate())
-    .withOptions({ history: "replace", shallow: false }),
-  until: parseAsIsoDate
-    .withDefault(DateTime.utc().minus({ days: 1 }).toJSDate())
-    .withOptions({ history: "replace", shallow: false }),
-};
-
 export async function loader({ request }: LoaderFunctionArgs) {
   await verifyAdmin(request.headers);
 
-  const { from, until } = createLoader(rangeParams)(request);
+  const searchParams = new URL(request.url).searchParams;
+  const from = parseFrom(searchParams);
+  const until = parseUntil(searchParams);
   const users = prisma.user.findMany({
     orderBy: { createdAt: "desc" },
     where: {
@@ -49,6 +40,18 @@ export async function loader({ request }: LoaderFunctionArgs) {
     analytics: fromGoogleAnalytics(from, until),
     users: Promise.resolve(users),
   };
+}
+
+function parseFrom(searchParams: URLSearchParams): Date {
+  const from = searchParams.get("from");
+  if (!from) return DateTime.utc().minus({ days: 30 }).toJSDate();
+  return DateTime.fromISO(from, { zone: "utc" }).toJSDate();
+}
+
+function parseUntil(searchParams: URLSearchParams): Date {
+  const until = searchParams.get("until");
+  if (!until) return DateTime.utc().minus({ days: 1 }).toJSDate();
+  return DateTime.fromISO(until, { zone: "utc" }).toJSDate();
 }
 
 async function fromGoogleAnalytics(
@@ -103,8 +106,27 @@ async function fromGoogleAnalytics(
 }
 
 export default function UsersPage({ loaderData }: Route.ComponentProps) {
-  const [from, setFrom] = useQueryState("from", rangeParams.from);
-  const [until, setUntil] = useQueryState("until", rangeParams.until);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const from = parseFrom(searchParams);
+  const setFrom = (value: Date) => {
+    setSearchParams(
+      (params) => {
+        params.set("from", value.toISOString().split("T")[0]);
+        return params;
+      },
+      { replace: true },
+    );
+  };
+  const until = parseUntil(searchParams);
+  const setUntil = (value: Date) => {
+    setSearchParams(
+      (params) => {
+        params.set("until", value.toISOString().split("T")[0]);
+        return params;
+      },
+      { replace: true },
+    );
+  };
 
   return (
     <section className="flex flex-col gap-8">

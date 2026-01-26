@@ -2,10 +2,9 @@ import { HeatmapRect } from "@visx/heatmap";
 import { scaleLinear } from "@visx/scale";
 import { clamp, groupBy, range, sumBy } from "es-toolkit";
 import { DateTime } from "luxon";
-import { parseAsStringEnum, useQueryState } from "nuqs";
 import type { User } from "prisma/generated/client";
 import { Suspense } from "react";
-import { Await } from "react-router";
+import { Await, useSearchParams } from "react-router";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
@@ -27,14 +26,21 @@ export default function Heatmap({
   analytics: Promise<Analytics[]>;
   users: Promise<User[]>;
 }) {
-  const [onlyFrom, setOnlyFrom] = useQueryState(
-    "onlyFrom",
-    parseAsStringEnum(["all", "llm", "search", "users"])
-      .withDefault("all")
-      .withOptions({
-        history: "replace",
-      }),
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
+  const onlyFrom =
+    (searchParams.get("onlyFrom") as
+      | "all"
+      | "llm"
+      | "search"
+      | "users"
+      | undefined) ?? "all";
+  const setOnlyFrom = (value: string) => {
+    setSearchParams((params) => {
+      params.set("onlyFrom", value);
+      return params;
+    });
+  };
+
   return (
     <section className="flex flex-col gap-4">
       <h2 className="font-bold text-2xl">Heatmap of Visitors by Day & Hour</h2>

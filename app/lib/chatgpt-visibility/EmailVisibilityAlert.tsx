@@ -42,8 +42,6 @@ function getRecommendation(sources: Source[]): string {
 }
 
 function SummarySection({ sources }: { sources: Source[] }) {
-  const avgScore = meanBy(sources, scoreSource);
-
   return (
     <Section>
       <table
@@ -60,9 +58,9 @@ function SummarySection({ sources }: { sources: Source[] }) {
         <tbody>
           <tr>
             <th align="left" className="whitespace-nowrap bg-gray-200">
-              Average score
+              Total score
             </th>
-            <td>{avgScore.toLocaleString()}</td>
+            <td>{sumBy(sources, scoreSource).toLocaleString()}</td>
           </tr>
           <tr>
             <th align="left" className="whitespace-nowrap bg-gray-200">

@@ -42,7 +42,7 @@ export default function VisibilityPage({ loaderData }: Route.ComponentProps) {
             const mostRecentQueries = orderBy(
               Object.entries(groupedByDate),
               [([date]) => date],
-              ["desc"],
+              ["asc"],
             )[0][1].queries;
 
             // Group by day so we have score, ratio, etc calculated from all
@@ -61,12 +61,18 @@ export default function VisibilityPage({ loaderData }: Route.ComponentProps) {
               groupBy(dailyTotals, ({ date }) =>
                 DateTime.fromISO(date).startOf("day").toFormat("yyyy-MM-dd"),
               ),
-            ).map(([date, metrics]) => ({
-              date,
-              rentail: meanBy(metrics, (metric) => metric.rentail),
-              score: meanBy(metrics, (metric) => metric.score),
-              ratio: meanBy(metrics, (metric) => metric.ratio),
-            }));
+            )
+              .map(([date, metrics]) => ({
+                date,
+                rentail: meanBy(metrics, (metric) => metric.rentail),
+                score: meanBy(metrics, (metric) => metric.score),
+                ratio: meanBy(metrics, (metric) => metric.ratio),
+              }))
+              .sort((a, b) =>
+                DateTime.fromISO(a.date)
+                  .diff(DateTime.fromISO(b.date))
+                  .toMillis(),
+              );
 
             return (
               <Fragment>
