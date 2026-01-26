@@ -7,9 +7,11 @@ import {
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { ArrowDown, ArrowUp, MapPinIcon } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
+import { Await } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import CentersMap, { type CenterMapFunction } from "~/components/ui/CentersMap";
+import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
   TableBody,
@@ -38,16 +40,21 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function CenterPage({ loaderData }: Route.ComponentProps) {
   const centerRef = useRef<CenterMapFunction>(null);
   return (
-    <div className="flex flex-col gap-8">
-      <CentersMap
-        centerRef={centerRef}
-        centers={loaderData.centers}
-        latitude={loaderData.latitude ?? 34.0522}
-        longitude={loaderData.longitude ?? -118.2437}
-      />
-
-      <CentersList centerRef={centerRef} centers={loaderData.centers} />
-    </div>
+    <Suspense fallback={<LoadingProgress />}>
+      <Await resolve={loaderData.centers}>
+        {(centers) => (
+          <section className="flex flex-col gap-8">
+            <CentersMap
+              centerRef={centerRef}
+              centers={centers}
+              latitude={loaderData.latitude ?? 34.0522}
+              longitude={loaderData.longitude ?? -118.2437}
+            />
+            <CentersList centerRef={centerRef} centers={centers} />
+          </section>
+        )}
+      </Await>
+    </Suspense>
   );
 }
 
