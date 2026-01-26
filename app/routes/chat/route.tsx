@@ -3,9 +3,8 @@ import { captureException } from "@sentry/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { DefaultChatTransport } from "ai";
 import { invariant } from "es-toolkit";
-import { useQueryState } from "nuqs";
 import { useState } from "react";
-import { useRouteLoaderData } from "react-router";
+import { useRouteLoaderData, useSearchParams } from "react-router";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import PageHeader from "~/components/layout/PageHeader";
@@ -20,7 +19,18 @@ import Centers from "./Centers";
 export const handle = { hideLayout: true };
 
 export default function ChatPage() {
-  const [query, setQuery] = useQueryState("q");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("q") ?? "";
+  const setQuery = (value: string | null) => {
+    setSearchParams(
+      (params) => {
+        if (value === null || value === "") params.delete("q");
+        else params.set("q", value);
+        return params;
+      },
+      { replace: true },
+    );
+  };
 
   // Access data from root loader first, our loaded depends on it
   const found = useRouteLoaderData<typeof rootLoader>("root");
@@ -98,7 +108,7 @@ export default function ChatPage() {
         <InputForm
           isResponding={status === "streaming"}
           isSubmitting={status === "submitted"}
-          query={query ?? ""}
+          query={query}
           sendMessage={async (message: string) => {
             if (message.trim() === "") return;
             await sendMessage({
