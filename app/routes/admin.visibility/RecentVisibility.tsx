@@ -5,6 +5,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { mean, median, sortBy, sum } from "es-toolkit";
+import { DateTime } from "luxon";
 import {
   Table,
   TableBody,
@@ -16,8 +17,10 @@ import {
 } from "~/components/ui/Table";
 
 export default function RecentVisibility({
+  date,
   queries,
 }: {
+  date: string;
   queries: {
     category: string;
     query: string;
@@ -34,9 +37,10 @@ export default function RecentVisibility({
         cell: ({ row }) => (
           <span className="font-bold">{row.original.category}</span>
         ),
-        enableGrouping: false,
         header: "Query ID",
         size: 120,
+        footer: DateTime.fromISO(date).toFormat("yyyy-MM-dd"),
+        enableGrouping: true,
       },
       {
         accessorKey: "query",
@@ -133,7 +137,7 @@ export default function RecentVisibility({
                       case "count":
                         return values.length.toLocaleString();
                       default:
-                        return null;
+                        return header.column.columnDef.footer?.toString();
                     }
                   })()}
                 </TableHead>

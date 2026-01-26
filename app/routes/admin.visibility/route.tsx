@@ -43,7 +43,7 @@ export default function VisibilityPage({ loaderData }: Route.ComponentProps) {
               Object.entries(groupedByDate),
               [([date]) => date],
               ["asc"],
-            )[0][1].queries;
+            )[0][1];
 
             // Group by day so we have score, ratio, etc calculated from all
             // queries for that day
@@ -76,7 +76,10 @@ export default function VisibilityPage({ loaderData }: Route.ComponentProps) {
 
             return (
               <Fragment>
-                <RecentVisibility queries={mostRecentQueries} />
+                <RecentVisibility
+                  date={mostRecentQueries.date}
+                  queries={mostRecentQueries.queries}
+                />
                 <VisibilityCharts metrics={metrics} />
               </Fragment>
             );
