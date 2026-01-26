@@ -26,11 +26,10 @@ export default async function converse(
   const responseCount = await page.locator(".chat-bubble-response").count();
 
   // NOTE: We need to focus on the input and then type text into it, which
-  // properly triggers React events.
-  const input = page.locator('input[type="text"]');
-  await input.clear();
-  await input.focus();
-  await input.pressSequentially(message);
+  // properly triggers React events. Use fill() for controlled React components.
+  const input = page.getByRole("textbox");
+  await input.fill(message);
+  await page.waitForTimeout(ms("100ms"));
   // Sanity check that we got the correct message in the input.
   expect(await input.inputValue()).toBe(message);
 
@@ -39,7 +38,15 @@ export default async function converse(
   await input.press("Enter");
 
   // After submitting, verify the input is empty (submission succeeded)
-  // Wait a bit for React state to update
+  // Wait for React state to update and input to clear
+  await page.waitForFunction(
+    (selector) => {
+      const input = document.querySelector(selector) as HTMLInputElement;
+      return input && input.value === "";
+    },
+    'input[type="text"]',
+    { timeout: ms("2s") },
+  );
   expect(await input.inputValue()).toBe("");
 
   // Wait for the new assistant response bubble to appear.

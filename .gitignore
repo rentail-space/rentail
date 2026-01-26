@@ -30,3 +30,4 @@ server.log
 prisma/backup.sql
 
 .devtools
+*.profraw
