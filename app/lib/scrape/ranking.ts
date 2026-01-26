@@ -15,11 +15,11 @@ export default function calculateRanking({
   reviewCount,
   tier,
 }: {
-  rating?: number;
-  reviewCount?: number;
+  rating?: number | null;
+  reviewCount?: number | null;
   tier?: number;
-}): number | undefined {
+}): number {
   return rating && rating >= 4 && tier && reviewCount
     ? rating * Math.log10(reviewCount ?? 1) * (tier ?? 1)
-    : undefined;
+    : 0;
 }

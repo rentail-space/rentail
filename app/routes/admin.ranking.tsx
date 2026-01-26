@@ -5,10 +5,13 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp, EqualIcon } from "lucide-react";
-import { Form } from "react-router";
+import type { PropertyGetPayload } from "prisma/generated/models";
+import { Suspense } from "react";
+import { Await, useFetcher, useSearchParams } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import { Input } from "~/components/ui/Input";
+import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
   TableBody,
@@ -18,23 +21,66 @@ import {
   TableRow,
 } from "~/components/ui/Table";
 import findNearbyCenters from "~/lib/findNearbyCenters";
-import type { Route } from "./+types/admin.centers";
+import calculateRanking from "~/lib/scrape/ranking";
+import type { Route } from "./+types/admin.ranking";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const url = new URL(request.url);
-  const location = url.searchParams.get("location") ?? undefined;
-  const { centers, displayName } = await findNearbyCenters({
+  const found = findNearbyCenters({
     headers: new Headers(),
     limit: 10,
-    location,
+    location: new URL(request.url).searchParams.get("location") ?? "",
   });
-  return { centers, displayName, location };
+  return Promise.resolve(found);
 }
 
-export default function RankingPage({
-  loaderData,
+export default function RankingPage({ loaderData }: Route.ComponentProps) {
+  const fetcher = useFetcher<typeof loader>();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  return (
+    <section className="flex flex-col gap-4">
+      <fetcher.Form
+        className="flex items-center gap-2"
+        method="get"
+        onSubmit={(event) => {
+          event.preventDefault();
+          setSearchParams(
+            (params) => {
+              params.set("location", event.currentTarget.location.value);
+              return params;
+            },
+            { replace: true },
+          );
+          fetcher.submit(event.currentTarget);
+        }}
+      >
+        <Input
+          defaultValue={searchParams.get("location") ?? ""}
+          name="location"
+          type="search"
+        />
+        <Button disabled={fetcher.state !== "idle"} type="submit">
+          {fetcher.state !== "idle" ? "Searching..." : "Search"}
+        </Button>
+      </fetcher.Form>
+
+      <Suspense fallback={<LoadingProgress />}>
+        <Await resolve={loaderData}>
+          {({ centers, displayName }) => (
+            <VisibleResults centers={centers} displayName={displayName} />
+          )}
+        </Await>
+      </Suspense>
+    </section>
+  );
+}
+
+function VisibleResults({
+  displayName,
+  centers,
 }: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
+  displayName: string;
+  centers: PropertyGetPayload<{ include: { spaces: true; state: true } }>[];
 }) {
   const table = useReactTable({
     columns: [
@@ -49,7 +95,11 @@ export default function RankingPage({
         size: 600,
       },
       { accessorKey: "city", size: 140, header: "City" },
-      { accessorKey: "state", header: "State", size: 80 },
+      {
+        accessorFn: (row) => row.state.abbreviation,
+        header: "State",
+        size: 80,
+      },
       {
         accessorFn: (row) => row.spaces.length,
         accessorKey: "spaces",
@@ -66,14 +116,14 @@ export default function RankingPage({
               {row.original.tier}
             </span>
             <EqualIcon className="h-4 w-4" />
-            <span>{row.original.ranking}</span>
+            <span>{calculateRanking(row.original).toFixed(2)}</span>
           </span>
         ),
         header: "Ranking",
         size: 220,
       },
     ],
-    data: loaderData.centers,
+    data: centers,
     enableSortingRemoval: true,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -82,22 +132,7 @@ export default function RankingPage({
 
   return (
     <section className="flex flex-col gap-4">
-      <Form
-        action="/admin/ranking"
-        className="flex items-center gap-2"
-        method="get"
-      >
-        <Input
-          defaultValue={loaderData.location}
-          name="location"
-          type="search"
-        />
-        <Button type="submit">Search</Button>
-      </Form>
-
-      <p className="text-gray-500 text-lg">
-        {loaderData.displayName || "no location"}
-      </p>
+      <p className="text-gray-500 text-lg">{displayName || "no location"}</p>
 
       <Table>
         <TableHeader>
