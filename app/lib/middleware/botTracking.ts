@@ -10,6 +10,7 @@ const logger = debug("server:middleware:bot");
  * Known bot patterns for classification
  *
  * @see https://www.xseek.io/docs
+ * @see https://plainsignal.com/agents/
  */
 const BOT_PATTERNS = [
   { pattern: /googlebot/i, type: "Googlebot" },
@@ -54,6 +55,8 @@ const BOT_PATTERNS = [
   { pattern: /wget/i, type: "wget" },
   { pattern: /scrapy/i, type: "Scrapy" },
   { pattern: /oai-searchbot/i, type: "OAI Search Bot" },
+  { pattern: /meta-externalagent/i, type: "Meta External Agent" },
+  { pattern: /ev-crawler/i, type: "Headline crawler" },
 ];
 
 /**
@@ -81,6 +84,7 @@ function isBot(userAgent: string | null): boolean {
 export async function trackBotVisit(request: Request): Promise<void> {
   const userAgent = request.headers.get("user-agent");
   if (!userAgent || !isBot(userAgent)) return;
+  if (/Better Stack/i.test(userAgent)) return;
 
   const botType = classifyBot(userAgent ?? "") ?? "Unknown";
   const date = DateTime.utc().startOf("day").toJSDate();
