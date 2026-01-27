@@ -10,6 +10,7 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { Suspense, useRef } from "react";
 import { Await } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
+import { Card, CardContent } from "~/components/ui/Card";
 import CentersMap, { type CenterMapFunction } from "~/components/ui/CentersMap";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
@@ -70,7 +71,7 @@ function CentersList({
   const virtualizer = useVirtualizer({
     count: centers.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 40,
+    estimateSize: () => 50,
     overscan: 20,
   });
   const table = useReactTable({
@@ -90,9 +91,9 @@ function CentersList({
   const parentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="container" ref={parentRef}>
-      <div style={{ height: `${virtualizer.getTotalSize()}px` }}>
-        <Table>
+    <Card className="bg-secondary-background text-foreground">
+      <CardContent>
+        <Table style={{ height: `${virtualizer.getTotalSize()}px` }}>
           <TableHeader>
             {table.getHeaderGroups().map((group) => (
               <TableRow key={group.id}>
@@ -162,7 +163,7 @@ function CentersList({
             ))}
           </TableBody>
         </Table>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

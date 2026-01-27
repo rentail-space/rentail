@@ -5,10 +5,12 @@ import { DateTime } from "luxon";
 import type { User } from "prisma/generated/client";
 import { Suspense } from "react";
 import { Await, useSearchParams } from "react-router";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHeader,
   TableRow,
@@ -42,38 +44,43 @@ export default function Heatmap({
   };
 
   return (
-    <section className="flex flex-col gap-4">
-      <h2 className="font-bold text-2xl">Heatmap of Visitors by Day & Hour</h2>
+    <Card className="bg-secondary-background text-foreground">
+      <CardHeader>
+        <CardTitle className="font-bold text-lg">
+          Heatmap of Visitors by Day & Hour
+        </CardTitle>
+        <Tabs value={onlyFrom} className="mx-auto">
+          <TabsList>
+            <TabsTrigger value="all" onClick={() => setOnlyFrom("all")}>
+              All Sources
+            </TabsTrigger>
+            <TabsTrigger value="llm" onClick={() => setOnlyFrom("llm")}>
+              LLM Visitors
+            </TabsTrigger>
+            <TabsTrigger value="search" onClick={() => setOnlyFrom("search")}>
+              Search Visitors
+            </TabsTrigger>
+            <TabsTrigger value="users" onClick={() => setOnlyFrom("users")}>
+              Chats
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </CardHeader>
 
-      <Tabs value={onlyFrom} className="mx-auto">
-        <TabsList>
-          <TabsTrigger value="all" onClick={() => setOnlyFrom("all")}>
-            All Sources
-          </TabsTrigger>
-          <TabsTrigger value="llm" onClick={() => setOnlyFrom("llm")}>
-            LLM Visitors
-          </TabsTrigger>
-          <TabsTrigger value="search" onClick={() => setOnlyFrom("search")}>
-            Search Visitors
-          </TabsTrigger>
-          <TabsTrigger value="users" onClick={() => setOnlyFrom("users")}>
-            Chats
-          </TabsTrigger>
-        </TabsList>
-      </Tabs>
-
-      <Suspense fallback={<LoadingProgress />}>
-        <Await resolve={Promise.all([analytics, users])}>
-          {([analytics, users]) => (
-            <HeatmapTable
-              analytics={analytics}
-              users={users}
-              onlyFrom={onlyFrom}
-            />
-          )}
-        </Await>
-      </Suspense>
-    </section>
+      <CardContent>
+        <Suspense fallback={<LoadingProgress />}>
+          <Await resolve={Promise.all([analytics, users])}>
+            {([analytics, users]) => (
+              <HeatmapTable
+                analytics={analytics}
+                users={users}
+                onlyFrom={onlyFrom}
+              />
+            )}
+          </Await>
+        </Suspense>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -115,79 +122,79 @@ function HeatmapTable({
   });
 
   return (
-    <section className="flex flex-col gap-4">
-      <div className="relative">
-        <Table className="w-70">
-          <TableHeader>
-            <TableRow>
-              <TableCell style={{ minWidth: size }}>&nbsp;</TableCell>
-              {hours.map((hour) => (
-                <TableCell
-                  key={hour}
-                  style={{ minWidth: size }}
-                  className="text-center"
-                >
-                  {hour}:00
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-              <TableRow key={day}>
-                <TableCell
-                  style={{ width: size, height: size }}
-                  className="text-center"
-                >
-                  {day}
-                </TableCell>
-              </TableRow>
+    <div className="relative">
+      <Table className="w-70">
+        <TableHeader>
+          <TableRow>
+            <TableCell style={{ minWidth: size }}>&nbsp;</TableCell>
+            {hours.map((hour) => (
+              <TableCell
+                key={hour}
+                style={{ minWidth: size }}
+                className="text-center"
+              >
+                {hour}:00
+              </TableCell>
             ))}
-          </TableBody>
-        </Table>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+            <TableRow key={day}>
+              <TableCell
+                style={{ width: size, height: size }}
+                className="text-center"
+              >
+                {day}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
 
-        <svg
-          height={height + size}
-          style={{ position: "absolute", top: 32, left: 58 }}
-          width={width + size}
-        >
-          <title>Heatmap</title>
-          <HeatmapRect
-            data={columns}
-            xScale={(column) => xScale(column)}
-            yScale={(row) => yScale(row)}
-            colorScale={rectColorScale}
+        <TableCaption>
+          <Legend
+            onlyFrom={onlyFrom}
+            colorMax={colorMax}
             opacityScale={opacityScale}
-            binWidth={width / columns.length}
-            binHeight={height / weekdays.length}
-            gap={8}
-          >
-            {(heatmap) =>
-              heatmap.map((bins) =>
-                bins.map((bin) => (
-                  <rect
-                    key={`${bin.x}-${bin.y}`}
-                    width={bin.width}
-                    height={bin.height}
-                    x={bin.x}
-                    y={bin.y}
-                    fill={bin.color}
-                    fillOpacity={bin.opacity}
-                  />
-                )),
-              )
-            }
-          </HeatmapRect>
-        </svg>
-      </div>
+            rectColorScale={rectColorScale}
+          />
+        </TableCaption>
+      </Table>
 
-      <Legend
-        onlyFrom={onlyFrom}
-        colorMax={colorMax}
-        opacityScale={opacityScale}
-        rectColorScale={rectColorScale}
-      />
-    </section>
+      <svg
+        height={height + size}
+        style={{ position: "absolute", top: 32, left: 58 }}
+        width={width + size}
+      >
+        <title>Heatmap</title>
+        <HeatmapRect
+          data={columns}
+          xScale={(column) => xScale(column)}
+          yScale={(row) => yScale(row)}
+          colorScale={rectColorScale}
+          opacityScale={opacityScale}
+          binWidth={width / columns.length}
+          binHeight={height / weekdays.length}
+          gap={8}
+        >
+          {(heatmap) =>
+            heatmap.map((bins) =>
+              bins.map((bin) => (
+                <rect
+                  key={`${bin.x}-${bin.y}`}
+                  width={bin.width}
+                  height={bin.height}
+                  x={bin.x}
+                  y={bin.y}
+                  fill={bin.color}
+                  fillOpacity={bin.opacity}
+                />
+              )),
+            )
+          }
+        </HeatmapRect>
+      </svg>
+    </div>
   );
 }
 

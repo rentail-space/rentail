@@ -17,8 +17,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Button } from "~/components/ui/Button";
-import { Input } from "~/components/ui/Input";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import {
   Table,
   TableBody,
@@ -27,6 +26,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/Table";
+import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import prisma from "~/lib/prisma";
 import { verifyAdmin } from "~/lib/sessions.server";
 import type { Route } from "./+types/admin.bots";
@@ -170,93 +170,97 @@ export default function BotsPage({ loaderData }: Route.ComponentProps) {
   const [days, setDays] = useState(loaderData.days);
 
   return (
-    <section className="flex flex-col gap-8">
-      <div className="flex items-center justify-between">
-        <h1 className="font-bold text-3xl">Bot Traffic</h1>
-        <form method="get" className="flex items-center gap-2">
-          <label htmlFor="days" className="text-gray-600 text-sm">
-            Last
-          </label>
-          <Input
-            id="days"
-            name="days"
-            type="number"
-            min="7"
-            max="90"
-            defaultValue={days}
-            onChange={(e) => setDays(Number.parseInt(e.target.value, 10))}
-            className="w-20"
-          />
-          <label htmlFor="days" className="text-gray-600 text-sm">
-            days
-          </label>
-          <Button type="submit" size="sm">
-            Update
-          </Button>
-        </form>
-      </div>
+    <section className="space-y-4">
+      <h1 className="text-center font-bold text-2xl">Bot Traffic</h1>
 
-      <div className="grid grid-cols-3 gap-4">
-        <div className="rounded-lg border border-gray-200 bg-white p-4">
-          <div className="text-gray-600 text-sm">Total Visits</div>
-          <div className="font-bold text-3xl">
-            {loaderData.totalVisits.toLocaleString()}
-          </div>
-        </div>
-        <div className="rounded-lg border border-gray-200 bg-white p-4">
-          <div className="text-gray-600 text-sm">Unique Bots</div>
-          <div className="font-bold text-3xl">{loaderData.uniqueBots}</div>
-        </div>
-        <div className="rounded-lg border border-gray-200 bg-white p-4">
-          <div className="text-gray-600 text-sm">Avg Daily Visits</div>
-          <div className="font-bold text-3xl">
-            {Math.round(loaderData.totalVisits / days).toLocaleString()}
-          </div>
-        </div>
-      </div>
+      <Tabs>
+        <TabsList>
+          {[30, 60, 90].map((days) => (
+            <TabsTrigger
+              key={days}
+              onClick={() => setDays(days)}
+              value={days.toString()}
+            >
+              Last {days} Days
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
 
-      <div className="rounded-lg border border-gray-200 bg-white p-6">
-        <h2 className="mb-4 font-semibold text-xl">Traffic Trend</h2>
-        <ResponsiveContainer width="100%" height={400}>
-          <LineChart data={loaderData.chartData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="date"
-              tickFormatter={(value) =>
-                DateTime.fromJSDate(new Date(value)).toFormat("MMM d")
-              }
-            />
-            <YAxis />
-            <Tooltip
-              labelFormatter={(value) =>
-                DateTime.fromJSDate(new Date(value as string)).toFormat("PPP")
-              }
-            />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="total"
-              stroke="#111111"
-              strokeWidth={2}
-              name="Total Visits"
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <section className="mb-6 grid grid-cols-3 gap-4">
+        {[
+          {
+            label: "Total Visits",
+            value: loaderData.totalVisits.toLocaleString(),
+          },
+          {
+            label: "Unique Bots",
+            value: loaderData.uniqueBots,
+          },
+          {
+            label: "Avg Daily Visits",
+            value: Math.round(loaderData.totalVisits / days).toLocaleString(),
+          },
+        ].map(({ label, value }) => (
+          <Card className="bg-secondary-background text-foreground" key={label}>
+            <CardContent>
+              <div className="text-gray-600 text-sm">{label}</div>
+              <div className="font-bold text-2xl">{value}</div>
+            </CardContent>
+          </Card>
+        ))}
+      </section>
 
-      <div className="rounded-lg border border-gray-200 bg-white p-6">
-        <h2 className="mb-4 font-semibold text-xl">
-          Recent Bot Activity (7 days)
-        </h2>
-        <BotStatsTable data={loaderData.recentBotStats} />
-      </div>
+      <Card className="bg-secondary-background text-foreground">
+        <CardHeader>
+          <CardTitle>Traffic Trend</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={400}>
+            <LineChart data={loaderData.chartData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="date"
+                tickFormatter={(value) =>
+                  DateTime.fromJSDate(new Date(value)).toFormat("MMM d")
+                }
+              />
+              <YAxis />
+              <Tooltip
+                labelFormatter={(value) =>
+                  DateTime.fromJSDate(new Date(value as string)).toFormat("PPP")
+                }
+              />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="total"
+                stroke="#111111"
+                strokeWidth={2}
+                name="Total Visits"
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
 
-      <div className="rounded-lg border border-gray-200 bg-white p-6">
-        <h2 className="mb-4 font-semibold text-xl">
-          Most Visited Paths (7 days)
-        </h2>
-        <PathStatsTable data={loaderData.topPaths} />
-      </div>
+      <Card className="bg-secondary-background text-foreground">
+        <CardHeader>
+          <CardTitle>Recent Bot Activity (7 days)</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <BotStatsTable data={loaderData.recentBotStats} />
+        </CardContent>
+      </Card>
+
+      <Card className="bg-secondary-background text-foreground">
+        <CardHeader>
+          <CardTitle>Most Visited Paths (7 days)</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <PathStatsTable data={loaderData.topPaths} />
+        </CardContent>
+      </Card>
     </section>
   );
 }

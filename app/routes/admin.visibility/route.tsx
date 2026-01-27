@@ -22,7 +22,11 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 export default function VisibilityPage({ loaderData }: Route.ComponentProps) {
   return (
-    <section className="flex flex-col gap-8">
+    <section className="space-y-4">
+      <h1 className="text-center font-bold text-2xl">
+        Recent Visibility Checks
+      </h1>
+
       <Suspense fallback={<LoadingProgress />}>
         <Await resolve={loaderData}>
           {(visibility) => {

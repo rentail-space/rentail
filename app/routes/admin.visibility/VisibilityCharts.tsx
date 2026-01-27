@@ -8,7 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
+import { Card, CardContent } from "~/components/ui/Card";
 import {
   ChartContainer,
   ChartLegend,
@@ -50,9 +50,6 @@ export default function VisibilityCharts({
 }) {
   return (
     <Card className="bg-secondary-background text-foreground">
-      <CardHeader className="text-center">
-        <CardTitle className="font-bold text-lg">Visibility Checks</CardTitle>
-      </CardHeader>
       <CardContent className="grid gap-4 md:grid-cols-2">
         {Object.entries(chartConfig).map(([key, value]) => (
           <SpecificChart

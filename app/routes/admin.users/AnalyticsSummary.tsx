@@ -4,6 +4,7 @@ import type { User } from "prisma/generated/client";
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 import { Await } from "react-router";
+import { Card, CardContent } from "~/components/ui/Card";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 import type { Analytics } from "./route";
 
@@ -45,8 +46,8 @@ function AnalyticsSummaryTable({
     meanBy(analytics, (entry) => entry.averageSessionDuration) || 0;
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="mx-auto flex flex-row items-center gap-4">
+    <Card className="bg-secondary-background text-foreground">
+      <CardContent className="grid grid-cols-2 gap-4 md:grid-cols-4">
         <Stat
           title="Unique Visitors"
           value={visitors}
@@ -82,8 +83,8 @@ function AnalyticsSummaryTable({
           }
           description="Chat and all"
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 

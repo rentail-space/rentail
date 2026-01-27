@@ -17,7 +17,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
+import { Card, CardContent } from "~/components/ui/Card";
 import {
   ChartContainer,
   ChartLegend,
@@ -71,12 +71,6 @@ export default function AnalyticsCharts({
 }) {
   return (
     <Card className="bg-secondary-background text-foreground">
-      <CardHeader className="text-center">
-        <CardTitle className="font-bold text-lg">
-          Visitors &rarr; Chats + Session Duration
-        </CardTitle>
-      </CardHeader>
-
       <CardContent>
         <Suspense fallback={<LoadingProgress />}>
           <Await resolve={Promise.all([analytics, users])}>

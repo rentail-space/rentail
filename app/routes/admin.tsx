@@ -3,8 +3,8 @@ import { verifyAdmin } from "~/lib/sessions.server";
 
 export const handle = {
   headerLinks: [
-    { label: "All centers", to: "/admin/centers" },
     { label: "All users", to: "/admin/users" },
+    { label: "All centers", to: "/admin/centers" },
     { label: "Ranking", to: "/admin/ranking" },
     { label: "Visibility", to: "/admin/visibility" },
     { label: "Searches", to: "/admin/searches" },

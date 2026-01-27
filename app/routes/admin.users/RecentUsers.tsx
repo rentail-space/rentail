@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import { Await } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
@@ -87,55 +88,59 @@ function RecentUsersTable({ users }: { users: User[] }) {
   });
 
   return (
-    <section className="flex flex-col gap-4">
-      <h2 className="font-bold text-2xl">
-        Recent Users{" "}
-        <span className="text-gray-500">({users.length} user)</span>
-      </h2>
+    <Card className="bg-secondary-background text-foreground">
+      <CardHeader>
+        <CardTitle className="font-bold text-2xl">
+          Recent Users{" "}
+          <span className="text-gray-500">({users.length} user)</span>
+        </CardTitle>
+      </CardHeader>
 
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((group) => (
-            <TableRow key={group.id}>
-              {group.headers.map((header) => (
-                <TableHead
-                  key={header.id}
-                  style={{ width: header.column.getSize() }}
-                >
-                  <Button
-                    className="flex w-full cursor-col-resize justify-between p-2"
-                    onDoubleClick={() => header.column.resetSize()}
-                    onMouseDown={header.getResizeHandler()}
-                    onTouchStart={header.getResizeHandler()}
-                    variant="ghost"
+      <CardContent>
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((group) => (
+              <TableRow key={group.id}>
+                {group.headers.map((header) => (
+                  <TableHead
+                    key={header.id}
+                    style={{ width: header.column.getSize() }}
                   >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-                  </Button>
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
+                    <Button
+                      className="flex w-full cursor-col-resize justify-between p-2"
+                      onDoubleClick={() => header.column.resetSize()}
+                      onMouseDown={header.getResizeHandler()}
+                      onTouchStart={header.getResizeHandler()}
+                      variant="ghost"
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                    </Button>
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
 
-        <TableBody>
-          {table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id} className="hover:bg-gray-100">
-              {row.getVisibleCells().map((cell) => (
-                <TableCell
-                  className="truncate"
-                  key={cell.id}
-                  style={{ maxWidth: cell.column.getSize() }}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </section>
+          <TableBody>
+            {table.getRowModel().rows.map((row) => (
+              <TableRow key={row.id} className="hover:bg-gray-100">
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell
+                    className="truncate"
+                    key={cell.id}
+                    style={{ maxWidth: cell.column.getSize() }}
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
   );
 }

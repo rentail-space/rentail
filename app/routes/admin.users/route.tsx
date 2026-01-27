@@ -129,7 +129,7 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
   };
 
   return (
-    <section className="flex flex-col gap-8">
+    <section className="space-y-4">
       <RangeSelection
         from={from}
         setFrom={setFrom}

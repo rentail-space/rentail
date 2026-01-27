@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import { Await, useFetcher, useSearchParams } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import { Input } from "~/components/ui/Input";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
@@ -38,7 +39,11 @@ export default function RankingPage({ loaderData }: Route.ComponentProps) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="space-y-4">
+      <h1 className="text-center font-bold text-2xl">
+        Shopping Center Ranking
+      </h1>
+
       <fetcher.Form
         className="flex items-center gap-2"
         method="get"
@@ -131,64 +136,68 @@ function VisibleResults({
   });
 
   return (
-    <section className="flex flex-col gap-4">
-      <p className="text-gray-500 text-lg">{displayName || "no location"}</p>
+    <Card className="bg-secondary-background text-foreground">
+      <CardHeader>
+        <CardTitle>{displayName || "no location"}</CardTitle>
+      </CardHeader>
 
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((group) => (
-            <TableRow key={group.id}>
-              {group.headers.map((header) => (
-                <TableHead
-                  key={header.id}
-                  style={{ width: header.column.getSize() }}
-                >
-                  {header.getContext().column.getCanSort() ? (
-                    <button
-                      className="flex w-full justify-between p-2 font-bold"
-                      onClick={header.column.getToggleSortingHandler()}
-                      type="button"
-                    >
-                      {flexRender(
+      <CardContent>
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((group) => (
+              <TableRow key={group.id}>
+                {group.headers.map((header) => (
+                  <TableHead
+                    key={header.id}
+                    style={{ width: header.column.getSize() }}
+                  >
+                    {header.getContext().column.getCanSort() ? (
+                      <button
+                        className="flex w-full justify-between p-2 font-bold"
+                        onClick={header.column.getToggleSortingHandler()}
+                        type="button"
+                      >
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                        {header.column.getIsSorted() === "desc" ? (
+                          <ArrowUp />
+                        ) : header.column.getIsSorted() === "asc" ? (
+                          <ArrowDown />
+                        ) : (
+                          <span />
+                        )}
+                      </button>
+                    ) : (
+                      flexRender(
                         header.column.columnDef.header,
                         header.getContext(),
-                      )}
-                      {header.column.getIsSorted() === "desc" ? (
-                        <ArrowUp />
-                      ) : header.column.getIsSorted() === "asc" ? (
-                        <ArrowDown />
-                      ) : (
-                        <span />
-                      )}
-                    </button>
-                  ) : (
-                    flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )
-                  )}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id} className="hover:bg-gray-100">
-              {row.getVisibleCells().map((cell) => (
-                <TableCell
-                  className="truncate"
-                  key={cell.id}
-                  style={{ maxWidth: cell.column.getSize() }}
-                  title={cell.getValue() as string}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </section>
+                      )
+                    )}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.map((row) => (
+              <TableRow key={row.id} className="hover:bg-gray-100">
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell
+                    className="truncate"
+                    key={cell.id}
+                    style={{ maxWidth: cell.column.getSize() }}
+                    title={cell.getValue() as string}
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
   );
 }

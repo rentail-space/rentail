@@ -12,7 +12,7 @@ import { DateTime } from "luxon";
 import { useState } from "react";
 import { type LoaderFunctionArgs, useSearchParams } from "react-router";
 import { Button } from "~/components/ui/Button";
-import { Card, CardContent } from "~/components/ui/Card";
+import { Card, CardContent, CardHeader } from "~/components/ui/Card";
 import { Input } from "~/components/ui/Input";
 import {
   Table,
@@ -162,22 +162,10 @@ export default function SearchesPage({ loaderData }: Route.ComponentProps) {
   };
 
   return (
-    <section className="flex flex-col gap-8">
-      <h1 className="font-bold text-2xl">Search Console Analytics</h1>
-
-      <Tabs>
-        <TabsList>
-          {[30, 60, 90].map((days) => (
-            <TabsTrigger
-              key={days}
-              onClick={() => setDays(days)}
-              value={days.toString()}
-            >
-              Last {days} Days
-            </TabsTrigger>
-          ))}
-        </TabsList>
-      </Tabs>
+    <section className="space-y-4">
+      <h1 className="text-center font-bold text-2xl">
+        Search Console Analytics
+      </h1>
 
       <section className="mb-6 grid grid-cols-4 gap-4">
         {[
@@ -201,62 +189,84 @@ export default function SearchesPage({ loaderData }: Route.ComponentProps) {
         ))}
       </section>
 
-      <form
-        method="get"
-        action="/api/searches/export"
-        className="mb-4 flex items-center justify-between"
-      >
-        <Input
-          value={globalFilter}
-          onChange={(e) => setGlobalFilter(e.target.value)}
-          placeholder="Filter by query..."
-          className="w-96"
-        />
-        <input type="hidden" name="days" value={days} />
-        <Button type="submit" variant="default">
-          Export CSV
-        </Button>
-      </form>
-
-      <Table className="w-full">
-        <TableHeader className="bg-gray-50">
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHead
-                  key={header.id}
-                  className="cursor-pointer border-b px-4 py-3 text-left font-semibold text-gray-700 text-sm hover:bg-gray-100"
-                  onClick={header.column.getToggleSortingHandler()}
-                  style={{ width: header.column.getSize() }}
-                >
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext(),
-                  )}
-                  {{
-                    asc: " 🔼",
-                    desc: " 🔽",
-                  }[header.column.getIsSorted() as string] ?? null}
-                </TableHead>
+      <Card className="bg-secondary-background text-foreground">
+        <CardHeader>
+          <form
+            method="get"
+            action="/api/searches/export"
+            className="mb-4 flex items-center justify-between"
+          >
+            <Tabs>
+              <TabsList>
+                {[30, 60, 90].map((days) => (
+                  <TabsTrigger
+                    key={days}
+                    onClick={() => setDays(days)}
+                    value={days.toString()}
+                  >
+                    Last {days} Days
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+            <Input
+              value={globalFilter}
+              onChange={(e) => setGlobalFilter(e.target.value)}
+              placeholder="Filter by query..."
+              className="w-96"
+            />
+            <input type="hidden" name="days" value={days} />
+            <Button type="submit" variant="default">
+              Export CSV
+            </Button>
+          </form>
+        </CardHeader>
+        <CardContent>
+          <Table className="w-full">
+            <TableHeader className="bg-gray-50">
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <TableHead
+                      key={header.id}
+                      className="cursor-pointer border-b px-4 py-3 text-left font-semibold text-gray-700 text-sm hover:bg-gray-100"
+                      onClick={header.column.getToggleSortingHandler()}
+                      style={{ width: header.column.getSize() }}
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                      {{
+                        asc: " 🔼",
+                        desc: " 🔽",
+                      }[header.column.getIsSorted() as string] ?? null}
+                    </TableHead>
+                  ))}
+                </TableRow>
               ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id} className="hover:bg-gray-50">
-              {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows.map((row) => (
+                <TableRow key={row.id} className="hover:bg-gray-50">
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
               ))}
-            </TableRow>
-          ))}
-        </TableBody>
-        <TableCaption>
-          Showing {table.getRowModel().rows.length} of {queries.length} queries
-        </TableCaption>
-      </Table>
+            </TableBody>
+            <TableCaption>
+              Showing {table.getRowModel().rows.length} of {queries.length}{" "}
+              queries
+            </TableCaption>
+          </Table>
+        </CardContent>
+      </Card>
     </section>
   );
 }
