@@ -8,6 +8,8 @@ const logger = debug("server:middleware:bot");
 
 /**
  * Known bot patterns for classification
+ *
+ * @see https://www.xseek.io/docs
  */
 const BOT_PATTERNS = [
   { pattern: /googlebot/i, type: "Googlebot" },
@@ -26,6 +28,8 @@ const BOT_PATTERNS = [
   { pattern: /anthropic-ai/i, type: "Claude Bot" },
   { pattern: /gptbot|chatgpt-user/i, type: "GPT Bot" },
   { pattern: /claudebot/i, type: "Claude Bot" },
+  { pattern: /claude-user/i, type: "Claude User" },
+  { pattern: /claude-searchbot/i, type: "Claude Search Bot" },
   { pattern: /perplexitybot/i, type: "Perplexity Bot" },
   { pattern: /applebot/i, type: "Applebot" },
   { pattern: /amazonbot/i, type: "Amazonbot" },
@@ -49,6 +53,7 @@ const BOT_PATTERNS = [
   { pattern: /curl/i, type: "cURL" },
   { pattern: /wget/i, type: "wget" },
   { pattern: /scrapy/i, type: "Scrapy" },
+  { pattern: /oai-searchbot/i, type: "OAI Search Bot" },
 ];
 
 /**
