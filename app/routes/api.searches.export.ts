@@ -48,11 +48,3 @@ export async function loader({ request }: ActionFunctionArgs) {
     },
   });
 }
-
-async function getCachedQueries(key: string): Promise<SearchQuery[]> {
-  const cached = await prisma.cache.findUnique({ where: { key: key } });
-  invariant(cached, "Cached query not found");
-  return typeof cached.value === "string"
-    ? (JSON.parse(cached.value) as SearchQuery[])
-    : (cached.value as unknown as SearchQuery[]);
-}
