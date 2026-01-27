@@ -77,7 +77,7 @@ jobs:
       - name: Check types
         run: pnpm tsc --noEmit --strict
         env:
-          NODE_OPTIONS: "--max-old-space-size=2096"
+          NODE_OPTIONS: "--max-old-space-size=3096"
 
       - name: Run Tests
         run: pnpm vitest run
