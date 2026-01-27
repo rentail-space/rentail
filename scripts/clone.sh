@@ -15,3 +15,6 @@ pg_dump "$DATABASE_URL" --file prisma/backup.sql --schema public --clean --no-ow
 echo -e "\033[32m  Restoring database from backup.sql …\033[0m"
 psql postgresql://postgres:postgres@localhost:5432/postgres < prisma/backup.sql
 # pg_restore --verbose --clean --file prisma/backup.sql --schema public
+
+# Open the auth page
+open "http://localhost:5173/auth"

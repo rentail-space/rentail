@@ -1,5 +1,5 @@
+import { invariant } from "es-toolkit";
 import { JWT } from "google-auth-library";
-import { google } from "googleapis";
 import envVars from "./env.js";
 
 export interface SearchQuery {
@@ -24,20 +24,36 @@ export async function getSearchAnalytics(
       email: "analytics@rentail-480516.iam.gserviceaccount.com",
       key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
     });
-    const searchconsole = google.searchconsole({ version: "v1", auth: auth });
-    const response = await searchconsole.searchanalytics.query({
-      siteUrl: "https://rentail.space",
-      requestBody: {
+    const url =
+      "https://searchconsole.googleapis.com/webmasters/v3/sites/https%3A%2F%2Frentail.space/searchAnalytics/query";
+    const accessToken = (await auth.authorize()).access_token;
+    invariant(accessToken, "Failed to get access token");
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         startDate,
         endDate,
         dimensions: ["query"],
         rowLimit: 100,
         dimensionFilterGroups: [],
-      },
+      }),
     });
+    invariant(response.ok, "Failed to fetch search analytics");
+    const data = (await response.json()) as {
+      rows: {
+        keys: string[];
+        clicks: number;
+        impressions: number;
+        ctr: number;
+        position: number;
+      }[];
+    };
 
-    if (!response.data.rows) return [];
-    return response.data.rows.map((row) => ({
+    return data.rows.map((row) => ({
       query: row.keys?.[0] ?? "",
       clicks: row.clicks ?? 0,
       impressions: row.impressions ?? 0,
