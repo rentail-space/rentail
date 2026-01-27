@@ -18,7 +18,7 @@ import {
   getHistoricalUsage,
 } from "~/lib/apiUsageTracker";
 import { verifyAdmin } from "~/lib/sessions.server";
-import type { Route } from "./+types/route";
+import type { Route } from "./+types/admin.api-usage";
 
 export async function loader({ request }: Route.LoaderArgs) {
   await verifyAdmin(request.headers);

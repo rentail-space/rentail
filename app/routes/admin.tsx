@@ -9,6 +9,7 @@ export const handle = {
     { label: "Visibility", to: "/admin/visibility" },
     { label: "Searches", to: "/admin/searches" },
     { label: "Bots", to: "/admin/bots" },
+    { label: "API Usage", to: "/admin/api-usage" },
   ],
 };
 
