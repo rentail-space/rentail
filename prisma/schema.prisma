@@ -15,9 +15,10 @@ datasource db {
 }
 
 model Cache {
-  key       String   @map("key")        @id
-  value     Json     @map("value")      @db.Json
-  createdAt DateTime @map("created_at") @default(now())
+  key       String    @map("key")        @id
+  value     Json      @map("value")      @db.Json
+  createdAt DateTime  @map("created_at") @default(now())
+  expiresAt DateTime? @map("expires_at")
 
   @@map("cache")
 }

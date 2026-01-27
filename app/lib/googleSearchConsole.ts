@@ -14,18 +14,21 @@ export interface SearchQuery {
  * Fetch search analytics data from Google Search Console
  * Returns top 100 queries sorted by impressions (reach)
  */
-export async function getSearchAnalytics(
-  startDate: string,
-  endDate: string,
-): Promise<SearchQuery[]> {
+export async function getSearchAnalytics({
+  startDate,
+  endDate,
+}: {
+  startDate: Date;
+  endDate: Date;
+}): Promise<SearchQuery[]> {
   try {
     const auth = new JWT({
       scopes: "https://www.googleapis.com/auth/webmasters.readonly",
       email: "analytics@rentail-480516.iam.gserviceaccount.com",
       key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
     });
-    const url =
-      "https://searchconsole.googleapis.com/webmasters/v3/sites/https%3A%2F%2Frentail.space/searchAnalytics/query";
+    const domain = "rentail.space";
+    const url = `https://searchconsole.googleapis.com/webmasters/v3/sites/sc-domain:${domain}/searchAnalytics/query`;
     const accessToken = (await auth.authorize()).access_token;
     invariant(accessToken, "Failed to get access token");
     const response = await fetch(url, {
@@ -42,7 +45,17 @@ export async function getSearchAnalytics(
         dimensionFilterGroups: [],
       }),
     });
-    invariant(response.ok, "Failed to fetch search analytics");
+    if (!response.ok) {
+      const error = (await response.json()) as {
+        error: {
+          code: 403;
+          message: "User does not have sufficient permission for site 'https://rentail.space'. See also: https://support.google.com/webmasters/answer/2451999.";
+        };
+      };
+      console.error("Error fetching search analytics:", error.error.message);
+      return [];
+    }
+
     const data = (await response.json()) as {
       rows: {
         keys: string[];
@@ -52,7 +65,6 @@ export async function getSearchAnalytics(
         position: number;
       }[];
     };
-
     return data.rows.map((row) => ({
       query: row.keys?.[0] ?? "",
       clicks: row.clicks ?? 0,
