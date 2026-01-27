@@ -1,5 +1,5 @@
 import { data } from "react-router";
-import findNearbyCenters from "~/lib/findNearbyCenters";
+import findNearbyCenters from "~/lib/findNearbyCenters.server";
 import { findUserAndChatById } from "~/lib/sessions.server";
 import type { Route } from "./+types/api.chat.$chatId.centers";
 

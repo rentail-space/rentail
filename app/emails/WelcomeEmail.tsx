@@ -2,7 +2,7 @@ import { Button, Link, Section, Text } from "@react-email/components";
 import type { User } from "prisma/generated/client";
 import * as styles from "~/emails/styles";
 import EmailLayout from "./EmailLayout";
-import { sendEmail } from "./sendEmails";
+import { sendEmail } from "./sendEmails.server";
 
 /**
  * Send a welcome email to a new user.  This is only sent to authenticated

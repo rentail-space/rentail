@@ -14,9 +14,9 @@ import {
 import { WaveLoading } from "respinner";
 import PageLayout from "~/components/layout/PageLayout";
 import "~/global.css";
-import { botTrackingMiddleware } from "~/lib/middleware/botTracking";
-import loggingMiddleware from "~/lib/middleware/logging";
-import { utmMiddleware } from "~/lib/middleware/utm";
+import { botTrackingMiddleware } from "~/lib/middleware/botTracking.server";
+import loggingMiddleware from "~/lib/middleware/logging.server";
+import { utmMiddleware } from "~/lib/middleware/utm.server";
 import type { Route } from "./+types/root";
 import { findUserAndLastChat } from "./lib/sessions.server";
 

@@ -3,8 +3,8 @@
  */
 
 import { captureException } from "@sentry/react-router";
-import checkRankings from "~/lib/seo-rank/checkRanking";
-import sendSEORankAlert from "~/lib/seo-rank/SEORankAlert";
+import checkRankings from "~/lib/seo-rank/checkRanking.server";
+import sendSEORankAlert from "~/lib/seo-rank/SEORankAlert.server";
 
 export async function loader() {
   try {

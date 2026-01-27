@@ -8,7 +8,7 @@
  * Collects all shopping centers in a metro area using comprehensive
  * grid-based search with Google Places API
  */
-import collectCenters from "~/lib/scrape/collectCenters";
+import collectCenters from "~/lib/scrape/collectCenters.server";
 
 const cityInput = process.argv[2];
 

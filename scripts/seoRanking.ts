@@ -11,9 +11,9 @@
  *   tsx scripts/seoRanking.ts --method=playwright  # Use browser automation instead of API
  */
 
-import prisma from "~/lib/prisma";
-import checkRankings from "~/lib/seo-rank/checkRanking";
-import sendSEORankAlert from "~/lib/seo-rank/SEORankAlert";
+import prisma from "~/lib/prisma.server";
+import checkRankings from "~/lib/seo-rank/checkRanking.server";
+import sendSEORankAlert from "~/lib/seo-rank/SEORankAlert.server";
 
 export type RankingResults = {
   term: string;

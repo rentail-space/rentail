@@ -2,9 +2,9 @@ import { Button, Section } from "@react-email/components";
 import { meanBy, sumBy } from "es-toolkit";
 import { twMerge } from "tailwind-merge";
 import EmailLayout from "~/emails/EmailLayout";
-import { sendEmail } from "~/emails/sendEmails";
+import { sendEmail } from "~/emails/sendEmails.server";
 import * as styles from "~/emails/styles";
-import type { Source } from "./runAllQueries";
+import type { Source } from "./runAllQueries.server";
 
 export default async function sendVisibilityAlert({
   sources,

@@ -2,7 +2,7 @@ import { ArrowRightIcon } from "lucide-react";
 import { Link } from "react-router";
 import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import type { Route } from "./+types/states";
 
 export async function loader() {

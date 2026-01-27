@@ -3,7 +3,7 @@ import type { User } from "prisma/generated/client";
 import * as styles from "~/emails/styles";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import EmailLayout from "./EmailLayout";
-import { sendEmail } from "./sendEmails";
+import { sendEmail } from "./sendEmails.server";
 
 /**
  * Notify admin of new user creation.  This is only sent in production.

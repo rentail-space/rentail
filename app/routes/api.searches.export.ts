@@ -3,7 +3,7 @@ import { invariant } from "es-toolkit";
 import { DateTime } from "luxon";
 import type { ActionFunctionArgs } from "react-router";
 import type { SearchQuery } from "~/lib/googleSearchConsole";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
 
 export async function loader({ request }: ActionFunctionArgs) {

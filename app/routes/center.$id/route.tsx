@@ -1,6 +1,6 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
 import externalLink from "~/lib/externalLink";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import type { Route } from "./+types/route";
 import CenterDetails from "./CenterDetails";
 

@@ -8,9 +8,9 @@
 
 import { exec, execFile } from "node:child_process";
 import { promisify } from "node:util";
-import prisma from "~/lib/prisma";
-import seedCenters from "~/lib/scrape/seedCenters";
-import seedStatesAndRelatedData from "~/lib/scrape/seedStates";
+import prisma from "~/lib/prisma.server";
+import seedCenters from "~/lib/scrape/seedCenters.server";
+import seedStatesAndRelatedData from "~/lib/scrape/seedStates.server";
 import { port } from "./launchBrowser";
 import { closeServer, launchServer } from "./launchServer";
 import { removeNewHTML } from "./toMatchInnerHTML";

@@ -4,7 +4,7 @@ import { JWT } from "google-auth-library";
 import { DateTime } from "luxon";
 import { type LoaderFunctionArgs, useSearchParams } from "react-router";
 import envVars from "~/lib/env";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
 import type { Route } from "./+types/route";
 import AnalyticsCharts from "./AnalyticsCharts";

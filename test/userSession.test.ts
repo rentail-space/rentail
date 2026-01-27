@@ -1,7 +1,7 @@
 import { type Page, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import { type LastEmail, getLastEmailSent } from "~/emails/sendEmails";
-import prisma from "~/lib/prisma";
+import { type LastEmail, getLastEmailSent } from "~/emails/sendEmails.server";
+import prisma from "~/lib/prisma.server";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import converse from "./helpers/converse";
 import { type HTMLNode, getElementsByTagName } from "./helpers/formatHTML";

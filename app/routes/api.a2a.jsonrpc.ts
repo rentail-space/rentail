@@ -1,7 +1,7 @@
 import { UserBuilder, jsonRpcHandler } from "@a2a-js/sdk/server/express";
 import { captureException } from "@sentry/react-router";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
-import requestHandler from "~/lib/a2a/requestHandler";
+import requestHandler from "~/lib/a2a/requestHandler.server";
 
 const handler = jsonRpcHandler({
   requestHandler,

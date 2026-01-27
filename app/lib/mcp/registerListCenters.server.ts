@@ -5,7 +5,7 @@ import { ulid } from "ulid";
 import zod from "zod";
 import externalLink from "../externalLink";
 import { geocodeFromUserInput } from "../geocode";
-import prisma from "../prisma";
+import prisma from "../prisma.server";
 
 const listCentersSpec = {
   annotations: { readOnlyHint: true },

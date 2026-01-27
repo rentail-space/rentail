@@ -10,7 +10,7 @@ import { invariant } from "es-toolkit";
 import Redis from "ioredis";
 import { afterAll, beforeAll } from "vitest";
 import envVars from "~/lib/env";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import msw from "~/test/mocks/mswHandlers";
 import "./toMatchInnerHTML";
 import "./toMatchScreenshot";

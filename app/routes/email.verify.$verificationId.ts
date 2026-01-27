@@ -1,5 +1,5 @@
 import { redirect } from "react-router";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import type { Route } from "./+types/email.verify.$verificationId";
 
 export async function loader({ params }: Route.ActionArgs) {

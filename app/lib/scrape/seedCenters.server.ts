@@ -3,7 +3,7 @@ import { partition } from "es-toolkit";
 import { readFileSync, readdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { z } from "zod";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import { slugify } from "~/lib/utils";
 import envVars from "../env";
 

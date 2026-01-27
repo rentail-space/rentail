@@ -1,7 +1,7 @@
 import { Button, Section, Text } from "@react-email/components";
 import * as styles from "~/emails/styles";
 import EmailLayout from "./EmailLayout";
-import { sendEmail } from "./sendEmails";
+import { sendEmail } from "./sendEmails.server";
 
 export default async function sendVerificationEmail({
   email,

@@ -12,8 +12,8 @@ import sendNewUserNotification from "~/emails/NewUserNotification";
 import sendWelcomeEmail from "~/emails/WelcomeEmail";
 import { getDeviceInfo } from "~/lib/deviceDetection.server";
 import envVars from "~/lib/env";
-import { readUtmParams, saveUtmParams } from "~/lib/middleware/utm";
-import prisma from "~/lib/prisma";
+import { readUtmParams, saveUtmParams } from "~/lib/middleware/utm.server";
+import prisma from "~/lib/prisma.server";
 import welcome from "~/prompts/welcome.md?raw";
 import { geocodeFromHeaders } from "./geocode";
 

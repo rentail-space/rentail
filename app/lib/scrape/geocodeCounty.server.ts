@@ -6,8 +6,8 @@
 import { invariant } from "es-toolkit";
 import ora from "ora";
 import zod from "zod";
-import envVars from "../env";
-import prisma from "../prisma";
+import envVars from "~/lib/env";
+import prisma from "~/lib/prisma.server";
 
 const geocodeResultSchema = zod.object({
   results: zod.array(

@@ -1,7 +1,7 @@
 import { captureException } from "@sentry/react-router";
 import debug from "debug";
 import { DateTime } from "luxon";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import type { Route } from "~/types/app/+types/root";
 
 const logger = debug("server:middleware:bot");

@@ -22,7 +22,7 @@ import {
   TableRow,
 } from "~/components/ui/Table";
 import envVars from "~/lib/env";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import type { Route } from "./+types/admin.centers";

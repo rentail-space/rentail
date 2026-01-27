@@ -7,8 +7,8 @@
  *   tsx scripts/visibility.ts
  */
 
-import runAllQueries from "~/lib/chatgpt-visibility/runAllQueries";
-import prisma from "~/lib/prisma";
+import runAllQueries from "~/lib/chatgpt-visibility/runAllQueries.server";
+import prisma from "~/lib/prisma.server";
 
 try {
   await runAllQueries(true);

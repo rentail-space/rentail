@@ -27,7 +27,7 @@ import {
   type SearchQuery,
   getSearchAnalytics,
 } from "~/lib/googleSearchConsole";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
 import type { Route } from "./+types/admin.searches";
 

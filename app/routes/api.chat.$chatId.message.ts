@@ -9,8 +9,8 @@ import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { ulid } from "ulid";
 import envVars from "~/lib/env";
 import { conversational } from "~/lib/models";
-import preparePrompt from "~/lib/preparePrompt";
-import prisma from "~/lib/prisma";
+import preparePrompt from "~/lib/preparePrompt.server";
+import prisma from "~/lib/prisma.server";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
 import { findOrCreateUser, recentMessages } from "~/lib/sessions.server";
 import updateWorkingMemory, {

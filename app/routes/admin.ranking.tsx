@@ -21,7 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/Table";
-import findNearbyCenters from "~/lib/findNearbyCenters";
+import findNearbyCenters from "~/lib/findNearbyCenters.server";
 import calculateRanking from "~/lib/scrape/ranking";
 import type { Route } from "./+types/admin.ranking";
 

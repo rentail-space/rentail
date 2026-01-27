@@ -10,7 +10,7 @@ import type {
   State,
 } from "prisma/generated/client";
 import z from "zod";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import { slugify } from "../utils";
 
 const logger = debug("seed");

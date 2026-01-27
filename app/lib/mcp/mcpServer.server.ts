@@ -1,5 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import registerListCenters from "./registerListCenters";
+import registerListCenters from "./registerListCenters.server";
 
 /**
  * Create a new MCP server instance. We use one MCP server instance per session.

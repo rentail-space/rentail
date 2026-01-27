@@ -6,8 +6,8 @@ import { ulid } from "ulid";
 import { beforeAll, it } from "vitest";
 import zod from "zod";
 import { classify } from "~/lib/models";
-import preparePrompt from "~/lib/preparePrompt";
-import prisma from "~/lib/prisma";
+import preparePrompt from "~/lib/preparePrompt.server";
+import prisma from "~/lib/prisma.server";
 import { findOrCreateUser, recentMessages } from "~/lib/sessions.server";
 import updateWorkingMemory from "~/lib/workingMemory";
 

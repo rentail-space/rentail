@@ -8,8 +8,8 @@ import chatPrompt from "~/prompts/chatPrompt.md?raw";
 import generalDirectives from "~/prompts/generalDirectives.md?raw";
 import envVars from "./env";
 import externalLink from "./externalLink";
-import findNearbyCenters from "./findNearbyCenters";
-import prisma from "./prisma";
+import findNearbyCenters from "./findNearbyCenters.server";
+import prisma from "./prisma.server";
 import timeOfDay from "./timeOfDay";
 
 /**

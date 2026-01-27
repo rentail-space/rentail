@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 import { Fragment, Suspense } from "react";
 import { Await } from "react-router";
 import LoadingProgress from "~/components/ui/LoadingProgress";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
 import type { Route } from "./+types/route";
 import RecentVisibility from "./RecentVisibility";

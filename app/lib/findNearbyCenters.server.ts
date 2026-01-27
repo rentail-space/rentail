@@ -1,6 +1,6 @@
 import type { User } from "prisma/generated/client";
 import type { PropertyGetPayload } from "prisma/generated/models";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import { geocodeFromUserInput, geocodeMemoryOrHeaders } from "./geocode";
 
 /**

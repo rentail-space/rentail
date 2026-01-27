@@ -1,4 +1,4 @@
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 
 /**
  * API endpoint for AI assistants to get information about the service. Returns

@@ -1,7 +1,7 @@
 import { InMemoryEventStore } from "@modelcontextprotocol/sdk/examples/shared/inMemoryEventStore.js";
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import { ulid } from "ulid";
-import createMcpServer from "./mcpServer";
+import createMcpServer from "./mcpServer.server";
 
 /**
  * GET and POST requests share similar handlers: create the MCP server and

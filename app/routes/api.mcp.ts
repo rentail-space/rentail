@@ -1,6 +1,6 @@
 import { captureException } from "@sentry/react-router";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
-import handleRequest from "~/lib/mcp/handleRequest";
+import handleRequest from "~/lib/mcp/handleRequest.server";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   try {

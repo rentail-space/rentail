@@ -13,7 +13,7 @@ import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import timeOfDay from "~/lib/timeOfDay";
 import { pluralize } from "~/lib/utils";
 import type { Route } from "./+types/state.$state";

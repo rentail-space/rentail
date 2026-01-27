@@ -9,8 +9,8 @@ import type { UserGetPayload } from "prisma/generated/models";
 import zod from "zod";
 import sendDailyAlertEmail from "~/emails/EmailDailyAlert";
 import { classify } from "~/lib/models";
-import preparePrompt from "~/lib/preparePrompt";
-import prisma from "~/lib/prisma";
+import preparePrompt from "~/lib/preparePrompt.server";
+import prisma from "~/lib/prisma.server";
 import { recentMessages } from "~/lib/sessions.server";
 
 export async function loader() {

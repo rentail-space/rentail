@@ -11,8 +11,8 @@ import ora, { type Ora } from "ora";
 import type { Property } from "prisma/generated/client";
 import sharp from "sharp";
 import zod from "zod";
-import envVars from "../env";
-import prisma from "../prisma";
+import envVars from "~/lib/env";
+import prisma from "~/lib/prisma.server";
 import { slugify } from "../utils";
 
 if (!envVars.GOOGLE_PLACES_API_KEY)

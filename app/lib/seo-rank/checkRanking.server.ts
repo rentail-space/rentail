@@ -17,7 +17,7 @@ import ora from "ora";
 import { chromium } from "playwright";
 import { getJson } from "serpapi";
 import env from "~/lib/env";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import terms from "./searchTerms";
 
 export type RankingResults = {

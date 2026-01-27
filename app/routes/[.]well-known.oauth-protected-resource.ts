@@ -1,6 +1,6 @@
 import { agentCardHandler } from "@a2a-js/sdk/server/express";
 import type { LoaderFunctionArgs } from "react-router";
-import requestHandler from "~/lib/a2a/requestHandler";
+import requestHandler from "~/lib/a2a/requestHandler.server";
 
 const handler = agentCardHandler({ agentCardProvider: requestHandler });
 

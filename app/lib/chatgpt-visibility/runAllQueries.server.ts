@@ -3,7 +3,7 @@ import type { LanguageModelV3 } from "@ai-sdk/provider";
 import { partition } from "es-toolkit";
 import { delay } from "node_modules/msw/lib/core/delay.mjs";
 import ora from "ora";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import queryChatGPTWithSearch from "./openaiClient";
 import queries from "./queries";
 

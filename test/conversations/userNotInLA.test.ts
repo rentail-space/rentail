@@ -1,6 +1,6 @@
 import debug from "debug";
 import { beforeAll, describe, it } from "vitest";
-import prisma from "~/lib/prisma";
+import prisma from "~/lib/prisma.server";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import runThroughScript from "~/test/helpers/runThroughScript";
 

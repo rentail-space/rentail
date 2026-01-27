@@ -2,7 +2,7 @@ import { invariant } from "node_modules/es-toolkit/dist/util/invariant.mjs";
 import type { User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import { beforeAll, describe, expect, it } from "vitest";
-import preparePrompt from "~/lib/preparePrompt";
+import preparePrompt from "~/lib/preparePrompt.server";
 import { createAnonymousUser } from "~/lib/sessions.server";
 
 describe("prompt()", () => {

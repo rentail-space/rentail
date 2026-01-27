@@ -3,7 +3,7 @@
  * Generates hexagonal grids for systematic area searching
  */
 
-import type { BoundingBox, LatLng } from "./geocodeCounty";
+import type { BoundingBox, LatLng } from "./geocodeCounty.server";
 
 /**
  * Generate hexagonal grid of search points for comprehensive coverage

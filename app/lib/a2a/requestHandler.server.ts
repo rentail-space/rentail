@@ -9,8 +9,8 @@ import {
 import { generateText } from "ai";
 import { ulid } from "ulid";
 import { conversational } from "../models";
-import preparePrompt from "../preparePrompt";
-import prisma from "../prisma";
+import preparePrompt from "../preparePrompt.server";
+import prisma from "../prisma.server";
 import { createAnonymousUser, recentMessages } from "../sessions.server";
 import rentailAgentCard from "./agentCard";
 

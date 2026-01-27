@@ -20,8 +20,8 @@ import {
 } from "~/components/ui/Table";
 import { Textarea } from "~/components/ui/Textarea";
 import deviceDetection from "~/lib/deviceDetection";
-import findNearbyCenters from "~/lib/findNearbyCenters";
-import prisma from "~/lib/prisma";
+import findNearbyCenters from "~/lib/findNearbyCenters.server";
+import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import type { Route } from "./+types/admin.user.$userId";

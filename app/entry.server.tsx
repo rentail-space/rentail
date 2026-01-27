@@ -8,7 +8,7 @@ import type {
 import { v7 as uuidv7 } from "uuid";
 import envVars from "~/lib/env";
 import msw from "~/test/mocks/mswHandlers";
-import { trackBotVisit } from "./lib/middleware/botTracking";
+import { trackBotVisit } from "./lib/middleware/botTracking.server";
 
 // Only enable Sentry in production
 if (envVars.isProduction) {

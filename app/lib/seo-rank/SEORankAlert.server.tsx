@@ -2,8 +2,8 @@ import { Section } from "@react-email/components";
 import { groupBy } from "es-toolkit";
 import { twMerge } from "tailwind-merge";
 import EmailLayout from "~/emails/EmailLayout";
-import { sendEmail } from "~/emails/sendEmails";
-import type { RankingResults } from "./checkRanking";
+import { sendEmail } from "~/emails/sendEmails.server";
+import type { RankingResults } from "./checkRanking.server";
 
 export default async function sendSEORankAlert({
   queries,
