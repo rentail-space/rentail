@@ -45,7 +45,7 @@ export default function HeroSection() {
             variant="button"
             bg="yellow"
             size="xl"
-            className="my-4 w-fit"
+            className="my-4 w-fit font-bold"
           >
             Find My Match
           </ActiveLink>

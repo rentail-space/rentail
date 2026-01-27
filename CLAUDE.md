@@ -68,6 +68,7 @@ businesses with short-term retail spaces in shopping centers.
 - `pnpm format --write` before committing
 - Avoid `forEach()` (use `for...of` or `map()`)
 - Limit `console` to: `.assert`, `.error`, `.info`, `.warn`
+- Do not use braces if conditional/loop is a single line
 
 **Security:**
 

@@ -14,13 +14,16 @@ import {
 import { WaveLoading } from "respinner";
 import PageLayout from "~/components/layout/PageLayout";
 import "~/global.css";
+import { botTrackingMiddleware } from "~/lib/middleware/botTracking";
 import loggingMiddleware from "~/lib/middleware/logging";
 import { utmMiddleware } from "~/lib/middleware/utm";
 import type { Route } from "./+types/root";
 import { findUserAndLastChat } from "./lib/sessions.server";
 
+// NOTE: not currently implemented, we're using other functions elsewhere
 export const middleware: Route.MiddlewareFunction[] = [
   utmMiddleware,
+  botTrackingMiddleware,
   loggingMiddleware,
 ];
 

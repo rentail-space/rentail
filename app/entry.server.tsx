@@ -8,6 +8,7 @@ import type {
 import { v7 as uuidv7 } from "uuid";
 import envVars from "~/lib/env";
 import msw from "~/test/mocks/mswHandlers";
+import { trackBotVisit } from "./lib/middleware/botTracking";
 
 // Only enable Sentry in production
 if (envVars.isProduction) {
@@ -45,6 +46,8 @@ export default Sentry.wrapSentryHandleRequest(
   ) => {
     const start = Date.now();
     console.info("%s %s", request.method, request.url);
+
+    trackBotVisit(request); // NOTE: run asynchronously
     const response = await handleRequest(
       request,
       responseStatusCode,

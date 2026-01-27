@@ -263,6 +263,23 @@ model VisibilityCheck {
   @@map("visibility_checks")
 }
 
+model BotVisit {
+  id        String   @id @default(cuid())
+  date      DateTime @db.Date
+  userAgent String   @map("user_agent") @db.Text
+  botType   String   @map("bot_type")
+  path      String   @map("path")
+  ip        String?  @map("ip")
+  count     Int      @default(0)
+  firstSeen DateTime @map("first_seen") @default(now())
+  lastSeen  DateTime @map("last_seen")  @updatedAt
+
+  @@unique([date, userAgent, path])
+  @@index([date])
+  @@index([botType])
+  @@map("bot_visits")
+}
+
 enum Role {
   assistant
   user
