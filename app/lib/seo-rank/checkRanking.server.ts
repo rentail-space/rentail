@@ -16,6 +16,7 @@ import { delay } from "es-toolkit";
 import ora from "ora";
 import { chromium } from "playwright";
 import { getJson } from "serpapi";
+import { trackApiCall } from "~/lib/apiUsageTracker";
 import env from "~/lib/env";
 import prisma from "~/lib/prisma.server";
 import terms from "./searchTerms";
@@ -54,46 +55,50 @@ export default async function checkRankings(
  * Check ranking using SerpAPI (recommended for production)
  */
 async function checkRankingWithSerpAPI(term: string): Promise<RankingResults> {
-  try {
-    const response = (await getJson({
-      engine: "google",
-      api_key: env.SERPAPI_KEY,
-      q: term,
-      location: "Los Angeles, California",
-    })) as {
-      organic_results?: {
-        position: number;
-        title: string;
-        link: string;
-        redirect_link: string;
-        displayed_link: string;
-        favicon: string;
-        snippet: string;
-        snippet_highlighted_words: string[];
-        rich_snippet: {
-          top: { detected_extensions: string[]; extensions: string[] };
-        };
-        source: string;
-      }[];
-      related_searches?: {
-        block_position: number;
-        query: string;
-        link: string;
-        serpapi_link: string;
-      }[];
-    };
+  return await trackApiCall("serpapi", "search", async () => {
+    try {
+      const response = (await getJson({
+        engine: "google",
+        api_key: env.SERPAPI_KEY,
+        q: term,
+        location: "Los Angeles, California",
+      })) as {
+        organic_results?: {
+          position: number;
+          title: string;
+          link: string;
+          redirect_link: string;
+          displayed_link: string;
+          favicon: string;
+          snippet: string;
+          snippet_highlighted_words: string[];
+          rich_snippet: {
+            top: { detected_extensions: string[]; extensions: string[] };
+          };
+          source: string;
+        }[];
+        related_searches?: {
+          block_position: number;
+          query: string;
+          link: string;
+          serpapi_link: string;
+        }[];
+      };
 
-    const results =
-      response.organic_results?.map((result) => ({
-        link: result.link,
-        title: result.title,
-        snippet: result.snippet,
-      })) ?? [];
-    return { term, results };
-  } catch (error) {
-    console.error(`Error checking "%s":`, term, error);
-    return { term, results: [] };
-  }
+      // Track API usage
+
+      const results =
+        response.organic_results?.map((result) => ({
+          link: result.link,
+          title: result.title,
+          snippet: result.snippet,
+        })) ?? [];
+      return { term, results };
+    } catch (error) {
+      console.error(`Error checking "%s":`, term, error);
+      return { term, results: [] };
+    }
+  });
 }
 
 /**

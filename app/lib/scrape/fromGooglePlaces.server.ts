@@ -11,6 +11,7 @@ import ora, { type Ora } from "ora";
 import type { Property } from "prisma/generated/client";
 import sharp from "sharp";
 import zod from "zod";
+import { trackApiCall } from "~/lib/apiUsageTracker";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma.server";
 import { slugify } from "../utils";
@@ -178,43 +179,45 @@ async function searchNearbyRaw({
   point: { lat: number; lng: number };
   radiusMeters: number;
 }): Promise<PlacesAPIPlace[]> {
-  const response = await fetch(
-    "https://places.googleapis.com/v1/places:searchNearby",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        includedTypes: ["shopping_mall"],
-        maxResultCount: 20,
-        locationRestriction: {
-          circle: {
-            center: {
-              latitude: point.lat,
-              longitude: point.lng,
+  return await trackApiCall("google-places", "nearby-search", async () => {
+    const response = await fetch(
+      "https://places.googleapis.com/v1/places:searchNearby",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          includedTypes: ["shopping_mall"],
+          maxResultCount: 20,
+          locationRestriction: {
+            circle: {
+              center: {
+                latitude: point.lat,
+                longitude: point.lng,
+              },
+              radius: radiusMeters,
             },
-            radius: radiusMeters,
           },
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          "User-Agent": "rentail.space/1.0 (support@rentail.space)",
+          "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
+          "X-Goog-FieldMask": findPlaceFields
+            .map((field) => `places.${field}`)
+            .join(","),
         },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        "User-Agent": "rentail.space/1.0 (support@rentail.space)",
-        "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
-        "X-Goog-FieldMask": findPlaceFields
-          .map((field) => `places.${field}`)
-          .join(","),
       },
-    },
-  );
-  invariant(response.ok, "Nearby search failed");
+    );
+    invariant(response.ok, "Nearby search failed");
 
-  const { places } = (await response.json()) as { places?: PlacesAPIPlace[] };
-  // Filter to operational shopping malls only
-  return (places ?? []).filter(
-    (place) =>
-      place.primaryType === "shopping_mall" &&
-      place.businessStatus === "OPERATIONAL" &&
-      place.websiteUri,
-  );
+    const { places } = (await response.json()) as { places?: PlacesAPIPlace[] };
+    // Filter to operational shopping malls only
+    return (places ?? []).filter(
+      (place) =>
+        place.primaryType === "shopping_mall" &&
+        place.businessStatus === "OPERATIONAL" &&
+        place.websiteUri,
+    );
+  });
 }
 
 /**
@@ -226,24 +229,27 @@ async function searchNearbyRaw({
  * @returns Place details, or undefined if the place is not found or not operational
  */
 export async function updatePlaceDetails(property: Property) {
-  const spinner = ora(`Updating details for ${property.name}`).start();
+  await trackApiCall("google-places", "place-details", async () => {
+    const spinner = ora(`Updating details for ${property.name}`).start();
 
-  const response = await fetch(
-    `https://places.googleapis.com/v1/${property.googlePlaceID}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        "User-Agent": "rentail.space/1.0 (support@rentail.space)",
-        "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
-        "X-Goog-FieldMask": findPlaceFields.join(","),
+    const response = await fetch(
+      `https://places.googleapis.com/v1/${property.googlePlaceID}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "User-Agent": "rentail.space/1.0 (support@rentail.space)",
+          "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
+          "X-Goog-FieldMask": findPlaceFields.join(","),
+        },
       },
-    },
-  );
-  invariant(response.ok, "Failed to get place details");
-  const place = (await response.json()) as PlacesAPIPlace;
-  const readyToSave = await prepareSave(place);
-  spinner.succeed();
-  return readyToSave;
+    );
+    invariant(response.ok, "Failed to get place details");
+
+    const place = (await response.json()) as PlacesAPIPlace;
+    const readyToSave = await prepareSave(place);
+    spinner.succeed();
+    return readyToSave;
+  });
 }
 
 /**
@@ -337,22 +343,24 @@ async function downloadPhotos({
   for (let index = 0; index < download.length; index++) {
     const photo = download[index];
     try {
-      const url = new URL(
-        `https://places.googleapis.com/v1/${photo.name}/media`,
-      );
-      url.searchParams.set("max_height_px", photo.heightPx.toString());
-      url.searchParams.set("max_width_px", photo.widthPx.toString());
-      // Fetch photo to detect format
-      const response = await fetch(url, {
-        headers: {
-          "User-Agent": "rentail.space/1.0 (support@rentail.space)",
-          "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
-        },
+      const buffer = await trackApiCall("google-places", "photo", async () => {
+        const url = new URL(
+          `https://places.googleapis.com/v1/${photo.name}/media`,
+        );
+        url.searchParams.set("max_height_px", photo.heightPx.toString());
+        url.searchParams.set("max_width_px", photo.widthPx.toString());
+        // Fetch photo to detect format
+        const response = await fetch(url, {
+          headers: {
+            "User-Agent": "rentail.space/1.0 (support@rentail.space)",
+            "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
+          },
+        });
+        invariant(response.ok, "Failed to download photo");
+        return Buffer.from(await response.arrayBuffer());
       });
-      invariant(response.ok, "Failed to download photo");
 
       // Process image: resize if needed and compress
-      const buffer = Buffer.from(await response.arrayBuffer());
       const image = sharp(buffer);
       const metadata = await image.metadata();
 

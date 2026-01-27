@@ -6,6 +6,7 @@
 import { invariant } from "es-toolkit";
 import ora from "ora";
 import zod from "zod";
+import { trackApiCall } from "~/lib/apiUsageTracker";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma.server";
 
@@ -97,14 +98,24 @@ export async function geocodeCounty(
 
     invariant(response.ok, `Geocoding API failed: ${response.statusText}`);
 
-    const data = geocodeResultSchema.parse(await response.json());
-    invariant(
-      data.status === "OK",
-      `Geocoding failed for ${countyName}: ${data.status}`,
+    // Track API usage
+    const result = await trackApiCall(
+      "google-geocoding",
+      "geocode",
+      async () => {
+        const data = geocodeResultSchema.parse(await response.json());
+        invariant(
+          data.status === "OK",
+          `Geocoding failed for ${countyName}: ${data.status}`,
+        );
+        invariant(
+          data.results.length > 0,
+          `No results found for ${countyName}`,
+        );
+        return data.results[0];
+      },
     );
-    invariant(data.results.length > 0, `No results found for ${countyName}`);
 
-    const result = data.results[0];
     const { geometry, formatted_address } = result;
 
     // Use bounds if available, otherwise use viewport
