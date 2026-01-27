@@ -38,20 +38,15 @@ export async function getSearchAnalytics({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        startDate,
-        endDate,
+        startDate: startDate.toISOString().split("T")[0],
+        endDate: endDate.toISOString().split("T")[0],
         dimensions: ["query"],
         rowLimit: 100,
         dimensionFilterGroups: [],
       }),
     });
     if (!response.ok) {
-      const error = (await response.json()) as {
-        error: {
-          code: 403;
-          message: "User does not have sufficient permission for site 'https://rentail.space'. See also: https://support.google.com/webmasters/answer/2451999.";
-        };
-      };
+      const error = (await response.json()) as { error: { message: string } };
       console.error("Error fetching search analytics:", error.error.message);
       return [];
     }
