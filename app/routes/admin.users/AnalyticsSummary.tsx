@@ -1,4 +1,3 @@
-import NumberFlow from "@number-flow/react";
 import { meanBy, sumBy } from "es-toolkit";
 import type { User } from "prisma/generated/client";
 import type { ReactNode } from "react";
@@ -69,16 +68,8 @@ function AnalyticsSummaryTable({
           title="Avg Session Duration"
           value={
             <span>
-              <NumberFlow
-                format={{ notation: "compact" }}
-                value={Math.floor(avgSessionDuration / 60)}
-              />
-              m{" "}
-              <NumberFlow
-                format={{ notation: "compact" }}
-                value={Math.floor(avgSessionDuration % 60)}
-              />
-              s
+              {Math.floor(avgSessionDuration / 60)}m{" "}
+              {Math.floor(avgSessionDuration % 60)}s
             </span>
           }
           description="Chat and all"
@@ -105,15 +96,11 @@ function Stat({
       <div className="flex flex-row items-center gap-1 font-bold text-2xl">
         {typeof value === "number" ? (
           <>
-            <NumberFlow format={{ notation: "compact" }} value={value} />
+            {value.toLocaleString()}
             {percentage !== undefined && Number.isFinite(percentage) && (
-              <NumberFlow
-                className="text-gray-500 text-sm"
-                prefix=" ("
-                format={{ notation: "compact" }}
-                value={percentage * 100}
-                suffix="%)"
-              />
+              <span className="text-gray-500 text-sm">
+                ({(percentage * 100).toFixed(2)}%)
+              </span>
             )}
           </>
         ) : (

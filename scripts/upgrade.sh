@@ -16,6 +16,7 @@ pnpm install
 git add package.json pnpm-lock.yaml
 
 echo -e "\033[32m  Running tests …\033[0m"
+rm -rf __screenshots__/*
 pnpm test
 
 echo -e "\033[32m  Auditing dependencies …\033[0m"
