@@ -1,5 +1,5 @@
 import { Button, Section } from "@react-email/components";
-import { meanBy, sumBy } from "es-toolkit";
+import { meanBy, sortBy, sumBy } from "es-toolkit";
 import { twMerge } from "tailwind-merge";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails.server";
@@ -118,26 +118,24 @@ function SourcesTable({ sources }: { sources: Source[] }) {
           </tr>
         </thead>
         <tbody>
-          {sources
-            .sort((a, b) => a.category.localeCompare(b.category))
-            .map((source) => (
-              <tr key={source.id}>
-                <td align="left">
-                  <strong>{source.category}</strong>: {source.query}
-                </td>
-                <td
-                  align="center"
-                  className={twMerge(
-                    source.citations.some(isRentail) && "font-bold",
-                    "whitespace-nowrap",
-                  )}
-                >
-                  {countRentail(source.citations).toLocaleString()} /{" "}
-                  {source.citations.length.toLocaleString()}
-                </td>
-                <td align="right">{scoreSource(source).toLocaleString()}</td>
-              </tr>
-            ))}
+          {sortBy(sources, ["category", "query"]).map((source) => (
+            <tr key={source.id}>
+              <td align="left">
+                <strong>{source.category}</strong>: {source.query}
+              </td>
+              <td
+                align="center"
+                className={twMerge(
+                  source.citations.some(isRentail) && "font-bold",
+                  "whitespace-nowrap",
+                )}
+              >
+                {countRentail(source.citations).toLocaleString()} /{" "}
+                {source.citations.length.toLocaleString()}
+              </td>
+              <td align="right">{scoreSource(source).toLocaleString()}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </Section>

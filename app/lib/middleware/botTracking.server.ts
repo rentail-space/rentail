@@ -61,6 +61,7 @@ const BOT_PATTERNS = [
   { pattern: /wget/i, type: "wget" },
   { pattern: /whatsapp/i, type: "WhatsApp" },
   { pattern: /yandexbot/i, type: "Yandex" },
+  { pattern: /seranking/i, type: "SE Ranking" },
 ];
 
 /**
