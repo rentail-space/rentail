@@ -162,8 +162,8 @@ function HeatmapTable({
       </Table>
 
       <svg
+        className="pointer-events-none absolute top-8 left-14"
         height={height + size}
-        style={{ position: "absolute", top: 32, left: 58 }}
         width={width + size}
       >
         <title>Heatmap</title>

@@ -12,12 +12,12 @@ import {
   Legend,
   Line,
   LineChart,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
+import { ChartContainer } from "~/components/ui/Chart";
 import {
   Table,
   TableBody,
@@ -216,7 +216,15 @@ export default function BotsPage({ loaderData }: Route.ComponentProps) {
           <CardTitle>Traffic Trend</CardTitle>
         </CardHeader>
         <CardContent>
-          <ResponsiveContainer width="100%" height={400}>
+          <ChartContainer
+            config={{
+              total: {
+                label: "Total Visits",
+                color: "#111111",
+              },
+            }}
+            className="h-40 w-full"
+          >
             <LineChart data={loaderData.chartData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
@@ -240,7 +248,7 @@ export default function BotsPage({ loaderData }: Route.ComponentProps) {
                 name="Total Visits"
               />
             </LineChart>
-          </ResponsiveContainer>
+          </ChartContainer>
         </CardContent>
       </Card>
 

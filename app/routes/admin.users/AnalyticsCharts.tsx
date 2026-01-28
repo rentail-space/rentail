@@ -167,10 +167,8 @@ function SpecificChart({
   return (
     <ChartContainer config={chartConfig} className="h-40 w-full">
       <AreaChart
-        accessibilityLayer
         data={data}
         margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-        responsive
       >
         <CartesianGrid vertical={false} />
         <XAxis dataKey={({ date }) => date.toFormat("yyyy-MM-dd")} />
