@@ -1,11 +1,11 @@
 import {
   flexRender,
   getCoreRowModel,
-  getGroupedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { mean, median, sortBy, sum } from "es-toolkit";
+import { groupBy, mean, median, orderBy, sortBy, sum } from "es-toolkit";
 import { DateTime } from "luxon";
+import { useMemo } from "react";
 import { Card, CardContent } from "~/components/ui/Card";
 import {
   Table,
@@ -18,19 +18,38 @@ import {
 } from "~/components/ui/Table";
 
 export default function RecentVisibility({
-  date,
-  queries,
+  visibility,
 }: {
-  date: string;
-  queries: {
+  visibility: {
     category: string;
-    query: string;
     citations: string[];
-    score: number;
-    ratio: number;
-    rentail: number;
+    query: string;
+    createdAt: Date;
   }[];
 }) {
+  const groupedByDate = useMemo(
+    () =>
+      Object.entries(
+        groupBy(visibility, ({ createdAt }) => createdAt.toISOString()),
+      ).map(([date, queries]) => ({
+        date,
+        queries: queries.map((query) => ({
+          category: query.category,
+          citations: query.citations,
+          query: query.query,
+          ratio: citationRatio(query.citations),
+          rentail: query.citations.filter(isRentail).length,
+          score: scoreCitations(query.citations),
+        })),
+      })),
+    [visibility],
+  );
+  const mostRecentQueries = useMemo(
+    () =>
+      orderBy(Object.entries(groupedByDate), [([date]) => date], ["asc"])[0][1],
+    [groupedByDate],
+  );
+
   const table = useReactTable({
     columns: [
       {
@@ -40,12 +59,10 @@ export default function RecentVisibility({
         ),
         header: "Query ID",
         size: 120,
-        footer: DateTime.fromISO(date).toFormat("yyyy-MM-dd"),
-        enableGrouping: true,
+        footer: DateTime.fromISO(mostRecentQueries.date).toFormat("yyyy-MM-dd"),
       },
       {
         accessorKey: "query",
-        enableGrouping: false,
         header: "Query",
         size: 600,
       },
@@ -57,21 +74,18 @@ export default function RecentVisibility({
             {row.original.rentail} / {row.original.citations.length}
           </span>
         ),
-        enableGrouping: true,
         header: "Citations",
         size: 60,
       },
       {
         accessorFn: (row) => row.score,
         aggregationFn: "sum",
-        enableGrouping: true,
         header: "Score",
         size: 60,
       },
     ],
-    data: sortBy(queries, ["category", "query"]),
+    data: sortBy(mostRecentQueries.queries, ["category", "query"]),
     getCoreRowModel: getCoreRowModel(),
-    getGroupedRowModel: getGroupedRowModel(),
   });
 
   return (
@@ -150,4 +164,19 @@ export default function RecentVisibility({
       </CardContent>
     </Card>
   );
+}
+
+function citationRatio(citations: string[]): number {
+  return citations.length > 0
+    ? citations.filter(isRentail).length / citations.length
+    : 0;
+}
+
+function scoreCitations(citations: string[]): number {
+  const isFirstPlace = citations.length > 0 && isRentail(citations[0]);
+  return (isFirstPlace ? 50 : 0) + citations.filter(isRentail).length * 10;
+}
+
+function isRentail(citation: string): boolean {
+  return new URL(citation).hostname === "rentail.space";
 }
