@@ -1,16 +1,17 @@
 import {
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useVirtualizer } from "@tanstack/react-virtual";
 import { ArrowDown, ArrowUp, MapPinIcon } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Suspense, useRef } from "react";
 import { Await } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
-import { Card, CardContent } from "~/components/ui/Card";
+import { Button } from "~/components/ui/Button";
+import { Card, CardContent, CardHeader } from "~/components/ui/Card";
 import CentersMap, { type CenterMapFunction } from "~/components/ui/CentersMap";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
@@ -32,10 +33,10 @@ const mapboxToken = envVars.MAPBOX_TOKEN;
 export async function loader({ request }: Route.LoaderArgs) {
   const user = await verifyAdmin(request.headers);
   const { location } = cleanParseWorkingMemory(user.workingMemory);
-  const centers = await prisma.property.findMany({
+  const centers = prisma.property.findMany({
     include: { spaces: true, state: true },
   });
-  return { centers, ...location, mapboxToken };
+  return { centers: Promise.resolve(centers), location, mapboxToken };
 }
 
 export default function CenterPage({ loaderData }: Route.ComponentProps) {
@@ -48,8 +49,8 @@ export default function CenterPage({ loaderData }: Route.ComponentProps) {
             <CentersMap
               centerRef={centerRef}
               centers={centers}
-              latitude={loaderData.latitude ?? 34.0522}
-              longitude={loaderData.longitude ?? -118.2437}
+              latitude={loaderData.location?.latitude ?? 34.0522}
+              longitude={loaderData.location?.longitude ?? -118.2437}
             />
             <CentersList centerRef={centerRef} centers={centers} />
           </section>
@@ -68,12 +69,6 @@ function CentersList({
     ((center: { longitude: number; latitude: number }) => void) | null
   >;
 }) {
-  const virtualizer = useVirtualizer({
-    count: centers.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 50,
-    overscan: 20,
-  });
   const table = useReactTable({
     columns: [
       { enableSorting: false, id: " ", size: 40 },
@@ -86,14 +81,45 @@ function CentersList({
     enableSortingRemoval: false,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    initialState: { sorting: [{ id: "name", desc: false }] },
+    getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      sorting: [{ id: "name", desc: false }],
+      pagination: { pageSize: 100 },
+    },
   });
-  const parentRef = useRef<HTMLDivElement>(null);
 
   return (
     <Card className="bg-secondary-background text-foreground">
+      <CardHeader className="flex flex-row items-center justify-center gap-2">
+        <Button
+          disabled={!table.getCanPreviousPage()}
+          onClick={() => table.previousPage()}
+          variant="secondary"
+        >
+          {"<"}
+        </Button>
+        {table.getPageOptions().map((page) => (
+          <Button
+            className="px-4"
+            disabled={table.getState().pagination.pageIndex === page}
+            key={page}
+            onClick={() => table.setPageIndex(page)}
+            variant="secondary"
+          >
+            {page + 1}
+          </Button>
+        ))}
+        <Button
+          disabled={!table.getCanNextPage()}
+          onClick={() => table.nextPage()}
+          variant="secondary"
+        >
+          {">"}
+        </Button>
+      </CardHeader>
+
       <CardContent>
-        <Table style={{ height: `${virtualizer.getTotalSize()}px` }}>
+        <Table>
           <TableHeader>
             {table.getHeaderGroups().map((group) => (
               <TableRow key={group.id}>
@@ -132,7 +158,7 @@ function CentersList({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows.map((row) => (
+            {table.getPaginationRowModel().rows.map((row) => (
               <TableRow key={row.id} className="hover:bg-gray-100">
                 <TableCell>
                   <MapPinIcon
