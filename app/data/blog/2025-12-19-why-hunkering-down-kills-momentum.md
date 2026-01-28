@@ -2,7 +2,7 @@
 title: "The Hermit Leader Problem: Why Hunkering Down Kills Momentum"
 image: "2025-12-19-matches.jpg"
 alt: "Row of matches with one burnt match among unlit ones, representing leader burnout and withdrawal that extinguishes team momentum while others remain ready to ignite"
-summary: "Early-stage founders face relentless uncertainty. Missed sales target. Key employee quits. Product launch flops. The instinct is to hunker down—withdraw, overthink, wait for clarity before moving forward. It feels protective. It's actually poisonous."
+summary: "Setbacks make founders retreat and overthink. That instinct kills companies faster than the original problem. Keep moving—test retail concepts in temporary spaces instead of freezing."
 ---
 
 Missed sales target. Key hire quits. Product launch flops.

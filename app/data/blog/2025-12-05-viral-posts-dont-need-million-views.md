@@ -1,8 +1,8 @@
 ---
-title: "Viral posts don't need million views"
+title: "Viral Posts Don't Need Million Views"
 image: "2025-12-05-typewriter.jpg"
-alt: "Typewriter with Oscar Wilde quote: 'Be yourself, everyone else is already taken'"
-summary: "Small business viral means customers share, comment, buy. Six retail shops prove authenticity beats production budgets—and physical spaces let you test what resonates."
+alt: "Vintage typewriter with Oscar Wilde quote 'Be yourself, everyone else is already taken' typed on paper, representing authentic content creation over polished production"
+summary: "Polished marketing videos get ignored. Lo-fi authenticity goes viral. Test content strategies in temporary retail spaces—find what resonates with real customers before scaling."
 ---
 
 Small business "viral" means customers share, comment, buy—not influencer reach.

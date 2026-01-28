@@ -2,7 +2,7 @@
 title: "Bridging the Gap: Connecting Gen Z Merchants with Shopping Centers"
 image: "2025-11-28-bridging-the-gap.jpg"
 alt: "Busy Japanese train station concourse with young diverse crowd walking through modern pink-lit retail space, Barbie campaign banners hanging from industrial ceiling, shops visible on sides"
-summary: "Rentail.space connects entrepreneurs with shopping centers seeking fresh concepts. No broker calls, no complex negotiations—just browse available short-term spaces and apply directly."
+summary: "Entrepreneurs can't find affordable retail space. Shopping centers can't find fresh brands. Rentail.space connects both—no broker calls, no complex negotiations."
 ---
 
 Shopping centers need fresh energy. Entrepreneurs need affordable physical spaces.

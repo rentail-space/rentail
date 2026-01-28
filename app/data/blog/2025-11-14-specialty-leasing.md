@@ -2,7 +2,7 @@
 title: "Specialty Leasing: A Smart Alternative for Small Business Owners Looking to Test the Waters"
 image: "2025-11-14-specialty-leasing.jpg"
 alt: "Comic books displayed on red retail shelf with wooden backdrop, representing small business merchandise presentation in specialty leasing spaces like mall kiosks or pop-up shops"
-summary: "Specialty leasing is the retail world's answer to \"try before you buy.\" Instead of signing a traditional long-term lease for a permanent store, specialty leasing offers temporary, flexible retail opportunities. Think mall kiosks during the holiday season, weekend pop-up shops, carts in high-traffic areas, or even shared retail spaces that rotate vendors."
+summary: "Traditional retail leases demand years of commitment and tens of thousands upfront. Specialty leasing lets you test concepts in weeks—find kiosks, pop-ups, and carts on rentail.space."
 ---
 
 You've dreamed of having your own storefront. But sky-high rents, multi-year commitments, and hefty build-out costs? Overwhelming.

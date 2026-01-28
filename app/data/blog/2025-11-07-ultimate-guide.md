@@ -1,8 +1,8 @@
 ---
-title: The Ultimate Guide
+title: "The Ultimate Guide to Finding Short-Term Retail Space"
 image: "2025-11-07-ultimate-guide.jpg"
 alt: "Man in dark shirt and jeans standing in modern, empty office space with concrete floors and floor-to-ceiling windows, holding tablet, with natural light streaming across industrial-style loft interior."
-summary: "Finding retail space shouldn't mean calling dozens of brokers. Browse available short-term spaces at shopping centers near you, with photos, pricing, and foot traffic data—all in one place."
+summary: "Calling dozens of brokers to find retail space wastes weeks. Rentail.space shows available short-term spaces at shopping centers near you—with photos, pricing, and foot traffic data in one place."
 ---
 
 Finding retail space shouldn't mean calling dozens of brokers. It doesn't have to.

@@ -2,7 +2,7 @@
 title: "The Type-A Trap: Why Speed Without Context Costs You Talent"
 image: "2026-01-09-fists.jpg"
 alt: "Diverse raised fists against neutral background, symbolizing team members voices needing to be heard and understood by leadership before quick judgments are made"
-summary: "Type-A leaders have a superpower: decisiveness. They see patterns fast, synthesize information quickly, and drive toward conclusions while others are still processing. This trait builds companies."
+summary: "Decisive leaders jump to conclusions fast. That speed builds companies—and destroys relationships. Load context before deciding. Test retail concepts with real customers before scaling."
 ---
 
 > I'm a type-A personality and very driven. I come to conclusions quickly and

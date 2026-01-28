@@ -1,8 +1,8 @@
 ---
 title: "Short-Term Retail Leasing Opportunities in Los Angeles Shopping Malls"
 image: "2026-03-06-short-term-retail-leasing-los-angeles.jpg"
-alt: "Interior of busy Los Angeles shopping mall with retail storefronts and shoppers"
-summary: "Los Angeles offers short-term retail leases from 1-24 months at $4-10 per square foot monthly, with AI-powered search tools simplifying the process of finding and securing specialty lease opportunities across the metro area."
+alt: "Interior of busy Los Angeles shopping mall with retail storefronts and shoppers walking through sunlit corridors, palm trees visible through windows"
+summary: "LA spans 503 square miles across diverse neighborhoods—manually searching properties wastes weeks. Rentail.space uses AI to find all shopping centers in range and prioritize matches for your budget and product."
 ---
 
 Finding short-term retail space in LA malls? [Rentail.space](https://rentail.space/chat) makes it easier. Conversational AI searches all shopping centers near you.

@@ -1,8 +1,8 @@
 ---
 title: "Where Can I Lease a Kiosk in a Mall for 3-6 Months?"
 image: "2026-04-10-where-can-i-lease-a-kiosk.jpg"
-alt: "Modern retail kiosk in busy shopping mall corridor with shoppers walking past"
-summary: "Use rentail.space to find 3-6 month kiosk leases in shopping centers near you through conversational AI that matches your needs to available spaces automatically."
+alt: "Modern retail kiosk in busy shopping mall corridor with shoppers walking past, displaying merchandise under bright overhead lighting"
+summary: "Finding 3-6 month kiosk leases means calling 15-20 malls individually. Rentail.space AI searches all nearby centers at once—matching your product, budget, and timeline to available spaces."
 ---
 
 You can lease a kiosk for 3-6 months at shopping centers. Most mall operators offer these short-term arrangements.

@@ -1,8 +1,8 @@
 ---
 title: "The $1 Trillion Power Shift: How Gen Z Just Took Control of Fashion"
 image: "2025-11-04-gen-z-fashion.jpg"
-alt: "Gen Z and Gen Alpha wearing fashion clothing, representing the new power shift in fashion"
-summary: "Gen Z controls 40% of fashion spending and demands physical spaces that match their speed. Pop-ups and kiosks let brands test concepts before Gen Z moves to the next trend."
+alt: "Gen Z and Gen Alpha wearing fashion clothing in vibrant streetwear, representing the new power shift in fashion spending and the demand for fast-moving retail experiences"
+summary: "Gen Z trend cycles die in days—seasonal retail calendars can't keep up. Pop-ups and kiosks at rentail.space let brands test concepts fast before the moment passes."
 ---
 
 Gen Z and Gen Alpha control 40% of fashion spending. They shop differently. They demand physical spaces that move at internet speed.

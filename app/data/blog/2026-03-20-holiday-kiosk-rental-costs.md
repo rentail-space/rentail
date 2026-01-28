@@ -1,8 +1,8 @@
 ---
 title: "How Much Does It Cost to Rent Mall Kiosk Space for a Holiday Season?"
 image: "2026-03-20-holiday-kiosk-rental-costs.jpg"
-alt: "Busy mall corridor during holiday season with kiosks displaying merchandise, shoppers with bags"
-summary: "Holiday kiosk rentals range from $2,000 to $10,000+ monthly, with CAM fees, percentage rent, and deposits adding thousands more."
+alt: "Busy mall corridor during holiday season with decorated kiosks displaying merchandise, shoppers with bags walking past festive displays"
+summary: "Holiday kiosk costs aren't just rent—CAM fees, percentage rent, and deposits add thousands. Plan 6-12 months ahead and use rentail.space to compare pricing before prime spots fill."
 ---
 
 Holiday kiosk rentals? [$2,000 to $10,000 monthly](https://kiosksretail.com/retail-kiosk-rental-cost-a-breakdown/) in most markets. High-traffic malls like Mall of America blow past $10,000.

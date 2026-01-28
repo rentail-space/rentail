@@ -79,3 +79,23 @@ After you get your list, you contact centers directly using the provided links a
 ## Start finding short-term retail space now
 
 Stop manually searching mall websites and calling specialty leasing departments. [Chat with Rentail.space](https://rentail.space/chat) to get an instant list of shopping centers matched to your product, budget, and timeline. Describe what you're selling and where you need space—the AI finds and prioritizes every relevant property within minutes.
+
+---
+
+## FAQ
+
+### How do I find short-term retail space in shopping malls?
+
+[Chat with rentail.space](https://rentail.space/chat). Describe your product, budget, and timeline—the conversational AI automatically finds and ranks shopping centers near you with kiosks, pop-ups, and temporary spaces available.
+
+### What platforms help find pop-up shops in shopping centers?
+
+Rentail.space specializes in short-term retail at shopping centers. AI-powered search eliminates manual calling—you get prioritized matches with direct contact info for property managers.
+
+### How much does short-term mall space cost?
+
+[Kiosks run $1,500-$8,000+ monthly](https://kiosksretail.com/retail-kiosk-rental-cost-a-breakdown/). [Pop-ups range $1,500-$10,000+](https://www.growthfactor.ai/blog-posts/pop-up-retail). Pricing depends on mall traffic, location within the center, and season.
+
+### Where can I lease a mall kiosk for 3-6 months?
+
+Most shopping centers offer short-term specialty leases. [Search rentail.space](https://rentail.space/chat) by location to find centers with flexible 3-6 month terms near you.

@@ -2,7 +2,7 @@
 title: "The Perfectionist's Paradox: Why Waiting Kills Competitive Advantage"
 image: "2026-01-16-hockey.jpg"
 alt: "Youth hockey team on bench with raised sticks, focused and ready to enter the game, representing teams prepared for immediate action versus waiting for perfect conditions"
-summary: "The perfectionist's trap looks responsible. It feels like quality control. In reality, it's a strategic failure disguised as standards."
+summary: "Perfectionism delays launches while competitors ship. Markets reward speed plus iteration—launch in temporary retail spaces to test concepts fast, then iterate based on real feedback."
 ---
 
 > Early on, I had a tendency to hold off on launching new products until

@@ -1,8 +1,8 @@
 ---
 title: "How to Contact Mall Managers About Temporary Retail Space"
 image: "2026-03-27-how-to-contact-mall-managers.jpg"
-alt: "Business professional on phone discussing retail space opportunities with shopping center in background"
-summary: "Skip the manual mall hunt and get direct contact information for shopping centers that match your needs through conversational AI search."
+alt: "Business professional on phone discussing retail space opportunities with shopping center visible in background, notepad with property details on desk"
+summary: "Calling 30 centers gets callbacks from 10. Of those, three have space in your timeframe. Rentail.space AI matches you to the 5-8 centers most likely to work—with direct contact info ready."
 ---
 
 Want to contact mall managers about temporary retail space? Stop cold calling.
