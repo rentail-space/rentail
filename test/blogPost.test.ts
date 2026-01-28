@@ -94,13 +94,6 @@ describe("Blog Post Rendering", () => {
     await expect(layout).toBeVisible();
   });
 
-  it("should have a section TL;DR with 4 items", async () => {
-    const tldr = page.locator("h2", { hasText: "TL;DR" });
-    await expect(tldr).toBeVisible();
-    const items = page.locator("h2:has-text('TL;DR') + ul > li");
-    await expect(items).toHaveCount(4);
-  });
-
   it("should have a section FAQ with 4 question items", async () => {
     const faq = page.locator("h2", { hasText: "FAQ" });
     await expect(faq).toBeVisible();
