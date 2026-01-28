@@ -2,7 +2,6 @@
  * Cron job to send daily alerts to users.
  */
 
-import { captureException } from "@sentry/react-router";
 import { Output, convertToModelMessages, generateText } from "ai";
 import { DateTime } from "luxon";
 import type { UserGetPayload } from "prisma/generated/models";
@@ -14,7 +13,7 @@ import prisma from "~/lib/prisma.server";
 import { recentMessages } from "~/lib/sessions.server";
 
 export async function loader() {
-  try {
+  return (async () => {
     const users = await prisma.user.findMany({
       include: { chats: true },
       where: {
@@ -35,11 +34,8 @@ export async function loader() {
       });
       await sendDailyAlertEmail({ user, ...alert });
     }
-    return null;
-  } catch (error) {
-    captureException(error);
-    throw error;
-  }
+    return new Response("OK");
+  })();
 }
 
 const Alert = zod

@@ -4,16 +4,16 @@ export const config: VercelConfig = {
   name: "rentail",
   crons: [
     {
-      path: "/cron/daily",
-      schedule: "0 5 * * *",
+      path: "/cron/daily", // Daily alerts to users
+      schedule: "0 5 * * *", // Every day at 5am
     },
     {
-      path: "/cron/visibility",
-      schedule: "0 6 * * *",
+      path: "/cron/visibility", // ChatGPT visibility checks
+      schedule: "0 6 * * *", // Every day at 6am
     },
     {
-      path: "/cron/ranking",
-      schedule: "0 7 * * *",
+      path: "/cron/seo-rank", // SEO ranking from SerpAPI
+      schedule: "0 7 * * 1", // Monday at 7am
     },
   ],
   github: {

@@ -1,3 +1,4 @@
+import type { InputJsonValue } from "@prisma/client/runtime/client";
 import {
   type ColumnDef,
   type SortingState,
@@ -57,10 +58,11 @@ export async function loader({ request }: Route.LoaderArgs) {
 
     if (queries.length > 0) {
       const expiresAt = DateTime.utc().plus({ hours: 1 }).toJSDate();
+      const value = queries as unknown as InputJsonValue;
       await prisma.cache.upsert({
+        create: { key, value, expiresAt },
+        update: { value, expiresAt },
         where: { key },
-        create: { key, value: JSON.stringify(queries), expiresAt },
-        update: { value: JSON.stringify(queries), expiresAt },
       });
     }
   }

@@ -6,15 +6,13 @@
  * Checks Google rankings for rentail.space across key search terms.
  * Stores results in the database for historical tracking.
  *
- * Usage:
- *   pnpm check-seo
- *   pnpm check-seo --method=playwright  # Use browser automation instead of API
+ * @see https://serpapi.com/search-api
  */
 
 import { ms } from "convert";
-import { delay } from "es-toolkit";
+import { delay, groupBy, partition } from "es-toolkit";
+import { DateTime } from "luxon";
 import ora from "ora";
-import { chromium } from "playwright";
 import { getJson } from "serpapi";
 import { trackApiCall } from "~/lib/apiUsageTracker";
 import env from "~/lib/env";
@@ -23,6 +21,7 @@ import terms from "./searchTerms";
 
 export type RankingResults = {
   term: string;
+  engine: string;
   results: {
     link: string;
     snippet: string;
@@ -30,138 +29,114 @@ export type RankingResults = {
   }[];
 };
 
+/**
+ * Check rankings for a given engine and return the top N results. Always
+ * includes rentail.space.
+ *
+ * @param engine - The engine to check rankings for.
+ * @param limit - The number of results to return.
+ * @returns An array of objects with hostname and count.
+ */
 export default async function checkRankings(
-  method: "playwright" | "serpapi",
-): Promise<RankingResults[]> {
+  engine: string,
+  limit: number,
+): Promise<{ hostname: string; count: number }[]> {
   const results: RankingResults[] = [];
   const spinner = ora().start(`Checking ${terms.length} terms...`);
 
   for (const term of terms) {
     spinner.text = `Checking "${term}"...`;
-    const ranking = await withCache(method, term, async () =>
-      method === "playwright"
-        ? await checkRankingWithPlaywright(term)
-        : await checkRankingWithSerpAPI(term),
+    const ranking = await withCache(engine, term, () =>
+      checkRankingWithSerpAPI(engine, term),
     );
     results.push(ranking);
-    // Rate limit: 1 request per second
-    await delay(ms("2s"));
   }
   spinner.succeed(`Checked ${terms.length} terms`);
-  return results;
+
+  const countedHostnames = Object.entries(
+    groupBy(
+      results.flatMap((query) =>
+        query.results.map((result) => new URL(result.link).hostname),
+      ),
+      (hostname) => hostname,
+    ),
+  ).map(([hostname, results]) => ({
+    hostname,
+    count: results.length,
+  }));
+  const [rentail, allOther] = partition(
+    countedHostnames,
+    ({ hostname }) => hostname === "rentail.space",
+  );
+  return [...rentail, ...allOther.slice(0, limit)].sort(
+    (a, b) => b.count - a.count,
+  );
 }
 
 /**
  * Check ranking using SerpAPI (recommended for production)
  */
-async function checkRankingWithSerpAPI(term: string): Promise<RankingResults> {
-  return await trackApiCall("serpapi", "search", async () => {
-    try {
-      const response = (await getJson({
-        engine: "google",
-        api_key: env.SERPAPI_KEY,
-        q: term,
-        location: "Los Angeles, California",
-      })) as {
-        organic_results?: {
-          position: number;
-          title: string;
-          link: string;
-          redirect_link: string;
-          displayed_link: string;
-          favicon: string;
-          snippet: string;
-          snippet_highlighted_words: string[];
-          rich_snippet: {
-            top: { detected_extensions: string[]; extensions: string[] };
-          };
-          source: string;
-        }[];
-        related_searches?: {
-          block_position: number;
-          query: string;
-          link: string;
-          serpapi_link: string;
-        }[];
-      };
-
-      // Track API usage
-
-      const results =
-        response.organic_results?.map((result) => ({
-          link: result.link,
-          title: result.title,
-          snippet: result.snippet,
-        })) ?? [];
-      return { term, results };
-    } catch (error) {
-      console.error(`Error checking "%s":`, term, error);
-      return { term, results: [] };
-    }
-  });
-}
-
-/**
- * Check ranking using Playwright browser automation (fallback/free option)
- */
-async function checkRankingWithPlaywright(
+async function checkRankingWithSerpAPI(
+  engine: string,
   term: string,
 ): Promise<RankingResults> {
-  const browser = await chromium.launch({ headless: true });
+  return await trackApiCall("serpapi", "search", async () => {
+    const response = (await getJson({
+      engine,
+      api_key: env.SERPAPI_KEY,
+      q: term,
+      location: "Los Angeles, California",
+    })) as {
+      organic_results?: {
+        position: number;
+        title: string;
+        link: string;
+        redirect_link: string;
+        displayed_link: string;
+        favicon: string;
+        snippet: string;
+        snippet_highlighted_words: string[];
+        rich_snippet: {
+          top: { detected_extensions: string[]; extensions: string[] };
+        };
+        source: string;
+      }[];
+      references?: {
+        link: string;
+        title: string;
+        snippet: string;
+      }[];
+    };
 
-  try {
-    const page = await browser.newPage();
+    // Rate limit: 1 request per second
+    await delay(ms("2s"));
 
-    // Search Google
-    await page.goto(
-      `https://www.google.com/search?q=${encodeURIComponent(term)}&num=10`,
-      { waitUntil: "domcontentloaded" },
-    );
-
-    // Wait for results
-    await page.waitForSelector("#search", { timeout: 5000 });
-
-    // Extract all organic result links
-    const results = await page.$$eval("#search div.g a[href]", (links) => {
-      return links
-        .map((link, index) => ({
-          link: (link as HTMLAnchorElement).href,
-          title: (link as HTMLAnchorElement).textContent,
-          snippet: (link as HTMLAnchorElement).textContent,
-          position: index + 1,
-          includesDomain:
-            (link as HTMLAnchorElement).hostname === "rentail.space",
-        }))
-        .filter((r) => r.includesDomain && r.position <= 10);
-    });
-
-    if (results.length > 0) {
-      return { term, results };
-    }
-
-    return { term, results: [] };
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error(`Playwright error for "${term}":`, errorMessage);
-    return { term, results: [] };
-  } finally {
-    await browser.close();
-  }
+    const results =
+      (response.organic_results ?? response.references ?? []).map((result) => ({
+        link: result.link,
+        title: result.title,
+        snippet: result.snippet,
+      })) ?? [];
+    return { engine, term, results };
+  });
 }
 
 async function withCache(
-  method: "playwright" | "serpapi",
+  engine: string,
   term: string,
   fn: () => Promise<RankingResults>,
 ) {
-  const key = `seo:${method}:${term}`;
-  const cached = await prisma.cache.findUnique({ where: { key } });
-  if (cached) return JSON.parse(cached.value as string) as RankingResults;
-  const result = await fn();
-  await prisma.cache.upsert({
-    where: { key },
-    create: { key, value: JSON.stringify(result) },
-    update: { value: JSON.stringify(result) },
+  const key = `seo:${engine}:${term}`;
+  const tenDaysAgo = DateTime.now().minus({ days: 10 }).toJSDate();
+  const cached = await prisma.cache.findUnique({
+    where: { key, createdAt: { gte: tenDaysAgo } },
   });
-  return result;
+  if (cached) return cached.value as unknown as RankingResults;
+  const value = await fn();
+  await prisma.cache.upsert({
+    create: { key, value },
+    update: { value },
+    where: { key },
+  });
+  return value;
 }

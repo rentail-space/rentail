@@ -3,6 +3,7 @@
  * Uses Google Geocoding API with caching
  */
 
+import type { InputJsonValue } from "@prisma/client/runtime/client";
 import { invariant } from "es-toolkit";
 import ora from "ora";
 import zod from "zod";
@@ -137,7 +138,7 @@ export async function geocodeCounty(
 
     // Cache result (indefinite TTL for geographic data)
     await prisma.cache.create({
-      data: { key, value: geocoded as never },
+      data: { key, value: geocoded as unknown as InputJsonValue },
     });
 
     spinner.succeed(`Geocoded ${countyName}`);

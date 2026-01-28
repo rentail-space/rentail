@@ -1,52 +1,59 @@
 import { Section } from "@react-email/components";
-import { groupBy } from "es-toolkit";
 import { twMerge } from "tailwind-merge";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails.server";
-import type { RankingResults } from "./checkRanking.server";
 
-export default async function sendSEORankAlert({
-  queries,
-}: {
-  queries: RankingResults[];
-}): Promise<void> {
+export default async function sendSEORankAlert(
+  engineQueries: {
+    engine: string;
+    queries: { hostname: string; count: number }[];
+  }[],
+): Promise<void> {
   await sendEmail({
     email: "assaf@labnotes.org",
     subject: "SEO Rank Alert",
     content: () => (
-      <EmailLayout subject={getRecommendation(queries)}>
-        <SummarySection queries={queries} />
+      <EmailLayout subject="SEO Rank Alert">
+        {engineQueries.map(({ engine, queries }) => (
+          <SummarySection key={engine} engine={engine} queries={queries} />
+        ))}
       </EmailLayout>
     ),
   });
 }
 
-function getRecommendation(results: RankingResults[]): string {
-  const count = results.filter((result) =>
-    result.results.some(
-      ({ link }) => new URL(link).hostname === "rentail.space",
-    ),
-  ).length;
-  return count >= 8
-    ? "Excellent visibility! Rentail.space is dominating ChatGPT search results."
-    : count >= 5
-      ? "Good visibility. Rentail.space appears consistently in top results."
-      : "Visibility declining. Consider content marketing or SEO improvements.";
-}
+const searchEngines = [
+  {
+    label: "Google",
+    id: "google",
+  },
+  {
+    label: "Google AI Mode",
+    id: "google_ai_mode",
+  },
+  {
+    label: "Bing",
+    id: "bing",
+  },
+  {
+    label: "DuckDuckGo",
+    id: "duckduckgo",
+  },
+];
 
-function SummarySection({ queries }: { queries: RankingResults[] }) {
-  const links = queries.flatMap((query) =>
-    query.results.map((result) => result.link),
-  );
-  const hostnames = Object.entries(
-    groupBy(links, (link) => new URL(link).hostname),
-  ).map(([hostname, group]) => ({
-    hostname,
-    count: group.length,
-  }));
-
+function SummarySection({
+  engine,
+  queries,
+}: {
+  engine: string;
+  queries: { hostname: string; count: number }[];
+}) {
   return (
     <Section>
+      <h2 className="font-bold text-lg">
+        {searchEngines.find((e) => e.id === engine)?.label || engine}
+      </h2>
+
       <table
         style={{
           width: "100%",
@@ -69,28 +76,22 @@ function SummarySection({ queries }: { queries: RankingResults[] }) {
           </tr>
         </thead>
         <tbody>
-          {hostnames
-            .sort((a, b) => b.count - a.count)
-            .map(({ hostname, count }) => (
-              <tr key={hostname}>
-                <td
-                  align="left"
-                  className={twMerge(
-                    hostname === "rentail.space" && "font-bold",
-                  )}
-                >
-                  {hostname}
-                </td>
-                <td
-                  align="right"
-                  className={twMerge(
-                    hostname === "rentail.space" && "font-bold",
-                  )}
-                >
-                  {count}
-                </td>
-              </tr>
-            ))}
+          {queries.map(({ hostname, count }) => (
+            <tr key={hostname}>
+              <td
+                align="left"
+                className={twMerge(hostname === "rentail.space" && "font-bold")}
+              >
+                {hostname}
+              </td>
+              <td
+                align="right"
+                className={twMerge(hostname === "rentail.space" && "font-bold")}
+              >
+                {count}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </Section>

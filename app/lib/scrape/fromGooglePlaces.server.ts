@@ -3,7 +3,6 @@
  * @see https://console.cloud.google.com/billing/015C92-88EA69-E2A38C/reports?project=rentail-480516&organizationId=316438173672
  */
 
-import type { InputJsonValue } from "@prisma/client/runtime/client";
 import { invariant, mapAsync } from "es-toolkit";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -154,12 +153,7 @@ export async function nearbySearch({
   );
 
   // Cache results (30-day TTL)
-  await prisma.cache.create({
-    data: {
-      key,
-      value: structured as unknown as InputJsonValue,
-    },
-  });
+  await prisma.cache.create({ data: { key, value: structured } });
 
   spinner.text = `Found ${structured.length} centers near ${location}`;
   return structured;
