@@ -25,7 +25,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   const engine = getSearchEngine(
     new URL(request.url).searchParams.get("engine"),
   );
-  const data = checkRankings(engine, 50);
+  const data = checkRankings(engine, 20);
   return { data: Promise.resolve(data) };
 }
 

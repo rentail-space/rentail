@@ -10,9 +10,8 @@
  */
 
 import { ms } from "convert";
-import { delay, groupBy, partition } from "es-toolkit";
+import { delay, groupBy, mapAsync, partition } from "es-toolkit";
 import { DateTime } from "luxon";
-import ora from "ora";
 import { getJson } from "serpapi";
 import { trackApiCall } from "~/lib/apiUsageTracker";
 import env from "~/lib/env";
@@ -41,31 +40,26 @@ export default async function checkRankings(
   engine: string,
   limit: number,
 ): Promise<{ hostname: string; count: number }[]> {
-  const results: RankingResults[] = [];
-  const spinner = ora().start(`Checking ${terms.length} terms...`);
-
-  for (const term of terms) {
-    spinner.text = `Checking "${term}"...`;
-    const ranking = await withCache(engine, term, () =>
+  const all = await mapAsync(terms, async (term) => {
+    console.info(`Checking "${term}"...`);
+    return await withCache(engine, term, () =>
       checkRankingWithSerpAPI(engine, term),
     );
-    results.push(ranking);
-  }
-  spinner.succeed(`Checked ${terms.length} terms`);
+  });
 
-  const countedHostnames = Object.entries(
+  const hostnames = Object.entries(
     groupBy(
-      results.flatMap((query) =>
+      all.flatMap((query) =>
         query.results.map((result) => new URL(result.link).hostname),
       ),
       (hostname) => hostname,
     ),
-  ).map(([hostname, results]) => ({
+  ).map(([hostname, queries]) => ({
     hostname,
-    count: results.length,
+    count: queries.length,
   }));
   const [rentail, allOther] = partition(
-    countedHostnames,
+    hostnames,
     ({ hostname }) => hostname === "rentail.space",
   );
   return [...rentail, ...allOther.slice(0, limit)].sort(
@@ -139,4 +133,16 @@ async function withCache(
     where: { key },
   });
   return value;
+}
+function foreachAsync(
+  terms: string[],
+  arg1: (term: any) => Promise<{ hostname: string; count: number }[]>,
+  arg2: (engine: string, term: string) => Promise<RankingResults>,
+  arg3: (
+    engine: string,
+    term: string,
+    fn: () => Promise<RankingResults>,
+  ) => Promise<RankingResults>,
+) {
+  throw new Error("Function not implemented.");
 }
