@@ -1,7 +1,6 @@
 import { groupBy, meanBy, sumBy } from "es-toolkit";
 import { BarChartIcon, PercentIcon, StarIcon } from "lucide-react";
 import { DateTime } from "luxon";
-import { useMemo } from "react";
 import {
   Area,
   AreaChart,
@@ -45,58 +44,46 @@ export default function VisibilityCharts({
     createdAt: Date;
   }[];
 }) {
-  const groupedByDate = useMemo(
-    () =>
-      Object.entries(
-        groupBy(visibility, ({ createdAt }) => createdAt.toISOString()),
-      ).map(([date, queries]) => ({
-        date,
-        queries: queries.map((query) => ({
-          category: query.category,
-          citations: query.citations,
-          query: query.query,
-          ratio: citationRatio(query.citations),
-          rentail: query.citations.filter(isRentail).length,
-          score: scoreCitations(query.citations),
-        })),
-      })),
-    [visibility],
-  );
+  const groupedByDate = Object.entries(
+    groupBy(visibility, ({ createdAt }) => createdAt.toISOString()),
+  ).map(([date, queries]) => ({
+    date,
+    queries: queries.map((query) => ({
+      category: query.category,
+      citations: query.citations,
+      query: query.query,
+      ratio: citationRatio(query.citations),
+      rentail: query.citations.filter(isRentail).length,
+      score: scoreCitations(query.citations),
+    })),
+  }));
 
   // Group by day so we have score, ratio, etc calculated from all
   // queries for that day
-  const dailyTotals = useMemo(
-    () =>
-      groupedByDate.map(({ date, queries }) => {
-        return {
-          date,
-          rentail: sumBy(queries, (query) => query.rentail),
-          score: sumBy(queries, (query) => query.score),
-          ratio: sumBy(queries, (query) => query.ratio),
-        };
-      }),
-    [groupedByDate],
-  );
+  const dailyTotals = groupedByDate.map(({ date, queries }) => {
+    return {
+      date,
+      rentail: sumBy(queries, (query) => query.rentail),
+      score: sumBy(queries, (query) => query.score),
+      ratio: sumBy(queries, (query) => query.ratio),
+    };
+  });
 
   // Aggregate by week so we have average score, ratio, etc for that week.
-  const weeklyAggregates = useMemo(
-    () =>
-      Object.entries(
-        groupBy(dailyTotals, ({ date }) =>
-          DateTime.fromISO(date).startOf("day").toFormat("yyyy-MM-dd"),
-        ),
-      )
-        .map(([date, metrics]) => ({
-          date,
-          rentail: meanBy(metrics, (metric) => metric.rentail),
-          score: meanBy(metrics, (metric) => metric.score),
-          ratio: meanBy(metrics, (metric) => metric.ratio),
-        }))
-        .sort((a, b) =>
-          DateTime.fromISO(a.date).diff(DateTime.fromISO(b.date)).toMillis(),
-        ),
-    [dailyTotals],
-  );
+  const weeklyAggregates = Object.entries(
+    groupBy(dailyTotals, ({ date }) =>
+      DateTime.fromISO(date).startOf("day").toFormat("yyyy-MM-dd"),
+    ),
+  )
+    .map(([date, metrics]) => ({
+      date,
+      rentail: meanBy(metrics, (metric) => metric.rentail),
+      score: meanBy(metrics, (metric) => metric.score),
+      ratio: meanBy(metrics, (metric) => metric.ratio),
+    }))
+    .sort((a, b) =>
+      DateTime.fromISO(a.date).diff(DateTime.fromISO(b.date)).toMillis(),
+    );
 
   return (
     <Card className="bg-secondary-background text-foreground">

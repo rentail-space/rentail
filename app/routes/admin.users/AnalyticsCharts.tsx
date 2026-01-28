@@ -65,8 +65,8 @@ export default function AnalyticsCharts({
   users,
 }: {
   analytics: Promise<Analytics[]>;
-  from: Date;
-  until: Date;
+  from: DateTime;
+  until: DateTime;
   users: Promise<User[]>;
 }) {
   return (
@@ -96,8 +96,8 @@ function SquareAnalyticsCharts({
   users,
 }: {
   analytics: Analytics[];
-  from: Date;
-  until: Date;
+  from: DateTime;
+  until: DateTime;
   users: User[];
 }) {
   const range = rangeOfDates(from, until);
@@ -219,11 +219,11 @@ function SpecificChart({
   );
 }
 
-function rangeOfDates(from: Date, until: Date): DateTime[] {
+function rangeOfDates(from: DateTime, until: DateTime): DateTime[] {
   const allDates: DateTime[] = [];
   for (
-    let current = DateTime.fromJSDate(from);
-    current <= DateTime.fromJSDate(until);
+    let current = from;
+    current <= until;
     current = current.plus({ days: 1 })
   )
     allDates.push(current);

@@ -5,7 +5,7 @@ export const handle = {
   headerLinks: [
     { label: "All users", to: "/admin/users" },
     { label: "All centers", to: "/admin/centers" },
-    { label: "Ranking", to: "/admin/ranking" },
+    { label: "SEO Ranking", to: "/admin/seo-rank" },
     { label: "Visibility", to: "/admin/visibility" },
     { label: "Searches", to: "/admin/searches" },
     { label: "Bots", to: "/admin/bots" },

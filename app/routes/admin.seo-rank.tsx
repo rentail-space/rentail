@@ -19,14 +19,14 @@ import {
 } from "~/components/ui/Table";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import checkRankings from "~/lib/seo-rank/checkRanking.server";
-import type { Route } from "./+types/admin.ranking";
+import type { Route } from "./+types/admin.seo-rank";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const engine = getSearchEngine(
     new URL(request.url).searchParams.get("engine"),
   );
   const data = checkRankings(engine, 20);
-  return { data: Promise.resolve(data) };
+  return { data };
 }
 
 const searchEngines = [

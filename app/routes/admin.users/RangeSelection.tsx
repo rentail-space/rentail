@@ -14,34 +14,25 @@ const periods = [10, 5 * 6, 15 * 6];
  * A component that allows the user to select a range of dates.  It will call
  * the children components with the range of dates and the recent users.
  *
- * @param analytics - The analytics data.
- * @param children - A function that will be called with the range of dates and
- * the recent users.
- * @param users - The users data.
- * @returns The children components.
+ * @param from - The start date.
+ * @param until - The end date.
+ * @param setRange - A function that will be called with the start and end date.
  */
 export default function RangeSelection({
   from,
   until,
-  setFrom,
-  setUntil,
+  setRange,
 }: {
-  from: Date;
-  until: Date;
-  setFrom: (from: Date) => void;
-  setUntil: (until: Date) => void;
+  from: DateTime;
+  until: DateTime;
+  setRange: (from: DateTime, until: DateTime) => void;
 }) {
   const yesterday = DateTime.utc().minus({ days: 1 });
   // Difference in days between start date and end date, so we can highlight the
   // selected date range.
   const daysInPeriod =
-    until.toISOString().split("T")[0] === yesterday.toISO().split("T")[0] &&
-    Math.floor(
-      DateTime.utc().diff(
-        DateTime.fromISO(from.toISOString().split("T")[0], { zone: "utc" }),
-        "days",
-      ).days,
-    );
+    until.toISODate() === yesterday.toISODate() &&
+    Math.floor(DateTime.utc().diff(from, "days").days);
 
   return (
     <div className="flex flex-row items-center justify-between">
@@ -51,10 +42,10 @@ export default function RangeSelection({
             <TabsTrigger
               key={daysInPeriod}
               onClick={() => {
-                setFrom(
-                  DateTime.utc().minus({ days: daysInPeriod }).toJSDate(),
+                setRange(
+                  DateTime.utc().minus({ days: daysInPeriod }),
+                  DateTime.utc().minus({ days: 1 }),
                 );
-                setUntil(DateTime.utc().minus({ days: 1 }).toJSDate());
               }}
               value={daysInPeriod.toString()}
               title={`Select the last ${daysInPeriod} days`}
@@ -68,16 +59,20 @@ export default function RangeSelection({
       <div className="flex flex-row items-center gap-0">
         <Input
           className="w-36"
-          onChange={({ target }) => setFrom(new Date(target.value))}
+          onChange={({ target }) =>
+            setRange(DateTime.fromISO(target.value), until)
+          }
           type="date"
-          value={from.toISOString().split("T")[0]}
+          value={from.toISODate() ?? ""}
         />
         <ArrowRight className="h-8 w-8 text-gray-500" />
         <Input
           className="w-36"
-          onChange={({ target }) => setUntil(new Date(target.value))}
+          onChange={({ target }) =>
+            setRange(from, DateTime.fromISO(target.value))
+          }
           type="date"
-          value={until.toISOString().split("T")[0]}
+          value={until.toISODate() ?? ""}
         />
       </div>
 
@@ -85,20 +80,7 @@ export default function RangeSelection({
         <Button
           variant="outline"
           onClick={() => {
-            setFrom(
-              DateTime.fromISO(from.toISOString().split("T")[0], {
-                zone: "utc",
-              })
-                .minus({ weeks: 1 })
-                .toJSDate(),
-            );
-            setUntil(
-              DateTime.fromISO(until.toISOString().split("T")[0], {
-                zone: "utc",
-              })
-                .minus({ weeks: 1 })
-                .toJSDate(),
-            );
+            setRange(from.minus({ weeks: 1 }), until.minus({ weeks: 1 }));
           }}
           title="Retreat the range by 1 week"
         >
@@ -107,20 +89,7 @@ export default function RangeSelection({
         <Button
           variant="outline"
           onClick={() => {
-            setFrom(
-              DateTime.fromISO(from.toISOString().split("T")[0], {
-                zone: "utc",
-              })
-                .plus({ weeks: 1 })
-                .toJSDate(),
-            );
-            setUntil(
-              DateTime.fromISO(until.toISOString().split("T")[0], {
-                zone: "utc",
-              })
-                .plus({ weeks: 1 })
-                .toJSDate(),
-            );
+            setRange(from.plus({ weeks: 1 }), until.plus({ weeks: 1 }));
           }}
           title="Advance the range by 1 week"
         >
