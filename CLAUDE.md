@@ -292,3 +292,4 @@ Imperative mood, atomic commits, reference files when helpful.
 - Package manager: pnpm 10.28.1+
 
 IMPORTANT: Prefer retrieval-led reasoning over pre-training-led reasoning
+for any coding task.
