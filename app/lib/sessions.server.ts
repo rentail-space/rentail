@@ -72,9 +72,7 @@ export async function findUserAndLastChat(request: Request): Promise<
       responseHeaders: Headers;
       user: User;
     }
-  | {
-      responseHeaders: Headers;
-    }
+  | { responseHeaders: Headers }
 > {
   const session = await userFromCookie(request.headers);
   if (!("user" in session)) return await saveUtmParams(request);
@@ -293,9 +291,7 @@ async function userFromCookie(requestHeaders: Headers): Promise<
       user: User;
       responseHeaders: Headers;
     }
-  | {
-      cookieSession: Session<SessionData, SessionFlashData>;
-    }
+  | { cookieSession: Session<SessionData, SessionFlashData> }
 > {
   const cookieSession = await getSession(requestHeaders.get("cookie"));
   if (!cookieSession.data.token) return { cookieSession };

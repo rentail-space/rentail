@@ -5,106 +5,39 @@ alt: "Diverse raised fists against neutral background, symbolizing team members 
 summary: "Decisive leaders jump to conclusions fast. That speed builds companies—and destroys relationships. Load context before deciding. Test retail concepts with real customers before scaling."
 ---
 
-> I'm a type-A personality and very driven. I come to conclusions quickly and
-  tend to jump to the end of a conversation even quicker. have learned to slow
-  down and listen more with an open mind to whomever I'm speaking with. Here was
-  a major breakthrough: I needed to understand that the person I'm speaking with
-  may have just gone through something very difficult, and that's what caused
-  them to behave differently than their norm. Once I understand a situation, I
-  now place myself in their shoes before determining next steps.
-
-— Henry Penix, CEO and executive chairman, Soaak Technologies
-
----
-
 Type-A leaders have a superpower: decisiveness. They see patterns fast, synthesize quickly, drive toward conclusions while others are still processing.
 
-This trait builds companies.
+This trait builds companies. It also destroys relationships.
 
-It also destroys relationships.
+## The Problem: Snap Judgments Cost You
 
-Henry Penix recognized the double edge. His instinct to jump to the end of conversations—skip the context, land on the solution—was alienating the people he needed most.
-
-The speed that made him effective as an operator was making him ineffective as a leader.
-
-## TL;DR
-
-- **Three breakdowns from velocity-only leadership**: You miss critical
-  information (assume low performance vs parent in hospice), talented people
-  leave (won't tolerate leaders who don't listen), culture becomes defensive
-  (people stop bringing problems forward, information flow breaks)
-- **Behavior isn't character**: Someone acting different than their norm signals
-  something (personal crisis, unclear expectations, misaligned incentives,
-  missing information); skipping straight to judgment misses the signal entirely
-- **Three practices for shift**: Pause before concluding (assume context you
-  don't have), place yourself in their position (imagine their pressures and
-  information), separate behavior from character (one missed deadline isn't a
-  flaw)
-- **Speed with context beats instant decisions with blind spots**: 10 minutes
-  gathering context (ask "What's changed?" and "What support do you need?")
-  loads data for better decisions; teams respect informed decisions over
-  reactive ones
-
-## The Cost of Snap Judgments
+Henry's instinct to jump to the end of conversations—skip the context, land on the solution—was alienating the people he needed most. The speed that made him effective as an operator was making him ineffective as a leader.
 
 When leaders operate purely on velocity, three breakdowns occur:
 
-First, you miss critical information. That team member who missed deadlines? You
-assume low performance. Reality: their parent just entered hospice. The snap
-judgment destroys trust before you even understand the situation.
+**You miss critical information**: That team member who missed deadlines? You assume low performance. Reality: their parent just entered hospice. The snap judgment destroys trust before you even understand the situation.
 
-Second, talented people leave. High performers don't tolerate leaders who don't
-listen. They'll endure difficult work, tight timelines, and high standards—but
-they won't stay with someone who dismisses their input or jumps to conclusions
-about their character.
+**Talented people leave**: High performers don't tolerate leaders who don't listen. They'll endure difficult work, tight timelines, and high standards—but they won't stay with someone who dismisses their input.
 
-Third, you create a culture of defensiveness. When people know you're making
-judgments before understanding context, they stop bringing problems forward.
-Information flow breaks down. You lose visibility into what's actually
-happening.
+**Culture becomes defensive**: When people know you're making judgments before understanding context, they stop bringing problems forward. Information flow breaks down. You lose visibility into what's actually happening.
 
-## The Listening Reset
+## The Solution: Context Before Conclusions
 
-Henry's breakthrough wasn't about becoming less decisive. It was about
-front-loading context before making the decision.
+Henry's breakthrough wasn't about becoming less decisive. It was about front-loading context before making the decision.
 
-His key insight: behavior isn't character. Someone acting differently than their
-norm is signaling something—personal crisis, unclear expectations, misaligned
-incentives, or missing information. Leaders who skip straight to judgment miss
-the signal entirely.
+His key insight: behavior isn't character. Someone acting differently than their norm is signaling something—personal crisis, unclear expectations, misaligned incentives, or missing information. Leaders who skip straight to judgment miss the signal entirely.
 
-Consider the operational difference. A usually reliable manager starts missing
-meetings and delivering work late. The snap judgment: performance issue, manage
-them out. The listening approach: schedule a direct conversation, ask what's
-changed, understand the context.
+**Pause before concluding**: When you notice behavioral changes, assume context you don't have. Ask questions before forming opinions.
 
-Maybe they're dealing with a family emergency. Maybe role expectations shifted
-without clear communication. Maybe they're drowning in poorly delegated work
-from three different executives. Each scenario requires a completely different
-response.
+**Place yourself in their position**: Literally imagine yourself in that person's situation. What pressures are they facing? What information might they have that you don't?
 
-## Making the Shift
+**Separate behavior from character**: One missed deadline isn't a character flaw. A pattern without context might be—but you won't know until you listen.
 
-Transitioning from snap judgments to open listening requires three practices:
+## Speed With Context
 
-**Pause before concluding.** When you notice behavioral changes, assume context
-you don't have. Ask questions before forming opinions.
+The best leaders are still decisive. They just load better data before pulling the trigger.
 
-**Place yourself in their position.** Henry's framework: before determining next
-steps, literally imagine yourself in that person's situation. What pressures are
-they facing? What information might they be operating with that you're not
-seeing?
-
-**Separate behavior from character.** One missed deadline isn't a character
-flaw. A pattern without context might be—but you won't know until you listen.
-
-## The Bottom Line
-
-Speed matters. But speed without context creates expensive mistakes—lost talent,
-broken trust, and blind spots that compound over time.
-
-The best leaders are still decisive. They just load better data before pulling
-the trigger.
+Ten minutes gathering context beats instant decisions with blind spots. Ask "What's changed?" and "What support do you need?" Teams respect informed decisions over reactive ones.
 
 Listen first. Decide fast. Execute with clarity.
 
@@ -129,7 +62,3 @@ The opposite. Teams respect informed decisions, not reactive ones. Asking questi
 ### Where can I find retail space to test concepts?
 
 [Browse rentail.space](https://rentail.space/chat) for available temporary spaces at shopping centers. Test with real customers, gather context, iterate fast.
-
-### How do I find short-term retail space?
-
-Search by location to see available kiosks, pop-ups, and carts with photos, pricing, and terms.

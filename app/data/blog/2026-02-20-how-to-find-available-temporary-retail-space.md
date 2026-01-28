@@ -7,113 +7,90 @@ summary: "Calling 30 mall offices to find temporary space wastes days. Rentail.s
 
 Finding available temporary retail space shouldn't require calling 30 mall offices.
 
-[Rentail.space](https://rentail.space/chat) uses AI to find shopping centers near you with actual availability. Describe what you're selling, when you need it, your budget—done. The AI searches everything nearby and ranks the best matches.
+[Rentail.space](https://rentail.space/chat) uses AI to find shopping centers near you with actual availability. Describe what you're selling, when you need it, your budget—done.
 
-Traditional method: Call mall offices one by one, leave voicemails, wait for callbacks, repeat your pitch 20 times. New method: One conversation with AI, get a prioritized list.
+## The Problem: Manual Searching Is Broken
 
-## TL;DR
+**Old way**: Call mall offices one by one. Leave voicemails. Wait for callbacks. Repeat your pitch 20 times.
 
-- Temporary retail leases in shopping centers range from [one day to one year](https://www.inventrustproperties.com/short-term/), including kiosks, carts, and pop-up spaces
-- AI-powered search finds all shopping centers within your driving radius and matches you to properties with current availability
-- Conversational search eliminates manual calling and broker hunting by understanding your product type, timeframe, and budget through dialogue
-- Specialty leasing spaces typically cost less than traditional storefronts and require shorter commitments
-- [Median lease-up time dropped below 7 months in 2026](https://www.credaily.com/briefs/retail-resilience-driving-2026-real-estate-trends/), indicating high demand and faster turnover
+Three days later, nobody's called back. You've spent hours on hold. Half the properties you reached don't have space in your timeframe.
 
-## Skip the phone tree
+Most shopping center websites don't list short-term availability publicly. They're designed for long-term anchor tenants, not pop-ups or seasonal businesses. You have to call and ask.
 
-Old way: Call individual centers. Leave voicemails. Wait for callbacks. Repeat your pitch to 15 different leasing managers.
+## The Solution: One Conversation, All Options
 
-New way: Talk to AI once. It searches 20-30 miles automatically.
+Rentail.space finds all shopping centers within your driving radius and matches you to properties with current availability.
+
+**How it works**:
+
+1. Describe your product and ideal customer
+2. Specify your timeframe and budget
+3. Get prioritized matches with direct contact info
 
 Say "I sell handmade jewelry, need a kiosk for the holidays starting November" or "Looking for a 10x10 space to test my skincare line for 3 months."
 
-The AI gets it. It knows "holiday season" means October-December. It knows "test my skincare line" means you're new and need affordable options. It matches these details to shopping centers and returns clickable links.
+The AI understands context. "Holiday season" means October-December. "Test my skincare line" means you're new and need affordable options. It matches these details to shopping centers and returns clickable links.
 
-Each link shows the property, address, phone number. See which malls fit, then reach out directly.
+## Describe Your Product for Better Matches
 
-## Describe your product and ideal customer to get better matches
+Shopping centers specialize in different demographics. A lifestyle center attracting affluent suburban families differs from an urban mall focused on teen fashion.
 
-Shopping centers specialize in different demographics and retail categories. A lifestyle center attracting affluent suburban families differs from an urban mall focused on teen fashion or a strip center serving everyday convenience shoppers.
+Tell the AI what you're selling and who buys it:
 
-Tell the AI what you're selling and who buys it. "I have a premium coffee subscription service targeting professionals aged 30-50 with household incomes above $100K" gives the system enough information to prioritize upscale properties in business districts or affluent suburbs.
+- "Premium coffee subscription service targeting professionals aged 30-50" → upscale properties in business districts
+- "Budget phone accessories for teens and college students" → higher foot traffic, younger demographics
 
-Similarly, "budget phone accessories for teens and college students" signals different requirements—higher foot traffic, younger demographics, price-conscious shoppers. The AI weighs these factors when ranking shopping centers.
+Product category matters for landlord approval too. Centers evaluate whether your offering fits their tenant mix. Describing your product clearly helps the AI suggest centers more likely to approve you.
 
-Product category matters for landlord approval too. [Specialty leasing tenants provide variety beyond national chains](https://shoppingcenters.com/article/what-specialty-leasing/), but property managers still evaluate whether your offering fits their tenant mix. Describing your product clearly helps the AI suggest centers more likely to approve your category.
+## Specify Your Timeframe
 
-The system doesn't show you photos of available spaces or let you filter by amenities. It's not a visual search tool. Instead, it acts like a knowledgeable local advisor who understands the market and makes recommendations based on your conversation.
+Temporary retail leases vary from a few days to two years. Most specialty leases fall in the 1-12 month range.
 
-## Specify your timeframe and get realistic availability
+- **3-day weekend activation** requires different inventory than **6-month seasonal lease**
+- **Holiday kiosks** (October-December) book months in advance
+- **Post-holiday spaces** (January-March) often have more availability
 
-[Temporary retail lease terms vary from a few days to two years](https://www.brookfieldproperties.com/en/our-businesses/retail/leasing/specialty-leasing/pop-ups/), with most specialty leases falling in the 1-12 month range. Shopping centers allocate space differently depending on duration.
+State your exact timeframe: "March 15 to June 15" or "2-week trial in late April." The AI considers seasonal demand and suggests centers more likely to have openings during your window.
 
-A 3-day weekend activation during a major event requires different inventory than a 6-month seasonal lease. Holiday kiosks (October-December) book months in advance, while post-holiday spaces (January-March) often have more availability.
+## Mention Your Budget
 
-State your exact timeframe: "I need space from March 15 to June 15" or "Looking for a 2-week trial run in late April." The AI considers seasonal demand patterns and suggests centers more likely to have openings during your window.
+Specialty leasing typically costs less than traditional store leases. Pricing varies by location, size, duration, and traffic.
 
-Some properties maintain waiting lists for popular seasons. Others have immediate availability but shorter minimum terms. By knowing your dates upfront, you avoid contacting centers that can't accommodate your schedule.
+- **Flat monthly rates**: $2,000-$5,000 for kiosks, $5,000-$15,000 for pop-ups
+- **Percentage rent**: 8-15% of gross sales
+- **Hybrid models**: Base rent plus percentage overages
 
-The system also understands flexibility. "Sometime in the next 3 months" or "ideally spring but summer works too" tells the AI you're open to recommendations based on when space actually opens up, potentially giving you more options.
+Tell the AI your constraints: "Up to $3,000 per month" or "Looking for percentage-only deals since I'm testing a new concept." This helps prioritize centers within your range.
 
-## Mention your budget to prioritize affordable options
+## Skip the Research
 
-[Specialty leasing typically costs less than traditional store leases](https://www.brookfieldproperties.com/en/our-businesses/retail/leasing/kiosks-carts-specialty-leasing/pop-ups.html), with pricing based on location, size, duration, and foot traffic. A kiosk in a premium regional mall costs more than a similar space in a community shopping center.
+Each center in your results links to a dedicated page with:
 
-Rental structures vary. Some landlords charge flat monthly rates ($2,000-$5,000 for kiosks, $5,000-$15,000 for pop-ups). Others use percentage rent (8-15% of gross sales) or hybrid models combining base rent plus percentage overages.
+- Property photo
+- Full street address
+- Direct phone number to leasing office
+- Description of tenant mix and property features
 
-Tell the AI your budget constraints: "I can spend up to $3,000 per month" or "Looking for percentage-only deals since I'm testing a new concept." This helps prioritize centers within your financial range.
+You contact centers directly using provided links and phone numbers. The AI gets you to the right properties faster.
 
-The AI doesn't show pricing directly—that comes from conversations with individual property managers—but it uses your budget signal to recommend appropriate property tiers. If you mention a limited budget, it won't suggest flagship luxury malls with $10,000 minimum monthly kiosks.
+**[Start searching at rentail.space](https://rentail.space/chat)**—describe your needs and get personalized shopping center recommendations.
 
-Being upfront about money saves time. You'll get a focused list of centers where the economics make sense rather than contacting properties far outside your range.
+---
 
-## Let AI recommendations guide you to less obvious opportunities
+## FAQ
 
-You might only know the major malls in your area, but shopping centers include lifestyle centers, power centers, outlet malls, and mixed-use developments—many with specialty leasing programs you haven't heard of.
+### How do I find available temporary retail space in shopping centers?
 
-The AI searches comprehensively across property types within your radius. A conversation about selling athletic supplements might surface a lifestyle center anchored by a fitness chain, even if that center never crossed your mind.
+[Chat with rentail.space](https://rentail.space/chat) and describe your product, budget, and timeline. The AI finds all shopping centers nearby with temporary space availability.
 
-Similarly, mentioning "families with young children" could highlight a center near schools and family entertainment venues that doesn't advertise widely but fits your customer profile perfectly.
+### What platforms help find short-term retail spaces?
 
-This discovery aspect separates AI search from manual research. You can't call properties you don't know exist, and commercial listing sites often emphasize larger traditional retail spaces over temporary specialty leases.
+Rentail.space specializes in temporary retail at shopping centers. AI-powered search eliminates manual calling—you get prioritized matches with direct contact info.
 
-The system makes suggestions: "Three centers in your area have strong foot traffic from your target demographic" or "This lifestyle center recently added several specialty tenants in complementary categories." These insights come from analyzing property characteristics, not just matching keywords.
+### How much does temporary retail space cost?
 
-## Review center pages and contact properties directly
+Kiosks run $2,000-$5,000 monthly. Pop-ups range $5,000-$15,000. Some use percentage rent (8-15% of sales). Pricing depends on location, traffic, and season.
 
-After your conversation, you receive a list of shopping center links. Click each to see:
+### When should I start looking for holiday retail space?
 
-- Property photo showing the center exterior or common areas
-- Full street address for visiting in person
-- Direct phone number to the leasing office
-- Description covering tenant mix, anchors, and property features
-
-This gives you everything needed to make contact. Call the leasing manager, reference the specific property, and discuss available spaces, exact pricing, lease terms, and approval requirements.
-
-The AI already filtered for centers likely to have availability, so you're not making blind calls. You know these properties operate specialty leasing programs and fit your general requirements.
-
-Some centers respond immediately with available options. Others schedule site visits to show physical spaces and discuss tenant mix compatibility. Either way, you start conversations with qualified leads rather than cold-calling random malls.
-
-## Why conversational AI beats traditional search methods
-
-Manual search requires knowing which shopping centers exist nearby, finding contact information for each, explaining your needs repeatedly, and waiting for responses that may never come. Commercial listing platforms like [LoopNet](https://www.loopnet.com/search/retail-space/for-lease/) focus on traditional retail leases, not short-term specialty placements.
-
-Working with commercial real estate brokers adds cost and time. Brokers provide value for complex deals but represent an extra step for straightforward temporary leases where you can negotiate directly.
-
-Conversational AI eliminates these friction points:
-
-- **Location awareness**: Automatically finds all centers within driving distance
-- **Requirement understanding**: Learns your needs through natural dialogue instead of rigid forms
-- **Intelligent matching**: Prioritizes centers based on your product, timeframe, and budget
-- **Direct access**: Provides phone numbers and addresses for immediate contact
-- **No intermediaries**: You speak directly with property managers who approve leases
-
-The system doesn't replace the landlord relationship or negotiation process. It accelerates the discovery phase so you spend time talking to relevant properties instead of searching for them.
-
-With [40% of retail space leased getting absorbed in just five months](https://www.credaily.com/briefs/retail-resilience-driving-2026-real-estate-trends/) and lease-up times at record lows, speed matters. Finding available space quickly gives you more options before the best locations fill up.
-
-## Get started finding available temporary retail space today
-
-Visit [rentail.space/chat](https://rentail.space/chat) to start a conversation about your temporary retail space needs. The AI will ask about your product, location preferences, timeframe, and budget, then provide a personalized list of shopping centers to contact.
-
-Your first search takes minutes. You'll know which properties to call, what spaces they typically offer, and how to reach decision-makers directly. No forms, no manual research, no broker fees—just relevant shopping center recommendations based on your specific requirements.
+Start 6-12 months ahead. Holiday kiosks (October-December) book months in advance. [Search rentail.space](https://rentail.space/chat) to find centers with confirmed availability.

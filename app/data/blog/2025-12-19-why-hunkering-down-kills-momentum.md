@@ -9,189 +9,45 @@ Missed sales target. Key hire quits. Product launch flops.
 
 Your instinct screams: retreat. Analyze everything. Don't make the next move until you've figured out what went wrong.
 
-Wait for clarity.
+This feels like responsible leadership. It's actually the fastest way to kill your company.
 
-This feels like responsible leadership.
+## The Problem: Withdrawal Cascades
 
-It's actually the fastest way to kill your company.
+When leaders go dark after setbacks, three failures cascade fast:
 
-> Early on in my journey, every little setback would derail me. This often made
-  me a hermit instead of a leader, discouraged my team, and limited all of our
-  productivity. After a few years, I realized things were never as great or as
-  bad as they seemed in the moment. A peer founder told me to take the 90-day
-  trailing average of my sentiment as a more reliable snapshot of the business.
-  So learned to execute excellently on what I can control, let go of what i
-  can't, and trust the process from there.
+**Team confidence evaporates**: If the CEO is rattled, everyone assumes the ship is sinking. Anxiety spreads. Top performers start taking recruiter calls. Your silence screams "we're doomed" louder than any all-hands meeting.
 
-— Brad Savage, founder and CEO, Gardencup
+**Decision velocity collapses**: Problems that need rapid iteration sit in limbo while you process emotions. Competitors move. Markets shift. Every day you spend in analysis paralysis, someone else is shipping.
 
-## The Numbers Don't Lie
+**Feedback loops break**: Hunkering down means avoiding customers, investors, and advisors—exactly the people who could provide perspective or open doors. You cut yourself off from the oxygen your business needs.
 
-**CB Insights**: 23% of startups fail from team issues. Dig deeper and you'll
-find a pattern: CEO withdrawal following a setback correlates with a **68% spike
-in employee churn** within 90 days.
+## The Solution: Execute Through Setbacks
 
-**Carta analysis**: Companies where founders maintain communication cadence
-during downturns have a **3.2x higher survival rate**.
+Brad's breakthrough came from a peer founder who asked: "How do you actually know if things are getting worse, or if you just had a bad week?"
 
-The hermit response isn't just uncomfortable. It's lethal.
+**The 90-day reset**: Track weekly sentiment on a 1-10 scale, then calculate a rolling 90-day average. That brutal week where two deals fell through? Could be a 3. But if your 90-day average is still a 7, you're experiencing volatility, not decline.
 
-## TL;DR
+This framework forces you to distinguish between:
 
-- **The Withdrawal Trap:** When you go dark after a setback, three failures
-  cascade fast: top performers start interviewing elsewhere, critical decisions
-  sit in limbo, and you cut yourself off from the customers and investors who
-  could provide perspective.
-- **The 90-Day Reset:** Track weekly sentiment (1-10 scale), then calculate your
-  rolling 90-day average. That brutal week where two deals fell through? Noise.
-  The actual trajectory reveals itself across quarters, not days.
-- **Persistence as Discipline:** Control what you can (customer calls, product
-  improvements, team communication). Release what you can't (market timing,
-  competitor moves). Trust the process—most founders quit right before the
-  inflection point.
-- **The Leadership Effect:** Your team takes emotional cues from you. When you
-  persist through setbacks with clear-eyed execution, you give them permission
-  to do the same. Markets reward persistence over perfection.
-
-## The Withdrawal Trap
-
-When leaders go dark after setbacks, three failures cascade—fast:
-
-### 1. Team Confidence Evaporates
-
-If the CEO is rattled, everyone assumes the ship is sinking. Anxiety spreads
-like wildfire. Top performers start taking recruiter calls. Your silence screams
-"we're doomed" louder than any all-hands meeting.
-
-**What happens**: That A-player engineer who was committed last week? Now
-interviewing at your competitor. Your best salesperson? Updating their LinkedIn.
-Your withdrawal becomes their permission to plan exit strategies.
-
-### 2. Decision Velocity Collapses
-
-Problems that need rapid iteration sit in limbo while you process emotions.
-Competitors move. Markets shift. Opportunities close. Every day you spend in
-analysis paralysis, someone else is shipping.
-
-**What happens**: The product bug that needs fixing? Still broken three weeks
-later. The customer complaint that needs addressing? Now an angry LinkedIn post.
-The strategic opportunity? Went to the competitor who executed while you
-deliberated.
-
-### 3. The Feedback Loop Breaks
-
-Hunkering down means avoiding customers, investors, and advisors—exactly the
-people who could provide perspective or open doors. You cut yourself off from
-the oxygen your business needs.
-
-**What happens**: That investor who could connect you to three enterprise
-customers? Stops reaching out. The advisor with relevant experience? Gives up
-trying to help. The customer who would tell you exactly what's wrong? Takes
-their budget elsewhere.
-
----
-
-## Brad's Pattern: From Hermit to Leader
-
-Brad Savage's early years at Gardencup followed a predictable cycle. Big
-customer churns? He'd disappear into spreadsheets for a week, canceling team
-meetings while he "figured things out." Product launch underwhelms? Radio
-silence while he rebuilt the roadmap alone. Key hire rejects the offer? He'd
-freeze all recruiting to "rethink the strategy."
-
-Classic hermit CEO behavior.
-
-His team didn't need a strategist hiding in data. They needed a leader showing
-them how to execute when conditions aren't perfect. Every withdrawal sent the
-same message: *when things get hard, we stop moving.*
-
-## The 90-Day Reset
-
-Brad's breakthrough came from a peer founder who asked a simple question: "How
-do you actually know if things are getting worse, or if you just had a bad
-week?"
-
-The answer: track weekly sentiment on a 1-10 scale, then calculate a rolling
-90-day average. This mental model changes everything.
-
-That brutal week where two deals fell through and your best engineer quit? Could
-be a 3. But if your 90-day average is still a 7, you're experiencing volatility,
-not decline. The spike of euphoria from landing one big customer? Could be a 9.
-But if your 90-day average is stuck at 4, you're celebrating noise while
-ignoring signal.
-
-**The framework works because it forces you to distinguish between:**
-
-- Short-term turbulence (weeks) ← Don't overreact
-- Medium-term trends (quarters) ← Pay close attention
-- Long-term trajectory (years) ← Strategic decisions only
-
-Most founders make the mistake Brad did: pivoting the business based on a bad
-week, or ignoring serious problems because one good day felt like momentum.
+- Short-term turbulence (weeks) → Don't overreact
+- Medium-term trends (quarters) → Pay close attention
+- Long-term trajectory (years) → Strategic decisions only
 
 ## Persistence as Execution
 
-The shift from hunkering down to persisting isn't about blind optimism. It's
-about operational discipline across three dimensions:
+The shift from hunkering down to persisting isn't about blind optimism. It's about operational discipline:
 
-### 1. Control What You Can
+**Control what you can**: Customer calls, product improvements, team communication. A customer churns? 2-hour post-mortem → document lessons → adjust pitch → make 15 new calls by end of week.
 
-These actions don't require perfect market conditions or resolved strategy
-questions:
+**Release what you can't**: Market timing, competitor moves, economic conditions. Acknowledge them. Adjust tactics if needed. Don't let uncontrollables become excuses to stop executing.
 
-- **Customer calls** — Schedule them. Show up. Listen. Execute feedback.
-- **Product improvements** — Ship the bug fix. Add the feature. Test the
-  hypothesis.
-- **Team communication** — Run the all-hands. Give clear direction. Answer
-  questions.
+**Trust the process**: Compounding happens slowly, then suddenly. Most founders quit in months 7-12, right before the inflection point.
 
-A customer churns. The hunkering response: spiral into analysis paralysis,
-question the entire business model, delay the next ten sales calls.
+## The Leadership Effect
 
-The persisting response: 2-hour post-mortem → document lessons → adjust pitch →
-make 15 new calls by end of week.
+Your team takes emotional cues from you. When you persist through setbacks with clear-eyed execution, you give them permission to do the same. When you hunker down, you signal defeat.
 
-### 2. Release What You Can't
-
-These variables burn mental energy without generating results:
-
-- **Market timing** — Can't control when buyers have budget
-- **Competitor moves** — Can't stop them from copying your features
-- **Economic conditions** — Can't change interest rates or recession fears
-
-Acknowledge them. Adjust your tactics if needed. But don't let uncontrollable
-factors become an excuse to stop executing on what you *can* control.
-
-### 3. Trust the Process
-
-Compounding happens slowly, then suddenly. Brad tracked this at Gardencup:
-
-- **Months 1-6:** Felt like nothing was working (sentiment: 4-5 range)
-- **Months 7-12:** Small wins accumulated, still grinding (sentiment: 5-6 range)
-- **Months 13-18:** Inflection point hit, revenue 3x'd (sentiment: 8-9 range)
-
-Most founders quit in months 7-12. The progress is there—it's just not visible
-yet. Your 90-day average shows the trajectory before your bank account does.
-
-## The Practical Difference
-
-Here's what this looks like in action—same setbacks, completely different
-execution patterns:
-
-| Scenario | Hermit Response (Typical) | Persistence Response (Brad's Model) | 90-Day Outcome |
-| -------- | ------------------------- | ----------------------------------- | -------------- |
-| Major customer churns | 7-day analysis paralysis, delayed outreach | 2-hour post-mortem, 15 new calls same week | +$47K recovered pipeline |
-| Product launch flops | Retreat to rework for 6 weeks | Ship fixes in 10 days, user feedback loop | 2.3x engagement in iteration 2 |
-| Key hire rejects offer | Freeze hiring, question strategy | Restart search next day, close backup candidate | -5 days time to fill |
-
-## The Leadership Mandate
-
-Your team takes emotional cues from you. When you persist through setbacks with
-clear-eyed execution, you give them permission to do the same. When you hunker
-down, you signal defeat.
-
-Markets reward persistence, not perfection. The founders who win aren't the ones
-who avoid setbacks—they're the ones who execute through them.
+Markets reward persistence, not perfection. The founders who win aren't the ones who avoid setbacks—they're the ones who execute through them.
 
 **Keep moving in retail:** [Find temporary spaces on rentail.space](https://rentail.space/chat) to test concepts after setbacks. Iterate fast, don't hunker down.
 
@@ -201,11 +57,11 @@ who avoid setbacks—they're the ones who execute through them.
 
 ### How do I handle business setbacks?
 
-Track weekly sentiment, calculate a 90-day average, and make decisions based on trends—not single bad days. Rate your week 1-10, and don't pivot unless the average shifts significantly over time.
+Track weekly sentiment, calculate a 90-day average, and make decisions based on trends—not single bad days. Don't pivot unless the average shifts significantly over time.
 
 ### What should I do immediately after a failure?
 
-Communicate with your team within 2 hours using "Fact → Plan → Focus." Schedule external conversations same day. Identify one quick win to execute this week—movement beats analysis paralysis.
+Communicate with your team within 2 hours. Schedule external conversations same day. Identify one quick win to execute this week—movement beats analysis paralysis.
 
 ### How do I keep my team motivated during tough times?
 
@@ -214,7 +70,3 @@ Stay visible and give clear direction. Don't hide after bad news—your presence
 ### Where can I find retail space to test new concepts?
 
 [Browse rentail.space](https://rentail.space/chat) for temporary spaces at shopping centers. Test ideas, gather feedback, iterate—don't hunker down.
-
-### How do I find short-term retail space?
-
-Search by location for available kiosks, pop-ups, and carts with flexible terms. Launch fast, learn, improve.
