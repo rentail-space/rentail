@@ -40,12 +40,9 @@ export default async function checkRankings(
   engine: string,
   limit: number,
 ): Promise<{ hostname: string; count: number }[]> {
-  const all = await mapAsync(terms, async (term) => {
-    console.info(`Checking "${term}"...`);
-    return await withCache(engine, term, () =>
-      checkRankingWithSerpAPI(engine, term),
-    );
-  });
+  const all = await mapAsync(terms, (term) =>
+    withCache(engine, term, () => checkRankingWithSerpAPI(engine, term)),
+  );
 
   const hostnames = Object.entries(
     groupBy(
@@ -133,16 +130,4 @@ async function withCache(
     where: { key },
   });
   return value;
-}
-function foreachAsync(
-  terms: string[],
-  arg1: (term: any) => Promise<{ hostname: string; count: number }[]>,
-  arg2: (engine: string, term: string) => Promise<RankingResults>,
-  arg3: (
-    engine: string,
-    term: string,
-    fn: () => Promise<RankingResults>,
-  ) => Promise<RankingResults>,
-) {
-  throw new Error("Function not implemented.");
 }

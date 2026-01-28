@@ -5,7 +5,6 @@
   "scripts": {
     "build": "prisma generate && react-router build --force",
     "check": "secretlint **/* --format stylish && biome lint && react-router typegen && tsc --noEmit --strict",
-    "check-seo": "tsx scripts/checkSeoRanking.ts",
     "clean": "rm -rf node_modules/.vite .react-router build",
     "clone": "./scripts/clone.sh",
     "dev": "react-router dev",

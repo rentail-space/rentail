@@ -15,14 +15,14 @@ datasource db {
 }
 
 model ApiUsage {
-  id        String   @id @default(cuid())
-  service   String   @map("service")   // "google-places", "google-geocoding", "serpapi"
-  endpoint  String   @map("endpoint")  // "nearby-search", "geocode", "photo", etc.
-  month     String   @map("month")     // "2026-01" for monthly aggregation
-  count     Int      @map("count")     @default(0)
-  cost      Float    @map("cost")      @default(0)
-  createdAt DateTime @map("created_at") @default(now())
-  updatedAt DateTime @map("updated_at") @updatedAt
+  id        String                                                                     @id @default(cuid())
+  service   String   @map("service") // "google-places", "google-geocoding", "serpapi"
+  endpoint  String   @map("endpoint") // "nearby-search", "geocode", "photo", etc.
+  month     String   @map("month") // "2026-01" for monthly aggregation
+  count     Int      @map("count")                                                     @default(0)
+  cost      Float    @map("cost")                                                      @default(0)
+  createdAt DateTime @map("created_at")                                                @default(now())
+  updatedAt DateTime @map("updated_at")                                                @updatedAt
 
   @@unique([service, endpoint, month])
   @@index([month])
@@ -30,10 +30,9 @@ model ApiUsage {
 }
 
 model Cache {
-  key       String    @map("key")        @id
-  value     Json      @map("value")      @db.Json
-  createdAt DateTime  @map("created_at") @default(now())
-  expiresAt DateTime? @map("expires_at")
+  key       String   @map("key")        @id
+  value     Json     @map("value")      @db.Json
+  createdAt DateTime @map("created_at") @default(now())
 
   @@map("cache")
 }
@@ -280,13 +279,13 @@ model VisibilityCheck {
 }
 
 model BotVisit {
-  id        String   @id @default(cuid())
-  date      DateTime @db.Date
+  id        String                      @id @default(cuid())
+  date      DateTime                    @db.Date
   userAgent String   @map("user_agent") @db.Text
   botType   String   @map("bot_type")
   path      String   @map("path")
   ip        String?  @map("ip")
-  count     Int      @default(0)
+  count     Int                         @default(0)
   firstSeen DateTime @map("first_seen") @default(now())
   lastSeen  DateTime @map("last_seen")  @updatedAt
 

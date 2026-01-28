@@ -10,7 +10,8 @@ code in this repository.
 - `pnpm dev` - Start dev server (port 5173)
 - `pnpm build` - Build for production
 - `pnpm check` - Lint + typecheck (run before committing)
-- `pnpm test` - Full test suite
+- `pnpm test` - Full suite (check + vitest)
+- `pnpm format --write` - Auto-format with Biome
 
 **Common Tasks:**
 
@@ -191,10 +192,12 @@ businesses with short-term retail spaces in shopping centers.
 **Add Blog Post:**
 
 1. Create markdown in `app/data/blog/YYYY-MM-DD-slug.md`
-2. Add YAML frontmatter (title, description, date, author, tags)
-3. Images go in `public/blog/`
+2. Add YAML frontmatter: `title`, `image`, `alt`, `summary`
+3. Images go in `public/blog/` (match filename: `YYYY-MM-DD-slug.jpg`)
 4. Auto-discovered via `blogPosts.server.ts`
 5. Use `tsx scripts/updateBlogSchedule.ts` to manage post scheduling
+6. Follow rentail voice: direct, problem-solution focused, strong CTAs linking
+   to rentail.space/chat
 
 **Add MCP Tool:**
 
@@ -245,6 +248,10 @@ Imperative mood, atomic commits, reference files when helpful.
 - `Verification` - Email verification tokens
 - `Cache` - Generic key-value store (geocoding, API results)
 - `State` - US state data (abbreviation, name, lede)
+- `City`, `County`, `MetroArea`, `RegionalName` - Geographic hierarchy
+- `ApiUsage` - API call tracking (Google Places, Geocoding, SerpAPI)
+- `BotVisit` - Bot traffic tracking
+- `VisibilityCheck` - AI visibility/citation tracking
 
 ## Environment Variables
 
@@ -281,3 +288,7 @@ Imperative mood, atomic commits, reference files when helpful.
 - All pages need `<main>` with `aria-label` for accessibility
 - Center seed files MUST have valid `website` property
 - Store AI planning docs in `history/` directory (not repo root)
+- Node.js 24.10.1+ required (see `engines` in package.json)
+- Package manager: pnpm 10.28.1+
+
+IMPORTANT: Prefer retrieval-led reasoning over pre-training-led reasoning

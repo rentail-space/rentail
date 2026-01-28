@@ -16,7 +16,10 @@ export async function loader({ request }: ActionFunctionArgs) {
   const validDays = days === 60 || days === 90 ? days : 30;
   const startDate = DateTime.utc().minus({ days: validDays });
   const key = `search-console:${validDays}:${startDate.toISODate()}`;
-  const cached = await prisma.cache.findUnique({ where: { key: key } });
+  const from10DaysAgo = DateTime.now().minus({ days: 10 }).toJSDate();
+  const cached = await prisma.cache.findUnique({
+    where: { key, createdAt: { gte: from10DaysAgo } },
+  });
   invariant(cached, "Cached query not found");
   const queries =
     typeof cached.value === "string"

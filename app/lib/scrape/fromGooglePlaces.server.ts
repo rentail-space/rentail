@@ -4,6 +4,7 @@
  */
 
 import { invariant, mapAsync } from "es-toolkit";
+import { DateTime } from "luxon";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import ora, { type Ora } from "ora";
@@ -140,11 +141,15 @@ export async function nearbySearch({
   const key = `nearby-search:${location}`;
 
   // Check cache
-  const cached = await prisma.cache.findUnique({ where: { key } });
+  const from30DaysAgo = DateTime.now().minus({ days: 30 }).toJSDate();
+  const cached = await prisma.cache.findUnique({
+    where: { key, createdAt: { gte: from30DaysAgo } },
+  });
   if (cached) {
     spinner.text = `Nearby search (${location}) - cached`;
     return cached.value as unknown as zod.infer<typeof placeDetailsSchema>[];
   }
+
   // Call API with retry logic
   const openPlaces = await searchNearbyRaw({ point, radiusMeters });
   const structured = await mapAsync(

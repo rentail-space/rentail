@@ -42,10 +42,13 @@ export async function loader({ request }: Route.LoaderArgs) {
   const startDate = endDate.minus({ days });
   const key = `search-console:${days}:${startDate.toISODate()}`;
 
-  const cached = await prisma.cache.findUnique({ where: { key } });
+  const from10DaysAgo = DateTime.now().minus({ days: 10 }).toJSDate();
+  const cached = await prisma.cache.findUnique({
+    where: { key, createdAt: { gte: from10DaysAgo } },
+  });
   let queries: SearchQuery[];
 
-  if (cached && (!cached.expiresAt || cached.expiresAt >= new Date())) {
+  if (cached) {
     queries =
       typeof cached.value === "string"
         ? (JSON.parse(cached.value) as SearchQuery[])
@@ -57,11 +60,10 @@ export async function loader({ request }: Route.LoaderArgs) {
     });
 
     if (queries.length > 0) {
-      const expiresAt = DateTime.utc().plus({ hours: 1 }).toJSDate();
       const value = queries as unknown as InputJsonValue;
       await prisma.cache.upsert({
-        create: { key, value, expiresAt },
-        update: { value, expiresAt },
+        create: { key, value },
+        update: { value },
         where: { key },
       });
     }

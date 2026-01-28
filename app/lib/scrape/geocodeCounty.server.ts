@@ -5,6 +5,7 @@
 
 import type { InputJsonValue } from "@prisma/client/runtime/client";
 import { invariant } from "es-toolkit";
+import { DateTime } from "luxon";
 import ora from "ora";
 import zod from "zod";
 import { trackApiCall } from "~/lib/apiUsageTracker";
@@ -82,7 +83,10 @@ export async function geocodeCounty(
     const key = `geocode:${countyName.toLowerCase().replace(/\s+/g, "-")}`;
 
     // Check cache
-    const cached = await prisma.cache.findUnique({ where: { key } });
+    const from30DaysAgo = DateTime.now().minus({ days: 30 }).toJSDate();
+    const cached = await prisma.cache.findUnique({
+      where: { key, createdAt: { gte: from30DaysAgo } },
+    });
     if (cached) {
       spinner.succeed(`Geocoding ${countyName} (cached)`);
       return cached.value as unknown as GeocodedCounty;
