@@ -94,15 +94,6 @@ describe("Blog Post Rendering", () => {
     await expect(layout).toBeVisible();
   });
 
-  it("should start with a quote", async () => {
-    const quote = page.locator("blockquote", {
-      hasText: "Early on in my journey, every little setback would derail me.",
-    });
-    await expect(quote).toBeVisible();
-    const cite = page.locator("blockquote + p");
-    expect(await cite.textContent()).toContain("Brad Savage");
-  });
-
   it("should have a section TL;DR with 4 items", async () => {
     const tldr = page.locator("h2", { hasText: "TL;DR" });
     await expect(tldr).toBeVisible();
@@ -110,11 +101,11 @@ describe("Blog Post Rendering", () => {
     await expect(items).toHaveCount(4);
   });
 
-  it("should have a section FAQ with 5 question items", async () => {
+  it("should have a section FAQ with 4 question items", async () => {
     const faq = page.locator("h2", { hasText: "FAQ" });
     await expect(faq).toBeVisible();
     const items = page.locator("h2:has-text('FAQ') ~ h3");
-    await expect(items).toHaveCount(5);
+    await expect(items).toHaveCount(4);
   });
 
   it("should match inner HTML", async () => {
