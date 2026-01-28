@@ -138,8 +138,10 @@ The specialty retail market is experiencing significant growth:
 - [API](https://rentail.space/api/query)
 - [OpenAPI](https://rentail.space/openapi.json)
 
-Website: https://rentail.space
+## Contact
 
-Email: hello@rentail.space
+- Website: https://rentail.space
+- Email: hello@rentail.space
+- LinkedIn: https://www.linkedin.com/company/rentail-space
 
 Last updated: January 2026
