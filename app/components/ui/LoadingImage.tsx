@@ -27,7 +27,10 @@ export default function LoadingImage({
   const imgRef = useRef<HTMLImageElement>(null);
   useEffect(() => {
     // NOTE React doesn't fire onLoad for SSR, so we need this hack.
-    if (imgRef.current?.complete) imgRef.current.classList.remove("opacity-0");
+    if (imgRef.current?.complete) {
+      imgRef.current.classList.remove("opacity-0");
+      imgRef.current.className = imgRef.current.className.trim();
+    }
   }, []);
 
   return (
