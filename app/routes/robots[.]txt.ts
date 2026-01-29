@@ -9,6 +9,13 @@ export async function loader() {
       disallow: ["/api/*", "/chat", "/auth", "/error"],
       sitemap: ["https://rentail.space/sitemap.xml"],
     },
+    { userAgent: "GPTBot", allow: ["/"] },
+    { userAgent: "ChatGPT-User", allow: ["/"] },
+    { userAgent: "PerplexityBot", allow: ["/"] },
+    { userAgent: "ClaudeBot", allow: ["/"] },
+    { userAgent: "anthropic-ai", allow: ["/"] },
+    { userAgent: "Googlebot", allow: ["/"] },
+    { userAgent: "Bingbot", allow: ["/"] },
   ]);
 
   // Add comment about API endpoint for AI assistants

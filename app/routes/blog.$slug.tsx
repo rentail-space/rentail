@@ -117,14 +117,15 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
                   url: "https://rentail.space",
                 },
                 datePublished: published,
+                dateModified: published,
                 inLanguage: "en-US",
                 name: title,
                 primaryImageOfPage: image
                   ? {
-                      "@id": image,
+                      "@id": `https://rentail.space/blog/${image}`,
                       "@type": "ImageObject",
                       caption: alt,
-                      contentUrl: image,
+                      contentUrl: `https://rentail.space/blog/${image}`,
                     }
                   : undefined,
               },

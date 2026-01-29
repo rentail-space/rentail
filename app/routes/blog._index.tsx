@@ -26,6 +26,29 @@ export default function Blog({
         name="keywords"
         content="blog, specialty leasing, retail spaces, rentail.space"
       />
+      <meta property="og:title" content="Blog | Rentail.space" />
+      <meta
+        property="og:description"
+        content="Discover tips, insights, and real-world success stories to help retail entrepreneurs thrive—specialty leasing ideas, marketing, and more."
+      />
+      <meta
+        property="og:image"
+        content="https://rentail.space/images/og-image.png"
+      />
+      <meta property="og:url" content="https://rentail.space/blog" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Rentail.space" />
+      <meta property="og:locale" content="en_US" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Blog | Rentail.space" />
+      <meta
+        name="twitter:description"
+        content="Discover tips, insights, and real-world success stories to help retail entrepreneurs thrive—specialty leasing ideas, marketing, and more."
+      />
+      <meta
+        name="twitter:image"
+        content="https://rentail.space/images/og-image.png"
+      />
       <link rel="canonical" href="https://rentail.space/blog" />
 
       <script
