@@ -62,6 +62,38 @@ export default function StatePage({ loaderData }: Route.ComponentProps) {
         name="keywords"
         content={`${state.name} specialty leasing, ${state.abbreviation} kiosk rental, ${state.name} pop-up shops, ${state.abbreviation} mall carts, ${state.name} temporary retail, shopping centers in ${state.name}`}
       />
+      <meta
+        property="og:title"
+        content={`Shopping Centers in ${state.name} | Rentail.space`}
+      />
+      <meta
+        property="og:description"
+        content={`Find specialty leasing and short-term retail spaces in ${state.name}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, and temporary storefronts.`}
+      />
+      <meta
+        property="og:image"
+        content="https://rentail.space/images/og-image.png"
+      />
+      <meta
+        property="og:url"
+        content={`https://rentail.space/state/${state.abbreviation}`}
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Rentail.space" />
+      <meta property="og:locale" content="en_US" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="twitter:title"
+        content={`Shopping Centers in ${state.name} | Rentail.space`}
+      />
+      <meta
+        name="twitter:description"
+        content={`Find specialty leasing and short-term retail spaces in ${state.name}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, and temporary storefronts.`}
+      />
+      <meta
+        name="twitter:image"
+        content="https://rentail.space/images/og-image.png"
+      />
       <link
         rel="canonical"
         href={`https://rentail.space/state/${state.abbreviation}`}

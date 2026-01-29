@@ -34,6 +34,46 @@ export default function CenterPage({
         content={`${center.name}, ${center.city} ${center.state.abbreviation}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`}
       />
       <meta name="author" content="rentail.space" />
+      <meta
+        property="og:title"
+        content={`${center.name} - ${center.city}, ${center.state.abbreviation} | Rentail.space`}
+      />
+      <meta
+        property="og:description"
+        content={
+          center.summary
+            ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
+            : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`
+        }
+      />
+      <meta
+        property="og:image"
+        content="https://rentail.space/images/og-image.png"
+      />
+      <meta
+        property="og:url"
+        content={`https://rentail.space/center/${center.id}`}
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Rentail.space" />
+      <meta property="og:locale" content="en_US" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="twitter:title"
+        content={`${center.name} - ${center.city}, ${center.state.abbreviation}`}
+      />
+      <meta
+        name="twitter:description"
+        content={
+          center.summary
+            ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
+            : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`
+        }
+      />
+      <meta
+        name="twitter:image"
+        content="https://rentail.space/images/og-image.png"
+      />
       <link
         rel="canonical"
         href={`https://rentail.space/center/${center.id}`}

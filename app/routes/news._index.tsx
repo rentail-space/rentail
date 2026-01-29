@@ -27,6 +27,29 @@ export default function News({
         name="keywords"
         content="news, rentail.space, retail spaces, specialty leasing"
       />
+      <meta property="og:title" content="News | Rentail.space" />
+      <meta
+        property="og:description"
+        content="Discover the latest news and updates from Rentail.space."
+      />
+      <meta
+        property="og:image"
+        content="https://rentail.space/images/og-image.png"
+      />
+      <meta property="og:url" content="https://rentail.space/news" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Rentail.space" />
+      <meta property="og:locale" content="en_US" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="News | Rentail.space" />
+      <meta
+        name="twitter:description"
+        content="Discover the latest news and updates from Rentail.space."
+      />
+      <meta
+        name="twitter:image"
+        content="https://rentail.space/images/og-image.png"
+      />
       <link rel="canonical" href="https://rentail.space/news" />
 
       <script

@@ -15,6 +15,28 @@ export default function TermsOfService() {
         name="keywords"
         content="terms of service, specialty leasing, retail spaces, rentail.space"
       />
+      <meta property="og:title" content="Terms of Service | Rentail.space" />
+      <meta
+        property="og:description"
+        content="Read the Rentail.space Terms of Service: your rights, obligations, and important policies for using our specialty leasing platform."
+      />
+      <meta
+        property="og:image"
+        content="https://rentail.space/images/og-image.png"
+      />
+      <meta property="og:url" content="https://rentail.space/terms" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Rentail.space" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Terms of Service | Rentail.space" />
+      <meta
+        name="twitter:description"
+        content="Read the Rentail.space Terms of Service: your rights, obligations, and important policies for using our specialty leasing platform."
+      />
+      <meta
+        name="twitter:image"
+        content="https://rentail.space/images/og-image.png"
+      />
       <link rel="canonical" href="https://rentail.space/terms" />
 
       <Streamdown

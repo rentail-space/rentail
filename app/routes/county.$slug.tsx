@@ -61,6 +61,38 @@ export default function CountyPage({ loaderData }: Route.ComponentProps) {
         name="keywords"
         content={`${county.name} specialty leasing, ${county.name} kiosk rental, ${county.name} pop-up shops, ${county.name} mall carts, ${county.name} temporary retail, shopping centers in ${county.name}`}
       />
+      <meta
+        property="og:title"
+        content={`Shopping Centers in ${county.name}, ${county.state.abbreviation} | Rentail.space`}
+      />
+      <meta
+        property="og:description"
+        content={`Find specialty leasing and short-term retail spaces in ${county.name}, ${county.state.abbreviation}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, and temporary storefronts.`}
+      />
+      <meta
+        property="og:image"
+        content="https://rentail.space/images/og-image.png"
+      />
+      <meta
+        property="og:url"
+        content={`https://rentail.space/county/${county.state.abbreviation.toLowerCase()}-${county.name.toLowerCase().replace(/\s+/g, "-")}`}
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Rentail.space" />
+      <meta property="og:locale" content="en_US" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="twitter:title"
+        content={`Shopping Centers in ${county.name}, ${county.state.abbreviation} | Rentail.space`}
+      />
+      <meta
+        name="twitter:description"
+        content={`Find specialty leasing and short-term retail spaces in ${county.name}, ${county.state.abbreviation}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, and temporary storefronts.`}
+      />
+      <meta
+        name="twitter:image"
+        content="https://rentail.space/images/og-image.png"
+      />
       <link
         rel="canonical"
         href={`https://rentail.space/county/${county.state.abbreviation.toLowerCase()}-${county.name.toLowerCase().replace(/\s+/g, "-")}`}
