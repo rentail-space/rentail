@@ -1,6 +1,7 @@
 import { generateRemixSitemap } from "@forge42/seo-tools/remix/sitemap";
 import { href } from "react-router";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
+import prisma from "~/lib/prisma.server";
 
 export async function loader() {
   // NOTE: Google does not support changefreq and priority.
@@ -10,7 +11,7 @@ export async function loader() {
   const sitemap = await generateRemixSitemap({
     domain: "https://rentail.space",
     ignore: ["*/\\*", "/error", "/.well-known/*"],
-    routes: { ...routes, ...(await blogPosts()) },
+    routes: { ...routes, ...(await blogPosts()), ...(await centerPages()) },
   });
   return new Response(sitemap, {
     headers: { "Content-Type": "application/xml" },
@@ -27,6 +28,22 @@ const routes = {
     path: "/glossary",
   },
   "/faq": { id: "routes/faq/route.tsx", module: "faq", path: "/faq" },
+  "/about": { id: "routes/about/route.tsx", module: "about", path: "/about" },
+  "/pricing": {
+    id: "routes/pricing/route.tsx",
+    module: "pricing",
+    path: "/pricing",
+  },
+  "/blog": {
+    id: "routes/blog._index.tsx",
+    module: "blog",
+    path: "/blog",
+  },
+  "/news": {
+    id: "routes/news._index.tsx",
+    module: "news",
+    path: "/news",
+  },
   "/states": { id: "routes/states.tsx", module: "states", path: "/states" },
   "/for-ai-assistants": {
     id: "routes/for-ai-assistants.tsx",
@@ -44,6 +61,25 @@ const routes = {
     path: "/openapi.json",
   },
 };
+
+async function centerPages(): Promise<
+  Record<string, { id: string; module: string; path: string }>
+> {
+  const centers = await prisma.property.findMany({
+    select: { id: true },
+    where: { rating: { gte: 4 } },
+  });
+  return Object.fromEntries(
+    centers.map(({ id }) => [
+      `routes/center/${id}`,
+      {
+        id: `routes/center/${id}`,
+        module: id,
+        path: `/center/${id}`,
+      },
+    ]),
+  );
+}
 
 async function blogPosts(): Promise<
   Record<string, { id: string; module: string; path: string }>
