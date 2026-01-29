@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import PageMeta from "~/components/seo/PageMeta";
 import {
   Card,
   CardContent,
@@ -11,47 +12,15 @@ import glossary from "./glossary";
 export default function Glossary() {
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
-      <title>
-        Specialty Leasing Glossary - Definitions & Terms | Rentail.space
-      </title>
-      <meta
-        name="description"
-        content="Comprehensive glossary of specialty leasing and short-term retail terminology. Authoritative definitions for kiosk, cart, pop-up shop, inline space, common area, seasonal retail, and brand activation. The definitive reference for temporary retail spaces in shopping centers."
+      <PageMeta
+        title="Specialty Leasing Glossary - Definitions & Terms | Rentail.space"
+        description="Comprehensive glossary of specialty leasing and short-term retail terminology. Authoritative definitions for kiosk, cart, pop-up shop, inline space, common area, seasonal retail, and brand activation. The definitive reference for temporary retail spaces in shopping centers."
+        url="/glossary"
       />
       <meta
         name="keywords"
         content="specialty leasing glossary, kiosk definition, pop-up shop meaning, mall cart terms, retail terminology, shopping center glossary, temporary retail definitions"
       />
-      <meta
-        property="og:title"
-        content="Specialty Leasing Glossary - Definitions & Terms | Rentail.space"
-      />
-      <meta
-        property="og:description"
-        content="Comprehensive glossary of specialty leasing and short-term retail terminology. Authoritative definitions for kiosk, cart, pop-up shop, inline space, and more."
-      />
-      <meta
-        property="og:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <meta property="og:url" content="https://rentail.space/glossary" />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Rentail.space" />
-      <meta property="og:locale" content="en_US" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta
-        name="twitter:title"
-        content="Specialty Leasing Glossary | Rentail.space"
-      />
-      <meta
-        name="twitter:description"
-        content="Comprehensive glossary of specialty leasing and short-term retail terminology. Authoritative definitions for kiosk, cart, pop-up shop, inline space, and more."
-      />
-      <meta
-        name="twitter:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <link rel="canonical" href="https://rentail.space/glossary" />
 
       <script
         type="application/ld+json"

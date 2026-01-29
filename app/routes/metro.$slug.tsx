@@ -9,6 +9,7 @@ import {
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Fragment, useRef } from "react";
 import { Link } from "react-router";
+import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
@@ -53,50 +54,14 @@ export default function MetroPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
-      <title>{`Shopping Centers in ${metro.name} Metro Area | Rentail.space`}</title>
-      <meta
-        name="description"
-        content={`Find specialty leasing and short-term retail spaces in the ${metro.name} metro area. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`}
+      <PageMeta
+        title={`Shopping Centers in ${metro.name} Metro Area | Rentail.space`}
+        description={`Find specialty leasing and short-term retail spaces in the ${metro.name} metro area. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`}
+        url={`/metro/${metro.state.abbreviation.toLowerCase()}-${metro.name.toLowerCase().replace(/\s+/g, "-")}`}
       />
       <meta
         name="keywords"
         content={`${metro.name} specialty leasing, ${metro.name} kiosk rental, ${metro.name} pop-up shops, ${metro.name} mall carts, ${metro.name} temporary retail, shopping centers in ${metro.name}`}
-      />
-      <meta
-        property="og:title"
-        content={`Shopping Centers in ${metro.name} Metro Area | Rentail.space`}
-      />
-      <meta
-        property="og:description"
-        content={`Find specialty leasing and short-term retail spaces in the ${metro.name} metro area. Browse ${centers.length} shopping centers with kiosks, pop-up shops, and temporary storefronts.`}
-      />
-      <meta
-        property="og:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <meta
-        property="og:url"
-        content={`https://rentail.space/metro/${metro.state.abbreviation.toLowerCase()}-${metro.name.toLowerCase().replace(/\s+/g, "-")}`}
-      />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Rentail.space" />
-      <meta property="og:locale" content="en_US" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta
-        name="twitter:title"
-        content={`Shopping Centers in ${metro.name} Metro Area | Rentail.space`}
-      />
-      <meta
-        name="twitter:description"
-        content={`Find specialty leasing and short-term retail spaces in the ${metro.name} metro area. Browse ${centers.length} shopping centers with kiosks, pop-up shops, and temporary storefronts.`}
-      />
-      <meta
-        name="twitter:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <link
-        rel="canonical"
-        href={`https://rentail.space/metro/${metro.state.abbreviation.toLowerCase()}-${metro.name.toLowerCase().replace(/\s+/g, "-")}`}
       />
 
       <script

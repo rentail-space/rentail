@@ -80,11 +80,11 @@ export default function PageLayout({
         <meta property="og:locale" content="en_US" />
 
         {/* Twitter Meta Tags */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:description" content={description} />
-        <meta property="twitter:image" content={`${url}/images/og-image.png`} />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:url" content={url} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={`${url}/images/og-image.png`} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:url" content={url} />
 
         {/* https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Client_hints */}
         <meta httpEquiv="Accept-CH" content="Width, Downlink, Sec-CH-UA" />

@@ -1,4 +1,5 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
+import PageMeta from "~/components/seo/PageMeta";
 import externalLink from "~/lib/externalLink";
 import prisma from "~/lib/prisma.server";
 import type { Route } from "./+types/route";
@@ -18,66 +19,20 @@ export default function CenterPage({
 }: Route.ComponentProps) {
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
-      <title>
-        {`${center.name} - ${center.city}, ${center.state.abbreviation} | Rentail.space`}
-      </title>
-      <meta
-        name="description"
-        content={
+      <PageMeta
+        title={`${center.name} - ${center.city}, ${center.state.abbreviation} | Rentail.space`}
+        description={
           center.summary
             ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
             : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`
         }
+        url={`/center/${center.id}`}
       />
       <meta
         name="keywords"
         content={`${center.name}, ${center.city} ${center.state.abbreviation}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`}
       />
       <meta name="author" content="rentail.space" />
-      <meta
-        property="og:title"
-        content={`${center.name} - ${center.city}, ${center.state.abbreviation} | Rentail.space`}
-      />
-      <meta
-        property="og:description"
-        content={
-          center.summary
-            ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
-            : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`
-        }
-      />
-      <meta
-        property="og:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <meta
-        property="og:url"
-        content={`https://rentail.space/center/${center.id}`}
-      />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Rentail.space" />
-      <meta property="og:locale" content="en_US" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta
-        name="twitter:title"
-        content={`${center.name} - ${center.city}, ${center.state.abbreviation}`}
-      />
-      <meta
-        name="twitter:description"
-        content={
-          center.summary
-            ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
-            : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`
-        }
-      />
-      <meta
-        name="twitter:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <link
-        rel="canonical"
-        href={`https://rentail.space/center/${center.id}`}
-      />
 
       <CenterDetails center={center} />
 

@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from "lucide-react";
 import { Link } from "react-router";
 import { Streamdown } from "streamdown";
+import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import prisma from "~/lib/prisma.server";
 import type { Route } from "./+types/states";
@@ -25,45 +26,15 @@ export default function StatePage({ loaderData }: Route.ComponentProps) {
       className="container mx-auto my-10 max-w-3xl space-y-8 p-5"
       aria-label="US states listing"
     >
-      <title>Shopping Centers by State | Rentail.space</title>
-      <meta
-        name="description"
-        content="Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces in shopping centers across all 50 US states. Real-time availability for seasonal and temporary retail locations."
+      <PageMeta
+        title="Shopping Centers by State | Rentail.space"
+        description="Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces in shopping centers across all 50 US states. Real-time availability for seasonal and temporary retail locations."
+        url="/states"
       />
       <meta
         name="keywords"
         content="specialty leasing by state, kiosk rental locations, pop-up shop states, mall cart by state, temporary retail locations, shopping centers by state"
       />
-      <meta
-        property="og:title"
-        content="Shopping Centers by State | Rentail.space"
-      />
-      <meta
-        property="og:description"
-        content="Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces in shopping centers across all 50 US states."
-      />
-      <meta
-        property="og:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <meta property="og:url" content="https://rentail.space/states" />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Rentail.space" />
-      <meta property="og:locale" content="en_US" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta
-        name="twitter:title"
-        content="Shopping Centers by State | Rentail.space"
-      />
-      <meta
-        name="twitter:description"
-        content="Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces across all 50 US states."
-      />
-      <meta
-        name="twitter:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <link rel="canonical" href="https://rentail.space/states" />
 
       <script
         type="application/ld+json"

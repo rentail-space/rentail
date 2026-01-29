@@ -1,3 +1,4 @@
+import PageMeta from "~/components/seo/PageMeta";
 import AboutCTA from "./AboutCTA";
 import AboutHeader from "./AboutHeader";
 import AboutMission from "./AboutMission";
@@ -11,47 +12,15 @@ export default function About() {
       className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
       aria-label="About page"
     >
-      <title>
-        About Rentail.space - Making retail space accessible for everyone
-      </title>
-      <meta
-        name="description"
-        content="Rentail.space helps micro-merchants find affordable, flexible retail space—making brick-and-mortar accessible to everyone."
+      <PageMeta
+        title="About Rentail.space - Making retail space accessible for everyone"
+        description="Rentail.space helps micro-merchants find affordable, flexible retail space—making brick-and-mortar accessible to everyone."
+        url="/about"
       />
       <meta
         name="keywords"
         content="about rentail.space, retail space, micro-merchants, brick-and-mortar, democratize retail space"
       />
-      <meta
-        property="og:title"
-        content="About Rentail.space - Making retail space accessible for everyone"
-      />
-      <meta
-        property="og:description"
-        content="Rentail.space helps micro-merchants find affordable, flexible retail space—making brick-and-mortar accessible to everyone."
-      />
-      <meta
-        property="og:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <meta property="og:url" content="https://rentail.space/about" />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Rentail.space" />
-      <meta property="og:locale" content="en_US" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta
-        name="twitter:title"
-        content="About Rentail.space - Making retail space accessible for everyone"
-      />
-      <meta
-        name="twitter:description"
-        content="Rentail.space helps micro-merchants find affordable, flexible retail space—making brick-and-mortar accessible to everyone."
-      />
-      <meta
-        name="twitter:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <link rel="canonical" href="https://rentail.space/about" />
 
       <script
         type="application/ld+json"

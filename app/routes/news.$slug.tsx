@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
+import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import externalLink from "~/lib/externalLink";
 import { type NewsItem, loadNewsItem } from "~/lib/newsItems.server";
@@ -27,36 +28,23 @@ export default function NewsPost({ loaderData }: { loaderData: NewsItem }) {
       className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12"
       aria-label={title}
     >
-      <title>{`${title} | Rentail.space`}</title>
-      <meta name="description" content={summary} />
-      <meta name="author" content="Rentail.space" />
-      <meta name="section" content="News" />
-      <meta property="og:published_time" content={published} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={summary} />
-      <meta property="og:type" content="article" />
-      <meta property="og:url" content={url} />
-      <meta property="og:site_name" content="Rentail.space" />
-      <meta property="og:locale" content="en_US" />
-      <meta
-        property="og:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={summary} />
-      <meta
-        name="twitter:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <meta name="robots" content="index, follow" />
-      <meta name="googlebot" content="index, follow" />
-      <meta name="bingbot" content="index, follow" />
-      <meta name="yandexbot" content="index, follow" />
-      <meta name="duckduckbot" content="index, follow" />
-      <meta name="slurp" content="index, follow" />
-      <meta name="ia_archiver" content="index, follow" />
-      <link rel="canonical" href={url} />
+      <PageMeta
+        title={`${title} | Rentail.space`}
+        description={summary}
+        url={`/news/${slug}`}
+        ogType="article"
+      >
+        <meta name="author" content="Rentail.space" />
+        <meta name="section" content="News" />
+        <meta property="og:published_time" content={published} />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="bingbot" content="index, follow" />
+        <meta name="yandexbot" content="index, follow" />
+        <meta name="duckduckbot" content="index, follow" />
+        <meta name="slurp" content="index, follow" />
+        <meta name="ia_archiver" content="index, follow" />
+      </PageMeta>
 
       <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
         <h1>{title}</h1>

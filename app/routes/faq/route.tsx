@@ -1,3 +1,4 @@
+import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import FAQQuestions from "./FAQQuestions";
 import faq from "./faq";
@@ -8,45 +9,15 @@ export default function FAQ() {
       className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
       aria-label="Frequently asked questions"
     >
-      <title>FAQ - Specialty Leasing Questions | Rentail.space</title>
-      <meta
-        name="description"
-        content="Frequently asked questions about specialty leasing, kiosk rentals, pop-up shops, and short-term retail spaces in shopping centers. Learn about pricing, booking process, and temporary retail opportunities across the US."
+      <PageMeta
+        title="FAQ - Specialty Leasing Questions | Rentail.space"
+        description="Frequently asked questions about specialty leasing, kiosk rentals, pop-up shops, and short-term retail spaces in shopping centers. Learn about pricing, booking process, and temporary retail opportunities across the US."
+        url="/faq"
       />
       <meta
         name="keywords"
         content="specialty leasing FAQ, kiosk rental questions, pop-up shop info, mall cart rental, temporary retail FAQ, short-term lease questions"
       />
-      <meta
-        property="og:title"
-        content="FAQ - Specialty Leasing Questions | Rentail.space"
-      />
-      <meta
-        property="og:description"
-        content="Frequently asked questions about specialty leasing, kiosk rentals, pop-up shops, and short-term retail spaces in shopping centers."
-      />
-      <meta
-        property="og:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <meta property="og:url" content="https://rentail.space/faq" />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Rentail.space" />
-      <meta property="og:locale" content="en_US" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta
-        name="twitter:title"
-        content="FAQ - Specialty Leasing Questions | Rentail.space"
-      />
-      <meta
-        name="twitter:description"
-        content="Frequently asked questions about specialty leasing, kiosk rentals, pop-up shops, and short-term retail spaces in shopping centers."
-      />
-      <meta
-        name="twitter:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <link rel="canonical" href="https://rentail.space/faq" />
 
       <script
         type="application/ld+json"

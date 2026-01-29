@@ -9,6 +9,7 @@ import {
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Fragment, useRef } from "react";
 import { Link } from "react-router";
+import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
@@ -47,50 +48,14 @@ export default function CityPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
-      <title>{`Shopping Centers in ${city.name}, ${city.state.abbreviation} | Rentail.space`}</title>
-      <meta
-        name="description"
-        content={`Find specialty leasing and short-term retail spaces in ${city.name}, ${city.state.abbreviation}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`}
+      <PageMeta
+        title={`Shopping Centers in ${city.name}, ${city.state.abbreviation} | Rentail.space`}
+        description={`Find specialty leasing and short-term retail spaces in ${city.name}, ${city.state.abbreviation}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`}
+        url={`/city/${city.state.abbreviation.toLowerCase()}-${city.name.toLowerCase().replace(/\s+/g, "-")}`}
       />
       <meta
         name="keywords"
         content={`${city.name} specialty leasing, ${city.name} kiosk rental, ${city.name} pop-up shops, ${city.name} mall carts, ${city.name} temporary retail, shopping centers in ${city.name}`}
-      />
-      <meta
-        property="og:title"
-        content={`Shopping Centers in ${city.name}, ${city.state.abbreviation} | Rentail.space`}
-      />
-      <meta
-        property="og:description"
-        content={`Find specialty leasing and short-term retail spaces in ${city.name}, ${city.state.abbreviation}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, and temporary storefronts.`}
-      />
-      <meta
-        property="og:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <meta
-        property="og:url"
-        content={`https://rentail.space/city/${city.state.abbreviation.toLowerCase()}-${city.name.toLowerCase().replace(/\s+/g, "-")}`}
-      />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Rentail.space" />
-      <meta property="og:locale" content="en_US" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta
-        name="twitter:title"
-        content={`Shopping Centers in ${city.name}, ${city.state.abbreviation} | Rentail.space`}
-      />
-      <meta
-        name="twitter:description"
-        content={`Find specialty leasing and short-term retail spaces in ${city.name}, ${city.state.abbreviation}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, and temporary storefronts.`}
-      />
-      <meta
-        name="twitter:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <link
-        rel="canonical"
-        href={`https://rentail.space/city/${city.state.abbreviation.toLowerCase()}-${city.name.toLowerCase().replace(/\s+/g, "-")}`}
       />
 
       <script

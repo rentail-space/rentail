@@ -1,3 +1,4 @@
+import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import PricingFAQ from "./PricingFAQ";
 import PricingPlans from "./PricingPlans";
@@ -8,39 +9,15 @@ export default function Pricing() {
       className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
       aria-label="Pricing"
     >
-      <title>Pricing | Rentail.space</title>
-      <meta
-        name="description"
-        content="Compare our simple, transparent pricing plans for specialty leasing. Find the right solution for your business—no hidden fees, no surprises."
+      <PageMeta
+        title="Pricing | Rentail.space"
+        description="Compare our simple, transparent pricing plans for specialty leasing. Find the right solution for your business—no hidden fees, no surprises."
+        url="/pricing"
       />
       <meta
         name="keywords"
         content="pricing, specialty leasing, retail spaces, rentail.space"
       />
-      <meta property="og:title" content="Pricing | Rentail.space" />
-      <meta
-        property="og:description"
-        content="Compare our simple, transparent pricing plans for specialty leasing. Find the right solution for your business—no hidden fees, no surprises."
-      />
-      <meta
-        property="og:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <meta property="og:url" content="https://rentail.space/pricing" />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Rentail.space" />
-      <meta property="og:locale" content="en_US" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Pricing | Rentail.space" />
-      <meta
-        name="twitter:description"
-        content="Compare our simple, transparent pricing plans for specialty leasing. Find the right solution for your business—no hidden fees, no surprises."
-      />
-      <meta
-        name="twitter:image"
-        content="https://rentail.space/images/og-image.png"
-      />
-      <link rel="canonical" href="https://rentail.space/pricing" />
 
       <script
         type="application/ld+json"
