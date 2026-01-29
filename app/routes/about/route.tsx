@@ -22,6 +22,35 @@ export default function About() {
         name="keywords"
         content="about rentail.space, retail space, micro-merchants, brick-and-mortar, democratize retail space"
       />
+      <meta
+        property="og:title"
+        content="About Rentail.space - Making retail space accessible for everyone"
+      />
+      <meta
+        property="og:description"
+        content="Rentail.space helps micro-merchants find affordable, flexible retail space—making brick-and-mortar accessible to everyone."
+      />
+      <meta
+        property="og:image"
+        content="https://rentail.space/images/og-image.png"
+      />
+      <meta property="og:url" content="https://rentail.space/about" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Rentail.space" />
+      <meta property="og:locale" content="en_US" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="twitter:title"
+        content="About Rentail.space - Making retail space accessible for everyone"
+      />
+      <meta
+        name="twitter:description"
+        content="Rentail.space helps micro-merchants find affordable, flexible retail space—making brick-and-mortar accessible to everyone."
+      />
+      <meta
+        name="twitter:image"
+        content="https://rentail.space/images/og-image.png"
+      />
       <link rel="canonical" href="https://rentail.space/about" />
 
       <script

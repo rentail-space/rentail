@@ -23,16 +23,32 @@ export default function NewsPost({ loaderData }: { loaderData: NewsItem }) {
   const url = `https://rentail.space/news/${slug}`;
 
   return (
-    <div className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12">
+    <main
+      className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12"
+      aria-label={title}
+    >
       <title>{`${title} | Rentail.space`}</title>
+      <meta name="description" content={summary} />
       <meta name="author" content="Rentail.space" />
       <meta name="section" content="News" />
-      <meta name="og:published_time" content={published} />
-      <meta name="og:title" content={title} />
-      <meta name="og:type" content="article" />
-      <meta name="og:url" content={url} />
-      <meta name="og:site_name" content="Rentail.space" />
-      <meta name="og:locale" content="en_US" />
+      <meta property="og:published_time" content={published} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={summary} />
+      <meta property="og:type" content="article" />
+      <meta property="og:url" content={url} />
+      <meta property="og:site_name" content="Rentail.space" />
+      <meta property="og:locale" content="en_US" />
+      <meta
+        property="og:image"
+        content="https://rentail.space/images/og-image.png"
+      />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={summary} />
+      <meta
+        name="twitter:image"
+        content="https://rentail.space/images/og-image.png"
+      />
       <meta name="robots" content="index, follow" />
       <meta name="googlebot" content="index, follow" />
       <meta name="bingbot" content="index, follow" />
@@ -142,6 +158,6 @@ export default function NewsPost({ loaderData }: { loaderData: NewsItem }) {
           })}
         </script>
       </article>
-    </div>
+    </main>
   );
 }

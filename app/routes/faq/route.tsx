@@ -17,6 +17,35 @@ export default function FAQ() {
         name="keywords"
         content="specialty leasing FAQ, kiosk rental questions, pop-up shop info, mall cart rental, temporary retail FAQ, short-term lease questions"
       />
+      <meta
+        property="og:title"
+        content="FAQ - Specialty Leasing Questions | Rentail.space"
+      />
+      <meta
+        property="og:description"
+        content="Frequently asked questions about specialty leasing, kiosk rentals, pop-up shops, and short-term retail spaces in shopping centers."
+      />
+      <meta
+        property="og:image"
+        content="https://rentail.space/images/og-image.png"
+      />
+      <meta property="og:url" content="https://rentail.space/faq" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Rentail.space" />
+      <meta property="og:locale" content="en_US" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="twitter:title"
+        content="FAQ - Specialty Leasing Questions | Rentail.space"
+      />
+      <meta
+        name="twitter:description"
+        content="Frequently asked questions about specialty leasing, kiosk rentals, pop-up shops, and short-term retail spaces in shopping centers."
+      />
+      <meta
+        name="twitter:image"
+        content="https://rentail.space/images/og-image.png"
+      />
       <link rel="canonical" href="https://rentail.space/faq" />
 
       <script
