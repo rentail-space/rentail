@@ -15,6 +15,8 @@ Wrong. You Google "retail space near me." Get a mix of office listings, warehous
 
 The process that should take hours takes weeks. And you're still not sure if you've found the best options.
 
+The numbers back this up: the U.S. pop-up retail market reached an estimated [$15.6 billion in 2025](https://www.ibisworld.com/united-states/industry/pop-up-shops/6418/), yet most shopping center websites still don't list short-term availability publicly. According to [Cushman & Wakefield](https://www.cushmanwakefield.com/en/united-states/insights/us-marketbeats/us-shopping-center-marketbeat-report), the national shopping center vacancy rate sits at 5.7%—near historic lows—which means competition for available space is fierce.
+
 ## The Solution: One Platform, All Options
 
 Rentail.space shows available kiosks, pop-ups, and inline spaces at shopping centers near you—with foot traffic data, photos, and pricing. AI-powered search understands what you need and ranks the best matches.
@@ -24,6 +26,8 @@ Rentail.space shows available kiosks, pop-ups, and inline spaces at shopping cen
 - **Direct access**: Contact info for every property, no broker middlemen
 
 ## Research Neighborhoods and Foot Traffic
+
+As Simon Property Group's Matt Sebree noted at [Connect Retail West 2025](https://www.connectcre.com/stories/industry-veterans-outline-post-pandemic-leasing-strategies-at-connect-retail-west-2025/): "We reinvest and reinvent... As long as you stay relevant to what people want, you'll keep your consumer." That relevance starts with data.
 
 Foot traffic data shows who actually visits—not opinions, real patterns. Get insights for shopping centers before you visit.
 
@@ -45,9 +49,9 @@ Find spaces with photos and floor plans before visiting. Once there:
 
 ## Negotiate Lease Terms
 
-Negotiation saves thousands and provides flexibility.
+Negotiation saves thousands and provides flexibility. According to [Capital One Shopping Research](https://capitaloneshopping.com/research/pop-up-retail-statistics/), 44% of pop-up shops cost less than $5,000 to open—and 80% of retailers who've opened one considered it a success.
 
-**Base rent**: Landlords build improvement costs into rent. Don't accept the first offer.
+**Base rent**: Mall kiosks typically cost [$1,500 to $8,000 per month](https://kiosksretail.com/retail-kiosk-rental-cost-a-breakdown/), depending on location, traffic, and season. Landlords build improvement costs into rent. Don't accept the first offer.
 
 **CAM charges**: Cap annual increases to avoid surprise escalations.
 

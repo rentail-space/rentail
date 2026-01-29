@@ -11,7 +11,7 @@ Specialty leasing fixes that.
 
 ## The Problem: Traditional Retail Is Crushing
 
-Traditional leases demand personal guarantees, months of rent upfront, expensive build-outs. You're betting tens of thousands on an unproven concept.
+Traditional leases demand personal guarantees, months of rent upfront, expensive build-outs. You're betting tens of thousands on an unproven concept. The [U.S. Small Business Administration](https://www.sba.gov/) reports that only 50% of small businesses survive five years—and [42% of startups fail because there's no market need](https://www.embroker.com/blog/startup-statistics/). Testing before committing isn't optional. It's survival.
 
 Not sure if your handmade jewelry will sell in that upscale center? Too bad—you've signed a five-year lease. The landlord gets paid whether you succeed or fail.
 
@@ -21,7 +21,7 @@ Small businesses need flexibility. Traditional retail offers none.
 
 Specialty leasing = temporary retail space. Kiosks, pop-ups, carts—days to months instead of years.
 
-Shopping centers offer these to fill vacant spaces and add variety. You get prime locations without the crushing commitment.
+Shopping centers offer these to fill vacant spaces and add variety. You get prime locations without the crushing commitment. According to [ICSC](https://www.icsc.com/news-and-views/icsc-exchange/where-to-focus-in-2020-specialty-leasing), smart landlords spread risk across 20-30 rotating specialty tenants instead of relying on one or two anchors—and properties with [retailtainment and rotating concepts see a 25% uptick in visits](https://www.icsc.com/news-and-views/icsc-exchange/retailtainment-is-having-a-moment-will-the-momentum-last).
 
 - **Lower financial risk**: Thousands vs tens of thousands upfront
 - **Faster validation**: Test concepts in weeks, not years
@@ -30,11 +30,11 @@ Shopping centers offer these to fill vacant spaces and add variety. You get prim
 
 ## How It Works
 
-**Costs**: A few thousand for a kiosk versus tens of thousands for a traditional store. No multi-month deposits or personal guarantees for most specialty leases.
+**Costs**: Mall kiosks typically rent for [$1,500 to $8,000 per month](https://kiosksretail.com/retail-kiosk-rental-cost-a-breakdown/) versus tens of thousands for a traditional store. [44% of pop-up shops cost less than $5,000 to open](https://capitaloneshopping.com/research/pop-up-retail-statistics/). No multi-month deposits or personal guarantees for most specialty leases.
 
-**Duration**: Days to months. Pop-ups typically last 4-6 weeks. Kiosks run 3-12 months.
+**Duration**: Days to months. Pop-ups typically last 4-6 weeks. Kiosks run 3-12 months. The [average pop-up shop is active for 3-14 days](https://www.amraandelma.com/pop-up-shop-marketing-statistics/).
 
-**Rental structures**: Flat monthly, percentage of sales, or hybrid models.
+**Rental structures**: Flat monthly, percentage of sales (typically 8-15% of gross), or hybrid models.
 
 ## The Reality Check
 
@@ -74,7 +74,7 @@ Search by location and timeframe at [rentail.space](https://rentail.space/chat).
 
 ### How much does specialty leasing cost vs traditional retail?
 
-Thousands vs tens of thousands. Kiosk setup costs a fraction of traditional build-out. No multi-month deposits or personal guarantees. Rental structures: flat monthly, percentage of sales, or hybrid.
+Mall kiosks rent for $1,500-$8,000/month vs tens of thousands for traditional stores. 44% of pop-ups cost under $5,000 to launch. No multi-month deposits or personal guarantees. Rental structures: flat monthly, percentage of sales (8-15%), or hybrid.
 
 ### What are the disadvantages of specialty leasing?
 

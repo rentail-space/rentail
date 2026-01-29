@@ -7,7 +7,7 @@ summary: "Calling dozens of leasing offices and hoping someone picks up wastes w
 
 Finding short-term retail space in shopping malls used to mean calling dozens of leasing offices and hoping someone picks up.
 
-Not anymore.
+Not anymore. The pop-up retail market generates an estimated [$15.6 billion annually in the U.S. alone](https://www.ibisworld.com/united-states/industry/pop-up-shops/6418/), and [80% of retailers who've opened a pop-up considered it a success](https://capitaloneshopping.com/research/pop-up-retail-statistics/). Yet the search process remains stuck in the voicemail era.
 
 ## The Problem: Manual Search Wastes Weeks
 
@@ -47,11 +47,11 @@ Most short-term spaces come unfurnished. You provide fixtures, displays, and sig
 
 ## Why Malls Offer Short-Term Leases
 
-Malls have empty space. Short-term tenants fill it.
+Malls have empty space. Short-term tenants fill it. [Cushman & Wakefield](https://www.cushmanwakefield.com/en/united-states/insights/us-marketbeats/us-shopping-center-marketbeat-report) reports the national shopping center vacancy rate at 5.7%—near historic lows but still representing millions of square feet of opportunity.
 
-Seasonal traffic spikes need seasonal businesses. Landlords keep occupancy up, merchants test concepts without betting the farm.
+Seasonal traffic spikes need seasonal businesses. Landlords keep occupancy up, merchants test concepts without betting the farm. As [RockStep Capital](https://rockstep.com/blog/specialty-leasing-in-retail) notes, smart landlords diversify across 20-30 rotating specialty tenants instead of relying on anchor stores alone.
 
-Plus, rotating pop-ups create buzz. Fresh concepts draw visitors. That's why specialty leasing exists.
+Plus, rotating pop-ups create buzz. PREIT properties with rotating concepts see a [25% uptick in visits and 22% jump in dwell times](https://www.icsc.com/news-and-views/icsc-exchange/retailtainment-is-having-a-moment-will-the-momentum-last)—benefiting every tenant in the center.
 
 ## What to Tell the AI
 

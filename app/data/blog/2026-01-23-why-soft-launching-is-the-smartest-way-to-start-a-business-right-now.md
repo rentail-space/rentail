@@ -15,13 +15,15 @@ Traditional launches require everything to be perfect on day one. Website polish
 
 Then reality hits. The product needs tweaking. The messaging doesn't resonate. The logistics break down. You've blown your budget and your first impression simultaneously.
 
+The data is brutal: [90% of startups eventually fail](https://www.embroker.com/blog/startup-statistics/), and the number one reason—at 42%—is building something nobody wants. The [U.S. Small Business Administration](https://www.sba.gov/) confirms only half survive five years. The average startup costs [$40,000](https://www.demandsage.com/startup-statistics/)—money most founders can't afford to lose on an untested concept.
+
 Worse, you've committed to infrastructure you can't easily unwind. Multi-year leases. Inventory contracts. Staff obligations. You're locked into a version of your business that hasn't been tested.
 
 ## The Solution: Start Quietly, Learn Fast
 
 Soft launching means starting with minimal commitment to gather feedback before scaling. Test concepts in temporary spaces. Iterate based on real data. Build confidence before betting big.
 
-**Physical retail soft launches**: Weekend pop-ups instead of five-year leases. Holiday kiosks instead of permanent storefronts. Test products with real customers in real environments—without massive overhead.
+**Physical retail soft launches**: Weekend pop-ups instead of five-year leases. Holiday kiosks instead of permanent storefronts. Test products with real customers in real environments—without massive overhead. [80% of retailers who've opened a pop-up considered it a success](https://capitaloneshopping.com/research/pop-up-retail-statistics/), and [44% cost less than $5,000 to launch](https://capitaloneshopping.com/research/pop-up-retail-statistics/).
 
 **Why it works**:
 
@@ -43,7 +45,7 @@ Instead of a full website, start with a landing page. Instead of a permanent sho
 
 ## Test Physical Concepts Fast
 
-Browse pop-ups and kiosks to soft launch your retail presence. Validate product-market fit before signing anything permanent.
+Browse pop-ups and kiosks to soft launch your retail presence. Validate product-market fit before signing anything permanent. Fashion brands using pop-ups see a [29% increase in customer acquisition](https://bestcolorfulsocks.com/blogs/news/retail-pop-up-fashion-store-roi-statistics), and [41% of fashion pop-ups break even within three days](https://bestcolorfulsocks.com/blogs/news/retail-pop-up-fashion-store-roi-statistics).
 
 Soft launching started as a social media strategy—vague teasers instead of polished announcements. Now it's survival strategy for entrepreneurs who want to build businesses that actually work.
 
