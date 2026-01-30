@@ -14,9 +14,9 @@ export async function loader({ params }: Route.LoaderArgs) {
   return center;
 }
 
-export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
-  if (!data) return [];
-  const center = data;
+export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
+  if (!loaderData) return [];
+  const center = loaderData;
   const description = center.summary
     ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
     : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`;

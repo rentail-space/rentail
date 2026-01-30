@@ -47,9 +47,9 @@ export async function loader({ params }: Route.LoaderArgs) {
   return { centers, regional };
 }
 
-export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
-  if (!data) return [];
-  const { centers, regional } = data;
+export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
+  if (!loaderData) return [];
+  const { centers, regional } = loaderData;
   return pageMeta({
     title: `Shopping Centers in ${regional.name} | Rentail.space`,
     description: `Find specialty leasing and short-term retail spaces in ${regional.name}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`,

@@ -46,9 +46,9 @@ export async function loader({ params }: Route.LoaderArgs) {
   return { centers, county };
 }
 
-export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
-  if (!data) return [];
-  const { centers, county } = data;
+export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
+  if (!loaderData) return [];
+  const { centers, county } = loaderData;
   return pageMeta({
     title: `Shopping Centers in ${county.name}, ${county.state.abbreviation} | Rentail.space`,
     description: `Find specialty leasing and short-term retail spaces in ${county.name}, ${county.state.abbreviation}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`,

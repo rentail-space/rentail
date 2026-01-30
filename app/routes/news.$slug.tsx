@@ -19,9 +19,9 @@ export async function loader({ params }: Route.LoaderArgs): Promise<NewsItem> {
   }
 }
 
-export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
-  if (!data) return [];
-  const { slug, published, summary, title } = data;
+export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
+  if (!loaderData) return [];
+  const { slug, published, summary, title } = loaderData;
   return [
     ...pageMeta({
       title: `${title} | Rentail.space`,
