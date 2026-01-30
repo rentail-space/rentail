@@ -17,15 +17,13 @@ Pop-up bakery needs kitchen access and ventilation. Holiday gift kiosk needs foo
 
 You end up calling properties anyway to ask basic questions. The filters save you nothing.
 
-## The Solution: Describe Your Needs in Plain Language
+## The Solution: Just Tell It What You Need
 
-Conversational AI flips it. You explain what you're selling. It understands context.
+Conversational AI flips it. You explain what you're selling. It gets it.
 
-- **Seasonal business?** Shorter lease terms
-- **Food concept?** Specific utilities
-- **Luxury brand?** Higher-income areas
+Seasonal business? It knows you need shorter terms. Food concept? It filters for kitchen access. Luxury brand? It shows you upscale areas.
 
-Shopping center managers care about fit, not just ability to pay. When the AI gets your business model, it suggests centers that'll actually approve you.
+Shopping center managers care about fit, not just ability to pay. When the AI understands your business model, it suggests centers that'll actually approve you.
 
 **How it works**:
 

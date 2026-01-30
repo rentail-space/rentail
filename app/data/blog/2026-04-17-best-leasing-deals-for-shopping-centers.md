@@ -7,11 +7,11 @@ summary: "Publicly listed spaces attract 20 competing tenants. The best deals co
 
 The best retail leasing deals aren't advertised on billboards. They emerge from timing mismatches, repositioning properties, and landlords who value tenant quality over squeezing every dollar.
 
-## The Problem: Bidding Wars Kill Value
+## The Problem: Bidding Wars Destroy Value
 
 Publicly listed spaces attract 20 competing tenants. By the time a space hits major listing platforms, you're fighting for scraps.
 
-Everyone bids. Prices rise. Landlords have leverage. You end up paying market rate or above for the privilege of winning a bidding war.
+Everyone bids. Prices rise. Landlords have leverage. You end up paying market rate or above just to win a bidding war.
 
 The best deals never make it to public listings. They go to tenants who understand landlord motivations and market timing.
 

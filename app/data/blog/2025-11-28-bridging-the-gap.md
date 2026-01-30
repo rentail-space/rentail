@@ -9,17 +9,17 @@ Shopping centers need fresh energy. Entrepreneurs need affordable physical space
 
 Both sides lose in the current system.
 
-## The Problem: A Broken Connection
+## The Problem: Nobody Can Find Each Other
 
-Entrepreneurs face three barriers to physical retail:
+Entrepreneurs hit three walls trying to get into physical retail:
 
-**High costs**: Traditional leases demand years of commitment, tens of thousands upfront. You're betting everything before you've validated demand.
+**High costs**: Traditional leases demand years of commitment, tens of thousands upfront. You're betting everything before you know if anyone wants your stuff.
 
 **No access**: Commercial real estate feels impossible without connections. You don't know who to call, and the people you do call don't return messages.
 
-**Poor visibility**: Online competition is fierce. You need physical presence in prime locations to stand out—but those locations seem reserved for established brands.
+**Poor visibility**: Online competition is brutal. You need physical presence in prime locations to stand out—but those locations feel reserved for Gap and Sephora.
 
-Shopping centers have the opposite problem. They have empty space, declining foot traffic, and a tenant mix that feels stale. They need innovative brands to attract customers. But finding those brands through traditional channels takes forever.
+Shopping centers have the opposite problem. They've got empty space, declining foot traffic, and a tenant mix that feels stale. They need fresh brands to attract customers. But finding those brands through traditional channels takes forever.
 
 ## The Solution: One Platform for Both
 

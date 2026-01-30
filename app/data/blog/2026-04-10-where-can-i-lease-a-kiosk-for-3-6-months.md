@@ -7,13 +7,13 @@ summary: "Finding 3-6 month kiosk leases means calling 15-20 malls individually.
 
 You can lease a kiosk for 3-6 months at most shopping centers. The problem isn't availability—it's finding the right one efficiently.
 
-## The Problem: Manual Search Takes Weeks
+## The Problem: Manual Search Is Brutal
 
 Traditional kiosk hunting: Visit mall websites individually. Navigate to leasing pages (if they exist). Find specialty leasing contacts. Leave voicemails. Wait for callbacks.
 
 This takes 2-4 weeks to contact 15-20 centers. Another week to schedule tours and compare offerings.
 
-Meanwhile, you're still not sure which centers have 3-6 month terms. Or which ones fit your product category. Or which ones you can actually afford.
+Meanwhile, you still don't know which centers have 3-6 month terms. Or which ones fit your product category. Or which ones you can actually afford.
 
 ## The Solution: AI Finds Everything at Once
 

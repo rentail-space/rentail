@@ -7,13 +7,13 @@ summary: "Calling dozens of brokers to find retail space wastes weeks. Rentail.s
 
 Finding retail space shouldn't mean calling dozens of brokers. It doesn't have to.
 
-## The Problem: The Search Takes Forever
+## The Problem: The Search Is Hell
 
 You want a kiosk or pop-up at a shopping center. Simple enough, right?
 
 Wrong. You Google "retail space near me." Get a mix of office listings, warehouse spaces, and commercial brokers who don't return calls. You find a few mall websites, navigate buried leasing pages, leave voicemails. Three days later, nobody's called back.
 
-The process that should take hours takes weeks. And you're still not sure if you've found the best options.
+The process that should take hours takes weeks. And you still don't know if you've found the best options.
 
 The numbers back this up: the U.S. pop-up retail market reached an estimated [$15.6 billion in 2025](https://www.ibisworld.com/united-states/industry/pop-up-shops/6418/), yet most shopping center websites still don't list short-term availability publicly. According to [Cushman & Wakefield](https://www.cushmanwakefield.com/en/united-states/insights/us-marketbeats/us-shopping-center-marketbeat-report), the national shopping center vacancy rate sits at 5.7%—near historic lows—which means competition for available space is fierce.
 

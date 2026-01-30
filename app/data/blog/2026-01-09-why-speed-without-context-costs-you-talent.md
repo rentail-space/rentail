@@ -9,13 +9,13 @@ Type-A leaders have a superpower: decisiveness. They see patterns fast, synthesi
 
 This trait builds companies. It also destroys relationships.
 
-## The Problem: Snap Judgments Cost You
+## The Problem: Snap Judgments Destroy Teams
 
-Henry's instinct to jump to the end of conversations—skip the context, land on the solution—was alienating the people he needed most. The speed that made him effective as an operator was making him ineffective as a leader.
+Henry's instinct to jump to the end of conversations—skip the context, land on the solution—was alienating the people he needed most. The speed that made him effective as an operator was making him terrible as a leader.
 
-When leaders operate purely on velocity, three breakdowns occur:
+When leaders operate purely on velocity, three things break:
 
-**You miss critical information**: That team member who missed deadlines? You assume low performance. Reality: their parent just entered hospice. The snap judgment destroys trust before you even understand the situation.
+**You miss critical information**: That team member who missed deadlines? You assume low performance. Reality: their parent just entered hospice. The snap judgment destroys trust before you even understand what's happening.
 
 **Talented people leave**: High performers don't tolerate leaders who don't listen. They'll endure difficult work, tight timelines, and high standards—but they won't stay with someone who dismisses their input.
 

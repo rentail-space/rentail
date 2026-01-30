@@ -11,9 +11,9 @@ Pop Mart: **362.8% profit surge**. Jellycat: **66% revenue jump to £333M**.
 
 This isn't a fad. It's emotional consumption.
 
-## The Problem: Traditional Retail Can't Keep Pace
+## The Problem: Traditional Retail Is Too Slow
 
-Emotional consumption trends move fast. By the time you've signed a five-year lease and built out a store, the moment has passed.
+Emotional consumption trends move fast. By the time you've signed a five-year lease and built out a store, the moment's over.
 
 Traditional retail demands commitment before validation. You're betting on a trend lasting—but "kidult" products thrive on scarcity, novelty, and FOMO. The infrastructure that makes traditional retail stable makes it terrible for capturing emotional purchases.
 

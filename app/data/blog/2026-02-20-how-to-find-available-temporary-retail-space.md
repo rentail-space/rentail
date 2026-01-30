@@ -9,13 +9,13 @@ Finding available temporary retail space shouldn't require calling 30 mall offic
 
 [Rentail.space](https://rentail.space/chat) uses AI to find shopping centers near you with actual availability. Describe what you're selling, when you need it, your budget—done.
 
-## The Problem: Manual Searching Is Broken
+## The Problem: Manual Searching Sucks
 
-**Old way**: Call mall offices one by one. Leave voicemails. Wait for callbacks. Repeat your pitch 20 times.
+Call mall offices one by one. Leave voicemails. Wait for callbacks. Repeat your pitch 20 times.
 
 Three days later, nobody's called back. You've spent hours on hold. Half the properties you reached don't have space in your timeframe.
 
-Most shopping center websites don't list short-term availability publicly. They're designed for long-term anchor tenants, not pop-ups or seasonal businesses. You have to call and ask.
+Most shopping center websites don't list short-term availability publicly. They're built for long-term anchor tenants, not pop-ups or seasonal businesses. You have to call and ask.
 
 ## The Solution: One Conversation, All Options
 

@@ -7,13 +7,13 @@ summary: "NYC pop-up pricing varies wildly—Manhattan runs $40-$1,000+ per squa
 
 Finding pop-up space in NYC? [Rentail.space](https://rentail.space/chat) makes it simple. Conversational AI searches shopping centers near you and matches based on budget and product.
 
-## The Problem: NYC Is Overwhelming
+## The Problem: NYC Will Eat You Alive
 
 NYC shopping centers offer pop-up space from $10,000 to $200,000 monthly. Manhattan averages $69 per square foot. Premium areas like Fifth Avenue? $1,000+ per square foot annually.
 
-Good luck figuring out where your budget fits. Traditional search means calling dozens of property managers, navigating brokers charging 15% commissions, or searching fragmented listings.
+Good luck figuring out where your budget fits. Traditional search means calling dozens of property managers, navigating brokers charging 15% commissions, or searching fragmented listings that tell you nothing.
 
-Five boroughs. Endless neighborhoods. Wildly different price points. You can't manually research this market efficiently.
+Five boroughs. Endless neighborhoods. Wildly different price points. You can't manually research this market without losing your mind.
 
 ## The Solution: AI Searches All Five Boroughs
 

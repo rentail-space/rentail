@@ -9,11 +9,11 @@ Want to contact mall managers about temporary retail space? Stop cold calling.
 
 [Rentail.space](https://rentail.space/chat) uses conversational AI to find shopping centers near you and gives you direct contact info for properties that actually match your needs.
 
-## The Problem: Cold Calling Doesn't Work
+## The Problem: Cold Calling Is Hell
 
-Traditional approach: Manually research centers. Call each one. Hope to reach the right person.
+Manually research centers. Call each one. Hope to reach the right person.
 
-**What actually happens**:
+Here's what actually happens:
 
 1. Google "shopping centers near me"—find 15 on page one
 2. Check Google Maps—add another 20

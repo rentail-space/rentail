@@ -9,13 +9,13 @@ Small business "viral" means customers share, comment, buy—not influencer reac
 
 You don't need a million views. You need the right hundred people to care.
 
-## The Problem: Polish Doesn't Convert
+## The Problem: Polish Kills Engagement
 
 Brands spend thousands on polished videos. Professional lighting. Scripted copy. Perfect editing.
 
 Nobody watches.
 
-Meanwhile, a college sophomore's shaky phone video outperforms your production budget. Why? Because it feels real. Customers are drowning in branded content. They skip anything that smells like marketing.
+Meanwhile, a college sophomore's shaky phone video outperforms your production budget. Why? It feels real. Customers are drowning in branded content. They skip anything that smells like marketing.
 
 ## The Solution: Authenticity Over Production
 

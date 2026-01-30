@@ -9,9 +9,9 @@ Holiday kiosk rentals? $2,000 to $10,000 monthly in most markets. High-traffic m
 
 But that's just base rent.
 
-## The Problem: Hidden Costs Add Up Fast
+## The Problem: Hidden Costs Will Kill You
 
-Base rent is only the starting point. Most merchants budget for rent and forget everything else.
+Base rent is just the start. Most merchants budget for rent and forget everything else.
 
 **CAM fees** (utilities, security, maintenance) add 10-20% to your monthly bill. On a $5,000 kiosk, that's another $500-$1,000.
 

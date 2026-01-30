@@ -9,15 +9,15 @@ Ann watched competitors launch while she polished. Her products were flawless. H
 
 The perfectionist's trap looks responsible. Feels like quality control. In reality? Strategic failure disguised as standards.
 
-## The Problem: Perfection Delays Revenue
+## The Problem: Perfection Kills Revenue
 
-Perfectionism in product launches creates three critical vulnerabilities:
+Perfectionism in product launches creates three disasters:
 
-**Market timing evaporates**: While you're perfecting version 1.0, customer needs evolve, trends shift, and competitors claim the positioning you were planning to own. By the time your "perfect" product launches, the opportunity window has closed.
+**Market timing evaporates**: While you're perfecting version 1.0, customer needs evolve, trends shift, and competitors claim the positioning you were planning to own. By the time your "perfect" product launches, the opportunity's gone.
 
-**Customer feedback comes too late**: You spend months refining based on internal assumptions. Then you launch and discover customers actually want something different. All that perfectionist effort optimized for the wrong variables.
+**Customer feedback comes too late**: You spend months refining based on internal assumptions. Then you launch and discover customers actually want something different. All that perfectionist effort optimized for the wrong thing.
 
-**Innovation velocity collapses**: Teams that wait for perfect learn to move slowly. The muscle memory becomes risk aversion and over-analysis. Your best people leave for companies that ship faster.
+**Innovation velocity dies**: Teams that wait for perfect learn to move slowly. The muscle memory becomes risk aversion and over-analysis. Your best people leave for companies that ship faster.
 
 ## The Solution: Iterate, Don't Perfect
 

@@ -9,17 +9,17 @@ Every founder hits this wall. You're building something real. Gaining traction. 
 
 Suddenly your wins feel small. Your team's execution looks inadequate. The mental spiral begins.
 
-## The Problem: Comparison Kills Progress
+## The Problem: Comparison Destroys Focus
 
-When you measure your chapter three against someone else's chapter twenty, you're not just wasting energy—you're actively sabotaging your strategic advantage.
+When you measure your chapter three against someone else's chapter twenty, you're not just wasting energy—you're sabotaging your own advantage.
 
-Constantly benchmarking against better-funded competitors creates three failures:
+Constantly benchmarking against better-funded competitors creates three disasters:
 
-**Misallocated resources**: Teams spread thin across ten mediocre initiatives instead of owning three exceptional ones. Every budget meeting becomes about matching competitor features rather than amplifying unique strengths.
+**Misallocated resources**: Teams spread thin across ten mediocre initiatives instead of owning three exceptional ones. Every budget meeting becomes about matching competitor features instead of building your unique strengths.
 
 **Destroyed morale**: Your team knows when they're playing catch-up. They feel the defensive posture. Nobody joins a startup to execute someone else's playbook.
 
-**Blindness to opportunities**: While you're obsessing over competitors' flashy campaigns, you miss genuine opportunities—underserved segments, operational efficiencies, authentic relationships that scale.
+**Blindness to opportunities**: While you're obsessing over competitors' flashy campaigns, you miss real opportunities—underserved segments, operational efficiencies, authentic relationships that scale.
 
 ## The Solution: Own What You Can Dominate
 

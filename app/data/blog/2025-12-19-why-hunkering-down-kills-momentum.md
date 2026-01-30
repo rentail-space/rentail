@@ -11,13 +11,13 @@ Your instinct screams: retreat. Analyze everything. Don't make the next move unt
 
 This feels like responsible leadership. It's actually the fastest way to kill your company.
 
-## The Problem: Withdrawal Cascades
+## The Problem: Withdrawal Destroys Everything
 
-When leaders go dark after setbacks, three failures cascade fast:
+When leaders go dark after setbacks, three things break fast:
 
 **Team confidence evaporates**: If the CEO is rattled, everyone assumes the ship is sinking. Anxiety spreads. Top performers start taking recruiter calls. Your silence screams "we're doomed" louder than any all-hands meeting.
 
-**Decision velocity collapses**: Problems that need rapid iteration sit in limbo while you process emotions. Competitors move. Markets shift. Every day you spend in analysis paralysis, someone else is shipping.
+**Decision velocity dies**: Problems that need rapid iteration sit in limbo while you process emotions. Competitors move. Markets shift. Every day you spend in analysis paralysis, someone else is shipping.
 
 **Feedback loops break**: Hunkering down means avoiding customers, investors, and advisors—exactly the people who could provide perspective or open doors. You cut yourself off from the oxygen your business needs.
 

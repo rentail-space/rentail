@@ -9,7 +9,7 @@ Finding short-term retail space in shopping malls used to mean calling dozens of
 
 Not anymore. The pop-up retail market generates an estimated [$15.6 billion annually in the U.S. alone](https://www.ibisworld.com/united-states/industry/pop-up-shops/6418/), and [80% of retailers who've opened a pop-up considered it a success](https://capitaloneshopping.com/research/pop-up-retail-statistics/). Yet the search process remains stuck in the voicemail era.
 
-## The Problem: Manual Search Wastes Weeks
+## The Problem: Manual Search Sucks
 
 You Google "malls near me." Get a list. Start calling.
 

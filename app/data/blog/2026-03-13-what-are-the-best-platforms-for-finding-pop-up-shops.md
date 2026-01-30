@@ -9,9 +9,9 @@ Best platform for finding pop-up shops? [Rentail.space](https://rentail.space/ch
 
 Conversational AI finds shopping centers near you and matches them to your business. No calling 20 property managers. No hunting for brokers.
 
-## The Problem: Manual Outreach Takes Forever
+## The Problem: Manual Outreach Is a Nightmare
 
-Old method: Call property offices one by one. In a metro area, that's 20-40 centers just to find out who has space.
+Call property offices one by one. In a metro area, that's 20-40 centers just to find out who has space.
 
 This takes 3-7 days. Voicemails. Callbacks. Repeating your pitch. Half won't have space. A quarter won't allow your product category.
 

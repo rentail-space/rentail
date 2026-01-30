@@ -42,9 +42,9 @@ He framed the problem as mutual: "Six vendors have closed this year, representin
 
 Instead of the 15% increase, Marcus negotiated a 40% reduction with a three-year lock.
 
-## Psychology Principles That Work
+## Psychology That Actually Works
 
-**Loss aversion trumps gain potential**: Frame negotiations around preventing losses, not requesting benefits. "Let's discuss how to avoid tenant turnover costs" beats "Can you reduce my rent?"
+**Loss aversion beats gain talk**: Frame negotiations around preventing losses, not requesting benefits. "Let's discuss how to avoid tenant turnover costs" beats "Can you reduce my rent?"
 
 **Partnership beats confrontation**: Position yourself as a business partner solving mutual problems. "How can we structure this to improve your NOI while ensuring my success?" beats "My rent is too high."
 

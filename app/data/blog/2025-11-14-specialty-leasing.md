@@ -9,13 +9,13 @@ You've dreamed of having your own storefront. But sky-high rents, multi-year com
 
 Specialty leasing fixes that.
 
-## The Problem: Traditional Retail Is Crushing
+## The Problem: Traditional Retail Will Bury You
 
 Traditional leases demand personal guarantees, months of rent upfront, expensive build-outs. You're betting tens of thousands on an unproven concept. The [U.S. Small Business Administration](https://www.sba.gov/) reports that only 50% of small businesses survive five years—and [42% of startups fail because there's no market need](https://www.embroker.com/blog/startup-statistics/). Testing before committing isn't optional. It's survival.
 
 Not sure if your handmade jewelry will sell in that upscale center? Too bad—you've signed a five-year lease. The landlord gets paid whether you succeed or fail.
 
-Small businesses need flexibility. Traditional retail offers none.
+Small businesses need flexibility. Traditional retail offers zero.
 
 ## The Solution: Test Before You Commit
 
