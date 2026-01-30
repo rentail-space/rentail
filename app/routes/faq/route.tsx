@@ -1,7 +1,19 @@
-import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
+import pageMeta from "~/lib/pageMeta";
+import type { Route } from "./+types/route";
 import FAQQuestions from "./FAQQuestions";
 import faq from "./faq";
+
+export function meta(): Route.MetaDescriptors {
+  return pageMeta({
+    title: "FAQ - Specialty Leasing Questions | Rentail.space",
+    description:
+      "Frequently asked questions about specialty leasing, kiosk rentals, pop-up shops, and short-term retail spaces in shopping centers. Learn about pricing, booking process, and temporary retail opportunities across the US.",
+    url: "/faq",
+    keywords:
+      "specialty leasing FAQ, kiosk rental questions, pop-up shop info, mall cart rental, temporary retail FAQ, short-term lease questions",
+  });
+}
 
 export default function FAQ() {
   return (
@@ -9,16 +21,6 @@ export default function FAQ() {
       className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
       aria-label="Frequently asked questions"
     >
-      <PageMeta
-        title="FAQ - Specialty Leasing Questions | Rentail.space"
-        description="Frequently asked questions about specialty leasing, kiosk rentals, pop-up shops, and short-term retail spaces in shopping centers. Learn about pricing, booking process, and temporary retail opportunities across the US."
-        url="/faq"
-      />
-      <meta
-        name="keywords"
-        content="specialty leasing FAQ, kiosk rental questions, pop-up shop info, mall cart rental, temporary retail FAQ, short-term lease questions"
-      />
-
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data

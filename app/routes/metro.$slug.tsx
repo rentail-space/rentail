@@ -9,10 +9,10 @@ import {
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Fragment, useRef } from "react";
 import { Link } from "react-router";
-import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
+import pageMeta from "~/lib/pageMeta";
 import prisma from "~/lib/prisma.server";
 import timeOfDay from "~/lib/timeOfDay";
 import { pluralize } from "~/lib/utils";
@@ -47,6 +47,17 @@ export async function loader({ params }: Route.LoaderArgs) {
   return { centers, metro };
 }
 
+export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
+  if (!data) return [];
+  const { centers, metro } = data;
+  return pageMeta({
+    title: `Shopping Centers in ${metro.name} Metro Area | Rentail.space`,
+    description: `Find specialty leasing and short-term retail spaces in the ${metro.name} metro area. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`,
+    url: `/metro/${metro.state.abbreviation.toLowerCase()}-${metro.name.toLowerCase().replace(/\s+/g, "-")}`,
+    keywords: `${metro.name} specialty leasing, ${metro.name} kiosk rental, ${metro.name} pop-up shops, ${metro.name} mall carts, ${metro.name} temporary retail, shopping centers in ${metro.name}`,
+  });
+}
+
 export default function MetroPage({ loaderData }: Route.ComponentProps) {
   const centerRef =
     useRef<(center: { longitude: number; latitude: number }) => void>(null);
@@ -54,16 +65,6 @@ export default function MetroPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
-      <PageMeta
-        title={`Shopping Centers in ${metro.name} Metro Area | Rentail.space`}
-        description={`Find specialty leasing and short-term retail spaces in the ${metro.name} metro area. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`}
-        url={`/metro/${metro.state.abbreviation.toLowerCase()}-${metro.name.toLowerCase().replace(/\s+/g, "-")}`}
-      />
-      <meta
-        name="keywords"
-        content={`${metro.name} specialty leasing, ${metro.name} kiosk rental, ${metro.name} pop-up shops, ${metro.name} mall carts, ${metro.name} temporary retail, shopping centers in ${metro.name}`}
-      />
-
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated data

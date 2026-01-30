@@ -10,10 +10,10 @@ import type { PropertyGetPayload } from "prisma/generated/models";
 import { Fragment, useRef } from "react";
 import { Link } from "react-router";
 import { Streamdown } from "streamdown";
-import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
+import pageMeta from "~/lib/pageMeta";
 import prisma from "~/lib/prisma.server";
 import timeOfDay from "~/lib/timeOfDay";
 import { pluralize } from "~/lib/utils";
@@ -47,6 +47,17 @@ export async function loader({ params }: Route.LoaderArgs) {
   return { centers, state, metroAreas, counties };
 }
 
+export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
+  if (!data) return [];
+  const { centers, state } = data;
+  return pageMeta({
+    title: `Shopping Centers in ${state.name} | Rentail.space`,
+    description: `Find specialty leasing and short-term retail spaces in ${state.name}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities in ${state.abbreviation}.`,
+    url: `/state/${state.abbreviation}`,
+    keywords: `${state.name} specialty leasing, ${state.abbreviation} kiosk rental, ${state.name} pop-up shops, ${state.abbreviation} mall carts, ${state.name} temporary retail, shopping centers in ${state.name}`,
+  });
+}
+
 export default function StatePage({ loaderData }: Route.ComponentProps) {
   const centerRef =
     useRef<(center: { longitude: number; latitude: number }) => void>(null);
@@ -54,16 +65,6 @@ export default function StatePage({ loaderData }: Route.ComponentProps) {
 
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
-      <PageMeta
-        title={`Shopping Centers in ${state.name} | Rentail.space`}
-        description={`Find specialty leasing and short-term retail spaces in ${state.name}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities in ${state.abbreviation}.`}
-        url={`/state/${state.abbreviation}`}
-      />
-      <meta
-        name="keywords"
-        content={`${state.name} specialty leasing, ${state.abbreviation} kiosk rental, ${state.name} pop-up shops, ${state.abbreviation} mall carts, ${state.name} temporary retail, shopping centers in ${state.name}`}
-      />
-
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated data

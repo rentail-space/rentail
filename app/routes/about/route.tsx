@@ -1,5 +1,17 @@
-import PageMeta from "~/components/seo/PageMeta";
+import pageMeta from "~/lib/pageMeta";
+import type { Route } from "./+types/route";
 import AboutCTA from "./AboutCTA";
+
+export function meta(): Route.MetaDescriptors {
+  return pageMeta({
+    title: "About Rentail.space - Making retail space accessible for everyone",
+    description:
+      "Rentail.space helps micro-merchants find affordable, flexible retail space—making brick-and-mortar accessible to everyone.",
+    url: "/about",
+    keywords:
+      "about rentail.space, retail space, micro-merchants, brick-and-mortar, democratize retail space",
+  });
+}
 import AboutHeader from "./AboutHeader";
 import AboutMission from "./AboutMission";
 import AboutStory from "./AboutStory";
@@ -12,16 +24,6 @@ export default function About() {
       className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
       aria-label="About page"
     >
-      <PageMeta
-        title="About Rentail.space - Making retail space accessible for everyone"
-        description="Rentail.space helps micro-merchants find affordable, flexible retail space—making brick-and-mortar accessible to everyone."
-        url="/about"
-      />
-      <meta
-        name="keywords"
-        content="about rentail.space, retail space, micro-merchants, brick-and-mortar, democratize retail space"
-      />
-
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data

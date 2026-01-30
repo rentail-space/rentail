@@ -1,8 +1,18 @@
 import { ArrowRightIcon } from "lucide-react";
 import { Link } from "react-router";
-import PageMeta from "~/components/seo/PageMeta";
 import type { BlogPost } from "~/lib/blogPosts.server";
 import { recentNewsItems } from "~/lib/newsItems.server";
+import pageMeta from "~/lib/pageMeta";
+import type { Route } from "./+types/news._index";
+
+export function meta(): Route.MetaDescriptors {
+  return pageMeta({
+    title: "News | Rentail.space",
+    description: "Discover the latest news and updates from Rentail.space.",
+    url: "/news",
+    keywords: "news, rentail.space, retail spaces, specialty leasing",
+  });
+}
 
 export async function loader() {
   const posts = await recentNewsItems();
@@ -19,16 +29,6 @@ export default function News({
       className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
       aria-label="News"
     >
-      <PageMeta
-        title="News | Rentail.space"
-        description="Discover the latest news and updates from Rentail.space."
-        url="/news"
-      />
-      <meta
-        name="keywords"
-        content="news, rentail.space, retail spaces, specialty leasing"
-      />
-
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data

@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import PageMeta from "~/components/seo/PageMeta";
 import {
   Card,
   CardContent,
@@ -7,21 +6,24 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/Card";
+import pageMeta from "~/lib/pageMeta";
+import type { Route } from "./+types/route";
 import glossary from "./glossary";
+
+export function meta(): Route.MetaDescriptors {
+  return pageMeta({
+    title: "Specialty Leasing Glossary - Definitions & Terms | Rentail.space",
+    description:
+      "Comprehensive glossary of specialty leasing and short-term retail terminology. Authoritative definitions for kiosk, cart, pop-up shop, inline space, common area, seasonal retail, and brand activation. The definitive reference for temporary retail spaces in shopping centers.",
+    url: "/glossary",
+    keywords:
+      "specialty leasing glossary, kiosk definition, pop-up shop meaning, mall cart terms, retail terminology, shopping center glossary, temporary retail definitions",
+  });
+}
 
 export default function Glossary() {
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
-      <PageMeta
-        title="Specialty Leasing Glossary - Definitions & Terms | Rentail.space"
-        description="Comprehensive glossary of specialty leasing and short-term retail terminology. Authoritative definitions for kiosk, cart, pop-up shop, inline space, common area, seasonal retail, and brand activation. The definitive reference for temporary retail spaces in shopping centers."
-        url="/glossary"
-      />
-      <meta
-        name="keywords"
-        content="specialty leasing glossary, kiosk definition, pop-up shop meaning, mall cart terms, retail terminology, shopping center glossary, temporary retail definitions"
-      />
-
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data

@@ -1,7 +1,18 @@
 import BlogPostsGrid from "~/components/ui/BlogPostsGrid";
-import PageMeta from "~/components/seo/PageMeta";
 import type { BlogPost } from "~/lib/blogPosts.server";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
+import pageMeta from "~/lib/pageMeta";
+import type { Route } from "./+types/blog._index";
+
+export function meta(): Route.MetaDescriptors {
+  return pageMeta({
+    title: "Blog | Rentail.space",
+    description:
+      "Discover tips, insights, and real-world success stories to help retail entrepreneurs thrive—specialty leasing ideas, marketing, and more.",
+    url: "/blog",
+    keywords: "blog, specialty leasing, retail spaces, rentail.space",
+  });
+}
 
 export async function loader() {
   const posts = await recentBlogPosts();
@@ -18,16 +29,6 @@ export default function Blog({
       className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
       aria-label="Blog"
     >
-      <PageMeta
-        title="Blog | Rentail.space"
-        description="Discover tips, insights, and real-world success stories to help retail entrepreneurs thrive—specialty leasing ideas, marketing, and more."
-        url="/blog"
-      />
-      <meta
-        name="keywords"
-        content="blog, specialty leasing, retail spaces, rentail.space"
-      />
-
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data

@@ -9,10 +9,10 @@ import {
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Fragment, useRef } from "react";
 import { Link } from "react-router";
-import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
+import pageMeta from "~/lib/pageMeta";
 import prisma from "~/lib/prisma.server";
 import timeOfDay from "~/lib/timeOfDay";
 import { pluralize } from "~/lib/utils";
@@ -47,6 +47,17 @@ export async function loader({ params }: Route.LoaderArgs) {
   return { centers, regional };
 }
 
+export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
+  if (!data) return [];
+  const { centers, regional } = data;
+  return pageMeta({
+    title: `Shopping Centers in ${regional.name} | Rentail.space`,
+    description: `Find specialty leasing and short-term retail spaces in ${regional.name}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`,
+    url: `/regional/${regional.state.abbreviation.toLowerCase()}-${regional.name.toLowerCase().replace(/\s+/g, "-")}`,
+    keywords: `${regional.name} specialty leasing, ${regional.name} kiosk rental, ${regional.name} pop-up shops, ${regional.name} mall carts, ${regional.name} temporary retail, shopping centers in ${regional.name}`,
+  });
+}
+
 export default function RegionalPage({ loaderData }: Route.ComponentProps) {
   const centerRef =
     useRef<(center: { longitude: number; latitude: number }) => void>(null);
@@ -54,16 +65,6 @@ export default function RegionalPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
-      <PageMeta
-        title={`Shopping Centers in ${regional.name} | Rentail.space`}
-        description={`Find specialty leasing and short-term retail spaces in ${regional.name}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`}
-        url={`/regional/${regional.state.abbreviation.toLowerCase()}-${regional.name.toLowerCase().replace(/\s+/g, "-")}`}
-      />
-      <meta
-        name="keywords"
-        content={`${regional.name} specialty leasing, ${regional.name} kiosk rental, ${regional.name} pop-up shops, ${regional.name} mall carts, ${regional.name} temporary retail, shopping centers in ${regional.name}`}
-      />
-
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated data

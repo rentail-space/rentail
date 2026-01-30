@@ -1,7 +1,18 @@
-import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
+import pageMeta from "~/lib/pageMeta";
+import type { Route } from "./+types/route";
 import PricingFAQ from "./PricingFAQ";
 import PricingPlans from "./PricingPlans";
+
+export function meta(): Route.MetaDescriptors {
+  return pageMeta({
+    title: "Pricing | Rentail.space",
+    description:
+      "Compare our simple, transparent pricing plans for specialty leasing. Find the right solution for your business—no hidden fees, no surprises.",
+    url: "/pricing",
+    keywords: "pricing, specialty leasing, retail spaces, rentail.space",
+  });
+}
 
 export default function Pricing() {
   return (
@@ -9,16 +20,6 @@ export default function Pricing() {
       className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
       aria-label="Pricing"
     >
-      <PageMeta
-        title="Pricing | Rentail.space"
-        description="Compare our simple, transparent pricing plans for specialty leasing. Find the right solution for your business—no hidden fees, no surprises."
-        url="/pricing"
-      />
-      <meta
-        name="keywords"
-        content="pricing, specialty leasing, retail spaces, rentail.space"
-      />
-
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data

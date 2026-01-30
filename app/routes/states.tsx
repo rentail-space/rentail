@@ -1,10 +1,21 @@
 import { ArrowRightIcon } from "lucide-react";
 import { Link } from "react-router";
 import { Streamdown } from "streamdown";
-import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
+import pageMeta from "~/lib/pageMeta";
 import prisma from "~/lib/prisma.server";
 import type { Route } from "./+types/states";
+
+export function meta(): Route.MetaDescriptors {
+  return pageMeta({
+    title: "Shopping Centers by State | Rentail.space",
+    description:
+      "Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces in shopping centers across all 50 US states. Real-time availability for seasonal and temporary retail locations.",
+    url: "/states",
+    keywords:
+      "specialty leasing by state, kiosk rental locations, pop-up shop states, mall cart by state, temporary retail locations, shopping centers by state",
+  });
+}
 
 export async function loader() {
   const states = await prisma.state.findMany({
@@ -26,16 +37,6 @@ export default function StatePage({ loaderData }: Route.ComponentProps) {
       className="container mx-auto my-10 max-w-3xl space-y-8 p-5"
       aria-label="US states listing"
     >
-      <PageMeta
-        title="Shopping Centers by State | Rentail.space"
-        description="Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces in shopping centers across all 50 US states. Real-time availability for seasonal and temporary retail locations."
-        url="/states"
-      />
-      <meta
-        name="keywords"
-        content="specialty leasing by state, kiosk rental locations, pop-up shop states, mall cart by state, temporary retail locations, shopping centers by state"
-      />
-
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: exception

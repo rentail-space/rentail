@@ -1,6 +1,6 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
-import PageMeta from "~/components/seo/PageMeta";
 import externalLink from "~/lib/externalLink";
+import pageMeta from "~/lib/pageMeta";
 import prisma from "~/lib/prisma.server";
 import type { Route } from "./+types/route";
 import CenterDetails from "./CenterDetails";
@@ -14,26 +14,25 @@ export async function loader({ params }: Route.LoaderArgs) {
   return center;
 }
 
+export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
+  if (!data) return [];
+  const center = data;
+  const description = center.summary
+    ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
+    : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`;
+  return pageMeta({
+    title: `${center.name} - ${center.city}, ${center.state.abbreviation} | Rentail.space`,
+    description,
+    url: `/center/${center.id}`,
+    keywords: `${center.name}, ${center.city} ${center.state.abbreviation}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`,
+  });
+}
+
 export default function CenterPage({
   loaderData: center,
 }: Route.ComponentProps) {
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
-      <PageMeta
-        title={`${center.name} - ${center.city}, ${center.state.abbreviation} | Rentail.space`}
-        description={
-          center.summary
-            ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
-            : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`
-        }
-        url={`/center/${center.id}`}
-      />
-      <meta
-        name="keywords"
-        content={`${center.name}, ${center.city} ${center.state.abbreviation}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`}
-      />
-      <meta name="author" content="rentail.space" />
-
       <CenterDetails center={center} />
 
       <script

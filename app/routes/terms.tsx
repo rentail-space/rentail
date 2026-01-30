@@ -1,22 +1,24 @@
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
-import PageMeta from "~/components/seo/PageMeta";
 import terms from "~/data/terms.md?raw";
+import pageMeta from "~/lib/pageMeta";
+import type { Route } from "./+types/terms";
+
+export function meta(): Route.MetaDescriptors {
+  return pageMeta({
+    title: "Terms of Service | Rentail.space",
+    description:
+      "Read the Rentail.space Terms of Service: your rights, obligations, and important policies for using our specialty leasing platform.",
+    url: "/terms",
+    keywords:
+      "terms of service, specialty leasing, retail spaces, rentail.space",
+  });
+}
 
 export default function TermsOfService() {
   return (
     <article className="container mx-auto my-10 max-w-4xl space-y-8 p-5">
-      <PageMeta
-        title="Terms of Service | Rentail.space"
-        description="Read the Rentail.space Terms of Service: your rights, obligations, and important policies for using our specialty leasing platform."
-        url="/terms"
-      />
-      <meta
-        name="keywords"
-        content="terms of service, specialty leasing, retail spaces, rentail.space"
-      />
-
       <Streamdown
         className="prose prose-lg mx-auto"
         mode="static"

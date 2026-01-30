@@ -2,11 +2,11 @@ import { HeartIcon } from "lucide-react";
 import { DateTime } from "luxon";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
-import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import LoadingImage from "~/components/ui/LoadingImage";
 import { type BlogPost, loadBlogPost } from "~/lib/blogPosts.server";
 import externalLink from "~/lib/externalLink";
+import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/blog.$slug";
 
 export async function loader({ params }: Route.LoaderArgs): Promise<BlogPost> {
@@ -18,6 +18,31 @@ export async function loader({ params }: Route.LoaderArgs): Promise<BlogPost> {
   }
 }
 
+export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
+  if (!data) return [];
+  const { slug, published, summary, title } = data;
+  return [
+    ...pageMeta({
+      title: `${title} | Rentail.space`,
+      description: summary,
+      url: `/blog/${slug}`,
+      keywords: "blog, specialty leasing, retail spaces, pop-up shops, kiosks",
+      ogType: "article",
+      image: `https://rentail.space/blog/${slug}.jpg`,
+      author: "Rentail.space",
+    }),
+    { name: "section", content: "Blog" },
+    { property: "og:published_time", content: published },
+    { name: "robots", content: "index, follow" },
+    { name: "googlebot", content: "index, follow" },
+    { name: "bingbot", content: "index, follow" },
+    { name: "yandexbot", content: "index, follow" },
+    { name: "duckduckbot", content: "index, follow" },
+    { name: "slurp", content: "index, follow" },
+    { name: "ia_archiver", content: "index, follow" },
+  ];
+}
+
 export default function Post({ loaderData }: { loaderData: BlogPost }) {
   const { alt, body, image, slug, published, summary, title } = loaderData;
   const faqItems = parseFAQ(body);
@@ -27,25 +52,6 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
       className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12"
       aria-label={title}
     >
-      <PageMeta
-        title={`${title} | Rentail.space`}
-        description={summary}
-        url={`/blog/${slug}`}
-        ogType="article"
-        image={`https://rentail.space/blog/${slug}.jpg`}
-      >
-        <meta name="author" content="Rentail.space" />
-        <meta name="section" content="Blog" />
-        <meta property="og:published_time" content={published} />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta name="bingbot" content="index, follow" />
-        <meta name="yandexbot" content="index, follow" />
-        <meta name="duckduckbot" content="index, follow" />
-        <meta name="slurp" content="index, follow" />
-        <meta name="ia_archiver" content="index, follow" />
-      </PageMeta>
-
       <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
         <h1>{title}</h1>
 

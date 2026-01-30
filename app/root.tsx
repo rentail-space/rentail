@@ -14,11 +14,23 @@ import {
 import { WaveLoading } from "respinner";
 import PageLayout from "~/components/layout/PageLayout";
 import "~/global.css";
+import pageMeta from "~/lib/pageMeta";
 import { botTrackingMiddleware } from "~/lib/middleware/botTracking.server";
 import loggingMiddleware from "~/lib/middleware/logging.server";
 import { utmMiddleware } from "~/lib/middleware/utm.server";
 import type { Route } from "./+types/root";
 import { findUserAndLastChat } from "./lib/sessions.server";
+
+export function meta(): Route.MetaDescriptors {
+  return pageMeta({
+    title: "rentail.space — Find your specialty lease with ease",
+    description:
+      "Discover short-term retail spaces and pop-up shop opportunities nationwide: seasonal retail, temporary stores, and unique business concepts.",
+    url: "/",
+    keywords:
+      "pop-up retail space, pop-up shop space for rent, seasonal retail space, shopping center kiosk rental, short term retail lease, specialty lease, temporary retail space rental",
+  });
+}
 
 // NOTE: not currently implemented, we're using other functions elsewhere
 export const middleware: Route.MiddlewareFunction[] = [

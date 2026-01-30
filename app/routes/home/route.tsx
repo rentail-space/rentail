@@ -1,6 +1,19 @@
 import BlogPostsGrid from "~/components/ui/BlogPostsGrid";
-import PageMeta from "~/components/seo/PageMeta";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
+import pageMeta from "~/lib/pageMeta";
+import type { Route } from "./+types/route";
+
+export function meta(): Route.MetaDescriptors {
+  return pageMeta({
+    title:
+      "Rentail.space - Specialty Leasing & Short-Term Retail Spaces in Shopping Centers",
+    description:
+      "Find short-term retail spaces in shopping centers. Kiosks, pop-ups, and RMUs nationwide. Built for small businesses—AI-powered matching, transparent pricing, no broker fees.",
+    url: "/",
+    keywords:
+      "specialty leasing, kiosk rental, pop-up shop, mall cart, temporary retail space, short-term lease, shopping center, seasonal retail, retail kiosk, mall kiosk rental, cart space rental",
+  });
+}
 import ActivityCounter from "~/routes/home/ActivityCounter";
 import FeaturesSection from "~/routes/home/FeaturesSection";
 import HeroSection from "~/routes/home/HeroSection";
@@ -23,16 +36,6 @@ export default function Home({
       className="flex min-h-screen flex-col bg-[hsl(60,100%,99%)]"
       aria-label="Home page"
     >
-      <PageMeta
-        title="Rentail.space - Specialty Leasing & Short-Term Retail Spaces in Shopping Centers"
-        description="Find short-term retail spaces in shopping centers. Kiosks, pop-ups, and RMUs nationwide. Built for small businesses—AI-powered matching, transparent pricing, no broker fees."
-        url="/"
-      />
-      <meta
-        name="keywords"
-        content="specialty leasing, kiosk rental, pop-up shop, mall cart, temporary retail space, short-term lease, shopping center, seasonal retail, retail kiosk, mall kiosk rental, cart space rental"
-      />
-
       <HeroSection />
       <FeaturesSection />
       <SpecialtyLeasing />

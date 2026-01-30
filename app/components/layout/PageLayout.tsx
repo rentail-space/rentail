@@ -16,8 +16,6 @@ import { useGoogleAnalytics } from "~/lib/analytics";
 import PageFooter from "./PageFooter";
 import PageHeader from "./PageHeader";
 
-const description =
-  "Discover short-term retail spaces and pop-up shop opportunities nationwide: seasonal retail, temporary stores, and unique business concepts.";
 const title = "rentail.space — Find your specialty lease with ease";
 const url = "https://rentail.space/";
 
@@ -48,11 +46,6 @@ export default function PageLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={description} />
-        <meta
-          name="keywords"
-          content="pop-up retail space, pop-up shop space for rent, seasonal retail space, shopping center kiosk rental, short term retail lease, specialty lease, temporary retail space rental"
-        />
         <meta name="author" content="rentail.space" />
         <meta name="theme-color" content="#2563eb" />
         <meta
@@ -66,25 +59,8 @@ export default function PageLayout({
         <meta name="mobile-web-app-capable" content="yes" />
 
         {/* Google / Search Engine Tags */}
-        <meta itemProp="description" content={description} />
         <meta itemProp="image" content={`${url}/images/og-image.png`} />
         <meta itemProp="name" content={title} />
-
-        {/* Facebook Meta Tags */}
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={`${url}/images/og-image.png`} />
-        <meta property="og:title" content={title} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={url} />
-        <meta property="og:site_name" content="Rentail.space" />
-        <meta property="og:locale" content="en_US" />
-
-        {/* Twitter Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={`${url}/images/og-image.png`} />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:url" content={url} />
 
         {/* https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Client_hints */}
         <meta httpEquiv="Accept-CH" content="Width, Downlink, Sec-CH-UA" />

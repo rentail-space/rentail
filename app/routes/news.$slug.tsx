@@ -3,10 +3,10 @@ import { DateTime } from "luxon";
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
-import PageMeta from "~/components/seo/PageMeta";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import externalLink from "~/lib/externalLink";
 import { type NewsItem, loadNewsItem } from "~/lib/newsItems.server";
+import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/news.$slug";
 
 export async function loader({ params }: Route.LoaderArgs): Promise<NewsItem> {
@@ -19,6 +19,30 @@ export async function loader({ params }: Route.LoaderArgs): Promise<NewsItem> {
   }
 }
 
+export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
+  if (!data) return [];
+  const { slug, published, summary, title } = data;
+  return [
+    ...pageMeta({
+      title: `${title} | Rentail.space`,
+      description: summary,
+      url: `/news/${slug}`,
+      keywords: "news, rentail.space, retail industry, specialty leasing",
+      ogType: "article",
+      author: "Rentail.space",
+    }),
+    { name: "section", content: "News" },
+    { property: "og:published_time", content: published },
+    { name: "robots", content: "index, follow" },
+    { name: "googlebot", content: "index, follow" },
+    { name: "bingbot", content: "index, follow" },
+    { name: "yandexbot", content: "index, follow" },
+    { name: "duckduckbot", content: "index, follow" },
+    { name: "slurp", content: "index, follow" },
+    { name: "ia_archiver", content: "index, follow" },
+  ];
+}
+
 export default function NewsPost({ loaderData }: { loaderData: NewsItem }) {
   const { body, slug, published, summary, title } = loaderData;
   const url = `https://rentail.space/news/${slug}`;
@@ -28,24 +52,6 @@ export default function NewsPost({ loaderData }: { loaderData: NewsItem }) {
       className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12"
       aria-label={title}
     >
-      <PageMeta
-        title={`${title} | Rentail.space`}
-        description={summary}
-        url={`/news/${slug}`}
-        ogType="article"
-      >
-        <meta name="author" content="Rentail.space" />
-        <meta name="section" content="News" />
-        <meta property="og:published_time" content={published} />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta name="bingbot" content="index, follow" />
-        <meta name="yandexbot" content="index, follow" />
-        <meta name="duckduckbot" content="index, follow" />
-        <meta name="slurp" content="index, follow" />
-        <meta name="ia_archiver" content="index, follow" />
-      </PageMeta>
-
       <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
         <h1>{title}</h1>
 
