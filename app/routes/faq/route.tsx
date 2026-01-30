@@ -6,7 +6,7 @@ import faq from "./faq";
 
 export function meta(): Route.MetaDescriptors {
   return pageMeta({
-    title: "FAQ - Specialty Leasing Questions | Rentail.space",
+    title: "FAQ - Specialty Leasing Questions",
     description:
       "Frequently asked questions about specialty leasing, kiosk rentals, pop-up shops, and short-term retail spaces in shopping centers. Learn about pricing, booking process, and temporary retail opportunities across the US.",
     url: "/faq",

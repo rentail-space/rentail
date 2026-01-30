@@ -4,7 +4,7 @@ import AboutCTA from "./AboutCTA";
 
 export function meta(): Route.MetaDescriptors {
   return pageMeta({
-    title: "About Rentail.space - Making retail space accessible for everyone",
+    title: "About - Making retail space accessible for everyone",
     description:
       "Rentail.space helps micro-merchants find affordable, flexible retail space—making brick-and-mortar accessible to everyone.",
     url: "/about",

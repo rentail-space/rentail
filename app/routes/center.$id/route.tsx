@@ -21,7 +21,7 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
     ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
     : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`;
   return pageMeta({
-    title: `${center.name} - ${center.city}, ${center.state.abbreviation} | Rentail.space`,
+    title: `${center.name} - ${center.city}, ${center.state.abbreviation}`,
     description,
     url: `/center/${center.id}`,
     keywords: `${center.name}, ${center.city} ${center.state.abbreviation}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`,

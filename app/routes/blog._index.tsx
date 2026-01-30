@@ -6,7 +6,7 @@ import type { Route } from "./+types/blog._index";
 
 export function meta(): Route.MetaDescriptors {
   return pageMeta({
-    title: "Blog | Rentail.space",
+    title: "Blog",
     description:
       "Discover tips, insights, and real-world success stories to help retail entrepreneurs thrive—specialty leasing ideas, marketing, and more.",
     url: "/blog",

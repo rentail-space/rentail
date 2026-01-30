@@ -50,7 +50,7 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
   if (!loaderData) return [];
   const { centers, county } = loaderData;
   return pageMeta({
-    title: `Shopping Centers in ${county.name}, ${county.state.abbreviation} | Rentail.space`,
+    title: `Shopping Centers in ${county.name}, ${county.state.abbreviation}`,
     description: `Find specialty leasing and short-term retail spaces in ${county.name}, ${county.state.abbreviation}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`,
     url: `/county/${county.state.abbreviation.toLowerCase()}-${county.name.toLowerCase().replace(/\s+/g, "-")}`,
     keywords: `${county.name} specialty leasing, ${county.name} kiosk rental, ${county.name} pop-up shops, ${county.name} mall carts, ${county.name} temporary retail, shopping centers in ${county.name}`,

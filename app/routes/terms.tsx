@@ -7,7 +7,7 @@ import type { Route } from "./+types/terms";
 
 export function meta(): Route.MetaDescriptors {
   return pageMeta({
-    title: "Terms of Service | Rentail.space",
+    title: "Terms of Service",
     description:
       "Read the Rentail.space Terms of Service: your rights, obligations, and important policies for using our specialty leasing platform.",
     url: "/terms",

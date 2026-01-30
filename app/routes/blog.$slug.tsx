@@ -23,7 +23,7 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
   const { slug, published, summary, title } = loaderData;
   return [
     ...pageMeta({
-      title: `${title} | Rentail.space`,
+      title: title,
       description: summary,
       url: `/blog/${slug}`,
       keywords: "blog, specialty leasing, retail spaces, pop-up shops, kiosks",

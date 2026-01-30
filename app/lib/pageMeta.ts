@@ -23,13 +23,16 @@ export default function pageMeta({
   author = "rentail.space",
 }: PageMetaArgs): MetaDescriptor[] {
   const fullUrl = url.startsWith("http") ? url : `${BASE_URL}${url}`;
+  const fullTitle = title.includes("Rentail.space")
+    ? title
+    : `${title} | Rentail.space`;
 
   return [
-    { title },
+    { title: fullTitle },
     { name: "description", content: description },
     { name: "keywords", content: keywords },
     { name: "author", content: author },
-    { property: "og:title", content: title },
+    { property: "og:title", content: fullTitle },
     { property: "og:description", content: description },
     { property: "og:image", content: image },
     { property: "og:url", content: fullUrl },
@@ -37,7 +40,7 @@ export default function pageMeta({
     { property: "og:site_name", content: "Rentail.space" },
     { property: "og:locale", content: "en_US" },
     { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: title },
+    { name: "twitter:title", content: fullTitle },
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: image },
     { tagName: "link", rel: "canonical", href: fullUrl },

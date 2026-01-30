@@ -7,7 +7,7 @@ import type { Route } from "./+types/news._index";
 
 export function meta(): Route.MetaDescriptors {
   return pageMeta({
-    title: "News | Rentail.space",
+    title: "News",
     description: "Discover the latest news and updates from Rentail.space.",
     url: "/news",
     keywords: "news, rentail.space, retail spaces, specialty leasing",

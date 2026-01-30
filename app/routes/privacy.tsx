@@ -7,7 +7,7 @@ import type { Route } from "./+types/privacy";
 
 export function meta(): Route.MetaDescriptors {
   return pageMeta({
-    title: "Privacy Policy | Rentail.space",
+    title: "Privacy Policy",
     description:
       "Learn how Rentail.space collects, uses, and safeguards your personal information to ensure your privacy when using our specialty leasing platform.",
     url: "/privacy",

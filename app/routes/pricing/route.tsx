@@ -6,7 +6,7 @@ import PricingPlans from "./PricingPlans";
 
 export function meta(): Route.MetaDescriptors {
   return pageMeta({
-    title: "Pricing | Rentail.space",
+    title: "Pricing",
     description:
       "Compare our simple, transparent pricing plans for specialty leasing. Find the right solution for your business—no hidden fees, no surprises.",
     url: "/pricing",

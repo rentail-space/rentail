@@ -8,7 +8,7 @@ import type { Route } from "./+types/states";
 
 export function meta(): Route.MetaDescriptors {
   return pageMeta({
-    title: "Shopping Centers by State | Rentail.space",
+    title: "Shopping Centers by State",
     description:
       "Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces in shopping centers across all 50 US states. Real-time availability for seasonal and temporary retail locations.",
     url: "/states",

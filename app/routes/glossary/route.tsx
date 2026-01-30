@@ -12,7 +12,7 @@ import glossary from "./glossary";
 
 export function meta(): Route.MetaDescriptors {
   return pageMeta({
-    title: "Specialty Leasing Glossary - Definitions & Terms | Rentail.space",
+    title: "Specialty Leasing Glossary - Definitions & Terms",
     description:
       "Comprehensive glossary of specialty leasing and short-term retail terminology. Authoritative definitions for kiosk, cart, pop-up shop, inline space, common area, seasonal retail, and brand activation. The definitive reference for temporary retail spaces in shopping centers.",
     url: "/glossary",

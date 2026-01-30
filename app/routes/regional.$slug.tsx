@@ -51,7 +51,7 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
   if (!loaderData) return [];
   const { centers, regional } = loaderData;
   return pageMeta({
-    title: `Shopping Centers in ${regional.name} | Rentail.space`,
+    title: `Shopping Centers in ${regional.name}`,
     description: `Find specialty leasing and short-term retail spaces in ${regional.name}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`,
     url: `/regional/${regional.state.abbreviation.toLowerCase()}-${regional.name.toLowerCase().replace(/\s+/g, "-")}`,
     keywords: `${regional.name} specialty leasing, ${regional.name} kiosk rental, ${regional.name} pop-up shops, ${regional.name} mall carts, ${regional.name} temporary retail, shopping centers in ${regional.name}`,
