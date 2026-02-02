@@ -1,14 +1,17 @@
 import { Section } from "@react-email/components";
+import { mapAsync } from "es-toolkit";
 import { twMerge } from "tailwind-merge";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails.server";
+import checkRankings from "./checkRanking.server";
 
-export default async function sendSEORankAlert(
-  engineQueries: {
-    engine: string;
-    queries: { hostname: string; count: number }[];
-  }[],
-): Promise<void> {
+export default async function sendSEORankAlert(): Promise<string> {
+  const engines = ["google", "google_ai_mode", "bing", "duckduckgo"];
+  const engineQueries = await mapAsync(engines, async (engine) => ({
+    engine,
+    queries: await checkRankings({ engine, everyDays: 10, limit: 10 }),
+  }));
+
   await sendEmail({
     email: "assaf@labnotes.org",
     subject: "SEO Rank Alert",
@@ -20,6 +23,7 @@ export default async function sendSEORankAlert(
       </EmailLayout>
     ),
   });
+  return "OK";
 }
 
 const searchEngines = [

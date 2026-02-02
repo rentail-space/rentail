@@ -13,7 +13,7 @@ export const config: VercelConfig = {
     },
     {
       path: "/cron/seo-rank", // SEO ranking from SerpAPI
-      schedule: "0 7 * * *", // Every day at 7am
+      schedule: "0 7 * * 1", // Every Monday at 7am
     },
   ],
   github: {

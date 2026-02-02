@@ -34,14 +34,22 @@ export type RankingResults = {
  *
  * @param engine - The engine to check rankings for.
  * @param limit - The number of results to return.
+ * @param everyDays - The number of days to check every.
  * @returns An array of objects with hostname and count.
  */
-export default async function checkRankings(
-  engine: string,
-  limit: number,
-): Promise<{ hostname: string; count: number }[]> {
+export default async function checkRankings({
+  engine,
+  everyDays,
+  limit,
+}: {
+  engine: string;
+  everyDays: number;
+  limit: number;
+}): Promise<{ hostname: string; count: number }[]> {
   const all = await mapAsync(terms, (term) =>
-    withCache(engine, term, () => checkRankingWithSerpAPI(engine, term)),
+    withCache({ engine, everyDays, term }, () =>
+      checkRankingWithSerpAPI(engine, term),
+    ),
   );
 
   const hostnames = Object.entries(
@@ -113,12 +121,19 @@ async function checkRankingWithSerpAPI(
 }
 
 async function withCache(
-  engine: string,
-  term: string,
+  {
+    engine,
+    everyDays,
+    term,
+  }: {
+    engine: string;
+    everyDays: number;
+    term: string;
+  },
   fn: () => Promise<RankingResults>,
 ) {
   const key = `seo:${engine}:${term}`;
-  const tenDaysAgo = DateTime.now().minus({ days: 10 }).toJSDate();
+  const tenDaysAgo = DateTime.now().minus({ days: everyDays }).toJSDate();
   const cached = await prisma.cache.findUnique({
     where: { key, createdAt: { gte: tenDaysAgo } },
   });
