@@ -1,0 +1,27 @@
+{
+  "address": "11745 Interstate 10",
+  "city": "San Antonio",
+  "country": "US",
+  "googlePlaceID": "places/ChIJmR5lgSVnXIYRuvITdlFK4HU",
+  "name": "Huebner Oaks Center",
+  "state": "TX",
+  "latitude": 29.5494823,
+  "longitude": -98.5828093,
+  "phone": "++1 830-355-8515",
+  "imageURLs": [
+    "/images/malls/tx-huebner-oaks-center-1.jpg"
+  ],
+  "summary": "Huebner Oaks Center is a 50-store lifestyle shopping complex in San Antonio featuring fashion retailers, gift shops, casual dining chains, and a cinema. Located along Interstate 10, this open-air destination offers a convenient blend of shopping, dining, and entertainment for the northwest San Antonio community.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.5,
+  "reviewCount": 4639,
+  "website": "https://www.shophuebneroaks.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Huebner Oaks attracts an affluent, family-oriented demographic from San Antonio's northwest corridor, with visitors typically ranging from middle to upper-middle income households. The trade area serves professionals and families residing in nearby master-planned communities who seek convenient access to fashion retailers, casual dining, and entertainment options. Primary shoppers include adults aged 25-54 with household incomes above the regional median, drawn to the center's mix of national brands and dining establishments. The location along Interstate 10 also captures pass-through traffic and serves as a regional destination for residents throughout the greater San Antonio metropolitan area.",
+  "description": "Huebner Oaks Center is a premier lifestyle shopping destination located along Interstate 10 in San Antonio, Texas, offering a compelling blend of fashion, gifts, dining, and entertainment. This open-air retail complex features approximately 50 stores and restaurants, creating a vibrant shopping experience that caters to the diverse needs of San Antonio's northwest community. The center's tenant mix includes popular national retailers like Verizon Wireless, Versona, Jos. A. Bank, and Mattress Firm, alongside dining favorites such as Potbelly Sandwich Shop and Fire Wok, providing visitors with a comprehensive selection of shopping and culinary options. With its convenient location and modern amenities including a cinema, Huebner Oaks has established itself as a go-to destination for both everyday needs and leisure activities. The center's commitment to customer engagement is evident through its VIP program, which allows shoppers to follow their favorite stores and receive exclusive deals and event notifications, enhancing the overall shopping experience.",
+  "numberOfStores": 50,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 32.997819352668834
+}

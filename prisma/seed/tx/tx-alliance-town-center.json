@@ -1,0 +1,27 @@
+{
+  "address": "9550 Sage Meadow Trail",
+  "city": "Fort Worth",
+  "country": "US",
+  "googlePlaceID": "places/ChIJY81d0P3YTYYR2ENmqhP1z4Y",
+  "name": "Alliance Town Center",
+  "state": "TX",
+  "latitude": 32.9119737,
+  "longitude": -97.31426479999999,
+  "phone": "++1 817-380-2772",
+  "imageURLs": [
+    "/images/malls/tx-alliance-town-center-1.jpg"
+  ],
+  "summary": "Alliance Town Center is a premier open-air lifestyle destination in Fort Worth's AllianceTexas development, featuring 38 retail shops, 58 dining options, and a movie theater within a master-planned mixed-use community. The center offers a complete live-work-play environment with integrated residential communities, Class A office spaces, parks, trails, and wellness amenities.",
+  "openFrom": 500,
+  "openUntil": 100,
+  "rating": 4.5,
+  "reviewCount": 7609,
+  "website": "http://www.alliancetowncenter.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Alliance Town Center attracts a diverse, affluent demographic primarily consisting of young professionals and families with above-average household incomes, reflecting the master-planned AllianceTexas development's upscale positioning. The trade area serves Fort Worth's rapidly growing northern suburbs, drawing visitors aged 25-54 with household incomes exceeding $75,000 who value convenience and quality lifestyle amenities. Primary market segments include dual-income families seeking one-stop shopping for retail, dining, and entertainment, as well as office workers from the nearby Hillwood Commons business district. Shopping patterns emphasize experiential retail with strong preference for dining options, entertainment venues like the movie theater, and easy access to complementary services within the mixed-use development.",
+  "description": "Alliance Town Center stands as the vibrant retail heart of the master-planned AllianceTexas development in Fort Worth, offering a comprehensive lifestyle destination that seamlessly integrates shopping, dining, living, and working. Developed by Hillwood and established over three decades ago, this open-air center has evolved into a premier mixed-use community featuring 38 retail shops and an impressive 58 dining options, complemented by a movie theater and extensive entertainment amenities. The center's strategic positioning within AllianceTexas provides visitors with access to not only their favorite retail brands but also 9 residential communities and Class A office spaces at Hillwood Commons, creating a true live-work-play environment. Beyond traditional shopping, Alliance Town Center distinguishes itself as a hub of wellness and community activity, featuring parks, trails, and health-focused amenities that encourage an active lifestyle. The center continues to evolve with new additions and tenant mix adjustments that respond to changing consumer behaviors and the return-to-work shift, maintaining its position as a dynamic gathering place for Fort Worth's thriving northern corridor.",
+  "numberOfStores": 96,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 34.93194825690496
+}

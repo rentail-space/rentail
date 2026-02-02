@@ -1,0 +1,26 @@
+{
+  "address": "110 Vintage Park Boulevard",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJewJ3kGLSQIYRPUj6t5lQchY",
+  "name": "Vintage Park",
+  "state": "TX",
+  "latitude": 29.9942721,
+  "longitude": -95.5723218,
+  "phone": "++1 281-655-8000",
+  "imageURLs": [
+    "/images/malls/tx-vintage-park-1.jpg"
+  ],
+  "summary": "Vintage Park is a contemporary lifestyle center in northwest Houston featuring high-end shops, diverse dining options, spa services, and regular live entertainment. This upscale open-air village serves as a premier community gathering place, hosting weekend concerts and special events throughout the year.",
+  "openFrom": 900,
+  "openUntil": 2200,
+  "rating": 4.6,
+  "reviewCount": 5358,
+  "website": "http://www.vintageparkhouston.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Vintage Park attracts an affluent, family-oriented demographic from the rapidly growing northwest Houston suburbs, particularly the Cypress and Tomball areas. The primary trade area consists of upper-middle to high-income households with median household incomes exceeding $100,000, featuring young professionals and established families with children. Visitors typically range from 25-54 years old and demonstrate strong preferences for experiential shopping, combining retail with dining and entertainment options. The center serves as a lifestyle destination for residents of nearby master-planned communities who value convenience, quality retailers, and regular community events.",
+  "description": "Vintage Park stands as Houston's premier lifestyle shopping village, offering a sophisticated blend of high-end retail, fine dining, and entertainment in the heart of northwest Houston's most desirable neighborhoods. This contemporary open-air complex has established itself as more than just a shopping destination—it's a vibrant community gathering place that hosts live music every weekend at the fountains, creating an engaging atmosphere from 7-10 PM with performances by local artists. The center features a carefully curated mix of upscale shops, a spa, and diverse dining options ranging from casual eateries to fine dining establishments, all designed to provide visitors with a complete lifestyle experience. Throughout the year, Vintage Park brings the community together with special events and seasonal programming, reinforcing its position as a social hub for the area's affluent residents. With its commitment to quality tenants, regular entertainment, and community engagement, Vintage Park has become the go-to destination for discerning shoppers seeking both convenience and an elevated retail experience in northwest Houston.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 51.46023738795623
+}

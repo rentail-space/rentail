@@ -1,0 +1,27 @@
+{
+  "address": "West Lake Houston Parkway",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ1y1TvE6uQIYRCV5rhQov1cw",
+  "name": "Westlake Marketplace",
+  "state": "TX",
+  "latitude": 29.927194399999998,
+  "longitude": -95.20346889999999,
+  "phone": "++1 281-693-1400",
+  "imageURLs": [
+    "/images/malls/tx-westlake-marketplace-1.jpg"
+  ],
+  "summary": "Westlake Marketplace is a 450,000 square foot community shopping center strategically located at Sam Houston Tollway and West Lake Houston Parkway in northeast Houston. This open-air retail destination serves the thriving Lake Houston residential corridor with a convenient mix of national retailers, dining, and services.",
+  "openFrom": 900,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 3035,
+  "website": "https://www.frpltd.com/properties/westlake-marketplace/directory?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Westlake Marketplace serves the growing residential communities of northeast Houston, particularly the Lake Houston area, attracting middle to upper-middle income families with household incomes ranging from $75,000 to $125,000. The primary trade area consists of young families and professionals aged 25-54 with children, drawn to the area's newer housing developments and highly-rated schools. Shoppers typically visit for convenience-oriented retail and dining, with strong weekday traffic from nearby office parks and weekend family shopping trips.",
+  "description": "Westlake Marketplace is a prominent community shopping center located at the intersection of Sam Houston Tollway and West Lake Houston Parkway in northeast Houston, Texas. Spanning approximately 450,000 square feet of developed retail space, this open-air center serves as a vital commercial hub for the rapidly growing Lake Houston residential corridor. The property is strategically positioned to capture traffic from both the Sam Houston Tollway and the surrounding master-planned communities that have transformed this area into one of Houston's most desirable suburban markets. Managed by FRP Ltd., a diversified real estate company with expertise in retail, healthcare, residential, and industrial properties, Westlake Marketplace offers a convenient mix of national retailers, dining options, and service-oriented tenants. The center's accessibility, ample parking, and modern facilities make it a preferred destination for families and professionals seeking everyday shopping needs and lifestyle amenities in a well-maintained environment.",
+  "squareFootage": 450000,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 30.64299651961923
+}

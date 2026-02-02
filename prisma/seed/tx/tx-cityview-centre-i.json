@@ -1,0 +1,26 @@
+{
+  "address": "4750 Bryant Irvin Road",
+  "city": "Fort Worth",
+  "country": "US",
+  "googlePlaceID": "places/ChIJnTZ38Z9yToYRxVYEfp1KTf0",
+  "name": "Cityview Centre I",
+  "state": "TX",
+  "latitude": 32.681164,
+  "longitude": -97.4166091,
+  "imageURLs": [
+    "/images/malls/tx-cityview-centre-i-1.jpg"
+  ],
+  "openFrom": 900,
+  "openUntil": 2200,
+  "rating": 4.3,
+  "reviewCount": 2540,
+  "website": "https://www.mallsinamerica.com/amp/texas/cityview-centre?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Cityview Centre serves the southwest Fort Worth market, attracting middle to upper-middle income families and professionals from the Bryant Irvin corridor and surrounding suburban neighborhoods. The trade area demographics skew toward households with annual incomes of $60,000-$100,000+, with a mix of young families, active adults, and working professionals aged 25-55. Visitors are drawn to the center's diverse mix of fitness facilities, dining options, and service-oriented tenants that cater to busy suburban lifestyles and convenience-focused shopping patterns.",
+  "description": "Cityview Centre is a vibrant community shopping center located at 4720 Bryant Irvin Road in Fort Worth, Texas, serving the growing southwest Fort Worth market. With 80 diverse stores and services, the center has established itself as a convenient one-stop destination for the surrounding residential communities. The tenant mix reflects the needs of busy suburban families and professionals, featuring popular anchors like Academy Sports+Outdoors and Spec's Wine, Spirits and Finer Foods, alongside a strong collection of fitness and wellness concepts including CLASS UFC GYM, Altitude Trampoline Park, Tapout Fitness, and Aqua-Tots Swim School. Dining options range from casual favorites like IHOP, Outback Steakhouse, and Dave's Hot Chicken to unique local concepts such as Hawaiian Bros Island Grill, Razzoo's Cajun Cafe, and Lola's Cuban Food. The center also provides essential services including dental and medical offices, salons, financial services, and specialty retailers, making it a true community hub that serves daily needs beyond traditional retail shopping.",
+  "numberOfStores": 80,
+  "summary": "Cityview Centre is a bustling 80-store community shopping center on Bryant Irvin Road in southwest Fort Worth, anchored by Academy Sports+Outdoors and featuring a strong mix of fitness facilities, diverse dining options, and essential services. The center serves as a convenient neighborhood hub with popular tenants ranging from Outback Steakhouse and IHOP to multiple gyms and wellness centers.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 29.281569962931467
+}

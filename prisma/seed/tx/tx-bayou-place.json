@@ -1,0 +1,26 @@
+{
+  "address": "500 Texas Avenue",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJm0PZszC_QIYR52W136mLsmo",
+  "name": "Bayou Place",
+  "state": "TX",
+  "latitude": 29.762527400000003,
+  "longitude": -95.3677086,
+  "phone": "++1 346-998-8167",
+  "imageURLs": [
+    "/images/malls/tx-bayou-place-1.jpg"
+  ],
+  "summary": "Bayou Place is Houston's premier dining and entertainment district located in the heart of the Theater District. Featuring the Revention Music Center, The Ballroom at Bayou Place, and sophisticated dining options, it serves as the cultural and social hub alongside the city's most prestigious performing arts venues.",
+  "openFrom": 1100,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 1358,
+  "website": "http://www.bayouplace.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Bayou Place attracts a diverse, culturally-engaged demographic drawn to Houston's Theater District, including urban professionals, arts patrons, and entertainment seekers with above-average incomes. The visitor base skews toward adults aged 25-54, including both downtown office workers seeking dining options and theater-goers attending performances at nearby venues like the Hobby Center and Alley Theatre. The trade area encompasses Houston's central business district and surrounding urban neighborhoods, with visitors typically seeking upscale dining experiences and live entertainment rather than traditional retail shopping.",
+  "description": "Bayou Place stands as Houston's premier dining and entertainment destination in the heart of the city's renowned Theater District. Located at 500 Texas Street, this unique mixed-use complex combines world-class entertainment venues with sophisticated dining options and office space, creating a vibrant urban gathering place. The center is home to the Revention Music Center, a flexible performance space that hosts major concerts and events, as well as The Ballroom at Bayou Place for special occasions. Strategically positioned alongside Houston's most prestigious performing arts venues including the Hobby Center for the Performing Arts, the Alley Theatre, and the Wortham Theater Center, Bayou Place serves as the cultural and social hub for pre-show dining and post-performance gatherings. The complex's integration of dining, entertainment, and office uses creates a dynamic atmosphere that draws both daytime professionals and evening theater patrons, making it a cornerstone of Houston's downtown cultural renaissance.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 27.569517975511452
+}

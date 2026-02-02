@@ -1,0 +1,26 @@
+{
+  "address": "2601 Preston Road",
+  "city": "Frisco",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ7U0L7e48TIYRTfrKXjkTSTE",
+  "name": "Stonebriar Centre",
+  "state": "TX",
+  "latitude": 33.099101,
+  "longitude": -96.81135599999999,
+  "phone": "++1 972-668-4900",
+  "imageURLs": [
+    "/images/malls/tx-stonebriar-centre-1.jpg"
+  ],
+  "summary": "Stonebriar Centre is Frisco's premier regional shopping destination, featuring department stores, specialty retailers, restaurants, and an AMC Dine-In Theatre. The expansive mall offers an elegant, modern setting that serves as the retail cornerstone of one of Texas's most affluent and fastest-growing communities.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 15090,
+  "website": "https://www.shopstonebriar.com/en.html?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Stonebriar Centre attracts an affluent, family-oriented demographic from the rapidly growing Frisco area and surrounding North Dallas suburbs. The primary trade area includes upper-middle to high-income households with median incomes exceeding $100,000, featuring young professionals, established families with children, and tech industry workers drawn to the area's corporate headquarters. Shoppers typically range from 25-54 years old with significant purchasing power, seeking a mix of fashion, dining, and entertainment options. The center serves as a regional destination for the prosperous Collin County market, known for excellent schools and master-planned communities.",
+  "description": "Stonebriar Centre stands as Frisco's premier shopping destination, offering an elegant and modern retail experience in one of Texas's fastest-growing cities. This expansive regional mall features a carefully curated mix of department stores, specialty retailers, and dining options that cater to the sophisticated tastes of North Dallas shoppers. The center's contemporary design provides an inviting atmosphere for families and fashion enthusiasts alike, with wide corridors and upscale finishes throughout. Beyond traditional shopping, Stonebriar Centre has evolved into a lifestyle hub, featuring an AMC Dine-In Theatre with 24 screens that adds entertainment value to the retail experience. Located at the intersection of Preston Road and State Highway 121, the mall serves as a cornerstone of Frisco's retail landscape, drawing visitors from across the Dallas-Fort Worth metroplex with its diverse tenant mix and commitment to providing a premium shopping environment.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 37.60820315798031
+}

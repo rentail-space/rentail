@@ -1,0 +1,27 @@
+{
+  "address": "201 Sharpstown Center",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJC02fjlnCQIYRCGtOgNsDJMk",
+  "name": "PlazAmericas",
+  "state": "TX",
+  "latitude": 29.706678900000004,
+  "longitude": -95.5155405,
+  "phone": "++1 713-777-1111",
+  "imageURLs": [
+    "/images/malls/tx-plazamericas-1.jpg"
+  ],
+  "summary": "PlazAmericas is a large regional shopping center in Houston featuring over 150 stores with diverse retailers, restaurants, and entertainment options. The center includes the unique 83,000 square foot Mercado marketplace filled with specialty shops and small businesses, plus a kids' play area, serving the multicultural communities of southwest Houston.",
+  "openFrom": 1100,
+  "openUntil": 2000,
+  "rating": 4.1,
+  "reviewCount": 7737,
+  "website": "http://www.plazamericas.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "PlazAmericas primarily serves Houston's diverse Hispanic and multicultural communities, attracting families and value-conscious shoppers from the Sharpstown area and surrounding southwest Houston neighborhoods. The trade area consists of predominantly middle-income households with strong Hispanic cultural preferences, seeking authentic retail experiences, specialty goods, and services that cater to their community. Visitors typically include multi-generational families who appreciate the bilingual environment and the unique Mercado concept offering small businesses and specialty items not found in traditional malls.",
+  "description": "PlazAmericas stands as a unique shopping destination in Houston's Sharpstown area, offering a distinctive blend of traditional retail and cultural marketplace experiences. This regional shopping center features over 150 stores, providing an extensive variety of retailers, restaurants, entertainment options, carts, and kiosks that cater to the diverse communities of southwest Houston. At the heart of the center lies the Mercado at PlazAmericas, an impressive 83,000 square foot marketplace filled with numerous small businesses and specialty stores offering unique items and services that reflect the rich cultural heritage of the area. The center has established itself as more than just a shopping venue—it's a community gathering place where families can enjoy a kids' play area, diverse dining options, and a welcoming bilingual environment. With its commitment to health and safety, comprehensive tenant mix, and focus on serving the multicultural population of Houston, PlazAmericas continues to be a vital retail and social hub in the region.",
+  "numberOfStores": 150,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 31.886295294232315
+}

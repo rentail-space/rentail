@@ -1,0 +1,26 @@
+{
+  "address": "4040 South Lamar Boulevard",
+  "city": "Austin",
+  "country": "US",
+  "googlePlaceID": "places/ChIJgesQzTpLW4YRCDCLjl3k4eo",
+  "name": "Brodie Oaks Shopping Center",
+  "state": "TX",
+  "latitude": 30.236441399999997,
+  "longitude": -97.7955514,
+  "phone": "++1 512-477-1212",
+  "imageURLs": [
+    "/images/malls/tx-brodie-oaks-shopping-center-1.jpg"
+  ],
+  "summary": "Brodie Oaks Shopping Center is a vast urban mall complex in South Austin featuring casual restaurants, department stores, and offices. Currently undergoing redevelopment, this well-established center serves as a central hub along the popular South Lamar Boulevard corridor.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 1727,
+  "website": "https://brodieoaksredevelopment.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Brodie Oaks serves the affluent South Austin market, attracting middle to upper-middle income families and young professionals with household incomes typically ranging from $75,000 to $150,000+. The trade area encompasses the rapidly growing South Lamar corridor, drawing residents from nearby neighborhoods like Circle C Ranch, Barton Creek, and South Congress. Shoppers tend to be educated millennials and Gen X families who value convenience, quality dining options, and a mix of national retailers with local Austin flavor, reflecting the area's preference for walkable, mixed-use developments.",
+  "description": "Brodie Oaks Shopping Center is a vast urban mall complex located at 4040 South Lamar Boulevard in the heart of South Austin's thriving commercial corridor. This expansive development has evolved into a dynamic mixed-use destination that serves as a central gathering place for the surrounding communities. The center features a wide range of casual restaurants, department stores, and professional offices, creating a vibrant atmosphere that caters to both daily needs and leisure activities. Currently undergoing a major redevelopment, Brodie Oaks is transforming into a modern lifestyle destination that will blend retail, dining, residential, and office spaces to meet the demands of Austin's growing population. With its prime location along South Lamar Boulevard, one of Austin's most desirable corridors, the center benefits from excellent visibility and accessibility, making it a convenient stop for residents throughout South Austin and beyond.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 27.193255635566658
+}

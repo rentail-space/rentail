@@ -1,0 +1,37 @@
+{
+  "address": "11215 South Interstate 35 Frontage Road",
+  "city": "Austin",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ6X5EKThNW4YR6XAg2YKo7Mk",
+  "name": "The Shops At Onion Creek",
+  "state": "TX",
+  "latitude": 30.1375158,
+  "longitude": -97.79628869999999,
+  "imageURLs": [
+    "/images/malls/tx-the-shops-at-onion-creek-1.jpg"
+  ],
+  "summary": "The Shops at Onion Creek is a 27,000 square foot neighborhood shopping center on Interstate 35 in South Austin, featuring a diverse mix of 15 tenants including medical offices, banking, dining, and essential services. With exceptional visibility from 118,000 daily vehicles and proximity to Baylor Scott & White facilities, the center serves a growing community of nearly 50,000 residents within 3 miles.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.6,
+  "reviewCount": 44,
+  "website": "https://www.stonecrestinvestments.com/shops-at-onion-creek?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "The Shops at Onion Creek serves a diverse South Austin market with a 1-mile radius population of 6,110 residents in 2,557 households, expanding to 49,199 people within 3 miles. The trade area demonstrates solid middle-income demographics with average household incomes of $93,910 within 1 mile, $88,693 within 3 miles, and $86,454 within 5 miles. The center attracts families and professionals seeking convenient neighborhood services, medical care, and dining options, benefiting from high visibility along Interstate 35 with 118,000 vehicles per day. The tenant mix of service providers, medical offices, and local restaurants indicates a customer base prioritizing accessibility and everyday convenience over luxury shopping experiences.",
+  "description": "The Shops at Onion Creek is a well-positioned neighborhood shopping center located at 11215 IH-35 South in Austin, Texas, offering 27,000 square feet of retail and service space. Strategically situated along Interstate 35 with exceptional visibility from 118,000 vehicles per day, the center serves the growing South Austin community with a carefully curated mix of essential services, medical facilities, and dining options. The diverse tenant roster includes Regions Bank, Baylor Scott & White Institute for Rehabilitation, Spirit Wine & Liquor, South Austin Cat Hospital, Coldwell Banker, Pearl Nails, State Farm, Onion Creek Family Dentistry, CraigO's Pizza, Prime Taco, Edward Jones, Wisp Eyelash Lounge, Opera Coffeehouse Cafe, and Subway. The center benefits from its proximity to a Baylor Scott & White Clinic, creating a medical hub that drives consistent traffic to the property. Developed and managed by StoneCrest Investments, The Shops at Onion Creek serves a thriving trade area with nearly 50,000 residents within 3 miles and average household incomes exceeding $88,000, making it an ideal destination for neighborhood convenience and professional services in one of Austin's fastest-growing corridors.",
+  "numberOfStores": 15,
+  "squareFootage": 27000,
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "104",
+      "type": "Other",
+      "size": 1501,
+      "available": true,
+      "imageURLs": [
+        "https://static.wixstatic.com/media/c15b48_e7d2c923f72f453c85ecf7a095636e8f.jpg/v1/fill/w_1280,h_720,al_t,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c15b48_e7d2c923f72f453c85ecf7a095636e8f.jpg"
+      ]
+    }
+  ],
+  "ranking": 15.119764623672923
+}

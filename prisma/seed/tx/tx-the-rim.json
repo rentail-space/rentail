@@ -1,0 +1,26 @@
+{
+  "address": "17703 La Cantera Parkway",
+  "city": "San Antonio",
+  "country": "US",
+  "googlePlaceID": "places/ChIJLckNWyFkXIYRolyLQO-9Krc",
+  "name": "The Rim",
+  "state": "TX",
+  "latitude": 29.609366899999994,
+  "longitude": -98.5987734,
+  "phone": "++1 210-641-1777",
+  "imageURLs": [
+    "/images/malls/tx-the-rim-1.jpg"
+  ],
+  "summary": "The Rim is San Antonio's premier open-air lifestyle center featuring diverse brand-name retailers, popular restaurants, and a multiplex cinema in the city's affluent northwest corridor. With its sprawling layout and upscale tenant mix, it serves as the primary shopping and entertainment destination for the region's growing population.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.6,
+  "reviewCount": 13272,
+  "website": "http://www.therimsa.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Rim attracts an affluent, family-oriented demographic from San Antonio's northwest corridor, with primary visitors aged 25-54 representing upper-middle to high-income households earning $75,000+. The trade area draws from the rapidly growing Stone Oak and surrounding master-planned communities, characterized by young professionals, dual-income families, and retirees seeking upscale shopping and dining experiences. Shoppers typically exhibit preferences for premium brands, experiential retail, and entertainment options, with strong weekend traffic driven by families combining shopping with dining and cinema visits.",
+  "description": "The Rim stands as San Antonio's premier open-air lifestyle destination, strategically positioned along La Cantera Parkway in the city's thriving northwest corridor. This sprawling shopping center has established itself as a cornerstone of upscale retail and entertainment in the region, offering visitors a sophisticated blend of diverse brand-name stores, acclaimed restaurants, and a state-of-the-art multiplex cinema. The center's open-air design creates an inviting atmosphere that encourages leisurely exploration, with wide pedestrian walkways connecting an impressive array of national retailers and local favorites. With operating hours from 10 AM to 9 PM daily, The Rim caters to both serious shoppers and those seeking a complete entertainment experience, featuring everything from fashion and home goods to specialty retailers and service providers. The center's exceptional 4.6-star rating from over 13,000 reviews reflects its consistent delivery of quality experiences, modern amenities, and a tenant mix that appeals to San Antonio's discerning northwest community.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 37.931014631749996
+}

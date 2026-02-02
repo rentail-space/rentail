@@ -1,0 +1,24 @@
+{
+  "address": "600 North Shepherd Drive",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJk7QZ9l7HQIYRoksm_dtocFM",
+  "name": "M-K-T",
+  "state": "TX",
+  "latitude": 29.782566,
+  "longitude": -95.4079648,
+  "imageURLs": [
+    "/images/malls/tx-m-k-t-1.jpg"
+  ],
+  "summary": "M-K-T is a trail-oriented lifestyle center in Houston's Heights neighborhood featuring adaptive reuse architecture by Michael Hsu, with up to 30 boutique retailers and chef-driven restaurants. This creative destination offers four acres of green space and direct access to the Heights Hike and Bike Trail, serving as a vibrant hub for Houston's creative class.",
+  "rating": 4.7,
+  "reviewCount": 532,
+  "website": "http://www.themkt.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "M-K-T attracts Houston's creative class and young urban professionals, primarily millennials and Gen Z visitors aged 25-45 with above-average incomes who value unique, artisanal experiences over mass-market retail. The Heights neighborhood draws affluent households with a preference for boutique shopping, chef-driven dining, and experiential entertainment. Visitors are typically educated, design-conscious consumers who prioritize authenticity and local businesses, with strong interest in outdoor recreation as evidenced by the trail-oriented development connecting to the Heights Hike and Bike Trail.",
+  "description": "M-K-T is a trail-oriented mixed-use lifestyle destination located at 600 North Shepherd Drive in Houston's coveted Heights neighborhood, representing a stunning example of adaptive reuse architecture. Designed by the acclaimed Michael Hsu Office of Architecture, this innovative project transformed five historic buildings into a vibrant hub for Houston's creative class, seamlessly blending the area's industrial heritage with contemporary urban design. The development features up to 30 carefully curated merchants and restaurants, offering sought-after boutique retail, chef-driven dining concepts, and dynamic nightlife options that cater to discerning visitors seeking unique, on-trend experiences. M-K-T's signature 40-foot tall Spine serves as a dramatic architectural centerpiece, particularly striking when illuminated at night, while four acres of thoughtfully designed green space provide gathering areas for the community. Directly connected to 4.7 miles of the Heights Hike and Bike Trail, M-K-T has established itself as Houston's premier destination for those seeking an authentic, locally-focused shopping and dining experience in one of the city's most dynamic neighborhoods.",
+  "numberOfStores": 30,
+  "tier": 3,
+  "spaces": [],
+  "ranking": 38.43535401536018
+}

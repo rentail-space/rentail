@@ -1,0 +1,84 @@
+{
+  "address": "3301-3401 West Airport Freeway",
+  "city": "Irving",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ_WfcQTOCToYRzgRpAsoDa9s",
+  "name": "Irving Towne Center",
+  "state": "TX",
+  "latitude": 32.8388585,
+  "longitude": -96.991237,
+  "phone": "++1 214-954-0600",
+  "imageURLs": [
+    "/images/malls/tx-irving-towne-center-1.jpg"
+  ],
+  "summary": "Irving Towne Center is an everyday retail complex in Irving, TX, featuring a department store anchor, diverse shops, services, and restaurants including both American and Asian dining options. Conveniently located on Airport Freeway, it serves as a one-stop destination for the local community's shopping, dining, and service needs.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.1,
+  "reviewCount": 2744,
+  "website": "http://www.irvingtownecenter.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Irving Towne Center attracts a diverse, middle-income demographic primarily from the Irving and West Dallas areas, with a strong representation of families and working professionals aged 25-54. The trade area serves a multicultural population with significant Hispanic and Asian communities, reflected in the center's dining options that include American favorites and Asian cuisines. Visitors typically seek convenient, everyday shopping for retail, services, and dining needs, with household incomes ranging from $40,000 to $75,000 annually. The center's location near the Airport Freeway provides accessibility to both local residents and commuters, creating a steady flow of value-conscious shoppers seeking practical retail solutions and family-friendly dining options.",
+  "description": "Irving Towne Center is a vibrant community shopping destination located at 3401 W Airport Fwy in Irving, Texas, offering a comprehensive mix of retail, dining, and service options for the local community. This everyday retail complex features a chain department store anchor along with a diverse collection of shops and restaurants that cater to the needs of Irving residents and visitors alike. The center has established itself as a convenient one-stop destination where shoppers can find their favorite retail brands, access essential services ranging from nail salons to business services, and enjoy a variety of dining experiences from classic American fare to authentic Asian cuisines. With its strategic location near the Airport Freeway, Irving Towne Center provides easy accessibility and ample parking for a stress-free shopping experience. The property is professionally managed by Teresa Mitchell and leased by the Weitzman Group, ensuring quality tenant mix and well-maintained facilities that serve the Irving community's everyday shopping and dining needs.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "101",
+      "type": "Other",
+      "size": 2000,
+      "available": true
+    },
+    {
+      "number": "106",
+      "type": "Other",
+      "size": 1125,
+      "available": true
+    },
+    {
+      "number": "108",
+      "type": "Other",
+      "size": 1960,
+      "available": true
+    },
+    {
+      "number": "112",
+      "type": "Other",
+      "size": 1875,
+      "available": true
+    },
+    {
+      "number": "134",
+      "type": "Other",
+      "size": 1103,
+      "available": true
+    },
+    {
+      "number": "206",
+      "type": "Other",
+      "size": 3871,
+      "floor": 2,
+      "available": true
+    },
+    {
+      "number": "222",
+      "type": "Other",
+      "size": 915,
+      "floor": 2,
+      "available": true
+    },
+    {
+      "number": "2400",
+      "type": "Other",
+      "size": 5600,
+      "floor": 2,
+      "available": true
+    },
+    {
+      "number": "3301",
+      "type": "Other",
+      "size": 6000,
+      "available": true
+    }
+  ],
+  "ranking": 28.19474967768465
+}

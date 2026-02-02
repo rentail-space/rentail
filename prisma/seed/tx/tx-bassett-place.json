@@ -1,0 +1,26 @@
+{
+  "address": "6101 Gateway Boulevard West",
+  "city": "El Paso",
+  "country": "US",
+  "googlePlaceID": "places/ChIJTT_0uk5a54YRLEqeDOvvG7s",
+  "name": "Bassett Place",
+  "state": "TX",
+  "latitude": 31.783188400000004,
+  "longitude": -106.4129895,
+  "phone": "++1 915-772-7479",
+  "imageURLs": [
+    "/images/malls/tx-bassett-place-1.jpg"
+  ],
+  "summary": "Bassett Place is El Paso's leading enclosed regional shopping center, featuring a comprehensive mix of national retailers, dining, and entertainment options. Located on Gateway Boulevard West, the mall serves as a premier shopping destination for West Texas families and visitors seeking a diverse retail experience.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 8273,
+  "website": "https://shopbassettplace.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Bassett Place serves a diverse, middle-income demographic in West El Paso, drawing families and young adults from the surrounding residential areas and nearby Fort Bliss military base. The trade area includes a significant Hispanic population reflective of El Paso's border location, with shoppers seeking value-oriented national brands and family-friendly entertainment options. Visitors typically include military families, cross-border shoppers from Ciudad Juárez, and local residents seeking convenient access to mainstream retail and dining in a climate-controlled environment.",
+  "description": "Bassett Place stands as El Paso's premier enclosed shopping destination, conveniently located on Gateway Boulevard West in the heart of the city's retail corridor. Since opening its doors, this regional mall has served as a gathering place for West Texas families, offering a diverse mix of national retailers, dining options, and entertainment venues all under one roof. The center features an extensive directory of stores spanning fashion, electronics, home goods, and specialty retail, making it a one-stop destination for shoppers throughout the El Paso metropolitan area. With its climate-controlled environment—a welcome respite from the desert heat—Bassett Place provides a comfortable shopping experience year-round. The mall's commitment to community engagement is evident through its regular events programming and strong social media presence, connecting with shoppers through the @shopbassett handle and maintaining its position as a vital retail hub in the region.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 33.691902009215426
+}

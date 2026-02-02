@@ -1,0 +1,25 @@
+{
+  "address": "2100 Southeast Loop 410 Access Road",
+  "city": "San Antonio",
+  "country": "US",
+  "googlePlaceID": "places/ChIJq7q62zDxXIYR2DPKJtWhP-4",
+  "name": "Rigsby Road Shopping Center",
+  "state": "TX",
+  "latitude": 29.4020778,
+  "longitude": -98.38780399999999,
+  "imageURLs": [
+    "/images/malls/tx-rigsby-road-shopping-center-1.jpg"
+  ],
+  "summary": "Rigsby Road Shopping Center is a neighborhood retail center on Southeast Loop 410 in San Antonio, offering convenient access to local businesses with ample parking. With a 4.2-star rating and daily hours from 8:30 AM to 9:00 PM, it serves the southeast San Antonio community's everyday shopping needs.",
+  "openFrom": 830,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 364,
+  "website": "http://rigsby-center.edan.io/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Rigsby Road Shopping Center serves a diverse, working-class to middle-income demographic in southeast San Antonio, with a significant Hispanic population reflective of the broader area. The trade area attracts families and value-conscious shoppers seeking convenient neighborhood retail and services along the Loop 410 corridor. Primary visitors include local residents within a 3-5 mile radius who prioritize accessibility and everyday shopping needs over destination retail experiences.",
+  "description": "Rigsby Road Shopping Center is a convenient neighborhood retail destination located at 2100 Southeast Loop 410 Access Road in San Antonio, Texas. Strategically positioned along the Loop 410 corridor, this shopping center serves the southeast San Antonio community with accessible parking and a variety of local businesses. The center has earned a solid 4.2-star rating from 364 reviews, with visitors praising its cleanliness and ample parking availability. Among its tenants, Red Star Vapor has been highlighted for excellent service and competitive pricing, reflecting the center's focus on serving local customer needs. Operating daily from 8:30 AM to 9:00 PM, Rigsby Road Shopping Center provides a practical shopping option for residents seeking everyday goods and services in a well-maintained, easily accessible location.",
+  "tier": 1,
+  "spaces": [],
+  "ranking": 10.756625811326035
+}

@@ -1,0 +1,32 @@
+{
+  "address": "9001 Spencer Highway",
+  "city": "La Porte",
+  "country": "US",
+  "googlePlaceID": "places/ChIJrxBTFaGfQIYRDaxskR5uuMM",
+  "name": "Deer Park Station",
+  "state": "TX",
+  "latitude": 29.6645554,
+  "longitude": -95.1005365,
+  "phone": "++1 713-781-7111",
+  "imageURLs": [
+    "/images/malls/tx-deer-park-station-1.jpg"
+  ],
+  "summary": "Deer Park Station is a convenient shopping center located at Spencer Highway and East Boulevard in Deer Park, TX, featuring a mix of retail, dining, and service tenants including Sally Beauty Supply, Kung Fu Tea, Supercuts, and Stanton Optical. Positioned in front of Walmart and approximately 30 minutes from downtown Houston, the center serves as a community hub for everyday shopping and service needs.",
+  "openFrom": 900,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 63,
+  "website": "http://www.deer-park-station.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Deer Park Station primarily serves middle-income families and working professionals in the Deer Park and La Porte areas, located approximately 30 minutes from downtown Houston. The trade area attracts a diverse demographic mix typical of suburban Houston communities, including young families, blue-collar workers from nearby industrial facilities, and value-conscious shoppers seeking convenient access to essential services and retail. The center's positioning near Walmart and focus on health, beauty, and service-oriented tenants indicates a customer base prioritizing everyday needs and practical shopping experiences over luxury or entertainment-focused retail.",
+  "description": "Deer Park Station is a conveniently located shopping center situated at 9001 Spencer Highway in Deer Park, Texas, positioned at the rapidly expanding intersection of Spencer Highway and East Boulevard, directly in front of Walmart. This community-focused retail destination offers a carefully curated mix of health, beauty, retail, dining, and service options designed to meet the everyday needs of local residents and visitors. The center features popular tenants including Sally Beauty Supply, Kung Fu Tea, Supercuts, and Stanton Optical, providing a comprehensive range of shopping and service experiences under one roof. Located approximately 30 minutes from downtown Houston, Deer Park Station serves as a hub of ease and convenience in the heart of a growing suburban community. With its strategic location and diverse tenant mix spanning shopping, dining, and essential services, the center has established itself as a go-to destination for residents seeking quality retail and service options in the Deer Park area.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "C",
+      "type": "Other",
+      "size": 1200
+    }
+  ],
+  "ranking": 15.83419683519152
+}

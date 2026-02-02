@@ -1,0 +1,26 @@
+{
+  "address": "816 Foch Street",
+  "city": "Fort Worth",
+  "country": "US",
+  "googlePlaceID": "places/ChIJVd3UhGVzToYRnPQG76xs-UE",
+  "name": "Artisan Circle",
+  "state": "TX",
+  "latitude": 32.750127,
+  "longitude": -97.3584381,
+  "phone": "++1 817-784-7000",
+  "imageURLs": [
+    "/images/malls/tx-artisan-circle-1.jpg"
+  ],
+  "summary": "Artisan Circle is a 5-block urban lifestyle destination in Fort Worth's Cultural District, featuring stylish restaurants, entertainment venues including a movie theater, and wellness services. This walkable open-air center offers a curated mix of dining and lifestyle experiences that complement the surrounding museums and arts venues.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 2089,
+  "website": "https://www.artisancirclefw.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Artisan Circle attracts an affluent, culturally-engaged demographic drawn to the Fort Worth Cultural District, with visitors typically ranging from young professionals to established families with above-average household incomes. The trade area serves educated consumers who value arts, entertainment, and upscale dining experiences, reflecting the sophisticated character of the surrounding museum district. Primary market segments include art enthusiasts, theater-goers, and discerning diners seeking elevated culinary experiences in an urban village atmosphere. Shopping patterns emphasize experiential visits combining dining, entertainment, and lifestyle services rather than traditional retail-focused trips.",
+  "description": "Artisan Circle is a distinctive 5-block urban village nestled in the heart of Fort Worth's prestigious Cultural District, serving as a vibrant complement to the world-class museums and performing arts venues that define this celebrated neighborhood. This thoughtfully designed lifestyle destination mirrors the excellence and creativity of its cultural neighbors, offering visitors a carefully curated collection of dining, entertainment, and wellness experiences. The center features an impressive array of restaurants and eateries that deliver a collage of incredible flavors, from casual dining to upscale culinary experiences, alongside a movie theater that provides entertainment options for all ages. Beyond dining and entertainment, Artisan Circle caters to personal wellness with salon services and spa treatments, creating a comprehensive lifestyle destination where every visit becomes a unique experience. The open-air design and walkable layout encourage exploration across its five blocks, making it a gathering place where the community can experience the intersection of culture, cuisine, and contemporary urban living in one of Fort Worth's most dynamic neighborhoods.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 29.21545827182672
+}

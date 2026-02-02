@@ -1,0 +1,27 @@
+{
+  "address": "1000 East 41st Street",
+  "city": "Austin",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ0UqGVvW1RIYR4pvzFid5JkA",
+  "name": "Hancock Center",
+  "state": "TX",
+  "latitude": 30.2998572,
+  "longitude": -97.7199325,
+  "phone": "++1 713-599-3500",
+  "imageURLs": [
+    "/images/malls/tx-hancock-center-1.jpg"
+  ],
+  "summary": "Hancock Center is a 245,628 square foot community shopping center in central Austin, anchored by H.E.B. and serving an affluent neighborhood near downtown and the University of Texas. With over 4 million annual visits, the center provides essential retail, fitness, and services to one of Austin's most desirable residential areas.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 6084,
+  "website": "https://www.regencycenters.com/property/detail/665/Hancock-Center?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Hancock Center serves an affluent, educated urban population with a 3-mile radius household income of $139,679 and average home values of $872,076. The trade area includes 189,375 residents and a robust daytime population of 347,309, reflecting the center's proximity to downtown Austin and the University of Texas. The demographic mix includes young professionals, university faculty and staff, and established families in central Austin's desirable neighborhoods. Shoppers are drawn to the center's convenience-oriented retail mix anchored by H.E.B., with over 4 million annual visits indicating strong local loyalty and frequent shopping trips for everyday needs.",
+  "description": "Hancock Center is a well-established community shopping destination strategically located at 1000 East 41st Street in central Austin, just minutes from downtown and the University of Texas campus. Developed and managed by Regency Centers, this 245,628 square foot open-air center serves one of Austin's most densely populated and affluent neighborhoods, with convenient access off Interstate 35. The property is anchored by H.E.B., a beloved Texas grocery chain, and features a strong tenant mix including Twin Liquors, Petco, and 24 Hour Fitness, providing essential services and amenities for the local community. With over 4 million annual visits and a 4.4-star rating from more than 6,000 reviews, Hancock Center has established itself as a trusted neighborhood hub. The center's location in a trade area with household incomes averaging nearly $140,000 and home values exceeding $870,000 positions it as a premier shopping destination serving central Austin's discerning residents and the substantial daytime population drawn to the nearby university and downtown employment centers.",
+  "squareFootage": 245628,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 33.300865007352456
+}

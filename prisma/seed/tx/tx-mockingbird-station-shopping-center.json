@@ -1,0 +1,26 @@
+{
+  "address": "5307 East Mockingbird Lane",
+  "city": "Dallas",
+  "country": "US",
+  "googlePlaceID": "places/ChIJexKv12yfToYRe9CxwMqY6-Q",
+  "name": "Mockingbird Station® Shopping Center",
+  "state": "TX",
+  "latitude": 32.8377771,
+  "longitude": -96.7761238,
+  "phone": "++1 469-676-1930",
+  "imageURLs": [
+    "/images/malls/tx-mockingbird-station-shopping-center-1.jpg"
+  ],
+  "summary": "Mockingbird Station is a modern lifestyle center in East Dallas featuring boutique and national retailers, diverse dining options, a cinema, and comedy club. This transit-oriented mixed-use destination combines shopping, entertainment, and urban living in a walkable environment.",
+  "openFrom": 500,
+  "openUntil": 2230,
+  "rating": 4.4,
+  "reviewCount": 2882,
+  "website": "http://www.mockingbirdstation.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Mockingbird Station attracts an affluent, urban demographic primarily consisting of young professionals and families aged 25-45 with above-average household incomes exceeding $75,000. The trade area draws from the upscale neighborhoods of East Dallas, Lakewood, and Park Cities, with visitors seeking a walkable, mixed-use environment that combines shopping, dining, and entertainment. The center appeals to educated, trend-conscious consumers who value convenience and quality experiences, with strong patronage from nearby SMU students and faculty as well as residents of the adjacent transit-oriented residential community.",
+  "description": "Mockingbird Station Shopping Center represents a premier mixed-use destination in the heart of Dallas, seamlessly blending retail, dining, entertainment, and residential living into one vibrant urban village. Located at 5307 East Mockingbird Lane, this modern lifestyle center has transformed the area into a walkable, transit-oriented community that serves as a hub for East Dallas residents and visitors alike. The center features an impressive mix of boutique shops and big-name retailers, complemented by diverse dining options that cater to every palate. Entertainment amenities include a state-of-the-art cinema and a popular comedy club, making Mockingbird Station a destination for both everyday shopping and special occasions. With its convenient DART rail access and contemporary design, the center has become a model for urban development in Dallas, offering a sophisticated shopping and lifestyle experience that reflects the dynamic character of the surrounding neighborhoods.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 30.445306993006145
+}

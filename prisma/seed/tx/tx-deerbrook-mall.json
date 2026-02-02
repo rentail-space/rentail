@@ -1,0 +1,27 @@
+{
+  "address": "20131 Highway 59 North",
+  "city": "Humble",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ-RfT2AGzQIYRCEApOOcXm40",
+  "name": "Deerbrook Mall",
+  "state": "TX",
+  "latitude": 30.0094843,
+  "longitude": -95.2702395,
+  "phone": "++1 281-446-6626",
+  "imageURLs": [
+    "/images/malls/tx-deerbrook-mall-1.jpg"
+  ],
+  "summary": "Deerbrook Mall is the premier enclosed shopping destination in the Greater Houston Metro area, featuring more than 130 stores and restaurants along with an AMC 24-screen cinema. This one-stop retail center combines popular department store anchors with diverse specialty shops, dining options, and entertainment to serve the Humble community and northeast Houston suburbs.",
+  "openFrom": 1100,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 11853,
+  "website": "https://www.shopdeerbrookmall.com/en.html?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Deerbrook Mall serves the Greater Houston Metro area, particularly the Humble and northeast Houston communities, attracting a diverse, family-oriented demographic. The primary trade area consists of middle to upper-middle income households with a mix of young families, professionals, and retirees typical of suburban Houston. The center draws shoppers seeking convenient one-stop shopping for apparel, entertainment, and dining, with strong weekend traffic from families utilizing the cinema and department stores. The visitor base reflects the area's growing population diversity and includes both value-conscious shoppers and those seeking mid-tier retail brands.",
+  "description": "Deerbrook Mall stands as the premier shopping destination in the Greater Houston Metro area, serving the Humble community and surrounding northeast Houston suburbs since its establishment. This comprehensive retail center features more than 130 shops and restaurants, anchored by popular department stores that provide a full spectrum of shopping options under one roof. The mall's enclosed design offers climate-controlled comfort year-round, making it an ideal destination for Texas shoppers seeking relief from the heat while browsing fashion, jewelry, toys, and electronics retailers. Beyond traditional retail, Deerbrook Mall has evolved into a complete entertainment destination with the addition of AMC Deerbrook 24, a state-of-the-art cinema complex that draws moviegoers from across the region. Managed by Brookfield Properties, the center continues to adapt to changing retail trends while maintaining its position as the go-to shopping hub for families and individuals throughout the northeast Houston area, offering convenient access via Highway 59 North and ample parking for its diverse visitor base.",
+  "numberOfStores": 130,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 35.034923245849534
+}

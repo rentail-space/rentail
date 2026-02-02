@@ -1,0 +1,52 @@
+{
+  "address": "2632 Smith Ranch Road",
+  "city": "Pearland",
+  "country": "US",
+  "googlePlaceID": "places/ChIJx5MXITeTQIYRw2pOqdAF2_U",
+  "name": "The Crossing at 288",
+  "state": "TX",
+  "latitude": 29.5588803,
+  "longitude": -95.3855778,
+  "phone": "++1 713-781-7111",
+  "imageURLs": [
+    "/images/malls/tx-the-crossing-at-288-1.jpg"
+  ],
+  "summary": "The Crossing at 288 is Pearland's go-to shopping center featuring a perfect blend of retail brands, local shops, and diverse dining options from breakfast to sushi. Located conveniently along Highway 288, this community hub also offers comprehensive services including healthcare, dental, and business solutions for the entire family.",
+  "openFrom": 900,
+  "openUntil": 2200,
+  "rating": 4.3,
+  "reviewCount": 2924,
+  "website": "http://www.thecrossingat288.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Crossing at 288 serves the growing Pearland, Texas market, attracting primarily middle to upper-middle income families with household incomes ranging from $75,000 to $150,000. The trade area draws heavily from young professionals and families with children, reflecting Pearland's status as one of Houston's fastest-growing suburban communities. Shoppers typically range from 25-54 years old, with a strong preference for convenient one-stop shopping that combines retail, dining, and essential services. The center benefits from its location along Highway 288, capturing both local residents and commuters traveling between Houston and the southern suburbs.",
+  "description": "The Crossing at 288 is Pearland's premier shopping destination, strategically located at 2632 Smith Ranch Road along the bustling Highway 288 corridor. This vibrant community center offers an exceptional mix of local boutiques, national retail brands, and diverse dining options that cater to the entire family. From breakfast spots to sushi restaurants, Mexican cuisine to ice cream parlors, the center provides culinary experiences for every taste and occasion. Beyond shopping and dining, The Crossing at 288 serves as a comprehensive lifestyle hub with essential services including healthcare, dental care, legal offices, and business services. The center's thoughtfully designed open-air layout creates an inviting atmosphere where visitors can enjoy the Texas weather while exploring their favorite stores and discovering new local businesses, making it the perfect destination for both everyday errands and leisurely weekend outings.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "Suite 102",
+      "type": "Inline",
+      "size": 3850
+    },
+    {
+      "number": "Suite 104",
+      "type": "Inline",
+      "size": 1892
+    },
+    {
+      "number": "Suite 105",
+      "type": "Inline",
+      "size": 1640
+    },
+    {
+      "number": "Suite 110",
+      "type": "Inline",
+      "size": 2504
+    },
+    {
+      "number": "Suite 2750",
+      "type": "Other",
+      "size": 24849
+    }
+  ],
+  "ranking": 29.807405367258074
+}

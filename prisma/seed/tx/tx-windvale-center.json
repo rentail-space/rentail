@@ -1,0 +1,28 @@
+{
+  "address": "9420 College Park Drive",
+  "city": "Conroe",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ0dKeB3g6R4YRP34zgGBFxQo",
+  "name": "Windvale Center",
+  "state": "TX",
+  "latitude": 30.228468499999995,
+  "longitude": -95.5092317,
+  "phone": "++1 610-215-7939",
+  "imageURLs": [
+    "/images/malls/tx-windvale-center-1.jpg"
+  ],
+  "summary": "Windvale Center is a Tesla-anchored shopping center in The Woodlands, Texas, offering 100,688 square feet of retail space serving an affluent trade area with average household incomes exceeding $163,000. The property features strong visibility from FM 1488 Road with over 46,000 daily vehicles and benefits from proximity to Lone Star College and major medical complexes.",
+  "openFrom": 600,
+  "openUntil": 0,
+  "rating": 4.1,
+  "reviewCount": 249,
+  "website": "https://brixmor.com/leasing/retail-space/tx/conroe/windvale-center?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Windvale Center serves an affluent and highly educated trade area with average household incomes exceeding $163,000 within a 3-mile radius, where 38% of residents hold college degrees. The center attracts professionals and families from The Woodlands area, benefiting from proximity to Lone Star College-Montgomery with over 15,000 students and major medical complexes including St. Luke's Health Hospital, Houston Methodist Hospital, and Texas Children's Hospital. The demographic profile reflects upper-middle-class consumers seeking convenience-oriented retail and services, with strong purchasing power and education levels well above national averages.",
+  "description": "Windvale Center is a Tesla-anchored shopping center strategically located at 9420 College Park Drive in The Woodlands, Texas, offering 100,688 square feet of retail space. This well-positioned center serves one of Houston's most affluent communities, with average household incomes exceeding $163,000 within a 3-mile radius and 38% of residents holding college degrees. The property benefits from exceptional visibility with over 46,000 vehicles passing daily on FM 1488 Road and 18,000 vehicles on College Park Drive, ensuring strong traffic flow and customer accessibility. Current tenants include Tesla as the anchor, along with a diverse mix of service-oriented businesses such as Swimlabs, Herrera's Mexican Restaurant, DDS Dentures and Implant Solutions, and The Woodlands Hair Elite. The center's proximity to Lone Star College-Montgomery with 15,000+ students and major medical facilities including St. Luke's Health Hospital, Houston Methodist Hospital, and Texas Children's Hospital creates a robust customer base and consistent foot traffic throughout the day.",
+  "numberOfStores": 13,
+  "squareFootage": 100688,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 19.648834646185037
+}

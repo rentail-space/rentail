@@ -1,0 +1,58 @@
+{
+  "address": "1270 West State Highway 114",
+  "city": "Grapevine",
+  "country": "US",
+  "googlePlaceID": "places/ChIJzwZOdNnUTYYRfkncREI76zo",
+  "name": "Grapevine Towne Center",
+  "state": "TX",
+  "latitude": 32.9294465,
+  "longitude": -97.0891003,
+  "phone": "++1 214-954-0600",
+  "imageURLs": [
+    "/images/malls/tx-grapevine-towne-center-1.jpg"
+  ],
+  "summary": "Grapevine Towne Center is a recently renovated strip mall in Grapevine, Texas, featuring a diverse mix of national retailers, local shops, and casual dining options including LoLo's Chicken & Waffles. Conveniently located on State Highway 114 near Grapevine Mills Mall, the center offers shopping, services, and restaurants in an accessible, unassuming setting.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.5,
+  "reviewCount": 2269,
+  "website": "http://www.grapevinetownecenter.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Grapevine Towne Center attracts a diverse mix of middle to upper-middle income families and professionals from the Grapevine and greater Dallas-Fort Worth area. The trade area serves a blend of suburban residents, business travelers, and tourists visiting nearby attractions like Grapevine Mills Mall and DFW Airport. Primary shoppers include families with children seeking convenient dining and retail options, as well as working professionals aged 25-54 looking for services and quick-service restaurants. The center benefits from high traffic volumes along State Highway 114, drawing both local residents and pass-through customers with household incomes ranging from $60,000 to $100,000+.",
+  "description": "Grapevine Towne Center is a recently renovated shopping destination located at 1270 W State Highway 114 in Grapevine, Texas, offering a convenient mix of national retailers, dining options, and essential services. Strategically positioned just down the street from Grapevine Mills Mall, this accessible strip center serves the thriving Dallas-Fort Worth community with a diverse tenant lineup that includes unique dining experiences like LoLo's Chicken & Waffles alongside specialty retailers such as Red Wing Shoes. The center provides a perfect blend of small businesses, local shops, and favorite retail brands, creating a neighborhood shopping experience that caters to everyday needs. Beyond shopping, Grapevine Towne Center offers comprehensive services ranging from healthcare and dental to legal and business solutions, making it a one-stop destination for the community. With its variety of dining options from slices to sandwiches, ample parking, and easy highway access, the center has established itself as a practical and welcoming shopping hub in the heart of Grapevine.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "100",
+      "type": "Inline",
+      "size": 19410
+    },
+    {
+      "number": "106",
+      "type": "Inline",
+      "size": 4610
+    },
+    {
+      "number": "116",
+      "type": "Inline",
+      "size": 9658,
+      "available": true
+    },
+    {
+      "number": "300",
+      "type": "Inline",
+      "size": 8994
+    },
+    {
+      "number": "504",
+      "type": "Inline",
+      "size": 3253
+    },
+    {
+      "number": "600",
+      "type": "Inline",
+      "size": 1735
+    }
+  ],
+  "ranking": 30.202510462964423
+}

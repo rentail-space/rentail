@@ -1,0 +1,27 @@
+{
+  "address": "2600 West 7th Street",
+  "city": "Fort Worth",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ4_QVanlzToYRIHP_Y8AL6aQ",
+  "name": "Montgomery Plaza",
+  "state": "TX",
+  "latitude": 32.75161180000001,
+  "longitude": -97.35333639999999,
+  "phone": "++1 833-800-4343",
+  "imageURLs": [
+    "/images/malls/tx-montgomery-plaza-1.jpg"
+  ],
+  "summary": "Montgomery Plaza is a unique mixed-use lifestyle center featuring the historic 1928 Montgomery Ward Art Deco building converted into luxury condos with an 80-foot retail promenade. The open-air property combines popular anchors like Ross, Marshalls/HomeGoods, and Petsmart with local boutiques and outdoor dining along Fort Worth's trendy W 7th corridor.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 4811,
+  "website": "https://www.kimcorealty.com/properties/montgomery-plaza/111001/view?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Montgomery Plaza attracts an affluent, urban demographic with the 1-mile trade area showing an average household income of $123,067 and median household income of $90,460. The center serves approximately 10,586 residents within one mile, expanding to 96,574 within three miles, with a significant daytime population of 35,252 nearby workers. The property benefits from over 1,000 residential units within walking distance, including 240 luxury condominiums within the historic building itself, creating a live-work-shop environment that appeals to young professionals and established families seeking convenience and quality retail experiences.",
+  "description": "Montgomery Plaza is a distinctive mixed-use development that seamlessly blends Fort Worth's rich architectural heritage with modern retail convenience along the vibrant W 7th corridor. At its heart stands the beautifully preserved 1928 Montgomery Ward store and catalog building, a nationally recognized Art Deco structure that was masterfully converted in 2004 into a luxury residential community featuring 240 condominiums on levels 3 through 8. The conversion incorporated a dramatic six-story opening through the center of the building, creating an impressive 80-foot promenade lined with shopping and dining destinations that showcase the building's industrial elements, elevated ceilings, and enormous full-length windows. The open-air retail component offers popular anchors including Ross Dress for Less, Marshalls/HomeGoods, and Petsmart, complemented by local boutiques and outdoor dining options, all supported by ample parking with a 5.85 ratio per 1,000 square feet. With over 1,000 additional residential units within walking distance and a thriving daytime population, Montgomery Plaza has established itself as a premier destination where historic preservation meets contemporary urban living in the heart of Fort Worth.",
+  "squareFootage": 291121,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 33.14011821212308
+}

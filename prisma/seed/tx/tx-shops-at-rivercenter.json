@@ -1,0 +1,26 @@
+{
+  "address": "849 East Commerce Street",
+  "city": "San Antonio",
+  "country": "US",
+  "googlePlaceID": "places/ChIJWQFYkapYXIYRL7-3TEY_55c",
+  "name": "Shops at Rivercenter",
+  "state": "TX",
+  "latitude": 29.4238596,
+  "longitude": -98.4851568,
+  "phone": "++1 210-225-0000",
+  "imageURLs": [
+    "/images/malls/tx-shops-at-rivercenter-1.jpg"
+  ],
+  "summary": "Shops at Rivercenter is San Antonio's downtown shopping destination located directly on the famous River Walk, featuring popular chain stores, diverse dining options, and an IMAX theater. This enclosed mall offers a unique blend of retail and entertainment in a climate-controlled environment, serving both tourists and local residents in the heart of the city.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 17720,
+  "website": "https://www.shoprivercenter.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Shops at Rivercenter attracts a diverse mix of tourists and local San Antonio residents, with a strong emphasis on visitors exploring the famous River Walk area. The center draws families, young professionals, and tourists aged 25-55 with middle to upper-middle income levels seeking convenient shopping and dining along the iconic waterway. The trade area benefits from San Antonio's robust tourism industry, with visitors seeking popular chain retailers and entertainment options in a climate-controlled environment. Shopping patterns reflect both destination tourism and local convenience, with peak traffic during weekends, holidays, and major San Antonio events.",
+  "description": "Shops at Rivercenter stands as San Antonio's premier downtown shopping destination, uniquely positioned along the world-famous River Walk at 849 East Commerce Street. This enclosed regional mall seamlessly blends retail therapy with the city's most iconic tourist attraction, offering visitors a climate-controlled shopping experience just steps from the scenic San Antonio River. The center features an impressive array of popular chain stores and restaurants, complemented by an IMAX movie theater that provides entertainment for the whole family. Connected to a hotel, Rivercenter serves as both a tourist destination and a convenient shopping hub for locals, creating a vibrant atmosphere that captures the spirit of downtown San Antonio. With its strategic location in the heart of the city's entertainment district, the mall has become an integral part of the River Walk experience, drawing millions of visitors annually who seek the perfect combination of shopping, dining, and entertainment in one of Texas's most beloved destinations.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 38.23617345795929
+}

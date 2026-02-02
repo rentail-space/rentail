@@ -1,0 +1,32 @@
+{
+  "address": "East Boulevard",
+  "city": "Deer Park",
+  "country": "US",
+  "googlePlaceID": "places/ChIJOUTkjqGfQIYRfiNNrOxLtV4",
+  "name": "Junction at Deer Park",
+  "state": "TX",
+  "latitude": 29.6668453,
+  "longitude": -95.09682459999999,
+  "phone": "++1 713-781-7111",
+  "imageURLs": [
+    "/images/malls/tx-junction-at-deer-park-1.jpg"
+  ],
+  "summary": "The Junction at Deer Park is an HEB-anchored community center located just 25 minutes from Houston, offering a convenient mix of shopping, dining, and essential services. The center serves the Deer Park community with national retailers like AT&T and Ideal Dental alongside local businesses in a modern, accessible setting.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 554,
+  "website": "http://www.thejunctionatdeerpark.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Junction at Deer Park serves the growing Deer Park community and surrounding Greater Houston area, attracting middle-income families and working professionals from the petrochemical and industrial sectors that dominate the local economy. The trade area consists primarily of homeowners aged 25-54 with household incomes ranging from $50,000 to $90,000, seeking convenient access to everyday shopping, dining, and services. Shoppers typically visit for weekly grocery runs at HEB and routine errands, with strong demand for health and beauty services, quick-service dining, and essential retail needs that serve the practical requirements of this suburban Houston community.",
+  "description": "The Junction at Deer Park is a community-focused shopping destination conveniently located at the northeast corner of Spencer Highway and East Boulevard in Deer Park, Texas, just 25 minutes from downtown Houston. Anchored by HEB, this modern retail center serves as a comprehensive hub for the surrounding community's dining, health, beauty, and everyday shopping needs. The center features a carefully curated mix of national retailers and local businesses, including AT&T, Ideal Dental, Nails of America, and YoYo's Chinese Cafe, providing residents with easy access to essential services and dining options. With its highly visible location and accessible layout, The Junction at Deer Park offers both small businesses and established brands an opportunity to connect with the thriving Deer Park community. The center's strategic positioning in this growing Houston suburb makes it an ideal destination for families and professionals seeking quality shopping and services close to home.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "E",
+      "type": "Inline",
+      "size": 1300
+    }
+  ],
+  "ranking": 24.142885929610184
+}

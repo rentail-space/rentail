@@ -1,0 +1,27 @@
+{
+  "address": "314 East Avenue F",
+  "city": "Midlothian",
+  "country": "US",
+  "googlePlaceID": "places/ChIJUfW5IXTzToYRdGwaF9Wtw14",
+  "name": "Founders Row",
+  "state": "TX",
+  "latitude": 32.482929299999995,
+  "longitude": -96.99056879999999,
+  "phone": "++1 972-298-3531",
+  "imageURLs": [
+    "/images/malls/tx-founders-row-1.jpg"
+  ],
+  "summary": "Founders Row is an innovative lifestyle center featuring beautifully restored Victorian-era homes from the late 1800s that have been transformed into unique shops, restaurants, and service businesses. This historic gathering destination offers boutique shopping, fresh seafood dining, wine tasting, coffee, and salon services in an intimate small-town setting that celebrates Midlothian's heritage.",
+  "openFrom": 800,
+  "openUntil": 2300,
+  "rating": 4.5,
+  "reviewCount": 13,
+  "website": "https://foundersrowtx.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Founders Row attracts an upscale, heritage-conscious demographic primarily consisting of affluent families and professionals from Midlothian and surrounding Ellis County communities. The visitor base skews toward middle to upper-middle income households with appreciation for historic preservation, artisanal shopping, and experiential dining. Primary shoppers are women aged 30-65 seeking boutique fashion, home décor, and specialty services in an intimate setting. The trade area draws both local residents seeking a small-town gathering place and regional visitors attracted to the unique Victorian-era architecture and curated tenant mix of wine bars, fresh seafood, coffee houses, and specialty boutiques.",
+  "description": "Founders Row is a truly distinctive shopping and dining destination in Midlothian, Texas, where history meets modern commerce in an innovative preservation project. This unique lifestyle center features beautifully restored Victorian-era Queen Anne homes from the late 1800s to early 1900s that have been rescued, relocated, and masterfully transformed by skilled craftsmen into an exciting collection of shops and restaurants. Currently comprising eight historic buildings with plans to expand across an entire city block, each structure tells its own story—like the Mulkey-Loggins House, built in 1898 by Dr. James C. Loggins on land settled in 1854 by pioneer Philip Mulkey. The center offers an carefully curated mix of hospitality and service-oriented businesses including Wilson's Seafood for fresh catches and cocktails, The Porch Pour wine bar, SOCO Coffee House, and boutiques like Copper Rose and NikNik's Boutique, alongside Ember & Ash Salon and House of Aesthetics. Founders Row serves as a gathering destination that captures the spirit of Midlothian's history and friendly small-town lifestyle, hosting community events like their annual Santa celebration complete with ice skating rink, petting zoo, and live entertainment, making it the perfect place for shopping, dining, working, and relaxing in a warm and welcoming historic setting.",
+  "numberOfStores": 8,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 10.02549017076153
+}

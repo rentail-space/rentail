@@ -1,0 +1,27 @@
+{
+  "address": "750 Sunland Park Drive",
+  "city": "El Paso",
+  "country": "US",
+  "googlePlaceID": "places/ChIJoWrRgA_43YYRCuVTlbT8QB0",
+  "name": "The Shoppes at Solana",
+  "state": "TX",
+  "latitude": 31.8144216,
+  "longitude": -106.5440443,
+  "phone": "++1 915-833-5596",
+  "imageURLs": [
+    "/images/malls/tx-the-shoppes-at-solana-1.jpg"
+  ],
+  "summary": "The Shoppes at Solana is El Paso's prominent two-level indoor shopping center featuring 100+ stores, chain restaurants, and a movie theater. This community-focused destination offers a complete experience with national brands, local boutiques, diverse dining options, and entertainment venues that make it the vibrant heart of west El Paso.",
+  "openFrom": 1100,
+  "openUntil": 2000,
+  "rating": 4.1,
+  "reviewCount": 4284,
+  "website": "http://theshoppesatsolana.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "The Shoppes at Solana attracts a diverse mix of families and young professionals from the west El Paso area, particularly from the growing Sunland Park Drive corridor. The trade area serves middle to upper-middle income households drawn to the convenience of having 100+ stores, dining, and entertainment options under one roof. Visitors typically include families with children seeking entertainment at the theater and gaming activities, as well as shoppers looking for both national brands and unique local retailers. The center serves as a community gathering place for corporate events, school fairs, and social occasions, indicating strong engagement with local residents and organizations.",
+  "description": "The Shoppes at Solana stands as El Paso's premier indoor shopping destination, offering an expansive two-level retail experience at 750 Sunland Park Drive. With over 100 stores spanning national brands and unique local boutiques, the center has established itself as the vibrant heart of the west El Paso community since its opening. Beyond traditional shopping, The Solana has evolved into a comprehensive lifestyle destination where visitors can shop more than 65 favorite retailers, dine at a variety of restaurants ranging from quick snacks to full dining experiences, and enjoy extensive entertainment options including a movie theater and gaming activities. The center prides itself on being more than just a shopping mall—it's a community hub that hosts corporate events, school fairs, non-profit fundraisers, pop-ups, pageants, and recitals, making it the go-to destination for gatherings with friends, family, and colleagues. With its ADA-friendly facilities, convenient location, and commitment to creating memorable experiences, The Shoppes at Solana continues to serve as the cornerstone of retail and entertainment in the El Paso region.",
+  "numberOfStores": 100,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 29.781165589710504
+}

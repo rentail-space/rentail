@@ -1,0 +1,26 @@
+{
+  "address": "7049 South Desert Boulevard",
+  "city": "El Paso",
+  "country": "US",
+  "googlePlaceID": "places/ChIJPej2WOD-3YYRboPGvYtWXhU",
+  "name": "Shops at Outlet Mall",
+  "state": "TX",
+  "latitude": 31.9108075,
+  "longitude": -106.58480229999999,
+  "imageURLs": [
+    "/images/malls/tx-shops-at-outlet-mall-1.jpg"
+  ],
+  "summary": "The Outlet Shoppes at El Paso is the region's only outlet shopping center, featuring over 100 name-brand stores including Nike, Coach, Brooks Brothers, and Banana Republic. As El Paso's favorite shopping destination, it offers significant savings on quality merchandise with special discount programs for military, students, teachers, and seniors.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 675,
+  "website": "https://www.theoutletshoppesatelpaso.com/?utm_source=rentail.space",
+  "centerType": "OutletCenter",
+  "demographics": "The Outlet Shoppes at El Paso serves a diverse cross-border market drawing from both El Paso, Texas and Ciudad Juárez, Mexico, attracting middle-income families and value-conscious shoppers seeking brand-name merchandise at discounted prices. The trade area includes a significant Hispanic population with bilingual households, military families from nearby Fort Bliss, and tourists traveling along Interstate 10. Typical visitors are bargain hunters aged 25-54 with household incomes ranging from $35,000 to $75,000 who prioritize value and are willing to drive for outlet shopping experiences. The center benefits from its position as the only outlet mall in the El Paso region, drawing shoppers from a wide geographic radius including southern New Mexico.",
+  "description": "The Outlet Shoppes at El Paso stands as the Sun City's premier outlet shopping destination and the only outlet center serving the greater El Paso region. Located at 7051 South Desert Boulevard in Canutilo, this expansive shopping center features more than 100 name-brand outlet stores offering significant savings on quality merchandise. Shoppers can explore an impressive roster of popular brands including Nike, Coach, Brooks Brothers, Ann Taylor, Banana Republic, Johnston & Murphy, Crocs, and Boss, among many others. The center operates Monday through Saturday from 10:00 AM to 9:00 PM and Sundays from 11:00 AM to 7:00 PM, providing convenient shopping hours for the entire community. Beyond its extensive retail offerings, The Outlet Shoppes at El Paso provides a comprehensive shopping experience with special discount programs for military personnel, students, teachers, and seniors, along with group tour accommodations and regular special events. The center's strategic location near the Texas-Mexico border makes it a popular destination for both local residents and international visitors seeking American brand outlets at competitive prices.",
+  "numberOfStores": 100,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 25.463733955479224
+}

@@ -1,0 +1,25 @@
+{
+  "address": "1121 Uptown Park Boulevard",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJt1Ur8kfBQIYRRzN9RMR0ycs",
+  "name": "Uptown Park",
+  "state": "TX",
+  "latitude": 29.756543500000003,
+  "longitude": -95.45685999999999,
+  "imageURLs": [
+    "/images/malls/tx-uptown-park-1.jpg"
+  ],
+  "summary": "Uptown Park is Houston's premier outdoor lifestyle center featuring upscale boutiques, acclaimed restaurants, and wine bars in an elegant open-air setting. This vibrant destination blends emerging brands with local favorites, hosting regular events like trunk shows, happy hours, and live music that create a sophisticated community gathering space.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.6,
+  "reviewCount": 2038,
+  "website": "http://www.uptownparkhouston.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Uptown Park attracts an affluent, professional demographic primarily consisting of adults aged 30-55 with household incomes exceeding $100,000 annually. The trade area draws from Houston's upscale Uptown and Galleria neighborhoods, appealing to dual-income households and young professionals seeking premium shopping and dining experiences. Visitors typically exhibit sophisticated tastes, favoring designer boutiques, upscale restaurants, and curated retail experiences over mass-market options. The center's emphasis on events like trunk shows and happy hours caters to socially-engaged consumers who value experiential retail and community gathering spaces.",
+  "description": "Uptown Park stands as Houston's premier outdoor lifestyle shopping center, offering a sophisticated blend of upscale boutiques, acclaimed restaurants, and specialty services in an elegant open-air setting. Located at 1121 Uptown Park Boulevard in the heart of Houston's prestigious Uptown district, this vibrant destination has established itself as a local staple that pairs emerging brands with beloved favorites. The center features an impressive roster of retailers including Elizabeth Anthony, a renowned women's boutique offering exceptional designer apparel; Top Drawer Lingerie, housing Texas' finest collection of over 100 intimate apparel brands; and the locally-owned Ethan Allen furniture store, operated by the Chesnick family for over 50 years. Dining options range from local favorites to national concepts, with popular spots like Postino, Duchess, Sweetgreen, and Urbe offering everything from casual bites to upscale cuisine. Beyond shopping and dining, Uptown Park serves as a community hub, hosting regular events including live music, happy hours, trunk shows, and fitness classes at Ritual One, creating a dynamic atmosphere rooted in creativity and connection.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 45.667017679451625
+}

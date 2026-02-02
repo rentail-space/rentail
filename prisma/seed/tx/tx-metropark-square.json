@@ -1,0 +1,26 @@
+{
+  "address": "8888 Metropark Drive",
+  "city": "Shenandoah",
+  "country": "US",
+  "googlePlaceID": "places/ChIJVcfIwhk3R4YREBbLY350BoI",
+  "name": "Metropark Square",
+  "state": "TX",
+  "latitude": 30.1947987,
+  "longitude": -95.4525336,
+  "phone": "++1 972-421-2700",
+  "imageURLs": [
+    "/images/malls/tx-metropark-square-1.jpg"
+  ],
+  "summary": "Metropark Square is a mixed-use lifestyle center in Shenandoah, Texas, featuring an integrated blend of retail shops, residential units, hotel accommodations, and a popular farmers market. This modern development serves as a community hub for the northern Houston suburbs with its open-air design and diverse amenities.",
+  "openFrom": 600,
+  "openUntil": 100,
+  "rating": 4.5,
+  "reviewCount": 1361,
+  "website": "https://www.metroparksquare.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Metropark Square serves the affluent northern Houston suburbs, attracting middle to upper-income families and young professionals from Shenandoah, The Woodlands, and surrounding Montgomery County communities. The trade area features households with above-average incomes, college-educated residents, and a mix of established families and growing young professional demographics. Visitors typically seek a blend of shopping, dining, and entertainment experiences in an upscale open-air environment, with preferences for quality retailers and experiential amenities including the on-site hotel and farmers market offerings.",
+  "description": "Metropark Square is a distinctive mixed-use lifestyle destination located in Shenandoah, Texas, just south of The Woodlands master-planned community. This thoughtfully designed center combines retail shopping with residential living, hotel accommodations, and a vibrant farmers market, creating a true live-work-play environment for the northern Houston suburbs. The open-air property features a carefully curated mix of shops and dining options that cater to the area's discerning residents and visitors. With its integration of residential units and hotel facilities alongside traditional retail, Metropark Square represents a modern approach to community-centered development. The center's farmers market component adds a unique local flavor, providing fresh produce and artisanal goods that complement the shopping and dining experiences, making it a gathering place for the community throughout the week.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 28.204723126830014
+}

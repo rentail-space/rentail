@@ -1,0 +1,26 @@
+{
+  "address": "3700 Vision Drive",
+  "city": "Fort Worth",
+  "country": "US",
+  "googlePlaceID": "places/ChIJJ3mZ9pRyToYRyYxpt9lvV7A",
+  "name": "Waterside Shopping Center",
+  "state": "TX",
+  "latitude": 32.7005413,
+  "longitude": -97.41302900000001,
+  "phone": "++1 817-818-4256",
+  "imageURLs": [
+    "/images/malls/tx-waterside-shopping-center-1.jpg"
+  ],
+  "openFrom": 700,
+  "openUntil": 1900,
+  "rating": 4.6,
+  "reviewCount": 1105,
+  "website": "https://www.watersidefw.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Waterside attracts an affluent, health-conscious demographic from Fort Worth's west side, particularly families and professionals aged 30-55 with above-average household incomes. The trade area includes the upscale neighborhoods surrounding Bryant Irvin Road and benefits from proximity to the Trinity River trails, drawing active lifestyle enthusiasts and outdoor recreation seekers. Primary visitors are educated consumers who prioritize organic and sustainable shopping options, as evidenced by anchor tenants like Whole Foods Market and REI, with strong interest in wellness, fitness, and experiential dining.",
+  "description": "Waterside Shopping Center represents Fort Worth's premier lifestyle destination, strategically positioned at the intersection of Bryant Irvin Road and Arborlawn Drive along the scenic shores of the Trinity River. This thoughtfully designed open-air center embraces the \"Conscious Place\" philosophy, creating an inspirational and sustainable environment that connects community, wellness, and vitality. Anchored by premium retailers including Whole Foods Market and REI, Waterside offers a carefully curated mix of shopping, dining, fitness, and entertainment options that cater to discerning consumers seeking quality experiences. The center's signature Grove area behind Whole Foods and Piatello provides a unique gathering space featuring free wifi, public art installations, bocce ball courts, and direct access to the Trinity Trails system, making it more than just a shopping destination but a true community hub. With covered parking garage convenience, diverse dining options ranging from fast-casual to intimate fine dining, and seamless connectivity to the Chisholm Trail, Waterside has established itself as Fort Worth's go-to destination for those seeking an elevated, experiential retail environment.",
+  "summary": "Waterside Shopping Center is Fort Worth's premier open-air lifestyle destination featuring upscale anchors like Whole Foods Market and REI, complemented by fine dining and wellness offerings. Located along the Trinity River with direct trail access, the center's unique Grove gathering space and \"Conscious Place\" philosophy create an experiential community hub that goes beyond traditional retail.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 41.998399436691585
+}

@@ -1,0 +1,26 @@
+{
+  "address": "1000 West Oaks Mall",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ0cz_fp7eQIYRitT9Jjsd8Xk",
+  "name": "West Oaks Mall",
+  "state": "TX",
+  "latitude": 29.732390199999994,
+  "longitude": -95.64873560000001,
+  "phone": "++1 281-531-1332",
+  "imageURLs": [
+    "/images/malls/tx-west-oaks-mall-1.jpg"
+  ],
+  "summary": "West Oaks Mall is an enclosed regional shopping center in west Houston featuring department stores, specialty shops for apparel, toys, and sports gear, plus a food court. The mall serves as a convenient community shopping destination for local families seeking value-oriented retail options.",
+  "openFrom": 1000,
+  "openUntil": 1800,
+  "rating": 3.5,
+  "reviewCount": 3118,
+  "website": "https://www.loopnet.com/Listing/1000-West-Oaks-Mall-Houston-TX/12803469/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "West Oaks Mall serves a diverse, middle-income demographic in west Houston, primarily attracting families and value-conscious shoppers from the surrounding suburban communities. The trade area encompasses households with median incomes ranging from $45,000 to $75,000, with a significant Hispanic population and multi-generational family units. Typical visitors include parents shopping for children's apparel and toys, budget-minded consumers seeking affordable fashion and everyday goods, and local residents utilizing the mall as a convenient community gathering space.",
+  "description": "West Oaks Mall has served the west Houston community since its opening, establishing itself as a regional shopping destination at 1000 West Oaks Mall. This enclosed shopping center features department store anchors alongside a diverse mix of specialty retailers offering apparel, toys, shoes, gifts, and sports gear to meet the everyday needs of local families. The mall provides a convenient food court where shoppers can refuel during their visits, making it a practical choice for extended shopping trips. With its accessible location and variety of value-oriented retailers, West Oaks Mall has become a familiar fixture in the community, drawing visitors from surrounding neighborhoods seeking affordable merchandise and family-friendly shopping experiences. While the center has faced challenges common to traditional malls in recent years, it continues to serve as an important retail hub for west Houston residents looking for convenient access to essential goods and services.",
+  "tier": 1,
+  "spaces": [],
+  "ranking": 0
+}

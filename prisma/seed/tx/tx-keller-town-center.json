@@ -1,0 +1,28 @@
+{
+  "address": "101 Town Center Lane",
+  "city": "Keller",
+  "country": "US",
+  "googlePlaceID": "places/ChIJcX1JSRnXTYYRMECHvd3bWo4",
+  "name": "Keller Town Center",
+  "state": "TX",
+  "latitude": 32.9330847,
+  "longitude": -97.2268685,
+  "phone": "++1 214-706-2500",
+  "imageURLs": [
+    "/images/malls/tx-keller-town-center-1.jpg"
+  ],
+  "summary": "Keller Town Center is a 120,279 square foot community shopping center anchored by Tom Thumb, strategically positioned in one of the Dallas-Fort Worth area's most affluent markets. Serving a trade area with average household incomes exceeding $200,000, the center attracts nearly 2 million annual visits from discerning shoppers seeking quality retail and services.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 1232,
+  "website": "https://www.regencycenters.com/property/detail/675/Keller-Town-Center?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Keller Town Center serves an exceptionally affluent trade area with households earning an average income of $202,629 within a 3-mile radius and average home values of $589,824. The center attracts approximately 1.98 million annual visits from a population of over 80,000 residents, primarily consisting of upper-income families and professionals in the Dallas-Fort Worth metropolitan area. The demographic profile skews toward established households with significant disposable income, seeking convenient access to quality grocery shopping, dining, and service-oriented retail in an upscale suburban setting.",
+  "description": "Keller Town Center is a premier community shopping destination strategically located on a major thoroughfare in Keller, Texas, serving one of the most affluent markets in the Dallas-Fort Worth metropolitan area. Anchored by Tom Thumb, this 120,279 square foot center has established itself as a vital retail hub for the surrounding neighborhoods, attracting nearly 2 million visits annually. The center is surrounded by dynamic residential communities where average household incomes exceed $200,000 and home values approach $590,000, creating a sophisticated customer base that values quality and convenience. Developed and managed by Regency Centers, a nationally recognized leader in community-centered retail, Keller Town Center offers a carefully curated mix of retailers, restaurants, salons, medical spaces, and fitness facilities that cater to the daily needs and lifestyle preferences of its discerning clientele. With its prime location, strong anchor tenant, and access to one of Texas's most desirable demographic profiles, Keller Town Center continues to thrive as an essential shopping and service destination in the North Texas market.",
+  "numberOfStores": 4,
+  "squareFootage": 120279,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 27.197374228889984
+}

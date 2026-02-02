@@ -1,0 +1,26 @@
+{
+  "address": "999 East Basse Road",
+  "city": "San Antonio",
+  "country": "US",
+  "googlePlaceID": "places/ChIJE_rXP0L1XIYRsk8M5o5MI1M",
+  "name": "The Shops at Lincoln Heights",
+  "state": "TX",
+  "latitude": 29.498112199999994,
+  "longitude": -98.4685425,
+  "phone": "++1 210-841-3214",
+  "imageURLs": [
+    "/images/malls/tx-the-shops-at-lincoln-heights-1.jpg"
+  ],
+  "summary": "The Shops at Lincoln Heights is a vibrant community center in San Antonio's upscale North Central area, anchored by H-E-B and featuring an exceptional blend of dining, wellness services, and specialty retail. Located near Alamo Heights and The Pearl, the center serves as a lifestyle destination with premium fitness studios, health services, and popular restaurants.",
+  "openFrom": 700,
+  "openUntil": 2300,
+  "rating": 4.5,
+  "reviewCount": 2785,
+  "website": "https://theshopsatlh.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Shops at Lincoln Heights attracts an affluent, educated demographic from the surrounding North Central San Antonio neighborhoods including Alamo Heights and Olmos Park, areas known for higher household incomes and professional residents. The center serves families and young professionals with median household incomes exceeding $75,000, drawn to the upscale H-E-B grocery anchor and specialty wellness services. Primary shoppers include health-conscious consumers aged 30-55 who value convenience, quality dining options, and premium services like massage, physiotherapy, and boutique fitness offerings. The trade area benefits from proximity to The Pearl and The Quarry, attracting both local residents seeking everyday necessities and destination visitors exploring San Antonio's upscale North Central corridor.",
+  "description": "The Shops at Lincoln Heights is a premier community shopping destination strategically located in San Antonio's thriving North Central area, serving the prestigious neighborhoods of Alamo Heights, Olmos Park, and The Quarry while positioned just minutes from the renowned Pearl district. This thoughtfully curated center anchors the community with an upscale H-E-B Lincoln Heights grocery store while offering an exceptional mix of dining, wellness, and specialty retail experiences. The center has established itself as a lifestyle hub featuring diverse restaurant options including Stone Werks Big Rock Grille, CAVA, and Jersey Mike's Subs, complemented by unique local retailers like Wolf Gang Bakery and Twin Liquors. Health and wellness form a cornerstone of the center's identity, with premium services including Massage Heights, Stretch Zone, HotWorx fitness studio, Results Physiotherapy, and San Antonio Eye Center providing comprehensive care options. Additional conveniences include beauty services from Blo Dry Bar and Palm Beach Tan, educational support through Mathnasium, and essential services from Wells Fargo and The UPS Store, making The Shops at Lincoln Heights a complete neighborhood destination professionally managed by CBRE.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 31.00342679558773
+}

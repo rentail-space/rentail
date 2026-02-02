@@ -1,0 +1,26 @@
+{
+  "address": "1612 South University Drive",
+  "city": "Fort Worth",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ5y2XTS1yToYRjGec1Xsz8ek",
+  "name": "University Park Village",
+  "state": "TX",
+  "latitude": 32.7275464,
+  "longitude": -97.36361330000001,
+  "phone": "++1 817-332-5700",
+  "imageURLs": [
+    "/images/malls/tx-university-park-village-1.jpg"
+  ],
+  "summary": "University Park Village is Fort Worth's premier upscale lifestyle center featuring luxury apparel shops and casual dining options. Managed by Simon Property Group, this high-end shopping destination serves the city's most affluent neighborhoods with a sophisticated retail and dining experience.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.5,
+  "reviewCount": 1734,
+  "website": "https://www.simon.com/mall/university-park-village?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "University Park Village attracts an affluent, educated demographic primarily consisting of professionals and families from the surrounding Fort Worth neighborhoods including Tanglewood, Mistletoe Heights, and Berkeley. The trade area serves upper-middle to high-income households with median incomes exceeding $75,000, with a significant portion of visitors being college-educated professionals aged 30-55. The center draws shoppers seeking upscale retail and dining experiences, with a customer base that values quality over discount pricing and frequents the property for both planned shopping trips and casual dining occasions.",
+  "description": "University Park Village stands as Fort Worth's premier upscale shopping destination, offering a sophisticated blend of luxury retail and refined dining experiences along South University Drive. This high-end lifestyle center has established itself as the go-to destination for discerning shoppers in the Fort Worth area, featuring an impressive collection of luxury apparel shops and casual dining options that cater to the city's most affluent residents. The center's open-air design creates an inviting atmosphere that encourages leisurely strolling between boutiques and restaurants, making it a popular gathering place for both serious shoppers and those seeking a pleasant dining experience. Managed by Simon Property Group, one of the nation's leading retail real estate companies, University Park Village benefits from professional management and a carefully curated tenant mix that maintains the center's upscale positioning. With its convenient location near Texas Christian University and some of Fort Worth's most prestigious neighborhoods, the center has become an integral part of the community's retail landscape, consistently earning high marks from visitors as evidenced by its impressive 4.5-star rating from over 1,700 reviews.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 43.72716275739259
+}

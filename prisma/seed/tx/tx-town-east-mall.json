@@ -1,0 +1,27 @@
+{
+  "address": "2063 Town East Mall",
+  "city": "Mesquite",
+  "country": "US",
+  "googlePlaceID": "places/ChIJSb6gni6kToYRfBu9WaZBcQ4",
+  "name": "Town East Mall",
+  "state": "TX",
+  "latitude": 32.8076709,
+  "longitude": -96.6237137,
+  "phone": "++1 972-270-4431",
+  "imageURLs": [
+    "/images/malls/tx-town-east-mall-1.jpg"
+  ],
+  "summary": "Town East Mall is a major enclosed regional shopping center in Mesquite featuring over 160 specialty shops, department store anchors, and an expansive 850-seat food court with more than 25 dining options. This established mall serves as a primary retail destination for the eastern Dallas-Fort Worth area, offering comprehensive shopping and dining experiences for the whole family.",
+  "openFrom": 1100,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 12225,
+  "website": "https://www.towneastmall.com/en.html?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Town East Mall serves a diverse, middle-income demographic in the eastern Dallas-Fort Worth metroplex, primarily drawing families and value-conscious shoppers from Mesquite and surrounding communities. The trade area includes a mix of suburban households with moderate income levels, young families, and multi-generational shoppers seeking affordable fashion and dining options. The center attracts a high volume of weekend traffic from the broader East Dallas region, with visitors typically looking for convenient one-stop shopping experiences that combine retail, dining, and entertainment in an accessible enclosed mall format.",
+  "description": "Town East Mall stands as a cornerstone shopping destination in Mesquite, Texas, serving the eastern Dallas-Fort Worth metroplex since its opening. This expansive enclosed regional mall features over 160 specialty shops and restaurants, anchored by major department stores that provide a comprehensive retail experience under one roof. The mall's impressive 850-seat food court offers visitors a choice of more than 25 diverse eateries, making it a popular gathering spot for families and friends throughout the day. With convenient hours and ample parking, Town East Mall has established itself as a community hub where shoppers can find everything from the latest fashion trends to everyday essentials. The center's prime location in Mesquite, combined with its extensive tenant mix and family-friendly amenities, continues to draw visitors from across the region who appreciate the convenience of traditional enclosed mall shopping.",
+  "numberOfStores": 160,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 34.33289048948353
+}

@@ -1,0 +1,65 @@
+{
+  "address": "1255 Southwest Loop 410",
+  "city": "San Antonio",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ35NBw69cXIYR3jUoYBvexUU",
+  "name": "Westlakes Landing",
+  "state": "TX",
+  "latitude": 29.425454599999995,
+  "longitude": -98.6513451,
+  "phone": "++1 210-824-4242",
+  "imageURLs": [
+    "/images/malls/tx-westlakes-landing-1.jpg"
+  ],
+  "summary": "Westlakes Landing Center is an 83,617 square foot shopping center anchored by Santikos Entertainment, located along Loop 410 in San Antonio with over 105,000 daily car traffic. The center features a mix of national retailers including Sherwin Williams and State Farm, serving the everyday needs of west San Antonio residents.",
+  "openFrom": 1000,
+  "openUntil": 2359,
+  "rating": 4.3,
+  "reviewCount": 1022,
+  "website": "https://valcorcre.com/portfolio-posts/westlakes-landing-center/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Westlakes Landing serves a diverse San Antonio market with strong Hispanic representation and middle-income families. The trade area along Loop 410 and Highway 151 attracts residents from the city's west side, characterized by young families and working professionals seeking convenient shopping and entertainment options. With over 105,000 cars passing daily, the center draws both local neighborhood traffic and commuters, with visitors typically seeking value-oriented retail, entertainment at Santikos, and service-based businesses.",
+  "description": "Westlakes Landing Center is a strategically positioned 83,617 square foot shopping destination located along Southwest Loop 410 in San Antonio, Texas, just west of Highway 151. The center benefits from exceptional visibility and accessibility, with more than 105,000 vehicles passing by daily on Loop 410, making it one of the most trafficked retail corridors in west San Antonio. Anchored by Santikos Entertainment, a popular movie theater and entertainment venue, Westlakes Landing has established itself as a community gathering place that combines retail, services, and entertainment. The tenant mix includes well-known national brands such as Sherwin Williams paint store and State Farm insurance, alongside local service providers like World Finance, creating a diverse offering that serves the everyday needs of the surrounding community. Managed by Valcor Commercial Real Estate, the center offers multiple suite sizes ranging from 900 to 2,610 square feet, plus a one-acre pad site available for build-to-suit opportunities, demonstrating ongoing investment and growth potential in this thriving west San Antonio location.",
+  "numberOfStores": 5,
+  "squareFootage": 83617,
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "Pad Site/ Build to Suit",
+      "type": "Other",
+      "size": 43560,
+      "available": true
+    },
+    {
+      "number": "Suite 135",
+      "type": "Inline",
+      "size": 1230,
+      "available": true
+    },
+    {
+      "number": "Suite 135-136",
+      "type": "Inline",
+      "size": 2610,
+      "available": true
+    },
+    {
+      "number": "Suite 136",
+      "type": "Inline",
+      "size": 1380,
+      "available": true
+    },
+    {
+      "number": "Suite 147",
+      "type": "Inline",
+      "size": 900,
+      "available": true
+    },
+    {
+      "number": "Suite 155",
+      "type": "Inline",
+      "size": 2400,
+      "available": true
+    }
+  ],
+  "ranking": 25.88127770386877
+}

@@ -1,0 +1,26 @@
+{
+  "address": "6464 Northwest Highway",
+  "city": "Dallas",
+  "country": "US",
+  "googlePlaceID": "places/ChIJA1F1y4CfToYRBrfogF7LOPQ",
+  "name": "Medallion Center",
+  "state": "TX",
+  "latitude": 32.8540399,
+  "longitude": -96.74715270000002,
+  "phone": "++1 214-361-1622",
+  "imageURLs": [
+    "/images/malls/tx-medallion-center-1.jpg"
+  ],
+  "summary": "Since 1962, Medallion Center has served as a Dallas neighborhood landmark featuring popular anchors like Target and Kohl's alongside locally-owned businesses. This convenient community center offers everything from apparel and home goods to fitness and dining options in one accessible location.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.3,
+  "reviewCount": 2471,
+  "website": "http://www.medallioncenterdallas.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Medallion Center serves a diverse, established Dallas neighborhood with a mix of middle-income families and working professionals. The trade area attracts value-conscious shoppers seeking convenient access to everyday essentials and national brands at competitive prices. Primary visitors include households with children shopping for family needs, fitness enthusiasts utilizing Planet Fitness, and local residents running daily errands. The center's location on Northwest Highway positions it as a neighborhood hub serving both the immediate residential community and commuters passing through this well-traveled corridor.",
+  "description": "Since 1962, Medallion Center has been a cherished Dallas landmark and an integral part of the local community, serving generations of shoppers for over six decades. Located at the heart of the neighborhood on Northwest Highway, this community shopping center has evolved to meet the changing needs of Dallas residents while maintaining its commitment to convenience and value. The center features an impressive lineup of nationally-recognized anchor tenants including Target and Kohl's, complemented by essential services like CVS pharmacy, Pet Supplies Plus for pet care needs, and Planet Fitness for health-conscious visitors. Beyond the big-box retailers, Medallion Center takes pride in hosting a diverse collection of locally-owned stores and businesses that you won't find anywhere else, giving the center a unique neighborhood character. Whether you're shopping for apparel and home decor, grabbing a meal at Subway, getting new eyewear at America's Best, or enjoying an invigorating workout, Medallion Center truly offers it all in one convenient location—right here in the Center of Your Neighborhood.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 29.178705610457882
+}

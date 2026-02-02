@@ -1,0 +1,26 @@
+{
+  "address": "250 Assay Street",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJucAiBEuuQIYRmq565EeGrds",
+  "name": "Redemption Square",
+  "state": "TX",
+  "latitude": 29.920264399999994,
+  "longitude": -95.2031348,
+  "phone": "++1 713-830-8210",
+  "imageURLs": [
+    "/images/malls/tx-redemption-square-1.jpg"
+  ],
+  "summary": "Redemption Square is a vibrant mixed-use lifestyle center in Houston offering an integrated experience of dining, shopping, living, and working spaces. This modern destination serves as a community hub with diverse amenities including residential units, professional workspaces, and hospitality options.",
+  "openFrom": 600,
+  "openUntil": 0,
+  "rating": 4.6,
+  "reviewCount": 189,
+  "website": "http://redemptionsquare.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Redemption Square attracts a diverse, urban demographic in Houston's east side, drawing visitors from nearby residential neighborhoods and the greater Houston metropolitan area. The center appeals to young professionals, families, and millennials seeking a mixed-use destination that combines dining, shopping, work, and hospitality options. The trade area serves middle to upper-middle income households who value convenience and community-oriented spaces with modern amenities and diverse entertainment options.",
+  "description": "Redemption Square is a dynamic mixed-use destination located at 250 Assay Street in Houston, Texas, offering a unique blend of dining, shopping, living, and working spaces. This modern lifestyle center has transformed into a vibrant community hub where visitors can enjoy diverse experiences ranging from retail therapy to culinary adventures, all within a thoughtfully designed environment. The center features an array of amenities including residential living spaces, professional work environments, and hospitality accommodations, making it more than just a shopping destination but a complete lifestyle experience. With convenient parking facilities and a prime location in Houston, Redemption Square serves as a gathering place for the community, hosting events and creating memorable experiences for visitors. The center's commitment to providing a comprehensive mixed-use environment reflects the evolving needs of modern urban living, where convenience, community, and quality converge in one accessible location.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 20.943448598393847
+}

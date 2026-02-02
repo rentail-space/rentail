@@ -1,0 +1,28 @@
+{
+  "address": "6635 Spring Stuebner Road",
+  "city": "Spring",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ8TpLVf4yR4YRrWxnrM0j8HQ",
+  "name": "Grand Parkway Marketplace",
+  "state": "TX",
+  "latitude": 30.087329300000004,
+  "longitude": -95.5201189,
+  "phone": "++1 833-800-4343",
+  "imageURLs": [
+    "/images/malls/tx-grand-parkway-marketplace-1.jpg"
+  ],
+  "summary": "Grand Parkway Marketplace is a 349,112 square foot open-air shopping center featuring Target, TJ Maxx, Burlington, and other popular retailers along the Grand Parkway in Spring, Texas. The center offers scenic lakeside dining and ample parking across its 75-acre site, serving the rapidly growing northwest Houston market.",
+  "openFrom": 900,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 3512,
+  "website": "https://www.kimcorealty.com/properties/grand-parkway-marketplace/117500/view?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Grand Parkway Marketplace attracts an affluent suburban customer base with a median household income of $96,498 within 10 miles, rising to $112,141 within 3 miles. The trade area serves over 866,000 residents within a 10-mile radius, predominantly consisting of families and middle-to-upper income households in the rapidly growing Spring and The Woodlands area. The center draws shoppers seeking value-oriented retail combined with convenience, with typical visitors making multiple stops during their shopping trips to take advantage of the diverse mix of big-box retailers and specialty stores.",
+  "description": "Grand Parkway Marketplace is a premier 75-acre open-air shopping destination strategically positioned at the intersection of Spring Stuebner Road and Kuykendahl Road along the newly opened Grand Parkway in Spring, Texas. Completed in phases between 2017 and 2018, this expansive retail center has quickly become a cornerstone of the rapidly growing northwest Houston market. The property features a 126,000 square foot Target as its primary anchor, complemented by an impressive lineup of junior anchor tenants including TJ Maxx, Burlington, Ross, DSW, Michaels, Ulta, PetSmart, and Party City. The center's thoughtful design incorporates scenic landscaping, a picturesque boardwalk, and lakeside restaurants that create an inviting atmosphere for dining and shopping. With generous parking providing a 5.94 ratio per 1,000 square feet, Grand Parkway Marketplace ensures an easy and convenient shopping experience for the tens of thousands of visitors it attracts from the affluent Spring and Woodlands communities.",
+  "numberOfStores": 9,
+  "squareFootage": 349112,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 31.909990565106586
+}

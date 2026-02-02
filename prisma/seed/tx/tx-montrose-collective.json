@@ -1,0 +1,27 @@
+{
+  "address": "888 Westheimer Road",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ2wyDXbm_QIYR7BroVAxSKt4",
+  "name": "Montrose Collective",
+  "state": "TX",
+  "latitude": 29.7450022,
+  "longitude": -95.3902626,
+  "phone": "++1 346-571-1953",
+  "imageURLs": [
+    "/images/malls/tx-montrose-collective-1.jpg"
+  ],
+  "summary": "Montrose Collective is a contemporary lifestyle destination in Houston's culturally vibrant Montrose neighborhood, featuring curated boutique shopping, upscale dining, and comprehensive wellness services. The open-air center combines independent merchants with sought-after brands like GANNI, Reformation, and Uchi in an architecturally distinctive setting with lush balconies, courtyards, and shaded pathways.",
+  "openFrom": 630,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 129,
+  "website": "http://montrosecollective.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Montrose Collective attracts a diverse, culturally-engaged demographic reflective of Houston's Montrose neighborhood, known for its artistic, progressive, and inclusive community. The primary visitor base consists of affluent millennials and Gen X professionals aged 25-45 with above-average household incomes, drawn to the center's curated mix of contemporary fashion, wellness services, and upscale dining. The trade area serves urban dwellers and young families who value experiential retail, independent merchants, and lifestyle amenities, with shopping patterns emphasizing quality over quantity and a preference for unique, design-forward brands.",
+  "description": "Montrose Collective is a creative canvas situated in the heart of Houston's most culturally eclectic neighborhood, designed to embrace the energy and inclusiveness that defines Montrose. This thoughtfully curated lifestyle destination features lush balconies framing boutique workspaces, activated patios welcoming neighbors to Houston's newest dining destinations, and shaded pathways and courtyards that invite guests to explore independent merchants. The center brings together an impressive collection of contemporary fashion brands including GANNI, Reformation, Buck Mason, PAIGE, and Rails, alongside luxury retailers like Brilliant Eye Elegance and The Real Real. Dining options range from the sophisticated Uchi and Sophie Cocktail & Terrace Bar to the welcoming La La Land Kind Cafe and Van Leeuwen Ice Cream, creating a vibrant culinary scene. The wellness component is equally robust, featuring Bayou City Smiles, RMA Houston, Solidcore, The Studio BE, and multiple beauty and skincare destinations, making Montrose Collective a comprehensive lifestyle hub that seamlessly blends shopping, dining, work, and wellness in an architecturally distinctive setting.",
+  "numberOfStores": 28,
+  "tier": 3,
+  "spaces": [],
+  "ranking": 27.859784175950082
+}

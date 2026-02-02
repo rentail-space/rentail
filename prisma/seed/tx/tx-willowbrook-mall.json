@@ -1,0 +1,26 @@
+{
+  "address": "2000 Willowbrook Mall",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJuwyzEd3NQIYRY4ZuygMmQJQ",
+  "name": "Willowbrook Mall",
+  "state": "TX",
+  "latitude": 29.9599148,
+  "longitude": -95.53900279999999,
+  "phone": "++1 281-890-8001",
+  "imageURLs": [
+    "/images/malls/tx-willowbrook-mall-1.jpg"
+  ],
+  "summary": "Willowbrook Mall is an airy indoor shopping plaza in northwest Houston featuring department stores, specialty retailers, and upscale shops. With a recently redesigned food court and diverse mix of popular brands, it serves as a comprehensive lifestyle destination for the greater Houston community.",
+  "openFrom": 1100,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 13510,
+  "website": "https://www.shopwillowbrookmall.com/en.html?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Willowbrook Mall serves a diverse, middle-income demographic in northwest Houston, attracting families and young professionals from the surrounding Willowbrook, Jersey Village, and Cypress areas. The primary trade area consists of households with median incomes ranging from $50,000 to $85,000, with a strong representation of millennial and Gen X shoppers aged 25-54. The center draws a multicultural customer base reflective of Houston's diversity, with visitors seeking value-oriented fashion, family dining options, and convenient one-stop shopping experiences.",
+  "description": "Willowbrook Mall stands as a premier shopping destination in northwest Houston, offering an exceptional retail experience since its establishment. This airy indoor shopping plaza features a carefully curated mix of department stores, specialty retailers, and upscale shops that cater to the diverse needs of Houston's dynamic community. The mall has recently undergone significant enhancements, including a redesigned food court featuring four new eateries that complement the existing dining options, creating a vibrant social hub for shoppers. Anchored by major department stores and featuring popular clothing, footwear, and accessories retailers, Willowbrook Mall provides a comprehensive shopping experience under one roof. The center's prime location at 2000 Willowbrook Mall makes it easily accessible to residents throughout the greater Houston area, while its commitment to evolving with customer preferences ensures it remains a relevant and engaging lifestyle destination for years to come.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 35.523636001589466
+}

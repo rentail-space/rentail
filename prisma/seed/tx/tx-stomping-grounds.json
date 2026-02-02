@@ -1,0 +1,28 @@
+{
+  "address": "1207-1227 West 34th Street",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJEZlJY6fHQIYRI4_KUNS9gyE",
+  "name": "Stomping Grounds",
+  "state": "TX",
+  "latitude": 29.816908499999997,
+  "longitude": -95.4216436,
+  "phone": "++1 713-357-5800",
+  "imageURLs": [
+    "/images/malls/tx-stomping-grounds-1.jpg"
+  ],
+  "summary": "Stomping Grounds is a vibrant lifestyle center in Houston's Garden Oaks neighborhood featuring 17 curated local businesses across 26,000 square feet of retail and dining space. The center's signature 8,000 square foot outdoor Green Space hosts weekly community events, creating a cultural hub where neighbors gather for artisan markets, fitness classes, concerts, and celebrations.",
+  "openFrom": 700,
+  "openUntil": 2200,
+  "rating": 4.5,
+  "reviewCount": 107,
+  "website": "https://www.stompinggroundshtx.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Stomping Grounds attracts a diverse, culturally-engaged demographic from the Garden Oaks neighborhood and surrounding Houston areas, primarily consisting of young professionals, families, and millennials aged 25-45 with middle to upper-middle income levels. The trade area draws residents seeking authentic local experiences, artisan goods, and community connection rather than traditional chain retail. Visitors tend to be educated, socially conscious consumers who value locally-owned businesses, outdoor gathering spaces, and curated cultural events including fitness classes, concerts, and artisan markets.",
+  "description": "Stomping Grounds is a cultural oasis nestled in the heart of beautiful Garden Oaks, Houston, offering a unique blend of culinary excellence and curated retail experiences. This innovative lifestyle center features 26,000 square feet of carefully selected local, best-in-class retail operators including restaurants, bars, salons, spas, and specialty shops, all working together to create a dynamic fabric that enhances the surrounding neighborhood. At the heart of the development is an expansive 8,000 square foot outdoor Green Space, designed as a community gathering place where neighbors, families, and culture-seekers come together to play, relax, and connect. The Green hosts weekly curated events including arts showcases, artisan markets, fitness classes, and live concerts, creating countless memories and fostering genuine community connection. With 17 best-in-class local brands contributing to its distinctive character, Stomping Grounds represents a new vision for neighborhood retail—one that prioritizes authentic experiences, local entrepreneurship, and meaningful social interaction over traditional shopping center conventions.",
+  "numberOfStores": 17,
+  "squareFootage": 26000,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 18.26445399916689
+}

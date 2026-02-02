@@ -1,0 +1,26 @@
+{
+  "address": "9806 Gaston Road",
+  "city": "Katy",
+  "country": "US",
+  "googlePlaceID": "places/ChIJIWDHqKQhQYYREvzO0JgdAhA",
+  "name": "Stableside",
+  "state": "TX",
+  "latitude": 29.734353,
+  "longitude": -95.8104414,
+  "phone": "++1 281-477-4300",
+  "imageURLs": [
+    "/images/malls/tx-stableside-1.jpg"
+  ],
+  "summary": "Stableside is a family-focused lifestyle center in Katy, Texas featuring carefully curated restaurants, stores, and local businesses in a welcoming open-air environment. The center distinguishes itself with unique amenities like Mural Alley and regular community events that create a safe, fun gathering place for the whole family.",
+  "openFrom": 930,
+  "openUntil": 2100,
+  "rating": 4,
+  "reviewCount": 10,
+  "website": "https://stablesidekaty.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Stableside attracts primarily affluent families and young professionals from the Katy, Texas area, with household incomes typically exceeding $100,000 annually. The trade area serves the rapidly growing western Houston suburbs, drawing visitors who value curated shopping experiences and family-friendly environments. Typical shoppers are homeowners aged 30-55 with children, seeking convenient access to quality restaurants, local services, and specialty retail in a safe, walkable setting.",
+  "description": "Stableside is a carefully curated lifestyle center in Katy, Texas that serves as a gathering place inspired by the families that surround it. Located at 9806 Gaston Road, this open-air shopping destination brings together a thoughtfully selected collection of restaurants, stores, and local businesses to create a welcoming, safe, and fun environment the whole family can enjoy. The center features a unique Mural Alley, created by Pandr Design Co. artists Phoebe and Roxy, who painted twelve vibrant murals in just five days, adding an artistic and Instagram-worthy dimension to the shopping experience. Stableside positions itself as more than just a shopping center—it's a community hub where local businesses thrive and families can spend quality time together. With its focus on creating an inviting atmosphere and hosting regular events, Stableside has become a beloved destination in the Katy community, earning a 4-star rating from visitors who appreciate its family-oriented approach and carefully selected tenant mix.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 8
+}

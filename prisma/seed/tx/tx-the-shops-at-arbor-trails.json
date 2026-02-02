@@ -1,0 +1,27 @@
+{
+  "address": "4301 West William Cannon Drive",
+  "city": "Austin",
+  "country": "US",
+  "googlePlaceID": "places/ChIJoxjQDg61RIYR1_q_3nN5Rn4",
+  "name": "The Shops at Arbor Trails",
+  "state": "TX",
+  "latitude": 30.222019399999994,
+  "longitude": -97.8398003,
+  "phone": "++1 512-263-1333",
+  "imageURLs": [
+    "/images/malls/tx-the-shops-at-arbor-trails-1.jpg"
+  ],
+  "summary": "The Shops at Arbor Trails is Southwest Austin's award-winning lifestyle center featuring popular dining destinations, major grocery anchors like Costco and Whole Foods, and an extensive collection of wellness and fitness services. The center's integration with surrounding hike and bike trails creates a unique shopping experience that combines retail convenience with outdoor recreation.",
+  "openFrom": 900,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 2082,
+  "website": "http://www.shopsatarbortrails.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Shops at Arbor Trails attracts a diverse mix of Southwest Austin families and professionals, primarily middle to upper-middle income households with median incomes ranging from $75,000 to $125,000. The trade area serves a growing suburban population with a strong presence of young families, dual-income households, and active retirees who value convenience and quality. Visitors typically seek a blend of everyday necessities and lifestyle amenities, with shopping patterns reflecting health-conscious preferences evidenced by tenants like Whole Foods, Pure Barre, and wellness services. The center's proximity to residential neighborhoods and the hike-and-bike trail system appeals to active, outdoor-oriented consumers who prioritize work-life balance and community engagement.",
+  "description": "Welcome to The Shops at Arbor Trails, a distinguished recipient of the 2009 and 2011 Best Real Estate Award by the Austin Business Journal, recognized as Southwest Austin's premier destination for entertainment, recreation, and relaxation. This thoughtfully designed lifestyle center seamlessly blends shopping, dining, and wellness in an inviting open-air environment that celebrates the active Austin lifestyle. The center features an impressive array of popular restaurants including Torchy's Tacos, Chuys, Kerbey Lane Cafe, and Mandola's Italian Market, alongside major anchors like Costco and Whole Foods that serve the daily needs of the surrounding community. Beyond traditional retail, the center has cultivated a strong wellness and fitness presence with Pure Barre, Pure Bikram Yoga, Hand and Stone, and Restore Cryotherapy, complemented by medical services and specialty shops. The property's unique amenity is its integration with surrounding hike and bike trails, offering visitors the opportunity to combine their shopping experience with outdoor recreation, making it a true community gathering place that reflects the values and lifestyle of Southwest Austin residents.",
+  "numberOfStores": 45,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 29.202630381535755
+}

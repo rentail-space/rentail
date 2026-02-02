@@ -1,0 +1,24 @@
+{
+  "address": "1212 Fiorella Street",
+  "city": "Castroville",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ32sHsTM5XIYRMbIk4u_e4zg",
+  "name": "The Elsass",
+  "state": "TX",
+  "latitude": 29.356852,
+  "longitude": -98.8770096,
+  "phone": "++1 210-416-4999",
+  "imageURLs": [
+    "/images/malls/tx-the-elsass-1.jpg"
+  ],
+  "summary": "The Elsass is a charming shopping center in historic Castroville, Texas, celebrating the town's unique Alsatian heritage with specialty shops and services. This distinctive destination blends European village character with modern convenience, serving both local residents and cultural tourists exploring the \"Little Alsace of Texas.\"",
+  "openFrom": 900,
+  "openUntil": 2100,
+  "website": "https://www.elssasscastroville.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "The Elsass serves the historic community of Castroville, Texas, attracting a mix of local residents and tourists drawn to the area's Alsatian heritage. The primary trade area consists of middle-income families and retirees from Castroville and surrounding Medina County communities, with a significant portion of visitors being day-trippers from San Antonio seeking authentic cultural experiences. The shopping center appeals to heritage-conscious consumers interested in specialty European goods, artisanal products, and unique dining experiences that reflect the town's distinctive Franco-German roots.",
+  "description": "The Elsass stands as a distinctive shopping destination in historic Castroville, Texas, celebrating the town's unique Alsatian heritage that dates back to its founding by French immigrants in 1844. Named after the Alsace region of France, this charming shopping center captures the essence of European village life while serving the modern needs of both local residents and cultural tourists. Located at 1212 Fiorella Street in the heart of Texas Hill Country, The Elsass offers visitors a curated selection of specialty shops and services that honor Castroville's designation as the \"Little Alsace of Texas.\" The center provides a welcoming atmosphere where traditional European craftsmanship meets contemporary convenience, making it a gathering place for the community and a must-visit destination for those exploring the region's rich cultural tapestry. With operating hours from 9:00 AM to 9:00 PM, The Elsass invites guests to experience a slice of Old World charm just a short drive from San Antonio.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 0
+}

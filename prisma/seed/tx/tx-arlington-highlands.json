@@ -1,0 +1,26 @@
+{
+  "address": "Matlock Road",
+  "city": "Arlington",
+  "country": "US",
+  "googlePlaceID": "places/ChIJfYDl4LhiToYRRGS-0v6JnuE",
+  "name": "Arlington Highlands",
+  "state": "TX",
+  "latitude": 32.6801567,
+  "longitude": -97.10877649999999,
+  "phone": "++1 817-466-7474",
+  "imageURLs": [
+    "/images/malls/tx-arlington-highlands-1.jpg"
+  ],
+  "summary": "Arlington Highlands is a vibrant lifestyle center featuring a compelling mix of retail stores, restaurants, and entertainment facilities in an open-air setting. Located in Arlington, Texas, this popular destination offers visitors a dynamic shopping and dining experience that serves the greater Dallas-Fort Worth area.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 12130,
+  "website": "http://www.arlingtonhighlands.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Arlington Highlands attracts a diverse mix of middle to upper-middle income families and young professionals from the Arlington and greater Dallas-Fort Worth metroplex. The primary trade area serves households with median incomes ranging from $60,000 to $100,000+, with a strong representation of families with children and millennials aged 25-45. Visitors are drawn to the center's combination of entertainment, dining, and shopping options, making it a popular destination for both everyday needs and leisure activities. The location near major highways provides access to a broad regional market including suburban families seeking convenient outdoor shopping experiences.",
+  "description": "Arlington Highlands is a premier lifestyle center located on Matlock Road in Arlington, Texas, offering a dynamic blend of retail, dining, and entertainment experiences in an open-air setting. This vibrant destination has established itself as a cornerstone of the Arlington community, combining the convenience of everyday shopping with the excitement of entertainment venues and diverse restaurant options. The center's thoughtfully designed layout creates an inviting atmosphere where visitors can enjoy a variety of experiences, from browsing popular retail stores to dining at distinctive restaurants and enjoying entertainment facilities. With its strategic location in the heart of Arlington and easy accessibility from major thoroughfares, Arlington Highlands serves as a regional draw for shoppers throughout the Dallas-Fort Worth metroplex. The center's mix of national retailers, local favorites, and entertainment options makes it a versatile destination for families, young professionals, and visitors seeking both practical shopping needs and leisure activities in a contemporary outdoor environment.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 36.754747207799156
+}

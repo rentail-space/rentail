@@ -1,0 +1,37 @@
+{
+  "address": "917 North Hampton Road",
+  "city": "DeSoto",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ3VBOPMKTToYRvHAHD8SejM4",
+  "name": "Pleasant Run Village",
+  "state": "TX",
+  "latitude": 32.6055995,
+  "longitude": -96.85785969999999,
+  "phone": "++1 214-954-0600",
+  "imageURLs": [
+    "/images/malls/tx-pleasant-run-village-1.jpg"
+  ],
+  "summary": "Pleasant Run Village is a neighborhood shopping center in DeSoto, TX, offering a convenient mix of dining, health and beauty services, and local retail shops. Located just 25 minutes from downtown Dallas, this community-focused center provides everyday essentials and services for local residents.",
+  "openFrom": 800,
+  "openUntil": 1800,
+  "rating": 4.1,
+  "reviewCount": 297,
+  "website": "http://www.pleasantrunvillage.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Pleasant Run Village serves the local DeSoto community, located approximately 25 minutes from downtown Dallas. The primary trade area consists of middle-income families and working professionals seeking convenient neighborhood shopping for everyday needs. The center attracts a diverse demographic mix typical of suburban DeSoto, with visitors primarily focused on health and beauty services, dining, and essential retail. Shopping patterns reflect a convenience-oriented customer base that values local accessibility over destination shopping experiences.",
+  "description": "Pleasant Run Village is a neighborhood shopping center located at 917 North Hampton Road in DeSoto, Texas, serving as a convenient local destination for the surrounding community. This shopping center offers a carefully curated mix of small businesses, local shops, and familiar retail brands that cater to the everyday needs of DeSoto residents. The center specializes in health and beauty services, dining options ranging from slices to sandwiches, and a variety of professional services including healthcare, dental, legal, and business solutions. Positioned approximately 25 minutes from downtown Dallas, Pleasant Run Village provides your neighborhood convenience with a little bit of everything for the local community. The center was scheduled for a complete redevelopment in 2019, demonstrating ongoing investment in modernizing the property to better serve its customers and tenants.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "301",
+      "type": "Other",
+      "size": 9534
+    },
+    {
+      "number": "302",
+      "type": "Other",
+      "size": 9109
+    }
+  ],
+  "ranking": 20.27660288440114
+}

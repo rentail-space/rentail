@@ -1,0 +1,26 @@
+{
+  "address": "970 Garden Park Drive",
+  "city": "Allen",
+  "country": "US",
+  "googlePlaceID": "places/ChIJUdKcrUAXTIYRbCrhvaUv-Po",
+  "name": "Watters Creek Village",
+  "state": "TX",
+  "latitude": 33.088515199999996,
+  "longitude": -96.68379689999999,
+  "phone": "++1 972-747-8000",
+  "imageURLs": [
+    "/images/malls/tx-watters-creek-village-1.jpg"
+  ],
+  "summary": "Watters Creek Village is North Dallas' premier open-air lifestyle center featuring an upscale mix of specialty shops, chef-driven restaurants, and entertainment options surrounding a scenic village green. This mixed-use destination combines retail, dining, residential lofts, and office space with public art, water features, and community events in a walkable, family-friendly environment.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.6,
+  "reviewCount": 3646,
+  "website": "https://www.watterscreek.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Watters Creek Village attracts an affluent, family-oriented demographic from Allen and the greater North Dallas suburbs, with visitors typically in the 30-55 age range and above-average household incomes. The trade area serves well-educated professionals and families who value a walkable, mixed-use environment that combines shopping, dining, and entertainment in an upscale outdoor setting. Primary shoppers are drawn to the center's boutique retail mix, chef-driven restaurants, and community-focused events like wine walks and seasonal festivals, reflecting preferences for experiential retail over traditional mall shopping.",
+  "description": "Watters Creek Village is North Dallas' premier lifestyle shopping destination, offering a distinctive blend of upscale retail, chef-driven dining, and community gathering spaces in the heart of Allen, Texas. This scenic open-air center features a thoughtfully designed village green surrounded by a curated mix of specialty shops, restaurants with water views, and unique entertainment options that create a true sense of place. The development seamlessly integrates residential lofts, office space, and retail uses, fostering a vibrant, walkable environment that serves as both a shopping destination and a community hub. With public art installations, a dedicated kids' play area, and carefully preserved natural spaces that welcome local wildlife, Watters Creek Village offers an elevated shopping experience that goes beyond traditional retail. The center's commitment to sustainability, regular community events like the ALLENtine's Day Wine Walk and Lucky Duck Kids Club, and its role in celebrating Allen's 150th anniversary demonstrate its deep connection to the local community and its position as a gathering place for North Dallas residents seeking quality, convenience, and authentic experiences.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 49.15306996760161
+}

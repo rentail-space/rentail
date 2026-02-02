@@ -1,0 +1,26 @@
+{
+  "address": "1415 State Street",
+  "city": "Richardson",
+  "country": "US",
+  "googlePlaceID": "places/ChIJo5gYkiUZTIYRJjjSgFqevW0",
+  "name": "CityLine",
+  "state": "TX",
+  "latitude": 33.0014354,
+  "longitude": -96.6985548,
+  "phone": "++1 972-739-5080",
+  "imageURLs": [
+    "/images/malls/tx-cityline-1.jpg"
+  ],
+  "summary": "CityLine is a premier mixed-use lifestyle destination in Richardson, Texas, offering an exciting blend of dining, retail, wellness, residential living, and entertainment in a walkable urban environment. With convenient DART access and a vibrant community atmosphere, it brings the best of city living to the North Dallas suburbs.",
+  "openFrom": 600,
+  "openUntil": 0,
+  "rating": 4.6,
+  "reviewCount": 575,
+  "website": "http://citylinedfw.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "CityLine attracts an affluent, urban-oriented demographic primarily consisting of young professionals and families aged 25-45 with above-average household incomes. The development draws from Richardson's educated workforce and nearby corporate offices, appealing to residents seeking walkable, mixed-use environments. Visitors typically value convenience, quality dining experiences, and active lifestyles, with strong preference for experiential retail and entertainment options. The proximity to DART transit and residential complexes creates a captive audience of urban dwellers who prioritize accessibility and community-oriented amenities.",
+  "description": "CityLine is a dynamic mixed-use development located in Richardson, Texas, at the intersection of President George Bush Turnpike and Central Expressway. This innovative lifestyle destination seamlessly blends urban sophistication with suburban convenience, creating a vibrant community hub that brings the best parts of city living to North Dallas. The development features an impressive array of dining options ranging from fresh Mexican flavors at Manny's Mexican Kitchen to unique experiences like Show Mini Hot Pot, alongside retail, wellness facilities, office spaces, a hotel, and eight residential complexes. CityLine's thoughtful urban design emphasizes walkability and connectivity, with a DART station on-site and a new Silver Line station coming soon, making it one of the most accessible destinations in the DFW metroplex. The center hosts regular community events including book clubs, calligraphy classes, and weekly specials, fostering a strong sense of community while offering residents and visitors an active lifestyle with parks, entertainment, and all essential amenities within steps of each other.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 25.388944171144598
+}

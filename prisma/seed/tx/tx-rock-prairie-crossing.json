@@ -1,0 +1,28 @@
+{
+  "address": "3501-3535 Longmire Drive",
+  "city": "College Station",
+  "country": "US",
+  "googlePlaceID": "places/ChIJXxR6ZOeERoYR7dwt0sf59yI",
+  "name": "Rock Prairie Crossing",
+  "state": "TX",
+  "latitude": 30.583597899999997,
+  "longitude": -96.28667019999999,
+  "phone": "++1 610-215-7939",
+  "imageURLs": [
+    "/images/malls/tx-rock-prairie-crossing-1.jpg"
+  ],
+  "summary": "Rock Prairie Crossing is a 118,700 square foot Kroger-anchored community center in College Station, Texas, featuring CVS/pharmacy, Spec's, and diverse dining options. The center serves the Texas A&M University community and benefits from high traffic visibility with 99,000+ daily vehicles on Highway 6.",
+  "openFrom": 600,
+  "openUntil": 0,
+  "rating": 4.4,
+  "reviewCount": 1173,
+  "website": "https://brixmor.com/leasing/retail-space/tx/college-station/rock-prairie-crossing?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Rock Prairie Crossing serves a highly educated market with 58% of the population within 3 miles holding college degrees, anchored by nearby Texas A&M University's 72,000+ students and 11,000+ employees. The trade area features strong household incomes averaging $120,358 within 1 mile and $113,417 within 3 miles, with a robust daytime population of 60,654 within 3 miles. The center attracts a mix of young professionals, university-affiliated households, and established families seeking convenient daily shopping and dining options. Primary visitors include health-conscious consumers drawn to the grocery anchor and medical professionals from the two nearby hospitals with nearly 300 combined beds.",
+  "description": "Rock Prairie Crossing is a Kroger-anchored community shopping center strategically located in College Station, Texas, serving the vibrant Texas A&M University community and surrounding residential areas. Spanning 118,700 square feet along Longmire Drive, the center benefits from exceptional visibility with over 99,000 vehicles passing daily on Highway 6 and 20,000+ on Rock Prairie Road. The property features a strong tenant mix including CVS/pharmacy, Spec's Wine, Spirits & Finer Foods, and a diverse selection of fast-casual and sit-down restaurants such as Cotton Patch Cafe, Freebirds World Burrito, and Double Dave's Pizzaworks. Positioned between St. Joseph Health College Station Hospital and Baylor Scott & White Medical Center, the center serves a highly educated population with convenient access to daily necessities, dining, and services. With a daytime population exceeding 64,000 within 3 miles and household incomes averaging over $120,000 nearby, Rock Prairie Crossing has established itself as a premier shopping destination in the College Station-Bryan market.",
+  "numberOfStores": 23,
+  "squareFootage": 118700,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 27.00982250661666
+}

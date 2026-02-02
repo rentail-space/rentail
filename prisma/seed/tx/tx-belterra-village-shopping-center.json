@@ -1,0 +1,39 @@
+{
+  "address": "166 Hargraves Drive",
+  "city": "Austin",
+  "country": "US",
+  "googlePlaceID": "places/ChIJKX2zgQ1GW4YRDMiBRd_wQz4",
+  "name": "Belterra Village Shopping Center",
+  "state": "TX",
+  "latitude": 30.204434400000004,
+  "longitude": -97.9788743,
+  "imageURLs": [
+    "/images/malls/tx-belterra-village-shopping-center-1.jpg"
+  ],
+  "summary": "Belterra Village Shopping Center is a 93-acre mixed-use lifestyle destination featuring over 310,000 square feet of retail, dining, and entertainment space at the gateway to Texas Hill Country. Located in one of Austin's fastest-growing and most affluent areas, the center serves a thriving master-planned community with integrated hike and bike trails and upscale amenities.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.5,
+  "reviewCount": 576,
+  "website": "https://www.endeavor-re.com/properties/belterra-village/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Belterra Village Shopping Center serves an affluent trade area with median household incomes ranging from $158,511 to $169,728 within a 5-mile radius. The primary market consists of upscale families and professionals residing in the master-planned Belterra community and surrounding West Austin/East Dripping Springs area, with a population of over 46,000 within 5 miles projected to grow 38% over the next 5 years. The demographic profile skews toward higher-income households seeking convenient access to quality retail, dining, medical services, and entertainment options in a modern mixed-use environment.",
+  "description": "Belterra Village Shopping Center is a premier 93-acre mixed-use development located at the gateway to Texas Hill Country, where Highway 290 meets Nutty Brown Road in Austin. As the commercial centerpiece of Belterra, a 1,600-acre master-planned community named the 2015 Master Planned Community of the Year, this shopping destination serves one of the fastest-growing and most affluent areas in the Austin metropolitan region. The center features over 310,000 square feet of retail, medical, and dining space, anchored by a theatre and restaurant complex that creates a vibrant entertainment hub for the community. With over 10 acres of hike and bike trails integrated throughout the property, large outdoor patio opportunities, and monument signage along Highway 290, Belterra Village offers a lifestyle-oriented shopping experience that blends seamlessly with the natural Hill Country setting. The development benefits from exceptional visibility with over 37,000 vehicles per day passing on Highway 290, serving a trade area of nearly 58,000 residents with median household incomes exceeding $164,000 and projected population growth of 38% over the next five years.",
+  "squareFootage": 310000,
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "3",
+      "type": "Other",
+      "size": 3000,
+      "available": true
+    },
+    {
+      "number": "5",
+      "type": "Other",
+      "size": 1200,
+      "available": true
+    }
+  ],
+  "ranking": 24.843802350808907
+}

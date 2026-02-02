@@ -1,0 +1,134 @@
+{
+  "address": "Highway 6",
+  "city": "Manvel",
+  "country": "US",
+  "googlePlaceID": "places/ChIJWemmYuDzQIYRhZtkcT_ySHQ",
+  "name": "Manvel Town Center",
+  "state": "TX",
+  "latitude": 29.483691999999998,
+  "longitude": -95.402025,
+  "imageURLs": [
+    "/images/malls/tx-manvel-town-center-1.jpg"
+  ],
+  "summary": "Manvel Town Center is a 273-acre community retail development anchored by H-E-B, serving the second fastest-growing city in Houston. This modern shopping destination offers a comprehensive mix of retail, dining, and services in a convenient open-air format at Highway 288 and State Highway 6.",
+  "openFrom": 500,
+  "openUntil": 2300,
+  "rating": 4.8,
+  "reviewCount": 56,
+  "website": "https://www.manveltownctr.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Manvel Town Center serves the rapidly growing Manvel community, which is the second fastest-growing city in Houston, attracting young families and middle to upper-middle income households. The trade area draws from suburban residents seeking convenient access to grocery shopping, dining, and essential services close to home. Primary visitors include families with children, working professionals, and homeowners in the 25-54 age range who value quality retail options and community-oriented shopping experiences in a modern, accessible setting.",
+  "description": "Manvel Town Center is a dynamic 273-acre retail development by Weitzman that serves as the premier shopping, dining, and entertainment destination for one of Houston's fastest-growing communities. Anchored by the renowned H-E-B grocery store, this modern community center brings together a carefully curated mix of retail shops, restaurants, and service providers to meet the everyday needs of Manvel residents and visitors. Conveniently located at the intersection of Highway 288 and State Highway 6 in Manvel, Texas, the center offers an all-encompassing shopping experience that celebrates the heart and spirit of the local community. From the latest fashion trends and essential household goods to family dining options and professional services ranging from banking to beauty salons, Manvel Town Center is equipped to handle it all with ease and efficiency. As a cornerstone of this thriving suburban community, the center provides a welcoming, open-air environment where neighbors can shop, dine, and connect in a vibrant retail hub designed for modern convenience.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "Available Space 10",
+      "type": "Other",
+      "size": 70118,
+      "available": true
+    },
+    {
+      "number": "Available Space 11",
+      "type": "Other",
+      "size": 54014,
+      "available": true
+    },
+    {
+      "number": "Available Space 12",
+      "type": "Other",
+      "size": 54014,
+      "available": true
+    },
+    {
+      "number": "Available Space 13",
+      "type": "Other",
+      "size": 54014,
+      "available": true
+    },
+    {
+      "number": "Available Space 14",
+      "type": "Other",
+      "size": 56628,
+      "available": true
+    },
+    {
+      "number": "Available Space 15",
+      "type": "Inline",
+      "size": 2000,
+      "available": true
+    },
+    {
+      "number": "Available Space 17",
+      "type": "Inline",
+      "size": 2350,
+      "available": true
+    },
+    {
+      "number": "Available Space 20",
+      "type": "Inline",
+      "size": 2000,
+      "available": true
+    },
+    {
+      "number": "Available Space 27",
+      "type": "Inline",
+      "size": 3400,
+      "available": true
+    },
+    {
+      "number": "Available Space 28",
+      "type": "Inline",
+      "size": 4000,
+      "available": true
+    },
+    {
+      "number": "Available Space 29",
+      "type": "Inline",
+      "size": 3150,
+      "available": true
+    },
+    {
+      "number": "Available Space 30",
+      "type": "Inline",
+      "size": 1350,
+      "available": true
+    },
+    {
+      "number": "Available Space 31",
+      "type": "Inline",
+      "size": 1900,
+      "available": true
+    },
+    {
+      "number": "Available Space 32",
+      "type": "Inline",
+      "size": 4000,
+      "available": true
+    },
+    {
+      "number": "Available Space 9",
+      "type": "Other",
+      "size": 42636,
+      "available": true
+    },
+    {
+      "number": "Restaurant Space 1",
+      "type": "Inline",
+      "size": 5850,
+      "available": true
+    },
+    {
+      "number": "Restaurant Space 2",
+      "type": "Inline",
+      "size": 6300,
+      "available": true
+    },
+    {
+      "number": "Restaurant Space 3",
+      "type": "Inline",
+      "size": 5227,
+      "available": true
+    }
+  ],
+  "ranking": 16.782605059259524
+}

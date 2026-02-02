@@ -1,0 +1,26 @@
+{
+  "address": "303 Memorial City Way",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJIXBsJZbEQIYRw_QBZox8qZk",
+  "name": "Memorial City Mall",
+  "state": "TX",
+  "latitude": 29.780700200000002,
+  "longitude": -95.5379007,
+  "phone": "++1 713-464-8640",
+  "imageURLs": [
+    "/images/malls/tx-memorial-city-mall-1.jpg"
+  ],
+  "summary": "Memorial City is West Houston's premier mixed-use destination combining upscale shopping at Memorial City Mall with luxury hotels, high-rise residences, Class A office spaces, and acclaimed dining experiences. This lifestyle center features sought-after brands like UNIQLO and lululemon alongside fine dining establishments such as Credence and Haywire, plus unique amenities including an ice-skating rink and event spaces.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 23404,
+  "website": "http://www.memorialcity.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Memorial City attracts an affluent, professional demographic primarily consisting of upper-middle-class families and young professionals working in West Houston's thriving business corridor. The trade area serves households with above-average incomes, typically ranging from $75,000 to $150,000+, with a strong presence of dual-income families aged 25-54. Visitors are drawn to the mixed-use environment that combines upscale shopping, fine dining experiences, luxury residential options, and Class A office spaces, reflecting a lifestyle-oriented consumer base that values convenience and quality.",
+  "description": "Memorial City stands as West Houston's premier mixed-use destination, seamlessly blending world-class shopping, dining, living, and working into one dynamic urban environment. Anchored by Memorial City Mall, this expansive development has evolved into a complete lifestyle center featuring luxury hotels like Hotel ZaZa and The Westin, high-rise residential towers including The McKinley with its twenty-five breathtaking stories, and state-of-the-art office spaces that attract major corporations. The shopping experience showcases today's most fashionable and sought-after brands, from the recently opened UNIQLO featuring collections by renowned British designer Clare Waight Keller to athleisure favorite lululemon. Dining options span from quick casual to upscale experiences, with notable restaurants including Credence (celebrating South Texas culinary traditions), Haywire, Churrascos, the newly opened Katz's Memorial City, and Liberty Kitchen. Beyond retail and dining, Memorial City offers unique amenities including a carousel, play area, and ice-skating rink, while The Lawn provides outdoor event space that hosts everything from Champagne Sundays to seasonal celebrations, making it a true community gathering place in the heart of West Houston.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 58.98541620742219
+}

@@ -1,0 +1,24 @@
+{
+  "address": "3500 East Parmer Lane",
+  "city": "Austin",
+  "country": "US",
+  "googlePlaceID": "places/ChIJhaDK78PJRIYRmfQMiRm47og",
+  "name": "EastVillage",
+  "state": "TX",
+  "latitude": 30.375424899999995,
+  "longitude": -97.6297408,
+  "phone": "++1 512-777-8332",
+  "imageURLs": [
+    "/images/malls/tx-eastvillage-1.jpg"
+  ],
+  "summary": "EastVillage is a 425-acre mixed-use lifestyle destination in Austin's Upper East Side tech corridor, featuring retail, dining, entertainment, and residential options across from Samsung and near major employers. The development combines urban density with extensive green spaces, offering a vibrant town center with an amphitheater, local restaurants, and walkable amenities.",
+  "rating": 4.7,
+  "reviewCount": 6,
+  "website": "http://www.eastvillageatx.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "EastVillage attracts a young, tech-savvy professional demographic working at nearby major employers including Samsung Austin Semiconductor, Dell, National Instruments, General Motors, The Home Depot Technology Center, and Amazon. The primary market consists of creative class millennials and Gen Z residents with above-average incomes seeking urban density combined with outdoor amenities. The mixed-use development appeals to both young professionals and families who value walkability, entertainment options, and proximity to the northeast tech corridor employment centers.",
+  "description": "EastVillage is a transformative 425-acre mixed-use development located on Parmer Lane in Austin's rapidly growing Upper East Side tech corridor. Positioned directly across from Samsung Austin Semiconductor and surrounded by major employers like Dell, National Instruments, and Amazon, this master-planned community represents the new frontier of Austin's urban expansion. The development seamlessly integrates office, retail, single-family and multi-family residential components with extensive outdoor amenities, creating a vibrant live-work-play environment. At its heart, the town center features an amphitheater for live entertainment, wide tree-lined sidewalks, and a carefully curated mix of iconic Austin shops, local restaurants, and food trailers. The Vaughan apartment community anchors the residential component, offering residents immediate access to entertainment venues, hiking trails, and lush parks. EastVillage delivers the energy and walkability of downtown Austin without the premium cost of living, attracting the creative class that is shaping the future of technology, art, and business in Texas's capital city.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 7.31462175360625
+}

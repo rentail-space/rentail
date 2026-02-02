@@ -1,0 +1,26 @@
+{
+  "address": "11105 Harlem Road",
+  "city": "Richmond",
+  "country": "US",
+  "googlePlaceID": "places/ChIJKajJBAzgQIYRSZJr3xqKQ4s",
+  "name": "Aliana Shopping Center",
+  "state": "TX",
+  "latitude": 29.6581983,
+  "longitude": -95.7120192,
+  "phone": "++1 281-295-3300",
+  "imageURLs": [
+    "/images/malls/tx-aliana-shopping-center-1.jpg"
+  ],
+  "summary": "Aliana Shopping Center is a well-rated community retail destination serving the master-planned Aliana community in Richmond, Texas. With a 4.5-star rating from over 1,000 reviews and convenient daily hours, it provides essential shopping and services for local residents.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.5,
+  "reviewCount": 1044,
+  "website": "http://alianahouston.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Aliana Shopping Center serves the master-planned community of Aliana in Richmond, Texas, attracting primarily middle to upper-middle income families with children. The trade area consists of suburban homeowners, with household incomes typically ranging from $75,000 to $150,000, drawn from the surrounding residential developments. The shopping center caters to convenience-oriented shoppers seeking everyday services and retail within their planned community, with visitors typically ranging from young families to established professionals who value accessibility and community amenities.",
+  "description": "Aliana Shopping Center is a community-focused retail destination located at 11105 Harlem Road in Richmond, Texas, serving the master-planned community of Aliana. This neighborhood shopping center operates daily from 6:00 AM to 11:00 PM, providing convenient access to essential services and retail for local residents. With an impressive 4.5-star rating from over 1,000 reviews, the center has established itself as a trusted gathering place within the Aliana community. The shopping center complements the broader Aliana development, which features extensive amenities including The Club at Aliana and The Westmoor Club, multiple fitness centers, tennis courts, pools, and parks. As an integral part of this thriving master-planned community in Richmond, the shopping center serves as a convenient retail hub for the families and professionals who call Aliana home.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 27.16830448799619
+}

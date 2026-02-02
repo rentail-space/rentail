@@ -1,0 +1,26 @@
+{
+  "address": "9813 Farm to Market 1960 Bypass",
+  "city": "Humble",
+  "country": "US",
+  "googlePlaceID": "places/ChIJt6a9lKmzQIYRNuUFWUkci34",
+  "name": "Deerbrook Shopping Center",
+  "state": "TX",
+  "latitude": 30.005801299999998,
+  "longitude": -95.2746995,
+  "imageURLs": [
+    "/images/malls/tx-deerbrook-shopping-center-1.jpg"
+  ],
+  "summary": "Deerbrook Mall is the premier shopping destination in northeast Houston, featuring more than 130 stores and restaurants, popular department store anchors, and an AMC 24-screen movie theater. This one-stop retail center serves the Greater Houston Metro area with a comprehensive mix of national retailers and dining options.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 1481,
+  "website": "https://www.shopdeerbrookmall.com/en.html?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Deerbrook Mall serves the Greater Houston Metro area, particularly the Humble and northeast Houston communities, attracting middle to upper-middle income families with household incomes ranging from $50,000 to $100,000+. The primary trade area includes young families with children, suburban professionals, and multi-generational households typical of the rapidly growing Houston suburbs. Shoppers are drawn from a diverse demographic base reflecting Houston's multicultural population, with visitors seeking convenient one-stop shopping for everyday needs, family entertainment, and dining options. The mall's location near FM 1960 positions it as a regional destination for communities throughout northeast Harris County and southern Montgomery County.",
+  "description": "Deerbrook Mall stands as the premier shopping destination in the Greater Houston Metro area, serving the thriving communities of Humble and northeast Houston since its establishment. This expansive regional mall features more than 130 shops and restaurants, anchored by popular department stores that provide a comprehensive retail experience under one roof. Managed by Brookfield Properties, one of the nation's leading commercial real estate companies, the mall has positioned itself as a one-stop retail center where visitors can check everything off their shopping list. The property includes an AMC Deerbrook 24 movie theater, adding entertainment value beyond traditional retail offerings. With convenient access from Farm to Market 1960 Bypass, the mall serves as a regional hub drawing shoppers from across the Greater Houston area, offering a diverse mix of national retailers, dining options, and family-friendly amenities that make it the preferred shopping destination in the region.",
+  "numberOfStores": 130,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 27.266773503282394
+}

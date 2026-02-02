@@ -1,0 +1,26 @@
+{
+  "address": "1964 West Gray Street",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJXdUScLzAQIYR0v33WMbQ1C0",
+  "name": "River Oaks Shopping Center",
+  "state": "TX",
+  "latitude": 29.753441,
+  "longitude": -95.4073559,
+  "phone": "++1 833-800-4343",
+  "imageURLs": [
+    "/images/malls/tx-river-oaks-shopping-center-1.jpg"
+  ],
+  "summary": "Houston's original and most iconic shopping center, River Oaks Shopping Center offers an upscale open-air plaza experience with curated retailers, distinctive dining, spa services, and complimentary valet parking. Located in the prestigious River Oaks neighborhood, this historic destination combines timeless quality with contemporary sophistication.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 4370,
+  "website": "https://www.riveroaksshoppingcenter.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "River Oaks Shopping Center attracts an affluent, educated demographic reflective of Houston's prestigious River Oaks neighborhood, with visitors typically in the 35-65 age range and household incomes exceeding $150,000. The trade area serves established professionals, empty nesters, and wealthy families who prioritize quality over price and seek curated shopping experiences. Primary shoppers are style-conscious consumers who value convenience amenities like valet parking and prefer boutique retailers, upscale dining, and specialty services over mass-market chains.",
+  "description": "River Oaks Shopping Center holds the distinction of being Houston's original shopping center and remains one of the city's most iconic destinations. Located in the prestigious River Oaks neighborhood at 2030 W. Gray Street, this historic center has stood the test of time by offering quality that cannot be duplicated and never goes out of style. The center features a carefully curated mix of shopping, dining, and entertainment options, including newly opened tenants like Maison Chinoise, Sense Pilates, Seviin Cosmetics, Goode Co. Bar Buena, Goode Co. Kitchen & Cantina, Honest Mary's, and Leo's River Oaks. With its open-air plaza design and complimentary valet parking, River Oaks Shopping Center provides an upscale lifestyle experience that caters to discerning shoppers seeking apparel, kitchen goods, art, spa services, and distinctive dining. The center's commitment to timeless quality and its position as a cherished Houston landmark make it a destination where heritage meets contemporary sophistication.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 49.14649939910069
+}

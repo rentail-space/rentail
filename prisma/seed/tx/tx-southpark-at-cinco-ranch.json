@@ -1,0 +1,27 @@
+{
+  "address": "9550 Spring Green Boulevard",
+  "city": "Katy",
+  "country": "US",
+  "googlePlaceID": "places/ChIJZcP3QIchQYYR9fZKwie53NU",
+  "name": "Southpark at Cinco Ranch",
+  "state": "TX",
+  "latitude": 29.699713000000003,
+  "longitude": -95.8108621,
+  "phone": "++1 713-599-3500",
+  "imageURLs": [
+    "/images/malls/tx-southpark-at-cinco-ranch-1.jpg"
+  ],
+  "summary": "Southpark at Cinco Ranch is a 264,667 square foot community center anchored by Kroger, Academy Sports, and Spec's Liquor, serving the top-selling master-planned community in the United States. Located at a key intersection in Katy, Texas, the center attracts 2.5 million annual visits from an affluent trade area with average household incomes exceeding $183,000.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 1677,
+  "website": "https://www.regencycenters.com/property/detail/60603/Southpark-at-Cinco-Ranch?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Southpark at Cinco Ranch serves an affluent suburban market with a 3-mile radius population of 95,955 and average household income of $183,539. The trade area is characterized by upscale families residing in the top-selling master-planned community in the United States, with an average home value of $526,885. The center attracts approximately 2.5 million annual visits from educated, high-income households seeking quality grocery shopping, sporting goods, and specialty retail in a convenient neighborhood setting.",
+  "description": "Southpark at Cinco Ranch is a premier community shopping center strategically located at the intersection of two main Houston area roads in Katy, Texas, serving the nation's top-selling master-planned community. This 264,667 square foot open-air center is anchored by leading retailers including Kroger, Academy Sports, and Spec's Liquor and Finer Foods, providing essential shopping and services to one of Houston's most affluent suburban markets. Developed and managed by Regency Centers, the property exemplifies the company's Fresh Look® philosophy of creating thriving neighborhood centers that serve as community gathering places. With approximately 2.5 million annual visits, the center has established itself as the go-to destination for residents of Cinco Ranch and surrounding Katy communities. The property's strong performance is supported by exceptional demographics, including a 3-mile household income of $183,539 and average home values exceeding $526,000, making it an attractive location for quality retailers seeking to serve discerning suburban shoppers.",
+  "squareFootage": 264667,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 28.375890950933556
+}

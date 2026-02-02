@@ -1,0 +1,25 @@
+{
+  "address": "Gulf Freeway",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJEWA64c6XQIYRQc5GJdFKBYI",
+  "name": "Monroe plaza",
+  "state": "TX",
+  "latitude": 29.6691035,
+  "longitude": -95.2608891,
+  "imageURLs": [
+    "/images/malls/tx-monroe-plaza-1.jpg"
+  ],
+  "summary": "Monroe Plaza is a community-oriented shopping center on Gulf Freeway in Houston, featuring authentic Mexican dining and neighborhood retail. With a 4.3-star rating and over 341 reviews, the plaza is known for its clean facilities, friendly service, and quality food offerings.",
+  "openFrom": 900,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 341,
+  "website": "http://monroe-plaza-houston.edan.io/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Monroe Plaza serves a diverse, working-class to middle-income demographic in southeast Houston along the Gulf Freeway corridor. The primary trade area consists of Hispanic families and young professionals seeking authentic Mexican dining and convenient neighborhood shopping. Visitors typically include local residents within a 3-5 mile radius who value accessibility, affordability, and cultural authenticity in their shopping and dining experiences.",
+  "description": "Monroe Plaza is a neighborhood shopping center conveniently located on Gulf Freeway in Houston, Texas, serving the local community with a blend of retail and dining options. The center has earned a solid reputation with a 4.3-star rating from over 341 reviews, reflecting its commitment to quality service and tenant offerings. Visitors particularly praise the plaza for its authentic Mexican cuisine, with reviewers highlighting the delicious real Mexican food that stands apart from typical Tex-Mex fare, complemented by friendly staff and excellent customer service. The center maintains a clean, welcoming environment that has made it a popular destination for both quick shopping trips and leisurely dining experiences. Operating daily from 9:00 AM to 9:00 PM, Monroe Plaza provides accessible, community-focused shopping along one of Houston's major thoroughfares, making it a convenient stop for residents and travelers alike.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 21.78168765933548
+}

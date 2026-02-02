@@ -1,0 +1,28 @@
+{
+  "address": "1505 Texas Avenue",
+  "city": "College Station",
+  "country": "US",
+  "googlePlaceID": "places/ChIJgXGMWnaERoYR5bDMj-KIfhs",
+  "name": "Central Station",
+  "state": "TX",
+  "latitude": 30.6172382,
+  "longitude": -96.31918189999999,
+  "phone": "++1 610-215-7939",
+  "imageURLs": [
+    "/images/malls/tx-central-station-1.jpg"
+  ],
+  "summary": "Central Station is a 178,141 square foot community center located just a quarter mile from Texas A&M University, serving over 72,000 students and a dense surrounding population. The property features strong national anchors including HomeGoods, Spec's, and Kohl's, drawing 3.4 million annual visits at a highly visible intersection with 37,000+ daily vehicles.",
+  "openFrom": 600,
+  "openUntil": 0,
+  "rating": 4.3,
+  "reviewCount": 1398,
+  "website": "https://brixmor.com/leasing/retail-space/tx/college-station/central-station?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Central Station serves a highly educated market with 49% of residents holding college degrees within a 3-mile radius, driven by proximity to Texas A&M University with over 72,000 students and 11,000 employees. The trade area encompasses a dense population of 94,000 within 3 miles, with average household incomes ranging from $51,083 at 1 mile to $91,997 at 5 miles, indicating a mix of student renters and established families. The center attracts a strong daytime population of 135,000+ within 3 miles, drawing an estimated 3.4 million annual visits and 9,300 daily visits, with shoppers seeking convenient access to national retailers, dining, and services near the university campus.",
+  "description": "Central Station is a vibrant community shopping center strategically located in the heart of Aggieland, just a quarter mile from Texas A&M University campus in College Station, Texas. Spanning 178,141 square feet, this highly trafficked retail destination draws over 3.4 million annual visits, serving the university's 72,000+ students and 11,000+ employees alongside the surrounding residential community. The center occupies a prominent position at the intersection of Texas Avenue and Harvey Road, benefiting from exceptional visibility with over 37,000 vehicles passing daily on Texas Avenue alone. Central Station features a diverse tenant mix anchored by national retailers including HomeGoods, Spec's Wine, Spirits & Finer Foods, and Kohl's, complemented by popular dining destinations like Los Cucos Mexican Café, Napa Flats, and Chick-fil-A. The property serves a highly educated market with 49% of residents holding college degrees within 3 miles, offering everything from essential services and entertainment venues like Poet's Family Billiard Hall to specialty retailers and fast-casual dining options that cater to both the student population and established families in the Bryan-College Station metropolitan area.",
+  "numberOfStores": 50,
+  "squareFootage": 178141,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 27.051361674123097
+}

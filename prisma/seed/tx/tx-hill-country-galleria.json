@@ -1,0 +1,27 @@
+{
+  "address": "12700 Hill Country Boulevard",
+  "city": "Bee Cave",
+  "country": "US",
+  "googlePlaceID": "places/ChIJjy3AU-s3W4YRkr4qbiCrxwE",
+  "name": "Hill Country Galleria",
+  "state": "TX",
+  "latitude": 30.308821599999998,
+  "longitude": -97.94048629999999,
+  "phone": "++1 512-263-0001",
+  "imageURLs": [
+    "/images/malls/tx-hill-country-galleria-1.jpg"
+  ],
+  "summary": "Hill Country Galleria is an upscale, open-air lifestyle center in Bee Cave featuring 75 retail, dining, and entertainment destinations anchored by Dillard's, Whole Foods Market, and Cinemark. This multi-use development combines sophisticated shopping with over 150 annual community events, making it the premier social and retail destination in the Texas Hill Country.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 3803,
+  "website": "http://www.hillcountrygalleria.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Hill Country Galleria attracts an affluent, family-oriented demographic from the rapidly growing Bee Cave and western Austin suburbs, with visitors typically in the 30-55 age range and above-average household incomes exceeding $100,000. The trade area serves educated professionals and families seeking upscale retail, dining, and entertainment options in the Texas Hill Country. Shopping patterns reflect a preference for quality brands, experiential retail, and community-oriented events, with strong weekend traffic from both local residents and tourists visiting the Hill Country region.",
+  "description": "Hill Country Galleria represents a sophisticated evolution in Texas Hill Country living, seamlessly blending upscale retail, dining, entertainment, and community gathering spaces in the heart of Bee Cave. This multi-use lifestyle destination features approximately 75 retail, dining, and entertainment experiences anchored by prestigious names including Dillard's, Barnes & Noble, Dick's Sporting Goods, Cinemark 14 Theater, and Whole Foods Market. Beyond shopping, the Galleria has established itself as a vibrant community hub, hosting more than 150 family-friendly events annually, including the popular Bee Cave Farmers Market. The open-air design showcases the natural beauty of the Texas Hill Country while offering a curated mix of men's and women's apparel, accessories, beauty retailers, and home décor stores alongside diverse dining options. With its combination of Class A office space, residential condominiums, apartments, and expansive green spaces, Hill Country Galleria has become more than just a shopping destination—it's a thriving social and business district that captures the essence of modern Hill Country lifestyle.",
+  "numberOfStores": 75,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 32.22113692870424
+}

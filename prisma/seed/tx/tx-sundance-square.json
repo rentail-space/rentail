@@ -1,0 +1,26 @@
+{
+  "address": "420 Main Street",
+  "city": "Fort Worth",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ9R1G70BxToYRY0ARUrObOJE",
+  "name": "Sundance Square",
+  "state": "TX",
+  "latitude": 32.7546342,
+  "longitude": -97.3314968,
+  "phone": "++1 817-222-1111",
+  "imageURLs": [
+    "/images/malls/tx-sundance-square-1.jpg"
+  ],
+  "summary": "Sundance Square is Fort Worth's premier downtown lifestyle destination featuring upscale dining, world-class performing arts at Bass Performance Hall, and vibrant entertainment around a lively pedestrian plaza. This multi-block urban district combines distinctive restaurants, live music venues, specialty retail, and cultural attractions in an open-air setting with outdoor dining and regular evening performances.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.6,
+  "reviewCount": 14423,
+  "website": "http://www.sundancesquare.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Sundance Square attracts an affluent, culturally engaged demographic with a strong representation of professionals aged 25-55 and empty nesters seeking upscale dining and entertainment experiences. The trade area draws from Fort Worth's urban core and surrounding affluent suburbs, with visitors typically having above-average household incomes and a preference for experiential retail over traditional shopping. The center appeals to both local residents seeking evening entertainment and cultural tourists visiting Fort Worth's downtown attractions, with a particular emphasis on patrons of the performing arts, fine dining, and live music venues.",
+  "description": "Sundance Square stands as Fort Worth's premier downtown entertainment and lifestyle destination, spanning multiple blocks in the heart of the city's historic district. This vibrant urban plaza has transformed downtown Fort Worth into a cultural hub, featuring a carefully curated mix of distinctive restaurants, live entertainment venues, and specialty retail shops arranged around a lively central square with outdoor dining and regular live music performances. The district is anchored by the iconic Nancy Lee and Perry R. Bass Performance Hall, celebrating over 25 years as a nationally distinguished performing arts venue and home to the Fort Worth Symphony Orchestra, Texas Ballet Theater, and Fort Worth Opera. Beyond world-class performing arts, Sundance Square offers an eclectic entertainment scene including The Spotlight live music venue in the historic Caravan of Dreams building, Circle Theatre's intimate award-winning productions, and the AMC Palace 9 Theatre. The open-air environment encourages pedestrian exploration, with visitors discovering unique dining experiences from upscale establishments like Waters and Mi Cocina to casual favorites, complemented by specialty shops, art galleries, and service providers that create a complete urban lifestyle experience.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 57.394967328486125
+}

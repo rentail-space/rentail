@@ -1,0 +1,52 @@
+{
+  "address": "Cullen Boulevard",
+  "city": "Pearland",
+  "country": "US",
+  "googlePlaceID": "places/ChIJb45xOqeTQIYR8lTBOVl9eCw",
+  "name": "Cullen Crossing",
+  "state": "TX",
+  "latitude": 29.5605233,
+  "longitude": -95.34893629999999,
+  "phone": "++1 713-781-7111",
+  "imageURLs": [
+    "/images/malls/tx-cullen-crossing-1.jpg"
+  ],
+  "summary": "Cullen Crossing is a Kroger-anchored neighborhood shopping center in Pearland, TX, offering a convenient mix of dining, retail, and health and beauty services. Located near Houston and Galveston, this community favorite features tenants like Wingstop, Jax Burgers Fries & Shakes, and Angel Tailors.",
+  "openFrom": 830,
+  "openUntil": 1730,
+  "rating": 4.3,
+  "reviewCount": 568,
+  "website": "http://www.cullencrossing.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Cullen Crossing serves the Pearland community, a growing suburban area located approximately 40 minutes from Houston and an hour from Galveston. The trade area attracts middle-income families and working professionals seeking convenient neighborhood shopping and services. Primary visitors include households with children who value accessible grocery shopping at the Kroger anchor, along with quick-service dining options and essential health and beauty services. The center caters to time-conscious shoppers looking for everyday necessities in a familiar, community-focused environment.",
+  "description": "Cullen Crossing is a neighborhood shopping center located at 8321 Broadway Street in Pearland, Texas, serving as a community favorite for residents seeking convenient shopping and dining options. Anchored by Kroger, this open-air center provides the Pearland community with a well-rounded mix of retail, dining, and service offerings that cater to everyday needs. The tenant lineup includes popular dining destinations like Wingstop and Jax Burgers Fries & Shakes, alongside essential services such as Angel Tailors, healthcare providers, dental offices, and various business services. Strategically positioned in the growing Pearland area, the center benefits from its proximity to Houston, located just 40 minutes away, and Galveston, about an hour's drive, making it accessible to a broad regional customer base. With its focus on small businesses, local shops, and trusted national brands, Cullen Crossing has established itself as a go-to destination for shopping, dining, and services in the Pearland community.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "112",
+      "type": "Inline",
+      "size": 2021
+    },
+    {
+      "number": "120",
+      "type": "Inline",
+      "size": 1190
+    },
+    {
+      "number": "208",
+      "type": "Inline",
+      "size": 4200
+    },
+    {
+      "number": "228",
+      "type": "Inline",
+      "size": 1200
+    },
+    {
+      "number": "240",
+      "type": "Inline",
+      "size": 1200
+    }
+  ],
+  "ranking": 23.687395687114762
+}

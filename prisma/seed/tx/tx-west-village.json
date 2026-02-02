@@ -1,0 +1,26 @@
+{
+  "address": "3699 McKinney Avenue",
+  "city": "Dallas",
+  "country": "US",
+  "googlePlaceID": "places/ChIJQyZ5EtSeToYRrFDPXVc1lFE",
+  "name": "West Village",
+  "state": "TX",
+  "latitude": 32.808715899999996,
+  "longitude": -96.7961747,
+  "phone": "++1 469-759-2890",
+  "imageURLs": [
+    "/images/malls/tx-west-village-1.jpg"
+  ],
+  "summary": "West Village is Dallas's premier lifestyle center in Uptown, offering a sophisticated mix of fashion boutiques, fitness studios, restaurants, and entertainment in a walkable open-air setting. This mixed-use destination combines retail, dining, wellness, cinema, and residential components with distinctive art installations, creating a vibrant community gathering place.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 4.5,
+  "reviewCount": 3091,
+  "website": "http://www.westvillagedallas.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "West Village attracts an affluent, urban demographic primarily consisting of young professionals and millennials aged 25-45 with above-average household incomes exceeding $75,000 annually. The trade area draws heavily from the upscale Uptown Dallas neighborhood and surrounding areas, with visitors seeking a walkable, mixed-use environment that combines shopping, dining, and entertainment. The center appeals to style-conscious consumers who value boutique retail experiences, fitness and wellness offerings, and diverse culinary options in an open-air setting.",
+  "description": "West Village stands as Dallas's premier lifestyle destination in the heart of the vibrant Uptown neighborhood at 3699 McKinney Avenue. This laid-back yet sophisticated retail complex seamlessly blends fashion boutiques, fitness studios, diverse restaurants, and a movie theater into a walkable, open-air environment that has become a cornerstone of urban living in Dallas. The center features a carefully curated mix of tenants across multiple categories including shopping, dining, wellness, and entertainment, creating a true mixed-use experience that serves both residents and visitors. With its distinctive art installations, including the notable Super Deluxe art program, West Village offers more than just retail—it provides a cultural gathering place where the community comes together for events, dining experiences, and social connections. The center's integration of residential components, hotel accommodations, and cinema alongside traditional retail creates a dynamic 18-hour environment that keeps the district active from morning fitness classes through late-night dining.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 47.116336568354626
+}

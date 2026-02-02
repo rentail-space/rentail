@@ -1,0 +1,26 @@
+{
+  "address": "3880 Irving Mall",
+  "city": "Irving",
+  "country": "US",
+  "googlePlaceID": "places/ChIJZ1JyZS2CToYRrVZJ2UZJE8I",
+  "name": "Irving Mall",
+  "state": "TX",
+  "latitude": 32.8404735,
+  "longitude": -96.9950129,
+  "phone": "++1 972-255-0572",
+  "imageURLs": [
+    "/images/malls/tx-irving-mall-1.jpg"
+  ],
+  "summary": "Irving Mall is a long-standing, bi-level enclosed shopping center in Irving, Texas, featuring department store anchors, a cinema, and a food court. This traditional regional mall serves the western Dallas area with a diverse mix of retail, dining, and entertainment options for families and value-oriented shoppers.",
+  "openFrom": 1100,
+  "openUntil": 2000,
+  "rating": 3.8,
+  "reviewCount": 10195,
+  "website": "https://shopirvingmall.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Irving Mall attracts a diverse, middle-income demographic primarily from the Irving and western Dallas metropolitan area, with a strong representation of families and Hispanic households reflecting the local community composition. The trade area serves a mix of value-conscious shoppers and families seeking convenient access to department stores, entertainment, and dining options. Typical visitors range from young families with children to middle-aged adults, with household incomes spanning lower-middle to middle class ranges, drawn by the mall's accessible price points and family-friendly amenities including the cinema and food court.",
+  "description": "Irving Mall stands as a long-established shopping destination in the heart of Irving, Texas, serving the western Dallas metropolitan area since its opening. This bi-level enclosed regional mall offers a traditional indoor shopping experience anchored by department stores and complemented by a diverse mix of retail tenants, dining options in its food court, and entertainment including a cinema. The mall's convenient location at 3880 Irving Mall provides easy access for families and shoppers throughout the Irving community and surrounding areas. With its climate-controlled environment and variety of stores, Irving Mall continues to serve as a gathering place for the local community, offering everything from fashion and accessories to entertainment and dining under one roof. The center maintains its role as a reliable shopping destination with extended hours and amenities that cater to the needs of value-conscious families and diverse shoppers in the Dallas-Fort Worth metroplex.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 0
+}

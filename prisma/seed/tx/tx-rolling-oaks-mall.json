@@ -1,0 +1,27 @@
+{
+  "address": "6909 North Loop 1604 East",
+  "city": "San Antonio",
+  "country": "US",
+  "googlePlaceID": "places/ChIJmxwEjcqNXIYR0xQfadksxAA",
+  "name": "Rolling Oaks Mall",
+  "state": "TX",
+  "latitude": 29.5976559,
+  "longitude": -98.3507851,
+  "phone": "++1 210-307-4950",
+  "imageURLs": [
+    "/images/malls/tx-rolling-oaks-mall-1.jpg"
+  ],
+  "summary": "Rolling Oaks Mall is a climate-controlled indoor shopping center in northeast San Antonio featuring over 100 specialty shops ranging from fashion to jewelry. Conveniently located off Loop 1604 East at Nacogdoches Road, the mall serves families throughout San Antonio, Schertz, Universal City, Selma, and New Braunfels with diverse retail, dining, and community events.",
+  "openFrom": 1100,
+  "openUntil": 2000,
+  "rating": 4.1,
+  "reviewCount": 6188,
+  "website": "https://rollingoaksmall.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Rolling Oaks Mall serves a diverse, family-oriented demographic in the northeast San Antonio area, including the communities of Schertz, Universal City, Selma, and New Braunfels. The primary trade area consists of middle-income households with a mix of military families from nearby Randolph Air Force Base and Fort Sam Houston, young professionals, and growing suburban families. Shoppers typically range from young adults to middle-aged parents seeking value-oriented retail options and family entertainment in a climate-controlled environment. The center attracts budget-conscious consumers looking for accessible shopping with over 100 specialty stores offering fashion, jewelry, and everyday goods at moderate price points.",
+  "description": "Rolling Oaks Mall is a climate-controlled indoor shopping destination serving the northeast San Antonio region and surrounding communities including Schertz, Universal City, Selma, and New Braunfels. Conveniently located off Loop 1604 East at Nacogdoches Road, this regional mall offers families and shoppers a comprehensive retail experience with over 100 specialty shops ranging from fashion to jewelry. The mall provides a comfortable, all-weather shopping environment where visitors can explore diverse retail options, enjoy dining experiences, and take advantage of regular deals and promotional events. With its central location and extensive tenant mix, Rolling Oaks Mall has established itself as a go-to shopping hub for the greater San Antonio area. The center maintains an active community presence through events, a VIP loyalty program offering deals and giveaways, and initiatives like the Heart of the Mall donation program, creating an engaging destination that goes beyond traditional retail.",
+  "numberOfStores": 100,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 31.090712501224104
+}

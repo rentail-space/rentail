@@ -1,0 +1,26 @@
+{
+  "address": "714 Yale Street",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJWcnr41nHQIYRSBL3sLo4AfA",
+  "name": "Heights Mercantile",
+  "state": "TX",
+  "latitude": 29.783870300000004,
+  "longitude": -95.3986266,
+  "phone": "++1 713-783-4444",
+  "imageURLs": [
+    "/images/malls/tx-heights-mercantile-1.jpg"
+  ],
+  "summary": "Heights Mercantile is a low-rise urban market district in Houston's historic Heights neighborhood that transformed forgotten structures into a collection of adaptive spaces featuring inspired dining, shopping, and wellness businesses. Located along the Heights Bike Trail, this lifestyle destination offers curated retail experiences, artisanal restaurants, and community-focused events including regular farmers markets.",
+  "openFrom": 1100,
+  "openUntil": 2300,
+  "rating": 4.5,
+  "reviewCount": 435,
+  "website": "http://heightsmercantile.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Heights Mercantile attracts an affluent, urban demographic primarily consisting of young professionals and families aged 25-45 with above-average household incomes. The visitor base reflects the historic Heights neighborhood's gentrified character, drawing design-conscious consumers who value locally-sourced products, artisanal dining experiences, and wellness-focused retail. The trade area encompasses Houston's inner loop neighborhoods, with shoppers seeking curated, experiential retail over traditional big-box shopping, favoring boutique brands, farm-to-table dining, and community-oriented events like farmers markets and yoga classes.",
+  "description": "Heights Mercantile is a distinctive low-rise urban market district located in Houston's historic and highly sought-after Heights neighborhood, positioned at the intersection of Heights Boulevard, 7th Street, and Yale Street across from Donovan Park. This innovative development reimagined forgotten structures into a collection of adaptive spaces along the Heights Bike Trail, creating an inspired architectural destination that blends the neighborhood's historic character with modern urban design. The center features an uncommon mix of dining, shopping, and beauty businesses, including notable tenants such as Aesop wellness, Vuori activewear, Melange Creperie, Postino wine bar, Kendra Scott jewelry, and Lemon Laine clean beauty shop. Heights Mercantile has become a community gathering place, hosting regular farmers markets featuring local produce and handmade goods, as well as wellness programming like perinatal yoga classes at The Studio. With its focus on experiential retail, artisanal dining, and community engagement, Heights Mercantile represents a new model of neighborhood-oriented retail that celebrates local culture while offering visitors a curated selection of contemporary brands and authentic experiences.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 35.61960496888761
+}

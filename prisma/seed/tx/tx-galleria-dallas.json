@@ -1,0 +1,26 @@
+{
+  "address": "13350 Dallas Parkway",
+  "city": "Dallas",
+  "country": "US",
+  "googlePlaceID": "places/ChIJY_i8sNwgTIYR3N5jfvmPuS4",
+  "name": "Galleria Dallas",
+  "state": "TX",
+  "latitude": 32.929809,
+  "longitude": -96.81988059999999,
+  "phone": "++1 972-702-7100",
+  "imageURLs": [
+    "/images/malls/tx-galleria-dallas-1.jpg"
+  ],
+  "summary": "Galleria Dallas is a premier three-level enclosed mall featuring luxury brands like Gucci and Louis Vuitton alongside popular retailers, anchored by Nordstrom and highlighted by a signature ice skating rink. This upscale destination offers a complete shopping, dining, and entertainment experience with unique community programming and events.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.5,
+  "reviewCount": 22499,
+  "website": "https://galleriadallas.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Galleria Dallas attracts an affluent, diverse demographic with a strong representation of middle to upper-income households from North Dallas suburbs including Addison, Plano, and Frisco. The primary visitor base consists of families and professionals aged 25-54 with household incomes exceeding $75,000, drawn to the center's mix of luxury and mainstream retailers. The trade area serves a cosmopolitan population that values both aspirational shopping experiences and convenient access to premium dining and entertainment options. Weekend traffic includes significant family visits for the ice skating rink and events, while weekday shoppers tend to be more affluent professionals seeking luxury goods and upscale dining.",
+  "description": "Galleria Dallas stands as one of North Texas's premier shopping destinations, offering a distinctive three-level enclosed mall experience that seamlessly blends luxury retail, dining, and entertainment under one roof. Since opening, this iconic center has established itself as the go-to destination for discerning shoppers seeking both high-end luxury brands like Gucci, Louis Vuitton, and Apple alongside popular retailers such as Nordstrom, Sephora, and Zara. The center's signature feature is its year-round ice skating rink, creating a unique entertainment amenity that draws families and visitors throughout the year. Beyond shopping, Galleria Dallas has cultivated a vibrant community atmosphere through its Artist Collective program supporting local creatives, PALS programming, and regular events including showtime performances and seasonal festivals like the Lantern Festival. With convenient access from Dallas Parkway and an attached hotel, the center serves as both a retail destination and a lifestyle hub where guests can shop, dine, skate, and experience the best of Dallas's upscale shopping culture in an inviting, climate-controlled environment.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 58.75420341202349
+}

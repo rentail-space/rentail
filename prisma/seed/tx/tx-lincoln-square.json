@@ -1,0 +1,27 @@
+{
+  "address": "1500 North Collins Street",
+  "city": "Arlington",
+  "country": "US",
+  "googlePlaceID": "places/ChIJR87pI4l9ToYRfklf-A7cKxA",
+  "name": "Lincoln Square",
+  "state": "TX",
+  "latitude": 32.7577778,
+  "longitude": -97.09888889999999,
+  "phone": "++1 682-999-3314",
+  "imageURLs": [
+    "/images/malls/tx-lincoln-square-1.jpg"
+  ],
+  "summary": "Lincoln Square is Arlington's premiere lifestyle destination, featuring over 50 stores, diverse dining options, and entertainment venues in the heart of the Entertainment District. For nearly 25 years, this conveniently located center has served shoppers, diners, and moviegoers with easy access from Interstate 30.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 5275,
+  "website": "https://www.lincolnsquarearlington.com/?utm_id=lincoln+square&utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Lincoln Square attracts a diverse mix of families and young professionals from the Arlington Entertainment District and surrounding Dallas-Fort Worth suburbs. The trade area serves middle to upper-middle income households with median incomes ranging from $55,000 to $85,000, drawn by the center's proximity to AT&T Stadium, Globe Life Field, and other major entertainment venues. Visitors typically include sports fans, moviegoers, and families seeking convenient dining and shopping options before or after events. The center appeals to value-conscious shoppers aged 25-54 who appreciate the combination of national retailers, diverse dining options, and entertainment amenities in a central location.",
+  "description": "Lincoln Square has been the premiere destination in the Arlington Entertainment District for nearly 25 years, offering an exceptional Shop, Dine & Play experience. Strategically located off Interstate 30 and Collins Street in Arlington, Texas, this lifestyle center serves as the central hub for entertainment seekers, sports fans, and families visiting the area's world-class venues. The center features an impressive mix of over 50 national retailers including Burlington, Ross Dress For Less, ULTA Beauty, PetSmart, and Michaels Arts and Crafts, providing shoppers with diverse options for fashion, home goods, and specialty items. Dining options range from casual favorites like Olive Garden, Jason's Deli, and Raising Cane's to unique local experiences such as Omi Korean Grill & Bar and Lupe's Tex Mex Grill, complemented by entertainment offerings including Studio Movie Grill for the latest film releases. With its convenient location near major sports and music venues, ample parking, and comprehensive tenant mix, Lincoln Square continues to serve as Arlington's go-to destination for locals and visitors seeking quality shopping, delicious meals, and entertainment all in one accessible location.",
+  "numberOfStores": 50,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 32.75555768293363
+}

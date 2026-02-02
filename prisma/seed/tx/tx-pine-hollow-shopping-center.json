@@ -1,0 +1,37 @@
+{
+  "address": "2000-2022 Interstate 45 North",
+  "city": "Conroe",
+  "country": "US",
+  "googlePlaceID": "places/ChIJM8qSQag-R4YR_NCpIRM1U9A",
+  "name": "Pine Hollow Shopping Center",
+  "state": "TX",
+  "latitude": 30.332084299999998,
+  "longitude": -95.47536970000002,
+  "phone": "++1 512-482-0094",
+  "imageURLs": [
+    "/images/malls/tx-pine-hollow-shopping-center-1.jpg"
+  ],
+  "summary": "Pine Hollow Shopping Center sits at the convenient intersection of I-45 and SH-336 in Conroe, offering a practical mix of retail, dining, and services. Anchored by Dollar Tree, Aaron's Rental, and Northern Tool + Equipment, the center provides everyday convenience to the local community and highway travelers.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 1584,
+  "website": "http://www.pinehollowsc.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Pine Hollow Shopping Center serves the growing Conroe, TX community, attracting middle-income families and working professionals from the surrounding Montgomery County area. The trade area draws from both local residents and I-45 corridor travelers, with a demographic mix that includes young families, blue-collar workers, and value-conscious shoppers. Visitors typically seek convenient, everyday shopping and dining options with easy highway access, favoring practical retail services and casual dining experiences over luxury shopping.",
+  "description": "Pine Hollow Shopping Center is strategically positioned at the intersection of Interstate 45 and State Highway 336 in Conroe, Texas, placing it in the middle of everything for local residents and travelers alike. This convenient shopping destination features a practical mix of national retailers and local businesses, including Dollar Tree for everyday essentials, Aaron's Rental for furniture and electronics, and Northern Tool + Equipment for hardware and automotive needs. Dining options like Kioku Supreme Buffet provide variety for shoppers looking to grab a meal during their visit. The center serves the buzzing Conroe community with a focus on retail convenience and accessible services, from healthcare and dental to legal and business solutions. Proudly offered by Weitzman, Pine Hollow delivers a neighborhood shopping experience that combines small businesses with favorite retail brands, all with the ease of highway access that makes it a go-to destination for Montgomery County residents.",
+  "tier": 1,
+  "spaces": [
+    {
+      "number": "2012",
+      "type": "Other",
+      "size": 1958
+    },
+    {
+      "number": "2018A",
+      "type": "Other",
+      "size": 13958
+    }
+  ],
+  "ranking": 13.438971744464594
+}

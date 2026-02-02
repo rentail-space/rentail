@@ -1,0 +1,26 @@
+{
+  "address": "8889 Gateway Boulevard West",
+  "city": "El Paso",
+  "country": "US",
+  "googlePlaceID": "places/ChIJHR5ljhdb54YRZjc6iCwx8sk",
+  "name": "The Fountains at Farah",
+  "state": "TX",
+  "latitude": 31.7686872,
+  "longitude": -106.37012279999999,
+  "phone": "++1 915-225-3600",
+  "imageURLs": [
+    "/images/malls/tx-the-fountains-at-farah-1.jpg"
+  ],
+  "summary": "The Fountains at Farah is El Paso's premier open-air lifestyle shopping center, featuring name-brand retailers, upscale dining including Ruth's Chris Steak House and P.F. Chang's, and entertainment venues set among cascading water displays. This regional destination offers a sophisticated outdoor shopping experience with covered parking and patio dining that attracts both local residents and international shoppers.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.6,
+  "reviewCount": 10784,
+  "website": "http://www.fountainsatfarah.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Fountains at Farah attracts a diverse, middle to upper-middle income demographic in the El Paso market, drawing from both local residents and international shoppers from nearby Ciudad Juárez, Mexico. The center appeals to families and young professionals seeking a mix of dining, entertainment, and retail experiences in an upscale outdoor setting. Primary visitors include households with annual incomes of $60,000-$120,000, with a strong representation of Hispanic consumers who value the combination of name-brand retailers and experiential amenities. The trade area benefits from El Paso's position as a major border city, attracting cross-border shoppers seeking American brands and dining experiences not readily available in Mexico.",
+  "description": "The Fountains at Farah stands as El Paso's premier lifestyle shopping destination, offering a sophisticated open-air retail experience in the heart of West El Paso. This regional lifestyle venue combines fresh, name-brand boutiques with on-trend and mid-range department stores, all set within a beautifully landscaped environment featuring numerous cascading water displays that give the center its distinctive character. The center's refreshing outdoor atmosphere is enhanced by covered parking, patio dining options, and entertainment venues including a performance stage that hosts community events throughout the year. Dining options range from upscale establishments like Ruth's Chris Steak House to popular chains such as P.F. Chang's, Jersey Mike's Subs, and La Madeleine, providing diverse culinary experiences for shoppers and diners alike. The Fountains at Farah has established itself as a unique destination that serves both local El Paso residents and international visitors, offering a convenient combination of shopping, dining, and entertainment in a welcoming outdoor mall setting that capitalizes on the region's favorable climate.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 37.10157488855945
+}

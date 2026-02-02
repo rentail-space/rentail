@@ -1,0 +1,27 @@
+{
+  "address": "2901 South Capital of Texas Highway",
+  "city": "Austin",
+  "country": "US",
+  "googlePlaceID": "places/ChIJx2c_5-ZKW4YRj-S58khukT4",
+  "name": "Barton Creek Square",
+  "state": "TX",
+  "latitude": 30.2573391,
+  "longitude": -97.80718829999999,
+  "phone": "++1 512-327-7040",
+  "imageURLs": [
+    "/images/malls/tx-barton-creek-square-1.jpg"
+  ],
+  "summary": "Barton Creek Square is a premier bi-level regional mall in Southwest Austin featuring over 170 retail stores, diverse dining options, and a 14-screen movie theater. Managed by Simon Property Group, this established shopping destination serves one of Austin's most affluent corridors with a comprehensive mix of national retailers and entertainment amenities.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 9827,
+  "website": "https://www.simon.com/mall/barton-creek-square?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Barton Creek Square attracts an affluent, family-oriented demographic from Southwest Austin and surrounding Hill Country communities, with visitors typically in the 25-54 age range and above-average household incomes exceeding $75,000. The trade area serves established suburban neighborhoods, young professionals, and growing families who value convenience and quality retail options. Shoppers demonstrate preferences for both national brands and dining experiences, with strong weekday traffic from nearby office parks and weekend family visits. The center's location along the Capital of Texas Highway positions it as a primary retail destination for one of Austin's most prosperous corridors.",
+  "description": "Barton Creek Square stands as one of Austin's premier shopping destinations, strategically located along the Capital of Texas Highway in the heart of Southwest Austin's affluent corridor. This expansive bi-level regional mall has served the community for decades, evolving into a comprehensive retail and entertainment hub that features over 170 specialty stores and restaurants. The center is anchored by major department stores and complemented by a 14-screen movie theater, making it a complete destination for shopping, dining, and entertainment. Managed by Simon Property Group, one of the nation's leading retail real estate companies, Barton Creek Square maintains high standards of tenant mix and customer experience. The mall's convenient location, ample parking, and climate-controlled environment make it a year-round favorite for Austin residents and visitors seeking everything from fashion and electronics to home goods and specialty services.",
+  "numberOfStores": 170,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 35.13330441325782
+}

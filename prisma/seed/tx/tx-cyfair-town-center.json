@@ -1,0 +1,26 @@
+{
+  "address": "17445 Spring Cypress Road",
+  "city": "",
+  "country": "US",
+  "googlePlaceID": "places/ChIJMfFeXbTVQIYRzY4KxSg1Lvg",
+  "name": "Cyfair Town Center",
+  "state": "TX",
+  "latitude": 29.970294100000004,
+  "longitude": -95.689359,
+  "phone": "++1 281-970-3300",
+  "imageURLs": [
+    "/images/malls/tx-cyfair-town-center-1.jpg"
+  ],
+  "summary": "Cyfair Town Center is a premier community shopping destination in the Cy-Fair region, anchored by Kroger and JCPenney with a dynamic mix of specialty retailers, local boutiques, and a Cinemark theater. The center offers a convenient, family-friendly environment for everyday shopping, dining, and entertainment needs.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.5,
+  "reviewCount": 2165,
+  "website": "http://www.shopcyfairtowncenter.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Cyfair Town Center serves the growing Cy-Fair region of northwest Houston, attracting primarily middle to upper-middle income families with household incomes ranging from $75,000 to $125,000. The trade area consists largely of young families and professionals aged 25-54 with children, drawn from the rapidly expanding residential communities along Spring Cypress Road and the surrounding suburbs. Shoppers typically visit for a combination of grocery shopping at Kroger, entertainment at Cinemark, and convenience retail, reflecting the center's role as a neighborhood hub for everyday needs and family-oriented activities.",
+  "description": "Cyfair Town Center stands as a premier shopping and entertainment destination serving the thriving Cy-Fair region of northwest Houston, Texas. Conveniently located at 17445 Spring Cypress Road in Cypress, this thoughtfully designed community center has established itself as a vital hub for residents seeking a dynamic mix of national retailers, essential services, and locally owned boutiques. The center is anchored by trusted household names including Kroger for grocery needs and JCPenney for department store shopping, providing the foundation for a comprehensive retail experience. Beyond its anchor tenants, Cyfair Town Center showcases an impressive variety of specialty shops where visitors can discover unique finds ranging from gifts and apparel to home décor and more. Entertainment options are highlighted by the modern Cinemark theater, offering moviegoers the latest films in a comfortable setting perfect for family outings or date nights. The center's open-air design and ample parking make it easy to navigate whether you're running everyday errands or planning a leisurely day out with family and friends. With its commitment to serving the local community and supporting the diverse businesses that call it home, Cyfair Town Center continues to evolve as an essential gathering place in one of Houston's fastest-growing suburban areas.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 30.01912110620446
+}

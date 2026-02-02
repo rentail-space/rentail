@@ -1,0 +1,36 @@
+{
+  "address": "5901 Hillcroft Avenue",
+  "city": "Houston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJb85qYErCQIYRpEUO0rN7kVk",
+  "name": "Hillcroft Shopping Plaza",
+  "state": "TX",
+  "latitude": 29.7182487,
+  "longitude": -95.4999666,
+  "phone": "++1 713-789-1500",
+  "imageURLs": [
+    "/images/malls/tx-hillcroft-shopping-plaza-1.jpg"
+  ],
+  "summary": "Hillcroft Shopping Plaza is Houston's premier South Asian shopping destination, featuring specialized retailers offering Indian and Pakistani attire, beauty products, health services, and authentic dining experiences. This cultural hub serves the Southwest Houston community with a unique collection of ethnic merchandise and services unavailable at traditional shopping centers.",
+  "openFrom": 1030,
+  "openUntil": 1700,
+  "rating": 4.2,
+  "reviewCount": 965,
+  "website": "http://hillcroftshopping.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Hillcroft Shopping Plaza primarily serves Houston's South Asian community, particularly Indian and Pakistani families in the Southwest Houston area. The trade area attracts middle to upper-middle income households seeking authentic ethnic goods, traditional attire, and cultural services. Visitors typically include multigenerational families, young professionals seeking specialty items, and shoppers traveling from across the Greater Houston metropolitan area for unique South Asian products and dining experiences unavailable elsewhere in the region.",
+  "description": "Hillcroft Shopping Plaza stands as Houston's premier destination for South Asian shopping, dining, and entertainment, serving as a cultural hub for the city's vibrant Indian and Pakistani communities. Located at the intersection of Hillcroft Avenue and Hillcroft Street in Southwest Houston, this specialty shopping center has established itself as the go-to destination for authentic ethnic merchandise and experiences. The plaza features an extensive collection of retailers specializing in traditional Indian and Pakistani attire, from elegant saris and lehengas to formal sherwanis and kurtas, alongside beauty product shops offering specialized cosmetics, henna, and personal care items tailored to South Asian preferences. Beyond fashion and beauty, the center offers a diverse array of services including health and wellness providers, making it a comprehensive one-stop destination for the community. The plaza's dining and entertainment options provide visitors with authentic culinary experiences and cultural activities, creating a vibrant atmosphere that celebrates South Asian heritage while serving the practical shopping needs of Houston's diverse population.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "Olympic Center",
+      "type": "Other",
+      "size": 2647,
+      "available": true,
+      "imageURLs": [
+        "https://hillcroftshopping.com/wp-content/uploads/2024/09/1-580x375.png"
+      ]
+    }
+  ],
+  "ranking": 25.07002943208786
+}

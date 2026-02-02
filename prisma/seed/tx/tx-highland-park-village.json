@@ -1,0 +1,26 @@
+{
+  "address": "47 Highland Park Village",
+  "city": "Dallas",
+  "country": "US",
+  "googlePlaceID": "places/ChIJR3xmR-6eToYRUJ2jRefgG5Q",
+  "name": "Highland Park Village",
+  "state": "TX",
+  "latitude": 32.8356649,
+  "longitude": -96.8056735,
+  "phone": "++1 214-443-9898",
+  "imageURLs": [
+    "/images/malls/tx-highland-park-village-1.jpg"
+  ],
+  "summary": "Highland Park Village is America's first shopping center and a National Historic Landmark, featuring luxury designer boutiques, upscale dining, and distinctive Spanish Colonial architecture. Located in Dallas's most prestigious neighborhood, this intimate open-air center offers an exclusive shopping experience with brands like Hermès, Chanel, and Dior.",
+  "openFrom": 1000,
+  "openUntil": 1800,
+  "rating": 4.6,
+  "reviewCount": 1883,
+  "website": "https://hpvillage.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Highland Park Village attracts an affluent, sophisticated demographic primarily consisting of high-net-worth individuals and families from the prestigious Highland Park and University Park neighborhoods of Dallas. The typical visitor is aged 35-65 with household incomes exceeding $200,000, often significantly higher, representing established professionals, business owners, and generational wealth. The trade area is characterized by some of the most expensive real estate in Texas, with shoppers seeking luxury goods, personalized service, and exclusive shopping experiences. This clientele values quality over quantity, with shopping patterns focused on designer fashion, fine jewelry, and upscale dining rather than mass-market retail.",
+  "description": "Highland Park Village stands as America's first self-contained shopping center, opening its doors in 1931 in the heart of one of Dallas's most prestigious neighborhoods. This National Historic Landmark pioneered the concept of the modern shopping center with its distinctive Spanish Colonial Revival architecture, featuring charming courtyards, fountains, and meticulously landscaped walkways that create an intimate, village-like atmosphere. The center has maintained its position as Dallas's premier luxury shopping destination for over nine decades, hosting an impressive collection of designer boutiques including Hermès, Chanel, Dior, and other internationally renowned fashion houses. Beyond its exceptional retail offerings, Highland Park Village features upscale dining establishments and specialty shops that cater to the discerning tastes of its affluent clientele. The center's commitment to preserving its architectural heritage while curating a world-class tenant mix has made it not just a shopping destination, but a cultural landmark that embodies the sophistication and elegance of Dallas's most exclusive neighborhood.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 45.19293441622997
+}

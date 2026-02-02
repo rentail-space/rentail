@@ -1,0 +1,26 @@
+{
+  "address": "10901 North Lamar Boulevard",
+  "city": "Austin",
+  "country": "US",
+  "googlePlaceID": "places/ChIJg15OyETJRIYRysMkhJkwxfg",
+  "name": "Chinatown Center",
+  "state": "TX",
+  "latitude": 30.378198699999995,
+  "longitude": -97.68669399999999,
+  "phone": "++1 512-502-8887",
+  "imageURLs": [
+    "/images/malls/tx-chinatown-center-1.jpg"
+  ],
+  "summary": "Chinatown Center is Austin's leading Asian retail complex featuring an extensive selection of restaurants spanning Chinese, Korean, and Vietnamese cuisines, complemented by an Asian supermarket and specialty shops. This cultural destination serves as a community hub offering authentic dining experiences, imported goods, and services tailored to Austin's diverse Asian population and food enthusiasts.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.3,
+  "reviewCount": 2299,
+  "website": "http://chinatownaustin.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Chinatown Center primarily serves Austin's Asian-American community and food enthusiasts, attracting families and young professionals aged 25-55 with middle to upper-middle income levels. The trade area draws from North Austin's diverse residential neighborhoods, with a significant concentration of Asian households seeking authentic cultural products and dining experiences. Visitors typically engage in weekly grocery shopping at the Asian supermarket while combining trips with dining at specialty restaurants, creating a destination shopping pattern rather than convenience-based visits.",
+  "description": "Chinatown Center stands as Austin's premier Asian retail and dining destination, located at 10901 North Lamar Boulevard in the heart of North Austin. This vibrant complex serves as a cultural hub, bringing together an authentic collection of Asian restaurants, specialty shops, and services that reflect the diverse cuisines and traditions of Chinese, Korean, Vietnamese, and other Asian communities. The center is anchored by a full-service Asian supermarket offering hard-to-find ingredients, fresh produce, and imported goods that draw shoppers from across the Austin metropolitan area. Beyond grocery shopping, visitors can explore a carefully curated mix of restaurants ranging from traditional dim sum and Korean BBQ to Vietnamese pho and bubble tea cafes, making it a beloved destination for both the local Asian community and food enthusiasts seeking authentic culinary experiences. With its strong community focus and diverse tenant mix spanning food, retail, beauty services, and financial institutions, Chinatown Center has established itself as an essential gathering place that celebrates Asian culture while serving the practical needs of its loyal customer base.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 28.909235152915798
+}
