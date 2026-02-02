@@ -44,7 +44,7 @@ function SummarySection({ byDate }: { byDate: [string, Source[]][] }) {
     date,
     sumBy(sources, (source) => source.citations.filter(isRentail).length),
   ]);
-  const mostRecent = last(byDate.map(([date, value]) => value))?.[0];
+  const mostRecent = last(byDate.map(([_date, value]) => value))?.[0];
   return (
     <Section>
       <table
