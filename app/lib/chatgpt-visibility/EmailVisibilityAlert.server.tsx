@@ -1,23 +1,22 @@
 import { Button, Section } from "@react-email/components";
-import { meanBy, sortBy, sumBy } from "es-toolkit";
+import { last, sortBy, sumBy } from "es-toolkit";
+import { DateTime } from "luxon";
 import { twMerge } from "tailwind-merge";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails.server";
 import * as styles from "~/emails/styles";
 import type { Source } from "./runAllQueries.server";
+import runAllQueries from "./runAllQueries.server";
 
-export default async function sendVisibilityAlert({
-  sources,
-}: {
-  sources: Source[];
-}): Promise<void> {
+export default async function sendVisibilityAlert(): Promise<string> {
+  const byDate = await runAllQueries({ cacheDays: 10 });
   await sendEmail({
     email: "assaf@labnotes.org",
     subject: "Visibility Alert",
     content: () => (
-      <EmailLayout subject={getRecommendation(sources)}>
-        <SummarySection sources={sources} />
-        <SourcesTable sources={sources} />
+      <EmailLayout subject="Rentail visibility in ChatGPT queries">
+        <SummarySection byDate={byDate} />
+        <SourcesTable byDate={byDate} />
 
         <Button
           href="https://rentail.space/admin/visibility"
@@ -28,20 +27,24 @@ export default async function sendVisibilityAlert({
       </EmailLayout>
     ),
   });
+
+  return "OK";
 }
 
-function getRecommendation(sources: Source[]): string {
-  const avgScore = meanBy(sources, scoreSource);
-  return avgScore >= 90
-    ? "Excellent visibility! Rentail.space is dominating ChatGPT search results."
-    : avgScore >= 50
-      ? "Good visibility. Rentail.space appears consistently in top results."
-      : avgScore >= 30
-        ? "Visibility declining. Consider content marketing or SEO improvements."
-        : "Critical: Low visibility in ChatGPT results. Immediate action needed.";
-}
-
-function SummarySection({ sources }: { sources: Source[] }) {
+function SummarySection({ byDate }: { byDate: [string, Source[]][] }) {
+  const scores: [string, number][] = byDate.map(([date, sources]) => [
+    date,
+    sumBy(sources, scoreSource),
+  ]);
+  const citations: [string, number][] = byDate.map(([date, sources]) => [
+    date,
+    sumBy(sources, (source) => source.citations.length),
+  ]);
+  const rentailCitations: [string, number][] = byDate.map(([date, sources]) => [
+    date,
+    sumBy(sources, (source) => source.citations.filter(isRentail).length),
+  ]);
+  const mostRecent = last(byDate.map(([date, value]) => value))?.[0];
   return (
     <Section>
       <table
@@ -60,17 +63,16 @@ function SummarySection({ sources }: { sources: Source[] }) {
             <th align="left" className="whitespace-nowrap bg-gray-200">
               Total score
             </th>
-            <td>{sumBy(sources, scoreSource).toLocaleString()}</td>
+            <td>
+              <Progression sequence={scores} />
+            </td>
           </tr>
           <tr>
             <th align="left" className="whitespace-nowrap bg-gray-200">
               All Citations
             </th>
             <td>
-              {sumBy(
-                sources,
-                (source) => source.citations.length,
-              ).toLocaleString()}
+              <Progression sequence={citations} />
             </td>
           </tr>
           <tr>
@@ -78,10 +80,18 @@ function SummarySection({ sources }: { sources: Source[] }) {
               Rentail Citations
             </th>
             <td>
-              {sumBy(
-                sources,
-                (source) => source.citations.filter(isRentail).length,
-              ).toLocaleString()}
+              <Progression sequence={rentailCitations} />
+            </td>
+          </tr>
+          <tr>
+            <th align="left" className="whitespace-nowrap bg-gray-200">
+              Last updated
+            </th>
+            <td>
+              {mostRecent &&
+                DateTime.fromJSDate(mostRecent.createdAt).toFormat(
+                  "yyyy-MM-dd",
+                )}
             </td>
           </tr>
         </tbody>
@@ -90,7 +100,18 @@ function SummarySection({ sources }: { sources: Source[] }) {
   );
 }
 
-function SourcesTable({ sources }: { sources: Source[] }) {
+function Progression({ sequence }: { sequence: [string, number][] }) {
+  return sequence.map(([date, value], index, all) => (
+    <span className={index === all.length - 1 ? "font-bold" : ""} key={date}>
+      {index > 0 ? " → " : ""}
+      {value.toLocaleString()}
+    </span>
+  ));
+}
+
+function SourcesTable({ byDate }: { byDate: [string, Source[]][] }) {
+  const sources = last(byDate)?.[1];
+  if (!sources) return null;
   return (
     <Section>
       <table

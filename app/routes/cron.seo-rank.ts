@@ -5,5 +5,5 @@
 import sendSEORankAlert from "~/lib/seo-rank/SEORankAlert.server";
 
 export async function loader() {
-  return await sendSEORankAlert();
+  return sendSEORankAlert();
 }
