@@ -1,0 +1,108 @@
+{
+  "address": "2610 Lee Street",
+  "city": "Greenville",
+  "country": "US",
+  "googlePlaceID": "places/ChIJUwKx_1joS4YRm1mvqrGB_oE",
+  "name": "Uptown Forum",
+  "state": "TX",
+  "latitude": 33.14,
+  "longitude": -96.1077778,
+  "phone": "++1 866-479-6644",
+  "imageURLs": [
+    "/images/malls/tx-uptown-forum-1.jpg"
+  ],
+  "summary": "Uptown Forum is a charming historic shopping center in downtown Greenville, Texas, housed in a beautifully restored 1916 department store building. The three-level property features a curated collection of independent shops, artists' studios, personal services, and an on-site restaurant, drawing visitors from across north and east Texas for over 40 years.",
+  "openFrom": 1000,
+  "openUntil": 2030,
+  "rating": 4.7,
+  "reviewCount": 58,
+  "website": "http://www.uptownforum.net/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Uptown Forum attracts a diverse mix of visitors including art enthusiasts, creative professionals, and heritage tourism seekers drawn to downtown Greenville's historic character. The center appeals primarily to middle to upper-middle income households who appreciate locally-owned businesses, artisan goods, and the building's unique historic charm. Typical visitors include families seeking dining experiences at the on-site restaurant, professionals utilizing studio and office spaces, and regional shoppers from across north and east Texas who make special trips for the curated collection of independent retailers and artists' studios.",
+  "description": "Uptown Forum is a historic shopping destination housed in a beautifully restored 1916 building that originally served as the Perkins Brothers Department Store, the retail center for fashionable ladies in Downtown Greenville for six decades. After the store closed in 1976, a preservation-minded local couple purchased the building in 1978 and transformed it into a delightful collection of shops, artists' studios, personal services, and small businesses, preserving unique architectural elements including the original pneumatic tubes that once sent sales slips from sales counters to the business office. The three-level building features whimsical design touches and careful craftsmanship throughout, creating an intimate community atmosphere that has drawn visitors from across north and east Texas for over 40 years. Today, Uptown Forum is home to a variety of independent retailers, creative professionals, and an on-site restaurant serving breakfast, lunch, and dinner, with retail hours varying by business. The center also offers multiple studio, office, and workshop spaces for lease on various levels, ranging from 350 to 1,516 square feet, making it an ideal location for artists, stylists, designers, and small business owners who value the building's historic character and collaborative community feel.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "Front Multi-level Retail Space",
+      "type": "Other",
+      "size": 1196,
+      "floor": 1,
+      "available": true,
+      "imageURLs": [
+        "http://www.uptownforum.net/Images/Space-AvailableMultilevel.jpg",
+        "http://www.uptownforum.net/Images/FrontLeftRetailMainFloor1.jpg",
+        "http://www.uptownforum.net/Images/FrontLeftRetailMainFloor2.jpg",
+        "http://www.uptownforum.net/Images/FrontLeftRetailMainFloor3.jpg",
+        "http://www.uptownforum.net/Images/FrontLeftRetailLowerRoom1.jpg",
+        "http://www.uptownforum.net/Images/FrontLeftRetailLowerRoom2.jpg"
+      ]
+    },
+    {
+      "number": "Mezzanine Office/Studio",
+      "type": "Other",
+      "size": 364,
+      "floor": 3,
+      "available": true,
+      "imageURLs": [
+        "http://www.uptownforum.net/Images/SpaceAvailableMezzanine.jpg",
+        "http://www.uptownforum.net/Images/Mezzanine1.jpg",
+        "http://www.uptownforum.net/Images/Mezzanine2.jpg"
+      ]
+    },
+    {
+      "number": "Mezzanine Workshop/Studio",
+      "type": "Other",
+      "size": 364,
+      "floor": 3,
+      "available": true,
+      "imageURLs": [
+        "http://www.uptownforum.net/Images/Space-AvailableWorkshop.jpg",
+        "http://www.uptownforum.net/Images/Workshop-1.jpg",
+        "http://www.uptownforum.net/Images/Workshop-2.jpg",
+        "http://www.uptownforum.net/Images/Workshop-3.jpg"
+      ]
+    },
+    {
+      "number": "Upstairs Large Office",
+      "type": "Other",
+      "size": 1516,
+      "floor": 2,
+      "available": true,
+      "imageURLs": [
+        "http://www.uptownforum.net/Images/Space-AvailableUpstairsLargeOffice.jpg",
+        "http://www.uptownforum.net/Images/realtor1.jpg",
+        "http://www.uptownforum.net/Images/realtor2.jpg",
+        "http://www.uptownforum.net/Images/realtor3.jpg",
+        "http://www.uptownforum.net/Images/realtor4.jpg",
+        "http://www.uptownforum.net/Images/realtor5.jpg"
+      ]
+    },
+    {
+      "number": "Upstairs Office/Studio A",
+      "type": "Other",
+      "size": 384,
+      "floor": 2,
+      "available": true,
+      "imageURLs": [
+        "http://www.uptownforum.net/Images/Space-AvailableUpstairsOfficeA.jpg",
+        "http://www.uptownforum.net/Images/UpstairsSplitStudio1.jpg",
+        "http://www.uptownforum.net/Images/UpstairsSplitStudio1-A.jpg",
+        "http://www.uptownforum.net/Images/UpstairsSplitStudio1-B.jpg"
+      ]
+    },
+    {
+      "number": "Upstairs Office/Studio B",
+      "type": "Other",
+      "size": 350,
+      "floor": 2,
+      "available": true,
+      "imageURLs": [
+        "http://www.uptownforum.net/Images/Space-AvailableUpstairsOfficeB.jpg",
+        "http://www.uptownforum.net/Images/UpstairsSplitStudio2A.jpg",
+        "http://www.uptownforum.net/Images/UpstairsSplitStudio2b.jpg",
+        "http://www.uptownforum.net/Images/UpstairsSplitStudio2.jpg"
+      ]
+    }
+  ],
+  "ranking": 16.57622313949161
+}

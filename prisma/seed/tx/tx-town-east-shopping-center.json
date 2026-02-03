@@ -1,0 +1,55 @@
+{
+  "address": "3301 North Town East Boulevard",
+  "city": "Mesquite",
+  "country": "US",
+  "googlePlaceID": "places/ChIJhazjC9elToYR5--QjPLHFz8",
+  "name": "Town East Shopping Center",
+  "state": "TX",
+  "latitude": 32.802543799999995,
+  "longitude": -96.6477175,
+  "imageURLs": [
+    "/images/malls/tx-town-east-shopping-center-1.jpg"
+  ],
+  "summary": "Town East Shopping Center is a strategically located retail property in Mesquite, TX, positioned at a high-traffic signalized intersection with excellent highway access to I-635, I-30, and US-80. Currently undergoing Spring 2024 renovations, the center offers flexible retail spaces near Town East Mall and Eastfield College, providing strong visibility and accessibility for businesses.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 277,
+  "website": "https://www.centerpointcp.com/listings/id18-mesquite?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Town East Shopping Center serves a diverse, middle-income demographic in the Mesquite, TX area with strong representation from families and young professionals. The trade area benefits from proximity to Eastfield College (1.3 miles away), attracting college students and faculty, while the nearby Town East Mall and major highway access (I-635, I-30, US-80) draw shoppers from surrounding suburban communities. The center's location at a high-traffic signalized intersection captures both convenience-oriented local residents and commuters seeking accessible retail options, with typical visitors representing working-class to middle-class households seeking value and convenience in their shopping experience.",
+  "description": "Town East Shopping Center is a strategically positioned retail destination located at 3301 N. Town East Blvd in Mesquite, Texas, offering prime visibility at the busy signalized intersection of Town East Boulevard and Motley Drive. This well-established shopping center benefits from exceptional accessibility, with close proximity to major highways including I-635, I-30, and US-80, making it easily reachable for shoppers throughout the Dallas-Fort Worth metroplex. The property is undergoing significant renovations beginning Spring 2024, which will modernize and enhance the retail spaces to better serve tenants and attract increased customer traffic. Situated just minutes from Town East Mall and numerous national retailers, and only 1.3 miles from Eastfield College, the center enjoys a prime location in one of Mesquite's most active commercial corridors. With available spaces ranging from 1,800 to 35,000 square feet, including white box retail units and a hard corner pad site with drive-thru capabilities, Town East Shopping Center offers flexible opportunities for diverse retail businesses seeking high visibility and strong traffic counts in a thriving suburban market.",
+  "numberOfStores": 3,
+  "squareFootage": 42800,
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "118",
+      "type": "Other",
+      "size": 6000,
+      "available": true,
+      "imageURLs": [
+        "https://v5.airtableusercontent.com/v3/u/50/50/1770091200000/CdP9PZVpj5z9pt1qFcG5Ew/PLnuauMerSFKNeaufWoTQ59H4GJ1WhotMyHYTnPvooWmKhgNwI9491CiXv3abYWBJQifuEBAZhCspAhjcTxvvKlh7kH0j0r04n2y8lgKyceXxHmiUKK1-eMt-izTNzvJwZHbTwEq31zGXHsVz_gXtcCiDveZJhJj8dZXcKewm48/XhziCLWx3HEYVMgPszRJh0X4ATYMgP-ardhKZmQqgLY"
+      ]
+    },
+    {
+      "number": "122",
+      "type": "Other",
+      "size": 1800,
+      "available": false,
+      "imageURLs": [
+        "https://v5.airtableusercontent.com/v3/u/50/50/1770091200000/CdP9PZVpj5z9pt1qFcG5Ew/PLnuauMerSFKNeaufWoTQ59H4GJ1WhotMyHYTnPvooWmKhgNwI9491CiXv3abYWBJQifuEBAZhCspAhjcTxvvKlh7kH0j0r04n2y8lgKyceXxHmiUKK1-eMt-izTNzvJwZHbTwEq31zGXHsVz_gXtcCiDveZJhJj8dZXcKewm48/XhziCLWx3HEYVMgPszRJh0X4ATYMgP-ardhKZmQqgLY"
+      ]
+    },
+    {
+      "number": "PAD 1",
+      "type": "Other",
+      "size": 35000,
+      "available": true,
+      "imageURLs": [
+        "https://v5.airtableusercontent.com/v3/u/50/50/1770091200000/CdP9PZVpj5z9pt1qFcG5Ew/PLnuauMerSFKNeaufWoTQ59H4GJ1WhotMyHYTnPvooWmKhgNwI9491CiXv3abYWBJQifuEBAZhCspAhjcTxvvKlh7kH0j0r04n2y8lgKyceXxHmiUKK1-eMt-izTNzvJwZHbTwEq31zGXHsVz_gXtcCiDveZJhJj8dZXcKewm48/XhziCLWx3HEYVMgPszRJh0X4ATYMgP-ardhKZmQqgLY"
+      ]
+    }
+  ],
+  "ranking": 21.005326013954257
+}

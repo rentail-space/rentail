@@ -1,0 +1,28 @@
+{
+  "address": "Preston Road",
+  "city": "Dallas",
+  "country": "US",
+  "googlePlaceID": "places/ChIJxUkZK44gTIYRJ1Fbx0GSpQo",
+  "name": "Preston Forest Shopping Center",
+  "state": "TX",
+  "latitude": 32.9083659,
+  "longitude": -96.8028338,
+  "phone": "++1 214-361-6635",
+  "imageURLs": [
+    "/images/malls/tx-preston-forest-shopping-center-1.jpg"
+  ],
+  "summary": "A 200,000 square foot family-oriented neighborhood shopping center anchored by Whole Foods Market in prestigious Preston Hollow. Features a strong mix of fitness concepts, specialty retail, and dining options serving one of North Dallas's most affluent communities.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 1449,
+  "website": "https://prestonforestsc.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Preston Forest Shopping Center serves one of Dallas's most prestigious and affluent residential neighborhoods in Preston Hollow, attracting upper-income families and professionals. The primary trade area consists of high-net-worth households with strong purchasing power, drawn to quality retailers like Whole Foods Market and boutique fitness concepts. Typical visitors are health-conscious, educated consumers aged 30-65 who value convenience, premium products, and specialized services, with shopping patterns favoring frequent visits for groceries, fitness activities, and specialty retail rather than destination shopping trips.",
+  "description": "Preston Forest Shopping Center stands as the cornerstone of the prestigious Preston Hollow community, serving North Dallas customers for decades at the southeast corner of Preston Road and Forest Lane. This 200,000 square foot family-oriented neighborhood shopping center is anchored by Whole Foods Market and has evolved into a dynamic destination that blends essential shopping with wellness and lifestyle offerings. The center features an impressive array of fitness and wellness concepts including CorePower Yoga, CycleBar, Mayweather Boxing + Fitness, and the innovative CYL Sauna Studio, reflecting the health-conscious values of its affluent customer base. Beyond fitness, visitors can explore specialty retailers like JoAnn fabric and craft store, Marmi Shoes, and enjoy diverse dining options from Baskin Robbins to Fajita Pete's, with exciting additions like Haystack Burgers and Barley and Merit Coffee coming soon. Located in one of the most sought-after residential neighborhoods in the metroplex, Preston Forest Shopping Center continues to blossom each year with new shopping and dining destinations that cater to the sophisticated tastes of its community.",
+  "numberOfStores": 12,
+  "squareFootage": 200000,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 27.81740179214634
+}

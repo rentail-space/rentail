@@ -83,12 +83,14 @@ export default async function seedCenters(centerSlugs?: string[]) {
 
   for (const center of seedable) await seedCenter(center);
 
-  const unknownStates = new Set(noState.map((center) => center.state)).values();
-  logger("❌ Unknown states: %s", ...unknownStates);
+  const unknownStates = [
+    ...new Set(noState.map((center) => center.state)).values(),
+  ];
+  if (unknownStates.length > 0) logger("❌ Unknown states: %o", unknownStates);
 }
 
 async function seedCenter(center: z.infer<typeof schema>) {
-  logger("🔄 Seeding %s in %s", center.name, center.state);
+  logger("🔄 Seeding %s %s", center.state, center.name);
 
   const imageURLs = center.imageURLs.map((url) =>
     envVars.isProduction

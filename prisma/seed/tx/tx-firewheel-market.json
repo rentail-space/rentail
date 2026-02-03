@@ -1,0 +1,53 @@
+{
+  "address": "",
+  "city": "Garland",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ5TdkZvkcTIYRlIRtowye3RQ",
+  "name": "Firewheel Market",
+  "state": "TX",
+  "latitude": 32.9570856,
+  "longitude": -96.6156073,
+  "phone": "++1 214-954-0600",
+  "imageURLs": [
+    "/images/malls/tx-firewheel-market-1.jpg"
+  ],
+  "summary": "Firewheel Market is a lifestyle center in Garland, Texas, featuring a delightful blend of family restaurants, local shops, and health and wellness services. Located next to Firewheel Town Center, it offers town square charm with convenient access to dining, shopping, and essential services for the northeast Dallas community.",
+  "openFrom": 1100,
+  "openUntil": 2300,
+  "rating": 4.4,
+  "reviewCount": 328,
+  "website": "http://www.firewheelmarket.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Firewheel Market attracts middle to upper-middle income families and young professionals from the Garland and northeast Dallas suburbs, with a primary trade area serving households earning $60,000-$100,000 annually. The center draws a diverse demographic mix typical of the Dallas-Fort Worth metroplex, with visitors ranging from young families seeking casual dining options to health-conscious consumers utilizing the wellness services. Shopping patterns reflect a convenience-oriented lifestyle with frequent visits for dining, services, and everyday retail needs rather than destination shopping trips.",
+  "description": "Firewheel Market is a vibrant lifestyle center located in Garland, Texas, offering a carefully curated mix of dining, shopping, and services that bring town square charm to the northeast Dallas suburbs. Situated adjacent to the larger Firewheel Town Center development at 4280-4720 Lavon Drive, this open-air shopping destination has established itself as a community gathering place where residents can find everything from family restaurants to health and wellness services. The center features a diverse tenant mix that includes local small businesses alongside favorite retail brands, creating an authentic neighborhood shopping experience. With its focus on family-friendly restaurants and essential services ranging from healthcare and dental to legal and business solutions, Firewheel Market serves as a convenient one-stop destination for daily needs. The center's thoughtful design and tenant curation reflect the growing demand for accessible, community-oriented retail environments that blend shopping, dining, and services in a walkable, open-air setting.",
+  "tier": 2,
+  "spaces": [
+    {
+      "number": "Suite 124",
+      "type": "Inline",
+      "size": 1324
+    },
+    {
+      "number": "Suite 164",
+      "type": "Inline",
+      "size": 1912
+    },
+    {
+      "number": "Suite 170",
+      "type": "Inline",
+      "size": 3265,
+      "available": true
+    },
+    {
+      "number": "Suite 224",
+      "type": "Inline",
+      "size": 1250
+    },
+    {
+      "number": "Suite 264",
+      "type": "Inline",
+      "size": 1500
+    }
+  ],
+  "ranking": 22.139689824662778
+}

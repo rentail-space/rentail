@@ -1,0 +1,26 @@
+{
+  "address": "2201 South Interstate 35",
+  "city": "Denton",
+  "country": "US",
+  "googlePlaceID": "places/ChIJkTWrPifLTYYR8Ogbw1fElQE",
+  "name": "Golden Triangle Mall",
+  "state": "TX",
+  "latitude": 33.1903866,
+  "longitude": -97.10790279999999,
+  "phone": "++1 940-566-6024",
+  "imageURLs": [
+    "/images/malls/tx-golden-triangle-mall-1.jpg"
+  ],
+  "summary": "Golden Triangle Mall is an established regional shopping center in Denton, Texas, offering a traditional enclosed mall experience with department stores and national retailers. Conveniently located on Interstate 35, it serves the northern Dallas-Fort Worth area with a diverse mix of fashion, home goods, and dining options.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 3.9,
+  "reviewCount": 4482,
+  "website": "https://shopgoldentriangle.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Golden Triangle Mall serves a diverse middle-income demographic in the Denton area, attracting families, college students from nearby University of North Texas and Texas Woman's University, and value-conscious shoppers. The trade area encompasses northern Denton County with a mix of young professionals, students, and established families seeking affordable retail options. Visitors typically range from budget-conscious millennials to middle-aged households with median incomes, drawn to the mall's accessible pricing and convenient Interstate 35 location.",
+  "description": "Golden Triangle Mall stands as a prominent shopping destination in Denton, Texas, strategically positioned along South Interstate 35 to serve the growing northern Dallas-Fort Worth metroplex. This regional mall has been a cornerstone of the Denton community for decades, providing residents and visitors with a comprehensive retail experience under one roof. The center features traditional department store anchors alongside a diverse mix of national retailers, offering everything from fashion and accessories to beauty products and home goods. With its enclosed climate-controlled environment, Golden Triangle Mall provides year-round comfort for shoppers exploring its various stores and dining options. The mall's location near major universities and residential areas makes it a convenient gathering place for the community, combining practical shopping needs with social and entertainment opportunities that have made it a lasting fixture in Denton's retail landscape.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 0
+}
