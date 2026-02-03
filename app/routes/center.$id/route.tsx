@@ -21,10 +21,11 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
     ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
     : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`;
   return pageMeta({
-    title: `${center.name} - ${center.city}, ${center.state.abbreviation}`,
     description,
-    url: `/center/${center.id}`,
+    image: center.imageURLs[0],
     keywords: `${center.name}, ${center.city} ${center.state.abbreviation}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`,
+    title: `${center.name} - ${center.city}, ${center.state.abbreviation}`,
+    url: `/center/${center.id}`,
   });
 }
 
