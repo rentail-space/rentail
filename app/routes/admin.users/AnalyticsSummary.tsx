@@ -32,37 +32,36 @@ function AnalyticsSummaryTable({
   analytics: Analytics[];
   users: User[];
 }) {
-  const visitors = sumBy(analytics, (day) => Number(day.visitors));
-  const fromLLM = sumBy(
-    analytics.filter(
-      (entry) =>
-        entry.sessionSource === "chatgpt.com" ||
-        entry.sessionSource === "perplexity.ai",
-    ),
-    (entry) => entry.visitors,
-  );
+  const visitors = getVisitors(analytics);
+  const chats = getChats(users);
   const avgSessionDuration =
     meanBy(analytics, (entry) => entry.averageSessionDuration) || 0;
 
   return (
     <Card className="bg-secondary-background text-foreground">
-      <CardContent className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <CardContent className="grid grid-cols-2 gap-4 md:grid-cols-5">
         <Stat
           title="Unique Visitors"
-          value={visitors}
+          value={visitors.all}
           description="From page views"
         />
         <Stat
-          title="From LLM"
-          value={fromLLM}
-          percentage={fromLLM / visitors}
+          title="Visits from LLM"
+          value={visitors.fromLLM}
+          percentage={visitors.fromLLM / visitors.all}
           description="ChatGPT/Perplexity"
         />
         <Stat
           title="New Chats"
-          value={users.length}
-          percentage={users.length / visitors}
+          value={chats.all}
+          percentage={chats.all / visitors.all}
           description="% of unique visitors"
+        />
+        <Stat
+          title="Chats from LLM"
+          value={chats.fromLLM}
+          percentage={chats.fromLLM / chats.all}
+          description="ChatGPT/Perplexity"
         />
         <Stat
           title="Avg Session Duration"
@@ -77,6 +76,33 @@ function AnalyticsSummaryTable({
       </CardContent>
     </Card>
   );
+}
+
+function getVisitors(analytics: Analytics[]) {
+  const all = sumBy(analytics, (day) => Number(day.visitors));
+  const fromLLM = sumBy(
+    analytics.filter(
+      (entry) =>
+        entry.sessionSource === "chatgpt.com" ||
+        entry.sessionSource === "perplexity.ai",
+    ),
+    (entry) => entry.visitors,
+  );
+  return { all, fromLLM };
+}
+
+function getChats(users: User[]) {
+  const all = users.length;
+  const fromLLM = users.filter((user) => {
+    try {
+      const utm = JSON.parse((user.utm as string) || "{}");
+      const source = utm.source || new URL(utm.referer).hostname;
+      return source === "chatgpt.com" || source === "perplexity.ai";
+    } catch {
+      return false;
+    }
+  }).length;
+  return { all, fromLLM };
 }
 
 function Stat({
