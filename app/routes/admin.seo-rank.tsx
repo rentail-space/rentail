@@ -71,14 +71,10 @@ export default function RankingPage({ loaderData }: Route.ComponentProps) {
     <section className="space-y-4">
       <h1 className="text-center font-bold text-2xl">SEO Ranking</h1>
 
-      <Tabs value={engine}>
+      <Tabs value={engine} onValueChange={(value) => setEngine(value)}>
         <TabsList>
           {searchEngines.map((engine) => (
-            <TabsTrigger
-              key={engine.id}
-              value={engine.id}
-              onClick={() => setEngine(engine.id)}
-            >
+            <TabsTrigger key={engine.id} value={engine.id}>
               {engine.label}
             </TabsTrigger>
           ))}

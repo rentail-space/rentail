@@ -202,11 +202,7 @@ export default function ProfilePage() {
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList>
               {tabs.map((tab) => (
-                <TabsTrigger
-                  key={tab.key}
-                  value={tab.key}
-                  onClick={() => setActiveTab(tab.key)}
-                >
+                <TabsTrigger key={tab.key} value={tab.key}>
                   {tab.label}
                 </TabsTrigger>
               ))}

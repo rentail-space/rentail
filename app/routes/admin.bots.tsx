@@ -173,15 +173,14 @@ export default function BotsPage({ loaderData }: Route.ComponentProps) {
     <section className="space-y-4">
       <h1 className="text-center font-bold text-2xl">Bot Traffic</h1>
 
-      <Tabs>
+      <Tabs
+        onValueChange={(value) => setDays(Number(value))}
+        value={days.toString()}
+      >
         <TabsList>
-          {[30, 60, 90].map((days) => (
-            <TabsTrigger
-              key={days}
-              onClick={() => setDays(days)}
-              value={days.toString()}
-            >
-              Last {days} Days
+          {[30, 60, 90].map((d) => (
+            <TabsTrigger key={d} value={d.toString()}>
+              Last {d} Days
             </TabsTrigger>
           ))}
         </TabsList>

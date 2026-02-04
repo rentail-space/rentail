@@ -62,12 +62,12 @@ async function fromGoogleAnalytics(
   from: DateTime,
   until: DateTime,
 ): Promise<Analytics[]> {
-  const auth = new JWT({
+  const authClient = new JWT({
     scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
     email: "analytics@rentail-480516.iam.gserviceaccount.com",
     key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
   });
-  const client = new BetaAnalyticsDataClient({ authClient: auth });
+  const client = new BetaAnalyticsDataClient({ authClient });
 
   // @see https://support.google.com/analytics/table/13948007
   const response = await client.runReport({

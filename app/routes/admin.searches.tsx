@@ -174,14 +174,13 @@ export default function SearchesPage({ loaderData }: Route.ComponentProps) {
             action="/api/searches/export"
             className="mb-4 flex items-center justify-between"
           >
-            <Tabs>
+            <Tabs
+              onValueChange={(value) => setDays(Number(value))}
+              value={days}
+            >
               <TabsList>
                 {[30, 60, 90].map((d) => (
-                  <TabsTrigger
-                    key={d}
-                    onClick={() => setDays(d)}
-                    value={d.toString()}
-                  >
+                  <TabsTrigger key={d} value={d}>
                     Last {d} Days
                   </TabsTrigger>
                 ))}
