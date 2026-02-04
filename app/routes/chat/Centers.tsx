@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import LoadingImage from "~/components/ui/LoadingImage";
-import { trackEvent } from "~/lib/analytics";
+import { trackEvent } from "~/lib/useAnalytics";
 
 /**
  * A list of centers that are nearby the user.

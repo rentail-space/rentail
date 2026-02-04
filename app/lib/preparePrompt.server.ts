@@ -7,7 +7,6 @@ import {
 import chatPrompt from "~/prompts/chatPrompt.md?raw";
 import generalDirectives from "~/prompts/generalDirectives.md?raw";
 import envVars from "./env";
-import externalLink from "./externalLink";
 import findNearbyCenters from "./findNearbyCenters.server";
 import prisma from "./prisma.server";
 import timeOfDay from "./timeOfDay";
@@ -103,7 +102,6 @@ function centerToJSON(
       ...open,
       address: center.address,
       centerType: center.centerType,
-      centerURL: `https://rentail.space/center/${center.id}`,
       city: center.city,
       country: center.state.country,
       demographics: center.demographics ?? "Unknown",
@@ -117,7 +115,7 @@ function centerToJSON(
       spaces,
       squareFootage: center.squareFootage ?? "Unknown",
       state: center.state.abbreviation,
-      websiteURL: externalLink(center.website),
+      url: `https://rentail.space/center/${center.id}`,
     },
     null,
     2,

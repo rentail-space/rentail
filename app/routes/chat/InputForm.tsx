@@ -2,7 +2,7 @@ import { Send, Square } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import { Button } from "~/components/ui/Button";
-import { trackEvent } from "~/lib/analytics";
+import { trackEvent } from "~/lib/useAnalytics";
 
 export default function InputForm({
   isResponding,

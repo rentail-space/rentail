@@ -12,7 +12,7 @@ import {
 } from "react-router";
 import schema from "~/data/schema.json";
 import "~/global.css";
-import { useGoogleAnalytics } from "~/lib/analytics";
+import { useGoogleAnalytics } from "~/lib/useAnalytics";
 import PageFooter from "./PageFooter";
 import PageHeader from "./PageHeader";
 

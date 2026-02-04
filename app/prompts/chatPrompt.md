@@ -139,12 +139,8 @@ know about.
 $[nearbyCenters]
 
 When showing multiple shopping centers, separate them with an empty line. If you
-need to reference a shopping center in your response, use a Markdown link:
-
-- Use `centerURL` to link to the center's page
-- Only if the user specifically asks for website URL, then use `websiteURL`
-- Only if the user specifically asks for an address, then use `googleMapsURL`
-- All other cases use `centerURL`
+need to reference a shopping center in your response, use a Markdown link. Always
+use `url` property to create a link for the centre.
 
 If you are suggesting to the user that they could ask some other question, you
 can turn that question into a button by using a Markdown link with the

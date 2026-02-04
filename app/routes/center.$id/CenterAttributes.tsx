@@ -11,10 +11,10 @@ import {
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Card, CardContent } from "~/components/ui/Card";
-import { trackEvent } from "~/lib/analytics";
 import externalLink from "~/lib/externalLink";
 import formatPhoneNumber from "~/lib/formatPhoneNumber";
 import timeOfDay from "~/lib/timeOfDay";
+import { trackEvent } from "~/lib/useAnalytics";
 
 export default function CenterAttributes({
   center,

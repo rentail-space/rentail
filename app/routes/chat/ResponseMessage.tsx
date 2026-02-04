@@ -8,7 +8,7 @@ import { twMerge } from "tailwind-merge";
 import type { ScrollToBottom } from "use-stick-to-bottom";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Card, CardContent } from "~/components/ui/Card";
-import { trackEvent } from "~/lib/analytics";
+import { trackEvent } from "~/lib/useAnalytics";
 import { maskWorkingMemoryTags } from "~/lib/workingMemory";
 
 export default function ResponseMessage({
