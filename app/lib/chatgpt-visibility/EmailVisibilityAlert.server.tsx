@@ -101,7 +101,7 @@ function SummarySection({ byDate }: { byDate: [string, Source[]][] }) {
 }
 
 function Progression({ sequence }: { sequence: [string, number][] }) {
-  return sequence.map(([date, value], index, all) => (
+  return sequence.slice(-5).map(([date, value], index, all) => (
     <span className={index === all.length - 1 ? "font-bold" : ""} key={date}>
       {index > 0 ? " → " : ""}
       {value.toLocaleString()}
