@@ -4,13 +4,15 @@ import { verifyAdmin } from "~/lib/sessions.server";
 export const handle = {
   headerLinks: [
     { label: "All users", to: "/admin/users" },
-    { label: "All centers", to: "/admin/centers" },
     { label: "SEO Ranking", to: "/admin/seo-rank" },
     { label: "Visibility", to: "/admin/visibility" },
+  ],
+  secondaryLinks: [
     { label: "Searches", to: "/admin/searches" },
     { label: "Bots", to: "/admin/bots" },
     { label: "Ranked Centers", to: "/admin/ranked-centers" },
-    { label: "Entrances", to: "/admin/pages" },
+    { label: "Landing Pages", to: "/admin/landing-pages" },
+    { label: "All centers", to: "/admin/centers" },
     { label: "API Usage", to: "/admin/api-usage" },
   ],
 };

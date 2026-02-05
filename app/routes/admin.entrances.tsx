@@ -1,5 +1,5 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
-import { sumBy } from "es-toolkit";
+import { invariant, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
 import { DateTime } from "luxon";
 import { Suspense } from "react";
@@ -17,10 +17,18 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import envVars from "~/lib/env";
 import { verifyAdmin } from "~/lib/sessions.server";
-import type { Route } from "./+types/admin.pages";
+import type { Route } from "./+types/admin.entrances";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await verifyAdmin(request.headers);
+
+  const period = Number(new URL(request.url).searchParams.get("period")) || 30;
+  return getEntrances(period);
+}
+
+async function getEntrances(period: number) {
+  const endDate = DateTime.utc();
+  const startDate = endDate.minus({ days: period });
 
   const authClient = new JWT({
     scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
@@ -28,28 +36,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
     key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
   });
   const analyticsDataClient = new BetaAnalyticsDataClient({ authClient });
-  const period = Number(new URL(request.url).searchParams.get("period")) || 30;
-
-  return getEntrances({
-    analyticsDataClient,
-    propertyId: "properties/496833933",
-    period,
-  });
-}
-
-async function getEntrances({
-  analyticsDataClient,
-  propertyId,
-  period,
-}: {
-  analyticsDataClient: BetaAnalyticsDataClient;
-  propertyId: string;
-  period: number;
-}) {
-  const endDate = DateTime.utc();
-  const startDate = endDate.minus({ days: period });
   const [entrancesResponse] = await analyticsDataClient.runReport({
-    property: propertyId,
+    property: "properties/496833933",
     dateRanges: [
       {
         startDate: startDate.toFormat("yyyy-MM-dd"),
@@ -61,7 +49,8 @@ async function getEntrances({
     orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
     limit: 50,
   });
-  return entrancesResponse.rows?.map((row) => ({
+  invariant(entrancesResponse.rows, "No rows found");
+  return entrancesResponse.rows.map((row) => ({
     path: row.dimensionValues?.[0]?.value || "",
     views: Number(row.metricValues?.[0]?.value) || 0,
   }));
@@ -106,7 +95,7 @@ export default function AdminPages({ loaderData }: Route.ComponentProps) {
       <CardContent>
         <Suspense fallback={<LoadingProgress />}>
           <Await resolve={loaderData}>
-            {(entrances) => <EntrancesTable entrances={entrances ?? []} />}
+            {(entrances) => <EntrancesTable entrances={entrances} />}
           </Await>
         </Suspense>
       </CardContent>
@@ -117,7 +106,7 @@ export default function AdminPages({ loaderData }: Route.ComponentProps) {
 function EntrancesTable({
   entrances,
 }: {
-  entrances: { path: string; views: number; percentage: number }[];
+  entrances: { path: string; views: number }[];
 }) {
   const totalEntrances = sumBy(entrances ?? [], (entrance) => entrance.views);
   return (

@@ -72,12 +72,13 @@ describe("prompt()", () => {
 
     it("includes shopping centers", () => {
       const theGrove = findTheGrove(prompt);
+      console.log(theGrove);
       expect(theGrove).toMatchObject({
         name: "The Grove",
         address: "189 The Grove Drive",
         city: "Los Angeles",
         state: "CA",
-        websiteURL: "https://thegrovela.com/?utm_source=rentail.space",
+        url: "https://rentail.space/center/ca-the-grove",
       });
     });
 

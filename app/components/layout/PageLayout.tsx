@@ -1,15 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-import { last } from "es-toolkit";
-import {
-  Links,
-  Meta,
-  Scripts,
-  ScrollRestoration,
-  type UIMatch,
-  useMatches,
-} from "react-router";
+import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
 import schema from "~/data/schema.json";
 import "~/global.css";
 import { useGoogleAnalytics } from "~/lib/useAnalytics";
@@ -32,14 +24,6 @@ export default function PageLayout({
   hideLayout?: boolean;
 }) {
   useGoogleAnalytics();
-  const matches = useMatches() as UIMatch<
-    unknown,
-    { headerLinks?: { to: string; label: string }[] }
-  >[];
-  const { headerLinks } =
-    last(
-      matches.filter((match) => match.handle && "headerLinks" in match.handle),
-    )?.handle || {};
 
   return (
     <html lang="en">
@@ -76,7 +60,7 @@ export default function PageLayout({
             children
           ) : (
             <div className="isolate flex min-h-screen flex-col">
-              <PageHeader links={headerLinks} />
+              <PageHeader />
               {children}
               <PageFooter />
             </div>

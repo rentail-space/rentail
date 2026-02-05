@@ -14,10 +14,10 @@ import {
 import { WaveLoading } from "respinner";
 import PageLayout from "~/components/layout/PageLayout";
 import "~/global.css";
-import pageMeta from "~/lib/pageMeta";
 import { botTrackingMiddleware } from "~/lib/middleware/botTracking.server";
 import loggingMiddleware from "~/lib/middleware/logging.server";
 import { utmMiddleware } from "~/lib/middleware/utm.server";
+import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/root";
 import { findUserAndLastChat } from "./lib/sessions.server";
 
@@ -38,20 +38,6 @@ export const middleware: Route.MiddlewareFunction[] = [
   botTrackingMiddleware,
   loggingMiddleware,
 ];
-
-export async function loader({ request }: Route.LoaderArgs) {
-  const found = await findUserAndLastChat(request);
-  return data(
-    "chat" in found
-      ? {
-          chat: found.chat,
-          messages: found.messages,
-          user: found.user,
-        }
-      : null,
-    { headers: found?.responseHeaders },
-  );
-}
 
 export const headers: HeadersFunction = () => {
   return {
@@ -110,6 +96,20 @@ export const handle = {
     { label: "🚀 Get Started", to: "/chat" },
   ],
 };
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const found = await findUserAndLastChat(request);
+  return data(
+    "chat" in found
+      ? {
+          chat: found.chat,
+          messages: found.messages,
+          user: found.user,
+        }
+      : null,
+    { headers: found?.responseHeaders },
+  );
+}
 
 export default function App({
   matches,
