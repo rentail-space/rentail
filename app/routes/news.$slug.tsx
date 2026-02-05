@@ -15,9 +15,9 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     invariant(slug, "Slug is required");
     const isMarkdown =
       request.headers.get("accept")?.split(",")[0] === "text/markdown";
-    console.log(`/news/${slug}.md`);
-    if (isMarkdown) return redirect(`/news/${slug}.md`, { status: 303 });
-    else return await loadNewsItem(slug);
+    return isMarkdown
+      ? redirect(`/news/${slug}.md`, { status: 303 })
+      : await loadNewsItem(slug);
   } catch {
     throw new Response("Not Found", { status: 404 });
   }

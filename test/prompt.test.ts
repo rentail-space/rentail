@@ -72,7 +72,6 @@ describe("prompt()", () => {
 
     it("includes shopping centers", () => {
       const theGrove = findTheGrove(prompt);
-      console.log(theGrove);
       expect(theGrove).toMatchObject({
         name: "The Grove",
         address: "189 The Grove Drive",
