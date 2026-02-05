@@ -29,6 +29,26 @@ model ApiUsage {
   @@map("api_usage")
 }
 
+
+model BotVisit {
+  accept    String?  @map("accept")
+  botType   String   @map("bot_type")
+  count     Int                         @default(0)
+  date      DateTime                    @db.Date
+  firstSeen DateTime @map("first_seen") @default(now())
+  id        String                      @id @default(cuid())
+  ip        String?  @map("ip")
+  lastSeen  DateTime @map("last_seen")  @updatedAt
+  path      String   @map("path")
+  referer   String?  @map("referer")
+  userAgent String   @map("user_agent") @db.Text
+
+  @@unique([date, userAgent, path])
+  @@index([date])
+  @@index([botType])
+  @@map("bot_visits")
+}
+
 model Cache {
   key       String   @map("key")        @id
   value     Json     @map("value")      @db.Json
@@ -276,23 +296,6 @@ model VisibilityCheck {
   query     String   @map("query")
 
   @@map("visibility_checks")
-}
-
-model BotVisit {
-  id        String                      @id @default(cuid())
-  date      DateTime                    @db.Date
-  userAgent String   @map("user_agent") @db.Text
-  botType   String   @map("bot_type")
-  path      String   @map("path")
-  ip        String?  @map("ip")
-  count     Int                         @default(0)
-  firstSeen DateTime @map("first_seen") @default(now())
-  lastSeen  DateTime @map("last_seen")  @updatedAt
-
-  @@unique([date, userAgent, path])
-  @@index([date])
-  @@index([botType])
-  @@map("bot_visits")
 }
 
 enum Role {

@@ -106,7 +106,16 @@ export async function trackBotVisit(request: Request): Promise<void> {
         ip,
         lastSeen: new Date(),
       },
-      create: { botType, count: 1, date, ip, path, userAgent },
+      create: {
+        accept: request.headers.get("accept"),
+        botType,
+        count: 1,
+        date,
+        ip,
+        path,
+        referer: request.headers.get("referer"),
+        userAgent,
+      },
     });
     logger("Tracked bot visit:", { botType, path });
   } catch (error) {

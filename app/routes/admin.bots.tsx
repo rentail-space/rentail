@@ -4,6 +4,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { sumBy } from "es-toolkit";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { DateTime } from "luxon";
 import {
@@ -38,15 +39,39 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   const { period } = parseDateRange(new URL(request.url).searchParams);
 
+  const { recentBotActivity, topPaths } = await getRecentBotActivity({
+    limit: 20,
+    pastDays: 7,
+  });
+  const { chartData, topBots, botTotals } = await getBotTotals({
+    period,
+    limit: 10,
+  });
+
+  return {
+    chartData,
+    topBots,
+    recentBotActivity,
+    topPaths,
+    totalVisits: sumBy(Object.values(botTotals), (total) => total),
+    uniqueBots: Object.keys(botTotals).length,
+  };
+}
+
+async function getBotTotals({
+  period,
+  limit,
+}: {
+  period: number;
+  limit: number;
+}) {
+  const today = DateTime.utc().startOf("day");
   // Get all bot visits in date range
   const visits = await prisma.botVisit.findMany({
     where: {
       date: {
-        gte: DateTime.utc()
-          .minus({ days: period - 1 })
-          .startOf("day")
-          .toJSDate(),
-        lte: DateTime.utc().endOf("day").toJSDate(),
+        gte: today.minus({ days: period }).toJSDate(),
+        lte: today.toJSDate(),
       },
     },
     orderBy: [{ date: "asc" }, { botType: "asc" }],
@@ -73,7 +98,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   const topBots = Object.entries(botTotals)
     .sort(([, a], [, b]) => b - a)
-    .slice(0, 10)
+    .slice(0, limit)
     .map(([botType]) => botType);
 
   // Chart data: Daily totals + breakdown by top bots
@@ -81,35 +106,48 @@ export async function loader({ request }: Route.LoaderArgs) {
     .sort()
     .map((date) => ({
       date,
-      total: Object.values(dailyByBot[date]).reduce(
-        (sum, count) => sum + count,
-        0,
-      ),
-      ...topBots.reduce(
-        (acc, bot) => {
-          acc[bot] = dailyByBot[date][bot] || 0;
-          return acc;
-        },
-        {} as Record<string, number>,
+      total: sumBy(Object.values(dailyByBot[date]), (count) => count),
+      ...Object.fromEntries(
+        topBots.map((bot) => [bot, dailyByBot[date][bot] || 0]),
       ),
     }));
 
-  // Recent visits table (last 7 days, top 10 bots)
+  return { chartData, topBots, botTotals };
+}
+
+async function getRecentBotActivity({
+  pastDays,
+  limit,
+}: {
+  pastDays: number;
+  limit: number;
+}) {
   const recentVisits = await prisma.botVisit.findMany({
     where: {
       date: {
-        gte: DateTime.utc().minus({ days: 6 }).startOf("day").toJSDate(),
+        gte: DateTime.utc().minus({ days: pastDays }).startOf("day").toJSDate(),
       },
     },
     orderBy: [{ date: "desc" }, { count: "desc" }],
   });
 
   const recentByBot = recentVisits.reduce<
-    Record<string, { botType: string; total: number; paths: Set<string> }>
+    Record<
+      string,
+      {
+        botType: string;
+        total: number;
+        paths: Set<string>;
+        accept: string | null;
+        referer: string | null;
+      }
+    >
   >((acc, visit) => {
     if (!acc[visit.botType]) {
       acc[visit.botType] = {
+        accept: visit.accept,
         botType: visit.botType,
+        referer: visit.referer,
         total: 0,
         paths: new Set<string>(),
       };
@@ -119,14 +157,16 @@ export async function loader({ request }: Route.LoaderArgs) {
     return acc;
   }, {});
 
-  const recentBotStats = Object.values(recentByBot)
+  const recentBotActivity = Object.values(recentByBot)
     .map((bot) => ({
       botType: bot.botType,
       total: bot.total,
       uniquePaths: bot.paths.size,
+      accept: bot.accept,
+      referer: bot.referer,
     }))
     .sort((a, b) => b.total - a.total)
-    .slice(0, 20);
+    .slice(0, limit);
 
   // Path popularity
   const pathStats = recentVisits.reduce<
@@ -151,19 +191,9 @@ export async function loader({ request }: Route.LoaderArgs) {
       uniqueBots: stat.bots.size,
     }))
     .sort((a, b) => b.count - a.count)
-    .slice(0, 20);
+    .slice(0, limit);
 
-  return {
-    chartData,
-    topBots,
-    recentBotStats,
-    topPaths,
-    totalVisits: Object.values(botTotals).reduce(
-      (sum, count) => sum + count,
-      0,
-    ),
-    uniqueBots: Object.keys(botTotals).length,
-  };
+  return { recentBotActivity, topPaths };
 }
 
 export default function BotsPage({ loaderData }: Route.ComponentProps) {
@@ -245,7 +275,7 @@ export default function BotsPage({ loaderData }: Route.ComponentProps) {
           <CardTitle>Recent Bot Activity (7 days)</CardTitle>
         </CardHeader>
         <CardContent>
-          <BotStatsTable data={loaderData.recentBotStats} />
+          <RecentBotActivityTable data={loaderData.recentBotActivity} />
         </CardContent>
       </Card>
 
@@ -254,24 +284,40 @@ export default function BotsPage({ loaderData }: Route.ComponentProps) {
           <CardTitle>Most Visited Paths (7 days)</CardTitle>
         </CardHeader>
         <CardContent>
-          <PathStatsTable data={loaderData.topPaths} />
+          <MostVisitedTable data={loaderData.topPaths} />
         </CardContent>
       </Card>
     </section>
   );
 }
 
-function BotStatsTable({
+function RecentBotActivityTable({
   data,
 }: {
-  data: { botType: string; total: number; uniquePaths: number }[];
+  data: {
+    botType: string;
+    total: number;
+    uniquePaths: number;
+    accept: string | null;
+    referer: string | null;
+  }[];
 }) {
   const table = useReactTable({
     columns: [
       {
         accessorKey: "botType",
         header: "Bot Type",
-        size: 300,
+        size: 200,
+      },
+      {
+        accessorKey: "accept",
+        header: "Accept",
+        size: 200,
+      },
+      {
+        accessorKey: "referer",
+        header: "Referer",
+        size: 200,
       },
       {
         accessorKey: "total",
@@ -336,6 +382,7 @@ function BotStatsTable({
           <TableRow key={row.id} className="hover:bg-gray-100">
             {row.getVisibleCells().map((cell) => (
               <TableCell
+                className="truncate"
                 key={cell.id}
                 style={{ maxWidth: cell.column.getSize() }}
               >
@@ -349,7 +396,7 @@ function BotStatsTable({
   );
 }
 
-function PathStatsTable({
+function MostVisitedTable({
   data,
 }: {
   data: { path: string; count: number; uniqueBots: number }[];
