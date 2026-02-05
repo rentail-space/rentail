@@ -12,12 +12,12 @@ export default function AnalyticsSummary({
   users,
 }: {
   analytics: Promise<Analytics[]>;
-  users: Promise<User[]>;
+  users: User[];
 }) {
   return (
     <Suspense fallback={<LoadingProgress />}>
-      <Await resolve={Promise.all([analytics, users])}>
-        {([analytics, users]) => (
+      <Await resolve={analytics}>
+        {(analytics) => (
           <AnalyticsSummaryTable analytics={analytics} users={users} />
         )}
       </Await>

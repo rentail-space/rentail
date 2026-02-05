@@ -1,17 +1,19 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import { invariant } from "es-toolkit";
 import { JWT } from "google-auth-library";
-import { DateTime } from "luxon";
-import { startTransition } from "react";
-import { type LoaderFunctionArgs, useSearchParams } from "react-router";
+import type { DateTime } from "luxon";
+import type { LoaderFunctionArgs } from "react-router";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
+import DateRangeSelector, {
+  parseDateRange,
+  useRangeSelection,
+} from "../../components/ui/DateRangeSelector";
 import type { Route } from "./+types/route";
 import AnalyticsCharts from "./AnalyticsCharts";
 import AnalyticsSummary from "./AnalyticsSummary";
 import Heatmap from "./Heatmap";
-import RangeSelection from "./RangeSelection";
 import RecentUsers from "./RecentUsers";
 import UserSources from "./UserSources";
 
@@ -27,8 +29,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
   await verifyAdmin(request.headers);
 
   const searchParams = new URL(request.url).searchParams;
-  const { from, until } = parseDates(searchParams);
-  const users = prisma.user.findMany({
+  const { from, until } = parseDateRange(searchParams);
+  const users = await prisma.user.findMany({
     orderBy: { createdAt: "desc" },
     where: {
       isBot: false,
@@ -37,25 +39,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     },
   });
   const analytics = fromGoogleAnalytics(from, until);
-  return {
-    analytics,
-    users: Promise.resolve(users),
-  };
-}
-
-function parseDates(searchParams: URLSearchParams): {
-  from: DateTime;
-  until: DateTime;
-} {
-  const fromValue = searchParams.get("from");
-  const untilValue = searchParams.get("until");
-  const from = fromValue
-    ? DateTime.fromISO(fromValue, { zone: "utc" })
-    : DateTime.utc().minus({ days: 30 });
-  const until = untilValue
-    ? DateTime.fromISO(untilValue, { zone: "utc" })
-    : DateTime.utc().minus({ days: 1 });
-  return { from, until };
+  return { analytics, users };
 }
 
 async function fromGoogleAnalytics(
@@ -101,25 +85,12 @@ async function fromGoogleAnalytics(
 }
 
 export default function UsersPage({ loaderData }: Route.ComponentProps) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { from, until } = parseDates(searchParams);
-  const setRange = (from: DateTime, until: DateTime) => {
-    startTransition(() => {
-      setSearchParams(
-        (params) => {
-          params.set("from", from.toISODate() ?? "");
-          params.set("until", until.toISODate() ?? "");
-          return params;
-        },
-        { replace: true },
-      );
-    });
-  };
+  const { from, until } = useRangeSelection();
   const { analytics, users } = loaderData;
 
   return (
     <section className="space-y-4">
-      <RangeSelection from={from} setRange={setRange} until={until} />
+      <DateRangeSelector />
 
       <AnalyticsCharts
         analytics={analytics}

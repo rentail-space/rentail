@@ -11,7 +11,7 @@ export const handle = {
     { label: "Searches", to: "/admin/searches" },
     { label: "Bots", to: "/admin/bots" },
     { label: "Ranked Centers", to: "/admin/ranked-centers" },
-    { label: "Landing Pages", to: "/admin/landing-pages" },
+    { label: "Landing Pages", to: "/admin/entrances" },
     { label: "All centers", to: "/admin/centers" },
     { label: "API Usage", to: "/admin/api-usage" },
   ],

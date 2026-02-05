@@ -67,14 +67,14 @@ export default function AnalyticsCharts({
   analytics: Promise<Analytics[]>;
   from: DateTime;
   until: DateTime;
-  users: Promise<User[]>;
+  users: User[];
 }) {
   return (
     <Card className="bg-secondary-background text-foreground">
       <CardContent>
         <Suspense fallback={<LoadingProgress />}>
-          <Await resolve={Promise.all([analytics, users])}>
-            {([analytics, users]) => (
+          <Await resolve={analytics}>
+            {(analytics) => (
               <SquareAnalyticsCharts
                 analytics={analytics}
                 from={from}

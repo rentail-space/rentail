@@ -26,7 +26,7 @@ export default function Heatmap({
   users,
 }: {
   analytics: Promise<Analytics[]>;
-  users: Promise<User[]>;
+  users: User[];
 }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const onlyFrom =
@@ -69,8 +69,8 @@ export default function Heatmap({
 
       <CardContent>
         <Suspense fallback={<LoadingProgress />}>
-          <Await resolve={Promise.all([analytics, users])}>
-            {([analytics, users]) => (
+          <Await resolve={analytics}>
+            {(analytics) => (
               <HeatmapTable
                 analytics={analytics}
                 users={users}

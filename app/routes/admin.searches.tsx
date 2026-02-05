@@ -10,9 +10,11 @@ import {
 } from "@tanstack/react-table";
 import { DateTime } from "luxon";
 import { useState } from "react";
-import { useSearchParams } from "react-router";
 import { Button } from "~/components/ui/Button";
 import { Card, CardContent, CardHeader } from "~/components/ui/Card";
+import DateRangeSelector, {
+  parseDateRange,
+} from "~/components/ui/DateRangeSelector";
 import { Input } from "~/components/ui/Input";
 import {
   Table,
@@ -23,7 +25,6 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/Table";
-import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import {
   type SearchQuery,
   getSearchAnalytics,
@@ -35,12 +36,11 @@ import type { Route } from "./+types/admin.searches";
 export async function loader({ request }: Route.LoaderArgs) {
   await verifyAdmin(request.headers);
 
-  const searchParams = new URL(request.url).searchParams;
-  const days = parseDays(searchParams);
+  const { period } = parseDateRange(new URL(request.url).searchParams);
 
   const endDate = DateTime.utc();
-  const startDate = endDate.minus({ days });
-  const key = `search-console:${days}:${startDate.toISODate()}`;
+  const startDate = endDate.minus({ days: period });
+  const key = `search-console:${period}:${startDate.toISODate()}`;
 
   const from10DaysAgo = DateTime.now().minus({ days: 10 }).toJSDate();
   const cached = await prisma.cache.findUnique({
@@ -77,14 +77,7 @@ export async function loader({ request }: Route.LoaderArgs) {
     totalImpressions: sumBy(queries, (query) => query.impressions),
   };
 
-  return { days, queries, summary };
-}
-
-function parseDays(searchParams: URLSearchParams): number {
-  const daysParam = searchParams.get("days");
-  const days = Number.parseInt(daysParam ?? "30", 10);
-  if (days === 60 || days === 90) return days;
-  return 30;
+  return { queries, summary };
 }
 
 const columns: ColumnDef<SearchQuery>[] = [
@@ -106,13 +99,12 @@ const columns: ColumnDef<SearchQuery>[] = [
 ];
 
 export default function SearchesPage({ loaderData }: Route.ComponentProps) {
-  const [_searchParams, setSearchParams] = useSearchParams();
   const [globalFilter, setGlobalFilter] = useState("");
   const [sorting, setSorting] = useState<SortingState>([
     { id: "impressions", desc: true },
   ]);
 
-  const { queries, summary, days } = loaderData;
+  const { queries, summary } = loaderData;
 
   const table = useReactTable({
     data: queries,
@@ -128,16 +120,6 @@ export default function SearchesPage({ loaderData }: Route.ComponentProps) {
       return query.toLowerCase().includes(filterValue.toLowerCase());
     },
   });
-
-  const setDays = (newDays: number) => {
-    setSearchParams(
-      (params) => {
-        params.set("days", newDays.toString());
-        return params;
-      },
-      { replace: true },
-    );
-  };
 
   return (
     <section className="space-y-4">
@@ -174,25 +156,13 @@ export default function SearchesPage({ loaderData }: Route.ComponentProps) {
             action="/api/searches/export"
             className="mb-4 flex items-center justify-between"
           >
-            <Tabs
-              onValueChange={(value) => setDays(Number(value))}
-              value={days}
-            >
-              <TabsList>
-                {[30, 60, 90].map((d) => (
-                  <TabsTrigger key={d} value={d}>
-                    Last {d} Days
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
+            <DateRangeSelector />
             <Input
               value={globalFilter}
               onChange={(e) => setGlobalFilter(e.target.value)}
               placeholder="Filter by query..."
               className="w-96"
             />
-            <input type="hidden" name="days" value={days} />
             <Button type="submit" variant="default">
               Export CSV
             </Button>

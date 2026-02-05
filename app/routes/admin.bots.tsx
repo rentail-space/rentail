@@ -6,7 +6,6 @@ import {
 } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { DateTime } from "luxon";
-import { useState } from "react";
 import {
   CartesianGrid,
   Legend,
@@ -18,6 +17,10 @@ import {
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import { ChartContainer } from "~/components/ui/Chart";
+import DateRangeSelector, {
+  parseDateRange,
+  useRangeSelection,
+} from "~/components/ui/DateRangeSelector";
 import {
   Table,
   TableBody,
@@ -26,7 +29,6 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/Table";
-import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
 import type { Route } from "./+types/admin.bots";
@@ -34,15 +36,14 @@ import type { Route } from "./+types/admin.bots";
 export async function loader({ request }: Route.LoaderArgs) {
   await verifyAdmin(request.headers);
 
-  const daysParam = new URL(request.url).searchParams.get("days");
-  const days = daysParam ? Number.parseInt(daysParam, 10) : 30;
+  const { period } = parseDateRange(new URL(request.url).searchParams);
 
   // Get all bot visits in date range
   const visits = await prisma.botVisit.findMany({
     where: {
       date: {
         gte: DateTime.utc()
-          .minus({ days: days - 1 })
+          .minus({ days: period - 1 })
           .startOf("day")
           .toJSDate(),
         lte: DateTime.utc().endOf("day").toJSDate(),
@@ -157,7 +158,6 @@ export async function loader({ request }: Route.LoaderArgs) {
     topBots,
     recentBotStats,
     topPaths,
-    days,
     totalVisits: Object.values(botTotals).reduce(
       (sum, count) => sum + count,
       0,
@@ -167,24 +167,13 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export default function BotsPage({ loaderData }: Route.ComponentProps) {
-  const [days, setDays] = useState(loaderData.days);
+  const { period } = useRangeSelection();
 
   return (
     <section className="space-y-4">
       <h1 className="text-center font-bold text-2xl">Bot Traffic</h1>
 
-      <Tabs
-        onValueChange={(value) => setDays(Number(value))}
-        value={days.toString()}
-      >
-        <TabsList>
-          {[30, 60, 90].map((d) => (
-            <TabsTrigger key={d} value={d.toString()}>
-              Last {d} Days
-            </TabsTrigger>
-          ))}
-        </TabsList>
-      </Tabs>
+      <DateRangeSelector />
 
       <section className="mb-6 grid grid-cols-3 gap-4">
         {[
@@ -198,7 +187,7 @@ export default function BotsPage({ loaderData }: Route.ComponentProps) {
           },
           {
             label: "Avg Daily Visits",
-            value: Math.round(loaderData.totalVisits / days).toLocaleString(),
+            value: Math.round(loaderData.totalVisits / period).toLocaleString(),
           },
         ].map(({ label, value }) => (
           <Card className="bg-secondary-background text-foreground" key={label}>

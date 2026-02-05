@@ -3,8 +3,11 @@ import { invariant, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
 import { DateTime } from "luxon";
 import { Suspense } from "react";
-import { Await, type LoaderFunctionArgs, useSearchParams } from "react-router";
+import { Await, type LoaderFunctionArgs } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
+import DateRangeSelector, {
+  parseDateRange,
+} from "~/components/ui/DateRangeSelector";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
@@ -14,15 +17,13 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/Table";
-import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import envVars from "~/lib/env";
 import { verifyAdmin } from "~/lib/sessions.server";
 import type { Route } from "./+types/admin.entrances";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await verifyAdmin(request.headers);
-
-  const period = Number(new URL(request.url).searchParams.get("period")) || 30;
+  const { period } = parseDateRange(new URL(request.url).searchParams);
   return getEntrances(period);
 }
 
@@ -56,40 +57,13 @@ async function getEntrances(period: number) {
   }));
 }
 
-const periods = [30, 60, 90];
-
 export default function AdminPages({ loaderData }: Route.ComponentProps) {
-  const [searchParams, setSearchParams] = useSearchParams({
-    period: periods[0].toString(),
-  });
-  const period = Number(searchParams.get("period"));
-
   return (
     <Card className="bg-secondary-background text-foreground">
       <CardHeader>
         <CardTitle className="flex items-center justify-between gap-2">
           <span>Landing Pages (Entrances)</span>
-
-          <Tabs
-            onValueChange={(value) => {
-              setSearchParams(
-                (params) => {
-                  params.set("period", value);
-                  return params;
-                },
-                { replace: true },
-              );
-            }}
-            value={period}
-          >
-            <TabsList>
-              {periods.map((d) => (
-                <TabsTrigger key={d} value={d}>
-                  Last {d} Days
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+          <DateRangeSelector />
         </CardTitle>
       </CardHeader>
       <CardContent>
