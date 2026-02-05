@@ -42,11 +42,15 @@ const activeLinkVariants = cva(
 export interface ActiveLinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof activeLinkVariants> {
+  viewTransition?: boolean;
   to: string;
 }
 
 const ActiveLink = React.forwardRef<HTMLAnchorElement, ActiveLinkProps>(
-  ({ className, disabled, variant, size, bg, to, ...props }, ref) => {
+  (
+    { className, disabled, variant, size, bg, to, viewTransition, ...props },
+    ref,
+  ) => {
     return (
       <Link
         ref={ref}
@@ -55,6 +59,7 @@ const ActiveLink = React.forwardRef<HTMLAnchorElement, ActiveLinkProps>(
         )}
         to={to}
         rel="noopener noreferrer"
+        viewTransition={viewTransition}
         {...props}
       />
     );

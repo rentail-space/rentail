@@ -37,6 +37,7 @@ export default function PageHeader() {
                 isActive && "text-[hsl(37,92%,65%)]",
               )
             }
+            viewTransition
           >
             {link.label}
           </NavLink>
@@ -94,6 +95,7 @@ function DropdownMenu({ links }: { links: HeaderLink[] }) {
                 to={link.to}
                 className="block w-full px-4 py-2 text-left font-medium text-black text-sm transition-colors hover:bg-[hsl(47,100%,95%)] hover:text-[hsl(37,92%,65%)]"
                 onClick={() => setIsOpen(false)}
+                viewTransition
               >
                 {link.label}
               </Link>
