@@ -1,6 +1,6 @@
 import { invariant } from "es-toolkit";
 import { DateTime } from "luxon";
-import { Link } from "react-router";
+import { Link, redirect } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
@@ -9,11 +9,15 @@ import { type NewsItem, loadNewsItem } from "~/lib/newsItems.server";
 import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/news.$slug";
 
-export async function loader({ params }: Route.LoaderArgs): Promise<NewsItem> {
+export async function loader({ params, request }: Route.LoaderArgs) {
   try {
     const { slug } = params;
     invariant(slug, "Slug is required");
-    return await loadNewsItem(slug);
+    const isMarkdown =
+      request.headers.get("accept")?.split(",")[0] === "text/markdown";
+    console.log(`/news/${slug}.md`);
+    if (isMarkdown) return redirect(`/news/${slug}.md`, { status: 303 });
+    else return await loadNewsItem(slug);
   } catch {
     throw new Response("Not Found", { status: 404 });
   }
