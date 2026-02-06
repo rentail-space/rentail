@@ -8,17 +8,20 @@ export const handle = {
     {
       label: "All users",
       to: "/admin/users",
-      description: "Show all users that have visited the website.",
+      description:
+        "Comprehensive view of all registered and anonymous users who have interacted with rentail.space. Includes authentication status, session data, working memory state, UTM tracking parameters, geographic location, and user agent information for analytics and support purposes.",
     },
     {
       label: "SEO Ranking",
       to: "/admin/seo-rank",
-      description: "Show the SEO ranking of the website and how it is ranked.",
+      description:
+        "Track rentail.space's search engine performance across target keywords and geographic markets. Monitor organic search positions, visibility trends, and competitive rankings to optimize content strategy and improve discoverability for specialty lease seekers.",
     },
     {
       label: "Visibility",
       to: "/admin/visibility",
-      description: "Show the visibility of the website and how it is ranked.",
+      description:
+        "Monitor how AI search engines (ChatGPT, Perplexity, Gemini, Claude) and traditional search (Google, Bing) discover and cite rentail.space. Track visibility checks, citation patterns, and generative engine optimization effectiveness to maximize AI-powered referral traffic.",
     },
   ],
 
@@ -26,34 +29,38 @@ export const handle = {
     {
       label: "Searches",
       to: "/admin/searches",
-      description: "Show all searches that have been made on the website.",
+      description:
+        "Analytics dashboard showing all user search queries within rentail.space, including geographic searches for shopping centers, specialty lease opportunities, and conversational AI interactions. Reveals user intent patterns, popular locations, and unmet needs to guide product development.",
     },
     {
       label: "Bots",
       to: "/admin/bots",
-      description: "Show all bots that have visited the website.",
+      description:
+        "Monitor automated traffic from search engine crawlers, AI agents, monitoring services, and other bots. Track request patterns, user agent strings, accepted formats (HTML, JSON, etc.), and bot behavior to optimize crawlability and detect potential abuse.",
     },
     {
       label: "Ranked Centers",
       to: "/admin/ranked-centers",
       description:
-        "Show all centers that are ranked by our algorithm and how we rank them.",
+        "View all shopping centers evaluated by rentail's proprietary ranking algorithm. Shows tier classifications, ranking scores, demographic factors, space availability, and quality metrics that determine which properties appear in search results and recommendations.",
     },
     {
       label: "Landing Pages",
       to: "/admin/entrances",
       description:
-        "Show metrics for all landing pages (entrances) of the website.",
+        "Performance metrics for all entry points (entrances) to rentail.space, including organic search, paid ads, social media, and direct traffic. Track bounce rates, session depth, conversion paths, and UTM attribution to optimize acquisition channels and user onboarding.",
     },
     {
       label: "All centers",
       to: "/admin/centers",
-      description: "Show all centers we have in our database.",
+      description:
+        "Complete database of shopping centers collected from Google Places API, enriched with AI-extracted details, website scraping, and manual curation. Includes property metadata, geographic coordinates, space inventory, ownership information, and enrichment status for data quality audits.",
     },
     {
       label: "API Usage",
       to: "/admin/api-usage",
-      description: "Show current and historical API usage and projected costs.",
+      description:
+        "Monitor consumption and costs across external APIs including Anthropic Claude, Google Places, Google Geocoding, SerpAPI, and Resend. Track usage patterns, rate limits, projected monthly spend, and cost anomalies to manage infrastructure budget and prevent overages.",
     },
   ],
 };
