@@ -64,14 +64,13 @@ describe("Blog Sitemap", () => {
 
     beforeAll(async () => {
       // Extract first blog post slug from sitemap
-      const match = content.match(/\[([^\]]+)\]\(\/blog\/([^)]+)\)/);
-      expect(match, "should find at least one blog post link").toBeDefined();
+      const match = content.match(/\[([^\]]+)\]\(\/blog\/([^)]+)\)/g);
       invariant(match, "should find at least one blog post link");
+      const lastPost = last(match);
+      invariant(lastPost, "should find at least one blog post link");
 
-      const slug = match[2];
-      expect(slug).toBe(
-        "2026-01-30-how-do-i-find-short-term-retail-space-in-shopping-malls",
-      );
+      const slug = lastPost.match(/\[([^\]]+)\]\(\/blog\/([^)]+)\)/)?.[2];
+      expect(slug).toBe("2025-10-31-the-name");
 
       // Fetch first news item (with .md extension for markdown format)
       blogPostResponse = await fetch(`http://localhost:${port}/blog/${slug}`, {
@@ -88,14 +87,12 @@ describe("Blog Sitemap", () => {
 
     it("should include blog post title", () => {
       const lines = blogPostContent.split("\n");
-      expect(lines[0]).toBe(
-        "# How Do I Find Short-Term Retail Space in Shopping Malls?",
-      );
+      expect(lines[0]).toBe("# The Birth of Rentail Space");
     });
 
     it("should include published date", () => {
       expect(blogPostContent).toContain(
-        "**Published:** Friday, January 30, 2026",
+        "**Published:** Friday, October 31, 2025",
       );
     });
 
@@ -103,11 +100,9 @@ describe("Blog Sitemap", () => {
       const parts = blogPostContent.split("---").filter(Boolean);
       const image = parts[1].match(/!\[([^\]]*)\]\(([^)]+)\)/);
       expect(image?.[1]).toBe(
-        "Modern shopping mall interior with empty retail kiosks and temporary spaces available for lease, showing high ceilings and natural light",
+        "Aerial view of modern multi-level retail space with escalators and organized product displays, representing structured business growth, clear operational pathways, and systematic organizational design",
       );
-      expect(image?.[2]).toMatch(
-        /^\/blog\/2026-01-30-how-do-i-find-space\.jpg$/,
-      );
+      expect(image?.[2]).toMatch(/^\/blog\/2025-10-31-the-name\.jpg$/);
     });
 
     it("should allow downloading the image with fetch and confirm it's a JPEG", async () => {
@@ -116,7 +111,7 @@ describe("Blog Sitemap", () => {
       expect(imgMatch, "should find image URL").toBeTruthy();
 
       const imageUrl = imgMatch?.[1];
-      expect(imageUrl).toMatch(/^\/blog\/2026-01-30-how-do-i-find-space\.jpg$/);
+      expect(imageUrl).toMatch(/^\/blog\/2025-10-31-the-name\.jpg$/);
 
       // Download image from local server
       const imageResponse = await fetch(`http://localhost:${port}${imageUrl}`);
@@ -136,7 +131,7 @@ describe("Blog Sitemap", () => {
     it("should include blog post body content", () => {
       const parts = blogPostContent.split("---").filter(Boolean);
       expect(parts[1]).toContain(
-        "Finding short-term retail space in shopping malls used to mean calling dozens of leasing offices and hoping someone picks up.",
+        'The temporary retail space industry is fragmented as hell. Generic terms like "pop-up space" or "kiosk rental" get buried in search noise. Merchants waste weeks chasing leads.',
       );
     });
 
