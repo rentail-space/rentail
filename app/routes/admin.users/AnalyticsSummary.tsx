@@ -15,13 +15,17 @@ export default function AnalyticsSummary({
   users: User[];
 }) {
   return (
-    <Suspense fallback={<LoadingProgress />}>
-      <Await resolve={analytics}>
-        {(analytics) => (
-          <AnalyticsSummaryTable analytics={analytics} users={users} />
-        )}
-      </Await>
-    </Suspense>
+    <Card className="bg-secondary-background text-foreground">
+      <CardContent>
+        <Suspense fallback={<LoadingProgress />}>
+          <Await resolve={analytics}>
+            {(analytics) => (
+              <AnalyticsSummaryTable analytics={analytics} users={users} />
+            )}
+          </Await>
+        </Suspense>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -38,43 +42,41 @@ function AnalyticsSummaryTable({
     meanBy(analytics, (entry) => entry.averageSessionDuration) || 0;
 
   return (
-    <Card className="bg-secondary-background text-foreground">
-      <CardContent className="grid grid-cols-2 gap-4 md:grid-cols-5">
-        <Stat
-          title="Unique Visitors"
-          value={visitors.all}
-          description="From page views"
-        />
-        <Stat
-          title="Visits from LLM"
-          value={visitors.fromLLM}
-          percentage={visitors.fromLLM / visitors.all}
-          description="ChatGPT/Perplexity"
-        />
-        <Stat
-          title="New Chats"
-          value={chats.all}
-          percentage={chats.all / visitors.all}
-          description="% of unique visitors"
-        />
-        <Stat
-          title="Chats from LLM"
-          value={chats.fromLLM}
-          percentage={chats.fromLLM / chats.all}
-          description="ChatGPT/Perplexity"
-        />
-        <Stat
-          title="Avg Session Duration"
-          value={
-            <span>
-              {Math.floor(avgSessionDuration / 60)}m{" "}
-              {Math.floor(avgSessionDuration % 60)}s
-            </span>
-          }
-          description="Chat and all"
-        />
-      </CardContent>
-    </Card>
+    <section className="grid grid-cols-2 gap-4 md:grid-cols-5">
+      <Stat
+        title="Unique Visitors"
+        value={visitors.all}
+        description="From page views"
+      />
+      <Stat
+        title="Visits from LLM"
+        value={visitors.fromLLM}
+        percentage={visitors.fromLLM / visitors.all}
+        description="ChatGPT/Perplexity"
+      />
+      <Stat
+        title="New Chats"
+        value={chats.all}
+        percentage={chats.all / visitors.all}
+        description="% of unique visitors"
+      />
+      <Stat
+        title="Chats from LLM"
+        value={chats.fromLLM}
+        percentage={chats.fromLLM / chats.all}
+        description="ChatGPT/Perplexity"
+      />
+      <Stat
+        title="Avg Session Duration"
+        value={
+          <span>
+            {Math.floor(avgSessionDuration / 60)}m{" "}
+            {Math.floor(avgSessionDuration % 60)}s
+          </span>
+        }
+        description="Chat and all"
+      />
+    </section>
   );
 }
 

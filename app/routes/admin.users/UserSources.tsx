@@ -9,7 +9,7 @@ import { sumBy } from "node_modules/es-toolkit/dist/math/sumBy.mjs";
 import { Suspense } from "react";
 import { Await } from "react-router";
 import { twMerge } from "tailwind-merge";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
+import { Card, CardContent } from "~/components/ui/Card";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
@@ -27,11 +27,15 @@ export default function UserSources({
   analytics: Promise<Analytics[]>;
 }) {
   return (
-    <Suspense fallback={<LoadingProgress />}>
-      <Await resolve={analytics}>
-        {(analytics) => <SourcesTable analytics={analytics} />}
-      </Await>
-    </Suspense>
+    <Card className="bg-secondary-background text-foreground">
+      <CardContent>
+        <Suspense fallback={<LoadingProgress />}>
+          <Await resolve={analytics}>
+            {(analytics) => <SourcesTable analytics={analytics} />}
+          </Await>
+        </Suspense>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -72,63 +76,58 @@ function SourcesTable({ analytics }: { analytics: Analytics[] }) {
   });
 
   return (
-    <Card className="bg-secondary-background text-foreground">
-      <CardHeader>
-        <CardTitle>
-          Sources{" "}
-          <span className="text-gray-500">
-            ({sumBy(Object.values(analytics), (entry) => entry.visitors)}{" "}
-            visitors / {Object.keys(grouped).length} sources)
-          </span>
-        </CardTitle>
-      </CardHeader>
+    <section>
+      <h2 className="font-bold text-lg">
+        Sources{" "}
+        <span className="text-gray-500">
+          ({sumBy(Object.values(analytics), (entry) => entry.visitors)} visitors
+          / {Object.keys(grouped).length} sources)
+        </span>
+      </h2>
+      <Table>
+        <TableHeader>
+          {table.getHeaderGroups().map((group) => (
+            <TableRow key={group.id}>
+              {group.headers.map((header) => (
+                <TableHead
+                  key={header.id}
+                  className="whitespace-nowrap font-bold"
+                  style={{ width: header.column.getSize() }}
+                >
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext(),
+                  )}
+                </TableHead>
+              ))}
+            </TableRow>
+          ))}
+        </TableHeader>
 
-      <CardContent>
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((group) => (
-              <TableRow key={group.id}>
-                {group.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    className="whitespace-nowrap font-bold"
-                    style={{ width: header.column.getSize() }}
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-
-          <TableBody>
-            {table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} className="hover:bg-gray-100">
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell
-                    className={twMerge(
-                      "truncate",
-                      cell.column.columnDef.meta &&
-                        "align" in cell.column.columnDef.meta &&
-                        cell.column.columnDef.meta.align === "right"
-                        ? "text-right"
-                        : "",
-                    )}
-                    key={cell.id}
-                    style={{ maxWidth: cell.column.getSize() }}
-                    title={cell.getValue() as string}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
+        <TableBody>
+          {table.getRowModel().rows.map((row) => (
+            <TableRow key={row.id} className="hover:bg-gray-100">
+              {row.getVisibleCells().map((cell) => (
+                <TableCell
+                  className={twMerge(
+                    "truncate",
+                    cell.column.columnDef.meta &&
+                      "align" in cell.column.columnDef.meta &&
+                      cell.column.columnDef.meta.align === "right"
+                      ? "text-right"
+                      : "",
+                  )}
+                  key={cell.id}
+                  style={{ maxWidth: cell.column.getSize() }}
+                  title={cell.getValue() as string}
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </section>
   );
 }

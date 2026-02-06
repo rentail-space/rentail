@@ -1,5 +1,5 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
-import { invariant } from "es-toolkit";
+import { groupBy, invariant, meanBy, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
 import type { DateTime } from "luxon";
 import type { LoaderFunctionArgs } from "react-router";
@@ -14,14 +14,12 @@ import DateRangeSelector, {
 import type { Route } from "./+types/route";
 import AnalyticsCharts from "./AnalyticsCharts";
 import AnalyticsSummary from "./AnalyticsSummary";
-import Heatmap from "./Heatmap";
 import RecentUsers from "./RecentUsers";
 import UserSources from "./UserSources";
 
 export type Analytics = {
   averageSessionDuration: number;
   date: string;
-  hour: number;
   sessionSource: string;
   visitors: number;
 };
@@ -74,7 +72,7 @@ async function fromGoogleAnalytics(
   const rows = response[0].rows;
   invariant(rows, "No rows found");
 
-  return rows.map((row) => ({
+  const analytics = rows.map((row) => ({
     averageSessionDuration: Number.parseFloat(
       row.metricValues?.[1]?.value ?? "",
     ),
@@ -82,6 +80,18 @@ async function fromGoogleAnalytics(
     hour: Number.parseInt(row.dimensionValues?.[1]?.value ?? "0", 10),
     sessionSource: row.dimensionValues?.[2]?.value ?? "",
     visitors: Number.parseInt(row.metricValues?.[0]?.value ?? "", 10),
+  }));
+  console.log(analytics);
+  return Object.entries(
+    groupBy(analytics, ({ date, sessionSource }) => `${date}-${sessionSource}`),
+  ).map(([, entries]) => ({
+    date: entries[0].date,
+    averageSessionDuration: meanBy(
+      entries,
+      ({ averageSessionDuration }) => averageSessionDuration,
+    ),
+    visitors: sumBy(entries, ({ visitors }) => visitors),
+    sessionSource: entries[0].sessionSource,
   }));
 }
 
@@ -105,7 +115,6 @@ export default function UsersPage({ loaderData }: Route.ComponentProps) {
           />
           <AnalyticsSummary analytics={analytics} users={users} />
           <RecentUsers users={users} />
-          <Heatmap analytics={analytics} users={users} />
           <UserSources analytics={analytics} />
         </section>
       )}
