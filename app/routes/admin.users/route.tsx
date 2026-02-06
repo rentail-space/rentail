@@ -3,6 +3,7 @@ import { invariant } from "es-toolkit";
 import { JWT } from "google-auth-library";
 import type { DateTime } from "luxon";
 import type { LoaderFunctionArgs } from "react-router";
+import LoadingProgress from "~/components/ui/LoadingProgress";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
@@ -85,23 +86,29 @@ async function fromGoogleAnalytics(
 }
 
 export default function UsersPage({ loaderData }: Route.ComponentProps) {
-  const { from, until } = useRangeSelection();
+  const { from, until, isLoading } = useRangeSelection();
   const { analytics, users } = loaderData;
 
   return (
-    <section className="space-y-4">
+    <main className="space-y-4">
       <DateRangeSelector />
 
-      <AnalyticsCharts
-        analytics={analytics}
-        from={from}
-        until={until}
-        users={users}
-      />
-      <AnalyticsSummary analytics={analytics} users={users} />
-      <RecentUsers users={users} />
-      <Heatmap analytics={analytics} users={users} />
-      <UserSources analytics={analytics} />
-    </section>
+      {isLoading ? (
+        <LoadingProgress />
+      ) : (
+        <section className="space-y-4">
+          <AnalyticsCharts
+            analytics={analytics}
+            from={from}
+            until={until}
+            users={users}
+          />
+          <AnalyticsSummary analytics={analytics} users={users} />
+          <RecentUsers users={users} />
+          <Heatmap analytics={analytics} users={users} />
+          <UserSources analytics={analytics} />
+        </section>
+      )}
+    </main>
   );
 }

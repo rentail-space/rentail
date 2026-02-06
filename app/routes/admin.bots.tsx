@@ -22,6 +22,7 @@ import DateRangeSelector, {
   parseDateRange,
   useRangeSelection,
 } from "~/components/ui/DateRangeSelector";
+import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
   TableBody,
@@ -197,106 +198,119 @@ async function getRecentBotActivity({
 }
 
 export default function BotsPage({ loaderData }: Route.ComponentProps) {
-  const { period } = useRangeSelection();
+  const { isLoading, period } = useRangeSelection();
 
   return (
-    <section className="space-y-4">
+    <main className="space-y-4">
       <h1 className="text-center font-bold text-2xl">Bot Traffic</h1>
 
       <DateRangeSelector />
 
-      <section className="mb-6 grid grid-cols-3 gap-4">
-        {[
-          {
-            label: "Total Visits",
-            value: loaderData.totalVisits.toLocaleString(),
-          },
-          {
-            label: "Unique Bots",
-            value: loaderData.uniqueBots,
-          },
-          {
-            label: "Avg Daily Visits",
-            value: Math.round(loaderData.totalVisits / period).toLocaleString(),
-          },
-        ].map(({ label, value }) => (
-          <Card className="bg-secondary-background text-foreground" key={label}>
+      {isLoading ? (
+        <LoadingProgress />
+      ) : (
+        <section className="space-y-4">
+          <div className="mb-6 grid grid-cols-3 gap-4">
+            {[
+              {
+                label: "Total Visits",
+                value: loaderData.totalVisits.toLocaleString(),
+              },
+              {
+                label: "Unique Bots",
+                value: loaderData.uniqueBots,
+              },
+              {
+                label: "Avg Daily Visits",
+                value: Math.round(
+                  loaderData.totalVisits / period,
+                ).toLocaleString(),
+              },
+            ].map(({ label, value }) => (
+              <Card
+                className="bg-secondary-background text-foreground"
+                key={label}
+              >
+                <CardContent>
+                  <div className="text-gray-600 text-sm">{label}</div>
+                  <div className="font-bold text-2xl">{value}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <Card className="bg-secondary-background text-foreground">
+            <CardHeader>
+              <CardTitle>Traffic Trend</CardTitle>
+            </CardHeader>
             <CardContent>
-              <div className="text-gray-600 text-sm">{label}</div>
-              <div className="font-bold text-2xl">{value}</div>
+              <ChartContainer
+                config={{
+                  total: {
+                    label: "Total Visits",
+                    color: "#111111",
+                  },
+                }}
+                className="h-40 w-full"
+              >
+                <LineChart data={loaderData.chartData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis
+                    dataKey="date"
+                    tickFormatter={(value) =>
+                      DateTime.fromJSDate(new Date(value)).toFormat("MMM d")
+                    }
+                  />
+                  <YAxis />
+                  <Tooltip
+                    labelFormatter={(value) =>
+                      DateTime.fromJSDate(new Date(value as string)).toFormat(
+                        "PPP",
+                      )
+                    }
+                  />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="total"
+                    stroke="#111111"
+                    strokeWidth={2}
+                    name="Total Visits"
+                  />
+                </LineChart>
+              </ChartContainer>
             </CardContent>
           </Card>
-        ))}
-      </section>
 
-      <Card className="bg-secondary-background text-foreground">
-        <CardHeader>
-          <CardTitle>Traffic Trend</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer
-            config={{
-              total: {
-                label: "Total Visits",
-                color: "#111111",
-              },
-            }}
-            className="h-40 w-full"
-          >
-            <LineChart data={loaderData.chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="date"
-                tickFormatter={(value) =>
-                  DateTime.fromJSDate(new Date(value)).toFormat("MMM d")
-                }
-              />
-              <YAxis />
-              <Tooltip
-                labelFormatter={(value) =>
-                  DateTime.fromJSDate(new Date(value as string)).toFormat("PPP")
-                }
-              />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="total"
-                stroke="#111111"
-                strokeWidth={2}
-                name="Total Visits"
-              />
-            </LineChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
+          <Card className="bg-secondary-background text-foreground">
+            <CardHeader>
+              <CardTitle>Recent Bot Activity (7 days)</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <RecentBotActivityTable data={loaderData.recentBotActivity} />
+            </CardContent>
+          </Card>
 
-      <Card className="bg-secondary-background text-foreground">
-        <CardHeader>
-          <CardTitle>Recent Bot Activity (7 days)</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <RecentBotActivityTable data={loaderData.recentBotActivity} />
-        </CardContent>
-      </Card>
+          <Card className="bg-secondary-background text-foreground">
+            <CardHeader>
+              <CardTitle>Most Visited Paths (7 days)</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <MostVisitedTable data={loaderData.topPaths} />
+            </CardContent>
+          </Card>
 
-      <Card className="bg-secondary-background text-foreground">
-        <CardHeader>
-          <CardTitle>Most Visited Paths (7 days)</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <MostVisitedTable data={loaderData.topPaths} />
-        </CardContent>
-      </Card>
-
-      <Card className="bg-secondary-background text-foreground">
-        <CardHeader>
-          <CardTitle>Accepts Header</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <AcceptsTable recentBotActivity={loaderData.recentBotActivity} />
-        </CardContent>
-      </Card>
-    </section>
+          <Card className="bg-secondary-background text-foreground">
+            <CardHeader>
+              <CardTitle>Accepts Header</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <AcceptsTable recentBotActivity={loaderData.recentBotActivity} />
+            </CardContent>
+          </Card>
+        </section>
+      )}
+    </main>
   );
 }
 

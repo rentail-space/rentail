@@ -1,5 +1,6 @@
 import { groupBy, mean, orderBy, sortBy } from "es-toolkit";
 import { DateTime } from "luxon";
+import { twMerge } from "tailwind-merge";
 import { Card, CardContent } from "~/components/ui/Card";
 import {
   Table,
@@ -55,10 +56,16 @@ export default function RecentVisibility({
           </TableHeader>
           <TableBody>
             {rows.map((row, index) => (
-              <TableRow key={index.toString()} className="hover:bg-gray-100">
+              <TableRow
+                key={index.toString()}
+                className={twMerge(
+                  row.rentail > 0 ? "bg-green-100" : "",
+                  "hover:bg-gray-100",
+                )}
+              >
                 <TableHead className="font-bold">{row.category}</TableHead>
                 <TableCell>{row.query}</TableCell>
-                <TableCell>
+                <TableCell className={row.rentail > 0 ? "font-bold" : ""}>
                   {row.rentail} / {row.citations.length}
                 </TableCell>
                 <TableCell>{row.score}</TableCell>
