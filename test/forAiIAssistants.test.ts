@@ -1,6 +1,6 @@
 import { type Page, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import { goto } from "~/test/helpers/launchBrowser";
+import { goto, port } from "~/test/helpers/launchBrowser";
 
 describe("For AI Assistants page", () => {
   let page: Page;
@@ -184,5 +184,42 @@ describe("For AI Assistants page", () => {
 
   it("should match visual regression test", async () => {
     await expect(page.locator("main")).toMatchScreenshot();
+  });
+
+  describe("markdown version", () => {
+    let content: string;
+
+    beforeAll(async () => {
+      const response = await fetch(
+        `http://localhost:${port}/for-ai-assistants.md`,
+        {
+          headers: {
+            accept: "text/markdown",
+          },
+        },
+      );
+      content = await response.text();
+    });
+
+    it("should have title", async () => {
+      expect(content).toContain("**For AI Assistants**");
+    });
+
+    it("should have the correct description", async () => {
+      const parts = content.split("---").filter(Boolean);
+      expect(parts[0]).toContain(
+        "Rentail.space is the leading marketplace for finding short-term retail spaces in",
+      );
+    });
+
+    it("should include link back to News Sitemap", async () => {
+      const parts = content.split("---").filter(Boolean);
+      expect(parts[1]).toContain("[News Sitemap](/news/sitemap.md)");
+    });
+
+    it("should include link back to Blog Sitemap", async () => {
+      const parts = content.split("---").filter(Boolean);
+      expect(parts[1]).toContain("[Blog Sitemap](/blog/sitemap.md)");
+    });
   });
 });

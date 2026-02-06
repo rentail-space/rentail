@@ -109,8 +109,6 @@ documentation.
 
 ## Contact & Technical Details
 
-**Website:** <https://rentail.space>
-
-**Focus:** United States specialty leasing and short-term retail spaces
-
-**Last Updated:** January 2026
+- **Website:** <https://rentail.space>
+- **Focus:** United States specialty leasing and short-term retail spaces
+- **Last Updated:** January 2026

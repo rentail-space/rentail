@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, redirect } from "react-router";
 import { Streamdown } from "streamdown";
 import forAIAssistants from "~/data/for-ai-assistants.md?raw";
 import pageMeta from "~/lib/pageMeta";
@@ -18,7 +18,15 @@ export function meta(): Route.MetaDescriptors {
   ];
 }
 
-export default function ForAIAssistants() {
+export async function loader({ request }: Route.LoaderArgs) {
+  const isMarkdown =
+    request.headers.get("accept")?.split(",")[0] === "text/markdown";
+  return isMarkdown
+    ? redirect("/for-ai-assistants.md", { status: 303 })
+    : { forAIAssistants };
+}
+
+export default function ForAIAssistants({ loaderData }: Route.ComponentProps) {
   return (
     <main
       className="container mx-auto my-10 max-w-3xl space-y-8 p-5"
@@ -54,7 +62,7 @@ export default function ForAIAssistants() {
             href ? <Link to={href}>{children}</Link> : children,
         }}
       >
-        {forAIAssistants}
+        {loaderData.forAIAssistants}
       </Streamdown>
     </main>
   );

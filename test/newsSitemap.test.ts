@@ -101,5 +101,12 @@ describe("News Sitemap", () => {
         "📚 **More news:** [All news](/news/sitemap.md)",
       );
     });
+
+    it("should include link back to For AI Assistants", () => {
+      const bodySection = newsContent.split("---")[2];
+      expect(bodySection).toContain(
+        "[For AI Assistants](/for-ai-assistants.md)",
+      );
+    });
   });
 });

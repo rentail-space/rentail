@@ -24,6 +24,7 @@ ${posts
 ## Related Sitemaps
 
 - [Blog Sitemap](/blog/sitemap.md)
+- [For AI Assistants](/for-ai-assistants.md)
   `.trim();
   return new Response(markdown, {
     headers: { "Content-Type": "text/markdown" },

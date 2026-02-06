@@ -141,5 +141,12 @@ describe("Blog Sitemap", () => {
         "📚 **More blog posts:** [All blog posts](/blog/sitemap.md)",
       );
     });
+
+    it("should include link back to For AI Assistants", () => {
+      const parts = blogPostContent.split("---").filter(Boolean);
+      expect(last(parts)).toContain(
+        "[For AI Assistants](/for-ai-assistants.md)",
+      );
+    });
   });
 });
