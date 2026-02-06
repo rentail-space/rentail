@@ -4,7 +4,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { sumBy } from "es-toolkit";
+import { groupBy, sumBy } from "es-toolkit";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { DateTime } from "luxon";
 import {
@@ -287,6 +287,15 @@ export default function BotsPage({ loaderData }: Route.ComponentProps) {
           <MostVisitedTable data={loaderData.topPaths} />
         </CardContent>
       </Card>
+
+      <Card className="bg-secondary-background text-foreground">
+        <CardHeader>
+          <CardTitle>Accepts Header</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <AcceptsTable recentBotActivity={loaderData.recentBotActivity} />
+        </CardContent>
+      </Card>
     </section>
   );
 }
@@ -477,6 +486,38 @@ function MostVisitedTable({
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </TableCell>
             ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+
+function AcceptsTable({
+  recentBotActivity,
+}: {
+  recentBotActivity: { accept: string | null; total: number }[];
+}) {
+  const accepts = Object.entries(
+    groupBy(recentBotActivity, ({ accept }) => accept || "Unknown"),
+  ).map(([accept, activity]) => ({
+    accept,
+    total: sumBy(activity, ({ total }) => total),
+  }));
+
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Accept</TableHead>
+          <TableHead>Total</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {accepts.map(({ accept, total }) => (
+          <TableRow key={accept}>
+            <TableCell>{accept}</TableCell>
+            <TableCell>{total.toLocaleString()}</TableCell>
           </TableRow>
         ))}
       </TableBody>
