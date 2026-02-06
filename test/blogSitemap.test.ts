@@ -53,6 +53,11 @@ describe("Blog Sitemap", () => {
     expect(parts[2]).toContain("[News Sitemap](/news/sitemap.md)");
   });
 
+  it("should include link back to For AI Assistants", () => {
+    const parts = content.split("---").filter(Boolean);
+    expect(parts[2]).toContain("[For AI Assistants](/for-ai-assistants.md)");
+  });
+
   describe("first blog post", () => {
     let blogPostContent: string;
     let blogPostResponse: Response;
@@ -139,13 +144,6 @@ describe("Blog Sitemap", () => {
       const parts = blogPostContent.split("---").filter(Boolean);
       expect(last(parts)).toContain(
         "📚 **More blog posts:** [All blog posts](/blog/sitemap.md)",
-      );
-    });
-
-    it("should include link back to For AI Assistants", () => {
-      const parts = blogPostContent.split("---").filter(Boolean);
-      expect(last(parts)).toContain(
-        "[For AI Assistants](/for-ai-assistants.md)",
       );
     });
   });

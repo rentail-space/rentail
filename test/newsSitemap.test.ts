@@ -53,6 +53,11 @@ describe("News Sitemap", () => {
     expect(parts[2]).toContain("[Blog Sitemap](/blog/sitemap.md)");
   });
 
+  it("should include link back to For AI Assistants", () => {
+    const parts = content.split("---").filter(Boolean);
+    expect(parts[2]).toContain("[For AI Assistants](/for-ai-assistants.md)");
+  });
+
   describe("first news item", () => {
     let newsContent: string;
     let newsResponse: Response;
@@ -99,13 +104,6 @@ describe("News Sitemap", () => {
       const bodySection = newsContent.split("---")[2];
       expect(bodySection).toContain(
         "📚 **More news:** [All news](/news/sitemap.md)",
-      );
-    });
-
-    it("should include link back to For AI Assistants", () => {
-      const bodySection = newsContent.split("---")[2];
-      expect(bodySection).toContain(
-        "[For AI Assistants](/for-ai-assistants.md)",
       );
     });
   });
