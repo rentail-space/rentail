@@ -304,8 +304,8 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.11)
       '@vercel/sdk':
-        specifier: ^1.18.10
-        version: 1.18.10
+        specifier: ^1.19.0
+        version: 1.19.0
       diff:
         specifier: ^8.0.3
         version: 8.0.3
@@ -319,8 +319,8 @@ importers:
         specifier: ^5.0.5
         version: 5.0.5
       ora:
-        specifier: ^9.2.0
-        version: 9.2.0
+        specifier: ^9.3.0
+        version: 9.3.0
       playwright:
         specifier: ^1.58.1
         version: 1.58.1
@@ -2802,8 +2802,8 @@ packages:
       react: '>=18'
       react-dom: '>=18'
 
-  '@vercel/sdk@1.18.10':
-    resolution: {integrity: sha512-RuPwK2hW/Uo9FCRYt8Aod9z7xcT4pVMrwoXE4cYN2/mnTR78ryl24HhZbluTuW9WQ4n+xNEst/+VwI/DEO9O8Q==}
+  '@vercel/sdk@1.19.0':
+    resolution: {integrity: sha512-cSNuKhnyYcCP6TDHT8MOnWjpgtHRg9sO5pDrYpgdzOjvkAlUtZV5zEkIlTqJngH0MPIfHZvJ0J2s6yTJtCxN3w==}
     hasBin: true
 
   '@vercel/speed-insights@1.3.1':
@@ -4706,8 +4706,8 @@ packages:
     resolution: {integrity: sha512-weP+BZ8MVNnlCm8c0Qdc1WSWq4Qn7I+9CJGm7Qali6g44e/PUzbjNqJX5NJ9ljlNMosfJvg1fKEGILklK9cwnw==}
     engines: {node: '>=18'}
 
-  ora@9.2.0:
-    resolution: {integrity: sha512-4sGT6oNDbqIuciDfD2aCkoPgHLmOe+g+xpFK2WDO0aQuD/bNHNwfdFosWP+DXmcxRyXeF8vnki6kXnOOHTuRSA==}
+  ora@9.3.0:
+    resolution: {integrity: sha512-lBX72MWFduWEf7v7uWf5DHp9Jn5BI8bNPGuFgtXMmr2uDz2Gz2749y3am3agSDdkhHPHYmmxEGSKH85ZLGzgXw==}
     engines: {node: '>=20'}
 
   outvariant@1.4.3:
@@ -8430,7 +8430,7 @@ snapshots:
       react-dom: 19.2.4(react@19.2.4)
       ts-morph: 12.0.0
 
-  '@vercel/sdk@1.18.10':
+  '@vercel/sdk@1.19.0':
     dependencies:
       '@modelcontextprotocol/sdk': 1.26.0(zod@4.3.6)
       zod: 4.3.6
@@ -10707,7 +10707,7 @@ snapshots:
       string-width: 7.2.0
       strip-ansi: 7.1.2
 
-  ora@9.2.0:
+  ora@9.3.0:
     dependencies:
       chalk: 5.6.2
       cli-cursor: 5.0.0
