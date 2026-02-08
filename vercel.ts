@@ -9,7 +9,7 @@ export const config: VercelConfig = {
     },
     {
       path: "/cron/visibility", // ChatGPT visibility checks
-      schedule: "0 6 * * *", // Every day at 6am
+      schedule: "0 6 * * 1", // Every Monday at 6am
     },
     {
       path: "/cron/seo-rank", // SEO ranking from SerpAPI
