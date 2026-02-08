@@ -12,6 +12,7 @@ import { Link } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
+import envVars from "~/lib/env";
 import pageMeta from "~/lib/pageMeta";
 import prisma from "~/lib/prisma.server";
 import timeOfDay from "~/lib/timeOfDay";
@@ -44,7 +45,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     },
   });
 
-  return { centers, metro };
+  return { centers, metro, mapboxToken: envVars.MAPBOX_TOKEN };
 }
 
 export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
@@ -92,6 +93,7 @@ export default function MetroPage({ loaderData }: Route.ComponentProps) {
 
       {centers.length > 0 && (
         <CentersMap
+          accessToken={loaderData.mapboxToken}
           centerRef={centerRef}
           centers={centers}
           latitude={meanBy(centers, (center) => center.latitude)}

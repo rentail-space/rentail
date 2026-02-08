@@ -47,6 +47,7 @@ export default function CenterPage({ loaderData }: Route.ComponentProps) {
         {(centers) => (
           <section className="flex flex-col gap-8">
             <CentersMap
+              accessToken={loaderData.mapboxToken}
               centerRef={centerRef}
               centers={centers}
               latitude={loaderData.location?.latitude ?? 34.0522}

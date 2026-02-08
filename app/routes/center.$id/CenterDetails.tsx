@@ -8,8 +8,10 @@ import CenterAttributes from "./CenterAttributes";
 import { CenterSpaces } from "./CenterSpaces";
 
 export default function CenterDetails({
+  accessToken,
   center,
 }: {
+  accessToken: string;
   center: PropertyGetPayload<{ include: { spaces: true; state: true } }>;
 }) {
   return (
@@ -60,6 +62,7 @@ export default function CenterDetails({
 
       <Card className="bg-white p-0!">
         <CentersMap
+          accessToken={accessToken}
           centers={[center]}
           latitude={center.latitude}
           longitude={center.longitude}

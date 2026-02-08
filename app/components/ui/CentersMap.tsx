@@ -17,18 +17,21 @@ export declare type CenterMapFunction = (point: {
 /**
  * A map showing shopping centers.
  *
- * @param centers - The centers to display on the map.
+ * @param accessToken - The access token for the Mapbox API.
  * @param centerRef - A ref to a function that will center the map on a given center.
+ * @param centers - The centers to display on the map.
  * @param latitude - The latitude of the center to display on the map.
  * @param longitude - The longitude of the center to display on the map.
  * @returns A map showing shopping centers.
  */
 export default function CentersMap({
+  accessToken,
   centers,
   centerRef,
   latitude,
   longitude,
 }: {
+  accessToken: string;
   centers: PropertyGetPayload<{
     include: {
       spaces: true;
@@ -56,13 +59,13 @@ export default function CentersMap({
       mapContainer.current?.scrollIntoView({ behavior: "smooth" });
     };
 
+  mapboxgl.accessToken = accessToken;
+
   useEffect(() => {
     // Only initialize on client side
     if (typeof window === "undefined") return;
     if (!mapContainer.current || map.current) return;
-
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoiYXNzYWZhcmtpbiIsImEiOiJjbWhwY3ZoazMwYXloMmxvbmxvZTE2eTBmIn0.m1npzYF93dHWeF4W3Yt_xw";
+    if (!mapboxgl.accessToken) return;
 
     try {
       const hasCenter = !Number.isNaN(longitude) && !Number.isNaN(latitude);

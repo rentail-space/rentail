@@ -13,6 +13,7 @@ import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
+import envVars from "~/lib/env";
 import pageMeta from "~/lib/pageMeta";
 import prisma from "~/lib/prisma.server";
 import timeOfDay from "~/lib/timeOfDay";
@@ -44,7 +45,13 @@ export async function loader({ params }: Route.LoaderArgs) {
     orderBy: { name: "asc" },
   });
 
-  return { centers, state, metroAreas, counties };
+  return {
+    centers,
+    counties,
+    mapboxToken: envVars.MAPBOX_TOKEN,
+    metroAreas,
+    state,
+  };
 }
 
 export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
@@ -91,6 +98,7 @@ export default function StatePage({ loaderData }: Route.ComponentProps) {
       </Streamdown>
 
       <CentersMap
+        accessToken={loaderData.mapboxToken}
         centerRef={centerRef}
         centers={centers}
         latitude={meanBy(centers, (center) => center.latitude)}

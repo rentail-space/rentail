@@ -1,4 +1,5 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
+import envVars from "~/lib/env";
 import externalLink from "~/lib/externalLink";
 import pageMeta from "~/lib/pageMeta";
 import prisma from "~/lib/prisma.server";
@@ -11,12 +12,12 @@ export async function loader({ params }: Route.LoaderArgs) {
     where: { id: params.id },
   });
   if (!center) throw new Response("Not Found", { status: 404 });
-  return center;
+  return { center, mapboxToken: envVars.MAPBOX_TOKEN };
 }
 
 export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
   if (!loaderData) return [];
-  const center = loaderData;
+  const { center } = loaderData;
   const description = center.summary
     ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
     : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`;
@@ -29,18 +30,19 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
   });
 }
 
-export default function CenterPage({
-  loaderData: center,
-}: Route.ComponentProps) {
+export default function CenterPage({ loaderData }: Route.ComponentProps) {
   return (
     <main className="container mx-auto my-10 space-y-8 p-5">
-      <CenterDetails center={center} />
+      <CenterDetails
+        accessToken={loaderData.mapboxToken}
+        center={loaderData.center}
+      />
 
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemaData(center)),
+          __html: JSON.stringify(schemaData(loaderData.center)),
         }}
       />
     </main>
