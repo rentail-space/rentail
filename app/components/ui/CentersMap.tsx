@@ -2,7 +2,7 @@ import { invariant, maxBy, minBy } from "es-toolkit";
 import { MapPin } from "lucide-react";
 import mapboxgl from "mapbox-gl";
 import type { PropertyGetPayload } from "prisma/generated/models";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 
 /**
@@ -47,6 +47,7 @@ export default function CentersMap({
   const escapeHandlerRef = useRef<((event: KeyboardEvent) => void) | null>(
     null,
   );
+  const [webglError, setWebglError] = useState(false);
 
   if (centerRef)
     centerRef.current = (center: { longitude: number; latitude: number }) => {
@@ -56,22 +57,31 @@ export default function CentersMap({
     };
 
   useEffect(() => {
+    // Only initialize on client side
+    if (typeof window === "undefined") return;
     if (!mapContainer.current || map.current) return;
 
     mapboxgl.accessToken =
       "pk.eyJ1IjoiYXNzYWZhcmtpbiIsImEiOiJjbWhwY3ZoazMwYXloMmxvbmxvZTE2eTBmIn0.m1npzYF93dHWeF4W3Yt_xw";
 
-    const hasCenter = !Number.isNaN(longitude) && !Number.isNaN(latitude);
-    // https://docs.mapbox.com/mapbox-gl-js/api/map/#instance-members-interaction-handlers
-    map.current = new mapboxgl.Map({
-      center: hasCenter ? [longitude, latitude] : [-98.5795, 39.8283],
-      container: mapContainer.current,
-      doubleClickZoom: false,
-      dragPan: true,
-      scrollZoom: false,
-      style: "mapbox://styles/mapbox/streets-v12",
-      zoom: hasCenter ? calculateZoomLevel(centers) : 4,
-    });
+    try {
+      const hasCenter = !Number.isNaN(longitude) && !Number.isNaN(latitude);
+      // https://docs.mapbox.com/mapbox-gl-js/api/map/#instance-members-interaction-handlers
+      map.current = new mapboxgl.Map({
+        center: hasCenter ? [longitude, latitude] : [-98.5795, 39.8283],
+        container: mapContainer.current,
+        doubleClickZoom: false,
+        dragPan: true,
+        scrollZoom: false,
+        style: "mapbox://styles/mapbox/streets-v12",
+        zoom: hasCenter ? calculateZoomLevel(centers) : 4,
+      });
+      setWebglError(false);
+    } catch (error) {
+      console.error("Failed to initialize Mapbox GL:", error);
+      setWebglError(true);
+      return;
+    }
 
     // Add navigation controls
     map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
@@ -209,6 +219,20 @@ export default function CentersMap({
       popupsRef.current.push(popup);
     }
   }, [centers]);
+
+  if (webglError) {
+    return (
+      <section className="relative flex h-96 w-full items-center justify-center overflow-hidden rounded-lg border-2 border-gray-300 bg-gray-50">
+        <div className="text-center">
+          <MapPin className="mx-auto mb-2 text-gray-400" size={48} />
+          <p className="text-gray-600">Map unavailable</p>
+          <p className="text-gray-500 text-sm">
+            WebGL is required to display the map
+          </p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="relative h-96 w-full overflow-hidden rounded-lg bg-gray-100">

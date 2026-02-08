@@ -9,6 +9,7 @@ import {
   data,
   isRouteErrorResponse,
   useLoaderData,
+  useMatches,
   useRouteError,
 } from "react-router";
 import { WaveLoading } from "respinner";
@@ -111,11 +112,8 @@ export async function loader({ request }: Route.LoaderArgs) {
   );
 }
 
-export default function App({
-  matches,
-}: {
-  matches: UIMatch<unknown, { hideLayout?: boolean }>[];
-}) {
+export default function App() {
+  const matches = useMatches() as UIMatch<unknown, { hideLayout?: boolean }>[];
   const { hideLayout } = last(
     matches.filter((match) => match.handle && "hideLayout" in match.handle),
   )?.handle || { hideLayout: false };

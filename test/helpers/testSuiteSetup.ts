@@ -11,6 +11,7 @@ import Redis from "ioredis";
 import { afterAll, beforeAll } from "vitest";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma.server";
+import "~/test/mocks/mockMapbox";
 import msw from "~/test/mocks/mswHandlers";
 import "./toMatchInnerHTML";
 import "./toMatchScreenshot";
