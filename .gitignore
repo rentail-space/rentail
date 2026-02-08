@@ -2,6 +2,7 @@
 .vercel
 /node_modules/
 google-rentail.json
+.opencode
 
 # React Router
 .env
