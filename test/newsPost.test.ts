@@ -11,7 +11,7 @@
 
 import { type Page, type Response, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import { goto } from "~/test/helpers/launchBrowser";
+import { goto, port } from "~/test/helpers/launchBrowser";
 
 describe("News Post Rendering", () => {
   let page: Page;
@@ -143,6 +143,16 @@ describe("News Post Rendering", () => {
     expect(articleClasses).toContain("mx-auto");
   });
 
+  it("should link to Markdown version of the news post", async () => {
+    const link = page.locator("head > link[href$='2026-01-20-launch.md']");
+    await expect(link).toHaveAttribute("rel", "alternate");
+    await expect(link).toHaveAttribute("type", "text/markdown");
+    await expect(link).toHaveAttribute(
+      "href",
+      "https://rentail.space/news/2026-01-20-launch.md",
+    );
+  });
+
   describe("404", () => {
     let response: Response | null;
 
@@ -152,6 +162,52 @@ describe("News Post Rendering", () => {
 
     it("should handle non-existent news posts with 404", async () => {
       expect(response?.status(), "should respond with 404").toEqual(404);
+    });
+  });
+
+  describe("Markdown version of the news post", () => {
+    let content: string;
+    let headers: Headers;
+
+    beforeAll(async () => {
+      const response = await fetch(
+        `http://localhost:${port}/news/2026-01-20-launch.md`,
+      );
+      content = await response.text();
+      headers = response.headers;
+    });
+
+    it("should return markdown content type", () => {
+      expect(headers.get("content-type")).toContain("text/markdown");
+    });
+
+    it("should HTTP link to /news", () => {
+      expect(headers.get("link")).toContain(
+        '<https://rentail.space/news/2026-01-20-launch>; rel="alternate"; type="text/html"',
+      );
+    });
+
+    it("should include news post title", () => {
+      const lines = content.split("\n");
+      expect(lines[0]).toBe(
+        "# Rentail.space Launches AI-Powered Marketplace Connecting Businesses with Short-Term Retail Spaces",
+      );
+    });
+
+    it("should include published date", () => {
+      expect(content).toContain("**Published:** Tuesday, January 20, 2026");
+    });
+
+    it("should include news post body content", () => {
+      const bodySection = content.split("---")[1];
+      expect(bodySection).toContain("Solving a Market Inefficiency");
+    });
+
+    it("should include link back to sitemap", () => {
+      const bodySection = content.split("---")[2];
+      expect(bodySection).toContain(
+        "**More news:** [All news](/news/sitemap.md)",
+      );
     });
   });
 

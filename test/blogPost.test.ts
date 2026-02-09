@@ -9,9 +9,10 @@
  * - Navigation functionality
  */
 
+import { last } from "es-toolkit";
 import { type Page, type Response, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import { goto } from "~/test/helpers/launchBrowser";
+import { goto, port } from "~/test/helpers/launchBrowser";
 
 describe("Blog Post Rendering", () => {
   let page: Page;
@@ -131,6 +132,18 @@ describe("Blog Post Rendering", () => {
     }
   });
 
+  it("should link to Markdown version of the blog post", async () => {
+    const link = page.locator(
+      "head > link[href$='/blog/2025-12-19-why-hunkering-down-kills-momentum.md']",
+    );
+    await expect(link).toHaveAttribute("rel", "alternate");
+    await expect(link).toHaveAttribute("type", "text/markdown");
+    await expect(link).toHaveAttribute(
+      "href",
+      "https://rentail.space/blog/2025-12-19-why-hunkering-down-kills-momentum.md",
+    );
+  });
+
   describe("404", () => {
     let response: Response | null;
 
@@ -160,6 +173,86 @@ describe("Blog Post Rendering", () => {
           name: "The Ultimate Guide",
         }),
       ).toBeVisible();
+    });
+  });
+
+  describe("Markdown version of the blog post", () => {
+    let content: string;
+    let headers: Headers;
+
+    beforeAll(async () => {
+      const response = await fetch(
+        `http://localhost:${port}/blog/2025-12-19-why-hunkering-down-kills-momentum.md`,
+      );
+      content = await response.text();
+      headers = response.headers;
+    });
+
+    it("should return markdown content type", () => {
+      expect(headers.get("content-type")).toContain("text/markdown");
+    });
+
+    it("should HTTP link to /blog", () => {
+      expect(headers.get("link")).toContain(
+        '<https://rentail.space/blog/2025-12-19-why-hunkering-down-kills-momentum>; rel="alternate"; type="text/html"',
+      );
+    });
+
+    it("should include blog post title", () => {
+      const lines = content.split("\n");
+      expect(lines[0]).toBe(
+        "# The Hermit Leader Problem: Why Hunkering Down Kills Momentum",
+      );
+    });
+
+    it("should include published date", () => {
+      expect(content).toContain("**Published:** Friday, December 19, 2025");
+    });
+
+    it("should include image with alt text", () => {
+      const parts = content.split("---").filter(Boolean);
+      const image = parts[1].match(/!\[([^\]]*)\]\(([^)]+)\)/);
+      expect(image?.[1]).toBe(
+        "Row of matches with one burnt match among unlit ones, representing leader burnout and withdrawal that extinguishes team momentum while others remain ready to ignite",
+      );
+      expect(image?.[2]).toMatch(/^\/blog\/2025-12-19-matches\.jpg$/);
+    });
+
+    it("should allow downloading the image with fetch and confirm it's a JPEG", async () => {
+      // Extract image URL from the blog post markdown
+      const imgMatch = content.match(/!\[[^\]]*\]\(([^)]+)\)/);
+      expect(imgMatch, "should find image URL").toBeTruthy();
+
+      const imageUrl = imgMatch?.[1];
+      expect(imageUrl).toMatch(/^\/blog\/2025-12-19-matches\.jpg$/);
+
+      // Download image from local server
+      const imageResponse = await fetch(`http://localhost:${port}${imageUrl}`);
+      expect(imageResponse.ok).toBe(true);
+
+      const contentType = imageResponse.headers.get("content-type");
+      expect(contentType).toMatch(/^image\/jpeg/);
+
+      // Optionally, check a JPEG magic number (0xFFD8FFE0)
+      const buffer = new Uint8Array(await imageResponse.arrayBuffer());
+      expect(buffer[0]).toBe(0xff);
+      expect(buffer[1]).toBe(0xd8);
+      // 3rd byte may vary (FFE0 - FFE8), only check start
+      expect(buffer[2]).toBe(0xff);
+    });
+
+    it("should include blog post body content", () => {
+      const parts = content.split("---").filter(Boolean);
+      expect(parts[1]).toContain(
+        "Missed sales target. Key hire quits. Product launch flops.",
+      );
+    });
+
+    it("should include link back to sitemap", () => {
+      const parts = content.split("---").filter(Boolean);
+      expect(last(parts)).toContain(
+        "**More blog posts:** [All blog posts](/blog/sitemap.md)",
+      );
     });
   });
 

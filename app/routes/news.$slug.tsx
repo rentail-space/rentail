@@ -45,6 +45,7 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
     { name: "slurp", content: "index, follow" },
     { name: "ia_archiver", content: "index, follow" },
     {
+      tagName: "link",
       href: `https://rentail.space/news/${slug}.md`,
       rel: "alternate",
       type: "text/markdown",

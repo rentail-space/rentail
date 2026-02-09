@@ -8,7 +8,6 @@
  * - First news item is accessible
  */
 
-import { invariant } from "es-toolkit";
 import { expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
 import { port } from "~/test/helpers/launchBrowser";
@@ -24,6 +23,12 @@ describe("News Sitemap", () => {
 
   it("should return markdown content type", () => {
     expect(response.headers.get("content-type")).toContain("text/markdown");
+  });
+
+  it("should HTTP link to /news", () => {
+    expect(response.headers.get("link")).toContain(
+      '<https://rentail.space/news>; rel="alternate"; type="text/html"',
+    );
   });
 
   it("should have the correct sitemap title on the first line", () => {
@@ -56,55 +61,5 @@ describe("News Sitemap", () => {
   it("should include link back to For AI Assistants", () => {
     const parts = content.split("---").filter(Boolean);
     expect(parts[2]).toContain("[For AI Assistants](/for-ai-assistants.md)");
-  });
-
-  describe("first news item", () => {
-    let newsContent: string;
-    let newsResponse: Response;
-
-    beforeAll(async () => {
-      // Extract first news item slug from sitemap
-      const match = content.match(/\[([^\]]+)\]\(\/news\/([^)]+)\)/);
-      expect(match, "should find at least one news link").toBeDefined();
-      invariant(match, "should find at least one news link");
-
-      const slug = match[2];
-      expect(slug).toBe("2026-01-20-launch");
-
-      // Fetch first news item (with .md extension for markdown format)
-      newsResponse = await fetch(`http://localhost:${port}/news/${slug}`, {
-        headers: { accept: "text/markdown" },
-      });
-      newsContent = await newsResponse.text();
-    });
-
-    it("should return markdown content type", () => {
-      expect(newsResponse.headers.get("content-type")).toContain(
-        "text/markdown",
-      );
-    });
-
-    it("should include news title", () => {
-      const lines = newsContent.split("\n");
-      expect(lines[0]).toBe(
-        "# Rentail.space Launches AI-Powered Marketplace Connecting Businesses with Short-Term Retail Spaces",
-      );
-    });
-
-    it("should include published date", () => {
-      expect(newsContent).toContain("**Published:** Tuesday, January 20, 2026");
-    });
-
-    it("should include news body content", () => {
-      const bodySection = newsContent.split("---")[1];
-      expect(bodySection).toContain("Solving a Market Inefficiency");
-    });
-
-    it("should include link back to sitemap", () => {
-      const bodySection = newsContent.split("---")[2];
-      expect(bodySection).toContain(
-        "📚 **More news:** [All news](/news/sitemap.md)",
-      );
-    });
   });
 });
