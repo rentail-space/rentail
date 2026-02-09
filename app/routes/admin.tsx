@@ -70,6 +70,14 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return "OK";
 }
 
+export function headers() {
+  return {
+    "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+    Pragma: "no-cache",
+    Expires: "0",
+  };
+}
+
 export default function Admin() {
   const outlet = useOutlet();
   const location = useLocation();
