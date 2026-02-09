@@ -50,7 +50,7 @@ export default function CentersMap({
   const escapeHandlerRef = useRef<((event: KeyboardEvent) => void) | null>(
     null,
   );
-  const [webglError, setWebglError] = useState(false);
+  const [webglError, setWebglError] = useState(process.env.NODE_ENV === "test");
 
   if (centerRef)
     centerRef.current = (center: { longitude: number; latitude: number }) => {
@@ -59,14 +59,12 @@ export default function CentersMap({
       mapContainer.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-  mapboxgl.accessToken = accessToken;
-
   useEffect(() => {
     // Only initialize on client side
     if (typeof window === "undefined") return;
     if (!mapContainer.current || map.current) return;
-    if (!mapboxgl.accessToken) return;
 
+    mapboxgl.accessToken = accessToken;
     try {
       const hasCenter = !Number.isNaN(longitude) && !Number.isNaN(latitude);
       // https://docs.mapbox.com/mapbox-gl-js/api/map/#instance-members-interaction-handlers
@@ -116,7 +114,7 @@ export default function CentersMap({
         map.current = null;
       }
     };
-  }, [centers, latitude, longitude]);
+  }, [centers, latitude, longitude, accessToken]);
 
   // Add markers when centers change
   useEffect(() => {
