@@ -27,6 +27,9 @@ ${posts
 - [For AI Assistants](/for-ai-assistants.md)
   `.trim();
   return new Response(markdown, {
-    headers: { "Content-Type": "text/markdown" },
+    headers: {
+      "Content-Type": "text/markdown",
+      Link: `<https://rentail.space/news>; rel="alternate"; type="text/html"`,
+    },
   });
 }

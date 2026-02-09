@@ -21,9 +21,14 @@ ${news.body}
 
 ---
 
-📚 **More news:** [All news](/news/sitemap.md)
+**More news:** [All news](/news/sitemap.md)
     `.trim();
-    return new Response(md, { headers: { "Content-Type": "text/markdown" } });
+    return new Response(md, {
+      headers: {
+        "Content-Type": "text/markdown",
+        Link: `<https://rentail.space/news/${slug}>; rel="alternate"; type="text/html"`,
+      },
+    });
   } catch {
     throw new Response("Not Found", { status: 404 });
   }

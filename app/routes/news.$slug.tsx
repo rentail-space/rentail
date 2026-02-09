@@ -44,6 +44,12 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
     { name: "duckduckbot", content: "index, follow" },
     { name: "slurp", content: "index, follow" },
     { name: "ia_archiver", content: "index, follow" },
+    {
+      href: `https://rentail.space/news/${slug}.md`,
+      rel: "alternate",
+      type: "text/markdown",
+      title: `Markdown version of ${title} News Article`,
+    },
   ];
 }
 

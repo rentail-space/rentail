@@ -21,9 +21,14 @@ ${post.body}
 
 ---
 
-📚 **More blog posts:** [All blog posts](/blog/sitemap.md)
+**More blog posts:** [All blog posts](/blog/sitemap.md)
     `.trim();
-    return new Response(md, { headers: { "Content-Type": "text/markdown" } });
+    return new Response(md, {
+      headers: {
+        "Content-Type": "text/markdown",
+        Link: `<https://rentail.space/blog/${slug}>; rel="alternate"; type="text/html"`,
+      },
+    });
   } catch {
     throw new Response("Not Found", { status: 404 });
   }
