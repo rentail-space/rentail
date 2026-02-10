@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { useNavigation, useSearchParams } from "react-router";
+import { useSearchParams } from "react-router";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 
 /**
@@ -18,12 +18,10 @@ const periods = [14, 30, 90];
  * const { from, until, period, today, setRange } = useRangeSelection();
  * setRange(today.minus({ days: 14 }), today);
  *
- * @returns The start and end dates and a function to set the range and a
- * boolean indicating if the component is loading.
+ * @returns The start and end dates and a function to set the range and the today's date.
  */
 export function useRangeSelection(): {
   from: DateTime<boolean>;
-  isLoading: boolean;
   period: number;
   setRange: (from: DateTime, until: DateTime) => void;
   today: DateTime<boolean>;
@@ -41,15 +39,7 @@ export function useRangeSelection(): {
       { replace: true, viewTransition: true },
     );
   };
-  const nav = useNavigation();
-  return {
-    from,
-    until,
-    period,
-    today,
-    setRange,
-    isLoading: nav.state === "loading",
-  };
+  return { from, until, period, today, setRange };
 }
 
 /**

@@ -1,6 +1,7 @@
 import { type LoaderFunctionArgs, useLocation, useOutlet } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Card, CardContent } from "~/components/ui/Card";
+import PageLoadingBouncer from "~/components/ui/PageLoadingBouncer";
 import { verifyAdmin } from "~/lib/sessions.server";
 
 export const handle = {
@@ -86,6 +87,7 @@ export default function Admin() {
   return (
     <main className="container mx-auto my-10 p-5">
       <title>Admin | Rentail.space</title>
+      <PageLoadingBouncer />
       {isRoot ? <AdminLinks /> : outlet}
     </main>
   );

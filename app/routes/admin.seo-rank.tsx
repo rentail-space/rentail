@@ -63,7 +63,7 @@ export default function RankingPage({ loaderData }: Route.ComponentProps) {
         params.set("engine", engine);
         return params;
       },
-      { replace: true },
+      { replace: true, viewTransition: true },
     );
   }
 

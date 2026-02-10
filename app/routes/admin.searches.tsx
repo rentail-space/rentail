@@ -14,10 +14,8 @@ import { Button } from "~/components/ui/Button";
 import { Card, CardContent, CardHeader } from "~/components/ui/Card";
 import DateRangeSelector, {
   parseDateRange,
-  useRangeSelection,
 } from "~/components/ui/DateRangeSelector";
 import { Input } from "~/components/ui/Input";
-import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
   Table,
   TableBody,
@@ -101,7 +99,6 @@ const columns: ColumnDef<SearchQuery>[] = [
 ];
 
 export default function SearchesPage({ loaderData }: Route.ComponentProps) {
-  const { isLoading } = useRangeSelection();
   const [globalFilter, setGlobalFilter] = useState("");
   const [sorting, setSorting] = useState<SortingState>([
     { id: "impressions", desc: true },
@@ -130,104 +127,100 @@ export default function SearchesPage({ loaderData }: Route.ComponentProps) {
         Search Console Analytics
       </h1>
 
-      {isLoading ? (
-        <LoadingProgress />
-      ) : (
-        <section className="space-y-4">
-          <div className="grid grid-cols-4 gap-4">
-            {[
-              {
-                label: "Total Impressions",
-                value: summary.totalImpressions.toLocaleString(),
-              },
-              {
-                label: "Total Clicks",
-                value: summary.totalClicks.toLocaleString(),
-              },
-              {
-                label: "Avg CTR",
-                value: `${(summary.avgCtr * 100).toFixed(2)}%`,
-              },
-              { label: "Avg Position", value: summary.avgPosition.toFixed(1) },
-            ].map(({ label, value }) => (
-              <Card
-                className="bg-secondary-background text-foreground"
-                key={label}
-              >
-                <CardContent>
-                  <div className="text-gray-600 text-sm">{label}</div>
-                  <div className="font-bold text-2xl">{value}</div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+      <section className="space-y-4">
+        <div className="grid grid-cols-4 gap-4">
+          {[
+            {
+              label: "Total Impressions",
+              value: summary.totalImpressions.toLocaleString(),
+            },
+            {
+              label: "Total Clicks",
+              value: summary.totalClicks.toLocaleString(),
+            },
+            {
+              label: "Avg CTR",
+              value: `${(summary.avgCtr * 100).toFixed(2)}%`,
+            },
+            { label: "Avg Position", value: summary.avgPosition.toFixed(1) },
+          ].map(({ label, value }) => (
+            <Card
+              className="bg-secondary-background text-foreground"
+              key={label}
+            >
+              <CardContent>
+                <div className="text-gray-600 text-sm">{label}</div>
+                <div className="font-bold text-2xl">{value}</div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
-          <Card className="bg-secondary-background text-foreground">
-            <CardHeader>
-              <form
-                method="get"
-                action="/api/searches/export"
-                className="mb-4 flex items-center justify-between"
-              >
-                <DateRangeSelector />
-                <Input
-                  value={globalFilter}
-                  onChange={(e) => setGlobalFilter(e.target.value)}
-                  placeholder="Filter by query..."
-                  className="w-96"
-                />
-                <Button type="submit" variant="default">
-                  Export CSV
-                </Button>
-              </form>
-            </CardHeader>
-            <CardContent>
-              <Table className="w-full">
-                <TableHeader className="bg-gray-50">
-                  {table.getHeaderGroups().map((headerGroup) => (
-                    <TableRow key={headerGroup.id}>
-                      {headerGroup.headers.map((header) => (
-                        <TableHead
-                          key={header.id}
-                          className="cursor-pointer border-b px-4 py-3 text-left font-semibold text-gray-700 text-sm hover:bg-gray-100"
-                          onClick={header.column.getToggleSortingHandler()}
-                          style={{ width: header.column.getSize() }}
-                        >
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                          {{ asc: " 🔼", desc: " 🔽" }[
-                            header.column.getIsSorted() as string
-                          ] ?? null}
-                        </TableHead>
-                      ))}
-                    </TableRow>
-                  ))}
-                </TableHeader>
-                <TableBody>
-                  {table.getRowModel().rows.map((row) => (
-                    <TableRow key={row.id} className="hover:bg-gray-50">
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext(),
-                          )}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))}
-                </TableBody>
-                <TableCaption>
-                  Showing {table.getRowModel().rows.length} of {queries.length}{" "}
-                  queries
-                </TableCaption>
-              </Table>
-            </CardContent>
-          </Card>
-        </section>
-      )}
+        <Card className="bg-secondary-background text-foreground">
+          <CardHeader>
+            <form
+              method="get"
+              action="/api/searches/export"
+              className="mb-4 flex items-center justify-between"
+            >
+              <DateRangeSelector />
+              <Input
+                value={globalFilter}
+                onChange={(e) => setGlobalFilter(e.target.value)}
+                placeholder="Filter by query..."
+                className="w-96"
+              />
+              <Button type="submit" variant="default">
+                Export CSV
+              </Button>
+            </form>
+          </CardHeader>
+          <CardContent>
+            <Table className="w-full">
+              <TableHeader className="bg-gray-50">
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <TableHead
+                        key={header.id}
+                        className="cursor-pointer border-b px-4 py-3 text-left font-semibold text-gray-700 text-sm hover:bg-gray-100"
+                        onClick={header.column.getToggleSortingHandler()}
+                        style={{ width: header.column.getSize() }}
+                      >
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                        {{ asc: " 🔼", desc: " 🔽" }[
+                          header.column.getIsSorted() as string
+                        ] ?? null}
+                      </TableHead>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableHeader>
+              <TableBody>
+                {table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id} className="hover:bg-gray-50">
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+              <TableCaption>
+                Showing {table.getRowModel().rows.length} of {queries.length}{" "}
+                queries
+              </TableCaption>
+            </Table>
+          </CardContent>
+        </Card>
+      </section>
     </main>
   );
 }

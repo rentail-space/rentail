@@ -7,7 +7,6 @@ import { Await, type LoaderFunctionArgs } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import DateRangeSelector, {
   parseDateRange,
-  useRangeSelection,
 } from "~/components/ui/DateRangeSelector";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 import {
@@ -59,7 +58,6 @@ async function getEntrances(period: number) {
 }
 
 export default function AdminPages({ loaderData }: Route.ComponentProps) {
-  const { isLoading } = useRangeSelection();
   return (
     <Card className="bg-secondary-background text-foreground">
       <CardHeader>
@@ -69,15 +67,11 @@ export default function AdminPages({ loaderData }: Route.ComponentProps) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        {isLoading ? (
-          <LoadingProgress />
-        ) : (
-          <Suspense fallback={<LoadingProgress />}>
-            <Await resolve={loaderData}>
-              {(entrances) => <EntrancesTable entrances={entrances} />}
-            </Await>
-          </Suspense>
-        )}
+        <Suspense fallback={<LoadingProgress />}>
+          <Await resolve={loaderData}>
+            {(entrances) => <EntrancesTable entrances={entrances} />}
+          </Await>
+        </Suspense>
       </CardContent>
     </Card>
   );
