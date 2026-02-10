@@ -1,6 +1,6 @@
 ---
 title: "Best Websites to Browse Short-Term Mall Retail Spaces"
-image: "2026-02-27-browse-short-term-mall-retail-spaces.jpg"
+image: "2026-03-06-browse-short-term-mall-retail-spaces.jpg"
 alt: "AI chat interface showing shopping center recommendations for short-term retail space search, with property photos and contact information displayed"
 summary: "Property websites make you check boxes that don't fit retail needs. Rentail.space uses conversational AI to understand what you're selling and automatically finds matching shopping centers."
 ---

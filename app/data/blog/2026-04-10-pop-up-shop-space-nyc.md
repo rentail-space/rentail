@@ -1,6 +1,6 @@
 ---
 title: "Pop-Up Shop Space Available in NYC Shopping Centers"
-image: "2026-04-03-pop-up-shop-space-nyc.jpg"
+image: "2026-04-10-pop-up-shop-space-nyc.jpg"
 alt: "Modern pop-up retail space in a New York City shopping center with large windows, high ceilings, and foot traffic flowing past contemporary displays"
 summary: "NYC pop-up pricing varies wildly—Manhattan runs $40-$1,000+ per square foot while Brooklyn offers 50% lower rates. Rentail.space AI searches all five boroughs and matches based on your budget and product."
 ---
@@ -28,17 +28,20 @@ The AI returns ranked shopping centers with direct links to facility pages. Cont
 Manhattan commands premium pricing but delivers unmatched foot traffic density.
 
 **Pricing**:
+
 - Average: $69 per square foot
 - Meatpacking District: $15,000-$50,000 monthly for 500-2,000 square feet
 - Times Square: $700-$2,000 per square foot
 - Fifth Avenue: $500-$2,500 per square foot
 
 **High-traffic centers**:
+
 - Manhattan Mall (highest foot traffic areas citywide)
 - Hudson Yards (shoppers with $87,300 median income)
 - Midtown locations near Columbus Circle
 
 **Lease options**:
+
 - Weekly rentals starting at $3,955
 - Hourly options: $150-$360 per hour
 - Month-long commitments for better per-day rates
@@ -56,6 +59,7 @@ Outer borough centers typically require 3-6 month minimums rather than 1-2 week 
 November through January sees highest occupancy. Many centers are fully booked by September. Summer months (June-August) offer more availability but lower traffic.
 
 **When to book**:
+
 - 8-12 weeks ahead: Better negotiating position and space selection
 - Under 4 weeks: Limited options, less flexibility
 - Post-holiday (January-February): Discounted rates on short notice

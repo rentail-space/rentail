@@ -1,6 +1,6 @@
 ---
 title: "How Much Does It Cost to Rent Mall Kiosk Space for a Holiday Season?"
-image: "2026-03-20-holiday-kiosk-rental-costs.jpg"
+image: "2026-03-27-holiday-kiosk-rental-costs.jpg"
 alt: "Busy mall corridor during holiday season with decorated kiosks displaying merchandise, shoppers with bags walking past festive displays"
 summary: "Holiday kiosk costs aren't just rent—CAM fees, percentage rent, and deposits add thousands. Plan 6-12 months ahead and use rentail.space to compare pricing before prime spots fill."
 ---
@@ -31,6 +31,7 @@ Total two-month holiday investment: $6,000 to $25,000 depending on location. And
 - High-traffic flagships: $6,000-$10,000+/month
 
 **Location within the mall matters**:
+
 - Mid-corridor spots facing entrances: $2,000+
 - Corner or wall-adjacent spaces: $1,400
 - Holiday premium: Add 20% or more
@@ -38,16 +39,19 @@ Total two-month holiday investment: $6,000 to $25,000 depending on location. And
 **Regional variation**:
 
 High-cost markets (NYC, LA, San Francisco, Miami):
+
 - Base rent: $5,000-$10,000+ monthly
 - CAM fees: $500-$2,000 monthly
 - Percentage rent: 8-15% of sales
 
 Mid-tier markets (Dallas, Atlanta, Phoenix):
+
 - Base rent: $2,500-$6,000 monthly
 - CAM fees: $250-$1,000 monthly
 - Percentage rent: 5-10% of sales
 
 Smaller markets:
+
 - Base rent: $900-$3,000 monthly
 - CAM fees: $100-$500 monthly
 - Percentage rent: 5-8% of sales
@@ -57,6 +61,7 @@ Smaller markets:
 You'll pay first month rent plus security deposit upfront. For a $5,000/month kiosk, budget $10,000 minimum before stocking inventory.
 
 **Additional costs**:
+
 - Initial inventory: $5,000-$50,000 depending on product
 - Marketing: $2,000-$10,000 for launch
 - Staffing: varies by hours and market

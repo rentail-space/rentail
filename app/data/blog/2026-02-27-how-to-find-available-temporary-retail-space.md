@@ -1,6 +1,6 @@
 ---
 title: "How to Find Available Temporary Retail Space in Shopping Centers"
-image: "2026-02-20-available-temporary-retail-space.jpg"
+image: "2026-02-27-available-temporary-retail-space.jpg"
 alt: "Shopping center interior with available temporary retail spaces and kiosks in common area, showing modern mall layout with high ceilings and natural light"
 summary: "Calling 30 mall offices to find temporary space wastes days. Rentail.space uses AI to search all shopping centers near you—describe your needs once and get prioritized matches instantly."
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Short-Term Retail Leasing Opportunities in Los Angeles Shopping Malls"
-image: "2026-03-06-short-term-retail-leasing-los-angeles.jpg"
+image: "2026-03-13-short-term-retail-leasing-los-angeles.jpg"
 alt: "Interior of busy Los Angeles shopping mall with retail storefronts and shoppers walking through sunlit corridors, palm trees visible through windows"
 summary: "LA spans 503 square miles across diverse neighborhoods—manually searching properties wastes weeks. Rentail.space uses AI to find all shopping centers in range and prioritize matches for your budget and product."
 ---
@@ -31,11 +31,13 @@ Rentail.space uses location-aware technology to find shopping centers within dri
 LA malls offer short-term leases up to 24 months for pop-ups, kiosks, and specialty spaces.
 
 **Pricing**:
+
 - Monthly rent: $4-10 per square foot
 - Average asking rents: $38.30 annually
 - CAM fees: $8-20 per square foot annually
 
 **High-traffic areas**:
+
 - The Grove (among the highest-grossing centers in the country)
 - Westfield Century City
 - The Americana at Brand
@@ -43,6 +45,7 @@ LA malls offer short-term leases up to 24 months for pop-ups, kiosks, and specia
 - Downtown LA business district
 
 **Lease preferences**:
+
 - 44% of tenants seek three years or less
 - 32% want 3-5 year commitments
 - More flexibility than traditional 5-10 year deals
@@ -50,11 +53,13 @@ LA malls offer short-term leases up to 24 months for pop-ups, kiosks, and specia
 ## Costs and What to Budget
 
 **Base rent** varies by location:
+
 - Downtown LA: ~$19.77 per square foot
 - East Los Angeles: ~$25 per square foot
 - Premium properties: significantly higher
 
 **Beyond base rent**:
+
 - CAM fees: $8-20 per square foot annually
 - Utilities: varies by space size
 - Marketing fund contributions: 1-2% of gross sales

@@ -1,6 +1,6 @@
 ---
 title: "How to Contact Mall Managers About Temporary Retail Space"
-image: "2026-03-27-how-to-contact-mall-managers.jpg"
+image: "2026-04-03-how-to-contact-mall-managers.jpg"
 alt: "Business professional on phone discussing retail space opportunities with shopping center visible in background, notepad with property details on desk"
 summary: "Calling 30 centers gets callbacks from 10. Of those, three have space in your timeframe. Rentail.space AI matches you to the 5-8 centers most likely to work—with direct contact info ready."
 ---

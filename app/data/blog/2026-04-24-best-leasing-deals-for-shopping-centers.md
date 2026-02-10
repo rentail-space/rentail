@@ -1,6 +1,6 @@
 ---
 title: "Best Leasing Deals for Shopping Centers: Where to Find Hidden Value"
-image: "2026-04-17-best-leasing-deals-for-shopping-centers.jpg"
+image: "2026-04-24-best-leasing-deals-for-shopping-centers.jpg"
 alt: "Shopping center storefront with attractive lease terms signage, representing the strategic opportunity of finding undervalued retail spaces with favorable deal structures"
 summary: "Publicly listed spaces attract 20 competing tenants. The best deals come from direct outreach after anchor closures and seasonal timing gaps—use rentail.space to find opportunities before competition enters."
 ---

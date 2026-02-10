@@ -1,6 +1,6 @@
 ---
 title: "Where Can I Lease a Kiosk in a Mall for 3-6 Months?"
-image: "2026-04-10-where-can-i-lease-a-kiosk.jpg"
+image: "2026-04-17-where-can-i-lease-a-kiosk.jpg"
 alt: "Modern retail kiosk in busy shopping mall corridor with shoppers walking past, displaying merchandise under bright overhead lighting"
 summary: "Finding 3-6 month kiosk leases means calling 15-20 malls individually. Rentail.space AI searches all nearby centers at once—matching your product, budget, and timeline to available spaces."
 ---
@@ -33,16 +33,19 @@ If you sell premium skincare, it recommends higher-tier malls with affluent demo
 Short-term kiosk leases cost $1,500-$8,000 monthly depending on mall quality and location within the center.
 
 **By mall tier**:
+
 - Community/regional malls: $1,500-$3,000/month
 - Mid-tier malls: $2,500-$5,000/month
 - Premium properties (Westfield, Brookfield): $4,000-$8,000/month
 
 **Location matters**:
+
 - Prime placement (near entrances, food court): ~$23/sq ft
 - Secondary spots (corners, walls): ~$11/sq ft
 - Holiday premium: 20-40% increase November-December
 
 **Additional costs**:
+
 - CAM fees: ~$200-$500/month
 - Percentage rent (sometimes): 5-10% of gross sales above threshold
 - Upfront deposits: First month + security deposit
