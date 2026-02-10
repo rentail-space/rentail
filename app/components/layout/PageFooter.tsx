@@ -5,6 +5,7 @@ const links = [
   {
     title: "Product",
     links: [
+      { to: "/benefits", label: "Benefits" },
       { to: "/pricing", label: "Pricing" },
       { to: "/faq", label: "FAQ" },
       { to: "/states", label: "US States" },
