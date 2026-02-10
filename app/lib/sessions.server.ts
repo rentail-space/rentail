@@ -49,7 +49,7 @@ const { getSession, commitSession, destroySession } =
       maxAge: 365 * 24 * 60 * 60, // 365 days
       path: "/",
       sameSite: "lax",
-      secrets: [envVars.BETTER_AUTH_SECRET],
+      secrets: [envVars.SESSION_SECRET],
       secure: envVars.isProduction,
     },
   });

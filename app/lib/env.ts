@@ -12,10 +12,9 @@ const envVars = {
   LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required(false).asString(),
   PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required(false).asString(),
   PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required(false).asUrlString(),
-  SENTRY_DSN: env.get("SENTRY_DSN").required(false).asUrlString(),
 
   ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),
-  BETTER_AUTH_SECRET: env.get("BETTER_AUTH_SECRET").required().asString(),
+  SESSION_SECRET: env.get("SESSION_SECRET").default("secret").asString(),
   DATABASE_URL: env.get("DATABASE_URL").required().asUrlString(),
   MAPBOX_TOKEN: env.get("MAPBOX_TOKEN").required(false).asString(),
   RESEND_API_KEY: env.get("RESEND_API_KEY").required().asString(),

@@ -257,7 +257,7 @@ Imperative mood, atomic commits, reference files when helpful.
 
 **Required:**
 
-- `BETTER_AUTH_SECRET` - Session cookie secret
+- `SESSION_SECRET` - Session cookie secret
 - `DATABASE_URL` - PostgreSQL connection string
 - `ANTHROPIC_API_KEY` - Claude AI API key
 - `GOOGLE_MAPS_API_KEY` - For geocoding and Places API
