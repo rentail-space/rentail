@@ -4,8 +4,11 @@
  * Tracks API requests and costs for billing monitoring
  */
 
+import type { InputJsonValue } from "@prisma/client/runtime/client";
 import { invariant } from "es-toolkit";
+import { DateTime } from "luxon";
 import prisma from "~/lib/prisma.server";
+import envVars from "./env";
 
 /**
  * API pricing configuration
@@ -38,44 +41,81 @@ type Endpoint<S extends Service> = keyof (typeof API_PRICING)[S];
 /**
  * Track an API request
  *
- * @param service API service name
- * @param endpoint Specific endpoint called
+ * @param params.service API service name
+ * @param params.endpoint Specific endpoint called
+ * @param params.defaultValue Default value to return if not in production
+ * @param params.days Number of days to cache the result
+ * @param params.key Cache key (eg `seo:${engine}:${term}`)
+ * @param fn Function to run and track the cost
  * @returns Promise that resolves when tracking is complete
  */
-export async function trackApiCall<S extends Service, T>(
-  service: S,
-  endpoint: Endpoint<S>,
+export async function trackApiCall<T, S extends Service>(
+  {
+    days,
+    defaultValue,
+    endpoint,
+    key,
+    service,
+  }: {
+    days: number;
+    defaultValue: T;
+    endpoint: Endpoint<S>;
+    key: string;
+    service: S;
+  },
   fn: () => Promise<T>,
 ): Promise<T> {
-  const month = new Date().toISOString().slice(0, 7); // "2026-01"
-  const cost = API_PRICING[service][endpoint];
-  invariant(cost, `Unknown cost for ${service} ${String(endpoint)}`);
+  return await withCache({ key, days }, async () => {
+    if (!envVars.isProduction) return defaultValue;
 
-  // Run the function and track the cost
-  try {
-    return await fn();
-  } finally {
-    await prisma.apiUsage.upsert({
-      where: {
-        service_endpoint_month: {
+    const month = new Date().toISOString().slice(0, 7); // "2026-01"
+    const cost = API_PRICING[service][endpoint];
+    invariant(cost, `Unknown cost for ${service} ${String(endpoint)}`);
+
+    // Run the function and track the cost
+    try {
+      return await fn();
+    } finally {
+      await prisma.apiUsage.upsert({
+        where: {
+          service_endpoint_month: {
+            service,
+            endpoint: endpoint as string,
+            month,
+          },
+        },
+        update: {
+          count: { increment: 1 },
+          cost: { increment: cost },
+        },
+        create: {
           service,
           endpoint: endpoint as string,
           month,
+          count: 1,
+          cost,
         },
-      },
-      update: {
-        count: { increment: 1 },
-        cost: { increment: cost },
-      },
-      create: {
-        service,
-        endpoint: endpoint as string,
-        month,
-        count: 1,
-        cost,
-      },
-    });
-  }
+      });
+    }
+  });
+}
+
+async function withCache<T>(
+  { days, key }: { days: number; key: string },
+  fn: () => Promise<T>,
+) {
+  const ago = DateTime.now().minus({ days }).toJSDate();
+  const cached = await prisma.cache.findUnique({
+    where: { key, createdAt: { gte: ago } },
+  });
+  if (cached) return cached.value as unknown as T;
+  const value = await fn();
+  await prisma.cache.upsert({
+    create: { key, value: value as unknown as InputJsonValue },
+    update: { value: value as unknown as InputJsonValue },
+    where: { key },
+  });
+  return value;
 }
 
 /**

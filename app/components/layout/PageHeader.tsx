@@ -13,20 +13,30 @@ export default function PageHeader() {
     unknown,
     {
       headerLinks?: { to: string; label: string }[];
-      secondaryLinks?: { to: string; label: string }[];
+      dropdownLinks?: { to: string; label: string }[];
     }
   >[];
-  const { headerLinks, secondaryLinks } =
+  const { headerLinks, dropdownLinks } =
     last(
-      matches.filter((match) => match.handle && "headerLinks" in match.handle),
+      matches.filter((match) => match.handle && ("headerLinks" in match.handle || "secondaryLinks" in match.handle)),
     )?.handle || {};
 
   return (
     <header className="z-10 flex min-h-16 w-full items-center border-black border-b-2 bg-[hsl(60,100%,99%)] p-2 print:hidden">
       <RentailIcon className="w-1/2" />
 
-      <nav className="hidden items-center gap-6 whitespace-nowrap md:flex">
-        {headerLinks?.map((link) => (
+      {headerLinks && <HeaderLinks links={headerLinks} />}
+      {dropdownLinks && <DropdownMenu links={dropdownLinks} />}
+
+      <AccountMenu className="w-1/2 justify-end" />
+    </header>
+  );
+}
+
+function HeaderLinks({ links }: { links: HeaderLink[] }) {
+  return (
+    <nav className="hidden items-center gap-6 whitespace-nowrap md:flex">
+        {links.map((link) => (
           <NavLink
             key={link.to}
             to={link.to}
@@ -42,12 +52,7 @@ export default function PageHeader() {
             {link.label}
           </NavLink>
         ))}
-      </nav>
-
-      {secondaryLinks && <DropdownMenu links={secondaryLinks} />}
-
-      <AccountMenu className="w-1/2 justify-end" />
-    </header>
+    </nav>
   );
 }
 

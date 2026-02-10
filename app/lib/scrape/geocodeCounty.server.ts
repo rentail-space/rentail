@@ -3,14 +3,11 @@
  * Uses Google Geocoding API with caching
  */
 
-import type { InputJsonValue } from "@prisma/client/runtime/client";
 import { invariant } from "es-toolkit";
-import { DateTime } from "luxon";
 import ora from "ora";
 import zod from "zod";
 import { trackApiCall } from "~/lib/apiUsageTracker";
 import envVars from "~/lib/env";
-import prisma from "~/lib/prisma.server";
 
 const geocodeResultSchema = zod.object({
   results: zod.array(
@@ -79,35 +76,28 @@ export async function geocodeCounty(
   const spinner = ora(`Geocoding ${countyName}`).start();
 
   try {
-    // Normalize cache key
-    const key = `geocode:${countyName.toLowerCase().replace(/\s+/g, "-")}`;
-
-    // Check cache
-    const from30DaysAgo = DateTime.now().minus({ days: 30 }).toJSDate();
-    const cached = await prisma.cache.findUnique({
-      where: { key, createdAt: { gte: from30DaysAgo } },
-    });
-    if (cached) {
-      spinner.succeed(`Geocoding ${countyName} (cached)`);
-      return cached.value as unknown as GeocodedCounty;
-    }
-
     // Call Google Geocoding API
     const url = new URL("https://maps.googleapis.com/maps/api/geocode/json");
     url.searchParams.set("address", countyName);
     url.searchParams.set("key", envVars.GOOGLE_PLACES_API_KEY);
 
-    const response = await fetch(url.toString(), {
-      headers: { "User-Agent": "rentail.space/1.0 (support@rentail.space)" },
-    });
-
-    invariant(response.ok, `Geocoding API failed: ${response.statusText}`);
-
     // Track API usage
     const result = await trackApiCall(
-      "google-geocoding",
-      "geocode",
+      {
+        days: 30,
+        defaultValue: null,
+        endpoint: "geocode",
+        key: `geocode:${countyName.toLowerCase().replace(/\s+/g, "-")}`,
+        service: "google-geocoding",
+      },
       async () => {
+        const response = await fetch(url.toString(), {
+          headers: {
+            "User-Agent": "rentail.space/1.0 (support@rentail.space)",
+          },
+        });
+
+        invariant(response.ok, `Geocoding API failed: ${response.statusText}`);
         const data = geocodeResultSchema.parse(await response.json());
         invariant(
           data.status === "OK",
@@ -120,6 +110,7 @@ export async function geocodeCounty(
         return data.results[0];
       },
     );
+    invariant(result, "Geocoding failed");
 
     const { geometry, formatted_address } = result;
 
@@ -139,11 +130,6 @@ export async function geocodeCounty(
       },
       formattedAddress: formatted_address,
     };
-
-    // Cache result (indefinite TTL for geographic data)
-    await prisma.cache.create({
-      data: { key, value: geocoded as unknown as InputJsonValue },
-    });
 
     spinner.succeed(`Geocoded ${countyName}`);
     return geocoded;

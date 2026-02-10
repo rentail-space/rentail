@@ -80,7 +80,6 @@ async function fromGoogleAnalytics(
     sessionSource: row.dimensionValues?.[2]?.value ?? "",
     visitors: Number.parseInt(row.metricValues?.[0]?.value ?? "", 10),
   }));
-  console.log(analytics);
   return Object.entries(
     groupBy(analytics, ({ date, sessionSource }) => `${date}-${sessionSource}`),
   ).map(([, entries]) => ({

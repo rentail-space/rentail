@@ -25,7 +25,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   const engine = getSearchEngine(
     new URL(request.url).searchParams.get("engine"),
   );
-  const data = checkRankings({ engine, everyDays: 10, limit: 20 });
+  const data = checkRankings({ days: 30, engine, limit: 20 });
   return { data };
 }
 

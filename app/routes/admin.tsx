@@ -6,6 +6,9 @@ import { verifyAdmin } from "~/lib/sessions.server";
 
 export const handle = {
   headerLinks: [
+  ],
+
+  dropdownLinks: [
     {
       label: "All users",
       to: "/admin/users",
@@ -19,34 +22,31 @@ export const handle = {
         "Track rentail.space's search engine performance across target keywords and geographic markets. Monitor organic search positions, visibility trends, and competitive rankings to optimize content strategy and improve discoverability for specialty lease seekers.",
     },
     {
-      label: "Visibility",
+      label: "Recent Visibility Checks",
       to: "/admin/visibility",
       description:
         "Monitor how AI search engines (ChatGPT, Perplexity, Gemini, Claude) and traditional search (Google, Bing) discover and cite rentail.space. Track visibility checks, citation patterns, and generative engine optimization effectiveness to maximize AI-powered referral traffic.",
     },
-  ],
-
-  secondaryLinks: [
     {
-      label: "Searches",
+      label: "Search Console Analytics",
       to: "/admin/searches",
       description:
         "Analytics dashboard showing all user search queries within rentail.space, including geographic searches for shopping centers, specialty lease opportunities, and conversational AI interactions. Reveals user intent patterns, popular locations, and unmet needs to guide product development.",
     },
     {
-      label: "Bots",
+      label: "Bot Traffic",
       to: "/admin/bots",
       description:
         "Monitor automated traffic from search engine crawlers, AI agents, monitoring services, and other bots. Track request patterns, user agent strings, accepted formats (HTML, JSON, etc.), and bot behavior to optimize crawlability and detect potential abuse.",
     },
     {
-      label: "Ranked Centers",
+      label: "Shopping Center Ranking",
       to: "/admin/ranked-centers",
       description:
         "View all shopping centers evaluated by rentail's proprietary ranking algorithm. Shows tier classifications, ranking scores, demographic factors, space availability, and quality metrics that determine which properties appear in search results and recommendations.",
     },
     {
-      label: "Landing Pages",
+      label: "Landing Pages (Entrances)",
       to: "/admin/entrances",
       description:
         "Performance metrics for all entry points (entrances) to rentail.space, including organic search, paid ads, social media, and direct traffic. Track bounce rates, session depth, conversion paths, and UTM attribution to optimize acquisition channels and user onboarding.",
@@ -96,7 +96,7 @@ export default function Admin() {
 function AdminLinks() {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-      {[...handle.headerLinks, ...handle.secondaryLinks].map((link) => (
+      {[...handle.headerLinks, ...handle.dropdownLinks].map((link) => (
         <Card key={link.to} className="bg-secondary-background text-foreground">
           <CardContent>
             <ActiveLink to={link.to} className="flex flex-col gap-2">

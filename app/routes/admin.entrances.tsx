@@ -60,11 +60,10 @@ async function getEntrances(period: number) {
 export default function AdminPages({ loaderData }: Route.ComponentProps) {
   return (
     <Card className="bg-secondary-background text-foreground">
-      <CardHeader>
-        <CardTitle className="flex items-center justify-between gap-2">
-          <span>Landing Pages (Entrances)</span>
-          <DateRangeSelector />
+      <CardHeader className="flex items-center justify-between gap-2">
+        <CardTitle className="text-center font-bold text-2xl">Landing Pages (Entrances) Traffic
         </CardTitle>
+          <DateRangeSelector />
       </CardHeader>
       <CardContent>
         <Suspense fallback={<LoadingProgress />}>

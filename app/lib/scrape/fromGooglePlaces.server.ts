@@ -4,7 +4,6 @@
  */
 
 import { invariant, mapAsync } from "es-toolkit";
-import { DateTime } from "luxon";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import ora, { type Ora } from "ora";
@@ -13,7 +12,6 @@ import sharp from "sharp";
 import zod from "zod";
 import { trackApiCall } from "~/lib/apiUsageTracker";
 import envVars from "~/lib/env";
-import prisma from "~/lib/prisma.server";
 import { slugify } from "../utils";
 
 if (!envVars.GOOGLE_PLACES_API_KEY)
@@ -137,28 +135,12 @@ export async function nearbySearch({
   const location = `${point.lat.toFixed(3)},${point.lng.toFixed(3)}`;
   spinner.text = `Searching for shopping centers near ${location}`;
 
-  // Create cache key
-  const key = `nearby-search:${location}`;
-
-  // Check cache
-  const from30DaysAgo = DateTime.now().minus({ days: 30 }).toJSDate();
-  const cached = await prisma.cache.findUnique({
-    where: { key, createdAt: { gte: from30DaysAgo } },
-  });
-  if (cached) {
-    spinner.text = `Nearby search (${location}) - cached`;
-    return cached.value as unknown as zod.infer<typeof placeDetailsSchema>[];
-  }
-
   // Call API with retry logic
   const openPlaces = await searchNearbyRaw({ point, radiusMeters });
   const structured = await mapAsync(
     openPlaces,
     async (place) => await prepareSave(place),
   );
-
-  // Cache results (30-day TTL)
-  await prisma.cache.create({ data: { key, value: structured } });
 
   spinner.text = `Found ${structured.length} centers near ${location}`;
   return structured;
@@ -178,45 +160,56 @@ async function searchNearbyRaw({
   point: { lat: number; lng: number };
   radiusMeters: number;
 }): Promise<PlacesAPIPlace[]> {
-  return await trackApiCall("google-places", "nearby-search", async () => {
-    const response = await fetch(
-      "https://places.googleapis.com/v1/places:searchNearby",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          includedTypes: ["shopping_mall"],
-          maxResultCount: 20,
-          locationRestriction: {
-            circle: {
-              center: {
-                latitude: point.lat,
-                longitude: point.lng,
+  return await trackApiCall(
+    {
+      service: "google-places",
+      endpoint: "nearby-search",
+      defaultValue: [],
+      days: 30,
+      key: `nearby-search:${point.lat.toFixed(3)},${point.lng.toFixed(3)}`,
+    },
+    async () => {
+      const response = await fetch(
+        "https://places.googleapis.com/v1/places:searchNearby",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            includedTypes: ["shopping_mall"],
+            maxResultCount: 20,
+            locationRestriction: {
+              circle: {
+                center: {
+                  latitude: point.lat,
+                  longitude: point.lng,
+                },
+                radius: radiusMeters,
               },
-              radius: radiusMeters,
             },
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            "User-Agent": "rentail.space/1.0 (support@rentail.space)",
+            "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
+            "X-Goog-FieldMask": findPlaceFields
+              .map((field) => `places.${field}`)
+              .join(","),
           },
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          "User-Agent": "rentail.space/1.0 (support@rentail.space)",
-          "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
-          "X-Goog-FieldMask": findPlaceFields
-            .map((field) => `places.${field}`)
-            .join(","),
         },
-      },
-    );
-    invariant(response.ok, "Nearby search failed");
+      );
+      invariant(response.ok, "Nearby search failed");
 
-    const { places } = (await response.json()) as { places?: PlacesAPIPlace[] };
-    // Filter to operational shopping malls only
-    return (places ?? []).filter(
-      (place) =>
-        place.primaryType === "shopping_mall" &&
-        place.businessStatus === "OPERATIONAL" &&
-        place.websiteUri,
-    );
-  });
+      const { places } = (await response.json()) as {
+        places?: PlacesAPIPlace[];
+      };
+      // Filter to operational shopping malls only
+      return (places ?? []).filter(
+        (place) =>
+          place.primaryType === "shopping_mall" &&
+          place.businessStatus === "OPERATIONAL" &&
+          place.websiteUri,
+      );
+    },
+  );
 }
 
 /**
@@ -228,27 +221,36 @@ async function searchNearbyRaw({
  * @returns Place details, or undefined if the place is not found or not operational
  */
 export async function updatePlaceDetails(property: Property) {
-  await trackApiCall("google-places", "place-details", async () => {
-    const spinner = ora(`Updating details for ${property.name}`).start();
+  await trackApiCall(
+    {
+      service: "google-places",
+      endpoint: "place-details",
+      defaultValue: null,
+      days: 10,
+      key: `place-details:${property.googlePlaceID}`,
+    },
+    async () => {
+      const spinner = ora(`Updating details for ${property.name}`).start();
 
-    const response = await fetch(
-      `https://places.googleapis.com/v1/${property.googlePlaceID}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "User-Agent": "rentail.space/1.0 (support@rentail.space)",
-          "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
-          "X-Goog-FieldMask": findPlaceFields.join(","),
+      const response = await fetch(
+        `https://places.googleapis.com/v1/${property.googlePlaceID}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "User-Agent": "rentail.space/1.0 (support@rentail.space)",
+            "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
+            "X-Goog-FieldMask": findPlaceFields.join(","),
+          },
         },
-      },
-    );
-    invariant(response.ok, "Failed to get place details");
+      );
+      invariant(response.ok, "Failed to get place details");
 
-    const place = (await response.json()) as PlacesAPIPlace;
-    const readyToSave = await prepareSave(place);
-    spinner.succeed();
-    return readyToSave;
-  });
+      const place = (await response.json()) as PlacesAPIPlace;
+      const readyToSave = await prepareSave(place);
+      spinner.succeed();
+      return readyToSave;
+    },
+  );
 }
 
 /**
@@ -320,19 +322,21 @@ async function prepareSave(
  * - Resized to max 1024px width (if wider)
  * - Compressed to JPEG format with high quality (90%)
  *
- * @see https://developers.google.com/maps/billing-and-pricing/pricing#places-legacy-pricing
- * @param slug Slug for the mall
  * @param photos Photos to download
+ * @param slug Slug for the mall
  * @returns Array of image URLs
+ *
+ * @see https://developers.google.com/maps/billing-and-pricing/pricing#places-legacy-pricing
  */
 async function downloadPhotos({
-  slug,
   photos,
+  slug,
 }: {
-  slug: string;
   photos: Array<{ name: string; widthPx: number; heightPx: number }>;
+  slug: string;
 }): Promise<string[]> {
   const imageURLs: string[] = [];
+
   // NOTE: Photo download is expensive, so we're starting with just one photo,
   // and only picking the high resolution photos.
   const download = photos
@@ -342,22 +346,32 @@ async function downloadPhotos({
   for (let index = 0; index < download.length; index++) {
     const photo = download[index];
     try {
-      const buffer = await trackApiCall("google-places", "photo", async () => {
-        const url = new URL(
-          `https://places.googleapis.com/v1/${photo.name}/media`,
-        );
-        url.searchParams.set("max_height_px", photo.heightPx.toString());
-        url.searchParams.set("max_width_px", photo.widthPx.toString());
-        // Fetch photo to detect format
-        const response = await fetch(url, {
-          headers: {
-            "User-Agent": "rentail.space/1.0 (support@rentail.space)",
-            "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
-          },
-        });
-        invariant(response.ok, "Failed to download photo");
-        return Buffer.from(await response.arrayBuffer());
-      });
+      const buffer = await trackApiCall(
+        {
+          service: "google-places",
+          endpoint: "photo",
+          defaultValue: null,
+          days: 10,
+          key: `photo:${photo.name}:${photo.widthPx}x${photo.heightPx}`,
+        },
+        async () => {
+          const url = new URL(
+            `https://places.googleapis.com/v1/${photo.name}/media`,
+          );
+          url.searchParams.set("max_height_px", photo.heightPx.toString());
+          url.searchParams.set("max_width_px", photo.widthPx.toString());
+          // Fetch photo to detect format
+          const response = await fetch(url, {
+            headers: {
+              "User-Agent": "rentail.space/1.0 (support@rentail.space)",
+              "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
+            },
+          });
+          invariant(response.ok, "Failed to download photo");
+          return Buffer.from(await response.arrayBuffer());
+        },
+      );
+      if (!buffer) continue;
 
       // Process image: resize if needed and compress
       const image = sharp(buffer);

@@ -9,7 +9,7 @@ export default async function sendSEORankAlert(): Promise<string> {
   const engines = ["google", "google_ai_mode", "bing", "duckduckgo"];
   const engineQueries = await mapAsync(engines, async (engine) => ({
     engine,
-    queries: await checkRankings({ engine, everyDays: 10, limit: 10 }),
+    queries: await checkRankings({ engine, days: 30, limit: 10 }),
   }));
 
   await sendEmail({

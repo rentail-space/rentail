@@ -11,11 +11,9 @@
 
 import { ms } from "convert";
 import { delay, groupBy, mapAsync, partition } from "es-toolkit";
-import { DateTime } from "luxon";
 import { getJson } from "serpapi";
 import { trackApiCall } from "~/lib/apiUsageTracker";
-import env from "~/lib/env";
-import prisma from "~/lib/prisma.server";
+import { default as env } from "~/lib/env";
 import terms from "./searchTerms";
 
 export type RankingResults = {
@@ -32,24 +30,22 @@ export type RankingResults = {
  * Check rankings for a given engine and return the top N results. Always
  * includes rentail.space.
  *
+ * @param days - The number of days to cache the results.
  * @param engine - The engine to check rankings for.
  * @param limit - The number of results to return.
- * @param everyDays - The number of days to check every.
  * @returns An array of objects with hostname and count.
  */
 export default async function checkRankings({
+  days,
   engine,
-  everyDays,
   limit,
 }: {
+  days: number;
   engine: string;
-  everyDays: number;
   limit: number;
 }): Promise<{ hostname: string; count: number }[]> {
   const all = await mapAsync(terms, (term) =>
-    withCache({ engine, everyDays, term }, () =>
-      checkRankingWithSerpAPI(engine, term),
-    ),
+    checkRankingWithSerpAPI({ days, engine, term }),
   );
 
   const hostnames = Object.entries(
@@ -75,74 +71,63 @@ export default async function checkRankings({
 /**
  * Check ranking using SerpAPI (recommended for production)
  */
-async function checkRankingWithSerpAPI(
-  engine: string,
-  term: string,
-): Promise<RankingResults> {
-  return await trackApiCall("serpapi", "search", async () => {
-    const response = (await getJson({
-      engine,
-      api_key: env.SERPAPI_KEY,
-      q: term,
-      location: "Los Angeles, California",
-    })) as {
-      organic_results?: {
-        position: number;
-        title: string;
-        link: string;
-        redirect_link: string;
-        displayed_link: string;
-        favicon: string;
-        snippet: string;
-        snippet_highlighted_words: string[];
-        rich_snippet: {
-          top: { detected_extensions: string[]; extensions: string[] };
-        };
-        source: string;
-      }[];
-      references?: {
-        link: string;
-        title: string;
-        snippet: string;
-      }[];
-    };
+async function checkRankingWithSerpAPI({
+  days,
+  engine,
+  term,
+}: {
+  days: number;
+  engine: string;
+  term: string;
+}): Promise<RankingResults> {
+  return await trackApiCall(
+    {
+      days,
+      defaultValue: { engine, term, results: [] },
+      endpoint: "search",
+      key: `seo:${engine}:${term}`,
+      service: "serpapi",
+    },
+    async () => {
+      const response = (await getJson({
+        engine,
+        api_key: env.SERPAPI_KEY,
+        q: term,
+        location: "Los Angeles, California",
+      })) as {
+        organic_results?: {
+          position: number;
+          title: string;
+          link: string;
+          redirect_link: string;
+          displayed_link: string;
+          favicon: string;
+          snippet: string;
+          snippet_highlighted_words: string[];
+          rich_snippet: {
+            top: { detected_extensions: string[]; extensions: string[] };
+          };
+          source: string;
+        }[];
+        references?: {
+          link: string;
+          title: string;
+          snippet: string;
+        }[];
+      };
 
-    // Rate limit: 1 request per second
-    await delay(ms("2s"));
+      // Rate limit: 1 request per second
+      await delay(ms("2s"));
 
-    const results =
-      (response.organic_results ?? response.references ?? []).map((result) => ({
-        link: result.link,
-        title: result.title,
-        snippet: result.snippet,
-      })) ?? [];
-    return { engine, term, results };
-  });
-}
-
-async function withCache(
-  {
-    engine,
-    everyDays,
-    term,
-  }: {
-    engine: string;
-    everyDays: number;
-    term: string;
-  },
-  fn: () => Promise<RankingResults>,
-) {
-  const key = `seo:${engine}:${term}`;
-  const tenDaysAgo = DateTime.now().minus({ days: everyDays }).toJSDate();
-  const cached = await prisma.cache.findUnique({
-    where: { key, createdAt: { gte: tenDaysAgo } },
-  });
-  if (cached) return cached.value as unknown as RankingResults;
-  const value = await fn();
-  await prisma.cache.upsert({
-    create: { key, value },
-    update: { value },
-    where: { key },
-  });
-  return value;
+      const results =
+        (response.organic_results ?? response.references ?? []).map(
+          (result) => ({
+            link: result.link,
+            title: result.title,
+            snippet: result.snippet,
+          }),
+        ) ?? [];
+      return { engine, term, results };
+    },
+  );
 }
