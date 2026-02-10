@@ -1,67 +1,65 @@
 import { type LoaderFunctionArgs, useLocation, useOutlet } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Card, CardContent } from "~/components/ui/Card";
+import LoadingImage from "~/components/ui/LoadingImage";
 import PageLoadingBouncer from "~/components/ui/PageLoadingBouncer";
 import { verifyAdmin } from "~/lib/sessions.server";
 
 export const handle = {
-  headerLinks: [
-  ],
+  headerLinks: [],
 
   dropdownLinks: [
     {
       label: "All users",
       to: "/admin/users",
       description:
-        "Comprehensive view of all registered and anonymous users who have interacted with rentail.space. Includes authentication status, session data, working memory state, UTM tracking parameters, geographic location, and user agent information for analytics and support purposes.",
+        "Registered and anonymous users who have interacted with rentail.space.",
     },
     {
       label: "SEO Ranking",
       to: "/admin/seo-rank",
-      description:
-        "Track rentail.space's search engine performance across target keywords and geographic markets. Monitor organic search positions, visibility trends, and competitive rankings to optimize content strategy and improve discoverability for specialty lease seekers.",
+      description: "Search engine performance across target keywords.",
     },
     {
       label: "Recent Visibility Checks",
       to: "/admin/visibility",
       description:
-        "Monitor how AI search engines (ChatGPT, Perplexity, Gemini, Claude) and traditional search (Google, Bing) discover and cite rentail.space. Track visibility checks, citation patterns, and generative engine optimization effectiveness to maximize AI-powered referral traffic.",
+        "How AI search engines  and traditional search discover and cite rentail.space.",
     },
     {
       label: "Search Console Analytics",
       to: "/admin/searches",
       description:
-        "Analytics dashboard showing all user search queries within rentail.space, including geographic searches for shopping centers, specialty lease opportunities, and conversational AI interactions. Reveals user intent patterns, popular locations, and unmet needs to guide product development.",
+        "Analytics dashboard showing all user search queries within rentail.space.",
     },
     {
       label: "Bot Traffic",
       to: "/admin/bots",
       description:
-        "Monitor automated traffic from search engine crawlers, AI agents, monitoring services, and other bots. Track request patterns, user agent strings, accepted formats (HTML, JSON, etc.), and bot behavior to optimize crawlability and detect potential abuse.",
+        "Automated traffic from search engine crawlers, AI agents, monitoring services, and other bots.",
     },
     {
       label: "Shopping Center Ranking",
       to: "/admin/ranked-centers",
       description:
-        "View all shopping centers evaluated by rentail's proprietary ranking algorithm. Shows tier classifications, ranking scores, demographic factors, space availability, and quality metrics that determine which properties appear in search results and recommendations.",
+        "All shopping centers evaluated by rentail's proprietary ranking algorithm.",
     },
     {
       label: "Landing Pages (Entrances)",
       to: "/admin/entrances",
       description:
-        "Performance metrics for all entry points (entrances) to rentail.space, including organic search, paid ads, social media, and direct traffic. Track bounce rates, session depth, conversion paths, and UTM attribution to optimize acquisition channels and user onboarding.",
+        "Performance metrics for all entry points (entrances) to rentail.space.",
     },
     {
       label: "All centers",
       to: "/admin/centers",
       description:
-        "Complete database of shopping centers collected from Google Places API, enriched with AI-extracted details, website scraping, and manual curation. Includes property metadata, geographic coordinates, space inventory, ownership information, and enrichment status for data quality audits.",
+        "Complete database of shopping centers collected from Google Places API.",
     },
     {
       label: "API Usage",
       to: "/admin/api-usage",
-      description:
-        "Monitor consumption and costs across external APIs including Anthropic Claude, Google Places, Google Geocoding, SerpAPI, and Resend. Track usage patterns, rate limits, projected monthly spend, and cost anomalies to manage infrastructure budget and prevent overages.",
+      description: "Consumption and costs across external APIs.",
     },
   ],
 };
@@ -101,6 +99,12 @@ function AdminLinks() {
           <CardContent>
             <ActiveLink to={link.to} className="flex flex-col gap-2">
               <h3 className="font-bold text-lg">{link.label}</h3>
+              <LoadingImage
+                src={`/images/${link.to}.png`}
+                alt={link.label}
+                figureClassName="border-b-2 border-black"
+                maxHeight={200}
+              />
               <p className="whitespace-break-spaces text-gray-500">
                 {link.description}
               </p>
