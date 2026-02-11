@@ -6,7 +6,12 @@ import PageLoadingBouncer from "~/components/ui/PageLoadingBouncer";
 import { verifyAdmin } from "~/lib/sessions.server";
 
 export const handle = {
-  headerLinks: [],
+  headerLinks: [
+    {
+      label: "Admin Dashboard",
+      to: "/admin",
+    },
+  ],
 
   dropdownLinks: [
     {
@@ -94,7 +99,7 @@ export default function Admin() {
 function AdminLinks() {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-      {[...handle.headerLinks, ...handle.dropdownLinks].map((link) => (
+      {handle.dropdownLinks.map((link) => (
         <Card key={link.to} className="bg-secondary-background text-foreground">
           <CardContent>
             <ActiveLink to={link.to} className="flex flex-col gap-2">
