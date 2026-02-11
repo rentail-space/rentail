@@ -222,8 +222,8 @@ importers:
         specifier: ^2.0.7
         version: 2.0.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       streamdown:
-        specifier: ^2.1.0
-        version: 2.1.0(react@19.2.4)
+        specifier: ^2.2.0
+        version: 2.2.0(react@19.2.4)
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.4.0
@@ -5047,8 +5047,8 @@ packages:
   remeda@2.33.4:
     resolution: {integrity: sha512-ygHswjlc/opg2VrtiYvUOPLjxjtdKvjGz1/plDhkG66hjNjFr1xmfrs2ClNFo/E6TyUFiwYNh53bKV26oBoMGQ==}
 
-  remend@1.1.0:
-    resolution: {integrity: sha512-JENGyuIhTwzUfCarW43X4r9cehoqTo9QyYxfNDZSud2AmqeuWjZ5pfybasTa4q0dxTJAj5m8NB+wR+YueAFpxQ==}
+  remend@1.2.0:
+    resolution: {integrity: sha512-NbKrdWweTRuByPYErzQCNpNtsR9M1QQ0hK2UzmnmlSaEqHnkQ5Korlyi8KpdbOJ0rImJfRy4EAY0uDxYnL9Plw==}
 
   remove-markdown@0.6.3:
     resolution: {integrity: sha512-Qvp2p0Q1irE7AaJO7QemJe04HdObHylJrG+q4hszvPlYp7q4EvfINpEIaIEFdB+3XTDp1h6fiyT60ae00gmRow==}
@@ -5337,8 +5337,8 @@ packages:
   stream-shift@1.0.3:
     resolution: {integrity: sha512-76ORR0DO1o1hlKwTbi/DM3EXWGf3ZJYO8cXX5RJwnul2DEg2oyoZyjLNoQM8WsvZiFKCRfC1O0J7iCvie3RZmQ==}
 
-  streamdown@2.1.0:
-    resolution: {integrity: sha512-u9gWd0AmjKg1d+74P44XaPlGrMeC21oDOSIhjGNEYMAttDMzCzlJO6lpTyJ9JkSinQQF65YcK4eOd3q9iTvULw==}
+  streamdown@2.2.0:
+    resolution: {integrity: sha512-Y51o1I/sjpAy4Yn7j7R4TbUl9gcUZ7BTrHS+68IhrUBoYpNQZ28z06vww1MBFu4mSwvgF8xQIxIH2b9S9IHDyQ==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
 
@@ -11001,7 +11001,7 @@ snapshots:
 
   remeda@2.33.4: {}
 
-  remend@1.1.0: {}
+  remend@1.2.0: {}
 
   remove-markdown@0.6.3: {}
 
@@ -11378,7 +11378,7 @@ snapshots:
 
   stream-shift@1.0.3: {}
 
-  streamdown@2.1.0(react@19.2.4):
+  streamdown@2.2.0(react@19.2.4):
     dependencies:
       clsx: 2.1.1
       hast-util-to-jsx-runtime: 2.3.6
@@ -11391,10 +11391,11 @@ snapshots:
       remark-gfm: 4.0.1
       remark-parse: 11.0.0
       remark-rehype: 11.1.2
-      remend: 1.1.0
+      remend: 1.2.0
       tailwind-merge: 3.4.0
       unified: 11.0.5
       unist-util-visit: 5.1.0
+      unist-util-visit-parents: 6.0.2
     transitivePeerDependencies:
       - supports-color
 
