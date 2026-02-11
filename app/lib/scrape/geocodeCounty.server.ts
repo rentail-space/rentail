@@ -4,6 +4,7 @@
  */
 
 import { invariant } from "es-toolkit";
+import { DateTime } from "luxon";
 import ora from "ora";
 import zod from "zod";
 import { trackApiCall } from "~/lib/apiUsageTracker";
@@ -82,9 +83,9 @@ export async function geocodeCounty(
     url.searchParams.set("key", envVars.GOOGLE_PLACES_API_KEY);
 
     // Track API usage
-    const result = await trackApiCall(
+    const { data: result } = await trackApiCall(
       {
-        days: 30,
+        newerThan: DateTime.now().minus({ days: 30 }).toJSDate(),
         defaultValue: null,
         endpoint: "geocode",
         key: `geocode:${countyName.toLowerCase().replace(/\s+/g, "-")}`,

@@ -4,6 +4,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp } from "lucide-react";
+import { DateTime } from "luxon";
 import { Suspense } from "react";
 import { Await, useSearchParams } from "react-router";
 import { twMerge } from "tailwind-merge";
@@ -19,14 +20,19 @@ import {
 } from "~/components/ui/Table";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 import checkRankings from "~/lib/seo-rank/checkRanking.server";
+import { timeago } from "~/lib/time";
 import type { Route } from "./+types/admin.seo-rank";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const engine = getSearchEngine(
     new URL(request.url).searchParams.get("engine"),
   );
-  const data = checkRankings({ days: 30, engine, limit: 20 });
-  return { data };
+  const result = checkRankings({
+    engine,
+    limit: 20,
+    newerThan: DateTime.now().minus({ days: 30 }).toJSDate(),
+  });
+  return result;
 }
 
 const searchEngines = [
@@ -71,19 +77,25 @@ export default function RankingPage({ loaderData }: Route.ComponentProps) {
     <section className="space-y-4">
       <h1 className="text-center font-bold text-2xl">SEO Ranking</h1>
 
-      <Tabs value={engine} onValueChange={(value) => setEngine(value)}>
-        <TabsList>
-          {searchEngines.map((engine) => (
-            <TabsTrigger key={engine.id} value={engine.id}>
-              {engine.label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-      </Tabs>
+      <div className="flex items-center justify-between gap-2">
+        <Tabs value={engine} onValueChange={(value) => setEngine(value)}>
+          <TabsList>
+            {searchEngines.map((engine) => (
+              <TabsTrigger key={engine.id} value={engine.id}>
+                {engine.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+        <span>
+          Last updated {timeago(loaderData.newest, new Date())} (
+          {DateTime.fromJSDate(loaderData.newest).toFormat("yyyy-MM-dd")})
+        </span>
+      </div>
 
       <Suspense fallback={<LoadingProgress />}>
-        <Await resolve={loaderData.data}>
-          {(data) => <VisibleResults data={data} />}
+        <Await resolve={loaderData.results}>
+          {(results) => <VisibleResults data={results} />}
         </Await>
       </Suspense>
     </section>

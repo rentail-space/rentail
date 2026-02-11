@@ -9,7 +9,9 @@ import type { Source } from "./runAllQueries.server";
 import runAllQueries from "./runAllQueries.server";
 
 export default async function sendVisibilityAlert(): Promise<string> {
-  const byDate = await runAllQueries({ days: 10 });
+  const byDate = await runAllQueries({
+    newerThan: DateTime.now().minus({ days: 10 }).toJSDate(),
+  });
   await sendEmail({
     email: "assaf@labnotes.org",
     subject: "Visibility Alert",

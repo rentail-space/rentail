@@ -6,7 +6,6 @@
 
 import type { InputJsonValue } from "@prisma/client/runtime/client";
 import { invariant } from "es-toolkit";
-import { DateTime } from "luxon";
 import prisma from "~/lib/prisma.server";
 import envVars from "./env";
 
@@ -42,30 +41,30 @@ type Endpoint<S extends Service> = keyof (typeof API_PRICING)[S];
  * Track an API request
  *
  * @param params.service API service name
- * @param params.endpoint Specific endpoint called
- * @param params.defaultValue Default value to return if not in production
- * @param params.days Number of days to cache the result
- * @param params.key Cache key (eg `seo:${engine}:${term}`)
- * @param fn Function to run and track the cost
- * @returns Promise that resolves when tracking is complete
+ * @param params.endpoint - Specific endpoint called
+ * @param params.defaultValue - Default value to return if not in production
+ * @param params.newerThan - Use cache if the result is newer than this date
+ * @param params.key - Cache key (eg `seo:${engine}:${term}`)
+ * @param fn - Function to run and track the cost
+ * @returns The result of the function and the date it was created
  */
 export async function trackApiCall<T, S extends Service>(
   {
-    days,
     defaultValue,
     endpoint,
     key,
+    newerThan,
     service,
   }: {
-    days: number;
     defaultValue: T;
     endpoint: Endpoint<S>;
+    newerThan: Date;
     key: string;
     service: S;
   },
   fn: () => Promise<T>,
-): Promise<T> {
-  return await withCache({ key, days }, async () => {
+): Promise<{ data: T; createdAt: Date }> {
+  return await withCache({ key, newerThan }, async () => {
     if (!envVars.isProduction) return defaultValue;
 
     const month = new Date().toISOString().slice(0, 7); // "2026-01"
@@ -101,21 +100,24 @@ export async function trackApiCall<T, S extends Service>(
 }
 
 async function withCache<T>(
-  { days, key }: { days: number; key: string },
+  { newerThan, key }: { newerThan: Date; key: string },
   fn: () => Promise<T>,
-) {
-  const ago = DateTime.now().minus({ days }).toJSDate();
+): Promise<{ data: T; createdAt: Date }> {
   const cached = await prisma.cache.findUnique({
-    where: { key, createdAt: { gte: ago } },
+    where: { key, createdAt: { gte: newerThan } },
   });
-  if (cached) return cached.value as unknown as T;
+  if (cached)
+    return { data: cached.value as unknown as T, createdAt: cached.createdAt };
+
   const value = await fn();
+
+  const createdAt = new Date();
   await prisma.cache.upsert({
-    create: { key, value: value as unknown as InputJsonValue },
-    update: { value: value as unknown as InputJsonValue },
+    create: { key, value: value as unknown as InputJsonValue, createdAt },
+    update: { value: value as unknown as InputJsonValue, createdAt },
     where: { key },
   });
-  return value;
+  return { data: value, createdAt };
 }
 
 /**

@@ -4,6 +4,7 @@
  */
 
 import { invariant, mapAsync } from "es-toolkit";
+import { DateTime } from "luxon";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import ora, { type Ora } from "ora";
@@ -136,11 +137,8 @@ export async function nearbySearch({
   spinner.text = `Searching for shopping centers near ${location}`;
 
   // Call API with retry logic
-  const openPlaces = await searchNearbyRaw({ point, radiusMeters });
-  const structured = await mapAsync(
-    openPlaces,
-    async (place) => await prepareSave(place),
-  );
+  const { data } = await searchNearbyRaw({ point, radiusMeters });
+  const structured = await mapAsync(data, prepareSave);
 
   spinner.text = `Found ${structured.length} centers near ${location}`;
   return structured;
@@ -159,13 +157,16 @@ async function searchNearbyRaw({
 }: {
   point: { lat: number; lng: number };
   radiusMeters: number;
-}): Promise<PlacesAPIPlace[]> {
+}): Promise<{
+  data: PlacesAPIPlace[];
+  createdAt: Date;
+}> {
   return await trackApiCall(
     {
       service: "google-places",
       endpoint: "nearby-search",
       defaultValue: [],
-      days: 30,
+      newerThan: DateTime.now().minus({ days: 30 }).toJSDate(),
       key: `nearby-search:${point.lat.toFixed(3)},${point.lng.toFixed(3)}`,
     },
     async () => {
@@ -226,7 +227,7 @@ export async function updatePlaceDetails(property: Property) {
       service: "google-places",
       endpoint: "place-details",
       defaultValue: null,
-      days: 10,
+      newerThan: DateTime.now().minus({ days: 10 }).toJSDate(),
       key: `place-details:${property.googlePlaceID}`,
     },
     async () => {
@@ -346,12 +347,12 @@ async function downloadPhotos({
   for (let index = 0; index < download.length; index++) {
     const photo = download[index];
     try {
-      const buffer = await trackApiCall(
+      const { data: buffer } = await trackApiCall(
         {
           service: "google-places",
           endpoint: "photo",
           defaultValue: null,
-          days: 10,
+          newerThan: DateTime.now().minus({ days: 10 }).toJSDate(),
           key: `photo:${photo.name}:${photo.widthPx}x${photo.heightPx}`,
         },
         async () => {

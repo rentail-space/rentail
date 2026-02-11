@@ -10,7 +10,7 @@
  */
 
 import { ms } from "convert";
-import { delay, groupBy, mapAsync, partition } from "es-toolkit";
+import { delay, groupBy, mapAsync, maxBy, partition } from "es-toolkit";
 import { getJson } from "serpapi";
 import { trackApiCall } from "~/lib/apiUsageTracker";
 import { default as env } from "~/lib/env";
@@ -30,28 +30,33 @@ export type RankingResults = {
  * Check rankings for a given engine and return the top N results. Always
  * includes rentail.space.
  *
- * @param days - The number of days to cache the results.
+ * @param newerThan - The date to cache the results.
  * @param engine - The engine to check rankings for.
  * @param limit - The number of results to return.
- * @returns An array of objects with hostname and count.
+ * @returns The newest date and the top N results.
  */
 export default async function checkRankings({
-  days,
   engine,
   limit,
+  newerThan,
 }: {
-  days: number;
   engine: string;
   limit: number;
-}): Promise<{ hostname: string; count: number }[]> {
+  newerThan: Date;
+}): Promise<{
+  newest: Date;
+  results: { hostname: string; count: number }[];
+}> {
   const all = await mapAsync(terms, (term) =>
-    checkRankingWithSerpAPI({ days, engine, term }),
+    checkRankingWithSerpAPI({ engine, newerThan, term }),
   );
+  const newest =
+    maxBy(all, (result) => result.createdAt.getTime())?.createdAt ?? new Date();
 
   const hostnames = Object.entries(
     groupBy(
-      all.flatMap((query) =>
-        query.results.map((result) => new URL(result.link).hostname),
+      all.flatMap(({ data }) =>
+        data.results.map((result) => new URL(result.link).hostname),
       ),
       (hostname) => hostname,
     ),
@@ -63,26 +68,32 @@ export default async function checkRankings({
     hostnames,
     ({ hostname }) => hostname === "rentail.space",
   );
-  return [...rentail, ...allOther.slice(0, limit)].sort(
-    (a, b) => b.count - a.count,
-  );
+  return {
+    newest,
+    results: [...rentail, ...allOther.slice(0, limit)].sort(
+      (a, b) => b.count - a.count,
+    ),
+  };
 }
 
 /**
  * Check ranking using SerpAPI (recommended for production)
  */
 async function checkRankingWithSerpAPI({
-  days,
   engine,
+  newerThan,
   term,
 }: {
-  days: number;
   engine: string;
+  newerThan: Date;
   term: string;
-}): Promise<RankingResults> {
+}): Promise<{
+  data: RankingResults;
+  createdAt: Date;
+}> {
   return await trackApiCall(
     {
-      days,
+      newerThan,
       defaultValue: { engine, term, results: [] },
       endpoint: "search",
       key: `seo:${engine}:${term}`,

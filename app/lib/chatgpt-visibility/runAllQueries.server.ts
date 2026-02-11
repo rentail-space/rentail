@@ -21,30 +21,30 @@ export type Source = {
  * Runs all queries and returns the sources from all queries.  The queries are
  * run sequentially to avoid rate limits.
  *
- * @param cacheDays - The number of days to cache the results.
+ * @param newerThan - The date to cache the results.
  * @returns The sources from all queries grouped by date.
  */
 export default async function runAllQueries({
-  days,
+  newerThan,
 }: {
-  days: number;
+  newerThan: Date;
 }): Promise<[string, Source[]][]> {
   const sources: Source[] = [];
   const model = openai("gpt-5-chat-latest");
-  const createdAt = new Date();
+  const createdAt = DateTime.now().toJSDate();
 
   // Run queries sequentially to avoid rate limits
   for (let i = 0; i < queries.length; i++) {
     const query = queries[i];
     console.info(`Running query ${i + 1} of ${queries.length}`);
 
-    const source = await runSingleQuery({
-      days: days,
+    const { data } = await runSingleQuery({
       createdAt,
       model,
+      newerThan,
       ...query,
     });
-    sources.push(source);
+    sources.push(data);
   }
 
   const all = await prisma.visibilityCheck.findMany();
@@ -59,19 +59,22 @@ export default async function runAllQueries({
 async function runSingleQuery({
   category,
   createdAt,
-  days,
+  newerThan,
   model,
   query,
 }: {
   category: string;
   createdAt: Date;
-  days: number;
+  newerThan: Date;
   model: LanguageModelV3;
   query: string;
-}): Promise<Source> {
+}): Promise<{
+  data: Source;
+  createdAt: Date;
+}> {
   return await trackApiCall(
     {
-      days,
+      newerThan,
       defaultValue: { citations: [], query, category, id: "", createdAt },
       endpoint: "visibility",
       key: `seo:${category}:${query}`,

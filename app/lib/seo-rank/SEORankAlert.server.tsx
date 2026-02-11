@@ -1,5 +1,6 @@
 import { Section } from "@react-email/components";
 import { mapAsync } from "es-toolkit";
+import { DateTime } from "luxon";
 import { twMerge } from "tailwind-merge";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails.server";
@@ -7,10 +8,11 @@ import checkRankings from "./checkRanking.server";
 
 export default async function sendSEORankAlert(): Promise<string> {
   const engines = ["google", "google_ai_mode", "bing", "duckduckgo"];
-  const engineQueries = await mapAsync(engines, async (engine) => ({
-    engine,
-    queries: await checkRankings({ engine, days: 30, limit: 10 }),
-  }));
+  const newerThan = DateTime.now().minus({ days: 30 }).toJSDate();
+  const engineQueries = await mapAsync(engines, async (engine) => {
+    const { results } = await checkRankings({ engine, newerThan, limit: 10 });
+    return { engine, queries: results };
+  });
 
   await sendEmail({
     email: "assaf@labnotes.org",
