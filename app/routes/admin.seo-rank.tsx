@@ -87,10 +87,7 @@ export default function RankingPage({ loaderData }: Route.ComponentProps) {
             ))}
           </TabsList>
         </Tabs>
-        <span>
-          Last updated {timeago(loaderData.newest, new Date())} (
-          {DateTime.fromJSDate(loaderData.newest).toFormat("yyyy-MM-dd")})
-        </span>
+        <span>Updated {timeago(loaderData.newest, new Date())}</span>
       </div>
 
       <Suspense fallback={<LoadingProgress />}>
