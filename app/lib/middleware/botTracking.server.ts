@@ -103,7 +103,6 @@ export async function trackBotVisit(request: Request): Promise<void> {
       },
       update: {
         count: { increment: 1 },
-        ip,
         lastSeen: new Date(),
       },
       create: {

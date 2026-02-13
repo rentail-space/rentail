@@ -364,6 +364,11 @@ export async function signUpEmail({
   password: string;
   requestHeaders: Headers;
 }): Promise<Headers> {
+  // Is this email already in use? If so, sign in the user.
+  const existingUser = await prisma.user.findUnique({ where: { email } });
+  if (existingUser)
+    return await signInEmail({ email, password, requestHeaders });
+
   const session = await getSession(requestHeaders.get("Cookie"));
   const passwordHash = await bcrypt.hash(password, 10);
 
@@ -380,21 +385,20 @@ export async function signUpEmail({
     },
   });
   if (anonymousUser) {
-    const isAnonymous = false;
-    const isAdmin = adminEmails.includes(email);
     const updatedUser = await prisma.user.update({
-      data: { isAdmin, isAnonymous, name, email, passwordHash },
+      data: {
+        isAdmin: adminEmails.includes(email),
+        isAnonymous: false,
+        name,
+        email,
+        passwordHash,
+      },
       where: { id: anonymousUser.id },
     });
     await sendWelcomeEmail(updatedUser);
     if (envVars.isProduction) await sendNewUserNotification(updatedUser);
     return await createSession({ requestHeaders, userId: updatedUser.id });
   }
-
-  // Is this email already in use? If so, sign in the user.
-  const existingUser = await prisma.user.findUnique({ where: { email } });
-  if (existingUser)
-    return await signInEmail({ email, password, requestHeaders });
 
   // Create a new user account and return the session cookie.
   const newUser = await createAuthenticatedUser({

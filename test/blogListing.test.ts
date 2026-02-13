@@ -71,12 +71,10 @@ describe("Blog Listing", () => {
 
   describe("clicks blog post link", () => {
     beforeAll(async () => {
-      await page.goto("/");
       await page
         .locator(
           'a[href^="/blog/2025-12-19-why-hunkering-down-kills-momentum"]',
         )
-        .last()
         .click();
       await page.waitForURL(/.*\/blog\/.*/);
     });
