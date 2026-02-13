@@ -1,4 +1,4 @@
-import { groupBy, meanBy, sumBy } from "es-toolkit";
+import { meanBy, sumBy } from "es-toolkit";
 import {
   BotIcon,
   BubblesIcon,
@@ -100,25 +100,21 @@ function SquareAnalyticsCharts({
   until: DateTime;
   users: User[];
 }) {
-  const range = rangeOfDates(from, until);
-  const groupOfDays = range.length >= 21 ? 6 : 1;
-  const data = Object.entries(
-    groupBy(range, (date) => Math.floor(range.indexOf(date) / groupOfDays)),
-  ).map(([, dates]) => {
-    const startAt = dates[0].setZone("UTC").startOf("day");
-    const endAt = dates[dates.length - 1].setZone("UTC").endOf("day");
+  const buckets = rangeOf5dayBuckets(from, until);
+  const isDaily = until.diff(from, "days").days <= 14; // if the range is less than 14 days, show daily data
+  const data = buckets.map((bucket) => {
     const entries = analytics.filter(
       (entry) =>
-        DateTime.fromISO(entry.date, { zone: "UTC" }) >= startAt &&
-        DateTime.fromISO(entry.date, { zone: "UTC" }) <= endAt,
+        DateTime.fromISO(entry.date, { zone: "UTC" }) >= bucket.start &&
+        DateTime.fromISO(entry.date, { zone: "UTC" }) <= bucket.end,
     );
     return {
       chats: users.filter(
         (user) =>
-          user.createdAt >= startAt.toJSDate() &&
-          user.createdAt <= endAt.toJSDate(),
+          user.createdAt >= bucket.start.toJSDate() &&
+          user.createdAt <= bucket.end.toJSDate(),
       ).length,
-      date: startAt,
+      date: bucket.start,
       fromLLM: sumBy(
         entries.filter(
           (entry) =>
@@ -139,7 +135,7 @@ function SquareAnalyticsCharts({
           data={data}
           dataKey={key}
           fill={value.color}
-          groupDays={groupOfDays}
+          isDaily={isDaily}
           key={key}
           name={value.label}
           valueFormatter={value.valueFormatter}
@@ -149,15 +145,47 @@ function SquareAnalyticsCharts({
   );
 }
 
+function rangeOf5dayBuckets(
+  from: DateTime,
+  until: DateTime,
+): Array<{ start: DateTime; end: DateTime }> {
+  const buckets = [];
+  const totalDays = Math.ceil(until.diff(from, "days").days) + 1;
+
+  // If the range is less than or equal to 14 days, return a bucket of each day.
+  if (totalDays <= 14)
+    return rangeOfDates(from, until).map((date) => ({
+      start: date,
+      end: date.endOf("day"),
+    }));
+
+  // Start at 'until', iterate down to 'from', making 5-day buckets (last may be partial)
+  let cursor = until.setZone("UTC").endOf("day");
+  while (cursor >= from.startOf("day")) {
+    // Compute bucket start and end for this interval
+    const bucketEnd = cursor;
+    // For the final bucket, its start can't precede 'from'
+    const bucketStart =
+      bucketEnd.minus({ days: 4 }).startOf("day") < from.startOf("day")
+        ? from.startOf("day")
+        : bucketEnd.minus({ days: 4 }).startOf("day");
+    buckets.unshift({ start: bucketStart, end: bucketEnd });
+
+    // Move cursor to the next lower chunk
+    cursor = bucketStart.minus({ days: 1 }).endOf("day");
+  }
+  return buckets;
+}
+
 function SpecificChart({
   data,
   dataKey,
   fill,
-  groupDays,
+  isDaily,
   name,
   valueFormatter,
 }: {
-  groupDays: number;
+  isDaily: boolean;
   data: Array<{ date: DateTime }>;
   dataKey: DataKey<(typeof data)[number]>;
   fill: string;
@@ -196,10 +224,10 @@ function SpecificChart({
               labelFormatter={(value) => {
                 const from = DateTime.fromISO(value).startOf("day");
                 const to = from
-                  .plus({ days: groupDays })
+                  .plus({ days: isDaily ? 1 : 6 })
                   .minus({ days: 1 })
                   .startOf("day");
-                return from.equals(to)
+                return isDaily
                   ? from.toFormat("MMM d")
                   : `${from.toFormat("MMM d")} — ${to.toFormat("MMM d")}`;
               }}
