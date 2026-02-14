@@ -1,7 +1,10 @@
 import { DateTime } from "luxon";
+import { trackBotVisit } from "~/lib/middleware/botTracking.server";
 import { recentNewsItems } from "~/lib/newsItems.server";
+import type { Route } from "./+types/news.sitemap[.]md";
 
-export async function loader() {
+export async function loader({ request }: Route.LoaderArgs) {
+  await trackBotVisit(request);
   const posts = await recentNewsItems();
   const markdown = `
 # Rentail News Sitemap

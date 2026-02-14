@@ -1,8 +1,10 @@
 import { DateTime } from "luxon";
 import { loadBlogPost } from "~/lib/blogPosts.server";
+import { trackBotVisit } from "~/lib/middleware/botTracking.server";
 import type { Route } from "./+types/blog.$slug";
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function loader({ params, request }: Route.LoaderArgs) {
+  await trackBotVisit(request);
   try {
     const { slug } = params;
     const post = await loadBlogPost(slug);

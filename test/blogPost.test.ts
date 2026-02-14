@@ -12,6 +12,7 @@
 import { last } from "es-toolkit";
 import { type Page, type Response, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
+import prisma from "~/lib/prisma.server";
 import { goto, port } from "~/test/helpers/launchBrowser";
 
 describe("Blog Post Rendering", () => {
@@ -181,8 +182,10 @@ describe("Blog Post Rendering", () => {
     let headers: Headers;
 
     beforeAll(async () => {
+      await prisma.botVisit.deleteMany();
       const response = await fetch(
         `http://localhost:${port}/blog/2025-12-19-why-hunkering-down-kills-momentum.md`,
+        { headers: { "User-Agent": "Googlebot" } },
       );
       content = await response.text();
       headers = response.headers;
@@ -252,6 +255,14 @@ describe("Blog Post Rendering", () => {
       const parts = content.split("---").filter(Boolean);
       expect(last(parts)).toContain(
         "**More blog posts:** [All blog posts](/blog/sitemap.md)",
+      );
+    });
+
+    it("track blog post visit", async () => {
+      const visits = await prisma.botVisit.findMany();
+      expect(visits).toHaveLength(1);
+      expect(visits[0].path).toBe(
+        "/blog/2025-12-19-why-hunkering-down-kills-momentum.md",
       );
     });
   });

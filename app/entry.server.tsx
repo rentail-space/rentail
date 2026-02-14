@@ -86,6 +86,7 @@ export function handleDataRequest(
 ) {
   const start = Date.now();
   console.info("%s %s", request.method, request.url);
+  trackBotVisit(request); // NOTE: run asynchronously
   waitForResponse(response, start).then((duration) => {
     console.info(
       "%s %s => %d (%dms)",

@@ -1,9 +1,11 @@
 import { invariant } from "es-toolkit";
 import { DateTime } from "luxon";
+import { trackBotVisit } from "~/lib/middleware/botTracking.server";
 import { loadNewsItem } from "~/lib/newsItems.server";
 import type { Route } from "./+types/news.$slug";
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function loader({ params, request }: Route.LoaderArgs) {
+  await trackBotVisit(request);
   try {
     const { slug } = params;
     invariant(slug, "Slug is required");

@@ -11,6 +11,7 @@
 
 import { type Page, type Response, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
+import prisma from "~/lib/prisma.server";
 import { goto, port } from "~/test/helpers/launchBrowser";
 
 describe("News Post Rendering", () => {
@@ -170,8 +171,10 @@ describe("News Post Rendering", () => {
     let headers: Headers;
 
     beforeAll(async () => {
+      await prisma.botVisit.deleteMany();
       const response = await fetch(
         `http://localhost:${port}/news/2026-01-20-launch.md`,
+        { headers: { "User-Agent": "Googlebot" } },
       );
       content = await response.text();
       headers = response.headers;
@@ -208,6 +211,12 @@ describe("News Post Rendering", () => {
       expect(bodySection).toContain(
         "**More news:** [All news](/news/sitemap.md)",
       );
+    });
+
+    it("track news post visit", async () => {
+      const visits = await prisma.botVisit.findMany();
+      expect(visits).toHaveLength(1);
+      expect(visits[0].path).toBe("/news/2026-01-20-launch.md");
     });
   });
 

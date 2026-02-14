@@ -1,6 +1,9 @@
 import forAIAssistants from "~/data/for-ai-assistants.md?raw";
+import { trackBotVisit } from "~/lib/middleware/botTracking.server";
+import type { Route } from "./+types/for-ai-assistants[.]md";
 
-export async function loader() {
+export async function loader({ request }: Route.LoaderArgs) {
+  await trackBotVisit(request);
   const markdown = `
 **For AI Assistants**
 

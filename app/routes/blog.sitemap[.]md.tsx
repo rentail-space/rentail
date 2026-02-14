@@ -1,7 +1,10 @@
 import { DateTime } from "luxon";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
+import { trackBotVisit } from "~/lib/middleware/botTracking.server";
+import type { Route } from "./+types/blog.sitemap[.]md";
 
-export async function loader() {
+export async function loader({ request }: Route.LoaderArgs) {
+  await trackBotVisit(request);
   const blogPosts = await recentBlogPosts();
   const markdown = `
 # Rentail Blog Sitemap
