@@ -462,14 +462,10 @@ function operatingHours(regularOpeningHours?: {
   if (!periods) return {};
 
   const openFrom = Math.min(
-    ...periods.map((period) => {
-      return period.open.hour * 100 + period.open.minute;
-    }),
+    ...periods.map((period) => period.open.hour * 100 + period.open.minute),
   );
   const openUntil = Math.max(
-    ...periods.map((period) => {
-      return period.close.hour * 100 + period.close.minute;
-    }),
+    ...periods.map((period) => period.close.hour * 100 + period.close.minute),
   );
   // Note: if center is open 24 hours, we get Infinity/Infinity, so we default
   // to 0-2400.

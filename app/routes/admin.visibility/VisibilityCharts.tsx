@@ -60,14 +60,12 @@ export default function VisibilityCharts({
 
   // Group by day so we have score, ratio, etc calculated from all
   // queries for that day
-  const dailyTotals = groupedByDate.map(({ date, queries }) => {
-    return {
-      date,
-      rentail: sumBy(queries, (query) => query.rentail),
-      score: sumBy(queries, (query) => query.score),
-      ratio: sumBy(queries, (query) => query.ratio),
-    };
-  });
+  const dailyTotals = groupedByDate.map(({ date, queries }) => ({
+    date,
+    rentail: sumBy(queries, (query) => query.rentail),
+    score: sumBy(queries, (query) => query.score),
+    ratio: sumBy(queries, (query) => query.ratio),
+  }));
 
   // Aggregate by week so we have average score, ratio, etc for that week.
   const weeklyAggregates = Object.entries(

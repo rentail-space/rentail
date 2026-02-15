@@ -49,8 +49,8 @@ export interface ButtonProps
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, render, ...props }, ref) => {
-    return useRender({
+  ({ className, variant, size, render, ...props }, ref) =>
+    useRender({
       defaultTagName: "button",
       render,
       props: {
@@ -58,8 +58,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className: twMerge(buttonVariants({ variant, size, className })),
         ref,
       },
-    });
-  },
+    }),
 );
 Button.displayName = "Button";
 

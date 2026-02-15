@@ -50,20 +50,18 @@ const ActiveLink = React.forwardRef<HTMLAnchorElement, ActiveLinkProps>(
   (
     { className, disabled, variant, size, bg, to, viewTransition, ...props },
     ref,
-  ) => {
-    return (
-      <Link
-        ref={ref}
-        className={twMerge(
-          activeLinkVariants({ variant, size, disabled, className, bg }),
-        )}
-        to={to}
-        rel="noopener noreferrer"
-        viewTransition={viewTransition}
-        {...props}
-      />
-    );
-  },
+  ) => (
+    <Link
+      ref={ref}
+      className={twMerge(
+        activeLinkVariants({ variant, size, disabled, className, bg }),
+      )}
+      to={to}
+      rel="noopener noreferrer"
+      viewTransition={viewTransition}
+      {...props}
+    />
+  ),
 );
 ActiveLink.displayName = "ActiveLink";
 

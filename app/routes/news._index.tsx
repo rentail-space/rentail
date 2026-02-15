@@ -76,20 +76,18 @@ export default function News({
 
       <section>
         <div className="container mx-auto max-w-4xl">
-          {loaderData.posts.map((post) => {
-            return (
-              <Link key={post.slug} to={`/news/${post.slug}`}>
-                <div className="flex flex-col gap-2">
-                  <h2 className="font-bold text-black text-xl">{post.title}</h2>
-                  <p className="text-gray-500">{post.summary}</p>
-                  <p className="flex items-center gap-1 text-blue-500">
-                    <span className="font-bold">Read more</span>
-                    <ArrowRightIcon className="h-4 w-4" fill="currentColor" />
-                  </p>
-                </div>
-              </Link>
-            );
-          })}
+          {loaderData.posts.map((post) => (
+            <Link key={post.slug} to={`/news/${post.slug}`}>
+              <div className="flex flex-col gap-2">
+                <h2 className="font-bold text-black text-xl">{post.title}</h2>
+                <p className="text-gray-500">{post.summary}</p>
+                <p className="flex items-center gap-1 text-blue-500">
+                  <span className="font-bold">Read more</span>
+                  <ArrowRightIcon className="h-4 w-4" fill="currentColor" />
+                </p>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
     </main>

@@ -40,11 +40,9 @@ export const middleware: Route.MiddlewareFunction[] = [
   loggingMiddleware,
 ];
 
-export const headers: HeadersFunction = () => {
-  return {
-    "Document-Policy": "js-profiling",
-  };
-};
+export const headers: HeadersFunction = () => ({
+  "Document-Policy": "js-profiling",
+});
 
 export const links: LinksFunction = () => [
   { href: "/favicon.ico", rel: "icon", type: "image/x-icon", sizes: "any" },
