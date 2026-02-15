@@ -4,17 +4,20 @@ allowedDeprecatedVersions:
 ignoredBuiltDependencies:
   - yarn
 
+minimumReleaseAge: 2880
+minimumReleaseAgeExclude:
+  - "@biomejs/biome"
+  - "@biomejs/*"
+
 onlyBuiltDependencies:
   - "@prisma/client"
   - "@prisma/engines"
   - "@sentry/cli"
   - "@tailwindcss/oxide"
+  - bcrypt
+  - core-js
   - esbuild
   - msw
   - prisma
-  - bcrypt
   - protobufjs
   - sharp
-
-minimumReleaseAge: 2880
-minimumReleaseAgeExclude:
