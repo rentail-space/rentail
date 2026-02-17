@@ -1,6 +1,6 @@
 import tsconfigPaths from "vite-tsconfig-paths";
-import { defineConfig } from "vitest/config";
 import type { ParsedStack } from "vitest";
+import { defineConfig } from "vitest/config";
 
 process.env.NODE_ENV = "test";
 
@@ -30,7 +30,7 @@ export default defineConfig({
     printConsoleTrace: !process.env.CI,
     reporters: [process.env.GITHUB_ACTIONS ? "github-actions" : "verbose"],
     setupFiles: "test/helpers/testSuiteSetup.ts",
-    teardownTimeout: 3_000, // 3 seconds - Prisma disconnect will timeout anyway on macOS
+    teardownTimeout: 5_000, // 5 seconds - Prisma disconnect will timeout anyway on macOS
     testTimeout: 30_000, // 30 seconds
 
     onConsoleLog: (log: string, type: "stdout" | "stderr") => {
