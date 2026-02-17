@@ -18,7 +18,11 @@ export default function PageHeader() {
   >[];
   const { headerLinks, dropdownLinks } =
     last(
-      matches.filter((match) => match.handle && ("headerLinks" in match.handle || "secondaryLinks" in match.handle)),
+      matches.filter(
+        (match) =>
+          match.handle &&
+          ("headerLinks" in match.handle || "secondaryLinks" in match.handle),
+      ),
     )?.handle || {};
 
   return (
@@ -36,22 +40,22 @@ export default function PageHeader() {
 function HeaderLinks({ links }: { links: HeaderLink[] }) {
   return (
     <nav className="hidden items-center gap-6 whitespace-nowrap md:flex">
-        {links.map((link) => (
-          <NavLink
-            key={link.to}
-            to={link.to}
-            className={({ isActive }) =>
-              twMerge(
-                "whitespace-nowrap font-bold text-black text-sm",
-                "transition-colors hover:text-[hsl(37,92%,65%)]",
-                isActive && "text-[hsl(37,92%,65%)]",
-              )
-            }
-            viewTransition
-          >
-            {link.label}
-          </NavLink>
-        ))}
+      {links.map((link) => (
+        <NavLink
+          key={link.to}
+          to={link.to}
+          className={({ isActive }) =>
+            twMerge(
+              "whitespace-nowrap font-bold text-black text-sm",
+              "transition-colors hover:text-[hsl(37,92%,65%)]",
+              isActive && "text-[hsl(37,92%,65%)]",
+            )
+          }
+          viewTransition
+        >
+          {link.label}
+        </NavLink>
+      ))}
     </nav>
   );
 }
