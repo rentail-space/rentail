@@ -83,13 +83,13 @@ jobs:
         run: pnpm vitest run
         env:
           ANTHROPIC_API_KEY: "***REMOVED***"
-          SESSION_SECRET: "***REMOVED***"
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
           DEBUG: ""
           NODE_OPTIONS: "--expose-gc --max-old-space-size=3096"
           OPENAI_API_KEY: "***REMOVED***"
           REDIS_URL: "redis://localhost:6379"
           RESEND_API_KEY: "re_"
+          SESSION_SECRET: "secret"
 
       - name: Upload Playwright Test Results
         uses: actions/upload-artifact@v4
