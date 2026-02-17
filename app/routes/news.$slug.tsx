@@ -1,6 +1,6 @@
 import { invariant } from "es-toolkit";
-import { DateTime } from "luxon";
 import { Link, redirect } from "react-router";
+import { formatDateMed } from "~/lib/temporal";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
@@ -130,7 +130,7 @@ export default function NewsPost({ loaderData }: { loaderData: NewsItem }) {
                   name: "Rentail.space",
                   url: "https://rentail.space",
                 },
-                dateline: `LOS ANGELES, CA — ${DateTime.fromISO(published, { zone: "utc" }).toLocaleString(DateTime.DATE_MED)}`,
+                dateline: `LOS ANGELES, CA — ${formatDateMed(published)}`,
                 datePublished: published,
                 headline: summary,
                 inLanguage: "en-US",

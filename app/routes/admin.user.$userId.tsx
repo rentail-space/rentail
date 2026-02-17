@@ -1,7 +1,7 @@
 import type { TextUIPart } from "ai";
 import { ArrowLeft, ArrowRight, CircleCheck, InfoIcon } from "lucide-react";
-import { DateTime } from "luxon";
 import type { User } from "prisma/generated/client";
+import { formatDatetimeFull } from "~/lib/temporal";
 import type {
   ChatGetPayload,
   PropertyGetPayload,
@@ -119,12 +119,7 @@ function UserInfoCard({ user }: { user: User }) {
               .map(([key, value]) => (
                 <Row key={key} title={`UTM ${key}`} value={value} />
               ))}
-          <Row
-            title="Created"
-            value={DateTime.fromJSDate(user.createdAt).toLocaleString(
-              DateTime.DATETIME_FULL,
-            )}
-          />
+          <Row title="Created" value={formatDatetimeFull(user.createdAt)} />
         </TableBody>
       </Table>
     </details>

@@ -1,5 +1,5 @@
-import { DateTime } from "luxon";
 import prisma from "~/lib/prisma.server";
+import { daysAgo } from "~/lib/temporal";
 import { verifyAdmin } from "~/lib/sessions.server";
 import type { Route } from "./+types/route";
 import RecentVisibility from "./RecentVisibility";
@@ -11,7 +11,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   return await prisma.visibilityCheck.findMany({
     orderBy: { createdAt: "desc" },
     where: {
-      createdAt: { gte: DateTime.now().minus({ days: 90 }).toJSDate() },
+      createdAt: { gte: daysAgo(90) },
     },
   });
 }

@@ -1,3 +1,4 @@
+import { Temporal } from "@js-temporal/polyfill";
 import { meanBy, sumBy } from "es-toolkit";
 import {
   BotIcon,
@@ -5,7 +6,6 @@ import {
   ClockIcon,
   PersonStandingIcon,
 } from "lucide-react";
-import { DateTime } from "luxon";
 import type { User } from "prisma/generated/client";
 import { Suspense } from "react";
 import { Await } from "react-router";
@@ -65,8 +65,8 @@ export default function AnalyticsCharts({
   users,
 }: {
   analytics: Promise<Analytics[]>;
-  from: DateTime;
-  until: DateTime;
+  from: Temporal.PlainDate;
+  until: Temporal.PlainDate;
   users: User[];
 }) {
   return (
@@ -96,23 +96,33 @@ function SquareAnalyticsCharts({
   users,
 }: {
   analytics: Analytics[];
-  from: DateTime;
-  until: DateTime;
+  from: Temporal.PlainDate;
+  until: Temporal.PlainDate;
   users: User[];
 }) {
   const buckets = rangeOf5dayBuckets(from, until);
-  const isDaily = until.diff(from, "days").days <= 14; // if the range is less than 14 days, show daily data
+  const totalDays = from
+    .until(until, { largestUnit: "day", smallestUnit: "day" })
+    .total("days");
+  const isDaily = totalDays <= 14; // if the range is less than 14 days, show daily data
   const data = buckets.map((bucket) => {
-    const entries = analytics.filter(
-      (entry) =>
-        DateTime.fromISO(entry.date, { zone: "UTC" }) >= bucket.start &&
-        DateTime.fromISO(entry.date, { zone: "UTC" }) <= bucket.end,
-    );
+    const entries = analytics.filter((entry) => {
+      const entryDate = Temporal.PlainDate.from(
+        `${entry.date.slice(0, 4)}-${entry.date.slice(4, 6)}-${entry.date.slice(6, 8)}`,
+      );
+      return (
+        Temporal.PlainDate.compare(entryDate, bucket.start.toString()) >= 0 &&
+        Temporal.PlainDate.compare(entryDate, bucket.end.toString()) <= 0
+      );
+    });
+
     return {
       chats: users.filter(
         (user) =>
-          user.createdAt >= bucket.start.toJSDate() &&
-          user.createdAt <= bucket.end.toJSDate(),
+          user.createdAt.toISOString().localeCompare(bucket.start.toString()) >=
+            0 &&
+          user.createdAt.toISOString().localeCompare(bucket.end.toString()) <=
+            0,
       ).length,
       date: bucket.start,
       fromLLM: sumBy(
@@ -146,33 +156,32 @@ function SquareAnalyticsCharts({
 }
 
 function rangeOf5dayBuckets(
-  from: DateTime,
-  until: DateTime,
-): Array<{ start: DateTime; end: DateTime }> {
-  const buckets = [];
-  const totalDays = Math.ceil(until.diff(from, "days").days) + 1;
+  from: Temporal.PlainDate,
+  until: Temporal.PlainDate,
+): Array<{ start: Temporal.PlainDate; end: Temporal.PlainDate }> {
+  const buckets: Array<{ start: Temporal.PlainDate; end: Temporal.PlainDate }> =
+    [];
+  const totalDays = from
+    .until(until, { largestUnit: "day", smallestUnit: "day" })
+    .total("days");
 
   // If the range is less than or equal to 14 days, return a bucket of each day.
   if (totalDays <= 14)
     return rangeOfDates(from, until).map((date) => ({
       start: date,
-      end: date.endOf("day"),
+      end: date.add({ days: 1 }),
     }));
 
   // Start at 'until', iterate down to 'from', making 5-day buckets (last may be partial)
-  let cursor = until.setZone("UTC").endOf("day");
-  while (cursor >= from.startOf("day")) {
+  let cursor = until.subtract({ days: 5 });
+  while (Temporal.PlainDate.compare(cursor, from) >= 0) {
     // Compute bucket start and end for this interval
-    const bucketEnd = cursor;
     // For the final bucket, its start can't precede 'from'
-    const bucketStart =
-      bucketEnd.minus({ days: 4 }).startOf("day") < from.startOf("day")
-        ? from.startOf("day")
-        : bucketEnd.minus({ days: 4 }).startOf("day");
-    buckets.unshift({ start: bucketStart, end: bucketEnd });
+    const candidateStart = cursor.subtract({ days: 5 });
+    buckets.unshift({ start: candidateStart, end: cursor });
 
     // Move cursor to the next lower chunk
-    cursor = bucketStart.minus({ days: 1 }).endOf("day");
+    cursor = cursor.subtract({ days: 5 });
   }
   return buckets;
 }
@@ -186,7 +195,7 @@ function SpecificChart({
   valueFormatter,
 }: {
   isDaily: boolean;
-  data: Array<{ date: DateTime }>;
+  data: Array<{ date: Temporal.PlainDate }>;
   dataKey: DataKey<(typeof data)[number]>;
   fill: string;
   name: string;
@@ -199,7 +208,7 @@ function SpecificChart({
         margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
       >
         <CartesianGrid vertical={false} />
-        <XAxis dataKey={({ date }) => date.toFormat("yyyy-MM-dd")} />
+        <XAxis dataKey={({ date }) => date.toString()} />
         <YAxis
           allowDecimals={false}
           tickFormatter={valueFormatter}
@@ -222,14 +231,11 @@ function SpecificChart({
           content={
             <ChartTooltipContent
               labelFormatter={(value) => {
-                const from = DateTime.fromISO(value).startOf("day");
-                const to = from
-                  .plus({ days: isDaily ? 1 : 6 })
-                  .minus({ days: 1 })
-                  .startOf("day");
-                return isDaily
-                  ? from.toFormat("MMM d")
-                  : `${from.toFormat("MMM d")} — ${to.toFormat("MMM d")}`;
+                const from = Temporal.PlainDate.from(value);
+                const to = Temporal.PlainDate.from(value)
+                  .add({ days: isDaily ? 1 : 6 })
+                  .subtract({ days: 1 });
+                return isDaily ? from.toString() : `${from} — ${to}`;
               }}
               formatter={(value, name) => (
                 <div className="grid w-full grid-cols-2 gap-2">
@@ -247,14 +253,15 @@ function SpecificChart({
   );
 }
 
-function rangeOfDates(from: DateTime, until: DateTime): DateTime[] {
-  const allDates: DateTime[] = [];
-  for (
-    let current = from;
-    current <= until;
-    current = current.plus({ days: 1 })
-  )
+function rangeOfDates(
+  from: Temporal.PlainDate,
+  until: Temporal.PlainDate,
+): Temporal.PlainDate[] {
+  const allDates: Temporal.PlainDate[] = [];
+  let current = from;
+  while (Temporal.PlainDate.compare(current, until) <= 0) {
     allDates.push(current);
-
+    current = current.add({ days: 1 });
+  }
   return allDates;
 }

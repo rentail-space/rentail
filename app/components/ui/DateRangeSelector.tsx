@@ -1,4 +1,4 @@
-import { DateTime } from "luxon";
+import { Temporal } from "@js-temporal/polyfill";
 import { useSearchParams } from "react-router";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
 
@@ -16,24 +16,24 @@ const periods = [14, 30, 90];
  *
  * @example
  * const { from, until, period, today, setRange } = useRangeSelection();
- * setRange(today.minus({ days: 14 }), today);
+ * setRange(today.subtract({ days: 14 }), today);
  *
  * @returns The start and end dates and a function to set the range and the today's date.
  */
 export function useRangeSelection(): {
-  from: DateTime<boolean>;
+  from: Temporal.PlainDate;
   period: number;
-  setRange: (from: DateTime, until: DateTime) => void;
-  today: DateTime<boolean>;
-  until: DateTime<boolean>;
+  setRange: (from: Temporal.PlainDate, until: Temporal.PlainDate) => void;
+  today: Temporal.PlainDate;
+  until: Temporal.PlainDate;
 } {
   const [searchParams, setSearchParams] = useSearchParams();
   const { from, period, until, today } = parseDateRange(searchParams);
-  const setRange = (from: DateTime, until: DateTime) => {
+  const setRange = (from: Temporal.PlainDate, until: Temporal.PlainDate) => {
     setSearchParams(
       (params) => {
-        params.set("from", from.toISODate() ?? "");
-        params.set("until", until.toISODate() ?? "");
+        params.set("from", from.toString());
+        params.set("until", until.toString());
         return params;
       },
       { replace: true, viewTransition: true },
@@ -52,30 +52,39 @@ export function useRangeSelection(): {
  * @returns The start and end dates and the today's date.
  */
 export function parseDateRange(searchParams: URLSearchParams): {
-  from: DateTime;
+  from: Temporal.PlainDate;
   period: number;
-  until: DateTime;
-  today: DateTime;
+  until: Temporal.PlainDate;
+  today: Temporal.PlainDate;
 } {
-  const today = DateTime.utc();
-  const until = DateTime.fromISO(searchParams.get("until") ?? "")
-    .setZone("utc")
-    .startOf("day");
-  const from = DateTime.fromISO(searchParams.get("from") ?? "")
-    .setZone("utc")
-    .startOf("day");
+  const today = Temporal.Now.plainDateISO("UTC");
+
+  let until: Temporal.PlainDate;
+  try {
+    until = Temporal.PlainDate.from(searchParams.get("until") ?? "");
+  } catch {
+    until = today;
+  }
+
+  let from: Temporal.PlainDate;
+  try {
+    from = Temporal.PlainDate.from(searchParams.get("from") ?? "");
+  } catch {
+    from = today.subtract({ days: periods[1] });
+  }
+
+  const todayDate = today.toString();
+  const untilDate = until.toString();
   const period =
-    until.toISODate() === today.toISODate()
-      ? Math.floor(today.diff(from, "days").days)
+    untilDate === todayDate
+      ? Math.floor(
+          from
+            .until(until, { largestUnit: "day", smallestUnit: "day" })
+            .total("hours") / 24,
+        )
       : periods[1];
-  return {
-    from: from.isValid
-      ? from
-      : today.minus({ days: periods[1] }).startOf("day"),
-    period,
-    today,
-    until: until.isValid ? until : today.startOf("day"),
-  };
+
+  return { from, period, today, until };
 }
 
 /**
@@ -90,7 +99,7 @@ export default function DateRangeSelector() {
     <Tabs
       value={period}
       onValueChange={(value) => {
-        setRange(today.minus({ days: Number(value) }), today);
+        setRange(today.subtract({ days: Number(value) }), today);
       }}
     >
       <TabsList>

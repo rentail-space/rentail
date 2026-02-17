@@ -1,5 +1,4 @@
 import { Feed } from "feed";
-import { DateTime } from "luxon";
 import { marked } from "marked";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
 
@@ -36,9 +35,7 @@ export async function loader() {
       const content =
         `<img src="${imageURL}" alt="${alt}" />` +
         (await marked.parse(body, { gfm: true }));
-      const publishedDate = DateTime.fromISO(published, {
-        zone: "utc",
-      }).toJSDate();
+      const publishedDate = new Date(published);
       feed.addItem({
         content,
         date: publishedDate,

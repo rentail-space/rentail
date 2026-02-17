@@ -1,4 +1,3 @@
-import { DateTime } from "luxon";
 import { trackBotVisit } from "~/lib/middleware/botTracking.server";
 import { recentNewsItems } from "~/lib/newsItems.server";
 import type { Route } from "./+types/news.sitemap[.]md";
@@ -16,9 +15,7 @@ This is a sitemap of all news articles in markdown format for AI agents.
 ${posts
   .map(
     (post) =>
-      `- [${post.title}](/news/${post.slug}) - ${DateTime.fromISO(
-        post.published,
-      ).toISODate()}`,
+      `- [${post.title}](/news/${post.slug}) - ${post.published.toString().slice(0, 10)}`,
   )
   .join("\n")}
 

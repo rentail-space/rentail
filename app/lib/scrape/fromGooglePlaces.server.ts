@@ -4,8 +4,8 @@
  */
 
 import { invariant, mapAsync } from "es-toolkit";
-import { DateTime } from "luxon";
 import { mkdir, writeFile } from "node:fs/promises";
+import { daysAgo } from "~/lib/temporal";
 import { join } from "node:path";
 import ora, { type Ora } from "ora";
 import type { Property } from "prisma/generated/client";
@@ -166,7 +166,7 @@ async function searchNearbyRaw({
       service: "google-places",
       endpoint: "nearby-search",
       defaultValue: [],
-      newerThan: DateTime.now().minus({ days: 30 }).toJSDate(),
+      newerThan: daysAgo(30),
       key: `nearby-search:${point.lat.toFixed(3)},${point.lng.toFixed(3)}`,
     },
     async () => {
@@ -227,7 +227,7 @@ export async function updatePlaceDetails(property: Property) {
       service: "google-places",
       endpoint: "place-details",
       defaultValue: null,
-      newerThan: DateTime.now().minus({ days: 10 }).toJSDate(),
+      newerThan: daysAgo(10),
       key: `place-details:${property.googlePlaceID}`,
     },
     async () => {
@@ -352,7 +352,7 @@ async function downloadPhotos({
           service: "google-places",
           endpoint: "photo",
           defaultValue: null,
-          newerThan: DateTime.now().minus({ days: 10 }).toJSDate(),
+          newerThan: daysAgo(10),
           key: `photo:${photo.name}:${photo.widthPx}x${photo.heightPx}`,
         },
         async () => {

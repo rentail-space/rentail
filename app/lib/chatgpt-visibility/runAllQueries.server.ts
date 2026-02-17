@@ -1,7 +1,6 @@
 import { openai } from "@ai-sdk/openai";
 import type { LanguageModelV3 } from "@ai-sdk/provider";
 import { groupBy, orderBy, partition } from "es-toolkit";
-import { DateTime } from "luxon";
 import { delay } from "node_modules/msw/lib/core/delay.mjs";
 import ora from "ora";
 import prisma from "~/lib/prisma.server";
@@ -31,7 +30,7 @@ export default async function runAllQueries({
 }): Promise<[string, Source[]][]> {
   const sources: Source[] = [];
   const model = openai("gpt-5-chat-latest");
-  const createdAt = DateTime.now().toJSDate();
+  const createdAt = new Date();
 
   // Run queries sequentially to avoid rate limits
   for (let i = 0; i < queries.length; i++) {
@@ -49,9 +48,7 @@ export default async function runAllQueries({
 
   const all = await prisma.visibilityCheck.findMany();
   const byDate = Object.entries(
-    groupBy(all, ({ createdAt }) =>
-      DateTime.fromJSDate(createdAt).toFormat("yyyy-MM-dd"),
-    ),
+    groupBy(all, ({ createdAt }) => createdAt.toISOString().slice(0, 10)),
   );
   return orderBy(byDate, [([date]) => date], ["asc"]);
 }

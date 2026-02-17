@@ -1,8 +1,8 @@
 import { ArrowRight, ChevronRight } from "lucide-react";
-import { DateTime } from "luxon";
 import { Link } from "react-router";
 import { twMerge } from "tailwind-merge";
 import type { BlogPost } from "~/lib/blogPosts.server";
+import { formatDateMed } from "~/lib/temporal";
 import { ActiveLink } from "./ActiveLink";
 import LoadingImage from "./LoadingImage";
 
@@ -65,10 +65,11 @@ function BlogPostCard({ post }: { post: BlogPost }) {
       />
       <div className="flex h-60 flex-col justify-between gap-3 p-6">
         <div>
-          <time dateTime={post.published} className="text-gray-500 text-sm">
-            {DateTime.fromISO(post.published, {
-              zone: "utc",
-            }).toLocaleString(DateTime.DATE_MED)}
+          <time
+            dateTime={post.published.toISOString()}
+            className="text-gray-500 text-sm"
+          >
+            {formatDateMed(post.published)}
           </time>
           <h2 className="line-clamp-2 font-bold text-black text-xl group-hover:text-[hsl(37,92%,65%)]">
             {post.title}

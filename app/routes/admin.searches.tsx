@@ -8,7 +8,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { DateTime } from "luxon";
+import { Temporal } from "@js-temporal/polyfill";
+import { daysAgo } from "~/lib/temporal";
 import { useState } from "react";
 import { Button } from "~/components/ui/Button";
 import { Card, CardContent, CardHeader } from "~/components/ui/Card";
@@ -38,11 +39,11 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   const { period } = parseDateRange(new URL(request.url).searchParams);
 
-  const endDate = DateTime.utc();
-  const startDate = endDate.minus({ days: period });
-  const key = `search-console:${period}:${startDate.toISODate()}`;
+  const endDate = Temporal.Now.zonedDateTimeISO("UTC");
+  const startDate = endDate.subtract({ days: period });
+  const key = `search-console:${period}:${startDate.toPlainDate().toString()}`;
 
-  const from10DaysAgo = DateTime.now().minus({ days: 10 }).toJSDate();
+  const from10DaysAgo = daysAgo(10);
   const cached = await prisma.cache.findUnique({
     where: { key, createdAt: { gte: from10DaysAgo } },
   });
@@ -55,8 +56,8 @@ export async function loader({ request }: Route.LoaderArgs) {
         : (cached.value as unknown as SearchQuery[]);
   } else {
     queries = await getSearchAnalytics({
-      startDate: startDate.toJSDate(),
-      endDate: endDate.toJSDate(),
+      startDate: new Date(startDate.epochMilliseconds),
+      endDate: new Date(endDate.epochMilliseconds),
     });
 
     if (queries.length > 0) {

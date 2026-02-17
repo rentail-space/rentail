@@ -1,5 +1,5 @@
-import { DateTime } from "luxon";
 import { loadBlogPost } from "~/lib/blogPosts.server";
+import { formatDateHuge } from "~/lib/temporal";
 import { trackBotVisit } from "~/lib/middleware/botTracking.server";
 import type { Route } from "./+types/blog.$slug";
 
@@ -11,9 +11,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     const md = `
 # ${post.title}
 
-**Published:** ${DateTime.fromISO(post.published).toLocaleString(
-      DateTime.DATE_HUGE,
-    )}
+**Published:** ${formatDateHuge(post.published)}
 
 ---
 

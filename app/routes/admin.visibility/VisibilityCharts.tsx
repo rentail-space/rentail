@@ -1,6 +1,5 @@
 import { groupBy, meanBy, sumBy } from "es-toolkit";
 import { BarChartIcon, PercentIcon, StarIcon } from "lucide-react";
-import { DateTime } from "luxon";
 import {
   Area,
   AreaChart,
@@ -69,9 +68,7 @@ export default function VisibilityCharts({
 
   // Aggregate by week so we have average score, ratio, etc for that week.
   const weeklyAggregates = Object.entries(
-    groupBy(dailyTotals, ({ date }) =>
-      DateTime.fromISO(date).startOf("day").toFormat("yyyy-MM-dd"),
-    ),
+    groupBy(dailyTotals, ({ date }) => date.slice(0, 10)),
   )
     .map(([date, metrics]) => ({
       date,
@@ -79,9 +76,7 @@ export default function VisibilityCharts({
       score: meanBy(metrics, (metric) => metric.score),
       ratio: meanBy(metrics, (metric) => metric.ratio),
     }))
-    .sort((a, b) =>
-      DateTime.fromISO(a.date).diff(DateTime.fromISO(b.date)).toMillis(),
-    );
+    .sort((a, b) => a.date.localeCompare(b.date));
 
   return (
     <Card className="bg-secondary-background text-foreground">

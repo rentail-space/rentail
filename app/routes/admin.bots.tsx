@@ -1,3 +1,4 @@
+import { Temporal } from "@js-temporal/polyfill";
 import {
   flexRender,
   getCoreRowModel,
@@ -6,7 +7,6 @@ import {
 } from "@tanstack/react-table";
 import { groupBy, sumBy } from "es-toolkit";
 import { ArrowDown, ArrowUp } from "lucide-react";
-import { DateTime } from "luxon";
 import {
   CartesianGrid,
   Legend,
@@ -65,13 +65,13 @@ async function getBotTotals({
   period: number;
   limit: number;
 }) {
-  const today = DateTime.utc().startOf("day");
+  const today = Temporal.Now.zonedDateTimeISO("UTC").startOfDay();
   // Get all bot visits in date range
   const visits = await prisma.botVisit.findMany({
     where: {
       date: {
-        gte: today.minus({ days: period }).toJSDate(),
-        lte: today.toJSDate(),
+        gte: new Date(today.subtract({ days: period }).epochMilliseconds),
+        lte: new Date(today.epochMilliseconds),
       },
     },
     orderBy: [{ date: "asc" }, { botType: "asc" }],
@@ -80,7 +80,7 @@ async function getBotTotals({
   // Aggregate by date and bot type
   const dailyByBot = visits.reduce<Record<string, Record<string, number>>>(
     (acc, visit) => {
-      const dateKey = DateTime.fromJSDate(visit.date).toFormat("yyyy-MM-dd");
+      const dateKey = visit.date.toISOString().slice(0, 10);
       if (!acc[dateKey]) acc[dateKey] = {};
       if (!acc[dateKey][visit.botType]) acc[dateKey][visit.botType] = 0;
       acc[dateKey][visit.botType] += visit.count;
@@ -125,7 +125,11 @@ async function getRecentBotActivity({
   const recentVisits = await prisma.botVisit.findMany({
     where: {
       date: {
-        gte: DateTime.utc().minus({ days: pastDays }).startOf("day").toJSDate(),
+        gte: new Date(
+          Temporal.Now.zonedDateTimeISO("UTC")
+            .subtract({ days: pastDays })
+            .startOfDay().epochMilliseconds,
+        ),
       },
     },
     orderBy: [{ date: "desc" }, { count: "desc" }],
@@ -254,15 +258,18 @@ export default function BotsPage({ loaderData }: Route.ComponentProps) {
                 <XAxis
                   dataKey="date"
                   tickFormatter={(value) =>
-                    DateTime.fromJSDate(new Date(value)).toFormat("MMM d")
+                    new Intl.DateTimeFormat("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    }).format(new Date(value))
                   }
                 />
                 <YAxis />
                 <Tooltip
                   labelFormatter={(value) =>
-                    DateTime.fromJSDate(new Date(value as string)).toFormat(
-                      "PPP",
-                    )
+                    new Intl.DateTimeFormat("en-US", {
+                      dateStyle: "long",
+                    }).format(new Date(value as string))
                   }
                 />
                 <Legend />

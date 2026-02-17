@@ -1,4 +1,3 @@
-import { DateTime } from "luxon";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
 import { trackBotVisit } from "~/lib/middleware/botTracking.server";
 import type { Route } from "./+types/blog.sitemap[.]md";
@@ -16,9 +15,7 @@ This is a sitemap of all blog posts in markdown format for AI agents.
 ${blogPosts
   .map(
     (blogPost) =>
-      `- [${blogPost.title}](/blog/${blogPost.slug}) - ${DateTime.fromISO(
-        blogPost.published,
-      ).toISODate()}`,
+      `- [${blogPost.title}](/blog/${blogPost.slug}) - ${blogPost.published.toString().slice(0, 10)}`,
   )
   .join("\n")}
 

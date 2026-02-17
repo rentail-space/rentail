@@ -1,17 +1,15 @@
 import { Button, Section } from "@react-email/components";
 import { last, sortBy, sumBy } from "es-toolkit";
-import { DateTime } from "luxon";
 import { twMerge } from "tailwind-merge";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails.server";
 import * as styles from "~/emails/styles";
+import { daysAgo } from "~/lib/temporal";
 import type { Source } from "./runAllQueries.server";
 import runAllQueries from "./runAllQueries.server";
 
 export default async function sendVisibilityAlert(): Promise<string> {
-  const byDate = await runAllQueries({
-    newerThan: DateTime.now().minus({ days: 10 }).toJSDate(),
-  });
+  const byDate = await runAllQueries({ newerThan: daysAgo(10) });
   await sendEmail({
     email: "assaf@labnotes.org",
     subject: "Visibility Alert",
@@ -89,12 +87,7 @@ function SummarySection({ byDate }: { byDate: [string, Source[]][] }) {
             <th align="left" className="whitespace-nowrap bg-gray-200">
               Last updated
             </th>
-            <td>
-              {mostRecent &&
-                DateTime.fromJSDate(mostRecent.createdAt).toFormat(
-                  "yyyy-MM-dd",
-                )}
-            </td>
+            <td>{mostRecent?.createdAt.toISOString().slice(0, 10)}</td>
           </tr>
         </tbody>
       </table>

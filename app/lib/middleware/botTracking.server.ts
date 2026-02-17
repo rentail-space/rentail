@@ -1,6 +1,6 @@
 import { captureException } from "@sentry/react-router";
 import debug from "debug";
-import { DateTime } from "luxon";
+import { Temporal } from "@js-temporal/polyfill";
 import prisma from "~/lib/prisma.server";
 import type { Route } from "~/types/app/+types/root";
 
@@ -92,7 +92,9 @@ export async function trackBotVisit(request: Request): Promise<void> {
   if (/Better Stack/i.test(userAgent)) return;
 
   const botType = classifyBot(userAgent ?? "") ?? "Unknown";
-  const date = DateTime.utc().startOf("day").toJSDate();
+  const date = new Date(
+    Temporal.Now.zonedDateTimeISO("UTC").startOfDay().epochMilliseconds,
+  );
   const path = new URL(request.url).pathname;
   const ip = request.headers.get("x-real-ip");
 

@@ -1,5 +1,5 @@
+import { Temporal } from "@js-temporal/polyfill";
 import { invariant } from "es-toolkit";
-import { DateTime } from "luxon";
 import { readFileSync, readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path, { basename, join } from "node:path";
@@ -14,7 +14,7 @@ export type BlogPost = {
   alt: string;
   body: string;
   image: string;
-  published: string; // YYYY-MM-DD
+  published: Date;
   slug: string;
   summary: string;
   title: string;
@@ -28,7 +28,11 @@ export type BlogPost = {
  */
 export async function recentBlogPosts(): Promise<BlogPost[]> {
   const filenames = readdirSync(dirname);
-  const morning = DateTime.local({ zone: "America/Los_Angeles" }).toISO();
+  // Pick date/time for "morning" in UTC (let's use 8am UTC today)
+  const now = new Date();
+  const morning = new Date(
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 8),
+  );
   return filenames
     .filter((filename) => filename.endsWith(".md"))
     .map((filename) => {
@@ -49,7 +53,7 @@ export async function recentBlogPosts(): Promise<BlogPost[]> {
       };
     })
     .filter(({ published }) => published <= morning)
-    .sort((a, b) => b.published.localeCompare(a.published));
+    .sort((a, b) => b.published.getTime() - a.published.getTime());
 }
 
 /**
@@ -81,12 +85,12 @@ export async function loadBlogPost(slug?: string): Promise<BlogPost> {
  * published date because the published date is stored in the filename.
  *
  * @param filename The filename of the blog post.
- * @returns The published date as a DateTime object.
+ * @returns The published date as a Date object.
  */
-function getPublishedDataTime(filename: string): string {
+function getPublishedDataTime(filename: string): Date {
   const date = basename(filename).match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "";
-  const published = DateTime.fromISO(`${date}T08:00:00`, {
-    zone: "America/Los_Angeles",
-  });
-  return published.toISO() ?? "";
+  const published = Temporal.PlainDateTime.from(
+    `${date}T08:00:00`,
+  ).toZonedDateTime("America/Los_Angeles");
+  return new Date(published.epochMilliseconds);
 }

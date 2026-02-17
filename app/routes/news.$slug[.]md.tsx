@@ -1,6 +1,6 @@
 import { invariant } from "es-toolkit";
-import { DateTime } from "luxon";
 import { trackBotVisit } from "~/lib/middleware/botTracking.server";
+import { formatDateHuge } from "~/lib/temporal";
 import { loadNewsItem } from "~/lib/newsItems.server";
 import type { Route } from "./+types/news.$slug";
 
@@ -13,9 +13,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     const md = `
 # ${news.title}
 
-**Published:** ${DateTime.fromISO(news.published).toLocaleString(
-      DateTime.DATE_HUGE,
-    )}
+**Published:** ${formatDateHuge(news.published)}
 
 ---
 

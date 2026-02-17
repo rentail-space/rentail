@@ -1,7 +1,7 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
+import { Temporal } from "@js-temporal/polyfill";
 import { invariant, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
-import { DateTime } from "luxon";
 import { Suspense } from "react";
 import { Await, type LoaderFunctionArgs } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
@@ -28,8 +28,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 async function getEntrances(period: number) {
-  const endDate = DateTime.utc();
-  const startDate = endDate.minus({ days: period });
+  const endDate = Temporal.Now.zonedDateTimeISO("UTC");
+  const startDate = endDate.subtract({ days: period });
 
   const authClient = new JWT({
     scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
@@ -41,8 +41,8 @@ async function getEntrances(period: number) {
     property: "properties/496833933",
     dateRanges: [
       {
-        startDate: startDate.toFormat("yyyy-MM-dd"),
-        endDate: endDate.toFormat("yyyy-MM-dd"),
+        startDate: startDate.toPlainDate().toString(),
+        endDate: endDate.toPlainDate().toString(),
       },
     ],
     dimensions: [{ name: "landingPage" }],
@@ -61,9 +61,10 @@ export default function AdminPages({ loaderData }: Route.ComponentProps) {
   return (
     <Card className="bg-secondary-background text-foreground">
       <CardHeader className="flex items-center justify-between gap-2">
-        <CardTitle className="text-center font-bold text-2xl">Landing Pages (Entrances) Traffic
+        <CardTitle className="text-center font-bold text-2xl">
+          Landing Pages (Entrances) Traffic
         </CardTitle>
-          <DateRangeSelector />
+        <DateRangeSelector />
       </CardHeader>
       <CardContent>
         <Suspense fallback={<LoadingProgress />}>

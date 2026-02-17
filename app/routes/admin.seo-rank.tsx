@@ -4,7 +4,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp } from "lucide-react";
-import { DateTime } from "luxon";
+import { daysAgo } from "~/lib/temporal";
 import { Suspense } from "react";
 import { Await, useSearchParams } from "react-router";
 import { twMerge } from "tailwind-merge";
@@ -30,7 +30,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   const result = checkRankings({
     engine,
     limit: 20,
-    newerThan: DateTime.now().minus({ days: 30 }).toJSDate(),
+    newerThan: daysAgo(30),
   });
   return result;
 }

@@ -1,5 +1,4 @@
 import { groupBy, mean, orderBy, sortBy } from "es-toolkit";
-import { DateTime } from "luxon";
 import { twMerge } from "tailwind-merge";
 import { Card, CardContent } from "~/components/ui/Card";
 import {
@@ -75,9 +74,7 @@ export default function RecentVisibility({
           <TableFooter>
             <TableRow>
               <TableHead colSpan={2}>
-                {DateTime.fromISO(mostRecentQueries.date).toFormat(
-                  "yyyy-MM-dd",
-                )}
+                {mostRecentQueries.date.slice(0, 10)}
               </TableHead>
               <TableHead>
                 {mean(rows.map((row) => row.rentail)).toLocaleString()} /{" "}

@@ -4,8 +4,8 @@
  */
 
 import { invariant } from "es-toolkit";
-import { DateTime } from "luxon";
 import ora from "ora";
+import { daysAgo } from "~/lib/temporal";
 import zod from "zod";
 import { trackApiCall } from "~/lib/apiUsageTracker";
 import envVars from "~/lib/env";
@@ -85,7 +85,7 @@ export async function geocodeCounty(
     // Track API usage
     const { data: result } = await trackApiCall(
       {
-        newerThan: DateTime.now().minus({ days: 30 }).toJSDate(),
+        newerThan: daysAgo(30),
         defaultValue: null,
         endpoint: "geocode",
         key: `geocode:${countyName.toLowerCase().replace(/\s+/g, "-")}`,

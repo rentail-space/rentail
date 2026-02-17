@@ -1,6 +1,6 @@
 import { HeartIcon } from "lucide-react";
-import { DateTime } from "luxon";
 import { redirect } from "react-router";
+import { formatDateMed } from "~/lib/temporal";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
@@ -104,10 +104,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
             <ActiveLink variant="silent" to="https://rentail.space">
               Rentail.space
             </ActiveLink>{" "}
-            on{" "}
-            {DateTime.fromISO(published, { zone: "utc" }).toLocaleString(
-              DateTime.DATE_MED,
-            )}
+            on {formatDateMed(published)}
           </span>
         </p>
 

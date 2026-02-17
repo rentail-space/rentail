@@ -1,7 +1,7 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
+import type { Temporal } from "@js-temporal/polyfill";
 import { groupBy, invariant, meanBy, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
-import type { DateTime } from "luxon";
 import type { LoaderFunctionArgs } from "react-router";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma.server";
@@ -33,7 +33,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
     where: {
       isBot: false,
       isAdmin: false,
-      createdAt: { gte: from.toJSDate(), lte: until.toJSDate() },
+      createdAt: {
+        gte: new Date(from.toString()),
+        lte: new Date(until.toString()),
+      },
     },
   });
   const analytics = fromGoogleAnalytics(from, until);
@@ -41,8 +44,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 async function fromGoogleAnalytics(
-  from: DateTime,
-  until: DateTime,
+  from: Temporal.PlainDate,
+  until: Temporal.PlainDate,
 ): Promise<Analytics[]> {
   const authClient = new JWT({
     scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
@@ -55,8 +58,8 @@ async function fromGoogleAnalytics(
   const response = await client.runReport({
     dateRanges: [
       {
-        startDate: from.toFormat("yyyy-MM-dd"),
-        endDate: until.toFormat("yyyy-MM-dd"),
+        startDate: from.toString(),
+        endDate: until.toString(),
       },
     ],
     dimensions: [{ name: "date" }, { name: "hour" }, { name: "sessionSource" }],

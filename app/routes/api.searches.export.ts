@@ -1,7 +1,8 @@
+import { Temporal } from "@js-temporal/polyfill";
 import { stringify } from "csv-stringify/sync";
 import { invariant } from "es-toolkit";
-import { DateTime } from "luxon";
 import type { ActionFunctionArgs } from "react-router";
+import { daysAgo } from "~/lib/temporal";
 import type { SearchQuery } from "~/lib/googleSearchConsole";
 import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
@@ -14,9 +15,11 @@ export async function loader({ request }: ActionFunctionArgs) {
   const days = Number.parseInt(daysParam?.toString() ?? "30", 10);
 
   const validDays = days === 60 || days === 90 ? days : 30;
-  const startDate = DateTime.utc().minus({ days: validDays });
-  const key = `search-console:${validDays}:${startDate.toISODate()}`;
-  const from10DaysAgo = DateTime.now().minus({ days: 10 }).toJSDate();
+  const startDate = Temporal.Now.zonedDateTimeISO("UTC").subtract({
+    days: validDays,
+  });
+  const key = `search-console:${validDays}:${startDate.toPlainDate().toString()}`;
+  const from10DaysAgo = daysAgo(10);
   const cached = await prisma.cache.findUnique({
     where: { key, createdAt: { gte: from10DaysAgo } },
   });
@@ -42,7 +45,7 @@ export async function loader({ request }: ActionFunctionArgs) {
     },
   );
 
-  const date = DateTime.utc().toFormat("yyyy-MM-dd");
+  const date = Temporal.Now.zonedDateTimeISO("UTC").toPlainDate().toString();
   const filename = `search-queries-${date}+${validDays}.csv`;
   return new Response(csv, {
     headers: {
