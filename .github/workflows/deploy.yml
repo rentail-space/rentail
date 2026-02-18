@@ -80,12 +80,11 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=3096"
 
       - name: Run Tests
-        run: pnpm vitest run
+        run: pnpm --expose-gc --max-old-space-size=4096 vitest run
         env:
           ANTHROPIC_API_KEY: "***REMOVED***"
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
           DEBUG: ""
-          NODE_OPTIONS: "--expose-gc --max-old-space-size=3096"
           OPENAI_API_KEY: "***REMOVED***"
           REDIS_URL: "redis://localhost:6379"
           RESEND_API_KEY: "re_"
