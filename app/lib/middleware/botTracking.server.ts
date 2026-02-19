@@ -1,6 +1,6 @@
+import { Temporal } from "@js-temporal/polyfill";
 import { captureException } from "@sentry/react-router";
 import debug from "debug";
-import { Temporal } from "@js-temporal/polyfill";
 import prisma from "~/lib/prisma.server";
 import type { Route } from "~/types/app/+types/root";
 
@@ -97,6 +97,16 @@ export async function trackBotVisit(request: Request): Promise<void> {
   );
   const path = new URL(request.url).pathname;
   const ip = request.headers.get("x-real-ip");
+  const mimeTypes =
+    request.headers
+      .get("accept")
+      ?.split(",")
+      .map((type) => type.trim()) ?? [];
+  const hasMarkup = mimeTypes.includes("text/markdown");
+  if (hasMarkup)
+    captureException("Bot visit looking for markdown", {
+      extra: { botType, path, userAgent, ip, mimeTypes },
+    });
 
   try {
     await prisma.botVisit.upsert({
@@ -108,7 +118,7 @@ export async function trackBotVisit(request: Request): Promise<void> {
         lastSeen: new Date(),
       },
       create: {
-        accept: request.headers.get("accept"),
+        accept: mimeTypes.join(","),
         botType,
         count: 1,
         date,
