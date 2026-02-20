@@ -2,7 +2,7 @@
 set -eo pipefail
 
 echo -e "\033[32m  Upgrading dependencies …\033[0m"
-npm-check-updates --configFileName .ncurc.json --errorLevel 2 || echo "Dependencies to update"
+npm upgrade
 
 echo -e "\033[32m  Installing Playwright browsers …\033[0m"
 pnpx playwright install
