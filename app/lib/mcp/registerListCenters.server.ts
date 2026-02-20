@@ -1,5 +1,4 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { invariant } from "es-toolkit";
 import type { User } from "prisma/generated/client";
 import { ulid } from "ulid";
 import zod from "zod";
@@ -27,7 +26,7 @@ const listCentersSpec = {
           .positive()
           .optional()
           .describe("Number of stores"),
-        rating: zod.int().positive().optional().describe("Rating (1-5)"),
+        rating: zod.number().min(1).max(5).optional().describe("Rating (1-5)"),
         squareFootage: zod
           .int()
           .positive()
@@ -100,17 +99,14 @@ export default function registerListCenters(mcpServer: McpServer) {
             .filter(Boolean)
             .join(", "),
           name: center.name,
-          numberOfStores: center.numberOfStores,
-          rating: center.rating,
-          squareFootage: center.squareFootage,
+          numberOfStores: center.numberOfStores ?? undefined,
+          rating: center.rating ?? undefined,
+          squareFootage: center.squareFootage ?? undefined,
           summary: center.summary,
           website: externalLink(center.website),
         })),
       } as zod.infer<typeof listCentersSpec.outputSchema>;
-      invariant(
-        listCentersSpec.outputSchema.parse(output),
-        "Output does not match schema",
-      );
+      listCentersSpec.outputSchema.parse(output);
       return {
         content: [{ type: "text", text: JSON.stringify(output) }],
         structuredContent: output,
