@@ -2,7 +2,7 @@
 set -eo pipefail
 
 echo -e "\033[32m  Upgrading dependencies …\033[0m"
-npm upgrade
+pnpm update
 
 echo -e "\033[32m  Installing Playwright browsers …\033[0m"
 pnpx playwright install
