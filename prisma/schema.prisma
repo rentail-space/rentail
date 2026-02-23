@@ -287,13 +287,28 @@ model Verification {
   @@map("verification")
 }
 
+model VisibilityRun {
+  id        String            @id @default(cuid())
+  createdAt DateTime          @default(now()) @map("created_at")
+  platform  String            @map("platform")
+  model     String            @map("model")
+  checks    VisibilityCheck[]
+
+  @@map("visibility_runs")
+}
+
 model VisibilityCheck {
-  category  String   @map("category")
-  citations String[] @map("citations")
-  createdAt DateTime @map("created_at") @default(now())
-  id        String                      @id @default(cuid())
-  model     String   @map("model")
-  query     String   @map("query")
+  id         String        @id @default(cuid())
+  createdAt  DateTime      @default(now()) @map("created_at")
+  runId      String        @map("run_id")
+  run        VisibilityRun @relation(fields: [runId], references: [id])
+  repetition Int           @map("repetition")
+  query      String        @map("query")
+  category   String        @map("category")
+  response   String        @map("response")
+  mentioned  Boolean       @map("mentioned")
+  position   Int?          @map("position")
+  citations  String[]      @map("citations")
 
   @@map("visibility_checks")
 }
