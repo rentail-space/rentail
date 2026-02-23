@@ -23,7 +23,7 @@
     ".react-router/**": true,
     ".vercel/**": true,
     ".vscode/**": true,
-    "**/node_module/**": true,
+    "**/node_modules/**": true,
     "app/data/blog/**": true,
     "prisma/seed/**/*": true,
     "public/images/**/*": true
