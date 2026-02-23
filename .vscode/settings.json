@@ -17,5 +17,15 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.biome": "explicit"
     }
+  },
+  "search.exclude": {
+    "__screenshots__/**": true,
+    ".react-router/**": true,
+    ".vercel/**": true,
+    ".vscode/**": true,
+    "**/node_module/**": true,
+    "app/data/blog/**": true,
+    "prisma/seed/**/*": true,
+    "public/images/**/*": true
   }
 }
