@@ -1,5 +1,5 @@
 // app/lib/llm-visibility/perplexityClient.ts
-import { createOpenAI } from "@ai-sdk/openai";
+import { createPerplexity } from "@ai-sdk/perplexity";
 import { generateText } from "ai";
 import envVars from "~/lib/env";
 import type { LLMResult } from "./types";
@@ -12,8 +12,7 @@ export default async function queryPerplexity(
   if (!envVars.PERPLEXITY_API_KEY)
     throw new Error("PERPLEXITY_API_KEY is not set");
 
-  const perplexity = createOpenAI({
-    baseURL: "https://api.perplexity.ai",
+  const perplexity = createPerplexity({
     apiKey: envVars.PERPLEXITY_API_KEY,
   });
 

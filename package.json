@@ -23,6 +23,7 @@
     "@ai-sdk/devtools": "^0.0.15",
     "@ai-sdk/google": "^3.0.30",
     "@ai-sdk/openai": "^3.0.30",
+    "@ai-sdk/perplexity": "^3.0.19",
     "@ai-sdk/react": "^3.0.99",
     "@base-ui/react": "^1.2.0",
     "@forge42/seo-tools": "^1.4.5",
