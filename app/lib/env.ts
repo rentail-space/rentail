@@ -35,6 +35,11 @@ const envVars = {
     .asUrlString(),
 
   OPENAI_API_KEY: env.get("OPENAI_API_KEY").required().asString(),
+  PERPLEXITY_API_KEY: env.get("PERPLEXITY_API_KEY").required().asString(),
+  GOOGLE_GENERATIVE_AI_API_KEY: env
+    .get("GOOGLE_GENERATIVE_AI_API_KEY")
+    .required()
+    .asString(),
   SERPAPI_KEY: env.get("SERPAPI_KEY").required(false).asString(),
 };
 
