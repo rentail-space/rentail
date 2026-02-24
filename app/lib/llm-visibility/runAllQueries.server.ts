@@ -11,33 +11,41 @@ import { runPlatform } from "./runPlatform";
 export { analyzeMention } from "./runPlatform";
 export type { MentionResult } from "./runPlatform";
 
+async function tryRunPlatform(args: Parameters<typeof runPlatform>[0]) {
+  try {
+    await runPlatform(args);
+  } catch (error) {
+    console.error(`[${args.platform}] Failed:`, error);
+  }
+}
+
 export default async function runAllQueries({
   newerThan,
 }: {
   newerThan: Date;
 }) {
-  await runPlatform({
+  await tryRunPlatform({
     platform: "chatgpt",
     modelId: "gpt-5-chat-latest",
     newerThan,
     queryFn: queryChatGPTWithSearch,
   });
 
-  await runPlatform({
+  await tryRunPlatform({
     platform: "perplexity",
     modelId: "sonar",
     newerThan,
     queryFn: queryPerplexity,
   });
 
-  await runPlatform({
+  await tryRunPlatform({
     platform: "claude",
     modelId: "claude-haiku-4-5-20251001",
     newerThan,
     queryFn: queryClaude,
   });
 
-  await runPlatform({
+  await tryRunPlatform({
     platform: "gemini",
     modelId: "gemini-2.0-flash",
     newerThan,
