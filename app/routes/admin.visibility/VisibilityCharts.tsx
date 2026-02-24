@@ -5,12 +5,17 @@ import {
   AreaChart,
   CartesianGrid,
   type DataKey,
-  Legend,
-  Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
 import { Card, CardContent } from "~/components/ui/Card";
+import {
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "~/components/ui/Chart";
 
 type Check = {
   citations: string[];
@@ -79,42 +84,68 @@ export default function VisibilityCharts({ runs }: { runs: Run[] }) {
 
   return (
     <Card className="bg-secondary-background text-foreground">
-      <CardContent className="grid gap-4 md:grid-cols-2">
-        {Object.entries(chartConfig).map(([key, value]) => (
-          <AreaChart
-            key={key}
-            data={points}
-            height={200}
-            margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-            responsive={false}
-            width={450}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis dataKey="date" />
-            <YAxis allowDecimals={false} tickLine={false} tickMargin={8} />
-            <Area
-              activeDot={{ fill: "var(--chart-active-dot)" }}
+      <CardContent>
+        <div className="grid gap-4 md:grid-cols-2">
+          {Object.entries(chartConfig).map(([key, value]) => (
+            <VisibilityChart
+              key={key}
+              data={points}
               dataKey={key as DataKey<RunPoint>}
               fill={value.color}
               name={value.label}
-              type="monotone"
             />
-            <Legend />
-            <Tooltip
-              content={({ payload, label }) => (
-                <div className="flex w-full flex-row gap-2 bg-background p-2">
-                  <span>{label}</span>
-                  <span>{payload?.[0]?.name}</span>
-                  <span className="text-right font-bold">
-                    {payload?.[0]?.value}
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function VisibilityChart({
+  data,
+  dataKey,
+  fill,
+  name,
+}: {
+  data: RunPoint[];
+  dataKey: DataKey<RunPoint>;
+  fill: string;
+  name: string;
+}) {
+  return (
+    <ChartContainer config={chartConfig} className="h-40 w-full">
+      <AreaChart
+        data={data}
+        margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+      >
+        <CartesianGrid vertical={false} />
+        <XAxis dataKey="date" />
+        <YAxis allowDecimals={false} tickLine={false} tickMargin={8} />
+        <Area
+          activeDot={{ fill: "var(--chart-active-dot)" }}
+          dataKey={dataKey}
+          fill={fill}
+          name={name}
+          type="monotone"
+        />
+        <ChartLegend content={<ChartLegendContent verticalAlign="top" />} />
+        <ChartTooltip
+          cursor
+          content={
+            <ChartTooltipContent
+              formatter={(value, name) => (
+                <div className="grid w-full grid-cols-2 gap-2">
+                  <span>{name}</span>
+                  <span className="text-right font-bold tabular-nums">
+                    {Number(value).toFixed(1)}
                   </span>
                 </div>
               )}
             />
-          </AreaChart>
-        ))}
-      </CardContent>
-    </Card>
+          }
+        />
+      </AreaChart>
+    </ChartContainer>
   );
 }
 
