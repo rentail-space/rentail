@@ -47,7 +47,7 @@ export default async function runAllQueries({
 
   await tryRunPlatform({
     platform: "gemini",
-    modelId: "gemini-2.0-flash",
+    modelId: "gemini-2.5-flash",
     newerThan,
     queryFn: queryGemini,
   });
