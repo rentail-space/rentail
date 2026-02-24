@@ -1,22 +1,16 @@
 import { openai } from "@ai-sdk/openai";
-import type { LanguageModelV3, LanguageModelV3Source } from "@ai-sdk/provider";
+import type { LanguageModelV3Source } from "@ai-sdk/provider";
 import { generateText } from "ai";
+import type { LLMResult } from "./types";
 
-export type ChatGPTResult = {
-  sources: LanguageModelV3Source[];
-  text: string;
-};
+const MODEL_ID = "gpt-5-chat-latest";
 
-export default async function queryChatGPTWithSearch({
-  model,
-  query,
-}: {
-  model: LanguageModelV3;
-  query: string;
-}): Promise<ChatGPTResult> {
+export default async function queryChatGPTWithSearch(
+  query: string,
+): Promise<LLMResult> {
   const { sources, text } = await generateText({
     maxOutputTokens: 2000,
-    model,
+    model: openai(MODEL_ID),
     prompt: [
       {
         role: "system",
@@ -41,5 +35,8 @@ export default async function queryChatGPTWithSearch({
     },
     toolChoice: { type: "tool", toolName: "web_search" },
   });
-  return { sources, text };
+  const citations = (sources as LanguageModelV3Source[])
+    .filter((s) => s.sourceType === "url")
+    .map((s) => s.url);
+  return { text, citations };
 }

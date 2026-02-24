@@ -1,5 +1,3 @@
-import { openai } from "@ai-sdk/openai";
-import type { LanguageModelV3 } from "@ai-sdk/provider";
 import { groupBy, orderBy, partition } from "es-toolkit";
 import ora from "ora";
 import prisma from "~/lib/prisma.server";
@@ -7,7 +5,6 @@ import queryChatGPTWithSearch from "./openaiClient";
 import queries from "./queries";
 
 const REPETITIONS = 3;
-const MODEL_ID = "gpt-5-chat-latest";
 
 function sleep(ms: number) {
   return new Promise<void>((resolve) => setTimeout(resolve, ms));
@@ -50,9 +47,8 @@ export default async function runAllQueries({
   if (existing) {
     console.info("Skipping — run already exists:", existing.id);
   } else {
-    const model = openai(MODEL_ID);
     const run = await prisma.visibilityRun.create({
-      data: { platform: "chatgpt", model: MODEL_ID },
+      data: { platform: "chatgpt", model: "gpt-5-chat-latest" },
     });
     console.info(`Created run ${run.id}`);
 
@@ -61,7 +57,7 @@ export default async function runAllQueries({
       console.info(`Query ${qi + 1}/${queries.length}: ${query.query}`);
 
       for (let rep = 1; rep <= REPETITIONS; rep++) {
-        await runSingleCheck({ model, run, query, repetition: rep });
+        await runSingleCheck({ run, query, repetition: rep });
         await sleep(2_000);
       }
     }
@@ -79,12 +75,10 @@ export default async function runAllQueries({
 }
 
 async function runSingleCheck({
-  model,
   run,
   query,
   repetition,
 }: {
-  model: LanguageModelV3;
   run: { id: string };
   query: { query: string; category: string };
   repetition: number;
@@ -94,13 +88,7 @@ async function runSingleCheck({
   ).start();
 
   try {
-    const { sources, text } = await queryChatGPTWithSearch({
-      model,
-      query: query.query,
-    });
-    const citations = sources
-      .filter((s) => s.sourceType === "url")
-      .map((s) => s.url);
+    const { text, citations } = await queryChatGPTWithSearch(query.query);
     const { mentioned, position } = analyzeMention(text);
     const [rentailCitations] = partition(
       citations,

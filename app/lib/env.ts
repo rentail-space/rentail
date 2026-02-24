@@ -15,10 +15,10 @@ const envVars = {
 
   ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),
   OPENAI_API_KEY: env.get("OPENAI_API_KEY").required().asString(),
-  PERPLEXITY_API_KEY: env.get("PERPLEXITY_API_KEY").required().asString(),
+  PERPLEXITY_API_KEY: env.get("PERPLEXITY_API_KEY").required(false).asString(),
   GOOGLE_GENERATIVE_AI_API_KEY: env
     .get("GOOGLE_GENERATIVE_AI_API_KEY")
-    .required()
+    .required(false)
     .asString(),
   SERPAPI_KEY: env.get("SERPAPI_KEY").required(false).asString(),
 
