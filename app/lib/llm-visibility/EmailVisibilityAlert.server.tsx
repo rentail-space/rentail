@@ -54,11 +54,6 @@ export default async function sendVisibilityAlert(): Promise<string> {
   return "OK";
 }
 
-function runVisibilityPct(run: Run): number {
-  if (run.checks.length === 0) return 0;
-  return mean(run.checks.map((c) => (c.mentioned ? 1 : 0))) * 100;
-}
-
 function SummarySection({ runs }: { runs: Run[] }) {
   return (
     <Section>
@@ -82,38 +77,55 @@ function SummarySection({ runs }: { runs: Run[] }) {
               Platform
             </th>
             <th
-              align="left"
+              align="center"
               style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
             >
-              Visibility % (last 5 runs)
+              Avg Visibility %
             </th>
             <th
-              align="left"
+              align="center"
               style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
             >
-              Latest run
+              Avg Citations
             </th>
           </tr>
         </thead>
         <tbody>
           {PLATFORMS.map((platform) => {
-            const platformRuns = runs.filter((r) => r.platform === platform);
-            const last5 = platformRuns.slice(-5);
-            const progression = last5
-              .map(
-                (run) =>
-                  `${run.createdAt.toISOString().slice(0, 10)}: ${runVisibilityPct(run).toFixed(0)}%`,
-              )
-              .join(" → ");
-            const latest =
-              platformRuns.at(-1)?.createdAt.toISOString().slice(0, 10) ?? "—";
+            const latestRun = runs
+              .filter((r) => r.platform === platform)
+              .at(-1);
+            if (!latestRun)
+              return (
+                <tr key={platform}>
+                  <td
+                    style={{ fontWeight: "bold", textTransform: "capitalize" }}
+                  >
+                    {platform}
+                  </td>
+                  <td align="center" colSpan={2}>
+                    No runs yet
+                  </td>
+                </tr>
+              );
+            const checks = latestRun.checks;
+            const visibilityPct =
+              mean(checks.map((c) => (c.mentioned ? 1 : 0))) * 100;
+            const avgCitations = mean(checks.map((c) => c.citations.length));
             return (
               <tr key={platform}>
                 <td style={{ fontWeight: "bold", textTransform: "capitalize" }}>
                   {platform}
                 </td>
-                <td>{progression || "No runs yet"}</td>
-                <td>{latest}</td>
+                <td
+                  align="center"
+                  style={{
+                    fontWeight: visibilityPct > 0 ? "bold" : "normal",
+                  }}
+                >
+                  {visibilityPct.toFixed(0)}%
+                </td>
+                <td align="center">{avgCitations.toFixed(1)}</td>
               </tr>
             );
           })}
