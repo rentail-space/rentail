@@ -136,85 +136,101 @@ function SummarySection({ runs }: { runs: Run[] }) {
 }
 
 function LatestRunTable({ runs }: { runs: Run[] }) {
-  const chatgptRuns = runs.filter((r) => r.platform === "chatgpt");
-  const latestRun = chatgptRuns.at(-1);
-  if (!latestRun) return null;
-
-  const byQuery = Object.entries(
-    latestRun.checks.reduce(
-      (acc, c) => {
-        if (!acc[c.query]) acc[c.query] = { category: c.category, checks: [] };
-        acc[c.query].checks.push(c);
-        return acc;
-      },
-      {} as Record<string, { category: string; checks: Check[] }>,
-    ),
-  )
-    .map(([query, { category, checks }]) => ({
-      query,
-      category,
-      visibilityPct: mean(checks.map((c) => (c.mentioned ? 1 : 0))) * 100,
-      avgCitations: mean(checks.map((c) => c.citations.length)),
-    }))
-    .sort(
-      (a, b) =>
-        a.category.localeCompare(b.category) || a.query.localeCompare(b.query),
-    );
-
   return (
-    <Section>
-      <table
-        style={{
-          width: "100%",
-          borderCollapse: "collapse",
-          marginTop: 16,
-          marginBottom: 16,
-          background: "#fff",
-        }}
-        cellPadding={8}
-        border={1}
-      >
-        <thead>
-          <tr>
-            <th
-              align="left"
-              style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
+    <>
+      {PLATFORMS.map((platform) => {
+        const latestRun = runs.filter((r) => r.platform === platform).at(-1);
+        if (!latestRun) return null;
+
+        const byQuery = Object.entries(
+          latestRun.checks.reduce(
+            (acc, c) => {
+              if (!acc[c.query])
+                acc[c.query] = { category: c.category, checks: [] };
+              acc[c.query].checks.push(c);
+              return acc;
+            },
+            {} as Record<string, { category: string; checks: Check[] }>,
+          ),
+        )
+          .map(([query, { category, checks }]) => ({
+            query,
+            category,
+            visibilityPct: mean(checks.map((c) => (c.mentioned ? 1 : 0))) * 100,
+            avgCitations: mean(checks.map((c) => c.citations.length)),
+          }))
+          .sort(
+            (a, b) =>
+              a.category.localeCompare(b.category) ||
+              a.query.localeCompare(b.query),
+          );
+
+        return (
+          <Section key={platform}>
+            <h2
+              style={{
+                fontWeight: "bold",
+                textTransform: "capitalize",
+                marginTop: 24,
+                marginBottom: 4,
+              }}
             >
-              Query (ChatGPT)
-            </th>
-            <th
-              align="center"
-              style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
+              {platform}
+            </h2>
+            <table
+              style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                marginBottom: 16,
+                background: "#fff",
+              }}
+              cellPadding={8}
+              border={1}
             >
-              Visibility %
-            </th>
-            <th
-              align="center"
-              style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
-            >
-              Avg Citations
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {byQuery.map((row) => (
-            <tr key={row.query}>
-              <td align="left">
-                <strong>{row.category}</strong>: {row.query}
-              </td>
-              <td
-                align="center"
-                style={{
-                  fontWeight: row.visibilityPct > 0 ? "bold" : "normal",
-                }}
-              >
-                {row.visibilityPct.toFixed(0)}%
-              </td>
-              <td align="right">{row.avgCitations.toFixed(1)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </Section>
+              <thead>
+                <tr>
+                  <th
+                    align="left"
+                    style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
+                  >
+                    Query
+                  </th>
+                  <th
+                    align="center"
+                    style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
+                  >
+                    Visibility %
+                  </th>
+                  <th
+                    align="center"
+                    style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
+                  >
+                    Avg Citations
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {byQuery.map((row) => (
+                  <tr key={row.query}>
+                    <td align="left">
+                      <strong>{row.category}</strong>: {row.query}
+                    </td>
+                    <td
+                      align="center"
+                      style={{
+                        fontWeight: row.visibilityPct > 0 ? "bold" : "normal",
+                      }}
+                    >
+                      {row.visibilityPct.toFixed(0)}%
+                    </td>
+                    <td align="center">{row.avgCitations.toFixed(1)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Section>
+        );
+      })}
+    </>
   );
 }
