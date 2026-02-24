@@ -1,123 +1,133 @@
 import { openai } from "@ai-sdk/openai";
 import type { LanguageModelV3 } from "@ai-sdk/provider";
 import { groupBy, orderBy, partition } from "es-toolkit";
-import { delay } from "node_modules/msw/lib/core/delay.mjs";
 import ora from "ora";
 import prisma from "~/lib/prisma.server";
-import { trackApiCall } from "../apiUsageTracker";
 import queryChatGPTWithSearch from "./openaiClient";
 import queries from "./queries";
 
-export type Source = {
-  category: string;
-  citations: string[];
+const REPETITIONS = 3;
+const MODEL_ID = "gpt-5-chat-latest";
+
+function sleep(ms: number) {
+  return new Promise<void>((resolve) => setTimeout(resolve, ms));
+}
+
+export type MentionResult = {
+  mentioned: boolean;
+  position: number | null;
+};
+
+export function analyzeMention(response: string): MentionResult {
+  const text = response.toLowerCase();
+  const keywords = ["rentail.space", "rentail"];
+  const mentioned = keywords.some((k) => text.includes(k));
+  if (!mentioned) return { mentioned: false, position: null };
+  const positions = keywords.map((k) => text.indexOf(k)).filter((i) => i >= 0);
+  return { mentioned: true, position: Math.min(...positions) };
+}
+
+export type RunSummary = {
+  runId: string;
   createdAt: Date;
-  id: string;
-  query: string;
+  checkCount: number;
 };
 
 /**
- * Runs all queries and returns the sources from all queries.  The queries are
- * run sequentially to avoid rate limits.
- *
- * @param newerThan - The date to cache the results.
- * @returns The sources from all queries grouped by date.
+ * Creates a VisibilityRun and runs all queries × REPETITIONS times.
+ * Skips if a run already exists newer than newerThan.
  */
 export default async function runAllQueries({
   newerThan,
 }: {
   newerThan: Date;
-}): Promise<[string, Source[]][]> {
-  const sources: Source[] = [];
-  const model = openai("gpt-5-chat-latest");
-  const createdAt = new Date();
-
-  // Run queries sequentially to avoid rate limits
-  for (let i = 0; i < queries.length; i++) {
-    const query = queries[i];
-    console.info(`Running query ${i + 1} of ${queries.length}`);
-
-    const { data } = await runSingleQuery({
-      createdAt,
-      model,
-      newerThan,
-      ...query,
+}) {
+  // Deduplication at run level
+  const existing = await prisma.visibilityRun.findFirst({
+    where: { createdAt: { gte: newerThan } },
+    orderBy: { createdAt: "desc" },
+  });
+  if (existing) {
+    console.info("Skipping — run already exists:", existing.id);
+  } else {
+    const model = openai(MODEL_ID);
+    const run = await prisma.visibilityRun.create({
+      data: { platform: "chatgpt", model: MODEL_ID },
     });
-    sources.push(data);
+    console.info(`Created run ${run.id}`);
+
+    for (let qi = 0; qi < queries.length; qi++) {
+      const query = queries[qi];
+      console.info(`Query ${qi + 1}/${queries.length}: ${query.query}`);
+
+      for (let rep = 1; rep <= REPETITIONS; rep++) {
+        await runSingleCheck({ model, run, query, repetition: rep });
+        await sleep(2_000);
+      }
+    }
   }
 
-  const all = await prisma.visibilityCheck.findMany();
+  // Return all runs grouped by date for email/charts
+  const all = await prisma.visibilityRun.findMany({
+    include: { checks: true },
+    orderBy: { createdAt: "asc" },
+  });
   const byDate = Object.entries(
     groupBy(all, ({ createdAt }) => createdAt.toISOString().slice(0, 10)),
   );
   return orderBy(byDate, [([date]) => date], ["asc"]);
 }
 
-async function runSingleQuery({
-  category,
-  createdAt,
-  newerThan,
+async function runSingleCheck({
   model,
+  run,
   query,
+  repetition,
 }: {
-  category: string;
-  createdAt: Date;
-  newerThan: Date;
   model: LanguageModelV3;
-  query: string;
-}): Promise<{
-  data: Source;
-  createdAt: Date;
-}> {
-  return await trackApiCall(
-    {
-      newerThan,
-      defaultValue: { citations: [], query, category, id: "", createdAt },
-      endpoint: "visibility",
-      key: `seo:${category}:${query}`,
-      service: "chatgpt",
-    },
-    async () => {
-      const spinner = ora(`Querying ChatGPT for ${query}`).start();
+  run: { id: string };
+  query: { query: string; category: string };
+  repetition: number;
+}) {
+  const spinner = ora(
+    `Rep ${repetition}/${REPETITIONS}: ${query.query}`,
+  ).start();
 
-      try {
-        const sources = await queryChatGPTWithSearch({ model, query });
-        const citations = sources
-          .filter((s) => s.sourceType === "url")
-          .map((s) => s.url);
-        const [isRentail] = partition(
-          citations,
-          (url) => new URL(url).hostname === "rentail.space",
-        );
-        const isFirstPlace = new URL(citations[0]).hostname === "rentail.space";
-        const score = (isFirstPlace ? 50 : 0) + isRentail.length * 10;
-        spinner.succeed(`${score} points`);
+  try {
+    const { sources, text } = await queryChatGPTWithSearch({
+      model,
+      query: query.query,
+    });
+    const citations = sources
+      .filter((s) => s.sourceType === "url")
+      .map((s) => s.url);
+    const { mentioned, position } = analyzeMention(text);
+    const [rentailCitations] = partition(
+      citations,
+      (url) => new URL(url).hostname === "rentail.space",
+    );
+    const isFirstPlace =
+      citations.length > 0 &&
+      new URL(citations[0]).hostname === "rentail.space";
+    const score = (isFirstPlace ? 50 : 0) + rentailCitations.length * 10;
+    spinner.succeed(
+      `score=${score} mentioned=${mentioned} citations=${citations.length}`,
+    );
 
-        for (const url of citations) {
-          const marker = new URL(url).hostname === "rentail.space" ? "★" : " ";
-          console.info("%s %s", marker, url);
-        }
-
-        // Save to database
-        const { id } = await prisma.visibilityCheck.create({
-          data: {
-            category,
-            citations,
-            createdAt,
-            model: model.modelId,
-            query,
-          },
-        });
-
-        // Rate limiting: wait 2 seconds between queries
-        console.info("\nWaiting 2 seconds before next query...");
-        await delay(2_000);
-
-        return { citations, query, category, id, createdAt };
-      } catch (error) {
-        spinner.fail(`Error querying "${query}": $error`);
-        throw error;
-      }
-    },
-  );
+    await prisma.visibilityCheck.create({
+      data: {
+        runId: run.id,
+        repetition,
+        query: query.query,
+        category: query.category,
+        response: text,
+        mentioned,
+        position,
+        citations,
+      },
+    });
+  } catch (error) {
+    spinner.fail(`Error: ${error}`);
+    throw error;
+  }
 }
