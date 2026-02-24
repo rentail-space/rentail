@@ -228,10 +228,11 @@ Imperative mood, atomic commits, reference files when helpful.
 
 **Schema Updates:**
 
-1. Edit `prisma/schema.prisma`
-2. Generate client: `pnpm prisma generate`
-3. Push to dev: `pnpm prisma db push`
-4. Create migration: `pnpm prisma migrate dev --name migration_name`
+1. Make sure all schema migrations are possible
+2. If necessary, separate schema migrations so one migration may add new field, while another migration may delete existinf field
+3. Edit `prisma/schema.prisma`
+4. Generate client: `pnpm prisma generate`
+5. Push to dev: `pnpm prisma db push`
 
 **Models:**
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { analyzeMention } from "~/lib/chatgpt-visibility/runAllQueries.server";
+import { analyzeMention } from "~/lib/llm-visibility/runAllQueries.server";
 
 describe("analyzeMention", () => {
   it("returns mentioned=true and position when 'rentail' appears in prose", () => {
