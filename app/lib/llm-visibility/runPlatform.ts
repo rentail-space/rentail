@@ -1,5 +1,4 @@
 // app/lib/llm-visibility/runPlatform.ts
-import ora from "ora";
 import prisma from "~/lib/prisma.server";
 import queries from "./queries";
 import type { LLMResult } from "./types";
@@ -56,13 +55,13 @@ export async function runPlatform({
     );
 
     for (let rep = 1; rep <= REPETITIONS; rep++) {
-      const spinner = ora(
-        `[${platform}] Rep ${rep}/${REPETITIONS}: ${query.query}`,
-      ).start();
+      console.info(`[${platform}] Rep ${rep}/${REPETITIONS}: ${query.query}`);
       try {
         const { text, citations } = await queryFn(query.query);
         const { mentioned, position } = analyzeMention(text);
-        spinner.succeed(`mentioned=${mentioned} citations=${citations.length}`);
+        console.info(
+          `[${platform}] mentioned=${mentioned} citations=${citations.length}`,
+        );
         await prisma.visibilityCheck.create({
           data: {
             runId: run.id,
@@ -76,7 +75,7 @@ export async function runPlatform({
           },
         });
       } catch (error) {
-        spinner.fail(`Error: ${error}`);
+        console.error(`[${platform}] Error: ${error}`);
         throw error;
       }
       await sleep(2_000);
