@@ -1,29 +1,20 @@
-/**
- * OpenAI client for querying ChatGPT with search capability.
- *
- */
-
 import { openai } from "@ai-sdk/openai";
 import type { LanguageModelV3, LanguageModelV3Source } from "@ai-sdk/provider";
 import { generateText } from "ai";
 
-/**
- * This uses OpenAI's API to simulate how users would query ChatGPT with web
- * search enabled.
- *
- * @param query - The query to search for.
- * @param model - The model to use.
- * @returns The sources from ChatGPT
- * @see https://ai-sdk.dev/providers/ai-sdk-providers/openai
- */
+export type ChatGPTResult = {
+  sources: LanguageModelV3Source[];
+  text: string;
+};
+
 export default async function queryChatGPTWithSearch({
   model,
   query,
 }: {
   model: LanguageModelV3;
   query: string;
-}): Promise<LanguageModelV3Source[]> {
-  const { sources } = await generateText({
+}): Promise<ChatGPTResult> {
+  const { sources, text } = await generateText({
     maxOutputTokens: 2000,
     model,
     prompt: [
@@ -50,5 +41,5 @@ export default async function queryChatGPTWithSearch({
     },
     toolChoice: { type: "tool", toolName: "web_search" },
   });
-  return sources;
+  return { sources, text };
 }
