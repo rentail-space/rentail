@@ -301,7 +301,7 @@ model VisibilityCheck {
   id         String        @id @default(cuid())
   createdAt  DateTime      @default(now()) @map("created_at")
   runId      String        @map("run_id")
-  run        VisibilityRun @relation(fields: [runId], references: [id])
+  run        VisibilityRun @relation(fields: [runId], references: [id], onDelete: Cascade)
   repetition Int           @map("repetition")
   query      String        @map("query")
   category   String        @map("category")
@@ -310,6 +310,7 @@ model VisibilityCheck {
   position   Int?          @map("position")
   citations  String[]      @map("citations")
 
+  @@index([runId])
   @@map("visibility_checks")
 }
 
