@@ -1,3 +1,4 @@
+// app/lib/llm-visibility/EmailVisibilityAlert.server.tsx
 import { Button, Section } from "@react-email/components";
 import { mean } from "es-toolkit";
 import EmailLayout from "~/emails/EmailLayout";
@@ -19,7 +20,10 @@ type Run = {
   checks: Check[];
   createdAt: Date;
   id: string;
+  platform: string;
 };
+
+const PLATFORMS = ["chatgpt", "perplexity", "claude", "gemini"] as const;
 
 export default async function sendVisibilityAlert(): Promise<string> {
   await runAllQueries({ newerThan: daysAgo(10) });
@@ -34,7 +38,7 @@ export default async function sendVisibilityAlert(): Promise<string> {
     email: "assaf@labnotes.org",
     subject: "Visibility Alert",
     content: () => (
-      <EmailLayout subject="Rentail visibility in ChatGPT queries">
+      <EmailLayout subject="Rentail visibility in LLM queries">
         <SummarySection runs={runs} />
         <LatestRunTable runs={runs} />
         <Button
@@ -56,12 +60,6 @@ function runVisibilityPct(run: Run): number {
 }
 
 function SummarySection({ runs }: { runs: Run[] }) {
-  const last5 = runs.slice(-5);
-  const progression = last5.map(
-    (run) =>
-      `${run.createdAt.toISOString().slice(0, 10)}: ${runVisibilityPct(run).toFixed(0)}%`,
-  );
-
   return (
     <Section>
       <table
@@ -75,34 +73,50 @@ function SummarySection({ runs }: { runs: Run[] }) {
         cellPadding={8}
         border={1}
       >
-        <tbody>
+        <thead>
           <tr>
+            <th
+              align="left"
+              style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
+            >
+              Platform
+            </th>
             <th
               align="left"
               style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
             >
               Visibility % (last 5 runs)
             </th>
-            <td>{progression.join(" → ")}</td>
-          </tr>
-          <tr>
             <th
               align="left"
               style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
             >
               Latest run
             </th>
-            <td>{runs.at(-1)?.createdAt.toISOString().slice(0, 10) ?? "—"}</td>
           </tr>
-          <tr>
-            <th
-              align="left"
-              style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
-            >
-              Total runs tracked
-            </th>
-            <td>{runs.length}</td>
-          </tr>
+        </thead>
+        <tbody>
+          {PLATFORMS.map((platform) => {
+            const platformRuns = runs.filter((r) => r.platform === platform);
+            const last5 = platformRuns.slice(-5);
+            const progression = last5
+              .map(
+                (run) =>
+                  `${run.createdAt.toISOString().slice(0, 10)}: ${runVisibilityPct(run).toFixed(0)}%`,
+              )
+              .join(" → ");
+            const latest =
+              platformRuns.at(-1)?.createdAt.toISOString().slice(0, 10) ?? "—";
+            return (
+              <tr key={platform}>
+                <td style={{ fontWeight: "bold", textTransform: "capitalize" }}>
+                  {platform}
+                </td>
+                <td>{progression || "No runs yet"}</td>
+                <td>{latest}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </Section>
@@ -110,7 +124,8 @@ function SummarySection({ runs }: { runs: Run[] }) {
 }
 
 function LatestRunTable({ runs }: { runs: Run[] }) {
-  const latestRun = runs.at(-1);
+  const chatgptRuns = runs.filter((r) => r.platform === "chatgpt");
+  const latestRun = chatgptRuns.at(-1);
   if (!latestRun) return null;
 
   const byQuery = Object.entries(
@@ -153,7 +168,7 @@ function LatestRunTable({ runs }: { runs: Run[] }) {
               align="left"
               style={{ background: "#e5e7eb", whiteSpace: "nowrap" }}
             >
-              Query
+              Query (ChatGPT)
             </th>
             <th
               align="center"
