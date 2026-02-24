@@ -7,10 +7,6 @@ import queryChatGPTWithSearch from "./openaiClient";
 import queryPerplexity from "./perplexityClient";
 import { runPlatform } from "./runPlatform";
 
-// Re-export for backwards compatibility with existing callers
-export { analyzeMention } from "./runPlatform";
-export type { MentionResult } from "./runPlatform";
-
 async function tryRunPlatform(args: Parameters<typeof runPlatform>[0]) {
   try {
     await runPlatform(args);
