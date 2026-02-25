@@ -3,50 +3,41 @@ import { groupBy, orderBy } from "es-toolkit";
 import prisma from "~/lib/prisma.server";
 import queryClaude from "./claudeClient";
 import queryGemini from "./geminiClient";
-import queryChatGPTWithSearch from "./openaiClient";
+import openaiClient from "./openaiClient";
 import queryPerplexity from "./perplexityClient";
 import { runPlatform } from "./runPlatform";
-
-async function tryRunPlatform(args: Parameters<typeof runPlatform>[0]) {
-  try {
-    await runPlatform(args);
-  } catch (error) {
-    console.error(`[${args.platform}] Failed:`, error);
-  }
-}
 
 export default async function runAllQueries({
   newerThan,
 }: {
   newerThan: Date;
 }) {
-  await tryRunPlatform({
-    platform: "chatgpt",
-    modelId: "gpt-5-chat-latest",
-    newerThan,
-    queryFn: queryChatGPTWithSearch,
-  });
-
-  await tryRunPlatform({
-    platform: "perplexity",
-    modelId: "sonar",
-    newerThan,
-    queryFn: queryPerplexity,
-  });
-
-  await tryRunPlatform({
-    platform: "claude",
-    modelId: "claude-haiku-4-5-20251001",
-    newerThan,
-    queryFn: queryClaude,
-  });
-
-  await tryRunPlatform({
-    platform: "gemini",
-    modelId: "gemini-2.5-flash",
-    newerThan,
-    queryFn: queryGemini,
-  });
+  await Promise.all([
+    runPlatform({
+      platform: "chatgpt",
+      modelId: "gpt-5-chat-latest",
+      newerThan,
+      queryFn: openaiClient,
+    }),
+    runPlatform({
+      platform: "perplexity",
+      modelId: "sonar",
+      newerThan,
+      queryFn: queryPerplexity,
+    }),
+    runPlatform({
+      platform: "claude",
+      modelId: "claude-haiku-4-5-20251001",
+      newerThan,
+      queryFn: queryClaude,
+    }),
+    runPlatform({
+      platform: "gemini",
+      modelId: "gemini-2.5-flash",
+      newerThan,
+      queryFn: queryGemini,
+    }),
+  ]);
 
   const all = await prisma.visibilityRun.findMany({
     include: { checks: true },

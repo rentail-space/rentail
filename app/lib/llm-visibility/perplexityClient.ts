@@ -1,29 +1,39 @@
 // app/lib/llm-visibility/perplexityClient.ts
 import { createPerplexity } from "@ai-sdk/perplexity";
 import { generateText } from "ai";
+import { invariant } from "es-toolkit";
 import envVars from "~/lib/env";
-import type { LLMResult } from "./types";
 
 const MODEL_ID = "sonar";
 
-export default async function queryPerplexity(
-  query: string,
-): Promise<LLMResult> {
-  if (!envVars.PERPLEXITY_API_KEY)
-    throw new Error("PERPLEXITY_API_KEY is not set");
+export default async function queryPerplexity(query: string): Promise<{
+  citations: string[];
+  queries: string[];
+}> {
+  invariant(envVars.PERPLEXITY_API_KEY, "PERPLEXITY_API_KEY is not set");
 
   const perplexity = createPerplexity({
     apiKey: envVars.PERPLEXITY_API_KEY,
   });
 
-  const { text, providerMetadata } = await generateText({
+  const response = await generateText({
     model: perplexity(MODEL_ID),
-    prompt: query,
+    prompt: [
+      {
+        role: "system",
+        content:
+          "You are Perplexity with web search capabilities. When answering questions, search the web for current information and cite your sources using numbered citations like 【1】, 【2】, etc. Always include a 'Sources:' section at the end with numbered references.",
+      },
+      {
+        role: "user",
+        content: [{ text: query, type: "text" }],
+      },
+    ],
     maxOutputTokens: 2000,
   });
+  const citations = response.sources
+    .filter((source) => source.sourceType === "url")
+    .map((source) => source.url);
 
-  const citations =
-    (providerMetadata?.perplexity?.citations as string[] | undefined) ?? [];
-
-  return { text, citations };
+  return { citations, queries: [] };
 }
