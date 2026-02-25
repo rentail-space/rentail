@@ -1,21 +1,17 @@
 // app/lib/llm-visibility/runPlatform.ts
 
 import { captureException } from "@sentry/react-router";
+import { ms } from "convert";
+import { delay } from "es-toolkit";
 import prisma from "~/lib/prisma.server";
 import queries from "./queries";
 
-const REPETITIONS = 3;
+/**
+ * Maximum number of times to repeat a query if it fails.
+ */
+const MAX_REPEATS = 3;
 
-export type MentionResult = {
-  mentioned: boolean;
-  position: number | null;
-};
-
-export function sleep(ms: number): Promise<void> {
-  return new Promise<void>((resolve) => setTimeout(resolve, ms));
-}
-
-export async function runPlatform({
+export default async function runPlatform({
   platform,
   modelId,
   newerThan,
@@ -58,12 +54,12 @@ export async function runPlatform({
         query.query,
       );
 
-      for (let rep = 1; rep <= REPETITIONS; rep++) {
+      for (let repeat = 1; repeat <= MAX_REPEATS; repeat++) {
         console.info(
           "[%s] Rep %d/%d: %s",
           platform,
-          rep,
-          REPETITIONS,
+          repeat,
+          MAX_REPEATS,
           query.query,
         );
         try {
@@ -74,7 +70,7 @@ export async function runPlatform({
           await prisma.visibilityCheck.create({
             data: {
               runId: run.id,
-              repetition: rep,
+              repetition: repeat,
               query: query.query,
               category: query.category,
               response: "",
@@ -83,11 +79,11 @@ export async function runPlatform({
               citations,
             },
           });
+          break;
         } catch (error) {
-          console.error(`[${platform}] Error: ${error}`);
-          throw error;
+          console.error("[%s] Error: %s", platform, error);
         }
-        await sleep(2_000);
+        await delay(ms("2s"));
       }
     }
   } catch (error) {
