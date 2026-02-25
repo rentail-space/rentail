@@ -5,7 +5,7 @@ import queryClaude from "./claudeClient";
 import queryGemini from "./geminiClient";
 import openaiClient from "./openaiClient";
 import queryPerplexity from "./perplexityClient";
-import { runPlatform } from "./runPlatform";
+import runPlatform from "./runPlatform";
 
 export default async function runAllQueries({
   newerThan,
