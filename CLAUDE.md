@@ -1,295 +1,99 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with
-code in this repository.
+## Commands
 
-## Essential Commands
-
-**Development:**
-
-- `pnpm dev` - Start dev server (port 5173)
-- `pnpm build` - Build for production
+- `pnpm dev` - Dev server (port 5173)
+- `pnpm build` - Production build
 - `pnpm check` - Lint + typecheck (run before committing)
 - `pnpm test` - Full suite (check + vitest)
-- `pnpm format --write` - Auto-format with Biome
+- `pnpm format --write` - Auto-format
+- `pnpx vitest run <pattern>` - Specific test / `--reporter=verbose` for detail
+- `DEBUG=server,browser pnpm dev` - Debug logging
+- `pnpm devmcp` - MCP inspector | `pnpm devai` - AI SDK devtools
+- `tsx scripts/collect.ts "Location"` - Collect shopping centers
+- `tsx scripts/promote.ts` - Promote to production
+- `tsx scripts/updateBlogSchedule.ts` - Schedule blog posts
 
-**Common Tasks:**
+## Project
 
-- `tsx scripts/collect.ts "Location"` - Collect shopping centers (supports metro
-  areas like "LA", "NYC", or counties)
-- `tsx scripts/checkWebsites.ts` - Validate seed file websites
-- `tsx scripts/promote.ts` - Promote preview deployment to production on Vercel
-- `tsx scripts/updateBlogSchedule.ts` - Schedule blog posts for future
-  publication
-- `pnpx vitest run <pattern>` - Run specific test file
-- `pnpx vitest run --reporter=verbose` - Detailed test output
+**rentail.space** - AI-powered specialty lease marketplace for short-term retail spaces in shopping centers.
 
-## Project Overview
-
-**rentail.space** is an AI-powered specialty lease marketplace connecting
-businesses with short-term retail spaces in shopping centers.
-
-**Stack:**
-
-- React Router v7 (SSR + file-based routing)
-- React 19 + TypeScript + Tailwind CSS 4
-- PostgreSQL + Prisma ORM
-- Claude AI + streaming responses
-- Redis (SSE coordination)
-- Vitest + Playwright
-- MCP protocol (AI agent interoperability)
-
-## Output Style
-
-**CLEARFRAME mode** (`.claude/rules/output-style.md`):
-
-- Execute immediately without explanation
-- No preamble/postamble phrases
-- Present only essential results
-- Zero conversational overhead
+**Stack:** React Router v7 (SSR), React 19, TypeScript, Tailwind CSS 4, PostgreSQL + Prisma, Claude AI + streaming, Redis, Vitest + Playwright, MCP
 
 ## Code Conventions
 
-**TypeScript:**
+**TypeScript:** Strict mode, interfaces over types, no enums (discriminated unions), auxiliary verb names (`isLoading`, `hasError`)
 
-- Strict mode; interfaces over types
-- Avoid enums (use discriminated unions)
-- Descriptive names with auxiliary verbs (`isLoading`, `hasError`)
+**Components:** PascalCase + default exports, `~/*` = `./app/*`, functional (no classes), early returns
 
-**Components:**
+**Formatting (Biome):** Double quotes, 2-space indent, 80 char width. No `forEach()`. `console` limited to `.assert`, `.error`, `.info`, `.warn`. No braces for single-line conditionals.
 
-- PascalCase + default exports
-- Path alias: `~/*` = `./app/*`
-- Functional patterns (no classes)
-- Early returns, no unnecessary else
+**Security:** Sanitize inputs, never `dangerouslySetInnerHTML`, bcrypt for passwords.
 
-**Formatting (Biome):**
+## Architecture
 
-- Double quotes, 2-space indent, 80 char width
-- `pnpm format --write` before committing
-- Avoid `forEach()` (use `for...of` or `map()`)
-- Limit `console` to: `.assert`, `.error`, `.info`, `.warn`
-- Do not use braces if conditional/loop is a single line
+**AI Streaming:** `streamText()` in `api.chat.$chatId.message.ts`. Resumable via Redis. `Chat.activeStreamId` tracks stream (ULID). Stop signals via `redis-stop-monitor.ts`.
 
-**Security:**
+**Working Memory:** `User.workingMemory` JSON. Schema: `app/lib/workingMemory.ts`. Claude emits `<working_memory>` tags → parsed `onFinish` → merged into profile. Fields: merchant, location, selling, projections. Tags masked from UI.
 
-- Sanitize user inputs (prevent XSS)
-- Never use `dangerouslySetInnerHTML`
-- Use bcrypt for passwords (configured)
+**Auth:** Cookie sessions (365-day), bcrypt (10 rounds), anonymous + authenticated users. Admin emails in `sessions.server.ts:32`. Email verification via 24-hour ULID tokens. Guards: `verifyAdmin()`, `getSignedInUser()`.
 
-## Key Architecture Patterns
+**UTM:** Middleware `app/lib/middleware/utm.ts`. `__utm` cookie (1-day). Persisted to `User.utm`, `.referrer`, `.ip`, `.userAgent`.
 
-**AI Streaming:**
+**Location:** workingMemory.location → Vercel IP geolocation → fallback LA Midcity (34.04592, -118.34574)
 
-- `streamText()` from Anthropic SDK in `app/routes/api.chat.$chatId.message.ts`
-- Resumable streams via Redis coordination (prevents duplication on reconnect)
-- `Chat.activeStreamId` tracks active stream (null when idle)
-- Stream lifecycle: Generate `streamId` (ULID) → Set `Chat.activeStreamId` →
-  Stream → `onFinish` clears `activeStreamId`
-- Stop signal monitoring via `redis-stop-monitor.ts`
+**Geographic Search:** Lat/lon bounding box in `findNearbyCenters.ts`. `lat ± (miles/69.172)`, `lon ± (miles/57.393)`. 30-mile search, 20-mile display. Rating ≥ 4, ordered by spaces → ranking → name.
 
-**Working Memory:**
+**Data Collection:** Hexagonal 50km grid, Google Places API via `app/lib/scrape/metroAreas.ts`. Pipeline: Places → Playwright → Claude enrichment. Metro aliases: "LA" → 4 counties, "NYC" → 5 boroughs.
 
-- User context stored in `User.workingMemory` JSON field
-- Schema: `app/lib/workingMemory.ts` (Zod validation)
-- Claude emits `<working_memory>` tags → parsed in `onFinish` → merged into user
-  profile
-- Fields: merchant, location, selling, projections
-- Tags are masked from user display in UI
-
-**Authentication:**
-
-- Cookie-based sessions (365-day expiration) via `sessions.server.ts`
-- Password hashing: bcrypt with 10 salt rounds
-- Two user types: anonymous (auto-created) and authenticated (email/password)
-- Admin emails hardcoded in `sessions.server.ts:32`
-- Email verification: 24-hour ULID tokens in `Verification` model
-- Session guards: `verifyAdmin()` for admin routes, `getSignedInUser()` for
-  profile
-
-**UTM Tracking:**
-
-- Middleware captures UTM parameters on first request (`app/lib/middleware/utm.ts`)
-- Separate `__utm` session cookie (1-day expiration, httpOnly, lax SameSite)
-- Parameters stored: `source`, `medium`, `campaign`, `term`, `content`
-- Also captures: IP address (`x-real-ip`), user agent, referrer
-- Data persisted to `User.utm` (JSON), `User.referrer`, `User.ip`, `User.userAgent`
-- Applied globally via middleware in `app/root.tsx`
-
-**Location Detection:**
-
-1. `User.workingMemory.location` (highest priority)
-2. Vercel IP geolocation headers
-3. Fallback: LA Midcity (34.04592, -118.34574)
-
-**Geographic Search:**
-
-- Simple lat/lon bounding box (no PostGIS)
-- Formula: `lat ± (miles / 69.172)`, `lon ± (miles / 57.393)`
-- Default: 30-mile search, 20-mile display
-- Implementation: `findNearbyCenters()` in `app/lib/findNearbyCenters.ts`
-- Ordered by: available spaces count (desc) → ranking (desc) → name (asc)
-- Only includes properties with rating ≥ 4
-
-**Data Collection:**
-
-- Grid-based Google Places API search via `app/lib/scrape/metroAreas.ts`
-- Hexagonal grid with 50km radius for comprehensive coverage
-- Enrichment pipeline: Google Places → Website scraping (Playwright) → AI
-  enrichment (Claude)
-- Metro area aliases: "LA" → 4 counties, "NYC" → 5 boroughs, etc.
-- Caching: Prisma Cache for geocoding and search results
-
-**Agent Interoperability:**
-
-- **MCP (Model Context Protocol)**: Exposes `list_shopping_centers` tool at
-  `/api/mcp` endpoint
-- OpenAPI spec at `/openapi.json`
-- Implementation: `app/lib/mcp/mcpServer.ts`
+**MCP:** `list_shopping_centers` at `/api/mcp`. OpenAPI at `/openapi.json`. Implementation: `app/lib/mcp/mcpServer.ts`.
 
 ## Testing
 
-**Setup:**
+Files in `/test/*.test.ts`. Vitest + Playwright. `isolate: true` required.
 
-- Test files in `/test/*.test.ts` (NOT alongside source)
-- Vitest + Playwright browser provider
-- `isolate: true` required for safety
-
-**Key Helpers:**
-
-- `converse("message", headers?)` - E2E chat testing with message submission and response wait
-- `goto(path, headers?)` - Navigate with reload and React context wait
-- MSW handlers: `/test/mocks/mswHandlers.ts`
-- Anthropic mock: `/test/mocks/mockAnthropic.ts`
-- Cleanup: Always `await prisma.user.deleteMany()` in tests requiring fresh state
-
-**Commands:**
-
-- `pnpm test` - Full suite (lint + typecheck + vitest)
-- `pnpx vitest run <pattern>` - Specific test
-- `pnpx vitest run --reporter=verbose` - Detailed output
-- `DEBUG=* pnpm test` - Enable debug logging
+- `converse("message", headers?)` - E2E chat testing
+- `goto(path, headers?)` - Navigate with React context wait
+- MSW: `/test/mocks/mswHandlers.ts` | Anthropic mock: `/test/mocks/mockAnthropic.ts`
+- Cleanup: `await prisma.user.deleteMany()` in tests needing fresh state
 
 ## Common Tasks
 
-**Add API Route:**
+**Add API route:** `app/routes/api.feature.ts` → export `action()`/`loader()`. Streaming: `streamText()` + `text/event-stream`.
 
-1. Create `app/routes/api.feature.ts`
-2. Export `action()` or `loader()`
-3. For streaming: use `streamText()` + `text/event-stream` header
-4. Test in `/test/*.test.tsx`
+**Modify Working Memory:** Edit `app/lib/workingMemory.ts` → update `app/prompts/*.md`.
 
-**Modify Working Memory:**
+**Add blog post:** `app/data/blog/YYYY-MM-DD-slug.md` with frontmatter (`title`, `image`, `alt`, `summary`). Images in `public/blog/`. Schedule with `updateBlogSchedule.ts`. Voice: direct, problem-solution, CTAs to rentail.space/chat.
 
-1. Edit schema in `app/lib/workingMemory.ts`
-2. Update prompts (`app/prompts/*.md`) to instruct Claude
-3. Test with mock Anthropic responses
+**Add MCP tool:** Handler in `app/lib/mcp/register*.ts` → register in `mcpServer.ts`.
 
-**Add Blog Post:**
+**Data collection:** `tsx scripts/collect.ts "Location"` → seeds in `app/data/seeds/` → `tsx scripts/seedCenter.ts path/to/seed.json`.
 
-1. Create markdown in `app/data/blog/YYYY-MM-DD-slug.md`
-2. Add YAML frontmatter: `title`, `image`, `alt`, `summary`
-3. Images go in `public/blog/` (match filename: `YYYY-MM-DD-slug.jpg`)
-4. Auto-discovered via `blogPosts.server.ts`
-5. Use `tsx scripts/updateBlogSchedule.ts` to manage post scheduling
-6. Follow rentail voice: direct, problem-solution focused, strong CTAs linking
-   to rentail.space/chat
+## Git
 
-**Add MCP Tool:**
+Format: `emoji type(scope): description` (imperative, atomic)
 
-1. Create tool handler in `app/lib/mcp/register*.ts`
-2. Register in `app/lib/mcp/mcpServer.ts`
-3. Tools are automatically exposed via `/api/mcp` endpoint
-4. Test with: `pnpm devmcp` (launches MCP inspector)
+✨ feat  🐛 fix  📝 docs  ♻️ refactor  ✅ test  🔧 chore
 
-**Run Data Collection:**
+## Database
 
-1. Use `tsx scripts/collect.ts "Location"` (e.g., "Los Angeles, CA")
-2. System resolves to metro area and generates search grid
-3. Results saved as seed files in `app/data/seeds/`
-4. Import: `tsx scripts/seedCenter.ts path/to/seed.json`
+Edit `prisma/schema.prisma` → `pnpm prisma generate` → `pnpm prisma db push`. Separate migrations for adding vs deleting fields.
 
-## Git Commits
+**Models:** User, Chat, Messages, Property, PropertySpace, Session, Verification, Cache, State, City/County/MetroArea/RegionalName, ApiUsage, BotVisit, VisibilityCheck
 
-Use conventional commits with emoji prefixes:
+## Environment
 
-- ✨ `feat:` New features
-- 🐛 `fix:` Bug fixes
-- 📝 `docs:` Documentation
-- ♻️ `refactor:` Code restructuring
-- ✅ `test:` Tests
-- 🔧 `chore:` Maintenance
+Required: `SESSION_SECRET`, `DATABASE_URL`, `ANTHROPIC_API_KEY`, `GOOGLE_MAPS_API_KEY`, `RESEND_API_KEY`
+Optional: `REDIS_URL`, `VERCEL_*`
 
-Format: `emoji type(scope): description`
+## Reminders
 
-Imperative mood, atomic commits, reference files when helpful.
-
-## Database Management
-
-**Schema Updates:**
-
-1. Make sure all schema migrations are possible
-2. If necessary, separate schema migrations so one migration may add new field, while another migration may delete existinf field
-3. Edit `prisma/schema.prisma`
-4. Generate client: `pnpm prisma generate`
-5. Push to dev: `pnpm prisma db push`
-
-**Models:**
-
-- `User` - Authentication and working memory
-- `Chat` - Conversation threads with `activeStreamId`
-- `Messages` - Chat messages (JSON content, UIMessage format)
-- `Property` - Shopping centers (lat/lon, demographics, tier, ranking)
-- `PropertySpace` - Individual retail spaces
-- `Session` - Auth sessions (token, expiration)
-- `Verification` - Email verification tokens
-- `Cache` - Generic key-value store (geocoding, API results)
-- `State` - US state data (abbreviation, name, lede)
-- `City`, `County`, `MetroArea`, `RegionalName` - Geographic hierarchy
-- `ApiUsage` - API call tracking (Google Places, Geocoding, SerpAPI)
-- `BotVisit` - Bot traffic tracking
-- `VisibilityCheck` - AI visibility/citation tracking
-
-## Environment Variables
-
-**Required:**
-
-- `SESSION_SECRET` - Session cookie secret
-- `DATABASE_URL` - PostgreSQL connection string
-- `ANTHROPIC_API_KEY` - Claude AI API key
-- `GOOGLE_MAPS_API_KEY` - For geocoding and Places API
-- `RESEND_API_KEY` - Email delivery
-
-**Optional:**
-
-- `REDIS_URL` - For stream coordination (falls back to memory)
-- `VERCEL_*` - Auto-set in Vercel deployments
-
-## Development Tools
-
-**Debugging:**
-
-- `DEBUG=server,browser pnpm dev` - Enable debug logging
-- `pnpm devmcp` - Inspect MCP server with Model Context Protocol inspector
-- `pnpm devai` - Launch AI SDK devtools for streaming debugging
-
-**Code Quality:**
-
-- `pnpm format` - Auto-format with Biome
-- `pnpm lint` - Lint code + check for secrets (secretlint)
-- `pnpm check` - Full check (lint + typecheck) - run before committing
-
-## Important Reminders
-
-- Run `pnpm check` before committing (lint + typecheck)
-- All pages need `<main>` with `aria-label` for accessibility
-- Center seed files MUST have valid `website` property
-- Store AI planning docs in `history/` directory (not repo root)
-- Node.js 24.10.1+ required (see `engines` in package.json)
-- Package manager: pnpm 10.28.1+
-
-IMPORTANT: Prefer retrieval-led reasoning over pre-training-led reasoning
-for any coding task.
+- `pnpm check` before committing
+- All pages: `<main aria-label="...">`
+- Seed files must have valid `website`
+- AI planning docs → `history/`
+- Node.js 24.10.1+, pnpm 10.28.1+
+- Prefer retrieval-led over pre-training-led reasoning
 
 <!-- rtk-instructions v2 -->
 # RTK (Rust Token Killer) - Token-Optimized Commands
@@ -313,9 +117,6 @@ rtk git add . && rtk git commit -m "msg" && rtk git push
 ### Build & Compile (80-90% savings)
 
 ```bash
-rtk cargo build         # Cargo build output
-rtk cargo check         # Cargo check output
-rtk cargo clippy        # Clippy warnings grouped by file (80%)
 rtk tsc                 # TypeScript errors grouped by file/code (83%)
 rtk lint                # ESLint/Biome violations grouped (84%)
 rtk prettier --check    # Files needing format only (70%)
@@ -325,7 +126,6 @@ rtk next build          # Next.js build with route metrics (87%)
 ### Test (90-99% savings)
 
 ```bash
-rtk cargo test          # Cargo test failures only (90%)
 rtk vitest run          # Vitest failures only (99.5%)
 rtk playwright test     # Playwright failures only (94%)
 rtk test <cmd>          # Generic test wrapper - failures only
@@ -386,27 +186,8 @@ rtk find <pattern>      # Find grouped by directory (70%)
 rtk err <cmd>           # Filter errors only from any command
 rtk log <file>          # Deduplicated logs with counts
 rtk json <file>         # JSON structure without values
-rtk deps                # Dependency overview
-rtk env                 # Environment variables compact
 rtk summary <cmd>       # Smart summary of command output
 rtk diff                # Ultra-compact diffs
-```
-
-### Infrastructure (85% savings)
-
-```bash
-rtk docker ps           # Compact container list
-rtk docker images       # Compact image list
-rtk docker logs <c>     # Deduplicated logs
-rtk kubectl get         # Compact resource list
-rtk kubectl logs        # Deduplicated pod logs
-```
-
-### Network (65-70% savings)
-
-```bash
-rtk curl <url>          # Compact HTTP responses (70%)
-rtk wget <url>          # Compact download output (65%)
 ```
 
 ### Meta Commands
@@ -416,22 +197,5 @@ rtk gain                # View token savings statistics
 rtk gain --history      # View command history with savings
 rtk discover            # Analyze Claude Code sessions for missed RTK usage
 rtk proxy <cmd>         # Run command without filtering (for debugging)
-rtk init                # Add RTK instructions to CLAUDE.md
-rtk init --global       # Add RTK to ~/.claude/CLAUDE.md
 ```
-
-## Token Savings Overview
-
-| Category | Commands | Typical Savings |
-|----------|----------|-----------------|
-| Tests | vitest, playwright, cargo test | 90-99% |
-| Build | next, tsc, lint, prettier | 70-87% |
-| Git | status, log, diff, add, commit | 59-80% |
-| GitHub | gh pr, gh run, gh issue | 26-87% |
-| Package Managers | pnpm, npm, npx | 70-90% |
-| Files | ls, read, grep, find | 60-75% |
-| Infrastructure | docker, kubectl | 85% |
-| Network | curl, wget | 65-70% |
-
-Overall average: **60-90% token reduction** on common development operations.
 <!-- /rtk-instructions -->
