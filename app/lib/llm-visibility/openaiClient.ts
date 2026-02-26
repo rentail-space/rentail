@@ -9,7 +9,7 @@ export default async function openaiClient(query: string): Promise<{
   citations: string[];
   queries: string[];
 }> {
-  const { sources, ...other } = await generateText({
+  const { sources } = await generateText({
     maxOutputTokens: 2000,
     model: openai(MODEL_ID),
     providerOptions: {
