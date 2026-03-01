@@ -85,6 +85,7 @@ jobs:
           ANTHROPIC_API_KEY: "***REMOVED***"
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
           DEBUG: ""
+          DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
           OPENAI_API_KEY: "***REMOVED***"
           REDIS_URL: "redis://localhost:6379"
           RESEND_API_KEY: "re_"

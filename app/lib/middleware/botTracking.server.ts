@@ -133,6 +133,17 @@ export async function trackBotVisit(request: Request): Promise<void> {
     captureException(error, { extra: { botType, path, userAgent, ip } });
     logger("Error tracking bot visit:", error);
   }
+
+  fetch("https://citeup.vercel.app/api/track-bot", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      url: request.url,
+      userAgent: userAgent,
+      accept: request.headers.get("accept") ?? "*/*",
+      referer: request.headers.get("referer"),
+    }),
+  });
 }
 
 /**
