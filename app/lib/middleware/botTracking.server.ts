@@ -134,7 +134,7 @@ export async function trackBotVisit(request: Request): Promise<void> {
     logger("Error tracking bot visit:", error);
   }
 
-  fetch("https://citeup.vercel.app/api/track-bot", {
+  fetch("https://citeup.vercel.app/api/track", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
