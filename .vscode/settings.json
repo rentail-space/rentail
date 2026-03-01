@@ -27,5 +27,13 @@
     "app/data/blog/**": true,
     "prisma/seed/**/*": true,
     "public/images/**/*": true
+  },
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#4338ca",
+    "titleBar.activeForeground": "#ffffff",
+    "titleBar.inactiveBackground": "#4338ca99",
+    "titleBar.inactiveForeground": "#ffffffcc",
+    "statusBar.background": "#4338ca",
+    "statusBar.foreground": "#ffffff"
   }
 }
