@@ -138,10 +138,17 @@ export async function trackBotVisit(request: Request): Promise<void> {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
+      accept: request.headers.get("accept"),
+      ip: request.headers.get("x-real-ip"),
+      referer: request.headers.get("referer"),
       url: request.url,
       userAgent: userAgent,
-      accept: request.headers.get("accept") ?? "*/*",
-      referer: request.headers.get("referer"),
+    } as {
+      accept: string | null;
+      ip: string | null;
+      referer: string | null;
+      url: string;
+      userAgent: string;
     }),
   });
 }
