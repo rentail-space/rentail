@@ -102,6 +102,7 @@ jobs:
         uses: dopplerhq/cli-action@v3
 
       - name: Update database
+        if: github.ref == 'refs/heads/main'
         run: |
           doppler run --config prd -- pnpm prisma db push
         env:
@@ -113,7 +114,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           org-id: "team_bjyg9pgn8TQQVP2NLMPnSYSN"
           prebuilt: false
-          production: false
+          production: true
           project-id: "prj_SrqYHd1Olo0XfxQHLe9lyGfcoT9z"
           token: ${{ secrets.VERCEL_TOKEN }}
         env:
