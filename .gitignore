@@ -32,3 +32,4 @@ prisma/backup.sql
 
 .devtools
 *.profraw
+.env*.local

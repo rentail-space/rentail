@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
   "vcs": {
     "enabled": false,
     "clientKind": "git",
@@ -23,6 +23,7 @@
       "!package.json",
       "!prisma/generated",
       "!prisma/seed",
+      "!prisma/backup.sql",
       "!__screenshots__"
     ],
     "ignoreUnknown": false
@@ -65,7 +66,12 @@
         "noUnsafeDeclarationMerging": "error",
         "noConsole": {
           "options": {
-            "allow": ["assert", "error", "info", "warn"]
+            "allow": [
+              "assert",
+              "error",
+              "info",
+              "warn"
+            ]
           }
         },
         "noDuplicateDependencies": "error",

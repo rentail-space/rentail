@@ -13,9 +13,8 @@ import {
   Area,
   AreaChart,
   CartesianGrid,
-  type DataKey,
   XAxis,
-  YAxis,
+  YAxis
 } from "recharts";
 import { Card, CardContent } from "~/components/ui/Card";
 import {
@@ -143,7 +142,7 @@ function SquareAnalyticsCharts({
       {Object.entries(chartConfig).map(([key, value]) => (
         <SpecificChart
           data={data}
-          dataKey={key}
+          dataKey={key as keyof typeof chartConfig}
           fill={value.color}
           isDaily={isDaily}
           key={key}
@@ -196,7 +195,7 @@ function SpecificChart({
 }: {
   isDaily: boolean;
   data: Array<{ date: Temporal.PlainDate }>;
-  dataKey: DataKey<(typeof data)[number]>;
+  dataKey: keyof typeof chartConfig;
   fill: string;
   name: string;
   valueFormatter: (value: number) => string;

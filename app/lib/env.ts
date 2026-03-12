@@ -8,10 +8,10 @@ const envVars = {
   isTest: process.env.NODE_ENV === "test",
   isDevelopment: process.env.NODE_ENV === "development",
 
-  LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required(false).asUrlString(),
+  LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required(false).asString(),
   LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required(false).asString(),
   PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required(false).asString(),
-  PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required(false).asUrlString(),
+  PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required(false).asString(),
 
   ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),
   OPENAI_API_KEY: env.get("OPENAI_API_KEY").required().asString(),

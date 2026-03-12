@@ -10,7 +10,6 @@
 
 import { expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
-import prisma from "~/lib/prisma.server";
 import { port } from "~/test/helpers/launchBrowser";
 
 describe("News Sitemap", () => {
@@ -18,7 +17,6 @@ describe("News Sitemap", () => {
   let response: Response;
 
   beforeAll(async () => {
-    await prisma.botVisit.deleteMany();
     response = await fetch(`http://localhost:${port}/news/sitemap.md`, {
       headers: { "User-Agent": "Googlebot" },
     });
@@ -65,11 +63,5 @@ describe("News Sitemap", () => {
   it("should include link back to For AI Assistants", () => {
     const parts = content.split("---").filter(Boolean);
     expect(parts[2]).toContain("[For AI Assistants](/for-ai-assistants.md)");
-  });
-
-  it("track news sitemap visit", async () => {
-    const visits = await prisma.botVisit.findMany();
-    expect(visits).toHaveLength(1);
-    expect(visits[0].path).toBe("/news/sitemap.md");
   });
 });

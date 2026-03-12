@@ -40,7 +40,6 @@ export default async function setup() {
   // Clean up database and seed it again
   await prisma.user.deleteMany();
   await prisma.property.deleteMany();
-  await prisma.botVisit.deleteMany();
 
   await seedStatesAndRelatedData();
   await seedCenters(centers);

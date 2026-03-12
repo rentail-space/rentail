@@ -15,7 +15,6 @@ import {
 import { WaveLoading } from "respinner";
 import PageLayout from "~/components/layout/PageLayout";
 import "~/global.css";
-import { botTrackingMiddleware } from "~/lib/middleware/botTracking.server";
 import loggingMiddleware from "~/lib/middleware/logging.server";
 import { utmMiddleware } from "~/lib/middleware/utm.server";
 import pageMeta from "~/lib/pageMeta";
@@ -36,7 +35,6 @@ export function meta(): Route.MetaDescriptors {
 // NOTE: not currently implemented, we're using other functions elsewhere
 export const middleware: Route.MiddlewareFunction[] = [
   utmMiddleware,
-  botTrackingMiddleware,
   loggingMiddleware,
 ];
 

@@ -1,6 +1,5 @@
 import { type Page, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import prisma from "~/lib/prisma.server";
 import { goto, port } from "~/test/helpers/launchBrowser";
 
 describe("For AI Assistants page", () => {
@@ -191,7 +190,6 @@ describe("For AI Assistants page", () => {
     let content: string;
 
     beforeAll(async () => {
-      await prisma.botVisit.deleteMany();
       const response = await fetch(
         `http://localhost:${port}/for-ai-assistants.md`,
         {
@@ -223,12 +221,6 @@ describe("For AI Assistants page", () => {
     it("should include link back to Blog Sitemap", async () => {
       const parts = content.split("---").filter(Boolean);
       expect(parts[1]).toContain("[Blog Sitemap](/blog/sitemap.md)");
-    });
-
-    it("track for ai assistants visit", async () => {
-      const visits = await prisma.botVisit.findMany();
-      expect(visits).toHaveLength(1);
-      expect(visits[0].path).toBe("/for-ai-assistants.md");
     });
   });
 });

@@ -14,34 +14,54 @@
     ".vercel",
     ".vscode",
     "biome.json",
-    "build",
     "node_modules",
-    "package.json",
     "prisma/generated",
-    "prisma/seed",
+    "prisma/backup.sql",
+    "scripts",
     "public"
   ],
   "compilerOptions": {
     "baseUrl": ".",
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2022"
+    ],
     "module": "ES2022",
     "moduleResolution": "bundler",
     "noEmit": true,
     "paths": {
-      "~/*": ["./app/*"],
-      "~/test/*": ["./test/*"],
-      "~/types/*": [".react-router/types/*"],
-      "prisma": ["./prisma/generated"],
-      "prisma/generated": ["./prisma/generated"]
+      "~/*": [
+        "./app/*"
+      ],
+      "~/test/*": [
+        "./test/*"
+      ],
+      "~/types/*": [
+        ".react-router/types/*"
+      ],
+      "prisma": [
+        "./prisma/generated"
+      ],
+      "prisma/generated": [
+        "./prisma/generated"
+      ]
     },
     "resolveJsonModule": true,
-    "rootDirs": [".", "./.react-router/types"],
+    "rootDirs": [
+      ".",
+      "./.react-router/types"
+    ],
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2022",
-    "types": ["node", "vite/client", "@react-router/node"],
+    "types": [
+      "node",
+      "vite/client",
+      "@react-router/node"
+    ],
     "verbatimModuleSyntax": true
   }
 }
