@@ -96,8 +96,8 @@ importers:
         specifier: ^1.6.1
         version: 1.6.1(react@19.2.4)(vue-router@4.6.3(vue@3.5.25(typescript@5.9.3)))(vue@3.5.25(typescript@5.9.3))
       '@vercel/config':
-        specifier: ^0.0.35
-        version: 0.0.35
+        specifier: ^0.0.38
+        version: 0.0.38
       '@vercel/react-router':
         specifier: ^1.2.5
         version: 1.2.5(@react-router/dev@7.13.1(@react-router/serve@7.13.1(react-router@7.13.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(typescript@5.9.3))(@types/node@25.4.0)(jiti@2.6.1)(lightningcss@1.31.1)(react-router@7.13.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.44.1)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.4.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(@react-router/node@7.13.1(react-router@7.13.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(typescript@5.9.3))(isbot@5.1.35)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -156,8 +156,8 @@ importers:
         specifier: ^10.0.1
         version: 10.0.1
       lucide-react:
-        specifier: ^0.575.0
-        version: 0.575.0(react@19.2.4)
+        specifier: ^0.577.0
+        version: 0.577.0(react@19.2.4)
       mapbox-gl:
         specifier: ^3.19.1
         version: 3.19.1
@@ -2835,8 +2835,8 @@ packages:
       vue-router:
         optional: true
 
-  '@vercel/config@0.0.35':
-    resolution: {integrity: sha512-6XaWTcNcsblJcHBvJf8V2fMZ6tcXEdtGXPinnkuUH2p3im/agvOKAeMbl5xmeDUXiWUQvFYYlFG3Bs8UBFhNJw==}
+  '@vercel/config@0.0.38':
+    resolution: {integrity: sha512-G5UIE6+PZzBsy/jsBPzdqdauMyUWfHeE1JaxuYsQfk50chTqNXmGsfr856n3wQy7krlFLc0pFG9YTFnNoLBvtw==}
     hasBin: true
 
   '@vercel/oidc@3.1.0':
@@ -2852,8 +2852,8 @@ packages:
       react: '>=18'
       react-dom: '>=18'
 
-  '@vercel/routing-utils@6.0.0':
-    resolution: {integrity: sha512-EL+rKYJCI4FPAzHUkhz7ds1Bgv0d+p9HBEzIok1sLVHItACSReh2f4ar1ZNZ4iSItE/J3D+AfwH1ouHQvuZHOw==}
+  '@vercel/routing-utils@6.0.2':
+    resolution: {integrity: sha512-XFsvKoRhwwxKC8jnnefhjYG02g5qpHc2PCxd2EKEVLiHQLF9un8HEA6+R0OfazN0daVj3SxjTDVnFClVREjg1Q==}
 
   '@vercel/sdk@1.19.11':
     resolution: {integrity: sha512-PzsZq7VMeUQfH684GBjNQQFSDjg0uuAOu79We6yxOPMd4pIkS64HD+eoufyAhkk82nQ3qZ5I4wjWL41cLWczng==}
@@ -4299,8 +4299,8 @@ packages:
     resolution: {integrity: sha512-DqC6n3QQ77zdFpCMASA1a3Jlb64Hv2N2DciFGkO/4L9+q/IpIAuRlKOvCXabtRW6cQf8usbmM6BE/TOPysCdIA==}
     engines: {bun: '>=1.0.0', deno: '>=1.30.0', node: '>=8.0.0'}
 
-  lucide-react@0.575.0:
-    resolution: {integrity: sha512-VuXgKZrk0uiDlWjGGXmKV6MSk9Yy4l10qgVvzGn2AWBx1Ylt0iBexKOAoA6I7JO3m+M9oeovJd3yYENfkUbOeg==}
+  lucide-react@0.577.0:
+    resolution: {integrity: sha512-4LjoFv2eEPwYDPg/CUdBJQSDfPyzXCRrVW1X7jrx/trgxnxkHFjnVZINbzvzxjN70dxychOfg+FTYwBiS3pQ5A==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -8410,9 +8410,9 @@ snapshots:
       vue: 3.5.25(typescript@5.9.3)
       vue-router: 4.6.3(vue@3.5.25(typescript@5.9.3))
 
-  '@vercel/config@0.0.35':
+  '@vercel/config@0.0.38':
     dependencies:
-      '@vercel/routing-utils': 6.0.0
+      '@vercel/routing-utils': 6.0.2
       pretty-cache-header: 1.0.0
       zod: 3.25.76
 
@@ -8428,7 +8428,7 @@ snapshots:
       react-dom: 19.2.4(react@19.2.4)
       ts-morph: 12.0.0
 
-  '@vercel/routing-utils@6.0.0':
+  '@vercel/routing-utils@6.0.2':
     dependencies:
       path-to-regexp: 6.1.0
       path-to-regexp-updated: path-to-regexp@6.3.0
@@ -9990,7 +9990,7 @@ snapshots:
 
   lru.min@1.1.4: {}
 
-  lucide-react@0.575.0(react@19.2.4):
+  lucide-react@0.577.0(react@19.2.4):
     dependencies:
       react: 19.2.4
 
