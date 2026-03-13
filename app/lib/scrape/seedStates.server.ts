@@ -44,6 +44,14 @@ export default async function seedStatesAndRelatedData() {
 }
 
 async function seedStates(): Promise<State[]> {
+  // PROMPT:
+  //
+  // write a short blurb about New Jersey state. what's special about it, why
+  // would I want to open a retail space in a shopping center in new your state.
+  // Make it two paragraphs, with 2~3 sentences in each paragraph. capture the
+  // reader's imagination and entice them to click the link. Use numbers if you
+  // have them.
+
   const stateSchema = z.array(
     z.object({
       name: z.string(),

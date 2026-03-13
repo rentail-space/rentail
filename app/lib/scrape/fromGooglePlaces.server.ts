@@ -4,8 +4,8 @@
  */
 
 import { invariant, mapAsync } from "es-toolkit";
+import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
-import { daysAgo } from "~/lib/temporal";
 import { join } from "node:path";
 import ora, { type Ora } from "ora";
 import type { Property } from "prisma/generated/client";
@@ -13,6 +13,7 @@ import sharp from "sharp";
 import zod from "zod";
 import { trackApiCall } from "~/lib/apiUsageTracker";
 import envVars from "~/lib/env";
+import { daysAgo } from "~/lib/temporal";
 import { slugify } from "../utils";
 
 if (!envVars.GOOGLE_PLACES_API_KEY)
@@ -346,6 +347,15 @@ async function downloadPhotos({
 
   for (let index = 0; index < download.length; index++) {
     const photo = download[index];
+
+    // Save with naming convention: {state}-{slug}-{index}.jpg
+    const filename = `${slug}-${index + 1}.jpg`;
+    const filepath = join("public", "images", "malls", filename);
+    if (existsSync(filepath)) {
+      imageURLs.push(`/images/malls/${filename}`);
+      continue;
+    }
+
     try {
       const { data: buffer } = await trackApiCall(
         {
@@ -392,10 +402,7 @@ async function downloadPhotos({
         .jpeg({ quality: 90, mozjpeg: true })
         .toBuffer();
 
-      // Save with naming convention: {state}-{slug}-{index}.jpg
-      const filename = `${slug}-${index + 1}.jpg`;
-      const filepath = join("public", "images", "malls", filename);
-
+      // Save image to file
       await mkdir(join(filepath, ".."), { recursive: true });
       await writeFile(filepath, compressed);
 

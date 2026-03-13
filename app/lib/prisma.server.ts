@@ -14,7 +14,6 @@ import { PrismaClient } from "prisma/generated/client";
 dotenv.configDotenv({ quiet: true });
 invariant(process.env.DATABASE_URL, "DATABASE_URL is required");
 
-
 export default new PrismaClient({
   adapter: new PrismaPg({
     connectionString: process.env.DATABASE_URL,

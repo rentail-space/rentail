@@ -15,11 +15,13 @@ process.env.NODE_ENV = "production";
 const cityInput = process.argv[2];
 
 if (!cityInput) {
-  console.error('Usage: doppler run -- tsx scripts/collect.ts "City Name"');
+  console.error(
+    'Usage: NODE_ENV=production doppler run -- tsx scripts/collect.ts "City Name"\n',
+  );
   console.error("Examples:");
-  console.error('  doppler run --  tsx scripts/collect.ts "LA"');
-  console.error('  doppler run --  tsx scripts/collect.ts "New York"');
-  console.error('  doppler run --  tsx scripts/collect.ts "Las Vegas"');
+  console.error('  tsx scripts/collect.ts "LA"');
+  console.error('  tsx scripts/collect.ts "New York"');
+  console.error('  tsx scripts/collect.ts "Las Vegas"');
   process.exit(1);
 }
 

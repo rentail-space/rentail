@@ -7,7 +7,7 @@ import prisma from "~/lib/prisma.server";
 import { slugify } from "~/lib/utils";
 import envVars from "../env";
 
-const schema = z.object({
+export const schema = z.object({
   name: z.string(),
   city: z.string(),
   state: z.string(),
@@ -89,7 +89,8 @@ export default async function seedCenters(centerSlugs?: string[]) {
   if (unknownStates.length > 0) logger("❌ Unknown states: %o", unknownStates);
 }
 
-async function seedCenter(center: z.infer<typeof schema>) {
+export async function seedCenter(rawCenter: z.infer<typeof schema>) {
+  const center = schema.parse(rawCenter);
   logger("🔄 Seeding %s %s", center.state, center.name);
 
   const imageURLs = center.imageURLs.map((url) =>

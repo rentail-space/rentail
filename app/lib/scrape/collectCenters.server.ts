@@ -5,10 +5,11 @@
 
 import { mapAsync, partition } from "es-toolkit";
 import { existsSync } from "node:fs";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import ora from "ora";
 import { chromium } from "playwright";
+import type z from "zod";
 import externalLink from "../externalLink";
 import { slugify } from "../utils";
 import enrichCenter from "./enrichCenter";
@@ -19,6 +20,7 @@ import resolveMetroArea from "./metroAreas";
 import ranking from "./ranking";
 import scrapeCenter from "./scrapeCenter";
 import scrapeSpaces from "./scrapeSpaces";
+import { schema, seedCenter } from "./seedCenters.server";
 
 /**
  * Collect shopping centers using grid-based search
@@ -72,7 +74,7 @@ export default async function collectCenters(search: string) {
 
   // Step 7: Enrich each center (same as collectCenters.ts)
   // Partition into new vs existing
-  const [_, creating] = partition(centers, (center) =>
+  const [existing, creating] = partition(centers, (center) =>
     existsSync(getCenterSaveFilename(center)),
   );
   console.info(
@@ -100,21 +102,17 @@ export default async function collectCenters(search: string) {
       // Save to file
       const filename = getCenterSaveFilename(center);
       await mkdir(dirname(filename), { recursive: true });
-      await writeFile(
-        filename,
-        JSON.stringify(
-          {
-            ...center,
-            ...enriched,
-            summary: enriched.summary ?? center.summary,
-            spaces,
-            ranking: ranking({ ...center, ...enriched }),
-          },
-          null,
-          2,
-        ),
-      );
+      const data = {
+        ...center,
+        ...enriched,
+        summary: enriched.summary ?? center.summary,
+        spaces,
+        ranking: ranking({ ...center, ...enriched }),
+      };
+      await writeFile(filename, JSON.stringify(data, null, 2));
 
+      // Seed center
+      await seedCenter(data);
       console.info("\x1b[32m  ✓ Saved %s\x1b[0m", filename);
       successCount++;
     } catch (error) {
@@ -128,6 +126,14 @@ export default async function collectCenters(search: string) {
   }
 
   await browser.close();
+
+  for (const center of existing) {
+    const filename = getCenterSaveFilename(center);
+    console.info("Seeding existing center: %s", filename);
+    const data = await readFile(filename, "utf-8");
+    const parsed = schema.parse(JSON.parse(data)) as z.infer<typeof schema>;
+    await seedCenter(parsed);
+  }
 
   // Summary
   console.info(
