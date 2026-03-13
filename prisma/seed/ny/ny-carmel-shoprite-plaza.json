@@ -1,0 +1,28 @@
+{
+  "address": "150-180 New York 52",
+  "city": "Carmel Hamlet",
+  "country": "US",
+  "googlePlaceID": "places/ChIJmQFwkR1N3YkRJziZybyqJy4",
+  "name": "Carmel ShopRite Plaza",
+  "state": "NY",
+  "latitude": 41.4361551,
+  "longitude": -73.6802428,
+  "phone": "++1 203-863-8200",
+  "imageURLs": [
+    "/images/malls/ny-carmel-shoprite-plaza-1.jpg"
+  ],
+  "summary": "Carmel ShopRite Plaza is a 145,466 square foot community center anchored by ShopRite, 52 Fitness, and Box Office Cinemas, conveniently located near I-84 in affluent Putnam County. The center attracts 1.8 million annual visits from a prosperous trade area with average household incomes of $142,515.",
+  "openFrom": 600,
+  "openUntil": 2300,
+  "rating": 4.5,
+  "reviewCount": 106,
+  "website": "https://www.regencycenters.com/property/detail/70043/Carmel-ShopRite-Plaza?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Carmel ShopRite Plaza serves an affluent suburban trade area with households earning an average income of $142,515 and home values averaging $494,300 within a 3-mile radius. The center attracts approximately 1.8 million annual visits from a population of over 18,000 residents, primarily consisting of established families and professionals in the Putnam County area. The daytime population of nearly 16,000 workers supplements the residential base, creating strong weekday traffic patterns. Shoppers in this market demonstrate preferences for quality grocery options, fitness amenities, and convenient services that support their upscale suburban lifestyle.",
+  "description": "Carmel ShopRite Plaza is a well-established community shopping center strategically positioned on Route 52 in Carmel, New York, serving the affluent Putnam County market. Spanning 145,466 square feet, this thriving retail destination is anchored by ShopRite supermarket and complemented by 52 Fitness and Box Office Cinemas, creating a compelling mix of grocery, wellness, and entertainment options. The center's prime location less than one mile from downtown Carmel and just minutes from Interstate 84 provides exceptional accessibility for the surrounding community of over 18,000 residents. With an impressive 1.8 million annual visits and a 4.5-star rating from over 100 reviews, the plaza has established itself as a trusted neighborhood hub. The trade area demographics are particularly strong, with average household incomes exceeding $142,000 and home values approaching half a million dollars, supporting a stable tenant base and consistent foot traffic throughout the week.",
+  "numberOfStores": 3,
+  "squareFootage": 145466,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 18.227752787382933
+}

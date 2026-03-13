@@ -1,0 +1,26 @@
+{
+  "address": "55 Richmond Terrace",
+  "city": "Staten Island",
+  "country": "US",
+  "googlePlaceID": "places/ChIJYWsog9RPwokRAZDSG1_ZgiE",
+  "name": "Empire Outlets",
+  "state": "NY",
+  "latitude": 40.6444979,
+  "longitude": -74.0762802,
+  "phone": "++1 718-679-9069",
+  "imageURLs": [
+    "/images/malls/ny-empire-outlets-1.jpg"
+  ],
+  "summary": "Empire Outlets is New York City's only outlet shopping center, featuring designer brand outlets with waterfront views of the Statue of Liberty and Manhattan skyline. Located steps from the Staten Island Ferry terminal, this modern open-air destination combines premium outlet shopping with diverse dining options in a spectacular harbor-side setting.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4,
+  "reviewCount": 2077,
+  "website": "https://www.empireoutlets.nyc/?utm_id=68040&utm_source=rentail.space",
+  "centerType": "OutletCenter",
+  "demographics": "Empire Outlets attracts a diverse mix of tourists and local Staten Island residents, with a significant portion of visitors being value-conscious shoppers seeking designer brands at discounted prices. The center draws heavily from the cruise ship passengers and tourists visiting the nearby Staten Island Ferry terminal and Statue of Liberty, representing a broad age range from young families to retirees with middle to upper-middle income levels. The trade area extends beyond Staten Island to include bargain-hunting shoppers from Brooklyn, Manhattan, and New Jersey who are drawn by the waterfront location and outlet pricing, with shopping patterns showing peak traffic during weekends, holidays, and cruise ship arrival times.",
+  "description": "Empire Outlets stands as New York City's first and only outlet center, strategically positioned along the Staten Island waterfront with stunning views of the Statue of Liberty and Manhattan skyline. Opened in 2019, this modern retail destination transformed the historic waterfront area adjacent to the Staten Island Ferry terminal into a premier shopping and dining experience. The center features a carefully curated mix of designer outlet stores offering significant savings on premium brands, complemented by diverse dining options and entertainment venues that capitalize on its spectacular harbor-side location. With its unique position as a gateway to Staten Island, Empire Outlets serves both tourists arriving via ferry and cruise ships, as well as local residents seeking quality brands at outlet prices. The open-air design incorporates the area's maritime heritage while providing a contemporary shopping environment that has become an integral part of Staten Island's ongoing waterfront revitalization and a must-visit destination for value-conscious shoppers throughout the New York metropolitan area.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 26.539491972280793
+}

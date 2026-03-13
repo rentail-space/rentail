@@ -1,0 +1,26 @@
+{
+  "address": "2601 Hempstead Turnpike",
+  "city": "Elmont",
+  "country": "US",
+  "googlePlaceID": "places/ChIJG-4BQQBjwokRukosxP2_5yk",
+  "name": "Belmont Park Village",
+  "state": "NY",
+  "latitude": 40.708858,
+  "longitude": -73.7258963,
+  "phone": "++1 516-421-4900",
+  "imageURLs": [
+    "/images/malls/ny-belmont-park-village-1.jpg"
+  ],
+  "summary": "Belmont Park Village is an upscale open-air lifestyle center featuring luxury boutiques including Coach, Gianvito Rossi, and Lacoste. Located adjacent to UBS Arena and Belmont Park Racetrack, it offers a premium shopping experience for visitors attending events at the entertainment campus.",
+  "openFrom": 1000,
+  "openUntil": 1900,
+  "rating": 4.6,
+  "reviewCount": 241,
+  "website": "http://www.belmontparkvillage.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Belmont Park Village attracts an affluent demographic from Nassau County and western Long Island, with visitors typically in the 35-65 age range and household incomes exceeding $100,000. The trade area draws from nearby upscale communities including Garden City, Floral Park, and Great Neck, as well as visitors attending events at UBS Arena and Belmont Park Racetrack. The center appeals to fashion-conscious shoppers seeking premium brands and luxury goods, with a customer base that values quality over discount pricing and appreciates the convenience of high-end shopping near major entertainment venues.",
+  "description": "Belmont Park Village is an upscale lifestyle shopping destination located at the heart of the Belmont Park entertainment campus in Elmont, New York. Situated adjacent to the historic Belmont Park Racetrack and the state-of-the-art UBS Arena, this premium retail village offers a curated collection of luxury boutiques and high-end retailers in an open-air setting. The center features an impressive roster of designer brands including Coach, Gianvito Rossi, Lacoste, The North Face, Kurt Geiger, Fusalp, L'Occitane, and Rains, providing shoppers with access to fashion-forward apparel, footwear, accessories, and lifestyle products. With convenient hours throughout the week and extended shopping on Fridays and Saturdays, Belmont Park Village serves as a sophisticated retail complement to the world-class entertainment and sporting events hosted at the adjacent venues. The village's strategic location on Hempstead Turnpike makes it easily accessible for both local residents and visitors from across the New York metropolitan area, creating a unique shopping experience that combines luxury retail with the excitement of Long Island's premier entertainment destination.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 32.87183518753318
+}

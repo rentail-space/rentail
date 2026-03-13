@@ -1,0 +1,28 @@
+{
+  "address": "150-168 North Village Avenue",
+  "city": "Rockville Centre",
+  "country": "US",
+  "googlePlaceID": "places/ChIJEwa36lN7wokRYSO4Hi8NhfQ",
+  "name": "Rockville Centre",
+  "state": "NY",
+  "latitude": 40.6615836,
+  "longitude": -73.6494713,
+  "phone": "++1 610-215-7939",
+  "imageURLs": [
+    "/images/malls/ny-rockville-centre-1.jpg"
+  ],
+  "summary": "Rockville Centre is a 44,131 square foot neighborhood shopping center anchored by New York state's most-visited HomeGoods location, serving one of Nassau County's most affluent communities with average household incomes exceeding $187,700. The center features exceptional tenant stability with 75% of small shops operating for over 10 years, plus the competitive advantage of ample parking in a market dominated by street parking.",
+  "openFrom": 600,
+  "openUntil": 0,
+  "rating": 4.4,
+  "reviewCount": 574,
+  "website": "https://brixmor.com/leasing/retail-space/ny/rockville-centre/rockville-centre?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "The Rockville Centre shopping center serves an exceptionally affluent and educated trade area, with households within 3 miles averaging $187,700 in annual income and 46% holding college degrees. The primary market consists of 221,500+ residents within a 3-mile radius, representing established families and professionals in Nassau County's dense suburban environment. The center attracts value-conscious yet quality-seeking shoppers who appreciate the convenience of ample parking and the HomeGoods anchor, which is the most visited location in New York state according to Placer.ai 2025 data.",
+  "description": "Rockville Centre is a well-established neighborhood shopping center located at 150-168 North Village Avenue in the heart of Nassau County's affluent Rockville Centre community. Anchored by HomeGoods—remarkably the most visited HomeGoods location in all of New York state according to Placer.ai 2025—this 44,131 square foot center has built exceptional tenant loyalty with 75% of its small shops operating in the center for over 10 years. The property benefits from outstanding accessibility, positioned within half a mile of both Sunrise Highway/State Highway 27 and the Long Island Railroad's Montauk line, providing convenient access for both drivers and commuters. The center's tenant mix includes Village Liquor Wine & Spirits, Nail Plus salon, and Paradiso Restaurant & Pizza, serving the daily needs of the surrounding dense, highly educated community of 221,500+ residents with an average household income exceeding $187,700 within 3 miles. A significant competitive advantage is the center's ample parking, which stands in stark contrast to the street parking that serves most competing retail space in downtown Rockville Centre.",
+  "numberOfStores": 5,
+  "squareFootage": 44131,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 24.27842465310217
+}

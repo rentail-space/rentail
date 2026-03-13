@@ -1,0 +1,25 @@
+{
+  "address": "1 Lackawanna Plaza",
+  "city": "Montclair",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ-ZXAzw9VwokR80N93kYSiVA",
+  "name": "Lackawanna Station",
+  "state": "NJ",
+  "latitude": 40.8114308,
+  "longitude": -74.21297919999999,
+  "imageURLs": [
+    "/images/malls/nj-lackawanna-station-1.jpg"
+  ],
+  "summary": "Lackawanna Station is a beautifully restored historic railway station in Montclair, NJ, now serving as a unique lifestyle center and community gathering place. The center hosts distinctive events including the popular Montclair Flea market and offers event spaces, blending historic charm with modern community-focused programming.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.6,
+  "reviewCount": 34,
+  "website": "https://www.lackawanna.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Lackawanna Station attracts an affluent, educated demographic reflective of Montclair's upscale suburban character, with median household incomes significantly above the national average. The primary trade area consists of young professionals, families with children, and empty nesters aged 30-65 who value unique shopping and dining experiences over traditional retail. Visitors tend to be culturally engaged residents who appreciate the center's historic architecture, artisan vendors, and community-focused events like the Montclair Flea market, demonstrating a preference for local, curated experiences over mass-market chain stores.",
+  "description": "Lackawanna Station stands as a beautifully restored historic landmark in the heart of Montclair, New Jersey, transforming a former railway station into a vibrant community gathering place. This distinctive lifestyle center seamlessly blends the architectural charm of its railroad heritage with modern amenities, creating an inviting atmosphere for shopping, dining, and cultural events. The center has become known for hosting unique community experiences, including regular events that bring together local artisans, vendors, and residents in spaces like \"The Big Room,\" which is available for private rentals and special occasions. The Montclair Flea market has become a signature attraction, drawing visitors from across the region to discover curated vintage finds, handmade goods, and local crafts. With its commitment to fostering community connections through its event programming and newsletter, Lackawanna Station has evolved beyond a traditional shopping destination into a cultural hub that celebrates Montclair's creative spirit and historic character.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 14.089606036788746
+}

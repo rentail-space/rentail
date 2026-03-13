@@ -1,0 +1,26 @@
+{
+  "address": "185 Greenwich Street",
+  "city": "Manhattan, New York",
+  "country": "US",
+  "googlePlaceID": "places/ChIJNT54mhlawokRM8ak2AYdABs",
+  "name": "Westfield World Trade Center",
+  "state": "NY",
+  "latitude": 40.7114207,
+  "longitude": -74.0114897,
+  "phone": "++1 212-284-9982",
+  "imageURLs": [
+    "/images/malls/ny-westfield-world-trade-center-1.jpg"
+  ],
+  "summary": "Westfield World Trade Center is a premier luxury shopping destination located within the iconic Oculus structure in Lower Manhattan, featuring over 100 upscale retailers, diverse dining options, and seamless integration with New York's major transit hub. This architectural marvel combines world-class brands like Apple, Sephora, and Eataly with stunning design and unparalleled convenience for millions of daily visitors.",
+  "openFrom": 900,
+  "openUntil": 2000,
+  "rating": 4.7,
+  "reviewCount": 5682,
+  "website": "https://www.westfield.com/en/united-states/westfieldworldtradecenter?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Westfield World Trade Center attracts a diverse, affluent demographic including international tourists, business professionals working in Lower Manhattan's Financial District, and urban residents from across the New York metropolitan area. The visitor base skews toward higher-income households with significant disposable income, drawn by the luxury and premium retail offerings. The trade area encompasses both local commuters using the transit hub and destination shoppers seeking upscale brands, with a strong representation of millennials and Gen X professionals aged 25-54 who value convenience and premium shopping experiences in an iconic architectural setting.",
+  "description": "Westfield World Trade Center stands as a stunning architectural landmark and premier shopping destination in the heart of Lower Manhattan, housed within Santiago Calatrava's iconic Oculus structure at 185 Greenwich Street. This extraordinary retail complex seamlessly integrates world-class shopping with the city's busiest transit hub, serving millions of commuters and visitors annually. The center features an impressive collection of over 100 luxury and contemporary retailers, including flagship stores like Apple, Sephora, and Eataly, alongside premium brands such as BOSS, Breitling, and MAC Cosmetics. Beyond shopping, the center offers diverse dining experiences ranging from Fogo de Chão to artisanal options at Gansevoort Liberty Market, complemented by entertainment options and regular events like Live Music Wednesdays. With its soaring white ribbed architecture, digital wayfinding technology, and direct connections to 11 subway lines and PATH trains, Westfield World Trade Center represents a unique fusion of retail excellence, architectural innovation, and urban connectivity that has redefined the downtown Manhattan shopping experience since rising from the World Trade Center site.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 52.93846733435552
+}

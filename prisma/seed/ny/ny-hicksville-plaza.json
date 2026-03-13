@@ -1,0 +1,27 @@
+{
+  "address": "265 North Broadway",
+  "city": "Hicksville",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ3XMAExqBwokRvB2gbzKpQw4",
+  "name": "Hicksville Plaza",
+  "state": "NY",
+  "latitude": 40.7775841,
+  "longitude": -73.5290538,
+  "phone": "++1 833-800-4343",
+  "imageURLs": [
+    "/images/malls/ny-hicksville-plaza-1.jpg"
+  ],
+  "summary": "Hicksville Plaza is a fully-leased 35,736 square foot neighborhood shopping center located on Route 106/107 in Central Nassau County's primary retail hub. The center serves an affluent trade area with median household incomes exceeding $143,000 and benefits from excellent visibility along North Broadway.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 526,
+  "website": "https://www.kimcorealty.com/properties/hicksville-plaza/111370/view?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Hicksville Plaza serves a prosperous suburban market in Central Nassau County with a median household income of $143,334 within one mile and $155,573 within three miles. The trade area attracts middle to upper-middle class families and professionals, with average household incomes reaching $171,481 locally. The center draws from a population of over 135,000 within three miles, with a strong daytime population of 150,000, indicating significant employment density and weekday shopping traffic. The demographic profile skews toward established homeowners and families seeking convenient neighborhood shopping options.",
+  "description": "Hicksville Plaza is a neighborhood shopping center strategically positioned on Route 106/107 in the heart of Hicksville's primary retail corridor in Central Nassau County, New York. This 35,736 square foot center serves as a strong secondary market complement to the larger Huntington and Westbury trade areas, providing convenient access to essential retail and services for the local community. Located on North Broadway, the plaza benefits from excellent visibility and accessibility along this major thoroughfare, drawing from an affluent trade area with median household incomes exceeding $143,000 within one mile. The center is currently fully leased, demonstrating strong tenant demand and market confidence in this established Long Island location. Managed by Kimco Realty Corporation, one of North America's largest publicly traded owners and operators of open-air, grocery-anchored shopping centers, Hicksville Plaza exemplifies the company's focus on well-located neighborhood retail properties serving thriving suburban communities.",
+  "squareFootage": 35736,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 22.856280250891412
+}

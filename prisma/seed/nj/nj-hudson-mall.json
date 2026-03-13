@@ -1,0 +1,26 @@
+{
+  "address": "701 New Jersey 440",
+  "city": "Jersey City",
+  "country": "US",
+  "googlePlaceID": "places/ChIJIwI16zlRwokRdD_4MrL6Rbc",
+  "name": "Hudson Mall",
+  "state": "NJ",
+  "latitude": 40.720889199999995,
+  "longitude": -74.09588289999999,
+  "phone": "++1 201-432-0119",
+  "imageURLs": [
+    "/images/malls/nj-hudson-mall-1.jpg"
+  ],
+  "summary": "Hudson Mall is a community shopping center in Jersey City offering essential retail, dining, and services including Marshalls, Old Navy, Bath & Body Works, and Big Lots. This one-stop destination provides groceries, fitness, quick-service food, and self-care options for the local community.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4,
+  "reviewCount": 5499,
+  "website": "https://locations.uedge.com/hudson-mall?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Hudson Mall serves a diverse, working-class to middle-income population in Jersey City, with a significant Hispanic and immigrant community. The trade area attracts value-conscious shoppers seeking everyday essentials, with household incomes ranging from $40,000 to $75,000 annually. Primary visitors include young families and working professionals aged 25-45 who appreciate the one-stop shopping convenience for groceries, clothing, and personal care needs. The center draws from Jersey City's dense urban population and benefits from its accessibility along Route 440, serving both local residents and commuters.",
+  "description": "Hudson Mall is a community shopping center strategically located at 701 Route 440 in the heart of Jersey City, New Jersey, serving as an essential retail destination for the local community. This open-air retail property has established itself as a convenient one-stop shopping hub, offering a diverse mix of national retailers and local businesses that cater to everyday needs. The center features popular anchor tenants including Marshalls, Big Lots, Old Navy, and Bath & Body Works, complemented by specialty stores like Eye Max Optical, Perfuroma, and The Wellness Place. Beyond traditional retail, Hudson Mall provides comprehensive services including fitness facilities, quick-service dining options at Flaming Grill and Modern Buffet, and personal care services such as Money Wink Lashes. With its accessible location along Route 440 and ample parking, the mall serves as a vital community gathering place where Jersey City residents can efficiently accomplish their shopping, dining, and wellness needs all in one convenient location.",
+  "tier": 1,
+  "spaces": [],
+  "ranking": 14.961134878727517
+}

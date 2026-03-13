@@ -1,0 +1,27 @@
+{
+  "address": "136-20 Roosevelt Avenue",
+  "city": "Queens",
+  "country": "US",
+  "googlePlaceID": "places/ChIJwTjc4BFgwokRfU_lBlZLBSw",
+  "name": "New World Mall",
+  "state": "NY",
+  "latitude": 40.7593415,
+  "longitude": -73.8291722,
+  "phone": "++1 718-353-0551",
+  "imageURLs": [
+    "/images/malls/ny-new-world-mall-1.jpg"
+  ],
+  "summary": "New World Mall is Flushing's premier indoor Asian marketplace featuring 57 specialty shops, a sprawling food court with 32 culinary brands, and one of the region's largest dim sum restaurants. This cultural destination combines authentic Asian commerce, diverse dining experiences, and entertainment amenities including karaoke, making it a must-visit hub for food lovers and shoppers seeking traditional Asian goods.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.1,
+  "reviewCount": 5768,
+  "website": "http://www.newworldmallnyc.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "New World Mall attracts a predominantly Asian demographic, particularly Chinese, Korean, and other East Asian communities, with visitors ranging from young professionals to families and seniors. The trade area serves the diverse Flushing neighborhood and broader Queens area, drawing middle to upper-middle income households seeking authentic Asian products and dining experiences. Shoppers typically visit for specialty groceries, traditional foods, and cultural goods not readily available in mainstream retail, with strong weekend traffic from families making it a social and culinary destination.",
+  "description": "New World Mall stands as Flushing's premier destination for authentic Asian commerce and cuisine, serving as a cultural cornerstone in one of New York's most vibrant neighborhoods. This indoor complex houses 57 carefully curated shops that blend traditional Asian retail with modern conveniences, offering everything from specialty goods to contemporary fashion. The mall's crown jewel is its expansive food court featuring 32 distinct culinary brands, taking visitors on a gastronomic journey through the diverse flavors of Asia and beyond. An extensive Asian supermarket provides fresh produce, imported goods, and specialty ingredients, while one of the Tri-State area's largest dim sum restaurants offers traditional Cantonese dining experiences. Additional amenities include a karaoke lounge for entertainment, creating a dynamic destination where food, culture, and community converge in the heart of Queens.",
+  "numberOfStores": 57,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 30.840407064033254
+}

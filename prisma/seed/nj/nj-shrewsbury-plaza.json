@@ -1,0 +1,27 @@
+{
+  "address": "New Jersey 35",
+  "city": "Shrewsbury",
+  "country": "US",
+  "googlePlaceID": "places/ChIJaVyh0NsvwokRHo4Gnz1Wq54",
+  "name": "Shrewsbury Plaza",
+  "state": "NJ",
+  "latitude": 40.3147899,
+  "longitude": -74.06508749999999,
+  "phone": "++1 732-530-1200",
+  "imageURLs": [
+    "/images/malls/nj-shrewsbury-plaza-1.jpg"
+  ],
+  "summary": "Shrewsbury Plaza is a 309,283-square-foot community shopping center located on Route 35 in Shrewsbury, New Jersey, offering convenient access and 1,454 parking spaces. The center serves the affluent Monmouth County market with strong demographics and excellent visibility along a major thoroughfare.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 1000,
+  "website": "http://www.nrdc.com/properties/retail/shrewsbury-plaza?utm_source=rentail.space#!property-details",
+  "centerType": "CommunityCenter",
+  "demographics": "Shrewsbury Plaza serves an affluent suburban market in Monmouth County, New Jersey, with strong household incomes and family-oriented demographics. The trade area features a mix of established professionals, families with children, and retirees who value convenience and quality. Within a 5-mile radius, the daytime population of 84,548 includes both local residents and commuters working in the area. The center attracts shoppers seeking everyday necessities combined with specialty retail, with typical visitors ranging from middle to upper-middle income households who prioritize accessibility and a diverse tenant mix.",
+  "description": "Shrewsbury Plaza is a well-established community shopping center located at 1026 Broad Street in Shrewsbury, New Jersey, strategically positioned along Route 35 in the heart of Monmouth County. Spanning over 309,000 square feet of gross leasable area, this open-air retail destination serves the affluent communities of Shrewsbury, Red Bank, and surrounding areas with convenient access and ample parking featuring 1,454 spaces. The center benefits from strong demographics, drawing from a daytime population of over 84,000 within five miles and nearly 169,000 within ten miles, making it a prime location for retailers seeking consistent foot traffic. Managed by NRDC, a respected real estate development company with a diverse portfolio across the Northeast, Shrewsbury Plaza offers a compelling mix of national retailers, local businesses, and service providers that cater to the daily needs of the community. With its excellent visibility along a major thoroughfare, generous parking ratio of 4.7 spaces per 1,000 square feet, and strong market fundamentals, the center continues to serve as a vital retail hub for Monmouth County residents seeking quality shopping in a convenient, accessible environment.",
+  "squareFootage": 309283,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 26.400000000000002
+}

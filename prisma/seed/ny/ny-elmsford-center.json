@@ -1,0 +1,27 @@
+{
+  "address": "251 East Main Street",
+  "city": "Elmsford",
+  "country": "US",
+  "googlePlaceID": "places/ChIJM1DRn6mVwokRVFiS2OpBnAI",
+  "name": "Elmsford Center",
+  "state": "NY",
+  "latitude": 41.049121299999996,
+  "longitude": -73.8080715,
+  "phone": "++1 833-800-4343",
+  "imageURLs": [
+    "/images/malls/ny-elmsford-center-1.jpg"
+  ],
+  "summary": "Elmsford Center is a fully-leased 58,838 square foot retail property strategically located on Route 119 in Westchester County, with convenient access from I-287. The center serves an affluent market west of White Plains along one of the county's primary retail corridors.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 5,
+  "reviewCount": 1,
+  "website": "https://www.kimcorealty.com/properties/elmsford-center/117060/view?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Elmsford Center serves an affluent Westchester County market with average household incomes ranging from $100K to over $300K in the surrounding trade area. The center attracts a diverse mix of suburban families and professionals from nearby White Plains and the broader New York metro area. Visitors typically include middle to upper-income households seeking convenient access to everyday retail and services along the Route 119 corridor, one of Westchester County's primary retail destinations.",
+  "description": "Elmsford Center is a well-positioned retail destination located at 295 East Main Street on Route 119 (Tarrytown-White Plains Road) in Elmsford, New York. Strategically situated west of downtown White Plains, the center benefits from its location on one of Westchester County's handful of primary retail corridors, surrounded by numerous nationwide chains and complementary retail offerings. With convenient access from both I-287 and the Central Avenue retail corridor, Elmsford Center serves as an accessible shopping destination for the affluent Westchester County market. The 58,838 square foot center is currently fully leased, demonstrating strong tenant demand and market performance in this desirable New York metro area location. Managed by Kimco Realty, the property offers a mix of retail and service tenants serving the everyday needs of the surrounding community.",
+  "squareFootage": 58838,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 0
+}

@@ -1,0 +1,25 @@
+{
+  "address": "1 Spring Valley Market Place",
+  "city": "Spring Valley",
+  "country": "US",
+  "googlePlaceID": "places/ChIJPZumHJnpwokRDxrMLlHUylo",
+  "name": "The Marketplace",
+  "state": "NY",
+  "latitude": 41.1059945,
+  "longitude": -74.0282125,
+  "imageURLs": [
+    "/images/malls/ny-the-marketplace-1.jpg"
+  ],
+  "summary": "The Marketplace is a highly-rated community shopping center in Spring Valley, NY, offering a convenient mix of retail stores, dining, and services. With a 4.8-star rating and diverse tenant lineup, it serves as a popular local destination for everyday shopping needs.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 4.8,
+  "reviewCount": 75,
+  "website": "https://www.themarketplaceny.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Marketplace serves the Spring Valley community in Rockland County, NY, drawing primarily from middle-income families and working professionals in the surrounding suburban area. The trade area encompasses a diverse population mix typical of Rockland County, with households seeking convenient access to everyday shopping, dining, and services. Visitors tend to be local residents making frequent trips for routine purchases and services, with shopping patterns focused on convenience and community-oriented retail experiences.",
+  "description": "The Marketplace is a vibrant community shopping destination located at 1-49 Spring Valley Marketplace in Spring Valley, New York. This well-established center serves as a convenient hub for local residents, offering a diverse mix of retail stores, dining options, and professional services all in one accessible location. With operating hours from 11:00 AM to 7:00 PM, The Marketplace caters to the busy schedules of Spring Valley families and professionals seeking quality shopping and services close to home. The center has earned an impressive 4.8-star rating from 75 reviews, reflecting its commitment to providing a positive shopping experience and maintaining strong tenant relationships. Whether visitors are looking to shop, eat, or conduct business, The Marketplace delivers a welcoming atmosphere with ample variety to meet the everyday needs of the Rockland County community.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 18.00058812856032
+}

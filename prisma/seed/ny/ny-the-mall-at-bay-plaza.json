@@ -1,0 +1,27 @@
+{
+  "address": "200 Baychester Avenue",
+  "city": "The Bronx",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ2RhPOrmMwokRC3USlAkN1m4",
+  "name": "The Mall at Bay Plaza",
+  "state": "NY",
+  "latitude": 40.864391999999995,
+  "longitude": -73.8279165,
+  "phone": "++1 718-208-2750",
+  "imageURLs": [
+    "/images/malls/ny-the-mall-at-bay-plaza-1.jpg"
+  ],
+  "summary": "The Mall at Bay Plaza is New York City's largest shopping center, featuring over 150 stores, restaurants, and entertainment options across a three-level enclosed mall and outdoor shopping area. Major retailers include Apple, Sephora, Macy's, Nike, Victoria's Secret, and AMC Theatres, making it the premier shopping destination in the Bronx.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 25117,
+  "website": "https://mallatbayplaza.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "The Mall at Bay Plaza serves a diverse, predominantly middle-income demographic in the Northeast Bronx, with a significant Hispanic and African American population. The trade area attracts families and young adults seeking value-oriented shopping options, with household incomes ranging from $40,000 to $80,000 annually. As New York City's largest shopping center and the first enclosed mall built in the Bronx in 40 years, it draws visitors from throughout the borough and neighboring Westchester County who appreciate the convenience of having 150+ stores in one location. The center appeals to urban shoppers looking for mainstream retail brands, entertainment options, and dining experiences without traveling to Manhattan.",
+  "description": "The Mall at Bay Plaza stands as New York City's largest shopping center and represents a landmark achievement as the first enclosed shopping mall built in the city in over 40 years. This impressive three-level shopping destination, combined with the adjacent Bay Plaza Shopping Center outdoor component, offers visitors an unparalleled retail experience with over 150 stores, restaurants, and entertainment venues. Major anchor tenants and popular retailers include Apple, Sephora, Macy's, Nike, Victoria's Secret, and AMC Theatres, providing a comprehensive mix of fashion, technology, beauty, and entertainment options. Located at 200 Baychester Avenue in the Bronx, the mall serves as a vital shopping hub for urban residents seeking convenient access to mainstream retail brands and dining experiences. The center actively engages with the local community through events like the Bronx Entrepreneurship Scholarship Foundation, artist features showcasing Bronx talent, and family-friendly activities including seasonal celebrations and cultural events held in the Level 3 Food Court.",
+  "numberOfStores": 150,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 38.71971633717957
+}

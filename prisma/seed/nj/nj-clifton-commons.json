@@ -1,0 +1,25 @@
+{
+  "address": "385 New Jersey 3",
+  "city": "Clifton",
+  "country": "US",
+  "googlePlaceID": "places/ChIJDY4tAkX_wokRr7_V-QZmS5I",
+  "name": "Clifton Commons",
+  "state": "NJ",
+  "latitude": 40.828966099999995,
+  "longitude": -74.138894,
+  "imageURLs": [
+    "/images/malls/nj-clifton-commons-1.jpg"
+  ],
+  "summary": "Clifton Commons is a community shopping center on Route 3 featuring a diverse mix of retail stores, restaurants, and banking services. The center's standout amenity is its 16-screen movie theater, making it a popular destination for both shopping and entertainment in northern New Jersey.",
+  "openFrom": 930,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 3360,
+  "website": "https://amzn.to/3QmaRUB?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Clifton Commons attracts a diverse, middle-class demographic from the densely populated Passaic County area, with a strong representation of families and working professionals aged 25-54. The trade area serves a multicultural community with above-average household incomes, drawing shoppers from Clifton, Passaic, and surrounding northern New Jersey suburbs. Visitors typically engage in convenience-oriented shopping trips, combining errands at the grocery anchor with entertainment at the 16-screen theater and casual dining experiences.",
+  "description": "Clifton Commons stands as a prominent community shopping destination in northern New Jersey, strategically located on Route 3 in Clifton. This open-air shopping center has established itself as a convenient one-stop destination for the surrounding communities, anchored by essential retail services and complemented by a substantial entertainment component. The center's 16-screen movie theater serves as a major draw, making it a popular evening and weekend destination for families and moviegoers throughout Passaic County. Beyond entertainment, Clifton Commons offers a practical mix of national retailers, banking services, and diverse dining options that cater to the area's multicultural population. The center's accessible location along a major thoroughfare, combined with ample parking and a tenant mix focused on everyday needs, has made it a reliable shopping hub for residents seeking convenience without traveling to larger regional malls.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 31.03178564103063
+}

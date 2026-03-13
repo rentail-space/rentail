@@ -1,0 +1,26 @@
+{
+  "address": "808 Central Park Avenue",
+  "city": "Yonkers",
+  "country": "US",
+  "googlePlaceID": "places/ChIJs8viLrnzwokRlUb8bUaa0nI",
+  "name": "The Mall At Cross County",
+  "state": "NY",
+  "latitude": 40.925938599999995,
+  "longitude": -73.8553912,
+  "imageURLs": [
+    "/images/malls/ny-the-mall-at-cross-county-1.jpg"
+  ],
+  "summary": "Cross County Center is an open-air shopping destination in Yonkers featuring 80+ stores, diverse dining options, and family-friendly amenities including seasonal entertainment and children's play areas. With free parking and a beautiful outdoor setting, it serves as Westchester County's convenient retail hub for shopping, dining, and entertainment.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4.7,
+  "reviewCount": 157,
+  "website": "https://www.crosscountycenter.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Cross County Center attracts a diverse, middle to upper-middle income demographic from Westchester County and the greater Yonkers area, with a strong representation of families and young professionals aged 25-54. The trade area serves a multicultural population with household incomes ranging from $75,000 to $150,000+, drawing from both urban Yonkers residents and suburban Westchester communities. Shoppers typically seek convenient access to mainstream retail brands, dining options, and entertainment in an accessible outdoor setting with free parking. The center appeals to value-conscious yet quality-focused consumers who appreciate a mix of national retailers and dining experiences within a family-friendly environment.",
+  "description": "Cross County Center is a premier open-air shopping destination located in Yonkers, Westchester County, New York, offering visitors an exceptional retail and dining experience since its establishment. Featuring over 80 stores and restaurants set in a beautiful outdoor environment, the center combines the convenience of traditional mall shopping with the ambiance of an open-air lifestyle center. The property boasts a diverse tenant mix of popular national retailers, complemented by delicious dining options and entertainment venues including Showcase Cinemas for moviegoers. Families particularly appreciate the center's seasonal entertainment programming, dedicated children's play areas, and the convenience of free year-round parking. With its accessible location at 8000 Mall Walk in Yonkers, the center serves as a vital retail hub for Westchester County residents and visitors, maintaining strong community connections through events and a rewards club program that enhances the shopping experience.",
+  "numberOfStores": 80,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 20.641456732646795
+}

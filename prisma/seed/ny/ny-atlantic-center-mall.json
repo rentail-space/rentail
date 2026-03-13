@@ -1,0 +1,26 @@
+{
+  "address": "625 Atlantic Avenue",
+  "city": "Brooklyn",
+  "country": "US",
+  "googlePlaceID": "places/ChIJVe_TG65bwokR56gCmdvxpF0",
+  "name": "Atlantic Center Mall",
+  "state": "NY",
+  "latitude": 40.683706,
+  "longitude": -73.97502,
+  "phone": "++1 718-834-3400",
+  "imageURLs": [
+    "/images/malls/ny-atlantic-center-mall-1.jpg"
+  ],
+  "summary": "Atlantic Terminal & Center is Downtown Brooklyn's premier shopping destination, offering brand-name retailers, diverse dining options, and entertainment in a bustling urban environment. Strategically located at a major transit hub, the center serves as the borough's preeminent gathering place for shopping, dining, and leisure activities.",
+  "openFrom": 800,
+  "openUntil": 2200,
+  "rating": 4.4,
+  "reviewCount": 2083,
+  "website": "https://www.shopatlanticterminal.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Atlantic Terminal & Center attracts a diverse urban demographic reflective of Downtown Brooklyn's dynamic population, including young professionals, families, and students with middle to upper-middle income levels. The trade area serves Brooklyn's rapidly growing residential neighborhoods, drawing visitors from across the borough and neighboring areas via its exceptional transit connectivity at the Atlantic Terminal hub. Shoppers are predominantly millennials and Gen Z consumers seeking convenient access to brand-name retailers and dining options, with a strong preference for experiential shopping combined with entertainment and social activities. The center benefits from Brooklyn's demographic shift toward younger, more affluent residents while maintaining accessibility for the borough's traditionally diverse working-class communities.",
+  "description": "Atlantic Terminal & Center stands as the preeminent destination for shopping, dining, and leisure in the epicenter of Downtown Brooklyn, serving as a bustling urban hub where the borough comes together. Located at the intersection of Atlantic Avenue and Flatbush Avenue, this dynamic shopping center benefits from its strategic position at one of New York City's most important transit hubs, providing unparalleled accessibility via multiple subway lines and the Long Island Rail Road. The center features a comprehensive mix of brand-name retailers spanning fashion, electronics, home goods, and specialty stores, complemented by diverse dining options that cater to Brooklyn's multicultural population. As a cornerstone of Downtown Brooklyn's retail landscape, Atlantic Terminal & Center has evolved alongside the neighborhood's dramatic transformation, serving both longtime residents and the influx of new professionals drawn to the area's urban energy. The mall's commitment to creating a vibrant community gathering space is evident through its seasonal events and programming, making it more than just a shopping destination but a true lifestyle center for Brooklyn's diverse and growing population.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 29.204465575540166
+}

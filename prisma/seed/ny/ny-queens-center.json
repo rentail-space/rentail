@@ -1,0 +1,26 @@
+{
+  "address": "90-15 Queens Boulevard",
+  "city": "Queens",
+  "country": "US",
+  "googlePlaceID": "places/ChIJA7Ciw0tewokRWJrqRqhFJBs",
+  "name": "Queens Center",
+  "state": "NY",
+  "latitude": 40.7347872,
+  "longitude": -73.8688409,
+  "phone": "++1 718-592-3900",
+  "imageURLs": [
+    "/images/malls/ny-queens-center-1.jpg"
+  ],
+  "summary": "Queens Center is a major enclosed regional mall in Queens, New York, featuring dozens of retail stores, department store anchors, and a food court. This coliseum-like shopping destination serves one of NYC's most diverse boroughs with a comprehensive mix of national retailers and dining options.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 31980,
+  "website": "https://www.shopqueenscenter.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Queens Center attracts a diverse, multicultural customer base reflecting the demographics of Queens, one of New York City's most ethnically diverse boroughs. The primary trade area includes middle to upper-middle income families with household incomes ranging from $50,000 to $100,000+, with a strong representation of immigrant communities and multi-generational households. Shoppers span all age groups, with particular strength among millennials and Gen X families seeking value-oriented fashion and department store offerings. The center serves as a major retail destination for residents throughout Queens and neighboring boroughs who appreciate the convenience of having major department stores and national retailers in an accessible urban location.",
+  "description": "Queens Center stands as one of New York City's premier indoor shopping destinations, serving the vibrant and diverse communities of Queens since its opening. This expansive coliseum-like enclosed mall houses an impressive collection of retail stores, anchored by major department stores and featuring a comprehensive mix of national retailers, specialty shops, and a bustling food court. Located at 90-15 Queens Boulevard, the center has established itself as a cornerstone of retail activity in the borough, drawing shoppers from throughout Queens and beyond with its convenient location and extensive tenant lineup. The mall's climate-controlled environment provides year-round shopping comfort, while its diverse merchant mix caters to the multicultural population that defines Queens. With operating hours from 10 AM to 9 PM daily and consistently high customer ratings (4.4 stars from nearly 32,000 reviews), Queens Center has proven its enduring appeal as a go-to destination for fashion, dining, entertainment, and everyday shopping needs in one of America's most dynamic urban markets.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 39.642930442809906
+}

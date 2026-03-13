@@ -1,0 +1,27 @@
+{
+  "address": "Mamaroneck Avenue",
+  "city": "White Plains",
+  "country": "US",
+  "googlePlaceID": "places/ChIJn5lWvPiVwokR73IWJP6VOwc",
+  "name": "White Plains S.C.",
+  "state": "NY",
+  "latitude": 41.030380799999996,
+  "longitude": -73.7662197,
+  "phone": "++1 833-800-4343",
+  "imageURLs": [
+    "/images/malls/ny-white-plains-sc-1.jpg"
+  ],
+  "summary": "White Plains S.C. is a fully-leased 14,450 square foot shopping center located on the main retail corridor of downtown White Plains, just north of New York City with Metro North access. The property serves an exceptionally affluent Westchester County market with median household incomes exceeding $150,000 within 5 miles.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 112,
+  "website": "https://www.kimcorealty.com/properties/white-plains-sc/111400/view?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "White Plains S.C. serves an affluent Westchester County market with median household incomes ranging from $102,867 within 1 mile to $151,066 within 5 miles, and average household incomes reaching $236,429 in the 5-mile trade area. The center attracts a professional, high-income demographic from the downtown White Plains business district, with daytime populations significantly exceeding residential populations due to its role as the county seat. The trade area encompasses over 847,000 residents within 10 miles, with strong per capita incomes averaging $74,215, indicating a customer base with substantial purchasing power for premium retail and services.",
+  "description": "White Plains S.C. is a strategically positioned shopping center located at 100 Mamaroneck Avenue in the heart of downtown White Plains, New York's premier retail corridor. Situated in the county seat of Westchester County, this 14,450 square foot property benefits from exceptional accessibility, with Metro North train service providing direct connections to Grand Central Station in New York City. The center serves one of the most affluent markets in the New York metropolitan area, with surrounding households earning median incomes exceeding $150,000 within a 5-mile radius. Currently fully leased, White Plains S.C. demonstrates strong tenant demand in this high-traffic downtown location that combines both residential and significant daytime business populations. The property is managed by Kimco Realty Corporation, one of North America's largest publicly traded owners and operators of open-air, grocery-anchored shopping centers and mixed-use assets.",
+  "squareFootage": 14450,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 18.033118599497598
+}

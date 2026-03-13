@@ -1,0 +1,27 @@
+{
+  "address": "17 East Ridgewood Avenue",
+  "city": "Paramus",
+  "country": "US",
+  "googlePlaceID": "places/ChIJJZrD6irlwokRVvUg2SweF1c",
+  "name": "Fashion Center Paramus",
+  "state": "NJ",
+  "latitude": 40.966619,
+  "longitude": -74.0755982,
+  "phone": "++1 201-444-9050",
+  "imageURLs": [
+    "/images/malls/nj-fashion-center-paramus-1.jpg"
+  ],
+  "summary": "Fashion Center Paramus is a 500,000 square foot shopping destination in North Bergen County offering a diverse mix of retail, dining, and grocery options. Anchored by Best Buy, Amazon Fresh, and Applebee's, the center provides convenient one-stop shopping at the intersection of Route 17 North and Ridgewood Avenue.",
+  "openFrom": 930,
+  "openUntil": 2200,
+  "rating": 4.2,
+  "reviewCount": 1628,
+  "website": "http://www.fashioncenterparamusnj.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Fashion Center Paramus attracts a diverse mix of middle to upper-middle income families from North Bergen County, New Jersey, with household incomes typically ranging from $75,000 to $150,000. The primary trade area includes Paramus and surrounding communities known for their suburban family demographics, with shoppers spanning ages 25-65 who value convenience and one-stop shopping. The center draws both weekday convenience shoppers seeking groceries and electronics, as well as weekend family visitors looking for dining and retail options in a convenient, accessible location off Route 17 North.",
+  "description": "Fashion Center Paramus is a comprehensive 500,000 square foot shopping destination strategically located at the intersection of Route 17 North and Ridgewood Avenue in Paramus, New Jersey. This community-focused shopping center serves as a one-stop destination for North Bergen County residents, offering everything from cutting-edge electronics at Best Buy to farm-fresh groceries at Amazon Fresh. The center combines essential retail services with lifestyle amenities, featuring designer clothing boutiques for men's and women's fashion, including suiting, tuxedos, dresses, handbags and shoes. After shopping, visitors can relax and refuel at Applebee's Grill & Bar, which offers a family-friendly atmosphere with grilled favorites and a full bar. With its convenient location and diverse tenant mix spanning electronics, groceries, fashion, and dining, Fashion Center Paramus has established itself as an essential retail hub providing easy access and comprehensive shopping opportunities for the surrounding neighborhoods.",
+  "squareFootage": 500000,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 26.97789696464673
+}

@@ -1,0 +1,26 @@
+{
+  "address": "18 Smith Street",
+  "city": "Paterson",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ_c51YMv9wokRQzF6PzKwjx4",
+  "name": "Center City Mall",
+  "state": "NJ",
+  "latitude": 40.9150225,
+  "longitude": -74.1719993,
+  "phone": "++1 973-345-4040",
+  "imageURLs": [
+    "/images/malls/nj-center-city-mall-1.jpg"
+  ],
+  "summary": "Center City Mall is an enclosed regional shopping center in downtown Paterson, New Jersey, offering retail stores, dining, and a movie theater. Serving the diverse urban community with convenient hours and parking, the mall has earned strong community support with over 2,000 customer reviews.",
+  "openFrom": 1000,
+  "openUntil": 2200,
+  "rating": 4.2,
+  "reviewCount": 2096,
+  "website": "http://centercitypaterson.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Center City Mall serves a diverse, working-class to middle-income demographic in Paterson, New Jersey, one of the state's most densely populated urban areas. The primary trade area includes Hispanic and African American families, with a significant proportion of households earning between $30,000-$60,000 annually. Shoppers tend to be value-conscious consumers seeking affordable fashion, entertainment options including the on-site movie theater, and convenient access to everyday retail needs. The mall attracts multi-generational family groups, particularly on weekends, with strong foot traffic from the surrounding urban neighborhoods within a 5-10 mile radius.",
+  "description": "Center City Mall stands as a cornerstone shopping destination in downtown Paterson, New Jersey, located at 301 Main Street in the heart of this historic city. This enclosed regional mall serves the diverse communities of Passaic County with a comprehensive mix of retail stores, dining options, and entertainment venues including a movie theater that draws families throughout the week. Operating Monday through Thursday from 10am to 9:30pm, with extended hours until 10pm on Friday and Saturday, and Sunday hours from 11am to 7pm, the mall provides convenient shopping access for the busy urban population. The center features ample parking facilities and is easily accessible from major thoroughfares, making it a practical choice for both local residents and visitors from surrounding areas. With a solid 4.2-star rating from over 2,000 Google reviews, Center City Mall has established itself as a reliable community gathering place that combines shopping convenience with entertainment options in Paterson's urban core.",
+  "tier": 1,
+  "spaces": [],
+  "ranking": 13.949843368909095
+}

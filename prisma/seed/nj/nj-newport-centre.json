@@ -1,0 +1,26 @@
+{
+  "address": "30 Mall Drive West",
+  "city": "Jersey City",
+  "country": "US",
+  "googlePlaceID": "places/ChIJL63bt1NXwokRZxRkIGSsRwQ",
+  "name": "Newport Centre",
+  "state": "NJ",
+  "latitude": 40.7271731,
+  "longitude": -74.0362091,
+  "phone": "++1 201-626-2025",
+  "imageURLs": [
+    "/images/malls/nj-newport-centre-1.jpg"
+  ],
+  "summary": "This indoor 3 level shopping center boasts a variety of premier shops, dining options & a cineplex. Located in Jersey City's Newport district, it serves as the area's primary enclosed mall destination with convenient PATH train access.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 17952,
+  "website": "https://www.simon.com/mall/newport-centre?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Newport Centre attracts a diverse, urban demographic from Jersey City and the surrounding Hudson County area, with a strong representation of young professionals and families with median to upper-middle income levels. The trade area serves a densely populated, multicultural community with high household density and significant transit accessibility via PATH trains and ferry services. Visitors tend to be convenience-focused shoppers seeking a mix of fashion, dining, and entertainment options in an accessible indoor environment, with strong weekday traffic from nearby office workers and weekend family visits.",
+  "description": "Newport Centre stands as Jersey City's premier indoor shopping destination, strategically located in the vibrant Newport neighborhood along the Hudson River waterfront. This three-level enclosed regional mall has served the community since its opening, offering residents and visitors a comprehensive retail experience with convenient access via multiple transportation options including the PATH train system. The center features a carefully curated mix of national retailers, specialty shops, and dining establishments, complemented by a modern cineplex that provides entertainment for the entire family. With its climate-controlled environment and diverse tenant lineup, Newport Centre has become an essential gathering place for the growing Jersey City population and surrounding communities. The mall's location in the rapidly developing Newport district positions it at the heart of one of New Jersey's most dynamic urban centers, serving both local residents and visitors from across the Hudson County area.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 37.4361929882694
+}

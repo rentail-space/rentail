@@ -1,0 +1,28 @@
+{
+  "address": "217 Brook Avenue",
+  "city": "Passaic",
+  "country": "US",
+  "googlePlaceID": "places/ChIJdfpFlTD_wokRIFjXOZBpuwU",
+  "name": "Brook Haven Mall",
+  "state": "NJ",
+  "latitude": 40.8419532,
+  "longitude": -74.1343203,
+  "phone": "++1 973-662-4800",
+  "imageURLs": [
+    "/images/malls/nj-brook-haven-mall-1.jpg"
+  ],
+  "summary": "Brook Haven Mall is the largest kosher shopping mall in the United States, featuring 100,000 square feet of retail space with over 30 retailers serving the Orthodox Jewish community. Located in Passaic, New Jersey, the center offers everything from kosher restaurants and apparel to pharmacy services and event spaces, all operating on a schedule that respects Shabbat observances.",
+  "openFrom": 700,
+  "openUntil": 2300,
+  "rating": 4.8,
+  "reviewCount": 405,
+  "website": "http://brookhavennj.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Brook Haven Mall serves the large Orthodox Jewish communities in and around Passaic, New Jersey, with primary trade areas including Fair Lawn, Teaneck, Bergenfield, Englewood, and nearby neighborhoods in New York such as Washington Heights and the Upper West Side. The center caters to observant Jewish families seeking kosher shopping options, with visitors typically consisting of middle to upper-middle income households who value convenience and religious accommodation. Shopping patterns reflect the community's needs for kosher food, modest apparel, and services that respect Shabbat observances, as evidenced by the mall's adjusted hours that close before Shabbat and reopen after.",
+  "description": "Brook Haven Mall stands as the largest kosher shopping mall in the entire United States, offering an impressive 100,000 square feet of retail space dedicated to serving the Orthodox Jewish community. Nestled on a sprawling property in the heart of Passaic, New Jersey, this unique shopping destination is strategically located within miles of several of the largest Jewish communities on the East Coast, making it easily accessible from Fair Lawn, Teaneck, Monsey, and even neighborhoods in New York City. The mall features over 30 diverse retailers ranging from meat and dairy restaurants to men's, women's, and children's apparel, along with essential services including Meadow Pharmacy, urgent care facilities, and specialty shops. Brook Haven distinguishes itself by operating on a schedule that respects Shabbat observances, closing approximately one hour before Shabbat on Fridays and reopening about one hour after Shabbat ends on Saturday evenings. With 400 convenient parking spots and amenities including event spaces like the Boutique Event Space and Grand Event Space, Brook Haven has created a comprehensive shopping experience that combines retail convenience with cultural sensitivity, making it a cornerstone destination for kosher consumers throughout the tri-state area.",
+  "numberOfStores": 30,
+  "squareFootage": 100000,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 25.03156822286082
+}

@@ -1,0 +1,25 @@
+{
+  "address": "10 Columbus Circle",
+  "city": "Manhattan, New York",
+  "country": "US",
+  "googlePlaceID": "places/ChIJp3PsL_ZYwokRdBcE-3KTjrg",
+  "name": "The Shops at Columbus Circle",
+  "state": "NY",
+  "latitude": 40.7685811,
+  "longitude": -73.9831811,
+  "imageURLs": [
+    "/images/malls/ny-the-shops-at-columbus-circle-1.jpg"
+  ],
+  "summary": "The Shops at Columbus Circle is an upscale lifestyle shopping gallery located in the iconic Time Warner Center at one of Manhattan's most prestigious addresses. This luxury destination features dozens of premium retailers, exceptional dining options, and exclusive events, offering a refined shopping experience for both locals and international visitors.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 10290,
+  "website": "https://www.theshopsatcolumbuscircle.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Shops at Columbus Circle attracts an affluent, cosmopolitan demographic with a median household income significantly above the national average, drawing both Manhattan residents and international tourists. The visitor base skews toward professionals aged 25-54 with high disposable incomes, as well as luxury shoppers and tourists seeking premium retail experiences. The trade area encompasses the Upper West Side, Midtown Manhattan, and Central Park South neighborhoods, with strong representation from dual-income households without children and affluent empty nesters who prioritize quality and convenience in their shopping experiences.",
+  "description": "The Shops at Columbus Circle is a premier luxury shopping destination located within the iconic Time Warner Center at 10 Columbus Circle in Manhattan. This sophisticated retail gallery seamlessly blends world-class shopping with exceptional dining and entertainment options, offering visitors a curated collection of high-end retailers and exclusive brands. Positioned at one of New York City's most prestigious addresses overlooking Central Park, the center features dozens of carefully selected retailers ranging from fashion and beauty to lifestyle and specialty stores, including brands like BOSS, Jo Malone London, Moleskine, and Fleet Feet. The center regularly hosts exclusive events and activations, such as the Super Mario Galaxy Movie experience in Princess Peach's castle, seasonal collection launches, and specialized workshops including coffee skills series with JURA and wellness-focused shopping experiences. With its prime location at Columbus Circle, the shopping center serves as both a destination for discerning local shoppers and international visitors, offering a refined retail experience complemented by its connection to the broader Time Warner Center complex and its proximity to Central Park, Lincoln Center, and Midtown Manhattan's cultural attractions.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 52.96388294686412
+}

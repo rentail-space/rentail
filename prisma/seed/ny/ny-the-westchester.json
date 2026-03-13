@@ -1,0 +1,26 @@
+{
+  "address": "125 Westchester Avenue",
+  "city": "White Plains",
+  "country": "US",
+  "googlePlaceID": "places/ChIJWb3SaTCUwokRX_ZI5Np-Ruk",
+  "name": "The Westchester",
+  "state": "NY",
+  "latitude": 41.031372999999995,
+  "longitude": -73.7590479,
+  "phone": "++1 914-683-8600",
+  "imageURLs": [
+    "/images/malls/ny-the-westchester-1.jpg"
+  ],
+  "summary": "The Westchester is a sophisticated, upscale retail center in White Plains featuring luxury shops, a trendy food court, and family-friendly amenities including a kids' play area. Managed by Simon Property Group, this premier destination offers a refined shopping experience for discerning customers throughout Westchester County.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 4567,
+  "website": "https://www.simon.com/mall/the-westchester?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "The Westchester attracts an affluent, educated demographic from Westchester County and surrounding areas, with median household incomes exceeding $100,000. The primary visitor base consists of families and professionals aged 30-65, with a significant portion of dual-income households seeking premium shopping experiences. The trade area draws from White Plains' urban core as well as surrounding suburban communities, with shoppers who value quality, convenience, and luxury retail options. Visitors typically exhibit sophisticated shopping preferences, favoring upscale brands and are willing to spend more for premium products and dining experiences.",
+  "description": "The Westchester stands as one of the premier luxury shopping destinations in Westchester County, offering a sophisticated retail experience in the heart of White Plains. This upscale enclosed mall features an impressive collection of high-end retailers and luxury brands, complemented by a trendy food court that elevates the traditional mall dining experience. Families appreciate the thoughtfully designed kids' play area, making it a destination that caters to shoppers of all ages. Managed by Simon Property Group, one of the nation's leading retail real estate companies, The Westchester maintains its reputation for excellence through carefully curated tenant selection and premium amenities. With its convenient location on Westchester Avenue and strong ratings from thousands of visitors, the center continues to serve as a cornerstone of upscale retail in the region, drawing shoppers from throughout the New York metropolitan area who seek a refined shopping environment.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 48.30712935321241
+}
