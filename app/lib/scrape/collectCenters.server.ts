@@ -33,7 +33,7 @@ export default async function collectCenters(search: string) {
   console.info("Counties: %s", counties.join(", "));
 
   // Step 2: Geocode all counties to get bounding boxes
-  const geocoded = await mapAsync(counties, geocodeCounty);
+  const geocoded = await mapAsync(counties, geocodeCounty, { concurrency: 1 });
 
   // Step 3: Merge bounding boxes to get a single bounding box
   const mergedBounds = mergeBounds(geocoded.map((g) => g.bounds));

@@ -5,10 +5,10 @@
 
 import { invariant } from "es-toolkit";
 import ora from "ora";
-import { daysAgo } from "~/lib/temporal";
 import zod from "zod";
 import { trackApiCall } from "~/lib/apiUsageTracker";
 import envVars from "~/lib/env";
+import { daysAgo } from "~/lib/temporal";
 
 const geocodeResultSchema = zod.object({
   results: zod.array(
@@ -98,20 +98,19 @@ export async function geocodeCounty(
           },
         });
 
-        invariant(response.ok, `Geocoding API failed: ${response.statusText}`);
+        if (!response.ok) {
+          throw new Error(`Geocoding API failed: ${response.statusText}`);
+        }
+
         const data = geocodeResultSchema.parse(await response.json());
-        invariant(
-          data.status === "OK",
-          `Geocoding failed for ${countyName}: ${data.status}`,
-        );
-        invariant(
-          data.results.length > 0,
-          `No results found for ${countyName}`,
-        );
+        if (data.status !== "OK")
+          throw new Error(`Geocoding failed for ${countyName}: ${data.status}`);
+        if (data.results.length === 0)
+          throw new Error(`No results found for ${countyName}`);
         return data.results[0];
       },
     );
-    invariant(result, "Geocoding failed");
+    if (!result) throw new Error(`Geocoding failed for ${countyName}`);
 
     const { geometry, formatted_address } = result;
 

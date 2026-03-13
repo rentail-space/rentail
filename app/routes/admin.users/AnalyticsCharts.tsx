@@ -9,13 +9,7 @@ import {
 import type { User } from "prisma/generated/client";
 import { Suspense } from "react";
 import { Await } from "react-router";
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  XAxis,
-  YAxis
-} from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { Card, CardContent } from "~/components/ui/Card";
 import {
   ChartContainer,
