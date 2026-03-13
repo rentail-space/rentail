@@ -1,0 +1,26 @@
+{
+  "address": "680 Legacy Place",
+  "city": "Dedham",
+  "country": "US",
+  "googlePlaceID": "places/ChIJBdPcrO9_44kRpdWvTTZKyf8",
+  "name": "Legacy Place",
+  "state": "MA",
+  "latitude": 42.231107,
+  "longitude": -71.1772388,
+  "phone": "++1 781-329-3009",
+  "imageURLs": [
+    "/images/malls/ma-legacy-place-1.jpg"
+  ],
+  "summary": "Legacy Place is Dedham's premier outdoor lifestyle center featuring brand-name stores, diverse dining options, entertainment, and fitness facilities in a sprawling open-air setting. With newly opened restaurants like Mecha Noodle Bar and Anna's Taqueria alongside fashion retailers like Aritzia, the center offers a comprehensive shopping and lifestyle experience enhanced by its Insider rewards program.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 4775,
+  "website": "https://www.legacyplace.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Legacy Place attracts an affluent, educated demographic from the greater Boston metro area, particularly families and professionals from Dedham and surrounding communities with above-average household incomes. The trade area draws visitors aged 25-65 who value quality shopping experiences and are willing to spend on premium brands, dining, and entertainment. Primary market segments include dual-income households, young professionals, and empty nesters seeking a convenient outdoor shopping environment with upscale amenities. The center's strong mix of fashion retailers, dining options, and entertainment venues appeals to experience-driven consumers who prioritize lifestyle and convenience in their shopping patterns.",
+  "description": "Legacy Place stands as Dedham's premier outdoor lifestyle destination, offering an unmistakable shopping and dining experience at 680 Legacy Place. This sprawling outdoor complex brings together brand-name stores, diverse dining options, fitness facilities, groceries, movies, and special events in a thoughtfully designed open-air setting. The center has established itself as a go-to destination featuring an impressive lineup of retailers including Aritzia for fashion-forward apparel, MiniLuxe for beauty and wellness services, and Industrious for modern workspace solutions. Food enthusiasts can explore an array of culinary options from the newly opened Mecha Noodle Bar and Anna's Taqueria to numerous other dining establishments that make Legacy Place a true food and drink destination. With its Insider rewards program offering exclusive access to events and benefits across the collection of brands, Legacy Place creates a community-focused environment where visitors can discover that \"best-day-ever feeling\" while enjoying the convenience of outdoor shopping combined with the quality of carefully curated tenants.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 32.37496570809394
+}

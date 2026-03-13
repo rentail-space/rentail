@@ -1,0 +1,26 @@
+{
+  "address": "55 Parsonage Road",
+  "city": "Edison",
+  "country": "US",
+  "googlePlaceID": "places/ChIJNy3WVBW2w4kRF6IQ3ncZED4",
+  "name": "Menlo Park Mall",
+  "state": "NJ",
+  "latitude": 40.547727599999995,
+  "longitude": -74.33553239999999,
+  "phone": "++1 732-494-6255",
+  "imageURLs": [
+    "/images/malls/nj-menlo-park-mall-1.jpg"
+  ],
+  "summary": "Menlo Park Mall is a roomy enclosed shopping center in Edison, NJ, featuring brand-name apparel and shoe retailers, a diverse food court, and a dine-in movie theater. This well-established regional mall serves as a comprehensive shopping and entertainment destination for central New Jersey communities.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 15564,
+  "website": "https://www.simon.com/mall/menlo-park-mall?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Menlo Park Mall attracts a diverse, middle to upper-middle class demographic from central New Jersey, with a strong representation of families and young professionals aged 25-54. The trade area serves affluent suburban communities in Middlesex County, including Edison, Woodbridge, and surrounding townships, with median household incomes ranging from $80,000 to $120,000. Shoppers are typically well-educated, value-conscious consumers who seek a mix of national brands and dining options in a convenient indoor setting. The mall draws both weekday lunch crowds from nearby corporate offices and weekend family shoppers looking for entertainment and retail variety.",
+  "description": "Menlo Park Mall stands as one of New Jersey's premier shopping destinations, serving the heart of Middlesex County since its opening. This spacious enclosed regional mall offers an exceptional retail experience with brand-name apparel and footwear stores that cater to diverse tastes and budgets. Beyond traditional shopping, the center has evolved into a complete entertainment destination, featuring a modern dine-in movie theater that allows guests to enjoy dinner and a film in one convenient location. The mall's expansive food court provides a variety of dining options for shoppers looking to refuel during their visit. With its prime location on Parsonage Road in Edison, excellent accessibility, and comprehensive mix of shopping, dining, and entertainment options, Menlo Park Mall has established itself as a go-to gathering place for families and friends throughout central New Jersey.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 36.89066675475901
+}

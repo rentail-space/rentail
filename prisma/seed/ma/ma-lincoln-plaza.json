@@ -1,0 +1,25 @@
+{
+  "address": "525 Lincoln Street",
+  "city": "Worcester",
+  "country": "US",
+  "googlePlaceID": "places/ChIJqbNlZsUH5IkRu-hF4c7sfPY",
+  "name": "Lincoln Plaza",
+  "state": "MA",
+  "latitude": 42.293589,
+  "longitude": -71.77608459999999,
+  "imageURLs": [
+    "/images/malls/ma-lincoln-plaza-1.jpg"
+  ],
+  "summary": "Lincoln Plaza is a neighborhood shopping center on Lincoln Street in Worcester, offering convenient access to everyday retail and services. With extended hours and a 4.1-star rating from thousands of reviews, it serves as a practical shopping destination for the local community.",
+  "openFrom": 700,
+  "openUntil": 2200,
+  "rating": 4.1,
+  "reviewCount": 3406,
+  "website": "http://google.com/url?q=https%3A%2F%2Fbusiness.google.com%2Fwebsite_shared%2Flaunch_bw.html%3Ff%3Dhttps%3A%2F%2Famzn.to%2F3WUjEji&utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Lincoln Plaza serves a diverse Worcester community with a mix of middle-income families, young professionals, and college students from nearby institutions. The trade area draws from Worcester's urban core and surrounding neighborhoods, attracting value-conscious shoppers seeking convenient access to everyday goods and services. Typical visitors include working families making quick shopping trips, students, and local residents who prioritize accessibility and practical retail options over luxury shopping experiences.",
+  "description": "Lincoln Plaza is a convenient neighborhood shopping destination located on Lincoln Street in Worcester, Massachusetts. This accessible retail center serves the local community with a practical mix of stores and services designed for everyday shopping needs. With operating hours from 7:00 AM to 10:00 PM, Lincoln Plaza accommodates early morning shoppers and those seeking evening convenience. The center has earned a solid 4.1-star rating from over 3,400 Google reviews, reflecting its role as a reliable community resource. Strategically positioned in Worcester's urban landscape, Lincoln Plaza provides residents with easy access to essential retail and services in a straightforward, no-frills shopping environment.",
+  "tier": 1,
+  "spaces": [],
+  "ranking": 14.482203038868986
+}

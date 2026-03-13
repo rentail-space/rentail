@@ -1,0 +1,26 @@
+{
+  "address": "470 Lewis Avenue",
+  "city": "Meriden",
+  "country": "US",
+  "googlePlaceID": "places/ChIJTSk8rgLK54kRiNWigp3-2lw",
+  "name": "Meriden Mall",
+  "state": "CT",
+  "latitude": 41.5510076,
+  "longitude": -72.8077014,
+  "phone": "++1 203-235-3343",
+  "imageURLs": [
+    "/images/malls/ct-meriden-mall-1.jpg"
+  ],
+  "summary": "Meriden Mall is a regional shopping center in central Connecticut featuring Boscov's as its anchor store along with popular national retailers like Finish Line, Kay Jewelers, and SHOE DEPT. The mall offers a VIP program for exclusive deals and serves as a convenient shopping destination for the Meriden community.",
+  "openFrom": 1100,
+  "openUntil": 2000,
+  "rating": 3.9,
+  "reviewCount": 5578,
+  "website": "http://www.meridenmall.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Meriden Mall serves a diverse middle-income demographic in central Connecticut, drawing primarily from Meriden and surrounding communities in New Haven County. The trade area attracts families and value-conscious shoppers seeking affordable retail options, with a customer base spanning young adults to seniors. The center appeals to budget-minded consumers looking for department store anchors and national chain retailers at accessible price points, typical of secondary markets in Connecticut's smaller cities.",
+  "description": "Meriden Mall is a regional shopping destination located in the heart of Meriden, Connecticut, serving the central Connecticut community since its establishment. The mall features a diverse mix of national retailers and local businesses, anchored by Boscov's department store, providing shoppers with a comprehensive retail experience under one roof. Visitors can explore popular stores including Finish Line for athletic footwear, Kay Jewelers for fine jewelry, SHOE DEPT. for family footwear, and Piercing Pagoda for accessories. The mall also offers dining options like PretzelMaker, making it a convenient destination for both shopping and refreshments. With its VIP program that allows shoppers to follow their favorite stores and receive exclusive deals, Meriden Mall creates a personalized shopping experience that keeps the community connected to the latest sales and events.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 0
+}

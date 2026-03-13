@@ -1,0 +1,26 @@
+{
+  "address": "400 Bald Hill Road",
+  "city": "Warwick",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ8ZoXDAhM5IkR1QAdbmOJQrQ",
+  "name": "Warwick Mall",
+  "state": "RI",
+  "latitude": 41.7247227,
+  "longitude": -71.47627250000001,
+  "phone": "++1 401-739-7500",
+  "imageURLs": [
+    "/images/malls/ri-warwick-mall-1.jpg"
+  ],
+  "summary": "Warwick Mall is a classic enclosed regional shopping center that has served Rhode Island families since 1970. Featuring a food court, carousel, multiplex cinema, and community-focused amenities, this well-established mall remains a popular destination with strong visitor ratings and a convenient Warwick location.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 6634,
+  "website": "http://www.warwickmall.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Warwick Mall serves a diverse middle-class demographic in the Providence metropolitan area, attracting families and value-conscious shoppers from across Rhode Island and southeastern Massachusetts. The primary trade area includes households with median incomes ranging from $50,000 to $85,000, with a strong representation of Gen X and Baby Boomer shoppers aged 35-65. The center draws both local residents seeking convenient shopping options and regional visitors who appreciate the mall's traditional enclosed format and family-friendly amenities like the carousel. Shopping patterns reflect a mix of necessity-based visits for everyday retail needs and leisure trips centered around dining and entertainment at the multiplex cinema.",
+  "description": "Warwick Mall stands as a cornerstone of Rhode Island retail, having served the community since its opening in 1970. This classic enclosed regional shopping center has evolved over more than five decades to remain a vital shopping destination for families throughout the Providence metropolitan area. The mall features traditional amenities that have made it a beloved local institution, including a charming carousel that delights children and nostalgic adults alike, a comprehensive food court offering diverse dining options, and an Apple Cinemas multiplex providing entertainment for the whole family. Beyond shopping, Warwick Mall has positioned itself as a community gathering place, hosting events throughout the year and offering thoughtful amenities like a dedicated nursing lounge for young families. With its convenient location on Bald Hill Road and strong ratings from thousands of visitors, the mall continues to adapt while maintaining the welcoming atmosphere that has made it a Rhode Island shopping tradition for generations.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 32.86726901777779
+}

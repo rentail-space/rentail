@@ -1,0 +1,28 @@
+{
+  "address": "3405 Erie Boulevard East",
+  "city": "De Witt",
+  "country": "US",
+  "googlePlaceID": "places/ChIJHSnb13ON2YkRHtGqwDicFEY",
+  "name": "Dewitt Marshall Plaza",
+  "state": "NY",
+  "latitude": 43.0471849,
+  "longitude": -76.0650265,
+  "phone": "++1 201-571-3500",
+  "imageURLs": [
+    "/images/malls/ny-dewitt-marshall-plaza-1.jpg"
+  ],
+  "summary": "Dewitt Marshall Plaza is the premier shopping center at the I-690/I-481 interchange in Syracuse, featuring Best Buy and adjacent to Dick's Sporting Goods, Golf Galaxy, PetSmart, and other popular retailers. With excellent highway access and ample parking, this community center serves as a convenient destination for electronics, sporting goods, and specialty retail in the greater DeWitt area.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.5,
+  "reviewCount": 184,
+  "website": "https://uedge.com/property/dewitt-marshall-plaza?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Dewitt Marshall Plaza serves the suburban Syracuse market in Onondaga County, attracting middle to upper-middle income families with household incomes ranging from $60,000 to $100,000 annually. The primary trade area draws from DeWitt and surrounding communities along the I-690/I-481 corridor, with shoppers typically aged 30-65 who value convenience and accessibility for everyday shopping needs. The center appeals to working professionals and families seeking big-box retail options and specialty stores in a convenient highway-accessible location.",
+  "description": "Dewitt Marshall Plaza stands as the dominant shopping destination near the strategic I-690/I-481 interchange in Syracuse, New York, offering unparalleled convenience for shoppers throughout the greater DeWitt area. Conveniently located off Highway 5 with easy access from Fietta Road, this well-positioned community center has established itself as a go-to destination for electronics, sporting goods, and specialty retail. The center is anchored by Best Buy and sits adjacent to a strong lineup of national retailers including Dick's Sporting Goods, Golf Galaxy, PetSmart, Panera Bread, and Five Below, creating a comprehensive shopping experience for the local community. With 45,961 square feet of retail space and ample parking for 510 vehicles across 1.3 acres, the plaza provides a comfortable and accessible shopping environment. Managed by Urban Edge Properties, Dewitt Marshall Plaza continues to serve as a vital retail hub in the Syracuse metropolitan area, combining convenience, quality tenants, and strategic highway access to meet the diverse needs of Central New York shoppers.",
+  "numberOfStores": 6,
+  "squareFootage": 45961,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 20.383360407085828
+}

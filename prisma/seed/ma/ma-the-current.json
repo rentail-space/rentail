@@ -1,0 +1,25 @@
+{
+  "address": "100 Seaport Boulevard",
+  "city": "Boston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJX34OVABx44kRRZfvydh9Am4",
+  "name": "The Current",
+  "state": "MA",
+  "latitude": 42.3515564,
+  "longitude": -71.04551719999999,
+  "imageURLs": [
+    "/images/malls/ma-the-current-1.jpg"
+  ],
+  "summary": "The Current is a contemporary lifestyle center in Boston's vibrant Seaport District, offering a curated mix of retail, dining, and entertainment options. Located at the heart of one of the city's most dynamic waterfront neighborhoods, it serves as a premier destination for urban professionals and visitors seeking modern shopping experiences.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 5,
+  "reviewCount": 2,
+  "website": "https://www.bostonseaport.xyz/the-current-fall2023/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Current attracts a young, affluent professional demographic typical of Boston's Seaport District, with visitors primarily aged 25-45 working in nearby tech, finance, and biotech companies. The trade area serves high-income urban residents and workers with household incomes exceeding $100,000, along with tourists visiting the waterfront destination. Shopping patterns reflect a preference for experiential retail, dining, and entertainment options that complement the modern, walkable urban environment of one of Boston's fastest-growing neighborhoods.",
+  "description": "The Current is a dynamic lifestyle destination located in Boston's thriving Seaport District at 100 Seaport Boulevard, representing the evolution of modern urban retail and entertainment. Situated in one of Boston's most rapidly developing neighborhoods, this open-air center captures the innovative spirit of the Seaport with its contemporary design and curated mix of retailers, restaurants, and experiential offerings. The center serves as a vibrant gathering place for the area's growing community of young professionals, residents, and visitors exploring the waterfront district. With its prime location near the Boston Convention and Exhibition Center, the Institute of Contemporary Art, and numerous corporate headquarters, The Current has become an integral part of the Seaport's transformation into a world-class urban destination. The center's modern aesthetic and carefully selected tenant mix reflect the sophisticated tastes of Boston's tech-savvy, design-conscious population, making it a premier shopping and dining destination in the city's newest neighborhood.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 4.515449934959718
+}

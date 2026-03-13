@@ -1,0 +1,26 @@
+{
+  "address": "75 Middlesex Turnpike",
+  "city": "Burlington",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ20siOTie44kR9rxwj-HpBEg",
+  "name": "Burlington Mall",
+  "state": "MA",
+  "latitude": 42.4825157,
+  "longitude": -71.2137169,
+  "phone": "++1 781-272-8667",
+  "imageURLs": [
+    "/images/malls/ma-burlington-mall-1.jpg"
+  ],
+  "summary": "Burlington Mall is an upscale enclosed regional shopping center located along Route 128 in Burlington, Massachusetts, featuring department stores and specialty retailers in a well-maintained, airy environment. Managed by Simon Property Group, this premier destination serves the affluent northern Boston suburbs with a strong mix of quality retailers and convenient highway access.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 10456,
+  "website": "https://www.simon.com/mall/burlington-mall?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Burlington Mall attracts an affluent suburban demographic from the Greater Boston area, particularly families and professionals from Burlington, Woburn, Lexington, and surrounding communities with above-average household incomes. The trade area serves a well-educated population with strong purchasing power, drawn to the mall's upscale retail mix and convenient Route 128/I-95 location. Primary shoppers include middle to upper-middle class households aged 25-65, with a significant presence of dual-income families seeking quality brands and department store shopping. The center benefits from its proximity to major employment centers along the 128 technology corridor, attracting both weekday lunch traffic and weekend family shopping trips.",
+  "description": "Burlington Mall stands as one of Greater Boston's premier enclosed shopping destinations, strategically located along the Route 128 technology corridor in Burlington, Massachusetts. Developed and managed by Simon Property Group, this upscale regional mall has served the affluent northern suburbs since its opening, establishing itself as a retail anchor for communities throughout Middlesex County. The mall features an impressive collection of department stores and specialty retailers spread across its airy, well-maintained interior spaces, offering shoppers a comfortable year-round shopping experience. With its convenient location at 75 Middlesex Turnpike and easy access from I-95/Route 128, the center draws visitors from Burlington, Woburn, Lexington, Bedford, and beyond, serving as a regional retail hub for the area's educated and affluent population. The mall's upmarket tenant mix, combined with dining options in its food court and strong customer ratings, has solidified its position as a preferred shopping destination in the competitive Boston metropolitan retail market.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 35.3704170562379
+}

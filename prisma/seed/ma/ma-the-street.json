@@ -1,0 +1,26 @@
+{
+  "address": "33 Boylston Street",
+  "city": "Newton",
+  "country": "US",
+  "googlePlaceID": "places/ChIJwQ9rfvJ444kRgR4ioRFQ8cs",
+  "name": "The Street",
+  "state": "MA",
+  "latitude": 42.3227864,
+  "longitude": -71.1687194,
+  "phone": "++1 617-646-3190",
+  "imageURLs": [
+    "/images/malls/ma-the-street-1.jpg"
+  ],
+  "summary": "The Street Chestnut Hill is an upscale outdoor lifestyle center in Newton featuring a sophisticated mix of contemporary fashion, beauty, and dining destinations including CHANEL, Todd Snyder, and Just Salad. This open-air shopping experience caters to affluent Boston-area shoppers with its curated collection of premium brands and an Insider rewards program.",
+  "openFrom": 1000,
+  "openUntil": 1900,
+  "rating": 4.4,
+  "reviewCount": 1456,
+  "website": "https://thestreetchestnuthill.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "The Street Chestnut Hill attracts an affluent, educated demographic primarily from the Greater Boston area, particularly Newton and surrounding upscale suburbs. The typical visitor is between 30-55 years old with household incomes exceeding $150,000, often professionals and families seeking premium shopping and dining experiences. The trade area draws from one of Massachusetts' wealthiest communities, with shoppers who value quality over price and prefer curated, boutique-style retail over traditional mall experiences. Visitors tend to be fashion-conscious, health-aware consumers who appreciate the outdoor shopping environment and frequently combine retail visits with dining at upscale eateries.",
+  "description": "The Street Chestnut Hill is a premier outdoor lifestyle destination located at 33 Boylston Street in Newton, Massachusetts, offering a sophisticated shopping and dining experience in the heart of one of Boston's most affluent suburbs. This upscale open-air center features a carefully curated collection of contemporary fashion brands, beauty boutiques, and culinary destinations that cater to discerning shoppers seeking both established names and emerging concepts. The center's tenant mix includes luxury retailers like CHANEL Fragrance and Beauty Boutique, fashion-forward brands such as Todd Snyder and Marine Layer, contemporary favorites like Mejuri and BIRKENSTOCK, and lifestyle boutiques including Onyx Boutique and WHEAT. Dining options range from health-conscious concepts like Just Salad and Pink Carrot to The Half Cookie for sweet treats, complemented by wellness services including The Tox and New England OB-GYN Associates. The Street also features 27 Boylston, a residential component that adds to the vibrant, mixed-use character of the development, while the Insider rewards program creates a sense of community among regular visitors with exclusive access to events and rewards across the center's collection of brands.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 41.75373014969665
+}

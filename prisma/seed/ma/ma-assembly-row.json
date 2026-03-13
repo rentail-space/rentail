@@ -1,0 +1,25 @@
+{
+  "address": "355 Artisan Way",
+  "city": "Somerville",
+  "country": "US",
+  "googlePlaceID": "places/ChIJAQAAANdw44kRs8EYGuz40k0",
+  "name": "Assembly Row",
+  "state": "MA",
+  "latitude": 42.3942477,
+  "longitude": -71.07914099999999,
+  "imageURLs": [
+    "/images/malls/ma-assembly-row-1.jpg"
+  ],
+  "summary": "Assembly Row is a contemporary lifestyle center in Somerville featuring big-box stores, specialty retailers, and diverse dining options in a walkable, mixed-use environment along the Mystic River. This modern development combines shopping with entertainment and community events, offering a vibrant urban destination easily accessible via public transportation.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 11639,
+  "website": "http://www.assemblyrow.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Assembly Row attracts a diverse, affluent demographic primarily consisting of young professionals and families aged 25-45 with above-average household incomes, drawn from the greater Boston metro area including Somerville, Cambridge, and surrounding communities. The trade area serves a highly educated population with strong purchasing power, reflecting the area's concentration of technology, healthcare, and academic professionals. Visitors typically seek a mixed-use experience combining shopping, dining, and entertainment in a walkable urban environment, with preferences for contemporary brands and experiential retail.",
+  "description": "Assembly Row is a vibrant mixed-use lifestyle center located along the Mystic River in Somerville, Massachusetts, representing one of the Boston area's premier shopping and entertainment destinations. This modern development features big-box retailers alongside specialty shops, offering a diverse mix of apparel, craft supplies, housewares, and more in an open-air, pedestrian-friendly environment. The center has transformed the former industrial Assembly Square area into a bustling urban destination that seamlessly blends retail, dining, and entertainment options. With its contemporary design and riverside location, Assembly Row provides visitors with a unique shopping experience that goes beyond traditional retail, incorporating events like farmers markets and seasonal activities that foster community engagement. The development's accessibility via the MBTA Orange Line and its integration with residential and office spaces make it a true live-work-play destination that serves both local residents and visitors from across the greater Boston metropolitan area.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 36.59324101369733
+}

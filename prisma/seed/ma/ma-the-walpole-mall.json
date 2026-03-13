@@ -1,0 +1,26 @@
+{
+  "address": "90 Providence Highway",
+  "city": "Walpole",
+  "country": "US",
+  "googlePlaceID": "places/ChIJDawmogV-5IkRFhRnkxl57XE",
+  "name": "The Walpole Mall",
+  "state": "MA",
+  "latitude": 42.154646299999996,
+  "longitude": -71.2016739,
+  "imageURLs": [
+    "/images/malls/ma-the-walpole-mall-1.jpg"
+  ],
+  "summary": "The Walpole Mall is a community shopping center in Walpole, MA featuring 32 shops, eateries, and services. Positioned as \"Your Every Day Place,\" it offers convenient neighborhood shopping with popular tenants like Duck Donuts and Texas Roadhouse.",
+  "openFrom": 900,
+  "openUntil": 2100,
+  "rating": 4,
+  "reviewCount": 1969,
+  "website": "https://thewalpolemall.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Walpole Mall serves a suburban Boston market with middle to upper-middle income families and professionals from Walpole and surrounding Norfolk County communities. The trade area attracts a diverse mix of shoppers including young families, working professionals aged 25-54, and retirees seeking convenient everyday shopping options. Visitors typically prioritize value and convenience, with shopping patterns centered around routine errands, casual dining, and family-oriented activities rather than luxury purchases.",
+  "description": "The Walpole Mall is a community shopping destination located at 90 Providence Highway in Walpole, Massachusetts, serving the southern Boston suburbs with convenient everyday shopping and dining options. Marketed as \"Your Every Day Place,\" this center features 32 shops, eateries, and services designed to meet the daily needs of local residents and families. The mall's tenant mix includes popular destinations like Duck Donuts and Texas Roadhouse, offering visitors a blend of retail shopping and casual dining experiences. Operating Monday through Saturday from 10:00 AM to 9:00 PM and Sundays from 12:00 PM to 6:00 PM, the center provides flexible hours to accommodate busy schedules. Managed by The Wilder Companies, Inc., The Walpole Mall has established itself as a reliable neighborhood shopping hub where the community can find familiar brands and services in a welcoming, accessible environment.",
+  "numberOfStores": 32,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 26.353965729104946
+}

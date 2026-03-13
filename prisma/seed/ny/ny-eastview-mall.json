@@ -1,0 +1,26 @@
+{
+  "address": "7979 Pittsford Victor Road",
+  "city": "Victor",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ6cI9Qecz0YkRHNREzIu9tjM",
+  "name": "Eastview Mall",
+  "state": "NY",
+  "latitude": 43.029289399999996,
+  "longitude": -77.4418481,
+  "phone": "++1 585-223-4420",
+  "imageURLs": [
+    "/images/malls/ny-eastview-mall-1.jpg"
+  ],
+  "summary": "Eastview Mall is the premier regional shopping destination in the Greater Rochester area, featuring upscale department stores, popular retailers, diverse dining options, and a cinema. With a 4.5-star rating and over 7,400 reviews, this well-maintained mall offers a superior shopping experience for families and professionals throughout the Finger Lakes region.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.5,
+  "reviewCount": 7483,
+  "website": "http://www.eastviewmall.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Eastview Mall attracts a diverse, affluent suburban demographic from the Rochester metropolitan area, particularly families and professionals from Victor, Pittsford, and surrounding Monroe County communities. The primary trade area consists of middle to upper-middle income households with median incomes significantly above the national average, drawn by the mall's upscale retail mix. Shoppers tend to be between 25-54 years old with substantial disposable income, seeking both everyday shopping and special occasion purchases. The center serves as a regional destination for the Finger Lakes region, attracting visitors willing to travel 30+ minutes for its premium retail selection and dining options.",
+  "description": "Eastview Mall stands as the premier shopping destination in the Greater Rochester area, offering an exceptional retail experience at 7979 Pittsford Victor Road in Victor, New York. This expansive regional mall has established itself as a cornerstone of upscale shopping in the Finger Lakes region, featuring department store anchors and a carefully curated selection of premium retailers that cater to discerning shoppers. The mall's impressive 4.5-star rating from over 7,400 reviews reflects its commitment to providing a superior shopping environment with modern amenities and exceptional customer service. Beyond its extensive retail offerings, Eastview Mall serves as a community gathering place with diverse dining options ranging from casual eateries to sit-down restaurants, plus entertainment venues including a state-of-the-art cinema. The center regularly features exciting promotions from popular retailers like Bath & Body Works, PINK, and Yankee Candle, ensuring visitors always find compelling reasons to return. With convenient hours from 10 AM to 8 PM and ample parking, Eastview Mall continues to evolve as a dynamic retail hub that meets the sophisticated tastes of Rochester-area shoppers while maintaining its position as the region's go-to destination for quality shopping and entertainment.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 34.86668170700732
+}

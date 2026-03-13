@@ -1,0 +1,28 @@
+{
+  "address": "137 West Boylston Street",
+  "city": "West Boylston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJn4DMc1v544kRLPtr0WTVvRU",
+  "name": "Scarlett Brook Marketplace",
+  "state": "MA",
+  "latitude": 42.3558984,
+  "longitude": -71.7843839,
+  "phone": "++1 617-232-8900",
+  "imageURLs": [
+    "/images/malls/ma-scarlett-brook-marketplace-1.jpg"
+  ],
+  "summary": "Scarlett Brook Marketplace is a 157,000 square foot community center in West Boylston that combines value retail with entertainment, anchored by Walmart and featuring a five-screen cinema. Located along busy Route 12, the center serves Worcester County residents seeking convenient, budget-friendly shopping and family entertainment options.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.1,
+  "reviewCount": 363,
+  "website": "https://www.wsdevelopment.com/our-properties/scarlett-brook-marketplace/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Scarlett Brook Marketplace serves Worcester County residents and families from West Boylston and surrounding central Massachusetts communities. The trade area attracts middle-income households seeking value-oriented shopping and entertainment options, with a strong presence of families drawn to the combination of Walmart's everyday essentials and the five-screen cinema. The center's location along busy Route 12 captures both local residents and pass-through traffic from the broader Worcester County district, appealing to budget-conscious shoppers who prioritize convenience and one-stop shopping experiences.",
+  "description": "Scarlett Brook Marketplace is a 157,000 square foot community shopping center strategically located along busy Route 12 in West Boylston, Massachusetts, serving the entire Worcester County district. The center expertly combines value retail with family entertainment, anchored by Walmart as its primary tenant and featuring the popular five-screen West Boylston Cinema that draws moviegoers from throughout the region. Additional key tenants include Dollar Tree, reinforcing the center's value-oriented positioning that resonates with budget-conscious shoppers. Managed and developed by WS Development, a respected real estate firm with an extensive portfolio across the Northeast, Scarlett Brook Marketplace benefits from professional management and strategic leasing expertise. The center's convenient Route 12 location at 137 West Boylston Street provides excellent visibility and accessibility, making it a go-to destination for everyday shopping needs and weekend entertainment for families throughout central Massachusetts.",
+  "numberOfStores": 3,
+  "squareFootage": 157000,
+  "tier": 1,
+  "spaces": [],
+  "ranking": 10.49561716264806
+}

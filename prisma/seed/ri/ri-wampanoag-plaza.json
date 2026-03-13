@@ -1,0 +1,27 @@
+{
+  "address": "1925 Pawtucket Avenue",
+  "city": "East Providence",
+  "country": "US",
+  "googlePlaceID": "places/ChIJR0CzbOda5IkRX1_PbsTquBY",
+  "name": "Wampanoag Plaza",
+  "state": "RI",
+  "latitude": 41.823163,
+  "longitude": -71.3574782,
+  "imageURLs": [
+    "/images/malls/ri-wampanoag-plaza-1.jpg"
+  ],
+  "summary": "Wampanoag Plaza is a 226,640 square foot grocery-anchored community center in East Providence, RI, featuring Stop & Shop, Marshalls, and Savers as anchor tenants. The center serves an affluent trade area of over 90,000 residents with average household incomes exceeding $131,000, offering a value-oriented mix of national retailers, dining, and services.",
+  "openFrom": 1100,
+  "openUntil": 2230,
+  "rating": 4.2,
+  "reviewCount": 1486,
+  "website": "https://www.sterlingorganization.com/properties/wampanoag-plaza/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Wampanoag Plaza serves a prosperous suburban trade area with over 90,000 residents within a 3-mile radius and an average household income exceeding $131,000. The primary market consists of middle to upper-middle class families and professionals, with median household incomes around $92,555 in the core trade area. The demographic profile skews toward established households seeking value-oriented shopping combined with everyday necessities, as evidenced by the mix of discount retailers, grocery anchors, and fitness facilities. Shopping patterns reflect a preference for one-stop convenience shopping, with visitors typically combining grocery runs at Stop & Shop with errands at complementary retailers like Dollar Tree, Marshalls, and NAPA Auto Parts.",
+  "description": "Wampanoag Plaza is a well-established grocery-anchored shopping center strategically positioned at the northwest corner of Pawtucket Avenue and Taunton Avenue in East Providence, Rhode Island. Spanning 226,640 square feet of gross leasable area, this community shopping destination serves as a vital retail hub for the affluent Providence metropolitan area. The center is anchored by Stop & Shop Supermarket, operated by retail giant Ahold, and features prominent junior anchors including Marshalls, Savers thrift store, and NAPA Auto Parts, creating a diverse tenant mix that appeals to value-conscious shoppers. The property has evolved to meet modern consumer demands, recently adding contemporary retailers like Five Below, Snipes, and KPOT Korean BBQ & Hot Pot alongside established tenants such as Dollar Tree and Work Out World fitness center. With its convenient location, strong anchor tenants, and mix of national retailers serving a trade area with over 90,000 residents and average household incomes exceeding $131,000, Wampanoag Plaza continues to be a cornerstone shopping destination for East Providence and surrounding communities.",
+  "numberOfStores": 10,
+  "squareFootage": 226640,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 26.644957999166273
+}

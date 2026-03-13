@@ -1,0 +1,26 @@
+{
+  "address": "101 Seaport Boulevard",
+  "city": "Boston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJLw3nA89x44kRcILcVv5D2zg",
+  "name": "Boston Seaport",
+  "state": "MA",
+  "latitude": 42.351411899999995,
+  "longitude": -71.04526249999999,
+  "phone": "++1 617-232-8900",
+  "imageURLs": [
+    "/images/malls/ma-boston-seaport-1.jpg"
+  ],
+  "summary": "Boston Seaport is a modern waterfront lifestyle center in Boston's Innovation District, offering upscale shopping, dining, and entertainment along the historic harbor. The open-air destination serves the neighborhood's affluent professional community and visitors with a curated mix of contemporary retailers and restaurants.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.8,
+  "reviewCount": 163,
+  "website": "https://www.bostonseaport.xyz/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Boston Seaport attracts a diverse, affluent demographic including young professionals, tech workers, and urban residents with above-average household incomes. The trade area draws heavily from Boston's Innovation District and surrounding neighborhoods, appealing to millennials and Gen X visitors aged 25-45 who value experiential retail and dining. The center serves both local residents seeking upscale shopping and dining options, as well as tourists visiting Boston's waterfront attractions, with visitors typically exhibiting preferences for contemporary brands and lifestyle-oriented experiences.",
+  "description": "Boston Seaport stands as a premier waterfront destination in Boston's rapidly evolving Innovation District, representing the city's transformation into a modern urban lifestyle center. Located at 101 Seaport Boulevard along Boston's historic harbor, this open-air shopping and dining destination has become an integral part of the Seaport neighborhood's renaissance. The center seamlessly blends contemporary retail, diverse dining experiences, and entertainment options against the backdrop of Boston Harbor's scenic waterfront. With its strategic location in one of Boston's most dynamic neighborhoods, the Seaport has attracted a curated mix of tenants that cater to the area's tech-savvy professionals and discerning visitors. The center's design emphasizes walkability and outdoor spaces, creating an inviting atmosphere that encourages exploration and social gathering. Its proximity to major office buildings, luxury residential developments, and cultural attractions like the Institute of Contemporary Art makes it a natural gathering place for both locals and tourists. The Seaport's commitment to creating a vibrant urban experience is reflected in its thoughtful tenant mix and modern amenities, establishing it as a cornerstone of Boston's 21st-century waterfront development.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 31.85550150341699
+}

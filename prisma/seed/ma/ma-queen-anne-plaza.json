@@ -1,0 +1,26 @@
+{
+  "address": "10 Washington Street",
+  "city": "Norwell",
+  "country": "US",
+  "googlePlaceID": "places/ChIJhzGaKt5h44kRcSc9aTmmYSo",
+  "name": "Queen Anne Plaza",
+  "state": "MA",
+  "latitude": 42.172174399999996,
+  "longitude": -70.8833899,
+  "phone": "++1 617-684-1502",
+  "imageURLs": [
+    "/images/malls/ma-queen-anne-plaza-1.jpg"
+  ],
+  "summary": "Queen Anne Plaza is a community shopping center in Norwell, Massachusetts, managed by Federal Realty Investment Trust. Serving the affluent South Shore market, the plaza offers convenient access to retailers and services with a strong 4.2-star rating from local shoppers.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 166,
+  "website": "https://properties.federalrealty.com/property/queen-anne-plaza/3314018?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Queen Anne Plaza serves the affluent South Shore Massachusetts market, primarily attracting middle to upper-middle income families and professionals from Norwell and surrounding communities like Hanover, Scituate, and Hingham. The trade area is characterized by well-educated households with above-average incomes, homeowners in their 30s-60s, and a strong presence of families with children. Shoppers typically seek convenient access to quality everyday services and retailers, with a preference for established national brands and local businesses that cater to suburban lifestyle needs.",
+  "description": "Queen Anne Plaza is a well-established community shopping center located at 10 Washington Street in Norwell, Massachusetts, serving the prosperous South Shore region. Owned and managed by Federal Realty Investment Trust, one of the nation's premier retail real estate investment trusts, the plaza benefits from professional management and a commitment to maintaining high-quality retail environments. The center operates daily from 10:00 AM to 9:00 PM, providing convenient access to a mix of retailers and services that cater to the everyday needs of local residents. With a strong 4.2-star rating from 166 reviews, Queen Anne Plaza has earned a reputation as a reliable shopping destination in the Norwell community. Its strategic location along Washington Street positions it as an accessible hub for families and professionals seeking quality shopping and services in the South Shore area.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 18.648907939536464
+}

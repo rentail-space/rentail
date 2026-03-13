@@ -1,0 +1,27 @@
+{
+  "address": "50 Mill Street",
+  "city": "Worcester",
+  "country": "US",
+  "googlePlaceID": "places/ChIJDaFOEiIE5IkRaeVEj3UbXtc",
+  "name": "Mill St. Plaza",
+  "state": "MA",
+  "latitude": 42.2473417,
+  "longitude": -71.8323539,
+  "phone": "++1 877-848-0023",
+  "imageURLs": [
+    "/images/malls/ma-mill-st-plaza-1.jpg"
+  ],
+  "summary": "Mill St. Plaza is a fully-leased 66,281-square-foot strip center in Worcester, Massachusetts, serving the local urban population with a strong tenant mix. The property's prime location and complete occupancy demonstrate its success in this established market.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4,
+  "reviewCount": 1283,
+  "website": "https://www.kimcorealty.com/properties/mill-st-plaza/117380/view?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Mill St. Plaza serves a diverse urban population in Worcester, Massachusetts, the second largest city in the state. The immediate trade area shows a median household income of $50,132 within 1 mile, increasing to $90,644 within 10 miles, indicating a mix of working-class and middle-income households. The center draws from a population of nearly 390,000 within a 10-mile radius, with demographic data showing average household incomes ranging from $70,409 to $118,870 across different trade area rings. The property serves local urban residents with everyday shopping needs, attracting visitors who value convenience and accessibility in Worcester's established retail corridor.",
+  "description": "Mill St. Plaza is a well-established 66,281-square-foot strip center strategically located at 50 Mill Street in Worcester, Massachusetts, the second largest city in the Commonwealth. This fully-leased property serves the local urban population with a strong tenant roster that has proven its appeal in this established market. The center benefits from its prime Worcester location, drawing from a substantial trade area population of nearly 390,000 residents within a 10-mile radius. Mill St. Plaza's success is evidenced by its full occupancy status, with interested retailers joining a waitlist for future availability. Managed by Kimco Realty Corporation, one of North America's largest publicly traded owners and operators of open-air, grocery-anchored shopping centers, the property exemplifies quality neighborhood retail serving the everyday needs of Worcester's diverse community.",
+  "squareFootage": 66281,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 24.865813250999427
+}

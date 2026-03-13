@@ -1,0 +1,27 @@
+{
+  "address": "221 University Avenue",
+  "city": "Westwood",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ_XV7HSyA5IkR8swtG7E3KE0",
+  "name": "University Station",
+  "state": "MA",
+  "latitude": 42.206361699999995,
+  "longitude": -71.153336,
+  "phone": "++1 617-418-0972",
+  "imageURLs": [
+    "/images/malls/ma-university-station-1.jpg"
+  ],
+  "summary": "University Station is a vibrant lifestyle center in Westwood, MA, featuring a diverse mix of over 45 retailers, restaurants, and services including Target, Wegmans, Nordstrom Rack, and Life Time Athletic. This mixed-use destination combines shopping, dining, wellness, and professional services to create a complete community hub for Greater Boston's suburban market.",
+  "openFrom": 800,
+  "openUntil": 2100,
+  "rating": 4.5,
+  "reviewCount": 2522,
+  "website": "https://www.shopuniversitystation.com/directory/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "University Station attracts an affluent, educated demographic primarily consisting of young professionals, families, and university-affiliated visitors in the Westwood, MA area. The trade area serves middle to upper-middle income households with median incomes significantly above the national average, typical of the Greater Boston suburban market. Primary shoppers include dual-income families aged 30-55 seeking convenient access to quality retailers, dining, and services, along with health-conscious consumers drawn to the fitness and wellness offerings. The center benefits from its proximity to major employment centers and residential neighborhoods in one of Massachusetts' most desirable communities.",
+  "description": "University Station is a premier mixed-use lifestyle center located in Westwood, Massachusetts, offering a dynamic blend of shopping, dining, entertainment, wellness, and professional services. This modern development features an impressive tenant mix anchored by major retailers including Target, Wegmans, Nordstrom Rack, HomeGoods, and Marshalls, complemented by specialty stores like Bath & Body Works, Michaels, and ULTA Beauty. The center distinguishes itself with exceptional dining options ranging from Del Frisco's Grille and Anthony's Coal Fired Pizza to fast-casual favorites like Chipotle and Panda Express. Beyond traditional retail, University Station has evolved into a true lifestyle destination with Life Time Athletic fitness center, VIO Med Spa, Brigham & Women's Health Care Center, and professional services including Fidelity Investments and banking facilities. The center's commitment to creating a complete live-work-play environment is evident through its integration of residential, office, and retail components, making it a vibrant community hub in the heart of Westwood.",
+  "numberOfStores": 48,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 30.615705740133567
+}

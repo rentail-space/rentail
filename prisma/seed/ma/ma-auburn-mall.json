@@ -1,0 +1,27 @@
+{
+  "address": "385 Southbridge Street",
+  "city": "Auburn",
+  "country": "US",
+  "googlePlaceID": "places/ChIJDWEwApME5IkRHFSrf15aLTI",
+  "name": "Auburn Mall",
+  "state": "MA",
+  "latitude": 42.2021048,
+  "longitude": -71.8351789,
+  "phone": "++1 508-832-6000",
+  "imageURLs": [
+    "/images/malls/ma-auburn-mall-1.jpg"
+  ],
+  "summary": "Auburn Mall is an indoor regional shopping center in Auburn, Massachusetts, featuring over 50 stores, a food court, day spa, and children's play area. Managed by Simon Property Group, this family-friendly destination serves the greater Worcester County area with a diverse mix of national retailers and convenient amenities.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 3.9,
+  "reviewCount": 3671,
+  "website": "https://www.simon.com/mall/auburn-mall?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Auburn Mall attracts a diverse middle-income demographic from the greater Worcester County area, with a strong representation of families and value-conscious shoppers. The trade area serves suburban communities in central Massachusetts, drawing visitors primarily aged 25-54 with household incomes ranging from $50,000 to $85,000. The center appeals to practical shoppers seeking everyday retail needs, family dining options, and convenient one-stop shopping experiences typical of regional malls in secondary markets.",
+  "description": "Auburn Mall stands as a prominent indoor shopping destination in central Massachusetts, serving the greater Worcester County region since its opening. Managed by Simon Property Group, one of the nation's leading retail real estate companies, this enclosed regional mall offers a comprehensive shopping experience with over 50 retail stores spanning fashion, electronics, home goods, and specialty retail. The center features family-friendly amenities including a spacious food court with diverse dining options, a relaxing day spa for personal care, and a dedicated children's play area that makes it a popular destination for families. Located at 385 Southbridge Street in Auburn, the mall provides convenient access to surrounding communities and maintains consistent operating hours from 10 AM to 9 PM daily. With its mix of national retailers, dining venues, and community-focused amenities, Auburn Mall has established itself as a reliable shopping hub for everyday needs and family outings in the Worcester metropolitan area.",
+  "numberOfStores": 50,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 0
+}

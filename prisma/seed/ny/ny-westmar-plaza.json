@@ -1,0 +1,25 @@
+{
+  "address": "2111 Buffalo Road",
+  "city": "Rochester",
+  "country": "US",
+  "googlePlaceID": "places/ChIJew70l-ey1okRNewliDCb8oY",
+  "name": "Westmar Plaza",
+  "state": "NY",
+  "latitude": 43.1478141,
+  "longitude": -77.70740359999999,
+  "imageURLs": [
+    "/images/malls/ny-westmar-plaza-1.jpg"
+  ],
+  "summary": "Westmar Plaza is a neighborhood shopping center on Buffalo Road in Rochester, offering a practical mix of retail stores, dining options, and services for local residents. With its convenient location and diverse tenant mix, the plaza serves as a reliable destination for everyday shopping needs in Rochester's western suburbs.",
+  "openFrom": 900,
+  "openUntil": 1900,
+  "rating": 4,
+  "reviewCount": 646,
+  "website": "http://westmar-plaza.edan.io/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Westmar Plaza serves a diverse middle-class demographic in Rochester's western suburbs, attracting families and working professionals from the surrounding residential neighborhoods. The trade area consists primarily of households with moderate to middle incomes, with a mix of homeowners and renters seeking convenient access to everyday shopping and services. Typical visitors range from young families to older adults who value the plaza's accessible location along Buffalo Road and its practical mix of retail and dining options.",
+  "description": "Westmar Plaza is a well-established shopping destination located at 2111 Buffalo Road in Rochester, New York, serving the western suburbs of the city with convenient access to retail and dining options. The plaza has built a reputation as a reliable neighborhood shopping center, offering a curated selection of stores and services that cater to the everyday needs of local residents. With its strategic location along Buffalo Road, one of Rochester's main commercial corridors, Westmar Plaza benefits from excellent visibility and accessibility for shoppers throughout the area. The center features a diverse mix of tenants including specialty retailers, service providers, and dining establishments, creating a vibrant atmosphere where customers can accomplish multiple errands in one convenient stop. Customer reviews consistently praise the plaza's welcoming environment and the variety of shopping options available, with visitors appreciating both the quality of the stores and the friendly service they receive. The plaza maintains regular operating hours from 9:00 AM to 7:00 PM, making it accessible for both daytime and early evening shopping trips. Whether visitors are looking for trendy clothing, enjoying a meal at one of the eateries, or simply running daily errands, Westmar Plaza has established itself as a valued community resource that continues to serve the Rochester area with dedication to customer satisfaction.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 22.481860143960674
+}

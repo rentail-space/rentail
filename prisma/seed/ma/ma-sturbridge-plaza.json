@@ -1,0 +1,25 @@
+{
+  "address": "196 Main Street",
+  "city": "Sturbridge",
+  "country": "US",
+  "googlePlaceID": "places/ChIJL2hPk0qi5okRrtptvc3vCQQ",
+  "name": "Sturbridge Plaza",
+  "state": "MA",
+  "latitude": 42.097487,
+  "longitude": -72.07165599999999,
+  "imageURLs": [
+    "/images/malls/ma-sturbridge-plaza-1.jpg"
+  ],
+  "summary": "Sturbridge Plaza is a well-maintained shopping center on Main Street in Sturbridge, Massachusetts, managed by IBIS Development Group. With a 4.3-star rating and convenient 6 AM to 10 PM hours, it serves both local residents and the area's substantial tourist traffic.",
+  "openFrom": 600,
+  "openUntil": 2200,
+  "rating": 4.3,
+  "reviewCount": 786,
+  "website": "http://ibisdevelopment.com/?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Sturbridge Plaza serves a diverse mix of local residents and tourists visiting the historic Sturbridge area, with a strong representation of middle-income families and retirees. The trade area benefits from significant tourist traffic drawn to nearby Old Sturbridge Village and the Massachusetts Turnpike corridor, attracting visitors from throughout New England. Primary shoppers include convenience-oriented local residents seeking everyday goods and services, as well as travelers looking for quick stops along the I-84 corridor.",
+  "description": "Sturbridge Plaza is a well-established shopping center located at 196 Main Street in Sturbridge, Massachusetts, strategically positioned in one of Central Massachusetts' most visited tourist destinations. Managed by IBIS Development Group, a commercial real estate company established in 2006 that specializes in finding unique investment opportunities and partnering with best-in-class operators, the plaza serves both the local community and the substantial tourist traffic that flows through this historic region. The center maintains convenient operating hours from 6:00 AM to 10:00 PM daily, accommodating early morning shoppers and evening visitors alike. With a strong 4.3-star rating from 786 reviews, Sturbridge Plaza has earned a reputation as a reliable shopping destination in the heart of Central Massachusetts. The plaza's location along Main Street provides easy access for both residents of the greater Sturbridge area and travelers passing through on the nearby Massachusetts Turnpike and Interstate 84 corridor.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 24.900633895938906
+}

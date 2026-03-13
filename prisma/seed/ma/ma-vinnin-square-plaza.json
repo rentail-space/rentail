@@ -1,0 +1,27 @@
+{
+  "address": "421 Paradise Road",
+  "city": "Swampscott",
+  "country": "US",
+  "googlePlaceID": "places/ChIJjZQ0_6oU44kRZ7MebKMmqBE",
+  "name": "Vinnin Square Plaza",
+  "state": "MA",
+  "latitude": 42.4815793,
+  "longitude": -70.9015608,
+  "phone": "++1 833-800-4343",
+  "imageURLs": [
+    "/images/malls/ma-vinnin-square-plaza-1.jpg"
+  ],
+  "summary": "Vinnin Square Plaza is a fully-leased 63,975 square foot shopping center located on Route 1A in Swampscott, Massachusetts, featuring a diverse mix of national, regional, and local tenants. Managed by Kimco Realty, the property serves the affluent North Shore Boston market with excellent accessibility and ample parking.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 894,
+  "website": "https://www.kimcorealty.com/properties/vinnin-square-plaza/117330/view?utm_source=rentail.space",
+  "centerType": "StripCenter",
+  "demographics": "Vinnin Square Plaza serves an affluent suburban Boston market with a 1-mile radius median household income of $121,266 and average household income of $172,121. The trade area encompasses approximately 13,366 residents within one mile, expanding to over 700,000 within ten miles, with strong daytime populations supporting retail activity. The demographic profile features upper-middle-class families and professionals with high per capita incomes of $69,625, indicating strong purchasing power and preference for quality national and regional retailers.",
+  "description": "Vinnin Square Plaza is a well-established shopping center strategically located on Route 1A in the Vinnin Square sub-market of Swampscott, Massachusetts, serving the affluent North Shore Boston metropolitan area. This 63,975 square foot retail destination offers a carefully curated mix of national, regional, and local tenants that cater to the sophisticated needs of the surrounding community. The property benefits from excellent accessibility along a major thoroughfare and provides ample parking with a ratio of 5.55 spaces per 1,000 square feet, ensuring convenience for shoppers. Managed by Kimco Realty Corporation, one of North America's largest publicly traded owners and operators of open-air shopping centers, Vinnin Square Plaza maintains high occupancy standards and is currently fully leased, reflecting strong tenant demand and market confidence. The center's location in the Boston-Cambridge-Newton metro area positions it within one of the nation's most economically vibrant markets, serving households with a median income exceeding $121,000 within a one-mile radius.",
+  "squareFootage": 63975,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 25.97177016540408
+}

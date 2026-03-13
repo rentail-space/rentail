@@ -1,0 +1,27 @@
+{
+  "address": "130 Arsenal Yards Boulevard",
+  "city": "Watertown",
+  "country": "US",
+  "googlePlaceID": "places/ChIJlTYM9CR444kR4-ChEvSGW3E",
+  "name": "Arsenal Yards",
+  "state": "MA",
+  "latitude": 42.361646799999995,
+  "longitude": -71.1589755,
+  "phone": "++1 617-923-9944",
+  "imageURLs": [
+    "/images/malls/ma-arsenal-yards-1.jpg"
+  ],
+  "summary": "Arsenal Yards is a sprawling lifestyle center in Watertown, Massachusetts, featuring over 50 stores and restaurants within a beautifully reimagined World War II-era armory. This mixed-use destination combines upscale shopping, chef-driven dining concepts, entertainment venues, and residential spaces to create a vibrant community hub for the Greater Boston area.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.2,
+  "reviewCount": 2592,
+  "website": "https://arsenalyards.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Arsenal Yards attracts an affluent, educated demographic from the Greater Boston area, particularly young professionals and families from Watertown and surrounding communities like Cambridge, Belmont, and Newton. The trade area consists of high-income households with median incomes exceeding $100,000, drawn to the center's upscale dining options, premium grocery offerings from Roche Bros., and contemporary retail mix. Visitors tend to be experience-focused shoppers who value convenience and quality, often combining shopping trips with dining and entertainment at the Majestic 7 cinema, reflecting the lifestyle-oriented nature of the development.",
+  "description": "Arsenal Yards is a remarkable transformation of a historic World War II-era armory into a vibrant, modern lifestyle destination in Watertown, Massachusetts. This sprawling shopping complex seamlessly blends the area's rich military heritage with contemporary retail, dining, and entertainment offerings across more than 50 stores and eateries. The center features an impressive mix of tenants including J.Crew Factory for fashion-forward shoppers, Roche Bros. supermarket for premium groceries, and innovative dining concepts like ButterBird by noted chef Jason Santos and the award-winning Medium Rare steakhouse. Beyond shopping and dining, Arsenal Yards offers the Majestic 7 cinema for entertainment, Skin Laundry for beauty treatments, and Wonder for diverse culinary experiences, creating a true mixed-use environment. The development also includes residential living spaces and office work environments, making it a complete live-work-play destination that serves as a community hub for Watertown and the greater Boston area. With seasonal events, a trivia pub crawl series, and constantly evolving tenant offerings, Arsenal Yards positions itself as a dynamic destination where visitors can turn simple errands into impromptu adventures.",
+  "numberOfStores": 50,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 28.67453397646787
+}

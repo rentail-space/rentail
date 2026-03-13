@@ -1,0 +1,25 @@
+{
+  "address": "Transportation Way",
+  "city": "Boston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJdTpJuTBj44kRlqfEGy5QVCA",
+  "name": "BOS Rent a Car Center Pl Logan",
+  "state": "MA",
+  "latitude": 42.368588599999995,
+  "longitude": -71.0300905,
+  "imageURLs": [
+    "/images/malls/ma-bos-rent-a-car-center-pl-logan-1.jpg"
+  ],
+  "summary": "The Boston Logan Rent-A-Car Center is a modern 24/7 facility located at Boston Logan International Airport, consolidating all major rental car brands including Enterprise, Hertz, Avis, and Budget in one convenient location. The center will soon feature a dedicated shuttle service connecting travelers directly to airport terminals, making it easier than ever to pick up a rental car with rates starting at $45 per day.",
+  "openFrom": 0,
+  "openUntil": 2400,
+  "rating": 4,
+  "reviewCount": 1253,
+  "website": "https://www.bostonrentalcarcenter.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "The Boston Logan Rent-A-Car Center primarily serves air travelers visiting or departing from Boston Logan International Airport, representing a diverse mix of business professionals and leisure tourists from across income levels. The facility caters to both domestic and international visitors, with demographics reflecting Boston's position as a major business hub and tourist destination. Typical users include corporate travelers on expense accounts, families planning New England vacations, and young professionals seeking convenient transportation options. The trade area extends beyond Boston to serve the entire Greater Boston metropolitan region and visitors from around the world.",
+  "description": "The Boston Logan Rent-A-Car Center is a state-of-the-art transportation facility located at 15 Transportation Way on the south side of Boston Logan International Airport, adjacent to the airport's main parking structures. This modern center operates 24/7 to serve travelers arriving at one of the busiest airports in the United States, offering convenient access to trusted rental brands including Alamo, Avis, Budget, Enterprise, Hertz, National, and Sixt—all consolidated in one convenient location. The facility features a customer service plaza on the top floor and is designed to make the car rental process simple and stress-free for travelers. As part of Boston Logan's ambitious modernization plan, the center will soon be connected to airport terminals via an innovative dedicated shuttle service currently under development, which will provide seamless transportation and reduce traffic congestion around the airport. With competitive rates starting at just $45 per day and both short-term and long-term parking options available, the Boston Logan Rent-A-Car Center represents a major investment in creating a world-class, sustainable, and efficient transportation hub for the future of travel in Boston.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 24.7836085679532
+}

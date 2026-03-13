@@ -1,0 +1,28 @@
+{
+  "address": "261 East Main Street",
+  "city": "Westfield",
+  "country": "US",
+  "googlePlaceID": "places/ChIJuTJ7Ljke54kRDywNAvOUBFk",
+  "name": "Westgate Plaza",
+  "state": "MA",
+  "latitude": 42.1134236,
+  "longitude": -72.73069079999999,
+  "phone": "++1 610-215-7939",
+  "imageURLs": [
+    "/images/malls/ma-westgate-plaza-1.jpg"
+  ],
+  "summary": "Westgate Plaza is a 125,403 square foot community shopping center in Westfield, MA, anchored by the second most visited T.J. Maxx in Massachusetts, along with ALDI, PetSmart, and other value-oriented national retailers. The center benefits from high visibility on US Route 20 with 21,000 daily vehicles and proximity to major healthcare facilities and Westfield State University.",
+  "openFrom": 600,
+  "openUntil": 0,
+  "rating": 4.3,
+  "reviewCount": 744,
+  "website": "https://brixmor.com/leasing/retail-space/ma/westfield/westgate-plaza?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Westgate Plaza serves a diverse middle to upper-middle class market with average household incomes of $103,108 within 1 mile and $121,231 within 5 miles. The trade area encompasses approximately 71,293 residents within a 5-mile radius, with a strong family-oriented demographic of 28,273 households. The center benefits from significant daytime population influx from nearby Western Massachusetts Hospital, Noble Hospital, and Westfield State University's 5,400+ students, creating a mix of healthcare professionals, students, and established families seeking value-oriented national retailers and everyday convenience shopping.",
+  "description": "Westgate Plaza is a 125,403 square foot community shopping center strategically located at 261 East Main Street in Westfield, Massachusetts, offering exceptional visibility with 21,000 vehicles passing daily on US Route 20. Anchored by the second most visited T.J. Maxx location in Massachusetts according to Placer.ai 2025 data, the center has established itself as a premier shopping destination in Hampden County. The property features a strong lineup of national retailers including ALDI, PetSmart, Ocean State Job Lot, Five Below, and Popeyes Louisiana Kitchen, providing a comprehensive mix of value-oriented shopping, pet supplies, home goods, and dining options. The center's proximity to Western Massachusetts Hospital, Noble Hospital, and Westfield State University creates consistent traffic from healthcare professionals, students, and local residents. Managed by Brixmor Property Group, Westgate Plaza continues to attract quality tenants while serving the growing Springfield metropolitan area market with convenient access and ample parking for the community's everyday shopping needs.",
+  "numberOfStores": 16,
+  "squareFootage": 125403,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 24.695527245694553
+}

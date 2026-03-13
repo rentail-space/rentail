@@ -1,0 +1,26 @@
+{
+  "address": "Union Road",
+  "city": "West Seneca",
+  "country": "US",
+  "googlePlaceID": "places/ChIJdfQXxM4O04kRfKBqrdl1RDw",
+  "name": "Southgate Plaza",
+  "state": "NY",
+  "latitude": 42.827011899999995,
+  "longitude": -78.7548154,
+  "phone": "++1 716-674-5050",
+  "imageURLs": [
+    "/images/malls/ny-southgate-plaza-1.jpg"
+  ],
+  "summary": "Southgate Plaza is a community-focused shopping center in West Seneca featuring a diverse mix of local businesses, specialty shops, dining options, and professional offices. With convenient parking and bus access at Union Road and Seneca Street, it serves as a practical one-stop destination for everyday shopping and services.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.4,
+  "reviewCount": 3043,
+  "website": "http://www.southgateplaza.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Southgate Plaza serves the West Seneca community, a middle-class suburban area in Erie County with a diverse mix of families, young professionals, and retirees. The trade area attracts shoppers seeking convenient access to everyday necessities, specialty services, and local dining options. Primary visitors are value-conscious consumers who appreciate the plaza's small business community atmosphere and practical tenant mix including grocery, medical offices, and personal services. The center draws from surrounding residential neighborhoods with household incomes ranging from moderate to upper-middle class levels typical of suburban Buffalo.",
+  "description": "Southgate Plaza is West Seneca's premier small business community shopping destination, conveniently located at Union Road and Seneca Street. This community-focused plaza has established itself as a hub for local commerce, featuring an extensive mix of specialty shops, boutique gifts, dining establishments, and professional services. The center prides itself on its diverse tenant roster that includes grocery shopping, specialty foods, beauty and grooming salons, fitness and wellness facilities, and a comprehensive selection of business offices ranging from medical and legal to real estate and technology services. With ample parking and convenient bus route access, Southgate Plaza serves as a one-stop destination for West Seneca residents. The plaza's commitment to supporting local entrepreneurs and small businesses has created a unique shopping environment that combines everyday convenience with personalized service, earning it a strong 4.4-star rating from over 3,000 reviews.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 30.653057180751873
+}

@@ -1,0 +1,27 @@
+{
+  "address": "2655 Richmond Avenue",
+  "city": "Staten Island",
+  "country": "US",
+  "googlePlaceID": "places/ChIJMQW5NIdLwokR8jmOUJsxtso",
+  "name": "Staten Island Mall",
+  "state": "NY",
+  "latitude": 40.581845099999995,
+  "longitude": -74.1658599,
+  "phone": "++1 718-761-6666",
+  "imageURLs": [
+    "/images/malls/ny-staten-island-mall-1.jpg"
+  ],
+  "summary": "Staten Island Mall is the borough's only regional shopping center, featuring over 200 specialty stores offering fashion, housewares, and lifestyle brands. With department store anchors, diverse dining options, and community-focused amenities like free Wi-Fi and seasonal events, it serves as Staten Island's premier retail destination.",
+  "openFrom": 1000,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 10850,
+  "website": "https://www.statenislandmall.com/en.html?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Staten Island Mall attracts a diverse middle to upper-middle class demographic from across Staten Island and neighboring areas of New Jersey. The primary trade area consists of families with household incomes ranging from $60,000 to $120,000, with a strong representation of shoppers aged 25-54. As the only regional shopping center on Staten Island, it serves as the primary retail destination for the borough's approximately 475,000 residents, drawing visitors who value convenience and variety in their shopping experience. The center appeals to both value-conscious shoppers and those seeking contemporary fashion and lifestyle brands.",
+  "description": "Staten Island Mall stands as the premier shopping destination and only regional shopping center on Staten Island, serving as a retail cornerstone for the borough's diverse community since its opening. This expansive enclosed mall features more than 200 specialty stores, offering an impressive selection of fashion, housewares, electronics, and lifestyle brands that cater to every shopping need. The center has evolved into more than just a shopping venue—it's a community gathering place that hosts seasonal events like Easter Bunny photo opportunities and maintains popular amenities including a mall-walking program and complimentary Wi-Fi throughout the property. Anchored by major department stores and complemented by a robust selection of fast-casual dining options, the mall provides a complete day-out experience for families and individuals alike. With its convenient location at 2655 Richmond Avenue and extended operating hours, Staten Island Mall continues to set itself apart by delivering the variety and quality that Staten Island shoppers deserve, all under one roof.",
+  "numberOfStores": 200,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 35.51178169602402
+}

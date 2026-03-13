@@ -1,0 +1,28 @@
+{
+  "address": "57 Snow Road",
+  "city": "Marshfield",
+  "country": "US",
+  "googlePlaceID": "places/ChIJ5bYrP1mn5IkR4b6-To7vWdo",
+  "name": "Webster Square",
+  "state": "MA",
+  "latitude": 42.090918699999996,
+  "longitude": -70.7070111,
+  "phone": "++1 610-215-7939",
+  "imageURLs": [
+    "/images/malls/ma-webster-square-1.jpg"
+  ],
+  "summary": "Webster Square is a 182,756 square foot Star Market-anchored community center located at the intersection of Routes 3A and 139 in Marshfield's business district. The center features strong national and regional tenants including Marshalls/HomeGoods, Ocean State Job Lot, and diverse dining options, serving an affluent trade area with average household incomes exceeding $171,500.",
+  "openFrom": 600,
+  "openUntil": 0,
+  "rating": 4.3,
+  "reviewCount": 371,
+  "website": "https://brixmor.com/leasing/retail-space/ma/marshfield/webster-square?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "Webster Square serves an affluent and highly educated trade area with average household incomes exceeding $171,500 within a 3-mile radius and 56% of residents holding college degrees. The center attracts middle to upper-middle class families and professionals from the surrounding Marshfield community and broader Plymouth County area. Primary shoppers include homeowners aged 35-65 seeking everyday necessities, home goods, and specialty retail, with strong weekday traffic from the local daytime population of over 19,000 workers within 3 miles. The demographic profile indicates customers with significant disposable income who value convenience and quality, supporting both value-oriented retailers like Ocean State Job Lot and premium services like specialty fitness and dining establishments.",
+  "description": "Webster Square is a Star Market-anchored community shopping center strategically located in Marshfield's primary business district at the high-traffic intersection of Route 3A and Route 139, with combined daily traffic exceeding 27,000 vehicles. This 182,756 square foot center serves as a vital retail hub for the affluent South Shore community, featuring a strong mix of national retailers including Marshalls/HomeGoods, Ocean State Job Lot, and regional favorites that cater to the area's discerning shoppers. The center benefits from its position within one of Massachusetts' most prosperous markets, surrounded by households earning an average of $171,500 within 3 miles and a highly educated population where 56% hold college degrees. Webster Square offers diverse shopping and dining experiences, from everyday essentials at Star Market to specialty retail like Paper Source and Mathnasium, complemented by popular dining destinations including Don Bravo Mexican Grill and Hareku Steak House & Sushi. Managed by Brixmor Property Group, one of the nation's largest open-air shopping center REITs, the property maintains strong occupancy with quality tenants and continues to attract both established brands and emerging local businesses seeking access to this premium South Shore market.",
+  "numberOfStores": 32,
+  "squareFootage": 182756,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 22.096615622689395
+}

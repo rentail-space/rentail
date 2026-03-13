@@ -1,0 +1,26 @@
+{
+  "address": "100 Huntington Avenue",
+  "city": "Boston",
+  "country": "US",
+  "googlePlaceID": "places/ChIJQ0eRlQ1644kR11stZbdBvM0",
+  "name": "Copley Place",
+  "state": "MA",
+  "latitude": 42.347183199999996,
+  "longitude": -71.0778024,
+  "phone": "++1 617-262-6600",
+  "imageURLs": [
+    "/images/malls/ma-copley-place-1.jpg"
+  ],
+  "summary": "Copley Place is an upscale, two-story enclosed shopping center in Boston's Back Bay featuring luxury retailers like Louis Vuitton and Burberry. This light-filled destination offers a premium shopping experience with high-end brands in one of the city's most prestigious locations.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 4.4,
+  "reviewCount": 4301,
+  "website": "https://www.simon.com/mall/copley-place?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Copley Place attracts an affluent, cosmopolitan demographic with above-average household incomes, drawing heavily from Boston's Back Bay neighborhood and surrounding upscale areas. The visitor base skews toward professionals aged 25-54, urban dwellers, and tourists seeking luxury shopping experiences in the heart of Boston. The trade area includes high-income residents from Beacon Hill, the South End, and suburban communities like Brookline and Newton, along with business travelers staying at nearby hotels. Shoppers here demonstrate strong preferences for premium brands, designer fashion, and upscale dining experiences, with significant foot traffic from convention attendees and cultural tourists visiting nearby attractions.",
+  "description": "Copley Place stands as one of Boston's premier luxury shopping destinations, offering an elegant two-story enclosed mall experience in the heart of the city's prestigious Back Bay neighborhood. Located at 100 Huntington Avenue, this light-filled shopping center has established itself as a cornerstone of upscale retail in New England since its opening. The center features an impressive collection of high-end retailers including Louis Vuitton, Burberry, and other luxury brands that cater to discerning shoppers seeking the finest in fashion, accessories, and lifestyle products. Connected to the Westin and Marriott hotels and adjacent to the Prudential Center, Copley Place benefits from exceptional accessibility via public transportation and serves both local residents and international visitors. The mall's sophisticated atmosphere, combined with its prime location near cultural landmarks like the Boston Public Library and Trinity Church, makes it a must-visit destination for those seeking a premium shopping experience in Boston's most fashionable district.",
+  "tier": 3,
+  "spaces": [],
+  "ranking": 47.96311664171401
+}

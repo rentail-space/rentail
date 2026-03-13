@@ -1,0 +1,26 @@
+{
+  "address": "90 Elm Street",
+  "city": "Enfield",
+  "country": "US",
+  "googlePlaceID": "places/ChIJl57Oq8_k5okRVObzdy8RKa0",
+  "name": "Enfield Square",
+  "state": "CT",
+  "latitude": 41.995137299999996,
+  "longitude": -72.5819683,
+  "phone": "++1 860-745-7000",
+  "imageURLs": [
+    "/images/malls/ct-enfield-square-1.jpg"
+  ],
+  "summary": "Enfield Square is an established regional shopping center in northern Connecticut, offering a diverse mix of national retailers and dining options in an enclosed mall format. Conveniently located near the Massachusetts border, it serves as a key retail destination for the greater Hartford area with daily operating hours from 9 AM to 8 PM.",
+  "openFrom": 900,
+  "openUntil": 2000,
+  "rating": 3.7,
+  "reviewCount": 3929,
+  "website": "https://amzn.to/457stvL?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Enfield Square attracts a diverse middle-income demographic from the greater Hartford area, serving families and working professionals primarily in the 25-54 age range. The trade area draws from both Enfield's suburban population and neighboring communities in northern Connecticut and southern Massachusetts, with household incomes ranging from $50,000 to $90,000. Shoppers typically seek value-oriented retail options and convenience, with strong weekday traffic from local residents and increased weekend visits from the broader regional market.",
+  "description": "Enfield Square stands as a prominent regional shopping destination in northern Connecticut, serving the greater Hartford area and communities along the Connecticut-Massachusetts border. Located at 90 Elm Street in Enfield, this enclosed shopping center has been a retail anchor for the region for decades, providing residents with convenient access to a diverse mix of national retailers, dining options, and services. The mall operates daily from 9:00 AM to 8:00 PM, offering shoppers a comfortable, climate-controlled environment year-round. With a solid 3.7-star rating from nearly 4,000 reviews, Enfield Square maintains its position as a reliable shopping venue for families and individuals seeking everyday retail needs. The center's strategic location near major highways makes it easily accessible for shoppers throughout the region, while its tenant mix caters to a broad range of shopping preferences and budgets.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 0
+}

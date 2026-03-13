@@ -1,0 +1,27 @@
+{
+  "address": "1 Walden Galleria",
+  "city": "Buffalo",
+  "country": "US",
+  "googlePlaceID": "places/ChIJCZUtqb0M04kRtmuDGnIWLHk",
+  "name": "Walden Galleria",
+  "state": "NY",
+  "latitude": 42.914907,
+  "longitude": -78.7613417,
+  "phone": "++1 716-681-7600",
+  "imageURLs": [
+    "/images/malls/ny-walden-galleria-1.jpg"
+  ],
+  "summary": "Walden Galleria is Buffalo's largest shopping destination featuring over 200 stores, 10 full-service restaurants, and premier entertainment venues including Regal Cinemas and Dave & Buster's. This two-level enclosed regional mall offers everything from department store anchors to boutique retailers, making it the top retail and entertainment attraction in the Buffalo-Niagara region.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.3,
+  "reviewCount": 14245,
+  "website": "http://www.waldengalleria.com/?utm_source=rentail.space",
+  "centerType": "RegionalMall",
+  "demographics": "Walden Galleria attracts a diverse, middle to upper-middle income demographic from the greater Buffalo-Niagara region, including significant cross-border traffic from Canadian shoppers. The center draws families with children who utilize the entertainment venues like Urban Air and Billy Beez, as well as young professionals and millennials attracted to contemporary fashion retailers and dining experiences. The trade area encompasses suburban Buffalo communities with household incomes ranging from $50,000 to $100,000+, with visitors typically seeking a comprehensive shopping and entertainment destination for weekend outings and special occasions.",
+  "description": "Walden Galleria stands as Buffalo, New York's premier shopping destination and the largest mall in the region, offering an unparalleled retail and entertainment experience. This prominent enclosed regional mall features over 200 stores across two levels, anchored by major department stores like Macy's and JCPenney, alongside sought-after retailers including Apple, Sephora, ZARA, H&M, Anthropologie, and Free People. Beyond shopping, the center has evolved into a complete lifestyle destination with 10 full-service restaurants such as The Cheesecake Factory, Texas de Brazil, and P.F. Chang's, plus 16 quick-service dining options offering diverse global cuisines. Entertainment options abound with Dave & Buster's, 5 Wits Adventure Entertainment, Regal Cinemas, Urban Air Adventure Park, and Billy Beez, making it a top attraction for families and visitors of all ages. Conveniently located at 1 Walden Galleria in Buffalo, the center draws shoppers from across Western New York and Southern Ontario, Canada, solidifying its position as one of the best things to do in the Buffalo-Niagara area with a 4.3-star rating from over 14,000 reviews.",
+  "numberOfStores": 200,
+  "tier": 2,
+  "spaces": [],
+  "ranking": 35.72149710074926
+}

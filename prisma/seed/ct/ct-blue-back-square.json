@@ -1,0 +1,26 @@
+{
+  "address": "65 Memorial Road",
+  "city": "West Hartford",
+  "country": "US",
+  "googlePlaceID": "places/ChIJP3BZbeys54kRHptYVCFxkiM",
+  "name": "Blue Back Square",
+  "state": "CT",
+  "latitude": 41.760348199999996,
+  "longitude": -72.740265,
+  "phone": "++1 860-882-0678",
+  "imageURLs": [
+    "/images/malls/ct-blue-back-square-1.jpg"
+  ],
+  "summary": "Blue Back Square is West Hartford's upscale mixed-use lifestyle center featuring dozens of retail stores, diverse dining options, a luxury Cinepolis cinema, and integrated residential lofts. This walkable urban village serves as the town's premier destination for shopping, entertainment, and community gatherings in an elegant open-air setting.",
+  "openFrom": 1100,
+  "openUntil": 1900,
+  "rating": 4.5,
+  "reviewCount": 2740,
+  "website": "https://www.bluebacksquare.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Blue Back Square attracts an affluent, educated demographic primarily from West Hartford and surrounding Hartford County suburbs. The visitor base skews toward middle to upper-income households with median incomes exceeding $80,000, including young professionals, families, and empty nesters aged 25-65. The trade area serves a sophisticated market seeking a walkable urban village experience with upscale dining, boutique shopping, and cultural amenities. Residents and visitors demonstrate preferences for quality over value, with strong interest in experiential retail, chef-driven restaurants, and entertainment options like the Cinepolis luxury cinema.",
+  "description": "Blue Back Square is West Hartford's premier mixed-use lifestyle destination, seamlessly blending upscale retail, dining, entertainment, residential living, and office space into a vibrant urban village. Located at 65 Memorial Road, this thoughtfully designed open-air center has transformed the heart of West Hartford into a walkable community gathering place that honors the town's literary heritage while providing modern amenities. The center features dozens of carefully curated chain and local retailers, complemented by an impressive array of restaurant options ranging from casual eateries to fine dining establishments. Entertainment anchors include the sophisticated Cinepolis luxury cinema, while the integrated Lofts at Blue Back provide upscale residential options for those seeking to live in the center of the action. With its public art installations, seasonal events, and Code of Conduct ensuring a family-friendly atmosphere, Blue Back Square has become the quintessential destination for West Hartford residents and visitors to live, shop, dine, and experience community in an elegant, pedestrian-friendly environment.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 30.93975506538349
+}

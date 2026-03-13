@@ -1,0 +1,26 @@
+{
+  "address": "1000 Division Street",
+  "city": "East Greenwich",
+  "country": "US",
+  "googlePlaceID": "places/ChIJXXxgFlJL5IkRVFuutpPHKW8",
+  "name": "East Greenwich Square",
+  "state": "RI",
+  "latitude": 41.661450599999995,
+  "longitude": -71.495784,
+  "phone": "++1 203-689-7000",
+  "imageURLs": [
+    "/images/malls/ri-east-greenwich-square-1.jpg"
+  ],
+  "summary": "East Greenwich Square is a community shopping center serving one of Rhode Island's most affluent coastal towns with a convenient mix of national retailers, local shops, and dining options. Located at 1000 Division Street, this well-regarded neighborhood destination provides accessible shopping for everyday needs and specialty retail.",
+  "openFrom": 900,
+  "openUntil": 2000,
+  "rating": 4.4,
+  "reviewCount": 1346,
+  "website": "https://www.eastgreenwichsquare.com/?utm_source=rentail.space",
+  "centerType": "CommunityCenter",
+  "demographics": "East Greenwich Square serves an affluent suburban demographic in one of Rhode Island's most desirable communities, attracting families and professionals with above-average household incomes typically exceeding $100,000. The trade area draws from East Greenwich and surrounding coastal Rhode Island towns, with shoppers who value convenience and quality over discount pricing. Primary visitors include educated professionals aged 35-65, families with children, and retirees who prefer a well-maintained neighborhood shopping destination for everyday needs and specialty retail.",
+  "description": "East Greenwich Square is a well-established community shopping center located in the heart of East Greenwich, Rhode Island, one of the state's most affluent and historic coastal towns. Situated at 1000 Division Street, this neighborhood retail destination has served the local community for decades as a convenient hub for everyday shopping, dining, and services. The center features a thoughtfully curated mix of national retailers, local businesses, restaurants, and service providers that cater to the discerning tastes of East Greenwich residents and visitors from surrounding communities. With its accessible location along Division Street and ample parking, East Greenwich Square provides a comfortable, open-air shopping experience that reflects the character of this charming New England town. The center maintains a strong reputation in the community, evidenced by its 4.4-star rating from over 1,300 reviews, and continues to serve as a vital retail anchor for the East Greenwich area.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 27.535596527014036
+}

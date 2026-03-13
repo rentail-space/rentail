@@ -1,0 +1,26 @@
+{
+  "address": "2 Patriot Place",
+  "city": "Foxborough",
+  "country": "US",
+  "googlePlaceID": "places/ChIJr0mhAsh85IkRakO4cRGfbe4",
+  "name": "Patriot Place",
+  "state": "MA",
+  "latitude": 42.0912868,
+  "longitude": -71.268784,
+  "phone": "++1 508-203-2100",
+  "imageURLs": [
+    "/images/malls/ma-patriot-place-1.jpg"
+  ],
+  "summary": "Patriot Place is a dynamic open-air lifestyle center adjacent to Gillette Stadium, offering an exceptional mix of shopping, dining, entertainment venues, and healthcare services. This destination combines national retailers with unique attractions like ELEVENO Pickleball, Patriots Hall of Fame, and diverse restaurants, making it New England's premier sports and entertainment complex.",
+  "openFrom": 1000,
+  "openUntil": 2100,
+  "rating": 4.6,
+  "reviewCount": 13266,
+  "website": "http://www.patriot-place.com/?utm_source=rentail.space",
+  "centerType": "LifestyleCenter",
+  "demographics": "Patriot Place attracts a diverse demographic mix centered around New England Patriots fans and families, with a strong representation of middle to upper-middle income households (median household income $80,000-$120,000+) from the Greater Boston metro area and southeastern Massachusetts. The visitor base skews toward adults aged 25-54 with families, particularly on game days and weekends, though the entertainment and dining options draw younger adults aged 21-35 for evening activities. The trade area extends throughout New England, with primary shoppers from within a 30-mile radius including Foxborough, Mansfield, and surrounding communities, while secondary visitors travel from Boston (22 miles) and Providence (18 miles) for special events, Patriots games, and destination entertainment experiences.",
+  "description": "Patriot Place is a premier lifestyle and entertainment destination located adjacent to Gillette Stadium in Foxborough, Massachusetts, serving as the ultimate gathering place for New England Patriots fans and families throughout the region. This open-air shopping, dining, and entertainment complex seamlessly blends retail therapy with world-class attractions, featuring everything from national retailers and local boutiques to innovative entertainment venues like ELEVENO Pickleball, Crazy Axes, Red Door Escape Room, and the Patriots Hall of Fame presented by RTX. The center's impressive dining scene includes over a dozen restaurants ranging from casual eateries to upscale establishments like Six String Grill & Stage, The Harp, and Scorpion Bar, with a unique Designated Outdoor Refreshment Area (DORA) allowing guests to enjoy beverages throughout the complex. Beyond shopping and dining, Patriot Place offers comprehensive healthcare services through Mass General Brigham facilities, two full-service hotels (Renaissance Boston Patriot Place Hotel and Hilton Garden Inn), and family-friendly amenities including the Nature Trail & Ocean Spray Cranberry Bog. With convenient MBTA Foxboro Station access, valet parking, and a packed calendar of events from Irish festivals to live entertainment, Patriot Place has established itself as New England's premier mixed-use destination where sports, shopping, dining, and entertainment converge.",
+  "tier": 2,
+  "spaces": [],
+  "ranking": 37.929207935253686
+}
