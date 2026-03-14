@@ -49,6 +49,11 @@ export default function PageLayout({
         {/* https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Client_hints */}
         <meta httpEquiv="Accept-CH" content="Width, Downlink, Sec-CH-UA" />
 
+        <link rel="me" href="https://mas.to/@assaf" />
+        <link rel="me" href="https://www.linkedin.com/company/rentail-space" />
+        <link rel="me" href="https://www.reddit.com/user/rentails" />
+        <link rel="me" href="https://github.com/rentail-space" />
+
         <Meta />
         <Links />
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
