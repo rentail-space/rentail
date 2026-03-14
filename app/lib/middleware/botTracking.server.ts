@@ -1,19 +1,22 @@
 /**
  * Track bot visits in database
  */
+
 export async function trackBotVisit(request: Request): Promise<void> {
-  fetch("https://cite.me.app.vercel.app/api/track", {
+  const apiKey = "cite.me.in_sSZflmJuJXGgGbU2";
+  const endpoint = "https://cite.me.in/api/track";
+  fetch(endpoint, {
     method: "POST",
     headers: {
-      Authorization: "Bearer cite.me.in_21945ffb0342eb204b60aaf28c7bdca9",
       "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
       accept: request.headers.get("accept"),
-      ip: request.headers.get("x-real-ip"),
+      ip: request.headers.get("x-forwarded-for"),
       referer: request.headers.get("referer"),
-      url: request.url,
+      url: request.url.toString(),
       userAgent: request.headers.get("user-agent"),
     }),
-  });
+  }).catch(() => {});
 }
