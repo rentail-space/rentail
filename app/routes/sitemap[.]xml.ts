@@ -70,17 +70,17 @@ const routes = {
 };
 
 async function allOtherRoutes(): Promise<
-  Record<string, { id: string; module: string; path: string }>
+  Record<string, { id: string; module: string; path: string; }>
 > {
-  const all = await Promise.all([
-    blogPosts(),
-    centerPages(),
-    states(),
-    counties(),
-    cities(),
-    metroAreas(),
-    regionalNames(),
-  ]);
+  const all = [
+    (await recentBlogPosts()).map(({ slug }) => `blog/${slug}`),
+    (await prisma.property.findMany({ select: { id: true } })).map(({ id }) => `center/${id}`),
+    (await prisma.state.findMany({ select: { abbreviation: true } })).map(({ abbreviation }) => `state/${abbreviation}`),
+    (await prisma.county.findMany({ select: { slug: true } })).map(({ slug }) => `county/${slug}`),
+    (await prisma.city.findMany({ select: { slug: true } })).map(({ slug }) => `city/${slug}`),
+    (await prisma.metroArea.findMany({ select: { slug: true } })).map(({ slug }) => `metro/${slug}`),
+    (await prisma.regionalName.findMany({ select: { slug: true } })).map(({ slug }) => `regional/${slug}`),
+  ];
 
   return Object.fromEntries(
     all
@@ -90,45 +90,4 @@ async function allOtherRoutes(): Promise<
         { id: `routes/${path}`, module: path, path: `/${path}` },
       ]),
   );
-}
-
-async function centerPages(): Promise<string[]> {
-  const centers = await prisma.property.findMany({ select: { id: true } });
-  return centers.map(({ id }) => `center/${id}`);
-}
-
-async function states(): Promise<string[]> {
-  const states = await prisma.state.findMany({
-    select: { abbreviation: true },
-  });
-  return states.map(({ abbreviation }) => `state/${abbreviation}`);
-}
-
-async function counties(): Promise<string[]> {
-  const counties = await prisma.county.findMany({ select: { slug: true } });
-  return counties.map(({ slug }) => `county/${slug}`);
-}
-
-async function cities(): Promise<string[]> {
-  const cities = await prisma.city.findMany({ select: { slug: true } });
-  return cities.map(({ slug }) => `city/${slug}`);
-}
-
-async function metroAreas(): Promise<string[]> {
-  const metroAreas = await prisma.metroArea.findMany({
-    select: { slug: true },
-  });
-  return metroAreas.map(({ slug }) => `metro/${slug}`);
-}
-
-async function regionalNames(): Promise<string[]> {
-  const regionalNames = await prisma.regionalName.findMany({
-    select: { slug: true },
-  });
-  return regionalNames.map(({ slug }) => `regional/${slug}`);
-}
-
-async function blogPosts(): Promise<string[]> {
-  const filenames = await recentBlogPosts();
-  return filenames.reverse().map(({ slug }) => `blog/${slug}`);
 }
