@@ -1,17 +1,17 @@
-import { captureException } from "@sentry/react-router";
-import bcrypt from "bcrypt";
-import { invariant } from "es-toolkit";
-import type { User } from "prisma/generated/client";
-import { useState } from "react";
-import { redirect, useLoaderData } from "react-router";
-import { ulid } from "ulid";
+import type { User } from "prisma/generated";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/Tabs";
-import sendVerificationEmail from "~/emails/EmailVerification";
-import prisma from "~/lib/prisma.server";
+import { redirect, useLoaderData } from "react-router";
 import { findUserAndLastChat } from "~/lib/sessions.server";
+import { captureException } from "@sentry/react-router";
+import { invariant } from "es-toolkit";
+import { useState } from "react";
+import { ulid } from "ulid";
+import sendVerificationEmail from "~/emails/EmailVerification";
+import ProfilePasswordForm from "./ProfilePasswordForm";
 import ProfileEmailForm from "./ProfileEmailForm";
 import ProfileNameForm from "./ProfileNameForm";
-import ProfilePasswordForm from "./ProfilePasswordForm";
+import bcrypt from "bcrypt";
+import prisma from "~/lib/prisma.server";
 
 export const handle = { headerLinks: [] };
 

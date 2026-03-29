@@ -1,5 +1,5 @@
 import { type Page, expect } from "playwright/test";
-import type { User } from "prisma/generated/client";
+import type { User } from "prisma/generated";
 import { afterAll, beforeAll, describe, it } from "vitest";
 import prisma from "~/lib/prisma.server";
 import converse from "./helpers/converse";

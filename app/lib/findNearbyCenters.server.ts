@@ -1,4 +1,4 @@
-import type { User } from "prisma/generated/client";
+import type { User } from "prisma/generated";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import prisma from "~/lib/prisma.server";
 import { geocodeFromUserInput, geocodeMemoryOrHeaders } from "./geocode";
@@ -31,7 +31,7 @@ export default async function findNearbyCenters({
   location?: string;
   maxDistance?: number;
 }): Promise<{
-  centers: PropertyGetPayload<{ include: { spaces: true; state: true } }>[];
+  centers: PropertyGetPayload<{ include: { spaces: true; state: true; }; }>[];
   displayName: string;
 }> {
   const { displayName, longitude, latitude } =

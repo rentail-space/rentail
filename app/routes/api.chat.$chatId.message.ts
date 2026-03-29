@@ -1,10 +1,10 @@
+import type { InputJsonValue } from "@prisma/client/runtime/client";
 import { captureException } from "@sentry/react-router";
 import { type UIMessage, convertToModelMessages, streamText } from "ai";
 import debug from "debug";
 import { invariant, last } from "es-toolkit";
 import humanFormat from "human-format";
 import { Redis } from "ioredis";
-import type { InputJsonValue } from "prisma/generated/internal/prismaNamespace";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { ulid } from "ulid";
 import envVars from "~/lib/env";

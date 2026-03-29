@@ -1,5 +1,5 @@
-import { invariant } from "node_modules/es-toolkit/dist/util/invariant.mjs";
-import type { User } from "prisma/generated/client";
+import { invariant } from "es-toolkit";
+import type { User } from "prisma/generated";
 import { ulid } from "ulid";
 import { beforeAll, describe, expect, it } from "vitest";
 import preparePrompt from "~/lib/preparePrompt.server";
@@ -86,7 +86,7 @@ describe("prompt()", () => {
       invariant(theGrove, "The Grove not found");
       const spaces = Array.isArray(theGrove.spaces) ? theGrove.spaces : [];
       const space = spaces.find(
-        (space: { id: string }) => space.id === "jzfi2vjakvteoqmrxzcucivq",
+        (space: { id: string; }) => space.id === "jzfi2vjakvteoqmrxzcucivq",
       );
       expect(space).toBeUndefined();
     });
@@ -132,7 +132,7 @@ describe("prompt()", () => {
 function findTheGrove(markdown: string): Record<string, unknown> | undefined {
   const centers = parseJSON(markdown);
   return centers.find(
-    (center) => (center as { name: string }).name === "The Grove",
+    (center) => (center as { name: string; }).name === "The Grove",
   );
 }
 

@@ -1,5 +1,5 @@
 import { expect } from "playwright/test";
-import type { Property } from "prisma/generated/client";
+import type { Property } from "prisma/generated";
 import { beforeAll, describe, it } from "vitest";
 import findNearbyCenters from "~/lib/findNearbyCenters.server";
 import prisma from "~/lib/prisma.server";

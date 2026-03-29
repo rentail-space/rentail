@@ -1,4 +1,4 @@
-import type { User } from "prisma/generated/client";
+import type { User } from "prisma/generated";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import {
   cleanParseWorkingMemory,
@@ -79,16 +79,16 @@ export default async function preparePrompt({
 }
 
 function centerToJSON(
-  center: PropertyGetPayload<{ include: { spaces: true; state: true } }>,
+  center: PropertyGetPayload<{ include: { spaces: true; state: true; }; }>,
 ): string {
   const open =
     center.openFrom === 0 && center.openUntil === 2400
       ? { open24Hours: true }
       : center.openFrom && center.openUntil
         ? {
-            openFrom: timeOfDay(center.openFrom),
-            openUntil: timeOfDay(center.openUntil),
-          }
+          openFrom: timeOfDay(center.openFrom),
+          openUntil: timeOfDay(center.openUntil),
+        }
         : null;
   const spaces = center.spaces.map((space) => ({
     number: space.number,

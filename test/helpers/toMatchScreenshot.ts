@@ -13,7 +13,7 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import type { Locator, Page } from "playwright";
-import vitestConfig from "vitest.config";
+import vitestConfig from "../../vitest.config";
 
 declare global {
   namespace PlaywrightTest {
@@ -43,8 +43,8 @@ const defaultTolerance = 2.3;
 expect.extend({
   async toMatchScreenshot(
     locator: Locator | Page,
-    options?: { name?: string; tolerance?: number },
-  ): Promise<{ message: () => string; pass: boolean }> {
+    options?: { name?: string; tolerance?: number; },
+  ): Promise<{ message: () => string; pass: boolean; }> {
     if (process.env.CI)
       return {
         message: () => "Skipping screenshot comparison in CI",

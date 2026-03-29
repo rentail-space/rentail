@@ -1,4 +1,4 @@
-import type { PropertySpace } from "prisma/generated/client";
+import type { PropertySpace } from "prisma/generated";
 import { Card, CardContent } from "~/components/ui/Card";
 
 export function CenterSpaces({ spaces }: { spaces: PropertySpace[] }) {

@@ -1,25 +1,25 @@
-import { Temporal } from "@js-temporal/polyfill";
-import { meanBy, sumBy } from "es-toolkit";
-import {
-  BotIcon,
-  BubblesIcon,
-  ClockIcon,
-  PersonStandingIcon,
-} from "lucide-react";
-import type { User } from "prisma/generated/client";
-import { Suspense } from "react";
-import { Await } from "react-router";
+import type { Analytics } from "./route";
+import type { User } from "prisma/generated";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { Card, CardContent } from "~/components/ui/Card";
+import { meanBy, sumBy } from "es-toolkit";
+import { Temporal } from "@js-temporal/polyfill";
+import { Suspense } from "react";
+import { Await } from "react-router";
 import {
-  ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-  ChartTooltip,
   ChartTooltipContent,
+  ChartLegendContent,
+  ChartContainer,
+  ChartTooltip,
+  ChartLegend,
 } from "~/components/ui/Chart";
+import {
+  PersonStandingIcon,
+  BubblesIcon,
+  ClockIcon,
+  BotIcon,
+} from "lucide-react";
 import LoadingProgress from "~/components/ui/LoadingProgress";
-import type { Analytics } from "./route";
 
 const chartConfig = {
   visitors: {

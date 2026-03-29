@@ -1,11 +1,11 @@
-import { meanBy, sumBy } from "es-toolkit";
-import type { User } from "prisma/generated/client";
 import type { ReactNode } from "react";
+import type { Analytics } from "./route";
+import type { User } from "prisma/generated";
+import { Card, CardContent } from "~/components/ui/Card";
+import { meanBy, sumBy } from "es-toolkit";
 import { Suspense } from "react";
 import { Await } from "react-router";
-import { Card, CardContent } from "~/components/ui/Card";
 import LoadingProgress from "~/components/ui/LoadingProgress";
-import type { Analytics } from "./route";
 
 export default function AnalyticsSummary({
   analytics,

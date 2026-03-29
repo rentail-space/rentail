@@ -1,7 +1,7 @@
 import { openai } from "@ai-sdk/openai";
 import type { LanguageModelV3Source } from "@ai-sdk/provider";
 import { generateText } from "ai";
-import envVars from "../env";
+import envVars from "~/lib/env";
 
 const MODEL_ID = "gpt-5-chat-latest";
 

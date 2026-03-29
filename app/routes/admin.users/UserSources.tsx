@@ -1,25 +1,24 @@
-import {
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { groupBy } from "node_modules/es-toolkit/dist/array/groupBy.mjs";
-import { sumBy } from "node_modules/es-toolkit/dist/math/sumBy.mjs";
-import { Suspense } from "react";
-import { Await } from "react-router";
-import { twMerge } from "tailwind-merge";
+import type { Analytics } from "./route";
 import { Card, CardContent } from "~/components/ui/Card";
-import LoadingProgress from "~/components/ui/LoadingProgress";
+import { groupBy, sumBy } from "es-toolkit";
+import { Suspense } from "react";
+import { twMerge } from "tailwind-merge";
+import { Await } from "react-router";
 import {
-  Table,
+  TableHeader,
   TableBody,
   TableCell,
   TableHead,
-  TableHeader,
   TableRow,
+  Table,
 } from "~/components/ui/Table";
-import type { Analytics } from "./route";
+import {
+  getSortedRowModel,
+  getCoreRowModel,
+  useReactTable,
+  flexRender,
+} from "@tanstack/react-table";
+import LoadingProgress from "~/components/ui/LoadingProgress";
 
 export default function UserSources({
   analytics,

@@ -8,13 +8,13 @@ import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import ora, { type Ora } from "ora";
-import type { Property } from "prisma/generated/client";
+import type { Property } from "prisma/generated";
 import sharp from "sharp";
 import zod from "zod";
 import { trackApiCall } from "~/lib/apiUsageTracker";
 import envVars from "~/lib/env";
 import { daysAgo } from "~/lib/temporal";
-import { slugify } from "../utils";
+import { slugify } from "~/lib/utils";
 
 if (!envVars.GOOGLE_PLACES_API_KEY)
   throw new Error("Use doppler run --config prd -- ");
@@ -76,10 +76,10 @@ export type PlacesAPIPlace = {
     >; // eg street_number=8500 route=Beverly Blvd locality=Los Angeles administrative_area_level_1=CA country=USA postal_code=90210
   }>;
   businessStatus:
-    | "OPERATIONAL"
-    | "CLOSED_TEMPORARILY"
-    | "CLOSED_PERMANENTLY"
-    | "UNKNOWN";
+  | "OPERATIONAL"
+  | "CLOSED_TEMPORARILY"
+  | "CLOSED_PERMANENTLY"
+  | "UNKNOWN";
   displayName: {
     text: string; // eg "Beverly Center",
   };
@@ -130,7 +130,7 @@ export async function nearbySearch({
   radiusMeters,
   spinner,
 }: {
-  point: { lat: number; lng: number };
+  point: { lat: number; lng: number; };
   radiusMeters: number;
   spinner: Ora;
 }): Promise<zod.infer<typeof placeDetailsSchema>[]> {
@@ -156,7 +156,7 @@ async function searchNearbyRaw({
   point,
   radiusMeters,
 }: {
-  point: { lat: number; lng: number };
+  point: { lat: number; lng: number; };
   radiusMeters: number;
 }): Promise<{
   data: PlacesAPIPlace[];
@@ -334,7 +334,7 @@ async function downloadPhotos({
   photos,
   slug,
 }: {
-  photos: Array<{ name: string; widthPx: number; heightPx: number }>;
+  photos: Array<{ name: string; widthPx: number; heightPx: number; }>;
   slug: string;
 }): Promise<string[]> {
   const imageURLs: string[] = [];
@@ -422,7 +422,7 @@ async function downloadPhotos({
  * @returns Long text of the address component
  */
 function longText(
-  addressComponents: Array<{ types?: string[]; longText: string }>,
+  addressComponents: Array<{ types?: string[]; longText: string; }>,
   type: string,
 ): string {
   const component = addressComponents.find(({ types }) =>
@@ -439,7 +439,7 @@ function longText(
  * @returns Short text of the address component
  */
 function shortText(
-  addressComponents: Array<{ types?: string[]; shortText: string }>,
+  addressComponents: Array<{ types?: string[]; shortText: string; }>,
   type: string,
 ): string {
   const component = addressComponents.find(({ types }) =>
@@ -459,10 +459,10 @@ function shortText(
  */
 function operatingHours(regularOpeningHours?: {
   periods: Array<{
-    open: { day: number; hour: number; minute: number };
-    close: { day: number; hour: number; minute: number };
+    open: { day: number; hour: number; minute: number; };
+    close: { day: number; hour: number; minute: number; };
   }>;
-}): { openFrom?: number; openUntil?: number } {
+}): { openFrom?: number; openUntil?: number; } {
   const periods = regularOpeningHours?.periods.filter(
     (period) => period.open && period.close,
   );

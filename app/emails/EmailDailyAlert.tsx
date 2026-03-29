@@ -1,10 +1,10 @@
+import type { User } from "prisma/generated";
 import { Button, Section, Text } from "@react-email/components";
-import type { User } from "prisma/generated/client";
+import { sendEmail } from "./sendEmails.server";
 import { ulid } from "ulid";
 import * as styles from "~/emails/styles";
-import prisma from "~/lib/prisma.server";
 import EmailLayout from "./EmailLayout";
-import { sendEmail } from "./sendEmails.server";
+import prisma from "~/lib/prisma.server";
 
 export default async function sendDailyAlertEmail({
   center,

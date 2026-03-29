@@ -9,7 +9,7 @@ import dotenv from "dotenv";
 import { invariant } from "es-toolkit";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { PrismaClient } from "prisma/generated/client";
+import { PrismaClient } from "prisma/generated";
 
 dotenv.configDotenv({ quiet: true });
 invariant(process.env.DATABASE_URL, "DATABASE_URL is required");

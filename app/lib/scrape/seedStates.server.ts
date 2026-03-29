@@ -8,10 +8,10 @@ import type {
   MetroArea,
   RegionalName,
   State,
-} from "prisma/generated/client";
+} from "prisma/generated";
 import z from "zod";
 import prisma from "~/lib/prisma.server";
-import { slugify } from "../utils";
+import { slugify } from "~/lib/utils";
 
 const logger = debug("seed");
 

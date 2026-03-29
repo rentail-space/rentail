@@ -1,7 +1,7 @@
+import type { Route } from "+types/app/+types/root";
 import debug from "debug";
 import { createCookieSessionStorage } from "react-router";
 import envVars from "~/lib/env";
-import type { Route } from "~/types/app/+types/root";
 
 type FirstRequest = {
   source?: string;

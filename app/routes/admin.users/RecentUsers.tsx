@@ -1,24 +1,24 @@
-import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { LockIcon, UserIcon } from "lucide-react";
-import type { User } from "prisma/generated/client";
-import { ActiveLink } from "~/components/ui/ActiveLink";
-import { Button } from "~/components/ui/Button";
+import type { User } from "prisma/generated";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
+import { cleanParseWorkingMemory } from "~/lib/workingMemory";
+import { LockIcon, UserIcon } from "lucide-react";
+import { ActiveLink } from "~/components/ui/ActiveLink";
+import { humanDate } from "~/lib/time";
+import { Button } from "~/components/ui/Button";
 import {
-  Table,
+  TableHeader,
   TableBody,
   TableCell,
   TableHead,
-  TableHeader,
   TableRow,
+  Table,
 } from "~/components/ui/Table";
+import {
+  getCoreRowModel,
+  useReactTable,
+  flexRender,
+} from "@tanstack/react-table";
 import deviceDetection from "~/lib/deviceDetection";
-import { humanDate } from "~/lib/time";
-import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 
 export default function RecentUsers({ users }: { users: User[] }) {
   const table = useReactTable({

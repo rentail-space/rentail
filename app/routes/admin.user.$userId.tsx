@@ -1,31 +1,31 @@
-import type { TextUIPart } from "ai";
-import { ArrowLeft, ArrowRight, CircleCheck, InfoIcon } from "lucide-react";
-import type { User } from "prisma/generated/client";
-import { formatDatetimeFull } from "~/lib/temporal";
 import type {
   ChatGetPayload,
   PropertyGetPayload,
 } from "prisma/generated/models";
+import type { TextUIPart } from "ai";
+import type { Route } from "./+types/admin.user.$userId";
+import type { User } from "prisma/generated";
+import { ArrowLeft, ArrowRight, CircleCheck, InfoIcon } from "lucide-react";
+import { cleanParseWorkingMemory } from "~/lib/workingMemory";
+import { formatDatetimeFull } from "~/lib/temporal";
 import { Link, useFetcher } from "react-router";
 import { StickToBottom } from "use-stick-to-bottom";
+import { verifyAdmin } from "~/lib/sessions.server";
 import { ActiveLink } from "~/components/ui/ActiveLink";
-import { Button } from "~/components/ui/Button";
 import { FieldSet } from "~/components/ui/FieldSet";
+import { Textarea } from "~/components/ui/Textarea";
+import { Button } from "~/components/ui/Button";
 import {
-  Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
+  Table,
 } from "~/components/ui/Table";
-import { Textarea } from "~/components/ui/Textarea";
-import deviceDetection from "~/lib/deviceDetection";
 import findNearbyCenters from "~/lib/findNearbyCenters.server";
-import prisma from "~/lib/prisma.server";
-import { verifyAdmin } from "~/lib/sessions.server";
-import { cleanParseWorkingMemory } from "~/lib/workingMemory";
-import type { Route } from "./+types/admin.user.$userId";
+import deviceDetection from "~/lib/deviceDetection";
 import Messages from "./chat/Messages";
+import prisma from "~/lib/prisma.server";
 
 export async function loader({ params, request }: Route.LoaderArgs) {
   await verifyAdmin(request.headers);

@@ -1,7 +1,7 @@
 import { Output, convertToModelMessages, generateText } from "ai";
 import debug from "debug";
 import { last } from "es-toolkit";
-import type { User } from "prisma/generated/client";
+import type { User } from "prisma/generated";
 import { ulid } from "ulid";
 import { beforeAll, it } from "vitest";
 import zod from "zod";
@@ -140,10 +140,10 @@ async function classifyAssistantResponse({
   I am only looking at this rules:
 
   ${expecting
-    .trim()
-    .split("\n")
-    .map((line) => `<rule>${line}</rule>`)
-    .join("\n")}
+        .trim()
+        .split("\n")
+        .map((line) => `<rule>${line}</rule>`)
+        .join("\n")}
 
   Do not make up any rules. Only return "yes" or "no" based on the rules.
   Each rule is interpreted as "does the assistant _______?"

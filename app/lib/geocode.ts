@@ -2,7 +2,7 @@ import { captureException } from "@sentry/react-router";
 import { ms } from "convert";
 import debug from "debug";
 import { invariant } from "es-toolkit";
-import type { User } from "prisma/generated/client";
+import type { User } from "prisma/generated";
 import { cleanParseWorkingMemory } from "./workingMemory";
 
 const fallbackLocation = {
