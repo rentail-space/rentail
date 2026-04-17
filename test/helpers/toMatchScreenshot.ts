@@ -43,8 +43,8 @@ const defaultTolerance = 2.3;
 expect.extend({
   async toMatchScreenshot(
     locator: Locator | Page,
-    options?: { name?: string; tolerance?: number; },
-  ): Promise<{ message: () => string; pass: boolean; }> {
+    options?: { name?: string; tolerance?: number },
+  ): Promise<{ message: () => string; pass: boolean }> {
     if (process.env.CI)
       return {
         message: () => "Skipping screenshot comparison in CI",

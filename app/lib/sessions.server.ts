@@ -67,12 +67,12 @@ const { getSession, commitSession, destroySession } =
  */
 export async function findUserAndLastChat(request: Request): Promise<
   | {
-    chat: Chat;
-    messages: UIMessage[];
-    responseHeaders: Headers;
-    user: User;
-  }
-  | { responseHeaders: Headers; }
+      chat: Chat;
+      messages: UIMessage[];
+      responseHeaders: Headers;
+      user: User;
+    }
+  | { responseHeaders: Headers }
 > {
   const session = await userFromCookie(request.headers);
   if (!("user" in session)) return await saveUtmParams(request);
@@ -115,11 +115,11 @@ export async function findUserAndChatById({
   requestHeaders: Headers;
 }): Promise<
   | {
-    chat: Chat;
-    messages: UIMessage[];
-    responseHeaders: Headers;
-    user: User;
-  }
+      chat: Chat;
+      messages: UIMessage[];
+      responseHeaders: Headers;
+      user: User;
+    }
   | undefined
 > {
   const session = await userFromCookie(requestHeaders);
@@ -287,11 +287,11 @@ export async function verifyAdmin(requestHeaders: Headers): Promise<User> {
  */
 async function userFromCookie(requestHeaders: Headers): Promise<
   | {
-    cookieSession: Session<SessionData, SessionFlashData>;
-    user: User;
-    responseHeaders: Headers;
-  }
-  | { cookieSession: Session<SessionData, SessionFlashData>; }
+      cookieSession: Session<SessionData, SessionFlashData>;
+      user: User;
+      responseHeaders: Headers;
+    }
+  | { cookieSession: Session<SessionData, SessionFlashData> }
 > {
   const cookieSession = await getSession(requestHeaders.get("cookie"));
   if (!cookieSession.data.token) return { cookieSession };
@@ -448,7 +448,7 @@ export async function createAnonymousUser({
 }: {
   chatId: string;
   requestHeaders: Headers;
-}): Promise<UserGetPayload<{ include: { chats: true; }; }>> {
+}): Promise<UserGetPayload<{ include: { chats: true } }>> {
   return await createUser({ chatId, isAnonymous: true, requestHeaders });
 }
 
@@ -476,7 +476,7 @@ async function createAuthenticatedUser({
   name: string;
   passwordHash: string;
   requestHeaders: Headers;
-}): Promise<UserGetPayload<{ include: { chats: true; }; }>> {
+}): Promise<UserGetPayload<{ include: { chats: true } }>> {
   return await createUser({
     chatId,
     email,
@@ -498,19 +498,19 @@ async function createUser({
   chatId: string;
   requestHeaders: Headers;
 } & (
-    | {
+  | {
       isAnonymous: true;
       name?: never;
       passwordHash?: never;
       email?: never;
     }
-    | {
+  | {
       isAnonymous: false;
       email: string;
       name: string;
       passwordHash: string;
     }
-  )): Promise<UserGetPayload<{ include: { chats: true; }; }>> {
+)): Promise<UserGetPayload<{ include: { chats: true } }>> {
   if (isAnonymous)
     invariant(
       !(Boolean(name) && Boolean(email) && Boolean(passwordHash)),
@@ -552,9 +552,9 @@ async function createUser({
       viewport:
         deviceInfo.viewportWidth && deviceInfo.viewportHeight
           ? {
-            width: deviceInfo.viewportWidth,
-            height: deviceInfo.viewportHeight,
-          }
+              width: deviceInfo.viewportWidth,
+              height: deviceInfo.viewportHeight,
+            }
           : undefined,
       workingMemory: JSON.stringify({ location }),
 

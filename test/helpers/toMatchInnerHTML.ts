@@ -47,8 +47,8 @@ const dirname = path.resolve(
 expect.extend({
   async toMatchInnerHTML(
     locator: Locator | Page,
-    options?: { name?: string; strip?: (html: HTMLNode[]) => void; },
-  ): Promise<{ message: () => string; pass: boolean; }> {
+    options?: { name?: string; strip?: (html: HTMLNode[]) => void },
+  ): Promise<{ message: () => string; pass: boolean }> {
     const name = options?.name || getTestName();
     const filename = path.resolve(dirname, `${name}.html`);
     const rawHtml =

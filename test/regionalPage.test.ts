@@ -9,9 +9,9 @@ describe("Regional area shopping centers page", () => {
   let testRegional: {
     name: string;
     stateAbbreviation: string;
-    state: { name: string; abbreviation: string; };
-    metroArea: { name: string; };
-    relatedCities: Array<{ name: string; }>;
+    state: { name: string; abbreviation: string };
+    metroArea: { name: string };
+    relatedCities: Array<{ name: string }>;
   };
   let regionalCenters: Array<{
     id: string;
@@ -137,7 +137,7 @@ describe("Regional area shopping centers page", () => {
     expect(breadcrumbs["@type"]).toBe("BreadcrumbList");
     expect(
       breadcrumbs.itemListElement.some(
-        (item: { name: string; }) => item.name === testRegional.name,
+        (item: { name: string }) => item.name === testRegional.name,
       ),
     ).toBe(true);
   });

@@ -147,7 +147,7 @@ export default async function collectCenters(search: string) {
 /**
  * Get save filename for a center
  */
-function getCenterSaveFilename(center: { name: string; state: string; }) {
+function getCenterSaveFilename(center: { name: string; state: string }) {
   const normalized = center.name
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, "")

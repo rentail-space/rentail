@@ -70,16 +70,28 @@ const routes = {
 };
 
 async function allOtherRoutes(): Promise<
-  Record<string, { id: string; module: string; path: string; }>
+  Record<string, { id: string; module: string; path: string }>
 > {
   const all = [
     (await recentBlogPosts()).map(({ slug }) => `blog/${slug}`),
-    (await prisma.property.findMany({ select: { id: true } })).map(({ id }) => `center/${id}`),
-    (await prisma.state.findMany({ select: { abbreviation: true } })).map(({ abbreviation }) => `state/${abbreviation}`),
-    (await prisma.county.findMany({ select: { slug: true } })).map(({ slug }) => `county/${slug}`),
-    (await prisma.city.findMany({ select: { slug: true } })).map(({ slug }) => `city/${slug}`),
-    (await prisma.metroArea.findMany({ select: { slug: true } })).map(({ slug }) => `metro/${slug}`),
-    (await prisma.regionalName.findMany({ select: { slug: true } })).map(({ slug }) => `regional/${slug}`),
+    (await prisma.property.findMany({ select: { id: true } })).map(
+      ({ id }) => `center/${id}`,
+    ),
+    (await prisma.state.findMany({ select: { abbreviation: true } })).map(
+      ({ abbreviation }) => `state/${abbreviation}`,
+    ),
+    (await prisma.county.findMany({ select: { slug: true } })).map(
+      ({ slug }) => `county/${slug}`,
+    ),
+    (await prisma.city.findMany({ select: { slug: true } })).map(
+      ({ slug }) => `city/${slug}`,
+    ),
+    (await prisma.metroArea.findMany({ select: { slug: true } })).map(
+      ({ slug }) => `metro/${slug}`,
+    ),
+    (await prisma.regionalName.findMany({ select: { slug: true } })).map(
+      ({ slug }) => `regional/${slug}`,
+    ),
   ];
 
   return Object.fromEntries(
