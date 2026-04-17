@@ -8,6 +8,8 @@ minimumReleaseAge: 2880
 minimumReleaseAgeExclude:
   - "@biomejs/biome"
   - "@biomejs/*"
+  - "react-email"
+  - "@react-email/render"
 
 onlyBuiltDependencies:
   - "@prisma/client"

@@ -1,7 +1,7 @@
 // app/lib/llm-visibility/perplexityClient.ts
 import { createPerplexity } from "@ai-sdk/perplexity";
 import { generateText } from "ai";
-import { invariant } from "es-toolkit";
+import invariant from "tiny-invariant";
 import envVars from "~/lib/env";
 
 const MODEL_ID = "sonar";

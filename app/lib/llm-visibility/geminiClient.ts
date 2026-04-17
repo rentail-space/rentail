@@ -1,7 +1,9 @@
 // app/lib/llm-visibility/geminiClient.ts
-import { google } from "@ai-sdk/google";
+
 import { generateText } from "ai";
-import { invariant, mapAsync } from "es-toolkit";
+import { google } from "@ai-sdk/google";
+import { map } from "radashi";
+import invariant from "tiny-invariant";
 import envVars from "~/lib/env";
 
 const MODEL_ID = "gemini-2.5-flash";
@@ -49,7 +51,7 @@ export default async function queryGemini(query: string): Promise<{
 
   const queries = metadata?.webSearchQueries;
   const urls = metadata?.groundingChunks?.map((chunk) => chunk.web.uri);
-  const citations = await mapAsync(urls ?? [], async (url) => {
+  const citations = await map(urls ?? [], async (url) => {
     const response = await fetch(url, { redirect: "follow" });
     return response.url;
   });

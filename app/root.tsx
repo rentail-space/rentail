@@ -1,5 +1,5 @@
 import Clarity from "@microsoft/clarity";
-import { last } from "es-toolkit";
+import { last } from "radashi";
 import { useEffect } from "react";
 import {
   type HeadersFunction,

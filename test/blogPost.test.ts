@@ -9,10 +9,10 @@
  * - Navigation functionality
  */
 
-import { last } from "es-toolkit";
-import { type Page, type Response, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
+import { type Page, type Response, expect } from "playwright/test";
 import { goto, port } from "~/test/helpers/launchBrowser";
+import { last } from "radashi";
 
 describe("Blog Post Rendering", () => {
   let page: Page;

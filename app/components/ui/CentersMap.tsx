@@ -1,9 +1,10 @@
-import { invariant, maxBy, minBy } from "es-toolkit";
+import { maxBy, minBy } from "es-toolkit";
 import { MapPin } from "lucide-react";
 import mapboxgl from "mapbox-gl";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
+import invariant from "tiny-invariant";
 
 /**
  * Called when the user clicks on a center outside the map and we want to center

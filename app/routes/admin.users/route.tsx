@@ -1,8 +1,9 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import type { Temporal } from "@js-temporal/polyfill";
-import { groupBy, invariant, meanBy, sumBy } from "es-toolkit";
+import { groupBy, meanBy, sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
 import type { LoaderFunctionArgs } from "react-router";
+import invariant from "tiny-invariant";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";

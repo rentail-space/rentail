@@ -1,5 +1,5 @@
-import { last } from "es-toolkit";
 import { MenuIcon } from "lucide-react";
+import { last } from "radashi";
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, type UIMatch, useMatches } from "react-router";
 import { twMerge } from "tailwind-merge";

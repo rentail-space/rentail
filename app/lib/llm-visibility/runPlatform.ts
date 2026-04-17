@@ -1,10 +1,10 @@
 // app/lib/llm-visibility/runPlatform.ts
 
 import { captureException } from "@sentry/react-router";
+import { sleep } from "radashi";
 import { ms } from "convert";
-import { delay } from "es-toolkit";
-import prisma from "~/lib/prisma.server";
 import queries from "./queries";
+import prisma from "~/lib/prisma.server";
 
 /**
  * Maximum number of times to repeat a query if it fails.
@@ -83,7 +83,7 @@ export default async function runPlatform({
         } catch (error) {
           console.error("[%s] Error: %s", platform, error);
         }
-        await delay(ms("2s"));
+        await sleep(ms("2s"));
       }
     }
   } catch (error) {

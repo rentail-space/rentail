@@ -3,24 +3,24 @@
  * Comprehensive coverage using Google Places Nearby Search
  */
 
-import { mapAsync, partition } from "es-toolkit";
-import { existsSync } from "node:fs";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
-import ora from "ora";
-import { chromium } from "playwright";
 import type z from "zod";
-import externalLink from "~/lib/externalLink";
-import { slugify } from "~/lib/utils";
-import enrichCenter from "./enrichCenter";
-import { nearbySearch } from "./fromGooglePlaces.server";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { geocodeCounty, mergeBounds } from "./geocodeCounty.server";
+import { schema, seedCenter } from "./seedCenters.server";
+import { dirname, resolve } from "node:path";
 import { generateHexGrid } from "./gridSearch.server";
+import { fork, parallel } from "radashi";
+import { nearbySearch } from "./fromGooglePlaces.server";
+import { existsSync } from "node:fs";
+import { chromium } from "playwright";
+import { slugify } from "~/lib/utils";
 import resolveMetroArea from "./metroAreas";
-import ranking from "./ranking";
+import externalLink from "~/lib/externalLink";
+import enrichCenter from "./enrichCenter";
 import scrapeCenter from "./scrapeCenter";
 import scrapeSpaces from "./scrapeSpaces";
-import { schema, seedCenter } from "./seedCenters.server";
+import ranking from "./ranking";
+import ora from "ora";
 
 /**
  * Collect shopping centers using grid-based search
@@ -35,8 +35,7 @@ export default async function collectCenters(search: string) {
   console.info("Counties: %s", counties.join(", "));
 
   // Step 2: Geocode all counties to get bounding boxes
-  const geocoded = await mapAsync(counties, geocodeCounty, { concurrency: 1 });
-
+  const geocoded = await parallel({ limit: 1 }, counties, geocodeCounty);
   // Step 3: Merge bounding boxes to get a single bounding box
   const mergedBounds = mergeBounds(geocoded.map((g) => g.bounds));
 
@@ -74,7 +73,7 @@ export default async function collectCenters(search: string) {
 
   // Step 7: Enrich each center (same as collectCenters.ts)
   // Partition into new vs existing
-  const [existing, creating] = partition(centers, (center) =>
+  const [existing, creating] = fork(centers, (center) =>
     existsSync(getCenterSaveFilename(center)),
   );
   console.info(

@@ -3,13 +3,13 @@
  * suite (test/helpers/globalSetup.ts)
  */
 
-import { PrismaPg } from "@prisma/adapter-pg";
-import debug from "debug";
-import dotenv from "dotenv";
-import { invariant } from "es-toolkit";
 import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
 import { PrismaClient } from "prisma/generated";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { resolve } from "node:path";
+import invariant from "tiny-invariant";
+import dotenv from "dotenv";
+import debug from "debug";
 
 dotenv.configDotenv({ quiet: true });
 invariant(process.env.DATABASE_URL, "DATABASE_URL is required");

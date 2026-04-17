@@ -1,7 +1,7 @@
-import { Button } from "@react-email/components";
 import type { UIMessage } from "ai";
 import type React from "react";
 import { Children, type JSX, useEffect, useRef } from "react";
+import { Button } from "react-email";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import { twMerge } from "tailwind-merge";

@@ -1,7 +1,7 @@
 // app/lib/llm-visibility/claudeClient.ts
-import { anthropic } from "@ai-sdk/anthropic";
 import { generateText } from "ai";
-import { invariant } from "es-toolkit";
+import { anthropic } from "@ai-sdk/anthropic";
+import invariant from "tiny-invariant";
 import envVars from "~/lib/env";
 
 const MODEL_ID = "claude-haiku-4-5-20251001";

@@ -5,10 +5,11 @@
  * the Anthropic API's Server-Sent Events format.
  */
 
-import debug from "debug";
-import { invariant, last } from "es-toolkit";
-import { ulid } from "ulid";
 import { conversational } from "~/lib/models";
+import { last } from "radashi";
+import { ulid } from "ulid";
+import invariant from "tiny-invariant";
+import debug from "debug";
 
 const logger = debug("msw");
 

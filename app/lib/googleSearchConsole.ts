@@ -1,5 +1,5 @@
-import { invariant } from "es-toolkit";
 import { JWT } from "google-auth-library";
+import invariant from "tiny-invariant";
 import envVars from "./env.js";
 
 export interface SearchQuery {

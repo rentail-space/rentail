@@ -11,7 +11,7 @@ import {
   Tailwind,
   Text,
   pixelBasedPreset,
-} from "@react-email/components";
+} from "react-email";
 import * as styles from "~/emails/styles";
 import { colors } from "~/emails/styles";
 

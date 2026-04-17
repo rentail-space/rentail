@@ -1,11 +1,11 @@
-import debug from "debug";
-import { partition } from "es-toolkit";
 import { readFileSync, readdirSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { slugify } from "~/lib/utils";
+import { fork } from "radashi";
 import { z } from "zod";
 import envVars from "~/lib/env";
 import prisma from "~/lib/prisma.server";
-import { slugify } from "~/lib/utils";
+import debug from "debug";
 
 export const schema = z.object({
   name: z.string(),
@@ -74,7 +74,7 @@ export default async function seedCenters(centerSlugs?: string[]) {
   });
 
   const states = await prisma.state.findMany();
-  const [seedable, noState] = partition(
+  const [seedable, noState] = fork(
     centers,
     (center) =>
       !!states.find(({ abbreviation }) => abbreviation === center.state),

@@ -1,8 +1,8 @@
 import { captureException } from "@sentry/react-router";
-import { invariant } from "es-toolkit";
 import { AlertCircle } from "lucide-react";
 import { redirect, useFetcher } from "react-router";
 import { CircularLoading } from "respinner";
+import invariant from "tiny-invariant";
 import { useToggle } from "usehooks-ts";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";

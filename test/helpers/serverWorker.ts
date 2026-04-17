@@ -5,9 +5,9 @@
  * cleanly when the test is done.
  */
 
-import { invariant } from "es-toolkit";
-import { rm } from "node:fs/promises";
 import { resolve } from "node:path";
+import { rm } from "node:fs/promises";
+import invariant from "tiny-invariant";
 import * as vite from "vite";
 
 // Import and start the server

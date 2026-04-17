@@ -1,4 +1,4 @@
-import { invariant } from "es-toolkit";
+import invariant from "tiny-invariant";
 import YAML from "yaml";
 
 export default function parseFrontMatter<T = Record<string, unknown>>(

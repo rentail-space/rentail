@@ -1,9 +1,10 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import { Temporal } from "@js-temporal/polyfill";
-import { invariant, sumBy } from "es-toolkit";
+import { sumBy } from "es-toolkit";
 import { JWT } from "google-auth-library";
 import { Suspense } from "react";
 import { Await, type LoaderFunctionArgs } from "react-router";
+import invariant from "tiny-invariant";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import DateRangeSelector, {
   parseDateRange,

@@ -1,15 +1,15 @@
-import { Section } from "@react-email/components";
-import { mapAsync } from "es-toolkit";
+import { map } from "radashi";
+import { Section } from "react-email";
 import { twMerge } from "tailwind-merge";
-import { daysAgo } from "~/lib/temporal";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails.server";
+import { daysAgo } from "~/lib/temporal";
 import checkRankings from "./checkRanking.server";
 
 export default async function sendSEORankAlert(): Promise<string> {
   const engines = ["google", "google_ai_mode", "bing", "duckduckgo"];
   const newerThan = daysAgo(30);
-  const engineQueries = await mapAsync(engines, async (engine) => {
+  const engineQueries = await map(engines, async (engine) => {
     const { results } = await checkRankings({ engine, newerThan, limit: 10 });
     return { engine, queries: results };
   });

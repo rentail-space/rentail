@@ -1,12 +1,12 @@
-import { invariant } from "es-toolkit";
 import { Link, redirect } from "react-router";
-import { formatDateMed } from "~/lib/temporal";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
+import invariant from "tiny-invariant";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import externalLink from "~/lib/externalLink";
 import { type NewsItem, loadNewsItem } from "~/lib/newsItems.server";
 import pageMeta from "~/lib/pageMeta";
+import { formatDateMed } from "~/lib/temporal";
 import type { Route } from "./+types/news.$slug";
 
 export async function loader({ params, request }: Route.LoaderArgs) {

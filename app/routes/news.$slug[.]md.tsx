@@ -1,7 +1,7 @@
-import { invariant } from "es-toolkit";
+import invariant from "tiny-invariant";
 import { trackBotVisit } from "~/lib/middleware/botTracking.server";
-import { formatDateHuge } from "~/lib/temporal";
 import { loadNewsItem } from "~/lib/newsItems.server";
+import { formatDateHuge } from "~/lib/temporal";
 import type { Route } from "./+types/news.$slug";
 
 export async function loader({ params, request }: Route.LoaderArgs) {

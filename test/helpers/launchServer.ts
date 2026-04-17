@@ -1,8 +1,8 @@
-import { ms } from "convert";
-import debug from "debug";
-import { delay } from "es-toolkit";
 import { type ChildProcess, fork } from "node:child_process";
 import { resolve } from "node:path";
+import { sleep } from "radashi";
+import { ms } from "convert";
+import debug from "debug";
 
 let worker: ChildProcess | undefined;
 
@@ -57,7 +57,7 @@ export async function launchServer(port: number): Promise<void> {
   });
 
   // Additional delay to ensure HTTP server is fully bound
-  await delay(500);
+  await sleep(ms("500ms"));
 }
 
 /**
@@ -68,7 +68,7 @@ export async function closeServer(): Promise<void> {
     // Send graceful shutdown message first
     worker.send("shutdown");
     // Wait for graceful shutdown (increased from 500ms to allow Vite server to fully close)
-    await delay(1000);
+    await sleep(ms("1s"));
     // Check if process exited, only kill if it's still running
     if (!worker.killed) worker.kill("SIGKILL");
     worker.disconnect();

@@ -1,9 +1,9 @@
-import { captureException } from "@sentry/react-router";
-import { ms } from "convert";
-import debug from "debug";
-import { invariant } from "es-toolkit";
 import type { User } from "prisma/generated";
 import { cleanParseWorkingMemory } from "./workingMemory";
+import { captureException } from "@sentry/react-router";
+import { ms } from "convert";
+import invariant from "tiny-invariant";
+import debug from "debug";
 
 const fallbackLocation = {
   ip: "23.241.26.38",

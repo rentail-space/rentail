@@ -1,4 +1,5 @@
-import { delay } from "es-toolkit";
+import { ms } from "convert";
+import { sleep } from "radashi";
 import { useTimeout } from "usehooks-ts";
 
 export default function askQuestion({
@@ -18,7 +19,7 @@ export default function askQuestion({
     // Animate typing the question
     let input = "";
     for (let i = 0; i < question.length; i++) {
-      await delay(10);
+      await sleep(ms("10ms"));
       input += question[i];
       setQuery(input);
     }

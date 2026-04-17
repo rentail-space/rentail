@@ -1,6 +1,7 @@
 // app/lib/llm-visibility/EmailVisibilityAlert.server.tsx
-import { Button, Section } from "@react-email/components";
+
 import { mean } from "es-toolkit";
+import { Button, Section } from "react-email";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails.server";
 import * as styles from "~/emails/styles";

@@ -26,7 +26,8 @@
     "**/node_modules/**": true,
     "app/data/blog/**": true,
     "prisma/seed/**/*": true,
-    "public/images/**/*": true
+    "public/images/**/*": true,
+    "pnpm-lock.yaml": true
   },
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#4338ca",

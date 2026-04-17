@@ -9,14 +9,15 @@
  * @see https://serpapi.com/search-api
  */
 
-import { ms } from "convert";
-import { delay, groupBy, mapAsync, maxBy, partition } from "es-toolkit";
-import { getJson } from "serpapi";
-import { trackApiCall } from "~/lib/apiUsageTracker";
+import { groupBy, mapAsync, maxBy } from "es-toolkit";
 import { default as env } from "~/lib/env";
+import { trackApiCall } from "~/lib/apiUsageTracker";
+import { fork, sleep } from "radashi";
+import { getJson } from "serpapi";
+import { ms } from "convert";
 import terms from "./searchTerms";
 
-export type RankingResults = {
+type RankingResults = {
   term: string;
   engine: string;
   results: {
@@ -64,7 +65,7 @@ export default async function checkRankings({
     hostname,
     count: queries.length,
   }));
-  const [rentail, allOther] = partition(
+  const [rentail, allOther] = fork(
     hostnames,
     ({ hostname }) => hostname === "rentail.space",
   );
@@ -128,7 +129,7 @@ async function checkRankingWithSerpAPI({
       };
 
       // Rate limit: 1 request per second
-      await delay(ms("2s"));
+      await sleep(ms("1s"));
 
       const results =
         (response.organic_results ?? response.references ?? []).map(
