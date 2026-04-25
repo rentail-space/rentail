@@ -81,8 +81,8 @@ Files in `/test/*.test.ts`. Vitest + Playwright. `isolate: true` required.
 **Always prefix with `rtk`** — applies optimized filtering when available, passthrough otherwise. Safe in all `&&` chains.
 
 ```bash
-# Build/lint:  rtk tsc | rtk lint | rtk next build
-# Test:        rtk vitest run | rtk playwright test | rtk test <cmd>
+# Build/lint:  rtk lint | rtk build
+# Test:        rtk vp test run | rtk playwright test | rtk test <cmd>
 # Git:         rtk git <any-subcmd>
 # GitHub:      rtk gh pr view/checks | rtk gh run list | rtk gh issue list
 # Node:        rtk pnpm install/list/outdated | rtk prisma | rtk npx <cmd>

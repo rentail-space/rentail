@@ -35,7 +35,7 @@ pnpm prisma migrate dev            # Create migration
 
 ### TypeScript
 
-- **Strict mode required** - All code must pass `tsc --noEmit --strict`
+- **Strict mode required** - All code must pass `vp check`
 - **Prefer interfaces over types** for object shapes
 - **Avoid enums** - Use discriminated unions or const objects instead
 - **Avoid `any`** - Oxlint warns on explicit any (set to `warn`)

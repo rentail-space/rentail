@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "prisma generate && react-router build --force",
-    "check": "secretlint **/* --format stylish && vp check --fix && react-router typegen && tsc --noEmit --strict",
+    "check": "secretlint **/* --format stylish && vp check --fix && react-router typegen",
     "clean": "rm -rf node_modules/.vite .react-router build",
     "clone": "./scripts/clone.sh",
     "dev": "react-router dev",
@@ -16,7 +16,6 @@
     "promote": "./scripts/promote.ts",
     "start": "react-router-serve ./build/server/index.js",
     "test": "pnpm run check && pnpm --expose-gc --max-old-space-size=3096 vp test run",
-    "typecheck": "react-router typegen && tsc --noEmit --strict",
     "upgrade": "./scripts/upgrade.sh"
   },
   "dependencies": {
