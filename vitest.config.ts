@@ -1,3 +1,4 @@
+import { resolve } from "node:path";
 import type { ParsedStack } from "vitest";
 import { defineConfig } from "vitest/config";
 
@@ -8,10 +9,22 @@ export default defineConfig({
     sourcemap: false, // Disable source maps in tests to save memory
   },
   plugins: [],
-  esbuild: {
-    logLevel: "error", // Reduce memory usage for esbuild transformations
-  },
   logLevel: process.env.CI ? "error" : "warn", // Only show errors in CI
+  resolve: {
+    alias: [
+      { find: "~/test", replacement: resolve("test") },
+      { find: "~", replacement: resolve("app") },
+      {
+        find: "prisma/generated/models",
+        replacement: resolve("prisma/generated/models"),
+      },
+      {
+        find: "prisma/generated",
+        replacement: resolve("prisma/generated/client"),
+      },
+      { find: "+types", replacement: resolve(".react-router/types") },
+    ],
+  },
 
   test: {
     bail: 3, // Stop after 3 failing tests
