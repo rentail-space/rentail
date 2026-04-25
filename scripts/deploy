@@ -24,15 +24,15 @@ echo -e "\033[32m  Installing Playwright …\033[0m"
 pnpm exec playwright install
 
 echo -e "\033[32m  Running tests …\033[0m"
-NODE_OPTIONS="--max-old-space-size=3096" vitest run
+NODE_OPTIONS="--max-old-space-size=3096" vp test run
 
 echo -e "\033[32m  Updating database …\033[0m"
 doppler --config prd run -- pnpm prisma db push
 
 echo -e "\033[32m  Deploying to Vercel …\033[0m"
 vercel pull --environment=production
-vercel build --prod
-vercel deploy --prod --prebuilt
+vercel build 
+vercel deploy --prebuilt
 
 echo -e "\033[32m  Opening dashboard …\033[0m"
 open "https://rentail.space"
