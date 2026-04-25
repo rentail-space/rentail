@@ -59,7 +59,7 @@ export interface BoundingBox {
   west: number;
 }
 
-export interface GeocodedCounty {
+interface GeocodedCounty {
   center: LatLng;
   bounds: BoundingBox;
   formattedAddress: string;

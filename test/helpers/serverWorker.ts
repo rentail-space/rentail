@@ -12,7 +12,7 @@ import * as vite from "vite";
 
 // Import and start the server
 async function startServer() {
-  invariant(process.send, "process.send is not defined");
+  invariant(process.send !== undefined, "process.send is not defined");
   const port = Number(process.env.PORT);
   invariant(port, "PORT is not defined");
   try {

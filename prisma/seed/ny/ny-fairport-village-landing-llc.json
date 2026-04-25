@@ -1,38 +1,36 @@
 {
-  "address": "217 Fairport Village Landing",
-  "city": "Fairport",
-  "country": "US",
-  "googlePlaceID": "places/ChIJO7Jl26-11okRAi16TOx07zI",
-  "name": "Fairport Village Landing, LLC",
-  "state": "NY",
-  "latitude": 43.1011544,
-  "longitude": -77.4431256,
-  "phone": "++1 585-425-0299",
-  "imageURLs": [
-    "/images/malls/ny-fairport-village-landing-llc-1.jpg"
-  ],
-  "summary": "Fairport Village Landing is a historic canal-side shopping destination established in 1977 along the Erie Canal in Fairport, NY. Recently renovated to blend early American heritage with modern amenities, the center features boutique retail shops, wellness services, professional offices, and the acclaimed Fairport Public Library.",
-  "openFrom": 1100,
-  "openUntil": 1702,
-  "rating": 4.5,
-  "reviewCount": 715,
-  "website": "http://www.fairportlanding.com/?utm_source=rentail.space",
-  "centerType": "StripCenter",
-  "demographics": "Fairport Village Landing attracts a diverse mix of local residents and tourists visiting the historic Erie Canal area. The primary trade area consists of middle to upper-middle income families from Fairport and surrounding Perinton communities, with a strong representation of educated professionals and retirees who appreciate the canal-side location and community-oriented atmosphere. Visitors include boaters and vacationers exploring the Erie Canal system, as well as library patrons and residents seeking boutique shopping experiences. The center appeals to environmentally-conscious consumers drawn to eco-friendly retailers and those interested in wellness services like yoga, reflecting the area's health-conscious and community-minded demographic profile.",
-  "description": "Established in 1977, Fairport Village Landing is a historic canal-side commercial destination located along the original Erie Canal barge system in the charming Village of Fairport, New York. For decades, this beloved gathering place has served boaters, vacationers, and area residents as a premier location to shop, dine, and enjoy the scenic waterfront setting. The center underwent a complete renovation by FDP Management to blend appreciation for its early American heritage with modern amenities, creating an inviting atmosphere that honors the past while embracing the future. Today, Fairport Village Landing is home to a carefully curated mix of retail shops including Barry's Yoga Studio for transformative wellness experiences, Cloth-n-Mortar boutique offering classic and Bohemian styles, and What's Good featuring eco-friendly products at fair prices. The property also houses professional offices and the Fairport Public Library, recognized as one of the finest libraries in New York State, making it a true community hub that serves both commercial and civic purposes for the Village of Fairport and surrounding areas.",
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "112",
-      "type": "Inline",
-      "size": 1100,
-      "floor": 1,
-      "available": true,
-      "imageURLs": [
-        "https://www.fairportlanding.com/uploads/1/1/9/0/119028892/published/fvl-suite112-1.jpg?1763664511",
-        "https://www.fairportlanding.com/uploads/1/1/9/0/119028892/published/fvl-suite112-2.jpg?1763664514"
-      ]
-    }
-  ],
-  "ranking": 25.688754376209726
+	"address": "217 Fairport Village Landing",
+	"city": "Fairport",
+	"country": "US",
+	"googlePlaceID": "places/ChIJO7Jl26-11okRAi16TOx07zI",
+	"name": "Fairport Village Landing, LLC",
+	"state": "NY",
+	"latitude": 43.1011544,
+	"longitude": -77.4431256,
+	"phone": "++1 585-425-0299",
+	"imageURLs": ["/images/malls/ny-fairport-village-landing-llc-1.jpg"],
+	"summary": "Fairport Village Landing is a historic canal-side shopping destination established in 1977 along the Erie Canal in Fairport, NY. Recently renovated to blend early American heritage with modern amenities, the center features boutique retail shops, wellness services, professional offices, and the acclaimed Fairport Public Library.",
+	"openFrom": 1100,
+	"openUntil": 1702,
+	"rating": 4.5,
+	"reviewCount": 715,
+	"website": "http://www.fairportlanding.com/?utm_source=rentail.space",
+	"centerType": "StripCenter",
+	"demographics": "Fairport Village Landing attracts a diverse mix of local residents and tourists visiting the historic Erie Canal area. The primary trade area consists of middle to upper-middle income families from Fairport and surrounding Perinton communities, with a strong representation of educated professionals and retirees who appreciate the canal-side location and community-oriented atmosphere. Visitors include boaters and vacationers exploring the Erie Canal system, as well as library patrons and residents seeking boutique shopping experiences. The center appeals to environmentally-conscious consumers drawn to eco-friendly retailers and those interested in wellness services like yoga, reflecting the area's health-conscious and community-minded demographic profile.",
+	"description": "Established in 1977, Fairport Village Landing is a historic canal-side commercial destination located along the original Erie Canal barge system in the charming Village of Fairport, New York. For decades, this beloved gathering place has served boaters, vacationers, and area residents as a premier location to shop, dine, and enjoy the scenic waterfront setting. The center underwent a complete renovation by FDP Management to blend appreciation for its early American heritage with modern amenities, creating an inviting atmosphere that honors the past while embracing the future. Today, Fairport Village Landing is home to a carefully curated mix of retail shops including Barry's Yoga Studio for transformative wellness experiences, Cloth-n-Mortar boutique offering classic and Bohemian styles, and What's Good featuring eco-friendly products at fair prices. The property also houses professional offices and the Fairport Public Library, recognized as one of the finest libraries in New York State, making it a true community hub that serves both commercial and civic purposes for the Village of Fairport and surrounding areas.",
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "112",
+			"type": "Inline",
+			"size": 1100,
+			"floor": 1,
+			"available": true,
+			"imageURLs": [
+				"https://www.fairportlanding.com/uploads/1/1/9/0/119028892/published/fvl-suite112-1.jpg?1763664511",
+				"https://www.fairportlanding.com/uploads/1/1/9/0/119028892/published/fvl-suite112-2.jpg?1763664514"
+			]
+		}
+	],
+	"ranking": 25.688754376209726
 }

@@ -1,6 +1,5 @@
 import type { User } from "prisma/generated";
 import { Button, Section, Text } from "react-email";
-import * as styles from "~/emails/styles";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import EmailLayout from "./EmailLayout";
 import { sendEmail } from "./sendEmails.server";
@@ -28,23 +27,23 @@ function UserInfo({ user }: { user: User }) {
   const workingMemory = cleanParseWorkingMemory(user.workingMemory);
   return (
     <Section>
-      <Text style={styles.text}>
+      <Text className="text-gray-700 text-sm leading-relaxed">
         <strong>Name:</strong> {user.name}
       </Text>
-      <Text style={styles.text}>
+      <Text className="text-gray-700 text-sm leading-relaxed">
         <strong>Email:</strong> {user.email}
       </Text>
-      <Text style={styles.text}>
+      <Text className="text-gray-700 text-sm leading-relaxed">
         <strong>Is Anonymous:</strong> {user.isAnonymous ? "Yes" : "No"}
       </Text>
-      <Text style={styles.text}>
+      <Text className="text-gray-700 text-sm leading-relaxed">
         <strong>Location:</strong>{" "}
         {workingMemory?.location?.displayName ?? "N/A"}
       </Text>
-      <Text style={styles.text}>
+      <Text className="text-gray-700 text-sm leading-relaxed">
         <strong>Referrer:</strong> {user.referrer ?? "N/A"}
       </Text>
-      <Text style={styles.text}>
+      <Text className="text-gray-700 text-sm leading-relaxed">
         <strong>User Agent:</strong> {user.userAgent ?? "N/A"}
       </Text>
       {utm &&
@@ -53,7 +52,7 @@ function UserInfo({ user }: { user: User }) {
             ([key]) => key !== "ip" && key !== "userAgent" && key !== "referer",
           )
           .map(([key, value]) => (
-            <Text key={key} style={styles.text}>
+            <Text key={key} className="text-gray-700 text-sm leading-relaxed">
               <strong>UTM {key}:</strong> {value}
             </Text>
           ))}
@@ -63,10 +62,10 @@ function UserInfo({ user }: { user: User }) {
 
 function LinkToUser({ user }: { user: User }) {
   return (
-    <Section style={styles.text}>
+    <Section className="mb-4 text-center">
       <Button
         href={`https://rentail.space/admin/user/${user.id}`}
-        style={styles.button}
+        className="bg-indigo-600 text-white rounded-md px-4 py-2 text-sm font-medium"
       >
         View User in Admin Panel
       </Button>

@@ -1,47 +1,45 @@
 {
-  "address": "Main Street",
-  "city": "Hesperia",
-  "country": "US",
-  "googlePlaceID": "places/ChIJU8ZiF6Rpw4ARnyaq-D-xEzQ",
-  "name": "High Desert Gateway",
-  "state": "CA",
-  "latitude": 34.4250715,
-  "longitude": -117.3847891,
-  "phone": "++1 909-946-7518",
-  "imageURLs": [
-    "/images/malls/ca-high-desert-gateway-1.jpg"
-  ],
-  "summary": "High Desert Gateway is a 370,400 square foot community shopping center anchored by Target, Ross, Marshalls, and Ulta Beauty, located at the highly visible southwest corner of I-15 and Main Street in Hesperia. The center serves the growing High Desert region with a strong mix of value retailers, dining options, and essential services.",
-  "openFrom": 700,
-  "openUntil": 2200,
-  "rating": 4.4,
-  "reviewCount": 2503,
-  "website": "https://lewisretailcenters.com/property/high-desert-gateway/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "High Desert Gateway serves the growing Hesperia community and surrounding High Desert region, attracting middle-income families and value-conscious shoppers with household incomes ranging from $40,000 to $75,000 annually. The trade area draws from a daytime worker population of over 26,000 within five miles, consisting primarily of working families, young professionals, and retirees seeking convenient access to everyday necessities and affordable retail options. Shoppers in this market prioritize value and convenience, with strong preference for discount retailers, off-price stores, and essential services that cater to budget-minded households in this rapidly developing desert community.",
-  "description": "High Desert Gateway is a 370,400 square foot community shopping center strategically positioned at the southwest corner of Interstate 15 and Main Street in Hesperia, California, serving as a premier retail destination in the High Desert region. This well-anchored center features a powerful lineup of national retailers including Target, Ross, Marshalls, Burlington, and Ulta Beauty, providing shoppers with an exceptional mix of value-oriented fashion, home goods, and beauty products. The center's diverse tenant roster extends beyond its anchor stores to include popular dining options like Golden Corral, Five Guys Burgers & Fries, and Farmer Boys, alongside essential services such as Chase Bank, Planet Fitness, America's Best Contacts and Eyeglasses, and multiple urgent care and dental facilities. With its prime location directly off I-15, High Desert Gateway benefits from excellent visibility and accessibility, drawing from a daytime worker population of over 26,000 within a five-mile radius. The center's thoughtful tenant mix and convenient location make it an indispensable shopping destination for residents and visitors throughout the rapidly growing High Desert communities of San Bernardino County.",
-  "numberOfStores": 36,
-  "squareFootage": 370400,
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "14",
-      "type": "Other",
-      "size": 6577,
-      "available": true
-    },
-    {
-      "number": "16",
-      "type": "Other",
-      "size": 6625,
-      "available": true
-    },
-    {
-      "number": "34",
-      "type": "Other",
-      "size": 1300,
-      "available": true
-    }
-  ],
-  "ranking": 29.906455476552367
+	"address": "Main Street",
+	"city": "Hesperia",
+	"country": "US",
+	"googlePlaceID": "places/ChIJU8ZiF6Rpw4ARnyaq-D-xEzQ",
+	"name": "High Desert Gateway",
+	"state": "CA",
+	"latitude": 34.4250715,
+	"longitude": -117.3847891,
+	"phone": "++1 909-946-7518",
+	"imageURLs": ["/images/malls/ca-high-desert-gateway-1.jpg"],
+	"summary": "High Desert Gateway is a 370,400 square foot community shopping center anchored by Target, Ross, Marshalls, and Ulta Beauty, located at the highly visible southwest corner of I-15 and Main Street in Hesperia. The center serves the growing High Desert region with a strong mix of value retailers, dining options, and essential services.",
+	"openFrom": 700,
+	"openUntil": 2200,
+	"rating": 4.4,
+	"reviewCount": 2503,
+	"website": "https://lewisretailcenters.com/property/high-desert-gateway/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "High Desert Gateway serves the growing Hesperia community and surrounding High Desert region, attracting middle-income families and value-conscious shoppers with household incomes ranging from $40,000 to $75,000 annually. The trade area draws from a daytime worker population of over 26,000 within five miles, consisting primarily of working families, young professionals, and retirees seeking convenient access to everyday necessities and affordable retail options. Shoppers in this market prioritize value and convenience, with strong preference for discount retailers, off-price stores, and essential services that cater to budget-minded households in this rapidly developing desert community.",
+	"description": "High Desert Gateway is a 370,400 square foot community shopping center strategically positioned at the southwest corner of Interstate 15 and Main Street in Hesperia, California, serving as a premier retail destination in the High Desert region. This well-anchored center features a powerful lineup of national retailers including Target, Ross, Marshalls, Burlington, and Ulta Beauty, providing shoppers with an exceptional mix of value-oriented fashion, home goods, and beauty products. The center's diverse tenant roster extends beyond its anchor stores to include popular dining options like Golden Corral, Five Guys Burgers & Fries, and Farmer Boys, alongside essential services such as Chase Bank, Planet Fitness, America's Best Contacts and Eyeglasses, and multiple urgent care and dental facilities. With its prime location directly off I-15, High Desert Gateway benefits from excellent visibility and accessibility, drawing from a daytime worker population of over 26,000 within a five-mile radius. The center's thoughtful tenant mix and convenient location make it an indispensable shopping destination for residents and visitors throughout the rapidly growing High Desert communities of San Bernardino County.",
+	"numberOfStores": 36,
+	"squareFootage": 370400,
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "14",
+			"type": "Other",
+			"size": 6577,
+			"available": true
+		},
+		{
+			"number": "16",
+			"type": "Other",
+			"size": 6625,
+			"available": true
+		},
+		{
+			"number": "34",
+			"type": "Other",
+			"size": 1300,
+			"available": true
+		}
+	],
+	"ranking": 29.906455476552367
 }

@@ -13,7 +13,7 @@ export default function ProfileNameForm({
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    fetcher.submit(event.currentTarget);
+    void fetcher.submit(event.currentTarget);
   }
 
   return (

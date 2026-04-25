@@ -34,7 +34,6 @@ export default function ForAIAssistants({ loaderData }: Route.ComponentProps) {
     >
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated data
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaData()),
         }}

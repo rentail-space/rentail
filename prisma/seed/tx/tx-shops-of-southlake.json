@@ -1,33 +1,31 @@
 {
-  "address": "1201-1465 East Southlake Boulevard",
-  "city": "Southlake",
-  "country": "US",
-  "googlePlaceID": "places/ChIJ0ZBlk_PUTYYRjJA8nqp2z0U",
-  "name": "Shops of Southlake",
-  "state": "TX",
-  "latitude": 32.9388295,
-  "longitude": -97.13127829999999,
-  "phone": "++1 214-954-0600",
-  "imageURLs": [
-    "/images/malls/tx-shops-of-southlake-1.jpg"
-  ],
-  "summary": "Shops of Southlake is a neighborhood lifestyle center featuring a unique blend of national retail favorites, local boutiques, and diverse dining options anchored by Central Market. Located across from Southlake Town Square, this open-air shopping destination offers stress-free parking and serves as a beloved community gathering place in one of Texas's most affluent areas.",
-  "openFrom": 1000,
-  "openUntil": 2100,
-  "rating": 4.6,
-  "reviewCount": 1820,
-  "website": "http://www.shopsofsouthlake.com/?utm_source=rentail.space",
-  "centerType": "LifestyleCenter",
-  "demographics": "Shops of Southlake attracts an affluent, family-oriented demographic reflective of Southlake's status as one of the wealthiest communities in the Dallas-Fort Worth metroplex. The primary visitor base consists of upper-income households with median household incomes exceeding $200,000, predominantly married couples with children, and professionals aged 35-65. The trade area draws from Southlake's highly educated population, with shopping patterns favoring quality over value, frequent dining experiences, and a preference for both national premium brands and unique local boutiques that align with their sophisticated lifestyle preferences.",
-  "description": "Shops of Southlake offers a distinctive neighborhood shopping experience in the heart of one of Texas's most affluent communities, located across from the renowned Southlake Town Square. This lifestyle center seamlessly blends national retail favorites with carefully curated local shops and boutiques, all anchored by the beloved Central Market, HEB's upscale grocery concept that serves as a community gathering place. The center has established itself as a Southlake tradition, providing residents with convenient access to shopping, dining, and services in an open-air environment with stress-free parking. From BBQ to frozen yogurt, the diverse dining options cater to every meal and occasion, while the retail mix spans everything from fashion and home décor to wellness services and yoga studios. The center's thoughtful tenant curation reflects the sophisticated tastes of the Southlake community, offering solutions for every need from interior design consultations to everyday essentials, making it a true neighborhood destination where locals can find it all in one welcoming location.",
-  "tier": 3,
-  "spaces": [
-    {
-      "number": "Suite 341",
-      "type": "Other",
-      "size": 1734,
-      "available": true
-    }
-  ],
-  "ranking": 44.988985154194026
+	"address": "1201-1465 East Southlake Boulevard",
+	"city": "Southlake",
+	"country": "US",
+	"googlePlaceID": "places/ChIJ0ZBlk_PUTYYRjJA8nqp2z0U",
+	"name": "Shops of Southlake",
+	"state": "TX",
+	"latitude": 32.9388295,
+	"longitude": -97.13127829999999,
+	"phone": "++1 214-954-0600",
+	"imageURLs": ["/images/malls/tx-shops-of-southlake-1.jpg"],
+	"summary": "Shops of Southlake is a neighborhood lifestyle center featuring a unique blend of national retail favorites, local boutiques, and diverse dining options anchored by Central Market. Located across from Southlake Town Square, this open-air shopping destination offers stress-free parking and serves as a beloved community gathering place in one of Texas's most affluent areas.",
+	"openFrom": 1000,
+	"openUntil": 2100,
+	"rating": 4.6,
+	"reviewCount": 1820,
+	"website": "http://www.shopsofsouthlake.com/?utm_source=rentail.space",
+	"centerType": "LifestyleCenter",
+	"demographics": "Shops of Southlake attracts an affluent, family-oriented demographic reflective of Southlake's status as one of the wealthiest communities in the Dallas-Fort Worth metroplex. The primary visitor base consists of upper-income households with median household incomes exceeding $200,000, predominantly married couples with children, and professionals aged 35-65. The trade area draws from Southlake's highly educated population, with shopping patterns favoring quality over value, frequent dining experiences, and a preference for both national premium brands and unique local boutiques that align with their sophisticated lifestyle preferences.",
+	"description": "Shops of Southlake offers a distinctive neighborhood shopping experience in the heart of one of Texas's most affluent communities, located across from the renowned Southlake Town Square. This lifestyle center seamlessly blends national retail favorites with carefully curated local shops and boutiques, all anchored by the beloved Central Market, HEB's upscale grocery concept that serves as a community gathering place. The center has established itself as a Southlake tradition, providing residents with convenient access to shopping, dining, and services in an open-air environment with stress-free parking. From BBQ to frozen yogurt, the diverse dining options cater to every meal and occasion, while the retail mix spans everything from fashion and home décor to wellness services and yoga studios. The center's thoughtful tenant curation reflects the sophisticated tastes of the Southlake community, offering solutions for every need from interior design consultations to everyday essentials, making it a true neighborhood destination where locals can find it all in one welcoming location.",
+	"tier": 3,
+	"spaces": [
+		{
+			"number": "Suite 341",
+			"type": "Other",
+			"size": 1734,
+			"available": true
+		}
+	],
+	"ranking": 44.988985154194026
 }

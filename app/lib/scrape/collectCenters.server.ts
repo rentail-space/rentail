@@ -3,24 +3,24 @@
  * Comprehensive coverage using Google Places Nearby Search
  */
 
-import type z from "zod";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { geocodeCounty, mergeBounds } from "./geocodeCounty.server";
-import { schema, seedCenter } from "./seedCenters.server";
-import { dirname, resolve } from "node:path";
-import { generateHexGrid } from "./gridSearch.server";
-import { fork, parallel } from "radashi";
-import { nearbySearch } from "./fromGooglePlaces.server";
 import { existsSync } from "node:fs";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
+import ora from "ora";
 import { chromium } from "playwright";
-import { slugify } from "~/lib/utils";
-import resolveMetroArea from "./metroAreas";
+import { fork, parallel } from "radashi";
+import type z from "zod";
 import externalLink from "~/lib/externalLink";
+import { slugify } from "~/lib/utils";
 import enrichCenter from "./enrichCenter";
+import { nearbySearch } from "./fromGooglePlaces.server";
+import { geocodeCounty, mergeBounds } from "./geocodeCounty.server";
+import generateHexGrid from "./gridSearch.server";
+import resolveMetroArea from "./metroAreas";
+import ranking from "./ranking";
 import scrapeCenter from "./scrapeCenter";
 import scrapeSpaces from "./scrapeSpaces";
-import ranking from "./ranking";
-import ora from "ora";
+import { schema, seedCenter } from "./seedCenters.server";
 
 /**
  * Collect shopping centers using grid-based search

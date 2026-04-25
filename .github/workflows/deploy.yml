@@ -20,7 +20,8 @@ jobs:
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s
+          --health-retries 5
 
       redis:
         image: redis:latest
@@ -63,24 +64,14 @@ jobs:
       - name: Check secrets
         run: pnpm secretlint "**/*" --format stylish
 
-      - name: Setup Biome
-        uses: biomejs/setup-biome@v2
-        with:
-          version: latest
-
-      - name: Lint code
-        run: biome lint
-
       - name: Generate React Router types
         run: pnpm react-router typegen
 
-      - name: Check types
-        run: pnpm tsc --noEmit --strict
-        env:
-          NODE_OPTIONS: "--max-old-space-size=3096"
+      - name: Check code/types/formatting
+        run: pnpm exec vp check
 
       - name: Run Tests
-        run: pnpm --expose-gc --max-old-space-size=4096 vitest run
+        run: pnpm test
         env:
           ANTHROPIC_API_KEY: "***REMOVED***"
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"

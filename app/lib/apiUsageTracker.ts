@@ -208,32 +208,3 @@ export async function getHistoricalUsage(months = 6) {
     };
   });
 }
-
-/**
- * Check if usage has exceeded threshold and requires alert
- *
- * @param threshold Percentage threshold (default: 80%)
- */
-export async function checkUsageThreshold(threshold = 80) {
-  const usage = await getCurrentMonthUsage();
-
-  const alerts = [];
-
-  if (usage.google.percentUsed >= threshold)
-    alerts.push({
-      service: "Google APIs",
-      percentUsed: usage.google.percentUsed,
-      totalCost: usage.google.totalCost,
-      limit: usage.google.freeTierLimit,
-    });
-
-  if (usage.serpapi.percentUsed >= threshold)
-    alerts.push({
-      service: "SerpAPI",
-      percentUsed: usage.serpapi.percentUsed,
-      totalCount: usage.serpapi.totalCount,
-      limit: usage.serpapi.freeTierLimit,
-    });
-
-  return alerts;
-}

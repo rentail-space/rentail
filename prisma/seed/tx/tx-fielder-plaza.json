@@ -1,54 +1,52 @@
 {
-  "address": "201-1701 West Randol Mill Road",
-  "city": "Arlington",
-  "country": "US",
-  "googlePlaceID": "places/ChIJRZaPQwF9ToYRt6dw5_cv0fM",
-  "name": "Fielder Plaza",
-  "state": "TX",
-  "latitude": 32.7514694,
-  "longitude": -97.13271189999999,
-  "phone": "++1 214-954-0600",
-  "imageURLs": [
-    "/images/malls/tx-fielder-plaza-1.jpg"
-  ],
-  "openFrom": 930,
-  "openUntil": 2130,
-  "rating": 4.2,
-  "reviewCount": 1551,
-  "website": "http://www.fielderplaza.com/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "Fielder Plaza serves a diverse North Arlington community with a mix of middle-income families and working professionals seeking convenient neighborhood shopping. The trade area attracts residents from nearby residential neighborhoods who value accessibility to everyday essentials, with a customer base that includes young families, established households, and seniors. Primary shoppers are value-conscious consumers looking for quality dining options and essential services close to home, with easy access from I-30 making it a convenient stop for commuters and local residents alike.",
-  "description": "Fielder Plaza is a newly remodeled neighborhood shopping center located at the northwest corner of N Fielder Road and W Randol Mill Road in Arlington, Texas, offering convenient access from I-30. This Tom Thumb-anchored center has been thoughtfully updated to serve the North Arlington community with a diverse mix of shopping, dining, and service options all in one location. The 157,155 square foot center features popular retailers including CVS Pharmacy and Pet Supermarket, alongside unique dining experiences ranging from Tandoor Restaurant's authentic Indian cuisine to Al's Hamburgers and a Starbucks for your daily coffee fix. Beyond retail and dining, Fielder Plaza provides essential services such as Hudson's Family Barbershop and various health and beauty options, making it a true one-stop destination for families. With its prime location, ample parking, and carefully curated tenant mix, Fielder Plaza has established itself as North Arlington's go-to neighborhood center for everyday needs and quality dining experiences.",
-  "numberOfStores": 6,
-  "squareFootage": 157155,
-  "summary": "Fielder Plaza is a newly remodeled, Tom Thumb-anchored neighborhood center in North Arlington offering 157,155 square feet of convenient shopping, diverse dining options, and essential services. Located at the NWC of N Fielder Road and W Randol Mill Road with easy I-30 access, this center serves the community with retailers like CVS, Pet Supermarket, and unique restaurants including Tandoor and Al's Hamburgers.",
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "207",
-      "type": "Other",
-      "size": 1735
-    },
-    {
-      "number": "421A",
-      "type": "Other",
-      "size": 1362
-    },
-    {
-      "number": "512",
-      "type": "Other",
-      "size": 4415
-    },
-    {
-      "number": "524",
-      "type": "Other",
-      "size": 5258
-    },
-    {
-      "number": "528",
-      "type": "Other",
-      "size": 3340
-    }
-  ],
-  "ranking": 26.801139101634284
+	"address": "201-1701 West Randol Mill Road",
+	"city": "Arlington",
+	"country": "US",
+	"googlePlaceID": "places/ChIJRZaPQwF9ToYRt6dw5_cv0fM",
+	"name": "Fielder Plaza",
+	"state": "TX",
+	"latitude": 32.7514694,
+	"longitude": -97.13271189999999,
+	"phone": "++1 214-954-0600",
+	"imageURLs": ["/images/malls/tx-fielder-plaza-1.jpg"],
+	"openFrom": 930,
+	"openUntil": 2130,
+	"rating": 4.2,
+	"reviewCount": 1551,
+	"website": "http://www.fielderplaza.com/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "Fielder Plaza serves a diverse North Arlington community with a mix of middle-income families and working professionals seeking convenient neighborhood shopping. The trade area attracts residents from nearby residential neighborhoods who value accessibility to everyday essentials, with a customer base that includes young families, established households, and seniors. Primary shoppers are value-conscious consumers looking for quality dining options and essential services close to home, with easy access from I-30 making it a convenient stop for commuters and local residents alike.",
+	"description": "Fielder Plaza is a newly remodeled neighborhood shopping center located at the northwest corner of N Fielder Road and W Randol Mill Road in Arlington, Texas, offering convenient access from I-30. This Tom Thumb-anchored center has been thoughtfully updated to serve the North Arlington community with a diverse mix of shopping, dining, and service options all in one location. The 157,155 square foot center features popular retailers including CVS Pharmacy and Pet Supermarket, alongside unique dining experiences ranging from Tandoor Restaurant's authentic Indian cuisine to Al's Hamburgers and a Starbucks for your daily coffee fix. Beyond retail and dining, Fielder Plaza provides essential services such as Hudson's Family Barbershop and various health and beauty options, making it a true one-stop destination for families. With its prime location, ample parking, and carefully curated tenant mix, Fielder Plaza has established itself as North Arlington's go-to neighborhood center for everyday needs and quality dining experiences.",
+	"numberOfStores": 6,
+	"squareFootage": 157155,
+	"summary": "Fielder Plaza is a newly remodeled, Tom Thumb-anchored neighborhood center in North Arlington offering 157,155 square feet of convenient shopping, diverse dining options, and essential services. Located at the NWC of N Fielder Road and W Randol Mill Road with easy I-30 access, this center serves the community with retailers like CVS, Pet Supermarket, and unique restaurants including Tandoor and Al's Hamburgers.",
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "207",
+			"type": "Other",
+			"size": 1735
+		},
+		{
+			"number": "421A",
+			"type": "Other",
+			"size": 1362
+		},
+		{
+			"number": "512",
+			"type": "Other",
+			"size": 4415
+		},
+		{
+			"number": "524",
+			"type": "Other",
+			"size": 5258
+		},
+		{
+			"number": "528",
+			"type": "Other",
+			"size": 3340
+		}
+	],
+	"ranking": 26.801139101634284
 }

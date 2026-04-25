@@ -1,4 +1,3 @@
-import tsconfigPaths from "vite-tsconfig-paths";
 import type { ParsedStack } from "vitest";
 import { defineConfig } from "vitest/config";
 
@@ -8,7 +7,7 @@ export default defineConfig({
   build: {
     sourcemap: false, // Disable source maps in tests to save memory
   },
-  plugins: [tsconfigPaths()],
+  plugins: [],
   esbuild: {
     logLevel: "error", // Reduce memory usage for esbuild transformations
   },

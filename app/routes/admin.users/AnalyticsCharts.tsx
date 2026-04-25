@@ -1,25 +1,25 @@
-import type { Analytics } from "./route";
-import type { User } from "prisma/generated";
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
-import { Card, CardContent } from "~/components/ui/Card";
-import { meanBy, sumBy } from "es-toolkit";
 import { Temporal } from "@js-temporal/polyfill";
-import { Suspense } from "react";
-import { Await } from "react-router";
+import { meanBy, sumBy } from "es-toolkit";
 import {
-  ChartTooltipContent,
-  ChartLegendContent,
-  ChartContainer,
-  ChartTooltip,
-  ChartLegend,
-} from "~/components/ui/Chart";
-import {
-  PersonStandingIcon,
+  BotIcon,
   BubblesIcon,
   ClockIcon,
-  BotIcon,
+  PersonStandingIcon,
 } from "lucide-react";
+import type { User } from "prisma/generated";
+import { Suspense } from "react";
+import { Await } from "react-router";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { Card, CardContent } from "~/components/ui/Card";
+import {
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "~/components/ui/Chart";
 import LoadingProgress from "~/components/ui/LoadingProgress";
+import type { Analytics } from "./route";
 
 const chartConfig = {
   visitors: {
@@ -228,7 +228,9 @@ function SpecificChart({
                 const to = Temporal.PlainDate.from(value)
                   .add({ days: isDaily ? 1 : 6 })
                   .subtract({ days: 1 });
-                return isDaily ? from.toString() : `${from} — ${to}`;
+                return isDaily
+                  ? from.toString()
+                  : `${from.toString()} — ${to.toString()}`;
               }}
               formatter={(value, name) => (
                 <div className="grid w-full grid-cols-2 gap-2">

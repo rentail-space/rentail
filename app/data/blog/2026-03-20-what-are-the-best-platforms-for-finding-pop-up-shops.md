@@ -44,12 +44,12 @@ The AI also interprets timing signals. "Need a space for the summer" gets matche
 
 ## Speed Comparison
 
-| Method | Time Required | Result Quality |
-| ------- | --------------- | ---------------- |
-| Calling property managers individually | 3-5 days | Hit or miss |
-| Commercial real estate broker | 1-2 weeks | Good but adds 10-15% cost |
-| Generic property search sites | 2-4 hours | Miss specialty lease opportunities |
-| Rentail.space conversational AI | 5-10 minutes | Prioritized matches with context |
+| Method                                 | Time Required | Result Quality                     |
+| -------------------------------------- | ------------- | ---------------------------------- |
+| Calling property managers individually | 3-5 days      | Hit or miss                        |
+| Commercial real estate broker          | 1-2 weeks     | Good but adds 10-15% cost          |
+| Generic property search sites          | 2-4 hours     | Miss specialty lease opportunities |
+| Rentail.space conversational AI        | 5-10 minutes  | Prioritized matches with context   |
 
 ## Direct Links Eliminate Friction
 

@@ -1,25 +1,25 @@
 {
-  "address": "422 West Avenue P",
-  "city": "Palmdale",
-  "country": "US",
-  "googlePlaceID": "places/ChIJlV3bVL9ZwoARaaWDHe3OXWw",
-  "name": "Palmdale Heating & Air Conditioning Promenade",
-  "state": "CA",
-  "latitude": 34.599739,
-  "longitude": -118.13739599999998,
-  "imageURLs": [
-    "/images/malls/ca-palmdale-heating-air-conditioning-promenade-1.jpg"
-  ],
-  "summary": "The Palmdale Heating & Air Conditioning Promenade is a well-rated community shopping center in Palmdale, California, offering convenient access to retail stores and services. With over 1,600 customer reviews and a 4.1-star rating, it serves as a popular destination for Antelope Valley residents.",
-  "openFrom": 930,
-  "openUntil": 2030,
-  "rating": 4.1,
-  "reviewCount": 1633,
-  "website": "https://www.visitpalmdale.org/listing/palmdale-promenade/231/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "The Palmdale Promenade primarily serves middle-income families and working professionals in the Antelope Valley region, with a demographic mix that includes young families with children, millennials, and established households. The trade area encompasses Palmdale's growing suburban population, which has seen significant residential development over the past two decades, attracting residents seeking affordable housing alternatives to Los Angeles County's more expensive markets. Typical visitors are value-conscious shoppers who prioritize convenience and accessibility, often combining shopping trips with errands and family activities. The center draws from a diverse community with a mix of Hispanic, African American, and Caucasian households, reflecting Palmdale's multicultural character.",
-  "description": "The Palmdale Heating & Air Conditioning Promenade is a vibrant shopping destination located in the heart of Palmdale, California, serving the Antelope Valley community. Situated at 422 West Avenue P, this open-air shopping center offers visitors a convenient and accessible retail experience with ample parking and modern amenities. The Promenade operates daily from 9:30 AM to 8:30 PM, providing flexible shopping hours for busy families and professionals alike. With a strong rating of 4.1 stars from over 1,600 reviews, the center has established itself as a trusted community gathering place. The center's strategic location in Palmdale makes it an ideal destination for residents seeking quality shopping, dining, and services in a comfortable outdoor setting.",
-  "tier": 2,
-  "spaces": [],
-  "ranking": 26.346486714840676
+	"address": "422 West Avenue P",
+	"city": "Palmdale",
+	"country": "US",
+	"googlePlaceID": "places/ChIJlV3bVL9ZwoARaaWDHe3OXWw",
+	"name": "Palmdale Heating & Air Conditioning Promenade",
+	"state": "CA",
+	"latitude": 34.599739,
+	"longitude": -118.13739599999998,
+	"imageURLs": [
+		"/images/malls/ca-palmdale-heating-air-conditioning-promenade-1.jpg"
+	],
+	"summary": "The Palmdale Heating & Air Conditioning Promenade is a well-rated community shopping center in Palmdale, California, offering convenient access to retail stores and services. With over 1,600 customer reviews and a 4.1-star rating, it serves as a popular destination for Antelope Valley residents.",
+	"openFrom": 930,
+	"openUntil": 2030,
+	"rating": 4.1,
+	"reviewCount": 1633,
+	"website": "https://www.visitpalmdale.org/listing/palmdale-promenade/231/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "The Palmdale Promenade primarily serves middle-income families and working professionals in the Antelope Valley region, with a demographic mix that includes young families with children, millennials, and established households. The trade area encompasses Palmdale's growing suburban population, which has seen significant residential development over the past two decades, attracting residents seeking affordable housing alternatives to Los Angeles County's more expensive markets. Typical visitors are value-conscious shoppers who prioritize convenience and accessibility, often combining shopping trips with errands and family activities. The center draws from a diverse community with a mix of Hispanic, African American, and Caucasian households, reflecting Palmdale's multicultural character.",
+	"description": "The Palmdale Heating & Air Conditioning Promenade is a vibrant shopping destination located in the heart of Palmdale, California, serving the Antelope Valley community. Situated at 422 West Avenue P, this open-air shopping center offers visitors a convenient and accessible retail experience with ample parking and modern amenities. The Promenade operates daily from 9:30 AM to 8:30 PM, providing flexible shopping hours for busy families and professionals alike. With a strong rating of 4.1 stars from over 1,600 reviews, the center has established itself as a trusted community gathering place. The center's strategic location in Palmdale makes it an ideal destination for residents seeking quality shopping, dining, and services in a comfortable outdoor setting.",
+	"tier": 2,
+	"spaces": [],
+	"ranking": 26.346486714840676
 }

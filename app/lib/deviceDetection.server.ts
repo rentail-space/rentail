@@ -5,7 +5,7 @@
  * Viewport size can be detected via Client Hints or cookies set by client-side code.
  */
 
-export interface DeviceInfo {
+interface DeviceInfo {
   /** Whether the device is mobile (from Client Hints or User-Agent) */
   isMobile: boolean;
   /** Viewport width in pixels, if available */

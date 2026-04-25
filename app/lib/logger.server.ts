@@ -1,9 +1,9 @@
+import type { ILogLevel } from "@logtail/types";
 import { createWriteStream } from "node:fs";
-import { resolve } from "node:path";
 import { format, styleText } from "node:util";
 import { Logtail } from "@logtail/node";
+import { resolve } from "node:path";
 import envVars from "~/lib/env";
-import type { ILogLevel } from "@logtail/types";
 
 const logtail = envVars.LOGTAIL_TOKEN
   ? new Logtail(envVars.LOGTAIL_TOKEN, {
@@ -51,7 +51,7 @@ for (const level of [
 
 process.on("SIGTERM", () => {
   // Ensure that all logs are sent to Logtail
-  if (logtail) logtail.flush();
+  if (logtail) void logtail.flush();
 });
 
 export default logtail;

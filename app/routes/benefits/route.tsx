@@ -25,7 +25,7 @@ export default function Benefits() {
     >
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data
+        // oxlint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaData()),
         }}

@@ -132,7 +132,7 @@ export function findMockResponse(body: object): ReadableStream<Uint8Array> {
 /**
  * Create a streaming response that mimics Anthropic's API format
  */
-export default function createStreamingResponse(
+function createStreamingResponse(
   mockResponse: string,
   toolCalls: ToolCall[],
 ): ReadableStream<Uint8Array> {
@@ -215,7 +215,7 @@ export default function createStreamingResponse(
 
         // Schedule next chunk using Promise microtask queue instead of setTimeout
         // This ensures chunks are sent reliably in test environments
-        Promise.resolve().then(sendNextChunk);
+        void Promise.resolve().then(sendNextChunk);
       }
 
       sendNextChunk();

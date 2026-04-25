@@ -27,16 +27,21 @@ import type { Route } from "./+types/auth";
 
 export const handle = { headerLinks: [] };
 
+function getStringFormValue(form: FormData, name: string) {
+  const value = form.get(name);
+  return typeof value === "string" ? value : undefined;
+}
+
 export async function action({ request }: Route.ActionArgs): Promise<Response> {
   const form = await request.formData();
   try {
-    const email = form.get("email")?.toString().trim().toLowerCase();
-    const password = form.get("password")?.toString().trim();
+    const email = getStringFormValue(form, "email")?.trim().toLowerCase();
+    const password = getStringFormValue(form, "password")?.trim();
     invariant(email, "Email is required");
     invariant(password, "Password is required");
 
     if (form.has("name")) {
-      const name = form.get("name")?.toString().trim() ?? "Anonymous";
+      const name = getStringFormValue(form, "name")?.trim() ?? "Anonymous";
       const returnedHeaders = await signUpEmail({
         email,
         name,

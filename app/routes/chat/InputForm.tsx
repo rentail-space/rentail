@@ -1,23 +1,19 @@
-import { Send, Square } from "lucide-react";
+import { Send } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import { Button } from "~/components/ui/Button";
 import { trackEvent } from "~/lib/useAnalytics";
 
 export default function InputForm({
-  isResponding,
   isSubmitting,
   query,
   sendMessage,
   setQuery,
-  stopChat,
 }: {
-  isResponding: boolean;
   isSubmitting: boolean;
   query: string;
   sendMessage: (message: string) => void;
   setQuery: (input: string | null) => void;
-  stopChat: () => void;
 }) {
   const { scrollToBottom } = useStickToBottomContext();
 
@@ -29,7 +25,7 @@ export default function InputForm({
           event.preventDefault();
           sendMessage(query.trim());
           setQuery(null);
-          scrollToBottom();
+          void scrollToBottom();
           trackEvent("send_message", { category: "chat" });
         }}
       >
@@ -37,7 +33,6 @@ export default function InputForm({
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
-          // biome-ignore lint/a11y/noAutofocus: we want to autofocus the input
           autoFocus={true}
           className={twMerge(
             "w-full py-4 pr-24 pl-5",
@@ -55,9 +50,6 @@ export default function InputForm({
         />
 
         <div className="absolute top-1/2 right-3 flex -translate-y-1/2 transform gap-2">
-          {false && (
-            <StopButton isResponding={isResponding} stopChat={stopChat} />
-          )}
           <SubmitButton isSubmitting={isSubmitting} />
         </div>
       </form>
@@ -80,27 +72,6 @@ function SubmitButton({ isSubmitting }: { isSubmitting: boolean }) {
           isSubmitting && "animate-spin",
         )}
       />
-    </Button>
-  );
-}
-
-function StopButton({
-  isResponding,
-  stopChat,
-}: {
-  isResponding: boolean;
-  stopChat: () => void;
-}) {
-  if (!isResponding) return null;
-
-  return (
-    <Button
-      aria-label="Stop"
-      className="h-12 w-12"
-      onClick={stopChat}
-      type="button"
-    >
-      <Square className="h-5 w-5 text-black" />
     </Button>
   );
 }

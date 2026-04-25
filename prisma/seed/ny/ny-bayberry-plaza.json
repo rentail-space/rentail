@@ -1,38 +1,36 @@
 {
-  "address": "7608 Oswego Road",
-  "city": "Liverpool",
-  "country": "US",
-  "googlePlaceID": "places/ChIJe565PK3v2YkRcZZazXF0p2Q",
-  "name": "Bayberry Plaza",
-  "state": "NY",
-  "latitude": 43.1389493,
-  "longitude": -76.2257781,
-  "phone": "++1 315-652-1463",
-  "imageURLs": [
-    "/images/malls/ny-bayberry-plaza-1.jpg"
-  ],
-  "summary": "Bayberry Plaza is a neighborhood strip center in Liverpool, New York, featuring 23 diverse tenants including Kinney Drugs, Bank of America, USPS, and multiple dining options. The plaza serves as a convenient one-stop destination for essential services, healthcare, dining, and everyday shopping needs for the Syracuse northern suburbs community.",
-  "openFrom": 600,
-  "openUntil": 2300,
-  "rating": 4.3,
-  "reviewCount": 707,
-  "website": "http://www.bayberryplaza.com/?utm_source=rentail.space",
-  "centerType": "StripCenter",
-  "demographics": "Bayberry Plaza serves the Liverpool, New York suburban community, attracting middle-income families and working professionals from the surrounding residential neighborhoods. The trade area draws from Syracuse's northern suburbs, with shoppers primarily seeking convenient access to essential services, healthcare, dining, and everyday retail needs. The tenant mix of pharmacies, postal services, dental care, and casual dining reflects a customer base focused on practical, routine shopping trips rather than destination retail experiences.",
-  "description": "Bayberry Plaza is a well-established neighborhood shopping center located at 7608 Oswego Road in Liverpool, New York, serving the greater Syracuse area since its development. This convenient strip center features over 20 diverse tenants providing essential services and amenities to the local community. Anchor tenants include Kinney Drugs pharmacy, Bank of America, and the United States Post Office, complemented by popular dining options like Antonio's Pizza, Pasta & Wings, Twin Trees Pizza, Bagelicious, and China Wong. The plaza also offers comprehensive personal services including Bayberry Dental, First Lady's Nail & Spa, SPAmazing, and Bayberry Hairstylists, along with specialty retailers like Bayberry Seafood, Tile & Carpet Town, and Metro Mattress. Additional outparcels feature Goodyear Automotive service center, providing one-stop shopping convenience for residents. The center maintains extended operating hours from 6:00 AM to 11:00 PM and hosts a popular Farmer's Market, creating a community gathering space that has earned a strong 4.3-star rating from over 700 customer reviews.",
-  "numberOfStores": 23,
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "10",
-      "type": "Inline",
-      "available": true
-    },
-    {
-      "number": "19",
-      "type": "Inline",
-      "available": true
-    }
-  ],
-  "ranking": 24.505006958653336
+	"address": "7608 Oswego Road",
+	"city": "Liverpool",
+	"country": "US",
+	"googlePlaceID": "places/ChIJe565PK3v2YkRcZZazXF0p2Q",
+	"name": "Bayberry Plaza",
+	"state": "NY",
+	"latitude": 43.1389493,
+	"longitude": -76.2257781,
+	"phone": "++1 315-652-1463",
+	"imageURLs": ["/images/malls/ny-bayberry-plaza-1.jpg"],
+	"summary": "Bayberry Plaza is a neighborhood strip center in Liverpool, New York, featuring 23 diverse tenants including Kinney Drugs, Bank of America, USPS, and multiple dining options. The plaza serves as a convenient one-stop destination for essential services, healthcare, dining, and everyday shopping needs for the Syracuse northern suburbs community.",
+	"openFrom": 600,
+	"openUntil": 2300,
+	"rating": 4.3,
+	"reviewCount": 707,
+	"website": "http://www.bayberryplaza.com/?utm_source=rentail.space",
+	"centerType": "StripCenter",
+	"demographics": "Bayberry Plaza serves the Liverpool, New York suburban community, attracting middle-income families and working professionals from the surrounding residential neighborhoods. The trade area draws from Syracuse's northern suburbs, with shoppers primarily seeking convenient access to essential services, healthcare, dining, and everyday retail needs. The tenant mix of pharmacies, postal services, dental care, and casual dining reflects a customer base focused on practical, routine shopping trips rather than destination retail experiences.",
+	"description": "Bayberry Plaza is a well-established neighborhood shopping center located at 7608 Oswego Road in Liverpool, New York, serving the greater Syracuse area since its development. This convenient strip center features over 20 diverse tenants providing essential services and amenities to the local community. Anchor tenants include Kinney Drugs pharmacy, Bank of America, and the United States Post Office, complemented by popular dining options like Antonio's Pizza, Pasta & Wings, Twin Trees Pizza, Bagelicious, and China Wong. The plaza also offers comprehensive personal services including Bayberry Dental, First Lady's Nail & Spa, SPAmazing, and Bayberry Hairstylists, along with specialty retailers like Bayberry Seafood, Tile & Carpet Town, and Metro Mattress. Additional outparcels feature Goodyear Automotive service center, providing one-stop shopping convenience for residents. The center maintains extended operating hours from 6:00 AM to 11:00 PM and hosts a popular Farmer's Market, creating a community gathering space that has earned a strong 4.3-star rating from over 700 customer reviews.",
+	"numberOfStores": 23,
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "10",
+			"type": "Inline",
+			"available": true
+		},
+		{
+			"number": "19",
+			"type": "Inline",
+			"available": true
+		}
+	],
+	"ranking": 24.505006958653336
 }

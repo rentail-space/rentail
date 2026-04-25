@@ -32,7 +32,7 @@ describe("Blog Post Rendering", () => {
   it("should render blog post image with proper attributes", async () => {
     // Check if hero image is rendered
     const heroImage = page.locator("figure img");
-    expect(heroImage).toBeVisible();
+    await expect(heroImage).toBeVisible();
 
     // Check image styling classes
     const imageClasses = await heroImage.getAttribute("class");

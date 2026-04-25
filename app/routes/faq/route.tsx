@@ -23,10 +23,7 @@ export default function FAQ() {
     >
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemaData()),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData()) }}
       />
 
       <section className="mx-auto max-w-4xl bg-[hsl(60,100%,99%)] py-20 text-center">

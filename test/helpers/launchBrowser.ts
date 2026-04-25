@@ -48,7 +48,7 @@ export async function goto(path: string, headers?: HeadersInit): Promise<Page> {
  *
  * @returns The browser context.
  */
-export async function newContext(): Promise<BrowserContext> {
+async function newContext(): Promise<BrowserContext> {
   if (context) return context;
 
   const headless = process.env.CI ? true : !logger.enabled;
@@ -61,8 +61,8 @@ export async function newContext(): Promise<BrowserContext> {
     baseURL: `http://localhost:${port}`,
     viewport: { width: 1024, height: 780 },
   });
-  context.setGeolocation({ latitude: 33.74901, longitude: -118.1956 });
-  context.route("**", blockOutgoingRequests);
+  void context.setGeolocation({ latitude: 33.74901, longitude: -118.1956 });
+  void context.route("**", blockOutgoingRequests);
   context
     .on("console", (msg) => {
       if (msg.text().includes("Download the React DevTools")) return;
@@ -70,7 +70,7 @@ export async function newContext(): Promise<BrowserContext> {
       else logger("%s: %s", msg.type(), msg.text());
     })
     .on("weberror", (error) => {
-      logger("error: %s", error.error);
+      logger("error: %s", error.error());
     });
 
   // Set navigation timeout to 5s less than hook timeout for better error messages
@@ -126,7 +126,7 @@ async function blockOutgoingRequests(route: Route): Promise<void> {
 }
 
 function cleanup() {
-  context?.browser()?.close();
+  void context?.browser()?.close();
 }
 
 process.on("exit", cleanup);

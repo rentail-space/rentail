@@ -1,64 +1,62 @@
 {
-  "address": "18771 Farm to Market Road 2252",
-  "city": "San Antonio",
-  "country": "US",
-  "googlePlaceID": "places/ChIJe2e5R_uNXIYRw0q3-JpFgyE",
-  "name": "Bracken Village",
-  "state": "TX",
-  "latitude": 29.6152327,
-  "longitude": -98.31684,
-  "phone": "++1 210-651-6935",
-  "imageURLs": [
-    "/images/malls/tx-bracken-village-1.jpg"
-  ],
-  "summary": "Bracken Village is a charming country shopping village in northeast San Antonio featuring 18 specialty businesses focused on wellness, beauty, fitness, and lifestyle services. Located near the Bracken community along FM 2252, this unique center offers a personalized shopping experience in individual buildings with a distinctive village atmosphere.",
-  "openFrom": 1000,
-  "openUntil": 1800,
-  "rating": 4.4,
-  "reviewCount": 179,
-  "website": "http://brackenvillagesa.com/?utm_source=rentail.space",
-  "centerType": "StripCenter",
-  "demographics": "Bracken Village serves the growing suburban communities north of San Antonio, particularly families and residents in the Bracken area near Loop 1604 and FM 3009. The trade area attracts middle to upper-middle income households seeking personalized services and boutique shopping experiences in a country setting. Primary visitors are women aged 25-55 who appreciate the center's focus on wellness, beauty, fitness, and specialty retail offerings. The location draws from nearby residential developments in northeast Bexar County, where household incomes tend to be above the San Antonio metro average.",
-  "description": "Bracken Village is a charming country shopping village located at 18771 Nacogdoches Road (FM 2252) in San Antonio, Texas, positioned 2.5 miles north of Loop 1604 and 1.6 miles south of FM 3009 near the community of Bracken. This unique retail destination offers a lovely village atmosphere with individual buildings housing a carefully curated mix of specialty businesses focused on wellness, beauty, and lifestyle services. The center features an impressive array of tenants including Blue Monarch Massage, Complexions Skincare II and Body, The Lash Barn, Jazzercise Bracken Village, and multiple photography studios like Ever After Photography and Love Preserved Photography. Additional offerings include Golden Hour Tan, The Beauty Dwelling & Slashernailz, and specialty retail shops such as Firelight Finds, Country Gatherings, and Earth Mother Treasures. With its country village aesthetic and focus on personalized services, Bracken Village provides a distinctive shopping experience that sets it apart from traditional strip centers in the San Antonio market.",
-  "numberOfStores": 18,
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "10",
-      "type": "Other",
-      "size": 352,
-      "available": true
-    },
-    {
-      "number": "16",
-      "type": "Other",
-      "size": 168,
-      "available": true
-    },
-    {
-      "number": "17",
-      "type": "Other",
-      "size": 384,
-      "available": true
-    },
-    {
-      "number": "26",
-      "type": "Other",
-      "size": 2775,
-      "available": true
-    },
-    {
-      "number": "6",
-      "type": "Other",
-      "size": 998,
-      "available": true
-    },
-    {
-      "number": "7",
-      "type": "Other",
-      "size": 496,
-      "available": true
-    }
-  ],
-  "ranking": 19.82510667262306
+	"address": "18771 Farm to Market Road 2252",
+	"city": "San Antonio",
+	"country": "US",
+	"googlePlaceID": "places/ChIJe2e5R_uNXIYRw0q3-JpFgyE",
+	"name": "Bracken Village",
+	"state": "TX",
+	"latitude": 29.6152327,
+	"longitude": -98.31684,
+	"phone": "++1 210-651-6935",
+	"imageURLs": ["/images/malls/tx-bracken-village-1.jpg"],
+	"summary": "Bracken Village is a charming country shopping village in northeast San Antonio featuring 18 specialty businesses focused on wellness, beauty, fitness, and lifestyle services. Located near the Bracken community along FM 2252, this unique center offers a personalized shopping experience in individual buildings with a distinctive village atmosphere.",
+	"openFrom": 1000,
+	"openUntil": 1800,
+	"rating": 4.4,
+	"reviewCount": 179,
+	"website": "http://brackenvillagesa.com/?utm_source=rentail.space",
+	"centerType": "StripCenter",
+	"demographics": "Bracken Village serves the growing suburban communities north of San Antonio, particularly families and residents in the Bracken area near Loop 1604 and FM 3009. The trade area attracts middle to upper-middle income households seeking personalized services and boutique shopping experiences in a country setting. Primary visitors are women aged 25-55 who appreciate the center's focus on wellness, beauty, fitness, and specialty retail offerings. The location draws from nearby residential developments in northeast Bexar County, where household incomes tend to be above the San Antonio metro average.",
+	"description": "Bracken Village is a charming country shopping village located at 18771 Nacogdoches Road (FM 2252) in San Antonio, Texas, positioned 2.5 miles north of Loop 1604 and 1.6 miles south of FM 3009 near the community of Bracken. This unique retail destination offers a lovely village atmosphere with individual buildings housing a carefully curated mix of specialty businesses focused on wellness, beauty, and lifestyle services. The center features an impressive array of tenants including Blue Monarch Massage, Complexions Skincare II and Body, The Lash Barn, Jazzercise Bracken Village, and multiple photography studios like Ever After Photography and Love Preserved Photography. Additional offerings include Golden Hour Tan, The Beauty Dwelling & Slashernailz, and specialty retail shops such as Firelight Finds, Country Gatherings, and Earth Mother Treasures. With its country village aesthetic and focus on personalized services, Bracken Village provides a distinctive shopping experience that sets it apart from traditional strip centers in the San Antonio market.",
+	"numberOfStores": 18,
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "10",
+			"type": "Other",
+			"size": 352,
+			"available": true
+		},
+		{
+			"number": "16",
+			"type": "Other",
+			"size": 168,
+			"available": true
+		},
+		{
+			"number": "17",
+			"type": "Other",
+			"size": 384,
+			"available": true
+		},
+		{
+			"number": "26",
+			"type": "Other",
+			"size": 2775,
+			"available": true
+		},
+		{
+			"number": "6",
+			"type": "Other",
+			"size": 998,
+			"available": true
+		},
+		{
+			"number": "7",
+			"type": "Other",
+			"size": 496,
+			"available": true
+		}
+	],
+	"ranking": 19.82510667262306
 }

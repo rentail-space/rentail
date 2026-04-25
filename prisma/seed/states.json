@@ -1,252 +1,252 @@
 [
-  {
-    "name": "Alabama",
-    "abbreviation": "AL",
-    "lede": "Alabama is a state in the United States. It is the 2nd most populous state in the United States."
-  },
-  {
-    "name": "Alaska",
-    "abbreviation": "AK",
-    "lede": "Alaska is a state in the United States. It is the 49th most populous state in the United States."
-  },
-  {
-    "name": "Arizona",
-    "abbreviation": "AZ",
-    "lede": "Arizona's economy runs on two engines: tourism and migration. 45.7 million visitors spent $29.7 billion here in 2024—$81 million per day—while the population grows at the nation's 4th-fastest rate. People are fleeing California for lower taxes, 300 days of sunshine, and housing that costs 40% less.\n\nPhoenix tech corridors mix with Scottsdale luxury resorts and Grand Canyon gateway towns. International visitors jumped 20%, spending up 30%. The state doesn't have seasonal dead zones—desert resorts, wine country, mountain retreats, mining heritage towns all pull traffic year-round. Retail spaces here tap into explosive growth from both tourists and new residents who bring California money and Texas optimism."
-  },
-  {
-    "name": "Arkansas",
-    "abbreviation": "AR",
-    "lede": "Arkansas is a state in the United States. It is the 5th most populous state in the United States."
-  },
-  {
-    "name": "California",
-    "abbreviation": "CA",
-    "lede": "California runs the fourth-largest economy on Earth. $4.1 trillion in GDP. 39.5 million residents. 268 million visitors spent $157 billion in 2024. Median household income: $100,149.\n\nTech wealth from Silicon Valley. Entertainment dollars from Los Angeles. 58 Fortune 500 headquarters. Shopping centers here don't just serve neighborhoods—they're destinations for global consumers who come for California's lifestyle, culture, and trends. Retail spaces here sit at the center of American consumer culture. For better or worse."
-  },
-  {
-    "name": "Colorado",
-    "abbreviation": "CO",
-    "lede": "Colorado mixes outdoor lifestyle affluence with urban tech money. 95.4 million visitors spent $28.5 billion in 2024. Tourist demographics skew upscale—23% earn $100,000-$150,000 annually, up five points from 2023.\n\nAspen, Vail, and Breckenridge ski resort spending meets Denver's tech prosperity. Median household income: $92,470. Aerospace giants, thriving tech corridors, outdoor recreation companies—all attracting affluent professionals who actually want to live here. Four-season tourism means no dead periods. Hiking in summer, skiing in winter. Retail spaces tap into educated, high-income residents who demand premium experiences in America's adventure capital."
-  },
-  {
-    "name": "Connecticut",
-    "abbreviation": "CT",
-    "lede": "Connecticut punches well above its weight — 1,540 shopping centers with a 95.7% occupancy rate and $30,300 in retail spending per capita, one of the highest figures in the entire Northeast. Tucked between New York City and Boston, CT shoppers are affluent, consistent, and hungry for discovery — with mall foot traffic up nearly 5% year-over-year and still climbing.\n\nSpecialty leasing in Connecticut means putting your brand in front of some of the most high-spending consumers in the country, at a fraction of traditional retail costs. 71% of in-store shoppers spend more than $50 per visit GroundTruth — and in a state where disposable income runs high, that number skews even higher. Your next loyal customer is already walking the mall. Are you there to meet them?"
-  },
-  {
-    "name": "Delaware",
-    "abbreviation": "DE",
-    "lede": "Delaware is a state in the United States. It is the 10th most populous state in the United States."
-  },
-  {
-    "name": "Florida",
-    "abbreviation": "FL",
-    "lede": "Florida's population grows 2% annually—fastest in the nation. Added 467,347 residents in 2024 alone. Zero state income tax. That's the pitch, and it works.\n\n143 million visitors spent $134.9 billion in 2024. Orlando pumps $164 million daily through its tourism machine. Miami, Tampa Bay, the whole state runs on migration and vacation dollars. 3 million new businesses since 2019. GDP growth doubled the national rate over five years. Retail spaces here capture the perfect storm: fastest population growth, zero income tax wealth accumulation, and relentless tourist spending. This is where America moves, invests, and spends."
-  },
-  {
-    "name": "Georgia",
-    "abbreviation": "GA",
-    "lede": "Georgia's 4,701 shopping centers run at 96.5% occupancy, with $205.7 billion in total retail sales in 2024 — making it one of the Southeast's biggest retail engines. Atlanta alone is a magnet for millions of shoppers, and with mall foot traffic up 6% year-over-year, the momentum isn't slowing down.\n\nWith a fast-growing population and a consumer base that skews young and brand-hungry, Georgia is where emerging brands break through. Get your product in front of those shoppers before someone else does."
-  },
-  {
-    "name": "Hawaii",
-    "abbreviation": "HI",
-    "lede": "Hawaii is a state in the United States. It is the 13th most populous state in the United States."
-  },
-  {
-    "name": "Idaho",
-    "abbreviation": "ID",
-    "lede": "Idaho is a state in the United States. It is the 14th most populous state in the United States."
-  },
-  {
-    "name": "Illinois",
-    "abbreviation": "IL",
-    "lede": "Illinois runs on Chicago. $1.15 trillion economy. 24 of the nation's largest financial firms managing $764 billion. World's largest futures exchange. Fortune 500 headquarters: McDonald's, United Airlines, Abbott, Walgreens. O'Hare—America's second-busiest airport.\n\n113 million visitors spent $48.5 billion in 2024. Chicago overnight visitors up 7.7%. The \"Middle of Everything\" campaign works because it's true—central location gives access to the entire Midwest manufacturing belt and 280+ million consumers. Route 66's 2026 centennial brings even more tourist momentum. Retail spaces here tap Fortune 500 corporate wealth and constant visitor flow. This is where America shops, works, and connects."
-  },
-  {
-    "name": "Indiana",
-    "abbreviation": "IN",
-    "lede": "Indiana is a state in the United States. It is the 16th most populous state in the United States."
-  },
-  {
-    "name": "Iowa",
-    "abbreviation": "IA",
-    "lede": "Iowa is a state in the United States. It is the 17th most populous state in the United States."
-  },
-  {
-    "name": "Kansas",
-    "abbreviation": "KS",
-    "lede": "Kansas malls have a 3-year foot traffic CAGR of 5.77% — one of the strongest growth rates in the country — with 776 shopping centers at 96.6% occupancy and $27,954 in retail spending per capita. This is a state quietly on the rise, where retail demand is outpacing supply.\n\nKansas consumers are nearly 20% less likely to shop online than the average American — meaning in-store is where the sale actually happens. Specialty leasing here means reaching a captive, high-converting audience that's still choosing the mall over the algorithm."
-  },
-  {
-    "name": "Kentucky",
-    "abbreviation": "KY",
-    "lede": "Kentucky is a state in the United States. It is the 19th most populous state in the United States."
-  },
-  {
-    "name": "Louisiana",
-    "abbreviation": "LA",
-    "lede": "Louisiana's 1,362 shopping centers hold a 97.4% occupancy rate, with $27,177 in retail spending per capita — and mall foot traffic surged 6.87% year-over-year. Louisiana shoppers are loyal, local, and love to browse in person.\n\nWith retail sales representing over 40% of the state's GDP, physical retail isn't just popular in Louisiana — it's foundational. If you want a state where your pop-up becomes a permanent fixture, this is it."
-  },
-  {
-    "name": "Maine",
-    "abbreviation": "ME",
-    "lede": "Maine is a state in the United States. It is the 21st most populous state in the United States."
-  },
-  {
-    "name": "Maryland",
-    "abbreviation": "MD",
-    "lede": "Maryland's 1,901 shopping centers are seeing consistent growth, with mall foot traffic up 6.12% year-over-year and a 3-year CAGR of 3.07%. Sitting at the doorstep of the DC metro, Maryland shoppers are among the most educated and highest-earning in the country.\n\nWith $22,701 in per-capita mall spending and a densely packed suburban corridor stretching from Baltimore to the Beltway, Maryland is fertile ground for brands looking to establish credibility in a high-income, high-traffic"
-  },
-  {
-    "name": "Massachusetts",
-    "abbreviation": "MA",
-    "lede": "Massachusetts runs on education and money. Nation's second-highest GDP per capita: $88,790. Median household income: $101,341. Harvard, MIT, dominant biotech corridors, financial services—creating the most educated, highest-earning consumer base in America.\n\n52.6 million visitors spent $24.2 billion in 2024. International tourism spending surged 45%. Revolutionary War heritage, Cape Cod beaches, Boston's cultural institutions all pull traffic. America's 250th anniversary celebrations through 2026 and FIFA World Cup matches bring unprecedented tourism momentum. Knowledge economy means recession-resistant spending. Retail spaces tap both the wealthiest per-capita population and explosive international visitor growth."
-  },
-  {
-    "name": "Michigan",
-    "abbreviation": "MI",
-    "lede": "Michigan runs on cars and coastline. Automotive manufacturing anchors steady, high-wage consumer spending. 131.2 million visitors spent $30.7 billion in 2024. 3,200 miles of Great Lakes coastline—more freshwater shoreline than any other state.\n\nDetroit's resurgence adds urban retail momentum. Resort towns from Traverse City to Mackinac Island pull summer traffic. Pure Michigan's marketing campaign works—influences 789,000 leisure trips annually and drives year-round foot traffic. Four-season appeal means no dead periods. Retail spaces tap both manufacturing wealth and explosive tourism growth. Visitors stay longer and spend more than national averages."
-  },
-  {
-    "name": "Minnesota",
-    "abbreviation": "MN",
-    "lede": "Minnesota has Mall of America. That tells you everything. Nation's largest retail and entertainment complex drew 81.6 million visitors who spent $14.7 billion in 2024.\n\nMedian household income: $87,556—16% above national average. 15 Fortune 500 headquarters: Target, UnitedHealth Group. Medical technology leadership floods shopping centers with high-income professionals. Twin Cities concentration creates purchasing power density. Four-season appeal—summer lake culture, winter sports. Retail spaces capture both affluent local consumers and massive tourist traffic. Spillover from Mall of America elevates every location statewide."
-  },
-  {
-    "name": "Mississippi",
-    "abbreviation": "MS",
-    "lede": "Mississippi is a state in the United States. It is the 26th most populous state in the United States."
-  },
-  {
-    "name": "Missouri",
-    "abbreviation": "MO",
-    "lede": "Missouri is a state in the United States. It is the 27th most populous state in the United States."
-  },
-  {
-    "name": "Montana",
-    "abbreviation": "MT",
-    "lede": "Montana is a state in the United States. It is the 28th most populous state in the United States."
-  },
-  {
-    "name": "Nebraska",
-    "abbreviation": "NE",
-    "lede": "Nebraska is a state in the United States. It is the 29th most populous state in the United States."
-  },
-  {
-    "name": "Nevada",
-    "abbreviation": "NV",
-    "lede": "Nevada is Las Vegas. 41.7 million visitors spent $1,322 per person in 2024—52.6% above pre-pandemic levels. Zero state income tax drives business migration from California.\n\n6 million convention attendees spend $1,681 per trip—33% more than leisure visitors. Shopping expenditure surged 12.8% to $281 per visitor, highest increase across all spending categories. Las Vegas Strip gaming revenue: $9.1 billion in 2024. Super Bowl LVIII, Las Vegas Grand Prix—major events flood the state with affluent consumers year-round. Tourism represents 37% of state GDP. Retail spaces capture the nation's most concentrated high-spending tourist traffic."
-  },
-  {
-    "name": "New Hampshire",
-    "abbreviation": "NH",
-    "lede": "New Hampshire is a state in the United States. It is the 31st most populous state in the United States."
-  },
-  {
-    "name": "New Jersey",
-    "abbreviation": "NJ",
-    "lede": "New Jersey is one of the most densely populated states in America, with 2,650 shopping centers running at a 95.9% occupancy rate and generating $26,241 in retail spending per capita annually. With foot traffic up 7% year-over-year, NJ shoppers aren't just browsing — they're buying.\n\nWhether you're a pop-up brand or a growing micro-merchant, New Jersey's mall ecosystem is one of the most active in the country — and specialty leasing spaces are your lowest-risk entry point into it. Nationally, 71% of in-store shoppers spend more than $50 per visit GroundTruth, compared to just 54% online. Your next customer is already at the mall — are you?"
-  },
-  {
-    "name": "New Mexico",
-    "abbreviation": "NM",
-    "lede": "New Mexico is a state in the United States. It is the 33rd most populous state in the United States."
-  },
-  {
-    "name": "New York",
-    "abbreviation": "NY",
-    "lede": "New York: third-largest economy in America. $1.6 trillion in GDP. 19.5 million residents. 291 million annual tourists. Median household income: $81,386—40% above national average.\n\nManhattan's 8.3 million residents create constant foot traffic. Cultural diversity drives demand for specialized retail concepts. America's financial and cultural capital means your brand gains visibility beyond your physical location. In New York, retail space isn't just real estate—it's a launchpad."
-  },
-  {
-    "name": "North Carolina",
-    "abbreviation": "NC",
-    "lede": "North Carolina is a state in the United States. It is the 35th most populous state in the United States."
-  },
-  {
-    "name": "North Dakota",
-    "abbreviation": "ND",
-    "lede": "North Dakota is a state in the United States. It is the 36th most populous state in the United States."
-  },
-  {
-    "name": "Ohio",
-    "abbreviation": "OH",
-    "lede": "Ohio sits at the crossroads of the Midwest. Interstate 70, 71, 75, and 80 converge here. 242 million visitors spent $57 billion in 2024. Manufacturing dominance (third-largest in U.S.) creates steady consumer spending.\n\n93% of Ohio tourists plan to return within 12 months—predictable repeat traffic. 48 million overnight visitors extended stays in 2024. Columbus, Cleveland, Cincinnati anchor thriving metro markets. Half the U.S. population lives within a day's drive. Retail spaces tap stable local demand and constant visitor flow from America's most tourism-dense states."
-  },
-  {
-    "name": "Oklahoma",
-    "abbreviation": "OK",
-    "lede": "Oklahoma is a state in the United States. It is the 38th most populous state in the United States."
-  },
-  {
-    "name": "Oregon",
-    "abbreviation": "OR",
-    "lede": "Oregon has zero state sales tax. One of only five states where every retail dollar goes further. Drives cross-border shopping pilgrimages from neighboring states.\n\nMedian household income: $80,426. Tech wealth from Nike, Intel, Columbia Sportswear headquarters fuels premium spending across Portland, Eugene, Bend. Tourism injected $14.3 billion in 2024. Coastal destinations, mountain recreation, urban shopping districts—constant flow. Retail spaces capture both affluent locals benefiting from tax-free purchases and tourists seeking natural beauty with shopping value."
-  },
-  {
-    "name": "Pennsylvania",
-    "abbreviation": "PA",
-    "lede": "Pennsylvania sits at America's historic and geographic heart. 202 million visitors spent $50 billion in 2024. 72 million people live within a four-hour drive—unmatched access to the Northeast corridor's massive consumer base.\n\n2026 transforms Pennsylvania into America's spotlight. Nation's 250th birthday, FIFA World Cup matches, NCAA Final Four, MLB All-Star Game, NFL Draft—all converging here. Philadelphia, Pittsburgh, iconic destinations statewide pull constant tourist traffic. Median household income: $76,081. Retail spaces capture both stable local markets and unprecedented visitor surges heading to the birthplace of American democracy."
-  },
-  {
-    "name": "Rhode Island",
-    "abbreviation": "RI",
-    "lede": "Don't let the size fool you — Rhode Island packs a serious retail punch. 451 shopping centers run at 96.7% occupancy, with $29,016 in mall spending per capita, and foot traffic has surged an extraordinary 20% year-over-year — among the highest growth rates in the entire country.\n\nWedged between Boston and Providence, with a dense, high-income population and a median household income of $86,372, Rhode Island shoppers are active, local, and ready to spend. Specialty leasing here means maximum exposure in minimum square footage — the smartest way to plant your flag in New England."
-  },
-  {
-    "name": "South Carolina",
-    "abbreviation": "SC",
-    "lede": "South Carolina is a state in the United States. It is the 42nd most populous state in the United States."
-  },
-  {
-    "name": "South Dakota",
-    "abbreviation": "SD",
-    "lede": "South Dakota is a state in the United States. It is the 43rd most populous state in the United States."
-  },
-  {
-    "name": "Tennessee",
-    "abbreviation": "TN",
-    "lede": "Tennessee is a state in the United States. It is the 44th most populous state in the United States."
-  },
-  {
-    "name": "Texas",
-    "abbreviation": "TX",
-    "lede": "Texas dominates American economic expansion. $2.7 trillion in GDP. 31.3 million residents. Fastest-growing major state economy. Zero state income tax puts more money in consumers' pockets.\n\n62 million visitors spent $97.5 billion in 2024. 53 Fortune 500 headquarters—more than any state. Led nation in job creation for 13th consecutive year. 563,000 new residents arrived last year seeking opportunity and lower costs. Shopping centers capture migration momentum. Retail spaces position you at the epicenter of America's economic future. Growth isn't a projection—it's already happening."
-  },
-  {
-    "name": "Utah",
-    "abbreviation": "UT",
-    "lede": "Utah is a state in the United States. It is the 46th most populous state in the United States."
-  },
-  {
-    "name": "Vermont",
-    "abbreviation": "VT",
-    "lede": "Vermont is a state in the United States. It is the 47th most populous state in the United States."
-  },
-  {
-    "name": "Virginia",
-    "abbreviation": "VA",
-    "lede": "Virginia is a state in the United States. It is the 48th most populous state in the United States."
-  },
-  {
-    "name": "Washington",
-    "abbreviation": "WA",
-    "lede": "Washington runs on tech money. Nation's third-highest per capita output: $88,215—surpassing even California. Median household income: $94,952. Microsoft, Amazon, Boeing anchor an innovation economy that concentrates wealth across Seattle and beyond.\n\n111 million visitors spent $25 billion in 2024. Zero state income tax keeps more money in consumers' wallets. Shopping centers capture spending from both affluent locals and millions of tourists exploring Seattle's urban energy and the state's natural wonders. Retail spaces tap a market where high incomes, visitor spending, and business momentum converge."
-  },
-  {
-    "name": "West Virginia",
-    "abbreviation": "WV",
-    "lede": "West Virginia is a state in the United States. It is the 50th most populous state in the United States."
-  },
-  {
-    "name": "Wisconsin",
-    "abbreviation": "WI",
-    "lede": "Wisconsin is a state in the United States. It is the 51st most populous state in the United States."
-  },
-  {
-    "name": "Wyoming",
-    "abbreviation": "WY",
-    "lede": "Wyoming is a state in the United States. It is the 52nd most populous state in the United States."
-  }
+	{
+		"name": "Alabama",
+		"abbreviation": "AL",
+		"lede": "Alabama is a state in the United States. It is the 2nd most populous state in the United States."
+	},
+	{
+		"name": "Alaska",
+		"abbreviation": "AK",
+		"lede": "Alaska is a state in the United States. It is the 49th most populous state in the United States."
+	},
+	{
+		"name": "Arizona",
+		"abbreviation": "AZ",
+		"lede": "Arizona's economy runs on two engines: tourism and migration. 45.7 million visitors spent $29.7 billion here in 2024—$81 million per day—while the population grows at the nation's 4th-fastest rate. People are fleeing California for lower taxes, 300 days of sunshine, and housing that costs 40% less.\n\nPhoenix tech corridors mix with Scottsdale luxury resorts and Grand Canyon gateway towns. International visitors jumped 20%, spending up 30%. The state doesn't have seasonal dead zones—desert resorts, wine country, mountain retreats, mining heritage towns all pull traffic year-round. Retail spaces here tap into explosive growth from both tourists and new residents who bring California money and Texas optimism."
+	},
+	{
+		"name": "Arkansas",
+		"abbreviation": "AR",
+		"lede": "Arkansas is a state in the United States. It is the 5th most populous state in the United States."
+	},
+	{
+		"name": "California",
+		"abbreviation": "CA",
+		"lede": "California runs the fourth-largest economy on Earth. $4.1 trillion in GDP. 39.5 million residents. 268 million visitors spent $157 billion in 2024. Median household income: $100,149.\n\nTech wealth from Silicon Valley. Entertainment dollars from Los Angeles. 58 Fortune 500 headquarters. Shopping centers here don't just serve neighborhoods—they're destinations for global consumers who come for California's lifestyle, culture, and trends. Retail spaces here sit at the center of American consumer culture. For better or worse."
+	},
+	{
+		"name": "Colorado",
+		"abbreviation": "CO",
+		"lede": "Colorado mixes outdoor lifestyle affluence with urban tech money. 95.4 million visitors spent $28.5 billion in 2024. Tourist demographics skew upscale—23% earn $100,000-$150,000 annually, up five points from 2023.\n\nAspen, Vail, and Breckenridge ski resort spending meets Denver's tech prosperity. Median household income: $92,470. Aerospace giants, thriving tech corridors, outdoor recreation companies—all attracting affluent professionals who actually want to live here. Four-season tourism means no dead periods. Hiking in summer, skiing in winter. Retail spaces tap into educated, high-income residents who demand premium experiences in America's adventure capital."
+	},
+	{
+		"name": "Connecticut",
+		"abbreviation": "CT",
+		"lede": "Connecticut punches well above its weight — 1,540 shopping centers with a 95.7% occupancy rate and $30,300 in retail spending per capita, one of the highest figures in the entire Northeast. Tucked between New York City and Boston, CT shoppers are affluent, consistent, and hungry for discovery — with mall foot traffic up nearly 5% year-over-year and still climbing.\n\nSpecialty leasing in Connecticut means putting your brand in front of some of the most high-spending consumers in the country, at a fraction of traditional retail costs. 71% of in-store shoppers spend more than $50 per visit GroundTruth — and in a state where disposable income runs high, that number skews even higher. Your next loyal customer is already walking the mall. Are you there to meet them?"
+	},
+	{
+		"name": "Delaware",
+		"abbreviation": "DE",
+		"lede": "Delaware is a state in the United States. It is the 10th most populous state in the United States."
+	},
+	{
+		"name": "Florida",
+		"abbreviation": "FL",
+		"lede": "Florida's population grows 2% annually—fastest in the nation. Added 467,347 residents in 2024 alone. Zero state income tax. That's the pitch, and it works.\n\n143 million visitors spent $134.9 billion in 2024. Orlando pumps $164 million daily through its tourism machine. Miami, Tampa Bay, the whole state runs on migration and vacation dollars. 3 million new businesses since 2019. GDP growth doubled the national rate over five years. Retail spaces here capture the perfect storm: fastest population growth, zero income tax wealth accumulation, and relentless tourist spending. This is where America moves, invests, and spends."
+	},
+	{
+		"name": "Georgia",
+		"abbreviation": "GA",
+		"lede": "Georgia's 4,701 shopping centers run at 96.5% occupancy, with $205.7 billion in total retail sales in 2024 — making it one of the Southeast's biggest retail engines. Atlanta alone is a magnet for millions of shoppers, and with mall foot traffic up 6% year-over-year, the momentum isn't slowing down.\n\nWith a fast-growing population and a consumer base that skews young and brand-hungry, Georgia is where emerging brands break through. Get your product in front of those shoppers before someone else does."
+	},
+	{
+		"name": "Hawaii",
+		"abbreviation": "HI",
+		"lede": "Hawaii is a state in the United States. It is the 13th most populous state in the United States."
+	},
+	{
+		"name": "Idaho",
+		"abbreviation": "ID",
+		"lede": "Idaho is a state in the United States. It is the 14th most populous state in the United States."
+	},
+	{
+		"name": "Illinois",
+		"abbreviation": "IL",
+		"lede": "Illinois runs on Chicago. $1.15 trillion economy. 24 of the nation's largest financial firms managing $764 billion. World's largest futures exchange. Fortune 500 headquarters: McDonald's, United Airlines, Abbott, Walgreens. O'Hare—America's second-busiest airport.\n\n113 million visitors spent $48.5 billion in 2024. Chicago overnight visitors up 7.7%. The \"Middle of Everything\" campaign works because it's true—central location gives access to the entire Midwest manufacturing belt and 280+ million consumers. Route 66's 2026 centennial brings even more tourist momentum. Retail spaces here tap Fortune 500 corporate wealth and constant visitor flow. This is where America shops, works, and connects."
+	},
+	{
+		"name": "Indiana",
+		"abbreviation": "IN",
+		"lede": "Indiana is a state in the United States. It is the 16th most populous state in the United States."
+	},
+	{
+		"name": "Iowa",
+		"abbreviation": "IA",
+		"lede": "Iowa is a state in the United States. It is the 17th most populous state in the United States."
+	},
+	{
+		"name": "Kansas",
+		"abbreviation": "KS",
+		"lede": "Kansas malls have a 3-year foot traffic CAGR of 5.77% — one of the strongest growth rates in the country — with 776 shopping centers at 96.6% occupancy and $27,954 in retail spending per capita. This is a state quietly on the rise, where retail demand is outpacing supply.\n\nKansas consumers are nearly 20% less likely to shop online than the average American — meaning in-store is where the sale actually happens. Specialty leasing here means reaching a captive, high-converting audience that's still choosing the mall over the algorithm."
+	},
+	{
+		"name": "Kentucky",
+		"abbreviation": "KY",
+		"lede": "Kentucky is a state in the United States. It is the 19th most populous state in the United States."
+	},
+	{
+		"name": "Louisiana",
+		"abbreviation": "LA",
+		"lede": "Louisiana's 1,362 shopping centers hold a 97.4% occupancy rate, with $27,177 in retail spending per capita — and mall foot traffic surged 6.87% year-over-year. Louisiana shoppers are loyal, local, and love to browse in person.\n\nWith retail sales representing over 40% of the state's GDP, physical retail isn't just popular in Louisiana — it's foundational. If you want a state where your pop-up becomes a permanent fixture, this is it."
+	},
+	{
+		"name": "Maine",
+		"abbreviation": "ME",
+		"lede": "Maine is a state in the United States. It is the 21st most populous state in the United States."
+	},
+	{
+		"name": "Maryland",
+		"abbreviation": "MD",
+		"lede": "Maryland's 1,901 shopping centers are seeing consistent growth, with mall foot traffic up 6.12% year-over-year and a 3-year CAGR of 3.07%. Sitting at the doorstep of the DC metro, Maryland shoppers are among the most educated and highest-earning in the country.\n\nWith $22,701 in per-capita mall spending and a densely packed suburban corridor stretching from Baltimore to the Beltway, Maryland is fertile ground for brands looking to establish credibility in a high-income, high-traffic"
+	},
+	{
+		"name": "Massachusetts",
+		"abbreviation": "MA",
+		"lede": "Massachusetts runs on education and money. Nation's second-highest GDP per capita: $88,790. Median household income: $101,341. Harvard, MIT, dominant biotech corridors, financial services—creating the most educated, highest-earning consumer base in America.\n\n52.6 million visitors spent $24.2 billion in 2024. International tourism spending surged 45%. Revolutionary War heritage, Cape Cod beaches, Boston's cultural institutions all pull traffic. America's 250th anniversary celebrations through 2026 and FIFA World Cup matches bring unprecedented tourism momentum. Knowledge economy means recession-resistant spending. Retail spaces tap both the wealthiest per-capita population and explosive international visitor growth."
+	},
+	{
+		"name": "Michigan",
+		"abbreviation": "MI",
+		"lede": "Michigan runs on cars and coastline. Automotive manufacturing anchors steady, high-wage consumer spending. 131.2 million visitors spent $30.7 billion in 2024. 3,200 miles of Great Lakes coastline—more freshwater shoreline than any other state.\n\nDetroit's resurgence adds urban retail momentum. Resort towns from Traverse City to Mackinac Island pull summer traffic. Pure Michigan's marketing campaign works—influences 789,000 leisure trips annually and drives year-round foot traffic. Four-season appeal means no dead periods. Retail spaces tap both manufacturing wealth and explosive tourism growth. Visitors stay longer and spend more than national averages."
+	},
+	{
+		"name": "Minnesota",
+		"abbreviation": "MN",
+		"lede": "Minnesota has Mall of America. That tells you everything. Nation's largest retail and entertainment complex drew 81.6 million visitors who spent $14.7 billion in 2024.\n\nMedian household income: $87,556—16% above national average. 15 Fortune 500 headquarters: Target, UnitedHealth Group. Medical technology leadership floods shopping centers with high-income professionals. Twin Cities concentration creates purchasing power density. Four-season appeal—summer lake culture, winter sports. Retail spaces capture both affluent local consumers and massive tourist traffic. Spillover from Mall of America elevates every location statewide."
+	},
+	{
+		"name": "Mississippi",
+		"abbreviation": "MS",
+		"lede": "Mississippi is a state in the United States. It is the 26th most populous state in the United States."
+	},
+	{
+		"name": "Missouri",
+		"abbreviation": "MO",
+		"lede": "Missouri is a state in the United States. It is the 27th most populous state in the United States."
+	},
+	{
+		"name": "Montana",
+		"abbreviation": "MT",
+		"lede": "Montana is a state in the United States. It is the 28th most populous state in the United States."
+	},
+	{
+		"name": "Nebraska",
+		"abbreviation": "NE",
+		"lede": "Nebraska is a state in the United States. It is the 29th most populous state in the United States."
+	},
+	{
+		"name": "Nevada",
+		"abbreviation": "NV",
+		"lede": "Nevada is Las Vegas. 41.7 million visitors spent $1,322 per person in 2024—52.6% above pre-pandemic levels. Zero state income tax drives business migration from California.\n\n6 million convention attendees spend $1,681 per trip—33% more than leisure visitors. Shopping expenditure surged 12.8% to $281 per visitor, highest increase across all spending categories. Las Vegas Strip gaming revenue: $9.1 billion in 2024. Super Bowl LVIII, Las Vegas Grand Prix—major events flood the state with affluent consumers year-round. Tourism represents 37% of state GDP. Retail spaces capture the nation's most concentrated high-spending tourist traffic."
+	},
+	{
+		"name": "New Hampshire",
+		"abbreviation": "NH",
+		"lede": "New Hampshire is a state in the United States. It is the 31st most populous state in the United States."
+	},
+	{
+		"name": "New Jersey",
+		"abbreviation": "NJ",
+		"lede": "New Jersey is one of the most densely populated states in America, with 2,650 shopping centers running at a 95.9% occupancy rate and generating $26,241 in retail spending per capita annually. With foot traffic up 7% year-over-year, NJ shoppers aren't just browsing — they're buying.\n\nWhether you're a pop-up brand or a growing micro-merchant, New Jersey's mall ecosystem is one of the most active in the country — and specialty leasing spaces are your lowest-risk entry point into it. Nationally, 71% of in-store shoppers spend more than $50 per visit GroundTruth, compared to just 54% online. Your next customer is already at the mall — are you?"
+	},
+	{
+		"name": "New Mexico",
+		"abbreviation": "NM",
+		"lede": "New Mexico is a state in the United States. It is the 33rd most populous state in the United States."
+	},
+	{
+		"name": "New York",
+		"abbreviation": "NY",
+		"lede": "New York: third-largest economy in America. $1.6 trillion in GDP. 19.5 million residents. 291 million annual tourists. Median household income: $81,386—40% above national average.\n\nManhattan's 8.3 million residents create constant foot traffic. Cultural diversity drives demand for specialized retail concepts. America's financial and cultural capital means your brand gains visibility beyond your physical location. In New York, retail space isn't just real estate—it's a launchpad."
+	},
+	{
+		"name": "North Carolina",
+		"abbreviation": "NC",
+		"lede": "North Carolina is a state in the United States. It is the 35th most populous state in the United States."
+	},
+	{
+		"name": "North Dakota",
+		"abbreviation": "ND",
+		"lede": "North Dakota is a state in the United States. It is the 36th most populous state in the United States."
+	},
+	{
+		"name": "Ohio",
+		"abbreviation": "OH",
+		"lede": "Ohio sits at the crossroads of the Midwest. Interstate 70, 71, 75, and 80 converge here. 242 million visitors spent $57 billion in 2024. Manufacturing dominance (third-largest in U.S.) creates steady consumer spending.\n\n93% of Ohio tourists plan to return within 12 months—predictable repeat traffic. 48 million overnight visitors extended stays in 2024. Columbus, Cleveland, Cincinnati anchor thriving metro markets. Half the U.S. population lives within a day's drive. Retail spaces tap stable local demand and constant visitor flow from America's most tourism-dense states."
+	},
+	{
+		"name": "Oklahoma",
+		"abbreviation": "OK",
+		"lede": "Oklahoma is a state in the United States. It is the 38th most populous state in the United States."
+	},
+	{
+		"name": "Oregon",
+		"abbreviation": "OR",
+		"lede": "Oregon has zero state sales tax. One of only five states where every retail dollar goes further. Drives cross-border shopping pilgrimages from neighboring states.\n\nMedian household income: $80,426. Tech wealth from Nike, Intel, Columbia Sportswear headquarters fuels premium spending across Portland, Eugene, Bend. Tourism injected $14.3 billion in 2024. Coastal destinations, mountain recreation, urban shopping districts—constant flow. Retail spaces capture both affluent locals benefiting from tax-free purchases and tourists seeking natural beauty with shopping value."
+	},
+	{
+		"name": "Pennsylvania",
+		"abbreviation": "PA",
+		"lede": "Pennsylvania sits at America's historic and geographic heart. 202 million visitors spent $50 billion in 2024. 72 million people live within a four-hour drive—unmatched access to the Northeast corridor's massive consumer base.\n\n2026 transforms Pennsylvania into America's spotlight. Nation's 250th birthday, FIFA World Cup matches, NCAA Final Four, MLB All-Star Game, NFL Draft—all converging here. Philadelphia, Pittsburgh, iconic destinations statewide pull constant tourist traffic. Median household income: $76,081. Retail spaces capture both stable local markets and unprecedented visitor surges heading to the birthplace of American democracy."
+	},
+	{
+		"name": "Rhode Island",
+		"abbreviation": "RI",
+		"lede": "Don't let the size fool you — Rhode Island packs a serious retail punch. 451 shopping centers run at 96.7% occupancy, with $29,016 in mall spending per capita, and foot traffic has surged an extraordinary 20% year-over-year — among the highest growth rates in the entire country.\n\nWedged between Boston and Providence, with a dense, high-income population and a median household income of $86,372, Rhode Island shoppers are active, local, and ready to spend. Specialty leasing here means maximum exposure in minimum square footage — the smartest way to plant your flag in New England."
+	},
+	{
+		"name": "South Carolina",
+		"abbreviation": "SC",
+		"lede": "South Carolina is a state in the United States. It is the 42nd most populous state in the United States."
+	},
+	{
+		"name": "South Dakota",
+		"abbreviation": "SD",
+		"lede": "South Dakota is a state in the United States. It is the 43rd most populous state in the United States."
+	},
+	{
+		"name": "Tennessee",
+		"abbreviation": "TN",
+		"lede": "Tennessee is a state in the United States. It is the 44th most populous state in the United States."
+	},
+	{
+		"name": "Texas",
+		"abbreviation": "TX",
+		"lede": "Texas dominates American economic expansion. $2.7 trillion in GDP. 31.3 million residents. Fastest-growing major state economy. Zero state income tax puts more money in consumers' pockets.\n\n62 million visitors spent $97.5 billion in 2024. 53 Fortune 500 headquarters—more than any state. Led nation in job creation for 13th consecutive year. 563,000 new residents arrived last year seeking opportunity and lower costs. Shopping centers capture migration momentum. Retail spaces position you at the epicenter of America's economic future. Growth isn't a projection—it's already happening."
+	},
+	{
+		"name": "Utah",
+		"abbreviation": "UT",
+		"lede": "Utah is a state in the United States. It is the 46th most populous state in the United States."
+	},
+	{
+		"name": "Vermont",
+		"abbreviation": "VT",
+		"lede": "Vermont is a state in the United States. It is the 47th most populous state in the United States."
+	},
+	{
+		"name": "Virginia",
+		"abbreviation": "VA",
+		"lede": "Virginia is a state in the United States. It is the 48th most populous state in the United States."
+	},
+	{
+		"name": "Washington",
+		"abbreviation": "WA",
+		"lede": "Washington runs on tech money. Nation's third-highest per capita output: $88,215—surpassing even California. Median household income: $94,952. Microsoft, Amazon, Boeing anchor an innovation economy that concentrates wealth across Seattle and beyond.\n\n111 million visitors spent $25 billion in 2024. Zero state income tax keeps more money in consumers' wallets. Shopping centers capture spending from both affluent locals and millions of tourists exploring Seattle's urban energy and the state's natural wonders. Retail spaces tap a market where high incomes, visitor spending, and business momentum converge."
+	},
+	{
+		"name": "West Virginia",
+		"abbreviation": "WV",
+		"lede": "West Virginia is a state in the United States. It is the 50th most populous state in the United States."
+	},
+	{
+		"name": "Wisconsin",
+		"abbreviation": "WI",
+		"lede": "Wisconsin is a state in the United States. It is the 51st most populous state in the United States."
+	},
+	{
+		"name": "Wyoming",
+		"abbreviation": "WY",
+		"lede": "Wyoming is a state in the United States. It is the 52nd most populous state in the United States."
+	}
 ]

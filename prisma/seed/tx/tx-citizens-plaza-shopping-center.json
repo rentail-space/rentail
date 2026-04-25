@@ -1,57 +1,55 @@
 {
-  "address": "North 4th Street",
-  "city": "Wills Point",
-  "country": "US",
-  "googlePlaceID": "places/ChIJKTqhAeFoSYYR-qPDdAzMAF4",
-  "name": "Citizens Plaza Shopping Center",
-  "state": "TX",
-  "latitude": 32.7133397,
-  "longitude": -96.0073788,
-  "imageURLs": [
-    "/images/malls/tx-citizens-plaza-shopping-center-1.jpg"
-  ],
-  "summary": "Citizens Plaza Shopping Center is a community-focused retail and office space destination in Wills Point, Texas, offering flexible leasing opportunities for local businesses. With its convenient North 4th Street location and commitment to supporting small-town commerce, the plaza serves as an essential hub for the Van Zandt County area.",
-  "rating": 4.2,
-  "reviewCount": 29,
-  "website": "http://www.citizensplazawp.com/?utm_source=rentail.space",
-  "centerType": "StripCenter",
-  "demographics": "Citizens Plaza Shopping Center serves the Wills Point community and surrounding Van Zandt County area, drawing primarily from middle-income families and small business owners in this rural Texas market. The trade area consists of local residents, agricultural workers, and small-town professionals seeking convenient access to essential services and retail options. Typical visitors are value-conscious shoppers who prefer supporting local businesses in a familiar, community-oriented environment rather than traveling to larger metropolitan shopping destinations.",
-  "description": "Citizens Plaza Shopping Center stands as a cornerstone of commerce in Wills Point, Texas, offering essential retail and office space opportunities in the heart of Van Zandt County. Located on North 4th Street, this community-focused shopping center embodies the spirit of small-town Texas with its commitment to supporting local businesses and entrepreneurs. The plaza provides flexible leasing options for both retail storefronts and professional office spaces, making it an ideal location for businesses looking to establish or expand their presence in the Wills Point market. With a straightforward application process and a focus on helping businesses \"take it to the next level,\" Citizens Plaza has earned a solid 4.2-star rating from local patrons who appreciate its accessible location and community-centered approach. The center's motto of \"Small Town – Big Support\" reflects its dedication to fostering business growth while serving the everyday needs of Wills Point residents and the surrounding rural communities.",
-  "tier": 1,
-  "spaces": [
-    {
-      "number": "566/568",
-      "type": "Inline",
-      "size": 8,
-      "available": true,
-      "imageURLs": [
-        "https://citizensplazawp.com/wp-content/uploads/2025/07/Image-22-1024x768.jpeg",
-        "https://citizensplazawp.com/wp-content/uploads/2025/07/Image-21-1024x768.jpeg",
-        "https://citizensplazawp.com/wp-content/uploads/2025/07/Image-20-1024x768.jpeg"
-      ]
-    },
-    {
-      "number": "574/576",
-      "type": "Inline",
-      "size": 2000,
-      "available": true,
-      "imageURLs": [
-        "https://citizensplazawp.com/wp-content/uploads/2025/07/Image-1024x768.jpeg",
-        "https://citizensplazawp.com/wp-content/uploads/2025/07/Image-1-1024x768.jpeg",
-        "https://citizensplazawp.com/wp-content/uploads/2025/07/Image-2-1024x768.jpeg"
-      ]
-    },
-    {
-      "number": "592",
-      "type": "Inline",
-      "size": 555,
-      "available": true,
-      "imageURLs": [
-        "https://citizensplazawp.com/wp-content/uploads/2025/07/Image-19-768x1024.jpeg",
-        "https://citizensplazawp.com/wp-content/uploads/2025/07/Image-18-1024x768.jpeg",
-        "https://citizensplazawp.com/wp-content/uploads/2025/07/Image-17-1024x768.jpeg"
-      ]
-    }
-  ],
-  "ranking": 6.142071591175616
+	"address": "North 4th Street",
+	"city": "Wills Point",
+	"country": "US",
+	"googlePlaceID": "places/ChIJKTqhAeFoSYYR-qPDdAzMAF4",
+	"name": "Citizens Plaza Shopping Center",
+	"state": "TX",
+	"latitude": 32.7133397,
+	"longitude": -96.0073788,
+	"imageURLs": ["/images/malls/tx-citizens-plaza-shopping-center-1.jpg"],
+	"summary": "Citizens Plaza Shopping Center is a community-focused retail and office space destination in Wills Point, Texas, offering flexible leasing opportunities for local businesses. With its convenient North 4th Street location and commitment to supporting small-town commerce, the plaza serves as an essential hub for the Van Zandt County area.",
+	"rating": 4.2,
+	"reviewCount": 29,
+	"website": "http://www.citizensplazawp.com/?utm_source=rentail.space",
+	"centerType": "StripCenter",
+	"demographics": "Citizens Plaza Shopping Center serves the Wills Point community and surrounding Van Zandt County area, drawing primarily from middle-income families and small business owners in this rural Texas market. The trade area consists of local residents, agricultural workers, and small-town professionals seeking convenient access to essential services and retail options. Typical visitors are value-conscious shoppers who prefer supporting local businesses in a familiar, community-oriented environment rather than traveling to larger metropolitan shopping destinations.",
+	"description": "Citizens Plaza Shopping Center stands as a cornerstone of commerce in Wills Point, Texas, offering essential retail and office space opportunities in the heart of Van Zandt County. Located on North 4th Street, this community-focused shopping center embodies the spirit of small-town Texas with its commitment to supporting local businesses and entrepreneurs. The plaza provides flexible leasing options for both retail storefronts and professional office spaces, making it an ideal location for businesses looking to establish or expand their presence in the Wills Point market. With a straightforward application process and a focus on helping businesses \"take it to the next level,\" Citizens Plaza has earned a solid 4.2-star rating from local patrons who appreciate its accessible location and community-centered approach. The center's motto of \"Small Town – Big Support\" reflects its dedication to fostering business growth while serving the everyday needs of Wills Point residents and the surrounding rural communities.",
+	"tier": 1,
+	"spaces": [
+		{
+			"number": "566/568",
+			"type": "Inline",
+			"size": 8,
+			"available": true,
+			"imageURLs": [
+				"https://citizensplazawp.com/wp-content/uploads/2025/07/Image-22-1024x768.jpeg",
+				"https://citizensplazawp.com/wp-content/uploads/2025/07/Image-21-1024x768.jpeg",
+				"https://citizensplazawp.com/wp-content/uploads/2025/07/Image-20-1024x768.jpeg"
+			]
+		},
+		{
+			"number": "574/576",
+			"type": "Inline",
+			"size": 2000,
+			"available": true,
+			"imageURLs": [
+				"https://citizensplazawp.com/wp-content/uploads/2025/07/Image-1024x768.jpeg",
+				"https://citizensplazawp.com/wp-content/uploads/2025/07/Image-1-1024x768.jpeg",
+				"https://citizensplazawp.com/wp-content/uploads/2025/07/Image-2-1024x768.jpeg"
+			]
+		},
+		{
+			"number": "592",
+			"type": "Inline",
+			"size": 555,
+			"available": true,
+			"imageURLs": [
+				"https://citizensplazawp.com/wp-content/uploads/2025/07/Image-19-768x1024.jpeg",
+				"https://citizensplazawp.com/wp-content/uploads/2025/07/Image-18-1024x768.jpeg",
+				"https://citizensplazawp.com/wp-content/uploads/2025/07/Image-17-1024x768.jpeg"
+			]
+		}
+	],
+	"ranking": 6.142071591175616
 }

@@ -62,7 +62,6 @@ export default function CityPage({ loaderData }: Route.ComponentProps) {
     <main className="container mx-auto my-10 space-y-8 p-5">
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated data
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaData(loaderData)),
         }}

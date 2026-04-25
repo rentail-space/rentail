@@ -264,7 +264,7 @@ function CenterPopup({
     };
   }>;
 }) {
-  const directionsUrl = `https://maps.google.com/?q=${encodeURIComponent(`${center.address}, ${center.city}, ${center.state} ${center.state.country}`)}`;
+  const directionsUrl = `https://maps.google.com/?q=${encodeURIComponent(`${center.address}, ${center.city}, ${center.state.abbreviation} ${center.state.country}`)}`;
 
   return (
     <div className="space-y-2">

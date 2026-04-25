@@ -1,6 +1,6 @@
 ---
 title: "How to Find Available Temporary Retail Space in Shopping Centers (2026 Guide)"
-image: "2026-02-13-find-temporary-retail-space.jpg" 
+image: "2026-02-13-find-temporary-retail-space.jpg"
 alt: "Empty retail kiosk space in modern shopping center with bright lighting and foot traffic, representing available temporary retail opportunities"
 summary: "Finding available temporary retail space in shopping centers is faster with AI search. Skip broker calls—see kiosks, pop-ups, and inline spaces with pricing, photos, and foot traffic data in one search."
 ---

@@ -1,77 +1,75 @@
 {
-  "address": "6201-6299 Old Granbury Road",
-  "city": "Fort Worth",
-  "country": "US",
-  "googlePlaceID": "places/ChIJwfW3VQttToYRDd9L0e2Cczc",
-  "name": "Hulen Square",
-  "state": "TX",
-  "latitude": 32.6579493,
-  "longitude": -97.4000587,
-  "phone": "++1 214-954-0600",
-  "imageURLs": [
-    "/images/malls/tx-hulen-square-1.jpg"
-  ],
-  "summary": "Hulen Square is a newly renovated neighborhood shopping center conveniently located at a major Fort Worth intersection near Hulen Mall. This quaint center offers a practical mix of value retailers, essential services, and dining options, serving as a one-stop shop for local families and residents.",
-  "openFrom": 1100,
-  "openUntil": 2100,
-  "rating": 4.2,
-  "reviewCount": 833,
-  "website": "http://www.hulensquare.com/?utm_source=rentail.space",
-  "centerType": "StripCenter",
-  "demographics": "Hulen Square attracts a diverse, value-conscious demographic primarily from the surrounding Fort Worth neighborhoods, with a strong representation of middle-income families and working professionals. The center's tenant mix of discount retailers like Dollar General and Goodwill, combined with essential services such as Firestone and Ace Cash Express, appeals to budget-minded shoppers seeking convenience and affordability. Located at one of Fort Worth's busiest intersections near Hulen Mall, the center draws both local residents looking for quick-stop shopping and services, as well as pass-by traffic seeking practical solutions for everyday needs.",
-  "description": "Hulen Square is a classic Fort Worth shopping center that has recently undergone exterior renovations, bringing fresh appeal to this convenient neighborhood destination. Strategically positioned at one of Fort Worth's most heavily trafficked intersections on Old Granbury Road, just down the street from Hulen Mall, this quaint center serves as a true one-stop shop for local residents. The center offers an eclectic mix of retailers and service providers including Goodwill, Dollar General, Firestone, Ace Cash Express, Galleria Furniture, and the locally beloved Honey Bunch Bake Shop. Beyond shopping, Hulen Square provides comprehensive solutions for the whole family with healthcare, dental, legal, and business services all under one roof. From slices to sandwiches, the dining options complement the practical retail mix, making Hulen Square the perfect neighborhood center for everyday needs close to home.",
-  "tier": 1,
-  "spaces": [
-    {
-      "number": "6221",
-      "type": "Other",
-      "size": 1334
-    },
-    {
-      "number": "6239",
-      "type": "Other",
-      "size": 5900
-    },
-    {
-      "number": "6245",
-      "type": "Other",
-      "size": 1000
-    },
-    {
-      "number": "6251",
-      "type": "Other",
-      "size": 2200
-    },
-    {
-      "number": "6259",
-      "type": "Other",
-      "size": 3600
-    },
-    {
-      "number": "6261",
-      "type": "Other",
-      "size": 3600
-    },
-    {
-      "number": "6263",
-      "type": "Other",
-      "size": 1500
-    },
-    {
-      "number": "6295",
-      "type": "Other",
-      "size": 6137
-    },
-    {
-      "number": "6299",
-      "type": "Other",
-      "size": 6181
-    },
-    {
-      "number": "6299B",
-      "type": "Other",
-      "size": 1600
-    }
-  ],
-  "ranking": 12.266709005908508
+	"address": "6201-6299 Old Granbury Road",
+	"city": "Fort Worth",
+	"country": "US",
+	"googlePlaceID": "places/ChIJwfW3VQttToYRDd9L0e2Cczc",
+	"name": "Hulen Square",
+	"state": "TX",
+	"latitude": 32.6579493,
+	"longitude": -97.4000587,
+	"phone": "++1 214-954-0600",
+	"imageURLs": ["/images/malls/tx-hulen-square-1.jpg"],
+	"summary": "Hulen Square is a newly renovated neighborhood shopping center conveniently located at a major Fort Worth intersection near Hulen Mall. This quaint center offers a practical mix of value retailers, essential services, and dining options, serving as a one-stop shop for local families and residents.",
+	"openFrom": 1100,
+	"openUntil": 2100,
+	"rating": 4.2,
+	"reviewCount": 833,
+	"website": "http://www.hulensquare.com/?utm_source=rentail.space",
+	"centerType": "StripCenter",
+	"demographics": "Hulen Square attracts a diverse, value-conscious demographic primarily from the surrounding Fort Worth neighborhoods, with a strong representation of middle-income families and working professionals. The center's tenant mix of discount retailers like Dollar General and Goodwill, combined with essential services such as Firestone and Ace Cash Express, appeals to budget-minded shoppers seeking convenience and affordability. Located at one of Fort Worth's busiest intersections near Hulen Mall, the center draws both local residents looking for quick-stop shopping and services, as well as pass-by traffic seeking practical solutions for everyday needs.",
+	"description": "Hulen Square is a classic Fort Worth shopping center that has recently undergone exterior renovations, bringing fresh appeal to this convenient neighborhood destination. Strategically positioned at one of Fort Worth's most heavily trafficked intersections on Old Granbury Road, just down the street from Hulen Mall, this quaint center serves as a true one-stop shop for local residents. The center offers an eclectic mix of retailers and service providers including Goodwill, Dollar General, Firestone, Ace Cash Express, Galleria Furniture, and the locally beloved Honey Bunch Bake Shop. Beyond shopping, Hulen Square provides comprehensive solutions for the whole family with healthcare, dental, legal, and business services all under one roof. From slices to sandwiches, the dining options complement the practical retail mix, making Hulen Square the perfect neighborhood center for everyday needs close to home.",
+	"tier": 1,
+	"spaces": [
+		{
+			"number": "6221",
+			"type": "Other",
+			"size": 1334
+		},
+		{
+			"number": "6239",
+			"type": "Other",
+			"size": 5900
+		},
+		{
+			"number": "6245",
+			"type": "Other",
+			"size": 1000
+		},
+		{
+			"number": "6251",
+			"type": "Other",
+			"size": 2200
+		},
+		{
+			"number": "6259",
+			"type": "Other",
+			"size": 3600
+		},
+		{
+			"number": "6261",
+			"type": "Other",
+			"size": 3600
+		},
+		{
+			"number": "6263",
+			"type": "Other",
+			"size": 1500
+		},
+		{
+			"number": "6295",
+			"type": "Other",
+			"size": 6137
+		},
+		{
+			"number": "6299",
+			"type": "Other",
+			"size": 6181
+		},
+		{
+			"number": "6299B",
+			"type": "Other",
+			"size": 1600
+		}
+	],
+	"ranking": 12.266709005908508
 }

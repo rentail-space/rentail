@@ -56,7 +56,7 @@ export default function RankingPage({ loaderData }: Route.ComponentProps) {
             },
             { replace: true },
           );
-          fetcher.submit(event.currentTarget);
+          void fetcher.submit(event.currentTarget);
         }}
       >
         <Input

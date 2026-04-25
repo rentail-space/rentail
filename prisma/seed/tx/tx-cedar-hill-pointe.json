@@ -1,38 +1,36 @@
 {
-  "address": "415-425 East Pleasant Run Road",
-  "city": "Cedar Hill",
-  "country": "US",
-  "googlePlaceID": "places/ChIJO5Qi6e-NToYRO3q0ovdfXrk",
-  "name": "Cedar Hill Pointe",
-  "state": "TX",
-  "latitude": 32.6049787,
-  "longitude": -96.93254879999999,
-  "phone": "++1 214-954-0600",
-  "imageURLs": [
-    "/images/malls/tx-cedar-hill-pointe-1.jpg"
-  ],
-  "openFrom": 1000,
-  "openUntil": 2100,
-  "rating": 4.2,
-  "reviewCount": 904,
-  "website": "http://www.cedarhillpointe.com/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "Cedar Hill Pointe serves a diverse suburban family demographic in the Cedar Hill trade area, with a mix of middle-income households seeking convenient access to everyday shopping and services. The center attracts residents from the surrounding Dallas-Fort Worth southern suburbs who value a neighborhood shopping experience with well-known national retailers. Primary visitors include working professionals, families with children, and homeowners looking for specialty retail like musical instruments, mattresses, and premium wine and spirits in a convenient location off Highway 67.",
-  "description": "Cedar Hill Pointe is a vibrant neighborhood shopping destination located at the intersection of Highway 67 and Pleasant Run Road in Cedar Hill, Texas. This 80,000 square foot community center serves as a convenient one-stop shopping experience for residents of the Cedar Hill trade area and surrounding Dallas-Fort Worth southern suburbs. The center features a carefully curated mix of well-known specialty retailers including Guitar Center for music enthusiasts, Sleep Number for premium sleep solutions, SAS Shoes for comfort footwear, and Spec's Wine, Spirits & Finer Foods for beverage connoisseurs. Beyond its retail offerings, Cedar Hill Pointe provides a comprehensive array of services including healthcare, dental, legal, and business services, making it a true community hub. The center also offers diverse dining options ranging from quick-service restaurants to casual eateries, ensuring visitors can enjoy a complete shopping and dining experience in one convenient location.",
-  "squareFootage": 80000,
-  "summary": "Cedar Hill Pointe is an 80,000 square foot neighborhood shopping center conveniently located off Highway 67 in Cedar Hill, Texas. The center features popular specialty retailers like Guitar Center, Sleep Number, SAS Shoes, and Spec's Wine, along with diverse dining options and essential services for the local community.",
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "Outparcel 1",
-      "type": "Other",
-      "size": 2700
-    },
-    {
-      "number": "Outparcel 2",
-      "type": "Other",
-      "size": 2700
-    }
-  ],
-  "ranking": 24.831814815993052
+	"address": "415-425 East Pleasant Run Road",
+	"city": "Cedar Hill",
+	"country": "US",
+	"googlePlaceID": "places/ChIJO5Qi6e-NToYRO3q0ovdfXrk",
+	"name": "Cedar Hill Pointe",
+	"state": "TX",
+	"latitude": 32.6049787,
+	"longitude": -96.93254879999999,
+	"phone": "++1 214-954-0600",
+	"imageURLs": ["/images/malls/tx-cedar-hill-pointe-1.jpg"],
+	"openFrom": 1000,
+	"openUntil": 2100,
+	"rating": 4.2,
+	"reviewCount": 904,
+	"website": "http://www.cedarhillpointe.com/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "Cedar Hill Pointe serves a diverse suburban family demographic in the Cedar Hill trade area, with a mix of middle-income households seeking convenient access to everyday shopping and services. The center attracts residents from the surrounding Dallas-Fort Worth southern suburbs who value a neighborhood shopping experience with well-known national retailers. Primary visitors include working professionals, families with children, and homeowners looking for specialty retail like musical instruments, mattresses, and premium wine and spirits in a convenient location off Highway 67.",
+	"description": "Cedar Hill Pointe is a vibrant neighborhood shopping destination located at the intersection of Highway 67 and Pleasant Run Road in Cedar Hill, Texas. This 80,000 square foot community center serves as a convenient one-stop shopping experience for residents of the Cedar Hill trade area and surrounding Dallas-Fort Worth southern suburbs. The center features a carefully curated mix of well-known specialty retailers including Guitar Center for music enthusiasts, Sleep Number for premium sleep solutions, SAS Shoes for comfort footwear, and Spec's Wine, Spirits & Finer Foods for beverage connoisseurs. Beyond its retail offerings, Cedar Hill Pointe provides a comprehensive array of services including healthcare, dental, legal, and business services, making it a true community hub. The center also offers diverse dining options ranging from quick-service restaurants to casual eateries, ensuring visitors can enjoy a complete shopping and dining experience in one convenient location.",
+	"squareFootage": 80000,
+	"summary": "Cedar Hill Pointe is an 80,000 square foot neighborhood shopping center conveniently located off Highway 67 in Cedar Hill, Texas. The center features popular specialty retailers like Guitar Center, Sleep Number, SAS Shoes, and Spec's Wine, along with diverse dining options and essential services for the local community.",
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "Outparcel 1",
+			"type": "Other",
+			"size": 2700
+		},
+		{
+			"number": "Outparcel 2",
+			"type": "Other",
+			"size": 2700
+		}
+	],
+	"ranking": 24.831814815993052
 }

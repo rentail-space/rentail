@@ -1,37 +1,35 @@
 {
-  "address": "1260 League City Parkway",
-  "city": "League City",
-  "country": "US",
-  "googlePlaceID": "places/ChIJ1zQHraiCQIYRwYh0UPEw9zk",
-  "name": "Tuscan Lakes",
-  "state": "TX",
-  "latitude": 29.496686900000004,
-  "longitude": -95.06568899999999,
-  "phone": "++1 713-781-7111",
-  "imageURLs": [
-    "/images/malls/tx-tuscan-lakes-1.jpg"
-  ],
-  "summary": "Tuscan Lakes is a neighborhood shopping center in League City, Texas, anchored by L.A. Fitness and featuring a diverse mix of health, beauty, dining, and service tenants. Conveniently located between Houston and Galveston, it serves as a one-stop destination for everyday needs in the growing southeast Houston suburban market.",
-  "rating": 4.4,
-  "reviewCount": 111,
-  "website": "http://www.tuscan-lakes.com/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "Tuscan Lakes serves the growing League City community, located between Houston and Galveston, attracting middle to upper-middle income families and young professionals. The trade area draws from the rapidly expanding suburban developments in southeast Houston, with visitors typically being homeowners aged 30-55 with household incomes ranging from $75,000 to $150,000. The center caters to convenience-oriented shoppers seeking health, wellness, and everyday services, with strong appeal to health-conscious residents utilizing the L.A. Fitness anchor and families requiring veterinary, beauty, and professional services within their neighborhood.",
-  "description": "Tuscan Lakes is a neighborhood-focused shopping center located at 1260 League City Parkway in League City, Texas, strategically positioned approximately 40 minutes from downtown Houston and 34 minutes from Galveston. Anchored by L.A. Fitness, this community center has established itself as a convenient destination for health, wellness, and everyday services for the growing southeast Houston suburban market. The center features a carefully curated mix of health and beauty services, including Egret Bay Animal Clinic and Abliss Beauty Bar, alongside local shops and dining options ranging from pizza to sandwiches. Tuscan Lakes prides itself on offering \"your neighborhood convenience\" with a perfect blend of small businesses, local retailers, and essential service providers that cater to the daily needs of League City residents and their families. The shopping center provides an accessible, open-air environment where visitors can find everything from fitness and healthcare to dining and professional services, all within a welcoming community atmosphere.",
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "Suite 100",
-      "type": "Other",
-      "size": 1796,
-      "available": true
-    },
-    {
-      "number": "Suite 300",
-      "type": "Other",
-      "size": 1200,
-      "available": false
-    }
-  ],
-  "ranking": 17.99884221332259
+	"address": "1260 League City Parkway",
+	"city": "League City",
+	"country": "US",
+	"googlePlaceID": "places/ChIJ1zQHraiCQIYRwYh0UPEw9zk",
+	"name": "Tuscan Lakes",
+	"state": "TX",
+	"latitude": 29.496686900000004,
+	"longitude": -95.06568899999999,
+	"phone": "++1 713-781-7111",
+	"imageURLs": ["/images/malls/tx-tuscan-lakes-1.jpg"],
+	"summary": "Tuscan Lakes is a neighborhood shopping center in League City, Texas, anchored by L.A. Fitness and featuring a diverse mix of health, beauty, dining, and service tenants. Conveniently located between Houston and Galveston, it serves as a one-stop destination for everyday needs in the growing southeast Houston suburban market.",
+	"rating": 4.4,
+	"reviewCount": 111,
+	"website": "http://www.tuscan-lakes.com/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "Tuscan Lakes serves the growing League City community, located between Houston and Galveston, attracting middle to upper-middle income families and young professionals. The trade area draws from the rapidly expanding suburban developments in southeast Houston, with visitors typically being homeowners aged 30-55 with household incomes ranging from $75,000 to $150,000. The center caters to convenience-oriented shoppers seeking health, wellness, and everyday services, with strong appeal to health-conscious residents utilizing the L.A. Fitness anchor and families requiring veterinary, beauty, and professional services within their neighborhood.",
+	"description": "Tuscan Lakes is a neighborhood-focused shopping center located at 1260 League City Parkway in League City, Texas, strategically positioned approximately 40 minutes from downtown Houston and 34 minutes from Galveston. Anchored by L.A. Fitness, this community center has established itself as a convenient destination for health, wellness, and everyday services for the growing southeast Houston suburban market. The center features a carefully curated mix of health and beauty services, including Egret Bay Animal Clinic and Abliss Beauty Bar, alongside local shops and dining options ranging from pizza to sandwiches. Tuscan Lakes prides itself on offering \"your neighborhood convenience\" with a perfect blend of small businesses, local retailers, and essential service providers that cater to the daily needs of League City residents and their families. The shopping center provides an accessible, open-air environment where visitors can find everything from fitness and healthcare to dining and professional services, all within a welcoming community atmosphere.",
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "Suite 100",
+			"type": "Other",
+			"size": 1796,
+			"available": true
+		},
+		{
+			"number": "Suite 300",
+			"type": "Other",
+			"size": 1200,
+			"available": false
+		}
+	],
+	"ranking": 17.99884221332259
 }

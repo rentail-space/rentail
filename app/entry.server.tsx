@@ -2,6 +2,7 @@ import * as Sentry from "@sentry/react-router";
 import { handleRequest } from "@vercel/react-router/entry.server";
 import type {
   ActionFunctionArgs,
+  AppLoadContext,
   EntryContext,
   LoaderFunctionArgs,
 } from "react-router";
@@ -41,12 +42,12 @@ export default Sentry.wrapSentryHandleRequest(
     responseStatusCode: number,
     responseHeaders: Headers,
     routerContext: EntryContext,
-    // biome-ignore lint/suspicious/noExplicitAny: Sentry wrapper requires flexible type
-    loadContext?: any,
-  ) => {
+    loadContext?: AppLoadContext,
+  ): Promise<Response> => {
     const start = Date.now();
     console.info("%s %s", request.method, request.url);
 
+    // oxlint-disable-next-line typescript/no-floating-promises
     trackBotVisit(request); // NOTE: run asynchronously
     const response = await handleRequest(
       request,
@@ -56,6 +57,7 @@ export default Sentry.wrapSentryHandleRequest(
       loadContext,
       { nonce: uuidv7() },
     );
+    // oxlint-disable-next-line typescript/no-floating-promises
     waitForResponse(response, start).then((duration) => {
       console.info(
         "%s %s => %d (%dms)",
@@ -86,8 +88,8 @@ export function handleDataRequest(
 ) {
   const start = Date.now();
   console.info("%s %s", request.method, request.url);
-  trackBotVisit(request); // NOTE: run asynchronously
-  waitForResponse(response, start).then((duration) => {
+  void trackBotVisit(request); // NOTE: run asynchronously
+  void waitForResponse(response, start).then((duration) => {
     console.info(
       "%s %s => %d (%dms)",
       request.method,

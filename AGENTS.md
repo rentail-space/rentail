@@ -5,15 +5,17 @@ Comprehensive guide for AI coding agents working in the rentail.space codebase.
 ## Commands
 
 ### Build & Test
+
 ```bash
 pnpm dev              # Start dev server (port 5173)
 pnpm build            # Production build (Prisma generate + React Router build)
 pnpm check            # Lint + typecheck (run before committing)
 pnpm test             # Full test suite (check + vitest)
-pnpm format --write   # Auto-format with Biome
+pnpm format           # Format with Oxfmt (via Vite+)
 ```
 
 ### Running Tests
+
 ```bash
 pnpx vitest run                    # Run all tests
 pnpx vitest run <pattern>          # Run specific test (e.g., "chat")
@@ -22,6 +24,7 @@ DEBUG=* pnpm test                  # Enable debug logging
 ```
 
 ### Database
+
 ```bash
 pnpm prisma generate               # Generate Prisma client
 pnpm prisma db push                # Push schema to dev DB
@@ -31,22 +34,25 @@ pnpm prisma migrate dev            # Create migration
 ## Code Style Guidelines
 
 ### TypeScript
+
 - **Strict mode required** - All code must pass `tsc --noEmit --strict`
 - **Prefer interfaces over types** for object shapes
 - **Avoid enums** - Use discriminated unions or const objects instead
-- **Avoid `any`** - Biome warns on explicit any (set to `warn`)
+- **Avoid `any`** - Oxlint warns on explicit any (set to `warn`)
 - **Descriptive names** - Use auxiliary verbs: `isLoading`, `hasError`, `canSubmit`
 - **Functional patterns** - No classes, prefer pure functions
 - **Early returns** - Handle errors at function start, avoid deep nesting
 
 ### Imports & Organization
+
 - **Path alias**: `~/*` maps to `./app/*`
-- **Import order**: Organized lexicographically (Biome auto-sorts)
+- **Import order**: Organized lexicographically
 - **File structure**: Exported component → subcomponents → helpers → static content → types
 - **Default exports** for components
-- **No barrel files** - Biome warns on performance impact
+- **No barrel files** - Oxlint warns on performance impact
 
-### Formatting (Biome)
+### Formatting (Oxfmt)
+
 - **Double quotes** for strings
 - **2-space indentation**
 - **80 character line width**
@@ -55,44 +61,49 @@ pnpm prisma migrate dev            # Create migration
 - **Single var declarator** per statement
 
 ### React & Components
+
 - **Functional components only** - No class components
 - **File naming**: lowercase-with-dashes for directories (e.g., `components/auth-wizard`)
 - **Component naming**: PascalCase, favor default export
 - **Hooks at top level** - Never inside conditionals/loops
-- **Exhaustive dependencies** - Biome warns on missing useEffect deps
+- **Exhaustive dependencies** - Oxlint warns on missing useEffect deps
 - **Minimize useState/useEffect** - Prefer context, reducers, or derived state
 - **Memoization** - Use `useMemo`/`useCallback` to prevent unnecessary re-renders
 - **Accessibility** - All pages need `<main>` with `aria-label`
 
 ### Conditionals & Logic
+
 - **No unnecessary curly braces** - Use concise syntax for simple statements
 - **Prefer early returns** over deeply nested if/else
-- **No useless else** - Biome rule `noUselessElse` is off (allowed but discouraged)
-- **Avoid forEach** - Use `for...of`, `.map()`, or `.filter()` instead (Biome warns)
+- **Avoid forEach** - Use `for...of`, `.map()`, or `.filter()` instead (Oxlint warns)
 
 ### Error Handling
+
 - **Zod for validation** - Runtime type checking and error handling
 - **Sentry for logging** - Use `captureException()` for errors
 - **Handle errors first** - Early returns for error conditions
 - **Avoid deeply nested ifs** - Use guard clauses
 
 ### Security
+
 - **Sanitize inputs** - Prevent XSS attacks
-- **Never use `dangerouslySetInnerHTML`** - Biome enforces this (error level)
+- **Never use `dangerouslySetInnerHTML`** - Oxlint enforces this (error level)
 - **bcrypt for passwords** - 10 salt rounds configured
 - **No secrets in console** - Use secretlint to check
 
 ### Logging
+
 - **debug module** - Use `debug("namespace:feature")` pattern
-- **Allowed console methods**: `.assert`, `.error`, `.info`, `.warn` (Biome enforces)
+- **Allowed console methods**: `.assert`, `.error`, `.info`, `.warn` (Oxlint enforces)
 - **No console.log** - Will fail lint check
 
 ### Performance
-- **Flat maps** - Biome enforces `useFlatMap` over nested map/flatten
-- **No re-export all** - Biome warns on `export * from`
+
+- **Flat maps** - Oxlint enforces `useFlatMap` over nested map/flatten
 - **Code splitting** - Use React Suspense and dynamic imports for non-critical components
 
 ### Testing (Vitest + Playwright)
+
 - **Test files**: `/test/*.test.ts` (NOT alongside source)
 - **Browser tests** - Uses Playwright browser provider
 - **Helpers**: `converse()` for E2E chat, `goto()` for navigation
@@ -103,6 +114,7 @@ pnpm prisma migrate dev            # Create migration
 ## React Router Conventions
 
 ### File-Based Routing
+
 - **Routes**: Files in `app/routes/` become routes
 - **Loaders**: Export `loader()` for data fetching (server-side)
 - **Actions**: Export `action()` for form submissions/mutations
@@ -110,6 +122,7 @@ pnpm prisma migrate dev            # Create migration
 - **Special files**: `route.tsx` for index, `[param].tsx` for dynamic routes
 
 ### Data Loading
+
 ```typescript
 import type { Route } from "./+types/route-name";
 
@@ -119,6 +132,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 ```
 
 ### Type Safety
+
 - **Generated types**: Import from `./+types/route-name`
 - **Loader data**: Typed automatically via `Route.LoaderArgs` and `Route.ComponentProps`
 
@@ -141,6 +155,7 @@ Use conventional commits with emoji prefixes:
 **Format**: `emoji type(scope): description`
 
 **Best Practices**:
+
 - Keep commits atomic and focused
 - Write in imperative mood ("Add feature" not "Added feature")
 - Explain why, not just what
@@ -151,6 +166,7 @@ Use conventional commits with emoji prefixes:
 ## Output Style
 
 Follow **CLEARFRAME mode** (from `.claude/rules/output-style.md`):
+
 - Execute immediately without explanation
 - No preamble phrases ("I'll help you", "Let me", "Here's what I found")
 - No postamble or summaries unless requested

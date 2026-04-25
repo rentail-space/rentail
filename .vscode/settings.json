@@ -1,40 +1,40 @@
 {
-  "prisma-smart-formatter.typescript.defaultFormatter": "biomejs.biome",
-  "prisma-smart-formatter.typescriptreact.defaultFormatter": "biomejs.biome",
-  "files.associations": {
-    "*.css": "tailwindcss",
-    "*.tsx": "typescriptreact"
-  },
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "never",
-    "source.fixAll.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "biomejs.biome",
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.biome": "explicit"
-    }
-  },
-  "search.exclude": {
-    "__screenshots__/**": true,
-    ".react-router/**": true,
-    ".vercel/**": true,
-    ".vscode/**": true,
-    "**/node_modules/**": true,
-    "app/data/blog/**": true,
-    "prisma/seed/**/*": true,
-    "public/images/**/*": true,
-    "pnpm-lock.yaml": true
-  },
-  "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#4338ca",
-    "titleBar.activeForeground": "#ffffff",
-    "titleBar.inactiveBackground": "#4338ca99",
-    "titleBar.inactiveForeground": "#ffffffcc",
-    "statusBar.background": "#4338ca",
-    "statusBar.foreground": "#ffffff"
-  }
+	"prisma-smart-formatter.typescript.defaultFormatter": "biomejs.biome",
+	"prisma-smart-formatter.typescriptreact.defaultFormatter": "biomejs.biome",
+	"files.associations": {
+		"*.css": "tailwindcss",
+		"*.tsx": "typescriptreact"
+	},
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "never",
+		"source.fixAll.biome": "explicit",
+		"source.organizeImports.biome": "explicit"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.biome": "explicit"
+		}
+	},
+	"search.exclude": {
+		"__screenshots__/**": true,
+		".react-router/**": true,
+		".vercel/**": true,
+		".vscode/**": true,
+		"**/node_modules/**": true,
+		"app/data/blog/**": true,
+		"prisma/seed/**/*": true,
+		"public/images/**/*": true,
+		"pnpm-lock.yaml": true
+	},
+	"workbench.colorCustomizations": {
+		"titleBar.activeBackground": "#4338ca",
+		"titleBar.activeForeground": "#ffffff",
+		"titleBar.inactiveBackground": "#4338ca99",
+		"titleBar.inactiveForeground": "#ffffffcc",
+		"statusBar.background": "#4338ca",
+		"statusBar.foreground": "#ffffff"
+	}
 }

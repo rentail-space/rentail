@@ -1,305 +1,299 @@
 {
-  "address": "610 Palomar Street",
-  "city": "Chula Vista",
-  "country": "US",
-  "googlePlaceID": "places/ChIJO_3PlitM2YARl-tJExQf2o0",
-  "name": "Palomar Trolley Center",
-  "state": "CA",
-  "latitude": 32.602536,
-  "longitude": -117.079088,
-  "phone": "++1 858-495-4900",
-  "imageURLs": [
-    "/images/malls/ca-palomar-trolley-center-1.jpg"
-  ],
-  "summary": "Palomar Trolley Center is a 183,000 square foot community shopping center in Chula Vista anchored by Food 4 Less, Ross, and DD's Discounts, featuring over 30 national and regional retailers, restaurants, and service providers. Strategically located at a high-traffic intersection near I-5 and adjacent to the Palomar Street Trolley & Transit Center, the center serves both local residents and cross-border shoppers from nearby Mexico.",
-  "openFrom": 700,
-  "openUntil": 0,
-  "rating": 4.3,
-  "reviewCount": 5278,
-  "website": "http://sihiproperties.com/property/palomar-trolley-center/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "The Palomar Trolley Center serves a diverse, working-class community with a median household income of $48,589 within one mile, rising to $65,991 within five miles. The trade area is characterized by young families with a median age of 34-35 years and moderate college education rates of 17-25%. The center attracts significant cross-border traffic from Mexico, located just 6 miles south, serving both local residents and international shoppers seeking value-oriented grocery, discount apparel, and everyday services. With over 65,000 vehicles passing daily at the Palomar Street and Broadway intersection, the center draws price-conscious consumers looking for convenient one-stop shopping anchored by Food 4 Less grocery and discount retailers like Ross and DD's Discounts.",
-  "description": "Palomar Trolley Center is a strategically positioned 183,000 square foot community shopping destination in Chula Vista, California's second-largest city in San Diego County with over 275,000 residents. Located less than half a mile east of Interstate 5 at the high-traffic intersection of Palomar Street and Broadway, the center serves as a vital retail hub for both local communities and international cross-border shoppers from nearby Mexico, just 6 miles to the south. The center is anchored by major national retailers including Food 4 Less grocery store, Ross Dress for Less, and DD's Discounts, complemented by a diverse tenant mix of over 30 specialty shops, services, and restaurants including Applebee's, Starbucks, Bank of America, and various local businesses. A unique feature of the property is its integration with the Palomar Street Trolley & Transit Center, providing exceptional accessibility via public transportation and making it a convenient destination for transit-dependent shoppers throughout the region. With over 65,000 vehicles passing daily and a trade area population exceeding 346,000 within five miles, Palomar Trolley Center has established itself as an essential shopping destination offering value-oriented retail, grocery, dining, and services to a diverse, multicultural customer base.",
-  "numberOfStores": 33,
-  "squareFootage": 183000,
-  "tier": 1,
-  "spaces": [
-    {
-      "number": "501",
-      "type": "Inline",
-      "size": 4500,
-      "available": true,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/available-blue-1.png"
-      ]
-    },
-    {
-      "number": "702-704",
-      "type": "Inline",
-      "size": 8260,
-      "available": true,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/available-blue-1.png"
-      ]
-    },
-    {
-      "number": "402",
-      "type": "Inline",
-      "size": 1804,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/Little-Kids-Wear.png"
-      ]
-    },
-    {
-      "number": "Bld. 13",
-      "type": "Other",
-      "size": 2393,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/Cox-Logo.png"
-      ]
-    },
-    {
-      "number": "Bld. 1",
-      "type": "Other",
-      "size": 50067,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/food4less.png",
-        "https://sihilive.wpenginepowered.com/wp-content/uploads/258-Palomar_Food4Less-800x500.jpg"
-      ]
-    },
-    {
-      "number": "Bld. 3",
-      "type": "Other",
-      "size": 24939,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/dds.png",
-        "https://sihilive.wpenginepowered.com/wp-content/uploads/258-Palomar_DDs_9-21-2021-800x500.jpg"
-      ]
-    },
-    {
-      "number": "Bld. 6",
-      "type": "Other",
-      "size": 33422,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/Ross-1.png"
-      ]
-    },
-    {
-      "number": "Bld. 14",
-      "type": "Other",
-      "size": 12000,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/WSS-Shoes-Logo.jpg"
-      ]
-    },
-    {
-      "number": "Bld. 15",
-      "type": "Other",
-      "size": 4700,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/available-blue-1.png"
-      ]
-    },
-    {
-      "number": "Bld. 15",
-      "type": "Other",
-      "size": 5294,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/applebees.png"
-      ]
-    },
-    {
-      "number": "201",
-      "type": "Inline",
-      "size": 1100,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/boostmob.png"
-      ]
-    },
-    {
-      "number": "202",
-      "type": "Inline",
-      "size": 900,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/IZ-eyebrow.png"
-      ]
-    },
-    {
-      "number": "401",
-      "type": "Inline",
-      "size": 4005,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/KidsClub.png",
-        "https://sihilive.wpenginepowered.com/wp-content/uploads/258-Palomar_KidsClub_9-21-2021-800x500.jpg"
-      ]
-    },
-    {
-      "number": "403",
-      "type": "Inline",
-      "size": 1020,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/TheJointChiropractic.png"
-      ]
-    },
-    {
-      "number": "405",
-      "type": "Inline",
-      "size": 1022,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/haircut-place.png"
-      ]
-    },
-    {
-      "number": "406",
-      "type": "Inline",
-      "size": 1157,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/upsstore.png"
-      ]
-    },
-    {
-      "number": "407",
-      "type": "Inline",
-      "size": 1155,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/subway.png",
-        "https://sihilive.wpenginepowered.com/wp-content/uploads/258-Palomar_Subway_9-21-2021-800x500.jpg"
-      ]
-    },
-    {
-      "number": "408",
-      "type": "Inline",
-      "size": 1155,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/littlecaesars-1.png"
-      ]
-    },
-    {
-      "number": "409",
-      "type": "Inline",
-      "size": 1157,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/mariostacoshop.png"
-      ]
-    },
-    {
-      "number": "410-411",
-      "type": "Inline",
-      "size": 2042,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/Benzer_Pharmacy_logo.png"
-      ]
-    },
-    {
-      "number": "701",
-      "type": "Inline",
-      "size": 2500,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/freeway-ins-1.png"
-      ]
-    },
-    {
-      "number": "1101",
-      "type": "Inline",
-      "size": 1195,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/DQ-OrangeJulius.png"
-      ]
-    },
-    {
-      "number": "1102",
-      "type": "Inline",
-      "size": 1045,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/totalwireless.png"
-      ]
-    },
-    {
-      "number": "1103",
-      "type": "Inline",
-      "size": 1515,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/palomar-dental.png"
-      ]
-    },
-    {
-      "number": "1104",
-      "type": "Inline",
-      "size": 1045,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/gnc.png"
-      ]
-    },
-    {
-      "number": "1105",
-      "type": "Inline",
-      "size": 1195,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/selinanails.jpg"
-      ]
-    },
-    {
-      "number": "Pad 8",
-      "type": "Cart",
-      "size": 2500,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/att.png",
-        "https://sihilive.wpenginepowered.com/wp-content/uploads/258-Palomar_ATT_9-21-2021-800x500.jpg"
-      ]
-    },
-    {
-      "number": "Pad 9",
-      "type": "Cart",
-      "size": 4000,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/BootWorld.jpg"
-      ]
-    },
-    {
-      "number": "Pad 10",
-      "type": "Cart",
-      "size": 3997,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/bofa.png",
-        "https://sihilive.wpenginepowered.com/wp-content/uploads/258-Palomar_BankofAmerica_09-21-2021-800x500.jpg"
-      ]
-    },
-    {
-      "number": "Pad 12",
-      "type": "Cart",
-      "size": 2204,
-      "available": false,
-      "imageURLs": [
-        "https://sihiproperties.com/wp-content/uploads/starbucks.png"
-      ]
-    }
-  ],
-  "ranking": 16.00661835930133
+	"address": "610 Palomar Street",
+	"city": "Chula Vista",
+	"country": "US",
+	"googlePlaceID": "places/ChIJO_3PlitM2YARl-tJExQf2o0",
+	"name": "Palomar Trolley Center",
+	"state": "CA",
+	"latitude": 32.602536,
+	"longitude": -117.079088,
+	"phone": "++1 858-495-4900",
+	"imageURLs": ["/images/malls/ca-palomar-trolley-center-1.jpg"],
+	"summary": "Palomar Trolley Center is a 183,000 square foot community shopping center in Chula Vista anchored by Food 4 Less, Ross, and DD's Discounts, featuring over 30 national and regional retailers, restaurants, and service providers. Strategically located at a high-traffic intersection near I-5 and adjacent to the Palomar Street Trolley & Transit Center, the center serves both local residents and cross-border shoppers from nearby Mexico.",
+	"openFrom": 700,
+	"openUntil": 0,
+	"rating": 4.3,
+	"reviewCount": 5278,
+	"website": "http://sihiproperties.com/property/palomar-trolley-center/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "The Palomar Trolley Center serves a diverse, working-class community with a median household income of $48,589 within one mile, rising to $65,991 within five miles. The trade area is characterized by young families with a median age of 34-35 years and moderate college education rates of 17-25%. The center attracts significant cross-border traffic from Mexico, located just 6 miles south, serving both local residents and international shoppers seeking value-oriented grocery, discount apparel, and everyday services. With over 65,000 vehicles passing daily at the Palomar Street and Broadway intersection, the center draws price-conscious consumers looking for convenient one-stop shopping anchored by Food 4 Less grocery and discount retailers like Ross and DD's Discounts.",
+	"description": "Palomar Trolley Center is a strategically positioned 183,000 square foot community shopping destination in Chula Vista, California's second-largest city in San Diego County with over 275,000 residents. Located less than half a mile east of Interstate 5 at the high-traffic intersection of Palomar Street and Broadway, the center serves as a vital retail hub for both local communities and international cross-border shoppers from nearby Mexico, just 6 miles to the south. The center is anchored by major national retailers including Food 4 Less grocery store, Ross Dress for Less, and DD's Discounts, complemented by a diverse tenant mix of over 30 specialty shops, services, and restaurants including Applebee's, Starbucks, Bank of America, and various local businesses. A unique feature of the property is its integration with the Palomar Street Trolley & Transit Center, providing exceptional accessibility via public transportation and making it a convenient destination for transit-dependent shoppers throughout the region. With over 65,000 vehicles passing daily and a trade area population exceeding 346,000 within five miles, Palomar Trolley Center has established itself as an essential shopping destination offering value-oriented retail, grocery, dining, and services to a diverse, multicultural customer base.",
+	"numberOfStores": 33,
+	"squareFootage": 183000,
+	"tier": 1,
+	"spaces": [
+		{
+			"number": "501",
+			"type": "Inline",
+			"size": 4500,
+			"available": true,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/available-blue-1.png"
+			]
+		},
+		{
+			"number": "702-704",
+			"type": "Inline",
+			"size": 8260,
+			"available": true,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/available-blue-1.png"
+			]
+		},
+		{
+			"number": "402",
+			"type": "Inline",
+			"size": 1804,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/Little-Kids-Wear.png"
+			]
+		},
+		{
+			"number": "Bld. 13",
+			"type": "Other",
+			"size": 2393,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/Cox-Logo.png"
+			]
+		},
+		{
+			"number": "Bld. 1",
+			"type": "Other",
+			"size": 50067,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/food4less.png",
+				"https://sihilive.wpenginepowered.com/wp-content/uploads/258-Palomar_Food4Less-800x500.jpg"
+			]
+		},
+		{
+			"number": "Bld. 3",
+			"type": "Other",
+			"size": 24939,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/dds.png",
+				"https://sihilive.wpenginepowered.com/wp-content/uploads/258-Palomar_DDs_9-21-2021-800x500.jpg"
+			]
+		},
+		{
+			"number": "Bld. 6",
+			"type": "Other",
+			"size": 33422,
+			"available": false,
+			"imageURLs": ["https://sihiproperties.com/wp-content/uploads/Ross-1.png"]
+		},
+		{
+			"number": "Bld. 14",
+			"type": "Other",
+			"size": 12000,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/WSS-Shoes-Logo.jpg"
+			]
+		},
+		{
+			"number": "Bld. 15",
+			"type": "Other",
+			"size": 4700,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/available-blue-1.png"
+			]
+		},
+		{
+			"number": "Bld. 15",
+			"type": "Other",
+			"size": 5294,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/applebees.png"
+			]
+		},
+		{
+			"number": "201",
+			"type": "Inline",
+			"size": 1100,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/boostmob.png"
+			]
+		},
+		{
+			"number": "202",
+			"type": "Inline",
+			"size": 900,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/IZ-eyebrow.png"
+			]
+		},
+		{
+			"number": "401",
+			"type": "Inline",
+			"size": 4005,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/KidsClub.png",
+				"https://sihilive.wpenginepowered.com/wp-content/uploads/258-Palomar_KidsClub_9-21-2021-800x500.jpg"
+			]
+		},
+		{
+			"number": "403",
+			"type": "Inline",
+			"size": 1020,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/TheJointChiropractic.png"
+			]
+		},
+		{
+			"number": "405",
+			"type": "Inline",
+			"size": 1022,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/haircut-place.png"
+			]
+		},
+		{
+			"number": "406",
+			"type": "Inline",
+			"size": 1157,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/upsstore.png"
+			]
+		},
+		{
+			"number": "407",
+			"type": "Inline",
+			"size": 1155,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/subway.png",
+				"https://sihilive.wpenginepowered.com/wp-content/uploads/258-Palomar_Subway_9-21-2021-800x500.jpg"
+			]
+		},
+		{
+			"number": "408",
+			"type": "Inline",
+			"size": 1155,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/littlecaesars-1.png"
+			]
+		},
+		{
+			"number": "409",
+			"type": "Inline",
+			"size": 1157,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/mariostacoshop.png"
+			]
+		},
+		{
+			"number": "410-411",
+			"type": "Inline",
+			"size": 2042,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/Benzer_Pharmacy_logo.png"
+			]
+		},
+		{
+			"number": "701",
+			"type": "Inline",
+			"size": 2500,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/freeway-ins-1.png"
+			]
+		},
+		{
+			"number": "1101",
+			"type": "Inline",
+			"size": 1195,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/DQ-OrangeJulius.png"
+			]
+		},
+		{
+			"number": "1102",
+			"type": "Inline",
+			"size": 1045,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/totalwireless.png"
+			]
+		},
+		{
+			"number": "1103",
+			"type": "Inline",
+			"size": 1515,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/palomar-dental.png"
+			]
+		},
+		{
+			"number": "1104",
+			"type": "Inline",
+			"size": 1045,
+			"available": false,
+			"imageURLs": ["https://sihiproperties.com/wp-content/uploads/gnc.png"]
+		},
+		{
+			"number": "1105",
+			"type": "Inline",
+			"size": 1195,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/selinanails.jpg"
+			]
+		},
+		{
+			"number": "Pad 8",
+			"type": "Cart",
+			"size": 2500,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/att.png",
+				"https://sihilive.wpenginepowered.com/wp-content/uploads/258-Palomar_ATT_9-21-2021-800x500.jpg"
+			]
+		},
+		{
+			"number": "Pad 9",
+			"type": "Cart",
+			"size": 4000,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/BootWorld.jpg"
+			]
+		},
+		{
+			"number": "Pad 10",
+			"type": "Cart",
+			"size": 3997,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/bofa.png",
+				"https://sihilive.wpenginepowered.com/wp-content/uploads/258-Palomar_BankofAmerica_09-21-2021-800x500.jpg"
+			]
+		},
+		{
+			"number": "Pad 12",
+			"type": "Cart",
+			"size": 2204,
+			"available": false,
+			"imageURLs": [
+				"https://sihiproperties.com/wp-content/uploads/starbucks.png"
+			]
+		}
+	],
+	"ranking": 16.00661835930133
 }

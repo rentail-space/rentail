@@ -1,40 +1,38 @@
 {
-  "address": "19333 U.S. 59",
-  "city": "Humble",
-  "country": "US",
-  "googlePlaceID": "places/ChIJh4nKnlGyQIYRMJy9kR5SpK4",
-  "name": "Humble Plaza Shopping Center",
-  "state": "TX",
-  "latitude": 29.9989233,
-  "longitude": -95.27225609999999,
-  "phone": "++1 281-548-1245",
-  "imageURLs": [
-    "/images/malls/tx-humble-plaza-shopping-center-1.jpg"
-  ],
-  "summary": "Humble Plaza Shopping Center has proudly served the Humble, Texas community for over 30 years, offering convenient access just off Highway US-59 near George Bush Intercontinental Airport. This established shopping center provides competitive leasing opportunities for businesses seeking a location in this growing Houston-area market.",
-  "openFrom": 900,
-  "openUntil": 1500,
-  "rating": 4.3,
-  "reviewCount": 411,
-  "website": "https://www.humbleplaza.com/?utm_source=rentail.space",
-  "centerType": "StripCenter",
-  "demographics": "Humble Plaza Shopping Center serves a diverse, family-oriented community in the greater Houston metropolitan area. The trade area draws from middle-income households with a mix of young families and established residents, many employed in the nearby energy, aerospace, and service sectors given the proximity to George Bush Intercontinental Airport. The center attracts convenience-focused shoppers seeking everyday services and local businesses, with visitors typically ranging from 25-65 years old who value accessibility and community-oriented retail experiences.",
-  "description": "Humble Plaza Shopping Center has been a cornerstone of the Humble, Texas community for over 30 years, providing essential retail and service options to local residents and businesses. Strategically located at 19333 US-59, this well-established shopping center offers unparalleled convenience, situated within seconds of Highway US-59, just 6 minutes from Deerbrook Mall, and within 5 miles of George Bush Intercontinental Airport. The center's longevity speaks to its strong community ties and commitment to serving the diverse needs of Humble residents. Managed by Equity Heart, Humble Plaza Shopping Center maintains competitive leasing rates and a welcoming environment for both tenants and customers. With office hours Monday through Friday from 9:00 AM to 3:00 PM, the friendly management team is dedicated to supporting business owners and organizations seeking their next commercial location in this thriving Houston-area community.",
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "Suite 115",
-      "type": "Inline",
-      "size": 2041,
-      "floor": 1,
-      "available": false,
-      "imageURLs": [
-        "https://humbleplazatx.com/wp-content/uploads/2022/10/office-exterior-1-1024x576.jpg",
-        "https://humbleplazatx.com/wp-content/uploads/2022/10/plaza-external-2-1-1024x576.jpg",
-        "https://humbleplazatx.com/wp-content/uploads/2022/10/home-plaza-1-1-1024x576.jpg",
-        "https://humbleplazatx.com/wp-content/uploads/2022/10/humble-plaza-overhead-2-1-1024x576.jpg"
-      ]
-    }
-  ],
-  "ranking": 22.479039668134195
+	"address": "19333 U.S. 59",
+	"city": "Humble",
+	"country": "US",
+	"googlePlaceID": "places/ChIJh4nKnlGyQIYRMJy9kR5SpK4",
+	"name": "Humble Plaza Shopping Center",
+	"state": "TX",
+	"latitude": 29.9989233,
+	"longitude": -95.27225609999999,
+	"phone": "++1 281-548-1245",
+	"imageURLs": ["/images/malls/tx-humble-plaza-shopping-center-1.jpg"],
+	"summary": "Humble Plaza Shopping Center has proudly served the Humble, Texas community for over 30 years, offering convenient access just off Highway US-59 near George Bush Intercontinental Airport. This established shopping center provides competitive leasing opportunities for businesses seeking a location in this growing Houston-area market.",
+	"openFrom": 900,
+	"openUntil": 1500,
+	"rating": 4.3,
+	"reviewCount": 411,
+	"website": "https://www.humbleplaza.com/?utm_source=rentail.space",
+	"centerType": "StripCenter",
+	"demographics": "Humble Plaza Shopping Center serves a diverse, family-oriented community in the greater Houston metropolitan area. The trade area draws from middle-income households with a mix of young families and established residents, many employed in the nearby energy, aerospace, and service sectors given the proximity to George Bush Intercontinental Airport. The center attracts convenience-focused shoppers seeking everyday services and local businesses, with visitors typically ranging from 25-65 years old who value accessibility and community-oriented retail experiences.",
+	"description": "Humble Plaza Shopping Center has been a cornerstone of the Humble, Texas community for over 30 years, providing essential retail and service options to local residents and businesses. Strategically located at 19333 US-59, this well-established shopping center offers unparalleled convenience, situated within seconds of Highway US-59, just 6 minutes from Deerbrook Mall, and within 5 miles of George Bush Intercontinental Airport. The center's longevity speaks to its strong community ties and commitment to serving the diverse needs of Humble residents. Managed by Equity Heart, Humble Plaza Shopping Center maintains competitive leasing rates and a welcoming environment for both tenants and customers. With office hours Monday through Friday from 9:00 AM to 3:00 PM, the friendly management team is dedicated to supporting business owners and organizations seeking their next commercial location in this thriving Houston-area community.",
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "Suite 115",
+			"type": "Inline",
+			"size": 2041,
+			"floor": 1,
+			"available": false,
+			"imageURLs": [
+				"https://humbleplazatx.com/wp-content/uploads/2022/10/office-exterior-1-1024x576.jpg",
+				"https://humbleplazatx.com/wp-content/uploads/2022/10/plaza-external-2-1-1024x576.jpg",
+				"https://humbleplazatx.com/wp-content/uploads/2022/10/home-plaza-1-1-1024x576.jpg",
+				"https://humbleplazatx.com/wp-content/uploads/2022/10/humble-plaza-overhead-2-1-1024x576.jpg"
+			]
+		}
+	],
+	"ranking": 22.479039668134195
 }

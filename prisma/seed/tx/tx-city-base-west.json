@@ -1,122 +1,120 @@
 {
-  "address": "7307 South New Braunfels Avenue",
-  "city": "San Antonio",
-  "country": "US",
-  "googlePlaceID": "places/ChIJyyb6ITJnXIYRp1lhd8GMBr4",
-  "name": "City Base West",
-  "state": "TX",
-  "latitude": 29.354001099999998,
-  "longitude": -98.4512859,
-  "phone": "++1 210-775-6842",
-  "imageURLs": [
-    "/images/malls/tx-city-base-west-1.jpg"
-  ],
-  "summary": "City Base West is a neighborhood shopping center at the entrance of Brooks City Base, featuring City Base Cinema 10, popular restaurants, and essential services. The center offers excellent visibility along Southeast Military Drive with convenient Interstate 37 access, serving the southeast San Antonio community.",
-  "openFrom": 900,
-  "openUntil": 2300,
-  "rating": 4.4,
-  "reviewCount": 4409,
-  "website": "http://www.citybasewest.com/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "City Base West serves a diverse, middle-income demographic in southeast San Antonio, drawing from the Brooks City Base area and surrounding neighborhoods. The trade area includes a mix of military families, young professionals, and established households with median incomes typical of the San Antonio market. Primary visitors are convenience-oriented shoppers seeking dining, entertainment, and essential services, with strong evening and weekend traffic driven by the cinema and restaurant tenants. The center benefits from its proximity to Interstate 37, attracting both local residents and commuters from the broader southeast San Antonio corridor.",
-  "description": "City Base West is a strategically positioned neighborhood shopping center located at the main entrance of Brooks City Base along Southeast Military Drive and South New Braunfels Avenue in San Antonio, Texas. The center offers exceptional visibility and convenient access to Interstate 37, making it a prime destination for residents and visitors in southeast San Antonio. Anchored by City Base Cinema 10, the property features a diverse tenant mix including popular dining options like 54th Street Grill & Bar, Firehouse Subs, and Krispy Kreme Doughnuts, alongside essential services such as DSI Southeast San Antonio Dialysis and Complete Urgent Care. With multiple available suites ranging from 1,000 to 10,000 square feet, plus development pads up to 1.27 acres, City Base West continues to evolve as a community hub. The center's combination of entertainment, dining, and healthcare services creates a compelling mixed-use environment that serves the daily needs of the growing Brooks City Base community and surrounding neighborhoods.",
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "2511",
-      "type": "Inline",
-      "size": 3000
-    },
-    {
-      "number": "2515",
-      "type": "Inline",
-      "size": 2500
-    },
-    {
-      "number": "A103",
-      "type": "Inline",
-      "size": 1826
-    },
-    {
-      "number": "A103-A104",
-      "type": "Inline",
-      "size": 3026
-    },
-    {
-      "number": "A104",
-      "type": "Inline",
-      "size": 1200
-    },
-    {
-      "number": "AA104",
-      "type": "Inline",
-      "size": 1000
-    },
-    {
-      "number": "AA104-AA105",
-      "type": "Inline",
-      "size": 2445
-    },
-    {
-      "number": "AA105",
-      "type": "Inline",
-      "size": 1445
-    },
-    {
-      "number": "D105",
-      "type": "Inline",
-      "size": 5000
-    },
-    {
-      "number": "D105-D110",
-      "type": "Inline",
-      "size": 10000
-    },
-    {
-      "number": "D110",
-      "type": "Inline",
-      "size": 5000
-    },
-    {
-      "number": "D115",
-      "type": "Inline",
-      "size": 5000
-    },
-    {
-      "number": "MB104",
-      "type": "Inline",
-      "size": 1895
-    },
-    {
-      "number": "MB106",
-      "type": "Inline",
-      "size": 2655
-    },
-    {
-      "number": "MB130",
-      "type": "Inline",
-      "size": 2984
-    },
-    {
-      "number": "Pad 1",
-      "type": "Other",
-      "size": 13500
-    },
-    {
-      "number": "Pad 2",
-      "type": "Other",
-      "size": 21780
-    },
-    {
-      "number": "Pad 4",
-      "type": "Other",
-      "size": 55242
-    },
-    {
-      "number": "Pad 5",
-      "type": "Other",
-      "size": 55242
-    }
-  ],
-  "ranking": 32.07019286967164
+	"address": "7307 South New Braunfels Avenue",
+	"city": "San Antonio",
+	"country": "US",
+	"googlePlaceID": "places/ChIJyyb6ITJnXIYRp1lhd8GMBr4",
+	"name": "City Base West",
+	"state": "TX",
+	"latitude": 29.354001099999998,
+	"longitude": -98.4512859,
+	"phone": "++1 210-775-6842",
+	"imageURLs": ["/images/malls/tx-city-base-west-1.jpg"],
+	"summary": "City Base West is a neighborhood shopping center at the entrance of Brooks City Base, featuring City Base Cinema 10, popular restaurants, and essential services. The center offers excellent visibility along Southeast Military Drive with convenient Interstate 37 access, serving the southeast San Antonio community.",
+	"openFrom": 900,
+	"openUntil": 2300,
+	"rating": 4.4,
+	"reviewCount": 4409,
+	"website": "http://www.citybasewest.com/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "City Base West serves a diverse, middle-income demographic in southeast San Antonio, drawing from the Brooks City Base area and surrounding neighborhoods. The trade area includes a mix of military families, young professionals, and established households with median incomes typical of the San Antonio market. Primary visitors are convenience-oriented shoppers seeking dining, entertainment, and essential services, with strong evening and weekend traffic driven by the cinema and restaurant tenants. The center benefits from its proximity to Interstate 37, attracting both local residents and commuters from the broader southeast San Antonio corridor.",
+	"description": "City Base West is a strategically positioned neighborhood shopping center located at the main entrance of Brooks City Base along Southeast Military Drive and South New Braunfels Avenue in San Antonio, Texas. The center offers exceptional visibility and convenient access to Interstate 37, making it a prime destination for residents and visitors in southeast San Antonio. Anchored by City Base Cinema 10, the property features a diverse tenant mix including popular dining options like 54th Street Grill & Bar, Firehouse Subs, and Krispy Kreme Doughnuts, alongside essential services such as DSI Southeast San Antonio Dialysis and Complete Urgent Care. With multiple available suites ranging from 1,000 to 10,000 square feet, plus development pads up to 1.27 acres, City Base West continues to evolve as a community hub. The center's combination of entertainment, dining, and healthcare services creates a compelling mixed-use environment that serves the daily needs of the growing Brooks City Base community and surrounding neighborhoods.",
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "2511",
+			"type": "Inline",
+			"size": 3000
+		},
+		{
+			"number": "2515",
+			"type": "Inline",
+			"size": 2500
+		},
+		{
+			"number": "A103",
+			"type": "Inline",
+			"size": 1826
+		},
+		{
+			"number": "A103-A104",
+			"type": "Inline",
+			"size": 3026
+		},
+		{
+			"number": "A104",
+			"type": "Inline",
+			"size": 1200
+		},
+		{
+			"number": "AA104",
+			"type": "Inline",
+			"size": 1000
+		},
+		{
+			"number": "AA104-AA105",
+			"type": "Inline",
+			"size": 2445
+		},
+		{
+			"number": "AA105",
+			"type": "Inline",
+			"size": 1445
+		},
+		{
+			"number": "D105",
+			"type": "Inline",
+			"size": 5000
+		},
+		{
+			"number": "D105-D110",
+			"type": "Inline",
+			"size": 10000
+		},
+		{
+			"number": "D110",
+			"type": "Inline",
+			"size": 5000
+		},
+		{
+			"number": "D115",
+			"type": "Inline",
+			"size": 5000
+		},
+		{
+			"number": "MB104",
+			"type": "Inline",
+			"size": 1895
+		},
+		{
+			"number": "MB106",
+			"type": "Inline",
+			"size": 2655
+		},
+		{
+			"number": "MB130",
+			"type": "Inline",
+			"size": 2984
+		},
+		{
+			"number": "Pad 1",
+			"type": "Other",
+			"size": 13500
+		},
+		{
+			"number": "Pad 2",
+			"type": "Other",
+			"size": 21780
+		},
+		{
+			"number": "Pad 4",
+			"type": "Other",
+			"size": 55242
+		},
+		{
+			"number": "Pad 5",
+			"type": "Other",
+			"size": 55242
+		}
+	],
+	"ranking": 32.07019286967164
 }

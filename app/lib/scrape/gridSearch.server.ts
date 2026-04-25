@@ -17,7 +17,7 @@ import type { BoundingBox, LatLng } from "./geocodeCounty.server";
  * @param bufferKm Extra buffer around bounds in km to catch edge cases
  * @returns Array of center points for searches
  */
-export function generateHexGrid(
+export default function generateHexGrid(
   bounds: BoundingBox,
   radiusKm: number,
   bufferKm: number,
@@ -80,37 +80,4 @@ export function generateHexGrid(
   }
 
   return points;
-}
-
-/**
- * Calculate approximate coverage area in km² for a given radius
- *
- * @param radiusKm Search radius in kilometers
- * @returns Coverage area in square kilometers
- */
-export function calculateCoverageArea(radiusKm: number): number {
-  return Math.PI * radiusKm * radiusKm;
-}
-
-/**
- * Estimate number of grid points needed for a bounding box
- *
- * @param bounds Bounding box to cover
- * @param radiusKm Search radius in kilometers
- * @returns Estimated number of grid points
- */
-export function estimateGridSize(bounds: BoundingBox, radiusKm = 50): number {
-  // Calculate bounding box area in km²
-  const latDiffKm = (bounds.north - bounds.south) * 111.32;
-  const avgLat = (bounds.north + bounds.south) / 2;
-  const lngDiffKm =
-    (bounds.east - bounds.west) * 111.32 * Math.cos((avgLat * Math.PI) / 180);
-
-  const boxAreaKm2 = latDiffKm * lngDiffKm;
-  const coveragePerPoint = calculateCoverageArea(radiusKm);
-
-  // Account for hexagonal packing efficiency (~15% overlap)
-  const packingEfficiency = 0.85;
-
-  return Math.ceil(boxAreaKm2 / (coveragePerPoint * packingEfficiency));
 }

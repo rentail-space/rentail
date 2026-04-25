@@ -1,63 +1,61 @@
 {
-  "address": "9507 Harwin Drive",
-  "city": "Houston",
-  "country": "US",
-  "googlePlaceID": "places/ChIJpwDpKuPCQIYR2BLwKQAUZt0",
-  "name": "Harwin Outlet Mall",
-  "state": "TX",
-  "latitude": 29.717266,
-  "longitude": -95.52994679999999,
-  "imageURLs": [
-    "/images/malls/tx-harwin-outlet-mall-1.jpg"
-  ],
-  "summary": "Harwin Outlet Mall is a large indoor shopping plaza on Houston's famous Harwin Drive, specializing in discount ladies' apparel, accessories, cosmetics, and bridal wear. With ten specialty stores including fashion boutiques, jewelry vendors, and bridal shops, the center serves value-conscious shoppers seeking variety and competitive pricing in a convenient indoor setting.",
-  "openFrom": 1000,
-  "openUntil": 1900,
-  "rating": 4.1,
-  "reviewCount": 842,
-  "website": "http://harwinoutletmall.shop/?utm_source=rentail.space",
-  "centerType": "OutletCenter",
-  "demographics": "Harwin Outlet Mall attracts a diverse, value-conscious customer base primarily from Houston's international communities, particularly Asian and Hispanic shoppers seeking wholesale and discount goods. The trade area draws middle-income households looking for affordable fashion, accessories, and bridal wear, with many visitors being small business owners and resellers purchasing inventory. Shopping patterns reflect bargain-hunting behavior with extended browsing times across multiple vendors, and the center serves as a destination for special occasion shopping, particularly for quinceañera and wedding attire.",
-  "description": "Harwin Outlet Mall is a distinctive indoor shopping destination located in Houston's renowned Harwin Drive shopping district, known for its concentration of wholesale and discount retailers. This large indoor plaza specializes in ladies' apparel, bags, scarves, cosmetics, and a wide variety of discount goods, offering shoppers an extensive selection under one roof. The mall features a curated mix of specialty retailers including JS Collection, The Perfect Gem jewelry store, Mad Fashion, Dressanovo bridal boutique, Dream's Bridal, Traditions Boutique XV for quinceañera attire, Solo Mexico Imports, Eau de Fragrances US, and SAC Store Fixtures. Operating daily from 10:00 AM to 7:00 PM, the center has earned a solid 4.1-star rating from over 840 Google reviews, reflecting its popularity among Houston shoppers seeking value and variety. The mall's strategic location on Harwin Drive positions it within one of Houston's most vibrant international shopping corridors, making it a go-to destination for both retail customers and wholesale buyers looking for competitive pricing on fashion and accessories.",
-  "numberOfStores": 10,
-  "tier": 1,
-  "spaces": [
-    {
-      "number": "100",
-      "type": "Inline"
-    },
-    {
-      "number": "102",
-      "type": "Inline"
-    },
-    {
-      "number": "105",
-      "type": "Inline"
-    },
-    {
-      "number": "120",
-      "type": "Inline"
-    },
-    {
-      "number": "126",
-      "type": "Inline"
-    },
-    {
-      "number": "135",
-      "type": "Inline"
-    },
-    {
-      "number": "148",
-      "type": "Inline"
-    },
-    {
-      "number": "158",
-      "type": "Inline"
-    },
-    {
-      "number": "165",
-      "type": "Inline"
-    }
-  ],
-  "ranking": 11.993779575148562
+	"address": "9507 Harwin Drive",
+	"city": "Houston",
+	"country": "US",
+	"googlePlaceID": "places/ChIJpwDpKuPCQIYR2BLwKQAUZt0",
+	"name": "Harwin Outlet Mall",
+	"state": "TX",
+	"latitude": 29.717266,
+	"longitude": -95.52994679999999,
+	"imageURLs": ["/images/malls/tx-harwin-outlet-mall-1.jpg"],
+	"summary": "Harwin Outlet Mall is a large indoor shopping plaza on Houston's famous Harwin Drive, specializing in discount ladies' apparel, accessories, cosmetics, and bridal wear. With ten specialty stores including fashion boutiques, jewelry vendors, and bridal shops, the center serves value-conscious shoppers seeking variety and competitive pricing in a convenient indoor setting.",
+	"openFrom": 1000,
+	"openUntil": 1900,
+	"rating": 4.1,
+	"reviewCount": 842,
+	"website": "http://harwinoutletmall.shop/?utm_source=rentail.space",
+	"centerType": "OutletCenter",
+	"demographics": "Harwin Outlet Mall attracts a diverse, value-conscious customer base primarily from Houston's international communities, particularly Asian and Hispanic shoppers seeking wholesale and discount goods. The trade area draws middle-income households looking for affordable fashion, accessories, and bridal wear, with many visitors being small business owners and resellers purchasing inventory. Shopping patterns reflect bargain-hunting behavior with extended browsing times across multiple vendors, and the center serves as a destination for special occasion shopping, particularly for quinceañera and wedding attire.",
+	"description": "Harwin Outlet Mall is a distinctive indoor shopping destination located in Houston's renowned Harwin Drive shopping district, known for its concentration of wholesale and discount retailers. This large indoor plaza specializes in ladies' apparel, bags, scarves, cosmetics, and a wide variety of discount goods, offering shoppers an extensive selection under one roof. The mall features a curated mix of specialty retailers including JS Collection, The Perfect Gem jewelry store, Mad Fashion, Dressanovo bridal boutique, Dream's Bridal, Traditions Boutique XV for quinceañera attire, Solo Mexico Imports, Eau de Fragrances US, and SAC Store Fixtures. Operating daily from 10:00 AM to 7:00 PM, the center has earned a solid 4.1-star rating from over 840 Google reviews, reflecting its popularity among Houston shoppers seeking value and variety. The mall's strategic location on Harwin Drive positions it within one of Houston's most vibrant international shopping corridors, making it a go-to destination for both retail customers and wholesale buyers looking for competitive pricing on fashion and accessories.",
+	"numberOfStores": 10,
+	"tier": 1,
+	"spaces": [
+		{
+			"number": "100",
+			"type": "Inline"
+		},
+		{
+			"number": "102",
+			"type": "Inline"
+		},
+		{
+			"number": "105",
+			"type": "Inline"
+		},
+		{
+			"number": "120",
+			"type": "Inline"
+		},
+		{
+			"number": "126",
+			"type": "Inline"
+		},
+		{
+			"number": "135",
+			"type": "Inline"
+		},
+		{
+			"number": "148",
+			"type": "Inline"
+		},
+		{
+			"number": "158",
+			"type": "Inline"
+		},
+		{
+			"number": "165",
+			"type": "Inline"
+		}
+	],
+	"ranking": 11.993779575148562
 }

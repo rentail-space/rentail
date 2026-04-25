@@ -1,20 +1,18 @@
 {
-  "address": "32229 Carnelian Road",
-  "city": "Lucerne Valley",
-  "country": "US",
-  "googlePlaceID": "places/ChIJZfI58qK7xIARkFdOJkSmv18",
-  "name": "Day Trip So Cal",
-  "state": "CA",
-  "latitude": 34.4034915,
-  "longitude": -116.96069449999999,
-  "imageURLs": [
-    "/images/malls/ca-day-trip-so-cal-1.jpg"
-  ],
-  "summary": "Day Trip So Cal is a specialized outdoor lifestyle boutique in Lucerne Valley offering curated products for Southern California adventures, from desert-ready sunglasses to road trip guides. This unique retail destination caters to explorers seeking authentic SoCal gear and travel resources for scenic routes like Angeles Crest Highway.",
-  "website": "https://daytripsocal.com/?utm_source=rentail.space",
-  "centerType": "StripCenter",
-  "demographics": "Day Trip So Cal attracts outdoor enthusiasts and adventure seekers, primarily millennials and Gen X visitors aged 25-45 with middle to upper-middle income levels. The customer base consists of Southern California residents and tourists seeking authentic desert and mountain experiences, particularly those interested in road trips along scenic routes like Angeles Crest Highway. Shoppers tend to be active lifestyle consumers who value quality outdoor gear and locally-inspired accessories, with a preference for curated, experience-driven retail over mass-market options.",
-  "description": "Day Trip So Cal is a unique retail destination located in Lucerne Valley, California, that celebrates the spirit of Southern California adventure and exploration. Rather than a traditional shopping center, this is a specialized boutique operation offering carefully curated products designed for desert highways, mountain roads, and sun-soaked SoCal adventures. The store features a distinctive collection of outdoor lifestyle products including the So Cal Sun sunglasses line built for blinding desert highways and Palm Springs glare, along with adventure-ready accessories like the Arroyo Crossbody tote bag, Badwater Air Pro footwear, and the Camarillo Straw Hat. Day Trip So Cal also offers unique travel guides, including their Day Trip Guide to Angeles Crest Highway, positioning themselves as both an outfitter and resource for Southern California explorers. With its location on Carnelian Road in the high desert community of Lucerne Valley, the store embodies the rugged, adventurous character of the region while serving as a gateway for visitors seeking authentic SoCal road trip experiences.",
-  "tier": 2,
-  "spaces": []
+	"address": "32229 Carnelian Road",
+	"city": "Lucerne Valley",
+	"country": "US",
+	"googlePlaceID": "places/ChIJZfI58qK7xIARkFdOJkSmv18",
+	"name": "Day Trip So Cal",
+	"state": "CA",
+	"latitude": 34.4034915,
+	"longitude": -116.96069449999999,
+	"imageURLs": ["/images/malls/ca-day-trip-so-cal-1.jpg"],
+	"summary": "Day Trip So Cal is a specialized outdoor lifestyle boutique in Lucerne Valley offering curated products for Southern California adventures, from desert-ready sunglasses to road trip guides. This unique retail destination caters to explorers seeking authentic SoCal gear and travel resources for scenic routes like Angeles Crest Highway.",
+	"website": "https://daytripsocal.com/?utm_source=rentail.space",
+	"centerType": "StripCenter",
+	"demographics": "Day Trip So Cal attracts outdoor enthusiasts and adventure seekers, primarily millennials and Gen X visitors aged 25-45 with middle to upper-middle income levels. The customer base consists of Southern California residents and tourists seeking authentic desert and mountain experiences, particularly those interested in road trips along scenic routes like Angeles Crest Highway. Shoppers tend to be active lifestyle consumers who value quality outdoor gear and locally-inspired accessories, with a preference for curated, experience-driven retail over mass-market options.",
+	"description": "Day Trip So Cal is a unique retail destination located in Lucerne Valley, California, that celebrates the spirit of Southern California adventure and exploration. Rather than a traditional shopping center, this is a specialized boutique operation offering carefully curated products designed for desert highways, mountain roads, and sun-soaked SoCal adventures. The store features a distinctive collection of outdoor lifestyle products including the So Cal Sun sunglasses line built for blinding desert highways and Palm Springs glare, along with adventure-ready accessories like the Arroyo Crossbody tote bag, Badwater Air Pro footwear, and the Camarillo Straw Hat. Day Trip So Cal also offers unique travel guides, including their Day Trip Guide to Angeles Crest Highway, positioning themselves as both an outfitter and resource for Southern California explorers. With its location on Carnelian Road in the high desert community of Lucerne Valley, the store embodies the rugged, adventurous character of the region while serving as a gateway for visitors seeking authentic SoCal road trip experiences.",
+	"tier": 2,
+	"spaces": []
 }

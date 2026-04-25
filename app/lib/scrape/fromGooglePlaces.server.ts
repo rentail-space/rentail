@@ -3,15 +3,14 @@
  * @see https://console.cloud.google.com/billing/015C92-88EA69-E2A38C/reports?project=rentail-480516&organizationId=316438173672
  */
 
-import type { Property } from "prisma/generated";
 import { mkdir, writeFile } from "node:fs/promises";
 import { trackApiCall } from "~/lib/apiUsageTracker";
 import { existsSync } from "node:fs";
+import { type Ora } from "ora";
 import { daysAgo } from "~/lib/temporal";
 import { slugify } from "~/lib/utils";
 import { join } from "node:path";
 import { map } from "radashi";
-import ora, { type Ora } from "ora";
 import invariant from "tiny-invariant";
 import envVars from "~/lib/env";
 import sharp from "sharp";
@@ -211,47 +210,6 @@ async function searchNearbyRaw({
           place.businessStatus === "OPERATIONAL" &&
           place.websiteUri,
       );
-    },
-  );
-}
-
-/**
- * Get place details from Google Places API. The Places API charges for usage,
- * so this function uses database caching to avoid redundant API calls.
- *
- * @param searchName Name of the place to search for
- * @param placeID ID of the place (eg "places/ChIJj61dQgK6j4AR4GeTYWZsKWw")
- * @returns Place details, or undefined if the place is not found or not operational
- */
-export async function updatePlaceDetails(property: Property) {
-  await trackApiCall(
-    {
-      service: "google-places",
-      endpoint: "place-details",
-      defaultValue: null,
-      newerThan: daysAgo(10),
-      key: `place-details:${property.googlePlaceID}`,
-    },
-    async () => {
-      const spinner = ora(`Updating details for ${property.name}`).start();
-
-      const response = await fetch(
-        `https://places.googleapis.com/v1/${property.googlePlaceID}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "User-Agent": "rentail.space/1.0 (support@rentail.space)",
-            "X-Goog-Api-Key": envVars.GOOGLE_PLACES_API_KEY,
-            "X-Goog-FieldMask": findPlaceFields.join(","),
-          },
-        },
-      );
-      invariant(response.ok, "Failed to get place details");
-
-      const place = (await response.json()) as PlacesAPIPlace;
-      const readyToSave = await prepareSave(place);
-      spinner.succeed();
-      return readyToSave;
     },
   );
 }

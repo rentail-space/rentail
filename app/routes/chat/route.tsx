@@ -49,7 +49,7 @@ export default function ChatPage() {
     queryKey: ["centers", chatId],
   });
 
-  const { error, messages, sendMessage, status, stop } = useChat({
+  const { error, messages, sendMessage, status } = useChat({
     id: chatId,
     generateId: () => ulid(),
     messages: initialMessages,
@@ -63,7 +63,7 @@ export default function ChatPage() {
     },
     onFinish: ({ isAbort }) => {
       setIsAborted(isAbort);
-      if (!isAbort) centersQuery.refetch();
+      if (!isAbort) void centersQuery.refetch();
     },
   });
 
@@ -106,7 +106,6 @@ export default function ChatPage() {
         <ScrollButton />
 
         <InputForm
-          isResponding={status === "streaming"}
           isSubmitting={status === "submitted"}
           query={query}
           sendMessage={async (message: string) => {
@@ -117,10 +116,6 @@ export default function ChatPage() {
             });
           }}
           setQuery={setQuery}
-          stopChat={() => {
-            stop();
-            fetch(`/api/chat/${chatId}/stop`, { method: "POST" });
-          }}
         />
       </StickToBottom>
     </main>

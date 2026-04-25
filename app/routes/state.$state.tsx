@@ -1,24 +1,24 @@
-import type { PropertyGetPayload } from "prisma/generated/models";
-import type { Route } from "./+types/state.$state";
 import { clamp, meanBy, range } from "es-toolkit";
-import { Fragment, useRef } from "react";
-import { Streamdown } from "streamdown";
-import { ActiveLink } from "~/components/ui/ActiveLink";
-import { pluralize } from "~/lib/utils";
-import { Button } from "~/components/ui/Button";
-import { Link } from "react-router";
 import {
   ArrowRightIcon,
+  MapPinIcon,
   MoveLeftIcon,
   StarHalfIcon,
-  MapPinIcon,
   StarIcon,
 } from "lucide-react";
+import type { PropertyGetPayload } from "prisma/generated/models";
+import { Fragment, useRef } from "react";
+import { Link } from "react-router";
+import { Streamdown } from "streamdown";
+import { ActiveLink } from "~/components/ui/ActiveLink";
+import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
-import timeOfDay from "~/lib/timeOfDay";
-import pageMeta from "~/lib/pageMeta";
 import envVars from "~/lib/env";
+import pageMeta from "~/lib/pageMeta";
 import prisma from "~/lib/prisma.server";
+import timeOfDay from "~/lib/timeOfDay";
+import { pluralize } from "~/lib/utils";
+import type { Route } from "./+types/state.$state";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const state = await prisma.state.findUnique({
@@ -74,7 +74,6 @@ export default function StatePage({ loaderData }: Route.ComponentProps) {
     <main className="container mx-auto my-10 space-y-8 p-5">
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated data
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaData(loaderData)),
         }}

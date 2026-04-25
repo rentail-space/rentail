@@ -3,7 +3,9 @@
     "app/**/*.ts",
     "app/**/*.tsx",
     ".react-router/types/**/*",
-    "test/**/*.ts"
+    "test/**/*.ts",
+    "prisma/**/*.ts",
+    "scripts/**/*.ts"
   ],
   "exclude": [
     "__screenshots__",
@@ -13,11 +15,9 @@
     ".github",
     ".vercel",
     ".vscode",
-    "biome.json",
     "node_modules",
     "prisma/generated",
     "prisma/backup.sql",
-    "scripts",
     "public"
   ],
   "compilerOptions": {

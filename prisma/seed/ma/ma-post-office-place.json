@@ -1,45 +1,43 @@
 {
-  "address": "206 Worcester Road",
-  "city": "Princeton",
-  "country": "US",
-  "googlePlaceID": "places/ChIJz-tcY9T944kRVNwBK_AZxJM",
-  "name": "Post Office Place",
-  "state": "MA",
-  "latitude": 42.4213081,
-  "longitude": -71.8782097,
-  "imageURLs": [
-    "/images/malls/ma-post-office-place-1.jpg"
-  ],
-  "summary": "Post Office Place is a service-oriented community center in Princeton, MA, featuring essential amenities including a US Post Office, Fidelity Bank, and a mix of personal care, dining, and professional service tenants. With flexible spaces available from 300 to 2,000 square feet, this well-rated center serves as a convenient one-stop destination for local residents.",
-  "openFrom": 700,
-  "openUntil": 2100,
-  "rating": 4.6,
-  "reviewCount": 15,
-  "website": "http://www.postofficeplace.com/?utm_source=rentail.space",
-  "centerType": "StripCenter",
-  "demographics": "Post Office Place serves the Princeton, Massachusetts community, a suburban town in Worcester County with a population of approximately 3,500 residents. The trade area attracts middle to upper-middle income families and professionals, with median household incomes above the state average. Primary visitors include local residents seeking convenient access to essential services like banking, postal services, and personal care, as well as small business owners utilizing professional services. The center caters to a practical, service-oriented customer base that values one-stop shopping for everyday needs in a small-town setting.",
-  "description": "Post Office Place is a convenient community shopping center located at 206 Worcester Road in Princeton, Massachusetts, serving as a true one-stop destination for local residents. This well-maintained property houses an essential mix of services and businesses that cater to everyday needs, anchored by a US Post Office and Fidelity Bank. The center features a diverse tenant roster including Thirsty Lab, Phoenix Nails, Kate's Powerhouse, and the Princeton Community Center, alongside professional services such as Anderson Insurance, Hancock Surveying, The Irrigation Company, Elevate Interiors, JC Aesthetics, and Open Door Realty. With operating hours from 7:00 AM to 9:00 PM and a strong 4.6-star rating from 15 reviews, Post Office Place has established itself as a reliable community hub. The property currently offers flexible leasing opportunities ranging from small 300 square foot office spaces to larger 2,000 square foot units with upstairs loft offices, making it an attractive option for businesses seeking a presence in this charming Worcester County town.",
-  "numberOfStores": 12,
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "Space 1",
-      "type": "Other",
-      "size": 2000,
-      "available": true
-    },
-    {
-      "number": "Space 2",
-      "type": "Other",
-      "size": 300,
-      "available": true
-    },
-    {
-      "number": "Space 3",
-      "type": "Other",
-      "size": 1650,
-      "available": true
-    }
-  ],
-  "ranking": 10.820039583312267
+	"address": "206 Worcester Road",
+	"city": "Princeton",
+	"country": "US",
+	"googlePlaceID": "places/ChIJz-tcY9T944kRVNwBK_AZxJM",
+	"name": "Post Office Place",
+	"state": "MA",
+	"latitude": 42.4213081,
+	"longitude": -71.8782097,
+	"imageURLs": ["/images/malls/ma-post-office-place-1.jpg"],
+	"summary": "Post Office Place is a service-oriented community center in Princeton, MA, featuring essential amenities including a US Post Office, Fidelity Bank, and a mix of personal care, dining, and professional service tenants. With flexible spaces available from 300 to 2,000 square feet, this well-rated center serves as a convenient one-stop destination for local residents.",
+	"openFrom": 700,
+	"openUntil": 2100,
+	"rating": 4.6,
+	"reviewCount": 15,
+	"website": "http://www.postofficeplace.com/?utm_source=rentail.space",
+	"centerType": "StripCenter",
+	"demographics": "Post Office Place serves the Princeton, Massachusetts community, a suburban town in Worcester County with a population of approximately 3,500 residents. The trade area attracts middle to upper-middle income families and professionals, with median household incomes above the state average. Primary visitors include local residents seeking convenient access to essential services like banking, postal services, and personal care, as well as small business owners utilizing professional services. The center caters to a practical, service-oriented customer base that values one-stop shopping for everyday needs in a small-town setting.",
+	"description": "Post Office Place is a convenient community shopping center located at 206 Worcester Road in Princeton, Massachusetts, serving as a true one-stop destination for local residents. This well-maintained property houses an essential mix of services and businesses that cater to everyday needs, anchored by a US Post Office and Fidelity Bank. The center features a diverse tenant roster including Thirsty Lab, Phoenix Nails, Kate's Powerhouse, and the Princeton Community Center, alongside professional services such as Anderson Insurance, Hancock Surveying, The Irrigation Company, Elevate Interiors, JC Aesthetics, and Open Door Realty. With operating hours from 7:00 AM to 9:00 PM and a strong 4.6-star rating from 15 reviews, Post Office Place has established itself as a reliable community hub. The property currently offers flexible leasing opportunities ranging from small 300 square foot office spaces to larger 2,000 square foot units with upstairs loft offices, making it an attractive option for businesses seeking a presence in this charming Worcester County town.",
+	"numberOfStores": 12,
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "Space 1",
+			"type": "Other",
+			"size": 2000,
+			"available": true
+		},
+		{
+			"number": "Space 2",
+			"type": "Other",
+			"size": 300,
+			"available": true
+		},
+		{
+			"number": "Space 3",
+			"type": "Other",
+			"size": 1650,
+			"available": true
+		}
+	],
+	"ranking": 10.820039583312267
 }

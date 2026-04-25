@@ -1,7 +1,7 @@
 # About Rentail.space
 
 Rentail.space is the leading marketplace for finding short-term retail spaces in
-shopping centers. Built for small businesses and seasonal sellers.  Saves you
+shopping centers. Built for small businesses and seasonal sellers. Saves you
 time with AI matching spaces ready for your business.
 
 We maintain real-time data on specialty leasing spaces including:

@@ -4,7 +4,7 @@
  * Used by grid-based collection to expand city searches to full metro areas
  */
 
-export const METRO_AREAS: Record<string, string[]> = {
+const METRO_AREAS: Record<string, string[]> = {
   LA: [
     "Los Angeles County, CA",
     "Orange County, CA",

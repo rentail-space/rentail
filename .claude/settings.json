@@ -1,26 +1,24 @@
 {
-  "permissions": {
-    "allow": [
-      "Bash(git add:*)"
-    ]
-  },
-  "enableAllProjectMcpServers": false,
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "biome format --fix"
-          },
-          {
-            "type": "command",
-            "command": "biome lint"
-          }
-        ]
-      }
-    ]
-  },
-  "outputStyle": "clearframe"
+	"permissions": {
+		"allow": ["Bash(git add:*)"]
+	},
+	"enableAllProjectMcpServers": false,
+	"hooks": {
+		"PostToolUse": [
+			{
+				"matcher": "Write|Edit|MultiEdit",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "pnpm exec vp fmt . --write"
+					},
+					{
+						"type": "command",
+						"command": "pnpm exec vp lint"
+					}
+				]
+			}
+		]
+	},
+	"outputStyle": "clearframe"
 }

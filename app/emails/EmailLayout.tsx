@@ -12,8 +12,6 @@ import {
   Text,
   pixelBasedPreset,
 } from "react-email";
-import * as styles from "~/emails/styles";
-import { colors } from "~/emails/styles";
 
 /**
  * EmailLayout is a component that wraps the email content and provides a consistent layout.
@@ -46,7 +44,13 @@ export default function EmailLayout({
           theme: {
             extend: {
               colors: {
-                primary: colors.primary,
+                primary: "#4f46e5",
+                text: "#374151",
+                background: "#f6f9fc",
+                white: "#ffffff",
+                highlightBg: "#f3f4f6",
+                border: "#e5e7eb",
+                borderLight: "#f0f0f0",
               },
             },
           },
@@ -82,7 +86,7 @@ function Header({ subject }: { subject: string }) {
   );
 }
 
-function Footer({ isCustomer = true }: { isCustomer: boolean }) {
+function Footer({ isCustomer }: { isCustomer: boolean }) {
   return (
     <Section className="mt-8 border-gray-200 border-t pt-6">
       {isCustomer && (
@@ -93,7 +97,7 @@ function Footer({ isCustomer = true }: { isCustomer: boolean }) {
           </Link>
         </Text>
       )}
-      <Text style={styles.footerText}>
+      <Text className="mb-4 text-center text-gray-500 text-sm leading-relaxed">
         <Link
           href="https://rentail.space/privacy"
           className="text-primary underline"

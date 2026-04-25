@@ -39,6 +39,7 @@ The shift from grand reveals to soft launches isn't about being shy. It's about 
 Instead of a full website, start with a landing page. Instead of a permanent shop, try a temporary space in a high-traffic area. Get moving without a "definitive narrative." Evolve based on what works.
 
 **Start with the smallest test**:
+
 - Single product line instead of full catalog
 - Weekend pop-up instead of monthly lease
 - One location instead of multi-city rollout

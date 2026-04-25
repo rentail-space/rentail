@@ -1,47 +1,45 @@
 {
-  "address": "3524 South New Braunfels Avenue",
-  "city": "San Antonio",
-  "country": "US",
-  "googlePlaceID": "places/ChIJV0G8V7T3XIYR52GBYMSEwXE",
-  "name": "McCreless Corner Shopping Center",
-  "state": "TX",
-  "latitude": 29.378377099999998,
-  "longitude": -98.4589721,
-  "phone": "++1 210-422-6688",
-  "imageURLs": [
-    "/images/malls/tx-mccreless-corner-shopping-center-1.jpg"
-  ],
-  "summary": "McCreless Corner Shopping Center is a 119,250 square foot community retail destination strategically positioned at one of San Antonio's busiest intersections, featuring value-oriented national tenants like Dollar Tree, Fallas Paredes, and O'Reilly Auto Parts. Located just one block from the major H-E-B Plus! anchored McCreless Market and near Interstate 37, the center serves over 123,000 residents with convenient access to discount shopping, healthcare services, and everyday essentials.",
-  "openFrom": 1100,
-  "openUntil": 2100,
-  "rating": 4.4,
-  "reviewCount": 7159,
-  "website": "https://mccreless-corner-shopping-center.website/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "McCreless Corner Shopping Center serves a diverse, working-class community with over 123,000 residents within a three-mile radius and an average household income of approximately $41,818. The primary market consists of value-conscious families and individuals seeking affordable shopping options, with a strong Hispanic demographic presence typical of San Antonio's South Side. Shoppers are drawn to discount retailers and essential services, making frequent trips for everyday necessities, healthcare services, and quick-service dining options that fit their budget-conscious lifestyle.",
-  "description": "McCreless Corner Shopping Center is a vibrant community retail hub strategically located at the intersection of Fair Avenue and South New Braunfels Avenue in San Antonio's South Side, serving as a cornerstone shopping destination for thousands of local residents. Spanning 119,250 square feet across three development phases, this well-established center offers exceptional visibility and accessibility with over 13,500 cars passing daily on South New Braunfels Avenue and convenient proximity to Interstate 37, which carries 104,000 vehicles per day. The center features a carefully curated mix of national and regional tenants including Fallas Paredes discount retail, Dollar Tree, O'Reilly Auto Parts, Little Caesar's Pizza, CSL Plasma, and Gonzaba Medical Group, creating a one-stop destination where families can accomplish multiple errands from healthcare appointments to grocery runs and automotive needs. Its strategic position just one block from the H-E-B Plus! anchored McCreless Market creates powerful retail synergy, drawing consistent traffic from shoppers visiting both centers. With competitive operating costs and strong demographic fundamentals serving over 123,000 residents within three miles, McCreless Corner Shopping Center represents an established community retail asset that successfully blends convenience, accessibility, and value-oriented shopping in one of San Antonio's most trafficked retail corridors.",
-  "numberOfStores": 6,
-  "squareFootage": 119250,
-  "tier": 1,
-  "spaces": [
-    {
-      "number": "1,500 SF Unit",
-      "type": "Inline",
-      "size": 1500,
-      "available": true
-    },
-    {
-      "number": "10,525 SF Unit",
-      "type": "Inline",
-      "size": 10525,
-      "available": true
-    },
-    {
-      "number": "Phase III",
-      "type": "Other",
-      "size": 163382,
-      "available": true
-    }
-  ],
-  "ranking": 16.961350394638472
+	"address": "3524 South New Braunfels Avenue",
+	"city": "San Antonio",
+	"country": "US",
+	"googlePlaceID": "places/ChIJV0G8V7T3XIYR52GBYMSEwXE",
+	"name": "McCreless Corner Shopping Center",
+	"state": "TX",
+	"latitude": 29.378377099999998,
+	"longitude": -98.4589721,
+	"phone": "++1 210-422-6688",
+	"imageURLs": ["/images/malls/tx-mccreless-corner-shopping-center-1.jpg"],
+	"summary": "McCreless Corner Shopping Center is a 119,250 square foot community retail destination strategically positioned at one of San Antonio's busiest intersections, featuring value-oriented national tenants like Dollar Tree, Fallas Paredes, and O'Reilly Auto Parts. Located just one block from the major H-E-B Plus! anchored McCreless Market and near Interstate 37, the center serves over 123,000 residents with convenient access to discount shopping, healthcare services, and everyday essentials.",
+	"openFrom": 1100,
+	"openUntil": 2100,
+	"rating": 4.4,
+	"reviewCount": 7159,
+	"website": "https://mccreless-corner-shopping-center.website/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "McCreless Corner Shopping Center serves a diverse, working-class community with over 123,000 residents within a three-mile radius and an average household income of approximately $41,818. The primary market consists of value-conscious families and individuals seeking affordable shopping options, with a strong Hispanic demographic presence typical of San Antonio's South Side. Shoppers are drawn to discount retailers and essential services, making frequent trips for everyday necessities, healthcare services, and quick-service dining options that fit their budget-conscious lifestyle.",
+	"description": "McCreless Corner Shopping Center is a vibrant community retail hub strategically located at the intersection of Fair Avenue and South New Braunfels Avenue in San Antonio's South Side, serving as a cornerstone shopping destination for thousands of local residents. Spanning 119,250 square feet across three development phases, this well-established center offers exceptional visibility and accessibility with over 13,500 cars passing daily on South New Braunfels Avenue and convenient proximity to Interstate 37, which carries 104,000 vehicles per day. The center features a carefully curated mix of national and regional tenants including Fallas Paredes discount retail, Dollar Tree, O'Reilly Auto Parts, Little Caesar's Pizza, CSL Plasma, and Gonzaba Medical Group, creating a one-stop destination where families can accomplish multiple errands from healthcare appointments to grocery runs and automotive needs. Its strategic position just one block from the H-E-B Plus! anchored McCreless Market creates powerful retail synergy, drawing consistent traffic from shoppers visiting both centers. With competitive operating costs and strong demographic fundamentals serving over 123,000 residents within three miles, McCreless Corner Shopping Center represents an established community retail asset that successfully blends convenience, accessibility, and value-oriented shopping in one of San Antonio's most trafficked retail corridors.",
+	"numberOfStores": 6,
+	"squareFootage": 119250,
+	"tier": 1,
+	"spaces": [
+		{
+			"number": "1,500 SF Unit",
+			"type": "Inline",
+			"size": 1500,
+			"available": true
+		},
+		{
+			"number": "10,525 SF Unit",
+			"type": "Inline",
+			"size": 10525,
+			"available": true
+		},
+		{
+			"number": "Phase III",
+			"type": "Other",
+			"size": 163382,
+			"available": true
+		}
+	],
+	"ranking": 16.961350394638472
 }

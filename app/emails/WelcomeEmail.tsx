@@ -1,6 +1,5 @@
 import type { User } from "prisma/generated";
 import { Button, Link, Section, Text } from "react-email";
-import * as styles from "~/emails/styles";
 import EmailLayout from "./EmailLayout";
 import { sendEmail } from "./sendEmails.server";
 
@@ -24,15 +23,15 @@ export default async function sendWelcomeEmail(user: User) {
 function Welcome({ name, subject }: { name: string; subject: string }) {
   return (
     <EmailLayout subject={subject}>
-      <Text style={styles.text}>Hi {name},</Text>
+      <Text className="text-gray-700 text-sm leading-relaxed">Hi {name},</Text>
 
-      <Text style={styles.text}>
+      <Text className="text-gray-700 text-sm leading-relaxed">
         Thanks for signing up! We're excited to have you on board and help you
         find the perfect retail space for your business.
       </Text>
 
-      <Section style={styles.highlightBox}>
-        <Text style={styles.highlightText}>
+      <Section className="bg-gray-100 rounded-md p-4">
+        <Text className="text-gray-700 text-sm leading-relaxed">
           🏢 Discover specialty leasing opportunities
           <br />🤖 AI-powered recommendations tailored to your needs
           <br />💬 Interactive chat to answer all your questions
@@ -40,32 +39,38 @@ function Welcome({ name, subject }: { name: string; subject: string }) {
         </Text>
       </Section>
 
-      <Text style={styles.text}>
+      <Text className="text-gray-700 text-sm leading-relaxed">
         Our platform uses advanced AI to help you discover short-term retail
         spaces in shopping centers. Whether you're looking for a pop-up shop,
         seasonal kiosk, or specialty lease, we've got you covered.
       </Text>
 
-      <Section style={styles.buttonContainer}>
-        <Button href="https://rentail.space/chat" style={styles.button}>
+      <Section className="mb-4 text-center">
+        <Button
+          href="https://rentail.space/chat"
+          className="bg-indigo-600 text-white rounded-md px-4 py-2 text-sm font-medium"
+        >
           Start Finding Spaces
         </Button>
       </Section>
 
-      <Text style={styles.text}>
+      <Text className="text-gray-700 text-sm leading-relaxed">
         Need help getting started? Just head to our{" "}
-        <Link href="https://rentail.space/chat" style={styles.link}>
+        <Link
+          href="https://rentail.space/chat"
+          className="text-primary underline"
+        >
           chat page
         </Link>{" "}
         and ask our AI assistant any questions you have.
       </Text>
 
-      <Text style={styles.text}>
+      <Text className="text-gray-700 text-sm leading-relaxed">
         If you have any questions or feedback, feel free to reply to this email.
         We'd love to hear from you!
       </Text>
 
-      <Text style={styles.text}>
+      <Text className="text-gray-700 text-sm leading-relaxed">
         Happy space hunting! 🚀
         <br />
         The rentail.space Team

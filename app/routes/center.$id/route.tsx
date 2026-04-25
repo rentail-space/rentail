@@ -40,7 +40,6 @@ export default function CenterPage({ loaderData }: Route.ComponentProps) {
 
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaData(loaderData.center)),
         }}

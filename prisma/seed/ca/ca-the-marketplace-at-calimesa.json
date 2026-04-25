@@ -1,47 +1,45 @@
 {
-  "address": "1040 Cherry Valley Boulevard",
-  "city": "Calimesa",
-  "country": "US",
-  "googlePlaceID": "places/ChIJre4QwJ1b24AR7zngexvFVyM",
-  "name": "The Marketplace at Calimesa",
-  "state": "CA",
-  "latitude": 33.9665434,
-  "longitude": -117.0361988,
-  "phone": "++1 909-795-1005",
-  "imageURLs": [
-    "/images/malls/ca-the-marketplace-at-calimesa-1.jpg"
-  ],
-  "openFrom": 600,
-  "openUntil": 2300,
-  "rating": 4.6,
-  "reviewCount": 231,
-  "website": "https://lewisretailcenters.com/property/marketplace-at-calimesa/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "The Marketplace at Calimesa serves a predominantly middle to upper-middle class suburban demographic, with average annual household incomes exceeding $120,000 within a 3-mile radius. The trade area attracts families and working professionals from Calimesa and surrounding Inland Empire communities who value convenience and quality. Primary shoppers include households seeking everyday necessities from the Stater Bros. anchor along with quick-service dining options. The center's location at Interstate 10 and Cherry Valley Boulevard also captures significant pass-through traffic from travelers and commuters between the Coachella Valley and greater Los Angeles area.",
-  "description": "The Marketplace at Calimesa is a well-positioned 102,700 square foot neighborhood shopping center serving the growing community of Calimesa, California. Strategically located at the high-traffic intersection of Interstate 10 and Cherry Valley Boulevard, this open-air center provides convenient access to both local residents and the thousands of daily commuters traveling through the area. Anchored by Stater Bros. Markets, a beloved Southern California grocery chain, the center offers a diverse tenant mix that caters to everyday shopping, dining, and service needs. The property features an impressive array of popular quick-service restaurants including Panda Express, Starbucks, Del Taco, Arby's, Fire Rock Burgers & Brews, and Cold Stone Creamery, making it a go-to destination for meals throughout the day. Additional tenants include West Coast Dental, All Valley Urgent Care, Sport Clips, and Modern Nails, providing essential services to the community. With an affluent trade area boasting average household incomes over $120,000 within three miles, The Marketplace at Calimesa serves as a vital retail hub for this prosperous Inland Empire community.",
-  "numberOfStores": 20,
-  "squareFootage": 102700,
-  "summary": "The Marketplace at Calimesa is a 102,700 square foot neighborhood center anchored by Stater Bros. Markets and featuring popular dining and service tenants. Strategically positioned at Interstate 10 and Cherry Valley Boulevard, it serves an affluent trade area with household incomes exceeding $120,000 within three miles.",
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "7",
-      "type": "Inline",
-      "size": 8149,
-      "available": true
-    },
-    {
-      "number": "17",
-      "type": "Inline",
-      "size": 1260,
-      "available": true
-    },
-    {
-      "number": "18",
-      "type": "Inline",
-      "size": 1260,
-      "available": true
-    }
-  ],
-  "ranking": 21.745230215007727
+	"address": "1040 Cherry Valley Boulevard",
+	"city": "Calimesa",
+	"country": "US",
+	"googlePlaceID": "places/ChIJre4QwJ1b24AR7zngexvFVyM",
+	"name": "The Marketplace at Calimesa",
+	"state": "CA",
+	"latitude": 33.9665434,
+	"longitude": -117.0361988,
+	"phone": "++1 909-795-1005",
+	"imageURLs": ["/images/malls/ca-the-marketplace-at-calimesa-1.jpg"],
+	"openFrom": 600,
+	"openUntil": 2300,
+	"rating": 4.6,
+	"reviewCount": 231,
+	"website": "https://lewisretailcenters.com/property/marketplace-at-calimesa/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "The Marketplace at Calimesa serves a predominantly middle to upper-middle class suburban demographic, with average annual household incomes exceeding $120,000 within a 3-mile radius. The trade area attracts families and working professionals from Calimesa and surrounding Inland Empire communities who value convenience and quality. Primary shoppers include households seeking everyday necessities from the Stater Bros. anchor along with quick-service dining options. The center's location at Interstate 10 and Cherry Valley Boulevard also captures significant pass-through traffic from travelers and commuters between the Coachella Valley and greater Los Angeles area.",
+	"description": "The Marketplace at Calimesa is a well-positioned 102,700 square foot neighborhood shopping center serving the growing community of Calimesa, California. Strategically located at the high-traffic intersection of Interstate 10 and Cherry Valley Boulevard, this open-air center provides convenient access to both local residents and the thousands of daily commuters traveling through the area. Anchored by Stater Bros. Markets, a beloved Southern California grocery chain, the center offers a diverse tenant mix that caters to everyday shopping, dining, and service needs. The property features an impressive array of popular quick-service restaurants including Panda Express, Starbucks, Del Taco, Arby's, Fire Rock Burgers & Brews, and Cold Stone Creamery, making it a go-to destination for meals throughout the day. Additional tenants include West Coast Dental, All Valley Urgent Care, Sport Clips, and Modern Nails, providing essential services to the community. With an affluent trade area boasting average household incomes over $120,000 within three miles, The Marketplace at Calimesa serves as a vital retail hub for this prosperous Inland Empire community.",
+	"numberOfStores": 20,
+	"squareFootage": 102700,
+	"summary": "The Marketplace at Calimesa is a 102,700 square foot neighborhood center anchored by Stater Bros. Markets and featuring popular dining and service tenants. Strategically positioned at Interstate 10 and Cherry Valley Boulevard, it serves an affluent trade area with household incomes exceeding $120,000 within three miles.",
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "7",
+			"type": "Inline",
+			"size": 8149,
+			"available": true
+		},
+		{
+			"number": "17",
+			"type": "Inline",
+			"size": 1260,
+			"available": true
+		},
+		{
+			"number": "18",
+			"type": "Inline",
+			"size": 1260,
+			"available": true
+		}
+	],
+	"ranking": 21.745230215007727
 }

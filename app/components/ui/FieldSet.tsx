@@ -206,7 +206,6 @@ function FieldError({
       <ul className="ml-4 flex list-disc flex-col gap-1">
         {errors.map(
           (error, index) =>
-            // biome-ignore lint/suspicious/noArrayIndexKey: we need to use the index as the key because the error is an array
             error?.message && <li key={index}>{error.message}</li>,
         )}
       </ul>

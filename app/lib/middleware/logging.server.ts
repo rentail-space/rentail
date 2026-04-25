@@ -1,6 +1,6 @@
 import type { Route } from "+types/app/+types/root";
-import debug from "debug";
 import logtail from "~/lib/logger.server";
+import debug from "debug";
 
 const logger = debug("server");
 
@@ -22,11 +22,23 @@ const loggingMiddleware: Route.MiddlewareFunction = async (
   const status = response.status;
   if (response.status >= 500) {
     logger("%s %s => %d (%dms)", method, pathname, status, duration);
-    logtail?.error("request", { duration, referrer, method, pathname, status });
-    logtail?.flush();
+    void logtail?.error("request", {
+      duration,
+      referrer,
+      method,
+      pathname,
+      status,
+    });
+    void logtail?.flush();
   } else {
     logger("%s %s => %d (%dms)", method, pathname, status, duration);
-    logtail?.info("request", { duration, referrer, method, pathname, status });
+    void logtail?.info("request", {
+      duration,
+      referrer,
+      method,
+      pathname,
+      status,
+    });
   }
 
   return response;

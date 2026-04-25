@@ -299,7 +299,7 @@ export default async function updateWorkingMemory({
  * @param schema - The Zod schema to convert
  * @returns A JSON-serializable example object
  */
-export function zodToExample(schema: ZodType): unknown {
+function zodToExample(schema: ZodType): unknown {
   // Use the public API to get the description
   const description = schema.description;
 

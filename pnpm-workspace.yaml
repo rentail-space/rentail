@@ -6,8 +6,6 @@ ignoredBuiltDependencies:
 
 minimumReleaseAge: 2880
 minimumReleaseAgeExclude:
-  - "@biomejs/biome"
-  - "@biomejs/*"
   - "react-email"
   - "@react-email/render"
 

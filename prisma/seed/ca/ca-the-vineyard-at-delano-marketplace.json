@@ -1,163 +1,161 @@
 {
-  "address": "530 Woollomes Avenue",
-  "city": "Delano",
-  "country": "US",
-  "googlePlaceID": "places/ChIJs-qLLRfl6oARDojN2eDmEwg",
-  "name": "The Vineyard at Delano Marketplace",
-  "state": "CA",
-  "latitude": 35.7438985,
-  "longitude": -119.24824100000001,
-  "phone": "++1 626-444-6680",
-  "imageURLs": [
-    "/images/malls/ca-the-vineyard-at-delano-marketplace-1.jpg"
-  ],
-  "summary": "The Vineyard at Delano Marketplace is the largest commercial center in north Kern County, featuring 328,500 square feet of retail space anchored by Target and Maya Theater. This mixed-use development creates over 1,600 jobs while providing comprehensive shopping, dining, and entertainment options for the region.",
-  "rating": 4.8,
-  "reviewCount": 5,
-  "website": "https://delanomarketplace.com/the-vineyard/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "The Vineyard at Delano Marketplace serves the residents of Delano and north Kern County, an area characterized by working-class families and agricultural workers with moderate income levels. The trade area includes a diverse population with significant Hispanic demographics, typical of California's Central Valley communities. Primary shoppers are value-conscious families seeking convenient access to general merchandise, groceries, and everyday retail needs. The center addresses existing retail leakage in the region, attracting residents who previously traveled outside the area for shopping, and serves as a major employment hub creating over 1,600 jobs for the local community.",
-  "description": "The Vineyard at Delano Marketplace represents the largest commercial development in north Kern County, transforming 42 acres into a vibrant mixed-use retail destination. This expansive 328,500 square foot commercial center anchors the region with Target as its primary tenant, complemented by the Maya Theater entertainment complex and a diverse mix of retail shops, restaurants, and food service establishments. Strategically located on Woollomes Avenue west of Highway 99, the development addresses a critical need in Delano by recapturing retail spending that previously left the community and creating 1,664 employment opportunities. The center features multiple building pads designed for various commercial uses, from major retail anchors to smaller specialty shops and dining options, creating a comprehensive shopping experience for residents throughout Kern County. As a catalyst for economic growth, The Vineyard not only meets the retail demands of the city but also stimulates the local economy through job creation and enhanced commercial infrastructure, establishing itself as the premier shopping destination in the region.",
-  "numberOfStores": 15,
-  "squareFootage": 328500,
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "Maya",
-      "type": "Other",
-      "size": 45518,
-      "available": false,
-      "imageURLs": [
-        "https://delanomarketplace.com/wp-content/uploads/slider3/DMP2MayaEdited-12.jpeg",
-        "https://delanomarketplace.com/wp-content/uploads/slider3/Maya-1.jpeg",
-        "https://delanomarketplace.com/wp-content/uploads/slider2/DMP2MayaEdited-2.jpeg"
-      ]
-    },
-    {
-      "number": "Pad 1",
-      "type": "Cart",
-      "size": 2500,
-      "available": false
-    },
-    {
-      "number": "Pad 2",
-      "type": "Cart",
-      "size": 2500,
-      "available": false
-    },
-    {
-      "number": "Pad 3",
-      "type": "Cart",
-      "size": 7000,
-      "available": false
-    },
-    {
-      "number": "Pad 4",
-      "type": "Cart",
-      "size": 10000,
-      "available": false
-    },
-    {
-      "number": "Pad 5",
-      "type": "Cart",
-      "size": 9604,
-      "available": false,
-      "imageURLs": [
-        "https://delanomarketplace.com/wp-content/uploads/slider2/DMP2Pad56Edited-32.jpeg",
-        "https://delanomarketplace.com/wp-content/uploads/slider2/DMP2Pad56Edited-37.jpeg",
-        "https://delanomarketplace.com/wp-content/uploads/slider3/DMP2Pad56Edited-9.jpeg"
-      ]
-    },
-    {
-      "number": "Pad 6",
-      "type": "Cart",
-      "size": 6200,
-      "available": false
-    },
-    {
-      "number": "Pad 7",
-      "type": "Cart",
-      "size": 2500,
-      "available": false
-    },
-    {
-      "number": "Pad 8",
-      "type": "Cart",
-      "size": 2700,
-      "available": false
-    },
-    {
-      "number": "Target",
-      "type": "Other",
-      "size": 148119,
-      "available": false
-    },
-    {
-      "number": "Major 1",
-      "type": "Inline",
-      "size": 23000,
-      "available": false
-    },
-    {
-      "number": "Major 2",
-      "type": "Inline",
-      "size": 25000,
-      "available": false
-    },
-    {
-      "number": "Major 3",
-      "type": "Inline",
-      "size": 15000,
-      "available": false
-    },
-    {
-      "number": "Major 4",
-      "type": "Inline",
-      "size": 15000,
-      "available": false
-    },
-    {
-      "number": "Major 5",
-      "type": "Inline",
-      "size": 8000,
-      "available": false
-    },
-    {
-      "number": "SHOPS B",
-      "type": "Inline",
-      "size": 20000,
-      "available": false
-    },
-    {
-      "number": "SHOPS D",
-      "type": "Inline",
-      "size": 15000,
-      "available": false
-    },
-    {
-      "number": "SHOPS E",
-      "type": "Inline",
-      "size": 8000,
-      "available": false
-    },
-    {
-      "number": "SHOPS F",
-      "type": "Cart",
-      "size": 4500,
-      "available": false
-    },
-    {
-      "number": "SHOPS G",
-      "type": "Inline",
-      "size": 8000,
-      "available": false
-    },
-    {
-      "number": "SHOPS H",
-      "type": "Cart",
-      "size": 4500,
-      "available": false
-    }
-  ],
-  "ranking": 6.710112041625781
+	"address": "530 Woollomes Avenue",
+	"city": "Delano",
+	"country": "US",
+	"googlePlaceID": "places/ChIJs-qLLRfl6oARDojN2eDmEwg",
+	"name": "The Vineyard at Delano Marketplace",
+	"state": "CA",
+	"latitude": 35.7438985,
+	"longitude": -119.24824100000001,
+	"phone": "++1 626-444-6680",
+	"imageURLs": ["/images/malls/ca-the-vineyard-at-delano-marketplace-1.jpg"],
+	"summary": "The Vineyard at Delano Marketplace is the largest commercial center in north Kern County, featuring 328,500 square feet of retail space anchored by Target and Maya Theater. This mixed-use development creates over 1,600 jobs while providing comprehensive shopping, dining, and entertainment options for the region.",
+	"rating": 4.8,
+	"reviewCount": 5,
+	"website": "https://delanomarketplace.com/the-vineyard/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "The Vineyard at Delano Marketplace serves the residents of Delano and north Kern County, an area characterized by working-class families and agricultural workers with moderate income levels. The trade area includes a diverse population with significant Hispanic demographics, typical of California's Central Valley communities. Primary shoppers are value-conscious families seeking convenient access to general merchandise, groceries, and everyday retail needs. The center addresses existing retail leakage in the region, attracting residents who previously traveled outside the area for shopping, and serves as a major employment hub creating over 1,600 jobs for the local community.",
+	"description": "The Vineyard at Delano Marketplace represents the largest commercial development in north Kern County, transforming 42 acres into a vibrant mixed-use retail destination. This expansive 328,500 square foot commercial center anchors the region with Target as its primary tenant, complemented by the Maya Theater entertainment complex and a diverse mix of retail shops, restaurants, and food service establishments. Strategically located on Woollomes Avenue west of Highway 99, the development addresses a critical need in Delano by recapturing retail spending that previously left the community and creating 1,664 employment opportunities. The center features multiple building pads designed for various commercial uses, from major retail anchors to smaller specialty shops and dining options, creating a comprehensive shopping experience for residents throughout Kern County. As a catalyst for economic growth, The Vineyard not only meets the retail demands of the city but also stimulates the local economy through job creation and enhanced commercial infrastructure, establishing itself as the premier shopping destination in the region.",
+	"numberOfStores": 15,
+	"squareFootage": 328500,
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "Maya",
+			"type": "Other",
+			"size": 45518,
+			"available": false,
+			"imageURLs": [
+				"https://delanomarketplace.com/wp-content/uploads/slider3/DMP2MayaEdited-12.jpeg",
+				"https://delanomarketplace.com/wp-content/uploads/slider3/Maya-1.jpeg",
+				"https://delanomarketplace.com/wp-content/uploads/slider2/DMP2MayaEdited-2.jpeg"
+			]
+		},
+		{
+			"number": "Pad 1",
+			"type": "Cart",
+			"size": 2500,
+			"available": false
+		},
+		{
+			"number": "Pad 2",
+			"type": "Cart",
+			"size": 2500,
+			"available": false
+		},
+		{
+			"number": "Pad 3",
+			"type": "Cart",
+			"size": 7000,
+			"available": false
+		},
+		{
+			"number": "Pad 4",
+			"type": "Cart",
+			"size": 10000,
+			"available": false
+		},
+		{
+			"number": "Pad 5",
+			"type": "Cart",
+			"size": 9604,
+			"available": false,
+			"imageURLs": [
+				"https://delanomarketplace.com/wp-content/uploads/slider2/DMP2Pad56Edited-32.jpeg",
+				"https://delanomarketplace.com/wp-content/uploads/slider2/DMP2Pad56Edited-37.jpeg",
+				"https://delanomarketplace.com/wp-content/uploads/slider3/DMP2Pad56Edited-9.jpeg"
+			]
+		},
+		{
+			"number": "Pad 6",
+			"type": "Cart",
+			"size": 6200,
+			"available": false
+		},
+		{
+			"number": "Pad 7",
+			"type": "Cart",
+			"size": 2500,
+			"available": false
+		},
+		{
+			"number": "Pad 8",
+			"type": "Cart",
+			"size": 2700,
+			"available": false
+		},
+		{
+			"number": "Target",
+			"type": "Other",
+			"size": 148119,
+			"available": false
+		},
+		{
+			"number": "Major 1",
+			"type": "Inline",
+			"size": 23000,
+			"available": false
+		},
+		{
+			"number": "Major 2",
+			"type": "Inline",
+			"size": 25000,
+			"available": false
+		},
+		{
+			"number": "Major 3",
+			"type": "Inline",
+			"size": 15000,
+			"available": false
+		},
+		{
+			"number": "Major 4",
+			"type": "Inline",
+			"size": 15000,
+			"available": false
+		},
+		{
+			"number": "Major 5",
+			"type": "Inline",
+			"size": 8000,
+			"available": false
+		},
+		{
+			"number": "SHOPS B",
+			"type": "Inline",
+			"size": 20000,
+			"available": false
+		},
+		{
+			"number": "SHOPS D",
+			"type": "Inline",
+			"size": 15000,
+			"available": false
+		},
+		{
+			"number": "SHOPS E",
+			"type": "Inline",
+			"size": 8000,
+			"available": false
+		},
+		{
+			"number": "SHOPS F",
+			"type": "Cart",
+			"size": 4500,
+			"available": false
+		},
+		{
+			"number": "SHOPS G",
+			"type": "Inline",
+			"size": 8000,
+			"available": false
+		},
+		{
+			"number": "SHOPS H",
+			"type": "Cart",
+			"size": 4500,
+			"available": false
+		}
+	],
+	"ranking": 6.710112041625781
 }

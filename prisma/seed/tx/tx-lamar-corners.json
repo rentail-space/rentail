@@ -1,39 +1,37 @@
 {
-  "address": "4601 Avenue H",
-  "city": "Rosenberg",
-  "country": "US",
-  "googlePlaceID": "places/ChIJNag4kCgcQYYRgGye0jjsq5Y",
-  "name": "Lamar Corners",
-  "state": "TX",
-  "latitude": 29.566808599999998,
-  "longitude": -95.7817641,
-  "phone": "++1 832-930-1380",
-  "imageURLs": [
-    "/images/malls/tx-lamar-corners-1.jpg"
-  ],
-  "summary": "Lamar Corners is a strip center in Rosenberg, Texas, offering flexible retail and office spaces from 1,800 to 4,200 square feet with great rental rates. The property experienced no flooding during Hurricane Harvey and serves diverse tenants including medical offices, boutiques, and professional services.",
-  "openFrom": 930,
-  "openUntil": 2030,
-  "rating": 4.1,
-  "reviewCount": 95,
-  "website": "http://lecear.com/?utm_source=rentail.space",
-  "centerType": "StripCenter",
-  "demographics": "Lamar Corners serves the Rosenberg community in Fort Bend County, an area characterized by growing middle-income families and young professionals working in the Houston metropolitan area. The trade area attracts a diverse demographic mix with household incomes ranging from moderate to upper-middle class, reflecting Fort Bend County's status as one of the most diverse counties in Texas. Primary shoppers include working families seeking convenient neighborhood services, small business owners, and residents looking for professional services like medical offices and learning centers in a accessible strip center format.",
-  "description": "Lamar Corners Shopping Center is a well-maintained strip center located at 4601 Avenue H in Rosenberg, Texas, serving the growing Fort Bend County community. This property gained significant credibility by experiencing no flooding during Hurricane Harvey, a major selling point for businesses and customers in the Houston area. The center features a practical linear layout with multiple suite configurations, offering flexible spaces ranging from 1,800 to 4,200 square feet that accommodate diverse tenant needs. Currently available spaces are ideal for retail boutiques, medical and dental offices, law firms, learning centers, small churches, and professional services, with Suite 12 notably featuring built-in amenities including offices with sinks, a reception area, back office space, skylight, and shower facilities. With competitive rental rates and a strategic location in Rosenberg, Lamar Corners provides an accessible and flood-safe option for small to medium-sized businesses seeking visibility and convenience in the western Houston suburbs.",
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "Suite 12",
-      "type": "Other",
-      "size": 4200,
-      "available": true
-    },
-    {
-      "number": "Suite 6",
-      "type": "Other",
-      "size": 1800,
-      "available": true
-    }
-  ],
-  "ranking": 16.217333563368552
+	"address": "4601 Avenue H",
+	"city": "Rosenberg",
+	"country": "US",
+	"googlePlaceID": "places/ChIJNag4kCgcQYYRgGye0jjsq5Y",
+	"name": "Lamar Corners",
+	"state": "TX",
+	"latitude": 29.566808599999998,
+	"longitude": -95.7817641,
+	"phone": "++1 832-930-1380",
+	"imageURLs": ["/images/malls/tx-lamar-corners-1.jpg"],
+	"summary": "Lamar Corners is a strip center in Rosenberg, Texas, offering flexible retail and office spaces from 1,800 to 4,200 square feet with great rental rates. The property experienced no flooding during Hurricane Harvey and serves diverse tenants including medical offices, boutiques, and professional services.",
+	"openFrom": 930,
+	"openUntil": 2030,
+	"rating": 4.1,
+	"reviewCount": 95,
+	"website": "http://lecear.com/?utm_source=rentail.space",
+	"centerType": "StripCenter",
+	"demographics": "Lamar Corners serves the Rosenberg community in Fort Bend County, an area characterized by growing middle-income families and young professionals working in the Houston metropolitan area. The trade area attracts a diverse demographic mix with household incomes ranging from moderate to upper-middle class, reflecting Fort Bend County's status as one of the most diverse counties in Texas. Primary shoppers include working families seeking convenient neighborhood services, small business owners, and residents looking for professional services like medical offices and learning centers in a accessible strip center format.",
+	"description": "Lamar Corners Shopping Center is a well-maintained strip center located at 4601 Avenue H in Rosenberg, Texas, serving the growing Fort Bend County community. This property gained significant credibility by experiencing no flooding during Hurricane Harvey, a major selling point for businesses and customers in the Houston area. The center features a practical linear layout with multiple suite configurations, offering flexible spaces ranging from 1,800 to 4,200 square feet that accommodate diverse tenant needs. Currently available spaces are ideal for retail boutiques, medical and dental offices, law firms, learning centers, small churches, and professional services, with Suite 12 notably featuring built-in amenities including offices with sinks, a reception area, back office space, skylight, and shower facilities. With competitive rental rates and a strategic location in Rosenberg, Lamar Corners provides an accessible and flood-safe option for small to medium-sized businesses seeking visibility and convenience in the western Houston suburbs.",
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "Suite 12",
+			"type": "Other",
+			"size": 4200,
+			"available": true
+		},
+		{
+			"number": "Suite 6",
+			"type": "Other",
+			"size": 1800,
+			"available": true
+		}
+	],
+	"ranking": 16.217333563368552
 }

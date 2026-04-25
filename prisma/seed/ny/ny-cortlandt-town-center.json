@@ -1,77 +1,75 @@
 {
-  "address": "3121 East Main Street",
-  "city": "Mohegan Lake",
-  "country": "US",
-  "googlePlaceID": "places/ChIJ_x8J9PHJwokRePkysI8p6zY",
-  "name": "Cortlandt Town Center",
-  "state": "NY",
-  "latitude": 41.310014699999996,
-  "longitude": -73.8711932,
-  "phone": "++1 914-526-3483",
-  "imageURLs": [
-    "/images/malls/ny-cortlandt-town-center-1.jpg"
-  ],
-  "summary": "Cortlandt Town Center is a 750,000 square foot community shopping destination in Mohegan Lake, NY, featuring major anchors including Walmart, Best Buy, Acme, HomeGoods, Marshalls, and United Artist Theatres. With 2,700 feet of Route 6 frontage and over 3,700 parking spaces, the center offers convenient access to a comprehensive mix of retail, dining, and entertainment options.",
-  "openFrom": 900,
-  "openUntil": 2100,
-  "rating": 4.3,
-  "reviewCount": 2803,
-  "website": "https://www.katzassociates.com/listings/cortlandt-town-center/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "Cortlandt Town Center serves a diverse suburban demographic in northern Westchester County, attracting middle to upper-middle income families with household incomes ranging from $75,000 to $150,000. The primary trade area draws from Mohegan Lake, Cortlandt Manor, and surrounding communities, with shoppers typically aged 25-65 who value convenience and variety in their shopping experience. The center appeals to busy families seeking one-stop shopping for everyday needs, entertainment, and dining, with strong weekend traffic from households with children and young professionals.",
-  "description": "Cortlandt Town Center stands as a premier shopping destination in Mohegan Lake, New York, offering an impressive 750,000 square feet of retail space along Route 6. This expansive community center features 2,700 feet of frontage and provides convenient access with over 3,700 parking spaces, making it one of the most accessible shopping venues in northern Westchester County. The center is anchored by major national retailers including Walmart, Best Buy, Acme, PetSmart, United Artist Theatres, HomeGoods, Marshalls, DSW, Old Navy, and Michaels, creating a comprehensive shopping experience that caters to diverse consumer needs. With multiple leasing opportunities ranging from 2,000 to 15,700 square feet, the center continues to evolve and attract quality tenants. Whether visitors are seeking groceries, home goods, entertainment, or fashion, Cortlandt Town Center delivers a complete retail experience in a convenient, well-maintained environment that has become a cornerstone of the local community.",
-  "numberOfStores": 8,
-  "squareFootage": 750000,
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "Unit 10",
-      "type": "Other",
-      "size": 4174,
-      "available": true
-    },
-    {
-      "number": "Unit 19",
-      "type": "Other",
-      "size": 2000,
-      "available": true
-    },
-    {
-      "number": "Unit 27",
-      "type": "Other",
-      "size": 5018,
-      "available": true
-    },
-    {
-      "number": "Unit 39",
-      "type": "Other",
-      "size": 9100,
-      "available": true
-    },
-    {
-      "number": "Unit 46b",
-      "type": "Other",
-      "size": 8000,
-      "available": true
-    },
-    {
-      "number": "Unit 49",
-      "type": "Other",
-      "size": 15700,
-      "available": true
-    },
-    {
-      "number": "Unit 53",
-      "type": "Other",
-      "size": 12933,
-      "available": true
-    },
-    {
-      "number": "Unit 7",
-      "type": "Other",
-      "size": 9436,
-      "available": true
-    }
-  ],
-  "ranking": 29.64955864073846
+	"address": "3121 East Main Street",
+	"city": "Mohegan Lake",
+	"country": "US",
+	"googlePlaceID": "places/ChIJ_x8J9PHJwokRePkysI8p6zY",
+	"name": "Cortlandt Town Center",
+	"state": "NY",
+	"latitude": 41.310014699999996,
+	"longitude": -73.8711932,
+	"phone": "++1 914-526-3483",
+	"imageURLs": ["/images/malls/ny-cortlandt-town-center-1.jpg"],
+	"summary": "Cortlandt Town Center is a 750,000 square foot community shopping destination in Mohegan Lake, NY, featuring major anchors including Walmart, Best Buy, Acme, HomeGoods, Marshalls, and United Artist Theatres. With 2,700 feet of Route 6 frontage and over 3,700 parking spaces, the center offers convenient access to a comprehensive mix of retail, dining, and entertainment options.",
+	"openFrom": 900,
+	"openUntil": 2100,
+	"rating": 4.3,
+	"reviewCount": 2803,
+	"website": "https://www.katzassociates.com/listings/cortlandt-town-center/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "Cortlandt Town Center serves a diverse suburban demographic in northern Westchester County, attracting middle to upper-middle income families with household incomes ranging from $75,000 to $150,000. The primary trade area draws from Mohegan Lake, Cortlandt Manor, and surrounding communities, with shoppers typically aged 25-65 who value convenience and variety in their shopping experience. The center appeals to busy families seeking one-stop shopping for everyday needs, entertainment, and dining, with strong weekend traffic from households with children and young professionals.",
+	"description": "Cortlandt Town Center stands as a premier shopping destination in Mohegan Lake, New York, offering an impressive 750,000 square feet of retail space along Route 6. This expansive community center features 2,700 feet of frontage and provides convenient access with over 3,700 parking spaces, making it one of the most accessible shopping venues in northern Westchester County. The center is anchored by major national retailers including Walmart, Best Buy, Acme, PetSmart, United Artist Theatres, HomeGoods, Marshalls, DSW, Old Navy, and Michaels, creating a comprehensive shopping experience that caters to diverse consumer needs. With multiple leasing opportunities ranging from 2,000 to 15,700 square feet, the center continues to evolve and attract quality tenants. Whether visitors are seeking groceries, home goods, entertainment, or fashion, Cortlandt Town Center delivers a complete retail experience in a convenient, well-maintained environment that has become a cornerstone of the local community.",
+	"numberOfStores": 8,
+	"squareFootage": 750000,
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "Unit 10",
+			"type": "Other",
+			"size": 4174,
+			"available": true
+		},
+		{
+			"number": "Unit 19",
+			"type": "Other",
+			"size": 2000,
+			"available": true
+		},
+		{
+			"number": "Unit 27",
+			"type": "Other",
+			"size": 5018,
+			"available": true
+		},
+		{
+			"number": "Unit 39",
+			"type": "Other",
+			"size": 9100,
+			"available": true
+		},
+		{
+			"number": "Unit 46b",
+			"type": "Other",
+			"size": 8000,
+			"available": true
+		},
+		{
+			"number": "Unit 49",
+			"type": "Other",
+			"size": 15700,
+			"available": true
+		},
+		{
+			"number": "Unit 53",
+			"type": "Other",
+			"size": 12933,
+			"available": true
+		},
+		{
+			"number": "Unit 7",
+			"type": "Other",
+			"size": 9436,
+			"available": true
+		}
+	],
+	"ranking": 29.64955864073846
 }

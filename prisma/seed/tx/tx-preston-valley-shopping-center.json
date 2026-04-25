@@ -1,43 +1,41 @@
 {
-  "address": "12817 Preston Road",
-  "city": "Dallas",
-  "country": "US",
-  "googlePlaceID": "places/ChIJIYeaPO4gTIYR89slIxZWJ1I",
-  "name": "Preston Valley Shopping Center",
-  "state": "TX",
-  "latitude": 32.9236788,
-  "longitude": -96.80527289999999,
-  "phone": "++1 214-954-0600",
-  "imageURLs": [
-    "/images/malls/tx-preston-valley-shopping-center-1.jpg"
-  ],
-  "summary": "Preston Valley Shopping Center is a convenient neighborhood destination near I-635 and the Galleria, featuring nearly 90,000 square feet of shopping, dining, and services. This well-rated center combines local favorites like India Palace and Maple Leaf Diner with essential retail and professional services for the North Dallas community.",
-  "openFrom": 1000,
-  "openUntil": 2200,
-  "rating": 4.3,
-  "reviewCount": 1473,
-  "website": "http://prestonvalleydallas.com/?utm_source=rentail.space",
-  "centerType": "StripCenter",
-  "demographics": "Preston Valley Shopping Center attracts a diverse, affluent demographic from the North Dallas area, particularly families and professionals living in nearby Preston Hollow and Far North Dallas neighborhoods. The trade area consists primarily of middle to upper-middle income households with median incomes exceeding $75,000, including young professionals, established families, and empty nesters aged 30-65. Visitors typically seek convenient neighborhood shopping and dining options, with a preference for local businesses mixed with familiar retail brands, reflecting the area's blend of traditional Dallas values and modern urban convenience.",
-  "description": "Preston Valley Shopping Center is a well-established neighborhood shopping destination located at the prominent intersection of Preston Road and I-635 in North Dallas. Spanning nearly 90,000 square feet, this open-air center has served the affluent Preston Hollow and Far North Dallas communities for decades, offering a carefully curated mix of local businesses and national brands. The center's strategic location near the Galleria Mall makes it an ideal stop for residents seeking convenient shopping, dining, and services without the crowds of larger regional malls. Preston Valley features an impressive array of dining options, from the popular India Palace to the beloved Maple Leaf Diner, alongside essential services including healthcare, dental, legal, and business providers. The center's commitment to supporting small businesses while maintaining quality retail options has made it a trusted neighborhood hub where convenience meets community, earning it a strong 4.3-star rating from over 1,400 reviews.",
-  "squareFootage": 90000,
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "104",
-      "type": "Other",
-      "size": 3595
-    },
-    {
-      "number": "112",
-      "type": "Other",
-      "size": 3750
-    },
-    {
-      "number": "136",
-      "type": "Other",
-      "size": 1800
-    }
-  ],
-  "ranking": 27.246543622846623
+	"address": "12817 Preston Road",
+	"city": "Dallas",
+	"country": "US",
+	"googlePlaceID": "places/ChIJIYeaPO4gTIYR89slIxZWJ1I",
+	"name": "Preston Valley Shopping Center",
+	"state": "TX",
+	"latitude": 32.9236788,
+	"longitude": -96.80527289999999,
+	"phone": "++1 214-954-0600",
+	"imageURLs": ["/images/malls/tx-preston-valley-shopping-center-1.jpg"],
+	"summary": "Preston Valley Shopping Center is a convenient neighborhood destination near I-635 and the Galleria, featuring nearly 90,000 square feet of shopping, dining, and services. This well-rated center combines local favorites like India Palace and Maple Leaf Diner with essential retail and professional services for the North Dallas community.",
+	"openFrom": 1000,
+	"openUntil": 2200,
+	"rating": 4.3,
+	"reviewCount": 1473,
+	"website": "http://prestonvalleydallas.com/?utm_source=rentail.space",
+	"centerType": "StripCenter",
+	"demographics": "Preston Valley Shopping Center attracts a diverse, affluent demographic from the North Dallas area, particularly families and professionals living in nearby Preston Hollow and Far North Dallas neighborhoods. The trade area consists primarily of middle to upper-middle income households with median incomes exceeding $75,000, including young professionals, established families, and empty nesters aged 30-65. Visitors typically seek convenient neighborhood shopping and dining options, with a preference for local businesses mixed with familiar retail brands, reflecting the area's blend of traditional Dallas values and modern urban convenience.",
+	"description": "Preston Valley Shopping Center is a well-established neighborhood shopping destination located at the prominent intersection of Preston Road and I-635 in North Dallas. Spanning nearly 90,000 square feet, this open-air center has served the affluent Preston Hollow and Far North Dallas communities for decades, offering a carefully curated mix of local businesses and national brands. The center's strategic location near the Galleria Mall makes it an ideal stop for residents seeking convenient shopping, dining, and services without the crowds of larger regional malls. Preston Valley features an impressive array of dining options, from the popular India Palace to the beloved Maple Leaf Diner, alongside essential services including healthcare, dental, legal, and business providers. The center's commitment to supporting small businesses while maintaining quality retail options has made it a trusted neighborhood hub where convenience meets community, earning it a strong 4.3-star rating from over 1,400 reviews.",
+	"squareFootage": 90000,
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "104",
+			"type": "Other",
+			"size": 3595
+		},
+		{
+			"number": "112",
+			"type": "Other",
+			"size": 3750
+		},
+		{
+			"number": "136",
+			"type": "Other",
+			"size": 1800
+		}
+	],
+	"ranking": 27.246543622846623
 }

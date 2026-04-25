@@ -1,83 +1,81 @@
 {
-  "address": "1701 U.S. 22",
-  "city": "Watchung",
-  "country": "US",
-  "googlePlaceID": "places/ChIJ4-L00ni6w4kRRNvUtlUGUQM",
-  "name": "Blue Star Shopping Center",
-  "state": "NJ",
-  "latitude": 40.6495895,
-  "longitude": -74.40855549999999,
-  "phone": "++1 800-488-0768",
-  "imageURLs": [
-    "/images/malls/nj-blue-star-shopping-center-1.jpg"
-  ],
-  "summary": "Blue Star Shopping Center is a newly revitalized 420,000 SF community destination in Watchung, NJ, anchored by a modern ShopRite and featuring strong value retailers like Kohl's, Marshalls, and Burlington. With 3.4 million annual visits and prime Route 22 frontage, the center serves as a regional hub for daily needs shopping, dining, and family entertainment.",
-  "openFrom": 700,
-  "openUntil": 2200,
-  "rating": 4.1,
-  "reviewCount": 2630,
-  "website": "https://www.levinmgt.com/levinproperties/blue-star-shopping-center/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "Blue Star Shopping Center serves an affluent Somerset County market with strong household incomes and family-oriented demographics. The trade area draws from Watchung and surrounding communities along the Route 22 corridor, attracting middle to upper-middle income households seeking convenient access to daily necessities and value-oriented shopping. The center's anchor tenants like ShopRite, Kohl's, and Marshalls appeal to budget-conscious families and professionals aged 25-65 who prioritize one-stop shopping convenience. With 3.4 million annual visits, the center captures significant regional traffic from the heavily-traveled Route 22 corridor with 55,197 average daily traffic count.",
-  "description": "Blue Star Shopping Center is a 420,000 square foot regional destination in Watchung, New Jersey that has been transformed through a multimillion-dollar redevelopment into a modern, vibrant shopping hub. Located at 1701 US Route 22 in prime Somerset County, the center benefits from exceptional visibility and access along one of New Jersey's busiest commercial corridors, with over 55,000 vehicles passing daily and quick connections to I-78. The centerpiece of the renovation is a brand-new ShopRite that opened in April 2025, driving daily needs traffic and anchoring a compelling mix of value retailers including Kohl's with Sephora, Marshalls (with a new store coming soon), Burlington, and Five Below. The center has experienced remarkable growth with 3.4 million annual visits and a 28.2% year-over-year increase tied to exciting 2025 openings. Beyond traditional retail, Blue Star offers diverse dining options including Five Guys, Taco Bell, and the upcoming Raising Cane's and honeygrow, plus fitness and entertainment with Planet Fitness, KidStrong, and the new Back Nine Golf facility, making it a true community gathering place for Somerset County residents.",
-  "numberOfStores": 31,
-  "squareFootage": 419926,
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "13",
-      "type": "Inline",
-      "size": 10051,
-      "available": true
-    },
-    {
-      "number": "15",
-      "type": "Inline",
-      "size": 7855,
-      "available": true
-    },
-    {
-      "number": "16",
-      "type": "Inline",
-      "size": 3120,
-      "available": true
-    },
-    {
-      "number": "17",
-      "type": "Inline",
-      "size": 11047,
-      "available": true
-    },
-    {
-      "number": "18",
-      "type": "Inline",
-      "size": 2025,
-      "available": true
-    },
-    {
-      "number": "20",
-      "type": "Inline",
-      "size": 1649,
-      "available": true
-    },
-    {
-      "number": "23",
-      "type": "Inline",
-      "size": 27000,
-      "available": true
-    },
-    {
-      "number": "28",
-      "type": "Other",
-      "size": 8200,
-      "available": true
-    },
-    {
-      "number": "9",
-      "type": "Inline",
-      "size": 1950,
-      "available": true
-    }
-  ],
-  "ranking": 28.043637137616013
+	"address": "1701 U.S. 22",
+	"city": "Watchung",
+	"country": "US",
+	"googlePlaceID": "places/ChIJ4-L00ni6w4kRRNvUtlUGUQM",
+	"name": "Blue Star Shopping Center",
+	"state": "NJ",
+	"latitude": 40.6495895,
+	"longitude": -74.40855549999999,
+	"phone": "++1 800-488-0768",
+	"imageURLs": ["/images/malls/nj-blue-star-shopping-center-1.jpg"],
+	"summary": "Blue Star Shopping Center is a newly revitalized 420,000 SF community destination in Watchung, NJ, anchored by a modern ShopRite and featuring strong value retailers like Kohl's, Marshalls, and Burlington. With 3.4 million annual visits and prime Route 22 frontage, the center serves as a regional hub for daily needs shopping, dining, and family entertainment.",
+	"openFrom": 700,
+	"openUntil": 2200,
+	"rating": 4.1,
+	"reviewCount": 2630,
+	"website": "https://www.levinmgt.com/levinproperties/blue-star-shopping-center/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "Blue Star Shopping Center serves an affluent Somerset County market with strong household incomes and family-oriented demographics. The trade area draws from Watchung and surrounding communities along the Route 22 corridor, attracting middle to upper-middle income households seeking convenient access to daily necessities and value-oriented shopping. The center's anchor tenants like ShopRite, Kohl's, and Marshalls appeal to budget-conscious families and professionals aged 25-65 who prioritize one-stop shopping convenience. With 3.4 million annual visits, the center captures significant regional traffic from the heavily-traveled Route 22 corridor with 55,197 average daily traffic count.",
+	"description": "Blue Star Shopping Center is a 420,000 square foot regional destination in Watchung, New Jersey that has been transformed through a multimillion-dollar redevelopment into a modern, vibrant shopping hub. Located at 1701 US Route 22 in prime Somerset County, the center benefits from exceptional visibility and access along one of New Jersey's busiest commercial corridors, with over 55,000 vehicles passing daily and quick connections to I-78. The centerpiece of the renovation is a brand-new ShopRite that opened in April 2025, driving daily needs traffic and anchoring a compelling mix of value retailers including Kohl's with Sephora, Marshalls (with a new store coming soon), Burlington, and Five Below. The center has experienced remarkable growth with 3.4 million annual visits and a 28.2% year-over-year increase tied to exciting 2025 openings. Beyond traditional retail, Blue Star offers diverse dining options including Five Guys, Taco Bell, and the upcoming Raising Cane's and honeygrow, plus fitness and entertainment with Planet Fitness, KidStrong, and the new Back Nine Golf facility, making it a true community gathering place for Somerset County residents.",
+	"numberOfStores": 31,
+	"squareFootage": 419926,
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "13",
+			"type": "Inline",
+			"size": 10051,
+			"available": true
+		},
+		{
+			"number": "15",
+			"type": "Inline",
+			"size": 7855,
+			"available": true
+		},
+		{
+			"number": "16",
+			"type": "Inline",
+			"size": 3120,
+			"available": true
+		},
+		{
+			"number": "17",
+			"type": "Inline",
+			"size": 11047,
+			"available": true
+		},
+		{
+			"number": "18",
+			"type": "Inline",
+			"size": 2025,
+			"available": true
+		},
+		{
+			"number": "20",
+			"type": "Inline",
+			"size": 1649,
+			"available": true
+		},
+		{
+			"number": "23",
+			"type": "Inline",
+			"size": 27000,
+			"available": true
+		},
+		{
+			"number": "28",
+			"type": "Other",
+			"size": 8200,
+			"available": true
+		},
+		{
+			"number": "9",
+			"type": "Inline",
+			"size": 1950,
+			"available": true
+		}
+	],
+	"ranking": 28.043637137616013
 }

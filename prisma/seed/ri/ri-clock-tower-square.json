@@ -1,117 +1,115 @@
 {
-  "address": "Clock Tower Square",
-  "city": "Portsmouth",
-  "country": "US",
-  "googlePlaceID": "places/ChIJ7_hsNHKr5YkRvk25CaxB1t8",
-  "name": "Clock Tower Square",
-  "state": "RI",
-  "latitude": 41.5907826,
-  "longitude": -71.26813469999999,
-  "phone": "++1 401-366-4796",
-  "imageURLs": [
-    "/images/malls/ri-clock-tower-square-1.jpg"
-  ],
-  "summary": "Clock Tower Square is Portsmouth, Rhode Island's neighborhood shopping destination, offering a convenient mix of retail shops, dining options, and medical and office facilities. Serving the East Bay community, this well-established center provides local residents with quality goods and services in a welcoming, accessible environment.",
-  "openFrom": 1000,
-  "openUntil": 1700,
-  "rating": 4.5,
-  "reviewCount": 59,
-  "website": "http://www.clocktowersq.com/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "Clock Tower Square serves the affluent Portsmouth and East Bay Rhode Island communities, attracting middle to upper-middle income families and professionals with household incomes typically exceeding $80,000. The primary trade area includes Portsmouth, Middletown, and Tiverton residents, with a strong mix of established families, retirees, and young professionals who value convenience and quality. Shoppers tend to be educated, health-conscious consumers seeking a combination of retail, dining, and professional services in a convenient neighborhood setting.",
-  "description": "Clock Tower Square stands as Portsmouth's premier shopping destination, serving the East Bay Rhode Island community with a carefully curated mix of retail shops, dining establishments, and professional medical and office spaces. Located at 1 Clock Tower Square Road in Portsmouth, this community-oriented center has established itself as a convenient hub for local residents seeking quality goods and services close to home. The center's distinctive clock tower serves as a landmark for the area, symbolizing its role as a gathering place for the community. With its thoughtfully planned layout combining shopping, dining, medical facilities, and office space, Clock Tower Square offers a comprehensive destination that meets the diverse needs of Portsmouth families and professionals. The center maintains an active connection with the community through regular events and a commitment to providing a welcoming environment where neighbors can shop, dine, and conduct business in a convenient, accessible location.",
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "201",
-      "type": "Other",
-      "size": 1782,
-      "available": false,
-      "imageURLs": [
-        "http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0533msepe2015.jpg"
-      ]
-    },
-    {
-      "number": "202",
-      "type": "Other",
-      "size": 1923,
-      "available": true,
-      "imageURLs": [
-        "http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0533msepe2015.jpg"
-      ]
-    },
-    {
-      "number": "203",
-      "type": "Other",
-      "size": 1011,
-      "available": false,
-      "imageURLs": [
-        "http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0333msepe2015.jpg"
-      ]
-    },
-    {
-      "number": "204A",
-      "type": "Other",
-      "size": 975,
-      "available": true,
-      "imageURLs": [
-        "http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0533msepe2015.jpg"
-      ]
-    },
-    {
-      "number": "205",
-      "type": "Other",
-      "size": 1782,
-      "available": false,
-      "imageURLs": [
-        "http://clocktowersq.com/wp-content/uploads/2015/09/clocktower0347msepe2015-450x300.jpg"
-      ]
-    },
-    {
-      "number": "206",
-      "type": "Other",
-      "size": 2652,
-      "available": false,
-      "imageURLs": [
-        "http://clocktowersq.com/wp-content/uploads/2015/09/clocktower0265msepe2015-450x300.jpg"
-      ]
-    },
-    {
-      "number": "207B",
-      "type": "Other",
-      "size": 1626,
-      "available": false,
-      "imageURLs": [
-        "http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0596msepe2015.jpg"
-      ]
-    },
-    {
-      "number": "208",
-      "type": "Other",
-      "size": 2220,
-      "available": false,
-      "imageURLs": [
-        "http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0596msepe2015.jpg"
-      ]
-    },
-    {
-      "number": "209",
-      "type": "Other",
-      "size": 3190,
-      "available": false,
-      "imageURLs": [
-        "http://clocktowersq.com/wp-content/uploads/2015/09/clocktower0089msepe2015-200x300.jpg"
-      ]
-    },
-    {
-      "number": "210",
-      "type": "Other",
-      "size": 2652,
-      "available": true,
-      "imageURLs": [
-        "http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0533msepe2015.jpg"
-      ]
-    }
-  ],
-  "ranking": 15.937668104779299
+	"address": "Clock Tower Square",
+	"city": "Portsmouth",
+	"country": "US",
+	"googlePlaceID": "places/ChIJ7_hsNHKr5YkRvk25CaxB1t8",
+	"name": "Clock Tower Square",
+	"state": "RI",
+	"latitude": 41.5907826,
+	"longitude": -71.26813469999999,
+	"phone": "++1 401-366-4796",
+	"imageURLs": ["/images/malls/ri-clock-tower-square-1.jpg"],
+	"summary": "Clock Tower Square is Portsmouth, Rhode Island's neighborhood shopping destination, offering a convenient mix of retail shops, dining options, and medical and office facilities. Serving the East Bay community, this well-established center provides local residents with quality goods and services in a welcoming, accessible environment.",
+	"openFrom": 1000,
+	"openUntil": 1700,
+	"rating": 4.5,
+	"reviewCount": 59,
+	"website": "http://www.clocktowersq.com/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "Clock Tower Square serves the affluent Portsmouth and East Bay Rhode Island communities, attracting middle to upper-middle income families and professionals with household incomes typically exceeding $80,000. The primary trade area includes Portsmouth, Middletown, and Tiverton residents, with a strong mix of established families, retirees, and young professionals who value convenience and quality. Shoppers tend to be educated, health-conscious consumers seeking a combination of retail, dining, and professional services in a convenient neighborhood setting.",
+	"description": "Clock Tower Square stands as Portsmouth's premier shopping destination, serving the East Bay Rhode Island community with a carefully curated mix of retail shops, dining establishments, and professional medical and office spaces. Located at 1 Clock Tower Square Road in Portsmouth, this community-oriented center has established itself as a convenient hub for local residents seeking quality goods and services close to home. The center's distinctive clock tower serves as a landmark for the area, symbolizing its role as a gathering place for the community. With its thoughtfully planned layout combining shopping, dining, medical facilities, and office space, Clock Tower Square offers a comprehensive destination that meets the diverse needs of Portsmouth families and professionals. The center maintains an active connection with the community through regular events and a commitment to providing a welcoming environment where neighbors can shop, dine, and conduct business in a convenient, accessible location.",
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "201",
+			"type": "Other",
+			"size": 1782,
+			"available": false,
+			"imageURLs": [
+				"http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0533msepe2015.jpg"
+			]
+		},
+		{
+			"number": "202",
+			"type": "Other",
+			"size": 1923,
+			"available": true,
+			"imageURLs": [
+				"http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0533msepe2015.jpg"
+			]
+		},
+		{
+			"number": "203",
+			"type": "Other",
+			"size": 1011,
+			"available": false,
+			"imageURLs": [
+				"http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0333msepe2015.jpg"
+			]
+		},
+		{
+			"number": "204A",
+			"type": "Other",
+			"size": 975,
+			"available": true,
+			"imageURLs": [
+				"http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0533msepe2015.jpg"
+			]
+		},
+		{
+			"number": "205",
+			"type": "Other",
+			"size": 1782,
+			"available": false,
+			"imageURLs": [
+				"http://clocktowersq.com/wp-content/uploads/2015/09/clocktower0347msepe2015-450x300.jpg"
+			]
+		},
+		{
+			"number": "206",
+			"type": "Other",
+			"size": 2652,
+			"available": false,
+			"imageURLs": [
+				"http://clocktowersq.com/wp-content/uploads/2015/09/clocktower0265msepe2015-450x300.jpg"
+			]
+		},
+		{
+			"number": "207B",
+			"type": "Other",
+			"size": 1626,
+			"available": false,
+			"imageURLs": [
+				"http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0596msepe2015.jpg"
+			]
+		},
+		{
+			"number": "208",
+			"type": "Other",
+			"size": 2220,
+			"available": false,
+			"imageURLs": [
+				"http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0596msepe2015.jpg"
+			]
+		},
+		{
+			"number": "209",
+			"type": "Other",
+			"size": 3190,
+			"available": false,
+			"imageURLs": [
+				"http://clocktowersq.com/wp-content/uploads/2015/09/clocktower0089msepe2015-200x300.jpg"
+			]
+		},
+		{
+			"number": "210",
+			"type": "Other",
+			"size": 2652,
+			"available": true,
+			"imageURLs": [
+				"http://clocktowersq.com/wp-content/uploads/2015/07/clocktower0533msepe2015.jpg"
+			]
+		}
+	],
+	"ranking": 15.937668104779299
 }

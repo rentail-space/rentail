@@ -1,44 +1,44 @@
 {
-  "address": "1916-1966 Jericho Turnpike",
-  "city": "East Northport",
-  "country": "US",
-  "googlePlaceID": "places/ChIJdQpVvg4t6IkR9Mn9KxFO8zs",
-  "name": "Elwood Center",
-  "state": "NY",
-  "latitude": 40.8375717,
-  "longitude": -73.3314419,
-  "phone": "++1 914-576-7500",
-  "imageURLs": [],
-  "summary": "Elwood Shopping Center is a neighborhood retail destination on Jericho Turnpike in East Northport featuring Retro Fitness, Pet Supplies Plus, Caggiano's Gourmet Market, and True North Urgent Care. With 425 parking spaces and available retail spaces, the center serves the local community with convenient shopping, dining, and service options.",
-  "openFrom": 0,
-  "openUntil": 2400,
-  "rating": 5,
-  "reviewCount": 3,
-  "website": "https://www.welcorealty.com/properties/elwood-shopping-center/?utm_source=rentail.space",
-  "centerType": "StripCenter",
-  "demographics": "Elwood Shopping Center serves the East Northport community and surrounding Suffolk County areas, attracting middle to upper-middle income families with household incomes ranging from $80,000 to $150,000. The primary trade area consists of suburban homeowners aged 30-65, including young families and established professionals seeking convenient neighborhood shopping. The center draws health-conscious consumers and pet owners, with strong demand for fitness services, urgent care, and specialty food options typical of Long Island's suburban demographic patterns.",
-  "description": "Elwood Shopping Center is a well-established neighborhood shopping destination located on Jericho Turnpike in East Northport, New York, serving the East Northport and greater Suffolk County communities. This convenient shopping center features a diverse mix of tenants including Retro Fitness for health and wellness, Pet Supplies Plus for pet care needs, and Caggiano's Gourmet Market offering specialty foods and groceries. Dining options include Jake's Hamburgers and Carvel ice cream, while True North Urgent Care provides essential healthcare services to the community. With 425 parking spaces, the center offers ample convenient parking for shoppers and visitors. The property is professionally managed by Welco Realty and currently has available retail spaces ranging from 1,500 to 7,500 square feet, including the former Denny's location, providing opportunities for new businesses to join this thriving shopping center.",
-  "numberOfStores": 7,
-  "tier": 2,
-  "spaces": [
-    {
-      "number": "10",
-      "type": "Other",
-      "size": 4100,
-      "available": false
-    },
-    {
-      "number": "13a",
-      "type": "Other",
-      "size": 1500,
-      "available": true
-    },
-    {
-      "number": "8",
-      "type": "Other",
-      "size": 7500,
-      "available": true
-    }
-  ],
-  "ranking": 4.771212547196624
+	"address": "1916-1966 Jericho Turnpike",
+	"city": "East Northport",
+	"country": "US",
+	"googlePlaceID": "places/ChIJdQpVvg4t6IkR9Mn9KxFO8zs",
+	"name": "Elwood Center",
+	"state": "NY",
+	"latitude": 40.8375717,
+	"longitude": -73.3314419,
+	"phone": "++1 914-576-7500",
+	"imageURLs": [],
+	"summary": "Elwood Shopping Center is a neighborhood retail destination on Jericho Turnpike in East Northport featuring Retro Fitness, Pet Supplies Plus, Caggiano's Gourmet Market, and True North Urgent Care. With 425 parking spaces and available retail spaces, the center serves the local community with convenient shopping, dining, and service options.",
+	"openFrom": 0,
+	"openUntil": 2400,
+	"rating": 5,
+	"reviewCount": 3,
+	"website": "https://www.welcorealty.com/properties/elwood-shopping-center/?utm_source=rentail.space",
+	"centerType": "StripCenter",
+	"demographics": "Elwood Shopping Center serves the East Northport community and surrounding Suffolk County areas, attracting middle to upper-middle income families with household incomes ranging from $80,000 to $150,000. The primary trade area consists of suburban homeowners aged 30-65, including young families and established professionals seeking convenient neighborhood shopping. The center draws health-conscious consumers and pet owners, with strong demand for fitness services, urgent care, and specialty food options typical of Long Island's suburban demographic patterns.",
+	"description": "Elwood Shopping Center is a well-established neighborhood shopping destination located on Jericho Turnpike in East Northport, New York, serving the East Northport and greater Suffolk County communities. This convenient shopping center features a diverse mix of tenants including Retro Fitness for health and wellness, Pet Supplies Plus for pet care needs, and Caggiano's Gourmet Market offering specialty foods and groceries. Dining options include Jake's Hamburgers and Carvel ice cream, while True North Urgent Care provides essential healthcare services to the community. With 425 parking spaces, the center offers ample convenient parking for shoppers and visitors. The property is professionally managed by Welco Realty and currently has available retail spaces ranging from 1,500 to 7,500 square feet, including the former Denny's location, providing opportunities for new businesses to join this thriving shopping center.",
+	"numberOfStores": 7,
+	"tier": 2,
+	"spaces": [
+		{
+			"number": "10",
+			"type": "Other",
+			"size": 4100,
+			"available": false
+		},
+		{
+			"number": "13a",
+			"type": "Other",
+			"size": 1500,
+			"available": true
+		},
+		{
+			"number": "8",
+			"type": "Other",
+			"size": 7500,
+			"available": true
+		}
+	],
+	"ranking": 4.771212547196624
 }

@@ -7,7 +7,7 @@
  */
 
 import type { GetDeploymentsResponseBody } from "@vercel/sdk/models/getdeploymentsop.js";
-import type { GetDeploymentResponseBody } from "@vercel/sdk/models/getdeploymentop.js";
+import type { GetDeploymentResponseBody } from "@vercel/sdk/models/getdeploymentresponsebody.js";
 import { promisify } from "node:util";
 import { execFile } from "node:child_process";
 import { confirm } from "@inquirer/prompts";

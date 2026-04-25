@@ -15,6 +15,11 @@ import ProfilePasswordForm from "./ProfilePasswordForm";
 
 export const handle = { headerLinks: [] };
 
+function getStringFormValue(form: FormData, name: string) {
+  const value = form.get(name);
+  return typeof value === "string" ? value : undefined;
+}
+
 export async function loader({ request }: { request: Request }) {
   const user = await getSignedInUser(request);
   return { user };
@@ -23,15 +28,15 @@ export async function loader({ request }: { request: Request }) {
 export async function action({ request }: { request: Request }) {
   const user = await getSignedInUser(request);
   const form = await request.formData();
-  const name = form.get("name")?.toString();
+  const name = getStringFormValue(form, "name");
   if (name) return await updateName({ user, name });
 
-  const email = form.get("email")?.toString();
+  const email = getStringFormValue(form, "email");
   if (email) return await updateEmail({ newEmail: email, request, user });
 
-  const currentPassword = form.get("currentPassword")?.toString();
-  const newPassword = form.get("newPassword")?.toString();
-  const confirmPassword = form.get("confirmPassword")?.toString();
+  const currentPassword = getStringFormValue(form, "currentPassword");
+  const newPassword = getStringFormValue(form, "newPassword");
+  const confirmPassword = getStringFormValue(form, "confirmPassword");
   if (currentPassword && newPassword && confirmPassword)
     return await updatePassword({
       confirmPassword,

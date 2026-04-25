@@ -1,6 +1,6 @@
 import type { UIMessage } from "ai";
 import type React from "react";
-import { Children, type JSX, useEffect, useRef } from "react";
+import { type JSX, useEffect, useRef } from "react";
 import { Button } from "react-email";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
@@ -25,7 +25,6 @@ export default function ResponseMessage({
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll during streaming updates
-  // biome-ignore lint/correctness/useExhaustiveDependencies: run when streaming and text changes
   useEffect(() => {
     if (!isStreaming) return;
     setTimeout(scrollToBottom, 10);
@@ -112,13 +111,13 @@ function getComponents({
 } {
   return {
     a: ({ children, href }) => {
-      const isAsk = href?.startsWith("/?q=");
-      return isAsk ? (
+      const question = getAskQuestionFromHref(href);
+      return question ? (
         <ActiveLink
-          to={`/chat?q=${children}`}
+          to={`/chat?q=${encodeURIComponent(question)}`}
           onClick={(event) => {
             event.preventDefault();
-            askQuestion(Children.toArray(children).join(""));
+            void askQuestion(question);
             trackEvent("click_ask_question", { category: "chat" });
           }}
         >
@@ -165,4 +164,11 @@ function getComponents({
       <ul className={"ml-4 list-outside list-disc"}>{children}</ul>
     ),
   };
+}
+
+function getAskQuestionFromHref(href: string | undefined): string | null {
+  if (!href?.startsWith("/?q=")) return null;
+
+  const question = new URL(href, "https://rentail.space").searchParams.get("q");
+  return question?.trim() || null;
 }

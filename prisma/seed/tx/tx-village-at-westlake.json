@@ -1,33 +1,31 @@
 {
-  "address": "701 South Capital of Texas Highway",
-  "city": "West Lake Hills",
-  "country": "US",
-  "googlePlaceID": "places/ChIJqRp9UoBKW4YR67VV99_8bGw",
-  "name": "Village At Westlake",
-  "state": "TX",
-  "latitude": 30.2920104,
-  "longitude": -97.8264196,
-  "phone": "++1 512-682-5517",
-  "imageURLs": [
-    "/images/malls/tx-village-at-westlake-1.jpg"
-  ],
-  "summary": "Village at Westlake is an upscale lifestyle center serving West Lake Hills and west Austin with a carefully curated selection of admired retailers, fine dining restaurants, and essential services. This open-air shopping destination combines convenience with quality, offering everything from groceries to banking in an inviting atmosphere that caters to the area's affluent residents.",
-  "openFrom": 600,
-  "openUntil": 2300,
-  "rating": 4.4,
-  "reviewCount": 1179,
-  "website": "http://www.shopvillageatwestlake.com/?utm_source=rentail.space",
-  "centerType": "LifestyleCenter",
-  "demographics": "Village at Westlake serves an affluent, upscale demographic in the West Lake Hills area of Austin, one of the wealthiest communities in Texas. The primary trade area consists of high-income households with median household incomes exceeding $150,000, predominantly professionals and executives aged 35-65. The shopping center attracts educated, quality-conscious consumers who prioritize convenience and premium shopping experiences, with a strong preference for specialty retailers, fine dining, and personalized services over mass-market offerings.",
-  "description": "Village at Westlake stands as West Lake Hills' premier shopping and dining destination, serving the affluent communities west of Austin along the Capital of Texas Highway. This upscale lifestyle center has established itself as the go-to location for discerning shoppers seeking a curated mix of admired retailers, fine dining establishments, and essential services all in one convenient location. The center's open-air design creates an inviting atmosphere that encourages leisurely shopping and dining experiences, perfectly suited to the Texas climate and the preferences of its sophisticated clientele. Beyond retail therapy, Village at Westlake functions as a true community hub, offering everything from everyday necessities like groceries and dry cleaning to banking services and professional offices. With its strategic location on Capital of Texas Highway South and commitment to maintaining a high-quality tenant mix, the center has become an integral part of the West Lake Hills lifestyle, providing residents with a refined alternative to traditional mall shopping while keeping them close to home.",
-  "tier": 3,
-  "spaces": [
-    {
-      "number": "29",
-      "type": "Inline",
-      "size": 1400,
-      "available": true
-    }
-  ],
-  "ranking": 40.543982227255185
+	"address": "701 South Capital of Texas Highway",
+	"city": "West Lake Hills",
+	"country": "US",
+	"googlePlaceID": "places/ChIJqRp9UoBKW4YR67VV99_8bGw",
+	"name": "Village At Westlake",
+	"state": "TX",
+	"latitude": 30.2920104,
+	"longitude": -97.8264196,
+	"phone": "++1 512-682-5517",
+	"imageURLs": ["/images/malls/tx-village-at-westlake-1.jpg"],
+	"summary": "Village at Westlake is an upscale lifestyle center serving West Lake Hills and west Austin with a carefully curated selection of admired retailers, fine dining restaurants, and essential services. This open-air shopping destination combines convenience with quality, offering everything from groceries to banking in an inviting atmosphere that caters to the area's affluent residents.",
+	"openFrom": 600,
+	"openUntil": 2300,
+	"rating": 4.4,
+	"reviewCount": 1179,
+	"website": "http://www.shopvillageatwestlake.com/?utm_source=rentail.space",
+	"centerType": "LifestyleCenter",
+	"demographics": "Village at Westlake serves an affluent, upscale demographic in the West Lake Hills area of Austin, one of the wealthiest communities in Texas. The primary trade area consists of high-income households with median household incomes exceeding $150,000, predominantly professionals and executives aged 35-65. The shopping center attracts educated, quality-conscious consumers who prioritize convenience and premium shopping experiences, with a strong preference for specialty retailers, fine dining, and personalized services over mass-market offerings.",
+	"description": "Village at Westlake stands as West Lake Hills' premier shopping and dining destination, serving the affluent communities west of Austin along the Capital of Texas Highway. This upscale lifestyle center has established itself as the go-to location for discerning shoppers seeking a curated mix of admired retailers, fine dining establishments, and essential services all in one convenient location. The center's open-air design creates an inviting atmosphere that encourages leisurely shopping and dining experiences, perfectly suited to the Texas climate and the preferences of its sophisticated clientele. Beyond retail therapy, Village at Westlake functions as a true community hub, offering everything from everyday necessities like groceries and dry cleaning to banking services and professional offices. With its strategic location on Capital of Texas Highway South and commitment to maintaining a high-quality tenant mix, the center has become an integral part of the West Lake Hills lifestyle, providing residents with a refined alternative to traditional mall shopping while keeping them close to home.",
+	"tier": 3,
+	"spaces": [
+		{
+			"number": "29",
+			"type": "Inline",
+			"size": 1400,
+			"available": true
+		}
+	],
+	"ranking": 40.543982227255185
 }

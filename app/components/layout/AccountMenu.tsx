@@ -1,10 +1,10 @@
-import type { loader as rootLoader } from "~/root";
-import type { User } from "prisma/generated";
-import { Link, useNavigate, useRouteLoaderData } from "react-router";
 import { ShieldIcon, UnlockIcon, UserIcon } from "lucide-react";
+import type { User } from "prisma/generated";
 import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate, useRouteLoaderData } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { Button } from "~/components/ui/Button";
+import type { loader as rootLoader } from "~/root";
 
 export default function AccountMenu({ className }: { className?: string }) {
   const data = useRouteLoaderData<typeof rootLoader>("root");
@@ -51,7 +51,7 @@ function SignInButton() {
       aria-label="Go to sign in page"
       className="h-9"
       onClick={() => {
-        navigate("/auth");
+        void navigate("/auth");
       }}
       type="button"
     >

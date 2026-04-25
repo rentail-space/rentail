@@ -26,11 +26,13 @@ Shopping centers have the opposite problem. They've got empty space, declining f
 Rentail.space connects merchants and shopping centers directly.
 
 **For Merchants:**
+
 - Browse spaces by location and timeframe
 - See photos, pricing, foot traffic data
 - Apply directly—no broker calls
 
 **For Shopping Centers:**
+
 - List vacant spaces with terms and photos
 - Review merchant applications and portfolios
 - Connect directly with vetted brands

@@ -4,7 +4,7 @@
 
 - `pnpm dev` - Dev server (port 5173) | `pnpm build` - Production build
 - `pnpm check` - Lint + typecheck (run before committing) | `pnpm test` - Full suite
-- `pnpm format --write` - Auto-format | `pnpm devmcp` - MCP inspector
+- `pnpm format` - Auto-format | `pnpm devmcp` - MCP inspector
 - `pnpx vitest run <pattern>` - Specific test | `--reporter=verbose` for detail
 - `tsx scripts/collect.ts "Location"` - Collect shopping centers
 - `tsx scripts/promote.ts` - Promote to production | `tsx scripts/updateBlogSchedule.ts` - Schedule posts
@@ -21,7 +21,7 @@
 
 **Components:** PascalCase + default exports, `~/*` = `./app/*`, functional, early returns
 
-**Biome:** Double quotes, 2-space indent, 80 chars. No `forEach()`. `console`: `.assert/.error/.info/.warn` only. No braces on single-line conditionals.
+**Oxc (Oxlint/Oxfmt):** Double quotes, 2-space indent, 80 chars. No `forEach()`. `console`: `.assert/.error/.info/.warn` only. No braces on single-line conditionals.
 
 **Security:** Sanitize inputs, never `dangerouslySetInnerHTML`, bcrypt for passwords.
 
@@ -59,7 +59,7 @@ Files in `/test/*.test.ts`. Vitest + Playwright. `isolate: true` required.
 
 ## Git
 
-`emoji type(scope): description` — ✨ feat  🐛 fix  📝 docs  ♻️ refactor  ✅ test  🔧 chore
+`emoji type(scope): description` — ✨ feat 🐛 fix 📝 docs ♻️ refactor ✅ test 🔧 chore
 
 ## Database
 
@@ -75,6 +75,7 @@ Files in `/test/*.test.ts`. Vitest + Playwright. `isolate: true` required.
 - Prefer retrieval-led over pre-training-led reasoning
 
 <!-- rtk-instructions v2 -->
+
 # RTK - Token-Optimized Commands
 
 **Always prefix with `rtk`** — applies optimized filtering when available, passthrough otherwise. Safe in all `&&` chains.
@@ -88,4 +89,5 @@ Files in `/test/*.test.ts`. Vitest + Playwright. `isolate: true` required.
 # Files:       rtk ls | rtk grep | rtk find
 # Debug:       rtk err <cmd> | rtk summary <cmd> | rtk gain | rtk gain --history
 ```
+
 <!-- /rtk-instructions -->

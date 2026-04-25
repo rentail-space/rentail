@@ -1,32 +1,30 @@
 {
-  "address": "",
-  "city": "Austin",
-  "country": "US",
-  "googlePlaceID": "places/ChIJJ1aBBhvKRIYR3FReAomlDjM",
-  "name": "Capital Plaza",
-  "state": "TX",
-  "latitude": 30.3149945,
-  "longitude": -97.7062875,
-  "phone": "++1 512-482-0094",
-  "imageURLs": [
-    "/images/malls/tx-capital-plaza-1.jpg"
-  ],
-  "summary": "Capital Plaza is a convenient neighborhood shopping center located along I-35 in North Austin, featuring value retailers like Ross and Boot Barn, diverse dining options including Buffet King, and a variety of local services. The center serves as an accessible hub for everyday shopping needs with easy freeway access and ample parking.",
-  "openFrom": 1000,
-  "openUntil": 2200,
-  "rating": 4.2,
-  "reviewCount": 5944,
-  "website": "http://www.capitalplazasc.com/?utm_source=rentail.space",
-  "centerType": "StripCenter",
-  "demographics": "Capital Plaza serves a diverse, middle-income demographic in North Austin, drawing from surrounding residential neighborhoods and commuters along the I-35 corridor. The trade area attracts value-conscious shoppers and families seeking convenient access to everyday retail, dining, and services. Primary visitors include working professionals, Hispanic and multi-cultural households, and budget-minded consumers who appreciate the mix of national retailers like Ross and Boot Barn alongside local ethnic dining options like Buffet King.",
-  "description": "Capital Plaza Shopping Center is conveniently located at the intersection of I-35 and Reinli Street in North Austin, Texas, positioning itself as a neighborhood hub for everyday shopping and dining needs. This open-air retail center features a practical mix of value-oriented national retailers including Ross Dress for Less and Boot Barn, complemented by diverse dining options such as Buffet King and various quick-service restaurants. The center prides itself on being \"in the middle of everything,\" offering accessible retail, dining, and service conveniences to the bustling local Austin community. With ample parking and easy freeway access from I-35, Capital Plaza serves as a go-to destination for residents seeking affordable shopping options and local services ranging from healthcare and dental to legal and business solutions. Professionally managed by Weitzman, Capital Plaza continues to provide North Austin families and commuters with a reliable shopping experience that combines familiar brands with neighborhood convenience.",
-  "tier": 1,
-  "spaces": [
-    {
-      "number": "12A",
-      "type": "Other",
-      "size": 4598
-    }
-  ],
-  "ranking": 15.85113096316058
+	"address": "",
+	"city": "Austin",
+	"country": "US",
+	"googlePlaceID": "places/ChIJJ1aBBhvKRIYR3FReAomlDjM",
+	"name": "Capital Plaza",
+	"state": "TX",
+	"latitude": 30.3149945,
+	"longitude": -97.7062875,
+	"phone": "++1 512-482-0094",
+	"imageURLs": ["/images/malls/tx-capital-plaza-1.jpg"],
+	"summary": "Capital Plaza is a convenient neighborhood shopping center located along I-35 in North Austin, featuring value retailers like Ross and Boot Barn, diverse dining options including Buffet King, and a variety of local services. The center serves as an accessible hub for everyday shopping needs with easy freeway access and ample parking.",
+	"openFrom": 1000,
+	"openUntil": 2200,
+	"rating": 4.2,
+	"reviewCount": 5944,
+	"website": "http://www.capitalplazasc.com/?utm_source=rentail.space",
+	"centerType": "StripCenter",
+	"demographics": "Capital Plaza serves a diverse, middle-income demographic in North Austin, drawing from surrounding residential neighborhoods and commuters along the I-35 corridor. The trade area attracts value-conscious shoppers and families seeking convenient access to everyday retail, dining, and services. Primary visitors include working professionals, Hispanic and multi-cultural households, and budget-minded consumers who appreciate the mix of national retailers like Ross and Boot Barn alongside local ethnic dining options like Buffet King.",
+	"description": "Capital Plaza Shopping Center is conveniently located at the intersection of I-35 and Reinli Street in North Austin, Texas, positioning itself as a neighborhood hub for everyday shopping and dining needs. This open-air retail center features a practical mix of value-oriented national retailers including Ross Dress for Less and Boot Barn, complemented by diverse dining options such as Buffet King and various quick-service restaurants. The center prides itself on being \"in the middle of everything,\" offering accessible retail, dining, and service conveniences to the bustling local Austin community. With ample parking and easy freeway access from I-35, Capital Plaza serves as a go-to destination for residents seeking affordable shopping options and local services ranging from healthcare and dental to legal and business solutions. Professionally managed by Weitzman, Capital Plaza continues to provide North Austin families and commuters with a reliable shopping experience that combines familiar brands with neighborhood convenience.",
+	"tier": 1,
+	"spaces": [
+		{
+			"number": "12A",
+			"type": "Other",
+			"size": 4598
+		}
+	],
+	"ranking": 15.85113096316058
 }

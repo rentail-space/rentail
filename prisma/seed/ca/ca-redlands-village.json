@@ -1,79 +1,77 @@
 {
-  "address": "Wabash Avenue",
-  "city": "Mentone",
-  "country": "US",
-  "googlePlaceID": "places/ChIJwwE2YaZV24ARWZiLiijj1fo",
-  "name": "Redlands Village",
-  "state": "CA",
-  "latitude": 34.0708008,
-  "longitude": -117.1397619,
-  "phone": "++1 909-946-7518",
-  "imageURLs": [
-    "/images/malls/ca-redlands-village-1.jpg"
-  ],
-  "openFrom": 600,
-  "openUntil": 2300,
-  "rating": 4.6,
-  "reviewCount": 638,
-  "website": "https://lewisretailcenters.com/property/redlands-village/?utm_source=rentail.space",
-  "centerType": "CommunityCenter",
-  "demographics": "Redlands Village serves a family-oriented residential community in the Mentone area of Redlands, California, attracting middle-income households with a mix of young families and established residents. The trade area consists primarily of suburban homeowners seeking convenient neighborhood shopping for groceries, everyday services, and quick-service dining. The center's anchor tenant Stater Bros. Markets draws regular weekly shoppers, while service tenants like Great Clips, Pretty Nails and Spa, and CVS cater to routine household needs, indicating a practical, value-conscious customer base focused on convenience and accessibility.",
-  "description": "Redlands Village is a well-established 77,000 square foot neighborhood shopping center strategically located at the northwest corner of Wabash Avenue and Lugonia Avenue in Mentone, California. Anchored by a substantial 45,000 square foot Stater Bros. Markets, the center serves as a vital community hub for the surrounding residential neighborhoods. The property features a diverse tenant mix including national retailers CVS and AutoZone, popular dining options like Starbucks, Jersey Mike's Subs, and Wingzone, as well as essential services such as Great Clips and Pretty Nails and Spa. Developed and managed by Lewis Retail Centers, Redlands Village benefits from a captive trade area with a strong existing residential base, ensuring consistent foot traffic and community engagement. The center's convenient location and comprehensive mix of grocery, retail, dining, and service offerings make it an indispensable destination for everyday shopping needs in the Redlands area.",
-  "numberOfStores": 10,
-  "squareFootage": 77000,
-  "summary": "Redlands Village is a 77,000 square foot neighborhood shopping center in Mentone, California, anchored by Stater Bros. Markets and featuring a convenient mix of national retailers, quick-service restaurants, and personal services. Located at Wabash Avenue and Lugonia Avenue, the center serves as a community hub for the surrounding residential neighborhoods.",
-  "tier": 2,
-  "spaces": [
-    {
-      "type": "Inline",
-      "number": "1",
-      "available": false
-    },
-    {
-      "type": "Inline",
-      "number": "2",
-      "available": false
-    },
-    {
-      "type": "Inline",
-      "number": "3",
-      "available": false
-    },
-    {
-      "type": "Inline",
-      "number": "4",
-      "available": false
-    },
-    {
-      "type": "Inline",
-      "number": "5",
-      "available": false
-    },
-    {
-      "type": "Inline",
-      "number": "6",
-      "available": false
-    },
-    {
-      "type": "Inline",
-      "number": "7",
-      "available": false
-    },
-    {
-      "type": "Inline",
-      "number": "8",
-      "available": false
-    },
-    {
-      "type": "Inline",
-      "number": "9",
-      "available": false
-    },
-    {
-      "type": "Inline",
-      "number": "10",
-      "available": false
-    }
-  ],
-  "ranking": 25.80435024423469
+	"address": "Wabash Avenue",
+	"city": "Mentone",
+	"country": "US",
+	"googlePlaceID": "places/ChIJwwE2YaZV24ARWZiLiijj1fo",
+	"name": "Redlands Village",
+	"state": "CA",
+	"latitude": 34.0708008,
+	"longitude": -117.1397619,
+	"phone": "++1 909-946-7518",
+	"imageURLs": ["/images/malls/ca-redlands-village-1.jpg"],
+	"openFrom": 600,
+	"openUntil": 2300,
+	"rating": 4.6,
+	"reviewCount": 638,
+	"website": "https://lewisretailcenters.com/property/redlands-village/?utm_source=rentail.space",
+	"centerType": "CommunityCenter",
+	"demographics": "Redlands Village serves a family-oriented residential community in the Mentone area of Redlands, California, attracting middle-income households with a mix of young families and established residents. The trade area consists primarily of suburban homeowners seeking convenient neighborhood shopping for groceries, everyday services, and quick-service dining. The center's anchor tenant Stater Bros. Markets draws regular weekly shoppers, while service tenants like Great Clips, Pretty Nails and Spa, and CVS cater to routine household needs, indicating a practical, value-conscious customer base focused on convenience and accessibility.",
+	"description": "Redlands Village is a well-established 77,000 square foot neighborhood shopping center strategically located at the northwest corner of Wabash Avenue and Lugonia Avenue in Mentone, California. Anchored by a substantial 45,000 square foot Stater Bros. Markets, the center serves as a vital community hub for the surrounding residential neighborhoods. The property features a diverse tenant mix including national retailers CVS and AutoZone, popular dining options like Starbucks, Jersey Mike's Subs, and Wingzone, as well as essential services such as Great Clips and Pretty Nails and Spa. Developed and managed by Lewis Retail Centers, Redlands Village benefits from a captive trade area with a strong existing residential base, ensuring consistent foot traffic and community engagement. The center's convenient location and comprehensive mix of grocery, retail, dining, and service offerings make it an indispensable destination for everyday shopping needs in the Redlands area.",
+	"numberOfStores": 10,
+	"squareFootage": 77000,
+	"summary": "Redlands Village is a 77,000 square foot neighborhood shopping center in Mentone, California, anchored by Stater Bros. Markets and featuring a convenient mix of national retailers, quick-service restaurants, and personal services. Located at Wabash Avenue and Lugonia Avenue, the center serves as a community hub for the surrounding residential neighborhoods.",
+	"tier": 2,
+	"spaces": [
+		{
+			"type": "Inline",
+			"number": "1",
+			"available": false
+		},
+		{
+			"type": "Inline",
+			"number": "2",
+			"available": false
+		},
+		{
+			"type": "Inline",
+			"number": "3",
+			"available": false
+		},
+		{
+			"type": "Inline",
+			"number": "4",
+			"available": false
+		},
+		{
+			"type": "Inline",
+			"number": "5",
+			"available": false
+		},
+		{
+			"type": "Inline",
+			"number": "6",
+			"available": false
+		},
+		{
+			"type": "Inline",
+			"number": "7",
+			"available": false
+		},
+		{
+			"type": "Inline",
+			"number": "8",
+			"available": false
+		},
+		{
+			"type": "Inline",
+			"number": "9",
+			"available": false
+		},
+		{
+			"type": "Inline",
+			"number": "10",
+			"available": false
+		}
+	],
+	"ranking": 25.80435024423469
 }

@@ -4,7 +4,6 @@ import { mean } from "es-toolkit";
 import { Button, Section } from "react-email";
 import EmailLayout from "~/emails/EmailLayout";
 import { sendEmail } from "~/emails/sendEmails.server";
-import * as styles from "~/emails/styles";
 import prisma from "~/lib/prisma.server";
 import { daysAgo } from "~/lib/temporal";
 import runAllQueries from "./runAllQueries.server";
@@ -44,7 +43,7 @@ export default async function sendVisibilityAlert(): Promise<string> {
         <LatestRunTable runs={runs} />
         <Button
           href="https://rentail.space/admin/visibility"
-          style={styles.button}
+          className="bg-indigo-600 text-white rounded-md px-4 py-2 text-sm font-medium"
         >
           Charts and Graphs
         </Button>

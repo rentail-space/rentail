@@ -41,9 +41,13 @@ export async function loader({ request, params }: Route.LoaderArgs) {
         status: 204,
       });
 
+    const headers = new Headers(UI_MESSAGE_STREAM_HEADERS);
+    for (const [key, value] of found.responseHeaders)
+      headers.append(key, value);
+
     // Return the stream directly - Response accepts ReadableStream<Uint8Array>
     return new Response(stream, {
-      headers: { ...UI_MESSAGE_STREAM_HEADERS, ...found.responseHeaders },
+      headers,
     });
   } catch (error) {
     captureException(error, {

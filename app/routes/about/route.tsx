@@ -1,6 +1,11 @@
 import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/route";
 import AboutCTA from "./AboutCTA";
+import AboutHeader from "./AboutHeader";
+import AboutMission from "./AboutMission";
+import AboutStory from "./AboutStory";
+import AboutTeam from "./AboutTeam";
+import AboutValues from "./AboutValues";
 
 export function meta(): Route.MetaDescriptors {
   return pageMeta({
@@ -12,11 +17,6 @@ export function meta(): Route.MetaDescriptors {
       "about rentail.space, retail space, micro-merchants, brick-and-mortar, democratize retail space",
   });
 }
-import AboutHeader from "./AboutHeader";
-import AboutMission from "./AboutMission";
-import AboutStory from "./AboutStory";
-import AboutTeam from "./AboutTeam";
-import AboutValues from "./AboutValues";
 
 export default function About() {
   return (
@@ -26,10 +26,7 @@ export default function About() {
     >
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: Server-generated structured data
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemaData()),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData()) }}
       />
 
       <div className="container mx-auto my-10 space-y-8 p-5">

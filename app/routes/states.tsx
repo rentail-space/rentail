@@ -39,7 +39,7 @@ export default function StatePage({ loaderData }: Route.ComponentProps) {
     >
       <script
         type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: exception
+        // oxlint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaData(loaderData)),
         }}
