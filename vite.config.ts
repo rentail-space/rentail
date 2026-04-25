@@ -1,4 +1,4 @@
-import { defineConfig } from "vite-plus";
+import { defineConfig, lazyPlugins } from "vite-plus";
 import { reactRouter } from "@react-router/dev/vite";
 import { sentryReactRouter } from "@sentry/react-router";
 import devtoolsJson from "vite-plugin-devtools-json";
@@ -22,7 +22,12 @@ const sentryConfig = {
   },
 };
 
-export default defineConfig((config) => ({
+const sentryViteConfig = {
+  command: process.env.NODE_ENV === "development" ? "serve" : "build",
+  mode: process.env.NODE_ENV === "development" ? "development" : "production",
+} as const;
+
+export default defineConfig({
   staged: {
     "*": "vp check --fix",
   },
@@ -86,7 +91,7 @@ export default defineConfig((config) => ({
   plugins: [
     tailwindcss(),
     reactRouter(),
-    sentryReactRouter(sentryConfig, config),
+    lazyPlugins(() => sentryReactRouter(sentryConfig, sentryViteConfig)),
     devtoolsJson(),
   ],
   resolve: {
@@ -119,4 +124,4 @@ export default defineConfig((config) => ({
   server: {
     allowedHosts: [".ngrok-free.app"],
   },
-}));
+});
