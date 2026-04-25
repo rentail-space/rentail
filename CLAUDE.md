@@ -5,7 +5,7 @@
 - `pnpm dev` - Dev server (port 5173) | `pnpm build` - Production build
 - `pnpm check` - Lint + typecheck (run before committing) | `pnpm test` - Full suite
 - `pnpm format` - Auto-format | `pnpm devmcp` - MCP inspector
-- `pnpx vitest run <pattern>` - Specific test | `--reporter=verbose` for detail
+- `vp test run <pattern>` - Specific test | `--reporter=verbose` for detail
 - `tsx scripts/collect.ts "Location"` - Collect shopping centers
 - `tsx scripts/promote.ts` - Promote to production | `tsx scripts/updateBlogSchedule.ts` - Schedule posts
 

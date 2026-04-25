@@ -1,6 +1,6 @@
-import { resolve } from "node:path";
 import type { ParsedStack } from "vitest";
 import { defineConfig } from "vitest/config";
+import { resolve } from "node:path";
 
 process.env.NODE_ENV = "test";
 

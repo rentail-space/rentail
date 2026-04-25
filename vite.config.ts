@@ -2,6 +2,7 @@ import { defineConfig } from "vite-plus";
 import { reactRouter } from "@react-router/dev/vite";
 import devtoolsJson from "vite-plugin-devtools-json";
 import tailwindcss from "@tailwindcss/vite";
+import { resolve } from "node:path";
 
 export default defineConfig({
   staged: {
@@ -65,6 +66,21 @@ export default defineConfig({
     },
   },
   plugins: [tailwindcss(), reactRouter(), devtoolsJson()],
+  resolve: {
+    alias: [
+      { find: "~/test", replacement: resolve("test") },
+      { find: "~", replacement: resolve("app") },
+      {
+        find: "prisma/generated/models",
+        replacement: resolve("prisma/generated/models"),
+      },
+      {
+        find: "prisma/generated",
+        replacement: resolve("prisma/generated/client"),
+      },
+      { find: "+types", replacement: resolve(".react-router/types") },
+    ],
+  },
   optimizeDeps: {
     include: ["react", "react-dom", "streamdown", "rehype-harden"],
   },
