@@ -60,13 +60,17 @@ async function startServer() {
     // Unref the server to allow process to exit cleanly
     devServer.httpServer?.unref();
 
+    async function shutdown() {
+      await devServer?.close();
+      process.exit(0);
+    }
+
     // Handle graceful shutdown on parent process termination
     process.on("message", async (msg) => {
-      if (msg === "shutdown") {
-        await devServer?.close();
-        process.exit(0);
-      }
+      if (msg === "shutdown") await shutdown();
     });
+    process.on("SIGINT", shutdown);
+    process.on("SIGTERM", shutdown);
 
     // Send ready signal immediately - first test navigation will trigger optimization
     process.send({ type: "ready" });

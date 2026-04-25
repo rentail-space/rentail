@@ -12,8 +12,9 @@ import {
 } from "playwright";
 import invariant from "tiny-invariant";
 import debug from "debug";
+import { getServerBaseURL, getServerPort } from "./launchServer";
 
-export const port = 9222;
+export const port = getServerPort();
 
 let context: BrowserContext | undefined;
 const logger = debug("browser");
@@ -58,7 +59,7 @@ async function newContext(): Promise<BrowserContext> {
   });
 
   context = await browser.newContext({
-    baseURL: `http://localhost:${port}`,
+    baseURL: getServerBaseURL(),
     viewport: { width: 1024, height: 780 },
   });
   void context.setGeolocation({ latitude: 33.74901, longitude: -118.1956 });

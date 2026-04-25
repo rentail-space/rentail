@@ -6,12 +6,11 @@
  * - Starts MSW server (used by Web server)
  */
 
-import { exec, execFile } from "node:child_process";
+import { exec } from "node:child_process";
 import { promisify } from "node:util";
 import prisma from "~/lib/prisma.server";
 import seedCenters from "~/lib/scrape/seedCenters.server";
 import seedStatesAndRelatedData from "~/lib/scrape/seedStates.server";
-import { port } from "./launchBrowser";
 import { closeServer, launchServer } from "./launchServer";
 import { removeNewHTML } from "./toMatchInnerHTML";
 import { removeDiffImages } from "./toMatchScreenshot";
@@ -31,12 +30,9 @@ const centers = [
   "ca/ca-westfield-culver-city.json",
 ];
 
-const execFileAsync = promisify(execFile);
 const execAsync = promisify(exec);
 
 export default async function setup() {
-  await killServerOnPort(port);
-
   // Clean up database and seed it again
   await prisma.user.deleteMany();
   await prisma.property.deleteMany();
@@ -49,15 +45,9 @@ export default async function setup() {
   await removeNewHTML();
 
   // Launch server and start test env MSW handlers
-  await launchServer(port);
-}
+  await launchServer();
 
-async function killServerOnPort(port: number) {
-  try {
-    const { stdout } = await execFileAsync("lsof", [`-ti:${port}`]);
-    const pid = stdout.trim().match(/^\s*(\d+)/m)?.[1];
-    if (pid) await execAsync(`kill -9 ${pid}`);
-  } catch {}
+  return teardown;
 }
 
 export async function teardown() {
