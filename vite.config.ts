@@ -1,10 +1,28 @@
 import { defineConfig } from "vite-plus";
 import { reactRouter } from "@react-router/dev/vite";
+import { sentryReactRouter } from "@sentry/react-router";
 import devtoolsJson from "vite-plugin-devtools-json";
 import tailwindcss from "@tailwindcss/vite";
 import { resolve } from "node:path";
 
-export default defineConfig({
+const sentryReleaseName =
+  process.env.SENTRY_RELEASE ??
+  process.env.VERCEL_GIT_COMMIT_SHA ??
+  process.env.GITHUB_SHA;
+
+const sentryConfig = {
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  release: {
+    name: sentryReleaseName,
+  },
+  sourcemaps: {
+    disable: !process.env.SENTRY_AUTH_TOKEN || !sentryReleaseName,
+  },
+};
+
+export default defineConfig((config) => ({
   staged: {
     "*": "vp check --fix",
   },
@@ -65,7 +83,12 @@ export default defineConfig({
       "unicorn/prefer-array-flat-map": "error",
     },
   },
-  plugins: [tailwindcss(), reactRouter(), devtoolsJson()],
+  plugins: [
+    tailwindcss(),
+    reactRouter(),
+    sentryReactRouter(sentryConfig, config),
+    devtoolsJson(),
+  ],
   resolve: {
     alias: [
       { find: "~/test", replacement: resolve("test") },
@@ -96,4 +119,4 @@ export default defineConfig({
   server: {
     allowedHosts: [".ngrok-free.app"],
   },
-});
+}));
