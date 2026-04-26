@@ -34,8 +34,17 @@ vercel pull --environment=production
 vercel build 
 vercel deploy --prebuilt > deploy.log
 
+DEPLOY_URL=$(cat deploy.log)
+
+echo -e "\033[32m  Checking deployment is live …\033[0m"
+if ! curl --fail --silent --show-error --max-time 30 "$DEPLOY_URL" > /dev/null; then
+  echo -e "\033[31m  Deployment check failed — aborting push. Fix the issue and push manually.\033[0m"
+  exit 1
+fi
+echo -e "\033[32m  Deployment is live ✓\033[0m"
+
 echo -e "\033[32m  Opening dashboard …\033[0m"
-open $(cat deploy.log)
+open "$DEPLOY_URL"
 
 echo -e "\033[32m  Pushing changes to origin/main …\033[0m"
 git push origin main
