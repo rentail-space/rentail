@@ -39,7 +39,6 @@ export default function StatePage({ loaderData }: Route.ComponentProps) {
     >
       <script
         type="application/ld+json"
-        // oxlint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaData(loaderData)),
         }}

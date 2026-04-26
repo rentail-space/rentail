@@ -60,21 +60,6 @@ export async function sendEmail({
 }
 
 /**
- * We use different processes for sending emails (Vite worker) and for checking
- * on them (test process), so we use Redis to communicate between the two.
- */
-const subscriber = new Redis(envVars.REDIS_URL);
-const publisher = new Redis(envVars.REDIS_URL);
-
-subscriber.on("message", (channel: string, message: unknown) => {
-  if (channel === "email:last")
-    lastEmailSent = message
-      ? (JSON.parse(message as string) as LastEmail)
-      : undefined;
-});
-await subscriber.subscribe("email:last");
-
-/**
  * Get the last email that was sent. This is useful for visual regression
  * testing. It is only available in test mode. This function will block until
  * the email is captured by the parent process.
@@ -82,9 +67,22 @@ await subscriber.subscribe("email:last");
  * @returns The last email that was sent.
  */
 export async function getLastEmailSent(): Promise<LastEmail> {
-  await withTimeout(async () => {
-    while (!lastEmailSent) await sleep(100);
-  }, ms("1s"));
+  const redis = new Redis(envVars.REDIS_URL);
+  try {
+    await withTimeout(async () => {
+      while (true) {
+        const raw = await redis.get("email:last");
+        if (raw) {
+          lastEmailSent = JSON.parse(raw) as LastEmail;
+          return;
+        }
+        await sleep(100);
+      }
+    }, ms("10s"));
+    await redis.del("email:last");
+  } finally {
+    await redis.quit();
+  }
   invariant(lastEmailSent, "No email sent");
   const lastEmail = lastEmailSent;
   lastEmailSent = undefined;
@@ -100,5 +98,7 @@ export async function getLastEmailSent(): Promise<LastEmail> {
  * @param to - The email address of the recipient.
  */
 export async function captureLastEmail(lastEmail: LastEmail) {
-  await publisher.publish("email:last", JSON.stringify(lastEmail));
+  const redis = new Redis(envVars.REDIS_URL);
+  await redis.set("email:last", JSON.stringify(lastEmail));
+  await redis.quit();
 }

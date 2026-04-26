@@ -13,7 +13,7 @@ import sendWelcomeEmail from "~/emails/WelcomeEmail";
 import invariant from "tiny-invariant";
 import envVars from "~/lib/env";
 import welcome from "~/prompts/welcome.md?raw";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import prisma from "~/lib/prisma.server";
 import debug from "debug";
 

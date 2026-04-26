@@ -1,9 +1,9 @@
 import { defineConfig, lazyPlugins } from "vite-plus";
-import { reactRouter } from "@react-router/dev/vite";
 import { sentryReactRouter } from "@sentry/react-router";
+import { reactRouter } from "@react-router/dev/vite";
+import { resolve } from "node:path";
 import devtoolsJson from "vite-plugin-devtools-json";
 import tailwindcss from "@tailwindcss/vite";
-import { resolve } from "node:path";
 
 const sentryReleaseName =
   process.env.SENTRY_RELEASE ??
@@ -73,6 +73,7 @@ export default defineConfig({
       "prisma/seed/**",
     ],
     options: {
+      reportUnusedDisableDirectives: "warn",
       typeAware: true,
       typeCheck: true,
     },

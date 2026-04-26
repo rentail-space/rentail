@@ -35,13 +35,21 @@ export async function launchServer(): Promise<number> {
 
   // Start the server as forked process, that way we don't share the same node
   // instance, which could cause issues with some libraries (eg Prisma)
+  process.on("exit", () => {
+    try {
+      worker?.kill("SIGKILL");
+    } catch {}
+  });
+
   worker = fork(resolve("test/helpers/serverWorker.ts"), {
     execArgv: ["--import", "tsx/esm"],
     stdio: debug.enabled("server") ? "inherit" : "pipe",
     env: {
       ...process.env,
+      CHOKIDAR_USEPOLLING: "1",
       NODE_ENV: "test",
       PORT: port.toString(),
+      VITE_APP_URL: `http://localhost:${port}`,
     },
   });
   if (worker.pid) {

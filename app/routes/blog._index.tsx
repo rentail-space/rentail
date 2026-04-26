@@ -31,7 +31,6 @@ export default function Blog({
     >
       <script
         type="application/ld+json"
-        // oxlint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",

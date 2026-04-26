@@ -15,7 +15,7 @@
     "lint": "vp lint --fix",
     "promote": "./scripts/promote.ts",
     "start": "react-router-serve ./build/server/index.js",
-    "test": "pnpm run check && pnpm --expose-gc --max-old-space-size=3096 vp test run",
+    "test": "pnpm run check && rm -rf __screenshots__ && pnpm --expose-gc --max-old-space-size=3096 vp test run",
     "upgrade": "./scripts/upgrade.sh"
   },
   "dependencies": {
@@ -49,7 +49,7 @@
     "@vercel/react-router": "^1.2.6",
     "@vercel/speed-insights": "^2.0.0",
     "ai": "^6.0.168",
-    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "convert": "^7.0.0",
     "csv-parse": "^6.2.1",

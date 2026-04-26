@@ -5,53 +5,65 @@
  * cleanly when the test is done.
  */
 
-import { resolve } from "node:path";
 import { rm } from "node:fs/promises";
+import { resolve } from "node:path";
 import invariant from "tiny-invariant";
-import * as vite from "vite";
+import * as vite from "vite-plus";
 
 // Import and start the server
-async function startServer() {
-  invariant(process.send !== undefined, "process.send is not defined");
+async function startServer(this: void) {
+  const send = process.send?.bind(process);
+  invariant(send, "process.send is not defined");
   const port = Number(process.env.PORT);
   invariant(port, "PORT is not defined");
   try {
-    // Remove the directory at "deps" before starting the dev server
-    await rm(resolve("node_modules/.vite/deps"), {
-      recursive: true,
-      force: true,
-    });
+    // Use a test-specific cache directory so tests don't interfere with the
+    // dev server cache (node_modules/.vite). Clear it on each run to ensure
+    // a clean start — Vite will re-optimize all listed deps from scratch.
+    const testCacheDir = resolve("node_modules/.vite-test");
+    await rm(testCacheDir, { recursive: true, force: true });
 
     const devServer = await vite.createServer({
       build: {
-        // Test-specific build options
         minify: false,
         sourcemap: true,
       },
+      cacheDir: testCacheDir,
       clearScreen: false,
-      logLevel: "warn", // Reduced log level to avoid noise
+      logLevel: "warn",
       root: process.cwd(),
       optimizeDeps: {
-        noDiscovery: false,
-        force: true, // Force re-optimization in test mode
+        // entries covers all route files so Vite crawls and discovers every
+        // transitive CJS dep before the browser makes its first request.
+        // Combined with Vite's default holdUntilCrawlEnd:true, the browser
+        // waits for the single full optimization pass to finish — no
+        // mid-session re-optimization, no two-React-instances errors.
+        //
+        // Do NOT use force: true — it triggers eager node_modules scanning on
+        // startup, hits macOS's open-file limit (EMFILE), and crashes before
+        // any test runs.
+        entries: ["app/root.tsx", "app/routes/**/*.tsx", "app/routes/**/*.ts"],
         include: [
           "react",
-          "react-dom",
+          "react/jsx-runtime",
+          "react/jsx-dev-runtime",
+          // Must be react-dom/client, not react-dom — the app imports the
+          // /client sub-path.
+          "react-dom/client",
           "react-router",
           "@ai-sdk/react",
           "lucide-react",
-          "tailwindcss",
           "use-stick-to-bottom",
         ],
       },
       server: {
-        fs: { allow: ["."] }, // Don't re-optimize already bundled deps
+        fs: { allow: ["."] },
         hmr: false,
         middlewareMode: false,
         port,
         strictPort: true,
-        warmup: { clientFiles: ["/", "/chat", "/chat?q=test"] }, // Pre-warm these routes during dev server startup
-        watch: null, // Don't watch files during tests
+        warmup: { clientFiles: ["/", "/chat", "/chat?q=test"] },
+        watch: null,
       },
     });
 
@@ -69,13 +81,15 @@ async function startServer() {
     process.on("message", async (msg) => {
       if (msg === "shutdown") await shutdown();
     });
+    process.on("disconnect", () => process.exit(0));
     process.on("SIGINT", shutdown);
     process.on("SIGTERM", shutdown);
 
-    // Send ready signal immediately - first test navigation will trigger optimization
-    process.send({ type: "ready" });
+    // Signal ready immediately. Vite's holdUntilCrawlEnd (default: true) will
+    // hold the first browser request until dep optimization completes.
+    send({ type: "ready" });
   } catch (error) {
-    process.send({
+    send({
       type: "error",
       error: error instanceof Error ? error.message : String(error),
     });

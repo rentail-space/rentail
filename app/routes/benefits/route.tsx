@@ -25,7 +25,6 @@ export default function Benefits() {
     >
       <script
         type="application/ld+json"
-        // oxlint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaData()),
         }}

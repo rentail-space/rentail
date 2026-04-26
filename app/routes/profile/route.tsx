@@ -1,5 +1,5 @@
 import { captureException } from "@sentry/react-router";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import type { User } from "prisma/generated";
 import { useState } from "react";
 import { redirect, useLoaderData } from "react-router";
