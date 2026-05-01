@@ -1,4 +1,3 @@
-import { redirect } from "react-router";
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
@@ -26,9 +25,7 @@ export function meta(): Route.MetaDescriptors {
   ];
 }
 
-export async function loader({ request }: Route.LoaderArgs) {
-  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
-    return redirect("/privacy.md", { status: 303 });
+export async function loader() {
   return null;
 }
 

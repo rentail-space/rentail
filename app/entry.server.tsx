@@ -115,7 +115,8 @@ const MD_DYNAMIC: {
 ];
 
 function tryMarkdown(path: string): Promise<Response | null> {
-  const key = path.replace(/^\/|\.md$/g, "");
+  let key = path.replace(/^\/|\.md$/g, "");
+  if (key === "") key = "index";
 
   const execute = (
     result:
@@ -170,11 +171,26 @@ export default Sentry.wrapSentryHandleRequest(
 
     const url = new URL(request.url);
     if (url.pathname.endsWith(".md")) {
-      const mdResponse = await tryMarkdown(url.pathname);
-      if (mdResponse) {
+      const md = await tryMarkdown(url.pathname);
+      if (md) {
         // oxlint-disable-next-line typescript/no-floating-promises
         trackBotVisit(request);
-        return mdResponse;
+        return md;
+      }
+    }
+
+    // Accept: text/markdown → serve markdown at the same URL
+    if (
+      request.headers
+        .get("accept")
+        ?.split(",")
+        .some((a) => a.trim() === "text/markdown")
+    ) {
+      const md = await tryMarkdown(url.pathname);
+      if (md) {
+        // oxlint-disable-next-line typescript/no-floating-promises
+        trackBotVisit(request);
+        return md;
       }
     }
 

@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Fragment, useRef } from "react";
-import { data, Link, redirect } from "react-router";
+import { data, Link } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
@@ -23,10 +23,7 @@ export function headers({ loaderHeaders }: Route.HeadersArgs) {
   return { Link: loaderHeaders.get("Link") ?? "" };
 }
 
-export async function loader({ params, request }: Route.LoaderArgs) {
-  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
-    return redirect(`/county/${params.slug}.md`, { status: 303 });
-
+export async function loader({ params }: Route.LoaderArgs) {
   const county = await prisma.county.findUnique({
     where: { slug: params.slug },
     include: {

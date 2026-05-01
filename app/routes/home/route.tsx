@@ -1,4 +1,4 @@
-import { data, redirect } from "react-router";
+import { data } from "react-router";
 import BlogPostsGrid from "~/components/ui/BlogPostsGrid";
 import { recentBlogPosts } from "~/lib/blogPosts.server";
 import pageMeta from "~/lib/pageMeta";
@@ -35,11 +35,7 @@ export function headers({ loaderHeaders }: Route.HeadersArgs) {
   return { Link: loaderHeaders.get("Link") ?? "" };
 }
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const isMarkdown =
-    request.headers.get("accept")?.split(",")[0] === "text/markdown";
-  if (isMarkdown) return redirect("/index.md", { status: 303 });
-
+export async function loader() {
   const posts = await recentBlogPosts();
   return data(
     { posts },

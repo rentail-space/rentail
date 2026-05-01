@@ -1,4 +1,4 @@
-import { data, redirect } from "react-router";
+import { data } from "react-router";
 import { ArrowRightIcon } from "lucide-react";
 import { Link } from "react-router";
 import { Streamdown } from "streamdown";
@@ -33,10 +33,7 @@ export function headers(): HeadersInit {
   };
 }
 
-export async function loader({ request }: Route.LoaderArgs) {
-  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
-    return redirect("/states.md", { status: 303 });
-
+export async function loader() {
   const states = await prisma.state.findMany({
     orderBy: { name: "asc" },
   });

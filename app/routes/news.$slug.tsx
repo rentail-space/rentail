@@ -1,4 +1,4 @@
-import { Link, redirect } from "react-router";
+import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
 import invariant from "tiny-invariant";
@@ -9,15 +9,10 @@ import pageMeta from "~/lib/pageMeta";
 import { formatDateMed } from "~/lib/temporal";
 import type { Route } from "./+types/news.$slug";
 
-export async function loader({ params, request }: Route.LoaderArgs) {
+export async function loader({ params }: Route.LoaderArgs) {
   try {
-    const { slug } = params;
-    invariant(slug, "Slug is required");
-    const isMarkdown =
-      request.headers.get("accept")?.split(",")[0] === "text/markdown";
-    return isMarkdown
-      ? redirect(`/news/${slug}.md`, { status: 303 })
-      : await loadNewsItem(slug);
+    invariant(params.slug, "Slug is required");
+    return await loadNewsItem(params.slug);
   } catch {
     throw new Response("Not Found", { status: 404 });
   }

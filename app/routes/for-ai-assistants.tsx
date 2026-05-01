@@ -1,4 +1,4 @@
-import { Link, data, redirect } from "react-router";
+import { Link, data } from "react-router";
 import { Streamdown } from "streamdown";
 import forAIAssistants from "~/data/for-ai-assistants.md?raw";
 import pageMeta from "~/lib/pageMeta";
@@ -25,19 +25,13 @@ export function meta(): Route.MetaDescriptors {
   ];
 }
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const isMarkdown =
-    request.headers.get("accept")?.split(",")[0] === "text/markdown";
-  if (isMarkdown) return redirect("/for-ai-assistants.md", { status: 303 });
-
+export async function loader() {
   return data({ forAIAssistants });
 }
 
-export function headers({ loaderHeaders }: Route.HeadersArgs) {
+export function headers() {
   return {
-    Link:
-      loaderHeaders.get("Link") ??
-      `<https://rentail.space/for-ai-assistants.md>; rel="alternate"; type="text/markdown"`,
+    Link: `<https://rentail.space/for-ai-assistants.md>; rel="alternate"; type="text/markdown"`,
   };
 }
 

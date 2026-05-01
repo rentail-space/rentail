@@ -1,5 +1,5 @@
 import { HeartIcon } from "lucide-react";
-import { redirect } from "react-router";
+
 import { formatDateMed } from "~/lib/temporal";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
@@ -10,14 +10,9 @@ import externalLink from "~/lib/externalLink";
 import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/blog.$slug";
 
-export async function loader({ params, request }: Route.LoaderArgs) {
+export async function loader({ params }: Route.LoaderArgs) {
   try {
-    const { slug } = params;
-    const isMarkdown =
-      request.headers.get("accept")?.split(",")[0] === "text/markdown";
-    return isMarkdown
-      ? redirect(`/blog/${slug}.md`, { status: 303 })
-      : await loadBlogPost(slug);
+    return await loadBlogPost(params.slug);
   } catch {
     throw new Response("Not Found", { status: 404 });
   }

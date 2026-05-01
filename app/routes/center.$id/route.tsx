@@ -1,5 +1,5 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
-import { data, redirect } from "react-router";
+import { data } from "react-router";
 import envVars from "~/lib/env";
 import externalLink from "~/lib/externalLink";
 import pageMeta from "~/lib/pageMeta";
@@ -11,10 +11,7 @@ export function headers({ loaderHeaders }: Route.HeadersArgs) {
   return { Link: loaderHeaders.get("Link") ?? "" };
 }
 
-export async function loader({ params, request }: Route.LoaderArgs) {
-  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
-    return redirect(`/center/${params.id}.md`, { status: 303 });
-
+export async function loader({ params }: Route.LoaderArgs) {
   const center = await prisma.property.findUnique({
     include: { spaces: { where: { available: true } }, state: true },
     where: { id: params.id },

@@ -26,8 +26,6 @@ export function meta(): Route.MetaDescriptors {
 }
 
 export async function loader({ request }: Route.LoaderArgs) {
-  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
-    return redirect("/faq.md", { status: 303 });
   return null;
 }
 

@@ -34,9 +34,7 @@ export function headers(): HeadersInit {
   };
 }
 
-export async function loader({ request }: Route.LoaderArgs) {
-  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
-    return redirect("/about.md", { status: 303 });
+export async function loader() {
   return null;
 }
 

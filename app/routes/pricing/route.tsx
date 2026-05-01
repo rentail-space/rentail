@@ -1,4 +1,3 @@
-import { redirect } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/route";
@@ -24,9 +23,7 @@ export function meta(): Route.MetaDescriptors {
   ];
 }
 
-export async function loader({ request }: Route.LoaderArgs) {
-  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
-    return redirect("/pricing.md", { status: 303 });
+export async function loader() {
   return null;
 }
 

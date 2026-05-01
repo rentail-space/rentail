@@ -1,4 +1,4 @@
-import { Link, redirect } from "react-router";
+import { Link } from "react-router";
 import {
   Card,
   CardContent,
@@ -30,9 +30,7 @@ export function meta(): Route.MetaDescriptors {
   ];
 }
 
-export async function loader({ request }: Route.LoaderArgs) {
-  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
-    return redirect("/glossary.md", { status: 303 });
+export async function loader() {
   return null;
 }
 

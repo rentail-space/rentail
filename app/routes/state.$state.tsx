@@ -24,10 +24,7 @@ export function headers({ loaderHeaders }: Route.HeadersArgs) {
   return { Link: loaderHeaders.get("Link") ?? "" };
 }
 
-export async function loader({ params, request }: Route.LoaderArgs) {
-  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
-    return redirect(`/state/${params.state.toLowerCase()}.md`, { status: 303 });
-
+export async function loader({ params }: Route.LoaderArgs) {
   const state = await prisma.state.findUnique({
     where: { abbreviation: params.state.toUpperCase() },
   });

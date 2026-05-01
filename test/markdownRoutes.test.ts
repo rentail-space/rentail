@@ -377,33 +377,35 @@ describe("Dynamic markdown routes", () => {
   });
 });
 
-// ── Accept header redirects (303) ────────────────────────────────────────
+// ── Accept header → inline markdown ──────────────────────────────────────
 
-describe("Accept: text/markdown redirects", () => {
-  const redirectCases = [
-    { from: "/", to: "/index.md" },
-    { from: "/about", to: "/about.md" },
-    { from: "/benefits", to: "/benefits.md" },
-    { from: "/faq", to: "/faq.md" },
-    { from: "/glossary", to: "/glossary.md" },
-    { from: "/pricing", to: "/pricing.md" },
-    { from: "/privacy", to: "/privacy.md" },
-    { from: "/terms", to: "/terms.md" },
-    { from: "/states", to: "/states.md" },
-    { from: "/state/ca", to: "/state/ca.md" },
+describe("Accept: text/markdown serves inline markdown", () => {
+  const paths = [
+    { path: "/", title: "# Rentail.space" },
+    { path: "/about", title: "# Making retail space accessible" },
+    { path: "/benefits", title: "# Why Smart Retailers" },
+    { path: "/faq", title: "# Frequently Asked Questions" },
+    { path: "/glossary", title: "# Specialty Leasing Glossary" },
+    { path: "/pricing", title: "# Simple, transparent pricing" },
+    { path: "/privacy", title: "# Privacy Policy" },
+    { path: "/terms", title: "# Terms of Service" },
+    { path: "/states", title: "# US States" },
+    { path: "/state/ca", title: "# California" },
+    { path: "/for-ai-assistants", title: "For AI Assistants" },
     {
-      from: "/center/ca-los-cerritos-center",
-      to: "/center/ca-los-cerritos-center.md",
+      path: "/center/ca-los-cerritos-center",
+      title: "# Los Cerritos Center",
     },
-    { from: "/city/ca-los-angeles", to: "/city/ca-los-angeles.md" },
-    { from: "/for-ai-assistants", to: "/for-ai-assistants.md" },
+    { path: "/city/ca-los-angeles", title: "Los Angeles" },
   ];
 
-  for (const { from, to } of redirectCases) {
-    it(`should redirect ${from} → ${to}`, async () => {
-      const res = await fetchHtmlWithAccept(from);
-      expect(res.status).toBe(303);
-      expect(res.headers.get("location")).toBe(to);
+  for (const { path, title } of paths) {
+    it(`should serve markdown for ${path}`, async () => {
+      const res = await fetchHtmlWithAccept(path);
+      expect(res.status).toBe(200);
+      expect(res.headers.get("content-type")).toBe("text/markdown");
+      const body = await res.text();
+      expect(body).toContain(title);
     });
   }
 });
