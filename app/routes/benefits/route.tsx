@@ -1,4 +1,3 @@
-import { redirect } from "react-router";
 import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/route";
 import BenefitsCTA from "./BenefitsCTA";
