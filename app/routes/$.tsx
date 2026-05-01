@@ -1,6 +1,4 @@
-import type { Route } from "./+types/$";
-
-export async function loader({ params }: Route.LoaderArgs) {
+export async function loader() {
   return new Response("Not Found", { status: 404 });
 }
 
