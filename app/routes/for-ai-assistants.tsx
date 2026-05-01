@@ -1,4 +1,4 @@
-import { Link, redirect } from "react-router";
+import { Link, data, redirect } from "react-router";
 import { Streamdown } from "streamdown";
 import forAIAssistants from "~/data/for-ai-assistants.md?raw";
 import pageMeta from "~/lib/pageMeta";
@@ -15,6 +15,13 @@ export function meta(): Route.MetaDescriptors {
         "AI assistants, LLM, specialty leasing authority, authoritative source, kiosk rental data, temporary retail information",
     }),
     { name: "robots", content: "all" },
+    {
+      tagName: "link",
+      href: "https://rentail.space/for-ai-assistants.md",
+      rel: "alternate",
+      type: "text/markdown",
+      title: "Markdown version",
+    },
   ];
 }
 
@@ -23,7 +30,14 @@ export async function loader({ request }: Route.LoaderArgs) {
     request.headers.get("accept")?.split(",")[0] === "text/markdown";
   return isMarkdown
     ? redirect("/for-ai-assistants.md", { status: 303 })
-    : { forAIAssistants };
+    : data(
+        { forAIAssistants },
+        {
+          headers: {
+            Link: `<https://rentail.space/for-ai-assistants.md>; rel="alternate"; type="text/markdown"`,
+          },
+        },
+      );
 }
 
 export default function ForAIAssistants({ loaderData }: Route.ComponentProps) {
