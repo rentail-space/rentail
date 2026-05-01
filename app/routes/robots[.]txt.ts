@@ -21,17 +21,20 @@ export async function loader() {
       userAgent: "*",
       allow: ["/", "/api/query"],
       disallow: ["/api/*", "/chat", "/auth", "/error"],
-      sitemap: [
-        "https://rentail.space/sitemap.xml",
-        "https://rentail.space/sitemap.txt",
-      ],
     },
   ]);
+
+  const sitemaps = [
+    "Sitemap: https://rentail.space/sitemap.xml",
+    "Sitemap: https://rentail.space/sitemap.txt",
+  ];
 
   const withComment = `# API for AI assistants: https://rentail.space/api/query
 # OpenAPI spec: https://rentail.space/openapi.json
 
-${robotsTxt}`;
+${robotsTxt}
+${sitemaps.join("\n")}
+`;
 
   return new Response(withComment, {
     headers: { "Content-Type": "text/plain" },
