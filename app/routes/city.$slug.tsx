@@ -19,6 +19,10 @@ import timeOfDay from "~/lib/timeOfDay";
 import { pluralize } from "~/lib/utils";
 import type { Route } from "./+types/city.$slug";
 
+export function headers({ loaderHeaders }: Route.HeadersArgs) {
+  return { Link: loaderHeaders.get("Link") ?? "" };
+}
+
 export async function loader({ params, request }: Route.LoaderArgs) {
   if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
     return redirect(`/city/${params.slug}.md`, { status: 303 });

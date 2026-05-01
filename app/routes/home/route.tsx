@@ -31,6 +31,10 @@ import SpecialtyLeasing from "~/routes/home/SpecialtyLeasing";
 
 export const handle = { headerLinks: [] };
 
+export function headers({ loaderHeaders }: Route.HeadersArgs) {
+  return { Link: loaderHeaders.get("Link") ?? "" };
+}
+
 export async function loader({ request }: Route.LoaderArgs) {
   const isMarkdown =
     request.headers.get("accept")?.split(",")[0] === "text/markdown";

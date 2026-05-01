@@ -27,6 +27,12 @@ export function meta(): Route.MetaDescriptors {
   ];
 }
 
+export function headers(): HeadersInit {
+  return {
+    Link: `<https://rentail.space/states.md>; rel="alternate"; type="text/markdown"`,
+  };
+}
+
 export async function loader({ request }: Route.LoaderArgs) {
   if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
     return redirect("/states.md", { status: 303 });
@@ -41,14 +47,7 @@ export async function loader({ request }: Route.LoaderArgs) {
     _count: { _all: true },
   });
 
-  return data(
-    { states, centers },
-    {
-      headers: {
-        Link: `<https://rentail.space/states.md>; rel="alternate"; type="text/markdown"`,
-      },
-    },
-  );
+  return data({ states, centers });
 }
 
 export default function StatePage({ loaderData }: Route.ComponentProps) {

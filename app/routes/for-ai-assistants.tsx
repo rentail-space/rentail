@@ -28,16 +28,17 @@ export function meta(): Route.MetaDescriptors {
 export async function loader({ request }: Route.LoaderArgs) {
   const isMarkdown =
     request.headers.get("accept")?.split(",")[0] === "text/markdown";
-  return isMarkdown
-    ? redirect("/for-ai-assistants.md", { status: 303 })
-    : data(
-        { forAIAssistants },
-        {
-          headers: {
-            Link: `<https://rentail.space/for-ai-assistants.md>; rel="alternate"; type="text/markdown"`,
-          },
-        },
-      );
+  if (isMarkdown) return redirect("/for-ai-assistants.md", { status: 303 });
+
+  return data({ forAIAssistants });
+}
+
+export function headers({ loaderHeaders }: Route.HeadersArgs) {
+  return {
+    Link:
+      loaderHeaders.get("Link") ??
+      `<https://rentail.space/for-ai-assistants.md>; rel="alternate"; type="text/markdown"`,
+  };
 }
 
 export default function ForAIAssistants({ loaderData }: Route.ComponentProps) {

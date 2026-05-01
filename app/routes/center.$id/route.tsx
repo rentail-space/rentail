@@ -7,6 +7,10 @@ import prisma from "~/lib/prisma.server";
 import type { Route } from "./+types/route";
 import CenterDetails from "./CenterDetails";
 
+export function headers({ loaderHeaders }: Route.HeadersArgs) {
+  return { Link: loaderHeaders.get("Link") ?? "" };
+}
+
 export async function loader({ params, request }: Route.LoaderArgs) {
   if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
     return redirect(`/center/${params.id}.md`, { status: 303 });
