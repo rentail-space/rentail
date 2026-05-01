@@ -1,3 +1,4 @@
+import { redirect } from "react-router";
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
@@ -6,13 +7,35 @@ import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/privacy";
 
 export function meta(): Route.MetaDescriptors {
-  return pageMeta({
-    title: "Privacy Policy",
-    description:
-      "Learn how Rentail.space collects, uses, and safeguards your personal information to ensure your privacy when using our specialty leasing platform.",
-    url: "/privacy",
-    keywords: "privacy policy, specialty leasing, retail spaces, rentail.space",
-  });
+  return [
+    ...pageMeta({
+      title: "Privacy Policy",
+      description:
+        "Learn how Rentail.space collects, uses, and safeguards your personal information to ensure your privacy when using our specialty leasing platform.",
+      url: "/privacy",
+      keywords:
+        "privacy policy, specialty leasing, retail spaces, rentail.space",
+    }),
+    {
+      tagName: "link",
+      href: "https://rentail.space/privacy.md",
+      rel: "alternate",
+      type: "text/markdown",
+      title: "Markdown version",
+    },
+  ];
+}
+
+export async function loader({ request }: Route.LoaderArgs) {
+  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
+    return redirect("/privacy.md", { status: 303 });
+  return null;
+}
+
+export function headers(): HeadersInit {
+  return {
+    Link: `<https://rentail.space/privacy.md>; rel="alternate"; type="text/markdown"`,
+  };
 }
 
 export default function PrivacyPolicy() {

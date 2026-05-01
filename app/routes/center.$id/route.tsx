@@ -1,4 +1,5 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
+import { data, redirect } from "react-router";
 import envVars from "~/lib/env";
 import externalLink from "~/lib/externalLink";
 import pageMeta from "~/lib/pageMeta";
@@ -6,13 +7,23 @@ import prisma from "~/lib/prisma.server";
 import type { Route } from "./+types/route";
 import CenterDetails from "./CenterDetails";
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function loader({ params, request }: Route.LoaderArgs) {
+  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
+    return redirect(`/center/${params.id}.md`, { status: 303 });
+
   const center = await prisma.property.findUnique({
     include: { spaces: { where: { available: true } }, state: true },
     where: { id: params.id },
   });
   if (!center) throw new Response("Not Found", { status: 404 });
-  return { center, mapboxToken: envVars.MAPBOX_TOKEN };
+  return data(
+    { center, mapboxToken: envVars.MAPBOX_TOKEN },
+    {
+      headers: {
+        Link: `<https://rentail.space/center/${center.id}.md>; rel="alternate"; type="text/markdown"`,
+      },
+    },
+  );
 }
 
 export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
@@ -21,13 +32,22 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
   const description = center.summary
     ? `${center.summary} Located at ${center.address}, ${center.city}, ${center.state.abbreviation}.`
     : `Shopping center at ${center.address}, ${center.city}, ${center.state.abbreviation}`;
-  return pageMeta({
-    description,
-    image: center.imageURLs[0],
-    keywords: `${center.name}, ${center.city} ${center.state.abbreviation}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`,
-    title: `${center.name} - ${center.city}, ${center.state.abbreviation}`,
-    url: `/center/${center.id}`,
-  });
+  return [
+    ...pageMeta({
+      description,
+      image: center.imageURLs[0],
+      keywords: `${center.name}, ${center.city} ${center.state.abbreviation}, shopping center, specialty leasing, kiosk rental, pop-up shop, temporary retail, mall leasing`,
+      title: `${center.name} - ${center.city}, ${center.state.abbreviation}`,
+      url: `/center/${center.id}`,
+    }),
+    {
+      tagName: "link",
+      href: `https://rentail.space/center/${center.id}.md`,
+      rel: "alternate",
+      type: "text/markdown",
+      title: "Markdown version",
+    },
+  ];
 }
 
 export default function CenterPage({ loaderData }: Route.ComponentProps) {

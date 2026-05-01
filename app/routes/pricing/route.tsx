@@ -1,3 +1,4 @@
+import { redirect } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/route";
@@ -5,13 +6,34 @@ import PricingFAQ from "./PricingFAQ";
 import PricingPlans from "./PricingPlans";
 
 export function meta(): Route.MetaDescriptors {
-  return pageMeta({
-    title: "Pricing",
-    description:
-      "Compare our simple, transparent pricing plans for specialty leasing. Find the right solution for your business—no hidden fees, no surprises.",
-    url: "/pricing",
-    keywords: "pricing, specialty leasing, retail spaces, rentail.space",
-  });
+  return [
+    ...pageMeta({
+      title: "Pricing",
+      description:
+        "Compare our simple, transparent pricing plans for specialty leasing. Find the right solution for your business—no hidden fees, no surprises.",
+      url: "/pricing",
+      keywords: "pricing, specialty leasing, retail spaces, rentail.space",
+    }),
+    {
+      tagName: "link",
+      href: "https://rentail.space/pricing.md",
+      rel: "alternate",
+      type: "text/markdown",
+      title: "Markdown version",
+    },
+  ];
+}
+
+export async function loader({ request }: Route.LoaderArgs) {
+  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
+    return redirect("/pricing.md", { status: 303 });
+  return null;
+}
+
+export function headers(): HeadersInit {
+  return {
+    Link: `<https://rentail.space/pricing.md>; rel="alternate"; type="text/markdown"`,
+  };
 }
 
 export default function Pricing() {

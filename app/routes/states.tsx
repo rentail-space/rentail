@@ -1,3 +1,4 @@
+import { data, redirect } from "react-router";
 import { ArrowRightIcon } from "lucide-react";
 import { Link } from "react-router";
 import { Streamdown } from "streamdown";
@@ -7,17 +8,29 @@ import prisma from "~/lib/prisma.server";
 import type { Route } from "./+types/states";
 
 export function meta(): Route.MetaDescriptors {
-  return pageMeta({
-    title: "Shopping Centers by State",
-    description:
-      "Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces in shopping centers across all 50 US states. Real-time availability for seasonal and temporary retail locations.",
-    url: "/states",
-    keywords:
-      "specialty leasing by state, kiosk rental locations, pop-up shop states, mall cart by state, temporary retail locations, shopping centers by state",
-  });
+  return [
+    ...pageMeta({
+      title: "Shopping Centers by State",
+      description:
+        "Browse specialty leasing and short-term retail opportunities by state. Find kiosks, pop-up shops, carts, and temporary retail spaces in shopping centers across all 50 US states. Real-time availability for seasonal and temporary retail locations.",
+      url: "/states",
+      keywords:
+        "specialty leasing by state, kiosk rental locations, pop-up shop states, mall cart by state, temporary retail locations, shopping centers by state",
+    }),
+    {
+      tagName: "link",
+      href: "https://rentail.space/states.md",
+      rel: "alternate",
+      type: "text/markdown",
+      title: "Markdown version",
+    },
+  ];
 }
 
-export async function loader() {
+export async function loader({ request }: Route.LoaderArgs) {
+  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
+    return redirect("/states.md", { status: 303 });
+
   const states = await prisma.state.findMany({
     orderBy: { name: "asc" },
   });
@@ -28,7 +41,14 @@ export async function loader() {
     _count: { _all: true },
   });
 
-  return { states, centers };
+  return data(
+    { states, centers },
+    {
+      headers: {
+        Link: `<https://rentail.space/states.md>; rel="alternate"; type="text/markdown"`,
+      },
+    },
+  );
 }
 
 export default function StatePage({ loaderData }: Route.ComponentProps) {

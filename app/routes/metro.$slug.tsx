@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Fragment, useRef } from "react";
-import { Link } from "react-router";
+import { data, Link, redirect } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
@@ -19,7 +19,10 @@ import timeOfDay from "~/lib/timeOfDay";
 import { pluralize } from "~/lib/utils";
 import type { Route } from "./+types/metro.$slug";
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function loader({ params, request }: Route.LoaderArgs) {
+  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
+    return redirect(`/metro/${params.slug}.md`, { status: 303 });
+
   const metro = await prisma.metroArea.findUnique({
     where: { slug: params.slug },
     include: {
@@ -45,18 +48,34 @@ export async function loader({ params }: Route.LoaderArgs) {
     },
   });
 
-  return { centers, metro, mapboxToken: envVars.MAPBOX_TOKEN };
+  return data(
+    { centers, metro, mapboxToken: envVars.MAPBOX_TOKEN },
+    {
+      headers: {
+        Link: `<https://rentail.space/metro/${metro.slug}.md>; rel="alternate"; type="text/markdown"`,
+      },
+    },
+  );
 }
 
 export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
   if (!loaderData) return [];
   const { centers, metro } = loaderData;
-  return pageMeta({
-    title: `Shopping Centers in ${metro.name} Metro Area`,
-    description: `Find specialty leasing and short-term retail spaces in the ${metro.name} metro area. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`,
-    url: `/metro/${metro.state.abbreviation.toLowerCase()}-${metro.name.toLowerCase().replace(/\s+/g, "-")}`,
-    keywords: `${metro.name} specialty leasing, ${metro.name} kiosk rental, ${metro.name} pop-up shops, ${metro.name} mall carts, ${metro.name} temporary retail, shopping centers in ${metro.name}`,
-  });
+  return [
+    ...pageMeta({
+      title: `Shopping Centers in ${metro.name} Metro Area`,
+      description: `Find specialty leasing and short-term retail spaces in the ${metro.name} metro area. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`,
+      url: `/metro/${metro.state.abbreviation.toLowerCase()}-${metro.name.toLowerCase().replace(/\s+/g, "-")}`,
+      keywords: `${metro.name} specialty leasing, ${metro.name} kiosk rental, ${metro.name} pop-up shops, ${metro.name} mall carts, ${metro.name} temporary retail, shopping centers in ${metro.name}`,
+    }),
+    {
+      tagName: "link",
+      href: `https://rentail.space/metro/${metro.slug}.md`,
+      rel: "alternate",
+      type: "text/markdown",
+      title: "Markdown version",
+    },
+  ];
 }
 
 export default function MetroPage({ loaderData }: Route.ComponentProps) {

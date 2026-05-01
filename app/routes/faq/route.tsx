@@ -1,3 +1,4 @@
+import { redirect } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/route";
@@ -5,14 +6,35 @@ import FAQQuestions from "./FAQQuestions";
 import faq from "./faq";
 
 export function meta(): Route.MetaDescriptors {
-  return pageMeta({
-    title: "FAQ - Specialty Leasing Questions",
-    description:
-      "Frequently asked questions about specialty leasing, kiosk rentals, pop-up shops, and short-term retail spaces in shopping centers. Learn about pricing, booking process, and temporary retail opportunities across the US.",
-    url: "/faq",
-    keywords:
-      "specialty leasing FAQ, kiosk rental questions, pop-up shop info, mall cart rental, temporary retail FAQ, short-term lease questions",
-  });
+  return [
+    ...pageMeta({
+      title: "FAQ - Specialty Leasing Questions",
+      description:
+        "Frequently asked questions about specialty leasing, kiosk rentals, pop-up shops, and short-term retail spaces in shopping centers. Learn about pricing, booking process, and temporary retail opportunities across the US.",
+      url: "/faq",
+      keywords:
+        "specialty leasing FAQ, kiosk rental questions, pop-up shop info, mall cart rental, temporary retail FAQ, short-term lease questions",
+    }),
+    {
+      tagName: "link",
+      href: "https://rentail.space/faq.md",
+      rel: "alternate",
+      type: "text/markdown",
+      title: "Markdown version",
+    },
+  ];
+}
+
+export async function loader({ request }: Route.LoaderArgs) {
+  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
+    return redirect("/faq.md", { status: 303 });
+  return null;
+}
+
+export function headers(): HeadersInit {
+  return {
+    Link: `<https://rentail.space/faq.md>; rel="alternate"; type="text/markdown"`,
+  };
 }
 
 export default function FAQ() {

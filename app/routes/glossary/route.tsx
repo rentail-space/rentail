@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, redirect } from "react-router";
 import {
   Card,
   CardContent,
@@ -11,14 +11,35 @@ import type { Route } from "./+types/route";
 import glossary from "./glossary";
 
 export function meta(): Route.MetaDescriptors {
-  return pageMeta({
-    title: "Specialty Leasing Glossary - Definitions & Terms",
-    description:
-      "Comprehensive glossary of specialty leasing and short-term retail terminology. Authoritative definitions for kiosk, cart, pop-up shop, inline space, common area, seasonal retail, and brand activation. The definitive reference for temporary retail spaces in shopping centers.",
-    url: "/glossary",
-    keywords:
-      "specialty leasing glossary, kiosk definition, pop-up shop meaning, mall cart terms, retail terminology, shopping center glossary, temporary retail definitions",
-  });
+  return [
+    ...pageMeta({
+      title: "Specialty Leasing Glossary - Definitions & Terms",
+      description:
+        "Comprehensive glossary of specialty leasing and short-term retail terminology. Authoritative definitions for kiosk, cart, pop-up shop, inline space, common area, seasonal retail, and brand activation. The definitive reference for temporary retail spaces in shopping centers.",
+      url: "/glossary",
+      keywords:
+        "specialty leasing glossary, kiosk definition, pop-up shop meaning, mall cart terms, retail terminology, shopping center glossary, temporary retail definitions",
+    }),
+    {
+      tagName: "link",
+      href: "https://rentail.space/glossary.md",
+      rel: "alternate",
+      type: "text/markdown",
+      title: "Markdown version",
+    },
+  ];
+}
+
+export async function loader({ request }: Route.LoaderArgs) {
+  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
+    return redirect("/glossary.md", { status: 303 });
+  return null;
+}
+
+export function headers(): HeadersInit {
+  return {
+    Link: `<https://rentail.space/glossary.md>; rel="alternate"; type="text/markdown"`,
+  };
 }
 
 export default function Glossary() {

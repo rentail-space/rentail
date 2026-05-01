@@ -18,6 +18,18 @@ const STATIC_PATHS = [
   "/terms",
   "/api/query",
   "/openapi.json",
+  "/index.md",
+  "/about.md",
+  "/benefits.md",
+  "/faq.md",
+  "/glossary.md",
+  "/pricing.md",
+  "/privacy.md",
+  "/terms.md",
+  "/states.md",
+  "/for-ai-assistants.md",
+  "/blog/sitemap.md",
+  "/news/sitemap.md",
 ];
 
 async function dynamicPaths(): Promise<string[]> {

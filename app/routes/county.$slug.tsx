@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Fragment, useRef } from "react";
-import { Link } from "react-router";
+import { data, Link, redirect } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
@@ -19,7 +19,10 @@ import timeOfDay from "~/lib/timeOfDay";
 import { pluralize } from "~/lib/utils";
 import type { Route } from "./+types/county.$slug";
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function loader({ params, request }: Route.LoaderArgs) {
+  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
+    return redirect(`/county/${params.slug}.md`, { status: 303 });
+
   const county = await prisma.county.findUnique({
     where: { slug: params.slug },
     include: {
@@ -44,18 +47,34 @@ export async function loader({ params }: Route.LoaderArgs) {
     },
   });
 
-  return { centers, county, mapboxToken: envVars.MAPBOX_TOKEN };
+  return data(
+    { centers, county, mapboxToken: envVars.MAPBOX_TOKEN },
+    {
+      headers: {
+        Link: `<https://rentail.space/county/${county.slug}.md>; rel="alternate"; type="text/markdown"`,
+      },
+    },
+  );
 }
 
 export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
   if (!loaderData) return [];
   const { centers, county } = loaderData;
-  return pageMeta({
-    title: `Shopping Centers in ${county.name}, ${county.state.abbreviation}`,
-    description: `Find specialty leasing and short-term retail spaces in ${county.name}, ${county.state.abbreviation}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`,
-    url: `/county/${county.state.abbreviation.toLowerCase()}-${county.name.toLowerCase().replace(/\s+/g, "-")}`,
-    keywords: `${county.name} specialty leasing, ${county.name} kiosk rental, ${county.name} pop-up shops, ${county.name} mall carts, ${county.name} temporary retail, shopping centers in ${county.name}`,
-  });
+  return [
+    ...pageMeta({
+      title: `Shopping Centers in ${county.name}, ${county.state.abbreviation}`,
+      description: `Find specialty leasing and short-term retail spaces in ${county.name}, ${county.state.abbreviation}. Browse ${centers.length} shopping centers with kiosks, pop-up shops, carts, and temporary storefronts. Real-time availability for seasonal and temporary retail opportunities.`,
+      url: `/county/${county.state.abbreviation.toLowerCase()}-${county.name.toLowerCase().replace(/\s+/g, "-")}`,
+      keywords: `${county.name} specialty leasing, ${county.name} kiosk rental, ${county.name} pop-up shops, ${county.name} mall carts, ${county.name} temporary retail, shopping centers in ${county.name}`,
+    }),
+    {
+      tagName: "link",
+      href: `https://rentail.space/county/${county.slug}.md`,
+      rel: "alternate",
+      type: "text/markdown",
+      title: "Markdown version",
+    },
+  ];
 }
 
 export default function CountyPage({ loaderData }: Route.ComponentProps) {

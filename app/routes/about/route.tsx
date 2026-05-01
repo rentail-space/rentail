@@ -1,3 +1,4 @@
+import { redirect } from "react-router";
 import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/route";
 import AboutCTA from "./AboutCTA";
@@ -8,14 +9,35 @@ import AboutTeam from "./AboutTeam";
 import AboutValues from "./AboutValues";
 
 export function meta(): Route.MetaDescriptors {
-  return pageMeta({
-    title: "About - Making retail space accessible for everyone",
-    description:
-      "Rentail.space helps micro-merchants find affordable, flexible retail space—making brick-and-mortar accessible to everyone.",
-    url: "/about",
-    keywords:
-      "about rentail.space, retail space, micro-merchants, brick-and-mortar, democratize retail space",
-  });
+  return [
+    ...pageMeta({
+      title: "About - Making retail space accessible for everyone",
+      description:
+        "Rentail.space helps micro-merchants find affordable, flexible retail space—making brick-and-mortar accessible to everyone.",
+      url: "/about",
+      keywords:
+        "about rentail.space, retail space, micro-merchants, brick-and-mortar, democratize retail space",
+    }),
+    {
+      tagName: "link",
+      href: "https://rentail.space/about.md",
+      rel: "alternate",
+      type: "text/markdown",
+      title: "Markdown version",
+    },
+  ];
+}
+
+export function headers(): HeadersInit {
+  return {
+    Link: `<https://rentail.space/about.md>; rel="alternate"; type="text/markdown"`,
+  };
+}
+
+export async function loader({ request }: Route.LoaderArgs) {
+  if (request.headers.get("accept")?.split(",")[0] === "text/markdown")
+    return redirect("/about.md", { status: 303 });
+  return null;
 }
 
 export default function About() {
