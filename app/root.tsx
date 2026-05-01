@@ -43,6 +43,18 @@ export const headers: HeadersFunction = () => ({
 });
 
 export const links: LinksFunction = () => [
+  {
+    href: "/sitemap.xml",
+    rel: "sitemap",
+    type: "application/xml",
+    title: "XML Sitemap",
+  },
+  {
+    href: "/sitemap.txt",
+    rel: "sitemap",
+    type: "text/plain",
+    title: "Text Sitemap",
+  },
   { href: "/favicon.ico", rel: "icon", type: "image/x-icon", sizes: "any" },
   { href: "/favicon.svg", rel: "icon", type: "image/svg+xml", sizes: "any" },
   { href: "/apple-touch-icon.png", rel: "apple-touch-icon", sizes: "180x180" },

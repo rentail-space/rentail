@@ -15,8 +15,25 @@ describe("robots.txt", () => {
     comments = lines.filter((line) => line.startsWith("#"));
   });
 
-  it("should reference sitemap.xml", () => {
+  it("should reference both sitemaps", () => {
     expect(statements).toContain("Sitemap: https://rentail.space/sitemap.xml");
+    expect(statements).toContain("Sitemap: https://rentail.space/sitemap.txt");
+  });
+
+  it("should have AI bot rules before catch-all", () => {
+    const agentIdx = (ua: string) => statements.indexOf(`User-agent: ${ua}`);
+    const gptIdx = agentIdx("GPTBot");
+    const claudeIdx = agentIdx("ClaudeBot");
+    const perpIdx = agentIdx("PerplexityBot");
+    const allIdx = agentIdx("*");
+
+    expect(gptIdx).toBeGreaterThanOrEqual(0);
+    expect(claudeIdx).toBeGreaterThanOrEqual(0);
+    expect(perpIdx).toBeGreaterThanOrEqual(0);
+
+    expect(gptIdx).toBeLessThan(allIdx);
+    expect(claudeIdx).toBeLessThan(allIdx);
+    expect(perpIdx).toBeLessThan(allIdx);
   });
 
   it("should allow crawling of root path", () => {
