@@ -15,7 +15,12 @@ FROM base AS builder
 WORKDIR /app
 
 # Install Doppler CLI for build-time secret injection
-RUN (curl -Ls https://cli.doppler.com/install.sh || true) | sh
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates \
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -fSslL https://cli.doppler.com/install.sh -o /tmp/install.sh \
+    && sh /tmp/install.sh --no-modify-path \
+    && rm /tmp/install.sh \
+    && doppler --version
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -38,7 +43,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Doppler CLI for runtime secret injection
-RUN (curl -Ls https://cli.doppler.com/install.sh || true) | sh
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates \
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -fSslL https://cli.doppler.com/install.sh -o /tmp/install.sh \
+    && sh /tmp/install.sh --no-modify-path \
+    && rm /tmp/install.sh \
+    && doppler --version
 
 RUN corepack enable pnpm
 
