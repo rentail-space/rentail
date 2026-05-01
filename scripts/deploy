@@ -39,9 +39,6 @@ DEPLOY_URL=$(cat deploy.log)
 echo -e "\033[32m  Opening dashboard …\033[0m"
 open "$DEPLOY_URL"
 
-echo -e "\033[32m  Pushing changes to origin/main …\033[0m"
-git push origin main
-
 echo -e "\033[32m  Done! …\033[0m"
 exit 0
 
