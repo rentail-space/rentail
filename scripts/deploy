@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-# Deploy the application to the production environment. This will run the tests,
-# generate the types, update the database, and deploy to Vercel. This always
-# deploys to production and does not require promotion, so use with care.
+# Deploy the application to Coolify. Runs checks/tests, pushes DB schema, then
+# triggers a Coolify deployment.
 #
-# Usage:
-#   scripts/deploy.ts
+# Requires these Doppler secrets:
+#   COOLIFY_TOKEN      - Coolify API token
 
 set -eo pipefail
 
@@ -29,16 +28,10 @@ NODE_OPTIONS="--max-old-space-size=3096" vp test run
 echo -e "\033[32m  Updating database …\033[0m"
 doppler --config prd run -- pnpm prisma db push
 
-echo -e "\033[32m  Deploying to Vercel …\033[0m"
-vercel pull --environment=production
-vercel build 
-vercel deploy --prebuilt > deploy.log
+echo -e "\033[32m  Deploying to Coolify …\033[0m"
+doppler --config prd run -- bash -c '
+  coolify --host https://coolify.labnotes.org --token "$COOLIFY_TOKEN" deploy uuid "s4jrdxemxqqk1v1ryvyurdm5" --force
+'
 
-DEPLOY_URL=$(cat deploy.log)
-
-echo -e "\033[32m  Opening dashboard …\033[0m"
-open "$DEPLOY_URL"
-
-echo -e "\033[32m  Done! …\033[0m"
+echo -e "\033[32m  Done!\033[0m"
 exit 0
-
