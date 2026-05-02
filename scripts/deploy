@@ -30,7 +30,8 @@ doppler --config prd run -- pnpm prisma db push
 
 echo -e "\033[32m  Deploying to Coolify …\033[0m"
 doppler --config prd run -- bash -c '
-  coolify --host https://coolify.labnotes.org --token "$COOLIFY_TOKEN" deploy uuid "s4jrdxemxqqk1v1ryvyurdm5" --force
+  coolify context add deploy-context https://coolify.labnotes.org "$COOLIFY_TOKEN" -f >/dev/null 2>&1
+  coolify deploy uuid "s4jrdxemxqqk1v1ryvyurdm5" --force
 '
 
 echo -e "\033[32m  Done!\033[0m"

@@ -1,4 +1,6 @@
 import * as Sentry from "@sentry/react-router";
+import { PassThrough } from "node:stream";
+import { renderToPipeableStream } from "react-dom/server";
 import type {
   ActionFunctionArgs,
   AppLoadContext,
@@ -6,8 +8,6 @@ import type {
   LoaderFunctionArgs,
 } from "react-router";
 import { ServerRouter } from "react-router";
-import { renderToPipeableStream } from "react-dom/server";
-import { PassThrough } from "node:stream";
 import { v7 as uuidv7 } from "uuid";
 import envVars from "~/lib/env";
 import {
@@ -161,7 +161,7 @@ export default Sentry.wrapSentryHandleRequest(
     responseStatusCode: number,
     responseHeaders: Headers,
     routerContext: EntryContext,
-    loadContext?: AppLoadContext,
+    _loadContext?: AppLoadContext,
   ): Promise<Response> => {
     const start = Date.now();
     console.info("%s %s", request.method, request.url);
@@ -195,7 +195,7 @@ export default Sentry.wrapSentryHandleRequest(
     }
 
     const response = await new Promise<Response>((resolve, reject) => {
-      const { pipe, abort } = renderToPipeableStream(
+      const { pipe } = renderToPipeableStream(
         <ServerRouter
           context={routerContext}
           url={request.url}
@@ -206,7 +206,7 @@ export default Sentry.wrapSentryHandleRequest(
             responseHeaders.set("Content-Type", "text/html");
             const body = new PassThrough();
             resolve(
-              new Response(body, {
+              new Response(body as unknown as BodyInit, {
                 status: responseStatusCode,
                 headers: responseHeaders,
               }),

@@ -104,8 +104,9 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           curl -fsSL https://raw.githubusercontent.com/coollabsio/coolify-cli/main/scripts/install.sh | bash
-          doppler run --config prd -- \
-            coolify --host https://coolify.labnotes.org --token "$COOLIFY_TOKEN" \
-            deploy uuid "s4jrdxemxqqk1v1ryvyurdm5" --force
+          doppler run --config prd -- bash -c '
+            coolify context add deploy-context https://coolify.labnotes.org "$COOLIFY_TOKEN" -f >/dev/null 2>&1
+            coolify deploy uuid "s4jrdxemxqqk1v1ryvyurdm5" --force
+          '
         env:
           DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
