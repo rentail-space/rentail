@@ -9,6 +9,9 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: read
+      packages: write
 
     services:
       postgres:
@@ -72,7 +75,6 @@ jobs:
         run: pnpm exec vp check
 
       - name: Run Tests
-        if: false
         run: pnpm test
         env:
           ANTHROPIC_API_KEY: "***REMOVED***"
@@ -85,7 +87,7 @@ jobs:
           SESSION_SECRET: "secret"
 
       - name: Upload Playwright Test Results
-        if: false
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-test-results
@@ -101,12 +103,25 @@ jobs:
         env:
           DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
 
+      - name: Login to GitHub Container Registry
+        if: github.ref == 'refs/heads/main'
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build and push Docker image
+        if: github.ref == 'refs/heads/main'
+        run: |
+          docker build \
+            --build-arg DOPPLER_TOKEN=${{ secrets.DOPPLER_TOKEN }} \
+            --build-arg DOPPLER_PROJECT=rentail \
+            --build-arg DOPPLER_CONFIG=prd \
+            -t ghcr.io/rentail-space/rentail:latest \
+            -t ghcr.io/rentail-space/rentail:${{ github.sha }} \
+            .
+          docker push --all-tags ghcr.io/rentail-space/rentail
+
       - name: Deploy to Coolify
         if: github.ref == 'refs/heads/main'
         run: |
-          doppler run --config prd -- bash -c '
-            curl -s -X POST -H "Authorization: Bearer $COOLIFY_TOKEN" \
-              "https://coolify.labnotes.org/api/v1/deploy?uuid=s4jrdxemxqqk1v1ryvyurdm5&force=true"
-          '
-        env:
-          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
+          curl -s -X GET \
+            -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
+            "${{ secrets.COOLIFY_WEBHOOK }}"

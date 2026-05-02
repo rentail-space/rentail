@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # Deploy the application to Coolify.
-# Runs checks/tests, pushes DB schema, then triggers a Coolify deployment
-# which pulls from GitHub.
+# Builds a Docker image, pushes to GHCR, then triggers a Coolify deployment.
 
 set -eo pipefail
 
@@ -26,11 +25,23 @@ NODE_OPTIONS="--max-old-space-size=3096" vp test run
 echo -e "\033[32m  Updating database \u2026\033[0m"
 doppler --config prd run -- pnpm prisma db push
 
+echo -e "\033[32m  Building and pushing Docker image \u2026\033[0m"
+doppler --config prd run -- bash -c '
+  docker build \
+    --build-arg DOPPLER_TOKEN="$DOPPLER_TOKEN" \
+    --build-arg DOPPLER_PROJECT="$DOPPLER_PROJECT" \
+    --build-arg DOPPLER_CONFIG="$DOPPLER_CONFIG" \
+    -t ghcr.io/rentail-space/rentail:latest \
+    .
+  docker push ghcr.io/rentail-space/rentail:latest
+'
+
 echo -e "\033[32m  Triggering Coolify deployment \u2026\033[0m"
 doppler --config prd run -- bash -c '
-  curl -s -H "Authorization: Bearer $COOLIFY_TOKEN" \
-    "https://coolify.labnotes.org/api/v1/deploy?uuid=s4jrdxemxqqk1v1ryvyurdm5&force=true" \
-    -X POST'
+  curl -s -X GET \
+    -H "Authorization: Bearer $COOLIFY_TOKEN" \
+    "https://coolify.labnotes.org/api/v1/deploy?uuid=c12diz0deab7ctmllamdugyg&force=false"
+'
 echo
 
 echo -e "\033[32m  Done!\033[0m"
