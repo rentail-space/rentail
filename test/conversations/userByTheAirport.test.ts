@@ -32,9 +32,9 @@ describe.skipIf(!!process.env.CI)(
     await runThroughScript({
       headers: {
         "x-real-ip": "127.0.0.1",
-        "x-vercel-ip-city": "Los%20Angeles",
-        "x-vercel-ip-latitude": "34.04209",
-        "x-vercel-ip-longitude": "-118.25578",
+        "x-ip-city": "Los%20Angeles",
+        "x-ip-latitude": "34.04209",
+        "x-ip-longitude": "-118.25578",
       },
       script,
     });

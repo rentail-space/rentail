@@ -15,9 +15,9 @@ describe("prompt()", () => {
         chatId: ulid(),
         requestHeaders: new Headers({
           "x-real-ip": "127.0.0.1",
-          "x-vercel-ip-city": "Los%20Angeles",
-          "x-vercel-ip-latitude": "34.04351",
-          "x-vercel-ip-longitude": "-118.26365",
+          "x-ip-city": "Los%20Angeles",
+          "x-ip-latitude": "34.04351",
+          "x-ip-longitude": "-118.26365",
         }),
       });
       prompt = (

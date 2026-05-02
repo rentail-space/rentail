@@ -1,6 +1,4 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
 import schema from "~/data/schema.json";
 import "~/global.css";
@@ -73,8 +71,6 @@ export default function PageLayout({
         </QueryClientProvider>
         <ScrollRestoration />
         <Scripts />
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );

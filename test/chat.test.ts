@@ -60,9 +60,9 @@ describe("Chat page exchange messages", () => {
       "looking for a pop-up retail space for my clothing boutique",
       {
         "x-real-ip": "127.0.0.1",
-        "x-vercel-ip-city": "Los%20Angeles",
-        "x-vercel-ip-latitude": "34.04592",
-        "x-vercel-ip-longitude": "-118.34574",
+        "x-ip-city": "Los%20Angeles",
+        "x-ip-latitude": "34.04592",
+        "x-ip-longitude": "-118.34574",
       },
     );
   });

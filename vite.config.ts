@@ -5,10 +5,7 @@ import { resolve } from "node:path";
 import devtoolsJson from "vite-plugin-devtools-json";
 import tailwindcss from "@tailwindcss/vite";
 
-const sentryReleaseName =
-  process.env.SENTRY_RELEASE ??
-  process.env.VERCEL_GIT_COMMIT_SHA ??
-  process.env.GITHUB_SHA;
+const sentryReleaseName = process.env.SENTRY_RELEASE ?? process.env.GITHUB_SHA;
 
 const sentryConfig = {
   authToken: process.env.SENTRY_AUTH_TOKEN,
@@ -40,7 +37,6 @@ export default defineConfig({
       ".github/**",
       ".opencode/**",
       ".react-router/**",
-      ".vercel/**",
       ".vscode/**",
       "__screenshots__/**",
       "build/**",
@@ -63,7 +59,6 @@ export default defineConfig({
       ".github/**",
       ".opencode/**",
       ".react-router/**",
-      ".vercel/**",
       ".vscode/**",
       "__screenshots__/**",
       "build/**",

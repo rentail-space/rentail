@@ -22,9 +22,9 @@ const logger = debug("server:conversations");
  *   runThroughScript({
  *     headers: {
  *       "x-real-ip": "127.0.0.1",
- *       "x-vercel-ip-city": "Los Angeles",
- *       "x-vercel-ip-latitude": "47.608013",
- *       "x-vercel-ip-longitude": "-122.335167",
+ *       "x-ip-city": "Los Angeles",
+ *       "x-ip-latitude": "47.608013",
+ *       "x-ip-longitude": "-122.335167",
  *     },
  *     script: `
  *       Assistant:

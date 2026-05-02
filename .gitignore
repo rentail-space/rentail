@@ -21,7 +21,7 @@ __screenshots__/*.html.diff
 # Need to re-generate on the server
 prisma/generated
 
-# All local files or directories (eg ./.claude/settings.local.json, /.vercel/.env.production.local) 
+# All local files or directories (eg ./.claude/settings.local.json)
 */*.local.*
 */*.local
 

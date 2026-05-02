@@ -46,7 +46,6 @@ if (envVars.isProduction) {
         recordInputs: true,
         recordOutputs: true,
       }),
-      Sentry.vercelAIIntegration({ recordInputs: true, recordOutputs: true }),
     ],
     tracesSampleRate: 1.0,
   });
@@ -197,7 +196,11 @@ export default Sentry.wrapSentryHandleRequest(
 
     const response = await new Promise<Response>((resolve, reject) => {
       const { pipe, abort } = renderToPipeableStream(
-        <ServerRouter context={routerContext} url={request.url} nonce={uuidv7()} />,
+        <ServerRouter
+          context={routerContext}
+          url={request.url}
+          nonce={uuidv7()}
+        />,
         {
           onShellReady() {
             responseHeaders.set("Content-Type", "text/html");

@@ -13,7 +13,6 @@
     ".cursor",
     ".devtools",
     ".github",
-    ".vercel",
     ".vscode",
     "node_modules",
     "prisma/generated",

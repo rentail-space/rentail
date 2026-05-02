@@ -83,23 +83,21 @@ export async function geocodeFromHeaders(requestHeaders: Headers): Promise<{
   const ip = requestHeaders.get("x-real-ip");
   if (!ip) return { ip: undefined, location: fallbackLocation };
   try {
-    const city = decodeURIComponent(
-      requestHeaders.get("x-vercel-ip-city") ?? "",
-    );
+    const city = decodeURIComponent(requestHeaders.get("x-ip-city") ?? "");
     const country = decodeURIComponent(
-      requestHeaders.get("x-vercel-ip-country") ?? "",
+      requestHeaders.get("x-ip-country") ?? "",
     );
     const state = decodeURIComponent(
-      requestHeaders.get("x-vercel-ip-country-region") ?? "",
+      requestHeaders.get("x-ip-country-region") ?? "",
     );
     const timeZone =
-      requestHeaders.get("x-vercel-ip-timezone") ?? "America/Los_Angeles";
+      requestHeaders.get("x-ip-timezone") ?? "America/Los_Angeles";
 
     const latitude = Number.parseFloat(
-      requestHeaders.get("x-vercel-ip-latitude") ?? "34.0456",
+      requestHeaders.get("x-ip-latitude") ?? "34.0456",
     );
     const longitude = Number.parseFloat(
-      requestHeaders.get("x-vercel-ip-longitude") ?? "-118.2694",
+      requestHeaders.get("x-ip-longitude") ?? "-118.2694",
     );
 
     const displayName = [city, state, country].filter(Boolean).join(", ");
@@ -130,8 +128,8 @@ export async function geocodeFromHeaders(requestHeaders: Headers): Promise<{
 }
 
 /**
- * Generally we use Vercel IP geolocation headers, but when not available, we
- * can use this API to geocode from an IP address.
+ * Generally we use IP geolocation headers from the proxy/CDN, but when not
+ * available, we can use this API to geocode from an IP address.
  *
  * @param ip - The IP address to geocode.
  * @returns The geocoded location.
@@ -172,8 +170,8 @@ async function geocodeFromIP(
 }
 
 /**
- * Generally we use Vercel IP geolocation headers, but when not available, we
- * can use this API to get the timezone from an IP address.
+ * Generally we use IP geolocation headers from the proxy/CDN, but when not
+ * available, we can use this API to get the timezone from an IP address.
  *
  * @param ip - The IP address to get the timezone for.
  * @returns The timezone for the IP address.

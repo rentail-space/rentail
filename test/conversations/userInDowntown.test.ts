@@ -28,9 +28,9 @@ describe.skipIf(!!process.env.CI)(
       headers: {
         // Palm Desert, California
         "x-real-ip": "127.0.0.1",
-        "x-vercel-ip-city": "Palm%20Desert",
-        "x-vercel-ip-latitude": "33.83039",
-        "x-vercel-ip-longitude": "-116.54560",
+        "x-ip-city": "Palm%20Desert",
+        "x-ip-latitude": "33.83039",
+        "x-ip-longitude": "-116.54560",
       },
       script,
     });

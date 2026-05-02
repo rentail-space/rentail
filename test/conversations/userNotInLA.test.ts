@@ -32,12 +32,12 @@ describe.skipIf(!!process.env.CI)(
   async () => {
     await runThroughScript({
       headers: {
-        "x-vercel-ip-latitude": "47.608013",
-        "x-vercel-ip-longitude": "-122.335167",
-        "x-vercel-ip-city": "Seattle",
-        "x-vercel-ip-state": "Washington",
-        "x-vercel-ip-country": "United States",
-        "x-vercel-ip-timezone": "America/Los_Angeles",
+        "x-ip-latitude": "47.608013",
+        "x-ip-longitude": "-122.335167",
+        "x-ip-city": "Seattle",
+        "x-ip-state": "Washington",
+        "x-ip-country": "United States",
+        "x-ip-timezone": "America/Los_Angeles",
       },
       script,
     });
