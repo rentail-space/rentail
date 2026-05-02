@@ -62,6 +62,7 @@ COPY --from=builder /app/build ./build
 COPY --from=builder /app/node_modules/.pnpm/node_modules/@prisma/engines ./build/node_modules/.pnpm/node_modules/@prisma/engines
 COPY --from=builder /app/prisma/generated ./prisma/generated
 COPY --from=builder /app/prisma/prod-ca-2021.crt ./prisma/prod-ca-2021.crt
+COPY --from=builder /app/app/data ./app/data
 COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install --prod --frozen-lockfile 2>/dev/null || true
