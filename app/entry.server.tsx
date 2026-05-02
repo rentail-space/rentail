@@ -1,11 +1,13 @@
 import * as Sentry from "@sentry/react-router";
-import { handleRequest } from "@vercel/react-router/entry.server";
 import type {
   ActionFunctionArgs,
   AppLoadContext,
   EntryContext,
   LoaderFunctionArgs,
 } from "react-router";
+import { ServerRouter } from "react-router";
+import { renderToPipeableStream } from "react-dom/server";
+import { PassThrough } from "node:stream";
 import { v7 as uuidv7 } from "uuid";
 import envVars from "~/lib/env";
 import {
@@ -31,7 +33,6 @@ import {
   renderTerms,
 } from "~/lib/markdown.server";
 import { trackBotVisit } from "~/lib/middleware/botTracking.server";
-import msw from "~/test/mocks/mswHandlers";
 
 // Only enable Sentry in production
 if (envVars.isProduction) {
@@ -52,7 +53,7 @@ if (envVars.isProduction) {
 }
 
 // Initialize MSW in test mode (on the server side)
-if (envVars.isTest) msw();
+if (envVars.isTest) (await import("~/test/mocks/mswHandlers")).default();
 
 const MARKDOWN_ROUTES: Record<
   string,
@@ -194,14 +195,30 @@ export default Sentry.wrapSentryHandleRequest(
       }
     }
 
-    const response = await handleRequest(
-      request,
-      responseStatusCode,
-      responseHeaders,
-      routerContext,
-      loadContext,
-      { nonce: uuidv7() },
-    );
+    const response = await new Promise<Response>((resolve, reject) => {
+      const { pipe, abort } = renderToPipeableStream(
+        <ServerRouter context={routerContext} url={request.url} nonce={uuidv7()} />,
+        {
+          onShellReady() {
+            responseHeaders.set("Content-Type", "text/html");
+            const body = new PassThrough();
+            resolve(
+              new Response(body, {
+                status: responseStatusCode,
+                headers: responseHeaders,
+              }),
+            );
+            pipe(body);
+          },
+          onShellError(error) {
+            reject(error);
+          },
+          onError(error) {
+            if (!responseHeaders.has("Content-Type")) reject(error);
+          },
+        },
+      );
+    });
     // oxlint-disable-next-line typescript/no-floating-promises
     waitForResponse(response, start).then((duration) => {
       console.info(
