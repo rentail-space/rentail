@@ -1,38 +1,36 @@
 #!/usr/bin/env bash
 
-# Deploy the application to Coolify. Runs checks/tests, pushes DB schema, then
-# triggers a Coolify deployment.
-#
-# Requires these Doppler secrets:
-#   COOLIFY_TOKEN      - Coolify API token
+# Deploy the application to Coolify.
+# Runs checks/tests, pushes DB schema, then triggers a Coolify deployment
+# which pulls from GitHub.
 
 set -eo pipefail
 
-echo -e "\033[32m  Checking code is clean …\033[0m"
+echo -e "\033[32m  Checking code is clean \u2026\033[0m"
 pnpm exec vp fmt --check
 pnpm exec vp lint
 secretlint "**/*" --format stylish
 
-echo -e "\033[32m  Generating React Router types …\033[0m"
+echo -e "\033[32m  Generating React Router types \u2026\033[0m"
 pnpm react-router typegen
 
-echo -e "\033[32m  Checking types …\033[0m"
+echo -e "\033[32m  Checking types \u2026\033[0m"
 pnpm tsc --noEmit --strict
 
-echo -e "\033[32m  Installing Playwright …\033[0m"
+echo -e "\033[32m  Installing Playwright \u2026\033[0m"
 pnpm exec playwright install
 
-echo -e "\033[32m  Running tests …\033[0m"
+echo -e "\033[32m  Running tests \u2026\033[0m"
 NODE_OPTIONS="--max-old-space-size=3096" vp test run
 
-echo -e "\033[32m  Updating database …\033[0m"
+echo -e "\033[32m  Updating database \u2026\033[0m"
 doppler --config prd run -- pnpm prisma db push
 
-echo -e "\033[32m  Deploying to Coolify …\033[0m"
+echo -e "\033[32m  Triggering Coolify deployment \u2026\033[0m"
 doppler --config prd run -- bash -c '
-  coolify context add deploy-context https://coolify.labnotes.org "$COOLIFY_TOKEN" -f >/dev/null 2>&1
-  coolify deploy uuid "s4jrdxemxqqk1v1ryvyurdm5" --force
-'
+  curl -s -H "Authorization: Bearer $COOLIFY_TOKEN" \
+    "https://coolify.labnotes.org/api/v1/deploy?uuid=s4jrdxemxqqk1v1ryvyurdm5&force=true" \
+    -X POST'
+echo
 
 echo -e "\033[32m  Done!\033[0m"
-exit 0
