@@ -109,9 +109,11 @@ jobs:
 
       - name: Build and push Docker image
         if: github.ref == 'refs/heads/main'
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
         run: |
-          docker build \
-            --build-arg DOPPLER_TOKEN=${{ secrets.DOPPLER_TOKEN }} \
+          docker buildx build \
+            --secret id=doppler_token,env=DOPPLER_TOKEN \
             --build-arg DOPPLER_PROJECT=rentail \
             --build-arg DOPPLER_CONFIG=prd \
             -t ghcr.io/rentail-space/rentail:latest \

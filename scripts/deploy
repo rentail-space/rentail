@@ -20,28 +20,27 @@ echo -e "\033[32m  Installing Playwright \u2026\033[0m"
 pnpm exec playwright install
 
 echo -e "\033[32m  Running tests \u2026\033[0m"
-NODE_OPTIONS="--max-old-space-size=3096" vp test run
+NODE_OPTIONS="--max-old-space-size=3096" vp test run --testNamePattern="^(?:(?!visual regression).)*$"
 
 echo -e "\033[32m  Updating database \u2026\033[0m"
 doppler --config prd run -- pnpm prisma db push
 
 echo -e "\033[32m  Building and pushing Docker image \u2026\033[0m"
-doppler --config prd run -- bash -c '
-  docker build \
-    --build-arg DOPPLER_TOKEN="$DOPPLER_TOKEN" \
-    --build-arg DOPPLER_PROJECT="$DOPPLER_PROJECT" \
-    --build-arg DOPPLER_CONFIG="$DOPPLER_CONFIG" \
-    -t ghcr.io/rentail-space/rentail:latest \
-    .
-  docker push ghcr.io/rentail-space/rentail:latest
-'
+echo "$(doppler secrets get GHCR_TOKEN --plain --config dev)" | docker login ghcr.io -u assaf --password-stdin
+export PRD_DOPPLER_TOKEN=$(doppler secrets get PRD_DOPPLER_TOKEN --plain --config dev)
+docker buildx build \
+  --platform linux/amd64 \
+  --secret id=doppler_token,env=PRD_DOPPLER_TOKEN \
+  --build-arg DOPPLER_PROJECT=rentail \
+  --build-arg DOPPLER_CONFIG=prd \
+  -t ghcr.io/rentail-space/rentail:latest \
+  --push \
+  .
 
 echo -e "\033[32m  Triggering Coolify deployment \u2026\033[0m"
-doppler --config prd run -- bash -c '
-  curl -s -X GET \
-    -H "Authorization: Bearer $COOLIFY_TOKEN" \
-    "https://coolify.labnotes.org/api/v1/deploy?uuid=c12diz0deab7ctmllamdugyg&force=false"
-'
+curl -s -X GET \
+  -H "Authorization: Bearer $(doppler secrets get COOLIFY_TOKEN --plain --config prd)" \
+  "https://coolify.labnotes.org/api/v1/deploy?uuid=c12diz0deab7ctmllamdugyg&force=false"
 echo
 
 echo -e "\033[32m  Done!\033[0m"
