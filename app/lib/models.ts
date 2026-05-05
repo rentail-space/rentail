@@ -1,16 +1,17 @@
-import { createOpenAI } from "@ai-sdk/openai";
-import { devToolsMiddleware } from "@ai-sdk/devtools";
 import type {
   LanguageModelV3,
   LanguageModelV3CallOptions,
 } from "@ai-sdk/provider";
+import { devToolsMiddleware } from "@ai-sdk/devtools";
 import { wrapLanguageModel } from "ai";
 import envVars from "./env";
 
-const deepseek = createOpenAI({
+import { createDeepSeek } from '@ai-sdk/deepseek';
+
+const deepseek = createDeepSeek({
   apiKey: envVars.DEEPSEEK_API_KEY ?? "test-api-key",
-  baseURL: "https://api.deepseek.com/v1",
 });
+
 
 function addMiddleware(model: LanguageModelV3): LanguageModelV3 {
   return wrapLanguageModel({
