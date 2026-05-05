@@ -1,6 +1,7 @@
-import { type Page, expect } from "playwright/test";
 import { afterAll, beforeAll, describe, it } from "vitest";
-import { goto, port } from "~/test/helpers/launchBrowser";
+import { type Page, expect } from "playwright/test";
+import { BASE_URL } from "./helpers/launchServer";
+import { goto } from "~/test/helpers/launchBrowser";
 
 describe("For AI Assistants page", () => {
   let page: Page;
@@ -190,15 +191,12 @@ describe("For AI Assistants page", () => {
     let content: string;
 
     beforeAll(async () => {
-      const response = await fetch(
-        `http://localhost:${port}/for-ai-assistants.md`,
-        {
-          headers: {
-            accept: "text/markdown",
-            "User-Agent": "Googlebot",
-          },
+      const response = await fetch(`${BASE_URL}for-ai-assistants.md`, {
+        headers: {
+          accept: "text/markdown",
+          "User-Agent": "Googlebot",
         },
-      );
+      });
       content = await response.text();
     });
 

@@ -1,18 +1,19 @@
-import { type ChildProcess, fork } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
+import { type ChildProcess, fork } from "node:child_process";
 import { rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { sleep } from "radashi";
 import { ms } from "convert";
 import debug from "debug";
 
+let port = 9222;
 let worker: ChildProcess | undefined;
-export let port: number;
 
 const logger = debug("server");
 const loopbackHosts = ["127.0.0.1", "::1"] as const;
-const serverHost = "localhost";
 const serverStatePath = resolve(".test-server.json");
+
+export const BASE_URL = `http://localhost:${await launchServer()}/`;
 
 type ServerState = {
   baseURL: string;
@@ -26,8 +27,6 @@ type ServerState = {
  * @param port - The port to launch the server on.
  */
 export async function launchServer(): Promise<number> {
-  if (worker) return port;
-
   await findAvailablePort();
   process.env.TEST_PORT = port.toString();
   process.env.TEST_BASE_URL = getServerBaseURL();
@@ -122,38 +121,22 @@ export async function closeServer(): Promise<void> {
 }
 
 async function findAvailablePort() {
-  port = 9222;
   // Check if the port is taken, increment by one and keep checking
-  let found = false;
-  while (!found) {
-    console.info(`Checking port ${port}...`);
-    found = await isPortAvailable(port);
-    if (!found) port++;
-  }
+  while (!(await isPortAvailable(port))) port++;
 }
 
-export async function isPortAvailable(port: number): Promise<boolean> {
+async function isPortAvailable(port: number): Promise<boolean> {
   const results = await Promise.all(
     loopbackHosts.map((host) => canBindPort(port, host)),
   );
   return results.every(Boolean);
 }
 
-export function getServerPort(): number {
-  const serverPort =
-    port || Number(process.env.TEST_PORT) || readServerState()?.port;
-  if (!serverPort) throw new Error("Test server port has not been set");
-  return serverPort;
-}
-
 export function getServerBaseURL(): string {
   if (process.env.TEST_BASE_URL) return process.env.TEST_BASE_URL;
-  if (process.env.TEST_PORT)
-    return `http://${serverHost}:${process.env.TEST_PORT}`;
+  if (process.env.TEST_PORT) return `http://localhost:${process.env.TEST_PORT}`;
 
-  return (
-    readServerState()?.baseURL ?? `http://${serverHost}:${getServerPort()}`
-  );
+  return readServerState()?.baseURL ?? `http://localhost:${port}`;
 }
 
 async function canBindPort(port: number, host: string): Promise<boolean> {
@@ -176,9 +159,8 @@ function waitForExit(
   worker: ChildProcess,
   timeoutMs: number,
 ): Promise<boolean> {
-  if (worker.exitCode != null || worker.signalCode != null) {
+  if (worker.exitCode != null || worker.signalCode != null)
     return Promise.resolve(true);
-  }
 
   return new Promise<boolean>((resolve) => {
     const timeout = setTimeout(() => {

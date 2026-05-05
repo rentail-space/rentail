@@ -1,6 +1,6 @@
-import { expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
-import { port } from "./helpers/launchBrowser";
+import { BASE_URL } from "./helpers/launchServer";
+import { expect } from "playwright/test";
 
 describe("robots.txt", () => {
   let lines: string[];
@@ -8,7 +8,7 @@ describe("robots.txt", () => {
   let statements: string[];
 
   beforeAll(async () => {
-    const response = await fetch(`http://localhost:${port}/robots.txt`);
+    const response = await fetch(`${BASE_URL}robots.txt`);
     const robotsContent = await response.text();
     lines = robotsContent.split("\n").filter(Boolean);
     statements = lines.filter((line) => !line.startsWith("#"));

@@ -8,16 +8,16 @@
  * - First news item is accessible
  */
 
-import { expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
-import { port } from "~/test/helpers/launchBrowser";
+import { BASE_URL } from "./helpers/launchServer";
+import { expect } from "playwright/test";
 
 describe("News Sitemap", () => {
   let content: string;
   let response: Response;
 
   beforeAll(async () => {
-    response = await fetch(`http://localhost:${port}/news/sitemap.md`, {
+    response = await fetch(`${BASE_URL}news/sitemap.md`, {
       headers: { "User-Agent": "Googlebot" },
     });
     content = await response.text();

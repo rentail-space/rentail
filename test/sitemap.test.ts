@@ -1,13 +1,13 @@
-import { XMLParser } from "fast-xml-parser";
-import { expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
-import { port } from "./helpers/launchBrowser";
+import { XMLParser } from "fast-xml-parser";
+import { BASE_URL } from "./helpers/launchServer";
+import { expect } from "playwright/test";
 
 describe("sitemap.xml", () => {
   let xml: { urlset: { url: { loc: string }[] } };
 
   beforeAll(async () => {
-    const response = await fetch(`http://localhost:${port}/sitemap.xml`);
+    const response = await fetch(`${BASE_URL}sitemap.xml`);
     const sitemapContent = await response.text();
     const parser = new XMLParser();
     xml = parser.parse(sitemapContent);
@@ -77,13 +77,13 @@ describe("sitemap.txt", () => {
   let urls: string[];
 
   beforeAll(async () => {
-    const response = await fetch(`http://localhost:${port}/sitemap.txt`);
+    const response = await fetch(`${BASE_URL}sitemap.txt`);
     const content = await response.text();
     urls = content.trim().split("\n");
   });
 
   it("should return text/plain", async () => {
-    const response = await fetch(`http://localhost:${port}/sitemap.txt`);
+    const response = await fetch(`${BASE_URL}sitemap.txt`);
     expect(response.headers.get("content-type")).toBe("text/plain");
   });
 
@@ -104,7 +104,7 @@ describe("sitemap.txt", () => {
   });
 
   it("should have same number of URLs as xml sitemap", async () => {
-    const xmlResponse = await fetch(`http://localhost:${port}/sitemap.xml`);
+    const xmlResponse = await fetch(`${BASE_URL}sitemap.xml`);
     const parser = new XMLParser();
     const xml = parser.parse(await xmlResponse.text());
     expect(urls.length).toBe(xml.urlset.url.length);

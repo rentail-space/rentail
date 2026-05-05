@@ -5,21 +5,20 @@
  * when Accept: text/markdown is set. This suite verifies both paths.
  */
 
-import { expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
-import { port } from "~/test/helpers/launchBrowser";
+import { BASE_URL } from "./helpers/launchServer";
+import { expect } from "playwright/test";
 
-const BASE = `http://localhost:${port}`;
 const MD_HEADER = "text/markdown";
 
 async function fetchMd(path: string) {
-  return fetch(`${BASE}${path}`, {
+  return fetch(`${BASE_URL}${path.slice(1)}`, {
     headers: { "User-Agent": "Googlebot" },
   });
 }
 
 async function fetchHtmlWithAccept(path: string) {
-  return fetch(`${BASE}${path}`, {
+  return fetch(`${BASE_URL}${path.slice(1)}`, {
     headers: {
       accept: "text/markdown",
       "User-Agent": "Googlebot",
@@ -435,7 +434,7 @@ describe("HTML pages link to .md alternate", () => {
 
   for (const { path, expected } of linkCases) {
     it(`should have Link header on ${path}`, async () => {
-      const res = await fetch(`${BASE}${path}`, {
+      const res = await fetch(`${BASE_URL}${path.slice(1)}`, {
         headers: { "User-Agent": "Googlebot" },
       });
       const link = res.headers.get("link");

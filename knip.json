@@ -16,6 +16,11 @@
     "!__screenshots__"
   ],
   "ignoreDependencies": ["@secretlint/secretlint-rule-preset-recommend"],
+  "ignore": [
+    "app/lib/scrape/scrapeLosCerritos.ts",
+    "app/lib/scrape/scrapeSantaMonica.ts",
+    "app/lib/scrape/scrapeStonewood.ts"
+  ],
   "ignoreIssues": {
     "app/lib/api/schemas.ts": ["exports"],
     "app/lib/html/parseHTML.ts": ["exports"],

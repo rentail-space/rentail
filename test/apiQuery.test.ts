@@ -1,6 +1,6 @@
-import { expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
-import { port } from "./helpers/launchBrowser";
+import { BASE_URL } from "./helpers/launchServer";
+import { expect } from "playwright/test";
 
 describe("/api/query endpoint", () => {
   let json: {
@@ -32,7 +32,7 @@ describe("/api/query endpoint", () => {
   };
 
   beforeAll(async () => {
-    const response = await fetch(`http://localhost:${port}/api/query`);
+    const response = await fetch(`${BASE_URL}api/query`);
     expect(response.status).toBe(200);
     expect(response.headers.get("content-type")).toContain("application/json");
     json = await response.json();
@@ -128,7 +128,7 @@ describe("/openapi.json endpoint", () => {
   };
 
   beforeAll(async () => {
-    const response = await fetch(`http://localhost:${port}/openapi.json`);
+    const response = await fetch(`${BASE_URL}openapi.json`);
     expect(response.status).toBe(200);
     expect(response.headers.get("content-type")).toContain("application/json");
     spec = await response.json();

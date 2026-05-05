@@ -1,4 +1,5 @@
 import type { JSX } from "react";
+import { BASE_URL, getServerBaseURL } from "./launchServer";
 import { URL as URLString } from "node:url";
 import { pretty, render } from "react-email";
 import { resolve } from "node:path";
@@ -12,9 +13,6 @@ import {
 } from "playwright";
 import invariant from "tiny-invariant";
 import debug from "debug";
-import { getServerBaseURL, getServerPort } from "./launchServer";
-
-export const port = getServerPort();
 
 let context: BrowserContext | undefined;
 const logger = debug("browser");
@@ -111,10 +109,7 @@ async function blockOutgoingRequests(route: Route): Promise<void> {
 
   // Mock rentail.space requests using localhost
   if (hostname === "rentail.space") {
-    const url = new URLString(
-      route.request().url(),
-      `http://localhost:${port}`,
-    );
+    const url = new URLString(route.request().url(), BASE_URL);
     const response = await route.fetch({ url: url.toString() });
     return await route.fulfill({ response });
   }

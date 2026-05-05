@@ -11,8 +11,9 @@
 
 import { afterAll, beforeAll, describe, it } from "vitest";
 import { type Page, type Response, expect } from "playwright/test";
-import { goto, port } from "~/test/helpers/launchBrowser";
+import { BASE_URL } from "~/test/helpers/launchServer";
 import { last } from "radashi";
+import { goto } from "~/test/helpers/launchBrowser";
 
 describe("Blog Post Rendering", () => {
   let page: Page;
@@ -182,7 +183,7 @@ describe("Blog Post Rendering", () => {
 
     beforeAll(async () => {
       const response = await fetch(
-        `http://localhost:${port}/blog/2025-12-19-why-hunkering-down-kills-momentum.md`,
+        `${BASE_URL}blog/2025-12-19-why-hunkering-down-kills-momentum.md`,
         { headers: { "User-Agent": "Googlebot" } },
       );
       content = await response.text();
@@ -228,7 +229,7 @@ describe("Blog Post Rendering", () => {
       expect(imageUrl).toMatch(/^\/blog\/2025-12-19-matches\.jpg$/);
 
       // Download image from local server
-      const imageResponse = await fetch(`http://localhost:${port}${imageUrl}`);
+      const imageResponse = await fetch(`${BASE_URL}${imageUrl?.slice(1)}`);
       expect(imageResponse.ok).toBe(true);
 
       const contentType = imageResponse.headers.get("content-type");

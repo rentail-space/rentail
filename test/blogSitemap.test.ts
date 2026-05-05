@@ -8,16 +8,16 @@
  * - First blog post is accessible
  */
 
-import { expect } from "playwright/test";
 import { beforeAll, describe, it } from "vitest";
-import { port } from "~/test/helpers/launchBrowser";
+import { BASE_URL } from "~/test/helpers/launchServer";
+import { expect } from "playwright/test";
 
 describe("Blog Sitemap", () => {
   let content: string;
   let response: Response;
 
   beforeAll(async () => {
-    response = await fetch(`http://localhost:${port}/blog/sitemap.md`, {
+    response = await fetch(`${BASE_URL}blog/sitemap.md`, {
       headers: { "User-Agent": "Googlebot" },
     });
     content = await response.text();
