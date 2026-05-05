@@ -2,14 +2,24 @@ import { captureException } from "@sentry/react-router";
 import { useEffect } from "react";
 import GA4 from "react-ga4";
 
-const isProduction = true; // process.env.NODE_ENV === "production";
-
 /**
  * Call this once in the root component to initialize Google Analytics.
  */
 export function useGoogleAnalytics() {
   useEffect(() => {
-    if (isProduction) GA4.initialize("G-HLE5G8GC5Y");
+    if (!import.meta.env.PROD) return;
+
+    try {
+      GA4.initialize("G-HLE5G8GC5Y");
+    } catch (error) {
+      // Silently fail if blocked by content blocker or ad blocker
+      if (
+        error instanceof Error &&
+        !error.message.includes("Content blocker")
+      ) {
+        captureException(error);
+      }
+    }
   }, []);
 }
 
@@ -31,7 +41,7 @@ export function trackEvent(
     value?: number;
   },
 ) {
-  if (!isProduction) return;
+  if (!import.meta.env.PROD) return;
 
   try {
     GA4.event({
@@ -42,6 +52,7 @@ export function trackEvent(
       transport: "beacon",
     });
   } catch (error) {
+    // Silently fail if blocked by content blocker
     captureException(error, { extra: { action, params } });
   }
 }

@@ -8,6 +8,8 @@ const envVars = {
   isTest: process.env.NODE_ENV === "test",
   isDevelopment: process.env.NODE_ENV === "development",
 
+  SENTRY_DSN: env.get("SENTRY_DSN").required(false).asString(),
+
   LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required(false).asString(),
   LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required(false).asString(),
   PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required(false).asString(),

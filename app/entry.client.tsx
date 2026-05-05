@@ -3,10 +3,13 @@ import { StrictMode, startTransition } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { HydratedRouter } from "react-router/dom";
 
-// Only enable Sentry in production
-if (process.env.NODE_ENV === "production") {
+const SENTRY_DSN =
+  "https://gkbTW4mifBshCeYcJiZDRH3s@s1693597.eu-nbg-2.betterstackdata.com/1693597";
+
+// Only enable Sentry in production build with valid DSN
+if (import.meta.env.PROD && SENTRY_DSN) {
   Sentry.init({
-    dsn: "https://gkbTW4mifBshCeYcJiZDRH3s@s1693597.eu-nbg-2.betterstackdata.com/1693597",
+    dsn: SENTRY_DSN,
     environment: "production",
     integrations: [
       Sentry.browserTracingIntegration(),

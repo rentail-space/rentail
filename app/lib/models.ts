@@ -6,12 +6,11 @@ import { devToolsMiddleware } from "@ai-sdk/devtools";
 import { wrapLanguageModel } from "ai";
 import envVars from "./env";
 
-import { createDeepSeek } from '@ai-sdk/deepseek';
+import { createDeepSeek } from "@ai-sdk/deepseek";
 
 const deepseek = createDeepSeek({
   apiKey: envVars.DEEPSEEK_API_KEY ?? "test-api-key",
 });
-
 
 function addMiddleware(model: LanguageModelV3): LanguageModelV3 {
   return wrapLanguageModel({
