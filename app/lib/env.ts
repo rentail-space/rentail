@@ -13,8 +13,9 @@ const envVars = {
   PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required(false).asString(),
   PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required(false).asString(),
 
-  ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required().asString(),
-  OPENAI_API_KEY: env.get("OPENAI_API_KEY").required().asString(),
+  ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required(false).asString(),
+  OPENAI_API_KEY: env.get("OPENAI_API_KEY").required(false).asString(),
+  DEEPSEEK_API_KEY: env.get("DEEPSEEK_API_KEY").required(false).asString(),
   PERPLEXITY_API_KEY: env.get("PERPLEXITY_API_KEY").required(false).asString(),
   GOOGLE_GENERATIVE_AI_API_KEY: env
     .get("GOOGLE_GENERATIVE_AI_API_KEY")

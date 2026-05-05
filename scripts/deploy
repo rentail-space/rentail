@@ -1,31 +1,47 @@
 #!/usr/bin/env bash
 
-# Deploy the application to Coolify.
-# Builds a Docker image, pushes to GHCR, then triggers a Coolify deployment.
-
 set -eo pipefail
 
-echo -e "\033[32m  Checking code is clean \u2026\033[0m"
+IMAGE="ghcr.io/rentail-space/rentail:latest"
+APP_UUID="c12diz0deab7ctmllamdugyg"
+
+echo "--- Step 1: Check (fmt, lint, secrets) ---"
 pnpm exec vp fmt --check
 pnpm exec vp lint
 secretlint "**/*" --format stylish
 
-echo -e "\033[32m  Generating React Router types \u2026\033[0m"
+echo "--- Step 2: Generate types ---"
 pnpm react-router typegen
 
-echo -e "\033[32m  Checking types \u2026\033[0m"
+echo "--- Step 3: Check types ---"
 pnpm tsc --noEmit --strict
 
-echo -e "\033[32m  Installing Playwright \u2026\033[0m"
+echo "--- Step 4: Install Playwright ---"
 pnpm exec playwright install
 
-echo -e "\033[32m  Running tests \u2026\033[0m"
+echo "--- Step 5: Run tests ---"
 NODE_OPTIONS="--max-old-space-size=3096" vp test run --testNamePattern="^(?:(?!visual regression).)*$"
 
-echo -e "\033[32m  Updating database \u2026\033[0m"
+echo "--- Step 5: Update database ---"
 doppler --config prd run -- pnpm prisma db push
 
-echo -e "\033[32m  Building and pushing Docker image \u2026\033[0m"
+echo "--- All checks passed. Deploying ---"
+
+COLIMA_WAS_RUNNING=true
+if ! colima status &>/dev/null; then
+  COLIMA_WAS_RUNNING=false
+  echo "Starting colima..."
+  colima start
+fi
+cleanup() {
+  if [ "$COLIMA_WAS_RUNNING" = false ]; then
+    echo "Stopping colima..."
+    colima stop
+  fi
+}
+trap cleanup EXIT
+
+echo "Building and pushing Docker image..."
 echo "$(doppler secrets get GHCR_TOKEN --plain --config dev)" | docker login ghcr.io -u assaf --password-stdin
 export PRD_DOPPLER_TOKEN=$(doppler secrets get PRD_DOPPLER_TOKEN --plain --config dev)
 docker buildx build \
@@ -33,14 +49,14 @@ docker buildx build \
   --secret id=doppler_token,env=PRD_DOPPLER_TOKEN \
   --build-arg DOPPLER_PROJECT=rentail \
   --build-arg DOPPLER_CONFIG=prd \
-  -t ghcr.io/rentail-space/rentail:latest \
+  -t "$IMAGE" \
   --push \
   .
 
-echo -e "\033[32m  Triggering Coolify deployment \u2026\033[0m"
-curl -s -X GET \
-  -H "Authorization: Bearer $(doppler secrets get COOLIFY_TOKEN --plain --config prd)" \
-  "https://coolify.labnotes.org/api/v1/deploy?uuid=c12diz0deab7ctmllamdugyg&force=false"
-echo
+echo "Triggering Coolify deployment..."
+TOKEN=$(jq -r '.instances[0].token' ~/.config/coolify/config.json)
+curl -s -X POST "https://coolify.labnotes.org/api/v1/deploy?type=application&uuid=$APP_UUID" \
+  -H "Authorization: Bearer $TOKEN" | jq
 
-echo -e "\033[32m  Done!\033[0m"
+echo "Deployed to https://rentail.space"
+open https://rentail.space

@@ -2,23 +2,25 @@ import debug from "debug";
 import { HttpResponse, http, passthrough } from "msw";
 import { setupServer } from "msw/node";
 import { ulid } from "ulid";
-import { findMockResponse } from "./mockAnthropic";
+import { findMockResponse } from "./mockDeepseek";
 
 const logger = debug("msw");
 
 const handlers = [
-  // Mock Anthropic API
+  // Mock DeepSeek API
   http.post(
-    "https://api.anthropic.com/v1/messages",
+    "https://api.deepseek.com/v1/responses",
     async ({ request }: { request: Request }) => {
+      logger("DeepSeek API mock hit! URL: %s", request.url);
       try {
         const json = await request.json();
+        logger("DeepSeek API mock request body: %j", json);
         const stream = findMockResponse(json);
         return new HttpResponse(stream, {
           headers: { "Content-Type": "text/event-stream" },
         });
       } catch (error) {
-        logger("Error in Anthropic API mock: %s", error);
+        logger("Error in DeepSeek API mock: %s", error);
         return HttpResponse.error();
       }
     },
@@ -90,24 +92,16 @@ const msw = setupServer(...handlers);
 // Add logging for debugging
 msw.events
   .on("request:start", ({ request }) =>
-    logger("%s", request.method, request.url),
+    logger("Request: %s %s", request.method, request.url),
   )
   .on("response:mocked", ({ request, response }) => {
-    logger("%s %s => %s", request.method, request.url, response.status);
+    logger("Mocked: %s %s => %s", request.method, request.url, response.status);
   })
   .on("request:unhandled", ({ request }) => {
-    // Only log external requests that are being bypassed
-    const url = new URL(request.url);
-    if (url.hostname !== "localhost" && url.hostname !== "127.0.0.1") {
-      logger(
-        "Unhandled external request (bypassed): %s %s",
-        request.method,
-        request.url,
-      );
-    }
+    logger("Unhandled: %s %s", request.method, request.url);
   })
   .on("unhandledException", ({ request, error }) => {
-    debug("server:msw")("%s %s errored!", request.method, request.url, error);
+    logger("Exception: %s %s %o", request.method, request.url, error);
   });
 
 export default function listen() {

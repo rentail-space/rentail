@@ -1,7 +1,4 @@
-import {
-  type AnthropicProviderOptions,
-  createAnthropic,
-} from "@ai-sdk/anthropic";
+import { createOpenAI } from "@ai-sdk/openai";
 import { devToolsMiddleware } from "@ai-sdk/devtools";
 import type {
   LanguageModelV3,
@@ -9,6 +6,11 @@ import type {
 } from "@ai-sdk/provider";
 import { wrapLanguageModel } from "ai";
 import envVars from "./env";
+
+const deepseek = createOpenAI({
+  apiKey: envVars.DEEPSEEK_API_KEY ?? "test-api-key",
+  baseURL: "https://api.deepseek.com/v1",
+});
 
 function addMiddleware(model: LanguageModelV3): LanguageModelV3 {
   return wrapLanguageModel({
@@ -21,12 +23,8 @@ function addMiddleware(model: LanguageModelV3): LanguageModelV3 {
  * The smartest model for the conversational tasks (replying to the user).
  */
 export const conversational = {
-  model: addMiddleware(
-    createAnthropic({
-      apiKey: envVars.ANTHROPIC_API_KEY,
-    })("claude-sonnet-4-5"),
-  ),
-  providerOptions: { anthropic: {} as AnthropicProviderOptions },
+  model: addMiddleware(deepseek("deepseek-chat")),
+  providerOptions: { openai: {} },
   temperature: 0.0,
 } satisfies Omit<LanguageModelV3CallOptions, "prompt"> & {
   model: LanguageModelV3;
@@ -36,16 +34,8 @@ export const conversational = {
  * The cheapest model for the classification tasks (verifying assistant's response).
  */
 export const classify = {
-  model: addMiddleware(
-    createAnthropic({
-      apiKey: envVars.ANTHROPIC_API_KEY,
-    })("claude-haiku-4-5"),
-  ),
-  providerOptions: {
-    anthropic: {
-      cacheControl: { type: "ephemeral", ttl: "1h" },
-    } as AnthropicProviderOptions,
-  },
+  model: addMiddleware(deepseek("deepseek-chat")),
+  providerOptions: { openai: {} },
   temperature: 0.0,
 } satisfies Omit<LanguageModelV3CallOptions, "prompt"> & {
   model: LanguageModelV3;
