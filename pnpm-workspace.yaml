@@ -14,7 +14,6 @@ onlyBuiltDependencies:
   - "@prisma/engines"
   - "@sentry/cli"
   - "@tailwindcss/oxide"
-  - bcrypt
   - core-js
   - esbuild
   - msw

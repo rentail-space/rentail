@@ -15,7 +15,7 @@ const envVars = {
 
   ANTHROPIC_API_KEY: env.get("ANTHROPIC_API_KEY").required(false).asString(),
   OPENAI_API_KEY: env.get("OPENAI_API_KEY").required(false).asString(),
-  DEEPSEEK_API_KEY: env.get("DEEPSEEK_API_KEY").required(false).asString(),
+  DEEPSEEK_API_KEY: env.get("DEEPSEEK_API_KEY").required(true).asString(),
   PERPLEXITY_API_KEY: env.get("PERPLEXITY_API_KEY").required(false).asString(),
   GOOGLE_GENERATIVE_AI_API_KEY: env
     .get("GOOGLE_GENERATIVE_AI_API_KEY")
