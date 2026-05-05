@@ -17,6 +17,7 @@ const sentryConfig = {
   sourcemaps: {
     disable: !process.env.SENTRY_AUTH_TOKEN || !sentryReleaseName,
   },
+  telemetry: false,
 };
 
 const sentryViteConfig = {
