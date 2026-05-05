@@ -1,4 +1,5 @@
 import { Send } from "lucide-react";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { useStickToBottomContext } from "use-stick-to-bottom";
 import { Button } from "~/components/ui/Button";
@@ -6,7 +7,7 @@ import { trackEvent } from "~/lib/useAnalytics";
 
 export default function InputForm({
   isSubmitting,
-  query,
+  query: initialQuery,
   sendMessage,
   setQuery,
 }: {
@@ -16,6 +17,13 @@ export default function InputForm({
   setQuery: (input: string | null) => void;
 }) {
   const { scrollToBottom } = useStickToBottomContext();
+  // Use local state for typing to avoid URL updates on every keystroke
+  const [inputValue, setInputValue] = useState(initialQuery);
+
+  // Sync external query changes (e.g., from URL) to local state
+  useEffect(() => {
+    setInputValue(initialQuery);
+  }, [initialQuery]);
 
   return (
     <div className="w-full items-center justify-center bg-[hsl(60,100%,99%)] p-4 pt-0">
@@ -23,7 +31,10 @@ export default function InputForm({
         className="relative w-full"
         onSubmit={(event) => {
           event.preventDefault();
-          sendMessage(query.trim());
+          const message = inputValue.trim();
+          if (message === "") return;
+          sendMessage(message);
+          setInputValue("");
           setQuery(null);
           void scrollToBottom();
           trackEvent("send_message", { category: "chat" });
@@ -42,11 +53,11 @@ export default function InputForm({
             "placeholder:text-gray-400",
           )}
           disabled={isSubmitting}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => setInputValue(e.target.value)}
           placeholder="Show me mall spaces for [product type] under $X/month"
           spellCheck="false"
           type="text"
-          value={query}
+          value={inputValue}
         />
 
         <div className="absolute top-1/2 right-3 flex -translate-y-1/2 transform gap-2">
