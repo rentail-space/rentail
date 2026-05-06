@@ -1,14 +1,14 @@
 .DS_Store
-/node_modules/
+node_modules/
 google-rentail.json
 .opencode
+.devtools
 
 # React Router
 .env
-.env.test
+.env.*
 .react-router/
-*.swp
-/build/
+build/
 
 # Ignore test results
 .test-server.json
@@ -20,17 +20,8 @@ __screenshots__/*.html.diff
 # Need to re-generate on the server
 prisma/generated
 
-# All local files or directories (eg ./.claude/settings.local.json)
-*/*.local.*
-*/*.local
-
 # Server log used when running tests
 server.log
 
 # Used by scripts/clone.sh to clone the production database to the local development database
 prisma/backup.sql
-
-.devtools
-*.profraw
-.env*.local
-deploy.log

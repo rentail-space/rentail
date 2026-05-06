@@ -1,7 +1,0 @@
----
-description: Use Context7
-globs: 
-alwaysApply: Always
----
-
-when the user requests code examples, setup or configuration steps, or library/API documentation use the tool "context7"
