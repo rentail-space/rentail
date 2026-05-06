@@ -104,6 +104,15 @@ describe("Blog Post Rendering", () => {
   });
 
   it("should match inner HTML", async () => {
+    // Wait for images to load (opacity-0 is removed on load) or fail (removed from DOM)
+    await page.waitForFunction(() => {
+      const images = document.querySelectorAll("figure img");
+      // If no images (removed on error) or all loaded (opacity-0 removed), we're ready
+      return (
+        images.length === 0 ||
+        Array.from(images).every((img) => !img.classList.contains("opacity-0"))
+      );
+    });
     await expect(page.locator("article")).toMatchInnerHTML();
   });
 

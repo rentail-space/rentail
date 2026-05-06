@@ -62,7 +62,7 @@
     "isbot": "^5.1.39",
     "looks-same": "^10.0.1",
     "lucide-react": "^1.14.0",
-    "mapbox-gl": "^3.23.0",
+    "mapbox-gl": "^3.23.1",
     "marked": "^18.0.3",
     "prisma": "^7.8.0",
     "radashi": "^12.7.2",
@@ -91,7 +91,7 @@
     "usehooks-ts": "^3.1.1",
     "uuid": "^14.0.0",
     "yaml": "^2.8.4",
-    "zod": "^4.4.2"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@ai-sdk/provider": "^3.0.10",

@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 
-import { plot, green } from "asciichart";
+import { green, plot } from "asciichart";
 import envVars from "~/lib/env";
 
 interface LogEntry {
@@ -16,7 +16,22 @@ interface MetricsData {
   avg: number;
 }
 
+interface TimeRange {
+  label: string;
+  durationMs: number;
+  step: number;
+}
+
+const timeRanges: TimeRange[] = [
+  { label: "30m", durationMs: 30 * 60 * 1000, step: 20 },
+  { label: "4h", durationMs: 4 * 60 * 60 * 1000, step: 150 },
+  { label: "24h", durationMs: 24 * 60 * 60 * 1000, step: 900 },
+  { label: "72h", durationMs: 72 * 60 * 60 * 1000, step: 2500 },
+  { label: "7d", durationMs: 7 * 24 * 60 * 60 * 1000, step: 5000 },
+];
+
 let currentView: "logs" | "metrics" = "logs";
+let currentTimeRange = timeRanges[4]; // Default to 7 days
 let logs: LogEntry[] = [];
 let metrics: MetricsData | null = null;
 
@@ -54,8 +69,10 @@ async function fetchLogs(): Promise<LogEntry[]> {
 
 async function fetchMetrics(): Promise<MetricsData> {
   const end = new Date().toISOString();
-  const start = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-  const step = 3600;
+  const start = new Date(
+    Date.now() - currentTimeRange.durationMs,
+  ).toISOString();
+  const step = currentTimeRange.step;
   const response = await fetch(
     `https://api.hetzner.cloud/v1/servers/128798634/metrics?type=cpu&start=${start}&end=${end}&step=${step}`,
     { headers: { Authorization: `Bearer ${envVars.HETZNER_TOKEN}` } },
@@ -89,9 +106,24 @@ function render() {
       ? `${ANSI.bold}[Metrics]${ANSI.reset}`
       : `${ANSI.dim}[Metrics]${ANSI.reset}`;
   lines.push(
-    `${ANSI.cyan}rentail.space${ANSI.reset}  ${logsTab}  ${metricsTab}  ${ANSI.dim}(Tab to switch, q to quit)${ANSI.reset}`,
+    `${ANSI.cyan}rentail.space${ANSI.reset}  ${logsTab}  ${metricsTab}  ${ANSI.dim}(Tab to switch, 1-5 for time range, q to quit)${ANSI.reset}`,
   );
   lines.push("─".repeat(termWidth));
+
+  // Time range selector (only show when on metrics view)
+  if (currentView === "metrics") {
+    const timeRangeOptions = timeRanges
+      .map((range) => {
+        const isSelected = range === currentTimeRange;
+        const label = `[${range.label}]`;
+        return isSelected
+          ? `${ANSI.bold}${ANSI.green}${label}${ANSI.reset}`
+          : `${ANSI.dim}${label}${ANSI.reset}`;
+      })
+      .join(" ");
+    lines.push(`  ${timeRangeOptions}`);
+    lines.push("─".repeat(termWidth));
+  }
 
   if (currentView === "logs") {
     if (logs.length === 0) {
@@ -110,7 +142,7 @@ function render() {
       lines.push(`${ANSI.dim}Loading metrics...${ANSI.reset}`);
     } else {
       lines.push(
-        `${ANSI.green} CPU Usage - Last 7 days (${metrics.cpuValues.length} samples)${ANSI.reset}`,
+        `${ANSI.green} CPU Usage - Last ${currentTimeRange.label} (${metrics.cpuValues.length} samples)${ANSI.reset}`,
       );
       lines.push("");
       const chart = plot(metrics.cpuValues, {
@@ -169,6 +201,12 @@ async function main() {
     if (key === "\t") {
       // Tab pressed - switch view
       currentView = currentView === "logs" ? "metrics" : "logs";
+      render();
+      await refreshData();
+    } else if (key >= "1" && key <= "5" && currentView === "metrics") {
+      // Number key 1-5 - select time range
+      const index = parseInt(key) - 1;
+      currentTimeRange = timeRanges[index];
       render();
       await refreshData();
     } else if (key === "q" || key === "\u0003") {

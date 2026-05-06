@@ -8,20 +8,19 @@ APP_UUID="c12diz0deab7ctmllamdugyg"
 echo -e "\033[0;32m--- Step 1: Check (fmt, lint, secrets) ---\033[0m"
 pnpm check
 
-if [[ -z "$SKIP_TESTS" ]]; then
-  echo -e "\033[0;32m--- Step 2: Run tests ---\033[0m"
-  NODE_OPTIONS="--max-old-space-size=3096" vp test run --testNamePattern="^(?:(?!visual regression).)*$"
+echo -e "\033[0;32m--- Step 2: Push DB schema ---\033[0m"
+pnpm prisma generate
+pnpm prisma db push
 
-  echo -e "\033[0;32m--- Step 3: Run visual regression tests ---\033[0m"
-  NODE_OPTIONS="--max-old-space-size=3096" vp test run --testNamePattern="^(?:(?!visual regression).)*$"
-else
+if [ "$arg" = "--skip-tests" ]; then
   echo -e "\033[0;33m--- Step 3: Skipping tests because SKIP_TESTS is set ---\033[0m"
+else
+  echo -e "\033[0;32m--- Step 3: Run tests ---\033[0m"
+  NODE_OPTIONS="--max-old-space-size=3096" vp test run
 fi
 
-echo -e "\033[0;32m--- Step 4: Update database ---\033[0m"
+echo -e "\033[0;32m--- Step 3: Update database ---\033[0m"
 doppler --config prd run -- pnpm prisma db push
-
-echo -e "\033[0;32m--- All checks passed. Deploying ---\033[0m"
 
 COLIMA_WAS_RUNNING=true
 if ! colima status &>/dev/null; then
@@ -37,7 +36,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-echo -e "\033[0;32m--- Building and pushing Docker image ---\033[0m"
+echo -e "\033[0;32m--- Step 4: Building and pushing Docker image ---\033[0m"
 echo "$(doppler secrets get GHCR_TOKEN --plain --config dev)" | docker login ghcr.io -u assaf --password-stdin
 export PRD_DOPPLER_TOKEN=$(doppler secrets get PRD_DOPPLER_TOKEN --plain --config dev)
 docker buildx build \
@@ -49,7 +48,7 @@ docker buildx build \
   --push \
   .
 
-echo -e "\033[0;32m--- Triggering Coolify deployment ---\033[0m"
+echo -e "\033[0;32m--- Step 5: Triggering Coolify deployment ---\033[0m"
 TOKEN=$(jq -r '.instances[0].token' ~/.config/coolify/config.json)
 curl -s -X POST "https://coolify.labnotes.org/api/v1/deploy?type=application&uuid=$APP_UUID" \
   -H "Authorization: Bearer $TOKEN" | jq
