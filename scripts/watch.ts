@@ -31,9 +31,10 @@ const timeRanges: TimeRange[] = [
 ];
 
 let currentView: "logs" | "metrics" = "logs";
-let currentTimeRange = timeRanges[4]; // Default to 7 days
+let currentTimeRange = timeRanges[4];
 let logs: LogEntry[] = [];
 let metrics: MetricsData | null = null;
+let scrollOffset = 0;
 
 const ANSI = {
   clear: "\x1b[2J",
@@ -47,9 +48,25 @@ const ANSI = {
   reset: "\x1b[0m",
 };
 
+function getVisibleLines(): number {
+  const termHeight = process.stdout.rows || 24;
+  const headerLines = 2;
+  const positionLine = 1;
+  return Math.max(1, termHeight - headerLines - positionLine);
+}
+
+function clampScrollOffset(
+  offset: number,
+  totalLogs: number,
+  visibleLines: number,
+): number {
+  const maxOffset = Math.max(0, totalLogs - visibleLines);
+  return Math.max(0, Math.min(offset, maxOffset));
+}
+
 async function fetchLogs(): Promise<LogEntry[]> {
   const response = await fetch(
-    `https://coolify.labnotes.org/api/v1/applications/c12diz0deab7ctmllamdugyg/logs?lines=50`,
+    `https://coolify.labnotes.org/api/v1/applications/c12diz0deab7ctmllamdugyg/logs?lines=1000`,
     { headers: { Authorization: `Bearer ${envVars.COOLIFY_TOKEN}` } },
   );
   const { logs: logsText } = (await response.json()) as { logs: string };
@@ -63,7 +80,6 @@ async function fetchLogs(): Promise<LogEntry[]> {
         message: line.replace(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\S*\s*/, ""),
       };
     })
-    .slice(-30)
     .reverse();
 }
 
@@ -96,7 +112,6 @@ function render() {
   const lines: string[] = [];
   const termWidth = process.stdout.columns || 80;
 
-  // Header with tabs
   const logsTab =
     currentView === "logs"
       ? `${ANSI.bold}[Logs]${ANSI.reset}`
@@ -110,7 +125,6 @@ function render() {
   );
   lines.push("─".repeat(termWidth));
 
-  // Time range selector (only show when on metrics view)
   if (currentView === "metrics") {
     const timeRangeOptions = timeRanges
       .map((range) => {
@@ -129,13 +143,23 @@ function render() {
     if (logs.length === 0) {
       lines.push(`${ANSI.dim}Loading logs...${ANSI.reset}`);
     } else {
-      for (const log of logs) {
+      const visibleLines = getVisibleLines();
+      scrollOffset = clampScrollOffset(scrollOffset, logs.length, visibleLines);
+
+      const visibleLogs = logs.slice(scrollOffset, scrollOffset + visibleLines);
+      for (const log of visibleLogs) {
         const time = log.timestamp
           ? `${ANSI.dim}${log.timestamp}${ANSI.reset} `
           : "";
         const msg = log.message.slice(0, termWidth - 22);
         lines.push(`${time}${msg}`);
       }
+
+      const start = scrollOffset + 1;
+      const end = Math.min(scrollOffset + visibleLines, logs.length);
+      lines.push(
+        `${ANSI.dim}Showing ${start}-${end} of ${logs.length} entries${ANSI.reset}`,
+      );
     }
   } else {
     if (!metrics) {
@@ -145,10 +169,7 @@ function render() {
         `${ANSI.green} CPU Usage - Last ${currentTimeRange.label} (${metrics.cpuValues.length} samples)${ANSI.reset}`,
       );
       lines.push("");
-      const chart = plot(metrics.cpuValues, {
-        height: 10,
-        colors: [green],
-      });
+      const chart = plot(metrics.cpuValues, { height: 10, colors: [green] });
       for (const chartLine of chart.split("\n")) {
         lines.push(chartLine);
       }
@@ -165,7 +186,6 @@ function render() {
     }
   }
 
-  // Render
   process.stdout.write(ANSI.clear + ANSI.home);
   process.stdout.write(lines.join("\n"));
 }
@@ -174,6 +194,7 @@ async function refreshData() {
   try {
     if (currentView === "logs") {
       logs = await fetchLogs();
+      scrollOffset = 0;
     } else {
       metrics = await fetchMetrics();
     }
@@ -184,7 +205,6 @@ async function refreshData() {
 }
 
 async function main() {
-  // Check if stdin is a TTY
   if (!process.stdin.isTTY) {
     console.error("Error: This script requires an interactive terminal (TTY)");
     console.error("Run directly in your terminal: pnpm tsx scripts/watch.ts");
@@ -199,21 +219,41 @@ async function main() {
   const handleKey = async (data: Buffer) => {
     const key = data.toString();
     if (key === "\t") {
-      // Tab pressed - switch view
       currentView = currentView === "logs" ? "metrics" : "logs";
+      scrollOffset = 0;
       render();
       await refreshData();
     } else if (key >= "1" && key <= "5" && currentView === "metrics") {
-      // Number key 1-5 - select time range
       const index = parseInt(key) - 1;
       currentTimeRange = timeRanges[index];
       render();
       await refreshData();
     } else if (key === "q" || key === "\u0003") {
-      // q or Ctrl+C - quit
       process.stdout.write(ANSI.clear + ANSI.home + ANSI.showCursor);
       stdin.setRawMode(false);
       process.exit(0);
+    } else if (currentView === "logs") {
+      if (key === "\x1b[A" || key === "k") {
+        scrollOffset = clampScrollOffset(
+          scrollOffset - 1,
+          logs.length,
+          getVisibleLines(),
+        );
+        render();
+      } else if (key === "\x1b[B" || key === "j") {
+        scrollOffset = clampScrollOffset(
+          scrollOffset + 1,
+          logs.length,
+          getVisibleLines(),
+        );
+        render();
+      } else if (key === "\x1b[H") {
+        scrollOffset = Math.max(0, logs.length - getVisibleLines());
+        render();
+      } else if (key === "\x1b[F") {
+        scrollOffset = 0;
+        render();
+      }
     }
   };
 
@@ -222,7 +262,6 @@ async function main() {
   render();
   await refreshData();
 
-  // Auto-refresh every 2 seconds
   setInterval(() => {
     void refreshData();
   }, 2000);
