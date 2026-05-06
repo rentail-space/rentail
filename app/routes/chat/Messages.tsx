@@ -1,9 +1,8 @@
 import type { UIMessage } from "ai";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { BeatLoading } from "respinner";
 import { twMerge } from "tailwind-merge";
 import { useStickToBottomContext } from "use-stick-to-bottom";
-import askQuestion from "~/routes/chat/askQuestion";
 import ErrorMessage from "./ErrorMessage";
 import ResponseMessage from "./ResponseMessage";
 import UserMessage from "./UserMessage";
@@ -45,6 +44,15 @@ export default function Messages({
     prevIsTyping.current = isTyping;
   }, [messages.length, isTyping, scrollToBottom, isAtBottom]);
 
+  // Memoize askQuestion to prevent re-creating on every render
+  const askQuestion = useCallback(
+    async (question: string) => {
+      setQuery(question);
+      void scrollToBottom();
+    },
+    [setQuery, scrollToBottom],
+  );
+
   return (
     <div
       className={twMerge(
@@ -58,7 +66,7 @@ export default function Messages({
           <UserMessage key={message.id} message={message} />
         ) : message.role === "assistant" ? (
           <ResponseMessage
-            askQuestion={askQuestion({ scrollToBottom, setQuery })}
+            askQuestion={askQuestion}
             isStreaming={index === messages.length - 1 && isTyping}
             key={message.id}
             message={message}

@@ -2,7 +2,7 @@ import { useChat } from "@ai-sdk/react";
 import { captureException } from "@sentry/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { DefaultChatTransport } from "ai";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useRouteLoaderData, useSearchParams } from "react-router";
 import invariant from "tiny-invariant";
 import { ulid } from "ulid";
@@ -21,16 +21,21 @@ export const handle = { hideLayout: true };
 export default function ChatPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("q") ?? "";
-  const setQuery = (value: string | null) => {
-    setSearchParams(
-      (params) => {
-        if (value === null || value === "") params.delete("q");
-        else params.set("q", value);
-        return params;
-      },
-      { replace: true },
-    );
-  };
+
+  // Memoize setQuery to prevent re-creating on every render
+  const setQuery = useCallback(
+    (value: string | null) => {
+      setSearchParams(
+        (params) => {
+          if (value === null || value === "") params.delete("q");
+          else params.set("q", value);
+          return params;
+        },
+        { replace: true },
+      );
+    },
+    [setSearchParams],
+  );
 
   // Access data from root loader first, our loaded depends on it
   const found = useRouteLoaderData<typeof rootLoader>("root");

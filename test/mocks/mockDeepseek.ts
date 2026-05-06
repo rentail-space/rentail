@@ -1,10 +1,9 @@
 /**
  * DeepSeek API Streaming Response Handler
  *
- * OpenAI Responses API format (used by AI SDK with createOpenAI)
+ * OpenAI Chat Completions API format (used by @ai-sdk/deepseek)
  */
 
-import { last } from "radashi";
 import { ulid } from "ulid";
 import debug from "debug";
 
@@ -49,32 +48,30 @@ const fallbackResponse: string = "Fallback response!";
  * Find a matching response for the given message
  */
 export function findMockResponse(body: object): ReadableStream<Uint8Array> {
-  const { input } = body as {
-    input?:
-      | string
-      | Array<{
-          role?: string;
-          type?: string;
-          text?: string;
-          content?: string | Array<{ type: string; text?: string }>;
-        }>;
+  // Chat Completions API format
+  const { messages } = body as {
+    messages?: Array<{
+      role: string;
+      content: string | Array<{ type: string; text?: string }>;
+    }>;
   };
+
+  logger("DeepSeek API mock - raw messages: %j", messages);
 
   // Extract the LAST user message text for pattern matching
   let messageText = "";
-  if (typeof input === "string") {
-    messageText = input;
-  } else if (Array.isArray(input)) {
-    // Find the last user message
-    const userMessages = input.filter(
-      (item) => item.role === "user" && Array.isArray(item.content),
-    );
-    const lastUserMessage = last(userMessages);
-    if (lastUserMessage && Array.isArray(lastUserMessage.content)) {
-      messageText = lastUserMessage.content
-        .filter((c) => c.type === "input_text")
-        .map((c) => c.text || "")
-        .join(" ");
+  if (Array.isArray(messages)) {
+    const userMessages = messages.filter((msg) => msg.role === "user");
+    const lastUserMessage = userMessages[userMessages.length - 1];
+    if (lastUserMessage) {
+      if (typeof lastUserMessage.content === "string") {
+        messageText = lastUserMessage.content;
+      } else if (Array.isArray(lastUserMessage.content)) {
+        messageText = lastUserMessage.content
+          .filter((c) => c.type === "text")
+          .map((c) => c.text || "")
+          .join(" ");
+      }
     }
   }
 
@@ -97,65 +94,22 @@ export function findMockResponse(body: object): ReadableStream<Uint8Array> {
 }
 
 /**
- * Create a streaming response in OpenAI Responses API format
+ * Create a streaming response in OpenAI Chat Completions API format
  */
 function createStreamingResponse(
   mockResponse: string,
 ): ReadableStream<Uint8Array> {
   const encoder = new TextEncoder();
-  const responseId = `resp_${ulid()}`;
-  const itemId = `item_${ulid()}`;
+  const responseId = `chatcmpl-${ulid()}`;
   let index = 0;
 
   return new ReadableStream({
     start(controller) {
-      // 1. Send response.output_item.added with type "message" - triggers text-start
-      const itemAddedEvent = {
-        type: "response.output_item.added",
-        output_index: 0,
-        item: {
-          type: "message",
-          id: itemId,
-        },
-      };
-      controller.enqueue(
-        encoder.encode(`data: ${JSON.stringify(itemAddedEvent)}\n\n`),
-      );
-
       const chunkSize = 50;
 
       function sendNextChunk() {
         if (index >= mockResponse.length) {
-          // 3. Send response.output_item.done with type "message" - triggers text-end
-          const itemDoneEvent = {
-            type: "response.output_item.done",
-            output_index: 0,
-            item: {
-              type: "message",
-              id: itemId,
-            },
-          };
-          controller.enqueue(
-            encoder.encode(`data: ${JSON.stringify(itemDoneEvent)}\n\n`),
-          );
-
-          // 4. Send response.completed
-          const completedEvent = {
-            type: "response.completed",
-            response: {
-              id: responseId,
-              status: "completed",
-              usage: {
-                input_tokens: 100,
-                output_tokens: Math.ceil(mockResponse.length / 4),
-              },
-            },
-          };
-          controller.enqueue(
-            encoder.encode(`data: ${JSON.stringify(completedEvent)}\n\n`),
-          );
-
-          // Send [DONE]
+          // Send the final [DONE] message
           controller.enqueue(encoder.encode("data: [DONE]\n\n"));
           controller.close();
           logger("streaming response now closed");
@@ -165,11 +119,19 @@ function createStreamingResponse(
         const chunk = mockResponse.slice(index, index + chunkSize);
         index += chunkSize;
 
-        // 2. Send response.output_text.delta - triggers text-delta
+        // Chat Completions streaming format
         const deltaEvent = {
-          type: "response.output_text.delta",
-          item_id: itemId,
-          delta: chunk,
+          id: responseId,
+          object: "chat.completion.chunk",
+          created: Math.floor(Date.now() / 1000),
+          model: "deepseek-chat",
+          choices: [
+            {
+              index: 0,
+              delta: { content: chunk },
+              finish_reason: null,
+            },
+          ],
         };
         controller.enqueue(
           encoder.encode(`data: ${JSON.stringify(deltaEvent)}\n\n`),

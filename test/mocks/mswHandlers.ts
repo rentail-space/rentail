@@ -7,9 +7,9 @@ import { findMockResponse } from "./mockDeepseek";
 const logger = debug("msw");
 
 const handlers = [
-  // Mock DeepSeek API
+  // Mock DeepSeek API (uses /chat/completions endpoint)
   http.post(
-    "https://api.deepseek.com/v1/responses",
+    "https://api.deepseek.com/chat/completions",
     async ({ request }: { request: Request }) => {
       logger("DeepSeek API mock hit! URL: %s", request.url);
       try {

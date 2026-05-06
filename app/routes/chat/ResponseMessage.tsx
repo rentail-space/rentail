@@ -1,6 +1,6 @@
 import type { UIMessage } from "ai";
 import type React from "react";
-import { type JSX, useEffect, useRef } from "react";
+import { type JSX, useEffect, useMemo, useRef } from "react";
 import { Button } from "react-email";
 import remarkGfm from "remark-gfm";
 import { Streamdown } from "streamdown";
@@ -30,12 +30,18 @@ export default function ResponseMessage({
     setTimeout(scrollToBottom, 10);
   }, [scrollToBottom, message.parts, isStreaming]);
 
+  // Memoize components to prevent re-creating on every render
+  const components = useMemo(
+    () => getComponents({ askQuestion }),
+    [askQuestion],
+  );
+
   return message.parts.map((part, index) => {
     switch (part.type) {
       case "text": {
         return (
           <MarkdownMessage
-            askQuestion={askQuestion}
+            components={components}
             contentRef={contentRef}
             isStreaming={isStreaming}
             key={index.toString()}
@@ -51,12 +57,12 @@ export default function ResponseMessage({
 }
 
 function MarkdownMessage({
-  askQuestion,
+  components,
   contentRef,
   isStreaming,
   text,
 }: {
-  askQuestion: (question: string) => Promise<void>;
+  components: ReturnType<typeof getComponents>;
   contentRef: React.RefObject<HTMLDivElement | null>;
   isStreaming: boolean;
   text: string;
@@ -85,7 +91,7 @@ function MarkdownMessage({
           <Streamdown
             caret="block"
             className="prose prose-base max-w-none"
-            components={getComponents({ askQuestion })}
+            components={components}
             controls={{ code: false, mermaid: false, table: false }}
             isAnimating={isStreaming}
             mode={isStreaming ? "streaming" : "static"}
