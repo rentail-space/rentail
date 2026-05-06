@@ -1,0 +1,197 @@
+#!/usr/bin/env tsx
+
+import { plot, green } from "asciichart";
+import envVars from "~/lib/env";
+
+interface LogEntry {
+  timestamp: string;
+  message: string;
+}
+
+interface MetricsData {
+  cpuValues: number[];
+  timestamps: Date[];
+  min: number;
+  max: number;
+  avg: number;
+}
+
+let currentView: "logs" | "metrics" = "logs";
+let logs: LogEntry[] = [];
+let metrics: MetricsData | null = null;
+
+const ANSI = {
+  clear: "\x1b[2J",
+  home: "\x1b[H",
+  hideCursor: "\x1b[?25l",
+  showCursor: "\x1b[?25h",
+  bold: "\x1b[1m",
+  dim: "\x1b[2m",
+  green: "\x1b[32m",
+  cyan: "\x1b[36m",
+  reset: "\x1b[0m",
+};
+
+async function fetchLogs(): Promise<LogEntry[]> {
+  const response = await fetch(
+    `https://coolify.labnotes.org/api/v1/applications/c12diz0deab7ctmllamdugyg/logs?lines=50`,
+    { headers: { Authorization: `Bearer ${envVars.COOLIFY_TOKEN}` } },
+  );
+  const { logs: logsText } = (await response.json()) as { logs: string };
+  return logsText
+    .split("\n")
+    .filter(Boolean)
+    .map((line) => {
+      const match = line.match(/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})/);
+      return {
+        timestamp: match?.[1] ?? "",
+        message: line.replace(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\S*\s*/, ""),
+      };
+    })
+    .slice(-30)
+    .reverse();
+}
+
+async function fetchMetrics(): Promise<MetricsData> {
+  const end = new Date().toISOString();
+  const start = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+  const step = 3600;
+  const response = await fetch(
+    `https://api.hetzner.cloud/v1/servers/128798634/metrics?type=cpu&start=${start}&end=${end}&step=${step}`,
+    { headers: { Authorization: `Bearer ${envVars.HETZNER_TOKEN}` } },
+  );
+  const { metrics } = (await response.json()) as {
+    metrics: { time_series: { cpu: { values: [number, string][] } } };
+  };
+  const values = metrics.time_series.cpu.values;
+  const cpuValues = values.map(([, v]) => parseFloat(v));
+  const timestamps = values.map(([t]) => new Date(t * 1000));
+  return {
+    cpuValues,
+    timestamps,
+    min: Math.min(...cpuValues),
+    max: Math.max(...cpuValues),
+    avg: cpuValues.reduce((a, b) => a + b, 0) / cpuValues.length,
+  };
+}
+
+function render() {
+  const lines: string[] = [];
+  const termWidth = process.stdout.columns || 80;
+
+  // Header with tabs
+  const logsTab =
+    currentView === "logs"
+      ? `${ANSI.bold}[Logs]${ANSI.reset}`
+      : `${ANSI.dim}[Logs]${ANSI.reset}`;
+  const metricsTab =
+    currentView === "metrics"
+      ? `${ANSI.bold}[Metrics]${ANSI.reset}`
+      : `${ANSI.dim}[Metrics]${ANSI.reset}`;
+  lines.push(
+    `${ANSI.cyan}rentail.space${ANSI.reset}  ${logsTab}  ${metricsTab}  ${ANSI.dim}(Tab to switch, q to quit)${ANSI.reset}`,
+  );
+  lines.push("─".repeat(termWidth));
+
+  if (currentView === "logs") {
+    if (logs.length === 0) {
+      lines.push(`${ANSI.dim}Loading logs...${ANSI.reset}`);
+    } else {
+      for (const log of logs) {
+        const time = log.timestamp
+          ? `${ANSI.dim}${log.timestamp}${ANSI.reset} `
+          : "";
+        const msg = log.message.slice(0, termWidth - 22);
+        lines.push(`${time}${msg}`);
+      }
+    }
+  } else {
+    if (!metrics) {
+      lines.push(`${ANSI.dim}Loading metrics...${ANSI.reset}`);
+    } else {
+      lines.push(
+        `${ANSI.green} CPU Usage - Last 7 days (${metrics.cpuValues.length} samples)${ANSI.reset}`,
+      );
+      lines.push("");
+      const chart = plot(metrics.cpuValues, {
+        height: 10,
+        colors: [green],
+      });
+      for (const chartLine of chart.split("\n")) {
+        lines.push(chartLine);
+      }
+      lines.push("");
+      lines.push(
+        ` Start: ${metrics.timestamps[0]?.toISOString().slice(0, 16)}`,
+      );
+      lines.push(
+        ` End:   ${metrics.timestamps.at(-1)?.toISOString().slice(0, 16)}`,
+      );
+      lines.push(` Min:   ${metrics.min.toFixed(1)}%`);
+      lines.push(` Max:   ${metrics.max.toFixed(1)}%`);
+      lines.push(` Avg:   ${metrics.avg.toFixed(1)}%`);
+    }
+  }
+
+  // Render
+  process.stdout.write(ANSI.clear + ANSI.home);
+  process.stdout.write(lines.join("\n"));
+}
+
+async function refreshData() {
+  try {
+    if (currentView === "logs") {
+      logs = await fetchLogs();
+    } else {
+      metrics = await fetchMetrics();
+    }
+    render();
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
+async function main() {
+  // Check if stdin is a TTY
+  if (!process.stdin.isTTY) {
+    console.error("Error: This script requires an interactive terminal (TTY)");
+    console.error("Run directly in your terminal: pnpm tsx scripts/watch.ts");
+    process.exit(1);
+  }
+
+  const stdin = process.stdin;
+  stdin.setRawMode(true);
+  stdin.resume();
+  process.stdout.write(ANSI.hideCursor);
+
+  const handleKey = async (data: Buffer) => {
+    const key = data.toString();
+    if (key === "\t") {
+      // Tab pressed - switch view
+      currentView = currentView === "logs" ? "metrics" : "logs";
+      render();
+      await refreshData();
+    } else if (key === "q" || key === "\u0003") {
+      // q or Ctrl+C - quit
+      process.stdout.write(ANSI.clear + ANSI.home + ANSI.showCursor);
+      stdin.setRawMode(false);
+      process.exit(0);
+    }
+  };
+
+  stdin.on("data", handleKey);
+
+  render();
+  await refreshData();
+
+  // Auto-refresh every 2 seconds
+  setInterval(() => {
+    void refreshData();
+  }, 2000);
+}
+
+main().catch((error) => {
+  process.stdout.write(ANSI.showCursor);
+  console.error(error);
+  process.exit(1);
+});

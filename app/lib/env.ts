@@ -44,6 +44,9 @@ const envVars = {
     .get("REDIS_URL")
     .default("redis://localhost:6379")
     .asUrlString(),
+
+  COOLIFY_TOKEN: env.get("COOLIFY_TOKEN").required(false).asString(),
+  HETZNER_TOKEN: env.get("HETZNER_TOKEN").required(false).asString(),
 };
 
 export default envVars;
