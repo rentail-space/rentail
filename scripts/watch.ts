@@ -48,6 +48,8 @@ const ANSI = {
   reset: "\x1b[0m",
 };
 
+const applicationUUID = "c12diz0deab7ctmllamdugyg";
+
 function getVisibleLines(): number {
   const termHeight = process.stdout.rows || 24;
   const headerLines = 2;
@@ -66,7 +68,7 @@ function clampScrollOffset(
 
 async function fetchLogs(): Promise<LogEntry[]> {
   const response = await fetch(
-    `https://coolify.labnotes.org/api/v1/applications/c12diz0deab7ctmllamdugyg/logs?lines=1000`,
+    `https://coolify.labnotes.org/api/v1/applications/${applicationUUID}/logs?lines=1000`,
     { headers: { Authorization: `Bearer ${envVars.COOLIFY_TOKEN}` } },
   );
   const { logs: logsText } = (await response.json()) as { logs: string };
