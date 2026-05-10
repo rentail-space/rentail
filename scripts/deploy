@@ -12,7 +12,7 @@ echo -e "\033[0;32m--- Step 2: Push DB schema ---\033[0m"
 pnpm prisma generate
 pnpm prisma db push
 
-if [ "$arg" = "--skip-tests" ]; then
+if [ "$1" = "--skip-tests" ]; then
   echo -e "\033[0;33m--- Step 3: Skipping tests because SKIP_TESTS is set ---\033[0m"
 else
   echo -e "\033[0;32m--- Step 3: Run tests ---\033[0m"
@@ -48,10 +48,13 @@ docker buildx build \
   --push \
   .
 
-echo -e "\033[0;32m--- Step 5: Triggering Coolify deployment ---\033[0m"
-TOKEN=$(jq -r '.instances[0].token' ~/.config/coolify/config.json)
-curl -s -X POST "https://coolify.labnotes.org/api/v1/deploy?type=application&uuid=$APP_UUID" \
-  -H "Authorization: Bearer $TOKEN" | jq
+echo -e "\033[0;32m--- Step 5: Deploying to Coolify ---\033[0m"
+npx coolify-deploy \
+  --image "$IMAGE" \
+  --app-uuid "$APP_UUID" \
+  --healthcheck-url "https://rentail.space/health" \
+  --healthcheck-timeout 60 \
+  --force
 
 echo -e "\033[0;34m--- Deployed to https://rentail.space ---\033[0m"
 open https://rentail.space

@@ -123,7 +123,11 @@ jobs:
 
       - name: Deploy to Coolify
         if: github.ref == 'refs/heads/main'
-        run: |
-          curl -s -X GET \
-            -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
-            "${{ secrets.COOLIFY_WEBHOOK }}"
+        uses: assaf/coolify-deploy@v1.0.0
+        with:
+          image: ghcr.io/rentail-space/rentail:latest
+          app-uuid: c12diz0deab7ctmllamdugyg
+          coolify-api-url: https://coolify.labnotes.org
+          coolify-token: ${{ secrets.COOLIFY_TOKEN }}
+          healthcheck-url: https://rentail.space/health
+          healthcheck-timeout: 120
