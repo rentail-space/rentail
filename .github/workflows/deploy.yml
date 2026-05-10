@@ -93,34 +93,6 @@ jobs:
           name: playwright-test-results
           path: __screenshots__
 
-      - name: Install Doppler CLI
-        uses: dopplerhq/cli-action@v3
-
-      - name: Update database
-        if: github.ref == 'refs/heads/main'
-        run: |
-          doppler run --config prd -- pnpm prisma db push
-        env:
-          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
-
-      - name: Login to GitHub Container Registry
-        if: github.ref == 'refs/heads/main'
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-      - name: Build and push Docker image
-        if: github.ref == 'refs/heads/main'
-        env:
-          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
-        run: |
-          docker buildx build \
-            --secret id=doppler_token,env=DOPPLER_TOKEN \
-            --build-arg DOPPLER_PROJECT=rentail \
-            --build-arg DOPPLER_CONFIG=prd \
-            -t ghcr.io/rentail-space/rentail:latest \
-            -t ghcr.io/rentail-space/rentail:${{ github.sha }} \
-            .
-          docker push --all-tags ghcr.io/rentail-space/rentail
-
       - name: Deploy to Coolify
         if: github.ref == 'refs/heads/main'
         uses: assaf/coolify-deploy@v1.0.0
@@ -131,3 +103,5 @@ jobs:
           coolify-token: ${{ secrets.COOLIFY_TOKEN }}
           healthcheck-path: /health
           healthcheck-timeout: 120
+          env-vars: |
+            DOPPLER_TOKEN=${{ secrets.DOPPLER_TOKEN }}

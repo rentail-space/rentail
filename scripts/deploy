@@ -41,7 +41,7 @@ echo "$(doppler secrets get GHCR_TOKEN --plain --config dev)" | docker login ghc
 export PRD_DOPPLER_TOKEN=$(doppler secrets get PRD_DOPPLER_TOKEN --plain --config dev)
 docker buildx build \
   --platform linux/amd64 \
-  --secret id=doppler_token,env=PRD_DOPPLER_TOKEN \
+  --secret id=env,env=PRD_DOPPLER_TOKEN \
   --build-arg DOPPLER_PROJECT=rentail \
   --build-arg DOPPLER_CONFIG=prd \
   -t "$IMAGE" \
