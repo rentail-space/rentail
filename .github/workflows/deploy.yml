@@ -126,8 +126,8 @@ jobs:
         uses: assaf/coolify-deploy@v1.0.0
         with:
           image: ghcr.io/rentail-space/rentail:latest
-          app-uuid: c12diz0deab7ctmllamdugyg
-          coolify-api-url: https://coolify.labnotes.org
+          app-name: c12diz0deab7ctmllamdugyg
+          coolify-url: https://coolify.labnotes.org
           coolify-token: ${{ secrets.COOLIFY_TOKEN }}
-          healthcheck-url: https://rentail.space/health
+          healthcheck-path: /health
           healthcheck-timeout: 120
