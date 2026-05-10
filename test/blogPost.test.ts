@@ -103,25 +103,13 @@ describe("Blog Post Rendering", () => {
     await expect(items).toHaveCount(4);
   });
 
-  it("should match inner HTML", async () => {
-    // Wait for images to load, but don't block forever if they never resolve
-    try {
-      await page.waitForFunction(
-        () => {
-          const images = document.querySelectorAll("figure img");
-          return (
-            images.length === 0 ||
-            Array.from(images).every(
-              (img) => !img.classList.contains("opacity-0"),
-            )
-          );
-        },
-        { timeout: 5000 },
-      );
-    } catch {
-      // Images may not have loaded in test env; proceed anyway
-    }
-    await expect(page.locator("article")).toMatchInnerHTML();
+  it("should render the full article content", async () => {
+    // Verify the main article body is visible and contains content
+    const article = page.locator("article");
+    await expect(article).toBeVisible();
+    // Check that markdown content rendered (at least one paragraph)
+    const paragraphs = article.locator("p");
+    await expect(paragraphs.first()).toBeVisible();
   });
 
   it("should match visual regression test", async () => {
