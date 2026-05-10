@@ -126,7 +126,7 @@ jobs:
         uses: assaf/coolify-deploy@v1.0.0
         with:
           image: ghcr.io/rentail-space/rentail:latest
-          app-name: c12diz0deab7ctmllamdugyg
+          app-name: rentail.space
           coolify-url: https://coolify.labnotes.org
           coolify-token: ${{ secrets.COOLIFY_TOKEN }}
           healthcheck-path: /health
