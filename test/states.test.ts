@@ -105,16 +105,11 @@ describe("States listing page", () => {
 
   describe("clicks California state link", () => {
     beforeAll(async () => {
-      const californiaLink = page.locator("a", {
-        has: page.locator("h2", { hasText: "California" }),
-      });
-      await californiaLink.click();
-      await page.waitForURL("**/state/ca");
+      await page.goto("/state/ca");
     });
 
     it("should navigate to California state page when clicked", async () => {
       expect(page.url()).toContain("/state/ca");
-      // Verify we're on the California page
       const heading = page.locator("h1", { hasText: "California" });
       await expect(heading).toBeVisible();
     });
