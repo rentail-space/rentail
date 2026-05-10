@@ -93,6 +93,14 @@ jobs:
           name: playwright-test-results
           path: __screenshots__
 
+      - name: Login to GitHub Container Registry
+        if: github.ref == 'refs/heads/main'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy to Coolify
         if: github.ref == 'refs/heads/main'
         uses: assaf/coolify-deploy@v1.0.0
