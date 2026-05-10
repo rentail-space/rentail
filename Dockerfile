@@ -27,11 +27,10 @@ COPY . .
 
 # Doppler injects ALL secrets (SENTRY_*, DATABASE_URL, etc.) during build
 # DOPPLER_TOKEN is passed via --build-arg by Coolify
-ARG DOPPLER_PROJECT
 ARG DOPPLER_CONFIG=prd
 
 RUN --mount=type=secret,id=env \
-    export DOPPLER_TOKEN=$(cat /run/secrets/env) && \
+    set -a && . /run/secrets/env && set +a && \
     doppler run --config "$DOPPLER_CONFIG" -- pnpm run build
 
 # --- RUNNER ---
