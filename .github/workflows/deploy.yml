@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+env:
+  INFISICAL_WORKSPACE: "066b245d-5428-40f4-b0d4-aee38c8f8cea"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -67,8 +70,11 @@ jobs:
         with:
           environment: "test"
           infisical_token: ${{ secrets.INFISICAL_TOKEN }}
-          output_file: ".env"
-          workspace_id: "066b245d-5428-40f4-b0d4-aee38c8f8cea"
+          workspace_id: ${{ env.INFISICAL_WORKSPACE }}
+
+      - name: Secrets 1
+        run: |
+          cat ".env"
 
       - name: Setup database schema for testing
         run: |
@@ -106,8 +112,7 @@ jobs:
         with:
           environment: "prod"
           infisical_token: ${{ secrets.INFISICAL_TOKEN }}
-          output_file: ".env"
-          workspace_id: "066b245d-5428-40f4-b0d4-aee38c8f8cea"
+          workspace_id: ${{ env.INFISICAL_WORKSPACE }}
 
       - name: Read env file for Docker build
         id: env-file
