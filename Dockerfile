@@ -18,10 +18,9 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-RUN --mount=type=secret,id=env,required=true \
-    cp /run/secrets/env .env && \
-    pnpm run build:prisma && \
-    pnpm run build
+RUN --mount=type=secret,id=env,target=/app/.env,required=true \
+  pnpm run build:prisma && \
+  pnpm run build
 
 # --- RUNNER ---
 FROM node:24-slim AS runner
