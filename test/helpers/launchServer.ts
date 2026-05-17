@@ -41,7 +41,7 @@ export async function launchServer(): Promise<number> {
   });
 
   worker = fork(resolve("test/helpers/serverWorker.ts"), {
-    execArgv: ["--import", "tsx/esm"],
+    execArgv: ["--experimental-strip-types"],
     stdio: debug.enabled("server") ? "inherit" : "pipe",
     env: {
       ...process.env,

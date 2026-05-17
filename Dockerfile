@@ -17,10 +17,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-ARG INFISICAL_ENV
-COPY .env .env
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-RUN pnpm run build
+RUN --mount=type=secret,id=env,target=/app/.env \
+    pnpm run build
 
 # --- RUNNER ---
 FROM node:24-slim AS runner
@@ -43,10 +42,10 @@ COPY --from=builder /app/node_modules/.pnpm/node_modules/@prisma/engines ./build
 COPY --from=builder /app/prisma/generated ./prisma/generated
 COPY --from=builder /app/prisma/prod-ca-2021.crt ./prisma/prod-ca-2021.crt
 COPY --from=builder /app/app/data ./app/data
-COPY --from=builder /app/.env .env
 COPY package.json pnpm-lock.yaml ./
 
-RUN chmod 644 .env
+RUN --mount=type=secret,id=env,target=/tmp/.env \
+    cp /tmp/.env .env && chmod 644 .env
 RUN pnpm install --prod --frozen-lockfile 2>/dev/null || true
 
 USER node

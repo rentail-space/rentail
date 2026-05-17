@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import env from "env-var";
 
-dotenv.config({ quiet: true, override: true });
+dotenv.config({ quiet: true });
 
 const envVars = {
   isProduction: process.env.NODE_ENV === "production",

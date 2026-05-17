@@ -7,15 +7,14 @@ ignoredBuiltDependencies:
 minimumReleaseAge: 2880
 
 minimumReleaseAgeExclude:
-  - react-email
-  - '@react-email/render'
+  - "coolify-ghcr-deploy"
 
 onlyBuiltDependencies:
-  - '@infisical/cli'
-  - '@prisma/client'
-  - '@prisma/engines'
-  - '@sentry/cli'
-  - '@tailwindcss/oxide'
+  - "@infisical/cli"
+  - "@prisma/client"
+  - "@prisma/engines"
+  - "@sentry/cli"
+  - "@tailwindcss/oxide"
   - core-js
   - esbuild
   - msw

@@ -4,6 +4,7 @@ google-rentail.json
 .opencode
 .devtools
 .infisical.json
+.env
 
 # React Router
 .react-router/
@@ -11,6 +12,7 @@ build/
 
 # Ignore test results
 .test-server.json
+test-results/
 __screenshots__/*.diff.png
 __screenshots__/*.new.png
 __screenshots__/*.new.html
