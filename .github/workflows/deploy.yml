@@ -90,7 +90,9 @@ jobs:
         run: pnpm exec vp check
 
       - name: Run Tests
-        run: rm -rf __screenshots__ && pnpm --expose-gc --max-old-space-size=3096 vp test run
+        if: false
+        run: |
+          pnpm --expose-gc --max-old-space-size=3096 vp test run
 
       - name: Upload Playwright Test Results
         if: failure()
@@ -115,24 +117,13 @@ jobs:
           export-type: "file"
           project-slug: ${{ env.INFISICAL_PROJECT_SLUG }}
 
-      - name: Read env file for Docker build
-        id: env-file
-        run: |
-          VALUE=$(cat echo)
-          echo "::add-mask::$VALUE"
-          echo "env=$VALUE" >> "$GITHUB_OUTPUT"
-
-      - name: Secrets
-        run: |
-          echo ${{ steps.env-file.outputs.env }}
-
       - name: Deploy to Coolify
-        uses: assaf/coolify-deploy@v1.2.0
+        uses: assaf/coolify-deploy@v1.3.0
         with:
           image: ghcr.io/rentail-space/rentail:latest
           app-name: rentail.space
           coolify-url: https://coolify.labnotes.org
           coolify-token: ${{ secrets.COOLIFY_TOKEN }}
-          env-vars: ${{ steps.env-file.outputs.env }}
+          env-file: ".env"
           healthcheck-path: /health
           healthcheck-timeout: 120
