@@ -117,8 +117,14 @@ jobs:
           client-secret: ${{ env.INFISICAL_CLIENT_SECRET }}
           env-slug: "prod"
           export-type: "file"
-          file-output-path: "/.env"
+          file-output-path: ".env"
           project-slug: ${{ env.INFISICAL_PROJECT_SLUG }}
+
+      - name: Spy
+        run: |
+          pwd
+          ls -a
+          cat .env
 
       - name: Deploy to Coolify
         uses: assaf/coolify-deploy@22529ccf5880cbe2b696d59915f888c1ee197287
