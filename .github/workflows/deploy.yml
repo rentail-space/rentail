@@ -115,14 +115,14 @@ jobs:
           client-secret: ${{ env.INFISICAL_CLIENT_SECRET }}
           env-slug: "prod"
           export-type: "file"
-          file-output-path: "~/.env"
+          file-output-path: ".env"
           project-slug: ${{ env.INFISICAL_PROJECT_SLUG }}
 
       - name: Log files
         run: ls .
 
       - name: Log .env
-        run: cat "~/.env"
+        run: cat ".env"
 
       - name: Deploy to Coolify
         uses: assaf/coolify-deploy@v1.3.0
