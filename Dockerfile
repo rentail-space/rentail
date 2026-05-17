@@ -20,7 +20,7 @@ COPY . .
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN --mount=type=secret,id=env,required=true \
     cp /run/secrets/env .env && \
-    node --env-file=.env node_modules/.bin/prisma generate && \
+    node --env-file=.env -e "require('child_process').execSync('pnpm run build:prisma',{stdio:'inherit'})" && \
     pnpm run build && rm .env
 
 # --- RUNNER ---
