@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "prisma generate && react-router build --force",
+    "build": "react-router build --force",
+    "build:prisma": "prisma generate",
     "check": "secretlint **/* --format stylish && vp check --fix && react-router typegen",
     "clean": "rm -rf node_modules/.vite .react-router build",
     "clone": "./scripts/clone",
