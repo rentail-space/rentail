@@ -118,21 +118,13 @@ jobs:
           file-output-path: "/.env"
           project-slug: ${{ env.INFISICAL_PROJECT_SLUG }}
 
-      - name: Log files
-        run: |
-          pwd
-          ls -a .
-
-      - name: Log .env
-        run: cat ".env"
-
       - name: Deploy to Coolify
         uses: assaf/coolify-deploy@v1.3.0
         with:
           app-name: rentail.space
           coolify-token: ${{ secrets.COOLIFY_TOKEN }}
           coolify-url: https://coolify.labnotes.org
-          env-file: "/.env"
+          env-file: ".env"
           healthcheck-path: /health
           healthcheck-timeout: 120
           image: ghcr.io/rentail-space/rentail:latest
