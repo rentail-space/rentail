@@ -1,5 +1,3 @@
-import type { User } from "prisma/generated";
-import { cleanParseWorkingMemory } from "./workingMemory";
 import { captureException } from "@sentry/react-router";
 import { ms } from "convert";
 import invariant from "tiny-invariant";
@@ -33,10 +31,16 @@ const logger = debug("geocode");
  *   fallback to LA midcity
  */
 export async function geocodeMemoryOrHeaders({
-  user,
+  location,
   headers,
 }: {
-  user?: User;
+  location?: {
+    city?: string;
+    state?: string;
+    country?: string;
+    longitude?: number;
+    latitude?: number;
+  };
   headers: Headers;
 }): Promise<{
   displayName: string;
@@ -44,19 +48,21 @@ export async function geocodeMemoryOrHeaders({
   latitude: number;
 }> {
   try {
-    invariant(user, "User is expected");
-    const { location } = cleanParseWorkingMemory(user.workingMemory);
-    const { longitude, latitude } = location ?? {};
-    const displayName = [location?.city, location?.state, location?.country]
-      .filter(Boolean)
-      .join(", ");
-    invariant(displayName, "DisplayName is expected");
-    invariant(longitude, "Longitude is expected");
-    invariant(latitude, "Latitude is expected");
-    return { displayName, longitude, latitude };
+    if (location?.longitude && location?.latitude) {
+      const displayName = [location.city, location.state, location.country]
+        .filter(Boolean)
+        .join(", ");
+      invariant(displayName, "DisplayName is expected");
+      return {
+        displayName,
+        longitude: location.longitude,
+        latitude: location.latitude,
+      };
+    }
+    throw new Error("No location in working memory");
   } catch {
-    const { location } = await geocodeFromHeaders(headers);
-    return location;
+    const { location: geocodedLocation } = await geocodeFromHeaders(headers);
+    return geocodedLocation;
   }
 }
 

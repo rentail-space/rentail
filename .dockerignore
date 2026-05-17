@@ -10,8 +10,6 @@ build
 .cursor
 __screenshots__
 *.log
-.env.local
-.ncurc.json
 deploy.log
 default.profraw
 profraw

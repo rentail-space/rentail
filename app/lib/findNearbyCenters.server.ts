@@ -2,6 +2,7 @@ import type { User } from "prisma/generated";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import prisma from "~/lib/prisma.server";
 import { geocodeFromUserInput, geocodeMemoryOrHeaders } from "./geocode";
+import { cleanParseWorkingMemory } from "./workingMemory";
 
 /**
  * Find the shopping centers within a given distance from the user. Gets the
@@ -34,9 +35,15 @@ export default async function findNearbyCenters({
   centers: PropertyGetPayload<{ include: { spaces: true; state: true } }>[];
   displayName: string;
 }> {
+  const workingMemoryLocation = user
+    ? cleanParseWorkingMemory(user.workingMemory).location
+    : undefined;
   const { displayName, longitude, latitude } =
     (location && (await geocodeFromUserInput(location))) ||
-    (await geocodeMemoryOrHeaders({ user, headers }));
+    (await geocodeMemoryOrHeaders({
+      location: workingMemoryLocation,
+      headers,
+    }));
 
   const centers = await prisma.property.findMany({
     include: {

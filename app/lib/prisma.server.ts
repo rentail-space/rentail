@@ -11,7 +11,12 @@ import invariant from "tiny-invariant";
 import dotenv from "dotenv";
 import debug from "debug";
 
-dotenv.configDotenv({ quiet: true });
+if (process.env.NODE_ENV === "test") {
+  dotenv.configDotenv({ path: ".env.test", override: true });
+  dotenv.configDotenv({ path: ".env", override: false });
+} else {
+  dotenv.configDotenv({ path: ".env", quiet: true });
+}
 invariant(process.env.DATABASE_URL, "DATABASE_URL is required");
 
 export default new PrismaClient({

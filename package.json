@@ -62,6 +62,7 @@
     "human-format": "^1.2.1",
     "ioredis": "^5.10.1",
     "isbot": "^5.1.39",
+    "linkedom": "^0.18.12",
     "looks-same": "^10.0.1",
     "lucide-react": "^1.14.0",
     "mapbox-gl": "^3.23.1",

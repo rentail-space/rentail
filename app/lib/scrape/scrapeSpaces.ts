@@ -1,5 +1,6 @@
 import { Output, generateText } from "ai";
 import { ms } from "convert";
+import { parseHTML } from "linkedom";
 import ora from "ora";
 import type { Browser } from "playwright";
 import { z } from "zod";
@@ -38,58 +39,106 @@ export default async function scrapeSpaces({
   browser: Browser;
   center: { name: string; website: string };
 }): Promise<z.infer<typeof spaceSchema>[]> {
-  const page = await browser.newPage();
   const spinner = ora(`Scraping spaces for ${center.name}...`).start();
 
+  // Try fetch + linkedom first (fast path)
+  let bodyText: string | undefined;
+  let images: { src: string; alt: string }[] = [];
+
   try {
-    // Navigate to main website
-    await page.goto(center.website, { timeout: ms("30s") });
-    await page.waitForLoadState("networkidle", { timeout: ms("10s") });
+    const response = await fetch(center.website, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; rentail.space/1.0)",
+        Accept: "text/html",
+      },
+      signal: AbortSignal.timeout(ms("10s")),
+      redirect: "follow",
+    });
+    if (response.ok) {
+      const contentType = response.headers.get("content-type") ?? "";
+      if (contentType.includes("text/html")) {
+        const html = await response.text();
+        const { document } = parseHTML(html);
+        for (const el of document.querySelectorAll("script, style, noscript"))
+          el.remove();
+        bodyText = (document.body ?? document.documentElement)?.textContent
+          ?.replace(/\s+/g, " ")
+          .trim();
 
-    // Try to find and click on leasing/spaces link
-    const leasingLinks = [
-      'a[href*="leasing"]',
-      'a[href*="spaces"]',
-      'a[href*="available"]',
-      'a:has-text("Leasing")',
-      'a:has-text("Available Spaces")',
-      'a:has-text("Retail Spaces")',
-    ];
-
-    for (const selector of leasingLinks) {
-      try {
-        const link = page.locator(selector).first();
-        if (await link.isVisible()) {
-          await link.click();
-          await page.waitForLoadState("networkidle", {
-            timeout: ms("10s"),
-          });
-          break;
-        }
-      } catch {
-        // Continue to next selector
-      }
-    }
-
-    // Extract page content
-    const bodyText = (await page.textContent("body")) || "";
-
-    // Extract images that might be related to spaces
-    const images = await page
-      .$$eval("img", (imgs) =>
-        imgs
+        images = Array.from(document.querySelectorAll("img"))
           .map((img) => ({
             src: (img as HTMLImageElement).src,
-            alt: img.getAttribute("alt") || "",
+            alt: img.getAttribute("alt") ?? "",
           }))
-          .filter((img) => img.src.startsWith("http")),
-      )
-      .catch(() => []);
+          .filter((img) => img.src.startsWith("http"));
+      }
+    }
+  } catch {
+    // Fall through to Playwright
+  }
 
-    // Use AI to extract space data
-    spinner.text = `Extracting space data for ${center.name}...`;
+  // If fetch didn't get enough content, use Playwright
+  if (!bodyText || bodyText.length < 200) {
+    const page = await browser.newPage();
+    try {
+      spinner.text = `Loading ${center.name} with browser...`;
+      await page.goto(center.website, { timeout: ms("30s") });
+      await page.waitForLoadState("networkidle", { timeout: ms("10s") });
 
-    const prompt = `Extract all available retail space listings from this shopping center website.
+      // Try to find and click on leasing/spaces link
+      const leasingLinks = [
+        'a[href*="leasing"]',
+        'a[href*="spaces"]',
+        'a[href*="available"]',
+        'a:has-text("Leasing")',
+        'a:has-text("Available Spaces")',
+        'a:has-text("Retail Spaces")',
+      ];
+      for (const selector of leasingLinks) {
+        try {
+          const link = page.locator(selector).first();
+          if (await link.isVisible()) {
+            await link.click();
+            await page.waitForLoadState("networkidle", {
+              timeout: ms("10s"),
+            });
+            break;
+          }
+        } catch {
+          // Continue to next selector
+        }
+      }
+
+      bodyText = (await page.textContent("body")) || "";
+      images = await page
+        .$$eval("img", (imgs) =>
+          imgs
+            .map((img) => ({
+              src: (img as HTMLImageElement).src,
+              alt: img.getAttribute("alt") || "",
+            }))
+            .filter((img) => img.src.startsWith("http")),
+        )
+        .catch(() => []);
+    } catch (error) {
+      spinner.fail(
+        `Failed to scrape spaces for ${center.name}: ${error instanceof Error ? error.message : String(error)}`,
+      );
+      return [];
+    } finally {
+      await page.close();
+    }
+  }
+
+  // Use AI to extract space data
+  if (!bodyText) {
+    spinner.fail(`No content found for ${center.name}`);
+    return [];
+  }
+
+  spinner.text = `Extracting space data for ${center.name}...`;
+
+  const prompt = `Extract all available retail space listings from this shopping center website.
 
 Website: ${center.website}
 
@@ -125,6 +174,7 @@ ${images.map((img) => `- ${img.alt}: ${img.src}`).join("\n")}
 
 If no spaces are found or the page doesn't contain leasing information, return an empty array.`;
 
+  try {
     const { output } = await generateText({
       abortSignal: AbortSignal.timeout(ms("60s")),
       prompt,
@@ -135,11 +185,9 @@ If no spaces are found or the page doesn't contain leasing information, return a
     return uniqueSpaces(output);
   } catch (error) {
     spinner.fail(
-      `Failed to scrape spaces for ${center.name}: ${error instanceof Error ? error.message : String(error)}`,
+      `Failed to extract spaces for ${center.name}: ${error instanceof Error ? error.message : String(error)}`,
     );
     return [];
-  } finally {
-    await page.close();
   }
 }
 

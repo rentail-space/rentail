@@ -49,4 +49,18 @@ const envVars = {
   HETZNER_TOKEN: env.get("HETZNER_TOKEN").required(false).asString(),
 };
 
+if (process.env.NODE_ENV === "test") {
+  const verifyLocalhost = (name: string, url: string) => {
+    if (new URL(url).hostname !== "localhost")
+      throw new Error(`${name} must point to localhost in test, got: ${url}`);
+  };
+  try {
+    verifyLocalhost("DATABASE_URL", envVars.DATABASE_URL);
+    if (envVars.REDIS_URL) verifyLocalhost("REDIS_URL", envVars.REDIS_URL);
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exit(1);
+  }
+}
+
 export default envVars;

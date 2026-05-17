@@ -1,4 +1,5 @@
 import { diffLines } from "diff";
+import { parseHTML } from "linkedom";
 
 /**
  * Represents a node in the HTML tree.
@@ -16,177 +17,35 @@ export type HTMLNode =
     };
 
 /**
- * Parses an HTML string into a tree of elements and text nodes.  The HTML is
- * assumed to be valid, well-formed HTML (i.e., as returned by innerHTML).
- *
- * @param html - The HTML to parse.
- * @returns The parsed HTML as a tree of elements and text nodes. The HTML is
- * sorted by attributes to make the diffs easier to read.
+ * Parses an HTML string into a tree of elements and text nodes using DOM-compliant parsing.
  */
 export function parseHTMLTree(html: string): HTMLNode[] {
-  // An improved, more memory-efficient HTML parser that avoids repeated RegExp.exec (which can leak memory
-  // on large input due to its lastIndex statefulness, especially in poorly structured document).
-  // This avoids recursion and big intermediate arrays as much as possible.
-
-  // Utility to parse attributes string into a Record
-  function parseAttributes(attrStr: string): Record<string, string> {
-    const attrs: Record<string, string> = {};
-    const attrRegex = /\s*([a-zA-Z0-9-:]+)(?:=(?:"([^"]*)"|'([^']*)'))?/g;
-    let match: RegExpExecArray | null;
-    for (;;) {
-      match = attrRegex.exec(attrStr);
-      if (match === null) break;
-      const [, name, doubleVal, singleVal] = match;
-      if (typeof doubleVal !== "undefined") {
-        attrs[name] = doubleVal;
-      } else if (typeof singleVal !== "undefined") {
-        attrs[name] = singleVal;
-      } else {
-        attrs[name] = "";
-      }
-    }
-    return attrs;
-  }
-
-  // Remove scripts and comments, so they're not parsed as nodes.
-  const raw = html
-    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gim, "")
-    .replace(/<!--[\s\S]*?-->/g, "");
-
-  const tagRegex =
-    /<(\/?)([a-zA-Z0-9-]+)((?:\s+[a-zA-Z0-9-:]+(?:=(?:"[^"]*"|'[^']*'))?)*)\s*(\/?)>/g;
-
-  const stack: HTMLNode[] = [];
-  const root: HTMLNode[] = [];
-  let lastIndex = 0;
-  let match: RegExpExecArray | null;
-
-  // Stream through the HTML string without the repeated exec in inner loop:
-  // Refactored per lint rule: do not assign in while condition
-  while (true) {
-    match = tagRegex.exec(raw);
-    if (match === null) break;
-    const [full, slash, tagName, attrStr, selfClosing] = match;
-    // Text node before this tag
-    if (match.index > lastIndex) {
-      const text = raw.slice(lastIndex, match.index);
-      const trimmed = text.replace(/\s+/g, " ").trim();
-      if (trimmed) {
-        const node: HTMLNode = { type: "text", content: trimmed };
-        if (stack.length > 0) {
-          const parent = stack[stack.length - 1];
-          if (
-            parent &&
-            parent.type === "element" &&
-            Array.isArray(parent.children)
-          ) {
-            parent.children.push(node);
-          }
-        } else {
-          root.push(node);
-        }
-      }
-    }
-
-    if (slash) {
-      // Closing tag: pop from stack
-      const popped = stack.pop();
-      // Defensive: If there is an unmatched closing tag, just skip
-      if (popped) {
-        if (stack.length > 0) {
-          const parent = stack[stack.length - 1];
-          if (
-            parent &&
-            parent.type === "element" &&
-            Array.isArray(parent.children)
-          ) {
-            parent.children.push(popped);
-          }
-        } else {
-          root.push(popped);
-        }
-      }
-    } else {
-      // Opening or self-closing tag
-      const node: HTMLNode = {
-        type: "element",
-        tag: tagName,
-        attributes: parseAttributes(attrStr),
-        children: [],
-      };
-      if (selfClosing || isSelfClosingTagString(full)) {
-        // Self-closing tag: push to children or root
-        if (stack.length > 0) {
-          const parent = stack[stack.length - 1];
-          if (
-            parent &&
-            parent.type === "element" &&
-            Array.isArray(parent.children)
-          ) {
-            parent.children.push(node);
-          }
-        } else {
-          root.push(node);
-        }
-      } else {
-        // Opening tag: push to stack
-        stack.push(node);
-      }
-    }
-    lastIndex = tagRegex.lastIndex;
-  }
-
-  // Text node after last tag
-  if (lastIndex < raw.length) {
-    const text = raw.slice(lastIndex);
-    const trimmed = text.replace(/\s+/g, " ").trim();
-    if (trimmed) {
-      const node: HTMLNode = { type: "text", content: trimmed };
-      if (stack.length > 0) {
-        const parent = stack[stack.length - 1];
-        if (
-          parent &&
-          parent.type === "element" &&
-          Array.isArray(parent.children)
-        ) {
-          parent.children.push(node);
-        }
-      } else {
-        root.push(node);
-      }
-    }
-  }
-
-  // Any not-properly-closed elements left: push them to root in order
-  while (stack.length > 0) {
-    const popped = stack.pop();
-    if (popped) {
-      if (stack.length > 0) {
-        // Fix: push to the correct parent's children array with type safety
-        const parent = stack[stack.length - 1];
-        if (
-          parent &&
-          parent.type === "element" &&
-          Array.isArray(parent.children)
-        ) {
-          parent.children.push(popped);
-        }
-      } else {
-        root.push(popped);
-      }
-    }
-  }
-
-  return root;
+  const { document } = parseHTML(html);
+  for (const el of document.querySelectorAll("script")) el.remove();
+  return domToTree(document.body ?? document.documentElement);
 }
 
-function isSelfClosingTagString(tag: string): boolean {
-  return (
-    tag.endsWith("/>") ||
-    /<(area|base|br|col|embed|hr|img|input|link|meta|source|track|wbr)[\s/>]/i.test(
-      tag,
-    )
-  );
+function domToTree(node: Element | Text): HTMLNode[] {
+  const result: HTMLNode[] = [];
+  for (const child of Array.from(node.childNodes)) {
+    if (child.nodeType === child.TEXT_NODE) {
+      const text = (child.textContent ?? "").replace(/\s+/g, " ").trim();
+      if (text) result.push({ type: "text", content: text });
+    } else if (child.nodeType === child.ELEMENT_NODE) {
+      const el = child as Element;
+      const attributes: Record<string, string> = {};
+      for (const attr of Array.from(el.attributes)) {
+        attributes[attr.name] = attr.value;
+      }
+      result.push({
+        type: "element",
+        tag: el.tagName.toLowerCase(),
+        attributes,
+        children: domToTree(el),
+      });
+    }
+  }
+  return result;
 }
 
 /**

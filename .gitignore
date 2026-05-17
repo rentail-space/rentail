@@ -6,8 +6,6 @@ google-rentail.json
 .infisical.json
 
 # React Router
-.env
-.env.*
 .react-router/
 build/
 
