@@ -9,6 +9,7 @@ env:
   INFISICAL_CLIENT_ID: "***REMOVED***"
   INFISICAL_CLIENT_SECRET: "***REMOVED***"
   INFISICAL_PROJECT_SLUG: "rentail-2h3s"
+  ACTIONS_STEP_DEBUG: true
 
 jobs:
   deploy:
@@ -120,7 +121,7 @@ jobs:
           project-slug: ${{ env.INFISICAL_PROJECT_SLUG }}
 
       - name: Deploy to Coolify
-        uses: assaf/coolify-deploy@v1.3.0
+        uses: assaf/coolify-deploy@22529ccf5880cbe2b696d59915f888c1ee197287
         with:
           app-name: rentail.space
           coolify-token: ${{ secrets.COOLIFY_TOKEN }}
