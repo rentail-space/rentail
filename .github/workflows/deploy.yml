@@ -120,6 +120,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Read env file for Docker build
+        id: env-file
+        run: echo "contents<<EOF" >> "$GITHUB_OUTPUT" && cat .env >> "$GITHUB_OUTPUT" && echo "EOF" >> "$GITHUB_OUTPUT"
+
       - name: Deploy to Coolify
         uses: assaf/coolify-deploy@v1.2.0
         with:
@@ -127,5 +131,6 @@ jobs:
           app-name: rentail.space
           coolify-url: https://coolify.labnotes.org
           coolify-token: ${{ secrets.COOLIFY_TOKEN }}
+          env-vars: ${{ steps.env-file.outputs.contents }}
           healthcheck-path: /health
           healthcheck-timeout: 120
