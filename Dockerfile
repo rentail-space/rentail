@@ -19,7 +19,7 @@ COPY . .
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN --mount=type=secret,id=env,required=true \
-    set -a && . /run/secrets/env && set +a && pnpm run build
+    cp /run/secrets/env .env && pnpm run build && rm .env
 
 # --- RUNNER ---
 FROM node:24-slim AS runner
