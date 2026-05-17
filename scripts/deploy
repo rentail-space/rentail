@@ -30,7 +30,7 @@ infisical --env prod run -- \
   --coolify-url "https://coolify.labnotes.org" \
   --app-name "rentail.space" \
   --image "$IMAGE" \
-  --env-file .env
+  --env-file ".env"
 rm -f .env
 docker context use default
 

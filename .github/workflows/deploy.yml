@@ -104,26 +104,27 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v4
         with:
+          password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get production secrets
-        uses: Infisical/secrets-action@v1.0.9
+        uses: Infisical/secrets-action@v1.0.16
         with:
           client-id: ${{ env.INFISICAL_CLIENT_ID }}
           client-secret: ${{ env.INFISICAL_CLIENT_SECRET }}
           env-slug: "prod"
           export-type: "file"
+          file-output-path: ".env"
           project-slug: ${{ env.INFISICAL_PROJECT_SLUG }}
 
       - name: Deploy to Coolify
         uses: assaf/coolify-deploy@v1.3.0
         with:
-          image: ghcr.io/rentail-space/rentail:latest
           app-name: rentail.space
-          coolify-url: https://coolify.labnotes.org
           coolify-token: ${{ secrets.COOLIFY_TOKEN }}
+          coolify-url: https://coolify.labnotes.org
           env-file: ".env"
           healthcheck-path: /health
           healthcheck-timeout: 120
+          image: ghcr.io/rentail-space/rentail:latest
