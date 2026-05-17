@@ -14,41 +14,21 @@ RUN pnpm install --frozen-lockfile
 FROM base AS builder
 WORKDIR /app
 
-# Install Doppler CLI for build-time secret injection
-RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates \
-    && rm -rf /var/lib/apt/lists/* \
-    && curl -fSslL https://cli.doppler.com/install.sh -o /tmp/install.sh \
-    && sh /tmp/install.sh --no-modify-path \
-    && rm /tmp/install.sh \
-    && doppler --version
-
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Doppler injects ALL secrets (SENTRY_*, DATABASE_URL, etc.) during build
-# DOPPLER_TOKEN is passed via --build-arg by Coolify
-ARG DOPPLER_CONFIG=prd
-
-RUN --mount=type=secret,id=env \
-    set -a && . /run/secrets/env && set +a && \
-    doppler run --config "$DOPPLER_CONFIG" -- pnpm run build
+ARG INFISICAL_ENV
+COPY .env .env
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+RUN pnpm run build
 
 # --- RUNNER ---
 FROM node:24-slim AS runner
 ENV NODE_ENV=production
 
-# Native deps for sharp/bcryptjs
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 make g++ curl \
+    python3 make g++ curl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
-
-# Install Doppler CLI for runtime secret injection
-RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates \
-    && rm -rf /var/lib/apt/lists/* \
-    && curl -fSslL https://cli.doppler.com/install.sh -o /tmp/install.sh \
-    && sh /tmp/install.sh --no-modify-path \
-    && rm /tmp/install.sh \
-    && doppler --version
 
 RUN corepack enable pnpm
 
@@ -63,11 +43,12 @@ COPY --from=builder /app/node_modules/.pnpm/node_modules/@prisma/engines ./build
 COPY --from=builder /app/prisma/generated ./prisma/generated
 COPY --from=builder /app/prisma/prod-ca-2021.crt ./prisma/prod-ca-2021.crt
 COPY --from=builder /app/app/data ./app/data
+COPY --from=builder /app/.env .env
 COPY package.json pnpm-lock.yaml ./
 
+RUN chmod 644 .env
 RUN pnpm install --prod --frozen-lockfile 2>/dev/null || true
 
 USER node
 
-# Doppler injects ALL secrets at runtime too
-CMD ["doppler", "run", "--config", "prd", "--", "pnpm", "start"]
+CMD ["pnpm", "start"]

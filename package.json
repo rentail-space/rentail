@@ -6,15 +6,17 @@
     "build": "prisma generate && react-router build --force",
     "check": "secretlint **/* --format stylish && vp check --fix && react-router typegen",
     "clean": "rm -rf node_modules/.vite .react-router build",
-    "clone": "./scripts/clone.sh",
-    "dev": "portless run react-router dev",
+    "clone": "./scripts/clone",
+    "dev": "infisical --env test run -- portless run -- react-router dev",
     "devmcp": "npx @modelcontextprotocol/inspector@latest http://localhost:5173/api/mcp",
     "devai": "npx @ai-sdk/devtools",
     "deploy": "./scripts/deploy",
     "format": "vp fmt --fix",
     "lint": "vp lint --fix",
     "start": "react-router-serve ./build/server/index.js",
-    "test": "pnpm run check && rm -rf __screenshots__ && pnpm --expose-gc --max-old-space-size=3096 vp test run",
+    "test": "pnpm run check && rm -rf __screenshots__ && infisical --env test run -- pnpm --expose-gc --max-old-space-size=3096 vp test run",
+    "test:db:push": "infisical --env test run -- pnpm prisma db push",
+    "prod:db:push": "infisical --env prod run -- pnpm prisma db push",
     "upgrade": "./scripts/upgrade.sh"
   },
   "dependencies": {
@@ -94,6 +96,7 @@
   },
   "devDependencies": {
     "@ai-sdk/provider": "^3.0.10",
+    "@infisical/cli": "^0.43.84",
     "@logtail/types": "^0.5.8",
     "@playwright/test": "^1.59.1",
     "@react-router/dev": "^7.14.2",

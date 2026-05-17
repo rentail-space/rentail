@@ -3,6 +3,7 @@ node_modules/
 google-rentail.json
 .opencode
 .devtools
+.infisical.json
 
 # React Router
 .env

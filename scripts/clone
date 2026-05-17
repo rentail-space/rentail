@@ -4,8 +4,8 @@ set -eo pipefail
 # Clone production database to local development database
 # Usage: ./scripts/clone.sh
 
-# Load environment variables from Doppler and export DATABASE_URL
-eval "$(doppler secrets download --format env --no-file)"
+# Load environment variables from Infisical and export DATABASE_URL
+eval "$(infisical export --env prod --format=dotenv --stdout)"
 
 # Dump the database to a file
 echo -e "\033[32m  Dumping database to backup.sql …\033[0m"

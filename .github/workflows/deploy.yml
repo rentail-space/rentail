@@ -1,17 +1,24 @@
 name: Deploy
 
 on:
-  - push
-  - workflow_dispatch
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+  DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+  REDIS_URL: "redis://localhost:6379"
+  NODE_ENV: "test"
+  CI: "true"
 
 jobs:
-  test:
-    name: Test
+  deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     permissions:
       contents: read
       packages: write
+    timeout-minutes: 25
 
     services:
       postgres:
@@ -22,8 +29,8 @@ jobs:
           POSTGRES_DB: postgres
         ports:
           - 5432:5432
-        # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s
+        options:
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s
           --health-retries 5
 
       redis:
@@ -36,29 +43,43 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
 
-      - name: Install pnpm
+      - name: Setup pnpm
         uses: pnpm/action-setup@v6
         with:
-          cache: true
+          cache: false
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
-          node-version-file: "package.json"
+          node-version: "24"
 
-      - name: Install NPM dependencies
-        run: pnpm install
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package.json') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
 
-      - name: Set PLAYWRIGHT_VERSION
-        run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version)" >> $GITHUB_ENV
+      - name: Install dependencies
+        run: pnpm store path | xargs rm -rf && pnpm install --frozen-lockfile
 
-      - name: Install Playwright (Chromium)
-        timeout-minutes: 5
-        run: pnpm exec playwright install chromium --with-deps
+      - name: Install Playwright and system dependencies
+        run: pnpm exec playwright install chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      - name: Get test secrets
+        uses: zerodays/action-infisical@v1
+        with:
+          environment: "test"
+          infisical_token: ${{ secrets.INFISICAL_TOKEN }}
+          output_file: ".env"
+          workspace_id: "066b245d-5428-40f4-b0d4-aee38c8f8cea"
 
       - name: Setup database schema for testing
         run: |
-          pnpm prisma generate 
+          pnpm prisma generate
           pnpm prisma db push
         env:
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
@@ -77,14 +98,7 @@ jobs:
       - name: Run Tests
         run: pnpm test
         env:
-          ANTHROPIC_API_KEY: "***REMOVED***"
-          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-          DEBUG: ""
-          DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-          OPENAI_API_KEY: "***REMOVED***"
-          REDIS_URL: "redis://localhost:6379"
-          RESEND_API_KEY: "re_"
-          SESSION_SECRET: "secret"
+          NODE_OPTIONS: --enable-source-maps
 
       - name: Upload Playwright Test Results
         if: failure()
@@ -93,17 +107,23 @@ jobs:
           name: playwright-test-results
           path: __screenshots__
 
+      - name: Get production secrets
+        uses: zerodays/action-infisical@v1
+        with:
+          environment: "prod"
+          infisical_token: ${{ secrets.INFISICAL_TOKEN }}
+          output_file: ".env"
+          workspace_id: "066b245d-5428-40f4-b0d4-aee38c8f8cea"
+
       - name: Login to GitHub Container Registry
-        if: github.ref == 'refs/heads/main'
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to Coolify
-        if: github.ref == 'refs/heads/main'
-        uses: assaf/coolify-deploy@v1.0.0
+        uses: assaf/coolify-deploy@v1.2.0
         with:
           image: ghcr.io/rentail-space/rentail:latest
           app-name: rentail.space
@@ -111,5 +131,3 @@ jobs:
           coolify-token: ${{ secrets.COOLIFY_TOKEN }}
           healthcheck-path: /health
           healthcheck-timeout: 120
-          env-vars: |
-            DOPPLER_TOKEN=${{ secrets.DOPPLER_TOKEN }}

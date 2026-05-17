@@ -3,7 +3,7 @@
 /**
  * Collect shopping centers:
  *
- *   doppler run -- tsx scripts/collect.ts "LA"
+ *   infisical --env prod run -- tsx scripts/collect.ts "LA"
  *
  * Collects all shopping centers in a metro area using comprehensive
  * grid-based search with Google Places API
@@ -16,7 +16,7 @@ const cityInput = process.argv[2];
 
 if (!cityInput) {
   console.error(
-    'Usage: NODE_ENV=production doppler run -- tsx scripts/collect.ts "City Name"\n',
+    'Usage: NODE_ENV=production infisical --env prod run -- tsx scripts/collect.ts "City Name"\n',
   );
   console.error("Examples:");
   console.error('  tsx scripts/collect.ts "LA"');

@@ -17,7 +17,7 @@ import sharp from "sharp";
 import zod from "zod";
 
 if (!envVars.GOOGLE_PLACES_API_KEY)
-  throw new Error("Use doppler run --config prd -- ");
+  throw new Error("Use infisical --env prod run -- ");
 
 const placeDetailsSchema = zod.object({
   address: zod.string().describe("The place's address"),

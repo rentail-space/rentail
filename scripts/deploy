@@ -8,19 +8,19 @@ APP_UUID="c12diz0deab7ctmllamdugyg"
 echo -e "\033[0;32m--- Step 1: Check (fmt, lint, secrets) ---\033[0m"
 pnpm check
 
-echo -e "\033[0;32m--- Step 2: Push DB schema ---\033[0m"
-pnpm prisma generate
-pnpm prisma db push
-
 if [ "$1" = "--skip-tests" ]; then
-  echo -e "\033[0;33m--- Step 3: Skipping tests because SKIP_TESTS is set ---\033[0m"
+  echo -e "\033[0;33m--- Step 2: Skipping tests ---\033[0m"
 else
+  echo -e "\033[0;32m--- Step 2: Generate Prisma client and push dev DB ---\033[0m"
+  pnpm prisma generate
+  pnpm prisma db push
+
   echo -e "\033[0;32m--- Step 3: Run tests ---\033[0m"
   NODE_OPTIONS="--max-old-space-size=3096" vp test run
-fi
 
-echo -e "\033[0;32m--- Step 3: Update database ---\033[0m"
-doppler --config prd run -- pnpm prisma db push
+  echo -e "\033[0;32m--- Step 4: Update production database ---\033[0m"
+  infisical --env prod run -- pnpm prisma db push
+fi
 
 COLIMA_WAS_RUNNING=true
 if ! colima status &>/dev/null; then
@@ -36,19 +36,17 @@ cleanup() {
 }
 trap cleanup EXIT
 
-echo -e "\033[0;32m--- Step 4: Building and pushing Docker image ---\033[0m"
-echo "$(doppler secrets get GHCR_TOKEN --plain --config dev)" | docker login ghcr.io -u assaf --password-stdin
-export PRD_DOPPLER_TOKEN=$(doppler secrets get PRD_DOPPLER_TOKEN --plain --config dev)
+echo -e "\033[0;32m--- Step 5: Building and pushing Docker image ---\033[0m"
+echo "$(infisical secrets get GHCR_TOKEN --env dev --plain)" | docker login ghcr.io -u assaf --password-stdin
+infisical export --env prod --format=dotenv > .env
 docker buildx build \
   --platform linux/amd64 \
-  --secret id=env,env=PRD_DOPPLER_TOKEN \
-  --build-arg DOPPLER_PROJECT=rentail \
-  --build-arg DOPPLER_CONFIG=prd \
   -t "$IMAGE" \
   --push \
   .
+rm -f .env
 
-echo -e "\033[0;32m--- Step 5: Deploying to Coolify ---\033[0m"
+echo -e "\033[0;32m--- Step 6: Deploying to Coolify ---\033[0m"
 npx coolify-deploy \
   --image "$IMAGE" \
   --app-uuid "$APP_UUID" \
