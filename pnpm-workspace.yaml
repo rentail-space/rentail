@@ -5,15 +5,17 @@ ignoredBuiltDependencies:
   - yarn
 
 minimumReleaseAge: 2880
+
 minimumReleaseAgeExclude:
-  - "react-email"
-  - "@react-email/render"
+  - react-email
+  - '@react-email/render'
 
 onlyBuiltDependencies:
-  - "@prisma/client"
-  - "@prisma/engines"
-  - "@sentry/cli"
-  - "@tailwindcss/oxide"
+  - '@infisical/cli'
+  - '@prisma/client'
+  - '@prisma/engines'
+  - '@sentry/cli'
+  - '@tailwindcss/oxide'
   - core-js
   - esbuild
   - msw
