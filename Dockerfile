@@ -20,8 +20,8 @@ COPY . .
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN --mount=type=secret,id=env,required=true \
     cp /run/secrets/env .env && \
-    node --env-file=.env -e "require('child_process').execSync('pnpm run build:prisma',{stdio:'inherit'})" && \
-    pnpm run build && rm .env
+    pnpm run build:prisma && \
+    pnpm run build
 
 # --- RUNNER ---
 FROM node:24-slim AS runner
@@ -48,7 +48,7 @@ COPY package.json pnpm-lock.yaml ./
 
 RUN --mount=type=secret,id=env,required=true \
     cp /run/secrets/env .env && chmod 644 .env
-RUN pnpm install --prod --frozen-lockfile 2>/dev/null || true
+RUN pnpm install --prod --frozen-lockfile 2>/dev/null
 
 USER node
 
