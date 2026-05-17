@@ -1,30 +1,23 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "entry": [
-    "app/components/layout/PageLayout.tsx",
     "app/components/ui/*.tsx",
     "app/emails/sendEmails.server.tsx",
     "app/global.css",
-    "test/helpers/serverWorker.ts",
-    "test/helpers/toMatchScreenshot.ts",
-    "scripts/*.ts"
+    "scripts/*.ts",
+    "test/helpers/serverWorker.ts"
   ],
-  "project": [
-    "app/**/*.ts",
-    "app/**/*.tsx",
-    "test/**/*.ts",
-    "!__screenshots__"
+  "project": ["app/**/*.{ts,tsx}", "test/**/*.{ts,tsx}", "!__screenshots__"],
+  "ignoreDependencies": [
+    "@secretlint/secretlint-rule-preset-recommend",
+    "portless"
   ],
-  "ignoreDependencies": ["@secretlint/secretlint-rule-preset-recommend"],
-  "ignore": [
-    "app/lib/scrape/scrapeLosCerritos.ts",
-    "app/lib/scrape/scrapeSantaMonica.ts",
-    "app/lib/scrape/scrapeStonewood.ts"
-  ],
+  "ignore": ["app/lib/scrape/*.ts"],
   "ignoreIssues": {
     "app/lib/api/schemas.ts": ["exports"],
     "app/lib/html/parseHTML.ts": ["exports"],
     "app/lib/relativeTime.ts": ["exports"],
     "app/lib/formatDate.ts": ["exports"]
-  }
+  },
+  "ignoreBinaries": ["infisical"]
 }

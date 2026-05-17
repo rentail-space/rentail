@@ -41,15 +41,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          cache: false
-
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: "24"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          cache: false
+          run_install: true
 
       - name: Cache Playwright browsers
         id: playwright-cache
