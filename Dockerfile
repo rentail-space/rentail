@@ -18,8 +18,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-RUN --mount=type=secret,id=env,target=/app/.env \
-    set -a && . /app/.env && set +a && pnpm run build
+RUN --mount=type=secret,id=env,required=true \
+    set -a && . /run/secrets/env && set +a && pnpm run build
 
 # --- RUNNER ---
 FROM node:24-slim AS runner
@@ -44,8 +44,8 @@ COPY --from=builder /app/prisma/prod-ca-2021.crt ./prisma/prod-ca-2021.crt
 COPY --from=builder /app/app/data ./app/data
 COPY package.json pnpm-lock.yaml ./
 
-RUN --mount=type=secret,id=env,target=/tmp/.env \
-    cp /tmp/.env .env && chmod 644 .env
+RUN --mount=type=secret,id=env,required=true \
+    cp /run/secrets/env .env && chmod 644 .env
 RUN pnpm install --prod --frozen-lockfile 2>/dev/null || true
 
 USER node
