@@ -5,13 +5,6 @@ on:
     branches: [main]
   workflow_dispatch:
 
-env:
-  DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-  DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-  REDIS_URL: "redis://localhost:6379"
-  NODE_ENV: "test"
-  CI: "true"
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -81,10 +74,6 @@ jobs:
         run: |
           pnpm prisma generate
           pnpm prisma db push
-        env:
-          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-          DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
-          NODE_ENV: "test"
 
       - name: Check secrets
         run: pnpm secretlint "**/*" --format stylish
@@ -105,6 +94,13 @@ jobs:
           name: playwright-test-results
           path: __screenshots__
 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Get production secrets
         uses: zerodays/action-infisical@v1
         with:
@@ -113,16 +109,16 @@ jobs:
           output_file: ".env"
           workspace_id: "066b245d-5428-40f4-b0d4-aee38c8f8cea"
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v4
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Read env file for Docker build
         id: env-file
-        run: echo "contents<<EOF" >> "$GITHUB_OUTPUT" && cat .env >> "$GITHUB_OUTPUT" && echo "EOF" >> "$GITHUB_OUTPUT"
+        run: |
+          VALUE=$(cat echo)
+          echo "::add-mask::$VALUE"
+          echo "env=$VALUE" >> "$GITHUB_OUTPUT"
+
+      - name: Secrets
+        run: |
+          echo ${{ steps.env-file.outputs.env }}
 
       - name: Deploy to Coolify
         uses: assaf/coolify-deploy@v1.2.0
@@ -131,6 +127,6 @@ jobs:
           app-name: rentail.space
           coolify-url: https://coolify.labnotes.org
           coolify-token: ${{ secrets.COOLIFY_TOKEN }}
-          env-vars: ${{ steps.env-file.outputs.contents }}
+          env-vars: ${{ steps.env-file.outputs.env }}
           healthcheck-path: /health
           healthcheck-timeout: 120
