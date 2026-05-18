@@ -47,7 +47,7 @@ COPY package.json pnpm-lock.yaml ./
 
 RUN --mount=type=secret,id=env,required=true \
     cp /run/secrets/env .env && chmod 644 .env
-RUN pnpm install --prod --frozen-lockfile
+RUN pnpm install --prod --frozen-lockfile --ignore-scripts
 
 USER node
 
