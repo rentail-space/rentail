@@ -92,7 +92,6 @@ jobs:
         run: pnpm exec vp check
 
       - name: Run Tests
-        if: false
         run: |
           pnpm --expose-gc --max-old-space-size=3096 vp test run
 
