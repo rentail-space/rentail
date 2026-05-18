@@ -120,7 +120,10 @@ jobs:
           file-output-path: ".env"
           project-slug: ${{ env.INFISICAL_PROJECT_SLUG }}
 
+      - uses: mxschmitt/action-tmate@v3
+
       - name: Spy
+        # /home/runner/work/rentail/rentail
         run: |
           pwd
           ls -a
