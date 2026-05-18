@@ -18,7 +18,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 RUN --mount=type=secret,id=env,required=true \
-  export $(cat /run/secrets/env | xargs) && \
+  set -a; . /run/secrets/env; set +a && \
   pnpm run build:prisma && \
   pnpm run build
 
