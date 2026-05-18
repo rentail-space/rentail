@@ -117,7 +117,7 @@ jobs:
           client-secret: ${{ env.INFISICAL_CLIENT_SECRET }}
           env-slug: "prod"
           export-type: "file"
-          file-output-path: ".env"
+          file-output-path: "/rentail/.env"
           project-slug: ${{ env.INFISICAL_PROJECT_SLUG }}
 
       - uses: mxschmitt/action-tmate@v3
@@ -126,8 +126,8 @@ jobs:
         # /home/runner/work/rentail/rentail
         run: |
           pwd
-          ls -a
-          cat .env
+          cat .env || echo "missing"
+          cat ../.env  || echo "missing"
 
       - name: Deploy to Coolify
         uses: assaf/coolify-deploy@22529ccf5880cbe2b696d59915f888c1ee197287
