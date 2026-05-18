@@ -117,7 +117,7 @@ jobs:
           client-secret: ${{ env.INFISICAL_CLIENT_SECRET }}
           env-slug: "prod"
           export-type: "file"
-          file-output-path: "/rentail/.env"
+          file-output-path: "./.env"
           project-slug: ${{ env.INFISICAL_PROJECT_SLUG }}
 
       - uses: mxschmitt/action-tmate@v3
