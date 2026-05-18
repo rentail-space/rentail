@@ -122,20 +122,13 @@ jobs:
 
       - uses: mxschmitt/action-tmate@v3
 
-      - name: Spy
-        # /home/runner/work/rentail/rentail
-        run: |
-          pwd
-          cat .env || echo "missing"
-          cat ../.env  || echo "missing"
-
       - name: Deploy to Coolify
         uses: assaf/coolify-deploy@22529ccf5880cbe2b696d59915f888c1ee197287
         with:
           app-name: rentail.space
           coolify-token: ${{ secrets.COOLIFY_TOKEN }}
           coolify-url: https://coolify.labnotes.org
-          env-file: ".env"
+          env-file: "/.env"
           healthcheck-path: /health
           healthcheck-timeout: 120
           image: ghcr.io/rentail-space/rentail:latest

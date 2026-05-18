@@ -17,10 +17,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-ENV NODE_OPTIONS="--max-old-space-size=4096"
-RUN --mount=type=secret,id=env,required=false \
-  pwd && ls -a . && cat .env
-
 RUN --mount=type=secret,id=env,required=true \
   pnpm run build:prisma && \
   pnpm run build
