@@ -124,7 +124,7 @@ jobs:
         if: false
 
       - name: Deploy to Coolify
-        uses: assaf/coolify-deploy@90a1aa3eea071ebfe250c6235bcf088f8b119ae2
+        uses: assaf/coolify-deploy@caef0592e6147f54f8ecd5bdfd852840ed206b57
         with:
           app-name: rentail.space
           coolify-token: ${{ secrets.COOLIFY_TOKEN }}
