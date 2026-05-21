@@ -90,7 +90,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          pnpm --expose-gc --max-old-space-size=3096 vp test run
+          pnpm vp test run
 
       - name: Upload Playwright Test Results
         if: failure()
