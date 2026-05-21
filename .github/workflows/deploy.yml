@@ -6,10 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  INFISICAL_CLIENT_ID: "***REMOVED***"
-  INFISICAL_CLIENT_SECRET: "***REMOVED***"
-  INFISICAL_PROJECT_SLUG: "rentail-2h3s"
-  ACTIONS_STEP_DEBUG: true
+  ACTIONS_STEP_DEBUG: false
 
 jobs:
   deploy:
