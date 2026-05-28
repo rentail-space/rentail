@@ -1,4 +1,3 @@
-import { captureException } from "@sentry/react-router";
 import { AlertCircle } from "lucide-react";
 import { redirect, useFetcher } from "react-router";
 import { CircularLoading } from "respinner";
@@ -58,7 +57,6 @@ export async function action({ request }: Route.ActionArgs): Promise<Response> {
       return redirect("/chat", { headers: responseHeaders });
     }
   } catch (error) {
-    captureException(error, { extra: { form } });
     const errorMessage =
       error instanceof Error ? error.message : "Something went wrong";
     console.error("Error in auth: %s", errorMessage);

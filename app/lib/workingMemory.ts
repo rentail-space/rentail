@@ -1,6 +1,5 @@
 import type { UIMessage } from "ai";
 import { geocodeFromUserInput } from "./geocode";
-import { captureException } from "@sentry/react-router";
 import { last } from "radashi";
 import zod, { type ZodType } from "zod";
 import invariant from "tiny-invariant";
@@ -216,7 +215,6 @@ export function cleanParseWorkingMemory(
       JSON.parse((workingMemory as string) || "{}"),
     );
   } catch (error) {
-    captureException(error, { extra: { workingMemory } });
     console.error("Error parsing working memory: %s", error);
     return {};
   }
@@ -286,7 +284,6 @@ export default async function updateWorkingMemory({
 
     return JSON.stringify(merged);
   } catch (error) {
-    captureException(error, { extra: { workingMemory } });
     console.error("Error updating working memory: %s", error);
     return workingMemory;
   }

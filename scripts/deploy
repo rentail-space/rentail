@@ -2,8 +2,6 @@
 
 set -eo pipefail
 
-IMAGE="ghcr.io/rentail-space/rentail:latest"
-
 echo -e "\033[0;32m--- Step 1: Check (fmt, lint, secrets) ---\033[0m"
 pnpm check
 
@@ -23,16 +21,14 @@ infisical --env prod run -- pnpm prisma db push
 
 echo -e "\033[0;32m--- Step 5: Build, push, and deploy ---\033[0m"
 infisical export --env prod --format=dotenv > .env
-docker context use colima
 echo "$(infisical secrets get GHCR_TOKEN --env dev --plain)" | docker login ghcr.io -u assaf --password-stdin
-infisical --env prod run -- \
-  coolify-ghcr-deploy \
-  --coolify-url "https://coolify.labnotes.org" \
+infisical --env prod run -- coolify-ghcr-deploy \
   --app-name "rentail.space" \
-  --image "$IMAGE" \
-  --env-file ".env"
+  --coolify-url "https://coolify.labnotes.org" \
+  --env-file ".env" \
+  --healthcheck-timeout 60 \
+  --image "ghcr.io/rentail-space/rentail:latest"
 rm -f .env
-docker context use default
 
 echo -e "\033[0;34m--- Deployed to https://rentail.space ---\033[0m"
 open https://rentail.space

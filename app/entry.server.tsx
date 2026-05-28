@@ -1,4 +1,3 @@
-import * as Sentry from "@sentry/react-router";
 import { PassThrough } from "node:stream";
 import { renderToPipeableStream } from "react-dom/server";
 import type {
@@ -34,24 +33,7 @@ import {
 } from "~/lib/markdown.server";
 import { trackBotVisit } from "~/lib/middleware/botTracking.server";
 
-// Only enable Sentry in production
-if (envVars.isProduction) {
-  Sentry.init({
-    dsn: "https://gkbTW4mifBshCeYcJiZDRH3s@s1693597.eu-nbg-2.betterstackdata.com/1693597",
-    enableLogs: true,
-    environment: "production",
-    integrations: [
-      Sentry.consoleLoggingIntegration({ levels: ["log", "warn", "error"] }),
-      Sentry.anthropicAIIntegration({
-        recordInputs: true,
-        recordOutputs: true,
-      }),
-    ],
-    tracesSampleRate: 1.0,
-  });
-}
-
-// Initialize MSW in test mode (on the server side)
+// NOTE: MSW is initialized in test mode on the server side
 if (envVars.isTest) (await import("~/test/mocks/mswHandlers")).default();
 
 const MARKDOWN_ROUTES: Record<
@@ -155,8 +137,7 @@ export function getLoadContext() {
   return {};
 }
 
-export default Sentry.wrapSentryHandleRequest(
-  async (
+export default async (
     request: Request,
     responseStatusCode: number,
     responseHeaders: Headers,
@@ -271,7 +252,6 @@ export function handleError(
   { request }: LoaderFunctionArgs | ActionFunctionArgs,
 ) {
   if (!request.signal.aborted) {
-    Sentry.captureException(error, { extra: { request } });
     console.error(error);
   }
 }

@@ -1,4 +1,3 @@
-import { captureException } from "@sentry/react-router";
 import { ms } from "convert";
 import invariant from "tiny-invariant";
 import debug from "debug";
@@ -242,7 +241,7 @@ export async function geocodeFromUserInput(location: string): Promise<{
       longitude: Number.parseFloat(results[0].lon),
     };
   } catch (error) {
-    captureException(error, { extra: { location } });
+    console.error("Error geocoding location '%s': %s", location, error);
     logger("Error geocoding location %s: %s", location, error);
     return null;
   }

@@ -1,4 +1,3 @@
-import { captureException } from "@sentry/react-router";
 import bcrypt from "bcryptjs";
 import type { User } from "prisma/generated";
 import { useState } from "react";
@@ -77,7 +76,6 @@ async function updateName({
     });
     return { success: "Name updated successfully" };
   } catch (error) {
-    captureException(error);
     console.error("Error updating name for user %s: %s", user.id, error);
     return { error: "I cannot update your name" };
   }
@@ -110,7 +108,6 @@ async function updateEmail({
     });
     return { success: "Verification email sent" };
   } catch (error) {
-    captureException(error);
     console.error(
       "Error sending verification email to user %s: %s",
       user.id,
@@ -150,7 +147,6 @@ async function updatePassword({
     });
     return { success: "Password changed successfully" };
   } catch (error) {
-    captureException(error);
     console.error("Error changing password for user %s: %s", user.id, error);
     return { error: "Your current password is incorrect, please try again" };
   }

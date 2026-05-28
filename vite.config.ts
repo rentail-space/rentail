@@ -1,25 +1,8 @@
-import { defineConfig, lazyPlugins } from "vite-plus";
-import { sentryReactRouter } from "@sentry/react-router";
+import { defineConfig } from "vite-plus";
 import { reactRouter } from "@react-router/dev/vite";
 import { resolve } from "node:path";
 import devtoolsJson from "vite-plugin-devtools-json";
 import tailwindcss from "@tailwindcss/vite";
-
-const sentryReleaseName = process.env.SENTRY_RELEASE ?? process.env.GITHUB_SHA;
-
-const sentryConfig = {
-  authToken: process.env.SENTRY_AUTH_TOKEN,
-  org: process.env.SENTRY_ORG,
-  project: process.env.SENTRY_PROJECT,
-  release: { name: sentryReleaseName },
-  sourcemaps: { disable: !process.env.SENTRY_AUTH_TOKEN || !sentryReleaseName },
-  telemetry: false,
-};
-
-const sentryViteConfig = {
-  command: process.env.NODE_ENV === "development" ? "serve" : "build",
-  mode: process.env.NODE_ENV === "development" ? "development" : "production",
-} as const;
 
 export default defineConfig({
   staged: {
@@ -107,7 +90,6 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     reactRouter(),
-    lazyPlugins(() => sentryReactRouter(sentryConfig, sentryViteConfig)),
     devtoolsJson(),
   ],
   resolve: {

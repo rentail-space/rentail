@@ -1,4 +1,3 @@
-import { captureException } from "@sentry/react-router";
 import debug from "debug";
 import Redis from "ioredis";
 import envVars from "~/lib/env";
@@ -35,7 +34,6 @@ export async function monitorStopSignal(chatId: string): Promise<{
     if ((await redis.get(key)) === "stop") abort.abort();
     await redis.quit();
   } catch (error) {
-    captureException(error, { extra: { chatId } });
     console.error("Error getting stop signal from Redis: %s", error);
   }
 
@@ -50,7 +48,6 @@ export async function monitorStopSignal(chatId: string): Promise<{
       await redis.del(key);
       redis.disconnect();
     } catch (error) {
-      captureException(error, { extra: { chatId } });
       console.error("Error cleaning up stop signal from Redis: %s", error);
     }
   }
@@ -73,7 +70,6 @@ export async function stopChat(chatId: string) {
     // Also publish to a channel for immediate notification
     await redis.publish(key, "stop");
   } catch (error) {
-    captureException(error, { extra: { chatId } });
     console.error("Error sending stop signal to Redis: %s", error);
   } finally {
     await redis.quit();

@@ -1,4 +1,3 @@
-import { captureException } from "@sentry/react-router";
 import { UI_MESSAGE_STREAM_HEADERS } from "ai";
 import { Redis } from "ioredis";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
@@ -50,12 +49,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       headers,
     });
   } catch (error) {
-    captureException(error, {
-      extra: {
-        activeStreamId: found.chat.activeStreamId,
-        chatId: found.chat.id,
-      },
-    });
+    console.error("Error resuming stream for chat %s: %s", found.chat.id, error);
     // Return 204 instead of 500 so client treats it as stream complete
     return new Response(null, { headers: found.responseHeaders, status: 204 });
   }

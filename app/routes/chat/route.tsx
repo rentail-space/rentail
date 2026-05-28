@@ -1,5 +1,4 @@
 import { useChat } from "@ai-sdk/react";
-import { captureException } from "@sentry/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { DefaultChatTransport } from "ai";
 import { useCallback, useState } from "react";
@@ -63,7 +62,6 @@ export default function ChatPage() {
       api: `/api/chat/${chatId}/message`,
     }),
     onError: (error) => {
-      captureException(error, { extra: { chatId } });
       console.error(`Chat error: ${error}`);
     },
     onFinish: ({ isAbort }) => {

@@ -4,7 +4,6 @@ import { type UIMessage, convertToModelMessages, streamText } from "ai";
 import { findOrCreateUser, recentMessages } from "~/lib/sessions.server";
 import { createResumableStreamContext } from "resumable-stream/ioredis";
 import { monitorStopSignal } from "~/lib/redis-stop-monitor";
-import { captureException } from "@sentry/react-router";
 import { conversational } from "~/lib/models";
 import { Redis } from "ioredis";
 import { last } from "radashi";
@@ -90,7 +89,6 @@ export async function action({ request, params }: Route.ActionArgs) {
     },
 
     onError: (error) => {
-      captureException(error, { extra: { chat } });
       console.error("Error in agent stream: %s", error);
     },
 
@@ -132,7 +130,6 @@ export async function action({ request, params }: Route.ActionArgs) {
     },
 
     onError: (error) => {
-      captureException(error, { extra: { chat } });
       console.error("Error in agent stream: %s", error);
       return "Error in agent stream";
     },

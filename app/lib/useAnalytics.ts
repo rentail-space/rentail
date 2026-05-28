@@ -1,4 +1,3 @@
-import { captureException } from "@sentry/react-router";
 import { useEffect } from "react";
 import GA4 from "react-ga4";
 
@@ -17,7 +16,7 @@ export function useGoogleAnalytics() {
         error instanceof Error &&
         !error.message.includes("Content blocker")
       ) {
-        captureException(error);
+        console.error("Google Analytics initialization error: %s", error);
       }
     }
   }, []);
@@ -53,6 +52,6 @@ export function trackEvent(
     });
   } catch (error) {
     // Silently fail if blocked by content blocker
-    captureException(error, { extra: { action, params } });
+    console.error("GA4 event error: %s", error);
   }
 }

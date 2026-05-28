@@ -1,6 +1,3 @@
-// app/lib/llm-visibility/runPlatform.ts
-
-import { captureException } from "@sentry/react-router";
 import { sleep } from "radashi";
 import { ms } from "convert";
 import queries from "./queries";
@@ -88,6 +85,6 @@ export default async function runPlatform({
     }
   } catch (error) {
     console.error("[%s] Error: %s", platform, error);
-    captureException(error, { extra: { platform } });
+    console.error("Error running platform '%s': %s", platform, error);
   }
 }

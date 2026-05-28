@@ -1,4 +1,3 @@
-import { captureException } from "@sentry/react-router";
 import { ms } from "convert";
 import debug from "debug";
 import { withTimeout } from "es-toolkit";
@@ -20,7 +19,7 @@ const resend = new Resend(envVars.RESEND_API_KEY);
 const logger = debug("email");
 
 /**
- * Send an email using Resend. If an error occurs, it will be captured by Sentry.
+ * Send an email using Resend.
  * The email will be stored in `lastEmailSent` for visual regression testing.
  *
  * @param email - The email address to send the email to.
@@ -54,7 +53,6 @@ export async function sendEmail({
 
     logger("%s sent to %s", subject, email);
   } catch (error) {
-    captureException(error, { extra: { email } });
     console.error("Error sending %s email to %s: %s", subject, email, error);
   }
 }
