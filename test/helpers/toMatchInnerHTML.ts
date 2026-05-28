@@ -16,7 +16,7 @@ import {
   access,
   mkdir,
 } from "node:fs/promises";
-import vitestConfig from "../../vitest.config";
+import viteConfig from "../../vite.config";
 import invariant from "tiny-invariant";
 import path from "node:path";
 
@@ -41,7 +41,7 @@ declare global {
 }
 
 const dirname = path.resolve(
-  vitestConfig.test?.browser?.screenshotDirectory ?? "",
+  viteConfig.test?.browser?.screenshotDirectory ?? "",
 );
 
 expect.extend({
@@ -61,7 +61,7 @@ expect.extend({
     const formattedHtml = formatHTMLTree(html);
 
     try {
-      if (vitestConfig.test?.update) throw new Error("Update is enabled");
+      if (viteConfig.test?.update) throw new Error("Update is enabled");
       await access(filename, constants.R_OK);
     } catch {
       await mkdir(dirname, { recursive: true });

@@ -1,0 +1,500 @@
+diff --git a/build/esm/api/context.js b/build/esm/api/context.js
+index 7dfcd82eebddbe6a58816790ea91290d31fe628c..89a8eb94053e76cdb0de564a3f32513a0cedc8c6 100644
+--- a/build/esm/api/context.js
++++ b/build/esm/api/context.js
+@@ -2,9 +2,9 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { NoopContextManager } from '../context/NoopContextManager';
+-import { getGlobal, registerGlobal, unregisterGlobal, } from '../internal/global-utils';
+-import { DiagAPI } from './diag';
++import { NoopContextManager } from '../context/NoopContextManager.js';
++import { getGlobal, registerGlobal, unregisterGlobal, } from '../internal/global-utils.js';
++import { DiagAPI } from './diag.js';
+ const API_NAME = 'context';
+ const NOOP_CONTEXT_MANAGER = new NoopContextManager();
+ /**
+diff --git a/build/esm/api/diag.js b/build/esm/api/diag.js
+index a995e1ed943c0745cd7fb447f1415af8fe92ec30..152d1771f54f05108443dbfff3f761585d9b8bf8 100644
+--- a/build/esm/api/diag.js
++++ b/build/esm/api/diag.js
+@@ -2,10 +2,10 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { DiagComponentLogger } from '../diag/ComponentLogger';
+-import { createLogLevelDiagLogger } from '../diag/internal/logLevelLogger';
+-import { DiagLogLevel } from '../diag/types';
+-import { getGlobal, registerGlobal, unregisterGlobal, } from '../internal/global-utils';
++import { DiagComponentLogger } from '../diag/ComponentLogger.js';
++import { createLogLevelDiagLogger } from '../diag/internal/logLevelLogger.js';
++import { DiagLogLevel } from '../diag/types.js';
++import { getGlobal, registerGlobal, unregisterGlobal, } from '../internal/global-utils.js';
+ const API_NAME = 'diag';
+ /**
+  * Singleton object which represents the entry point to the OpenTelemetry internal
+diff --git a/build/esm/api/metrics.js b/build/esm/api/metrics.js
+index 20c82f33439c9638f1fbff857b20575e72f21144..e56d8a1d273a278a86452475ae5f744cefa95518 100644
+--- a/build/esm/api/metrics.js
++++ b/build/esm/api/metrics.js
+@@ -2,9 +2,9 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { NOOP_METER_PROVIDER } from '../metrics/NoopMeterProvider';
+-import { getGlobal, registerGlobal, unregisterGlobal, } from '../internal/global-utils';
+-import { DiagAPI } from './diag';
++import { NOOP_METER_PROVIDER } from '../metrics/NoopMeterProvider.js';
++import { getGlobal, registerGlobal, unregisterGlobal, } from '../internal/global-utils.js';
++import { DiagAPI } from './diag.js';
+ const API_NAME = 'metrics';
+ /**
+  * Singleton object which represents the entry point to the OpenTelemetry Metrics API
+diff --git a/build/esm/api/propagation.js b/build/esm/api/propagation.js
+index ffe4f4b6f7a0bcdd82e9732e439af263f0eff189..8ed983b037fd7374676686840842a414501a17e5 100644
+--- a/build/esm/api/propagation.js
++++ b/build/esm/api/propagation.js
+@@ -2,12 +2,12 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { getGlobal, registerGlobal, unregisterGlobal, } from '../internal/global-utils';
+-import { NoopTextMapPropagator } from '../propagation/NoopTextMapPropagator';
+-import { defaultTextMapGetter, defaultTextMapSetter, } from '../propagation/TextMapPropagator';
+-import { getBaggage, getActiveBaggage, setBaggage, deleteBaggage, } from '../baggage/context-helpers';
+-import { createBaggage } from '../baggage/utils';
+-import { DiagAPI } from './diag';
++import { getGlobal, registerGlobal, unregisterGlobal, } from '../internal/global-utils.js';
++import { NoopTextMapPropagator } from '../propagation/NoopTextMapPropagator.js';
++import { defaultTextMapGetter, defaultTextMapSetter, } from '../propagation/TextMapPropagator.js';
++import { getBaggage, getActiveBaggage, setBaggage, deleteBaggage, } from '../baggage/context-helpers.js';
++import { createBaggage } from '../baggage/utils.js';
++import { DiagAPI } from './diag.js';
+ const API_NAME = 'propagation';
+ const NOOP_TEXT_MAP_PROPAGATOR = new NoopTextMapPropagator();
+ /**
+diff --git a/build/esm/api/trace.js b/build/esm/api/trace.js
+index 9f667ed79912ea710b80980be17b53e6e98be3bd..e7d652620e80b1789efdf86801179888053a6ac5 100644
+--- a/build/esm/api/trace.js
++++ b/build/esm/api/trace.js
+@@ -2,11 +2,11 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { getGlobal, registerGlobal, unregisterGlobal, } from '../internal/global-utils';
+-import { ProxyTracerProvider } from '../trace/ProxyTracerProvider';
+-import { isSpanContextValid, wrapSpanContext, } from '../trace/spancontext-utils';
+-import { deleteSpan, getActiveSpan, getSpan, getSpanContext, setSpan, setSpanContext, } from '../trace/context-utils';
+-import { DiagAPI } from './diag';
++import { getGlobal, registerGlobal, unregisterGlobal, } from '../internal/global-utils.js';
++import { ProxyTracerProvider } from '../trace/ProxyTracerProvider.js';
++import { isSpanContextValid, wrapSpanContext, } from '../trace/spancontext-utils.js';
++import { deleteSpan, getActiveSpan, getSpan, getSpanContext, setSpan, setSpanContext, } from '../trace/context-utils.js';
++import { DiagAPI } from './diag.js';
+ const API_NAME = 'trace';
+ /**
+  * Singleton object which represents the entry point to the OpenTelemetry Tracing API
+diff --git a/build/esm/baggage/context-helpers.js b/build/esm/baggage/context-helpers.js
+index 739f2c76cfa8099a707f6df5b3f01dc9dc6e97e5..dca8784b3914a9250e9fc7b34d4eba3a907bcffa 100644
+--- a/build/esm/baggage/context-helpers.js
++++ b/build/esm/baggage/context-helpers.js
+@@ -2,8 +2,8 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { ContextAPI } from '../api/context';
+-import { createContextKey } from '../context/context';
++import { ContextAPI } from '../api/context.js';
++import { createContextKey } from '../context/context.js';
+ /**
+  * Baggage key
+  */
+diff --git a/build/esm/baggage/utils.js b/build/esm/baggage/utils.js
+index b57ff2b2a6e41c58765b4c95367c178a9b192778..a987b18fed04f6409896508a3ec7b214e9c2fdd0 100644
+--- a/build/esm/baggage/utils.js
++++ b/build/esm/baggage/utils.js
+@@ -2,9 +2,9 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { DiagAPI } from '../api/diag';
+-import { BaggageImpl } from './internal/baggage-impl';
+-import { baggageEntryMetadataSymbol } from './internal/symbol';
++import { DiagAPI } from '../api/diag.js';
++import { BaggageImpl } from './internal/baggage-impl.js';
++import { baggageEntryMetadataSymbol } from './internal/symbol.js';
+ const diag = DiagAPI.instance();
+ /**
+  * Create a new Baggage with optional entries
+diff --git a/build/esm/context/NoopContextManager.js b/build/esm/context/NoopContextManager.js
+index 40752d5a757e4cd787d1a878d1f6f6cc3244f688..5b99267f830e12ea51587740ba186e7e1f6535b6 100644
+--- a/build/esm/context/NoopContextManager.js
++++ b/build/esm/context/NoopContextManager.js
+@@ -2,7 +2,7 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { ROOT_CONTEXT } from './context';
++import { ROOT_CONTEXT } from './context.js';
+ export class NoopContextManager {
+     active() {
+         return ROOT_CONTEXT;
+diff --git a/build/esm/context-api.js b/build/esm/context-api.js
+index 24d437316f13f85156a01095ceb2de7cacf662ca..b3bbd01f7f45265d8cd2a97ec9cc9d4c619c17e5 100644
+--- a/build/esm/context-api.js
++++ b/build/esm/context-api.js
+@@ -4,7 +4,7 @@
+  */
+ // Split module-level variable definition into separate files to allow
+ // tree-shaking on each api instance.
+-import { ContextAPI } from './api/context';
++import { ContextAPI } from './api/context.js';
+ /**
+  * Entrypoint for context API
+  * @since 1.0.0
+diff --git a/build/esm/diag/ComponentLogger.js b/build/esm/diag/ComponentLogger.js
+index d442e7f92e208c77162ea4af3eafde1dca5354b2..a3b0f7266e6005cb318db11277cdb504be03de78 100644
+--- a/build/esm/diag/ComponentLogger.js
++++ b/build/esm/diag/ComponentLogger.js
+@@ -2,7 +2,7 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { getGlobal } from '../internal/global-utils';
++import { getGlobal } from '../internal/global-utils.js';
+ /**
+  * Component Logger which is meant to be used as part of any component which
+  * will add automatically additional namespace in front of the log message.
+diff --git a/build/esm/diag/internal/logLevelLogger.js b/build/esm/diag/internal/logLevelLogger.js
+index 7ab05fe39ff8a4c2cef68c4ff4ff472336af82a0..ebf7d39a5067a7f71e05ab204bf6c336bc7244a2 100644
+--- a/build/esm/diag/internal/logLevelLogger.js
++++ b/build/esm/diag/internal/logLevelLogger.js
+@@ -2,7 +2,7 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { DiagLogLevel } from '../types';
++import { DiagLogLevel } from '../types.js';
+ export function createLogLevelDiagLogger(maxLevel, logger) {
+     if (maxLevel < DiagLogLevel.NONE) {
+         maxLevel = DiagLogLevel.NONE;
+diff --git a/build/esm/diag-api.js b/build/esm/diag-api.js
+index f3e1907f2ab7410a92d6337684df76f8bc3b6146..a06939ca0bd1d7fab8841796d5f57fa35746730e 100644
+--- a/build/esm/diag-api.js
++++ b/build/esm/diag-api.js
+@@ -4,7 +4,7 @@
+  */
+ // Split module-level variable definition into separate files to allow
+ // tree-shaking on each api instance.
+-import { DiagAPI } from './api/diag';
++import { DiagAPI } from './api/diag.js';
+ /**
+  * Entrypoint for Diag API.
+  * Defines Diagnostic handler used for internal diagnostic logging operations.
+diff --git a/build/esm/experimental/index.js b/build/esm/experimental/index.js
+index 04e092b96f8ada720a6a32ba85a27d6d04627acb..64d174d571f7344301914dc0a1c212c91ccc4ee2 100644
+--- a/build/esm/experimental/index.js
++++ b/build/esm/experimental/index.js
+@@ -6,5 +6,5 @@
+  * Any exports here may change at any time and without warning
+  * @module @opentelemetry/api/experimental
+  */
+-export { wrapTracer, SugaredTracer } from './trace/SugaredTracer';
++export { wrapTracer, SugaredTracer } from './trace/SugaredTracer.js';
+ //# sourceMappingURL=index.js.map
+\ No newline at end of file
+diff --git a/build/esm/experimental/trace/SugaredTracer.js b/build/esm/experimental/trace/SugaredTracer.js
+index 7487cb76a9f1b7c3d4b177341aaba0b3b209b7e4..5f34c177d291255f0b189db884dc517d7cb671ea 100644
+--- a/build/esm/experimental/trace/SugaredTracer.js
++++ b/build/esm/experimental/trace/SugaredTracer.js
+@@ -1,4 +1,4 @@
+-import { context as contextApi, SpanStatusCode } from '../../';
++import { context as contextApi, SpanStatusCode } from '../../.js';
+ const defaultOnException = (e, span) => {
+     span.recordException(e);
+     span.setStatus({
+diff --git a/build/esm/index.js b/build/esm/index.js
+index 9dc35ec82585dafbc30c7adbfc2506dce274942a..646999bed232f8935f17061b8c56f4715ccc861a 100644
+--- a/build/esm/index.js
++++ b/build/esm/index.js
+@@ -2,34 +2,34 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-export { baggageEntryMetadataFromString } from './baggage/utils';
++export { baggageEntryMetadataFromString } from './baggage/utils.js';
+ // Context APIs
+-export { createContextKey, ROOT_CONTEXT } from './context/context';
++export { createContextKey, ROOT_CONTEXT } from './context/context.js';
+ // Diag APIs
+-export { DiagConsoleLogger } from './diag/consoleLogger';
+-export { DiagLogLevel } from './diag/types';
++export { DiagConsoleLogger } from './diag/consoleLogger.js';
++export { DiagLogLevel } from './diag/types.js';
+ // Metrics APIs
+-export { createNoopMeter } from './metrics/NoopMeter';
+-export { ValueType } from './metrics/Metric';
++export { createNoopMeter } from './metrics/NoopMeter.js';
++export { ValueType } from './metrics/Metric.js';
+ // Propagation APIs
+-export { defaultTextMapGetter, defaultTextMapSetter, } from './propagation/TextMapPropagator';
+-export { ProxyTracer } from './trace/ProxyTracer';
++export { defaultTextMapGetter, defaultTextMapSetter, } from './propagation/TextMapPropagator.js';
++export { ProxyTracer } from './trace/ProxyTracer.js';
+ // TODO: Remove ProxyTracerProvider export in the next major version.
+-export { ProxyTracerProvider } from './trace/ProxyTracerProvider';
+-export { SamplingDecision } from './trace/SamplingResult';
+-export { SpanKind } from './trace/span_kind';
+-export { SpanStatusCode } from './trace/status';
+-export { TraceFlags } from './trace/trace_flags';
+-export { createTraceState } from './trace/internal/utils';
+-export { isSpanContextValid, isValidTraceId, isValidSpanId, } from './trace/spancontext-utils';
+-export { INVALID_SPANID, INVALID_TRACEID, INVALID_SPAN_CONTEXT, } from './trace/invalid-span-constants';
++export { ProxyTracerProvider } from './trace/ProxyTracerProvider.js';
++export { SamplingDecision } from './trace/SamplingResult.js';
++export { SpanKind } from './trace/span_kind.js';
++export { SpanStatusCode } from './trace/status.js';
++export { TraceFlags } from './trace/trace_flags.js';
++export { createTraceState } from './trace/internal/utils.js';
++export { isSpanContextValid, isValidTraceId, isValidSpanId, } from './trace/spancontext-utils.js';
++export { INVALID_SPANID, INVALID_TRACEID, INVALID_SPAN_CONTEXT, } from './trace/invalid-span-constants.js';
+ // Split module-level variable definition into separate files to allow
+ // tree-shaking on each api instance.
+-import { context } from './context-api';
+-import { diag } from './diag-api';
+-import { metrics } from './metrics-api';
+-import { propagation } from './propagation-api';
+-import { trace } from './trace-api';
++import { context } from './context-api.js';
++import { diag } from './diag-api.js';
++import { metrics } from './metrics-api.js';
++import { propagation } from './propagation-api.js';
++import { trace } from './trace-api.js';
+ // Named export.
+ export { context, diag, metrics, propagation, trace };
+ // Default export.
+diff --git a/build/esm/internal/global-utils.js b/build/esm/internal/global-utils.js
+index 13a8d2ec116757b055d6fe9f541a4de54beabbf0..1e54ca057df064c919ab07fa0ceaf35bf2902322 100644
+--- a/build/esm/internal/global-utils.js
++++ b/build/esm/internal/global-utils.js
+@@ -2,8 +2,8 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { VERSION } from '../version';
+-import { isCompatible } from './semver';
++import { VERSION } from '../version.js';
++import { isCompatible } from './semver.js';
+ const major = VERSION.split('.')[0];
+ const GLOBAL_OPENTELEMETRY_API_KEY = Symbol.for(`opentelemetry.js.api.${major}`);
+ const _global = (typeof globalThis === 'object'
+diff --git a/build/esm/internal/semver.js b/build/esm/internal/semver.js
+index 0ba64cef7bb224797ab4bd81b613e0274051391a..51a2ab30d15dc06650cc99046d4f1868085663d8 100644
+--- a/build/esm/internal/semver.js
++++ b/build/esm/internal/semver.js
+@@ -2,7 +2,7 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { VERSION } from '../version';
++import { VERSION } from '../version.js';
+ const re = /^(\d+)\.(\d+)\.(\d+)(-(.+))?$/;
+ /**
+  * Create a function to test an API version to see if it is compatible with the provided ownVersion.
+diff --git a/build/esm/metrics/NoopMeterProvider.js b/build/esm/metrics/NoopMeterProvider.js
+index 7adc79a7ef642fdcbc165bc088b6be6f14e2e12d..ba186930e5c7ee9084150d4d6441895e8f8deb1f 100644
+--- a/build/esm/metrics/NoopMeterProvider.js
++++ b/build/esm/metrics/NoopMeterProvider.js
+@@ -2,7 +2,7 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { NOOP_METER } from './NoopMeter';
++import { NOOP_METER } from './NoopMeter.js';
+ /**
+  * An implementation of the {@link MeterProvider} which returns an impotent Meter
+  * for all calls to `getMeter`
+diff --git a/build/esm/metrics-api.js b/build/esm/metrics-api.js
+index 5928528c250644ea50d5c1466ced2fda9f327cfb..a309eb3e0327f29c253b42a627325fd1196f7fc0 100644
+--- a/build/esm/metrics-api.js
++++ b/build/esm/metrics-api.js
+@@ -4,7 +4,7 @@
+  */
+ // Split module-level variable definition into separate files to allow
+ // tree-shaking on each api instance.
+-import { MetricsAPI } from './api/metrics';
++import { MetricsAPI } from './api/metrics.js';
+ /**
+  * Entrypoint for metrics API
+  *
+diff --git a/build/esm/propagation-api.js b/build/esm/propagation-api.js
+index eff02734ffec98a3e2a5595fe313c2200c277d22..f85cd3527b31757a3b30242549472e474512e3e1 100644
+--- a/build/esm/propagation-api.js
++++ b/build/esm/propagation-api.js
+@@ -4,7 +4,7 @@
+  */
+ // Split module-level variable definition into separate files to allow
+ // tree-shaking on each api instance.
+-import { PropagationAPI } from './api/propagation';
++import { PropagationAPI } from './api/propagation.js';
+ /**
+  * Entrypoint for propagation API
+  *
+diff --git a/build/esm/trace/NonRecordingSpan.js b/build/esm/trace/NonRecordingSpan.js
+index 9235397523811e8b83b3a6b5b4785e3b69b4b21e..724208d694df8f43d27ab14c95b035c7936d47ea 100644
+--- a/build/esm/trace/NonRecordingSpan.js
++++ b/build/esm/trace/NonRecordingSpan.js
+@@ -2,7 +2,7 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { INVALID_SPAN_CONTEXT } from './invalid-span-constants';
++import { INVALID_SPAN_CONTEXT } from './invalid-span-constants.js';
+ /**
+  * The NonRecordingSpan is the default {@link Span} that is used when no Span
+  * implementation is available. All operations are no-op including context
+diff --git a/build/esm/trace/NoopTracer.js b/build/esm/trace/NoopTracer.js
+index acb8cd201b2c5fc65fa5ee6d8781dae76f31a8cd..ab4d8c6e211fb01e956355d6f42995d89ff2a02f 100644
+--- a/build/esm/trace/NoopTracer.js
++++ b/build/esm/trace/NoopTracer.js
+@@ -2,10 +2,10 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { ContextAPI } from '../api/context';
+-import { getSpanContext, setSpan } from '../trace/context-utils';
+-import { NonRecordingSpan } from './NonRecordingSpan';
+-import { isSpanContextValid } from './spancontext-utils';
++import { ContextAPI } from '../api/context.js';
++import { getSpanContext, setSpan } from '../trace/context-utils.js';
++import { NonRecordingSpan } from './NonRecordingSpan.js';
++import { isSpanContextValid } from './spancontext-utils.js';
+ const contextApi = ContextAPI.getInstance();
+ /**
+  * No-op implementations of {@link Tracer}.
+diff --git a/build/esm/trace/NoopTracerProvider.js b/build/esm/trace/NoopTracerProvider.js
+index e9b5da78b8b803093d58d444324a8ab7818b99f0..784101eeb62242f086cb15326891a60795a34951 100644
+--- a/build/esm/trace/NoopTracerProvider.js
++++ b/build/esm/trace/NoopTracerProvider.js
+@@ -2,7 +2,7 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { NoopTracer } from './NoopTracer';
++import { NoopTracer } from './NoopTracer.js';
+ /**
+  * An implementation of the {@link TracerProvider} which returns an impotent
+  * Tracer for all calls to `getTracer`.
+diff --git a/build/esm/trace/ProxyTracer.js b/build/esm/trace/ProxyTracer.js
+index d79c9598dfafb68db22cdb01f079babe41863c80..add193e1282f0d95aa1a4e611b498a67d8f88aaa 100644
+--- a/build/esm/trace/ProxyTracer.js
++++ b/build/esm/trace/ProxyTracer.js
+@@ -2,7 +2,7 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { NoopTracer } from './NoopTracer';
++import { NoopTracer } from './NoopTracer.js';
+ const NOOP_TRACER = new NoopTracer();
+ /**
+  * Proxy tracer provided by the proxy tracer provider
+diff --git a/build/esm/trace/ProxyTracerProvider.js b/build/esm/trace/ProxyTracerProvider.js
+index c6a9aa892958eb07ac10c28fe77b8ce5ee65f1da..1d5bf5cbf3a6347112b3a65d242437bc4408e31e 100644
+--- a/build/esm/trace/ProxyTracerProvider.js
++++ b/build/esm/trace/ProxyTracerProvider.js
+@@ -2,8 +2,8 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { ProxyTracer } from './ProxyTracer';
+-import { NoopTracerProvider } from './NoopTracerProvider';
++import { ProxyTracer } from './ProxyTracer.js';
++import { NoopTracerProvider } from './NoopTracerProvider.js';
+ const NOOP_TRACER_PROVIDER = new NoopTracerProvider();
+ /**
+  * Tracer provider which provides {@link ProxyTracer}s.
+diff --git a/build/esm/trace/context-utils.js b/build/esm/trace/context-utils.js
+index c44d08f12a647f3470d0353f33237e8c606d3fea..0f0d8150428c47e70bb38b274a178a48d922cb32 100644
+--- a/build/esm/trace/context-utils.js
++++ b/build/esm/trace/context-utils.js
+@@ -2,9 +2,9 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { createContextKey } from '../context/context';
+-import { NonRecordingSpan } from './NonRecordingSpan';
+-import { ContextAPI } from '../api/context';
++import { createContextKey } from '../context/context.js';
++import { NonRecordingSpan } from './NonRecordingSpan.js';
++import { ContextAPI } from '../api/context.js';
+ /**
+  * span key
+  */
+diff --git a/build/esm/trace/internal/tracestate-impl.js b/build/esm/trace/internal/tracestate-impl.js
+index b763df8b5db9db295f6c0e0d6fa07b2d871a7f14..31b7e2bd81d11552de012a50fa89fd74a8b47c00 100644
+--- a/build/esm/trace/internal/tracestate-impl.js
++++ b/build/esm/trace/internal/tracestate-impl.js
+@@ -2,7 +2,7 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { validateKey, validateValue } from './tracestate-validators';
++import { validateKey, validateValue } from './tracestate-validators.js';
+ const MAX_TRACE_STATE_ITEMS = 32;
+ const MAX_TRACE_STATE_LEN = 512;
+ const LIST_MEMBERS_SEPARATOR = ',';
+diff --git a/build/esm/trace/internal/utils.js b/build/esm/trace/internal/utils.js
+index bb637bbbbb0657207b29ee5ed94c723bcd7457b7..4d502bfc4c844edbd1a22c69f693ee67a20cdfac 100644
+--- a/build/esm/trace/internal/utils.js
++++ b/build/esm/trace/internal/utils.js
+@@ -2,7 +2,7 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { TraceStateImpl } from './tracestate-impl';
++import { TraceStateImpl } from './tracestate-impl.js';
+ /**
+  * @since 1.1.0
+  */
+diff --git a/build/esm/trace/invalid-span-constants.js b/build/esm/trace/invalid-span-constants.js
+index d063f6019a09e89c8fad343a28d159c1b9f8a50f..77affba9c68dd0fdf38e92c3b8b32eda19c62845 100644
+--- a/build/esm/trace/invalid-span-constants.js
++++ b/build/esm/trace/invalid-span-constants.js
+@@ -2,7 +2,7 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { TraceFlags } from './trace_flags';
++import { TraceFlags } from './trace_flags.js';
+ /**
+  * @since 1.0.0
+  */
+diff --git a/build/esm/trace/spancontext-utils.js b/build/esm/trace/spancontext-utils.js
+index 5c1887fa31dfae27684ffb039daebcf70d3b7845..5c4e995588a30b2863c8fa6b1248eb50c98cdeeb 100644
+--- a/build/esm/trace/spancontext-utils.js
++++ b/build/esm/trace/spancontext-utils.js
+@@ -2,8 +2,8 @@
+  * Copyright The OpenTelemetry Authors
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-import { INVALID_SPANID, INVALID_TRACEID } from './invalid-span-constants';
+-import { NonRecordingSpan } from './NonRecordingSpan';
++import { INVALID_SPANID, INVALID_TRACEID } from './invalid-span-constants.js';
++import { NonRecordingSpan } from './NonRecordingSpan.js';
+ // Valid characters (0-9, a-f, A-F) are marked as 1.
+ const isHex = new Uint8Array([
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+diff --git a/build/esm/trace-api.js b/build/esm/trace-api.js
+index 2c02742d82fe994c682556387cc917a805559ac4..94e417bd3a7eb934ed8e80812ba005c75c9fcba6 100644
+--- a/build/esm/trace-api.js
++++ b/build/esm/trace-api.js
+@@ -4,7 +4,7 @@
+  */
+ // Split module-level variable definition into separate files to allow
+ // tree-shaking on each api instance.
+-import { TraceAPI } from './api/trace';
++import { TraceAPI } from './api/trace.js';
+ /**
+  * Entrypoint for trace API
+  *

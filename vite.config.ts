@@ -11,12 +11,8 @@ const sentryConfig = {
   authToken: process.env.SENTRY_AUTH_TOKEN,
   org: process.env.SENTRY_ORG,
   project: process.env.SENTRY_PROJECT,
-  release: {
-    name: sentryReleaseName,
-  },
-  sourcemaps: {
-    disable: !process.env.SENTRY_AUTH_TOKEN || !sentryReleaseName,
-  },
+  release: { name: sentryReleaseName },
+  sourcemaps: { disable: !process.env.SENTRY_AUTH_TOKEN || !sentryReleaseName },
   telemetry: false,
 };
 
@@ -85,6 +81,29 @@ export default defineConfig({
       "unicorn/prefer-array-flat-map": "error",
     },
   },
+
+  test: {
+    bail: 3, // Stop after 3 failing tests
+    browser: { screenshotDirectory: "__screenshots__" },
+    disableConsoleIntercept: !process.env.CI,
+    exclude: ["test/conversations/**/*.ts"],
+    execArgv: ["--max-old-space-size=3072"],
+    fileParallelism: false,
+    globalSetup: "test/helpers/globalSetup.ts",
+    hookTimeout: 30_000, // 30 seconds for beforeAll/afterAll (server + browser startup)
+    include: ["test/**/*.test.ts"],
+    maxConcurrency: 1, // Run tests sequentially to reduce memory pressure
+    maxWorkers: 1, // Use only 1 worker to minimize memory usage
+    pool: "forks",
+    printConsoleTrace: !process.env.CI,
+    reporters: process.env.GITHUB_ACTIONS
+      ? ["github-actions", "verbose"]
+      : ["verbose"],
+    setupFiles: "test/helpers/testSuiteSetup.ts",
+    teardownTimeout: 5_000, // 5 seconds - Prisma disconnect will timeout anyway on macOS
+    testTimeout: 30_000, // 30 seconds
+  },
+
   plugins: [
     tailwindcss(),
     reactRouter(),

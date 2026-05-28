@@ -10,7 +10,7 @@ import {
   access,
   mkdir,
 } from "node:fs/promises";
-import vitestConfig from "../../vitest.config";
+import viteConfig from "../../vite.config";
 import looksSame from "looks-same";
 import invariant from "tiny-invariant";
 import path from "node:path";
@@ -36,7 +36,7 @@ declare global {
 }
 
 const dirname = path.resolve(
-  vitestConfig.test?.browser?.screenshotDirectory ?? "",
+  viteConfig.test?.browser?.screenshotDirectory ?? "",
 );
 const defaultTolerance = 2.3;
 

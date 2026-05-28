@@ -12,8 +12,9 @@
     "devmcp": "npx @modelcontextprotocol/inspector@latest http://localhost:5173/api/mcp",
     "prod:db:push": "infisical --env prod run -- pnpm prisma db push",
     "start": "react-router-serve ./build/server/index.js",
-    "test": "pnpm run check && pnpm test:db:push && pnpm test:reset && infisical --env test run -- vitest run && infisical --env test run -- playwright test",
-    "test:db:push": "infisical --env test run -- pnpm prisma db push"
+    "test": "pnpm run check && pnpm test:db:push && pnpm test:reset && infisical --env test run -- vp test run",
+    "test:db:push": "infisical --env test run -- pnpm prisma db push",
+    "test:reset": "rm -rf __screenshots__/*"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.79",
@@ -124,5 +125,5 @@
   "engines": {
     "node": ">=24.10.1"
   },
-  "packageManager": "pnpm@11.1.2"
+  "packageManager": "pnpm@11.3.0"
 }

@@ -30,3 +30,7 @@ onlyBuiltDependencies:
   - prisma
   - protobufjs
   - sharp
+
+patchedDependencies:
+  "@opentelemetry/api@1.9.1": patches/@opentelemetry__api@1.9.1.patch
+  "@opentelemetry/semantic-conventions@1.41.1": patches/@opentelemetry__semantic-conventions@1.41.1.patch
