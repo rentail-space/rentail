@@ -5,7 +5,6 @@
  * - Cleans up database (once per test suite)
  */
 
-import * as Sentry from "@sentry/react-router";
 import Redis from "ioredis";
 import { afterAll, beforeAll } from "vitest";
 import envVars from "~/lib/env";
@@ -15,8 +14,6 @@ import msw from "~/test/mocks/mswHandlers";
 import "./toMatchInnerHTML";
 import "./toMatchScreenshot";
 import "./trimConsole";
-
-Sentry.init({ enabled: false });
 
 beforeAll(async () => {
   // Cleanup database
