@@ -83,7 +83,7 @@ jobs:
         run: pnpm secretlint "**/*" --format stylish
 
       - name: Generate React Router types
-        run: pnpm react-router typegen
+        run: pnpm exec react-router typegen
 
       - name: Check code/types/formatting
         run: pnpm exec vp check
