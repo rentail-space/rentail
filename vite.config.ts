@@ -87,11 +87,7 @@ export default defineConfig({
     testTimeout: 30_000, // 30 seconds
   },
 
-  plugins: [
-    tailwindcss(),
-    reactRouter(),
-    devtoolsJson(),
-  ],
+  plugins: [tailwindcss(), reactRouter(), devtoolsJson()],
   resolve: {
     alias: [
       { find: "~/test", replacement: resolve("test") },

@@ -49,7 +49,11 @@ export async function loader({ request, params }: Route.LoaderArgs) {
       headers,
     });
   } catch (error) {
-    console.error("Error resuming stream for chat %s: %s", found.chat.id, error);
+    console.error(
+      "Error resuming stream for chat %s: %s",
+      found.chat.id,
+      error,
+    );
     // Return 204 instead of 500 so client treats it as stream complete
     return new Response(null, { headers: found.responseHeaders, status: 204 });
   }

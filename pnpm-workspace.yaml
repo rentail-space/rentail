@@ -30,4 +30,3 @@ onlyBuiltDependencies:
   - prisma
   - protobufjs
   - sharp
-

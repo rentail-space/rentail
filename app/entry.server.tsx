@@ -138,84 +138,83 @@ export function getLoadContext() {
 }
 
 export default async (
-    request: Request,
-    responseStatusCode: number,
-    responseHeaders: Headers,
-    routerContext: EntryContext,
-    _loadContext?: AppLoadContext,
-  ): Promise<Response> => {
-    const start = Date.now();
-    console.info("%s %s", request.method, request.url);
+  request: Request,
+  responseStatusCode: number,
+  responseHeaders: Headers,
+  routerContext: EntryContext,
+  _loadContext?: AppLoadContext,
+): Promise<Response> => {
+  const start = Date.now();
+  console.info("%s %s", request.method, request.url);
 
-    // oxlint-disable-next-line typescript/no-floating-promises
-    trackBotVisit(request); // NOTE: run asynchronously
+  // oxlint-disable-next-line typescript/no-floating-promises
+  trackBotVisit(request); // NOTE: run asynchronously
 
-    const url = new URL(request.url);
-    if (url.pathname.endsWith(".md")) {
-      const md = await tryMarkdown(url.pathname);
-      if (md) {
-        // oxlint-disable-next-line typescript/no-floating-promises
-        trackBotVisit(request);
-        return md;
-      }
+  const url = new URL(request.url);
+  if (url.pathname.endsWith(".md")) {
+    const md = await tryMarkdown(url.pathname);
+    if (md) {
+      // oxlint-disable-next-line typescript/no-floating-promises
+      trackBotVisit(request);
+      return md;
     }
+  }
 
-    // Accept: text/markdown → serve markdown at the same URL
-    if (
-      request.headers
-        .get("accept")
-        ?.split(",")
-        .some((a) => a.trim() === "text/markdown")
-    ) {
-      const md = await tryMarkdown(url.pathname);
-      if (md) {
-        // oxlint-disable-next-line typescript/no-floating-promises
-        trackBotVisit(request);
-        return md;
-      }
+  // Accept: text/markdown → serve markdown at the same URL
+  if (
+    request.headers
+      .get("accept")
+      ?.split(",")
+      .some((a) => a.trim() === "text/markdown")
+  ) {
+    const md = await tryMarkdown(url.pathname);
+    if (md) {
+      // oxlint-disable-next-line typescript/no-floating-promises
+      trackBotVisit(request);
+      return md;
     }
+  }
 
-    const response = await new Promise<Response>((resolve, reject) => {
-      const { pipe } = renderToPipeableStream(
-        <ServerRouter
-          context={routerContext}
-          url={request.url}
-          nonce={uuidv7()}
-        />,
-        {
-          onShellReady() {
-            responseHeaders.set("Content-Type", "text/html");
-            const body = new PassThrough();
-            resolve(
-              new Response(body as unknown as BodyInit, {
-                status: responseStatusCode,
-                headers: responseHeaders,
-              }),
-            );
-            pipe(body);
-          },
-          onShellError(error) {
-            reject(error);
-          },
-          onError(error) {
-            if (!responseHeaders.has("Content-Type")) reject(error);
-          },
+  const response = await new Promise<Response>((resolve, reject) => {
+    const { pipe } = renderToPipeableStream(
+      <ServerRouter
+        context={routerContext}
+        url={request.url}
+        nonce={uuidv7()}
+      />,
+      {
+        onShellReady() {
+          responseHeaders.set("Content-Type", "text/html");
+          const body = new PassThrough();
+          resolve(
+            new Response(body as unknown as BodyInit, {
+              status: responseStatusCode,
+              headers: responseHeaders,
+            }),
+          );
+          pipe(body);
         },
-      );
-    });
-    // oxlint-disable-next-line typescript/no-floating-promises
-    waitForResponse(response, start).then((duration) => {
-      console.info(
-        "%s %s => %d (%dms)",
-        request.method,
-        request.url,
-        response.status,
-        duration,
-      );
-    });
-    return response;
-  },
-);
+        onShellError(error) {
+          reject(error);
+        },
+        onError(error) {
+          if (!responseHeaders.has("Content-Type")) reject(error);
+        },
+      },
+    );
+  });
+  // oxlint-disable-next-line typescript/no-floating-promises
+  waitForResponse(response, start).then((duration) => {
+    console.info(
+      "%s %s => %d (%dms)",
+      request.method,
+      request.url,
+      response.status,
+      duration,
+    );
+  });
+  return response;
+};
 
 async function waitForResponse(response: Response, start: number) {
   const reader = response.clone().body?.getReader();
