@@ -1,6 +1,5 @@
 allowBuilds:
   "@prisma/engines": true
-  "@sentry/cli": true
   esbuild: true
   msw: true
   prisma: true
@@ -22,7 +21,6 @@ onlyBuiltDependencies:
   - "@infisical/cli"
   - "@prisma/client"
   - "@prisma/engines"
-  - "@sentry/cli"
   - "@tailwindcss/oxide"
   - core-js
   - esbuild
