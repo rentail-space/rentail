@@ -9,7 +9,7 @@ import prisma from "../prisma.server";
 const listCentersSpec = {
   annotations: { readOnlyHint: true },
   description:
-    "List all shopping centers and enclosed malls in a given city or area. Focus on retail shopping centers, strip malls, and enclosed malls. Exclude individual stores or single-building retail. Helps the user find a space to rent in a shopping center or mall.",
+    "List the best shopping centers and enclosed malls in a given city or area, limited to the top 5 by ranking. Focus on retail shopping centers, strip malls, and enclosed malls. Exclude individual stores or single-building retail. Helps the user find a space to rent in a shopping center or mall.",
   inputSchema: zod.object({
     location: zod
       .string()
@@ -76,6 +76,8 @@ export default function registerListCenters(mcpServer: McpServer) {
           },
           state: true,
         },
+        orderBy: { ranking: "desc" },
+        take: 5,
         where: {
           latitude: {
             gte: geocode.latitude - maxDistance / 69.172,
@@ -85,8 +87,12 @@ export default function registerListCenters(mcpServer: McpServer) {
             gte: geocode.longitude - maxDistance / 57.393,
             lte: geocode.longitude + maxDistance / 57.393,
           },
+          rating: { gte: 4 },
         },
       });
+
+      // Sort alphabetically for presentation
+      centers.sort((a, b) => a.name.localeCompare(b.name));
 
       const output = {
         centers: centers.map((center) => ({

@@ -93,10 +93,10 @@ describe("prompt()", () => {
 
     it("includes instructions about known shopping centers only", () => {
       expect(prompt).toContain(
-        "These are all the shopping centers you know about",
+        "These are the best shopping centers near the user",
       );
       expect(prompt).toContain(
-        "You do not know about any other shopping centers",
+        "You only know about these centers",
       );
       expect(prompt).toContain(
         "Do not make up information about shopping centers you do not know about",

@@ -34,6 +34,7 @@ export default async function preparePrompt({
   const maxDistance = 30; // miles
   const { centers: nearbyCenters, displayName } = await findNearbyCenters({
     headers,
+    limit: 5,
     maxDistance,
     user,
   });

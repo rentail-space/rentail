@@ -27,6 +27,8 @@ export const schema = z.object({
   openUntil: z.int().optional(),
   rating: z.number().min(1).max(5).optional(),
   reviewCount: z.int().positive().optional(),
+  tier: z.int().min(0).max(3).optional(),
+  ranking: z.number().optional(),
   centerType: z.enum([
     "RegionalMall",
     "CommunityCenter",

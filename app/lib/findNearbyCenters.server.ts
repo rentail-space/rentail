@@ -52,11 +52,7 @@ export default async function findNearbyCenters({
       },
       state: true,
     },
-    orderBy: [
-      { spaces: { _count: "desc" } },
-      { ranking: "desc" },
-      { name: "asc" },
-    ],
+    orderBy: { ranking: "desc" },
     take: limit,
     where: {
       latitude: {
@@ -70,5 +66,7 @@ export default async function findNearbyCenters({
       rating: { gte: 4 },
     },
   });
+  // Sort alphabetically for presentation
+  centers.sort((a, b) => a.name.localeCompare(b.name));
   return { centers, displayName };
 }
