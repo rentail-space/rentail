@@ -48,9 +48,8 @@ export default function InputForm({
           className={twMerge(
             "w-full py-4 pr-24 pl-5",
             "rounded-base border-2 border-black bg-white shadow-[4px_4px_0px_0px_hsl(37,92%,65%)] outline-none",
-            "font-medium text-base text-black placeholder-gray-600",
-            "transition-all duration-100 focus:translate-x-[-2px] focus:translate-y-[-2px] focus:shadow-[6px_6px_0px_0px_hsl(37,92%,65%)]",
-            "placeholder:text-gray-400",
+            "font-medium text-base text-black placeholder:text-gray-400",
+            "transition-all duration-100 focus:translate-x-[-2px] focus:translate-y-[-2px] focus:shadow-[6px_6px_0px_0px_hsl(37,92%,65%)] focus:ring-4 focus:ring-black/10",
           )}
           disabled={isSubmitting}
           onChange={(e) => setInputValue(e.target.value)}
