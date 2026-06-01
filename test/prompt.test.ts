@@ -95,9 +95,7 @@ describe("prompt()", () => {
       expect(prompt).toContain(
         "These are the best shopping centers near the user",
       );
-      expect(prompt).toContain(
-        "You only know about these centers",
-      );
+      expect(prompt).toContain("You only know about these centers");
       expect(prompt).toContain(
         "Do not make up information about shopping centers you do not know about",
       );
