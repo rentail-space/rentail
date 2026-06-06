@@ -15,8 +15,8 @@ COPY . .
 
 RUN --mount=type=secret,id=env,required=true \
   set -a; . /run/secrets/env; set +a && \
-  pnpm run build:prisma && \
-  pnpm run build
+  pnpm --config.verify-deps-before-run=false run build:prisma && \
+  pnpm --config.verify-deps-before-run=false run build
 
 # --- RUNNER ---
 FROM node:24-slim AS runner
@@ -43,8 +43,9 @@ COPY package.json pnpm-lock.yaml ./
 
 RUN --mount=type=secret,id=env,required=true \
     cp /run/secrets/env .env && chmod 644 .env
-RUN pnpm install --prod --frozen-lockfile --ignore-scripts
+RUN pnpm --config.verify-deps-before-run=false install --prod --frozen-lockfile --ignore-scripts
 
 USER node
 
+ENV pnpm_config_verify_deps_before_run=false
 CMD ["pnpm", "start"]
