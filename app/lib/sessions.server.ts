@@ -15,7 +15,7 @@ import envVars from "~/lib/env";
 import welcome from "~/prompts/welcome.md?raw";
 import bcrypt from "bcryptjs";
 import prisma from "~/lib/prisma.server";
-import { safeTextParts } from "~/lib/aiMessage.server";
+import { safeTextParts } from "~/lib/aiMessage";
 import debug from "debug";
 
 type SessionData = {

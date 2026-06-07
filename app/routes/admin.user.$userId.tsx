@@ -19,11 +19,11 @@ import {
 import { Textarea } from "~/components/ui/Textarea";
 import deviceDetection from "~/lib/deviceDetection";
 import findNearbyCenters from "~/lib/findNearbyCenters.server";
-import { safeParseUtm } from "~/lib/middleware/utm.server";
+import { safeParseUtm } from "~/lib/utm";
 import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
 import { formatDatetimeFull } from "~/lib/temporal";
-import { safeTextParts } from "~/lib/aiMessage.server";
+import { safeTextParts } from "~/lib/aiMessage";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import type { Route } from "./+types/admin.user.$userId";
 import Messages from "./chat/Messages";

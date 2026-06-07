@@ -1,40 +1,10 @@
 import type { Route } from "+types/app/+types/root";
-import type { JsonValue } from "@prisma/client/runtime/client";
 import debug from "debug";
 import { createCookieSessionStorage } from "react-router";
-import { z } from "zod";
 import envVars from "~/lib/env";
+import { type FirstRequest, safeParseUtm } from "~/lib/utm";
 
-const utmSchema = z.object({
-  source: z.string().optional(),
-  medium: z.string().optional(),
-  campaign: z.string().optional(),
-  term: z.string().optional(),
-  content: z.string().optional(),
-  ip: z.string().optional(),
-  userAgent: z.string().optional(),
-  referer: z.string().optional(),
-});
-
-type FirstRequest = z.infer<typeof utmSchema>;
-
-/**
- * Safely parse a JSON-encoded UTM string from the database.
- * Returns the parsed UTM object or undefined if parsing fails.
- */
-export function safeParseUtm(
-  utm: string | JsonValue,
-): FirstRequest | undefined {
-  if (!utm) return undefined;
-  try {
-    const parsed = utmSchema.safeParse(
-      utm instanceof Object ? utm : JSON.parse(utm.toString()),
-    );
-    return parsed.success ? parsed.data : undefined;
-  } catch {
-    return undefined;
-  }
-}
+export { safeParseUtm };
 
 const logger = debug("server:middleware:utm");
 

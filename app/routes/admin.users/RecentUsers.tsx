@@ -18,7 +18,7 @@ import {
   useReactTable,
   flexRender,
 } from "@tanstack/react-table";
-import { safeParseUtm } from "~/lib/middleware/utm.server";
+import { safeParseUtm } from "~/lib/utm";
 import deviceDetection from "~/lib/deviceDetection";
 
 export default function RecentUsers({ users }: { users: User[] }) {

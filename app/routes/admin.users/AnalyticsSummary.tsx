@@ -5,7 +5,7 @@ import { Card, CardContent } from "~/components/ui/Card";
 import { meanBy, sumBy } from "es-toolkit";
 import { Suspense } from "react";
 import { Await } from "react-router";
-import { safeParseUtm } from "~/lib/middleware/utm.server";
+import { safeParseUtm } from "~/lib/utm";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 
 export default function AnalyticsSummary({
