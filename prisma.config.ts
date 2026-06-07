@@ -4,10 +4,16 @@ import { defineConfig, env } from "prisma/config";
 
 dotenv.configDotenv({ quiet: true });
 
+function getDirectUrl(): string {
+  return env("DIRECT_URL");
+}
+
 // @see https://www.prisma.io/docs/orm/overview/databases/supabase#specific-considerations
 export default defineConfig({
   datasource: {
-    url: env("DIRECT_URL"),
+    get url() {
+      return getDirectUrl();
+    },
   },
   migrations: {
     path: "prisma/migrations",

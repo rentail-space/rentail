@@ -3,9 +3,11 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 
+import { normalizeSpaceType, type SpaceType } from "./types";
+
 interface RetailSpace {
   number?: string;
-  type?: "Cart" | "Inline" | "Storage";
+  type?: SpaceType;
   size?: number;
   floor?: number;
   available?: boolean;
@@ -49,7 +51,7 @@ async function scrapeSantaMonica() {
                 space.number = value;
                 break;
               case "space type":
-                space.type = value as "Cart" | "Inline" | "Storage";
+                space.type = normalizeSpaceType(value);
                 break;
               case "total space sf":
               case "total space":

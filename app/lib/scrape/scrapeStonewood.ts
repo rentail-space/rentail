@@ -4,9 +4,11 @@ import { resolve } from "node:path";
 import ora from "ora";
 import { chromium } from "playwright";
 
+import { normalizeSpaceType, type SpaceType } from "./types";
+
 interface RetailSpace {
   number: string;
-  type?: "Cart" | "Inline" | "Storage";
+  type?: SpaceType;
   size?: number;
   floor?: number;
   available?: boolean;
@@ -49,8 +51,12 @@ async function scrapeStonewood() {
             /Space Type[:\s]+([^\n\r]+?)(?:\n|$|Cart|Inline|Storage)/i,
           );
           if (typeMatch) {
-            const type = typeMatch[1].trim() as "Cart" | "Inline" | "Storage";
-            if (type && !type.includes("Space") && type.length < 20)
+            const type = normalizeSpaceType(typeMatch[1]);
+            if (
+              type &&
+              !typeMatch[1].includes("Space") &&
+              typeMatch[1].trim().length < 20
+            )
               space.type = type;
           }
 

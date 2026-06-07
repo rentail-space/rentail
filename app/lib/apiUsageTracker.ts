@@ -22,7 +22,7 @@ const API_PRICING = {
   serpapi: {
     search: 0.01,
   },
-} as Record<string, Record<string, number>>;
+} satisfies Record<string, Record<string, number>>;
 
 /**
  * Free tier limits (shared $200/month credit for Google APIs)
@@ -66,7 +66,7 @@ export async function trackApiCall<T, S extends Service>(
     if (process.env.NODE_ENV !== "production") return defaultValue;
 
     const month = new Date().toISOString().slice(0, 7); // "2026-01"
-    const cost = API_PRICING[service][endpoint];
+    const cost = Number(API_PRICING[service][endpoint]);
     if (!cost)
       throw new Error(`Unknown cost for ${service} ${String(endpoint)}`);
 
