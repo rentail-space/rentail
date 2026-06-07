@@ -2,7 +2,7 @@ FROM node:26-slim AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable pnpm
+RUN npm install -g corepack && corepack enable pnpm
 
 # --- BUILDER ---
 FROM base AS builder
@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 make g++ curl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-RUN corepack enable pnpm
+RUN npm install -g corepack && corepack enable pnpm
 
 WORKDIR /app
 
