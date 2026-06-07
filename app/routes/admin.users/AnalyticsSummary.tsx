@@ -5,6 +5,7 @@ import { Card, CardContent } from "~/components/ui/Card";
 import { meanBy, sumBy } from "es-toolkit";
 import { Suspense } from "react";
 import { Await } from "react-router";
+import { safeParseUtm } from "~/lib/middleware/utm.server";
 import LoadingProgress from "~/components/ui/LoadingProgress";
 
 export default function AnalyticsSummary({
@@ -96,13 +97,11 @@ function getVisitors(analytics: Analytics[]) {
 function getChats(users: User[]) {
   const all = users.length;
   const fromLLM = users.filter((user) => {
-    try {
-      const utm = JSON.parse((user.utm as string) || "{}");
-      const source = utm.source || new URL(utm.referer).hostname;
-      return source === "chatgpt.com" || source === "perplexity.ai";
-    } catch {
-      return false;
-    }
+    const utm = safeParseUtm(user.utm);
+    if (!utm) return false;
+    const source =
+      utm.source || (utm.referer ? new URL(utm.referer).hostname : undefined);
+    return source === "chatgpt.com" || source === "perplexity.ai";
   }).length;
   return { all, fromLLM };
 }

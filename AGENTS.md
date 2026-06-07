@@ -174,6 +174,75 @@ Follow **CLEARFRAME mode** (from `.claude/rules/output-style.md`):
 - Zero conversational overhead
 - Function like a precise, efficient tool
 
+## TypeScript Improvement Workflow
+
+When reviewing the codebase against TypeScript best practices (e.g. the `typescript-tips-everyone-should-know` list or similar references), follow this systematic process:
+
+### Step 1: Map tips to existing patterns
+
+Read the reference. For each tip, check if the codebase already follows it by grepping for relevant patterns:
+
+```bash
+# Check for 'any' (tip #1)
+grep -rn ": any" --include="*.ts" --include="*.tsx" app/
+
+# Check for 'as' casts (tip #3)
+grep -rn "as " --include="*.ts" --include="*.tsx" app/ | grep -v "as const" | grep -v "import "
+
+# Check for enums (tip #11)
+grep -rn "enum " --include="*.ts" --include="*.tsx" app/
+
+# Check JSON.parse patterns (tip #10)
+grep -rn "JSON.parse.*as " --include="*.ts" --include="*.tsx" app/
+
+# Check API response casts (tip #10)
+grep -rn "response.json() as " --include="*.ts" --include="*.tsx" app/
+
+# Check safeParse vs as casts
+grep -rn "safeParse\|\.parse(JSON.parse" --include="*.ts" --include="*.tsx" app/
+```
+
+### Step 2: Prioritize by impact
+
+1. **Runtime safety** (tip #10) — Replace `as` casts on `JSON.parse` and `response.json()` with Zod `safeParse`. These are actual runtime boundaries where bad data can reach production.
+2. **Redundant casts** (tip #3) — `schema.parse()` already returns `z.infer<typeof schema>`. Remove `as z.infer<>` after `.parse()` calls. Check `Object.entries(schema.shape)` for redundant `as ZodType`.
+3. **Type predicates** (tip #8) — Extract repeated `as Type[]` patterns into reusable `safe*()` functions with `.filter((v): v is T => ...)`.
+4. **Derived types** (tip #4) — Look for manually duplicated union types that could be `(typeof arr)[number]`.
+5. **Strict options** (tip #13) — `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes` in tsconfig. Only enable if the codebase is small enough to fix all errors in one pass — otherwise note it as a future improvement.
+
+### Step 3: Check each file in context
+
+Before changing a file, read enough to understand the data flow:
+
+```bash
+grep -rn "import.*from.*file" --include="*.ts" app/  # Find all consumers
+```
+
+Key questions:
+
+- Does this `as` cast cross a serialization boundary (JSON.parse, API fetch, Prisma JSON field)? → Use Zod.
+- Is this `as` cast on an internal/trusted call (same-app fetch, sibling function return)? → Acceptable, but prefer `satisfies` if possible.
+- Is the cast followed by `.parse()` or similar validation? → The cast is redundant, remove it.
+
+### Step 4: Run the full pipeline
+
+```bash
+pnpm check     # Lint + typecheck + format + unused exports
+```
+
+Resolve any new errors. If too many errors appear (e.g. from strict tsconfig flags), revert and note the scope.
+
+### Common patterns found in this codebase
+
+| Pattern                                       | Fix                                                            | Example                                          |
+| --------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------ |
+| `JSON.parse(x) as T`                          | Zod schema + `safeParse`                                       | SearchQuery, LastEmail, UTM                      |
+| `response.json() as T`                        | Zod schema + `safeParse`                                       | googleSearchConsole.ts, geocode.ts               |
+| `schema.parse(x) as z.infer<typeof schema>`   | Remove the cast — `.parse()` already returns the inferred type | seedCenters, collectCenters, registerListCenters |
+| `value as ZodType` in `Object.entries(shape)` | Remove — Zod's `shape` already types values as `ZodType`       | workingMemory.ts                                 |
+| `x as TextUIPart[]` from Prisma JSON          | `safeTextParts(x)` type predicate                              | sessions.server.ts, admin.user.$userId.tsx       |
+| `user.utm as string` + `JSON.parse`           | `safeParseUtm(user.utm)`                                       | 4 locations → centralized helper                 |
+
 ## Key Architecture Notes
 
 - **AI Streaming**: Uses Anthropic SDK `streamText()` with Redis coordination for resumable streams
@@ -181,5 +250,5 @@ Follow **CLEARFRAME mode** (from `.claude/rules/output-style.md`):
 - **Auth**: Cookie-based sessions (365-day expiration), bcrypt hashing
 - **Path Aliases**: `~/*` = `./app/*`, configured in `tsconfig.json`
 - **Database**: PostgreSQL + Prisma ORM, use `prisma` import alias
-- **Node Version**: 24.10.1+ required
+- **Node Version**: 26.0.0+ required
 - **Package Manager**: pnpm 10.28.2+

@@ -51,9 +51,8 @@ export default function ResponseMessage({
       }
       // Other part types (reasoning, tool-invocation, source, file, data, step-start)
       // are rendered by the AI SDK's built-in UI and are intentionally skipped here.
-      default: {
+      default:
         return null;
-      }
     }
   });
 }

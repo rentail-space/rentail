@@ -123,7 +123,7 @@
     "vitest": "npm:@voidzero-dev/vite-plus-test@latest"
   },
   "engines": {
-    "node": ">=24.10.1"
+    "node": ">=26.0.0"
   },
   "packageManager": "pnpm@11.5.1"
 }

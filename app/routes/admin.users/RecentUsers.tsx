@@ -18,6 +18,7 @@ import {
   useReactTable,
   flexRender,
 } from "@tanstack/react-table";
+import { safeParseUtm } from "~/lib/middleware/utm.server";
 import deviceDetection from "~/lib/deviceDetection";
 
 export default function RecentUsers({ users }: { users: User[] }) {
@@ -44,9 +45,7 @@ export default function RecentUsers({ users }: { users: User[] }) {
       },
       {
         accessorFn: (row) =>
-          (row.utm && JSON.parse(row.utm as string).source) ||
-          row.referrer ||
-          "N/A",
+          safeParseUtm(row.utm)?.source || row.referrer || "N/A",
         size: 180,
         header: "Source",
       },

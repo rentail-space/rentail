@@ -304,7 +304,7 @@ function zodToExample(schema: ZodType): unknown {
     const shape = schema.shape;
     const result: Record<string, unknown> = {};
     for (const [key, value] of Object.entries(shape))
-      result[key] = zodToExample(value as ZodType);
+      result[key] = zodToExample(value);
     return result;
   } else if (schema instanceof zod.ZodArray) return schema.description;
   else if (schema instanceof zod.ZodString) return description || "string";

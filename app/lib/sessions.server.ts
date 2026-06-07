@@ -1,4 +1,4 @@
-import type { TextUIPart, UIMessage } from "ai";
+import type { UIMessage } from "ai";
 import type { UserGetPayload } from "prisma/generated/models";
 import type { Chat, User } from "prisma/generated";
 import { type Session, createCookieSessionStorage } from "react-router";
@@ -15,6 +15,7 @@ import envVars from "~/lib/env";
 import welcome from "~/prompts/welcome.md?raw";
 import bcrypt from "bcryptjs";
 import prisma from "~/lib/prisma.server";
+import { safeTextParts } from "~/lib/aiMessage.server";
 import debug from "debug";
 
 type SessionData = {
@@ -202,15 +203,13 @@ export async function recentMessages(chatId: string): Promise<UIMessage[]> {
     recent
       // NOTE: skip empty messages, API doesn't support empty messages
       .filter((message) =>
-        (message.content as TextUIPart[]).some(
-          (part) => part.text.trim() !== "",
-        ),
+        safeTextParts(message.content).some((part) => part.text.trim() !== ""),
       )
       .reverse()
       // NOTE: ensure correct transformation to ModelMessage[]
       .map((message) => ({
         id: message.id,
-        parts: message.content as TextUIPart[],
+        parts: safeTextParts(message.content),
         role: message.role,
       }))
   );

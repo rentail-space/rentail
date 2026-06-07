@@ -1,5 +1,6 @@
 import { ms } from "convert";
 import invariant from "tiny-invariant";
+import { z } from "zod";
 import debug from "debug";
 
 const fallbackLocation = {
@@ -9,6 +10,29 @@ const fallbackLocation = {
   displayName: "",
   timeZone: "America/Los_Angeles",
 };
+
+const ipGeoResponseSchema = z.object({
+  location: z.object({
+    city: z.string(),
+    country_code2: z.string(),
+    latitude: z.string(),
+    longitude: z.string(),
+    state_code: z.string(),
+  }),
+});
+
+const timezoneResponseSchema = z.object({
+  timezone: z.object({ name: z.string() }),
+});
+
+const nominatimResponseSchema = z.array(
+  z.object({
+    place_id: z.union([z.number(), z.string()]),
+    display_name: z.string(),
+    lat: z.string(),
+    lon: z.string(),
+  }),
+);
 
 type GeocodedLocation = {
   city?: string;
@@ -149,15 +173,9 @@ async function geocodeFromIP(
   const response = await fetch(url);
   invariant(response.ok, "Failed to geocode from IP");
 
-  const data = (await response.json()) as {
-    location: {
-      city: string; // eg "Los Angeles",
-      country_code2: string; // eg "US",
-      latitude: string; // eg "34.05361",
-      longitude: string; // eg "-118.24550",
-      state_code: string; // eg "US-CA",
-    };
-  };
+  const parsed = ipGeoResponseSchema.safeParse(await response.json());
+  invariant(parsed.success, "Invalid ipgeolocation response");
+  const data = parsed.data;
   const city = decodeURIComponent(data.location.city);
   const country = decodeURIComponent(data.location.country_code2);
   const state = decodeURIComponent(data.location.state_code.split("-")[1]);
@@ -189,11 +207,9 @@ async function getTimezoneFromIP(ip: string): Promise<string> {
   const response = await fetch(url);
   invariant(response.ok, "Failed to get timezone");
 
-  const data = (await response.json()) as {
-    timezone: {
-      name: string; // eg "America/Los_Angeles",
-    };
-  };
+  const parsed = timezoneResponseSchema.safeParse(await response.json());
+  invariant(parsed.success, "Invalid timezone response");
+  const data = parsed.data;
   const timezone = data.timezone.name;
   logger("Timezone from IP %s => %s", ip, timezone);
   return timezone;
@@ -224,12 +240,9 @@ export async function geocodeFromUserInput(location: string): Promise<{
       headers: { "User-Agent": "rentail.space/1.0 (support@rentail.space)" },
       signal: AbortSignal.timeout(ms("2s")),
     });
-    const results = (await response.json()) as Array<{
-      place_id: number;
-      display_name: string;
-      lat: string;
-      lon: string;
-    }>;
+    const parsed = nominatimResponseSchema.safeParse(await response.json());
+    invariant(parsed.success, "Invalid Nominatim response");
+    const results = parsed.data;
     invariant(results.length > 0, "No results found");
     // NOTE: Handle strings like "Las%20Vegas, NV, US" properly.
     const displayName = decodeURIComponent(results[0].display_name);

@@ -1,5 +1,6 @@
 import type { User } from "prisma/generated";
 import { Button, Section, Text } from "react-email";
+import { safeParseUtm } from "~/lib/middleware/utm.server";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import EmailLayout from "./EmailLayout";
 import { sendEmail } from "./sendEmails.server";
@@ -23,7 +24,7 @@ export default async function sendNewUserNotification(user: User) {
 }
 
 function UserInfo({ user }: { user: User }) {
-  const utm = user.utm ? JSON.parse(user.utm as string) : undefined;
+  const utm = safeParseUtm(user.utm);
   const workingMemory = cleanParseWorkingMemory(user.workingMemory);
   return (
     <Section>
@@ -47,15 +48,21 @@ function UserInfo({ user }: { user: User }) {
         <strong>User Agent:</strong> {user.userAgent ?? "N/A"}
       </Text>
       {utm &&
-        Object.entries<string>(utm)
+        Object.entries(utm)
           .filter(
             ([key]) => key !== "ip" && key !== "userAgent" && key !== "referer",
           )
-          .map(([key, value]) => (
-            <Text key={key} className="text-gray-700 text-sm leading-relaxed">
-              <strong>UTM {key}:</strong> {value}
-            </Text>
-          ))}
+          .map(
+            ([key, value]) =>
+              value && (
+                <Text
+                  key={key}
+                  className="text-gray-700 text-sm leading-relaxed"
+                >
+                  <strong>UTM {key}:</strong> {value}
+                </Text>
+              ),
+          )}
     </Section>
   );
 }

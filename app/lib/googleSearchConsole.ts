@@ -1,14 +1,35 @@
 import { JWT } from "google-auth-library";
 import invariant from "tiny-invariant";
+import { z } from "zod";
 import envVars from "./env.js";
 
-export interface SearchQuery {
-  query: string;
-  clicks: number;
-  impressions: number;
-  ctr: number;
-  position: number;
-}
+const searchQuerySchema = z.object({
+  query: z.string(),
+  clicks: z.number(),
+  impressions: z.number(),
+  ctr: z.number(),
+  position: z.number(),
+});
+
+export const searchQueryArraySchema = z.array(searchQuerySchema);
+
+export type SearchQuery = z.infer<typeof searchQuerySchema>;
+
+const searchConsoleErrorSchema = z.object({
+  error: z.object({ message: z.string() }),
+});
+
+const searchConsoleResponseSchema = z.object({
+  rows: z.array(
+    z.object({
+      keys: z.array(z.string()),
+      clicks: z.number(),
+      impressions: z.number(),
+      ctr: z.number(),
+      position: z.number(),
+    }),
+  ),
+});
 
 /**
  * Fetch search analytics data from Google Search Console
@@ -46,26 +67,26 @@ export async function getSearchAnalytics({
       }),
     });
     if (!response.ok) {
-      const error = (await response.json()) as { error: { message: string } };
-      console.error("Error fetching search analytics:", error.error.message);
+      const error = searchConsoleErrorSchema.safeParse(await response.json());
+      if (error.success)
+        console.error(
+          "Error fetching search analytics:",
+          error.data.error.message,
+        );
       return [];
     }
 
-    const data = (await response.json()) as {
-      rows: {
-        keys: string[];
-        clicks: number;
-        impressions: number;
-        ctr: number;
-        position: number;
-      }[];
-    };
-    return data.rows.map((row) => ({
-      query: row.keys?.[0] ?? "",
-      clicks: row.clicks ?? 0,
-      impressions: row.impressions ?? 0,
-      ctr: row.ctr ?? 0,
-      position: row.position ?? 0,
+    const data = searchConsoleResponseSchema.safeParse(await response.json());
+    if (!data.success) {
+      console.error("Invalid Search Console API response:", data.error);
+      return [];
+    }
+    return data.data.rows.map((row) => ({
+      query: row.keys[0] ?? "",
+      clicks: row.clicks,
+      impressions: row.impressions,
+      ctr: row.ctr,
+      position: row.position,
     }));
   } catch (error) {
     console.error("Error fetching search analytics:", error);

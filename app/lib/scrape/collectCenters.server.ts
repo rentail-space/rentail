@@ -9,7 +9,6 @@ import { dirname, resolve } from "node:path";
 import ora from "ora";
 import { chromium } from "playwright";
 import { fork, parallel } from "radashi";
-import type z from "zod";
 import externalLink from "~/lib/externalLink";
 import { slugify } from "~/lib/utils";
 import enrichCenter from "./enrichCenter";
@@ -130,7 +129,7 @@ export default async function collectCenters(search: string) {
     const filename = getCenterSaveFilename(center);
     console.info("Seeding existing center: %s", filename);
     const data = await readFile(filename, "utf-8");
-    const parsed = schema.parse(JSON.parse(data)) as z.infer<typeof schema>;
+    const parsed = schema.parse(JSON.parse(data));
     await seedCenter(parsed);
   }
 

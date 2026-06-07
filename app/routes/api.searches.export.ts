@@ -1,10 +1,10 @@
 import type { ActionFunctionArgs } from "react-router";
-import type { SearchQuery } from "~/lib/googleSearchConsole";
 import { verifyAdmin } from "~/lib/sessions.server";
 import { stringify } from "csv-stringify/sync";
 import { Temporal } from "@js-temporal/polyfill";
 import { daysAgo } from "~/lib/temporal";
 import invariant from "tiny-invariant";
+import { searchQueryArraySchema } from "~/lib/googleSearchConsole";
 import prisma from "~/lib/prisma.server";
 
 export async function loader({ request }: ActionFunctionArgs) {
@@ -24,10 +24,11 @@ export async function loader({ request }: ActionFunctionArgs) {
     where: { key, createdAt: { gte: from10DaysAgo } },
   });
   invariant(cached, "Cached query not found");
-  const queries =
-    typeof cached.value === "string"
-      ? (JSON.parse(cached.value) as SearchQuery[])
-      : (cached.value as unknown as SearchQuery[]);
+  const raw =
+    typeof cached.value === "string" ? JSON.parse(cached.value) : cached.value;
+  const parsed = searchQueryArraySchema.safeParse(raw);
+  invariant(parsed.success, "Invalid cached search queries");
+  const queries = parsed.data;
 
   const csv = stringify(
     queries

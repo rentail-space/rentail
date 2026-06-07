@@ -72,7 +72,7 @@ export default async function seedCenters(centerSlugs?: string[]) {
     );
   const centers = (centerSlugs || filenames).map((filename) => {
     const data = readFileSync(resolve(basedir, filename), "utf-8");
-    return schema.parse(JSON.parse(data)) as z.infer<typeof schema>;
+    return schema.parse(JSON.parse(data));
   });
 
   const states = await prisma.state.findMany();

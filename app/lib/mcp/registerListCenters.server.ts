@@ -111,7 +111,7 @@ export default function registerListCenters(mcpServer: McpServer) {
           summary: center.summary,
           website: externalLink(center.website),
         })),
-      } as zod.infer<typeof listCentersSpec.outputSchema>;
+      };
       listCentersSpec.outputSchema.parse(output);
       return {
         content: [{ type: "text", text: JSON.stringify(output) }],

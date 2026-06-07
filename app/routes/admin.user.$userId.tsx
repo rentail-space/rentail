@@ -1,4 +1,3 @@
-import type { TextUIPart } from "ai";
 import { ArrowLeft, ArrowRight, CircleCheck, InfoIcon } from "lucide-react";
 import type { User } from "prisma/generated";
 import type {
@@ -20,9 +19,11 @@ import {
 import { Textarea } from "~/components/ui/Textarea";
 import deviceDetection from "~/lib/deviceDetection";
 import findNearbyCenters from "~/lib/findNearbyCenters.server";
+import { safeParseUtm } from "~/lib/middleware/utm.server";
 import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
 import { formatDatetimeFull } from "~/lib/temporal";
+import { safeTextParts } from "~/lib/aiMessage.server";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import type { Route } from "./+types/admin.user.$userId";
 import Messages from "./chat/Messages";
@@ -92,7 +93,7 @@ export default function UserPage({
 
 function UserInfoCard({ user }: { user: User }) {
   const workingMemory = cleanParseWorkingMemory(user.workingMemory);
-  const utm = user.utm ? JSON.parse(user.utm as string) : undefined;
+  const utm = safeParseUtm(user.utm);
   // Get the browser timezone if we're on the client
 
   return (
@@ -111,13 +112,13 @@ function UserInfoCard({ user }: { user: User }) {
           <Row title="Device" value={deviceDetection(user.userAgent)} />
           <Row title="Viewport" value={user.viewport as string} />
           {utm &&
-            Object.entries<string>(utm)
+            Object.entries(utm)
               .filter(
                 ([key]) =>
                   key !== "ip" && key !== "userAgent" && key !== "referer",
               )
               .map(([key, value]) => (
-                <Row key={key} title={`UTM ${key}`} value={value} />
+                <Row key={key} title={`UTM ${key}`} value={value ?? null} />
               ))}
           <Row title="Created" value={formatDatetimeFull(user.createdAt)} />
         </TableBody>
@@ -226,7 +227,7 @@ function FullChat({
           isTyping={false}
           messages={chat.messages.map((message) => ({
             id: message.id,
-            parts: message.content as TextUIPart[],
+            parts: safeTextParts(message.content),
             role: message.role,
           }))}
           setQuery={() => {}}

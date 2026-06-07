@@ -6,13 +6,16 @@ import { sleep } from "radashi";
 import { pretty, render } from "react-email";
 import { Resend } from "resend";
 import invariant from "tiny-invariant";
+import { z } from "zod";
 import envVars from "~/lib/env";
 
-export type LastEmail = {
-  html: string;
-  subject: string;
-  to: string;
-};
+export const lastEmailSchema = z.object({
+  html: z.string(),
+  subject: z.string(),
+  to: z.string(),
+});
+
+export type LastEmail = z.infer<typeof lastEmailSchema>;
 
 export let lastEmailSent: LastEmail | undefined = undefined;
 const resend = new Resend(envVars.RESEND_API_KEY);
@@ -71,8 +74,11 @@ export async function getLastEmailSent(): Promise<LastEmail> {
       while (true) {
         const raw = await redis.get("email:last");
         if (raw) {
-          lastEmailSent = JSON.parse(raw) as LastEmail;
-          return;
+          const parsed = lastEmailSchema.safeParse(JSON.parse(raw));
+          if (parsed.success) {
+            lastEmailSent = parsed.data;
+            return;
+          }
         }
         await sleep(100);
       }

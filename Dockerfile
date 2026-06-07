@@ -1,4 +1,4 @@
-FROM node:24-slim AS base
+FROM node:26-slim AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -19,7 +19,7 @@ RUN --mount=type=secret,id=env,required=true \
   pnpm --config.verify-deps-before-run=false run build
 
 # --- RUNNER ---
-FROM node:24-slim AS runner
+FROM node:26-slim AS runner
 ENV NODE_ENV=production
 
 RUN apt-get update && apt-get install -y --no-install-recommends \

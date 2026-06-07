@@ -29,6 +29,7 @@ import {
 import {
   type SearchQuery,
   getSearchAnalytics,
+  searchQueryArraySchema,
 } from "~/lib/googleSearchConsole";
 import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
@@ -50,10 +51,14 @@ export async function loader({ request }: Route.LoaderArgs) {
   let queries: SearchQuery[];
 
   if (cached) {
-    queries =
+    const raw =
       typeof cached.value === "string"
-        ? (JSON.parse(cached.value) as SearchQuery[])
-        : (cached.value as unknown as SearchQuery[]);
+        ? JSON.parse(cached.value)
+        : cached.value;
+    const parsed = searchQueryArraySchema.safeParse(raw);
+    queries = parsed.success ? parsed.data : [];
+    if (!parsed.success)
+      console.error("Invalid cached search queries: %s", parsed.error);
   } else {
     queries = await getSearchAnalytics({
       startDate: new Date(startDate.epochMilliseconds),
@@ -61,7 +66,7 @@ export async function loader({ request }: Route.LoaderArgs) {
     });
 
     if (queries.length > 0) {
-      const value = queries as unknown as InputJsonValue;
+      const value = searchQueryArraySchema.parse(queries) as InputJsonValue;
       await prisma.cache.upsert({
         create: { key, value },
         update: { value },
