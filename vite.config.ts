@@ -1,46 +1,9 @@
-import { execSync } from "node:child_process";
 import { resolve } from "node:path";
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite-plus";
 import devtoolsJson from "vite-plugin-devtools-json";
-
-/**
- * Load secrets from Infisical into a flat env object for Vitest.
- * Falls back gracefully if Infisical CLI is unavailable or
- * unauthenticated — tests will use whatever is already in process.env.
- */
-function loadInfisicalEnv(): Record<string, string> {
-  try {
-    const raw = execSync(
-      "infisical export --env test --format dotenv-export --silent",
-      { encoding: "utf-8", timeout: 10_000 },
-    );
-    const secrets: Record<string, string> = {};
-    for (const line of raw.split("\n")) {
-      const match = line.match(
-        /^export\s+(\w+)=('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|[^\s]+)/,
-      );
-      if (match) {
-        let value = match[2];
-        // Strip surrounding quotes (single or double)
-        if (
-          (value.startsWith("'") && value.endsWith("'")) ||
-          (value.startsWith('"') && value.endsWith('"'))
-        ) {
-          value = value.slice(1, -1);
-        }
-        secrets[match[1]] = value;
-      }
-    }
-    return secrets;
-  } catch {
-    console.warn(
-      "Infisical: unable to load secrets — falling back to process.env",
-    );
-    return {};
-  }
-}
+import { loadInfisicalEnv } from "./app/lib/loadSecrets";
 
 export default defineConfig({
   staged: {
