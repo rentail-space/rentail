@@ -53,7 +53,9 @@ async function fromGoogleAnalytics(
     email: "analytics@rentail-480516.iam.gserviceaccount.com",
     key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
   });
-  const client = new BetaAnalyticsDataClient({ authClient });
+  const client = new BetaAnalyticsDataClient({
+    authClient: authClient as never,
+  });
 
   // @see https://support.google.com/analytics/table/13948007
   const response = await client.runReport({

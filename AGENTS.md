@@ -10,16 +10,16 @@ Comprehensive guide for AI coding agents working in the rentail.space codebase.
 pnpm dev              # Start dev server (port 5173)
 pnpm build            # Production build (Prisma generate + React Router build)
 pnpm check            # Lint + typecheck (run before committing)
-pnpm test             # Full test suite (check + vitest)
+pnpm test             # Full test suite (check + vp test)
 pnpm format           # Format with Oxfmt (via Vite+)
 ```
 
 ### Running Tests
 
 ```bash
-pnpx vitest run                    # Run all tests
-pnpx vitest run <pattern>          # Run specific test (e.g., "chat")
-pnpx vitest run --reporter=verbose # Detailed test output
+pnpx vp test run                    # Run all tests
+pnpx vp test run <pattern>          # Run specific test (e.g., "chat")
+pnpx vp test run --reporter=verbose # Detailed test output
 DEBUG=* pnpm test                  # Enable debug logging
 ```
 
@@ -102,7 +102,7 @@ pnpm prisma migrate dev            # Create migration
 - **Flat maps** - Oxlint enforces `useFlatMap` over nested map/flatten
 - **Code splitting** - Use React Suspense and dynamic imports for non-critical components
 
-### Testing (Vitest + Playwright)
+### Testing (vp test + Playwright)
 
 - **Test files**: `/test/*.test.ts` (NOT alongside source)
 - **Browser tests** - Uses Playwright browser provider

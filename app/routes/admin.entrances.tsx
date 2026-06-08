@@ -37,7 +37,10 @@ async function getEntrances(period: number) {
     email: "analytics@rentail-480516.iam.gserviceaccount.com",
     key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
   });
-  const analyticsDataClient = new BetaAnalyticsDataClient({ authClient });
+
+  const analyticsDataClient = new BetaAnalyticsDataClient({
+    authClient: authClient as never,
+  });
   const [entrancesResponse] = await analyticsDataClient.runReport({
     property: "properties/496833933",
     dateRanges: [
