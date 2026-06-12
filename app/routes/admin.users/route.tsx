@@ -1,10 +1,9 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import type { Temporal } from "@js-temporal/polyfill";
 import { groupBy, meanBy, sumBy } from "es-toolkit";
-import { JWT } from "google-auth-library";
 import type { LoaderFunctionArgs } from "react-router";
 import invariant from "tiny-invariant";
-import envVars from "~/lib/env";
+import { createGoogleAnalyticsAuth } from "~/lib/googleAnalytics.server";
 import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
 import DateRangeSelector, {
@@ -48,11 +47,9 @@ async function fromGoogleAnalytics(
   from: Temporal.PlainDate,
   until: Temporal.PlainDate,
 ): Promise<Analytics[]> {
-  const authClient = new JWT({
-    scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
-    email: "analytics@rentail-480516.iam.gserviceaccount.com",
-    key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
-  });
+  const authClient = createGoogleAnalyticsAuth(
+    "https://www.googleapis.com/auth/analytics.readonly",
+  );
   const client = new BetaAnalyticsDataClient({
     authClient: authClient as never,
   });

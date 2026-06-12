@@ -34,6 +34,10 @@ const envVars = {
     .get("GOOGLE_ANALYTICS_PRIVATE_KEY")
     .required(false)
     .asString(),
+  GOOGLE_APPLICATION_CREDENTIALS: env
+    .get("GOOGLE_APPLICATION_CREDENTIALS")
+    .required(false)
+    .asString(),
 
   GOOGLE_PLACES_API_KEY: env
     .get("GOOGLE_PLACES_API_KEY")

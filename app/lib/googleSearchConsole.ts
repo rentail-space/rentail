@@ -1,7 +1,6 @@
-import { JWT } from "google-auth-library";
 import invariant from "tiny-invariant";
 import { z } from "zod";
-import envVars from "./env.js";
+import { createGoogleAnalyticsAuth } from "./googleAnalytics.server.js";
 
 const searchQuerySchema = z.object({
   query: z.string(),
@@ -43,14 +42,12 @@ export async function getSearchAnalytics({
   endDate: Date;
 }): Promise<SearchQuery[]> {
   try {
-    const auth = new JWT({
-      scopes: "https://www.googleapis.com/auth/webmasters.readonly",
-      email: "analytics@rentail-480516.iam.gserviceaccount.com",
-      key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
-    });
+    const auth = createGoogleAnalyticsAuth(
+      "https://www.googleapis.com/auth/webmasters.readonly",
+    );
     const domain = "rentail.space";
     const url = `https://searchconsole.googleapis.com/webmasters/v3/sites/sc-domain:${domain}/searchAnalytics/query`;
-    const accessToken = (await auth.authorize()).access_token;
+    const accessToken = await auth.getAccessToken();
     invariant(accessToken, "Failed to get access token");
     const response = await fetch(url, {
       method: "POST",

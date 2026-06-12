@@ -1,7 +1,6 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import { Temporal } from "@js-temporal/polyfill";
 import { sumBy } from "es-toolkit";
-import { JWT } from "google-auth-library";
 import { Suspense } from "react";
 import { Await, type LoaderFunctionArgs } from "react-router";
 import invariant from "tiny-invariant";
@@ -18,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/Table";
-import envVars from "~/lib/env";
+import { createGoogleAnalyticsAuth } from "~/lib/googleAnalytics.server";
 import { verifyAdmin } from "~/lib/sessions.server";
 import type { Route } from "./+types/admin.entrances";
 
@@ -32,11 +31,9 @@ async function getEntrances(period: number) {
   const endDate = Temporal.Now.zonedDateTimeISO("UTC");
   const startDate = endDate.subtract({ days: period });
 
-  const authClient = new JWT({
-    scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
-    email: "analytics@rentail-480516.iam.gserviceaccount.com",
-    key: envVars.GOOGLE_ANALYTICS_PRIVATE_KEY,
-  });
+  const authClient = createGoogleAnalyticsAuth(
+    "https://www.googleapis.com/auth/analytics.readonly",
+  );
 
   const analyticsDataClient = new BetaAnalyticsDataClient({
     authClient: authClient as never,
