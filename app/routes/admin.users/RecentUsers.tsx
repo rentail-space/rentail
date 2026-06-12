@@ -20,6 +20,8 @@ import {
 } from "@tanstack/react-table";
 import { safeParseUtm } from "~/lib/utm";
 import deviceDetection from "~/lib/deviceDetection";
+import { max, last, round } from "radashi";
+import convert from "convert";
 
 export default function RecentUsers({ users }: { users: User[] }) {
   const table = useReactTable({
@@ -72,13 +74,19 @@ export default function RecentUsers({ users }: { users: User[] }) {
     },
     getCoreRowModel: getCoreRowModel(),
   });
+  const recent = last(users)?.createdAt;
+  const days =
+    recent && convert(Date.now() - new Date(recent).getTime(), "ms").to("days");
 
   return (
     <Card className="bg-secondary-background text-foreground">
       <CardHeader>
         <CardTitle className="font-bold text-2xl">
           Recent Users{" "}
-          <span className="text-gray-500">({users.length} user)</span>
+          <span className="text-gray-500">
+            ({users.length} users
+            {days && ` ~${round(users.length / days, 1)} day`})
+          </span>
         </CardTitle>
       </CardHeader>
 
