@@ -7,8 +7,6 @@ import {
   PersonStandingIcon,
 } from "lucide-react";
 import type { User } from "prisma/generated";
-import { Suspense } from "react";
-import { Await } from "react-router";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { Card, CardContent } from "~/components/ui/Card";
 import {
@@ -18,7 +16,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "~/components/ui/Chart";
-import LoadingProgress from "~/components/ui/LoadingProgress";
 import type { Analytics } from "./route";
 
 const chartConfig = {
@@ -57,7 +54,7 @@ export default function AnalyticsCharts({
   until,
   users,
 }: {
-  analytics: Promise<Analytics[]>;
+  analytics: Analytics[];
   from: Temporal.PlainDate;
   until: Temporal.PlainDate;
   users: User[];
@@ -65,18 +62,12 @@ export default function AnalyticsCharts({
   return (
     <Card className="bg-secondary-background text-foreground">
       <CardContent>
-        <Suspense fallback={<LoadingProgress />}>
-          <Await resolve={analytics}>
-            {(analytics) => (
-              <SquareAnalyticsCharts
-                analytics={analytics}
-                from={from}
-                until={until}
-                users={users}
-              />
-            )}
-          </Await>
-        </Suspense>
+        <SquareAnalyticsCharts
+          analytics={analytics}
+          from={from}
+          until={until}
+          users={users}
+        />
       </CardContent>
     </Card>
   );

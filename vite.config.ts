@@ -1,9 +1,46 @@
 import { resolve } from "node:path";
+import type { Connect } from "vite";
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite-plus";
 import devtoolsJson from "vite-plugin-devtools-json";
 import { loadInfisicalEnv } from "./app/lib/loadSecrets";
+
+/**
+ * Vite middleware that forces no-cache on every response.
+ *
+ * Safari bfcache (back/forward cache) and HTTP cache both aggressively
+ * retain JavaScript modules. Even with Cache-Control headers on the
+ * document, Safari will serve stale transformed modules from its cache.
+ * This middleware runs at the Connect level, before Vite's own layer,
+ * and stamps every response with kill-cache headers.
+ *
+ * The `Surrogate-Control` header is respected by Safari where plain
+ * `Cache-Control` is sometimes ignored for modulepreload resources.
+ */
+function noCachePlugin(): import("vite").Plugin {
+  return {
+    name: "no-cache",
+    configureServer(server) {
+      server.middlewares.use(
+        (
+          _req: Connect.IncomingMessage,
+          res: import("http").ServerResponse,
+          next: Connect.NextFunction,
+        ) => {
+          res.setHeader(
+            "Cache-Control",
+            "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
+          );
+          res.setHeader("Pragma", "no-cache");
+          res.setHeader("Expires", "0");
+          res.setHeader("Surrogate-Control", "no-store");
+          next();
+        },
+      );
+    },
+  };
+}
 
 export default defineConfig({
   staged: {
@@ -91,7 +128,7 @@ export default defineConfig({
     testTimeout: 30_000, // 30 seconds
   },
 
-  plugins: [tailwindcss(), reactRouter(), devtoolsJson()],
+  plugins: [noCachePlugin(), tailwindcss(), reactRouter(), devtoolsJson()],
   resolve: {
     alias: [
       { find: "~/test", replacement: resolve("test") },

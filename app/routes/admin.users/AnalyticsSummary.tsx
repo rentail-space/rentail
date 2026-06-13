@@ -3,28 +3,19 @@ import type { Analytics } from "./route";
 import type { User } from "prisma/generated";
 import { Card, CardContent } from "~/components/ui/Card";
 import { meanBy, sumBy } from "es-toolkit";
-import { Suspense } from "react";
-import { Await } from "react-router";
 import { safeParseUtm } from "~/lib/utm";
-import LoadingProgress from "~/components/ui/LoadingProgress";
 
 export default function AnalyticsSummary({
   analytics,
   users,
 }: {
-  analytics: Promise<Analytics[]>;
+  analytics: Analytics[];
   users: User[];
 }) {
   return (
     <Card className="bg-secondary-background text-foreground">
       <CardContent>
-        <Suspense fallback={<LoadingProgress />}>
-          <Await resolve={analytics}>
-            {(analytics) => (
-              <AnalyticsSummaryTable analytics={analytics} users={users} />
-            )}
-          </Await>
-        </Suspense>
+        <AnalyticsSummaryTable analytics={analytics} users={users} />
       </CardContent>
     </Card>
   );

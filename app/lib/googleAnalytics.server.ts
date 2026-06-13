@@ -1,21 +1,19 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { GoogleAuth } from "google-auth-library";
+import { JWT } from "google-auth-library";
 import invariant from "tiny-invariant";
 import envVars from "./env";
 
+const SERVICE_ACCOUNT_EMAIL =
+  "analytics@rentail-480516.iam.gserviceaccount.com";
+
 /**
  * Locate the service account JSON key file.
- *
- * Checks several locations so this works in both dev and production.
  */
 function findKeyFilePath(): string | null {
   const candidates = [
-    // Project root (dev)
     join(process.cwd(), "google-rentail.json"),
-    // One level up (some deployment setups)
     join(process.cwd(), "..", "google-rentail.json"),
-    // Absolute path from env
     envVars.GOOGLE_APPLICATION_CREDENTIALS,
   ];
   for (const candidate of candidates) {
@@ -25,29 +23,27 @@ function findKeyFilePath(): string | null {
 }
 
 /**
- * Create a GoogleAuth client for Google Analytics (GA4) and Search Console.
+ * Read the service account JSON and extract the private key.
  *
- * Prefers the service account JSON key file (google-rentail.json) since
- * constructing a JWT from the GOOGLE_ANALYTICS_PRIVATE_KEY env var is
- * error-prone — the PEM key often has literal `\n` sequences that OpenSSL
- * 3.x rejects.  Falls back to the env var when no key file is present.
+ * Using `JSON.parse` on the file content properly converts `\n` escape
+ * sequences in the private_key field to real newlines, which is what
+ * OpenSSL 3.x requires.
  */
-export function createGoogleAnalyticsAuth(
-  scopes: string | string[],
-): GoogleAuth {
+function readKeyFileCredentials(): {
+  client_email: string;
+  private_key: string;
+} | null {
   const keyFile = findKeyFilePath();
-  if (keyFile) return new GoogleAuth({ scopes, keyFile });
-
-  // Fallback: construct from env var
-  const privateKey = envVars.GOOGLE_ANALYTICS_PRIVATE_KEY;
-  invariant(privateKey, "No Google Analytics credentials found");
-  return new GoogleAuth({
-    scopes,
-    credentials: {
-      client_email: "analytics@rentail-480516.iam.gserviceaccount.com",
-      private_key: normalizePrivateKey(privateKey),
-    },
-  });
+  if (!keyFile) return null;
+  try {
+    const data = JSON.parse(readFileSync(keyFile, "utf8"));
+    return {
+      client_email: data.client_email,
+      private_key: data.private_key,
+    };
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -60,4 +56,32 @@ export function createGoogleAnalyticsAuth(
 function normalizePrivateKey(key: string): string {
   if (key.includes("\\n")) return key.replace(/\\n/g, "\n");
   return key;
+}
+
+/**
+ * Create a JWT auth client for Google Analytics (GA4) and Search Console.
+ *
+ * Prefers the service account JSON key file (google-rentail.json) since
+ * `JSON.parse` properly converts `\n` → real newlines. Falls back to the
+ * GOOGLE_ANALYTICS_PRIVATE_KEY env var with manual normalization.
+ */
+export function createGoogleAnalyticsAuth(scopes: string | string[]): JWT {
+  // 1. Try the JSON key file (most reliable — JSON.parse handles \n for us)
+  const fileCreds = readKeyFileCredentials();
+  if (fileCreds) {
+    return new JWT({
+      scopes,
+      email: fileCreds.client_email,
+      key: fileCreds.private_key,
+    });
+  }
+
+  // 2. Fall back to the env var
+  const privateKey = envVars.GOOGLE_ANALYTICS_PRIVATE_KEY;
+  invariant(privateKey, "No Google Analytics credentials found");
+  return new JWT({
+    scopes,
+    email: SERVICE_ACCOUNT_EMAIL,
+    key: normalizePrivateKey(privateKey),
+  });
 }

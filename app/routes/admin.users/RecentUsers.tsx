@@ -20,7 +20,7 @@ import {
 } from "@tanstack/react-table";
 import { safeParseUtm } from "~/lib/utm";
 import deviceDetection from "~/lib/deviceDetection";
-import { max, last, round } from "radashi";
+import { last, round } from "radashi";
 import convert from "convert";
 
 export default function RecentUsers({ users }: { users: User[] }) {

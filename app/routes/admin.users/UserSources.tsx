@@ -1,9 +1,7 @@
 import type { Analytics } from "./route";
 import { Card, CardContent } from "~/components/ui/Card";
 import { groupBy, sumBy } from "es-toolkit";
-import { Suspense } from "react";
 import { twMerge } from "tailwind-merge";
-import { Await } from "react-router";
 import {
   TableHeader,
   TableBody,
@@ -18,21 +16,12 @@ import {
   useReactTable,
   flexRender,
 } from "@tanstack/react-table";
-import LoadingProgress from "~/components/ui/LoadingProgress";
 
-export default function UserSources({
-  analytics,
-}: {
-  analytics: Promise<Analytics[]>;
-}) {
+export default function UserSources({ analytics }: { analytics: Analytics[] }) {
   return (
     <Card className="bg-secondary-background text-foreground">
       <CardContent>
-        <Suspense fallback={<LoadingProgress />}>
-          <Await resolve={analytics}>
-            {(analytics) => <SourcesTable analytics={analytics} />}
-          </Await>
-        </Suspense>
+        <SourcesTable analytics={analytics} />
       </CardContent>
     </Card>
   );

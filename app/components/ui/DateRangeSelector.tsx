@@ -1,55 +1,37 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { useSearchParams } from "react-router";
-import { Tabs, TabsList, TabsTrigger } from "~/components/ui/Tabs";
+import { useCallback, useState } from "react";
 
-/**
- * These are the time periods user can tab through.
- */
-const periods = [14, 30, 90];
+export const PERIODS = [14, 30, 90];
 
-/**
- * A hook that returns the start and end dates and a function to set the range.
- * The start and end dates are parsed from the search params. The function to
- * set the range is used to update the search params and can be used with
- * useTransition in client. Can be used with useSearchParams in client,
- * URLSearchParams in server.
- *
- * @example
- * const { from, until, period, today, setRange } = useRangeSelection();
- * setRange(today.subtract({ days: 14 }), today);
- *
- * @returns The start and end dates and a function to set the range and the today's date.
- */
-export function useRangeSelection(): {
-  from: Temporal.PlainDate;
-  period: number;
-  setRange: (from: Temporal.PlainDate, until: Temporal.PlainDate) => void;
-  today: Temporal.PlainDate;
-  until: Temporal.PlainDate;
-} {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { from, period, until, today } = parseDateRange(searchParams);
-  const setRange = (from: Temporal.PlainDate, until: Temporal.PlainDate) => {
-    setSearchParams(
-      (params) => {
-        params.set("from", from.toString());
-        params.set("until", until.toString());
-        return params;
-      },
-      { replace: true, viewTransition: true },
-    );
-  };
-  return { from, until, period, today, setRange };
+function getToday() {
+  return Temporal.Now.plainDateISO("UTC");
 }
 
 /**
- * Parses the start and end dates and the today's date from the search params.
- * Can be used with URLSearchParams in server.
- *
- * @example
- * const { from, until, today } = parseDateRange(new URL(request.url).searchParams);
- * @param searchParams - The search params to parse the dates from.
- * @returns The start and end dates and the today's date.
+ * Client-side hook for reading the current date range.
+ * Each caller gets its own independent state (no shared context).
+ * For syncing data across components, pass values as props.
+ */
+export function useRangeSelection() {
+  const today = getToday();
+  const [period, setPeriod] = useState(PERIODS[1]);
+  const from = today.subtract({ days: period });
+  const setRange = useCallback(
+    (from: Temporal.PlainDate, until: Temporal.PlainDate) => {
+      const diff = from.until(until, {
+        largestUnit: "day",
+        smallestUnit: "day",
+      });
+      setPeriod(Math.floor(diff.total("hours") / 24));
+    },
+    [],
+  );
+  return { from, period, today, until: today, setRange };
+}
+
+/**
+ * Server-side utility to parse date range from URL search params.
+ * Does NOT use React state or hooks — safe to call in loaders.
  */
 export function parseDateRange(searchParams: URLSearchParams): {
   from: Temporal.PlainDate;
@@ -57,7 +39,7 @@ export function parseDateRange(searchParams: URLSearchParams): {
   until: Temporal.PlainDate;
   today: Temporal.PlainDate;
 } {
-  const today = Temporal.Now.plainDateISO("UTC");
+  const today = getToday();
 
   let until: Temporal.PlainDate;
   try {
@@ -70,7 +52,7 @@ export function parseDateRange(searchParams: URLSearchParams): {
   try {
     from = Temporal.PlainDate.from(searchParams.get("from") ?? "");
   } catch {
-    from = today.subtract({ days: periods[1] });
+    from = today.subtract({ days: PERIODS[1] });
   }
 
   const todayDate = today.toString();
@@ -82,37 +64,43 @@ export function parseDateRange(searchParams: URLSearchParams): {
             .until(until, { largestUnit: "day", smallestUnit: "day" })
             .total("hours") / 24,
         )
-      : periods[1];
+      : PERIODS[1];
 
   return { from, period, today, until };
 }
 
-/**
- * A component that allows the user to select a range of dates. Can be used with
- * useRangeSelection in client, URLSearchParams in server.
- *
- * @returns The component that allows the user to select a range of dates.
- */
-export default function DateRangeSelector() {
-  const { period, today, setRange } = useRangeSelection();
+export default function DateRangeSelector({
+  period,
+  onPeriodChange,
+}: {
+  period?: number;
+  onPeriodChange?: (period: number) => void;
+}) {
+  const activePeriod = period ?? PERIODS[1];
+
+  if (!PERIODS.length) return null;
+
   return (
-    <Tabs
-      value={period}
-      onValueChange={(value) => {
-        setRange(today.subtract({ days: Number(value) }), today);
-      }}
-    >
-      <TabsList>
-        {periods.map((daysInPeriod) => (
-          <TabsTrigger
+    <div className="inline-flex items-center justify-center gap-2 rounded-base border-2 border-black bg-[hsl(60,100%,99%)] p-2 shadow-[2px_2px_0px_0px_black]">
+      {PERIODS.map((daysInPeriod) => {
+        const isActive = activePeriod === daysInPeriod;
+        return (
+          <button
             key={daysInPeriod}
-            value={daysInPeriod}
+            className={`inline-flex items-center justify-center whitespace-nowrap rounded-base border-2 px-4 py-2 font-bold text-sm transition-all duration-100 ${
+              isActive
+                ? "border-black bg-[hsl(37,92%,65%)] shadow-[2px_2px_0px_0px_black]"
+                : "border-transparent text-black hover:border-black hover:bg-white"
+            }`}
+            onClick={() => {
+              if (onPeriodChange) onPeriodChange(daysInPeriod);
+            }}
             title={`Select the last ${daysInPeriod} days`}
           >
             Last {daysInPeriod} Days
-          </TabsTrigger>
-        ))}
-      </TabsList>
-    </Tabs>
+          </button>
+        );
+      })}
+    </div>
   );
 }

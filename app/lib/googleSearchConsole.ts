@@ -47,7 +47,7 @@ export async function getSearchAnalytics({
     );
     const domain = "rentail.space";
     const url = `https://searchconsole.googleapis.com/webmasters/v3/sites/sc-domain:${domain}/searchAnalytics/query`;
-    const accessToken = await auth.getAccessToken();
+    const accessToken = (await auth.authorize()).access_token;
     invariant(accessToken, "Failed to get access token");
     const response = await fetch(url, {
       method: "POST",
