@@ -1,10 +1,10 @@
+import { execSync } from "node:child_process";
 import { resolve } from "node:path";
 import type { Connect } from "vite";
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite-plus";
 import devtoolsJson from "vite-plugin-devtools-json";
-import { loadInfisicalEnv } from "./app/lib/loadSecrets";
 
 /**
  * Vite middleware that forces no-cache on every response.
@@ -107,9 +107,26 @@ export default defineConfig({
     bail: 3, // Stop after 3 failing tests
     browser: { screenshotDirectory: "__screenshots__" },
     disableConsoleIntercept: !process.env.CI,
-    // Secrets from Infisical; process.env takes precedence so overrides
-    // via the CLI or .env files still work.
-    env: { ...loadInfisicalEnv(), ...process.env },
+    // Fetch secrets via Infisical REST API (Machine Identity) or fall back to process.env.
+    // Uses a sync helper script because vite config is evaluated synchronously.
+    env: (() => {
+      try {
+        const raw = execSync("node scripts/fetch-infisical-secrets.mjs", {
+          encoding: "utf-8",
+          timeout: 10_000,
+          stdio: ["pipe", "pipe", "pipe"],
+        });
+        const env: Record<string, string> = {};
+        for (const line of raw.split("\n")) {
+          const match = line.match(/^export\s+(\w+)=(.*)$/);
+          if (match) env[match[1]] = match[2];
+        }
+        return { ...env, ...process.env };
+      } catch {
+        // Infisical credentials not configured — use process.env only
+        return { ...process.env };
+      }
+    })(),
     exclude: ["test/conversations/**/*.ts"],
     execArgv: ["--max-old-space-size=3072"],
     fileParallelism: false,

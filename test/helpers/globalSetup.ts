@@ -8,7 +8,6 @@
 
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
-import { loadInfisicalIntoEnv } from "~/lib/loadSecrets";
 
 /**
  * These are the only centers that are available in testing.
@@ -28,10 +27,10 @@ const centers = [
 const execAsync = promisify(exec);
 
 export default async function setup() {
-  // Load secrets from Infisical into process.env BEFORE any module that
-  // depends on them (e.g. Prisma) is imported. Since static imports are
-  // hoisted, we must dynamically import those modules after setting env vars.
-  loadInfisicalIntoEnv();
+  // Inject secrets from Infisical into process.env via the REST API.
+  // Uses Machine Identity (Universal Auth) — no CLI login needed.
+  const { loadInfisicalIntoEnv } = await import("~/lib/loadSecrets");
+  await loadInfisicalIntoEnv();
 
   const [
     { default: prisma },

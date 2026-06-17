@@ -7,7 +7,6 @@
 
 import Redis from "ioredis";
 import { afterAll, beforeAll } from "vitest";
-import envVars from "~/lib/env";
 import prisma from "~/lib/prisma.server";
 import "~/test/mocks/mockMapbox";
 import msw from "~/test/mocks/mswHandlers";
@@ -23,7 +22,7 @@ beforeAll(async () => {
   ]);
 
   // Cleanup Redis to avoid stale data between tests
-  const redis = new Redis(envVars.REDIS_URL);
+  const redis = new Redis(process.env.REDIS_URL ?? "redis://localhost:6379");
   await redis.flushdb();
 
   msw();
