@@ -73,7 +73,15 @@ async function startServer(this: void) {
     devServer.httpServer?.unref();
 
     async function shutdown() {
-      await devServer?.close();
+      try {
+        await devServer?.close();
+      } catch {
+        // Vite's optimizer may leave a non-empty deps_temp_* directory
+        // and fail to remove it with fs.rmdir. This is a Vite issue
+        // (non-recursive rmdir on a non-empty dir). Ignore it — we clean
+        // the whole cache dir on the next startup anyway.
+      }
+      await rm(testCacheDir, { recursive: true, force: true }).catch(() => {});
       process.exit(0);
     }
 

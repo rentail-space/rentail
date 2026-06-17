@@ -67,19 +67,23 @@ export async function launchServer(): Promise<number> {
     }, ms("30s"));
 
     if (worker) {
-      worker.on("message", (msg: { type: string; error?: string }) => {
+      const onMessage = (msg: { type: string; error?: string }) => {
         if (msg.type === "ready") {
           clearTimeout(timeout);
           logger("Server is ready");
+          worker?.off("message", onMessage);
           resolve();
         } else if (msg.type === "error") {
           clearTimeout(timeout);
+          worker?.off("message", onMessage);
           reject(new Error(`Server error: ${msg.error}`));
         }
-      });
+      };
+      worker.on("message", onMessage);
 
       worker.on("error", (error) => {
         clearTimeout(timeout);
+        worker?.off("message", onMessage);
         reject(error);
       });
     }
