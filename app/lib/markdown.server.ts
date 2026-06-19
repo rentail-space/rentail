@@ -1,7 +1,7 @@
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { recentBlogPosts, loadBlogPost } from "~/lib/blogPosts.server";
 import { recentNewsItems, loadNewsItem } from "~/lib/newsItems.server";
-import forAIAssistants from "~/data/for-ai-assistants.md?raw";
+import forAIAssistants from "~/data/for-ai-assistants.md";
 import privacy from "~/data/privacy.md?raw";
 import terms from "~/data/terms.md?raw";
 import prisma from "~/lib/prisma.server";

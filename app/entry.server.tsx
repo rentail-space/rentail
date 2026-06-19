@@ -146,16 +146,13 @@ export default async (
 ): Promise<Response> => {
   const start = Date.now();
   console.info("%s %s", request.method, request.url);
-
-  // oxlint-disable-next-line typescript/no-floating-promises
-  trackBotVisit(request); // NOTE: run asynchronously
+  void trackBotVisit(request); // NOTE: run asynchronously
 
   const url = new URL(request.url);
   if (url.pathname.endsWith(".md")) {
     const md = await tryMarkdown(url.pathname);
     if (md) {
-      // oxlint-disable-next-line typescript/no-floating-promises
-      trackBotVisit(request);
+      void trackBotVisit(request);
       return md;
     }
   }
@@ -169,8 +166,7 @@ export default async (
   ) {
     const md = await tryMarkdown(url.pathname);
     if (md) {
-      // oxlint-disable-next-line typescript/no-floating-promises
-      trackBotVisit(request);
+      void trackBotVisit(request);
       return md;
     }
   }
@@ -203,8 +199,7 @@ export default async (
       },
     );
   });
-  // oxlint-disable-next-line typescript/no-floating-promises
-  waitForResponse(response, start).then((duration) => {
+  void waitForResponse(response, start).then((duration) => {
     console.info(
       "%s %s => %d (%dms)",
       request.method,

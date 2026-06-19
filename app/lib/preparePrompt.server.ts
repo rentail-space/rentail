@@ -74,7 +74,7 @@ export default async function preparePrompt({
         .join("\n"),
     )
     .replace("$[generalDirectives]", generalDirectives)
-    .replace(/\$\[\w+\]/gm, (_match) => {
+    .replace(/\$\[\w+\]/gm, (_match: string) => {
       throw new Error(`Section ${_match} not expanded`);
     });
 }

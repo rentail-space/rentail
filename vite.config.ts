@@ -1,6 +1,6 @@
 import { execSync } from "node:child_process";
 import { resolve } from "node:path";
-import type { Connect } from "vite";
+import type { Connect } from "vite-plus";
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite-plus";
@@ -18,7 +18,7 @@ import devtoolsJson from "vite-plugin-devtools-json";
  * The `Surrogate-Control` header is respected by Safari where plain
  * `Cache-Control` is sometimes ignored for modulepreload resources.
  */
-function noCachePlugin(): import("vite").Plugin {
+function noCachePlugin(): import("vite-plus").Plugin {
   return {
     name: "no-cache",
     configureServer(server) {
