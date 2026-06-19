@@ -81,9 +81,6 @@ jobs:
       - name: Check code/types/formatting
         run: pnpm exec vp check
 
-      - name: Clean vitest cache
-        run: rm -rf node_modules/.vite-test
-
       - name: Run Tests
         run: |
           pnpm vp test run

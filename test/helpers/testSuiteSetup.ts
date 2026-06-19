@@ -6,7 +6,7 @@
  */
 
 import Redis from "ioredis";
-import { afterAll, beforeAll } from "vitest";
+import { afterAll, beforeAll } from "vite-plus/test";
 import prisma from "~/lib/prisma.server";
 import "~/test/mocks/mockMapbox";
 import msw from "~/test/mocks/mswHandlers";

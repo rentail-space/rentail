@@ -9,7 +9,7 @@
  * - Navigation functionality
  */
 
-import { afterAll, beforeAll, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vite-plus/test";
 import { type Page, type Response, expect } from "playwright/test";
 import { BASE_URL } from "./helpers/launchServer";
 import { goto } from "~/test/helpers/launchBrowser";

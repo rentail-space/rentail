@@ -2,7 +2,7 @@
  * Mock Mapbox GL for tests to prevent WebGL initialization errors
  */
 
-import { vi } from "vitest";
+import { vi } from "vite-plus/test";
 
 // Mock the entire mapbox-gl module
 vi.mock("mapbox-gl", () => {

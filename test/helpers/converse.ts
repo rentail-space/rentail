@@ -1,7 +1,7 @@
 import { ms } from "convert";
 import { withTimeout } from "es-toolkit";
 import type { Page } from "playwright";
-import { expect } from "vitest";
+import { expect } from "vite-plus/test";
 import prisma from "~/lib/prisma.server";
 import { goto } from "./launchBrowser";
 

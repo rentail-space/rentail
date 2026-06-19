@@ -8,7 +8,7 @@
  * - First news item is accessible
  */
 
-import { beforeAll, describe, it } from "vitest";
+import { beforeAll, describe, it } from "vite-plus/test";
 import { BASE_URL } from "./helpers/launchServer";
 import { expect } from "playwright/test";
 

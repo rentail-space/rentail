@@ -1,6 +1,6 @@
 import { type Page, expect } from "playwright/test";
 import type { User } from "prisma/generated";
-import { afterAll, beforeAll, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vite-plus/test";
 import prisma from "~/lib/prisma.server";
 import converse from "./helpers/converse";
 import { goto } from "./helpers/launchBrowser";

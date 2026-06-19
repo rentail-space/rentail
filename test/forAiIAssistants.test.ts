@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it } from "vite-plus/test";
 import { type Page, expect } from "playwright/test";
 import { BASE_URL } from "./helpers/launchServer";
 import { goto } from "~/test/helpers/launchBrowser";

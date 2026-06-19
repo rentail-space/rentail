@@ -1,4 +1,4 @@
-import { beforeAll, describe, it } from "vitest";
+import { beforeAll, describe, it } from "vite-plus/test";
 import { XMLParser } from "fast-xml-parser";
 import { BASE_URL } from "./helpers/launchServer";
 import { expect } from "playwright/test";

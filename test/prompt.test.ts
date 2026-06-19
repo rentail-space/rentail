@@ -1,5 +1,5 @@
 import type { User } from "prisma/generated";
-import { beforeAll, describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vite-plus/test";
 import { createAnonymousUser } from "~/lib/sessions.server";
 import { ulid } from "ulid";
 import preparePrompt from "~/lib/preparePrompt.server";

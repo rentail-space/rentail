@@ -1,4 +1,4 @@
-// DO NOT add to setup.ts as vitest.config.js cannot upload file that imports vitest
+// DO NOT add to setup.ts as vite.config.js cannot upload file that imports vitest
 
 import type { Locator, Page } from "playwright";
 import { readdirSync, unlinkSync } from "node:fs";

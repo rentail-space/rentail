@@ -1,7 +1,7 @@
 import type { User } from "prisma/generated";
 import { Output, convertToModelMessages, generateText } from "ai";
 import { findOrCreateUser, recentMessages } from "~/lib/sessions.server";
-import { beforeAll, it } from "vitest";
+import { beforeAll, it } from "vite-plus/test";
 import { classify } from "~/lib/models";
 import { last } from "radashi";
 import { ulid } from "ulid";

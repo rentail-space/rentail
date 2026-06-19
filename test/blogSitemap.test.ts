@@ -8,7 +8,7 @@
  * - First blog post is accessible
  */
 
-import { beforeAll, describe, it } from "vitest";
+import { beforeAll, describe, it } from "vite-plus/test";
 import { BASE_URL } from "~/test/helpers/launchServer";
 import { expect } from "playwright/test";
 

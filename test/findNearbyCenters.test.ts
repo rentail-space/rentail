@@ -1,6 +1,6 @@
 import { expect } from "playwright/test";
 import type { Property } from "prisma/generated";
-import { beforeAll, describe, it } from "vitest";
+import { beforeAll, describe, it } from "vite-plus/test";
 import findNearbyCenters from "~/lib/findNearbyCenters.server";
 import prisma from "~/lib/prisma.server";
 import { createAnonymousUser } from "~/lib/sessions.server";
