@@ -8,7 +8,12 @@
 import { rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import invariant from "tiny-invariant";
-import * as vite from "vite-plus";
+
+// Import Vite the same way react-router dev CLI does — using dynamic import
+// of the "vite" package. The test server needs React Router's SSR middleware
+// properly wired, which only works when Vite is loaded via the standard
+// vite package (not through vite-plus's re-export of the internal fork).
+const vite = await import("vite");
 
 // Import and start the server
 async function startServer(this: void) {

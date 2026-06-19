@@ -7,12 +7,6 @@ declare module "*?raw" {
   export default src;
 }
 
-// Markdown imports (non-raw, e.g. for-ai-assistants.md)
-declare module "*.md" {
-  const src: string;
-  export default src;
-}
-
 // Vite import.meta.env (PROD, DEV, MODE, BASE_URL, SSR)
 interface ImportMetaEnv {
   BASE_URL: string;
