@@ -1,6 +1,6 @@
 # Terms of Service
 
-Last Updated: `10/02/2025`
+Last Updated: `06/19/2026`
 
 ## 1. Acceptance of Terms
 
@@ -13,6 +13,11 @@ Terms of Service, please do not use the Service.
 rentail.space is a platform that helps businesses find short-term retail spaces
 in shopping centers. The Service provides AI-powered assistance to discover,
 compare, and connect with specialty leasing opportunities.
+
+**The Service is an experiment.** It is made available for exploration and
+evaluation purposes, is under active development, and may be modified,
+suspended, or discontinued at any time without notice. Features, data, and
+behavior may change frequently and without warning.
 
 ## 3. User Accounts
 
@@ -45,10 +50,32 @@ trade secret, and other intellectual property or proprietary rights laws.
 
 ## 6. AI-Generated Content
 
-The Service uses artificial intelligence to provide recommendations and
-information. While we strive for accuracy, AI-generated content may contain
-errors or inaccuracies. You should verify all information independently before
-making business decisions.
+The Service uses artificial intelligence ("AI") and large language model
+("LLM") providers to generate responses, recommendations, and other content.
+The following terms apply to all AI-generated content:
+
+- **Suggestive, not informative.** AI responses are provided as suggestions
+  and starting points for your own investigation, not as authoritative,
+  complete, or informative statements of fact. Treat every response as a
+  prompt for further inquiry rather than a definitive answer.
+- **No assumption of correctness or validity.** You must not assume that any
+  AI-generated response is correct, accurate, current, complete, or valid.
+  AI may produce content that is incorrect, outdated, fabricated
+  ("hallucinated"), or misleading, even when it appears confident or
+  well-sourced. You are solely responsible for verifying all information
+  before relying on it.
+- **LLM providers may change.** The specific AI and LLM provider(s) powering
+  the Service may change from time to time, without notice. Different
+  providers behave differently, and the quality, style, and accuracy of
+  responses may vary as a result. No representation is made about which
+  provider is in use at any given time.
+- **Independent verification required.** Always independently confirm any
+  fact, figure, availability, price, location, contact detail, or other
+  information before making business or financial decisions based on
+  AI-generated content.
+
+We make no warranty or representation regarding the accuracy, reliability, or
+fitness for any purpose of AI-generated content.
 
 ## 7. Third-Party Links
 
