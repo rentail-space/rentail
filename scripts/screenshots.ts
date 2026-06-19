@@ -1,4 +1,4 @@
-#!/usr/bin/env npx tsx
+#!/usr/bin/env nub
 
 /**
  * Review new screenshots against their current versions.
@@ -7,7 +7,7 @@
  * - If no local .png but one exists in Git: compare .new.png vs Git version, Next only.
  *
  * Usage:
- *   npx tsx scripts/screenshots.ts
+ *   nub scripts/screenshots.ts
  */
 
 import { execSync } from "node:child_process";

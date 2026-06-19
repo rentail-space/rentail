@@ -146,11 +146,7 @@ $[nearbyCenters]
 
 When showing multiple shopping centers, separate them with an empty line. If you
 need to reference a shopping center in your response, use a Markdown link. Always
-use `url` property to create a link for the centre.
-
-If you are suggesting to the user that they could ask some other question, you
-can turn that question into a button by using a Markdown link with the
-structure: "/?q={question}".
+use `url` property to create a link for the center.
 
 ## Approximate Pricing
 

@@ -17,7 +17,7 @@ export default defineConfig({
   },
   migrations: {
     path: "prisma/migrations",
-    seed: "pnpm tsx prisma/seed.ts",
+    seed: "nub prisma/seed.ts",
   },
   schema: "prisma/schema.prisma",
   typedSql: { path: resolve("prisma", "sql") },

@@ -7,7 +7,7 @@ allowBuilds:
   sharp: true
 
 allowedDeprecatedVersions:
-  - glob@>=10.3.7 <10.5.0
+  glob: ">=10.3.7 <10.5.0"
 
 ignoredBuiltDependencies:
   - yarn

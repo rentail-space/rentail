@@ -14,9 +14,6 @@ importers:
       '@ai-sdk/deepseek':
         specifier: ^2.0.39
         version: 2.0.39(zod@4.4.3)
-      '@ai-sdk/devtools':
-        specifier: ^0.0.20
-        version: 0.0.20
       '@ai-sdk/google':
         specifier: ^3.0.83
         version: 3.0.83(zod@4.4.3)
@@ -206,9 +203,6 @@ importers:
       tiny-invariant:
         specifier: ^1.3.3
         version: 1.3.3
-      tsx:
-        specifier: ^4.22.4
-        version: 4.22.4
       tw-animate-css:
         specifier: ^1.4.0
         version: 1.4.0
@@ -326,11 +320,6 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
-
-  '@ai-sdk/devtools@0.0.20':
-    resolution: {integrity: sha512-FdlI3u9wGI+qKSSIhLiU12DUP1kxaRyHI8nM27kfhjns7ZqkYGJQBcpng45Z+AKtvQELf0j+gUekCj6YRZ6Oeg==}
-    engines: {node: '>=18'}
-    hasBin: true
 
   '@ai-sdk/gateway@3.0.133':
     resolution: {integrity: sha512-Ebs+7iS9zUgJu5B0RlxM2JmDWzq79Cpd6YdiqcCzB5qFdpfQJPUDiXutqlQP89F2XGjOdDeidulBTXUdXWzOxw==}
@@ -5868,12 +5857,6 @@ snapshots:
       '@ai-sdk/provider-utils': 4.0.30(zod@4.4.3)
       zod: 4.4.3
 
-  '@ai-sdk/devtools@0.0.20':
-    dependencies:
-      '@ai-sdk/provider': 3.0.10
-      '@hono/node-server': 1.19.14(hono@4.12.25)
-      hono: 4.12.25
-
   '@ai-sdk/gateway@3.0.133(zod@4.4.3)':
     dependencies:
       '@ai-sdk/provider': 3.0.10
@@ -11133,6 +11116,7 @@ snapshots:
       esbuild: 0.28.1
     optionalDependencies:
       fsevents: 2.3.3
+    optional: true
 
   tunnel@0.0.6: {}
 

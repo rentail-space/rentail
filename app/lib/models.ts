@@ -2,7 +2,6 @@ import type {
   LanguageModelV3,
   LanguageModelV3CallOptions,
 } from "@ai-sdk/provider";
-import { devToolsMiddleware } from "@ai-sdk/devtools";
 import { wrapLanguageModel } from "ai";
 import envVars from "./env";
 
@@ -15,7 +14,7 @@ const deepseek = createDeepSeek({
 function addMiddleware(model: LanguageModelV3): LanguageModelV3 {
   return wrapLanguageModel({
     model,
-    middleware: envVars.isDevelopment ? [devToolsMiddleware()] : [],
+    middleware: [],
   });
 }
 
