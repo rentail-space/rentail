@@ -7,8 +7,8 @@ import { cleanParseWorkingMemory } from "./workingMemory";
 /**
  * Find the shopping centers within a given distance from the user. Gets the
  * current location from working memory. The list is ordered by:
- * - More available spaces
  * - Higher ranking
+ * - Has a phone number (so the user can contact the center directly)
  * - Alphabetically
  *
  * @param headers The HTTP headers to use to get the user's location.
@@ -52,7 +52,10 @@ export default async function findNearbyCenters({
       },
       state: true,
     },
-    orderBy: { ranking: "desc" },
+    orderBy: [
+      { ranking: { sort: "desc", nulls: "last" } },
+      { phone: { sort: "asc", nulls: "last" } },
+    ],
     take: limit,
     where: {
       latitude: {
@@ -66,7 +69,18 @@ export default async function findNearbyCenters({
       rating: { gte: 4 },
     },
   });
-  // Sort alphabetically for presentation
-  centers.sort((a, b) => a.name.localeCompare(b.name));
+  // Sort for presentation: ranking (desc, nulls last), phone present first,
+  // then alphabetically. This re-establishes the DB ordering (which a plain
+  // alphabetical sort would erase) and prioritizes centers the user can
+  // actually call directly among equal-ranking centers.
+  centers.sort((a, b) => {
+    const rankA = a.ranking ?? -Infinity;
+    const rankB = b.ranking ?? -Infinity;
+    if (rankA !== rankB) return rankB - rankA;
+    const phoneA = a.phone ? 0 : 1;
+    const phoneB = b.phone ? 0 : 1;
+    if (phoneA !== phoneB) return phoneA - phoneB;
+    return a.name.localeCompare(b.name);
+  });
   return { centers, displayName };
 }
