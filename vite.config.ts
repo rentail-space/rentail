@@ -84,6 +84,11 @@ export default defineConfig({
       "prisma/backup.sql",
       "prisma/generated/**",
       "prisma/seed/**",
+      // tsgolint (oxc's typescript-go backend) overflows its recursion limit
+      // on this file's complex `defineConfig`/`Plugin` generics, producing
+      // false-positive "Excessive stack depth" errors. tsc 6.0.3 type-checks
+      // it cleanly. Re-enable once tsgolint handles the recursion.
+      "vite.config.ts",
     ],
     options: {
       reportUnusedDisableDirectives: "warn",

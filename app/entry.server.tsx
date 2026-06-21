@@ -2,7 +2,6 @@ import { PassThrough } from "node:stream";
 import { renderToPipeableStream } from "react-dom/server";
 import type {
   ActionFunctionArgs,
-  AppLoadContext,
   EntryContext,
   LoaderFunctionArgs,
 } from "react-router";
@@ -142,7 +141,7 @@ export default async (
   responseStatusCode: number,
   responseHeaders: Headers,
   routerContext: EntryContext,
-  _loadContext?: AppLoadContext,
+  _loadContext?: unknown,
 ): Promise<Response> => {
   const start = Date.now();
   console.info("%s %s", request.method, request.url);
