@@ -91,7 +91,7 @@
   "devDependencies": {
     "@ai-sdk/provider": "^3.0.10",
     "@logtail/types": "^0.5.8",
-    "@playwright/test": "^1.61.0",
+    "@playwright/test": "^1.61.1",
     "@secretlint/secretlint-rule-preset-recommend": "^13.0.2",
     "@types/asciichart": "^1.5.8",
     "@types/debug": "^4.1.13",
@@ -104,7 +104,7 @@
     "knip": "^6.18.0",
     "msw": "^2.14.6",
     "ora": "^9.4.1",
-    "playwright": "^1.61.0",
+    "playwright": "^1.61.1",
     "portless": "^0.14.0",
     "secretlint": "^13.0.2",
     "tailwindcss": "^4.3.1",
