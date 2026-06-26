@@ -15,7 +15,7 @@
     "test:db:push": "infisical --env test run -- prisma db push"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^3.0.85",
+    "@ai-sdk/anthropic": "^3.0.86",
     "@ai-sdk/deepseek": "^2.0.39",
     "@ai-sdk/google": "^3.0.83",
     "@ai-sdk/openai": "^3.0.74",
@@ -101,7 +101,7 @@
     "coolify-ghcr-deploy": "^1.4.1",
     "diff": "^9.0.0",
     "fast-xml-parser": "^5.9.3",
-    "knip": "^6.18.0",
+    "knip": "^6.20.0",
     "msw": "^2.14.6",
     "ora": "^9.4.1",
     "playwright": "^1.61.1",
