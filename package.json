@@ -111,7 +111,6 @@
     "tailwindcss": "^4.3.1",
     "typescript": "^6.0.3",
     "vite": "^8.1.0",
-    "vite-plugin-devtools-json": "^1.0.0",
     "vite-plus": "^0.2.1"
   },
   "engines": {

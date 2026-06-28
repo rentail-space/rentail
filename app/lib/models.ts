@@ -1,6 +1,6 @@
 import type {
-  LanguageModelV3,
-  LanguageModelV3CallOptions,
+  LanguageModelV4,
+  LanguageModelV4CallOptions,
 } from "@ai-sdk/provider";
 import { wrapLanguageModel } from "ai";
 import envVars from "./env";
@@ -11,7 +11,7 @@ const deepseek = createDeepSeek({
   apiKey: envVars.DEEPSEEK_API_KEY ?? "test-api-key",
 });
 
-function addMiddleware(model: LanguageModelV3): LanguageModelV3 {
+function addMiddleware(model: LanguageModelV4): LanguageModelV4 {
   return wrapLanguageModel({
     model,
     middleware: [],
@@ -25,8 +25,8 @@ export const conversational = {
   model: addMiddleware(deepseek("deepseek-chat")),
   providerOptions: { openai: {} },
   temperature: 0.0,
-} satisfies Omit<LanguageModelV3CallOptions, "prompt"> & {
-  model: LanguageModelV3;
+} satisfies Omit<LanguageModelV4CallOptions, "prompt"> & {
+  model: LanguageModelV4;
 };
 
 /**
@@ -36,6 +36,6 @@ export const classify = {
   model: addMiddleware(deepseek("deepseek-chat")),
   providerOptions: { openai: {} },
   temperature: 0.0,
-} satisfies Omit<LanguageModelV3CallOptions, "prompt"> & {
-  model: LanguageModelV3;
+} satisfies Omit<LanguageModelV4CallOptions, "prompt"> & {
+  model: LanguageModelV4;
 };

@@ -4,7 +4,6 @@ import type { Connect } from "vite-plus";
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite-plus";
-import devtoolsJson from "vite-plugin-devtools-json";
 
 /**
  * Vite middleware that forces no-cache on every response.
@@ -150,7 +149,7 @@ export default defineConfig({
     testTimeout: 30_000, // 30 seconds
   },
 
-  plugins: [noCachePlugin(), tailwindcss(), reactRouter(), devtoolsJson()],
+  plugins: [noCachePlugin(), tailwindcss(), reactRouter()],
   resolve: {
     alias: [
       { find: "~/test", replacement: resolve("test") },
