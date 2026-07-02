@@ -16,6 +16,16 @@ minimumReleaseAge: 2880
 
 minimumReleaseAgeExclude:
   - "coolify-ghcr-deploy"
+  - vite-plus
+  - "@voidzero-dev/*"
+  - oxlint
+  - "@oxlint/*"
+  - oxlint-tsgolint
+  - "@oxlint-tsgolint/*"
+  - oxfmt
+  - "@oxfmt/*"
+  - vitest
+  - "@vitest/*"
 
 onlyBuiltDependencies:
   - "@infisical/cli"
@@ -28,3 +38,15 @@ onlyBuiltDependencies:
   - prisma
   - protobufjs
   - sharp
+catalog:
+  vite: npm:@voidzero-dev/vite-plus-core@^0.2.2
+overrides:
+  vite: "catalog:"
+  vitest: "4.1.9"
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: "*"
+    vitest: "*"

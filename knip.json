@@ -20,5 +20,5 @@
     "app/lib/relativeTime.ts": ["exports"],
     "app/lib/formatDate.ts": ["exports"]
   },
-  "ignoreBinaries": ["infisical", "nub"]
+  "ignoreBinaries": ["infisical"]
 }

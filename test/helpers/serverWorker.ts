@@ -13,7 +13,7 @@ import invariant from "tiny-invariant";
 // of the "vite" package. The test server needs React Router's SSR middleware
 // properly wired, which only works when Vite is loaded via the standard
 // vite package (not through vite-plus's re-export of the internal fork).
-const vite = await import("vite");
+const vite = await import("vite-plus");
 
 // Import and start the server
 async function startServer(this: void) {
