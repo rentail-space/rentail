@@ -41,7 +41,7 @@ COPY --from=builder /app/node_modules/.pnpm/node_modules/@prisma/engines ./build
 COPY --from=builder /app/prisma/generated ./prisma/generated
 COPY --from=builder /app/prisma/prod-ca-2021.crt ./prisma/prod-ca-2021.crt
 COPY --from=builder /app/app/data ./app/data
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 RUN --mount=type=secret,id=env,required=true \
     cp /run/secrets/env .env && chmod 644 .env
