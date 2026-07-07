@@ -16,12 +16,12 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^4.0.5",
-    "@ai-sdk/deepseek": "^3.0.3",
-    "@ai-sdk/google": "^4.0.6",
-    "@ai-sdk/openai": "^4.0.5",
-    "@ai-sdk/perplexity": "^4.0.4",
-    "@ai-sdk/react": "^4.0.12",
+    "@ai-sdk/anthropic": "^4.0.8",
+    "@ai-sdk/deepseek": "^3.0.5",
+    "@ai-sdk/google": "^4.0.8",
+    "@ai-sdk/openai": "^4.0.7",
+    "@ai-sdk/perplexity": "^4.0.6",
+    "@ai-sdk/react": "^4.0.16",
     "@base-ui/react": "^1.6.0",
     "@forge42/seo-tools": "^1.4.5",
     "@google-analytics/data": "^6.1.0",
@@ -41,7 +41,7 @@
     "@tailwindcss/vite": "^4.3.2",
     "@tanstack/react-query": "^5.101.2",
     "@tanstack/react-table": "^8.21.3",
-    "ai": "^7.0.11",
+    "ai": "^7.0.15",
     "asciichart": "^1.5.25",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
@@ -66,14 +66,14 @@
     "radashi": "^12.9.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-email": "^6.6.5",
+    "react-email": "^6.6.6",
     "react-ga4": "^3.0.1",
     "react-router": "^8.1.0",
-    "recharts": "^3.9.1",
+    "recharts": "^3.9.2",
     "rehype-harden": "^1.1.8",
     "remark-gfm": "^4.0.1",
     "remove-markdown": "^0.6.4",
-    "resend": "^6.16.0",
+    "resend": "^6.17.1",
     "respinner": "^5.0.0",
     "resumable-stream": "^2.2.12",
     "serpapi": "^2.2.1",
@@ -91,7 +91,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@ai-sdk/provider": "^4.0.1",
+    "@ai-sdk/provider": "^4.0.2",
     "@logtail/types": "^0.5.8",
     "@playwright/test": "^1.61.1",
     "@secretlint/secretlint-rule-preset-recommend": "^13.0.2",
@@ -112,10 +112,10 @@
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",
     "vite": "catalog:",
-    "vite-plus": "^0.2.2"
+    "vite-plus": "^0.2.3"
   },
   "engines": {
     "node": ">=26.0.0"
   },
-  "packageManager": "pnpm@11.9.0"
+  "packageManager": "pnpm@11.10.0"
 }
