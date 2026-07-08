@@ -7,6 +7,7 @@ import invariant from "tiny-invariant";
 
 describe("prompt()", () => {
   let prompt: string;
+  let rawPrompt: string;
   let user: User;
 
   describe("user in Los Angeles", () => {
@@ -20,12 +21,11 @@ describe("prompt()", () => {
           "x-ip-longitude": "-118.26365",
         }),
       });
-      prompt = (
-        await preparePrompt({
-          headers: new Headers(),
-          user,
-        })
-      )
+      rawPrompt = await preparePrompt({
+        headers: new Headers(),
+        user,
+      });
+      prompt = rawPrompt
         // Replace all single newlines with space, but keep double newlines
         .replace(/([^\n])\n([^\n])/g, "$1 $2");
     });
@@ -100,6 +100,37 @@ describe("prompt()", () => {
         "Do not make up information about shopping centers you do not know about",
       );
     });
+
+    describe("all-centers list URLs", () => {
+      it("renders every center as a Markdown link to its real id", () => {
+        const lines = allCentersLines(rawPrompt);
+        expect(lines.length).toBeGreaterThan(0);
+        // Each entry must be a link whose URL uses the center's real id — a
+        // state-prefixed slug, e.g. ca-the-grove. This rejects invented slugs
+        // like /center/skyview or /center/bronx-terminal that 404.
+        for (const line of lines) {
+          expect(line).toMatch(
+            /^- \[.+\]\(https:\/\/rentail\.space\/center\/[a-z]{2}-.+\) in .+, [A-Z]{2}, .+$/,
+          );
+        }
+      });
+
+      it("does not list any center without a link", () => {
+        // The old bug listed centers as bare "- Name in City, ST, Country"
+        // with no URL, which led the model to fabricate slugs from the name.
+        const bare = allCentersLines(rawPrompt).filter(
+          (line) => !line.includes("](https://rentail.space/center/"),
+        );
+        expect(bare).toEqual([]);
+      });
+
+      it("includes The Grove with its full state-prefixed id", () => {
+        const block = allCentersBlock(rawPrompt);
+        expect(block).toContain(
+          "[The Grove](https://rentail.space/center/ca-the-grove)",
+        );
+      });
+    });
   });
 
   describe("unknown location", () => {
@@ -126,6 +157,22 @@ describe("prompt()", () => {
     });
   });
 });
+
+function allCentersBlock(prompt: string): string {
+  const start = prompt.indexOf("## All Centers");
+  const end = prompt.indexOf("# General Directives");
+  if (start === -1 || end === -1 || end <= start) {
+    throw new Error("Could not locate the all-centers block in the prompt");
+  }
+  return prompt.slice(start, end);
+}
+
+function allCentersLines(prompt: string): string[] {
+  return allCentersBlock(prompt)
+    .split("\n")
+    .map((line) => line.trimEnd())
+    .filter((line) => line.startsWith("- "));
+}
 
 function findTheGrove(markdown: string): Record<string, unknown> | undefined {
   const centers = parseJSON(markdown);
