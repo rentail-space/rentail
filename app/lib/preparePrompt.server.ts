@@ -29,7 +29,7 @@ export default async function preparePrompt({
   user: User;
 }): Promise<string> {
   const allCenters = await prisma.property.findMany({
-    include: { spaces: true, state: true },
+    include: { state: true },
   });
   const maxDistance = 30; // miles
   const { centers: nearbyCenters, displayName } = await findNearbyCenters({
