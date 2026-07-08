@@ -69,7 +69,7 @@ export default async function preparePrompt({
       allCenters
         .map(
           (center) =>
-            `- ${center.name} in ${center.city}, ${center.state.abbreviation}, ${center.state.country}`,
+            `- [${center.name}](https://rentail.space/center/${center.id}) in ${center.city}, ${center.state.abbreviation}, ${center.state.country}`,
         )
         .join("\n"),
     )

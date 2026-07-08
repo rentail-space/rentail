@@ -19,9 +19,9 @@
     "@ai-sdk/anthropic": "^4.0.8",
     "@ai-sdk/deepseek": "^3.0.5",
     "@ai-sdk/google": "^4.0.8",
-    "@ai-sdk/openai": "^4.0.7",
+    "@ai-sdk/openai": "^4.0.8",
     "@ai-sdk/perplexity": "^4.0.6",
-    "@ai-sdk/react": "^4.0.16",
+    "@ai-sdk/react": "^4.0.17",
     "@base-ui/react": "^1.6.0",
     "@forge42/seo-tools": "^1.4.5",
     "@google-analytics/data": "^6.1.0",
@@ -41,7 +41,7 @@
     "@tailwindcss/vite": "^4.3.2",
     "@tanstack/react-query": "^5.101.2",
     "@tanstack/react-table": "^8.21.3",
-    "ai": "^7.0.15",
+    "ai": "^7.0.16",
     "asciichart": "^1.5.25",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
@@ -52,7 +52,7 @@
     "dotenv": "^17.4.2",
     "env-var": "^7.5.0",
     "es-toolkit": "^1.49.0",
-    "feed": "^5.2.1",
+    "feed": "^6.0.0",
     "google-auth-library": "^10.9.0",
     "human-format": "^1.2.1",
     "ioredis": "^5.11.1",
@@ -112,7 +112,7 @@
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",
     "vite": "catalog:",
-    "vite-plus": "^0.2.3"
+    "vite-plus": "^0.2.4"
   },
   "engines": {
     "node": ">=26.0.0"

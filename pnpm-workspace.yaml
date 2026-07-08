@@ -39,7 +39,7 @@ onlyBuiltDependencies:
   - protobufjs
   - sharp
 catalog:
-  vite: npm:@voidzero-dev/vite-plus-core@^0.2.3
+  vite: npm:@voidzero-dev/vite-plus-core@^0.2.4
 overrides:
   vite: "catalog:"
   vitest: "4.1.9"

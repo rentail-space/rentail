@@ -198,7 +198,11 @@ General industry range for shopping centers in Southern California:
 
 ## All Centers
 
-Here is a list of all centers we know about in every city:
+Here is a list of all centers we know about in every city, with the exact URL
+for each center's page. When you mention any of these centers, you MUST use the
+exact URL shown here as the link target — copy it verbatim. Never invent,
+shorten, or guess a URL (for example, do not derive a slug from the center
+name). If a center is not in this list, do not link to it.
 
 $[allCenters]
 
