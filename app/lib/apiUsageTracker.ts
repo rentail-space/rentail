@@ -4,8 +4,8 @@
  * Tracks API requests and costs for billing monitoring
  */
 
-import type { InputJsonValue } from "@prisma/client/runtime/client";
 import prisma from "~/lib/prisma.server";
+import type { Prisma } from "prisma/generated";
 
 /**
  * API pricing configuration
@@ -112,8 +112,12 @@ async function withCache<T>(
   const createdAt = new Date();
   if (value != null) {
     await prisma.cache.upsert({
-      create: { key, value: value as unknown as InputJsonValue, createdAt },
-      update: { value: value as unknown as InputJsonValue, createdAt },
+      create: {
+        key,
+        value: value as Prisma.InputJsonValue,
+        createdAt,
+      },
+      update: { value: value as Prisma.InputJsonValue, createdAt },
       where: { key },
     });
   }

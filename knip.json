@@ -10,6 +10,7 @@
   "project": ["app/**/*.{ts,tsx}", "test/**/*.{ts,tsx}", "!__screenshots__"],
   "ignoreDependencies": [
     "@secretlint/secretlint-rule-preset-recommend",
+    "@prisma/client",
     "coolify-ghcr-deploy",
     "portless"
   ],

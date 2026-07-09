@@ -1,4 +1,4 @@
-import type { InputJsonValue } from "@prisma/client/runtime/client";
+import type { Prisma } from "prisma/generated";
 import type { Route } from "./+types/api.chat.$chatId.message";
 import { type UIMessage, convertToModelMessages, streamText } from "ai";
 import { findOrCreateUser, recentMessages } from "~/lib/sessions.server";
@@ -49,7 +49,7 @@ export async function action({ request, params }: Route.ActionArgs) {
       activeStreamId: null,
       messages: {
         create: {
-          content: lastMessage.parts as InputJsonValue,
+          content: lastMessage.parts as Prisma.InputJsonValue,
           id: lastMessage.id,
           role: "user",
           type: "text",

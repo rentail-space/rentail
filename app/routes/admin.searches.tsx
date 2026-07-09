@@ -1,4 +1,4 @@
-import type { InputJsonValue } from "@prisma/client/runtime/client";
+import type { Prisma } from "prisma/generated";
 import {
   type ColumnDef,
   type SortingState,
@@ -66,7 +66,9 @@ export async function loader({ request }: Route.LoaderArgs) {
     });
 
     if (queries.length > 0) {
-      const value = searchQueryArraySchema.parse(queries) as InputJsonValue;
+      const value = searchQueryArraySchema.parse(
+        queries,
+      ) as Prisma.InputJsonValue;
       await prisma.cache.upsert({
         create: { key, value },
         update: { value },
