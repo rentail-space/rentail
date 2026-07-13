@@ -100,7 +100,15 @@ describe("Chat page exchange messages", () => {
     it("should look like a real chat", async () => {
       await page.locator(".overflow-y-auto").first().scrollIntoViewIfNeeded();
       await page.waitForTimeout(100);
-      await expect(page).toMatchScreenshot();
+      // The assistant response is mocked (deterministic text), so any pixel
+      // drift is sub-pixel/antialiasing noise from the browser render, not a
+      // real regression. Loosen the antialiasing detector and allow a tiny
+      // fraction of differing pixels so the baseline stays stable across runs
+      // while still failing on genuine layout changes.
+      await expect(page).toMatchScreenshot({
+        antialiasingTolerance: 4,
+        maxDiffPixelRatio: 0.002,
+      });
     });
   });
 

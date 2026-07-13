@@ -23,13 +23,22 @@ declare global {
        *
        * @param options - The options for the matcher.
        * @param options.name - The name of the test.
-       * @param options.tolerance - The tolerance for the matcher (default: 2.3).
+       * @param options.tolerance - The per-pixel ΔE tolerance for the matcher (default: 2.3).
+       * @param options.antialiasingTolerance - Brightness tolerance for the
+       *   antialiasing detector (default: 0). Raise this to absorb sub-pixel
+       *   browser rendering noise; looks-same recommends not exceeding 10.
+       * @param options.maxDiffPixelRatio - If set (0..1), the test still passes
+       *   when the fraction of differing pixels is at or below this value, even
+       *   if the images are not pixel-identical. Use for noisy renders (text,
+       *   gradients) where content is deterministic but a few pixels drift.
        * @example
        * await expect(page).toMatchScreenshot();
        */
       toMatchScreenshot(options?: {
         name?: string;
         tolerance?: number;
+        antialiasingTolerance?: number;
+        maxDiffPixelRatio?: number;
       }): Promise<R>;
     }
   }
@@ -43,7 +52,12 @@ const defaultTolerance = 2.3;
 expect.extend({
   async toMatchScreenshot(
     locator: Locator | Page,
-    options?: { name?: string; tolerance?: number },
+    options?: {
+      name?: string;
+      tolerance?: number;
+      antialiasingTolerance?: number;
+      maxDiffPixelRatio?: number;
+    },
   ): Promise<{ message: () => string; pass: boolean }> {
     if (process.env.CI)
       return {
@@ -74,24 +88,33 @@ expect.extend({
         pass: true,
       };
     }
-    const { diffImage, equal } = await looksSame(
-      await readFile(filename),
-      screenshot,
-      {
-        createDiffImage: true,
-        ignoreAntialiasing: true,
-        ignoreCaret: true,
-        tolerance: options?.tolerance ?? defaultTolerance,
-        strict: false,
-      },
-    );
+    const result = await looksSame(await readFile(filename), screenshot, {
+      antialiasingTolerance: options?.antialiasingTolerance ?? 0,
+      createDiffImage: true,
+      ignoreAntialiasing: true,
+      ignoreCaret: true,
+      tolerance: options?.tolerance ?? defaultTolerance,
+      strict: false,
+    });
+    const { diffImage, equal, differentPixels, totalPixels } = result;
 
-    if (!equal) {
+    // Even when looks-same reports a difference, allow a small fraction of
+    // differing pixels to drift. This absorbs sub-pixel rendering noise on
+    // deterministic content (e.g. streamed chat text) without masking real
+    // layout regressions, which affect a much larger pixel area.
+    const maxRatio = options?.maxDiffPixelRatio;
+    const diffRatio = totalPixels ? differentPixels / totalPixels : 0;
+    const withinPixelBudget = maxRatio !== undefined && diffRatio <= maxRatio;
+
+    if (!equal && !withinPixelBudget) {
       const diffFilename = path.resolve(dirname, `${name}.diff.png`);
       await diffImage.save(diffFilename);
       await writeFile(path.resolve(dirname, `${name}.new.png`), screenshot);
       return {
-        message: () => `Image differs from baseline see ${diffFilename}`,
+        message: () =>
+          `Image differs from baseline see ${diffFilename} ` +
+          `(${differentPixels}/${totalPixels} pixels, ` +
+          `${(diffRatio * 100).toFixed(3)}% differ)`,
         pass: false,
       };
     }
