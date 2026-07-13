@@ -1,6 +1,6 @@
 import { data } from "react-router";
 import { ArrowRightIcon } from "lucide-react";
-import { Link } from "react-router";
+import { href, Link } from "react-router";
 import { Streamdown } from "streamdown";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import pageMeta from "~/lib/pageMeta";
@@ -132,7 +132,7 @@ function LinkToState({
       <div className="flex w-full flex-row justify-end">
         <ActiveLink
           variant="button"
-          to={`/state/${abbreviation.toLowerCase()}`}
+          to={href("/state/:state", { state: abbreviation.toLowerCase() })}
         >
           Visit {name} centers
           <ArrowRightIcon className="h-4 w-4" />

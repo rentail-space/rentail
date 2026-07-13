@@ -8,7 +8,7 @@ import {
 import { ArrowDown, ArrowUp, MapPinIcon } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Suspense, useRef } from "react";
-import { Await } from "react-router";
+import { Await, href } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import { Card, CardContent, CardHeader } from "~/components/ui/Card";
@@ -173,13 +173,17 @@ function CentersList({
                   />
                 </TableCell>
                 <TableCell>
-                  <ActiveLink to={`/center/${row.original.id}`}>
+                  <ActiveLink to={href("/center/:id", { id: row.original.id })}>
                     {row.original.name}
                   </ActiveLink>
                 </TableCell>
                 <TableCell>{row.original.city}</TableCell>
                 <TableCell>
-                  <ActiveLink to={`/state/${row.original.state.abbreviation}`}>
+                  <ActiveLink
+                    to={href("/state/:state", {
+                      state: row.original.state.abbreviation,
+                    })}
+                  >
                     {row.original.state.abbreviation}
                   </ActiveLink>
                 </TableCell>

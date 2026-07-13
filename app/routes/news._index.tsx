@@ -1,5 +1,5 @@
 import { ArrowRightIcon } from "lucide-react";
-import { Link } from "react-router";
+import { href, Link } from "react-router";
 import type { BlogPost } from "~/lib/blogPosts.server";
 import { recentNewsItems } from "~/lib/newsItems.server";
 import pageMeta from "~/lib/pageMeta";
@@ -76,7 +76,7 @@ export default function News({
       <section>
         <div className="container mx-auto max-w-4xl">
           {loaderData.posts.map((post) => (
-            <Link key={post.slug} to={`/news/${post.slug}`}>
+            <Link key={post.slug} to={href("/news/:slug", { slug: post.slug })}>
               <div className="flex flex-col gap-2">
                 <h2 className="font-bold text-black text-xl">{post.title}</h2>
                 <p className="text-gray-500">{post.summary}</p>

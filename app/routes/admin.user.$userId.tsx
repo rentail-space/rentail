@@ -4,7 +4,7 @@ import type {
   ChatGetPayload,
   PropertyGetPayload,
 } from "prisma/generated/models";
-import { Link, useFetcher } from "react-router";
+import { href, Link, useFetcher } from "react-router";
 import { StickToBottom } from "use-stick-to-bottom";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
@@ -244,12 +244,18 @@ function Pagination({ user, users }: { user: User; users: { id: string }[] }) {
 
   return (
     <div className="flex justify-between">
-      <ActiveLink disabled={!older} to={`/admin/user/${older?.id}`}>
+      <ActiveLink
+        disabled={!older}
+        to={href("/admin/user/:userId", { userId: older?.id ?? "" })}
+      >
         <ArrowLeft className="h-5 w-5" />
         <span>Older</span>
       </ActiveLink>
 
-      <ActiveLink disabled={!newer} to={`/admin/user/${newer?.id}`}>
+      <ActiveLink
+        disabled={!newer}
+        to={href("/admin/user/:userId", { userId: newer?.id ?? "" })}
+      >
         Newer
         <ArrowRight className="h-4 w-4" />
       </ActiveLink>
@@ -277,7 +283,7 @@ function Centers({
                   <Link
                     className="truncate text-blue-500 underline hover:decoration-[hsl(37,92%,65%)]"
                     target="_blank"
-                    to={`/center/${center.id}`}
+                    to={href("/center/:id", { id: center.id })}
                   >
                     {center.name}
                   </Link>

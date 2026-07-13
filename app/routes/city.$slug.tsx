@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Fragment, useRef } from "react";
-import { data, Link } from "react-router";
+import { data, href, Link } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import CentersMap from "~/components/ui/CentersMap";
@@ -88,7 +88,9 @@ export default function CityPage({ loaderData }: Route.ComponentProps) {
       />
 
       <ActiveLink
-        to={`/state/${city.state.abbreviation.toLowerCase()}`}
+        to={href("/state/:state", {
+          state: city.state.abbreviation.toLowerCase(),
+        })}
         variant="silent"
         className="hidden md:inline-flex print:hidden"
       >
@@ -158,7 +160,7 @@ function LinkToCenter({
           className="flex flex-row items-center justify-between gap-2 font-bold text-xl"
           itemProp="name"
         >
-          <Link to={`/center/${center.id}`}>{center.name}</Link>
+          <Link to={href("/center/:id", { id: center.id })}>{center.name}</Link>
         </h2>
         <Button
           variant="link"
@@ -175,7 +177,7 @@ function LinkToCenter({
       </div>
 
       <div className="flex flex-row flex-nowrap items-end justify-between gap-4">
-        <Link to={`/center/${center.id}`} className="space-y-2">
+        <Link to={href("/center/:id", { id: center.id })} className="space-y-2">
           <p className="space-x-2">
             {center.rating && center.rating > 3 && (
               <RatingStars rating={center.rating} />
@@ -185,7 +187,10 @@ function LinkToCenter({
           <KeyCenterStats center={center} />
         </Link>
 
-        <ActiveLink to={`/center/${center.id}`} variant="button">
+        <ActiveLink
+          to={href("/center/:id", { id: center.id })}
+          variant="button"
+        >
           Visit {center.name}
           <ArrowRightIcon className="h-4 w-4" />
         </ActiveLink>

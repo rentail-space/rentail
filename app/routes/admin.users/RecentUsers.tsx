@@ -1,4 +1,5 @@
 import type { User } from "prisma/generated";
+import { href } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import { cleanParseWorkingMemory } from "~/lib/workingMemory";
 import { LockIcon, UserIcon } from "lucide-react";
@@ -28,7 +29,9 @@ export default function RecentUsers({ users }: { users: User[] }) {
     columns: [
       {
         cell: ({ row }) => (
-          <ActiveLink to={`/admin/user/${row.original.id}`}>
+          <ActiveLink
+            to={href("/admin/user/:userId", { userId: row.original.id })}
+          >
             {row.original.isAnonymous ? (
               <UserIcon className="h-4 w-4 text-gray-500" />
             ) : (

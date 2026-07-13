@@ -7,7 +7,7 @@ import {
 import { ArrowDown, ArrowUp, EqualIcon } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Suspense } from "react";
-import { Await, useFetcher, useSearchParams } from "react-router";
+import { Await, href, useFetcher, useSearchParams } from "react-router";
 import { ActiveLink } from "~/components/ui/ActiveLink";
 import { Button } from "~/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
@@ -92,7 +92,7 @@ function VisibleResults({
       {
         accessorKey: "name",
         cell: ({ row }) => (
-          <ActiveLink to={`/center/${row.original.id}`}>
+          <ActiveLink to={href("/center/:id", { id: row.original.id })}>
             {row.original.name}
           </ActiveLink>
         ),

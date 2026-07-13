@@ -1,7 +1,7 @@
 import { sortBy } from "es-toolkit";
 import type { PropertyGetPayload } from "prisma/generated/models";
 import { Activity, useLayoutEffect, useRef, useState } from "react";
-import { Link } from "react-router";
+import { href, Link } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/Card";
 import LoadingImage from "~/components/ui/LoadingImage";
@@ -64,7 +64,7 @@ function LinkToCenter({
         onMouseEnter={() => setCenterShown(center.id)}
         onMouseLeave={() => setCenterShown(null)}
         target="_blank"
-        to={`/center/${center.id}`}
+        to={href("/center/:id", { id: center.id })}
       >
         <Card className="p-2!">
           <CardContent className="flex flex-row items-center gap-2 p-0">
@@ -188,7 +188,7 @@ function HoverCard({
         onMouseLeave={() => setCenterShown(null)}
         ref={cardRef}
         target="_blank"
-        to={`/center/${center.id}`}
+        to={href("/center/:id", { id: center.id })}
       >
         <div
           className={twMerge(
