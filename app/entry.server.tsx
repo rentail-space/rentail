@@ -1,11 +1,11 @@
-import { PassThrough } from "node:stream";
-import { renderToPipeableStream } from "react-dom/server";
 import type {
   ActionFunctionArgs,
   EntryContext,
   LoaderFunctionArgs,
 } from "react-router";
 import { ServerRouter } from "react-router";
+import { isbot } from "isbot";
+import { renderToReadableStream } from "react-dom/server";
 import { v7 as uuidv7 } from "uuid";
 import envVars from "~/lib/env";
 import {
@@ -34,6 +34,10 @@ import { trackBotVisit } from "~/lib/middleware/botTracking.server";
 
 // NOTE: MSW is initialized in test mode on the server side
 if (envVars.isTest) (await import("~/test/mocks/mswHandlers")).default();
+
+// Max time (ms) the server will wait for the streaming render before flushing
+// whatever is ready. Bots and SPA-mode renders always wait for the full shell.
+export const streamTimeout = 5_000;
 
 const MARKDOWN_ROUTES: Record<
   string,
@@ -141,7 +145,6 @@ export default async (
   responseStatusCode: number,
   responseHeaders: Headers,
   routerContext: EntryContext,
-  _loadContext?: unknown,
 ): Promise<Response> => {
   const start = Date.now();
   console.info("%s %s", request.method, request.url);
@@ -170,34 +173,48 @@ export default async (
     }
   }
 
-  const response = await new Promise<Response>((resolve, reject) => {
-    const { pipe } = renderToPipeableStream(
-      <ServerRouter
-        context={routerContext}
-        url={request.url}
-        nonce={uuidv7()}
-      />,
-      {
-        onShellReady() {
-          responseHeaders.set("Content-Type", "text/html");
-          const body = new PassThrough();
-          resolve(
-            new Response(body as unknown as BodyInit, {
-              status: responseStatusCode,
-              headers: responseHeaders,
-            }),
-          );
-          pipe(body);
-        },
-        onShellError(error) {
-          reject(error);
-        },
-        onError(error) {
-          if (!responseHeaders.has("Content-Type")) reject(error);
-        },
+  // https://httpwg.org/specs/rfc9110.html#HEAD
+  if (request.method.toUpperCase() === "HEAD") {
+    return new Response(null, {
+      status: responseStatusCode,
+      headers: responseHeaders,
+    });
+  }
+
+  // Web Streams render. React Router already uses Web Streams internally, so
+  // this avoids the Web↔Node stream conversions that renderToPipeableStream
+  // requires (PassThrough bridging). Shell errors reject the awaited promise
+  // and surface via handleError; post-shell errors are logged here.
+  let shellRendered = false;
+  const userAgent = request.headers.get("user-agent");
+
+  const body = await renderToReadableStream(
+    <ServerRouter context={routerContext} url={request.url} nonce={uuidv7()} />,
+    {
+      signal: AbortSignal.timeout(streamTimeout + 1000),
+      onError(error: unknown) {
+        responseStatusCode = 500;
+        // Only log errors that occur after the shell has streamed; shell
+        // errors reject the await above and are handled by handleError.
+        if (shellRendered) console.error(error);
       },
-    );
+    },
+  );
+  shellRendered = true;
+
+  // Bots and SPA-mode renders wait for the full document before responding, so
+  // crawlers receive complete HTML.
+  // https://react.dev/reference/react-dom/server/renderToReadableStream#waiting-for-all-content-to-load-for-crawlers-and-static-generation
+  if ((userAgent && isbot(userAgent)) || routerContext.isSpaMode) {
+    await body.allReady;
+  }
+
+  responseHeaders.set("Content-Type", "text/html");
+  const response = new Response(body, {
+    status: responseStatusCode,
+    headers: responseHeaders,
   });
+
   void waitForResponse(response, start).then((duration) => {
     console.info(
       "%s %s => %d (%dms)",
