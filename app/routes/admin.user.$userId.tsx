@@ -20,6 +20,7 @@ import { Textarea } from "~/components/ui/Textarea";
 import deviceDetection from "~/lib/deviceDetection";
 import findNearbyCenters from "~/lib/findNearbyCenters.server";
 import { safeParseUtm } from "~/lib/utm";
+import { detectSource } from "~/lib/sourceDetection";
 import prisma from "~/lib/prisma.server";
 import { verifyAdmin } from "~/lib/sessions.server";
 import { formatDatetimeFull } from "~/lib/temporal";
@@ -103,6 +104,14 @@ function UserInfoCard({ user }: { user: User }) {
         <TableBody>
           {!user.isAnonymous && <Row title="Email" value={user.email} />}
           <Row title="User Agent" value={user.userAgent} />
+          <Row
+            title="Source"
+            value={detectSource({
+              referrer: user.referrer,
+              userAgent: user.userAgent,
+              utm: user.utm,
+            })}
+          />
           <Row title="Referrer" value={user.referrer} />
           <Row title="IP" value={user.ip} />
           <Row
