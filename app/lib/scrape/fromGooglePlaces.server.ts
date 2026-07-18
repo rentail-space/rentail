@@ -13,6 +13,7 @@ import { join } from "node:path";
 import { map } from "radashi";
 import invariant from "tiny-invariant";
 import envVars from "~/lib/env";
+import normalizePhone from "~/lib/normalizePhone";
 import sharp from "sharp";
 import zod from "zod";
 
@@ -261,9 +262,7 @@ async function prepareSave(
     state,
     latitude: place.location.latitude,
     longitude: place.location.longitude,
-    phone: place.internationalPhoneNumber
-      ? `+${place.internationalPhoneNumber.replace(/D/g, "")}`
-      : undefined,
+    phone: normalizePhone(place.internationalPhoneNumber),
     imageURLs,
     summary: place.editorialSummary?.text,
     openFrom,

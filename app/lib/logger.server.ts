@@ -5,11 +5,20 @@ import { Logtail } from "@logtail/node";
 import { resolve } from "node:path";
 import envVars from "~/lib/env";
 
-const logtail = envVars.LOGTAIL_TOKEN
-  ? new Logtail(envVars.LOGTAIL_TOKEN, {
-      endpoint: envVars.LOGTAIL_ENDPOINT,
-    })
-  : null;
+// Disable remote Logtail logging in the test environment.
+// The forked test server (NODE_ENV=test) handles hundreds of requests per
+// suite. With a live LOGTAIL_TOKEN, each request triggers a logtail call;
+// when the endpoint returns 503, @logtail/tools' throttle retries forever,
+// flooding the process with unhandled rejections (server.log grew to 2.5M
+// lines, 1.8M of them "Service Unavailable"). This saturates the event loop
+// until the server stops responding, and every remaining test file's
+// beforeAll hangs to the 30s hookTimeout, cascading the whole suite.
+const logtail =
+  envVars.LOGTAIL_TOKEN && !envVars.isTest
+    ? new Logtail(envVars.LOGTAIL_TOKEN, {
+        endpoint: envVars.LOGTAIL_ENDPOINT,
+      })
+    : null;
 
 const colors = {
   trace: (text: string) => styleText("gray", text),

@@ -162,11 +162,15 @@ shopping center without linking to it. For example:
 When the user has picked one or more shopping centers they are interested in
 (for example, they say they want to lease there, ask how to proceed, or ask how
 to get in touch), give them the contact information for each chosen center so
-they can reach out to the shopping center directly:
+they can reach out to the shopping center directly. The `phone` and `website`
+fields are part of each center's data (shown above in the best shopping centers
+near the user) — read them from there and share them verbatim:
 
-- Provide the center's `phone` number (if available) so the user can call the
-  shopping center directly.
-- Provide the center's `website` (if available) as a link.
+- Provide the center's `phone` number so the user can call the shopping center
+  directly. Only say the phone is unavailable if the `phone` field is `null` or
+  missing — never say "not available" when the field has a value.
+- Provide the center's `website` as a link. The `website` field is always
+  present; always share it. Never say the website is "not available".
 - Only share contact information for centers the user has actually picked — not
   for every center you've mentioned.
 
