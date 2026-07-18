@@ -21,7 +21,7 @@
     "@ai-sdk/google": "^4.0.17",
     "@ai-sdk/openai": "^4.0.15",
     "@ai-sdk/perplexity": "^4.0.11",
-    "@ai-sdk/react": "^4.0.31",
+    "@ai-sdk/react": "^4.0.32",
     "@base-ui/react": "^1.6.0",
     "@forge42/seo-tools": "^1.4.5",
     "@google-analytics/data": "^6.1.0",
@@ -37,10 +37,10 @@
     "@react-router/serve": "^8.2.0",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/typography": "^0.5.20",
-    "@tailwindcss/vite": "^4.3.2",
+    "@tailwindcss/vite": "^4.3.3",
     "@tanstack/react-query": "^5.101.2",
     "@tanstack/react-table": "^8.21.3",
-    "ai": "^7.0.28",
+    "ai": "^7.0.29",
     "asciichart": "^1.5.25",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
@@ -64,7 +64,7 @@
     "radashi": "^12.9.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-email": "^6.8.1",
+    "react-email": "^6.9.0",
     "react-ga4": "^3.0.1",
     "react-router": "^8.2.0",
     "recharts": "^3.9.2",
@@ -100,7 +100,7 @@
     "@types/react-dom": "^19.2.3",
     "coolify-ghcr-deploy": "^1.4.1",
     "diff": "^9.0.0",
-    "fast-xml-parser": "^5.10.0",
+    "fast-xml-parser": "^5.10.1",
     "knip": "^6.27.0",
     "msw": "^2.15.0",
     "ora": "^9.4.1",
@@ -108,7 +108,7 @@
     "portless": "^0.15.3",
     "prisma": "^7.8.0",
     "secretlint": "^13.0.2",
-    "tailwindcss": "^4.3.2",
+    "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "catalog:",
     "vite-plus": "catalog:"
@@ -116,5 +116,5 @@
   "engines": {
     "node": ">=26.0.0"
   },
-  "packageManager": "pnpm@11.11.0"
+  "packageManager": "pnpm@11.13.1"
 }
