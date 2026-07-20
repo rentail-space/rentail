@@ -36,8 +36,34 @@
   --font-sans:
     "Archivo", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-heading:
+    "Archivo", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: "Quando", "Times New Roman", serif;
   --font-mono:
     "Atkinson", "Monaco", "Consolas", "Liberation Mono", "Courier New",
     monospace;
+}
+
+/* Typeset presets — tuned for our self-hosted fonts and neobrutal theme.
+   typeset.css is vendored verbatim from https://ui.shadcn.com/typeset.css;
+   these presets are the only project-specific layer on top. */
+@layer components {
+  .typeset-docs {
+    --typeset-font-body: var(--font-sans);
+    --typeset-font-heading: var(--font-sans);
+    --typeset-font-mono: var(--font-mono);
+    --typeset-size: 16px;
+    --typeset-leading: 1.7;
+    --typeset-flow: 1.25em;
+  }
+
+  .typeset-chat {
+    --typeset-font-body: var(--font-sans);
+    --typeset-font-heading: var(--font-sans);
+    --typeset-font-mono: var(--font-mono);
+    --typeset-size: 15px;
+    --typeset-leading: 1.6;
+    --typeset-flow: 1em;
+  }
 }

@@ -50,39 +50,36 @@ describe("Blog Post Rendering", () => {
     const paragraphs = page.locator("article p");
     await expect(paragraphs.first()).toBeVisible();
 
-    // Verify prose styling is applied
+    // Verify typeset styling is applied
     const article = page.locator("article");
     const articleClasses = await article.getAttribute("class");
-    expect(articleClasses).toContain("prose");
-    expect(articleClasses).toContain("prose-lg");
+    expect(articleClasses).toContain("typeset");
+    expect(articleClasses).toContain("typeset-docs");
     expect(articleClasses).toContain("mx-auto");
   });
 
   it("should handle links with proper styling", async () => {
-    // Check if links are rendered with blue styling
+    // Typeset styles links via element CSS (underline), not utility classes
     const links = page.locator("article a");
     if ((await links.count()) > 0) {
       const firstLink = links.first();
-      const linkClasses = await firstLink.getAttribute("class");
-      expect(linkClasses).toContain("underline");
+      await expect(firstLink).toHaveCSS("text-decoration-line", "underline");
     }
   });
 
   it("should render lists with proper indentation and styling", async () => {
-    // Check for ordered lists
+    // Typeset sets list-style-type via CSS on ol/ul elements, not utility classes
     const orderedLists = page.locator("article ol");
     if ((await orderedLists.count()) > 0) {
-      const firstOL = orderedLists.first();
-      const olClasses = await firstOL.getAttribute("class");
-      expect(olClasses).toContain("list-decimal");
+      await expect(orderedLists.first()).toHaveCSS(
+        "list-style-type",
+        "decimal",
+      );
     }
 
-    // Check for unordered lists
     const unorderedLists = page.locator("article ul");
     if ((await unorderedLists.count()) > 0) {
-      const firstUL = unorderedLists.first();
-      const ulClasses = await firstUL.getAttribute("class");
-      expect(ulClasses).toContain("list-disc");
+      await expect(unorderedLists.first()).toHaveCSS("list-style-type", "disc");
     }
   });
 
@@ -125,9 +122,9 @@ describe("Blog Post Rendering", () => {
     const article = page.locator("article");
     await expect(article).toBeVisible();
 
-    // Verify responsive prose classes
+    // Verify responsive typeset classes
     const articleClasses = await article.getAttribute("class");
-    expect(articleClasses).toContain("prose");
+    expect(articleClasses).toContain("typeset");
     expect(articleClasses).toContain("mx-auto");
 
     // Check that image is responsive

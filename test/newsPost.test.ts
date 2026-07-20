@@ -38,11 +38,11 @@ describe("News Post Rendering", () => {
     const paragraphs = page.locator("article p");
     await expect(paragraphs.first()).toBeVisible();
 
-    // Verify prose styling is applied
+    // Verify typeset styling is applied
     const article = page.locator("article");
     const articleClasses = await article.getAttribute("class");
-    expect(articleClasses).toContain("prose");
-    expect(articleClasses).toContain("prose-lg");
+    expect(articleClasses).toContain("typeset");
+    expect(articleClasses).toContain("typeset-docs");
     expect(articleClasses).toContain("mx-auto");
   });
 
@@ -138,9 +138,9 @@ describe("News Post Rendering", () => {
     const article = page.locator("article");
     await expect(article).toBeVisible();
 
-    // Verify responsive prose classes
+    // Verify responsive typeset classes
     const articleClasses = await article.getAttribute("class");
-    expect(articleClasses).toContain("prose");
+    expect(articleClasses).toContain("typeset");
     expect(articleClasses).toContain("mx-auto");
   });
 

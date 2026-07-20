@@ -22,7 +22,7 @@ export default function UserMessage({ message }: { message: UIMessage }) {
           "max-w-9/10 rounded-tr-none bg-[hsl(47,100%,95%)] py-2",
         )}
       >
-        <CardContent className="prose prose-base">
+        <CardContent className="typeset typeset-chat">
           {multipleLines.map((line, index) => (
             <p key={index.toString()}>{line}</p>
           ))}

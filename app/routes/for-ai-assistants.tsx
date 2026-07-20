@@ -60,7 +60,7 @@ export default function ForAIAssistants({ loaderData }: Route.ComponentProps) {
       </div>
 
       <Streamdown
-        className="prose prose-lg mx-auto"
+        className="typeset typeset-docs mx-auto"
         mode="static"
         shikiTheme={["github-light", "github-dark"]}
         components={{

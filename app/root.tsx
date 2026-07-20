@@ -141,7 +141,7 @@ export default function App() {
 export function HydrateFallback() {
   return (
     <PageLayout hideLayout={true}>
-      <main className="prose prose-lg mx-auto flex flex-col items-center justify-center gap-4">
+      <main className="typeset typeset-docs mx-auto flex flex-col items-center justify-center gap-4">
         <WaveLoading color="#111111" count={2} />
         <p className="text-gray-500 text-sm">Loading, please wait...</p>
       </main>
@@ -154,7 +154,7 @@ export function ErrorBoundary() {
 
   return (
     <PageLayout>
-      <main className="prose prose-lg mx-auto py-32">
+      <main className="typeset typeset-docs mx-auto py-32">
         {isRouteErrorResponse(error) ? (
           <h1 className="mx-auto flex flex-row justify-center gap-2 text-4xl">
             <span className="font-bold text-red-500">{error.status}</span>

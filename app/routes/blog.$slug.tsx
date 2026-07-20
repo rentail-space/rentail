@@ -59,7 +59,7 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
       className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12"
       aria-label={title}
     >
-      <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
+      <article className="typeset typeset-docs mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
         <h1>{title}</h1>
 
         <LoadingImage
@@ -69,11 +69,11 @@ export default function Post({ loaderData }: { loaderData: BlogPost }) {
           src={`/blog/${image}`}
         />
 
-        <p className="prose prose-lg mx-auto text-gray-400 text-md italic">
+        <p className="typeset typeset-docs mx-auto text-gray-400 text-md italic">
           {summary}
         </p>
         <Streamdown
-          className="prose prose-lg mx-auto"
+          className="typeset typeset-docs mx-auto"
           components={{
             a: ({ children, href }) => (
               <ActiveLink

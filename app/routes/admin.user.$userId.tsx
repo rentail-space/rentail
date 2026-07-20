@@ -72,7 +72,7 @@ export default function UserPage({
 }) {
   return (
     <StickToBottom
-      className="prose mx-auto space-y-4"
+      className="typeset typeset-docs mx-auto space-y-4"
       initial="smooth"
       resize="smooth"
     >
@@ -189,7 +189,9 @@ function WorkingMemory({ user }: { user: User }) {
   return (
     <details className="rounded-lg border-2 border-gray-400 p-4 print:hidden">
       <summary className="font-semibold">User's working memory</summary>
-      <pre className="not-prose">{JSON.stringify(workingMemory, null, 2)}</pre>
+      <pre className="not-typeset">
+        {JSON.stringify(workingMemory, null, 2)}
+      </pre>
     </details>
   );
 }
@@ -198,7 +200,7 @@ function Geocode({ user }: { user: User }) {
   return (
     <details className="rounded-lg border-2 border-gray-400 p-4 print:hidden">
       <summary className="font-semibold">Original geocode</summary>
-      <pre className="not-prose">{JSON.stringify(user.geocode, null, 2)}</pre>
+      <pre className="not-typeset">{JSON.stringify(user.geocode, null, 2)}</pre>
     </details>
   );
 }

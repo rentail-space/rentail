@@ -20,6 +20,9 @@
   --chart-4: #05e17a;
   --chart-5: #7a83ff;
   --chart-active-dot: #000;
+  --muted: oklch(96.5% 0 0);
+  --muted-foreground: oklch(45% 0 0);
+  --primary: var(--main);
 }
 
 .dark {
@@ -37,6 +40,9 @@
   --chart-4: #04c86d;
   --chart-5: #7a83ff;
   --chart-active-dot: #fff;
+  --muted: oklch(35% 0 0);
+  --muted-foreground: oklch(70% 0 0);
+  --primary: var(--main);
 }
 
 @theme inline {
@@ -53,6 +59,9 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
 
   --spacing-boxShadowX: 4px;
   --spacing-boxShadowY: 4px;

@@ -1,11 +1,11 @@
 @import "tailwindcss";
 @import "./css/fonts.css";
 @import "./css/neobrutalism.css";
+@import "./css/typeset.css";
 @import "mapbox-gl/dist/mapbox-gl.css";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-@plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
 
 @plugin "tailwindcss-animate";

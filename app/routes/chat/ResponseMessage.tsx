@@ -75,7 +75,7 @@ function MarkdownMessage({
         "flex max-w-9/10 flex-row gap-2",
       )}
     >
-      <div className="not-prose row-span-2 min-w-10 self-end">
+      <div className="not-typeset row-span-2 min-w-10 self-end">
         <img
           alt="rental space"
           height="40px"
@@ -91,7 +91,7 @@ function MarkdownMessage({
         <CardContent>
           <Streamdown
             caret="block"
-            className="prose prose-base max-w-none"
+            className="typeset typeset-chat max-w-none"
             components={components}
             controls={{ code: false, mermaid: false, table: false }}
             isAnimating={isStreaming}
@@ -144,31 +144,6 @@ function getComponents({
     },
     button: ({ children }) => (
       <Button className="inline-block">{children}</Button>
-    ),
-    h1: ({ children }) => (
-      <h1 className={"mt-6 mb-2 font-bold text-black text-xl"}>{children}</h1>
-    ),
-    h2: ({ children }) => (
-      <h2 className={"mt-6 mb-2 font-bold text-black text-lg"}>{children}</h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className={"mt-6 mb-2 font-bold text-black text-md"}>{children}</h3>
-    ),
-    hr: () => <hr className="border-2 border-black" />,
-    li: ({ children }) => <li className={"py-1 text-black"}>{children}</li>,
-    ol: ({ children }) => (
-      <ol className={"ml-4 list-outside list-decimal text-black"}>
-        {children}
-      </ol>
-    ),
-    p: ({ children }) => (
-      <p className="mt-2 mb-2 whitespace-pre-wrap text-black">{children}</p>
-    ),
-    strong: ({ children }) => (
-      <span className={"font-bold text-black"}>{children}</span>
-    ),
-    ul: ({ children }) => (
-      <ul className={"ml-4 list-outside list-disc"}>{children}</ul>
     ),
   };
 }

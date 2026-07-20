@@ -58,11 +58,11 @@ export default function NewsPost({ loaderData }: { loaderData: NewsItem }) {
       className="min-h-screen bg-[hsl(60,100%,99%)] px-4 py-12"
       aria-label={title}
     >
-      <article className="prose prose-lg mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
+      <article className="typeset typeset-docs mx-auto max-w-4xl rounded-md border-black bg-white md:border-2 md:p-8 md:shadow-[8px_8px_0px_0px_black]">
         <h1>{title}</h1>
 
         <Streamdown
-          className="prose prose-lg mx-auto"
+          className="typeset typeset-docs mx-auto"
           components={{
             a: ({ children, href }) => (
               <ActiveLink
@@ -96,7 +96,7 @@ export default function NewsPost({ loaderData }: { loaderData: NewsItem }) {
           <h3>Media Contact</h3>
           <dl
             className="grid gap-2 [&_dd]:my-0 [&_dd]:text-black [&_dt]:my-0 [&_dt]:font-bold"
-            style={{ gridTemplateColumns: "2rem 1fr" }}
+            style={{ gridTemplateColumns: "4rem 1fr" }}
           >
             <dt>Name</dt>
             <dd>Assaf Arkin</dd>
