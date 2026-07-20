@@ -215,9 +215,16 @@ const html = `<!DOCTYPE html>
 
     const placeholderSvg = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23333%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23666%22 font-family=%22sans-serif%22>Not found</text></svg>';
 
+    function shutdown() {
+      // sendBeacon survives page unload (unlike fetch), so closing the tab
+      // also reliably stops the server.
+      navigator.sendBeacon('/shutdown');
+    }
+
     function render() {
       if (currentIndex >= items.length) {
-        container.innerHTML = '<div class="done">All screenshots reviewed! You can close this window.</div>';
+        container.innerHTML = '<div class="done">All screenshots reviewed! Server stopped — you can close this tab.</div>';
+        shutdown();
         return;
       }
       const item = items[currentIndex];
@@ -325,8 +332,12 @@ const html = `<!DOCTYPE html>
       else if (e.key === "n" || e.key === "N") next();
       else if (e.key === "k" || e.key === "K") keep();
       else if (e.key === "r" || e.key === "R") revert();
-      else if (e.key === "Escape") window.close();
+      else if (e.key === "Escape") {
+        shutdown();
+        window.close();
+      }
     });
+    window.addEventListener('beforeunload', shutdown);
     render();
   </script>
 </body>
@@ -419,6 +430,16 @@ const server = createServer((req, res) => {
       res.writeHead(200);
       res.end("ok");
     }
+    return;
+  }
+  if (url.pathname === "/shutdown") {
+    res.writeHead(200);
+    res.end("ok");
+    // Respond first, then clean up and exit after a tick so the fetch completes.
+    setTimeout(() => {
+      cleanup();
+      process.exit(0);
+    }, 50);
     return;
   }
   serveStatic(join(screenshotsDir, url.pathname), res);
