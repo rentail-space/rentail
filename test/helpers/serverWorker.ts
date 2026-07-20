@@ -22,10 +22,12 @@ async function startServer(this: void) {
   const port = Number(process.env.PORT);
   invariant(port, "PORT is not defined");
   try {
-    // Use a test-specific cache directory so tests don't interfere with the
-    // dev server cache (node_modules/.vite). Clear it on each run to ensure
-    // a clean start — Vite will re-optimize all listed deps from scratch.
-    const testCacheDir = resolve("node_modules/.vite-test");
+    // Use a per-worker cache directory so parallel test workers (each forks
+    // its own server with isolate: true) don't race on a shared dir. Keying by
+    // port (unique per worker) means no worker can delete another's
+    // in-progress optimization cache, which previously caused ENOTEMPTY on
+    // startup. Clear our own dir on each run for a clean re-optimize.
+    const testCacheDir = resolve(`node_modules/.vite-test-${port}`);
     await rm(testCacheDir, { recursive: true, force: true });
 
     const devServer = await vite.createServer({
