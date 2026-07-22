@@ -1,4 +1,4 @@
-#!/usr/bin/env nub
+#!/usr/bin/env tsx
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";

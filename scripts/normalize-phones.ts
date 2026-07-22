@@ -1,9 +1,9 @@
-#!/usr/bin/env nub
+#!/usr/bin/env tsx
 
 /**
  * Normalize malformed phone numbers in the database.
  *
- *   infisical --env prod run -- nub scripts/normalize-phones.ts
+ *   infisical --env prod run -- tsx scripts/normalize-phones.ts
  *
  * Background: the Google Places collector normalized phone numbers with the
  * regex /D/g (literal "D") instead of /\D/g (non-digits). Every collected
@@ -19,7 +19,7 @@
  * the script and the write path can never drift.
  *
  * This script constructs its own PrismaClient (rather than importing
- * ~/lib/prisma.server) because nub does not resolve extensionless `.server`
+ * ~/lib/prisma.server) because tsx does not resolve extensionless `.server`
  * imports — it treats the `.server` suffix as the file extension — while tsc
  * forbids explicit `.ts` import extensions. Package/alias imports without a
  * dot in the final segment (like `prisma/generated` and `~/lib/normalizePhone`)

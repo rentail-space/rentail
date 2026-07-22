@@ -215,8 +215,9 @@ function SpecificChart({
           content={
             <ChartTooltipContent
               labelFormatter={(value) => {
-                const from = Temporal.PlainDate.from(value);
-                const to = Temporal.PlainDate.from(value)
+                const valueStr = typeof value === "string" ? value : "";
+                const from = Temporal.PlainDate.from(valueStr);
+                const to = Temporal.PlainDate.from(valueStr)
                   .add({ days: isDaily ? 1 : 6 })
                   .subtract({ days: 1 });
                 return isDaily

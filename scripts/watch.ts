@@ -1,4 +1,4 @@
-#!/usr/bin/env nub
+#!/usr/bin/env tsx
 
 import { green, plot } from "asciichart";
 import envVars from "~/lib/env";
@@ -209,7 +209,7 @@ async function refreshData() {
 async function main() {
   if (!process.stdin.isTTY) {
     console.error("Error: This script requires an interactive terminal (TTY)");
-    console.error("Run directly in your terminal: nub scripts/watch.ts");
+    console.error("Run directly in your terminal: tsx scripts/watch.ts");
     process.exit(1);
   }
 

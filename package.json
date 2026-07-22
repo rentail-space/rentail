@@ -11,7 +11,7 @@
     "devmcp": "npx @modelcontextprotocol/inspector@latest http://localhost:5173/api/mcp",
     "prod:db:push": "infisical --env prod run -- prisma db push",
     "start": "react-router-serve ./build/server/index.js",
-    "test": "./scripts/check && nub run test:db:push && rm -rf __screenshots__/* && vp test run",
+    "test": "./scripts/check && tsx run test:db:push && rm -rf __screenshots__/* && vp test run",
     "test:db:push": "infisical --env test run -- prisma db push",
     "prepare": "vp config"
   },

@@ -1,4 +1,4 @@
-#!/usr/bin/env nub
+#!/usr/bin/env tsx
 
 /**
  * SEO Ranking Checker
