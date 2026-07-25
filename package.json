@@ -18,10 +18,10 @@
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.18",
     "@ai-sdk/deepseek": "^3.0.13",
-    "@ai-sdk/google": "^4.0.21",
-    "@ai-sdk/openai": "^4.0.17",
+    "@ai-sdk/google": "^4.0.22",
+    "@ai-sdk/openai": "^4.0.18",
     "@ai-sdk/perplexity": "^4.0.13",
-    "@ai-sdk/react": "^4.0.37",
+    "@ai-sdk/react": "^4.0.38",
     "@base-ui/react": "^1.6.0",
     "@forge42/seo-tools": "^1.4.5",
     "@google-analytics/data": "^6.1.0",
@@ -39,11 +39,11 @@
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/react-query": "^5.101.4",
     "@tanstack/react-table": "^8.21.3",
-    "ai": "^7.0.34",
+    "ai": "^7.0.35",
     "asciichart": "^1.5.25",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
-    "convert": "^7.0.0",
+    "convert": "^7.0.2",
     "csv-parse": "^7.0.1",
     "csv-stringify": "^6.8.1",
     "debug": "^4.4.3",
@@ -57,8 +57,8 @@
     "isbot": "^5.2.1",
     "linkedom": "^0.18.13",
     "looks-same": "^10.0.1",
-    "lucide-react": "^1.25.0",
-    "mapbox-gl": "^3.26.0",
+    "lucide-react": "^1.26.0",
+    "mapbox-gl": "^3.27.0",
     "marked": "^18.0.7",
     "radashi": "^12.9.1",
     "react": "^19.2.8",
@@ -116,5 +116,5 @@
   "engines": {
     "node": ">=26.0.0"
   },
-  "packageManager": "pnpm@11.15.1"
+  "packageManager": "pnpm@11.16.0"
 }
