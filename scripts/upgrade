@@ -8,7 +8,7 @@ echo -e "\033[32m  Upgrading dependencies …\033[0m"
 pnpm update --latest
 
 echo -e "\033[32m  Installing Playwright browsers …\033[0m"
-pnpx playwright install
+playwright install webkit --with-deps
 
 echo -e "\033[32m  Deduping dependencies …\033[0m"
 pnpm dedupe --ignore-scripts
