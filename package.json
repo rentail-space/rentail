@@ -16,12 +16,12 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^4.0.21",
-    "@ai-sdk/deepseek": "^3.0.13",
-    "@ai-sdk/google": "^4.0.24",
-    "@ai-sdk/openai": "^4.0.20",
-    "@ai-sdk/perplexity": "^4.0.13",
-    "@ai-sdk/react": "^4.0.40",
+    "@ai-sdk/anthropic": "^4.0.23",
+    "@ai-sdk/deepseek": "^3.0.15",
+    "@ai-sdk/google": "^4.0.27",
+    "@ai-sdk/openai": "^4.0.23",
+    "@ai-sdk/perplexity": "^4.0.16",
+    "@ai-sdk/react": "^4.0.44",
     "@base-ui/react": "^1.6.0",
     "@forge42/seo-tools": "^1.4.5",
     "@google-analytics/data": "^6.1.0",
@@ -39,7 +39,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/react-query": "^5.101.4",
     "@tanstack/react-table": "^8.21.3",
-    "ai": "^7.0.37",
+    "ai": "^7.0.41",
     "asciichart": "^1.5.25",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
@@ -70,7 +70,7 @@
     "rehype-harden": "^1.1.8",
     "remark-gfm": "^4.0.1",
     "remove-markdown": "^0.6.4",
-    "resend": "^6.18.0",
+    "resend": "^6.18.1",
     "respinner": "^5.0.0",
     "resumable-stream": "^2.2.12",
     "serpapi": "^2.2.1",
@@ -88,7 +88,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@ai-sdk/provider": "^4.0.3",
+    "@ai-sdk/provider": "^4.0.4",
     "@logtail/types": "^0.5.8",
     "@playwright/test": "^1.62.0",
     "@secretlint/secretlint-rule-preset-recommend": "^13.0.4",
@@ -116,5 +116,5 @@
   "engines": {
     "node": ">=26.0.0"
   },
-  "packageManager": "pnpm@11.17.0"
+  "packageManager": "pnpm@11.18.0"
 }
