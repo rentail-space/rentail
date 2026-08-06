@@ -27,3 +27,5 @@ server.log
 
 # Used by scripts/clone.sh to clone the production database to the local development database
 prisma/backup.sql
+.vercel
+.env*
