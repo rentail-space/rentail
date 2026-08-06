@@ -15,7 +15,8 @@ ignoredBuiltDependencies:
 minimumReleaseAge: 2880
 
 minimumReleaseAgeExclude:
-  - "coolify-ghcr-deploy"
+  - "@vercel/*"
+  - vercel
   - vite-plus
   - "@voidzero-dev/*"
   - oxlint

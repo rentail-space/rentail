@@ -9,8 +9,8 @@ if [ "$1" = "--skip-tests" ]; then
   echo -e "\033[0;33m--- Step 2: Skipping tests ---\033[0m"
 else
   echo -e "\033[0;32m--- Step 2: Generate Prisma client and push dev DB ---\033[0m"
-  infisical --env dev run --  pnpm prisma generate
-  infisical --env dev run --  pnpm test:db:push
+  infisical --env dev run -- pnpm prisma generate
+  infisical --env dev run -- pnpm test:db:push
 
   echo -e "\033[0;32m--- Step 3: Run tests ---\033[0m"
   infisical --env test run -- pnpm vp test
@@ -19,18 +19,11 @@ fi
 echo -e "\033[0;32m--- Step 4: Update production database ---\033[0m"
 infisical --env prod run -- pnpm prisma db push
 
-echo -e "\033[0;32m--- Step 5: Build, push, and deploy ---\033[0m"
-infisical export --env prod --format=dotenv > .env
-echo "$(infisical secrets get GHCR_TOKEN --env dev --plain)" | docker login ghcr.io -u assaf --password-stdin
-orb start
-infisical --env prod run -- coolify-ghcr-deploy \
-  --app-name "rentail.space" \
-  --coolify-url "https://coolify.labnotes.org" \
-  --env-file ".env" \
-  --healthcheck-timeout 60 \
-  --image "ghcr.io/rentail-space/rentail:latest"
-rm -f .env
-orb stop
+echo -e "\033[0;32m--- Step 5: Build and deploy to Vercel ---\033[0m"
+export VERCEL_TOKEN="$(infisical secrets get VERCEL_TOKEN --env prod --plain)"
+pnpm exec vercel pull --yes --environment=production
+pnpm exec vercel build --prod
+pnpm exec vercel deploy --prebuilt --prod
 
 echo -e "\033[0;34m--- Deployed to https://rentail.space ---\033[0m"
 open https://rentail.space

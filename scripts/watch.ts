@@ -1,5 +1,6 @@
 #!/usr/bin/env tsx
 
+import { readFileSync } from "node:fs";
 import { green, plot } from "asciichart";
 import envVars from "~/lib/env";
 
@@ -48,7 +49,22 @@ const ANSI = {
   reset: "\x1b[0m",
 };
 
-const applicationUUID = "c12diz0deab7ctmllamdugyg";
+function getProjectId(): string {
+  const projectId = envVars.VERCEL_PROJECT_ID;
+  if (projectId) return projectId;
+  // Fall back to the linked project from `vercel link`
+  try {
+    const project = JSON.parse(
+      readFileSync(new URL("../.vercel/project.json", import.meta.url), "utf8"),
+    ) as { projectId?: string };
+    if (project.projectId) return project.projectId;
+  } catch {
+    // Not linked — fall through
+  }
+  throw new Error(
+    "VERCEL_PROJECT_ID not set and no .vercel/project.json found. Run `vercel link` or set the env var.",
+  );
+}
 
 function getVisibleLines(): number {
   const termHeight = process.stdout.rows || 24;
@@ -67,20 +83,48 @@ function clampScrollOffset(
 }
 
 async function fetchLogs(): Promise<LogEntry[]> {
-  const response = await fetch(
-    `https://coolify.labnotes.org/api/v1/applications/${applicationUUID}/logs?lines=1000`,
-    { headers: { Authorization: `Bearer ${envVars.COOLIFY_TOKEN}` } },
+  const projectId = getProjectId();
+  const deploymentsResponse = await fetch(
+    `https://api.vercel.com/v6/deployments?projectId=${projectId}&target=production&limit=1&state=READY`,
+    { headers: { Authorization: `Bearer ${envVars.VERCEL_TOKEN}` } },
   );
-  const { logs: logsText } = (await response.json()) as { logs: string };
-  return logsText
-    .split("\n")
-    .filter(Boolean)
-    .map((line) => {
-      const match = line.match(/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})/);
-      return {
-        timestamp: match?.[1] ?? "",
-        message: line.replace(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\S*\s*/, ""),
-      };
+  if (!deploymentsResponse.ok)
+    throw new Error(
+      `Vercel API: ${deploymentsResponse.status} ${await deploymentsResponse.text()}`,
+    );
+  const { deployments } = (await deploymentsResponse.json()) as {
+    deployments: { id: string }[];
+  };
+  const deployment = deployments[0];
+  if (!deployment) return [];
+
+  const eventsResponse = await fetch(
+    `https://api.vercel.com/v3/deployments/${deployment.id}/events?direction=forward`,
+    { headers: { Authorization: `Bearer ${envVars.VERCEL_TOKEN}` } },
+  );
+  if (!eventsResponse.ok)
+    throw new Error(
+      `Vercel API: ${eventsResponse.status} ${await eventsResponse.text()}`,
+    );
+  const { events } = (await eventsResponse.json()) as {
+    events: { created?: number; payload?: { text?: string } }[];
+  };
+  return events
+    .flatMap((event) => {
+      const text = event.payload?.text;
+      if (!text) return [];
+      return text
+        .split("\n")
+        .filter(Boolean)
+        .map((line) => ({
+          timestamp: event.created
+            ? new Date(event.created)
+                .toISOString()
+                .slice(0, 19)
+                .replace("T", " ")
+            : "",
+          message: line,
+        }));
     })
     .reverse();
 }

@@ -49,7 +49,8 @@ const envVars = {
     .default("redis://localhost:6379")
     .asUrlString(),
 
-  COOLIFY_TOKEN: env.get("COOLIFY_TOKEN").required(false).asString(),
+  VERCEL_TOKEN: env.get("VERCEL_TOKEN").required(false).asString(),
+  VERCEL_PROJECT_ID: env.get("VERCEL_PROJECT_ID").required(false).asString(),
   HETZNER_TOKEN: env.get("HETZNER_TOKEN").required(false).asString(),
 };
 

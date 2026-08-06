@@ -13,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
-    timeout-minutes: 25
+    timeout-minutes: 35
 
     services:
       postgres:
@@ -42,7 +41,7 @@ jobs:
       - name: Setup pnpm + Node.js
         uses: pnpm/setup@v1
         with:
-          runtime: node@26
+          runtime: node@24
           cache: false
           install: true
 
@@ -92,33 +91,11 @@ jobs:
           name: playwright-test-results
           path: __screenshots__
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v4
-        with:
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: ghcr.io
-          username: ${{ github.actor }}
-
-      - name: Get production secrets
-        uses: Infisical/secrets-action@v1.0.16
-        with:
-          client-id: ${{ secrets.INFISICAL_CLIENT_ID }}
-          client-secret: ${{ secrets.INFISICAL_CLIENT_SECRET }}
-          env-slug: "prod"
-          export-type: "file"
-          file-output-path: "/.env"
-          project-slug: ${{ secrets.INFISICAL_PROJECT_SLUG }}
-
-      - uses: mxschmitt/action-tmate@v3
-        if: false
-
-      - name: Deploy to Coolify
-        uses: assaf/coolify-deploy@d5bf2501ddf14c56437ac44e4f5c598db0d853d7
-        with:
-          app-name: rentail.space
-          coolify-token: ${{ secrets.COOLIFY_TOKEN }}
-          coolify-url: https://coolify.labnotes.org
-          env-file: ".env"
-          healthcheck-path: /health
-          healthcheck-timeout: 120
-          image: ghcr.io/rentail-space/rentail:latest
+      - name: Deploy to Vercel
+        run: |
+          pnpm exec vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          pnpm exec vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+          pnpm exec vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

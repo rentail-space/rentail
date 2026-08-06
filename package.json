@@ -13,6 +13,7 @@
     "start": "react-router-serve ./build/server/index.js",
     "test": "./scripts/check && tsx run test:db:push && rm -rf __screenshots__/* && vp test run",
     "test:db:push": "infisical --env test run -- prisma db push",
+    "vercel-build": "prisma generate && react-router build --force",
     "prepare": "vp config"
   },
   "dependencies": {
@@ -97,7 +98,7 @@
     "@types/node": "^26.1.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "coolify-ghcr-deploy": "^1.4.1",
+    "@vercel/react-router": "^1.3.2",
     "diff": "^9.0.0",
     "fast-xml-parser": "^5.10.1",
     "knip": "^6.29.0",
@@ -110,11 +111,12 @@
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.1",
     "typescript": "^7.0.2",
+    "vercel": "^58.7.1",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },
   "engines": {
-    "node": ">=26.0.0"
+    "node": ">=24.0.0"
   },
   "packageManager": "pnpm@11.18.0"
 }
