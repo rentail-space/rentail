@@ -15,6 +15,16 @@ jobs:
       contents: read
     timeout-minutes: 35
 
+    env:
+      # Test database + Redis come from the service containers; the remaining
+      # test secrets come from GitHub Actions secrets (RESEND_API_KEY,
+      # SESSION_SECRET). This mirrors what .env.test provides locally.
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/rentail_test
+      DIRECT_URL: postgresql://postgres:postgres@localhost:5432/rentail_test
+      REDIS_URL: redis://localhost:6379
+      SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+
     services:
       postgres:
         image: postgres:16-alpine
@@ -57,14 +67,6 @@ jobs:
       - name: Install Playwright and system dependencies
         run: pnpm exec playwright install chromium
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-
-      - name: Get test secrets
-        uses: Infisical/secrets-action@v1.0.16
-        with:
-          client-id: ${{ secrets.INFISICAL_CLIENT_ID }}
-          client-secret: ${{ secrets.INFISICAL_CLIENT_SECRET }}
-          env-slug: "test"
-          project-slug: ${{ secrets.INFISICAL_PROJECT_SLUG }}
 
       - name: Setup database schema for testing
         run: |

@@ -3,7 +3,7 @@
 /**
  * Normalize malformed phone numbers in the database.
  *
- *   infisical --env prod run -- tsx scripts/normalize-phones.ts
+ *   tsx scripts/normalize-phones.ts
  *
  * Background: the Google Places collector normalized phone numbers with the
  * regex /D/g (literal "D") instead of /\D/g (non-digits). Every collected
@@ -35,7 +35,7 @@ import normalizePhone from "~/lib/normalizePhone";
 dotenv.configDotenv({ quiet: true });
 
 if (!process.env.DATABASE_URL)
-  throw new Error("DATABASE_URL is required (use infisical --env prod run)");
+  throw new Error("DATABASE_URL is required (load it from .env)");
 
 // The production database requires SSL with the project's CA cert; a local dev
 // database does not. Gate SSL on the connection host so the same script runs

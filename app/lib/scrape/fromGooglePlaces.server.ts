@@ -18,7 +18,7 @@ import sharp from "sharp";
 import zod from "zod";
 
 if (!envVars.GOOGLE_PLACES_API_KEY)
-  throw new Error("Use infisical --env prod run -- ");
+  throw new Error("GOOGLE_PLACES_API_KEY is required (set it in .env)");
 
 const placeDetailsSchema = zod.object({
   address: zod.string().describe("The place's address"),

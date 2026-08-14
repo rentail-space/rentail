@@ -3,10 +3,11 @@ set -eo pipefail
 
 # Clone production database to local development database
 # Usage: ./scripts/clone.sh
+# Requires DATABASE_URL (production) in .env.prod
 
 # Dump the database to a file
 echo -e "\033[32m  Dumping database to backup.sql …\033[0m"
-pg_dump "$(infisical --env prod secrets get --plain DATABASE_URL)" --file prisma/backup.sql --schema public --clean --no-owner --no-privileges
+pg_dump "$(node -e "require('dotenv').config({path:'.env.prod',quiet:true});process.stdout.write(process.env.DATABASE_URL||'')")" --file prisma/backup.sql --schema public --clean --no-owner --no-privileges
 
 # Restore the database from the file
 echo -e "\033[32m  Restoring database from backup.sql …\033[0m"

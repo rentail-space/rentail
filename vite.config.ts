@@ -1,5 +1,5 @@
-import { execSync } from "node:child_process";
 import { resolve } from "node:path";
+import dotenv from "dotenv";
 import type { Connect } from "vite-plus";
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
@@ -111,25 +111,14 @@ export default defineConfig({
     bail: 3, // Stop after 3 failing tests
     browser: { screenshotDirectory: "__screenshots__" },
     disableConsoleIntercept: !process.env.CI,
-    // Fetch secrets via Infisical REST API (Machine Identity) or fall back to process.env.
-    // Uses a sync helper script because vite config is evaluated synchronously.
+    // Load secrets from local env files (dotenv), falling back to process.env.
     env: (() => {
-      try {
-        const raw = execSync("node scripts/fetch-infisical-secrets.mjs", {
-          encoding: "utf-8",
-          timeout: 10_000,
-          stdio: ["pipe", "pipe", "pipe"],
-        });
-        const env: Record<string, string> = {};
-        for (const line of raw.split("\n")) {
-          const match = line.match(/^export\s+(\w+)=(.*)$/);
-          if (match) env[match[1]] = match[2];
-        }
-        return { ...env, ...process.env };
-      } catch {
-        // Infisical credentials not configured — use process.env only
-        return { ...process.env };
+      const env: Record<string, string> = {};
+      for (const path of [".env.test", ".env"]) {
+        const parsed = dotenv.config({ path, quiet: true }).parsed;
+        if (parsed) Object.assign(env, parsed);
       }
+      return { ...env, ...process.env };
     })(),
     exclude: ["test/conversations/**/*.ts"],
     execArgv: ["--max-old-space-size=3072"],

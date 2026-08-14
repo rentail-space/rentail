@@ -1,13 +1,19 @@
 /**
  * NOTE: Setup code to run only once before all tests
  *
- * - Loads test secrets from Infisical into process.env
+ * - Loads test secrets from .env.test / .env into process.env
  * - Seeds database with known centers
  * - Launches Web server once per test suite
  */
 
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
+import dotenv from "dotenv";
+
+// Load test env (overrides .env values), then shared .env as a fallback.
+// Worker processes get the same env via the test env hook in vite.config.ts.
+dotenv.config({ path: ".env.test", quiet: true });
+dotenv.config({ quiet: true });
 
 /**
  * These are the only centers that are available in testing.
@@ -27,11 +33,6 @@ const centers = [
 const execAsync = promisify(exec);
 
 export default async function setup() {
-  // Inject secrets from Infisical into process.env via the REST API.
-  // Uses Machine Identity (Universal Auth) — no CLI login needed.
-  const { loadInfisicalIntoEnv } = await import("~/lib/loadSecrets");
-  await loadInfisicalIntoEnv();
-
   const [
     { default: prisma },
     { default: seedCenters },

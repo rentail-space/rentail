@@ -10,8 +10,7 @@
   "project": ["app/**/*.{ts,tsx}", "test/**/*.{ts,tsx}", "!__screenshots__"],
   "ignoreDependencies": [
     "@secretlint/secretlint-rule-preset-recommend",
-    "@prisma/client",
-    "portless"
+    "@prisma/client"
   ],
   "ignore": ["app/lib/scrape/*.ts"],
   "ignoreIssues": {
@@ -19,6 +18,5 @@
     "app/lib/html/parseHTML.ts": ["exports"],
     "app/lib/relativeTime.ts": ["exports"],
     "app/lib/formatDate.ts": ["exports"]
-  },
-  "ignoreBinaries": ["infisical"]
+  }
 }

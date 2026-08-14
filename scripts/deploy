@@ -8,19 +8,18 @@ pnpm check
 if [ "$1" = "--skip-tests" ]; then
   echo -e "\033[0;33m--- Step 2: Skipping tests ---\033[0m"
 else
-  echo -e "\033[0;32m--- Step 2: Generate Prisma client and push dev DB ---\033[0m"
-  infisical --env dev run -- pnpm prisma generate
-  infisical --env dev run -- pnpm test:db:push
+  echo -e "\033[0;32m--- Step 2: Generate Prisma client and push test DB ---\033[0m"
+  pnpm prisma generate
+  pnpm test:db:push
 
   echo -e "\033[0;32m--- Step 3: Run tests ---\033[0m"
-  infisical --env test run -- pnpm vp test
+  pnpm vp test
 fi
 
 echo -e "\033[0;32m--- Step 4: Update production database ---\033[0m"
-infisical --env prod run -- pnpm prisma db push
+node scripts/load-env.mjs .env.prod -- pnpm prisma db push
 
 echo -e "\033[0;32m--- Step 5: Build and deploy to Vercel ---\033[0m"
-export VERCEL_TOKEN="$(infisical secrets get VERCEL_TOKEN --env prod --plain)"
 pnpm exec vercel pull --yes --environment=production
 pnpm exec vercel build --prod
 pnpm exec vercel deploy --prebuilt --prod
