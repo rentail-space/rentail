@@ -2,11 +2,15 @@ import type { Prisma } from "prisma/generated";
 import {
   type ColumnDef,
   type SortingState,
+  columnFilteringFeature,
+  columnSizingFeature,
+  createFilteredRowModel,
+  createSortedRowModel,
   flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getSortedRowModel,
-  useReactTable,
+  globalFilteringFeature,
+  rowSortingFeature,
+  tableFeatures,
+  useTable,
 } from "@tanstack/react-table";
 import { Temporal } from "@js-temporal/polyfill";
 import { daysAgo } from "~/lib/temporal";
@@ -88,7 +92,16 @@ export async function loader({ request }: Route.LoaderArgs) {
   return { queries, summary };
 }
 
-const columns: ColumnDef<SearchQuery>[] = [
+const features = tableFeatures({
+  rowSortingFeature,
+  columnFilteringFeature,
+  globalFilteringFeature,
+  columnSizingFeature,
+  sortedRowModel: createSortedRowModel(),
+  filteredRowModel: createFilteredRowModel(),
+});
+
+const columns: ColumnDef<typeof features, SearchQuery>[] = [
   { accessorKey: "query", header: "Query" },
   { accessorKey: "impressions", header: "Impressions", size: 100 },
   { accessorKey: "clicks", header: "Clicks", size: 80 },
@@ -114,15 +127,13 @@ export default function SearchesPage({ loaderData }: Route.ComponentProps) {
 
   const { queries, summary } = loaderData;
 
-  const table = useReactTable({
+  const table = useTable({
     data: queries,
     columns,
+    features,
     state: { sorting, globalFilter },
     onSortingChange: setSorting,
     onGlobalFilterChange: setGlobalFilter,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     globalFilterFn: (row, _, filterValue) => {
       const query = row.getValue("query") as string;
       return query.toLowerCase().includes(filterValue.toLowerCase());
@@ -210,7 +221,7 @@ export default function SearchesPage({ loaderData }: Route.ComponentProps) {
               <TableBody>
                 {table.getRowModel().rows.map((row) => (
                   <TableRow key={row.id} className="hover:bg-gray-50">
-                    {row.getVisibleCells().map((cell) => (
+                    {row.getAllCells().map((cell) => (
                       <TableCell key={cell.id}>
                         {flexRender(
                           cell.column.columnDef.cell,

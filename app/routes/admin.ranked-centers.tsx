@@ -1,8 +1,10 @@
 import {
+  columnSizingFeature,
+  createSortedRowModel,
   flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
+  rowSortingFeature,
+  tableFeatures,
+  useTable,
 } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp, EqualIcon } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
@@ -80,6 +82,12 @@ export default function RankingPage({ loaderData }: Route.ComponentProps) {
   );
 }
 
+const features = tableFeatures({
+  rowSortingFeature,
+  columnSizingFeature,
+  sortedRowModel: createSortedRowModel(),
+});
+
 function VisibleResults({
   displayName,
   centers,
@@ -87,7 +95,7 @@ function VisibleResults({
   displayName: string;
   centers: PropertyGetPayload<{ include: { spaces: true; state: true } }>[];
 }) {
-  const table = useReactTable({
+  const table = useTable({
     columns: [
       {
         accessorKey: "name",
@@ -102,6 +110,7 @@ function VisibleResults({
       { accessorKey: "city", size: 140, header: "City" },
       {
         accessorFn: (row) => row.state.abbreviation,
+        id: "state",
         header: "State",
         size: 80,
       },
@@ -129,9 +138,8 @@ function VisibleResults({
       },
     ],
     data: centers,
+    features,
     enableSortingRemoval: true,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     initialState: { sorting: [] },
   });
 
@@ -183,7 +191,7 @@ function VisibleResults({
           <TableBody>
             {table.getRowModel().rows.map((row) => (
               <TableRow key={row.id} className="hover:bg-gray-100">
-                {row.getVisibleCells().map((cell) => (
+                {row.getAllCells().map((cell) => (
                   <TableCell
                     className="truncate"
                     key={cell.id}

@@ -1,9 +1,11 @@
 import { Temporal } from "@js-temporal/polyfill";
 import {
+  columnSizingFeature,
+  createSortedRowModel,
   flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
+  rowSortingFeature,
+  tableFeatures,
+  useTable,
 } from "@tanstack/react-table";
 import { groupBy, sumBy } from "es-toolkit";
 import { ArrowDown, ArrowUp } from "lucide-react";
@@ -316,6 +318,12 @@ export default function BotsPage({ loaderData }: Route.ComponentProps) {
   );
 }
 
+const features = tableFeatures({
+  rowSortingFeature,
+  columnSizingFeature,
+  sortedRowModel: createSortedRowModel(),
+});
+
 function RecentBotActivityTable({
   data,
 }: {
@@ -327,7 +335,7 @@ function RecentBotActivityTable({
     referer: string | null;
   }[];
 }) {
-  const table = useReactTable({
+  const table = useTable({
     columns: [
       {
         accessorKey: "botType",
@@ -358,8 +366,7 @@ function RecentBotActivityTable({
     ],
     data,
     enableSortingRemoval: false,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    features,
     initialState: { sorting: [{ id: "total", desc: true }] },
   });
 
@@ -405,7 +412,7 @@ function RecentBotActivityTable({
       <TableBody>
         {table.getRowModel().rows.map((row) => (
           <TableRow key={row.id} className="hover:bg-gray-100">
-            {row.getVisibleCells().map((cell) => (
+            {row.getAllCells().map((cell) => (
               <TableCell
                 className="truncate"
                 key={cell.id}
@@ -426,7 +433,7 @@ function MostVisitedTable({
 }: {
   data: { path: string; count: number; uniqueBots: number }[];
 }) {
-  const table = useReactTable({
+  const table = useTable({
     columns: [
       {
         accessorKey: "path",
@@ -447,8 +454,7 @@ function MostVisitedTable({
     ],
     data,
     enableSortingRemoval: false,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    features,
     initialState: { sorting: [{ id: "count", desc: true }] },
   });
 
@@ -494,7 +500,7 @@ function MostVisitedTable({
       <TableBody>
         {table.getRowModel().rows.map((row) => (
           <TableRow key={row.id} className="hover:bg-gray-100">
-            {row.getVisibleCells().map((cell) => (
+            {row.getAllCells().map((cell) => (
               <TableCell
                 key={cell.id}
                 style={{ maxWidth: cell.column.getSize() }}

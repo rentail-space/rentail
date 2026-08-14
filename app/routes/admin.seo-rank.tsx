@@ -1,7 +1,10 @@
 import {
+  columnSizingFeature,
+  createSortedRowModel,
   flexRender,
-  getCoreRowModel,
-  useReactTable,
+  rowSortingFeature,
+  tableFeatures,
+  useTable,
 } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { daysAgo } from "~/lib/temporal";
@@ -99,12 +102,18 @@ export default function RankingPage({ loaderData }: Route.ComponentProps) {
   );
 }
 
+const features = tableFeatures({
+  rowSortingFeature,
+  columnSizingFeature,
+  sortedRowModel: createSortedRowModel(),
+});
+
 function VisibleResults({
   data,
 }: {
   data: { hostname: string; count: number }[];
 }) {
-  const table = useReactTable({
+  const table = useTable({
     columns: [
       {
         accessorKey: "hostname",
@@ -114,7 +123,7 @@ function VisibleResults({
       { accessorKey: "count", size: 140, header: "Count" },
     ],
     data,
-    getCoreRowModel: getCoreRowModel(),
+    features,
   });
 
   return (
@@ -171,7 +180,7 @@ function VisibleResults({
                 )}
                 key={row.id}
               >
-                {row.getVisibleCells().map((cell) => (
+                {row.getAllCells().map((cell) => (
                   <TableCell
                     className="truncate"
                     key={cell.id}

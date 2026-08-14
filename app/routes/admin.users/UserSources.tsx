@@ -11,10 +11,12 @@ import {
   Table,
 } from "~/components/ui/Table";
 import {
-  getSortedRowModel,
-  getCoreRowModel,
-  useReactTable,
+  columnSizingFeature,
+  createSortedRowModel,
   flexRender,
+  rowSortingFeature,
+  tableFeatures,
+  useTable,
 } from "@tanstack/react-table";
 
 export default function UserSources({ analytics }: { analytics: Analytics[] }) {
@@ -27,13 +29,19 @@ export default function UserSources({ analytics }: { analytics: Analytics[] }) {
   );
 }
 
+const features = tableFeatures({
+  rowSortingFeature,
+  columnSizingFeature,
+  sortedRowModel: createSortedRowModel(),
+});
+
 function SourcesTable({ analytics }: { analytics: Analytics[] }) {
   const grouped = groupBy(analytics, ({ sessionSource }) => sessionSource);
   const totalVisitors = sumBy(
     Object.values(analytics),
     (entry) => entry.visitors,
   );
-  const table = useReactTable({
+  const table = useTable({
     columns: [
       {
         accessorKey: "source",
@@ -58,8 +66,7 @@ function SourcesTable({ analytics }: { analytics: Analytics[] }) {
       percentage:
         (sumBy(entries, ({ visitors }) => visitors) / totalVisitors) * 100,
     })),
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    features,
     initialState: { sorting: [{ id: "visitors", desc: true }] },
   });
 
@@ -95,7 +102,7 @@ function SourcesTable({ analytics }: { analytics: Analytics[] }) {
         <TableBody>
           {table.getRowModel().rows.map((row) => (
             <TableRow key={row.id} className="hover:bg-gray-100">
-              {row.getVisibleCells().map((cell) => (
+              {row.getAllCells().map((cell) => (
                 <TableCell
                   className={twMerge(
                     "truncate",

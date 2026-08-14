@@ -15,17 +15,24 @@ import {
   Table,
 } from "~/components/ui/Table";
 import {
-  getCoreRowModel,
-  useReactTable,
+  columnResizingFeature,
+  columnSizingFeature,
   flexRender,
+  tableFeatures,
+  useTable,
 } from "@tanstack/react-table";
 import { safeParseUtm } from "~/lib/utm";
 import deviceDetection from "~/lib/deviceDetection";
 import { last, round } from "radashi";
 import convert from "convert";
 
+const features = tableFeatures({
+  columnSizingFeature,
+  columnResizingFeature,
+});
+
 export default function RecentUsers({ users }: { users: User[] }) {
-  const table = useReactTable({
+  const table = useTable({
     columns: [
       {
         cell: ({ row }) => (
@@ -46,11 +53,13 @@ export default function RecentUsers({ users }: { users: User[] }) {
       {
         accessorFn: (row) => deviceDetection(row.userAgent),
         header: "Device",
+        id: "device",
         size: 120,
       },
       {
         accessorFn: (row) =>
           safeParseUtm(row.utm)?.source || row.referrer || "N/A",
+        id: "source",
         size: 180,
         header: "Source",
       },
@@ -60,6 +69,7 @@ export default function RecentUsers({ users }: { users: User[] }) {
             ? cleanParseWorkingMemory(row.workingMemory).location?.displayName
             : null,
         header: "Location",
+        id: "location",
         size: 240,
       },
       {
@@ -75,7 +85,7 @@ export default function RecentUsers({ users }: { users: User[] }) {
       minSize: 100,
       maxSize: 400,
     },
-    getCoreRowModel: getCoreRowModel(),
+    features,
   });
   const recent = last(users)?.createdAt;
   const days =
@@ -124,7 +134,7 @@ export default function RecentUsers({ users }: { users: User[] }) {
           <TableBody>
             {table.getRowModel().rows.map((row) => (
               <TableRow key={row.id} className="hover:bg-gray-100">
-                {row.getVisibleCells().map((cell) => (
+                {row.getAllCells().map((cell) => (
                   <TableCell
                     className="truncate"
                     key={cell.id}

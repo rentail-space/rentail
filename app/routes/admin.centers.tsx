@@ -1,9 +1,12 @@
 import {
+  columnSizingFeature,
+  createPaginatedRowModel,
+  createSortedRowModel,
   flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
+  rowPaginationFeature,
+  rowSortingFeature,
+  tableFeatures,
+  useTable,
 } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp, MapPinIcon } from "lucide-react";
 import type { PropertyGetPayload } from "prisma/generated/models";
@@ -61,6 +64,14 @@ export default function CenterPage({ loaderData }: Route.ComponentProps) {
   );
 }
 
+const features = tableFeatures({
+  rowSortingFeature,
+  rowPaginationFeature,
+  columnSizingFeature,
+  sortedRowModel: createSortedRowModel(),
+  paginatedRowModel: createPaginatedRowModel(),
+});
+
 function CentersList({
   centers,
   centerRef,
@@ -70,7 +81,7 @@ function CentersList({
     ((center: { longitude: number; latitude: number }) => void) | null
   >;
 }) {
-  const table = useReactTable({
+  const table = useTable({
     columns: [
       { enableSorting: false, id: " ", size: 40 },
       { accessorKey: "name", size: 600, header: "Shopping Center" },
@@ -79,13 +90,11 @@ function CentersList({
       { accessorKey: "spaces", size: 120, header: "Spaces" },
     ],
     data: centers,
+    features,
     enableSortingRemoval: false,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     initialState: {
       sorting: [{ id: "name", desc: false }],
-      pagination: { pageSize: 100 },
+      pagination: { pageIndex: 0, pageSize: 100 },
     },
   });
 
@@ -102,7 +111,7 @@ function CentersList({
         {table.getPageOptions().map((page) => (
           <Button
             className="px-4"
-            disabled={table.getState().pagination.pageIndex === page}
+            disabled={table.state.pagination.pageIndex === page}
             key={page}
             onClick={() => table.setPageIndex(page)}
             variant="secondary"
@@ -159,7 +168,7 @@ function CentersList({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getPaginationRowModel().rows.map((row) => (
+            {table.getRowModel().rows.map((row) => (
               <TableRow key={row.id} className="hover:bg-gray-100">
                 <TableCell>
                   <MapPinIcon
