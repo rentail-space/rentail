@@ -17,12 +17,12 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^4.0.40",
-    "@ai-sdk/deepseek": "^3.0.29",
-    "@ai-sdk/google": "^4.0.47",
-    "@ai-sdk/openai": "^4.0.44",
-    "@ai-sdk/perplexity": "^4.0.30",
-    "@ai-sdk/react": "^4.0.73",
+    "@ai-sdk/anthropic": "^4.0.41",
+    "@ai-sdk/deepseek": "^3.0.31",
+    "@ai-sdk/google": "^4.0.50",
+    "@ai-sdk/openai": "^4.0.46",
+    "@ai-sdk/perplexity": "^4.0.31",
+    "@ai-sdk/react": "^4.0.80",
     "@base-ui/react": "^1.7.0",
     "@forge42/seo-tools": "^1.4.5",
     "@google-analytics/data": "^7.0.0",
@@ -38,9 +38,9 @@
     "@react-router/serve": "^8.3.0",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/vite": "^4.3.3",
-    "@tanstack/react-query": "^5.101.4",
+    "@tanstack/react-query": "^5.102.0",
     "@tanstack/react-table": "^9.1.2",
-    "ai": "^7.0.70",
+    "ai": "^7.0.77",
     "asciichart": "^1.5.25",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
@@ -71,7 +71,7 @@
     "rehype-harden": "^1.1.8",
     "remark-gfm": "^4.0.1",
     "remove-markdown": "^0.6.4",
-    "resend": "^6.21.0",
+    "resend": "^6.22.0",
     "respinner": "^5.0.0",
     "resumable-stream": "^2.2.12",
     "serpapi": "^2.2.1",
@@ -111,12 +111,12 @@
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.12",
     "typescript": "^7.0.2",
-    "vercel": "^59.4.0",
+    "vercel": "^59.5.0",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },
   "engines": {
     "node": ">=24.0.0"
   },
-  "packageManager": "pnpm@11.22.0"
+  "packageManager": "pnpm@11.23.0"
 }
