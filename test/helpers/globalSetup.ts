@@ -67,10 +67,18 @@ export default async function setup() {
 }
 
 export async function teardown() {
-  await execAsync(
-    'terminal-notifier -sound default -title "Test Suite" -message "Done!"',
-  );
-  // Dynamically import closeServer inside teardown since it was imported dynamically in setup
+  // Close the shared test server first: nothing after this point may leave it
+  // running, or the next run inherits a process holding the port.
+  // Dynamic import (matching setup) so the module instance is the same one that
+  // loaded `.env.test`; a static import would be hoisted above dotenv.config().
   const { closeServer } = await import("./launchServer");
   await closeServer();
+
+  // Local notification only. CI images have no usable terminal-notifier (the
+  // Linux shim exits non-zero), and a missing notifier must never fail an
+  // otherwise green run.
+  if (!process.env.CI)
+    await execAsync(
+      'terminal-notifier -sound default -title "Test Suite" -message "Done!"',
+    ).catch(() => {});
 }
