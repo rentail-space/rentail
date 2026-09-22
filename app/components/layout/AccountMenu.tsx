@@ -1,14 +1,13 @@
 import { ShieldIcon, UnlockIcon, UserIcon } from "lucide-react";
-import type { User } from "prisma/generated";
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate, useRouteLoaderData } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { Button } from "~/components/ui/Button";
-import type { loader as rootLoader } from "~/root";
+import type { SessionUser } from "~/lib/sessionUser";
+import { useSession } from "~/lib/useSession";
 
 export default function AccountMenu({ className }: { className?: string }) {
-  const data = useRouteLoaderData<typeof rootLoader>("root");
-  const user = data?.user;
+  const { user } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -60,7 +59,7 @@ function SignInButton() {
   );
 }
 
-function DropdownMenu({ user }: { user: User }) {
+function DropdownMenu({ user }: { user: SessionUser }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

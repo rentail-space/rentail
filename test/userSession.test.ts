@@ -236,6 +236,28 @@ describe("Anonymous visits chat page", () => {
             ).toEqual(false);
           });
 
+          it("keeps the conversation after signing up", async () => {
+            const users = await prisma.user.findMany({
+              include: { chats: { include: { messages: true } } },
+            });
+            // Same chat, still holding the exchange from before sign-up.
+            expect(users[0].chats.length).toEqual(1);
+            expect(
+              users[0].chats[0].messages.some((m) => m.role === "user"),
+            ).toBe(true);
+          });
+
+          it("does not embed the user in cached pages", async () => {
+            // Documents are visitor-independent: they are cached at the CDN and
+            // served to everyone, so they must not carry who is signed in.
+            const html = await page.evaluate(async () => {
+              const response = await fetch("/about?session-check=1");
+              return response.text();
+            });
+            expect(html).not.toContain("Working Memory User");
+            expect(html).not.toContain("working-memory@example.com");
+          });
+
           it("stores user credentials correctly in database", async () => {
             const user = await prisma.user.findFirstOrThrow({
               where: { isAnonymous: false },
@@ -306,6 +328,28 @@ describe("Anonymous visits chat page", () => {
             afterAll(async () => {
               await emailPage?.close();
             });
+          });
+        });
+
+        describe("signs out", () => {
+          beforeAll(async () => {
+            await page
+              .getByRole("button")
+              .filter({ hasText: "Working Memory User" })
+              .click();
+            await page.getByRole("button", { name: "Sign Out" }).click();
+            await page.waitForURL("/", { waitUntil: "load" });
+          });
+
+          it("returns to the signed out state", async () => {
+            await expect(
+              page.getByRole("button", { name: "Sign In" }),
+            ).toBeVisible({ timeout: 5000 });
+          });
+
+          it("clears the session marker cookie", async () => {
+            const cookie = await page.evaluate(() => document.cookie);
+            expect(cookie).not.toContain("__user=");
           });
         });
       });

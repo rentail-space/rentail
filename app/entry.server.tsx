@@ -31,6 +31,7 @@ import {
   renderTerms,
 } from "~/lib/markdown.server";
 import { trackBotVisit } from "~/lib/middleware/botTracking.server";
+import { utmCaptureSession } from "~/lib/middleware/utm.server";
 
 // NOTE: MSW is initialized in test mode on the server side
 if (envVars.isTest) (await import("~/test/mocks/mswHandlers")).default();
@@ -38,6 +39,70 @@ if (envVars.isTest) (await import("~/test/mocks/mswHandlers")).default();
 // Max time (ms) the server will wait for the streaming render before flushing
 // whatever is ready. Bots and SPA-mode renders always wait for the full shell.
 export const streamTimeout = 5_000;
+
+// Pages that act on the visitor or answer an API call are never cached, even
+// when they happen to set no cookie. Prefixes have no trailing slash so both
+// `/profile` and `/profile/settings` are covered. `/cron` is here because those
+// endpoints do work (rank checks, LLM visibility runs): caching their response
+// would silently skip the run.
+const CDN_UNCACHEABLE_PREFIXES = [
+  "/admin",
+  "/api",
+  "/auth",
+  "/chat",
+  "/cron",
+  "/email",
+  "/profile",
+];
+
+// Catalog pages change only when the catalog does, so they get a week of CDN
+// caching; the rest of the site keeps the short window.
+const CRAWLER_LONG_CACHE_PREFIXES = [
+  "/blog",
+  "/center/",
+  "/city/",
+  "/county/",
+  "/metro/",
+  "/news",
+  "/regional/",
+  "/state",
+];
+
+/**
+ * Serve visitor-independent responses from the CDN. A response that sets no
+ * cookie carries no per-visitor state - documents render no user or chat data,
+ * and the session is fetched by the browser instead - so the edge can hand the
+ * same bytes to everyone and skip the function on the next request.
+ */
+async function cacheAtEdge(request: Request, response: Response) {
+  const { pathname } = new URL(request.url);
+  if (
+    request.method !== "GET" ||
+    response.status !== 200 ||
+    response.headers.getSetCookie().length > 0 ||
+    CDN_UNCACHEABLE_PREFIXES.some((prefix) => pathname.startsWith(prefix))
+  )
+    return response;
+
+  // The middleware appends the first-touch cookie after this response is built:
+  // a response that is about to receive it carries per-visitor state.
+  if (await utmCaptureSession(request)) return response;
+
+  // Markdown sitemaps are discovery documents, not content: they keep the short
+  // window so new posts and centers reach crawlers within the hour.
+  const sMaxAge =
+    !pathname.endsWith("/sitemap.md") &&
+    CRAWLER_LONG_CACHE_PREFIXES.some((prefix) => pathname.startsWith(prefix))
+      ? 604800
+      : 3600;
+
+  response.headers.set(
+    "Vercel-CDN-Cache-Control",
+    `public, s-maxage=${sMaxAge}, stale-while-revalidate=86400`,
+  );
+  response.headers.set("Cache-Control", "public, max-age=0, must-revalidate");
+  return response;
+}
 
 const MARKDOWN_ROUTES: Record<
   string,
@@ -151,12 +216,11 @@ export default async (
   void trackBotVisit(request); // NOTE: run asynchronously
 
   const url = new URL(request.url);
+  const userAgent = request.headers.get("user-agent");
+
   if (url.pathname.endsWith(".md")) {
     const md = await tryMarkdown(url.pathname);
-    if (md) {
-      void trackBotVisit(request);
-      return md;
-    }
+    if (md) return await cacheAtEdge(request, md);
   }
 
   // Accept: text/markdown → serve markdown at the same URL
@@ -167,13 +231,12 @@ export default async (
       .some((a) => a.trim() === "text/markdown")
   ) {
     const md = await tryMarkdown(url.pathname);
-    if (md) {
-      void trackBotVisit(request);
-      return md;
-    }
+    if (md) return await cacheAtEdge(request, md);
   }
 
   // https://httpwg.org/specs/rfc9110.html#HEAD
+  // Not cached: the CDN cache key is the URL, so a bodyless entry could be
+  // served to a later GET.
   if (request.method.toUpperCase() === "HEAD") {
     return new Response(null, {
       status: responseStatusCode,
@@ -186,7 +249,6 @@ export default async (
   // requires (PassThrough bridging). Shell errors reject the awaited promise
   // and surface via handleError; post-shell errors are logged here.
   let shellRendered = false;
-  const userAgent = request.headers.get("user-agent");
 
   const body = await renderToReadableStream(
     <ServerRouter context={routerContext} url={request.url} nonce={uuidv7()} />,
@@ -215,45 +277,22 @@ export default async (
     headers: responseHeaders,
   });
 
-  void waitForResponse(response, start).then((duration) => {
-    console.info(
-      "%s %s => %d (%dms)",
-      request.method,
-      request.url,
-      response.status,
-      duration,
-    );
-  });
-  return response;
+  console.info(
+    "%s %s => %d (%dms)",
+    request.method,
+    request.url,
+    response.status,
+    Date.now() - start,
+  );
+  return await cacheAtEdge(request, response);
 };
-
-async function waitForResponse(response: Response, start: number) {
-  const reader = response.clone().body?.getReader();
-  if (reader) {
-    while (true) {
-      const { done } = await reader.read();
-      if (done) break;
-    }
-  }
-  return Date.now() - start;
-}
 
 export function handleDataRequest(
   response: Response,
   { request }: LoaderFunctionArgs | ActionFunctionArgs,
 ) {
-  const start = Date.now();
-  console.info("%s %s", request.method, request.url);
+  console.info("%s %s => %d", request.method, request.url, response.status);
   void trackBotVisit(request); // NOTE: run asynchronously
-  void waitForResponse(response, start).then((duration) => {
-    console.info(
-      "%s %s => %d (%dms)",
-      request.method,
-      request.url,
-      response.status,
-      duration,
-    );
-  });
   return response;
 }
 

@@ -51,7 +51,8 @@ export async function loader() {
     return new Response(feed.atom1(), {
       headers: {
         "Content-Type": "application/atom+xml; charset=utf-8",
-        "Cache-Control": "public, max-age=3600",
+        "Cache-Control":
+          "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
       },
     });
   } catch (error) {

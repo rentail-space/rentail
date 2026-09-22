@@ -2,8 +2,9 @@ import type { UIMessage } from "ai";
 import type { UserGetPayload } from "prisma/generated/models";
 import type { Chat, User } from "prisma/generated";
 import { type Session, createCookieSessionStorage } from "react-router";
-import { readUtmParams, saveUtmParams } from "~/lib/middleware/utm.server";
-import { createIsbotFromList, list } from "isbot";
+import { readUtmParams } from "~/lib/middleware/utm.server";
+import { isCrawler } from "~/lib/crawler.server";
+import type { SessionUser } from "~/lib/sessionUser";
 import { geocodeFromHeaders } from "./geocode";
 import { getDeviceInfo } from "~/lib/deviceDetection.server";
 import { reverse } from "node:dns/promises";
@@ -28,26 +29,26 @@ type SessionFlashData = {
 
 const adminEmails = ["assaf@labnotes.org"];
 
-// List of user agents that are considered bots
-const botUserAgents = [
-  "Android 9",
-  "Better Stack",
-  "CFNetwork",
-  "Checkly",
-  "FastmailUA",
-  "Vercel",
-];
+// Lifetime of the session cookie and its browser-readable marker.
+const SESSION_MAX_AGE = 365 * 24 * 60 * 60;
+
+// Cookie the browser can read (not HttpOnly), used by the client to decide
+// whether to fetch the session. Documents are rendered without user state so
+// that they stay identical for every visitor and cacheable at the CDN.
+const USER_MARKER = "__user";
 
 const logger = debug("server:sessions");
+
+const cookieDomain = envVars.isProduction ? "rentail.space" : "localhost";
 
 const { getSession, commitSession, destroySession } =
   createCookieSessionStorage<SessionData, SessionFlashData>({
     // a Cookie from `createCookie` or the CookieOptions to create one
     cookie: {
       name: "__session",
-      domain: envVars.isProduction ? "rentail.space" : "localhost",
+      domain: cookieDomain,
       httpOnly: true,
-      maxAge: 365 * 24 * 60 * 60, // 365 days
+      maxAge: SESSION_MAX_AGE,
       path: "/",
       sameSite: "lax",
       secrets: [envVars.SESSION_SECRET],
@@ -56,15 +57,33 @@ const { getSession, commitSession, destroySession } =
   });
 
 /**
+ * Serialize the session marker cookie. A `maxAge` of 0 clears it.
+ *
+ * @param maxAge - Lifetime in seconds
+ * @returns The Set-Cookie value
+ */
+function userMarkerCookie(maxAge: number): string {
+  return [
+    maxAge > 0 ? `${USER_MARKER}=1` : `${USER_MARKER}=`,
+    `Domain=${cookieDomain}`,
+    `Max-Age=${maxAge}`,
+    "Path=/",
+    "SameSite=Lax",
+    ...(envVars.isProduction ? ["Secure"] : []),
+  ].join("; ");
+}
+
+/**
  * Get the most recent chat for the user from the session. If the user exists,
  * there must be a last chat for the user. Also return the recent messages in
- * the chat, the HTTP headers with the session cookie set, and whether the user
- * is an admin.
+ * the chat and the HTTP headers with the session cookie set.
+ *
+ * UTM capture is the middleware's job (`utmMiddleware`); this runs inside the
+ * chat route, which is never cached.
  *
  * @param request - The request object
  * @returns The last chat, messages, response headers with the session cookie
- * set, user. If the user is not found, return the response headers with the
- * session cookie set.
+ * set, user. If the user is not found, return empty response headers.
  */
 export async function findUserAndLastChat(request: Request): Promise<
   | {
@@ -76,22 +95,17 @@ export async function findUserAndLastChat(request: Request): Promise<
   | { responseHeaders: Headers }
 > {
   const session = await userFromCookie(request.headers);
-  if (!("user" in session)) return await saveUtmParams(request);
+  if (!("user" in session)) return { responseHeaders: new Headers() };
 
-  const { user } = session;
+  const { user, responseHeaders } = session;
   const chat = await prisma.chat.findFirst({
     orderBy: { createdAt: "desc" },
     take: 1,
     where: { userId: user.id },
   });
-  if (!chat) return { responseHeaders: new Headers() };
+  if (!chat) return { responseHeaders };
 
   const messages = await recentMessages(chat.id);
-  const { responseHeaders } = await saveUtmParams(request);
-  responseHeaders.append(
-    "set-cookie",
-    await commitSession(session.cookieSession),
-  );
   return { chat, messages, responseHeaders, user };
 }
 
@@ -216,19 +230,6 @@ export async function recentMessages(chatId: string): Promise<UIMessage[]> {
 }
 
 /**
- * Check if the user agent is a bot. In testing, we treat headless Chrome as a
- * real user. The list of bots is defined in the botUserAgents array.
- *
- * @param userAgent - The user agent to check
- * @returns True if the user agent is a bot, false otherwise
- */
-const isUABot: (userAgent: string) => boolean = createIsbotFromList(
-  list
-    .filter((record: string): boolean => !/headless/i.test(record))
-    .concat(botUserAgents),
-);
-
-/**
  * Check if an IP address is from Google's domains by performing reverse DNS lookup.
  * This helps verify if a request is actually from Google's crawlers. If the reverse
  * DNS lookup fails, assume it's not a Google IP.
@@ -302,10 +303,29 @@ async function userFromCookie(requestHeaders: Headers): Promise<
   const user = session?.user;
   if (!user) return { cookieSession };
 
-  const responseHeaders = new Headers({
-    "set-cookie": await commitSession(cookieSession),
-  });
+  // Refresh the session cookie, and (re)set the marker so sessions created
+  // before the marker existed heal on their next request.
+  const responseHeaders = new Headers();
+  responseHeaders.append("set-cookie", await commitSession(cookieSession));
+  responseHeaders.append("set-cookie", userMarkerCookie(SESSION_MAX_AGE));
   return { cookieSession, user, responseHeaders };
+}
+
+/**
+ * Look up the signed-in user for the client, without loading chats or
+ * messages. Returns `null` when nobody is signed in.
+ *
+ * @param requestHeaders - The request headers object
+ * @returns The signed-in user, or null
+ */
+export async function findSessionUser(
+  requestHeaders: Headers,
+): Promise<SessionUser | null> {
+  const session = await userFromCookie(requestHeaders);
+  if (!("user" in session)) return null;
+
+  const { id, name, email, isAdmin, isAnonymous } = session.user;
+  return { id, name, email, isAdmin, isAnonymous };
 }
 
 /**
@@ -414,10 +434,14 @@ export async function signUpEmail({
 
 export async function signOut(requestHeaders: Headers): Promise<Headers> {
   const session = await getSession(requestHeaders.get("Cookie"));
-  await prisma.session.delete({
-    where: { token: session.data.token },
-  });
-  return new Headers({ "set-cookie": await destroySession(session) });
+  const token = session.data.token;
+  // deleteMany rather than delete: signing out without a live session must
+  // still clear the cookies instead of throwing.
+  if (token) await prisma.session.deleteMany({ where: { token } });
+  const headers = new Headers();
+  headers.append("set-cookie", await destroySession(session));
+  headers.append("set-cookie", userMarkerCookie(0));
+  return headers;
 }
 
 /**
@@ -539,7 +563,7 @@ async function createUser({
       ip,
       isAdmin,
       isAnonymous,
-      isBot: isUABot(userAgent) || (await isBotByIP(ip)),
+      isBot: isCrawler(userAgent) || (await isBotByIP(ip)),
       isMCP: false,
       isMobile: deviceInfo.isMobile,
       metadata: {},
@@ -598,5 +622,10 @@ async function createSession({
     },
   });
   session.set("token", sessionToken);
-  return new Headers({ "set-cookie": await commitSession(session) });
+  const headers = new Headers();
+  headers.append("set-cookie", await commitSession(session));
+  // The marker tells the browser to fetch the session; the document itself
+  // stays free of user state so it can be cached at the CDN.
+  headers.append("set-cookie", userMarkerCookie(SESSION_MAX_AGE));
+  return headers;
 }

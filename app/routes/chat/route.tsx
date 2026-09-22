@@ -2,20 +2,36 @@ import { useChat } from "@ai-sdk/react";
 import { useQuery } from "@tanstack/react-query";
 import { DefaultChatTransport } from "ai";
 import { useCallback, useState } from "react";
-import { useRouteLoaderData, useSearchParams } from "react-router";
+import { data, useLoaderData, useSearchParams } from "react-router";
 import invariant from "tiny-invariant";
 import { ulid } from "ulid";
 import { StickToBottom } from "use-stick-to-bottom";
 import PageHeader from "~/components/layout/PageHeader";
+import { findUserAndLastChat } from "~/lib/sessions.server";
 import welcome from "~/prompts/welcome.md?raw";
-import type { loader as rootLoader } from "~/root";
 import InputForm from "~/routes/chat/InputForm";
 import Messages from "~/routes/chat/Messages";
 import ScrollButton from "~/routes/chat/ScrollButton";
 import type { Route as CentersRoute } from "../+types/api.chat.$chatId.centers";
+import type { Route } from "./+types/route";
 import Centers from "./Centers";
 
 export const handle = { hideLayout: true };
+
+/**
+ * The conversation lives here rather than in the root loader: only this route
+ * renders it, and keeping it out of the root document is what lets every other
+ * page be served from the CDN.
+ */
+export async function loader({ request }: Route.LoaderArgs) {
+  const found = await findUserAndLastChat(request);
+  return data(
+    "chat" in found
+      ? { chat: found.chat, messages: found.messages }
+      : { chat: null, messages: null },
+    { headers: found.responseHeaders },
+  );
+}
 
 export default function ChatPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,8 +52,8 @@ export default function ChatPage() {
     [setSearchParams],
   );
 
-  // Access data from root loader first, our loaded depends on it
-  const found = useRouteLoaderData<typeof rootLoader>("root");
+  // Access data from the chat loader, which owns the conversation
+  const found = useLoaderData<typeof loader>();
   const [chatId] = useState(() => found?.chat?.id ?? ulid());
   const initialMessages = found?.messages ?? [
     { id: chatId, parts: [{ text: welcome, type: "text" }], role: "assistant" },

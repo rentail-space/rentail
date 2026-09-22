@@ -216,7 +216,8 @@ export async function loader() {
   return Response.json(spec, {
     headers: {
       "Content-Type": "application/json",
-      "Cache-Control": "public, max-age=86400",
+      "Cache-Control":
+        "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800",
     },
   });
 }

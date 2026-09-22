@@ -10,8 +10,6 @@ const envVars = {
 
   SENTRY_DSN: env.get("SENTRY_DSN").required(false).asString(),
 
-  LOGTAIL_ENDPOINT: env.get("LOGTAIL_ENDPOINT").required(false).asString(),
-  LOGTAIL_TOKEN: env.get("LOGTAIL_TOKEN").required(false).asString(),
   PUSHGATEWAY_TOKEN: env.get("PUSHGATEWAY_TOKEN").required(false).asString(),
   PUSHGATEWAY_URL: env.get("PUSHGATEWAY_URL").required(false).asString(),
 

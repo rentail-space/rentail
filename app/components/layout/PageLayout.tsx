@@ -1,8 +1,11 @@
+import Clarity from "@microsoft/clarity";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
 import schema from "~/data/schema.json";
 import "~/global.css";
 import { useGoogleAnalytics } from "~/lib/useAnalytics";
+import { useSession } from "~/lib/useSession";
 import PageFooter from "./PageFooter";
 import PageHeader from "./PageHeader";
 
@@ -22,6 +25,7 @@ export default function PageLayout({
   hideLayout?: boolean;
 }) {
   useGoogleAnalytics();
+  const [queryClient] = useState(() => new QueryClient());
 
   return (
     <html lang="en">
@@ -58,7 +62,8 @@ export default function PageLayout({
       </head>
       <body className="relative">
         <DevTag />
-        <QueryClientProvider client={new QueryClient()}>
+        <QueryClientProvider client={queryClient}>
+          <ClarityIdentity />
           {hideLayout ? (
             children
           ) : (
@@ -84,4 +89,19 @@ function DevTag() {
       </span>
     )
   );
+}
+
+/**
+ * Identify the signed-in user in Clarity. Lives inside the query client
+ * provider: the user comes from the session fetch, not the document.
+ */
+function ClarityIdentity() {
+  const { user } = useSession();
+  useEffect(() => {
+    Clarity.init("utqohlkqlf");
+  }, []);
+  useEffect(() => {
+    if (user) Clarity.identify(user.id);
+  }, [user]);
+  return null;
 }

@@ -1,25 +1,19 @@
-import Clarity from "@microsoft/clarity";
 import { last } from "radashi";
-import { useEffect } from "react";
 import {
   type HeadersFunction,
   type LinksFunction,
   Outlet,
   type UIMatch,
-  data,
   isRouteErrorResponse,
-  useLoaderData,
   useMatches,
   useRouteError,
 } from "react-router";
 import { WaveLoading } from "respinner";
 import PageLayout from "~/components/layout/PageLayout";
 import "~/global.css";
-import loggingMiddleware from "~/lib/middleware/logging.server";
 import { utmMiddleware } from "~/lib/middleware/utm.server";
 import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/root";
-import { findUserAndLastChat } from "./lib/sessions.server";
 
 export function meta(): Route.MetaDescriptors {
   return pageMeta({
@@ -32,11 +26,8 @@ export function meta(): Route.MetaDescriptors {
   });
 }
 
-// NOTE: not currently implemented, we're using other functions elsewhere
-export const middleware: Route.MiddlewareFunction[] = [
-  utmMiddleware,
-  loggingMiddleware,
-];
+// NOTE: request logging lives in entry.server, we're using other functions elsewhere
+export const middleware: Route.MiddlewareFunction[] = [utmMiddleware];
 
 export const headers: HeadersFunction = () => ({
   "Cache-Control":
@@ -110,26 +101,11 @@ export const handle = {
   ],
 };
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const found = await findUserAndLastChat(request);
-  return data(
-    "chat" in found
-      ? {
-          chat: found.chat,
-          messages: found.messages,
-          user: found.user,
-        }
-      : null,
-    { headers: found?.responseHeaders },
-  );
-}
-
 export default function App() {
   const matches = useMatches() as UIMatch<unknown, { hideLayout?: boolean }>[];
   const { hideLayout } = last(
     matches.filter((match) => match.handle && "hideLayout" in match.handle),
   )?.handle || { hideLayout: false };
-  useClarity();
 
   return (
     <PageLayout hideLayout={hideLayout}>
@@ -171,14 +147,4 @@ export function ErrorBoundary() {
       </main>
     </PageLayout>
   );
-}
-
-function useClarity() {
-  const found = useLoaderData<typeof loader>();
-  useEffect(() => {
-    Clarity.init("utqohlkqlf");
-  }, []);
-  useEffect(() => {
-    if (found?.user) Clarity.identify(found.user.id);
-  }, [found]);
 }

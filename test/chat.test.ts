@@ -171,6 +171,31 @@ describe("Chat page exchange messages", () => {
     expect(messages.find((m) => m.role === "assistant")).toBeDefined();
   });
 
+  describe("reloads the page", () => {
+    beforeAll(async () => {
+      // The conversation is restored by the chat route's own loader: the
+      // document itself carries no session state.
+      await page.reload({ waitUntil: "load" });
+      await scrollToBottom(page);
+    });
+
+    it("should restore the conversation", async () => {
+      await expect(
+        page.locator(".chat-bubble-user", {
+          hasText: /looking for a pop-up retail space/,
+        }),
+      ).toBeVisible();
+      expect(
+        await page.locator(".chat-bubble-response").count(),
+      ).toBeGreaterThanOrEqual(2);
+    });
+
+    it("should not start a new chat", async () => {
+      const users = await prisma.user.findMany({ include: { chats: true } });
+      expect(users[0].chats.length).toEqual(1);
+    });
+  });
+
   afterAll(async () => {
     await page?.close();
   });
