@@ -109,7 +109,7 @@
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "vercel": "^59.25.0",
+    "vercel": "^59.25.2",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },
