@@ -43,11 +43,11 @@
     "asciichart": "^1.5.25",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
-    "convert": "^7.0.2",
+    "convert": "^8.0.2",
     "csv-parse": "^7.0.2",
     "csv-stringify": "^6.8.3",
     "debug": "^4.4.3",
-    "dotenv": "^17.4.2",
+    "dotenv": "^18.0.1",
     "env-var": "^7.5.0",
     "es-toolkit": "^1.52.0",
     "feed": "^6.0.0",
@@ -69,7 +69,7 @@
     "recharts": "^3.10.1",
     "rehype-harden": "^1.1.8",
     "remark-gfm": "^4.0.1",
-    "remove-markdown": "^0.6.4",
+    "remove-markdown": "^0.7.0",
     "resend": "^6.28.1",
     "respinner": "^5.0.0",
     "resumable-stream": "^2.2.13",
@@ -110,11 +110,11 @@
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vercel": "^59.25.0",
-    "vite": "npm:@voidzero-dev/vite-plus-core@0.3.0",
+    "vite": "catalog:",
     "vite-plus": "catalog:"
   },
   "engines": {
-    "node": ">=24.0.0"
+    "node": ">=24.11.0"
   },
   "packageManager": "pnpm@11.23.0"
 }

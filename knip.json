@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "$schema": "https://unpkg.com/knip@6/schema.json",
   "entry": [
     "app/components/ui/*.tsx",
     "app/emails/sendEmails.server.tsx",
@@ -7,7 +7,11 @@
     "scripts/*.ts",
     "test/helpers/serverWorker.ts"
   ],
-  "project": ["app/**/*.{ts,tsx}", "test/**/*.{ts,tsx}", "!__screenshots__"],
+  "project": [
+    "app/**/*.{ts,tsx,css}",
+    "test/**/*.{ts,tsx}",
+    "!__screenshots__"
+  ],
   "ignoreDependencies": [
     "@secretlint/secretlint-rule-preset-recommend",
     "@prisma/client"
