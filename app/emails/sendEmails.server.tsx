@@ -1,13 +1,15 @@
 import { ms } from "convert";
 import debug from "debug";
 import { withTimeout } from "es-toolkit";
-import Redis from "ioredis";
 import { sleep } from "radashi";
+import prisma from "~/lib/prisma.server";
 import { pretty, render } from "react-email";
 import { Resend } from "resend";
 import invariant from "tiny-invariant";
 import { z } from "zod";
 import envVars from "~/lib/env";
+
+const EMAIL_LAST_KEY = "email:last";
 
 export const lastEmailSchema = z.object({
   html: z.string(),
@@ -68,27 +70,26 @@ export async function sendEmail({
  * @returns The last email that was sent.
  */
 export async function getLastEmailSent(): Promise<LastEmail> {
-  const redis = new Redis(envVars.REDIS_URL);
+  let lastEmail: LastEmail | undefined = undefined;
   try {
     await withTimeout(async () => {
       while (true) {
-        const raw = await redis.get("email:last");
-        if (raw) {
-          const parsed = lastEmailSchema.safeParse(JSON.parse(raw));
-          if (parsed.success) {
-            lastEmailSent = parsed.data;
-            return;
-          }
+        const cached = await prisma.cache.findUnique({
+          where: { key: EMAIL_LAST_KEY },
+        });
+        const parsed = lastEmailSchema.safeParse(cached?.value);
+        if (parsed.success) {
+          lastEmail = parsed.data;
+          return;
         }
         await sleep(100);
       }
     }, ms("10s"));
-    await redis.del("email:last");
-  } finally {
-    await redis.quit();
+    await prisma.cache.delete({ where: { key: EMAIL_LAST_KEY } });
+  } catch {
+    // Fall through to the invariant below on timeout.
   }
-  invariant(lastEmailSent, "No email sent");
-  const lastEmail = lastEmailSent;
+  invariant(lastEmail, "No email sent");
   lastEmailSent = undefined;
   return lastEmail;
 }
@@ -102,7 +103,9 @@ export async function getLastEmailSent(): Promise<LastEmail> {
  * @param to - The email address of the recipient.
  */
 export async function captureLastEmail(lastEmail: LastEmail) {
-  const redis = new Redis(envVars.REDIS_URL);
-  await redis.set("email:last", JSON.stringify(lastEmail));
-  await redis.quit();
+  await prisma.cache.upsert({
+    where: { key: EMAIL_LAST_KEY },
+    create: { key: EMAIL_LAST_KEY, value: lastEmail },
+    update: { value: lastEmail },
+  });
 }

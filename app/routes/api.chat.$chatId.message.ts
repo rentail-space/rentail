@@ -2,10 +2,9 @@ import type { Prisma } from "prisma/generated";
 import type { Route } from "./+types/api.chat.$chatId.message";
 import { type UIMessage, convertToModelMessages, streamText } from "ai";
 import { findOrCreateUser, recentMessages } from "~/lib/sessions.server";
-import { createResumableStreamContext } from "resumable-stream/ioredis";
-import { monitorStopSignal } from "~/lib/redis-stop-monitor";
+import { bufferChatStream } from "~/lib/chatStream.server";
+import { monitorStopSignal } from "~/lib/chat-stop.server";
 import { conversational } from "~/lib/models";
-import { Redis } from "ioredis";
 import { last } from "radashi";
 import { ulid } from "ulid";
 import updateWorkingMemory, {
@@ -14,7 +13,6 @@ import updateWorkingMemory, {
 import preparePrompt from "~/lib/preparePrompt.server";
 import humanFormat from "human-format";
 import invariant from "tiny-invariant";
-import envVars from "~/lib/env";
 import prisma from "~/lib/prisma.server";
 import debug from "debug";
 
@@ -63,7 +61,7 @@ export async function action({ request, params }: Route.ActionArgs) {
   // to operate on the full conversation history.
   const messages = await recentMessages(chat.id);
 
-  // Set up Redis stop monitoring
+  // Set up stop-signal monitoring
   const { abortSignal } = await monitorStopSignal(chat.id);
 
   // NOTE: onFinish may be called before consumeSseStream, so we need to store
@@ -117,16 +115,9 @@ export async function action({ request, params }: Route.ActionArgs) {
     })),
 
     consumeSseStream: async ({ stream }) => {
-      // Create a resumable stream from the SSE stream
-      const streamContext = createResumableStreamContext({
-        publisher: new Redis(envVars.REDIS_URL),
-        subscriber: new Redis(envVars.REDIS_URL),
-        waitUntil: async (promise) => await promise,
-      });
-      await streamContext.createNewResumableStream(
-        activeStreamId,
-        () => stream,
-      );
+      // Buffer the SSE stream in Postgres so it can be resumed after a
+      // reconnect.
+      await bufferChatStream(activeStreamId, stream);
     },
 
     onError: (error) => {

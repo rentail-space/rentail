@@ -5,7 +5,6 @@
  * - Cleans up database (once per test suite)
  */
 
-import Redis from "ioredis";
 import { afterAll, beforeAll } from "vite-plus/test";
 import prisma from "~/lib/prisma.server";
 import "~/test/mocks/mockMapbox";
@@ -19,11 +18,8 @@ beforeAll(async () => {
   await Promise.all([
     prisma.user.deleteMany(),
     prisma.verification.deleteMany(),
+    prisma.cache.deleteMany(),
   ]);
-
-  // Cleanup Redis to avoid stale data between tests
-  const redis = new Redis(process.env.REDIS_URL ?? "redis://localhost:6379");
-  await redis.flushdb();
 
   msw();
 });

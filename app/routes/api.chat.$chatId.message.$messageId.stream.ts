@@ -1,7 +1,5 @@
 import { UI_MESSAGE_STREAM_HEADERS } from "ai";
-import { Redis } from "ioredis";
-import { createResumableStreamContext } from "resumable-stream/ioredis";
-import envVars from "~/lib/env";
+import { resumeChatStream } from "~/lib/chatStream.server";
 import { findUserAndChatById } from "~/lib/sessions.server";
 import type { Route } from "./+types/api.chat.$chatId.message.$messageId.stream";
 
@@ -23,18 +21,10 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     return new Response(null, { status: 204 });
 
   try {
-    const streamContext = createResumableStreamContext({
-      publisher: new Redis(envVars.REDIS_URL),
-      subscriber: new Redis(envVars.REDIS_URL),
-      waitUntil: async (promise) => await promise,
-    });
-
-    const stream = await streamContext.resumeExistingStream(
-      found.chat.activeStreamId,
-    );
+    const stream = await resumeChatStream(found.chat.activeStreamId);
 
     if (!stream)
-      // Stream not found in Redis, return 204 to signal completion
+      // No buffered stream — return 204 to signal completion
       return new Response(null, {
         headers: found.responseHeaders,
         status: 204,

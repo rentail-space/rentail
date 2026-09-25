@@ -42,11 +42,6 @@ const envVars = {
     .required(false)
     .asString(),
 
-  REDIS_URL: env
-    .get("REDIS_URL")
-    .default("redis://localhost:6379")
-    .asUrlString(),
-
   VERCEL_TOKEN: env.get("VERCEL_TOKEN").required(false).asString(),
   VERCEL_PROJECT_ID: env.get("VERCEL_PROJECT_ID").required(false).asString(),
   HETZNER_TOKEN: env.get("HETZNER_TOKEN").required(false).asString(),
@@ -59,7 +54,6 @@ if (process.env.NODE_ENV === "test") {
   };
   try {
     verifyLocalhost("DATABASE_URL", envVars.DATABASE_URL);
-    if (envVars.REDIS_URL) verifyLocalhost("REDIS_URL", envVars.REDIS_URL);
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
     process.exit(1);

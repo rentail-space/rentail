@@ -16,12 +16,11 @@ jobs:
     timeout-minutes: 35
 
     env:
-      # Test database + Redis come from the service containers; the remaining
+      # The test database comes from the service container; the remaining
       # test secrets come from GitHub Actions secrets (RESEND_API_KEY,
       # SESSION_SECRET). This mirrors what .env.test provides locally.
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/rentail_test
       DIRECT_URL: postgresql://postgres:postgres@localhost:5432/rentail_test
-      REDIS_URL: redis://localhost:6379
       SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
       RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
 
@@ -37,12 +36,6 @@ jobs:
         options:
           --health-cmd pg_isready --health-interval 10s --health-timeout 5s
           --health-retries 5
-
-      redis:
-        image: redis:latest
-        ports:
-          - 6379:6379
-        options: --entrypoint redis-server
 
     steps:
       - name: Checkout Repository
