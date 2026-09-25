@@ -1,7 +1,7 @@
 /**
- * DeepSeek API Streaming Response Handler
+ * Z.ai API Streaming Response Handler
  *
- * OpenAI Chat Completions API format (used by @ai-sdk/deepseek)
+ * OpenAI Chat Completions API format (used by @ai-sdk/openai-compatible)
  */
 
 import { ulid } from "ulid";
@@ -56,7 +56,7 @@ export function findMockResponse(body: object): ReadableStream<Uint8Array> {
     }>;
   };
 
-  logger("DeepSeek API mock - raw messages: %j", messages);
+  logger("Z.ai API mock - raw messages: %j", messages);
 
   // Extract the LAST user message text for pattern matching
   let messageText = "";
@@ -76,7 +76,7 @@ export function findMockResponse(body: object): ReadableStream<Uint8Array> {
   }
 
   logger(
-    "DeepSeek API mock - processing message: %s... ",
+    "Z.ai API mock - processing message: %s... ",
     messageText.slice(0, 100),
   );
 
@@ -86,10 +86,7 @@ export function findMockResponse(body: object): ReadableStream<Uint8Array> {
       messageText.toLowerCase().includes(pattern.toLowerCase()),
     )?.[1] ?? fallbackResponse;
 
-  logger(
-    "DeepSeek API mock - matched response: %s",
-    mockResponse.slice(0, 100),
-  );
+  logger("Z.ai API mock - matched response: %s", mockResponse.slice(0, 100));
   return createStreamingResponse(mockResponse);
 }
 
@@ -124,7 +121,7 @@ function createStreamingResponse(
           id: responseId,
           object: "chat.completion.chunk",
           created: Math.floor(Date.now() / 1000),
-          model: "deepseek-chat",
+          model: "glm-5.3-flash",
           choices: [
             {
               index: 0,

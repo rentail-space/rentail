@@ -2,25 +2,25 @@ import debug from "debug";
 import { HttpResponse, http, passthrough } from "msw";
 import { setupServer } from "msw/node";
 import { ulid } from "ulid";
-import { findMockResponse } from "./mockDeepseek";
+import { findMockResponse } from "./mockZai";
 
 const logger = debug("msw");
 
 const handlers = [
-  // Mock DeepSeek API (uses /chat/completions endpoint)
+  // Mock Z.ai API (uses /chat/completions endpoint)
   http.post(
-    "https://api.deepseek.com/chat/completions",
+    "https://api.z.ai/api/paas/v4/chat/completions",
     async ({ request }: { request: Request }) => {
-      logger("DeepSeek API mock hit! URL: %s", request.url);
+      logger("Z.ai API mock hit! URL: %s", request.url);
       try {
         const json = await request.json();
-        logger("DeepSeek API mock request body: %j", json);
+        logger("Z.ai API mock request body: %j", json);
         const stream = findMockResponse(json);
         return new HttpResponse(stream, {
           headers: { "Content-Type": "text/event-stream" },
         });
       } catch (error) {
-        logger("Error in DeepSeek API mock: %s", error);
+        logger("Error in Z.ai API mock: %s", error);
         return HttpResponse.error();
       }
     },
