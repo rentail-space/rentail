@@ -107,7 +107,7 @@
     "prisma": "8.0.0-rc.17",
     "secretlint": "^13.0.6",
     "tailwindcss": "^4.3.3",
-    "temporal-polyfill": "^1.0.5",
+    "temporal-spec": "^1.0.1",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vercel": "^60.1.3",
