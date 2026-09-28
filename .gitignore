@@ -31,3 +31,4 @@ prisma/backup.sql
 .vercel
 .env*
 .vitest/
+.test-server.log

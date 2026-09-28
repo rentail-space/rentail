@@ -15,6 +15,25 @@ import invariant from "tiny-invariant";
 // vite package (not through vite-plus's re-export of the internal fork).
 const vite = await import("vite-plus");
 
+// Lifecycle + crash logging: stderr is captured to .test-server.log by
+// launchServer, so these lines are the record of who killed the server.
+const tag = `[serverWorker:${process.pid}:port=${process.env.PORT}]`;
+process.on("exit", (code) => console.info(`${tag} exit code=${code}`));
+process.on("disconnect", () => {
+  console.info(`${tag} IPC disconnect -> exit(0)`);
+});
+process.on("uncaughtException", (error) => {
+  console.error(`${tag} uncaughtException`, error);
+});
+process.on("unhandledRejection", (reason) => {
+  console.error(`${tag} unhandledRejection`, reason);
+});
+for (const signal of ["SIGTERM", "SIGINT"] as const) {
+  process.on(signal, () => {
+    console.info(`${tag} received ${signal}`);
+  });
+}
+
 // Import and start the server
 async function startServer(this: void) {
   const send = process.send?.bind(process);
@@ -94,7 +113,10 @@ async function startServer(this: void) {
 
     // Handle graceful shutdown on parent process termination
     process.on("message", async (msg) => {
-      if (msg === "shutdown") await shutdown();
+      if (msg === "shutdown") {
+        console.info(`[serverWorker:${process.pid}] shutdown message`);
+        await shutdown();
+      }
     });
     process.on("disconnect", () => process.exit(0));
     process.on("SIGINT", shutdown);

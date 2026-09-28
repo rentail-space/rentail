@@ -86,6 +86,14 @@ jobs:
           name: playwright-test-results
           path: __screenshots__
 
+      - name: Upload Test Server Log
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-server-log
+          path: .test-server.log
+          if-no-files-found: ignore
+
       - name: Deploy to Vercel
         run: |
           pnpm exec vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}

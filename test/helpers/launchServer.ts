@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, openSync, readFileSync } from "node:fs";
 import { type ChildProcess, fork } from "node:child_process";
 import { rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -12,6 +12,7 @@ let worker: ChildProcess | undefined;
 const logger = debug("server");
 const loopbackHosts = ["127.0.0.1", "::1"] as const;
 const serverStatePath = resolve(".test-server.json");
+const serverLogPath = resolve(".test-server.log");
 
 export const BASE_URL = `http://localhost:${await launchServer()}/`;
 
@@ -40,9 +41,13 @@ export async function launchServer(): Promise<number> {
     } catch {}
   });
 
+  // Pipe the server's stdout/stderr to a log file: with the default pipe no
+  // one reads the other end, so crash output was silently lost and a full
+  // buffer could stall the server. Keeps the IPC channel as the last fd.
+  const serverLogFd = openSync(serverLogPath, "a");
   worker = fork(resolve("test/helpers/serverWorker.ts"), {
     execArgv: ["--experimental-strip-types"],
-    stdio: debug.enabled("server") ? "inherit" : "pipe",
+    stdio: ["ignore", serverLogFd, serverLogFd, "ipc"],
     env: {
       ...process.env,
       CHOKIDAR_USEPOLLING: "1",
