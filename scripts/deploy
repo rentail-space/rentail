@@ -9,7 +9,7 @@ if [ "$1" = "--skip-tests" ]; then
   echo -e "\033[0;33m--- Step 2: Skipping tests ---\033[0m"
 else
   echo -e "\033[0;32m--- Step 2: Generate Prisma client and push test DB ---\033[0m"
-  pnpm prisma generate
+  pnpm prisma7 generate
   pnpm test:db:push
 
   echo -e "\033[0;32m--- Step 3: Run tests ---\033[0m"
@@ -17,7 +17,7 @@ else
 fi
 
 echo -e "\033[0;32m--- Step 4: Update production database ---\033[0m"
-node scripts/load-env.mjs .env.prod -- pnpm prisma db push
+node scripts/load-env.mjs .env.prod -- pnpm prisma7 db push
 
 echo -e "\033[0;32m--- Step 5: Build and deploy to Vercel ---\033[0m"
 pnpm exec vercel pull --yes --environment=production

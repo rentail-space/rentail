@@ -1,10 +1,10 @@
 import { ms } from "convert";
 import { sleep } from "radashi";
 import { z } from "zod";
-import prisma from "~/lib/prisma.server";
+import { db } from "~/lib/db";
 
 /**
- * Postgres-backed resumable chat streams.
+ * Postgres-backed resumable chat streams (Prisma ORM 8).
  *
  * Replaces the previous Redis implementation (resumable-stream + ioredis).
  * The raw UI message stream (SSE) is buffered into the `cache` table as it is
@@ -41,22 +41,23 @@ export async function bufferChatStream(
   let content = "";
 
   const write = async (done: boolean) => {
-    await prisma.cache.upsert({
-      where: { key },
+    await db.orm.public.Cache.upsert({
       create: { key, value: { content, done } },
       update: { value: { content, done } },
+      conflictOn: { key },
     });
   };
 
   await write(false);
 
-  // Sweep expired streams from crashed runs.
-  await prisma.cache.deleteMany({
-    where: {
-      key: { startsWith: "chat-stream:" },
-      createdAt: { lt: new Date(Date.now() - STREAM_TTL) },
-    },
-  });
+  // Sweep expired streams from crashed runs. The `timestamp` column maps to
+  // Temporal.PlainDateTime (UTC-assumed, matching Prisma 7's storage).
+  const cutoff = Temporal.Instant.fromEpochMilliseconds(Date.now() - STREAM_TTL)
+    .toZonedDateTimeISO("UTC")
+    .toPlainDateTime();
+  await db.orm.public.Cache.where((c) => c.key.like("chat-stream:%"))
+    .where((c) => c.createdAt.lt(cutoff))
+    .deleteAll();
 
   const reader = stream.getReader();
   let lastWrite = Date.now();
@@ -90,8 +91,8 @@ export function resumeChatStream(
   let offset = 0;
 
   return (async () => {
-    const existing = await prisma.cache.findUnique({
-      where: { key: streamKey(streamId) },
+    const existing = await db.orm.public.Cache.first({
+      key: streamKey(streamId),
     });
     if (!existing || !streamValueSchema.safeParse(existing.value).success)
       return null;
@@ -109,8 +110,8 @@ export function resumeChatStream(
         void (async () => {
           try {
             while (!cancelled) {
-              const row = await prisma.cache.findUnique({
-                where: { key: streamKey(streamId) },
+              const row = await db.orm.public.Cache.first({
+                key: streamKey(streamId),
               });
               const parsed = streamValueSchema.safeParse(row?.value);
 

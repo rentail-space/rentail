@@ -1,0 +1,24 @@
+import dotenv from "dotenv";
+import { resolve } from "node:path";
+import { defineConfig, env } from "@prisma/prisma7/config";
+
+dotenv.configDotenv({ quiet: true });
+
+function getDirectUrl(): string {
+  return env("DIRECT_URL");
+}
+
+// @see https://www.prisma.io/docs/orm/overview/databases/supabase#specific-considerations
+export default defineConfig({
+  datasource: {
+    get url() {
+      return getDirectUrl();
+    },
+  },
+  migrations: {
+    path: "prisma/migrations",
+    seed: "tsx prisma/seed.ts",
+  },
+  schema: "prisma/schema.prisma",
+  typedSql: { path: resolve("prisma", "sql") },
+});

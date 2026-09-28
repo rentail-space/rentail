@@ -281,7 +281,7 @@ model Verification {
   expiresAt  DateTime @map("expires_at")
   id         String   @map("id")         @id
   identifier String   @map("identifier")
-  updatedAt  DateTime @map("updated_at") @default(now()) @updatedAt
+  updatedAt  DateTime @map("updated_at") @updatedAt
   value      String   @map("value")
 
   @@map("verification")

@@ -1,13 +1,13 @@
 import { ms } from "convert";
 import { sleep } from "radashi";
 import { z } from "zod";
-import prisma from "~/lib/prisma.server";
+import { db } from "~/lib/db";
 import debug from "debug";
 
 const logger = debug("server:chat");
 
 /**
- * Postgres-backed stop signals for running chat streams.
+ * Postgres-backed stop signals for running chat streams (Prisma ORM 8).
  *
  * Replaces the previous Redis pub/sub implementation. The stream request
  * polls the `cache` table while the stream is active; a stop request from
@@ -46,11 +46,8 @@ export async function monitorStopSignal(chatId: string): Promise<{
 
       try {
         const [signal, chat] = await Promise.all([
-          prisma.cache.findUnique({ where: { key: stopKey(chatId) } }),
-          prisma.chat.findUnique({
-            where: { id: chatId },
-            select: { activeStreamId: true },
-          }),
+          db.orm.public.Cache.first({ key: stopKey(chatId) }),
+          db.orm.public.Chat.select("activeStreamId").first({ id: chatId }),
         ]);
 
         // Only honor signals requested for this stream run; ignore rows left
@@ -74,9 +71,7 @@ export async function monitorStopSignal(chatId: string): Promise<{
     }
 
     // Clean up the signal row so a later message isn't stopped by a stale one.
-    await prisma.cache
-      .deleteMany({ where: { key: stopKey(chatId) } })
-      .catch(() => {});
+    await db.orm.public.Cache.where({ key: stopKey(chatId) }).deleteAll();
   })();
 
   return { abortSignal: abort.signal };
@@ -87,17 +82,17 @@ export async function monitorStopSignal(chatId: string): Promise<{
  */
 export async function stopChat(chatId: string) {
   try {
-    await prisma.cache.upsert({
-      where: { key: stopKey(chatId) },
+    await db.orm.public.Cache.upsert({
       create: {
         key: stopKey(chatId),
         value: { requestedAt: new Date().toISOString() },
       },
       update: { value: { requestedAt: new Date().toISOString() } },
+      conflictOn: { key: stopKey(chatId) },
     });
     // The poller ignores stale rows; drop the signal if nobody claims it.
     void sleep(STOP_KEY_TTL).then(() =>
-      prisma.cache.deleteMany({ where: { key: stopKey(chatId) } }),
+      db.orm.public.Cache.where({ key: stopKey(chatId) }).deleteAll(),
     );
   } catch (error) {
     console.error("Error sending stop signal for %s: %s", chatId, error);

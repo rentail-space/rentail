@@ -63,8 +63,8 @@ jobs:
 
       - name: Setup database schema for testing
         run: |
-          pnpm prisma generate
-          pnpm prisma db push
+          pnpm prisma7 generate
+          pnpm prisma7 db push
 
       - name: Check secrets
         run: pnpm secretlint "**/*" --format stylish
