@@ -106,6 +106,26 @@ function createStreamingResponse(
 
       function sendNextChunk() {
         if (index >= mockResponse.length) {
+          // Terminate the OpenAI-compatible stream properly: a final chunk
+          // carrying finish_reason, then [DONE]. Without the finish chunk the
+          // @ai-sdk/openai-compatible client fails with
+          // "Response stream ended without a finish reason".
+          const finishEvent = {
+            id: responseId,
+            object: "chat.completion.chunk",
+            created: Math.floor(Date.now() / 1000),
+            model: "glm-5.3-flash",
+            choices: [
+              {
+                index: 0,
+                delta: {},
+                finish_reason: "stop",
+              },
+            ],
+          };
+          controller.enqueue(
+            encoder.encode(`data: ${JSON.stringify(finishEvent)}\n\n`),
+          );
           // Send the final [DONE] message
           controller.enqueue(encoder.encode("data: [DONE]\n\n"));
           controller.close();
