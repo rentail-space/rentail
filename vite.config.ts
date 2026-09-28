@@ -79,6 +79,8 @@ export default defineConfig({
       ".vscode/**",
       "__screenshots__/**",
       "build/**",
+      "generated/**",
+      "migrations/snapshots/**",
       "node_modules/**",
       "prisma/backup.sql",
       "prisma/generated/**",
