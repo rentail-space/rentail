@@ -18,6 +18,13 @@ describe("UTM parameter capture", () => {
       utm_campaign: "spring2024",
     });
     page = await goto(`/?${qs.toString()}`);
+    // Wait for the client-side capture POST to finish: `converse` creates the
+    // user, which reads the captured UTM from the cookie.
+    await page.waitForFunction(
+      () => sessionStorage.getItem("utm:captured") !== null,
+      undefined,
+      { timeout: 10_000 },
+    );
     await converse("Hello, I'm interested in retail spaces");
     users = await prisma.user.findMany();
   });

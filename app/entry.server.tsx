@@ -31,7 +31,6 @@ import {
   renderTerms,
 } from "~/lib/markdown.server";
 import { trackBotVisit } from "~/lib/middleware/botTracking.server";
-import { utmCaptureSession } from "~/lib/middleware/utm.server";
 
 // NOTE: MSW is initialized in test mode on the server side
 if (envVars.isTest) (await import("~/test/mocks/mswHandlers")).default();
@@ -55,17 +54,25 @@ const CDN_UNCACHEABLE_PREFIXES = [
   "/profile",
 ];
 
-// Catalog pages change only when the catalog does, so they get a week of CDN
-// caching; the rest of the site keeps the short window.
+// Catalog pages and static content change only when the content does, so they
+// get a week of CDN caching; the rest of the site keeps the short window.
 const CRAWLER_LONG_CACHE_PREFIXES = [
+  "/about",
+  "/benefits",
   "/blog",
   "/center/",
   "/city/",
   "/county/",
+  "/faq",
+  "/for-ai-assistants",
+  "/glossary",
   "/metro/",
   "/news",
+  "/pricing",
+  "/privacy",
   "/regional/",
   "/state",
+  "/terms",
 ];
 
 /**
@@ -84,15 +91,13 @@ async function cacheAtEdge(request: Request, response: Response) {
   )
     return response;
 
-  // The middleware appends the first-touch cookie after this response is built:
-  // a response that is about to receive it carries per-visitor state.
-  if (await utmCaptureSession(request)) return response;
-
   // Markdown sitemaps are discovery documents, not content: they keep the short
-  // window so new posts and centers reach crawlers within the hour.
+  // window so new posts and centers reach crawlers within the hour. The home
+  // page is static content too, so it gets the long window.
   const sMaxAge =
     !pathname.endsWith("/sitemap.md") &&
-    CRAWLER_LONG_CACHE_PREFIXES.some((prefix) => pathname.startsWith(prefix))
+    (pathname === "/" ||
+      CRAWLER_LONG_CACHE_PREFIXES.some((prefix) => pathname.startsWith(prefix)))
       ? 604800
       : 3600;
 
@@ -287,13 +292,17 @@ export default async (
   return await cacheAtEdge(request, response);
 };
 
-export function handleDataRequest(
+export async function handleDataRequest(
   response: Response,
   { request }: LoaderFunctionArgs | ActionFunctionArgs,
 ) {
   console.info("%s %s => %d", request.method, request.url, response.status);
   void trackBotVisit(request); // NOTE: run asynchronously
-  return response;
+  // Content loaders are visitor-independent, so SPA-navigation `.data`
+  // responses can be CDN-cached under the same rules as documents. The
+  // guards in cacheAtEdge (GET, 200, no cookies, uncacheable prefixes)
+  // leave action `.data` calls and per-visitor routes untouched.
+  return await cacheAtEdge(request, response);
 }
 
 export function handleError(

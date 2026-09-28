@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { last } from "radashi";
 import {
   type HeadersFunction,
@@ -11,7 +12,6 @@ import {
 import { WaveLoading } from "respinner";
 import PageLayout from "~/components/layout/PageLayout";
 import "~/global.css";
-import { utmMiddleware } from "~/lib/middleware/utm.server";
 import pageMeta from "~/lib/pageMeta";
 import type { Route } from "./+types/root";
 
@@ -27,7 +27,6 @@ export function meta(): Route.MetaDescriptors {
 }
 
 // NOTE: request logging lives in entry.server, we're using other functions elsewhere
-export const middleware: Route.MiddlewareFunction[] = [utmMiddleware];
 
 export const headers: HeadersFunction = () => ({
   "Cache-Control":
@@ -106,6 +105,24 @@ export default function App() {
   const { hideLayout } = last(
     matches.filter((match) => match.handle && "hideLayout" in match.handle),
   )?.handle || { hideLayout: false };
+
+  // First-touch attribution runs client-side so no document response carries
+  // the capture cookie: content pages stay CDN-cacheable. Best-effort; a
+  // failed POST leaves the marker unset and is retried on the next load.
+  useEffect(() => {
+    if (sessionStorage.getItem("utm:captured")) return;
+    void fetch("/api/utm", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        url: location.href,
+        referrer: document.referrer || undefined,
+      }),
+      keepalive: true,
+    })
+      .then(() => sessionStorage.setItem("utm:captured", "1"))
+      .catch(() => {});
+  }, []);
 
   return (
     <PageLayout hideLayout={hideLayout}>

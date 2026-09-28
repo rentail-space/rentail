@@ -78,7 +78,7 @@ function userMarkerCookie(maxAge: number): string {
  * there must be a last chat for the user. Also return the recent messages in
  * the chat and the HTTP headers with the session cookie set.
  *
- * UTM capture is the middleware's job (`utmMiddleware`); this runs inside the
+ * UTM capture is the browser's job (`POST /api/utm`); this runs inside the
  * chat route, which is never cached.
  *
  * @param request - The request object
