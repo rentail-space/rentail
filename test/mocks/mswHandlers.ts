@@ -105,7 +105,5 @@ msw.events
   });
 
 export default function listen() {
-  msw.listen({
-    onUnhandledRequest: "error",
-  });
+  msw.listen({ onUnhandledFrame: "error" });
 }
